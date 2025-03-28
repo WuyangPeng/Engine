@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorLine3Box3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Line3 = Line3<Real>;
         using Box3 = Box3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
@@ -40,7 +40,7 @@ namespace Mathematics
         NODISCARD Box3 GetBox() const noexcept;
 
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
 
     private:
         void Find();
@@ -59,20 +59,20 @@ namespace Mathematics
         Box3 box;
 
         int quantity;
-        Vector3 point0;
-        Vector3 point1;
+        Vector3Type point0;
+        Vector3Type point1;
 
     public:
         // ”…IntersectorRay3Box3∫ÕIntersectorSegment3Box3π≤œÌ°£
         struct FindShared
         {
             int quantity;
-            Vector3 point0;
-            Vector3 point1;
+            Vector3Type point0;
+            Vector3Type point1;
             IntersectionType intersectionType;
         };
 
-        NODISCARD static FindShared DoClipping(Real t0, Real t1, const Vector3& origin, const Vector3& direction, const Box3& box, bool solid);
+        NODISCARD static FindShared DoClipping(Real t0, Real t1, const Vector3Type& origin, const Vector3Type& direction, const Box3& box, bool solid);
     };
 }
 

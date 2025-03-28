@@ -15,7 +15,7 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorPlane3Plane3<Real>::StaticFindIntersectorPlane3Plane3(const Plane3& plane0, const Plane3& plane1, const Real epsilon)
-    : ParentType{ epsilon }, plane0{ plane0 }, plane1{ plane1 }, intrLine{ Vector3::GetZero(), Vector3::GetZero() }, intrPlane{}
+    : ParentType{ epsilon }, plane0{ plane0 }, plane1{ plane1 }, intrLine{ Vector3Type::GetZero(), Vector3Type::GetZero() }, intrPlane{}
 {
     Find();
 

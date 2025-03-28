@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = StaticTestIntersectorSegment3Sphere3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Segment3 = Segment3<Real>;
         using Sphere3 = Sphere3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;

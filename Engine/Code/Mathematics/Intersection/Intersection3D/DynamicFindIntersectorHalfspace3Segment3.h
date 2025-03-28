@@ -28,7 +28,7 @@ namespace Mathematics
         using ClassType = DynamicFindIntersectorHalfspace3Segment3<Real>;
         using ParentType = DynamicIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Segment3 = Segment3<Real>;
         using Plane3 = Plane3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
@@ -38,8 +38,8 @@ namespace Mathematics
         DynamicFindIntersectorHalfspace3Segment3(const Plane3& halfspace,
                                                  const Segment3& segment,
                                                  Real tmax,
-                                                 const Vector3& lhsVelocity,
-                                                 const Vector3& rhsVelocity,
+                                                 const Vector3Type& lhsVelocity,
+                                                 const Vector3Type& rhsVelocity,
                                                  const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -49,7 +49,7 @@ namespace Mathematics
 
         /// 相交集为空，点或线段。 函数GetQuantity() 返回0、1或2。
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
 
     private:
         // 动态查询。
@@ -61,8 +61,8 @@ namespace Mathematics
 
         // 有关交集的信息。
         int quantity;
-        Vector3 point0;
-        Vector3 point1;
+        Vector3Type point0;
+        Vector3Type point1;
     };
 }
 

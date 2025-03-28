@@ -82,7 +82,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::Compute(const Matrix3& matrix)
             // 重新缩放回原来的大小。
             RescaleBack(maxValue);
 
-            eigenvector = EigenVectorType{ Vector3::GetUnitX(), Vector3::GetUnitY(), Vector3::GetUnitZ() };
+            eigenvector = EigenVectorType{ Vector3Type::GetUnitX(), Vector3Type::GetUnitY(), Vector3Type::GetUnitZ() };
             return;
         }
     }
@@ -216,7 +216,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::ComputeRoots(const Matrix3& matrix
 }
 
 template <typename Real>
-bool Mathematics::NoniterativeEigen3x3<Real>::PositiveRank(Matrix3& matrix, Real& maxEntry, Vector3& maxRow) const
+bool Mathematics::NoniterativeEigen3x3<Real>::PositiveRank(Matrix3& matrix, Real& maxEntry, Vector3Type& maxRow) const
 {
     // 找到矩阵的最大幅度条目。
     maxEntry = MathType::GetValue(-1);
@@ -242,7 +242,7 @@ bool Mathematics::NoniterativeEigen3x3<Real>::PositiveRank(Matrix3& matrix, Real
 }
 
 template <typename Real>
-void Mathematics::NoniterativeEigen3x3<Real>::ComputeVectors(const Matrix3& matrix, const Vector3& vector, int index0, int index1, int index2)
+void Mathematics::NoniterativeEigen3x3<Real>::ComputeVectors(const Matrix3& matrix, const Vector3Type& vector, int index0, int index1, int index2)
 {
     const auto basis = Vector3ToolsType::GenerateComplementBasis(vector);
     const auto uVector = basis.GetUVector();

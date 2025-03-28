@@ -59,7 +59,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
     const auto u = vector3OrthonormalBasis.GetUVector();
     const auto v = vector3OrthonormalBasis.GetVVector();
 
-    std::array<Vector3, 3> temp{};
+    std::array<Vector3Type, 3> temp{};
 
     for (auto i = 0; i < 3; ++i)
     {

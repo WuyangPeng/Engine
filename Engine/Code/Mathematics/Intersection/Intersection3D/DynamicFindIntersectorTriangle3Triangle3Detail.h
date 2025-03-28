@@ -24,7 +24,7 @@
 #include "Mathematics/Objects3D/Segment3Detail.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::DynamicFindIntersectorTriangle3Triangle3(const Triangle3& triangle0, const Triangle3& triangle1, Real tmax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::DynamicFindIntersectorTriangle3Triangle3(const Triangle3& triangle0, const Triangle3& triangle1, Real tmax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, triangle0{ triangle0 }, triangle1{ triangle1 }, point{}
 {
     Find();
@@ -197,7 +197,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
 }
 
 template <typename Real>
-typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectInfo Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindOverlap(const Vector3& axis, Real tmax, const Vector3& velocity)
+typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectInfo Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindOverlap(const Vector3Type& axis, Real tmax, const Vector3Type& velocity)
 {
     const auto cfg0 = ProjectOntoAxis(triangle0, axis);
     const auto cfg1 = ProjectOntoAxis(triangle1, axis);
@@ -206,7 +206,7 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectI
 }
 
 template <typename Real>
-typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Configuration Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::ProjectOntoAxis(const Triangle3& triangle, const Vector3& axis)
+typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Configuration Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::ProjectOntoAxis(const Triangle3& triangle, const Vector3Type& axis)
 {
     Configuration cfg{};
 
@@ -680,7 +680,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInt
 }
 
 template <typename Real>
-void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeEdgeIntersection(const Vector3& u0, const Vector3& u1, const Vector3& v0, const Vector3& v1)
+void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeEdgeIntersection(const Vector3Type& u0, const Vector3Type& u1, const Vector3Type& v0, const Vector3Type& v1)
 {
     // 计算两个边缘平面的法线。
     auto edge0 = u1 - u0;
@@ -712,7 +712,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeEdgeInt
 }
 
 template <typename Real>
-void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeFaceIntersection(const Vector3& u0, const Vector3& u1, const Triangle3& triangle)
+void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeFaceIntersection(const Vector3Type& u0, const Vector3Type& u1, const Triangle3& triangle)
 {
     // 计算三角形的平面。
     const auto vertex = triangle.GetVertex(0);

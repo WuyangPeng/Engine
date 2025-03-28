@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorLine3Torus3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Line3 = Line3<Real>;
         using Torus3 = Torus3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
@@ -41,7 +41,7 @@ namespace Mathematics
 
         // 相交集（数量最多为4）。
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
 
     private:
         void Find();
@@ -51,10 +51,10 @@ namespace Mathematics
         Torus3 torus;
 
         int quantity;
-        Vector3 point0;
-        Vector3 point1;
-        Vector3 point2;
-        Vector3 point3;
+        Vector3Type point0;
+        Vector3Type point1;
+        Vector3Type point2;
+        Vector3Type point3;
     };
 }
 

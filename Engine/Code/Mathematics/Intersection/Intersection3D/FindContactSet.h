@@ -25,14 +25,14 @@ namespace Mathematics
     public:
         using ClassType = FindContactSet<Real>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Triangle3 = Triangle3<Real>;
         using Box3 = Box3<Real>;
         using IntersectorConfiguration = IntersectorConfiguration<Real>;
-        using SegmentType = std::array<Vector3, 2>;
-        using TriangleType = std::array<Vector3, 3>;
-        using RectangleType = std::array<Vector3, 4>;
-        using PointType = std::vector<Vector3>;
+        using SegmentType = std::array<Vector3Type, 2>;
+        using TriangleType = std::array<Vector3Type, 3>;
+        using RectangleType = std::array<Vector3Type, 4>;
+        using PointType = std::vector<Vector3Type>;
 
     public:
         FindContactSet(const SegmentType& segment,
@@ -40,8 +40,8 @@ namespace Mathematics
                        ContactSide side,
                        const IntersectorConfiguration& segmentCfg,
                        const IntersectorConfiguration& triangleCfg,
-                       const Vector3& segmentVelocity,
-                       const Vector3& triangleVelocity,
+                       const Vector3Type& segmentVelocity,
+                       const Vector3Type& triangleVelocity,
                        Real tFirst);
 
         FindContactSet(const SegmentType& segment,
@@ -49,8 +49,8 @@ namespace Mathematics
                        ContactSide side,
                        const IntersectorConfiguration& segmentCfg,
                        const IntersectorConfiguration& boxCfg,
-                       const Vector3& segmentVelocity,
-                       const Vector3& boxVelocity,
+                       const Vector3Type& segmentVelocity,
+                       const Vector3Type& boxVelocity,
                        Real tFirst);
 
         FindContactSet(const Triangle3& triangle,
@@ -58,8 +58,8 @@ namespace Mathematics
                        ContactSide side,
                        const IntersectorConfiguration& triangleCfg,
                        const IntersectorConfiguration& boxCfg,
-                       const Vector3& triangleVelocity,
-                       const Vector3& boxVelocity,
+                       const Vector3Type& triangleVelocity,
+                       const Vector3Type& boxVelocity,
                        Real tFirst);
 
         FindContactSet(const Box3& box0,
@@ -67,8 +67,8 @@ namespace Mathematics
                        ContactSide side,
                        const IntersectorConfiguration& box0Cfg,
                        const IntersectorConfiguration& box1Cfg,
-                       const Vector3& box0Velocity,
-                       const Vector3& box1Velocity,
+                       const Vector3Type& box0Velocity,
+                       const Vector3Type& box1Velocity,
                        Real tFirst);
 
         CLASS_INVARIANT_DECLARE;
@@ -80,7 +80,7 @@ namespace Mathematics
 
         void ColinearSegments(const SegmentType& segment0, const SegmentType& segment1);
 
-        void SegmentThroughPlane(const SegmentType& segment, const Vector3& planeOrigin, const Vector3& planeNormal);
+        void SegmentThroughPlane(const SegmentType& segment, const Vector3Type& planeOrigin, const Vector3Type& planeNormal);
 
         void SegmentSegment(const SegmentType& segment0, const SegmentType& segment1);
 

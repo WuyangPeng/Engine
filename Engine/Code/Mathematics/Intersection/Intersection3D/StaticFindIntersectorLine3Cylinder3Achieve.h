@@ -100,7 +100,7 @@ Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorLine3Cylinder3<Real
 }
 
 template <typename Real>
-typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::Find(const Vector3& origin, const Vector3& dir, const Cylinder3& cylinder)
+typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::Find(const Vector3Type& origin, const Vector3Type& dir, const Cylinder3& cylinder)
 {
     FindShared findShared{};
 

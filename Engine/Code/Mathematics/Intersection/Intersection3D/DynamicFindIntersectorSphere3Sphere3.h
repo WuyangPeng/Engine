@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = DynamicFindIntersectorSphere3Sphere3<Real>;
         using ParentType = DynamicIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Sphere3 = Sphere3<Real>;
         using Circle3 = Circle3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
@@ -35,8 +35,8 @@ namespace Mathematics
         DynamicFindIntersectorSphere3Sphere3(const Sphere3& sphere0,
                                              const Sphere3& sphere1,
                                              Real tMax,
-                                             const Vector3& lhsVelocity,
-                                             const Vector3& rhsVelocity,
+                                             const Vector3Type& lhsVelocity,
+                                             const Vector3Type& rhsVelocity,
                                              const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -48,7 +48,7 @@ namespace Mathematics
         NODISCARD Circle3 GetCircle() const noexcept;
 
         // 用于动态查找相交查询的相交集。
-        NODISCARD Vector3 GetContactPoint() const noexcept;
+        NODISCARD Vector3Type GetContactPoint() const noexcept;
 
     private:
         // 动态查找交叉点查询。
@@ -63,7 +63,7 @@ namespace Mathematics
         Circle3 circle;
 
         // 动态球体的交点。
-        Vector3 contactPoint;
+        Vector3Type contactPoint;
     };
 }
 

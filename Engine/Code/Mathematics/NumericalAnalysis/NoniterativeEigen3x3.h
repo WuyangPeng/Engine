@@ -29,7 +29,7 @@ namespace Mathematics
 
         using MathType = Math<Real>;
         using Matrix3 = Matrix3<Real>;
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
 
     public:
@@ -40,7 +40,7 @@ namespace Mathematics
 
         // 得到特征向量。特征值以递增的顺序存储。
         NODISCARD Real GetEigenvalue(int index) const;
-        NODISCARD Vector3 GetEigenvector(int index) const;
+        NODISCARD Vector3Type GetEigenvector(int index) const;
 
     private:
         NODISCARD Real GetMaxValue(const Matrix3& matrix) const;
@@ -52,16 +52,16 @@ namespace Mathematics
 
         // 确定matrix是否有的正的列。返回matrix的最大量值项目。
         // 它包含的列也被返回。
-        NODISCARD bool PositiveRank(Matrix3& matrix, Real& maxEntry, Vector3& maxRow) const;
+        NODISCARD bool PositiveRank(Matrix3& matrix, Real& maxEntry, Vector3Type& maxRow) const;
 
         // 计算特征向量。
-        void ComputeVectors(const Matrix3& matrix, const Vector3& vector, int index0, int index1, int index2);
+        void ComputeVectors(const Matrix3& matrix, const Vector3Type& vector, int index0, int index1, int index2);
 
     private:
         static constexpr auto eigenMax = 3;
 
         using EigenValueType = std::array<Real, eigenMax>;
-        using EigenVectorType = std::array<Vector3, eigenMax>;
+        using EigenVectorType = std::array<Vector3Type, eigenMax>;
         using Container = std::vector<Real>;
 
         EigenValueType eigenvalue;

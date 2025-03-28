@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorSegment3Capsule3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Segment3 = Segment3<Real>;
         using Capsule3 = Capsule3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
@@ -40,7 +40,7 @@ namespace Mathematics
         NODISCARD Capsule3 GetCapsule() const noexcept;
 
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
         // 点的段参数
         NODISCARD Real GetParameter0() const noexcept;
         NODISCARD Real GetParameter1() const noexcept;
@@ -53,8 +53,8 @@ namespace Mathematics
         Capsule3 capsule;
 
         int quantity;
-        Vector3 point0;
-        Vector3 point1;
+        Vector3Type point0;
+        Vector3Type point1;
         Real parameter0;
         Real parameter1;
     };

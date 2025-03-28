@@ -89,7 +89,7 @@ Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorLine3Box3<Real>::Ge
 }
 
 template <typename Real>
-typename Mathematics::StaticFindIntersectorLine3Box3<Real>::FindShared Mathematics::StaticFindIntersectorLine3Box3<Real>::DoClipping(Real t0, Real t1, const Vector3& origin, const Vector3& direction, const Box3& box, bool solid)
+typename Mathematics::StaticFindIntersectorLine3Box3<Real>::FindShared Mathematics::StaticFindIntersectorLine3Box3<Real>::DoClipping(Real t0, Real t1, const Vector3Type& origin, const Vector3Type& direction, const Box3& box, bool solid)
 {
     FindShared findShared{};
 

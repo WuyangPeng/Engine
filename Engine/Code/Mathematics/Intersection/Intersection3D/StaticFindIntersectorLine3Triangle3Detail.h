@@ -154,7 +154,7 @@ Real Mathematics::StaticFindIntersectorLine3Triangle3<Real>::GetTriangleBary2() 
 }
 
 template <typename Real>
-typename Mathematics::StaticFindIntersectorLine3Triangle3<Real>::Vector3 Mathematics::StaticFindIntersectorLine3Triangle3<Real>::GetPoint() const noexcept
+typename Mathematics::StaticFindIntersectorLine3Triangle3<Real>::Vector3Type Mathematics::StaticFindIntersectorLine3Triangle3<Real>::GetPoint() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

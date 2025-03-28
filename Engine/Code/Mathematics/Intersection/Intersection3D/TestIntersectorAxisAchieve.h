@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3& axis, const SegmentType& segment, const Triangle3& triangle, const Vector3& velocity, Real tmax)
+Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3Type& axis, const SegmentType& segment, const Triangle3& triangle, const Vector3Type& velocity, Real tmax)
     : result{ false }, tFirst{}, tLast{}
 {
     const auto projection0 = GetProjection(axis, segment);
@@ -27,7 +27,7 @@ Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3& axis,
 }
 
 template <typename Real>
-Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3& axis, const SegmentType& segment, const Box3& box, const Vector3& velocity, Real tmax)
+Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3Type& axis, const SegmentType& segment, const Box3& box, const Vector3Type& velocity, Real tmax)
     : result{ false }, tFirst{}, tLast{}
 {
     const auto projection0 = GetProjection(axis, segment);
@@ -40,7 +40,7 @@ Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3& axis,
 }
 
 template <typename Real>
-Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3& axis, const Triangle3& triangle, const Box3& box, const Vector3& velocity, Real tmax)
+Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3Type& axis, const Triangle3& triangle, const Box3& box, const Vector3Type& velocity, Real tmax)
     : result{ false }, tFirst{}, tLast{}
 {
     const auto projection0 = GetProjection(axis, triangle);
@@ -52,7 +52,7 @@ Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3& axis,
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 template <typename Real>
-Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3& axis, const Box3& box0, const Box3& box1, const Vector3& velocity, Real tmax)
+Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3Type& axis, const Box3& box0, const Box3& box1, const Vector3Type& velocity, Real tmax)
     : result{ false }, tFirst{}, tLast{}
 {
     const auto projection0 = GetProjection(axis, box0);
@@ -65,7 +65,7 @@ Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3& axis,
 }
 
 template <typename Real>
-Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3& axis, const Vector3& velocity, Real min0, Real max0, Real min1, Real max1, Real tmax) noexcept
+Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3Type& axis, const Vector3Type& velocity, Real min0, Real max0, Real min1, Real max1, Real tmax) noexcept
     : result{ false }, tFirst{}, tLast{}
 {
     Test(axis, velocity, min0, max0, min1, max1, tmax);
@@ -106,7 +106,7 @@ Real Mathematics::TestIntersectorAxis<Real>::GetTLast() const noexcept
 }
 
 template <typename Real>
-typename Mathematics::TestIntersectorAxis<Real>::Projections Mathematics::TestIntersectorAxis<Real>::GetProjection(const Vector3& axis, const SegmentType& segment) noexcept
+typename Mathematics::TestIntersectorAxis<Real>::Projections Mathematics::TestIntersectorAxis<Real>::GetProjection(const Vector3Type& axis, const SegmentType& segment) noexcept
 {
     auto min = Vector3Tools<Real>::DotProduct(axis, segment.at(0));
     auto max = Vector3Tools<Real>::DotProduct(axis, segment.at(1));
@@ -120,7 +120,7 @@ typename Mathematics::TestIntersectorAxis<Real>::Projections Mathematics::TestIn
 }
 
 template <typename Real>
-typename Mathematics::TestIntersectorAxis<Real>::Projections Mathematics::TestIntersectorAxis<Real>::GetProjection(const Vector3& axis, const Triangle3& triangle)
+typename Mathematics::TestIntersectorAxis<Real>::Projections Mathematics::TestIntersectorAxis<Real>::GetProjection(const Vector3Type& axis, const Triangle3& triangle)
 {
     auto min = Vector3Tools<Real>::DotProduct(axis, triangle.GetVertex(0));
     auto max = min;
@@ -145,7 +145,7 @@ typename Mathematics::TestIntersectorAxis<Real>::Projections Mathematics::TestIn
 }
 
 template <typename Real>
-typename Mathematics::TestIntersectorAxis<Real>::Projections Mathematics::TestIntersectorAxis<Real>::GetProjection(const Vector3& axis, const Box3& box)
+typename Mathematics::TestIntersectorAxis<Real>::Projections Mathematics::TestIntersectorAxis<Real>::GetProjection(const Vector3Type& axis, const Box3& box)
 {
     const auto origin = Vector3Tools<Real>::DotProduct(axis, box.GetCenter());
     const auto maximumExtent = Math<Real>::FAbs(box.GetExtent(0) * Vector3Tools<Real>::DotProduct(axis, box.GetAxis(0))) +
@@ -156,7 +156,7 @@ typename Mathematics::TestIntersectorAxis<Real>::Projections Mathematics::TestIn
 }
 
 template <typename Real>
-void Mathematics::TestIntersectorAxis<Real>::Test(const Vector3& axis, const Vector3& velocity, Real min0, Real max0, Real min1, Real max1, Real tmax) noexcept
+void Mathematics::TestIntersectorAxis<Real>::Test(const Vector3Type& axis, const Vector3Type& velocity, Real min0, Real max0, Real min1, Real max1, Real tmax) noexcept
 {
     /// 静态分离轴测试。 如果在时间间隔（即快速退出）中object0和object1没有在任何分隔轴( TFirst > TLast || TFirst > TMax )上的间隔[0，TMax]中相交，则返回false。 否则返回true。
     //  min0，max0，min1和max1是将对象object0和object1投影到测试轴上的最小和最大点。

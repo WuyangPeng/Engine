@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = DynamicFindIntersectorSegment3Box3<Real>;
         using ParentType = DynamicIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Segment3 = Segment3<Real>;
         using Box3 = Box3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
@@ -36,8 +36,8 @@ namespace Mathematics
                                            const Box3& box,
                                            bool solid,
                                            Real tMax,
-                                           const Vector3& lhsVelocity,
-                                           const Vector3& rhsVelocity,
+                                           const Vector3Type& lhsVelocity,
+                                           const Vector3Type& rhsVelocity,
                                            const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -46,7 +46,7 @@ namespace Mathematics
         NODISCARD Box3 GetBox() const noexcept;
 
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
 
     private:
         /// 动态查找交叉点查询。 当有单个交点时，可以通过GetPoint(0)访问第一个交点；
@@ -60,8 +60,8 @@ namespace Mathematics
         bool solid;
 
         int quantity;
-        Vector3 point0;
-        Vector3 point1;
+        Vector3Type point0;
+        Vector3Type point1;
     };
 }
 

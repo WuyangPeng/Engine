@@ -16,7 +16,7 @@
 #include "Mathematics/Objects3D/Segment3Detail.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::DynamicFindIntersectorTriangle3Sphere3(const Triangle3& triangle, const Sphere3& sphere, Real tMax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::DynamicFindIntersectorTriangle3Sphere3(const Triangle3& triangle, const Sphere3& sphere, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon }, triangle{ triangle }, sphere{ sphere }, point{}
 {
     Find();
@@ -71,7 +71,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
     // 获取三角形顶点。
     auto vertices = triangle.GetVertex();
 
-    using EdgesType = std::array<Vector3, 3>;
+    using EdgesType = std::array<Vector3Type, 3>;
 
     // 获取三角形的边缘。
     EdgesType edges{ vertices.at(1) - vertices.at(0), vertices.at(2) - vertices.at(1), vertices.at(0) - vertices.at(2) };
@@ -245,7 +245,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
         normal.Normalize();
 
         // 球上的点我们关心与三角形平面相交。
-        Vector3 spherePoint{};
+        Vector3Type spherePoint{};
 
         // 球面在三角形的哪一侧？
         if (normalDotTriangle < normalDotCenter)
@@ -424,7 +424,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
 }
 
 template <typename Real>
-bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::FindTriangleSphereCoplanarIntersection(int index, const VertexType& vertexs, const Vector3& sideNorm, const Vector3& side, Real tmax, const Vector3& velocity0, const Vector3& velocity1)
+bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::FindTriangleSphereCoplanarIntersection(int index, const VertexType& vertexs, const Vector3Type& sideNorm, const Vector3Type& side, Real tmax, const Vector3Type& velocity0, const Vector3Type& velocity1)
 {
     // 顶点是球体可以相交的两个潜在边所连接的“关键”顶点，它索引为vertex。
     // sideNorm是由（vertex，vertex + 1）和tri norm形成的平面的法线，为了避免重新计算而通过
@@ -458,8 +458,8 @@ bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::FindTriangleSphe
     // 通过将顶点和新点都投影到三角形边缘（使用其“法线”找到该点的同一边缘）上，来找到顶点位于哪一侧。
     auto vertexDot = Vector3ToolsType::DotProduct(side, vertexs.at(index));
     auto pointDot = Vector3ToolsType::DotProduct(side, spherePoint);
-    const Vector3 end0 = vertexs.at(index);
-    Vector3 end1{};
+    const Vector3Type end0 = vertexs.at(index);
+    Vector3Type end1{};
     if (vertexDot <= pointDot)
     {
         // 与边的交点 (vertex,vertex+1).
@@ -494,7 +494,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::FindTriangleSphe
 }
 
 template <typename Real>
-bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::FindSphereVertexIntersection(const Vector3& vertex, Real tmax, const Vector3& velocity0, const Vector3& velocity1)
+bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::FindSphereVertexIntersection(const Vector3Type& vertex, Real tmax, const Vector3Type& velocity0, const Vector3Type& velocity1)
 {
     /// 查找rkOrigin处rkDir处的fRadius球面朝顶点处的顶点移动的交点的时间和地点
     /// （以及可能错过的可能发生的情况）。

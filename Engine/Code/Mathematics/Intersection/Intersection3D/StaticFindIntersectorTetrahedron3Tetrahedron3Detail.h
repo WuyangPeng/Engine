@@ -143,7 +143,7 @@ typename Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>::Inter
     }
 
     // 四面体被平面分开。 确定如何拆分以及如何将负极部分分解为四面体（6例）。
-    std::array<Vector3, 4> intp{};
+    std::array<Vector3Type, 4> intp{};
 
     if (positive == 3)
     {

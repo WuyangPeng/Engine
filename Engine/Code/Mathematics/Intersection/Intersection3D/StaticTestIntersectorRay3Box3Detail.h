@@ -55,11 +55,11 @@ Mathematics::Box3<Real> Mathematics::StaticTestIntersectorRay3Box3<Real>::GetBox
 template <typename Real>
 void Mathematics::StaticTestIntersectorRay3Box3<Real>::Test()
 {
-    Vector3 wdu{};
-    Vector3 awdu{};
-    Vector3 ddu{};
-    Vector3 addu{};
-    Vector3 awxddu{};
+    Vector3Type wdu{};
+    Vector3Type awdu{};
+    Vector3Type ddu{};
+    Vector3Type addu{};
+    Vector3Type awxddu{};
 
     auto diff = ray.GetOrigin() - box.GetCenter();
 

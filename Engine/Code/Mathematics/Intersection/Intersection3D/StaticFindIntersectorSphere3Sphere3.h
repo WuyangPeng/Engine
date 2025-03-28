@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorSphere3Sphere3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Sphere3 = Sphere3<Real>;
         using Circle3 = Circle3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
@@ -43,7 +43,7 @@ namespace Mathematics
         NODISCARD Circle3 GetCircle() const noexcept;
 
         // 用于动态查找相交查询的相交集。
-        NODISCARD Vector3 GetContactPoint() const noexcept;
+        NODISCARD Vector3Type GetContactPoint() const noexcept;
 
     private:
         void Find();
@@ -56,7 +56,7 @@ namespace Mathematics
         Circle3 circle;
 
         // 动态球体的交点。
-        Vector3 contactPoint;
+        Vector3Type contactPoint;
     };
 }
 

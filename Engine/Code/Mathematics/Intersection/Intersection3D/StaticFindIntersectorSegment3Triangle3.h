@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorSegment3Triangle3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Segment3 = Segment3<Real>;
         using Triangle3 = Triangle3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
@@ -49,7 +49,7 @@ namespace Mathematics
         /// 对于“ bool Find()”查询，您打算使用GetSegmentParameter()或三个GetTriBary?()函数自己计算接触点。
         ///  现在，这些函数还支持“bool Find()”查询。
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
 
     private:
         void Find();
@@ -64,8 +64,8 @@ namespace Mathematics
         Real triBary2;
 
         int quantity;
-        Vector3 point0;
-        Vector3 point1;
+        Vector3Type point0;
+        Vector3Type point1;
     };
 }
 

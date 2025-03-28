@@ -70,7 +70,7 @@ void Mathematics::StaticTestIntersectorBox3Box3<Real>::Test()
     // |c_{ij}|
     Matrix3<Real> absMatrix{};
     // Dot(A_i,D)
-    Vector3 axisDotCenterDiff{};
+    Vector3Type axisDotCenterDiff{};
 
     constexpr auto size = 3;
 

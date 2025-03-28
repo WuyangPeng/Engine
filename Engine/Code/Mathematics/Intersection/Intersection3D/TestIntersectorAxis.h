@@ -25,24 +25,24 @@ namespace Mathematics
     public:
         using ClassType = TestIntersectorAxis<Real>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Triangle3 = Triangle3<Real>;
         using Box3 = Box3<Real>;
-        using SegmentType = std::array<Vector3, 2>;
+        using SegmentType = std::array<Vector3Type, 2>;
         using Projections = std::pair<Real, Real>;
 
     public:
         /// 测试查询投影间隔的交集。 输入的速度是objectVelocity1 - objectVelocity0之差。
         /// 计算第一次和最后一次接触时间。
-        TestIntersectorAxis(const Vector3& axis, const SegmentType& segment, const Triangle3& triangle, const Vector3& velocity, Real tmax);
+        TestIntersectorAxis(const Vector3Type& axis, const SegmentType& segment, const Triangle3& triangle, const Vector3Type& velocity, Real tmax);
 
-        TestIntersectorAxis(const Vector3& axis, const SegmentType& segment, const Box3& box, const Vector3& velocity, Real tmax);
+        TestIntersectorAxis(const Vector3Type& axis, const SegmentType& segment, const Box3& box, const Vector3Type& velocity, Real tmax);
 
-        TestIntersectorAxis(const Vector3& axis, const Triangle3& triangle, const Box3& box, const Vector3& velocity, Real tmax);
+        TestIntersectorAxis(const Vector3Type& axis, const Triangle3& triangle, const Box3& box, const Vector3Type& velocity, Real tmax);
 
-        TestIntersectorAxis(const Vector3& axis, const Box3& box0, const Box3& box1, const Vector3& velocity, Real tmax);
+        TestIntersectorAxis(const Vector3Type& axis, const Box3& box0, const Box3& box1, const Vector3Type& velocity, Real tmax);
 
-        TestIntersectorAxis(const Vector3& axis, const Vector3& velocity, Real min0, Real max0, Real min1, Real max1, Real tmax) noexcept;
+        TestIntersectorAxis(const Vector3Type& axis, const Vector3Type& velocity, Real min0, Real max0, Real min1, Real max1, Real tmax) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -51,15 +51,15 @@ namespace Mathematics
         NODISCARD Real GetTLast() const noexcept;
 
         // Projections.
-        NODISCARD static Projections GetProjection(const Vector3& axis, const SegmentType& segment) noexcept;
+        NODISCARD static Projections GetProjection(const Vector3Type& axis, const SegmentType& segment) noexcept;
 
-        NODISCARD static Projections GetProjection(const Vector3& axis, const Triangle3& triangle);
+        NODISCARD static Projections GetProjection(const Vector3Type& axis, const Triangle3& triangle);
 
-        NODISCARD static Projections GetProjection(const Vector3& axis, const Box3& box);
+        NODISCARD static Projections GetProjection(const Vector3Type& axis, const Box3& box);
 
     private:
         //  预测的低级测试查询。
-        void Test(const Vector3& axis, const Vector3& velocity, Real min0, Real max0, Real min1, Real max1, Real tmax) noexcept;
+        void Test(const Vector3Type& axis, const Vector3Type& velocity, Real min0, Real max0, Real min1, Real max1, Real tmax) noexcept;
 
     private:
         bool result;

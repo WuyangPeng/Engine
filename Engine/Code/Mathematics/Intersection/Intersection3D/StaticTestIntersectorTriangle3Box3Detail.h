@@ -56,9 +56,9 @@ Mathematics::Box3<Real> Mathematics::StaticTestIntersectorTriangle3Box3<Real>::G
 template <typename Real>
 void Mathematics::StaticTestIntersectorTriangle3Box3<Real>::Test()
 {
-    std::array<Vector3, 3> edge{ triangle.GetVertex(1) - triangle.GetVertex(0),
-                                 triangle.GetVertex(2) - triangle.GetVertex(0),
-                                 Vector3{} };
+    std::array<Vector3Type, 3> edge{ triangle.GetVertex(1) - triangle.GetVertex(0),
+                                     triangle.GetVertex(2) - triangle.GetVertex(0),
+                                     Vector3Type{} };
 
     auto d = Vector3ToolsType::CrossProduct(edge.at(0), edge.at(1));
     auto min0 = Vector3ToolsType::DotProduct(d, triangle.GetVertex(0));

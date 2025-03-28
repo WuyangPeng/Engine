@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = StaticTestIntersectorCircle3Plane3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Circle3 = Circle3<Real>;
         using Plane3 = Plane3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;

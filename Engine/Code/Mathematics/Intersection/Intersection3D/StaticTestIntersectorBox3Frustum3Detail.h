@@ -57,7 +57,7 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>::Test()
 {
     using Vector = std::array<Real, 3>;
 
-    const std::array<Vector3, 3> axes{ box.GetAxis0(), box.GetAxis1(), box.GetAxis2() };
+    const std::array<Vector3Type, 3> axes{ box.GetAxis0(), box.GetAxis1(), box.GetAxis2() };
     const Vector extents{ box.GetExtent0(), box.GetExtent1(), box.GetExtent2() };
 
     auto diff = box.GetCenter() - frustum.GetOrigin();  // C-E

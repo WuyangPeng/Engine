@@ -105,7 +105,7 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::Test()
     auto minSqrDistance = MathType::maxReal;
     auto maxSqrDistance = MathType::GetValue(0);
 
-    if (Vector3ToolsType::Approximate(k, Vector3::GetZero()))
+    if (Vector3ToolsType::Approximate(k, Vector3Type::GetZero()))
     {
         // 共同中心的特殊情况必须分开处理。 椭圆体不可能分开。
         for (auto i = 0; i < 3; ++i)

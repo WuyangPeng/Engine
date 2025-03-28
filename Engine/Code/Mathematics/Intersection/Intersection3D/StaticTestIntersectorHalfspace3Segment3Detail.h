@@ -56,7 +56,7 @@ Mathematics::Segment3<Real> Mathematics::StaticTestIntersectorHalfspace3Segment3
 template <typename Real>
 void Mathematics::StaticTestIntersectorHalfspace3Segment3<Real>::Test() noexcept
 {
-    const std::array<Vector3, 2> segmentType{ segment.GetBeginPoint(), segment.GetEndPoint() };
+    const std::array<Vector3Type, 2> segmentType{ segment.GetBeginPoint(), segment.GetEndPoint() };
 
     if (const auto projection = TestIntersectorAxis<Real>::GetProjection(halfspace.GetNormal(), segmentType);
         projection.first <= halfspace.GetConstant())

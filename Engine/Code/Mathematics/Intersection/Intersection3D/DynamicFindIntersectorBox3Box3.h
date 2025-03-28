@@ -24,7 +24,7 @@ namespace Mathematics
         using ClassType = DynamicFindIntersectorBox3Box3<Real>;
         using ParentType = DynamicIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Box3 = Box3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
@@ -33,8 +33,8 @@ namespace Mathematics
         DynamicFindIntersectorBox3Box3(const Box3& box0,
                                        const Box3& box1,
                                        Real tmax,
-                                       const Vector3& lhsVelocity,
-                                       const Vector3& rhsVelocity,
+                                       const Vector3Type& lhsVelocity,
+                                       const Vector3Type& rhsVelocity,
                                        const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -43,10 +43,10 @@ namespace Mathematics
         NODISCARD Box3 GetBox1() const noexcept;
 
         NODISCARD int GetQuantity() const;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
 
     private:
-        using Container = std::vector<Vector3>;
+        using Container = std::vector<Vector3Type>;
 
     private:
         // 动态查找交叉点查询。 该触点组被计算出来。

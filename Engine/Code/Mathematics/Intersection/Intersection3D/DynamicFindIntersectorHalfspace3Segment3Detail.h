@@ -18,7 +18,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorHalfspace3Segment3<Real>::DynamicFindIntersectorHalfspace3Segment3(const Plane3& halfspace, const Segment3& segment, Real tmax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorHalfspace3Segment3<Real>::DynamicFindIntersectorHalfspace3Segment3(const Plane3& halfspace, const Segment3& segment, Real tmax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, halfspace{ halfspace }, segment{ segment }, quantity{}, point0{}, point1{}
 {
     Find();
@@ -60,7 +60,7 @@ void Mathematics::DynamicFindIntersectorHalfspace3Segment3<Real>::Find()
 {
     this->SetContactTime(MathType::GetValue(0));
 
-    using SegmentType = std::array<Vector3, 2>;
+    using SegmentType = std::array<Vector3Type, 2>;
     SegmentType segmentType{ segment.GetBeginPoint(), segment.GetEndPoint() };
 
     const auto cfg = FindIntersectorAxis<Real>::GetConfiguration(halfspace.GetNormal(), segmentType);

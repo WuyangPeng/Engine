@@ -106,7 +106,7 @@ Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorLine3Capsule3<Real>
 }
 
 template <typename Real>
-typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathematics::StaticFindIntersectorLine3Capsule3<Real>::Find(const Vector3& origin, const Vector3& direction, const Capsule3& capsule)
+typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathematics::StaticFindIntersectorLine3Capsule3<Real>::Find(const Vector3Type& origin, const Vector3Type& direction, const Capsule3& capsule)
 {
     FindShared findShared{};
 
@@ -311,8 +311,8 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
     /// 测试与上半球的交点。 二次方程是t^2 + 2 * (px * dx + py * dy + (pz - e) * dz) * t + (px^2 + py^2 + (pz - e)^2 - r^2) = 0
     /// 使用当前a1 = px * dx  + py * dy + (pz + e) * dz和a0 = px^2 + py^2 + (pz + e)^2 - r^2的事实。
     /// 前导系数为a2 = 1，因此无需包含在构造中。
-    a1 -= (MathType::GetValue(2)) * extent * dot.GetZ();
-    a0 -= (MathType::GetValue(4)) * extent * point.GetZ();
+    a1 -= (MathType::GetValue(2))*extent * dot.GetZ();
+    a0 -= (MathType::GetValue(4))*extent * point.GetZ();
     discr = a1 * a1 - a0;
     if (MathType::GetZeroTolerance() < discr)
     {

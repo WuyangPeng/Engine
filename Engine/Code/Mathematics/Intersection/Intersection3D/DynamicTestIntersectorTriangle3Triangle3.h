@@ -26,7 +26,7 @@ namespace Mathematics
         using ClassType = DynamicTestIntersectorTriangle3Triangle3<Real>;
         using ParentType = DynamicIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Triangle3 = Triangle3<Real>;
         using Plane3 = Plane3<Real>;
         using Line3 = Line3<Real>;
@@ -37,8 +37,8 @@ namespace Mathematics
         DynamicTestIntersectorTriangle3Triangle3(const Triangle3& triangle0,
                                                  const Triangle3& triangle1,
                                                  Real tMax,
-                                                 const Vector3& lhsVelocity,
-                                                 const Vector3& rhsVelocity,
+                                                 const Vector3Type& lhsVelocity,
+                                                 const Vector3Type& rhsVelocity,
                                                  const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -61,9 +61,9 @@ namespace Mathematics
 
         NODISCARD static IntersectInfo TestOverlap(Real tMax, Real speed, Real uMin, Real uMax, Real vMin, Real vMax) noexcept;
 
-        NODISCARD IntersectInfo TestOverlap(const Vector3& axis, Real tMax, const Vector3& velocity);
+        NODISCARD IntersectInfo TestOverlap(const Vector3Type& axis, Real tMax, const Vector3Type& velocity);
 
-        NODISCARD static IntersectInfo ProjectOntoAxis(const Triangle3& triangle, const Vector3& axis);
+        NODISCARD static IntersectInfo ProjectOntoAxis(const Triangle3& triangle, const Vector3Type& axis);
 
     private:
         Triangle3 triangle0;

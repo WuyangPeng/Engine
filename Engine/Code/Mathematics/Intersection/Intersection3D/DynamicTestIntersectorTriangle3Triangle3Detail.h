@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::DynamicTestIntersectorTriangle3Triangle3(const Triangle3& triangle0, const Triangle3& triangle1, Real tMax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::DynamicTestIntersectorTriangle3Triangle3(const Triangle3& triangle0, const Triangle3& triangle1, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon }, triangle0{ triangle0 }, triangle1{ triangle1 }
 {
     Test();
@@ -75,7 +75,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::Test()
     auto relVelocity = velocity1 - velocity0;
 
     // 计算三角形0的边缘和法线方向。
-    using TriangleType = std::array<Vector3, 3>;
+    using TriangleType = std::array<Vector3Type, 3>;
     TriangleType edge0{ triangle0.GetVertex(1) - triangle0.GetVertex(0),
                         triangle0.GetVertex(2) - triangle0.GetVertex(1),
                         triangle0.GetVertex(0) - triangle0.GetVertex(2) };
@@ -165,7 +165,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::Test()
 }
 
 template <typename Real>
-typename Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::IntersectInfo Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::ProjectOntoAxis(const Triangle3& triangle, const Vector3& axis)
+typename Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::IntersectInfo Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::ProjectOntoAxis(const Triangle3& triangle, const Vector3Type& axis)
 {
     auto dot0 = Vector3ToolsType::DotProduct(axis, triangle.GetVertex(0));
     auto dot1 = Vector3ToolsType::DotProduct(axis, triangle.GetVertex(1));
@@ -310,7 +310,7 @@ typename Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::IntersectI
 }
 
 template <typename Real>
-typename Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::IntersectInfo Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::TestOverlap(const Vector3& axis, Real tMax, const Vector3& velocity)
+typename Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::IntersectInfo Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::TestOverlap(const Vector3Type& axis, Real tMax, const Vector3Type& velocity)
 {
     const auto intersectInfo0 = ProjectOntoAxis(triangle0, axis);
     const auto intersectInfo1 = ProjectOntoAxis(triangle1, axis);

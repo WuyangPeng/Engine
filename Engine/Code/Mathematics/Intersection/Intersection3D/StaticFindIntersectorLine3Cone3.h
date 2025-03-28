@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorLine3Cone3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Line3 = Line3<Real>;
         using Cone3 = Cone3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
@@ -45,7 +45,7 @@ namespace Mathematics
         /// IT_SEGMENT：<point0,point1>是相交线段
         /// IT_RAY：point0 + t * point1是相交射线
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
 
     private:
         void Find();
@@ -55,8 +55,8 @@ namespace Mathematics
         Cone3 cone;
 
         int quantity;
-        Vector3 point0;
-        Vector3 point1;
+        Vector3Type point0;
+        Vector3Type point1;
     };
 }
 

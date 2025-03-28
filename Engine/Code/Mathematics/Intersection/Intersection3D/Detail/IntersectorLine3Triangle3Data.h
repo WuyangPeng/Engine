@@ -24,7 +24,7 @@ namespace Mathematics
     public:
         using ClassType = IntersectorLine3Triangle3Data<Real>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Line3 = Line3<Real>;
         using Triangle3 = Triangle3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
@@ -38,8 +38,8 @@ namespace Mathematics
         NODISCARD Triangle3 GetTriangle() const;
         NODISCARD Real GetDirectionDotNormal() const noexcept;
 
-        NODISCARD Vector3 GetOriginCrossEdge2() const noexcept;
-        NODISCARD Vector3 GetEdge1CrossOrigin() const noexcept;
+        NODISCARD Vector3Type GetOriginCrossEdge2() const noexcept;
+        NODISCARD Vector3Type GetEdge1CrossOrigin() const noexcept;
         NODISCARD Real GetOriginDotNormal() const noexcept;
 
     private:
@@ -49,10 +49,10 @@ namespace Mathematics
         // 相交对象
         Line3 line;
         Triangle3 triangle;
-        Vector3 origin;
-        Vector3 edge1;
-        Vector3 edge2;
-        Vector3 normal;
+        Vector3Type origin;
+        Vector3Type edge1;
+        Vector3Type edge2;
+        Vector3Type normal;
         Real directionDotNormal;
     };
 }

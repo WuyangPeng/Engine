@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = DynamicFindIntersectorPlane3Plane3<Real>;
         using ParentType = DynamicIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Plane3 = Plane3<Real>;
         using Line3 = Line3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
@@ -35,8 +35,8 @@ namespace Mathematics
         DynamicFindIntersectorPlane3Plane3(const Plane3& plane0,
                                            const Plane3& plane1,
                                            Real tmax,
-                                           const Vector3& lhsVelocity,
-                                           const Vector3& rhsVelocity,
+                                           const Vector3Type& lhsVelocity,
+                                           const Vector3Type& rhsVelocity,
                                            const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;

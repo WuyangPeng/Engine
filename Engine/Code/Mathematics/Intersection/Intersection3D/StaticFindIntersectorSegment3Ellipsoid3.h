@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorSegment3Ellipsoid3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Segment3 = Segment3<Real>;
         using Ellipsoid3 = Ellipsoid3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
@@ -44,7 +44,7 @@ namespace Mathematics
         /// 如果您希望椭球只是表面本身，并且当线段严格位于椭球内时希望得到“无交集”的结果，
         /// 则只要将IT_SEGMENT作为类型，就将线段终点与GetPoint(i)的值进行比较。 如果它们相同，则将其视为“无交集”。
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
 
     private:
         void Find();
@@ -54,8 +54,8 @@ namespace Mathematics
         Ellipsoid3 ellipsoid;
 
         int quantity;
-        Vector3 point0;
-        Vector3 point1;
+        Vector3Type point0;
+        Vector3Type point1;
     };
 }
 

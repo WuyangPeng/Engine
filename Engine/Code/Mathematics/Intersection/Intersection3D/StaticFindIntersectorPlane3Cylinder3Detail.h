@@ -19,10 +19,10 @@ Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::StaticFindIntersectorPl
       plane{ plane },
       cylinder{ cylinder },
       type{ CylinderPlaneIntersection::EmptySet },
-      line0{ Vector3::GetZero(), Vector3::GetZero() },
-      line1{ Vector3::GetZero(), Vector3::GetZero() },
-      circle{ Vector3::GetZero(), Vector3::GetZero(), Vector3::GetZero(), Vector3::GetZero(), MathType::GetValue(0) },
-      ellipse{ Vector3::GetZero(), Vector3::GetZero(), Vector3::GetZero(), Vector3::GetZero(), MathType::GetValue(0), MathType::GetValue(0) }
+      line0{ Vector3Type::GetZero(), Vector3Type::GetZero() },
+      line1{ Vector3Type::GetZero(), Vector3Type::GetZero() },
+      circle{ Vector3Type::GetZero(), Vector3Type::GetZero(), Vector3Type::GetZero(), Vector3Type::GetZero(), MathType::GetValue(0) },
+      ellipse{ Vector3Type::GetZero(), Vector3Type::GetZero(), Vector3Type::GetZero(), Vector3Type::GetZero(), MathType::GetValue(0), MathType::GetValue(0) }
 {
     Find();
 

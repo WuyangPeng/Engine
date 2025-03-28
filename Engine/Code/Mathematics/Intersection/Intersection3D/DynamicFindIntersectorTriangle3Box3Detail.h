@@ -18,7 +18,7 @@
 #include "Mathematics/Intersection/Flags/ContactSide.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::DynamicFindIntersectorTriangle3Box3(const Triangle3& triangle, const Box3& box, Real tMax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::DynamicFindIntersectorTriangle3Box3(const Triangle3& triangle, const Box3& box, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon }, triangle{ triangle }, box{ box }, point{}
 {
     Find();
@@ -66,7 +66,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::Find()
     auto relVelocity = rhsVelocity - lhsVelocity;
 
     // 测试三角形法线
-    using EdgeType = std::array<Vector3, 3>;
+    using EdgeType = std::array<Vector3Type, 3>;
     EdgeType edge{ triangle.GetVertex(1) - triangle.GetVertex(0),
                    triangle.GetVertex(2) - triangle.GetVertex(1),
                    triangle.GetVertex(0) - triangle.GetVertex(2) };

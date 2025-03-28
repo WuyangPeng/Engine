@@ -25,12 +25,12 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorTriangle3Box3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Triangle3 = Triangle3<Real>;
         using Box3 = Box3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
-        using Container = std::vector<Vector3>;
+        using Container = std::vector<Vector3Type>;
 
     public:
         StaticFindIntersectorTriangle3Box3(const Triangle3& triangle, const Box3& box, const Real epsilon = MathType::GetZeroTolerance());
@@ -41,7 +41,7 @@ namespace Mathematics
         NODISCARD Box3 GetBox() const noexcept;
 
         NODISCARD int GetQuantity() const;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
 
     private:
         void Find();

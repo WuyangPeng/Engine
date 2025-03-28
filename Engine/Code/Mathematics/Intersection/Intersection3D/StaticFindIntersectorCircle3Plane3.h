@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorCircle3Plane3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Circle3 = Circle3<Real>;
         using Plane3 = Plane3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
@@ -43,7 +43,7 @@ namespace Mathematics
         /// 如果类型为IT_POINT，GetPoint(i)。
         /// 如果类型为IT_OTHER，则该集合为圆，因此请使用GetIntersectionCircle()，它返回圆对象。
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
         NODISCARD Circle3 GetIntersectionCircle() const noexcept;
 
     private:
@@ -54,8 +54,8 @@ namespace Mathematics
         Plane3 plane;
 
         int quantity;
-        Vector3 point0;
-        Vector3 point1;
+        Vector3Type point0;
+        Vector3Type point1;
     };
 }
 

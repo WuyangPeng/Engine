@@ -24,7 +24,7 @@ namespace Mathematics
         using ClassType = DynamicAngularTestIntersectorBox3Box3<Real>;
         using ParentType = DynamicIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Box3 = Box3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
@@ -34,12 +34,12 @@ namespace Mathematics
                                               const Box3& box1,
                                               Real tMax,
                                               int numSteps,
-                                              const Vector3& lhsVelocity,
-                                              const Vector3& lhsRotCenter,
-                                              const Vector3& lhsRotAxis,
-                                              const Vector3& rhsVelocity,
-                                              const Vector3& rhsRotCenter,
-                                              const Vector3& rhsRotAxis,
+                                              const Vector3Type& lhsVelocity,
+                                              const Vector3Type& lhsRotCenter,
+                                              const Vector3Type& lhsRotAxis,
+                                              const Vector3Type& rhsVelocity,
+                                              const Vector3Type& rhsRotCenter,
+                                              const Vector3Type& rhsRotAxis,
                                               const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -57,10 +57,10 @@ namespace Mathematics
         Box3 box1;
 
         int numSteps;
-        Vector3 lhsRotCenter;
-        Vector3 lhsRotAxis;
-        Vector3 rhsRotCenter;
-        Vector3 rhsRotAxis;
+        Vector3Type lhsRotCenter;
+        Vector3Type lhsRotAxis;
+        Vector3Type rhsRotCenter;
+        Vector3Type rhsRotAxis;
     };
 }
 

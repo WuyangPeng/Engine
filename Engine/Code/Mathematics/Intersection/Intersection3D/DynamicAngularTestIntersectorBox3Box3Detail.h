@@ -22,12 +22,12 @@ Mathematics::DynamicAngularTestIntersectorBox3Box3<Real>::DynamicAngularTestInte
                                                                                                 const Box3& box1,
                                                                                                 Real tMax,
                                                                                                 int numSteps,
-                                                                                                const Vector3& lhsVelocity,
-                                                                                                const Vector3& lhsRotCenter,
-                                                                                                const Vector3& lhsRotAxis,
-                                                                                                const Vector3& rhsVelocity,
-                                                                                                const Vector3& rhsRotCenter,
-                                                                                                const Vector3& rhsRotAxis,
+                                                                                                const Vector3Type& lhsVelocity,
+                                                                                                const Vector3Type& lhsRotCenter,
+                                                                                                const Vector3Type& lhsRotAxis,
+                                                                                                const Vector3Type& rhsVelocity,
+                                                                                                const Vector3Type& rhsRotCenter,
+                                                                                                const Vector3Type& rhsRotAxis,
                                                                                                 const Real epsilon)
     : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon },
       box0{ box0 },
@@ -106,7 +106,7 @@ void Mathematics::DynamicAngularTestIntersectorBox3Box3<Real>::Test()
         subBox1 = subBox1.GetMove(1, subVelocity1);
 
         // ¸üÐÂºÐ×ÓÖá¡£
-        using AxisType = std::vector<Vector3>;
+        using AxisType = std::vector<Vector3Type>;
         AxisType axis0{ subBox0.GetAxis(0) + stepSize * Vector3ToolsType::CrossProduct(lhsRotAxis, subBox0.GetAxis(0)),
                         subBox0.GetAxis(1) + stepSize * Vector3ToolsType::CrossProduct(lhsRotAxis, subBox0.GetAxis(1)),
                         subBox0.GetAxis(2) + stepSize * Vector3ToolsType::CrossProduct(lhsRotAxis, subBox0.GetAxis(2)) };

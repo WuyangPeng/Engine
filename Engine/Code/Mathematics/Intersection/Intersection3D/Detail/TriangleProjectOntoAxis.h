@@ -24,10 +24,10 @@ namespace Mathematics
         using ClassType = TriangleProjectOntoAxis<Real>;
 
         using Triangle3 = Triangle3<Real>;
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
 
     public:
-        TriangleProjectOntoAxis(const Triangle3& triangle, const Vector3& axis);
+        TriangleProjectOntoAxis(const Triangle3& triangle, const Vector3Type& axis);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -35,7 +35,7 @@ namespace Mathematics
         NODISCARD Real GetMax() const noexcept;
 
     private:
-        void Project(const Triangle3& triangle, const Vector3& axis);
+        void Project(const Triangle3& triangle, const Vector3Type& axis);
 
     private:
         Real min;

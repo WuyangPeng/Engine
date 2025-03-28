@@ -24,7 +24,7 @@ namespace Mathematics
         using ClassType = StaticTestIntersectorCapsule3Capsule3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Capsule3 = Capsule3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;

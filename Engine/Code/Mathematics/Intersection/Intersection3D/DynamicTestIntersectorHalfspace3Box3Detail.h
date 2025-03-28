@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::DynamicTestIntersectorHalfspace3Box3<Real>::DynamicTestIntersectorHalfspace3Box3(const Plane3& halfspace, const Box3& box, Real tmax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicTestIntersectorHalfspace3Box3<Real>::DynamicTestIntersectorHalfspace3Box3(const Plane3& halfspace, const Box3& box, Real tmax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, halfspace{ halfspace }, box{ box }
 {
     Test();

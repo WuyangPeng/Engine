@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = DynamicTestIntersectorSphere3Sphere3<Real>;
         using ParentType = DynamicIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Sphere3 = Sphere3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
@@ -34,8 +34,8 @@ namespace Mathematics
         DynamicTestIntersectorSphere3Sphere3(const Sphere3& sphere0,
                                              const Sphere3& sphere1,
                                              Real tMax,
-                                             const Vector3& lhsVelocity,
-                                             const Vector3& rhsVelocity,
+                                             const Vector3Type& lhsVelocity,
+                                             const Vector3Type& rhsVelocity,
                                              const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;

@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::DynamicTestIntersectorTriangle3Box3<Real>::DynamicTestIntersectorTriangle3Box3(const Triangle3& triangle, const Box3& box, Real tMax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicTestIntersectorTriangle3Box3<Real>::DynamicTestIntersectorTriangle3Box3(const Triangle3& triangle, const Box3& box, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon }, triangle{ triangle }, box{ box }
 {
     Test();
@@ -59,7 +59,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Box3<Real>::Test()
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
     // 测试三角形法线的方向。
-    using TriangleType = std::array<Vector3, 3>;
+    using TriangleType = std::array<Vector3Type, 3>;
     TriangleType edge{ triangle.GetVertex(1) - triangle.GetVertex(0),
                        triangle.GetVertex(2) - triangle.GetVertex(0),
                        triangle.GetVertex(2) - triangle.GetVertex(1) };

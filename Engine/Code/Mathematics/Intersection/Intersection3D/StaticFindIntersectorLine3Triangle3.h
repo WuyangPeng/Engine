@@ -27,7 +27,7 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorLine3Triangle3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Line3 = Line3<Real>;
         using Triangle3 = Triangle3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
@@ -46,7 +46,7 @@ namespace Mathematics
         NODISCARD Real GetTriangleBary1() const noexcept;
         NODISCARD Real GetTriangleBary2() const noexcept;
 
-        NODISCARD Vector3 GetPoint() const noexcept;
+        NODISCARD Vector3Type GetPoint() const noexcept;
 
     private:
         void Find();
@@ -62,7 +62,7 @@ namespace Mathematics
         Real triangleBary1;
         Real triangleBary2;
 
-        Vector3 point;
+        Vector3Type point;
     };
 }
 

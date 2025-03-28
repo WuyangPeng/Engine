@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = DynamicFindIntersectorTriangle3Sphere3<Real>;
         using ParentType = DynamicIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Triangle3 = Triangle3<Real>;
         using Sphere3 = Sphere3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
@@ -35,8 +35,8 @@ namespace Mathematics
         DynamicFindIntersectorTriangle3Sphere3(const Triangle3& triangle,
                                                const Sphere3& sphere,
                                                Real tMax,
-                                               const Vector3& lhsVelocity,
-                                               const Vector3& rhsVelocity,
+                                               const Vector3Type& lhsVelocity,
+                                               const Vector3Type& rhsVelocity,
                                                const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -45,10 +45,10 @@ namespace Mathematics
         NODISCARD Sphere3 GetSphere() const noexcept;
 
         // 接触点。
-        NODISCARD Vector3 GetPoint() const noexcept;
+        NODISCARD Vector3Type GetPoint() const noexcept;
 
     private:
-        using VertexType = std::vector<Vector3>;
+        using VertexType = std::vector<Vector3Type>;
 
     private:
         /// 动态查找交叉点查询。 如果查询返回“ true”，请使用GetContactTime()获取第一次相交。
@@ -58,9 +58,9 @@ namespace Mathematics
 
     private:
         // 支持动态查询。
-        NODISCARD bool FindTriangleSphereCoplanarIntersection(int index, const VertexType& vertexs, const Vector3& sideNorm, const Vector3& side, Real tmax, const Vector3& velocity0, const Vector3& velocity1);
+        NODISCARD bool FindTriangleSphereCoplanarIntersection(int index, const VertexType& vertexs, const Vector3Type& sideNorm, const Vector3Type& side, Real tmax, const Vector3Type& velocity0, const Vector3Type& velocity1);
 
-        NODISCARD bool FindSphereVertexIntersection(const Vector3& vertex, Real tmax, const Vector3& velocity0, const Vector3& velocity1);
+        NODISCARD bool FindSphereVertexIntersection(const Vector3Type& vertex, Real tmax, const Vector3Type& velocity0, const Vector3Type& velocity1);
 
     private:
         // 要相交的对象。
@@ -68,7 +68,7 @@ namespace Mathematics
         Sphere3 sphere;
 
         // 动态查询的相交点。
-        Vector3 point;
+        Vector3Type point;
     };
 }
 

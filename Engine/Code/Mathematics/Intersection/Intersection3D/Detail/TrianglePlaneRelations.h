@@ -27,7 +27,7 @@ namespace Mathematics
         using ClassType = TrianglePlaneRelations<Real>;
 
         using Triangle3 = Triangle3<Real>;
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Plane3 = Plane3<Real>;
         using MathType = Math<Real>;
 

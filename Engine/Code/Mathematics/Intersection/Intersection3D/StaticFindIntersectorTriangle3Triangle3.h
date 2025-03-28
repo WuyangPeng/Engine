@@ -26,13 +26,13 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorTriangle3Triangle3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Line3 = Line3<Real>;
         using Plane3 = Plane3<Real>;
         using Triangle3 = Triangle3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
-        using Container = std::vector<Vector3>;
+        using Container = std::vector<Vector3Type>;
 
     public:
         StaticFindIntersectorTriangle3Triangle3(const Triangle3& lhsTriangle, const Triangle3& rhsTriangle, bool reportCoplanarIntersections = true, const Real epsilon = MathType::GetZeroTolerance());
@@ -43,14 +43,14 @@ namespace Mathematics
         NODISCARD Triangle3 GetRhsTriangle() const noexcept;
 
         NODISCARD int GetQuantity() const;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
 
     private:
         void Find();
 
-        void ContainsPoint(const Triangle3& triangle, const Plane3& plane, const Vector3& vector3);
+        void ContainsPoint(const Triangle3& triangle, const Plane3& plane, const Vector3Type& vector3);
 
-        void IntersectsSegment(const Plane3& plane, const Triangle3& triangle, const Vector3& end0, const Vector3& end1);
+        void IntersectsSegment(const Plane3& plane, const Triangle3& triangle, const Vector3Type& end0, const Vector3Type& end1);
         void GetCoplanarIntersection(const Plane3& plane, const Triangle3& lhsTriangle, const Triangle3& rhsTriangle);
 
     private:

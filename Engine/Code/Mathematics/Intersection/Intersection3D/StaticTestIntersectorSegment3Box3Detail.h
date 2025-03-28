@@ -56,9 +56,9 @@ Mathematics::Box3<Real> Mathematics::StaticTestIntersectorSegment3Box3<Real>::Ge
 template <typename Real>
 void Mathematics::StaticTestIntersectorSegment3Box3<Real>::Test()
 {
-    Vector3 awdu{};
-    Vector3 addu{};
-    Vector3 awxddu{};
+    Vector3Type awdu{};
+    Vector3Type addu{};
+    Vector3Type awxddu{};
 
     auto diff = segment.GetCenterPoint() - box.GetCenter();
 

@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = DynamicFindIntersectorSegment3Sphere3<Real>;
         using ParentType = DynamicIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Segment3 = Segment3<Real>;
         using Sphere3 = Sphere3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
@@ -35,8 +35,8 @@ namespace Mathematics
         DynamicFindIntersectorSegment3Sphere3(const Segment3& segment,
                                               const Sphere3& sphere,
                                               Real tMax,
-                                              const Vector3& lhsVelocity,
-                                              const Vector3& rhsVelocity,
+                                              const Vector3Type& lhsVelocity,
+                                              const Vector3Type& rhsVelocity,
                                               const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -45,7 +45,7 @@ namespace Mathematics
         NODISCARD Sphere3 GetSphere() const noexcept;
 
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
         NODISCARD Real GetSegmentParameter0() const noexcept;
         NODISCARD Real GetSegmentParameter1() const noexcept;
 
@@ -58,8 +58,8 @@ namespace Mathematics
         Sphere3 sphere;
 
         int quantity;
-        Vector3 point0;
-        Vector3 point1;
+        Vector3Type point0;
+        Vector3Type point1;
         Real segmentParameter0;
         Real segmentParameter1;
     };

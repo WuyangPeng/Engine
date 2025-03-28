@@ -181,7 +181,7 @@ Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorTriangle3Triangle3<
 }
 
 template <typename Real>
-void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::ContainsPoint(const Triangle3& triangle, const Plane3& plane, const Vector3& vector3)
+void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::ContainsPoint(const Triangle3& triangle, const Plane3& plane, const Vector3Type& vector3)
 {
     /// 生成平面的坐标系。 传入三角形的顶点为<V0,V1,V2>。
     /// 输入平面的单位长度法向为N，输入点为P。选择V0作为平面的原点。 坐标轴方向是两个单位长度向量U0和U1，
@@ -217,7 +217,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::ContainsPoint(c
 }
 
 template <typename Real>
-void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegment(const Plane3& plane, const Triangle3& triangle, const Vector3& end0, const Vector3& end1)
+void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegment(const Plane3& plane, const Triangle3& triangle, const Vector3Type& end0, const Vector3Type& end1)
 {
     /// 计算三角形顶点的二维表示以及相对于三角形平面的线段端点。 然后计算2D空间中的交点。
 

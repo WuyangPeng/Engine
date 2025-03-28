@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorSphere3Cone3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using Sphere3 = Sphere3<Real>;
         using Cone3 = Cone3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
@@ -40,7 +40,7 @@ namespace Mathematics
         NODISCARD Cone3 GetCone() const noexcept;
 
         /// 在静态查找相交查询中，如果球体和圆锥体之间发生相交，则可能是无限集。 此函数返回最接近圆锥顶点的交点。
-        NODISCARD Vector3 GetPoint() const noexcept;
+        NODISCARD Vector3Type GetPoint() const noexcept;
 
     private:
         void Find();
@@ -50,7 +50,7 @@ namespace Mathematics
         Cone3 cone;
 
         // 与圆锥顶点最近的相交点。
-        Vector3 point;
+        Vector3Type point;
     };
 }
 
