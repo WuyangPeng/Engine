@@ -26,15 +26,15 @@ namespace Mathematics
         using ClassType = RationalVector2<IntSize>;
 
         using Rational = SignRational<IntSize>;
-        using RationalVector = RationalVector<2, IntSize>;
+        using RationalVectorType = RationalVector<2, IntSize>;
 
     public:
         RationalVector2() noexcept;
 
-        explicit RationalVector2(const RationalVector& rhs) noexcept;
+        explicit RationalVector2(const RationalVectorType& rhs) noexcept;
         RationalVector2(const Rational& x, const Rational& y) noexcept;
 
-        RationalVector2& operator=(const RationalVector& rhs) noexcept;
+        RationalVector2& operator=(const RationalVectorType& rhs) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -56,7 +56,7 @@ namespace Mathematics
         NODISCARD Rational SquaredLength() const;
 
     private:
-        RationalVector tuple;
+        RationalVectorType tuple;
     };
 
     // ·µ»Ø Dot(lhs,rhs).
