@@ -19,7 +19,7 @@
 #include "Mathematics/Objects2D/Box2Detail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorBox2Box2<Real>::StaticTestIntersectorBox2Box2(const Box2& lhsBox, const Box2& rhsBox, const Real epsilon)
+Mathematics::StaticTestIntersectorBox2Box2<Real>::StaticTestIntersectorBox2Box2(const Box2Type& lhsBox, const Box2Type& rhsBox, const Real epsilon)
     : ParentType{ epsilon }, lhsBox{ lhsBox }, rhsBox{ rhsBox }
 {
     Test();

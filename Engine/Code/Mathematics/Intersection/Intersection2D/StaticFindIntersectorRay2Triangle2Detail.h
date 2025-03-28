@@ -18,7 +18,7 @@
 #include "Mathematics/Intersection/StaticFindIntersector1.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorRay2Triangle2<Real>::StaticFindIntersectorRay2Triangle2(const Ray2& ray, const Triangle2& triangle, const Real dotThreshold)
+Mathematics::StaticFindIntersectorRay2Triangle2<Real>::StaticFindIntersectorRay2Triangle2(const Ray2Type& ray, const Triangle2Type& triangle, const Real dotThreshold)
     : ParentType{ dotThreshold }, ray{ ray }, triangle{ triangle }, quantity{}, point0{}, point1{}
 {
     Find();

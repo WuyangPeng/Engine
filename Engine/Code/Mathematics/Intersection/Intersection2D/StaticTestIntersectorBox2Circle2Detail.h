@@ -15,7 +15,7 @@
 #include "Mathematics/Distance/Distance2D/DistancePoint2Box2.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorBox2Circle2<Real>::StaticTestIntersectorBox2Circle2(const Box2& box, const Circle2& circle, const Real epsilon)
+Mathematics::StaticTestIntersectorBox2Circle2<Real>::StaticTestIntersectorBox2Circle2(const Box2Type& box, const Circle2Type& circle, const Real epsilon)
     : ParentType{ epsilon }, box{ box }, circle{ circle }
 {
     Test();

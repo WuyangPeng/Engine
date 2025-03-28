@@ -24,17 +24,17 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector2>;
 
         using Vector2Type = Vector2<Real>;
-        using Box2 = Box2<Real>;
-        using Circle2 = Circle2<Real>;
+        using Box2Type = Box2<Real>;
+        using Circle2Type = Circle2<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorBox2Circle2(const Box2& box, const Circle2& circle, const Real epsilon = MathType::GetZeroTolerance());
+        StaticTestIntersectorBox2Circle2(const Box2Type& box, const Circle2Type& circle, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Box2 GetBox() const noexcept;
-        NODISCARD Circle2 GetCircle() const noexcept;
+        NODISCARD Box2Type GetBox() const noexcept;
+        NODISCARD Circle2Type GetCircle() const noexcept;
 
     private:
         // 静态查找相交查询。
@@ -42,8 +42,8 @@ namespace Mathematics
 
     private:
         // 要相交的对象。
-        Box2 box;
-        Circle2 circle;
+        Box2Type box;
+        Circle2Type circle;
     };
 }
 

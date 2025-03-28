@@ -19,7 +19,7 @@
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorLine2Line2<Real>::StaticTestIntersectorLine2Line2(const Line2& lhsLine, const Line2& rhsLine, const Real dotThreshold)
+Mathematics::StaticTestIntersectorLine2Line2<Real>::StaticTestIntersectorLine2Line2(const Line2Type& lhsLine, const Line2Type& rhsLine, const Real dotThreshold)
     : ParentType{ dotThreshold }, lhsLine{ lhsLine }, rhsLine{ rhsLine }, quantity{ 0 }
 {
     Test();

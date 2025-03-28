@@ -20,7 +20,7 @@
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorSegment2Segment2<Real>::StaticFindIntersectorSegment2Segment2(const Segment2& lhsSegment, const Segment2& rhsSegment, const Real dotThreshold, const Real intervalThreshold)
+Mathematics::StaticFindIntersectorSegment2Segment2<Real>::StaticFindIntersectorSegment2Segment2(const Segment2Type& lhsSegment, const Segment2Type& rhsSegment, const Real dotThreshold, const Real intervalThreshold)
     : ParentType{ dotThreshold }, lhsSegment{ lhsSegment }, rhsSegment{ rhsSegment }, quantity{ 0 }, intervalThreshold{ intervalThreshold }, point0{}, point1{}
 {
     Find();
@@ -101,7 +101,7 @@ bool Mathematics::StaticFindIntersectorSegment2Segment2<Real>::IsValid() const n
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename Mathematics::StaticFindIntersectorSegment2Segment2<Real>::Segment2 Mathematics::StaticFindIntersectorSegment2Segment2<Real>::GetLhsSegment() const noexcept
+typename Mathematics::StaticFindIntersectorSegment2Segment2<Real>::Segment2Type Mathematics::StaticFindIntersectorSegment2Segment2<Real>::GetLhsSegment() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -109,7 +109,7 @@ typename Mathematics::StaticFindIntersectorSegment2Segment2<Real>::Segment2 Math
 }
 
 template <typename Real>
-typename Mathematics::StaticFindIntersectorSegment2Segment2<Real>::Segment2 Mathematics::StaticFindIntersectorSegment2Segment2<Real>::GetRhsSegment() const noexcept
+typename Mathematics::StaticFindIntersectorSegment2Segment2<Real>::Segment2Type Mathematics::StaticFindIntersectorSegment2Segment2<Real>::GetRhsSegment() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

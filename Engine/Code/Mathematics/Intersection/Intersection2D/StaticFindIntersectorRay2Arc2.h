@@ -26,18 +26,18 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector2>;
 
         using Vector2Type = Vector2<Real>;
-        using Ray2 = Ray2<Real>;
-        using Arc2 = Arc2<Real>;
+        using Ray2Type = Ray2<Real>;
+        using Arc2Type = Arc2<Real>;
         using Vector2ToolsType = Vector2Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorRay2Arc2(const Ray2& ray, const Arc2& arc, const Real dotThreshold = MathType::GetZeroTolerance());
+        StaticFindIntersectorRay2Arc2(const Ray2Type& ray, const Arc2Type& arc, const Real dotThreshold = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Ray2 GetRay() const noexcept;
-        NODISCARD Arc2 GetArc() const noexcept;
+        NODISCARD Ray2Type GetRay() const noexcept;
+        NODISCARD Arc2Type GetArc() const noexcept;
 
         NODISCARD int GetQuantity() const noexcept;
         NODISCARD Vector2Type GetPoint(int index) const;
@@ -46,8 +46,8 @@ namespace Mathematics
         void Find();
 
     private:
-        Ray2 ray;
-        Arc2 arc;
+        Ray2Type ray;
+        Arc2Type arc;
 
         int quantity;
         Vector2Type point0;

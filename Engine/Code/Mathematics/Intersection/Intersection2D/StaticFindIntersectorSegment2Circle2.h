@@ -26,18 +26,18 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector2>;
 
         using Vector2Type = Vector2<Real>;
-        using Segment2 = Segment2<Real>;
-        using Circle2 = Circle2<Real>;
+        using Segment2Type = Segment2<Real>;
+        using Circle2Type = Circle2<Real>;
         using Vector2ToolsType = Vector2Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorSegment2Circle2(const Segment2& segment, const Circle2& circle, const Real dotThreshold = MathType::GetZeroTolerance());
+        StaticFindIntersectorSegment2Circle2(const Segment2Type& segment, const Circle2Type& circle, const Real dotThreshold = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Segment2 GetSegment() const noexcept;
-        NODISCARD Circle2 GetCircle() const noexcept;
+        NODISCARD Segment2Type GetSegment() const noexcept;
+        NODISCARD Circle2Type GetCircle() const noexcept;
 
         NODISCARD int GetQuantity() const noexcept;
         NODISCARD Vector2Type GetPoint(int index) const;
@@ -46,8 +46,8 @@ namespace Mathematics
         void Find();
 
     private:
-        Segment2 segment;
-        Circle2 circle;
+        Segment2Type segment;
+        Circle2Type circle;
 
         int quantity;
         Vector2Type point0;

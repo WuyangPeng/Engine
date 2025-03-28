@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorTriangle2Triangle2<Real>::StaticTestIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1, const Real dotThreshold)
+Mathematics::StaticTestIntersectorTriangle2Triangle2<Real>::StaticTestIntersectorTriangle2Triangle2(const Triangle2Type& triangle0, const Triangle2Type& triangle1, const Real dotThreshold)
     : ParentType{ dotThreshold }, triangle0{ triangle0 }, triangle1{ triangle1 }
 {
     Test();

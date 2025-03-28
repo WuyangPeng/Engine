@@ -20,7 +20,7 @@
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersector<Mathematics::Segment2<Real>, Mathematics::Segment2<Real>>::StaticTestIntersector(const Segment2& lhsSegment, const Segment2& rhsSegment, const Real dotThreshold, const Real intervalThreshold)
+Mathematics::StaticTestIntersector<Mathematics::Segment2<Real>, Mathematics::Segment2<Real>>::StaticTestIntersector(const Segment2Type& lhsSegment, const Segment2Type& rhsSegment, const Real dotThreshold, const Real intervalThreshold)
     : ParentType{ dotThreshold }, lhsSegment{ lhsSegment }, rhsSegment{ rhsSegment }, quantity{ 0 }, intervalThreshold{ intervalThreshold }
 {
     Test();

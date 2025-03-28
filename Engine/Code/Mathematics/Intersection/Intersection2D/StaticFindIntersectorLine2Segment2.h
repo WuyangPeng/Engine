@@ -27,18 +27,18 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector2>;
 
         using Vector2Type = Vector2<Real>;
-        using Line2 = Line2<Real>;
-        using Segment2 = Segment2<Real>;
+        using Line2Type = Line2<Real>;
+        using Segment2Type = Segment2<Real>;
         using Vector2ToolsType = Vector2Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorLine2Segment2(const Line2& line, const Segment2& segment, const Real dotThreshold = MathType::GetZeroTolerance(), const Real intervalThreshold = MathType::GetValue(0));
+        StaticFindIntersectorLine2Segment2(const Line2Type& line, const Segment2Type& segment, const Real dotThreshold = MathType::GetZeroTolerance(), const Real intervalThreshold = MathType::GetValue(0));
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Line2 GetLine() const noexcept;
-        NODISCARD Segment2 GetSegment() const noexcept;
+        NODISCARD Line2Type GetLine() const noexcept;
+        NODISCARD Segment2Type GetSegment() const noexcept;
 
         // 相交测试使用线段的中心-范围形式。
         // 如果从端点（Vector2Type<Real>）开始并创建 Segment2<Real>对象，
@@ -62,8 +62,8 @@ namespace Mathematics
 
     private:
         // 要相交的对象。
-        Line2 line;
-        Segment2 segment;
+        Line2Type line;
+        Segment2Type segment;
 
         // 相交集
         int quantity;

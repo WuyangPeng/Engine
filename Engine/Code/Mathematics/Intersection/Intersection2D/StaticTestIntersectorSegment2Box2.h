@@ -26,26 +26,26 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector2>;
 
         using Vector2Type = Vector2<Real>;
-        using Segment2 = Segment2<Real>;
-        using Box2 = Box2<Real>;
+        using Segment2Type = Segment2<Real>;
+        using Box2Type = Box2<Real>;
         using Vector2ToolsType = Vector2Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorSegment2Box2(const Segment2& segment, const Box2& box, bool solid, const Real dotThreshold = MathType::GetZeroTolerance());
+        StaticTestIntersectorSegment2Box2(const Segment2Type& segment, const Box2Type& box, bool solid, const Real dotThreshold = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Segment2 GetSegment() const noexcept;
+        NODISCARD Segment2Type GetSegment() const noexcept;
 
-        NODISCARD Box2 GetBox() const noexcept;
+        NODISCARD Box2Type GetBox() const noexcept;
 
     private:
         void Test();
 
     private:
-        Segment2 segment;
-        Box2 box;
+        Segment2Type segment;
+        Box2Type box;
         bool solid;
     };
 }

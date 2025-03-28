@@ -26,17 +26,17 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector2>;
 
         using Vector2Type = Vector2<Real>;
-        using Triangle2 = Triangle2<Real>;
+        using Triangle2Type = Triangle2<Real>;
         using Vector2ToolsType = Vector2Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1, const Real dotThreshold = MathType::GetZeroTolerance());
+        StaticTestIntersectorTriangle2Triangle2(const Triangle2Type& triangle0, const Triangle2Type& triangle1, const Real dotThreshold = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Triangle2 GetTriangle0() const noexcept;
-        NODISCARD Triangle2 GetTriangle1() const noexcept;
+        NODISCARD Triangle2Type GetTriangle0() const noexcept;
+        NODISCARD Triangle2Type GetTriangle1() const noexcept;
 
     private:
         using Container = std::vector<Vector2Type>;
@@ -47,8 +47,8 @@ namespace Mathematics
         NODISCARD static NumericalValueSymbol WhichSide(const Container& vertex, const Vector2Type& point, const Vector2Type& direction);
 
     private:
-        Triangle2 triangle0;
-        Triangle2 triangle1;
+        Triangle2Type triangle0;
+        Triangle2Type triangle1;
     };
 }
 

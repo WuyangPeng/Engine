@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorLine2Box2<Real>::StaticTestIntersectorLine2Box2(const Line2& line, const Box2& box, const Real epsilon)
+Mathematics::StaticTestIntersectorLine2Box2<Real>::StaticTestIntersectorLine2Box2(const Line2Type& line, const Box2Type& box, const Real epsilon)
     : ParentType{ epsilon }, line{ line }, box{ box }
 {
     Test();

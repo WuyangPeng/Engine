@@ -16,7 +16,7 @@
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorRay2Box2<Real>::StaticTestIntersectorRay2Box2(const Ray2& ray, const Box2& box, const Real dotThreshold)
+Mathematics::StaticTestIntersectorRay2Box2<Real>::StaticTestIntersectorRay2Box2(const Ray2Type& ray, const Box2Type& box, const Real dotThreshold)
     : ParentType{ dotThreshold }, ray{ ray }, box{ box }
 {
     Test();

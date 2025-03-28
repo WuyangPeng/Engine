@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorSegment2Box2<Real>::StaticTestIntersectorSegment2Box2(const Segment2& segment, const Box2& box, bool solid, const Real dotThreshold)
+Mathematics::StaticTestIntersectorSegment2Box2<Real>::StaticTestIntersectorSegment2Box2(const Segment2Type& segment, const Box2Type& box, bool solid, const Real dotThreshold)
     : ParentType{ dotThreshold }, segment{ segment }, box{ box }, solid{ solid }
 {
     Test();

@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorSegment2Circle2<Real>::StaticFindIntersectorSegment2Circle2(const Segment2& segment, const Circle2& circle, const Real dotThreshold)
+Mathematics::StaticFindIntersectorSegment2Circle2<Real>::StaticFindIntersectorSegment2Circle2(const Segment2Type& segment, const Circle2Type& circle, const Real dotThreshold)
     : ParentType{ dotThreshold },
       segment{ segment },
       circle{ circle },

@@ -19,7 +19,7 @@
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorLine2Segment2<Real>::StaticFindIntersectorLine2Segment2(const Line2& line, const Segment2& segment, const Real dotThreshold, const Real intervalThreshold)
+Mathematics::StaticFindIntersectorLine2Segment2<Real>::StaticFindIntersectorLine2Segment2(const Line2Type& line, const Segment2Type& segment, const Real dotThreshold, const Real intervalThreshold)
     : ParentType{ dotThreshold }, line{ line }, segment{ segment }, quantity{ 0 }, intervalThreshold{ intervalThreshold }, point{}
 {
     Find();

@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorRay2Circle2<Real>::StaticFindIntersectorRay2Circle2(const Ray2& ray, const Circle2& circle, const Real dotThreshold)
+Mathematics::StaticFindIntersectorRay2Circle2<Real>::StaticFindIntersectorRay2Circle2(const Ray2Type& ray, const Circle2Type& circle, const Real dotThreshold)
     : ParentType{ dotThreshold }, ray{ ray }, circle{ circle }, quantity{}, point0{}, point1{}
 {
     Find();

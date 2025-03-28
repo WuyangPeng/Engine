@@ -27,17 +27,17 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector2>;
 
         using Vector2Type = Vector2<Real>;
-        using Line2 = Line2<Real>;
+        using Line2Type = Line2<Real>;
         using Vector2ToolsType = Vector2Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorLine2Line2(const Line2& lhsLine, const Line2& rhsLine, const Real dotThreshold = MathType::GetZeroTolerance());
+        StaticFindIntersectorLine2Line2(const Line2Type& lhsLine, const Line2Type& rhsLine, const Real dotThreshold = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Line2 GetLhsLine() const noexcept;
-        NODISCARD Line2 GetRhsLine() const noexcept;
+        NODISCARD Line2Type GetLhsLine() const noexcept;
+        NODISCARD Line2Type GetRhsLine() const noexcept;
 
         // 相交集。让 q = GetQuantity()。情况是：
         //   q = 0: 线不相交， GetIntersection() 返回IntersectionType::Empty。
@@ -52,8 +52,8 @@ namespace Mathematics
 
     private:
         // 要相交的对象。
-        Line2 lhsLine;
-        Line2 rhsLine;
+        Line2Type lhsLine;
+        Line2Type rhsLine;
 
         // 相交集
         int quantity;
