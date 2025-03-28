@@ -12,6 +12,8 @@
 
 #include "Mathematics/MathematicsDll.h"
 
+#include <type_traits>
+
 namespace Mathematics
 {
     template <typename Real>
