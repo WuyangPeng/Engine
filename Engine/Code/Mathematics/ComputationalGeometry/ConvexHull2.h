@@ -28,11 +28,11 @@ namespace Mathematics
     public:
         using ClassType = ConvexHull2<Real>;
         using ParentType = ConvexHull<Real>;
-        using Vector2 = Vector2<Real>;
-        using Vertices = std::vector<Vector2>;
-        using ConvexHull1 = ConvexHull1<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Vertices = std::vector<Vector2Type>;
+        using ConvexHull1Type = ConvexHull1<Real>;
         using String = System::String;
-        using IndicesType = ParentType::IndicesType;
+        using IndicesType = typename ParentType::IndicesType;
         using MathType = Math<Real>;
 
     public:
@@ -41,9 +41,9 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Vector2 GetLineOrigin() const noexcept;
-        NODISCARD Vector2 GetLineDirection() const noexcept;
-        NODISCARD ConvexHull1 GetConvexHull1() const;
+        NODISCARD Vector2Type GetLineOrigin() const noexcept;
+        NODISCARD Vector2Type GetLineDirection() const noexcept;
+        NODISCARD ConvexHull1Type GetConvexHull1() const;
 
         void LoadFile(const String& filename);
         void SaveFile(const String& filename) const;
@@ -86,8 +86,8 @@ namespace Mathematics
         Vertices sVertices;
         Query2SharedPtr query;
 
-        Vector2 lineOrigin;
-        Vector2 lineDirection;
+        Vector2Type lineOrigin;
+        Vector2Type lineDirection;
     };
 
     using ConvexHull2F = ConvexHull2<float>;

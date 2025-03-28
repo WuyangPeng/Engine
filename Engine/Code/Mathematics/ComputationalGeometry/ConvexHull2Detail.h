@@ -172,14 +172,14 @@ Mathematics::ConvexHull1<Real> Mathematics::ConvexHull2<Real>::GetConvexHull1() 
         THROW_EXCEPTION(SYSTEM_TEXT("Î¬¶È±ØÐëÎª1¡£"));
     }
 
-    typename ConvexHull1::Vertices projection{};
+    typename ConvexHull1Type::Vertices projection{};
     for (const auto& value : vertices)
     {
         auto diff = value - lineOrigin;
         projection.emplace_back(Vector2Tools<Real>::DotProduct(lineDirection, diff));
     }
 
-    ConvexHull1 convexHull1(projection, this->GetEpsilon(), this->GetQueryType());
+    ConvexHull1Type convexHull1(projection, this->GetEpsilon(), this->GetQueryType());
 
     return convexHull1;
 }
@@ -231,12 +231,12 @@ void Mathematics::ConvexHull2<Real>::LoadFile(const String& filename)
     vertices.resize(numVertices);
     sVertices.resize(numVertices);
 
-    const auto size = Vector2::pointSize * numVertices;
+    const auto size = Vector2Type::pointSize * numVertices;
 
     inFile.Read(sizeof(Real), size, vertices.data());
     inFile.Read(sizeof(Real), size, sVertices.data());
-    inFile.Read(sizeof(Real), Vector2::pointSize, &lineOrigin);
-    inFile.Read(sizeof(Real), Vector2::pointSize, &lineDirection);
+    inFile.Read(sizeof(Real), Vector2Type::pointSize, &lineOrigin);
+    inFile.Read(sizeof(Real), Vector2Type::pointSize, &lineDirection);
 
     switch (this->GetQueryType())
     {
@@ -282,12 +282,12 @@ void Mathematics::ConvexHull2<Real>::SaveFile(const String& filename) const
 
     const auto numVertices = this->GetNumVertices();
 
-    const auto size = Vector2::pointSize * numVertices;
+    const auto size = Vector2Type::pointSize * numVertices;
 
     outFile.Write(sizeof(Real), size, vertices.data());
     outFile.Write(sizeof(Real), size, sVertices.data());
-    outFile.Write(sizeof(Real), Vector2::pointSize, &lineOrigin);
-    outFile.Write(sizeof(Real), Vector2::pointSize, &lineDirection);
+    outFile.Write(sizeof(Real), Vector2Type::pointSize, &lineOrigin);
+    outFile.Write(sizeof(Real), Vector2Type::pointSize, &lineDirection);
 }
 
 template <typename Real>

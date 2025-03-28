@@ -134,7 +134,7 @@ void Mathematics::Delaunay3<Real>::Init()
     }
     else
     {
-        min = Vector3::GetZero();
+        min = Vector3Type::GetZero();
         scale = Math<Real>::GetValue(1);
         sVertices = vertices;
 
@@ -157,7 +157,7 @@ void Mathematics::Delaunay3<Real>::Init()
 
     tetraMesh.Insert(extreme.at(0), extreme.at(1), extreme.at(2), extreme.at(3));
 
-    std::set<Vector3> processed{};
+    std::set<Vector3Type> processed{};
     for (auto i = 0; i < 4; ++i)
     {
         processed.emplace(sVertices.at(extreme.at(i)));
@@ -251,14 +251,14 @@ Mathematics::Delaunay1<Real> Mathematics::Delaunay3<Real>::GetDelaunay1() const
         THROW_EXCEPTION(SYSTEM_TEXT("Î¬¶È±ØÐëÎª1¡£"));
     }
 
-    typename Delaunay1::Vertices projection{};
+    typename Delaunay1Type::Vertices projection{};
     for (const auto& value : vertices)
     {
         auto diff = value - lineOrigin;
         projection.emplace_back(Vector3Tools<Real>::DotProduct(lineDirection, diff));
     }
 
-    Delaunay1 delaunay1{ projection, this->GetEpsilon(), this->GetQueryType() };
+    Delaunay1Type delaunay1{ projection, this->GetEpsilon(), this->GetQueryType() };
 
     return delaunay1;
 }
@@ -364,7 +364,7 @@ typename Mathematics::Delaunay3<Real>::HullType Mathematics::Delaunay3<Real>::Ge
 }
 
 template <typename Real>
-int Mathematics::Delaunay3<Real>::GetContainingTetrahedron(const Vector3& p) const
+int Mathematics::Delaunay3<Real>::GetContainingTetrahedron(const Vector3Type& p) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -514,7 +514,7 @@ typename Mathematics::Delaunay3<Real>::VertexType Mathematics::Delaunay3<Real>::
                  true };
     }
 
-    return { Vector3{}, Vector3{}, Vector3{}, Vector3{}, false };
+    return { Vector3Type{}, Vector3Type{}, Vector3Type{}, Vector3Type{}, false };
 }
 
 template <typename Real>
@@ -562,7 +562,7 @@ typename Mathematics::Delaunay3<Real>::IndexType Mathematics::Delaunay3<Real>::G
 }
 
 template <typename Real>
-typename Mathematics::Delaunay3<Real>::BaryType Mathematics::Delaunay3<Real>::GetBarycentricSet(int i, const Vector3& p) const
+typename Mathematics::Delaunay3<Real>::BaryType Mathematics::Delaunay3<Real>::GetBarycentricSet(int i, const Vector3Type& p) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -646,15 +646,15 @@ void Mathematics::Delaunay3<Real>::LoadFile(const String& filename)
     inFile.Read(sizeof(int32_t), &lastFaceOppositeIndex);
     inFile.Read(sizeof(int32_t), pathSize, path.data());
 
-    const auto threeNumVertices = Vector3::pointSize * numVertices;
+    const auto threeNumVertices = Vector3Type::pointSize * numVertices;
 
     inFile.Read(sizeof(Real), threeNumVertices, vertices.data());
     inFile.Read(sizeof(Real), threeNumVertices, sVertices.data());
-    inFile.Read(sizeof(Real), Vector3::pointSize, &min);
-    inFile.Read(sizeof(Real), Vector3::pointSize, &scale);
-    inFile.Read(sizeof(Real), Vector3::pointSize, &lineOrigin);
-    inFile.Read(sizeof(Real), Vector3::pointSize, &lineDirection);
-    inFile.Read(sizeof(Real), Vector3::pointSize, &planeOrigin);
+    inFile.Read(sizeof(Real), Vector3Type::pointSize, &min);
+    inFile.Read(sizeof(Real), Vector3Type::pointSize, &scale);
+    inFile.Read(sizeof(Real), Vector3Type::pointSize, &lineOrigin);
+    inFile.Read(sizeof(Real), Vector3Type::pointSize, &lineDirection);
+    inFile.Read(sizeof(Real), Vector3Type::pointSize, &planeOrigin);
     inFile.Read(sizeof(Real), 6, planeDirection.data());
 
     const auto queryType = this->GetQueryType();
@@ -711,15 +711,15 @@ void Mathematics::Delaunay3<Real>::SaveFile(const String& filename) const
     outFile.Write(sizeof(int32_t), pathSize, path.data());
 
     const auto numVertices = this->GetNumVertices();
-    const auto threeNumVertices = Vector3::pointSize * numVertices;
+    const auto threeNumVertices = Vector3Type::pointSize * numVertices;
 
     outFile.Write(sizeof(Real), threeNumVertices, vertices.data());
     outFile.Write(sizeof(Real), threeNumVertices, sVertices.data());
-    outFile.Write(sizeof(Real), Vector3::pointSize, &min);
-    outFile.Write(sizeof(Real), Vector3::pointSize, &scale);
-    outFile.Write(sizeof(Real), Vector3::pointSize, &lineOrigin);
-    outFile.Write(sizeof(Real), Vector3::pointSize, &lineDirection);
-    outFile.Write(sizeof(Real), Vector3::pointSize, &planeOrigin);
+    outFile.Write(sizeof(Real), Vector3Type::pointSize, &min);
+    outFile.Write(sizeof(Real), Vector3Type::pointSize, &scale);
+    outFile.Write(sizeof(Real), Vector3Type::pointSize, &lineOrigin);
+    outFile.Write(sizeof(Real), Vector3Type::pointSize, &lineDirection);
+    outFile.Write(sizeof(Real), Vector3Type::pointSize, &planeOrigin);
     outFile.Write(sizeof(Real), 6, planeDirection.data());
 }
 

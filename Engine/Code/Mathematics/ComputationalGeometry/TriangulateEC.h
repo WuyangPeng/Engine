@@ -24,8 +24,8 @@ namespace Mathematics
     {
     public:
         using ClassType = TriangulateEC<Real>;
-        using Vector2 = Vector2<Real>;
-        using Positions = std::vector<Vector2>;
+        using Vector2Type = Vector2<Real>;
+        using Positions = std::vector<Vector2Type>;
         using Indices = std::vector<int>;
         using IndicesArray = std::vector<Indices>;
         using IndexMap = std::map<int, int>;
@@ -62,7 +62,7 @@ namespace Mathematics
 
         void DoEarClipping(int numVertices, const Indices& indices, Indices& triangles);
 
-        NODISCARD int TriangleQuery(const Vector2& position, QueryType queryType, Real epsilon, const std::array<Vector2, 3>& triangle) const;
+        NODISCARD int TriangleQuery(const Vector2Type& position, QueryType queryType, Real epsilon, const std::array<Vector2Type, 3>& triangle) const;
 
         void CombinePolygons(QueryType queryType, Real epsilon, int nextElement, const Indices& outer, const Indices& inner, IndexMap& indexMap, Indices& combined);
 
@@ -114,7 +114,7 @@ namespace Mathematics
         int eLast;
 
         Query2SharedPtr query;
-        std::vector<Vector2> sPositions;
+        std::vector<Vector2Type> sPositions;
     };
 }
 

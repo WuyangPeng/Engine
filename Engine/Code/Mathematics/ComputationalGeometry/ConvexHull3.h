@@ -26,10 +26,10 @@ namespace Mathematics
     public:
         using ClassType = ConvexHull3<Real>;
         using ParentType = ConvexHull<Real>;
-        using Vector3 = Vector3<Real>;
-        using Vertices = std::vector<Vector3>;
-        using ConvexHull1 = ConvexHull1<Real>;
-        using ConvexHull2 = ConvexHull2<Real>;
+        using Vector3Type = Vector3<Real>;
+        using Vertices = std::vector<Vector3Type>;
+        using ConvexHull1Type = ConvexHull1<Real>;
+        using ConvexHull2Type = ConvexHull2<Real>;
         using String = System::String;
         using IndicesType = ParentType::IndicesType;
         using MathType = Math<Real>;
@@ -40,13 +40,13 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Vector3 GetLineOrigin() const noexcept;
-        NODISCARD Vector3 GetLineDirection() const noexcept;
-        NODISCARD ConvexHull1 GetConvexHull1() const;
+        NODISCARD Vector3Type GetLineOrigin() const noexcept;
+        NODISCARD Vector3Type GetLineDirection() const noexcept;
+        NODISCARD ConvexHull1Type GetConvexHull1() const;
 
-        NODISCARD Vector3 GetPlaneOrigin() const noexcept;
-        NODISCARD Vector3 GetPlaneDirection(int i) const;
-        NODISCARD ConvexHull2 GetConvexHull2() const;
+        NODISCARD Vector3Type GetPlaneOrigin() const noexcept;
+        NODISCARD Vector3Type GetPlaneDirection(int i) const;
+        NODISCARD ConvexHull2Type GetConvexHull2() const;
 
         void LoadFile(const String& filename);
         void SaveFile(const String& filename) const;
@@ -87,11 +87,11 @@ namespace Mathematics
         Vertices sVertices;
         Query3SharedPtr query;
 
-        Vector3 lineOrigin;
-        Vector3 lineDirection;
+        Vector3Type lineOrigin;
+        Vector3Type lineDirection;
 
-        Vector3 planeOrigin;
-        std::array<Vector3, 2> planeDirection;
+        Vector3Type planeOrigin;
+        std::array<Vector3Type, 2> planeDirection;
 
         std::set<TriangleSharedPtr> hull;
 

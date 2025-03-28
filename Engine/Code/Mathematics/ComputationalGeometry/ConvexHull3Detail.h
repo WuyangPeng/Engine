@@ -213,14 +213,14 @@ Mathematics::ConvexHull1<Real> Mathematics::ConvexHull3<Real>::GetConvexHull1() 
     }
 
     const auto mNumVertices = this->GetNumVertices();
-    typename ConvexHull1::Vertices projection{};
+    typename ConvexHull1Type::Vertices projection{};
     for (auto i = 0; i < mNumVertices; ++i)
     {
         auto diff = vertices.at(i) - lineOrigin;
         projection.emplace_back(Vector3Tools<Real>::DotProduct(lineDirection, diff));
     }
 
-    return ConvexHull1{ projection, this->GetEpsilon(), this->GetQueryType() };
+    return ConvexHull1Type{ projection, this->GetEpsilon(), this->GetQueryType() };
 }
 
 template <typename Real>
@@ -293,14 +293,14 @@ void Mathematics::ConvexHull3<Real>::LoadFile(const String& filename)
     vertices.resize(numVertices);
     sVertices.resize(numVertices);
 
-    const auto size = Vector3::pointSize * numVertices;
+    const auto size = Vector3Type::pointSize * numVertices;
 
     inFile.Read(sizeof(Real), size, vertices.data());
     inFile.Read(sizeof(Real), size, sVertices.data());
-    inFile.Read(sizeof(Real), Vector3::pointSize, &lineOrigin);
-    inFile.Read(sizeof(Real), Vector3::pointSize, &lineDirection);
-    inFile.Read(sizeof(Real), Vector3::pointSize, &planeOrigin);
-    inFile.Read(sizeof(Real), Vector3::pointSize * 2, planeDirection.data());
+    inFile.Read(sizeof(Real), Vector3Type::pointSize, &lineOrigin);
+    inFile.Read(sizeof(Real), Vector3Type::pointSize, &lineDirection);
+    inFile.Read(sizeof(Real), Vector3Type::pointSize, &planeOrigin);
+    inFile.Read(sizeof(Real), Vector3Type::pointSize * 2, planeDirection.data());
 
     switch (this->GetQueryType())
     {
@@ -346,14 +346,14 @@ void Mathematics::ConvexHull3<Real>::SaveFile(const String& filename) const
 
     const auto numVertices = this->GetNumVertices();
 
-    const auto size = Vector3::pointSize * numVertices;
+    const auto size = Vector3Type::pointSize * numVertices;
 
     outFile.Write(sizeof(Real), size, vertices.data());
     outFile.Write(sizeof(Real), size, sVertices.data());
-    outFile.Write(sizeof(Real), Vector3::pointSize, &lineOrigin);
-    outFile.Write(sizeof(Real), Vector3::pointSize, &lineDirection);
-    outFile.Write(sizeof(Real), Vector3::pointSize, &planeOrigin);
-    outFile.Write(sizeof(Real), Vector3::pointSize * 2, planeDirection.data());
+    outFile.Write(sizeof(Real), Vector3Type::pointSize, &lineOrigin);
+    outFile.Write(sizeof(Real), Vector3Type::pointSize, &lineDirection);
+    outFile.Write(sizeof(Real), Vector3Type::pointSize, &planeOrigin);
+    outFile.Write(sizeof(Real), Vector3Type::pointSize * 2, planeDirection.data());
 }
 
 template <typename Real>
