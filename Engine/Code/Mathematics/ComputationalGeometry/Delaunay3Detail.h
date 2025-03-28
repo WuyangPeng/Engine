@@ -292,7 +292,7 @@ Mathematics::Delaunay2<Real> Mathematics::Delaunay3<Real>::GetDelaunay2() const
     }
 
     const auto numVertices = this->GetNumVertices();
-    typename Delaunay2::Vertices projection(numVertices);
+    typename Delaunay2Type::Vertices projection(numVertices);
     for (int i = 0; i < numVertices; ++i)
     {
         auto diff = vertices.at(i) - planeOrigin;
