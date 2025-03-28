@@ -89,7 +89,7 @@ void Mathematics::StaticTestIntersectorTriangle2Triangle2<Real>::Test()
 }
 
 template <typename Real>
-Mathematics::NumericalValueSymbol Mathematics::StaticTestIntersectorTriangle2Triangle2<Real>::WhichSide(const Container& vertex, const Vector2& point, const Vector2& direction)
+Mathematics::NumericalValueSymbol Mathematics::StaticTestIntersectorTriangle2Triangle2<Real>::WhichSide(const Container& vertex, const Vector2Type& point, const Vector2Type& direction)
 {
     /// 顶点投影为P + t * D形式。 如果所有t> 0，则返回值为+1；
     /// 如果所有t <0，则返回-1；否则，则返回0，在这种情况下，该线将三角形分开。

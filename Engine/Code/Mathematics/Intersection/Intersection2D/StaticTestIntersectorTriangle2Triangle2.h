@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = StaticTestIntersectorTriangle2Triangle2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Vector2 = Vector2<Real>;
+        using Vector2Type = Vector2<Real>;
         using Triangle2 = Triangle2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
         using MathType = typename ParentType::MathType;
@@ -39,12 +39,12 @@ namespace Mathematics
         NODISCARD Triangle2 GetTriangle1() const noexcept;
 
     private:
-        using Container = std::vector<Vector2>;
+        using Container = std::vector<Vector2Type>;
 
     private:
         void Test();
 
-        NODISCARD static NumericalValueSymbol WhichSide(const Container& vertex, const Vector2& point, const Vector2& direction);
+        NODISCARD static NumericalValueSymbol WhichSide(const Container& vertex, const Vector2Type& point, const Vector2Type& direction);
 
     private:
         Triangle2 triangle0;

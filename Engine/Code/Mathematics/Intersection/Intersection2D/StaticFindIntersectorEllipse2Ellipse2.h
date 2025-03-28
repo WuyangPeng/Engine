@@ -26,7 +26,7 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorEllipse2Ellipse2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Vector2 = Vector2<Real>;
+        using Vector2Type = Vector2<Real>;
         using Ellipse2 = Ellipse2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
         using MathType = typename ParentType::MathType;
@@ -44,14 +44,14 @@ namespace Mathematics
         ///   IT_POINT：Q个不同的交点
         ///   IT_OTHER：椭圆是相同的。 GetIntersectionEllipse返回椭圆对象之一。 Q无效。
         NODISCARD int GetQuantity() const;
-        NODISCARD Vector2 GetPoint(int index) const;
+        NODISCARD Vector2Type GetPoint(int index) const;
         NODISCARD Ellipse2 GetIntersectionEllipse() const noexcept;
         NODISCARD bool IsTransverseIntersection(int index) const;
 
     private:
         using CoeffType = std::array<Real, 6>;
         using RootsType = std::vector<Real>;
-        using Intersection = std::vector<Vector2>;
+        using Intersection = std::vector<Vector2Type>;
         using TransverseType = std::array<bool, 4>;
 
     private:
@@ -66,7 +66,7 @@ namespace Mathematics
             NODISCARD bool operator<(const Measurement& measure) const noexcept;
 
             // <x, y, sqrt(Q0(x,y)^2 + Q1(x,y)^2)>
-            Vector2 point;
+            Vector2Type point;
             Real q0;
             Real q1;
             Real norm;
@@ -76,7 +76,7 @@ namespace Mathematics
 
         NODISCARD static Polynomial<Real> GetQuartic(const Ellipse2& ellipse0, const Ellipse2& ellipse1);
 
-        NODISCARD Measurement RefinePoint(const CoeffType& coeff, const Vector2& vector2);
+        NODISCARD Measurement RefinePoint(const CoeffType& coeff, const Vector2Type& vector2);
 
     private:
         // 要相交的对象。

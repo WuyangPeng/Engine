@@ -26,7 +26,7 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector2>;
 
         using MathType = typename ParentType::MathType;
-        using Vector2 = Vector2<Real>;
+        using Vector2Type = Vector2<Real>;
         using Triangle2 = Triangle2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
 
@@ -39,15 +39,15 @@ namespace Mathematics
         NODISCARD Triangle2 GetTriangle1() const noexcept;
 
         NODISCARD int GetQuantity() const;
-        NODISCARD Vector2 GetPoint(int index) const;
+        NODISCARD Vector2Type GetPoint(int index) const;
 
     private:
-        using Intersection = std::vector<Vector2>;
+        using Intersection = std::vector<Vector2Type>;
 
     private:
         void Find();
 
-        static Intersection ClipConvexPolygonAgainstLine(const Vector2& axis, Real dot, const Intersection& intersection);
+        static Intersection ClipConvexPolygonAgainstLine(const Vector2Type& axis, Real dot, const Intersection& intersection);
 
     private:
         // 要相交的对象。

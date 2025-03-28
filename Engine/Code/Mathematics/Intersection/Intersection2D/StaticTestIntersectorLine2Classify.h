@@ -23,7 +23,7 @@ namespace Mathematics
         using ClassType = StaticTestIntersectorLine2Classify<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Vector2 = Vector2<Real>;
+        using Vector2Type = Vector2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
         using MathType = typename ParentType::MathType;
 
@@ -38,10 +38,10 @@ namespace Mathematics
         // 在Test() 和 Find() 函数中使用的值是m_Epsilon。
         // 如果你想知道s[]值，传递isCalculateParameter为'true'。
         // 代码用于射线-射线，直线-直线和线段-线段的相交测试共享。
-        StaticTestIntersectorLine2Classify(const Vector2& lhsOrigin,
-                                           const Vector2& lhsDirection,
-                                           const Vector2& rhsOrigin,
-                                           const Vector2& rhsDirection,
+        StaticTestIntersectorLine2Classify(const Vector2Type& lhsOrigin,
+                                           const Vector2Type& lhsDirection,
+                                           const Vector2Type& rhsOrigin,
+                                           const Vector2Type& rhsDirection,
                                            bool isCalculateParameter = true,
                                            const Real epsilon = MathType::GetZeroTolerance());
 
@@ -51,7 +51,7 @@ namespace Mathematics
         NODISCARD Real GetParameter1() const noexcept;
 
     private:
-        void Test(const Vector2& lhsOrigin, const Vector2& lhsDirection, const Vector2& rhsOrigin, const Vector2& rhsDirection, bool isCalculateParameter);
+        void Test(const Vector2Type& lhsOrigin, const Vector2Type& lhsDirection, const Vector2Type& rhsOrigin, const Vector2Type& rhsDirection, bool isCalculateParameter);
 
     private:
         Real parameter0;

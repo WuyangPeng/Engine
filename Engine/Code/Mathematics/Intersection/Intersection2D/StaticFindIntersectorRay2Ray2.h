@@ -24,7 +24,7 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorRay2Ray2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Vector2 = Vector2<Real>;
+        using Vector2Type = Vector2<Real>;
         using Ray2 = Ray2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
         using MathType = typename ParentType::MathType;
@@ -50,7 +50,7 @@ namespace Mathematics
         //          访问相交射点原点使用GetPoint(0)。
 
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector2 GetPoint(int index) const;
+        NODISCARD Vector2Type GetPoint(int index) const;
 
     private:
         void Find();
@@ -62,8 +62,8 @@ namespace Mathematics
 
         // 相交集
         int quantity;
-        Vector2 point0;
-        Vector2 point1;
+        Vector2Type point0;
+        Vector2Type point1;
     };
 }
 

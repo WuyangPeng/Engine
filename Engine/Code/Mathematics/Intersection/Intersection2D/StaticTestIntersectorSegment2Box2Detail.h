@@ -57,8 +57,8 @@ void Mathematics::StaticTestIntersectorSegment2Box2<Real>::Test()
 {
     auto diff = segment.GetCenterPoint() - box.GetCenter();
 
-    Vector2 directionDotBox{};
-    Vector2 diffDotBox{};
+    Vector2Type directionDotBox{};
+    Vector2Type diffDotBox{};
 
     directionDotBox[0] = MathType::FAbs(Vector2Tools::DotProduct(segment.GetDirection(), box.GetAxis0()));
     diffDotBox[0] = MathType::FAbs(Vector2Tools::DotProduct(diff, box.GetAxis0()));

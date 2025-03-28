@@ -24,11 +24,11 @@ namespace Mathematics
     {
     public:
         using ClassType = ScribeCircle2Inscribe<Real>;
-        using Vector2 = Vector2<Real>;
+        using Vector2Type = Vector2<Real>;
         using Circle2 = Circle2<Real>;
 
     public:
-        ScribeCircle2Inscribe(const Vector2& v0, const Vector2& v1, const Vector2& v2);
+        ScribeCircle2Inscribe(const Vector2Type& v0, const Vector2Type& v1, const Vector2Type& v2);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -40,7 +40,7 @@ namespace Mathematics
         void Calculate();
 
     private:
-        std::vector<Vector2> points;
+        std::vector<Vector2Type> points;
         Circle2 circle2;
         bool isCircleConstructed;
     };

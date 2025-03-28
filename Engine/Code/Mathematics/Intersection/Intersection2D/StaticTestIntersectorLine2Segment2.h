@@ -24,7 +24,7 @@ namespace Mathematics
         using ClassType = StaticTestIntersectorLine2Segment2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Vector2 = Vector2<Real>;
+        using Vector2Type = Vector2<Real>;
         using Line2 = Line2<Real>;
         using Segment2 = Segment2<Real>;
         using Vector2Tools = Vector2Tools<Real>;

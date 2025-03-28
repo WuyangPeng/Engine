@@ -133,7 +133,7 @@ Real Mathematics::StaticFindIntersectorSegment2Segment2<Real>::GetIntervalThresh
 }
 
 template <typename Real>
-typename Mathematics::StaticFindIntersectorSegment2Segment2<Real>::Vector2 Mathematics::StaticFindIntersectorSegment2Segment2<Real>::GetPoint(int index) const
+typename Mathematics::StaticFindIntersectorSegment2Segment2<Real>::Vector2Type Mathematics::StaticFindIntersectorSegment2Segment2<Real>::GetPoint(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

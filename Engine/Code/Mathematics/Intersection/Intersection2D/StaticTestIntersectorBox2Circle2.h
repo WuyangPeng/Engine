@@ -23,7 +23,7 @@ namespace Mathematics
         using ClassType = StaticTestIntersectorBox2Circle2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Vector2 = Vector2<Real>;
+        using Vector2Type = Vector2<Real>;
         using Box2 = Box2<Real>;
         using Circle2 = Circle2<Real>;
         using MathType = typename ParentType::MathType;

@@ -24,7 +24,7 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorSegment2Segment2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Vector2 = Vector2<Real>;
+        using Vector2Type = Vector2<Real>;
         using Segment2 = Segment2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
         using MathType = typename ParentType::MathType;
@@ -52,7 +52,7 @@ namespace Mathematics
         //          GetIntersection()返回IntersectionType::Segment。
         //          访问相交线段终点使用GetPoint(0)和GetPoint(1)。
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector2 GetPoint(int index) const;
+        NODISCARD Vector2Type GetPoint(int index) const;
 
     private:
         // 静态查找相交查询。
@@ -67,8 +67,8 @@ namespace Mathematics
         int quantity;
 
         Real intervalThreshold;
-        Vector2 point0;
-        Vector2 point1;
+        Vector2Type point0;
+        Vector2Type point1;
     };
 }
 

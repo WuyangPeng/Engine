@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = StaticTestIntersectorRay2Triangle2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Vector2 = Vector2<Real>;
+        using Vector2Type = Vector2<Real>;
         using Ray2 = Ray2<Real>;
         using Triangle2 = Triangle2<Real>;
         using Vector2Tools = Vector2Tools<Real>;

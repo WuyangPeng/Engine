@@ -26,7 +26,7 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorLine2Line2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Vector2 = Vector2<Real>;
+        using Vector2Type = Vector2<Real>;
         using Line2 = Line2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
         using MathType = typename ParentType::MathType;
@@ -45,7 +45,7 @@ namespace Mathematics
         //          访问相交点使用GetPoint()。
         //   q = INT_MAX:  线是重叠的。GetIntersection() 返回IntersectionType::Line。
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector2 GetPoint() const;
+        NODISCARD Vector2Type GetPoint() const;
 
     private:
         void Find();
@@ -57,7 +57,7 @@ namespace Mathematics
 
         // 相交集
         int quantity;
-        Vector2 point;
+        Vector2Type point;
     };
 }
 

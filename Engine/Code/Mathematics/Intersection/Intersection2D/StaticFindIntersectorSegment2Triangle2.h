@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorSegment2Triangle2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Vector2 = Vector2<Real>;
+        using Vector2Type = Vector2<Real>;
         using Segment2 = Segment2<Real>;
         using Triangle2 = Triangle2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
@@ -43,7 +43,7 @@ namespace Mathematics
         /// 如果线段和三角形在单个点上相交，则GetQuantity() 返回1，在这种情况下，相交类型为IT_POINT，而GetPoint()返回相交点。
         /// 如果段和三角形在段中相交，则GetQuantity() 返回2，在这种情况下，相交类型为IT_SEGMENT，而GetPoint()返回段端点。
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector2 GetPoint(int index) const;
+        NODISCARD Vector2Type GetPoint(int index) const;
 
     private:
         void Find();
@@ -53,8 +53,8 @@ namespace Mathematics
         Triangle2 triangle;
 
         int quantity;
-        Vector2 point0;
-        Vector2 point1;
+        Vector2Type point0;
+        Vector2Type point1;
     };
 }
 

@@ -107,13 +107,13 @@ bool Mathematics::Algebra::Polygon2<Real>::CounterClockwise() const noexcept
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Algebra::Polygon2<Real>::Vector2 Mathematics::Algebra::Polygon2<Real>::ComputeVertexAverage() const
+typename Mathematics::Algebra::Polygon2<Real>::Vector2Type Mathematics::Algebra::Polygon2<Real>::ComputeVertexAverage() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     const auto vertexPoolSharedPtr = GetVertexPool();
 
-    Vector2 average{};
+    Vector2Type average{};
 
     for (const auto index : vertices)
     {

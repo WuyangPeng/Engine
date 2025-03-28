@@ -41,8 +41,8 @@ namespace Mathematics::Algebra
     public:
         using ClassType = Polygon2;
 
-        using Vector2 = Vector2<Real>;
-        using VertexPool = std::vector<Vector2>;
+        using Vector2Type = Vector2<Real>;
+        using VertexPool = std::vector<Vector2Type>;
         using VertexPoolSharedPtr = std::shared_ptr<VertexPool>;
         using VertexPoolWeakPtr = std::weak_ptr<VertexPool>;
 
@@ -70,7 +70,7 @@ namespace Mathematics::Algebra
         NODISCARD bool CounterClockwise() const noexcept;
 
         /// º∏∫Œ≤È—Ø°£
-        NODISCARD Vector2 ComputeVertexAverage() const;
+        NODISCARD Vector2Type ComputeVertexAverage() const;
 
         NODISCARD Real ComputePerimeterLength() const;
 

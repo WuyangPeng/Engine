@@ -97,7 +97,7 @@ void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::Find()
 }
 
 template <typename Real>
-typename Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::Intersection Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::ClipConvexPolygonAgainstLine(const Vector2& axis, Real dot, const Intersection& intersection)
+typename Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::Intersection Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::ClipConvexPolygonAgainstLine(const Vector2Type& axis, Real dot, const Intersection& intersection)
 {
     using Container = std::vector<Real>;
     // 假定输入顶点为逆时针顺序。 顺序是此函数的不变式。

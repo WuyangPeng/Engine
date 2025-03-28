@@ -260,7 +260,7 @@ Mathematics::Polynomial<Real> Mathematics::StaticFindIntersectorEllipse2Ellipse2
 }
 
 template <typename Real>
-typename Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Measurement Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::RefinePoint(const CoeffType& coeff, const Vector2& vector2)
+typename Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Measurement Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::RefinePoint(const CoeffType& coeff, const Vector2Type& vector2)
 {
     /// 传入多项式为
     ///  f(angle) = d0 + d1 * c + d2 * s + d3 * c^2 + d4 * c * s + d5 * s^2

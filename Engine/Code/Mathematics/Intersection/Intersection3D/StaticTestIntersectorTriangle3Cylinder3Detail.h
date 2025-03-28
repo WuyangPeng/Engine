@@ -115,9 +115,9 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
         }
     }
 
-    std::array<Vector2, 3> q{ Vector2{ temp.at(j0)[0], temp.at(j0)[1] },
-                              Vector2{ temp.at(j1)[0], temp.at(j1)[1] },
-                              Vector2{ temp.at(j2)[0], temp.at(j2)[1] } };
+    std::array<Vector2Type, 3> q{ Vector2{ temp.at(j0)[0], temp.at(j0)[1] },
+                                  Vector2{ temp.at(j1)[0], temp.at(j1)[1] },
+                                  Vector2{ temp.at(j2)[0], temp.at(j2)[1] } };
 
     std::array<Real, 3> z{ temp.at(j0)[2], temp.at(j1)[2], temp.at(j2)[2] };
 
@@ -142,7 +142,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
         return;
     }
 
-    std::array<Vector2, 5> polygon{};
+    std::array<Vector2Type, 5> polygon{};
 
     if (z.at(0) < -hhalf)
     {
@@ -379,13 +379,13 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
 }
 
 template <typename Real>
-bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::DiskOverlapsPoint(const Vector2& q) const
+bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::DiskOverlapsPoint(const Vector2Type& q) const
 {
     return q[0] * q[0] + q[1] * q[1] <= cylinder.GetRadius() * cylinder.GetRadius();
 }
 
 template <typename Real>
-bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::DiskOverlapsSegment(const Vector2& q0, const Vector2& q1) const
+bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::DiskOverlapsSegment(const Vector2Type& q0, const Vector2Type& q1) const
 {
     auto rSqr = cylinder.GetRadius() * cylinder.GetRadius();
     auto D = q0 - q1;
@@ -406,7 +406,7 @@ bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::DiskOverlapsSeg
 }
 
 template <typename Real>
-bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::DiskOverlapsPolygon(const std::vector<Vector2>& q) const
+bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::DiskOverlapsPolygon(const std::vector<Vector2Type>& q) const
 {
     auto positive = 0;
     auto negative = 0;

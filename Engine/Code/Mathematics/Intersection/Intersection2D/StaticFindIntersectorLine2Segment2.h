@@ -26,7 +26,7 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorLine2Segment2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Vector2 = Vector2<Real>;
+        using Vector2Type = Vector2<Real>;
         using Line2 = Line2<Real>;
         using Segment2 = Segment2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
@@ -54,7 +54,7 @@ namespace Mathematics
         //   q = 2: 直线-线段是重叠的且相交是线段。
         //          GetIntersection()返回IntersectionType::Segment。
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector2 GetPoint() const;
+        NODISCARD Vector2Type GetPoint() const;
 
     private:
         // 静态查找相交查询。
@@ -69,7 +69,7 @@ namespace Mathematics
         int quantity;
 
         Real intervalThreshold;
-        Vector2 point;
+        Vector2Type point;
     };
 }
 

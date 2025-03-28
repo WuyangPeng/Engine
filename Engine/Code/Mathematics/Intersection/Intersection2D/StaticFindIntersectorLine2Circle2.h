@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorLine2Circle2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Vector2 = Vector2<Real>;
+        using Vector2Type = Vector2<Real>;
         using Line2 = Line2<Real>;
         using Circle2 = Circle2<Real>;
         using Vector2Tools = Vector2Tools<Real>;
@@ -40,7 +40,7 @@ namespace Mathematics
         NODISCARD Circle2 GetCircle() const noexcept;
 
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector2 GetPoint(int index) const;
+        NODISCARD Vector2Type GetPoint(int index) const;
 
     private:
         void Find();
@@ -50,8 +50,8 @@ namespace Mathematics
         Circle2 circle;
 
         int quantity;
-        Vector2 point0;
-        Vector2 point1;
+        Vector2Type point0;
+        Vector2Type point1;
     };
 }
 

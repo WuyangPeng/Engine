@@ -18,10 +18,10 @@
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorLine2Classify<Real>::StaticTestIntersectorLine2Classify(const Vector2& lhsOrigin,
-                                                                                          const Vector2& lhsDirection,
-                                                                                          const Vector2& rhsOrigin,
-                                                                                          const Vector2& rhsDirection,
+Mathematics::StaticTestIntersectorLine2Classify<Real>::StaticTestIntersectorLine2Classify(const Vector2Type& lhsOrigin,
+                                                                                          const Vector2Type& lhsDirection,
+                                                                                          const Vector2Type& rhsOrigin,
+                                                                                          const Vector2Type& rhsDirection,
                                                                                           bool isCalculateParameter,
                                                                                           const Real epsilon)
     : ParentType{ epsilon },
@@ -34,7 +34,7 @@ Mathematics::StaticTestIntersectorLine2Classify<Real>::StaticTestIntersectorLine
 }
 
 template <typename Real>
-void Mathematics::StaticTestIntersectorLine2Classify<Real>::Test(const Vector2& lhsOrigin, const Vector2& lhsDirection, const Vector2& rhsOrigin, const Vector2& rhsDirection, bool isCalculateParameter)
+void Mathematics::StaticTestIntersectorLine2Classify<Real>::Test(const Vector2Type& lhsOrigin, const Vector2Type& lhsDirection, const Vector2Type& rhsOrigin, const Vector2Type& rhsDirection, bool isCalculateParameter)
 {
     auto dotThreshold = this->GetEpsilon();
 

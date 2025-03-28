@@ -30,7 +30,7 @@ namespace Mathematics
         using Vector3 = Vector3<Real>;
         using Triangle3 = Triangle3<Real>;
         using Cylinder3 = Cylinder3<Real>;
-        using Vector2 = Vector2<Real>;
+        using Vector2Type = Vector2<Real>;
         using Vector3Tools = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
@@ -46,9 +46,9 @@ namespace Mathematics
         void Test();
 
     private:
-        NODISCARD bool DiskOverlapsPoint(const Vector2& q) const;
-        NODISCARD bool DiskOverlapsSegment(const Vector2& q0, const Vector2& q1) const;
-        NODISCARD bool DiskOverlapsPolygon(const std::vector<Vector2>& q) const;
+        NODISCARD bool DiskOverlapsPoint(const Vector2Type& q) const;
+        NODISCARD bool DiskOverlapsSegment(const Vector2Type& q0, const Vector2Type& q1) const;
+        NODISCARD bool DiskOverlapsPolygon(const std::vector<Vector2Type>& q) const;
 
     private:
         Triangle3 triangle;

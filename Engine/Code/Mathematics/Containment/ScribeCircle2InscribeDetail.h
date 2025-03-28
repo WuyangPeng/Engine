@@ -16,7 +16,7 @@
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 
 template <typename Real>
-Mathematics::ScribeCircle2Inscribe<Real>::ScribeCircle2Inscribe(const Vector2& v0, const Vector2& v1, const Vector2& v2)
+Mathematics::ScribeCircle2Inscribe<Real>::ScribeCircle2Inscribe(const Vector2Type& v0, const Vector2Type& v1, const Vector2Type& v2)
     : points{ v0, v1, v2 }, circle2{}, isCircleConstructed{ false }
 {
     Calculate();

@@ -137,7 +137,7 @@ Real Mathematics::StaticFindIntersectorRay2Segment2<Real>::GetIntervalThreshold(
 }
 
 template <typename Real>
-typename Mathematics::StaticFindIntersectorRay2Segment2<Real>::Vector2 Mathematics::StaticFindIntersectorRay2Segment2<Real>::GetPoint(int index) const
+typename Mathematics::StaticFindIntersectorRay2Segment2<Real>::Vector2Type Mathematics::StaticFindIntersectorRay2Segment2<Real>::GetPoint(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
