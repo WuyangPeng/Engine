@@ -236,7 +236,7 @@ Mathematics::ConvexHull2<Real> Mathematics::ConvexHull3<Real>::GetConvexHull2() 
     }
 
     const auto numVertices = this->GetNumVertices();
-    typename ConvexHull2::Vertices projection(numVertices);
+    typename ConvexHull2Type::Vertices projection(numVertices);
     for (auto i = 0; i < numVertices; ++i)
     {
         auto diff = vertices.at(i) - planeOrigin;

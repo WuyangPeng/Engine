@@ -124,7 +124,7 @@ void Mathematics::Delaunay2<Real>::Init()
     }
     else
     {
-        min = Vector2::GetZero();
+        min = Vector2Type::GetZero();
         scale = Math<Real>::GetValue(1);
         sVertices = vertices;
 
