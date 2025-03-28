@@ -33,7 +33,7 @@ Mathematics::Integer<N> Mathematics::Integer<N>::CreateOne() noexcept
 
 template <int N>
 Mathematics::Integer<N>::Integer(Special special) noexcept
-    : integerData{ IntegerData::Special::One }
+    : integerData{ IntegerDataType::Special::One }
 {
     System::UnusedFunction(special);
 
@@ -80,7 +80,7 @@ Mathematics::Integer<N>::Integer(T value)
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <int N>
-Mathematics::Integer<N>::Integer(const IntegerData& data) noexcept
+Mathematics::Integer<N>::Integer(const IntegerDataType& data) noexcept
     : integerData{ data }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -197,7 +197,7 @@ Mathematics::Integer<N>& Mathematics::Integer<N>::operator/=(const Integer& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    const IntegerDivisionModulo divisionModulo{ integerData, rhs.integerData };
+    const IntegerDivisionModuloType divisionModulo{ integerData, rhs.integerData };
 
     integerData = divisionModulo.GetQuotient();
 
@@ -209,7 +209,7 @@ Mathematics::Integer<N>& Mathematics::Integer<N>::operator%=(const Integer& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    const IntegerDivisionModulo divisionModulo(integerData, rhs.integerData);
+    const IntegerDivisionModuloType divisionModulo(integerData, rhs.integerData);
 
     integerData = divisionModulo.GetRemainder();
 
@@ -221,7 +221,7 @@ Mathematics::IntegerDivisionModulo<N> Mathematics::Integer<N>::GetDivisionModulo
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    IntegerDivisionModulo divisionModulo{ integerData, rhs.integerData };
+    IntegerDivisionModuloType divisionModulo{ integerData, rhs.integerData };
 
     return divisionModulo;
 }
