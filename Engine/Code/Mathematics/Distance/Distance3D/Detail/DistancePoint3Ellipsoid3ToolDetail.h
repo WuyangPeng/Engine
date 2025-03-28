@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Real>
-Mathematics::DistancePoint3Ellipsoid3Tool<Real>::DistancePoint3Ellipsoid3Tool(Real extent0, Real extent1, Real extent2, const Vector3& vector, Real zeroThreshold)
+Mathematics::DistancePoint3Ellipsoid3Tool<Real>::DistancePoint3Ellipsoid3Tool(Real extent0, Real extent1, Real extent2, const Vector3Type& vector, Real zeroThreshold)
     : toolExtent{ extent0, extent1, extent2 }, inputVector{ vector }, outputVector{}, squaredDistance{ MathType::GetValue(0) }, zeroThreshold{ zeroThreshold }
 {
     ComputeSquaredDistance();
@@ -87,8 +87,8 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistance()
         invPermute.at(permute.at(index)) = index;
     }
 
-    Vector3 localExtent{};
-    Vector3 localQueryPoint{};
+    Vector3Type localExtent{};
+    Vector3Type localQueryPoint{};
     for (auto index = 0; index < size; ++index)
     {
         const auto permuteIndex = permute.at(index);
@@ -117,7 +117,7 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistance()
 }
 
 template <typename Real>
-void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistanceSpecial(const Vector3& extent, const Vector3& queryPoint)
+void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistanceSpecial(const Vector3Type& extent, const Vector3Type& queryPoint)
 {
     Container extentPos{};
     Container queryPointPos{};

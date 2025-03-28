@@ -23,30 +23,30 @@ namespace Mathematics
     {
     public:
         using ClassType = DistanceRay3Box3<Real>;
-        using Vector3 = Vector3<Real>;
-        using ParentType = DistanceBase<Real, Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3Type>;
 
-        using Ray3 = Ray3<Real>;
-        using Box3 = Box3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Ray3Type = Ray3<Real>;
+        using Box3Type = Box3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
         using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistanceRay3Box3(const Ray3& ray, const Box3& box) noexcept;
+        DistanceRay3Box3(const Ray3Type& ray, const Box3Type& box) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Ray3 GetRay() const noexcept;
-        NODISCARD Box3 GetBox() const noexcept;
+        NODISCARD Ray3Type GetRay() const noexcept;
+        NODISCARD Box3Type GetBox() const noexcept;
 
         NODISCARD DistanceResult GetSquared() const override;
 
-        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
     private:
-        Ray3 ray;
-        Box3 box;
+        Ray3Type ray;
+        Box3Type box;
     };
 
     using DistanceRay3Box3F = DistanceRay3Box3<float>;

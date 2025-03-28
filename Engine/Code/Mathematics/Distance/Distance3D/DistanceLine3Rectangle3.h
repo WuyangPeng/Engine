@@ -24,37 +24,37 @@ namespace Mathematics
     {
     public:
         using ClassType = DistanceLine3Rectangle3<Real>;
-        using Vector3 = Vector3<Real>;
-        using ParentType = DistanceBase<Real, Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3Type>;
 
-        using Line3 = Line3<Real>;
-        using Vector2 = Vector2<Real>;
-        using Rectangle3 = Rectangle3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Line3Type = Line3<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Rectangle3Type = Rectangle3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
         using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistanceLine3Rectangle3(const Line3& line, const Rectangle3& rectangle) noexcept;
+        DistanceLine3Rectangle3(const Line3Type& line, const Rectangle3Type& rectangle) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Line3 GetLine() const noexcept;
-        NODISCARD Rectangle3 GetRectangle() const noexcept;
+        NODISCARD Line3Type GetLine() const noexcept;
+        NODISCARD Rectangle3Type GetRectangle() const noexcept;
 
         NODISCARD DistanceResult GetSquared() const override;
 
-        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
         NODISCARD Real GetRectangleCoordinate(int index) const;
 
     private:
-        Line3 line;
-        Rectangle3 rectangle;
+        Line3Type line;
+        Rectangle3Type rectangle;
 
         // 有关最接近点的信息。
 
-        mutable Vector2 rectCoord;
+        mutable Vector2Type rectCoord;
     };
 
     using DistanceLine3Rectangle3F = DistanceLine3Rectangle3<float>;

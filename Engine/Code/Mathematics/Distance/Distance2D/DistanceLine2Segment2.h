@@ -25,37 +25,37 @@ namespace Mathematics
     {
     public:
         using ClassType = DistanceLine2Segment2<Real>;
-        using Vector2 = Vector2<Real>;
-        using ParentType = DistanceBase<Real, Vector2>;
+        using Vector2Type = Vector2<Real>;
+        using ParentType = DistanceBase<Real, Vector2Type>;
 
-        using Line2 = Line2<Real>;
-        using Segment2 = Segment2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
-        using DistanceLine2Line2Tool = DistanceLine2Line2Tool<Real>;
+        using Line2Type = Line2<Real>;
+        using Segment2Type = Segment2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
+        using DistanceLine2Line2ToolType = DistanceLine2Line2Tool<Real>;
         using MathType = typename ParentType::MathType;
         using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistanceLine2Segment2(const Line2& line, const Segment2& ray) noexcept;
+        DistanceLine2Segment2(const Line2Type& line, const Segment2Type& ray) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Line2 GetLine() const noexcept;
-        NODISCARD Segment2 GetSegment() const noexcept;
+        NODISCARD Line2Type GetLine() const noexcept;
+        NODISCARD Segment2Type GetSegment() const noexcept;
 
         // æ≤Ã¨æ‡¿Î≤È—Ø°£
         NODISCARD DistanceResult GetSquared() const override;
 
         // ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£
-        NODISCARD DistanceResult GetSquared(Real t, const Vector2& lhsVelocity, const Vector2& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector2Type& lhsVelocity, const Vector2Type& rhsVelocity) const override;
 
     private:
-        NODISCARD DistanceResult GetSquaredWithClosestPoints(const DistanceLine2Line2Tool& tool, Real rhsExtent) const;
-        NODISCARD DistanceResult GetSquaredWithClosestPointsIsParallel(const DistanceLine2Line2Tool& tool) const;
+        NODISCARD DistanceResult GetSquaredWithClosestPoints(const DistanceLine2Line2ToolType& tool, Real rhsExtent) const;
+        NODISCARD DistanceResult GetSquaredWithClosestPointsIsParallel(const DistanceLine2Line2ToolType& tool) const;
 
     private:
-        Line2 line;
-        Segment2 segment;
+        Line2Type line;
+        Segment2Type segment;
     };
 
     using DistanceLine2Segment2F = DistanceLine2Segment2<float>;

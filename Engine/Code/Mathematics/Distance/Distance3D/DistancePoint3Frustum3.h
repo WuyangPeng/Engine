@@ -22,29 +22,29 @@ namespace Mathematics
     {
     public:
         using ClassType = DistancePoint3Frustum3<Real>;
-        using Vector3 = Vector3<Real>;
-        using ParentType = DistanceBase<Real, Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3Type>;
 
-        using Frustum3 = Frustum3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Frustum3Type = Frustum3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
         using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistancePoint3Frustum3(const Vector3& point, const Frustum3& frustum) noexcept;
+        DistancePoint3Frustum3(const Vector3Type& point, const Frustum3Type& frustum) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Vector3 GetPoint() const noexcept;
-        NODISCARD Frustum3 GetFrustum() const noexcept;
+        NODISCARD Vector3Type GetPoint() const noexcept;
+        NODISCARD Frustum3Type GetFrustum() const noexcept;
 
         NODISCARD DistanceResult GetSquared() const override;
 
-        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
     private:
-        Vector3 point;
-        Frustum3 frustum;
+        Vector3Type point;
+        Frustum3Type frustum;
     };
 
     using DistancePoint3Frustum3F = DistancePoint3Frustum3<float>;

@@ -24,31 +24,31 @@ namespace Mathematics
     {
     public:
         using ClassType = DistancePoint3Ray3<Real>;
-        using Vector3 = Vector3<Real>;
-        using ParentType = DistanceBase<Real, Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3Type>;
 
-        using Ray3 = Ray3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Ray3Type = Ray3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
         using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistancePoint3Ray3(const Vector3& point, const Ray3& ray) noexcept;
+        DistancePoint3Ray3(const Vector3Type& point, const Ray3Type& ray) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Vector3 GetPoint() const noexcept;
-        NODISCARD Ray3 GetRay() const noexcept;
+        NODISCARD Vector3Type GetPoint() const noexcept;
+        NODISCARD Ray3Type GetRay() const noexcept;
 
         // æ≤Ã¨æ‡¿Î≤È—Ø°£
         NODISCARD DistanceResult GetSquared() const override;
 
         // ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£
-        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
     private:
-        Vector3 point;
-        Ray3 ray;
+        Vector3Type point;
+        Ray3Type ray;
     };
 
     using DistancePoint3Ray3F = DistancePoint3Ray3<float>;

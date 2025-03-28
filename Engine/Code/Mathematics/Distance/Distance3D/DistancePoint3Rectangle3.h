@@ -22,36 +22,36 @@ namespace Mathematics
     {
     public:
         using ClassType = DistancePoint3Rectangle3<Real>;
-        using Vector3 = Vector3<Real>;
-        using ParentType = DistanceBase<Real, Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3Type>;
 
-        using Vector2 = Vector2<Real>;
-        using Rectangle3 = Rectangle3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Rectangle3Type = Rectangle3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
         using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistancePoint3Rectangle3(const Vector3& point, const Rectangle3& rectangle) noexcept;
+        DistancePoint3Rectangle3(const Vector3Type& point, const Rectangle3Type& rectangle) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Vector3 GetPoint() const noexcept;
-        NODISCARD Rectangle3 GetRectangle() const noexcept;
+        NODISCARD Vector3Type GetPoint() const noexcept;
+        NODISCARD Rectangle3Type GetRectangle() const noexcept;
 
         NODISCARD DistanceResult GetSquared() const override;
 
-        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
         // 有关最接近的矩形点的信息。
         Real GetRectangleCoordinate(int index) const;
 
     private:
-        Vector3 point;
-        Rectangle3 rectangle;
+        Vector3Type point;
+        Rectangle3Type rectangle;
 
         // 有关最接近的矩形点的信息
-        mutable Vector2 rectCoord;
+        mutable Vector2Type rectCoord;
     };
 
     using DistancePoint3Rectangle3F = DistancePoint3Rectangle3<float>;

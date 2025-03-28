@@ -23,31 +23,31 @@ namespace Mathematics
     {
     public:
         using ClassType = DistancePoint3Box3<Real>;
-        using Vector3 = Vector3<Real>;
-        using ParentType = DistanceBase<Real, Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3Type>;
 
-        using Box3 = Box3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Box3Type = Box3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
         using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistancePoint3Box3(const Vector3& point, const Box3& ellipse) noexcept;
+        DistancePoint3Box3(const Vector3Type& point, const Box3Type& ellipse) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Vector3 GetPoint() const noexcept;
-        NODISCARD Box3 GetBox() const noexcept;
+        NODISCARD Vector3Type GetPoint() const noexcept;
+        NODISCARD Box3Type GetBox() const noexcept;
 
         // æ≤Ã¨æ‡¿Î≤È—Ø°£
         NODISCARD DistanceResult GetSquared() const override;
 
         // ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£
-        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
     private:
-        Vector3 point;
-        Box3 box;
+        Vector3Type point;
+        Box3Type box;
     };
 
     using DistancePoint3Box3F = DistancePoint3Box3<float>;

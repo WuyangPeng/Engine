@@ -18,7 +18,7 @@
 #include "Mathematics/Objects3D/Line3Detail.h"
 
 template <typename Real>
-Mathematics::DistanceLine3Line3<Real>::DistanceLine3Line3(const Line3& lhsLine, const Line3& rhsLine) noexcept
+Mathematics::DistanceLine3Line3<Real>::DistanceLine3Line3(const Line3Type& lhsLine, const Line3Type& rhsLine) noexcept
     : ParentType{}, lhsLine{ lhsLine }, rhsLine{ rhsLine }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -94,7 +94,7 @@ typename Mathematics::DistanceLine3Line3<Real>::DistanceResult Mathematics::Dist
 }
 
 template <typename Real>
-typename Mathematics::DistanceLine3Line3<Real>::DistanceResult Mathematics::DistanceLine3Line3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistanceLine3Line3<Real>::DistanceResult Mathematics::DistanceLine3Line3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

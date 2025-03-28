@@ -18,7 +18,7 @@
 #include "Mathematics/Objects2D/Segment2Detail.h"
 
 template <typename Real>
-Mathematics::DistanceRay2Segment2<Real>::DistanceRay2Segment2(const Ray2& ray, const Segment2& segment) noexcept
+Mathematics::DistanceRay2Segment2<Real>::DistanceRay2Segment2(const Ray2Type& ray, const Segment2Type& segment) noexcept
     : ParentType{}, ray{ ray }, segment{ segment }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -58,7 +58,7 @@ typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathematics::Di
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const DistanceLine2Line2Tool tool{ ray.GetOrigin(), ray.GetDirection(), segment.GetCenterPoint(), segment.GetDirection() };
+    const DistanceLine2Line2ToolType tool{ ray.GetOrigin(), ray.GetDirection(), segment.GetCenterPoint(), segment.GetDirection() };
 
     const auto det = tool.GetDet();
     const auto rhsExtent = segment.GetExtent();
@@ -132,7 +132,7 @@ typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathematics::Di
 }
 
 template <typename Real>
-typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathematics::DistanceRay2Segment2<Real>::GetSquaredWithClosestPointsIsSegmentEndPoint(const DistanceLine2Line2Tool& tool, Real rhsExtent) const
+typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathematics::DistanceRay2Segment2<Real>::GetSquaredWithClosestPointsIsSegmentEndPoint(const DistanceLine2Line2ToolType& tool, Real rhsExtent) const
 {
     const auto t = tool.GetLhsT(-rhsExtent);
     const auto rhsSquare = rhsExtent * (rhsExtent + MathType::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) +
@@ -155,7 +155,7 @@ typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathematics::Di
 }
 
 template <typename Real>
-typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathematics::DistanceRay2Segment2<Real>::GetSquaredWithClosestPointsIsSegmentBeginPoint(const DistanceLine2Line2Tool& tool, Real rhsExtent) const
+typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathematics::DistanceRay2Segment2<Real>::GetSquaredWithClosestPointsIsSegmentBeginPoint(const DistanceLine2Line2ToolType& tool, Real rhsExtent) const
 {
     auto t = tool.GetLhsT(rhsExtent);
     if (MathType::GetValue(0) < t)
@@ -175,7 +175,7 @@ typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathematics::Di
 }
 
 template <typename Real>
-typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathematics::DistanceRay2Segment2<Real>::GetSquaredWithClosestPointsIsRayOrigin(const DistanceLine2Line2Tool& tool, Real rhsExtent) const
+typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathematics::DistanceRay2Segment2<Real>::GetSquaredWithClosestPointsIsRayOrigin(const DistanceLine2Line2ToolType& tool, Real rhsExtent) const
 {
     auto dotRhsDirection = -tool.GetOriginDifferenceDotRhsDirection();
     if (dotRhsDirection < -rhsExtent)
@@ -195,7 +195,7 @@ typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathematics::Di
 }
 
 template <typename Real>
-typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathematics::DistanceRay2Segment2<Real>::GetSquared(Real t, const Vector2& lhsVelocity, const Vector2& rhsVelocity) const
+typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathematics::DistanceRay2Segment2<Real>::GetSquared(Real t, const Vector2Type& lhsVelocity, const Vector2Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

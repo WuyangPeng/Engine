@@ -24,31 +24,31 @@ namespace Mathematics
     {
     public:
         using ClassType = DistancePoint3Segment3<Real>;
-        using Vector3 = Vector3<Real>;
-        using ParentType = DistanceBase<Real, Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3Type>;
 
-        using Segment3 = Segment3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Segment3Type = Segment3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
         using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistancePoint3Segment3(const Vector3& point, const Segment3& segment) noexcept;
+        DistancePoint3Segment3(const Vector3Type& point, const Segment3Type& segment) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Vector3 GetPoint() const noexcept;
-        NODISCARD Segment3 GetSegment() const noexcept;
+        NODISCARD Vector3Type GetPoint() const noexcept;
+        NODISCARD Segment3Type GetSegment() const noexcept;
 
         // æ≤Ã¨æ‡¿Î≤È—Ø°£
         NODISCARD DistanceResult GetSquared() const override;
 
         // ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£
-        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
     private:
-        Vector3 point;
-        Segment3 segment;
+        Vector3Type point;
+        Segment3Type segment;
     };
 
     using DistancePoint3Segment3F = DistancePoint3Segment3<float>;

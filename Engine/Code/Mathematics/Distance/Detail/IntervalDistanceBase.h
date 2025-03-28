@@ -23,12 +23,12 @@ namespace Mathematics
     public:
         using ClassType = IntervalDistanceBase<Real, Vector>;
 
-        using DistanceBase = DistanceBase<Real, Vector>;
-        using DistanceResult = DistanceResult<Real, Vector>;
+        using DistanceBaseType = DistanceBase<Real, Vector>;
+        using DistanceResultType = DistanceResult<Real, Vector>;
         using MathType = Math<Real>;
 
     public:
-        IntervalDistanceBase(const DistanceBase& distance, Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity);
+        IntervalDistanceBase(const DistanceBaseType& distance, Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity);
         virtual ~IntervalDistanceBase() noexcept = default;
 
         IntervalDistanceBase(const IntervalDistanceBase& rhs) = default;
@@ -38,13 +38,13 @@ namespace Mathematics
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        NODISCARD DistanceResult GetResult() const noexcept;
+        NODISCARD DistanceResultType GetResult() const noexcept;
 
     protected:
         void Solve();
-        NODISCARD DistanceResult GetDistanceResultSquared(Real t) const;
+        NODISCARD DistanceResultType GetDistanceResultSquared(Real t) const;
         NODISCARD Real GetDerivativeDistanceResultSquared(Real t) const;
-        NODISCARD DistanceResult GetDistanceResult(Real t) const;
+        NODISCARD DistanceResultType GetDistanceResult(Real t) const;
         NODISCARD Real GetDerivativeDistanceResult(Real t) const;
 
     private:
@@ -52,22 +52,22 @@ namespace Mathematics
         NODISCARD bool CheckEndMonotonicFunction();
         NODISCARD bool Iteration();
         void BisectionMethod();
-        NODISCARD virtual DistanceResult Get(Real t) const = 0;
+        NODISCARD virtual DistanceResultType Get(Real t) const = 0;
         NODISCARD virtual Real GetDerivative(Real t) const = 0;
 
     private:
-        const DistanceBase& distance;
+        const DistanceBaseType& distance;
         Real tMin;
         Real tMax;
         Vector lhsVelocity;
         Vector rhsVelocity;
-        DistanceResult distanceResult;
+        DistanceResultType distanceResult;
 
         Real beginT;
         Real endT;
-        DistanceResult beginDistanceResult;
+        DistanceResultType beginDistanceResult;
         Real beginDerivativeDistanceResult;
-        DistanceResult endDistanceResult;
+        DistanceResultType endDistanceResult;
         Real endDerivativeDistanceResult;
     };
 }

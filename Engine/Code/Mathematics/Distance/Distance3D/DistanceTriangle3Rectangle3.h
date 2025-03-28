@@ -23,30 +23,30 @@ namespace Mathematics
     {
     public:
         using ClassType = DistanceTriangle3Rectangle3<Real>;
-        using Vector3 = Vector3<Real>;
-        using ParentType = DistanceBase<Real, Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3Type>;
 
-        using Rectangle3 = Rectangle3<Real>;
-        using Triangle3 = Triangle3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Rectangle3Type = Rectangle3<Real>;
+        using Triangle3Type = Triangle3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
         using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistanceTriangle3Rectangle3(const Triangle3& triangle, const Rectangle3& rectangle) noexcept;
+        DistanceTriangle3Rectangle3(const Triangle3Type& triangle, const Rectangle3Type& rectangle) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Triangle3 GetTriangle() const noexcept;
-        NODISCARD Rectangle3 GetRectangle() const noexcept;
+        NODISCARD Triangle3Type GetTriangle() const noexcept;
+        NODISCARD Rectangle3Type GetRectangle() const noexcept;
 
         NODISCARD DistanceResult GetSquared() const override;
 
-        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
     private:
-        Triangle3 triangle;
-        Rectangle3 rectangle;
+        Triangle3Type triangle;
+        Rectangle3Type rectangle;
     };
 
     using DistanceTriangle3Rectangle3F = DistanceTriangle3Rectangle3<float>;

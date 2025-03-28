@@ -17,7 +17,7 @@
 #include "Mathematics/Objects3D/Segment3Detail.h"
 
 template <typename Real>
-Mathematics::DistancePoint3Segment3<Real>::DistancePoint3Segment3(const Vector3& point, const Segment3& segment) noexcept
+Mathematics::DistancePoint3Segment3<Real>::DistancePoint3Segment3(const Vector3Type& point, const Segment3Type& segment) noexcept
     : ParentType{}, point{ point }, segment{ segment }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -58,9 +58,9 @@ typename Mathematics::DistancePoint3Segment3<Real>::DistanceResult Mathematics::
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     auto difference = point - segment.GetCenterPoint();
-    auto param = Vector3Tools::DotProduct(segment.GetDirection(), difference);
+    auto param = Vector3ToolsType::DotProduct(segment.GetDirection(), difference);
 
-    Vector3 rhsClosestPoint{};
+    Vector3Type rhsClosestPoint{};
     if (-segment.GetExtent() < param)
     {
         if (param < segment.GetExtent())
@@ -81,7 +81,7 @@ typename Mathematics::DistancePoint3Segment3<Real>::DistanceResult Mathematics::
 
     difference = rhsClosestPoint - point;
 
-    return DistanceResult{ Vector3Tools::GetLengthSquared(difference),
+    return DistanceResult{ Vector3ToolsType::GetLengthSquared(difference),
                            MathType::GetValue(0),
                            point,
                            rhsClosestPoint,
@@ -90,7 +90,7 @@ typename Mathematics::DistancePoint3Segment3<Real>::DistanceResult Mathematics::
 }
 
 template <typename Real>
-typename Mathematics::DistancePoint3Segment3<Real>::DistanceResult Mathematics::DistancePoint3Segment3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistancePoint3Segment3<Real>::DistanceResult Mathematics::DistancePoint3Segment3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

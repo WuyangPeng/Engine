@@ -17,7 +17,7 @@
 #include "Mathematics/Distance/DistanceBaseDetail.h"
 
 template <typename Real>
-Mathematics::DistanceRectangle3Rectangle3<Real>::DistanceRectangle3Rectangle3(const Rectangle3& lhsRectangle, const Rectangle3& rhsRectangle) noexcept
+Mathematics::DistanceRectangle3Rectangle3<Real>::DistanceRectangle3Rectangle3(const Rectangle3Type& lhsRectangle, const Rectangle3Type& rhsRectangle) noexcept
     : ParentType{}, lhsRectangle{ lhsRectangle }, rhsRectangle{ rhsRectangle }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -57,8 +57,8 @@ typename Mathematics::DistanceRectangle3Rectangle3<Real>::DistanceResult Mathema
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    Vector3 closestPoint0{};
-    Vector3 closestPoint1{};
+    Vector3Type closestPoint0{};
+    Vector3Type closestPoint1{};
 
     auto sqrDist = MathType::maxReal;
 
@@ -109,7 +109,7 @@ typename Mathematics::DistanceRectangle3Rectangle3<Real>::DistanceResult Mathema
 }
 
 template <typename Real>
-typename Mathematics::DistanceRectangle3Rectangle3<Real>::DistanceResult Mathematics::DistanceRectangle3Rectangle3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistanceRectangle3Rectangle3<Real>::DistanceResult Mathematics::DistanceRectangle3Rectangle3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

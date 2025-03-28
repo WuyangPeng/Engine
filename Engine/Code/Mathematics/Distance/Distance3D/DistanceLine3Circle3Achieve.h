@@ -18,7 +18,7 @@
 #include "Mathematics/NumericalAnalysis/PolynomialRoots.h"
 
 template <typename Real>
-Mathematics::DistanceLine3Circle3<Real>::DistanceLine3Circle3(const Line3& line, const Circle3& circle) noexcept
+Mathematics::DistanceLine3Circle3<Real>::DistanceLine3Circle3(const Line3Type& line, const Circle3Type& circle) noexcept
     : ParentType{}, line{ line }, circle{ circle }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -54,7 +54,7 @@ Mathematics::Circle3<Real> Mathematics::DistanceLine3Circle3<Real>::GetCircle() 
 }
 
 template <typename Real>
-typename Mathematics::DistanceLine3Circle3<Real>::DistanceResult Mathematics::DistanceLine3Circle3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistanceLine3Circle3<Real>::DistanceResult Mathematics::DistanceLine3Circle3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -82,18 +82,18 @@ typename Mathematics::DistanceLine3Circle3<Real>::DistanceResult Mathematics::Di
     ClosestPoints closestLine{};
     ClosestPoints closestCircle{};
 
-    const auto lineCrossNormal = Vector3Tools::CrossProduct(line.GetDirection(), circle.GetNormal());
-    const auto dot = Vector3Tools::DotProduct(lineCrossNormal, lineCrossNormal);
+    const auto lineCrossNormal = Vector3ToolsType::CrossProduct(line.GetDirection(), circle.GetNormal());
+    const auto dot = Vector3ToolsType::DotProduct(lineCrossNormal, lineCrossNormal);
     if (MathType::GetValue(0) < dot)
     {
         const auto dotSqrt = MathType::Sqrt(dot);
         const auto radiusMultiplyDotSqrt = circle.GetRadius() * dotSqrt;
-        auto diffCrossNormal = Vector3Tools::CrossProduct(diff, circle.GetNormal());
-        const auto lambda = Vector3Tools::DotProduct(-lineCrossNormal, diffCrossNormal) / dot;
+        auto diffCrossNormal = Vector3ToolsType::CrossProduct(diff, circle.GetNormal());
+        const auto lambda = Vector3ToolsType::DotProduct(-lineCrossNormal, diffCrossNormal) / dot;
         diff += lambda * line.GetDirection();
         diffCrossNormal += lambda * lineCrossNormal;
-        const auto lineDotDiff = Vector3Tools::DotProduct(line.GetDirection(), diff);
-        const auto diffCrossNormalDot = Vector3Tools::DotProduct(diffCrossNormal, diffCrossNormal);
+        const auto lineDotDiff = Vector3ToolsType::DotProduct(line.GetDirection(), diff);
+        const auto diffCrossNormalDot = Vector3ToolsType::DotProduct(diffCrossNormal, diffCrossNormal);
         if (MathType::GetValue(0) < diffCrossNormalDot)
         {
             const auto diffCrossNormalDotSqrt = MathType::Sqrt(diffCrossNormalDot);
@@ -348,7 +348,7 @@ typename Mathematics::DistanceLine3Circle3<Real>::DistanceResult Mathematics::Di
     }
     else
     {
-        auto closestLine0 = line.GetOrigin() - Vector3Tools::DotProduct(circle.GetNormal(), diff) * circle.GetNormal();
+        auto closestLine0 = line.GetOrigin() - Vector3ToolsType::DotProduct(circle.GetNormal(), diff) * circle.GetNormal();
         const auto distanceInfo = SqrDistancePointCircle(closestLine0);
         sqrDistance = distanceInfo.sqrDistance;
 
@@ -363,19 +363,19 @@ typename Mathematics::DistanceLine3Circle3<Real>::DistanceResult Mathematics::Di
 }
 
 template <typename Real>
-Mathematics::DistanceLine3Circle3<Real>::DistanceInfo::DistanceInfo(Real sqrDistance, int numClosestCircle, const Vector3& closestCircle) noexcept
+Mathematics::DistanceLine3Circle3<Real>::DistanceInfo::DistanceInfo(Real sqrDistance, int numClosestCircle, const Vector3Type& closestCircle) noexcept
     : sqrDistance{ sqrDistance }, numClosestCircle{ numClosestCircle }, closestCircle{ closestCircle }
 {
 }
 
 template <typename Real>
-typename Mathematics::DistanceLine3Circle3<Real>::DistanceInfo Mathematics::DistanceLine3Circle3<Real>::SqrDistancePointCircle(const Vector3& closestLine) const
+typename Mathematics::DistanceLine3Circle3<Real>::DistanceInfo Mathematics::DistanceLine3Circle3<Real>::SqrDistancePointCircle(const Vector3Type& closestLine) const
 {
-    Vector3 closestCircle{};
+    Vector3Type closestCircle{};
     auto numClosestCircle = 0;
     auto lineMinusCenter = closestLine - circle.GetCenter();
-    auto dot = lineMinusCenter - Vector3Tools::DotProduct(circle.GetNormal(), lineMinusCenter) * circle.GetNormal();
-    auto dotLength = Vector3Tools::GetLength(dot);
+    auto dot = lineMinusCenter - Vector3ToolsType::DotProduct(circle.GetNormal(), lineMinusCenter) * circle.GetNormal();
+    auto dotLength = Vector3ToolsType::GetLength(dot);
     if (MathType::GetValue(0) < dotLength)
     {
         numClosestCircle = 1;
@@ -390,7 +390,7 @@ typename Mathematics::DistanceLine3Circle3<Real>::DistanceInfo Mathematics::Dist
 
     const auto diff = closestLine - closestCircle;
 
-    return DistanceInfo{ Vector3Tools::DotProduct(diff, diff), numClosestCircle, closestCircle };
+    return DistanceInfo{ Vector3ToolsType::DotProduct(diff, diff), numClosestCircle, closestCircle };
 }
 
 template <typename Real>

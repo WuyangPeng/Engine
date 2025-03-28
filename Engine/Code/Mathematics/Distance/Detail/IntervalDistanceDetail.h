@@ -17,7 +17,7 @@
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <typename Real, typename Vector>
-Mathematics::IntervalDistance<Real, Vector>::IntervalDistance(const DistanceBase& distance, Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity)
+Mathematics::IntervalDistance<Real, Vector>::IntervalDistance(const DistanceBaseType& distance, Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity)
     : ParentType{ distance, tMin, tMax, lhsVelocity, rhsVelocity }
 {
     this->Solve();
@@ -41,7 +41,7 @@ bool Mathematics::IntervalDistance<Real, Vector>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real, typename Vector>
-typename Mathematics::IntervalDistance<Real, Vector>::DistanceResult Mathematics::IntervalDistance<Real, Vector>::Get(Real t) const
+typename Mathematics::IntervalDistance<Real, Vector>::DistanceResultType Mathematics::IntervalDistance<Real, Vector>::Get(Real t) const
 {
     return ParentType::GetDistanceResult(t);
 }

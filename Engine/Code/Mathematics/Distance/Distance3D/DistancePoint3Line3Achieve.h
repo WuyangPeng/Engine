@@ -18,7 +18,7 @@
 #include "Mathematics/Objects3D/Line3Detail.h"
 
 template <typename Real>
-Mathematics::DistancePoint3Line3<Real>::DistancePoint3Line3(const Vector3& point, const Line3& line) noexcept
+Mathematics::DistancePoint3Line3<Real>::DistancePoint3Line3(const Vector3Type& point, const Line3Type& line) noexcept
     : ParentType{}, point{ point }, line{ line }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -59,15 +59,15 @@ typename Mathematics::DistancePoint3Line3<Real>::DistanceResult Mathematics::Dis
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     auto difference = point - line.GetOrigin();
-    const auto param = Vector3Tools::DotProduct(line.GetDirection(), difference);
+    const auto param = Vector3ToolsType::DotProduct(line.GetDirection(), difference);
     const auto rhsClosestPoint = line.GetOrigin() + param * line.GetDirection();
     difference = rhsClosestPoint - point;
 
-    return DistanceResult{ Vector3Tools::GetLengthSquared(difference), MathType::GetValue(0), point, rhsClosestPoint, MathType::GetValue(0), param };
+    return DistanceResult{ Vector3ToolsType::GetLengthSquared(difference), MathType::GetValue(0), point, rhsClosestPoint, MathType::GetValue(0), param };
 }
 
 template <typename Real>
-typename Mathematics::DistancePoint3Line3<Real>::DistanceResult Mathematics::DistancePoint3Line3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistancePoint3Line3<Real>::DistanceResult Mathematics::DistancePoint3Line3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

@@ -24,16 +24,16 @@ namespace Mathematics
     public:
         using ClassType = DistancePoint3Ellipsoid3Tool<Real>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
         using MathType = Math<Real>;
 
     public:
-        DistancePoint3Ellipsoid3Tool(Real extent0, Real extent1, Real extent2, const Vector3& vector, Real zeroThreshold);
+        DistancePoint3Ellipsoid3Tool(Real extent0, Real extent1, Real extent2, const Vector3Type& vector, Real zeroThreshold);
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD Real GetSquaredDistance() const noexcept;
-        NODISCARD Vector3 GetOutputVector() const noexcept;
+        NODISCARD Vector3Type GetOutputVector() const noexcept;
 
     private:
         using Container = std::vector<Real>;
@@ -49,15 +49,15 @@ namespace Mathematics
         // 查询点是 (y0,y1,y2)。
         // 函数返回从查询点到椭圆的平方距离。
         // 它也计算最接近(y0,y1,y2)的椭圆点 (x0,x1,x2)  。
-        void ComputeSquaredDistanceSpecial(const Vector3& extent, const Vector3& queryPoint);
+        void ComputeSquaredDistanceSpecial(const Vector3Type& extent, const Vector3Type& queryPoint);
 
         // 该平分算法来寻找F(t)的唯一根。
         NODISCARD Container Bisector(const Container& extent, const Container& queryPoint);
 
     private:
-        Vector3 toolExtent;
-        Vector3 inputVector;
-        Vector3 outputVector;
+        Vector3Type toolExtent;
+        Vector3Type inputVector;
+        Vector3Type outputVector;
         Real squaredDistance;
         Real zeroThreshold;
     };

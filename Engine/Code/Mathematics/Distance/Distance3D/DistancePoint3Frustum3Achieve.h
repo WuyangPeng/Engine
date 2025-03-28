@@ -16,7 +16,7 @@
 #include "Mathematics/Distance/DistanceBaseDetail.h"
 
 template <typename Real>
-Mathematics::DistancePoint3Frustum3<Real>::DistancePoint3Frustum3(const Vector3& point, const Frustum3& frustum) noexcept
+Mathematics::DistancePoint3Frustum3<Real>::DistancePoint3Frustum3(const Vector3Type& point, const Frustum3Type& frustum) noexcept
     : ParentType{}, point{ point }, frustum{ frustum }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -58,9 +58,9 @@ typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::
 
     // 计算相对于视锥坐标系的点的坐标。
     auto diff = point - frustum.GetOrigin();
-    Vector3 test{ Vector3Tools::DotProduct(diff, frustum.GetRightVector()),
-                  Vector3Tools::DotProduct(diff, frustum.GetUpVector()),
-                  Vector3Tools::DotProduct(diff, frustum.GetDirectionVector()) };
+    Vector3Type test{ Vector3ToolsType::DotProduct(diff, frustum.GetRightVector()),
+                  Vector3ToolsType::DotProduct(diff, frustum.GetUpVector()),
+                  Vector3ToolsType::DotProduct(diff, frustum.GetDirectionVector()) };
 
     // 在具有非负Real和U坐标的八分圆中执行计算。
     auto rSignChange = false;
@@ -104,7 +104,7 @@ typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::
     const auto maxRightUpDirectionDot = frustum.GetDirectionRatio() * minRightUpDirectionDot;
 
     /// 在所有情况下，算法都会通过确定测试点所在的圆锥体的顶点，边缘和面的哪个Voronoi区域来计算最接近的点。
-    Vector3 closest{};
+    Vector3Type closest{};
 
     if (directionMax <= test.GetZ())
     {
@@ -440,11 +440,11 @@ typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::
                               closest.GetY() * frustum.GetUpVector() +
                               closest.GetZ() * frustum.GetDirectionVector();
 
-    return DistanceResult{ Vector3Tools::GetLengthSquared(diff), MathType::GetValue(0), point, closestPoint };
+    return DistanceResult{ Vector3ToolsType::GetLengthSquared(diff), MathType::GetValue(0), point, closestPoint };
 }
 
 template <typename Real>
-typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::DistancePoint3Frustum3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::DistancePoint3Frustum3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

@@ -18,7 +18,7 @@
 #include "Mathematics/Objects2D/Segment2Detail.h"
 
 template <typename Real>
-Mathematics::DistanceLine2Segment2<Real>::DistanceLine2Segment2(const Line2& line, const Segment2& segment) noexcept
+Mathematics::DistanceLine2Segment2<Real>::DistanceLine2Segment2(const Line2Type& line, const Segment2Type& segment) noexcept
     : ParentType{}, line{ line }, segment{ segment }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -58,7 +58,7 @@ typename Mathematics::DistanceLine2Segment2<Real>::DistanceResult Mathematics::D
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const DistanceLine2Line2Tool tool{ line.GetOrigin(), line.GetDirection(), segment.GetCenterPoint(), segment.GetDirection() };
+    const DistanceLine2Line2ToolType tool{ line.GetOrigin(), line.GetDirection(), segment.GetCenterPoint(), segment.GetDirection() };
 
     const auto det = tool.GetDet();
 
@@ -101,7 +101,7 @@ typename Mathematics::DistanceLine2Segment2<Real>::DistanceResult Mathematics::D
 }
 
 template <typename Real>
-typename Mathematics::DistanceLine2Segment2<Real>::DistanceResult Mathematics::DistanceLine2Segment2<Real>::GetSquaredWithClosestPoints(const DistanceLine2Line2Tool& tool, Real rhsExtent) const
+typename Mathematics::DistanceLine2Segment2<Real>::DistanceResult Mathematics::DistanceLine2Segment2<Real>::GetSquaredWithClosestPoints(const DistanceLine2Line2ToolType& tool, Real rhsExtent) const
 {
     const auto t = tool.GetLhsT(-rhsExtent);
     const auto rhsSquare = rhsExtent * (rhsExtent + MathType::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) + tool.GetOriginDifferenceSquaredLength();
@@ -113,7 +113,7 @@ typename Mathematics::DistanceLine2Segment2<Real>::DistanceResult Mathematics::D
 }
 
 template <typename Real>
-typename Mathematics::DistanceLine2Segment2<Real>::DistanceResult Mathematics::DistanceLine2Segment2<Real>::GetSquaredWithClosestPointsIsParallel(const DistanceLine2Line2Tool& tool) const
+typename Mathematics::DistanceLine2Segment2<Real>::DistanceResult Mathematics::DistanceLine2Segment2<Real>::GetSquaredWithClosestPointsIsParallel(const DistanceLine2Line2ToolType& tool) const
 {
     const auto originDifferenceDotLhsDirection = tool.GetOriginDifferenceDotLhsDirection();
     const auto squaredDistance = tool.GetSquaredDistanceWithParallel();
@@ -125,7 +125,7 @@ typename Mathematics::DistanceLine2Segment2<Real>::DistanceResult Mathematics::D
 }
 
 template <typename Real>
-typename Mathematics::DistanceLine2Segment2<Real>::DistanceResult Mathematics::DistanceLine2Segment2<Real>::GetSquared(Real t, const Vector2& lhsVelocity, const Vector2& rhsVelocity) const
+typename Mathematics::DistanceLine2Segment2<Real>::DistanceResult Mathematics::DistanceLine2Segment2<Real>::GetSquared(Real t, const Vector2Type& lhsVelocity, const Vector2Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

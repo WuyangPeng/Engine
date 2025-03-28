@@ -18,7 +18,7 @@
 #include "Mathematics/Objects3D/Segment3Detail.h"
 
 template <typename Real>
-Mathematics::DistanceRay3Segment3<Real>::DistanceRay3Segment3(const Ray3& ray, const Segment3& segment) noexcept
+Mathematics::DistanceRay3Segment3<Real>::DistanceRay3Segment3(const Ray3Type& ray, const Segment3Type& segment) noexcept
     : ParentType{}, ray{ ray }, segment{ segment }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -209,7 +209,7 @@ typename Mathematics::DistanceRay3Segment3<Real>::DistanceResult Mathematics::Di
 }
 
 template <typename Real>
-typename Mathematics::DistanceRay3Segment3<Real>::DistanceResult Mathematics::DistanceRay3Segment3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistanceRay3Segment3<Real>::DistanceResult Mathematics::DistanceRay3Segment3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

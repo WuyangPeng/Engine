@@ -16,7 +16,7 @@
 #include "Mathematics/Distance/DistanceBaseDetail.h"
 
 template <typename Real>
-Mathematics::DistanceLine3Box3<Real>::DistanceLine3Box3(const Line3& line, const Box3& box) noexcept
+Mathematics::DistanceLine3Box3<Real>::DistanceLine3Box3(const Line3Type& line, const Box3Type& box) noexcept
     : ParentType{}, line{ line }, box{ box }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -52,7 +52,7 @@ Mathematics::Box3<Real> Mathematics::DistanceLine3Box3<Real>::GetBox() const noe
 }
 
 template <typename Real>
-typename Mathematics::DistanceLine3Box3<Real>::DistanceResult Mathematics::DistanceLine3Box3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistanceLine3Box3<Real>::DistanceResult Mathematics::DistanceLine3Box3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -74,12 +74,12 @@ typename Mathematics::DistanceLine3Box3<Real>::DistanceResult Mathematics::Dista
 
     // 在盒坐标系中计算线的坐标。
     auto diff = line.GetOrigin() - box.GetCenter();
-    auto point = Vector3{ Vector3Tools::DotProduct(diff, box.GetAxis0()),
-                          Vector3Tools::DotProduct(diff, box.GetAxis1()),
-                          Vector3Tools::DotProduct(diff, box.GetAxis2()) };
-    Vector3 direction{ Vector3Tools::DotProduct(line.GetDirection(), box.GetAxis0()),
-                       Vector3Tools::DotProduct(line.GetDirection(), box.GetAxis1()),
-                       Vector3Tools::DotProduct(line.GetDirection(), box.GetAxis2()) };
+    auto point = Vector3Type{ Vector3ToolsType::DotProduct(diff, box.GetAxis0()),
+                          Vector3ToolsType::DotProduct(diff, box.GetAxis1()),
+                          Vector3ToolsType::DotProduct(diff, box.GetAxis2()) };
+    Vector3Type direction{ Vector3ToolsType::DotProduct(line.GetDirection(), box.GetAxis0()),
+                       Vector3ToolsType::DotProduct(line.GetDirection(), box.GetAxis1()),
+                       Vector3ToolsType::DotProduct(line.GetDirection(), box.GetAxis2()) };
 
     // 应用反射，使方向向量具有非负分量。
     constexpr auto size = 3;
@@ -177,10 +177,10 @@ typename Mathematics::DistanceLine3Box3<Real>::DistanceResult Mathematics::Dista
 }
 
 template <typename Real>
-Real Mathematics::DistanceLine3Box3<Real>::CaseNoZeros(const Vector3& direction, Real& lineParameter, Vector3& point) const
+Real Mathematics::DistanceLine3Box3<Real>::CaseNoZeros(const Vector3Type& direction, Real& lineParameter, Vector3Type& point) const
 {
     Real sqrDistance{};
-    const Vector3 pointMinusExtent{ point.GetX() - box.GetExtent(0), point.GetY() - box.GetExtent(1), point.GetZ() - box.GetExtent(2) };
+    const Vector3Type pointMinusExtent{ point.GetX() - box.GetExtent(0), point.GetY() - box.GetExtent(1), point.GetZ() - box.GetExtent(2) };
 
     auto prodDxPy = direction.GetX() * pointMinusExtent.GetY();
     auto prodDyPx = direction.GetY() * pointMinusExtent.GetX();
@@ -224,10 +224,10 @@ Real Mathematics::DistanceLine3Box3<Real>::CaseNoZeros(const Vector3& direction,
 }
 
 template <typename Real>
-Real Mathematics::DistanceLine3Box3<Real>::Face(int i0, int i1, int i2, const Vector3& direction, const Vector3& pointMinusExtent, Real& lineParameter, Vector3& point) const
+Real Mathematics::DistanceLine3Box3<Real>::Face(int i0, int i1, int i2, const Vector3Type& direction, const Vector3Type& pointMinusExtent, Real& lineParameter, Vector3Type& point) const
 {
     Real sqrDistance{};
-    Vector3 pointPlusExtent{};
+    Vector3Type pointPlusExtent{};
     pointPlusExtent[i1] = point[i1] + box.GetExtent(i1);
     pointPlusExtent[i2] = point[i2] + box.GetExtent(i2);
 
@@ -397,7 +397,7 @@ Real Mathematics::DistanceLine3Box3<Real>::Face(int i0, int i1, int i2, const Ve
 }
 
 template <typename Real>
-Real Mathematics::DistanceLine3Box3<Real>::Case0(int i0, int i1, int i2, const Vector3& direction, Real& lineParameter, Vector3& point) const
+Real Mathematics::DistanceLine3Box3<Real>::Case0(int i0, int i1, int i2, const Vector3Type& direction, Real& lineParameter, Vector3Type& point) const
 {
     auto sqrDistance = MathType::GetValue(0);
     auto pointMinusE0 = point[i0] - box.GetExtent(i0);
@@ -463,7 +463,7 @@ Real Mathematics::DistanceLine3Box3<Real>::Case0(int i0, int i1, int i2, const V
 }
 
 template <typename Real>
-Real Mathematics::DistanceLine3Box3<Real>::Case00(int i0, int i1, int i2, const Vector3& dir, Real& lineParameter, Vector3& point) const
+Real Mathematics::DistanceLine3Box3<Real>::Case00(int i0, int i1, int i2, const Vector3Type& dir, Real& lineParameter, Vector3Type& point) const
 {
     auto sqrDistance = MathType::GetValue(0);
 
@@ -501,7 +501,7 @@ Real Mathematics::DistanceLine3Box3<Real>::Case00(int i0, int i1, int i2, const 
 }
 
 template <typename Real>
-Real Mathematics::DistanceLine3Box3<Real>::Case000(Vector3& point) const
+Real Mathematics::DistanceLine3Box3<Real>::Case000(Vector3Type& point) const
 {
     auto sqrDistance = MathType::GetValue(0);
 

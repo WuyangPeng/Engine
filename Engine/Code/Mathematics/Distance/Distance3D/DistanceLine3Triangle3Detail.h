@@ -17,7 +17,7 @@
 #include "Mathematics/Distance/DistanceBaseDetail.h"
 
 template <typename Real>
-Mathematics::DistanceLine3Triangle3<Real>::DistanceLine3Triangle3(const Line3& line, const Triangle3& triangle) noexcept
+Mathematics::DistanceLine3Triangle3<Real>::DistanceLine3Triangle3(const Line3Type& line, const Triangle3Type& triangle) noexcept
     : ParentType{}, line{ line }, triangle{ triangle }, triangleBary{}
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -60,24 +60,24 @@ typename Mathematics::DistanceLine3Triangle3<Real>::DistanceResult Mathematics::
     // 测试线是否与三角形相交。 如果是这样，则平方距离为零。
     const auto edge0 = triangle.GetVertex(1) - triangle.GetVertex(0);
     const auto edge1 = triangle.GetVertex(2) - triangle.GetVertex(0);
-    const auto normal = Vector3Tools::UnitCrossProduct(edge0, edge1);
+    const auto normal = Vector3ToolsType::UnitCrossProduct(edge0, edge1);
 
-    if (const auto normalDotDirection = Vector3Tools::DotProduct(normal, line.GetDirection());
+    if (const auto normalDotDirection = Vector3ToolsType::DotProduct(normal, line.GetDirection());
         MathType::GetZeroTolerance() < MathType::FAbs(normalDotDirection))
     {
         // 直线和三角形不平行，因此直线与三角形的平面相交。
         auto diff = line.GetOrigin() - triangle.GetVertex(0);
 
-        const auto Vector3OrthonormalBasis = Vector3Tools::GenerateComplementBasis(line.GetDirection());
+        const auto Vector3OrthonormalBasis = Vector3ToolsType::GenerateComplementBasis(line.GetDirection());
         const auto uVector = Vector3OrthonormalBasis.GetUVector();
         const auto vVector = Vector3OrthonormalBasis.GetVVector();
 
-        auto uVectorDotEdge0 = Vector3Tools::DotProduct(uVector, edge0);
-        auto uVectorDotEdge1 = Vector3Tools::DotProduct(uVector, edge1);
-        auto uVectorDotDiff = Vector3Tools::DotProduct(uVector, diff);
-        auto vVectorDotEdge0 = Vector3Tools::DotProduct(vVector, edge0);
-        auto vVectorDotEdge1 = Vector3Tools::DotProduct(vVector, edge1);
-        auto vVectorDotDiff = Vector3Tools::DotProduct(vVector, diff);
+        auto uVectorDotEdge0 = Vector3ToolsType::DotProduct(uVector, edge0);
+        auto uVectorDotEdge1 = Vector3ToolsType::DotProduct(uVector, edge1);
+        auto uVectorDotDiff = Vector3ToolsType::DotProduct(uVector, diff);
+        auto vVectorDotEdge0 = Vector3ToolsType::DotProduct(vVector, edge0);
+        auto vVectorDotEdge1 = Vector3ToolsType::DotProduct(vVector, edge1);
+        auto vVectorDotDiff = Vector3ToolsType::DotProduct(vVector, diff);
         auto invDet = (MathType::GetValue(1)) / (uVectorDotEdge0 * vVectorDotEdge1 - uVectorDotEdge1 * vVectorDotEdge0);
 
         // 相交点的重心坐标。
@@ -88,9 +88,9 @@ typename Mathematics::DistanceLine3Triangle3<Real>::DistanceResult Mathematics::
         if (MathType::GetValue(0) <= b0 && MathType::GetValue(0) <= b1 && MathType::GetValue(0) <= b2)
         {
             // 相交点的线参数。
-            auto directionDotEdge0 = Vector3Tools::DotProduct(line.GetDirection(), edge0);
-            auto directionDotEdge1 = Vector3Tools::DotProduct(line.GetDirection(), edge1);
-            auto directionDotDiff = Vector3Tools::DotProduct(line.GetDirection(), diff);
+            auto directionDotEdge0 = Vector3ToolsType::DotProduct(line.GetDirection(), edge0);
+            auto directionDotEdge1 = Vector3ToolsType::DotProduct(line.GetDirection(), edge1);
+            auto directionDotDiff = Vector3ToolsType::DotProduct(line.GetDirection(), diff);
             auto lineParameter = b1 * directionDotEdge0 + b2 * directionDotEdge1 - directionDotDiff;
 
             // 相交点的重心坐标。
@@ -107,8 +107,8 @@ typename Mathematics::DistanceLine3Triangle3<Real>::DistanceResult Mathematics::
         }
     }
 
-    Vector3 closestPoint0{};
-    Vector3 closestPoint1{};
+    Vector3Type closestPoint0{};
+    Vector3Type closestPoint1{};
     auto lineParameter = MathType::GetValue(0);
 
     /// （1）线不平行于三角形，并且线和三角形的平面的交点在三角形之外，或者（2）线和三角形平行。
@@ -120,7 +120,7 @@ typename Mathematics::DistanceLine3Triangle3<Real>::DistanceResult Mathematics::
         auto center = (MathType::GetRational(1, 2)) * (triangle.GetVertex(i0) + triangle.GetVertex(i1));
         auto direction = triangle.GetVertex(i1) - triangle.GetVertex(i0);
 
-        auto extent = (MathType::GetRational(1, 2)) * Vector3Tools::GetLength(direction);
+        auto extent = (MathType::GetRational(1, 2)) * Vector3ToolsType::GetLength(direction);
         const Segment3<Real> segment{ extent, center, direction };
 
         DistanceLine3Segment3<Real> distanceLine3Segment3{ line, segment };
@@ -143,7 +143,7 @@ typename Mathematics::DistanceLine3Triangle3<Real>::DistanceResult Mathematics::
 }
 
 template <typename Real>
-typename Mathematics::DistanceLine3Triangle3<Real>::DistanceResult Mathematics::DistanceLine3Triangle3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistanceLine3Triangle3<Real>::DistanceResult Mathematics::DistanceLine3Triangle3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

@@ -18,7 +18,7 @@
 #include "Mathematics/Objects3D/Plane3Detail.h"
 
 template <typename Real>
-Mathematics::DistancePoint3Tetrahedron3<Real>::DistancePoint3Tetrahedron3(const Vector3& point, const Tetrahedron3& tetrahedron) noexcept
+Mathematics::DistancePoint3Tetrahedron3<Real>::DistancePoint3Tetrahedron3(const Vector3Type& point, const Tetrahedron3Type& tetrahedron) noexcept
     : ParentType{}, point{ point }, tetrahedron{ tetrahedron }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -64,7 +64,7 @@ typename Mathematics::DistancePoint3Tetrahedron3<Real>::DistanceResult Mathemati
 
     /// 确定哪些面对查询点可见。 点到三角形的距离查询只需要处理这些。
     auto minSqrDistance = MathType::maxReal;
-    auto minTetraClosest = Vector3::GetZero();
+    auto minTetraClosest = Vector3Type::GetZero();
     constexpr auto tetrahedronSize = 4;
     for (auto i = 0; i < tetrahedronSize; ++i)
     {
@@ -83,7 +83,7 @@ typename Mathematics::DistancePoint3Tetrahedron3<Real>::DistanceResult Mathemati
         }
     }
 
-    Vector3 closestPoint{};
+    Vector3Type closestPoint{};
     if (MathType::Approximate(minSqrDistance, MathType::maxReal))
     {
         // 查询点在“实心”四面体之外。
@@ -100,7 +100,7 @@ typename Mathematics::DistancePoint3Tetrahedron3<Real>::DistanceResult Mathemati
 }
 
 template <typename Real>
-typename Mathematics::DistancePoint3Tetrahedron3<Real>::DistanceResult Mathematics::DistancePoint3Tetrahedron3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistancePoint3Tetrahedron3<Real>::DistanceResult Mathematics::DistancePoint3Tetrahedron3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

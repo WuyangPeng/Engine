@@ -25,38 +25,38 @@ namespace Mathematics
     {
     public:
         using ClassType = DistanceRay2Segment2<Real>;
-        using Vector2 = Vector2<Real>;
-        using ParentType = DistanceBase<Real, Vector2>;
+        using Vector2Type = Vector2<Real>;
+        using ParentType = DistanceBase<Real, Vector2Type>;
 
-        using Ray2 = Ray2<Real>;
-        using Segment2 = Segment2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
-        using DistanceLine2Line2Tool = DistanceLine2Line2Tool<Real>;
+        using Ray2Type = Ray2<Real>;
+        using Segment2Type = Segment2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
+        using DistanceLine2Line2ToolType = DistanceLine2Line2Tool<Real>;
         using MathType = typename ParentType::MathType;
         using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistanceRay2Segment2(const Ray2& ray, const Segment2& segment) noexcept;
+        DistanceRay2Segment2(const Ray2Type& ray, const Segment2Type& segment) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Ray2 GetRay() const noexcept;
-        NODISCARD Segment2 GetSegment() const noexcept;
+        NODISCARD Ray2Type GetRay() const noexcept;
+        NODISCARD Segment2Type GetSegment() const noexcept;
 
         // æ≤Ã¨æ‡¿Î≤È—Ø°£
         NODISCARD DistanceResult GetSquared() const override;
 
         // ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£
-        NODISCARD DistanceResult GetSquared(Real t, const Vector2& lhsVelocity, const Vector2& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector2Type& lhsVelocity, const Vector2Type& rhsVelocity) const override;
 
     private:
-        NODISCARD DistanceResult GetSquaredWithClosestPointsIsSegmentEndPoint(const DistanceLine2Line2Tool& tool, Real rhsExtent) const;
-        NODISCARD DistanceResult GetSquaredWithClosestPointsIsSegmentBeginPoint(const DistanceLine2Line2Tool& tool, Real rhsExtent) const;
-        NODISCARD DistanceResult GetSquaredWithClosestPointsIsRayOrigin(const DistanceLine2Line2Tool& tool, Real rhsExtent) const;
+        NODISCARD DistanceResult GetSquaredWithClosestPointsIsSegmentEndPoint(const DistanceLine2Line2ToolType& tool, Real rhsExtent) const;
+        NODISCARD DistanceResult GetSquaredWithClosestPointsIsSegmentBeginPoint(const DistanceLine2Line2ToolType& tool, Real rhsExtent) const;
+        NODISCARD DistanceResult GetSquaredWithClosestPointsIsRayOrigin(const DistanceLine2Line2ToolType& tool, Real rhsExtent) const;
 
     private:
-        Ray2 ray;
-        Segment2 segment;
+        Ray2Type ray;
+        Segment2Type segment;
     };
 
     using DistanceRay2Segment2F = DistanceRay2Segment2<float>;

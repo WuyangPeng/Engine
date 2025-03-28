@@ -17,7 +17,7 @@
 #include "Mathematics/Objects2D/Ray2Detail.h"
 
 template <typename Real>
-Mathematics::DistancePoint2Ray2<Real>::DistancePoint2Ray2(const Vector2& point, const Ray2& ray) noexcept
+Mathematics::DistancePoint2Ray2<Real>::DistancePoint2Ray2(const Vector2Type& point, const Ray2Type& ray) noexcept
     : ParentType{}, point{ point }, ray{ ray }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -58,7 +58,7 @@ typename Mathematics::DistancePoint2Ray2<Real>::DistanceResult Mathematics::Dist
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     auto difference = point - ray.GetOrigin();
-    auto param = Vector2Tools::DotProduct(ray.GetDirection(), difference);
+    auto param = Vector2ToolsType::DotProduct(ray.GetDirection(), difference);
 
     if (param <= MathType::GetValue(0))
     {
@@ -68,11 +68,11 @@ typename Mathematics::DistancePoint2Ray2<Real>::DistanceResult Mathematics::Dist
     const auto rhsClosestPoint = ray.GetOrigin() + param * ray.GetDirection();
     difference = rhsClosestPoint - point;
 
-    return DistanceResult{ Vector2Tools::GetLengthSquared(difference), MathType::GetValue(0), point, rhsClosestPoint };
+    return DistanceResult{ Vector2ToolsType::GetLengthSquared(difference), MathType::GetValue(0), point, rhsClosestPoint };
 }
 
 template <typename Real>
-typename Mathematics::DistancePoint2Ray2<Real>::DistanceResult Mathematics::DistancePoint2Ray2<Real>::GetSquared(Real t, const Vector2& lhsVelocity, const Vector2& rhsVelocity) const
+typename Mathematics::DistancePoint2Ray2<Real>::DistanceResult Mathematics::DistancePoint2Ray2<Real>::GetSquared(Real t, const Vector2Type& lhsVelocity, const Vector2Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

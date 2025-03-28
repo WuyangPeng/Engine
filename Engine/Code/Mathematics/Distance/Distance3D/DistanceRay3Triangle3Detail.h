@@ -18,7 +18,7 @@
 #include "Mathematics/Distance/DistanceBaseDetail.h"
 
 template <typename Real>
-Mathematics::DistanceRay3Triangle3<Real>::DistanceRay3Triangle3(const Ray3& ray, const Triangle3& triangle) noexcept
+Mathematics::DistanceRay3Triangle3<Real>::DistanceRay3Triangle3(const Ray3Type& ray, const Triangle3Type& triangle) noexcept
     : ParentType{}, ray{ ray }, triangle{ triangle }, triangleBary{}
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -58,8 +58,8 @@ typename Mathematics::DistanceRay3Triangle3<Real>::DistanceResult Mathematics::D
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    Vector3 closestPoint0{};
-    Vector3 closestPoint1{};
+    Vector3Type closestPoint0{};
+    Vector3Type closestPoint1{};
 
     const Line3<Real> line{ ray.GetOrigin(), ray.GetDirection() };
     DistanceLine3Triangle3<Real> distanceLine3Triangle3{ line, triangle };
@@ -90,7 +90,7 @@ typename Mathematics::DistanceRay3Triangle3<Real>::DistanceResult Mathematics::D
 }
 
 template <typename Real>
-typename Mathematics::DistanceRay3Triangle3<Real>::DistanceResult Mathematics::DistanceRay3Triangle3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistanceRay3Triangle3<Real>::DistanceResult Mathematics::DistanceRay3Triangle3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

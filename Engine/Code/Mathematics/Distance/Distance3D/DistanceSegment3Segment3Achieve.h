@@ -17,7 +17,7 @@
 #include "Mathematics/Objects3D/Segment3Detail.h"
 
 template <typename Real>
-Mathematics::DistanceSegment3Segment3<Real>::DistanceSegment3Segment3(const Segment3& lhsSegment, const Segment3& rhsSegment) noexcept
+Mathematics::DistanceSegment3Segment3<Real>::DistanceSegment3Segment3(const Segment3Type& lhsSegment, const Segment3Type& rhsSegment) noexcept
     : ParentType{}, lhsSegment{ lhsSegment }, rhsSegment{ rhsSegment }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -57,7 +57,7 @@ typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const DistanceLine3Line3Tool tool{ lhsSegment.GetCenterPoint(), lhsSegment.GetDirection(), rhsSegment.GetCenterPoint(), rhsSegment.GetDirection() };
+    const DistanceLine3Line3ToolType tool{ lhsSegment.GetCenterPoint(), lhsSegment.GetDirection(), rhsSegment.GetCenterPoint(), rhsSegment.GetDirection() };
 
     const auto det = tool.GetDet();
     const auto lhsExtent = lhsSegment.GetExtent();
@@ -183,7 +183,7 @@ typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics
 }
 
 template <typename Real>
-typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics::DistanceSegment3Segment3<Real>::GetSquaredWithClosestPointsIsLhsSide(const DistanceLine3Line3Tool& tool, Real lhsExtent, Real rhsExtent) const
+typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics::DistanceSegment3Segment3<Real>::GetSquaredWithClosestPointsIsLhsSide(const DistanceLine3Line3ToolType& tool, Real lhsExtent, Real rhsExtent) const
 {
     const auto t = tool.GetLhsT(-rhsExtent);
     const auto rhsSquare = rhsExtent * (rhsExtent + MathType::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) +
@@ -219,7 +219,7 @@ typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics
 }
 
 template <typename Real>
-typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics::DistanceSegment3Segment3<Real>::GetSquaredWithClosestPointsIsRhsSide(const DistanceLine3Line3Tool& tool, Real lhsExtent, Real rhsExtent) const
+typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics::DistanceSegment3Segment3<Real>::GetSquaredWithClosestPointsIsRhsSide(const DistanceLine3Line3ToolType& tool, Real lhsExtent, Real rhsExtent) const
 {
     const auto t = tool.GetRhsT(-lhsExtent);
     const auto lhsSquare = lhsExtent * (lhsExtent + MathType::GetValue(2) * tool.GetOriginDifferenceDotLhsDirection()) +
@@ -255,7 +255,7 @@ typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics
 }
 
 template <typename Real>
-typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics::DistanceSegment3Segment3<Real>::GetSquaredWithClosestPointsIsLhsCorner(const DistanceLine3Line3Tool& tool, Real lhsExtent, Real rhsExtent) const
+typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics::DistanceSegment3Segment3<Real>::GetSquaredWithClosestPointsIsLhsCorner(const DistanceLine3Line3ToolType& tool, Real lhsExtent, Real rhsExtent) const
 {
     const auto t = tool.GetLhsT(-rhsExtent);
     const auto rhsSquare = rhsExtent * (rhsExtent + MathType::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) +
@@ -286,7 +286,7 @@ typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics
 }
 
 template <typename Real>
-typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics::DistanceSegment3Segment3<Real>::GetSquaredWithClosestPointsIsRhsCorner(const DistanceLine3Line3Tool& tool, Real lhsExtent, Real rhsExtent) const
+typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics::DistanceSegment3Segment3<Real>::GetSquaredWithClosestPointsIsRhsCorner(const DistanceLine3Line3ToolType& tool, Real lhsExtent, Real rhsExtent) const
 {
     const auto t = tool.GetLhsT(-rhsExtent);
     const auto rhsSquare = rhsExtent * (rhsExtent + MathType::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) +
@@ -317,7 +317,7 @@ typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics
 }
 
 template <typename Real>
-typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics::DistanceSegment3Segment3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistanceSegment3Segment3<Real>::DistanceResult Mathematics::DistanceSegment3Segment3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

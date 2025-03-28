@@ -22,35 +22,35 @@ namespace Mathematics
     {
     public:
         using ClassType = DistanceTriangle3Triangle3<Real>;
-        using Vector3 = Vector3<Real>;
-        using ParentType = DistanceBase<Real, Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3Type>;
 
-        using Triangle3 = Triangle3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Triangle3Type = Triangle3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
         using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistanceTriangle3Triangle3(const Triangle3& lhsTriangle, const Triangle3& rhsTriangle) noexcept;
+        DistanceTriangle3Triangle3(const Triangle3Type& lhsTriangle, const Triangle3Type& rhsTriangle) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Triangle3 GetLhsTriangle() const noexcept;
-        NODISCARD Triangle3 GetRhsTriangle() const noexcept;
+        NODISCARD Triangle3Type GetLhsTriangle() const noexcept;
+        NODISCARD Triangle3Type GetRhsTriangle() const noexcept;
 
         NODISCARD DistanceResult GetSquared() const override;
 
-        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
         NODISCARD Real GetTriangleBary0(int index) const;
         NODISCARD Real GetTriangleBary1(int index) const;
 
     private:
-        Triangle3 lhsTriangle;
-        Triangle3 rhsTriangle;
+        Triangle3Type lhsTriangle;
+        Triangle3Type rhsTriangle;
 
-        mutable Vector3 triangleBary0;
-        mutable Vector3 triangleBary1;
+        mutable Vector3Type triangleBary0;
+        mutable Vector3Type triangleBary1;
     };
 
     using DistanceTriangle3Triangle3F = DistanceTriangle3Triangle3<float>;

@@ -22,29 +22,29 @@ namespace Mathematics
     {
     public:
         using ClassType = DistancePoint3Plane3<Real>;
-        using Vector3 = Vector3<Real>;
-        using ParentType = DistanceBase<Real, Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3Type>;
 
-        using Plane3 = Plane3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Plane3Type = Plane3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
         using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistancePoint3Plane3(const Vector3& point, const Plane3& plane) noexcept;
+        DistancePoint3Plane3(const Vector3Type& point, const Plane3Type& plane) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Vector3 GetPoint() const noexcept;
-        NODISCARD Plane3 GetPlane() const noexcept;
+        NODISCARD Vector3Type GetPoint() const noexcept;
+        NODISCARD Plane3Type GetPlane() const noexcept;
 
         NODISCARD DistanceResult GetSquared() const override;
 
-        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
     private:
-        Vector3 point;
-        Plane3 plane;
+        Vector3Type point;
+        Plane3Type plane;
     };
 
     using DistancePoint3Plane3F = DistancePoint3Plane3<float>;

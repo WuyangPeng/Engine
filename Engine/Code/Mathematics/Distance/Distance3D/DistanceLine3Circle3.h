@@ -24,23 +24,23 @@ namespace Mathematics
     {
     public:
         using ClassType = DistanceLine3Circle3<Real>;
-        using Vector3 = Vector3<Real>;
-        using ParentType = DistanceBase<Real, Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3Type>;
 
-        using Line3 = Line3<Real>;
-        using Circle3 = Circle3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Line3Type = Line3<Real>;
+        using Circle3Type = Circle3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
         using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistanceLine3Circle3(const Line3& line, const Circle3& circle) noexcept;
+        DistanceLine3Circle3(const Line3Type& line, const Circle3Type& circle) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         // 对象访问。
-        NODISCARD Line3 GetLine() const noexcept;
-        NODISCARD Circle3 GetCircle() const noexcept;
+        NODISCARD Line3Type GetLine() const noexcept;
+        NODISCARD Circle3Type GetCircle() const noexcept;
 
         /// 静态距离查询。 计算从点P到圆的距离。
         /// 当P在法线C + t * N上，其中C是圆心并且N是包含该圆的平面的法线时，则所有圆点都与P等距。
@@ -48,28 +48,28 @@ namespace Mathematics
         NODISCARD DistanceResult GetSquared() const override;
 
         // 动态距离查询的函数计算。
-        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
     private:
         struct DistanceInfo
         {
             Real sqrDistance;
             int numClosestCircle;
-            Vector3 closestCircle;
+            Vector3Type closestCircle;
 
-            DistanceInfo(Real sqrDistance, int numClosestCircle, const Vector3& closestCircle) noexcept;
+            DistanceInfo(Real sqrDistance, int numClosestCircle, const Vector3Type& closestCircle) noexcept;
         };
 
         /// mClosestLine[i]是输入。 mClosestCircle[i]是输出。
         /// 返回它们之间的平方距离。 mNumClosest的值设置为1或INT_MAX。 如果是后者，则所有圆点都与mClosestLine[i]等距。
-        NODISCARD DistanceInfo SqrDistancePointCircle(const Vector3& closestLine) const;
+        NODISCARD DistanceInfo SqrDistancePointCircle(const Vector3Type& closestLine) const;
 
         // 将函数F(s) = s + m2b2 - r * m0sqr * s / sqrt(m0sqr * s * s + b1sqr)分成指定间隔[smin，smax]。
         NODISCARD static Real BisectF(Real lineDotDiff, Real radiusMultiplyDot, Real dot, Real diffCrossNormalDot, Real smin, Real smax);
 
     private:
-        Line3 line;
-        Circle3 circle;
+        Line3Type line;
+        Circle3Type circle;
     };
 
     using DistanceLine3Circle3F = DistanceLine3Circle3<float>;

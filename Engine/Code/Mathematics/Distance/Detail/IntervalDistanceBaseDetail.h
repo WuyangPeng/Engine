@@ -16,7 +16,7 @@
 #include "Mathematics/Distance/DistanceResultDetail.h"
 
 template <typename Real, typename Vector>
-Mathematics::IntervalDistanceBase<Real, Vector>::IntervalDistanceBase(const DistanceBase& distance, Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity)
+Mathematics::IntervalDistanceBase<Real, Vector>::IntervalDistanceBase(const DistanceBaseType& distance, Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity)
     : distance{ distance },
       tMin{ tMin },
       tMax{ tMax },
@@ -49,13 +49,13 @@ void Mathematics::IntervalDistanceBase<Real, Vector>::Solve()
 }
 
 template <typename Real, typename Vector>
-typename Mathematics::IntervalDistanceBase<Real, Vector>::DistanceResult Mathematics::IntervalDistanceBase<Real, Vector>::GetDistanceResult(Real t) const
+typename Mathematics::IntervalDistanceBase<Real, Vector>::DistanceResultType Mathematics::IntervalDistanceBase<Real, Vector>::GetDistanceResult(Real t) const
 {
     return distance.Get(t, lhsVelocity, rhsVelocity);
 }
 
 template <typename Real, typename Vector>
-typename Mathematics::IntervalDistanceBase<Real, Vector>::DistanceResult Mathematics::IntervalDistanceBase<Real, Vector>::GetDistanceResultSquared(Real t) const
+typename Mathematics::IntervalDistanceBase<Real, Vector>::DistanceResultType Mathematics::IntervalDistanceBase<Real, Vector>::GetDistanceResultSquared(Real t) const
 {
     return distance.GetSquared(t, lhsVelocity, rhsVelocity);
 }
@@ -224,7 +224,7 @@ bool Mathematics::IntervalDistanceBase<Real, Vector>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real, typename Vector>
-typename Mathematics::IntervalDistanceBase<Real, Vector>::DistanceResult Mathematics::IntervalDistanceBase<Real, Vector>::GetResult() const noexcept
+typename Mathematics::IntervalDistanceBase<Real, Vector>::DistanceResultType Mathematics::IntervalDistanceBase<Real, Vector>::GetResult() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

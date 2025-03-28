@@ -16,7 +16,7 @@
 #include "Mathematics/Distance/DistanceBaseDetail.h"
 
 template <typename Real>
-Mathematics::DistancePoint3Rectangle3<Real>::DistancePoint3Rectangle3(const Vector3& point, const Rectangle3& rectangle) noexcept
+Mathematics::DistancePoint3Rectangle3<Real>::DistancePoint3Rectangle3(const Vector3Type& point, const Rectangle3Type& rectangle) noexcept
     : ParentType{}, point{ point }, rectangle{ rectangle }, rectCoord{}
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -57,11 +57,11 @@ typename Mathematics::DistancePoint3Rectangle3<Real>::DistanceResult Mathematics
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     auto diff = rectangle.GetCenter() - point;
-    auto dot0 = Vector3Tools::DotProduct(diff, rectangle.GetAxis(0));
-    auto dot1 = Vector3Tools::DotProduct(diff, rectangle.GetAxis(1));
+    auto dot0 = Vector3ToolsType::DotProduct(diff, rectangle.GetAxis(0));
+    auto dot1 = Vector3ToolsType::DotProduct(diff, rectangle.GetAxis(1));
     auto s0 = -dot0;
     auto s1 = -dot1;
-    auto sqrDistance = Vector3Tools::GetLengthSquared(diff);
+    auto sqrDistance = Vector3ToolsType::GetLengthSquared(diff);
 
     if (s0 < -rectangle.GetExtent(0))
     {
@@ -97,7 +97,7 @@ typename Mathematics::DistancePoint3Rectangle3<Real>::DistanceResult Mathematics
 }
 
 template <typename Real>
-typename Mathematics::DistancePoint3Rectangle3<Real>::DistanceResult Mathematics::DistancePoint3Rectangle3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistancePoint3Rectangle3<Real>::DistanceResult Mathematics::DistancePoint3Rectangle3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

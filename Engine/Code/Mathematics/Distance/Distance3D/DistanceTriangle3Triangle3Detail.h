@@ -17,7 +17,7 @@
 #include "Mathematics/Distance/DistanceBaseDetail.h"
 
 template <typename Real>
-Mathematics::DistanceTriangle3Triangle3<Real>::DistanceTriangle3Triangle3(const Triangle3& lhsTriangle, const Triangle3& rhsTriangle) noexcept
+Mathematics::DistanceTriangle3Triangle3<Real>::DistanceTriangle3Triangle3(const Triangle3Type& lhsTriangle, const Triangle3Type& rhsTriangle) noexcept
     : ParentType{}, lhsTriangle{ lhsTriangle }, rhsTriangle{ rhsTriangle }, triangleBary0{}, triangleBary1{}
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -57,8 +57,8 @@ typename Mathematics::DistanceTriangle3Triangle3<Real>::DistanceResult Mathemati
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    Vector3 closestPoint0;
-    Vector3 closestPoint1;
+    Vector3Type closestPoint0;
+    Vector3Type closestPoint1;
 
     auto sqrDist = MathType::maxReal;
 
@@ -69,7 +69,7 @@ typename Mathematics::DistanceTriangle3Triangle3<Real>::DistanceResult Mathemati
     {
         auto center = (MathType::GetRational(1, 2)) * (lhsTriangle.GetVertex(i0) + lhsTriangle.GetVertex(i1));
         auto direction = lhsTriangle.GetVertex(i1) - lhsTriangle.GetVertex(i0);
-        auto extent = (MathType::GetRational(1, 2)) * Vector3Tools::GetLength(direction);
+        auto extent = (MathType::GetRational(1, 2)) * Vector3ToolsType::GetLength(direction);
 
         const Segment3<Real> edge{ extent, center, direction };
 
@@ -102,7 +102,7 @@ typename Mathematics::DistanceTriangle3Triangle3<Real>::DistanceResult Mathemati
     {
         auto center = (MathType::GetRational(1, 2)) * (rhsTriangle.GetVertex(i0) + rhsTriangle.GetVertex(i1));
         auto direction = rhsTriangle.GetVertex(i1) - rhsTriangle.GetVertex(i0);
-        auto extent = (MathType::GetRational(1, 2)) * Vector3Tools::GetLength(direction);
+        auto extent = (MathType::GetRational(1, 2)) * Vector3ToolsType::GetLength(direction);
 
         const Segment3<Real> edge{ extent, center, direction };
 
@@ -134,7 +134,7 @@ typename Mathematics::DistanceTriangle3Triangle3<Real>::DistanceResult Mathemati
 }
 
 template <typename Real>
-typename Mathematics::DistanceTriangle3Triangle3<Real>::DistanceResult Mathematics::DistanceTriangle3Triangle3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistanceTriangle3Triangle3<Real>::DistanceResult Mathematics::DistanceTriangle3Triangle3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

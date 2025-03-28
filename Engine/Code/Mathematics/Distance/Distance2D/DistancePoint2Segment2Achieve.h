@@ -17,7 +17,7 @@
 #include "Mathematics/Objects2D/Segment2Detail.h"
 
 template <typename Real>
-Mathematics::DistancePoint2Segment2<Real>::DistancePoint2Segment2(const Vector2& point, const Segment2& segment) noexcept
+Mathematics::DistancePoint2Segment2<Real>::DistancePoint2Segment2(const Vector2Type& point, const Segment2Type& segment) noexcept
     : ParentType{}, point{ point }, segment{ segment }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -58,9 +58,9 @@ typename Mathematics::DistancePoint2Segment2<Real>::DistanceResult Mathematics::
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     auto difference = point - segment.GetCenterPoint();
-    auto param = Vector2Tools::DotProduct(segment.GetDirection(), difference);
+    auto param = Vector2ToolsType::DotProduct(segment.GetDirection(), difference);
 
-    Vector2 rhsClosestPoint{};
+    Vector2Type rhsClosestPoint{};
     if (-segment.GetExtent() < param)
     {
         if (param < segment.GetExtent())
@@ -79,11 +79,11 @@ typename Mathematics::DistancePoint2Segment2<Real>::DistanceResult Mathematics::
 
     difference = rhsClosestPoint - point;
 
-    return DistanceResult{ Vector2Tools::GetLengthSquared(difference), MathType::GetValue(0), point, rhsClosestPoint };
+    return DistanceResult{ Vector2ToolsType::GetLengthSquared(difference), MathType::GetValue(0), point, rhsClosestPoint };
 }
 
 template <typename Real>
-typename Mathematics::DistancePoint2Segment2<Real>::DistanceResult Mathematics::DistancePoint2Segment2<Real>::GetSquared(Real t, const Vector2& lhsVelocity, const Vector2& rhsVelocity) const
+typename Mathematics::DistancePoint2Segment2<Real>::DistanceResult Mathematics::DistancePoint2Segment2<Real>::GetSquared(Real t, const Vector2Type& lhsVelocity, const Vector2Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

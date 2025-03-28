@@ -19,7 +19,7 @@
 #include "Mathematics/Objects3D/Ray3Detail.h"
 
 template <typename Real>
-Mathematics::DistanceLine3Ray3<Real>::DistanceLine3Ray3(const Line3& line, const Ray3& ray) noexcept
+Mathematics::DistanceLine3Ray3<Real>::DistanceLine3Ray3(const Line3Type& line, const Ray3Type& ray) noexcept
     : ParentType{}, line{ line }, ray{ ray }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -59,7 +59,7 @@ typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics::Dista
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const DistanceLine3Line3Tool tool{ line.GetOrigin(), line.GetDirection(), ray.GetOrigin(), ray.GetDirection() };
+    const DistanceLine3Line3ToolType tool{ line.GetOrigin(), line.GetDirection(), ray.GetOrigin(), ray.GetDirection() };
 
     const auto det = tool.GetDet();
 
@@ -97,7 +97,7 @@ typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics::Dista
 }
 
 template <typename Real>
-typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics::DistanceLine3Ray3<Real>::GetSquaredWithClosestPoints(const DistanceLine3Line3Tool& tool) const
+typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics::DistanceLine3Ray3<Real>::GetSquaredWithClosestPoints(const DistanceLine3Line3ToolType& tool) const
 {
     auto squaredDistance = tool.GetSquaredDistanceWithLhs();
 
@@ -110,7 +110,7 @@ typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics::Dista
 }
 
 template <typename Real>
-typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics::DistanceLine3Ray3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics::DistanceLine3Ray3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

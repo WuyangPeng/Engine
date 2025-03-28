@@ -16,7 +16,7 @@
 #include "Mathematics/Distance/DistanceBaseDetail.h"
 
 template <typename Real>
-Mathematics::DistancePoint3Triangle3<Real>::DistancePoint3Triangle3(const Vector3& point, const Triangle3& triangle) noexcept
+Mathematics::DistancePoint3Triangle3<Real>::DistancePoint3Triangle3(const Vector3Type& point, const Triangle3Type& triangle) noexcept
     : ParentType{}, point{ point }, triangle{ triangle }, triangleBary{}
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -59,12 +59,12 @@ typename Mathematics::DistancePoint3Triangle3<Real>::DistanceResult Mathematics:
     auto diff = triangle.GetVertex(0) - point;
     auto edge0 = triangle.GetVertex(1) - triangle.GetVertex(0);
     auto edge1 = triangle.GetVertex(2) - triangle.GetVertex(0);
-    auto edge0LengthSquared = Vector3Tools::GetLengthSquared(edge0);
-    auto edge0DotEdge1 = Vector3Tools::DotProduct(edge0, edge1);
-    auto edge1LengthSquared = Vector3Tools::GetLengthSquared(edge1);
-    auto diffDotEdge0 = Vector3Tools::DotProduct(diff, edge0);
-    auto diffDotEdge1 = Vector3Tools::DotProduct(diff, edge1);
-    auto diffLengthSquared = Vector3Tools::GetLengthSquared(diff);
+    auto edge0LengthSquared = Vector3ToolsType::GetLengthSquared(edge0);
+    auto edge0DotEdge1 = Vector3ToolsType::DotProduct(edge0, edge1);
+    auto edge1LengthSquared = Vector3ToolsType::GetLengthSquared(edge1);
+    auto diffDotEdge0 = Vector3ToolsType::DotProduct(diff, edge0);
+    auto diffDotEdge1 = Vector3ToolsType::DotProduct(diff, edge1);
+    auto diffLengthSquared = Vector3ToolsType::GetLengthSquared(diff);
     auto det = MathType::FAbs(edge0LengthSquared * edge1LengthSquared - edge0DotEdge1 * edge0DotEdge1);
     auto s = edge0DotEdge1 * diffDotEdge1 - edge1LengthSquared * diffDotEdge0;
     auto t = edge0DotEdge1 * diffDotEdge0 - edge0LengthSquared * diffDotEdge1;
@@ -286,7 +286,7 @@ typename Mathematics::DistancePoint3Triangle3<Real>::DistanceResult Mathematics:
 }
 
 template <typename Real>
-typename Mathematics::DistancePoint3Triangle3<Real>::DistanceResult Mathematics::DistancePoint3Triangle3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistancePoint3Triangle3<Real>::DistanceResult Mathematics::DistancePoint3Triangle3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

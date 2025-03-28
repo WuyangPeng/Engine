@@ -16,7 +16,7 @@
 #include "Mathematics/Distance/DistanceBaseDetail.h"
 
 template <typename Real>
-Mathematics::DistancePoint2Hyperbola2<Real>::DistancePoint2Hyperbola2(const Vector2& point, const Vector2& extent) noexcept
+Mathematics::DistancePoint2Hyperbola2<Real>::DistancePoint2Hyperbola2(const Vector2Type& point, const Vector2Type& extent) noexcept
     : ParentType{}, point{ point }, extent{ extent }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -56,8 +56,8 @@ typename Mathematics::DistancePoint2Hyperbola2<Real>::DistanceResult Mathematics
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    Vector2 extentSquared{ extent.GetX() * extent.GetX(), extent.GetY() * extent.GetY() };
-    const Vector2 reciprocalExtentSquared{ MathType::GetValue(1) / extentSquared[0], MathType::GetValue(1) / extentSquared[1] };
+    Vector2Type extentSquared{ extent.GetX() * extent.GetX(), extent.GetY() * extent.GetY() };
+    const Vector2Type reciprocalExtentSquared{ MathType::GetValue(1) / extentSquared[0], MathType::GetValue(1) / extentSquared[1] };
 
     // 初始化二分法。 与H(-a^2)= +无穷大和H(b^2)= -infinity不相关，
     // 因此我们只需要用相应的有符号数字初始化函数值。
@@ -97,16 +97,16 @@ typename Mathematics::DistancePoint2Hyperbola2<Real>::DistanceResult Mathematics
         }
     }
 
-    const Vector2 closest{ point.GetX() / (MathType::GetValue(1) + tRoot * reciprocalExtentSquared.GetX()),
+    const Vector2Type closest{ point.GetX() / (MathType::GetValue(1) + tRoot * reciprocalExtentSquared.GetX()),
                            point.GetY() / (MathType::GetValue(1) - tRoot * reciprocalExtentSquared.GetY()) };
 
     const auto diff = point - closest;
 
-    return DistanceResult{ Vector2Tools::GetLengthSquared(diff), MathType::GetValue(0), point, closest };
+    return DistanceResult{ Vector2ToolsType::GetLengthSquared(diff), MathType::GetValue(0), point, closest };
 }
 
 template <typename Real>
-Real Mathematics::DistancePoint2Hyperbola2<Real>::GetHyperbola(Real t, const Vector2& reciprocalExtentSquared) const
+Real Mathematics::DistancePoint2Hyperbola2<Real>::GetHyperbola(Real t, const Vector2Type& reciprocalExtentSquared) const
 {
     const auto ratio0 = point.GetX() / (MathType::GetValue(1) + t * reciprocalExtentSquared[0]);
     const auto ratio1 = point.GetY() / (MathType::GetValue(1) - t * reciprocalExtentSquared[1]);
@@ -115,7 +115,7 @@ Real Mathematics::DistancePoint2Hyperbola2<Real>::GetHyperbola(Real t, const Vec
 }
 
 template <typename Real>
-typename Mathematics::DistancePoint2Hyperbola2<Real>::DistanceResult Mathematics::DistancePoint2Hyperbola2<Real>::GetSquared(Real t, const Vector2& lhsVelocity, [[maybe_unused]] const Vector2& rhsVelocity) const
+typename Mathematics::DistancePoint2Hyperbola2<Real>::DistanceResult Mathematics::DistancePoint2Hyperbola2<Real>::GetSquared(Real t, const Vector2Type& lhsVelocity, [[maybe_unused]] const Vector2Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

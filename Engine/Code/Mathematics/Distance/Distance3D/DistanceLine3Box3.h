@@ -24,44 +24,44 @@ namespace Mathematics
     {
     public:
         using ClassType = DistanceLine3Box3<Real>;
-        using Vector3 = Vector3<Real>;
-        using ParentType = DistanceBase<Real, Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3Type>;
 
-        using Line3 = Line3<Real>;
-        using Box3 = Box3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Line3Type = Line3<Real>;
+        using Box3Type = Box3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
         using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistanceLine3Box3(const Line3& line, const Box3& box) noexcept;
+        DistanceLine3Box3(const Line3Type& line, const Box3Type& box) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         // 对象访问。
-        NODISCARD Line3 GetLine() const noexcept;
-        NODISCARD Box3 GetBox() const noexcept;
+        NODISCARD Line3Type GetLine() const noexcept;
+        NODISCARD Box3Type GetBox() const noexcept;
 
         // 静态距离查询。
         NODISCARD DistanceResult GetSquared() const override;
 
         // 动态距离查询的函数计算。
-        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
     private:
-        NODISCARD Real Face(int i0, int i1, int i2, const Vector3& dir, const Vector3& pointMinusExtent, Real& lineParameter, Vector3& point) const;
+        NODISCARD Real Face(int i0, int i1, int i2, const Vector3Type& dir, const Vector3Type& pointMinusExtent, Real& lineParameter, Vector3Type& point) const;
 
-        NODISCARD Real CaseNoZeros(const Vector3& direction, Real& lineParameter, Vector3& point) const;
+        NODISCARD Real CaseNoZeros(const Vector3Type& direction, Real& lineParameter, Vector3Type& point) const;
 
-        NODISCARD Real Case0(int i0, int i1, int i2, const Vector3& direction, Real& lineParameter, Vector3& point) const;
+        NODISCARD Real Case0(int i0, int i1, int i2, const Vector3Type& direction, Real& lineParameter, Vector3Type& point) const;
 
-        NODISCARD Real Case00(int i0, int i1, int i2, const Vector3& direction, Real& lineParameter, Vector3& point) const;
+        NODISCARD Real Case00(int i0, int i1, int i2, const Vector3Type& direction, Real& lineParameter, Vector3Type& point) const;
 
-        NODISCARD Real Case000(Vector3& point) const;
+        NODISCARD Real Case000(Vector3Type& point) const;
 
     private:
-        Line3 line;
-        Box3 box;
+        Line3Type line;
+        Box3Type box;
     };
 
     using DistanceLine3Box3F = DistanceLine3Box3<float>;

@@ -22,34 +22,34 @@ namespace Mathematics
     {
     public:
         using ClassType = DistancePoint3Triangle3<Real>;
-        using Vector3 = Vector3<Real>;
-        using ParentType = DistanceBase<Real, Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3Type>;
 
-        using Triangle3 = Triangle3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Triangle3Type = Triangle3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
         using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistancePoint3Triangle3(const Vector3& point, const Triangle3& triangle) noexcept;
+        DistancePoint3Triangle3(const Vector3Type& point, const Triangle3Type& triangle) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Vector3 GetPoint() const noexcept;
-        NODISCARD Triangle3 GetTriangle() const noexcept;
+        NODISCARD Vector3Type GetPoint() const noexcept;
+        NODISCARD Triangle3Type GetTriangle() const noexcept;
 
         NODISCARD DistanceResult GetSquared() const override;
 
-        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
         // 有关最接近的三角形点的信息。
         NODISCARD Real GetTriangleBary(int index) const;
 
     private:
-        Vector3 point;
-        Triangle3 triangle;
+        Vector3Type point;
+        Triangle3Type triangle;
 
-        mutable Vector3 triangleBary;
+        mutable Vector3Type triangleBary;
     };
 
     using DistancePoint3Triangle3F = DistancePoint3Triangle3<float>;

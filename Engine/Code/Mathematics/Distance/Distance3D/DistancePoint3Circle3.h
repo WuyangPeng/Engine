@@ -23,32 +23,32 @@ namespace Mathematics
     {
     public:
         using ClassType = DistancePoint3Circle3<Real>;
-        using Vector3 = Vector3<Real>;
-        using ParentType = DistanceBase<Real, Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3Type>;
 
-        using Circle3 = Circle3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Circle3Type = Circle3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
         using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistancePoint3Circle3(const Vector3& point, const Circle3& circle) noexcept;
+        DistancePoint3Circle3(const Vector3Type& point, const Circle3Type& circle) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Vector3 GetPoint() const noexcept;
-        NODISCARD Circle3 GetCircle() const noexcept;
+        NODISCARD Vector3Type GetPoint() const noexcept;
+        NODISCARD Circle3Type GetCircle() const noexcept;
 
         /// 静态距离查询。 计算从点P到圆的距离。 当P在法线C + t * N上，其中C是圆心并且N是包含该圆的平面的法线时，则所有圆点都与P等距。
         /// 在这种情况下，返回点为C + r * U，其中U是垂直于N的向量。
         NODISCARD DistanceResult GetSquared() const override;
 
         // 动态距离查询的函数计算。
-        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
     private:
-        Vector3 point;
-        Circle3 circle;
+        Vector3Type point;
+        Circle3Type circle;
     };
 
     using DistancePoint3Circle3F = DistancePoint3Circle3<float>;

@@ -23,31 +23,31 @@ namespace Mathematics
     {
     public:
         using ClassType = DistanceLine2Line2<Real>;
-        using Vector2 = Vector2<Real>;
-        using ParentType = DistanceBase<Real, Vector2>;
+        using Vector2Type = Vector2<Real>;
+        using ParentType = DistanceBase<Real, Vector2Type>;
 
-        using Line2 = Line2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
+        using Line2Type = Line2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
         using MathType = typename ParentType::MathType;
         using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistanceLine2Line2(const Line2& lhsLine, const Line2& rhsLine) noexcept;
+        DistanceLine2Line2(const Line2Type& lhsLine, const Line2Type& rhsLine) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Line2 GetLhsLine() const noexcept;
-        NODISCARD Line2 GetRhsLine() const noexcept;
+        NODISCARD Line2Type GetLhsLine() const noexcept;
+        NODISCARD Line2Type GetRhsLine() const noexcept;
 
         // æ≤Ã¨æ‡¿Î≤È—Ø°£
         NODISCARD DistanceResult GetSquared() const override;
 
         // ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£
-        NODISCARD DistanceResult GetSquared(Real t, const Vector2& lhsVelocity, const Vector2& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector2Type& lhsVelocity, const Vector2Type& rhsVelocity) const override;
 
     private:
-        Line2 lhsLine;
-        Line2 rhsLine;
+        Line2Type lhsLine;
+        Line2Type rhsLine;
     };
 
     using DistanceLine2Line2F = DistanceLine2Line2<float>;

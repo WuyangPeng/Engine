@@ -17,7 +17,7 @@
 #include "Mathematics/Objects2D/Ray2Detail.h"
 
 template <typename Real>
-Mathematics::DistanceRay2Ray2<Real>::DistanceRay2Ray2(const Ray2& lhsRay, const Ray2& rhsRay) noexcept
+Mathematics::DistanceRay2Ray2<Real>::DistanceRay2Ray2(const Ray2Type& lhsRay, const Ray2Type& rhsRay) noexcept
     : lhsRay{ lhsRay }, rhsRay{ rhsRay }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -57,7 +57,7 @@ typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::Distan
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const DistanceLine2Line2Tool tool{ lhsRay.GetOrigin(),
+    const DistanceLine2Line2ToolType tool{ lhsRay.GetOrigin(),
                                        lhsRay.GetDirection(),
                                        rhsRay.GetOrigin(),
                                        rhsRay.GetDirection() };
@@ -162,7 +162,7 @@ typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::Distan
 }
 
 template <typename Real>
-typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::DistanceRay2Ray2<Real>::GetSquaredWithClosestPointsIsOrigin(const DistanceLine2Line2Tool& tool) const
+typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::DistanceRay2Ray2<Real>::GetSquaredWithClosestPointsIsOrigin(const DistanceLine2Line2ToolType& tool) const
 {
     return DistanceResult{ MathType::GetNumericalRoundOffNonnegative(tool.GetOriginDifferenceSquaredLength()),
                            MathType::GetValue(0),
@@ -171,7 +171,7 @@ typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::Distan
 }
 
 template <typename Real>
-typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::DistanceRay2Ray2<Real>::GetSquaredWithClosestPointsIsLhs(const DistanceLine2Line2Tool& tool) const
+typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::DistanceRay2Ray2<Real>::GetSquaredWithClosestPointsIsLhs(const DistanceLine2Line2ToolType& tool) const
 {
     const auto squaredDistance = tool.GetSquaredDistanceWithLhs();
 
@@ -179,7 +179,7 @@ typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::Distan
 }
 
 template <typename Real>
-typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::DistanceRay2Ray2<Real>::GetSquaredWithClosestPointsIsRhs(const DistanceLine2Line2Tool& tool) const
+typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::DistanceRay2Ray2<Real>::GetSquaredWithClosestPointsIsRhs(const DistanceLine2Line2ToolType& tool) const
 {
     const auto squaredDistance = tool.GetSquaredDistanceWithRhs();
 
@@ -187,7 +187,7 @@ typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::Distan
 }
 
 template <typename Real>
-typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::DistanceRay2Ray2<Real>::GetSquared(Real t, const Vector2& lhsVelocity, const Vector2& rhsVelocity) const
+typename Mathematics::DistanceRay2Ray2<Real>::DistanceResult Mathematics::DistanceRay2Ray2<Real>::GetSquared(Real t, const Vector2Type& lhsVelocity, const Vector2Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
