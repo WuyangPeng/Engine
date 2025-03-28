@@ -52,7 +52,7 @@ void Mathematics::StaticTestIntersectorRay2Segment2<Real>::Test()
     {
         // 计算线段segment中心相对于射线ray的位置。
         auto difference = segment.GetCenterPoint() - ray.GetOrigin();
-        auto dotProduct = Vector2Tools::DotProduct(ray.GetDirection(), difference);
+        auto dotProduct = Vector2ToolsType::DotProduct(ray.GetDirection(), difference);
 
         // 计算线段相对于射线方向的最右点的位置。
         auto tmax = dotProduct + segment.GetExtent();
