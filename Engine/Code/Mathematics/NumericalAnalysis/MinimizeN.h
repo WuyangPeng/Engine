@@ -55,7 +55,7 @@ namespace Mathematics
         NODISCARD MinimizeNDataType GetMinimum(const Container& begin, const Container& end, const Container& initial) const;
 
     private:
-        using MinimizeNGetMinimum = MinimizeNGetMinimum<Real, UserDataType>;
+        using MinimizeNGetMinimumType = MinimizeNGetMinimum<Real, UserDataType>;
 
     private:
         int dimensions;

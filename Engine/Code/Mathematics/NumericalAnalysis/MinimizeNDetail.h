@@ -49,7 +49,7 @@ typename Mathematics::MinimizeN<Real, UserDataType>::MinimizeNDataType Mathemati
     MATHEMATICS_CLASS_IS_VALID_1;
 
     // ³õÊ¼²Â²â¡£
-    MinimizeNGetMinimum minimizeNGetMinimum{ dimensions, initial, function, userData, begin, end };
+    MinimizeNGetMinimumType minimizeNGetMinimum{ dimensions, initial, function, userData, begin, end };
 
     for (auto iter = 0; iter < maxIterations; ++iter)
     {
