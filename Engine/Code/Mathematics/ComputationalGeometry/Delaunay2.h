@@ -75,8 +75,8 @@ namespace Mathematics
     private:
         using Triangle = ETManifoldMesh::Triangle;
         using TriangleSharedPtr = std::shared_ptr<Triangle>;
-        using Query2 = Query2<Real>;
-        using Query2SharedPtr = std::shared_ptr<Query2>;
+        using Query2Type = Query2<Real>;
+        using Query2SharedPtr = std::shared_ptr<Query2Type>;
 
         NODISCARD bool GetContainingTriangle(int i, const Triangle& tri) const;
 

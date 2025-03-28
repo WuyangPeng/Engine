@@ -123,7 +123,7 @@ void Mathematics::Delaunay3<Real>::Init()
         else
         {
             expand = Math<Real>::GetValue(1);
-            query = std::make_shared<Query3>(sVertices);
+            query = std::make_shared<Query3Type>(sVertices);
         }
 
         scale *= expand;
@@ -677,7 +677,7 @@ void Mathematics::Delaunay3<Real>::LoadFile(const String& filename)
         }
         case QueryType::Real:
         {
-            query = std::make_shared<Query3>(sVertices);
+            query = std::make_shared<Query3Type>(sVertices);
             break;
         }
         case QueryType::Filtered:

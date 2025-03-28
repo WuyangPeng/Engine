@@ -77,8 +77,8 @@ namespace Mathematics
     private:
         using Tetrahedron = TSManifoldMesh::Tetrahedron;
         using TetrahedronSharedPtr = std::shared_ptr<Tetrahedron>;
-        using Query3 = Query3<Real>;
-        using Query3SharedPtr = std::shared_ptr<Query3>;
+        using Query3Type = Query3<Real>;
+        using Query3SharedPtr = std::shared_ptr<Query3Type>;
 
     private:
         NODISCARD bool GetContainingTetrahedron(int i, const Tetrahedron& tetra) const;

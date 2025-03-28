@@ -113,7 +113,7 @@ void Mathematics::Delaunay2<Real>::Init()
         else
         {
             expand = Math<Real>::GetValue(1);
-            query = std::make_shared<Query2>(sVertices);
+            query = std::make_shared<Query2Type>(sVertices);
         }
 
         scale *= expand;
@@ -581,7 +581,7 @@ void Mathematics::Delaunay2<Real>::LoadFile(const String& filename)
         }
         case QueryType::Real:
         {
-            query = std::make_shared<Query2>(sVertices);
+            query = std::make_shared<Query2Type>(sVertices);
             break;
         }
         case QueryType::Filtered:
