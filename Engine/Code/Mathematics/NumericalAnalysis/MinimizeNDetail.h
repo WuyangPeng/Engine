@@ -44,7 +44,7 @@ bool Mathematics::MinimizeN<Real, UserDataType>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real, typename UserDataType>
-typename Mathematics::MinimizeN<Real, UserDataType>::MinimizeNData Mathematics::MinimizeN<Real, UserDataType>::GetMinimum(const Container& begin, const Container& end, const Container& initial) const
+typename Mathematics::MinimizeN<Real, UserDataType>::MinimizeNDataType Mathematics::MinimizeN<Real, UserDataType>::GetMinimum(const Container& begin, const Container& end, const Container& initial) const
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
