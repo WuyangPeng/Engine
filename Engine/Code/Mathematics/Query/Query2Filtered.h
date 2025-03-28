@@ -50,10 +50,10 @@ namespace Mathematics
         NODISCARD CircumcircleQueryType ToCircumcircle(const Vector2& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const override;
 
     private:
-        using Query2Rational = Query2Rational<Real>;
+        using Query2RationalType = Query2Rational<Real>;
 
     private:
-        Query2Rational rationalQuery;
+        Query2RationalType rationalQuery;
         Real uncertainty;
     };
 
