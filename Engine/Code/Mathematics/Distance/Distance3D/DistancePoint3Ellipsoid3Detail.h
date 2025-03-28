@@ -17,7 +17,7 @@
 #include "Mathematics/Distance/DistanceBaseDetail.h"
 
 template <typename Real>
-Mathematics::DistancePoint3Ellipsoid3<Real>::DistancePoint3Ellipsoid3(const Vector3& point, const Ellipsoid3& ellipsoid) noexcept
+Mathematics::DistancePoint3Ellipsoid3<Real>::DistancePoint3Ellipsoid3(const Vector3Type& point, const Ellipsoid3Type& ellipsoid) noexcept
     : ParentType{}, point{ point }, ellipsoid{ ellipsoid }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -58,9 +58,9 @@ typename Mathematics::DistancePoint3Ellipsoid3<Real>::DistanceResult Mathematics
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     const auto diff = point - ellipsoid.GetCenter();
-    const Vector3 dot{ Vector3Tools::DotProduct(diff, ellipsoid.GetAxis0()),
-                       Vector3Tools::DotProduct(diff, ellipsoid.GetAxis1()),
-                       Vector3Tools::DotProduct(diff, ellipsoid.GetAxis2()) };
+    const Vector3Type dot{ Vector3ToolsType::DotProduct(diff, ellipsoid.GetAxis0()),
+                       Vector3ToolsType::DotProduct(diff, ellipsoid.GetAxis1()),
+                       Vector3ToolsType::DotProduct(diff, ellipsoid.GetAxis2()) };
 
     const DistancePoint3Ellipsoid3Tool<Real> point3Ellipsoid3SquaredDistance{ ellipsoid.GetExtent0(), ellipsoid.GetExtent1(), ellipsoid.GetExtent2(), dot, this->GetZeroThreshold() };
 
@@ -74,7 +74,7 @@ typename Mathematics::DistancePoint3Ellipsoid3<Real>::DistanceResult Mathematics
 }
 
 template <typename Real>
-typename Mathematics::DistancePoint3Ellipsoid3<Real>::DistanceResult Mathematics::DistancePoint3Ellipsoid3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistancePoint3Ellipsoid3<Real>::DistanceResult Mathematics::DistancePoint3Ellipsoid3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
