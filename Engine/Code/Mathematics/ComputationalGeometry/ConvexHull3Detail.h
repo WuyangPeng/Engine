@@ -100,7 +100,7 @@ void Mathematics::ConvexHull3<Real>::Init()
         else
         {
             expand = MathType::GetValue(1);
-            query = std::make_shared<Query3>(sVertices);
+            query = std::make_shared<Query3Type>(sVertices);
         }
 
         for (auto i = 0; i < mNumVertices; ++i)
@@ -321,7 +321,7 @@ void Mathematics::ConvexHull3<Real>::LoadFile(const String& filename)
         }
         case QueryType::Real:
         {
-            query = std::make_shared<Query3>(sVertices);
+            query = std::make_shared<Query3Type>(sVertices);
             break;
         }
         case QueryType::Filtered:
@@ -486,7 +486,7 @@ Mathematics::ConvexHull3<Real>::Triangle::Triangle(int32_t v0, int32_t v1, int32
 }
 
 template <typename Real>
-Mathematics::PlaneQueryType Mathematics::ConvexHull3<Real>::Triangle::GetSign(int32_t i, const Query3& query)
+Mathematics::PlaneQueryType Mathematics::ConvexHull3<Real>::Triangle::GetSign(int32_t i, const Query3Type& query)
 {
     if (i != time)
     {

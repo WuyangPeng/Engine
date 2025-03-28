@@ -54,8 +54,8 @@ namespace Mathematics
     private:
         class Triangle;
 
-        using Query3 = Query3<Real>;
-        using Query3SharedPtr = std::shared_ptr<Query3>;
+        using Query3Type = Query3<Real>;
+        using Query3SharedPtr = std::shared_ptr<Query3Type>;
         using TriangleSharedPtr = std::shared_ptr<Triangle>;
         using TriangleWeakPtr = std::weak_ptr<Triangle>;
 
@@ -65,7 +65,7 @@ namespace Mathematics
         public:
             Triangle(int32_t v0, int32_t v1, int32_t v2);
 
-            NODISCARD PlaneQueryType GetSign(int32_t i, const Query3& query);
+            NODISCARD PlaneQueryType GetSign(int32_t i, const Query3Type& query);
             void AttachTo(const TriangleSharedPtr& adj0, const TriangleSharedPtr& adj1, const TriangleSharedPtr& adj2);
             NODISCARD int32_t DetachFrom(int32_t adjIndex, const TriangleSharedPtr& adj);
 

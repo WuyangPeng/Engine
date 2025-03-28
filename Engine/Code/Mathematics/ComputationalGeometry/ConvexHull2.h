@@ -51,8 +51,8 @@ namespace Mathematics
     private:
         class Edge;
 
-        using Query2 = Query2<Real>;
-        using Query2SharedPtr = std::shared_ptr<Query2>;
+        using Query2Type = Query2<Real>;
+        using Query2SharedPtr = std::shared_ptr<Query2Type>;
         using EdgeSharedPtr = std::shared_ptr<Edge>;
         using EdgeWeakPtr = std::weak_ptr<Edge>;
 
@@ -62,7 +62,7 @@ namespace Mathematics
         public:
             Edge(int32_t v0, int32_t v1);
 
-            NODISCARD LineQueryType GetSign(int32_t i, const Query2& query);
+            NODISCARD LineQueryType GetSign(int32_t i, const Query2Type& query);
             void Insert(const EdgeSharedPtr& adj0, const EdgeSharedPtr& adj1);
             void DeleteSelf();
             void DeleteAll();

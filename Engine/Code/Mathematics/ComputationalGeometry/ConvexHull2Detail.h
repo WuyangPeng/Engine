@@ -84,7 +84,7 @@ void Mathematics::ConvexHull2<Real>::Init()
         else
         {
             expand = MathType::GetValue(1);
-            query = std::make_shared<Query2>(sVertices);
+            query = std::make_shared<Query2Type>(sVertices);
         }
 
         for (auto i = 0; i < mNumVertices; ++i)
@@ -257,7 +257,7 @@ void Mathematics::ConvexHull2<Real>::LoadFile(const String& filename)
         }
         case QueryType::Real:
         {
-            query = std::make_shared<Query2>(sVertices);
+            query = std::make_shared<Query2Type>(sVertices);
             break;
         }
         case QueryType::Filtered:
@@ -371,7 +371,7 @@ Mathematics::ConvexHull2<Real>::Edge::Edge(int32_t v0, int32_t v1)
 }
 
 template <typename Real>
-Mathematics::LineQueryType Mathematics::ConvexHull2<Real>::Edge::GetSign(int32_t i, const Query2& query)
+Mathematics::LineQueryType Mathematics::ConvexHull2<Real>::Edge::GetSign(int32_t i, const Query2Type& query)
 {
     if (i != time)
     {
