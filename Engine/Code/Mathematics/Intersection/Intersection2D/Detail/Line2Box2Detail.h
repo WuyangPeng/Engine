@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 
 template <typename Real>
-Mathematics::Line2Box2<Real>::Line2Box2(Real t0, Real t1, const Vector2& origin, const Vector2& direction, const Box2& box, bool solid)
+Mathematics::Line2Box2<Real>::Line2Box2(Real t0, Real t1, const Vector2Type& origin, const Vector2Type& direction, const Box2Type& box, bool solid)
     : rootCount{}, parameter{}, intersectionType{ IntersectionType::Empty }
 {
     DoClipping(t0, t1, origin, direction, box, solid);
@@ -58,12 +58,12 @@ Mathematics::IntersectionType Mathematics::Line2Box2<Real>::GetIntersects() cons
 }
 
 template <typename Real>
-void Mathematics::Line2Box2<Real>::DoClipping(Real t0, Real t1, const Vector2& origin, const Vector2& direction, const Box2& box, bool solid)
+void Mathematics::Line2Box2<Real>::DoClipping(Real t0, Real t1, const Vector2Type& origin, const Vector2Type& direction, const Box2Type& box, bool solid)
 {
     /// 将线性分量转换为盒子坐标。
     auto diff = origin - box.GetCenter();
-    const Vector2 boxOrigin{ Vector2Tools::DotProduct(diff, box.GetAxis0()), Vector2Tools::DotProduct(diff, box.GetAxis1()) };
-    const Vector2 boxDirection{ Vector2Tools::DotProduct(direction, box.GetAxis0()), Vector2Tools::DotProduct(direction, box.GetAxis1()) };
+    const Vector2Type boxOrigin{ Vector2ToolsType::DotProduct(diff, box.GetAxis0()), Vector2ToolsType::DotProduct(diff, box.GetAxis1()) };
+    const Vector2Type boxDirection{ Vector2ToolsType::DotProduct(direction, box.GetAxis0()), Vector2ToolsType::DotProduct(direction, box.GetAxis1()) };
 
     const ClipType saveClipType{ t0, t1 };
 

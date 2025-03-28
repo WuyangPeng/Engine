@@ -16,7 +16,7 @@
 #include "Mathematics/Distance/Distance2D/DistancePoint2Box2Detail.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorBox2Circle2<Real>::DynamicFindIntersectorBox2Circle2(const Box2& box, const Circle2& circle, Real tmax, const Vector2& lhsVelocity, const Vector2& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorBox2Circle2<Real>::DynamicFindIntersectorBox2Circle2(const Box2Type& box, const Circle2Type& circle, Real tmax, const Vector2Type& lhsVelocity, const Vector2Type& rhsVelocity, const Real epsilon)
     : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, box{ box }, circle{ circle }, contactPoint{}
 {
     Find();

@@ -19,7 +19,7 @@
 #include "Mathematics/Objects2D/Circle2Detail.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorCircle2Circle2<Real>::StaticFindIntersectorCircle2Circle2(const Circle2& lhsCircle, const Circle2& rhsCircle, const Real epsilon)
+Mathematics::StaticFindIntersectorCircle2Circle2<Real>::StaticFindIntersectorCircle2Circle2(const Circle2Type& lhsCircle, const Circle2Type& rhsCircle, const Real epsilon)
     : ParentType{ epsilon }, lhsCircle{ lhsCircle }, rhsCircle{ rhsCircle }, point{}
 {
     Find();
@@ -51,7 +51,7 @@ void Mathematics::StaticFindIntersectorCircle2Circle2<Real>::Find()
     // 如果 |R0-R1| < |U| < |R0+R1|，那么两个圆相交有两个交点
 
     auto centerDifference = rhsCircle.GetCenter() - lhsCircle.GetCenter();
-    auto centerDifferenceSquaredLength = Vector2Tools::GetLengthSquared(centerDifference);
+    auto centerDifferenceSquaredLength = Vector2ToolsType::GetLengthSquared(centerDifference);
     auto lhsRadius = lhsCircle.GetRadius();
     auto rhsRadius = rhsCircle.GetRadius();
     auto lhsRadiusMinusRhsRadius = lhsRadius - rhsRadius;
@@ -93,12 +93,12 @@ void Mathematics::StaticFindIntersectorCircle2Circle2<Real>::Find()
                 discriminant = MathType::GetValue(0);
             }
             auto discriminantSqrt = MathType::Sqrt(discriminant);
-            const auto perp = Vector2Tools::GetPerp(centerDifference);
+            const auto perp = Vector2ToolsType::GetPerp(centerDifference);
 
             auto lhsPoint = amendmentCenter - discriminantSqrt * perp;
             auto rhsPoint = amendmentCenter + discriminantSqrt * perp;
 
-            if (Vector2Tools::Approximate(lhsPoint, rhsPoint, epsilon))
+            if (Vector2ToolsType::Approximate(lhsPoint, rhsPoint, epsilon))
             {
                 point.emplace_back((lhsPoint + rhsPoint) / MathType::GetValue(2));
             }

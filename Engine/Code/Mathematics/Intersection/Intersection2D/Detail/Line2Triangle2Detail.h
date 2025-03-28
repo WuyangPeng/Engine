@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 
 template <typename Real>
-Mathematics::Line2Triangle2<Real>::Line2Triangle2(const Vector2& origin, const Vector2& direction, const Triangle2& triangle)
+Mathematics::Line2Triangle2<Real>::Line2Triangle2(const Vector2Type& origin, const Vector2Type& direction, const Triangle2Type& triangle)
     : distance{}, sign{}, positive{}, negative{}, zero{}, origin{ origin }, direction{ direction }, triangle{ triangle }
 {
     TriangleLineRelations();
@@ -57,7 +57,7 @@ void Mathematics::Line2Triangle2<Real>::TriangleLineRelations()
     for (int i = 0; i < size; ++i)
     {
         auto diff = vertex.at(i) - origin;
-        distance.at(i) = Vector2Tools::DotPerp(diff, direction);
+        distance.at(i) = Vector2ToolsType::DotPerp(diff, direction);
         if (MathType::GetZeroTolerance() < distance.at(i))
         {
             sign.at(i) = NumericalValueSymbol::Positive;
@@ -90,7 +90,7 @@ Mathematics::Vector2<Real> Mathematics::Line2Triangle2<Real>::GetInterval() cons
     for (auto i = 0; i < size; ++i)
     {
         auto diff = vertex.at(i) - origin;
-        proj.at(i) = Vector2Tools::DotProduct(direction, diff);
+        proj.at(i) = Vector2ToolsType::DotProduct(direction, diff);
     }
 
     using System::operator*;
@@ -98,7 +98,7 @@ Mathematics::Vector2<Real> Mathematics::Line2Triangle2<Real>::GetInterval() cons
     // 用线计算三角形边缘的横向交点。
 
     auto quantity = 0;
-    Vector2 param{};
+    Vector2Type param{};
     for (auto i0 = 2, i1 = 0; i1 < size; i0 = i1++)
     {
         if (sign.at(i0) * System::EnumCastUnderlying(sign.at(i1)) < 0)

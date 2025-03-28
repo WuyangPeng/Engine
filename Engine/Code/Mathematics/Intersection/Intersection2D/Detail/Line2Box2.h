@@ -23,22 +23,22 @@ namespace Mathematics
         using ClassType = Line2Box2<Real>;
 
         using MathType = Math<Real>;
-        using Vector2 = Vector2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
-        using Parameter = std::array<Vector2, 2>;
-        using Box2 = Box2<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
+        using Parameter = std::array<Vector2Type, 2>;
+        using Box2Type = Box2<Real>;
 
     public:
-        Line2Box2(Real t0, Real t1, const Vector2& origin, const Vector2& direction, const Box2& box, bool solid);
+        Line2Box2(Real t0, Real t1, const Vector2Type& origin, const Vector2Type& direction, const Box2Type& box, bool solid);
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD int GetRootCount() const noexcept;
-        NODISCARD Vector2 GetParameter(int index) const;
+        NODISCARD Vector2Type GetParameter(int index) const;
         NODISCARD IntersectionType GetIntersects() const noexcept;
 
     private:
-        void DoClipping(Real t0, Real t1, const Vector2& origin, const Vector2& direction, const Box2& box, bool solid);
+        void DoClipping(Real t0, Real t1, const Vector2Type& origin, const Vector2Type& direction, const Box2Type& box, bool solid);
 
         struct ClipType final
         {

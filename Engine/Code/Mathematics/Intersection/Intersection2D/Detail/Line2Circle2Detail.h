@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 
 template <typename Real>
-Mathematics::Line2Circle2<Real>::Line2Circle2(const Vector2& origin, const Vector2& direction, const Vector2& center, Real radius)
+Mathematics::Line2Circle2<Real>::Line2Circle2(const Vector2Type& origin, const Vector2Type& direction, const Vector2Type& center, Real radius)
     : rootCount{}, parameter{}, intersects{}
 {
     Find(origin, direction, center, radius);
@@ -71,7 +71,7 @@ bool Mathematics::Line2Circle2<Real>::IsIntersects() const noexcept
 }
 
 template <typename Real>
-void Mathematics::Line2Circle2<Real>::Find(const Vector2& origin, const Vector2& direction, const Vector2& center, Real radius)
+void Mathematics::Line2Circle2<Real>::Find(const Vector2Type& origin, const Vector2Type& direction, const Vector2Type& center, Real radius)
 {
     /// 直线P + t * D 与圆|X - C| = Real。 线方向是单位长度。 t值是二次方程式的根：
     ///   0 = |t * D + P - C|^2 - Real^2
@@ -80,8 +80,8 @@ void Mathematics::Line2Circle2<Real>::Find(const Vector2& origin, const Vector2&
     /// 如果返回两个根，则顺序为T [0] <T [1]。
 
     auto diff = origin - center;
-    auto a0 = Vector2Tools::GetLengthSquared(diff) - radius * radius;
-    auto a1 = Vector2Tools::DotProduct(direction, diff);
+    auto a0 = Vector2ToolsType::GetLengthSquared(diff) - radius * radius;
+    auto a1 = Vector2ToolsType::DotProduct(direction, diff);
     auto discr = a1 * a1 - a0;
     if (discr > MathType::GetZeroTolerance())
     {

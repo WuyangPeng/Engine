@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::DynamicTestIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1, Real tmax, const Vector2& velocity0, const Vector2& velocity1, const Real epsilon)
+Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::DynamicTestIntersectorTriangle2Triangle2(const Triangle2Type& triangle0, const Triangle2Type& triangle1, Real tmax, const Vector2Type& velocity0, const Vector2Type& velocity1, const Real epsilon)
     : ParentType{ tmax, velocity0, velocity1, epsilon }, triangle0{ triangle0 }, triangle1{ triangle1 }
 {
     Test();
@@ -70,9 +70,9 @@ void Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::Test()
         const auto& vertor2 = vertex0.at(i2);
 
         // 测试轴 V0[i1] + t*perp(V0[i2]-V0[i1]), perp(x,y) = (y,-x).
-        const Vector2 axis{ vertor2.GetY() - vertor1.GetY(), vertor1.GetX() - vertor2.GetX() };
+        const Vector2Type axis{ vertor2.GetY() - vertor1.GetY(), vertor1.GetX() - vertor2.GetX() };
 
-        const auto speed = Vector2Tools::DotProduct(axis, velocityDiff);
+        const auto speed = Vector2ToolsType::DotProduct(axis, velocityDiff);
         const auto cfg0 = ComputeTwo(vertex0, axis, i0, i1, i2);
         const auto cfg1 = ComputeThree(vertex1, axis, vertor1);
 
@@ -92,8 +92,8 @@ void Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::Test()
 
         // 测试轴 V1[i1] + t*perp(V1[i2]-V1[i1]), perp(x,y) = (y,-x).
 
-        const Vector2 axis{ vertor2.GetY() - vertor1.GetY(), vertor1.GetX() - vertor2.GetX() };
-        const auto speed = Vector2Tools::DotProduct(axis, velocityDiff);
+        const Vector2Type axis{ vertor2.GetY() - vertor1.GetY(), vertor1.GetX() - vertor2.GetX() };
+        const auto speed = Vector2ToolsType::DotProduct(axis, velocityDiff);
 
         const auto cfg1 = ComputeTwo(vertex1, axis, i0, i1, i2);
         const auto cfg0 = ComputeThree(vertex0, axis, vertor1);
@@ -111,26 +111,26 @@ void Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::Test()
 }
 
 template <typename Real>
-typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::Configuration Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::ComputeTwo(const Intersection& vertex, const Vector2& axis, int i0, int i1, int i2)
+typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::Configuration Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::ComputeTwo(const Intersection& vertex, const Vector2Type& axis, int i0, int i1, int i2)
 {
     Configuration cfg{};
 
     cfg.projectionMap = ProjectionMap::M12;
     cfg.index = decltype(cfg.index){ i0, i1, i2 };
-    cfg.min = Vector2Tools::DotProduct(axis, (vertex.at(i0) - vertex.at(i1)));
+    cfg.min = Vector2ToolsType::DotProduct(axis, (vertex.at(i0) - vertex.at(i1)));
     cfg.max = MathType::GetValue(0);
 
     return cfg;
 }
 
 template <typename Real>
-typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::Configuration Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::ComputeThree(const Intersection& vertex, const Vector2& axis, const Vector2& point)
+typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::Configuration Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::ComputeThree(const Intersection& vertex, const Vector2Type& axis, const Vector2Type& point)
 {
     Configuration cfg{};
 
-    const auto d0 = Vector2Tools::DotProduct(axis, (vertex.at(0) - point));
-    const auto d1 = Vector2Tools::DotProduct(axis, (vertex.at(1) - point));
-    const auto d2 = Vector2Tools::DotProduct(axis, (vertex.at(2) - point));
+    const auto d0 = Vector2ToolsType::DotProduct(axis, (vertex.at(0) - point));
+    const auto d1 = Vector2ToolsType::DotProduct(axis, (vertex.at(1) - point));
+    const auto d2 = Vector2ToolsType::DotProduct(axis, (vertex.at(2) - point));
 
     /// 每当映射值为M12或M21时，请确保m_aiIndex[...]是（0,1,2）的偶数排列。 这需要确保重叠边缘的交点得到正确计算。
 

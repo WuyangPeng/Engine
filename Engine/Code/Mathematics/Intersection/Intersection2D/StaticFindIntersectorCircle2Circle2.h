@@ -27,19 +27,19 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorCircle2Circle2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Vector2 = Vector2<Real>;
-        using Circle2 = Circle2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Circle2Type = Circle2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
         using MathType = typename ParentType::MathType;
-        using Intersection = std::vector<Vector2>;
+        using Intersection = std::vector<Vector2Type>;
 
     public:
-        StaticFindIntersectorCircle2Circle2(const Circle2& lhsCircle, const Circle2& rhsCircle, const Real epsilon = MathType::GetZeroTolerance());
+        StaticFindIntersectorCircle2Circle2(const Circle2Type& lhsCircle, const Circle2Type& rhsCircle, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Circle2 GetLhsCircle() const noexcept;
-        NODISCARD Circle2 GetRhsCircle() const noexcept;
+        NODISCARD Circle2Type GetLhsCircle() const noexcept;
+        NODISCARD Circle2Type GetRhsCircle() const noexcept;
 
         // 相交集为静态查找相交查询。
         // m_Point.size()为0,1或2。
@@ -48,16 +48,16 @@ namespace Mathematics
         //   IntersectionType::Other:  圆是一样的。其中一个圆对象由GetIntersectionCircle返回。
         //   m_Point是无效的。
         NODISCARD int GetQuantity() const;
-        NODISCARD Vector2 GetPoint(int index) const;
-        NODISCARD Circle2 GetIntersectionCircle() const;
+        NODISCARD Vector2Type GetPoint(int index) const;
+        NODISCARD Circle2Type GetIntersectionCircle() const;
 
     private:
         void Find();
 
     private:
         // 要相交的对象。
-        Circle2 lhsCircle;
-        Circle2 rhsCircle;
+        Circle2Type lhsCircle;
+        Circle2Type rhsCircle;
 
         // 相交点。
         Intersection point;

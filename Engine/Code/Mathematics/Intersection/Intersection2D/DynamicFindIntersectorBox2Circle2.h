@@ -26,20 +26,20 @@ namespace Mathematics
         using ParentType = DynamicIntersector<Real, Vector2>;
 
         using MathType = typename ParentType::MathType;
-        using Box2 = Box2<Real>;
-        using Circle2 = Circle2<Real>;
-        using Vector2 = Vector2<Real>;
+        using Box2Type = Box2<Real>;
+        using Circle2Type = Circle2<Real>;
+        using Vector2Type = Vector2<Real>;
 
     public:
-        DynamicFindIntersectorBox2Circle2(const Box2& box, const Circle2& circle, Real tmax, const Vector2& lhsVelocity, const Vector2& rhsVelocity, const Real epsilon = MathType::GetZeroTolerance());
+        DynamicFindIntersectorBox2Circle2(const Box2Type& box, const Circle2Type& circle, Real tmax, const Vector2Type& lhsVelocity, const Vector2Type& rhsVelocity, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Box2 GetBox() const noexcept;
-        NODISCARD Circle2 GetCircle() const noexcept;
+        NODISCARD Box2Type GetBox() const noexcept;
+        NODISCARD Circle2Type GetCircle() const noexcept;
 
         // 用于动态查找相交查询的相交集。
-        NODISCARD Vector2 GetContactPoint() const noexcept;
+        NODISCARD Vector2Type GetContactPoint() const noexcept;
 
     private:
         enum class IntersectingType
@@ -69,11 +69,11 @@ namespace Mathematics
 
     private:
         // 要相交的对象。
-        Box2 box;
-        Circle2 circle;
+        Box2Type box;
+        Circle2Type circle;
 
         // 相交点。
-        Vector2 contactPoint;
+        Vector2Type contactPoint;
     };
 
     using DynamicFindIntersectorBox2Circle2F = DynamicFindIntersectorBox2Circle2<float>;

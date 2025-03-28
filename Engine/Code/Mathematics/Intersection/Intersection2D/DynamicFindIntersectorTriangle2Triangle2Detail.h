@@ -16,7 +16,7 @@
 #include "Mathematics/Intersection/StaticFindIntersector1.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>::DynamicFindIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1, Real tmax, const Vector2& velocity0, const Vector2& velocity1, const Real epsilon)
+Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>::DynamicFindIntersectorTriangle2Triangle2(const Triangle2Type& triangle0, const Triangle2Type& triangle1, Real tmax, const Vector2Type& velocity0, const Vector2Type& velocity1, const Real epsilon)
     : ParentType{ tmax, velocity0, velocity1, epsilon }, triangle0{ triangle0 }, triangle1{ triangle1 }, point{}
 {
     Find();
@@ -87,8 +87,8 @@ void Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>::Find()
         const auto& vertor2 = vertex0.at(i2);
 
         // 测试轴 V0[i1] + t * perp(V0[i2] - V0[i1]), perp(x,y) = (y,-x).
-        const Vector2 axis{ vertor2.GetY() - vertor1.GetY(), vertor1.GetX() - vertor2.GetX() };
-        const auto speed = Vector2Tools::DotProduct(axis, velocityDiff);
+        const Vector2Type axis{ vertor2.GetY() - vertor1.GetY(), vertor1.GetX() - vertor2.GetX() };
+        const auto speed = Vector2ToolsType::DotProduct(axis, velocityDiff);
 
         const auto cfg0 = ComputeTwo(vertex0, axis, i0, i1, i2);
         const auto cfg1 = ComputeThree(vertex1, axis, vertor1);
@@ -109,8 +109,8 @@ void Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>::Find()
 
         // 测试轴 V1[i1] + t*perp(V1[i2]-V1[i1]), perp(x,y) = (y,-x).
 
-        const Vector2 axis{ vertor2.GetY() - vertor1.GetY(), vertor1.GetX() - vertor2.GetX() };
-        const auto speed = Vector2Tools::DotProduct(axis, velocityDiff);
+        const Vector2Type axis{ vertor2.GetY() - vertor1.GetY(), vertor1.GetX() - vertor2.GetX() };
+        const auto speed = Vector2ToolsType::DotProduct(axis, velocityDiff);
 
         const auto cfg1 = ComputeTwo(vertex1, axis, i0, i1, i2);
         const auto cfg0 = ComputeThree(vertex0, axis, vertor1);
@@ -145,26 +145,26 @@ void Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>::Find()
 }
 
 template <typename Real>
-typename Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>::Configuration Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>::ComputeTwo(const Intersection& vertex, const Vector2& axis, int i0, int i1, int i2)
+typename Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>::Configuration Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>::ComputeTwo(const Intersection& vertex, const Vector2Type& axis, int i0, int i1, int i2)
 {
     Configuration cfg{};
 
     cfg.projectionMap = ProjectionMap::M12;
     cfg.index = decltype(cfg.index){ i0, i1, i2 };
-    cfg.min = Vector2Tools::DotProduct(axis, (vertex.at(i0) - vertex.at(i1)));
+    cfg.min = Vector2ToolsType::DotProduct(axis, (vertex.at(i0) - vertex.at(i1)));
     cfg.max = MathType::GetValue(0);
 
     return cfg;
 }
 
 template <typename Real>
-typename Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>::Configuration Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>::ComputeThree(const Intersection& vertex, const Vector2& axis, const Vector2& vector)
+typename Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>::Configuration Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>::ComputeThree(const Intersection& vertex, const Vector2Type& axis, const Vector2Type& vector)
 {
     Configuration cfg{};
 
-    const auto d0 = Vector2Tools::DotProduct(axis, (vertex.at(0) - vector));
-    const auto d1 = Vector2Tools::DotProduct(axis, (vertex.at(1) - vector));
-    const auto d2 = Vector2Tools::DotProduct(axis, (vertex.at(2) - vector));
+    const auto d0 = Vector2ToolsType::DotProduct(axis, (vertex.at(0) - vector));
+    const auto d1 = Vector2ToolsType::DotProduct(axis, (vertex.at(1) - vector));
+    const auto d2 = Vector2ToolsType::DotProduct(axis, (vertex.at(2) - vector));
 
     /// 每当映射值为M12或M21时，请确保m_aiIndex[...]是（0,1,2）的偶数排列。 这需要确保重叠边缘的交点得到正确计算。
 
@@ -420,11 +420,11 @@ typename Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>::Intersecti
         {
             const auto& origin = moveV0.at(cfg0.index.at(1));
             const auto edge = moveV0.at(cfg0.index.at(2)) - origin;
-            const auto invEdgeDotEdge = (MathType::GetValue(1)) / Vector2Tools::DotProduct(edge, edge);
+            const auto invEdgeDotEdge = (MathType::GetValue(1)) / Vector2ToolsType::DotProduct(edge, edge);
             const auto diff1 = moveV1.at(cfg1.index.at(1)) - origin;
-            const auto edgeMin = Vector2Tools::DotProduct(edge, diff1) * invEdgeDotEdge;
+            const auto edgeMin = Vector2ToolsType::DotProduct(edge, diff1) * invEdgeDotEdge;
             const auto diff0 = moveV1.at(cfg1.index.at(0)) - origin;
-            const auto edgeMax = Vector2Tools::DotProduct(edge, diff0) * invEdgeDotEdge;
+            const auto edgeMax = Vector2ToolsType::DotProduct(edge, diff0) * invEdgeDotEdge;
             MATHEMATICS_ASSERTION_1(edgeMin <= edgeMax, "意外状况\n");
 
             StaticFindIntersector1<Real> staticFindIntersector1{ MathType::GetValue(0), MathType::GetValue(1), edgeMin, edgeMax };
@@ -451,11 +451,11 @@ typename Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>::Intersecti
         {
             const auto& origin = moveV1.at(cfg1.index.at(1));
             const auto edge = moveV1.at(cfg1.index.at(2)) - origin;
-            const auto invEdgeDotEdge = (MathType::GetValue(1)) / Vector2Tools::DotProduct(edge, edge);
+            const auto invEdgeDotEdge = (MathType::GetValue(1)) / Vector2ToolsType::DotProduct(edge, edge);
             const auto diff1 = moveV0.at(cfg0.index.at(1)) - origin;
-            const auto edgeMin = Vector2Tools::DotProduct(edge, diff1) * invEdgeDotEdge;
+            const auto edgeMin = Vector2ToolsType::DotProduct(edge, diff1) * invEdgeDotEdge;
             const auto diff0 = moveV0.at(cfg0.index.at(0)) - origin;
-            const auto edgeMax = Vector2Tools::DotProduct(edge, diff0) * invEdgeDotEdge;
+            const auto edgeMax = Vector2ToolsType::DotProduct(edge, diff0) * invEdgeDotEdge;
             MATHEMATICS_ASSERTION_1(edgeMin <= edgeMax, "意外状况\n");
 
             StaticFindIntersector1<Real> staticFindIntersector1{ MathType::GetValue(0), MathType::GetValue(1), edgeMin, edgeMax };
@@ -470,8 +470,8 @@ typename Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>::Intersecti
     }
     else  // 三角形最初是相交的。
     {
-        const Triangle2 tri0{ moveV0.at(0), moveV0.at(1), moveV0.at(2) };
-        const Triangle2 tri1{ moveV1.at(0), moveV1.at(1), moveV1.at(2) };
+        const Triangle2Type tri0{ moveV0.at(0), moveV0.at(1), moveV0.at(2) };
+        const Triangle2Type tri1{ moveV1.at(0), moveV1.at(1), moveV1.at(2) };
         StaticFindIntersectorTriangle2Triangle2<Real> staticFindIntersectorTriangle2Triangle2{ tri0, tri1 };
 
         const auto quantity = staticFindIntersectorTriangle2Triangle2.GetQuantity();
