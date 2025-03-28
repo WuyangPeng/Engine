@@ -95,7 +95,7 @@ Real Mathematics::MinimizeNGetMinimum<Real, UserDataType>::GetFunctionResult(con
 }
 
 template <typename Real, typename UserDataType>
-const typename Mathematics::MinimizeNGetMinimum<Real, UserDataType>::MinimizeNData& Mathematics::MinimizeNGetMinimum<Real, UserDataType>::GetMinimizeNData() const noexcept
+const typename Mathematics::MinimizeNGetMinimum<Real, UserDataType>::MinimizeNDataType& Mathematics::MinimizeNGetMinimum<Real, UserDataType>::GetMinimizeNData() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -110,7 +110,7 @@ void Mathematics::MinimizeNGetMinimum<Real, UserDataType>::FindEachDirection(int
     const auto domainResult = ComputeDomain(beginContainer, endContainer);
 
     // 对 1D 函数回调
-    const Minimize1 minimizer{ LineFunction, maxLevel, maxBracket, this };
+    const Minimize1Type minimizer{ LineFunction, maxLevel, maxBracket, this };
 
     const auto minimizerData = minimizer.GetMinimum(domainResult.beginResult, domainResult.endResult, MathType::GetValue(0));
 
@@ -148,7 +148,7 @@ void Mathematics::MinimizeNGetMinimum<Real, UserDataType>::MinimizeConjugateDire
     directionCurrentIndex = directionConjugateIndex;
     const auto domainResult = ComputeDomain(beginContainer, endContainer);
 
-    const Minimize1 minimizer{ LineFunction, maxLevel, maxBracket, this };
+    const Minimize1Type minimizer{ LineFunction, maxLevel, maxBracket, this };
     const auto minimizerData = minimizer.GetMinimum(domainResult.beginResult, domainResult.endResult, MathType::GetValue(0));
 
     minimizeNData.Set(minimizerData.GetMinValue(), minimizerData.GetMinLocation(), directionStorage, directionCurrentIndex);

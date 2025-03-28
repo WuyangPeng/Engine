@@ -26,8 +26,8 @@ namespace Mathematics
         using ClassType = MinimizeNGetMinimum<Real, UserDataType>;
 
         using MathType = Math<Real>;
-        using Minimize1 = Minimize1<Real, ClassType>;
-        using MinimizeNData = MinimizeNData<Real>;
+        using Minimize1Type = Minimize1<Real, ClassType>;
+        using MinimizeNDataType = MinimizeNData<Real>;
         using Container = std::vector<Real>;
         using IndexContainer = std::vector<int>;
         using Function = Real (*)(const Container&, const UserDataType*);
@@ -50,7 +50,7 @@ namespace Mathematics
         NODISCARD Real EstimateUnitLengthConjugateDirection();
         void MinimizeConjugateDirection(Real length, int maxLevel, int maxBracket);
 
-        NODISCARD const MinimizeNData& GetMinimizeNData() const noexcept;
+        NODISCARD const MinimizeNDataType& GetMinimizeNData() const noexcept;
 
     private:
         struct DomainResult
@@ -93,7 +93,7 @@ namespace Mathematics
 
         Function function;
         const UserDataType* userData;
-        MinimizeNData minimizeNData;
+        MinimizeNDataType minimizeNData;
         Container beginContainer;
         Container endContainer;
     };
