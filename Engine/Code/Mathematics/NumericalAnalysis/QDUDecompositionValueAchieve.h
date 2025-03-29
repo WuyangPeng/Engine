@@ -18,7 +18,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-Mathematics::QDUDecompositionValue<Real>::QDUDecompositionValue(const Matrix3& matrix)
+Mathematics::QDUDecompositionValue<Real>::QDUDecompositionValue(const Matrix3Type& matrix)
     : orthogonal{}, diagonal{}, upperTriangular{}
 {
     Calculate(matrix);
@@ -38,7 +38,7 @@ bool Mathematics::QDUDecompositionValue<Real>::IsValid() const noexcept
 
 // private
 template <typename Real>
-void Mathematics::QDUDecompositionValue<Real>::Calculate(const Matrix3& matrix)
+void Mathematics::QDUDecompositionValue<Real>::Calculate(const Matrix3Type& matrix)
 {
     // 因子M = QR = QDU其中Q是正交（旋转），
     // D是对角（缩放），并且U是与那些在它的对角线（剪切）上三角。
@@ -102,7 +102,7 @@ void Mathematics::QDUDecompositionValue<Real>::Calculate(const Matrix3& matrix)
     }
 
     // 建立“右边”的矩阵Real.
-    Matrix3 right{};
+    Matrix3Type right{};
     right(0, 0) = orthogonal.template GetValue<0, 0>() * matrix.template GetValue<0, 0>() + orthogonal.template GetValue<1, 0>() * matrix.template GetValue<1, 0>() + orthogonal.template GetValue<2, 0>() * matrix.template GetValue<2, 0>();
 
     right(0, 1) = orthogonal.template GetValue<0, 0>() * matrix.template GetValue<0, 1>() + orthogonal.template GetValue<1, 0>() * matrix.template GetValue<1, 1>() + orthogonal.template GetValue<2, 0>() * matrix.template GetValue<2, 1>();
@@ -120,7 +120,7 @@ void Mathematics::QDUDecompositionValue<Real>::Calculate(const Matrix3& matrix)
 
     // 剪切组件。
     auto invD00 = MathType::GetValue(1) / diagonal.template GetValue<0, 0>();
-    upperTriangular = Matrix3{ MathType::GetValue(1),
+    upperTriangular = Matrix3Type{ MathType::GetValue(1),
                                right.template GetValue<0, 1>() * invD00,
                                right(0, 2) * invD00,
                                MathType::GetValue(0),
@@ -132,7 +132,7 @@ void Mathematics::QDUDecompositionValue<Real>::Calculate(const Matrix3& matrix)
 }
 
 template <typename Real>
-typename Mathematics::QDUDecompositionValue<Real>::Matrix3 Mathematics::QDUDecompositionValue<Real>::GeOrthogonalMatrix() const noexcept
+typename Mathematics::QDUDecompositionValue<Real>::Matrix3Type Mathematics::QDUDecompositionValue<Real>::GeOrthogonalMatrix() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -140,7 +140,7 @@ typename Mathematics::QDUDecompositionValue<Real>::Matrix3 Mathematics::QDUDecom
 }
 
 template <typename Real>
-typename Mathematics::QDUDecompositionValue<Real>::Matrix3 Mathematics::QDUDecompositionValue<Real>::GetDiagonalMatrix() const noexcept
+typename Mathematics::QDUDecompositionValue<Real>::Matrix3Type Mathematics::QDUDecompositionValue<Real>::GetDiagonalMatrix() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -148,7 +148,7 @@ typename Mathematics::QDUDecompositionValue<Real>::Matrix3 Mathematics::QDUDecom
 }
 
 template <typename Real>
-typename Mathematics::QDUDecompositionValue<Real>::Matrix3 Mathematics::QDUDecompositionValue<Real>::GetUpperTriangularMatrix() const noexcept
+typename Mathematics::QDUDecompositionValue<Real>::Matrix3Type Mathematics::QDUDecompositionValue<Real>::GetUpperTriangularMatrix() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

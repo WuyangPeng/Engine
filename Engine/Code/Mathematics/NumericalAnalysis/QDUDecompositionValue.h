@@ -22,26 +22,26 @@ namespace Mathematics
 
         using ClassType = QDUDecompositionValue<Real>;
 
-        using Matrix3 = Matrix3<Real>;
+        using Matrix3Type = Matrix3<Real>;
         using MathType = Math<Real>;
 
     public:
-        explicit QDUDecompositionValue(const Matrix3& matrix);
+        explicit QDUDecompositionValue(const Matrix3Type& matrix);
 
         CLASS_INVARIANT_DECLARE;
 
     public:
-        NODISCARD Matrix3 GeOrthogonalMatrix() const noexcept;
-        NODISCARD Matrix3 GetDiagonalMatrix() const noexcept;
-        NODISCARD Matrix3 GetUpperTriangularMatrix() const noexcept;
+        NODISCARD Matrix3Type GeOrthogonalMatrix() const noexcept;
+        NODISCARD Matrix3Type GetDiagonalMatrix() const noexcept;
+        NODISCARD Matrix3Type GetUpperTriangularMatrix() const noexcept;
 
     private:
-        void Calculate(const Matrix3& matrix);
+        void Calculate(const Matrix3Type& matrix);
 
     private:
-        Matrix3 orthogonal;
-        Matrix3 diagonal;
-        Matrix3 upperTriangular;
+        Matrix3Type orthogonal;
+        Matrix3Type diagonal;
+        Matrix3Type upperTriangular;
     };
 
     using QDUDecompositionValueF = QDUDecompositionValue<float>;
