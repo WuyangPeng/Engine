@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorSegment3Ellipsoid3<Real>::StaticTestIntersectorSegment3Ellipsoid3(const Segment3& segment, const Ellipsoid3& ellipsoid, const Real epsilon)
+Mathematics::StaticTestIntersectorSegment3Ellipsoid3<Real>::StaticTestIntersectorSegment3Ellipsoid3(const Segment3Type& segment, const Ellipsoid3Type& ellipsoid, const Real epsilon)
     : ParentType{ epsilon }, segment{ segment }, ellipsoid{ ellipsoid }
 {
     Test();

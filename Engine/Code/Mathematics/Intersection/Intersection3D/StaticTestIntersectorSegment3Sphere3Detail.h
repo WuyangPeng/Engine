@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorSegment3Sphere3<Real>::StaticTestIntersectorSegment3Sphere3(const Segment3& segment, const Sphere3& sphere, const Real epsilon)
+Mathematics::StaticTestIntersectorSegment3Sphere3<Real>::StaticTestIntersectorSegment3Sphere3(const Segment3Type& segment, const Sphere3Type& sphere, const Real epsilon)
     : ParentType{ epsilon }, segment{ segment }, sphere{ sphere }, zeroThreshold{ MathType::GetZeroTolerance() }
 {
     Test();

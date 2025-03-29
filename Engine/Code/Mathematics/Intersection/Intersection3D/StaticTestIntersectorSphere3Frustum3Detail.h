@@ -15,7 +15,7 @@
 #include "Mathematics/Distance/Distance3D/DistancePoint3Frustum3Detail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorSphere3Frustum3<Real>::StaticTestIntersectorSphere3Frustum3(const Sphere3& sphere, const Frustum3& frustum, const Real epsilon)
+Mathematics::StaticTestIntersectorSphere3Frustum3<Real>::StaticTestIntersectorSphere3Frustum3(const Sphere3Type& sphere, const Frustum3Type& frustum, const Real epsilon)
     : ParentType{ epsilon }, sphere{ sphere }, frustum{ frustum }
 {
     Test();

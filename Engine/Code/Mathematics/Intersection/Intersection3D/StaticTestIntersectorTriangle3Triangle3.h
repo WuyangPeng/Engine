@@ -27,8 +27,8 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Line3 = Line3<Real>;
-        using Plane3 = Plane3<Real>;
+        using Line3Type = Line3<Real>;
+        using Plane3Type = Plane3<Real>;
         using Triangle3 = Triangle3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;

@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorTriangle3Cone3<Real>::StaticTestIntersectorTriangle3Cone3(const Triangle3& triangle, const Cone3& cone, const Real epsilon)
+Mathematics::StaticTestIntersectorTriangle3Cone3<Real>::StaticTestIntersectorTriangle3Cone3(const Triangle3Type& triangle, const Cone3Type& cone, const Real epsilon)
     : ParentType{ epsilon }, triangle{ triangle }, cone{ cone }
 {
     Test();

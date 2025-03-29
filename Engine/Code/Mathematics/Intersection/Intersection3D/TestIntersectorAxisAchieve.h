@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3Type& axis, const SegmentType& segment, const Triangle3& triangle, const Vector3Type& velocity, Real tmax)
+Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3Type& axis, const SegmentType& segment, const Triangle3Type& triangle, const Vector3Type& velocity, Real tmax)
     : result{ false }, tFirst{}, tLast{}
 {
     const auto projection0 = GetProjection(axis, segment);
@@ -27,7 +27,7 @@ Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3Type& a
 }
 
 template <typename Real>
-Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3Type& axis, const SegmentType& segment, const Box3& box, const Vector3Type& velocity, Real tmax)
+Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3Type& axis, const SegmentType& segment, const Box3Type& box, const Vector3Type& velocity, Real tmax)
     : result{ false }, tFirst{}, tLast{}
 {
     const auto projection0 = GetProjection(axis, segment);
@@ -40,7 +40,7 @@ Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3Type& a
 }
 
 template <typename Real>
-Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3Type& axis, const Triangle3& triangle, const Box3& box, const Vector3Type& velocity, Real tmax)
+Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3Type& axis, const Triangle3Type& triangle, const Box3Type& box, const Vector3Type& velocity, Real tmax)
     : result{ false }, tFirst{}, tLast{}
 {
     const auto projection0 = GetProjection(axis, triangle);
@@ -52,7 +52,7 @@ Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3Type& a
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 template <typename Real>
-Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3Type& axis, const Box3& box0, const Box3& box1, const Vector3Type& velocity, Real tmax)
+Mathematics::TestIntersectorAxis<Real>::TestIntersectorAxis(const Vector3Type& axis, const Box3Type& box0, const Box3Type& box1, const Vector3Type& velocity, Real tmax)
     : result{ false }, tFirst{}, tLast{}
 {
     const auto projection0 = GetProjection(axis, box0);
@@ -120,7 +120,7 @@ typename Mathematics::TestIntersectorAxis<Real>::Projections Mathematics::TestIn
 }
 
 template <typename Real>
-typename Mathematics::TestIntersectorAxis<Real>::Projections Mathematics::TestIntersectorAxis<Real>::GetProjection(const Vector3Type& axis, const Triangle3& triangle)
+typename Mathematics::TestIntersectorAxis<Real>::Projections Mathematics::TestIntersectorAxis<Real>::GetProjection(const Vector3Type& axis, const Triangle3Type& triangle)
 {
     auto min = Vector3Tools<Real>::DotProduct(axis, triangle.GetVertex(0));
     auto max = min;
@@ -145,7 +145,7 @@ typename Mathematics::TestIntersectorAxis<Real>::Projections Mathematics::TestIn
 }
 
 template <typename Real>
-typename Mathematics::TestIntersectorAxis<Real>::Projections Mathematics::TestIntersectorAxis<Real>::GetProjection(const Vector3Type& axis, const Box3& box)
+typename Mathematics::TestIntersectorAxis<Real>::Projections Mathematics::TestIntersectorAxis<Real>::GetProjection(const Vector3Type& axis, const Box3Type& box)
 {
     const auto origin = Vector3Tools<Real>::DotProduct(axis, box.GetCenter());
     const auto maximumExtent = Math<Real>::FAbs(box.GetExtent(0) * Vector3Tools<Real>::DotProduct(axis, box.GetAxis(0))) +

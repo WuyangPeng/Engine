@@ -16,7 +16,7 @@
 #include "Mathematics/Distance/Distance3D/DistancePoint3Triangle3Detail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorTriangle3Sphere3<Real>::StaticTestIntersectorTriangle3Sphere3(const Triangle3& triangle, const Sphere3& sphere, const Real epsilon)
+Mathematics::StaticTestIntersectorTriangle3Sphere3<Real>::StaticTestIntersectorTriangle3Sphere3(const Triangle3Type& triangle, const Sphere3Type& sphere, const Real epsilon)
     : ParentType{ epsilon }, triangle{ triangle }, sphere{ sphere }
 {
     Test();

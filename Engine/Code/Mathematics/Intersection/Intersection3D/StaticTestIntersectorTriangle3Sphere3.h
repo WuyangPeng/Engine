@@ -26,25 +26,25 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Triangle3 = Triangle3<Real>;
-        using Sphere3 = Sphere3<Real>;
+        using Triangle3Type = Triangle3<Real>;
+        using Sphere3Type = Sphere3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorTriangle3Sphere3(const Triangle3& triangle, const Sphere3& sphere, const Real epsilon = MathType::GetZeroTolerance());
+        StaticTestIntersectorTriangle3Sphere3(const Triangle3Type& triangle, const Sphere3Type& sphere, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Triangle3 GetTriangle() const noexcept;
-        NODISCARD Sphere3 GetSphere() const noexcept;
+        NODISCARD Triangle3Type GetTriangle() const noexcept;
+        NODISCARD Sphere3Type GetSphere() const noexcept;
 
     private:
         void Test();
 
     private:
-        Triangle3 triangle;
-        Sphere3 sphere;
+        Triangle3Type triangle;
+        Sphere3Type sphere;
     };
 }
 

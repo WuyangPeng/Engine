@@ -26,25 +26,25 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Sphere3 = Sphere3<Real>;
-        using Frustum3 = Frustum3<Real>;
+        using Sphere3Type = Sphere3<Real>;
+        using Frustum3Type = Frustum3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorSphere3Frustum3(const Sphere3& sphere, const Frustum3& frustum, const Real epsilon = MathType::GetZeroTolerance());
+        StaticTestIntersectorSphere3Frustum3(const Sphere3Type& sphere, const Frustum3Type& frustum, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Sphere3 GetSphere() const noexcept;
-        NODISCARD Frustum3 GetFrustum() const noexcept;
+        NODISCARD Sphere3Type GetSphere() const noexcept;
+        NODISCARD Frustum3Type GetFrustum() const noexcept;
 
     private:
         void Test();
 
     private:
-        Sphere3 sphere;
-        Frustum3 frustum;
+        Sphere3Type sphere;
+        Frustum3Type frustum;
     };
 }
 

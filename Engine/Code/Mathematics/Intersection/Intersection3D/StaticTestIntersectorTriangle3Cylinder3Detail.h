@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::StaticTestIntersectorTriangle3Cylinder3(const Triangle3& triangle, const Cylinder3& cylinder, const Real epsilon)
+Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::StaticTestIntersectorTriangle3Cylinder3(const Triangle3Type& triangle, const Cylinder3Type& cylinder, const Real epsilon)
     : ParentType{ epsilon }, triangle{ triangle }, cylinder{ cylinder }
 {
     Test();

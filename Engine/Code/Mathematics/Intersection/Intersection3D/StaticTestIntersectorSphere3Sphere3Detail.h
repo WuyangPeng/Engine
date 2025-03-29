@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorSphere3Sphere3<Real>::StaticTestIntersectorSphere3Sphere3(const Sphere3& rkSphere0, const Sphere3& rkSphere1, const Real epsilon)
+Mathematics::StaticTestIntersectorSphere3Sphere3<Real>::StaticTestIntersectorSphere3Sphere3(const Sphere3Type& rkSphere0, const Sphere3Type& rkSphere1, const Real epsilon)
     : ParentType{ epsilon }, sphere0{ rkSphere0 }, sphere1{ rkSphere1 }
 {
     Test();

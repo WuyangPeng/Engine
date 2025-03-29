@@ -26,25 +26,25 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Segment3 = Segment3<Real>;
-        using Capsule3 = Capsule3<Real>;
+        using Segment3Type = Segment3<Real>;
+        using Capsule3Type = Capsule3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorSegment3Capsule3(const Segment3& segment, const Capsule3& capsule, const Real epsilon = MathType::GetZeroTolerance());
+        StaticTestIntersectorSegment3Capsule3(const Segment3Type& segment, const Capsule3Type& capsule, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Segment3 GetSegment() const noexcept;
-        NODISCARD Capsule3 GetCapsule() const noexcept;
+        NODISCARD Segment3Type GetSegment() const noexcept;
+        NODISCARD Capsule3Type GetCapsule() const noexcept;
 
     private:
         void Test();
 
     private:
-        Segment3 segment;
-        Capsule3 capsule;
+        Segment3Type segment;
+        Capsule3Type capsule;
     };
 }
 

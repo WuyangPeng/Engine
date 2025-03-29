@@ -26,25 +26,25 @@ namespace Mathematics
         using ParentType = StaticIntersector<Real, Vector3>;
 
         using Vector3Type = Vector3<Real>;
-        using Segment3 = Segment3<Real>;
-        using Ellipsoid3 = Ellipsoid3<Real>;
+        using Segment3Type = Segment3<Real>;
+        using Ellipsoid3Type = Ellipsoid3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorSegment3Ellipsoid3(const Segment3& segment, const Ellipsoid3& ellipsoid, const Real epsilon = MathType::GetZeroTolerance());
+        StaticTestIntersectorSegment3Ellipsoid3(const Segment3Type& segment, const Ellipsoid3Type& ellipsoid, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Segment3 GetSegment() const noexcept;
-        NODISCARD Ellipsoid3 GetEllipsoid() const noexcept;
+        NODISCARD Segment3Type GetSegment() const noexcept;
+        NODISCARD Ellipsoid3Type GetEllipsoid() const noexcept;
 
     private:
         void Test();
 
     private:
-        Segment3 segment;
-        Ellipsoid3 ellipsoid;
+        Segment3Type segment;
+        Ellipsoid3Type ellipsoid;
     };
 }
 
