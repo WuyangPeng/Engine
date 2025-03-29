@@ -45,7 +45,7 @@ namespace Mathematics
     public:
         OdeImplicitEuler(int dimension,
                          Real step,
-                         typename Function function,
+                         Function function,
                          DerivativeFunction derivativeFunction,
                          const UserDataType* userData);
 
