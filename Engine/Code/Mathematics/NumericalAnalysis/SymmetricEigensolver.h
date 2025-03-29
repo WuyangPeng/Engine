@@ -172,8 +172,8 @@ namespace Mathematics
         void ComputePermutation(int sortType);
 
     private:
-        using SortItem = SortItem<Real>;
-        using SortItemContainer = std::vector<SortItem>;
+        using SortItemType = SortItem<Real>;
+        using SortItemContainer = std::vector<SortItemType>;
 
     private:
         // 要处理的矩阵的行和列的数量N。

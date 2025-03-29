@@ -280,14 +280,14 @@ void Mathematics::SymmetricEigensolver<Real>::ComputePermutation(int32_t sortTyp
     if (0 < sortType)
     {
         std::sort(items.begin(), items.end(),
-                  [](const SortItem& lhs, const SortItem& rhs) noexcept {
+                  [](const SortItemType& lhs, const SortItemType& rhs) noexcept {
                       return lhs.GetEigenvalue() < rhs.GetEigenvalue();
                   });
     }
     else
     {
         std::sort(items.begin(), items.end(),
-                  [](const SortItem& lhs, const SortItem& rhs) noexcept {
+                  [](const SortItemType& lhs, const SortItemType& rhs) noexcept {
                       return rhs.GetEigenvalue() < lhs.GetEigenvalue();
                   });
     }
