@@ -232,7 +232,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
         const Rational half{ 0.5 };
         auto xMin = -b;
         auto xMax = b;
-        PolynomialRoot::PolynomialRootBisect(f, -1, +1, xMin, xMax);
+        PolynomialRootType::PolynomialRootBisect(f, -1, +1, xMin, xMax);
         rRoots.at(0) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
         return 1;
     }
@@ -267,19 +267,19 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
         /// 区间[-2 * s, s]上的双截
         auto xMin = -twoS;
         auto xMax = -s;
-        PolynomialRoot::PolynomialRootBisect(f, -1, +1, xMin, xMax);
+        PolynomialRootType::PolynomialRootBisect(f, -1, +1, xMin, xMax);
         rRoots.at(0) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
 
         /// 区间[-2 * s, s]上的双截
         xMin = -s;
         xMax = s;
-        PolynomialRoot::PolynomialRootBisect(f, +1, -1, xMin, xMax);
+        PolynomialRootType::PolynomialRootBisect(f, +1, -1, xMin, xMax);
         rRoots.at(1) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
 
         /// 区间[s, 2 * s]上的双截
         xMin = s;
         xMax = twoS;
-        PolynomialRoot::PolynomialRootBisect(f, -1, +1, xMin, xMax);
+        PolynomialRootType::PolynomialRootBisect(f, -1, +1, xMin, xMax);
         rRoots.at(2) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
         return 3;
     }
@@ -299,7 +299,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
         const Rational half{ 0.5 };
         auto xMin = -b;
         auto xMax = b;
-        PolynomialRoot::PolynomialRootBisect(f, -1, +1, xMin, xMax);
+        PolynomialRootType::PolynomialRootBisect(f, -1, +1, xMin, xMax);
         rRoots.at(0) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
         return 1;
     }
@@ -369,7 +369,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
         const Rational half{ 0.5 };
         auto xMin = -b;
         auto xMax = b;
-        PolynomialRoot::PolynomialRootBisect(f, -1, +1, xMin, xMax);
+        PolynomialRootType::PolynomialRootBisect(f, -1, +1, xMin, xMax);
         rRoots.at(0) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
         return 1;
     }
@@ -404,19 +404,19 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
         /// 区间[-2 * s, s]上的双截
         auto xMin = -twoS;
         auto xMax = -s;
-        PolynomialRoot::PolynomialRootBisect(f, -1, +1, xMin, xMax);
+        PolynomialRootType::PolynomialRootBisect(f, -1, +1, xMin, xMax);
         rRoots.at(0) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
 
         /// 区间[-2 * s, s]上的双截
         xMin = -s;
         xMax = s;
-        PolynomialRoot::PolynomialRootBisect(f, +1, -1, xMin, xMax);
+        PolynomialRootType::PolynomialRootBisect(f, +1, -1, xMin, xMax);
         rRoots.at(1) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
 
         /// 区间[s, 2 * s]上的双截
         xMin = s;
         xMax = twoS;
-        PolynomialRoot::PolynomialRootBisect(f, -1, +1, xMin, xMax);
+        PolynomialRootType::PolynomialRootBisect(f, -1, +1, xMin, xMax);
         rRoots.at(2) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
         return 3;
     }
@@ -436,7 +436,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
         const Rational half{ 0.5 };
         auto xMin = -b;
         auto xMax = b;
-        PolynomialRoot::PolynomialRootBisect(f, -1, +1, xMin, xMax);
+        PolynomialRootType::PolynomialRootBisect(f, -1, +1, xMin, xMax);
         rRoots.at(0) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
         return 1;
     }

@@ -53,8 +53,8 @@ namespace Mathematics
         /// roots[]数组必须至少有2个元素。
         /// 返回的int是roots[]数组中有效根的数目。
         using Rational = BinaryScientificRational<UIntegerArbitraryPrecision32>;
-        using PolynomialRoot = Algebra::PolynomialRoot<T>;
-        using PolynomialRootContainer = std::vector<PolynomialRoot>;
+        using PolynomialRootType = Algebra::PolynomialRoot<T>;
+        using PolynomialRootContainer = std::vector<PolynomialRootType>;
         using RationalPolynomialRoot = Algebra::PolynomialRoot<Rational>;
         using RationalPolynomialRootContainer = std::array<RationalPolynomialRoot, 3>;
         using MathType = Math<T>;
