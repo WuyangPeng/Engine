@@ -28,15 +28,15 @@ namespace Mathematics
 
         using MathType = Math<Real>;
         using Function = Real (*)(Real, Real);
-        using Bisect2Root = Bisect2Root<Real>;
-        using Bisect2Calculate = Bisect2Calculate<Real>;
+        using Bisect2RootType = Bisect2Root<Real>;
+        using Bisect2CalculateType = Bisect2Calculate<Real>;
 
     public:
         Bisect2(Function function0, Function function1, int maxLevel, Real tolerance = MathType::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Bisect2Root Bisect(Real beginPointX, Real beginPointY, Real endPointX, Real endPointY) const;
+        NODISCARD Bisect2RootType Bisect(Real beginPointX, Real beginPointY, Real endPointX, Real endPointY) const;
 
         NODISCARD Real GetFunction0Value(Real x, Real y) const;
         NODISCARD Real GetFunction1Value(Real x, Real y) const;

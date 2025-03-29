@@ -108,7 +108,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRoots(bool useBisection, const R
 {
     if (useBisection)
     {
-        return RootsCubic<T>::ComputeDepressedRootsBisection(rD0, rD1, rRoots);
+        return ComputeDepressedRootsBisection(rD0, rD1, rRoots);
     }
     else
     {

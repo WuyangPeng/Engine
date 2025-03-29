@@ -48,7 +48,7 @@ Mathematics::Bisect2Root<Real> Mathematics::Bisect2<Real>::Bisect(Real beginPoin
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    Bisect2Calculate calculate{ *this, beginPointX, beginPointY, endPointX, endPointY };
+    Bisect2CalculateType calculate{ *this, beginPointX, beginPointY, endPointX, endPointY };
 
     return calculate.GetRoot();
 }

@@ -41,7 +41,7 @@ bool Mathematics::Bisect1<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename Mathematics::Bisect1<Real>::Bisect1Root Mathematics::Bisect1<Real>::Bisect(Real beginPoint, Real endPoint)
+typename Mathematics::Bisect1<Real>::Bisect1RootType Mathematics::Bisect1<Real>::Bisect(Real beginPoint, Real endPoint)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -52,19 +52,19 @@ typename Mathematics::Bisect1<Real>::Bisect1Root Mathematics::Bisect1<Real>::Bis
     auto beginPointFunctionValue = function(beginPoint);
     if (MathType::FAbs(beginPointFunctionValue) <= tolerance)
     {
-        return Bisect1Root{ beginPoint, BisectRootType::HaveSolution };
+        return Bisect1RootType{ beginPoint, BisectRootType::HaveSolution };
     }
 
     auto endPointFunctionValue = function(endPoint);
     if (MathType::FAbs(endPointFunctionValue) <= tolerance)
     {
-        return Bisect1Root{ endPoint, BisectRootType::HaveSolution };
+        return Bisect1RootType{ endPoint, BisectRootType::HaveSolution };
     }
 
     // 方程无解
     if (MathType::GetValue(0) < beginPointFunctionValue * endPointFunctionValue)
     {
-        return Bisect1Root{};
+        return Bisect1RootType{};
     }
 
     auto middlePoints = MathType::GetRational(1, 2) * (beginPoint + endPoint);
@@ -74,7 +74,7 @@ typename Mathematics::Bisect1<Real>::Bisect1Root Mathematics::Bisect1<Real>::Bis
         auto middlePointFunctionValue = function(middlePoints);
         if (MathType::FAbs(middlePointFunctionValue) <= tolerance)
         {
-            return Bisect1Root{ middlePoints, BisectRootType::HaveSolution };
+            return Bisect1RootType{ middlePoints, BisectRootType::HaveSolution };
         }
 
         if (beginPointFunctionValue * middlePointFunctionValue < MathType::GetValue(0))
@@ -92,7 +92,7 @@ typename Mathematics::Bisect1<Real>::Bisect1Root Mathematics::Bisect1<Real>::Bis
     }
 
     // 循环超出了次数，返回一个中间值。
-    return Bisect1Root{ middlePoints, BisectRootType::Unknown };
+    return Bisect1RootType{ middlePoints, BisectRootType::Unknown };
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_BISECT1_ACHIEVE_H
