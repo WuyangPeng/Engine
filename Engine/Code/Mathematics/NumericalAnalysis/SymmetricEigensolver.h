@@ -103,10 +103,10 @@ namespace Mathematics
         using ClassType = SymmetricEigensolver<Real>;
 
         using MathType = Math<Real>;
-        using GivensRotation = GivensRotation<Real>;
+        using GivensRotationType = GivensRotation<Real>;
         using MatrixType = std::vector<Real>;
         using DiagonalType = std::vector<Real>;
-        using GivensRotationContainer = std::vector<GivensRotation>;
+        using GivensRotationContainer = std::vector<GivensRotationType>;
         using PermutationType = std::vector<int>;
         using VisitedType = std::vector<int>;
 
