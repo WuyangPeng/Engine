@@ -28,7 +28,7 @@ namespace Mathematics
 
         using TraitsType = typename IntegerTraits<T>::TraitsType;
         using Rational = SignRational<N>;
-        using Integer = Integer<N>;
+        using IntegerType = Integer<N>;
 
     public:
         // 返回值若被截断，抛出异常
@@ -51,8 +51,8 @@ namespace Mathematics
         void Negative() noexcept;
 
     private:
-        Integer absNumerator;
-        Integer absDenominator;
+        IntegerType absNumerator;
+        IntegerType absDenominator;
         // 得到分子和分母的起始位的差。
         int shifting;
         NumericalValueSymbol symbol;
