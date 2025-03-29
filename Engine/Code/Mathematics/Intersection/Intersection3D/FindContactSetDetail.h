@@ -23,8 +23,8 @@ template <typename Real>
 Mathematics::FindContactSet<Real>::FindContactSet(const SegmentType& segment,
                                                   const Triangle3Type& triangle,
                                                   ContactSide side,
-                                                  const IntersectorConfiguration& segmentCfg,
-                                                  const IntersectorConfiguration& triangleCfg,
+                                                  const IntersectorConfigurationType& segmentCfg,
+                                                  const IntersectorConfigurationType& triangleCfg,
                                                   const Vector3Type& segmentVelocity,
                                                   const Vector3Type& triangleVelocity,
                                                   Real tFirst)
@@ -88,8 +88,8 @@ template <typename Real>
 Mathematics::FindContactSet<Real>::FindContactSet(const SegmentType& segment,
                                                   const Box3Type& box,
                                                   ContactSide side,
-                                                  const IntersectorConfiguration& segmentCfg,
-                                                  const IntersectorConfiguration& boxCfg,
+                                                  const IntersectorConfigurationType& segmentCfg,
+                                                  const IntersectorConfigurationType& boxCfg,
                                                   const Vector3Type& segmentVelocity,
                                                   const Vector3Type& boxVelocity,
                                                   Real tFirst)
@@ -169,8 +169,8 @@ template <typename Real>
 Mathematics::FindContactSet<Real>::FindContactSet(const Triangle3Type& triangle,
                                                   const Box3Type& box,
                                                   ContactSide side,
-                                                  const IntersectorConfiguration& triangleCfg,
-                                                  const IntersectorConfiguration& boxCfg,
+                                                  const IntersectorConfigurationType& triangleCfg,
+                                                  const IntersectorConfigurationType& boxCfg,
                                                   const Vector3Type& triangleVelocity,
                                                   const Vector3Type& boxVelocity,
                                                   Real tFirst)
@@ -312,8 +312,8 @@ template <typename Real>
 Mathematics::FindContactSet<Real>::FindContactSet(const Box3Type& box0,
                                                   const Box3Type& box1,
                                                   ContactSide side,
-                                                  const IntersectorConfiguration& box0Cfg,
-                                                  const IntersectorConfiguration& box1Cfg,
+                                                  const IntersectorConfigurationType& box0Cfg,
+                                                  const IntersectorConfigurationType& box1Cfg,
                                                   const Vector3Type& box0Velocity,
                                                   const Vector3Type& box1Velocity,
                                                   Real tFirst)

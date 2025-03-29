@@ -28,7 +28,7 @@ namespace Mathematics
         using Vector3Type = Vector3<Real>;
         using Triangle3Type = Triangle3<Real>;
         using Box3Type = Box3<Real>;
-        using IntersectorConfiguration = IntersectorConfiguration<Real>;
+        using IntersectorConfigurationType = IntersectorConfiguration<Real>;
         using SegmentType = std::array<Vector3Type, 2>;
         using TriangleType = std::array<Vector3Type, 3>;
         using RectangleType = std::array<Vector3Type, 4>;
@@ -38,8 +38,8 @@ namespace Mathematics
         FindContactSet(const SegmentType& segment,
                        const Triangle3Type& triangle,
                        ContactSide side,
-                       const IntersectorConfiguration& segmentCfg,
-                       const IntersectorConfiguration& triangleCfg,
+                       const IntersectorConfigurationType& segmentCfg,
+                       const IntersectorConfigurationType& triangleCfg,
                        const Vector3Type& segmentVelocity,
                        const Vector3Type& triangleVelocity,
                        Real tFirst);
@@ -47,8 +47,8 @@ namespace Mathematics
         FindContactSet(const SegmentType& segment,
                        const Box3Type& box,
                        ContactSide side,
-                       const IntersectorConfiguration& segmentCfg,
-                       const IntersectorConfiguration& boxCfg,
+                       const IntersectorConfigurationType& segmentCfg,
+                       const IntersectorConfigurationType& boxCfg,
                        const Vector3Type& segmentVelocity,
                        const Vector3Type& boxVelocity,
                        Real tFirst);
@@ -56,8 +56,8 @@ namespace Mathematics
         FindContactSet(const Triangle3Type& triangle,
                        const Box3Type& box,
                        ContactSide side,
-                       const IntersectorConfiguration& triangleCfg,
-                       const IntersectorConfiguration& boxCfg,
+                       const IntersectorConfigurationType& triangleCfg,
+                       const IntersectorConfigurationType& boxCfg,
                        const Vector3Type& triangleVelocity,
                        const Vector3Type& boxVelocity,
                        Real tFirst);
@@ -65,8 +65,8 @@ namespace Mathematics
         FindContactSet(const Box3Type& box0,
                        const Box3Type& box1,
                        ContactSide side,
-                       const IntersectorConfiguration& box0Cfg,
-                       const IntersectorConfiguration& box1Cfg,
+                       const IntersectorConfigurationType& box0Cfg,
+                       const IntersectorConfigurationType& box1Cfg,
                        const Vector3Type& box0Velocity,
                        const Vector3Type& box1Velocity,
                        Real tFirst);
