@@ -28,13 +28,13 @@ namespace Mathematics
         using ClassType = NoniterativeEigen3x3<Real>;
 
         using MathType = Math<Real>;
-        using Matrix3 = Matrix3<Real>;
+        using Matrix3Type = Matrix3<Real>;
         using Vector3Type = Vector3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
 
     public:
         // 输入矩阵必须是对称的。
-        explicit NoniterativeEigen3x3(const Matrix3& matrix);
+        explicit NoniterativeEigen3x3(const Matrix3Type& matrix);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -43,19 +43,19 @@ namespace Mathematics
         NODISCARD Vector3Type GetEigenvector(int index) const;
 
     private:
-        NODISCARD Real GetMaxValue(const Matrix3& matrix) const;
-        void Compute(const Matrix3& matrix);
+        NODISCARD Real GetMaxValue(const Matrix3Type& matrix) const;
+        void Compute(const Matrix3Type& matrix);
         void RescaleBack(Real maxValue) noexcept;
 
         // 计算三次多项式的根。双精度运算被使用在由于最小化的影响减消除。根按递增顺序返回。
-        void ComputeRoots(const Matrix3& matrix);
+        void ComputeRoots(const Matrix3Type& matrix);
 
         // 确定matrix是否有的正的列。返回matrix的最大量值项目。
         // 它包含的列也被返回。
-        NODISCARD bool PositiveRank(Matrix3& matrix, Real& maxEntry, Vector3Type& maxRow) const;
+        NODISCARD bool PositiveRank(Matrix3Type& matrix, Real& maxEntry, Vector3Type& maxRow) const;
 
         // 计算特征向量。
-        void ComputeVectors(const Matrix3& matrix, const Vector3Type& vector, int index0, int index1, int index2);
+        void ComputeVectors(const Matrix3Type& matrix, const Vector3Type& vector, int index0, int index1, int index2);
 
     private:
         static constexpr auto eigenMax = 3;

@@ -16,7 +16,7 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::NoniterativeEigen3x3<Real>::NoniterativeEigen3x3(const Matrix3& matrix)
+Mathematics::NoniterativeEigen3x3<Real>::NoniterativeEigen3x3(const Matrix3Type& matrix)
     : eigenvalue{}, eigenvector{}
 {
     Compute(matrix);
@@ -25,7 +25,7 @@ Mathematics::NoniterativeEigen3x3<Real>::NoniterativeEigen3x3(const Matrix3& mat
 }
 
 template <typename Real>
-Real Mathematics::NoniterativeEigen3x3<Real>::GetMaxValue(const Matrix3& matrix) const
+Real Mathematics::NoniterativeEigen3x3<Real>::GetMaxValue(const Matrix3Type& matrix) const
 {
     Container maxValue{ MathType::FAbs(matrix.template GetValue<0, 0>()),
                         MathType::FAbs(matrix.template GetValue<0, 1>()),
@@ -46,12 +46,12 @@ Real Mathematics::NoniterativeEigen3x3<Real>::GetMaxValue(const Matrix3& matrix)
 }
 
 template <typename Real>
-void Mathematics::NoniterativeEigen3x3<Real>::Compute(const Matrix3& matrix)
+void Mathematics::NoniterativeEigen3x3<Real>::Compute(const Matrix3Type& matrix)
 {
     // 缩放矩阵，让它的条目都在[-1,1]。
     // 缩放应用于当至少一个矩阵条目具有大小大于1。
 
-    Matrix3 scaledEntry{ matrix };
+    Matrix3Type scaledEntry{ matrix };
     const auto maxValue = GetMaxValue(scaledEntry);
 
     if (MathType::GetValue(1) < maxValue)
@@ -66,7 +66,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::Compute(const Matrix3& matrix)
     EigenVectorType maxRow{};
     for (auto i = 0; i < eigenMax; ++i)
     {
-        Matrix3 computeMatrix{ scaledEntry };
+        Matrix3Type computeMatrix{ scaledEntry };
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
@@ -124,7 +124,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::RescaleBack(Real maxValue) noexcep
 }
 
 template <typename Real>
-void Mathematics::NoniterativeEigen3x3<Real>::ComputeRoots(const Matrix3& matrix)
+void Mathematics::NoniterativeEigen3x3<Real>::ComputeRoots(const Matrix3Type& matrix)
 {
     static const auto sqrt3Value = MathType::Sqrt(MathType::GetValue(3));
 
@@ -216,7 +216,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::ComputeRoots(const Matrix3& matrix
 }
 
 template <typename Real>
-bool Mathematics::NoniterativeEigen3x3<Real>::PositiveRank(Matrix3& matrix, Real& maxEntry, Vector3Type& maxRow) const
+bool Mathematics::NoniterativeEigen3x3<Real>::PositiveRank(Matrix3Type& matrix, Real& maxEntry, Vector3Type& maxRow) const
 {
     // 找到矩阵的最大幅度条目。
     maxEntry = MathType::GetValue(-1);
@@ -242,7 +242,7 @@ bool Mathematics::NoniterativeEigen3x3<Real>::PositiveRank(Matrix3& matrix, Real
 }
 
 template <typename Real>
-void Mathematics::NoniterativeEigen3x3<Real>::ComputeVectors(const Matrix3& matrix, const Vector3Type& vector, int index0, int index1, int index2)
+void Mathematics::NoniterativeEigen3x3<Real>::ComputeVectors(const Matrix3Type& matrix, const Vector3Type& vector, int index0, int index1, int index2)
 {
     const auto basis = Vector3ToolsType::GenerateComplementBasis(vector);
     const auto uVector = basis.GetUVector();
