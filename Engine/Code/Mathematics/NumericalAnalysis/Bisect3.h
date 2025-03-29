@@ -27,7 +27,7 @@ namespace Mathematics
         using ClassType = Bisect3<Real>;
 
         using Function = Real (*)(Real, Real, Real);
-        using Bisect3Root = Bisect3Root<Real>;
+        using Bisect3RootType = Bisect3Root<Real>;
         using MathType = Math<Real>;
 
     public:
@@ -35,7 +35,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Bisect3Root Bisect(Real beginPointX,
+        NODISCARD Bisect3RootType Bisect(Real beginPointX,
                                      Real beginPointY,
                                      Real beginPointZ,
                                      Real endPointX,
@@ -49,7 +49,7 @@ namespace Mathematics
         NODISCARD Real GetTolerance() const noexcept;
 
     private:
-        using Bisect3Calculate = Bisect3Calculate<Real>;
+        using Bisect3CalculateType = Bisect3Calculate<Real>;
 
     private:
         // 输入数据和函数。

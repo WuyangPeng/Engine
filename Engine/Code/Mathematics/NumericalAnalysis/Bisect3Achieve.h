@@ -45,11 +45,11 @@ bool Mathematics::Bisect3<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename Mathematics::Bisect3<Real>::Bisect3Root Mathematics::Bisect3<Real>::Bisect(Real beginPointX, Real beginPointY, Real beginPointZ, Real endPointX, Real endPointY, Real endPointZ) const
+typename Mathematics::Bisect3<Real>::Bisect3RootType Mathematics::Bisect3<Real>::Bisect(Real beginPointX, Real beginPointY, Real beginPointZ, Real endPointX, Real endPointY, Real endPointZ) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    Bisect3Calculate calculate{ *this, beginPointX, beginPointY, beginPointZ, endPointX, endPointY, endPointZ };
+    Bisect3CalculateType calculate{ *this, beginPointX, beginPointY, beginPointZ, endPointX, endPointY, endPointZ };
 
     return calculate.GetRoot();
 }

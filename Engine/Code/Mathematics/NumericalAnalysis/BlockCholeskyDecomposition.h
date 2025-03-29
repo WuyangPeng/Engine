@@ -70,10 +70,10 @@ namespace Mathematics
         void SubtractiveUpdate(int r, int k, int c, BlockMatrix& a);
 
     private:
-        using CholeskyDecomposition = CholeskyDecomposition<Real, BlockSize>;
+        using CholeskyDecompositionType = CholeskyDecomposition<Real, BlockSize>;
 
     private:
-        CholeskyDecomposition decomposer;
+        CholeskyDecompositionType decomposer;
     };
 
     /// 仅在运行时才知道大小的实现。
