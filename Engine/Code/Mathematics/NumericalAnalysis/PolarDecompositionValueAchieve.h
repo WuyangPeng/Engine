@@ -18,7 +18,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-Mathematics::PolarDecompositionValue<Real>::PolarDecompositionValue(const Matrix3& matrix)
+Mathematics::PolarDecompositionValue<Real>::PolarDecompositionValue(const Matrix3Type& matrix)
     : orthogonal{}, symmetry{}
 {
     Calculate(matrix);
@@ -37,7 +37,7 @@ bool Mathematics::PolarDecompositionValue<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-void Mathematics::PolarDecompositionValue<Real>::Calculate(const Matrix3& matrix)
+void Mathematics::PolarDecompositionValue<Real>::Calculate(const Matrix3Type& matrix)
 {
     // ·Ö½â M = L * D * Real^T.
     const SingularValue<Real> singularValue{ matrix };
