@@ -46,7 +46,7 @@ int Mathematics::RootsQuartic<T>::Solve(bool useBisection,
 
     if (MathType::Approximate(g4, T{}))
     {
-        return RootsCubic::Solve(useBisection, g0, g1, g2, g3, roots);
+        return RootsCubicType::Solve(useBisection, g0, g1, g2, g3, roots);
     }
 
     /// 测试零值根。
@@ -173,7 +173,7 @@ int Mathematics::RootsQuartic<T>::HasZeroValuedRoots(bool useBisection,
     }
     else
     {
-        auto numRoots = RootsCubic::Solve(useBisection, g1, g2, g3, g4, roots);
+        auto numRoots = RootsCubicType::Solve(useBisection, g1, g2, g3, g4, roots);
         roots.at(numRoots++) = { T{}, 1 };
         std::sort(roots.begin(), roots.begin() + numRoots);
         return numRoots;
@@ -214,7 +214,7 @@ int Mathematics::RootsQuartic<T>::HasZeroValuedRoots(bool useBisection,
     }
     else
     {
-        auto numRoots = RootsCubic::Solve(useBisection, m1, m2, m3, roots);
+        auto numRoots = RootsCubicType::Solve(useBisection, m1, m2, m3, roots);
         roots.at(numRoots++) = { T{}, 1 };
         std::sort(roots.begin(), roots.begin() + numRoots);
         return numRoots;
@@ -386,7 +386,7 @@ int Mathematics::RootsQuartic<T>::ComputeDepressedRootsBisection(const Rational&
         {
             /// 零是多重数1的根。三次解算器计算其他根。
             std::array temp{ RationalPolynomialRoot::CreateZero(), RationalPolynomialRoot::CreateZero(), RationalPolynomialRoot::CreateZero() };
-            auto numRoots = RootsCubic::ComputeDepressedRoots(true, rD1, rD2, temp);
+            auto numRoots = RootsCubicType::ComputeDepressedRoots(true, rD1, rD2, temp);
             rRoots.at(0) = temp.at(0);
             rRoots.at(1) = temp.at(1);
             rRoots.at(2) = temp.at(2);
