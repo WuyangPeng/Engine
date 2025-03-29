@@ -19,7 +19,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-Mathematics::SingularValue<Real>::SingularValue(const Matrix3& matrix)
+Mathematics::SingularValue<Real>::SingularValue(const Matrix3Type& matrix)
     : left{}, diagonal{}, rightTranspose{}
 {
     Calculate(matrix);
@@ -38,7 +38,7 @@ bool Mathematics::SingularValue<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-void Mathematics::SingularValue<Real>::Calculate(const Matrix3& matrix)
+void Mathematics::SingularValue<Real>::Calculate(const Matrix3Type& matrix)
 {
     // 通过调用特征分解和QR分解专门针对3x3的更换。
     // 所述QDUDecomposition似乎假定输入矩阵是可逆的，但一般的QR分解具有处理非满秩矩阵。

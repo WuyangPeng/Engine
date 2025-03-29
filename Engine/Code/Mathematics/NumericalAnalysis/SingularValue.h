@@ -24,25 +24,25 @@ namespace Mathematics
 
         using ClassType = SingularValue<Real>;
 
-        using Matrix3 = Matrix3<Real>;
+        using Matrix3Type = Matrix3<Real>;
 
     public:
-        explicit SingularValue(const Matrix3& matrix);
+        explicit SingularValue(const Matrix3Type& matrix);
 
         CLASS_INVARIANT_DECLARE;
 
     public:
-        NODISCARD Matrix3 GetLeftMatrix() const noexcept;
-        NODISCARD Matrix3 GetDiagonalMatrix() const noexcept;
-        NODISCARD Matrix3 GetRightTransposeMatrix() const noexcept;
+        NODISCARD Matrix3Type GetLeftMatrix() const noexcept;
+        NODISCARD Matrix3Type GetDiagonalMatrix() const noexcept;
+        NODISCARD Matrix3Type GetRightTransposeMatrix() const noexcept;
 
     private:
-        void Calculate(const Matrix3& matrix);
+        void Calculate(const Matrix3Type& matrix);
 
     private:
-        Matrix3 left;
-        Matrix3 diagonal;
-        Matrix3 rightTranspose;
+        Matrix3Type left;
+        Matrix3Type diagonal;
+        Matrix3Type rightTranspose;
     };
 
     using SingularValueF = SingularValue<float>;
