@@ -98,11 +98,11 @@ namespace Mathematics::Algebra
         NODISCARD DiagonalType GetSingularValues() const;
 
     private:
-        using GivensRotation = GivensRotation<Real>;
-        using SingularInfo = SingularInfo<Real>;
+        using GivensRotationType = GivensRotation<Real>;
+        using SingularInfoType = SingularInfo<Real>;
         using HouseholderType = std::vector<DiagonalType>;
-        using GivensRotationContainer = std::vector<GivensRotation>;
-        using SingularInfoContainer = std::vector<SingularInfo>;
+        using GivensRotationContainer = std::vector<GivensRotationType>;
+        using SingularInfoContainer = std::vector<SingularInfoType>;
 
         static constexpr auto unitRoundOff = std::numeric_limits<Real>::epsilon();
 

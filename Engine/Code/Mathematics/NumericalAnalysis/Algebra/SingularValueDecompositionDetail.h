@@ -740,7 +740,7 @@ void Mathematics::Algebra::SingularValueDecomposition<Real>::SortSingularValues(
         sorted.at(i).SetSingular(sMatrix.at(index));
         sorted.at(i).SetInversePermute(i);
     }
-    std::sort(sorted.begin(), sorted.end(), std::greater<SingularInfo>());
+    std::sort(sorted.begin(), sorted.end(), std::greater<SingularInfoType>());
     for (auto i = 0; i < numCols; ++i)
     {
         const auto index = i + numCols * i;
