@@ -111,14 +111,14 @@ void Mathematics::AlignedBox<N, Real>::Set(const Vector& aMin, const Vector& aMa
 
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
-typename Mathematics::AlignedBox<N, Real>::AlignedBoxCentered Mathematics::AlignedBox<N, Real>::GetCenteredForm() const
+typename Mathematics::AlignedBox<N, Real>::AlignedBoxCenteredType Mathematics::AlignedBox<N, Real>::GetCenteredForm() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     const auto center = (max + min) * MathType::GetRational(1, 2);
     const auto extent = (max - min) * MathType::GetRational(1, 2);
 
-    return AlignedBoxCentered{ center, extent };
+    return AlignedBoxCenteredType{ center, extent };
 }
 
 template <int N, typename Real>

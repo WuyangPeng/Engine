@@ -25,22 +25,22 @@ namespace Mathematics
         using ClassType = Capsule<N, Real>;
 
         using MathType = Math<Real>;
-        using Segment = Segment<N, Real>;
+        using SegmentType = Segment<N, Real>;
 
     public:
         /// 默认构造函数将线段设置为具有端点p0 = (-1,0,...,0)和p1 = (1,0,...,0)，半径为1。
         Capsule() noexcept;
-        Capsule(const Segment& segment, Real radius) noexcept;
+        Capsule(const SegmentType& segment, Real radius) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Segment GetSegment() const noexcept;
-        void SetSegment(const Segment& aSegment) noexcept;
+        NODISCARD SegmentType GetSegment() const noexcept;
+        void SetSegment(const SegmentType& aSegment) noexcept;
         NODISCARD Real GetRadius() const noexcept;
         void SetRadius(Real aRadius) noexcept;
 
     private:
-        Segment segment;
+        SegmentType segment;
         Real radius;
     };
 

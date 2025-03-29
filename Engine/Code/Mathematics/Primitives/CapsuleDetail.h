@@ -23,7 +23,7 @@ Mathematics::Capsule<N, Real>::Capsule() noexcept
 
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
-Mathematics::Capsule<N, Real>::Capsule(const Segment& segment, Real radius) noexcept
+Mathematics::Capsule<N, Real>::Capsule(const SegmentType& segment, Real radius) noexcept
     : segment{ segment }, radius{ radius }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -42,7 +42,7 @@ bool Mathematics::Capsule<N, Real>::IsValid() const noexcept
 
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
-typename Mathematics::Capsule<N, Real>::Segment Mathematics::Capsule<N, Real>::GetSegment() const noexcept
+typename Mathematics::Capsule<N, Real>::SegmentType Mathematics::Capsule<N, Real>::GetSegment() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -51,7 +51,7 @@ typename Mathematics::Capsule<N, Real>::Segment Mathematics::Capsule<N, Real>::G
 
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
-void Mathematics::Capsule<N, Real>::SetSegment(const Segment& aSegment) noexcept
+void Mathematics::Capsule<N, Real>::SetSegment(const SegmentType& aSegment) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
