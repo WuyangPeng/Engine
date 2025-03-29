@@ -63,13 +63,13 @@ void Mathematics::StaticFindIntersectorPlane3Sphere3<Real>::Find()
         // 球体与平面相交成一个圆。 当距离等于m_Sphere.GetRadius()时，圆会退化，在这种情况下，圆半径为零。
         auto radius = MathType::Sqrt(MathType::FAbs(sphere.GetRadius() * sphere.GetRadius() - distance * distance));
         this->SetIntersectionType(IntersectionType::Point);
-        circle = Circle3{ center, Vector3Type::GetZero(), Vector3Type::GetZero(), normal, radius };
+        circle = Circle3Type{ center, Vector3Type::GetZero(), Vector3Type::GetZero(), normal, radius };
         return;
     }
 
     // 圆的附加指示。
     auto radius = MathType::GetValue(-1);
-    circle = Circle3{ center, Vector3Type::GetZero(), Vector3Type::GetZero(), normal, radius };
+    circle = Circle3Type{ center, Vector3Type::GetZero(), Vector3Type::GetZero(), normal, radius };
     this->SetIntersectionType(IntersectionType::Empty);
 }
 

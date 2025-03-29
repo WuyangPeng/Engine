@@ -29,7 +29,7 @@ namespace Mathematics
         using Vector3Type = Vector3<Real>;
         using Plane3Type = Plane3<Real>;
         using Sphere3Type = Sphere3<Real>;
-        using Circle3 = Circle3<Real>;
+        using Circle3Type = Circle3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
         using MathType = typename ParentType::MathType;
 
@@ -45,7 +45,7 @@ namespace Mathematics
         NODISCARD bool SphereIsCulled() const noexcept;
 
         // 相交集。 该圆仅在Find()返回“ true”时才有效。 如果不存在相交，则将圆半径设置为-1，以附加指示圆无效。
-        NODISCARD Circle3 GetCircle() const noexcept;
+        NODISCARD Circle3Type GetCircle() const noexcept;
 
     private:
         void Find();
@@ -54,7 +54,7 @@ namespace Mathematics
         Plane3Type plane;
         Sphere3Type sphere;
 
-        Circle3 circle;
+        Circle3Type circle;
     };
 }
 
