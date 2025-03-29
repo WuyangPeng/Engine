@@ -27,11 +27,11 @@ namespace Mathematics
         using ClassType = IntegerDataConversion<N, T>;
 
         using TraitsType = typename IntegerTraits<T>::TraitsType;
-        using IntegerData = IntegerData<N>;
+        using IntegerDataType = IntegerData<N>;
 
     public:
         // 返回值若被截断，抛出异常
-        explicit IntegerDataConversion(const IntegerData& data);
+        explicit IntegerDataConversion(const IntegerDataType& data);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -49,7 +49,7 @@ namespace Mathematics
         void SignedIntegerNegative();
 
     private:
-        IntegerData absData;
+        IntegerDataType absData;
         int shifting;
         uint64_t mantissa;
         NumericalValueSymbol symbol;
