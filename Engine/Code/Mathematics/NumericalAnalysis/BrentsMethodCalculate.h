@@ -29,7 +29,7 @@ namespace Mathematics
         using ClassType = BrentsMethodCalculate<Real, UserDataType>;
 
         using BrentsMethodType = BrentsMethod<Real, UserDataType>;
-        using BrentsMethodRootType = BrentsMethodRoot<Real>;
+        using BrentsMethodRootR = BrentsMethodRoot<Real>;
         using MathType = Math<Real>;
 
     public:
@@ -37,7 +37,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD BrentsMethodRootType GetRoot() noexcept;
+        NODISCARD BrentsMethodRootR GetRoot() noexcept;
 
     private:
         void Calculate();
@@ -62,7 +62,7 @@ namespace Mathematics
         Real beginFunction;
         Real endFunction;
 
-        BrentsMethodRootType bisect2Root;
+        BrentsMethodRootR bisect2Root;
 
         // ¸ùËÑË÷µÄÖµ¡£
         Real searchBegin;
