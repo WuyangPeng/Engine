@@ -177,7 +177,7 @@ const UserDataType* Mathematics::BrentsMethod<Real, UserDataType>::GetUserData()
 }
 
 template <typename Real, typename UserDataType>
-typename Mathematics::BrentsMethod<Real, UserDataType>::BrentsMethodRoot Mathematics::BrentsMethod<Real, UserDataType>::GetRoot(Real begin, Real end)
+typename Mathematics::BrentsMethod<Real, UserDataType>::BrentsMethodRootType Mathematics::BrentsMethod<Real, UserDataType>::GetRoot(Real begin, Real end)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
     MATHEMATICS_ASSERTION_1(begin <= end, "间隔是无效在GetRoot。\n");

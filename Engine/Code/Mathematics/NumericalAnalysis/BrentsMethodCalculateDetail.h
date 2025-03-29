@@ -17,7 +17,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real, typename UserDataType>
-Mathematics::BrentsMethodCalculate<Real, UserDataType>::BrentsMethodCalculate(const BrentsMethod& brentsMethod, Real begin, Real end)
+Mathematics::BrentsMethodCalculate<Real, UserDataType>::BrentsMethodCalculate(const BrentsMethodType& brentsMethod, Real begin, Real end)
     : brentsMethod{ brentsMethod },
       begin{ begin },
       end{ end },
@@ -50,7 +50,7 @@ bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::IsValid() const noe
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real, typename UserDataType>
-typename Mathematics::BrentsMethodCalculate<Real, UserDataType>::BrentsMethodRoot Mathematics::BrentsMethodCalculate<Real, UserDataType>::GetRoot() noexcept
+typename Mathematics::BrentsMethodCalculate<Real, UserDataType>::BrentsMethodRootType Mathematics::BrentsMethodCalculate<Real, UserDataType>::GetRoot() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -63,12 +63,12 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::Calculate()
     if (IsBeginSatisfyConditions())
     {
         // 该端点是满足函数公差的近似根。
-        bisect2Root = BrentsMethodRoot{ begin, beginFunction, BrentsMethodRootType::HaveSolution };
+        bisect2Root = BrentsMethodRootType{ begin, beginFunction, BrentsMethodRootType::HaveSolution };
     }
     else if (IsEndSatisfyConditions())
     {
         // 该端点是满足函数公差的近似根。
-        bisect2Root = BrentsMethodRoot{ end, endFunction, BrentsMethodRootType::HaveSolution };
+        bisect2Root = BrentsMethodRootType{ end, endFunction, BrentsMethodRootType::HaveSolution };
     }
     else if (beginFunction * endFunction < MathType::GetValue(0))
     {
@@ -120,7 +120,7 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::Search()
         }
     }
 
-    bisect2Root = BrentsMethodRoot{ end, endFunction, BrentsMethodRootType::Unknown };
+    bisect2Root = BrentsMethodRootType{ end, endFunction, BrentsMethodRootType::Unknown };
 }
 
 template <typename Real, typename UserDataType>
@@ -169,7 +169,7 @@ bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::RootSearch()
     // 评估函数在新的估计和收敛测试。
     if (IsSolutionSatisfyConditions())
     {
-        bisect2Root = BrentsMethodRoot{ solution, solutionFunction, BrentsMethodRootType::HaveSolution };
+        bisect2Root = BrentsMethodRootType{ solution, solutionFunction, BrentsMethodRootType::HaveSolution };
         return true;
     }
 
@@ -179,7 +179,7 @@ bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::RootSearch()
     // 允许该算法子间隔足够小时终止。
     if (IsConvXTolerance())
     {
-        bisect2Root = BrentsMethodRoot{ end, endFunction, BrentsMethodRootType::HaveSolution };
+        bisect2Root = BrentsMethodRootType{ end, endFunction, BrentsMethodRootType::HaveSolution };
 
         return true;
     }

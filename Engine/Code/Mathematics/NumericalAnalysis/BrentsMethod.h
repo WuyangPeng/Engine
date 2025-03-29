@@ -26,7 +26,7 @@ namespace Mathematics
         using ClassType = BrentsMethod<Real, UserDataType>;
 
         using MathType = Math<Real>;
-        using BrentsMethodRoot = BrentsMethodRoot<Real>;
+        using BrentsMethodRootType = BrentsMethodRoot<Real>;
 
         // 一个函数F(x)，但有一个额外的参数，
         // 让你传递用户定义的数据给需要评估的函数。
@@ -88,7 +88,7 @@ namespace Mathematics
         NODISCARD Real GetFunctionValue(Real value) const;
 
         // 当返回的根有解时，x是根和y是根的函数值。
-        NODISCARD BrentsMethodRoot GetRoot(Real begin, Real end);
+        NODISCARD BrentsMethodRootType GetRoot(Real begin, Real end);
 
     private:
         Function function;
