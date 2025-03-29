@@ -56,9 +56,9 @@ namespace Mathematics::Algebra
         void GetMinimum(const Container& t0, const Container& t1, const Container& tInitial, Container& aTMin, T& aFMin);
 
     private:
-        using VariableLengthVector = VariableLengthVector<T>;
-        using Minimize1 = Minimize1<T>;
-        using VariableLengthVectorContainer = std::vector<VariableLengthVector>;
+        using VariableLengthVectorType = VariableLengthVector<T>;
+        using Minimize1Type = Minimize1<T>;
+        using VariableLengthVectorContainer = std::vector<VariableLengthVectorType>;
 
     private:
         /// 最小位置的当前估计为mTCurr[0..d-1]。
@@ -75,10 +75,10 @@ namespace Mathematics::Algebra
         VariableLengthVectorContainer directions;
         int dConjIndex;
         int dCurrIndex;
-        VariableLengthVector tCurr;
-        VariableLengthVector tSave;
+        VariableLengthVectorType tCurr;
+        VariableLengthVectorType tSave;
         T fCurr;
-        Minimize1 minimizer;
+        Minimize1Type minimizer;
     };
 }
 

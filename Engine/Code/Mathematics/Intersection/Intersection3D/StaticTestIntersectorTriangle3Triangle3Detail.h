@@ -22,7 +22,7 @@
 #include "Mathematics/Objects3D/Triangle3Detail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::StaticTestIntersectorTriangle3Triangle3(const Triangle3& lhsTriangle, const Triangle3& rhsTriangle, const Real epsilon)
+Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::StaticTestIntersectorTriangle3Triangle3(const Triangle3Type& lhsTriangle, const Triangle3Type& rhsTriangle, const Real epsilon)
     : ParentType{ epsilon }, lhsTriangle{ lhsTriangle }, rhsTriangle{ rhsTriangle }
 {
     Test();
@@ -140,7 +140,7 @@ void Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::Test()
 }
 
 template <typename Real>
-typename Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::Triangle3 Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::GetLhsTriangle() const noexcept
+typename Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::Triangle3Type Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::GetLhsTriangle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -148,7 +148,7 @@ typename Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::Triangle3 M
 }
 
 template <typename Real>
-typename Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::Triangle3 Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::GetRhsTriangle() const noexcept
+typename Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::Triangle3Type Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::GetRhsTriangle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
