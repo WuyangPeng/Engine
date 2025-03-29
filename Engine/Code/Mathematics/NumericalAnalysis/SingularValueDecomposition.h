@@ -26,41 +26,41 @@ namespace Mathematics
         using ClassType = SingularValueDecomposition<Real>;
 
         using MathType = Math<Real>;
-        using VariableMatrix = VariableMatrix<Real>;
-        using VariableLengthVector = VariableLengthVector<Real>;
+        using VariableMatrixType = VariableMatrix<Real>;
+        using VariableLengthVectorType = VariableLengthVector<Real>;
 
     public:
         // 奇异值分解，M = L * D * Transpose(Real)，
         // 其中L和Real是正交和D是对角矩阵，其对角项是非负数。
         // 观察M为m乘n矩阵，其中 m >= n时，L是m乘m，Real是n乘n和D是m乘n;
         // 即M和D具有相同的大小，但不一定正方形。
-        explicit SingularValueDecomposition(const VariableMatrix& matrix);
+        explicit SingularValueDecomposition(const VariableMatrixType& matrix);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD VariableMatrix GetLeftMatrix() const;
-        NODISCARD VariableMatrix GetDiagonalMatrix() const;
-        NODISCARD VariableMatrix GetRightTransposeMatrix() const;
+        NODISCARD VariableMatrixType GetLeftMatrix() const;
+        NODISCARD VariableMatrixType GetDiagonalMatrix() const;
+        NODISCARD VariableMatrixType GetRightTransposeMatrix() const;
 
     private:
-        void Calculate(const VariableMatrix& matrix);
+        void Calculate(const VariableMatrixType& matrix);
 
         // 计算V使V[0] = 1，和(I - 2 * V * V^T / V^T * V) * X除第一部分外全是零。返回V。
-        NODISCARD static VariableLengthVector HouseholderVector(const VariableLengthVector& vector);
+        NODISCARD static VariableLengthVectorType HouseholderVector(const VariableLengthVectorType& vector);
 
         // 覆盖 A 为 (I - 2 * V * V^T / V^T * V) * A.
-        static void HouseholderPremultiply(const VariableLengthVector& vector, VariableMatrix& matrix);
+        static void HouseholderPremultiply(const VariableLengthVectorType& vector, VariableMatrixType& matrix);
 
         // 覆盖 A 为 A * (I - 2 * V * V^T / V^T * V).
-        static void HouseholderPostmultiply(const VariableLengthVector& vector, VariableMatrix& matrix);
+        static void HouseholderPostmultiply(const VariableLengthVectorType& vector, VariableMatrixType& matrix);
 
         // 因子A = Q * Real，Q是正交和Real是上三角。
         void HouseholderQR();
 
     private:
-        VariableMatrix left;
-        VariableMatrix diagonal;
-        VariableMatrix rightTranspose;
+        VariableMatrixType left;
+        VariableMatrixType diagonal;
+        VariableMatrixType rightTranspose;
     };
 
     using SingularValueDecompositionF = SingularValueDecomposition<float>;
