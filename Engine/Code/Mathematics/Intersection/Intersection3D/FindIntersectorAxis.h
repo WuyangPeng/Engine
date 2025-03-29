@@ -30,7 +30,7 @@ namespace Mathematics
         using Triangle3Type = Triangle3<Real>;
         using Box3Type = Box3<Real>;
         using SegmentType = std::array<Vector3Type, 2>;
-        using IntersectorConfiguration = IntersectorConfiguration<Real>;
+        using IntersectorConfigurationType = IntersectorConfiguration<Real>;
 
     public:
         /// 查找查询投影区间的交集。 输入的速度是objectVelocity1 - objectVelocity0之差。
@@ -50,27 +50,27 @@ namespace Mathematics
         NODISCARD Real GetTLast() const noexcept;
 
         NODISCARD ContactSide Getside() const noexcept;
-        NODISCARD IntersectorConfiguration GetCfgFinal0() const noexcept;
-        NODISCARD IntersectorConfiguration GetCfgFinal1() const noexcept;
+        NODISCARD IntersectorConfigurationType GetCfgFinal0() const noexcept;
+        NODISCARD IntersectorConfigurationType GetCfgFinal1() const noexcept;
 
         // Configurations.
-        NODISCARD static IntersectorConfiguration GetConfiguration(const Vector3Type& axis, const SegmentType& segment);
+        NODISCARD static IntersectorConfigurationType GetConfiguration(const Vector3Type& axis, const SegmentType& segment);
 
-        NODISCARD static IntersectorConfiguration GetConfiguration(const Vector3Type& axis, const Triangle3Type& triangle);
+        NODISCARD static IntersectorConfigurationType GetConfiguration(const Vector3Type& axis, const Triangle3Type& triangle);
 
-        NODISCARD static IntersectorConfiguration GetConfiguration(const Vector3Type& axis, const Box3Type& box);
+        NODISCARD static IntersectorConfigurationType GetConfiguration(const Vector3Type& axis, const Box3Type& box);
 
     private:
         // 投影的低级查找查询。
-        void Find(const Vector3Type& axis, const Vector3Type& velocity, const IntersectorConfiguration& cfg0Start, const IntersectorConfiguration& cfg1Start, Real tmax) noexcept;
+        void Find(const Vector3Type& axis, const Vector3Type& velocity, const IntersectorConfigurationType& cfg0Start, const IntersectorConfigurationType& cfg1Start, Real tmax) noexcept;
 
     private:
         bool result;
         Real tFirst;
         Real tLast;
         ContactSide side;
-        IntersectorConfiguration cfgFinal0;
-        IntersectorConfiguration cfgFinal1;
+        IntersectorConfigurationType cfgFinal0;
+        IntersectorConfigurationType cfgFinal1;
     };
 }
 
