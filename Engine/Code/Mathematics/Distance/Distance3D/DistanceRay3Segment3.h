@@ -31,7 +31,7 @@ namespace Mathematics
         using Ray3Type = Ray3<Real>;
         using Segment3Type = Segment3<Real>;
         using Vector3ToolsType = Vector3Tools<Real>;
-        using DistanceLine3Line3Tool = DistanceLine3Line3Tool<Real>;
+        using DistanceLine3Line3ToolType = DistanceLine3Line3Tool<Real>;
         using MathType = typename ParentType::MathType;
         using DistanceResult = typename ParentType::DistanceResultType;
 
@@ -50,9 +50,9 @@ namespace Mathematics
         NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
     private:
-        NODISCARD DistanceResult GetSquaredWithClosestPointsIsSegmentEndPoint(const DistanceLine3Line3Tool& tool, Real rhsExtent) const;
-        NODISCARD DistanceResult GetSquaredWithClosestPointsIsSegmentBeginPoint(const DistanceLine3Line3Tool& tool, Real rhsExtent) const;
-        NODISCARD DistanceResult GetSquaredWithClosestPointsIsRayOrigin(const DistanceLine3Line3Tool& tool, Real rhsExtent) const;
+        NODISCARD DistanceResult GetSquaredWithClosestPointsIsSegmentEndPoint(const DistanceLine3Line3ToolType& tool, Real rhsExtent) const;
+        NODISCARD DistanceResult GetSquaredWithClosestPointsIsSegmentBeginPoint(const DistanceLine3Line3ToolType& tool, Real rhsExtent) const;
+        NODISCARD DistanceResult GetSquaredWithClosestPointsIsRayOrigin(const DistanceLine3Line3ToolType& tool, Real rhsExtent) const;
 
     private:
         Ray3Type ray;

@@ -58,7 +58,7 @@ typename Mathematics::DistanceRay3Segment3<Real>::DistanceResult Mathematics::Di
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const DistanceLine3Line3Tool tool{ ray.GetOrigin(), ray.GetDirection(), segment.GetCenterPoint(), segment.GetDirection() };
+    const DistanceLine3Line3ToolType tool{ ray.GetOrigin(), ray.GetDirection(), segment.GetCenterPoint(), segment.GetDirection() };
 
     const auto det = tool.GetDet();
     const auto rhsExtent = segment.GetExtent();
@@ -141,7 +141,7 @@ typename Mathematics::DistanceRay3Segment3<Real>::DistanceResult Mathematics::Di
 }
 
 template <typename Real>
-typename Mathematics::DistanceRay3Segment3<Real>::DistanceResult Mathematics::DistanceRay3Segment3<Real>::GetSquaredWithClosestPointsIsSegmentEndPoint(const DistanceLine3Line3Tool& tool, Real rhsExtent) const
+typename Mathematics::DistanceRay3Segment3<Real>::DistanceResult Mathematics::DistanceRay3Segment3<Real>::GetSquaredWithClosestPointsIsSegmentEndPoint(const DistanceLine3Line3ToolType& tool, Real rhsExtent) const
 {
     const auto t = tool.GetLhsT(-rhsExtent);
     const auto rhsSquare = rhsExtent * (rhsExtent + MathType::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) + tool.GetOriginDifferenceSquaredLength();
@@ -167,7 +167,7 @@ typename Mathematics::DistanceRay3Segment3<Real>::DistanceResult Mathematics::Di
 }
 
 template <typename Real>
-typename Mathematics::DistanceRay3Segment3<Real>::DistanceResult Mathematics::DistanceRay3Segment3<Real>::GetSquaredWithClosestPointsIsSegmentBeginPoint(const DistanceLine3Line3Tool& tool, Real rhsExtent) const
+typename Mathematics::DistanceRay3Segment3<Real>::DistanceResult Mathematics::DistanceRay3Segment3<Real>::GetSquaredWithClosestPointsIsSegmentBeginPoint(const DistanceLine3Line3ToolType& tool, Real rhsExtent) const
 {
     const auto t = tool.GetLhsT(rhsExtent);
     if (MathType::GetValue(0) < t)
@@ -188,7 +188,7 @@ typename Mathematics::DistanceRay3Segment3<Real>::DistanceResult Mathematics::Di
 }
 
 template <typename Real>
-typename Mathematics::DistanceRay3Segment3<Real>::DistanceResult Mathematics::DistanceRay3Segment3<Real>::GetSquaredWithClosestPointsIsRayOrigin(const DistanceLine3Line3Tool& tool, Real rhsExtent) const
+typename Mathematics::DistanceRay3Segment3<Real>::DistanceResult Mathematics::DistanceRay3Segment3<Real>::GetSquaredWithClosestPointsIsRayOrigin(const DistanceLine3Line3ToolType& tool, Real rhsExtent) const
 {
     auto dotRhsDirection = -tool.GetOriginDifferenceDotRhsDirection();
     if (dotRhsDirection < -rhsExtent)
