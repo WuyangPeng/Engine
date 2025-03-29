@@ -22,7 +22,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-Mathematics::Matrix3Tools<Real>::Matrix3Tools(const Matrix3& matrix) noexcept
+Mathematics::Matrix3Tools<Real>::Matrix3Tools(const Matrix3Type& matrix) noexcept
     : matrix{ matrix }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -39,7 +39,7 @@ bool Mathematics::Matrix3Tools<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename Mathematics::Matrix3Tools<Real>::SingularValue Mathematics::Matrix3Tools<Real>::SingularValueDecomposition() const
+typename Mathematics::Matrix3Tools<Real>::SingularValueType Mathematics::Matrix3Tools<Real>::SingularValueDecomposition() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -47,23 +47,23 @@ typename Mathematics::Matrix3Tools<Real>::SingularValue Mathematics::Matrix3Tool
     // 所述QDUDecomposition似乎假定输入矩阵是可逆的，
     // 但一般的QR分解具有处理非满秩矩阵。
 
-    SingularValue singularValue{ matrix };
+    SingularValueType singularValue{ matrix };
 
     return singularValue;
 }
 
 template <typename Real>
-typename Mathematics::Matrix3Tools<Real>::PolarDecompositionValue Mathematics::Matrix3Tools<Real>::PolarDecomposition() const
+typename Mathematics::Matrix3Tools<Real>::PolarDecompositionValueType Mathematics::Matrix3Tools<Real>::PolarDecomposition() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    PolarDecompositionValue polarDecompositionValue{ matrix };
+    PolarDecompositionValueType polarDecompositionValue{ matrix };
 
     return polarDecompositionValue;
 }
 
 template <typename Real>
-typename Mathematics::Matrix3Tools<Real>::QDUDecompositionValue Mathematics::Matrix3Tools<Real>::QDUDecomposition() const
+typename Mathematics::Matrix3Tools<Real>::QDUDecompositionValueType Mathematics::Matrix3Tools<Real>::QDUDecomposition() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -87,7 +87,7 @@ typename Mathematics::Matrix3Tools<Real>::QDUDecompositionValue Mathematics::Mat
     // 所以 D = diag(r00,r11,r22) 和 U 具有项 u01 = r01/r00,
     // u02 = r02/r00, 和 u12 = r12/r11.
 
-    QDUDecompositionValue qDUDecompositionValue{ matrix };
+    QDUDecompositionValueType qDUDecompositionValue{ matrix };
 
     return qDUDecompositionValue;
 }
