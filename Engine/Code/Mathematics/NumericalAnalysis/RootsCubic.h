@@ -17,6 +17,8 @@
 #include "Mathematics/Rational/BinaryScientificRational.h"
 #include "Mathematics/Rational/UIntegerArbitraryPrecision32.h"
 
+#include <type_traits>
+
 /// 计算具有实值系数的三次多项式的实值根。
 /// 一般的三次多项式是g(x) = g0 + g1 * x + g2 * x^2 + g3 * x^3，其中g3不为零。
 /// 一次三次多项式为m(x) = m0 + m1 * x + m2 * x^2 + x^3。
