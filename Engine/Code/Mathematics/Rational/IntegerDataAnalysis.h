@@ -25,14 +25,14 @@ namespace Mathematics
     {
     public:
         using ClassType = IntegerDataAnalysis<N>;
-        using IntegerData = IntegerData<N>;
+        using IntegerDataType = IntegerData<N>;
 
     public:
-        explicit IntegerDataAnalysis(const IntegerData& master) noexcept;
+        explicit IntegerDataAnalysis(const IntegerDataType& master) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD IntegerData GetAbsoluteValue() const;
+        NODISCARD IntegerDataType GetAbsoluteValue() const;
 
         // 其他实用程序。
         NODISCARD uint32_t ToUnsignedInt(int index) const;
@@ -47,9 +47,9 @@ namespace Mathematics
         NODISCARD int GetTrailingBit() const;  // 整个数字
 
         // 算术运算。
-        NODISCARD IntegerData operator-() const;
+        NODISCARD IntegerDataType operator-() const;
 
-        NODISCARD IntegerDivisionModulo<N> GetDivisionModulo(const IntegerData& rhs) const;
+        NODISCARD IntegerDivisionModulo<N> GetDivisionModulo(const IntegerDataType& rhs) const;
 
     private:
         static constexpr auto maskSize = 4;
@@ -72,7 +72,7 @@ namespace Mathematics
         static constexpr MaskType trailingMask{ 0x00FF, 0x0F0F, 0x3333, 0x5555 };
 
         // 最低位储存在索引0。
-        const IntegerData& master;
+        const IntegerDataType& master;
     };
 
     template <int N>
