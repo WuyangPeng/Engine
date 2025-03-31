@@ -166,7 +166,20 @@ void Mathematics::RootsQuadratic<T>::ComputeClassifiers(const Rational& rM0, con
 }
 
 template <typename T>
-int Mathematics::RootsQuadratic<T>::ComputeDepressedRootsBisection(const Rational& rD0, RationalPolynomialRootContainer& rRoots) requires(std::is_arithmetic_v<T>)
+int Mathematics::RootsQuadratic<T>::ComputeDepressedRootsBisection(const Rational& rD0, RationalPolynomialRootContainer& rRoots)
+{
+    if constexpr (std::is_arithmetic_v<T>)
+    {
+        return ComputeDepressedRootsBisection0(rD0, rRoots);
+    }
+    else
+    {
+        return ComputeDepressedRootsBisection1(rD0, rRoots);
+    }
+}
+
+template <typename T>
+int Mathematics::RootsQuadratic<T>::ComputeDepressedRootsBisection0(const Rational& rD0, RationalPolynomialRootContainer& rRoots)
 {
     const auto signD0 = rD0.GetSign();
     if (signD0 > 0)
@@ -203,7 +216,7 @@ int Mathematics::RootsQuadratic<T>::ComputeDepressedRootsBisection(const Rationa
 }
 
 template <typename T>
-int Mathematics::RootsQuadratic<T>::ComputeDepressedRootsBisection(const Rational& rD0, RationalPolynomialRootContainer& rRoots) requires(!std::is_arithmetic_v<T>)
+int Mathematics::RootsQuadratic<T>::ComputeDepressedRootsBisection1(const Rational& rD0, RationalPolynomialRootContainer& rRoots)
 {
     const auto signD0 = rD0.GetSign();
     if (signD0 > 0)
