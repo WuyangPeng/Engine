@@ -1331,7 +1331,7 @@ Mathematics::BinaryScientificNumber<UInteger> Mathematics::Atanh(const BinarySci
 template <typename UInteger>
 Mathematics::BinaryScientificNumber<UInteger> Mathematics::Atan2(const BinaryScientificNumber<UInteger>& y, const BinaryScientificNumber<UInteger>& x)
 {
-    return BinaryScientificNumber<UInteger>{ std::atanh(static_cast<double>(y), static_cast<double>(x)) };
+    return BinaryScientificNumber<UInteger>{ std::atan2(static_cast<double>(y), static_cast<double>(x)) };
 }
 
 template <typename UInteger>
@@ -1379,7 +1379,7 @@ Mathematics::BinaryScientificNumber<UInteger> Mathematics::Floor(const BinarySci
 template <typename UInteger>
 Mathematics::BinaryScientificNumber<UInteger> Mathematics::Fmod(const BinaryScientificNumber<UInteger>& x, const BinaryScientificNumber<UInteger>& y)
 {
-    return BinaryScientificNumber<UInteger>{ std::fmod(static_cast<double>(x)) };
+    return BinaryScientificNumber<UInteger>{ std::fmod(static_cast<double>(x), static_cast<double>(y)) };
 }
 
 template <typename UInteger>
