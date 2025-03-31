@@ -1373,13 +1373,13 @@ Mathematics::BinaryScientificNumber<UInteger> Mathematics::Fabs(const BinaryScie
 template <typename UInteger>
 Mathematics::BinaryScientificNumber<UInteger> Mathematics::Floor(const BinaryScientificNumber<UInteger>& x)
 {
-    return BinaryScientificNumber<UInteger>{ Floor(static_cast<double>(x)) };
+    return BinaryScientificNumber<UInteger>{ std::floor(static_cast<double>(x)) };
 }
 
 template <typename UInteger>
 Mathematics::BinaryScientificNumber<UInteger> Mathematics::Fmod(const BinaryScientificNumber<UInteger>& x, const BinaryScientificNumber<UInteger>& y)
 {
-    return BinaryScientificNumber<UInteger>{ Fmod(static_cast<double>(x)) };
+    return BinaryScientificNumber<UInteger>{ std::fmod(static_cast<double>(x)) };
 }
 
 template <typename UInteger>
