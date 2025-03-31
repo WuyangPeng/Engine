@@ -1295,73 +1295,73 @@ Mathematics::BinaryScientificNumber<UInteger> Mathematics::RobustDop(const Binar
 template <typename UInteger>
 Mathematics::BinaryScientificNumber<UInteger> Mathematics::Acos(const BinaryScientificNumber<UInteger>& x)
 {
-    return BinaryScientificNumber<UInteger>{ Acos(static_cast<double>(x)) };
+    return BinaryScientificNumber<UInteger>{ std::acos(static_cast<double>(x)) };
 }
 
 template <typename UInteger>
 Mathematics::BinaryScientificNumber<UInteger> Mathematics::Acosh(const BinaryScientificNumber<UInteger>& x)
 {
-    return BinaryScientificNumber<UInteger>{ Acosh(static_cast<double>(x)) };
+    return BinaryScientificNumber<UInteger>{ std::acosh(static_cast<double>(x)) };
 }
 
 template <typename UInteger>
 Mathematics::BinaryScientificNumber<UInteger> Mathematics::Asin(const BinaryScientificNumber<UInteger>& x)
 {
-    return BinaryScientificNumber<UInteger>{ Asin(static_cast<double>(x)) };
+    return BinaryScientificNumber<UInteger>{ std::asin(static_cast<double>(x)) };
 }
 
 template <typename UInteger>
 Mathematics::BinaryScientificNumber<UInteger> Mathematics::Asinh(const BinaryScientificNumber<UInteger>& x)
 {
-    return BinaryScientificNumber<UInteger>{ Asinh(static_cast<double>(x)) };
+    return BinaryScientificNumber<UInteger>{ std::asinh(static_cast<double>(x)) };
 }
 
 template <typename UInteger>
 Mathematics::BinaryScientificNumber<UInteger> Mathematics::Atan(const BinaryScientificNumber<UInteger>& x)
 {
-    return BinaryScientificNumber<UInteger>{ Atan(static_cast<double>(x)) };
+    return BinaryScientificNumber<UInteger>{ std::atan(static_cast<double>(x)) };
 }
 
 template <typename UInteger>
 Mathematics::BinaryScientificNumber<UInteger> Mathematics::Atanh(const BinaryScientificNumber<UInteger>& x)
 {
-    return BinaryScientificNumber<UInteger>{ Atanh(static_cast<double>(x)) };
+    return BinaryScientificNumber<UInteger>{ std::atanh(static_cast<double>(x)) };
 }
 
 template <typename UInteger>
 Mathematics::BinaryScientificNumber<UInteger> Mathematics::Atan2(const BinaryScientificNumber<UInteger>& y, const BinaryScientificNumber<UInteger>& x)
 {
-    return BinaryScientificNumber<UInteger>{ Atanh(static_cast<double>(y), static_cast<double>(x)) };
+    return BinaryScientificNumber<UInteger>{ std::atanh(static_cast<double>(y), static_cast<double>(x)) };
 }
 
 template <typename UInteger>
 Mathematics::BinaryScientificNumber<UInteger> Mathematics::Ceil(const BinaryScientificNumber<UInteger>& x)
 {
-    return BinaryScientificNumber<UInteger>{ Ceil(static_cast<double>(x)) };
+    return BinaryScientificNumber<UInteger>{ std::ceil(static_cast<double>(x)) };
 }
 
 template <typename UInteger>
 Mathematics::BinaryScientificNumber<UInteger> Mathematics::Cos(const BinaryScientificNumber<UInteger>& x)
 {
-    return BinaryScientificNumber<UInteger>{ Cos(static_cast<double>(x)) };
+    return BinaryScientificNumber<UInteger>{ std::cos(static_cast<double>(x)) };
 }
 
 template <typename UInteger>
 Mathematics::BinaryScientificNumber<UInteger> Mathematics::Cosh(const BinaryScientificNumber<UInteger>& x)
 {
-    return BinaryScientificNumber<UInteger>{ Cosh(static_cast<double>(x)) };
+    return BinaryScientificNumber<UInteger>{ std::cosh(static_cast<double>(x)) };
 }
 
 template <typename UInteger>
 Mathematics::BinaryScientificNumber<UInteger> Mathematics::Exp(const BinaryScientificNumber<UInteger>& x)
 {
-    return BinaryScientificNumber<UInteger>{ Exp(static_cast<double>(x)) };
+    return BinaryScientificNumber<UInteger>{ std::exp(static_cast<double>(x)) };
 }
 
 template <typename UInteger>
 Mathematics::BinaryScientificNumber<UInteger> Mathematics::Exp2(const BinaryScientificNumber<UInteger>& x)
 {
-    return BinaryScientificNumber<UInteger>{ Exp2(static_cast<double>(x)) };
+    return BinaryScientificNumber<UInteger>{ std::exp2(static_cast<double>(x)) };
 }
 
 template <typename UInteger>
