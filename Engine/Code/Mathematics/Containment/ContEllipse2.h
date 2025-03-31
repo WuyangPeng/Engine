@@ -28,7 +28,7 @@ namespace Mathematics
     public:
         NODISCARD static Ellipse2<Real> ContEllipse(const std::vector<Vector2<Real>>& points);
 
-        NODISCARD static void ProjectEllipse(const Ellipse2<Real>& ellipse, const Line2<Real>& line, Real& smin, Real& smax);
+        static void ProjectEllipse(const Ellipse2<Real>& ellipse, const Line2<Real>& line, Real& smin, Real& smax);
 
         NODISCARD static Ellipse2<Real> MergeEllipses(const Ellipse2<Real>& ellipse0, const Ellipse2<Real>& ellipse1);
     };

@@ -45,8 +45,8 @@ namespace Mathematics
         NODISCARD virtual Real operator()(const std::vector<int>& dx, const std::vector<Real>& x) = 0;
 
     protected:
-        NODISCARD virtual void EvaluateUnknownData() = 0;
-        NODISCARD virtual void ComputeIntermediate() = 0;
+        virtual void EvaluateUnknownData() = 0;
+        virtual void ComputeIntermediate() = 0;
         void SetPolynomial(int order, Real diff, VariableLengthVector<Real>& polynomial);
 
         NODISCARD static int Choose(int n, int k) noexcept;
