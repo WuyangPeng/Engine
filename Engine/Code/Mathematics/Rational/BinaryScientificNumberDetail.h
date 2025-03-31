@@ -1217,7 +1217,7 @@ Mathematics::BinaryScientificNumber<UInteger> Mathematics::AtanDivPi(const Binar
 template <typename UInteger>
 Mathematics::BinaryScientificNumber<UInteger> Mathematics::Atan2DivPi(const BinaryScientificNumber<UInteger>& y, const BinaryScientificNumber<UInteger>& x)
 {
-    return BinaryScientificNumber<UInteger>{ AtanDivPi(static_cast<double>(y), static_cast<double>(x)) };
+    return BinaryScientificNumber<UInteger>{ Atan2DivPi(static_cast<double>(y), static_cast<double>(x)) };
 }
 
 template <typename UInteger>
