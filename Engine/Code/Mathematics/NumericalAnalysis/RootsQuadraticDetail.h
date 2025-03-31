@@ -38,7 +38,7 @@ int Mathematics::RootsQuadratic<T>::Solve(bool useBisection, const T& g0, const 
     /// 测试度数是否小于2。
     if (MathType::Approximate(g2, T{}))
     {
-        return RootsLinear::Solve(g0, g1, roots);
+        return RootsLinearType::Solve(g0, g1, roots);
     }
 
     /// 测试零值根。
@@ -126,7 +126,7 @@ int Mathematics::RootsQuadratic<T>::HasZeroValuedRoots(const T& g1, const T& g2,
     }
     else
     {
-        auto numRoots = RootsLinear::Solve(g1, g2, roots);
+        auto numRoots = RootsLinearType::Solve(g1, g2, roots);
         roots.at(numRoots++) = { T{}, 1 };
         std::sort(roots.begin(), roots.begin() + numRoots);
         return numRoots;
@@ -143,7 +143,7 @@ int Mathematics::RootsQuadratic<T>::HasZeroValuedRoots(const T& m1, PolynomialRo
     }
     else
     {
-        auto numRoots = RootsLinear::Solve(m1, roots);
+        auto numRoots = RootsLinearType::Solve(m1, roots);
         roots.at(numRoots++) = { T{}, 1 };
         std::sort(roots.begin(), roots.begin() + numRoots);
         return numRoots;

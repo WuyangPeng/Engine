@@ -93,8 +93,8 @@ namespace Mathematics
                                                    RationalPolynomialRootContainer& rRoots);
 
     private:
-        using RootsLinear = RootsLinear<T>;
-        using RootsQuadratic = RootsQuadratic<T>;
+        using RootsLinearType = RootsLinear<T>;
+        using RootsQuadraticType = RootsQuadratic<T>;
 
     private:
         /// 确定多项式是否具有零值根。

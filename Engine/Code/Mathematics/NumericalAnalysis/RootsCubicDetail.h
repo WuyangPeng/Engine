@@ -39,7 +39,7 @@ int Mathematics::RootsCubic<T>::Solve(bool useBisection, const T& g0, const T& g
     /// 测试度数是否小于3。
     if (MathType::Approximate(g3, T{}))
     {
-        return RootsQuadratic::Solve(useBisection, g0, g1, g2, roots);
+        return RootsQuadraticType::Solve(useBisection, g0, g1, g2, roots);
     }
 
     /// 测试零值根。
@@ -128,7 +128,7 @@ int Mathematics::RootsCubic<T>::HasZeroValuedRoots(bool useBisection, const T& g
         }
         else
         {
-            auto numRoots = RootsLinear::Solve(g2, g3, roots);
+            auto numRoots = RootsLinearType::Solve(g2, g3, roots);
             roots.at(numRoots++) = { T{}, 2 };
             std::sort(roots.begin(), roots.begin() + numRoots);
             return numRoots;
@@ -136,7 +136,7 @@ int Mathematics::RootsCubic<T>::HasZeroValuedRoots(bool useBisection, const T& g
     }
     else
     {
-        auto numRoots = RootsQuadratic::Solve(useBisection, g1, g2, g3, roots);
+        auto numRoots = RootsQuadraticType::Solve(useBisection, g1, g2, g3, roots);
         roots.at(numRoots++) = { T{}, 1 };
         std::sort(roots.begin(), roots.begin() + numRoots);
         return numRoots;
@@ -155,7 +155,7 @@ int Mathematics::RootsCubic<T>::HasZeroValuedRoots(bool useBisection, const T& m
         }
         else
         {
-            auto numRoots = RootsLinear::Solve(m2, roots);
+            auto numRoots = RootsLinearType::Solve(m2, roots);
             roots.at(numRoots++) = { T{}, 2 };
             std::sort(roots.begin(), roots.begin() + numRoots);
             return numRoots;
@@ -163,7 +163,7 @@ int Mathematics::RootsCubic<T>::HasZeroValuedRoots(bool useBisection, const T& m
     }
     else
     {
-        auto numRoots = RootsQuadratic::Solve(useBisection, m1, m2, roots);
+        auto numRoots = RootsQuadraticType::Solve(useBisection, m1, m2, roots);
         roots.at(numRoots++) = { T{}, 1 };
         std::sort(roots.begin(), roots.begin() + numRoots);
         return numRoots;
@@ -204,7 +204,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
         {
             std::array quadraticRoot{ RationalPolynomialRoot::CreateZero(), RationalPolynomialRoot::CreateZero() };
             /// 三个实根，每个复数为1。
-            auto numRoots = RootsQuadratic::ComputeDepressedRoots(true, rD1, quadraticRoot);
+            auto numRoots = RootsQuadraticType::ComputeDepressedRoots(true, rD1, quadraticRoot);
             rRoots.at(0) = quadraticRoot.at(0);
             rRoots.at(1) = quadraticRoot.at(1);
             rRoots.at(numRoots++) = { Rational(0), 1 };
@@ -251,7 +251,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
         ///  将区间划分为[-2 * s, -s], [-s, s]和[s, 2 * s]。
         ///  在每个区间上使用平分来估计F(x)的根。
         std::array rQRoots{ RationalPolynomialRoot::CreateZero(), RationalPolynomialRoot::CreateZero() };
-        MAYBE_UNUSED const auto roots = RootsQuadratic::ComputeDepressedRoots(true, Rational(1, 3) * rD1, rQRoots);
+        MAYBE_UNUSED const auto roots = RootsQuadraticType::ComputeDepressedRoots(true, Rational(1, 3) * rD1, rQRoots);
         auto rS = rQRoots.at(1).GetX();
         auto rTwoS = Rational{ 2 } * rS;
         auto d0 = static_cast<T>(rD0);
@@ -341,7 +341,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
         {
             std::array quadraticRoot{ RationalPolynomialRoot::CreateZero(), RationalPolynomialRoot::CreateZero() };
             /// 三个实根，每个复数为1。
-            auto numRoots = RootsQuadratic::ComputeDepressedRoots(true, rD1, quadraticRoot);
+            auto numRoots = RootsQuadraticType::ComputeDepressedRoots(true, rD1, quadraticRoot);
             rRoots.at(0) = quadraticRoot.at(0);
             rRoots.at(1) = quadraticRoot.at(1);
             rRoots.at(numRoots++) = { Rational(0), 1 };
@@ -388,7 +388,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
         ///  将区间划分为[-2 * s, -s], [-s, s]和[s, 2 * s]。
         ///  在每个区间上使用平分来估计F(x)的根。
         std::array rQRoots{ RationalPolynomialRoot::CreateZero(), RationalPolynomialRoot::CreateZero() };
-        MAYBE_UNUSED const auto roots = RootsQuadratic::ComputeDepressedRoots(true, Rational(1, 3) * rD1, rQRoots);
+        MAYBE_UNUSED const auto roots = RootsQuadraticType::ComputeDepressedRoots(true, Rational(1, 3) * rD1, rQRoots);
         auto rS = rQRoots.at(1).GetX();
         auto rTwoS = Rational{ 2 } * rS;
         auto d0 = static_cast<T>(rD0);

@@ -74,7 +74,7 @@ namespace Mathematics
                                                    RationalPolynomialRootContainer& rRoots);
 
     private:
-        using RootsLinear = RootsLinear<T>;
+        using RootsLinearType = RootsLinear<T>;
 
     private:
         /// 确定多项式是否具有零值根。
