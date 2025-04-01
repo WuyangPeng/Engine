@@ -14,6 +14,8 @@
 
 #include "CoreTools/MemoryTools/Array3.h"
 
+#include <array>
+
 namespace Mathematics
 {
     template <typename Real>
