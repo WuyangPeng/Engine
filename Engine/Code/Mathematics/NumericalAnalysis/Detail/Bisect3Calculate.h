@@ -26,15 +26,15 @@ namespace Mathematics
 
         using ClassType = Bisect3Calculate<Real>;
 
-        using Bisect3Storage = Bisect3Storage<Real>;
-        using Bisect3Node = Bisect3Node<Real>;
-        using Bisect3NodeSharedPtr = std::shared_ptr<Bisect3Node>;
-        using Bisect3Root = Bisect3Root<Real>;
-        using Bisect3RootSharedPtr = std::shared_ptr<Bisect3Root>;
-        using Bisect3 = Bisect3<Real>;
+        using Bisect3StorageType = Bisect3Storage<Real>;
+        using Bisect3NodeType = Bisect3Node<Real>;
+        using Bisect3NodeSharedPtr = std::shared_ptr<Bisect3NodeType>;
+        using Bisect3RootType = Bisect3Root<Real>;
+        using Bisect3RootSharedPtr = std::shared_ptr<Bisect3RootType>;
+        using Bisect3Type = Bisect3<Real>;
 
     public:
-        Bisect3Calculate(const Bisect3& bisect,
+        Bisect3Calculate(const Bisect3Type& bisect,
                          Real beginPointX,
                          Real beginPointY,
                          Real beginPointZ,
@@ -44,7 +44,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Bisect3Root GetRoot() const noexcept;
+        NODISCARD Bisect3RootType GetRoot() const noexcept;
 
     private:
         void Calculate(Real beginPointX,
@@ -66,12 +66,12 @@ namespace Mathematics
         void BuildRightUpperOutside(const Bisect3NodeSharedPtr& node);
 
     private:
-        const Bisect3& bisect3;
+        const Bisect3Type& bisect3;
         int level;
         Bisect3RootSharedPtr bisect3Root;
 
         // πÃ∂®¥Ê¥¢,“‘±‹√‚‘⁄µ›πÈ∂—’ªÀ∫ƒ°£
-        Bisect3Storage bisect3Storage;
+        Bisect3StorageType bisect3Storage;
 
         // Õº£¨”…µ›πÈ≥Ã–Ú¿¥ππΩ®°£
         Bisect3NodeSharedPtr graph;

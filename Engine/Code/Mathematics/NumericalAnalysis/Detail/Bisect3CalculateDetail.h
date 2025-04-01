@@ -18,7 +18,7 @@
 #include "Mathematics/NumericalAnalysis/Bisect3.h"
 
 template <typename Real>
-Mathematics::Bisect3Calculate<Real>::Bisect3Calculate(const Bisect3& bisect,
+Mathematics::Bisect3Calculate<Real>::Bisect3Calculate(const Bisect3Type& bisect,
                                                       Real beginPointX,
                                                       Real beginPointY,
                                                       Real beginPointZ,
@@ -27,7 +27,7 @@ Mathematics::Bisect3Calculate<Real>::Bisect3Calculate(const Bisect3& bisect,
                                                       Real endPointZ)
     : bisect3{ bisect },
       level{ 0 },
-      bisect3Root(std::make_shared<Bisect3Root>()),
+      bisect3Root(std::make_shared<Bisect3RootType>()),
       bisect3Storage{ bisect },
       graph{}
 {
@@ -59,7 +59,7 @@ void Mathematics::Bisect3Calculate<Real>::Calculate(Real beginPointX,
     // 构建初始八边形
 
     // 增加 N000。
-    graph = std::make_shared<Bisect3Node>(beginPointX,
+    graph = std::make_shared<Bisect3NodeType>(beginPointX,
                                           beginPointY,
                                           beginPointZ,
                                           bisect3Storage.GetBeginXBeginYBeginZValue0(),
@@ -155,7 +155,7 @@ bool Mathematics::Bisect3Calculate<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename Mathematics::Bisect3Calculate<Real>::Bisect3Root Mathematics::Bisect3Calculate<Real>::GetRoot() const noexcept
+typename Mathematics::Bisect3Calculate<Real>::Bisect3RootType Mathematics::Bisect3Calculate<Real>::GetRoot() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -174,7 +174,7 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
     {
         // 递归超出了次数，返回一个中间值。
         --level;
-        bisect3Root = std::make_shared<Bisect3Root>(bisect3Storage.GetMidpointX(), bisect3Storage.GetMidpointY(), bisect3Storage.GetMidpointZ(), BisectRootType::Unknown);
+        bisect3Root = std::make_shared<Bisect3RootType>(bisect3Storage.GetMidpointX(), bisect3Storage.GetMidpointY(), bisect3Storage.GetMidpointZ(), BisectRootType::Unknown);
 
         return false;
     }
@@ -204,7 +204,7 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
     // 构建左下内的立方体
 
     // 原左下内点
-    auto leftLowerInside = std::make_shared<Bisect3Node>(bisect3Storage.GetBeginPointX(),
+    auto leftLowerInside = std::make_shared<Bisect3NodeType>(bisect3Storage.GetBeginPointX(),
                                                          bisect3Storage.GetBeginPointY(),
                                                          bisect3Storage.GetBeginPointZ(),
                                                          bisect3Storage.GetBeginXBeginYBeginZValue0(),
@@ -216,7 +216,7 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
     // 构建右下内的立方体
 
     // 边 000, 100
-    auto rightLowerInside = std::make_shared<Bisect3Node>(bisect3Storage.GetMidpointX(),
+    auto rightLowerInside = std::make_shared<Bisect3NodeType>(bisect3Storage.GetMidpointX(),
                                                           bisect3Storage.GetBeginPointY(),
                                                           bisect3Storage.GetBeginPointZ(),
                                                           bisect3Storage.GetMidXBeginYBeginZValue0(),
@@ -228,7 +228,7 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
     // 构建左上内的立方体
 
     // 边 000, 010
-    auto leftUpperInside = std::make_shared<Bisect3Node>(bisect3Storage.GetBeginPointX(),
+    auto leftUpperInside = std::make_shared<Bisect3NodeType>(bisect3Storage.GetBeginPointX(),
                                                          bisect3Storage.GetMidpointY(),
                                                          bisect3Storage.GetBeginPointZ(),
                                                          bisect3Storage.GetBeginXMidYBeginZValue0(),
@@ -240,7 +240,7 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
     // 构建右上内的立方体
 
     // 面 000, 100, 110, 010
-    auto rightUpperInside = std::make_shared<Bisect3Node>(bisect3Storage.GetMidpointX(),
+    auto rightUpperInside = std::make_shared<Bisect3NodeType>(bisect3Storage.GetMidpointX(),
                                                           bisect3Storage.GetMidpointY(),
                                                           bisect3Storage.GetBeginPointZ(),
                                                           bisect3Storage.GetMidXMidYBeginZValue0(),
@@ -252,7 +252,7 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
     // 构建左下外的立方体
 
     // 边 000, 001
-    auto leftLowerOutside = std::make_shared<Bisect3Node>(bisect3Storage.GetBeginPointX(),
+    auto leftLowerOutside = std::make_shared<Bisect3NodeType>(bisect3Storage.GetBeginPointX(),
                                                           bisect3Storage.GetBeginPointY(),
                                                           bisect3Storage.GetMidpointZ(),
                                                           bisect3Storage.GetBeginXBeginYMidZValue0(),
@@ -264,7 +264,7 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
     // 构建右下外的立方体
 
     // 面 000, 100, 001, 101
-    auto rightLowerOutside = std::make_shared<Bisect3Node>(bisect3Storage.GetMidpointX(),
+    auto rightLowerOutside = std::make_shared<Bisect3NodeType>(bisect3Storage.GetMidpointX(),
                                                            bisect3Storage.GetBeginPointY(),
                                                            bisect3Storage.GetMidpointZ(),
                                                            bisect3Storage.GetMidXBeginYMidZValue0(),
@@ -276,7 +276,7 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
     // 构建左上外的立方体
 
     // 面 000, 010, 011, 001
-    auto leftUpperOutside = std::make_shared<Bisect3Node>(bisect3Storage.GetBeginPointX(),
+    auto leftUpperOutside = std::make_shared<Bisect3NodeType>(bisect3Storage.GetBeginPointX(),
                                                           bisect3Storage.GetMidpointY(),
                                                           bisect3Storage.GetMidpointZ(),
                                                           bisect3Storage.GetBeginXMidYMidZValue0(),
@@ -288,7 +288,7 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
     // 构建右上外的立方体
 
     // 中心
-    auto rightUpperOutside = std::make_shared<Bisect3Node>(bisect3Storage.GetMidpointX(),
+    auto rightUpperOutside = std::make_shared<Bisect3NodeType>(bisect3Storage.GetMidpointX(),
                                                            bisect3Storage.GetMidpointY(),
                                                            bisect3Storage.GetMidpointZ(),
                                                            bisect3Storage.GetMidXMidYMidZValue0(),
