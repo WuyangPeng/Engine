@@ -24,15 +24,15 @@ namespace Mathematics
 
         using ClassType = Bisect2Calculate<Real>;
 
-        using Bisect2 = Bisect2<Real>;
+        using Bisect2Type = Bisect2<Real>;
         using Bisect2Root = Bisect2Root<Real>;
         using Bisect2RootSharedPtr = std::shared_ptr<Bisect2Root>;
-        using Bisect2Storage = Bisect2Storage<Real>;
-        using Bisect2Node = Bisect2Node<Real>;
-        using Bisect2NodeSharedPtr = std::shared_ptr<Bisect2Node>;
+        using Bisect2StorageType = Bisect2Storage<Real>;
+        using Bisect2NodeType = Bisect2Node<Real>;
+        using Bisect2NodeSharedPtr = std::shared_ptr<Bisect2NodeType>;
 
     public:
-        Bisect2Calculate(const Bisect2& bisect, Real beginPointX, Real beginPointY, Real endPointX, Real endPointY);
+        Bisect2Calculate(const Bisect2Type& bisect, Real beginPointX, Real beginPointY, Real endPointX, Real endPointY);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -44,12 +44,12 @@ namespace Mathematics
         NODISCARD bool BisectRecurse(const Bisect2NodeSharedPtr& node);
 
     private:
-        const Bisect2& bisect2;
+        const Bisect2Type& bisect2;
         int level;
         Bisect2RootSharedPtr bisect2Root;
 
         // πÃ∂®¥Ê¥¢,“‘±‹√‚‘⁄µ›πÈ∂—’ªÀ∫ƒ°£
-        Bisect2Storage bisect2Storage;
+        Bisect2StorageType bisect2Storage;
 
         // Õº£¨”…µ›πÈ≥Ã–Ú¿¥ππΩ®°£
         Bisect2NodeSharedPtr graph;

@@ -19,7 +19,7 @@
 #include "Mathematics/NumericalAnalysis/Bisect2Root.h"
 
 template <typename Real>
-Mathematics::Bisect2Calculate<Real>::Bisect2Calculate(const Bisect2& bisect, Real beginPointX, Real beginPointY, Real endPointX, Real endPointY)
+Mathematics::Bisect2Calculate<Real>::Bisect2Calculate(const Bisect2Type& bisect, Real beginPointX, Real beginPointY, Real endPointX, Real endPointY)
     : bisect2{ bisect }, level{ 0 }, bisect2Root{ std::make_shared<Bisect2Root>() }, bisect2Storage{ bisect }, graph{}
 {
     Calculate(beginPointX, beginPointY, endPointX, endPointY);
@@ -44,7 +44,7 @@ void Mathematics::Bisect2Calculate<Real>::Calculate(Real beginPointX, Real begin
     // 构建初始四边形。
 
     // 增加 N00。
-    graph = std::make_shared<Bisect2Node>(beginPointX, beginPointY, bisect2Storage.GetBeginXAndBeginYValue0(), bisect2Storage.GetBeginXAndBeginYValue1());
+    graph = std::make_shared<Bisect2NodeType>(beginPointX, beginPointY, bisect2Storage.GetBeginXAndBeginYValue0(), bisect2Storage.GetBeginXAndBeginYValue1());
 
     // 增加 N10。
     graph->AddXNextNode(endPointX, beginPointY, bisect2Storage.GetEndXAndBeginYValue0(), bisect2Storage.GetEndXAndBeginYValue1());
@@ -129,7 +129,7 @@ bool Mathematics::Bisect2Calculate<Real>::BisectRecurse(const Bisect2NodeSharedP
     // 构建左上角的四边形
 
     // 原左上角点
-    auto leftUpper = std::make_shared<Bisect2Node>(bisect2Storage.GetBeginPointX(),
+    auto leftUpper = std::make_shared<Bisect2NodeType>(bisect2Storage.GetBeginPointX(),
                                                    bisect2Storage.GetBeginPointY(),
                                                    bisect2Storage.GetBeginXAndBeginYValue0(),
                                                    bisect2Storage.GetBeginXAndBeginYValue1());
@@ -157,7 +157,7 @@ bool Mathematics::Bisect2Calculate<Real>::BisectRecurse(const Bisect2NodeSharedP
     // 构建右上角的四边形
 
     // 顶部的平分线
-    auto rightUpper = std::make_shared<Bisect2Node>(bisect2Storage.GetMidpointX(),
+    auto rightUpper = std::make_shared<Bisect2NodeType>(bisect2Storage.GetMidpointX(),
                                                     bisect2Storage.GetBeginPointY(),
                                                     bisect2Storage.GetMidXAndBeginYValue0(),
                                                     bisect2Storage.GetMidXAndBeginYValue1());
@@ -185,7 +185,7 @@ bool Mathematics::Bisect2Calculate<Real>::BisectRecurse(const Bisect2NodeSharedP
     // 构建左下角的四边形
 
     // 左边的平分线
-    auto leftLower = std::make_shared<Bisect2Node>(bisect2Storage.GetBeginPointX(),
+    auto leftLower = std::make_shared<Bisect2NodeType>(bisect2Storage.GetBeginPointX(),
                                                    bisect2Storage.GetMidpointY(),
                                                    bisect2Storage.GetBeginXAndMidYValue0(),
                                                    bisect2Storage.GetBeginXAndMidYValue1());
@@ -213,7 +213,7 @@ bool Mathematics::Bisect2Calculate<Real>::BisectRecurse(const Bisect2NodeSharedP
     // 构建右下角的四边形
 
     // 中间的平分线
-    auto rightLower = std::make_shared<Bisect2Node>(bisect2Storage.GetMidpointX(),
+    auto rightLower = std::make_shared<Bisect2NodeType>(bisect2Storage.GetMidpointX(),
                                                     bisect2Storage.GetMidpointY(),
                                                     bisect2Storage.GetMidXAndMidYValue0(),
                                                     bisect2Storage.GetMidXAndMidYValue1());
