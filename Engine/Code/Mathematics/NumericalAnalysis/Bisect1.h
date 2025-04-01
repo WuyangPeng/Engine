@@ -15,6 +15,8 @@
 #include "Bisect1Root.h"
 #include "Mathematics/Base/MathDetail.h"
 
+#include <type_traits>
+
 // 二分法解方程
 namespace Mathematics
 {
