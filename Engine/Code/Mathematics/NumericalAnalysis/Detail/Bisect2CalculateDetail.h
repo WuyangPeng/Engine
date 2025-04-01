@@ -20,7 +20,7 @@
 
 template <typename Real>
 Mathematics::Bisect2Calculate<Real>::Bisect2Calculate(const Bisect2Type& bisect, Real beginPointX, Real beginPointY, Real endPointX, Real endPointY)
-    : bisect2{ bisect }, level{ 0 }, bisect2Root{ std::make_shared<Bisect2Root>() }, bisect2Storage{ bisect }, graph{}
+    : bisect2{ bisect }, level{ 0 }, bisect2Root{ std::make_shared<Bisect2RootType>() }, bisect2Storage{ bisect }, graph{}
 {
     Calculate(beginPointX, beginPointY, endPointX, endPointY);
 
@@ -80,7 +80,7 @@ bool Mathematics::Bisect2Calculate<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename Mathematics::Bisect2Calculate<Real>::Bisect2Root Mathematics::Bisect2Calculate<Real>::GetRoot() const noexcept
+typename Mathematics::Bisect2Calculate<Real>::Bisect2RootType Mathematics::Bisect2Calculate<Real>::GetRoot() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -99,7 +99,7 @@ bool Mathematics::Bisect2Calculate<Real>::BisectRecurse(const Bisect2NodeSharedP
     {
         // 递归超出了次数，返回一个中间值。
         --level;
-        bisect2Root = std::make_shared<Bisect2Root>(bisect2Storage.GetMidpointX(), bisect2Storage.GetMidpointY(), BisectRootType::Unknown);
+        bisect2Root = std::make_shared<Bisect2RootType>(bisect2Storage.GetMidpointX(), bisect2Storage.GetMidpointY(), BisectRootType::Unknown);
 
         return false;
     }
