@@ -19,6 +19,7 @@
 
 #include <boost/noncopyable.hpp>
 #include <memory>
+#include <type_traits>
 
 namespace Mathematics
 {
