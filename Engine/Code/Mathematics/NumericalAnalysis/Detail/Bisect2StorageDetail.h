@@ -17,7 +17,7 @@
 #include "Mathematics/NumericalAnalysis/Bisect2.h"
 
 template <typename Real>
-Mathematics::Bisect2Storage<Real>::Bisect2Storage(const Bisect2& bisect) noexcept
+Mathematics::Bisect2Storage<Real>::Bisect2Storage(const Bisect2Type& bisect) noexcept
     : bisect{ bisect },
       beginPointX{},
       beginPointY{},
@@ -86,7 +86,7 @@ bool Mathematics::Bisect2Storage<Real>::ZeroTest(Real x, Real y, Bisect2StorageT
 
     if (MathType::FAbs(value0) <= bisect.GetTolerance() && MathType::FAbs(value1) <= bisect.GetTolerance())
     {
-        bisect2Root = std::make_shared<Bisect2Root>(x, y, BisectRootType::HaveSolution);
+        bisect2Root = std::make_shared<Bisect2RootType>(x, y, BisectRootType::HaveSolution);
 
         return true;
     }
