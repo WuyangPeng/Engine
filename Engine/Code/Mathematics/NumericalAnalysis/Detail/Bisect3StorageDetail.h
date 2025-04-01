@@ -17,7 +17,7 @@
 #include "Mathematics/NumericalAnalysis/Bisect3Root.h"
 
 template <typename Real>
-Mathematics::Bisect3Storage<Real>::Bisect3Storage(const Bisect3& bisect) noexcept
+Mathematics::Bisect3Storage<Real>::Bisect3Storage(const Bisect3Type& bisect) noexcept
     : bisect{ bisect },
       beginPointX{},
       endPointX{},
@@ -207,7 +207,7 @@ bool Mathematics::Bisect3Storage<Real>::ZeroTest(Real x, Real y, Real z, Bisect3
 
     if (MathType::FAbs(value0) <= bisect.GetTolerance() && MathType::FAbs(value1) <= bisect.GetTolerance() && MathType::FAbs(value2) <= bisect.GetTolerance())
     {
-        bisect3Root = std::make_shared<Bisect3Root>(x, y, z, BisectRootType::HaveSolution);
+        bisect3Root = std::make_shared<Bisect3RootType>(x, y, z, BisectRootType::HaveSolution);
 
         return true;
     }

@@ -30,15 +30,15 @@ namespace Mathematics
 
         using ClassType = Bisect3Storage<Real>;
 
-        using Bisect3Root = Bisect3Root<Real>;
-        using Bisect3RootSharedPtr = std::shared_ptr<Bisect3Root>;
-        using Bisect3 = Bisect3<Real>;
-        using Bisect3Node = Bisect3Node<Real>;
-        using Bisect3NodeSharedPtr = std::shared_ptr<Bisect3Node>;
+        using Bisect3RootType = Bisect3Root<Real>;
+        using Bisect3RootSharedPtr = std::shared_ptr<Bisect3RootType>;
+        using Bisect3Type = Bisect3<Real>;
+        using Bisect3NodeType = Bisect3Node<Real>;
+        using Bisect3NodeSharedPtr = std::shared_ptr<Bisect3NodeType>;
         using MathType = Math<Real>;
 
     public:
-        explicit Bisect3Storage(const Bisect3& bisect) noexcept;
+        explicit Bisect3Storage(const Bisect3Type& bisect) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -166,7 +166,7 @@ namespace Mathematics
         bool ZeroTest(Real x, Real y, Real z, Bisect3StorageType type);
 
     private:
-        const Bisect3& bisect;
+        const Bisect3Type& bisect;
 
         // 顶点和中点的位置。
         Real beginPointX;
