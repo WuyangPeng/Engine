@@ -179,7 +179,7 @@ int Mathematics::RootsQuadratic<T>::ComputeDepressedRootsBisection(const Rationa
 }
 
 template <typename T>
-int Mathematics::RootsQuadratic<T>::ComputeDepressedRootsBisection0(const Rational& rD0, RationalPolynomialRootContainer& rRoots)
+int Mathematics::RootsQuadratic<T>::ComputeDepressedRootsBisection0(const Rational& rD0, RationalPolynomialRootContainer& rRoots) requires(std::is_arithmetic_v<T>)
 {
     const auto signD0 = rD0.GetSign();
     if (signD0 > 0)
@@ -216,7 +216,7 @@ int Mathematics::RootsQuadratic<T>::ComputeDepressedRootsBisection0(const Ration
 }
 
 template <typename T>
-int Mathematics::RootsQuadratic<T>::ComputeDepressedRootsBisection1(const Rational& rD0, RationalPolynomialRootContainer& rRoots)
+int Mathematics::RootsQuadratic<T>::ComputeDepressedRootsBisection1(const Rational& rD0, RationalPolynomialRootContainer& rRoots) requires(!std::is_arithmetic_v<T>)
 {
     const auto signD0 = rD0.GetSign();
     if (signD0 > 0)

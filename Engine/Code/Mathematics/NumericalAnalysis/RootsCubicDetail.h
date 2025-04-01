@@ -201,7 +201,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
 }
 
 template <typename T>
-int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection0(const Rational& rD0, const Rational& rD1, RationalPolynomialRootContainer& rRoots)
+int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection0(const Rational& rD0, const Rational& rD1, RationalPolynomialRootContainer& rRoots) requires(std::is_arithmetic_v<T>)
 {
     const auto signD0 = rD0.GetSign();
     const auto signD1 = rD1.GetSign();
@@ -338,7 +338,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection0(const Rational& 
 }
 
 template <typename T>
-int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection1(const Rational& rD0, const Rational& rD1, RationalPolynomialRootContainer& rRoots)
+int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection1(const Rational& rD0, const Rational& rD1, RationalPolynomialRootContainer& rRoots) requires(!std::is_arithmetic_v<T>)
 {
     const auto signD0 = rD0.GetSign();
     const auto signD1 = rD1.GetSign();

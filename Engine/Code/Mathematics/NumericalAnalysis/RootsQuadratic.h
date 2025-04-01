@@ -102,8 +102,8 @@ namespace Mathematics
                                        Rational& rM1Div2);
 
         NODISCARD static int ComputeDepressedRootsBisection(const Rational& rD0, RationalPolynomialRootContainer& rRoots);
-        NODISCARD static int ComputeDepressedRootsBisection0(const Rational& rD0, RationalPolynomialRootContainer& rRoots);
-        NODISCARD static int ComputeDepressedRootsBisection1(const Rational& rD0, RationalPolynomialRootContainer& rRoots);
+        NODISCARD static int ComputeDepressedRootsBisection0(const Rational& rD0, RationalPolynomialRootContainer& rRoots) requires(std::is_arithmetic_v<T>);
+        NODISCARD static int ComputeDepressedRootsBisection1(const Rational& rD0, RationalPolynomialRootContainer& rRoots) requires(!std::is_arithmetic_v<T>);
 
         NODISCARD static int ComputeDepressedRootsClosedForm(const Rational& rD0, RationalPolynomialRootContainer& rRoots);
     };
