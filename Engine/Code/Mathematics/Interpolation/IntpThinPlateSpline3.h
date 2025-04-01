@@ -13,6 +13,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include <vector>
+#include <array>
 
 namespace Mathematics
 {
