@@ -18,7 +18,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-Mathematics::LinearSystemInverse<Real>::LinearSystemInverse(const VariableMatrix& matrix, const RealContainer& input, Real zeroTolerance)
+Mathematics::LinearSystemInverse<Real>::LinearSystemInverse(const VariableMatrixType& matrix, const RealContainer& input, Real zeroTolerance)
     : zeroTolerance{ zeroTolerance },
       inverse{ matrix },
       size{ inverse.GetRowsNumber() },
@@ -36,7 +36,7 @@ Mathematics::LinearSystemInverse<Real>::LinearSystemInverse(const VariableMatrix
 }
 
 template <typename Real>
-Mathematics::LinearSystemInverse<Real>::LinearSystemInverse(const VariableMatrix& matrix, Real zeroTolerance)
+Mathematics::LinearSystemInverse<Real>::LinearSystemInverse(const VariableMatrixType& matrix, Real zeroTolerance)
     : zeroTolerance{ zeroTolerance },
       inverse{ matrix },
       size{ inverse.GetRowsNumber() },
@@ -226,7 +226,7 @@ void Mathematics::LinearSystemInverse<Real>::Rearrangement()
 }
 
 template <typename Real>
-typename Mathematics::LinearSystemInverse<Real>::VariableMatrix Mathematics::LinearSystemInverse<Real>::GetInverse() const
+typename Mathematics::LinearSystemInverse<Real>::VariableMatrixType Mathematics::LinearSystemInverse<Real>::GetInverse() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
