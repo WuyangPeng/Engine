@@ -21,7 +21,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-Mathematics::BandedMatrixInvert<Real>::BandedMatrixInvert(const BandedMatrix& matrix, Real zeroTolerance)
+Mathematics::BandedMatrixInvert<Real>::BandedMatrixInvert(const BandedMatrixType& matrix, Real zeroTolerance)
     : zeroTolerance{ zeroTolerance }, matrix{ matrix }, output{ matrix.GetSize(), matrix.GetSize() }
 {
     Solve();

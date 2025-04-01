@@ -24,15 +24,15 @@ namespace Mathematics
         using ClassType = BandedMatrixInvert<Real>;
 
         using MathType = Math<Real>;
-        using BandedMatrix = BandedMatrix<Real>;
-        using VariableMatrix = VariableMatrix<Real>;
+        using BandedMatrixType = BandedMatrix<Real>;
+        using VariableMatrixType = VariableMatrix<Real>;
 
     public:
-        explicit BandedMatrixInvert(const BandedMatrix& matrix, Real zeroTolerance = MathType::GetZeroTolerance());
+        explicit BandedMatrixInvert(const BandedMatrixType& matrix, Real zeroTolerance = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD VariableMatrix GetInvert() const;
+        NODISCARD VariableMatrixType GetInvert() const;
 
     private:
         void Solve();
@@ -41,8 +41,8 @@ namespace Mathematics
 
     private:
         Real zeroTolerance;
-        BandedMatrix matrix;
-        VariableMatrix output;
+        BandedMatrixType matrix;
+        VariableMatrixType output;
     };
 }
 
