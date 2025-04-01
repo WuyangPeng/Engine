@@ -14,7 +14,7 @@
 #include "Slerp.h"
 #include "Mathematics/Base/MathDetail.h"
 
-template <typename T, uint32_t N>
+template <typename T, size_t N>
 requires(N >= 2)
 std::array<T, N> Mathematics::Slerp(T t, const std::array<T, N>& q0, const std::array<T, N>& q1)
 {
@@ -34,7 +34,7 @@ std::array<T, N> Mathematics::Slerp(T t, const std::array<T, N>& q0, const std::
     return result;
 }
 
-template <typename T, uint32_t N>
+template <typename T, size_t N>
 requires(N >= 2)
 std::array<T, N> Mathematics::Slerp(T t, const std::array<T, N>& q0, const std::array<T, N>& q1, T cosA)
 {
@@ -49,7 +49,7 @@ std::array<T, N> Mathematics::Slerp(T t, const std::array<T, N>& q0, const std::
     return result;
 }
 
-template <typename T, uint32_t N>
+template <typename T, size_t N>
 requires(N >= 2)
 std::array<T, N> Mathematics::Slerp(T t, const std::array<T, N>& q0, const std::array<T, N>& q1, const std::array<T, N>& qh, T cosAH)
 {

@@ -65,18 +65,18 @@
 namespace Mathematics
 {
     // q0和q1之间的角度为 [0,pi)。
-    template <typename T, uint32_t N>
+    template <typename T, size_t N>
     requires(N >= 2)
     NODISCARD std::array<T, N> Slerp(T t, const std::array<T, N>& q0, const std::array<T, N>& q1);
 
     // q0和q1之间的角度必须在[0,pi)中，并且cosA = Dot(q0,q1)。
-    template <typename T, uint32_t N>
+    template <typename T, size_t N>
     requires(N >= 2)
     NODISCARD std::array<T, N> Slerp(T t, const std::array<T, N>& q0, const std::array<T, N>& q1, T cosA);
 
     /// q0和q1之间的角度为[0,pi)。输入qh位于沿着超球面弧的q0和qc1之间的中间。
     /// 如果cosA = Dot(q0,q1)，则 cosAH = sqrt((1+cosA)/2)，qh = (q0+q1)/(2*cosAH)。
-    template <typename T, uint32_t N>
+    template <typename T, size_t N>
     requires(N >= 2)
     NODISCARD std::array<T, N> Slerp(T t, const std::array<T, N>& q0, const std::array<T, N>& q1, const std::array<T, N>& qh, T cosAH);
 }
