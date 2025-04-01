@@ -354,7 +354,7 @@ void Mathematics::BlockLdltDecomposition<T>::Convert(const VariableMatrix& m, Bl
 }
 
 template <typename T>
-void Mathematics::BlockLdltDecomposition<T>::Convert(const VariableLengthVector& v, BlockVector& vBlock, bool verifySize) const
+void Mathematics::BlockLdltDecomposition<T>::Convert(const VariableLengthVectorType& v, BlockVector& vBlock, bool verifySize) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -418,7 +418,7 @@ void Mathematics::BlockLdltDecomposition<T>::Convert(const BlockMatrix& mBlock, 
 }
 
 template <typename T>
-void Mathematics::BlockLdltDecomposition<T>::Convert(const BlockVector& vBlock, VariableLengthVector& v, bool verifySize) const
+void Mathematics::BlockLdltDecomposition<T>::Convert(const BlockVector& vBlock, VariableLengthVectorType& v, bool verifySize) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
