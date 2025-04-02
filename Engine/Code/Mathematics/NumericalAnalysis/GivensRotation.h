@@ -12,6 +12,8 @@
 
 #include "Mathematics/MathematicsDll.h"
 
+#include <type_traits>
+
 namespace Mathematics
 {
     /// Givens旋转用于将初始三对角矩阵简化为对角矩阵。
