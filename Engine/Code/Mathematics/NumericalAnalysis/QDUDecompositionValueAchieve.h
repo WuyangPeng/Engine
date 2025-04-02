@@ -63,15 +63,15 @@ void Mathematics::QDUDecompositionValue<Real>::Calculate(const Matrix3Type& matr
     // 构建正交矩阵Q.
     auto invLength = MathType::InvSqrt(matrix.template GetValue<0, 0>() * matrix.template GetValue<0, 0>() + matrix.template GetValue<1, 0>() * matrix.template GetValue<1, 0>() + matrix.template GetValue<2, 0>() * matrix.template GetValue<2, 0>());
 
-    orthogonal.SetValue<0, 0>(matrix.template GetValue<0, 0>() * invLength);
-    orthogonal.SetValue<1, 0>(matrix.template GetValue<1, 0>() * invLength);
-    orthogonal.SetValue<2, 0>(matrix.template GetValue<2, 0>() * invLength);
+    orthogonal.template SetValue<0, 0>(matrix.template GetValue<0, 0>() * invLength);
+    orthogonal.template SetValue<1, 0>(matrix.template GetValue<1, 0>() * invLength);
+    orthogonal.template SetValue<2, 0>(matrix.template GetValue<2, 0>() * invLength);
 
     auto fDot = orthogonal.template GetValue<0, 0>() * matrix.template GetValue<0, 1>() + orthogonal.template GetValue<1, 0>() * matrix.template GetValue<1, 1>() + orthogonal.template GetValue<2, 0>() * matrix.template GetValue<2, 1>();
 
-    orthogonal.SetValue<0, 1>(matrix.template GetValue<0, 1>() - fDot * orthogonal.template GetValue<0, 0>());
-    orthogonal.SetValue<1, 1>(matrix.template GetValue<1, 1>() - fDot * orthogonal.template GetValue<1, 0>());
-    orthogonal.SetValue<2, 1>(matrix.template GetValue<2, 1>() - fDot * orthogonal.template GetValue<2, 0>());
+    orthogonal.template SetValue<0, 1>(matrix.template GetValue<0, 1>() - fDot * orthogonal.template GetValue<0, 0>());
+    orthogonal.template SetValue<1, 1>(matrix.template GetValue<1, 1>() - fDot * orthogonal.template GetValue<1, 0>());
+    orthogonal.template SetValue<2, 1>(matrix.template GetValue<2, 1>() - fDot * orthogonal.template GetValue<2, 0>());
     invLength = MathType::InvSqrt(orthogonal.template GetValue<0, 1>() * orthogonal.template GetValue<0, 1>() + orthogonal.template GetValue<1, 1>() * orthogonal.template GetValue<1, 1>() + orthogonal.template GetValue<2, 1>() * orthogonal.template GetValue<2, 1>());
     orthogonal(0, 1) *= invLength;
     orthogonal(1, 1) *= invLength;
