@@ -80,7 +80,7 @@ int64_t Rendering::BaseRenderer::Draw(const VisualContainer& visuals)
     return impl->Draw(visuals);
 }
 
-int64_t Rendering::BaseRenderer::Draw(int x, int y, const Colour& color, const std::string& message)
+int64_t Rendering::BaseRenderer::Draw(int x, int y, const ColourType& color, const std::string& message)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -507,14 +507,14 @@ Rendering::DepthRange Rendering::BaseRenderer::GetDepthRange() const
     return impl->GetDepthRange();
 }
 
-void Rendering::BaseRenderer::SetClearColor(const Colour& clearColor) noexcept
+void Rendering::BaseRenderer::SetClearColor(const ColourType& clearColor) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     return impl->SetClearColor(clearColor);
 }
 
-Rendering::BaseRenderer::Colour Rendering::BaseRenderer::GetClearColor() const noexcept
+Rendering::BaseRenderer::ColourType Rendering::BaseRenderer::GetClearColor() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
