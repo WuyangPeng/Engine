@@ -12,6 +12,8 @@
 
 #include "Mathematics/MathematicsDll.h"
 
+#include <type_traits>
+
 namespace Mathematics
 {
     /// 计算排序引起的排列。
