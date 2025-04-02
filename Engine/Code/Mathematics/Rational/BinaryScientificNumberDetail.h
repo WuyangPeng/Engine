@@ -17,6 +17,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Mathematics/Base/BitHacks.h"
+#include "Mathematics/Base/Functions.h"
 
 #include <cfenv>
 
