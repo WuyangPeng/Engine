@@ -27,10 +27,10 @@ namespace Rendering
         COPY_UNSHARED_TYPE_DECLARE(ConstantColorEffect);
         using ParentType = VisualEffect;
 
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
 
     public:
-        ConstantColorEffect(const std::string& name, ProgramFactory& factory, const BaseRendererSharedPtr& baseRenderer, const Colour& color);
+        ConstantColorEffect(const std::string& name, ProgramFactory& factory, const BaseRendererSharedPtr& baseRenderer, const ColourType& color);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
