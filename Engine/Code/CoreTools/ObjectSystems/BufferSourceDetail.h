@@ -84,8 +84,7 @@ void CoreTools::BufferSource::ReadBoolContainer(T& container)
     ReadBoolContainer(elementsNumber, container);
 }
 
-template <int Size>
-requires(0 <= Size)
+template <size_t Size> 
 void CoreTools::BufferSource::ReadContainer(std::array<bool, Size>& container)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
