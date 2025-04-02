@@ -17,6 +17,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 #include <cfenv>
+#include <cmath>
 
 template <typename Rational>
 Mathematics::ArbitraryPrecisionConversion<Rational>::ArbitraryPrecisionConversion(int precision, int maxIterations)
