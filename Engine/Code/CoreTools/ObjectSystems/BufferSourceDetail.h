@@ -84,7 +84,7 @@ void CoreTools::BufferSource::ReadBoolContainer(T& container)
     ReadBoolContainer(elementsNumber, container);
 }
 
-template <size_t Size> 
+template <size_t Size>
 void CoreTools::BufferSource::ReadContainer(std::array<bool, Size>& container)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -246,8 +246,8 @@ std::vector<T> CoreTools::BufferSource::ReadVectorNotUseNumber()
     return ReadVectorUseNumber<T>(elementsNumber);
 }
 
-template <typename T, int Size>
-requires(std::is_arithmetic_v<T> && 0 <= Size)
+template <typename T, size_t Size>
+requires(std::is_arithmetic_v<T>)
 std::array<T, Size> CoreTools::BufferSource::ReadContainer()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -322,8 +322,8 @@ void CoreTools::BufferSource::ReadContainer(T& container)
     ReadContainer(elementsNumber, container);
 }
 
-template <typename T, int Size>
-requires(std::is_arithmetic_v<T> && 0 <= Size)
+template <typename T, size_t Size>
+requires(std::is_arithmetic_v<T>)
 void CoreTools::BufferSource::ReadContainer(std::array<T, Size>& container)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
