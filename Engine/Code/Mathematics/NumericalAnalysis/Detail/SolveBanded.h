@@ -27,11 +27,11 @@ namespace Mathematics
         using ClassType = SolveBanded<Real>;
 
         using MathType = Math<Real>;
-        using BandedMatrix = BandedMatrix<Real>;
+        using BandedMatrixType = BandedMatrix<Real>;
         using RealContainer = std::vector<Real>;
 
     public:
-        SolveBanded(BandedMatrix matrix, RealContainer inputVector, Real zeroTolerance = MathType::GetZeroTolerance());
+        SolveBanded(BandedMatrixType matrix, RealContainer inputVector, Real zeroTolerance = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
@@ -43,7 +43,7 @@ namespace Mathematics
 
     private:
         Real zeroTolerance;
-        BandedMatrix matrix;
+        BandedMatrixType matrix;
         RealContainer output;
     };
 }

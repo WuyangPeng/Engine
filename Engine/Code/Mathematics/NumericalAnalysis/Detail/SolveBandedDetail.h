@@ -18,7 +18,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-Mathematics::SolveBanded<Real>::SolveBanded(BandedMatrix matrix, RealContainer inputVector, Real zeroTolerance)
+Mathematics::SolveBanded<Real>::SolveBanded(BandedMatrixType matrix, RealContainer inputVector, Real zeroTolerance)
     : zeroTolerance{ std::move(zeroTolerance) }, matrix{ std::move(matrix) }, output{ inputVector }
 {
     Solve();
