@@ -19,8 +19,6 @@
 #include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Framework/Helper/MiddleLayerMacro.h"
 
-FRAMEWORK_NON_COPY_EXPORT_IMPL(RenderingManagerImpl);
-
 // 渲染中间层接口类。
 namespace Framework
 {
