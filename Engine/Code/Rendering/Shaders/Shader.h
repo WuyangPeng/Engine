@@ -40,7 +40,6 @@ namespace Rendering
         using TextureSingleSharedPtr = std::shared_ptr<TextureSingle>;
         using SamplerStateSharedPtr = std::shared_ptr<SamplerState>;
         using TextureArraySharedPtr = std::shared_ptr<TextureArray>;
-        using SamplerStateSharedPtr = std::shared_ptr<SamplerState>;
         using CompiledCodeContainer = std::vector<uint8_t>;
         using ShaderDataContainer = std::vector<ShaderData>;
         using ConstShaderDataContainerIter = ShaderDataContainer::const_iterator;
