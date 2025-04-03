@@ -72,14 +72,14 @@ void Rendering::BlendState::SetEnableIndependentBlend(bool enableIndependentBlen
     return impl->SetEnableIndependentBlend(enableIndependentBlend);
 }
 
-Rendering::BlendState::Colour Rendering::BlendState::GetBlendColor() const noexcept
+Rendering::BlendState::ColourType Rendering::BlendState::GetBlendColor() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return impl->GetBlendColor();
 }
 
-void Rendering::BlendState::SetBlendColor(const Colour& blendColor) noexcept
+void Rendering::BlendState::SetBlendColor(const ColourType& blendColor) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 

@@ -28,7 +28,7 @@ namespace Rendering
         COPY_UNSHARED_TYPE_DECLARE(SamplerState);
         using ParentType = DrawingState;
 
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
 
     public:
         explicit SamplerState(const std::string& name);
@@ -49,7 +49,7 @@ namespace Rendering
         NODISCARD float GetMipLodBias() const noexcept;
         NODISCARD int GetMaxAnisotropy() const noexcept;
         NODISCARD SamplerStateComparison GetComparison() const noexcept;
-        NODISCARD Colour GetBorderColor() const noexcept;
+        NODISCARD ColourType GetBorderColor() const noexcept;
         NODISCARD float GetMinLod() const noexcept;
         NODISCARD float GetMaxLod() const noexcept;
 
