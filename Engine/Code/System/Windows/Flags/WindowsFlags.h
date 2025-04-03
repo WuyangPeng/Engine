@@ -58,7 +58,7 @@ namespace System
 
     enum class WindowsPointUse
     {
-        Default = 0x80000000,
+        Default = (int)0x80000000,
     };
 
     enum class WindowsStyles : uint32_t
