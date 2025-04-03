@@ -10,6 +10,6 @@
 #include "MainEntryPoint2.h"
 #include "Framework/Helper/MainFunctionMacro.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 CONSOLE_MAIN_FUNCTION(Framework, MainEntryPoint2, SYSTEM_TEXT("MainEntryPoint2"), SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT(""))

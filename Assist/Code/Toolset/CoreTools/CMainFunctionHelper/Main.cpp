@@ -12,7 +12,7 @@
 #include "System/Time/DeltaTime.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 int main(int argc, char** argv)
 {

@@ -10,6 +10,6 @@
 #include "MainFunctionHelperBase1.h"
 #include "Framework/Helper/MainFunctionMacro.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 CONSOLE_MAIN_FUNCTION(Framework, MainFunctionHelperBase1, SYSTEM_TEXT("MainFunctionHelperBaseTesting"), SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT(""))

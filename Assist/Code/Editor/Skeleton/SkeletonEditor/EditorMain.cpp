@@ -11,6 +11,6 @@
 #include "Framework/Helper/MainFunctionMacro.h"
 #include "Editor/Skeleton/SkeletonEditor/EditorHelper.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 WINDOWS_MAIN_FUNCTION_WITH_INFORMATION(SkeletonEditor, EditorHelper, SYSTEM_TEXT("SkeletonEditor"), SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT(""), 1024, 768)

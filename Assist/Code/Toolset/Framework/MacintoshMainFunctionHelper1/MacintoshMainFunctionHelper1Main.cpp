@@ -11,7 +11,7 @@
 #include "Framework/Helper/MainFunctionMacro.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 int main()
 {

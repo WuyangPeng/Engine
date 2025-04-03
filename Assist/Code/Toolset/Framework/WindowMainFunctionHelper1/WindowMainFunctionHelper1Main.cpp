@@ -10,6 +10,6 @@
 #include "WindowMainFunctionHelper1.h"
 #include "Framework/Helper/MainFunctionMacro.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 WINDOWS_MAIN_FUNCTION_WITH_INFORMATION(Framework, WindowMainFunctionHelper1, SYSTEM_TEXT("WindowMainFunctionHelper1"), SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT(""), 1024, 768)
