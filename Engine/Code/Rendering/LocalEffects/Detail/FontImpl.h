@@ -39,7 +39,7 @@ namespace Rendering
         using ProgramFactorySharedPtr = std::shared_ptr<ProgramFactory>;
         using Texture2DSharedPtr = std::shared_ptr<Texture2D>;
 
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
         using TexelsType = std::vector<uint8_t>;
         using CharacterDataType = std::array<float, 257>;
 
@@ -74,7 +74,7 @@ namespace Rendering
                      int viewportHeight,
                      int x,
                      int y,
-                     const Colour& color,
+                     const ColourType& color,
                      const std::string& message) const;
 
         NODISCARD virtual FontSharedPtr Clone() const = 0;
