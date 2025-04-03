@@ -24,7 +24,7 @@ namespace Rendering
     {
     public:
         using ClassType = SamplerStateImpl;
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
 
     public:
         SamplerStateImpl() noexcept;
@@ -47,7 +47,7 @@ namespace Rendering
         NODISCARD float GetMipLodBias() const noexcept;
         NODISCARD int GetMaxAnisotropy() const noexcept;
         NODISCARD SamplerStateComparison GetComparison() const noexcept;
-        NODISCARD Colour GetBorderColor() const noexcept;
+        NODISCARD ColourType GetBorderColor() const noexcept;
         NODISCARD float GetMinLod() const noexcept;
         NODISCARD float GetMaxLod() const noexcept;
 
@@ -62,7 +62,7 @@ namespace Rendering
         float mipLodBias;
         int maxAnisotropy;
         SamplerStateComparison comparison;
-        Colour borderColor;
+        ColourType borderColor;
         float minLod;
         float maxLod;
     };

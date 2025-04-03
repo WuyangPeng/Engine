@@ -150,7 +150,7 @@ Rendering::SamplerStateComparison Rendering::SamplerStateImpl::GetComparison() c
     return comparison;
 }
 
-Rendering::SamplerStateImpl::Colour Rendering::SamplerStateImpl::GetBorderColor() const noexcept
+Rendering::SamplerStateImpl::ColourType Rendering::SamplerStateImpl::GetBorderColor() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
