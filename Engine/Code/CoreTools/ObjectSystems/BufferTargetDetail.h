@@ -203,7 +203,7 @@ void CoreTools::BufferTarget::WriteAggregateContainerWithoutNumber(const T& obje
     }
 }
 
-template <typename T, int Size>
+template <typename T, size_t Size>
 void CoreTools::BufferTarget::WriteAggregateContainer(const std::array<T, Size>& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;

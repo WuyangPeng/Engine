@@ -49,7 +49,7 @@ namespace CoreTools
         template <typename T>
         void WriteAggregateContainerWithoutNumber(const T& objects);
 
-        template <typename T, int Size>
+        template <typename T, size_t Size>
         void WriteAggregateContainer(const std::array<T, Size>& objects);
 
         // 写入对象指针（uniqueID在磁盘上为[无效]内存指针）。
