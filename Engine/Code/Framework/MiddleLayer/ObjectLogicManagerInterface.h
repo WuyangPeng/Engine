@@ -17,8 +17,6 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Framework/Helper/MiddleLayerMacro.h"
 
-FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
-
 /// 分为两个模块：
 /// 游戏对象逻辑模块（该处理过程定义了游戏的博弈机制）
 /// 人工智能模块（该机制定义了游戏对象逻辑、自适应性以及针对游戏事件或玩家输入状态的预置或动态反馈）

@@ -20,7 +20,6 @@
 #include "Framework/Helper/MiddleLayerMacro.h"
 
 FRAMEWORK_NON_COPY_EXPORT_IMPL(NetworkManagerImpl);
-FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
 
 // 网络接口，与外部实体间的通信，其中包括游戏或硬件设备、匹配服务等。
 namespace Framework

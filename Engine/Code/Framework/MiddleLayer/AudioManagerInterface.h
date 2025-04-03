@@ -17,8 +17,6 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Framework/Helper/MiddleLayerMacro.h"
 
-FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
-
 // 音频管理（音效处理过程，包括简单的音频回放以及空间定位功能）。
 namespace Framework
 {

@@ -17,8 +17,6 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Framework/Helper/MiddleLayerMacro.h"
 
-FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
-
 // 消息机制常用于游戏对象以及游戏管理系统之间的通信。
 namespace Framework
 {
