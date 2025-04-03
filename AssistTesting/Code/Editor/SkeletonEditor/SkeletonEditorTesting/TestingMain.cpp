@@ -10,6 +10,6 @@
 #include "CoreTools/Helper/MainFunctionMacro.h"
 #include "Editor/SkeletonEditor/SkeletonEditorTesting/TestingHelper.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 MAIN_FUNCTION(SkeletonEditor, TestingHelper)

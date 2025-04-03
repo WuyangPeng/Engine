@@ -10,6 +10,6 @@
 #include "CoreTools/Helper/MainFunctionMacro.h"
 #include "Example/SoundEffectExample/SoundEffectExampleTesting/TestingHelper.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 MAIN_FUNCTION(SoundEffectExample, TestingHelper)

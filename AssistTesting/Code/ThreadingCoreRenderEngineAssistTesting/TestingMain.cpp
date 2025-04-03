@@ -10,6 +10,6 @@
 #include "ThreadingCoreRenderEngineAssistTesting/TestingHelper.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 MAIN_FUNCTION(ThreadingCoreRenderEngineAssist, TestingHelper)
