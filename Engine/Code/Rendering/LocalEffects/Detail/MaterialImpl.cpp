@@ -28,7 +28,7 @@ Rendering::MaterialImpl::MaterialImpl() noexcept
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
-Rendering::MaterialImpl::MaterialImpl(const Colour& emissive, const Colour& ambient, const Colour& diffuse, const Colour& specular) noexcept
+Rendering::MaterialImpl::MaterialImpl(const ColourType& emissive, const ColourType& ambient, const ColourType& diffuse, const ColourType& specular) noexcept
     : emissive{ emissive }, ambient{ ambient }, diffuse{ diffuse }, specular{ specular }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -69,56 +69,56 @@ int Rendering::MaterialImpl::GetStreamingSize() const noexcept
     return size;
 }
 
-Rendering::MaterialImpl::Colour Rendering::MaterialImpl::GetEmissive() const noexcept
+Rendering::MaterialImpl::ColourType Rendering::MaterialImpl::GetEmissive() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return emissive;
 }
 
-Rendering::MaterialImpl::Colour Rendering::MaterialImpl::GetAmbient() const noexcept
+Rendering::MaterialImpl::ColourType Rendering::MaterialImpl::GetAmbient() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return ambient;
 }
 
-Rendering::MaterialImpl::Colour Rendering::MaterialImpl::GetDiffuse() const noexcept
+Rendering::MaterialImpl::ColourType Rendering::MaterialImpl::GetDiffuse() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return diffuse;
 }
 
-Rendering::MaterialImpl::Colour Rendering::MaterialImpl::GetSpecular() const noexcept
+Rendering::MaterialImpl::ColourType Rendering::MaterialImpl::GetSpecular() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return specular;
 }
 
-void Rendering::MaterialImpl::SetEmissive(const Colour& aEmissive) noexcept
+void Rendering::MaterialImpl::SetEmissive(const ColourType& aEmissive) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     emissive = aEmissive;
 }
 
-void Rendering::MaterialImpl::SetAmbient(const Colour& aAmbient) noexcept
+void Rendering::MaterialImpl::SetAmbient(const ColourType& aAmbient) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     ambient = aAmbient;
 }
 
-void Rendering::MaterialImpl::SetDiffuse(const Colour& aDiffuse) noexcept
+void Rendering::MaterialImpl::SetDiffuse(const ColourType& aDiffuse) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     diffuse = aDiffuse;
 }
 
-void Rendering::MaterialImpl::SetSpecular(const Colour& aSpecular) noexcept
+void Rendering::MaterialImpl::SetSpecular(const ColourType& aSpecular) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
