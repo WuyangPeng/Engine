@@ -171,8 +171,8 @@ void CoreTools::BufferTarget::WriteEnumContainerWithoutNumber(const T& objects)
     }
 }
 
-template <typename T, int Size>
-requires(std::is_enum_v<T> && 0 <= Size)
+template <typename T, size_t Size>
+requires(std::is_enum_v<T>)
 void CoreTools::BufferTarget::WriteEnumContainer(const std::array<T, Size>& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;

@@ -138,8 +138,8 @@ namespace CoreTools
         requires(std::is_enum_v<typename T::value_type>)
         void WriteEnumContainerWithoutNumber(const T& objects);
 
-        template <typename T, int Size>
-        requires(std::is_enum_v<T> && 0 <= Size)
+        template <typename T, size_t Size>
+        requires(std::is_enum_v<T>)
         void WriteEnumContainer(const std::array<T, Size>& objects);
 
         // °ïÖúº¯Êı
