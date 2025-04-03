@@ -48,7 +48,19 @@ System::WinSockInternetAddress SystemToolset::ConnectParameter::GetWinSockIntern
 
     internetAddress.sin_family = EnumCastUnderlying<uint16_t>(System::AddressFamilies::Internet);
     internetAddress.sin_port = System::GetHostToNetShort(boost::numeric_cast<uint16_t>(port));
+
+#ifdef TCRE_USE_GCC
+
+    if (inet_pton(AF_INET, address.c_str(), &internetAddress.sin_addr) <= 0)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("Invalid address / Address not supported \n"))
+    }
+
+#else  // !TCRE_USE_GCC
+
     internetAddress.sin_addr.s_addr = System::GetInternetAddress(address.c_str());
+
+#endif  // TCRE_USE_GCC
 
     return internetAddress;
 }
