@@ -29,7 +29,7 @@ namespace Rendering
     public:
         using ClassType = BumpMapEffectImpl;
 
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
         using Math = Mathematics::Math<float>;
         using Vector2 = Mathematics::Vector2<float>;
         using Vector3 = Mathematics::Vector3<float>;
