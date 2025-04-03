@@ -480,8 +480,8 @@ void CoreTools::BufferSource::ReadEnumContainer(T& container)
     ReadEnumContainer(elementsNumber, container);
 }
 
-template <typename T, int Size>
-requires(std::is_enum_v<T> && 0 <= Size)
+template <typename T, size_t Size>
+requires(std::is_enum_v<T>)
 void CoreTools::BufferSource::ReadEnumContainer(std::array<T, Size>& container)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -582,7 +582,7 @@ void CoreTools::BufferSource::ReadAggregateContainer(T& container)
     ReadAggregateContainer(elementsNumber, container);
 }
 
-template <typename T, size_t Size> 
+template <typename T, size_t Size>
 void CoreTools::BufferSource::ReadAggregateContainer(std::array<T, Size>& container)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;

@@ -255,8 +255,8 @@ namespace CoreTools
         requires(std::is_enum_v<typename T::value_type>)
         void ReadEnumContainer(T& container);
 
-        template <typename T, int Size>
-        requires(std::is_enum_v<T> && 0 <= Size)
+        template <typename T, size_t Size>
+        requires(std::is_enum_v<T>)
         void ReadEnumContainer(std::array<T, Size>& container);
 
         /// °ïÖúº¯Êı
