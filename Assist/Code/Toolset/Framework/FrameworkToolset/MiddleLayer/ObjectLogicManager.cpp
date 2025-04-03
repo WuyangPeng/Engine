@@ -17,7 +17,7 @@
 
 CLASS_INVARIANT_STUB_DEFINE(FrameworkToolset, ObjectLogicManager)
 
-namespace FrameworkToolset
+namespace Framework
 {
     template class Framework::ObjectLogicManager<Framework::ObjectLogicInterface, Framework::ArtificialIntelligenceInterface>;
 }

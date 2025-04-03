@@ -17,7 +17,7 @@
 
 CLASS_INVARIANT_STUB_DEFINE(FrameworkToolset, OpenGLGlutMainFunctionHelper)
 
-namespace FrameworkToolset
+namespace Framework
 {
     template class Framework::OpenGLGlutMainFunctionHelper<Framework::OpenGLGlutFrameBuild, Framework::OpenGLGlutProcessInterface>;
 }

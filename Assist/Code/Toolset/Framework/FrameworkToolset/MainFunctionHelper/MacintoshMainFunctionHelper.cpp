@@ -17,7 +17,7 @@
 
 CLASS_INVARIANT_STUB_DEFINE(FrameworkToolset, MacintoshMainFunctionHelper)
 
-namespace FrameworkToolset
+namespace Framework
 {
     template class Framework::MacintoshMainFunctionHelper<Framework::MacintoshFrameBuild, Framework::MacintoshProcessInterface>;
 }

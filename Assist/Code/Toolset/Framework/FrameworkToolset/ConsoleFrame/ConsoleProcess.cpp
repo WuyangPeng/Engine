@@ -16,7 +16,7 @@
 
 CLASS_INVARIANT_STUB_DEFINE(FrameworkToolset, ConsoleProcess)
 
-namespace FrameworkToolset
+namespace Framework
 {
     template class Framework::ConsoleProcess<Framework::ConsoleCallBackInterface>;
 }
