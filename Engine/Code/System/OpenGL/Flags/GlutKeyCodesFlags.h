@@ -109,6 +109,7 @@ namespace System
     {
         Shift = 0x0001,
         Control = 0x0002,
+        Alt = 0x0004,
         LeftButton = 0x0000,
         MiddleButton = 0x0001,
         RightButton = 0x0002,
