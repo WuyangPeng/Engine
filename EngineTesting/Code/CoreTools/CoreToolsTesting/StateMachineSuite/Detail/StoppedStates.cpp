@@ -39,7 +39,7 @@ void CoreTools::StoppedStates::Exit() noexcept
     CORE_TOOLS_CLASS_IS_VALID_1;
 }
 
-CoreTools::State<CoreTools::PlayerEntity>::MessageResult CoreTools::StoppedStates::OnMessage(const Telegram& telegram)
+CoreTools::State<CoreTools::PlayerEntity>::MessageResult CoreTools::StoppedStates::OnMessage(const TelegramType& telegram)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
