@@ -25,7 +25,7 @@ namespace Rendering
         using ClassType = PointLightEffect;
         using ParentType = LightEffect;
 
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
 
     public:
         explicit PointLightEffect(ProgramFactory& factory,

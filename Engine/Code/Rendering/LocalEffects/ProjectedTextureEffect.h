@@ -29,7 +29,7 @@ namespace Rendering
         COPY_UNSHARED_TYPE_DECLARE(ProjectedTextureEffect);
         using ParentType = LightEffect;
 
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
         using Texture2DSharedPtr = std::shared_ptr<Texture2D>;
         using ConstantBufferSharedPtr = std::shared_ptr<ConstantBuffer>;
 

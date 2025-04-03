@@ -26,13 +26,13 @@ namespace Rendering
         COPY_UNSHARED_TYPE_DECLARE(Material);
         using ParentType = Object;
 
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
         using MaterialSharedPtr = std::shared_ptr<ClassType>;
         using ConstMaterialSharedPtr = std::shared_ptr<const ClassType>;
 
     public:
         NODISCARD static MaterialSharedPtr Create(const std::string& name);
-        NODISCARD static MaterialSharedPtr Create(const std::string& name, const Colour& emissive, const Colour& ambient, const Colour& diffuse, const Colour& specular);
+        NODISCARD static MaterialSharedPtr Create(const std::string& name, const ColourType& emissive, const ColourType& ambient, const ColourType& diffuse, const ColourType& specular);
 
     protected:
         enum class MaterialCreate
@@ -42,21 +42,21 @@ namespace Rendering
 
     public:
         Material(MaterialCreate materialCreate, const std::string& name);
-        Material(MaterialCreate materialCreate, const std::string& name, const Colour& emissive, const Colour& ambient, const Colour& diffuse, const Colour& specular);
+        Material(MaterialCreate materialCreate, const std::string& name, const ColourType& emissive, const ColourType& ambient, const ColourType& diffuse, const ColourType& specular);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Material);
 
-        NODISCARD Colour GetEmissive() const noexcept;
-        NODISCARD Colour GetAmbient() const noexcept;
-        NODISCARD Colour GetDiffuse() const noexcept;
-        NODISCARD Colour GetSpecular() const noexcept;
+        NODISCARD ColourType GetEmissive() const noexcept;
+        NODISCARD ColourType GetAmbient() const noexcept;
+        NODISCARD ColourType GetDiffuse() const noexcept;
+        NODISCARD ColourType GetSpecular() const noexcept;
 
-        void SetEmissive(const Colour& emissive) noexcept;
-        void SetAmbient(const Colour& ambient) noexcept;
-        void SetDiffuse(const Colour& diffuse) noexcept;
-        void SetSpecular(const Colour& specular) noexcept;
+        void SetEmissive(const ColourType& emissive) noexcept;
+        void SetAmbient(const ColourType& ambient) noexcept;
+        void SetDiffuse(const ColourType& diffuse) noexcept;
+        void SetSpecular(const ColourType& specular) noexcept;
 
         NODISCARD float GetAlpha() const noexcept;
         NODISCARD float GetSpecularExponent() const noexcept;
