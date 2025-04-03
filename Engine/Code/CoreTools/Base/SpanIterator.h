@@ -85,7 +85,7 @@ namespace CoreTools
         requires(sizeof(typename Iter::value_type) <= sizeof(T) && sizeof(T) % sizeof(typename Iter::value_type) == 0)
         void SetValue(int step, T value);
 
-        template <typename T, int Size>
+        template <typename T, size_t Size>
         requires(sizeof(typename Iter::value_type) <= sizeof(T) && sizeof(T) % sizeof(typename Iter::value_type) == 0)
         void SetValue(int step, const std::array<T, Size>& value);
 
