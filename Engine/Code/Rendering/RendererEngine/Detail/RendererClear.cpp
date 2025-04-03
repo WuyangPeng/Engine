@@ -23,14 +23,14 @@ Rendering::RendererClear::RendererClear() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, RendererClear)
 
-void Rendering::RendererClear::SetClearColor(const Colour& aClearColor) noexcept
+void Rendering::RendererClear::SetClearColor(const ColourType& aClearColor) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     clearColor = aClearColor;
 }
 
-Rendering::RendererClear::Colour Rendering::RendererClear::GetClearColor() const noexcept
+Rendering::RendererClear::ColourType Rendering::RendererClear::GetClearColor() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
