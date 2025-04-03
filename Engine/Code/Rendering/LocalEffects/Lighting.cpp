@@ -157,42 +157,42 @@ float Rendering::Lighting::GetExponent() const noexcept
     return impl->GetExponent();
 }
 
-void Rendering::Lighting::SetAmbient(const Colour& ambient) noexcept
+void Rendering::Lighting::SetAmbient(const ColourType& ambient) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetAmbient(ambient);
 }
 
-void Rendering::Lighting::SetDiffuse(const Colour& diffuse) noexcept
+void Rendering::Lighting::SetDiffuse(const ColourType& diffuse) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetDiffuse(diffuse);
 }
 
-void Rendering::Lighting::SetSpecular(const Colour& specular) noexcept
+void Rendering::Lighting::SetSpecular(const ColourType& specular) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetSpecular(specular);
 }
 
-Rendering::Lighting::Colour Rendering::Lighting::GetAmbient() const noexcept
+Rendering::Lighting::ColourType Rendering::Lighting::GetAmbient() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetAmbient();
 }
 
-Rendering::Lighting::Colour Rendering::Lighting::GetDiffuse() const noexcept
+Rendering::Lighting::ColourType Rendering::Lighting::GetDiffuse() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetDiffuse();
 }
 
-Rendering::Lighting::Colour Rendering::Lighting::GetSpecular() const noexcept
+Rendering::Lighting::ColourType Rendering::Lighting::GetSpecular() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

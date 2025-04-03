@@ -28,7 +28,7 @@ namespace Rendering
         COPY_UNSHARED_TYPE_DECLARE(Lighting);
         using ParentType = Object;
 
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
         using Math = Mathematics::Math<float>;
         using LightSharedPtr = std::shared_ptr<ClassType>;
 
@@ -52,13 +52,13 @@ namespace Rendering
         NODISCARD float GetSinAngle() const noexcept;
         NODISCARD float GetExponent() const noexcept;
 
-        void SetAmbient(const Colour& ambient) noexcept;
-        void SetDiffuse(const Colour& diffuse) noexcept;
-        void SetSpecular(const Colour& specular) noexcept;
+        void SetAmbient(const ColourType& ambient) noexcept;
+        void SetDiffuse(const ColourType& diffuse) noexcept;
+        void SetSpecular(const ColourType& specular) noexcept;
 
-        NODISCARD Colour GetAmbient() const noexcept;
-        NODISCARD Colour GetDiffuse() const noexcept;
-        NODISCARD Colour GetSpecular() const noexcept;
+        NODISCARD ColourType GetAmbient() const noexcept;
+        NODISCARD ColourType GetDiffuse() const noexcept;
+        NODISCARD ColourType GetSpecular() const noexcept;
 
         void SetAttenuation(float constant, float linear, float quadratic, float intensity) noexcept;
 
