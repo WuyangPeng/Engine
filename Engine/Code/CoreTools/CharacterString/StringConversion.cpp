@@ -188,3 +188,16 @@ std::string CoreTools::StringConversion::MultiByteConversionUtf8(const std::stri
 
     return WideCharConversionUtf8(wideChar);
 }
+
+System::String CoreTools::StringConversion::FileSystemConversionStandard(const std::filesystem::path::string_type& character)
+{
+#ifdef SYSTEM_PLATFORM_WIN32
+
+    return WideCharConversionStandard(character);
+
+#else  // !SYSTEM_PLATFORM_WIN32
+
+    return MultiByteConversionStandard(character);
+
+#endif  // SYSTEM_PLATFORM_WIN32
+}
