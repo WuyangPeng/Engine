@@ -14,8 +14,6 @@
 #include "Framework/AndroidFrame/AndroidCallBackDetail.h"
 #include "Framework/MiddleLayer/MiddleLayerInterface.h"
 
-CLASS_INVARIANT_STUB_DEFINE(FrameworkToolset, AndroidCallBack)
-
 namespace FrameworkToolset
 {
     template class Framework::AndroidCallBack<Framework::MiddleLayerInterface>;
