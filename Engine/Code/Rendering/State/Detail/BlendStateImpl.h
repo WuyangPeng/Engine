@@ -26,7 +26,7 @@ namespace Rendering
     public:
         using ClassType = BlendStateImpl;
 
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
         using BufferSource = CoreTools::BufferSource;
         using BufferTarget = CoreTools::BufferTarget;
 
@@ -41,8 +41,8 @@ namespace Rendering
         NODISCARD bool IsEnableIndependentBlend() const noexcept;
         void SetEnableIndependentBlend(bool aEnableIndependentBlend) noexcept;
 
-        NODISCARD Colour GetBlendColor() const noexcept;
-        void SetBlendColor(const Colour& aBlendColor) noexcept;
+        NODISCARD ColourType GetBlendColor() const noexcept;
+        void SetBlendColor(const ColourType& aBlendColor) noexcept;
 
         NODISCARD uint32_t GetSampleMask() const noexcept;
         void SetSampleMask(uint32_t aSampleMask) noexcept;
@@ -61,7 +61,7 @@ namespace Rendering
         bool enableAlphaToCoverage;
         bool enableIndependentBlend;
         BlendStateTargetContainer blendStateTarget;
-        Colour blendColor;
+        ColourType blendColor;
         uint32_t sampleMask;
     };
 }
