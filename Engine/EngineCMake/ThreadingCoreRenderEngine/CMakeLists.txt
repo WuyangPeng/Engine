@@ -25,8 +25,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	include_directories(/data/coding/Libs/mongo-cxx-driver/src/bsoncxx/include/)	
 	include_directories(/data/coding/Libs/mysql-connector-c++/include/)
 	include_directories(/data/coding/Libs/mysql-connector-c++/BuildX64/include/mysqlx/) 
-	include_directories(/data/coding/Libs/hiredis/) 
-	include_directories(/data/coding/Libs/vld/src/) 
+	include_directories(/data/coding/Libs/hiredis/) 	
 	
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
