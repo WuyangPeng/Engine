@@ -28,112 +28,112 @@ Rendering::LightCameraGeometryImpl::LightCameraGeometryImpl() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, LightCameraGeometryImpl)
 
-Rendering::LightCameraGeometryImpl::Colour Rendering::LightCameraGeometryImpl::GetLightModelPosition() const noexcept
+Rendering::LightCameraGeometryImpl::ColourType Rendering::LightCameraGeometryImpl::GetLightModelPosition() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return lightModelPosition;
 }
 
-void Rendering::LightCameraGeometryImpl::SetLightModelPosition(const Colour& aLightModelPosition) noexcept
+void Rendering::LightCameraGeometryImpl::SetLightModelPosition(const ColourType& aLightModelPosition) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     this->lightModelPosition = aLightModelPosition;
 }
 
-Rendering::LightCameraGeometryImpl::Colour Rendering::LightCameraGeometryImpl::GetLightModelDirection() const noexcept
+Rendering::LightCameraGeometryImpl::ColourType Rendering::LightCameraGeometryImpl::GetLightModelDirection() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return lightModelDirection;
 }
 
-void Rendering::LightCameraGeometryImpl::SetLightModelDirection(const Colour& aLightModelDirection) noexcept
+void Rendering::LightCameraGeometryImpl::SetLightModelDirection(const ColourType& aLightModelDirection) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     this->lightModelDirection = aLightModelDirection;
 }
 
-Rendering::LightCameraGeometryImpl::Colour Rendering::LightCameraGeometryImpl::GetLightModelUp() const noexcept
+Rendering::LightCameraGeometryImpl::ColourType Rendering::LightCameraGeometryImpl::GetLightModelUp() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return lightModelUp;
 }
 
-void Rendering::LightCameraGeometryImpl::SetLightModelUp(const Colour& aLightModelUp) noexcept
+void Rendering::LightCameraGeometryImpl::SetLightModelUp(const ColourType& aLightModelUp) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     this->lightModelUp = aLightModelUp;
 }
 
-Rendering::LightCameraGeometryImpl::Colour Rendering::LightCameraGeometryImpl::GetLightModelRight() const noexcept
+Rendering::LightCameraGeometryImpl::ColourType Rendering::LightCameraGeometryImpl::GetLightModelRight() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return lightModelRight;
 }
 
-void Rendering::LightCameraGeometryImpl::SetLightModelRight(const Colour& aLightModelRight) noexcept
+void Rendering::LightCameraGeometryImpl::SetLightModelRight(const ColourType& aLightModelRight) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     this->lightModelRight = aLightModelRight;
 }
 
-Rendering::LightCameraGeometryImpl::Colour Rendering::LightCameraGeometryImpl::GetCameraModelPosition() const noexcept
+Rendering::LightCameraGeometryImpl::ColourType Rendering::LightCameraGeometryImpl::GetCameraModelPosition() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return cameraModelPosition;
 }
 
-void Rendering::LightCameraGeometryImpl::SetCameraModelPosition(const Colour& aCameraModelPosition) noexcept
+void Rendering::LightCameraGeometryImpl::SetCameraModelPosition(const ColourType& aCameraModelPosition) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     this->cameraModelPosition = aCameraModelPosition;
 }
 
-Rendering::LightCameraGeometryImpl::Colour Rendering::LightCameraGeometryImpl::GetCameraModelDirection() const noexcept
+Rendering::LightCameraGeometryImpl::ColourType Rendering::LightCameraGeometryImpl::GetCameraModelDirection() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return cameraModelDirection;
 }
 
-void Rendering::LightCameraGeometryImpl::SetCameraModelDirection(const Colour& aCameraModelDirection) noexcept
+void Rendering::LightCameraGeometryImpl::SetCameraModelDirection(const ColourType& aCameraModelDirection) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     this->cameraModelDirection = aCameraModelDirection;
 }
 
-Rendering::LightCameraGeometryImpl::Colour Rendering::LightCameraGeometryImpl::GetCameraModelUp() const noexcept
+Rendering::LightCameraGeometryImpl::ColourType Rendering::LightCameraGeometryImpl::GetCameraModelUp() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return cameraModelUp;
 }
 
-void Rendering::LightCameraGeometryImpl::SetCameraModelUp(const Colour& aCameraModelUp) noexcept
+void Rendering::LightCameraGeometryImpl::SetCameraModelUp(const ColourType& aCameraModelUp) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     this->cameraModelUp = aCameraModelUp;
 }
 
-Rendering::LightCameraGeometryImpl::Colour Rendering::LightCameraGeometryImpl::GetCameraModelRight() const noexcept
+Rendering::LightCameraGeometryImpl::ColourType Rendering::LightCameraGeometryImpl::GetCameraModelRight() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return cameraModelRight;
 }
 
-void Rendering::LightCameraGeometryImpl::SetCameraModelRight(const Colour& aCameraModelRight) noexcept
+void Rendering::LightCameraGeometryImpl::SetCameraModelRight(const ColourType& aCameraModelRight) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 

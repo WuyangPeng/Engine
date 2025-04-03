@@ -22,7 +22,7 @@ namespace Rendering
     public:
         using ClassType = LightCameraGeometryImpl;
 
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
         using BufferTarget = CoreTools::BufferTarget;
         using BufferSource = CoreTools::BufferSource;
 
@@ -35,33 +35,33 @@ namespace Rendering
         void Save(BufferTarget& target) const;
         void Load(BufferSource& source);
 
-        NODISCARD Colour GetLightModelPosition() const noexcept;
-        void SetLightModelPosition(const Colour& aLightModelPosition) noexcept;
-        NODISCARD Colour GetLightModelDirection() const noexcept;
-        void SetLightModelDirection(const Colour& aLightModelDirection) noexcept;
-        NODISCARD Colour GetLightModelUp() const noexcept;
-        void SetLightModelUp(const Colour& aLightModelUp) noexcept;
-        NODISCARD Colour GetLightModelRight() const noexcept;
-        void SetLightModelRight(const Colour& aLightModelRight) noexcept;
-        NODISCARD Colour GetCameraModelPosition() const noexcept;
-        void SetCameraModelPosition(const Colour& aCameraModelPosition) noexcept;
-        NODISCARD Colour GetCameraModelDirection() const noexcept;
-        void SetCameraModelDirection(const Colour& aCameraModelDirection) noexcept;
-        NODISCARD Colour GetCameraModelUp() const noexcept;
-        void SetCameraModelUp(const Colour& aCameraModelUp) noexcept;
-        NODISCARD Colour GetCameraModelRight() const noexcept;
-        void SetCameraModelRight(const Colour& aCameraModelRight) noexcept;
+        NODISCARD ColourType GetLightModelPosition() const noexcept;
+        void SetLightModelPosition(const ColourType& aLightModelPosition) noexcept;
+        NODISCARD ColourType GetLightModelDirection() const noexcept;
+        void SetLightModelDirection(const ColourType& aLightModelDirection) noexcept;
+        NODISCARD ColourType GetLightModelUp() const noexcept;
+        void SetLightModelUp(const ColourType& aLightModelUp) noexcept;
+        NODISCARD ColourType GetLightModelRight() const noexcept;
+        void SetLightModelRight(const ColourType& aLightModelRight) noexcept;
+        NODISCARD ColourType GetCameraModelPosition() const noexcept;
+        void SetCameraModelPosition(const ColourType& aCameraModelPosition) noexcept;
+        NODISCARD ColourType GetCameraModelDirection() const noexcept;
+        void SetCameraModelDirection(const ColourType& aCameraModelDirection) noexcept;
+        NODISCARD ColourType GetCameraModelUp() const noexcept;
+        void SetCameraModelUp(const ColourType& aCameraModelUp) noexcept;
+        NODISCARD ColourType GetCameraModelRight() const noexcept;
+        void SetCameraModelRight(const ColourType& aCameraModelRight) noexcept;
 
     private:
-        Colour lightModelPosition;  // 默认: (0, 0, 0, 1)
-        Colour lightModelDirection;  // 默认: (0, 0, -1, 0)
-        Colour lightModelUp;  // 默认: (0, 1, 0, 0)
-        Colour lightModelRight;  // 默认: (1, 0, 0, 0)
+        ColourType lightModelPosition;  // 默认: (0, 0, 0, 1)
+        ColourType lightModelDirection;  // 默认: (0, 0, -1, 0)
+        ColourType lightModelUp;  // 默认: (0, 1, 0, 0)
+        ColourType lightModelRight;  // 默认: (1, 0, 0, 0)
 
-        Colour cameraModelPosition;  // 默认: (0, 0, 0, 1)
-        Colour cameraModelDirection;  // 默认: (0, 0, -1, 0)
-        Colour cameraModelUp;  // 默认: (0, 1, 0, 0)
-        Colour cameraModelRight;  // 默认: (1, 0, 0, 0)
+        ColourType cameraModelPosition;  // 默认: (0, 0, 0, 1)
+        ColourType cameraModelDirection;  // 默认: (0, 0, -1, 0)
+        ColourType cameraModelUp;  // 默认: (0, 1, 0, 0)
+        ColourType cameraModelRight;  // 默认: (1, 0, 0, 0)
     };
 }
 
