@@ -15,7 +15,7 @@
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "Framework/Application/GlutApplicationInformation.h"
+#include "Framework/Application/GLUTApplicationInformation.h"
 #include "Framework/OpenGLGlutFrame/OpenGLGlutProcessManager.h"
 
 template <template <typename> class Build, typename Process>
