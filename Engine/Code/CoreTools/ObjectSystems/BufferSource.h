@@ -51,8 +51,7 @@ namespace CoreTools
         template <typename T>
         void ReadAggregateContainer(T& container);
 
-        template <typename T, int Size>
-        requires(0 <= Size)
+        template <typename T, size_t Size>
         void ReadAggregateContainer(std::array<T, Size>& container);
 
         template <typename T>

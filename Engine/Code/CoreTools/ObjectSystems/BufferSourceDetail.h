@@ -582,8 +582,7 @@ void CoreTools::BufferSource::ReadAggregateContainer(T& container)
     ReadAggregateContainer(elementsNumber, container);
 }
 
-template <typename T, int Size>
-requires(0 <= Size)
+template <typename T, size_t Size> 
 void CoreTools::BufferSource::ReadAggregateContainer(std::array<T, Size>& container)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
