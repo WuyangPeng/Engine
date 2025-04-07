@@ -44,7 +44,31 @@ endif()
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
 	link_directories(/data/coding/Libs/boost/stage/lib)
-	link_directories(/data/coding/Engine/x64/CMake/ReleaseWindows)  	 
+	link_directories(/data/coding/Engine/x64/CMake/ReleaseWindows)  	
+
+	link_libraries(libSystem)	
+	
+	link_libraries(libCoreTools)	
+	
+	link_libraries(libNetwork)	
+	link_libraries(libDatabase)	
+	link_libraries(libScript)
+	link_libraries(libMathematics)	
+	link_libraries(libSoundEffect)	
+	link_libraries(libInputOutput)		
+	
+	link_libraries(libResourceManager)	
+	link_libraries(libRendering)	
+	link_libraries(libPhysics)	
+	link_libraries(libImagics)	
+	
+	link_libraries(libAnimation)	
+	link_libraries(libArtificialIntelligence)	
+	link_libraries(libUserInterface)	
+	
+	link_libraries(libAssistTools)	
+	
+	link_libraries(libFramework)	
 
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
