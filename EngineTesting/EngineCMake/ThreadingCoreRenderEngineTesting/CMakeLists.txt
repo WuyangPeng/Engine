@@ -46,7 +46,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	link_directories(/data/coding/Libs/boost/stage/lib)
 	link_directories(/data/coding/Engine/x64/CMake/ReleaseWindows)  	
 
-	link_libraries(libSystem)	
+	link_libraries(libSystem.so)	
 	
 	link_libraries(libCoreTools)	
 	
