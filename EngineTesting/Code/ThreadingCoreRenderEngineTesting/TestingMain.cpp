@@ -12,5 +12,4 @@
 
 #include "System/Helper/PragmaWarning/Vld.h"
 
-
 MAIN_FUNCTION(ThreadingCoreRenderEngine, TestingHelper)
