@@ -10,6 +10,6 @@
 #include "Framework/FrameworkAndroidTesting/TestingHelper.h"
 #include "Framework/Helper/MainFunctionMacro.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 ANDROID_MAIN_FUNCTION(Framework, TestingHelper, SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT(""));

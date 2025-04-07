@@ -10,7 +10,7 @@
 #include "CoreTools/CoreToolsTesting/TestingHelper.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 CORE_TOOLS_MUTEX_INIT(CoreTools);
 
