@@ -30,6 +30,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	include_directories(/data/coding/Libs/hiredis/) 
 	include_directories(/data/coding/Assist/Code/)
 	include_directories(/data/coding/Engine/Code/)	
+	include_directories(/data/coding/EngineTesting/Code/)
 	
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
