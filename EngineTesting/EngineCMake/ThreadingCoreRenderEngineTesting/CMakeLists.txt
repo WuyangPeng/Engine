@@ -48,7 +48,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
 	link_libraries(libSystem.so)	
 	
-	link_libraries(libCoreTools.so	
+	link_libraries(libCoreTools.so)	
 	
 	link_libraries(libNetwork.so)	
 	link_libraries(libDatabase.so)	
