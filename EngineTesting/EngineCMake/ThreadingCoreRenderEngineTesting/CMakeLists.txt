@@ -48,27 +48,27 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
 	link_libraries(libSystem.so)	
 	
-	link_libraries(libCoreTools)	
+	link_libraries(libCoreTools.so	
 	
-	link_libraries(libNetwork)	
-	link_libraries(libDatabase)	
-	link_libraries(libScript)
-	link_libraries(libMathematics)	
-	link_libraries(libSoundEffect)	
-	link_libraries(libInputOutput)		
+	link_libraries(libNetwork.so)	
+	link_libraries(libDatabase.so)	
+	link_libraries(libScript.so)
+	link_libraries(libMathematics.so)	
+	link_libraries(libSoundEffect.so)	
+	link_libraries(libInputOutput.so)		
 	
-	link_libraries(libResourceManager)	
-	link_libraries(libRendering)	
-	link_libraries(libPhysics)	
-	link_libraries(libImagics)	
+	link_libraries(libResourceManager.so)	
+	link_libraries(libRendering.so)	
+	link_libraries(libPhysics.so)	
+	link_libraries(libImagics.so)	
 	
-	link_libraries(libAnimation)	
-	link_libraries(libArtificialIntelligence)	
-	link_libraries(libUserInterface)	
+	link_libraries(libAnimation.so)	
+	link_libraries(libArtificialIntelligence.so)	
+	link_libraries(libUserInterface.so)	
 	
-	link_libraries(libAssistTools)	
+	link_libraries(libAssistTools.so)	
 	
-	link_libraries(libFramework)	
+	link_libraries(libFramework.so)	
 
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
