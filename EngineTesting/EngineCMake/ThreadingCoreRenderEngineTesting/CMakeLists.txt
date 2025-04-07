@@ -7,8 +7,6 @@ project ("ThreadingCoreRenderEngineTesting")
 
 set(CMAKE_CXX_STANDARD 20)
 
-
-
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
 	include_directories(/data/coding/Libs/boost/)
@@ -43,26 +41,36 @@ else()
     # 其他平台下的操作
 endif()
 
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
-if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+	link_directories(/data/coding/Libs/boost/stage/lib)
+	link_directories(/data/coding/Engine/x64/CMake/ReleaseWindows)  	 
 
-    link_directories($ENV{LibsEnvironmentX64DebugLib}/)   
-    link_directories($ENV{EngineEngineering}/x64/CMake/DebugWindows/)  
-    link_directories($ENV{AssistEngineering}/x64/CMake/DebugWindows/)   
-    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/DebugWindows) 
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
-    set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/DebugWindows)
+	if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+
+		link_directories($ENV{LibsEnvironmentX64DebugLib}/)   
+		link_directories($ENV{EngineEngineering}/x64/CMake/DebugWindows/)  
+		link_directories($ENV{AssistEngineering}/x64/CMake/DebugWindows/)   
+		link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/DebugWindows) 
+
+		set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/DebugWindows)
+
+	else()
+
+		link_directories($ENV{LibsEnvironmentX64ReleaseLib}/) 
+		link_directories($ENV{EngineEngineering}/x64/CMake/ReleaseWindows)  
+		link_directories($ENV{AssistEngineering}/x64/CMake/ReleaseWindows/)  
+		link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/ReleaseWindows) 
+
+		set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/ReleaseWindows)
+
+	endif() 
 
 else()
-
-    link_directories($ENV{LibsEnvironmentX64ReleaseLib}/) 
-    link_directories($ENV{EngineEngineering}/x64/CMake/ReleaseWindows)  
-    link_directories($ENV{AssistEngineering}/x64/CMake/ReleaseWindows/)  
-    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/ReleaseWindows) 
-
-    set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/ReleaseWindows)
-
-endif()  
+    # 其他平台下的操作
+endif()
  
 link_directories($ENV{LibsEnvironmentX64Lib}/)
 
