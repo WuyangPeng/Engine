@@ -16,6 +16,7 @@
 #include "System/Network/Flags/SocketPrototypesFlags.h"
 #include "System/Network/SocketPrototypes.h"
 #include "System/Windows/Engineering.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "Toolset/System/SystemToolset/Helper/SystemToolsetClassInvariantMacro.h"
 
 SystemToolset::ConnectParameter::ConnectParameter(const std::string& jsonRoute, const std::string& portName)
