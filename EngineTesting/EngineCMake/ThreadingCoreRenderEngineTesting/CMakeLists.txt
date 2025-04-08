@@ -45,6 +45,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
 	link_directories(/data/coding/Libs/boost/stage/lib)
 	link_directories(/data/coding/Libs/ACE/ACE_wrappers/lib)
+	link_directories(/data/coding/Libs/mongo-cxx-driver/build/src/mongocxx)
 	link_directories(/data/coding/Engine/x64/CMake/ReleaseWindows)  	
 
 	link_libraries(libSystem.so)	
@@ -72,6 +73,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	link_libraries(libFramework.so)	
 	
 	link_libraries(libACE.so)	
+	link_libraries(libmongocxx.so)	
 
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
