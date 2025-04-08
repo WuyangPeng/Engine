@@ -44,6 +44,7 @@ endif()
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
 	link_directories(/data/coding/Libs/boost/stage/lib)
+	link_directories(/data/coding/Libs/ACE/ACE_wrappers/lib)
 	link_directories(/data/coding/Engine/x64/CMake/ReleaseWindows)  	
 
 	link_libraries(libSystem.so)	
@@ -69,6 +70,8 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	link_libraries(libAssistTools.so)	
 	
 	link_libraries(libFramework.so)	
+	
+	link_libraries(libACE.so)	
 
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
