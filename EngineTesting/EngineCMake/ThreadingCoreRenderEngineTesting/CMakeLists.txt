@@ -78,6 +78,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	link_libraries(libACE.so)	
 	link_libraries(libmongocxx.so)	
 	link_libraries(libmysqlcppconnx.so)
+	link_libraries(libactivemq-cpp.so)
 
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
