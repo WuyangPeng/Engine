@@ -83,6 +83,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	link_libraries(libactivemq-cpp.so)
 	link_libraries(libminiz.a)
 	link_libraries(libhiredis.so)
+	link_libraries(libGL.so)
 
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
