@@ -46,7 +46,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	link_directories(/data/coding/Libs/boost/stage/lib)
 	link_directories(/data/coding/Libs/ACE/ACE_wrappers/lib)
 	link_directories(/data/coding/Libs/mongo-cxx-driver/build/src/mongocxx)
-	link_directories(/data/coding/Libs/mysql-connector-c++/build/cdk/mysqlx)
+	link_directories(/data/coding/Libs/mysql-connector-c++/build)
 	link_directories(/data/coding/Engine/x64/CMake/ReleaseWindows)  	
 
 	link_libraries(libSystem.so)	
@@ -77,7 +77,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	link_libraries(libboost_date_time.so)
 	link_libraries(libACE.so)	
 	link_libraries(libmongocxx.so)	
-	link_libraries(libcdk_mysqlx.a)
+	link_libraries(libmysqlcppconnx.so)
 
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
