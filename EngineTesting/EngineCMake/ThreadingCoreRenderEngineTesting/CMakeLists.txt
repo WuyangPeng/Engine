@@ -75,6 +75,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	
 	link_libraries(libFramework.so)	
 	
+	link_libraries(libboost_system.so)	
 	link_libraries(libboost_timer.so)	
 	link_libraries(libboost_date_time.so)
 	link_libraries(libACE.so)	
