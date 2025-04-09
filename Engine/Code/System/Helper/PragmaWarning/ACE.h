@@ -75,9 +75,16 @@
 class ACE_Main_Base
 {
 public:
-    ACE_Main_Base();
-    virtual ~ACE_Main_Base();
-    int run(int, char*[]);
+    ACE_Main_Base()
+    {
+    }
+    virtual ~ACE_Main_Base()
+    {
+    }
+    int run(int, char*[])
+    {
+        retrun 0;
+    }
     virtual int run_i(int, char*[]) = 0;
 };
 
