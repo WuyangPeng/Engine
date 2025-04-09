@@ -48,6 +48,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	link_directories(/data/coding/Libs/mongo-cxx-driver/build/src/mongocxx)
 	link_directories(/data/coding/Libs/mysql-connector-c++/build)
 	link_directories(/data/coding/Libs/miniz/build)
+	link_directories(/data/coding/Libs/hiredis/build)
 	link_directories(/data/coding/Engine/x64/CMake/ReleaseWindows)  	
 
 	link_libraries(libSystem.so)	
@@ -81,6 +82,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	link_libraries(libmysqlcppconnx.so)
 	link_libraries(libactivemq-cpp.so)
 	link_libraries(libminiz.a)
+	link_libraries(libhiredis.so)
 
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
