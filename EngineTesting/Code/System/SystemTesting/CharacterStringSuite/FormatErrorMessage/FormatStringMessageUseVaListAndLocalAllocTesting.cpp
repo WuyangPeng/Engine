@@ -63,8 +63,8 @@ void System::FormatStringMessageUseVaListAndLocalAllocTesting::FormatStringMessa
 
 void System::FormatStringMessageUseVaListAndLocalAllocTesting::FormatStringMessageUseArgumentsTest(WindowsHLocal& resultMessage, const TChar* message, va_list vaArguments)
 {
-    va_list* ptr{ &vaArguments };
-    const auto size = FormatStringMessage(message, resultMessage, ptr);
+    va_list* ptr = &vaArguments;
+    const auto size = System::FormatStringMessage(message, resultMessage, ptr);
     ASSERT_LESS(0u, size);
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(resultMessage, "FormatStringMessage Ê§°Ü¡£");
 
