@@ -83,7 +83,7 @@ public:
     }
     int run(int, char*[])
     {
-        retrun 0;
+        return 0;
     }
     virtual int run_i(int, char*[]) = 0;
 };
