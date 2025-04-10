@@ -32,15 +32,33 @@
 #else  // !SYSTEM_PLATFORM_WIN32
 
     #define WINDOWS_MAIN_FUNCTION_WITH_INFORMATION(namespaceName, helperClassName, windowName, engineEnvironment, engineDirectory, windowSizeWidth, windowSizeHeight) \
-        int main(int argc, char** argv)                                                                                                                               \
+        int main(int argc, char** argv) noexcept                                                                                                                      \
         {                                                                                                                                                             \
-            return Framework::MainEntryPoint<namespaceName::helperClassName>(argc, argv, "", "", "");                                                                 \
+            try                                                                                                                                                       \
+            {                                                                                                                                                         \
+                namespaceName::helperClassName helper{ argc, argv };                                                                                                  \
+                return helper.Run();                                                                                                                                  \
+            }                                                                                                                                                         \
+            catch (...)                                                                                                                                               \
+            {                                                                                                                                                         \
+                System::OutputDebugStringWithTChar(SYSTEM_TEXT("main 抛出异常。"));                                                                                   \
+            }                                                                                                                                                         \
+            return 0;                                                                                                                                                 \
         }
 
     #define WINDOWS_MAIN_FUNCTION_USE_PARAMETER(namespaceName, helperClassName, engineEnvironment, engineDirectory, renderer) \
-        int main(int argc, char** argv)                                                                                       \
+        int main(int argc, char** argv) noexcept                                                                              \
         {                                                                                                                     \
-            return Framework::MainEntryPoint<namespaceName::helperClassName>(argc, argv, "", "", "");                         \
+            try                                                                                                               \
+            {                                                                                                                 \
+                namespaceName::helperClassName helper{ argc, argv };                                                          \
+                return helper.Run();                                                                                          \
+            }                                                                                                                 \
+            catch (...)                                                                                                       \
+            {                                                                                                                 \
+                System::OutputDebugStringWithTChar(SYSTEM_TEXT("main 抛出异常。"));                                           \
+            }                                                                                                                 \
+            return 0;                                                                                                         \
         }
 
 #endif  // SYSTEM_PLATFORM_WIN32
