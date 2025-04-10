@@ -13,6 +13,8 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
+#include <stdarg.h>
+
 System::FormatStringMessageUseVaListAndLocalAllocTesting::FormatStringMessageUseVaListAndLocalAllocTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
