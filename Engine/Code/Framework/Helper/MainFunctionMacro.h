@@ -34,13 +34,13 @@
     #define WINDOWS_MAIN_FUNCTION_WITH_INFORMATION(namespaceName, helperClassName, windowName, engineEnvironment, engineDirectory, windowSizeWidth, windowSizeHeight) \
         int main(int argc, char** argv)                                                                                                                               \
         {                                                                                                                                                             \
-            return Framework::MainEntryPoint<namespaceName::helperClassName>(argc, argv, "", engineEnvironment, engineDirectory);                                     \
+            return Framework::MainEntryPoint<namespaceName::helperClassName>(argc, argv, "", "", "");                                                                 \
         }
 
-    #define WINDOWS_MAIN_FUNCTION_USE_PARAMETER(namespaceName, helperClassName, engineEnvironment, engineDirectory, renderer)     \
-        int main(int argc, char** argv)                                                                                           \
-        {                                                                                                                         \
-            return Framework::MainEntryPoint<namespaceName::helperClassName>(argc, argv, "", engineEnvironment, engineDirectory); \
+    #define WINDOWS_MAIN_FUNCTION_USE_PARAMETER(namespaceName, helperClassName, engineEnvironment, engineDirectory, renderer) \
+        int main(int argc, char** argv)                                                                                       \
+        {                                                                                                                     \
+            return Framework::MainEntryPoint<namespaceName::helperClassName>(argc, argv, "", "", "");                         \
         }
 
 #endif  // SYSTEM_PLATFORM_WIN32
