@@ -42,8 +42,6 @@ else()
     # 其他平台下的操作
 endif()
 
-message(STATUS "C++ Standard Include Directories: ${CMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES}")
-
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
 	link_directories(/data/coding/Libs/boost/stage/lib)
