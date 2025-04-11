@@ -14,7 +14,9 @@
 
 #ifdef SYSTEM_PLATFORM_LINUX
 
-    #include <X11/X.h>
+    #include <X11/Xlib.h>
+
+    #include <GL/glx.h>
     #include <GL/glxext.h>
 
 #endif  // SYSTEM_PLATFORM_LINUX
