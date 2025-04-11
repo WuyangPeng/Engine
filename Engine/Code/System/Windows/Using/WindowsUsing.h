@@ -485,7 +485,7 @@ namespace System
     };
     using WindowOverlappedPtr = WindowOverlapped*;
 
-    using WindowOverlappedCompletionRoutine = void (*)(uint32_t errorCode, uint32_t numberOfBytesTransfered, void* overlapped);
+    using WindowOverlappedCompletionRoutine = void (*)(DWORD errorCode, DWORD numberOfBytesTransfered, void* overlapped);
 
     struct WindowOverlappedEntry
     {
