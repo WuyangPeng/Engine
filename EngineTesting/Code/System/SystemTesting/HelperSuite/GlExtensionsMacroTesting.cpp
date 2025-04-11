@@ -8,7 +8,7 @@
 /// °æ±¾£º1.0.0.7 (2024/03/08 16:01)
 
 #include "GlExtensionsMacroTesting.h"
-#include "System/Helper/GlExtensionsMacro.h"
+#include "System/Helper/GLExtensionsMacro.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
