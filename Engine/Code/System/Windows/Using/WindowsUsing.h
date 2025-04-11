@@ -477,9 +477,9 @@ namespace System
             {
                 uint32_t Offset;
                 uint32_t OffsetHigh;
-            } DUMMYSTRUCTNAME;
+            };
             void* Pointer;
-        } DUMMYUNIONNAME;
+        };
 
         WindowsHandle hEvent;
     };
