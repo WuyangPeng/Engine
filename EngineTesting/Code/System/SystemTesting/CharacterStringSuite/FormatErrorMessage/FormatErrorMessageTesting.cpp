@@ -47,8 +47,7 @@ void System::FormatErrorMessageTesting::FormatErrorMessageTest(WindowsHLocal err
                                          WindowError::InvalidAccess,
                                          parameter.GetLanguageIdData(),
                                          ReinterpretCast(errorMessage),
-                                         0,
-                                         nullptr);
+                                         0);
 
     ASSERT_LESS(0u, size);
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(errorMessage, "∏Ò ΩªØ¥ÌŒÛ¬Î ß∞‹°£");

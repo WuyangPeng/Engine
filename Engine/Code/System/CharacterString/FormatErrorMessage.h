@@ -32,7 +32,24 @@ namespace System
                                                                      const LanguageIdData& languageId,
                                                                      TChar* buffer,
                                                                      WindowsDWord size,
+                                                                     va_list arguments) noexcept;
+
+    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatErrorMessage(FormatMessageOption flag,
+                                                                     FormatMessageWidth widthFlag,
+                                                                     WindowsConstVoidPtr source,
+                                                                     WindowError messageId,
+                                                                     const LanguageIdData& languageId,
+                                                                     TChar* buffer,
+                                                                     WindowsDWord size,
                                                                      va_list* arguments) noexcept;
+
+    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatErrorMessage(FormatMessageOption flag,
+                                                                     FormatMessageWidth widthFlag,
+                                                                     WindowsConstVoidPtr source,
+                                                                     WindowError messageId,
+                                                                     const LanguageIdData& languageId,
+                                                                     TChar* buffer,
+                                                                     WindowsDWord size) noexcept;
 
     /// errorMessage分配的内存需要使用LocalMemoryFree进行释放。
     NODISCARD bool SYSTEM_DEFAULT_DECLARE FormatErrorMessage(WindowsHLocal& errorMessage, WindowError lastError) noexcept;
@@ -43,9 +60,9 @@ namespace System
 
     /// resultMessage分配的内存需要使用LocalMemoryFree进行释放。
     NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatStringMessage(const TChar* message, TChar* buffer, WindowsDWord size, WindowsDWordPtrSizeType* arguments) noexcept;
-    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatStringMessage(const TChar* message, TChar* buffer, WindowsDWord size, va_list* arguments) noexcept;
+    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatStringMessage(const TChar* message, TChar* buffer, WindowsDWord size, va_list arguments) noexcept;
     NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatStringMessage(const TChar* message, WindowsHLocal& resultMessage, WindowsDWordPtrSizeType* arguments) noexcept;
-    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatStringMessage(const TChar* message, WindowsHLocal& resultMessage, va_list* arguments) noexcept;
+    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatStringMessage(const TChar* message, WindowsHLocal& resultMessage, va_list arguments) noexcept;
 
     NODISCARD constexpr WindowsDWord MakeSoftwareException(const Severity severity, const Facility facility, const WindowsDWord exception) noexcept
     {
