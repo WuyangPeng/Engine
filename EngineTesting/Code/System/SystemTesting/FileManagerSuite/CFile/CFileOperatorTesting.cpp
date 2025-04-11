@@ -77,15 +77,13 @@ void System::CFileOperatorTesting::PositionTest(FILE* file)
 {
     ASSERT_TRUE(Seek(file, 0, FileSeek::Set));
 
-    const auto position0 = GetPosition(file);
-    constexpr PosType zero{};
-    ASSERT_EQUAL(position0, zero);
+    auto position = GetPosition(file);
+    ASSERT_EQUAL(position, 0);
 
-    constexpr PosType one{ 1 };
-    ASSERT_TRUE(SetPosition(file, one));
+    ASSERT_TRUE(SetPosition(file, 1));
 
-    const auto position1 = GetPosition(file);
-    ASSERT_EQUAL(position1, one);
+    position = GetPosition(file);
+    ASSERT_EQUAL(position, 1);
 }
 
 System::CFileString System::CFileOperatorTesting::GetFileName() const
