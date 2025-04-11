@@ -1,11 +1,11 @@
 /// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/11 14:38)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/11 14:38)
 
 #include "Utf8ConversionWideCharTesting.h"
 #include "System/CharacterString/StringConversion.h"
@@ -16,7 +16,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::Utf8ConversionWideCharTesting::Utf8ConversionWideCharTesting(const OStreamShared& stream)
-    : ParentType{ stream, 19, L"Utf8×Ö·û´®×ª»»ÎªWideChar" },  /// ²»ÂÛÓ¢ÎÄ»òÖĞÎÄ¶¼°´1¸ö³¤¶ÈËã£¬°üÀ¨ÖÕÖ¹·û¡£
+    : ParentType{ stream, 19, L"Utf8å­—ç¬¦ä¸²è½¬æ¢ä¸ºWideChar" },  /// ä¸è®ºè‹±æ–‡æˆ–ä¸­æ–‡éƒ½æŒ‰1ä¸ªé•¿åº¦ç®—ï¼ŒåŒ…æ‹¬ç»ˆæ­¢ç¬¦ã€‚
       multiByteInitial{ CoreTools::CFileManagerHelper::LoadFromFile("Resource/StringConversionTesting/Utf8ConversionWideChar.txt") },
       multiByteInitialLength{ boost::numeric_cast<int>(multiByteInitial.size() + 1) }
 {
