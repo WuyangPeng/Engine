@@ -200,7 +200,7 @@ namespace System
 
     using WindowsWord = uint16_t;
     using WindowsWordPtr = WindowsWord*;
-    using WindowsDWord = uint32_t;
+    using WindowsDWord = unsigned long;
     using WindowsDWordPtr = WindowsDWord*;
 
     constexpr WindowsDWord gMaxPath{ 260 };
