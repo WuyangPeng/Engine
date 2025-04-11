@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/08 11:02)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/08 11:02)
 
 #include "EnumShiftableTesting.h"
 #include "System/Helper/EnumOperator.h"
@@ -37,24 +37,24 @@ void System::EnumShiftableTesting::MainTest()
 
 void System::EnumShiftableTesting::ShiftableTest() const
 {
-    std::cout << "ÇëÊäÈëÒ»¸ö²âÊÔÊı×Ö£º";
+    std::cout << "è¯·è¾“å…¥ä¸€ä¸ªæµ‹è¯•æ•°å­—ï¼š";
 
     SignedNumber number{};
 
     std::cin >> number;
 
-    std::cout << "ÕâÀïÏÔÊ¾¸Õ²ÅÊäÈëµÄÊı×Ö£º" << number << '\n';
+    std::cout << "è¿™é‡Œæ˜¾ç¤ºåˆšæ‰è¾“å…¥çš„æ•°å­—ï¼š" << number << '\n';
 
-    std::wcout << L"ÇëÔÙÊäÈëÒ»¸ö²âÊÔÊı×Ö£º";
+    std::wcout << L"è¯·å†è¾“å…¥ä¸€ä¸ªæµ‹è¯•æ•°å­—ï¼š";
 
     std::wcin >> number;
 
-    std::wcout << L"ÕâÀïÏÔÊ¾¸Õ²ÅÊäÈëµÄÊı×Ö£º" << number << '\n';
+    std::wcout << L"è¿™é‡Œæ˜¾ç¤ºåˆšæ‰è¾“å…¥çš„æ•°å­—ï¼š" << number << '\n';
 }
 
 void System::EnumShiftableTesting::PrintTipsMessage()
 {
-    GetStream() << "Õâ¸ö²âÊÔĞèÒª¿ØÖÆÌ¨ÊäÈë¡£\n";
+    GetStream() << "è¿™ä¸ªæµ‹è¯•éœ€è¦æ§åˆ¶å°è¾“å…¥ã€‚\n";
 
     SystemPause();
 }
