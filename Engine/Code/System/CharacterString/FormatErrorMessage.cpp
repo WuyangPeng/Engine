@@ -97,7 +97,7 @@ System::WindowsDWord System::FormatErrorMessage(FormatMessageOption flag,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(flag, widthFlag, source, messageId, languageId, buffer, size, arguments);
+    UnusedFunction(flag, widthFlag, source, messageId, languageId, buffer, size);
 
     return 0;
 
