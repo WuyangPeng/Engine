@@ -15,40 +15,36 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
+using namespace std::literals;
+
 System::CompareStringOrdinalUseBinaryTesting::CompareStringOrdinalUseBinaryTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      comparesWStrings{ L"啊",
-
-#ifdef SYSTEM_PLATFORM_WIN32
-
-                        L"吧",
-                        L"抽",
-                        L"的",
-                        L"额",
-                        L"发",
-                        L"给",
-                        L"胡",
-                        L"奖",
-                        L"看",
-                        L"了",
-                        L"吗",
-                        L"你",
-                        L"哦",
-                        L"平",
-                        L"气",
-                        L"人",
-                        L"是",
-                        L"他",
-                        L"我",
-                        L"想",
-                        L"要",
-                        L"做",
-                        L"a",
-                        L"A",
-
-#endif  // SYSTEM_PLATFORM_WIN32
-
-                        L"0" },
+      comparesWStrings{ L"啊"s,
+                        L"吧"s,
+                        L"抽"s,
+                        L"的"s,
+                        L"额"s,
+                        L"发"s,
+                        L"给"s,
+                        L"胡"s,
+                        L"奖"s,
+                        L"看"s,
+                        L"了"s,
+                        L"吗"s,
+                        L"你"s,
+                        L"哦"s,
+                        L"平"s,
+                        L"气"s,
+                        L"人"s,
+                        L"是"s,
+                        L"他"s,
+                        L"我"s,
+                        L"想"s,
+                        L"要"s,
+                        L"做"s,
+                        L"a"s,
+                        L"A"s,
+                        L"0"s },
       randomEngine{ GetEngineRandomSeed() }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
