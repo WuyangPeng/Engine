@@ -59,6 +59,9 @@ namespace System
     {
         ProcessedOutput = 0x0001,
         WrapAtEolOutput = 0x0002,
+        VirtualTerminalProcessing = 0x0004,
+        DisableNewlineAutoReturn = 0x0008,
+        LvbGridWorldwide = 0x0010
     };
 
 #endif  // SYSTEM_PLATFORM_WIN32
