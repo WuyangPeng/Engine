@@ -18,6 +18,9 @@
 System::CompareStringOrdinalUseBinaryTesting::CompareStringOrdinalUseBinaryTesting(const OStreamShared& stream)
     : ParentType{ stream },
       comparesWStrings{ L"°¡",
+
+#ifdef SYSTEM_PLATFORM_WIN32
+
                         L"°É",
                         L"³é",
                         L"µÄ",
@@ -42,6 +45,9 @@ System::CompareStringOrdinalUseBinaryTesting::CompareStringOrdinalUseBinaryTesti
                         L"×ö",
                         L"a",
                         L"A",
+
+#endif  // SYSTEM_PLATFORM_WIN32
+
                         L"0" },
       randomEngine{ GetEngineRandomSeed() }
 {
