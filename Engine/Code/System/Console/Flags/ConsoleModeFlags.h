@@ -52,6 +52,7 @@ namespace System
         InsertMode = 0x0020 | ExtendedFlags,
         QuickEditMode = 0x0040 | ExtendedFlags,
         AutoPosition = 0x0100,
+        VirtualTerminalInput = 0x0200
     };
 
     enum class ConsoleOutputMode
