@@ -18,7 +18,7 @@
 #include "ConfigMacro/StdLibConfigTesting.h"
 #include "EnumCastTesting.h"
 #include "EnumOperator/EnumAddableTesting.h"
-#include "EnumOperator/EnumAndAbleTesting.h"
+#include "EnumOperator/EnumAndableTesting.h"
 #include "EnumOperator/EnumDecrementableTesting.h"
 #include "EnumOperator/EnumIncrementableTesting.h"
 #include "EnumOperator/EnumMultiplicationTesting.h"
