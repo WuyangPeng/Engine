@@ -1067,7 +1067,7 @@ namespace System
     enum class ErrorMode
     {
         Default = 0x0000,
-        FailCriticaleErrors = 0x0001,
+        FailCriticalErrors = 0x0001,
         NoGeneralProtectionFaultErrorBox = 0x0002,
         NoAlignmentFaultExcept = 0x0004,
         NoOpenFileErrorBox = 0x8000,
