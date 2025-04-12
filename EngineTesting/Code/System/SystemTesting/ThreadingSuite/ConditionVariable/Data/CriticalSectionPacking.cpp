@@ -8,12 +8,13 @@
 /// °æ±¾£º1.0.0.7 (2024/03/12 19:31)
 
 #include "CriticalSectionPacking.h"
+#include "System/Threading/CriticalSection.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 
 System::CriticalSectionPacking::CriticalSectionPacking(ThreadingCriticalSection& criticalSection) noexcept
     : criticalSection{ criticalSection }
 {
-    EnterCriticalSection(&criticalSection);
+    EnterSystemCriticalSection(&criticalSection);
 
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -22,7 +23,7 @@ System::CriticalSectionPacking::~CriticalSectionPacking() noexcept
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 
-    LeaveCriticalSection(&criticalSection);
+    LeaveSystemCriticalSection(&criticalSection);
 }
 
 CLASS_INVARIANT_STUB_DEFINE(System, CriticalSectionPacking)
