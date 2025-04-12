@@ -19,6 +19,9 @@
     #include <GL/glx.h>
     #include <GL/glxext.h>
 
+    #undef InputOutput
+    #undef None
+
 #endif  // SYSTEM_PLATFORM_LINUX
 
 #endif  // SYSTEM_HELPER_GLX_EXTENSIONS_MACRO_H
