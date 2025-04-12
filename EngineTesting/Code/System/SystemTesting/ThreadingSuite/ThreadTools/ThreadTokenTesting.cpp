@@ -69,10 +69,14 @@ bool System::ThreadTokenTesting::RandomShuffleFlags()
 
 void System::ThreadTokenTesting::ThreadTest()
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     const auto mutexHandle = CreateSystemMutex(nullptr, false, nullptr);
     ASSERT_NOT_THROW_EXCEPTION_1(DoThreadTest, mutexHandle);
 
     ASSERT_NOT_THROW_EXCEPTION_1(CloseMutexTest, mutexHandle);
+
+#endif  // !SYSTEM_PLATFORM_WIN32
 }
 
 void System::ThreadTokenTesting::TokenTest(ThreadHandle threadHandle, TokenStandardAccess tokenStandardAccess, TokenSpecificAccess tokenSpecificAccess)
