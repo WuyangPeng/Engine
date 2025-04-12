@@ -102,7 +102,7 @@ void System::ConditionVariableTestingBase::PushBuffer()
 
 void System::ConditionVariableTestingBase::WakeNotEmptyConditionVariable() noexcept
 {
-    WakeConditionVariable(&bufferNotEmpty);
+    WakeSystemConditionVariable(&bufferNotEmpty);
 }
 
 void System::ConditionVariableTestingBase::WakeAllConditionVariable() noexcept
