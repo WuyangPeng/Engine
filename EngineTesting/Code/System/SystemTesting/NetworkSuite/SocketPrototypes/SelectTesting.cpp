@@ -102,13 +102,21 @@ void System::SelectTesting::SelectThreadTest()
 
 System::WinSocket System::SelectTesting::GetWinSocket(size_t index) const noexcept
 {
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
+#ifdef SYSTEM_PLATFORM_WIN32
+
+    #include SYSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26446)
+    #include SYSTEM_WARNING_DISABLE(26482)
 
     return winSockFdSet.fd_array[index];
 
-#include SYSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
+
+#else  // !SYSTEM_PLATFORM_WIN32
+
+    return winSockFdSet.fds_bits[index];
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 void System::SelectTesting::SelectSuccess(WinSockFdSet& readWinSockFdSet)
