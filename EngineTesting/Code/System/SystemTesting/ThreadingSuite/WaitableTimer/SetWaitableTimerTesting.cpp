@@ -48,6 +48,8 @@ void System::SetWaitableTimerTesting::AsynchronousTest()
 
 void System::SetWaitableTimerTesting::DoAsynchronousTest(WindowsHandle waitableTimerHandle)
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     ASSERT_TRUE(IsWaitableTimerValid(waitableTimerHandle));
 
     WindowsLargeInteger waitableTimerLargeInteger{};
@@ -63,19 +65,27 @@ void System::SetWaitableTimerTesting::DoAsynchronousTest(WindowsHandle waitableT
     GetStream() << "µÈ´ý" << period / 1000 << "ÃëÖÓ¡£\n";
 
     ASSERT_EQUAL(SystemSleep(EnumCastUnderlying(MutexWait::Infinite), true), SleepReturn::WaitIOCompletion);
+
+#endif  // !SYSTEM_PLATFORM_WIN32
 }
 
 void System::SetWaitableTimerTesting::AsynchronousUseTolerableDelayTest()
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     const auto waitableTimerHandle = CreateSystemWaitableTimer(nullptr, true, nullptr);
 
     ASSERT_NOT_THROW_EXCEPTION_1(DoAsynchronousUseTolerableDelayTest, waitableTimerHandle);
 
     ASSERT_NOT_THROW_EXCEPTION_1(CloseWaitableTimerTest, waitableTimerHandle);
+
+#endif  // !SYSTEM_PLATFORM_WIN32
 }
 
 void System::SetWaitableTimerTesting::DoAsynchronousUseTolerableDelayTest(WindowsHandle waitableTimerHandle)
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     ASSERT_TRUE(IsWaitableTimerValid(waitableTimerHandle));
 
     WindowsLargeInteger waitableTimerLargeInteger{};
@@ -92,6 +102,8 @@ void System::SetWaitableTimerTesting::DoAsynchronousUseTolerableDelayTest(Window
     GetStream() << "µÈ´ý" << period / 1000 << "ÃëÖÓ¡£\n";
 
     ASSERT_EQUAL(SystemSleep(EnumCastUnderlying(MutexWait::Infinite), true), SleepReturn::WaitIOCompletion);
+
+#endif  // !SYSTEM_PLATFORM_WIN32
 }
 
 void System::SetWaitableTimerTesting::TimerApcProcedure(WindowsVoidPtr argToCompletionRoutine, WindowsDWord timerLowValue, WindowsDWord timerHighValue)
