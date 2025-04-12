@@ -54,6 +54,8 @@ System::WindowsDWord System::PriorityBoostTesting::ThreadStartRoutine(void* thre
 
 void System::PriorityBoostTesting::DoThreadTest(WindowsHandle mutexHandle)
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     ASSERT_TRUE(IsSystemMutexValid(mutexHandle));
 
     ASSERT_TRUE(WaitForSystemMutex(mutexHandle));
@@ -64,6 +66,8 @@ void System::PriorityBoostTesting::DoThreadTest(WindowsHandle mutexHandle)
     ASSERT_NOT_THROW_EXCEPTION_3(ResultTest, threadHandle, threadId, mutexHandle);
 
     ASSERT_NOT_THROW_EXCEPTION_1(CloseThreadTest, threadHandle);
+
+#endif  // !SYSTEM_PLATFORM_WIN32
 }
 
 void System::PriorityBoostTesting::ResultTest(WindowsHandle threadHandle, WindowsDWord threadId, WindowsHandle mutexHandle)
