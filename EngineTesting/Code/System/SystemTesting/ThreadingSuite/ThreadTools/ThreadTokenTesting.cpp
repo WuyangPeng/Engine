@@ -119,6 +119,8 @@ void System::ThreadTokenTesting::DoThreadTest(ThreadHandle mutexHandle)
 
 void System::ThreadTokenTesting::TokenThreadTest(ThreadHandle threadHandle, WindowsDWord threadId, ThreadHandle mutexHandle)
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     ASSERT_TRUE(IsThreadHandleValid(threadHandle));
     ASSERT_LESS(0u, threadId);
 
@@ -129,6 +131,8 @@ void System::ThreadTokenTesting::TokenThreadTest(ThreadHandle threadHandle, Wind
 
     ASSERT_TRUE(ReleaseSystemMutex(mutexHandle));
     ASSERT_TRUE(WaitForSystemThread(threadHandle));
+
+#endif  // !SYSTEM_PLATFORM_WIN32
 }
 
 void System::ThreadTokenTesting::DoTokenThreadTest(size_t index, ThreadHandle threadHandle)
