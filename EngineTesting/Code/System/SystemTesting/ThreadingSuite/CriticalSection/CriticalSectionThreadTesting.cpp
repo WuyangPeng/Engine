@@ -14,6 +14,8 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
+#include <thread>
+
 System::CriticalSectionThreadTesting::CriticalSectionThreadTesting(const OStreamShared& stream)
     : ParentType{ stream }, criticalSection{}
 {
