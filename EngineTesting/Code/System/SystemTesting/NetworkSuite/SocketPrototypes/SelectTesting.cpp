@@ -121,10 +121,14 @@ System::WinSocket System::SelectTesting::GetWinSocket(size_t index) const noexce
 
 void System::SelectTesting::SelectSuccess(WinSockFdSet& readWinSockFdSet)
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     for (auto i = 0u; i < winSockFdSet.fd_count; i++)
     {
         ASSERT_NOT_THROW_EXCEPTION_2(DoSelectSuccess, i, readWinSockFdSet);
     }
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 void System::SelectTesting::DoSelectSuccess(size_t index, WinSockFdSet& readWinSockFdSet)
