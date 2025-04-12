@@ -86,12 +86,16 @@ void System::OpenThreadTesting::DoWaitForSystemMutexTest(size_t index, WindowsHa
 
 void System::OpenThreadTesting::DoThreadTest(WindowsHandle mutexHandle, ThreadStandardAccess threadStandardAccess, ThreadSpecificAccess threadSpecificAccess)
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     WindowsDWord threadId{ 0 };
     const auto threadHandle = CreateSystemThread(nullptr, 0, ClassType::ThreadStartRoutine, mutexHandle, ThreadCreation::Default, &threadId);
 
     ThreadResultTest(threadHandle, threadId, threadStandardAccess, threadSpecificAccess, mutexHandle);
 
     ASSERT_NOT_THROW_EXCEPTION_1(CloseThreadTest, threadHandle);
+
+#endif  // !SYSTEM_PLATFORM_WIN32
 }
 
 void System::OpenThreadTesting::ThreadResultTest(WindowsHandle threadHandle, WindowsDWord threadId, ThreadStandardAccess threadStandardAccess, ThreadSpecificAccess threadSpecificAccess, WindowsHandle mutexHandle)
