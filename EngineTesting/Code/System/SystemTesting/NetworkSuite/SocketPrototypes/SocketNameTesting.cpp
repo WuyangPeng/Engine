@@ -67,9 +67,13 @@ void System::SocketNameTesting::InetNToATest(const WinSockInternetAddress& peerN
 
 void System::SocketNameTesting::WinSockInternetAddressTest(const WinSockInternetAddress& address, const WinSockInternetAddress& peerName)
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     ASSERT_EQUAL(address.sin_family, peerName.sin_family);
     ASSERT_EQUAL(address.sin_port, peerName.sin_port);
     ASSERT_EQUAL(address.sin_addr.s_addr, peerName.sin_addr.s_addr);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 System::WinSockInternetAddress System::SocketNameTesting::GetPeerNameTest(WinSocket socketHandle)
