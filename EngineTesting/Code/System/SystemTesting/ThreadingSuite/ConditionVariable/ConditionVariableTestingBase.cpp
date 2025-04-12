@@ -140,7 +140,7 @@ void System::ConditionVariableTestingBase::PopBuffer()
 
 void System::ConditionVariableTestingBase::WakeNotFullConditionVariable() noexcept
 {
-    WakeConditionVariable(&bufferNotFull);
+    WakeSystemConditionVariable(&bufferNotFull);
 }
 
 int System::ConditionVariableTestingBase::GetQueueSize() const noexcept
