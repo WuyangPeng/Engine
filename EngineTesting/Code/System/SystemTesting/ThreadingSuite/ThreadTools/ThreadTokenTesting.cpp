@@ -99,6 +99,8 @@ System::WindowsDWord System::ThreadTokenTesting::ThreadStartRoutine(void* thread
 
 void System::ThreadTokenTesting::DoThreadTest(ThreadHandle mutexHandle)
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     ASSERT_TRUE(IsSystemMutexValid(mutexHandle));
 
     ASSERT_TRUE(WaitForSystemMutex(mutexHandle));
@@ -111,6 +113,8 @@ void System::ThreadTokenTesting::DoThreadTest(ThreadHandle mutexHandle)
     ASSERT_NOT_THROW_EXCEPTION_3(TokenThreadTest, threadHandle, threadId, mutexHandle);
 
     ASSERT_NOT_THROW_EXCEPTION_1(CloseThreadTest, threadHandle);
+
+#endif  // !SYSTEM_PLATFORM_WIN32
 }
 
 void System::ThreadTokenTesting::TokenThreadTest(ThreadHandle threadHandle, WindowsDWord threadId, ThreadHandle mutexHandle)
