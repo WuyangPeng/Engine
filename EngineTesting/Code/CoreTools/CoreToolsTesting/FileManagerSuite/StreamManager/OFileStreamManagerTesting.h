@@ -34,8 +34,8 @@ namespace CoreTools
 
         void OFileStreamManagerMessageTest();
         void OFileStreamManagerSizeTest();
-        static NODISCARD String GetOFileStreamFileName();
-        static NODISCARD String GetOFileStreamFileContent();
+        NODISCARD static String GetOFileStreamFileName();
+        NODISCARD static String GetOFileStreamFileContent();
 
         void OriginalSizeTest(const OFileStreamManager& manager, const String& fileStreamFileContent);
         void ExpansionSizeTest(OFileStreamManager& manager, const String& fileStreamFileContent);
