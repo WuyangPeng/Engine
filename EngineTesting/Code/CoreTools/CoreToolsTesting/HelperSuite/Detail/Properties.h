@@ -15,6 +15,8 @@
 #include "CoreTools/Properties/MethodPropertyGetSetDetail.h"
 #include "CoreTools/Properties/MethodPropertySetDetail.h"
 #include "CoreTools/Properties/PropertyDetail.h"
+#include "CoreTools/Properties/PropertyGetExternalDetail.h"
+#include "CoreTools/Properties/PropertySetExternalDetail.h"
 
 #include "CoreTools/Helper/PropertiesMacro.h"
 
