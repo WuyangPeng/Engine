@@ -12,6 +12,8 @@
 
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
+#include <atomic>
+
 namespace CoreTools
 {
     class AtomicMinMaxTesting final : public UnitTest
