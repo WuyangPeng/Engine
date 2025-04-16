@@ -88,13 +88,7 @@ void CoreTools::Properties::SetValue5(const std::string& value)
     value5 = value;
 }
 
-const std::string& CoreTools::Properties::GetValue6() const
-
-#ifdef SYSTEM_PLATFORM_WIN32
-
-    noexcept
-
-#endif  // SYSTEM_PLATFORM_WIN32
+const std::string& CoreTools::Properties::GetValue6() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
