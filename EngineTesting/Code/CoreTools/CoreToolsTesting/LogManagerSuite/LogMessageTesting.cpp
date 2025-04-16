@@ -189,8 +189,8 @@ CoreTools::LogMessage CoreTools::LogMessageTesting::GetIntegerLogMessage()
 
     message << 1;
     message << 2u;
-    message << 3LL;
-    message << 4ULL;
+    message << int64_t{ 3LL };
+    message << uint64_t{ 4ULL };
     message << 5.0f;
     message << 6.0;
 
