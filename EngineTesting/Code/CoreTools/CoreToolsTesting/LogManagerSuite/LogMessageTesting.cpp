@@ -134,7 +134,7 @@ void CoreTools::LogMessageTesting::StdExceptionTest()
 {
     LogMessage message{ LogLevel::Warn, LogFilter::Network, CORE_TOOLS_FUNCTION_DESCRIBED };
 
-    const std::exception exception{ "exception" };
+    const std::runtime_error exception{ "exception" };
 
     message << exception;
 
