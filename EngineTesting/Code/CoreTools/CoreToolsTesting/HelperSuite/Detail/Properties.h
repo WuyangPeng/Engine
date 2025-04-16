@@ -55,7 +55,7 @@ namespace CoreTools
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-        NODISCARD const std::string& GetValue6() const noexcept;
+        NODISCARD const std::string& GetValue6() const;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 
