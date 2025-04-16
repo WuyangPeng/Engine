@@ -84,8 +84,7 @@ namespace CoreTools
         requires(std::is_same_v<typename T::value_type, bool>)
         void WriteBoolContainerWithoutNumber(const T& objects);
 
-        template <int Size>
-        requires(0 <= Size)
+        template <size_t Size>
         void WriteContainer(const std::array<bool, Size>& objects);
 
         // 写入字符串，在字符串之前写入4个字节代表长度。没有空终止符。
@@ -100,12 +99,10 @@ namespace CoreTools
         requires(std::is_same_v<typename T::value_type, std::string> || std::is_same_v<typename T::value_type, const char*>)
         void WriteStringContainerWithoutNumber(const T& objects);
 
-        template <int Size>
-        requires(0 <= Size)
+        template <size_t Size> 
         void WriteContainer(const std::array<std::string, Size>& objects);
 
-        template <int Size>
-        requires(0 <= Size)
+        template <size_t Size> 
         void WriteContainer(const std::array<const char*, Size>& objects);
 
         // 原生数据写入函数。

@@ -42,8 +42,7 @@ void CoreTools::BufferTarget::WriteBoolContainerWithoutNumber(const T& objects)
     }
 }
 
-template <int Size>
-requires(0 <= Size)
+template <size_t Size>
 void CoreTools::BufferTarget::WriteContainer(const std::array<bool, Size>& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -76,8 +75,7 @@ void CoreTools::BufferTarget::WriteStringContainerWithoutNumber(const T& objects
     }
 }
 
-template <int Size>
-requires(0 <= Size)
+template <size_t Size>
 void CoreTools::BufferTarget::WriteContainer(const std::array<std::string, Size>& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -85,8 +83,7 @@ void CoreTools::BufferTarget::WriteContainer(const std::array<std::string, Size>
     WriteStringContainerWithoutNumber(objects);
 }
 
-template <int Size>
-requires(0 <= Size)
+template <size_t Size>
 void CoreTools::BufferTarget::WriteContainer(const std::array<const char*, Size>& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
