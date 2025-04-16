@@ -38,7 +38,7 @@
 #include "System/Helper/PragmaWarning/Mongocxx.h"
 #include "System/Helper/PragmaWarning/MultiIndex.h"
 #include "System/Helper/PragmaWarning/Mutex.h"
-#include "System/Helper/PragmaWarning/Mysql.h"
+//#include "System/Helper/PragmaWarning/Mysql.h"
 #include "System/Helper/PragmaWarning/MysqlxXdevapi.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/PragmaWarning/OpenXLSX.h"
