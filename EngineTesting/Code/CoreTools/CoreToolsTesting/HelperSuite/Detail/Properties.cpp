@@ -123,8 +123,12 @@ void CoreTools::Properties::SetValue8(const std::string& value)
     value8 = value;
 }
 
+#ifdef SYSTEM_PLATFORM_WIN32
+
 namespace CoreTools
 {
     TCRE_DEFINE_PROPERTY(Properties, Value4);
     TCRE_DEFINE_PROPERTY(Properties, Value5);
 }
+
+#endif  // SYSTEM_PLATFORM_WIN32
