@@ -48,7 +48,17 @@ namespace CoreTools
 
     public:
         NODISCARD std::string GetValue2() const;
+
+#ifdef SYSTEM_PLATFORM_WIN32
+
         NODISCARD const std::string& GetValue6() const noexcept;
+
+#else  // !SYSTEM_PLATFORM_WIN32
+
+        NODISCARD const std::string& GetValue6() const noexcept;
+
+#endif  // SYSTEM_PLATFORM_WIN32
+
         void SetValue7(const std::string& value);
         NODISCARD std::string GetValue7() const;
         NODISCARD std::string GetValue8() const;
