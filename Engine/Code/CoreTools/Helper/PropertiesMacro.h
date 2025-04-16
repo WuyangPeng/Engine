@@ -83,7 +83,7 @@
 
     #define TCRE_PROPERTY_READ(type, name, function) CoreTools::PropertyGetExternal<ClassType, const type&, &ClassType::function> name
     #define TCRE_PROPERTY_WRITE(type, name, function) CoreTools::PropertySetExternal<ClassType, const type&, &ClassType::function> name
-    #define TCRE_PROPERTY_READ_WRITE(type, name, getFunction, setFunction) CoreTools::PropertyGetSetExternal<ClassType, const type&, &ClassType::getFunction, type&, &ClassType::setFunction> name
+    #define TCRE_PROPERTY_READ_WRITE(type, name, getFunction, setFunction) CoreTools::PropertyGetSetExternal<ClassType, const type&, &ClassType::getFunction, const type&, &ClassType::setFunction> name
 
 #endif  // TCRE_USE_BORLANDC
 
