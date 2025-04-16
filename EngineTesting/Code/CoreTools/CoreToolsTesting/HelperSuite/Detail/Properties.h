@@ -52,7 +52,7 @@ namespace CoreTools
         NODISCARD const std::string& GetValue6() const noexcept;
         void SetValue7(const std::string& value);
         NODISCARD std::string GetValue7() const;
-        NODISCARD std::string GetValue8() const;
+        NODISCARD const std::string& GetValue8() const;
         void SetValue8(const std::string& value);
 
         TCRE_METHOD_PROPERTY_GET(int, const int&, ClassType, GetValue0, Value0, true);

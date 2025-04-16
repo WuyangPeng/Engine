@@ -109,7 +109,7 @@ std::string CoreTools::Properties::GetValue7() const
     return value7;
 }
 
-std::string CoreTools::Properties::GetValue8() const
+const std::string& CoreTools::Properties::GetValue8() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
