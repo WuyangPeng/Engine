@@ -33,7 +33,7 @@ namespace CoreTools
         static void Create();
         static void Destroy() noexcept;
 
-        SINGLETON_GET_PTR_DECLARE(SingletonMacro)
+        SINGLETON_GET_PTR_DECLARE(SingletonMacro);
 
         void DoNothing();
 
