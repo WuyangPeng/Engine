@@ -61,9 +61,14 @@ namespace CoreTools
         TCRE_METHOD_PROPERTY_GET_SET(uint32_t, uint32_t, const uint32_t&, ClassType, GetValue3, SetValue3, Value3, true);
         TCRE_DECLARE_PROPERTY(ClassType, int, int, Value4, SetValue4, GetValue4);
         TCRE_DECLARE_PROPERTY(ClassType, std::string, const std::string&, Value5, SetValue5, GetValue5);
+
+#ifdef SYSTEM_PLATFORM_WIN32
+
         TCRE_PROPERTY_READ(std::string, Value6, GetValue6);
         TCRE_PROPERTY_WRITE(std::string, Value8, SetValue7);
         TCRE_PROPERTY_READ_WRITE(std::string, Value9, GetValue8, SetValue8);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 
     private:
         int value0;
