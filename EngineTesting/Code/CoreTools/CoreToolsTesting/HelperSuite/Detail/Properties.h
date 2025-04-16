@@ -10,12 +10,13 @@
 #ifndef CORE_TOOLS_HELPER_SUITE_PROPERTIES_H
 #define CORE_TOOLS_HELPER_SUITE_PROPERTIES_H
 
-#include "CoreTools/Helper/PropertiesMacro.h"
 #include "CoreTools/Helper/UserMacro.h"
 #include "CoreTools/Properties/MethodPropertyGetDetail.h"
 #include "CoreTools/Properties/MethodPropertyGetSetDetail.h"
 #include "CoreTools/Properties/MethodPropertySetDetail.h"
 #include "CoreTools/Properties/PropertyDetail.h"
+
+#include "CoreTools/Helper/PropertiesMacro.h"
 
 #include <string>
 
