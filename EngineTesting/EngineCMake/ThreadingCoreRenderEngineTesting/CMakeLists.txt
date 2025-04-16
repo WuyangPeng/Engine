@@ -52,6 +52,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	link_directories(/data/coding/Libs/miniz/build)
 	link_directories(/data/coding/Libs/hiredis/build)
 	link_directories(/data/coding/Engine/x64/CMake/ReleaseWindows)  	
+	link_directories(/data/coding/Assist/x64/CMake/ReleaseWindows)  
 
 	link_libraries(libSystem.so)	
 	
@@ -76,6 +77,8 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	link_libraries(libAssistTools.so)	
 	
 	link_libraries(libFramework.so)	
+	
+	link_libraries(libExportTest.so)	
 	
 	link_libraries(libboost_system.so)	
 	link_libraries(libboost_timer.so)	
