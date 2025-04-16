@@ -63,8 +63,7 @@ namespace CoreTools
         template <typename T>
         NODISCARD T ReadAggregateContainerNotUseNumber();
 
-        template <typename T, int Size>
-        requires(0 <= Size)
+        template <typename T, size_t Size>
         NODISCARD std::array<T, Size> ReadAggregateContainer();
 
         /// 读取对象指针（uniqueId在磁盘上为[无效]内存指针）。
@@ -96,8 +95,8 @@ namespace CoreTools
         requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::value_type::ObjectType>)
         void ReadObjectAssociatedContainer(T& container);
 
-        template <typename T, int Size>
-        requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType> && 0 <= Size)
+        template <typename T, size_t Size>
+        requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType>)
         void ReadObjectAssociatedContainer(std::array<T, Size>& container);
 
         /// 读取bool值为4字节
@@ -111,8 +110,7 @@ namespace CoreTools
         requires(std::is_same_v<typename T::value_type, bool>)
         NODISCARD T ReadBoolContainerNotUseNumber();
 
-        template <int Size>
-        requires(0 <= Size)
+        template <size_t Size>
         NODISCARD std::array<bool, Size> ReadBoolContainer();
 
         void Read(bool& value);
@@ -141,8 +139,7 @@ namespace CoreTools
         requires(std::is_same_v<typename T::value_type, std::string>)
         NODISCARD T ReadStringContainerNotUseNumber();
 
-        template <int Size>
-        requires(0 <= Size)
+        template <size_t Size>
         NODISCARD std::array<std::string, Size> ReadStringContainer();
 
         void Read(std::string& value);
@@ -157,8 +154,7 @@ namespace CoreTools
         requires(std::is_same_v<typename T::value_type, std::string>)
         void ReadStringContainer(T& container);
 
-        template <int Size>
-        requires(0 <= Size)
+        template <size_t Size>
         void ReadContainer(std::array<std::string, Size>& container);
 
         /// 原生数据读取函数
@@ -231,8 +227,8 @@ namespace CoreTools
         requires(std::is_enum_v<T>)
         NODISCARD std::vector<T> ReadEnumVectorNotUseNumber();
 
-        template <typename T, int Size>
-        requires(std::is_enum_v<T> && 0 <= Size)
+        template <typename T, size_t Size>
+        requires(std::is_enum_v<T>)
         NODISCARD std::array<T, Size> ReadEnumContainer();
 
         template <typename T>
