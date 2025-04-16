@@ -69,8 +69,8 @@ namespace CoreTools
         requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::value_type::ObjectType>)
         void WriteObjectAssociatedContainerWithoutNumber(const T& objects);
 
-        template <typename T, int Size>
-        requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType> && 0 <= Size)
+        template <typename T, size_t Size>
+        requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType>)
         void WriteObjectAssociatedContainer(const std::array<T, Size>& objects);
 
         // 写入bool值为4字节。
@@ -99,10 +99,10 @@ namespace CoreTools
         requires(std::is_same_v<typename T::value_type, std::string> || std::is_same_v<typename T::value_type, const char*>)
         void WriteStringContainerWithoutNumber(const T& objects);
 
-        template <size_t Size> 
+        template <size_t Size>
         void WriteContainer(const std::array<std::string, Size>& objects);
 
-        template <size_t Size> 
+        template <size_t Size>
         void WriteContainer(const std::array<const char*, Size>& objects);
 
         // 原生数据写入函数。

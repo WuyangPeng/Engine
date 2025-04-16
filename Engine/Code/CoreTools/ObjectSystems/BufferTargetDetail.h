@@ -265,8 +265,8 @@ void CoreTools::BufferTarget::WriteObjectAssociatedContainerWithoutNumber(const 
     }
 }
 
-template <typename T, int Size>
-requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType> && 0 <= Size)
+template <typename T, size_t Size>
+requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType>)
 void CoreTools::BufferTarget::WriteObjectAssociatedContainer(const std::array<T, Size>& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
