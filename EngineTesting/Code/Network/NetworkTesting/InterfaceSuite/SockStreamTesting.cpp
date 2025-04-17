@@ -145,8 +145,12 @@ void Network::SockStreamTesting::ACEGetACEHandleTest()
 
 void Network::SockStreamTesting::ACESetACEHandleTest()
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     SockStream sockStream{ GetACEServerConfigurationStrategy() };
     sockStream.SetACEHandle(nullptr);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 void Network::SockStreamTesting::ACESetNetworkHandleExceptionTest()
