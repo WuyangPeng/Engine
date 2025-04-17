@@ -76,7 +76,7 @@ void Network::MultipleMessageStreamingLoad<1, Network::MultipleMessageContainer<
     ValueType value{};
     source.Read(value);
 
-    container.SetValue<0>(value);
+    container.template SetValue<0>(value);
 }
 
 #endif  // NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_STREAMING_LOAD_DETAIL_H
