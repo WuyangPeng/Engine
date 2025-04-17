@@ -69,7 +69,7 @@ void CoreTools::StreamSizeTesting::SingedStreamSizeTest()
     ASSERT_EQUAL(GetStreamSize(short{ 0 }), boost::numeric_cast<int>(sizeof(short)));
     ASSERT_EQUAL(GetStreamSize(int{ 0 }), boost::numeric_cast<int>(sizeof(int)));
     ASSERT_EQUAL(GetStreamSize(long{ 0 }), boost::numeric_cast<int>(sizeof(long)));
-    ASSERT_EQUAL(GetStreamSize(long long{ 0 }), boost::numeric_cast<int>(sizeof(long long)));
+    ASSERT_EQUAL(GetStreamSize(0ll), boost::numeric_cast<int>(sizeof(long long)));
 }
 
 void CoreTools::StreamSizeTesting::UnSingedStreamSizeTest()
