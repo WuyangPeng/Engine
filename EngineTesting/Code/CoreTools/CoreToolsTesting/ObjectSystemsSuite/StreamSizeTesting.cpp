@@ -74,7 +74,7 @@ void CoreTools::StreamSizeTesting::SingedStreamSizeTest()
 
 void CoreTools::StreamSizeTesting::UnSingedStreamSizeTest()
 {
-    ASSERT_EQUAL(GetStreamSize(unsigned char{ 0 }), boost::numeric_cast<int>(sizeof(unsigned char)));
+    ASSERT_EQUAL(GetStreamSize(static_cast<unsigned char>(0)), boost::numeric_cast<int>(sizeof(unsigned char)));
     ASSERT_EQUAL(GetStreamSize(unsigned short{ 0 }), boost::numeric_cast<int>(sizeof(unsigned short)));
     ASSERT_EQUAL(GetStreamSize(unsigned int{ 0 }), boost::numeric_cast<int>(sizeof(unsigned int)));
     ASSERT_EQUAL(GetStreamSize(unsigned long{ 0 }), boost::numeric_cast<int>(sizeof(unsigned long)));
