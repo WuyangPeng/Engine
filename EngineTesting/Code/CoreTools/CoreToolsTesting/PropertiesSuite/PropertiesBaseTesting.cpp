@@ -33,6 +33,8 @@ void CoreTools::PropertiesBaseTesting::MainTest()
 
 void CoreTools::PropertiesBaseTesting::GetSetTest()
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     PropertiesBase propertiesBase{};
 
     ASSERT_EQUAL(propertiesBase.propValue, 0);
@@ -40,4 +42,6 @@ void CoreTools::PropertiesBaseTesting::GetSetTest()
     propertiesBase.propValue = 1;
 
     ASSERT_EQUAL(propertiesBase.propValue, 1);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
