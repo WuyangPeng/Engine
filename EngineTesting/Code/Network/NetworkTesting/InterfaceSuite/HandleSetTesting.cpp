@@ -86,6 +86,8 @@ void Network::HandleSetTesting::NullConstructionTest()
 
 void Network::HandleSetTesting::ACEHandleTest()
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     HandleSet handleSet{ GetACEServerConfigurationStrategy() };
 
     handleSet.SetBit(nullptr);
@@ -99,10 +101,14 @@ void Network::HandleSetTesting::ACEHandleTest()
     MAYBE_UNUSED const auto isFdSetCount = handleSet.IsFdSetCount();
     MAYBE_UNUSED const auto isFdSetCountIsOne = handleSet.IsFdSetCountIsOne();
     MAYBE_UNUSED const auto select = handleSet.Select(0);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 void Network::HandleSetTesting::BoostHandleTest()
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     HandleSet handleSet{ GetBoostServerConfigurationStrategy() };
 
     handleSet.SetBit(nullptr);
@@ -114,10 +120,14 @@ void Network::HandleSetTesting::BoostHandleTest()
     MAYBE_UNUSED const auto isFdSetCount = handleSet.IsFdSetCount();
     MAYBE_UNUSED const auto isFdSetCountIsOne = handleSet.IsFdSetCountIsOne();
     MAYBE_UNUSED const auto select = handleSet.Select(0);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 void Network::HandleSetTesting::NetworkHandleTest()
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     HandleSet handleSet{ GetNetworkServerConfigurationStrategy() };
 
     handleSet.SetBit(nullptr);
@@ -129,10 +139,14 @@ void Network::HandleSetTesting::NetworkHandleTest()
     MAYBE_UNUSED const auto isFdSetCount = handleSet.IsFdSetCount();
     MAYBE_UNUSED const auto isFdSetCountIsOne = handleSet.IsFdSetCountIsOne();
     MAYBE_UNUSED const auto select = handleSet.Select(0);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 void Network::HandleSetTesting::NullHandleTest()
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     HandleSet handleSet{ GetNullServerConfigurationStrategy() };
 
     handleSet.SetBit(nullptr);
@@ -144,6 +158,8 @@ void Network::HandleSetTesting::NullHandleTest()
     MAYBE_UNUSED const auto isFdSetCount = handleSet.IsFdSetCount();
     MAYBE_UNUSED const auto isFdSetCountIsOne = handleSet.IsFdSetCountIsOne();
     MAYBE_UNUSED const auto select = handleSet.Select(0);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 void Network::HandleSetTesting::BoostGetFdSetExceptionTest()
