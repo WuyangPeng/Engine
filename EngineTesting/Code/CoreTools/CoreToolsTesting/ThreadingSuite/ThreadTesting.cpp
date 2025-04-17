@@ -72,11 +72,15 @@ void CoreTools::ThreadTesting::CreateThread()
 
 CoreTools::Thread CoreTools::ThreadTesting::DoCreateThread()
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     Thread thread1{ Thread1, nullptr };
 
     thread1.Resume();
 
     return thread1;
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 uint32_t CoreTools::ThreadTesting::Thread0(void* threadParameter) noexcept
