@@ -92,6 +92,8 @@ void CoreTools::PropertiesMacroTesting::PropertiesValue3Test()
 
 void CoreTools::PropertiesMacroTesting::PropertiesValue4Test()
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     Properties properties{};
 
     ASSERT_EQUAL(properties.Value4, 0);
@@ -99,10 +101,14 @@ void CoreTools::PropertiesMacroTesting::PropertiesValue4Test()
     properties.Value4 = 2;
 
     ASSERT_EQUAL(properties.Value4, 2);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 void CoreTools::PropertiesMacroTesting::PropertiesValue5Test()
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     Properties properties{};
 
     auto result = static_cast<std::string>(properties.Value5);
@@ -114,6 +120,8 @@ void CoreTools::PropertiesMacroTesting::PropertiesValue5Test()
 
     result = properties.Value5;
     ASSERT_EQUAL(result, newValue);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 void CoreTools::PropertiesMacroTesting::PropertiesValue6Test()
