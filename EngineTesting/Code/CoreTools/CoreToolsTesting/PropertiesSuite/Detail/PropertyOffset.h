@@ -38,8 +38,8 @@ namespace CoreTools
 
         NODISCARD const std::string& GetValue() const noexcept;
 
-        using PropertyGetExternalOffset = PropertyGetExternalOffset<ClassType, const std::string&, &GetValue, GetOffset>;
-        using PropertyGetInternalOffset = PropertyGetInternalOffset<ClassType, std::string, const std::string&, &GetValue, GetOffset>;
+        using PropertyGetExternalOffset = PropertyGetExternalOffset<ClassType, const std::string&, &ClassType::GetValue, GetOffset>;
+        using PropertyGetInternalOffset = PropertyGetInternalOffset<ClassType, std::string, const std::string&, &ClassType::GetValue, GetOffset>;
 
         PropertyGetInternalOffset internalOffset;
 
