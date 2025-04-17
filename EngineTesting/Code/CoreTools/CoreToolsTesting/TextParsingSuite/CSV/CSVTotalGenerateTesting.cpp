@@ -66,7 +66,7 @@ CoreTools::CSVTotalGenerateTesting::CSVHeadContainer CoreTools::CSVTotalGenerate
     for (const auto& inputPath : std::filesystem::directory_iterator(path))
     {
         if (const auto nativeFileName = inputPath.path().native();
-            nativeFileName.find(StringConversion::StandardConversionWideChar(SYSTEM_TEXT("csv"))) == nativeFileName.size() - 3)
+            nativeFileName.find(StringConversion::FileSystemConversionStandard(SYSTEM_TEXT("csv"))) == nativeFileName.size() - 3)
         {
             CSVContent csvContent{ StringConversion::WideCharConversionStandard(nativeFileName) };
 
