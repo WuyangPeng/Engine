@@ -332,7 +332,7 @@ void CoreTools::CSVRowTesting::CSVRow1ArrayTest(const CSVRow& csvRow)
     ASSERT_EQUAL(doubleArray.size(), 1u);
     ASSERT_APPROXIMATE(doubleArray.at(0), 1.2, Mathematics::MathD::epsilon);
 
-    ASSERT_EQUAL(csvRow.GetInt64Array(SYSTEM_TEXT("test17"s)), (std::vector{ 10002LL }));
+    ASSERT_EQUAL(csvRow.GetInt64Array(SYSTEM_TEXT("test17"s)), (std::vector{ static_cast<int64_t>(10002LL) }));
     ASSERT_EQUAL(csvRow.GetIntArray(SYSTEM_TEXT("test18"s)), (std::vector{ 3 }));
     ASSERT_EQUAL(csvRow.GetEnumArray<CSVDataType>(SYSTEM_TEXT("test19"s)), (std::vector{ CSVDataType::Char }));
 }
