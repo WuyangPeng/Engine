@@ -68,7 +68,7 @@ CoreTools::CSVTotalGenerateTesting::CSVHeadContainer CoreTools::CSVTotalGenerate
         if (const auto nativeFileName = inputPath.path().native();
             nativeFileName.find(StringConversion::FileSystemConversionStandard(SYSTEM_TEXT("csv"))) == nativeFileName.size() - 3)
         {
-            CSVContent csvContent{ StringConversion::WideCharConversionStandard(nativeFileName) };
+            CSVContent csvContent{ StringConversion::FileSystemConversionStandard(nativeFileName) };
 
             container.emplace_back(csvContent.GetCSVHead());
         }
