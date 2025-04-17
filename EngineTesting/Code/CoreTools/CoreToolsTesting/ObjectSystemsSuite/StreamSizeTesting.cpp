@@ -85,7 +85,7 @@ void CoreTools::StreamSizeTesting::FloatStreamSizeTest()
 {
     ASSERT_EQUAL(GetStreamSize(float{ 0.0f }), boost::numeric_cast<int>(sizeof(float)));
     ASSERT_EQUAL(GetStreamSize(double{ 0.0 }), boost::numeric_cast<int>(sizeof(double)));
-    ASSERT_EQUAL(GetStreamSize(long double{ 0.0 }), boost::numeric_cast<int>(sizeof(long double)));
+    ASSERT_EQUAL(GetStreamSize(static_cast<long double>(0.0)), boost::numeric_cast<int>(sizeof(long double)));
 }
 
 void CoreTools::StreamSizeTesting::StringStreamSizeTest()
