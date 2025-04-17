@@ -10,7 +10,7 @@
 #ifndef CORE_TOOLS_MEMORY_TOOLS_SUITE_H
 #define CORE_TOOLS_MEMORY_TOOLS_SUITE_H
 
-#include "Array2Testing.h "
+#include "Array2Testing.h"
 #include "Array3Testing.h"
 #include "Array4Testing.h"
 #include "AtomicMinMaxTesting.h"
