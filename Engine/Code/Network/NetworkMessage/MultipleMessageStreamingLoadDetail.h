@@ -47,7 +47,7 @@ void Network::MultipleMessageStreamingLoad<Index, Network::MultipleMessageContai
     ValueType value{};
     source.Read(value);
 
-    container.SetValue<Index - 1>(value);
+    container.template SetValue<Index - 1>(value);
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
