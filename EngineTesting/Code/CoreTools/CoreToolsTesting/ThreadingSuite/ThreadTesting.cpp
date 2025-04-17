@@ -42,6 +42,8 @@ void CoreTools::ThreadTesting::MainTest()
 
 void CoreTools::ThreadTesting::CreateThread()
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     isContinue = false;
 
     auto threadParameter = 2;
@@ -64,6 +66,8 @@ void CoreTools::ThreadTesting::CreateThread()
 
     thread0.Wait();
     thread1.Wait();
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 CoreTools::Thread CoreTools::ThreadTesting::DoCreateThread()
