@@ -53,6 +53,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	link_directories(/data/coding/Libs/mysql-connector-c++/build)
 	link_directories(/data/coding/Libs/miniz/build)
 	link_directories(/data/coding/Libs/hiredis/build)
+	link_directories(/data/coding/Libs/protobuf/build)
 	link_directories(/data/coding/Engine/x64/CMake/ReleaseWindows)  	
 	link_directories(/data/coding/Assist/x64/CMake/ReleaseWindows)  
 
@@ -96,6 +97,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	link_libraries(libGL.so)
 	link_libraries(libssl.so)
 	link_libraries(libcrypto.so)	
+	link_libraries(libprotobuf.a)	
 
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
