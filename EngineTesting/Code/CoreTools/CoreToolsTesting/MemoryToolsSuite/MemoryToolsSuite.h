@@ -23,7 +23,7 @@
 #include "RawIteratorsTesting.h"
 #include "RawPtrCompareTesting.h"
 #include "SharedPtrCompareTesting.h"
-#include "TypeTraitsTesting.h "
+#include "TypeTraitsTesting.h"
 #include "WeakPtrCompareTesting.h"
 
 #endif  // CORE_TOOLS_MEMORY_TOOLS_SUITE_H
