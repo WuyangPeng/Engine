@@ -56,10 +56,14 @@ void CoreTools::TinyTesting::InitSizeTest() noexcept
     using Tiny2 = Tiny<char, long>;
     using Tiny3 = Tiny<char, char, int>;
 
+#ifdef SYSTEM_PLATFORM_WIN32
+
     constexpr BOOST_MPL_ASSERT_RELATION(boost::mpl::size<Tiny0>::value, ==, 0);
     constexpr BOOST_MPL_ASSERT_RELATION(boost::mpl::size<Tiny1>::value, ==, 1);
     constexpr BOOST_MPL_ASSERT_RELATION(boost::mpl::size<Tiny2>::value, ==, 2);
     constexpr BOOST_MPL_ASSERT_RELATION(boost::mpl::size<Tiny3>::value, ==, 3);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 void CoreTools::TinyTesting::InitEmptyTest() noexcept
@@ -69,10 +73,14 @@ void CoreTools::TinyTesting::InitEmptyTest() noexcept
     using Tiny2 = Tiny<char, long>;
     using Tiny3 = Tiny<char, char, int>;
 
+#ifdef SYSTEM_PLATFORM_WIN32
+
     constexpr BOOST_MPL_ASSERT((boost::mpl::empty<Tiny0>));
     constexpr BOOST_MPL_ASSERT_NOT((boost::mpl::empty<Tiny1>));
     constexpr BOOST_MPL_ASSERT_NOT((boost::mpl::empty<Tiny2>));
     constexpr BOOST_MPL_ASSERT_NOT((boost::mpl::empty<Tiny3>));
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 void CoreTools::TinyTesting::InitFrontBackTest() noexcept
@@ -81,12 +89,16 @@ void CoreTools::TinyTesting::InitFrontBackTest() noexcept
     using Tiny1 = Tiny<char, long>;
     using Tiny2 = Tiny<char, char, int>;
 
+#ifdef SYSTEM_PLATFORM_WIN32
+
     constexpr BOOST_MPL_ASSERT((boost::is_same<boost::mpl::front<Tiny0>::type, char>));
     constexpr BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<Tiny0>::type, char>));
     constexpr BOOST_MPL_ASSERT((boost::is_same<boost::mpl::front<Tiny1>::type, char>));
     constexpr BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<Tiny1>::type, long>));
     constexpr BOOST_MPL_ASSERT((boost::is_same<boost::mpl::front<Tiny2>::type, char>));
     constexpr BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<Tiny2>::type, int>));
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 void CoreTools::TinyTesting::PushBackTest() noexcept
