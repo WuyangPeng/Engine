@@ -167,8 +167,12 @@ void Network::SockStreamTesting::BoostGetACEHandleExceptionTest()
 
 void Network::SockStreamTesting::BoostSetACEHandleExceptionTest()
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     SockStream sockStream{ GetBoostServerConfigurationStrategy() };
     sockStream.SetACEHandle(nullptr);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 void Network::SockStreamTesting::BoostSetNetworkHandleExceptionTest()
@@ -185,8 +189,12 @@ void Network::SockStreamTesting::NetworkGetACEHandleExceptionTest()
 
 void Network::SockStreamTesting::NetworkSetACEHandleExceptionTest()
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     SockStream sockStream{ GetNetworkServerConfigurationStrategy() };
     sockStream.SetACEHandle(nullptr);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 void Network::SockStreamTesting::NetworkSetNetworkHandleTest()
@@ -214,8 +222,12 @@ void Network::SockStreamTesting::NullGetACEHandleExceptionTest()
 
 void Network::SockStreamTesting::NullSetACEHandleExceptionTest()
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     SockStream sockStream{ GetNullServerConfigurationStrategy() };
     sockStream.SetACEHandle(nullptr);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 void Network::SockStreamTesting::NullSetNetworkHandleExceptionTest()
