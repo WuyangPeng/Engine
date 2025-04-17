@@ -16,7 +16,7 @@
 #include "AtomicMinMaxTesting.h"
 #include "ContainerAdapterTesting.h"
 #include "HeapAllocateTesting.h"
-#include "LatticeTesting.h "
+#include "LatticeTesting.h"
 #include "LexicoArray2Testing.h"
 #include "MultiArrayAdapterTesting.h"
 #include "MultiArrayTesting.h"
