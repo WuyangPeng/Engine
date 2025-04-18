@@ -93,18 +93,18 @@ void Mathematics::LinearSystemTesting::Solve3Test()
     {
         const LinearSystemD linearsystem(1e-10);
 
-        LinearSystemD::Matrix3 matrix = { LinearSystemD::Vector3{ floatRandomDistribution(generator),
-                                                                  floatRandomDistribution(generator),
-                                                                  floatRandomDistribution(generator) },
-                                          LinearSystemD::Vector3{ floatRandomDistribution(generator),
-                                                                  floatRandomDistribution(generator),
-                                                                  floatRandomDistribution(generator) },
-                                          LinearSystemD::Vector3{ floatRandomDistribution(generator),
-                                                                  floatRandomDistribution(generator),
-                                                                  floatRandomDistribution(generator) } };
-        LinearSystemD::Vector3 inputVector = { floatRandomDistribution(generator),
-                                               floatRandomDistribution(generator),
-                                               floatRandomDistribution(generator) };
+        LinearSystemD::Matrix3 matrix = { LinearSystemD::Vector3Type{ floatRandomDistribution(generator),
+                                                                      floatRandomDistribution(generator),
+                                                                      floatRandomDistribution(generator) },
+                                          LinearSystemD::Vector3Type{ floatRandomDistribution(generator),
+                                                                      floatRandomDistribution(generator),
+                                                                      floatRandomDistribution(generator) },
+                                          LinearSystemD::Vector3Type{ floatRandomDistribution(generator),
+                                                                      floatRandomDistribution(generator),
+                                                                      floatRandomDistribution(generator) } };
+        LinearSystemD::Vector3Type inputVector = { floatRandomDistribution(generator),
+                                                   floatRandomDistribution(generator),
+                                                   floatRandomDistribution(generator) };
         auto outputVector = linearsystem.Solve3(matrix, inputVector);
 
         const Matrix3D matrix0(matrix.at(0).at(0), matrix.at(0).at(1), matrix.at(0).at(2), matrix.at(1).at(0), matrix.at(1).at(1), matrix.at(1).at(2), matrix.at(2).at(0), matrix.at(2).at(1), matrix.at(2).at(2));
