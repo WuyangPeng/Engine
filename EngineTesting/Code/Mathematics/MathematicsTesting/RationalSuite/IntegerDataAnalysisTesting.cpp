@@ -298,7 +298,7 @@ void Mathematics::IntegerDataAnalysisTesting::DivisionModuloTest()
     const IntegerData<12> firstIntegerData(data);
     const IntegerDataAnalysis<12> firstIntegerDataAnalysis(firstIntegerData);
 
-    const IntegerData<12> secondIntegerData(0x1FFF2FFF2FFFFFFFULL);
+    const IntegerData<12> secondIntegerData(static_cast<uint64_t>(0x1FFF2FFF2FFFFFFFULL));
 
     const IntegerDivisionModulo<12> divisionModule = firstIntegerDataAnalysis.GetDivisionModulo(secondIntegerData);
 
