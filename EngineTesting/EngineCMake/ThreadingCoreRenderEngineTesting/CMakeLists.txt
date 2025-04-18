@@ -83,6 +83,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	
 	link_libraries(libExportTest.so)	
 	link_libraries(libCSVConfigure.so)
+	link_libraries(libDatabaseEntity.so)
 	
 	link_libraries(libboost_system.so)	
 	link_libraries(libboost_timer.so)	
