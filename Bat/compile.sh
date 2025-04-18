@@ -4,13 +4,13 @@ cd "$curDir"/Libs/Bat
 sh create_lib.sh
 
 cd "$curDir"/Engine/Bat
-./compile.sh
+sh compile.sh
 
 cd "$curDir"/Assist/Bat
-./compile.sh
+sh compile.sh
 
 cd "$curDir"/EngineTesting/Bat
-./compile.sh
+sh compile.sh
 
 cd "$curDir"/AssistTesting/Bat
-./compile.sh
+sh compile.sh
