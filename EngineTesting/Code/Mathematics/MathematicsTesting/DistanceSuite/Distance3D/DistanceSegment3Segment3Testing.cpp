@@ -12,7 +12,6 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
-#include "Mathematics/Algebra/Vector3Toolsdetail.h"
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
 #include "Mathematics/Distance/Distance3D/DistanceLine3Line3Detail.h"
 #include "Mathematics/Distance/Distance3D/DistanceSegment3Segment3Detail.h"
