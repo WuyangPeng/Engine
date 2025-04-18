@@ -148,21 +148,21 @@ void Mathematics::Vector2Testing::BarycentricsTest()
     const Vector2 vector1(0.0, 0.0);
     const Vector2 vector2(0.0, 1.0);
 
-    const Vector2D::BarycentricCoordinates firstCoordinates = vector0.GetBarycentrics(vector0, vector1, vector2);
+    const Vector2D::BarycentricCoordinatesType firstCoordinates = vector0.GetBarycentrics(vector0, vector1, vector2);
 
     ASSERT_TRUE(firstCoordinates.IsBarycentricCoordinatesValid());
     ASSERT_APPROXIMATE(firstCoordinates[0], 1.0, 1e-10);
     ASSERT_APPROXIMATE(firstCoordinates[1], 0.0, 1e-10);
     ASSERT_APPROXIMATE(firstCoordinates[2], 0.0, 1e-10);
 
-    const Vector2D::BarycentricCoordinates secondCoordinates = vector1.GetBarycentrics(vector0, vector1, vector2);
+    const Vector2D::BarycentricCoordinatesType secondCoordinates = vector1.GetBarycentrics(vector0, vector1, vector2);
 
     ASSERT_TRUE(secondCoordinates.IsBarycentricCoordinatesValid());
     ASSERT_APPROXIMATE(secondCoordinates[0], 0.0, 1e-10);
     ASSERT_APPROXIMATE(secondCoordinates[1], 1.0, 1e-10);
     ASSERT_APPROXIMATE(secondCoordinates[2], 0.0, 1e-10);
 
-    const Vector2D::BarycentricCoordinates thirdCoordinates = vector2.GetBarycentrics(vector0, vector1, vector2);
+    const Vector2D::BarycentricCoordinatesType thirdCoordinates = vector2.GetBarycentrics(vector0, vector1, vector2);
 
     ASSERT_TRUE(thirdCoordinates.IsBarycentricCoordinatesValid());
     ASSERT_APPROXIMATE(thirdCoordinates[0], 0.0, 1e-10);
@@ -171,7 +171,7 @@ void Mathematics::Vector2Testing::BarycentricsTest()
 
     const Vector2 vector3(0.1, 0.1);
 
-    const Vector2D::BarycentricCoordinates fourthCoordinates = vector3.GetBarycentrics(vector0, vector1, vector2);
+    const Vector2D::BarycentricCoordinatesType fourthCoordinates = vector3.GetBarycentrics(vector0, vector1, vector2);
 
     ASSERT_TRUE(fourthCoordinates.IsBarycentricCoordinatesValid());
     ASSERT_APPROXIMATE(fourthCoordinates[0] + fourthCoordinates[1] + fourthCoordinates[2], 1.0, 1e-10);
@@ -186,7 +186,7 @@ void Mathematics::Vector2Testing::BarycentricsTest()
     {
         const Vector2 vector4(randomDistribution(generator), randomDistribution(generator));
 
-        const Vector2D::BarycentricCoordinates fifthCoordinates = vector4.GetBarycentrics(vector0, vector1, vector2);
+        const Vector2D::BarycentricCoordinatesType fifthCoordinates = vector4.GetBarycentrics(vector0, vector1, vector2);
 
         ASSERT_TRUE(fifthCoordinates.IsBarycentricCoordinatesValid());
 

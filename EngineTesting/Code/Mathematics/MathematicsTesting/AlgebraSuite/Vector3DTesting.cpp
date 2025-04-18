@@ -179,7 +179,7 @@ void Mathematics::Vector3Testing::BarycentricsTest()
     const Vector3D vector2(0.0, 0.0, 1.0);
     const Vector3D vector3(0.0, 0.0, 0.0);
 
-    const Vector3D::BarycentricCoordinates firstCoordinates = vector0.GetBarycentrics(vector0, vector1, vector2, vector3);
+    const Vector3D::BarycentricCoordinatesType firstCoordinates = vector0.GetBarycentrics(vector0, vector1, vector2, vector3);
 
     ASSERT_TRUE(firstCoordinates.IsBarycentricCoordinatesValid());
     ASSERT_APPROXIMATE(firstCoordinates[0], 1.0, 1e-10);
@@ -187,7 +187,7 @@ void Mathematics::Vector3Testing::BarycentricsTest()
     ASSERT_APPROXIMATE(firstCoordinates[2], 0.0, 1e-10);
     ASSERT_APPROXIMATE(firstCoordinates[3], 0.0, 1e-10);
 
-    const Vector3D::BarycentricCoordinates secondCoordinates = vector1.GetBarycentrics(vector0, vector1, vector2, vector3);
+    const Vector3D::BarycentricCoordinatesType secondCoordinates = vector1.GetBarycentrics(vector0, vector1, vector2, vector3);
 
     ASSERT_TRUE(secondCoordinates.IsBarycentricCoordinatesValid());
     ASSERT_APPROXIMATE(secondCoordinates[0], 0.0, 1e-10);
@@ -195,7 +195,7 @@ void Mathematics::Vector3Testing::BarycentricsTest()
     ASSERT_APPROXIMATE(secondCoordinates[2], 0.0, 1e-10);
     ASSERT_APPROXIMATE(secondCoordinates[3], 0.0, 1e-10);
 
-    const Vector3D::BarycentricCoordinates thirdCoordinates = vector2.GetBarycentrics(vector0, vector1, vector2, vector3);
+    const Vector3D::BarycentricCoordinatesType thirdCoordinates = vector2.GetBarycentrics(vector0, vector1, vector2, vector3);
 
     ASSERT_TRUE(thirdCoordinates.IsBarycentricCoordinatesValid());
     ASSERT_APPROXIMATE(thirdCoordinates[0], 0.0, 1e-10);
@@ -203,7 +203,7 @@ void Mathematics::Vector3Testing::BarycentricsTest()
     ASSERT_APPROXIMATE(thirdCoordinates[2], 1.0, 1e-10);
     ASSERT_APPROXIMATE(thirdCoordinates[3], 0.0, 1e-10);
 
-    const Vector3D::BarycentricCoordinates fourthCoordinates = vector3.GetBarycentrics(vector0, vector1, vector2, vector3);
+    const Vector3D::BarycentricCoordinatesType fourthCoordinates = vector3.GetBarycentrics(vector0, vector1, vector2, vector3);
 
     ASSERT_TRUE(fourthCoordinates.IsBarycentricCoordinatesValid());
     ASSERT_APPROXIMATE(fourthCoordinates[0], 0.0, 1e-10);
@@ -213,7 +213,7 @@ void Mathematics::Vector3Testing::BarycentricsTest()
 
     const Vector3D vector4(0.1, 0.1, 0.1);
 
-    const Vector3D::BarycentricCoordinates fifthCoordinates = vector4.GetBarycentrics(vector0, vector1, vector2, vector3);
+    const Vector3D::BarycentricCoordinatesType fifthCoordinates = vector4.GetBarycentrics(vector0, vector1, vector2, vector3);
 
     ASSERT_TRUE(fifthCoordinates.IsBarycentricCoordinatesValid());
     ASSERT_APPROXIMATE(fifthCoordinates[0] + fifthCoordinates[1] + fifthCoordinates[2] + fifthCoordinates[3], 1.0, 1e-10);
@@ -230,7 +230,7 @@ void Mathematics::Vector3Testing::BarycentricsTest()
                                randomDistribution(generator),
                                randomDistribution(generator));
 
-        const Vector3D::BarycentricCoordinates sixthCoordinates = vector5.GetBarycentrics(vector0, vector1, vector2, vector3);
+        const Vector3D::BarycentricCoordinatesType sixthCoordinates = vector5.GetBarycentrics(vector0, vector1, vector2, vector3);
 
         ASSERT_TRUE(sixthCoordinates.IsBarycentricCoordinatesValid());
 

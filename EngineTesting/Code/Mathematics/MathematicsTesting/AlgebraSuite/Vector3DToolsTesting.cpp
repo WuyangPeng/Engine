@@ -296,9 +296,9 @@ void Mathematics::Vector3ToolsTesting::OtherCalculateTest()
     vectors.push_back(vector1);
     vectors.push_back(vector2);
 
-    const Vector3ToolsD::Vector3Orthonormalize firstOrthonormalize = Vector3ToolsD::Orthonormalize(vector0, vector1, vector2);
+    const Vector3ToolsD::Vector3OrthonormalizeType firstOrthonormalize = Vector3ToolsD::Orthonormalize(vector0, vector1, vector2);
 
-    const Vector3ToolsD::Vector3Orthonormalize secondOrthonormaliz = Vector3ToolsD::Orthonormalize(vectors);
+    const Vector3ToolsD::Vector3OrthonormalizeType secondOrthonormaliz = Vector3ToolsD::Orthonormalize(vectors);
 
     vector0.Normalize();
     double dot0 = Vector3ToolsD::DotProduct(vector0, vector1);
