@@ -31,7 +31,6 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	include_directories(/data/coding/Engine/Code/)	
 	include_directories(/data/coding/EngineTesting/Code/)
 	include_directories(/data/coding/EngineTesting/Code/Network/NetworkTesting/NetworkMessageSuite/Detail/)
-	include_directories(/data/coding/EngineTesting/EngineWindows/Framework/FrameworkWindowTesting)
 	include_directories(/data/coding/EngineTesting/EngineWindows)
 	include_directories(/data/coding/Assist/AssistWindows)	
 	
