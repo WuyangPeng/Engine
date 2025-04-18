@@ -3,13 +3,13 @@
 #
 cmake_minimum_required (VERSION 3.8)
 
-file(GLOB_RECURSE SRC_DIR_LIST "${CMAKE_SOURCE_DIR}/../../Code/Editor/Scene/SceneEditorAssist/*.cpp")
+file(GLOB_RECURSE SRC_DIR_LIST "${CMAKE_SOURCE_DIR}/../../Code/Editor/Scene/SceneEditorAssistTesting/*.cpp")
 
 # 将源代码添加到此项目的可执行文件。
 if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
-     add_library (SceneEditorAssistD SHARED ${SRC_DIR_LIST})
+     add_library (SceneEditorAssistTestingD SHARED ${SRC_DIR_LIST})
 else()
-     add_library (SceneEditorAssist SHARED ${SRC_DIR_LIST})
+     add_library (SceneEditorAssistTesting SHARED ${SRC_DIR_LIST})
 endif()  
 
 # TODO: 如有需要，请添加测试并安装目标。

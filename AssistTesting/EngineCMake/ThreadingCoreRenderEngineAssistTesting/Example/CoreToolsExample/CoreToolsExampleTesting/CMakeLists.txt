@@ -3,13 +3,13 @@
 #
 cmake_minimum_required (VERSION 3.8)
 
-file(GLOB_RECURSE SRC_DIR_LIST "${CMAKE_SOURCE_DIR}/../../Code/Example/CoreTools/CoreToolsExample/*.cpp")
+file(GLOB_RECURSE SRC_DIR_LIST "${CMAKE_SOURCE_DIR}/../../Code/Example/CoreTools/CoreToolsExampleTesting/*.cpp")
 
 # 将源代码添加到此项目的可执行文件。
 if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
-     add_library (CoreToolsExampleD SHARED ${SRC_DIR_LIST})
+     add_library (CoreToolsExampleTestingD SHARED ${SRC_DIR_LIST})
 else()
-     add_library (CoreToolsExample SHARED ${SRC_DIR_LIST})
+     add_library (CoreToolsExampleTesting SHARED ${SRC_DIR_LIST})
 endif()  
 
 # TODO: 如有需要，请添加测试并安装目标。

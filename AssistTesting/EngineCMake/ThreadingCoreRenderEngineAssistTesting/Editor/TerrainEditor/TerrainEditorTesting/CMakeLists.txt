@@ -3,13 +3,13 @@
 #
 cmake_minimum_required (VERSION 3.8)
 
-file(GLOB_RECURSE SRC_DIR_LIST "${CMAKE_SOURCE_DIR}/../../Code/Editor/Terrain/TerrainEditor/*.cpp")
+file(GLOB_RECURSE SRC_DIR_LIST "${CMAKE_SOURCE_DIR}/../../Code/Editor/Terrain/TerrainEditorTesting/*.cpp")
 
 # 将源代码添加到此项目的可执行文件。
 if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
-     add_library (TerrainEditorD SHARED ${SRC_DIR_LIST})
+     add_library (TerrainEditorTestingD SHARED ${SRC_DIR_LIST})
 else()
-     add_library (TerrainEditor SHARED ${SRC_DIR_LIST})
+     add_library (TerrainEditorTesting SHARED ${SRC_DIR_LIST})
 endif()  
 
 # TODO: 如有需要，请添加测试并安装目标。
