@@ -1,7 +1,7 @@
 curDir=$(pwd)/..
 
 cd "$curDir"/Libs/Bat
-./create_lib.sh
+sh create_lib.sh
 
 cd "$curDir"/Engine/Bat
 ./compile.sh
