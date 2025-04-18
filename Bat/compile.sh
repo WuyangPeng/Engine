@@ -1,16 +1,16 @@
-set curDir=%cd%/..
+curDir=$(pwd)/..
 
-cd %curDir%/Libs/Bat
-sh create_lib.sh
+cd "$curDir"/Libs/Bat
+./create_lib.sh
 
-cd %curDir%/Engine/Bat
-sh complie.sh
+cd "$curDir"/Engine/Bat
+./compile.sh
 
-cd %curDir%/Assist/Bat
-sh complie.sh
+cd "$curDir"/Assist/Bat
+./compile.sh
 
-cd %curDir%/EngineTesting/Bat
-sh complie.sh
+cd "$curDir"/EngineTesting/Bat
+./compile.sh
 
-cd %curDir%/AssistTesting/Bat
-sh complie.sh
+cd "$curDir"/AssistTesting/Bat
+./compile.sh
