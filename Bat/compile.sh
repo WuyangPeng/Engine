@@ -1,4 +1,4 @@
-cd Libs/Bat
+cd ../Libs/Bat
 sh create_lib.sh
 
 cd ../../Engine/Bat
