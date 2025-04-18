@@ -1,14 +1,16 @@
-cd ../Libs/Bat
+set curDir=%cd%/..
+
+cd %curDir%/Libs/Bat
 sh create_lib.sh
 
-cd ../../Engine/Bat
+cd %curDir%/Engine/Bat
 sh complie.sh
 
-cd ../../Assist/Bat
+cd %curDir%/Assist/Bat
 sh complie.sh
 
-cd ../../EngineTesting/Bat
+cd %curDir%/EngineTesting/Bat
 sh complie.sh
 
-cd ../../AssistTesting/Bat
+cd %curDir%/AssistTesting/Bat
 sh complie.sh
