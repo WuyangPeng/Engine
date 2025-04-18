@@ -531,22 +531,22 @@ void Mathematics::Matrix3Testing::OperatorCalculateTest()
 
         ASSERT_TRUE(Approximate(matrix3, matrix6, 1e-8f));
 
-        Matrix3F::Vector3 vector0(randomDistribution(generator),
-                                  randomDistribution(generator),
-                                  randomDistribution(generator));
+        Matrix3F::Vector3Type vector0(randomDistribution(generator),
+                                      randomDistribution(generator),
+                                      randomDistribution(generator));
 
-        const Matrix3F::Vector3 vector1 = matrix6 * vector0;
-        const Matrix3F::Vector3 vector2 = vector0 * matrix6;
+        const Matrix3F::Vector3Type vector1 = matrix6 * vector0;
+        const Matrix3F::Vector3Type vector2 = vector0 * matrix6;
 
-        Matrix3F::Vector3 vector3(matrix6(0, 0) * vector0[0] +
-                                      matrix6(0, 1) * vector0[1] +
-                                      matrix6(0, 2) * vector0[2],
-                                  matrix6(1, 0) * vector0[0] +
-                                      matrix6(1, 1) * vector0[1] +
-                                      matrix6(1, 2) * vector0[2],
-                                  matrix6(2, 0) * vector0[0] +
-                                      matrix6(2, 1) * vector0[1] +
-                                      matrix6(2, 2) * vector0[2]);
+        Matrix3F::Vector3Type vector3(matrix6(0, 0) * vector0[0] +
+                                          matrix6(0, 1) * vector0[1] +
+                                          matrix6(0, 2) * vector0[2],
+                                      matrix6(1, 0) * vector0[0] +
+                                          matrix6(1, 1) * vector0[1] +
+                                          matrix6(1, 2) * vector0[2],
+                                      matrix6(2, 0) * vector0[0] +
+                                          matrix6(2, 1) * vector0[1] +
+                                          matrix6(2, 2) * vector0[2]);
 
         ASSERT_TRUE(Vector3ToolsF::Approximate(vector1, vector3, 1e-3f));
 
@@ -589,13 +589,13 @@ void Mathematics::Matrix3Testing::ArithmeticCalculateTest()
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
-        Matrix3F::Vector3 vector0(randomDistribution(generator),
-                                  randomDistribution(generator),
-                                  randomDistribution(generator));
+        Matrix3F::Vector3Type vector0(randomDistribution(generator),
+                                      randomDistribution(generator),
+                                      randomDistribution(generator));
 
-        const Matrix3F::Vector3 vector1(randomDistribution(generator),
-                                        randomDistribution(generator),
-                                        randomDistribution(generator));
+        const Matrix3F::Vector3Type vector1(randomDistribution(generator),
+                                            randomDistribution(generator),
+                                            randomDistribution(generator));
 
         Matrix3F matrix0(randomDistribution(generator),
                          randomDistribution(generator),
@@ -689,7 +689,7 @@ void Mathematics::Matrix3Testing::ArithmeticCalculateTest()
 
         const Vector3F vector5(matrix6(0, 1), matrix6(1, 1), matrix6(2, 1));
 
-        vector4 -= (Vector3ToolsF::DotProduct(vector3, vector4)) * vector3;
+        vector4 -= (Vector3ToolsF::DotProduct(vector3, vector4))*vector3;
 
         vector4.Normalize();
 
@@ -698,9 +698,9 @@ void Mathematics::Matrix3Testing::ArithmeticCalculateTest()
         Vector3F seventhVector(matrix7(0, 2), matrix7(1, 2), matrix7(2, 2));
         const Vector3F eighthVector(matrix6(0, 2), matrix6(1, 2), matrix6(2, 2));
 
-        seventhVector -= (Vector3ToolsF::DotProduct(vector3, seventhVector)) * vector3;
+        seventhVector -= (Vector3ToolsF::DotProduct(vector3, seventhVector))*vector3;
 
-        seventhVector -= (Vector3ToolsF::DotProduct(vector5, seventhVector)) * vector5;
+        seventhVector -= (Vector3ToolsF::DotProduct(vector5, seventhVector))*vector5;
 
         seventhVector.Normalize();
 
@@ -711,7 +711,7 @@ void Mathematics::Matrix3Testing::ArithmeticCalculateTest()
 
         const Matrix3F matrix8(randomDistribution(generator), angle, secondAngle, angle, randomDistribution(generator), thirdAngle, secondAngle, thirdAngle, randomDistribution(generator));
 
-        Matrix3F::Matrix3EigenDecomposition eigenDecomposition = matrix8.EigenDecomposition(1e-8f);
+        Matrix3F::Matrix3EigenDecompositionType eigenDecomposition = matrix8.EigenDecomposition(1e-8f);
 
         Matrix3F rotation = eigenDecomposition.GetRotation();
         Matrix3F diagonal = eigenDecomposition.GetDiagonal();
@@ -775,7 +775,7 @@ void Mathematics::Matrix3Testing::EulerTest()
 
         matrix0.MakeEulerXYZ(firstAngle, secondAngle, thirdAngle);
 
-        Matrix3D::Euler euler0 = matrix0.ExtractEulerXYZ();
+        Matrix3D::EulerType euler0 = matrix0.ExtractEulerXYZ();
 
         ASSERT_APPROXIMATE(firstAngle, euler0.GetX0Angle(), 1e-10);
         ASSERT_APPROXIMATE(secondAngle, euler0.GetY0Angle(), 1e-10);
