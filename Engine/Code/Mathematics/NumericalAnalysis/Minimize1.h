@@ -31,8 +31,8 @@ namespace Mathematics
         // 当然，当你需要它来确保“function”拥有所有计算其所需的信息，
         // 用户数据可以是复杂的。
         using Function = Real (*)(Real, const UserDataType*);
-        using Minimize1Data = Minimize1Data<Real>;
-        using Math = Math<Real>;
+        using Minimize1DataType = Minimize1Data<Real>;
+        using MathType = Math<Real>;
 
     public:
         // 区间[t0,t1]提供给GetMinimum(Real,Real,Real)
@@ -61,15 +61,15 @@ namespace Mathematics
         // “tInitial”为初始猜测在'function'值。
         // 最小的位置为'tMin'和最小的值是'fMin'。
         // 返回的第一部分为tMin和第二部分为fMin
-        NODISCARD Minimize1Data GetMinimum(Real begin, Real end, Real initial) const;
+        NODISCARD Minimize1DataType GetMinimum(Real begin, Real end, Real initial) const;
 
     private:
         // 这是调用的开始搜索相关的[t0,tInitial]和[tInitial,t1]。
-        void CompareMinimum(Real begin, Real beginFunction, Real end, Real endFunction, int level, Minimize1Data& minimize1Data) const;
+        void CompareMinimum(Real begin, Real beginFunction, Real end, Real endFunction, int level, Minimize1DataType& minimize1Data) const;
 
     private:
         // 这是调用递归搜索在[a,(a+b)/2] 和 [(a+b)/2,b]。
-        void CompareMinimum(Real begin, Real beginFunction, Real middle, Real middleFunction, Real end, Real endFunction, int level, Minimize1Data& minimize1Data) const;
+        void CompareMinimum(Real begin, Real beginFunction, Real middle, Real middleFunction, Real end, Real endFunction, int level, Minimize1DataType& minimize1Data) const;
 
         // 这是调用当{f0,f1,f2}括号是最小值时。
         void CompareBracketedMinimum(Real begin,
@@ -79,7 +79,7 @@ namespace Mathematics
                                      Real end,
                                      Real endFunction,
                                      int level,
-                                     Minimize1Data& minimize1Data) const;
+                                     Minimize1DataType& minimize1Data) const;
 
     private:
         Function function;

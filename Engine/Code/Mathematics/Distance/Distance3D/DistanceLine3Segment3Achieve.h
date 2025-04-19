@@ -19,7 +19,7 @@
 #include "Mathematics/Objects3D/Segment3Detail.h"
 
 template <typename Real>
-Mathematics::DistanceLine3Segment3<Real>::DistanceLine3Segment3(const Line3& line, const Segment3& segment) noexcept
+Mathematics::DistanceLine3Segment3<Real>::DistanceLine3Segment3(const Line3Type& line, const Segment3Type& segment) noexcept
     : ParentType{}, line{ line }, segment{ segment }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -57,7 +57,7 @@ typename Mathematics::DistanceLine3Segment3<Real>::DistanceResult Mathematics::D
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const DistanceLine3Line3Tool tool{ line.GetOrigin(), line.GetDirection(), segment.GetCenterPoint(), segment.GetDirection() };
+    const DistanceLine3Line3ToolType tool{ line.GetOrigin(), line.GetDirection(), segment.GetCenterPoint(), segment.GetDirection() };
 
     const auto det = tool.GetDet();
 
@@ -76,12 +76,12 @@ typename Mathematics::DistanceLine3Segment3<Real>::DistanceResult Mathematics::D
                 auto lhsT = tool.GetLhsT() / det;
                 rhsT /= det;
 
-                auto squaredDistance = lhsT * (lhsT + tool.GetDirectionDot() * rhsT + Math::GetValue(2) * tool.GetOriginDifferenceDotLhsDirection()) +
-                                       rhsT * (tool.GetDirectionDot() * lhsT + rhsT + Math::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) +
+                auto squaredDistance = lhsT * (lhsT + tool.GetDirectionDot() * rhsT + MathType::GetValue(2) * tool.GetOriginDifferenceDotLhsDirection()) +
+                                       rhsT * (tool.GetDirectionDot() * lhsT + rhsT + MathType::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) +
                                        tool.GetOriginDifferenceSquaredLength();
 
-                return DistanceResult{ Math::GetNumericalRoundOffNonnegative(squaredDistance),
-                                       Math::GetValue(0),
+                return DistanceResult{ MathType::GetNumericalRoundOffNonnegative(squaredDistance),
+                                       MathType::GetValue(0),
                                        line.GetOrigin() + lhsT * line.GetDirection(),
                                        segment.GetCenterPoint() + rhsT * segment.GetDirection(),
                                        lhsT,
@@ -107,13 +107,13 @@ typename Mathematics::DistanceLine3Segment3<Real>::DistanceResult Mathematics::D
 }
 
 template <typename Real>
-typename Mathematics::DistanceLine3Segment3<Real>::DistanceResult Mathematics::DistanceLine3Segment3<Real>::GetSquaredWithClosestPoints(const DistanceLine3Line3Tool& tool, Real rhsExtent) const
+typename Mathematics::DistanceLine3Segment3<Real>::DistanceResult Mathematics::DistanceLine3Segment3<Real>::GetSquaredWithClosestPoints(const DistanceLine3Line3ToolType& tool, Real rhsExtent) const
 {
     auto t = tool.GetLhsT(-rhsExtent);
-    auto rhsSquare = rhsExtent * (rhsExtent + Math::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) + tool.GetOriginDifferenceSquaredLength();
+    auto rhsSquare = rhsExtent * (rhsExtent + MathType::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) + tool.GetOriginDifferenceSquaredLength();
 
-    return DistanceResult{ Math::GetNumericalRoundOffNonnegative(-t * t + rhsSquare),
-                           Math::GetValue(0),
+    return DistanceResult{ MathType::GetNumericalRoundOffNonnegative(-t * t + rhsSquare),
+                           MathType::GetValue(0),
                            line.GetOrigin() + t * line.GetDirection(),
                            segment.GetCenterPoint() + rhsExtent * segment.GetDirection(),
                            t,
@@ -121,21 +121,21 @@ typename Mathematics::DistanceLine3Segment3<Real>::DistanceResult Mathematics::D
 }
 
 template <typename Real>
-typename Mathematics::DistanceLine3Segment3<Real>::DistanceResult Mathematics::DistanceLine3Segment3<Real>::GetSquaredWithClosestPointsIsParallel(const DistanceLine3Line3Tool& tool) const
+typename Mathematics::DistanceLine3Segment3<Real>::DistanceResult Mathematics::DistanceLine3Segment3<Real>::GetSquaredWithClosestPointsIsParallel(const DistanceLine3Line3ToolType& tool) const
 {
     auto originDifferenceDotLhsDirection = tool.GetOriginDifferenceDotLhsDirection();
     auto squaredDistance = tool.GetSquaredDistanceWithParallel();
 
     return DistanceResult{ squaredDistance,
-                           Math::GetValue(0),
+                           MathType::GetValue(0),
                            line.GetOrigin() - originDifferenceDotLhsDirection * line.GetDirection(),
                            segment.GetCenterPoint(),
                            -originDifferenceDotLhsDirection,
-                           Math::GetValue(0) };
+                           MathType::GetValue(0) };
 }
 
 template <typename Real>
-typename Mathematics::DistanceLine3Segment3<Real>::DistanceResult Mathematics::DistanceLine3Segment3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistanceLine3Segment3<Real>::DistanceResult Mathematics::DistanceLine3Segment3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

@@ -30,7 +30,7 @@ namespace CoreTools
 
         void Exit() noexcept override;
 
-        NODISCARD MessageResult OnMessage(const Telegram& telegram) override;
+        NODISCARD MessageResult OnMessage(const TelegramType& telegram) override;
 
         CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
 

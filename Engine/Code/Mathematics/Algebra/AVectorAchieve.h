@@ -18,7 +18,7 @@
 
 template <typename T>
 requires std::is_arithmetic_v<T>
-Mathematics::AVector<T>::AVector(const Vector3& rhs) noexcept
+Mathematics::AVector<T>::AVector(const Vector3Type& rhs) noexcept
     : AVector{ rhs.GetX(), rhs.GetY(), rhs.GetZ() }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -27,17 +27,17 @@ Mathematics::AVector<T>::AVector(const Vector3& rhs) noexcept
 template <typename T>
 requires std::is_arithmetic_v<T>
 Mathematics::AVector<T>::AVector(const ArrayType& rhs) noexcept
-    : AVector{ rhs.at(System::EnumCastUnderlying(HomogeneousPoint::PointIndex::X)),
-               rhs.at(System::EnumCastUnderlying(HomogeneousPoint::PointIndex::Y)),
-               rhs.at(System::EnumCastUnderlying(HomogeneousPoint::PointIndex::Z)) }
+    : AVector{ rhs.at(System::EnumCastUnderlying(HomogeneousPointType::PointIndex::X)),
+               rhs.at(System::EnumCastUnderlying(HomogeneousPointType::PointIndex::Y)),
+               rhs.at(System::EnumCastUnderlying(HomogeneousPointType::PointIndex::Z)) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename T>
 requires std::is_arithmetic_v<T>
-Mathematics::AVector<T>::AVector(const HomogeneousPoint& homogeneousPoint) noexcept
-    : homogeneousPoint{ homogeneousPoint.GetX(), homogeneousPoint.GetY(), homogeneousPoint.GetZ(), Math::GetValue(0) }
+Mathematics::AVector<T>::AVector(const HomogeneousPointType& homogeneousPoint) noexcept
+    : homogeneousPoint{ homogeneousPoint.GetX(), homogeneousPoint.GetY(), homogeneousPoint.GetZ(), MathType::GetValue(0) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -47,7 +47,7 @@ Mathematics::AVector<T>::AVector(const HomogeneousPoint& homogeneousPoint) noexc
 template <typename T>
 requires std::is_arithmetic_v<T> bool Mathematics::AVector<T>::IsValid() const noexcept
 {
-    if (Math::FAbs(homogeneousPoint.GetW()) <= Math::GetZeroTolerance())
+    if (MathType::FAbs(homogeneousPoint.GetW()) <= MathType::GetZeroTolerance())
         return true;
     else
         return false;
@@ -61,7 +61,7 @@ Mathematics::Vector3<T> Mathematics::AVector<T>::GetVector3() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return Vector3{ homogeneousPoint.GetX(), homogeneousPoint.GetY(), homogeneousPoint.GetZ() };
+    return Vector3Type{ homogeneousPoint.GetX(), homogeneousPoint.GetY(), homogeneousPoint.GetZ() };
 }
 
 template <typename T>
@@ -202,9 +202,9 @@ Mathematics::AVector<T>& Mathematics::AVector<T>::operator/=(T scalar)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    if (Math::GetZeroTolerance() < Math::FAbs(scalar))
+    if (MathType::GetZeroTolerance() < MathType::FAbs(scalar))
     {
-        auto invScalar = Math::GetValue(1) / scalar;
+        auto invScalar = MathType::GetValue(1) / scalar;
 
         *this *= invScalar;
     }
@@ -222,7 +222,7 @@ T Mathematics::AVector<T>::Length() const noexcept(gAssert < 3 || gMathematicsAs
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return Math::Sqrt(SquaredLength());
+    return MathType::Sqrt(SquaredLength());
 }
 
 template <typename T>
@@ -243,7 +243,7 @@ void Mathematics::AVector<T>::Normalize(T epsilon)
 #ifdef MATHEMATICS_NORMALIZE_EPSILON
 
     if (const auto length = Length();
-        std::min(Math::epsilon, epsilon) < length)
+        std::min(MathType::epsilon, epsilon) < length)
 
 #else  // !MATHEMATICS_NORMALIZE_EPSILON
 
@@ -253,7 +253,7 @@ void Mathematics::AVector<T>::Normalize(T epsilon)
 #endif  // MATHEMATICS_NORMALIZE_EPSILON
 
     {
-        auto invLength = Math::GetValue(1) / length;
+        auto invLength = MathType::GetValue(1) / length;
 
         *this *= invLength;
     }
@@ -269,7 +269,7 @@ requires std::is_arithmetic_v<T> bool Mathematics::AVector<T>::IsZero(T epsilon)
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     if (const auto length = Length();
-        epsilon < Math::FAbs(length))
+        epsilon < MathType::FAbs(length))
     {
         return false;
     }
@@ -285,7 +285,7 @@ requires std::is_arithmetic_v<T> bool Mathematics::AVector<T>::IsNormalize(T eps
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     if (const auto length = Length();
-        epsilon < Math::FAbs(length - Math::GetValue(1)))
+        epsilon < MathType::FAbs(length - MathType::GetValue(1)))
     {
         return false;
     }
@@ -306,9 +306,9 @@ template <typename T>
 requires std::is_arithmetic_v<T>
 void Mathematics::AVector<T>::Set(const ArrayType& coordinate) noexcept
 {
-    SetX(coordinate.at(System::EnumCastUnderlying(HomogeneousPoint::PointIndex::X)));
-    SetY(coordinate.at(System::EnumCastUnderlying(HomogeneousPoint::PointIndex::Y)));
-    SetZ(coordinate.at(System::EnumCastUnderlying(HomogeneousPoint::PointIndex::Z)));
+    SetX(coordinate.at(System::EnumCastUnderlying(HomogeneousPointType::PointIndex::X)));
+    SetY(coordinate.at(System::EnumCastUnderlying(HomogeneousPointType::PointIndex::Y)));
+    SetZ(coordinate.at(System::EnumCastUnderlying(HomogeneousPointType::PointIndex::Z)));
 }
 
 #endif  // MATHEMATICS_ALGEBRA_A_VECTOR_ACHIEVE_H

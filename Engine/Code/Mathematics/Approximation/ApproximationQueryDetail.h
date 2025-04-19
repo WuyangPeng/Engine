@@ -15,8 +15,10 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Time/Timer.h"
 
+#include <algorithm>
 #include <numeric>
 #include <random>
+#include <ranges>
 
 template <typename Real, typename ObservationType>
 requires(std::is_arithmetic_v<Real>)

@@ -26,7 +26,7 @@ Mathematics::Intersector1<Real>::Intersector1(Real u0, Real u1, Real v0, Real v1
 template <typename Real>
 bool Mathematics::Intersector1<Real>::IsValid() const noexcept
 {
-    if (u.GetX() <= u.GetY() && v.GetX() <= v.GetY() && Math::GetValue(0) <= epsilon)
+    if (u.GetX() <= u.GetY() && v.GetX() <= v.GetY() && MathType::GetValue(0) <= epsilon)
         return true;
     else
         return false;

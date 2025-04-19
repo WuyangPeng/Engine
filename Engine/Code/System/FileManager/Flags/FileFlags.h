@@ -139,6 +139,7 @@ namespace System
         ShareDelete = 0x00000004,
         ShareRead = 0x00000001,
         ShareWrite = 0x00000002,
+        ReadWrite = ShareRead | ShareWrite,
     };
 
     enum class FileHandleCreationDisposition

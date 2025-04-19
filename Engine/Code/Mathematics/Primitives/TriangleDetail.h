@@ -16,7 +16,7 @@
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::Triangle<N, Real>::Triangle() noexcept requires(N == 2)
-    : v{ Vector{}, Vector{ Math::GetValue(1), Math::GetValue(0) }, Vector{ Math::GetValue(0), Math::GetValue(1) } }
+    : v{ Vector{}, Vector{ MathType::GetValue(1), MathType::GetValue(0) }, Vector{ MathType::GetValue(0), MathType::GetValue(1) } }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -24,7 +24,7 @@ Mathematics::Triangle<N, Real>::Triangle() noexcept requires(N == 2)
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::Triangle<N, Real>::Triangle() noexcept requires(N == 3)
-    : v{ Vector{}, Vector{ Math::GetValue(1), Math::GetValue(0), Math::GetValue(0) }, Vector{ Math::GetValue(0), Math::GetValue(1), Math::GetValue(0) } }
+    : v{ Vector{}, Vector{ MathType::GetValue(1), MathType::GetValue(0), MathType::GetValue(0) }, Vector{ MathType::GetValue(0), MathType::GetValue(1), MathType::GetValue(0) } }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }

@@ -35,7 +35,7 @@ namespace Rendering
         using ClassType = BaseRendererImpl;
         using FactoryType = RendererFactory;
 
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
 
         using FontSharedPtr = std::shared_ptr<Font>;
         using ComputeProgramSharedPtr = std::shared_ptr<ComputeProgram>;
@@ -84,11 +84,11 @@ namespace Rendering
 
         NODISCARD bool HasDepthRange01() const;
         NODISCARD std::string GetShaderName(const std::string& name) const;
-        NODISCARD void Resize(int width, int height);
+        void Resize(int width, int height);
         void DisplayColorBuffer(int syncInterval);
 
-        void SetClearColor(const Colour& clearColor) noexcept;
-        NODISCARD Colour GetClearColor() const noexcept;
+        void SetClearColor(const ColourType& clearColor) noexcept;
+        NODISCARD ColourType GetClearColor() const noexcept;
         void SetClearDepth(float clearDepth) noexcept;
         NODISCARD float GetClearDepth() const noexcept;
         void SetClearStencil(int clearStencil) noexcept;
@@ -122,7 +122,7 @@ namespace Rendering
 
         NODISCARD int64_t Draw(Visual& visual);
         NODISCARD int64_t Draw(const VisualContainer& visuals);
-        NODISCARD int64_t Draw(int x, int y, const Colour& color, const std::string& message);
+        NODISCARD int64_t Draw(int x, int y, const ColourType& color, const std::string& message);
         NODISCARD int64_t Draw(const OverlayEffectSharedPtr& overlay);
 
         void SetAllowOcclusionQuery(bool allow) noexcept;

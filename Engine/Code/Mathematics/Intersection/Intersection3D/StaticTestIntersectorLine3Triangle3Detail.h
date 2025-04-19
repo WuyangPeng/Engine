@@ -18,7 +18,7 @@
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorLine3Triangle3<Real>::StaticTestIntersectorLine3Triangle3(const Line3& line, const Triangle3& triangle, const Real epsilon)
+Mathematics::StaticTestIntersectorLine3Triangle3<Real>::StaticTestIntersectorLine3Triangle3(const Line3Type& line, const Triangle3Type& triangle, const Real epsilon)
     : ParentType{ epsilon }, line{ line }, triangle{ triangle }
 {
     Test();
@@ -82,12 +82,12 @@ void Mathematics::StaticTestIntersectorLine3Triangle3<Real>::Test()
 
     using namespace System;
 
-    auto directionDotOriginCrossEdge2 = sign * Vector3Tools::DotProduct(line.GetDirection(), data.GetOriginCrossEdge2());
-    if (Math::GetValue(0) <= directionDotOriginCrossEdge2)
+    auto directionDotOriginCrossEdge2 = sign * Vector3ToolsType::DotProduct(line.GetDirection(), data.GetOriginCrossEdge2());
+    if (MathType::GetValue(0) <= directionDotOriginCrossEdge2)
     {
-        auto directionDotEdge1CrossOrigin = sign * Vector3Tools::DotProduct(line.GetDirection(), data.GetEdge1CrossOrigin());
+        auto directionDotEdge1CrossOrigin = sign * Vector3ToolsType::DotProduct(line.GetDirection(), data.GetEdge1CrossOrigin());
 
-        if (Math::GetValue(0) <= directionDotEdge1CrossOrigin)
+        if (MathType::GetValue(0) <= directionDotEdge1CrossOrigin)
         {
             if (directionDotNormal <= directionDotOriginCrossEdge2 + directionDotEdge1CrossOrigin)
             {

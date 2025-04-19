@@ -17,7 +17,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Threading/Mutex.h"
 
-SINGLETON_GET_PTR_DEFINE(CoreTools, RouteServiceManager);
+SINGLETON_GET_PTR_DEFINE(Network, RouteServiceManager);
 
 Network::RouteServiceManager::RouteServiceManagerUniquePtr Network::RouteServiceManager::routeServiceManager{};
 

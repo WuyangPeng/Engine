@@ -28,16 +28,16 @@ namespace Mathematics
 
         using ClassType = BrentsMethodCalculate<Real, UserDataType>;
 
-        using BrentsMethod = BrentsMethod<Real, UserDataType>;
-        using BrentsMethodRoot = BrentsMethodRoot<Real>;
-        using Math = Math<Real>;
+        using BrentsMethodType = BrentsMethod<Real, UserDataType>;
+        using BrentsMethodRootR = BrentsMethodRoot<Real>;
+        using MathType = Math<Real>;
 
     public:
-        BrentsMethodCalculate(const BrentsMethod& brentsMethod, Real begin, Real end);
+        BrentsMethodCalculate(const BrentsMethodType& brentsMethod, Real begin, Real end);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD BrentsMethodRoot GetRoot() noexcept;
+        NODISCARD BrentsMethodRootR GetRoot() noexcept;
 
     private:
         void Calculate();
@@ -56,13 +56,13 @@ namespace Mathematics
         void UpdateSubinterval() noexcept;
 
     private:
-        const BrentsMethod& brentsMethod;
+        const BrentsMethodType& brentsMethod;
         Real begin;
         Real end;
         Real beginFunction;
         Real endFunction;
 
-        BrentsMethodRoot bisect2Root;
+        BrentsMethodRootR bisect2Root;
 
         // ¸ùËÑË÷µÄÖµ¡£
         Real searchBegin;

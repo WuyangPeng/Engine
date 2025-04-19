@@ -13,6 +13,7 @@
 #include "Framework/FrameworkDll.h"
 
 #include "System/Android/Flags/AndroidKeyCodesFlags.h"
+#include "System/Helper/EnumCast.h"
 #include "System/OpenGL/Flags/GlutKeyCodesFlags.h"
 #include "System/Windows/Flags/WindowsKeyCodesFlags.h"
 

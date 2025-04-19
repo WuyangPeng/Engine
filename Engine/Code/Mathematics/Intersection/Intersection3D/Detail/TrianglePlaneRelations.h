@@ -26,13 +26,13 @@ namespace Mathematics
     public:
         using ClassType = TrianglePlaneRelations<Real>;
 
-        using Triangle3 = Triangle3<Real>;
-        using Vector3 = Vector3<Real>;
-        using Plane3 = Plane3<Real>;
-        using Math = Math<Real>;
+        using Triangle3Type = Triangle3<Real>;
+        using Vector3Type = Vector3<Real>;
+        using Plane3Type = Plane3<Real>;
+        using MathType = Math<Real>;
 
     public:
-        TrianglePlaneRelations(const Triangle3& triangle, const Plane3& plane, const Real epsilon = Math::GetZeroTolerance());
+        TrianglePlaneRelations(const Triangle3Type& triangle, const Plane3Type& plane, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
@@ -49,7 +49,7 @@ namespace Mathematics
         using SignType = std::array<NumericalValueSymbol, size>;
 
     private:
-        void Relations(const Triangle3& triangle, const Plane3& plane, const Real epsilon);
+        void Relations(const Triangle3Type& triangle, const Plane3Type& plane, const Real epsilon);
 
     private:
         DistanceType distance;

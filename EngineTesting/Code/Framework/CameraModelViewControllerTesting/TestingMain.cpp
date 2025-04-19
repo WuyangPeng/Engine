@@ -10,6 +10,6 @@
 #include "Framework/CameraModelViewControllerTesting/TestingHelper.h"
 #include "Framework/Helper/MainFunctionMacro.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 WINDOWS_MAIN_FUNCTION_WITH_INFORMATION(CameraModelViewController, TestingHelper, SYSTEM_TEXT("PixelModelViewControllerTesting"), SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT(""), 1024, 768)

@@ -34,13 +34,13 @@ bool Mathematics::CholeskyDecomposition<Real, N>::IsValid() const noexcept
 
 template <typename Real, int N>
 requires(std::is_arithmetic_v<Real> && 0 <= N)
-bool Mathematics::CholeskyDecomposition<Real, N>::Factor(Matrix& a)
+bool Mathematics::CholeskyDecomposition<Real, N>::Factor(MatrixType& a)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
     for (auto c = 0; c < N; ++c)
     {
-        if (a(c, c) <= Math::GetValue(0))
+        if (a(c, c) <= MathType::GetValue(0))
         {
             return false;
         }
@@ -64,11 +64,11 @@ bool Mathematics::CholeskyDecomposition<Real, N>::Factor(Matrix& a)
 
 template <typename Real, int N>
 requires(std::is_arithmetic_v<Real> && 0 <= N)
-typename Mathematics::CholeskyDecomposition<Real, N>::Vector Mathematics::CholeskyDecomposition<Real, N>::SolveLower(const Matrix& l)
+typename Mathematics::CholeskyDecomposition<Real, N>::VectorType Mathematics::CholeskyDecomposition<Real, N>::SolveLower(const MatrixType& l)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    Vector y{};
+    VectorType y{};
     for (auto r = 0; r < N; ++r)
     {
         for (auto c = 0; c < r; ++c)
@@ -83,11 +83,11 @@ typename Mathematics::CholeskyDecomposition<Real, N>::Vector Mathematics::Choles
 
 template <typename Real, int N>
 requires(std::is_arithmetic_v<Real> && 0 <= N)
-typename Mathematics::CholeskyDecomposition<Real, N>::Vector Mathematics::CholeskyDecomposition<Real, N>::SolveUpper(const Matrix& l)
+typename Mathematics::CholeskyDecomposition<Real, N>::VectorType Mathematics::CholeskyDecomposition<Real, N>::SolveUpper(const MatrixType& l)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    Vector x{};
+    VectorType x{};
     for (auto r = N - 1; r >= 0; --r)
     {
         for (auto c = r + 1; c < N; ++c)
@@ -121,7 +121,7 @@ bool Mathematics::CholeskyDecomposition<Real, 0>::IsValid() const noexcept
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-bool Mathematics::CholeskyDecomposition<Real, 0>::Factor(VariableMatrix& a)
+bool Mathematics::CholeskyDecomposition<Real, 0>::Factor(VariableMatrixType& a)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -156,11 +156,11 @@ bool Mathematics::CholeskyDecomposition<Real, 0>::Factor(VariableMatrix& a)
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-typename Mathematics::CholeskyDecomposition<Real>::VariableLengthVector Mathematics::CholeskyDecomposition<Real, 0>::SolveLower(const VariableMatrix& l)
+typename Mathematics::CholeskyDecomposition<Real>::VariableLengthVectorType Mathematics::CholeskyDecomposition<Real, 0>::SolveLower(const VariableMatrixType& l)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    VariableLengthVector y{};
+    VariableLengthVectorType y{};
     if (l.GetRowsNumber() == n && l.GetColumnsNumber() == n && y.GetSize() == n)
     {
         for (auto r = 0; r < n; ++r)
@@ -180,11 +180,11 @@ typename Mathematics::CholeskyDecomposition<Real>::VariableLengthVector Mathemat
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-typename Mathematics::CholeskyDecomposition<Real>::VariableLengthVector Mathematics::CholeskyDecomposition<Real, 0>::SolveUpper(const VariableMatrix& l)
+typename Mathematics::CholeskyDecomposition<Real>::VariableLengthVectorType Mathematics::CholeskyDecomposition<Real, 0>::SolveUpper(const VariableMatrixType& l)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    VariableLengthVector x{};
+    VariableLengthVectorType x{};
     if (l.GetRowsNumber() == n && l.GetColumnsNumber() == n && x.GetSize() == n)
     {
         for (auto r = n - 1; r >= 0; --r)

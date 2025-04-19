@@ -335,7 +335,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::PlaneF& datum)
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 
     using ElementType = Mathematics::PlaneF::ElementType;
-    using AVector = Mathematics::PlaneF::AVector;
+    using AVector = Mathematics::PlaneF::AVectorType;
 
     const auto epsilon = Read<ElementType>();
     datum.SetEpsilon(epsilon);
@@ -364,7 +364,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::PlaneD& datum)
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 
     using ElementType = Mathematics::PlaneD::ElementType;
-    using AVector = Mathematics::PlaneD::AVector;
+    using AVector = Mathematics::PlaneD::AVectorType;
 
     const auto epsilon = Read<ElementType>();
     datum.SetEpsilon(epsilon);

@@ -173,10 +173,10 @@ void Mathematics::Algebra::PolynomialRoot<Real>::PolynomialRootBisect(const std:
             constexpr auto maxBisections = 4096;
             for (auto iteration = 1; iteration < maxBisections; ++iteration)
             {
-                auto x = Math::GetRational(1, 2) * (xMin + xMax);
+                auto x = MathType::GetRational(1, 2) * (xMin + xMax);
                 auto f = function(x);
 
-                if (Math::Approximate(x, xMin) || Math::Approximate(x, xMax))
+                if (MathType::Approximate(x, xMin) || MathType::Approximate(x, xMax))
                 {
                     /// 浮点数xMin和xMax是连续的，
                     /// 在这种情况下，细分无法在它们之间产生浮点数。

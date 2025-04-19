@@ -42,7 +42,7 @@ void Mathematics::DynamicFindIntersector1<Real>::Find(Real tMax, Real speedU, Re
     {
         // [u0,u1]最初在[v0,v1]的左边。
         auto differenceSpeed = speedU - speedV;
-        if (Math::GetValue(0) < differenceSpeed)
+        if (MathType::GetValue(0) < differenceSpeed)
         {
             // 区间必须朝向彼此移动。
             auto differencePosition = v0 - u1;
@@ -60,7 +60,7 @@ void Mathematics::DynamicFindIntersector1<Real>::Find(Real tMax, Real speedU, Re
     {
         // [u0,u1]最初在[v0,v1]的右边。
         auto differenceSpeed = speedV - speedU;
-        if (Math::GetValue(0) < differenceSpeed)
+        if (MathType::GetValue(0) < differenceSpeed)
         {
             // 区间必须朝向彼此移动。
             auto differencePosition = u0 - v1;
@@ -77,7 +77,7 @@ void Mathematics::DynamicFindIntersector1<Real>::Find(Real tMax, Real speedU, Re
     else
     {
         // 区间本来就相交。
-        firstTime = Math::GetValue(0);
+        firstTime = MathType::GetValue(0);
         if (speedU + epsilon < speedV)
         {
             lastTime = (u1 - v0) / (speedV - speedU);
@@ -88,7 +88,7 @@ void Mathematics::DynamicFindIntersector1<Real>::Find(Real tMax, Real speedU, Re
         }
         else
         {
-            lastTime = Math::maxReal;
+            lastTime = MathType::maxReal;
         }
 
         if (v0 + epsilon < u1)
@@ -98,9 +98,9 @@ void Mathematics::DynamicFindIntersector1<Real>::Find(Real tMax, Real speedU, Re
                 auto lhsIntersection = (u0 < v0 ? v0 : u0);
                 auto rhsIntersection = (v1 < u1 ? v1 : u1);
 
-                if (Math::Approximate(lhsIntersection, rhsIntersection, epsilon))
+                if (MathType::Approximate(lhsIntersection, rhsIntersection, epsilon))
                 {
-                    intersections.emplace_back((lhsIntersection + rhsIntersection) / Math::GetValue(2));
+                    intersections.emplace_back((lhsIntersection + rhsIntersection) / MathType::GetValue(2));
                 }
                 else
                 {
@@ -110,12 +110,12 @@ void Mathematics::DynamicFindIntersector1<Real>::Find(Real tMax, Real speedU, Re
             }
             else  // u0 == v1
             {
-                intersections.emplace_back((u0 + v1) / Math::GetValue(2));
+                intersections.emplace_back((u0 + v1) / MathType::GetValue(2));
             }
         }
         else  // u1 == v0
         {
-            intersections.emplace_back((u1 + v0) / Math::GetValue(2));
+            intersections.emplace_back((u1 + v0) / MathType::GetValue(2));
         }
     }
 }
@@ -125,7 +125,7 @@ void Mathematics::DynamicFindIntersector1<Real>::Find(Real tMax, Real speedU, Re
 template <typename Real>
 bool Mathematics::DynamicFindIntersector1<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && Math::GetValue(0) <= firstTime && firstTime <= lastTime)
+    if (ParentType::IsValid() && MathType::GetValue(0) <= firstTime && firstTime <= lastTime)
         return true;
     else
         return false;

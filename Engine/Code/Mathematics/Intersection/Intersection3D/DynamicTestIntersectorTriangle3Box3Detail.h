@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::DynamicTestIntersectorTriangle3Box3<Real>::DynamicTestIntersectorTriangle3Box3(const Triangle3& triangle, const Box3& box, Real tMax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicTestIntersectorTriangle3Box3<Real>::DynamicTestIntersectorTriangle3Box3(const Triangle3Type& triangle, const Box3Type& box, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon }, triangle{ triangle }, box{ box }
 {
     Test();
@@ -59,12 +59,12 @@ void Mathematics::DynamicTestIntersectorTriangle3Box3<Real>::Test()
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
     // 测试三角形法线的方向。
-    using TriangleType = std::array<Vector3, 3>;
+    using TriangleType = std::array<Vector3Type, 3>;
     TriangleType edge{ triangle.GetVertex(1) - triangle.GetVertex(0),
                        triangle.GetVertex(2) - triangle.GetVertex(0),
                        triangle.GetVertex(2) - triangle.GetVertex(1) };
 
-    auto crossProduct = Vector3Tools::CrossProduct(edge.at(0), edge.at(1));
+    auto crossProduct = Vector3ToolsType::CrossProduct(edge.at(0), edge.at(1));
 
     const TestIntersectorAxis<Real> testIntersectorAxis{ crossProduct, triangle, box, relVelocity, this->GetTMax() };
     auto contactTime = testIntersectorAxis.GetTFirst();
@@ -94,7 +94,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Box3<Real>::Test()
     {
         for (auto i1 = 0; i1 < 3; ++i1)
         {
-            crossProduct = Vector3Tools::CrossProduct(edge.at(i0), box.GetAxis(i1));
+            crossProduct = Vector3ToolsType::CrossProduct(edge.at(i0), box.GetAxis(i1));
 
             const TestIntersectorAxis<Real> intersector{ crossProduct, triangle, box, relVelocity, this->GetTMax() };
             contactTime = intersector.GetTFirst();

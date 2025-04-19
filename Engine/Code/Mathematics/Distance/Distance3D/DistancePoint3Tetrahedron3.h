@@ -22,29 +22,29 @@ namespace Mathematics
     {
     public:
         using ClassType = DistancePoint3Tetrahedron3<Real>;
-        using Vector3 = Vector3<Real>;
-        using ParentType = DistanceBase<Real, Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3Type>;
 
-        using Tetrahedron3 = Tetrahedron3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using Tetrahedron3Type = Tetrahedron3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistancePoint3Tetrahedron3(const Vector3& point, const Tetrahedron3& tetrahedron) noexcept;
+        DistancePoint3Tetrahedron3(const Vector3Type& point, const Tetrahedron3Type& tetrahedron) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Vector3 GetPoint() const noexcept;
-        NODISCARD Tetrahedron3 GetTetrahedron() const noexcept;
+        NODISCARD Vector3Type GetPoint() const noexcept;
+        NODISCARD Tetrahedron3Type GetTetrahedron() const noexcept;
 
         NODISCARD DistanceResult GetSquared() const override;
 
-        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
     private:
-        Vector3 point;
-        Tetrahedron3 tetrahedron;
+        Vector3Type point;
+        Tetrahedron3Type tetrahedron;
     };
 
     using DistancePoint3Tetrahedron3F = DistancePoint3Tetrahedron3<float>;

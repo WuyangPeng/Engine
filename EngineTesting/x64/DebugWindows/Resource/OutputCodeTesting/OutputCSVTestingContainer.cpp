@@ -41,14 +41,14 @@ void OutputCSVTesting::OutputCSVTestingContainer::Parsing(const String& director
 
 void OutputCSVTesting::OutputCSVTestingContainer::Parsing(const std::filesystem::directory_entry& inputPath)
 {
-    const auto fileName = inputPath.path().native();
+    const auto fileName = CoreTools::StringConversion::FileSystemConversionStandard(inputPath.path().native());
 
-    if (fileName.find(L".csv"s) != (fileName.size() - 4))
+    if (fileName.find(SYSTEM_TEXT(".csv"s)) != (fileName.size() - 4))
     {
         return;
     }
 
-    const CoreTools::CSVContent csvContent{ CoreTools::StringConversion::WideCharConversionStandard(fileName) };
+    const CoreTools::CSVContent csvContent{ fileName };
 
     const auto csvClassName = csvContent.GetCSVClassName();
 

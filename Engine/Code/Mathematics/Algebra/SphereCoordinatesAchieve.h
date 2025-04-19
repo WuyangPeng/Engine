@@ -17,10 +17,10 @@
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-Mathematics::SphereCoordinates<Real>::SphereCoordinates(Real r, Real ¦È, Real ¦Õ)
+Mathematics::SphereCoordinates<Real>::SphereCoordinates(Real r, Real theta, Real phi)
     : r{ r },
-      ¦È{ ¦È },
-      ¦Õ{ ¦Õ }
+      theta{ theta },
+      phi{ phi }
 {
     if (!IsValid())
     {
@@ -33,7 +33,7 @@ Mathematics::SphereCoordinates<Real>::SphereCoordinates(Real r, Real ¦È, Real ¦Õ
 template <typename Real>
 requires std::is_floating_point_v<Real> bool Mathematics::SphereCoordinates<Real>::IsValid() const noexcept
 {
-    return Math::GetValue(0) <= r && Math::GetValue(0) <= ¦È && ¦È <= Math::GetPI() && Math::GetValue(0) <= ¦Õ && ¦Õ < Math::GetTwoPI();
+    return MathType::GetValue(0) <= r && MathType::GetValue(0) <= theta && theta <= MathType::GetPI() && MathType::GetValue(0) <= phi && phi < MathType::GetTwoPI();
 }
 
 template <typename Real>
@@ -42,7 +42,7 @@ void Mathematics::SphereCoordinates<Real>::SetR(Real radius)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    if (Math::GetValue(0) <= radius)
+    if (MathType::GetValue(0) <= radius)
     {
         r = radius;
     }
@@ -54,13 +54,13 @@ void Mathematics::SphereCoordinates<Real>::SetR(Real radius)
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-void Mathematics::SphereCoordinates<Real>::SetTheta(Real theta)
+void Mathematics::SphereCoordinates<Real>::SetTheta(Real aTheta)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    if (Math::GetValue(0) <= theta && theta <= Math::GetPI())
+    if (MathType::GetValue(0) <= aTheta && aTheta <= MathType::GetPI())
     {
-        ¦È = theta;
+        theta = aTheta;
     }
     else
     {
@@ -70,13 +70,13 @@ void Mathematics::SphereCoordinates<Real>::SetTheta(Real theta)
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-void Mathematics::SphereCoordinates<Real>::SetPhi(Real phi)
+void Mathematics::SphereCoordinates<Real>::SetPhi(Real aPhi)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    if (Math::GetValue(0) <= phi && phi < Math::GetTwoPI())
+    if (MathType::GetValue(0) <= aPhi && aPhi < MathType::GetTwoPI())
     {
-        ¦Õ = phi;
+        phi = aPhi;
     }
     else
     {
@@ -90,9 +90,9 @@ void Mathematics::SphereCoordinates<Real>::SetCartesian(Real xCoordinate, Real y
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    r = Math::Sqrt(Math::Square(xCoordinate) + Math::Square(yCoordinate) * 2 + Math::Square(zCoordinate));
-    ¦È = Math::GetZeroTolerance() < r ? Math::ASin(Math::Sqrt((Math::Square(xCoordinate) + Math::Square(zCoordinate)) / Math::Square(r))) : Real{};
-    ¦Õ = Math::GetZeroTolerance() < r ? Math::ASin(Math::Sqrt((Math::Square(xCoordinate) + Math::Square(yCoordinate)) / Math::Square(r))) : Real{};
+    r = MathType::Sqrt(MathType::Square(xCoordinate) + MathType::Square(yCoordinate) * 2 + MathType::Square(zCoordinate));
+    theta = MathType::GetZeroTolerance() < r ? MathType::ASin(MathType::Sqrt((MathType::Square(xCoordinate) + MathType::Square(zCoordinate)) / MathType::Square(r))) : Real{};
+    phi = MathType::GetZeroTolerance() < r ? MathType::ASin(MathType::Sqrt((MathType::Square(xCoordinate) + MathType::Square(yCoordinate)) / MathType::Square(r))) : Real{};
 }
 
 template <typename Real>
@@ -101,7 +101,7 @@ Mathematics::Vector3<Real> Mathematics::SphereCoordinates<Real>::GetCartesian() 
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return Vector3{ r * Math::Sin(¦È) * Math::Sin(¦Õ), r * Math::Cos(¦È), r * Math::Sin(¦È) * Math::Cos(¦Õ) };
+    return Vector3Type{ r * MathType::Sin(theta) * MathType::Sin(phi), r * MathType::Cos(theta), r * MathType::Sin(theta) * MathType::Cos(phi) };
 }
 
 #endif  // MATHEMATICS_SPHERE_COORDINATES_ACHIEVE_H

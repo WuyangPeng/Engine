@@ -28,7 +28,7 @@ Mathematics::Query2Filtered<Real>::Query2Filtered(const VerticesType& vertices, 
 template <typename Real>
 bool Mathematics::Query2Filtered<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && Math::GetValue(0) <= uncertainty && uncertainty <= Math::GetValue(1))
+    if (ParentType::IsValid() && MathType::GetValue(0) <= uncertainty && uncertainty <= MathType::GetValue(1))
         return true;
     else
         return false;
@@ -67,13 +67,13 @@ Mathematics::LineQueryType Mathematics::Query2Filtered<Real>::ToLine(const Vecto
     const auto x1 = vector1.GetX() - vector0.GetX();
     const auto y1 = vector1.GetY() - vector0.GetY();
 
-    const auto len0 = Math::Sqrt(x0 * x0 + y0 * y0);
-    const auto len1 = Math::Sqrt(x1 * x1 + y1 * y1);
+    const auto len0 = MathType::Sqrt(x0 * x0 + y0 * y0);
+    const auto len1 = MathType::Sqrt(x1 * x1 + y1 * y1);
     const auto scaledUncertainty = uncertainty * len0 * len1;
 
     const auto det = QueryDotTools<Real>::Det2(x0, y0, x1, y1);
 
-    if (scaledUncertainty <= Math::FAbs(det))
+    if (scaledUncertainty <= MathType::FAbs(det))
     {
         if (0 < det)
             return LineQueryType::Right;
@@ -122,13 +122,13 @@ Mathematics::CircumcircleQueryType Mathematics::Query2Filtered<Real>::ToCircumci
     const auto z1 = mhsPlusTestX * mhsMinusTestX + mhsPlusTestY * mhsMinusTestY;
     const auto z2 = rhsPlusTestX * rhsMinusTestX + rhsPlusTestY * rhsMinusTestY;
 
-    const auto len0 = Math::Sqrt(lhsMinusTestX * lhsMinusTestX + lhsMinusTestY * lhsMinusTestY + z0 * z0);
-    const auto len1 = Math::Sqrt(mhsMinusTestX * mhsMinusTestX + mhsMinusTestY * mhsMinusTestY + z1 * z1);
-    const auto len2 = Math::Sqrt(rhsMinusTestX * rhsMinusTestX + rhsMinusTestY * rhsMinusTestY + z2 * z2);
+    const auto len0 = MathType::Sqrt(lhsMinusTestX * lhsMinusTestX + lhsMinusTestY * lhsMinusTestY + z0 * z0);
+    const auto len1 = MathType::Sqrt(mhsMinusTestX * mhsMinusTestX + mhsMinusTestY * mhsMinusTestY + z1 * z1);
+    const auto len2 = MathType::Sqrt(rhsMinusTestX * rhsMinusTestX + rhsMinusTestY * rhsMinusTestY + z2 * z2);
     const auto scaledUncertainty = uncertainty * len0 * len1 * len2;
 
     const auto det = QueryDotTools<Real>::Det3(lhsMinusTestX, lhsMinusTestY, z0, mhsMinusTestX, mhsMinusTestY, z1, rhsMinusTestX, rhsMinusTestY, z2);
-    if (scaledUncertainty <= Math::FAbs(det))
+    if (scaledUncertainty <= MathType::FAbs(det))
     {
         if (0 < det)
             return CircumcircleQueryType::Inside;

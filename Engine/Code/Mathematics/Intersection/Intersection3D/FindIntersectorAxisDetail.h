@@ -15,7 +15,7 @@
 #include "Mathematics/Intersection/Flags/ContactSide.h"
 
 template <typename Real>
-Mathematics::FindIntersectorAxis<Real>::FindIntersectorAxis(const Vector3& axis, const SegmentType& segment, const Triangle3& triangle, const Vector3& velocity, Real tmax)
+Mathematics::FindIntersectorAxis<Real>::FindIntersectorAxis(const Vector3Type& axis, const SegmentType& segment, const Triangle3Type& triangle, const Vector3Type& velocity, Real tmax)
     : result{ false }, tFirst{}, tLast{ Math<Real>::maxReal }, side{}, cfgFinal0{}, cfgFinal1{}
 {
     const auto segmentCfgStart = GetConfiguration(axis, segment);
@@ -28,7 +28,7 @@ Mathematics::FindIntersectorAxis<Real>::FindIntersectorAxis(const Vector3& axis,
 }
 
 template <typename Real>
-Mathematics::FindIntersectorAxis<Real>::FindIntersectorAxis(const Vector3& axis, const SegmentType& segment, const Box3& box, const Vector3& velocity, Real tmax)
+Mathematics::FindIntersectorAxis<Real>::FindIntersectorAxis(const Vector3Type& axis, const SegmentType& segment, const Box3Type& box, const Vector3Type& velocity, Real tmax)
     : result{ false }, tFirst{}, tLast{ Math<Real>::maxReal }, side{}, cfgFinal0{}, cfgFinal1{}
 {
     const auto segmentCfgStart = GetConfiguration(axis, segment);
@@ -41,7 +41,7 @@ Mathematics::FindIntersectorAxis<Real>::FindIntersectorAxis(const Vector3& axis,
 }
 
 template <typename Real>
-Mathematics::FindIntersectorAxis<Real>::FindIntersectorAxis(const Vector3& axis, const Triangle3& triangle, const Box3& box, const Vector3& velocity, Real tmax)
+Mathematics::FindIntersectorAxis<Real>::FindIntersectorAxis(const Vector3Type& axis, const Triangle3Type& triangle, const Box3Type& box, const Vector3Type& velocity, Real tmax)
     : result{ false }, tFirst{}, tLast{ Math<Real>::maxReal }, side{}, cfgFinal0{}, cfgFinal1{}
 {
     const auto triangleCfgStart = GetConfiguration(axis, triangle);
@@ -53,7 +53,7 @@ Mathematics::FindIntersectorAxis<Real>::FindIntersectorAxis(const Vector3& axis,
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 template <typename Real>
-Mathematics::FindIntersectorAxis<Real>::FindIntersectorAxis(const Vector3& axis, const Box3& box0, const Box3& box1, const Vector3& velocity, Real tmax)
+Mathematics::FindIntersectorAxis<Real>::FindIntersectorAxis(const Vector3Type& axis, const Box3Type& box0, const Box3Type& box1, const Vector3Type& velocity, Real tmax)
     : result{ false }, tFirst{}, tLast{ Math<Real>::maxReal }, side{}, cfgFinal0{}, cfgFinal1{}
 {
     const auto box0CfgStart = GetConfiguration(axis, box0);
@@ -124,9 +124,9 @@ Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Rea
 }
 
 template <typename Real>
-Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Real>::GetConfiguration(const Vector3& axis, const SegmentType& segment)
+Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Real>::GetConfiguration(const Vector3Type& axis, const SegmentType& segment)
 {
-    IntersectorConfiguration cfg{};
+    IntersectorConfigurationType cfg{};
 
     std::array<Real, 2> dot{ Vector3Tools<Real>::DotProduct(axis, segment.at(0)), Vector3Tools<Real>::DotProduct(axis, segment.at(1)) };
 
@@ -158,9 +158,9 @@ Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Rea
 }
 
 template <typename Real>
-Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Real>::GetConfiguration(const Vector3& axis, const Triangle3& triangle)
+Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Real>::GetConfiguration(const Vector3Type& axis, const Triangle3Type& triangle)
 {
-    IntersectorConfiguration cfg{};
+    IntersectorConfigurationType cfg{};
 
     // 查找顶点到潜在分离轴上的投影。
     auto d0 = Vector3Tools<Real>::DotProduct(axis, triangle.GetVertex(0));
@@ -286,7 +286,7 @@ Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Rea
 }
 
 template <typename Real>
-Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Real>::GetConfiguration(const Vector3& axis, const Box3& box)
+Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Real>::GetConfiguration(const Vector3Type& axis, const Box3Type& box)
 {
     // IntersectorConfiguration.mIndex的坐标排序方案的说明。
     // 顶点数（向上/向下）与范围的符号（仅在向后映射中很重要）
@@ -303,7 +303,7 @@ Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Rea
     // 当它在“相交配置”中返回排序时，也保证它是有序的。
     // （如果有4个顶点，则将按照将创建一个框（例如0,1,3,2）的顺序进行保证）
 
-    IntersectorConfiguration cfg{};
+    IntersectorConfigurationType cfg{};
 
     std::array<Real, 3> axes{ Vector3Tools<Real>::DotProduct(axis, box.GetAxis(0)),
                               Vector3Tools<Real>::DotProduct(axis, box.GetAxis(1)),
@@ -584,7 +584,7 @@ Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Rea
 }
 
 template <typename Real>
-void Mathematics::FindIntersectorAxis<Real>::Find(const Vector3& axis, const Vector3& velocity, const IntersectorConfiguration& cfg0Start, const IntersectorConfiguration& cfg1Start, Real tmax) noexcept
+void Mathematics::FindIntersectorAxis<Real>::Find(const Vector3Type& axis, const Vector3Type& velocity, const IntersectorConfigurationType& cfg0Start, const IntersectorConfigurationType& cfg1Start, Real tmax) noexcept
 {
     // 等速分离轴测试。 配置cfg0Start和cfg1Start是当前的潜在联系配置，而cfg0Final和cfg1Final是改进的配置。
     auto t = Math<Real>::GetValue(0);

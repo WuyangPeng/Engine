@@ -27,7 +27,7 @@ namespace Mathematics
         using Vector2 = Algebra::Vector2<Real>;
         using Vector2Container = std::vector<Vector2>;
         using OrientedBox2 = Algebra::OrientedBox2<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         ContOrientedBox2() noexcept;

@@ -14,9 +14,9 @@
 #include "Slerp.h"
 #include "Mathematics/Base/MathDetail.h"
 
-template <typename T, int N>
+template <typename T, size_t N>
 requires(N >= 2)
-NODISCARD std::array<T, N> Mathematics::Slerp(T t, const std::array<T, N>& q0, const std::array<T, N>& q1)
+std::array<T, N> Mathematics::Slerp(T t, const std::array<T, N>& q0, const std::array<T, N>& q1)
 {
     T cosA{};
     for (auto i = 0; i < N; ++i)
@@ -34,9 +34,9 @@ NODISCARD std::array<T, N> Mathematics::Slerp(T t, const std::array<T, N>& q0, c
     return result;
 }
 
-template <typename T, int N>
+template <typename T, size_t N>
 requires(N >= 2)
-NODISCARD std::array<T, N> Mathematics::Slerp(T t, const std::array<T, N>& q0, const std::array<T, N>& q1, T cosA)
+std::array<T, N> Mathematics::Slerp(T t, const std::array<T, N>& q0, const std::array<T, N>& q1, T cosA)
 {
     auto f = ChebyshevRatiosUsingCosAngle<T>(t, cosA);
 
@@ -49,9 +49,9 @@ NODISCARD std::array<T, N> Mathematics::Slerp(T t, const std::array<T, N>& q0, c
     return result;
 }
 
-template <typename T, int N>
+template <typename T, size_t N>
 requires(N >= 2)
-NODISCARD std::array<T, N> Mathematics::Slerp(T t, const std::array<T, N>& q0, const std::array<T, N>& q1, const std::array<T, N>& qh, T cosAH)
+std::array<T, N> Mathematics::Slerp(T t, const std::array<T, N>& q0, const std::array<T, N>& q1, const std::array<T, N>& qh, T cosAH)
 {
     std::array<T, 2> f{};
     std::array<T, N> result{};

@@ -27,32 +27,32 @@ namespace Mathematics
         using ClassType = StaticTestIntersectorTriangle3Cylinder3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Triangle3 = Triangle3<Real>;
-        using Cylinder3 = Cylinder3<Real>;
-        using Vector2 = Vector2<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Triangle3Type = Triangle3<Real>;
+        using Cylinder3Type = Cylinder3<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorTriangle3Cylinder3(const Triangle3& triangle, const Cylinder3& cylinder, const Real epsilon = Math::GetZeroTolerance());
+        StaticTestIntersectorTriangle3Cylinder3(const Triangle3Type& triangle, const Cylinder3Type& cylinder, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Triangle3 GetTriangle() const noexcept;
-        NODISCARD Cylinder3 GetCylinder() const noexcept;
+        NODISCARD Triangle3Type GetTriangle() const noexcept;
+        NODISCARD Cylinder3Type GetCylinder() const noexcept;
 
     private:
         void Test();
 
     private:
-        NODISCARD bool DiskOverlapsPoint(const Vector2& q) const;
-        NODISCARD bool DiskOverlapsSegment(const Vector2& q0, const Vector2& q1) const;
-        NODISCARD bool DiskOverlapsPolygon(const std::vector<Vector2>& q) const;
+        NODISCARD bool DiskOverlapsPoint(const Vector2Type& q) const;
+        NODISCARD bool DiskOverlapsSegment(const Vector2Type& q0, const Vector2Type& q1) const;
+        NODISCARD bool DiskOverlapsPolygon(const std::vector<Vector2Type>& q) const;
 
     private:
-        Triangle3 triangle;
-        Cylinder3 cylinder;
+        Triangle3Type triangle;
+        Cylinder3Type cylinder;
     };
 }
 

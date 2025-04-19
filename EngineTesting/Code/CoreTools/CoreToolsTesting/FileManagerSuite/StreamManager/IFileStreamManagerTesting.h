@@ -38,8 +38,8 @@ namespace CoreTools
         void IFileStreamManagerDeleteBackupFileTest();
         void SeparateTest();
 
-        static NODISCARD String GetIFileStreamFileName();
-        static NODISCARD String GetIFileStreamFileContent();
+        NODISCARD static String GetIFileStreamFileName();
+        NODISCARD static String GetIFileStreamFileContent();
 
         void BackupFileTest(const String& fileStreamFileContent, const IFileStreamManager& manager);
         void StreamTest(IFileStreamManager& manager);

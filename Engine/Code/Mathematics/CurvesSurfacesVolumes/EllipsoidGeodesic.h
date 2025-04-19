@@ -25,7 +25,7 @@ namespace Mathematics
 
         using ClassType = EllipsoidGeodesic<Real>;
         using ParentType = RiemannianGeodesic<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         EllipsoidGeodesic(Real xExtent, Real yExtent, Real zExtent);

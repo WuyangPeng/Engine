@@ -27,26 +27,26 @@ namespace Mathematics
     public:
         using ClassType = Vector2Orthonormalize<Real, Robust>;
 
-        using Math = Math<Real>;
-        using Vector2 = Vector2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
+        using MathType = Math<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
 
     public:
         // Gram-Schmidt正交化.
         // 以线性无关的向量U和V，来计算一个正交组（单位长度，相互垂直）。
-        Vector2Orthonormalize(const Vector2& lhs, const Vector2& rhs, const Real epsilon = Math::GetZeroTolerance());
+        Vector2Orthonormalize(const Vector2Type& lhs, const Vector2Type& rhs, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD const Vector2 GetUVector() const noexcept;
-        NODISCARD const Vector2 GetVVector() const noexcept;
+        NODISCARD const Vector2Type GetUVector() const noexcept;
+        NODISCARD const Vector2Type GetVVector() const noexcept;
 
     private:
         void Generate();
 
     private:
-        Vector2 uVector;
-        Vector2 vVector;
+        Vector2Type uVector;
+        Vector2Type vVector;
         Real epsilon;
     };
 

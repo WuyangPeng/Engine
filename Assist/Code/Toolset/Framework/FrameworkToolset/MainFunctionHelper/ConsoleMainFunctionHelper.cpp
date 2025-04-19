@@ -17,7 +17,7 @@
 
 CLASS_INVARIANT_STUB_DEFINE(FrameworkToolset, ConsoleMainFunctionHelper)
 
-namespace FrameworkToolset
+namespace Framework
 {
     template class Framework::ConsoleMainFunctionHelper<Framework::ConsoleFrameBuild, Framework::ConsoleProcessInterface>;
 }

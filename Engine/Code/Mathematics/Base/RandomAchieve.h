@@ -35,7 +35,7 @@ Real Mathematics::Random<Real>::UnitRandom(uint32_t seed)
 
     const auto ratio = (static_cast<Real>(randomDistribution(generator))) / (static_cast<Real>(RAND_MAX));
 
-    MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= ratio && ratio <= Math::GetValue(1), "ratio值必须在区间[0,1]！\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= ratio && ratio <= MathType::GetValue(1), "ratio值必须在区间[0,1]！\n");
 
     return ratio;
 }
@@ -44,9 +44,9 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::Random<Real>::SymmetricRandom(uint32_t seed)
 {
-    const auto ratio = (Math::GetValue(2) * UnitRandom(seed)) - Math::GetValue(1);
+    const auto ratio = (MathType::GetValue(2) * UnitRandom(seed)) - MathType::GetValue(1);
 
-    MATHEMATICS_ASSERTION_3(Math::GetValue(-1) <= ratio && ratio <= Math::GetValue(1), "ratio值必须在区间[-1,1]！\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(-1) <= ratio && ratio <= MathType::GetValue(1), "ratio值必须在区间[-1,1]！\n");
 
     return ratio;
 }

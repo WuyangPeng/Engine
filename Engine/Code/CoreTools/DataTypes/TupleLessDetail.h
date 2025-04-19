@@ -31,7 +31,7 @@ bool CoreTools::TupleLess<Dimension, Type>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <int Dimension, typename Type>
-bool CoreTools::TupleLess<Dimension, Type>::operator()(const Tuple& lhs, const Tuple& rhs) const
+bool CoreTools::TupleLess<Dimension, Type>::operator()(const TupleType& lhs, const TupleType& rhs) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 

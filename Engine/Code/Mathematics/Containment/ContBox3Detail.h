@@ -35,22 +35,22 @@ bool Mathematics::ContBox3<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::ContAlignedBox(const Points& points)
+typename Mathematics::ContBox3<Real>::Box3Type Mathematics::ContBox3<Real>::ContAlignedBox(const Points& points)
 {
     const auto aabb = Vector3Tools<Real>::ComputeExtremes(points);
-    auto halfDiagonal = Math::GetRational(1, 2) * (aabb.GetMaxPoint() - aabb.GetMinPoint());
+    auto halfDiagonal = MathType::GetRational(1, 2) * (aabb.GetMaxPoint() - aabb.GetMinPoint());
 
-    return Box3{ Math::GetRational(1, 2) * (aabb.GetMinPoint() + aabb.GetMaxPoint()),
-                 Vector3::GetUnitX(),
-                 Vector3::GetUnitY(),
-                 Vector3::GetUnitZ(),
+    return Box3Type{ MathType::GetRational(1, 2) * (aabb.GetMinPoint() + aabb.GetMaxPoint()),
+                 Vector3Type::GetUnitX(),
+                 Vector3Type::GetUnitY(),
+                 Vector3Type::GetUnitZ(),
                  halfDiagonal[0],
                  halfDiagonal[1],
                  halfDiagonal[2] };
 }
 
 template <typename Real>
-typename Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::ContOrientedBox(const Points& points)
+typename Mathematics::ContBox3<Real>::Box3Type Mathematics::ContBox3<Real>::ContOrientedBox(const Points& points)
 {
     const GaussPointsFit3<Real> gaussPointsFit3{ points };
     const auto box = gaussPointsFit3.GetBox3();
@@ -89,19 +89,19 @@ typename Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::ContOrie
     const auto thirdBoundary = std::minmax_element(thirdDotCollection.begin(), thirdDotCollection.end());
 
     auto center = box.GetCenter() +
-                  (Math::GetRational(1, 2) * (*firstBoundary.first + *firstBoundary.second) * box.GetAxis0() +
-                   Math::GetRational(1, 2) * (*secondBoundary.first + *secondBoundary.second) * box.GetAxis1() +
-                   Math::GetRational(1, 2) * (*thirdBoundary.first + *thirdBoundary.second) * box.GetAxis2());
+                  (MathType::GetRational(1, 2) * (*firstBoundary.first + *firstBoundary.second) * box.GetAxis0() +
+                   MathType::GetRational(1, 2) * (*secondBoundary.first + *secondBoundary.second) * box.GetAxis1() +
+                   MathType::GetRational(1, 2) * (*thirdBoundary.first + *thirdBoundary.second) * box.GetAxis2());
 
-    auto firstExtent = (*firstBoundary.second - *firstBoundary.first) * Math::GetRational(1, 2);
-    auto secondExtent = (*secondBoundary.second - *secondBoundary.first) * Math::GetRational(1, 2);
-    auto thirdExtent = (*thirdBoundary.second - *thirdBoundary.first) * Math::GetRational(1, 2);
+    auto firstExtent = (*firstBoundary.second - *firstBoundary.first) * MathType::GetRational(1, 2);
+    auto secondExtent = (*secondBoundary.second - *secondBoundary.first) * MathType::GetRational(1, 2);
+    auto thirdExtent = (*thirdBoundary.second - *thirdBoundary.first) * MathType::GetRational(1, 2);
 
-    return Box3{ center, box.GetAxis0(), box.GetAxis1(), box.GetAxis2(), firstExtent, secondExtent, thirdExtent };
+    return Box3Type{ center, box.GetAxis0(), box.GetAxis1(), box.GetAxis2(), firstExtent, secondExtent, thirdExtent };
 }
 
 template <typename Real>
-bool Mathematics::ContBox3<Real>::InBox(const Vector3& point, const Box3& box)
+bool Mathematics::ContBox3<Real>::InBox(const Vector3Type& point, const Box3Type& box)
 {
     auto diff = point - box.GetCenter();
     auto firstCoeff = Vector3Tools<Real>::DotProduct(diff, box.GetAxis0());
@@ -123,31 +123,31 @@ bool Mathematics::ContBox3<Real>::InBox(const Vector3& point, const Box3& box)
 }
 
 template <typename Real>
-typename Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::MergeBoxes(const Box3& lhs, const Box3& rhs)
+typename Mathematics::ContBox3<Real>::Box3Type Mathematics::ContBox3<Real>::MergeBoxes(const Box3Type& lhs, const Box3Type& rhs)
 {
     // 在包围盒中心的第一个猜想。输入包围盒顶点投影到确定的平均包围盒的轴，
     // 此值将在后面进行更新。
-    auto center = Math::GetRational(1, 2) * (lhs.GetCenter() + rhs.GetCenter());
+    auto center = MathType::GetRational(1, 2) * (lhs.GetCenter() + rhs.GetCenter());
 
     // 一个包围盒的轴，就像一个列矩阵形成一个旋转矩阵。
     // 输入包围盒的轴被转换为四元数。
     // 计算平均四元数，然后标准化为单位长度。
     // 结果为具有t值为1/2的两个输入四元数的球面线性插值。
     // 结果被转换回旋转矩阵和它的列被选择作为合并包围盒的轴。
-    std::vector<Vector3> lhsRotationColumn{ lhs.GetAxis0(), lhs.GetAxis1(), lhs.GetAxis2() };
+    std::vector<Vector3Type> lhsRotationColumn{ lhs.GetAxis0(), lhs.GetAxis1(), lhs.GetAxis2() };
 
-    std::vector<Vector3> rhsRotationColumn{ rhs.GetAxis0(), rhs.GetAxis1(), rhs.GetAxis2() };
+    std::vector<Vector3Type> rhsRotationColumn{ rhs.GetAxis0(), rhs.GetAxis1(), rhs.GetAxis2() };
 
     const Quaternion<Real> lhsQuaternion{ lhsRotationColumn };
     Quaternion<Real> rhsQuaternion{ rhsRotationColumn };
 
-    if (Dot(lhsQuaternion, rhsQuaternion) < Math::GetValue(0))
+    if (Dot(lhsQuaternion, rhsQuaternion) < MathType::GetValue(0))
     {
         rhsQuaternion = -rhsQuaternion;
     }
 
     auto sumQuaternion = lhsQuaternion + rhsQuaternion;
-    auto invLength = Math::InvSqrt(Dot(sumQuaternion, sumQuaternion));
+    auto invLength = MathType::InvSqrt(Dot(sumQuaternion, sumQuaternion));
     sumQuaternion = invLength * sumQuaternion;
 
     const auto sumRotationColumn = sumQuaternion.ToRotationColumnVector3();
@@ -194,15 +194,15 @@ typename Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::MergeBox
 
     // [min,max] 为合并后的包围盒的轴在坐标系中为轴对齐包围盒。
     // 更新当前包围盒中心成为新包围盒的中心。计算基于新的中心的范围。
-    center += Math::GetRational(1, 2) * (*firstBoundary.first + *firstBoundary.second) * sumRotationColumn.at(0) +
-              Math::GetRational(1, 2) * (*secondBoundary.first + *secondBoundary.second) * sumRotationColumn.at(1) +
-              Math::GetRational(1, 2) * (*thirdBoundary.first + *thirdBoundary.second) * sumRotationColumn.at(2);
+    center += MathType::GetRational(1, 2) * (*firstBoundary.first + *firstBoundary.second) * sumRotationColumn.at(0) +
+              MathType::GetRational(1, 2) * (*secondBoundary.first + *secondBoundary.second) * sumRotationColumn.at(1) +
+              MathType::GetRational(1, 2) * (*thirdBoundary.first + *thirdBoundary.second) * sumRotationColumn.at(2);
 
-    auto firstExtent = (*firstBoundary.second - *firstBoundary.first) * Math::GetRational(1, 2);
-    auto secondExtent = (*secondBoundary.second - *secondBoundary.first) * Math::GetRational(1, 2);
-    auto thirdExtent = (*thirdBoundary.second - *thirdBoundary.first) * Math::GetRational(1, 2);
+    auto firstExtent = (*firstBoundary.second - *firstBoundary.first) * MathType::GetRational(1, 2);
+    auto secondExtent = (*secondBoundary.second - *secondBoundary.first) * MathType::GetRational(1, 2);
+    auto thirdExtent = (*thirdBoundary.second - *thirdBoundary.first) * MathType::GetRational(1, 2);
 
-    return Box3{ center, sumRotationColumn.at(0), sumRotationColumn.at(1), sumRotationColumn.at(2), firstExtent, secondExtent, thirdExtent };
+    return Box3Type{ center, sumRotationColumn.at(0), sumRotationColumn.at(1), sumRotationColumn.at(2), firstExtent, secondExtent, thirdExtent };
 }
 
 #endif  // MATHEMATICS_CONTAINMENT_CONT_BOX3_DETAIL_H

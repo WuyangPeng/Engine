@@ -129,7 +129,7 @@ typename Mathematics::Polyhedron3<Real>::IndicesType Mathematics::Polyhedron3<Re
 }
 
 template <typename Real>
-void Mathematics::Polyhedron3<Real>::SetVertex(int index, const Vector3& vertex)
+void Mathematics::Polyhedron3<Real>::SetVertex(int index, const Vector3Type& vertex)
 {
     MATHEMATICS_CLASS_IS_VALID_3;
 
@@ -137,11 +137,11 @@ void Mathematics::Polyhedron3<Real>::SetVertex(int index, const Vector3& vertex)
 }
 
 template <typename Real>
-typename Mathematics::Polyhedron3<Real>::Vector3 Mathematics::Polyhedron3<Real>::ComputeVertexAverage() const
+typename Mathematics::Polyhedron3<Real>::Vector3Type Mathematics::Polyhedron3<Real>::ComputeVertexAverage() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
 
-    Vector3 average{};
+    Vector3Type average{};
 
     for (const auto& value : vertices)
     {
@@ -158,7 +158,7 @@ Real Mathematics::Polyhedron3<Real>::ComputeSurfaceArea() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
 
-    auto surfaceArea = Math::GetValue(0);
+    auto surfaceArea = MathType::GetValue(0);
 
     for (auto i = 0; i < GetNumTriangles(); ++i)
     {
@@ -171,11 +171,11 @@ Real Mathematics::Polyhedron3<Real>::ComputeSurfaceArea() const
         const auto v2 = indices.at(index2);
         const auto edge0 = vertices.at(v1) - vertices.at(v0);
         const auto edge1 = vertices.at(v2) - vertices.at(v0);
-        const auto cross = Vector3Tools::CrossProduct(edge0, edge1);
-        surfaceArea += Vector3Tools::GetLength(cross);
+        const auto cross = Vector3ToolsType::CrossProduct(edge0, edge1);
+        surfaceArea += Vector3ToolsType::GetLength(cross);
     }
 
-    surfaceArea *= Math::GetRational(1, 2);
+    surfaceArea *= MathType::GetRational(1, 2);
 
     return surfaceArea;
 }
@@ -185,7 +185,7 @@ Real Mathematics::Polyhedron3<Real>::ComputeVolume() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
 
-    auto volume = Math::GetValue(0);
+    auto volume = MathType::GetValue(0);
 
     for (auto i = 0; i < GetNumTriangles(); ++i)
     {
@@ -197,12 +197,12 @@ Real Mathematics::Polyhedron3<Real>::ComputeVolume() const
         const auto v1 = indices.at(index1);
         const auto v2 = indices.at(index2);
 
-        const auto cross = Vector3Tools::CrossProduct(vertices.at(v1), vertices.at(v2));
+        const auto cross = Vector3ToolsType::CrossProduct(vertices.at(v1), vertices.at(v2));
 
-        volume += Vector3Tools::DotProduct(vertices.at(v0), cross);
+        volume += Vector3ToolsType::DotProduct(vertices.at(v0), cross);
     }
 
-    volume /= Math::GetValue(6);
+    volume /= MathType::GetValue(6);
 
     return volume;
 }

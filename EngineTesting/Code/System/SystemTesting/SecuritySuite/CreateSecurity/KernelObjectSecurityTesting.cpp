@@ -51,6 +51,8 @@ void System::KernelObjectSecurityTesting::DoKernelObjectSecurityTest(WindowsHand
 
 void System::KernelObjectSecurityTesting::SetKernelObjectSecurityTest(WindowsHandle tokenHandle, SecurityRequestedInformation securityRequestedInformation)
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     WindowsDWord neededLength{ 0 };
     ASSERT_FALSE(GetSystemKernelObjectSecurity(tokenHandle, securityRequestedInformation, nullptr, 0, &neededLength));
 
@@ -61,4 +63,6 @@ void System::KernelObjectSecurityTesting::SetKernelObjectSecurityTest(WindowsHan
     ASSERT_EQUAL(newNeededLength, neededLength);
 
     ASSERT_TRUE(SetSystemKernelObjectSecurity(tokenHandle, securityRequestedInformation, buffer.data()));
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }

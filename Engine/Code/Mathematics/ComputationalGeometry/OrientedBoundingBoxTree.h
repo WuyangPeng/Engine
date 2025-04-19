@@ -43,8 +43,8 @@ namespace Mathematics
 
         using Vector3 = Algebra::Vector3<Real>;
         using Vector3Container = std::vector<Vector3>;
-        using OrientedBoundingBoxNode = OrientedBoundingBoxNode<Real>;
-        using NodeContainer = std::vector<OrientedBoundingBoxNode>;
+        using OrientedBoundingBoxNodeType = OrientedBoundingBoxNode<Real>;
+        using NodeContainer = std::vector<OrientedBoundingBoxNodeType>;
         using PartitionContainer = std::vector<int>;
 
     public:

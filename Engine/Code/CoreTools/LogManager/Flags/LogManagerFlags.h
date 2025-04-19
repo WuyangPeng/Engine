@@ -24,7 +24,7 @@ namespace CoreTools
         Mathematics,  // 数学
         SoundEffect,  // 音效
         InputOutput,  // 输入输出
-        ResourceManager,  // 资源管理
+    	ResourceManager,  // 资源管理
         Rendering,  // 渲染
         Physics,  // 物理
         Imagics,  // 图像分析

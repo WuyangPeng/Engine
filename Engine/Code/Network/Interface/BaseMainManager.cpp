@@ -17,7 +17,7 @@
 #include "CoreTools/Helper/MainFunctionMacro.h"
 #include "CoreTools/Threading/Mutex.h"
 
-SINGLETON_GET_PTR_DEFINE(CoreTools, EntityManager);
+SINGLETON_GET_PTR_DEFINE(Network, BaseMainManager);
 
 Network::BaseMainManager::BaseMainManagerUniquePtr Network::BaseMainManager::baseMainManager{};
 

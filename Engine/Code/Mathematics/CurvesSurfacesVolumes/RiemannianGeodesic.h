@@ -23,7 +23,7 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = RiemannianGeodesic<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using RefineCallbackFunction = void (*)();
 
     public:
@@ -81,7 +81,7 @@ namespace Mathematics
         Real derivativeStep{ static_cast<Real>(0.0001) };
         int subdivisions{ 7 };
         int refinements{ 8 };
-        Real searchRadius{ Math::GetValue(1) };
+        Real searchRadius{ MathType::GetValue(1) };
 
         RefineCallbackFunction refineCallback;
 

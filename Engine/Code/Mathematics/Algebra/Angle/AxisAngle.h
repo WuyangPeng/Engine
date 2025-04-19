@@ -25,23 +25,23 @@ namespace Mathematics::Algebra
     public:
         using ClassType = AxisAngle<N, Real>;
 
-        using Vector = Vector<N, Real>;
+        using VectorType = Vector<N, Real>;
 
     public:
         AxisAngle() noexcept;
-        AxisAngle(const Vector& axis, Real angle) noexcept;
+        AxisAngle(const VectorType& axis, Real angle) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector GetAxis() const noexcept;
+        NODISCARD VectorType GetAxis() const noexcept;
         NODISCARD Real GetAngle() const noexcept;
 
-        void SetAxis(const Vector& aAxis) noexcept;
+        void SetAxis(const VectorType& aAxis) noexcept;
         void SetAngle(Real aAngle) noexcept;
         void MakeAxisZero();
 
     private:
-        Vector axis;
+        VectorType axis;
         Real angle;
     };
 

@@ -85,11 +85,11 @@ int Mathematics::LevenbergMarquardtMinimizer<T>::GetNumFDimensions() const noexc
 }
 
 template <typename T>
-typename Mathematics::LevenbergMarquardtMinimizer<T>::LevenbergMarquardtMinimizerResult Mathematics::LevenbergMarquardtMinimizer<T>::operator()(const DVector& p0, int maxIterations, T updateLengthTolerance, T errorDifferenceTolerance, T lambdaFactor, T lambdaAdjust, int maxAdjustments)
+typename Mathematics::LevenbergMarquardtMinimizer<T>::LevenbergMarquardtMinimizerResultType Mathematics::LevenbergMarquardtMinimizer<T>::operator()(const DVector& p0, int maxIterations, T updateLengthTolerance, T errorDifferenceTolerance, T lambdaFactor, T lambdaAdjust, int maxAdjustments)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    LevenbergMarquardtMinimizerResult result{};
+    LevenbergMarquardtMinimizerResultType result{};
     result.SetMinLocation(p0);
     result.SetMinError(std::numeric_limits<T>::max());
     result.SetMinErrorDifference(std::numeric_limits<T>::max());
@@ -104,7 +104,7 @@ typename Mathematics::LevenbergMarquardtMinimizer<T>::LevenbergMarquardtMinimize
     {
         maxAdjustments = 1;
         lambdaFactor = T{};
-        lambdaAdjust = Math::GetValue(1);
+        lambdaAdjust = MathType::GetValue(1);
     }
 
     /// 作为一个简单的预防措施，确保公差为非负。
@@ -194,7 +194,7 @@ void Mathematics::LevenbergMarquardtMinimizer<T>::ComputeLinearSystemInputs(cons
 }
 
 template <typename T>
-std::pair<bool, bool> Mathematics::LevenbergMarquardtMinimizer<T>::DoIteration(DVector const& pCurrent, T lambdaFactor, T updateLengthTolerance, T errorDifferenceTolerance, DVector& pNext, LevenbergMarquardtMinimizerResult& result)
+std::pair<bool, bool> Mathematics::LevenbergMarquardtMinimizer<T>::DoIteration(DVector const& pCurrent, T lambdaFactor, T updateLengthTolerance, T errorDifferenceTolerance, DVector& pNext, LevenbergMarquardtMinimizerResultType& result)
 {
     ComputeLinearSystemInputs(pCurrent, lambdaFactor);
     if (!decomposer.Factor(jtj))

@@ -60,7 +60,11 @@
 
     #ifndef SYSTEM_CPP_STANDARD
 
-        #if defined(__cpp_if_constexpr) && (201606 <= __cpp_if_constexpr)
+        #if defined(__cpp_if_constexpr) && (202002L <= __cplusplus)
+
+            #define SYSTEM_CPP_STANDARD 20
+
+        #elif (201606L <= __cplusplus)
 
             #define SYSTEM_CPP_STANDARD 17
 

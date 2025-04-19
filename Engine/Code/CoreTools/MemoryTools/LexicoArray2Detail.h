@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 template <typename Iter>
-CoreTools::LexicoArray2<true, Iter>::LexicoArray2(int numRows, int numColumns, const SpanIterator& matrix) noexcept
+CoreTools::LexicoArray2<true, Iter>::LexicoArray2(int numRows, int numColumns, const SpanIteratorType& matrix) noexcept
     : numRows{ numRows },
       numColumns{ numColumns },
       matrix{ matrix }
@@ -100,7 +100,7 @@ void CoreTools::LexicoArray2<true, Iter>::FillZero()
 }
 
 template <typename Iter>
-CoreTools::LexicoArray2<false, Iter>::LexicoArray2(int numRows, int numColumns, const SpanIterator& matrix) noexcept
+CoreTools::LexicoArray2<false, Iter>::LexicoArray2(int numRows, int numColumns, const SpanIteratorType& matrix) noexcept
     : numRows{ numRows },
       numColumns{ numColumns },
       matrix{ matrix }
@@ -184,7 +184,7 @@ void CoreTools::LexicoArray2<false, Iter>::FillZero()
 }
 
 template <typename Iter, int NumRows, int NumCols>
-CoreTools::LexicoArray2<true, Iter, NumRows, NumCols>::LexicoArray2(const SpanIterator& matrix) noexcept
+CoreTools::LexicoArray2<true, Iter, NumRows, NumCols>::LexicoArray2(const SpanIteratorType& matrix) noexcept
     : matrix{ matrix }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -264,7 +264,7 @@ void CoreTools::LexicoArray2<true, Iter, NumRows, NumColumns>::FillZero()
 }
 
 template <typename Iter, int NumRows, int NumCols>
-CoreTools::LexicoArray2<false, Iter, NumRows, NumCols>::LexicoArray2(const SpanIterator& matrix) noexcept
+CoreTools::LexicoArray2<false, Iter, NumRows, NumCols>::LexicoArray2(const SpanIteratorType& matrix) noexcept
     : matrix{ matrix }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;

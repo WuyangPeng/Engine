@@ -26,22 +26,22 @@ namespace Mathematics
     public:
         using ClassType = FindIntersectorAxis<Real>;
 
-        using Vector3 = Vector3<Real>;
-        using Triangle3 = Triangle3<Real>;
-        using Box3 = Box3<Real>;
-        using SegmentType = std::array<Vector3, 2>;
-        using IntersectorConfiguration = IntersectorConfiguration<Real>;
+        using Vector3Type = Vector3<Real>;
+        using Triangle3Type = Triangle3<Real>;
+        using Box3Type = Box3<Real>;
+        using SegmentType = std::array<Vector3Type, 2>;
+        using IntersectorConfigurationType = IntersectorConfiguration<Real>;
 
     public:
         /// 查找查询投影区间的交集。 输入的速度是objectVelocity1 - objectVelocity0之差。
         /// 计算接触的第一次和最后一次，以及关于接触结构和投影（接触侧）顺序的信息。
-        FindIntersectorAxis(const Vector3& axis, const SegmentType& segment, const Triangle3& triangle, const Vector3& velocity, Real tmax);
+        FindIntersectorAxis(const Vector3Type& axis, const SegmentType& segment, const Triangle3Type& triangle, const Vector3Type& velocity, Real tmax);
 
-        FindIntersectorAxis(const Vector3& axis, const SegmentType& segment, const Box3& box, const Vector3& velocity, Real tmax);
+        FindIntersectorAxis(const Vector3Type& axis, const SegmentType& segment, const Box3Type& box, const Vector3Type& velocity, Real tmax);
 
-        FindIntersectorAxis(const Vector3& axis, const Triangle3& triangle, const Box3& box, const Vector3& velocity, Real tmax);
+        FindIntersectorAxis(const Vector3Type& axis, const Triangle3Type& triangle, const Box3Type& box, const Vector3Type& velocity, Real tmax);
 
-        FindIntersectorAxis(const Vector3& axis, const Box3& box0, const Box3& box1, const Vector3& velocity, Real tmax);
+        FindIntersectorAxis(const Vector3Type& axis, const Box3Type& box0, const Box3Type& box1, const Vector3Type& velocity, Real tmax);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -50,27 +50,27 @@ namespace Mathematics
         NODISCARD Real GetTLast() const noexcept;
 
         NODISCARD ContactSide Getside() const noexcept;
-        NODISCARD IntersectorConfiguration GetCfgFinal0() const noexcept;
-        NODISCARD IntersectorConfiguration GetCfgFinal1() const noexcept;
+        NODISCARD IntersectorConfigurationType GetCfgFinal0() const noexcept;
+        NODISCARD IntersectorConfigurationType GetCfgFinal1() const noexcept;
 
         // Configurations.
-        NODISCARD static IntersectorConfiguration GetConfiguration(const Vector3& axis, const SegmentType& segment);
+        NODISCARD static IntersectorConfigurationType GetConfiguration(const Vector3Type& axis, const SegmentType& segment);
 
-        NODISCARD static IntersectorConfiguration GetConfiguration(const Vector3& axis, const Triangle3& triangle);
+        NODISCARD static IntersectorConfigurationType GetConfiguration(const Vector3Type& axis, const Triangle3Type& triangle);
 
-        NODISCARD static IntersectorConfiguration GetConfiguration(const Vector3& axis, const Box3& box);
+        NODISCARD static IntersectorConfigurationType GetConfiguration(const Vector3Type& axis, const Box3Type& box);
 
     private:
         // 投影的低级查找查询。
-        void Find(const Vector3& axis, const Vector3& velocity, const IntersectorConfiguration& cfg0Start, const IntersectorConfiguration& cfg1Start, Real tmax) noexcept;
+        void Find(const Vector3Type& axis, const Vector3Type& velocity, const IntersectorConfigurationType& cfg0Start, const IntersectorConfigurationType& cfg1Start, Real tmax) noexcept;
 
     private:
         bool result;
         Real tFirst;
         Real tLast;
         ContactSide side;
-        IntersectorConfiguration cfgFinal0;
-        IntersectorConfiguration cfgFinal1;
+        IntersectorConfigurationType cfgFinal0;
+        IntersectorConfigurationType cfgFinal1;
     };
 }
 

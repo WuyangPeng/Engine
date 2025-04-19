@@ -17,7 +17,7 @@
 #include "Mathematics/Distance/DistanceBaseDetail.h"
 
 template <typename Real>
-Mathematics::DistanceLine3Rectangle3<Real>::DistanceLine3Rectangle3(const Line3& line, const Rectangle3& rectangle) noexcept
+Mathematics::DistanceLine3Rectangle3<Real>::DistanceLine3Rectangle3(const Line3Type& line, const Rectangle3Type& rectangle) noexcept
     : ParentType{}, line{ line }, rectangle{ rectangle }, rectCoord{}
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -58,35 +58,35 @@ typename Mathematics::DistanceLine3Rectangle3<Real>::DistanceResult Mathematics:
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     // 测试线是否与矩形相交。 如果是这样，则平方距离为零。
-    const auto crossProduct = Vector3Tools::CrossProduct(rectangle.GetAxis0(), rectangle.GetAxis1());
+    const auto crossProduct = Vector3ToolsType::CrossProduct(rectangle.GetAxis0(), rectangle.GetAxis1());
 
-    if (const auto dot = Vector3Tools::DotProduct(crossProduct, line.GetDirection());
-        Math::GetZeroTolerance() < Math::FAbs(dot))
+    if (const auto dot = Vector3ToolsType::DotProduct(crossProduct, line.GetDirection());
+        MathType::GetZeroTolerance() < MathType::FAbs(dot))
     {
         // 线和矩形不平行，因此线与矩形的平面相交。
         const auto diff = line.GetOrigin() - rectangle.GetCenter();
 
-        const auto vector3OrthonormalBasis = Vector3Tools::GenerateComplementBasis(line.GetDirection());
+        const auto vector3OrthonormalBasis = Vector3ToolsType::GenerateComplementBasis(line.GetDirection());
         const auto uVector = vector3OrthonormalBasis.GetUVector();
         const auto vVector = vector3OrthonormalBasis.GetVVector();
-        const auto uVectorDotAxis0 = Vector3Tools::DotProduct(uVector, rectangle.GetAxis0());
-        const auto uVectorDotAxis1 = Vector3Tools::DotProduct(uVector, rectangle.GetAxis1());
-        const auto uVectorDotDiff = Vector3Tools::DotProduct(uVector, diff);
-        const auto vVectorDotAxis0 = Vector3Tools::DotProduct(vVector, rectangle.GetAxis0());
-        const auto vVectorDotAxis1 = Vector3Tools::DotProduct(vVector, rectangle.GetAxis1());
-        const auto vVectorDotDiff = Vector3Tools::DotProduct(vVector, diff);
-        const auto invDet = (Math::GetValue(1)) / (uVectorDotAxis0 * vVectorDotAxis1 - uVectorDotAxis1 * vVectorDotAxis0);
+        const auto uVectorDotAxis0 = Vector3ToolsType::DotProduct(uVector, rectangle.GetAxis0());
+        const auto uVectorDotAxis1 = Vector3ToolsType::DotProduct(uVector, rectangle.GetAxis1());
+        const auto uVectorDotDiff = Vector3ToolsType::DotProduct(uVector, diff);
+        const auto vVectorDotAxis0 = Vector3ToolsType::DotProduct(vVector, rectangle.GetAxis0());
+        const auto vVectorDotAxis1 = Vector3ToolsType::DotProduct(vVector, rectangle.GetAxis1());
+        const auto vVectorDotDiff = Vector3ToolsType::DotProduct(vVector, diff);
+        const auto invDet = (MathType::GetValue(1)) / (uVectorDotAxis0 * vVectorDotAxis1 - uVectorDotAxis1 * vVectorDotAxis0);
 
         // 相交点的矩形坐标。
         const auto s0 = (vVectorDotAxis1 * uVectorDotDiff - uVectorDotAxis1 * vVectorDotDiff) * invDet;
         const auto s1 = (uVectorDotAxis0 * vVectorDotDiff - vVectorDotAxis0 * uVectorDotDiff) * invDet;
 
-        if (Math::FAbs(s0) <= rectangle.GetExtent0() && Math::FAbs(s1) <= rectangle.GetExtent1())
+        if (MathType::FAbs(s0) <= rectangle.GetExtent0() && MathType::FAbs(s1) <= rectangle.GetExtent1())
         {
             // 相交点的线参数。
-            const auto directionDotAxis0 = Vector3Tools::DotProduct(line.GetDirection(), rectangle.GetAxis0());
-            const auto directionDotAxis1 = Vector3Tools::DotProduct(line.GetDirection(), rectangle.GetAxis1());
-            const auto directionDotDiff = Vector3Tools::DotProduct(line.GetDirection(), diff);
+            const auto directionDotAxis0 = Vector3ToolsType::DotProduct(line.GetDirection(), rectangle.GetAxis0());
+            const auto directionDotAxis1 = Vector3ToolsType::DotProduct(line.GetDirection(), rectangle.GetAxis1());
+            const auto directionDotDiff = Vector3ToolsType::DotProduct(line.GetDirection(), diff);
             const auto lineParameter = s0 * directionDotAxis0 + s1 * directionDotAxis1 - directionDotDiff;
 
             // 相交点的矩形坐标。
@@ -98,20 +98,20 @@ typename Mathematics::DistanceLine3Rectangle3<Real>::DistanceResult Mathematics:
 
             const auto closestPoint1 = rectangle.GetCenter() + s0 * rectangle.GetAxis0() + s1 * rectangle.GetAxis1();
 
-            return DistanceResult{ Math::GetValue(0), Math::GetValue(0), closestPoint0, closestPoint1, lineParameter, Math::GetValue(0) };
+            return DistanceResult{ MathType::GetValue(0), MathType::GetValue(0), closestPoint0, closestPoint1, lineParameter, MathType::GetValue(0) };
         }
     }
 
-    Vector3 closestPoint0{};
-    Vector3 closestPoint1{};
+    Vector3Type closestPoint0{};
+    Vector3Type closestPoint1{};
     Real lineParameter{};
 
     /// （1）线不与矩形平行，且线和矩形平面的交点在矩形外部，或者（2）线和矩形平行。
     /// 无论如何，矩形上的最接近点在矩形的边缘上。 将线与矩形的所有四个边缘进行比较。
 
-    auto sqrDist = Math::maxReal;
+    auto sqrDist = MathType::maxReal;
     constexpr auto size = 2;
-    std::array<Vector3, size> scaledDir{ rectangle.GetExtent0() * rectangle.GetAxis0(), rectangle.GetExtent1() * rectangle.GetAxis1() };
+    std::array<Vector3Type, size> scaledDir{ rectangle.GetExtent0() * rectangle.GetAxis0(), rectangle.GetExtent1() * rectangle.GetAxis1() };
 
     for (auto outerIndex = 0; outerIndex < size; ++outerIndex)
     {
@@ -142,11 +142,11 @@ typename Mathematics::DistanceLine3Rectangle3<Real>::DistanceResult Mathematics:
         }
     }
 
-    return DistanceResult{ sqrDist, Math::GetValue(0), closestPoint0, closestPoint1, lineParameter, Math::GetValue(0) };
+    return DistanceResult{ sqrDist, MathType::GetValue(0), closestPoint0, closestPoint1, lineParameter, MathType::GetValue(0) };
 }
 
 template <typename Real>
-typename Mathematics::DistanceLine3Rectangle3<Real>::DistanceResult Mathematics::DistanceLine3Rectangle3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistanceLine3Rectangle3<Real>::DistanceResult Mathematics::DistanceLine3Rectangle3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

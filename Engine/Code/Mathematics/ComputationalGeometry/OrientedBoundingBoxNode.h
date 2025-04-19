@@ -36,11 +36,11 @@ namespace Mathematics
         NODISCARD int GetLeftChild() const noexcept;
         NODISCARD int GetRightChild() const noexcept;
 
-        NODISCARD void SetBox(const OrientedBox3& aBox) noexcept;
-        NODISCARD void SetMinIndex(int aMinIndex) noexcept;
-        NODISCARD void SetMaxIndex(int aMaxIndex) noexcept;
-        NODISCARD void SetLeftChild(int aLeftChild) noexcept;
-        NODISCARD void SetRightChild(int aRightChild) noexcept;
+        void SetBox(const OrientedBox3& aBox) noexcept;
+        void SetMinIndex(int aMinIndex) noexcept;
+        void SetMaxIndex(int aMaxIndex) noexcept;
+        void SetLeftChild(int aLeftChild) noexcept;
+        void SetRightChild(int aRightChild) noexcept;
 
     private:
         OrientedBox3 box;

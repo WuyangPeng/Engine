@@ -23,12 +23,12 @@ namespace Mathematics
     public:
         using ClassType = DistanceLine2Line2Tool<Real>;
 
-        using Math = Math<Real>;
-        using Vector2 = Vector2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
+        using MathType = Math<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
 
     public:
-        DistanceLine2Line2Tool(const Vector2& lhsOrigin, const Vector2& lhsDirection, const Vector2& rhsOrigin, const Vector2& rhsDirection);
+        DistanceLine2Line2Tool(const Vector2Type& lhsOrigin, const Vector2Type& lhsDirection, const Vector2Type& rhsOrigin, const Vector2Type& rhsDirection);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -47,7 +47,7 @@ namespace Mathematics
         NODISCARD Real GetOriginDifferenceDotDirectionAverage() const noexcept;
 
     private:
-        Vector2 originDifference;
+        Vector2Type originDifference;
         Real directionDot;
         Real originDifferenceDotLhsDirection;
         Real originDifferenceDotRhsDirection;

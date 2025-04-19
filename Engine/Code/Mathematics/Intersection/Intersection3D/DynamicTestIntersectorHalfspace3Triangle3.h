@@ -28,31 +28,31 @@ namespace Mathematics
         using ClassType = DynamicTestIntersectorHalfspace3Triangle3<Real>;
         using ParentType = DynamicIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Triangle3 = Triangle3<Real>;
-        using Plane3 = Plane3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Triangle3Type = Triangle3<Real>;
+        using Plane3Type = Plane3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        DynamicTestIntersectorHalfspace3Triangle3(const Plane3& halfspace,
-                                                  const Triangle3& triangle,
+        DynamicTestIntersectorHalfspace3Triangle3(const Plane3Type& halfspace,
+                                                  const Triangle3Type& triangle,
                                                   Real tmax,
-                                                  const Vector3& lhsVelocity,
-                                                  const Vector3& rhsVelocity,
-                                                  const Real epsilon = Math::GetZeroTolerance());
+                                                  const Vector3Type& lhsVelocity,
+                                                  const Vector3Type& rhsVelocity,
+                                                  const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Plane3 GetHalfspace() const noexcept;
-        NODISCARD Triangle3 GetTriangle() const noexcept;
+        NODISCARD Plane3Type GetHalfspace() const noexcept;
+        NODISCARD Triangle3Type GetTriangle() const noexcept;
 
     private:
         void Test();
 
     private:
-        Plane3 halfspace;
-        Triangle3 triangle;
+        Plane3Type halfspace;
+        Triangle3Type triangle;
     };
 }
 

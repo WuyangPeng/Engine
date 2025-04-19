@@ -13,6 +13,8 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
+#include <cstdarg>
+
 System::FormatStringMessageUseVaListAndLocalAllocTesting::FormatStringMessageUseVaListAndLocalAllocTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -61,7 +63,7 @@ void System::FormatStringMessageUseVaListAndLocalAllocTesting::FormatStringMessa
 
 void System::FormatStringMessageUseVaListAndLocalAllocTesting::FormatStringMessageUseArgumentsTest(WindowsHLocal& resultMessage, const TChar* message, va_list vaArguments)
 {
-    const auto size = FormatStringMessage(message, resultMessage, &vaArguments);
+    const auto size = System::FormatStringMessage(message, resultMessage, vaArguments);
     ASSERT_LESS(0u, size);
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(resultMessage, "FormatStringMessage Ê§°Ü¡£");
 

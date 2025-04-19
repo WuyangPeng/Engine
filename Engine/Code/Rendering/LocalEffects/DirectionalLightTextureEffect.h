@@ -28,7 +28,7 @@ namespace Rendering
         COPY_UNSHARED_TYPE_DECLARE(DirectionalLightTextureEffect);
         using ParentType = LightEffect;
 
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
         using Texture2DSharedPtr = std::shared_ptr<Texture2D>;
         using SamplerStateSharedPtr = std::shared_ptr<SamplerState>;
 

@@ -28,12 +28,12 @@ namespace Mathematics
     public:
         using ClassType = ConvexHull2<Real>;
         using ParentType = ConvexHull<Real>;
-        using Vector2 = Vector2<Real>;
-        using Vertices = std::vector<Vector2>;
-        using ConvexHull1 = ConvexHull1<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Vertices = std::vector<Vector2Type>;
+        using ConvexHull1Type = ConvexHull1<Real>;
         using String = System::String;
-        using IndicesType = ParentType::IndicesType;
-        using Math = Math<Real>;
+        using IndicesType = typename ParentType::IndicesType;
+        using MathType = Math<Real>;
 
     public:
         ConvexHull2(const Vertices& vertices, Real epsilon, QueryType queryType);
@@ -41,9 +41,9 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Vector2 GetLineOrigin() const noexcept;
-        NODISCARD Vector2 GetLineDirection() const noexcept;
-        NODISCARD ConvexHull1 GetConvexHull1() const;
+        NODISCARD Vector2Type GetLineOrigin() const noexcept;
+        NODISCARD Vector2Type GetLineDirection() const noexcept;
+        NODISCARD ConvexHull1Type GetConvexHull1() const;
 
         void LoadFile(const String& filename);
         void SaveFile(const String& filename) const;
@@ -51,8 +51,8 @@ namespace Mathematics
     private:
         class Edge;
 
-        using Query2 = Query2<Real>;
-        using Query2SharedPtr = std::shared_ptr<Query2>;
+        using Query2Type = Query2<Real>;
+        using Query2SharedPtr = std::shared_ptr<Query2Type>;
         using EdgeSharedPtr = std::shared_ptr<Edge>;
         using EdgeWeakPtr = std::weak_ptr<Edge>;
 
@@ -62,7 +62,7 @@ namespace Mathematics
         public:
             Edge(int32_t v0, int32_t v1);
 
-            NODISCARD LineQueryType GetSign(int32_t i, const Query2& query);
+            NODISCARD LineQueryType GetSign(int32_t i, const Query2Type& query);
             void Insert(const EdgeSharedPtr& adj0, const EdgeSharedPtr& adj1);
             void DeleteSelf();
             void DeleteAll();
@@ -86,8 +86,8 @@ namespace Mathematics
         Vertices sVertices;
         Query2SharedPtr query;
 
-        Vector2 lineOrigin;
-        Vector2 lineDirection;
+        Vector2Type lineOrigin;
+        Vector2Type lineDirection;
     };
 
     using ConvexHull2F = ConvexHull2<float>;

@@ -17,7 +17,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-Mathematics::Line3<Real>::Line3(const Vector3& origin, const Vector3& direction, Real epsilon) noexcept
+Mathematics::Line3<Real>::Line3(const Vector3Type& origin, const Vector3Type& direction, Real epsilon) noexcept
     : origin{ origin }, direction{ direction }, epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -67,7 +67,7 @@ Mathematics::Vector3<Real> Mathematics::Line3<Real>::GetDirection() const noexce
 }
 
 template <typename Real>
-Mathematics::Line3<Real> Mathematics::Line3<Real>::GetMove(Real t, const Vector3& velocity) const
+Mathematics::Line3<Real> Mathematics::Line3<Real>::GetMove(Real t, const Vector3Type& velocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

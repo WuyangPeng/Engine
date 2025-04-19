@@ -17,7 +17,7 @@
 #include "Mathematics/Objects2D/Box2Detail.h"
 
 template <typename Real>
-Mathematics::DistancePoint2Box2<Real>::DistancePoint2Box2(const Vector2& point, const Box2& box) noexcept
+Mathematics::DistancePoint2Box2<Real>::DistancePoint2Box2(const Vector2Type& point, const Box2Type& box) noexcept
     : ParentType{}, point{ point }, box{ box }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -61,10 +61,10 @@ typename Mathematics::DistancePoint2Box2<Real>::DistanceResult Mathematics::Dist
     auto difference = point - box.GetCenter();
 
     // 计算平方距离和包围盒上的最近点。
-    Vector2 closest{ Vector2Tools::DotProduct(difference, box.GetAxis0()),
-                     Vector2Tools::DotProduct(difference, box.GetAxis1()) };
-    auto squaredDistance = Math::GetValue(0);
-    auto delta = Math::GetValue(0);
+    Vector2Type closest{ Vector2ToolsType::DotProduct(difference, box.GetAxis0()),
+                     Vector2ToolsType::DotProduct(difference, box.GetAxis1()) };
+    auto squaredDistance = MathType::GetValue(0);
+    auto delta = MathType::GetValue(0);
 
     if (closest.GetX() < -box.GetExtent0())
     {
@@ -93,13 +93,13 @@ typename Mathematics::DistancePoint2Box2<Real>::DistanceResult Mathematics::Dist
     }
 
     return DistanceResult{ squaredDistance,
-                           Math::GetValue(0),
+                           MathType::GetValue(0),
                            point,
                            box.GetCenter() + closest.GetX() * box.GetAxis0() + closest.GetY() * box.GetAxis1() };
 }
 
 template <typename Real>
-typename Mathematics::DistancePoint2Box2<Real>::DistanceResult Mathematics::DistancePoint2Box2<Real>::GetSquared(Real t, const Vector2& lhsVelocity, const Vector2& rhsVelocity) const
+typename Mathematics::DistancePoint2Box2<Real>::DistanceResult Mathematics::DistancePoint2Box2<Real>::GetSquared(Real t, const Vector2Type& lhsVelocity, const Vector2Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

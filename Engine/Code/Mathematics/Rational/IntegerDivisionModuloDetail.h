@@ -21,11 +21,11 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <int N>
-Mathematics::IntegerDivisionModulo<N>::IntegerDivisionModulo(const IntegerData& division, const IntegerData& modulo)
+Mathematics::IntegerDivisionModulo<N>::IntegerDivisionModulo(const IntegerDataType& division, const IntegerDataType& modulo)
     : numerator{ division },
       denominator{ modulo },
-      absNumerator{ IntegerDataAnalysis(numerator).GetAbsoluteValue() },
-      absDenominator{ IntegerDataAnalysis(denominator).GetAbsoluteValue() },
+      absNumerator{ IntegerDataAnalysisType(numerator).GetAbsoluteValue() },
+      absDenominator{ IntegerDataAnalysisType(denominator).GetAbsoluteValue() },
       quotient{},
       remainder{}
 {
@@ -41,7 +41,7 @@ template <int N>
 void Mathematics::IntegerDivisionModulo<N>::Calculate()
 {
     // 计算中使用绝对值的分子值和分母值。
-    const auto compare = IntegerData::UnsignedDataCompare(absNumerator, absDenominator);
+    const auto compare = IntegerDataType::UnsignedDataCompare(absNumerator, absDenominator);
     if (compare == NumericalValueSymbol::Negative)
     {
         // 分子 < 分母:  numerator = 0 * denominator + numerator
@@ -51,13 +51,13 @@ void Mathematics::IntegerDivisionModulo<N>::Calculate()
     else if (compare == NumericalValueSymbol::Zero)
     {
         // 分子 == 分母:  numerator = 1 * denominator + 0
-        quotient = IntegerData{ 1 };
+        quotient = IntegerDataType{ 1 };
         remainder.SetZero();
     }
     else
     {
         // 分子 > 分母, 使用除法计算商和余数
-        if (IntegerData{ low } < absDenominator)
+        if (IntegerDataType{ low } < absDenominator)
         {
             DivisionMultiple();
         }
@@ -88,7 +88,7 @@ void Mathematics::IntegerDivisionModulo<N>::DivisionSingle()
     const auto lowDenominator = low & boost::numeric_cast<uint32_t>(absDenominator[0]);
 
     // 获取分子。
-    const IntegerDataAnalysis numeratorAnalysis{ absNumerator };
+    const IntegerDataAnalysisType numeratorAnalysis{ absNumerator };
     const auto start = numeratorAnalysis.GetLeadingBlock();
 
     auto remainderDigit = 0u;
@@ -115,11 +115,11 @@ void Mathematics::IntegerDivisionModulo<N>::DivisionSingle()
     // 得到余数
     if (remainderDigit & high)
     {
-        remainder = IntegerData{ remainderDigit };
+        remainder = IntegerDataType{ remainderDigit };
     }
     else
     {
-        remainder = IntegerData{ boost::numeric_cast<uint16_t>(remainderDigit) };
+        remainder = IntegerDataType{ boost::numeric_cast<uint16_t>(remainderDigit) };
     }
 }
 
@@ -149,7 +149,7 @@ void Mathematics::IntegerDivisionModulo<N>::CalculateRemainder()
         {
             IntegerDataOperator<N> quotientOperator{ quotient };
 
-            quotientOperator += IntegerData{ 1 };
+            quotientOperator += IntegerDataType{ 1 };
             remainder.SetZero();
         }
         else if (absDenominator < remainder)
@@ -174,9 +174,9 @@ bool Mathematics::IntegerDivisionModulo<N>::IsValid() const noexcept
     try
     {
         if (!denominator.IsZero() &&
-            absNumerator == IntegerDataAnalysis(numerator).GetAbsoluteValue() &&
-            absDenominator == IntegerDataAnalysis(denominator).GetAbsoluteValue() &&
-            IntegerDataAnalysis{ remainder }.GetAbsoluteValue() < IntegerDataAnalysis{ denominator }.GetAbsoluteValue() &&
+            absNumerator == IntegerDataAnalysisType(numerator).GetAbsoluteValue() &&
+            absDenominator == IntegerDataAnalysisType(denominator).GetAbsoluteValue() &&
+            IntegerDataAnalysisType{ remainder }.GetAbsoluteValue() < IntegerDataAnalysisType{ denominator }.GetAbsoluteValue() &&
             IsCorrect())
         {
             return true;
@@ -211,7 +211,7 @@ bool Mathematics::IntegerDivisionModulo<N>::IsCorrect() const
 #endif  // OPEN_CLASS_INVARIANT
 
 template <int N>
-typename Mathematics::IntegerDivisionModulo<N>::IntegerData Mathematics::IntegerDivisionModulo<N>::GetQuotient() const noexcept
+typename Mathematics::IntegerDivisionModulo<N>::IntegerDataType Mathematics::IntegerDivisionModulo<N>::GetQuotient() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -219,7 +219,7 @@ typename Mathematics::IntegerDivisionModulo<N>::IntegerData Mathematics::Integer
 }
 
 template <int N>
-typename Mathematics::IntegerDivisionModulo<N>::IntegerData Mathematics::IntegerDivisionModulo<N>::GetRemainder() const noexcept
+typename Mathematics::IntegerDivisionModulo<N>::IntegerDataType Mathematics::IntegerDivisionModulo<N>::GetRemainder() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

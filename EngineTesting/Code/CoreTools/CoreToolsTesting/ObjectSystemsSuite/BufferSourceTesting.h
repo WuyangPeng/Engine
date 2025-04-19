@@ -12,14 +12,15 @@
 
 #include "Detail/BufferSourceTestingEnum.h"
 #include "CoreTools/FileManager/FileManagerFwd.h"
-#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "CoreTools/ObjectSystems/ConstObjectAssociated.h"
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "Mathematics/Algebra/AlgebraFwd.h"
 #include "Mathematics/Algebra/Vector4.h"
 #include "Mathematics/Base/Math.h"
 
 #include <array>
+#include <list>
 #include <set>
 
 namespace CoreTools

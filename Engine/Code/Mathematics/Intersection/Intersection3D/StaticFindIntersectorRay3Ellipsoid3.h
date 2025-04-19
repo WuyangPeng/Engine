@@ -25,33 +25,33 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorRay3Ellipsoid3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Ray3 = Ray3<Real>;
-        using Ellipsoid3 = Ellipsoid3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Ray3Type = Ray3<Real>;
+        using Ellipsoid3Type = Ellipsoid3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorRay3Ellipsoid3(const Ray3& ray, const Ellipsoid3& ellipsoid, const Real epsilon = Math::GetZeroTolerance());
+        StaticFindIntersectorRay3Ellipsoid3(const Ray3Type& ray, const Ellipsoid3Type& ellipsoid, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Ray3 GetRay() const noexcept;
-        NODISCARD Ellipsoid3 GetEllipsoid() const noexcept;
+        NODISCARD Ray3Type GetRay() const noexcept;
+        NODISCARD Ellipsoid3Type GetEllipsoid() const noexcept;
 
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
 
     private:
         void Find();
 
     private:
-        Ray3 ray;
-        Ellipsoid3 ellipsoid;
+        Ray3Type ray;
+        Ellipsoid3Type ellipsoid;
 
         int quantity;
-        Vector3 point0;
-        Vector3 point1;
+        Vector3Type point0;
+        Vector3Type point1;
     };
 }
 

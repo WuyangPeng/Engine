@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::DynamicTestIntersectorSegment3Box3<Real>::DynamicTestIntersectorSegment3Box3(const Segment3& segment, const Box3& box, bool solid, Real tMax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicTestIntersectorSegment3Box3<Real>::DynamicTestIntersectorSegment3Box3(const Segment3Type& segment, const Box3Type& box, bool solid, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon }, segment{ segment }, box{ box }, solid{ solid }
 {
     Test();
@@ -56,13 +56,13 @@ template <typename Real>
 void Mathematics::DynamicTestIntersectorSegment3Box3<Real>::Test()
 {
     // 获取线段的端点。
-    using SegmentType = std::array<Vector3, 2>;
+    using SegmentType = std::array<Vector3Type, 2>;
     const SegmentType segmentType{ segment.GetBeginPoint(), segment.GetEndPoint() };
 
     // 获取相对于线段的框速度。
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
-    auto contactTime = Math::GetValue(0);
+    auto contactTime = MathType::GetValue(0);
 
     // 测试盒法线。
     for (auto i = 0; i < 3; ++i)
@@ -82,7 +82,7 @@ void Mathematics::DynamicTestIntersectorSegment3Box3<Real>::Test()
     // 测试线段方向的交叉盒边缘。
     for (auto i = 0; i < 3; ++i)
     {
-        const auto axis = Vector3Tools::CrossProduct(box.GetAxis(i), segment.GetDirection());
+        const auto axis = Vector3ToolsType::CrossProduct(box.GetAxis(i), segment.GetDirection());
 
         const TestIntersectorAxis<Real> testIntersectorAxis{ axis, segmentType, box, relVelocity, this->GetTMax() };
         contactTime = testIntersectorAxis.GetTFirst();
@@ -98,7 +98,7 @@ void Mathematics::DynamicTestIntersectorSegment3Box3<Real>::Test()
     // 测试速度穿越盒——面。
     for (auto i = 0; i < 3; i++)
     {
-        const auto axis = Vector3Tools::CrossProduct(relVelocity, box.GetAxis(i));
+        const auto axis = Vector3ToolsType::CrossProduct(relVelocity, box.GetAxis(i));
         const TestIntersectorAxis<Real> testIntersectorAxis{ axis, segmentType, box, relVelocity, this->GetTMax() };
         contactTime = testIntersectorAxis.GetTFirst();
 

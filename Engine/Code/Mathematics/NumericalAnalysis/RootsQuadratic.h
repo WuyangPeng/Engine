@@ -44,7 +44,7 @@ namespace Mathematics
         using PolynomialRootContainer = std::vector<PolynomialRoot>;
         using RationalPolynomialRoot = Algebra::PolynomialRoot<Rational>;
         using RationalPolynomialRootContainer = std::array<RationalPolynomialRoot, 2>;
-        using Math = Math<T>;
+        using MathType = Math<T>;
 
     public:
         RootsQuadratic() noexcept;
@@ -74,7 +74,7 @@ namespace Mathematics
                                                    RationalPolynomialRootContainer& rRoots);
 
     private:
-        using RootsLinear = RootsLinear<T>;
+        using RootsLinearType = RootsLinear<T>;
 
     private:
         /// 确定多项式是否具有零值根。
@@ -101,8 +101,9 @@ namespace Mathematics
                                        Rational& rD0,
                                        Rational& rM1Div2);
 
-        NODISCARD static int ComputeDepressedRootsBisection(const Rational& rD0, RationalPolynomialRootContainer& rRoots) requires(std::is_arithmetic_v<T>);
-        NODISCARD static int ComputeDepressedRootsBisection(const Rational& rD0, RationalPolynomialRootContainer& rRoots) requires(!std::is_arithmetic_v<T>);
+        NODISCARD static int ComputeDepressedRootsBisection(const Rational& rD0, RationalPolynomialRootContainer& rRoots);
+        NODISCARD static int ComputeDepressedRootsBisection0(const Rational& rD0, RationalPolynomialRootContainer& rRoots) requires(std::is_arithmetic_v<T>);
+        NODISCARD static int ComputeDepressedRootsBisection1(const Rational& rD0, RationalPolynomialRootContainer& rRoots) requires(!std::is_arithmetic_v<T>);
 
         NODISCARD static int ComputeDepressedRootsClosedForm(const Rational& rD0, RationalPolynomialRootContainer& rRoots);
     };

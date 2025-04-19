@@ -22,13 +22,13 @@ namespace Rendering
     public:
         using ClassType = MaterialImpl;
 
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
         using BufferSource = CoreTools::BufferSource;
         using BufferTarget = CoreTools::BufferTarget;
 
     public:
         MaterialImpl() noexcept;
-        MaterialImpl(const Colour& emissive, const Colour& ambient, const Colour& diffuse, const Colour& specular) noexcept;
+        MaterialImpl(const ColourType& emissive, const ColourType& ambient, const ColourType& diffuse, const ColourType& specular) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -36,28 +36,28 @@ namespace Rendering
         void Save(BufferTarget& target) const;
         NODISCARD int GetStreamingSize() const noexcept;
 
-        NODISCARD Colour GetEmissive() const noexcept;
-        NODISCARD Colour GetAmbient() const noexcept;
-        NODISCARD Colour GetDiffuse() const noexcept;
-        NODISCARD Colour GetSpecular() const noexcept;
+        NODISCARD ColourType GetEmissive() const noexcept;
+        NODISCARD ColourType GetAmbient() const noexcept;
+        NODISCARD ColourType GetDiffuse() const noexcept;
+        NODISCARD ColourType GetSpecular() const noexcept;
 
-        void SetEmissive(const Colour& aEmissive) noexcept;
-        void SetAmbient(const Colour& aAmbient) noexcept;
-        void SetDiffuse(const Colour& aDiffuse) noexcept;
-        void SetSpecular(const Colour& aSpecular) noexcept;
+        void SetEmissive(const ColourType& aEmissive) noexcept;
+        void SetAmbient(const ColourType& aAmbient) noexcept;
+        void SetDiffuse(const ColourType& aDiffuse) noexcept;
+        void SetSpecular(const ColourType& aSpecular) noexcept;
 
         NODISCARD float GetAlpha() const noexcept;
         NODISCARD float GetSpecularExponent() const noexcept;
 
     private:
-        Colour emissive;  // 默认: (0,0,0,1)
-        Colour ambient;  // 默认: (0,0,0,1)
+        ColourType emissive;  // 默认: (0,0,0,1)
+        ColourType ambient;  // 默认: (0,0,0,1)
 
         // 材料的alpha使用diffuse的alpha通道
-        Colour diffuse;  // 默认: (0,0,0,1)
+        ColourType diffuse;  // 默认: (0,0,0,1)
 
         // 材料的镜面指数使用specular的alpha通道
-        Colour specular;  // 默认: (0,0,0,1)
+        ColourType specular;  // 默认: (0,0,0,1)
     };
 }
 

@@ -18,7 +18,7 @@ template <typename Real>
 Mathematics::AffineMatrix<Real>::AffineMatrix() noexcept
     : rotationOrGeneralMatrix{ Mathematics::MatrixInitType::Identity },
       translate{},
-      scale{ Math::GetValue(1), Math::GetValue(1), Math::GetValue(1) }
+      scale{ MathType::GetValue(1), MathType::GetValue(1), MathType::GetValue(1) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -58,8 +58,8 @@ void Mathematics::AffineMatrix<Real>::MakeIdentity() noexcept
 
     rotationOrGeneralMatrix.MakeIdentity();
 
-    translate = APoint::GetOrigin();
-    scale = APoint{ Math::GetValue(1), Math::GetValue(1), Math::GetValue(1) };
+    translate = APointType::GetOrigin();
+    scale = APointType{ MathType::GetValue(1), MathType::GetValue(1), MathType::GetValue(1) };
 }
 
 template <typename Real>
@@ -67,11 +67,11 @@ void Mathematics::AffineMatrix<Real>::MakeUnitScale() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    scale = APoint{ Math::GetValue(1), Math::GetValue(1), Math::GetValue(1) };
+    scale = APointType{ MathType::GetValue(1), MathType::GetValue(1), MathType::GetValue(1) };
 }
 
 template <typename Real>
-typename Mathematics::AffineMatrix<Real>::Matrix Mathematics::AffineMatrix<Real>::GetRotationOrGeneralMatrix() const noexcept
+typename Mathematics::AffineMatrix<Real>::MatrixType Mathematics::AffineMatrix<Real>::GetRotationOrGeneralMatrix() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -79,7 +79,7 @@ typename Mathematics::AffineMatrix<Real>::Matrix Mathematics::AffineMatrix<Real>
 }
 
 template <typename Real>
-typename Mathematics::AffineMatrix<Real>::APoint Mathematics::AffineMatrix<Real>::GetTranslate() const noexcept
+typename Mathematics::AffineMatrix<Real>::APointType Mathematics::AffineMatrix<Real>::GetTranslate() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -87,7 +87,7 @@ typename Mathematics::AffineMatrix<Real>::APoint Mathematics::AffineMatrix<Real>
 }
 
 template <typename Real>
-typename Mathematics::AffineMatrix<Real>::APoint Mathematics::AffineMatrix<Real>::GetScale() const noexcept
+typename Mathematics::AffineMatrix<Real>::APointType Mathematics::AffineMatrix<Real>::GetScale() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -95,7 +95,7 @@ typename Mathematics::AffineMatrix<Real>::APoint Mathematics::AffineMatrix<Real>
 }
 
 template <typename Real>
-void Mathematics::AffineMatrix<Real>::SetRotationOrGeneralMatrix(const Matrix& aRotationOrGeneralMatrix) noexcept
+void Mathematics::AffineMatrix<Real>::SetRotationOrGeneralMatrix(const MatrixType& aRotationOrGeneralMatrix) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -103,7 +103,7 @@ void Mathematics::AffineMatrix<Real>::SetRotationOrGeneralMatrix(const Matrix& a
 }
 
 template <typename Real>
-void Mathematics::AffineMatrix<Real>::SetTranslate(const APoint& aTranslate) noexcept
+void Mathematics::AffineMatrix<Real>::SetTranslate(const APointType& aTranslate) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -111,7 +111,7 @@ void Mathematics::AffineMatrix<Real>::SetTranslate(const APoint& aTranslate) noe
 }
 
 template <typename Real>
-void Mathematics::AffineMatrix<Real>::SetScale(const APoint& aScale) noexcept
+void Mathematics::AffineMatrix<Real>::SetScale(const APointType& aScale) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 

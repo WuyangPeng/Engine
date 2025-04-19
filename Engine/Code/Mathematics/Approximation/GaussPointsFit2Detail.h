@@ -46,7 +46,7 @@ Mathematics::Box2<Real> Mathematics::GaussPointsFit2<Real>::Calculate(const Poin
     const auto numPoints = boost::numeric_cast<Real>(points.size());
 
     // 计算点的平均值。
-    Vector2 center{};
+    Vector2Type center{};
     for (const auto& point : points)
     {
         center += point;
@@ -55,9 +55,9 @@ Mathematics::Box2<Real> Mathematics::GaussPointsFit2<Real>::Calculate(const Poin
     center /= numPoints;
 
     // 计算点的协方差矩阵。
-    auto sumXX = Math::GetValue(0);
-    auto sumXY = Math::GetValue(0);
-    auto sumYY = Math::GetValue(0);
+    auto sumXX = MathType::GetValue(0);
+    auto sumXY = MathType::GetValue(0);
+    auto sumYY = MathType::GetValue(0);
     for (const auto& point : points)
     {
         auto diff = point - center;
@@ -83,7 +83,7 @@ Mathematics::Box2<Real> Mathematics::GaussPointsFit2<Real>::Calculate(const Poin
     eigenSystem.Solve(true);
 
     std::array<Real, size> extent{};
-    std::array<Vector2, size> axis{};
+    std::array<Vector2Type, size> axis{};
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
@@ -95,7 +95,7 @@ Mathematics::Box2<Real> Mathematics::GaussPointsFit2<Real>::Calculate(const Poin
         axis[i] = eigenSystem.GetEigenvector2(i);
     }
 
-    return Box2{ center, axis[0], axis[1], extent[0], extent[1] };
+    return Box2Type{ center, axis[0], axis[1], extent[0], extent[1] };
 
 #include SYSTEM_WARNING_POP
 }

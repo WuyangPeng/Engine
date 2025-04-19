@@ -26,7 +26,7 @@ namespace Mathematics
     public:
         using ClassType = Random<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         // 产生范围在[0,1]的随机数。

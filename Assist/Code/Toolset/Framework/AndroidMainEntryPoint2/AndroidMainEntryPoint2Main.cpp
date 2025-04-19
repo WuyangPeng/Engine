@@ -10,6 +10,6 @@
 #include "AndroidMainEntryPoint2.h"
 #include "Framework/Helper/MainFunctionMacro.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 ANDROID_MAIN_FUNCTION(Framework, AndroidMainEntryPoint2, SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT(""))

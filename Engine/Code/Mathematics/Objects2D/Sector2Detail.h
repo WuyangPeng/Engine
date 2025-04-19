@@ -17,10 +17,10 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 Mathematics::Sector2<Real>::Sector2() noexcept
     : vertex{},
-      radius{ Math::GetValue(1) },
-      direction{ Math::GetValue(1), Math::GetValue(0) },
-      angle{ Math::GetPI() },
-      cosAngle{ Math::GetValue(-1) },
+      radius{ MathType::GetValue(1) },
+      direction{ MathType::GetValue(1), MathType::GetValue(0) },
+      angle{ MathType::GetPI() },
+      cosAngle{ MathType::GetValue(-1) },
       sinAngle{}
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -28,12 +28,12 @@ Mathematics::Sector2<Real>::Sector2() noexcept
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Sector2<Real>::Sector2(const Vector2& inVertex, Real inRadius, const Vector2& inDirection, Real inAngle) noexcept
+Mathematics::Sector2<Real>::Sector2(const Vector2Type& inVertex, Real inRadius, const Vector2Type& inDirection, Real inAngle) noexcept
     : vertex{ inVertex },
       radius{ inRadius },
       direction{ inDirection },
       angle{ inAngle },
-      cosAngle{ Math::GetValue(-1) },
+      cosAngle{ MathType::GetValue(-1) },
       sinAngle{}
 {
     SetAngle(inAngle);
@@ -59,13 +59,13 @@ void Mathematics::Sector2<Real>::SetAngle(Real inAngle) noexcept
     MATHEMATICS_CLASS_IS_VALID_9;
 
     angle = inAngle;
-    cosAngle = Math::Cos(angle);
-    sinAngle = Math::Sin(angle);
+    cosAngle = MathType::Cos(angle);
+    sinAngle = MathType::Sin(angle);
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Sector2<Real>::Vector2 Mathematics::Sector2<Real>::GetVertex() const noexcept
+typename Mathematics::Sector2<Real>::Vector2Type Mathematics::Sector2<Real>::GetVertex() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -83,7 +83,7 @@ Real Mathematics::Sector2<Real>::GetRadius() const noexcept
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Sector2<Real>::Vector2 Mathematics::Sector2<Real>::GetDirection() const noexcept
+typename Mathematics::Sector2<Real>::Vector2Type Mathematics::Sector2<Real>::GetDirection() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -119,7 +119,7 @@ Real Mathematics::Sector2<Real>::GetSinAngle() const noexcept
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::Sector2<Real>::SetVertex(const Vector2& aVertex) noexcept
+void Mathematics::Sector2<Real>::SetVertex(const Vector2Type& aVertex) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -137,7 +137,7 @@ void Mathematics::Sector2<Real>::SetRadius(Real aRadius) noexcept
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::Sector2<Real>::SetDirection(const Vector2& aDirection) noexcept
+void Mathematics::Sector2<Real>::SetDirection(const Vector2Type& aDirection) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -146,7 +146,7 @@ void Mathematics::Sector2<Real>::SetDirection(const Vector2& aDirection) noexcep
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-bool Mathematics::Sector2<Real>::Contains(const Vector2& point) const
+bool Mathematics::Sector2<Real>::Contains(const Vector2Type& point) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

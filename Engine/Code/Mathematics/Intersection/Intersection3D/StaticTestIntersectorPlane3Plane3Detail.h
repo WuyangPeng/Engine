@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorPlane3Plane3<Real>::StaticTestIntersectorPlane3Plane3(const Plane3& plane0, const Plane3& plane1, const Real epsilon) noexcept
+Mathematics::StaticTestIntersectorPlane3Plane3<Real>::StaticTestIntersectorPlane3Plane3(const Plane3Type& plane0, const Plane3Type& plane1, const Real epsilon) noexcept
     : ParentType{ epsilon }, plane0{ plane0 }, plane1{ plane1 }
 {
     Test();
@@ -54,8 +54,8 @@ Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorPlane3Plane3<Real>::
 template <typename Real>
 void Mathematics::StaticTestIntersectorPlane3Plane3<Real>::Test() noexcept
 {
-    if (const auto dot = Vector3Tools::DotProduct(plane0.GetNormal(), plane1.GetNormal());
-        Math::FAbs(dot) < Math::GetValue(1) - Math::GetZeroTolerance())
+    if (const auto dot = Vector3ToolsType::DotProduct(plane0.GetNormal(), plane1.GetNormal());
+        MathType::FAbs(dot) < MathType::GetValue(1) - MathType::GetZeroTolerance())
     {
         this->SetIntersectionType(IntersectionType::Other);
     }

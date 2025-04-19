@@ -18,7 +18,7 @@
 #include "Mathematics/Intersection/Flags/ContactSide.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorBox3Box3<Real>::DynamicFindIntersectorBox3Box3(const Box3& box0, const Box3& box1, Real tmax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorBox3Box3<Real>::DynamicFindIntersectorBox3Box3(const Box3Type& box0, const Box3Type& box1, Real tmax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, box0{ box0 }, box1{ box1 }, point{}
 {
     Find();
@@ -74,10 +74,10 @@ Mathematics::Vector3<Real> Mathematics::DynamicFindIntersectorBox3Box3<Real>::Ge
 template <typename Real>
 void Mathematics::DynamicFindIntersectorBox3Box3<Real>::Find()
 {
-    this->SetContactTime(Math::GetValue(0));
+    this->SetContactTime(MathType::GetValue(0));
 
-    auto contactTime = Math::GetValue(0);
-    auto tLast = Math::GetValue(0);
+    auto contactTime = MathType::GetValue(0);
+    auto tLast = MathType::GetValue(0);
     auto side = ContactSide::None;
     IntersectorConfiguration<Real> box0Cfg{};
     IntersectorConfiguration<Real> box1Cfg{};
@@ -132,10 +132,10 @@ void Mathematics::DynamicFindIntersectorBox3Box3<Real>::Find()
     {
         for (auto innerIndex = 0; innerIndex < 3; ++innerIndex)
         {
-            const auto axis = Vector3Tools::CrossProduct(box0.GetAxis(outerIndex), box1.GetAxis(innerIndex));
+            const auto axis = Vector3ToolsType::CrossProduct(box0.GetAxis(outerIndex), box1.GetAxis(innerIndex));
 
             // 由于所有轴都是单位长度（假定），因此可以将其与恒定（而非相对）epsilon进行比较。
-            if (Vector3Tools::GetLengthSquared(axis) <= Math::GetZeroTolerance())
+            if (Vector3ToolsType::GetLengthSquared(axis) <= MathType::GetZeroTolerance())
             {
                 /// 轴i0和i1平行。 如果任意两个轴平行，则唯一需要的比较就是面自身之间的比较。
                 /// 目前，这些面已经过测试，没有分离，因此所有进一步的分离测试将仅显示重叠。
@@ -167,7 +167,7 @@ void Mathematics::DynamicFindIntersectorBox3Box3<Real>::Find()
     // 速度交叉box0边
     for (auto i = 0; i < 3; ++i)
     {
-        const auto axis = Vector3Tools::CrossProduct(relVelocity, box0.GetAxis(i));
+        const auto axis = Vector3ToolsType::CrossProduct(relVelocity, box0.GetAxis(i));
 
         const FindIntersectorAxis<Real> findIntersectorAxis{ axis, box0, box1, relVelocity, this->GetTMax() };
         contactTime = findIntersectorAxis.GetTFirst();
@@ -188,7 +188,7 @@ void Mathematics::DynamicFindIntersectorBox3Box3<Real>::Find()
     // 速度交叉box1边
     for (auto i = 0; i < 3; ++i)
     {
-        const auto axis = Vector3Tools::CrossProduct(relVelocity, box1.GetAxis(i));
+        const auto axis = Vector3ToolsType::CrossProduct(relVelocity, box1.GetAxis(i));
 
         const FindIntersectorAxis<Real> findIntersectorAxis{ axis, box0, box1, relVelocity, this->GetTMax() };
         contactTime = findIntersectorAxis.GetTFirst();
@@ -206,7 +206,7 @@ void Mathematics::DynamicFindIntersectorBox3Box3<Real>::Find()
         this->SetContactTime(contactTime);
     }
 
-    if (contactTime <= Math::GetValue(0) || side == ContactSide::None)
+    if (contactTime <= MathType::GetValue(0) || side == ContactSide::None)
     {
         this->SetIntersectionType(IntersectionType::Empty);
         this->SetContactTime(contactTime);

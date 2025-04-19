@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorLine3Sphere3<Real>::StaticTestIntersectorLine3Sphere3(const Line3& line, const Sphere3& sphere, const Real epsilon)
+Mathematics::StaticTestIntersectorLine3Sphere3<Real>::StaticTestIntersectorLine3Sphere3(const Line3Type& line, const Sphere3Type& sphere, const Real epsilon)
     : ParentType{ epsilon }, line{ line }, sphere{ sphere }
 {
     Test();
@@ -56,10 +56,10 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorLine3Sphere3<Real>::Test()
 {
     const auto diff = line.GetOrigin() - sphere.GetCenter();
-    const auto a0 = Vector3Tools::DotProduct(diff, diff) - sphere.GetRadius() * sphere.GetRadius();
-    const auto a1 = Vector3Tools::DotProduct(line.GetDirection(), diff);
+    const auto a0 = Vector3ToolsType::DotProduct(diff, diff) - sphere.GetRadius() * sphere.GetRadius();
+    const auto a1 = Vector3ToolsType::DotProduct(line.GetDirection(), diff);
     const auto discr = a1 * a1 - a0;
-    if (Math::GetValue(0) <= discr)
+    if (MathType::GetValue(0) <= discr)
     {
         this->SetIntersectionType(IntersectionType::Point);
     }

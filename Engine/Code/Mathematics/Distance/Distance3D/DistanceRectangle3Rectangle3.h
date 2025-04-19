@@ -23,29 +23,29 @@ namespace Mathematics
     {
     public:
         using ClassType = DistanceRectangle3Rectangle3<Real>;
-        using Vector3 = Vector3<Real>;
-        using ParentType = DistanceBase<Real, Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3Type>;
 
-        using Rectangle3 = Rectangle3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using Rectangle3Type = Rectangle3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistanceRectangle3Rectangle3(const Rectangle3& lhsRectangle, const Rectangle3& rhsRectangle) noexcept;
+        DistanceRectangle3Rectangle3(const Rectangle3Type& lhsRectangle, const Rectangle3Type& rhsRectangle) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Rectangle3 GetLhsRectangle() const noexcept;
-        NODISCARD Rectangle3 GetRhsRectangle() const noexcept;
+        NODISCARD Rectangle3Type GetLhsRectangle() const noexcept;
+        NODISCARD Rectangle3Type GetRhsRectangle() const noexcept;
 
         NODISCARD DistanceResult GetSquared() const override;
 
-        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
     private:
-        Rectangle3 lhsRectangle;
-        Rectangle3 rhsRectangle;
+        Rectangle3Type lhsRectangle;
+        Rectangle3Type rhsRectangle;
     };
 
     using DistanceRectangle3Rectangle3F = DistanceRectangle3Rectangle3<float>;

@@ -49,7 +49,7 @@ namespace Mathematics
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD bool IsZero() const noexcept;
-        NODISCARD void SetZero();
+        void SetZero();
         NODISCARD NumericalValueSymbol GetSign() const noexcept;
 
         void SwapBigEndian() noexcept;

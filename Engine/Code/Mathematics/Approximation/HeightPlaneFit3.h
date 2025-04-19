@@ -26,9 +26,9 @@ namespace Mathematics
     public:
         using ClassType = HeightPlaneFit3<Real>;
 
-        using Vector3 = Vector3<Real>;
-        using Math = Math<Real>;
-        using Points = std::vector<Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using MathType = Math<Real>;
+        using Points = std::vector<Vector3Type>;
 
     public:
         explicit HeightPlaneFit3(const Points& points);

@@ -17,7 +17,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-Mathematics::Circle3<Real>::Circle3(const Vector3& center, const Vector3& direction0, const Vector3& direction1, const Vector3& normal, const Real radius, const Real epsilon) noexcept
+Mathematics::Circle3<Real>::Circle3(const Vector3Type& center, const Vector3Type& direction0, const Vector3Type& direction1, const Vector3Type& normal, const Real radius, const Real epsilon) noexcept
     : center{ center }, direction0{ direction0 }, direction1{ direction1 }, normal{ normal }, radius{ radius }, epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -30,9 +30,9 @@ bool Mathematics::Circle3<Real>::IsValid() const noexcept
 {
     try
     {
-        if (Vector3Tools::Approximate(Vector3Tools::CrossProduct(direction0, direction1), normal, epsilon) &&
-            Vector3Tools::Approximate(Vector3Tools::CrossProduct(direction1, normal), direction0, epsilon) &&
-            Vector3Tools::Approximate(Vector3Tools::CrossProduct(normal, direction0), direction1, epsilon))
+        if (Vector3ToolsType::Approximate(Vector3ToolsType::CrossProduct(direction0, direction1), normal, epsilon) &&
+            Vector3ToolsType::Approximate(Vector3ToolsType::CrossProduct(direction1, normal), direction0, epsilon) &&
+            Vector3ToolsType::Approximate(Vector3ToolsType::CrossProduct(normal, direction0), direction1, epsilon))
         {
             return true;
         }
@@ -90,7 +90,7 @@ Real Mathematics::Circle3<Real>::GetRadius() const noexcept
 }
 
 template <typename Real>
-Mathematics::Circle3<Real> Mathematics::Circle3<Real>::GetMove(Real t, const Vector3& velocity) const
+Mathematics::Circle3<Real> Mathematics::Circle3<Real>::GetMove(Real t, const Vector3Type& velocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

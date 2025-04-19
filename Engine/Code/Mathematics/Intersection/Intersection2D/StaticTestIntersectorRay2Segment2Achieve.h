@@ -19,7 +19,7 @@
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorRay2Segment2<Real>::StaticTestIntersectorRay2Segment2(const Ray2& ray, const Segment2& segment, const Real dotThreshold, const Real intervalThreshold)
+Mathematics::StaticTestIntersectorRay2Segment2<Real>::StaticTestIntersectorRay2Segment2(const Ray2Type& ray, const Segment2Type& segment, const Real dotThreshold, const Real intervalThreshold)
     : ParentType{ dotThreshold }, ray{ ray }, segment{ segment }, quantity{ 0 }, intervalThreshold{ intervalThreshold }
 {
     Test();
@@ -38,7 +38,7 @@ void Mathematics::StaticTestIntersectorRay2Segment2<Real>::Test()
     if (intersectionType == IntersectionType::Point)
     {
         // 测试直线-直线的相交点是否在射线和线段上。
-        if (0 <= classify.GetParameter0() && Math::FAbs(classify.GetParameter1()) <= segment.GetExtent() + intervalThreshold)
+        if (0 <= classify.GetParameter0() && MathType::FAbs(classify.GetParameter1()) <= segment.GetExtent() + intervalThreshold)
         {
             quantity = 1;
         }
@@ -52,7 +52,7 @@ void Mathematics::StaticTestIntersectorRay2Segment2<Real>::Test()
     {
         // 计算线段segment中心相对于射线ray的位置。
         auto difference = segment.GetCenterPoint() - ray.GetOrigin();
-        auto dotProduct = Vector2Tools::DotProduct(ray.GetDirection(), difference);
+        auto dotProduct = Vector2ToolsType::DotProduct(ray.GetDirection(), difference);
 
         // 计算线段相对于射线方向的最右点的位置。
         auto tmax = dotProduct + segment.GetExtent();

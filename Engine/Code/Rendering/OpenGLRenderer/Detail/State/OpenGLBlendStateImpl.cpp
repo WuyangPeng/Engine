@@ -88,14 +88,14 @@ void Rendering::OpenGLBlendStateImpl::SetEnableIndependentBlend(bool aEnableInde
     enableIndependentBlend = aEnableIndependentBlend;
 }
 
-Rendering::OpenGLBlendStateImpl::Colour Rendering::OpenGLBlendStateImpl::GetBlendColor() const noexcept
+Rendering::OpenGLBlendStateImpl::ColourType Rendering::OpenGLBlendStateImpl::GetBlendColor() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return blendColor;
 }
 
-void Rendering::OpenGLBlendStateImpl::SetBlendColor(const Colour& aBlendColor) noexcept
+void Rendering::OpenGLBlendStateImpl::SetBlendColor(const ColourType& aBlendColor) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 

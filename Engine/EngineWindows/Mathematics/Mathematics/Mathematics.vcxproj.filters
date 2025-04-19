@@ -7019,6 +7019,9 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ApproximationConvexQuadByRectDetail.h">
       <Filter>Approximation 模板文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorLine3Sphere3Achieve.h">
+      <Filter>Intersection 模板文件\Intersection3D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\ReadMe.md">

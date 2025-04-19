@@ -37,8 +37,8 @@ Rendering::AmbientLightEffect::AmbientLightEffect(const std::string& name,
                   material,
                   lighting,
                   nullptr,
-                  Rendering::GetStreamSize<Colour>() * 2,
-                  Rendering::GetStreamSize<Colour>() * 2,
+                  Rendering::GetStreamSize<ColourType>() * 2,
+                  Rendering::GetStreamSize<ColourType>() * 2,
                   0 }
 {
     ClassType::UpdateMaterialConstant();
@@ -72,7 +72,7 @@ void Rendering::AmbientLightEffect::UpdateMaterialConstant()
     data.SetValue(0, emissive.GetPoint());
 
     const auto ambient = material->GetAmbient();
-    data.SetValue(boost::numeric_cast<int>(emissive.GetPoint().size()) * boost::numeric_cast<int>(sizeof(Colour::ArrayType::value_type)), ambient.GetPoint());
+    data.SetValue(boost::numeric_cast<int>(emissive.GetPoint().size()) * boost::numeric_cast<int>(sizeof(ColourType::ArrayType::value_type)), ambient.GetPoint());
 
     ParentType::UpdateMaterialConstant();
 }

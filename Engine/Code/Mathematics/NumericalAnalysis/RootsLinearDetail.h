@@ -34,7 +34,7 @@ int Mathematics::RootsLinear<T>::Solve(const T& g0, const T& g1, PolynomialRootC
 {
     /// 测试度数是否小于2。
 
-    if (Math::Approximate(g1, T{}))
+    if (MathType::Approximate(g1, T{}))
     {
         /// 解集要么是全实值x (g0 = 0)，要么没有解(g0 != 0)。
         /// 无论哪种情况，都不报告根源。
@@ -42,7 +42,7 @@ int Mathematics::RootsLinear<T>::Solve(const T& g0, const T& g1, PolynomialRootC
     }
 
     /// 测试零值根。
-    if (Math::Approximate(g0, T{}))
+    if (MathType::Approximate(g0, T{}))
     {
         roots.at(0) = { T{}, 1 };
 

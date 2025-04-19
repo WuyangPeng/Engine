@@ -35,7 +35,7 @@ namespace Rendering
 
         NODISCARD ConstResourceSharedPtr GetResource() const;
 
-        NODISCARD void* MapForWrite(BindBuffer target) const noexcept;
+        void* MapForWrite(BindBuffer target) const noexcept;
         void Unmap(BindBuffer target) const noexcept;
 
         NODISCARD bool CopyCpuToGpu() override = 0;

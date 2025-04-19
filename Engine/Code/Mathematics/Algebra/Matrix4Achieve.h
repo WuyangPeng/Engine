@@ -82,10 +82,10 @@ void Mathematics::Matrix4<Real>::MakeIdentity() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    x = Vector4::GetUnitX();
-    y = Vector4::GetUnitY();
-    z = Vector4::GetUnitZ();
-    w = Vector4::GetUnitW();
+    x = Vector4Type::GetUnitX();
+    y = Vector4Type::GetUnitY();
+    z = Vector4Type::GetUnitZ();
+    w = Vector4Type::GetUnitW();
 }
 
 template <typename Real>
@@ -126,7 +126,7 @@ const Real& Mathematics::Matrix4<Real>::operator()(int row, int column) const
 {
     MATHEMATICS_CLASS_IS_VALID_9;
     MATHEMATICS_ASSERTION_0(xIndex <= row && row < vectorSize, "row索引错误！");
-    MATHEMATICS_ASSERTION_0(Vector4::xIndex <= column && column < Vector4::pointSize, "column索引错误！");
+    MATHEMATICS_ASSERTION_0(Vector4Type::xIndex <= column && column < Vector4Type::pointSize, "column索引错误！");
 
     return (*this)[row][column];
 }
@@ -227,11 +227,11 @@ Mathematics::Matrix4<Real>& Mathematics::Matrix4<Real>::operator/=(Real scalar) 
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::Matrix4<Real>::QuadraticForm(const Vector4& lhs, const Vector4& rhs) const noexcept
+Real Mathematics::Matrix4<Real>::QuadraticForm(const Vector4Type& lhs, const Vector4Type& rhs) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    return Vector4Tools::DotProduct(lhs, (*this) * rhs);
+    return Vector4ToolsType::DotProduct(lhs, (*this) * rhs);
 }
 
 template <typename Real>
@@ -321,7 +321,7 @@ Mathematics::Matrix4<Real> Mathematics::Matrix4<Real>::Inverse(Real epsilon) con
     const auto b5 = GetValue<2, 2>() * GetValue<3, 3>() - GetValue<2, 3>() * GetValue<3, 2>();
 
     const auto det = a0 * b5 - a1 * b4 + a2 * b3 + a3 * b2 - a4 * b1 + a5 * b0;
-    if (epsilon < Math::FAbs(det))
+    if (epsilon < MathType::FAbs(det))
     {
         Matrix4 adjoint{ GetValue<1, 1>() * b5 - GetValue<1, 2>() * b4 + GetValue<1, 3>() * b3,
                          -GetValue<0, 1>() * b5 + GetValue<0, 2>() * b4 - GetValue<0, 3>() * b3,
@@ -415,7 +415,7 @@ Real Mathematics::Matrix4<Real>::Determinant() const noexcept
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::Matrix4<Real>::MakeObliqueProjection(const Vector3& normal, const Vector3& origin, const Vector3& direction) noexcept(gAssert < 1 || gMathematicsAssert < 1)
+void Mathematics::Matrix4<Real>::MakeObliqueProjection(const Vector3Type& normal, const Vector3Type& origin, const Vector3Type& direction) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
     MATHEMATICS_ASSERTION_1(normal.IsNormalize() && direction.IsNormalize(), "normal和direction必须是单位向量！");
@@ -441,8 +441,8 @@ void Mathematics::Matrix4<Real>::MakeObliqueProjection(const Vector3& normal, co
     // 该矩阵被选择为每当Dot(N,D) < 0使得M[3][3] > 0
     // （投影到平面上的“正面侧”）。
 
-    const auto dotNormalDirection = Vector3Tools::DotProduct(normal, direction);
-    const auto dotNormalOrigin = Vector3Tools::DotProduct(normal, origin);
+    const auto dotNormalDirection = Vector3ToolsType::DotProduct(normal, direction);
+    const auto dotNormalOrigin = Vector3ToolsType::DotProduct(normal, origin);
 
     x.SetCoordinate(direction.GetX() * normal.GetX() - dotNormalDirection,
                     direction.GetX() * normal.GetY(),
@@ -456,12 +456,12 @@ void Mathematics::Matrix4<Real>::MakeObliqueProjection(const Vector3& normal, co
                     direction.GetZ() * normal.GetY(),
                     direction.GetZ() * normal.GetZ() - dotNormalDirection,
                     -dotNormalOrigin * direction.GetZ());
-    w.SetCoordinate(Math::GetValue(0), Math::GetValue(0), Math::GetValue(0), -dotNormalDirection);
+    w.SetCoordinate(MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0), -dotNormalDirection);
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::Matrix4<Real>::MakePerspectiveProjection(const Vector3& normal, const Vector3& origin, const Vector3& eye)
+void Mathematics::Matrix4<Real>::MakePerspectiveProjection(const Vector3Type& normal, const Vector3Type& origin, const Vector3Type& eye)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
     MATHEMATICS_ASSERTION_1(normal.IsNormalize(), "normal必须是单位向量！");
@@ -473,7 +473,7 @@ void Mathematics::Matrix4<Real>::MakePerspectiveProjection(const Vector3& normal
     //
     // 其中E为眼点，P为平面上的一个点，而N是单位长度的平面法线。
 
-    const auto dotNormalDirection = Vector3Tools::DotProduct(normal, eye - origin);
+    const auto dotNormalDirection = Vector3ToolsType::DotProduct(normal, eye - origin);
 
     x.SetCoordinate(dotNormalDirection - eye.GetX() * normal.GetX(),
                     -eye.GetX() * normal.GetY(),
@@ -487,12 +487,12 @@ void Mathematics::Matrix4<Real>::MakePerspectiveProjection(const Vector3& normal
                     -eye.GetZ() * normal.GetY(),
                     dotNormalDirection - eye.GetZ() * normal.GetZ(),
                     -(GetValue<2, 0>() * eye.GetX() + GetValue<2, 1>() * eye.GetY() + GetValue<2, 2>() * eye.GetZ()));
-    w.SetCoordinate(-normal.GetX(), -normal.GetY(), -normal.GetZ(), Vector3Tools::DotProduct(eye, normal));
+    w.SetCoordinate(-normal.GetX(), -normal.GetY(), -normal.GetZ(), Vector3ToolsType::DotProduct(eye, normal));
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::Matrix4<Real>::MakeReflection(const Vector3& normal, const Vector3& origin) noexcept(gAssert < 1 || gMathematicsAssert < 1)
+void Mathematics::Matrix4<Real>::MakeReflection(const Vector3Type& normal, const Vector3Type& origin) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
     MATHEMATICS_ASSERTION_1(normal.IsNormalize(), "normal必须是单位向量！");
@@ -504,27 +504,27 @@ void Mathematics::Matrix4<Real>::MakeReflection(const Vector3& normal, const Vec
     //
     // 其中P是平面上的点，N是一个单位长度的平面法线。
 
-    const auto twoDotNormalOrigin = Math::GetValue(2) * Vector3Tools::DotProduct(normal, origin);
+    const auto twoDotNormalOrigin = MathType::GetValue(2) * Vector3ToolsType::DotProduct(normal, origin);
 
-    SetValue<0, 0>(Math::GetValue(1) - Math::GetValue(2) * normal.GetX() * normal.GetX());
-    SetValue<0, 1>(-Math::GetValue(2) * normal.GetX() * normal.GetY());
-    SetValue<0, 2>(-Math::GetValue(2) * normal.GetX() * normal.GetZ());
+    SetValue<0, 0>(MathType::GetValue(1) - MathType::GetValue(2) * normal.GetX() * normal.GetX());
+    SetValue<0, 1>(-MathType::GetValue(2) * normal.GetX() * normal.GetY());
+    SetValue<0, 2>(-MathType::GetValue(2) * normal.GetX() * normal.GetZ());
     SetValue<0, 3>(twoDotNormalOrigin * normal.GetX());
 
-    SetValue<1, 0>(-Math::GetValue(2) * normal.GetY() * normal.GetX());
-    SetValue<1, 1>(Math::GetValue(1) - Math::GetValue(2) * normal.GetY() * normal.GetY());
-    SetValue<1, 2>(-Math::GetValue(2) * normal.GetY() * normal.GetZ());
+    SetValue<1, 0>(-MathType::GetValue(2) * normal.GetY() * normal.GetX());
+    SetValue<1, 1>(MathType::GetValue(1) - MathType::GetValue(2) * normal.GetY() * normal.GetY());
+    SetValue<1, 2>(-MathType::GetValue(2) * normal.GetY() * normal.GetZ());
     SetValue<1, 3>(twoDotNormalOrigin * normal.GetY());
 
-    SetValue<2, 0>(-Math::GetValue(2) * normal.GetZ() * normal.GetX());
-    SetValue<2, 1>(-Math::GetValue(2) * normal.GetZ() * normal.GetY());
-    SetValue<2, 2>(Math::GetValue(1) - Math::GetValue(2) * normal.GetZ() * normal.GetZ());
+    SetValue<2, 0>(-MathType::GetValue(2) * normal.GetZ() * normal.GetX());
+    SetValue<2, 1>(-MathType::GetValue(2) * normal.GetZ() * normal.GetY());
+    SetValue<2, 2>(MathType::GetValue(1) - MathType::GetValue(2) * normal.GetZ() * normal.GetZ());
     SetValue<2, 3>(twoDotNormalOrigin * normal.GetZ());
 
-    SetValue<3, 0>(Math::GetValue(0));
-    SetValue<3, 1>(Math::GetValue(0));
-    SetValue<3, 2>(Math::GetValue(0));
-    SetValue<3, 3>(Math::GetValue(1));
+    SetValue<3, 0>(MathType::GetValue(0));
+    SetValue<3, 1>(MathType::GetValue(0));
+    SetValue<3, 2>(MathType::GetValue(0));
+    SetValue<3, 3>(MathType::GetValue(1));
 }
 
 // 创建给定的平截头体矩阵在左，右，顶，底，近，远的值在平截头体边界。
@@ -538,25 +538,25 @@ void Mathematics::Matrix4<Real>::MakeFrustumMatrix44(Real left, Real right, Real
     const auto height = top - bottom;
     const auto depth = farDistance - nearDistance;
 
-    SetValue<0, 0>((Math::GetValue(2) * nearDistance) / width);
-    SetValue<0, 1>(Math::GetValue(0));
-    SetValue<0, 2>(Math::GetValue(0));
-    SetValue<0, 3>(Math::GetValue(0));
+    SetValue<0, 0>((MathType::GetValue(2) * nearDistance) / width);
+    SetValue<0, 1>(MathType::GetValue(0));
+    SetValue<0, 2>(MathType::GetValue(0));
+    SetValue<0, 3>(MathType::GetValue(0));
 
-    SetValue<1, 0>(Math::GetValue(0));
-    SetValue<1, 1>((Math::GetValue(2) * nearDistance) / height);
-    SetValue<1, 2>(Math::GetValue(0));
-    SetValue<1, 3>(Math::GetValue(0));
+    SetValue<1, 0>(MathType::GetValue(0));
+    SetValue<1, 1>((MathType::GetValue(2) * nearDistance) / height);
+    SetValue<1, 2>(MathType::GetValue(0));
+    SetValue<1, 3>(MathType::GetValue(0));
 
     SetValue<2, 0>((right + left) / width);
     SetValue<2, 1>((top + bottom) / height);
     SetValue<2, 2>(-(farDistance + nearDistance) / depth);
-    SetValue<2, 3>(-Math::GetValue(1));
+    SetValue<2, 3>(-MathType::GetValue(1));
 
-    SetValue<3, 0>(Math::GetValue(0));
-    SetValue<3, 1>(Math::GetValue(0));
-    SetValue<3, 2>(-(Math::GetValue(2) * farDistance * nearDistance) / depth);
-    SetValue<3, 3>(Math::GetValue(0));
+    SetValue<3, 0>(MathType::GetValue(0));
+    SetValue<3, 1>(MathType::GetValue(0));
+    SetValue<3, 2>(-(MathType::GetValue(2) * farDistance * nearDistance) / depth);
+    SetValue<3, 3>(MathType::GetValue(0));
 }
 
 // 创建一个立体矩阵给定在Y方向上的领域视图的度数，Y/X的纵横比，并且近和远平面的距离
@@ -566,31 +566,31 @@ void Mathematics::Matrix4<Real>::MakePerspectiveMatrix44(Real fieldOfViewY, Real
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    auto angle = fieldOfViewY / Math::GetValue(2);
+    auto angle = fieldOfViewY / MathType::GetValue(2);
     // 角度转换成弧度
-    angle *= Math::GetDegreeToRadian();
+    angle *= MathType::GetDegreeToRadian();
 
-    const auto cot = Math::Cos(angle) / Math::Sin(angle);
+    const auto cot = MathType::Cos(angle) / MathType::Sin(angle);
 
     SetValue<0, 0>(cot / aspect);
-    SetValue<0, 1>(Math::GetValue(0));
-    SetValue<0, 2>(Math::GetValue(0));
-    SetValue<0, 3>(Math::GetValue(0));
+    SetValue<0, 1>(MathType::GetValue(0));
+    SetValue<0, 2>(MathType::GetValue(0));
+    SetValue<0, 3>(MathType::GetValue(0));
 
-    SetValue<1, 0>(Math::GetValue(0));
+    SetValue<1, 0>(MathType::GetValue(0));
     SetValue<1, 1>(cot);
-    SetValue<1, 2>(Math::GetValue(0));
-    SetValue<1, 3>(Math::GetValue(0));
+    SetValue<1, 2>(MathType::GetValue(0));
+    SetValue<1, 3>(MathType::GetValue(0));
 
-    SetValue<2, 0>(Math::GetValue(0));
-    SetValue<2, 1>(Math::GetValue(0));
+    SetValue<2, 0>(MathType::GetValue(0));
+    SetValue<2, 1>(MathType::GetValue(0));
     SetValue<2, 2>(-(farDistance + nearDistance) / (farDistance - nearDistance));
-    SetValue<2, 3>(-Math::GetValue(1));
+    SetValue<2, 3>(-MathType::GetValue(1));
 
-    SetValue<3, 0>(Math::GetValue(0));
-    SetValue<3, 1>(Math::GetValue(0));
-    SetValue<3, 2>(-(Math::GetValue(2) * farDistance * nearDistance) / (farDistance - nearDistance));
-    SetValue<3, 3>(Math::GetValue(0));
+    SetValue<3, 0>(MathType::GetValue(0));
+    SetValue<3, 1>(MathType::GetValue(0));
+    SetValue<3, 2>(-(MathType::GetValue(2) * farDistance * nearDistance) / (farDistance - nearDistance));
+    SetValue<3, 3>(MathType::GetValue(0));
 }
 
 // 由给定的左侧，右侧，底部，顶部，近值，和远值创建平截头体边界的正交矩阵。
@@ -604,31 +604,31 @@ void Mathematics::Matrix4<Real>::MakeOrthoMatrix44(Real left, Real right, Real b
     const auto height = top - bottom;
     const auto depth = farDistance - nearDistance;
 
-    SetValue<0, 0>(Math::GetValue(2) / width);
-    SetValue<0, 1>(Math::GetValue(0));
-    SetValue<0, 2>(Math::GetValue(0));
-    SetValue<0, 3>(Math::GetValue(0));
+    SetValue<0, 0>(MathType::GetValue(2) / width);
+    SetValue<0, 1>(MathType::GetValue(0));
+    SetValue<0, 2>(MathType::GetValue(0));
+    SetValue<0, 3>(MathType::GetValue(0));
 
-    SetValue<1, 0>(Math::GetValue(0));
-    SetValue<1, 1>(Math::GetValue(2) / height);
-    SetValue<1, 2>(Math::GetValue(0));
-    SetValue<1, 3>(Math::GetValue(0));
+    SetValue<1, 0>(MathType::GetValue(0));
+    SetValue<1, 1>(MathType::GetValue(2) / height);
+    SetValue<1, 2>(MathType::GetValue(0));
+    SetValue<1, 3>(MathType::GetValue(0));
 
-    SetValue<2, 0>(Math::GetValue(0));
-    SetValue<2, 1>(Math::GetValue(0));
-    SetValue<2, 2>(-Math::GetValue(2) / depth);
-    SetValue<2, 3>(Math::GetValue(0));
+    SetValue<2, 0>(MathType::GetValue(0));
+    SetValue<2, 1>(MathType::GetValue(0));
+    SetValue<2, 2>(-MathType::GetValue(2) / depth);
+    SetValue<2, 3>(MathType::GetValue(0));
 
     SetValue<3, 0>(-(right + left) / width);
     SetValue<3, 1>(-(top + bottom) / height);
     SetValue<3, 2>(-(farDistance + nearDistance) / depth);
-    SetValue<3, 3>(Math::GetValue(1));
+    SetValue<3, 3>(MathType::GetValue(1));
 }
 
 // 创建使用3个基本规范化向量的方向矩阵
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::Matrix4<Real>::MakeOrthoNormalMatrix44(const Vector3& xDirection, const Vector3& yDirection, const Vector3& zDirection) noexcept(gAssert < 1 || gMathematicsAssert < 1)
+void Mathematics::Matrix4<Real>::MakeOrthoNormalMatrix44(const Vector3Type& xDirection, const Vector3Type& yDirection, const Vector3Type& zDirection) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
     MATHEMATICS_ASSERTION_1(xDirection.IsNormalize() && yDirection.IsNormalize() && zDirection.IsNormalize(), "xDirection、yDirection和zDirection不是单位向量！");
@@ -636,22 +636,22 @@ void Mathematics::Matrix4<Real>::MakeOrthoNormalMatrix44(const Vector3& xDirecti
     SetValue<0, 0>(xDirection.GetX());
     SetValue<0, 1>(yDirection.GetX());
     SetValue<0, 2>(zDirection.GetX());
-    SetValue<0, 3>(Math::GetValue(0));
+    SetValue<0, 3>(MathType::GetValue(0));
 
     SetValue<1, 0>(xDirection.GetY());
     SetValue<1, 1>(yDirection.GetY());
     SetValue<1, 2>(zDirection.GetY());
-    SetValue<1, 3>(Math::GetValue(0));
+    SetValue<1, 3>(MathType::GetValue(0));
 
     SetValue<2, 0>(xDirection.GetZ());
     SetValue<2, 1>(yDirection.GetZ());
     SetValue<2, 2>(zDirection.GetZ());
-    SetValue<2, 3>(Math::GetValue(0));
+    SetValue<2, 3>(MathType::GetValue(0));
 
-    SetValue<3, 0>(Math::GetValue(0));
-    SetValue<3, 1>(Math::GetValue(0));
-    SetValue<3, 2>(Math::GetValue(0));
-    SetValue<3, 3>(Math::GetValue(1));
+    SetValue<3, 0>(MathType::GetValue(0));
+    SetValue<3, 1>(MathType::GetValue(0));
+    SetValue<3, 2>(MathType::GetValue(0));
+    SetValue<3, 3>(MathType::GetValue(1));
 }
 
 template <typename Real>
@@ -711,7 +711,7 @@ void Mathematics::Matrix4<Real>::Set(const ArrayType& coordinate)
     auto index = 0;
     for (auto value : coordinate)
     {
-        (*this)(index / vectorSize, index % Vector4::pointSize) = value;
+        (*this)(index / vectorSize, index % Vector4Type::pointSize) = value;
 
         ++index;
     }
@@ -723,11 +723,11 @@ Mathematics::Matrix3<Real> Mathematics::Matrix4<Real>::Project() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    Matrix3 result{ MatrixInitType::Zero };
+    Matrix3Type result{ MatrixInitType::Zero };
 
-    for (auto r = 0; r < Matrix3::vectorSize; ++r)
+    for (auto r = 0; r < Matrix3Type::vectorSize; ++r)
     {
-        for (auto c = 0; c < Matrix3::vectorSize; ++c)
+        for (auto c = 0; c < Matrix3Type::vectorSize; ++c)
         {
             result(r, c) = (*this)(r, c);
         }

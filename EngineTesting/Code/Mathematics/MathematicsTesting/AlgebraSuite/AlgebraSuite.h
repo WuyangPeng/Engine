@@ -41,7 +41,7 @@
 #include "QuaternionSwingTwistTesting.h"
 #include "QuaternionTesting.h"
 #include "Transform/IdentityTransformTesting.h"
-#include "Transform/MatrixTransformTesting.H"
+#include "Transform/MatrixTransformTesting.h"
 #include "Transform/RotationTransformTesting.h"
 #include "Transform/ScaleTransformTesting.h"
 #include "Transform/TranslateTransformTesting.h"

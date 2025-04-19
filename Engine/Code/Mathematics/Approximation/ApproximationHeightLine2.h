@@ -34,7 +34,7 @@ namespace Mathematics
         using ObservationTypeContainer = typename ParentType::ObservationTypeContainer;
         using IndicesContainer = typename ParentType::IndicesContainer;
         using ParametersType = std::pair<Vector2, Vector2>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         ApproximationHeightLine2() noexcept;

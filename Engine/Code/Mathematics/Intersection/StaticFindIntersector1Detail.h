@@ -44,9 +44,9 @@ void Mathematics::StaticFindIntersector1<Real>::Find()
                 const auto lhsIntersection = (u0 < v0 ? v0 : u0);
                 const auto rhsIntersection = (v1 < u1 ? v1 : u1);
 
-                if (Math::Approximate(lhsIntersection, rhsIntersection, epsilon))
+                if (MathType::Approximate(lhsIntersection, rhsIntersection, epsilon))
                 {
-                    intersections.emplace_back((lhsIntersection + rhsIntersection) / Math::GetValue(2));
+                    intersections.emplace_back((lhsIntersection + rhsIntersection) / MathType::GetValue(2));
                 }
                 else
                 {
@@ -56,12 +56,12 @@ void Mathematics::StaticFindIntersector1<Real>::Find()
             }
             else  // u0 == v1
             {
-                intersections.emplace_back((u0 + v1) / Math::GetValue(2));
+                intersections.emplace_back((u0 + v1) / MathType::GetValue(2));
             }
         }
         else  // v0 == u1
         {
-            intersections.emplace_back((v0 + u1) / Math::GetValue(2));
+            intersections.emplace_back((v0 + u1) / MathType::GetValue(2));
         }
     }
 }

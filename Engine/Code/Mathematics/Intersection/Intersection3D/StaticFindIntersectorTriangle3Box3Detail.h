@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorTriangle3Box3<Real>::StaticFindIntersectorTriangle3Box3(const Triangle3& triangle, const Box3& box, const Real epsilon)
+Mathematics::StaticFindIntersectorTriangle3Box3<Real>::StaticFindIntersectorTriangle3Box3(const Triangle3Type& triangle, const Box3Type& box, const Real epsilon)
     : ParentType{ epsilon }, triangle{ triangle }, box{ box }, point{}
 {
     Find();
@@ -64,8 +64,8 @@ void Mathematics::StaticFindIntersectorTriangle3Box3<Real>::Find()
     {
         for (auto side = 0; side < 3; ++side)
         {
-            auto innerNormal = Math::GetValue(dir) * box.GetAxis(side);
-            auto constant = Vector3Tools::DotProduct(innerNormal, box.GetCenter()) - box.GetExtent(side);
+            auto innerNormal = MathType::GetValue(dir) * box.GetAxis(side);
+            auto constant = Vector3ToolsType::DotProduct(innerNormal, box.GetCenter()) - box.GetExtent(side);
             container = IntersectorUtility3<Real>::ClipConvexPolygonAgainstPlane(innerNormal, constant, container);
         }
     }

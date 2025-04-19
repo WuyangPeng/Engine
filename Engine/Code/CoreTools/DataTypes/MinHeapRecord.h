@@ -12,6 +12,8 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
+#include <type_traits>
+
 namespace CoreTools
 {
     template <typename KeyType, typename ValueType>

@@ -42,6 +42,8 @@ void CoreTools::ThreadManagerTesting::MainTest()
 
 void CoreTools::ThreadManagerTesting::CreateThread()
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     isContinue = false;
 
     auto threadParameter = 3;
@@ -59,6 +61,8 @@ void CoreTools::ThreadManagerTesting::CreateThread()
     isContinue = true;
 
     manager.Wait();
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 uint32_t CoreTools::ThreadManagerTesting::Thread0(void* threadParameter) noexcept

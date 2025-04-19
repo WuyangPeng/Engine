@@ -15,7 +15,7 @@
 #include "Detail/DirectoryDefaultName.h"
 #include "Detail/MainFunctionHelperBaseImpl.h"
 #include "CoreTools/Base/Flags/UniqueIdSelect.h"
-#include "CoreTools/Base/UniqueIDManagerDetail.h"
+#include "CoreTools/Base/UniqueIdManagerDetail.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/FileManager/Environment.h"

@@ -93,5 +93,13 @@ void* System::GetOpenGLFunctionPointer(const char* glFunction) noexcept
 {
     UnusedFunction(glFunction);
 
+#ifdef SYSTEM_PLATFORM_WIN32
+
     return &System::GLFunction;
+
+#else  // !SYSTEM_PLATFORM_WIN32
+
+    return reinterpret_cast<void*>(&System::GLFunction);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }

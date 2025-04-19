@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorRay2Circle2<Real>::StaticFindIntersectorRay2Circle2(const Ray2& ray, const Circle2& circle, const Real dotThreshold)
+Mathematics::StaticFindIntersectorRay2Circle2<Real>::StaticFindIntersectorRay2Circle2(const Ray2Type& ray, const Circle2Type& circle, const Real dotThreshold)
     : ParentType{ dotThreshold }, ray{ ray }, circle{ circle }, quantity{}, point0{}, point1{}
 {
     Find();
@@ -64,18 +64,18 @@ void Mathematics::StaticFindIntersectorRay2Circle2<Real>::Find()
         auto rootCount = line2Circle2.GetRootCount();
         if (rootCount == 1)
         {
-            if (line2Circle2.GetParameter(0) < Math::GetValue(0))
+            if (line2Circle2.GetParameter(0) < MathType::GetValue(0))
             {
                 rootCount = 0;
             }
         }
         else
         {
-            if (line2Circle2.GetParameter(1) < Math::GetValue(0))
+            if (line2Circle2.GetParameter(1) < MathType::GetValue(0))
             {
                 rootCount = 0;
             }
-            else if (line2Circle2.GetParameter(0) < Math::GetValue(0))
+            else if (line2Circle2.GetParameter(0) < MathType::GetValue(0))
             {
                 rootCount = 1;
                 line2Circle2.ClearParameter0();

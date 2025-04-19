@@ -10,7 +10,7 @@
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_DETAIL_H
 
-#include "PolynomialRoots.h" 
+#include "PolynomialRoots.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Mathematics/Algebra/PolynomialDivideDetail.h"
@@ -33,7 +33,7 @@ Mathematics::PolynomialRoots<Real>::PolynomialRoots(Real epsilon)
 template <typename Real>
 bool Mathematics::PolynomialRoots<Real>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) <= epsilon && 0 <= count && root.size() == gsl::narrow_cast<size_t>(maxRoot) && 0 <= maxIterations)
+    if (MathType::GetValue(0) <= epsilon && 0 <= count && root.size() == gsl::narrow_cast<size_t>(maxRoot) && 0 <= maxIterations)
         return true;
     else
         return false;
@@ -99,7 +99,7 @@ bool Mathematics::PolynomialRoots<Real>::FindAlgebraic(Real constant, Real once)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    if (epsilon <= Math::FAbs(once))
+    if (epsilon <= MathType::FAbs(once))
     {
         SetRoot(0, -constant / once);
         count = 1;
@@ -118,14 +118,14 @@ Real Mathematics::PolynomialRoots<Real>::GetBound(Real constant, Real once)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    if (Math::FAbs(once) <= epsilon)
+    if (MathType::FAbs(once) <= epsilon)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("多项式是恒定的，约束是无效的"s));
     }
 
-    auto maxValue = Math::FAbs(constant) / once;
+    auto maxValue = MathType::FAbs(constant) / once;
 
-    return Math::GetValue(1) + maxValue;
+    return MathType::GetValue(1) + maxValue;
 }
 
 template <typename Real>
@@ -133,29 +133,29 @@ bool Mathematics::PolynomialRoots<Real>::FindAlgebraic(Real constant, Real once,
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    if (Math::FAbs(secondary) <= epsilon)
+    if (MathType::FAbs(secondary) <= epsilon)
     {
         // 方程是一次的
         return FindAlgebraic(constant, once);
     }
 
-    auto discriminant = once * once - Math::GetValue(4) * constant * secondary;
-    if (Math::FAbs(discriminant) <= epsilon)
+    auto discriminant = once * once - MathType::GetValue(4) * constant * secondary;
+    if (MathType::FAbs(discriminant) <= epsilon)
     {
-        discriminant = Math::GetValue(0);
+        discriminant = MathType::GetValue(0);
     }
 
-    if (discriminant < Math::GetValue(0))
+    if (discriminant < MathType::GetValue(0))
     {
         count = 0;
         return false;
     }
 
-    auto lhs = Math::GetRational(1, 2) / secondary;
+    auto lhs = MathType::GetRational(1, 2) / secondary;
 
-    if (Math::GetValue(0) < discriminant)
+    if (MathType::GetValue(0) < discriminant)
     {
-        discriminant = Math::Sqrt(discriminant);
+        discriminant = MathType::Sqrt(discriminant);
 
         SetRoot(0, lhs * (-once - discriminant));
         SetRoot(1, lhs * (-once + discriminant));
@@ -175,7 +175,7 @@ Real Mathematics::PolynomialRoots<Real>::GetBound(Real constant, Real once, Real
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    if (Math::FAbs(secondary) <= epsilon)
+    if (MathType::FAbs(secondary) <= epsilon)
     {
         // 方程是一次的
         if (FindAlgebraic(constant, once))
@@ -193,11 +193,11 @@ Real Mathematics::PolynomialRoots<Real>::GetBound(Real constant, Real once, Real
         }
     }
 
-    const auto value0 = Math::FAbs(constant) / secondary;
-    const auto value1 = Math::FAbs(once) / secondary;
+    const auto value0 = MathType::FAbs(constant) / secondary;
+    const auto value1 = MathType::FAbs(once) / secondary;
     const auto maxValue = (value1 <= value0 ? value0 : value1);
 
-    return Math::GetValue(1) + maxValue;
+    return MathType::GetValue(1) + maxValue;
 }
 
 template <typename Real>
@@ -205,7 +205,7 @@ bool Mathematics::PolynomialRoots<Real>::FindAlgebraic(Real constant, Real once,
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    if (Math::FAbs(thrice) <= epsilon)
+    if (MathType::FAbs(thrice) <= epsilon)
     {
         // 方程是二次的
         return FindAlgebraic(constant, once, secondary);
@@ -217,47 +217,47 @@ bool Mathematics::PolynomialRoots<Real>::FindAlgebraic(Real constant, Real once,
     secondary /= thrice;
 
     // 转换为y^3 + a * y + b = 0 ，由x = y - c2 / 3。
-    constexpr auto third = Math::GetRational(1, 3);
-    constexpr auto twentySeventh = Math::GetRational(1, 27);
+    constexpr auto third = MathType::GetRational(1, 3);
+    constexpr auto twentySeventh = MathType::GetRational(1, 27);
     const auto offset = third * secondary;
     const auto a = once - secondary * offset;
-    const auto b = constant + secondary * (Math::GetValue(2) * secondary * secondary - Math::GetValue(9) * once) * twentySeventh;
+    const auto b = constant + secondary * (MathType::GetValue(2) * secondary * secondary - MathType::GetValue(9) * once) * twentySeventh;
 
-    const auto halfB = (Math::GetRational(1, 2)) * b;
+    const auto halfB = (MathType::GetRational(1, 2))*b;
 
     auto discriminant = halfB * halfB + a * a * a * twentySeventh;
 
-    if (Math::FAbs(discriminant) <= epsilon)
+    if (MathType::FAbs(discriminant) <= epsilon)
     {
-        discriminant = Math::GetValue(0);
+        discriminant = MathType::GetValue(0);
 
-        const auto halfBPowThird = Math::CubeRoot(halfB);
+        const auto halfBPowThird = MathType::CubeRoot(halfB);
 
-        SetRoot(0, Math::GetValue(2) * halfBPowThird - offset);
+        SetRoot(0, MathType::GetValue(2) * halfBPowThird - offset);
         SetRoot(1, -halfBPowThird - offset);
         count = 2;
     }
-    else if (Math::GetValue(0) < discriminant)  // 1实,2虚根
+    else if (MathType::GetValue(0) < discriminant)  // 1实,2虚根
     {
-        discriminant = Math::Sqrt(discriminant);
+        discriminant = MathType::Sqrt(discriminant);
         const auto discriminantMinusHalfB = -halfB + discriminant;
-        auto cubeRoot = Math::CubeRoot(discriminantMinusHalfB);
+        auto cubeRoot = MathType::CubeRoot(discriminantMinusHalfB);
 
         const auto negativeDiscriminantMinusHalfB = -halfB - discriminant;
-        cubeRoot += Math::CubeRoot(negativeDiscriminantMinusHalfB);
+        cubeRoot += MathType::CubeRoot(negativeDiscriminantMinusHalfB);
         cubeRoot -= offset;
         SetRoot(0, cubeRoot);
         count = 1;
     }
-    else  // if (discr <  Math::sm_Zero)
+    else  // if (discr <  MathType::sm_Zero)
     {
-        const auto dist = Math::Sqrt(-third * a);
-        const auto angle = third * Math::ATan2(Math::Sqrt(-discriminant), -halfB);
-        const auto cosValue = Math::Cos(angle);
-        const auto sinValue = Math::Sin(angle);
-        SetRoot(0, Math::GetValue(2) * dist * cosValue - offset);
-        SetRoot(1, -dist * (cosValue + Math::GetSqrt3() * sinValue) - offset);
-        SetRoot(2, -dist * (cosValue - Math::GetSqrt3() * sinValue) - offset);
+        const auto dist = MathType::Sqrt(-third * a);
+        const auto angle = third * MathType::ATan2(MathType::Sqrt(-discriminant), -halfB);
+        const auto cosValue = MathType::Cos(angle);
+        const auto sinValue = MathType::Sin(angle);
+        SetRoot(0, MathType::GetValue(2) * dist * cosValue - offset);
+        SetRoot(1, -dist * (cosValue + MathType::GetSqrt3() * sinValue) - offset);
+        SetRoot(2, -dist * (cosValue - MathType::GetSqrt3() * sinValue) - offset);
         count = 3;
     }
 
@@ -269,7 +269,7 @@ bool Mathematics::PolynomialRoots<Real>::FindEigenvalues(Real constant, Real onc
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    if (Math::FAbs(thrice) <= epsilon)
+    if (MathType::FAbs(thrice) <= epsilon)
     {
         // 方程是二次的
         return FindAlgebraic(constant, once, secondary);
@@ -281,9 +281,9 @@ bool Mathematics::PolynomialRoots<Real>::FindEigenvalues(Real constant, Real onc
     secondary /= thrice;
 
     // 构造3×3协同矩阵。
-    VariableMatrix matrix{ 3, 3 };  // 初始化为0。
-    matrix(1, 0) = Math::GetValue(1);
-    matrix(2, 1) = Math::GetValue(1);
+    VariableMatrixType matrix{ 3, 3 };  // 初始化为0。
+    matrix(1, 0) = MathType::GetValue(1);
+    matrix(2, 1) = MathType::GetValue(1);
     matrix(0, 2) = -constant;
     matrix(1, 2) = -once;
     matrix(2, 2) = -secondary;
@@ -304,27 +304,27 @@ bool Mathematics::PolynomialRoots<Real>::FindEigenvalues(Real constant, Real onc
 }
 
 template <typename Real>
-void Mathematics::PolynomialRoots<Real>::BalanceCompanion3(VariableMatrix& matrix, Real tolerance)
+void Mathematics::PolynomialRoots<Real>::BalanceCompanion3(VariableMatrixType& matrix, Real tolerance)
 {
-    auto a10 = Math::FAbs(matrix(1, 0));
-    auto a21 = Math::FAbs(matrix(2, 1));
-    auto a02 = Math::FAbs(matrix(0, 2));
-    auto a12 = Math::FAbs(matrix(1, 2));
-    auto a22 = Math::FAbs(matrix(2, 2));
+    auto a10 = MathType::FAbs(matrix(1, 0));
+    auto a21 = MathType::FAbs(matrix(2, 1));
+    auto a02 = MathType::FAbs(matrix(0, 2));
+    auto a12 = MathType::FAbs(matrix(1, 2));
+    auto a22 = MathType::FAbs(matrix(2, 2));
 
     for (auto i = 0; i < balanceCompanionIterationMax; ++i)
     {
         // 抵销 行/列 0
         auto rowNorm = a02;
         auto columnNorm = a10;
-        auto scale = Math::Sqrt(columnNorm / rowNorm);
+        auto scale = MathType::Sqrt(columnNorm / rowNorm);
         a02 *= scale;
         a10 = a02;
 
         // 抵销 行/列 1
         rowNorm = (a12 <= a10 ? a10 : a12);
         columnNorm = a21;
-        scale = Math::Sqrt(columnNorm / rowNorm);
+        scale = MathType::Sqrt(columnNorm / rowNorm);
         a10 *= scale;
         a12 *= scale;
         a21 /= scale;
@@ -336,7 +336,7 @@ void Mathematics::PolynomialRoots<Real>::BalanceCompanion3(VariableMatrix& matri
         {
             columnNorm = a22;
         }
-        scale = Math::Sqrt(columnNorm / rowNorm);
+        scale = MathType::Sqrt(columnNorm / rowNorm);
 
         a21 *= scale;
         a02 /= scale;
@@ -350,11 +350,11 @@ void Mathematics::PolynomialRoots<Real>::BalanceCompanion3(VariableMatrix& matri
         MATHEMATICS_ASSERTION_1(i != balanceCompanionIterationMax - 1, "超出最大迭代。\n");
     }
 
-    matrix(1, 0) = (Math::GetValue(0) <= matrix(1, 0) ? a10 : -a10);
-    matrix(2, 1) = (Math::GetValue(0) <= matrix(2, 1) ? a21 : -a21);
-    matrix(0, 2) = (Math::GetValue(0) <= matrix(0, 2) ? a02 : -a02);
-    matrix(1, 2) = (Math::GetValue(0) <= matrix(1, 2) ? a12 : -a12);
-    matrix(2, 2) = (Math::GetValue(0) <= matrix(2, 2) ? a22 : -a22);
+    matrix(1, 0) = (MathType::GetValue(0) <= matrix(1, 0) ? a10 : -a10);
+    matrix(2, 1) = (MathType::GetValue(0) <= matrix(2, 1) ? a21 : -a21);
+    matrix(0, 2) = (MathType::GetValue(0) <= matrix(0, 2) ? a02 : -a02);
+    matrix(1, 2) = (MathType::GetValue(0) <= matrix(1, 2) ? a12 : -a12);
+    matrix(2, 2) = (MathType::GetValue(0) <= matrix(2, 2) ? a22 : -a22);
 }
 
 template <typename Real>
@@ -363,7 +363,7 @@ bool Mathematics::PolynomialRoots<Real>::IsBalancedCompanion3(Real a10, Real a21
     // 行/列 0
     auto rowNorm = a02;
     auto columnNorm = a10;
-    auto test = Math::FAbs(Math::GetValue(1) - columnNorm / rowNorm);
+    auto test = MathType::FAbs(MathType::GetValue(1) - columnNorm / rowNorm);
     if (tolerance < test)
     {
         return false;
@@ -372,7 +372,7 @@ bool Mathematics::PolynomialRoots<Real>::IsBalancedCompanion3(Real a10, Real a21
     // 行/列 1
     rowNorm = (a12 <= a10 ? a10 : a12);
     columnNorm = a21;
-    test = Math::FAbs(Math::GetValue(1) - columnNorm / rowNorm);
+    test = MathType::FAbs(MathType::GetValue(1) - columnNorm / rowNorm);
     if (tolerance < test)
     {
         return false;
@@ -385,27 +385,27 @@ bool Mathematics::PolynomialRoots<Real>::IsBalancedCompanion3(Real a10, Real a21
     {
         columnNorm = a22;
     }
-    test = Math::FAbs(Math::GetValue(1) - columnNorm / rowNorm);
+    test = MathType::FAbs(MathType::GetValue(1) - columnNorm / rowNorm);
 
     return test <= tolerance;
 }
 
 template <typename Real>
-bool Mathematics::PolynomialRoots<Real>::QRIteration3(VariableMatrix& matrix)
+bool Mathematics::PolynomialRoots<Real>::QRIteration3(VariableMatrixType& matrix)
 {
-    VariableLengthVector variableLengthVector{ 3 };
+    VariableLengthVectorType variableLengthVector{ 3 };
 
     for (auto i = 0; i < maxIterations; ++i)
     {
-        auto rhs = epsilon * (Math::FAbs(matrix(0, 0)) + Math::FAbs(matrix(1, 1)));
+        auto rhs = epsilon * (MathType::FAbs(matrix(0, 0)) + MathType::FAbs(matrix(1, 1)));
 
-        if (Math::FAbs(matrix(1, 0)) <= rhs)
+        if (MathType::FAbs(matrix(1, 0)) <= rhs)
         {
             // mat(0,0)是一个根，解子矩阵的二次方程。
             const auto trace = matrix(1, 1) + matrix(2, 2);
             const auto det = matrix(1, 1) * matrix(2, 2) - matrix(1, 2) * matrix(2, 1);
 
-            MAYBE_UNUSED const auto result = FindAlgebraic(det, -trace, Math::GetValue(1));
+            MAYBE_UNUSED const auto result = FindAlgebraic(det, -trace, MathType::GetValue(1));
 
             SetRoot(count, matrix(0, 0));
             ++count;
@@ -413,14 +413,14 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration3(VariableMatrix& matrix)
             return true;
         }
 
-        rhs = epsilon * (Math::FAbs(matrix(1, 1)) + Math::FAbs(matrix(2, 2)));
+        rhs = epsilon * (MathType::FAbs(matrix(1, 1)) + MathType::FAbs(matrix(2, 2)));
 
-        if (Math::FAbs(matrix(2, 1)) <= rhs)
+        if (MathType::FAbs(matrix(2, 1)) <= rhs)
         {
             // mat(2,2)是一个根，解了子矩阵的二次方程。
             const auto trace = matrix(0, 0) + matrix(1, 1);
             const auto det = matrix(0, 0) * matrix(1, 1) - matrix(0, 1) * matrix(1, 0);
-            MAYBE_UNUSED const auto result = FindAlgebraic(det, -trace, Math::GetValue(1));
+            MAYBE_UNUSED const auto result = FindAlgebraic(det, -trace, MathType::GetValue(1));
 
             SetRoot(count, matrix(2, 2));
             ++count;
@@ -438,12 +438,12 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration3(VariableMatrix& matrix)
     MATHEMATICS_ASSERTION_4(false, "超出最大迭代\n");
 
     // 现在，清零最小的次对角项去分离矩阵。
-    if (Math::FAbs(matrix(1, 0)) <= Math::FAbs(matrix(2, 1)))
+    if (MathType::FAbs(matrix(1, 0)) <= MathType::FAbs(matrix(2, 1)))
     {
         // mat(0,0)是一个根，解了子矩阵的二次方程。
         const auto trace = matrix(1, 1) + matrix(2, 2);
         const auto det = matrix(1, 1) * matrix(2, 2) - matrix(1, 2) * matrix(2, 1);
-        MAYBE_UNUSED const auto result = FindAlgebraic(det, -trace, Math::GetValue(1));
+        MAYBE_UNUSED const auto result = FindAlgebraic(det, -trace, MathType::GetValue(1));
 
         SetRoot(count, matrix(0, 0));
         ++count;
@@ -453,7 +453,7 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration3(VariableMatrix& matrix)
         // mat(2,2)是一个根，解了子矩阵的二次方程。
         const auto trace = matrix(0, 0) + matrix(1, 1);
         const auto det = matrix(0, 0) * matrix(1, 1) - matrix(0, 1) * matrix(1, 0);
-        MAYBE_UNUSED const auto result = FindAlgebraic(det, -trace, Math::GetValue(1));
+        MAYBE_UNUSED const auto result = FindAlgebraic(det, -trace, MathType::GetValue(1));
 
         SetRoot(count, matrix(2, 2));
         ++count;
@@ -463,7 +463,7 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration3(VariableMatrix& matrix)
 }
 
 template <typename Real>
-void Mathematics::PolynomialRoots<Real>::FrancisQRStep(VariableMatrix& hessenbergMatrix, VariableLengthVector& vector)
+void Mathematics::PolynomialRoots<Real>::FrancisQRStep(VariableMatrixType& hessenbergMatrix, VariableLengthVectorType& vector)
 {
     // 给定一个n乘n未还原的上Hessenberg矩阵H其尾部2×2主子阵具有特征值a1和a2，
     // 覆盖 H以Z^T * H * Z其中Z = P(1) * ... * P(n-2)是Householder矩阵和
@@ -475,7 +475,7 @@ void Mathematics::PolynomialRoots<Real>::FrancisQRStep(VariableMatrix& hessenber
     auto trace = hessenbergMatrix(rowsNumber - 2, rowsNumber - 2) + hessenbergMatrix(rowsNumber - 1, rowsNumber - 1);
     auto det = hessenbergMatrix(rowsNumber - 2, rowsNumber - 2) * hessenbergMatrix(rowsNumber - 1, rowsNumber - 1) -
                hessenbergMatrix(rowsNumber - 2, rowsNumber - 1) * hessenbergMatrix(rowsNumber - 1, rowsNumber - 2);
-    Vector3 uVector{ hessenbergMatrix(0, 0) * hessenbergMatrix(1, 1) + hessenbergMatrix(0, 1) * hessenbergMatrix(1, 0) - trace * hessenbergMatrix(0, 0) + det,
+    Vector3Type uVector{ hessenbergMatrix(0, 0) * hessenbergMatrix(1, 1) + hessenbergMatrix(0, 1) * hessenbergMatrix(1, 0) - trace * hessenbergMatrix(0, 0) + det,
                      hessenbergMatrix(1, 0) * (hessenbergMatrix(0, 0) + hessenbergMatrix(1, 1) - trace),
                      hessenbergMatrix(1, 0) * hessenbergMatrix(2, 1) };
 
@@ -515,30 +515,30 @@ void Mathematics::PolynomialRoots<Real>::FrancisQRStep(VariableMatrix& hessenber
 }
 
 template <typename Real>
-typename Mathematics::PolynomialRoots<Real>::Vector3 Mathematics::PolynomialRoots<Real>::GetHouseholderVector(int size, const Vector3& uVector)
+typename Mathematics::PolynomialRoots<Real>::Vector3Type Mathematics::PolynomialRoots<Real>::GetHouseholderVector(int size, const Vector3Type& uVector)
 {
-    Vector3 vVector{};
+    Vector3Type vVector{};
 
     // Householder向量V：
     // 给定一个向量的U，计算矢量V像这样
     // 使V[0] = 1 和 (I - 2 * V * V^T / |V|^2) * U 是除第一组分部分外都是零。
     // 矩阵P = I - 2 * V * V^T /| V|^2 是一个Householder变换，一个反射矩阵。
 
-    auto length = Math::GetValue(0);
+    auto length = MathType::GetValue(0);
 
     for (auto i = 0; i < size; ++i)
     {
         length += uVector[i] * uVector[i];
     }
-    length = Math::Sqrt(length);
+    length = MathType::Sqrt(length);
 
     using namespace System;
     using System::operator*;
 
     if (epsilon < length)
     {
-        auto inv = Math::GetValue(1) / (uVector[0] + length * Math::Sign(uVector[0]));
-        vVector[0] = Math::GetValue(1);
+        auto inv = MathType::GetValue(1) / (uVector[0] + length * MathType::Sign(uVector[0]));
+        vVector[0] = MathType::GetValue(1);
         for (auto i = 1; i < size; ++i)
         {
             vVector[i] = inv * uVector[i];
@@ -547,10 +547,10 @@ typename Mathematics::PolynomialRoots<Real>::Vector3 Mathematics::PolynomialRoot
     else
     {
         // uVector是零向量，任何向量都可以
-        vVector[0] = Math::GetValue(1);
+        vVector[0] = MathType::GetValue(1);
         for (int i = 1; i < size; ++i)
         {
-            vVector[i] = Math::GetValue(0);
+            vVector[i] = MathType::GetValue(0);
         }
     }
 
@@ -558,7 +558,7 @@ typename Mathematics::PolynomialRoots<Real>::Vector3 Mathematics::PolynomialRoot
 }
 
 template <typename Real>
-void Mathematics::PolynomialRoots<Real>::PremultiplyHouseholder(VariableMatrix& matrix, VariableLengthVector& variableLengthVector, int rowMin, int rowMax, int columnMin, int columnMax, int vSize, const Vector3& vVector)
+void Mathematics::PolynomialRoots<Real>::PremultiplyHouseholder(VariableMatrixType& matrix, VariableLengthVectorType& variableLengthVector, int rowMin, int rowMax, int columnMin, int columnMax, int vSize, const Vector3Type& vVector)
 {
     // Householder预乘：给定的矩阵A和m×1矢量V采用V[0]= 1，
     // 令S是A的子矩阵m行的rmin <= r <= m + rmin - 1和列的子cmin <= c <= cmax。
@@ -567,16 +567,16 @@ void Mathematics::PolynomialRoots<Real>::PremultiplyHouseholder(VariableMatrix& 
     const auto subRows = rowMax - rowMin + 1;
     const auto subColunms = columnMax - columnMin + 1;
 
-    auto sqrLen = Math::GetValue(0);
+    auto sqrLen = MathType::GetValue(0);
     for (auto i = 0; i < vSize; ++i)
     {
         sqrLen += vVector[i] * vVector[i];
     }
 
-    const auto beta = Math::GetValue(-2) / sqrLen;
+    const auto beta = MathType::GetValue(-2) / sqrLen;
     for (auto column = 0; column < subColunms; ++column)
     {
-        variableLengthVector[column] = Math::GetValue(0);
+        variableLengthVector[column] = MathType::GetValue(0);
         for (auto row = 0; row < subRows; ++row)
         {
             variableLengthVector[column] += vVector[row] * matrix(rowMin + row, columnMin + column);
@@ -594,14 +594,14 @@ void Mathematics::PolynomialRoots<Real>::PremultiplyHouseholder(VariableMatrix& 
 }
 
 template <typename Real>
-void Mathematics::PolynomialRoots<Real>::PostmultiplyHouseholder(VariableMatrix& matrix,
-                                                                 VariableLengthVector& variableLengthVector,
+void Mathematics::PolynomialRoots<Real>::PostmultiplyHouseholder(VariableMatrixType& matrix,
+                                                                 VariableLengthVectorType& variableLengthVector,
                                                                  int rowMin,
                                                                  int rowMax,
                                                                  int columnMin,
                                                                  int columnMax,
                                                                  int vSize,
-                                                                 const Vector3& vVector)
+                                                                 const Vector3Type& vVector)
 {
     // Householder预乘：给定的矩阵A和m×1矢量V采用V[0]= 1，
     // 令S是A的子矩阵m行的rmin <= r <= m + rmin - 1和列的子cmin <= c <= cmax。
@@ -610,16 +610,16 @@ void Mathematics::PolynomialRoots<Real>::PostmultiplyHouseholder(VariableMatrix&
     const auto subRows = rowMax - rowMin + 1;
     const auto subColumns = columnMax - columnMin + 1;
 
-    auto sqrLen = Math::GetValue(0);
+    auto sqrLen = MathType::GetValue(0);
     for (auto i = 0; i < vSize; ++i)
     {
         sqrLen += vVector[i] * vVector[i];
     }
 
-    auto beta = Math::GetValue(-2) / sqrLen;
+    auto beta = MathType::GetValue(-2) / sqrLen;
     for (auto row = 0; row < subRows; ++row)
     {
-        variableLengthVector[row] = Math::GetValue(0);
+        variableLengthVector[row] = MathType::GetValue(0);
         for (auto column = 0; column < subColumns; ++column)
         {
             variableLengthVector[row] += matrix(rowMin + row, columnMin + column) * vVector[column];
@@ -641,32 +641,32 @@ Real Mathematics::PolynomialRoots<Real>::GetBound(Real constant, Real once, Real
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    if (Math::FAbs(thrice) <= epsilon)
+    if (MathType::FAbs(thrice) <= epsilon)
     {
         // 多项式是二次。
         return GetBound(constant, once, secondary);
     }
 
-    const auto invThrice = Math::GetValue(1) / thrice;
-    auto maxValue = Math::FAbs(constant) * invThrice;
+    const auto invThrice = MathType::GetValue(1) / thrice;
+    auto maxValue = MathType::FAbs(constant) * invThrice;
 
-    const auto onceProduct = Math::FAbs(once) * invThrice;
+    const auto onceProduct = MathType::FAbs(once) * invThrice;
     if (maxValue < onceProduct)
     {
         maxValue = onceProduct;
     }
 
-    const auto secondaryProduct = Math::FAbs(secondary) * invThrice;
+    const auto secondaryProduct = MathType::FAbs(secondary) * invThrice;
     if (maxValue < secondaryProduct)
     {
         maxValue = secondaryProduct;
     }
 
-    return Math::GetValue(1) + maxValue;
+    return MathType::GetValue(1) + maxValue;
 }
 
 template <typename Real>
-void Mathematics::PolynomialRoots<Real>::Balance3(VariableMatrix& matrix, Real tolerance)
+void Mathematics::PolynomialRoots<Real>::Balance3(VariableMatrixType& matrix, Real tolerance)
 {
     for (auto loop = 0; loop < balanceIterationMax; ++loop)
     {
@@ -674,8 +674,8 @@ void Mathematics::PolynomialRoots<Real>::Balance3(VariableMatrix& matrix, Real t
         {
             const auto rowNorm = GetRowNorm(index, matrix);
             const auto columnNorm = GetColumnNorm(index, matrix);
-            const auto scale = Math::Sqrt(columnNorm / rowNorm);
-            const auto invScale = Math::GetValue(1) / scale;
+            const auto scale = MathType::Sqrt(columnNorm / rowNorm);
+            const auto invScale = MathType::GetValue(1) / scale;
             ScaleRow(index, scale, matrix);
             ScaleColumn(index, invScale, matrix);
         }
@@ -690,13 +690,13 @@ void Mathematics::PolynomialRoots<Real>::Balance3(VariableMatrix& matrix, Real t
 }
 
 template <typename Real>
-bool Mathematics::PolynomialRoots<Real>::IsBalanced3(VariableMatrix& matrix, Real tolerance)
+bool Mathematics::PolynomialRoots<Real>::IsBalanced3(VariableMatrixType& matrix, Real tolerance)
 {
     for (auto i = 0; i < 3; ++i)
     {
         const auto rowNorm = GetRowNorm(i, matrix);
         const auto columnNorm = GetColumnNorm(i, matrix);
-        const auto test = Math::FAbs(Math::GetValue(1) - columnNorm / rowNorm);
+        const auto test = MathType::FAbs(MathType::GetValue(1) - columnNorm / rowNorm);
         if (tolerance < test)
         {
             return false;
@@ -706,12 +706,12 @@ bool Mathematics::PolynomialRoots<Real>::IsBalanced3(VariableMatrix& matrix, Rea
 }
 
 template <typename Real>
-Real Mathematics::PolynomialRoots<Real>::GetRowNorm(int row, VariableMatrix& matrix)
+Real Mathematics::PolynomialRoots<Real>::GetRowNorm(int row, VariableMatrixType& matrix)
 {
-    auto norm = Math::GetValue(0);
+    auto norm = MathType::GetValue(0);
     for (auto column = 0; column < matrix.GetColumnsNumber(); ++column)
     {
-        const auto absValue = Math::FAbs(matrix(row, column));
+        const auto absValue = MathType::FAbs(matrix(row, column));
         if (norm < absValue)
         {
             norm = absValue;
@@ -721,12 +721,12 @@ Real Mathematics::PolynomialRoots<Real>::GetRowNorm(int row, VariableMatrix& mat
 }
 
 template <typename Real>
-Real Mathematics::PolynomialRoots<Real>::GetColumnNorm(int column, VariableMatrix& matrix)
+Real Mathematics::PolynomialRoots<Real>::GetColumnNorm(int column, VariableMatrixType& matrix)
 {
-    auto norm = Math::GetValue(0);
+    auto norm = MathType::GetValue(0);
     for (auto row = 0; row < matrix.GetRowsNumber(); ++row)
     {
-        const auto absValue = Math::FAbs(matrix(row, column));
+        const auto absValue = MathType::FAbs(matrix(row, column));
         if (norm < absValue)
         {
             norm = absValue;
@@ -736,7 +736,7 @@ Real Mathematics::PolynomialRoots<Real>::GetColumnNorm(int column, VariableMatri
 }
 
 template <typename Real>
-void Mathematics::PolynomialRoots<Real>::ScaleRow(int row, Real scale, VariableMatrix& matrix)
+void Mathematics::PolynomialRoots<Real>::ScaleRow(int row, Real scale, VariableMatrixType& matrix)
 {
     for (auto column = 0; column < matrix.GetColumnsNumber(); ++column)
     {
@@ -745,7 +745,7 @@ void Mathematics::PolynomialRoots<Real>::ScaleRow(int row, Real scale, VariableM
 }
 
 template <typename Real>
-void Mathematics::PolynomialRoots<Real>::ScaleColumn(int column, Real scale, VariableMatrix& matrix)
+void Mathematics::PolynomialRoots<Real>::ScaleColumn(int column, Real scale, VariableMatrixType& matrix)
 {
     for (auto row = 0; row < matrix.GetRowsNumber(); ++row)
     {
@@ -766,10 +766,10 @@ Real Mathematics::PolynomialRoots<Real>::SpecialCubic(Real thrice, Real once, Re
     // 这导致 sinh(u) = ((E + sqrt(E^2 + 1))^{1 / 3} - (E + sqrt(E^2 + 1))^{-1 / 3}) / 2.
     // 因此,  r = D*((E + sqrt(E^2 + 1))^{1 / 3} - (E + sqrt(E^2 + 1))^{-1 / 3}) / 2
 
-    const auto sqrt = Math::Sqrt(Math::GetValue(4) * once / (Math::GetValue(3) * thrice));
-    const auto value = Math::GetValue(4) * constant / (thrice * sqrt * sqrt * sqrt);
-    const auto pow = Math::CubeRoot(value + Math::Sqrt(value * value + Math::GetValue(1)));
-    const auto specialCubic = (Math::GetRational(1, 2) * sqrt * (pow - (Math::GetValue(1) / pow)));
+    const auto sqrt = MathType::Sqrt(MathType::GetValue(4) * once / (MathType::GetValue(3) * thrice));
+    const auto value = MathType::GetValue(4) * constant / (thrice * sqrt * sqrt * sqrt);
+    const auto pow = MathType::CubeRoot(value + MathType::Sqrt(value * value + MathType::GetValue(1)));
+    const auto specialCubic = (MathType::GetRational(1, 2) * sqrt * (pow - (MathType::GetValue(1) / pow)));
 
     return specialCubic;
 }
@@ -779,7 +779,7 @@ bool Mathematics::PolynomialRoots<Real>::FindAlgebraic(Real constant, Real once,
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    if (Math::FAbs(quartic) <= epsilon)
+    if (MathType::FAbs(quartic) <= epsilon)
     {
         // 多项式是三次的
         return FindAlgebraic(constant, once, secondary, thrice);
@@ -792,11 +792,11 @@ bool Mathematics::PolynomialRoots<Real>::FindAlgebraic(Real constant, Real once,
     thrice /= quartic;
 
     // 减至解三次多项式 y^3 + newSecondary * y^2 + newOnce * y + newConstant = 0.
-    const auto newConstant = -thrice * thrice * constant + Math::GetValue(4) * secondary * constant - once * once;
-    const auto newOnce = thrice * once - Math::GetValue(4) * constant;
+    const auto newConstant = -thrice * thrice * constant + MathType::GetValue(4) * secondary * constant - once * once;
+    const auto newOnce = thrice * once - MathType::GetValue(4) * constant;
     const auto newSecondary = -secondary;
     // 总是至少产生一个根
-    if (!FindAlgebraic(newConstant, newOnce, newSecondary, Math::GetValue(1)))
+    if (!FindAlgebraic(newConstant, newOnce, newSecondary, MathType::GetValue(1)))
     {
         return false;
     }
@@ -805,80 +805,80 @@ bool Mathematics::PolynomialRoots<Real>::FindAlgebraic(Real constant, Real once,
 
     count = 0;
 
-    auto discriminant = Math::GetRational(1, 4) * thrice * thrice - secondary + thriceRoot;
-    if (Math::FAbs(discriminant) <= epsilon)
+    auto discriminant = MathType::GetRational(1, 4) * thrice * thrice - secondary + thriceRoot;
+    if (MathType::FAbs(discriminant) <= epsilon)
     {
-        discriminant = Math::GetValue(0);
+        discriminant = MathType::GetValue(0);
     }
 
-    if (Math::GetValue(0) < discriminant)
+    if (MathType::GetValue(0) < discriminant)
     {
-        auto discriminantSqrt = Math::Sqrt(discriminant);
-        auto t1 = Math::GetRational(3, 4) * thrice * thrice - discriminantSqrt * discriminantSqrt - Math::GetValue(2) * secondary;
-        auto t2 = (Math::GetValue(4) * thrice * secondary - Math::GetValue(8) * once - thrice * thrice * thrice) /
-                  (Math::GetValue(4) * discriminantSqrt);
+        auto discriminantSqrt = MathType::Sqrt(discriminant);
+        auto t1 = MathType::GetRational(3, 4) * thrice * thrice - discriminantSqrt * discriminantSqrt - MathType::GetValue(2) * secondary;
+        auto t2 = (MathType::GetValue(4) * thrice * secondary - MathType::GetValue(8) * once - thrice * thrice * thrice) /
+                  (MathType::GetValue(4) * discriminantSqrt);
 
         auto tPlus = t1 + t2;
         auto tMinus = t1 - t2;
-        if (Math::FAbs(tPlus) <= epsilon)
+        if (MathType::FAbs(tPlus) <= epsilon)
         {
-            tPlus = Math::GetValue(0);
+            tPlus = MathType::GetValue(0);
         }
-        if (Math::FAbs(tMinus) <= epsilon)
+        if (MathType::FAbs(tMinus) <= epsilon)
         {
-            tMinus = Math::GetValue(0);
+            tMinus = MathType::GetValue(0);
         }
 
-        if (Math::GetValue(0) <= tPlus)
+        if (MathType::GetValue(0) <= tPlus)
         {
-            auto tPlusSqrt = Math::Sqrt(tPlus);
-            SetRoot(count, Math::GetRational(-1, 4) * thrice + (Math::GetRational(1, 2) * (discriminantSqrt + tPlusSqrt)));
+            auto tPlusSqrt = MathType::Sqrt(tPlus);
+            SetRoot(count, MathType::GetRational(-1, 4) * thrice + (MathType::GetRational(1, 2) * (discriminantSqrt + tPlusSqrt)));
             ++count;
-            SetRoot(count, Math::GetRational(-1, 4) * thrice + (Math::GetRational(1, 2) * (discriminantSqrt - tPlusSqrt)));
+            SetRoot(count, MathType::GetRational(-1, 4) * thrice + (MathType::GetRational(1, 2) * (discriminantSqrt - tPlusSqrt)));
             ++count;
         }
-        if (Math::GetValue(0) <= tMinus)
+        if (MathType::GetValue(0) <= tMinus)
         {
-            auto e = Math::Sqrt(tMinus);
-            SetRoot(count, Math::GetRational(-1, 4) * thrice + (Math::GetRational(1, 2) * (e - discriminantSqrt)));
+            auto e = MathType::Sqrt(tMinus);
+            SetRoot(count, MathType::GetRational(-1, 4) * thrice + (MathType::GetRational(1, 2) * (e - discriminantSqrt)));
             ++count;
-            SetRoot(count, Math::GetRational(-1, 4) * thrice - (Math::GetRational(1, 2) * (e + discriminantSqrt)));
+            SetRoot(count, MathType::GetRational(-1, 4) * thrice - (MathType::GetRational(1, 2) * (e + discriminantSqrt)));
             ++count;
         }
     }
-    else if (discriminant < Math::GetValue(0))
+    else if (discriminant < MathType::GetValue(0))
     {
         count = 0;
     }
     else
     {
-        auto t2 = thriceRoot * thriceRoot - Math::GetValue(4) * constant;
+        auto t2 = thriceRoot * thriceRoot - MathType::GetValue(4) * constant;
         if (-epsilon <= t2)
         {
             // 取整为零
-            if (t2 < Math::GetValue(0))
+            if (t2 < MathType::GetValue(0))
             {
-                t2 = Math::GetValue(0);
+                t2 = MathType::GetValue(0);
             }
 
-            t2 = Math::GetValue(2) * Math::Sqrt(t2);
-            auto t1 = Math::GetRational(3, 4) * thrice * thrice - Math::GetValue(2) * secondary;
+            t2 = MathType::GetValue(2) * MathType::Sqrt(t2);
+            auto t1 = MathType::GetRational(3, 4) * thrice * thrice - MathType::GetValue(2) * secondary;
             auto tPlus = t1 + t2;
             if (epsilon <= tPlus)
             {
-                auto tPlusSqrt = Math::Sqrt(tPlus);
-                SetRoot(count, Math::GetRational(-1, 4) * thrice + Math::GetRational(1, 2) * tPlusSqrt);
+                auto tPlusSqrt = MathType::Sqrt(tPlus);
+                SetRoot(count, MathType::GetRational(-1, 4) * thrice + MathType::GetRational(1, 2) * tPlusSqrt);
                 ++count;
-                SetRoot(count, Math::GetRational(-1, 4) * thrice - Math::GetRational(1, 2) * tPlusSqrt);
+                SetRoot(count, MathType::GetRational(-1, 4) * thrice - MathType::GetRational(1, 2) * tPlusSqrt);
                 ++count;
             }
             auto tMinus = t1 - t2;
             if (epsilon <= tMinus)
             {
-                auto tMinusSqrt = Math::Sqrt(tMinus);
-                SetRoot(count, Math::GetRational(-1, 4) * thrice + Math::GetRational(1, 2) * tMinusSqrt);
+                auto tMinusSqrt = MathType::Sqrt(tMinus);
+                SetRoot(count, MathType::GetRational(-1, 4) * thrice + MathType::GetRational(1, 2) * tMinusSqrt);
                 ++count;
-                SetRoot(count, Math::GetRational(-1, 4) * thrice - Math::GetRational(1, 2) * tMinusSqrt);
+                SetRoot(count, MathType::GetRational(-1, 4) * thrice - MathType::GetRational(1, 2) * tMinusSqrt);
                 ++count;
             }
         }
@@ -890,7 +890,7 @@ bool Mathematics::PolynomialRoots<Real>::FindAlgebraic(Real constant, Real once,
 template <typename Real>
 bool Mathematics::PolynomialRoots<Real>::FindEigenvalues(Real constant, Real once, Real secondary, Real thrice, Real quartic, bool doBalancing, Real tolerance)
 {
-    if (Math::FAbs(quartic) <= epsilon)
+    if (MathType::FAbs(quartic) <= epsilon)
     {
         // 多项式是三次。
         return FindAlgebraic(constant, once, secondary, thrice);
@@ -903,10 +903,10 @@ bool Mathematics::PolynomialRoots<Real>::FindEigenvalues(Real constant, Real onc
     thrice /= quartic;
 
     // 构建4×4的同伴矩阵。初始化为零
-    VariableMatrix matrix{ 4, 4 };
-    matrix(1, 0) = Math::GetValue(1);
-    matrix(2, 1) = Math::GetValue(1);
-    matrix(3, 2) = Math::GetValue(1);
+    VariableMatrixType matrix{ 4, 4 };
+    matrix(1, 0) = MathType::GetValue(1);
+    matrix(2, 1) = MathType::GetValue(1);
+    matrix(3, 2) = MathType::GetValue(1);
     matrix(0, 3) = -constant;
     matrix(1, 3) = -once;
     matrix(2, 3) = -secondary;
@@ -921,29 +921,29 @@ bool Mathematics::PolynomialRoots<Real>::FindEigenvalues(Real constant, Real onc
 }
 
 template <typename Real>
-void Mathematics::PolynomialRoots<Real>::BalanceCompanion4(VariableMatrix& matrix, Real tolerance)
+void Mathematics::PolynomialRoots<Real>::BalanceCompanion4(VariableMatrixType& matrix, Real tolerance)
 {
-    auto a10 = Math::FAbs(matrix(1, 0));
-    auto a21 = Math::FAbs(matrix(2, 1));
-    auto a32 = Math::FAbs(matrix(3, 2));
-    auto a03 = Math::FAbs(matrix(0, 3));
-    auto a13 = Math::FAbs(matrix(1, 3));
-    auto a23 = Math::FAbs(matrix(2, 3));
-    auto a33 = Math::FAbs(matrix(3, 3));
+    auto a10 = MathType::FAbs(matrix(1, 0));
+    auto a21 = MathType::FAbs(matrix(2, 1));
+    auto a32 = MathType::FAbs(matrix(3, 2));
+    auto a03 = MathType::FAbs(matrix(0, 3));
+    auto a13 = MathType::FAbs(matrix(1, 3));
+    auto a23 = MathType::FAbs(matrix(2, 3));
+    auto a33 = MathType::FAbs(matrix(3, 3));
 
     for (auto i = 0; i < balanceCompanionIterationMax; ++i)
     {
         // 平衡 行/列 0
         auto rowNorm = a03;
         auto columnNorm = a10;
-        auto scale = Math::Sqrt(columnNorm / rowNorm);
+        auto scale = MathType::Sqrt(columnNorm / rowNorm);
         a03 *= scale;
         a10 = a03;
 
         // 平衡 行/列 1
         rowNorm = (a13 <= a10 ? a10 : a13);
         columnNorm = a21;
-        scale = Math::Sqrt(columnNorm / rowNorm);
+        scale = MathType::Sqrt(columnNorm / rowNorm);
         a10 *= scale;
         a13 *= scale;
         a21 /= scale;
@@ -951,7 +951,7 @@ void Mathematics::PolynomialRoots<Real>::BalanceCompanion4(VariableMatrix& matri
         // 平衡 行/列 2
         rowNorm = (a21 >= a23 ? a21 : a23);
         columnNorm = a32;
-        scale = Math::Sqrt(columnNorm / rowNorm);
+        scale = MathType::Sqrt(columnNorm / rowNorm);
         a21 *= scale;
         a23 *= scale;
         a32 /= scale;
@@ -967,7 +967,7 @@ void Mathematics::PolynomialRoots<Real>::BalanceCompanion4(VariableMatrix& matri
         {
             columnNorm = a33;
         }
-        scale = Math::Sqrt(columnNorm / rowNorm);
+        scale = MathType::Sqrt(columnNorm / rowNorm);
         a32 *= scale;
         a03 /= scale;
         a13 /= scale;
@@ -981,13 +981,13 @@ void Mathematics::PolynomialRoots<Real>::BalanceCompanion4(VariableMatrix& matri
         MATHEMATICS_ASSERTION_1(i != balanceCompanionIterationMax - 1, "超过最大迭代\n");
     }
 
-    matrix(1, 0) = (Math::GetValue(0) <= matrix(1, 0) ? a10 : -a10);
-    matrix(2, 1) = (Math::GetValue(0) <= matrix(2, 1) ? a21 : -a21);
-    matrix(3, 2) = (Math::GetValue(0) <= matrix(3, 2) ? a32 : -a32);
-    matrix(0, 3) = (Math::GetValue(0) <= matrix(0, 3) ? a03 : -a03);
-    matrix(1, 3) = (Math::GetValue(0) <= matrix(1, 3) ? a13 : -a13);
-    matrix(2, 3) = (Math::GetValue(0) <= matrix(2, 3) ? a23 : -a23);
-    matrix(3, 3) = (Math::GetValue(0) <= matrix(3, 3) ? a33 : -a33);
+    matrix(1, 0) = (MathType::GetValue(0) <= matrix(1, 0) ? a10 : -a10);
+    matrix(2, 1) = (MathType::GetValue(0) <= matrix(2, 1) ? a21 : -a21);
+    matrix(3, 2) = (MathType::GetValue(0) <= matrix(3, 2) ? a32 : -a32);
+    matrix(0, 3) = (MathType::GetValue(0) <= matrix(0, 3) ? a03 : -a03);
+    matrix(1, 3) = (MathType::GetValue(0) <= matrix(1, 3) ? a13 : -a13);
+    matrix(2, 3) = (MathType::GetValue(0) <= matrix(2, 3) ? a23 : -a23);
+    matrix(3, 3) = (MathType::GetValue(0) <= matrix(3, 3) ? a33 : -a33);
 }
 
 template <typename Real>
@@ -996,7 +996,7 @@ bool Mathematics::PolynomialRoots<Real>::IsBalancedCompanion4(Real a10, Real a21
     // 行/列 0
     auto rowNorm = a03;
     auto columnNorm = a10;
-    auto test = Math::FAbs(Math::GetValue(1) - columnNorm / rowNorm);
+    auto test = MathType::FAbs(MathType::GetValue(1) - columnNorm / rowNorm);
     if (tolerance < test)
     {
         return false;
@@ -1005,7 +1005,7 @@ bool Mathematics::PolynomialRoots<Real>::IsBalancedCompanion4(Real a10, Real a21
     // 行/列 1
     rowNorm = (a13 <= a10 ? a10 : a13);
     columnNorm = a21;
-    test = Math::FAbs(Math::GetValue(1) - columnNorm / rowNorm);
+    test = MathType::FAbs(MathType::GetValue(1) - columnNorm / rowNorm);
     if (tolerance < test)
     {
         return false;
@@ -1014,7 +1014,7 @@ bool Mathematics::PolynomialRoots<Real>::IsBalancedCompanion4(Real a10, Real a21
     // 行/列 2
     rowNorm = (a23 <= a21 ? a21 : a23);
     columnNorm = a32;
-    test = Math::FAbs(Math::GetValue(1) - columnNorm / rowNorm);
+    test = MathType::FAbs(MathType::GetValue(1) - columnNorm / rowNorm);
     if (tolerance < test)
     {
         return false;
@@ -1031,25 +1031,25 @@ bool Mathematics::PolynomialRoots<Real>::IsBalancedCompanion4(Real a10, Real a21
     {
         columnNorm = a33;
     }
-    test = Math::FAbs(Math::GetValue(1) - columnNorm / rowNorm);
+    test = MathType::FAbs(MathType::GetValue(1) - columnNorm / rowNorm);
 
     return test <= tolerance;
 }
 
 template <typename Real>
-bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrix& matrix)
+bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrixType& matrix)
 {
-    VariableLengthVector vector{ 4 };
+    VariableLengthVectorType vector{ 4 };
 
     for (auto i = 0; i < maxIterations; ++i)
     {
-        auto rhs = epsilon * (Math::FAbs(matrix(0, 0)) + Math::FAbs(matrix(1, 1)));
+        auto rhs = epsilon * (MathType::FAbs(matrix(0, 0)) + MathType::FAbs(matrix(1, 1)));
 
-        if (Math::FAbs(matrix(1, 0)) <= rhs)
+        if (MathType::FAbs(matrix(1, 0)) <= rhs)
         {
             // matrix(0,0)是一个根，减少3×3子矩阵
             // 避免拷贝，并通过行/列偏移量的FrancisQR方法。
-            VariableMatrix matrixMS{ 3, 3 };
+            VariableMatrixType matrixMS{ 3, 3 };
 
             matrixMS(0, 0) = matrix(1, 1);
             matrixMS(0, 1) = matrix(1, 2);
@@ -1069,14 +1069,14 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrix& matrix)
             return true;
         }
 
-        rhs = epsilon * (Math::FAbs(matrix(1, 1)) + Math::FAbs(matrix(2, 2)));
+        rhs = epsilon * (MathType::FAbs(matrix(1, 1)) + MathType::FAbs(matrix(2, 2)));
 
-        if (Math::FAbs(matrix(2, 1)) <= rhs)
+        if (MathType::FAbs(matrix(2, 1)) <= rhs)
         {
             // 该矩阵被分解成两个2×2块。解这些块的二次方程式。
             auto trace = matrix(0, 0) + matrix(1, 1);
             auto det = matrix(0, 0) * matrix(1, 1) - matrix(0, 1) * matrix(1, 0);
-            if (!FindAlgebraic(det, -trace, Math::GetValue(1)))
+            if (!FindAlgebraic(det, -trace, MathType::GetValue(1)))
             {
                 return false;
             }
@@ -1090,7 +1090,7 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrix& matrix)
 
             trace = matrix(2, 2) + matrix(3, 3);
             det = matrix(2, 2) * matrix(3, 3) - matrix(2, 3) * matrix(3, 2);
-            if (!FindAlgebraic(det, -trace, Math::GetValue(1)))
+            if (!FindAlgebraic(det, -trace, MathType::GetValue(1)))
             {
                 return false;
             }
@@ -1102,13 +1102,13 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrix& matrix)
             return 0 < count;
         }
 
-        rhs = epsilon * (Math::FAbs(matrix(2, 2)) + Math::FAbs(matrix(3, 3)));
+        rhs = epsilon * (MathType::FAbs(matrix(2, 2)) + MathType::FAbs(matrix(3, 3)));
 
-        if (Math::FAbs(matrix(3, 2)) <= rhs)
+        if (MathType::FAbs(matrix(3, 2)) <= rhs)
         {
             // matrix(3,3)是一个根，减少3×3子矩阵
             // 避免拷贝，并通过行/列偏移量的FrancisQR方法。
-            VariableMatrix matrixMS{ 3, 3 };
+            VariableMatrixType matrixMS{ 3, 3 };
 
             matrixMS(0, 0) = matrix(0, 0);
             matrixMS(0, 1) = matrix(0, 1);
@@ -1139,14 +1139,14 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrix& matrix)
 
     // 现在，分离最小次对角项矩阵。
     auto i = 0;
-    auto minValue = Math::FAbs(matrix(1, 0));
-    auto absValue = Math::FAbs(matrix(2, 1));
+    auto minValue = MathType::FAbs(matrix(1, 0));
+    auto absValue = MathType::FAbs(matrix(2, 1));
     if (absValue < minValue)
     {
         minValue = absValue;
         i = 1;
     }
-    absValue = Math::FAbs(matrix(3, 2));
+    absValue = MathType::FAbs(matrix(3, 2));
     if (absValue < minValue)
     {
         minValue = absValue;
@@ -1157,7 +1157,7 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrix& matrix)
     {
         // matrix(0,0)是一个根，减少3×3子矩阵
         // 避免拷贝，并通过行/列偏移量的FrancisQR方法。
-        VariableMatrix matrixMS{ 3, 3 };
+        VariableMatrixType matrixMS{ 3, 3 };
 
         matrixMS(0, 0) = matrix(1, 1);
         matrixMS(0, 1) = matrix(1, 2);
@@ -1179,7 +1179,7 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrix& matrix)
         // 该矩阵被分解成两个2×2块。解这些块的二次方程式。
         auto trace = matrix(0, 0) + matrix(1, 1);
         auto det = matrix(0, 0) * matrix(1, 1) - matrix(0, 1) * matrix(1, 0);
-        if (!FindAlgebraic(det, -trace, Math::GetValue(1)))
+        if (!FindAlgebraic(det, -trace, MathType::GetValue(1)))
         {
             return false;
         }
@@ -1192,7 +1192,7 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrix& matrix)
 
         trace = matrix(2, 2) + matrix(3, 3);
         det = matrix(2, 2) * matrix(3, 3) - matrix(2, 3) * matrix(3, 2);
-        if (!FindAlgebraic(det, -trace, Math::GetValue(1)))
+        if (!FindAlgebraic(det, -trace, MathType::GetValue(1)))
         {
             return false;
         }
@@ -1205,7 +1205,7 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrix& matrix)
     {
         // matrix(3,3)是一个根，减少3×3子矩阵
         // 避免拷贝，并通过行/列偏移量的FrancisQR方法。
-        VariableMatrix matrixMS{ 3, 3 };
+        VariableMatrixType matrixMS{ 3, 3 };
 
         matrixMS(0, 0) = matrix(0, 0);
         matrixMS(0, 1) = matrix(0, 1);
@@ -1231,50 +1231,50 @@ Real Mathematics::PolynomialRoots<Real>::GetBound(Real constant, Real once, Real
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    if (Math::FAbs(quartic) <= epsilon)
+    if (MathType::FAbs(quartic) <= epsilon)
     {
         // 多项式是三次的
         return GetBound(constant, once, secondary, thrice);
     }
 
-    auto maxValue = Math::FAbs(constant) / quartic;
+    auto maxValue = MathType::FAbs(constant) / quartic;
 
-    auto value = Math::FAbs(once) / quartic;
+    auto value = MathType::FAbs(once) / quartic;
     if (maxValue < value)
     {
         maxValue = value;
     }
 
-    value = Math::FAbs(secondary) / quartic;
+    value = MathType::FAbs(secondary) / quartic;
     if (maxValue < value)
     {
         maxValue = value;
     }
 
-    value = Math::FAbs(thrice) / quartic;
+    value = MathType::FAbs(thrice) / quartic;
     if (maxValue < value)
     {
         maxValue = value;
     }
 
-    return Math::GetValue(1) + maxValue;
+    return MathType::GetValue(1) + maxValue;
 }
 
 template <typename Real>
-bool Mathematics::PolynomialRoots<Real>::FindBisection(const Polynomial& polynomial, int digits)
+bool Mathematics::PolynomialRoots<Real>::FindBisection(const PolynomialType& polynomial, int digits)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
     auto bound = GetBound(polynomial);
 
-    if (Math::GetValue(0) <= bound)
+    if (MathType::GetValue(0) <= bound)
         return FindBisection(polynomial, -bound, bound, digits);
     else
         return false;
 }
 
 template <typename Real>
-Real Mathematics::PolynomialRoots<Real>::GetBound(const Polynomial& polynomial)
+Real Mathematics::PolynomialRoots<Real>::GetBound(const PolynomialType& polynomial)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -1284,25 +1284,25 @@ Real Mathematics::PolynomialRoots<Real>::GetBound(const Polynomial& polynomial)
     if (degree < 1)
     {
         // 多项式是常数，返回无效边界。
-        return Math::GetValue(-1);
+        return MathType::GetValue(-1);
     }
 
-    auto invCopyDegree = Math::GetValue(1) / copyPolynomial[degree];
-    auto maxValue = Math::GetValue(0);
+    auto invCopyDegree = MathType::GetValue(1) / copyPolynomial[degree];
+    auto maxValue = MathType::GetValue(0);
     for (auto i = 0; i < degree; ++i)
     {
-        auto value = Math::FAbs(copyPolynomial[i]) * invCopyDegree;
+        auto value = MathType::FAbs(copyPolynomial[i]) * invCopyDegree;
         if (maxValue < value)
         {
             maxValue = value;
         }
     }
 
-    return Math::GetValue(1) + maxValue;
+    return MathType::GetValue(1) + maxValue;
 }
 
 template <typename Real>
-bool Mathematics::PolynomialRoots<Real>::FindBisection(const Polynomial& polynomial, Real xMin, Real xMax, int digits)
+bool Mathematics::PolynomialRoots<Real>::FindBisection(const PolynomialType& polynomial, Real xMin, Real xMax, int digits)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -1313,7 +1313,7 @@ bool Mathematics::PolynomialRoots<Real>::FindBisection(const Polynomial& polynom
         root.resize(maxRoot);
     }
 
-    auto bisection = Math::GetValue(0);
+    auto bisection = MathType::GetValue(0);
     if (polynomial.GetDegree() == 1)
     {
         if (Bisection(polynomial, xMin, xMax, digits, bisection))
@@ -1384,7 +1384,7 @@ bool Mathematics::PolynomialRoots<Real>::FindBisection(const Polynomial& polynom
             const auto beforeRootIndex = i - 1;
 
             if (auto rootDifference = newRoot.at(i) - newRoot.at(beforeRootIndex);
-                epsilon < Math::FAbs(rootDifference))
+                epsilon < MathType::FAbs(rootDifference))
             {
                 root.at(count++) = newRoot.at(i);
             }
@@ -1399,44 +1399,44 @@ bool Mathematics::PolynomialRoots<Real>::FindBisection(const Polynomial& polynom
 }
 
 template <typename Real>
-bool Mathematics::PolynomialRoots<Real>::Bisection(const Polynomial& polynomial, Real xMin, Real xMax, int digits, Real& result) noexcept(gAssert < 3 || gMathematicsAssert < 3)
+bool Mathematics::PolynomialRoots<Real>::Bisection(const PolynomialType& polynomial, Real xMin, Real xMax, int digits, Real& result) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     auto xMinPolynomial = polynomial(xMin);
-    if (Math::FAbs(xMinPolynomial) <= Math::GetZeroTolerance())
+    if (MathType::FAbs(xMinPolynomial) <= MathType::GetZeroTolerance())
     {
         result = xMin;
         return true;
     }
 
     auto xMaxPolynomial = polynomial(xMax);
-    if (Math::FAbs(xMaxPolynomial) <= Math::GetZeroTolerance())
+    if (MathType::FAbs(xMaxPolynomial) <= MathType::GetZeroTolerance())
     {
         result = xMax;
         return true;
     }
 
-    if (Math::GetValue(0) < xMinPolynomial * xMaxPolynomial)
+    if (MathType::GetValue(0) < xMinPolynomial * xMaxPolynomial)
     {
         return false;
     }
 
     // 确定迭代次数来获得'digits'的准确性..
-    auto differenceLog = Math::Log(xMax - xMin);
-    auto digitsProductLN10 = static_cast<Real>(digits) * Math::GetLN10();
-    auto arg = (differenceLog + digitsProductLN10) / Math::GetLN2();
-    const auto maxIter = static_cast<int>(arg + Math::GetRational(1, 2));
+    auto differenceLog = MathType::Log(xMax - xMin);
+    auto digitsProductLN10 = static_cast<Real>(digits) * MathType::GetLN10();
+    auto arg = (differenceLog + digitsProductLN10) / MathType::GetLN2();
+    const auto maxIter = static_cast<int>(arg + MathType::GetRational(1, 2));
 
     for (auto i = 0; i < maxIter; ++i)
     {
-        result = Math::GetRational(1, 2) * (xMin + xMax);
+        result = MathType::GetRational(1, 2) * (xMin + xMax);
         auto rootPolynomial = polynomial(result);
         auto product = rootPolynomial * xMinPolynomial;
-        if (product < Math::GetValue(0))
+        if (product < MathType::GetValue(0))
         {
             xMax = result;
             xMaxPolynomial = rootPolynomial;
         }
-        else if (Math::GetValue(0) < product)
+        else if (MathType::GetValue(0) < product)
         {
             xMin = result;
             xMinPolynomial = rootPolynomial;
@@ -1451,7 +1451,7 @@ bool Mathematics::PolynomialRoots<Real>::Bisection(const Polynomial& polynomial,
 }
 
 template <typename Real>
-bool Mathematics::PolynomialRoots<Real>::AllRealPartsNegative(const Polynomial& polynomial)
+bool Mathematics::PolynomialRoots<Real>::AllRealPartsNegative(const PolynomialType& polynomial)
 {
     // 使用系数的一个副本，以后调用将改变副本。
     const auto degree = polynomial.GetDegree();
@@ -1463,21 +1463,21 @@ bool Mathematics::PolynomialRoots<Real>::AllRealPartsNegative(const Polynomial& 
 
     // 使多项式首一。
 
-    if (epsilon < Math::FAbs(coeff.at(degree) - Math::GetValue(1)))
+    if (epsilon < MathType::FAbs(coeff.at(degree) - MathType::GetValue(1)))
     {
         for (auto i = 0; i < degree; ++i)
         {
             coeff.at(i) /= coeff.at(degree);
         }
 
-        coeff.at(degree) = Math::GetValue(1);
+        coeff.at(degree) = MathType::GetValue(1);
     }
 
     return AllRealPartsNegative(degree, coeff);
 }
 
 template <typename Real>
-bool Mathematics::PolynomialRoots<Real>::AllRealPartsPositive(const Polynomial& polynomial)
+bool Mathematics::PolynomialRoots<Real>::AllRealPartsPositive(const PolynomialType& polynomial)
 {
     // 使用系数的一个副本，以后调用将改变副本。
     const auto degree = polynomial.GetDegree();
@@ -1488,14 +1488,14 @@ bool Mathematics::PolynomialRoots<Real>::AllRealPartsPositive(const Polynomial& 
     }
 
     // 使多项式首一。
-    if (epsilon < Math::FAbs(coeff.at(degree) - Math::GetValue(1)))
+    if (epsilon < MathType::FAbs(coeff.at(degree) - MathType::GetValue(1)))
     {
         for (auto i = 0; i < degree; ++i)
         {
             coeff.at(i) /= coeff.at(degree);
         }
 
-        coeff.at(degree) = Math::GetValue(1);
+        coeff.at(degree) = MathType::GetValue(1);
     }
 
     // 反射 z -> -z.
@@ -1512,10 +1512,10 @@ bool Mathematics::PolynomialRoots<Real>::AllRealPartsPositive(const Polynomial& 
 template <typename Real>
 bool Mathematics::PolynomialRoots<Real>::AllRealPartsNegative(int degree, Container& coeff)
 {
-    MATHEMATICS_ASSERTION_1(Math::FAbs(coeff.at(degree) - Math::GetValue(1)) <= epsilon, "多项式首1\n");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(coeff.at(degree) - MathType::GetValue(1)) <= epsilon, "多项式首1\n");
 
     const auto degreeMinus1 = degree - 1;
-    if (coeff.at(degreeMinus1) <= Math::GetValue(0))
+    if (coeff.at(degreeMinus1) <= MathType::GetValue(0))
     {
         return false;
     }
@@ -1527,7 +1527,7 @@ bool Mathematics::PolynomialRoots<Real>::AllRealPartsNegative(int degree, Contai
 
     Container tmpCoeff(degree);
 
-    tmpCoeff.at(0) = Math::GetValue(2) * coeff.at(0) * coeff.at(degreeMinus1);
+    tmpCoeff.at(0) = MathType::GetValue(2) * coeff.at(0) * coeff.at(degreeMinus1);
 
     for (auto i = 1; i <= degree - 2; ++i)
     {
@@ -1537,15 +1537,15 @@ bool Mathematics::PolynomialRoots<Real>::AllRealPartsNegative(int degree, Contai
             const auto next = i - 1;
             tmpCoeff.at(i) -= coeff.at(next);
         }
-        tmpCoeff.at(i) *= Math::GetValue(2);
+        tmpCoeff.at(i) *= MathType::GetValue(2);
     }
 
-    tmpCoeff.at(degreeMinus1) = Math::GetValue(2) * coeff.at(degreeMinus1) * coeff.at(degreeMinus1);
+    tmpCoeff.at(degreeMinus1) = MathType::GetValue(2) * coeff.at(degreeMinus1) * coeff.at(degreeMinus1);
 
     auto nextDegree = 0;
     for (nextDegree = degree - 1; 0 <= nextDegree; --nextDegree)
     {
-        if (epsilon < Math::FAbs(tmpCoeff.at(nextDegree)))
+        if (epsilon < MathType::FAbs(tmpCoeff.at(nextDegree)))
         {
             break;
         }
@@ -1557,7 +1557,7 @@ bool Mathematics::PolynomialRoots<Real>::AllRealPartsNegative(int degree, Contai
 
     if (0 <= nextDegree)
     {
-        coeff.at(nextDegree) = Math::GetValue(1);
+        coeff.at(nextDegree) = MathType::GetValue(1);
 
         return AllRealPartsNegative(nextDegree, coeff);
     }
@@ -1568,7 +1568,7 @@ bool Mathematics::PolynomialRoots<Real>::AllRealPartsNegative(int degree, Contai
 }
 
 template <typename Real>
-int Mathematics::PolynomialRoots<Real>::GetRootCount(const Polynomial& polynomial, Real begin, Real end)
+int Mathematics::PolynomialRoots<Real>::GetRootCount(const PolynomialType& polynomial, Real begin, Real end)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -1578,7 +1578,7 @@ int Mathematics::PolynomialRoots<Real>::GetRootCount(const Polynomial& polynomia
     if (degree == 0)
     {
         // 多项式是在区间恒定。
-        if (Math::FAbs(coeff.at(0)) <= epsilon)
+        if (MathType::FAbs(coeff.at(0)) <= epsilon)
         {
             return 0;
         }
@@ -1590,7 +1590,7 @@ int Mathematics::PolynomialRoots<Real>::GetRootCount(const Polynomial& polynomia
     }
 
     // 生成Sturm序列。
-    std::vector<Polynomial> sturm{ Polynomial{ polynomial }, polynomial.GetDerivative() };
+    std::vector<PolynomialType> sturm{ PolynomialType{ polynomial }, polynomial.GetDerivative() };
     auto beginPolynomialIndex = 0;
     auto endPolynomialIndex = 1;
     auto currentIndex = sturm.size() - 1;
@@ -1612,7 +1612,7 @@ int Mathematics::PolynomialRoots<Real>::GetRootCount(const Polynomial& polynomia
 
     // 计数在begin的符号改变。
     auto signChanges0 = 0;
-    if (Math::FAbs(begin + Math::maxReal) <= epsilon)
+    if (MathType::FAbs(begin + MathType::maxReal) <= epsilon)
     {
         Real value0{};
 
@@ -1625,9 +1625,9 @@ int Mathematics::PolynomialRoots<Real>::GetRootCount(const Polynomial& polynomia
             value0 = sturm.at(0).GetEnd();
         }
 
-        if (Math::FAbs(value0) < epsilon)
+        if (MathType::FAbs(value0) < epsilon)
         {
-            value0 = Math::GetValue(0);
+            value0 = MathType::GetValue(0);
         }
 
         for (auto i = 1; i < numSturm; ++i)
@@ -1643,12 +1643,12 @@ int Mathematics::PolynomialRoots<Real>::GetRootCount(const Polynomial& polynomia
                 value1 = sturm.at(i).GetEnd();
             }
 
-            if (Math::FAbs(value1) < epsilon)
+            if (MathType::FAbs(value1) < epsilon)
             {
-                value1 = Math::GetValue(0);
+                value1 = MathType::GetValue(0);
             }
 
-            if (value0 * value1 < Math::GetValue(0) || Math::FAbs(value0) < epsilon)
+            if (value0 * value1 < MathType::GetValue(0) || MathType::FAbs(value0) < epsilon)
             {
                 ++signChanges0;
             }
@@ -1661,9 +1661,9 @@ int Mathematics::PolynomialRoots<Real>::GetRootCount(const Polynomial& polynomia
         Real value0{};
 
         value0 = sturm.at(0)(begin);
-        if (Math::FAbs(value0) < epsilon)
+        if (MathType::FAbs(value0) < epsilon)
         {
-            value0 = Math::GetValue(0);
+            value0 = MathType::GetValue(0);
         }
 
         for (auto i = 1; i < numSturm; ++i)
@@ -1671,12 +1671,12 @@ int Mathematics::PolynomialRoots<Real>::GetRootCount(const Polynomial& polynomia
             Real value1{};
 
             value1 = sturm.at(0)(begin);
-            if (Math::FAbs(value1) < epsilon)
+            if (MathType::FAbs(value1) < epsilon)
             {
-                value1 = Math::GetValue(0);
+                value1 = MathType::GetValue(0);
             }
 
-            if (value0 * value1 < Math::GetValue(0) || Math::FAbs(value0) < epsilon)
+            if (value0 * value1 < MathType::GetValue(0) || MathType::FAbs(value0) < epsilon)
             {
                 ++signChanges0;
             }
@@ -1687,23 +1687,23 @@ int Mathematics::PolynomialRoots<Real>::GetRootCount(const Polynomial& polynomia
 
     // 计数在end的符号改变。
     auto signChanges1 = 0;
-    if (Math::FAbs(end - Math::maxReal) <= epsilon)
+    if (MathType::FAbs(end - MathType::maxReal) <= epsilon)
     {
         auto value0 = sturm.at(0).GetEnd();
-        if (Math::FAbs(value0) < epsilon)
+        if (MathType::FAbs(value0) < epsilon)
         {
-            value0 = Math::GetValue(0);
+            value0 = MathType::GetValue(0);
         }
 
         for (auto i = 1; i < numSturm; ++i)
         {
             auto value1 = sturm.at(0).GetEnd();
-            if (Math::FAbs(value1) < epsilon)
+            if (MathType::FAbs(value1) < epsilon)
             {
-                value1 = Math::GetValue(0);
+                value1 = MathType::GetValue(0);
             }
 
-            if (value0 * value1 < Math::GetValue(0) || Math::FAbs(value0) < epsilon)
+            if (value0 * value1 < MathType::GetValue(0) || MathType::FAbs(value0) < epsilon)
             {
                 ++signChanges1;
             }
@@ -1714,20 +1714,20 @@ int Mathematics::PolynomialRoots<Real>::GetRootCount(const Polynomial& polynomia
     else
     {
         auto value0 = sturm.at(0)(end);
-        if (Math::FAbs(value0) < epsilon)
+        if (MathType::FAbs(value0) < epsilon)
         {
-            value0 = Math::GetValue(0);
+            value0 = MathType::GetValue(0);
         }
 
         for (auto i = 1; i < numSturm; ++i)
         {
             auto value1 = sturm.at(i)(end);
-            if (Math::FAbs(value1) < epsilon)
+            if (MathType::FAbs(value1) < epsilon)
             {
-                value1 = Math::GetValue(0);
+                value1 = MathType::GetValue(0);
             }
 
-            if (value0 * value1 < Math::GetValue(0) || Math::FAbs(value0) < epsilon)
+            if (value0 * value1 < MathType::GetValue(0) || MathType::FAbs(value0) < epsilon)
             {
                 ++signChanges1;
             }

@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::StaticTestIntersectorTriangle3Cylinder3(const Triangle3& triangle, const Cylinder3& cylinder, const Real epsilon)
+Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::StaticTestIntersectorTriangle3Cylinder3(const Triangle3Type& triangle, const Cylinder3Type& cylinder, const Real epsilon)
     : ParentType{ epsilon }, triangle{ triangle }, cylinder{ cylinder }
 {
     Test();
@@ -55,18 +55,18 @@ Mathematics::Cylinder3<Real> Mathematics::StaticTestIntersectorTriangle3Cylinder
 template <typename Real>
 void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
 {
-    const auto vector3OrthonormalBasis = Vector3Tools::GenerateComplementBasis(cylinder.GetAxis().GetDirection());
+    const auto vector3OrthonormalBasis = Vector3ToolsType::GenerateComplementBasis(cylinder.GetAxis().GetDirection());
     const auto u = vector3OrthonormalBasis.GetUVector();
     const auto v = vector3OrthonormalBasis.GetVVector();
 
-    std::array<Vector3, 3> temp{};
+    std::array<Vector3Type, 3> temp{};
 
     for (auto i = 0; i < 3; ++i)
     {
         auto delta = triangle.GetVertex(i) - cylinder.GetAxis().GetOrigin();
-        temp.at(i)[0] = Vector3Tools::DotProduct(u, delta);
-        temp.at(i)[1] = Vector3Tools::DotProduct(v, delta);
-        temp.at(i)[2] = Vector3Tools::DotProduct(cylinder.GetAxis().GetDirection(), delta);
+        temp.at(i)[0] = Vector3ToolsType::DotProduct(u, delta);
+        temp.at(i)[1] = Vector3ToolsType::DotProduct(v, delta);
+        temp.at(i)[2] = Vector3ToolsType::DotProduct(cylinder.GetAxis().GetDirection(), delta);
     }
 
     auto j0 = 0;
@@ -115,13 +115,13 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
         }
     }
 
-    std::array<Vector2, 3> q{ Vector2{ temp.at(j0)[0], temp.at(j0)[1] },
-                              Vector2{ temp.at(j1)[0], temp.at(j1)[1] },
-                              Vector2{ temp.at(j2)[0], temp.at(j2)[1] } };
+    std::array<Vector2Type, 3> q{ Vector2{ temp.at(j0)[0], temp.at(j0)[1] },
+                                  Vector2{ temp.at(j1)[0], temp.at(j1)[1] },
+                                  Vector2{ temp.at(j2)[0], temp.at(j2)[1] } };
 
     std::array<Real, 3> z{ temp.at(j0)[2], temp.at(j1)[2], temp.at(j2)[2] };
 
-    const auto hhalf = Math::GetRational(1, 2) * cylinder.GetHeight();
+    const auto hhalf = MathType::GetRational(1, 2) * cylinder.GetHeight();
     if (z.at(2) < -hhalf || hhalf < z.at(0))
     {
         this->SetIntersectionType(IntersectionType::Empty);
@@ -142,7 +142,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
         return;
     }
 
-    std::array<Vector2, 5> polygon{};
+    std::array<Vector2Type, 5> polygon{};
 
     if (z.at(0) < -hhalf)
     {
@@ -152,8 +152,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
             {
                 auto numer0 = -hhalf - z.at(0);
                 auto numer1 = +hhalf - z.at(0);
-                auto invDenom0 = Math::GetValue(1) / (z.at(1) - z.at(0));
-                auto invDenom1 = Math::GetValue(1) / (z.at(2) - z.at(0));
+                auto invDenom0 = MathType::GetValue(1) / (z.at(1) - z.at(0));
+                auto invDenom1 = MathType::GetValue(1) / (z.at(2) - z.at(0));
                 auto t = numer0 * invDenom1;
                 polygon.at(0) = q.at(0) + t * (q.at(2) - q.at(0));
                 t = numer0 * invDenom0;
@@ -177,8 +177,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
             {
                 auto numer0 = -hhalf - z.at(2);
                 auto numer1 = +hhalf - z.at(2);
-                auto invDenom0 = (Math::GetValue(1)) / (z.at(1) - z.at(2));
-                auto invDenom1 = (Math::GetValue(1)) / (z.at(0) - z.at(2));
+                auto invDenom0 = (MathType::GetValue(1)) / (z.at(1) - z.at(2));
+                auto invDenom1 = (MathType::GetValue(1)) / (z.at(0) - z.at(2));
                 auto t = numer0 * invDenom1;
                 polygon.at(0) = q.at(2) + t * (q.at(0) - q.at(2));
                 t = numer0 * invDenom0;
@@ -202,8 +202,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
             {
                 auto numer0 = -hhalf - z.at(0);
                 auto numer1 = +hhalf - z.at(0);
-                auto invDenom0 = (Math::GetValue(1)) / (z.at(1) - z.at(0));
-                auto invDenom1 = (Math::GetValue(1)) / (z.at(2) - z.at(0));
+                auto invDenom0 = (MathType::GetValue(1)) / (z.at(1) - z.at(0));
+                auto invDenom1 = (MathType::GetValue(1)) / (z.at(2) - z.at(0));
                 auto t = numer0 * invDenom1;
                 polygon.at(0) = q.at(0) + t * (q.at(2) - q.at(0));
                 t = numer0 * invDenom0;
@@ -230,8 +230,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
             if (z.at(1) <= -hhalf)
             {
                 auto numer0 = -hhalf - z.at(2);
-                auto invDenom0 = Math::GetValue(1) / (z.at(1) - z.at(2));
-                auto invDenom1 = Math::GetValue(1) / (z.at(0) - z.at(2));
+                auto invDenom0 = MathType::GetValue(1) / (z.at(1) - z.at(2));
+                auto invDenom1 = MathType::GetValue(1) / (z.at(0) - z.at(2));
                 auto t = numer0 * invDenom0;
                 polygon.at(0) = q.at(2) + t * (q.at(1) - q.at(2));
                 t = numer0 * invDenom1;
@@ -251,8 +251,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
             else
             {
                 auto numer0 = -hhalf - z.at(0);
-                auto invDenom0 = (Math::GetValue(1)) / (z.at(2) - z.at(0));
-                auto invDenom1 = (Math::GetValue(1)) / (z.at(1) - z.at(0));
+                auto invDenom0 = (MathType::GetValue(1)) / (z.at(2) - z.at(0));
+                auto invDenom1 = (MathType::GetValue(1)) / (z.at(1) - z.at(0));
                 auto t = numer0 * invDenom0;
                 polygon.at(0) = q.at(0) + t * (q.at(2) - q.at(0));
                 t = numer0 * invDenom1;
@@ -306,8 +306,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
         if (hhalf <= z.at(1))
         {
             auto numer0 = -hhalf - z.at(0);
-            auto invDenom0 = (Math::GetValue(1)) / (z.at(2) - z.at(0));
-            auto invDenom1 = (Math::GetValue(1)) / (z.at(1) - z.at(0));
+            auto invDenom0 = (MathType::GetValue(1)) / (z.at(2) - z.at(0));
+            auto invDenom1 = (MathType::GetValue(1)) / (z.at(1) - z.at(0));
             auto t = numer0 * invDenom0;
             polygon.at(0) = q.at(0) + t * (q.at(2) - q.at(0));
             t = numer0 * invDenom1;
@@ -327,8 +327,8 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
         else
         {
             auto numer0 = -hhalf - z.at(2);
-            auto invDenom0 = (Math::GetValue(1)) / (z.at(1) - z.at(2));
-            auto invDenom1 = (Math::GetValue(1)) / (z.at(0) - z.at(2));
+            auto invDenom0 = (MathType::GetValue(1)) / (z.at(1) - z.at(2));
+            auto invDenom1 = (MathType::GetValue(1)) / (z.at(0) - z.at(2));
             auto t = numer0 * invDenom0;
             polygon.at(0) = q.at(2) + t * (q.at(1) - q.at(2));
             t = numer0 * invDenom1;
@@ -379,18 +379,18 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::Test()
 }
 
 template <typename Real>
-bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::DiskOverlapsPoint(const Vector2& q) const
+bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::DiskOverlapsPoint(const Vector2Type& q) const
 {
     return q[0] * q[0] + q[1] * q[1] <= cylinder.GetRadius() * cylinder.GetRadius();
 }
 
 template <typename Real>
-bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::DiskOverlapsSegment(const Vector2& q0, const Vector2& q1) const
+bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::DiskOverlapsSegment(const Vector2Type& q0, const Vector2Type& q1) const
 {
     auto rSqr = cylinder.GetRadius() * cylinder.GetRadius();
     auto D = q0 - q1;
     auto dot = Vector2Tools<Real>::DotProduct(q0, D);
-    if (dot <= Math::GetValue(0))
+    if (dot <= MathType::GetValue(0))
     {
         return Vector2Tools<Real>::DotProduct(q0, q0) <= rSqr;
     }
@@ -406,7 +406,7 @@ bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::DiskOverlapsSeg
 }
 
 template <typename Real>
-bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::DiskOverlapsPolygon(const std::vector<Vector2>& q) const
+bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::DiskOverlapsPolygon(const std::vector<Vector2Type>& q) const
 {
     auto positive = 0;
     auto negative = 0;
@@ -415,11 +415,11 @@ bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::DiskOverlapsPol
     for (auto i0 = numVertices - 1, i1 = 0; i1 < numVertices; i0 = i1++)
     {
         auto dot = Vector2Tools<Real>::DotPerp(q.at(i0), (q.at(i0) - q.at(i1)));
-        if (Math::GetValue(0) < dot)
+        if (MathType::GetValue(0) < dot)
         {
             ++positive;
         }
-        else if (dot < Math::GetValue(0))
+        else if (dot < MathType::GetValue(0))
         {
             ++negative;
         }

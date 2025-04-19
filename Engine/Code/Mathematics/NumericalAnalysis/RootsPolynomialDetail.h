@@ -177,7 +177,7 @@ int Mathematics::RootsPolynomial<Real>::Find(int degree, const std::vector<Real>
     {
         constexpr Real zero{};
 
-        while (degree >= 0 && Math::Approximate(c.at(degree), zero))
+        while (degree >= 0 && MathType::Approximate(c.at(degree), zero))
         {
             --degree;
         }
@@ -185,7 +185,7 @@ int Mathematics::RootsPolynomial<Real>::Find(int degree, const std::vector<Real>
         if (degree > 0)
         {
             /// 计算柯西边界。
-            constexpr auto one = Math::GetValue(1);
+            constexpr auto one = MathType::GetValue(1);
 
             auto invLeading = one / c.at(degree);
 
@@ -229,13 +229,13 @@ bool Mathematics::RootsPolynomial<Real>::Find(int degree, const std::vector<Real
 {
     constexpr Real zero{};
     auto pMin = Evaluate(degree, c, tMin);
-    if (Math::Approximate(pMin, zero))
+    if (MathType::Approximate(pMin, zero))
     {
         root = tMin;
         return true;
     }
     auto pMax = Evaluate(degree, c, tMax);
-    if (Math::Approximate(pMax, zero))
+    if (MathType::Approximate(pMax, zero))
     {
         root = tMax;
         return true;
@@ -255,10 +255,10 @@ bool Mathematics::RootsPolynomial<Real>::Find(int degree, const std::vector<Real
 
     for (auto i = 1; i <= maxIterations; ++i)
     {
-        root = Math::GetRational(1, 2) * (tMin + tMax);
+        root = MathType::GetRational(1, 2) * (tMin + tMax);
 
         /// 当tMin和tMax是连续的浮点数时，此测试是为 'float'或'double'设计的。
-        if (Math::Approximate(root, tMin) || Math::Approximate(root, tMax))
+        if (MathType::Approximate(root, tMin) || MathType::Approximate(root, tMax))
         {
             break;
         }
@@ -319,7 +319,7 @@ void Mathematics::RootsPolynomial<Real>::SolveDepressedCubic(const Rational& c0,
     /// 处理c0 = 0的特殊情况，
     /// 在这种情况下，多项式简化为下压二次多项式。
     constexpr Rational zero{};
-    if (Math::Approximate(c0, zero))
+    if (MathType::Approximate(c0, zero))
     {
         SolveDepressedQuadratic(c1, rmMap);
         const auto iter = rmMap.find(zero);
@@ -337,8 +337,8 @@ void Mathematics::RootsPolynomial<Real>::SolveDepressedCubic(const Rational& c0,
     }
 
     /// 处理c0的特殊情况 c0 != 0 and c1 = 0.
-    constexpr auto oneThird = Math::GetRational(1, 3);
-    if (Math::Approximate(c1, zero))
+    constexpr auto oneThird = MathType::GetRational(1, 3);
+    if (MathType::Approximate(c1, zero))
     {
         /// 一个简单的真正根。
         Rational root0{};
@@ -378,9 +378,9 @@ void Mathematics::RootsPolynomial<Real>::SolveDepressedCubic(const Rational& c0,
         Rational cs{ std::cos(angle) };
         Rational sn{ std::sin(angle) };
         const auto rhoSqr = betaRe * betaRe + betaIm * betaIm;
-        Rational rhoPowThird{ std::pow(static_cast<Real>(rhoSqr), Math::GetRational(1, 6)) };
+        Rational rhoPowThird{ std::pow(static_cast<Real>(rhoSqr), MathType::GetRational(1, 6)) };
         const auto temp0 = rhoPowThird * cs;
-        const auto temp1 = rhoPowThird * sn * std::sqrt(Math::GetValue(3));
+        const auto temp1 = rhoPowThird * sn * std::sqrt(MathType::GetValue(3));
         const auto root0 = rat2 * temp0;
         const auto root1 = -temp0 - temp1;
         const auto root2 = -temp0 + temp1;
@@ -436,7 +436,7 @@ void Mathematics::RootsPolynomial<Real>::SolveDepressedQuartic(const Rational& c
 {
     /// 处理c0=0的特殊情况，在这种情况下，多项式减少为一个压低的三次方。
     constexpr Rational zero{};
-    if (Math::Approximate(c0, zero))
+    if (MathType::Approximate(c0, zero))
     {
         SolveDepressedCubic(c1, c2, rmMap);
         auto iter = rmMap.find(zero);
@@ -455,7 +455,7 @@ void Mathematics::RootsPolynomial<Real>::SolveDepressedQuartic(const Rational& c
 
     /// 处理c1=0的特殊情况，在这种情况下，四次方是双二次方
     ///   x^4 + c1*x^2 + c0 = (x^2 + c2/2)^2 + (c0 - c2^2/4)
-    if (Math::Approximate(c1, zero))
+    if (MathType::Approximate(c1, zero))
     {
         SolveBiquadratic(c0, c2, rmMap);
         return;
@@ -582,7 +582,7 @@ void Mathematics::RootsPolynomial<Real>::SolveDepressedQuartic(const Rational& c
         else
         {
             const Rational rat3{ 3 };
-            if (!Math::Approximate(a0, zero))
+            if (!MathType::Approximate(a0, zero))
             {
                 /// 一个双实根，两个简单实根。
                 const Rational rat9{ 9 };
@@ -948,12 +948,12 @@ int Mathematics::RootsPolynomial<Real>::FindRecursive(int degree, const std::vec
     if (degree == 1)
     {
         int numRoots{};
-        if (!Math::Approximate(c.at(1), zero))
+        if (!MathType::Approximate(c.at(1), zero))
         {
             root = -c.at(0) / c.at(1);
             numRoots = 1;
         }
-        else if (!Math::Approximate(c.at(0), zero))
+        else if (!MathType::Approximate(c.at(0), zero))
         {
             root = zero;
             numRoots = 1;
@@ -981,7 +981,7 @@ int Mathematics::RootsPolynomial<Real>::FindRecursive(int degree, const std::vec
     std::vector<Real> derivativeRoots(derivativeDegree);
     for (auto i = 0, ip1 = 1; i <= derivativeDegree; ++i, ++ip1)
     {
-        derivativeCoefficients.at(i) = c.at(ip1) * Math::GetValue(ip1) / Math::GetValue(degree);
+        derivativeCoefficients.at(i) = c.at(ip1) * MathType::GetValue(ip1) / MathType::GetValue(degree);
     }
     const auto numDerivativeRoots = FindRecursive(degree - 1, derivativeCoefficients, tMin, tMax, maxIterations, derivativeRoots);
 

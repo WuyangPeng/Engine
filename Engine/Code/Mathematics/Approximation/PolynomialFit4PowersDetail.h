@@ -125,12 +125,12 @@ void Mathematics::PolynomialFit4Powers<Real>::TransformToUnit(const Samples& sou
 {
     const auto result = std::minmax_element(sourceSamples.begin(), sourceSamples.end());
 
-    auto scale = Math::GetValue(1) / (*result.second - *result.first);
+    auto scale = MathType::GetValue(1) / (*result.second - *result.first);
     powersData.SetScale(index, scale);
 
     for (auto sample : sourceSamples)
     {
-        auto newSample = Math::GetValue(-1) + Math::GetValue(2) * (sample - *result.first) * scale;
+        auto newSample = MathType::GetValue(-1) + MathType::GetValue(2) * (sample - *result.first) * scale;
         targetSamples.emplace_back(newSample);
     }
 }
@@ -148,17 +148,17 @@ void Mathematics::PolynomialFit4Powers<Real>::DoLeastSquaresFit(const Samples& x
     const auto maxXPower = powersData.GetMaxPower(0);
     const auto xPowersSize = 2 * maxXPower + 1;
     Samples xPowers(xPowersSize);
-    xPowers.at(0) = Math::GetValue(1);
+    xPowers.at(0) = MathType::GetValue(1);
 
     const auto maxYPower = powersData.GetMaxPower(1);
     const auto yPowersSize = 2 * maxYPower + 1;
     Samples yPowers(yPowersSize);
-    yPowers.at(0) = Math::GetValue(1);
+    yPowers.at(0) = MathType::GetValue(1);
 
     const auto maxZPower = powersData.GetMaxPower(2);
     const auto zPowersSize = 2 * maxZPower + 1;
     Samples zPowers(zPowersSize);
-    zPowers.at(0) = Math::GetValue(1);
+    zPowers.at(0) = MathType::GetValue(1);
 
     auto numPowers = boost::numeric_cast<int>(powers.size());
 
@@ -304,22 +304,22 @@ Real Mathematics::PolynomialFit4Powers<Real>::operator()(Real x, Real y, Real z)
     const auto maxXPower = powersData.GetMaxPower(0);
     const auto xPowersSize = maxXPower + 1;
     Samples xPowers(xPowersSize);
-    xPowers.at(0) = Math::GetValue(1);
+    xPowers.at(0) = MathType::GetValue(1);
 
     const auto maxYPower = powersData.GetMaxPower(1);
     const auto yPowersSize = maxYPower + 1;
     Samples yPowers(yPowersSize);
-    yPowers.at(0) = Math::GetValue(1);
+    yPowers.at(0) = MathType::GetValue(1);
 
     const auto maxZPower = powersData.GetMaxPower(2);
     const auto zPowersSize = maxZPower + 1;
     Samples zPowers(zPowersSize);
-    zPowers.at(0) = Math::GetValue(1);
+    zPowers.at(0) = MathType::GetValue(1);
 
     // 变换(x,y,z) 从原来的空间到[-1,1]^3。
-    x = Math::GetValue(-1) + (Math::GetValue(2) * (x - powersData.GetMin(0)) * powersData.GetScale(0));
-    y = Math::GetValue(-1) + (Math::GetValue(2) * (y - powersData.GetMin(1)) * powersData.GetScale(1));
-    z = Math::GetValue(-1) + (Math::GetValue(2) * (z - powersData.GetMin(2)) * powersData.GetScale(2));
+    x = MathType::GetValue(-1) + (MathType::GetValue(2) * (x - powersData.GetMin(0)) * powersData.GetScale(0));
+    y = MathType::GetValue(-1) + (MathType::GetValue(2) * (y - powersData.GetMin(1)) * powersData.GetScale(1));
+    z = MathType::GetValue(-1) + (MathType::GetValue(2) * (z - powersData.GetMin(2)) * powersData.GetScale(2));
 
     // 计算x、y和z的有关幂
     for (auto power = 1; power <= maxXPower; ++power)
@@ -338,7 +338,7 @@ Real Mathematics::PolynomialFit4Powers<Real>::operator()(Real x, Real y, Real z)
         zPowers.at(power) = zPowers.at(beforeIndex) * z;
     }
 
-    auto w = Math::GetValue(0);
+    auto w = MathType::GetValue(0);
     for (auto i = 0u; i < powers.size(); ++i)
     {
         auto xp = xPowers.at(powers.at(i)[0]);
@@ -348,7 +348,7 @@ Real Mathematics::PolynomialFit4Powers<Real>::operator()(Real x, Real y, Real z)
     }
 
     // 变换w从[-1,1]回到原来的空间。
-    w = (w + Math::GetValue(1)) * powersData.GetInvTwoWScale() + powersData.GetMin(3);
+    w = (w + MathType::GetValue(1)) * powersData.GetInvTwoWScale() + powersData.GetMin(3);
 
     return w;
 }

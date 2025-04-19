@@ -13,6 +13,8 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
+#include <ranges>
+
 CoreTools::SimpleCSV::SharedStringsImpl::SharedStringsImpl() noexcept
     : stringCache{}
 {

@@ -17,7 +17,7 @@
 #include "Mathematics/NumericalAnalysis/Bisect2.h"
 
 template <typename Real>
-Mathematics::Bisect2Storage<Real>::Bisect2Storage(const Bisect2& bisect) noexcept
+Mathematics::Bisect2Storage<Real>::Bisect2Storage(const Bisect2Type& bisect) noexcept
     : bisect{ bisect },
       beginPointX{},
       beginPointY{},
@@ -84,9 +84,9 @@ bool Mathematics::Bisect2Storage<Real>::ZeroTest(Real x, Real y, Bisect2StorageT
 
     SetStorageValue(value0, value1, type);
 
-    if (Math::FAbs(value0) <= bisect.GetTolerance() && Math::FAbs(value1) <= bisect.GetTolerance())
+    if (MathType::FAbs(value0) <= bisect.GetTolerance() && MathType::FAbs(value1) <= bisect.GetTolerance())
     {
-        bisect2Root = std::make_shared<Bisect2Root>(x, y, BisectRootType::HaveSolution);
+        bisect2Root = std::make_shared<Bisect2RootType>(x, y, BisectRootType::HaveSolution);
 
         return true;
     }
@@ -369,14 +369,14 @@ void Mathematics::Bisect2Storage<Real>::SetStorageValue(const Bisect2NodeSharedP
     {
         endPointX = xNext->GetX();
         beginPointX = yNext->GetX();
-        midpointX = Math::GetRational(1, 2) * (beginPointX + endPointX);
+        midpointX = MathType::GetRational(1, 2) * (beginPointX + endPointX);
     }
 
     if (yNext != nullptr)
     {
         beginPointY = xNext->GetY();
         endPointY = yNext->GetY();
-        midpointY = Math::GetRational(1, 2) * (beginPointY + endPointY);
+        midpointY = MathType::GetRational(1, 2) * (beginPointY + endPointY);
     }
 }
 

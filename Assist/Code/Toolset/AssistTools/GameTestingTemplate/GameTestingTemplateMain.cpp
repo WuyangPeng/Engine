@@ -10,6 +10,6 @@
 #include "Framework/Helper/MainFunctionMacro.h"
 #include "Toolset/AssistTools/GameTestingTemplate/GameTestingTemplateHelper.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 CONSOLE_MAIN_FUNCTION(GameTestingTemplate, GameTestingTemplateHelper, SYSTEM_TEXT("GameTestingTemplate"), SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT(""));

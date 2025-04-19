@@ -23,17 +23,17 @@ namespace Mathematics
     public:
         using ClassType = AxesAlignBoundingBox2<Real>;
 
-        using Vector2 = Vector2<Real>;
-        using Math = Math<Real>;
-        using PointIndex = typename Vector2::PointIndex;
+        using Vector2Type = Vector2<Real>;
+        using MathType = Math<Real>;
+        using PointIndex = typename Vector2Type::PointIndex;
 
     public:
         constexpr AxesAlignBoundingBox2() noexcept
-            : minPoint{ Math::maxReal, Math::maxReal }, maxPoint{ Math::minReal, Math::minReal }
+            : minPoint{ MathType::maxReal, MathType::maxReal }, maxPoint{ MathType::minReal, MathType::minReal }
         {
         }
 
-        AxesAlignBoundingBox2(const Vector2& minPoint, const Vector2& maxPoint) noexcept;
+        AxesAlignBoundingBox2(const Vector2Type& minPoint, const Vector2Type& maxPoint) noexcept;
 
         template <typename RhsType>
         explicit AxesAlignBoundingBox2(const AxesAlignBoundingBox2<RhsType>& aabb);
@@ -45,8 +45,8 @@ namespace Mathematics
 
         NODISCARD bool IsBoxValid() const noexcept;
 
-        NODISCARD Vector2 GetMinPoint() const noexcept;
-        NODISCARD Vector2 GetMaxPoint() const noexcept;
+        NODISCARD Vector2Type GetMinPoint() const noexcept;
+        NODISCARD Vector2Type GetMaxPoint() const noexcept;
 
         NODISCARD Real GetMinPoint(int index) const;
         NODISCARD Real GetMaxPoint(int index) const;
@@ -54,13 +54,13 @@ namespace Mathematics
         NODISCARD Real GetMaxPoint(PointIndex index) const;
 
         // 计算盒子的中心点和盒子中心到盒子边缘（半径）的长度。
-        NODISCARD Vector2 GetCenter() const;
+        NODISCARD Vector2Type GetCenter() const;
         NODISCARD Real GetExtentX() const noexcept;
         NODISCARD Real GetExtentY() const noexcept;
 
     private:
-        Vector2 minPoint;
-        Vector2 maxPoint;
+        Vector2Type minPoint;
+        Vector2Type maxPoint;
     };
 
     // 重叠的测试是在严格意义上。

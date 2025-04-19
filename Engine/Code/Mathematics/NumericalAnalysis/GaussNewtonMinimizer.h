@@ -54,7 +54,7 @@ namespace Mathematics
     public:
         using ClassType = GaussNewtonMinimizer<Real>;
 
-        using GaussNewtonMinimizerResult = GaussNewtonMinimizerResult<Real>;
+        using GaussNewtonMinimizerResultType = GaussNewtonMinimizerResult<Real>;
 
         /// 域向量、范围向量、函数F和雅可比J的方便类型。
         using DVector = VariableLengthVector<Real>;  // numPDimensions
@@ -78,13 +78,13 @@ namespace Mathematics
         NODISCARD int GetNumPDimensions() const noexcept;
         NODISCARD int GetNumFDimensions() const noexcept;
 
-        NODISCARD GaussNewtonMinimizerResult operator()(const DVector& p0, int maxIterations, Real updateLengthTolerance, Real errorDifferenceTolerance);
+        NODISCARD GaussNewtonMinimizerResultType operator()(const DVector& p0, int maxIterations, Real updateLengthTolerance, Real errorDifferenceTolerance);
 
     private:
         void ComputeLinearSystemInputs(const DVector& pCurrent);
 
     private:
-        using CholeskyDecomposition = CholeskyDecomposition<Real>;
+        using CholeskyDecompositionType = CholeskyDecomposition<Real>;
 
     private:
         int numPDimensions;
@@ -99,7 +99,7 @@ namespace Mathematics
         JtjMatrix jtj;
         JtfVector negJtf;
 
-        CholeskyDecomposition decomposer;
+        CholeskyDecompositionType decomposer;
 
         bool useJFunction;
     };

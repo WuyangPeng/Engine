@@ -26,18 +26,18 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorLine2Line2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Vector2 = Vector2<Real>;
-        using Line2 = Line2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector2Type = Vector2<Real>;
+        using Line2Type = Line2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorLine2Line2(const Line2& lhsLine, const Line2& rhsLine, const Real dotThreshold = Math::GetZeroTolerance());
+        StaticFindIntersectorLine2Line2(const Line2Type& lhsLine, const Line2Type& rhsLine, const Real dotThreshold = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Line2 GetLhsLine() const noexcept;
-        NODISCARD Line2 GetRhsLine() const noexcept;
+        NODISCARD Line2Type GetLhsLine() const noexcept;
+        NODISCARD Line2Type GetRhsLine() const noexcept;
 
         // 相交集。让 q = GetQuantity()。情况是：
         //   q = 0: 线不相交， GetIntersection() 返回IntersectionType::Empty。
@@ -45,19 +45,19 @@ namespace Mathematics
         //          访问相交点使用GetPoint()。
         //   q = INT_MAX:  线是重叠的。GetIntersection() 返回IntersectionType::Line。
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector2 GetPoint() const;
+        NODISCARD Vector2Type GetPoint() const;
 
     private:
         void Find();
 
     private:
         // 要相交的对象。
-        Line2 lhsLine;
-        Line2 rhsLine;
+        Line2Type lhsLine;
+        Line2Type rhsLine;
 
         // 相交集
         int quantity;
-        Vector2 point;
+        Vector2Type point;
     };
 }
 

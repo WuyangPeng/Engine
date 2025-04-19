@@ -21,7 +21,6 @@
 #include "Framework/Helper/MiddleLayerMacro.h"
 
 FRAMEWORK_NON_COPY_EXPORT_IMPL(SystemManagerImpl);
-FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
 
 // 任务管理（分配相关任务至多处理器、线程管理等）。
 namespace Framework

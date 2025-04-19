@@ -72,8 +72,8 @@ bool Mathematics::ContOrientedBox2<Real>::GetContainer(const Vector2Container& p
 
         for (auto j = 0; j < 2; ++j)
         {
-            box.SetCenter(box.GetCenter() + Math::GetRational(1, 2) * (pMin[j] + pMax[j]) * box.GetAxis(j));
-            box.SetExtent(j, Math::GetRational(1, 2) * (pMax[j] - pMin[j]));
+            box.SetCenter(box.GetCenter() + MathType::GetRational(1, 2) * (pMin[j] + pMax[j]) * box.GetAxis(j));
+            box.SetExtent(j, MathType::GetRational(1, 2) * (pMax[j] - pMin[j]));
         }
 
         return true;
@@ -104,17 +104,17 @@ bool Mathematics::ContOrientedBox2<Real>::MergeContainers(const OrientedBox2& bo
 {
     /// 在方框中心的第一个猜测。
     /// 稍后，在将输入框顶点投影到由框轴的平均值确定的轴上之后，将更新此值。
-    merge.SetCenter(Math::GetRational(1, 2) * (box0.GetCenter() + box1.GetCenter()));
+    merge.SetCenter(MathType::GetRational(1, 2) * (box0.GetCenter() + box1.GetCenter()));
 
     /// 合并框轴是输入框轴的平均值。
     /// 如有必要，第二个长方体的轴被取反，因此它们与第一个长方体形成锐角。
     if (Dot(box0.GetAxis(0), box1.GetAxis(0)) >= Real{})
     {
-        merge.SetAxis(0, Math::GetRational(1, 2) * (box0.GetAxis(0) + box1.GetAxis(0)));
+        merge.SetAxis(0, MathType::GetRational(1, 2) * (box0.GetAxis(0) + box1.GetAxis(0)));
     }
     else
     {
-        merge.SetAxis(0, Math::GetRational(1, 2) * (box0.GetAxis(0) - box1.GetAxis(0)));
+        merge.SetAxis(0, MathType::GetRational(1, 2) * (box0.GetAxis(0) - box1.GetAxis(0)));
     }
     auto axis0 = merge.GetAxis(0);
     Normalize(axis0);
@@ -175,8 +175,8 @@ bool Mathematics::ContOrientedBox2<Real>::MergeContainers(const OrientedBox2& bo
 
     for (auto j = 0; j < 2; ++j)
     {
-        merge.SetCenter(merge.GetCenter() + Math::GetRational(1, 2) * (pMax[j] + pMin[j]) * merge.GetAxis(j));
-        merge.SetExtent(j, Math::GetRational(1, 2) * (pMax[j] - pMin[j]));
+        merge.SetCenter(merge.GetCenter() + MathType::GetRational(1, 2) * (pMax[j] + pMin[j]) * merge.GetAxis(j));
+        merge.SetExtent(j, MathType::GetRational(1, 2) * (pMax[j] - pMin[j]));
     }
 
     return true;

@@ -43,6 +43,8 @@ void System::WinSockHostTesting::MainTest()
 
 void System::WinSockHostTesting::GetHostByAddressTest()
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     const auto serverHostname = "www.sina.com.cn"s;
 
     InternetAddress address{};
@@ -52,6 +54,8 @@ void System::WinSockHostTesting::GetHostByAddressTest()
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(winSockHostEnt, "ªÒ»°Hostent ß∞‹°£");
 
     ASSERT_NOT_THROW_EXCEPTION_1(WinSockHostEntTest, winSockHostEnt);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 void System::WinSockHostTesting::GetHostNameTest()

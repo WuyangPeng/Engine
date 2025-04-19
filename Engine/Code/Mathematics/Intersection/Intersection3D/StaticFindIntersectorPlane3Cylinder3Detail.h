@@ -14,15 +14,15 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::StaticFindIntersectorPlane3Cylinder3(const Plane3& plane, const Cylinder3& cylinder, const Real epsilon)
+Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::StaticFindIntersectorPlane3Cylinder3(const Plane3Type& plane, const Cylinder3Type& cylinder, const Real epsilon)
     : ParentType{ epsilon },
       plane{ plane },
       cylinder{ cylinder },
       type{ CylinderPlaneIntersection::EmptySet },
-      line0{ Vector3::GetZero(), Vector3::GetZero() },
-      line1{ Vector3::GetZero(), Vector3::GetZero() },
-      circle{ Vector3::GetZero(), Vector3::GetZero(), Vector3::GetZero(), Vector3::GetZero(), Math::GetValue(0) },
-      ellipse{ Vector3::GetZero(), Vector3::GetZero(), Vector3::GetZero(), Vector3::GetZero(), Math::GetValue(0), Math::GetValue(0) }
+      line0{ Vector3Type::GetZero(), Vector3Type::GetZero() },
+      line1{ Vector3Type::GetZero(), Vector3Type::GetZero() },
+      circle{ Vector3Type::GetZero(), Vector3Type::GetZero(), Vector3Type::GetZero(), Vector3Type::GetZero(), MathType::GetValue(0) },
+      ellipse{ Vector3Type::GetZero(), Vector3Type::GetZero(), Vector3Type::GetZero(), Vector3Type::GetZero(), MathType::GetValue(0), MathType::GetValue(0) }
 {
     Find();
 
@@ -63,20 +63,20 @@ void Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::Find()
 {
     auto distance = plane.DistanceTo(cylinder.GetAxis().GetOrigin());
     auto center = cylinder.GetAxis().GetOrigin() - distance * plane.GetNormal();
-    auto cosTheta = Vector3Tools::DotProduct(cylinder.GetAxis().GetDirection(), plane.GetNormal());
-    auto absCosTheta = Math::FAbs(cosTheta);
+    auto cosTheta = Vector3ToolsType::DotProduct(cylinder.GetAxis().GetDirection(), plane.GetNormal());
+    auto absCosTheta = MathType::FAbs(cosTheta);
 
-    if (Math::GetValue(0) < absCosTheta)
+    if (MathType::GetValue(0) < absCosTheta)
     {
         // 圆柱轴在唯一点上与平面相交。
-        if (absCosTheta < Math::GetValue(1))
+        if (absCosTheta < MathType::GetValue(1))
         {
             type = CylinderPlaneIntersection::Ellipse;
             auto major = (cylinder.GetAxis().GetDirection() - cosTheta * plane.GetNormal());
-            auto minor = Vector3Tools::CrossProduct(plane.GetNormal(), major);
+            auto minor = Vector3ToolsType::CrossProduct(plane.GetNormal(), major);
             major.Normalize();
             minor.Normalize();
-            ellipse = Ellipse3{ center - (distance / cosTheta) * cylinder.GetAxis().GetDirection(),
+            ellipse = Ellipse3Type{ center - (distance / cosTheta) * cylinder.GetAxis().GetDirection(),
                                 plane.GetNormal(),
                                 major,
                                 minor,
@@ -88,7 +88,7 @@ void Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::Find()
         else
         {
             type = CylinderPlaneIntersection::Circle;
-            circle = Circle3{ center, circle.GetDirection0(), circle.GetDirection1(), plane.GetNormal(), cylinder.GetRadius() };
+            circle = Circle3Type{ center, circle.GetDirection0(), circle.GetDirection1(), plane.GetNormal(), cylinder.GetRadius() };
 
             this->SetIntersectionType(IntersectionType::Other);
 
@@ -98,24 +98,24 @@ void Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::Find()
     else
     {
         // 圆柱体平行于平面。
-        auto absDistance = Math::FAbs(distance);
+        auto absDistance = MathType::FAbs(distance);
         if (absDistance < cylinder.GetRadius())
         {
             type = CylinderPlaneIntersection::TwoLines;
 
-            const auto offset = Vector3Tools::CrossProduct(cylinder.GetAxis().GetDirection(), plane.GetNormal());
-            auto extent = Math::Sqrt(cylinder.GetRadius() * cylinder.GetRadius() - distance * distance);
+            const auto offset = Vector3ToolsType::CrossProduct(cylinder.GetAxis().GetDirection(), plane.GetNormal());
+            auto extent = MathType::Sqrt(cylinder.GetRadius() * cylinder.GetRadius() - distance * distance);
 
-            line0 = Line3{ center - extent * offset, cylinder.GetAxis().GetDirection() };
-            line1 = Line3{ center + extent * offset, cylinder.GetAxis().GetDirection() };
+            line0 = Line3Type{ center - extent * offset, cylinder.GetAxis().GetDirection() };
+            line1 = Line3Type{ center + extent * offset, cylinder.GetAxis().GetDirection() };
 
             this->SetIntersectionType(IntersectionType::Other);
             return;
         }
-        else if (Math::Approximate(absDistance, cylinder.GetRadius()))
+        else if (MathType::Approximate(absDistance, cylinder.GetRadius()))
         {
             type = CylinderPlaneIntersection::OneLine;
-            line0 = Line3{ center, cylinder.GetAxis().GetDirection() };
+            line0 = Line3Type{ center, cylinder.GetAxis().GetDirection() };
 
             this->SetIntersectionType(IntersectionType::Other);
             return;
@@ -136,12 +136,12 @@ bool Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::CylinderIsCulled()
     //   min = (Dot(N,C)-d) - r*sqrt(1-Dot(N,W)^2) - (h/2)*|Dot(N,W)|
     //   max = (Dot(N,C)-d) + r*sqrt(1-Dot(N,W)^2) + (h/2)*|Dot(N,W)|
     const auto distance = plane.DistanceTo(cylinder.GetAxis().GetOrigin());
-    const auto absNormalDotDirection = Math::FAbs(Vector3Tools::DotProduct(plane.GetNormal(), cylinder.GetAxis().GetDirection()));
-    const auto root = Math::Sqrt(Math::FAbs(Math::GetValue(1) - absNormalDotDirection * absNormalDotDirection));
-    const auto term = cylinder.GetRadius() * root + Math::GetRational(1, 2) * cylinder.GetHeight() * absNormalDotDirection;
+    const auto absNormalDotDirection = MathType::FAbs(Vector3ToolsType::DotProduct(plane.GetNormal(), cylinder.GetAxis().GetDirection()));
+    const auto root = MathType::Sqrt(MathType::FAbs(MathType::GetValue(1) - absNormalDotDirection * absNormalDotDirection));
+    const auto term = cylinder.GetRadius() * root + MathType::GetRational(1, 2) * cylinder.GetHeight() * absNormalDotDirection;
 
     // 当且仅当max <= 0时才发生剔除。
-    return distance + term <= Math::GetValue(0);
+    return distance + term <= MathType::GetValue(0);
 }
 
 template <typename Real>

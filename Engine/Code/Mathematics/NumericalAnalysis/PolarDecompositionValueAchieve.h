@@ -18,7 +18,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-Mathematics::PolarDecompositionValue<Real>::PolarDecompositionValue(const Matrix3& matrix)
+Mathematics::PolarDecompositionValue<Real>::PolarDecompositionValue(const Matrix3Type& matrix)
     : orthogonal{}, symmetry{}
 {
     Calculate(matrix);
@@ -37,7 +37,7 @@ bool Mathematics::PolarDecompositionValue<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-void Mathematics::PolarDecompositionValue<Real>::Calculate(const Matrix3& matrix)
+void Mathematics::PolarDecompositionValue<Real>::Calculate(const Matrix3Type& matrix)
 {
     // 分解 M = L * D * Real^T.
     const SingularValue<Real> singularValue{ matrix };
@@ -55,11 +55,11 @@ void Mathematics::PolarDecompositionValue<Real>::Calculate(const Matrix3& matrix
     // 数值舍入误差会导致不是对称的，
     // 即S[i][j] 和S[j][i]]略有不同,当i != j。
     // 通过平均S = (S + S^T)/2更正。
-    symmetry(0, 1) = Math::GetRational(1, 2) * (symmetry(0, 1) + symmetry(1, 0));
+    symmetry(0, 1) = MathType::GetRational(1, 2) * (symmetry(0, 1) + symmetry(1, 0));
     symmetry(1, 0) = symmetry(0, 1);
-    symmetry(0, 2) = Math::GetRational(1, 2) * (symmetry(0, 2) + symmetry(2, 0));
+    symmetry(0, 2) = MathType::GetRational(1, 2) * (symmetry(0, 2) + symmetry(2, 0));
     symmetry(2, 0) = symmetry(0, 2);
-    symmetry(1, 2) = Math::GetRational(1, 2) * (symmetry(1, 2) + symmetry(2, 1));
+    symmetry(1, 2) = MathType::GetRational(1, 2) * (symmetry(1, 2) + symmetry(2, 1));
     symmetry(2, 1) = symmetry(1, 2);
 }
 

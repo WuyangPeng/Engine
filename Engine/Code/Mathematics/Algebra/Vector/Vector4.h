@@ -19,7 +19,7 @@ namespace Mathematics::Algebra
     template <typename Real>
     using Vector4 = Vector<4, Real>;
 
-    /// 在Vector3.h中，Vector3 Cross、UnitCross和DotCross的模板参数N应为3或4。
+    /// 在Vector3.h中，Vector3Type Cross、UnitCross和DotCross的模板参数N应为3或4。
     /// 当您想使用4元组和4x4矩阵进行仿射代数时，后一种情况支持4D中的仿射向量（最后一个分量w=0）。
     /// 因此，您可以将这些模板函数用于Vector4。
 

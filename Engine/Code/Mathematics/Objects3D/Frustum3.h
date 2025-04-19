@@ -37,14 +37,14 @@ namespace Mathematics
 
         using ClassType = Frustum3<Real>;
 
-        using Math = Math<Real>;
-        using Vector3 = Vector3<Real>;
+        using MathType = Math<Real>;
+        using Vector3Type = Vector3<Real>;
         using AlgebraVector3 = Algebra::Vector3<Real>;
-        using VerticesType = std::vector<Vector3>;
+        using VerticesType = std::vector<Vector3Type>;
 
         static constexpr auto vertexSize = 8;
 
-        using ArrayType = std::array<Vector3, vertexSize>;
+        using ArrayType = std::array<Vector3Type, vertexSize>;
 
     public:
         /// 默认构造函数设置以下值：
@@ -57,15 +57,15 @@ namespace Mathematics
         /// uBound(u)为1和rBound(r)为1。
         Frustum3() noexcept;
 
-        Frustum3(const Vector3& origin,
-                 const Vector3& directionVector,
-                 const Vector3& upVector,
-                 const Vector3& rightVector,
+        Frustum3(const Vector3Type& origin,
+                 const Vector3Type& directionVector,
+                 const Vector3Type& upVector,
+                 const Vector3Type& rightVector,
                  Real directionMin,
                  Real directionMax,
                  Real upBound,
                  Real rightBound,
-                 Real epsilon = Math::GetZeroTolerance()) noexcept;
+                 Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
         Frustum3(const AlgebraVector3& origin,
                  const AlgebraVector3& directionVector,
@@ -75,14 +75,14 @@ namespace Mathematics
                  Real directionMax,
                  Real upBound,
                  Real rightBound,
-                 Real epsilon = Math::GetZeroTolerance());
+                 Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector3 GetOrigin() const noexcept;
-        NODISCARD Vector3 GetDirectionVector() const noexcept;
-        NODISCARD Vector3 GetUpVector() const noexcept;
-        NODISCARD Vector3 GetRightVector() const noexcept;
+        NODISCARD Vector3Type GetOrigin() const noexcept;
+        NODISCARD Vector3Type GetDirectionVector() const noexcept;
+        NODISCARD Vector3Type GetUpVector() const noexcept;
+        NODISCARD Vector3Type GetRightVector() const noexcept;
         NODISCARD Real GetDirectionMin() const noexcept;
         NODISCARD Real GetDirectionMax() const noexcept;
         NODISCARD Real GetUpBound() const noexcept;
@@ -101,12 +101,12 @@ namespace Mathematics
         NODISCARD VerticesType ComputeVertices() const;
         NODISCARD ArrayType ComputeVerticesToArray() const;
 
-        NODISCARD Frustum3 GetMove(Real t, const Vector3& velocity) const;
+        NODISCARD Frustum3 GetMove(Real t, const Vector3Type& velocity) const;
 
-        void SetOrigin(const Vector3& aOrigin) noexcept;
-        void SetDirectionVector(const Vector3& aDirectionVector) noexcept;
-        void SetUpVector(const Vector3& aUpVector) noexcept;
-        void SetRightVector(const Vector3& aRightVector) noexcept;
+        void SetOrigin(const Vector3Type& aOrigin) noexcept;
+        void SetDirectionVector(const Vector3Type& aDirectionVector) noexcept;
+        void SetUpVector(const Vector3Type& aUpVector) noexcept;
+        void SetRightVector(const Vector3Type& aRightVector) noexcept;
         void SetDirectionMin(Real aDirectionMin) noexcept;
         void SetDirectionMax(Real aDirectionMax) noexcept;
         void SetUpBound(Real aUpBound) noexcept;
@@ -123,10 +123,10 @@ namespace Mathematics
         void Update() noexcept;
 
     private:
-        Vector3 origin;
-        Vector3 directionVector;
-        Vector3 upVector;
-        Vector3 rightVector;
+        Vector3Type origin;
+        Vector3Type directionVector;
+        Vector3Type upVector;
+        Vector3Type rightVector;
         Real directionMin;
         Real directionMax;
         Real upBound;

@@ -25,7 +25,7 @@ template <int Row, int Column>
 Real Mathematics::Matrix4<Real>::GetValue() const noexcept
 {
     static_assert(0 <= Row && Row < vectorSize);
-    static_assert(0 <= Column && Column < Vector4::pointSize);
+    static_assert(0 <= Column && Column < Vector4Type::pointSize);
 
     const auto& vector = GetVector<Row>();
 
@@ -45,7 +45,7 @@ template <int Row, int Column>
 void Mathematics::Matrix4<Real>::SetValue(Real value) noexcept
 {
     static_assert(0 <= Row && Row < vectorSize);
-    static_assert(0 <= Column && Column < Vector4::pointSize);
+    static_assert(0 <= Column && Column < Vector4Type::pointSize);
 
     auto& vector = GetVector<Row>();
 
@@ -83,7 +83,7 @@ Mathematics::Vector4<Real>& Mathematics::Matrix4<Real>::GetVector() noexcept
 {
     static_assert(0 <= Row && Row < vectorSize);
 
-    return NON_CONST_MEMBER_CALL_CONST_MEMBER(Vector4&, GetVector<Row>);
+    return NON_CONST_MEMBER_CALL_CONST_MEMBER(Vector4Type&, GetVector<Row>);
 }
 
 template <typename Real>
@@ -91,16 +91,16 @@ requires std::is_arithmetic_v<Real>
 template <int Column>
 typename Mathematics::Vector4<Real>::GetCoordinateFunction Mathematics::Matrix4<Real>::GetVectorGetFunction() const noexcept
 {
-    static_assert(0 <= Column && Column < Vector4::pointSize);
+    static_assert(0 <= Column && Column < Vector4Type::pointSize);
 
-    if constexpr (Column == Vector4::xIndex)
-        return &Vector4::GetX;
-    else if constexpr (Column == Vector4::yIndex)
-        return &Vector4::GetY;
-    else if constexpr (Column == Vector4::zIndex)
-        return &Vector4::GetZ;
+    if constexpr (Column == Vector4Type::xIndex)
+        return &Vector4Type::GetX;
+    else if constexpr (Column == Vector4Type::yIndex)
+        return &Vector4Type::GetY;
+    else if constexpr (Column == Vector4Type::zIndex)
+        return &Vector4Type::GetZ;
     else
-        return &Vector4::GetW;
+        return &Vector4Type::GetW;
 }
 
 template <typename Real>
@@ -108,16 +108,16 @@ requires std::is_arithmetic_v<Real>
 template <int Column>
 typename Mathematics::Vector4<Real>::SetCoordinateFunction Mathematics::Matrix4<Real>::GetVectorSetFunction() const noexcept
 {
-    static_assert(0 <= Column && Column < Vector4::pointSize);
+    static_assert(0 <= Column && Column < Vector4Type::pointSize);
 
-    if constexpr (Column == Vector4::xIndex)
-        return &Vector4::SetX;
-    else if constexpr (Column == Vector4::yIndex)
-        return &Vector4::SetY;
-    else if constexpr (Column == Vector4::zIndex)
-        return &Vector4::SetZ;
+    if constexpr (Column == Vector4Type::xIndex)
+        return &Vector4Type::SetX;
+    else if constexpr (Column == Vector4Type::yIndex)
+        return &Vector4Type::SetY;
+    else if constexpr (Column == Vector4Type::zIndex)
+        return &Vector4Type::SetZ;
     else
-        return &Vector4::SetW;
+        return &Vector4Type::SetW;
 }
 
 template <typename Real>

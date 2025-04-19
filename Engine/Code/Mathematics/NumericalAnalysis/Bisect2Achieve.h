@@ -31,7 +31,7 @@ Mathematics::Bisect2<Real>::Bisect2(Function function0, Function function1, int 
 template <typename Real>
 bool Mathematics::Bisect2<Real>::IsValid() const noexcept
 {
-    if (function0 != nullptr && function1 != nullptr && 0 < maxLevel && Math::GetValue(0) <= tolerance)
+    if (function0 != nullptr && function1 != nullptr && 0 < maxLevel && MathType::GetValue(0) <= tolerance)
     {
         return true;
     }
@@ -48,7 +48,7 @@ Mathematics::Bisect2Root<Real> Mathematics::Bisect2<Real>::Bisect(Real beginPoin
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    Bisect2Calculate calculate{ *this, beginPointX, beginPointY, endPointX, endPointY };
+    Bisect2CalculateType calculate{ *this, beginPointX, beginPointY, endPointX, endPointY };
 
     return calculate.GetRoot();
 }

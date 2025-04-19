@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/04/23 21:33)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/04/23 21:33)
 
 #include "StringConversionTesting.h"
 #include "CoreTools/CharacterString/StringConversion.h"
@@ -73,8 +73,8 @@ void CoreTools::StringConversionTesting::MultiByteConversionWideCharTest()
 
 void CoreTools::StringConversionTesting::ChineseMultiByteConversionWideCharTest()
 {
-    const auto wideChar = StringConversion::MultiByteConversionWideChar("MultiByte×Ö·û´®×ª»»ÎªWideChar×Ö·û´®"s);
-    ASSERT_EQUAL(wideChar, L"MultiByte×Ö·û´®×ª»»ÎªWideChar×Ö·û´®"s);
+    const auto wideChar = StringConversion::MultiByteConversionWideChar("MultiByteå­—ç¬¦ä¸²è½¬æ¢ä¸ºWideCharå­—ç¬¦ä¸²"s);
+    ASSERT_EQUAL(wideChar, L"MultiByteå­—ç¬¦ä¸²è½¬æ¢ä¸ºWideCharå­—ç¬¦ä¸²"s);
 }
 
 void CoreTools::StringConversionTesting::WideCharConversionMultiByteTest()
@@ -85,8 +85,8 @@ void CoreTools::StringConversionTesting::WideCharConversionMultiByteTest()
 
 void CoreTools::StringConversionTesting::ChineseWideCharConversionMultiByteTest()
 {
-    const auto multiByte = StringConversion::WideCharConversionMultiByte(L"WideChar×Ö·û´®×ª»»ÎªMultiByte×Ö·û´®"s);
-    ASSERT_EQUAL(multiByte, "WideChar×Ö·û´®×ª»»ÎªMultiByte×Ö·û´®"s);
+    const auto multiByte = StringConversion::WideCharConversionMultiByte(L"WideCharå­—ç¬¦ä¸²è½¬æ¢ä¸ºMultiByteå­—ç¬¦ä¸²"s);
+    ASSERT_EQUAL(multiByte, "WideCharå­—ç¬¦ä¸²è½¬æ¢ä¸ºMultiByteå­—ç¬¦ä¸²"s);
 }
 
 void CoreTools::StringConversionTesting::StandardConversionWideCharTest()
@@ -97,8 +97,8 @@ void CoreTools::StringConversionTesting::StandardConversionWideCharTest()
 
 void CoreTools::StringConversionTesting::ChineseStandardConversionWideCharTest()
 {
-    const auto wideChar = StringConversion::StandardConversionWideChar(SYSTEM_TEXT("±ê×¼×Ö·û´®×ª»»ÎªWideChar×Ö·û´®"s));
-    ASSERT_EQUAL(wideChar, L"±ê×¼×Ö·û´®×ª»»ÎªWideChar×Ö·û´®"s);
+    const auto wideChar = StringConversion::StandardConversionWideChar(SYSTEM_TEXT("æ ‡å‡†å­—ç¬¦ä¸²è½¬æ¢ä¸ºWideCharå­—ç¬¦ä¸²"s));
+    ASSERT_EQUAL(wideChar, L"æ ‡å‡†å­—ç¬¦ä¸²è½¬æ¢ä¸ºWideCharå­—ç¬¦ä¸²"s);
 }
 
 void CoreTools::StringConversionTesting::StandardConversionMultiByteTest()
@@ -109,8 +109,8 @@ void CoreTools::StringConversionTesting::StandardConversionMultiByteTest()
 
 void CoreTools::StringConversionTesting::ChineseStandardConversionMultiByteTest()
 {
-    const auto multiByte = StringConversion::StandardConversionMultiByte(SYSTEM_TEXT("±ê×¼×Ö·û´®×ª»»ÎªMultiByte×Ö·û´®"s));
-    ASSERT_EQUAL(multiByte, "±ê×¼×Ö·û´®×ª»»ÎªMultiByte×Ö·û´®"s);
+    const auto multiByte = StringConversion::StandardConversionMultiByte(SYSTEM_TEXT("æ ‡å‡†å­—ç¬¦ä¸²è½¬æ¢ä¸ºMultiByteå­—ç¬¦ä¸²"s));
+    ASSERT_EQUAL(multiByte, "æ ‡å‡†å­—ç¬¦ä¸²è½¬æ¢ä¸ºMultiByteå­—ç¬¦ä¸²"s);
 }
 
 void CoreTools::StringConversionTesting::MultiByteConversionStandardTest()
@@ -121,8 +121,8 @@ void CoreTools::StringConversionTesting::MultiByteConversionStandardTest()
 
 void CoreTools::StringConversionTesting::ChineseMultiByteConversionStandardTest()
 {
-    const auto standard = StringConversion::MultiByteConversionStandard("MultiByte×Ö·û´®×ª»»Îª±ê×¼×Ö·û´®"s);
-    ASSERT_EQUAL(standard, SYSTEM_TEXT("MultiByte×Ö·û´®×ª»»Îª±ê×¼×Ö·û´®"s));
+    const auto standard = StringConversion::MultiByteConversionStandard("MultiByteå­—ç¬¦ä¸²è½¬æ¢ä¸ºæ ‡å‡†å­—ç¬¦ä¸²"s);
+    ASSERT_EQUAL(standard, SYSTEM_TEXT("MultiByteå­—ç¬¦ä¸²è½¬æ¢ä¸ºæ ‡å‡†å­—ç¬¦ä¸²"s));
 }
 
 void CoreTools::StringConversionTesting::WideCharConversionStandardTest()
@@ -133,8 +133,8 @@ void CoreTools::StringConversionTesting::WideCharConversionStandardTest()
 
 void CoreTools::StringConversionTesting::ChineseWideCharConversionStandardTest()
 {
-    const auto standard = StringConversion::WideCharConversionStandard(L"WideChar×Ö·û´®×ª»»Îª±ê×¼×Ö·û´®"s);
-    ASSERT_EQUAL(standard, SYSTEM_TEXT("WideChar×Ö·û´®×ª»»Îª±ê×¼×Ö·û´®"s));
+    const auto standard = StringConversion::WideCharConversionStandard(L"WideCharå­—ç¬¦ä¸²è½¬æ¢ä¸ºæ ‡å‡†å­—ç¬¦ä¸²"s);
+    ASSERT_EQUAL(standard, SYSTEM_TEXT("WideCharå­—ç¬¦ä¸²è½¬æ¢ä¸ºæ ‡å‡†å­—ç¬¦ä¸²"s));
 }
 
 void CoreTools::StringConversionTesting::StandardConversionDynamicLinkStringTest()
@@ -145,8 +145,8 @@ void CoreTools::StringConversionTesting::StandardConversionDynamicLinkStringTest
 
 void CoreTools::StringConversionTesting::ChineseStandardConversionDynamicLinkStringTest()
 {
-    const auto dynamicLinkString = StringConversion::StandardConversionDynamicLinkString(SYSTEM_TEXT("±ê×¼×Ö·û´®×ª»»ÎªDynamicLink×Ö·û´®"s));
-    ASSERT_EQUAL(dynamicLinkString, DYNAMIC_LINK_TEXT("±ê×¼×Ö·û´®×ª»»ÎªDynamicLink×Ö·û´®"s));
+    const auto dynamicLinkString = StringConversion::StandardConversionDynamicLinkString(SYSTEM_TEXT("æ ‡å‡†å­—ç¬¦ä¸²è½¬æ¢ä¸ºDynamicLinkå­—ç¬¦ä¸²"s));
+    ASSERT_EQUAL(dynamicLinkString, DYNAMIC_LINK_TEXT("æ ‡å‡†å­—ç¬¦ä¸²è½¬æ¢ä¸ºDynamicLinkå­—ç¬¦ä¸²"s));
 }
 
 void CoreTools::StringConversionTesting::DynamicLinkStringConversionMultiByteTest()
@@ -157,8 +157,8 @@ void CoreTools::StringConversionTesting::DynamicLinkStringConversionMultiByteTes
 
 void CoreTools::StringConversionTesting::ChineseDynamicLinkStringConversionMultiByteTest()
 {
-    const auto multiByte = StringConversion::DynamicLinkStringConversionMultiByte(SYSTEM_TEXT("DynamicLink×ª»»ÎªMultiByte×Ö·û´®"s));
-    ASSERT_EQUAL(multiByte, "DynamicLink×ª»»ÎªMultiByte×Ö·û´®"s);
+    const auto multiByte = StringConversion::DynamicLinkStringConversionMultiByte(SYSTEM_TEXT("DynamicLinkè½¬æ¢ä¸ºMultiByteå­—ç¬¦ä¸²"s));
+    ASSERT_EQUAL(multiByte, "DynamicLinkè½¬æ¢ä¸ºMultiByteå­—ç¬¦ä¸²"s);
 }
 
 void CoreTools::StringConversionTesting::DynamicLinkStringConversionStandardTest()
@@ -169,8 +169,8 @@ void CoreTools::StringConversionTesting::DynamicLinkStringConversionStandardTest
 
 void CoreTools::StringConversionTesting::ChineseDynamicLinkStringConversionStandardTest()
 {
-    const auto standard = StringConversion::DynamicLinkStringConversionStandard(SYSTEM_TEXT("DynamicLink×Ö·û´®×ª»»Îª±ê×¼×Ö·û´®"s));
-    ASSERT_EQUAL(standard, SYSTEM_TEXT("DynamicLink×Ö·û´®×ª»»Îª±ê×¼×Ö·û´®"s));
+    const auto standard = StringConversion::DynamicLinkStringConversionStandard(SYSTEM_TEXT("DynamicLinkå­—ç¬¦ä¸²è½¬æ¢ä¸ºæ ‡å‡†å­—ç¬¦ä¸²"s));
+    ASSERT_EQUAL(standard, SYSTEM_TEXT("DynamicLinkå­—ç¬¦ä¸²è½¬æ¢ä¸ºæ ‡å‡†å­—ç¬¦ä¸²"s));
 }
 
 void CoreTools::StringConversionTesting::StandardConversionCFileStringTest()
@@ -181,8 +181,8 @@ void CoreTools::StringConversionTesting::StandardConversionCFileStringTest()
 
 void CoreTools::StringConversionTesting::ChineseStandardConversionCFileStringTest()
 {
-    const auto cFile = StringConversion::StandardConversionCFileString(SYSTEM_TEXT("±ê×¼×Ö·û´®×ª»»ÎªCFile×Ö·û´®"s));
-    ASSERT_EQUAL(cFile, SYSTEM_FILE_TEXT("±ê×¼×Ö·û´®×ª»»ÎªCFile×Ö·û´®"s));
+    const auto cFile = StringConversion::StandardConversionCFileString(SYSTEM_TEXT("æ ‡å‡†å­—ç¬¦ä¸²è½¬æ¢ä¸ºCFileå­—ç¬¦ä¸²"s));
+    ASSERT_EQUAL(cFile, SYSTEM_FILE_TEXT("æ ‡å‡†å­—ç¬¦ä¸²è½¬æ¢ä¸ºCFileå­—ç¬¦ä¸²"s));
 }
 
 void CoreTools::StringConversionTesting::Utf8ConversionWideCharTest()
@@ -195,7 +195,7 @@ void CoreTools::StringConversionTesting::Utf8ConversionWideCharTest()
 
 void CoreTools::StringConversionTesting::ChineseUtf8ConversionWideCharTest()
 {
-    const auto original = L"WideChar×Ö·û´®×ª»»ÎªUTF8×Ö·û´®"s;
+    const auto original = L"WideCharå­—ç¬¦ä¸²è½¬æ¢ä¸ºUTF8å­—ç¬¦ä¸²"s;
     const auto uft8 = StringConversion::WideCharConversionUtf8(original);
     const auto wideChar = StringConversion::Utf8ConversionWideChar(uft8);
     ASSERT_EQUAL(wideChar, original);
@@ -211,7 +211,7 @@ void CoreTools::StringConversionTesting::Utf8ConversionStandardTest()
 
 void CoreTools::StringConversionTesting::ChineseUtf8ConversionStandardTest()
 {
-    const auto original = SYSTEM_TEXT("±ê×¼×Ö·û´®×ª»»ÎªUTF8×Ö·û´®"s);
+    const auto original = SYSTEM_TEXT("æ ‡å‡†å­—ç¬¦ä¸²è½¬æ¢ä¸ºUTF8å­—ç¬¦ä¸²"s);
     const auto uft8 = StringConversion::StandardConversionUtf8(original);
     const auto standard = StringConversion::Utf8ConversionStandard(uft8);
     ASSERT_EQUAL(standard, original);
@@ -227,7 +227,7 @@ void CoreTools::StringConversionTesting::Utf8ConversionMultiByteTest()
 
 void CoreTools::StringConversionTesting::ChineseUtf8ConversionMultiByteTest()
 {
-    const auto original = "MultiByte×Ö·û´®×ª»»ÎªUTF8×Ö·û´®"s;
+    const auto original = "MultiByteå­—ç¬¦ä¸²è½¬æ¢ä¸ºUTF8å­—ç¬¦ä¸²"s;
     const auto uft8 = StringConversion::MultiByteConversionUtf8(original);
     const auto multiByte = StringConversion::Utf8ConversionMultiByte(uft8);
     ASSERT_EQUAL(multiByte, original);
@@ -251,10 +251,10 @@ void CoreTools::StringConversionTesting::WideCharUtf8ConversionStandardEnglishTe
 
 void CoreTools::StringConversionTesting::WideCharUtf8ConversionStandardChineseTest()
 {
-    const auto original = "WideCharUTF8×Ö·û´®×ª»»Îª±ê×¼×Ö·û´®"s;
+    const auto original = "WideCharUTF8å­—ç¬¦ä¸²è½¬æ¢ä¸ºæ ‡å‡†å­—ç¬¦ä¸²"s;
     const auto uft8 = StringConversion::MultiByteConversionUtf8(original);
     const auto wideCharUft8 = StringUtility::ConvertNarrowToWide(uft8);
     const auto standard = StringConversion::Utf8ConversionStandard(wideCharUft8);
 
-    ASSERT_EQUAL(standard, SYSTEM_TEXT("WideCharUTF8×Ö·û´®×ª»»Îª±ê×¼×Ö·û´®"s));
+    ASSERT_EQUAL(standard, SYSTEM_TEXT("WideCharUTF8å­—ç¬¦ä¸²è½¬æ¢ä¸ºæ ‡å‡†å­—ç¬¦ä¸²"s));
 }

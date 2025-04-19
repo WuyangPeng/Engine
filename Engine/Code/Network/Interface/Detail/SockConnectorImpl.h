@@ -35,7 +35,7 @@ namespace Network
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
         NODISCARD virtual bool Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) = 0;
-        NODISCARD virtual void AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) = 0;
+        virtual void AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) = 0;
 
         NODISCARD virtual SockConnectorSharedPtr Clone() const = 0;
     };

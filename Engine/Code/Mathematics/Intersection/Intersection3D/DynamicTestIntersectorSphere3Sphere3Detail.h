@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::DynamicTestIntersectorSphere3Sphere3<Real>::DynamicTestIntersectorSphere3Sphere3(const Sphere3& sphere0, const Sphere3& sphere1, Real tMax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicTestIntersectorSphere3Sphere3<Real>::DynamicTestIntersectorSphere3Sphere3(const Sphere3Type& sphere0, const Sphere3Type& sphere1, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon }, sphere0{ sphere0 }, sphere1{ sphere1 }
 {
     Test();
@@ -55,17 +55,17 @@ template <typename Real>
 void Mathematics::DynamicTestIntersectorSphere3Sphere3<Real>::Test()
 {
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
-    auto relVelocitySquared = Vector3Tools::GetLengthSquared(relVelocity);
+    auto relVelocitySquared = Vector3ToolsType::GetLengthSquared(relVelocity);
     auto diff = sphere1.GetCenter() - sphere0.GetCenter();
-    auto diffSquared = Vector3Tools::GetLengthSquared(diff);
+    auto diffSquared = Vector3ToolsType::GetLengthSquared(diff);
     auto radiusSum = sphere0.GetRadius() + sphere1.GetRadius();
     auto radiusSumSqr = radiusSum * radiusSum;
 
     auto result = false;
-    if (Math::GetValue(0) < relVelocitySquared)
+    if (MathType::GetValue(0) < relVelocitySquared)
     {
-        auto dot = Vector3Tools::DotProduct(diff, relVelocity);
-        if (dot <= Math::GetValue(0))
+        auto dot = Vector3ToolsType::DotProduct(diff, relVelocity);
+        if (dot <= MathType::GetValue(0))
         {
             if (-this->GetTMax() * relVelocitySquared <= dot)
             {
@@ -73,7 +73,7 @@ void Mathematics::DynamicTestIntersectorSphere3Sphere3<Real>::Test()
             }
             else
             {
-                result = this->GetTMax() * (this->GetTMax() * relVelocitySquared + (Math::GetValue(2)) * dot) + diffSquared <= radiusSumSqr;
+                result = this->GetTMax() * (this->GetTMax() * relVelocitySquared + (MathType::GetValue(2)) * dot) + diffSquared <= radiusSumSqr;
             }
         }
     }

@@ -12,4 +12,4 @@ xcopy "%ProjectDir%/Configuration/Testing.json" "%Target%" /F /Y
 xcopy "%ProjectDir%/Configuration/%ProjectName%.json" %Target%" /F /Y
 xcopy "%ProjectDir%/Configuration/Global.json" "%Target%" /F /Y
 xcopy "%ProjectDir%/Configuration/Smtp.json" "%Target%" /F /Y
-xcopy "%ProjectDir%/Configuration/Database.json" "%Target%" /F /Y
+xcopy "%ProjectDir%/Configuration/%ProjectName%/Database.json" "%Target%/%ProjectName%" /F /Y

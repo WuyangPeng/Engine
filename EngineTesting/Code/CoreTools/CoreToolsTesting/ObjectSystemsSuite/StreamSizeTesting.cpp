@@ -69,23 +69,23 @@ void CoreTools::StreamSizeTesting::SingedStreamSizeTest()
     ASSERT_EQUAL(GetStreamSize(short{ 0 }), boost::numeric_cast<int>(sizeof(short)));
     ASSERT_EQUAL(GetStreamSize(int{ 0 }), boost::numeric_cast<int>(sizeof(int)));
     ASSERT_EQUAL(GetStreamSize(long{ 0 }), boost::numeric_cast<int>(sizeof(long)));
-    ASSERT_EQUAL(GetStreamSize(long long{ 0 }), boost::numeric_cast<int>(sizeof(long long)));
+    ASSERT_EQUAL(GetStreamSize(0ll), boost::numeric_cast<int>(sizeof(long long)));
 }
 
 void CoreTools::StreamSizeTesting::UnSingedStreamSizeTest()
 {
-    ASSERT_EQUAL(GetStreamSize(unsigned char{ 0 }), boost::numeric_cast<int>(sizeof(unsigned char)));
-    ASSERT_EQUAL(GetStreamSize(unsigned short{ 0 }), boost::numeric_cast<int>(sizeof(unsigned short)));
-    ASSERT_EQUAL(GetStreamSize(unsigned int{ 0 }), boost::numeric_cast<int>(sizeof(unsigned int)));
-    ASSERT_EQUAL(GetStreamSize(unsigned long{ 0 }), boost::numeric_cast<int>(sizeof(unsigned long)));
-    ASSERT_EQUAL(GetStreamSize(unsigned long long{ 0 }), boost::numeric_cast<int>(sizeof(unsigned long long)));
+    ASSERT_EQUAL(GetStreamSize(static_cast<unsigned char>(0)), boost::numeric_cast<int>(sizeof(unsigned char)));
+    ASSERT_EQUAL(GetStreamSize(static_cast<unsigned short>(0)), boost::numeric_cast<int>(sizeof(unsigned short)));
+    ASSERT_EQUAL(GetStreamSize(static_cast<unsigned int>(0)), boost::numeric_cast<int>(sizeof(unsigned int)));
+    ASSERT_EQUAL(GetStreamSize(static_cast<unsigned long>(0)), boost::numeric_cast<int>(sizeof(unsigned long)));
+    ASSERT_EQUAL(GetStreamSize(static_cast<unsigned long long>(0)), boost::numeric_cast<int>(sizeof(unsigned long long)));
 }
 
 void CoreTools::StreamSizeTesting::FloatStreamSizeTest()
 {
     ASSERT_EQUAL(GetStreamSize(float{ 0.0f }), boost::numeric_cast<int>(sizeof(float)));
     ASSERT_EQUAL(GetStreamSize(double{ 0.0 }), boost::numeric_cast<int>(sizeof(double)));
-    ASSERT_EQUAL(GetStreamSize(long double{ 0.0 }), boost::numeric_cast<int>(sizeof(long double)));
+    ASSERT_EQUAL(GetStreamSize(static_cast<long double>(0.0)), boost::numeric_cast<int>(sizeof(long double)));
 }
 
 void CoreTools::StreamSizeTesting::StringStreamSizeTest()

@@ -70,6 +70,26 @@
     #include <ace/SOCK_Connector.h>
     #include <ace/SOCK_Stream.h>
 
+    #ifdef TCRE_USE_GCC
+
+class ACE_Main_Base
+{
+public:
+    ACE_Main_Base()
+    {
+    }
+    virtual ~ACE_Main_Base()
+    {
+    }
+    int run(int, char*[])
+    {
+        return 0;
+    }
+    virtual int run_i(int, char*[]) = 0;
+};
+
+    #endif  // TCRE_USE_GCC
+
     #include SYSTEM_WARNING_POP
 
 #endif  // NETWORK_USE_ACE

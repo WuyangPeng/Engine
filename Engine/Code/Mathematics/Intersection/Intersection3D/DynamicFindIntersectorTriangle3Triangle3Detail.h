@@ -24,7 +24,7 @@
 #include "Mathematics/Objects3D/Segment3Detail.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::DynamicFindIntersectorTriangle3Triangle3(const Triangle3& triangle0, const Triangle3& triangle1, Real tmax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::DynamicFindIntersectorTriangle3Triangle3(const Triangle3Type& triangle0, const Triangle3Type& triangle1, Real tmax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, triangle0{ triangle0 }, triangle1{ triangle1 }, point{}
 {
     Find();
@@ -79,7 +79,7 @@ Mathematics::Vector3<Real> Mathematics::DynamicFindIntersectorTriangle3Triangle3
 
 template <typename Real>
 Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectInfo::IntersectInfo() noexcept
-    : result{}, side{ ContactSide::None }, tCfg0{}, tCfg1{}, tFirst{}, tLast{ Math::maxReal }
+    : result{}, side{ ContactSide::None }, tCfg0{}, tCfg1{}, tFirst{}, tLast{ MathType::maxReal }
 {
 }
 
@@ -104,7 +104,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
     Vector3Container edge0{ triangle0.GetVertex(1) - triangle0.GetVertex(0),
                             triangle0.GetVertex(2) - triangle0.GetVertex(1),
                             triangle0.GetVertex(0) - triangle0.GetVertex(2) };
-    const auto normal0 = Vector3Tools::UnitCrossProduct(edge0.at(0), edge0.at(1));
+    const auto normal0 = Vector3ToolsType::UnitCrossProduct(edge0.at(0), edge0.at(1));
     auto intersectInfo = FindOverlap(normal0, tMax, relVelocity);
     if (!intersectInfo.result)
     {
@@ -116,9 +116,9 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
     Vector3Container edge1{ triangle1.GetVertex(1) - triangle1.GetVertex(0),
                             triangle1.GetVertex(2) - triangle1.GetVertex(1),
                             triangle1.GetVertex(0) - triangle1.GetVertex(2) };
-    const auto normal1 = Vector3Tools::UnitCrossProduct(edge1.at(0), edge1.at(1));
+    const auto normal1 = Vector3ToolsType::UnitCrossProduct(edge1.at(0), edge1.at(1));
 
-    if (Math::FAbs(Vector3Tools::DotProduct(normal0, normal1)) < Math::GetValue(1) - Math::GetZeroTolerance())
+    if (MathType::FAbs(Vector3ToolsType::DotProduct(normal0, normal1)) < MathType::GetValue(1) - MathType::GetZeroTolerance())
     {
         // 三角形不平行。
 
@@ -136,7 +136,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
         {
             for (auto i0 = 0; i0 < 3; ++i0)
             {
-                const auto dir = Vector3Tools::UnitCrossProduct(edge0.at(i0), edge1.at(i1));
+                const auto dir = Vector3ToolsType::UnitCrossProduct(edge0.at(i0), edge1.at(i1));
 
                 intersectInfo = FindOverlap(dir, tMax, relVelocity);
                 if (!intersectInfo.result)
@@ -152,7 +152,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
         // 方向 NxE[i0].
         for (auto i = 0; i < 3; ++i)
         {
-            const auto dir = Vector3Tools::UnitCrossProduct(normal0, edge0.at(i));
+            const auto dir = Vector3ToolsType::UnitCrossProduct(normal0, edge0.at(i));
 
             intersectInfo = FindOverlap(dir, tMax, relVelocity);
             if (!intersectInfo.result)
@@ -165,7 +165,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
         // 方向 NxF[i1].
         for (auto i = 0; i < 3; ++i)
         {
-            const auto dir = Vector3Tools::UnitCrossProduct(normal1, edge1.at(i));
+            const auto dir = Vector3ToolsType::UnitCrossProduct(normal1, edge1.at(i));
 
             intersectInfo = FindOverlap(dir, tMax, relVelocity);
             if (!intersectInfo.result)
@@ -176,7 +176,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
         }
     }
 
-    if (intersectInfo.tFirst <= Math::GetValue(0))
+    if (intersectInfo.tFirst <= MathType::GetValue(0))
     {
         this->SetIntersectionType(IntersectionType::Empty);
         return;
@@ -185,10 +185,10 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
     this->SetContactTime(intersectInfo.tFirst);
 
     // 在找到触点组之前，第一次调整U和V
-    const Triangle3 moveTriangle0{ triangle0.GetVertex(0) + intersectInfo.tFirst * lhsVelocity,
+    const Triangle3Type moveTriangle0{ triangle0.GetVertex(0) + intersectInfo.tFirst * lhsVelocity,
                                    triangle0.GetVertex(1) + intersectInfo.tFirst * lhsVelocity,
                                    triangle0.GetVertex(2) + intersectInfo.tFirst * lhsVelocity };
-    const Triangle3 moveTriangle1{ triangle1.GetVertex(0) + intersectInfo.tFirst * rhsVelocity,
+    const Triangle3Type moveTriangle1{ triangle1.GetVertex(0) + intersectInfo.tFirst * rhsVelocity,
                                    triangle1.GetVertex(1) + intersectInfo.tFirst * rhsVelocity,
                                    triangle1.GetVertex(2) + intersectInfo.tFirst * rhsVelocity };
 
@@ -197,32 +197,32 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
 }
 
 template <typename Real>
-typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectInfo Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindOverlap(const Vector3& axis, Real tmax, const Vector3& velocity)
+typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectInfo Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindOverlap(const Vector3Type& axis, Real tmax, const Vector3Type& velocity)
 {
     const auto cfg0 = ProjectOntoAxis(triangle0, axis);
     const auto cfg1 = ProjectOntoAxis(triangle1, axis);
-    const auto speed = Vector3Tools::DotProduct(velocity, axis);
+    const auto speed = Vector3ToolsType::DotProduct(velocity, axis);
     return FindOverlap(tmax, speed, cfg0, cfg1);
 }
 
 template <typename Real>
-typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Configuration Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::ProjectOntoAxis(const Triangle3& triangle, const Vector3& axis)
+typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Configuration Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::ProjectOntoAxis(const Triangle3Type& triangle, const Vector3Type& axis)
 {
     Configuration cfg{};
 
     // 查找顶点到潜在分离轴上的投影。
-    const auto d0 = Vector3Tools::DotProduct(axis, triangle.GetVertex(0));
-    const auto d1 = Vector3Tools::DotProduct(axis, triangle.GetVertex(1));
-    const auto d2 = Vector3Tools::DotProduct(axis, triangle.GetVertex(2));
+    const auto d0 = Vector3ToolsType::DotProduct(axis, triangle.GetVertex(0));
+    const auto d1 = Vector3ToolsType::DotProduct(axis, triangle.GetVertex(1));
+    const auto d2 = Vector3ToolsType::DotProduct(axis, triangle.GetVertex(2));
 
     // 显式排序的顶点以构造Configuration对象。
     if (d0 <= d1)
     {
         if (d1 <= d2)  // D0 <= D1 <= D2
         {
-            if (Math::Approximate(d0, d1))
+            if (MathType::Approximate(d0, d1))
             {
-                if (Math::Approximate(d1, d2))
+                if (MathType::Approximate(d1, d2))
                 {
                     cfg.vertexProjectionMap = VertexProjectionMap::M111;
                 }
@@ -233,7 +233,7 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Configurat
             }
             else  // ( D0 == D1 )
             {
-                if (Math::Approximate(d1, d2))
+                if (MathType::Approximate(d1, d2))
                 {
                     cfg.vertexProjectionMap = VertexProjectionMap::M21;
                 }
@@ -250,7 +250,7 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Configurat
         }
         else if (d0 <= d2)  // D0 <= D2 < D1
         {
-            if (Math::Approximate(d1, d2))
+            if (MathType::Approximate(d1, d2))
             {
                 cfg.vertexProjectionMap = VertexProjectionMap::M111;
                 cfg.index.at(0) = 0;
@@ -269,7 +269,7 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Configurat
         }
         else  // D2 < D0 <= D1
         {
-            if (Math::Approximate(d0, d1))
+            if (MathType::Approximate(d0, d1))
             {
                 cfg.vertexProjectionMap = VertexProjectionMap::M111;
             }
@@ -287,7 +287,7 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Configurat
     }
     else if (d2 <= d1)  // D2 <= D1 < D0
     {
-        if (Math::Approximate(d2, d1))
+        if (MathType::Approximate(d2, d1))
         {
             cfg.vertexProjectionMap = VertexProjectionMap::M111;
             cfg.index.at(0) = 2;
@@ -306,7 +306,7 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Configurat
     }
     else if (d2 <= d0)  // D1 < D2 <= D0
     {
-        if (Math::Approximate(d2, d0))
+        if (MathType::Approximate(d2, d0))
         {
             cfg.vertexProjectionMap = VertexProjectionMap::M111;
         }
@@ -341,11 +341,11 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectI
 
     // 等速分离轴测试。 uConfiguration和vConfiguration是新的潜在配置，而intersectInfo是最好的配置。
 
-    auto t = Math::GetValue(0);
+    auto t = MathType::GetValue(0);
 
     if (vConfiguration.max < uConfiguration.min)  // V在U的左侧
     {
-        if (speed <= Math::GetValue(0))  // V从U移开
+        if (speed <= MathType::GetValue(0))  // V从U移开
         {
             return intersectInfo;
         }
@@ -383,7 +383,7 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectI
     }
     else if (uConfiguration.max < vConfiguration.min)  // V在U的右边
     {
-        if (Math::GetValue(0) <= speed)  // V从U移开
+        if (MathType::GetValue(0) <= speed)  // V从U移开
         {
             return intersectInfo;
         }
@@ -421,7 +421,7 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectI
     }
     else  // 重叠间隔上的V和U
     {
-        if (Math::GetValue(0) < speed)
+        if (MathType::GetValue(0) < speed)
         {
             // 查找该轴上的最后一次接触时间。
             t = (uConfiguration.max - vConfiguration.min) / speed;
@@ -436,7 +436,7 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectI
                 return intersectInfo;
             }
         }
-        else if (speed < Math::GetValue(0))
+        else if (speed < MathType::GetValue(0))
         {
             // 查找该轴上的最后一次接触时间。
             t = (uConfiguration.min - vConfiguration.max) / speed;
@@ -458,7 +458,7 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectI
 }
 
 template <typename Real>
-void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindContactSet(const Triangle3& moveTriangle0, const Triangle3& moveTriangle1, const ContactSide& side, const Configuration& cfg0, const Configuration& cfg1)
+void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindContactSet(const Triangle3Type& moveTriangle0, const Triangle3Type& moveTriangle1, const ContactSide& side, const Configuration& cfg0, const Configuration& cfg1)
 {
     if (side == ContactSide::Right)  // ri0在tri1的右边
     {
@@ -500,7 +500,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindContactSet
             else  // cfg1.vertexProjectionMap == M3
             {
                 // 面0-面1 相交
-                const Plane3 plane0{ moveTriangle0.GetVertex(0), moveTriangle0.GetVertex(1), moveTriangle0.GetVertex(2) };
+                const Plane3Type plane0{ moveTriangle0.GetVertex(0), moveTriangle0.GetVertex(1), moveTriangle0.GetVertex(2) };
                 GetCoplanarIntersection(plane0, moveTriangle0, moveTriangle1);
             }
         }
@@ -544,7 +544,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindContactSet
             else  // cfg0.vertexProjectionMap == M
             {
                 // 面0-面1 相交
-                const Plane3 plane0{ moveTriangle0.GetVertex(0), moveTriangle0.GetVertex(1), moveTriangle0.GetVertex(2) };
+                const Plane3Type plane0{ moveTriangle0.GetVertex(0), moveTriangle0.GetVertex(1), moveTriangle0.GetVertex(2) };
                 GetCoplanarIntersection(plane0, moveTriangle0, moveTriangle1);
             }
         }
@@ -566,18 +566,18 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindContactSet
 }
 
 template <typename Real>
-void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarIntersection(const Plane3& plane, const Triangle3& moveTriangle0, const Triangle3& moveTriangle1)
+void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarIntersection(const Plane3Type& plane, const Triangle3Type& moveTriangle0, const Triangle3Type& moveTriangle1)
 {
     // 在与平面法线最对齐的坐标平面上投影三角形。
     auto maxNormal = 0;
-    auto x = Math::FAbs(plane.GetNormal().GetX());
-    auto y = Math::FAbs(plane.GetNormal().GetY());
+    auto x = MathType::FAbs(plane.GetNormal().GetX());
+    auto y = MathType::FAbs(plane.GetNormal().GetY());
     if (x < y)
     {
         maxNormal = 1;
         x = y;
     }
-    y = Math::FAbs(plane.GetNormal().GetZ());
+    y = MathType::FAbs(plane.GetNormal().GetZ());
     if (x < y)
     {
         maxNormal = 2;
@@ -623,7 +623,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInt
 
     auto edge0 = projectTriangle0.GetVertex(1) - projectTriangle0.GetVertex(0);
     auto edge1 = projectTriangle0.GetVertex(2) - projectTriangle0.GetVertex(0);
-    if (Vector2Tools<Real>::DotPerp(edge0, edge1) < Math::GetValue(0))
+    if (Vector2Tools<Real>::DotPerp(edge0, edge1) < MathType::GetValue(0))
     {
         // 三角形是顺时针方向，请重新排序。
         projectTriangle0 = Triangle2<Real>{ projectTriangle0Vector.at(0), projectTriangle0Vector.at(2), projectTriangle0Vector.at(1) };
@@ -631,7 +631,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInt
 
     edge0 = projectTriangle1.GetVertex(1) - projectTriangle1.GetVertex(0);
     edge1 = projectTriangle1.GetVertex(2) - projectTriangle1.GetVertex(0);
-    if (Vector2Tools<Real>::DotPerp(edge0, edge1) < Math::GetValue(0))
+    if (Vector2Tools<Real>::DotPerp(edge0, edge1) < MathType::GetValue(0))
     {
         // 三角形是顺时针方向，请重新排序。
         projectTriangle1 = Triangle2<Real>{ projectTriangle1Vector.at(0), projectTriangle1Vector.at(2), projectTriangle1Vector.at(1) };
@@ -647,30 +647,30 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInt
     const auto quantity = intr.GetQuantity();
     if (maxNormal == 0)
     {
-        auto invNormalX = (Math::GetValue(1)) / plane.GetNormal().GetX();
+        auto invNormalX = (MathType::GetValue(1)) / plane.GetNormal().GetX();
         for (auto i = 0; i < quantity; i++)
         {
-            Vector3 vertex{ Math::GetValue(0), intr.GetPoint(i).GetX(), intr.GetPoint(i).GetY() };
+            Vector3 vertex{ MathType::GetValue(0), intr.GetPoint(i).GetX(), intr.GetPoint(i).GetY() };
             vertex.SetX(invNormalX * (plane.GetConstant() - plane.GetNormal().GetY() * vertex.GetY() - plane.GetNormal().GetZ() * vertex.GetZ()));
             point.emplace_back(vertex);
         }
     }
     else if (maxNormal == 1)
     {
-        auto invNormalY = (Math::GetValue(1)) / plane.GetNormal().GetY();
+        auto invNormalY = (MathType::GetValue(1)) / plane.GetNormal().GetY();
         for (auto i = 0; i < quantity; i++)
         {
-            Vector3 vertex{ intr.GetPoint(i).GetX(), Math::GetValue(0), intr.GetPoint(i).GetY() };
+            Vector3 vertex{ intr.GetPoint(i).GetX(), MathType::GetValue(0), intr.GetPoint(i).GetY() };
             vertex.SetY(invNormalY * (plane.GetConstant() - plane.GetNormal().GetX() * vertex.GetX() - plane.GetNormal().GetZ() * vertex.GetZ()));
             point.emplace_back(vertex);
         }
     }
     else
     {
-        auto invNormalZ = (Math::GetValue(1)) / plane.GetNormal().GetZ();
+        auto invNormalZ = (MathType::GetValue(1)) / plane.GetNormal().GetZ();
         for (auto i = 0; i < quantity; i++)
         {
-            Vector3 vertex{ intr.GetPoint(i).GetX(), intr.GetPoint(i).GetY(), Math::GetValue(0) };
+            Vector3 vertex{ intr.GetPoint(i).GetX(), intr.GetPoint(i).GetY(), MathType::GetValue(0) };
             vertex.SetZ(invNormalZ * (plane.GetConstant() - plane.GetNormal().GetX() * vertex.GetX() - plane.GetNormal().GetY() * vertex.GetY()));
             point.emplace_back(vertex);
         }
@@ -680,28 +680,28 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInt
 }
 
 template <typename Real>
-void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeEdgeIntersection(const Vector3& u0, const Vector3& u1, const Vector3& v0, const Vector3& v1)
+void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeEdgeIntersection(const Vector3Type& u0, const Vector3Type& u1, const Vector3Type& v0, const Vector3Type& v1)
 {
     // 计算两个边缘平面的法线。
     auto edge0 = u1 - u0;
     auto edge1 = v1 - v0;
-    const auto normal = Vector3Tools::CrossProduct(edge0, edge1);
+    const auto normal = Vector3ToolsType::CrossProduct(edge0, edge1);
 
     /// 求解U0 + s * (U1 - U0) = V0 + t * (V1 - V0)。
     /// 我们知道边相交，所以[0,1]中的s和[0,1]中的t。 因此，只需解决s。
     /// 注意，s * E0 = D + t * E1，其中D = V0 - U0。
     /// 因此s * N = s * E0xE1 = DxE1且s = N * DxE1 / N * N。
     auto delta = v0 - u0;
-    auto s = Vector3Tools::DotProduct(normal, (Vector3Tools::CrossProduct(delta, edge1) / Vector3Tools::GetLengthSquared(normal)));
-    if (s < Math::GetValue(0))
+    auto s = Vector3ToolsType::DotProduct(normal, (Vector3ToolsType::CrossProduct(delta, edge1) / Vector3ToolsType::GetLengthSquared(normal)));
+    if (s < MathType::GetValue(0))
     {
-        MATHEMATICS_ASSERTION_0(-Math::GetZeroTolerance() <= s, "意外的s值。\n");
-        s = Math::GetValue(0);
+        MATHEMATICS_ASSERTION_0(-MathType::GetZeroTolerance() <= s, "意外的s值。\n");
+        s = MathType::GetValue(0);
     }
-    else if (Math::GetValue(1) < s)
+    else if (MathType::GetValue(1) < s)
     {
-        MATHEMATICS_ASSERTION_0(s <= Math::GetValue(1) + Math::GetZeroTolerance(), "意外的s值。\n");
-        s = Math::GetValue(1);
+        MATHEMATICS_ASSERTION_0(s <= MathType::GetValue(1) + MathType::GetZeroTolerance(), "意外的s值。\n");
+        s = MathType::GetValue(1);
     }
 
     this->SetIntersectionType(IntersectionType::Point);
@@ -712,33 +712,33 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeEdgeInt
 }
 
 template <typename Real>
-void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeFaceIntersection(const Vector3& u0, const Vector3& u1, const Triangle3& triangle)
+void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeFaceIntersection(const Vector3Type& u0, const Vector3Type& u1, const Triangle3Type& triangle)
 {
     // 计算三角形的平面。
     const auto vertex = triangle.GetVertex(0);
     const auto edge0 = triangle.GetVertex(1) - vertex;
     const auto edge1 = triangle.GetVertex(2) - vertex;
-    const auto normal = Vector3Tools::UnitCrossProduct(edge0, edge1);
+    const auto normal = Vector3ToolsType::UnitCrossProduct(edge0, edge1);
 
-    const auto Vector3OrthonormalBasis = Vector3Tools::GenerateComplementBasis(normal);
+    const auto Vector3OrthonormalBasis = Vector3ToolsType::GenerateComplementBasis(normal);
     const auto dir0 = Vector3OrthonormalBasis.GetUVector();
     const auto dir1 = Vector3OrthonormalBasis.GetVVector();
 
     // 将边缘端点投影到平面上。
 
     auto diff = u0 - vertex;
-    const Vector2<Real> projectU0{ Vector3Tools::DotProduct(dir0, diff), Vector3Tools::DotProduct(dir1, diff) };
+    const Vector2<Real> projectU0{ Vector3ToolsType::DotProduct(dir0, diff), Vector3ToolsType::DotProduct(dir1, diff) };
 
     diff = u1 - vertex;
-    const Vector2<Real> projectU1{ Vector3Tools::DotProduct(dir0, diff), Vector3Tools::DotProduct(dir1, diff) };
+    const Vector2<Real> projectU1{ Vector3ToolsType::DotProduct(dir0, diff), Vector3ToolsType::DotProduct(dir1, diff) };
 
     const Segment2<Real> projectSegment{ projectU0, projectU1 };
 
     // 计算三角形的平面坐标。
     using Triangle = std::array<Vector2<Real>, 3>;
     Triangle projectTriangleVector{ Vector2<Real>::GetZero(),
-                                    Vector2<Real>(Vector3Tools::DotProduct(dir0, edge0), Vector3Tools::DotProduct(dir1, edge0)),
-                                    Vector2<Real>(Vector3Tools::DotProduct(dir0, edge1), Vector3Tools::DotProduct(dir1, edge1)) };
+                                    Vector2<Real>(Vector3ToolsType::DotProduct(dir0, edge0), Vector3ToolsType::DotProduct(dir1, edge0)),
+                                    Vector2<Real>(Vector3ToolsType::DotProduct(dir0, edge1), Vector3ToolsType::DotProduct(dir1, edge1)) };
 
     const Triangle2<Real> projectTriangle{ projectTriangleVector.at(0), projectTriangleVector.at(1), projectTriangleVector.at(2) };
 

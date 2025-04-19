@@ -121,7 +121,7 @@ void Mathematics::IntegerDataTesting::Bit1Test()
 
 void Mathematics::IntegerDataTesting::ConversionTest()
 {
-    IntegerData<3> firstIntegerData(0xF000F458F7892523ULL);
+    IntegerData<3> firstIntegerData(static_cast<uint64_t>(0xF000F458F7892523ULL));
 
     ASSERT_EQUAL(firstIntegerData[0], uint16_t(0x2523));
     ASSERT_EQUAL(firstIntegerData[1], uint16_t(0xF789));

@@ -175,7 +175,7 @@ void Mathematics::Vector2ToolsTesting::OtherCalculateTest()
         Vector2 vector0(randomDistribution(generator), randomDistribution(generator));
         Vector2 vector1(randomDistribution(generator), randomDistribution(generator));
 
-        const Vector2ToolsD::Vector2Orthonormalize orthonormalize = Vector2ToolsD::Orthonormalize(vector0, vector1);
+        const Vector2ToolsD::Vector2OrthonormalizeType orthonormalize = Vector2ToolsD::Orthonormalize(vector0, vector1);
 
         vector0.Normalize();
 

@@ -26,7 +26,7 @@ namespace Rendering
         using ClassType = AmbientLightEffect;
         using ParentType = LightEffect;
 
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
 
     public:
         explicit AmbientLightEffect(const std::string& name,

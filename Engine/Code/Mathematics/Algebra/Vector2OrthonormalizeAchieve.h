@@ -18,7 +18,7 @@
 
 template <typename Real, bool Robust>
 requires std::is_arithmetic_v<Real>
-Mathematics::Vector2Orthonormalize<Real, Robust>::Vector2Orthonormalize(const Vector2& lhs, const Vector2& rhs, const Real epsilon)
+Mathematics::Vector2Orthonormalize<Real, Robust>::Vector2Orthonormalize(const Vector2Type& lhs, const Vector2Type& rhs, const Real epsilon)
     : uVector{ lhs }, vVector{ rhs }, epsilon{ epsilon }
 {
     Generate();
@@ -48,9 +48,9 @@ void Mathematics::Vector2Orthonormalize<Real, Robust>::Generate()
     }
 
     // 计算 u1.
-    const auto dot = Vector2Tools::DotProduct(uVector, vVector);
+    const auto dot = Vector2ToolsType::DotProduct(uVector, vVector);
 
-    MATHEMATICS_ASSERTION_1(epsilon < Math::FAbs(dot), "输入向量必须是线性无关的！");
+    MATHEMATICS_ASSERTION_1(epsilon < MathType::FAbs(dot), "输入向量必须是线性无关的！");
 
     vVector -= uVector * dot;
 
@@ -71,7 +71,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector2Orthonormalize<Real
 {
     try
     {
-        if (Math::FAbs(Vector2Tools::DotProduct(uVector, vVector)) <= epsilon &&
+        if (MathType::FAbs(Vector2ToolsType::DotProduct(uVector, vVector)) <= epsilon &&
             uVector.IsNormalize(epsilon) &&
             vVector.IsNormalize(epsilon))
         {

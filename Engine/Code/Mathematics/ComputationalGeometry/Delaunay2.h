@@ -29,13 +29,13 @@ namespace Mathematics
     public:
         using ClassType = Delaunay2<Real>;
         using ParentType = Delaunay<Real>;
-        using Vector2 = Vector2<Real>;
-        using Vertices = std::vector<Vector2>;
+        using Vector2Type = Vector2<Real>;
+        using Vertices = std::vector<Vector2Type>;
         using String = System::String;
         using IndicesType = ParentType::IndicesType;
-        using Delaunay1 = Delaunay1<Real>;
+        using Delaunay1Type = Delaunay1<Real>;
         using HullType = std::pair<IndicesType, bool>;
-        using VertexType = std::tuple<Vector2, Vector2, Vector2, bool>;
+        using VertexType = std::tuple<Vector2Type, Vector2Type, Vector2Type, bool>;
         using IndexType = std::tuple<int32_t, int32_t, int32_t, bool>;
         using BaryType = std::tuple<Real, Real, Real, bool>;
 
@@ -48,13 +48,13 @@ namespace Mathematics
         NODISCARD Vertices GetVertices() const;
         NODISCARD int GetNumUniqueVertices() const noexcept;
 
-        NODISCARD Vector2 GetLineOrigin() const noexcept;
-        NODISCARD Vector2 GetLineDirection() const noexcept;
-        NODISCARD Delaunay1 GetDelaunay1() const;
+        NODISCARD Vector2Type GetLineOrigin() const noexcept;
+        NODISCARD Vector2Type GetLineDirection() const noexcept;
+        NODISCARD Delaunay1Type GetDelaunay1() const;
 
         NODISCARD HullType GetHull() const;
 
-        NODISCARD int GetContainingTriangle(const Vector2& p) const;
+        NODISCARD int GetContainingTriangle(const Vector2Type& p) const;
 
         NODISCARD int GetPathLast() const noexcept;
         NODISCARD IndicesType GetPath() const;
@@ -67,7 +67,7 @@ namespace Mathematics
 
         NODISCARD IndexType GetAdjacentSet(int i) const;
 
-        NODISCARD BaryType GetBarycentricSet(int i, const Vector2& p) const;
+        NODISCARD BaryType GetBarycentricSet(int i, const Vector2Type& p) const;
 
         void LoadFile(const String& filename);
         void SaveFile(const String& filename) const;
@@ -75,8 +75,8 @@ namespace Mathematics
     private:
         using Triangle = ETManifoldMesh::Triangle;
         using TriangleSharedPtr = std::shared_ptr<Triangle>;
-        using Query2 = Query2<Real>;
-        using Query2SharedPtr = std::shared_ptr<Query2>;
+        using Query2Type = Query2<Real>;
+        using Query2SharedPtr = std::shared_ptr<Query2Type>;
 
         NODISCARD bool GetContainingTriangle(int i, const Triangle& tri) const;
 
@@ -92,13 +92,13 @@ namespace Mathematics
 
         Vertices sVertices;
         Query2SharedPtr query;
-        Vector2 min;
+        Vector2Type min;
         Real scale;
 
         ETManifoldMesh triMesh;
 
-        Vector2 lineOrigin;
-        Vector2 lineDirection;
+        Vector2Type lineOrigin;
+        Vector2Type lineDirection;
 
         mutable int pathLast;
         mutable IndicesType path;

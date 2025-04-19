@@ -75,7 +75,7 @@ namespace Rendering
         /// 则可以在应用程序初始化时设置一次“defaultVersion”。
         /// 尽管我们在CPU端需要OpenGL 4.5的接口，
         /// 但GLSL所需的版本是4.30，以支持计算着色器。
-        NODISCARD void SetVersion(const std::string& defaultVersion);
+        void SetVersion(const std::string& defaultVersion);
 
     private:
         PackageType impl;

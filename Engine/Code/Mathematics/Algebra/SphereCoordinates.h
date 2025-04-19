@@ -26,22 +26,22 @@ namespace Mathematics
     public:
         using ClassType = SphereCoordinates<Real>;
 
-        using Math = Math<Real>;
-        using Vector3 = Vector3<Real>;
+        using MathType = Math<Real>;
+        using Vector3Type = Vector3<Real>;
 
     public:
         constexpr SphereCoordinates() noexcept
-            : r{}, ¦È{}, ¦Õ{}
+            : r{}, theta{}, phi{}
         {
         }
 
-        SphereCoordinates(Real r, Real ¦È, Real ¦Õ);
+        SphereCoordinates(Real r, Real theta, Real phi);
 
         NODISCARD bool IsValid() const noexcept;
 
         void SetCartesian(Real xCoordinate, Real yCoordinate, Real zCoordinate) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        NODISCARD Vector3 GetCartesian() const noexcept;
+        NODISCARD Vector3Type GetCartesian() const noexcept;
 
         NODISCARD constexpr Real GetR() const noexcept
         {
@@ -50,24 +50,24 @@ namespace Mathematics
 
         NODISCARD constexpr Real GetTheta() const noexcept
         {
-            return ¦È;
+            return theta;
         }
 
         NODISCARD constexpr Real GetPhi() const noexcept
         {
-            return ¦Õ;
+            return phi;
         }
 
         void SetR(Real radius);
 
-        void SetTheta(Real theta);
+        void SetTheta(Real aTheta);
 
-        void SetPhi(Real phi);
+        void SetPhi(Real aPhi);
 
     private:
         Real r;
-        Real ¦È;
-        Real ¦Õ;
+        Real theta;
+        Real phi;
     };
 }
 

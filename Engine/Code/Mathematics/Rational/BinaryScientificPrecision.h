@@ -33,10 +33,10 @@ namespace Mathematics
 
         NODISCARD PrecisionParameters GetBsn() const noexcept;
         NODISCARD PrecisionParameters GetBsr() const noexcept;
-        NODISCARD void SetBsn(const PrecisionParameters& aBsn) noexcept;
-        NODISCARD void SetBsr(const PrecisionParameters& aBsr) noexcept;
-        NODISCARD void SetBsn(int minExponent, int maxExponent, int maxBits) noexcept;
-        NODISCARD void SetBsr(int minExponent, int maxExponent, int maxBits) noexcept;
+        void SetBsn(const PrecisionParameters& aBsn) noexcept;
+        void SetBsr(const PrecisionParameters& aBsr) noexcept;
+        void SetBsn(int minExponent, int maxExponent, int maxBits) noexcept;
+        void SetBsr(int minExponent, int maxExponent, int maxBits) noexcept;
 
     private:
         PrecisionParameters bsn;

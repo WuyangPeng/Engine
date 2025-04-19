@@ -26,8 +26,8 @@ namespace Mathematics
         using ClassType = PolynomialSamplesPower<Real>;
 
         using Samples = std::vector<Real>;
-        using Math = Math<Real>;
-        using VariableMatrix = VariableMatrix<Real>;
+        using MathType = Math<Real>;
+        using VariableMatrixType = VariableMatrix<Real>;
 
     public:
         PolynomialSamplesPower(const Samples& samples, int degree);
@@ -44,7 +44,7 @@ namespace Mathematics
     private:
         int numDegree;
         int numSamples;
-        VariableMatrix power;
+        VariableMatrixType power;
     };
 }
 

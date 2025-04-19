@@ -10,12 +10,16 @@
 #ifndef CORE_TOOLS_HELPER_SUITE_PROPERTIES_H
 #define CORE_TOOLS_HELPER_SUITE_PROPERTIES_H
 
-#include "CoreTools/Helper/PropertiesMacro.h"
 #include "CoreTools/Helper/UserMacro.h"
 #include "CoreTools/Properties/MethodPropertyGetDetail.h"
 #include "CoreTools/Properties/MethodPropertyGetSetDetail.h"
 #include "CoreTools/Properties/MethodPropertySetDetail.h"
 #include "CoreTools/Properties/PropertyDetail.h"
+#include "CoreTools/Properties/PropertyGetExternalDetail.h"
+#include "CoreTools/Properties/PropertyGetSetExternalDetail.h"
+#include "CoreTools/Properties/PropertySetExternalDetail.h"
+
+#include "CoreTools/Helper/PropertiesMacro.h"
 
 #include <string>
 
@@ -48,7 +52,7 @@ namespace CoreTools
         NODISCARD const std::string& GetValue6() const noexcept;
         void SetValue7(const std::string& value);
         NODISCARD std::string GetValue7() const;
-        NODISCARD std::string GetValue8() const;
+        NODISCARD const std::string& GetValue8() const noexcept;
         void SetValue8(const std::string& value);
 
         TCRE_METHOD_PROPERTY_GET(int, const int&, ClassType, GetValue0, Value0, true);
@@ -57,9 +61,14 @@ namespace CoreTools
         TCRE_METHOD_PROPERTY_GET_SET(uint32_t, uint32_t, const uint32_t&, ClassType, GetValue3, SetValue3, Value3, true);
         TCRE_DECLARE_PROPERTY(ClassType, int, int, Value4, SetValue4, GetValue4);
         TCRE_DECLARE_PROPERTY(ClassType, std::string, const std::string&, Value5, SetValue5, GetValue5);
+
+#ifdef SYSTEM_PLATFORM_WIN32
+
         TCRE_PROPERTY_READ(std::string, Value6, GetValue6);
         TCRE_PROPERTY_WRITE(std::string, Value8, SetValue7);
         TCRE_PROPERTY_READ_WRITE(std::string, Value9, GetValue8, SetValue8);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 
     private:
         int value0;

@@ -17,9 +17,9 @@
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-Mathematics::CylindricalCoordinates<Real>::CylindricalCoordinates(Real r, Real ¦Õ, Real y)
+Mathematics::CylindricalCoordinates<Real>::CylindricalCoordinates(Real r, Real phi, Real y)
     : r{ r },
-      ¦Õ{ ¦Õ },
+      phi{ phi },
       y{ y }
 {
     if (!IsValid())
@@ -33,7 +33,7 @@ Mathematics::CylindricalCoordinates<Real>::CylindricalCoordinates(Real r, Real ¦
 template <typename Real>
 requires std::is_floating_point_v<Real> bool Mathematics::CylindricalCoordinates<Real>::IsValid() const noexcept
 {
-    return Math::GetValue(0) <= r && Math::GetValue(0) <= ¦Õ && ¦Õ < Math::GetTwoPI();
+    return MathType::GetValue(0) <= r && MathType::GetValue(0) <= phi && phi < MathType::GetTwoPI();
 }
 
 template <typename Real>
@@ -42,7 +42,7 @@ void Mathematics::CylindricalCoordinates<Real>::SetR(Real radius)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    if (Math::GetValue(0) <= radius)
+    if (MathType::GetValue(0) <= radius)
     {
         r = radius;
     }
@@ -54,13 +54,13 @@ void Mathematics::CylindricalCoordinates<Real>::SetR(Real radius)
 
 template <typename Real>
 requires std::is_floating_point_v<Real>
-void Mathematics::CylindricalCoordinates<Real>::SetPhi(Real phi)
+void Mathematics::CylindricalCoordinates<Real>::SetPhi(Real aPhi)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    if (Math::GetValue(0) <= phi && phi < Math::GetTwoPI())
+    if (MathType::GetValue(0) <= aPhi && aPhi < MathType::GetTwoPI())
     {
-        ¦Õ = phi;
+        phi = aPhi;
     }
     else
     {
@@ -74,8 +74,8 @@ void Mathematics::CylindricalCoordinates<Real>::SetCartesian(Real xCoordinate, R
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    r = Math::Sqrt(Math::Square(xCoordinate) + Math::Square(zCoordinate));
-    ¦Õ = Math::GetZeroTolerance() < r ? Math::ASin(xCoordinate / r) : Real{};
+    r = MathType::Sqrt(MathType::Square(xCoordinate) + MathType::Square(zCoordinate));
+    phi = MathType::GetZeroTolerance() < r ? MathType::ASin(xCoordinate / r) : Real{};
     y = yCoordinate;
 }
 
@@ -85,7 +85,7 @@ Mathematics::Vector3<Real> Mathematics::CylindricalCoordinates<Real>::GetCartesi
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return Vector3{ r * Math::Sin(¦Õ), y, r * Math::Cos(¦Õ) };
+    return Vector3Type{ r * MathType::Sin(phi), y, r * MathType::Cos(phi) };
 }
 
 #endif  // MATHEMATICS_CYLINDRICAL_COORDINATES_ACHIEVE_H

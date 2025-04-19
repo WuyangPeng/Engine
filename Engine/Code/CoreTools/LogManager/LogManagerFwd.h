@@ -10,7 +10,7 @@
 #ifndef CORE_TOOLS_LOG_MANAGER_FWD_H
 #define CORE_TOOLS_LOG_MANAGER_FWD_H
 
-    namespace CoreTools
+namespace CoreTools
 {
     enum class LogFilter;
     enum class LogLevel;

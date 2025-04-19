@@ -161,7 +161,7 @@ template <int N, typename Real>
 requires(1 <= N && N <= 4 && std::is_arithmetic_v<Real>)
 void Mathematics::Algebra::Vector<N, Real>::MakeOnes()
 {
-    std::fill(container.begin(), container.end(), Math::GetValue(1));
+    std::fill(container.begin(), container.end(), MathType::GetValue(1));
 }
 
 template <int N, typename Real>
@@ -173,7 +173,7 @@ void Mathematics::Algebra::Vector<N, Real>::MakeUnit(int direction)
     std::fill(container.begin(), container.end(), Real{});
     if (0 <= direction && direction < N)
     {
-        container.at(direction) = Math::GetValue(1);
+        container.at(direction) = MathType::GetValue(1);
     }
 }
 
@@ -276,7 +276,7 @@ Mathematics::Algebra::Vector<N, Real>& Mathematics::Algebra::Vector<N, Real>::op
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    if (!Math::Approximate(scalar, Math::GetZeroTolerance()))
+    if (!MathType::Approximate(scalar, MathType::GetZeroTolerance()))
     {
         for (auto i = 0; i < N; ++i)
         {
@@ -327,7 +327,7 @@ Real Mathematics::Algebra::Vector<N, Real>::GetMaxComponent() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    auto maxComponent = Math::FAbs(container.at(0));
+    auto maxComponent = MathType::FAbs(container.at(0));
 
     if constexpr (N == 1)
     {
@@ -337,7 +337,7 @@ Real Mathematics::Algebra::Vector<N, Real>::GetMaxComponent() const
     {
         for (auto i = 1; i < N; ++i)
         {
-            const auto component = Math::FAbs(container.at(i));
+            const auto component = MathType::FAbs(container.at(i));
             if (maxComponent < component)
             {
                 maxComponent = component;

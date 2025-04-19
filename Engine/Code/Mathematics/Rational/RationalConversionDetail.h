@@ -75,8 +75,6 @@ void Mathematics::RationalConversion<N, T>::Init(const DoubleType&)
 template <int N, typename T>
 void Mathematics::RationalConversion<N, T>::InitToFloatingPoint()
 {
-    using IntegerType = typename TraitsType::IntegerType;
-
     CorrectWithShifting();
 
     if (shifting <= boost::numeric_cast<int>(TraitsType::realExponentDifference))
@@ -86,12 +84,12 @@ void Mathematics::RationalConversion<N, T>::InitToFloatingPoint()
     else
     {
         // 大于max_normal_float。
-        THROW_EXCEPTION(SYSTEM_TEXT("转换溢出！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("转换溢出！"s))
     }
 
     Negative();
 
-    auto result = boost::numeric_cast<IntegerType>(mantissa);
+    auto result = boost::numeric_cast<typename TraitsType::IntegerType>(mantissa);
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
@@ -127,8 +125,6 @@ void Mathematics::RationalConversion<N, T>::CorrectWithShifting()
 template <int N, typename T>
 void Mathematics::RationalConversion<N, T>::CalculateMantissa()
 {
-    using IntegerType = typename TraitsType::IntegerType;
-
     constexpr auto realExponentDifference = gsl::narrow_cast<int>(TraitsType::realExponentDifference);
     constexpr auto exponentShifting = gsl::narrow_cast<int>(TraitsType::exponentShifting);
 
@@ -136,13 +132,13 @@ void Mathematics::RationalConversion<N, T>::CalculateMantissa()
     // -149 float
     if (-realExponentDifference - exponentShifting + 1 <= shifting)
     {
-        IntegerType exponent{ 0 };
-        IntegerType bit{ 0 };
-        IntegerType shift{ 0 };
+        typename TraitsType::IntegerType exponent{ 0 };
+        typename TraitsType::IntegerType bit{ 0 };
+        typename TraitsType::IntegerType shift{ 0 };
         if (-realExponentDifference < shifting)
         {
             // normal_float, 1.c * 2^{e - 127}
-            exponent = gsl::narrow_cast<IntegerType>(shifting) + realExponentDifference;
+            exponent = gsl::narrow_cast<typename TraitsType::IntegerType>(shifting) + realExponentDifference;
             bit = 1;
             shift = 0;
         }
@@ -155,7 +151,7 @@ void Mathematics::RationalConversion<N, T>::CalculateMantissa()
             shift = -(shifting + realExponentDifference);
         }
 
-        const auto beginMask = (IntegerType{ 1 } << (exponentShifting - 1)) >> shift;
+        const auto beginMask = (typename TraitsType::IntegerType{ 1 } << (exponentShifting - 1)) >> shift;
 
         for (auto mask = beginMask; 0 < mask; mask >>= 1)
         {

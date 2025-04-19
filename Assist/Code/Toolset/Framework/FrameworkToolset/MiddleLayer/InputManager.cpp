@@ -16,7 +16,7 @@
 
 CLASS_INVARIANT_STUB_DEFINE(FrameworkToolset, InputManager)
 
-namespace FrameworkToolset
+namespace Framework
 {
     template class Framework::InputManager<Framework::WindowApplicationTrait>;
 }

@@ -16,8 +16,8 @@
 
 template <typename Real, typename UserDataType>
 Mathematics::GaussianQuadrature<Real, UserDataType>::GaussianQuadrature(Real begin, Real end, Function function, const UserDataType* userData) noexcept
-    : radius{ Math::GetRational(1, 2) * (end - begin) },
-      center{ Math::GetRational(1, 2) * (end + begin) },
+    : radius{ MathType::GetRational(1, 2) * (end - begin) },
+      center{ MathType::GetRational(1, 2) * (end + begin) },
       function{ function },
       userData{ userData },
       result{}

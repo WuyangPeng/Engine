@@ -27,7 +27,7 @@ namespace Mathematics
     public:
         using ClassType = SymmetricEigensolver3x3<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         SymmetricEigensolver3x3() noexcept;

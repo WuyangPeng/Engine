@@ -14,6 +14,7 @@
 
 #include <istream>
 #include <vector>
+#include <limits>
 
 namespace Mathematics
 {

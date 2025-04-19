@@ -22,10 +22,10 @@ namespace Mathematics
     public:
         using ClassType = GreatArcFit3Item<Real>;
 
-        using Vector3 = Vector3<Real>;
+        using Vector3Type = Vector3<Real>;
 
     public:
-        explicit GreatArcFit3Item(const Vector3& uVector, const Vector3& vVector, const Vector3& point) noexcept;
+        explicit GreatArcFit3Item(const Vector3Type& uVector, const Vector3Type& vVector, const Vector3Type& point) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

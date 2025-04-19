@@ -34,7 +34,7 @@ namespace Rendering
         using ConstVertexBufferSharedPtr = std::shared_ptr<const VertexBuffer>;
         using ConstIndexBufferSharedPtr = std::shared_ptr<const IndexBuffer>;
         using ConstTextEffectSharedPtr = std::shared_ptr<const TextEffect>;
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
 
     public:
         Font(FontType fontType, ProgramFactory& factory, const std::string& shaderExtendName, int maxMessageLength);
@@ -52,7 +52,7 @@ namespace Rendering
                      int viewportHeight,
                      int x,
                      int y,
-                     const Colour& color,
+                     const ColourType& color,
                      const std::string& message) const;
 
         NODISCARD VertexBufferSharedPtr GetVertexBuffer() noexcept;

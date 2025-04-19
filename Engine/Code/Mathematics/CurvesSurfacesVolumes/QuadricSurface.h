@@ -106,7 +106,7 @@ namespace Mathematics
             QRational c5;
         };
 
-        NODISCARD static void GetRootSigns(RReps& reps, int& positiveRoots, int& negativeRoots, int& zeroRoots);
+        static void GetRootSigns(RReps& reps, int& positiveRoots, int& negativeRoots, int& zeroRoots);
         NODISCARD static int GetSignChanges(int quantity, const std::array<QRational, 4>& value);
         NODISCARD static Type ClassifyZeroRoots0(const RReps& reps, int positiveRoots);
         NODISCARD static Type ClassifyZeroRoots1(const RReps& reps, int positiveRoots);

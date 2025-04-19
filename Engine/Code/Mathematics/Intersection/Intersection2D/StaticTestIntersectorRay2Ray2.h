@@ -24,18 +24,18 @@ namespace Mathematics
         using ClassType = StaticTestIntersectorRay2Ray2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Vector2 = Vector2<Real>;
-        using Ray2 = Ray2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector2Type = Vector2<Real>;
+        using Ray2Type = Ray2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorRay2Ray2(const Ray2& lhsRay, const Ray2& rhsRay, const Real dotThreshold = Math::GetZeroTolerance());
+        StaticTestIntersectorRay2Ray2(const Ray2Type& lhsRay, const Ray2Type& rhsRay, const Real dotThreshold = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Ray2 GetLhsRay() const noexcept;
-        NODISCARD Ray2 GetRhsRay() const noexcept;
+        NODISCARD Ray2Type GetLhsRay() const noexcept;
+        NODISCARD Ray2Type GetRhsRay() const noexcept;
 
         // 相交集。让 q = GetQuantity()。情况是：
         //   q = 0: 射线不相交， GetIntersection() 返回IntersectionType::Empty。
@@ -52,8 +52,8 @@ namespace Mathematics
 
     private:
         // 要相交的对象。
-        Ray2 lhsRay;
-        Ray2 rhsRay;
+        Ray2Type lhsRay;
+        Ray2Type rhsRay;
 
     private:
         // 相交集

@@ -27,7 +27,7 @@ Mathematics::DistanceResultImpl<Real, Vector>::DistanceResultImpl(Real distance)
 template <typename Real, typename Vector>
 bool Mathematics::DistanceResultImpl<Real, Vector>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) <= distance)
+    if (MathType::GetValue(0) <= distance)
         return true;
     else
         return false;
@@ -48,7 +48,7 @@ Real Mathematics::DistanceResultImpl<Real, Vector>::GetContactTime() const noexc
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return Math::GetValue(0);
+    return MathType::GetValue(0);
 }
 
 template <typename Real, typename Vector>
@@ -116,7 +116,7 @@ void Mathematics::DistanceResultImpl<Real, Vector>::SetSqrtDistance(Real newDist
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    SetDistance(Math::Sqrt(newDistance));
+    SetDistance(MathType::Sqrt(newDistance));
 }
 
 template <typename Real, typename Vector>

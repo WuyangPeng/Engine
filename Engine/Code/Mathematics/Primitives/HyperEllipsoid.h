@@ -51,7 +51,7 @@ namespace Mathematics
     public:
         using ClassType = HyperEllipsoid<N, Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector = Algebra::Vector<N, Real>;
         using AxisType = std::array<Vector, N>;
         using Matrix = Algebra::Matrix<N, N, Real>;
@@ -73,7 +73,7 @@ namespace Mathematics
         NODISCARD AxisType GetAxis() const noexcept;
         void SetAxis(const AxisType& aAxis) noexcept;
         NODISCARD Vector GetAxis(int index) const;
-        NODISCARD void SetAxis(int index, const Vector& aAxis);
+        void SetAxis(int index, const Vector& aAxis);
 
         NODISCARD Vector GetExtent() const noexcept;
         void SetExtent(const Vector& aExtent) noexcept;

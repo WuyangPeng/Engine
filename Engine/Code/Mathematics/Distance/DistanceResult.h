@@ -26,9 +26,13 @@ namespace Mathematics
     class DistanceResult final
     {
     public:
-        using DistanceResultImpl = DistanceResultImpl<Real, Vector>;
+        using DistanceResultImplType = DistanceResultImpl<Real, Vector>;
 
-        DELAY_COPY_UNSHARED_TYPE_DECLARE(DistanceResult);
+        using ClassType = DistanceResult;
+        using ImplType = DistanceResultImplType;
+        using PackageType = CoreTools::DelayCopyUnsharedImpl<DistanceResult, ImplType>;
+        using SharedPtr = std::shared_ptr<ImplType>;
+        COPY_UNSHARED_CLONE_SELF_DECLARE;
 
         using ClosestPoints = std::vector<Vector>;
 

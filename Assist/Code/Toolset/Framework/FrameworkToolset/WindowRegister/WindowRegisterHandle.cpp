@@ -16,7 +16,7 @@
 
 CLASS_INVARIANT_STUB_DEFINE(FrameworkToolset, WindowRegisterHandle)
 
-namespace FrameworkToolset
+namespace Framework
 {
     template class Framework::WindowRegisterHandle<Framework::WindowProcessInterface>;
 }

@@ -22,22 +22,22 @@ namespace Rendering
     public:
         using ClassType = RendererClear;
 
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
 
     public:
         RendererClear() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        void SetClearColor(const Colour& aClearColor) noexcept;
-        NODISCARD Colour GetClearColor() const noexcept;
+        void SetClearColor(const ColourType& aClearColor) noexcept;
+        NODISCARD ColourType GetClearColor() const noexcept;
         void SetClearDepth(float aClearDepth) noexcept;
         NODISCARD float GetClearDepth() const noexcept;
         void SetClearStencil(int aClearStencil) noexcept;
         NODISCARD int GetClearStencil() const noexcept;
 
     private:
-        Colour clearColor;
+        ColourType clearColor;
         float clearDepth;
         int clearStencil;
     };

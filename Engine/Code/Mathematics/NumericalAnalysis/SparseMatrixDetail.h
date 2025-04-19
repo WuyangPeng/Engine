@@ -65,9 +65,9 @@ const Real& Mathematics::SparseMatrix<Real>::operator()(int row, int column) con
     }
     else
     {
-        static constexpr auto zero = Math::GetValue(0);
+        static constexpr auto zero = MathType::GetValue(0);
 
-        MATHEMATICS_ASSERTION_0(Math::Approximate(zero, Math::GetValue(0), Math::GetZeroTolerance()), "静态const变量被修改！");
+        MATHEMATICS_ASSERTION_0(MathType::Approximate(zero, MathType::GetValue(0), MathType::GetZeroTolerance()), "静态const变量被修改！");
 
         return zero;
     }

@@ -22,14 +22,14 @@ namespace Mathematics
     public:
         using ClassType = LevenbergMarquardtMinimizerResult<T>;
 
-        using VariableLengthVector = VariableLengthVector<T>;
+        using VariableLengthVectorType = VariableLengthVector<T>;
 
     public:
         LevenbergMarquardtMinimizerResult() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD VariableLengthVector GetMinLocation() const;
+        NODISCARD VariableLengthVectorType GetMinLocation() const;
         NODISCARD T GetMinError() const noexcept;
         NODISCARD T GetMinErrorDifference() const noexcept;
         NODISCARD T GetMinUpdateLength() const noexcept;
@@ -37,7 +37,7 @@ namespace Mathematics
         NODISCARD int GetNumAdjustments() const noexcept;
         NODISCARD bool IsConverged() const noexcept;
 
-        void SetMinLocation(const VariableLengthVector& aMinLocation);
+        void SetMinLocation(const VariableLengthVectorType& aMinLocation);
         void SetMinError(T aMinError) noexcept;
         void SetMinErrorDifference(T aMinErrorDifference) noexcept;
         void SetMinUpdateLength(T aMinUpdateLength) noexcept;
@@ -48,7 +48,7 @@ namespace Mathematics
         void SetConverged(bool aConverged) noexcept;
 
     private:
-        VariableLengthVector minLocation;
+        VariableLengthVectorType minLocation;
         T minError;
         T minErrorDifference;
         T minUpdateLength;

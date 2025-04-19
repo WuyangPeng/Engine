@@ -25,7 +25,7 @@ namespace Rendering
         using ClassType = SpotLightEffect;
         using ParentType = LightEffect;
 
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
 
     public:
         explicit SpotLightEffect(ProgramFactory& factory,

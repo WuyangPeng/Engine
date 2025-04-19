@@ -48,7 +48,7 @@ void Mathematics::RootsGeneralPolynomial<T>::Solve(const Container& p, bool useT
 
     /// 移除高阶零值系数。
     auto degree = boost::numeric_cast<int>(p.size() - 1);
-    while (degree >= 1 && Math::Approximate(p.at(degree), T{}))
+    while (degree >= 1 && MathType::Approximate(p.at(degree), T{}))
     {
         --degree;
     }
@@ -388,7 +388,7 @@ bool Mathematics::RootsGeneralPolynomial<T>::Bisect(const Container& tP, const R
     T tRoot{};
     for (auto i = 0; i < maxIterations; ++i)
     {
-        tRoot = Math::GetRational(1, 2) * (tXMin + tXMax);
+        tRoot = MathType::GetRational(1, 2) * (tXMin + tXMax);
 
         /// 当tXMin和tXMax是连续的浮点数时，
         /// 该测试是为'float'或'double'设计的。

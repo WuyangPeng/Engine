@@ -53,7 +53,7 @@ int Mathematics::Query3<Real>::GetNumVertices() const
 }
 
 template <typename Real>
-typename Mathematics::Query3<Real>::Vector3 Mathematics::Query3<Real>::GetVertex(int index) const
+typename Mathematics::Query3<Real>::Vector3Type Mathematics::Query3<Real>::GetVertex(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -69,7 +69,7 @@ Mathematics::PlaneQueryType Mathematics::Query3<Real>::ToPlane(int index, int v0
 }
 
 template <typename Real>
-Mathematics::PlaneQueryType Mathematics::Query3<Real>::ToPlane(const Vector3& testVector, int v0, int v1, int v2) const
+Mathematics::PlaneQueryType Mathematics::Query3<Real>::ToPlane(const Vector3Type& testVector, int v0, int v1, int v2) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -97,9 +97,9 @@ Mathematics::PlaneQueryType Mathematics::Query3<Real>::ToPlane(const Vector3& te
         det = -det;
     }
 
-    if (Math::FAbs(det) <= Math::GetZeroTolerance())
+    if (MathType::FAbs(det) <= MathType::GetZeroTolerance())
         return PlaneQueryType::OnPlane;
-    else if (Math::GetValue(0) < det)
+    else if (MathType::GetValue(0) < det)
         return PlaneQueryType::PositiveSide;
     else
         return PlaneQueryType::NegativeSide;
@@ -114,7 +114,7 @@ Mathematics::TetrahedronQueryType Mathematics::Query3<Real>::ToTetrahedron(int i
 }
 
 template <typename Real>
-Mathematics::TetrahedronQueryType Mathematics::Query3<Real>::ToTetrahedron(const Vector3& testVector, int v0, int v1, int v2, int v3) const
+Mathematics::TetrahedronQueryType Mathematics::Query3<Real>::ToTetrahedron(const Vector3Type& testVector, int v0, int v1, int v2, int v3) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_0(0 <= v0 && v0 < GetNumVertices(), "Ë÷Òý´íÎó£¡");
@@ -166,7 +166,7 @@ Mathematics::CircumsphereQueryType Mathematics::Query3<Real>::ToCircumsphere(int
 }
 
 template <typename Real>
-Mathematics::CircumsphereQueryType Mathematics::Query3<Real>::ToCircumsphere(const Vector3& testVector, int v0, int v1, int v2, int v3) const
+Mathematics::CircumsphereQueryType Mathematics::Query3<Real>::ToCircumsphere(const Vector3Type& testVector, int v0, int v1, int v2, int v3) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -214,9 +214,9 @@ Mathematics::CircumsphereQueryType Mathematics::Query3<Real>::ToCircumsphere(con
         det = -det;
     }
 
-    if (Math::FAbs(det) <= Math::GetZeroTolerance())
+    if (MathType::FAbs(det) <= MathType::GetZeroTolerance())
         return CircumsphereQueryType::OnCircumsphere;
-    else if (det < Math::GetValue(0))
+    else if (det < MathType::GetValue(0))
         return CircumsphereQueryType::Inside;
     else
         return CircumsphereQueryType::Outside;

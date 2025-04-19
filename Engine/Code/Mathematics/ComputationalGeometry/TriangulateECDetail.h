@@ -215,7 +215,7 @@ void Mathematics::TriangulateEC<Real>::InitializePositions(const Positions& posi
                 sPositions.at(i) = positions.at(i);
             }
 
-            query = std::make_shared<Query2>(sPositions);
+            query = std::make_shared<Query2Type>(sPositions);
             return;
         }
 
@@ -394,9 +394,9 @@ void Mathematics::TriangulateEC<Real>::DoEarClipping(int numVertices, const Indi
 }
 
 template <typename Real>
-int Mathematics::TriangulateEC<Real>::TriangleQuery(const Vector2& position, QueryType queryType, Real epsilon, const std::array<Vector2, 3>& triangle) const
+int Mathematics::TriangulateEC<Real>::TriangleQuery(const Vector2Type& position, QueryType queryType, Real epsilon, const std::array<Vector2Type, 3>& triangle) const
 {
-    std::vector<Vector2> triangleVec{ triangle.begin(), triangle.end() };
+    std::vector<Vector2Type> triangleVec{ triangle.begin(), triangle.end() };
 
     switch (queryType)
     {
@@ -407,7 +407,7 @@ int Mathematics::TriangulateEC<Real>::TriangleQuery(const Vector2& position, Que
             return System::EnumCastUnderlying(Query2Integer<Real>(triangleVec).ToTriangle(position, 0, 1, 2));
 
         case QueryType::Real:
-            return System::EnumCastUnderlying(Query2(triangleVec).ToTriangle(position, 0, 1, 2));
+            return System::EnumCastUnderlying(Query2Type(triangleVec).ToTriangle(position, 0, 1, 2));
 
         case QueryType::Rational:
             return System::EnumCastUnderlying(Query2Rational<Real>(triangleVec).ToTriangle(position, 0, 1, 2));
@@ -445,7 +445,7 @@ void Mathematics::TriangulateEC<Real>::CombinePolygons(QueryType queryType,
     }
     auto m = sPositions.at(inner.at(xmaxIndex));
 
-    Vector2 intr{ Math<Real>::maxReal, m[1] };
+    Vector2Type intr{ Math<Real>::maxReal, m[1] };
     auto v0min = -1;
     auto v1min = -1;
     auto endMin = -1;
@@ -542,7 +542,7 @@ void Mathematics::TriangulateEC<Real>::CombinePolygons(QueryType queryType,
     {
         MATHEMATICS_ASSERTION_0(v0min >= 0 && v1min >= 0, "意外情况\n");
 
-        std::array<Vector2, 3> sTriangle{};
+        std::array<Vector2Type, 3> sTriangle{};
         auto pIndex = 0;
         if (sPositions.at(outer.at(v0min))[0] > sPositions.at(outer.at(v1min))[0])
         {

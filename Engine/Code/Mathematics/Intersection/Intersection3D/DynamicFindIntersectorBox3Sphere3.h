@@ -25,27 +25,27 @@ namespace Mathematics
         using ClassType = DynamicFindIntersectorBox3Sphere3<Real>;
         using ParentType = DynamicIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Box3 = Box3<Real>;
-        using Sphere3 = Sphere3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Box3Type = Box3<Real>;
+        using Sphere3Type = Sphere3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        DynamicFindIntersectorBox3Sphere3(const Box3& box,
-                                          const Sphere3& sphere,
+        DynamicFindIntersectorBox3Sphere3(const Box3Type& box,
+                                          const Sphere3Type& sphere,
                                           Real tmax,
-                                          const Vector3& lhsVelocity,
-                                          const Vector3& rhsVelocity,
-                                          const Real epsilon = Math::GetZeroTolerance());
+                                          const Vector3Type& lhsVelocity,
+                                          const Vector3Type& rhsVelocity,
+                                          const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Box3 GetBox() const noexcept;
-        NODISCARD Sphere3 GetSphere() const noexcept;
+        NODISCARD Box3Type GetBox() const noexcept;
+        NODISCARD Sphere3Type GetSphere() const noexcept;
 
         // 用于动态查找相交查询的相交集。
-        NODISCARD Vector3 GetContactPoint() const noexcept;
+        NODISCARD Vector3Type GetContactPoint() const noexcept;
 
     private:
         void Find();
@@ -64,10 +64,10 @@ namespace Mathematics
         NODISCARD int FindVertexRegionIntersection(Real extentX, Real extentY, Real extentZ, Real centerDiffDotX, Real centerDiffDotY, Real centerDiffDotZ, Real relativeVelocityDotX, Real relativeVelocityDotY, Real relativeVelocityDotZ) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
     private:
-        Box3 box;
-        Sphere3 sphere;
+        Box3Type box;
+        Sphere3Type sphere;
 
-        Vector3 contactPoint;
+        Vector3Type contactPoint;
 
         Real x;
         Real y;

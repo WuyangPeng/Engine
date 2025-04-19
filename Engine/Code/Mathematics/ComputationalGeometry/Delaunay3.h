@@ -25,14 +25,14 @@ namespace Mathematics
     public:
         using ClassType = Delaunay3<Real>;
         using ParentType = Delaunay<Real>;
-        using Vector3 = Vector3<Real>;
-        using Vertices = std::vector<Vector3>;
-        using Delaunay1 = Delaunay1<Real>;
-        using Delaunay2 = Delaunay2<Real>;
+        using Vector3Type = Vector3<Real>;
+        using Vertices = std::vector<Vector3Type>;
+        using Delaunay1Type = Delaunay1<Real>;
+        using Delaunay2Type = Delaunay2<Real>;
         using String = System::String;
         using IndicesType = ParentType::IndicesType;
         using HullType = std::pair<IndicesType, bool>;
-        using VertexType = std::tuple<Vector3, Vector3, Vector3, Vector3, bool>;
+        using VertexType = std::tuple<Vector3Type, Vector3Type, Vector3Type, Vector3Type, bool>;
         using IndexType = std::tuple<int32_t, int32_t, int32_t, int32_t, bool>;
         using BaryType = std::tuple<Real, Real, Real, Real, bool>;
 
@@ -46,17 +46,17 @@ namespace Mathematics
 
         NODISCARD int GetNumUniqueVertices() const noexcept;
 
-        NODISCARD Vector3 GetLineOrigin() const noexcept;
-        NODISCARD Vector3 GetLineDirection() const noexcept;
-        NODISCARD Delaunay1 GetDelaunay1() const;
+        NODISCARD Vector3Type GetLineOrigin() const noexcept;
+        NODISCARD Vector3Type GetLineDirection() const noexcept;
+        NODISCARD Delaunay1Type GetDelaunay1() const;
 
-        NODISCARD Vector3 GetPlaneOrigin() const noexcept;
-        NODISCARD Vector3 GetPlaneDirection(int i) const;
-        NODISCARD Delaunay2 GetDelaunay2() const;
+        NODISCARD Vector3Type GetPlaneOrigin() const noexcept;
+        NODISCARD Vector3Type GetPlaneDirection(int i) const;
+        NODISCARD Delaunay2Type GetDelaunay2() const;
 
         NODISCARD HullType GetHull() const;
 
-        NODISCARD int GetContainingTetrahedron(const Vector3& p) const;
+        NODISCARD int GetContainingTetrahedron(const Vector3Type& p) const;
 
         NODISCARD int GetPathLast() const noexcept;
         NODISCARD IndicesType GetPath() const;
@@ -69,7 +69,7 @@ namespace Mathematics
 
         NODISCARD IndexType GetAdjacentSet(int i) const;
 
-        NODISCARD BaryType GetBarycentricSet(int i, const Vector3& p) const;
+        NODISCARD BaryType GetBarycentricSet(int i, const Vector3Type& p) const;
 
         void LoadFile(const String& filename);
         void SaveFile(const String& filename) const;
@@ -77,8 +77,8 @@ namespace Mathematics
     private:
         using Tetrahedron = TSManifoldMesh::Tetrahedron;
         using TetrahedronSharedPtr = std::shared_ptr<Tetrahedron>;
-        using Query3 = Query3<Real>;
-        using Query3SharedPtr = std::shared_ptr<Query3>;
+        using Query3Type = Query3<Real>;
+        using Query3SharedPtr = std::shared_ptr<Query3Type>;
 
     private:
         NODISCARD bool GetContainingTetrahedron(int i, const Tetrahedron& tetra) const;
@@ -95,16 +95,16 @@ namespace Mathematics
 
         Vertices sVertices;
         Query3SharedPtr query;
-        Vector3 min;
+        Vector3Type min;
         Real scale;
 
         TSManifoldMesh tetraMesh;
 
-        Vector3 lineOrigin;
-        Vector3 lineDirection;
+        Vector3Type lineOrigin;
+        Vector3Type lineDirection;
 
-        Vector3 planeOrigin;
-        std::array<Vector3, 2> planeDirection;
+        Vector3Type planeOrigin;
+        std::array<Vector3Type, 2> planeDirection;
 
         mutable int pathLast;
         mutable IndicesType path;

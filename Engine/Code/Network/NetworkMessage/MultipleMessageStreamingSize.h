@@ -26,23 +26,23 @@ namespace Network
     class MultipleMessageStreamingSize<Index, MultipleMessageContainer<E, ByteType, Types...>> : public MultipleMessageStreamingSize<Index - 1, MultipleMessageContainer<E, ByteType, Types...>>
     {
     public:
-        using MultipleMessageContainer = MultipleMessageContainer<E, ByteType, Types...>;
-        using ClassType = MultipleMessageStreamingSize<Index, MultipleMessageContainer>;
-        using ParentType = MultipleMessageStreamingSize<Index - 1, MultipleMessageContainer>;
+        using MultipleMessageContainerType = MultipleMessageContainer<E, ByteType, Types...>;
+        using ClassType = MultipleMessageStreamingSize<Index, MultipleMessageContainerType>;
+        using ParentType = MultipleMessageStreamingSize<Index - 1, MultipleMessageContainerType>;
 
         MultipleMessageStreamingSize() noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD int GetStreamingSize(const MultipleMessageContainer& container) const override;
+        NODISCARD int GetStreamingSize(const MultipleMessageContainerType& container) const override;
     };
 
     template <typename E, MultipleMessageByteType ByteType, MultipleMessageByteType... Types>
     class MultipleMessageStreamingSize<1, MultipleMessageContainer<E, ByteType, Types...>>
     {
     public:
-        using MultipleMessageContainer = MultipleMessageContainer<E, ByteType, Types...>;
-        using ClassType = MultipleMessageStreamingSize<0, MultipleMessageContainer>;
+        using MultipleMessageContainerType = MultipleMessageContainer<E, ByteType, Types...>;
+        using ClassType = MultipleMessageStreamingSize<0, MultipleMessageContainerType>;
 
         MultipleMessageStreamingSize() noexcept;
         virtual ~MultipleMessageStreamingSize() noexcept = default;
@@ -54,7 +54,7 @@ namespace Network
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        NODISCARD virtual int GetStreamingSize(const MultipleMessageContainer& container) const;
+        NODISCARD virtual int GetStreamingSize(const MultipleMessageContainerType& container) const;
     };
 }
 

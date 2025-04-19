@@ -378,7 +378,7 @@ void Mathematics::PolynomialTesting::CalculateTest()
 
     PolynomialD eighthPolynomial(secondDoubleVector);
 
-    PolynomialD::PolynomialDivide polynomialDivide = firstPolynomial.Divide(eighthPolynomial, 1e-10);
+    PolynomialD::PolynomialDivideType polynomialDivide = firstPolynomial.Divide(eighthPolynomial, 1e-10);
 
     PolynomialD ninthPolynomial = polynomialDivide.GetQuotient() * eighthPolynomial + polynomialDivide.GetRemainder();
 

@@ -27,25 +27,25 @@ namespace Mathematics
 
         using ClassType = Ray2<Real>;
 
-        using Vector2 = Vector2<Real>;
-        using Math = Math<Real>;
+        using Vector2Type = Vector2<Real>;
+        using MathType = Math<Real>;
 
     public:
         // 射线表示为P+t*D，其中P是线原点，D是单位长度的方向向量，t >= 0。
         // 用户必须确保D是单位长度。
 
-        Ray2(const Vector2& origin, const Vector2& direction, Real epsilon = Math::GetZeroTolerance()) noexcept;
+        Ray2(const Vector2Type& origin, const Vector2Type& direction, Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector2 GetOrigin() const noexcept;
-        NODISCARD Vector2 GetDirection() const noexcept;
+        NODISCARD Vector2Type GetOrigin() const noexcept;
+        NODISCARD Vector2Type GetDirection() const noexcept;
 
-        NODISCARD Ray2 GetMove(Real t, const Vector2& velocity) const;
+        NODISCARD Ray2 GetMove(Real t, const Vector2Type& velocity) const;
 
     private:
-        Vector2 origin;
-        Vector2 direction;
+        Vector2Type origin;
+        Vector2Type direction;
         Real epsilon;
     };
 

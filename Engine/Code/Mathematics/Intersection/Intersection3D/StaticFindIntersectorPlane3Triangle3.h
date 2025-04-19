@@ -25,35 +25,35 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorPlane3Triangle3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Plane3 = Plane3<Real>;
-        using Triangle3 = Triangle3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Plane3Type = Plane3<Real>;
+        using Triangle3Type = Triangle3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
         // 如果要进行模糊确定，请将epsilon值设置为较小的正数。
-        StaticFindIntersectorPlane3Triangle3(const Plane3& plane, const Triangle3& triangle, Real epsilon = Math::GetValue(0));
+        StaticFindIntersectorPlane3Triangle3(const Plane3Type& plane, const Triangle3Type& triangle, Real epsilon = MathType::GetValue(0));
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Plane3 GetPlane() const noexcept;
-        NODISCARD Triangle3 GetTriangle() const noexcept;
+        NODISCARD Plane3Type GetPlane() const noexcept;
+        NODISCARD Triangle3Type GetTriangle() const noexcept;
 
         // 相交集，它是空的，点，线段或整个三角形（GetQuantity返回0、1、2或3）
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
 
     private:
         void Find();
 
-        Plane3 plane;
-        Triangle3 triangle;
+        Plane3Type plane;
+        Triangle3Type triangle;
 
         int quantity;
-        Vector3 point0;
-        Vector3 point1;
-        Vector3 point2;
+        Vector3Type point0;
+        Vector3Type point1;
+        Vector3Type point2;
     };
 }
 

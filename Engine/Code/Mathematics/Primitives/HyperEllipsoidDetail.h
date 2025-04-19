@@ -18,7 +18,7 @@
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::HyperEllipsoid<N, Real>::HyperEllipsoid() noexcept requires(N == 2)
-    : center{}, axis{ Vector{ Math::GetValue(1), Math::GetValue(0) }, Vector{ Math::GetValue(0), Math::GetValue(1) } }, extent{ Math::GetValue(1), Math::GetValue(1) }
+    : center{}, axis{ Vector{ MathType::GetValue(1), MathType::GetValue(0) }, Vector{ MathType::GetValue(0), MathType::GetValue(1) } }, extent{ MathType::GetValue(1), MathType::GetValue(1) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -27,10 +27,10 @@ template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::HyperEllipsoid<N, Real>::HyperEllipsoid() noexcept requires(N == 3)
     : center{},
-      axis{ Vector{ Math::GetValue(1), Math::GetValue(0), Math::GetValue(0) },
-            Vector{ Math::GetValue(0), Math::GetValue(1), Math::GetValue(0) },
-            Vector{ Math::GetValue(0), Math::GetValue(0), Math::GetValue(1) } },
-      extent{ Math::GetValue(1), Math::GetValue(1), Math::GetValue(1) }
+      axis{ Vector{ MathType::GetValue(1), MathType::GetValue(0), MathType::GetValue(0) },
+            Vector{ MathType::GetValue(0), MathType::GetValue(1), MathType::GetValue(0) },
+            Vector{ MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(1) } },
+      extent{ MathType::GetValue(1), MathType::GetValue(1), MathType::GetValue(1) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -199,7 +199,7 @@ typename Mathematics::HyperEllipsoid<N, Real>::CoefficientType Mathematics::Hype
     /// 将二次项的其中一个系数设置为1。
     auto quadIndex = numCoefficients - 1;
     auto maxIndex = quadIndex;
-    auto maxValue = Math::FAbs(coefficient.at(quadIndex));
+    auto maxValue = MathType::FAbs(coefficient.at(quadIndex));
 
 #include SYSTEM_WARNING_POP
 
@@ -212,7 +212,7 @@ typename Mathematics::HyperEllipsoid<N, Real>::CoefficientType Mathematics::Hype
         for (auto d = 2; d < localN; ++d)
         {
             quadIndex -= d;
-            auto absValue = Math::FAbs(coefficient.at(quadIndex));
+            auto absValue = MathType::FAbs(coefficient.at(quadIndex));
             if (maxValue < absValue)
             {
                 maxIndex = quadIndex;
@@ -221,7 +221,7 @@ typename Mathematics::HyperEllipsoid<N, Real>::CoefficientType Mathematics::Hype
         }
     }
 
-    auto invMaxValue = Math::GetValue(1) / maxValue;
+    auto invMaxValue = MathType::GetValue(1) / maxValue;
     for (auto i = 0; i < numCoefficients; ++i)
     {
         if (i != maxIndex)
@@ -230,7 +230,7 @@ typename Mathematics::HyperEllipsoid<N, Real>::CoefficientType Mathematics::Hype
         }
         else
         {
-            coefficient.at(i) = Math::GetValue(1);
+            coefficient.at(i) = MathType::GetValue(1);
         }
     }
 
@@ -245,8 +245,8 @@ void Mathematics::HyperEllipsoid<N, Real>::ToCoefficients(Matrix& a, Vector& b, 
 
     a = GetM();
     const auto product = a * center;
-    b = Math::GetValue(-2) * product;
-    c = Dot(center, product) - Math::GetValue(1);
+    b = MathType::GetValue(-2) * product;
+    c = Dot(center, product) - MathType::GetValue(1);
 }
 
 template <int N, typename Real>
@@ -277,17 +277,17 @@ bool Mathematics::HyperEllipsoid<N, Real>::FromCoefficients(const Matrix& a, con
         return false;
     }
 
-    center = Math::GetRational(-1, 2) * (invA * b);
+    center = MathType::GetRational(-1, 2) * (invA * b);
 
     // 计算 B^T*A^{-1}*B/4 - C = K^T*A*K - C = -K^T*B/2 - C.
-    const auto rightSide = Math::GetRational(-1, 2) * Dot(center, b) - c;
-    if (Math::Approximate(rightSide, Real{}))
+    const auto rightSide = MathType::GetRational(-1, 2) * Dot(center, b) - c;
+    if (MathType::Approximate(rightSide, Real{}))
     {
         return false;
     }
 
     // 计算 M = A/(K^T*A*K - C).
-    const auto invRightSide = Math::GetValue(1) / rightSide;
+    const auto invRightSide = MathType::GetValue(1) / rightSide;
     const auto m = invRightSide * a;
 
     /// 因子为 M = R*D*R^T。M是对称的，
@@ -312,7 +312,7 @@ bool Mathematics::HyperEllipsoid<N, Real>::FromCoefficients(const Matrix& a, con
             return false;
         }
 
-        extent[d] = Math::GetValue(1) / Math::Sqrt(diagonal.at(d));
+        extent[d] = MathType::GetValue(1) / MathType::Sqrt(diagonal.at(d));
         axis.at(d) = rotation.GetColumn(d);
     }
 
@@ -351,7 +351,7 @@ void Mathematics::HyperEllipsoid<N, Real>::Convert(const CoefficientType& coeffi
         ++i;
         for (auto column = r + 1; column < N; ++column, ++i)
         {
-            a(r, column) = coefficient.at(i) * Math::GetRational(1, 2);
+            a(r, column) = coefficient.at(i) * MathType::GetRational(1, 2);
         }
     }
 }
@@ -376,7 +376,7 @@ void Mathematics::HyperEllipsoid<N, Real>::Convert(const Matrix& a, const Vector
         ++i;
         for (auto column = r + 1; column < N && i < boost::numeric_cast<int>(coefficient.size()); ++column, ++i)
         {
-            coefficient.at(i) = a(r, column) * Math::GetRational(1, 2);
+            coefficient.at(i) = a(r, column) * MathType::GetRational(1, 2);
         }
     }
 }

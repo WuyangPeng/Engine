@@ -107,13 +107,13 @@ bool Mathematics::Algebra::Polygon2<Real>::CounterClockwise() const noexcept
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Algebra::Polygon2<Real>::Vector2 Mathematics::Algebra::Polygon2<Real>::ComputeVertexAverage() const
+typename Mathematics::Algebra::Polygon2<Real>::Vector2Type Mathematics::Algebra::Polygon2<Real>::ComputeVertexAverage() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     const auto vertexPoolSharedPtr = GetVertexPool();
 
-    Vector2 average{};
+    Vector2Type average{};
 
     for (const auto index : vertices)
     {
@@ -167,9 +167,9 @@ Real Mathematics::Algebra::Polygon2<Real>::ComputeArea() const
         v0 = v1;
         v1 = v2;
     }
-    area *= Math::GetRational(1, 2);
+    area *= MathType::GetRational(1, 2);
 
-    return Math::FAbs(area);
+    return MathType::FAbs(area);
 }
 
 template <typename Real>
@@ -241,7 +241,7 @@ bool Mathematics::Algebra::Polygon2<Real>::IsConvexInternal() const
 {
     const auto vertexPoolSharedPtr = GetVertexPool();
 
-    const auto sign = counterClockwise ? Math::GetValue(1) : Math::GetValue(-1);
+    const auto sign = counterClockwise ? MathType::GetValue(1) : MathType::GetValue(-1);
     const auto numIndices = boost::numeric_cast<int>(indices.size());
     for (auto index = 0; index < numIndices; ++index)
     {

@@ -38,7 +38,7 @@ void Mathematics::DynamicTestIntersector1<Real>::Test(Real tMax, Real speedU, Re
     {
         // [u0,u1]最初在[v0,v1]的左边。
         auto differenceSpeed = speedU - speedV;
-        if (Math::GetValue(0) < differenceSpeed)
+        if (MathType::GetValue(0) < differenceSpeed)
         {
             // 区间必须朝向彼此移动。
             auto differencePosition = v0 - u1;
@@ -56,7 +56,7 @@ void Mathematics::DynamicTestIntersector1<Real>::Test(Real tMax, Real speedU, Re
     {
         // [u0,u1]最初在[v0,v1]的右边。
         auto differenceSpeed = speedV - speedU;
-        if (Math::GetValue(0) < differenceSpeed)
+        if (MathType::GetValue(0) < differenceSpeed)
         {
             // 区间必须朝向彼此移动。
             auto differencePosition = u0 - v1;
@@ -72,7 +72,7 @@ void Mathematics::DynamicTestIntersector1<Real>::Test(Real tMax, Real speedU, Re
     else
     {
         // 区间本来就相交。
-        firstTime = Math::GetValue(0);
+        firstTime = MathType::GetValue(0);
         if (speedU + epsilon < speedV)
         {
             lastTime = (u1 - v0) / (speedV - speedU);
@@ -83,7 +83,7 @@ void Mathematics::DynamicTestIntersector1<Real>::Test(Real tMax, Real speedU, Re
         }
         else
         {
-            lastTime = Math::maxReal;
+            lastTime = MathType::maxReal;
         }
 
         intersection = true;
@@ -95,7 +95,7 @@ void Mathematics::DynamicTestIntersector1<Real>::Test(Real tMax, Real speedU, Re
 template <typename Real>
 bool Mathematics::DynamicTestIntersector1<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && Math::GetValue(0) <= firstTime && firstTime <= lastTime)
+    if (ParentType::IsValid() && MathType::GetValue(0) <= firstTime && firstTime <= lastTime)
         return true;
     else
         return false;

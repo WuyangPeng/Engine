@@ -25,26 +25,26 @@ namespace Mathematics
         using ClassType = StaticTestIntersectorBox3Frustum3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Box3 = Box3<Real>;
-        using Frustum3 = Frustum3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Box3Type = Box3<Real>;
+        using Frustum3Type = Frustum3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorBox3Frustum3(const Box3& box, const Frustum3& frustum, const Real epsilon = Math::GetZeroTolerance());
+        StaticTestIntersectorBox3Frustum3(const Box3Type& box, const Frustum3Type& frustum, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Box3 GetBox() const noexcept;
-        NODISCARD Frustum3 GetFrustum() const noexcept;
+        NODISCARD Box3Type GetBox() const noexcept;
+        NODISCARD Frustum3Type GetFrustum() const noexcept;
 
     private:
         void Test();
 
     private:
-        Box3 box;
-        Frustum3 frustum;
+        Box3Type box;
+        Frustum3Type frustum;
     };
 }
 

@@ -45,7 +45,7 @@ namespace Mathematics
     public:
         using ClassType = Hyperplane<N, Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector = Algebra::Vector<N, Real>;
         using PointType = std::array<Vector, N>;
 

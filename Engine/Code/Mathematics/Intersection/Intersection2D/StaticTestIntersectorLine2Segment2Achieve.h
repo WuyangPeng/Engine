@@ -19,7 +19,7 @@
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorLine2Segment2<Real>::StaticTestIntersectorLine2Segment2(const Line2& line, const Segment2& segment, const Real dotThreshold, const Real intervalThreshold)
+Mathematics::StaticTestIntersectorLine2Segment2<Real>::StaticTestIntersectorLine2Segment2(const Line2Type& line, const Segment2Type& segment, const Real dotThreshold, const Real intervalThreshold)
     : ParentType{ dotThreshold }, line{ line }, segment{ segment }, quantity{ 0 }, intervalThreshold{ intervalThreshold }
 {
     Test();
@@ -37,7 +37,7 @@ void Mathematics::StaticTestIntersectorLine2Segment2<Real>::Test()
     if (intersectionType == IntersectionType::Point)
     {
         // 测试线-线相交的点是否在线段上。
-        if (Math::FAbs(classify.GetParameter1()) <= segment.GetExtent() + intervalThreshold)
+        if (MathType::FAbs(classify.GetParameter1()) <= segment.GetExtent() + intervalThreshold)
         {
             quantity = 1;
         }

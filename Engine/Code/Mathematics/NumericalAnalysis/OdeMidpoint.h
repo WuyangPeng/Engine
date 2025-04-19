@@ -27,7 +27,7 @@ namespace Mathematics
         using ClassType = OdeMidpoint<Real, UserDataType>;
 
         using ParentType = OdeSolver<Real, UserDataType>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
         using Data = typename ParentType::Data;
         using Function = typename ParentType::Function;

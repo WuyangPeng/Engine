@@ -23,35 +23,35 @@ namespace Mathematics
     {
     public:
         using ClassType = DistanceSegment3Rectangle3<Real>;
-        using Vector3 = Vector3<Real>;
-        using ParentType = DistanceBase<Real, Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3Type>;
 
-        using Segment3 = Segment3<Real>;
-        using Rectangle3 = Rectangle3<Real>;
-        using Vector2 = Vector2<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using Segment3Type = Segment3<Real>;
+        using Rectangle3Type = Rectangle3<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistanceSegment3Rectangle3(const Segment3& segment, const Rectangle3& rectangle) noexcept;
+        DistanceSegment3Rectangle3(const Segment3Type& segment, const Rectangle3Type& rectangle) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Segment3 GetSegment() const noexcept;
-        NODISCARD Rectangle3 GetRectangle() const noexcept;
+        NODISCARD Segment3Type GetSegment() const noexcept;
+        NODISCARD Rectangle3Type GetRectangle() const noexcept;
 
         NODISCARD DistanceResult GetSquared() const override;
 
-        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
         NODISCARD Real GetRectangleCoordinate(int index) const;
 
     private:
-        Segment3 segment;
-        Rectangle3 rectangle;
+        Segment3Type segment;
+        Rectangle3Type rectangle;
 
-        mutable Vector2 rectCoord;
+        mutable Vector2Type rectCoord;
     };
 
     using DistanceSegment3Rectangle3F = DistanceSegment3Rectangle3<float>;

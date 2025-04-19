@@ -25,33 +25,33 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorSegment2Arc2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Vector2 = Vector2<Real>;
-        using Segment2 = Segment2<Real>;
-        using Arc2 = Arc2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector2Type = Vector2<Real>;
+        using Segment2Type = Segment2<Real>;
+        using Arc2Type = Arc2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorSegment2Arc2(const Segment2& segment, const Arc2& arc, const Real dotThreshold = Math::GetZeroTolerance());
+        StaticFindIntersectorSegment2Arc2(const Segment2Type& segment, const Arc2Type& arc, const Real dotThreshold = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Segment2 GetSegment() const noexcept;
-        NODISCARD Arc2 GetArc() const noexcept;
+        NODISCARD Segment2Type GetSegment() const noexcept;
+        NODISCARD Arc2Type GetArc() const noexcept;
 
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector2 GetPoint(int index) const;
+        NODISCARD Vector2Type GetPoint(int index) const;
 
     private:
         void Find();
 
     private:
-        Segment2 segment;
-        Arc2 arc;
+        Segment2Type segment;
+        Arc2Type arc;
 
         int quantity;
-        Vector2 point0;
-        Vector2 point1;
+        Vector2Type point0;
+        Vector2Type point1;
     };
 }
 

@@ -16,7 +16,7 @@
 
 CLASS_INVARIANT_STUB_DEFINE(FrameworkToolset, AndroidCallBack)
 
-namespace FrameworkToolset
+namespace Framework
 {
-    template class Framework::AndroidCallBack<Framework::MiddleLayerInterface>;
+    template class AndroidCallBack<MiddleLayerInterface>;
 }

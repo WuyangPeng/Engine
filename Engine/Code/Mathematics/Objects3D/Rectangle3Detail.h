@@ -17,13 +17,13 @@
 
 template <typename Real>
 Mathematics::Rectangle3<Real>::Rectangle3() noexcept
-    : center{}, axis{ Vector3::GetUnitX(), Vector3::GetUnitY() }, extent{ Math::GetValue(1), Math::GetValue(1) }, epsilon{ Math::GetZeroTolerance() }
+    : center{}, axis{ Vector3Type::GetUnitX(), Vector3Type::GetUnitY() }, extent{ MathType::GetValue(1), MathType::GetValue(1) }, epsilon{ MathType::GetZeroTolerance() }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
-Mathematics::Rectangle3<Real>::Rectangle3(const Vector3& center, const Vector3& axis0, const Vector3& axis1, Real extent0, Real extent1, Real epsilon) noexcept
+Mathematics::Rectangle3<Real>::Rectangle3(const Vector3Type& center, const Vector3Type& axis0, const Vector3Type& axis1, Real extent0, Real extent1, Real epsilon) noexcept
     : center{ center }, axis{ axis0, axis1 }, extent{ extent0, extent1 }, epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -31,7 +31,7 @@ Mathematics::Rectangle3<Real>::Rectangle3(const Vector3& center, const Vector3& 
 
 template <typename Real>
 Mathematics::Rectangle3<Real>::Rectangle3(const AlgebraRectangle3& rectangle3, Real epsilon)
-    : center{ Vector3{ rectangle3.GetCenter() } }, axis{ Vector3{ rectangle3.GetAxis(0) }, Vector3{ rectangle3.GetAxis(1) } }, extent{ rectangle3.GetExtent(0), rectangle3.GetExtent(1) }, epsilon{ epsilon }
+    : center{ Vector3Type{ rectangle3.GetCenter() } }, axis{ Vector3Type{ rectangle3.GetAxis(0) }, Vector3Type{ rectangle3.GetAxis(1) } }, extent{ rectangle3.GetExtent(0), rectangle3.GetExtent(1) }, epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -192,7 +192,7 @@ Mathematics::Vector3<Real> Mathematics::Rectangle3<Real>::GetMMCorner() const
 }
 
 template <typename Real>
-Mathematics::Rectangle3<Real> Mathematics::Rectangle3<Real>::GetMove(Real t, const Vector3& velocity) const
+Mathematics::Rectangle3<Real> Mathematics::Rectangle3<Real>::GetMove(Real t, const Vector3Type& velocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

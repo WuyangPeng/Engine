@@ -77,10 +77,12 @@ System::WinSocket System::NetworkMacroTesting::CreateWinSocket()
 
 void System::NetworkMacroTesting::FdSetTest(WinSocket winSocket)
 {
-#include SYSTEM_WARNING_PUSH
+#ifdef SYSTEM_PLATFORM_WIN32
 
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
+    #include SYSTEM_WARNING_PUSH
+
+    #include SYSTEM_WARNING_DISABLE(26446)
+    #include SYSTEM_WARNING_DISABLE(26482)
 
     WinSockFdSet winSockFdSet{};
 
@@ -98,5 +100,7 @@ void System::NetworkMacroTesting::FdSetTest(WinSocket winSocket)
     SYSTEM_FD_ZERO(&winSockFdSet);
     ASSERT_EQUAL(winSockFdSet.fd_count, 0u);
 
-#include SYSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }

@@ -131,7 +131,7 @@ void Rendering::TextEffect::SetNormalizedZ(float z)
     return impl->SetNormalizedZ(z);
 }
 
-void Rendering::TextEffect::SetColor(const Colour& aColor)
+void Rendering::TextEffect::SetColor(const ColourType& aColor)
 {
     RENDERING_CLASS_IS_VALID_9;
 

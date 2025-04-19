@@ -16,7 +16,7 @@
 #include "Mathematics/Distance/DistanceBaseDetail.h"
 
 template <typename Real>
-Mathematics::DistancePoint3Plane3<Real>::DistancePoint3Plane3(const Vector3& point, const Plane3& plane) noexcept
+Mathematics::DistancePoint3Plane3<Real>::DistancePoint3Plane3(const Vector3Type& point, const Plane3Type& plane) noexcept
     : ParentType{}, point{ point }, plane{ plane }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -56,13 +56,13 @@ typename Mathematics::DistancePoint3Plane3<Real>::DistanceResult Mathematics::Di
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const auto signedDistance = Vector3Tools::DotProduct(plane.GetNormal(), point) - plane.GetConstant();
+    const auto signedDistance = Vector3ToolsType::DotProduct(plane.GetNormal(), point) - plane.GetConstant();
 
-    return DistanceResult{ Math::FAbs(signedDistance), Math::GetValue(0), point, point - signedDistance * plane.GetNormal() };
+    return DistanceResult{ MathType::FAbs(signedDistance), MathType::GetValue(0), point, point - signedDistance * plane.GetNormal() };
 }
 
 template <typename Real>
-typename Mathematics::DistancePoint3Plane3<Real>::DistanceResult Mathematics::DistancePoint3Plane3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistancePoint3Plane3<Real>::DistanceResult Mathematics::DistancePoint3Plane3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

@@ -107,7 +107,7 @@ int Mathematics::RootsBisection1<Real>::operator()(const std::function<Real(cons
         /// 如果函数恰好为零，则会找到根。
         /// 对于固定精度，两个连续数字的平均值可能是当前间隔端点之一。
         const auto signRoot = (fAtTRoot > Real{} ? +1 : (fAtTRoot < Real{} ? -1 : 0));
-        if (signRoot == 0 || Math::Approximate(tRoot, t0) || Math::Approximate(tRoot, t1))
+        if (signRoot == 0 || MathType::Approximate(tRoot, t0) || MathType::Approximate(tRoot, t1))
         {
             break;
         }
@@ -135,7 +135,7 @@ void Mathematics::RootsBisection1<Real>::RoundInitial(Real const& inT0, Real con
 template <typename Real>
 Real Mathematics::RootsBisection1<Real>::RoundAverage(Real const& t0, Real const& t1) noexcept requires(!CoreTools::IsArbitraryPrecision<Real>::value)
 {
-    const auto average = Math::GetRational(1, 2) * (t0 + t1);
+    const auto average = MathType::GetRational(1, 2) * (t0 + t1);
     return average;
 }
 

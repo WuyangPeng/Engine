@@ -15,7 +15,7 @@
 #include "System/Helper/WindowsMacro.h"
 #include "System/Time/DeltaTime.h"
 #include "CoreTools/Base/Flags/UniqueIdSelect.h"
-#include "CoreTools/Base/UniqueIDManagerDetail.h"
+#include "CoreTools/Base/UniqueIdManagerDetail.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"

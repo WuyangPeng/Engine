@@ -25,26 +25,26 @@ namespace Mathematics
         using ClassType = StaticTestIntersectorRay3Ellipsoid3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Ray3 = Ray3<Real>;
-        using Ellipsoid3 = Ellipsoid3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Ray3Type = Ray3<Real>;
+        using Ellipsoid3Type = Ellipsoid3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorRay3Ellipsoid3(const Ray3& ray, const Ellipsoid3& ellipsoid, const Real epsilon = Math::GetZeroTolerance());
+        StaticTestIntersectorRay3Ellipsoid3(const Ray3Type& ray, const Ellipsoid3Type& ellipsoid, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Ray3 GetRay() const noexcept;
-        NODISCARD Ellipsoid3 GetEllipsoid() const noexcept;
+        NODISCARD Ray3Type GetRay() const noexcept;
+        NODISCARD Ellipsoid3Type GetEllipsoid() const noexcept;
 
     private:
         void Test();
 
     private:
-        Ray3 ray;
-        Ellipsoid3 ellipsoid;
+        Ray3Type ray;
+        Ellipsoid3Type ellipsoid;
     };
 }
 

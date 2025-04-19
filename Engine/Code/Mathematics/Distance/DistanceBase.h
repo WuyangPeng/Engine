@@ -25,8 +25,8 @@ namespace Mathematics
     public:
         using ClassType = DistanceBase<Real, Vector>;
 
-        using DistanceResult = DistanceResult<Real, Vector>;
-        using Math = Math<Real>;
+        using DistanceResultType = DistanceResult<Real, Vector>;
+        using MathType = Math<Real>;
 
     public:
         DistanceBase() noexcept;
@@ -51,14 +51,14 @@ namespace Mathematics
 
         // 静态距离查询。
         // 距离（默认实现为调用GetSquared，对DistanceResult中的距离值进行开方）
-        NODISCARD virtual DistanceResult Get() const;
+        NODISCARD virtual DistanceResultType Get() const;
         // 距离平方
-        NODISCARD virtual DistanceResult GetSquared() const = 0;
+        NODISCARD virtual DistanceResultType GetSquared() const = 0;
 
         // 函数计算动态距离查询。
         // （默认实现为调用GetSquared，对DistanceResult中的距离值进行开方）
-        NODISCARD virtual DistanceResult Get(Real t, const Vector& lhsVelocity, const Vector& rhsVelocity) const;
-        NODISCARD virtual DistanceResult GetSquared(Real t, const Vector& lhsVelocity, const Vector& rhsVelocity) const = 0;
+        NODISCARD virtual DistanceResultType Get(Real t, const Vector& lhsVelocity, const Vector& rhsVelocity) const;
+        NODISCARD virtual DistanceResultType GetSquared(Real t, const Vector& lhsVelocity, const Vector& rhsVelocity) const = 0;
 
         // 微分计算动态距离查询。默认使用有限差分估计f'(t) = (f(t + h) - f(t - h)) / (2 * h)，其中h = m_DifferenceStep。
         // 派生类可以覆盖这些，并提供不要求h的精确公式的实现。
@@ -67,19 +67,19 @@ namespace Mathematics
 
         // 动态距离查询。函数计算在时间间隔[tmin,tmax]两个对象之间的最小距离。
         // 默认实现假设是，距离f(t)是一个凸函数。
-        NODISCARD virtual DistanceResult GetInterval(Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity) const;
-        NODISCARD virtual DistanceResult GetIntervalSquared(Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity) const;
+        NODISCARD virtual DistanceResultType GetInterval(Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity) const;
+        NODISCARD virtual DistanceResultType GetIntervalSquared(Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity) const;
 
     private:
         static constexpr auto defaultMaximumIterations = 8;
-        static constexpr Real defaultZeroThreshold = Math::GetZeroTolerance();
-        static constexpr Real defaultDifferenceStep = Math::GetRational(1, 1000);
+        static constexpr Real defaultZeroThreshold = MathType::GetZeroTolerance();
+        static constexpr Real defaultDifferenceStep = MathType::GetRational(1, 1000);
 
     private:
         // 对于牛顿法和逆抛物线插值。
         // 默认 = 8
         int maximumIterations;
-        // 默认 = Math<Real>::GetZeroTolerance()
+        // 默认 = MathType<Real>::GetZeroTolerance()
         Real zeroThreshold;
 
         // 默认 = 1e-03

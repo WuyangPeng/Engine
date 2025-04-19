@@ -26,12 +26,12 @@ namespace Mathematics
         using ClassType = Line2Circle2<Real>;
 
         using Parameter = std::array<Real, 2>;
-        using Math = Math<Real>;
-        using Vector2 = Vector2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
+        using MathType = Math<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
 
     public:
-        Line2Circle2(const Vector2& origin, const Vector2& direction, const Vector2& center, Real radius);
+        Line2Circle2(const Vector2Type& origin, const Vector2Type& direction, const Vector2Type& center, Real radius);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -42,7 +42,7 @@ namespace Mathematics
         void ClearParameter0() noexcept;
 
     private:
-        void Find(const Vector2& origin, const Vector2& direction, const Vector2& center, Real radius);
+        void Find(const Vector2Type& origin, const Vector2Type& direction, const Vector2Type& center, Real radius);
 
     private:
         int rootCount;

@@ -25,7 +25,7 @@ Mathematics::BinaryScientificRational<UInteger> Mathematics::BinaryScientificRat
 
 template <typename UInteger>
 Mathematics::BinaryScientificRational<UInteger>::BinaryScientificRational(CoreTools::DisableNotThrow disableNotThrow)
-    : numerator{ BinaryScientificNumber::CreateZero() }, denominator{ 1 }
+    : numerator{ BinaryScientificNumberType::CreateZero() }, denominator{ 1 }
 {
     System::UnusedFunction(disableNotThrow);
 
@@ -122,7 +122,7 @@ Mathematics::BinaryScientificRational<UInteger>::BinaryScientificRational(uint64
 }
 
 template <typename UInteger>
-Mathematics::BinaryScientificRational<UInteger>::BinaryScientificRational(const BinaryScientificNumber& numerator)
+Mathematics::BinaryScientificRational<UInteger>::BinaryScientificRational(const BinaryScientificNumberType& numerator)
     : numerator{ numerator },
       denominator{ 1 }
 {
@@ -286,7 +286,7 @@ Mathematics::BinaryScientificRational<UInteger>::BinaryScientificRational(uint64
 }
 
 template <typename UInteger>
-Mathematics::BinaryScientificRational<UInteger>::BinaryScientificRational(const BinaryScientificNumber& numerator, const BinaryScientificNumber& denominator)
+Mathematics::BinaryScientificRational<UInteger>::BinaryScientificRational(const BinaryScientificNumberType& numerator, const BinaryScientificNumberType& denominator)
     : numerator{ numerator },
       denominator{ denominator }
 {
@@ -387,7 +387,7 @@ void Mathematics::BinaryScientificRational<UInteger>::Negate() noexcept(!isBinar
 }
 
 template <typename UInteger>
-const typename Mathematics::BinaryScientificRational<UInteger>::BinaryScientificNumber& Mathematics::BinaryScientificRational<UInteger>::GetNumerator() const noexcept
+const typename Mathematics::BinaryScientificRational<UInteger>::BinaryScientificNumberType& Mathematics::BinaryScientificRational<UInteger>::GetNumerator() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -395,7 +395,7 @@ const typename Mathematics::BinaryScientificRational<UInteger>::BinaryScientific
 }
 
 template <typename UInteger>
-typename Mathematics::BinaryScientificRational<UInteger>::BinaryScientificNumber& Mathematics::BinaryScientificRational<UInteger>::GetNumerator() noexcept
+typename Mathematics::BinaryScientificRational<UInteger>::BinaryScientificNumberType& Mathematics::BinaryScientificRational<UInteger>::GetNumerator() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -403,7 +403,7 @@ typename Mathematics::BinaryScientificRational<UInteger>::BinaryScientificNumber
 }
 
 template <typename UInteger>
-const typename Mathematics::BinaryScientificRational<UInteger>::BinaryScientificNumber& Mathematics::BinaryScientificRational<UInteger>::GetDenominator() const noexcept
+const typename Mathematics::BinaryScientificRational<UInteger>::BinaryScientificNumberType& Mathematics::BinaryScientificRational<UInteger>::GetDenominator() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -411,7 +411,7 @@ const typename Mathematics::BinaryScientificRational<UInteger>::BinaryScientific
 }
 
 template <typename UInteger>
-typename Mathematics::BinaryScientificRational<UInteger>::BinaryScientificNumber& Mathematics::BinaryScientificRational<UInteger>::GetDenominator() noexcept
+typename Mathematics::BinaryScientificRational<UInteger>::BinaryScientificNumberType& Mathematics::BinaryScientificRational<UInteger>::GetDenominator() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 

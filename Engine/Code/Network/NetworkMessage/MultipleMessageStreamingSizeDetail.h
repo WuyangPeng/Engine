@@ -37,7 +37,7 @@ bool Network::MultipleMessageStreamingSize<Index, Network::MultipleMessageContai
 #endif  // OPEN_CLASS_INVARIANT
 
 template <int Index, typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-int Network::MultipleMessageStreamingSize<Index, Network::MultipleMessageContainer<E, ByteType, Types...>>::GetStreamingSize(const MultipleMessageContainer& container) const
+int Network::MultipleMessageStreamingSize<Index, Network::MultipleMessageContainer<E, ByteType, Types...>>::GetStreamingSize(const MultipleMessageContainerType& container) const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -62,7 +62,7 @@ bool Network::MultipleMessageStreamingSize<1, Network::MultipleMessageContainer<
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-int Network::MultipleMessageStreamingSize<1, Network::MultipleMessageContainer<E, ByteType, Types...>>::GetStreamingSize(const MultipleMessageContainer& container) const
+int Network::MultipleMessageStreamingSize<1, Network::MultipleMessageContainer<E, ByteType, Types...>>::GetStreamingSize(const MultipleMessageContainerType& container) const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 

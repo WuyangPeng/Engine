@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorSegment2Box2<Real>::StaticTestIntersectorSegment2Box2(const Segment2& segment, const Box2& box, bool solid, const Real dotThreshold)
+Mathematics::StaticTestIntersectorSegment2Box2<Real>::StaticTestIntersectorSegment2Box2(const Segment2Type& segment, const Box2Type& box, bool solid, const Real dotThreshold)
     : ParentType{ dotThreshold }, segment{ segment }, box{ box }, solid{ solid }
 {
     Test();
@@ -57,11 +57,11 @@ void Mathematics::StaticTestIntersectorSegment2Box2<Real>::Test()
 {
     auto diff = segment.GetCenterPoint() - box.GetCenter();
 
-    Vector2 directionDotBox{};
-    Vector2 diffDotBox{};
+    Vector2Type directionDotBox{};
+    Vector2Type diffDotBox{};
 
-    directionDotBox[0] = Math::FAbs(Vector2Tools::DotProduct(segment.GetDirection(), box.GetAxis0()));
-    diffDotBox[0] = Math::FAbs(Vector2Tools::DotProduct(diff, box.GetAxis0()));
+    directionDotBox[0] = MathType::FAbs(Vector2ToolsType::DotProduct(segment.GetDirection(), box.GetAxis0()));
+    diffDotBox[0] = MathType::FAbs(Vector2ToolsType::DotProduct(diff, box.GetAxis0()));
     auto rhs = box.GetExtent0() + segment.GetExtent() * directionDotBox[0];
     if (rhs < diffDotBox[0])
     {
@@ -69,8 +69,8 @@ void Mathematics::StaticTestIntersectorSegment2Box2<Real>::Test()
         return;
     }
 
-    directionDotBox[1] = Math::FAbs(Vector2Tools::DotProduct(segment.GetDirection(), box.GetAxis1()));
-    diffDotBox[1] = Math::FAbs(Vector2Tools::DotProduct(diff, box.GetAxis1()));
+    directionDotBox[1] = MathType::FAbs(Vector2ToolsType::DotProduct(segment.GetDirection(), box.GetAxis1()));
+    diffDotBox[1] = MathType::FAbs(Vector2ToolsType::DotProduct(diff, box.GetAxis1()));
     rhs = box.GetExtent1() + segment.GetExtent() * directionDotBox[1];
     if (rhs < diffDotBox[1])
     {
@@ -78,10 +78,10 @@ void Mathematics::StaticTestIntersectorSegment2Box2<Real>::Test()
         return;
     }
 
-    const auto perp = Vector2Tools::GetPerp(segment.GetDirection());
-    auto lhs = Math::FAbs(Vector2Tools::DotProduct(perp, diff));
-    auto part0 = Math::FAbs(Vector2Tools::DotProduct(perp, box.GetAxis0()));
-    auto part1 = Math::FAbs(Vector2Tools::DotProduct(perp, box.GetAxis1()));
+    const auto perp = Vector2ToolsType::GetPerp(segment.GetDirection());
+    auto lhs = MathType::FAbs(Vector2ToolsType::DotProduct(perp, diff));
+    auto part0 = MathType::FAbs(Vector2ToolsType::DotProduct(perp, box.GetAxis0()));
+    auto part1 = MathType::FAbs(Vector2ToolsType::DotProduct(perp, box.GetAxis1()));
     rhs = box.GetExtent0() * part0 + box.GetExtent1() * part1;
     if (lhs <= rhs)
     {

@@ -48,8 +48,8 @@ namespace Mathematics
         using ClassType = PolynomialFit4<Real>;
 
         using Samples = std::vector<Real>;
-        using Polynomial = Polynomial<Real>;
-        using Math = Math<Real>;
+        using PolynomialType = Polynomial<Real>;
+        using MathType = Math<Real>;
 
     public:
         PolynomialFit4(const Samples& xSamples,

@@ -39,7 +39,7 @@ void CoreTools::PlayingStates::Exit() noexcept
     CORE_TOOLS_CLASS_IS_VALID_1;
 }
 
-CoreTools::State<CoreTools::PlayerEntity>::MessageResult CoreTools::PlayingStates::OnMessage(const Telegram& telegram)
+CoreTools::State<CoreTools::PlayerEntity>::MessageResult CoreTools::PlayingStates::OnMessage(const TelegramType& telegram)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 

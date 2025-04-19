@@ -86,7 +86,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3<Real>::IsZero(Real
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (Math::FAbs(x) <= epsilon && Math::FAbs(y) <= epsilon && Math::FAbs(z) <= epsilon)
+    if (MathType::FAbs(x) <= epsilon && MathType::FAbs(y) <= epsilon && MathType::FAbs(z) <= epsilon)
         return true;
     else
         return false;
@@ -98,7 +98,7 @@ void Mathematics::Vector3<Real>::ZeroOut() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    SetCoordinate(Math::GetValue(0), Math::GetValue(0), Math::GetValue(0));
+    SetCoordinate(MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0));
 }
 
 template <typename Real>
@@ -205,7 +205,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3<Real>::IsNormalize
 
     const auto length = ToolsType::GetLength(*this);
 
-    if (Math::FAbs(length - Math::GetValue(1)) <= epsilon)
+    if (MathType::FAbs(length - MathType::GetValue(1)) <= epsilon)
         return true;
     else
         return false;
@@ -313,7 +313,7 @@ Mathematics::Vector3<Real>& Mathematics::Vector3<Real>::operator/=(Real rhs) noe
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    if (Math::GetZeroTolerance() < Math::FAbs(rhs))
+    if (MathType::GetZeroTolerance() < MathType::FAbs(rhs))
     {
         x /= rhs;
         y /= rhs;
@@ -331,7 +331,7 @@ Mathematics::Vector3<Real>& Mathematics::Vector3<Real>::operator/=(Real rhs) noe
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector3<Real>::BarycentricCoordinates Mathematics::Vector3<Real>::GetBarycentrics(const Vector3& vector0, const Vector3& vector1, const Vector3& vector2, const Vector3& vector3, const Real epsilon) const
+typename Mathematics::Vector3<Real>::BarycentricCoordinatesType Mathematics::Vector3<Real>::GetBarycentrics(const Vector3& vector0, const Vector3& vector1, const Vector3& vector2, const Vector3& vector3, const Real epsilon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -345,16 +345,16 @@ typename Mathematics::Vector3<Real>::BarycentricCoordinates Mathematics::Vector3
     const auto e2CrossE0 = ToolsType::CrossProduct(difference.at(zIndex), difference.at(xIndex));
     const auto e0CrossE1 = ToolsType::CrossProduct(difference.at(xIndex), difference.at(yIndex));
 
-    if (epsilon < Math::FAbs(det))
+    if (epsilon < MathType::FAbs(det))
     {
         CoreTools::Tuple<w + 1, Real> bary{ ToolsType::DotProduct(difference.at(w), e1CrossE2) / det,
                                             ToolsType::DotProduct(difference.at(w), e2CrossE0) / det,
                                             ToolsType::DotProduct(difference.at(w), e0CrossE1) / det,
-                                            Math::GetValue(0) };
+                                            MathType::GetValue(0) };
 
-        bary[w] = Math::GetValue(1) - bary[xIndex] - bary[yIndex] - bary[zIndex];
+        bary[w] = MathType::GetValue(1) - bary[xIndex] - bary[yIndex] - bary[zIndex];
 
-        return BarycentricCoordinates{ true, bary };
+        return BarycentricCoordinatesType{ true, bary };
     }
     else
     {
@@ -364,7 +364,7 @@ typename Mathematics::Vector3<Real>::BarycentricCoordinates Mathematics::Vector3
 
 #endif  // MATHEMATICS_ASSERT_ON_BARYCENTRIC3_DEGENERATE
 
-        return BarycentricCoordinates{};
+        return BarycentricCoordinatesType{};
     }
 }
 
@@ -383,7 +383,7 @@ Real Mathematics::Vector3<Real>::GetMaxAbsComp() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto maxAbsComp = std::max(std::max(Math::FAbs(GetX()), Math::FAbs(GetY())), Math::FAbs(GetZ()));
+    const auto maxAbsComp = std::max(std::max(MathType::FAbs(GetX()), MathType::FAbs(GetY())), MathType::FAbs(GetZ()));
 
     return maxAbsComp;
 }

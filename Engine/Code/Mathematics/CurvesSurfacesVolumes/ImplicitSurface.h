@@ -48,7 +48,7 @@ namespace Mathematics
 
         NODISCARD Matrix3<Real> GetHessian(const Vector3<Real>& pos) const;
 
-        NODISCARD void GetFrame(const Vector3<Real>& pos, Vector3<Real>& tangent0, Vector3<Real>& tangent1, Vector3<Real>& normal) const;
+        void GetFrame(const Vector3<Real>& pos, Vector3<Real>& tangent0, Vector3<Real>& tangent1, Vector3<Real>& normal) const;
 
         NODISCARD bool ComputePrincipalCurvatureInfo(const Vector3<Real>& pos, Real& curv0, Real& curv1, Vector3<Real>& dir0, Vector3<Real>& dir1);
 

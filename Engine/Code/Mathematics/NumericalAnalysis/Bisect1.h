@@ -15,6 +15,8 @@
 #include "Bisect1Root.h"
 #include "Mathematics/Base/MathDetail.h"
 
+#include <type_traits>
+
 // 二分法解方程
 namespace Mathematics
 {
@@ -26,17 +28,17 @@ namespace Mathematics
 
         using ClassType = Bisect1<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Function = Real (*)(Real);
-        using Bisect1Root = Bisect1Root<Real>;
+        using Bisect1RootType = Bisect1Root<Real>;
 
     public:
-        Bisect1(Function function, int maxLevel, Real tolerance = Math::GetZeroTolerance()) noexcept;
+        Bisect1(Function function, int maxLevel, Real tolerance = MathType::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         // 通过根的求解区间端点来解方程
-        NODISCARD Bisect1Root Bisect(Real beginPoint, Real endPoint);
+        NODISCARD Bisect1RootType Bisect(Real beginPoint, Real endPoint);
 
     private:
         // 输入数据和函数。

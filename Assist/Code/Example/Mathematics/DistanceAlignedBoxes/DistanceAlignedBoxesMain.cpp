@@ -10,7 +10,7 @@
 #include "DistanceAlignedBoxesHelper.h"
 #include "Framework/Helper/MainFunctionMacro.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 WINDOWS_MAIN_FUNCTION_USE_PARAMETER(DistanceAlignedBoxes,
                                     DistanceAlignedBoxesHelper,

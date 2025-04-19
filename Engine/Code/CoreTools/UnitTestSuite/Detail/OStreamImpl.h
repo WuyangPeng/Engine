@@ -13,6 +13,7 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include <iostream>
+#include <memory>
 #include <string>
 
 namespace CoreTools

@@ -30,7 +30,7 @@ Mathematics::BSplineCurveFit<Real>::BSplineCurveFit(int dimension, int numSample
     MATHEMATICS_ASSERTION_0(numControls <= numSamples, "ÎÞÐ§ÊäÈë¡£\n");
 
     BSplineFitBasis<Real> dBasis{ numControls, degree };
-    auto tMultiplier = Math::GetValue(1) / static_cast<Real>(gsl::narrow_cast<size_t>(numSamples) - 1);
+    auto tMultiplier = MathType::GetValue(1) / static_cast<Real>(gsl::narrow_cast<size_t>(numSamples) - 1);
 
     BandedMatrixSolve<Real> ataMat{ numControls, degree + 1, degree + 1 };
 
@@ -49,10 +49,10 @@ Mathematics::BSplineCurveFit<Real>::BSplineCurveFit(int dimension, int numSample
 
         for (auto i1 = i0; i1 <= i1Max; ++i1)
         {
-            auto value = Math::GetValue(0);
+            auto value = MathType::GetValue(0);
             for (auto i2 = 0; i2 < numSamples; ++i2)
             {
-                auto t = tMultiplier * Math::GetValue(i2);
+                auto t = tMultiplier * MathType::GetValue(i2);
                 auto imin = 0;
                 auto imax = 0;
                 dBasis.Compute(t, imin, imax);
@@ -74,7 +74,7 @@ Mathematics::BSplineCurveFit<Real>::BSplineCurveFit(int dimension, int numSample
     {
         for (auto i1 = 0; i1 < numSamples; ++i1)
         {
-            auto t = tMultiplier * Math::GetValue(i1);
+            auto t = tMultiplier * MathType::GetValue(i1);
             auto imin = 0;
             auto imax = 0;
             dBasis.Compute(t, imin, imax);

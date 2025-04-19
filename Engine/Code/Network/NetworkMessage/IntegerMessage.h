@@ -25,8 +25,8 @@ namespace Network
         using ClassType = IntegerMessage<E>;
         using ParentType = MessageInterface;
 
-        using MessageContainer = MessageContainer<E, int32_t>;
-        using IntegerType = typename MessageContainer::MessageType;
+        using MessageContainerType = MessageContainer<E, int32_t>;
+        using IntegerType = typename MessageContainerType::MessageType;
 
     public:
         IntegerMessage(MessageHeadStrategy messageHeadStrategy, int64_t messageId, const IntegerType& message);
@@ -40,7 +40,7 @@ namespace Network
         NODISCARD int GetSize() const noexcept;
 
     private:
-        MessageContainer message;
+        MessageContainerType message;
     };
 
     template <typename E>

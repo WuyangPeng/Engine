@@ -25,36 +25,36 @@ namespace Mathematics
         using ClassType = DynamicFindIntersectorTriangle3Box3<Real>;
         using ParentType = DynamicIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Triangle3 = Triangle3<Real>;
-        using Box3 = Box3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
-        using Container = std::vector<Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using Triangle3Type = Triangle3<Real>;
+        using Box3Type = Box3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
+        using Container = std::vector<Vector3Type>;
 
     public:
-        DynamicFindIntersectorTriangle3Box3(const Triangle3& triangle,
-                                            const Box3& box,
+        DynamicFindIntersectorTriangle3Box3(const Triangle3Type& triangle,
+                                            const Box3Type& box,
                                             Real tMax,
-                                            const Vector3& lhsVelocity,
-                                            const Vector3& rhsVelocity,
-                                            const Real epsilon = Math::GetZeroTolerance());
+                                            const Vector3Type& lhsVelocity,
+                                            const Vector3Type& rhsVelocity,
+                                            const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Triangle3 GetTriangle() const noexcept;
-        NODISCARD Box3 GetBox() const noexcept;
+        NODISCARD Triangle3Type GetTriangle() const noexcept;
+        NODISCARD Box3Type GetBox() const noexcept;
 
         NODISCARD int GetQuantity() const;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
 
     private:
         void Find();
 
     private:
         // 要相交的对象。
-        Triangle3 triangle;
-        Box3 box;
+        Triangle3Type triangle;
+        Box3Type box;
 
         /// 静态查询的交集。 一个三角形最多可以在7个顶点处相交一个框。
         Container point;

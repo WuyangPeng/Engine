@@ -32,7 +32,7 @@ namespace Rendering
         using ConstConstantBufferSharedPtr = std::shared_ptr<const ConstantBuffer>;
         using ConstSamplerStateSharedPtr = std::shared_ptr<const SamplerState>;
 
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
 
     public:
         TextEffectImpl(ShaderAPIType shaderAPIType, int numTranslateConstantBytes, int numColorConstantBytes);
@@ -49,7 +49,7 @@ namespace Rendering
 
         void SetTranslate(float x, float y);
         void SetNormalizedZ(float z);
-        void SetColor(const Colour& aColor);
+        void SetColor(const ColourType& aColor);
 
     private:
         ConstantBufferSharedPtr translate;

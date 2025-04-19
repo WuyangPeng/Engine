@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-typename Mathematics::IntersectorUtility3<Real>::Container Mathematics::IntersectorUtility3<Real>::ClipConvexPolygonAgainstPlane(const Vector3& normal, Real constant, const Container& point)
+typename Mathematics::IntersectorUtility3<Real>::Container Mathematics::IntersectorUtility3<Real>::ClipConvexPolygonAgainstPlane(const Vector3Type& normal, Real constant, const Container& point)
 {
     /// 假定输入顶点为逆时针顺序。 顺序是此函数的不变式。
 
@@ -178,7 +178,7 @@ typename Mathematics::IntersectorUtility3<Real>::Container Mathematics::Intersec
 }
 
 template <typename Real>
-Mathematics::Vector3<Real> Mathematics::IntersectorUtility3<Real>::GetPointFromIndex(int index, const Box3& box)
+Mathematics::Vector3<Real> Mathematics::IntersectorUtility3<Real>::GetPointFromIndex(int index, const Box3Type& box)
 {
     auto point = box.GetCenter();
 

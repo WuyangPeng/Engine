@@ -23,19 +23,19 @@ namespace Mathematics
     public:
         using ClassType = PolynomialDivide<Real>;
 
-        using Polynomial = Polynomial<Real>;
+        using PolynomialType = Polynomial<Real>;
 
     public:
-        PolynomialDivide(Polynomial quotient, Polynomial remainder) noexcept;
+        PolynomialDivide(PolynomialType quotient, PolynomialType remainder) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Polynomial GetQuotient() const;
-        NODISCARD Polynomial GetRemainder() const;
+        NODISCARD PolynomialType GetQuotient() const;
+        NODISCARD PolynomialType GetRemainder() const;
 
     private:
-        Polynomial quotient;
-        Polynomial remainder;
+        PolynomialType quotient;
+        PolynomialType remainder;
     };
 
     using PolynomialDivideF = PolynomialDivide<float>;

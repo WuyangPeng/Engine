@@ -11,6 +11,6 @@
 #include "Framework/Helper/MainFunctionMacro.h"
 #include "Framework/OpenGLGlutFrame/Flags/FrameParameter.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 GLUT_CONSOLE_MAIN_FUNCTION(Framework, GlutMainEntryPoint2, SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT(""), 3, 0, Framework::FrameParameter::SixtyFrame)

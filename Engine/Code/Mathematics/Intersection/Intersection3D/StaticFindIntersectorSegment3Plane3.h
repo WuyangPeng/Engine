@@ -25,19 +25,19 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorSegment3Plane3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Segment3 = Segment3<Real>;
-        using Plane3 = Plane3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Segment3Type = Segment3<Real>;
+        using Plane3Type = Plane3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorSegment3Plane3(const Segment3& segment, const Plane3& plane, const Real epsilon = Math::GetZeroTolerance()) noexcept;
+        StaticFindIntersectorSegment3Plane3(const Segment3Type& segment, const Plane3Type& plane, const Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Segment3 GetSegment() const noexcept;
-        NODISCARD Plane3 GetPlane() const noexcept;
+        NODISCARD Segment3Type GetSegment() const noexcept;
+        NODISCARD Plane3Type GetPlane() const noexcept;
 
         NODISCARD Real GetSegmentParameter() const noexcept;
 
@@ -46,8 +46,8 @@ namespace Mathematics
         void Find() noexcept;
 
     private:
-        Segment3 segment;
-        Plane3 plane;
+        Segment3Type segment;
+        Plane3Type plane;
 
         Real segmentParameter;
     };

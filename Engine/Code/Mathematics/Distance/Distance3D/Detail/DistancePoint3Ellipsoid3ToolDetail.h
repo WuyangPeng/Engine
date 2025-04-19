@@ -15,8 +15,8 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Real>
-Mathematics::DistancePoint3Ellipsoid3Tool<Real>::DistancePoint3Ellipsoid3Tool(Real extent0, Real extent1, Real extent2, const Vector3& vector, Real zeroThreshold)
-    : toolExtent{ extent0, extent1, extent2 }, inputVector{ vector }, outputVector{}, squaredDistance{ Math::GetValue(0) }, zeroThreshold{ zeroThreshold }
+Mathematics::DistancePoint3Ellipsoid3Tool<Real>::DistancePoint3Ellipsoid3Tool(Real extent0, Real extent1, Real extent2, const Vector3Type& vector, Real zeroThreshold)
+    : toolExtent{ extent0, extent1, extent2 }, inputVector{ vector }, outputVector{}, squaredDistance{ MathType::GetValue(0) }, zeroThreshold{ zeroThreshold }
 {
     ComputeSquaredDistance();
 
@@ -29,7 +29,7 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistance()
     constexpr auto size = 3;
 
     // 确定m_InputVector的反射到第一象限。
-    const std::array<bool, size> reflect{ inputVector.GetX() < Math::GetValue(0), inputVector.GetY() < Math::GetValue(0), inputVector.GetZ() < Math::GetValue(0) };
+    const std::array<bool, size> reflect{ inputVector.GetX() < MathType::GetValue(0), inputVector.GetY() < MathType::GetValue(0), inputVector.GetZ() < MathType::GetValue(0) };
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
@@ -87,8 +87,8 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistance()
         invPermute.at(permute.at(index)) = index;
     }
 
-    Vector3 localExtent{};
-    Vector3 localQueryPoint{};
+    Vector3Type localExtent{};
+    Vector3Type localQueryPoint{};
     for (auto index = 0; index < size; ++index)
     {
         const auto permuteIndex = permute.at(index);
@@ -117,7 +117,7 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistance()
 }
 
 template <typename Real>
-void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistanceSpecial(const Vector3& extent, const Vector3& queryPoint)
+void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistanceSpecial(const Vector3Type& extent, const Vector3Type& queryPoint)
 {
     Container extentPos{};
     Container queryPointPos{};
@@ -134,7 +134,7 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistanceSpec
         }
         else
         {
-            outputVector[i] = Math::GetValue(0);
+            outputVector[i] = MathType::GetValue(0);
         }
     }
 
@@ -167,7 +167,7 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistanceSpec
             }
         }
 
-        squaredDistance = Math::GetValue(0);
+        squaredDistance = MathType::GetValue(0);
 
         auto inSubEllipse = false;
         if (inAABBSubEllipse)
@@ -175,7 +175,7 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistanceSpec
             // queryPoint[]在轴对齐包围盒的子椭圆边界框。
             // 这中间测试旨在防范除零错误，当对一些i，extentPos[i] == extent[N - 1]。
             std::array<Real, size> xde{};
-            auto discriminant = Math::GetValue(1);
+            auto discriminant = MathType::GetValue(1);
             for (auto i = 0u; i < numPos; ++i)
             {
                 xde.at(i) = extentMultiplyQueryPoint.at(i) / denom.at(i);
@@ -184,14 +184,14 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistanceSpec
             if (zeroThreshold < discriminant)
             {
                 // queryPoint[]在子椭圆内，最接近椭圆点有outputPos[2] > 0.
-                squaredDistance = Math::GetValue(0);
+                squaredDistance = MathType::GetValue(0);
                 for (auto i = 0u; i < numPos; ++i)
                 {
                     outputPos.emplace_back(extentPos.at(i) * xde.at(i));
                     auto diff = outputPos.at(i) - queryPoint[i];
                     squaredDistance += diff * diff;
                 }
-                outputVector[2] = extent[2] * Math::Sqrt(discriminant);
+                outputVector[2] = extent[2] * MathType::Sqrt(discriminant);
                 squaredDistance += outputVector[2] * outputVector[2];
                 inSubEllipse = true;
             }
@@ -200,7 +200,7 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistanceSpec
         if (!inSubEllipse)
         {
             // queryPoint[]在子椭圆之外。最近的椭球点有x[2] == 0，是在域边界椭圆。
-            outputVector[2] = Math::GetValue(0);
+            outputVector[2] = MathType::GetValue(0);
             outputPos = Bisector(extentPos, queryPointPos);
         }
     }
@@ -231,7 +231,7 @@ typename Mathematics::DistancePoint3Ellipsoid3Tool<Real>::Container Mathematics:
 
     std::array<Real, 3> extentSquared{};
     std::array<Real, 3> extentMultiplyQueryPoint{};
-    auto argument = Math::GetValue(0);
+    auto argument = MathType::GetValue(0);
 
     for (auto i = 0u; i < numComponents; ++i)
     {
@@ -241,18 +241,18 @@ typename Mathematics::DistancePoint3Ellipsoid3Tool<Real>::Container Mathematics:
     }
 
     auto beginT = -extentSquared.at(temp) + extentMultiplyQueryPoint.at(temp);
-    auto endT = -extentSquared.at(temp) + Math::Sqrt(argument);
+    auto endT = -extentSquared.at(temp) + MathType::Sqrt(argument);
     auto middleT = beginT;
     constexpr auto max = 2 * std::numeric_limits<Real>::max_exponent;
     for (auto index = 0; index < max; ++index)
     {
-        middleT = Math::GetRational(1, 2) * (beginT + endT);
-        if (Math::FAbs(middleT - beginT) <= zeroThreshold || Math::FAbs(middleT - endT) <= zeroThreshold)
+        middleT = MathType::GetRational(1, 2) * (beginT + endT);
+        if (MathType::FAbs(middleT - beginT) <= zeroThreshold || MathType::FAbs(middleT - endT) <= zeroThreshold)
         {
             break;
         }
 
-        auto sum = Math::GetValue(-1);
+        auto sum = MathType::GetValue(-1);
 
         for (auto i = 0u; i < numComponents; ++i)
         {
@@ -275,7 +275,7 @@ typename Mathematics::DistancePoint3Ellipsoid3Tool<Real>::Container Mathematics:
 
     std::vector<Real> result{};
 
-    squaredDistance = Math::GetValue(0);
+    squaredDistance = MathType::GetValue(0);
     for (auto i = 0u; i < numComponents; ++i)
     {
         result.emplace_back(extentSquared.at(i) * queryPoint.at(i) / (middleT + extentSquared.at(i)));
@@ -291,7 +291,7 @@ typename Mathematics::DistancePoint3Ellipsoid3Tool<Real>::Container Mathematics:
 template <typename Real>
 bool Mathematics::DistancePoint3Ellipsoid3Tool<Real>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) <= squaredDistance)
+    if (MathType::GetValue(0) <= squaredDistance)
         return true;
     else
         return false;

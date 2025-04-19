@@ -26,7 +26,7 @@ Mathematics::VariableMatrix<Real>::VariableMatrix(int rowsNumber, int columnsNum
 
 #if defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
-    : container(rowsNumber, VariableLengthVector{ columnsNumber })
+    : container(rowsNumber, VariableLengthVectorType{ columnsNumber })
 
 #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
@@ -67,14 +67,14 @@ Mathematics::VariableMatrix<Real>::VariableMatrix(VectorContainerType matrix) no
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::VariableMatrix<Real>::VariableMatrix(const Matrix2& rhs)
+Mathematics::VariableMatrix<Real>::VariableMatrix(const Matrix2Type& rhs)
     : container{}
 {
-    for (auto row = 0; row < Matrix2::vectorSize; ++row)
+    for (auto row = 0; row < Matrix2Type::vectorSize; ++row)
     {
-        typename VariableLengthVector::ContainerType variableLengthVector{};
+        typename VariableLengthVectorType::ContainerType variableLengthVector{};
 
-        for (auto column = 0; column < Matrix2::vectorSize; ++column)
+        for (auto column = 0; column < Matrix2Type::vectorSize; ++column)
         {
             variableLengthVector.emplace_back(rhs(row, column));
         }
@@ -87,14 +87,14 @@ Mathematics::VariableMatrix<Real>::VariableMatrix(const Matrix2& rhs)
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::VariableMatrix<Real>::VariableMatrix(const Matrix3& rhs)
+Mathematics::VariableMatrix<Real>::VariableMatrix(const Matrix3Type& rhs)
     : container{}
 {
-    for (auto row = 0; row < Matrix3::vectorSize; ++row)
+    for (auto row = 0; row < Matrix3Type::vectorSize; ++row)
     {
-        typename VariableLengthVector::ContainerType variableLengthVector{};
+        typename VariableLengthVectorType::ContainerType variableLengthVector{};
 
-        for (auto column = 0; column < Matrix3::vectorSize; ++column)
+        for (auto column = 0; column < Matrix3Type::vectorSize; ++column)
         {
             variableLengthVector.emplace_back(rhs(row, column));
         }
@@ -156,7 +156,7 @@ void Mathematics::VariableMatrix<Real>::SetSize(int rowsNumber, int columnsNumbe
 
 #if defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
-    container.resize(rowsNumber, VariableLengthVector{ columnsNumber });
+    container.resize(rowsNumber, VariableLengthVectorType{ columnsNumber });
 
 #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
@@ -314,7 +314,7 @@ void Mathematics::VariableMatrix<Real>::SetContainer(int rowsNumber, int columns
 
     for (auto row = 0; row < rowsNumber; ++row)
     {
-        typename VariableLengthVector::ContainerType variableLengthVector{};
+        typename VariableLengthVectorType::ContainerType variableLengthVector{};
 
         for (auto column = 0; column < columnsNumber; ++column)
         {
@@ -345,7 +345,7 @@ void Mathematics::VariableMatrix<Real>::SetContainer(int rowsNumber, int columns
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::VariableMatrix<Real>::SetRow(int row, const VariableLengthVector& vector)
+void Mathematics::VariableMatrix<Real>::SetRow(int row, const VariableLengthVectorType& vector)
 {
     MATHEMATICS_CLASS_IS_VALID_3;
 
@@ -372,7 +372,7 @@ void Mathematics::VariableMatrix<Real>::SetRow(int row, const VariableLengthVect
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::VariableMatrix<Real>::VariableLengthVector Mathematics::VariableMatrix<Real>::GetRow(int row) const
+typename Mathematics::VariableMatrix<Real>::VariableLengthVectorType Mathematics::VariableMatrix<Real>::GetRow(int row) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
 
@@ -398,7 +398,7 @@ typename Mathematics::VariableMatrix<Real>::VariableLengthVector Mathematics::Va
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::VariableMatrix<Real>::SetColumn(int column, const VariableLengthVector& vector)
+void Mathematics::VariableMatrix<Real>::SetColumn(int column, const VariableLengthVectorType& vector)
 {
     MATHEMATICS_CLASS_IS_VALID_3;
 
@@ -425,7 +425,7 @@ void Mathematics::VariableMatrix<Real>::SetColumn(int column, const VariableLeng
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::VariableMatrix<Real>::VariableLengthVector Mathematics::VariableMatrix<Real>::GetColumn(int column) const
+typename Mathematics::VariableMatrix<Real>::VariableLengthVectorType Mathematics::VariableMatrix<Real>::GetColumn(int column) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
 
@@ -433,14 +433,14 @@ typename Mathematics::VariableMatrix<Real>::VariableLengthVector Mathematics::Va
 
     const auto rowsNumber = GetRowsNumber();
 
-    typename VariableLengthVector::ContainerType variableLengthVector{};
+    typename VariableLengthVectorType::ContainerType variableLengthVector{};
 
     for (auto rows = 0; rows < rowsNumber; ++rows)
     {
         variableLengthVector.emplace_back((*this)(rows, column));
     }
 
-    return VariableLengthVector{ variableLengthVector };
+    return VariableLengthVectorType{ variableLengthVector };
 
 #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
@@ -692,7 +692,7 @@ Mathematics::VariableMatrix<Real>& Mathematics::VariableMatrix<Real>::operator/=
 {
     MATHEMATICS_CLASS_IS_VALID_3;
 
-    if (Math::GetZeroTolerance() < scalar)
+    if (MathType::GetZeroTolerance() < scalar)
     {
         for (auto index = 0; index < GetElementsNumber(); ++index)
         {
@@ -717,7 +717,7 @@ Real Mathematics::VariableMatrix<Real>::L1Norm() const
 
     for (auto i = 0; i < GetElementsNumber(); ++i)
     {
-        sum += Math::FAbs((*this)[i]);
+        sum += MathType::FAbs((*this)[i]);
     }
 
     return sum;
@@ -736,7 +736,7 @@ Real Mathematics::VariableMatrix<Real>::L2Norm() const
         sum += (*this)[i] * (*this)[i];
     }
 
-    return Math::Sqrt(sum);
+    return MathType::Sqrt(sum);
 }
 
 template <typename Real>
@@ -749,7 +749,7 @@ Real Mathematics::VariableMatrix<Real>::LInfinityNorm() const
 
     for (auto i = 0; i < GetElementsNumber(); ++i)
     {
-        const auto component = Math::FAbs((*this)[i]);
+        const auto component = MathType::FAbs((*this)[i]);
         if (maxComponent < component)
         {
             maxComponent = component;
@@ -798,7 +798,7 @@ Real Mathematics::VariableMatrix<Real>::Determinant() const
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::VariableMatrix<Real>::QuadraticForm(const VariableLengthVector& vector0, const VariableLengthVector& vector1) const
+Real Mathematics::VariableMatrix<Real>::QuadraticForm(const VariableLengthVectorType& vector0, const VariableLengthVectorType& vector1) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
 
@@ -834,16 +834,16 @@ Mathematics::VariableMatrix<Real> Mathematics::VariableMatrix<Real>::Transpose()
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::VariableMatrix<Real>::Matrix3 Mathematics::VariableMatrix<Real>::GetMatrix3() const
+typename Mathematics::VariableMatrix<Real>::Matrix3Type Mathematics::VariableMatrix<Real>::GetMatrix3() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
 
-    if (GetRowsNumber() != GetColumnsNumber() && GetRowsNumber() != Matrix3::matrixSize)
+    if (GetRowsNumber() != GetColumnsNumber() && GetRowsNumber() != Matrix3Type::matrixSize)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("æÿ’Û≤ª «Matrix3\n"s))
     }
 
-    return Matrix3{ (*this)(0, 0),
+    return Matrix3Type{ (*this)(0, 0),
                     (*this)(0, 1),
                     (*this)(0, 2),
                     (*this)(1, 0),
@@ -876,7 +876,7 @@ void Mathematics::VariableMatrix<Real>::MakeUnit(int row, int column)
 
     if (0 <= row && row < GetRowsNumber() && 0 <= column && column < GetColumnsNumber())
     {
-        operator()(row, column) = Math::GetValue(1);
+        operator()(row, column) = MathType::GetValue(1);
     }
 }
 
@@ -891,7 +891,7 @@ void Mathematics::VariableMatrix<Real>::MakeIdentity()
     const auto numDiagonal = (GetRowsNumber() <= GetColumnsNumber() ? GetRowsNumber() : GetColumnsNumber());
     for (auto i = 0; i < numDiagonal; ++i)
     {
-        operator()(i, i) = Math::GetValue(1);
+        operator()(i, i) = MathType::GetValue(1);
     }
 }
 

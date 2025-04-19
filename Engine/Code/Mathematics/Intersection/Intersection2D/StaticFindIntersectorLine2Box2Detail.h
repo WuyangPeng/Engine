@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorLine2Box2<Real>::StaticFindIntersectorLine2Box2(const Line2& line, const Box2& box, const Real epsilon)
+Mathematics::StaticFindIntersectorLine2Box2<Real>::StaticFindIntersectorLine2Box2(const Line2Type& line, const Box2Type& box, const Real epsilon)
     : ParentType{ epsilon }, line{ line }, box{ box }, quantity{}, point0{}, point1{}
 {
     Find();
@@ -82,8 +82,8 @@ int Mathematics::StaticFindIntersectorLine2Box2<Real>::GetQuantity() const noexc
 template <typename Real>
 void Mathematics::StaticFindIntersectorLine2Box2<Real>::Find()
 {
-    constexpr auto t0 = -Math::maxReal;
-    constexpr auto t1 = Math::maxReal;
+    constexpr auto t0 = -MathType::maxReal;
+    constexpr auto t1 = MathType::maxReal;
 
     const Line2Box2<Real> line2Box2{ t0, t1, line.GetOrigin(), line.GetDirection(), box, true };
     quantity = line2Box2.GetRootCount();

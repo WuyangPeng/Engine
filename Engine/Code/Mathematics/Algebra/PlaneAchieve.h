@@ -20,7 +20,7 @@
 template <typename T>
 requires std::is_arithmetic_v<T>
 Mathematics::Plane<T>::Plane(const T epsilon) noexcept
-    : homogeneousPoint{ Math::GetValue(1), Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) }, epsilon{ epsilon }
+    : homogeneousPoint{ MathType::GetValue(1), MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) }, epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -28,7 +28,7 @@ Mathematics::Plane<T>::Plane(const T epsilon) noexcept
 template <typename T>
 requires std::is_arithmetic_v<T>
 Mathematics::Plane<T>::Plane() noexcept
-    : Plane{ Math::GetZeroTolerance() }
+    : Plane{ MathType::GetZeroTolerance() }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -45,7 +45,7 @@ Mathematics::Plane<T>::Plane(T normalX, T normalY, T normalZ, T constant, T epsi
 
 template <typename T>
 requires std::is_arithmetic_v<T>
-Mathematics::Plane<T>::Plane(const AVector& normal, T constant, T epsilon) noexcept
+Mathematics::Plane<T>::Plane(const AVectorType& normal, T constant, T epsilon) noexcept
     : homogeneousPoint{ normal.GetX(), normal.GetY(), normal.GetZ(), -constant }, epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -53,7 +53,7 @@ Mathematics::Plane<T>::Plane(const AVector& normal, T constant, T epsilon) noexc
 
 template <typename T>
 requires std::is_arithmetic_v<T>
-Mathematics::Plane<T>::Plane(const AVector& normal, const APoint& point, T epsilon) noexcept
+Mathematics::Plane<T>::Plane(const AVectorType& normal, const APointType& point, T epsilon) noexcept
     : homogeneousPoint{ normal.GetX(), normal.GetY(), normal.GetZ(), -Dot(point, normal) }, epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -61,20 +61,20 @@ Mathematics::Plane<T>::Plane(const AVector& normal, const APoint& point, T epsil
 
 template <typename T>
 requires std::is_arithmetic_v<T>
-Mathematics::Plane<T>::Plane(const APoint& lhs, const APoint& mhs, const APoint& rhs, T epsilon)
+Mathematics::Plane<T>::Plane(const APointType& lhs, const APointType& mhs, const APointType& rhs, T epsilon)
     : homogeneousPoint{}, epsilon{ epsilon }
 {
     const auto edge1 = mhs - lhs;
     const auto edge2 = rhs - lhs;
     const auto normal = UnitCross(edge1, edge2, epsilon);
-    homogeneousPoint = HomogeneousPoint{ normal.GetX(), normal.GetY(), normal.GetZ(), -Dot(lhs, normal) };
+    homogeneousPoint = HomogeneousPointType{ normal.GetX(), normal.GetY(), normal.GetZ(), -Dot(lhs, normal) };
 
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename T>
 requires std::is_arithmetic_v<T>
-Mathematics::Plane<T>::Plane(const HomogeneousPoint& homogeneousPoint, T epsilon)
+Mathematics::Plane<T>::Plane(const HomogeneousPointType& homogeneousPoint, T epsilon)
     : homogeneousPoint{ homogeneousPoint }, epsilon{ epsilon }
 {
     Normalize();
@@ -86,7 +86,7 @@ template <typename T>
 requires std::is_arithmetic_v<T>
 void Mathematics::Plane<T>::Normalize()
 {
-    const auto length = AVector{ homogeneousPoint.GetX(), homogeneousPoint.GetY(), homogeneousPoint.GetZ() }.Length();
+    const auto length = AVectorType{ homogeneousPoint.GetX(), homogeneousPoint.GetY(), homogeneousPoint.GetZ() }.Length();
 
     if (epsilon < length)
     {
@@ -108,7 +108,7 @@ requires std::is_arithmetic_v<T> bool Mathematics::Plane<T>::IsValid() const noe
 {
     try
     {
-        const AVector normal{ homogeneousPoint.GetX(), homogeneousPoint.GetY(), homogeneousPoint.GetZ() };
+        const AVectorType normal{ homogeneousPoint.GetX(), homogeneousPoint.GetY(), homogeneousPoint.GetZ() };
 
         return normal.IsNormalize(epsilon);
     }
@@ -149,7 +149,7 @@ T& Mathematics::Plane<T>::operator[](int index)
 
 template <typename T>
 requires std::is_arithmetic_v<T>
-void Mathematics::Plane<T>::SetNormal(const AVector& normal) noexcept(gAssert < 2 || gMathematicsAssert < 2)
+void Mathematics::Plane<T>::SetNormal(const AVectorType& normal) noexcept(gAssert < 2 || gMathematicsAssert < 2)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -193,7 +193,7 @@ Mathematics::AVector<T> Mathematics::Plane<T>::GetNormal() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return AVector{ homogeneousPoint.GetX(), homogeneousPoint.GetY(), homogeneousPoint.GetZ() };
+    return AVectorType{ homogeneousPoint.GetX(), homogeneousPoint.GetY(), homogeneousPoint.GetZ() };
 }
 
 template <typename T>
@@ -207,7 +207,7 @@ T Mathematics::Plane<T>::GetConstant() const noexcept
 
 template <typename T>
 requires std::is_arithmetic_v<T>
-T Mathematics::Plane<T>::DistanceTo(const APoint& point) const noexcept
+T Mathematics::Plane<T>::DistanceTo(const APointType& point) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -216,7 +216,7 @@ T Mathematics::Plane<T>::DistanceTo(const APoint& point) const noexcept
 
 template <typename T>
 requires std::is_arithmetic_v<T>
-Mathematics::NumericalValueSymbol Mathematics::Plane<T>::WhichSide(const APoint& point) const noexcept
+Mathematics::NumericalValueSymbol Mathematics::Plane<T>::WhichSide(const APointType& point) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

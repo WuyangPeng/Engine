@@ -26,28 +26,28 @@ namespace Mathematics
         using ClassType = StaticTestIntersectorTriangle3Triangle3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Line3 = Line3<Real>;
-        using Plane3 = Plane3<Real>;
-        using Triangle3 = Triangle3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Line3Type = Line3<Real>;
+        using Plane3Type = Plane3<Real>;
+        using Triangle3Type = Triangle3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorTriangle3Triangle3(const Triangle3& lhsTriangle, const Triangle3& rhsTriangle, const Real epsilon = Math::GetZeroTolerance());
+        StaticTestIntersectorTriangle3Triangle3(const Triangle3Type& lhsTriangle, const Triangle3Type& rhsTriangle, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Triangle3 GetLhsTriangle() const noexcept;
-        NODISCARD Triangle3 GetRhsTriangle() const noexcept;
+        NODISCARD Triangle3Type GetLhsTriangle() const noexcept;
+        NODISCARD Triangle3Type GetRhsTriangle() const noexcept;
 
     private:
         void Test();
 
     private:
         // 要相交的对象。
-        Triangle3 lhsTriangle;
-        Triangle3 rhsTriangle;
+        Triangle3Type lhsTriangle;
+        Triangle3Type rhsTriangle;
     };
 }
 

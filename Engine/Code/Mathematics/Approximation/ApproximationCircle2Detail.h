@@ -33,24 +33,24 @@ bool Mathematics::ApproximationCircle2<Real>::IsValid() const noexcept
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-bool Mathematics::ApproximationCircle2<Real>::FitUsingSquaredLengths(const Vector2Container& points, Circle2& circle)
+bool Mathematics::ApproximationCircle2<Real>::FitUsingSquaredLengths(const Vector2Container& points, Circle2Type& circle)
 {
     const auto numPoints = boost::numeric_cast<int>(points.size());
 
     /// 计算数据点的平均值。
-    Vector2 a{};
+    Vector2Type a{};
     for (auto i = 0; i < numPoints; ++i)
     {
         a += points.at(i);
     }
-    auto invNumPoints = Math::GetValue(1) / Math::GetValue(numPoints);
+    auto invNumPoints = MathType::GetValue(1) / MathType::GetValue(numPoints);
     a *= invNumPoints;
 
     /// 计算Y[i] = X[i]-A和线性系统M*(C-A) = R的右侧R的协方差矩阵M。
     Real m00{};
     Real m01{};
     Real m11{};
-    Vector2 r{};
+    Vector2Type r{};
     for (auto i = 0; i < numPoints; ++i)
     {
         auto y = points.at(i) - a;
@@ -62,11 +62,11 @@ bool Mathematics::ApproximationCircle2<Real>::FitUsingSquaredLengths(const Vecto
         m11 += y1Y1;
         r += (y0Y0 + y1Y1) * y;
     }
-    r *= Math::GetRational(1, 2);
+    r *= MathType::GetRational(1, 2);
 
     /// 求解中心C的线性系统M*(C-A) = R。
     auto det = m00 * m11 - m01 * m01;
-    if (!Math::Approximate(det, Real{}))
+    if (!MathType::Approximate(det, Real{}))
     {
         circle.SetCenterX(a[0] + (m11 * r[0] - m01 * r[1]) / det);
         circle.SetCenterY(a[1] + (m00 * r[1] - m01 * r[0]) / det);
@@ -90,7 +90,7 @@ bool Mathematics::ApproximationCircle2<Real>::FitUsingSquaredLengths(const Vecto
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-int Mathematics::ApproximationCircle2<Real>::FitUsingLengths(const Vector2Container& points, int maxIterations, bool initialCenterIsAverage, Circle2& circle, Real epsilon)
+int Mathematics::ApproximationCircle2<Real>::FitUsingLengths(const Vector2Container& points, int maxIterations, bool initialCenterIsAverage, Circle2Type& circle, Real epsilon)
 {
     const auto numPoints = boost::numeric_cast<int>(points.size());
 
@@ -100,7 +100,7 @@ int Mathematics::ApproximationCircle2<Real>::FitUsingLengths(const Vector2Contai
     {
         average += points.at(i);
     }
-    auto invNumPoints = Math::GetValue(1) / static_cast<Real>(numPoints);
+    auto invNumPoints = MathType::GetValue(1) / static_cast<Real>(numPoints);
     average *= invNumPoints;
 
     /// 对中心的初步猜测。
@@ -118,7 +118,7 @@ int Mathematics::ApproximationCircle2<Real>::FitUsingLengths(const Vector2Contai
 
         /// 计算平均值 L, dL/da, dL/db.
         Real lenAverage{};
-        auto derLenAverage = Vector2::GetZero();
+        auto derLenAverage = Vector2Type::GetZero();
         for (auto i = 0; i < numPoints; ++i)
         {
             const auto diff = points.at(i) - circle.GetCenter().GetVector();
@@ -126,7 +126,7 @@ int Mathematics::ApproximationCircle2<Real>::FitUsingLengths(const Vector2Contai
             if (length > Real{})
             {
                 lenAverage += length;
-                auto invLength = Math::GetValue(1) / length;
+                auto invLength = MathType::GetValue(1) / length;
                 derLenAverage -= invLength * diff;
             }
         }

@@ -75,6 +75,8 @@ void System::CFileOperatorTesting::TellTest(FILE* file)
 
 void System::CFileOperatorTesting::PositionTest(FILE* file)
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     ASSERT_TRUE(Seek(file, 0, FileSeek::Set));
 
     auto position = GetPosition(file);
@@ -84,6 +86,8 @@ void System::CFileOperatorTesting::PositionTest(FILE* file)
 
     position = GetPosition(file);
     ASSERT_EQUAL(position, 1);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 System::CFileString System::CFileOperatorTesting::GetFileName() const

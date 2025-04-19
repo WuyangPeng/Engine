@@ -29,27 +29,27 @@ namespace Mathematics
 
         using ClassType = Triangle2<Real>;
 
-        using Math = Math<Real>;
-        using Vector2 = Vector2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
-        using ContainerType = std::vector<Vector2>;
+        using MathType = Math<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
+        using ContainerType = std::vector<Vector2Type>;
 
     public:
         // 三角形表示为三个顶点数组：
-        Triangle2(const Vector2& vector0, const Vector2& vector1, const Vector2& vector2) noexcept;
+        Triangle2(const Vector2Type& vector0, const Vector2Type& vector1, const Vector2Type& vector2) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         // 从点point到三角形的距离。
-        NODISCARD Real DistanceTo(const Vector2& point) const;
+        NODISCARD Real DistanceTo(const Vector2Type& point) const;
 
         NODISCARD ContainerType GetVertex() const;
-        NODISCARD Vector2 GetVertex(int index) const;
+        NODISCARD Vector2Type GetVertex(int index) const;
 
     private:
         constexpr static auto vertexSize = 3;
 
-        using ArrayType = std::array<Vector2, vertexSize>;
+        using ArrayType = std::array<Vector2Type, vertexSize>;
 
     private:
         ArrayType vertex;

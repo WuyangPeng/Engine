@@ -34,21 +34,21 @@ namespace Mathematics
     public:
         using ClassType = BandedMatrixSolve<Real>;
 
-        using Math = Math<Real>;
-        using BandedMatrix = BandedMatrix<Real>;
-        using VariableMatrix = VariableMatrix<Real>;
-        using VariableLengthVector = VariableLengthVector<Real>;
+        using MathType = Math<Real>;
+        using BandedMatrixType = BandedMatrix<Real>;
+        using VariableMatrixType = VariableMatrix<Real>;
+        using VariableLengthVectorType = VariableLengthVector<Real>;
         using ContainerType = std::vector<Real>;
 
     public:
-        BandedMatrixSolve(int size, int lowerBandsNumber, int upperBandsNumber, Real epsilon = Math::GetZeroTolerance());
+        BandedMatrixSolve(int size, int lowerBandsNumber, int upperBandsNumber, Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
 #ifdef OPEN_CLASS_INVARIANT
 
         NODISCARD bool IsSolveValid() const;
-        NODISCARD Real GetProduct(const BandedMatrix& upperBandedMatrix, const BandedMatrix& lowerBandedMatrix, int row, int column) const;
+        NODISCARD Real GetProduct(const BandedMatrixType& upperBandedMatrix, const BandedMatrixType& lowerBandedMatrix, int row, int column) const;
 
 #endif  // OPEN_CLASS_INVARIANT
 
@@ -61,7 +61,7 @@ namespace Mathematics
         NODISCARD Real GetEpsilon() const noexcept;
 
         /// 重设大小会清空原有数据。
-        void ResetSize(int size, int lowerBandsNumber, int upperBandsNumber, Real aEpsilon = Math::GetZeroTolerance());
+        void ResetSize(int size, int lowerBandsNumber, int upperBandsNumber, Real aEpsilon = MathType::GetZeroTolerance());
 
         /// 对角线
         NODISCARD ContainerType GetDiagonalBand() const;
@@ -96,7 +96,7 @@ namespace Mathematics
         /// 函数的输入vector是B，X被计算并被返回。
         /// 当且仅当有一个解决方案时，返回值是有效的，否则会抛出异常。
         /// 如果成功，包括Cholesky分解。（L在A的下三角部分和L^ T在A的上三角部分）
-        NODISCARD VariableLengthVector SolveSystem(const VariableLengthVector& vector);
+        NODISCARD VariableLengthVectorType SolveSystem(const VariableLengthVectorType& vector);
 
         /// 求解线性系统A * X= B，其中A是一个NxN的带状矩阵，B是一个NxM的矩阵。未知的X是也是NxM。
         /// 函数的输入matrix是B，X被计算并被返回。
@@ -105,33 +105,33 @@ namespace Mathematics
         ///
         /// RowMajor必须具有由模板参数指定的存储顺序。
         template <bool RowMajor = true>
-        NODISCARD VariableMatrix SolveSystem(const VariableMatrix& matrix);
+        NODISCARD VariableMatrixType SolveSystem(const VariableMatrixType& matrix);
 
-        NODISCARD VariableMatrix ToInputVariableMatrix() const;
-        NODISCARD VariableMatrix ToCholeskyVariableMatrix() const;
+        NODISCARD VariableMatrixType ToInputVariableMatrix() const;
+        NODISCARD VariableMatrixType ToCholeskyVariableMatrix() const;
 
     private:
         /// 线性系统为L * U * X = B，其中A = L * U和U = L^T，
         /// 减少到U * X = L^{-1} * B。返回值有效当且仅当操作成功。
-        NODISCARD VariableLengthVector SolveLower(const VariableLengthVector& vector) const;
+        NODISCARD VariableLengthVectorType SolveLower(const VariableLengthVectorType& vector) const;
 
         /// 线性系统为U * X = L^{-1} * B，减少到 X = U^{-1} * L^{-1} * B。
         /// 返回值有效当且仅当操作成功。
-        NODISCARD VariableLengthVector SolveUpper(const VariableLengthVector& vector) const;
+        NODISCARD VariableLengthVectorType SolveUpper(const VariableLengthVectorType& vector) const;
 
         /// 线性系统为L * U * X = B，其中A = L * U和U = L^T，
         /// 减少到U * X = L^{-1} * B。返回值有效当且仅当操作成功。
         template <bool RowMajor>
-        NODISCARD VariableMatrix SolveLower(const VariableMatrix& matrix) const;
+        NODISCARD VariableMatrixType SolveLower(const VariableMatrixType& matrix) const;
 
         /// 线性系统为U * X = L^{-1} * B，减少到 X = U^{-1} * L^{-1} * B。
         /// 返回值有效当且仅当操作成功。
         template <bool RowMajor>
-        NODISCARD VariableMatrix SolveUpper(const VariableMatrix& matrix) const;
+        NODISCARD VariableMatrixType SolveUpper(const VariableMatrixType& matrix) const;
 
     private:
-        BandedMatrix input;
-        BandedMatrix cholesky;
+        BandedMatrixType input;
+        BandedMatrixType cholesky;
         BandedMatrixSolveFlags solve;
         Real epsilon;
     };

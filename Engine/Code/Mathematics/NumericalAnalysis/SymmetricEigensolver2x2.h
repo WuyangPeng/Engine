@@ -25,7 +25,7 @@ namespace Mathematics
     public:
         using ClassType = SymmetricEigensolver2x2<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         SymmetricEigensolver2x2() noexcept;

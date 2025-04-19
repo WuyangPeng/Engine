@@ -33,8 +33,8 @@
 
 // CylinderFit3<Real> fit0{ points };
 // Real exactly0 = fit0.GetExactly();
-// Vector3<Real> center = fit0.GetCenter();
-// Vector3<Real> axis = fit0.GetAxis();
+// Vector3Type<Real> center = fit0.GetCenter();
+// Vector3Type<Real> axis = fit0.GetAxis();
 // for (int i = 0; i <= max; ++i)
 // {
 //     CylinderFit3<Real> fit1{ points,center,axis };
@@ -58,21 +58,21 @@ namespace Mathematics
     public:
         using ClassType = CylinderFit3<Real>;
 
-        using Vector3 = Vector3<Real>;
-        using Points = std::vector<Vector3>;
-        using Math = Math<Real>;
+        using Vector3Type = Vector3<Real>;
+        using Points = std::vector<Vector3Type>;
+        using MathType = Math<Real>;
 
     public:
-        explicit CylinderFit3(const Points& points, const Real epsilon = Math::GetZeroTolerance());
-        CylinderFit3(const Points& points, const Vector3& guessCenter, const Vector3& guessAxis, const Real epsilon = Math::GetZeroTolerance());
+        explicit CylinderFit3(const Points& points, const Real epsilon = MathType::GetZeroTolerance());
+        CylinderFit3(const Points& points, const Vector3Type& guessCenter, const Vector3Type& guessAxis, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
         // 返回准确度
         NODISCARD Real GetExactly() const noexcept;
 
-        NODISCARD Vector3 GetCenter() const noexcept;
-        NODISCARD Vector3 GetAxis() const noexcept;
+        NODISCARD Vector3Type GetCenter() const noexcept;
+        NODISCARD Vector3Type GetAxis() const noexcept;
         NODISCARD Real GetRadius() const noexcept;
         NODISCARD Real GetHeight() const noexcept;
 
@@ -84,8 +84,8 @@ namespace Mathematics
         void ComputeCenter(Real average);
 
     private:
-        Vector3 center;
-        Vector3 axis;
+        Vector3Type center;
+        Vector3Type axis;
         Real radius;
         Real height;
         Real exactly;

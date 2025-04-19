@@ -17,32 +17,40 @@
 
 System::CompareStringOrdinalUseBinaryTesting::CompareStringOrdinalUseBinaryTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      comparesWStrings{ L"啊",
-                        L"吧",
-                        L"抽",
-                        L"的",
-                        L"额",
-                        L"发",
-                        L"给",
-                        L"胡",
-                        L"奖",
-                        L"看",
-                        L"了",
-                        L"吗",
-                        L"你",
-                        L"哦",
-                        L"平",
-                        L"气",
-                        L"人",
-                        L"是",
-                        L"他",
-                        L"我",
-                        L"想",
-                        L"要",
-                        L"做",
-                        L"a",
-                        L"A",
-                        L"0" },
+      comparesWStrings{
+
+#ifdef SYSTEM_PLATFORM_WIN32
+
+          L"啊",
+          L"吧",
+          L"抽",
+          L"的",
+          L"额",
+          L"发",
+          L"给",
+          L"胡",
+          L"奖",
+          L"看",
+          L"了",
+          L"吗",
+          L"你",
+          L"哦",
+          L"平",
+          L"气",
+          L"人",
+          L"是",
+          L"他",
+          L"我",
+          L"想",
+          L"要",
+          L"做",
+          L"a",
+          L"A",
+          L"0"
+
+#endif  // SYSTEM_PLATFORM_WIN32
+
+      },
       randomEngine{ GetEngineRandomSeed() }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;

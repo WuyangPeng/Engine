@@ -17,12 +17,12 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <int N>
-Mathematics::IntegerMultiplication<N>::IntegerMultiplication(const IntegerData& lhs, const IntegerData& rhs)
+Mathematics::IntegerMultiplication<N>::IntegerMultiplication(const IntegerDataType& lhs, const IntegerDataType& rhs)
     : lhsData{ lhs },
       rhsData{ rhs },
       productSign{ (lhsData.GetSign() == rhsData.GetSign() ? NumericalValueSymbol::Positive : NumericalValueSymbol::Negative) },
-      absLhsData{ IntegerDataAnalysis{ lhsData }.GetAbsoluteValue() },
-      absRhsData{ IntegerDataAnalysis{ rhsData }.GetAbsoluteValue() },
+      absLhsData{ IntegerDataAnalysisType{ lhsData }.GetAbsoluteValue() },
+      absRhsData{ IntegerDataAnalysisType{ rhsData }.GetAbsoluteValue() },
       product(2 * intSize),
       result(2 * intSize),
       multiplication{}
@@ -153,7 +153,7 @@ void Mathematics::IntegerMultiplication<N>::OverflowTest()
         THROW_EXCEPTION(SYSTEM_TEXT("IntegerÒç³ö\n"s));
     }
 
-    multiplication = IntegerData{ result };
+    multiplication = IntegerDataType{ result };
 }
 
 template <int N>

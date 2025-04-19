@@ -14,6 +14,8 @@
 
 #include "Network/ServiceWrappers/Detail/ClientServiceConsumer.h"
 
+#include <thread>
+
 namespace Network
 {
     class NETWORK_HIDDEN_DECLARE BoostTcpClientServiceConsumer final : public ClientServiceConsumer

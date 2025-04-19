@@ -58,6 +58,11 @@ namespace System
     };
     using ProcessInformationPtr = ProcessInformation*;
 
+    struct ProcThreadAttributeList
+    {
+    };
+    using ProcThreadAttributeListPtr = ProcThreadAttributeList*;
+
     struct ProcessStartupInfoEx
     {
         ProcessStartupInfo StartupInfo;

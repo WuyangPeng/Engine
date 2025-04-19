@@ -12,6 +12,8 @@
 
 #include "MemoryHelper.h"
 
+#include <cstring>
+
 template <typename T>
 requires(std::is_trivial_v<T> && std::is_standard_layout_v<T>)
 void System::FillMemoryToZero(T& value) noexcept

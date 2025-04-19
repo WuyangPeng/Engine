@@ -58,7 +58,7 @@ namespace System
 
     enum class WindowsPointUse
     {
-        Default = 0x80000000,
+        Default = (int)0x80000000,
     };
 
     enum class WindowsStyles : uint32_t
@@ -79,18 +79,18 @@ namespace System
         Minimize = 0x20000000L,
         MinimizeBox = 0x00020000L,
         Overlapped = 0x00000000L,
+        SysMenu = 0x00080000L,
+        ThickFrame = 0x00040000L,
         OverlappedWindow = (Overlapped | Caption | SysMenu | ThickFrame | MinimizeBox | MaximizeBox),
         Popup = 0x80000000L,
         PopupWindow = (Popup | Border | SysMenu),
-        WindowStyleSizeBox = 0x00040000L,
-        WindowStyleSysMenu = 0x00080000L,
-        WindowStyleTabStop = 0x00010000L,
-        WindowStyleThickFrame = 0x00040000L,
-        WindowStyleTiled = 0x00000000L,
-        WindowStyleTiledWindow = (Overlapped | Caption | SysMenu | ThickFrame | MinimizeBox | MaximizeBox),
-        WindowStyleVisible = 0x10000000L,
-        WindowStyleVScroll = 0x00200000L,
-        WindowStyleDefault = OverlappedWindow | Visible,
+        SizeBox = 0x00040000L,
+        TabStop = 0x00010000L,
+        Tiled = 0x00000000L,
+        TiledWindow = (Overlapped | Caption | SysMenu | ThickFrame | MinimizeBox | MaximizeBox),
+        Visible = 0x10000000L,
+        VScroll = 0x00200000L,
+        Default = OverlappedWindow | Visible,
     };
 
 #endif  // SYSTEM_PLATFORM_WIN32

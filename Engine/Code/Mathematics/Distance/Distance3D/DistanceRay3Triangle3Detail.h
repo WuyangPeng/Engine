@@ -18,7 +18,7 @@
 #include "Mathematics/Distance/DistanceBaseDetail.h"
 
 template <typename Real>
-Mathematics::DistanceRay3Triangle3<Real>::DistanceRay3Triangle3(const Ray3& ray, const Triangle3& triangle) noexcept
+Mathematics::DistanceRay3Triangle3<Real>::DistanceRay3Triangle3(const Ray3Type& ray, const Triangle3Type& triangle) noexcept
     : ParentType{}, ray{ ray }, triangle{ triangle }, triangleBary{}
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -58,15 +58,15 @@ typename Mathematics::DistanceRay3Triangle3<Real>::DistanceResult Mathematics::D
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    Vector3 closestPoint0{};
-    Vector3 closestPoint1{};
+    Vector3Type closestPoint0{};
+    Vector3Type closestPoint1{};
 
     const Line3<Real> line{ ray.GetOrigin(), ray.GetDirection() };
     DistanceLine3Triangle3<Real> distanceLine3Triangle3{ line, triangle };
     auto sqrDist = distanceLine3Triangle3.GetSquared();
     auto rayParameter = sqrDist.GetLhsParameter();
 
-    if (Math::GetValue(0) <= rayParameter)
+    if (MathType::GetValue(0) <= rayParameter)
     {
         closestPoint0 = sqrDist.GetLhsClosestPoint();
         closestPoint1 = sqrDist.GetRhsClosestPoint();
@@ -80,17 +80,17 @@ typename Mathematics::DistanceRay3Triangle3<Real>::DistanceResult Mathematics::D
         DistancePoint3Triangle3<Real> distancePoint3Triangle3{ closestPoint0, triangle };
         sqrDist = distancePoint3Triangle3.GetSquared();
         closestPoint1 = sqrDist.GetRhsClosestPoint();
-        rayParameter = Math::GetValue(0);
+        rayParameter = MathType::GetValue(0);
         triangleBary[0] = distancePoint3Triangle3.GetTriangleBary(0);
         triangleBary[1] = distancePoint3Triangle3.GetTriangleBary(1);
         triangleBary[2] = distancePoint3Triangle3.GetTriangleBary(2);
     }
 
-    return DistanceResult{ sqrDist.GetDistance(), Math::GetValue(0), closestPoint0, closestPoint1, rayParameter, Math::GetValue(0) };
+    return DistanceResult{ sqrDist.GetDistance(), MathType::GetValue(0), closestPoint0, closestPoint1, rayParameter, MathType::GetValue(0) };
 }
 
 template <typename Real>
-typename Mathematics::DistanceRay3Triangle3<Real>::DistanceResult Mathematics::DistanceRay3Triangle3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistanceRay3Triangle3<Real>::DistanceResult Mathematics::DistanceRay3Triangle3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

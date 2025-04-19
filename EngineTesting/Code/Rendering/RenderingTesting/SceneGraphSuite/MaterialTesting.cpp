@@ -39,32 +39,32 @@ void Rendering::MaterialTesting::BaseTest()
 {
     auto firstMaterial = Material::Create("Material");
 
-    ASSERT_TRUE(Approximate(firstMaterial->GetEmissive(), Material::Colour(0.0f, 0.0f, 0.0f, 1.0f), 1e-8f));
-    ASSERT_TRUE(Approximate(firstMaterial->GetAmbient(), Material::Colour(0.0f, 0.0f, 0.0f, 1.0f), 1e-8f));
-    ASSERT_TRUE(Approximate(firstMaterial->GetDiffuse(), Material::Colour(0.0f, 0.0f, 0.0f, 1.0f), 1e-8f));
-    ASSERT_TRUE(Approximate(firstMaterial->GetSpecular(), Material::Colour(0.0f, 0.0f, 0.0f, 1.0f), 1e-8f));
+    ASSERT_TRUE(Approximate(firstMaterial->GetEmissive(), Material::ColourType(0.0f, 0.0f, 0.0f, 1.0f), 1e-8f));
+    ASSERT_TRUE(Approximate(firstMaterial->GetAmbient(), Material::ColourType(0.0f, 0.0f, 0.0f, 1.0f), 1e-8f));
+    ASSERT_TRUE(Approximate(firstMaterial->GetDiffuse(), Material::ColourType(0.0f, 0.0f, 0.0f, 1.0f), 1e-8f));
+    ASSERT_TRUE(Approximate(firstMaterial->GetSpecular(), Material::ColourType(0.0f, 0.0f, 0.0f, 1.0f), 1e-8f));
     ASSERT_APPROXIMATE(firstMaterial->GetAlpha(), 1.0f, 1e-8f);
     ASSERT_APPROXIMATE(firstMaterial->GetSpecularExponent(), 1.0f, 1e-8f);
 
-    firstMaterial->SetEmissive(Material::Colour(1.0f, 0.0f, 0.0f, 1.0f));
-    firstMaterial->SetAmbient(Material::Colour(0.0f, 1.0f, 0.0f, 1.0f));
-    firstMaterial->SetDiffuse(Material::Colour(0.0f, 0.0f, 1.0f, 0.0f));
-    firstMaterial->SetSpecular(Material::Colour(0.0f, 1.0f, 0.0f, 1.0f));
+    firstMaterial->SetEmissive(Material::ColourType(1.0f, 0.0f, 0.0f, 1.0f));
+    firstMaterial->SetAmbient(Material::ColourType(0.0f, 1.0f, 0.0f, 1.0f));
+    firstMaterial->SetDiffuse(Material::ColourType(0.0f, 0.0f, 1.0f, 0.0f));
+    firstMaterial->SetSpecular(Material::ColourType(0.0f, 1.0f, 0.0f, 1.0f));
 
-    ASSERT_TRUE(Approximate(firstMaterial->GetEmissive(), Material::Colour(1.0f, 0.0f, 0.0f, 1.0f), 1e-8f));
-    ASSERT_TRUE(Approximate(firstMaterial->GetAmbient(), Material::Colour(0.0f, 1.0f, 0.0f, 1.0f), 1e-8f));
-    ASSERT_TRUE(Approximate(firstMaterial->GetDiffuse(), Material::Colour(0.0f, 0.0f, 1.0f, 0.0f), 1e-8f));
-    ASSERT_TRUE(Approximate(firstMaterial->GetSpecular(), Material::Colour(0.0f, 1.0f, 0.0f, 1.0f), 1e-8f));
+    ASSERT_TRUE(Approximate(firstMaterial->GetEmissive(), Material::ColourType(1.0f, 0.0f, 0.0f, 1.0f), 1e-8f));
+    ASSERT_TRUE(Approximate(firstMaterial->GetAmbient(), Material::ColourType(0.0f, 1.0f, 0.0f, 1.0f), 1e-8f));
+    ASSERT_TRUE(Approximate(firstMaterial->GetDiffuse(), Material::ColourType(0.0f, 0.0f, 1.0f, 0.0f), 1e-8f));
+    ASSERT_TRUE(Approximate(firstMaterial->GetSpecular(), Material::ColourType(0.0f, 1.0f, 0.0f, 1.0f), 1e-8f));
     ASSERT_APPROXIMATE(firstMaterial->GetAlpha(), 0.0f, 1e-8f);
     ASSERT_APPROXIMATE(firstMaterial->GetSpecularExponent(), 1.0f, 1e-8f);
 
-    auto secondMaterial = Material::Create("Material", Material::Colour(0.1f, 0.2f, 0.3f, 1.0f), Material::Colour(0.2f, 0.3f, 0.4f, 1.0f),
-                                           Material::Colour(0.5f, 0.6f, 0.7f, 0.0f), Material::Colour(0.8f, 0.9f, 1.0f, 1.0f));
+    auto secondMaterial = Material::Create("Material", Material::ColourType(0.1f, 0.2f, 0.3f, 1.0f), Material::ColourType(0.2f, 0.3f, 0.4f, 1.0f),
+                                           Material::ColourType(0.5f, 0.6f, 0.7f, 0.0f), Material::ColourType(0.8f, 0.9f, 1.0f, 1.0f));
 
-    ASSERT_TRUE(Approximate(secondMaterial->GetEmissive(), Material::Colour(0.1f, 0.2f, 0.3f, 1.0f), 1e-8f));
-    ASSERT_TRUE(Approximate(secondMaterial->GetAmbient(), Material::Colour(0.2f, 0.3f, 0.4f, 1.0f), 1e-8f));
-    ASSERT_TRUE(Approximate(secondMaterial->GetDiffuse(), Material::Colour(0.5f, 0.6f, 0.7f, 0.0f), 1e-8f));
-    ASSERT_TRUE(Approximate(secondMaterial->GetSpecular(), Material::Colour(0.8f, 0.9f, 1.0f, 1.0f), 1e-8f));
+    ASSERT_TRUE(Approximate(secondMaterial->GetEmissive(), Material::ColourType(0.1f, 0.2f, 0.3f, 1.0f), 1e-8f));
+    ASSERT_TRUE(Approximate(secondMaterial->GetAmbient(), Material::ColourType(0.2f, 0.3f, 0.4f, 1.0f), 1e-8f));
+    ASSERT_TRUE(Approximate(secondMaterial->GetDiffuse(), Material::ColourType(0.5f, 0.6f, 0.7f, 0.0f), 1e-8f));
+    ASSERT_TRUE(Approximate(secondMaterial->GetSpecular(), Material::ColourType(0.8f, 0.9f, 1.0f, 1.0f), 1e-8f));
     ASSERT_APPROXIMATE(secondMaterial->GetAlpha(), 0.0f, 1e-8f);
     ASSERT_APPROXIMATE(secondMaterial->GetSpecularExponent(), 1.0f, 1e-8f);
 }

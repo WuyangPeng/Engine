@@ -24,7 +24,7 @@ namespace CoreTools
         using ClassType = EventEntity<EventType>;
         using ParentType = BaseEntity;
 
-        using Telegram = Telegram<EventType>;
+        using TelegramType = Telegram<EventType>;
         using EntityEventType = EventType;
         using EventEntitySharedPtr = std::shared_ptr<EventEntity>;
 
@@ -37,7 +37,7 @@ namespace CoreTools
     public:
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD virtual bool EventFunction(const Telegram& telegram) = 0;
+        NODISCARD virtual bool EventFunction(const TelegramType& telegram) = 0;
     };
 }
 

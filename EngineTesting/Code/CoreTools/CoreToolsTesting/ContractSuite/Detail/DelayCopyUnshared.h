@@ -40,7 +40,7 @@ namespace CoreTools
 
         NODISCARD size_t GetAddress() const noexcept;
 
-        static NODISCARD ImplSharedPtr Clone(const Impl& impl);
+        NODISCARD static ImplSharedPtr Clone(const Impl& impl);
 
     private:
         PackageType impl;

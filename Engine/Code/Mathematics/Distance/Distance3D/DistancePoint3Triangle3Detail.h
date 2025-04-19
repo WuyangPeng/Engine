@@ -16,7 +16,7 @@
 #include "Mathematics/Distance/DistanceBaseDetail.h"
 
 template <typename Real>
-Mathematics::DistancePoint3Triangle3<Real>::DistancePoint3Triangle3(const Vector3& point, const Triangle3& triangle) noexcept
+Mathematics::DistancePoint3Triangle3<Real>::DistancePoint3Triangle3(const Vector3Type& point, const Triangle3Type& triangle) noexcept
     : ParentType{}, point{ point }, triangle{ triangle }, triangleBary{}
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -59,30 +59,30 @@ typename Mathematics::DistancePoint3Triangle3<Real>::DistanceResult Mathematics:
     auto diff = triangle.GetVertex(0) - point;
     auto edge0 = triangle.GetVertex(1) - triangle.GetVertex(0);
     auto edge1 = triangle.GetVertex(2) - triangle.GetVertex(0);
-    auto edge0LengthSquared = Vector3Tools::GetLengthSquared(edge0);
-    auto edge0DotEdge1 = Vector3Tools::DotProduct(edge0, edge1);
-    auto edge1LengthSquared = Vector3Tools::GetLengthSquared(edge1);
-    auto diffDotEdge0 = Vector3Tools::DotProduct(diff, edge0);
-    auto diffDotEdge1 = Vector3Tools::DotProduct(diff, edge1);
-    auto diffLengthSquared = Vector3Tools::GetLengthSquared(diff);
-    auto det = Math::FAbs(edge0LengthSquared * edge1LengthSquared - edge0DotEdge1 * edge0DotEdge1);
+    auto edge0LengthSquared = Vector3ToolsType::GetLengthSquared(edge0);
+    auto edge0DotEdge1 = Vector3ToolsType::DotProduct(edge0, edge1);
+    auto edge1LengthSquared = Vector3ToolsType::GetLengthSquared(edge1);
+    auto diffDotEdge0 = Vector3ToolsType::DotProduct(diff, edge0);
+    auto diffDotEdge1 = Vector3ToolsType::DotProduct(diff, edge1);
+    auto diffLengthSquared = Vector3ToolsType::GetLengthSquared(diff);
+    auto det = MathType::FAbs(edge0LengthSquared * edge1LengthSquared - edge0DotEdge1 * edge0DotEdge1);
     auto s = edge0DotEdge1 * diffDotEdge1 - edge1LengthSquared * diffDotEdge0;
     auto t = edge0DotEdge1 * diffDotEdge0 - edge0LengthSquared * diffDotEdge1;
-    auto sqrDistance = Math::GetValue(0);
+    auto sqrDistance = MathType::GetValue(0);
 
     if (s + t <= det)
     {
-        if (s < Math::GetValue(0))
+        if (s < MathType::GetValue(0))
         {
-            if (t < Math::GetValue(0))  // 区域 4
+            if (t < MathType::GetValue(0))  // 区域 4
             {
-                if (diffDotEdge0 < Math::GetValue(0))
+                if (diffDotEdge0 < MathType::GetValue(0))
                 {
-                    t = Math::GetValue(0);
+                    t = MathType::GetValue(0);
                     if (edge0LengthSquared <= -diffDotEdge0)
                     {
-                        s = Math::GetValue(1);
-                        sqrDistance = edge0LengthSquared + (Math::GetValue(2)) * diffDotEdge0 + diffLengthSquared;
+                        s = MathType::GetValue(1);
+                        sqrDistance = edge0LengthSquared + (MathType::GetValue(2)) * diffDotEdge0 + diffLengthSquared;
                     }
                     else
                     {
@@ -92,16 +92,16 @@ typename Mathematics::DistancePoint3Triangle3<Real>::DistanceResult Mathematics:
                 }
                 else
                 {
-                    s = Math::GetValue(0);
-                    if (Math::GetValue(0) <= diffDotEdge1)
+                    s = MathType::GetValue(0);
+                    if (MathType::GetValue(0) <= diffDotEdge1)
                     {
-                        t = Math::GetValue(0);
+                        t = MathType::GetValue(0);
                         sqrDistance = diffLengthSquared;
                     }
                     else if (edge1LengthSquared <= -diffDotEdge1)
                     {
-                        t = Math::GetValue(1);
-                        sqrDistance = edge1LengthSquared + (Math::GetValue(2)) * diffDotEdge1 + diffLengthSquared;
+                        t = MathType::GetValue(1);
+                        sqrDistance = edge1LengthSquared + (MathType::GetValue(2)) * diffDotEdge1 + diffLengthSquared;
                     }
                     else
                     {
@@ -112,16 +112,16 @@ typename Mathematics::DistancePoint3Triangle3<Real>::DistanceResult Mathematics:
             }
             else  // 区域 3
             {
-                s = Math::GetValue(0);
-                if (Math::GetValue(0) <= diffDotEdge1)
+                s = MathType::GetValue(0);
+                if (MathType::GetValue(0) <= diffDotEdge1)
                 {
-                    t = Math::GetValue(0);
+                    t = MathType::GetValue(0);
                     sqrDistance = diffLengthSquared;
                 }
                 else if (edge1LengthSquared <= -diffDotEdge1)
                 {
-                    t = Math::GetValue(1);
-                    sqrDistance = edge1LengthSquared + (Math::GetValue(2)) * diffDotEdge1 + diffLengthSquared;
+                    t = MathType::GetValue(1);
+                    sqrDistance = edge1LengthSquared + (MathType::GetValue(2)) * diffDotEdge1 + diffLengthSquared;
                 }
                 else
                 {
@@ -130,18 +130,18 @@ typename Mathematics::DistancePoint3Triangle3<Real>::DistanceResult Mathematics:
                 }
             }
         }
-        else if (t < Math::GetValue(0))  // 区域 5
+        else if (t < MathType::GetValue(0))  // 区域 5
         {
-            t = Math::GetValue(0);
-            if (diffDotEdge0 >= Math::GetValue(0))
+            t = MathType::GetValue(0);
+            if (diffDotEdge0 >= MathType::GetValue(0))
             {
-                s = Math::GetValue(0);
+                s = MathType::GetValue(0);
                 sqrDistance = diffLengthSquared;
             }
             else if (edge0LengthSquared <= -diffDotEdge0)
             {
-                s = Math::GetValue(1);
-                sqrDistance = edge0LengthSquared + (Math::GetValue(2)) * diffDotEdge0 + diffLengthSquared;
+                s = MathType::GetValue(1);
+                sqrDistance = edge0LengthSquared + (MathType::GetValue(2)) * diffDotEdge0 + diffLengthSquared;
             }
             else
             {
@@ -155,43 +155,43 @@ typename Mathematics::DistancePoint3Triangle3<Real>::DistanceResult Mathematics:
 
             s /= det;
             t /= det;
-            sqrDistance = s * (edge0LengthSquared * s + edge0DotEdge1 * t + (Math::GetValue(2)) * diffDotEdge0) + t * (edge0DotEdge1 * s + edge1LengthSquared * t + (Math::GetValue(2)) * diffDotEdge1) + diffLengthSquared;
+            sqrDistance = s * (edge0LengthSquared * s + edge0DotEdge1 * t + (MathType::GetValue(2)) * diffDotEdge0) + t * (edge0DotEdge1 * s + edge1LengthSquared * t + (MathType::GetValue(2)) * diffDotEdge1) + diffLengthSquared;
         }
     }
     else
     {
-        if (s < Math::GetValue(0))  // 区域 2
+        if (s < MathType::GetValue(0))  // 区域 2
         {
             auto value0 = edge0DotEdge1 + diffDotEdge0;
             auto value1 = edge1LengthSquared + diffDotEdge1;
             if (value0 < value1)
             {
                 auto numer = value1 - value0;
-                auto denom = edge0LengthSquared - (Math::GetValue(2)) * edge0DotEdge1 + edge1LengthSquared;
+                auto denom = edge0LengthSquared - (MathType::GetValue(2)) * edge0DotEdge1 + edge1LengthSquared;
                 if (denom <= numer)
                 {
-                    s = Math::GetValue(1);
-                    t = Math::GetValue(0);
-                    sqrDistance = edge0LengthSquared + (Math::GetValue(2)) * diffDotEdge0 + diffLengthSquared;
+                    s = MathType::GetValue(1);
+                    t = MathType::GetValue(0);
+                    sqrDistance = edge0LengthSquared + (MathType::GetValue(2)) * diffDotEdge0 + diffLengthSquared;
                 }
                 else
                 {
                     s = numer / denom;
-                    t = Math::GetValue(1) - s;
-                    sqrDistance = s * (edge0LengthSquared * s + edge0DotEdge1 * t + (Math::GetValue(2)) * diffDotEdge0) + t * (edge0DotEdge1 * s + edge1LengthSquared * t + (Math::GetValue(2)) * diffDotEdge1) + diffLengthSquared;
+                    t = MathType::GetValue(1) - s;
+                    sqrDistance = s * (edge0LengthSquared * s + edge0DotEdge1 * t + (MathType::GetValue(2)) * diffDotEdge0) + t * (edge0DotEdge1 * s + edge1LengthSquared * t + (MathType::GetValue(2)) * diffDotEdge1) + diffLengthSquared;
                 }
             }
             else
             {
-                s = Math::GetValue(0);
-                if (value1 <= Math::GetValue(0))
+                s = MathType::GetValue(0);
+                if (value1 <= MathType::GetValue(0))
                 {
-                    t = Math::GetValue(1);
-                    sqrDistance = edge1LengthSquared + (Math::GetValue(2)) * diffDotEdge1 + diffLengthSquared;
+                    t = MathType::GetValue(1);
+                    sqrDistance = edge1LengthSquared + (MathType::GetValue(2)) * diffDotEdge1 + diffLengthSquared;
                 }
-                else if (Math::GetValue(0) <= diffDotEdge1)
+                else if (MathType::GetValue(0) <= diffDotEdge1)
                 {
-                    t = Math::GetValue(0);
+                    t = MathType::GetValue(0);
                     sqrDistance = diffLengthSquared;
                 }
                 else
@@ -201,38 +201,38 @@ typename Mathematics::DistancePoint3Triangle3<Real>::DistanceResult Mathematics:
                 }
             }
         }
-        else if (t < Math::GetValue(0))  // 区域 6
+        else if (t < MathType::GetValue(0))  // 区域 6
         {
             auto value0 = edge0DotEdge1 + diffDotEdge1;
             auto value1 = edge0LengthSquared + diffDotEdge0;
             if (value1 > value0)
             {
                 auto numer = value1 - value0;
-                auto denom = edge0LengthSquared - (Math::GetValue(2)) * edge0DotEdge1 + edge1LengthSquared;
+                auto denom = edge0LengthSquared - (MathType::GetValue(2)) * edge0DotEdge1 + edge1LengthSquared;
                 if (denom <= numer)
                 {
-                    t = Math::GetValue(1);
-                    s = Math::GetValue(0);
-                    sqrDistance = edge1LengthSquared + (Math::GetValue(2)) * diffDotEdge1 + diffLengthSquared;
+                    t = MathType::GetValue(1);
+                    s = MathType::GetValue(0);
+                    sqrDistance = edge1LengthSquared + (MathType::GetValue(2)) * diffDotEdge1 + diffLengthSquared;
                 }
                 else
                 {
                     t = numer / denom;
-                    s = Math::GetValue(1) - t;
-                    sqrDistance = s * (edge0LengthSquared * s + edge0DotEdge1 * t + (Math::GetValue(2)) * diffDotEdge0) + t * (edge0DotEdge1 * s + edge1LengthSquared * t + (Math::GetValue(2)) * diffDotEdge1) + diffLengthSquared;
+                    s = MathType::GetValue(1) - t;
+                    sqrDistance = s * (edge0LengthSquared * s + edge0DotEdge1 * t + (MathType::GetValue(2)) * diffDotEdge0) + t * (edge0DotEdge1 * s + edge1LengthSquared * t + (MathType::GetValue(2)) * diffDotEdge1) + diffLengthSquared;
                 }
             }
             else
             {
-                t = Math::GetValue(0);
-                if (value1 <= Math::GetValue(0))
+                t = MathType::GetValue(0);
+                if (value1 <= MathType::GetValue(0))
                 {
-                    s = Math::GetValue(1);
-                    sqrDistance = edge0LengthSquared + (Math::GetValue(2)) * diffDotEdge0 + diffLengthSquared;
+                    s = MathType::GetValue(1);
+                    sqrDistance = edge0LengthSquared + (MathType::GetValue(2)) * diffDotEdge0 + diffLengthSquared;
                 }
-                else if (Math::GetValue(0) <= diffDotEdge0)
+                else if (MathType::GetValue(0) <= diffDotEdge0)
                 {
-                    s = Math::GetValue(0);
+                    s = MathType::GetValue(0);
                     sqrDistance = diffLengthSquared;
                 }
                 else
@@ -245,48 +245,48 @@ typename Mathematics::DistancePoint3Triangle3<Real>::DistanceResult Mathematics:
         else  // 区域 1
         {
             auto numer = edge1LengthSquared + diffDotEdge1 - edge0DotEdge1 - diffDotEdge0;
-            if (numer <= Math::GetValue(0))
+            if (numer <= MathType::GetValue(0))
             {
-                s = Math::GetValue(0);
-                t = Math::GetValue(1);
-                sqrDistance = edge1LengthSquared + (Math::GetValue(2)) * diffDotEdge1 + diffLengthSquared;
+                s = MathType::GetValue(0);
+                t = MathType::GetValue(1);
+                sqrDistance = edge1LengthSquared + (MathType::GetValue(2)) * diffDotEdge1 + diffLengthSquared;
             }
             else
             {
-                auto denom = edge0LengthSquared - (Math::GetValue(2)) * edge0DotEdge1 + edge1LengthSquared;
+                auto denom = edge0LengthSquared - (MathType::GetValue(2)) * edge0DotEdge1 + edge1LengthSquared;
                 if (denom <= numer)
                 {
-                    s = Math::GetValue(1);
-                    t = Math::GetValue(0);
-                    sqrDistance = edge0LengthSquared + (Math::GetValue(2)) * diffDotEdge0 + diffLengthSquared;
+                    s = MathType::GetValue(1);
+                    t = MathType::GetValue(0);
+                    sqrDistance = edge0LengthSquared + (MathType::GetValue(2)) * diffDotEdge0 + diffLengthSquared;
                 }
                 else
                 {
                     s = numer / denom;
-                    t = Math::GetValue(1) - s;
-                    sqrDistance = s * (edge0LengthSquared * s + edge0DotEdge1 * t + (Math::GetValue(2)) * diffDotEdge0) + t * (edge0DotEdge1 * s + edge1LengthSquared * t + (Math::GetValue(2)) * diffDotEdge1) + diffLengthSquared;
+                    t = MathType::GetValue(1) - s;
+                    sqrDistance = s * (edge0LengthSquared * s + edge0DotEdge1 * t + (MathType::GetValue(2)) * diffDotEdge0) + t * (edge0DotEdge1 * s + edge1LengthSquared * t + (MathType::GetValue(2)) * diffDotEdge1) + diffLengthSquared;
                 }
             }
         }
     }
 
     // 解决数字舍入误差。
-    if (sqrDistance < Math::GetValue(0))
+    if (sqrDistance < MathType::GetValue(0))
     {
-        sqrDistance = Math::GetValue(0);
+        sqrDistance = MathType::GetValue(0);
     }
 
     const auto closestPoint = triangle.GetVertex(0) + s * edge0 + t * edge1;
 
     triangleBary[1] = s;
     triangleBary[2] = t;
-    triangleBary[0] = Math::GetValue(1) - s - t;
+    triangleBary[0] = MathType::GetValue(1) - s - t;
 
-    return DistanceResult{ sqrDistance, Math::GetValue(0), point, closestPoint };
+    return DistanceResult{ sqrDistance, MathType::GetValue(0), point, closestPoint };
 }
 
 template <typename Real>
-typename Mathematics::DistancePoint3Triangle3<Real>::DistanceResult Mathematics::DistancePoint3Triangle3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistancePoint3Triangle3<Real>::DistanceResult Mathematics::DistancePoint3Triangle3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

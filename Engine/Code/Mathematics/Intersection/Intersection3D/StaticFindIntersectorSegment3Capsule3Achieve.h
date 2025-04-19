@@ -16,7 +16,7 @@
 #include "Mathematics/Distance/Distance3D/DistanceSegment3Segment3Detail.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorSegment3Capsule3<Real>::StaticFindIntersectorSegment3Capsule3(const Segment3& segment, const Capsule3& capsule, const Real epsilon)
+Mathematics::StaticFindIntersectorSegment3Capsule3<Real>::StaticFindIntersectorSegment3Capsule3(const Segment3Type& segment, const Capsule3Type& capsule, const Real epsilon)
     : ParentType{ epsilon }, segment{ segment }, capsule{ capsule }, quantity{}, point0{}, point1{}, parameter0{}, parameter1{}
 {
     Find();
@@ -62,7 +62,7 @@ void Mathematics::StaticFindIntersectorSegment3Capsule3<Real>::Find()
     for (auto i = 0; i < findShared.quantity; ++i)
     {
         auto parameter = (i == 0) ? findShared.parameter0 : findShared.parameter1;
-        if (Math::FAbs(parameter) <= segment.GetExtent())
+        if (MathType::FAbs(parameter) <= segment.GetExtent())
         {
             if (quantity == 0)
             {

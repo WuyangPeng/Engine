@@ -16,7 +16,7 @@
 
 CLASS_INVARIANT_STUB_DEFINE(FrameworkToolset, WindowsAPIFrameBuild)
 
-namespace FrameworkToolset
+namespace Framework
 {
     template class Framework::WindowsAPIFrameBuild<Framework::WindowProcessInterface>;
 }

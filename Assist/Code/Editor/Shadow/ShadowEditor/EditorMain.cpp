@@ -11,6 +11,6 @@
 #include "Framework/Helper/MainFunctionMacro.h"
 #include "Editor/Shadow/ShadowEditor/EditorHelper.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 WINDOWS_MAIN_FUNCTION_WITH_INFORMATION(ShadowEditor, EditorHelper, SYSTEM_TEXT("ShadowEditor"), SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT(""), 1024, 768)

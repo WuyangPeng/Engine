@@ -26,14 +26,14 @@ namespace Mathematics
     public:
         using ClassType = CylinderFit3Update<Real>;
 
-        using Vector3 = Vector3<Real>;
-        using Math = Math<Real>;
-        using Points = std::vector<Vector3>;
-        using CylinderFit3UpdateData = CylinderFit3UpdateData<Real>;
-        using UpdateData = std::vector<CylinderFit3UpdateData>;
+        using Vector3Type = Vector3<Real>;
+        using MathType = Math<Real>;
+        using Points = std::vector<Vector3Type>;
+        using CylinderFit3UpdateDataType = CylinderFit3UpdateData<Real>;
+        using UpdateData = std::vector<CylinderFit3UpdateDataType>;
 
     public:
-        CylinderFit3Update(Points points, const Vector3& guessCenter, const Vector3& guessAxis, const Real epsilon = Math::GetZeroTolerance()) noexcept;
+        CylinderFit3Update(Points points, const Vector3Type& guessCenter, const Vector3Type& guessAxis, const Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -43,8 +43,8 @@ namespace Mathematics
         NODISCARD Real GetExactly() const noexcept;
 
         NODISCARD Real GetInverseRadiusSquare() const noexcept;
-        NODISCARD Vector3 GetAxis() const noexcept;
-        NODISCARD Vector3 GetCenter() const noexcept;
+        NODISCARD Vector3Type GetAxis() const noexcept;
+        NODISCARD Vector3Type GetCenter() const noexcept;
 
     private:
         void CalculateUpdateData();
@@ -55,8 +55,8 @@ namespace Mathematics
     private:
         Points points;
         Real inverseRadiusSquare;
-        Vector3 axis;
-        Vector3 center;
+        Vector3Type axis;
+        Vector3Type center;
         Real exactly;
         Real epsilon;
         UpdateData updateData;

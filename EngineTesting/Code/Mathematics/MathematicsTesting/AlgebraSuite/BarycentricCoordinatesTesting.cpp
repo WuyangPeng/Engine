@@ -46,7 +46,7 @@ void Mathematics::BarycentricCoordinatesTesting::BarycentricCoordinates3DTest()
 
     ASSERT_FALSE(barycentricCoordinates0.IsBarycentricCoordinatesValid());
 
-    const BarycentricCoordinates<double, 3> barycentricCoordinates1{ true, BarycentricCoordinates<double, 3>::Tuple(0.1, 0.4, 0.5) };
+    const BarycentricCoordinates<double, 3> barycentricCoordinates1{ true, BarycentricCoordinates<double, 3>::TupleType(0.1, 0.4, 0.5) };
 
     ASSERT_APPROXIMATE(barycentricCoordinates1[0], 0.1, 1e-10);
     ASSERT_APPROXIMATE(barycentricCoordinates1[1], 0.4, 1e-10);
@@ -59,7 +59,7 @@ void Mathematics::BarycentricCoordinatesTesting::BarycentricCoordinates4DTest()
 
     ASSERT_FALSE(barycentricCoordinates0.IsBarycentricCoordinatesValid());
 
-    const BarycentricCoordinates<float, 4> barycentricCoordinates1{ true, BarycentricCoordinates<float, 4>::Tuple(0.1f, 0.4f, 0.3f, 0.2f) };
+    const BarycentricCoordinates<float, 4> barycentricCoordinates1{ true, BarycentricCoordinates<float, 4>::TupleType(0.1f, 0.4f, 0.3f, 0.2f) };
 
     ASSERT_APPROXIMATE(barycentricCoordinates1[0], 0.1f, 1e-8f);
     ASSERT_APPROXIMATE(barycentricCoordinates1[1], 0.4f, 1e-8f);

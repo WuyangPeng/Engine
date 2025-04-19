@@ -29,33 +29,33 @@ namespace Mathematics
     public:
         using ClassType = AVector<T>;
 
-        using Math = Math<T>;
-        using Vector3 = Vector3<T>;
-        using HomogeneousPoint = HomogeneousPoint<T>;
+        using MathType = Math<T>;
+        using Vector3Type = Vector3<T>;
+        using HomogeneousPointType = HomogeneousPoint<T>;
         using ContainerType = std::vector<ClassType>;
 
-        static constexpr auto vectorSize = System::EnumCastUnderlying(HomogeneousPoint::PointIndex::W);
+        static constexpr auto vectorSize = System::EnumCastUnderlying(HomogeneousPointType::PointIndex::W);
         using ArrayType = std::array<T, vectorSize>;
 
     public:
         // AVector表示仿射坐标 (x,y,z,0)。默认 (0,0,0,0)。
         constexpr AVector() noexcept
-            : AVector{ Math::GetValue(0), Math::GetValue(0), Math::GetValue(0) }
+            : AVector{ MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) }
         {
         }
 
         constexpr AVector(T x, T y, T z) noexcept
-            : homogeneousPoint{ x, y, z, Math::GetValue(0) }
+            : homogeneousPoint{ x, y, z, MathType::GetValue(0) }
         {
         }
 
-        explicit AVector(const Vector3& rhs) noexcept;
+        explicit AVector(const Vector3Type& rhs) noexcept;
         explicit AVector(const ArrayType& rhs) noexcept;
-        explicit AVector(const HomogeneousPoint& homogeneousPoint) noexcept;
+        explicit AVector(const HomogeneousPointType& homogeneousPoint) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector3 GetVector3() const noexcept;
+        NODISCARD Vector3Type GetVector3() const noexcept;
 
         NODISCARD const T& operator[](int index) const;
         NODISCARD T& operator[](int index);
@@ -77,9 +77,9 @@ namespace Mathematics
         // 向量运算。
         NODISCARD T Length() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
         NODISCARD T SquaredLength() const noexcept;
-        void Normalize(T epsilon = Math::GetZeroTolerance());
-        NODISCARD bool IsZero(T epsilon = Math::GetZeroTolerance()) const noexcept(gAssert < 3 || gMathematicsAssert < 3);
-        NODISCARD bool IsNormalize(T epsilon = Math::GetZeroTolerance()) const noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        void Normalize(T epsilon = MathType::GetZeroTolerance());
+        NODISCARD bool IsZero(T epsilon = MathType::GetZeroTolerance()) const noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD bool IsNormalize(T epsilon = MathType::GetZeroTolerance()) const noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         NODISCARD ArrayType GetCoordinate() const noexcept;
         void Set(const ArrayType& coordinate) noexcept;
@@ -93,19 +93,19 @@ namespace Mathematics
         // (1,0,0,0)
         static constexpr AVector GetUnitX() noexcept
         {
-            return AVector{ Math::GetValue(1), Math::GetValue(0), Math::GetValue(0) };
+            return AVector{ MathType::GetValue(1), MathType::GetValue(0), MathType::GetValue(0) };
         }
 
         // (0,1,0,0)
         static constexpr AVector GetUnitY() noexcept
         {
-            return AVector{ Math::GetValue(0), Math::GetValue(1), Math::GetValue(0) };
+            return AVector{ MathType::GetValue(0), MathType::GetValue(1), MathType::GetValue(0) };
         }
 
         // (0,0,1,0)
         static constexpr AVector GetUnitZ() noexcept
         {
-            return AVector{ Math::GetValue(0), Math::GetValue(0), Math::GetValue(1) };
+            return AVector{ MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(1) };
         }
 
         static constexpr AVector GetUnit(const MatrixRotationAxis axisIndex) noexcept
@@ -123,10 +123,10 @@ namespace Mathematics
             }
         }
 
-        NODISCARD HomogeneousPoint GetHomogeneousPoint() const noexcept;
+        NODISCARD HomogeneousPointType GetHomogeneousPoint() const noexcept;
 
     private:
-        HomogeneousPoint homogeneousPoint;
+        HomogeneousPointType homogeneousPoint;
     };
 
     template <typename T>

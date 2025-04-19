@@ -22,24 +22,24 @@ namespace Mathematics
 
         using ClassType = PolarDecompositionValue<Real>;
 
-        using Math = Math<Real>;
-        using Matrix3 = Matrix3<Real>;
+        using MathType = Math<Real>;
+        using Matrix3Type = Matrix3<Real>;
 
     public:
-        explicit PolarDecompositionValue(const Matrix3& matrix);
+        explicit PolarDecompositionValue(const Matrix3Type& matrix);
 
         CLASS_INVARIANT_DECLARE;
 
     public:
-        NODISCARD Matrix3 GeOrthogonalMatrix() const noexcept;
-        NODISCARD Matrix3 GetSymmetryMatrix() const noexcept;
+        NODISCARD Matrix3Type GeOrthogonalMatrix() const noexcept;
+        NODISCARD Matrix3Type GetSymmetryMatrix() const noexcept;
 
     private:
-        void Calculate(const Matrix3& matrix);
+        void Calculate(const Matrix3Type& matrix);
 
     private:
-        Matrix3 orthogonal;
-        Matrix3 symmetry;
+        Matrix3Type orthogonal;
+        Matrix3Type symmetry;
     };
 
     using PolarDecompositionValueF = PolarDecompositionValue<float>;

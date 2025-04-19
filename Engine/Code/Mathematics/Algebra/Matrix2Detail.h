@@ -25,7 +25,7 @@ template <int Row, int Column>
 Real Mathematics::Matrix2<Real>::GetValue() const noexcept
 {
     static_assert(0 <= Row && Row < vectorSize);
-    static_assert(0 <= Column && Column < Vector2::pointSize);
+    static_assert(0 <= Column && Column < Vector2Type::pointSize);
 
     const auto& vector = GetVector<Row>();
 
@@ -45,7 +45,7 @@ template <int Row, int Column>
 void Mathematics::Matrix2<Real>::SetValue(Real value) noexcept
 {
     static_assert(0 <= Row && Row < vectorSize);
-    static_assert(0 <= Column && Column < Vector2::pointSize);
+    static_assert(0 <= Column && Column < Vector2Type::pointSize);
 
     auto& vector = GetVector<Row>();
 
@@ -79,7 +79,7 @@ Mathematics::Vector2<Real>& Mathematics::Matrix2<Real>::GetVector() noexcept
 {
     static_assert(0 <= Row && Row < vectorSize);
 
-    return NON_CONST_MEMBER_CALL_CONST_MEMBER(Vector2&, GetVector<Row>);
+    return NON_CONST_MEMBER_CALL_CONST_MEMBER(Vector2Type&, GetVector<Row>);
 }
 
 template <typename Real>
@@ -87,12 +87,12 @@ requires std::is_arithmetic_v<Real>
 template <int Column>
 typename Mathematics::Vector2<Real>::GetCoordinateFunction Mathematics::Matrix2<Real>::GetVectorGetFunction() const noexcept
 {
-    static_assert(0 <= Column && Column < Vector2::pointSize);
+    static_assert(0 <= Column && Column < Vector2Type::pointSize);
 
-    if constexpr (Column == Vector2::xIndex)
-        return &Vector2::GetX;
+    if constexpr (Column == Vector2Type::xIndex)
+        return &Vector2Type::GetX;
     else
-        return &Vector2::GetY;
+        return &Vector2Type::GetY;
 }
 
 template <typename Real>
@@ -100,12 +100,12 @@ requires std::is_arithmetic_v<Real>
 template <int Column>
 typename Mathematics::Vector2<Real>::SetCoordinateFunction Mathematics::Matrix2<Real>::GetVectorSetFunction() const noexcept
 {
-    static_assert(0 <= Column && Column < Vector2::pointSize);
+    static_assert(0 <= Column && Column < Vector2Type::pointSize);
 
-    if constexpr (Column == Vector2::xIndex)
-        return &Vector2::SetX;
+    if constexpr (Column == Vector2Type::xIndex)
+        return &Vector2Type::SetX;
     else
-        return &Vector2::SetY;
+        return &Vector2Type::SetY;
 }
 
 template <typename Real>

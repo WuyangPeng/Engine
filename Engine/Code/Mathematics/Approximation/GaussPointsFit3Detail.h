@@ -46,7 +46,7 @@ Mathematics::Box3<Real> Mathematics::GaussPointsFit3<Real>::Calculate(const Poin
     const auto numPoints = static_cast<Real>(points.size());
 
     // 计算点的平均值。
-    Vector3 center{};
+    Vector3Type center{};
     for (const auto& point : points)
     {
         center += point;
@@ -55,12 +55,12 @@ Mathematics::Box3<Real> Mathematics::GaussPointsFit3<Real>::Calculate(const Poin
     center /= numPoints;
 
     // 计算点的协方差矩阵。
-    auto sumXX = Math::GetValue(0);
-    auto sumXY = Math::GetValue(0);
-    auto sumYY = Math::GetValue(0);
-    auto sumXZ = Math::GetValue(0);
-    auto sumYZ = Math::GetValue(0);
-    auto sumZZ = Math::GetValue(0);
+    auto sumXX = MathType::GetValue(0);
+    auto sumXY = MathType::GetValue(0);
+    auto sumYY = MathType::GetValue(0);
+    auto sumXZ = MathType::GetValue(0);
+    auto sumYZ = MathType::GetValue(0);
+    auto sumZZ = MathType::GetValue(0);
 
     for (const auto& point : points)
     {
@@ -98,7 +98,7 @@ Mathematics::Box3<Real> Mathematics::GaussPointsFit3<Real>::Calculate(const Poin
     eigenSystem.Solve(true);
 
     std::array<Real, size> extent{};
-    std::array<Vector3, size> axis{};
+    std::array<Vector3Type, size> axis{};
 
     for (auto i = 0; i < size; ++i)
     {
@@ -110,7 +110,7 @@ Mathematics::Box3<Real> Mathematics::GaussPointsFit3<Real>::Calculate(const Poin
         axis[i] = eigenSystem.GetEigenvector3(i);
     }
 
-    return Box3{ center, axis[0], axis[1], axis[2], extent[0], extent[1], extent[2] };
+    return Box3Type{ center, axis[0], axis[1], axis[2], extent[0], extent[1], extent[2] };
 
 #include SYSTEM_WARNING_POP
 }

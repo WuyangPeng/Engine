@@ -12,6 +12,8 @@
 
 #include "Mathematics/MathematicsDll.h"
 
+#include <type_traits>
+
 namespace Mathematics
 {
     /// 求解器迭代过程中的变量记账。名称为'w'或'z'，用于提供可读的调试帮助。

@@ -95,7 +95,7 @@ void Rendering::TextEffectImpl::SetNormalizedZ(float z)
     data.Increase(z);
 }
 
-void Rendering::TextEffectImpl::SetColor(const Colour& aColor)
+void Rendering::TextEffectImpl::SetColor(const ColourType& aColor)
 {
     RENDERING_CLASS_IS_VALID_9;
 

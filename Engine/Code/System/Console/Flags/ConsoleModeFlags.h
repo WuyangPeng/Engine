@@ -52,12 +52,16 @@ namespace System
         InsertMode = 0x0020 | ExtendedFlags,
         QuickEditMode = 0x0040 | ExtendedFlags,
         AutoPosition = 0x0100,
+        VirtualTerminalInput = 0x0200
     };
 
     enum class ConsoleOutputMode
     {
         ProcessedOutput = 0x0001,
         WrapAtEolOutput = 0x0002,
+        VirtualTerminalProcessing = 0x0004,
+        DisableNewlineAutoReturn = 0x0008,
+        LvbGridWorldwide = 0x0010
     };
 
 #endif  // SYSTEM_PLATFORM_WIN32

@@ -26,35 +26,35 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorPlane3Sphere3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Plane3 = Plane3<Real>;
-        using Sphere3 = Sphere3<Real>;
-        using Circle3 = Circle3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Plane3Type = Plane3<Real>;
+        using Sphere3Type = Sphere3<Real>;
+        using Circle3Type = Circle3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorPlane3Sphere3(const Plane3& plane, const Sphere3& sphere, const Real epsilon = Math::GetZeroTolerance());
+        StaticFindIntersectorPlane3Sphere3(const Plane3Type& plane, const Sphere3Type& sphere, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Plane3 GetPlane() const noexcept;
-        NODISCARD Sphere3 GetSphere() const noexcept;
+        NODISCARD Plane3Type GetPlane() const noexcept;
+        NODISCARD Sphere3Type GetSphere() const noexcept;
 
         /// 剔除支持。 视锥台被认为位于平面的正侧。 如果球面在平面的负侧，则将其剔除。
         NODISCARD bool SphereIsCulled() const noexcept;
 
         // 相交集。 该圆仅在Find()返回“ true”时才有效。 如果不存在相交，则将圆半径设置为-1，以附加指示圆无效。
-        NODISCARD Circle3 GetCircle() const noexcept;
+        NODISCARD Circle3Type GetCircle() const noexcept;
 
     private:
         void Find();
 
     private:
-        Plane3 plane;
-        Sphere3 sphere;
+        Plane3Type plane;
+        Sphere3Type sphere;
 
-        Circle3 circle;
+        Circle3Type circle;
     };
 }
 

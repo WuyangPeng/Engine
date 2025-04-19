@@ -25,22 +25,22 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorSegment3Capsule3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Segment3 = Segment3<Real>;
-        using Capsule3 = Capsule3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Segment3Type = Segment3<Real>;
+        using Capsule3Type = Capsule3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorSegment3Capsule3(const Segment3& segment, const Capsule3& capsule, const Real epsilon = Math::GetZeroTolerance());
+        StaticFindIntersectorSegment3Capsule3(const Segment3Type& segment, const Capsule3Type& capsule, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Segment3 GetSegment() const noexcept;
-        NODISCARD Capsule3 GetCapsule() const noexcept;
+        NODISCARD Segment3Type GetSegment() const noexcept;
+        NODISCARD Capsule3Type GetCapsule() const noexcept;
 
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
         // 点的段参数
         NODISCARD Real GetParameter0() const noexcept;
         NODISCARD Real GetParameter1() const noexcept;
@@ -49,12 +49,12 @@ namespace Mathematics
         void Find();
 
     private:
-        Segment3 segment;
-        Capsule3 capsule;
+        Segment3Type segment;
+        Capsule3Type capsule;
 
         int quantity;
-        Vector3 point0;
-        Vector3 point1;
+        Vector3Type point0;
+        Vector3Type point1;
         Real parameter0;
         Real parameter1;
     };

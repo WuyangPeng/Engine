@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::DynamicTestIntersectorHalfspace3Segment3<Real>::DynamicTestIntersectorHalfspace3Segment3(const Plane3& halfspace, const Segment3& segment, Real tmax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicTestIntersectorHalfspace3Segment3<Real>::DynamicTestIntersectorHalfspace3Segment3(const Plane3Type& halfspace, const Segment3Type& segment, Real tmax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, halfspace{ halfspace }, segment{ segment }
 {
     Test();
@@ -55,15 +55,15 @@ Mathematics::Segment3<Real> Mathematics::DynamicTestIntersectorHalfspace3Segment
 template <typename Real>
 void Mathematics::DynamicTestIntersectorHalfspace3Segment3<Real>::Test()
 {
-    this->SetContactTime(Math::GetValue(0));
+    this->SetContactTime(MathType::GetValue(0));
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
-    using SegmentType = std::array<Vector3, 2>;
+    using SegmentType = std::array<Vector3Type, 2>;
     const SegmentType segmentType{ segment.GetBeginPoint(), segment.GetEndPoint() };
 
     const auto projection = TestIntersectorAxis<Real>::GetProjection(halfspace.GetNormal(), segmentType);
 
-    const TestIntersectorAxis<Real> testIntersectorAxis{ halfspace.GetNormal(), relVelocity, -Math::maxReal, halfspace.GetConstant(), projection.first, projection.second, this->GetTMax() };
+    const TestIntersectorAxis<Real> testIntersectorAxis{ halfspace.GetNormal(), relVelocity, -MathType::maxReal, halfspace.GetConstant(), projection.first, projection.second, this->GetTMax() };
 
     auto contactTime = testIntersectorAxis.GetTFirst();
     if (testIntersectorAxis.GetResult())

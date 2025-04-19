@@ -41,16 +41,16 @@ namespace Mathematics
 
         using ClassType = LinearSystem<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using RealContainer = std::vector<Real>;
         using Vector2 = std::array<Real, 2>;
         using Matrix2 = std::array<Vector2, 2>;
-        using Vector3 = std::array<Real, 3>;
-        using Matrix3 = std::array<Vector3, 3>;
-        using BandedMatrix = BandedMatrix<Real>;
-        using SparseMatrix = SparseMatrix<Real>;
-        using VariableMatrix = VariableMatrix<Real>;
-        using VariableLengthVector = VariableLengthVector<Real>;
+        using Vector3Type = std::array<Real, 3>;
+        using Matrix3 = std::array<Vector3Type, 3>;
+        using BandedMatrixType = BandedMatrix<Real>;
+        using SparseMatrixType = SparseMatrix<Real>;
+        using VariableMatrixType = VariableMatrix<Real>;
+        using VariableLengthVectorType = VariableLengthVector<Real>;
 
         using Matrix2x2 = Algebra::Matrix2x2<Real>;
         using Matrix3x3 = Algebra::Matrix3x3<Real>;
@@ -61,7 +61,7 @@ namespace Mathematics
         using AlgebraSparseMatrix = std::map<std::array<int, 2>, Real>;
 
     public:
-        explicit LinearSystem(Real zeroTolerance = Math::GetZeroTolerance()) noexcept;
+        explicit LinearSystem(Real zeroTolerance = MathType::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -70,13 +70,13 @@ namespace Mathematics
         // 2×2和3x3系统（避免了高斯消元的开销）
         NODISCARD Vector2 Solve2(const Matrix2& matrix, const Vector2& vector) const;
 
-        NODISCARD Vector3 Solve3(const Matrix3& matrix, const Vector3& vector) const;
+        NODISCARD Vector3Type Solve3(const Matrix3& matrix, const Vector3Type& vector) const;
 
         // 输入:
         //     matrix[iSize][iSize], 项是 matrix[row][col]
         // 输出:
         //     求逆矩阵失败抛出异常，否则返回逆矩阵。
-        NODISCARD VariableMatrix Inverse(const VariableMatrix& matrix) const;
+        NODISCARD VariableMatrixType Inverse(const VariableMatrixType& matrix) const;
 
         // 输入:
         //     A[iSize][iSize] 系数矩阵，项是 A[row][col]
@@ -86,7 +86,7 @@ namespace Mathematics
         //     X[iSize] 是解X 在 AX = B
 
         // 必须保证输入vector和输出vector大小为iSize的一维数组。
-        NODISCARD RealContainer Solve(const VariableMatrix& matrix, const RealContainer& vector) const;
+        NODISCARD RealContainer Solve(const VariableMatrixType& matrix, const RealContainer& vector) const;
 
         // 输入:
         //     矩阵是三对角矩阵。
@@ -121,7 +121,7 @@ namespace Mathematics
         //    X[size] 是解 x 为 Ax = B
 
         // 必须保证inputVector和outputVector为大小为size的一维数组。
-        NODISCARD RealContainer SolveSymmetricConjugateGradient(const VariableMatrix& matrix, const RealContainer& vector) const;
+        NODISCARD RealContainer SolveSymmetricConjugateGradient(const VariableMatrixType& matrix, const RealContainer& vector) const;
 
         // 稀疏对称矩阵共轭梯度法。
         // 输入:
@@ -134,7 +134,7 @@ namespace Mathematics
         //    X[size] 是解 x 为 Ax = B
 
         // 必须保证inputVector和outputVector为大小为size的一维数组。
-        NODISCARD RealContainer SolveSymmetricConjugateGradient(const SparseMatrix& matrix, const RealContainer& vector) const;
+        NODISCARD RealContainer SolveSymmetricConjugateGradient(const SparseMatrixType& matrix, const RealContainer& vector) const;
 
         // 求解带状矩阵系统。
         // 输入:
@@ -145,14 +145,14 @@ namespace Mathematics
         //     返回X[size] 是解 X 在 AX = B
 
         // 必须保证inputVector和outputVector为大小为size的一维数组。
-        NODISCARD RealContainer SolveBanded(const BandedMatrix& matrix, const RealContainer& vector) const;
+        NODISCARD RealContainer SolveBanded(const BandedMatrixType& matrix, const RealContainer& vector) const;
 
         // 求带状矩阵的逆
         // 输入:
         //     matrix, 带状矩阵
         // 输出:
         //     求逆失败抛出异常，否则返回逆矩阵
-        NODISCARD VariableMatrix Invert(const BandedMatrix& matrix) const;
+        NODISCARD VariableMatrixType Invert(const BandedMatrixType& matrix) const;
 
         /// 通过直接反转矩阵来求解2x2、3x3和4x4系统。
         /// 这避免了在小维度中高斯消除的开销。
@@ -219,7 +219,7 @@ namespace Mathematics
 
     private:
         // 线性系统求解容差。
-        // 默认 = Math<Real>::GetZeroTolerance()
+        // 默认 = MathType<Real>::GetZeroTolerance()
         Real zeroTolerance;
     };
 

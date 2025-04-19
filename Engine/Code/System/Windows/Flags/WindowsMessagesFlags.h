@@ -438,7 +438,7 @@ namespace System
         ImeKeyLast = 0x010F,
 
         InitDialog = 0x0110,
-        Command = x0111,
+        Command = 0x0111,
         SysCommand = 0x0112,
         Timer = 0x0113,
         HScroll = 0x0114,

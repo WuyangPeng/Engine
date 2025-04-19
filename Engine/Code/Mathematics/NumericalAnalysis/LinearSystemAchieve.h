@@ -38,7 +38,7 @@ Mathematics::LinearSystem<Real>::LinearSystem(Real zeroTolerance) noexcept
 template <typename Real>
 bool Mathematics::LinearSystem<Real>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) <= zeroTolerance)
+    if (MathType::GetValue(0) <= zeroTolerance)
         return true;
     else
         return false;
@@ -64,7 +64,7 @@ typename Mathematics::LinearSystem<Real>::Vector2 Mathematics::LinearSystem<Real
 
     auto det = matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
 
-    if (Math::FAbs(det) <= zeroTolerance)
+    if (MathType::FAbs(det) <= zeroTolerance)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("Solve2 失败！det为0。"s));
     }
@@ -76,22 +76,22 @@ typename Mathematics::LinearSystem<Real>::Vector2 Mathematics::LinearSystem<Real
 }
 
 template <typename Real>
-typename Mathematics::LinearSystem<Real>::Vector3 Mathematics::LinearSystem<Real>::Solve3(const Matrix3& matrix, const Vector3& vector) const
+typename Mathematics::LinearSystem<Real>::Vector3Type Mathematics::LinearSystem<Real>::Solve3(const Matrix3& matrix, const Vector3Type& vector) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-    Matrix3 invMatrix{ Vector3{ matrix[1][1] * matrix[2][2] - matrix[1][2] * matrix[2][1],
+    Matrix3 invMatrix{ Vector3Type{ matrix[1][1] * matrix[2][2] - matrix[1][2] * matrix[2][1],
                                 matrix[0][2] * matrix[2][1] - matrix[0][1] * matrix[2][2],
                                 matrix[0][1] * matrix[1][2] - matrix[0][2] * matrix[1][1] },
 
-                       Vector3{ matrix[1][2] * matrix[2][0] - matrix[1][0] * matrix[2][2],
+                       Vector3Type{ matrix[1][2] * matrix[2][0] - matrix[1][0] * matrix[2][2],
                                 matrix[0][0] * matrix[2][2] - matrix[0][2] * matrix[2][0],
                                 matrix[0][2] * matrix[1][0] - matrix[0][0] * matrix[1][2] },
 
-                       Vector3{ matrix[1][0] * matrix[2][1] - matrix[1][1] * matrix[2][0],
+                       Vector3Type{ matrix[1][0] * matrix[2][1] - matrix[1][1] * matrix[2][0],
                                 matrix[0][1] * matrix[2][0] - matrix[0][0] * matrix[2][1],
                                 matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0] } };
 
@@ -99,7 +99,7 @@ typename Mathematics::LinearSystem<Real>::Vector3 Mathematics::LinearSystem<Real
 
 #include SYSTEM_WARNING_POP
 
-    if (Math::FAbs(det) <= zeroTolerance)
+    if (MathType::FAbs(det) <= zeroTolerance)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("Solve3 失败！det为0。"s));
     }
@@ -115,7 +115,7 @@ typename Mathematics::LinearSystem<Real>::Vector3 Mathematics::LinearSystem<Real
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-    return Vector3{ invMatrix[0][0] * vector[0] + invMatrix[0][1] * vector[1] + invMatrix[0][2] * vector[2],
+    return Vector3Type{ invMatrix[0][0] * vector[0] + invMatrix[0][1] * vector[1] + invMatrix[0][2] * vector[2],
                     invMatrix[1][0] * vector[0] + invMatrix[1][1] * vector[1] + invMatrix[1][2] * vector[2],
                     invMatrix[2][0] * vector[0] + invMatrix[2][1] * vector[1] + invMatrix[2][2] * vector[2] };
 
@@ -123,7 +123,7 @@ typename Mathematics::LinearSystem<Real>::Vector3 Mathematics::LinearSystem<Real
 }
 
 template <typename Real>
-Mathematics::VariableMatrix<Real> Mathematics::LinearSystem<Real>::Inverse(const VariableMatrix& matrix) const
+Mathematics::VariableMatrix<Real> Mathematics::LinearSystem<Real>::Inverse(const VariableMatrixType& matrix) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_1(matrix.GetRowsNumber() == matrix.GetColumnsNumber(), "矩阵必须是方阵\n");
@@ -134,7 +134,7 @@ Mathematics::VariableMatrix<Real> Mathematics::LinearSystem<Real>::Inverse(const
 }
 
 template <typename Real>
-typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSystem<Real>::Solve(const VariableMatrix& matrix, const RealContainer& vector) const
+typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSystem<Real>::Solve(const VariableMatrixType& matrix, const RealContainer& vector) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -159,7 +159,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
         THROW_EXCEPTION(SYSTEM_TEXT("数组大小错误！"s));
     }
 
-    if (Math::FAbs(mainDdiagonal.at(0)) <= zeroTolerance)
+    if (MathType::FAbs(mainDdiagonal.at(0)) <= zeroTolerance)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("求解失败！"s));
     }
@@ -177,7 +177,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
         upperAmend.at(i) = upper.at(i) / mainAmend;
         const auto next = i + 1;
         mainAmend = mainDdiagonal.at(next) - lower.at(i) * upperAmend.at(i);
-        if (Math::FAbs(mainAmend) <= zeroTolerance)
+        if (MathType::FAbs(mainAmend) <= zeroTolerance)
         {
             THROW_EXCEPTION(SYSTEM_TEXT("求解失败！"s));
         }
@@ -204,7 +204,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
         THROW_EXCEPTION(SYSTEM_TEXT("数组大小错误！"s));
     }
 
-    if (Math::FAbs(mainDdiagonal) <= zeroTolerance)
+    if (MathType::FAbs(mainDdiagonal) <= zeroTolerance)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("求解失败！"s));
     }
@@ -221,7 +221,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
     {
         upperAmend.at(i) = upper / mainAmend;
         mainAmend = mainDdiagonal - lower * upperAmend.at(i);
-        if (Math::FAbs(mainAmend) <= zeroTolerance)
+        if (MathType::FAbs(mainAmend) <= zeroTolerance)
         {
             THROW_EXCEPTION(SYSTEM_TEXT("求解失败！"s));
         }
@@ -241,7 +241,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
 }
 
 template <typename Real>
-typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSystem<Real>::SolveSymmetricConjugateGradient(const VariableMatrix& matrix, const RealContainer& vector) const
+typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSystem<Real>::SolveSymmetricConjugateGradient(const VariableMatrixType& matrix, const RealContainer& vector) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -254,7 +254,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
 }
 
 template <typename Real>
-typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSystem<Real>::SolveSymmetricConjugateGradient(const SparseMatrix& matrix, const RealContainer& vector) const
+typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSystem<Real>::SolveSymmetricConjugateGradient(const SparseMatrixType& matrix, const RealContainer& vector) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -267,7 +267,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
 }
 
 template <typename Real>
-typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSystem<Real>::SolveBanded(const BandedMatrix& matrix, const RealContainer& vector) const
+typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSystem<Real>::SolveBanded(const BandedMatrixType& matrix, const RealContainer& vector) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -277,7 +277,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
 }
 
 template <typename Real>
-typename Mathematics::LinearSystem<Real>::VariableMatrix Mathematics::LinearSystem<Real>::Invert(const BandedMatrix& matrix) const
+typename Mathematics::LinearSystem<Real>::VariableMatrixType Mathematics::LinearSystem<Real>::Invert(const BandedMatrixType& matrix) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -372,25 +372,25 @@ bool Mathematics::LinearSystem<Real>::Solve(int n, int m, const RealContainer& a
 template <typename Real>
 bool Mathematics::LinearSystem<Real>::SolveTriDiagonal(int n, const RealContainer& subDiagonal, const RealContainer& diagonal, const RealContainer& superDiagonal, const RealContainer& b, RealContainer& x)
 {
-    if (Math::Approximate(diagonal.at(0), Real{}))
+    if (MathType::Approximate(diagonal.at(0), Real{}))
     {
         return false;
     }
 
     RealContainer tmp(boost::numeric_cast<size_t>(n) - 1);
     auto expr = diagonal.at(0);
-    auto invExpr = Math::GetValue(1) / expr;
+    auto invExpr = MathType::GetValue(1) / expr;
     x.at(0) = b.at(0) * invExpr;
 
     for (auto i0 = 0, i1 = 1; i1 < n; ++i0, ++i1)
     {
         tmp.at(i0) = superDiagonal.at(i0) * invExpr;
         expr = diagonal.at(i1) - subDiagonal.at(i0) * tmp.at(i0);
-        if (Math::Approximate(expr, Real{}))
+        if (MathType::Approximate(expr, Real{}))
         {
             return false;
         }
-        invExpr = Math::GetValue(1) / expr;
+        invExpr = MathType::GetValue(1) / expr;
         x.at(i1) = (b.at(i1) - subDiagonal.at(i0) * x.at(i0)) * invExpr;
     }
 
@@ -404,25 +404,25 @@ bool Mathematics::LinearSystem<Real>::SolveTriDiagonal(int n, const RealContaine
 template <typename Real>
 bool Mathematics::LinearSystem<Real>::SolveConstantTriDiagonal(int n, Real subDiagonal, Real diagonal, Real superDiagonal, const RealContainer& b, RealContainer& x)
 {
-    if (Math::Approximate(diagonal, Real{}))
+    if (MathType::Approximate(diagonal, Real{}))
     {
         return false;
     }
 
     RealContainer tmp(boost::numeric_cast<size_t>(n) - 1);
     auto expr = diagonal;
-    auto invExpr = Math::GetValue(1) / expr;
+    auto invExpr = MathType::GetValue(1) / expr;
     x.at(0) = b.at(0) * invExpr;
 
     for (auto i0 = 0, i1 = 1; i1 < n; ++i0, ++i1)
     {
         tmp.at(i0) = superDiagonal * invExpr;
         expr = diagonal - subDiagonal * tmp.at(i0);
-        if (Math::Approximate(expr, Real{}))
+        if (MathType::Approximate(expr, Real{}))
         {
             return false;
         }
-        invExpr = Math::GetValue(1) / expr;
+        invExpr = MathType::GetValue(1) / expr;
         x.at(i1) = (b.at(i1) - subDiagonal * x.at(i0)) * invExpr;
     }
 

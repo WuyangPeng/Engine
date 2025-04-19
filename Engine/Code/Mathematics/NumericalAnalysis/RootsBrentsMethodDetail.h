@@ -84,13 +84,13 @@ bool Mathematics::RootsBrentsMethod<Real>::Find(const std::function<Real(Real)>&
         auto fDiff01 = f0 - f1;
         auto fDiff02 = f0 - f2;
         auto fDiff12 = f1 - f2;
-        auto invFDiff01 = Math::GetValue(1) / fDiff01;
+        auto invFDiff01 = MathType::GetValue(1) / fDiff01;
         Real s{};
-        if (!Math::Approximate(fDiff02, Real{}) && !Math::Approximate(fDiff12, Real{}))
+        if (!MathType::Approximate(fDiff02, Real{}) && !MathType::Approximate(fDiff12, Real{}))
         {
             /// 使用逆二次插值。
-            auto infFDiff02 = Math::GetValue(1) / fDiff02;
-            auto invFDiff12 = Math::GetValue(1) / fDiff12;
+            auto infFDiff02 = MathType::GetValue(1) / fDiff02;
+            auto invFDiff12 = MathType::GetValue(1) / fDiff12;
             s = t0 * f1 * f2 * invFDiff01 * infFDiff02 -
                 t1 * f0 * f2 * invFDiff01 * invFDiff12 +
                 t2 * f0 * f1 * infFDiff02 * invFDiff12;
@@ -102,7 +102,7 @@ bool Mathematics::RootsBrentsMethod<Real>::Find(const std::function<Real(Real)>&
         }
 
         /// 计算接受或拒绝测试中所需的值。
-        auto tDiffSAvr = s - Math::GetRational(3, 4) * t0 - Math::GetRational(1, 4) * t1;
+        auto tDiffSAvr = s - MathType::GetRational(3, 4) * t0 - MathType::GetRational(1, 4) * t1;
         auto tDiffS1 = s - t1;
         const auto absTDiffS1 = std::fabs(tDiffS1);
         const auto absTDiff12 = std::fabs(t1 - t2);
@@ -118,19 +118,19 @@ bool Mathematics::RootsBrentsMethod<Real>::Find(const std::function<Real(Real)>&
         else if (prevBisected)
         {
             /// 布伦特的第一个测试，以确定是否接受插值s值。
-            currBisected = (absTDiffS1 >= Math::GetRational(1, 2) * absTDiff12) || (absTDiff12 <= stepTTolerance);
+            currBisected = (absTDiffS1 >= MathType::GetRational(1, 2) * absTDiff12) || (absTDiff12 <= stepTTolerance);
         }
         else
         {
             // 布伦特的第二次测试，以确定是否接受插值的s值。
-            currBisected = (absTDiffS1 >= Math::GetRational(1, 2) * absTDiff23) || (absTDiff23 <= stepTTolerance);
+            currBisected = (absTDiffS1 >= MathType::GetRational(1, 2) * absTDiff23) || (absTDiff23 <= stepTTolerance);
         }
 
         if (currBisected)
         {
             // 其中一个附加测试失败，因此拒绝插值的s值，而是使用平分。
-            s = Math::GetRational(1, 2) * (t0 + t1);
-            if (!Math::Approximate(s, t0) || !Math::Approximate(s, t1))
+            s = MathType::GetRational(1, 2) * (t0 + t1);
+            if (!MathType::Approximate(s, t0) || !MathType::Approximate(s, t1))
             {
                 // 数字t0和t1是连续的浮点数。
                 root = s;

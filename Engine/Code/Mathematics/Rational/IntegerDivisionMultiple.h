@@ -24,16 +24,16 @@ namespace Mathematics
     {
     public:
         using ClassType = IntegerDivisionMultiple<N>;
-        using IntegerData = IntegerData<N>;
-        using IntegerDataAnalysis = IntegerDataAnalysis<N>;
+        using IntegerDataType = IntegerData<N>;
+        using IntegerDataAnalysisType = IntegerDataAnalysis<N>;
 
     public:
-        IntegerDivisionMultiple(const IntegerData& absNumerator, const IntegerData& absDenominator);
+        IntegerDivisionMultiple(const IntegerDataType& absNumerator, const IntegerDataType& absDenominator);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD IntegerData GetQuotient() const noexcept;
-        NODISCARD IntegerData GetRemainder() const noexcept;
+        NODISCARD IntegerDataType GetQuotient() const noexcept;
+        NODISCARD IntegerDataType GetRemainder() const noexcept;
 
     private:
         void Calculate();
@@ -46,18 +46,18 @@ namespace Mathematics
         static constexpr auto high = 0xFFFF0000u;
         static constexpr auto integerCarry = 0x00010000u;
 
-        const IntegerData& absNumerator;
-        const IntegerData& absDenominator;
-        IntegerData adjustNumerator;
-        IntegerData adjustDenominator;
+        const IntegerDataType& absNumerator;
+        const IntegerDataType& absDenominator;
+        IntegerDataType adjustNumerator;
+        IntegerDataType adjustDenominator;
         int numeratorInit;
         int denominatorInit;
         int adjust;
         uint32_t firstDigit;
         uint32_t secondDigit;
         uint32_t remainderHat;
-        IntegerData quotient;
-        IntegerData remainder;
+        IntegerDataType quotient;
+        IntegerDataType remainder;
     };
 }
 

@@ -24,21 +24,21 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorSegment2Segment2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Vector2 = Vector2<Real>;
-        using Segment2 = Segment2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector2Type = Vector2<Real>;
+        using Segment2Type = Segment2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorSegment2Segment2(const Segment2& lhsSegment, const Segment2& rhsSegment, const Real dotThreshold = Math::GetZeroTolerance(), const Real intervalThreshold = Math::GetValue(0));
+        StaticFindIntersectorSegment2Segment2(const Segment2Type& lhsSegment, const Segment2Type& rhsSegment, const Real dotThreshold = MathType::GetZeroTolerance(), const Real intervalThreshold = MathType::GetValue(0));
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Segment2 GetLhsSegment() const noexcept;
-        NODISCARD Segment2 GetRhsSegment() const noexcept;
+        NODISCARD Segment2Type GetLhsSegment() const noexcept;
+        NODISCARD Segment2Type GetRhsSegment() const noexcept;
 
         // 相交测试使用线段的中心-范围形式。
-        // 如果从端点（Vector2<Real>）开始并创建 Segment2<Real>对象，
+        // 如果从端点（Vector2Type<Real>）开始并创建 Segment2<Real>对象，
         // 则到中心-范围格式的转换可能包含小的数字舍入误差。
         // 测试相交一个端点的两个线段的交集可能由于舍入误差而导致失败。
         // 为此，您可以指定一个小的正阈值，稍微放大线段的间隔。 默认值为零。
@@ -52,7 +52,7 @@ namespace Mathematics
         //          GetIntersection()返回IntersectionType::Segment。
         //          访问相交线段终点使用GetPoint(0)和GetPoint(1)。
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector2 GetPoint(int index) const;
+        NODISCARD Vector2Type GetPoint(int index) const;
 
     private:
         // 静态查找相交查询。
@@ -60,15 +60,15 @@ namespace Mathematics
 
     private:
         // 要相交的对象。
-        Segment2 lhsSegment;
-        Segment2 rhsSegment;
+        Segment2Type lhsSegment;
+        Segment2Type rhsSegment;
 
         // 相交集
         int quantity;
 
         Real intervalThreshold;
-        Vector2 point0;
-        Vector2 point1;
+        Vector2Type point0;
+        Vector2Type point1;
     };
 }
 

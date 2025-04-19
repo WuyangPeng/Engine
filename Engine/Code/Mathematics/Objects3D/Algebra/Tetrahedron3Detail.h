@@ -17,14 +17,14 @@
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
 Mathematics::Algebra::Tetrahedron3<Real>::Tetrahedron3() noexcept
-    : vertex{ Vector3{}, Vector3{ Math::GetValue(1), Math::GetValue(0), Math::GetValue(0) }, Vector3{ Math::GetValue(0), Math::GetValue(1), Math::GetValue(0) }, Vector3{ Math::GetValue(0), Math::GetValue(0), Math::GetValue(1) } }
+    : vertex{ Vector3Type{}, Vector3Type{ MathType::GetValue(1), MathType::GetValue(0), MathType::GetValue(0) }, Vector3Type{ MathType::GetValue(0), MathType::GetValue(1), MathType::GetValue(0) }, Vector3Type{ MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(1) } }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-Mathematics::Algebra::Tetrahedron3<Real>::Tetrahedron3(const Vector3& v0, const Vector3& v1, const Vector3& v2, const Vector3& v3) noexcept
+Mathematics::Algebra::Tetrahedron3<Real>::Tetrahedron3(const Vector3Type& v0, const Vector3Type& v1, const Vector3Type& v2, const Vector3Type& v3) noexcept
     : vertex{ v0, v1, v2, v3 }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -120,7 +120,7 @@ const typename Mathematics::Algebra::Tetrahedron3<Real>::VertexAugmentedType& Ma
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-typename Mathematics::Algebra::Tetrahedron3<Real>::Vector3 Mathematics::Algebra::Tetrahedron3<Real>::ComputeFaceNormal(int face) const
+typename Mathematics::Algebra::Tetrahedron3<Real>::Vector3Type Mathematics::Algebra::Tetrahedron3<Real>::ComputeFaceNormal(int face) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -136,7 +136,7 @@ typename Mathematics::Algebra::Tetrahedron3<Real>::Vector3 Mathematics::Algebra:
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-typename Mathematics::Algebra::Tetrahedron3<Real>::Vector3 Mathematics::Algebra::Tetrahedron3<Real>::ComputeEdgeNormal(int edge) const
+typename Mathematics::Algebra::Tetrahedron3<Real>::Vector3Type Mathematics::Algebra::Tetrahedron3<Real>::ComputeEdgeNormal(int edge) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -158,7 +158,7 @@ typename Mathematics::Algebra::Tetrahedron3<Real>::Vector3 Mathematics::Algebra:
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-typename Mathematics::Algebra::Tetrahedron3<Real>::Vector3 Mathematics::Algebra::Tetrahedron3<Real>::ComputeVertexNormal(int vertexIndex) const
+typename Mathematics::Algebra::Tetrahedron3<Real>::Vector3Type Mathematics::Algebra::Tetrahedron3<Real>::ComputeVertexNormal(int vertexIndex) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -220,11 +220,11 @@ typename Mathematics::Algebra::Tetrahedron3<Real>::Plane3Container Mathematics::
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-typename Mathematics::Algebra::Tetrahedron3<Real>::Vector3 Mathematics::Algebra::Tetrahedron3<Real>::ComputeCentroid() const
+typename Mathematics::Algebra::Tetrahedron3<Real>::Vector3Type Mathematics::Algebra::Tetrahedron3<Real>::ComputeCentroid() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return (vertex.at(0) + vertex.at(1) + vertex.at(2) + vertex.at(3)) * Math::GetRational(1, 4);
+    return (vertex.at(0) + vertex.at(1) + vertex.at(2) + vertex.at(3)) * MathType::GetRational(1, 4);
 }
 
 template <typename Real>

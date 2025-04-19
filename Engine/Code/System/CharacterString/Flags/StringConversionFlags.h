@@ -95,13 +95,13 @@ namespace System
 
     enum class LanguageLocale
     {
-        SystemDefault = MakeLanguageCid(gLanguageSystemDefault, EnumCastUnderlying(LocaleSort::Default)),
-        UserDefault = MakeLanguageCid(gLanguageUserDefault, EnumCastUnderlying(LocaleSort::Default)),
-        CustomDefault = MakeLanguageCid(MakeLanguageId(EnumCastUnderlying(PrimaryLanguage::Neutral), EnumCastUnderlying(SubLanguage::CustomDefault)), EnumCastUnderlying(LocaleSort::Default)),
-        CustomUnspecified = MakeLanguageCid(MakeLanguageId(EnumCastUnderlying(PrimaryLanguage::Neutral), EnumCastUnderlying(SubLanguage::CustomUnspecified)), EnumCastUnderlying(LocaleSort::Default)),
-        CustomUiDefault = MakeLanguageCid(MakeLanguageId(EnumCastUnderlying(PrimaryLanguage::Neutral), EnumCastUnderlying(SubLanguage::UICustomDefault)), EnumCastUnderlying(LocaleSort::Default)),
-        Neutral = MakeLanguageCid(MakeLanguageId(EnumCastUnderlying(PrimaryLanguage::Neutral), EnumCastUnderlying(SubLanguage::Neutral)), EnumCastUnderlying(LocaleSort::Default)),
-        Invariant = MakeLanguageCid(MakeLanguageId(EnumCastUnderlying(PrimaryLanguage::Invariant), EnumCastUnderlying(SubLanguage::Neutral)), EnumCastUnderlying(LocaleSort::Default)),
+        SystemDefault = MakeLanguageCid(gLanguageSystemDefault, 0x0),
+        UserDefault = MakeLanguageCid(gLanguageUserDefault, 0x0),
+        CustomDefault = MakeLanguageCid(MakeLanguageId(EnumCastUnderlying(PrimaryLanguage::Neutral), EnumCastUnderlying(SubLanguage::CustomDefault)), 0x0),
+        CustomUnspecified = MakeLanguageCid(MakeLanguageId(EnumCastUnderlying(PrimaryLanguage::Neutral), EnumCastUnderlying(SubLanguage::CustomUnspecified)), 0x0),
+        CustomUiDefault = MakeLanguageCid(MakeLanguageId(EnumCastUnderlying(PrimaryLanguage::Neutral), EnumCastUnderlying(SubLanguage::UICustomDefault)), 0x0),
+        Neutral = MakeLanguageCid(MakeLanguageId(EnumCastUnderlying(PrimaryLanguage::Neutral), EnumCastUnderlying(SubLanguage::Neutral)), 0x0),
+        Invariant = MakeLanguageCid(MakeLanguageId(EnumCastUnderlying(PrimaryLanguage::Invariant), EnumCastUnderlying(SubLanguage::Neutral)), 0x0),
     };
 
     enum class Compares

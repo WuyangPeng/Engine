@@ -26,8 +26,8 @@ namespace Mathematics
     public:
         using ClassType = QuaternionConstraints<Real>;
 
-        using Quaternion = Quaternion<Real>;
-        using Math = Math<Real>;
+        using QuaternionType = Quaternion<Real>;
+        using MathType = Math<Real>;
 
     public:
         QuaternionConstraints(Real minAngle, Real maxAngle) noexcept;

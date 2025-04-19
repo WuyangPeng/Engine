@@ -27,7 +27,7 @@ Mathematics::Vector3Information<Real>::Vector3Information(const ContainerType& p
       epsilon{ epsilon },
       dimension{ -1 },
       axesAlignBoundingBox{},
-      maxRange{ Math::GetValue(0) },
+      maxRange{ MathType::GetValue(0) },
       origin{},
       directionX{},
       directionY{},
@@ -40,7 +40,7 @@ Mathematics::Vector3Information<Real>::Vector3Information(const ContainerType& p
       indexMin{},
       indexMax{}
 {
-    if (points.empty() || epsilon < Math::GetValue(0))
+    if (points.empty() || epsilon < MathType::GetValue(0))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("无效输入在Vector3Information\n"s));
     }
@@ -96,13 +96,13 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 void Mathematics::Vector3Information<Real>::ComputeAxisAlignedBoundingBox()
 {
-    Vector3 min{ Math::maxReal, Math::maxReal, Math::maxReal };
-    Vector3 max{ Math::minReal, Math::minReal, Math::minReal };
+    Vector3Type min{ MathType::maxReal, MathType::maxReal, MathType::maxReal };
+    Vector3Type max{ MathType::minReal, MathType::minReal, MathType::minReal };
 
     auto pointsIndex = 0;
     for (const auto& point : points)
     {
-        for (auto directionIndex = 0u; directionIndex < Vector3::pointSize; ++directionIndex)
+        for (auto directionIndex = 0u; directionIndex < Vector3Type::pointSize; ++directionIndex)
         {
             if (point[directionIndex] < min[directionIndex])
             {
@@ -122,7 +122,7 @@ void Mathematics::Vector3Information<Real>::ComputeAxisAlignedBoundingBox()
         ++pointsIndex;
     }
 
-    axesAlignBoundingBox = AxesAlignBoundingBox3{ min, max };
+    axesAlignBoundingBox = AxesAlignBoundingBox3Type{ min, max };
 }
 
 template <typename Real>
@@ -134,10 +134,10 @@ void Mathematics::Vector3Information<Real>::DetermineMaximumRange()
 
     maxRange = maxPoint.GetX() - minPoint.GetX();
 
-    minExtreme = indexMin.at(Vector3::xIndex);
-    maxExtreme = indexMax.at(Vector3::xIndex);
+    minExtreme = indexMin.at(Vector3Type::xIndex);
+    maxExtreme = indexMax.at(Vector3Type::xIndex);
 
-    for (auto i = Vector3::yIndex; i < Vector3::pointSize; ++i)
+    for (auto i = Vector3Type::yIndex; i < Vector3Type::pointSize; ++i)
     {
         auto range = maxPoint[i] - minPoint[i];
 
@@ -179,7 +179,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::
     /// 测试向量集是否（几乎）是线段。我们需要{directionY，directionZ}来跨越directionX的正交补码。
     directionX = points.at(maxExtreme) - origin;
     directionX.Normalize(epsilon);
-    if (Math::FAbs(directionX[1]) < Math::FAbs(directionX[0]))
+    if (MathType::FAbs(directionX[1]) < MathType::FAbs(directionX[0]))
     {
         directionY[0] = -directionX[2];
         directionY[1] = Real{};
@@ -192,19 +192,19 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::
         directionY[2] = -directionX[1];
     }
     directionY.Normalize(epsilon);
-    directionZ = Vector3Tools::CrossProduct(directionX, directionY);
+    directionZ = Vector3ToolsType::CrossProduct(directionX, directionY);
 
     /// 计算点与直线的最大距离
     /// origin + t * directionX
-    auto maxDistance = Math::GetValue(0);
+    auto maxDistance = MathType::GetValue(0);
     perpendicularExtreme = minExtreme;
     auto index = 0;
     for (const auto& point : points)
     {
         const auto difference = point - origin;
-        const auto dot = Vector3Tools::DotProduct(directionX, difference);
+        const auto dot = Vector3ToolsType::DotProduct(directionX, difference);
         const auto proj = difference - dot * directionX;
-        const auto distance = Vector3Tools::GetLength(proj);
+        const auto distance = Vector3ToolsType::GetLength(proj);
 
         if (maxDistance < distance)
         {
@@ -237,16 +237,16 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::
     /// 向量v[extreme[perpendicularExtreme]]- origin 不一定垂直于directionX，
     /// 因此投影出directionX分量，使结果垂直于directionX。
     directionY = points.at(perpendicularExtreme) - origin;
-    const auto dot = Vector3Tools::DotProduct(directionX, directionY);
+    const auto dot = Vector3ToolsType::DotProduct(directionX, directionY);
     directionY -= dot * directionX;
     directionY.Normalize(epsilon);
 
     /// 我们需要directionZ来跨越{directionX，directionY}的正交补码。
-    directionZ = Vector3Tools::CrossProduct(directionX, directionY);
+    directionZ = Vector3ToolsType::CrossProduct(directionX, directionY);
 
     /// 计算点与平面的最大距离
     /// origin+t0 * directionX + t1 * directionY
-    auto maxDistance = Math::GetValue(0);
+    auto maxDistance = MathType::GetValue(0);
     auto maxSign = NumericalValueSymbol::Zero;
     tetrahedronExtreme = minExtreme;
 
@@ -254,9 +254,9 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::
     for (const auto& point : points)
     {
         const auto diff = point - origin;
-        auto distance = Vector3Tools::DotProduct(directionZ, diff);
-        const auto sign = Math::Sign(distance);
-        distance = Math::FAbs(distance);
+        auto distance = Vector3ToolsType::DotProduct(directionZ, diff);
+        const auto sign = MathType::Sign(distance);
+        distance = MathType::FAbs(distance);
         if (maxDistance < distance)
         {
             maxDistance = distance;

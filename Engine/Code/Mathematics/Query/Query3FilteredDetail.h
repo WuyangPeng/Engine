@@ -27,7 +27,7 @@ Mathematics::Query3Filtered<Real>::Query3Filtered(const VerticesType& vertices, 
 template <typename Real>
 bool Mathematics::Query3Filtered<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && Math::GetValue(0) <= uncertainty && uncertainty <= Math::GetValue(1))
+    if (ParentType::IsValid() && MathType::GetValue(0) <= uncertainty && uncertainty <= MathType::GetValue(1))
         return true;
     else
         return false;
@@ -73,18 +73,18 @@ Mathematics::PlaneQueryType Mathematics::Query3Filtered<Real>::ToPlane(const Vec
     const auto y2 = vector2.GetY() - vector0.GetY();
     const auto z2 = vector2.GetZ() - vector0.GetZ();
 
-    const auto len0 = Math::Sqrt(x0 * x0 + y0 * y0 + z0 * z0);
-    const auto len1 = Math::Sqrt(x1 * x1 + y1 * y1 + z1 * z1);
-    const auto len2 = Math::Sqrt(x2 * x2 + y2 * y2 + z2 * z2);
+    const auto len0 = MathType::Sqrt(x0 * x0 + y0 * y0 + z0 * z0);
+    const auto len1 = MathType::Sqrt(x1 * x1 + y1 * y1 + z1 * z1);
+    const auto len2 = MathType::Sqrt(x2 * x2 + y2 * y2 + z2 * z2);
 
     const auto scaledUncertainty = uncertainty * len0 * len1 * len2;
 
     const auto det = QueryDotTools<Real>::Det3(x0, y0, z0, x1, y1, z1, x2, y2, z2);
-    if (scaledUncertainty <= Math::FAbs(det))
+    if (scaledUncertainty <= MathType::FAbs(det))
     {
-        if (Math::FAbs(det) <= Math::GetZeroTolerance())
+        if (MathType::FAbs(det) <= MathType::GetZeroTolerance())
             return PlaneQueryType::OnPlane;
-        else if (Math::GetValue(0) < det)
+        else if (MathType::GetValue(0) < det)
             return PlaneQueryType::PositiveSide;
         else
             return PlaneQueryType::NegativeSide;
@@ -144,19 +144,19 @@ Mathematics::CircumsphereQueryType Mathematics::Query3Filtered<Real>::ToCircumsp
     const auto w2 = s2x * d2x + s2y * d2y + s2z * d2z;
     const auto w3 = s3x * d3x + s3y * d3y + s3z * d3z;
 
-    const auto len0 = Math::Sqrt(d0x * d0x + d0y * d0y + d0z * d0z + w0 * w0);
-    const auto len1 = Math::Sqrt(d1x * d1x + d1y * d1y + d1z * d1z + w1 * w1);
-    const auto len2 = Math::Sqrt(d2x * d2x + d2y * d2y + d2z * d2z + w2 * w2);
-    const auto len3 = Math::Sqrt(d3x * d3x + d3y * d3y + d3z * d3z + w3 * w3);
+    const auto len0 = MathType::Sqrt(d0x * d0x + d0y * d0y + d0z * d0z + w0 * w0);
+    const auto len1 = MathType::Sqrt(d1x * d1x + d1y * d1y + d1z * d1z + w1 * w1);
+    const auto len2 = MathType::Sqrt(d2x * d2x + d2y * d2y + d2z * d2z + w2 * w2);
+    const auto len3 = MathType::Sqrt(d3x * d3x + d3y * d3y + d3z * d3z + w3 * w3);
     const auto scaledUncertainty = uncertainty * len0 * len1 * len2 * len3;
 
     const auto det = QueryDotTools<Real>::Det4(d0x, d0y, d0z, w0, d1x, d1y, d1z, w1, d2x, d2y, d2z, w2, d3x, d3y, d3z, w3);
 
-    if (scaledUncertainty <= Math::FAbs(det))
+    if (scaledUncertainty <= MathType::FAbs(det))
     {
-        if (Math::FAbs(det) <= Math::GetZeroTolerance())
+        if (MathType::FAbs(det) <= MathType::GetZeroTolerance())
             return CircumsphereQueryType::OnCircumsphere;
-        else if (det < Math::GetValue(0))
+        else if (det < MathType::GetValue(0))
             return CircumsphereQueryType::Inside;
         else
             return CircumsphereQueryType::Outside;

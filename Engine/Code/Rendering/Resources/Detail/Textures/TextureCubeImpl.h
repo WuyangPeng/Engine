@@ -55,7 +55,7 @@ namespace Rendering
 
     private:
         using FloatColour = Colour<float>;
-        using TextureLevelData = TextureLevelData<2>;
+        using TextureLevelDataType = TextureLevelData<2>;
 
         static constexpr auto cubeFaceCount = System::EnumCastUnderlying(CubeFaceType::Count);
 
@@ -65,7 +65,7 @@ namespace Rendering
         NODISCARD int GetLevelDataStreamingSize() const override;
 
     private:
-        TextureLevelData textureLevelData;
+        TextureLevelDataType textureLevelData;
     };
 }
 

@@ -24,31 +24,31 @@ namespace Rendering
     {
     public:
         COPY_UNSHARED_TYPE_DECLARE(AreaLightEffectParameters);
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
 
     public:
         NODISCARD static AreaLightEffectParameters Create();
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Colour GetAmbient() const noexcept;
-        void SetAmbient(const Colour& ambient) noexcept;
-        NODISCARD Colour GetDiffuse() const noexcept;
-        void SetDiffuse(const Colour& diffuse) noexcept;
-        NODISCARD Colour GetSpecular() const noexcept;
-        void SetSpecular(const Colour& specular) noexcept;
-        NODISCARD Colour GetAttenuation() const noexcept;
-        void SetAttenuation(const Colour& attenuation) noexcept;
-        NODISCARD Colour GetPosition() const noexcept;
-        void SetPosition(const Colour& position) noexcept;
-        NODISCARD Colour GetNormal() const noexcept;
-        void SetNormal(const Colour& normal) noexcept;
-        NODISCARD Colour GetAxis0() const noexcept;
-        void SetAxis0(const Colour& axis0) noexcept;
-        NODISCARD Colour GetAxis1() const noexcept;
-        void SetAxis1(const Colour& axis1) noexcept;
-        NODISCARD Colour GetExtent() const noexcept;
-        void SetExtent(const Colour& extent) noexcept;
+        NODISCARD ColourType GetAmbient() const noexcept;
+        void SetAmbient(const ColourType& ambient) noexcept;
+        NODISCARD ColourType GetDiffuse() const noexcept;
+        void SetDiffuse(const ColourType& diffuse) noexcept;
+        NODISCARD ColourType GetSpecular() const noexcept;
+        void SetSpecular(const ColourType& specular) noexcept;
+        NODISCARD ColourType GetAttenuation() const noexcept;
+        void SetAttenuation(const ColourType& attenuation) noexcept;
+        NODISCARD ColourType GetPosition() const noexcept;
+        void SetPosition(const ColourType& position) noexcept;
+        NODISCARD ColourType GetNormal() const noexcept;
+        void SetNormal(const ColourType& normal) noexcept;
+        NODISCARD ColourType GetAxis0() const noexcept;
+        void SetAxis0(const ColourType& axis0) noexcept;
+        NODISCARD ColourType GetAxis1() const noexcept;
+        void SetAxis1(const ColourType& axis1) noexcept;
+        NODISCARD ColourType GetExtent() const noexcept;
+        void SetExtent(const ColourType& extent) noexcept;
 
         NODISCARD int GetStreamingSize() const noexcept;
 

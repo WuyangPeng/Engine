@@ -39,8 +39,8 @@ int Mathematics::SymmetricEigensolver3x3<Real>::operator()(const Real& a00, cons
     /// 计算Householder反射H0和B = H0*A*H0，
     /// 其中b02 = 0。H0 = {{c,s,0},{s,-c,0},{0,0,1}} ，其中每个内部三元组是H0的一行。
     constexpr Real zero{};
-    constexpr auto one = Math::GetValue(1);
-    constexpr auto half = Math::GetRational(1, 2);
+    constexpr auto one = MathType::GetValue(1);
+    constexpr auto half = MathType::GetRational(1, 2);
     auto isRotation = false;
     auto c = zero;
     auto s = zero;
@@ -233,7 +233,7 @@ void Mathematics::SymmetricEigensolver3x3<Real>::GetCosSin(const Real& u, const 
     }
     else
     {
-        c = Math::GetValue(-1);
+        c = MathType::GetValue(-1);
         s = Real{};
     }
 }
@@ -245,13 +245,13 @@ bool Mathematics::SymmetricEigensolver3x3<Real>::Converged(bool aggressive, cons
     if (aggressive)
     {
         /// 测试superDiagonal项是否为零。
-        return Math::Approximate(superDiagonal, Real{});
+        return MathType::Approximate(superDiagonal, Real{});
     }
     else
     {
         /// 测试超对角线项与其对角线邻居相比是否有效为零。
         const auto sum = std::fabs(diagonal0) + std::fabs(diagonal1);
-        return Math::Approximate(sum + std::fabs(superDiagonal), sum);
+        return MathType::Approximate(sum + std::fabs(superDiagonal), sum);
     }
 }
 

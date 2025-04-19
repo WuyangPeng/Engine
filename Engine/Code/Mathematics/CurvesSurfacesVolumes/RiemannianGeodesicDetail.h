@@ -23,7 +23,7 @@ Mathematics::RiemannianGeodesic<Real>::RiemannianGeodesic(int dimension)
       derivativeStep{ static_cast<Real>(0.0001) },
       subdivisions{ 7 },
       refinements{ 8 },
-      searchRadius{ Math::GetValue(1) },
+      searchRadius{ MathType::GetValue(1) },
 
       refineCallback{ nullptr },
 
@@ -39,9 +39,9 @@ Mathematics::RiemannianGeodesic<Real>::RiemannianGeodesic(int dimension)
       refine{ 0 },
       currentQuantity{ 0 },
 
-      integralStep{ (Math::GetValue(1)) / Math::GetValue(integralSamples - 1) },
-      searchStep{ (Math::GetValue(1)) / Math::GetValue(searchSamples) },
-      derivativeFactor{ Math::GetRational(1, 2) / derivativeStep }
+      integralStep{ (MathType::GetValue(1)) / MathType::GetValue(integralSamples - 1) },
+      searchStep{ (MathType::GetValue(1)) / MathType::GetValue(searchSamples) },
+      derivativeFactor{ MathType::GetRational(1, 2) / derivativeStep }
 {
     MATHEMATICS_ASSERTION_0(dimension >= 2, "维度必须至少是2。\n");
 
@@ -82,24 +82,24 @@ Real Mathematics::RiemannianGeodesic<Real>::ComputeSegmentLength(const VariableL
     VariableLengthVector<Real> temp{ dimension };
 
     auto qForm = metric.QuadraticForm(diff, diff);
-    MATHEMATICS_ASSERTION_0(qForm > Math::GetValue(0), "意外结果\n");
-    auto length = Math::Sqrt(qForm);
+    MATHEMATICS_ASSERTION_0(qForm > MathType::GetValue(0), "意外结果\n");
+    auto length = MathType::Sqrt(qForm);
 
     ComputeMetric(point1);
     qForm = metric.QuadraticForm(diff, diff);
-    MATHEMATICS_ASSERTION_0(qForm > Math::GetValue(0), "意外结果\n");
-    length += Math::Sqrt(qForm);
-    length *= Math::GetRational(1, 2);
+    MATHEMATICS_ASSERTION_0(qForm > MathType::GetValue(0), "意外结果\n");
+    length += MathType::Sqrt(qForm);
+    length *= MathType::GetRational(1, 2);
 
     const auto imax = integralSamples - 2;
     for (auto i = 1; i <= imax; ++i)
     {
-        auto t = integralStep * Math::GetValue(i);
+        auto t = integralStep * MathType::GetValue(i);
         temp = point0 + t * diff;
         ComputeMetric(temp);
         qForm = metric.QuadraticForm(diff, diff);
-        MATHEMATICS_ASSERTION_0(qForm > Math::GetValue(0), "意外结果\n");
-        length += Math::Sqrt(qForm);
+        MATHEMATICS_ASSERTION_0(qForm > MathType::GetValue(0), "意外结果\n");
+        length += MathType::Sqrt(qForm);
     }
     length *= integralStep;
 
@@ -180,7 +180,7 @@ bool Mathematics::RiemannianGeodesic<Real>::Subdivide(const VariableLengthVector
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    mid = Math::GetRational(1, 2) * (end0 + end1);
+    mid = MathType::GetRational(1, 2) * (end0 + end1);
     auto save = refineCallback;
     refineCallback = nullptr;
     const auto changed = Refine(end0, mid, end1);
@@ -222,7 +222,7 @@ bool Mathematics::RiemannianGeodesic<Real>::Refine(const VariableLengthVector<Re
     auto minIndex = 0;
     for (auto i = -searchSamples; i <= searchSamples; ++i)
     {
-        auto tRay = multiplier * Math::GetValue(i);
+        auto tRay = multiplier * MathType::GetValue(i);
         pRay = mid - tRay * gradient;
         length0 = ComputeSegmentLength(end0, pRay);
         length1 = ComputeSegmentLength(end1, pRay);
@@ -280,12 +280,12 @@ Real Mathematics::RiemannianGeodesic<Real>::ComputeSegmentCurvature(const Variab
     auto curvature = ComputeIntegrand(point0, diff);
 
     curvature += ComputeIntegrand(point1, diff);
-    curvature *= Math::GetRational(1, 2);
+    curvature *= MathType::GetRational(1, 2);
 
     const auto imax = integralSamples - 2;
     for (auto i = 1; i <= imax; ++i)
     {
-        auto t = integralStep * Math::GetValue(i);
+        auto t = integralStep * MathType::GetValue(i);
         temp = point0 + t * diff;
         curvature += ComputeIntegrand(temp, diff);
     }
@@ -321,7 +321,7 @@ Real Mathematics::RiemannianGeodesic<Real>::ComputeIntegrand(const VariableLengt
     ComputeChristoffel2();
 
     auto qForm0 = metric.QuadraticForm(der, der);
-    MATHEMATICS_ASSERTION_0(qForm0 > Math::GetValue(0), "意外结果。\n");
+    MATHEMATICS_ASSERTION_0(qForm0 > MathType::GetValue(0), "意外结果。\n");
 
     VariableMatrix<Real> mat{ dimension, dimension };
 
@@ -339,7 +339,7 @@ Real Mathematics::RiemannianGeodesic<Real>::ComputeIntegrand(const VariableLengt
         acc[k] += christoffel2.at(k).QuadraticForm(der, der);
     }
 
-    auto curvature = Math::Sqrt(metric.QuadraticForm(acc, acc));
+    auto curvature = MathType::Sqrt(metric.QuadraticForm(acc, acc));
     return curvature;
 }
 

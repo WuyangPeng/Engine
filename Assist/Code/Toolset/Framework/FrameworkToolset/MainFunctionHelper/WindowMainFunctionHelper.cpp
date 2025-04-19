@@ -18,7 +18,7 @@
 
 CLASS_INVARIANT_STUB_DEFINE(FrameworkToolset, WindowMainFunctionHelper)
 
-namespace FrameworkToolset
+namespace Framework
 {
     template class Framework::WindowMainFunctionHelper<Framework::WindowsAPIFrameBuild, Framework::WindowProcessInterface>;
 }

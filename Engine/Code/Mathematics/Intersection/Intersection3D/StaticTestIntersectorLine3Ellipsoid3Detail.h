@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>::StaticTestIntersectorLine3Ellipsoid3(const Line3& line, const Ellipsoid3& ellipsoid, const Real epsilon)
+Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>::StaticTestIntersectorLine3Ellipsoid3(const Line3Type& line, const Ellipsoid3Type& ellipsoid, const Real epsilon)
     : ParentType{ epsilon }, line{ line }, ellipsoid{ ellipsoid }, negativeThreshold{}, positiveThreshold{}
 {
     Test();
@@ -60,9 +60,9 @@ void Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>::Test()
     const auto diff = line.GetOrigin() - ellipsoid.GetCenter();
     const auto matDir = matrix * line.GetDirection();
     const auto matDiff = matrix * diff;
-    const auto a2 = Vector3Tools::DotProduct(line.GetDirection(), matDir);
-    const auto a1 = Vector3Tools::DotProduct(line.GetDirection(), matDiff);
-    const auto a0 = Vector3Tools::DotProduct(diff, matDiff) - Math::GetValue(1);
+    const auto a2 = Vector3ToolsType::DotProduct(line.GetDirection(), matDir);
+    const auto a1 = Vector3ToolsType::DotProduct(line.GetDirection(), matDiff);
+    const auto a0 = Vector3ToolsType::DotProduct(diff, matDiff) - MathType::GetValue(1);
 
     const auto discr = a1 * a1 - a0 * a2;
     if (negativeThreshold <= discr)
@@ -80,7 +80,7 @@ void Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>::SetNegativeThresho
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    if (negThreshold <= Math::GetValue(0))
+    if (negThreshold <= MathType::GetValue(0))
     {
         negativeThreshold = negThreshold;
         return;
@@ -102,7 +102,7 @@ void Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>::SetPositiveThresho
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    if (posThreshold >= Math::GetValue(0))
+    if (posThreshold >= MathType::GetValue(0))
     {
         positiveThreshold = posThreshold;
         return;

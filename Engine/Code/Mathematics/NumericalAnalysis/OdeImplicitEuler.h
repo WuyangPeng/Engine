@@ -27,9 +27,9 @@ namespace Mathematics
         using ClassType = OdeImplicitEuler<Real, UserDataType>;
         using ParentType = OdeSolver<Real, UserDataType>;
 
-        using VariableMatrix = VariableMatrix<Real>;
-        using VariableVector = VariableLengthVector<Real>;
-        using LinearSystem = LinearSystem<Real>;
+        using VariableMatrixType = VariableMatrix<Real>;
+        using VariableVectorType = VariableLengthVector<Real>;
+        using LinearSystemType = LinearSystem<Real>;
 
         using Container = typename ParentType::Container;
         using Function = typename ParentType::Function;
@@ -39,13 +39,13 @@ namespace Mathematics
         // 一次导数矩阵相对于x是DF(t,x)，n乘n矩阵。
         // 进入DF[r][c]是F[r]相对于x[c]的派生物。
         // 返回值DF(t,x)
-        using DerivativeFunction = VariableMatrix (*)(Real,  // t
-                                                      const Container&,  // x
-                                                      const UserDataType*);  // 用户定义数据
+        using DerivativeFunction = VariableMatrixType (*)(Real,  // t
+                                                          const Container&,  // x
+                                                          const UserDataType*);  // 用户定义数据
     public:
         OdeImplicitEuler(int dimension,
                          Real step,
-                         typename Function function,
+                         Function function,
                          DerivativeFunction derivativeFunction,
                          const UserDataType* userData);
 
@@ -54,13 +54,13 @@ namespace Mathematics
         NODISCARD Data Update(Real tIn, const Container& xIn) override;
 
     private:
-        void Update(const VariableMatrix& derivative);
+        void Update(const VariableMatrixType& derivative);
 
     private:
         DerivativeFunction derivativeFunction;
-        VariableMatrix derivativeFunctionMatrix;
-        VariableVector functionVector;
-        VariableMatrix identity;
+        VariableMatrixType derivativeFunctionMatrix;
+        VariableVectorType functionVector;
+        VariableMatrixType identity;
     };
 }
 

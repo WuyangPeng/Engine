@@ -46,7 +46,7 @@ namespace Rendering
 
         using BaseRendererSharedPtr = std::shared_ptr<BaseRenderer>;
 
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
 
         using FontSharedPtr = std::shared_ptr<Font>;
         using ComputeProgramSharedPtr = std::shared_ptr<ComputeProgram>;
@@ -104,11 +104,11 @@ namespace Rendering
         NODISCARD std::string GetShaderName(const std::string& name) const;
 
         /// 窗口大小变化
-        NODISCARD void Resize(int width, int height);
+        void Resize(int width, int height);
 
         /// 访问颜色，深度和模板缓冲区的当前清除参数。 颜色缓冲区是后缓冲区。
-        void SetClearColor(const Colour& clearColor) noexcept;
-        NODISCARD Colour GetClearColor() const noexcept;
+        void SetClearColor(const ColourType& clearColor) noexcept;
+        NODISCARD ColourType GetClearColor() const noexcept;
         void SetClearDepth(float clearDepth) noexcept;
         NODISCARD float GetClearDepth() const noexcept;
         void SetClearStencil(int clearStencil) noexcept;
@@ -153,7 +153,7 @@ namespace Rendering
         NODISCARD int64_t Draw(const VisualContainer& visuals);
 
         /// 绘制二维文本。
-        NODISCARD int64_t Draw(int x, int y, const Colour& color, const std::string& message);
+        NODISCARD int64_t Draw(int x, int y, const ColourType& color, const std::string& message);
 
         /// 绘制二维矩形覆盖。这对于将按钮、控件、缩略图和其他GUI对象添加到应用程序窗口非常有用。
         NODISCARD int64_t Draw(const OverlayEffectSharedPtr& overlay);

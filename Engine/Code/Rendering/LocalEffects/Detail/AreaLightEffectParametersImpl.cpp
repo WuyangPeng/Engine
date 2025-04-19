@@ -20,126 +20,126 @@ Rendering::AreaLightEffectParametersImpl::AreaLightEffectParametersImpl() noexce
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, AreaLightEffectParametersImpl)
 
-Rendering::AreaLightEffectParametersImpl::Colour Rendering::AreaLightEffectParametersImpl::GetAmbient() const noexcept
+Rendering::AreaLightEffectParametersImpl::ColourType Rendering::AreaLightEffectParametersImpl::GetAmbient() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return ambient;
 }
 
-void Rendering::AreaLightEffectParametersImpl::SetAmbient(const Colour& aAmbient) noexcept
+void Rendering::AreaLightEffectParametersImpl::SetAmbient(const ColourType& aAmbient) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     this->ambient = aAmbient;
 }
 
-Rendering::AreaLightEffectParametersImpl::Colour Rendering::AreaLightEffectParametersImpl::GetDiffuse() const noexcept
+Rendering::AreaLightEffectParametersImpl::ColourType Rendering::AreaLightEffectParametersImpl::GetDiffuse() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return diffuse;
 }
 
-void Rendering::AreaLightEffectParametersImpl::SetDiffuse(const Colour& aDiffuse) noexcept
+void Rendering::AreaLightEffectParametersImpl::SetDiffuse(const ColourType& aDiffuse) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     this->diffuse = aDiffuse;
 }
 
-Rendering::AreaLightEffectParametersImpl::Colour Rendering::AreaLightEffectParametersImpl::GetSpecular() const noexcept
+Rendering::AreaLightEffectParametersImpl::ColourType Rendering::AreaLightEffectParametersImpl::GetSpecular() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return specular;
 }
 
-void Rendering::AreaLightEffectParametersImpl::SetSpecular(const Colour& aSpecular) noexcept
+void Rendering::AreaLightEffectParametersImpl::SetSpecular(const ColourType& aSpecular) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     this->specular = aSpecular;
 }
 
-Rendering::AreaLightEffectParametersImpl::Colour Rendering::AreaLightEffectParametersImpl::GetAttenuation() const noexcept
+Rendering::AreaLightEffectParametersImpl::ColourType Rendering::AreaLightEffectParametersImpl::GetAttenuation() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return attenuation;
 }
 
-void Rendering::AreaLightEffectParametersImpl::SetAttenuation(const Colour& aAttenuation) noexcept
+void Rendering::AreaLightEffectParametersImpl::SetAttenuation(const ColourType& aAttenuation) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     this->attenuation = aAttenuation;
 }
 
-Rendering::AreaLightEffectParametersImpl::Colour Rendering::AreaLightEffectParametersImpl::GetPosition() const noexcept
+Rendering::AreaLightEffectParametersImpl::ColourType Rendering::AreaLightEffectParametersImpl::GetPosition() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return position;
 }
 
-void Rendering::AreaLightEffectParametersImpl::SetPosition(const Colour& aPosition) noexcept
+void Rendering::AreaLightEffectParametersImpl::SetPosition(const ColourType& aPosition) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     this->position = aPosition;
 }
 
-Rendering::AreaLightEffectParametersImpl::Colour Rendering::AreaLightEffectParametersImpl::GetNormal() const noexcept
+Rendering::AreaLightEffectParametersImpl::ColourType Rendering::AreaLightEffectParametersImpl::GetNormal() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return normal;
 }
 
-void Rendering::AreaLightEffectParametersImpl::SetNormal(const Colour& aNormal) noexcept
+void Rendering::AreaLightEffectParametersImpl::SetNormal(const ColourType& aNormal) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     this->normal = aNormal;
 }
 
-Rendering::AreaLightEffectParametersImpl::Colour Rendering::AreaLightEffectParametersImpl::GetAxis0() const noexcept
+Rendering::AreaLightEffectParametersImpl::ColourType Rendering::AreaLightEffectParametersImpl::GetAxis0() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return axis0;
 }
 
-void Rendering::AreaLightEffectParametersImpl::SetAxis0(const Colour& aAxis0) noexcept
+void Rendering::AreaLightEffectParametersImpl::SetAxis0(const ColourType& aAxis0) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     this->axis0 = aAxis0;
 }
 
-Rendering::AreaLightEffectParametersImpl::Colour Rendering::AreaLightEffectParametersImpl::GetAxis1() const noexcept
+Rendering::AreaLightEffectParametersImpl::ColourType Rendering::AreaLightEffectParametersImpl::GetAxis1() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return axis1;
 }
 
-void Rendering::AreaLightEffectParametersImpl::SetAxis1(const Colour& aAxis1) noexcept
+void Rendering::AreaLightEffectParametersImpl::SetAxis1(const ColourType& aAxis1) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     this->axis1 = aAxis1;
 }
 
-Rendering::AreaLightEffectParametersImpl::Colour Rendering::AreaLightEffectParametersImpl::GetExtent() const noexcept
+Rendering::AreaLightEffectParametersImpl::ColourType Rendering::AreaLightEffectParametersImpl::GetExtent() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return extent;
 }
 
-void Rendering::AreaLightEffectParametersImpl::SetExtent(const Colour& aExtent) noexcept
+void Rendering::AreaLightEffectParametersImpl::SetExtent(const ColourType& aExtent) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 

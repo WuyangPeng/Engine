@@ -19,7 +19,7 @@
 #include "Mathematics/Objects2D/Circle2Detail.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorCircle2Circle2<Real>::StaticFindIntersectorCircle2Circle2(const Circle2& lhsCircle, const Circle2& rhsCircle, const Real epsilon)
+Mathematics::StaticFindIntersectorCircle2Circle2<Real>::StaticFindIntersectorCircle2Circle2(const Circle2Type& lhsCircle, const Circle2Type& rhsCircle, const Real epsilon)
     : ParentType{ epsilon }, lhsCircle{ lhsCircle }, rhsCircle{ rhsCircle }, point{}
 {
     Find();
@@ -51,12 +51,12 @@ void Mathematics::StaticFindIntersectorCircle2Circle2<Real>::Find()
     // 如果 |R0-R1| < |U| < |R0+R1|，那么两个圆相交有两个交点
 
     auto centerDifference = rhsCircle.GetCenter() - lhsCircle.GetCenter();
-    auto centerDifferenceSquaredLength = Vector2Tools::GetLengthSquared(centerDifference);
+    auto centerDifferenceSquaredLength = Vector2ToolsType::GetLengthSquared(centerDifference);
     auto lhsRadius = lhsCircle.GetRadius();
     auto rhsRadius = rhsCircle.GetRadius();
     auto lhsRadiusMinusRhsRadius = lhsRadius - rhsRadius;
     auto epsilon = ParentType::GetEpsilon();
-    if (centerDifferenceSquaredLength < epsilon && Math::FAbs(lhsRadiusMinusRhsRadius) < epsilon)
+    if (centerDifferenceSquaredLength < epsilon && MathType::FAbs(lhsRadiusMinusRhsRadius) < epsilon)
     {
         // 圆基本相同。
         this->SetIntersectionType(IntersectionType::Other);
@@ -82,25 +82,25 @@ void Mathematics::StaticFindIntersectorCircle2Circle2<Real>::Find()
     {
         if (lhsRadiusMinusRhsRadiusSquared + epsilon < centerDifferenceSquaredLength)
         {
-            auto ordinal = Math::GetRational(1, 2) * ((lhsRadius * lhsRadius - rhsRadius * rhsRadius) / centerDifferenceSquaredLength + Math::GetValue(1));
+            auto ordinal = MathType::GetRational(1, 2) * ((lhsRadius * lhsRadius - rhsRadius * rhsRadius) / centerDifferenceSquaredLength + MathType::GetValue(1));
             auto amendmentCenter = lhsCircle.GetCenter() + ordinal * centerDifference;
 
             // 理论上，discriminant是非负的。
             // 然而，数值四舍五入误差可能使其略负。将其截断为零。
             auto discriminant = lhsRadius * lhsRadius / centerDifferenceSquaredLength - ordinal * ordinal;
-            if (discriminant < Math::GetValue(0))
+            if (discriminant < MathType::GetValue(0))
             {
-                discriminant = Math::GetValue(0);
+                discriminant = MathType::GetValue(0);
             }
-            auto discriminantSqrt = Math::Sqrt(discriminant);
-            const auto perp = Vector2Tools::GetPerp(centerDifference);
+            auto discriminantSqrt = MathType::Sqrt(discriminant);
+            const auto perp = Vector2ToolsType::GetPerp(centerDifference);
 
             auto lhsPoint = amendmentCenter - discriminantSqrt * perp;
             auto rhsPoint = amendmentCenter + discriminantSqrt * perp;
 
-            if (Vector2Tools::Approximate(lhsPoint, rhsPoint, epsilon))
+            if (Vector2ToolsType::Approximate(lhsPoint, rhsPoint, epsilon))
             {
-                point.emplace_back((lhsPoint + rhsPoint) / Math::GetValue(2));
+                point.emplace_back((lhsPoint + rhsPoint) / MathType::GetValue(2));
             }
             else
             {

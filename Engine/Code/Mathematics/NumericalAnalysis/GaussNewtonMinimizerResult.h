@@ -23,15 +23,15 @@ namespace Mathematics
     public:
         using ClassType = GaussNewtonMinimizerResult<Real>;
 
-        using VariableLengthVector = VariableLengthVector<Real>;
+        using VariableLengthVectorType = VariableLengthVector<Real>;
 
     public:
         GaussNewtonMinimizerResult() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD VariableLengthVector GetMinLocation() const;
-        void SetMinLocation(const VariableLengthVector& aMinLocation);
+        NODISCARD VariableLengthVectorType GetMinLocation() const;
+        void SetMinLocation(const VariableLengthVectorType& aMinLocation);
 
         NODISCARD Real GetMinError() const noexcept;
         void SetMinError(Real aMinError) noexcept;
@@ -50,7 +50,7 @@ namespace Mathematics
         void SetConverged(bool aConverged) noexcept;
 
     private:
-        VariableLengthVector minLocation;
+        VariableLengthVectorType minLocation;
         Real minError;
         Real minErrorDifference;
         Real minUpdateLength;

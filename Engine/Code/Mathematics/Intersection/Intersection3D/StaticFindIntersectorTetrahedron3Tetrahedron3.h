@@ -24,31 +24,31 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorTetrahedron3Tetrahedron3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Tetrahedron3 = Tetrahedron3<Real>;
-        using Plane3 = Plane3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
-        using IntersectionContainer = std::vector<Tetrahedron3>;
+        using Vector3Type = Vector3<Real>;
+        using Tetrahedron3Type = Tetrahedron3<Real>;
+        using Plane3Type = Plane3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
+        using IntersectionContainer = std::vector<Tetrahedron3Type>;
 
     public:
-        StaticFindIntersectorTetrahedron3Tetrahedron3(const Tetrahedron3& tetrahedron0, const Tetrahedron3& tetrahedron1, const Real epsilon = Math::GetZeroTolerance());
+        StaticFindIntersectorTetrahedron3Tetrahedron3(const Tetrahedron3Type& tetrahedron0, const Tetrahedron3Type& tetrahedron1, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Tetrahedron3 GetTetrahedron0() const noexcept;
-        NODISCARD Tetrahedron3 GetTetrahedron1() const noexcept;
+        NODISCARD Tetrahedron3Type GetTetrahedron0() const noexcept;
+        NODISCARD Tetrahedron3Type GetTetrahedron1() const noexcept;
 
         NODISCARD IntersectionContainer GetIntersection() const;
 
     private:
         void Find();
 
-        NODISCARD static IntersectionContainer SplitAndDecompose(const Tetrahedron3& tetra, const Plane3& plane, const IntersectionContainer& inside);
+        NODISCARD static IntersectionContainer SplitAndDecompose(const Tetrahedron3Type& tetra, const Plane3Type& plane, const IntersectionContainer& inside);
 
     private:
-        Tetrahedron3 tetrahedron0;
-        Tetrahedron3 tetrahedron1;
+        Tetrahedron3Type tetrahedron0;
+        Tetrahedron3Type tetrahedron1;
 
         IntersectionContainer intersectionContainer;
     };

@@ -29,7 +29,7 @@ void Mathematics::PolynomialSamplesPower<Real>::Calculate(const Samples& samples
 {
     for (auto samplesIndex = 0; samplesIndex < numSamples; ++samplesIndex)
     {
-        power(samplesIndex, 0) = Math::GetValue(1);
+        power(samplesIndex, 0) = MathType::GetValue(1);
         for (auto degreeIndex = 1; degreeIndex < numDegree; ++degreeIndex)
         {
             power(samplesIndex, degreeIndex) = samples.at(samplesIndex) * power(samplesIndex, degreeIndex - 1);

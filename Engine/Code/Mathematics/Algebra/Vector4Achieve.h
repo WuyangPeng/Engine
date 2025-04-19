@@ -79,10 +79,10 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector4<Real>::IsZero(Real
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (Math::FAbs(x) <= epsilon &&
-        Math::FAbs(y) <= epsilon &&
-        Math::FAbs(z) <= epsilon &&
-        Math::FAbs(w) <= epsilon)
+    if (MathType::FAbs(x) <= epsilon &&
+        MathType::FAbs(y) <= epsilon &&
+        MathType::FAbs(z) <= epsilon &&
+        MathType::FAbs(w) <= epsilon)
     {
         return true;
     }
@@ -98,7 +98,7 @@ void Mathematics::Vector4<Real>::ZeroOut() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    SetCoordinate(Math::GetValue(0), Math::GetValue(0), Math::GetValue(0), Math::GetValue(0));
+    SetCoordinate(MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0));
 }
 
 template <typename Real>
@@ -215,12 +215,12 @@ void Mathematics::Vector4<Real>::ProjectionNormalization(Real epsilon) noexcept(
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    if (epsilon <= Math::FAbs(w))
+    if (epsilon <= MathType::FAbs(w))
     {
         x /= w;
         y /= w;
         z /= w;
-        w = Math::GetValue(1);
+        w = MathType::GetValue(1);
     }
     else
     {
@@ -337,7 +337,7 @@ Mathematics::Vector4<Real>& Mathematics::Vector4<Real>::operator/=(Real rhs) noe
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    if (Math::GetZeroTolerance() < Math::FAbs(rhs))
+    if (MathType::GetZeroTolerance() < MathType::FAbs(rhs))
     {
         x /= rhs;
         y /= rhs;
@@ -369,8 +369,8 @@ Real Mathematics::Vector4<Real>::GetMaxAbsComp() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto maxAbsComp0 = std::max(Math::FAbs(GetX()), Math::FAbs(GetY()));
-    const auto maxAbsComp1 = std::max(Math::FAbs(GetZ()), Math::FAbs(GetW()));
+    const auto maxAbsComp0 = std::max(MathType::FAbs(GetX()), MathType::FAbs(GetY()));
+    const auto maxAbsComp1 = std::max(MathType::FAbs(GetZ()), MathType::FAbs(GetW()));
     const auto maxAbsComp = std::max(maxAbsComp0, maxAbsComp1);
 
     return maxAbsComp;

@@ -18,7 +18,7 @@
 #include "Mathematics/Intersection/Flags/ContactSide.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::DynamicFindIntersectorTriangle3Box3(const Triangle3& triangle, const Box3& box, Real tMax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::DynamicFindIntersectorTriangle3Box3(const Triangle3Type& triangle, const Box3Type& box, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon }, triangle{ triangle }, box{ box }, point{}
 {
     Find();
@@ -66,12 +66,12 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::Find()
     auto relVelocity = rhsVelocity - lhsVelocity;
 
     // 测试三角形法线
-    using EdgeType = std::array<Vector3, 3>;
+    using EdgeType = std::array<Vector3Type, 3>;
     EdgeType edge{ triangle.GetVertex(1) - triangle.GetVertex(0),
                    triangle.GetVertex(2) - triangle.GetVertex(1),
                    triangle.GetVertex(0) - triangle.GetVertex(2) };
-    const auto triangleNorm = Vector3Tools::CrossProduct(edge.at(0), edge.at(1));
-    this->SetContactTime(Math::GetValue(0));
+    const auto triangleNorm = Vector3ToolsType::CrossProduct(edge.at(0), edge.at(1));
+    this->SetContactTime(MathType::GetValue(0));
 
     const FindIntersectorAxis<Real> intersector{ triangleNorm, triangle, box, relVelocity, tMax };
     auto tLast = intersector.GetTLast();
@@ -109,11 +109,11 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::Find()
         }
 
         // 测试轴是否平行于三角形法线。 测试为：sin(Angle(normal,axis)) < epsilon
-        auto triangleNormDotAxis = Vector3Tools::DotProduct(triangleNorm, axis);
-        auto triangleNormDotTriangleNorm = Vector3Tools::GetLengthSquared(triangleNorm);
-        auto axisDotAxis = Vector3Tools::GetLengthSquared(axis);
-        auto sinValue = Math::Sqrt(Math::FAbs(Math::GetValue(1) - triangleNormDotAxis * triangleNormDotAxis / (triangleNormDotTriangleNorm * axisDotAxis)));
-        if (sinValue < Math::GetZeroTolerance())
+        auto triangleNormDotAxis = Vector3ToolsType::DotProduct(triangleNorm, axis);
+        auto triangleNormDotTriangleNorm = Vector3ToolsType::GetLengthSquared(triangleNorm);
+        auto axisDotAxis = Vector3ToolsType::GetLengthSquared(axis);
+        auto sinValue = MathType::Sqrt(MathType::FAbs(MathType::GetValue(1) - triangleNormDotAxis * triangleNormDotAxis / (triangleNormDotTriangleNorm * axisDotAxis)));
+        if (sinValue < MathType::GetZeroTolerance())
         {
             coplanar = i;
         }
@@ -126,7 +126,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::Find()
         {
             for (auto i1 = 0; i1 < 3; ++i1)
             {
-                const auto axis = Vector3Tools::CrossProduct(edge.at(i0), box.GetAxis(i1));
+                const auto axis = Vector3ToolsType::CrossProduct(edge.at(i0), box.GetAxis(i1));
                 const FindIntersectorAxis<Real> findIntersectorAxis{ axis, triangle, box, relVelocity, tMax };
                 tLast = findIntersectorAxis.GetTLast();
                 triangleContact = findIntersectorAxis.GetCfgFinal0();
@@ -148,7 +148,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::Find()
         // 测试三角形穿过盒轴。
         for (auto i = 0; i < 3; ++i)
         {
-            const auto axis = Vector3Tools::CrossProduct(edge.at(i), triangleNorm);
+            const auto axis = Vector3ToolsType::CrossProduct(edge.at(i), triangleNorm);
             const FindIntersectorAxis<Real> findIntersectorAxis{ axis, triangle, box, relVelocity, tMax };
             tLast = findIntersectorAxis.GetTLast();
             triangleContact = findIntersectorAxis.GetCfgFinal0();
@@ -168,7 +168,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::Find()
     // 测试向量穿过盒面。
     for (auto i = 0; i < 3; ++i)
     {
-        const auto axis = Vector3Tools::CrossProduct(relVelocity, box.GetAxis(i));
+        const auto axis = Vector3ToolsType::CrossProduct(relVelocity, box.GetAxis(i));
 
         const FindIntersectorAxis<Real> findIntersectorAxis{ axis, triangle, box, relVelocity, tMax };
         tLast = findIntersectorAxis.GetTLast();
@@ -185,7 +185,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::Find()
         }
     }
 
-    if (contactTime < Math::GetValue(0) || side == ContactSide::None)
+    if (contactTime < MathType::GetValue(0) || side == ContactSide::None)
     {
         this->SetContactTime(contactTime);
         this->SetIntersectionType(IntersectionType::Empty);

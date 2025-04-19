@@ -95,9 +95,9 @@ namespace Mathematics
     public:
         using ClassType = Cone<N, Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector = Algebra::Vector<N, Real>;
-        using Ray = Ray<N, Real>;
+        using RayType = Ray<N, Real>;
         using Vector2 = Algebra::Vector<2, Real>;
         using Vector3 = Algebra::Vector<3, Real>;
         using Vector2Container = std::vector<Vector2>;
@@ -114,21 +114,21 @@ namespace Mathematics
         Cone() noexcept requires(N == 3);
 
         /// 创建一个具有指定顶点、轴方向、角度和高度地无限圆锥体
-        Cone(const Ray& ray, Real angle) noexcept;
+        Cone(const RayType& ray, Real angle) noexcept;
 
         /// 创建一个具有指定顶点、轴方向、角度和正最小高度地无限截锥。
         /// 最大高度为+infinity。如果指定的最小高度为0，则相当于调用无限圆锥体的构造函数。
-        Cone(const Ray& ray, Real angle, Real minHeight) noexcept;
+        Cone(const RayType& ray, Real angle, Real minHeight) noexcept;
 
         /// 使用指定的所有参数创建有限圆锥体或圆锥体的截头体。
         /// 如果指定最小高度为0，则会得到一个有限的圆锥体。
         /// 如果指定一个正的最小高度，则会得到一个圆锥体的截头体。
-        Cone(const Ray& ray, Real angle, Real minHeight, Real maxHeight) noexcept;
+        Cone(const RayType& ray, Real angle, Real minHeight, Real maxHeight) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Ray GetRay() const noexcept;
-        void SetRay(const Ray& aRay) noexcept;
+        NODISCARD RayType GetRay() const noexcept;
+        void SetRay(const RayType& aRay) noexcept;
 
         NODISCARD Real GetAngle() const noexcept;
 
@@ -184,7 +184,7 @@ namespace Mathematics
 
     private:
         /// 圆锥体轴方向（射线方向）必须是单位长度。
-        Ray ray;
+        RayType ray;
 
         /// 角度必须在(0,pi/2).内。其他成员是从角度派生的，
         /// 以避免在几何查询中调用三角函数（为了速度）。

@@ -27,13 +27,13 @@ namespace Mathematics
 
         using ClassType = Tetrahedron3<Real>;
 
-        using Math = Math<Real>;
-        using Plane3 = Plane3<Real>;
-        using Vector3 = Vector3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using ContainerType = std::vector<Vector3>;
+        using MathType = Math<Real>;
+        using Plane3Type = Plane3<Real>;
+        using Vector3Type = Vector3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using ContainerType = std::vector<Vector3Type>;
         using IndicesType = std::vector<int>;
-        using PlaneContainerType = std::vector<Plane3>;
+        using PlaneContainerType = std::vector<Plane3Type>;
 
     public:
         // 该四面体被表示为四个顶点的数组：V0，V1，V2和V3。
@@ -44,17 +44,17 @@ namespace Mathematics
         //   面 2 = <V[0],V[3],V[2]>
         //   面 3 = <V[1],V[2],V[3]>
 
-        Tetrahedron3(const Vector3& vertex0,
-                     const Vector3& vertex1,
-                     const Vector3& vertex2,
-                     const Vector3& vertex3) noexcept;
+        Tetrahedron3(const Vector3Type& vertex0,
+                     const Vector3Type& vertex1,
+                     const Vector3Type& vertex2,
+                     const Vector3Type& vertex3) noexcept;
 
         explicit Tetrahedron3(const ContainerType& container);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector3 GetVertex(int index) const;
-        void SetVertex(int index, const Vector3& aVertex);
+        NODISCARD Vector3Type GetVertex(int index) const;
+        void SetVertex(int index, const Vector3Type& aVertex);
 
         // 获取顶点索引在指定的面。
         NODISCARD static IndicesType GetFaceIndices(int face);
@@ -64,12 +64,12 @@ namespace Mathematics
         // 平面索引是同前面的GetFaceIndices返回的索引相同。
         NODISCARD PlaneContainerType GetPlanes() const;
 
-        NODISCARD Tetrahedron3 GetMove(Real t, const Vector3& velocity) const;
+        NODISCARD Tetrahedron3 GetMove(Real t, const Vector3Type& velocity) const;
 
     private:
         constexpr static auto vertexSize = 4;
 
-        using ArrayType = std::array<Vector3, vertexSize>;
+        using ArrayType = std::array<Vector3Type, vertexSize>;
 
     private:
         ArrayType vertex;

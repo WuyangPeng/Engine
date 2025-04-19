@@ -37,7 +37,7 @@ bool Network::MultipleMessageStreamingSave<Index, Network::MultipleMessageContai
 #endif  // OPEN_CLASS_INVARIANT
 
 template <int Index, typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-void Network::MultipleMessageStreamingSave<Index, Network::MultipleMessageContainer<E, ByteType, Types...>>::Save(const MultipleMessageContainer& container, MessageTarget& target) const
+void Network::MultipleMessageStreamingSave<Index, Network::MultipleMessageContainer<E, ByteType, Types...>>::Save(const MultipleMessageContainerType& container, MessageTarget& target) const
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -64,7 +64,7 @@ bool Network::MultipleMessageStreamingSave<1, Network::MultipleMessageContainer<
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-void Network::MultipleMessageStreamingSave<1, Network::MultipleMessageContainer<E, ByteType, Types...>>::Save(const MultipleMessageContainer& container, MessageTarget& target) const
+void Network::MultipleMessageStreamingSave<1, Network::MultipleMessageContainer<E, ByteType, Types...>>::Save(const MultipleMessageContainerType& container, MessageTarget& target) const
 {
     NETWORK_CLASS_IS_VALID_9;
 

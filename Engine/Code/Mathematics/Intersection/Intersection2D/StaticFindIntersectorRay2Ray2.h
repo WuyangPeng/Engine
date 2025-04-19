@@ -24,18 +24,18 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorRay2Ray2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Vector2 = Vector2<Real>;
-        using Ray2 = Ray2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector2Type = Vector2<Real>;
+        using Ray2Type = Ray2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorRay2Ray2(const Ray2& lhsRay, const Ray2& rhsRay, const Real dotThreshold = Math::GetZeroTolerance());
+        StaticFindIntersectorRay2Ray2(const Ray2Type& lhsRay, const Ray2Type& rhsRay, const Real dotThreshold = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Ray2 GetLhsRay() const noexcept;
-        NODISCARD Ray2 GetRhsRay() const noexcept;
+        NODISCARD Ray2Type GetLhsRay() const noexcept;
+        NODISCARD Ray2Type GetRhsRay() const noexcept;
 
         // 相交集。让 q = GetQuantity()。情况是：
         //   q = 0: 射线不相交， GetIntersection() 返回IntersectionType::Empty。
@@ -50,20 +50,20 @@ namespace Mathematics
         //          访问相交射点原点使用GetPoint(0)。
 
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector2 GetPoint(int index) const;
+        NODISCARD Vector2Type GetPoint(int index) const;
 
     private:
         void Find();
 
     private:
         // 要相交的对象。
-        Ray2 lhsRay;
-        Ray2 rhsRay;
+        Ray2Type lhsRay;
+        Ray2Type rhsRay;
 
         // 相交集
         int quantity;
-        Vector2 point0;
-        Vector2 point1;
+        Vector2Type point0;
+        Vector2Type point1;
     };
 }
 

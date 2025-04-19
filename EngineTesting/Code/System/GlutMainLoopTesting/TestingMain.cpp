@@ -10,6 +10,6 @@
 #include "System/GlutMainLoopTesting/TestingHelper.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 MAIN_FUNCTION(GlutMainLoopTesting, TestingHelper)

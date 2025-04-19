@@ -25,33 +25,33 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorLine3Capsule3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Line3 = Line3<Real>;
-        using Capsule3 = Capsule3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Line3Type = Line3<Real>;
+        using Capsule3Type = Capsule3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorLine3Capsule3(const Line3& line, const Capsule3& capsule, const Real epsilon = Math::GetZeroTolerance());
+        StaticFindIntersectorLine3Capsule3(const Line3Type& line, const Capsule3Type& capsule, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Line3 GetLine() const noexcept;
-        NODISCARD Capsule3 GetCapsule() const noexcept;
+        NODISCARD Line3Type GetLine() const noexcept;
+        NODISCARD Capsule3Type GetCapsule() const noexcept;
 
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
 
     private:
         void Find();
 
     private:
-        Line3 line;
-        Capsule3 capsule;
+        Line3Type line;
+        Capsule3Type capsule;
 
         int quantity;
-        Vector3 point0;
-        Vector3 point1;
+        Vector3Type point0;
+        Vector3Type point1;
 
     public:
         // ”…IntersectorRay3Capsule3∫ÕIntersectorSegment3Capsule3π≤œÌ°£
@@ -62,7 +62,7 @@ namespace Mathematics
             Real parameter1;
         };
 
-        NODISCARD static FindShared Find(const Vector3& origin, const Vector3& direction, const Capsule3& capsule);
+        NODISCARD static FindShared Find(const Vector3Type& origin, const Vector3Type& direction, const Capsule3Type& capsule);
     };
 }
 

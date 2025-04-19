@@ -12,6 +12,8 @@
 
 #include "Mathematics/MathematicsDll.h"
 
+#include <type_traits>
+
 namespace Mathematics
 {
     template <typename Real>
@@ -30,8 +32,8 @@ namespace Mathematics
         NODISCARD int GetPointIndex() const noexcept;
         NODISCARD Real GetProjection() const noexcept;
 
-        NODISCARD void SetPointIndex(int aPointIndex) noexcept;
-        NODISCARD void SetProjection(Real aProjection) noexcept;
+        void SetPointIndex(int aPointIndex) noexcept;
+        void SetProjection(Real aProjection) noexcept;
 
     private:
         int pointIndex;

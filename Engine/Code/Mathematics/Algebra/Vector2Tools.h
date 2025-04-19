@@ -29,56 +29,56 @@ namespace Mathematics
     public:
         using ClassType = Vector2Tools<Real>;
 
-        using Vector2 = Vector2<Real>;
-        using Vector3 = Vector3<Real>;
-        using Math = Math<Real>;
-        using Vector2Orthonormalize = Vector2Orthonormalize<Real>;
-        using Vector2OrthonormalBasis = Vector2OrthonormalBasis<Real>;
-        using AxesAlignBoundingBox2 = AxesAlignBoundingBox2<Real>;
-        using ContainerType = std::vector<Vector2>;
+        using Vector2Type = Vector2<Real>;
+        using Vector3Type = Vector3<Real>;
+        using MathType = Math<Real>;
+        using Vector2OrthonormalizeType = Vector2Orthonormalize<Real>;
+        using Vector2OrthonormalBasisType = Vector2OrthonormalBasis<Real>;
+        using AxesAlignBoundingBox2Type = AxesAlignBoundingBox2<Real>;
+        using ContainerType = std::vector<Vector2Type>;
 
     public:
-        NODISCARD static bool Approximate(const Vector2& lhs, const Vector2& rhs, Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        NODISCARD static bool Approximate(const Vector2Type& lhs, const Vector2Type& rhs, Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        NODISCARD static Real GetRobustLength(const Vector2& vector);
-        NODISCARD static Real GetLength(const Vector2& vector) noexcept(gAssert < 3 || gMathematicsAssert < 3);
-        NODISCARD static Real GetLengthSquared(const Vector2& vector) noexcept;
-        NODISCARD static Real Distance(const Vector2& lhs, const Vector2& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3);
-        NODISCARD static Real DistanceSquared(const Vector2& lhs, const Vector2& rhs) noexcept;
-        NODISCARD static Real DotProduct(const Vector2& lhs, const Vector2& rhs) noexcept;
+        NODISCARD static Real GetRobustLength(const Vector2Type& vector);
+        NODISCARD static Real GetLength(const Vector2Type& vector) noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD static Real GetLengthSquared(const Vector2Type& vector) noexcept;
+        NODISCARD static Real Distance(const Vector2Type& lhs, const Vector2Type& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD static Real DistanceSquared(const Vector2Type& lhs, const Vector2Type& rhs) noexcept;
+        NODISCARD static Real DotProduct(const Vector2Type& lhs, const Vector2Type& rhs) noexcept;
 
         // 即DotPerp
-        NODISCARD static Real PseudoCrossProduct(const Vector2& lhs, const Vector2& rhs) noexcept;
+        NODISCARD static Real PseudoCrossProduct(const Vector2Type& lhs, const Vector2Type& rhs) noexcept;
 
-        NODISCARD static Vector2 ParallelVectorLhsToRhs(const Vector2& lhs, const Vector2& rhs, Real epsilon = Math::GetZeroTolerance());
-        NODISCARD static Vector2 ApeakVectorLhsToRhs(const Vector2& lhs, const Vector2& rhs, Real epsilon = Math::GetZeroTolerance());
-        NODISCARD static Real GetVectorIncludedAngle(const Vector2& lhs, const Vector2& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD static Vector2Type ParallelVectorLhsToRhs(const Vector2Type& lhs, const Vector2Type& rhs, Real epsilon = MathType::GetZeroTolerance());
+        NODISCARD static Vector2Type ApeakVectorLhsToRhs(const Vector2Type& lhs, const Vector2Type& rhs, Real epsilon = MathType::GetZeroTolerance());
+        NODISCARD static Real GetVectorIncludedAngle(const Vector2Type& lhs, const Vector2Type& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 垂直线相关
         // 返回 (y,-x).
-        NODISCARD static Vector2 GetPerp(const Vector2& vector) noexcept;
+        NODISCARD static Vector2Type GetPerp(const Vector2Type& vector) noexcept;
 
         // 返回 (y,-x) / sqrt(x * x + y * y).
-        NODISCARD static Vector2 GetUnitPerp(const Vector2& vector, Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        NODISCARD static Vector2Type GetUnitPerp(const Vector2Type& vector, Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // 返回 DotPerp((lhs.x,lhs.y),(rhs.x,rhs.y)) = lhs.x * rhs.y - lhs.y * rhs.x.
-        NODISCARD static Real DotPerp(const Vector2& lhs, const Vector2& rhs) noexcept;
+        NODISCARD static Real DotPerp(const Vector2Type& lhs, const Vector2Type& rhs) noexcept;
 
         // 计算点的轴对齐包围盒。
-        NODISCARD static AxesAlignBoundingBox2 ComputeExtremes(const ContainerType& vectors);
+        NODISCARD static AxesAlignBoundingBox2Type ComputeExtremes(const ContainerType& vectors);
 
         // Gram-Schmidt正交化。
         // 以线性无关的向量U和V，来计算一个正交组（单位长度，相互垂直）。
-        NODISCARD static Vector2Orthonormalize Orthonormalize(const Vector2& lhs, const Vector2& rhs, Real epsilon = Math::GetZeroTolerance());
+        NODISCARD static Vector2OrthonormalizeType Orthonormalize(const Vector2Type& lhs, const Vector2Type& rhs, Real epsilon = MathType::GetZeroTolerance());
 
         // 输入值nonzeroVector（V）必须是一个非零向量。
         // 返回值是一个标准正交基{U，V}。
         // 返回的V为通过此函数正则化的nonzeroVector。
         // 如果你已知V是单位长度，使用U = GetPerp(V)。
-        NODISCARD static Vector2OrthonormalBasis GenerateOrthonormalBasis(const Vector2& nonzeroVector, Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        NODISCARD static Vector2OrthonormalBasisType GenerateOrthonormalBasis(const Vector2Type& nonzeroVector, Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        NODISCARD static Vector3 LiftHomogeneous(const Vector2& vector, Real last) noexcept;
-        NODISCARD static Vector3 Lift(const Vector2& vector, int inject, Real value);
+        NODISCARD static Vector3Type LiftHomogeneous(const Vector2Type& vector, Real last) noexcept;
+        NODISCARD static Vector3Type Lift(const Vector2Type& vector, int inject, Real value);
     };
 
     using Vector2ToolsF = Vector2Tools<float>;

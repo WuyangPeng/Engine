@@ -23,10 +23,10 @@ Mathematics::Box3<Real>::Box3() noexcept
 }
 
 template <typename Real>
-Mathematics::Box3<Real>::Box3(const Vector3& center,
-                              const Vector3& axis0,
-                              const Vector3& axis1,
-                              const Vector3& axis2,
+Mathematics::Box3<Real>::Box3(const Vector3Type& center,
+                              const Vector3Type& axis0,
+                              const Vector3Type& axis1,
+                              const Vector3Type& axis2,
                               const Real extent0,
                               const Real extent1,
                               const Real extent2,
@@ -52,7 +52,7 @@ bool Mathematics::Box3<Real>::IsValid() const noexcept
             -epsilon <= extent[0] &&
             -epsilon <= extent[1] &&
             -epsilon <= extent[2] &&
-            Math::GetValue(0) <= epsilon)
+            MathType::GetValue(0) <= epsilon)
 
     #include SYSTEM_WARNING_POP
         {
@@ -142,7 +142,7 @@ Mathematics::Vector3<Real> Mathematics::Box3<Real>::GetAxis2() const noexcept
 }
 
 template <typename Real>
-typename Mathematics::Box3<Real>::Vector3 Mathematics::Box3<Real>::GetAxis(int index) const
+typename Mathematics::Box3<Real>::Vector3Type Mathematics::Box3<Real>::GetAxis(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -205,7 +205,7 @@ Real Mathematics::Box3<Real>::GetEpsilon() const noexcept
 }
 
 template <typename Real>
-Mathematics::Box3<Real> Mathematics::Box3<Real>::GetMove(Real t, const Vector3& velocity) const
+Mathematics::Box3<Real> Mathematics::Box3<Real>::GetMove(Real t, const Vector3Type& velocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -220,10 +220,10 @@ Mathematics::Box3<Real> Mathematics::Box3<Real>::GetMove(Real t, const Vector3& 
 }
 
 template <typename Real>
-void Mathematics::Box3<Real>::Set(const Vector3& newCenter,
-                                  const Vector3& axis0,
-                                  const Vector3& axis1,
-                                  const Vector3& axis2,
+void Mathematics::Box3<Real>::Set(const Vector3Type& newCenter,
+                                  const Vector3Type& axis0,
+                                  const Vector3Type& axis1,
+                                  const Vector3Type& axis2,
                                   Real extent0,
                                   Real extent1,
                                   Real extent2) noexcept

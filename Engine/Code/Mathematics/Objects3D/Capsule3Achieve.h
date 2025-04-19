@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::Capsule3<Real>::Capsule3(const Segment3& segment, Real radius) noexcept
+Mathematics::Capsule3<Real>::Capsule3(const Segment3Type& segment, Real radius) noexcept
     : segment{ segment }, radius{ radius }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;

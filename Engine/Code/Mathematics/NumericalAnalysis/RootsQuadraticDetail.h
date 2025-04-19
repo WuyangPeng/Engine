@@ -36,13 +36,13 @@ template <typename T>
 int Mathematics::RootsQuadratic<T>::Solve(bool useBisection, const T& g0, const T& g1, const T& g2, PolynomialRootContainer& roots) requires(std::is_floating_point_v<T> || std::is_same_v<T, Rational>)
 {
     /// 测试度数是否小于2。
-    if (Math::Approximate(g2, T{}))
+    if (MathType::Approximate(g2, T{}))
     {
-        return RootsLinear::Solve(g0, g1, roots);
+        return RootsLinearType::Solve(g0, g1, roots);
     }
 
     /// 测试零值根。
-    if (Math::Approximate(g0, T{}))
+    if (MathType::Approximate(g0, T{}))
     {
         return HasZeroValuedRoots(g1, g2, roots);
     }
@@ -67,7 +67,7 @@ template <typename T>
 int Mathematics::RootsQuadratic<T>::Solve(bool useBisection, const T& m0, const T& m1, PolynomialRootContainer& roots) requires(std::is_floating_point_v<T> || std::is_same_v<T, Rational>)
 {
     /// 测试零值根。
-    if (Math::Approximate(m0, T{}))
+    if (MathType::Approximate(m0, T{}))
     {
         return HasZeroValuedRoots(m1, roots);
     }
@@ -119,14 +119,14 @@ int Mathematics::RootsQuadratic<T>::ComputeDepressedRoots(bool useBisection, con
 template <typename T>
 int Mathematics::RootsQuadratic<T>::HasZeroValuedRoots(const T& g1, const T& g2, PolynomialRootContainer& roots)
 {
-    if (Math::Approximate(g1, T{}))
+    if (MathType::Approximate(g1, T{}))
     {
         roots.at(0) = { T{}, 2 };
         return 1;
     }
     else
     {
-        auto numRoots = RootsLinear::Solve(g1, g2, roots);
+        auto numRoots = RootsLinearType::Solve(g1, g2, roots);
         roots.at(numRoots++) = { T{}, 1 };
         std::sort(roots.begin(), roots.begin() + numRoots);
         return numRoots;
@@ -136,14 +136,14 @@ int Mathematics::RootsQuadratic<T>::HasZeroValuedRoots(const T& g1, const T& g2,
 template <typename T>
 int Mathematics::RootsQuadratic<T>::HasZeroValuedRoots(const T& m1, PolynomialRootContainer& roots)
 {
-    if (Math::Approximate(m1, T{}))
+    if (MathType::Approximate(m1, T{}))
     {
         roots.at(0) = { T{}, 2 };
         return 1;
     }
     else
     {
-        auto numRoots = RootsLinear::Solve(m1, roots);
+        auto numRoots = RootsLinearType::Solve(m1, roots);
         roots.at(numRoots++) = { T{}, 1 };
         std::sort(roots.begin(), roots.begin() + numRoots);
         return numRoots;
@@ -166,7 +166,20 @@ void Mathematics::RootsQuadratic<T>::ComputeClassifiers(const Rational& rM0, con
 }
 
 template <typename T>
-int Mathematics::RootsQuadratic<T>::ComputeDepressedRootsBisection(const Rational& rD0, RationalPolynomialRootContainer& rRoots) requires(std::is_arithmetic_v<T>)
+int Mathematics::RootsQuadratic<T>::ComputeDepressedRootsBisection(const Rational& rD0, RationalPolynomialRootContainer& rRoots)
+{
+    if constexpr (std::is_arithmetic_v<T>)
+    {
+        return ComputeDepressedRootsBisection0(rD0, rRoots);
+    }
+    else
+    {
+        return ComputeDepressedRootsBisection1(rD0, rRoots);
+    }
+}
+
+template <typename T>
+int Mathematics::RootsQuadratic<T>::ComputeDepressedRootsBisection0(const Rational& rD0, RationalPolynomialRootContainer& rRoots) requires(std::is_arithmetic_v<T>)
 {
     const auto signD0 = rD0.GetSign();
     if (signD0 > 0)
@@ -186,7 +199,7 @@ int Mathematics::RootsQuadratic<T>::ComputeDepressedRootsBisection(const Rationa
     /// F(x)的柯西界为b = max{1,|d_0|}$。
     /// 使用区间 [-b,b]上的平分来估计根。
     auto d0 = static_cast<T>(rD0);
-    auto b = std::max(Math::GetValue(1), std::fabs(d0));
+    auto b = std::max(MathType::GetValue(1), std::fabs(d0));
     auto f = [&d0](T x) noexcept {
         return Fma(x, x, d0);
     };
@@ -203,7 +216,7 @@ int Mathematics::RootsQuadratic<T>::ComputeDepressedRootsBisection(const Rationa
 }
 
 template <typename T>
-int Mathematics::RootsQuadratic<T>::ComputeDepressedRootsBisection(const Rational& rD0, RationalPolynomialRootContainer& rRoots) requires(!std::is_arithmetic_v<T>)
+int Mathematics::RootsQuadratic<T>::ComputeDepressedRootsBisection1(const Rational& rD0, RationalPolynomialRootContainer& rRoots) requires(!std::is_arithmetic_v<T>)
 {
     const auto signD0 = rD0.GetSign();
     if (signD0 > 0)

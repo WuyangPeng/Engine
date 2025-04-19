@@ -36,9 +36,9 @@ namespace CoreTools
         void SetValue(const std::string& aValue);
 
     public:
-        using GetType = PropertyGetExternal<ClassType, const std::string&, &GetValue>;
-        using SetType = PropertySetExternal<ClassType, const std::string&, &SetValue>;
-        using GetSetType = PropertyGetSetExternal<ClassType, const std::string&, &GetValue, const std::string&, &SetValue>;
+        using GetType = PropertyGetExternal<ClassType, const std::string&, &ClassType::GetValue>;
+        using SetType = PropertySetExternal<ClassType, const std::string&, &ClassType::SetValue>;
+        using GetSetType = PropertyGetSetExternal<ClassType, const std::string&, &ClassType::GetValue, const std::string&, &ClassType::SetValue>;
 
         GetType getType;
         SetType setType;

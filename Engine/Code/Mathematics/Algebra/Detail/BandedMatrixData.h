@@ -27,7 +27,7 @@ namespace Mathematics
     public:
         using ClassType = BandedMatrixData<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using ContainerType = std::vector<Real>;
 
     public:

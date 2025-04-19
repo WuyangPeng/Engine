@@ -17,7 +17,7 @@
 
 CLASS_INVARIANT_STUB_DEFINE(FrameworkToolset, AndroidMainFunctionHelper)
 
-namespace FrameworkToolset
+namespace Framework
 {
     template class Framework::AndroidMainFunctionHelper<Framework::AndroidFrameBuild, Framework::AndroidProcessInterface>;
 }

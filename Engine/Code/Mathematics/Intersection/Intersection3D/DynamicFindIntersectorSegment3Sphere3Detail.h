@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorSegment3Sphere3<Real>::DynamicFindIntersectorSegment3Sphere3(const Segment3& segment, const Sphere3& sphere, Real tMax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorSegment3Sphere3<Real>::DynamicFindIntersectorSegment3Sphere3(const Segment3Type& segment, const Sphere3Type& sphere, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon }, segment{ segment }, sphere{ sphere }, quantity{}, point0{}, point1{}, segmentParameter0{}, segmentParameter1{}
 {
     Find();
@@ -60,7 +60,7 @@ void Mathematics::DynamicFindIntersectorSegment3Sphere3<Real>::Find()
     StaticFindIntersectorSegment3Sphere3<Real> intersector{ segment, sphere };
     if (intersector.IsIntersection())
     {
-        this->SetContactTime(Math::GetValue(0));
+        this->SetContactTime(MathType::GetValue(0));
         this->SetIntersectionType(IntersectionType::Other);
         if (intersector.GetQuantity() == 1)
         {
@@ -85,16 +85,16 @@ void Mathematics::DynamicFindIntersectorSegment3Sphere3<Real>::Find()
     const Capsule3<Real> capsule{ segment, sphere.GetRadius() };
 
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
-    auto relSpeed = Vector3Tools::GetLength(relVelocity);
+    auto relSpeed = Vector3ToolsType::GetLength(relVelocity);
 
     // 单位长度向量
     relVelocity.Normalize();
-    const Segment3 path{ (Math::GetRational(1, 2)) * this->GetTMax() * relSpeed, sphere.GetCenter() + (Math::GetRational(1, 2)) * this->GetTMax() * relSpeed * relVelocity, relVelocity };
+    const Segment3Type path{ (MathType::GetRational(1, 2)) * this->GetTMax() * relSpeed, sphere.GetCenter() + (MathType::GetRational(1, 2)) * this->GetTMax() * relSpeed * relVelocity, relVelocity };
 
     StaticFindIntersectorSegment3Capsule3<Real> staticFindIntersectorSegment3Capsule3{ path, capsule };
     if (!staticFindIntersectorSegment3Capsule3.IsIntersection())
     {
-        this->SetContactTime(Math::GetValue(0));
+        this->SetContactTime(MathType::GetValue(0));
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
@@ -109,10 +109,10 @@ void Mathematics::DynamicFindIntersectorSegment3Sphere3<Real>::Find()
 
     auto moveCenter = sphere.GetCenter() + this->GetContactTime() * this->GetRhsVelocity();
     auto moveOrigin = segment.GetCenterPoint() + this->GetContactTime() * this->GetLhsVelocity();
-    auto origin = Vector3Tools::DotProduct(segment.GetDirection(), moveOrigin);
+    auto origin = Vector3ToolsType::DotProduct(segment.GetDirection(), moveOrigin);
     auto negEnd = origin - segment.GetExtent();
     auto posEnd = origin + segment.GetExtent();
-    auto center = Vector3Tools::DotProduct(segment.GetDirection(), moveCenter);
+    auto center = Vector3ToolsType::DotProduct(segment.GetDirection(), moveCenter);
 
     if (center < negEnd)
     {

@@ -24,7 +24,7 @@ Mathematics::RationalVector2<IntSize>::RationalVector2() noexcept
 }
 
 template <int IntSize>
-Mathematics::RationalVector2<IntSize>::RationalVector2(const RationalVector& rhs) noexcept
+Mathematics::RationalVector2<IntSize>::RationalVector2(const RationalVectorType& rhs) noexcept
     : tuple{ rhs }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -41,7 +41,7 @@ Mathematics::RationalVector2<IntSize>::RationalVector2(const Rational& x, const 
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <int IntSize>
-Mathematics::RationalVector2<IntSize>& Mathematics::RationalVector2<IntSize>::operator=(const RationalVector& rhs) noexcept
+Mathematics::RationalVector2<IntSize>& Mathematics::RationalVector2<IntSize>::operator=(const RationalVectorType& rhs) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 

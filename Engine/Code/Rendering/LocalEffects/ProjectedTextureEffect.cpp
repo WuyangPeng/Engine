@@ -47,9 +47,9 @@ Rendering::ProjectedTextureEffect::ProjectedTextureEffect(ProgramFactory& factor
                   material,
                   lighting,
                   geometry,
-                  Rendering::GetStreamSize<Colour>() * 4,
-                  Rendering::GetStreamSize<Colour>() * 4,
-                  Rendering::GetStreamSize<Colour>() * 2 },
+                  Rendering::GetStreamSize<ColourType>() * 4,
+                  Rendering::GetStreamSize<ColourType>() * 4,
+                  Rendering::GetStreamSize<ColourType>() * 2 },
       impl{ texture, filter, mode0, mode1, Rendering::GetStreamSize<Matrix4>() }
 {
     ClassType::UpdateMaterialConstant();

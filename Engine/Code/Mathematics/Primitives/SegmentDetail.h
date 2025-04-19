@@ -18,7 +18,7 @@
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::Segment<N, Real>::Segment() noexcept requires(N == 2)
-    : p{ Vector{ Math::GetValue(-1), Math::GetValue(0) }, Vector{ Math::GetValue(1), Math::GetValue(0) } }
+    : p{ Vector{ MathType::GetValue(-1), MathType::GetValue(0) }, Vector{ MathType::GetValue(1), MathType::GetValue(0) } }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -26,7 +26,7 @@ Mathematics::Segment<N, Real>::Segment() noexcept requires(N == 2)
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::Segment<N, Real>::Segment() noexcept requires(N == 3)
-    : p{ Vector{ Math::GetValue(-1), Math::GetValue(0), Math::GetValue(0) }, Vector{ Math::GetValue(1), Math::GetValue(0), Math::GetValue(0) } }
+    : p{ Vector{ MathType::GetValue(-1), MathType::GetValue(0), MathType::GetValue(0) }, Vector{ MathType::GetValue(1), MathType::GetValue(0), MathType::GetValue(0) } }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -82,9 +82,9 @@ void Mathematics::Segment<N, Real>::GetCenteredForm(Vector& center, Vector& dire
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    center = Math::GetRational(1, 2) * (p.at(0) + p.at(1));
+    center = MathType::GetRational(1, 2) * (p.at(0) + p.at(1));
     direction = p.at(1) - p.at(0);
-    extent = Math::GetRational(1, 2) * Normalize(direction);
+    extent = MathType::GetRational(1, 2) * Normalize(direction);
 }
 
 template <int N, typename Real>

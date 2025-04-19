@@ -122,12 +122,12 @@ void Mathematics::PolynomialFitPowersData<Real, S>::SetScale(int index, Real aSc
 
     if (index == size - 1)
     {
-        invTwoWScale = Math::GetRational(1, 2) / scale.at(index);
+        invTwoWScale = MathType::GetRational(1, 2) / scale.at(index);
     }
 }
 
 template <typename Real, int S>
-void Mathematics::PolynomialFitPowersData<Real, S>::Solve(const VariableMatrix& matrix, const VariableLengthVector& vector)
+void Mathematics::PolynomialFitPowersData<Real, S>::Solve(const VariableMatrixType& matrix, const VariableLengthVectorType& vector)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 

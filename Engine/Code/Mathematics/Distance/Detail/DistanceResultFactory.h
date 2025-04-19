@@ -24,8 +24,8 @@ namespace Mathematics
     public:
         using ClassType = DistanceResultFactory<Real, Vector>;
 
-        using DistanceResultImpl = DistanceResultImpl<Real, Vector>;
-        using DistanceResultSharedPtr = std::shared_ptr<DistanceResultImpl>;
+        using DistanceResultImplType = DistanceResultImpl<Real, Vector>;
+        using DistanceResultSharedPtr = std::shared_ptr<DistanceResultImplType>;
         using ClosestPoints = std::vector<Vector>;
 
     public:

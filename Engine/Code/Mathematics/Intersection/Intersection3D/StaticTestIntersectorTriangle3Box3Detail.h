@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorTriangle3Box3<Real>::StaticTestIntersectorTriangle3Box3(const Triangle3& triangle, const Box3& box, const Real epsilon)
+Mathematics::StaticTestIntersectorTriangle3Box3<Real>::StaticTestIntersectorTriangle3Box3(const Triangle3Type& triangle, const Box3Type& box, const Real epsilon)
     : ParentType{ epsilon }, triangle{ triangle }, box{ box }
 {
     Test();
@@ -56,12 +56,12 @@ Mathematics::Box3<Real> Mathematics::StaticTestIntersectorTriangle3Box3<Real>::G
 template <typename Real>
 void Mathematics::StaticTestIntersectorTriangle3Box3<Real>::Test()
 {
-    std::array<Vector3, 3> edge{ triangle.GetVertex(1) - triangle.GetVertex(0),
-                                 triangle.GetVertex(2) - triangle.GetVertex(0),
-                                 Vector3{} };
+    std::array<Vector3Type, 3> edge{ triangle.GetVertex(1) - triangle.GetVertex(0),
+                                     triangle.GetVertex(2) - triangle.GetVertex(0),
+                                     Vector3Type{} };
 
-    auto d = Vector3Tools::CrossProduct(edge.at(0), edge.at(1));
-    auto min0 = Vector3Tools::DotProduct(d, triangle.GetVertex(0));
+    auto d = Vector3ToolsType::CrossProduct(edge.at(0), edge.at(1));
+    auto min0 = Vector3ToolsType::DotProduct(d, triangle.GetVertex(0));
     auto max0 = min0;
     auto result = TestIntersectorAxis<Real>::GetProjection(d, box);
     auto min1 = result.first;
@@ -78,7 +78,7 @@ void Mathematics::StaticTestIntersectorTriangle3Box3<Real>::Test()
         result = TestIntersectorAxis<Real>::GetProjection(d, triangle);
         min0 = result.first;
         max0 = result.second;
-        auto ddc = Vector3Tools::DotProduct(d, box.GetCenter());
+        auto ddc = Vector3ToolsType::DotProduct(d, box.GetCenter());
         min1 = ddc - box.GetExtent(i);
         max1 = ddc + box.GetExtent(i);
         if (max1 < min0 || max0 < min1)
@@ -93,7 +93,7 @@ void Mathematics::StaticTestIntersectorTriangle3Box3<Real>::Test()
     {
         for (int i1 = 0; i1 < 3; ++i1)
         {
-            d = Vector3Tools::CrossProduct(edge.at(i0), box.GetAxis(i1));
+            d = Vector3ToolsType::CrossProduct(edge.at(i0), box.GetAxis(i1));
             result = TestIntersectorAxis<Real>::GetProjection(d, triangle);
             min0 = result.first;
             max0 = result.second;

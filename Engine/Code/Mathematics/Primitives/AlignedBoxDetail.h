@@ -18,7 +18,7 @@
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::AlignedBox<N, Real>::AlignedBox() noexcept requires(N == 2)
-    : min{ Math::GetValue(-1), Math::GetValue(-1) }, max{ Math::GetValue(1), Math::GetValue(1) }
+    : min{ MathType::GetValue(-1), MathType::GetValue(-1) }, max{ MathType::GetValue(1), MathType::GetValue(1) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -26,7 +26,7 @@ Mathematics::AlignedBox<N, Real>::AlignedBox() noexcept requires(N == 2)
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::AlignedBox<N, Real>::AlignedBox() noexcept requires(N == 3)
-    : min{ Math::GetValue(-1), Math::GetValue(-1), Math::GetValue(-1) }, max{ Math::GetValue(1), Math::GetValue(1), Math::GetValue(1) }
+    : min{ MathType::GetValue(-1), MathType::GetValue(-1), MathType::GetValue(-1) }, max{ MathType::GetValue(1), MathType::GetValue(1), MathType::GetValue(1) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -111,14 +111,14 @@ void Mathematics::AlignedBox<N, Real>::Set(const Vector& aMin, const Vector& aMa
 
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
-typename Mathematics::AlignedBox<N, Real>::AlignedBoxCentered Mathematics::AlignedBox<N, Real>::GetCenteredForm() const
+typename Mathematics::AlignedBox<N, Real>::AlignedBoxCenteredType Mathematics::AlignedBox<N, Real>::GetCenteredForm() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const auto center = (max + min) * Math::GetRational(1, 2);
-    const auto extent = (max - min) * Math::GetRational(1, 2);
+    const auto center = (max + min) * MathType::GetRational(1, 2);
+    const auto extent = (max - min) * MathType::GetRational(1, 2);
 
-    return AlignedBoxCentered{ center, extent };
+    return AlignedBoxCenteredType{ center, extent };
 }
 
 template <int N, typename Real>

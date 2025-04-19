@@ -17,7 +17,7 @@
 #include "Mathematics/Intersection/Intersection3D/IntersectorUtility3Detail.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::DynamicFindIntersectorHalfspace3Box3(const Plane3& halfSpace, const Box3& box, Real tMax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::DynamicFindIntersectorHalfspace3Box3(const Plane3Type& halfSpace, const Box3Type& box, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon }, halfSpace{ halfSpace }, box{ box }, point{}
 {
     Find();
@@ -73,12 +73,12 @@ Mathematics::Vector3<Real> Mathematics::DynamicFindIntersectorHalfspace3Box3<Rea
 template <typename Real>
 void Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::Find()
 {
-    this->SetContactTime(Math::GetValue(0));
+    this->SetContactTime(MathType::GetValue(0));
 
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
     const auto cfg = FindIntersectorAxis<Real>::GetConfiguration(halfSpace.GetNormal(), box);
-    const TestIntersectorAxis<Real> testIntersectorAxis{ halfSpace.GetNormal(), relVelocity, -Math::maxReal, halfSpace.GetConstant(), cfg.GetMin(), cfg.GetMax(), this->GetTMax() };
+    const TestIntersectorAxis<Real> testIntersectorAxis{ halfSpace.GetNormal(), relVelocity, -MathType::maxReal, halfSpace.GetConstant(), cfg.GetMin(), cfg.GetMax(), this->GetTMax() };
 
     auto contactTime = testIntersectorAxis.GetTFirst();
 
@@ -90,7 +90,7 @@ void Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::Find()
         return;
     }
 
-    if (Math::Approximate(contactTime, Math::GetValue(0)))
+    if (MathType::Approximate(contactTime, MathType::GetValue(0)))
     {
         // 现在相交。
         this->SetContactTime(contactTime);

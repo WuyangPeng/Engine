@@ -30,7 +30,7 @@
 #include "Mathematics/Query/Query2Detail.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::StaticFindIntersectorTriangle3Triangle3(const Triangle3& lhsTriangle, const Triangle3& rhsTriangle, bool reportCoplanarIntersections, const Real epsilon)
+Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::StaticFindIntersectorTriangle3Triangle3(const Triangle3Type& lhsTriangle, const Triangle3Type& rhsTriangle, bool reportCoplanarIntersections, const Real epsilon)
     : ParentType{ epsilon }, triangle0{ lhsTriangle }, triangle1{ rhsTriangle }, reportCoplanarIntersections{ reportCoplanarIntersections }, point{}
 {
     Find();
@@ -42,7 +42,7 @@ template <typename Real>
 void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::Find()
 {
     // 获取m_LhsTriangle的平面
-    const Plane3 lhsPlane0{ triangle0 };
+    const Plane3Type lhsPlane0{ triangle0 };
 
     // 计算三角形m_RhsTriangle顶点到平面lhsPlane0的有符号距离。使用epsilon-thick测试。
     const TrianglePlaneRelations<Real> rhsTrianglePlaneRelations{ triangle1, lhsPlane0, this->GetEpsilon() };
@@ -149,7 +149,7 @@ bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IsValid() const
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::Triangle3 Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetLhsTriangle() const noexcept
+typename Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::Triangle3Type Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetLhsTriangle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -157,7 +157,7 @@ typename Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::Triangle3 M
 }
 
 template <typename Real>
-typename Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::Triangle3 Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetRhsTriangle() const noexcept
+typename Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::Triangle3Type Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetRhsTriangle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -181,14 +181,14 @@ Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorTriangle3Triangle3<
 }
 
 template <typename Real>
-void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::ContainsPoint(const Triangle3& triangle, const Plane3& plane, const Vector3& vector3)
+void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::ContainsPoint(const Triangle3Type& triangle, const Plane3Type& plane, const Vector3Type& vector3)
 {
     /// 生成平面的坐标系。 传入三角形的顶点为<V0,V1,V2>。
     /// 输入平面的单位长度法向为N，输入点为P。选择V0作为平面的原点。 坐标轴方向是两个单位长度向量U0和U1，
     /// 构造为{ U0，U1，N } 是一个正交集。 平面中的任何点Q均可写为Q = V0 + x0 * U0 + x1 * U1。
     ///  坐标计算为x0 = Dot(U0,Q - V0)和x1 = Dot(U1,Q - V0)。
 
-    const auto vector3OrthonormalBasis = Vector3Tools::GenerateComplementBasis(plane.GetNormal());
+    const auto vector3OrthonormalBasis = Vector3ToolsType::GenerateComplementBasis(plane.GetNormal());
     const auto uVector = vector3OrthonormalBasis.GetUVector();
     const auto vVector = vector3OrthonormalBasis.GetVVector();
 
@@ -198,14 +198,14 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::ContainsPoint(c
     auto vertex2MinusVertex0 = triangle.GetVertex(2) - triangle.GetVertex(0);
 
     // P - V0的平面表示。.
-    const Vector2<Real> planar{ Vector3Tools::DotProduct(uVector, pointMinusVertex0), Vector3Tools::DotProduct(vVector, pointMinusVertex0) };
+    const Vector2<Real> planar{ Vector3ToolsType::DotProduct(uVector, pointMinusVertex0), Vector3ToolsType::DotProduct(vVector, pointMinusVertex0) };
 
     using Triangle = std::vector<Vector2<Real>>;
 
     /// 三角形<V0-V0,V1-V0,V2-V0>的平面表示。
     Triangle triangleVector{ Vector2<Real>::GetZero(),
-                             Vector2<Real>{ Vector3Tools::DotProduct(uVector, vertex1MinusVertex0), Vector3Tools::DotProduct(vVector, vertex1MinusVertex0) },
-                             Vector2<Real>{ Vector3Tools::DotProduct(uVector, vertex2MinusVertex0), Vector3Tools::DotProduct(vVector, vertex2MinusVertex0) } };
+                             Vector2<Real>{ Vector3ToolsType::DotProduct(uVector, vertex1MinusVertex0), Vector3ToolsType::DotProduct(vVector, vertex1MinusVertex0) },
+                             Vector2<Real>{ Vector3ToolsType::DotProduct(uVector, vertex2MinusVertex0), Vector3ToolsType::DotProduct(vVector, vertex2MinusVertex0) } };
 
     /// 测试P-V0是否在三角形<0,V1-V0,V2-V0>中。
     if (Query2<Real>{ triangleVector }.ToTriangle(planar, 0, 1, 2) != TriangleQueryType::Outside)
@@ -217,20 +217,20 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::ContainsPoint(c
 }
 
 template <typename Real>
-void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegment(const Plane3& plane, const Triangle3& triangle, const Vector3& end0, const Vector3& end1)
+void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegment(const Plane3Type& plane, const Triangle3Type& triangle, const Vector3Type& end0, const Vector3Type& end1)
 {
     /// 计算三角形顶点的二维表示以及相对于三角形平面的线段端点。 然后计算2D空间中的交点。
 
     /// 将三角形投影到与平面法线最对齐的坐标平面上。
     auto maxNormal = 0;
-    auto x = Math::FAbs(plane.GetNormal().GetX());
-    auto y = Math::FAbs(plane.GetNormal().GetY());
+    auto x = MathType::FAbs(plane.GetNormal().GetX());
+    auto y = MathType::FAbs(plane.GetNormal().GetY());
     if (x < y)
     {
         maxNormal = 1;
         x = y;
     }
-    y = Math::FAbs(plane.GetNormal().GetZ());
+    y = MathType::FAbs(plane.GetNormal().GetZ());
     if (x < y)
     {
         maxNormal = 2;
@@ -313,10 +313,10 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegme
     // 取消投影相交线段。
     if (maxNormal == 0)
     {
-        Real invNormalX = (Math::GetValue(1)) / plane.GetNormal().GetX();
+        Real invNormalX = (MathType::GetValue(1)) / plane.GetNormal().GetX();
         for (auto i = 0; i < quantity; ++i)
         {
-            Vector3 vector3{ Math::GetValue(0), intersector.at(i).GetX(), intersector.at(i).GetY() };
+            Vector3 vector3{ MathType::GetValue(0), intersector.at(i).GetX(), intersector.at(i).GetY() };
 
             vector3.SetX(invNormalX * (plane.GetConstant() - plane.GetNormal().GetY() * vector3.GetY() - plane.GetNormal().GetZ() * vector3.GetZ()));
 
@@ -325,10 +325,10 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegme
     }
     else if (maxNormal == 1)
     {
-        Real invNormalY = (Math::GetValue(1)) / plane.GetNormal().GetY();
+        Real invNormalY = (MathType::GetValue(1)) / plane.GetNormal().GetY();
         for (auto i = 0; i < quantity; ++i)
         {
-            Vector3 vector3{ intersector.at(i).GetX(), intersector.at(i).GetY(), Math::GetValue(0) };
+            Vector3 vector3{ intersector.at(i).GetX(), intersector.at(i).GetY(), MathType::GetValue(0) };
 
             vector3.SetZ(invNormalY * (plane.GetConstant() - plane.GetNormal().GetX() * vector3.GetX() - plane.GetNormal().GetZ() * vector3.GetZ()));
 
@@ -337,10 +337,10 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegme
     }
     else
     {
-        Real invNormalZ = (Math::GetValue(1)) / plane.GetNormal().GetZ();
+        Real invNormalZ = (MathType::GetValue(1)) / plane.GetNormal().GetZ();
         for (auto i = 0; i < quantity; ++i)
         {
-            Vector3 vector3{ intersector.at(i).GetX(), intersector.at(i).GetY(), Math::GetValue(0) };
+            Vector3 vector3{ intersector.at(i).GetX(), intersector.at(i).GetY(), MathType::GetValue(0) };
 
             vector3.SetZ(invNormalZ * (plane.GetConstant() - plane.GetNormal().GetX() * vector3.GetX() - plane.GetNormal().GetY() * vector3.GetY()));
 
@@ -350,18 +350,18 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegme
 }
 
 template <typename Real>
-void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetCoplanarIntersection(const Plane3& plane, const Triangle3& lhsTriangle, const Triangle3& rhsTriangle)
+void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetCoplanarIntersection(const Plane3Type& plane, const Triangle3Type& lhsTriangle, const Triangle3Type& rhsTriangle)
 {
     // 在与平面法线最对齐的坐标平面上投影三角形。
     auto maxNormal = 0;
-    auto x = Math::FAbs(plane.GetNormal().GetX());
-    auto y = Math::FAbs(plane.GetNormal().GetY());
+    auto x = MathType::FAbs(plane.GetNormal().GetX());
+    auto y = MathType::FAbs(plane.GetNormal().GetY());
     if (x < y)
     {
         maxNormal = 1;
         x = y;
     }
-    y = Math::FAbs(plane.GetNormal().GetZ());
+    y = MathType::FAbs(plane.GetNormal().GetZ());
     if (x < y)
     {
         maxNormal = 2;
@@ -407,7 +407,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInte
 
     auto edge0 = projectTriangle0.GetVertex(1) - projectTriangle0.GetVertex(0);
     auto edge1 = projectTriangle0.GetVertex(2) - projectTriangle0.GetVertex(0);
-    if (Vector2Tools<Real>::DotPerp(edge0, edge1) < Math::GetValue(0))
+    if (Vector2Tools<Real>::DotPerp(edge0, edge1) < MathType::GetValue(0))
     {
         // 三角形是顺时针方向，请重新排序。
         projectTriangle0 = Triangle2<Real>{ projectTriangle0Vector.at(0), projectTriangle0Vector.at(2), projectTriangle0Vector.at(1) };
@@ -415,7 +415,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInte
 
     edge0 = projectTriangle1.GetVertex(1) - projectTriangle1.GetVertex(0);
     edge1 = projectTriangle1.GetVertex(2) - projectTriangle1.GetVertex(0);
-    if (Vector2Tools<Real>::DotPerp(edge0, edge1) < Math::GetValue(0))
+    if (Vector2Tools<Real>::DotPerp(edge0, edge1) < MathType::GetValue(0))
     {
         // 三角形是顺时针方向，请重新排序。
         projectTriangle1 = Triangle2<Real>{ projectTriangle1Vector.at(0), projectTriangle1Vector.at(2), projectTriangle1Vector.at(1) };
@@ -431,30 +431,30 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInte
     const auto quantity = intr.GetQuantity();
     if (maxNormal == 0)
     {
-        auto invNormalX = (Math::GetValue(1)) / plane.GetNormal().GetX();
+        auto invNormalX = (MathType::GetValue(1)) / plane.GetNormal().GetX();
         for (auto i = 0; i < quantity; i++)
         {
-            Vector3 vector3{ Math::GetValue(0), intr.GetPoint(i).GetX(), intr.GetPoint(i).GetY() };
+            Vector3 vector3{ MathType::GetValue(0), intr.GetPoint(i).GetX(), intr.GetPoint(i).GetY() };
             vector3.SetX(invNormalX * (plane.GetConstant() - plane.GetNormal().GetY() * vector3.GetY() - plane.GetNormal().GetZ() * vector3.GetZ()));
             point.emplace_back(vector3);
         }
     }
     else if (maxNormal == 1)
     {
-        auto invNormalY = (Math::GetValue(1)) / plane.GetNormal().GetY();
+        auto invNormalY = (MathType::GetValue(1)) / plane.GetNormal().GetY();
         for (auto i = 0; i < quantity; i++)
         {
-            Vector3 vector3{ intr.GetPoint(i).GetX(), Math::GetValue(0), intr.GetPoint(i).GetY() };
+            Vector3 vector3{ intr.GetPoint(i).GetX(), MathType::GetValue(0), intr.GetPoint(i).GetY() };
             vector3.SetY(invNormalY * (plane.GetConstant() - plane.GetNormal().GetX() * vector3.GetX() - plane.GetNormal().GetZ() * vector3.GetZ()));
             point.emplace_back(vector3);
         }
     }
     else
     {
-        auto invNormalZ = (Math::GetValue(1)) / plane.GetNormal().GetZ();
+        auto invNormalZ = (MathType::GetValue(1)) / plane.GetNormal().GetZ();
         for (auto i = 0; i < quantity; i++)
         {
-            Vector3 vector3{ intr.GetPoint(i).GetX(), intr.GetPoint(i).GetY(), Math::GetValue(0) };
+            Vector3 vector3{ intr.GetPoint(i).GetX(), intr.GetPoint(i).GetY(), MathType::GetValue(0) };
             vector3.SetZ(invNormalZ * (plane.GetConstant() - plane.GetNormal().GetX() * vector3.GetX() - plane.GetNormal().GetY() * vector3.GetY()));
             point.emplace_back(vector3);
         }

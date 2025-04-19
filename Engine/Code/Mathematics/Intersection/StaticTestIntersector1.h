@@ -23,10 +23,10 @@ namespace Mathematics
         using ClassType = StaticTestIntersector1<Real>;
         using ParentType = Intersector1<Real>;
 
-        using Math = typename ParentType::Math;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersector1(Real u0, Real u1, Real v0, Real v1, const Real epsilon = Math::GetZeroTolerance()) noexcept;
+        StaticTestIntersector1(Real u0, Real u1, Real v0, Real v1, const Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_FINAL_DECLARE;
 

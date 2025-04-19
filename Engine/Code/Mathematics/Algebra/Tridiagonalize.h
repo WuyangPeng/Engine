@@ -25,19 +25,19 @@ namespace Mathematics
     public:
         using ClassType = Tridiagonalize<Real>;
 
-        using Math = Math<Real>;
-        using Matrix3 = Matrix3<Real>;
-        using Vector2 = Vector2<Real>;
-        using Vector3 = Vector3<Real>;
+        using MathType = Math<Real>;
+        using Matrix3Type = Matrix3<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Vector3Type = Vector3<Real>;
 
     public:
-        explicit Tridiagonalize(const Matrix3& matrix);
+        explicit Tridiagonalize(const Matrix3Type& matrix);
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD bool IsReflection() const noexcept;
-        NODISCARD Matrix3 GetRotation() const noexcept;
-        NODISCARD Vector3 GetDiagonal() const noexcept;
+        NODISCARD Matrix3Type GetRotation() const noexcept;
+        NODISCARD Vector3Type GetDiagonal() const noexcept;
 
     private:
         // 支持特征分解。该Tridiagonalize函数可将Householder变换矩阵。
@@ -51,10 +51,10 @@ namespace Mathematics
         void GivensRotation(int lhsIndex, int rhsIndex, Real cosValue, Real sinValue);
 
     private:
-        Matrix3 inputMatrix;
-        Matrix3 outputMatrix;
-        Vector3 diagonal;
-        Vector2 subDiagonal;
+        Matrix3Type inputMatrix;
+        Matrix3Type outputMatrix;
+        Vector3Type diagonal;
+        Vector2Type subDiagonal;
         bool reflection;
     };
 }

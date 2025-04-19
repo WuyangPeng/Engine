@@ -13,6 +13,8 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
+#include <cstdarg>
+
 System::FormatStringMessageUseVaListAndUseBufferTesting::FormatStringMessageUseVaListAndUseBufferTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -58,7 +60,7 @@ void System::FormatStringMessageUseVaListAndUseBufferTesting::FormatStringMessag
 void System::FormatStringMessageUseVaListAndUseBufferTesting::FormatStringMessageUseArgumentsTest(const TChar* message, va_list vaArguments)
 {
     TCharBufferType buffer{};
-    const auto size = FormatStringMessage(message, buffer.data(), defaultBufferSize - 1, &vaArguments);
+    const auto size = FormatStringMessage(message, buffer.data(), defaultBufferSize - 1, vaArguments);
 
     ASSERT_LESS(0u, size);
     ASSERT_LESS(static_cast<int>(size), defaultBufferSize);

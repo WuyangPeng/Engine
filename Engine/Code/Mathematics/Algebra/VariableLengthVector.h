@@ -27,7 +27,7 @@ namespace Mathematics
     public:
         using ClassType = VariableLengthVector;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using ContainerType = std::vector<Real>;
         using ContainerTypeIter = typename ContainerType::iterator;
         using ContainerTypeConstIter = typename ContainerType::const_iterator;
@@ -76,7 +76,7 @@ namespace Mathematics
         /// 并在长度为零时将归一化向量设置为零。
         NODISCARD Real Length(bool robust = false) const;
         NODISCARD Real SquaredLength(bool robust = false) const;
-        Real Normalize(Real epsilon = Math::GetZeroTolerance(), bool robust = false);
+        Real Normalize(Real epsilon = MathType::GetZeroTolerance(), bool robust = false);
 
         NODISCARD ContainerType GetContainer() const;
         void SetContainer(const ContainerType& aContainer);

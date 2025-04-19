@@ -18,7 +18,7 @@
 #include "Mathematics/Algebra/VariableMatrixDetail.h"
 
 template <typename Real>
-Mathematics::SingularValueDecomposition<Real>::SingularValueDecomposition(const VariableMatrix& matrix)
+Mathematics::SingularValueDecomposition<Real>::SingularValueDecomposition(const VariableMatrixType& matrix)
     : left{ matrix.GetRowsNumber(), matrix.GetRowsNumber() },
       diagonal{ matrix.GetRowsNumber(), matrix.GetColumnsNumber() },
       rightTranspose{ matrix.GetColumnsNumber(), matrix.GetColumnsNumber() }
@@ -29,7 +29,7 @@ Mathematics::SingularValueDecomposition<Real>::SingularValueDecomposition(const 
 }
 
 template <typename Real>
-void Mathematics::SingularValueDecomposition<Real>::Calculate(const VariableMatrix& matrix)
+void Mathematics::SingularValueDecomposition<Real>::Calculate(const VariableMatrixType& matrix)
 {
     // 从“矩阵计算”实现其他QR分解和奇异值分解代码，然后给用户指定这里使用哪些方法的能力。
 
@@ -53,32 +53,32 @@ void Mathematics::SingularValueDecomposition<Real>::HouseholderQR()
     const auto numColumns = diagonal.GetColumnsNumber();
     MATHEMATICS_ASSERTION_3(numColumns <= numRows, "太多的列（使用转置矩阵）\n");
 
-    std::vector<VariableLengthVector> saveVector{};
+    std::vector<VariableLengthVectorType> saveVector{};
     for (auto column = 0; column < numColumns; ++column)
     {
-        VariableLengthVector vector{ numRows };
+        VariableLengthVectorType vector{ numRows };
 
         // 创建Householder向量对A的部分列
         for (auto row = 0; row < column; ++row)
         {
-            vector[row] = Math::GetValue(0);
+            vector[row] = MathType::GetValue(0);
         }
-        auto length = Math::GetValue(0);
+        auto length = MathType::GetValue(0);
         for (auto row = column; row < numRows; ++row)
         {
             vector[row] = diagonal(row, column);
             length += vector[row] * vector[row];
         }
-        length = Math::Sqrt(length);
-        auto beta = vector[column] + length * System::EnumCastUnderlying(Math::Sign(vector[column]));
-        if (Math::GetZeroTolerance() < Math::FAbs(beta))
+        length = MathType::Sqrt(length);
+        auto beta = vector[column] + length * System::EnumCastUnderlying(MathType::Sign(vector[column]));
+        if (MathType::GetZeroTolerance() < MathType::FAbs(beta))
         {
             for (int i = column + 1; i < numRows; ++i)
             {
                 vector[i] /= beta;
             }
         }
-        vector[column] = Math::GetValue(1);
+        vector[column] = MathType::GetValue(1);
 
         // 由V-反射矩阵预乘A。
         HouseholderPremultiply(vector, diagonal);
@@ -102,15 +102,15 @@ void Mathematics::SingularValueDecomposition<Real>::HouseholderQR()
 }
 
 template <typename Real>
-typename Mathematics::SingularValueDecomposition<Real>::VariableLengthVector Mathematics::SingularValueDecomposition<Real>::HouseholderVector(const VariableLengthVector& vector)
+typename Mathematics::SingularValueDecomposition<Real>::VariableLengthVectorType Mathematics::SingularValueDecomposition<Real>::HouseholderVector(const VariableLengthVectorType& vector)
 {
     using namespace System;
     using System::operator*;
 
     auto householderVector = vector;
     auto length = householderVector.Length();
-    auto beta = vector[0] + length * Math::Sign(vector[0]);
-    if (Math::GetZeroTolerance() < Math::FAbs(beta))
+    auto beta = vector[0] + length * MathType::Sign(vector[0]);
+    if (MathType::GetZeroTolerance() < MathType::FAbs(beta))
     {
         for (auto i = 1; i < householderVector.GetSize(); ++i)
         {
@@ -118,16 +118,16 @@ typename Mathematics::SingularValueDecomposition<Real>::VariableLengthVector Mat
         }
     }
 
-    householderVector[0] = Math::GetValue(1);
+    householderVector[0] = MathType::GetValue(1);
 
     return householderVector;
 }
 
 template <typename Real>
-void Mathematics::SingularValueDecomposition<Real>::HouseholderPremultiply(const VariableLengthVector& vector, VariableMatrix& matrix)
+void Mathematics::SingularValueDecomposition<Real>::HouseholderPremultiply(const VariableLengthVectorType& vector, VariableMatrixType& matrix)
 {
     const auto transitionVector = vector * matrix;
-    const auto wVector = (Math::GetValue(-2) / vector.SquaredLength()) * transitionVector;
+    const auto wVector = (MathType::GetValue(-2) / vector.SquaredLength()) * transitionVector;
     const auto numRows = matrix.GetRowsNumber();
     const auto numColumns = matrix.GetColumnsNumber();
     for (auto row = 0; row < numRows; ++row)
@@ -140,9 +140,9 @@ void Mathematics::SingularValueDecomposition<Real>::HouseholderPremultiply(const
 }
 
 template <typename Real>
-void Mathematics::SingularValueDecomposition<Real>::HouseholderPostmultiply(const VariableLengthVector& vector, VariableMatrix& matrix)
+void Mathematics::SingularValueDecomposition<Real>::HouseholderPostmultiply(const VariableLengthVectorType& vector, VariableMatrixType& matrix)
 {
-    const auto transitionVector = (Math::GetValue(-2) / vector.SquaredLength()) * (matrix * vector);
+    const auto transitionVector = (MathType::GetValue(-2) / vector.SquaredLength()) * (matrix * vector);
     const auto numRows = matrix.GetRowsNumber();
     const auto numColumns = matrix.GetColumnsNumber();
     for (auto row = 0; row < numRows; ++row)
@@ -175,7 +175,7 @@ bool Mathematics::SingularValueDecomposition<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename Mathematics::SingularValueDecomposition<Real>::VariableMatrix Mathematics::SingularValueDecomposition<Real>::GetLeftMatrix() const
+typename Mathematics::SingularValueDecomposition<Real>::VariableMatrixType Mathematics::SingularValueDecomposition<Real>::GetLeftMatrix() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -183,7 +183,7 @@ typename Mathematics::SingularValueDecomposition<Real>::VariableMatrix Mathemati
 }
 
 template <typename Real>
-typename Mathematics::SingularValueDecomposition<Real>::VariableMatrix Mathematics::SingularValueDecomposition<Real>::GetDiagonalMatrix() const
+typename Mathematics::SingularValueDecomposition<Real>::VariableMatrixType Mathematics::SingularValueDecomposition<Real>::GetDiagonalMatrix() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -191,7 +191,7 @@ typename Mathematics::SingularValueDecomposition<Real>::VariableMatrix Mathemati
 }
 
 template <typename Real>
-typename Mathematics::SingularValueDecomposition<Real>::VariableMatrix Mathematics::SingularValueDecomposition<Real>::GetRightTransposeMatrix() const
+typename Mathematics::SingularValueDecomposition<Real>::VariableMatrixType Mathematics::SingularValueDecomposition<Real>::GetRightTransposeMatrix() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

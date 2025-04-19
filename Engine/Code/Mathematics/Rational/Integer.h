@@ -38,9 +38,9 @@ namespace Mathematics
 
         using ClassType = Integer<N>;
 
-        using IntegerDivisionModulo = IntegerDivisionModulo<N>;
+        using IntegerDivisionModuloType = IntegerDivisionModulo<N>;
         using DataType = std::vector<uint16_t>;
-        using IntegerData = IntegerData<N>;
+        using IntegerDataType = IntegerData<N>;
 
     public:
         NODISCARD static Integer<N> CreateOne() noexcept;
@@ -53,7 +53,7 @@ namespace Mathematics
         explicit Integer(Special special) noexcept;
         Integer() noexcept;
         explicit Integer(const DataType& data);
-        explicit Integer(const IntegerData& data) noexcept;
+        explicit Integer(const IntegerDataType& data) noexcept;
 
         template <typename T>
         explicit Integer(T value);
@@ -61,7 +61,7 @@ namespace Mathematics
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD bool IsZero() const noexcept;
-        NODISCARD void SetZero();
+        void SetZero();
         NODISCARD NumericalValueSymbol GetSign() const noexcept;
 
         NODISCARD uint16_t& operator[](int index);
@@ -77,7 +77,7 @@ namespace Mathematics
         Integer& operator*=(const Integer& rhs);
 
         // 如果要同时求出商和余数，直接调用GetDivisionModulo
-        NODISCARD IntegerDivisionModulo GetDivisionModulo(const Integer& rhs) const;
+        NODISCARD IntegerDivisionModuloType GetDivisionModulo(const Integer& rhs) const;
         Integer& operator/=(const Integer& rhs);
         Integer& operator%=(const Integer& rhs);
 
@@ -106,7 +106,7 @@ namespace Mathematics
         void Print(std::ostream& os) const;
 
     private:
-        IntegerData integerData;
+        IntegerDataType integerData;
     };
 
     template <int N>

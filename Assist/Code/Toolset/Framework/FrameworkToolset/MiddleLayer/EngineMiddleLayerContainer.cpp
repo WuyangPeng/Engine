@@ -16,7 +16,7 @@
 
 CLASS_INVARIANT_STUB_DEFINE(FrameworkToolset, EngineMiddleLayerContainer)
 
-namespace FrameworkToolset
+namespace Framework
 {
     template class Framework::EngineMiddleLayerContainer<Framework::WindowApplicationTrait>;
 }

@@ -16,19 +16,19 @@
 #include "Mathematics/Distance/DistanceResultDetail.h"
 
 template <typename Real, typename Vector>
-Mathematics::IntervalDistanceBase<Real, Vector>::IntervalDistanceBase(const DistanceBase& distance, Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity)
+Mathematics::IntervalDistanceBase<Real, Vector>::IntervalDistanceBase(const DistanceBaseType& distance, Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity)
     : distance{ distance },
       tMin{ tMin },
       tMax{ tMax },
       lhsVelocity{ lhsVelocity },
       rhsVelocity{ rhsVelocity },
-      distanceResult{ Math::GetValue(0) },
+      distanceResult{ MathType::GetValue(0) },
       beginT{ tMin },
       endT{ tMax },
-      beginDistanceResult{ Math::GetValue(0) },
-      beginDerivativeDistanceResult{ Math::GetValue(0) },
-      endDistanceResult{ Math::GetValue(0) },
-      endDerivativeDistanceResult{ Math::GetValue(0) }
+      beginDistanceResult{ MathType::GetValue(0) },
+      beginDerivativeDistanceResult{ MathType::GetValue(0) },
+      endDistanceResult{ MathType::GetValue(0) },
+      endDerivativeDistanceResult{ MathType::GetValue(0) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -49,13 +49,13 @@ void Mathematics::IntervalDistanceBase<Real, Vector>::Solve()
 }
 
 template <typename Real, typename Vector>
-typename Mathematics::IntervalDistanceBase<Real, Vector>::DistanceResult Mathematics::IntervalDistanceBase<Real, Vector>::GetDistanceResult(Real t) const
+typename Mathematics::IntervalDistanceBase<Real, Vector>::DistanceResultType Mathematics::IntervalDistanceBase<Real, Vector>::GetDistanceResult(Real t) const
 {
     return distance.Get(t, lhsVelocity, rhsVelocity);
 }
 
 template <typename Real, typename Vector>
-typename Mathematics::IntervalDistanceBase<Real, Vector>::DistanceResult Mathematics::IntervalDistanceBase<Real, Vector>::GetDistanceResultSquared(Real t) const
+typename Mathematics::IntervalDistanceBase<Real, Vector>::DistanceResultType Mathematics::IntervalDistanceBase<Real, Vector>::GetDistanceResultSquared(Real t) const
 {
     return distance.GetSquared(t, lhsVelocity, rhsVelocity);
 }
@@ -79,14 +79,14 @@ bool Mathematics::IntervalDistanceBase<Real, Vector>::CheckBeginMonotonicFunctio
     if (beginDistanceResult.GetDistance() <= distance.GetZeroThreshold())
     {
         // 距离为有效值零。对象是在最初位置接触。
-        beginDistanceResult.Set(Math::GetValue(0), beginT);
+        beginDistanceResult.Set(MathType::GetValue(0), beginT);
         distanceResult = beginDistanceResult;
 
         return true;
     }
 
     beginDerivativeDistanceResult = GetDerivative(beginT);
-    if (Math::GetValue(0) <= beginDerivativeDistanceResult)
+    if (MathType::GetValue(0) <= beginDerivativeDistanceResult)
     {
         // 距离在[0,tmax]增加。
         beginDistanceResult.SetContactTime(beginT);
@@ -105,14 +105,14 @@ bool Mathematics::IntervalDistanceBase<Real, Vector>::CheckEndMonotonicFunction(
     if (endDistanceResult.GetDistance() <= distance.GetZeroThreshold())
     {
         // 距离为有效值零。
-        endDistanceResult.Set(Math::GetValue(0), endT);
+        endDistanceResult.Set(MathType::GetValue(0), endT);
         distanceResult = endDistanceResult;
 
         return true;
     }
 
     endDerivativeDistanceResult = GetDerivative(endT);
-    if (endDerivativeDistanceResult <= Math::GetValue(0))
+    if (endDerivativeDistanceResult <= MathType::GetValue(0))
     {
         // 距离在[0,tmax]增加。
         endDistanceResult.SetContactTime(endT);
@@ -144,14 +144,14 @@ bool Mathematics::IntervalDistanceBase<Real, Vector>::Iteration()
         if (distanceResult.GetDistance() <= distance.GetZeroThreshold())
         {
             // 距离为有效值零。
-            distanceResult.SetDistance(Math::GetValue(0));
+            distanceResult.SetDistance(MathType::GetValue(0));
             distanceResult.SetContactTime(iterationT);
 
             return true;
         }
 
         auto derivativeResult = GetDerivative(iterationT);
-        if (Math::GetValue(0) <= derivativeResult)
+        if (MathType::GetValue(0) <= derivativeResult)
         {
             // 图形的凸性保证当该条件发生时，距离总为正。切换到最小数字。
             return false;
@@ -180,10 +180,10 @@ template <typename Real, typename Vector>
 void Mathematics::IntervalDistanceBase<Real, Vector>::BisectionMethod()
 {
     // 距离总为正。使用二分法找到导数函数的根。
-    auto resultT = Math::GetValue(0);
+    auto resultT = MathType::GetValue(0);
     for (auto loop = 0; loop < distance.GetMaximumIterations(); ++loop)
     {
-        resultT = Math::GetRational(1, 2) * (beginT + endT);
+        resultT = MathType::GetRational(1, 2) * (beginT + endT);
         auto derivativeResult = GetDerivative(resultT);
         auto product = derivativeResult * beginDerivativeDistanceResult;
         if (product < -distance.GetZeroThreshold())
@@ -211,7 +211,7 @@ void Mathematics::IntervalDistanceBase<Real, Vector>::BisectionMethod()
 template <typename Real, typename Vector>
 bool Mathematics::IntervalDistanceBase<Real, Vector>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) <= tMin && tMin <= tMax)
+    if (MathType::GetValue(0) <= tMin && tMin <= tMax)
     {
         return true;
     }
@@ -224,7 +224,7 @@ bool Mathematics::IntervalDistanceBase<Real, Vector>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real, typename Vector>
-typename Mathematics::IntervalDistanceBase<Real, Vector>::DistanceResult Mathematics::IntervalDistanceBase<Real, Vector>::GetResult() const noexcept
+typename Mathematics::IntervalDistanceBase<Real, Vector>::DistanceResultType Mathematics::IntervalDistanceBase<Real, Vector>::GetResult() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

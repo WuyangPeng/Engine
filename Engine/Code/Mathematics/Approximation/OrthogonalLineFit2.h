@@ -25,23 +25,23 @@ namespace Mathematics
     public:
         using ClassType = OrthogonalLineFit2<Real>;
 
-        using Vector2 = Vector2<Real>;
-        using Line2 = Line2<Real>;
-        using Math = Math<Real>;
-        using Points = std::vector<Vector2>;
+        using Vector2Type = Vector2<Real>;
+        using Line2Type = Line2<Real>;
+        using MathType = Math<Real>;
+        using Points = std::vector<Vector2Type>;
 
     public:
         explicit OrthogonalLineFit2(const Points& points);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Line2 GetLine2() const noexcept;
+        NODISCARD Line2Type GetLine2() const noexcept;
 
     private:
-        NODISCARD static Line2 Calculate(const Points& points);
+        NODISCARD static Line2Type Calculate(const Points& points);
 
     private:
-        Line2 line;
+        Line2Type line;
     };
 
     using OrthogonalLineFit2F = OrthogonalLineFit2<float>;

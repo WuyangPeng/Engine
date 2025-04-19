@@ -10,20 +10,20 @@
 #ifndef CORE_TOOLS_MEMORY_TOOLS_SUITE_H
 #define CORE_TOOLS_MEMORY_TOOLS_SUITE_H
 
-#include "Array2Testing.h "
+#include "Array2Testing.h"
 #include "Array3Testing.h"
 #include "Array4Testing.h"
 #include "AtomicMinMaxTesting.h"
 #include "ContainerAdapterTesting.h"
 #include "HeapAllocateTesting.h"
-#include "LatticeTesting.h "
+#include "LatticeTesting.h"
 #include "LexicoArray2Testing.h"
 #include "MultiArrayAdapterTesting.h"
 #include "MultiArrayTesting.h"
 #include "RawIteratorsTesting.h"
 #include "RawPtrCompareTesting.h"
 #include "SharedPtrCompareTesting.h"
-#include "TypeTraitsTesting.h "
+#include "TypeTraitsTesting.h"
 #include "WeakPtrCompareTesting.h"
 
 #endif  // CORE_TOOLS_MEMORY_TOOLS_SUITE_H

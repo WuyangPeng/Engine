@@ -25,26 +25,26 @@ namespace Mathematics
         using ClassType = StaticTestIntersectorRay2Triangle2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Vector2 = Vector2<Real>;
-        using Ray2 = Ray2<Real>;
-        using Triangle2 = Triangle2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector2Type = Vector2<Real>;
+        using Ray2Type = Ray2<Real>;
+        using Triangle2Type = Triangle2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorRay2Triangle2(const Ray2& ray, const Triangle2& triangle, const Real dotThreshold = Math::GetZeroTolerance());
+        StaticTestIntersectorRay2Triangle2(const Ray2Type& ray, const Triangle2Type& triangle, const Real dotThreshold = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Ray2 GetRay() const noexcept;
-        NODISCARD Triangle2 GetTriangle() const noexcept;
+        NODISCARD Ray2Type GetRay() const noexcept;
+        NODISCARD Triangle2Type GetTriangle() const noexcept;
 
     private:
         void Test();
 
     private:
-        Ray2 ray;
-        Triangle2 triangle;
+        Ray2Type ray;
+        Triangle2Type triangle;
     };
 }
 

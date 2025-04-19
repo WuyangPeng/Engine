@@ -22,6 +22,8 @@ System::FormatErrorMessageTestingBase::FormatErrorMessageTestingBase(const OStre
                     WindowError::NoError,
                     WindowError::SecEOk,
 
+#ifdef SYSTEM_PLATFORM_WIN32
+
                     WindowError::InvalidFunction,
                     WindowError::FileNotFound,
                     WindowError::PathNotFound,
@@ -877,6 +879,9 @@ System::FormatErrorMessageTestingBase::FormatErrorMessageTestingBase(const OStre
                     WindowError::DiskQuotaExceeded,
                     WindowError::ContentBlocked,
                     WindowError::IncompatibleServicePrivilege,
+
+#endif
+
                     WindowError::AppHang },
       comWindowErrors{ WindowError::EUnexpected,
                        WindowError::ENotImpl,
