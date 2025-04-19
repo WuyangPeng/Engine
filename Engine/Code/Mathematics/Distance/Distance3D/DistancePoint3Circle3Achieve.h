@@ -16,7 +16,7 @@
 #include "Mathematics/Distance/DistanceBaseDetail.h"
 
 template <typename Real>
-Mathematics::DistancePoint3Circle3<Real>::DistancePoint3Circle3(const Vector3& point, const Circle3& circle) noexcept
+Mathematics::DistancePoint3Circle3<Real>::DistancePoint3Circle3(const Vector3Type& point, const Circle3Type& circle) noexcept
     : ParentType{}, point{ point }, circle{ circle }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -58,11 +58,11 @@ typename Mathematics::DistancePoint3Circle3<Real>::DistanceResult Mathematics::D
 
     // P-C在平面上的投影为 Q-C = P-C - Dot(N,P - C) * N。
     const auto pointMinusCenter = point - circle.GetCenter();
-    const auto discriminant = pointMinusCenter - Vector3Tools::DotProduct(circle.GetNormal(), pointMinusCenter) * circle.GetNormal();
-    const auto lengthDiscriminant = Vector3Tools::GetLength(discriminant);
-    Vector3 closestPoint{};
+    const auto discriminant = pointMinusCenter - Vector3ToolsType::DotProduct(circle.GetNormal(), pointMinusCenter) * circle.GetNormal();
+    const auto lengthDiscriminant = Vector3ToolsType::GetLength(discriminant);
+    Vector3Type closestPoint{};
 
-    if (Math::GetValue(0) < lengthDiscriminant)
+    if (MathType::GetValue(0) < lengthDiscriminant)
     {
         closestPoint = circle.GetCenter() + circle.GetRadius() * discriminant / lengthDiscriminant;
     }
@@ -73,13 +73,13 @@ typename Mathematics::DistancePoint3Circle3<Real>::DistanceResult Mathematics::D
     }
 
     const auto diff = point - closestPoint;
-    const auto sqrDistance = Vector3Tools::DotProduct(diff, diff);
+    const auto sqrDistance = Vector3ToolsType::DotProduct(diff, diff);
 
-    return DistanceResult{ sqrDistance, Math::GetValue(0), point, closestPoint };
+    return DistanceResult{ sqrDistance, MathType::GetValue(0), point, closestPoint };
 }
 
 template <typename Real>
-typename Mathematics::DistancePoint3Circle3<Real>::DistanceResult Mathematics::DistancePoint3Circle3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistancePoint3Circle3<Real>::DistanceResult Mathematics::DistancePoint3Circle3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

@@ -556,30 +556,30 @@ void Mathematics::Matrix4Testing::OperatorCalculateTest()
 
         ASSERT_TRUE(Approximate(matrix31, matrix6, 1e-8f));
 
-        Matrix4F::Vector4 vector0(randomDistribution(generator),
-                                  randomDistribution(generator),
-                                  randomDistribution(generator),
-                                  randomDistribution(generator));
+        Matrix4F::Vector4Type vector0(randomDistribution(generator),
+                                      randomDistribution(generator),
+                                      randomDistribution(generator),
+                                      randomDistribution(generator));
 
-        const Matrix4F::Vector4 vector1 = matrix6 * vector0;
-        const Matrix4F::Vector4 vector2 = vector0 * matrix6;
+        const Matrix4F::Vector4Type vector1 = matrix6 * vector0;
+        const Matrix4F::Vector4Type vector2 = vector0 * matrix6;
 
-        Matrix4F::Vector4 vector3(matrix6(0, 0) * vector0[0] +
-                                      matrix6(0, 1) * vector0[1] +
-                                      matrix6(0, 2) * vector0[2] +
-                                      matrix6(0, 3) * vector0[3],
-                                  matrix6(1, 0) * vector0[0] +
-                                      matrix6(1, 1) * vector0[1] +
-                                      matrix6(1, 2) * vector0[2] +
-                                      matrix6(1, 3) * vector0[3],
-                                  matrix6(2, 0) * vector0[0] +
-                                      matrix6(2, 1) * vector0[1] +
-                                      matrix6(2, 2) * vector0[2] +
-                                      matrix6(2, 3) * vector0[3],
-                                  matrix6(3, 0) * vector0[0] +
-                                      matrix6(3, 1) * vector0[1] +
-                                      matrix6(3, 2) * vector0[2] +
-                                      matrix6(3, 3) * vector0[3]);
+        Matrix4F::Vector4Type vector3(matrix6(0, 0) * vector0[0] +
+                                          matrix6(0, 1) * vector0[1] +
+                                          matrix6(0, 2) * vector0[2] +
+                                          matrix6(0, 3) * vector0[3],
+                                      matrix6(1, 0) * vector0[0] +
+                                          matrix6(1, 1) * vector0[1] +
+                                          matrix6(1, 2) * vector0[2] +
+                                          matrix6(1, 3) * vector0[3],
+                                      matrix6(2, 0) * vector0[0] +
+                                          matrix6(2, 1) * vector0[1] +
+                                          matrix6(2, 2) * vector0[2] +
+                                          matrix6(2, 3) * vector0[3],
+                                      matrix6(3, 0) * vector0[0] +
+                                          matrix6(3, 1) * vector0[1] +
+                                          matrix6(3, 2) * vector0[2] +
+                                          matrix6(3, 3) * vector0[3]);
 
         ASSERT_TRUE(Vector4ToolsF::Approximate(vector1, vector3, 1e-2f));
 
@@ -629,15 +629,15 @@ void Mathematics::Matrix4Testing::ArithmeticCalculateTest()
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
-        const Matrix4F::Vector4 vector0(randomDistribution(generator),
-                                        randomDistribution(generator),
-                                        randomDistribution(generator),
-                                        randomDistribution(generator));
+        const Matrix4F::Vector4Type vector0(randomDistribution(generator),
+                                            randomDistribution(generator),
+                                            randomDistribution(generator),
+                                            randomDistribution(generator));
 
-        const Matrix4F::Vector4 vector1(randomDistribution(generator),
-                                        randomDistribution(generator),
-                                        randomDistribution(generator),
-                                        randomDistribution(generator));
+        const Matrix4F::Vector4Type vector1(randomDistribution(generator),
+                                            randomDistribution(generator),
+                                            randomDistribution(generator),
+                                            randomDistribution(generator));
 
         Matrix4F matrix0(randomDistribution(generator),
                          randomDistribution(generator),
@@ -720,22 +720,22 @@ void Mathematics::Matrix4Testing::ProjectionTest()
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
-        Matrix3F::Vector3 vector0(randomDistribution(generator),
-                                  randomDistribution(generator),
-                                  randomDistribution(generator));
+        Matrix3F::Vector3Type vector0(randomDistribution(generator),
+                                      randomDistribution(generator),
+                                      randomDistribution(generator));
 
-        Matrix3F::Vector3 vector1(randomDistribution(generator),
-                                  randomDistribution(generator),
-                                  randomDistribution(generator));
+        Matrix3F::Vector3Type vector1(randomDistribution(generator),
+                                      randomDistribution(generator),
+                                      randomDistribution(generator));
 
-        Matrix3F::Vector3 vector2(randomDistribution(generator),
-                                  randomDistribution(generator),
-                                  randomDistribution(generator));
+        Matrix3F::Vector3Type vector2(randomDistribution(generator),
+                                      randomDistribution(generator),
+                                      randomDistribution(generator));
 
-        Matrix4F::Vector4 vector3(randomDistribution(generator),
-                                  randomDistribution(generator),
-                                  randomDistribution(generator),
-                                  1.0f);
+        Matrix4F::Vector4Type vector3(randomDistribution(generator),
+                                      randomDistribution(generator),
+                                      randomDistribution(generator),
+                                      1.0f);
 
         vector0.Normalize();
         vector2.Normalize();
@@ -745,7 +745,7 @@ void Mathematics::Matrix4Testing::ProjectionTest()
             Matrix4F matrix0;
             matrix0.MakeObliqueProjection(vector0, vector1, vector2);
 
-            Matrix4F::Vector4 vector4 = matrix0 * vector3;
+            Matrix4F::Vector4Type vector4 = matrix0 * vector3;
 
             vector4.ProjectionNormalization();
 
@@ -757,44 +757,44 @@ void Mathematics::Matrix4Testing::ProjectionTest()
             ASSERT_APPROXIMATE(distance, 0.0f, 1e-2f);
 
             // 原来的点与转换后的点的差是direction或-direction
-            Matrix4F::Vector4 vector5 = vector3 - vector4;
+            Matrix4F::Vector4Type vector5 = vector3 - vector4;
 
             vector5.Normalize();
 
             ASSERT_APPROXIMATE(vector5[3], 0.0f, 1e-8f);
 
-            const Matrix3F::Vector3 seventhVector(vector5);
-            const Matrix3F::Vector3 eighthVector(-seventhVector);
+            const Matrix3F::Vector3Type seventhVector(vector5);
+            const Matrix3F::Vector3Type eighthVector(-seventhVector);
 
             ASSERT_TRUE(Vector3ToolsF::Approximate(seventhVector, vector2, 1e-5f) ||
                         Vector3ToolsF::Approximate(eighthVector, vector2, 1e-5f));
         }
 
-        const Matrix3F::Vector3 ninthVector(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Matrix3F::Vector3Type ninthVector(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
         Matrix4F matrix1;
         matrix1.MakePerspectiveProjection(vector0, vector1, ninthVector);
 
-        Matrix4F::Vector4 tenthVector = matrix1 * vector3;
+        Matrix4F::Vector4Type tenthVector = matrix1 * vector3;
 
         tenthVector.ProjectionNormalization();
 
         const PlaneF secondPlane = PlaneF(AVectorF(vector0), APointF(vector1));
 
         // 原来的点与转换后的点和点eye在同一直线上
-        Matrix4F::Vector4 eleventhVector = vector3 - tenthVector;
+        Matrix4F::Vector4Type eleventhVector = vector3 - tenthVector;
 
         ASSERT_APPROXIMATE(eleventhVector[3], 0.0f, 1e-8f);
 
         eleventhVector.Normalize();
 
-        Matrix4F::Vector3 twelfthVector = ninthVector - Vector3F(tenthVector);
+        Matrix4F::Vector3Type twelfthVector = ninthVector - Vector3F(tenthVector);
 
         twelfthVector.Normalize();
 
         matrix1.MakeReflection(vector0, vector1);
 
-        Matrix4F::Vector4 thirteenVector = matrix1 * vector3;
+        Matrix4F::Vector4Type thirteenVector = matrix1 * vector3;
 
         const float firstDistance = secondPlane.DistanceTo(APointF(thirteenVector[0], thirteenVector[1], thirteenVector[2]));
 

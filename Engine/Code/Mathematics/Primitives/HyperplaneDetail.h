@@ -20,7 +20,7 @@
 template <int N, typename Real>
 requires(3 <= N && N <= 4 && std::is_arithmetic_v<Real>)
 Mathematics::Hyperplane<N, Real>::Hyperplane() noexcept requires(N == 3)
-    : normal{ Real{}, Real{}, Math::GetValue(1) },
+    : normal{ Real{}, Real{}, MathType::GetValue(1) },
       origin{},
       constant{}
 {
@@ -30,7 +30,7 @@ Mathematics::Hyperplane<N, Real>::Hyperplane() noexcept requires(N == 3)
 template <int N, typename Real>
 requires(3 <= N && N <= 4 && std::is_arithmetic_v<Real>)
 Mathematics::Hyperplane<N, Real>::Hyperplane() noexcept requires(N == 4)
-    : normal{ Real{}, Real{}, Real{}, Math::GetValue(1) },
+    : normal{ Real{}, Real{}, Real{}, MathType::GetValue(1) },
       origin{},
       constant{}
 {

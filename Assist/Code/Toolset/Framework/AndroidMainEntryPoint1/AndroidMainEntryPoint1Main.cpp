@@ -11,7 +11,7 @@
 #include "System/Helper/Tools.h"
 #include "Framework/Helper/MainFunctionMacro.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 #ifndef SYSTEM_PLATFORM_ANDROID
 

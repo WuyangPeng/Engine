@@ -26,7 +26,7 @@ namespace Mathematics
 
         using ClassType = Minimize1Data<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         Minimize1Data() noexcept;

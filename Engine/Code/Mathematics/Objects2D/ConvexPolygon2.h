@@ -29,12 +29,12 @@ namespace Mathematics
         using ClassType = ConvexPolygon2<Real>;
 
         using ParentType = Polygon2<Real>;
-        using Line2 = Line2<Real>;
-        using LineType = std::vector<Line2>;
-        using Math = typename ParentType::Math;
-        using Vector2 = typename ParentType::Vector2;
+        using Line2Type = Line2<Real>;
+        using LineType = std::vector<Line2Type>;
+        using MathType = typename ParentType::MathType;
+        using Vector2 = typename ParentType::Vector2Type;
         using VerticesType = typename ParentType::VerticesType;
-        using Vector2Tools = typename ParentType::Vector2Tools;
+        using Vector2Tools = typename ParentType::Vector2ToolsType;
 
     public:
         // 调用方负责确保顶点数组表示凸多边形，且逆时针顺序。
@@ -44,7 +44,7 @@ namespace Mathematics
 
         // 只读成员访问。
         NODISCARD LineType GetLines() const;
-        NODISCARD const Line2& GetLine(int index) const;
+        NODISCARD const Line2Type& GetLine(int index) const;
 
         // 允许顶点修改。调用者必须确保多边形仍是凸多边形。
         // 只要你修改尽可能多的顶点后，调用UpdateLines()。
@@ -59,11 +59,11 @@ namespace Mathematics
         // 其有符号的距离满足d < 0，数值舍入误差会产生不正确凸性测试，
         // 所以一个小的负阈值t可能通过该函数，
         // 在这种情况下，距离测试会变成d < t < 0。
-        NODISCARD bool IsConvex(Real threshold = -Math::GetZeroTolerance()) const;
+        NODISCARD bool IsConvex(Real threshold = -MathType::GetZeroTolerance()) const;
 
         // 点在多边形的测试，在点和边缘的线，在n个顶点之间边的查询执行，为O(n)算法。
         // 这不是最优算法。TODO：将二分搜索算法用于这个类。这是一个O(log n)的算法。
-        NODISCARD bool Contains(const Vector2& point, Real threshold = -Math::GetZeroTolerance()) const;
+        NODISCARD bool Contains(const Vector2& point, Real threshold = -MathType::GetZeroTolerance()) const;
 
     private:
         // 支持的边缘线的高效更新。

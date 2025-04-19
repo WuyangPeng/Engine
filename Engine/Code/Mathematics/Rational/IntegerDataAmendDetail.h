@@ -17,7 +17,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <int N>
-Mathematics::IntegerDataAmend<N>::IntegerDataAmend(IntegerData& master) noexcept
+Mathematics::IntegerDataAmend<N>::IntegerDataAmend(IntegerDataType& master) noexcept
     : master{ master }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;

@@ -25,33 +25,33 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorRay3Capsule3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Ray3 = Ray3<Real>;
-        using Capsule3 = Capsule3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Ray3Type = Ray3<Real>;
+        using Capsule3Type = Capsule3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorRay3Capsule3(const Ray3& ray, const Capsule3& capsule, const Real epsilon = Math::GetZeroTolerance());
+        StaticFindIntersectorRay3Capsule3(const Ray3Type& ray, const Capsule3Type& capsule, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Ray3 GetRay() const noexcept;
-        NODISCARD Capsule3 GetCapsule() const noexcept;
+        NODISCARD Ray3Type GetRay() const noexcept;
+        NODISCARD Capsule3Type GetCapsule() const noexcept;
 
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
 
     private:
         void Find();
 
     private:
-        Ray3 ray;
-        Capsule3 capsule;
+        Ray3Type ray;
+        Capsule3Type capsule;
 
         int quantity;
-        Vector3 point0;
-        Vector3 point1;
+        Vector3Type point0;
+        Vector3Type point1;
     };
 }
 

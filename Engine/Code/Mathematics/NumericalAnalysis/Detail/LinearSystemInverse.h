@@ -27,13 +27,13 @@ namespace Mathematics
 
         using ClassType = LinearSystemInverse<Real>;
 
-        using Math = Math<Real>;
-        using VariableMatrix = VariableMatrix<Real>;
+        using MathType = Math<Real>;
+        using VariableMatrixType = VariableMatrix<Real>;
         using RealContainer = std::vector<Real>;
 
     public:
-        explicit LinearSystemInverse(const VariableMatrix& matrix, const RealContainer& input, Real zeroTolerance = Math::GetZeroTolerance());
-        explicit LinearSystemInverse(const VariableMatrix& matrix, Real zeroTolerance = Math::GetZeroTolerance());
+        explicit LinearSystemInverse(const VariableMatrixType& matrix, const RealContainer& input, Real zeroTolerance = MathType::GetZeroTolerance());
+        explicit LinearSystemInverse(const VariableMatrixType& matrix, Real zeroTolerance = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
@@ -41,7 +41,7 @@ namespace Mathematics
         //     matrix[iSize][iSize], 项是 matrix[row][col]
         // 输出:
         //     求逆矩阵失败抛出异常，否则返回逆矩阵。
-        NODISCARD VariableMatrix GetInverse() const;
+        NODISCARD VariableMatrixType GetInverse() const;
 
         NODISCARD RealContainer GetResult() const;
 
@@ -62,8 +62,8 @@ namespace Mathematics
 
     private:
         // 线性系统求解容差。
-        Real zeroTolerance;  // 默认 = Math::GetZeroTolerance()
-        VariableMatrix inverse;
+        Real zeroTolerance;  // 默认 = MathType::GetZeroTolerance()
+        VariableMatrixType inverse;
         int size;
         IndexContainer columnsIndex;
         IndexContainer rowIndex;

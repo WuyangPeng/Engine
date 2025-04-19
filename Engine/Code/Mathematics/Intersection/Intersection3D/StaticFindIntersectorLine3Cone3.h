@@ -25,19 +25,19 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorLine3Cone3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Line3 = Line3<Real>;
-        using Cone3 = Cone3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Line3Type = Line3<Real>;
+        using Cone3Type = Cone3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorLine3Cone3(const Line3& line, const Cone3& cone, const Real epsilon = Math::GetZeroTolerance());
+        StaticFindIntersectorLine3Cone3(const Line3Type& line, const Cone3Type& cone, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Line3 GetLine() const noexcept;
-        NODISCARD Cone3 GetCone() const noexcept;
+        NODISCARD Line3Type GetLine() const noexcept;
+        NODISCARD Cone3Type GetCone() const noexcept;
 
         /// 相交集。 可能的相交点类型是
         /// IT_EMTPY：没有交集
@@ -45,18 +45,18 @@ namespace Mathematics
         /// IT_SEGMENT：<point0,point1>是相交线段
         /// IT_RAY：point0 + t * point1是相交射线
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
 
     private:
         void Find();
 
     private:
-        Line3 line;
-        Cone3 cone;
+        Line3Type line;
+        Cone3Type cone;
 
         int quantity;
-        Vector3 point0;
-        Vector3 point1;
+        Vector3Type point0;
+        Vector3Type point1;
     };
 }
 

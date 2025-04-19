@@ -8,6 +8,7 @@
 /// °æ±¾£º1.0.0.7 (2024/03/13 17:16)
 
 #include "WindowsUserTesting.h"
+#include "System/Threading/Thread.h"
 #include "System/Windows/Flags/WindowsMessagesFlags.h"
 #include "System/Windows/WindowsUser.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -35,7 +36,7 @@ void System::WindowsUserTesting::MainTest()
 
 void System::WindowsUserTesting::MessageTest()
 {
-    ASSERT_TRUE(PostSystemThreadMessage(GetCurrentThreadId(), WindowsMessages::Paint, 0, 0));
+    ASSERT_TRUE(PostSystemThreadMessage(GetCurrentSystemThreadId(), WindowsMessages::Paint, 0, 0));
 }
 
 void System::WindowsUserTesting::HWndTest()

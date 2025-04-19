@@ -27,34 +27,34 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorLine3Triangle3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Line3 = Line3<Real>;
-        using Triangle3 = Triangle3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Line3Type = Line3<Real>;
+        using Triangle3Type = Triangle3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorLine3Triangle3(const Line3& line, const Triangle3& triangle, const Real epsilon = Math::GetZeroTolerance());
+        StaticFindIntersectorLine3Triangle3(const Line3Type& line, const Triangle3Type& triangle, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Line3 GetLine() const noexcept;
-        NODISCARD Triangle3 GetTriangle() const noexcept;
+        NODISCARD Line3Type GetLine() const noexcept;
+        NODISCARD Triangle3Type GetTriangle() const noexcept;
 
         NODISCARD Real GetLineParameter() const noexcept;
         NODISCARD Real GetTriangleBary0() const noexcept;
         NODISCARD Real GetTriangleBary1() const noexcept;
         NODISCARD Real GetTriangleBary2() const noexcept;
 
-        NODISCARD Vector3 GetPoint() const noexcept;
+        NODISCARD Vector3Type GetPoint() const noexcept;
 
     private:
         void Find();
 
     private:
         // 相交对象
-        Line3 line;
-        Triangle3 triangle;
+        Line3Type line;
+        Triangle3Type triangle;
 
         // 相交对象集信息
         Real lineParameter;
@@ -62,7 +62,7 @@ namespace Mathematics
         Real triangleBary1;
         Real triangleBary2;
 
-        Vector3 point;
+        Vector3Type point;
     };
 }
 

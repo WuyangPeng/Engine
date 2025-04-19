@@ -28,34 +28,34 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorHalfspace3Segment3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Segment3 = Segment3<Real>;
-        using Plane3 = Plane3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Segment3Type = Segment3<Real>;
+        using Plane3Type = Plane3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorHalfspace3Segment3(const Plane3& halfspace, const Segment3& segment, const Real epsilon = Math::GetZeroTolerance());
+        StaticFindIntersectorHalfspace3Segment3(const Plane3Type& halfspace, const Segment3Type& segment, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Plane3 GetHalfspace() const noexcept;
-        NODISCARD Segment3 GetSegment() const noexcept;
+        NODISCARD Plane3Type GetHalfspace() const noexcept;
+        NODISCARD Segment3Type GetSegment() const noexcept;
 
         // 相交集为空，点或线段。 函数GetQuantity()返回0、1或2。
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
 
     private:
         void Find();
 
     private:
-        Plane3 halfspace;
-        Segment3 segment;
+        Plane3Type halfspace;
+        Segment3Type segment;
 
         int quantity;
-        Vector3 point0;
-        Vector3 point1;
+        Vector3Type point0;
+        Vector3Type point1;
     };
 }
 

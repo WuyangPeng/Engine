@@ -25,9 +25,9 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, ConstantColorEffect)
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ConstantColorEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, ConstantColorEffect);
 
-Rendering::ConstantColorEffect::ConstantColorEffect(const std::string& name, ProgramFactory& factory, const BaseRendererSharedPtr& baseRenderer, const Colour& color)
+Rendering::ConstantColorEffect::ConstantColorEffect(const std::string& name, ProgramFactory& factory, const BaseRendererSharedPtr& baseRenderer, const ColourType& color)
     : ParentType{ name, factory, baseRenderer, "Resource/Shader/ConstantColorEffect.vs", "Resource/Shader/ConstantColorEffect.ps" },
-      impl{ Rendering::GetStreamSize<Colour>() }
+      impl{ Rendering::GetStreamSize<ColourType>() }
 {
     const auto colorConstant = impl->GetColorConstant();
 

@@ -25,10 +25,10 @@ Mathematics::Torus3Parameters<Real>::Torus3Parameters(Real s, Real t) noexcept
 template <typename Real>
 bool Mathematics::Torus3Parameters<Real>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) <= s &&
-        s <= Math::GetValue(1) &&
-        Math::GetValue(0) <= t &&
-        t <= Math::GetValue(1))
+    if (MathType::GetValue(0) <= s &&
+        s <= MathType::GetValue(1) &&
+        MathType::GetValue(0) <= t &&
+        t <= MathType::GetValue(1))
         return true;
     else
         return false;

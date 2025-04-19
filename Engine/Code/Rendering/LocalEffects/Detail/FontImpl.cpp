@@ -146,7 +146,7 @@ int Rendering::FontImpl::GetWidth(const std::string& message) const
     return boost::numeric_cast<int>(std::ceil(width));
 }
 
-void Rendering::FontImpl::Typeset(int viewportWidth, int viewportHeight, int x, int y, const Colour& color, const std::string& message) const
+void Rendering::FontImpl::Typeset(int viewportWidth, int viewportHeight, int x, int y, const ColourType& color, const std::string& message) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

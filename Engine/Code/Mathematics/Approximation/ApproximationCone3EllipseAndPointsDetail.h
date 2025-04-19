@@ -35,7 +35,7 @@ bool Mathematics::ApproximationCone3EllipseAndPoints<Real>::IsValid() const noex
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-typename Mathematics::ApproximationCone3EllipseAndPoints<Real>::Cone3 Mathematics::ApproximationCone3EllipseAndPoints<Real>::Fit(const Ellipse3& ellipse, const Vector3Container& points, ApproximationCone3EllipseAndPointsControl control)
+typename Mathematics::ApproximationCone3EllipseAndPoints<Real>::Cone3 Mathematics::ApproximationCone3EllipseAndPoints<Real>::Fit(const Ellipse3& ellipse, const Vector3Container& points, ApproximationCone3EllipseAndPointsControlType control)
 {
     ASSERT_FAIL_THROW_EXCEPTION(control.ValidParameters(), SYSTEM_TEXT("无效的控制参数。"))
 
@@ -73,61 +73,61 @@ typename Mathematics::ApproximationCone3EllipseAndPoints<Real>::Cone3 Mathematic
                                        control.GetEpsilon(),
                                        control.GetTolerance());
     auto t0 = boost::numeric_cast<Real>(control.GetPadding());
-    auto t1 = Math::GetHalfPI() - control.GetPadding();
+    auto t1 = MathType::GetHalfPI() - control.GetPadding();
     Real tMin{};
     Real fMin{};
-    auto minError = -Math::GetValue(1);
+    auto minError = -MathType::GetValue(1);
     Cone3 minCone{};
 
-    sigma0 = Math::GetValue(1);
-    sigma1 = Math::GetValue(1);
+    sigma0 = MathType::GetValue(1);
+    sigma1 = MathType::GetValue(1);
     minimizer.GetMinimum(t0, t1, tMin, fMin);
     if (t0 < tMin && tMin < t1)
     {
-        if (Math::Approximate(minError, -Math::GetValue(1)) || fMin < minError)
+        if (MathType::Approximate(minError, -MathType::GetValue(1)) || fMin < minError)
         {
             minError = fMin;
             minCone = ComputeCone(tMin, sigma0, sigma1, ellipse);
         }
     }
 
-    sigma0 = Math::GetValue(1);
-    sigma1 = -Math::GetValue(1);
+    sigma0 = MathType::GetValue(1);
+    sigma1 = -MathType::GetValue(1);
     minimizer.GetMinimum(t0, t1, tMin, fMin);
     if (t0 < tMin && tMin < t1)
     {
-        if (Math::Approximate(minError, -Math::GetValue(1)) || fMin < minError)
+        if (MathType::Approximate(minError, -MathType::GetValue(1)) || fMin < minError)
         {
             minError = fMin;
             minCone = ComputeCone(tMin, sigma0, sigma1, ellipse);
         }
     }
 
-    sigma0 = -Math::GetValue(1);
-    sigma1 = Math::GetValue(1);
+    sigma0 = -MathType::GetValue(1);
+    sigma1 = MathType::GetValue(1);
     minimizer.GetMinimum(t0, t1, tMin, fMin);
     if (t0 < tMin && tMin < t1)
     {
-        if (Math::Approximate(minError, -Math::GetValue(1)) || fMin < minError)
+        if (MathType::Approximate(minError, -MathType::GetValue(1)) || fMin < minError)
         {
             minError = fMin;
             minCone = ComputeCone(tMin, sigma0, sigma1, ellipse);
         }
     }
 
-    sigma0 = -Math::GetValue(1);
-    sigma1 = -Math::GetValue(1);
+    sigma0 = -MathType::GetValue(1);
+    sigma1 = -MathType::GetValue(1);
     minimizer.GetMinimum(t0, t1, tMin, fMin);
     if (t0 < tMin && tMin < t1)
     {
-        if (Math::Approximate(minError, -Math::GetValue(1)) || fMin < minError)
+        if (MathType::Approximate(minError, -MathType::GetValue(1)) || fMin < minError)
         {
             minError = fMin;
             minCone = ComputeCone(tMin, sigma0, sigma1, ellipse);
         }
     }
 
-    ASSERT_FAIL_THROW_EXCEPTION(!Math::Approximate(minError, -Math::GetValue(1)), SYSTEM_TEXT("找不到合适的圆锥体。"))
+    ASSERT_FAIL_THROW_EXCEPTION(!MathType::Approximate(minError, -MathType::GetValue(1)), SYSTEM_TEXT("找不到合适的圆锥体。"))
 
     return minCone;
 }
@@ -142,15 +142,15 @@ typename Mathematics::ApproximationCone3EllipseAndPoints<Real>::Cone3 Mathematic
     const auto& a = ellipse.GetExtent(0);
     const auto& b = ellipse.GetExtent(1);
     const auto bDivA = b / a;
-    const auto eSqr = std::max(Real{}, Math::GetValue(1) - bDivA * bDivA);
-    const auto omeSqr = Math::GetValue(1) - eSqr;
+    const auto eSqr = std::max(Real{}, MathType::GetValue(1) - bDivA * bDivA);
+    const auto omeSqr = MathType::GetValue(1) - eSqr;
     const auto e = std::sqrt(eSqr);
 
     const auto snTheta = std::sin(theta);
     const auto csTheta = std::cos(theta);
     const auto snPhi = sigma0 * e * csTheta;
     const auto snPhiSqr = snPhi * snPhi;
-    const auto csPhi = sigma1 * std::sqrt(std::max(Real{}, Math::GetValue(1) - snPhiSqr));
+    const auto csPhi = sigma1 * std::sqrt(std::max(Real{}, MathType::GetValue(1) - snPhiSqr));
     const auto h = a * omeSqr * csTheta / (snTheta * std::fabs(csPhi));
     const auto d = csPhi * n + snPhi * u;
     const auto snThetaSqr = snTheta * snTheta;

@@ -21,27 +21,27 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-requires std::is_arithmetic_v<Real> bool Mathematics::Vector2Tools<Real>::Approximate(const Vector2& lhs, const Vector2& rhs, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
+requires std::is_arithmetic_v<Real> bool Mathematics::Vector2Tools<Real>::Approximate(const Vector2Type& lhs, const Vector2Type& rhs, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
-    MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= epsilon, "epsilon必须大于或等于0！");
+    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= epsilon, "epsilon必须大于或等于0！");
 
-    return Math::FAbs(lhs.GetX() - rhs.GetX()) < epsilon && Math::FAbs(lhs.GetY() - rhs.GetY()) < epsilon;
+    return MathType::FAbs(lhs.GetX() - rhs.GetX()) < epsilon && MathType::FAbs(lhs.GetY() - rhs.GetY()) < epsilon;
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::Vector2Tools<Real>::GetLength(const Vector2& vector) noexcept(gAssert < 3 || gMathematicsAssert < 3)
+Real Mathematics::Vector2Tools<Real>::GetLength(const Vector2Type& vector) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    return Math::Sqrt(GetLengthSquared(vector));
+    return MathType::Sqrt(GetLengthSquared(vector));
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::Vector2Tools<Real>::GetRobustLength(const Vector2& vector)
+Real Mathematics::Vector2Tools<Real>::GetRobustLength(const Vector2Type& vector)
 {
     const auto maxAbsComp = vector.GetMaxAbsComp();
 
-    if (Math::GetZeroTolerance() < maxAbsComp)
+    if (MathType::GetZeroTolerance() < maxAbsComp)
     {
         const auto scaled = vector / maxAbsComp;
         return maxAbsComp * GetLength(scaled);
@@ -54,21 +54,21 @@ Real Mathematics::Vector2Tools<Real>::GetRobustLength(const Vector2& vector)
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::Vector2Tools<Real>::GetLengthSquared(const Vector2& vector) noexcept
+Real Mathematics::Vector2Tools<Real>::GetLengthSquared(const Vector2Type& vector) noexcept
 {
     return DotProduct(vector, vector);
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::Vector2Tools<Real>::Distance(const Vector2& lhs, const Vector2& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3)
+Real Mathematics::Vector2Tools<Real>::Distance(const Vector2Type& lhs, const Vector2Type& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    return Math::Sqrt(DistanceSquared(lhs, rhs));
+    return MathType::Sqrt(DistanceSquared(lhs, rhs));
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::Vector2Tools<Real>::DistanceSquared(const Vector2& lhs, const Vector2& rhs) noexcept
+Real Mathematics::Vector2Tools<Real>::DistanceSquared(const Vector2Type& lhs, const Vector2Type& rhs) noexcept
 {
     const auto distanceX = lhs.GetX() - rhs.GetX();
     const auto distanceY = lhs.GetY() - rhs.GetY();
@@ -78,23 +78,23 @@ Real Mathematics::Vector2Tools<Real>::DistanceSquared(const Vector2& lhs, const 
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::Vector2Tools<Real>::DotProduct(const Vector2& lhs, const Vector2& rhs) noexcept
+Real Mathematics::Vector2Tools<Real>::DotProduct(const Vector2Type& lhs, const Vector2Type& rhs) noexcept
 {
     return (lhs.GetX() * rhs.GetX() + lhs.GetY() * rhs.GetY());
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::Vector2Tools<Real>::PseudoCrossProduct(const Vector2& lhs, const Vector2& rhs) noexcept
+Real Mathematics::Vector2Tools<Real>::PseudoCrossProduct(const Vector2Type& lhs, const Vector2Type& rhs) noexcept
 {
     return DotPerp(lhs, rhs);
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Vector2<Real> Mathematics::Vector2Tools<Real>::ParallelVectorLhsToRhs(const Vector2& lhs, const Vector2& rhs, Real epsilon)
+Mathematics::Vector2<Real> Mathematics::Vector2Tools<Real>::ParallelVectorLhsToRhs(const Vector2Type& lhs, const Vector2Type& rhs, Real epsilon)
 {
-    MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= epsilon, "epsilon必须大于或等于0！");
+    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= epsilon, "epsilon必须大于或等于0！");
 
     const auto moduleSquare = GetLengthSquared(rhs);
 
@@ -106,34 +106,34 @@ Mathematics::Vector2<Real> Mathematics::Vector2Tools<Real>::ParallelVectorLhsToR
     {
         MATHEMATICS_ASSERTION_1(false, "除零错误！");
 
-        return Vector2{};
+        return Vector2Type{};
     }
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Vector2<Real> Mathematics::Vector2Tools<Real>::ApeakVectorLhsToRhs(const Vector2& lhs, const Vector2& rhs, Real epsilon)
+Mathematics::Vector2<Real> Mathematics::Vector2Tools<Real>::ApeakVectorLhsToRhs(const Vector2Type& lhs, const Vector2Type& rhs, Real epsilon)
 {
     return lhs - ParallelVectorLhsToRhs(lhs, rhs, epsilon);
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::Vector2Tools<Real>::GetVectorIncludedAngle(const Vector2& lhs, const Vector2& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3)
+Real Mathematics::Vector2Tools<Real>::GetVectorIncludedAngle(const Vector2Type& lhs, const Vector2Type& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    return Math::ACos(DotProduct(lhs, rhs) / (GetLength(lhs) * GetLength(rhs)));
+    return MathType::ACos(DotProduct(lhs, rhs) / (GetLength(lhs) * GetLength(rhs)));
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Vector2<Real> Mathematics::Vector2Tools<Real>::GetPerp(const Vector2& vector) noexcept
+Mathematics::Vector2<Real> Mathematics::Vector2Tools<Real>::GetPerp(const Vector2Type& vector) noexcept
 {
-    return Vector2{ vector.GetY(), -vector.GetX() };
+    return Vector2Type{ vector.GetY(), -vector.GetX() };
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Vector2<Real> Mathematics::Vector2Tools<Real>::GetUnitPerp(const Vector2& vector, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
+Mathematics::Vector2<Real> Mathematics::Vector2Tools<Real>::GetUnitPerp(const Vector2Type& vector, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     auto perp = GetPerp(vector);
     perp.Normalize(epsilon);
@@ -143,21 +143,21 @@ Mathematics::Vector2<Real> Mathematics::Vector2Tools<Real>::GetUnitPerp(const Ve
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::Vector2Tools<Real>::DotPerp(const Vector2& lhs, const Vector2& rhs) noexcept
+Real Mathematics::Vector2Tools<Real>::DotPerp(const Vector2Type& lhs, const Vector2Type& rhs) noexcept
 {
-    return DotProduct(Vector2(-lhs.GetY(), lhs.GetX()), rhs);
+    return DotProduct(Vector2Type(-lhs.GetY(), lhs.GetX()), rhs);
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector2Tools<Real>::AxesAlignBoundingBox2 Mathematics::Vector2Tools<Real>::ComputeExtremes(const ContainerType& vectors)
+typename Mathematics::Vector2Tools<Real>::AxesAlignBoundingBox2Type Mathematics::Vector2Tools<Real>::ComputeExtremes(const ContainerType& vectors)
 {
-    Vector2 min{ Math::maxReal, Math::maxReal };
-    Vector2 max{ Math::minReal, Math::minReal };
+    Vector2Type min{ MathType::maxReal, MathType::maxReal };
+    Vector2Type max{ MathType::minReal, MathType::minReal };
 
     for (const auto& eachVector : vectors)
     {
-        for (auto i = 0; i < Vector2::pointSize; ++i)
+        for (auto i = 0; i < Vector2Type::pointSize; ++i)
         {
             if (eachVector[i] < min[i])
             {
@@ -171,12 +171,12 @@ typename Mathematics::Vector2Tools<Real>::AxesAlignBoundingBox2 Mathematics::Vec
         }
     }
 
-    return AxesAlignBoundingBox2{ min, max };
+    return AxesAlignBoundingBox2Type{ min, max };
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector2Tools<Real>::Vector2Orthonormalize Mathematics::Vector2Tools<Real>::Orthonormalize(const Vector2& lhs, const Vector2& rhs, Real epsilon)
+typename Mathematics::Vector2Tools<Real>::Vector2OrthonormalizeType Mathematics::Vector2Tools<Real>::Orthonormalize(const Vector2Type& lhs, const Vector2Type& rhs, Real epsilon)
 {
     /// 如果输入向量v0和v1，则Gram-Schmidt正交向量产生矢量u0和u1如下，
     ///
@@ -185,37 +185,37 @@ typename Mathematics::Vector2Tools<Real>::Vector2Orthonormalize Mathematics::Vec
     ///
     /// 其中|A|表示向量A的长度和A * B表示向量A和B的点积
 
-    return Vector2Orthonormalize{ lhs, rhs, epsilon };
+    return Vector2OrthonormalizeType{ lhs, rhs, epsilon };
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector2Tools<Real>::Vector2OrthonormalBasis Mathematics::Vector2Tools<Real>::GenerateOrthonormalBasis(const Vector2& nonzeroVector, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
+typename Mathematics::Vector2Tools<Real>::Vector2OrthonormalBasisType Mathematics::Vector2Tools<Real>::GenerateOrthonormalBasis(const Vector2Type& nonzeroVector, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
-    return Vector2OrthonormalBasis{ nonzeroVector, epsilon };
+    return Vector2OrthonormalBasisType{ nonzeroVector, epsilon };
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Vector3<Real> Mathematics::Vector2Tools<Real>::LiftHomogeneous(const Vector2& vector, Real last) noexcept
+Mathematics::Vector3<Real> Mathematics::Vector2Tools<Real>::LiftHomogeneous(const Vector2Type& vector, Real last) noexcept
 {
-    return Vector3{ vector.GetX(), vector.GetY(), last };
+    return Vector3Type{ vector.GetX(), vector.GetY(), last };
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Vector3<Real> Mathematics::Vector2Tools<Real>::Lift(const Vector2& vector, int inject, Real value)
+Mathematics::Vector3<Real> Mathematics::Vector2Tools<Real>::Lift(const Vector2Type& vector, int inject, Real value)
 {
-    Vector3 result{};
+    Vector3Type result{};
 
     auto i = 0;
-    for (; i < inject && i < Vector2::pointSize; ++i)
+    for (; i < inject && i < Vector2Type::pointSize; ++i)
     {
         result[i] = vector[i];
     }
     result[i] = value;
 
-    for (; i < Vector3::pointSize; ++i)
+    for (; i < Vector3Type::pointSize; ++i)
     {
         result[i + 1] = vector[i];
     }

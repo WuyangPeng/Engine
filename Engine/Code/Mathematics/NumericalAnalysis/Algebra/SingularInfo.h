@@ -12,6 +12,8 @@
 
 #include "Mathematics/MathematicsDll.h"
 
+#include <type_traits>
+
 /// 支持对奇异值进行排序。
 namespace Mathematics::Algebra
 {

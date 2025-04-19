@@ -33,6 +33,8 @@
 #include "Rendering/Resources/Flags/DataFormatType.h"
 #include "Rendering/Visibility/Culler.h"
 
+#include <thread>
+
 using System::operator&;
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, Visual)

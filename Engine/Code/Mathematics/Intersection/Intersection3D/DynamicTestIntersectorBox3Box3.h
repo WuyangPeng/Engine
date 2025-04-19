@@ -24,18 +24,18 @@ namespace Mathematics
         using ClassType = DynamicTestIntersectorBox3Box3<Real>;
         using ParentType = DynamicIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Box3 = Box3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Box3Type = Box3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        DynamicTestIntersectorBox3Box3(const Box3& box0, const Box3& box1, Real tmax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
+        DynamicTestIntersectorBox3Box3(const Box3Type& box0, const Box3Type& box1, Real tmax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Box3 GetBox0() const noexcept;
-        NODISCARD Box3 GetBox1() const noexcept;
+        NODISCARD Box3Type GetBox0() const noexcept;
+        NODISCARD Box3Type GetBox1() const noexcept;
 
     private:
         using Separated = std::pair<bool, Real>;
@@ -54,8 +54,8 @@ namespace Mathematics
         NODISCARD Separated IsSeparated(Real min0, Real max0, Real min1, Real max1, Real speed, Real tmax, Real tlast) noexcept;
 
     private:
-        Box3 box0;
-        Box3 box1;
+        Box3Type box0;
+        Box3Type box1;
     };
 }
 

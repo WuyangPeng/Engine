@@ -27,22 +27,22 @@ namespace Mathematics
     public:
         using ClassType = GreatCircleFit3<Real>;
 
-        using Vector3 = Vector3<Real>;
-        using Points = std::vector<Vector3>;
-        using Math = Math<Real>;
+        using Vector3Type = Vector3<Real>;
+        using Points = std::vector<Vector3Type>;
+        using MathType = Math<Real>;
 
     public:
         explicit GreatCircleFit3(const Points& points);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector3 GetNormal() noexcept;
+        NODISCARD Vector3Type GetNormal() noexcept;
 
     private:
         void Calculate(const Points& points);
 
     private:
-        Vector3 normal;
+        Vector3Type normal;
     };
 
     using GreatCircleFit3F = GreatCircleFit3<float>;

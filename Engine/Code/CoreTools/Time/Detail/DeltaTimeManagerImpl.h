@@ -28,7 +28,7 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD void ResetCurrentTime() noexcept;
+        void ResetCurrentTime() noexcept;
         NODISCARD int64_t GetElapsedTimeInMicroseconds() const noexcept;
         NODISCARD int64_t GetElapsedTimeInSeconds() const noexcept;
         NODISCARD static int64_t GetNowTimeInMicroseconds() noexcept;

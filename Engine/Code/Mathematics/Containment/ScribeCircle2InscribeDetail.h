@@ -16,7 +16,7 @@
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 
 template <typename Real>
-Mathematics::ScribeCircle2Inscribe<Real>::ScribeCircle2Inscribe(const Vector2& v0, const Vector2& v1, const Vector2& v2)
+Mathematics::ScribeCircle2Inscribe<Real>::ScribeCircle2Inscribe(const Vector2Type& v0, const Vector2Type& v1, const Vector2Type& v2)
     : points{ v0, v1, v2 }, circle2{}, isCircleConstructed{ false }
 {
     Calculate();
@@ -49,7 +49,7 @@ void Mathematics::ScribeCircle2Inscribe<Real>::Calculate()
     }
     else
     {
-        circle2 = Circle2{};
+        circle2 = Circle2Type{};
         isCircleConstructed = false;
     }
 }
@@ -73,7 +73,7 @@ bool Mathematics::ScribeCircle2Inscribe<Real>::IsCircleConstructed() const noexc
 }
 
 template <typename Real>
-typename Mathematics::ScribeCircle2Inscribe<Real>::Circle2 Mathematics::ScribeCircle2Inscribe<Real>::GetCircle2() const
+typename Mathematics::ScribeCircle2Inscribe<Real>::Circle2Type Mathematics::ScribeCircle2Inscribe<Real>::GetCircle2() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

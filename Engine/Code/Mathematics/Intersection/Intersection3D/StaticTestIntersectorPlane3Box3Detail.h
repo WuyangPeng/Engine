@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorPlane3Box3<Real>::StaticTestIntersectorPlane3Box3(const Plane3& plane, const Box3& box, const Real epsilon)
+Mathematics::StaticTestIntersectorPlane3Box3<Real>::StaticTestIntersectorPlane3Box3(const Plane3Type& plane, const Box3Type& box, const Real epsilon)
     : ParentType{ epsilon }, plane{ plane }, box{ box }
 {
     Test();
@@ -54,14 +54,14 @@ Mathematics::Box3<Real> Mathematics::StaticTestIntersectorPlane3Box3<Real>::GetB
 template <typename Real>
 void Mathematics::StaticTestIntersectorPlane3Box3<Real>::Test()
 {
-    std::array<Real, 3> tmp{ box.GetExtent(0) * (Vector3Tools::DotProduct(plane.GetNormal(), box.GetAxis(0))),
-                             box.GetExtent(1) * (Vector3Tools::DotProduct(plane.GetNormal(), box.GetAxis(1))),
-                             box.GetExtent(2) * (Vector3Tools::DotProduct(plane.GetNormal(), box.GetAxis(2))) };
+    std::array<Real, 3> tmp{ box.GetExtent(0) * (Vector3ToolsType::DotProduct(plane.GetNormal(), box.GetAxis(0))),
+                             box.GetExtent(1) * (Vector3ToolsType::DotProduct(plane.GetNormal(), box.GetAxis(1))),
+                             box.GetExtent(2) * (Vector3ToolsType::DotProduct(plane.GetNormal(), box.GetAxis(2))) };
 
-    auto radius = Math::FAbs(tmp.at(0)) + Math::FAbs(tmp.at(1)) + Math::FAbs(tmp.at(2));
+    auto radius = MathType::FAbs(tmp.at(0)) + MathType::FAbs(tmp.at(1)) + MathType::FAbs(tmp.at(2));
 
     auto signedDistance = plane.DistanceTo(box.GetCenter());
-    if (Math::FAbs(signedDistance) <= radius)
+    if (MathType::FAbs(signedDistance) <= radius)
     {
         this->SetIntersectionType(IntersectionType::Point);
     }
@@ -76,11 +76,11 @@ bool Mathematics::StaticTestIntersectorPlane3Box3<Real>::BoxIsCulled() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    std::array<Real, 3> tmp{ box.GetExtent(0) * (Vector3Tools::DotProduct(plane.GetNormal(), box.GetAxis(0))),
-                             box.GetExtent(1) * (Vector3Tools::DotProduct(plane.GetNormal(), box.GetAxis(1))),
-                             box.GetExtent(2) * (Vector3Tools::DotProduct(plane.GetNormal(), box.GetAxis(2))) };
+    std::array<Real, 3> tmp{ box.GetExtent(0) * (Vector3ToolsType::DotProduct(plane.GetNormal(), box.GetAxis(0))),
+                             box.GetExtent(1) * (Vector3ToolsType::DotProduct(plane.GetNormal(), box.GetAxis(1))),
+                             box.GetExtent(2) * (Vector3ToolsType::DotProduct(plane.GetNormal(), box.GetAxis(2))) };
 
-    auto radius = Math::FAbs(tmp.at(0)) + Math::FAbs(tmp.at(1)) + Math::FAbs(tmp.at(2));
+    auto radius = MathType::FAbs(tmp.at(0)) + MathType::FAbs(tmp.at(1)) + MathType::FAbs(tmp.at(2));
 
     auto signedDistance = plane.DistanceTo(box.GetCenter());
 

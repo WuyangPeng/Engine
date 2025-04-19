@@ -60,10 +60,10 @@
     <None Include="Configuration\Smtp.json">
       <Filter>配置</Filter>
     </None>
-    <None Include="Configuration\Database.json">
-      <Filter>配置</Filter>
-    </None>
     <None Include="Configuration\ThreadingCoreRenderEngineAssist\Renderer.json">
+      <Filter>配置\ThreadingCoreRenderEngineAssist</Filter>
+    </None>
+    <None Include="Configuration\ThreadingCoreRenderEngineAssist\Database.json">
       <Filter>配置\ThreadingCoreRenderEngineAssist</Filter>
     </None>
   </ItemGroup>

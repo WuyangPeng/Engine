@@ -102,7 +102,7 @@ void System::ConditionVariableTestingBase::PushBuffer()
 
 void System::ConditionVariableTestingBase::WakeNotEmptyConditionVariable() noexcept
 {
-    WakeConditionVariable(&bufferNotEmpty);
+    WakeSystemConditionVariable(&bufferNotEmpty);
 }
 
 void System::ConditionVariableTestingBase::WakeAllConditionVariable() noexcept
@@ -140,7 +140,7 @@ void System::ConditionVariableTestingBase::PopBuffer()
 
 void System::ConditionVariableTestingBase::WakeNotFullConditionVariable() noexcept
 {
-    WakeConditionVariable(&bufferNotFull);
+    WakeSystemConditionVariable(&bufferNotFull);
 }
 
 int System::ConditionVariableTestingBase::GetQueueSize() const noexcept

@@ -79,7 +79,7 @@ namespace System
     {
         int unused;
     };
-    using OpenGLHglrc = OpenGLHglrcDeclare*;
+    using OpenGLRcHandle = OpenGLHglrcDeclare*;
 
     using OpenGLColorRef = uint32_t;
 

@@ -17,7 +17,7 @@
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorLine3Plane3<Real>::StaticTestIntersectorLine3Plane3(const Line3& line, const Plane3& plane, const Real epsilon) noexcept
+Mathematics::StaticTestIntersectorLine3Plane3<Real>::StaticTestIntersectorLine3Plane3(const Line3Type& line, const Plane3Type& plane, const Real epsilon) noexcept
     : ParentType{ epsilon }, line{ line }, plane{ plane }
 {
     Test();
@@ -57,15 +57,15 @@ Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorLine3Plane3<Real>::G
 template <typename Real>
 void Mathematics::StaticTestIntersectorLine3Plane3<Real>::Test() noexcept
 {
-    if (const auto ddn = Vector3Tools::DotProduct(line.GetDirection(), plane.GetNormal());
-        Math::GetZeroTolerance() < Math::FAbs(ddn))
+    if (const auto ddn = Vector3ToolsType::DotProduct(line.GetDirection(), plane.GetNormal());
+        MathType::GetZeroTolerance() < MathType::FAbs(ddn))
     {
         this->SetIntersectionType(IntersectionType::Point);
         return;
     }
 
     if (const auto signedDistance = plane.DistanceTo(line.GetOrigin());
-        Math::FAbs(signedDistance) <= Math::GetZeroTolerance())
+        MathType::FAbs(signedDistance) <= MathType::GetZeroTolerance())
     {
         this->SetIntersectionType(IntersectionType::Line);
         return;

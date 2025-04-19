@@ -19,15 +19,15 @@ requires std::is_arithmetic_v<Real>
 Mathematics::QuaternionConstraints<Real>::QuaternionConstraints(Real minAngle, Real maxAngle) noexcept
     : minAngle{ minAngle },
       maxAngle{ maxAngle },
-      cosMinAngle{ Math::Cos(minAngle) },
-      sinMinAngle{ Math::Sin(minAngle) },
-      cosMaxAngle{ Math::Cos(maxAngle) },
-      sinMaxAngle{ Math::Sin(maxAngle) },
+      cosMinAngle{ MathType::Cos(minAngle) },
+      sinMinAngle{ MathType::Sin(minAngle) },
+      cosMaxAngle{ MathType::Cos(maxAngle) },
+      sinMaxAngle{ MathType::Sin(maxAngle) },
       diffCosMaxMin{ cosMaxAngle - cosMinAngle },
       diffSinMaxMin{ sinMaxAngle - sinMinAngle },
-      avrAngle{ Math::GetRational(1, 2) * (minAngle + maxAngle) },
-      cosAvrAngle{ Math::Cos(avrAngle) },
-      sinAvrAngle{ Math::Sin(avrAngle) }
+      avrAngle{ MathType::GetRational(1, 2) * (minAngle + maxAngle) },
+      cosAvrAngle{ MathType::Cos(avrAngle) },
+      sinAvrAngle{ MathType::Sin(avrAngle) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -37,7 +37,7 @@ Mathematics::QuaternionConstraints<Real>::QuaternionConstraints(Real minAngle, R
 template <typename Real>
 requires std::is_arithmetic_v<Real> bool Mathematics::QuaternionConstraints<Real>::IsValid() const noexcept
 {
-    if (-Math::GetHalfPI() <= minAngle && minAngle <= Math::GetHalfPI() && minAngle <= maxAngle && maxAngle <= Math::GetHalfPI())
+    if (-MathType::GetHalfPI() <= minAngle && minAngle <= MathType::GetHalfPI() && minAngle <= maxAngle && maxAngle <= MathType::GetHalfPI())
         return true;
     else
         return false;
@@ -49,7 +49,7 @@ template <typename Real>
 requires std::is_arithmetic_v<Real> bool Mathematics::QuaternionConstraints<Real>::IsValid(Real x, Real y) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_1(Math::Approximate(Math::Sqrt(x * x + y * y), Math::GetValue(1)), "(x,y)必须是单位长度！");
+    MATHEMATICS_ASSERTION_1(MathType::Approximate(MathType::Sqrt(x * x + y * y), MathType::GetValue(1)), "(x,y)必须是单位长度！");
 
     // 测试(x,y)是否满足约束条件。
     auto xm = x - cosMinAngle;

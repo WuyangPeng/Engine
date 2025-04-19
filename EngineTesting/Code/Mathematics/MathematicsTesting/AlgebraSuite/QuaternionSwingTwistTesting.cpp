@@ -63,7 +63,7 @@ void Mathematics::QuaternionSwingTwistTesting::QuaternionSwingTwistTest()
 
         firstQuaternion.Normalize();
 
-        QuaternionD::QuaternionSwingTwist quaternionSwingTwist = firstQuaternion.DecomposeTwistTimesSwing(vector0, 1e-10);
+        QuaternionD::QuaternionSwingTwistType quaternionSwingTwist = firstQuaternion.DecomposeTwistTimesSwing(vector0, 1e-10);
 
         QuaternionD secondQuaternion = quaternionSwingTwist.GetTwist() * quaternionSwingTwist.GetSwing();
 

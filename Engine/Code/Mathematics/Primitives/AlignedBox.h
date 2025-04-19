@@ -28,9 +28,9 @@ namespace Mathematics
     public:
         using ClassType = AlignedBox<N, Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector = Algebra::Vector<N, Real>;
-        using AlignedBoxCentered = AlignedBoxCentered<N, Real>;
+        using AlignedBoxCenteredType = AlignedBoxCentered<N, Real>;
         using VerticesType = std::array<Vector, (1 << N)>;
 
     public:
@@ -51,7 +51,7 @@ namespace Mathematics
         /// 计算居中表示。
         /// 注意：如果设置最小值和最大值，计算C和范围，
         /// 然后重新计算最小值和最高值，则数值舍入误差可能会导致与开始时不同的结果。
-        NODISCARD AlignedBoxCentered GetCenteredForm() const;
+        NODISCARD AlignedBoxCenteredType GetCenteredForm() const;
 
         /// 计算长方体的顶点。
         /// 如果索引i具有比特模式i = b[N-1]...b[0]，则索引i处的角是vertex[i]，

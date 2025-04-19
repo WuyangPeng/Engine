@@ -16,9 +16,8 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Rendering/DataTypes/ColourDetail.h"
 #include "Rendering/RendererEngine/RendererEngineFwd.h"
+#include "Framework/MiddleLayer/RenderingManagerInterface.h"
 #include "Framework/WindowCreate/WindowCreateFwd.h"
-
-FRAMEWORK_NON_COPY_EXPORT_IMPL(RenderingManagerImpl);
 
 //  ”Õº≤„¿‡
 namespace Framework

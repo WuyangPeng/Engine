@@ -32,7 +32,11 @@ void CoreTools::PropertiesBase::SetValue(int aValue) noexcept
     value = aValue;
 }
 
+#ifdef SYSTEM_PLATFORM_WIN32
+
 namespace CoreTools
 {
     const ptrdiff_t PropertyBase<PropertiesBase::PropValue, PropertiesBase>::offset = offsetof(PropertiesBase, propValue);
 }
+
+#endif  // SYSTEM_PLATFORM_WIN32

@@ -26,7 +26,7 @@ namespace Mathematics
     public:
         using ClassType = Euler<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         Euler(EulerResult type,

@@ -16,7 +16,7 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::TrianglePlaneRelations<Real>::TrianglePlaneRelations(const Triangle3& triangle, const Plane3& plane, const Real epsilon)
+Mathematics::TrianglePlaneRelations<Real>::TrianglePlaneRelations(const Triangle3Type& triangle, const Plane3Type& plane, const Real epsilon)
     : distance{}, sign{}, positive{ 0 }, negative{ 0 }, zero{ 0 }
 {
     Relations(triangle, plane, epsilon);
@@ -25,7 +25,7 @@ Mathematics::TrianglePlaneRelations<Real>::TrianglePlaneRelations(const Triangle
 }
 
 template <typename Real>
-void Mathematics::TrianglePlaneRelations<Real>::Relations(const Triangle3& triangle, const Plane3& plane, const Real epsilon)
+void Mathematics::TrianglePlaneRelations<Real>::Relations(const Triangle3Type& triangle, const Plane3Type& plane, const Real epsilon)
 {
     // 计算三角形顶点到平面的带符号距离。 使用epsilon平面测试。
 
@@ -45,7 +45,7 @@ void Mathematics::TrianglePlaneRelations<Real>::Relations(const Triangle3& trian
         }
         else
         {
-            distance.at(i) = Math::GetValue(0);
+            distance.at(i) = MathType::GetValue(0);
             sign.at(i) = NumericalValueSymbol::Zero;
             ++zero;
         }

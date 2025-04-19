@@ -113,7 +113,7 @@ void Mathematics::Delaunay2<Real>::Init()
         else
         {
             expand = Math<Real>::GetValue(1);
-            query = std::make_shared<Query2>(sVertices);
+            query = std::make_shared<Query2Type>(sVertices);
         }
 
         scale *= expand;
@@ -124,7 +124,7 @@ void Mathematics::Delaunay2<Real>::Init()
     }
     else
     {
-        min = Vector2::GetZero();
+        min = Vector2Type::GetZero();
         scale = Math<Real>::GetValue(1);
         sVertices = vertices;
 
@@ -147,7 +147,7 @@ void Mathematics::Delaunay2<Real>::Init()
 
     triMesh.InsertTriangle(extreme.at(0), extreme.at(1), extreme.at(2));
 
-    std::set<Vector2> processed{};
+    std::set<Vector2Type> processed{};
     for (auto i = 0; i < 3; ++i)
     {
         processed.insert(sVertices.at(extreme.at(i)));
@@ -238,14 +238,14 @@ Mathematics::Delaunay1<Real> Mathematics::Delaunay2<Real>::GetDelaunay1() const
         THROW_EXCEPTION(SYSTEM_TEXT("Î¬¶È±ØÐëÎª1¡£"));
     }
 
-    typename Delaunay1::Vertices projection{};
+    typename Delaunay1Type::Vertices projection{};
     for (const auto& value : vertices)
     {
         auto diff = value - lineOrigin;
         projection.emplace_back(Vector2Tools<Real>::DotProduct(lineDirection, diff));
     }
 
-    Delaunay1 delaunay1(projection, this->GetEpsilon(), this->GetQueryType());
+    Delaunay1Type delaunay1(projection, this->GetEpsilon(), this->GetQueryType());
 
     return delaunay1;
 }
@@ -298,7 +298,7 @@ typename Mathematics::Delaunay2<Real>::HullType Mathematics::Delaunay2<Real>::Ge
 }
 
 template <typename Real>
-int Mathematics::Delaunay2<Real>::GetContainingTriangle(const Vector2& p) const
+int Mathematics::Delaunay2<Real>::GetContainingTriangle(const Vector2Type& p) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -424,7 +424,7 @@ typename Mathematics::Delaunay2<Real>::VertexType Mathematics::Delaunay2<Real>::
         return { vertices.at(this->GetIndex(3 * i)), vertices.at(this->GetIndex(3 * i + 1)), vertices.at(this->GetIndex(3 * i + 2)), true };
     }
 
-    return { Vector2{}, Vector2{}, Vector2{}, false };
+    return { Vector2Type{}, Vector2Type{}, Vector2Type{}, false };
 }
 
 template <typename Real>
@@ -472,7 +472,7 @@ typename Mathematics::Delaunay2<Real>::IndexType Mathematics::Delaunay2<Real>::G
 }
 
 template <typename Real>
-typename Mathematics::Delaunay2<Real>::BaryType Mathematics::Delaunay2<Real>::GetBarycentricSet(int i, const Vector2& p) const
+typename Mathematics::Delaunay2<Real>::BaryType Mathematics::Delaunay2<Real>::GetBarycentricSet(int i, const Vector2Type& p) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -553,14 +553,14 @@ void Mathematics::Delaunay2<Real>::LoadFile(const String& filename)
     inFile.Read(sizeof(int32_t), &lastEdgeOppositeIndex);
     inFile.Read(sizeof(int32_t), pathSize, path.data());
 
-    const auto twoNumVertices = Vector2::pointSize * numVertices;
+    const auto twoNumVertices = Vector2Type::pointSize * numVertices;
 
     inFile.Read(sizeof(Real), twoNumVertices, vertices.data());
     inFile.Read(sizeof(Real), twoNumVertices, sVertices.data());
-    inFile.Read(sizeof(Real), Vector2::pointSize, &min);
-    inFile.Read(sizeof(Real), Vector2::pointSize, &scale);
-    inFile.Read(sizeof(Real), Vector2::pointSize, &lineOrigin);
-    inFile.Read(sizeof(Real), Vector2::pointSize, &lineDirection);
+    inFile.Read(sizeof(Real), Vector2Type::pointSize, &min);
+    inFile.Read(sizeof(Real), Vector2Type::pointSize, &scale);
+    inFile.Read(sizeof(Real), Vector2Type::pointSize, &lineOrigin);
+    inFile.Read(sizeof(Real), Vector2Type::pointSize, &lineDirection);
 
     switch (this->GetQueryType())
     {
@@ -581,7 +581,7 @@ void Mathematics::Delaunay2<Real>::LoadFile(const String& filename)
         }
         case QueryType::Real:
         {
-            query = std::make_shared<Query2>(sVertices);
+            query = std::make_shared<Query2Type>(sVertices);
             break;
         }
         case QueryType::Filtered:
@@ -617,14 +617,14 @@ void Mathematics::Delaunay2<Real>::SaveFile(const String& filename) const
 
     const auto numVertices = this->GetNumVertices();
 
-    const auto twoNumVertices = Vector2::pointSize * numVertices;
+    const auto twoNumVertices = Vector2Type::pointSize * numVertices;
 
     outFile.Write(sizeof(Real), twoNumVertices, vertices.data());
     outFile.Write(sizeof(Real), twoNumVertices, vertices.data());
-    outFile.Write(sizeof(Real), Vector2::pointSize, &min);
-    outFile.Write(sizeof(Real), Vector2::pointSize, &scale);
-    outFile.Write(sizeof(Real), Vector2::pointSize, &lineOrigin);
-    outFile.Write(sizeof(Real), Vector2::pointSize, &lineDirection);
+    outFile.Write(sizeof(Real), Vector2Type::pointSize, &min);
+    outFile.Write(sizeof(Real), Vector2Type::pointSize, &scale);
+    outFile.Write(sizeof(Real), Vector2Type::pointSize, &lineOrigin);
+    outFile.Write(sizeof(Real), Vector2Type::pointSize, &lineDirection);
 }
 
 template <typename Real>

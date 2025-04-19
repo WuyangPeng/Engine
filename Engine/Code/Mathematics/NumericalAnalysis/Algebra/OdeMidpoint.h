@@ -28,7 +28,7 @@ namespace Mathematics::Algebra
         using ClassType = OdeMidpoint<Real, TVector>;
         using ParentType = OdeSolver<Real, TVector>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using FunctionType = std::function<TVector(Real, const TVector&)>;
 
     public:

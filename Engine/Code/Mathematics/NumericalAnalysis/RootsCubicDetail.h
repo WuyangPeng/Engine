@@ -37,13 +37,13 @@ template <typename T>
 int Mathematics::RootsCubic<T>::Solve(bool useBisection, const T& g0, const T& g1, const T& g2, const T& g3, PolynomialRootContainer& roots) requires(std::is_floating_point_v<T> || std::is_same_v<T, Rational>)
 {
     /// 测试度数是否小于3。
-    if (Math::Approximate(g3, T{}))
+    if (MathType::Approximate(g3, T{}))
     {
-        return RootsQuadratic::Solve(useBisection, g0, g1, g2, roots);
+        return RootsQuadraticType::Solve(useBisection, g0, g1, g2, roots);
     }
 
     /// 测试零值根。
-    if (Math::Approximate(g0, T{}))
+    if (MathType::Approximate(g0, T{}))
     {
         return HasZeroValuedRoots(useBisection, g1, g2, g3, roots);
     }
@@ -68,7 +68,7 @@ template <typename T>
 int Mathematics::RootsCubic<T>::Solve(bool useBisection, const T& m0, const T& m1, const T& m2, PolynomialRootContainer& roots) requires(std::is_floating_point_v<T> || std::is_same_v<T, Rational>)
 {
     /// 测试零值根。
-    if (Math::Approximate(m0, T{}))
+    if (MathType::Approximate(m0, T{}))
     {
         return HasZeroValuedRoots(useBisection, m1, m2, roots);
     }
@@ -119,16 +119,16 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRoots(bool useBisection, const R
 template <typename T>
 int Mathematics::RootsCubic<T>::HasZeroValuedRoots(bool useBisection, const T& g1, const T& g2, const T& g3, PolynomialRootContainer& roots)
 {
-    if (Math::Approximate(g1, T{}))
+    if (MathType::Approximate(g1, T{}))
     {
-        if (Math::Approximate(g2, T{}))
+        if (MathType::Approximate(g2, T{}))
         {
             roots.at(0) = { T{}, 3 };
             return 1;
         }
         else
         {
-            auto numRoots = RootsLinear::Solve(g2, g3, roots);
+            auto numRoots = RootsLinearType::Solve(g2, g3, roots);
             roots.at(numRoots++) = { T{}, 2 };
             std::sort(roots.begin(), roots.begin() + numRoots);
             return numRoots;
@@ -136,7 +136,7 @@ int Mathematics::RootsCubic<T>::HasZeroValuedRoots(bool useBisection, const T& g
     }
     else
     {
-        auto numRoots = RootsQuadratic::Solve(useBisection, g1, g2, g3, roots);
+        auto numRoots = RootsQuadraticType::Solve(useBisection, g1, g2, g3, roots);
         roots.at(numRoots++) = { T{}, 1 };
         std::sort(roots.begin(), roots.begin() + numRoots);
         return numRoots;
@@ -146,16 +146,16 @@ int Mathematics::RootsCubic<T>::HasZeroValuedRoots(bool useBisection, const T& g
 template <typename T>
 int Mathematics::RootsCubic<T>::HasZeroValuedRoots(bool useBisection, const T& m1, const T& m2, PolynomialRootContainer& roots)
 {
-    if (Math::Approximate(m1, T{}))
+    if (MathType::Approximate(m1, T{}))
     {
-        if (Math::Approximate(m2, T{}))
+        if (MathType::Approximate(m2, T{}))
         {
             roots.at(0) = { T{}, 3 };
             return 1;
         }
         else
         {
-            auto numRoots = RootsLinear::Solve(m2, roots);
+            auto numRoots = RootsLinearType::Solve(m2, roots);
             roots.at(numRoots++) = { T{}, 2 };
             std::sort(roots.begin(), roots.begin() + numRoots);
             return numRoots;
@@ -163,7 +163,7 @@ int Mathematics::RootsCubic<T>::HasZeroValuedRoots(bool useBisection, const T& m
     }
     else
     {
-        auto numRoots = RootsQuadratic::Solve(useBisection, m1, m2, roots);
+        auto numRoots = RootsQuadraticType::Solve(useBisection, m1, m2, roots);
         roots.at(numRoots++) = { T{}, 1 };
         std::sort(roots.begin(), roots.begin() + numRoots);
         return numRoots;
@@ -188,7 +188,20 @@ void Mathematics::RootsCubic<T>::ComputeClassifiers(const Rational& rM0, const R
 }
 
 template <typename T>
-int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& rD0, const Rational& rD1, RationalPolynomialRootContainer& rRoots) requires(std::is_arithmetic_v<T>)
+int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& rD0, const Rational& rD1, RationalPolynomialRootContainer& rRoots)
+{
+    if constexpr (std::is_arithmetic_v<T>)
+    {
+        return ComputeDepressedRootsBisection0(rD0, rD1, rRoots);
+    }
+    else
+    {
+        return ComputeDepressedRootsBisection1(rD0, rD1, rRoots);
+    }
+}
+
+template <typename T>
+int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection0(const Rational& rD0, const Rational& rD1, RationalPolynomialRootContainer& rRoots) requires(std::is_arithmetic_v<T>)
 {
     const auto signD0 = rD0.GetSign();
     const auto signD1 = rD1.GetSign();
@@ -204,7 +217,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
         {
             std::array quadraticRoot{ RationalPolynomialRoot::CreateZero(), RationalPolynomialRoot::CreateZero() };
             /// 三个实根，每个复数为1。
-            auto numRoots = RootsQuadratic::ComputeDepressedRoots(true, rD1, quadraticRoot);
+            auto numRoots = RootsQuadraticType::ComputeDepressedRoots(true, rD1, quadraticRoot);
             rRoots.at(0) = quadraticRoot.at(0);
             rRoots.at(1) = quadraticRoot.at(1);
             rRoots.at(numRoots++) = { Rational(0), 1 };
@@ -223,7 +236,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
     {
         /// 一个实根，重数1。
         auto d0 = static_cast<T>(rD0);
-        auto b = std::max(Math::GetValue(1), std::fabs(d0));
+        auto b = std::max(MathType::GetValue(1), std::fabs(d0));
         auto f = [&d0](T x) noexcept {
             return Fma(x, x * x, d0);
         };
@@ -232,7 +245,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
         const Rational half{ 0.5 };
         auto xMin = -b;
         auto xMax = b;
-        PolynomialRoot::PolynomialRootBisect(f, -1, +1, xMin, xMax);
+        PolynomialRootType::PolynomialRootBisect(f, -1, +1, xMin, xMax);
         rRoots.at(0) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
         return 1;
     }
@@ -251,7 +264,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
         ///  将区间划分为[-2 * s, -s], [-s, s]和[s, 2 * s]。
         ///  在每个区间上使用平分来估计F(x)的根。
         std::array rQRoots{ RationalPolynomialRoot::CreateZero(), RationalPolynomialRoot::CreateZero() };
-        MAYBE_UNUSED const auto roots = RootsQuadratic::ComputeDepressedRoots(true, Rational(1, 3) * rD1, rQRoots);
+        MAYBE_UNUSED const auto roots = RootsQuadraticType::ComputeDepressedRoots(true, Rational(1, 3) * rD1, rQRoots);
         auto rS = rQRoots.at(1).GetX();
         auto rTwoS = Rational{ 2 } * rS;
         auto d0 = static_cast<T>(rD0);
@@ -267,19 +280,19 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
         /// 区间[-2 * s, s]上的双截
         auto xMin = -twoS;
         auto xMax = -s;
-        PolynomialRoot::PolynomialRootBisect(f, -1, +1, xMin, xMax);
+        PolynomialRootType::PolynomialRootBisect(f, -1, +1, xMin, xMax);
         rRoots.at(0) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
 
         /// 区间[-2 * s, s]上的双截
         xMin = -s;
         xMax = s;
-        PolynomialRoot::PolynomialRootBisect(f, +1, -1, xMin, xMax);
+        PolynomialRootType::PolynomialRootBisect(f, +1, -1, xMin, xMax);
         rRoots.at(1) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
 
         /// 区间[s, 2 * s]上的双截
         xMin = s;
         xMax = twoS;
-        PolynomialRoot::PolynomialRootBisect(f, -1, +1, xMin, xMax);
+        PolynomialRootType::PolynomialRootBisect(f, -1, +1, xMin, xMax);
         rRoots.at(2) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
         return 3;
     }
@@ -290,7 +303,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
         /// 在区间 [-b,b]上使用平分来估计根。
         auto d0 = static_cast<T>(rD0);
         auto d1 = static_cast<T>(rD1);
-        auto b = std::max(Math::GetValue(1), std::max(std::fabs(d0), std::fabs(d1)));
+        auto b = std::max(MathType::GetValue(1), std::max(std::fabs(d0), std::fabs(d1)));
         auto f = [&d0, &d1](T x) noexcept {
             return std::fma(x, std::fma(x, x, d1), d0);
         };
@@ -299,7 +312,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
         const Rational half{ 0.5 };
         auto xMin = -b;
         auto xMax = b;
-        PolynomialRoot::PolynomialRootBisect(f, -1, +1, xMin, xMax);
+        PolynomialRootType::PolynomialRootBisect(f, -1, +1, xMin, xMax);
         rRoots.at(0) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
         return 1;
     }
@@ -325,7 +338,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
 }
 
 template <typename T>
-int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& rD0, const Rational& rD1, RationalPolynomialRootContainer& rRoots) requires(!std::is_arithmetic_v<T>)
+int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection1(const Rational& rD0, const Rational& rD1, RationalPolynomialRootContainer& rRoots) requires(!std::is_arithmetic_v<T>)
 {
     const auto signD0 = rD0.GetSign();
     const auto signD1 = rD1.GetSign();
@@ -341,7 +354,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
         {
             std::array quadraticRoot{ RationalPolynomialRoot::CreateZero(), RationalPolynomialRoot::CreateZero() };
             /// 三个实根，每个复数为1。
-            auto numRoots = RootsQuadratic::ComputeDepressedRoots(true, rD1, quadraticRoot);
+            auto numRoots = RootsQuadraticType::ComputeDepressedRoots(true, rD1, quadraticRoot);
             rRoots.at(0) = quadraticRoot.at(0);
             rRoots.at(1) = quadraticRoot.at(1);
             rRoots.at(numRoots++) = { Rational(0), 1 };
@@ -369,7 +382,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
         const Rational half{ 0.5 };
         auto xMin = -b;
         auto xMax = b;
-        PolynomialRoot::PolynomialRootBisect(f, -1, +1, xMin, xMax);
+        PolynomialRootType::PolynomialRootBisect(f, -1, +1, xMin, xMax);
         rRoots.at(0) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
         return 1;
     }
@@ -388,7 +401,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
         ///  将区间划分为[-2 * s, -s], [-s, s]和[s, 2 * s]。
         ///  在每个区间上使用平分来估计F(x)的根。
         std::array rQRoots{ RationalPolynomialRoot::CreateZero(), RationalPolynomialRoot::CreateZero() };
-        MAYBE_UNUSED const auto roots = RootsQuadratic::ComputeDepressedRoots(true, Rational(1, 3) * rD1, rQRoots);
+        MAYBE_UNUSED const auto roots = RootsQuadraticType::ComputeDepressedRoots(true, Rational(1, 3) * rD1, rQRoots);
         auto rS = rQRoots.at(1).GetX();
         auto rTwoS = Rational{ 2 } * rS;
         auto d0 = static_cast<T>(rD0);
@@ -404,19 +417,19 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
         /// 区间[-2 * s, s]上的双截
         auto xMin = -twoS;
         auto xMax = -s;
-        PolynomialRoot::PolynomialRootBisect(f, -1, +1, xMin, xMax);
+        PolynomialRootType::PolynomialRootBisect(f, -1, +1, xMin, xMax);
         rRoots.at(0) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
 
         /// 区间[-2 * s, s]上的双截
         xMin = -s;
         xMax = s;
-        PolynomialRoot::PolynomialRootBisect(f, +1, -1, xMin, xMax);
+        PolynomialRootType::PolynomialRootBisect(f, +1, -1, xMin, xMax);
         rRoots.at(1) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
 
         /// 区间[s, 2 * s]上的双截
         xMin = s;
         xMax = twoS;
-        PolynomialRoot::PolynomialRootBisect(f, -1, +1, xMin, xMax);
+        PolynomialRootType::PolynomialRootBisect(f, -1, +1, xMin, xMax);
         rRoots.at(2) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
         return 3;
     }
@@ -436,7 +449,7 @@ int Mathematics::RootsCubic<T>::ComputeDepressedRootsBisection(const Rational& r
         const Rational half{ 0.5 };
         auto xMin = -b;
         auto xMax = b;
-        PolynomialRoot::PolynomialRootBisect(f, -1, +1, xMin, xMax);
+        PolynomialRootType::PolynomialRootBisect(f, -1, +1, xMin, xMax);
         rRoots.at(0) = { half * (Rational{ xMin } + Rational{ xMax }), 1 };
         return 1;
     }

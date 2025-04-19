@@ -25,24 +25,24 @@ namespace Mathematics
         using ClassType = DynamicFindIntersectorSegment3Triangle3<Real>;
         using ParentType = DynamicIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Segment3 = Segment3<Real>;
-        using Triangle3 = Triangle3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Segment3Type = Segment3<Real>;
+        using Triangle3Type = Triangle3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        DynamicFindIntersectorSegment3Triangle3(const Segment3& segment,
-                                                const Triangle3& triangle,
+        DynamicFindIntersectorSegment3Triangle3(const Segment3Type& segment,
+                                                const Triangle3Type& triangle,
                                                 Real tmax,
-                                                const Vector3& lhsVelocity,
-                                                const Vector3& rhsVelocity,
-                                                const Real epsilon = Math::GetZeroTolerance());
+                                                const Vector3Type& lhsVelocity,
+                                                const Vector3Type& rhsVelocity,
+                                                const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Segment3 GetSegment() const noexcept;
-        NODISCARD Triangle3 GetTriangle() const noexcept;
+        NODISCARD Segment3Type GetSegment() const noexcept;
+        NODISCARD Triangle3Type GetTriangle() const noexcept;
 
         NODISCARD Real GetSegmentParameter() const noexcept;
         NODISCARD Real GetTriangleBary0() const noexcept;
@@ -52,7 +52,7 @@ namespace Mathematics
         /// 这些函数旨在在动态查找交叉点查询之后调用。
         /// 对于“Find()”查询，您打算使用GetSegmentParameter()或三个GetTriangleBary?()函数自己计算接触点。
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
 
     private:
         /// 动态查找交叉点查询。 当有单个交点时，可以通过GetPoint(0)访问第一个交点；
@@ -62,8 +62,8 @@ namespace Mathematics
 
     private:
         // 要相交的对象。
-        Segment3 segment;
-        Triangle3 triangle;
+        Segment3Type segment;
+        Triangle3Type triangle;
 
         // 有关固定交集的信息。
         Real segmentParameter;
@@ -73,8 +73,8 @@ namespace Mathematics
 
         // 有关动态交集的信息。
         int quantity;
-        Vector3 point0;
-        Vector3 point1;
+        Vector3Type point0;
+        Vector3Type point1;
     };
 }
 

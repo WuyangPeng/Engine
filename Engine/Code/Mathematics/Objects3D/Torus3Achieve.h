@@ -27,7 +27,7 @@ Mathematics::Torus3<Real>::Torus3(Real outerRadius, Real innerRadius) noexcept
 template <typename Real>
 bool Mathematics::Torus3<Real>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) < innerRadius && innerRadius < outerRadius)
+    if (MathType::GetValue(0) < innerRadius && innerRadius < outerRadius)
         return true;
     else
         return false;
@@ -55,31 +55,31 @@ template <typename Real>
 Mathematics::Vector3<Real> Mathematics::Torus3<Real>::GetPosition(Real s, Real t) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= s && s <= Math::GetValue(1) && Math::GetValue(0) <= t && t <= Math::GetValue(1), "s和t必须在0和1之间");
+    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= s && s <= MathType::GetValue(1) && MathType::GetValue(0) <= t && t <= MathType::GetValue(1), "s和t必须在0和1之间");
 
-    const auto twoPiS = Math::GetTwoPI() * s;
-    const auto twoPiT = Math::GetTwoPI() * t;
-    const auto cosTwoPiS = Math::Cos(twoPiS);
-    const auto sinTwoPiS = Math::Sin(twoPiS);
-    const auto cosTwoPiT = Math::Cos(twoPiT);
-    const auto sinTwoPiT = Math::Sin(twoPiT);
+    const auto twoPiS = MathType::GetTwoPI() * s;
+    const auto twoPiT = MathType::GetTwoPI() * t;
+    const auto cosTwoPiS = MathType::Cos(twoPiS);
+    const auto sinTwoPiS = MathType::Sin(twoPiS);
+    const auto cosTwoPiT = MathType::Cos(twoPiT);
+    const auto sinTwoPiT = MathType::Sin(twoPiT);
     const auto maxRadius = outerRadius + innerRadius * cosTwoPiT;
 
-    return Vector3{ maxRadius * cosTwoPiS, maxRadius * sinTwoPiS, innerRadius * sinTwoPiT };
+    return Vector3Type{ maxRadius * cosTwoPiS, maxRadius * sinTwoPiS, innerRadius * sinTwoPiT };
 }
 
 template <typename Real>
 Mathematics::Vector3<Real> Mathematics::Torus3<Real>::GetNormal(Real s, Real t) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= s && s <= Math::GetValue(1) && Math::GetValue(0) <= t && t <= Math::GetValue(1), "s和t必须在0和1之间");
+    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= s && s <= MathType::GetValue(1) && MathType::GetValue(0) <= t && t <= MathType::GetValue(1), "s和t必须在0和1之间");
 
-    const auto twoPiS = Math::GetTwoPI() * s;
-    const auto cosTwoPiS = Math::Cos(twoPiS);
-    const auto sinTwoPiS = Math::Sin(twoPiS);
+    const auto twoPiS = MathType::GetTwoPI() * s;
+    const auto cosTwoPiS = MathType::Cos(twoPiS);
+    const auto sinTwoPiS = MathType::Sin(twoPiS);
     const auto position = GetPosition(s, t);
 
-    Vector3 normal{ position.GetX() - outerRadius * cosTwoPiS,
+    Vector3Type normal{ position.GetX() - outerRadius * cosTwoPiS,
                     position.GetY() - outerRadius * sinTwoPiS,
                     position.GetZ() };
     normal.Normalize();
@@ -88,49 +88,49 @@ Mathematics::Vector3<Real> Mathematics::Torus3<Real>::GetNormal(Real s, Real t) 
 }
 
 template <typename Real>
-Mathematics::Torus3Parameters<Real> Mathematics::Torus3<Real>::GetParameters(const Vector3& position) const noexcept(gAssert < 3 || gMathematicsAssert < 3)
+Mathematics::Torus3Parameters<Real> Mathematics::Torus3<Real>::GetParameters(const Vector3Type& position) const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const auto radius = Math::Sqrt(position.GetX() * position.GetX() + position.GetY() * position.GetY());
+    const auto radius = MathType::Sqrt(position.GetX() * position.GetX() + position.GetY() * position.GetY());
 
-    auto s = Math::GetValue(0);
+    auto s = MathType::GetValue(0);
 
-    if (Math::GetZeroTolerance() < radius)
+    if (MathType::GetZeroTolerance() < radius)
     {
-        auto angle = Math::ATan2(position.GetY(), position.GetX());
-        if (Math::GetValue(0) <= angle)
+        auto angle = MathType::ATan2(position.GetY(), position.GetX());
+        if (MathType::GetValue(0) <= angle)
         {
-            s = angle * Math::GetInverseTwoPI();
+            s = angle * MathType::GetInverseTwoPI();
         }
         else
         {
-            s = Math::GetValue(1) + angle * Math::GetInverseTwoPI();
+            s = MathType::GetValue(1) + angle * MathType::GetInverseTwoPI();
         }
     }
 
     auto diff = radius - outerRadius;
 
-    auto t = Math::GetValue(0);
+    auto t = MathType::GetValue(0);
 
-    if (Math::FAbs(diff) < Math::GetZeroTolerance() && Math::FAbs(position.GetZ()) < Math::GetZeroTolerance())
+    if (MathType::FAbs(diff) < MathType::GetZeroTolerance() && MathType::FAbs(position.GetZ()) < MathType::GetZeroTolerance())
     {
-        t = Math::GetValue(0);
+        t = MathType::GetValue(0);
     }
     else
     {
-        auto angle = Math::ATan2(position.GetZ(), diff);
-        if (Math::GetValue(0) <= angle)
+        auto angle = MathType::ATan2(position.GetZ(), diff);
+        if (MathType::GetValue(0) <= angle)
         {
-            t = angle * Math::GetInverseTwoPI();
+            t = angle * MathType::GetInverseTwoPI();
         }
         else
         {
-            t = Math::GetValue(1) + angle * Math::GetInverseTwoPI();
+            t = MathType::GetValue(1) + angle * MathType::GetInverseTwoPI();
         }
     }
 
-    return Torus3Parameters{ s, t };
+    return Torus3ParametersType{ s, t };
 }
 
 #endif  // MATHEMATICS_OBJECTS_3D_TORUS3_ACHIEVE_H

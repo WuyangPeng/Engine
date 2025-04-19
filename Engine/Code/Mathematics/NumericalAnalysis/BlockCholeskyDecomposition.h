@@ -70,10 +70,10 @@ namespace Mathematics
         void SubtractiveUpdate(int r, int k, int c, BlockMatrix& a);
 
     private:
-        using CholeskyDecomposition = CholeskyDecomposition<Real, BlockSize>;
+        using CholeskyDecompositionType = CholeskyDecomposition<Real, BlockSize>;
 
     private:
-        CholeskyDecomposition decomposer;
+        CholeskyDecompositionType decomposer;
     };
 
     /// 仅在运行时才知道大小的实现。
@@ -83,19 +83,19 @@ namespace Mathematics
     public:
         using ClassType = BlockCholeskyDecomposition<Real, 0, 0>;
 
-        using VariableLengthVector = VariableLengthVector<Real>;
-        using VariableMatrix = VariableMatrix<Real>;
+        using VariableLengthVectorType = VariableLengthVector<Real>;
+        using VariableMatrixType = VariableMatrix<Real>;
 
         /// BlockVector对象中的元素数必须为NumBlocks，
         /// 并且每个GVector元素都有BlockSize组件。
-        using BlockVector = std::vector<VariableLengthVector>;
+        using BlockVector = std::vector<VariableLengthVectorType>;
 
         /// BlockMatrix是NumBlocks乘NumBlocks矩阵的数组。
         /// 每个块矩阵按行主顺序存储。
         /// BlockMatrix元素本身按行的主要顺序存储。
         /// 块矩阵元素 M = BlockMatrix[col + NumBlocks * row]的大小为BlockSize乘BlockSize（按行主顺序），
         /// 并且位于块的完整矩阵的（row，col）位置。
-        using BlockMatrix = std::vector<VariableMatrix>;
+        using BlockMatrix = std::vector<VariableMatrixType>;
 
     public:
         BlockCholeskyDecomposition(int blockSize, int numBlocks);
@@ -119,7 +119,7 @@ namespace Mathematics
         NODISCARD BlockVector SolveUpper(const BlockMatrix& l);
 
     private:
-        using CholeskyDecomposition = CholeskyDecomposition<Real>;
+        using CholeskyDecompositionType = CholeskyDecomposition<Real>;
 
     private:
         /// 计算二维BlockMatrix对象中块矩阵的一维索引。
@@ -142,7 +142,7 @@ namespace Mathematics
         const int numDimensions;
 
         /// 分解器的大小为BlockSize。
-        CholeskyDecomposition decomposer;
+        CholeskyDecompositionType decomposer;
     };
 }
 

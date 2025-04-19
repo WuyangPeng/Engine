@@ -35,7 +35,7 @@ namespace CoreTools
         };
 
     public:
-        static NODISCARD Environment Create();
+        NODISCARD static Environment Create();
 
         explicit Environment(EnvironmentCreate environmentCreate);
 

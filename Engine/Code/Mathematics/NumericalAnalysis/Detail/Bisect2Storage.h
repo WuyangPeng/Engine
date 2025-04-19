@@ -19,6 +19,7 @@
 
 #include <boost/noncopyable.hpp>
 #include <memory>
+#include <type_traits>
 
 namespace Mathematics
 {
@@ -30,15 +31,15 @@ namespace Mathematics
 
         using ClassType = Bisect2Storage<Real>;
 
-        using Bisect2Root = Bisect2Root<Real>;
-        using Bisect2RootSharedPtr = std::shared_ptr<Bisect2Root>;
-        using Math = Math<Real>;
-        using Bisect2 = Bisect2<Real>;
-        using Bisect2Node = Bisect2Node<Real>;
-        using Bisect2NodeSharedPtr = std::shared_ptr<Bisect2Node>;
+        using Bisect2RootType = Bisect2Root<Real>;
+        using Bisect2RootSharedPtr = std::shared_ptr<Bisect2RootType>;
+        using MathType = Math<Real>;
+        using Bisect2Type = Bisect2<Real>;
+        using Bisect2NodeType = Bisect2Node<Real>;
+        using Bisect2NodeSharedPtr = std::shared_ptr<Bisect2NodeType>;
 
     public:
-        explicit Bisect2Storage(const Bisect2& bisect) noexcept;
+        explicit Bisect2Storage(const Bisect2Type& bisect) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -85,7 +86,7 @@ namespace Mathematics
         bool ZeroTest(Real x, Real y, Bisect2StorageType type);
 
     private:
-        const Bisect2& bisect;
+        const Bisect2Type& bisect;
 
         // ¹Ì¶¨´æ´¢,ÒÔ±ÜÃâÔÚµÝ¹éÖÐµÄ¶ÑÕ»ËðºÄ¡£
         Real beginPointX;

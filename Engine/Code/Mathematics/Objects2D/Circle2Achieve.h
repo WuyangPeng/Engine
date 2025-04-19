@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::Circle2<Real>::Circle2(const Vector2& center, Real radius) noexcept
+Mathematics::Circle2<Real>::Circle2(const Vector2Type& center, Real radius) noexcept
     : center{ center }, radius{ radius }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -32,7 +32,7 @@ Mathematics::Circle2<Real>::Circle2() noexcept
 template <typename Real>
 bool Mathematics::Circle2<Real>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) <= radius)
+    if (MathType::GetValue(0) <= radius)
         return true;
     else
         return false;
@@ -49,7 +49,7 @@ Mathematics::Vector2<Real> Mathematics::Circle2<Real>::GetCenter() const noexcep
 }
 
 template <typename Real>
-void Mathematics::Circle2<Real>::SetCircle(const Vector2& aCenter, Real aRadius) noexcept
+void Mathematics::Circle2<Real>::SetCircle(const Vector2Type& aCenter, Real aRadius) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -58,7 +58,7 @@ void Mathematics::Circle2<Real>::SetCircle(const Vector2& aCenter, Real aRadius)
 }
 
 template <typename Real>
-void Mathematics::Circle2<Real>::SetCenter(const Vector2& aCenter) noexcept
+void Mathematics::Circle2<Real>::SetCenter(const Vector2Type& aCenter) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -70,7 +70,7 @@ void Mathematics::Circle2<Real>::SetCenter(const AlgebraVector2& aCenter)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    center = Vector2{ aCenter[0], aCenter[1] };
+    center = Vector2Type{ aCenter[0], aCenter[1] };
 }
 
 template <typename Real>

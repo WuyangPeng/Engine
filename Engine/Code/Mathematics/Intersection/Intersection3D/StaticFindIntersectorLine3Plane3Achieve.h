@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorLine3Plane3<Real>::StaticFindIntersectorLine3Plane3(const Line3& line, const Plane3& plane, const Real epsilon) noexcept
+Mathematics::StaticFindIntersectorLine3Plane3<Real>::StaticFindIntersectorLine3Plane3(const Line3Type& line, const Plane3Type& plane, const Real epsilon) noexcept
     : ParentType{ epsilon }, line{ line }, plane{ plane }, lineParameter{}
 {
     Find();
@@ -55,9 +55,9 @@ Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorLine3Plane3<Real>::G
 template <typename Real>
 void Mathematics::StaticFindIntersectorLine3Plane3<Real>::Find() noexcept
 {
-    auto directionDotNormal = Vector3Tools::DotProduct(line.GetDirection(), plane.GetNormal());
+    auto directionDotNormal = Vector3ToolsType::DotProduct(line.GetDirection(), plane.GetNormal());
     auto signedDistance = plane.DistanceTo(line.GetOrigin());
-    if (Math::GetZeroTolerance() < Math::FAbs(directionDotNormal))
+    if (MathType::GetZeroTolerance() < MathType::FAbs(directionDotNormal))
     {
         // 该线不平行于平面，因此它们必须相交。
         lineParameter = -signedDistance / directionDotNormal;
@@ -67,10 +67,10 @@ void Mathematics::StaticFindIntersectorLine3Plane3<Real>::Find() noexcept
     }
 
     // 线和平面平行。 确定它们在数值上是否足够接近以重合。
-    if (Math::FAbs(signedDistance) <= Math::GetZeroTolerance())
+    if (MathType::FAbs(signedDistance) <= MathType::GetZeroTolerance())
     {
         // 该线与平面重合，因此将参数选择为t = 0。
-        lineParameter = Math::GetValue(0);
+        lineParameter = MathType::GetValue(0);
         this->SetIntersectionType(IntersectionType::Line);
 
         return;

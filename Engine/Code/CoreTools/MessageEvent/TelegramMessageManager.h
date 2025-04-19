@@ -26,8 +26,8 @@ namespace CoreTools
     public:
         using ClassType = TelegramMessageManager<EventType>;
 
-        using Telegram = Telegram<EventType>;
-        using TelegramLess = TelegramLess<EventType>;
+        using TelegramType = Telegram<EventType>;
+        using TelegramLessType = TelegramLess<EventType>;
 
     public:
         explicit TelegramMessageManager(int64_t difference);
@@ -40,8 +40,8 @@ namespace CoreTools
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        void CallEvent(const Telegram& telegram);
-        void CallEventImmediately(int64_t currentTime, const Telegram& telegram);
+        void CallEvent(const TelegramType& telegram);
+        void CallEventImmediately(int64_t currentTime, const TelegramType& telegram);
 
         void DispatchDelayEvent(int64_t currentTime);
 
@@ -52,19 +52,19 @@ namespace CoreTools
         NODISCARD bool UnRegister(EventType eventType, int64_t entityId);
 
     private:
-        using EventContainer = std::set<Telegram, TelegramLess>;
+        using EventContainer = std::set<TelegramType, TelegramLessType>;
         using RegisterContainer = std::set<int64_t>;
         using EventRegisterContainer = std::map<EventType, RegisterContainer>;
-        using EventEntity = EventEntity<EventType>;
-        using EventEntityPtr = std::shared_ptr<EventEntity>;
+        using EventEntityType = EventEntity<EventType>;
+        using EventEntityPtr = std::shared_ptr<EventEntityType>;
 
     private:
-        void DisposeEvent(const Telegram& telegram);
-        void DisposeAllEvent(const Telegram& telegram);
-        void DisposeEvent(int64_t entityId, const Telegram& telegram);
+        void DisposeEvent(const TelegramType& telegram);
+        void DisposeAllEvent(const TelegramType& telegram);
+        void DisposeEvent(int64_t entityId, const TelegramType& telegram);
 
     private:
-        TelegramLess telegramLess;
+        TelegramLessType telegramLess;
         EventContainer eventContainer;
         RegisterContainer registerContainer;
         EventRegisterContainer eventRegisterContainer;

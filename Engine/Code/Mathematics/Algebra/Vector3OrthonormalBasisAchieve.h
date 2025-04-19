@@ -18,7 +18,7 @@
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Vector3OrthonormalBasis<Real>::Vector3OrthonormalBasis(const Vector3& nonzeroVector, bool isUnit, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
+Mathematics::Vector3OrthonormalBasis<Real>::Vector3OrthonormalBasis(const Vector3Type& nonzeroVector, bool isUnit, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
     : isUnit{ isUnit }, uVector{}, vVector{}, wVector{ nonzeroVector }, epsilon{ epsilon }
 {
     MATHEMATICS_ASSERTION_1(!nonzeroVector.IsZero(epsilon), "输入必须是非零向量！");
@@ -37,7 +37,7 @@ void Mathematics::Vector3OrthonormalBasis<Real>::Generate() noexcept(gAssert < 1
         wVector.Normalize(epsilon);
     }
 
-    if (Math::FAbs(wVector.GetY()) <= Math::FAbs(wVector.GetX()))
+    if (MathType::FAbs(wVector.GetY()) <= MathType::FAbs(wVector.GetX()))
     {
         GenerateOnXOrZIsMax();
     }
@@ -52,11 +52,11 @@ requires std::is_arithmetic_v<Real>
 void Mathematics::Vector3OrthonormalBasis<Real>::GenerateOnXOrZIsMax() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     // unitVector.x或unitVector.z是大小最大的组成部分，交换他们
-    const auto invLength = Math::InvSqrt(wVector.GetX() * wVector.GetX() + wVector.GetZ() * wVector.GetZ());
+    const auto invLength = MathType::InvSqrt(wVector.GetX() * wVector.GetX() + wVector.GetZ() * wVector.GetZ());
 
-    uVector = Vector3{ -wVector.GetZ() * invLength, Math::GetValue(0), wVector.GetX() * invLength };
+    uVector = Vector3Type{ -wVector.GetZ() * invLength, MathType::GetValue(0), wVector.GetX() * invLength };
 
-    vVector = Vector3{ wVector.GetY() * uVector.GetZ(), wVector.GetZ() * uVector.GetX() - wVector.GetX() * uVector.GetZ(), -wVector.GetY() * uVector.GetX() };
+    vVector = Vector3Type{ wVector.GetY() * uVector.GetZ(), wVector.GetZ() * uVector.GetX() - wVector.GetX() * uVector.GetZ(), -wVector.GetY() * uVector.GetX() };
 }
 
 template <typename Real>
@@ -64,11 +64,11 @@ requires std::is_arithmetic_v<Real>
 void Mathematics::Vector3OrthonormalBasis<Real>::GenerateOnYOrZIsMax() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     // unitVector.y或unitVector.z是大小最大的组成部分，交换他们
-    const auto invLength = Math::InvSqrt(wVector.GetY() * wVector.GetY() + wVector.GetZ() * wVector.GetZ());
+    const auto invLength = MathType::InvSqrt(wVector.GetY() * wVector.GetY() + wVector.GetZ() * wVector.GetZ());
 
-    uVector = Vector3{ Math::GetValue(0), wVector.GetZ() * invLength, -wVector.GetY() * invLength };
+    uVector = Vector3Type{ MathType::GetValue(0), wVector.GetZ() * invLength, -wVector.GetY() * invLength };
 
-    vVector = Vector3{ wVector.GetY() * uVector.GetZ() - wVector.GetZ() * uVector.GetY(), -wVector.GetX() * uVector.GetZ(), wVector.GetX() * uVector.GetY() };
+    vVector = Vector3Type{ wVector.GetY() * uVector.GetZ() - wVector.GetZ() * uVector.GetY(), -wVector.GetX() * uVector.GetZ(), wVector.GetX() * uVector.GetY() };
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -78,9 +78,9 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3OrthonormalBasis<Re
 {
     try
     {
-        if (Math::FAbs(Vector3Tools::DotProduct(uVector, vVector)) <= epsilon &&
-            Math::FAbs(Vector3Tools::DotProduct(uVector, wVector)) <= epsilon &&
-            Math::FAbs(Vector3Tools::DotProduct(vVector, wVector)) <= epsilon &&
+        if (MathType::FAbs(Vector3ToolsType::DotProduct(uVector, vVector)) <= epsilon &&
+            MathType::FAbs(Vector3ToolsType::DotProduct(uVector, wVector)) <= epsilon &&
+            MathType::FAbs(Vector3ToolsType::DotProduct(vVector, wVector)) <= epsilon &&
             uVector.IsNormalize(epsilon) &&
             vVector.IsNormalize(epsilon) &&
             wVector.IsNormalize(epsilon))

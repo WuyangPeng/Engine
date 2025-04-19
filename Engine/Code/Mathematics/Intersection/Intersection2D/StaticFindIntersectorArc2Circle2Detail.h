@@ -19,7 +19,7 @@
 #include "Mathematics/Objects2D/Arc2Detail.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorArc2Circle2<Real>::StaticFindIntersectorArc2Circle2(const Arc2& arc, const Circle2& circle, const Real epsilon)
+Mathematics::StaticFindIntersectorArc2Circle2<Real>::StaticFindIntersectorArc2Circle2(const Arc2Type& arc, const Circle2Type& circle, const Real epsilon)
     : ParentType{ epsilon }, arc{ arc }, circle{ circle }, point{}
 {
     Find();
@@ -30,7 +30,7 @@ Mathematics::StaticFindIntersectorArc2Circle2<Real>::StaticFindIntersectorArc2Ci
 template <typename Real>
 void Mathematics::StaticFindIntersectorArc2Circle2<Real>::Find()
 {
-    const Circle2 circleOfArc{ arc.GetCenter(), arc.GetRadius() };
+    const Circle2Type circleOfArc{ arc.GetCenter(), arc.GetRadius() };
     StaticFindIntersectorCircle2Circle2<Real> intersector{ circleOfArc, circle };
 
     if (!intersector.IsIntersection())

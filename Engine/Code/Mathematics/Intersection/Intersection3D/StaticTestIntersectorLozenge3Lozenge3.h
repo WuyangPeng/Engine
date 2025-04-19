@@ -24,25 +24,25 @@ namespace Mathematics
         using ClassType = StaticTestIntersectorLozenge3Lozenge3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Lozenge3 = Lozenge3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Lozenge3Type = Lozenge3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticTestIntersectorLozenge3Lozenge3(const Lozenge3& lozenge0, const Lozenge3& lozenge1, const Real epsilon = Math::GetZeroTolerance());
+        StaticTestIntersectorLozenge3Lozenge3(const Lozenge3Type& lozenge0, const Lozenge3Type& lozenge1, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Lozenge3 GetLozenge0() const noexcept;
-        NODISCARD Lozenge3 GetLozenge1() const noexcept;
+        NODISCARD Lozenge3Type GetLozenge0() const noexcept;
+        NODISCARD Lozenge3Type GetLozenge1() const noexcept;
 
     private:
         void Test();
 
     private:
-        Lozenge3 lozenge0;
-        Lozenge3 lozenge1;
+        Lozenge3Type lozenge0;
+        Lozenge3Type lozenge1;
     };
 }
 

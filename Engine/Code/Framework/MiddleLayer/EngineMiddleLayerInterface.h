@@ -14,6 +14,10 @@
 
 #include "MiddleLayerInterface.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
+#include "CoreTools/Helper/ExportMacro.h"
+
+FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
 
 #include <memory>
 

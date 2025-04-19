@@ -60,7 +60,7 @@ namespace Rendering
         NODISCARD bool HasDepthRange01() const;
         NODISCARD std::string GetShaderName(const std::string& name) const;
         NODISCARD std::string GetShaderExtendName() const;
-        NODISCARD void Resize(int width, int height);
+        void Resize(int width, int height);
 
         NODISCARD int64_t DrawPrimitive(RendererObjectBridge& rendererObjectBridge,
                                         const VertexBufferSharedPtr& vertexBuffer,

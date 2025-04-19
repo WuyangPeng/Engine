@@ -13,19 +13,46 @@
 #include "MainFunctionEntryPoint.h"
 #include "System/Helper/Tools.h"
 
-#define WINDOWS_MAIN_FUNCTION_WITH_INFORMATION(namespaceName, helperClassName, windowName, engineEnvironment, engineDirectory, windowSizeWidth, windowSizeHeight)                                        \
-    int SYSTEM_WIN_API WinMain(SYSTEM_IN System::WindowsHInstance instance, SYSTEM_IN_OPT System::WindowsHInstance previousInstance, SYSTEM_IN char* commandLine, SYSTEM_IN int showCommand)             \
-    {                                                                                                                                                                                                    \
-        System::UnusedFunction(showCommand);                                                                                                                                                             \
-        return Framework::WinMainEntryPoint<namespaceName::helperClassName>(instance, commandLine, engineEnvironment, engineDirectory, windowName, windowSizeWidth, windowSizeHeight, previousInstance); \
-    }
+#ifdef SYSTEM_PLATFORM_WIN32
 
-#define WINDOWS_MAIN_FUNCTION_USE_PARAMETER(namespaceName, helperClassName, engineEnvironment, engineDirectory, renderer)                                                                    \
-    int SYSTEM_WIN_API WinMain(SYSTEM_IN System::WindowsHInstance instance, SYSTEM_IN_OPT System::WindowsHInstance previousInstance, SYSTEM_IN char* commandLine, SYSTEM_IN int showCommand) \
-    {                                                                                                                                                                                        \
-        System::UnusedFunction(showCommand);                                                                                                                                                 \
-        return Framework::WinMainEntryPoint<namespaceName::helperClassName>(instance, commandLine, engineEnvironment, engineDirectory, renderer, previousInstance);                          \
-    }
+    #define WINDOWS_MAIN_FUNCTION_WITH_INFORMATION(namespaceName, helperClassName, windowName, engineEnvironment, engineDirectory, windowSizeWidth, windowSizeHeight)                                        \
+        int SYSTEM_WIN_API WinMain(SYSTEM_IN System::WindowsHInstance instance, SYSTEM_IN_OPT System::WindowsHInstance previousInstance, SYSTEM_IN char* commandLine, SYSTEM_IN int showCommand)             \
+        {                                                                                                                                                                                                    \
+            System::UnusedFunction(showCommand);                                                                                                                                                             \
+            return Framework::WinMainEntryPoint<namespaceName::helperClassName>(instance, commandLine, engineEnvironment, engineDirectory, windowName, windowSizeWidth, windowSizeHeight, previousInstance); \
+        }
+
+    #define WINDOWS_MAIN_FUNCTION_USE_PARAMETER(namespaceName, helperClassName, engineEnvironment, engineDirectory, renderer)                                                                    \
+        int SYSTEM_WIN_API WinMain(SYSTEM_IN System::WindowsHInstance instance, SYSTEM_IN_OPT System::WindowsHInstance previousInstance, SYSTEM_IN char* commandLine, SYSTEM_IN int showCommand) \
+        {                                                                                                                                                                                        \
+            System::UnusedFunction(showCommand);                                                                                                                                                 \
+            return Framework::WinMainEntryPoint<namespaceName::helperClassName>(instance, commandLine, engineEnvironment, engineDirectory, renderer, previousInstance);                          \
+        }
+
+#else  // !SYSTEM_PLATFORM_WIN32
+    #define WINDOWS_MAIN_FUNCTION_WITH_INFORMATION(namespaceName, helperClassName, windowName, engineEnvironment, engineDirectory, windowSizeWidth, windowSizeHeight)                                        \
+        int SYSTEM_WIN_API WinMain(SYSTEM_IN System::WindowsHInstance instance, SYSTEM_IN_OPT System::WindowsHInstance previousInstance, SYSTEM_IN char* commandLine, SYSTEM_IN int showCommand)             \
+        {                                                                                                                                                                                                    \
+            System::UnusedFunction(showCommand);                                                                                                                                                             \
+            return Framework::WinMainEntryPoint<namespaceName::helperClassName>(instance, commandLine, engineEnvironment, engineDirectory, windowName, windowSizeWidth, windowSizeHeight, previousInstance); \
+        }                                                                                                                                                                                                    \
+        int main()                                                                                                                                                                                           \
+        {                                                                                                                                                                                                    \
+            return 0;                                                                                                                                                                                        \
+        }
+
+    #define WINDOWS_MAIN_FUNCTION_USE_PARAMETER(namespaceName, helperClassName, engineEnvironment, engineDirectory, renderer)                                                                    \
+        int SYSTEM_WIN_API WinMain(SYSTEM_IN System::WindowsHInstance instance, SYSTEM_IN_OPT System::WindowsHInstance previousInstance, SYSTEM_IN char* commandLine, SYSTEM_IN int showCommand) \
+        {                                                                                                                                                                                        \
+            System::UnusedFunction(showCommand);                                                                                                                                                 \
+            return Framework::WinMainEntryPoint<namespaceName::helperClassName>(instance, commandLine, engineEnvironment, engineDirectory, renderer, previousInstance);                          \
+        }                                                                                                                                                                                        \
+        int main()                                                                                                                                                                               \
+        {                                                                                                                                                                                        \
+            return 0;                                                                                                                                                                            \
+        }
+
+#endif  // SYSTEM_PLATFORM_WIN32
 
 #define CONSOLE_MAIN_FUNCTION(namespaceName, helperClassName, consoleTitle, engineEnvironment, engineDirectory)                         \
     int main(int argc, char** argv)                                                                                                     \

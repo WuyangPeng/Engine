@@ -116,18 +116,18 @@ void Mathematics::ParametricSurface<Real>::ComputePrincipalCurvatureInfo(Real u,
     curvatureTensor[1][1] = -Vector3Tools<Real>::DotProduct(normal, derVV);
 
     auto c0 = curvatureTensor.Determinant();
-    auto c1 = Math::GetValue(2) * curvatureTensor[0][1] * metricTensor[0][1] - curvatureTensor[0][0] * metricTensor[1][1] - curvatureTensor[1][1] * metricTensor[0][0];
+    auto c1 = MathType::GetValue(2) * curvatureTensor[0][1] * metricTensor[0][1] - curvatureTensor[0][0] * metricTensor[1][1] - curvatureTensor[1][1] * metricTensor[0][0];
     auto c2 = metricTensor.Determinant();
 
-    auto temp = Math::Sqrt(Math::FAbs(c1 * c1 - Math::GetValue(4) * c0 * c2));
-    auto mult = Math::GetRational(1, 2) / c2;
+    auto temp = MathType::Sqrt(MathType::FAbs(c1 * c1 - MathType::GetValue(4) * c0 * c2));
+    auto mult = MathType::GetRational(1, 2) / c2;
     curv0 = -mult * (c1 + temp);
     curv1 = mult * (-c1 + temp);
 
     auto a0 = curvatureTensor[0][1] - curv0 * metricTensor[0][1];
     auto a1 = curv0 * metricTensor[0][0] - curvatureTensor[0][0];
-    auto length = Math::Sqrt(a0 * a0 + a1 * a1);
-    if (length >= Math::GetZeroTolerance())
+    auto length = MathType::Sqrt(a0 * a0 + a1 * a1);
+    if (length >= MathType::GetZeroTolerance())
     {
         dir0 = a0 * derU + a1 * derV;
     }
@@ -135,8 +135,8 @@ void Mathematics::ParametricSurface<Real>::ComputePrincipalCurvatureInfo(Real u,
     {
         a0 = curvatureTensor[1][1] - curv0 * metricTensor[1][1];
         a1 = curv0 * metricTensor[0][1] - curvatureTensor[0][1];
-        length = Math::Sqrt(a0 * a0 + a1 * a1);
-        if (length >= Math::GetZeroTolerance())
+        length = MathType::Sqrt(a0 * a0 + a1 * a1);
+        if (length >= MathType::GetZeroTolerance())
         {
             dir0 = a0 * derU + a1 * derV;
         }

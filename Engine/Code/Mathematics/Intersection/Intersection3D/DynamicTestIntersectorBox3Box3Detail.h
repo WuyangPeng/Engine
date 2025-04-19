@@ -17,7 +17,7 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::DynamicTestIntersectorBox3Box3<Real>::DynamicTestIntersectorBox3Box3(const Box3& box0, const Box3& box1, Real tmax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicTestIntersectorBox3Box3<Real>::DynamicTestIntersectorBox3Box3(const Box3Type& box0, const Box3Type& box1, Real tmax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, box0{ box0 }, box1{ box1 }
 {
     Test();
@@ -57,13 +57,13 @@ Mathematics::Box3<Real> Mathematics::DynamicTestIntersectorBox3Box3<Real>::GetBo
 template <typename Real>
 void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
 {
-    if (Vector3Tools::Approximate(this->GetLhsVelocity(), this->GetRhsVelocity()))
+    if (Vector3ToolsType::Approximate(this->GetLhsVelocity(), this->GetRhsVelocity()))
     {
         StaticTestIntersectorBox3Box3<Real> intersector{ box0, box1 };
         this->SetIntersectionType(intersector.GetIntersectionType());
         if (intersector.IsIntersection())
         {
-            this->SetContactTime(Math::GetValue(0));
+            this->SetContactTime(MathType::GetValue(0));
             return;
         }
         return;
@@ -71,7 +71,7 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
 
     /// 框轴之间的角度的余弦值的截止值。 用于捕捉至少一对轴平行的情况。
     /// 如果发生这种情况，则无需包括叉积轴以进行分离。
-    constexpr auto cutoff = Math::GetValue(1) - Math::GetZeroTolerance();
+    constexpr auto cutoff = MathType::GetValue(1) - MathType::GetZeroTolerance();
     auto existsParallelPair = false;
 
     // 便利变量
@@ -79,38 +79,38 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
     auto velocityDiff = this->GetRhsVelocity() - this->GetLhsVelocity();
 
     // matrix C = A^T B, c_{ij} = Dot(A_i,B_j)
-    const Matrix3<Real> matrix{ Vector3Tools::DotProduct(box0.GetAxis(0), box1.GetAxis(0)),
-                                Vector3Tools::DotProduct(box0.GetAxis(0), box1.GetAxis(1)),
-                                Vector3Tools::DotProduct(box0.GetAxis(0), box1.GetAxis(2)),
-                                Vector3Tools::DotProduct(box0.GetAxis(1), box1.GetAxis(0)),
-                                Vector3Tools::DotProduct(box0.GetAxis(1), box1.GetAxis(1)),
-                                Vector3Tools::DotProduct(box0.GetAxis(1), box1.GetAxis(2)),
-                                Vector3Tools::DotProduct(box0.GetAxis(2), box1.GetAxis(0)),
-                                Vector3Tools::DotProduct(box0.GetAxis(2), box1.GetAxis(1)),
-                                Vector3Tools::DotProduct(box0.GetAxis(2), box1.GetAxis(2)) };
+    const Matrix3<Real> matrix{ Vector3ToolsType::DotProduct(box0.GetAxis(0), box1.GetAxis(0)),
+                                Vector3ToolsType::DotProduct(box0.GetAxis(0), box1.GetAxis(1)),
+                                Vector3ToolsType::DotProduct(box0.GetAxis(0), box1.GetAxis(2)),
+                                Vector3ToolsType::DotProduct(box0.GetAxis(1), box1.GetAxis(0)),
+                                Vector3ToolsType::DotProduct(box0.GetAxis(1), box1.GetAxis(1)),
+                                Vector3ToolsType::DotProduct(box0.GetAxis(1), box1.GetAxis(2)),
+                                Vector3ToolsType::DotProduct(box0.GetAxis(2), box1.GetAxis(0)),
+                                Vector3ToolsType::DotProduct(box0.GetAxis(2), box1.GetAxis(1)),
+                                Vector3ToolsType::DotProduct(box0.GetAxis(2), box1.GetAxis(2)) };
 
     // |c_{ij}|
-    Matrix3<Real> absMatrix{ Math::FAbs(matrix.template GetValue<0, 0>()),
-                             Math::FAbs(matrix.template GetValue<0, 1>()),
-                             Math::FAbs(matrix.template GetValue<0, 2>()),
-                             Math::FAbs(matrix.template GetValue<1, 0>()),
-                             Math::FAbs(matrix.template GetValue<1, 1>()),
-                             Math::FAbs(matrix.template GetValue<1, 2>()),
-                             Math::FAbs(matrix.template GetValue<2, 0>()),
-                             Math::FAbs(matrix.template GetValue<2, 1>()),
-                             Math::FAbs(matrix.template GetValue<2, 2>()) };
+    Matrix3<Real> absMatrix{ MathType::FAbs(matrix.template GetValue<0, 0>()),
+                             MathType::FAbs(matrix.template GetValue<0, 1>()),
+                             MathType::FAbs(matrix.template GetValue<0, 2>()),
+                             MathType::FAbs(matrix.template GetValue<1, 0>()),
+                             MathType::FAbs(matrix.template GetValue<1, 1>()),
+                             MathType::FAbs(matrix.template GetValue<1, 2>()),
+                             MathType::FAbs(matrix.template GetValue<2, 0>()),
+                             MathType::FAbs(matrix.template GetValue<2, 1>()),
+                             MathType::FAbs(matrix.template GetValue<2, 2>()) };
     // Dot(A_i,D)
-    Vector3 axisDotCenterDiff{ Vector3Tools::DotProduct(box0.GetAxis(0), centerDiff),
-                               Vector3Tools::DotProduct(box0.GetAxis(1), centerDiff),
-                               Vector3Tools::DotProduct(box0.GetAxis(2), centerDiff) };
+    Vector3 axisDotCenterDiff{ Vector3ToolsType::DotProduct(box0.GetAxis(0), centerDiff),
+                               Vector3ToolsType::DotProduct(box0.GetAxis(1), centerDiff),
+                               Vector3ToolsType::DotProduct(box0.GetAxis(2), centerDiff) };
 
     // Dot(A_i,W)
-    Vector3 axisDotAvelocityDiff{ Vector3Tools::DotProduct(box0.GetAxis(0), velocityDiff),
-                                  Vector3Tools::DotProduct(box0.GetAxis(1), velocityDiff),
-                                  Vector3Tools::DotProduct(box0.GetAxis(2), velocityDiff) };
+    Vector3 axisDotAvelocityDiff{ Vector3ToolsType::DotProduct(box0.GetAxis(0), velocityDiff),
+                                  Vector3ToolsType::DotProduct(box0.GetAxis(1), velocityDiff),
+                                  Vector3ToolsType::DotProduct(box0.GetAxis(2), velocityDiff) };
 
-    this->SetContactTime(Math::GetValue(0));
-    Separated tLast{ false, Math::maxReal };
+    this->SetContactTime(MathType::GetValue(0));
+    Separated tLast{ false, MathType::maxReal };
 
     // 轴 C0 + t * A[i]
     constexpr auto size = 3;
@@ -149,10 +149,10 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
         auto radius = box0.GetExtent(0) * absMatrix(0, i) + box0.GetExtent(1) * absMatrix(1, i) + box0.GetExtent(2) * absMatrix(2, i);
         auto min0 = -radius;
         auto max0 = +radius;
-        auto center = Vector3Tools::DotProduct(box1.GetAxis(i), centerDiff);
+        auto center = Vector3ToolsType::DotProduct(box1.GetAxis(i), centerDiff);
         auto min1 = center - box1.GetExtent(i);
         auto max1 = center + box1.GetExtent(i);
-        auto speed = Vector3Tools::DotProduct(velocityDiff, box1.GetAxis(i));
+        auto speed = Vector3ToolsType::DotProduct(velocityDiff, box1.GetAxis(i));
         tLast = IsSeparated(min0, max0, min1, max1, speed, this->GetTMax(), tLast.second);
         if (tLast.first)
         {
@@ -318,18 +318,18 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
 template <typename Real>
 typename Mathematics::DynamicTestIntersectorBox3Box3<Real>::Separated Mathematics::DynamicTestIntersectorBox3Box3<Real>::IsSeparated(Real min0, Real max0, Real min1, Real max1, Real speed, Real tmax, Real tlast) noexcept
 {
-    auto invSpeed = Math::GetValue(0);
-    auto t = Math::GetValue(0);
+    auto invSpeed = MathType::GetValue(0);
+    auto t = MathType::GetValue(0);
 
     // box1最初位于box0的左侧
     if (max1 < min0)
     {
-        if (speed <= Math::GetValue(0))
+        if (speed <= MathType::GetValue(0))
         {
             // 投影间隔分离。
             return { true, tlast };
         }
-        invSpeed = (Math::GetValue(1)) / speed;
+        invSpeed = (MathType::GetValue(1)) / speed;
 
         t = (min0 - max1) * invSpeed;
         if (this->GetContactTime() < t)
@@ -358,12 +358,12 @@ typename Mathematics::DynamicTestIntersectorBox3Box3<Real>::Separated Mathematic
     // box1最初位于box0的右侧
     else if (max0 < min1)
     {
-        if (speed >= Math::GetValue(0))
+        if (speed >= MathType::GetValue(0))
         {
             // 投影间隔分离。
             return { true, tlast };
         }
-        invSpeed = (Math::GetValue(1)) / speed;
+        invSpeed = (MathType::GetValue(1)) / speed;
 
         t = (max0 - min1) * invSpeed;
         if (this->GetContactTime() < t)
@@ -392,7 +392,7 @@ typename Mathematics::DynamicTestIntersectorBox3Box3<Real>::Separated Mathematic
     // box0和box1最初重叠
     else
     {
-        if (Math::GetValue(0) < speed)
+        if (MathType::GetValue(0) < speed)
         {
             t = (max0 - min1) / speed;
             if (t < tlast)
@@ -406,7 +406,7 @@ typename Mathematics::DynamicTestIntersectorBox3Box3<Real>::Separated Mathematic
                 return { true, tlast };
             }
         }
-        else if (speed < Math::GetValue(0))
+        else if (speed < MathType::GetValue(0))
         {
             t = (min0 - max1) / speed;
             if (t < tlast)

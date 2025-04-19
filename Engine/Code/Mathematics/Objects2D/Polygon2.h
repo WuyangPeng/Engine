@@ -25,10 +25,10 @@ namespace Mathematics
 
         using ClassType = Polygon2;
 
-        using Math = Math<Real>;
-        using Vector2 = Vector2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
-        using VerticesType = std::vector<Vector2>;
+        using MathType = Math<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
+        using VerticesType = std::vector<Vector2Type>;
 
     public:
         // 调用方负责确保顶点数组逆时针，代表一个简单的多边形。
@@ -45,13 +45,13 @@ namespace Mathematics
         // 只读成员访问。
         NODISCARD int GetNumVertices() const;
         NODISCARD const VerticesType& GetVertices() const noexcept;
-        NODISCARD const Vector2& GetVertex(int index) const;
+        NODISCARD const Vector2Type& GetVertex(int index) const;
 
         // 允许顶点修改。调用者必须确保多边形仍然是简单多边形。
-        virtual void SetVertex(int index, const Vector2& vertex);
+        virtual void SetVertex(int index, const Vector2Type& vertex);
 
         // 计算关于所述多边形的各种信息。
-        NODISCARD Vector2 ComputeVertexAverage() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        NODISCARD Vector2Type ComputeVertexAverage() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
         NODISCARD Real ComputePerimeterLength() const;
         NODISCARD Real ComputeArea() const;
 

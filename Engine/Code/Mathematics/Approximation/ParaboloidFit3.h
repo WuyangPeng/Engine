@@ -52,16 +52,16 @@ namespace Mathematics
     public:
         using ClassType = ParaboloidFit3<Real>;
 
-        using Vector3 = Vector3<Real>;
-        using VariableLengthVector = VariableLengthVector<Real>;
-        using Points = std::vector<Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using VariableLengthVectorType = VariableLengthVector<Real>;
+        using Points = std::vector<Vector3Type>;
 
     public:
         explicit ParaboloidFit3(const Points& points);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD VariableLengthVector GetCoeff() const;
+        NODISCARD VariableLengthVectorType GetCoeff() const;
         NODISCARD bool GetIsFitSuccess() const noexcept;
 
     private:
@@ -71,7 +71,7 @@ namespace Mathematics
         constexpr static int variableMatrixSize = 6;
 
     private:
-        VariableLengthVector coeff;
+        VariableLengthVectorType coeff;
         bool isFitSuccess;
     };
 

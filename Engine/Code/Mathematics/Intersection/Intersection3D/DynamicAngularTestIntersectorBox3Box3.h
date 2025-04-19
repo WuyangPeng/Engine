@@ -24,28 +24,28 @@ namespace Mathematics
         using ClassType = DynamicAngularTestIntersectorBox3Box3<Real>;
         using ParentType = DynamicIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Box3 = Box3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Box3Type = Box3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        DynamicAngularTestIntersectorBox3Box3(const Box3& box0,
-                                              const Box3& box1,
+        DynamicAngularTestIntersectorBox3Box3(const Box3Type& box0,
+                                              const Box3Type& box1,
                                               Real tMax,
                                               int numSteps,
-                                              const Vector3& lhsVelocity,
-                                              const Vector3& lhsRotCenter,
-                                              const Vector3& lhsRotAxis,
-                                              const Vector3& rhsVelocity,
-                                              const Vector3& rhsRotCenter,
-                                              const Vector3& rhsRotAxis,
-                                              const Real epsilon = Math::GetZeroTolerance());
+                                              const Vector3Type& lhsVelocity,
+                                              const Vector3Type& lhsRotCenter,
+                                              const Vector3Type& lhsRotAxis,
+                                              const Vector3Type& rhsVelocity,
+                                              const Vector3Type& rhsRotCenter,
+                                              const Vector3Type& rhsRotAxis,
+                                              const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Box3 GetBox0() const noexcept;
-        NODISCARD Box3 GetBox1() const noexcept;
+        NODISCARD Box3Type GetBox0() const noexcept;
+        NODISCARD Box3Type GetBox1() const noexcept;
 
     private:
         /// 动态测试交叉点查询，其中框具有恒定的线速度和恒定的角速度。 旋转轴的长度是角速度。
@@ -53,14 +53,14 @@ namespace Mathematics
         void Test();
 
     private:
-        Box3 box0;
-        Box3 box1;
+        Box3Type box0;
+        Box3Type box1;
 
         int numSteps;
-        Vector3 lhsRotCenter;
-        Vector3 lhsRotAxis;
-        Vector3 rhsRotCenter;
-        Vector3 rhsRotAxis;
+        Vector3Type lhsRotCenter;
+        Vector3Type lhsRotAxis;
+        Vector3Type rhsRotCenter;
+        Vector3Type rhsRotAxis;
     };
 }
 

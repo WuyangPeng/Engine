@@ -44,12 +44,12 @@ bool Mathematics::MinimizeN<Real, UserDataType>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real, typename UserDataType>
-typename Mathematics::MinimizeN<Real, UserDataType>::MinimizeNData Mathematics::MinimizeN<Real, UserDataType>::GetMinimum(const Container& begin, const Container& end, const Container& initial) const
+typename Mathematics::MinimizeN<Real, UserDataType>::MinimizeNDataType Mathematics::MinimizeN<Real, UserDataType>::GetMinimum(const Container& begin, const Container& end, const Container& initial) const
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
     // 初始猜测。
-    MinimizeNGetMinimum minimizeNGetMinimum{ dimensions, initial, function, userData, begin, end };
+    MinimizeNGetMinimumType minimizeNGetMinimum{ dimensions, initial, function, userData, begin, end };
 
     for (auto iter = 0; iter < maxIterations; ++iter)
     {
@@ -61,7 +61,7 @@ typename Mathematics::MinimizeN<Real, UserDataType>::MinimizeNData Mathematics::
 
         // 估计一个单位长度的共轭方向。
         const auto length = minimizeNGetMinimum.EstimateUnitLengthConjugateDirection();
-        if (length < Math::epsilon)
+        if (length < MathType::epsilon)
         {
             // 新的位置并没有从旧的位置有显著改变。在这里是否有更好的收敛准则？
             break;

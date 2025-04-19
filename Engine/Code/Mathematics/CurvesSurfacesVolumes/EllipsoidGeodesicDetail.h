@@ -37,10 +37,10 @@ Mathematics::Vector3<Real> Mathematics::EllipsoidGeodesic<Real>::ComputePosition
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    auto cos0 = Math::Cos(point[0]);
-    auto sin0 = Math::Sin(point[0]);
-    auto cos1 = Math::Cos(point[1]);
-    auto sin1 = Math::Sin(point[1]);
+    auto cos0 = MathType::Cos(point[0]);
+    auto sin0 = MathType::Sin(point[0]);
+    auto cos1 = MathType::Cos(point[1]);
+    auto sin1 = MathType::Sin(point[1]);
 
     return Vector3<Real>{ xExtent * cos0 * sin1, yExtent * sin0 * sin1, zExtent * cos1 };
 }
@@ -50,12 +50,12 @@ void Mathematics::EllipsoidGeodesic<Real>::ComputeMetric(const VariableLengthVec
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    auto cos0 = Math::Cos(point[0]);
-    auto sin0 = Math::Sin(point[0]);
-    auto cos1 = Math::Cos(point[1]);
-    auto sin1 = Math::Sin(point[1]);
+    auto cos0 = MathType::Cos(point[0]);
+    auto sin0 = MathType::Sin(point[0]);
+    auto cos1 = MathType::Cos(point[1]);
+    auto sin1 = MathType::Sin(point[1]);
 
-    const Vector3<Real> der0{ -xExtent * sin0 * sin1, yExtent * cos0 * sin1, Math::GetValue(0) };
+    const Vector3<Real> der0{ -xExtent * sin0 * sin1, yExtent * cos0 * sin1, MathType::GetValue(0) };
     const Vector3<Real> der1{ xExtent * cos0 * cos1, yExtent * sin0 * cos1, -zExtent * sin1 };
 
     this->SetMetric(0, 0, Vector3Tools<Real>::DotProduct(der0, der0));
@@ -69,18 +69,18 @@ void Mathematics::EllipsoidGeodesic<Real>::ComputeChristoffel1(const VariableLen
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    auto cos0 = Math::Cos(point[0]);
-    auto sin0 = Math::Sin(point[0]);
-    auto cos1 = Math::Cos(point[1]);
-    auto sin1 = Math::Sin(point[1]);
+    auto cos0 = MathType::Cos(point[0]);
+    auto sin0 = MathType::Sin(point[0]);
+    auto cos1 = MathType::Cos(point[1]);
+    auto sin1 = MathType::Sin(point[1]);
 
-    const Vector3<Real> der0{ -xExtent * sin0 * sin1, yExtent * cos0 * sin1, Math::GetValue(0) };
+    const Vector3<Real> der0{ -xExtent * sin0 * sin1, yExtent * cos0 * sin1, MathType::GetValue(0) };
 
     const Vector3<Real> der1{ xExtent * cos0 * cos1, yExtent * sin0 * cos1, -zExtent * sin1 };
 
-    const Vector3<Real> der00{ -xExtent * cos0 * sin1, -yExtent * sin0 * sin1, Math::GetValue(0) };
+    const Vector3<Real> der00{ -xExtent * cos0 * sin1, -yExtent * sin0 * sin1, MathType::GetValue(0) };
 
-    const Vector3<Real> der01{ -xExtent * sin0 * cos1, yExtent * cos0 * cos1, Math::GetValue(0) };
+    const Vector3<Real> der01{ -xExtent * sin0 * cos1, yExtent * cos0 * cos1, MathType::GetValue(0) };
 
     const Vector3<Real> der11{ -xExtent * cos0 * sin1, -yExtent * sin0 * sin1, -zExtent * cos1 };
 

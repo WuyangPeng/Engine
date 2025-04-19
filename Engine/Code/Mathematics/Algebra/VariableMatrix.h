@@ -41,12 +41,12 @@ namespace Mathematics
     public:
         using ClassType = VariableMatrix<Real>;
 
-        using Math = Math<Real>;
-        using Matrix2 = Matrix2<Real>;
-        using Matrix3 = Matrix3<Real>;
-        using VariableLengthVector = VariableLengthVector<Real>;
+        using MathType = Math<Real>;
+        using Matrix2Type = Matrix2<Real>;
+        using Matrix3Type = Matrix3<Real>;
+        using VariableLengthVectorType = VariableLengthVector<Real>;
         using ContainerType = std::vector<Real>;
-        using VectorContainerType = std::vector<VariableLengthVector>;
+        using VectorContainerType = std::vector<VariableLengthVectorType>;
 
     public:
         /// 长度为零，numRows和numCols设置为零。
@@ -64,8 +64,8 @@ namespace Mathematics
 
         VariableMatrix(int rowsNumber, int columnsNumber, const ContainerType& entry);
         explicit VariableMatrix(VectorContainerType matrix) noexcept;
-        explicit VariableMatrix(const Matrix2& rhs);
-        explicit VariableMatrix(const Matrix3& rhs);
+        explicit VariableMatrix(const Matrix2Type& rhs);
+        explicit VariableMatrix(const Matrix3Type& rhs);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -92,10 +92,10 @@ namespace Mathematics
         void SetContainer(int rowsNumber, int columnsNumber, const ContainerType& entry);
 
         /// 按行或按列访问成员。输入向量的元素数量必须与矩阵大小相适应。
-        void SetRow(int row, const VariableLengthVector& vector);
-        NODISCARD VariableLengthVector GetRow(int row) const;
-        void SetColumn(int column, const VariableLengthVector& vector);
-        NODISCARD VariableLengthVector GetColumn(int column) const;
+        void SetRow(int row, const VariableLengthVectorType& vector);
+        NODISCARD VariableLengthVectorType GetRow(int row) const;
+        void SetColumn(int column, const VariableLengthVectorType& vector);
+        NODISCARD VariableLengthVectorType GetColumn(int column) const;
         void ResetMatrix(const VectorContainerType& matrix);
 
         /// 支持交换行和列。
@@ -132,12 +132,12 @@ namespace Mathematics
         /// vector0^T * M * vector1
         /// （numColumns(M) = size(vector1) 和
         /// numRows(M) = size(vector0) 是必须的）
-        NODISCARD Real QuadraticForm(const VariableLengthVector& vector0, const VariableLengthVector& vector1) const;
+        NODISCARD Real QuadraticForm(const VariableLengthVectorType& vector0, const VariableLengthVectorType& vector1) const;
 
         // M^T
         NODISCARD VariableMatrix Transpose() const;
 
-        NODISCARD Matrix3 GetMatrix3() const;
+        NODISCARD Matrix3Type GetMatrix3() const;
 
         /// 特殊矩阵。
 

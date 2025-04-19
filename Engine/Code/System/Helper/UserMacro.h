@@ -46,8 +46,12 @@ static_assert(COMPILE_SYSTEM_CLOSE <= CLOSE_SYSTEM_MAX, "COMPILE_SYSTEM_CLOSE Mu
 
 #if !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_GLUT) != CLOSE_GLUT
 
-    /// 是否使用glut
-    #define SYSTEM_USE_GLUT static_cast<void>(0)
+    #ifdef SYSTEM_PLATFORM_WIN32
+
+        /// 是否使用glut
+        #define SYSTEM_USE_GLUT static_cast<void>(0)
+
+    #endif  // SYSTEM_PLATFORM_WIN32
 
 #endif  //  !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_GLUT) != CLOSE_GLUT
 

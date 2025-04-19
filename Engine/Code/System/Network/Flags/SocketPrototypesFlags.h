@@ -18,6 +18,7 @@
 
 #elif defined(SYSTEM_PLATFORM_LINUX)
 
+    #include <arpa/inet.h>
     #include <sys/ioctl.h>
     #include <sys/socket.h>
 

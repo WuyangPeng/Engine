@@ -12,6 +12,8 @@
 
 #include "System/Helper/Platform.h"
 
+#include "ConsoleColourUsing.h"
+
 namespace System
 {
 #ifdef SYSTEM_PLATFORM_WIN32

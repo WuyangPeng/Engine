@@ -18,7 +18,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-Mathematics::QDUDecompositionValue<Real>::QDUDecompositionValue(const Matrix3& matrix)
+Mathematics::QDUDecompositionValue<Real>::QDUDecompositionValue(const Matrix3Type& matrix)
     : orthogonal{}, diagonal{}, upperTriangular{}
 {
     Calculate(matrix);
@@ -38,7 +38,7 @@ bool Mathematics::QDUDecompositionValue<Real>::IsValid() const noexcept
 
 // private
 template <typename Real>
-void Mathematics::QDUDecompositionValue<Real>::Calculate(const Matrix3& matrix)
+void Mathematics::QDUDecompositionValue<Real>::Calculate(const Matrix3Type& matrix)
 {
     // 因子M = QR = QDU其中Q是正交（旋转），
     // D是对角（缩放），并且U是与那些在它的对角线（剪切）上三角。
@@ -61,18 +61,18 @@ void Mathematics::QDUDecompositionValue<Real>::Calculate(const Matrix3& matrix)
     // u02 = r02/r00, 和 u12 = r12/r11.
 
     // 构建正交矩阵Q.
-    auto invLength = Math::InvSqrt(matrix.template GetValue<0, 0>() * matrix.template GetValue<0, 0>() + matrix.template GetValue<1, 0>() * matrix.template GetValue<1, 0>() + matrix.template GetValue<2, 0>() * matrix.template GetValue<2, 0>());
+    auto invLength = MathType::InvSqrt(matrix.template GetValue<0, 0>() * matrix.template GetValue<0, 0>() + matrix.template GetValue<1, 0>() * matrix.template GetValue<1, 0>() + matrix.template GetValue<2, 0>() * matrix.template GetValue<2, 0>());
 
-    orthogonal.SetValue<0, 0>(matrix.template GetValue<0, 0>() * invLength);
-    orthogonal.SetValue<1, 0>(matrix.template GetValue<1, 0>() * invLength);
-    orthogonal.SetValue<2, 0>(matrix.template GetValue<2, 0>() * invLength);
+    orthogonal.template SetValue<0, 0>(matrix.template GetValue<0, 0>() * invLength);
+    orthogonal.template SetValue<1, 0>(matrix.template GetValue<1, 0>() * invLength);
+    orthogonal.template SetValue<2, 0>(matrix.template GetValue<2, 0>() * invLength);
 
     auto fDot = orthogonal.template GetValue<0, 0>() * matrix.template GetValue<0, 1>() + orthogonal.template GetValue<1, 0>() * matrix.template GetValue<1, 1>() + orthogonal.template GetValue<2, 0>() * matrix.template GetValue<2, 1>();
 
-    orthogonal.SetValue<0, 1>(matrix.template GetValue<0, 1>() - fDot * orthogonal.template GetValue<0, 0>());
-    orthogonal.SetValue<1, 1>(matrix.template GetValue<1, 1>() - fDot * orthogonal.template GetValue<1, 0>());
-    orthogonal.SetValue<2, 1>(matrix.template GetValue<2, 1>() - fDot * orthogonal.template GetValue<2, 0>());
-    invLength = Math::InvSqrt(orthogonal.template GetValue<0, 1>() * orthogonal.template GetValue<0, 1>() + orthogonal.template GetValue<1, 1>() * orthogonal.template GetValue<1, 1>() + orthogonal.template GetValue<2, 1>() * orthogonal.template GetValue<2, 1>());
+    orthogonal.template SetValue<0, 1>(matrix.template GetValue<0, 1>() - fDot * orthogonal.template GetValue<0, 0>());
+    orthogonal.template SetValue<1, 1>(matrix.template GetValue<1, 1>() - fDot * orthogonal.template GetValue<1, 0>());
+    orthogonal.template SetValue<2, 1>(matrix.template GetValue<2, 1>() - fDot * orthogonal.template GetValue<2, 0>());
+    invLength = MathType::InvSqrt(orthogonal.template GetValue<0, 1>() * orthogonal.template GetValue<0, 1>() + orthogonal.template GetValue<1, 1>() * orthogonal.template GetValue<1, 1>() + orthogonal.template GetValue<2, 1>() * orthogonal.template GetValue<2, 1>());
     orthogonal(0, 1) *= invLength;
     orthogonal(1, 1) *= invLength;
     orthogonal(2, 1) *= invLength;
@@ -88,7 +88,7 @@ void Mathematics::QDUDecompositionValue<Real>::Calculate(const Matrix3& matrix)
     orthogonal(1, 2) -= fDot * orthogonal.template GetValue<1, 1>();
     orthogonal(2, 2) -= fDot * orthogonal.template GetValue<2, 1>();
 
-    invLength = Math::InvSqrt(orthogonal.template GetValue<0, 2>() * orthogonal.template GetValue<0, 2>() + orthogonal.template GetValue<1, 2>() * orthogonal.template GetValue<1, 2>() + orthogonal.template GetValue<2, 2>() * orthogonal.template GetValue<2, 2>());
+    invLength = MathType::InvSqrt(orthogonal.template GetValue<0, 2>() * orthogonal.template GetValue<0, 2>() + orthogonal.template GetValue<1, 2>() * orthogonal.template GetValue<1, 2>() + orthogonal.template GetValue<2, 2>() * orthogonal.template GetValue<2, 2>());
     orthogonal(0, 2) *= invLength;
     orthogonal(1, 2) *= invLength;
     orthogonal(2, 2) *= invLength;
@@ -96,13 +96,13 @@ void Mathematics::QDUDecompositionValue<Real>::Calculate(const Matrix3& matrix)
     // 保证正交矩阵行列式1（无反射）
     auto det = orthogonal.Determinant();
 
-    if (det < Math::GetValue(0))
+    if (det < MathType::GetValue(0))
     {
         orthogonal = -orthogonal;
     }
 
     // 建立“右边”的矩阵Real.
-    Matrix3 right{};
+    Matrix3Type right{};
     right(0, 0) = orthogonal.template GetValue<0, 0>() * matrix.template GetValue<0, 0>() + orthogonal.template GetValue<1, 0>() * matrix.template GetValue<1, 0>() + orthogonal.template GetValue<2, 0>() * matrix.template GetValue<2, 0>();
 
     right(0, 1) = orthogonal.template GetValue<0, 0>() * matrix.template GetValue<0, 1>() + orthogonal.template GetValue<1, 0>() * matrix.template GetValue<1, 1>() + orthogonal.template GetValue<2, 0>() * matrix.template GetValue<2, 1>();
@@ -119,20 +119,20 @@ void Mathematics::QDUDecompositionValue<Real>::Calculate(const Matrix3& matrix)
     diagonal.MakeDiagonal(right.template GetValue<0, 0>(), right.template GetValue<1, 1>(), right.template GetValue<2, 2>());
 
     // 剪切组件。
-    auto invD00 = Math::GetValue(1) / diagonal.template GetValue<0, 0>();
-    upperTriangular = Matrix3{ Math::GetValue(1),
+    auto invD00 = MathType::GetValue(1) / diagonal.template GetValue<0, 0>();
+    upperTriangular = Matrix3Type{ MathType::GetValue(1),
                                right.template GetValue<0, 1>() * invD00,
                                right(0, 2) * invD00,
-                               Math::GetValue(0),
-                               Math::GetValue(1),
+                               MathType::GetValue(0),
+                               MathType::GetValue(1),
                                right.template GetValue<1, 2>() / diagonal.template GetValue<1, 1>(),
-                               Math::GetValue(0),
-                               Math::GetValue(0),
-                               Math::GetValue(1) };
+                               MathType::GetValue(0),
+                               MathType::GetValue(0),
+                               MathType::GetValue(1) };
 }
 
 template <typename Real>
-typename Mathematics::QDUDecompositionValue<Real>::Matrix3 Mathematics::QDUDecompositionValue<Real>::GeOrthogonalMatrix() const noexcept
+typename Mathematics::QDUDecompositionValue<Real>::Matrix3Type Mathematics::QDUDecompositionValue<Real>::GeOrthogonalMatrix() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -140,7 +140,7 @@ typename Mathematics::QDUDecompositionValue<Real>::Matrix3 Mathematics::QDUDecom
 }
 
 template <typename Real>
-typename Mathematics::QDUDecompositionValue<Real>::Matrix3 Mathematics::QDUDecompositionValue<Real>::GetDiagonalMatrix() const noexcept
+typename Mathematics::QDUDecompositionValue<Real>::Matrix3Type Mathematics::QDUDecompositionValue<Real>::GetDiagonalMatrix() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -148,7 +148,7 @@ typename Mathematics::QDUDecompositionValue<Real>::Matrix3 Mathematics::QDUDecom
 }
 
 template <typename Real>
-typename Mathematics::QDUDecompositionValue<Real>::Matrix3 Mathematics::QDUDecompositionValue<Real>::GetUpperTriangularMatrix() const noexcept
+typename Mathematics::QDUDecompositionValue<Real>::Matrix3Type Mathematics::QDUDecompositionValue<Real>::GetUpperTriangularMatrix() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

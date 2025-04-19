@@ -12,4 +12,4 @@ TODO Level 8
 8.  （Query）Query3Rational、Query2Rational修改了原有的缓存机制，改成构造时直接转换，看下是否合适。 
 9.  （Distance）重构DistanceLine3Box3类，删除mutable变量。
 10. （综合）数学库过多的使用抛出异常，精度错误不应该这么做，需要进行修改。
-11. （综合）考虑使用Math::FloatingPointEqual替换Math::Approximate来比较浮点数的近似相等。
+11. （综合）考虑使用MathType::FloatingPointEqual替换MathType::Approximate来比较浮点数的近似相等。

@@ -26,11 +26,11 @@ namespace CoreTools
 
         using EntityTypePtr = std::shared_ptr<EntityType>;
         using EntityEventType = EventType;
-        using Telegram = Telegram<EntityEventType>;
+        using TelegramType = Telegram<EntityEventType>;
         using EntityTypeWeakPtr = std::weak_ptr<EntityType>;
-        using State = State<EntityType>;
-        using StateSharedPtr = std::shared_ptr<State>;
-        using ConstStateSharedPtr = std::shared_ptr<const State>;
+        using StateType = State<EntityType>;
+        using StateSharedPtr = std::shared_ptr<StateType>;
+        using ConstStateSharedPtr = std::shared_ptr<const StateType>;
 
     public:
         explicit StateMachineBase(StateSharedPtr currentState) noexcept;
@@ -48,9 +48,9 @@ namespace CoreTools
 
         void Update(int64_t timeInterval);
 
-        NODISCARD bool HandleMessage(const Telegram& msg);
+        NODISCARD bool HandleMessage(const TelegramType& msg);
 
-        NODISCARD bool IsInState(const State& state) const;
+        NODISCARD bool IsInState(const StateType& state) const;
 
         NODISCARD ConstStateSharedPtr GetCurrentState() const noexcept;
         NODISCARD ConstStateSharedPtr GetGlobalState() const noexcept;

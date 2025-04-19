@@ -23,31 +23,31 @@ namespace Mathematics
     {
     public:
         using ClassType = DistanceCircle3Circle3<Real>;
-        using Vector3 = Vector3<Real>;
-        using ParentType = DistanceBase<Real, Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3Type>;
 
-        using Circle3 = Circle3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using Circle3Type = Circle3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistanceCircle3Circle3(const Circle3& lhsCircle, const Circle3& rhsCircle) noexcept;
+        DistanceCircle3Circle3(const Circle3Type& lhsCircle, const Circle3Type& rhsCircle) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Circle3 GetLhsCircle() const noexcept;
-        NODISCARD Circle3 GetRhsCircle() const noexcept;
+        NODISCARD Circle3Type GetLhsCircle() const noexcept;
+        NODISCARD Circle3Type GetRhsCircle() const noexcept;
 
         // æ≤Ã¨æ‡¿Î≤È—Ø°£
         NODISCARD DistanceResult GetSquared() const override;
 
         // ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£
-        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
     private:
-        Circle3 lhsCircle;
-        Circle3 rhsCircle;
+        Circle3Type lhsCircle;
+        Circle3Type rhsCircle;
     };
 
     using DistanceCircle3Circle3F = DistanceCircle3Circle3<float>;

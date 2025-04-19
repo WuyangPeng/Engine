@@ -26,7 +26,7 @@ namespace Mathematics
 
         using ClassType = GaussianQuadrature<Real, UserDataType>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
         // 最后一个参数是用户定义的数据。
         using Function = Real (*)(Real, const UserDataType*) noexcept;

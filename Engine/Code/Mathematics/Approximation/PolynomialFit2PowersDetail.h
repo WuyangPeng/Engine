@@ -60,12 +60,12 @@ void Mathematics::PolynomialFit2Powers<Real>::TransformToUnit(const Samples& sou
 {
     const auto result = std::minmax_element(sourceSamples.begin(), sourceSamples.end());
 
-    auto scale = Math::GetValue(1) / (*result.second - *result.first);
+    auto scale = MathType::GetValue(1) / (*result.second - *result.first);
     powersData.SetScale(index, scale);
 
     for (auto sample : sourceSamples)
     {
-        auto newSample = Math::GetValue(-1) + Math::GetValue(2) * (sample - *result.first) * scale;
+        auto newSample = MathType::GetValue(-1) + MathType::GetValue(2) * (sample - *result.first) * scale;
         targetSamples.emplace_back(newSample);
     }
 }
@@ -79,7 +79,7 @@ void Mathematics::PolynomialFit2Powers<Real>::DoLeastSquaresFit(const Samples& x
     const auto powersSize = 2 * maxXPower + 1;
     Samples xPowers(powersSize);
 
-    xPowers.at(0) = Math::GetValue(1);
+    xPowers.at(0) = MathType::GetValue(1);
 
     auto numPowers = boost::numeric_cast<int>(powers.size());
 
@@ -182,10 +182,10 @@ Real Mathematics::PolynomialFit2Powers<Real>::operator()(Real x) const
     const auto maxXPowerPlus1 = maxXPower + 1;
     Samples xPowers(maxXPowerPlus1);
 
-    xPowers.at(0) = Math::GetValue(1);
+    xPowers.at(0) = MathType::GetValue(1);
 
     // 变换x从原来的空间到[-1,1]。
-    x = Math::GetValue(-1) + (Math::GetValue(2) * (x - powersData.GetMin(0)) * powersData.GetScale(0));
+    x = MathType::GetValue(-1) + (MathType::GetValue(2) * (x - powersData.GetMin(0)) * powersData.GetScale(0));
 
     // 计算x的有关幂
     for (auto power = 1; power <= maxXPower; ++power)
@@ -194,7 +194,7 @@ Real Mathematics::PolynomialFit2Powers<Real>::operator()(Real x) const
         xPowers.at(power) = xPowers.at(next) * x;
     }
 
-    auto w = Math::GetValue(0);
+    auto w = MathType::GetValue(0);
     for (auto i = 0u; i < powers.size(); ++i)
     {
         auto xp = xPowers.at(powers.at(i));
@@ -202,7 +202,7 @@ Real Mathematics::PolynomialFit2Powers<Real>::operator()(Real x) const
     }
 
     // 变换w从[-1,1]回到原来的空间。
-    w = (w + Math::GetValue(1)) * powersData.GetInvTwoWScale() + powersData.GetMin(1);
+    w = (w + MathType::GetValue(1)) * powersData.GetInvTwoWScale() + powersData.GetMin(1);
 
     return w;
 }

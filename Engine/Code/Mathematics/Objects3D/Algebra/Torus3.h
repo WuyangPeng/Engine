@@ -50,19 +50,19 @@ namespace Mathematics::Algebra
     public:
         using ClassType = Torus3<Real>;
 
-        using Math = Math<Real>;
-        using Vector3 = Vector3<Real>;
-        using EvaluateResult = std::vector<Vector3>;
+        using MathType = Math<Real>;
+        using Vector3Type = Vector3<Real>;
+        using EvaluateResult = std::vector<Vector3Type>;
 
     public:
         /// 默认构造函数设置
         // center到(0,0,0)，direction0到(1,0,0)，direction1到(0,1,0)、normal
         // 到(0,0,1)，radius0到2，radius1到1。
         Torus3() noexcept;
-        Torus3(Vector3 center,
-               Vector3 direction0,
-               Vector3 direction1,
-               Vector3 normal,
+        Torus3(Vector3Type center,
+               Vector3Type direction0,
+               Vector3Type direction1,
+               Vector3Type normal,
                Real radius0,
                Real radius1) noexcept;
 
@@ -80,19 +80,19 @@ namespace Mathematics::Algebra
         NODISCARD EvaluateResult Evaluate(Real u, Real v, int maxOrder) const;
 
         /// 从位置反向查找参数。
-        void GetParameters(const Vector3& x, Real& u, Real& v) const;
+        void GetParameters(const Vector3Type& x, Real& u, Real& v) const;
 
-        NODISCARD Vector3 GetCenter() const noexcept;
-        void SetCenter(const Vector3& aCenter) noexcept;
+        NODISCARD Vector3Type GetCenter() const noexcept;
+        void SetCenter(const Vector3Type& aCenter) noexcept;
 
-        NODISCARD Vector3 GetDirection0() const noexcept;
-        void SetDirection0(const Vector3& aDirection0) noexcept;
+        NODISCARD Vector3Type GetDirection0() const noexcept;
+        void SetDirection0(const Vector3Type& aDirection0) noexcept;
 
-        NODISCARD Vector3 GetDirection1() const noexcept;
-        void SetDirection1(const Vector3& aDirection1) noexcept;
+        NODISCARD Vector3Type GetDirection1() const noexcept;
+        void SetDirection1(const Vector3Type& aDirection1) noexcept;
 
-        NODISCARD Vector3 GetNormal() const noexcept;
-        void SetNormal(const Vector3& aNormal) noexcept;
+        NODISCARD Vector3Type GetNormal() const noexcept;
+        void SetNormal(const Vector3Type& aNormal) noexcept;
 
         NODISCARD Real GetRadius0() const noexcept;
         void SetRadius0(Real aRadius0) noexcept;
@@ -101,10 +101,10 @@ namespace Mathematics::Algebra
         void SetRadius1(Real aRadius1) noexcept;
 
     private:
-        Vector3 center;
-        Vector3 direction0;
-        Vector3 direction1;
-        Vector3 normal;
+        Vector3Type center;
+        Vector3Type direction0;
+        Vector3Type direction1;
+        Vector3Type normal;
         Real radius0;
         Real radius1;
     };

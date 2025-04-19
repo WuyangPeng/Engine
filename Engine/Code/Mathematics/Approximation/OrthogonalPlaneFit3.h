@@ -26,23 +26,23 @@ namespace Mathematics
     public:
         using ClassType = OrthogonalPlaneFit3<Real>;
 
-        using Vector3 = Vector3<Real>;
-        using Plane3 = Plane3<Real>;
-        using Math = Math<Real>;
-        using Points = std::vector<Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using Plane3Type = Plane3<Real>;
+        using MathType = Math<Real>;
+        using Points = std::vector<Vector3Type>;
 
     public:
         explicit OrthogonalPlaneFit3(const Points& points);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Plane3 GetPlane3() const noexcept;
+        NODISCARD Plane3Type GetPlane3() const noexcept;
 
     private:
-        NODISCARD static Plane3 Calculate(const Points& points);
+        NODISCARD static Plane3Type Calculate(const Points& points);
 
     private:
-        Plane3 plane3;
+        Plane3Type plane3;
     };
 
     using OrthogonalPlaneFit3F = OrthogonalPlaneFit3<float>;

@@ -32,8 +32,8 @@ Mathematics::EigenDecomposition<Real>::EigenDecomposition(int size)
 }
 
 template <typename Real>
-Mathematics::EigenDecomposition<Real>::EigenDecomposition(const Matrix2& rhs)
-    : size{ Matrix2::vectorSize },
+Mathematics::EigenDecomposition<Real>::EigenDecomposition(const Matrix2Type& rhs)
+    : size{ Matrix2Type::vectorSize },
       matrix{ rhs },
       solveMatrix{ rhs },
       diagonal(size),
@@ -45,8 +45,8 @@ Mathematics::EigenDecomposition<Real>::EigenDecomposition(const Matrix2& rhs)
 }
 
 template <typename Real>
-Mathematics::EigenDecomposition<Real>::EigenDecomposition(const Matrix3& rhs)
-    : size{ Matrix3::vectorSize },
+Mathematics::EigenDecomposition<Real>::EigenDecomposition(const Matrix3Type& rhs)
+    : size{ Matrix3Type::vectorSize },
       matrix{ rhs },
       solveMatrix{ rhs },
       diagonal(size),
@@ -58,7 +58,7 @@ Mathematics::EigenDecomposition<Real>::EigenDecomposition(const Matrix3& rhs)
 }
 
 template <typename Real>
-Mathematics::EigenDecomposition<Real>::EigenDecomposition(const VariableMatrix& rhs)
+Mathematics::EigenDecomposition<Real>::EigenDecomposition(const VariableMatrixType& rhs)
     : size{ rhs.GetRowsNumber() },
       matrix{ rhs },
       solveMatrix{ rhs },
@@ -83,7 +83,7 @@ void Mathematics::EigenDecomposition<Real>::Swap(EigenDecomposition& rhs) noexce
 }
 
 template <typename Real>
-Mathematics::EigenDecomposition<Real>& Mathematics::EigenDecomposition<Real>::operator=(const Matrix2& rhs)
+Mathematics::EigenDecomposition<Real>& Mathematics::EigenDecomposition<Real>::operator=(const Matrix2Type& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -95,7 +95,7 @@ Mathematics::EigenDecomposition<Real>& Mathematics::EigenDecomposition<Real>::op
 }
 
 template <typename Real>
-Mathematics::EigenDecomposition<Real>& Mathematics::EigenDecomposition<Real>::operator=(const Matrix3& rhs)
+Mathematics::EigenDecomposition<Real>& Mathematics::EigenDecomposition<Real>::operator=(const Matrix3Type& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -107,7 +107,7 @@ Mathematics::EigenDecomposition<Real>& Mathematics::EigenDecomposition<Real>::op
 }
 
 template <typename Real>
-Mathematics::EigenDecomposition<Real>& Mathematics::EigenDecomposition<Real>::operator=(const VariableMatrix& rhs)
+Mathematics::EigenDecomposition<Real>& Mathematics::EigenDecomposition<Real>::operator=(const VariableMatrixType& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -125,7 +125,7 @@ bool Mathematics::EigenDecomposition<Real>::IsValid() const noexcept
 {
     try
     {
-        if (Matrix2::vectorSize <= size &&
+        if (Matrix2Type::vectorSize <= size &&
             matrix.GetColumnsNumber() == matrix.GetRowsNumber() &&
             solveMatrix.GetColumnsNumber() == solveMatrix.GetRowsNumber() &&
             matrix.GetColumnsNumber() == solveMatrix.GetColumnsNumber())
@@ -183,10 +183,10 @@ void Mathematics::EigenDecomposition<Real>::Solve(bool increasingSort)
 
     switch (size)
     {
-        case Matrix2::vectorSize:
+        case Matrix2Type::vectorSize:
             Tridiagonal2();
             break;
-        case Matrix3::vectorSize:
+        case Matrix3Type::vectorSize:
             Tridiagonal3();
             break;
         default:
@@ -218,7 +218,7 @@ void Mathematics::EigenDecomposition<Real>::Tridiagonal2()
     diagonal.at(0) = matrix(0, 0);
     diagonal.at(1) = matrix(1, 1);
     subdiagonal.at(0) = matrix(0, 1);
-    subdiagonal.at(1) = Math::GetValue(0);
+    subdiagonal.at(1) = MathType::GetValue(0);
 
     solveMatrix.MakeIdentity();
 
@@ -236,24 +236,24 @@ void Mathematics::EigenDecomposition<Real>::Tridiagonal3()
     auto m22 = matrix(2, 2);
 
     diagonal.at(0) = m00;
-    subdiagonal.at(2) = Math::GetValue(0);
-    if (Math::GetZeroTolerance() < Math::FAbs(m02))
+    subdiagonal.at(2) = MathType::GetValue(0);
+    if (MathType::GetZeroTolerance() < MathType::FAbs(m02))
     {
-        const auto length = Math::Sqrt(m01 * m01 + m02 * m02);
+        const auto length = MathType::Sqrt(m01 * m01 + m02 * m02);
         m01 /= length;
         m02 /= length;
-        const auto q = Math::GetValue(2) * m01 * m12 + m02 * (m22 - m11);
+        const auto q = MathType::GetValue(2) * m01 * m12 + m02 * (m22 - m11);
         diagonal.at(1) = m11 + m02 * q;
         diagonal.at(2) = m22 - m02 * q;
         subdiagonal.at(0) = length;
         subdiagonal.at(1) = m12 - m01 * q;
-        solveMatrix(0, 0) = Math::GetValue(1);
-        solveMatrix(0, 1) = Math::GetValue(0);
-        solveMatrix(0, 2) = Math::GetValue(0);
-        solveMatrix(1, 0) = Math::GetValue(0);
+        solveMatrix(0, 0) = MathType::GetValue(1);
+        solveMatrix(0, 1) = MathType::GetValue(0);
+        solveMatrix(0, 2) = MathType::GetValue(0);
+        solveMatrix(1, 0) = MathType::GetValue(0);
         solveMatrix(1, 1) = m01;
         solveMatrix(1, 2) = m02;
-        solveMatrix(2, 0) = Math::GetValue(0);
+        solveMatrix(2, 0) = MathType::GetValue(0);
         solveMatrix(2, 1) = m02;
         solveMatrix(2, 2) = -m01;
 
@@ -295,7 +295,7 @@ void Mathematics::EigenDecomposition<Real>::Step1()
         else
         {
             subdiagonal.at(index) = solveMatrix(index, index - 1);
-            diagonal.at(index) = Math::GetValue(0);
+            diagonal.at(index) = MathType::GetValue(0);
         }
     }
 }
@@ -305,10 +305,10 @@ void Mathematics::EigenDecomposition<Real>::TridiagonalNInLoop(int index)
 {
     auto scale = GetScale(index);
 
-    if (Math::FAbs(scale) <= Math::GetZeroTolerance())
+    if (MathType::FAbs(scale) <= MathType::GetZeroTolerance())
     {
         subdiagonal.at(index) = solveMatrix(index, index - 1);
-        diagonal.at(index) = Math::GetValue(0);
+        diagonal.at(index) = MathType::GetValue(0);
     }
     else
     {
@@ -329,8 +329,8 @@ void Mathematics::EigenDecomposition<Real>::CalculateDiagonal(int index, Real sc
     }
 
     auto solveMatrixValue = solveMatrix(index, index - 1);
-    auto diagonalValueSqrt = Math::Sqrt(diagonalValue);
-    if (Math::GetValue(0) < solveMatrixValue)
+    auto diagonalValueSqrt = MathType::Sqrt(diagonalValue);
+    if (MathType::GetValue(0) < solveMatrixValue)
     {
         diagonalValueSqrt = -diagonalValueSqrt;
     }
@@ -366,7 +366,7 @@ void Mathematics::EigenDecomposition<Real>::CalculateSubdiagonal(int index)
         subDiagonalProduct += subdiagonal.at(outerIndex) * solveMatrix(index, outerIndex);
     }
 
-    const auto value = Math::GetRational(1, 2) * subDiagonalProduct / diagonalValue;
+    const auto value = MathType::GetRational(1, 2) * subDiagonalProduct / diagonalValue;
     for (auto outerIndex = 0; outerIndex <= index - 1; ++outerIndex)
     {
         const auto solveMatrixValue = solveMatrix(index, outerIndex);
@@ -386,7 +386,7 @@ Real Mathematics::EigenDecomposition<Real>::GetScale(int index) const
 
     for (auto scaleIndex = 0; scaleIndex <= index - 1; ++scaleIndex)
     {
-        scale += Math::FAbs(solveMatrix(index, scaleIndex));
+        scale += MathType::FAbs(solveMatrix(index, scaleIndex));
     }
 
     return scale;
@@ -395,11 +395,11 @@ Real Mathematics::EigenDecomposition<Real>::GetScale(int index) const
 template <typename Real>
 void Mathematics::EigenDecomposition<Real>::Step2()
 {
-    diagonal.at(0) = Math::GetValue(0);
-    subdiagonal.at(0) = Math::GetValue(0);
+    diagonal.at(0) = MathType::GetValue(0);
+    subdiagonal.at(0) = MathType::GetValue(0);
     for (auto index = 0; index <= size - 1; ++index)
     {
-        if (Math::GetZeroTolerance() < Math::FAbs(diagonal.at(index)))
+        if (MathType::GetZeroTolerance() < MathType::FAbs(diagonal.at(index)))
         {
             for (auto outerIndex = 0; outerIndex <= index - 1; ++outerIndex)
             {
@@ -416,11 +416,11 @@ void Mathematics::EigenDecomposition<Real>::Step2()
             }
         }
         diagonal.at(index) = solveMatrix(index, index);
-        solveMatrix(index, index) = Math::GetValue(1);
+        solveMatrix(index, index) = MathType::GetValue(1);
         for (auto innerIndex = 0; innerIndex <= index - 1; ++innerIndex)
         {
-            solveMatrix(innerIndex, index) = Math::GetValue(0);
-            solveMatrix(index, innerIndex) = Math::GetValue(0);
+            solveMatrix(innerIndex, index) = MathType::GetValue(0);
+            solveMatrix(index, innerIndex) = MathType::GetValue(0);
         }
     }
 }
@@ -436,7 +436,7 @@ void Mathematics::EigenDecomposition<Real>::Step3()
         subdiagonal.at(indexMinus1) = subdiagonal.at(index);
     }
     const auto sizeMinus1 = size - 1;
-    subdiagonal.at(sizeMinus1) = Math::GetValue(0);
+    subdiagonal.at(sizeMinus1) = MathType::GetValue(0);
 }
 
 template <typename Real>
@@ -486,36 +486,36 @@ template <typename Real>
 void Mathematics::EigenDecomposition<Real>::QLAlgorithmLoop(int totalIndex, int outerIndex)
 {
     auto subDiagonalValue = GetQLAlgorithmSubDiagonalValue(totalIndex, outerIndex);
-    auto sine = Math::GetValue(1);
-    auto cosine = Math::GetValue(1);
-    auto diagonalDifferenceValue = Math::GetValue(0);
+    auto sine = MathType::GetValue(1);
+    auto cosine = MathType::GetValue(1);
+    auto diagonalDifferenceValue = MathType::GetValue(0);
 
     for (auto innerIndex = outerIndex - 1; innerIndex >= totalIndex; --innerIndex)
     {
         auto subDiagonalSineValue = sine * subdiagonal.at(innerIndex);
         auto subDiagonalCosineValue = cosine * subdiagonal.at(innerIndex);
 
-        if (Math::FAbs(subDiagonalValue) <= Math::FAbs(subDiagonalSineValue))
+        if (MathType::FAbs(subDiagonalValue) <= MathType::FAbs(subDiagonalSineValue))
         {
             cosine = subDiagonalValue / subDiagonalSineValue;
-            const auto cosineAmend = Math::Sqrt(cosine * cosine + Math::GetValue(1));
+            const auto cosineAmend = MathType::Sqrt(cosine * cosine + MathType::GetValue(1));
             const auto innerNextIndex = innerIndex + 1;
             subdiagonal.at(innerNextIndex) = subDiagonalSineValue * cosineAmend;
-            sine = Math::GetValue(1) / cosineAmend;
+            sine = MathType::GetValue(1) / cosineAmend;
             cosine *= sine;
         }
         else
         {
             sine = subDiagonalSineValue / subDiagonalValue;
-            const auto cosineAmend = Math::Sqrt(sine * sine + Math::GetValue(1));
+            const auto cosineAmend = MathType::Sqrt(sine * sine + MathType::GetValue(1));
             const auto innerNextIndex = innerIndex + 1;
             subdiagonal.at(innerNextIndex) = subDiagonalValue * cosineAmend;
-            cosine = Math::GetValue(1) / cosineAmend;
+            cosine = MathType::GetValue(1) / cosineAmend;
             sine *= cosine;
         }
         const auto innerNextIndex = innerIndex + 1;
         subDiagonalValue = diagonal.at(innerNextIndex) - diagonalDifferenceValue;
-        const auto value = (diagonal.at(innerIndex) - subDiagonalValue) * sine + Math::GetValue(2) * subDiagonalCosineValue * cosine;
+        const auto value = (diagonal.at(innerIndex) - subDiagonalValue) * sine + MathType::GetValue(2) * subDiagonalCosineValue * cosine;
         diagonalDifferenceValue = sine * value;
         diagonal.at(innerNextIndex) = subDiagonalValue + diagonalDifferenceValue;
         subDiagonalValue = cosine * value - subDiagonalCosineValue;
@@ -525,17 +525,17 @@ void Mathematics::EigenDecomposition<Real>::QLAlgorithmLoop(int totalIndex, int 
 
     diagonal.at(totalIndex) -= diagonalDifferenceValue;
     subdiagonal.at(totalIndex) = subDiagonalValue;
-    subdiagonal.at(outerIndex) = Math::GetValue(0);
+    subdiagonal.at(outerIndex) = MathType::GetValue(0);
 }
 
 template <typename Real>
 Real Mathematics::EigenDecomposition<Real>::GetQLAlgorithmSubDiagonalValue(int totalIndex, int outerIndex) const
 {
     const auto totalIndexPlusOne = totalIndex + 1;
-    const auto value = (diagonal.at(totalIndexPlusOne) - diagonal.at(totalIndex)) / (Math::GetValue(2) * subdiagonal.at(totalIndex));
+    const auto value = (diagonal.at(totalIndexPlusOne) - diagonal.at(totalIndex)) / (MathType::GetValue(2) * subdiagonal.at(totalIndex));
 
-    const auto amendValue = Math::Sqrt(value * value + Math::GetValue(1));
-    if (value < Math::GetValue(0))
+    const auto amendValue = MathType::Sqrt(value * value + MathType::GetValue(1));
+    if (value < MathType::GetValue(0))
     {
         return diagonal.at(outerIndex) - diagonal.at(totalIndex) + subdiagonal.at(totalIndex) / (value - amendValue);
     }
@@ -561,9 +561,9 @@ template <typename Real>
 bool Mathematics::EigenDecomposition<Real>::IsQLAlgorithmQuit(int outerIndex) const
 {
     const auto outerNextIndex = outerIndex + 1;
-    const auto diagonalSum = Math::FAbs(diagonal.at(outerIndex)) + Math::FAbs(diagonal.at(outerNextIndex));
+    const auto diagonalSum = MathType::FAbs(diagonal.at(outerIndex)) + MathType::FAbs(diagonal.at(outerNextIndex));
 
-    if (Math::FAbs(Math::FAbs(subdiagonal.at(outerIndex)) + diagonalSum - diagonalSum) <= Math::GetZeroTolerance())
+    if (MathType::FAbs(MathType::FAbs(subdiagonal.at(outerIndex)) + diagonalSum - diagonalSum) <= MathType::GetZeroTolerance())
     {
         return true;
     }
@@ -672,9 +672,9 @@ Mathematics::Vector2<Real> Mathematics::EigenDecomposition<Real>::GetEigenvector
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_0(solve, "未解析！");
     MATHEMATICS_ASSERTION_1(0 <= index && index < size, "无效索引在GetEigenvector2\n");
-    MATHEMATICS_ASSERTION_1(size == Matrix2::vectorSize, "维度不匹配在GetEigenvector2\n");
+    MATHEMATICS_ASSERTION_1(size == Matrix2Type::vectorSize, "维度不匹配在GetEigenvector2\n");
 
-    Vector2 eigenVector{};
+    Vector2Type eigenVector{};
     for (auto row = 0; row < size; ++row)
     {
         eigenVector[row] = solveMatrix(row, index);
@@ -688,12 +688,12 @@ Mathematics::Matrix2<Real> Mathematics::EigenDecomposition<Real>::GetEigenvector
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_0(solve, "未解析！");
-    MATHEMATICS_ASSERTION_1(size == Matrix2::vectorSize, "维度不匹配在GetEigenvector2\n");
+    MATHEMATICS_ASSERTION_1(size == Matrix2Type::vectorSize, "维度不匹配在GetEigenvector2\n");
 
-    Matrix2 eigenVectors{};
-    for (auto row = 0; row < Matrix2::vectorSize; ++row)
+    Matrix2Type eigenVectors{};
+    for (auto row = 0; row < Matrix2Type::vectorSize; ++row)
     {
-        for (auto column = 0; column < Vector2::pointSize; ++column)
+        for (auto column = 0; column < Vector2Type::pointSize; ++column)
         {
             eigenVectors(row, column) = solveMatrix(row, column);
         }
@@ -708,9 +708,9 @@ Mathematics::Vector3<Real> Mathematics::EigenDecomposition<Real>::GetEigenvector
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_0(solve, "未解析！");
     MATHEMATICS_ASSERTION_1(0 <= index && index < size, "无效索引在GetEigenvector3\n");
-    MATHEMATICS_ASSERTION_1(size == Matrix3::vectorSize, "维度不匹配在GetEigenvector3\n");
+    MATHEMATICS_ASSERTION_1(size == Matrix3Type::vectorSize, "维度不匹配在GetEigenvector3\n");
 
-    Vector3 eigenVector{};
+    Vector3Type eigenVector{};
     for (auto row = 0; row < size; ++row)
     {
         eigenVector[row] = solveMatrix(row, index);
@@ -724,7 +724,7 @@ Mathematics::Matrix3<Real> Mathematics::EigenDecomposition<Real>::GetEigenvector
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_0(solve, "未解析！");
-    MATHEMATICS_ASSERTION_1(size == Matrix3::vectorSize, "维度不匹配在GetEigenvector3\n");
+    MATHEMATICS_ASSERTION_1(size == Matrix3Type::vectorSize, "维度不匹配在GetEigenvector3\n");
 
     return solveMatrix.GetMatrix3();
 }

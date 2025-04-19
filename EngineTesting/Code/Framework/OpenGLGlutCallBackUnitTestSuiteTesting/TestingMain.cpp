@@ -13,6 +13,6 @@
 #include "Framework/OpenGLGlutFrame/Flags/FrameParameter.h"
 #include "Framework/WindowCreate/WindowSize.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 GLUT_CONSOLE_MAIN_FUNCTION(OpenGLGlutCallBackUnitTestSuiteTesting, TestingHelper, SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT(""), 3, 0, Framework::FrameParameter::SixtyFrame);

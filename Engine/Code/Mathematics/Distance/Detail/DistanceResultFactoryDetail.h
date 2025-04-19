@@ -17,7 +17,7 @@
 template <typename Real, typename Vector>
 typename Mathematics::DistanceResultFactory<Real, Vector>::DistanceResultSharedPtr Mathematics::DistanceResultFactory<Real, Vector>::Create(Real distance)
 {
-    return std::make_shared<DistanceResultImpl>(distance);
+    return std::make_shared<DistanceResultImplType>(distance);
 }
 
 template <typename Real, typename Vector>

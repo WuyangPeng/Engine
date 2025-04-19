@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 
 template <typename Real>
-Mathematics::Line2<Real>::Line2(const Vector2& origin, const Vector2& direction, Real epsilon) noexcept
+Mathematics::Line2<Real>::Line2(const Vector2Type& origin, const Vector2Type& direction, Real epsilon) noexcept
     : origin{ origin }, direction{ direction }, epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -58,7 +58,7 @@ Mathematics::Vector2<Real> Mathematics::Line2<Real>::GetDirection() const noexce
 }
 
 template <typename Real>
-void Mathematics::Line2<Real>::SetDirection(const Vector2& newDirection) noexcept
+void Mathematics::Line2<Real>::SetDirection(const Vector2Type& newDirection) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -66,7 +66,7 @@ void Mathematics::Line2<Real>::SetDirection(const Vector2& newDirection) noexcep
 }
 
 template <typename Real>
-void Mathematics::Line2<Real>::SetOrigin(const Vector2& newOrigin) noexcept
+void Mathematics::Line2<Real>::SetOrigin(const Vector2Type& newOrigin) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -74,7 +74,7 @@ void Mathematics::Line2<Real>::SetOrigin(const Vector2& newOrigin) noexcept
 }
 
 template <typename Real>
-Mathematics::Line2<Real> Mathematics::Line2<Real>::GetMove(Real t, const Vector2& velocity) const
+Mathematics::Line2<Real> Mathematics::Line2<Real>::GetMove(Real t, const Vector2Type& velocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -86,7 +86,7 @@ Real Mathematics::Line2<Real>::DotProduct() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return Vector2Tools::DotProduct(direction, origin);
+    return Vector2ToolsType::DotProduct(direction, origin);
 }
 
 #endif  // MATHEMATICS_OBJECTS_2D_LINE2_ACHIEVE_H

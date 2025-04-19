@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorCircle3Plane3<Real>::StaticTestIntersectorCircle3Plane3(const Circle3& circle, const Plane3& plane, const Real epsilon)
+Mathematics::StaticTestIntersectorCircle3Plane3<Real>::StaticTestIntersectorCircle3Plane3(const Circle3Type& circle, const Plane3Type& plane, const Real epsilon)
     : ParentType{ epsilon }, circle{ circle }, plane{ plane }
 {
     Test();
@@ -56,7 +56,7 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorCircle3Plane3<Real>::Test()
 {
     // 构造圆的平面。
-    const Plane3 circlePlane{ circle.GetNormal(), circle.GetCenter() };
+    const Plane3Type circlePlane{ circle.GetNormal(), circle.GetCenter() };
 
     // 计算此平面与输入平面的交点。
     StaticFindIntersectorPlane3Plane3<Real> intr{ plane, circlePlane };
@@ -81,13 +81,13 @@ void Mathematics::StaticTestIntersectorCircle3Plane3<Real>::Test()
     /// 则r^2 = |t * D + P - C|^2 = |D|^2 * t^2 + 2 * Dot(D,P-C) * t + |P-C|^2。
     /// 这是形式为a2 * t^2 + 2 * a1 * t + a0 = 0的二次方程。
     auto diff = line.GetOrigin() - circle.GetCenter();
-    auto a2 = Vector3Tools::GetLengthSquared(line.GetDirection());
-    auto a1 = Vector3Tools::DotProduct(diff, line.GetDirection());
-    auto a0 = Vector3Tools::GetLengthSquared(diff) - circle.GetRadius() * circle.GetRadius();
+    auto a2 = Vector3ToolsType::GetLengthSquared(line.GetDirection());
+    auto a1 = Vector3ToolsType::DotProduct(diff, line.GetDirection());
+    auto a0 = Vector3ToolsType::GetLengthSquared(diff) - circle.GetRadius() * circle.GetRadius();
 
     // 实值根表示一个交集。
     auto discr = a1 * a1 - a0 * a2;
-    this->SetIntersectionType(Math::GetValue(0) <= discr ? IntersectionType::Point : IntersectionType::Empty);
+    this->SetIntersectionType(MathType::GetValue(0) <= discr ? IntersectionType::Point : IntersectionType::Empty);
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_CIRCLE3_PLANE3_ACHIEVE_H

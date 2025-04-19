@@ -144,14 +144,14 @@ void Mathematics::ConvexPolyhedron3<Real>::UpdatePlane(int index, const Vector3&
     auto diff = average - vertex0;
     auto edge1 = vertex1 - vertex0;
     auto edge2 = vertex2 - vertex0;
-    auto normal = Vector3Tools::CrossProduct(edge2, edge1);
-    auto length = Vector3Tools::GetLength(normal);
-    if (Math::GetZeroTolerance() < length)
+    auto normal = Vector3ToolsType::CrossProduct(edge2, edge1);
+    auto length = Vector3ToolsType::GetLength(normal);
+    if (MathType::GetZeroTolerance() < length)
     {
         normal /= length;
-        auto dot = Vector3Tools::DotProduct(normal, diff);
-        MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= dot, "点积必须为非负数\n");
-        if (dot < Math::GetValue(0))
+        auto dot = Vector3ToolsType::DotProduct(normal, diff);
+        MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= dot, "点积必须为非负数\n");
+        if (dot < MathType::GetValue(0))
         {
             normal = -normal;
         }
@@ -181,15 +181,15 @@ template <typename Real>
 bool Mathematics::ConvexPolyhedron3<Real>::IsConvex(Real threshold) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
-    MATHEMATICS_ASSERTION_1(threshold <= Math::GetValue(0), "threshold必须为负值！");
+    MATHEMATICS_ASSERTION_1(threshold <= MathType::GetValue(0), "threshold必须为负值！");
 
     if (IsUpdatePlanes())
     {
         THROW_EXCEPTION(SYSTEM_TEXT("需要更新平面。\n"s))
     }
 
-    auto maxDistance = -Math::maxReal;
-    auto minDistance = Math::maxReal;
+    auto maxDistance = -MathType::maxReal;
+    auto minDistance = MathType::maxReal;
 
     for (const auto& plane : planes)
     {
@@ -220,7 +220,7 @@ template <typename Real>
 bool Mathematics::ConvexPolyhedron3<Real>::Contains(const Vector3& point, Real threshold) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
-    MATHEMATICS_ASSERTION_1(threshold <= Math::GetValue(0), "threshold必须为负值！");
+    MATHEMATICS_ASSERTION_1(threshold <= MathType::GetValue(0), "threshold必须为负值！");
 
     if (IsUpdatePlanes())
     {

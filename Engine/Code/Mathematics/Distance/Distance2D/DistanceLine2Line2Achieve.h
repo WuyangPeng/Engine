@@ -18,7 +18,7 @@
 #include "Mathematics/Objects2D/Line2Detail.h"
 
 template <typename Real>
-Mathematics::DistanceLine2Line2<Real>::DistanceLine2Line2(const Line2& lhsLine, const Line2& rhsLine) noexcept
+Mathematics::DistanceLine2Line2<Real>::DistanceLine2Line2(const Line2Type& lhsLine, const Line2Type& rhsLine) noexcept
     : ParentType{}, lhsLine{ lhsLine }, rhsLine{ rhsLine }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -68,7 +68,7 @@ typename Mathematics::DistanceLine2Line2<Real>::DistanceResult Mathematics::Dist
         auto lhsT = tool.GetLhsT() / det;
         auto rhsT = tool.GetRhsT() / det;
 
-        return DistanceResult{ Math::GetValue(0), Math::GetValue(0), lhsLine.GetOrigin() + lhsT * lhsLine.GetDirection(), rhsLine.GetOrigin() + rhsT * rhsLine.GetDirection() };
+        return DistanceResult{ MathType::GetValue(0), MathType::GetValue(0), lhsLine.GetOrigin() + lhsT * lhsLine.GetDirection(), rhsLine.GetOrigin() + rhsT * rhsLine.GetDirection() };
     }
     else
     {
@@ -76,12 +76,12 @@ typename Mathematics::DistanceLine2Line2<Real>::DistanceResult Mathematics::Dist
         const auto originDifferenceDotLhsDirection = tool.GetOriginDifferenceDotLhsDirection();
         const auto squaredDistance = tool.GetSquaredDistanceWithParallel();
 
-        return DistanceResult{ squaredDistance, Math::GetValue(0), lhsLine.GetOrigin() - originDifferenceDotLhsDirection * lhsLine.GetDirection(), rhsLine.GetOrigin() };
+        return DistanceResult{ squaredDistance, MathType::GetValue(0), lhsLine.GetOrigin() - originDifferenceDotLhsDirection * lhsLine.GetDirection(), rhsLine.GetOrigin() };
     }
 }
 
 template <typename Real>
-typename Mathematics::DistanceLine2Line2<Real>::DistanceResult Mathematics::DistanceLine2Line2<Real>::GetSquared(Real t, const Vector2& lhsVelocity, const Vector2& rhsVelocity) const
+typename Mathematics::DistanceLine2Line2<Real>::DistanceResult Mathematics::DistanceLine2Line2<Real>::GetSquared(Real t, const Vector2Type& lhsVelocity, const Vector2Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

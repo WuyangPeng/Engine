@@ -90,9 +90,9 @@ int Mathematics::Algebra::SingularValueDecomposition<Real>::Solve(const MatrixTy
         for (auto i = 0; i <= numCols - 2; ++i)
         {
             const auto nextIndex = i + 1;
-            const auto absSuper = Math::FAbs(superDiagonal.at(i));
-            const auto absDiagonal0 = Math::FAbs(diagonal.at(i));
-            const auto absDiagonal1 = Math::FAbs(diagonal.at(nextIndex));
+            const auto absSuper = MathType::FAbs(superDiagonal.at(i));
+            const auto absDiagonal0 = MathType::FAbs(diagonal.at(i));
+            const auto absDiagonal1 = MathType::FAbs(diagonal.at(nextIndex));
             if (absSuper <= epsilon * (absDiagonal0 + absDiagonal1))
             {
                 superDiagonal.at(i) = Real{};
@@ -113,7 +113,7 @@ int Mathematics::Algebra::SingularValueDecomposition<Real>::Solve(const MatrixTy
         auto iMax = numCols - 2;
         for (; iMax != 0; --iMax)
         {
-            if (!Math::Approximate(superDiagonal.at(iMax), Real{}))
+            if (!MathType::Approximate(superDiagonal.at(iMax), Real{}))
             {
                 break;
             }
@@ -123,7 +123,7 @@ int Mathematics::Algebra::SingularValueDecomposition<Real>::Solve(const MatrixTy
         auto iMin = iMax - 1;
         for (; iMin != invalid; --iMin)
         {
-            if (!Math::Approximate(superDiagonal.at(iMin), Real{}))
+            if (!MathType::Approximate(superDiagonal.at(iMin), Real{}))
             {
                 break;
             }
@@ -269,9 +269,9 @@ void Mathematics::Algebra::SingularValueDecomposition<Real>::ComputeHouseholderU
         mu += element * element;
         v.at(row) = element;
     }
-    mu = Math::Sqrt(mu);
+    mu = MathType::Sqrt(mu);
 
-    if (Math::Approximate(mu, Real{}))
+    if (MathType::Approximate(mu, Real{}))
     {
         const auto beta = v.at(selectCol) + (Real{} <= v.at(selectCol) ? mu : -mu);
         for (row = selectCol + 1; row < numRows; ++row)
@@ -280,7 +280,7 @@ void Mathematics::Algebra::SingularValueDecomposition<Real>::ComputeHouseholderU
         }
     }
 
-    v.at(selectCol) = Math::GetValue(1);
+    v.at(selectCol) = MathType::GetValue(1);
 }
 
 template <typename Real>
@@ -308,9 +308,9 @@ void Mathematics::Algebra::SingularValueDecomposition<Real>::ComputeHouseholderV
         mu += element * element;
         v.at(col) = element;
     }
-    mu = Math::Sqrt(mu);
+    mu = MathType::Sqrt(mu);
 
-    if (Math::Approximate(mu, Real{}))
+    if (MathType::Approximate(mu, Real{}))
     {
         const auto beta = v.at(selectRowP1) + (Real{} <= v.at(selectRowP1) ? mu : -mu);
         for (col = selectRowP1 + 1; col < numCols; ++col)
@@ -319,7 +319,7 @@ void Mathematics::Algebra::SingularValueDecomposition<Real>::ComputeHouseholderV
         }
     }
 
-    v.at(selectRowP1) = Math::GetValue(1);
+    v.at(selectRowP1) = MathType::GetValue(1);
 }
 
 template <typename Real>
@@ -331,7 +331,7 @@ void Mathematics::Algebra::SingularValueDecomposition<Real>::DoHouseholderPreMul
     {
         vSqrLength += v.at(row) * v.at(row);
     }
-    const auto beta = Math::GetValue(-2) / vSqrLength;
+    const auto beta = MathType::GetValue(-2) / vSqrLength;
 
     DiagonalType w(numCols);
     for (auto col = selectCol; col < numCols; ++col)
@@ -364,7 +364,7 @@ void Mathematics::Algebra::SingularValueDecomposition<Real>::DoHouseholderPostMu
     {
         vSqrLength += v.at(col) * v.at(col);
     }
-    const auto beta = Math::GetValue(-2) / vSqrLength;
+    const auto beta = MathType::GetValue(-2) / vSqrLength;
 
     DiagonalType w(numRows);
     for (auto row = selectRow; row < numRows; ++row)
@@ -433,7 +433,7 @@ void Mathematics::Algebra::SingularValueDecomposition<Real>::ComputeCutoffs(Real
     Real norm{};
     for (auto i = 0; i < numCols; ++i)
     {
-        const auto abs = Math::FAbs(diagonal.at(i));
+        const auto abs = MathType::FAbs(diagonal.at(i));
         if (norm < abs)
         {
             norm = abs;
@@ -442,7 +442,7 @@ void Mathematics::Algebra::SingularValueDecomposition<Real>::ComputeCutoffs(Real
 
     for (auto i = 0; i < numCols - 1; ++i)
     {
-        const auto abs = Math::FAbs(superDiagonal.at(i));
+        const auto abs = MathType::FAbs(superDiagonal.at(i));
         if (norm < abs)
         {
             norm = abs;
@@ -457,24 +457,24 @@ template <typename Real>
 requires(std::is_arithmetic_v<Real>)
 void Mathematics::Algebra::SingularValueDecomposition<Real>::GetSinCos(Real x, Real y, Real& cs, Real& sn) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    if (Math::Approximate(y, Real{}))
+    if (MathType::Approximate(y, Real{}))
     {
         if (std::fabs(x) < std::fabs(y))
         {
             const auto tau = -x / y;
-            sn = Math::GetValue(1) / Math::Sqrt(Math::GetValue(1) + tau * tau);
+            sn = MathType::GetValue(1) / MathType::Sqrt(MathType::GetValue(1) + tau * tau);
             cs = sn * tau;
         }
         else
         {
             const auto tau = -y / x;
-            cs = Math::GetValue(1) / Math::Sqrt(Math::GetValue(1) + tau * tau);
+            cs = MathType::GetValue(1) / MathType::Sqrt(MathType::GetValue(1) + tau * tau);
             sn = cs * tau;
         }
     }
     else
     {
-        cs = Math::GetValue(1);
+        cs = MathType::GetValue(1);
         sn = Real{};
     }
 }
@@ -485,7 +485,7 @@ bool Mathematics::Algebra::SingularValueDecomposition<Real>::DiagonalEntriesNonz
 {
     for (auto i = iMin; i < iMax; ++i)
     {
-        if (Math::FAbs(diagonal.at(i)) <= threshold)
+        if (MathType::FAbs(diagonal.at(i)) <= threshold)
         {
             /// 使用平面旋转将超对角线条目从矩阵中逐出，从而生成一行零。
             Real cs{};
@@ -551,8 +551,8 @@ void Mathematics::Algebra::SingularValueDecomposition<Real>::DoGolubKahanStep(in
     /// 如果a11 <= a00，则所需特征值使用(-)sqrt项。
     const auto sum = a00 + a11;
     const auto dif = a00 - a11;
-    const auto root = Math::Sqrt(dif * dif + a01 * a01);
-    const auto lambda = Math::GetRational(1, 2) * (a00 <= a11 ? sum + root : sum - root);
+    const auto root = MathType::Sqrt(dif * dif + a01 * a01);
+    const auto lambda = MathType::GetRational(1, 2) * (a00 <= a11 ? sum + root : sum - root);
     auto x = diagonal.at(iMin) * diagonal.at(iMin) - lambda;
     auto y = diagonal.at(iMin) * superDiagonal.at(iMin);
 
@@ -635,7 +635,7 @@ void Mathematics::Algebra::SingularValueDecomposition<Real>::ComputeUOrthogonal(
     for (auto d = 0; d < numRows; ++d)
     {
         const auto index = d + numRows * d;
-        uMatrix.at(index) = Math::GetValue(1);
+        uMatrix.at(index) = MathType::GetValue(1);
     }
 
     /// 使用向后累加乘以Householder反射。
@@ -673,7 +673,7 @@ void Mathematics::Algebra::SingularValueDecomposition<Real>::ComputeVOrthogonal(
     for (auto d = 0; d < numCols; ++d)
     {
         const auto index = d + numCols * d;
-        vMatrix.at(index) = Math::GetValue(1);
+        vMatrix.at(index) = MathType::GetValue(1);
     }
 
     /// 使用向后累加乘以Householder反射。
@@ -740,7 +740,7 @@ void Mathematics::Algebra::SingularValueDecomposition<Real>::SortSingularValues(
         sorted.at(i).SetSingular(sMatrix.at(index));
         sorted.at(i).SetInversePermute(i);
     }
-    std::sort(sorted.begin(), sorted.end(), std::greater<SingularInfo>());
+    std::sort(sorted.begin(), sorted.end(), std::greater<SingularInfoType>());
     for (auto i = 0; i < numCols; ++i)
     {
         const auto index = i + numCols * i;

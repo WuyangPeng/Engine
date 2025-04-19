@@ -36,7 +36,7 @@ void Mathematics::Algebra::OdeRungeKutta4<Real, TVector>::Update(Real tIn, const
     MATHEMATICS_CLASS_IS_VALID_9;
 
     /// 计算第一步。
-    const auto halfTDelta = Math::GetRational(1, 2) * this->GetTDelta();
+    const auto halfTDelta = MathType::GetRational(1, 2) * this->GetTDelta();
     const auto fTemp1 = this->GetFunction(tIn, xIn);
     auto xTemp = xIn + halfTDelta * fTemp1;
 
@@ -50,10 +50,10 @@ void Mathematics::Algebra::OdeRungeKutta4<Real, TVector>::Update(Real tIn, const
     xTemp = xIn + this->GetTDelta() * fTemp3;
 
     /// 计算第四步。
-    const auto sixthTDelta = this->GetTDelta() / Math::GetValue(6);
+    const auto sixthTDelta = this->GetTDelta() / MathType::GetValue(6);
     tOut = tIn + this->GetTDelta();
     const auto fTemp4 = this->GetFunction(tOut, xTemp);
-    xOut = xIn + sixthTDelta * (fTemp1 + Math::GetValue(2) * (fTemp2 + fTemp3) + fTemp4);
+    xOut = xIn + sixthTDelta * (fTemp1 + MathType::GetValue(2) * (fTemp2 + fTemp3) + fTemp4);
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_ALGEBRA_ODE_RUNGE_KUTTA4_DETAIL_H

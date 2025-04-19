@@ -25,36 +25,36 @@ namespace Mathematics
     {
     public:
         using ClassType = DistanceLine3Ray3<Real>;
-        using Vector3 = Vector3<Real>;
-        using ParentType = DistanceBase<Real, Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3Type>;
 
-        using Line3 = Line3<Real>;
-        using Ray3 = Ray3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using DistanceLine3Line3Tool = DistanceLine3Line3Tool<Real>;
-        using Math = typename ParentType::Math;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using Line3Type = Line3<Real>;
+        using Ray3Type = Ray3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using DistanceLine3Line3ToolType = DistanceLine3Line3Tool<Real>;
+        using MathType = typename ParentType::MathType;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistanceLine3Ray3(const Line3& line, const Ray3& ray) noexcept;
+        DistanceLine3Ray3(const Line3Type& line, const Ray3Type& ray) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Line3 GetLine() const noexcept;
-        NODISCARD Ray3 GetRay() const noexcept;
+        NODISCARD Line3Type GetLine() const noexcept;
+        NODISCARD Ray3Type GetRay() const noexcept;
 
         // æ≤Ã¨æ‡¿Î≤È—Ø°£
         NODISCARD DistanceResult GetSquared() const override;
 
         // ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£
-        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
     private:
-        NODISCARD DistanceResult GetSquaredWithClosestPoints(const DistanceLine3Line3Tool& tool) const;
+        NODISCARD DistanceResult GetSquaredWithClosestPoints(const DistanceLine3Line3ToolType& tool) const;
 
     private:
-        Line3 line;
-        Ray3 ray;
+        Line3Type line;
+        Ray3Type ray;
     };
 
     using DistanceLine3Ray3F = DistanceLine3Ray3<float>;

@@ -42,19 +42,19 @@ void Mathematics::NISymmetricEigensolver3x3<Real>::operator()(Real a00, Real a01
     const auto max1 = std::max(std::fabs(a02), std::fabs(a11));
     const auto max2 = std::max(std::fabs(a12), std::fabs(a22));
     const auto maxAbsElement = std::max(std::max(max0, max1), max2);
-    if (Math::Approximate(maxAbsElement, Real{}))
+    if (MathType::Approximate(maxAbsElement, Real{}))
     {
         /// A 是零矩阵。
         eval.at(0) = Real{};
         eval.at(1) = Real{};
         eval.at(2) = Real{};
-        evec.at(0) = { Math::GetValue(1), Real{}, Real{} };
-        evec.at(1) = { Real{}, Math::GetValue(1), Real{} };
-        evec.at(2) = { Real{}, Real{}, Math::GetValue(1) };
+        evec.at(0) = { MathType::GetValue(1), Real{}, Real{} };
+        evec.at(1) = { Real{}, MathType::GetValue(1), Real{} };
+        evec.at(2) = { Real{}, Real{}, MathType::GetValue(1) };
         return;
     }
 
-    Real invMaxAbsElement = Math::GetValue(1) / maxAbsElement;
+    Real invMaxAbsElement = MathType::GetValue(1) / maxAbsElement;
     a00 *= invMaxAbsElement;
     a01 *= invMaxAbsElement;
     a02 *= invMaxAbsElement;
@@ -70,7 +70,7 @@ void Mathematics::NISymmetricEigensolver3x3<Real>::operator()(Real a00, Real a01
         /// 在前面提到的PDF中，B = (A - q*I)/p，
         /// 其中q = tr(A)/3，其中tr(A)是A的迹（A的对角线项的和），
         /// 其中p = sqrt(tr((A - q*I)^2)/6)。
-        const auto q = (a00 + a11 + a22) / Math::GetValue(3);
+        const auto q = (a00 + a11 + a22) / MathType::GetValue(3);
 
         /// 矩阵A - q*I由以下表示，其中b00、b11和b22是在这些注释之后计算的，
         ///   +-           -+
@@ -83,7 +83,7 @@ void Mathematics::NISymmetricEigensolver3x3<Real>::operator()(Real a00, Real a01
         const auto b22 = a22 - q;
 
         /// 是PDF中提到的变量p。
-        const auto p = std::sqrt((b00 * b00 + b11 * b11 + b22 * b22 + norm * Math::GetValue(2)) / Math::GetValue(6));
+        const auto p = std::sqrt((b00 * b00 + b11 * b11 + b22 * b22 + norm * MathType::GetValue(2)) / MathType::GetValue(6));
 
         /// 我们需要det(B) = det((A - q*I)/p) = det(A - q*I)/p^3。
         /// 值det(A - q*I) 是使用A - q*I。
@@ -98,15 +98,15 @@ void Mathematics::NISymmetricEigensolver3x3<Real>::operator()(Real a00, Real a01
         /// halfDet值是PDF中提到的(3*theta)。
         /// acos(z)函数需要|z| <= 1，但如果输入的大小大于1，则会无声地失败并返回NaN。
         /// 为了避免由于舍入误差引起的此问题，将halfDet值箝位为[-1,1]。
-        auto halfDet = det * Math::GetRational(1, 2);
-        halfDet = std::min(std::max(halfDet, Math::GetValue(-1)), Math::GetValue(1));
+        auto halfDet = det * MathType::GetRational(1, 2);
+        halfDet = std::min(std::max(halfDet, MathType::GetValue(-1)), MathType::GetValue(1));
 
         /// B的特征值排序为beta0 <= beta1 <= beta2。
         /// 选择两个ThirdsPi中的位数，以便无论是浮点还是双精度，浮点数都最接近理论上的2*pi/3。
-        const auto angle = std::acos(halfDet) / Math::GetValue(3);
-        constexpr auto twoThirdsPi = Math::GetValue(2.09439510239319549);
-        auto beta2 = std::cos(angle) * Math::GetValue(2);
-        auto beta0 = std::cos(angle + twoThirdsPi) * Math::GetValue(2);
+        const auto angle = std::acos(halfDet) / MathType::GetValue(3);
+        constexpr auto twoThirdsPi = MathType::GetValue(2.09439510239319549);
+        auto beta2 = std::cos(angle) * MathType::GetValue(2);
+        auto beta0 = std::cos(angle + twoThirdsPi) * MathType::GetValue(2);
         auto beta1 = -(beta0 + beta2);
 
         /// A的特征值被排序为alpha0 <= alpha1 <= alpha2。
@@ -134,9 +134,9 @@ void Mathematics::NISymmetricEigensolver3x3<Real>::operator()(Real a00, Real a01
         eval.at(0) = a00;
         eval.at(1) = a11;
         eval.at(2) = a22;
-        evec.at(0) = { Math::GetValue(1), Real{}, Real{} };
-        evec.at(1) = { Real{}, Math::GetValue(1), Real{} };
-        evec.at(2) = { Real{}, Real{}, Math::GetValue(1) };
+        evec.at(0) = { MathType::GetValue(1), Real{}, Real{} };
+        evec.at(1) = { Real{}, MathType::GetValue(1), Real{} };
+        evec.at(2) = { Real{}, Real{}, MathType::GetValue(1) };
     }
 
     /// 预处理缩放了矩阵A，矩阵A缩放了本征值。恢复缩放。
@@ -169,7 +169,7 @@ template <typename Real>
 requires(std::is_arithmetic_v<Real>)
 std::array<Real, 3> Mathematics::NISymmetricEigensolver3x3<Real>::Divide(const std::array<Real, 3>& u, Real s)
 {
-    const auto invS = Math::GetValue(1) / s;
+    const auto invS = MathType::GetValue(1) / s;
     const std::array<Real, 3> division{ u.at(0) * invS, u.at(1) * invS, u.at(2) * invS };
 
     return division;
@@ -204,13 +204,13 @@ void Mathematics::NISymmetricEigensolver3x3<Real>::ComputeOrthogonalComplement(c
     if (std::fabs(w.at(0)) > std::fabs(w.at(1)))
     {
         /// 最大绝对值的分量是w.at(0)或w.at(2)。
-        invLength = Math::GetValue(1) / std::sqrt(w.at(0) * w.at(0) + w.at(2) * w.at(2));
+        invLength = MathType::GetValue(1) / std::sqrt(w.at(0) * w.at(0) + w.at(2) * w.at(2));
         u = { -w.at(2) * invLength, Real{}, +w.at(0) * invLength };
     }
     else
     {
         /// 最大绝对值的分量是w.at(1)或w.at(2)。
-        invLength = Math::GetValue(1) / std::sqrt(w.at(1) * w.at(1) + w.at(2) * w.at(2));
+        invLength = MathType::GetValue(1) / std::sqrt(w.at(1) * w.at(1) + w.at(2) * w.at(2));
         u = { Real{}, +w.at(2) * invLength, -w.at(1) * invLength };
     }
     v = Cross(w, u);
@@ -313,13 +313,13 @@ void Mathematics::NISymmetricEigensolver3x3<Real>::ComputeEigenvector1(Real a00,
             if (absM00 >= absM01)
             {
                 m01 /= m00;
-                m00 = Math::GetValue(1) / std::sqrt(Math::GetValue(1) + m01 * m01);
+                m00 = MathType::GetValue(1) / std::sqrt(MathType::GetValue(1) + m01 * m01);
                 m01 *= m00;
             }
             else
             {
                 m00 /= m01;
-                m01 = Math::GetValue(1) / std::sqrt(Math::GetValue(1) + m00 * m00);
+                m01 = MathType::GetValue(1) / std::sqrt(MathType::GetValue(1) + m00 * m00);
                 m00 *= m01;
             }
             evec1 = Subtract(Multiply(m01, u), Multiply(m00, v));
@@ -337,13 +337,13 @@ void Mathematics::NISymmetricEigensolver3x3<Real>::ComputeEigenvector1(Real a00,
             if (absM11 >= absM01)
             {
                 m01 /= m11;
-                m11 = Math::GetValue(1) / std::sqrt(Math::GetValue(1) + m01 * m01);
+                m11 = MathType::GetValue(1) / std::sqrt(MathType::GetValue(1) + m01 * m01);
                 m01 *= m11;
             }
             else
             {
                 m11 /= m01;
-                m01 = Math::GetValue(1) / std::sqrt(Math::GetValue(1) + m11 * m11);
+                m01 = MathType::GetValue(1) / std::sqrt(MathType::GetValue(1) + m11 * m11);
                 m11 *= m01;
             }
             evec1 = Subtract(Multiply(m11, u), Multiply(m01, v));

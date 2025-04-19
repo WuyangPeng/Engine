@@ -33,17 +33,17 @@ namespace Mathematics
     public:
         using ClassType = Arc2<Real>;
 
-        using Math = Math<Real>;
-        using Vector2 = Vector2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
+        using MathType = Math<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
         using AlgebraVector2 = Algebra::Vector2<Real>;
 
     public:
         /// 默认构造函数将中心设置为(0,0)，将半径设置为1，将端点0设置为(1,0)，将端点1设置为 (0,1)。
         Arc2() noexcept;
 
-        Arc2(const Vector2& center, Real radius, const Vector2& end0, const Vector2& end1, Real epsilon = Math::GetZeroTolerance()) noexcept;
-        Arc2(const AlgebraVector2& center, Real radius, const AlgebraVector2& end0, const AlgebraVector2& end1, Real epsilon = Math::GetZeroTolerance());
+        Arc2(const Vector2Type& center, Real radius, const Vector2Type& end0, const Vector2Type& end1, Real epsilon = MathType::GetZeroTolerance()) noexcept;
+        Arc2(const AlgebraVector2& center, Real radius, const AlgebraVector2& end0, const AlgebraVector2& end1, Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
@@ -58,23 +58,23 @@ namespace Mathematics
         /// 如果P在圆上（在epsilon公差意义上），则||P-C| - r| <= epsilon。
         /// 否则，P不在圆上。
         /// 则应用前一段/段落的线侧测试。
-        NODISCARD bool Contains(const Vector2& point) const;
+        NODISCARD bool Contains(const Vector2Type& point) const;
         NODISCARD bool Contains(const AlgebraVector2& point) const;
 
         /// 此函数假定P位于包含圆弧的圆上（可能存在少量浮点舍入误差）。
-        NODISCARD bool CircleContains(const Vector2& point) const;
+        NODISCARD bool CircleContains(const Vector2Type& point) const;
         NODISCARD bool CircleContains(const AlgebraVector2& point) const;
 
-        NODISCARD Vector2 GetCenter() const noexcept;
+        NODISCARD Vector2Type GetCenter() const noexcept;
         NODISCARD Real GetRadius() const noexcept;
-        NODISCARD Vector2 GetEnd0() const noexcept;
-        NODISCARD Vector2 GetEnd1() const noexcept;
+        NODISCARD Vector2Type GetEnd0() const noexcept;
+        NODISCARD Vector2Type GetEnd1() const noexcept;
 
     private:
-        Vector2 center;
+        Vector2Type center;
         Real radius;
-        Vector2 end0;
-        Vector2 end1;
+        Vector2Type end0;
+        Vector2Type end1;
         Real epsilon;
     };
 

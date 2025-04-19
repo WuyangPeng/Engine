@@ -32,8 +32,8 @@ namespace Mathematics
         using Vector3 = Algebra::Vector3<Real>;
         using Vector3Container = std::vector<Vector3>;
         using Ellipse3 = Algebra::Ellipse3<Real>;
-        using Math = Math<Real>;
-        using ApproximationCone3EllipseAndPointsControl = ApproximationCone3EllipseAndPointsControl<Real>;
+        using MathType = Math<Real>;
+        using ApproximationCone3EllipseAndPointsControlType = ApproximationCone3EllipseAndPointsControl<Real>;
 
     public:
         /// 椭圆必须是平面与圆锥体的交点。
@@ -46,7 +46,7 @@ namespace Mathematics
 
         NODISCARD static Cone3 Fit(const Ellipse3& ellipse,
                                    const Vector3Container& points,
-                                   ApproximationCone3EllipseAndPointsControl control = ApproximationCone3EllipseAndPointsControl{});
+                                   ApproximationCone3EllipseAndPointsControlType control = ApproximationCone3EllipseAndPointsControlType{});
 
     private:
         NODISCARD static Cone3 ComputeCone(Real theta,

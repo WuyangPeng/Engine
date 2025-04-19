@@ -34,7 +34,7 @@ namespace Mathematics
         using Samples = std::vector<Real>;
         using Tuple = CoreTools::Tuple<2, int>;
         using Powers = std::vector<Tuple>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         // 构造函数是数据(x[i],y[i],w[i])，分别为0 <= i < numSamples。

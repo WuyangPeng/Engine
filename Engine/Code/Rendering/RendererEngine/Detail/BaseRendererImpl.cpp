@@ -153,14 +153,14 @@ void Rendering::BaseRendererImpl::Resize(int width, int height)
     return rendererAdapter.Resize(width, height);
 }
 
-void Rendering::BaseRendererImpl::SetClearColor(const Colour& clearColor) noexcept
+void Rendering::BaseRendererImpl::SetClearColor(const ColourType& clearColor) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     rendererClear.SetClearColor(clearColor);
 }
 
-Rendering::BaseRendererImpl::Colour Rendering::BaseRendererImpl::GetClearColor() const noexcept
+Rendering::BaseRendererImpl::ColourType Rendering::BaseRendererImpl::GetClearColor() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -484,7 +484,7 @@ int64_t Rendering::BaseRendererImpl::SetState(Font& activeFont)
     return numPixelsDrawn;
 }
 
-int64_t Rendering::BaseRendererImpl::Draw(int x, int y, const Colour& color, const std::string& message)
+int64_t Rendering::BaseRendererImpl::Draw(int x, int y, const ColourType& color, const std::string& message)
 {
     RENDERING_CLASS_IS_VALID_9;
 

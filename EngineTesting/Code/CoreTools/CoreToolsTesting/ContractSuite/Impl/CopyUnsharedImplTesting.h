@@ -30,7 +30,7 @@ namespace CoreTools
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        static NODISCARD ImplSharedPtr Clone(const Impl& impl);
+        NODISCARD static ImplSharedPtr Clone(const Impl& impl);
 
     private:
         void DoRunUnitTest() override;

@@ -10,6 +10,8 @@
 #ifndef MATHEMATICS_PRIMITIVES_FWD_H
 #define MATHEMATICS_PRIMITIVES_FWD_H
 
+#include <type_traits>
+
 namespace Mathematics
 {
     template <int N, typename Real>

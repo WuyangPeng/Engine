@@ -10,7 +10,7 @@
 #include "CoreTools/ConsoleCoreToolsTesting/TestingHelper.h"
 #include "Framework/Helper/MainFunctionMacro.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 WINDOWS_MAIN_FUNCTION_WITH_INFORMATION(ConsoleCoreToolsTesting,
                                        TestingHelper,

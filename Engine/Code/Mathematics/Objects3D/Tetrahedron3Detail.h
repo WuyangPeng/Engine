@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::Tetrahedron3<Real>::Tetrahedron3(const Vector3& vertex0, const Vector3& vertex1, const Vector3& vertex2, const Vector3& vertex3) noexcept
+Mathematics::Tetrahedron3<Real>::Tetrahedron3(const Vector3Type& vertex0, const Vector3Type& vertex1, const Vector3Type& vertex2, const Vector3Type& vertex3) noexcept
     : vertex{ vertex0, vertex1, vertex2, vertex3 }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -63,7 +63,7 @@ Mathematics::Vector3<Real> Mathematics::Tetrahedron3<Real>::GetVertex(int index)
 }
 
 template <typename Real>
-void Mathematics::Tetrahedron3<Real>::SetVertex(int index, const Vector3& aVertex)
+void Mathematics::Tetrahedron3<Real>::SetVertex(int index, const Vector3Type& aVertex)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -108,19 +108,19 @@ typename Mathematics::Tetrahedron3<Real>::PlaneContainerType Mathematics::Tetrah
     // <v0,v1,v3>
     // <v0,v3,v2>
     // <v1,v2,v3>
-    std::array<Vector3, vertexSize> normal{ Vector3Tools::UnitCrossProduct(edge20, edge10),
-                                            Vector3Tools::UnitCrossProduct(edge10, edge30),
-                                            Vector3Tools::UnitCrossProduct(edge30, edge20),
-                                            Vector3Tools::UnitCrossProduct(edge21, edge31) };
+    std::array<Vector3Type, vertexSize> normal{ Vector3ToolsType::UnitCrossProduct(edge20, edge10),
+                                            Vector3ToolsType::UnitCrossProduct(edge10, edge30),
+                                            Vector3ToolsType::UnitCrossProduct(edge30, edge20),
+                                            Vector3ToolsType::UnitCrossProduct(edge21, edge31) };
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-    const auto det = Vector3Tools::DotProduct(edge10, normal[3]);
+    const auto det = Vector3ToolsType::DotProduct(edge10, normal[3]);
 
 #include SYSTEM_WARNING_POP
 
-    if (det < Math::GetValue(0))
+    if (det < MathType::GetValue(0))
     {
         // 法线是指向内部点，改变他们的方向。
         for (auto& value : normal)
@@ -148,7 +148,7 @@ typename Mathematics::Tetrahedron3<Real>::PlaneContainerType Mathematics::Tetrah
 }
 
 template <typename Real>
-Mathematics::Tetrahedron3<Real> Mathematics::Tetrahedron3<Real>::GetMove(Real t, const Vector3& velocity) const
+Mathematics::Tetrahedron3<Real> Mathematics::Tetrahedron3<Real>::GetMove(Real t, const Vector3Type& velocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

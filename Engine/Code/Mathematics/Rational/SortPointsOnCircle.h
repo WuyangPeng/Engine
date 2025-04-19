@@ -35,7 +35,7 @@ namespace Mathematics
         using Vector2 = std::array<T, 2>;
         using Points = std::vector<Vector2>;
         using Indices = std::vector<int>;
-        using CircleSortObject = CircleSortObject<T>;
+        using CircleSortObjectType = CircleSortObject<T>;
 
     public:
         CLASS_INVARIANT_DECLARE;
@@ -58,8 +58,8 @@ namespace Mathematics
                                             bool sortCcw);
 
     private:
-        using CircleSortObjectContainer = std::vector<CircleSortObject>;
-        using SortFunction = bool (*)(const CircleSortObject& lhs, const CircleSortObject& rhs);
+        using CircleSortObjectContainer = std::vector<CircleSortObjectType>;
+        using SortFunction = bool (*)(const CircleSortObjectType& lhs, const CircleSortObjectType& rhs);
 
         NODISCARD static Indices Sort(const Points& point,
                                       const Vector2& center,
@@ -68,8 +68,8 @@ namespace Mathematics
                                       SortFunction sortFunction);
 
     private:
-        NODISCARD static bool LessThanByAngle(const CircleSortObject& lhs, const CircleSortObject& rhs);
-        NODISCARD static bool LessThanByGeometry(const CircleSortObject& lhs, const CircleSortObject& rhs);
+        NODISCARD static bool LessThanByAngle(const CircleSortObjectType& lhs, const CircleSortObjectType& rhs);
+        NODISCARD static bool LessThanByGeometry(const CircleSortObjectType& lhs, const CircleSortObjectType& rhs);
     };
 }
 

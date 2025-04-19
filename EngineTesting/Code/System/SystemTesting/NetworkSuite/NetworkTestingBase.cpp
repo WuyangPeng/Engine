@@ -95,9 +95,13 @@ System::WinSockInternetAddress System::NetworkTestingBase::GetAddress(uint16_t p
 
     WinSockInternetAddress address{};
 
+#ifdef SYSTEM_PLATFORM_WIN32
+
     address.sin_family = EnumCastUnderlying<uint16_t>(AddressFamilies::Internet);
     address.sin_port = GetHostToNetShort(port);
     address.sin_addr.s_addr = GetHostToNetLong(internetAddressAny);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 
     return address;
 }
@@ -119,9 +123,13 @@ System::WinSockInternetAddress System::NetworkTestingBase::GetAddress(uint16_t p
 
     WinSockInternetAddress address{};
 
+#ifdef SYSTEM_PLATFORM_WIN32
+
     address.sin_family = EnumCastUnderlying<uint16_t>(AddressFamilies::Internet);
     address.sin_port = GetHostToNetShort(port);
     address.sin_addr.s_addr = GetInternetAddress(hostname.c_str());
+
+#endif  // SYSTEM_PLATFORM_WIN32
 
     return address;
 }

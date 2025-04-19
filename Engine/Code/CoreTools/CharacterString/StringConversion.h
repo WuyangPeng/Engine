@@ -17,6 +17,7 @@
 #include "System/Helper/UnicodeUsing.h"
 
 #include <string>
+#include <filesystem>
 
 namespace CoreTools
 {
@@ -51,6 +52,8 @@ namespace CoreTools
         NODISCARD static std::string StandardConversionUtf8(const String& character);
         NODISCARD static std::string Utf8ConversionMultiByte(const std::string& character);
         NODISCARD static std::string MultiByteConversionUtf8(const std::string& character);
+
+        NODISCARD static String FileSystemConversionStandard(const std::filesystem::path::string_type& character);
     };
 }
 

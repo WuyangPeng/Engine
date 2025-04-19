@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2025
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.6 (2023/10/26 15:16)
+/// 标准：std:c++20
+/// 版本：1.0.2.0 (2025/03/27 14:33)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR3_H
 #define MATHEMATICS_ALGEBRA_VECTOR3_H
@@ -45,9 +45,9 @@ namespace Mathematics
 
         using ClassType = Vector3<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using ToolsType = Vector3Tools<Real>;
-        using BarycentricCoordinates = BarycentricCoordinates<Real, pointSize + 1>;
+        using BarycentricCoordinatesType = BarycentricCoordinates<Real, pointSize + 1>;
         using ArrayType = std::array<Real, pointSize>;
         using AlgebraVector3 = Algebra::Vector<3, Real>;
 
@@ -83,7 +83,7 @@ namespace Mathematics
         NODISCARD Real GetX() const noexcept;
         NODISCARD Real GetY() const noexcept;
         NODISCARD Real GetZ() const noexcept;
-        NODISCARD bool IsZero(Real epsilon = Math::GetZeroTolerance()) const noexcept;
+        NODISCARD bool IsZero(Real epsilon = MathType::GetZeroTolerance()) const noexcept;
 
         void SetCoordinate(const ArrayType& coordinate) noexcept;
         NODISCARD ArrayType GetCoordinate() const noexcept;
@@ -93,10 +93,10 @@ namespace Mathematics
         void SetX(Real aX) noexcept;
         void SetY(Real aY) noexcept;
         void SetZ(Real aZ) noexcept;
-        void Normalize(Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
-        void RobustNormalize(Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void Normalize(Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void RobustNormalize(Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        NODISCARD bool IsNormalize(Real epsilon = Math::GetZeroTolerance()) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        NODISCARD bool IsNormalize(Real epsilon = MathType::GetZeroTolerance()) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         NODISCARD Vector3 operator-() const noexcept;
         NODISCARD const Real& operator[](int index) const;
@@ -119,25 +119,25 @@ namespace Mathematics
         // (1,0,0)
         static constexpr Vector3 GetUnitX() noexcept
         {
-            return Vector3{ Math::GetValue(1), Math::GetValue(0), Math::GetValue(0) };
+            return Vector3{ MathType::GetValue(1), MathType::GetValue(0), MathType::GetValue(0) };
         }
 
         // (0,1,0)
         static constexpr Vector3 GetUnitY() noexcept
         {
-            return Vector3{ Math::GetValue(0), Math::GetValue(1), Math::GetValue(0) };
+            return Vector3{ MathType::GetValue(0), MathType::GetValue(1), MathType::GetValue(0) };
         }
 
         // (0,0,1)
         static constexpr Vector3 GetUnitZ() noexcept
         {
-            return Vector3{ Math::GetValue(0), Math::GetValue(0), Math::GetValue(1) };
+            return Vector3{ MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(1) };
         }
 
         // (1,1,1)
         static constexpr Vector3 GetOne() noexcept
         {
-            return Vector3{ Math::GetValue(1), Math::GetValue(1), Math::GetValue(1) };
+            return Vector3{ MathType::GetValue(1), MathType::GetValue(1), MathType::GetValue(1) };
         }
 
         // 相对于计算出点V的重心坐标到四面体<V0,V1,V2,V3>
@@ -145,11 +145,11 @@ namespace Mathematics
         // 这里b0 + b1 + b2 + b3 = 1。
         // 当且仅当{V0，V1，V2, V3}是线性无关组时返回值是有效的。
         // 数值上，测试 |det[V0 V1 V2 V3]| <= epsilon。
-        NODISCARD BarycentricCoordinates GetBarycentrics(const Vector3& vector0,
+        NODISCARD BarycentricCoordinatesType GetBarycentrics(const Vector3& vector0,
                                                          const Vector3& vector1,
                                                          const Vector3& vector2,
                                                          const Vector3& vector3,
-                                                         const Real epsilon = Math::GetZeroTolerance()) const;
+                                                         const Real epsilon = MathType::GetZeroTolerance()) const;
 
         NODISCARD Vector3 GetMove(Real t, const Vector3& velocity) const;
 

@@ -14,8 +14,8 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorPlane3Plane3<Real>::StaticFindIntersectorPlane3Plane3(const Plane3& plane0, const Plane3& plane1, const Real epsilon)
-    : ParentType{ epsilon }, plane0{ plane0 }, plane1{ plane1 }, intrLine{ Vector3::GetZero(), Vector3::GetZero() }, intrPlane{}
+Mathematics::StaticFindIntersectorPlane3Plane3<Real>::StaticFindIntersectorPlane3Plane3(const Plane3Type& plane0, const Plane3Type& plane1, const Real epsilon)
+    : ParentType{ epsilon }, plane0{ plane0 }, plane1{ plane1 }, intrLine{ Vector3Type::GetZero(), Vector3Type::GetZero() }, intrPlane{}
 {
     Find();
 
@@ -65,12 +65,12 @@ void Mathematics::StaticFindIntersectorPlane3Plane3<Real>::Find()
     ///   c1 = (d1 - d * d0) / det
     /// 其中det = 1 - d^2。
 
-    auto dot = Vector3Tools::DotProduct(plane0.GetNormal(), plane1.GetNormal());
-    if (Math::GetValue(1) - Math::GetZeroTolerance() <= Math::FAbs(dot))
+    auto dot = Vector3ToolsType::DotProduct(plane0.GetNormal(), plane1.GetNormal());
+    if (MathType::GetValue(1) - MathType::GetZeroTolerance() <= MathType::FAbs(dot))
     {
         // 这些平面是平行的。 检查它们是否共面。
-        auto diff = Math::GetValue(0);
-        if (Math::GetValue(0) <= dot)
+        auto diff = MathType::GetValue(0);
+        if (MathType::GetValue(0) <= dot)
         {
             // 法线方向相同，需要查看c0 - c1。
             diff = plane0.GetConstant() - plane1.GetConstant();
@@ -81,7 +81,7 @@ void Mathematics::StaticFindIntersectorPlane3Plane3<Real>::Find()
             diff = plane0.GetConstant() + plane1.GetConstant();
         }
 
-        if (Math::FAbs(diff) < Math::GetZeroTolerance())
+        if (MathType::FAbs(diff) < MathType::GetZeroTolerance())
         {
             // 平面共面。
             this->SetIntersectionType(IntersectionType::Plane);
@@ -94,11 +94,11 @@ void Mathematics::StaticFindIntersectorPlane3Plane3<Real>::Find()
         return;
     }
 
-    auto invDet = (Math::GetValue(1)) / (Math::GetValue(1) - dot * dot);
+    auto invDet = (MathType::GetValue(1)) / (MathType::GetValue(1) - dot * dot);
     auto c0 = (plane0.GetConstant() - dot * plane1.GetConstant()) * invDet;
     auto c1 = (plane1.GetConstant() - dot * plane0.GetConstant()) * invDet;
     this->SetIntersectionType(IntersectionType::Line);
-    intrLine = Line3{ c0 * plane0.GetNormal() + c1 * plane1.GetNormal(), Vector3Tools::UnitCrossProduct(plane0.GetNormal(), plane1.GetNormal()) };
+    intrLine = Line3Type{ c0 * plane0.GetNormal() + c1 * plane1.GetNormal(), Vector3ToolsType::UnitCrossProduct(plane0.GetNormal(), plane1.GetNormal()) };
 }
 
 template <typename Real>

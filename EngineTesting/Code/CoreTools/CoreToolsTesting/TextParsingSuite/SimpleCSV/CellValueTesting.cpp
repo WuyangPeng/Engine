@@ -86,7 +86,7 @@ void CoreTools::CellValueTesting::CreateInt32Test()
 
 void CoreTools::CellValueTesting::CreateInt64Test()
 {
-    const CellValue cellValue{ 11LL };
+    const CellValue cellValue{ static_cast<int64_t>(11LL) };
 
     ASSERT_EQUAL(cellValue.GetType(), ValueType::Integer);
     ASSERT_EQUAL(cellValue.GetIntegral(), 11);

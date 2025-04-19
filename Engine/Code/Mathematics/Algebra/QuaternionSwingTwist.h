@@ -25,19 +25,19 @@ namespace Mathematics
     public:
         using ClassType = QuaternionSwingTwist<Real>;
 
-        using Quaternion = Quaternion<Real>;
+        using QuaternionType = Quaternion<Real>;
 
     public:
-        QuaternionSwingTwist(const Quaternion& swing, const Quaternion& twist) noexcept;
+        QuaternionSwingTwist(const QuaternionType& swing, const QuaternionType& twist) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Quaternion GetTwist() const noexcept;
-        NODISCARD Quaternion GetSwing() const noexcept;
+        NODISCARD QuaternionType GetTwist() const noexcept;
+        NODISCARD QuaternionType GetSwing() const noexcept;
 
     private:
-        Quaternion swing;
-        Quaternion twist;
+        QuaternionType swing;
+        QuaternionType twist;
     };
 
     using QuaternionSwingTwistF = QuaternionSwingTwist<float>;

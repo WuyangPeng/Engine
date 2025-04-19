@@ -26,9 +26,9 @@ namespace Mathematics
         using ClassType = Query2<Real>;
         using ParentType = QueryBase;
 
-        using Math = Math<Real>;
-        using Vector2 = Vector2<Real>;
-        using VerticesType = std::vector<Vector2>;
+        using MathType = Math<Real>;
+        using Vector2Type = Vector2<Real>;
+        using VerticesType = std::vector<Vector2Type>;
 
     public:
         // 基类处理浮点查询。
@@ -39,7 +39,7 @@ namespace Mathematics
         NODISCARD QueryType GetType() const noexcept override;
 
         NODISCARD int GetNumVertices() const;
-        NODISCARD Vector2 GetVertex(int index) const;
+        NODISCARD Vector2Type GetVertex(int index) const;
 
         // 关于一个点的各种几何对象之间的关系查询。
 
@@ -48,21 +48,21 @@ namespace Mathematics
         //   LineQueryType::Left, 在线的左侧
         //   LineQueryType::OnLine, 在线上
         NODISCARD virtual LineQueryType ToLine(int index, int lhsVerticesIndex, int rhsVerticesIndex) const;
-        NODISCARD virtual LineQueryType ToLine(const Vector2& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const;
+        NODISCARD virtual LineQueryType ToLine(const Vector2Type& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const;
 
         // 返回:
         // TriangleQueryType::Outside, 在三角形外
         // TriangleQueryType::Inside, 在三角形内
         // TriangleQueryType::OnTriangle, 在三角形上
         NODISCARD virtual TriangleQueryType ToTriangle(int index, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const;
-        NODISCARD virtual TriangleQueryType ToTriangle(const Vector2& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const;
+        NODISCARD virtual TriangleQueryType ToTriangle(const Vector2Type& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const;
 
         // 返回:
         // CircumcircleQueryType::Outside,在三角形的外接圆外
         // CircumcircleQueryType::Inside, 在三角形的外接圆内
         // CircumcircleQueryType::OnCircumcircle,在三角形的外接圆上
         NODISCARD virtual CircumcircleQueryType ToCircumcircle(int index, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const;
-        NODISCARD virtual CircumcircleQueryType ToCircumcircle(const Vector2& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const;
+        NODISCARD virtual CircumcircleQueryType ToCircumcircle(const Vector2Type& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const;
 
     private:
         // 输入点

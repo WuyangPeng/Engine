@@ -20,7 +20,7 @@
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorRay2Segment2<Real>::StaticFindIntersectorRay2Segment2(const Ray2& ray, const Segment2& segment, const Real dotThreshold, const Real intervalThreshold)
+Mathematics::StaticFindIntersectorRay2Segment2<Real>::StaticFindIntersectorRay2Segment2(const Ray2Type& ray, const Segment2Type& segment, const Real dotThreshold, const Real intervalThreshold)
     : ParentType{ dotThreshold }, ray{ ray }, segment{ segment }, quantity{ 0 }, intervalThreshold{ intervalThreshold }, point0{}, point1{}
 {
     Find();
@@ -39,7 +39,7 @@ void Mathematics::StaticFindIntersectorRay2Segment2<Real>::Find()
     if (intersectionType == IntersectionType::Point)
     {
         // 测试直线-直线的相交点是否在射线和线段上。
-        if (0 <= classify.GetParameter0() && Math::FAbs(classify.GetParameter1()) <= segment.GetExtent() + intervalThreshold)
+        if (0 <= classify.GetParameter0() && MathType::FAbs(classify.GetParameter1()) <= segment.GetExtent() + intervalThreshold)
         {
             quantity = 1;
             point0 = ray.GetOrigin() + classify.GetParameter0() * ray.GetDirection();
@@ -54,14 +54,14 @@ void Mathematics::StaticFindIntersectorRay2Segment2<Real>::Find()
     {
         // 计算线段segment中心相对于射线ray的位置。
         auto difference = segment.GetCenterPoint() - ray.GetOrigin();
-        auto dotProduct = Vector2Tools::DotProduct(ray.GetDirection(), difference);
+        auto dotProduct = Vector2ToolsType::DotProduct(ray.GetDirection(), difference);
 
         // 计算线段相对于射线方向的终点的位置。
         auto tmin = dotProduct - segment.GetExtent();
         auto tmax = dotProduct + segment.GetExtent();
 
         // 计算区间 [0,+infinity) 和 [tmin,tmax]相交点。
-        StaticFindIntersector1<Real> calc{ Math::GetValue(0), Math::maxReal, tmin, tmax, dotThreshold };
+        StaticFindIntersector1<Real> calc{ MathType::GetValue(0), MathType::maxReal, tmin, tmax, dotThreshold };
 
         quantity = calc.GetNumIntersections();
 
@@ -137,7 +137,7 @@ Real Mathematics::StaticFindIntersectorRay2Segment2<Real>::GetIntervalThreshold(
 }
 
 template <typename Real>
-typename Mathematics::StaticFindIntersectorRay2Segment2<Real>::Vector2 Mathematics::StaticFindIntersectorRay2Segment2<Real>::GetPoint(int index) const
+typename Mathematics::StaticFindIntersectorRay2Segment2<Real>::Vector2Type Mathematics::StaticFindIntersectorRay2Segment2<Real>::GetPoint(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

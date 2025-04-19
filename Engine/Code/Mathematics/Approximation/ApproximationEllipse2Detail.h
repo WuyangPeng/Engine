@@ -85,7 +85,7 @@ Real Mathematics::ApproximationEllipse2<Real>::operator()(const Vector2Container
     for (auto i = 0; i < 2; ++i)
     {
         ellipse.SetAxis(i, { evec.at(i).at(0), evec.at(i).at(1) });
-        ellipse.SetExtent(i, Math::GetValue(1) / std::sqrt(eval.at(i)));
+        ellipse.SetExtent(i, MathType::GetValue(1) / std::sqrt(eval.at(i)));
     }
 
     return error;
@@ -95,12 +95,12 @@ template <typename Real>
 requires(std::is_arithmetic_v<Real>)
 Real Mathematics::ApproximationEllipse2<Real>::UpdateCenter(const Vector2Container& points, const Matrix2x2& m, Vector2& c)
 {
-    constexpr Real zero = Math::GetValue(0);
-    constexpr Real one = Math::GetValue(1);
-    constexpr Real two = Math::GetValue(2);
-    constexpr Real three = Math::GetValue(3);
-    constexpr Real four = Math::GetValue(4);
-    constexpr Real epsilon = Math::GetValue(1e-06);
+    constexpr Real zero = MathType::GetValue(0);
+    constexpr Real one = MathType::GetValue(1);
+    constexpr Real two = MathType::GetValue(2);
+    constexpr Real three = MathType::GetValue(3);
+    constexpr Real four = MathType::GetValue(4);
+    constexpr Real epsilon = MathType::GetValue(1e-06);
 
     Vector2Container mDelta(points.size());
     std::vector<Real> a(points.size());
@@ -178,10 +178,10 @@ template <typename Real>
 requires(std::is_arithmetic_v<Real>)
 Real Mathematics::ApproximationEllipse2<Real>::UpdateMatrix(const Vector2Container& points, const Vector2& c, Matrix2x2& m)
 {
-    constexpr Real zero = Math::GetValue(0);
-    constexpr Real one = Math::GetValue(1);
-    constexpr Real two = Math::GetValue(2);
-    constexpr Real epsilon = Math::GetValue(1e-06);
+    constexpr Real zero = MathType::GetValue(0);
+    constexpr Real one = MathType::GetValue(1);
+    constexpr Real two = MathType::GetValue(2);
+    constexpr Real epsilon = MathType::GetValue(1e-06);
 
     Vector2Container delta(points.size());
     std::vector<Real> a(points.size());
@@ -254,7 +254,7 @@ Real Mathematics::ApproximationEllipse2<Real>::UpdateMatrix(const Vector2Contain
                     return minError;
                 }
             }
-            root *= Math::GetRational(1, 2);
+            root *= MathType::GetRational(1, 2);
         }
     }
     return aaMean;
@@ -268,7 +268,7 @@ Real Mathematics::ApproximationEllipse2<Real>::ErrorFunction(const Vector2Contai
     for (const auto& p : points)
     {
         const auto delta = p - c;
-        auto a = Dot(delta, m * delta) - Math::GetValue(1);
+        auto a = Dot(delta, m * delta) - MathType::GetValue(1);
         error += a * a;
     }
     error /= boost::numeric_cast<Real>(points.size());

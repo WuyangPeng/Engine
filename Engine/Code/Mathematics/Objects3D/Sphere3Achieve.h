@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::Sphere3<Real>::Sphere3(const Vector3& center, Real radius) noexcept
+Mathematics::Sphere3<Real>::Sphere3(const Vector3Type& center, Real radius) noexcept
     : center{ center }, radius{ radius }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -33,7 +33,7 @@ Mathematics::Sphere3<Real>::Sphere3() noexcept
 template <typename Real>
 bool Mathematics::Sphere3<Real>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) <= radius)
+    if (MathType::GetValue(0) <= radius)
         return true;
     else
         return false;
@@ -42,7 +42,7 @@ bool Mathematics::Sphere3<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename Mathematics::Sphere3<Real>::Vector3 Mathematics::Sphere3<Real>::GetCenter() const noexcept
+typename Mathematics::Sphere3<Real>::Vector3Type Mathematics::Sphere3<Real>::GetCenter() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -58,7 +58,7 @@ Real Mathematics::Sphere3<Real>::GetRadius() const noexcept
 }
 
 template <typename Real>
-void Mathematics::Sphere3<Real>::SetSphere(const Vector3& aCenter, Real aRadius) noexcept
+void Mathematics::Sphere3<Real>::SetSphere(const Vector3Type& aCenter, Real aRadius) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 

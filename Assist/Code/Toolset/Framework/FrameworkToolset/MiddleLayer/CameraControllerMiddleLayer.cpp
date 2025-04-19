@@ -14,9 +14,9 @@
 #include "Framework/Application/Flags/ApplicationTrait.h"
 #include "Framework/MiddleLayer/CameraControllerMiddleLayerDetail.h"
 
-    CLASS_INVARIANT_STUB_DEFINE(FrameworkToolset, CameraControllerMiddleLayer)
+CLASS_INVARIANT_STUB_DEFINE(FrameworkToolset, CameraControllerMiddleLayer)
 
-        namespace FrameworkToolset
+namespace Framework
 {
     template class Framework::CameraControllerMiddleLayer<Framework::WindowApplicationTrait>;
 }

@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorSegment3Triangle3<Real>::StaticTestIntersectorSegment3Triangle3(const Segment3& segment, const Triangle3& triangle, const Real epsilon)
+Mathematics::StaticTestIntersectorSegment3Triangle3<Real>::StaticTestIntersectorSegment3Triangle3(const Segment3Type& segment, const Triangle3Type& triangle, const Real epsilon)
     : ParentType{ epsilon }, segment{ segment }, triangle{ triangle }
 {
     Test();
@@ -57,17 +57,17 @@ void Mathematics::StaticTestIntersectorSegment3Triangle3<Real>::Test()
     const auto diff = segment.GetCenterPoint() - triangle.GetVertex(0);
     const auto edge1 = triangle.GetVertex(1) - triangle.GetVertex(0);
     const auto edge2 = triangle.GetVertex(2) - triangle.GetVertex(0);
-    const auto normal = Vector3Tools::CrossProduct(edge1, edge2);
+    const auto normal = Vector3ToolsType::CrossProduct(edge1, edge2);
 
-    auto ddn = Vector3Tools::DotProduct(segment.GetDirection(), normal);
+    auto ddn = Vector3ToolsType::DotProduct(segment.GetDirection(), normal);
     Real sign{};
-    if (ddn > Math::GetZeroTolerance())
+    if (ddn > MathType::GetZeroTolerance())
     {
-        sign = Math::GetValue(1);
+        sign = MathType::GetValue(1);
     }
-    else if (ddn < -Math::GetZeroTolerance())
+    else if (ddn < -MathType::GetZeroTolerance())
     {
-        sign = Math::GetValue(-1);
+        sign = MathType::GetValue(-1);
         ddn = -ddn;
     }
     else
@@ -77,15 +77,15 @@ void Mathematics::StaticTestIntersectorSegment3Triangle3<Real>::Test()
         return;
     }
 
-    auto ddqxe2 = sign * Vector3Tools::DotProduct(segment.GetDirection(), Vector3Tools::CrossProduct(diff, edge2));
-    if (Math::GetValue(0) <= ddqxe2)
+    auto ddqxe2 = sign * Vector3ToolsType::DotProduct(segment.GetDirection(), Vector3ToolsType::CrossProduct(diff, edge2));
+    if (MathType::GetValue(0) <= ddqxe2)
     {
-        auto dde1xq = sign * Vector3Tools::DotProduct(segment.GetDirection(), Vector3Tools::CrossProduct(edge1, diff));
-        if (Math::GetValue(0) <= dde1xq)
+        auto dde1xq = sign * Vector3ToolsType::DotProduct(segment.GetDirection(), Vector3ToolsType::CrossProduct(edge1, diff));
+        if (MathType::GetValue(0) <= dde1xq)
         {
             if (ddqxe2 + dde1xq <= ddn)
             {
-                auto qdn = -sign * Vector3Tools::DotProduct(diff, normal);
+                auto qdn = -sign * Vector3ToolsType::DotProduct(diff, normal);
                 auto extDdN = segment.GetExtent() * ddn;
                 if (-extDdN <= qdn && qdn <= extDdN)
                 {

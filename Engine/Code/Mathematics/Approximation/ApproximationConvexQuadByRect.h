@@ -25,7 +25,7 @@ namespace Mathematics
     public:
         using ClassType = ApproximationConvexQuadByRect<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Vector2 = Algebra::Vector2<Real>;
         using OrientedBox2 = Algebra::OrientedBox2<Real>;
 

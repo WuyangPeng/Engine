@@ -127,6 +127,8 @@ void CoreTools::CReadFileManagerTesting::PositionTest()
 
 void CoreTools::CReadFileManagerTesting::DoPositionTest(CReadFileManager& manager)
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     ASSERT_EQUAL(0, manager.GetPosition());
 
     ASSERT_TRUE(manager.Seek(1, System::FileSeek::Cur));
@@ -134,6 +136,8 @@ void CoreTools::CReadFileManagerTesting::DoPositionTest(CReadFileManager& manage
 
     ASSERT_TRUE(manager.SetPosition(8));
     ASSERT_EQUAL(8, manager.GetPosition());
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 void CoreTools::CReadFileManagerTesting::MiscellaneousTest(CReadFileManager& manager)

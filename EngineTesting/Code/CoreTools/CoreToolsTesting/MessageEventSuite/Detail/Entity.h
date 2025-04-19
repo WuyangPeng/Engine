@@ -29,7 +29,7 @@ namespace CoreTools
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD bool EventFunction(const Telegram& telegram) override;
+        NODISCARD bool EventFunction(const Telegram<>& telegram) override;
 
         NODISCARD int GetValue() const noexcept;
 

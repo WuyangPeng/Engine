@@ -16,7 +16,7 @@
 #include "Mathematics/NumericalAnalysis/PolynomialRoots.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::StaticFindIntersectorEllipse2Ellipse2(const Ellipse2& ellipse0, const Ellipse2& ellipse1, const Real epsilon)
+Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::StaticFindIntersectorEllipse2Ellipse2(const Ellipse2Type& ellipse0, const Ellipse2Type& ellipse1, const Real epsilon)
     : ParentType{ epsilon }, ellipse0{ ellipse0 }, ellipse1{ ellipse1 }, point{}, transverse{}, digitsAccuracy{ 10 }
 {
     Find();
@@ -102,7 +102,7 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Find()
 
     /// 计算四次多项式，其根导致椭圆相交的，然后计算其根。
     auto poly = GetQuartic(ellipse0, ellipse1);
-    PolynomialRoots<Real> polynomialRoots{ Math::GetZeroTolerance() };
+    PolynomialRoots<Real> polynomialRoots{ MathType::GetZeroTolerance() };
     if (!polynomialRoots.FindBisection(poly, digitsAccuracy) || polynomialRoots.GetCount() == 0)
     {
         this->SetIntersectionType(IntersectionType::Empty);
@@ -117,12 +117,12 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Find()
     const auto matrix1Axis0 = matrix1 * ellipse0.GetAxis0();
     const auto matrix1Axis1 = matrix1 * ellipse0.GetAxis1();
 
-    const CoeffType coeff{ Vector2Tools::DotProduct(matrix1Center0MinusCenter1, center0MinusCenter1) - Math::GetValue(1),
-                           (Math::GetValue(2)) * ellipse0.GetExtent0() * Vector2Tools::DotProduct(matrix1Axis0, center0MinusCenter1),
-                           (Math::GetValue(2)) * ellipse0.GetExtent1() * Vector2Tools::DotProduct(matrix1Axis1, center0MinusCenter1),
-                           ellipse0.GetExtent0() * ellipse0.GetExtent0() * Vector2Tools::DotProduct(matrix1Axis0, ellipse0.GetAxis0()),
-                           (Math::GetValue(2)) * ellipse0.GetExtent0() * ellipse0.GetExtent1() * Vector2Tools::DotProduct(matrix1Axis0, ellipse0.GetAxis1()),
-                           ellipse0.GetExtent1() * ellipse0.GetExtent1() * Vector2Tools::DotProduct(matrix1Axis1, ellipse0.GetAxis1()) };
+    const CoeffType coeff{ Vector2ToolsType::DotProduct(matrix1Center0MinusCenter1, center0MinusCenter1) - MathType::GetValue(1),
+                           (MathType::GetValue(2))*ellipse0.GetExtent0() * Vector2ToolsType::DotProduct(matrix1Axis0, center0MinusCenter1),
+                           (MathType::GetValue(2))*ellipse0.GetExtent1() * Vector2ToolsType::DotProduct(matrix1Axis1, center0MinusCenter1),
+                           ellipse0.GetExtent0() * ellipse0.GetExtent0() * Vector2ToolsType::DotProduct(matrix1Axis0, ellipse0.GetAxis0()),
+                           (MathType::GetValue(2))*ellipse0.GetExtent0() * ellipse0.GetExtent1() * Vector2ToolsType::DotProduct(matrix1Axis0, ellipse0.GetAxis1()),
+                           ellipse0.GetExtent1() * ellipse0.GetExtent1() * Vector2ToolsType::DotProduct(matrix1Axis1, ellipse0.GetAxis1()) };
 
     /// 求解二次方，保存这些值以供以后测试接近零和根部抛光的程度。
     auto ellipse0Coefficients = ellipse0.ToCoefficients();
@@ -138,9 +138,9 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Find()
     auto indexX = 0;
     for (auto begin = polynomialRoots.GetBegin(); begin != polynomialRoots.GetEnd(); ++begin)
     {
-        Vector2 vector2{ Math::GetValue(0), *begin };
+        Vector2 vector2{ MathType::GetValue(0), *begin };
 
-        PolynomialRoots<Real> roots{ Math::GetZeroTolerance() };
+        PolynomialRoots<Real> roots{ MathType::GetZeroTolerance() };
         Polynomial<Real> polynomial{ 2 };
         polynomial[0] = qp0.at(0) + vector2[1] * (qp0.at(2) + vector2[1] * qp0.at(5));
         polynomial[1] = qp0.at(1) + vector2[1] * qp0.at(4);
@@ -168,14 +168,14 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Find()
     auto quantity = 0;
     for (auto i = 0; i < measurementSize; ++i)
     {
-        if (measure.at(i).norm < Math::GetZeroTolerance())
+        if (measure.at(i).norm < MathType::GetZeroTolerance())
         {
             auto find = 0;
 
             for (; find < quantity; ++find)
             {
                 if (auto diff = measure.at(i).angle0 - measure.at(find).angle0;
-                    Math::FAbs(diff) < Math::GetZeroTolerance())
+                    MathType::FAbs(diff) < MathType::GetZeroTolerance())
                 {
                     break;
                 }
@@ -205,7 +205,7 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Find()
 }
 
 template <typename Real>
-Mathematics::Polynomial<Real> Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::GetQuartic(const Ellipse2& ellipse0, const Ellipse2& ellipse1)
+Mathematics::Polynomial<Real> Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::GetQuartic(const Ellipse2Type& ellipse0, const Ellipse2Type& ellipse1)
 {
     const auto ellipse2Coefficients0 = ellipse0.ToCoefficients();
     const auto ellipse2Coefficients1 = ellipse1.ToCoefficients();
@@ -251,16 +251,16 @@ Mathematics::Polynomial<Real> Mathematics::StaticFindIntersectorEllipse2Ellipse2
 
     Polynomial<Real> poly{ 4 };
     poly[0] = d01 * d13 - d30 * d30;
-    poly[1] = d01 * d43 + d04p21 * d13 - (Math::GetValue(2)) * d30 * d32;
-    poly[2] = d04p21 * d43 + d24p51 * d13 - (Math::GetValue(2)) * d30 * d35 - d32 * d32;
-    poly[3] = d24p51 * d43 + d54 * d13 - (Math::GetValue(2)) * d32 * d35;
+    poly[1] = d01 * d43 + d04p21 * d13 - (MathType::GetValue(2))*d30 * d32;
+    poly[2] = d04p21 * d43 + d24p51 * d13 - (MathType::GetValue(2))*d30 * d35 - d32 * d32;
+    poly[3] = d24p51 * d43 + d54 * d13 - (MathType::GetValue(2))*d32 * d35;
     poly[4] = d54 * d43 - d35 * d35;
 
     return poly;
 }
 
 template <typename Real>
-typename Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Measurement Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::RefinePoint(const CoeffType& coeff, const Vector2& vector2)
+typename Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Measurement Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::RefinePoint(const CoeffType& coeff, const Vector2Type& vector2)
 {
     /// 传入多项式为
     ///  f(angle) = d0 + d1 * c + d2 * s + d3 * c^2 + d4 * c * s + d5 * s^2
@@ -268,13 +268,13 @@ typename Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Measurement M
     ///  f'(angle) = -d1 * s + d2 * c + (d5 - d3) * 2 * c * s + d4 * (c^2 - s^2)
 
     auto diff = vector2 - ellipse0.GetCenter();
-    auto cos = Vector2Tools::DotProduct(diff, ellipse0.GetAxis0()) / ellipse0.GetExtent0();
-    auto sin = Vector2Tools::DotProduct(diff, ellipse0.GetAxis1()) / ellipse0.GetExtent1();
-    auto aTan = Math::ATan2(sin, cos);
+    auto cos = Vector2ToolsType::DotProduct(diff, ellipse0.GetAxis0()) / ellipse0.GetExtent0();
+    auto sin = Vector2ToolsType::DotProduct(diff, ellipse0.GetAxis1()) / ellipse0.GetExtent1();
+    auto aTan = MathType::ATan2(sin, cos);
     auto f0 = coeff.at(0) + coeff.at(1) * cos + coeff.at(2) * sin + coeff.at(3) * cos * cos + coeff.at(4) * cos * sin + coeff.at(5) * sin * sin;
-    auto df0 = -coeff.at(1) * sin + coeff.at(2) * cos + (Math::GetValue(2)) * (coeff.at(5) - coeff.at(3)) * cos * sin + coeff.at(4) * (cos * cos - sin * sin);
+    auto df0 = -coeff.at(1) * sin + coeff.at(2) * cos + (MathType::GetValue(2)) * (coeff.at(5) - coeff.at(3)) * cos * sin + coeff.at(4) * (cos * cos - sin * sin);
 
-    auto a1 = Math::GetValue(0);
+    auto a1 = MathType::GetValue(0);
 
     /// f0值应与q1相匹配（在浮点舍入误差内）。 尝试使用二等分将f0强制为零。
     /// 这需要找到一个角度，使得相应的函数值的符号与f0相反。
@@ -284,26 +284,26 @@ typename Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Measurement M
     for (; i < maxIterations; ++i)
     {
         a1 = aTan - f0 / df0;
-        cos = Math::Cos(a1);
-        sin = Math::Sin(a1);
+        cos = MathType::Cos(a1);
+        sin = MathType::Sin(a1);
         auto f1 = coeff.at(0) + coeff.at(1) * cos + coeff.at(2) * sin + coeff.at(3) * cos * cos + coeff.at(4) * cos * sin + coeff.at(5) * sin * sin;
 
-        if (f0 * f1 < Math::GetValue(0))
+        if (f0 * f1 < MathType::GetValue(0))
         {
             // 切换到二等分。
             break;
         }
 
-        auto df1 = -coeff.at(1) * sin + coeff.at(2) * cos + (Math::GetValue(2)) * (coeff.at(5) - coeff.at(3)) * cos * sin + coeff.at(4) * (cos * cos - sin * sin);
+        auto df1 = -coeff.at(1) * sin + coeff.at(2) * cos + (MathType::GetValue(2)) * (coeff.at(5) - coeff.at(3)) * cos * sin + coeff.at(4) * (cos * cos - sin * sin);
 
-        if (df1 * df0 < Math::GetValue(0))
+        if (df1 * df0 < MathType::GetValue(0))
         {
             // 尝试更陡的斜率在寻找一个符号相反值的希望值。
-            df0 *= Math::GetValue(2);
+            df0 *= MathType::GetValue(2);
             continue;
         }
 
-        if (Math::FAbs(f1) < Math::FAbs(f0))
+        if (MathType::FAbs(f1) < MathType::FAbs(f0))
         {
             /// 我们找不到相反的值，但是新函数的值接近于零，因此请尝试使用新值。
             aTan = a1;
@@ -317,23 +317,23 @@ typename Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Measurement M
     if (i < maxIterations)
     {
         // 应用二等分。 确定迭代次数以获取10位精度。
-        auto value0 = Math::Log(Math::FAbs(a1 - aTan));
-        auto value1 = (static_cast<Real>(digitsAccuracy)) * Math::Log(Math::GetValue(10));
-        auto arg = (value0 + value1) / Math::Log(Math::GetValue(2));
-        maxIterations = static_cast<int>(arg + Math::GetRational(1, 2));
+        auto value0 = MathType::Log(MathType::FAbs(a1 - aTan));
+        auto value1 = (static_cast<Real>(digitsAccuracy)) * MathType::Log(MathType::GetValue(10));
+        auto arg = (value0 + value1) / MathType::Log(MathType::GetValue(2));
+        maxIterations = static_cast<int>(arg + MathType::GetRational(1, 2));
         for (i = 0; i < maxIterations; ++i)
         {
-            angle = (Math::GetRational(1, 2)) * (aTan + a1);
-            cos = Math::Cos(angle);
-            sin = Math::Sin(angle);
+            angle = (MathType::GetRational(1, 2)) * (aTan + a1);
+            cos = MathType::Cos(angle);
+            sin = MathType::Sin(angle);
             auto f1 = coeff.at(0) + coeff.at(1) * cos + coeff.at(2) * sin + coeff.at(3) * cos * cos + coeff.at(4) * cos * sin + coeff.at(5) * sin * sin;
 
             auto product = f0 * f1;
-            if (product < Math::GetValue(0))
+            if (product < MathType::GetValue(0))
             {
                 a1 = angle;
             }
-            else if (Math::GetValue(0) < product)
+            else if (MathType::GetValue(0) < product)
             {
                 aTan = angle;
                 f0 = f1;
@@ -356,7 +356,7 @@ typename Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Measurement M
     measure.q0 = ellipse0.Evaluate(vector2);
     measure.q1 = ellipse1.Evaluate(vector2);
     measure.angle0 = angle;
-    measure.norm = Math::Sqrt(measure.q0 * measure.q0 + measure.q1 * measure.q1);
+    measure.norm = MathType::Sqrt(measure.q0 * measure.q0 + measure.q1 * measure.q1);
     measure.transverse = transverseResult;
 
     return measure;
@@ -366,7 +366,7 @@ typename Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Measurement M
 
 template <typename Real>
 Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Measurement::Measurement() noexcept
-    : point{ Math::maxReal, Math::maxReal }, q0{ Math::maxReal }, q1{ Math::maxReal }, norm{ Math::maxReal }, angle0{ Math::maxReal }, transverse{ false }
+    : point{ MathType::maxReal, MathType::maxReal }, q0{ MathType::maxReal }, q1{ MathType::maxReal }, norm{ MathType::maxReal }, angle0{ MathType::maxReal }, transverse{ false }
 {
 }
 

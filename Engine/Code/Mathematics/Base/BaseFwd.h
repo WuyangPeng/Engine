@@ -12,6 +12,8 @@
 
 #include "CoreTools/DataTypes/DataTypesFwd.h"
 
+#include <type_traits>
+
 namespace Mathematics
 {
     class BitHacks;

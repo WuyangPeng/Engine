@@ -44,23 +44,23 @@ int Mathematics::QuarticRootsQr<Real>::operator()(int maxIterations, Real c0, Re
     a.at(0).at(1) = Real{};
     a.at(0).at(2) = Real{};
     a.at(0).at(3) = -c0;
-    a.at(1).at(0) = Math::GetValue(1);
+    a.at(1).at(0) = MathType::GetValue(1);
     a.at(1).at(1) = Real{};
     a.at(1).at(2) = Real{};
     a.at(1).at(3) = -c1;
     a.at(2).at(0) = Real{};
-    a.at(2).at(1) = Math::GetValue(1);
+    a.at(2).at(1) = MathType::GetValue(1);
     a.at(2).at(2) = Real{};
     a.at(2).at(3) = -c2;
     a.at(3).at(0) = Real{};
     a.at(3).at(1) = Real{};
-    a.at(3).at(2) = Math::GetValue(1);
+    a.at(3).at(2) = MathType::GetValue(1);
     a.at(3).at(3) = -c3;
 
     /// 当c1 = c2 = 0时避免QR循环，当c1和c2接近零时避免缓慢收敛。
-    const std::array<Real, 3> v{ Math::GetValue(1),
-                                 Math::GetValue(0.36602540378443865),
-                                 Math::GetValue(0.36602540378443865) };
+    const std::array<Real, 3> v{ MathType::GetValue(1),
+                                 MathType::GetValue(0.36602540378443865),
+                                 MathType::GetValue(0.36602540378443865) };
     DoIteration(v, a);
 
     return operator()(maxIterations, a, numRoots, roots);
@@ -86,7 +86,7 @@ int Mathematics::QuarticRootsQr<Real>::operator()(int maxIterations, Matrix& a, 
 
         /// A的解耦试验。
         auto tr12 = a.at(1).at(1) + a.at(2).at(2);
-        if (Math::Approximate(tr12 + a.at(2).at(1), tr12))
+        if (MathType::Approximate(tr12 + a.at(2).at(1), tr12))
         {
             GetQuadraticRoots(0, 1, a, numRoots, roots);
             GetQuadraticRoots(2, 3, a, numRoots, roots);
@@ -94,7 +94,7 @@ int Mathematics::QuarticRootsQr<Real>::operator()(int maxIterations, Matrix& a, 
         }
 
         auto tr01 = a.at(0).at(0) + a.at(1).at(1);
-        if (Math::Approximate(tr01 + a.at(1).at(0), tr01))
+        if (MathType::Approximate(tr01 + a.at(1).at(0), tr01))
         {
             numRoots = 1;
             roots.at(0) = a.at(0).at(0);
@@ -103,7 +103,7 @@ int Mathematics::QuarticRootsQr<Real>::operator()(int maxIterations, Matrix& a, 
             /// 因此将子矩阵a复制到B是运行解算器的一个简单解决方法。
             /// 编写避免此类复制的通用根查找/代码。
             const auto subMaxIterations = maxIterations - numIterations;
-            typename CubicRootsQr<Real>::Matrix b{};
+            typename CubicRootsQr<Real>::MatrixType b{};
             for (auto r = 0, rp1 = 1; r < 3; ++r, ++rp1)
             {
                 for (auto c = 0, cp1 = 1; c < 3; ++c, ++cp1)
@@ -124,7 +124,7 @@ int Mathematics::QuarticRootsQr<Real>::operator()(int maxIterations, Matrix& a, 
         }
 
         auto tr23 = a.at(2).at(2) + a.at(3).at(3);
-        if (Math::Approximate(tr23 + a.at(3).at(2), tr23))
+        if (MathType::Approximate(tr23 + a.at(3).at(2), tr23))
         {
             numRoots = 1;
             roots.at(0) = a.at(3).at(3);
@@ -133,7 +133,7 @@ int Mathematics::QuarticRootsQr<Real>::operator()(int maxIterations, Matrix& a, 
             /// 因此将子矩阵a复制到B是运行解算器的一个简单解决方法。
             /// 编写避免此类复制的通用根查找/代码。
             const auto subMaxIterations = maxIterations - numIterations;
-            typename CubicRootsQr<Real>::Matrix b{};
+            typename CubicRootsQr<Real>::MatrixType b{};
             for (auto r = 0; r < 3; ++r)
             {
                 for (auto c = 0; c < 3; ++c)
@@ -160,21 +160,21 @@ template <typename Real>
 requires(std::is_arithmetic_v<Real>)
 void Mathematics::QuarticRootsQr<Real>::DoIteration(const std::array<Real, 3>& v, Matrix& a) const
 {
-    auto multV = Math::GetValue(-2) / (v.at(0) * v.at(0) + v.at(1) * v.at(1) + v.at(2) * v.at(2));
+    auto multV = MathType::GetValue(-2) / (v.at(0) * v.at(0) + v.at(1) * v.at(1) + v.at(2) * v.at(2));
     std::array<Real, 3> mv{ multV * v.at(0), multV * v.at(1), multV * v.at(2) };
     RowHouse<3>(0, 2, 0, 3, v, mv, a);
     ColHouse<3>(0, 3, 0, 2, v, mv, a);
 
     const std::array<Real, 3> x{ a.at(1).at(0), a.at(2).at(0), a.at(3).at(0) };
     const auto locV = House<3>(x);
-    multV = Math::GetValue(-2) / (locV.at(0) * locV.at(0) + locV.at(1) * locV.at(1) + locV.at(2) * locV.at(2));
+    multV = MathType::GetValue(-2) / (locV.at(0) * locV.at(0) + locV.at(1) * locV.at(1) + locV.at(2) * locV.at(2));
     mv = { multV * locV.at(0), multV * locV.at(1), multV * locV.at(2) };
     RowHouse<3>(1, 3, 0, 3, locV, mv, a);
     ColHouse<3>(0, 3, 1, 3, locV, mv, a);
 
     const std::array<Real, 2> y{ a.at(2).at(1), a.at(3).at(1) };
     const auto w = House<2>(y);
-    const auto multW = Math::GetValue(-2) / (w.at(0) * w.at(0) + w.at(1) * w.at(1));
+    const auto multW = MathType::GetValue(-2) / (w.at(0) * w.at(0) + w.at(1) * w.at(1));
     const std::array<Real, 2> mw{ multW * w.at(0), multW * w.at(1) };
     RowHouse<2>(2, 3, 0, 3, w, mw, a);
     ColHouse<2>(0, 3, 2, 3, w, mw, a);
@@ -192,9 +192,9 @@ std::array<Real, N> Mathematics::QuarticRootsQr<Real>::House(const std::array<Re
         length += x.at(i) * x.at(i);
     }
     length = std::sqrt(length);
-    if (!Math::Approximate(length, Real{}))
+    if (!MathType::Approximate(length, Real{}))
     {
-        const auto sign = (x.at(0) >= Real{} ? Math::GetValue(1) : Math::GetValue(-1));
+        const auto sign = (x.at(0) >= Real{} ? MathType::GetValue(1) : MathType::GetValue(-1));
         const auto denominator = x.at(0) + sign * length;
         for (int i = 1; i < N; ++i)
         {
@@ -205,7 +205,7 @@ std::array<Real, N> Mathematics::QuarticRootsQr<Real>::House(const std::array<Re
     {
         v.fill(Real{});
     }
-    v.at(0) = Math::GetValue(1);
+    v.at(0) = MathType::GetValue(1);
 
     return v;
 }
@@ -272,12 +272,12 @@ void Mathematics::QuarticRootsQr<Real>::GetQuadraticRoots(int i0, int i1, Matrix
     /// 为了避免减法消除的潜在数值问题，
     /// 根计算为r0 = t/2 + sign(t/2)*sqrt(D), r1 = trace - r0
     const auto trace = a.at(i0).at(i0) + a.at(i1).at(i1);
-    const auto halfTrace = trace * Math::GetRational(1, 2);
+    const auto halfTrace = trace * MathType::GetRational(1, 2);
     const auto determinant = a.at(i0).at(i0) * a.at(i1).at(i1) - a.at(i0).at(i1) * a.at(i1).at(i0);
     const auto discriminant = halfTrace * halfTrace - determinant;
     if (discriminant >= Real{})
     {
-        const auto sign = trace >= Real{} ? Math::GetValue(1) : Math::GetValue(-1);
+        const auto sign = trace >= Real{} ? MathType::GetValue(1) : MathType::GetValue(-1);
         const auto root = halfTrace + sign * std::sqrt(discriminant);
         roots.at(numRoots++) = root;
         roots.at(numRoots++) = trace - root;

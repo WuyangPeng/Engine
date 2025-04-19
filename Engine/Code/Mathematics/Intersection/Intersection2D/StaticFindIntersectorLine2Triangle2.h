@@ -25,36 +25,36 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorLine2Triangle2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Vector2 = Vector2<Real>;
-        using Line2 = Line2<Real>;
-        using Triangle2 = Triangle2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector2Type = Vector2<Real>;
+        using Line2Type = Line2<Real>;
+        using Triangle2Type = Triangle2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorLine2Triangle2(const Line2& line, const Triangle2& triangle, const Real dotThreshold = Math::GetZeroTolerance());
+        StaticFindIntersectorLine2Triangle2(const Line2Type& line, const Triangle2Type& triangle, const Real dotThreshold = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Line2 GetLine() const noexcept;
-        NODISCARD Triangle2 GetTriangle() const noexcept;
+        NODISCARD Line2Type GetLine() const noexcept;
+        NODISCARD Triangle2Type GetTriangle() const noexcept;
 
         /// 相交集。 如果直线和三角形不相交，则 GetQuantity()返回0，在这种情况下，相交类型为IT_EMPTY。
         /// 如果直线和三角形在单个点上相交，则 GetQuantity()返回1，在这种情况下，相交类型为IT_POINT，而GetPoint() 返回相交点。
         /// 如果直线和三角形在段中相交，则GetQuantity()返回2，在这种情况下，相交类型为IT_SEGMENT，而GetPoint() 返回段端点。
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector2 GetPoint(int index) const;
+        NODISCARD Vector2Type GetPoint(int index) const;
 
     private:
         void Find();
 
     private:
-        Line2 line;
-        Triangle2 triangle;
+        Line2Type line;
+        Triangle2Type triangle;
 
         int quantity;
-        Vector2 point0;
-        Vector2 point1;
+        Vector2Type point0;
+        Vector2Type point1;
     };
 }
 

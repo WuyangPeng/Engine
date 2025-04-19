@@ -20,7 +20,7 @@
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::QuaternionFactor<Real>::QuaternionFactor(const Quaternion& quaternion, QuaternionFactorFlags flag) noexcept(gAssert < 1 || gMathematicsAssert < 1)
+Mathematics::QuaternionFactor<Real>::QuaternionFactor(const QuaternionType& quaternion, QuaternionFactorFlags flag) noexcept(gAssert < 1 || gMathematicsAssert < 1)
     : quaternion{ quaternion }, sinX{}, cosX{}, sinY{}, cosY{}, sinZ{}, cosZ{}
 {
     switch (flag)
@@ -120,33 +120,33 @@ requires std::is_arithmetic_v<Real>
 void Mathematics::QuaternionFactor<Real>::FactorXYZ() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     const auto a = quaternion.GetW() * quaternion.GetX() - quaternion.GetY() * quaternion.GetZ();
-    const auto b = Math::GetRational(1, 2) * (quaternion.GetW() * quaternion.GetW() - quaternion.GetX() * quaternion.GetX() - quaternion.GetY() * quaternion.GetY() + quaternion.GetZ() * quaternion.GetZ());
+    const auto b = MathType::GetRational(1, 2) * (quaternion.GetW() * quaternion.GetW() - quaternion.GetX() * quaternion.GetX() - quaternion.GetY() * quaternion.GetY() + quaternion.GetZ() * quaternion.GetZ());
 
-    const auto length = Math::Sqrt(a * a + b * b);
+    const auto length = MathType::Sqrt(a * a + b * b);
 
-    if (Math::GetZeroTolerance() < length)
+    if (MathType::GetZeroTolerance() < length)
     {
         auto sigma0 = a / length;
         auto gamma0 = b / length;
 
-        if (Math::GetValue(0) <= gamma0)
+        if (MathType::GetValue(0) <= gamma0)
         {
-            cosX = Math::Sqrt(Math::GetRational(1, 2) * (Math::GetValue(1) + gamma0));
-            sinX = Math::GetRational(1, 2) * sigma0 / cosX;
+            cosX = MathType::Sqrt(MathType::GetRational(1, 2) * (MathType::GetValue(1) + gamma0));
+            sinX = MathType::GetRational(1, 2) * sigma0 / cosX;
         }
         else
         {
-            sinX = Math::Sqrt(Math::GetRational(1, 2) * (Math::GetValue(1) - gamma0));
-            cosX = Math::GetRational(1, 2) * sigma0 / sinX;
+            sinX = MathType::Sqrt(MathType::GetRational(1, 2) * (MathType::GetValue(1) - gamma0));
+            cosX = MathType::GetRational(1, 2) * sigma0 / sinX;
         }
 
         auto tmp0 = cosX * quaternion.GetW() + sinX * quaternion.GetX();
         auto tmp1 = cosX * quaternion.GetZ() - sinX * quaternion.GetY();
-        auto invLength = Math::InvSqrt(tmp0 * tmp0 + tmp1 * tmp1);
+        auto invLength = MathType::InvSqrt(tmp0 * tmp0 + tmp1 * tmp1);
         cosZ = tmp0 * invLength;
         sinZ = tmp1 * invLength;
 
-        if (Math::FAbs(sinZ) <= Math::FAbs(cosZ))
+        if (MathType::FAbs(sinZ) <= MathType::FAbs(cosZ))
         {
             cosY = tmp0 / cosZ;
             sinY = (cosX * quaternion.GetY() + sinX * quaternion.GetZ()) / cosZ;
@@ -160,25 +160,25 @@ void Mathematics::QuaternionFactor<Real>::FactorXYZ() noexcept(gAssert < 3 || gM
     else
     {
         // 无穷多解。选择其中之一。
-        if (Math::GetValue(0) < quaternion.GetW() * quaternion.GetY() + quaternion.GetX() * quaternion.GetZ())
+        if (MathType::GetValue(0) < quaternion.GetW() * quaternion.GetY() + quaternion.GetX() * quaternion.GetZ())
         {
             // p = (p0,p1,p0,p1)
-            cosX = Math::GetValue(1);
-            sinX = Math::GetValue(0);
-            cosY = Math::GetInverseSqrt2();
-            sinY = Math::GetInverseSqrt2();
-            cosZ = Math::GetSqrt2() * quaternion.GetW();
-            sinZ = Math::GetSqrt2() * quaternion.GetX();
+            cosX = MathType::GetValue(1);
+            sinX = MathType::GetValue(0);
+            cosY = MathType::GetInverseSqrt2();
+            sinY = MathType::GetInverseSqrt2();
+            cosZ = MathType::GetSqrt2() * quaternion.GetW();
+            sinZ = MathType::GetSqrt2() * quaternion.GetX();
         }
         else
         {
             // p = (p0,p1,-p0,-p1)
-            cosX = Math::GetValue(1);
-            sinX = Math::GetValue(0);
-            cosY = Math::GetInverseSqrt2();
-            sinY = -Math::GetInverseSqrt2();
-            cosZ = Math::GetSqrt2() * quaternion.GetW();
-            sinZ = -Math::GetSqrt2() * quaternion.GetX();
+            cosX = MathType::GetValue(1);
+            sinX = MathType::GetValue(0);
+            cosY = MathType::GetInverseSqrt2();
+            sinY = -MathType::GetInverseSqrt2();
+            cosZ = MathType::GetSqrt2() * quaternion.GetW();
+            sinZ = -MathType::GetSqrt2() * quaternion.GetX();
         }
     }
 }
@@ -187,7 +187,7 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 void Mathematics::QuaternionFactor<Real>::FactorXZY() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    quaternion = Quaternion{ quaternion.GetW(), quaternion.GetX(), quaternion.GetZ(), -quaternion.GetY() };
+    quaternion = QuaternionType{ quaternion.GetW(), quaternion.GetX(), quaternion.GetZ(), -quaternion.GetY() };
 
     FactorXYZ();
 
@@ -202,7 +202,7 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 void Mathematics::QuaternionFactor<Real>::FactorYZX() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    quaternion = Quaternion{ quaternion.GetW(), -quaternion.GetY(), quaternion.GetZ(), -quaternion.GetX() };
+    quaternion = QuaternionType{ quaternion.GetW(), -quaternion.GetY(), quaternion.GetZ(), -quaternion.GetX() };
 
     FactorXYZ();
 
@@ -221,7 +221,7 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 void Mathematics::QuaternionFactor<Real>::FactorYXZ() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    quaternion = Quaternion{ quaternion.GetW(), -quaternion.GetY(), quaternion.GetX(), quaternion.GetZ() };
+    quaternion = QuaternionType{ quaternion.GetW(), -quaternion.GetY(), quaternion.GetX(), quaternion.GetZ() };
 
     FactorXYZ();
 
@@ -236,7 +236,7 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 void Mathematics::QuaternionFactor<Real>::FactorZXY() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    quaternion = Quaternion{ quaternion.GetW(), -quaternion.GetZ(), quaternion.GetX(), -quaternion.GetY() };
+    quaternion = QuaternionType{ quaternion.GetW(), -quaternion.GetZ(), quaternion.GetX(), -quaternion.GetY() };
 
     FactorXYZ();
 
@@ -255,7 +255,7 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 void Mathematics::QuaternionFactor<Real>::FactorZYX() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    quaternion = Quaternion{ quaternion.GetW(), quaternion.GetZ(), -quaternion.GetY(), quaternion.GetX() };
+    quaternion = QuaternionType{ quaternion.GetW(), quaternion.GetZ(), -quaternion.GetY(), quaternion.GetX() };
 
     FactorXYZ();
 

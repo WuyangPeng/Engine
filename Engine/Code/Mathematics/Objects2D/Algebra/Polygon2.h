@@ -41,15 +41,15 @@ namespace Mathematics::Algebra
     public:
         using ClassType = Polygon2;
 
-        using Vector2 = Vector2<Real>;
-        using VertexPool = std::vector<Vector2>;
+        using Vector2Type = Vector2<Real>;
+        using VertexPool = std::vector<Vector2Type>;
         using VertexPoolSharedPtr = std::shared_ptr<VertexPool>;
         using VertexPoolWeakPtr = std::weak_ptr<VertexPool>;
 
         using VerticesType = std::set<int>;
         using IndicesType = std::vector<int>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         /// 构造当'numIndices' >= 3且“vertexPool”和“indices”不为空时，构造函数成功；
@@ -70,7 +70,7 @@ namespace Mathematics::Algebra
         NODISCARD bool CounterClockwise() const noexcept;
 
         /// 几何查询。
-        NODISCARD Vector2 ComputeVertexAverage() const;
+        NODISCARD Vector2Type ComputeVertexAverage() const;
 
         NODISCARD Real ComputePerimeterLength() const;
 

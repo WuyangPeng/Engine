@@ -52,7 +52,7 @@ Mathematics::Matrix2<Real>::Matrix2(const ContainerType& entry, MatrixMajorFlags
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Matrix2<Real>::Matrix2(const Vector2& vector0, const Vector2& vector1, MatrixMajorFlags majorFlag)
+Mathematics::Matrix2<Real>::Matrix2(const Vector2Type& vector0, const Vector2Type& vector1, MatrixMajorFlags majorFlag)
     : x{}, y{}
 {
     if (majorFlag == MatrixMajorFlags::Row)
@@ -110,7 +110,7 @@ Mathematics::Matrix2<Real>::Matrix2(Real angle) noexcept
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Matrix2<Real>::Matrix2(const Vector2& vector0, const Vector2& vector1) noexcept
+Mathematics::Matrix2<Real>::Matrix2(const Vector2Type& vector0, const Vector2Type& vector1) noexcept
     : x{}, y{}
 {
     MakeTensorProduct(vector0, vector1);
@@ -144,8 +144,8 @@ void Mathematics::Matrix2<Real>::MakeIdentity() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    x = Vector2::GetUnitX();
-    y = Vector2::GetUnitY();
+    x = Vector2Type::GetUnitX();
+    y = Vector2Type::GetUnitY();
 }
 
 template <typename Real>
@@ -154,8 +154,8 @@ void Mathematics::Matrix2<Real>::MakeDiagonal(Real member00, Real member11) noex
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    x.SetCoordinate(member00, Math::GetValue(0));
-    y.SetCoordinate(Math::GetValue(0), member11);
+    x.SetCoordinate(member00, MathType::GetValue(0));
+    y.SetCoordinate(MathType::GetValue(0), member11);
 }
 
 template <typename Real>
@@ -164,13 +164,13 @@ void Mathematics::Matrix2<Real>::MakeRotation(Real angle) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    x.SetCoordinate(Math::Cos(angle), -Math::Sin(angle));
+    x.SetCoordinate(MathType::Cos(angle), -MathType::Sin(angle));
     y.SetCoordinate(-x.GetY(), x.GetX());
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::Matrix2<Real>::MakeTensorProduct(const Vector2& lhs, const Vector2& rhs) noexcept
+void Mathematics::Matrix2<Real>::MakeTensorProduct(const Vector2Type& lhs, const Vector2Type& rhs) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -221,7 +221,7 @@ const Real& Mathematics::Matrix2<Real>::operator()(int row, int column) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
     MATHEMATICS_ASSERTION_0(xIndex <= row && row < vectorSize, "row索引错误！");
-    MATHEMATICS_ASSERTION_0(Vector2::xIndex <= column && column < Vector2::pointSize, "column索引错误！");
+    MATHEMATICS_ASSERTION_0(Vector2Type::xIndex <= column && column < Vector2Type::pointSize, "column索引错误！");
 
     return (*this)[row][column];
 }
@@ -290,11 +290,11 @@ Mathematics::Matrix2<Real>& Mathematics::Matrix2<Real>::operator/=(Real scalar) 
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::Matrix2<Real>::QuadraticForm(const Vector2& lhs, const Vector2& rhs) const noexcept
+Real Mathematics::Matrix2<Real>::QuadraticForm(const Vector2Type& lhs, const Vector2Type& rhs) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return Vector2Tools::DotProduct(lhs, (*this) * rhs);
+    return Vector2ToolsType::DotProduct(lhs, (*this) * rhs);
 }
 
 template <typename Real>
@@ -326,7 +326,7 @@ Mathematics::Matrix2<Real> Mathematics::Matrix2<Real>::Inverse(Real epsilon) con
     // 由于除零错误的epsilon和这里的epsilon不同，改由先除后乘。
     const auto inv = 1 / Determinant();
 
-    if (epsilon < Math::FAbs(inv))
+    if (epsilon < MathType::FAbs(inv))
     {
         return Adjoint() * inv;
     }
@@ -392,11 +392,11 @@ Real Mathematics::Matrix2<Real>::ExtractAngle() const noexcept(gAssert < 1 || gM
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    MATHEMATICS_ASSERTION_1(Math::FAbs(GetValue<0, 0>() - GetValue<1, 1>()) <= Math::GetZeroTolerance(), "该矩阵不是旋转矩阵！");
-    MATHEMATICS_ASSERTION_1(Math::FAbs(GetValue<0, 1>() + GetValue<1, 0>()) <= Math::GetZeroTolerance(), "该矩阵不是旋转矩阵！");
-    MATHEMATICS_ASSERTION_1(Math::FAbs(GetValue<0, 0>() * GetValue<1, 1>() - GetValue<0, 1>() * GetValue<1, 0>() - Math::GetValue(1)) <= Math::GetZeroTolerance(), "该矩阵不是旋转矩阵！");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 0>() - GetValue<1, 1>()) <= MathType::GetZeroTolerance(), "该矩阵不是旋转矩阵！");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 1>() + GetValue<1, 0>()) <= MathType::GetZeroTolerance(), "该矩阵不是旋转矩阵！");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 0>() * GetValue<1, 1>() - GetValue<0, 1>() * GetValue<1, 0>() - MathType::GetValue(1)) <= MathType::GetZeroTolerance(), "该矩阵不是旋转矩阵！");
 
-    return Math::ATan2(GetValue<1, 0>(), GetValue<0, 0>());
+    return MathType::ATan2(GetValue<1, 0>(), GetValue<0, 0>());
 }
 
 template <typename Real>
@@ -410,14 +410,14 @@ void Mathematics::Matrix2<Real>::Orthonormalize()
     //   q1 = (m1 - (q0 * m1)q0) / |m1 - (q0 * m1)q0|
     // 其中|V|表示向量V的长度和A * B表示向量A和B的点积
 
-    MATHEMATICS_ASSERTION_1(Math::FAbs(GetValue<0, 0>() - GetValue<1, 1>()) <= Math::GetZeroTolerance(), "该矩阵不是旋转矩阵！");
-    MATHEMATICS_ASSERTION_1(Math::FAbs(GetValue<0, 1>() + GetValue<1, 0>()) <= Math::GetZeroTolerance(), "该矩阵不是旋转矩阵！");
-    MATHEMATICS_ASSERTION_1(Math::FAbs(GetValue<0, 0>() * GetValue<1, 1>() - GetValue<0, 1>() * GetValue<1, 0>() - Math::GetValue(1)) <= Math::GetZeroTolerance(), "该矩阵不是旋转矩阵！");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 0>() - GetValue<1, 1>()) <= MathType::GetZeroTolerance(), "该矩阵不是旋转矩阵！");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 1>() + GetValue<1, 0>()) <= MathType::GetZeroTolerance(), "该矩阵不是旋转矩阵！");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 0>() * GetValue<1, 1>() - GetValue<0, 1>() * GetValue<1, 0>() - MathType::GetValue(1)) <= MathType::GetZeroTolerance(), "该矩阵不是旋转矩阵！");
 
     MATHEMATICS_CLASS_IS_VALID_9;
 
     // 计算 q0.
-    auto invLength = Math::InvSqrt(GetValue<0, 0>() * GetValue<0, 0>() + GetValue<1, 0>() * GetValue<1, 0>());
+    auto invLength = MathType::InvSqrt(GetValue<0, 0>() * GetValue<0, 0>() + GetValue<1, 0>() * GetValue<1, 0>());
 
     (*this)(0, 0) *= invLength;
     (*this)(1, 0) *= invLength;
@@ -428,7 +428,7 @@ void Mathematics::Matrix2<Real>::Orthonormalize()
     (*this)(0, 1) -= dot * GetValue<0, 0>();
     (*this)(1, 1) -= dot * GetValue<1, 0>();
 
-    invLength = Math::InvSqrt(GetValue<0, 1>() * GetValue<0, 1>() + GetValue<1, 1>() * GetValue<1, 1>());
+    invLength = MathType::InvSqrt(GetValue<0, 1>() * GetValue<0, 1>() + GetValue<1, 1>() * GetValue<1, 1>());
 
     (*this)(0, 1) *= invLength;
     (*this)(1, 1) *= invLength;
@@ -436,33 +436,33 @@ void Mathematics::Matrix2<Real>::Orthonormalize()
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Matrix2<Real>::Matrix2EigenDecomposition Mathematics::Matrix2<Real>::EigenDecomposition(Real epsilon) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
+typename Mathematics::Matrix2<Real>::Matrix2EigenDecompositionType Mathematics::Matrix2<Real>::EigenDecomposition(Real epsilon) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    MATHEMATICS_ASSERTION_1(Math::FAbs(GetValue<0, 1>() - GetValue<1, 0>()) <= epsilon, "矩阵必须是对称矩阵。");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 1>() - GetValue<1, 0>()) <= epsilon, "矩阵必须是对称矩阵。");
 
-    auto sum = Math::FAbs(GetValue<0, 0>()) + Math::FAbs(GetValue<1, 1>());
+    auto sum = MathType::FAbs(GetValue<0, 0>()) + MathType::FAbs(GetValue<1, 1>());
 
-    if (Math::FAbs(Math::FAbs(GetValue<0, 1>()) + sum - sum) < epsilon)
+    if (MathType::FAbs(MathType::FAbs(GetValue<0, 1>()) + sum - sum) < epsilon)
     {
         // 矩阵 M 是对角矩阵（数字四舍五入）。
         const Matrix2<Real> rotation{ MatrixInitType::Identity };
         const Matrix2<Real> diagonal{ GetValue<0, 0>(), GetValue<1, 1>() };
 
-        return Matrix2EigenDecomposition{ rotation, diagonal, epsilon };
+        return Matrix2EigenDecompositionType{ rotation, diagonal, epsilon };
     }
 
     const auto trace = GetValue<0, 0>() + GetValue<1, 1>();
     const auto difference = GetValue<0, 0>() - GetValue<1, 1>();
-    const auto discr = Math::Sqrt(difference * difference + (Math::GetValue(4) * GetValue<0, 1>() * GetValue<0, 1>()));
+    const auto discr = MathType::Sqrt(difference * difference + (MathType::GetValue(4) * GetValue<0, 1>() * GetValue<0, 1>()));
 
-    const auto eigenvalue0 = Math::GetRational(1, 2) * (trace - discr);
-    const auto eigenvalue1 = Math::GetRational(1, 2) * (trace + discr);
+    const auto eigenvalue0 = MathType::GetRational(1, 2) * (trace - discr);
+    const auto eigenvalue1 = MathType::GetRational(1, 2) * (trace + discr);
     const Matrix2<Real> diagonal{ eigenvalue0, eigenvalue1 };
 
     Real cosValue{};
     Real sinValue{};
-    if (Math::GetValue(0) <= difference)
+    if (MathType::GetValue(0) <= difference)
     {
         cosValue = GetValue<0, 1>();
         sinValue = eigenvalue0 - GetValue<0, 0>();
@@ -473,13 +473,13 @@ typename Mathematics::Matrix2<Real>::Matrix2EigenDecomposition Mathematics::Matr
         sinValue = GetValue<0, 1>();
     }
 
-    const auto invLength = Math::InvSqrt(cosValue * cosValue + sinValue * sinValue);
+    const auto invLength = MathType::InvSqrt(cosValue * cosValue + sinValue * sinValue);
     cosValue *= invLength;
     sinValue *= invLength;
 
     const Matrix2 rotation{ cosValue, -sinValue, sinValue, cosValue };
 
-    return Matrix2EigenDecomposition{ rotation, diagonal, epsilon };
+    return Matrix2EigenDecompositionType{ rotation, diagonal, epsilon };
 }
 
 template <typename Real>
@@ -509,7 +509,7 @@ void Mathematics::Matrix2<Real>::Set(const ArrayType& coordinate)
     auto index = 0;
     for (auto value : coordinate)
     {
-        (*this)(index / vectorSize, index % Vector2::pointSize) = value;
+        (*this)(index / vectorSize, index % Vector2Type::pointSize) = value;
 
         ++index;
     }
@@ -521,7 +521,7 @@ Mathematics::Matrix3<Real> Mathematics::Matrix2<Real>::Lift() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    Matrix3 result{ MatrixInitType::Identity };
+    Matrix3Type result{ MatrixInitType::Identity };
 
     for (auto r = 0; r < vectorSize; ++r)
     {

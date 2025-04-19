@@ -25,7 +25,7 @@ namespace Mathematics
 
         using ClassType = BSplineRectangle<Real>;
         using ParentType = ParametricSurface<Real>;
-        using Math = ParentType::Math;
+        using MathType = typename ParentType::MathType;
 
     public:
         BSplineRectangle(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Vector3<Real>>>& ctrlPoint, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen);

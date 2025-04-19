@@ -26,8 +26,8 @@ namespace Mathematics
     public:
         using ClassType = LevenbergMarquardtMinimizer<T>;
 
-        using Math = Math<T>;
-        using LevenbergMarquardtMinimizerResult = LevenbergMarquardtMinimizerResult<T>;
+        using MathType = Math<T>;
+        using LevenbergMarquardtMinimizerResultType = LevenbergMarquardtMinimizerResult<T>;
 
         /// 域向量、范围向量、函数F和雅可比J的方便类型。
         using DVector = VariableLengthVector<T>;  // numPDimensions
@@ -68,7 +68,7 @@ namespace Mathematics
         /// 更详细地解释lambda，Multiview Geometry提到lambda = 0.001*average(diagonal(JTJ))，
         /// 但让我们只在平均值前面暴露因子。
 
-        NODISCARD LevenbergMarquardtMinimizerResult operator()(const DVector& p0,
+        NODISCARD LevenbergMarquardtMinimizerResultType operator()(const DVector& p0,
                                                                int maxIterations,
                                                                T updateLengthTolerance,
                                                                T errorDifferenceTolerance,
@@ -88,10 +88,10 @@ namespace Mathematics
                                                     T updateLengthTolerance,
                                                     T errorDifferenceTolerance,
                                                     DVector& pNext,
-                                                    LevenbergMarquardtMinimizerResult& result);
+                                                    LevenbergMarquardtMinimizerResultType& result);
 
     private:
-        using CholeskyDecomposition = CholeskyDecomposition<T>;
+        using CholeskyDecompositionType = CholeskyDecomposition<T>;
 
     private:
         int numPDimensions;
@@ -106,7 +106,7 @@ namespace Mathematics
         JtjMatrix jtj;
         JtfVector negJtf;
 
-        CholeskyDecomposition decomposer;
+        CholeskyDecompositionType decomposer;
 
         bool useJFunction;
     };

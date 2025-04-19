@@ -56,7 +56,7 @@ namespace Framework
         NODISCARD virtual bool IdleFunction();
         NODISCARD virtual bool TimerFunction(TimerFunctionCallback callback);
         NODISCARD virtual bool ProcessMenu(int menuValue);
-        NODISCARD virtual void DestroyWindow();
+        virtual void DestroyWindow();
 
         NODISCARD virtual int GetMillisecond() const noexcept;
         NODISCARD virtual int GetTerminateKey() const noexcept;

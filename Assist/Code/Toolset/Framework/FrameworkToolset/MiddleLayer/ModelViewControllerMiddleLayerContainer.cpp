@@ -19,7 +19,7 @@
 
 CLASS_INVARIANT_STUB_DEFINE(FrameworkToolset, ModelViewControllerMiddleLayerContainer)
 
-namespace FrameworkToolset
+namespace Framework
 {
     template class Framework::ModelViewControllerMiddleLayerContainer<Framework::WindowApplicationTrait, Framework::ModelMiddleLayer, Framework::ViewMiddleLayer, Framework::ControllerMiddleLayer>;
 }

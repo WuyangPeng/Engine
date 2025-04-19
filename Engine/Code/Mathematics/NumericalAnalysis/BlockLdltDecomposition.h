@@ -84,18 +84,18 @@ namespace Mathematics
     public:
         using ClassType = BlockLdltDecomposition<T>;
 
-        using VariableLengthVector = VariableLengthVector<T>;
-        using VariableMatrix = VariableMatrix<T>;
+        using VariableLengthVectorType = VariableLengthVector<T>;
+        using VariableMatrixType = VariableMatrix<T>;
 
         /// BlockVector对象中的元素数必须为NumBlocks，
         /// 并且每个GVector元素都有BlockSize组件。
-        using BlockVector = std::vector<VariableLengthVector>;
+        using BlockVector = std::vector<VariableLengthVectorType>;
 
         /// BlockMatrix是NumBlocks乘NumBlocks矩阵的数组。
         /// 每个块矩阵按行主顺序存储。BlockMatrix元素本身按行的主要顺序存储。
         /// 块矩阵元素 M = BlockMatrix[col + numBlocks * row]的大小为BlockSize乘BlockSize（按行主顺序），
         /// 并且位于块的完整矩阵的(row,col)位置。
-        using BlockMatrix = std::vector<VariableMatrix>;
+        using BlockMatrix = std::vector<VariableMatrixType>;
 
     public:
         BlockLdltDecomposition(int blockSize, int numBlocks);
@@ -111,16 +111,16 @@ namespace Mathematics
         void Set(BlockMatrix& m, int row, int col, const T& value, bool verifySize = true);
 
         /// 从矩阵转换为块矩阵。
-        void Convert(const VariableMatrix& m, BlockMatrix& mBlock, bool verifySize = true) const;
+        void Convert(const VariableMatrixType& m, BlockMatrix& mBlock, bool verifySize = true) const;
 
         /// 从矢量转换为块矢量。
-        void Convert(const VariableLengthVector& v, BlockVector& vBlock, bool verifySize = true) const;
+        void Convert(const VariableLengthVectorType& v, BlockVector& vBlock, bool verifySize = true) const;
 
         /// 从块矩阵转换为矩阵。
-        void Convert(const BlockMatrix& mBlock, VariableMatrix& m, bool verifySize = true) const;
+        void Convert(const BlockMatrix& mBlock, VariableMatrixType& m, bool verifySize = true) const;
 
         /// 从块矢量转换为矢量。
-        void Convert(const BlockVector& vBlock, VariableLengthVector& v, bool verifySize = true) const;
+        void Convert(const BlockVector& vBlock, VariableLengthVectorType& v, bool verifySize = true) const;
 
         /// 块矩阵A必须是正定的。该实现仅使用A的下三角块。
         /// 在输出时，块矩阵L是下单位三角形（对角块是BxB单位矩阵），

@@ -58,7 +58,7 @@ int Rendering::Font::GetWidth(const std::string& message) const
     return impl->GetWidth(message);
 }
 
-void Rendering::Font::Typeset(int viewportWidth, int viewportHeight, int x, int y, const Colour& color, const std::string& message) const
+void Rendering::Font::Typeset(int viewportWidth, int viewportHeight, int x, int y, const ColourType& color, const std::string& message) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

@@ -25,36 +25,36 @@ namespace Mathematics
     {
     public:
         using ClassType = DistanceLine2Ray2<Real>;
-        using Vector2 = Vector2<Real>;
-        using ParentType = DistanceBase<Real, Vector2>;
+        using Vector2Type = Vector2<Real>;
+        using ParentType = DistanceBase<Real, Vector2Type>;
 
-        using Ray2 = Ray2<Real>;
-        using Line2 = Line2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
-        using DistanceLine2Line2Tool = DistanceLine2Line2Tool<Real>;
-        using Math = typename ParentType::Math;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using Ray2Type = Ray2<Real>;
+        using Line2Type = Line2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
+        using DistanceLine2Line2ToolType = DistanceLine2Line2Tool<Real>;
+        using MathType = typename ParentType::MathType;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistanceLine2Ray2(const Line2& line, const Ray2& ray) noexcept;
+        DistanceLine2Ray2(const Line2Type& line, const Ray2Type& ray) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Line2 GetLine() const noexcept;
-        NODISCARD Ray2 GetRay() const noexcept;
+        NODISCARD Line2Type GetLine() const noexcept;
+        NODISCARD Ray2Type GetRay() const noexcept;
 
         // æ≤Ã¨æ‡¿Î≤È—Ø°£
         NODISCARD DistanceResult GetSquared() const override;
 
         // ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£
-        NODISCARD DistanceResult GetSquared(Real t, const Vector2& lhsVelocity, const Vector2& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector2Type& lhsVelocity, const Vector2Type& rhsVelocity) const override;
 
     private:
-        NODISCARD DistanceResult GetSquaredWithClosestPoints(const DistanceLine2Line2Tool& tool) const;
+        NODISCARD DistanceResult GetSquaredWithClosestPoints(const DistanceLine2Line2ToolType& tool) const;
 
     private:
-        Line2 line;
-        Ray2 ray;
+        Line2Type line;
+        Ray2Type ray;
     };
 
     using DistanceLine2Ray2F = DistanceLine2Ray2<float>;

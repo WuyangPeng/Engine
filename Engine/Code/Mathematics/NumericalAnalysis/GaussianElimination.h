@@ -34,12 +34,12 @@ namespace Mathematics
         using ClassType = GaussianElimination<Real>;
 
         using Container = std::vector<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
-        GaussianElimination(int numRows, const Container& matrix, bool wantInverse, const Container& b, int numColumns, const Container& c, Real epsilon = Math::GetZeroTolerance());
-        GaussianElimination(int numRows, const Container& matrix, bool wantInverse, Real epsilon = Math::GetZeroTolerance());
-        GaussianElimination(int numRows, const Container& matrix, bool wantInverse, const Container& b, Real epsilon = Math::GetZeroTolerance());
+        GaussianElimination(int numRows, const Container& matrix, bool wantInverse, const Container& b, int numColumns, const Container& c, Real epsilon = MathType::GetZeroTolerance());
+        GaussianElimination(int numRows, const Container& matrix, bool wantInverse, Real epsilon = MathType::GetZeroTolerance());
+        GaussianElimination(int numRows, const Container& matrix, bool wantInverse, const Container& b, Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 

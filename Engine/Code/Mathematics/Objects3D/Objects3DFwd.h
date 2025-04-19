@@ -10,6 +10,8 @@
 #ifndef MATHEMATICS_OBJECTS_3D_FWD_H
 #define MATHEMATICS_OBJECTS_3D_FWD_H
 
+#include <type_traits>
+
 namespace Mathematics
 {
     template <typename Real>

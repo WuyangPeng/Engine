@@ -18,8 +18,8 @@
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorLine3Triangle3<Real>::StaticFindIntersectorLine3Triangle3(const Line3& line, const Triangle3& triangle, const Real epsilon)
-    : ParentType{ epsilon }, line{ line }, triangle{ triangle }, lineParameter{}, triangleBary0{}, triangleBary1{}, triangleBary2{ Math::GetValue(1) }, point{}
+Mathematics::StaticFindIntersectorLine3Triangle3<Real>::StaticFindIntersectorLine3Triangle3(const Line3Type& line, const Triangle3Type& triangle, const Real epsilon)
+    : ParentType{ epsilon }, line{ line }, triangle{ triangle }, lineParameter{}, triangleBary0{}, triangleBary1{}, triangleBary2{ MathType::GetValue(1) }, point{}
 {
     Find();
 
@@ -33,7 +33,7 @@ bool Mathematics::StaticFindIntersectorLine3Triangle3<Real>::IsValid() const noe
 {
     try
     {
-        if (ParentType::IsValid() && Math::Approximate(triangleBary0 + triangleBary1 + triangleBary2, Math::GetValue(1)))
+        if (ParentType::IsValid() && MathType::Approximate(triangleBary0 + triangleBary1 + triangleBary2, MathType::GetValue(1)))
         {
             return true;
         }
@@ -93,12 +93,12 @@ void Mathematics::StaticFindIntersectorLine3Triangle3<Real>::Find()
 
     using namespace System;
 
-    auto directionDotOriginCrossEdge2 = System::EnumCastUnderlying(sign) * Vector3Tools::DotProduct(line.GetDirection(), data.GetOriginCrossEdge2());
-    if (Math::GetValue(0) <= directionDotOriginCrossEdge2)
+    auto directionDotOriginCrossEdge2 = System::EnumCastUnderlying(sign) * Vector3ToolsType::DotProduct(line.GetDirection(), data.GetOriginCrossEdge2());
+    if (MathType::GetValue(0) <= directionDotOriginCrossEdge2)
     {
-        auto directionDotEdge1CrossOrigin = System::EnumCastUnderlying(sign) * Vector3Tools::DotProduct(line.GetDirection(), data.GetEdge1CrossOrigin());
+        auto directionDotEdge1CrossOrigin = System::EnumCastUnderlying(sign) * Vector3ToolsType::DotProduct(line.GetDirection(), data.GetEdge1CrossOrigin());
 
-        if (Math::GetValue(0) <= directionDotEdge1CrossOrigin)
+        if (MathType::GetValue(0) <= directionDotEdge1CrossOrigin)
         {
             if (directionDotOriginCrossEdge2 + directionDotEdge1CrossOrigin <= directionDotNormal)
             {
@@ -108,7 +108,7 @@ void Mathematics::StaticFindIntersectorLine3Triangle3<Real>::Find()
                 lineParameter = originDotNormal / directionDotNormal;
                 triangleBary1 = directionDotOriginCrossEdge2 / directionDotNormal;
                 triangleBary2 = directionDotEdge1CrossOrigin / directionDotNormal;
-                triangleBary0 = Math::GetValue(1) - triangleBary1 - triangleBary2;
+                triangleBary0 = MathType::GetValue(1) - triangleBary1 - triangleBary2;
 
                 point = line.GetOrigin() + lineParameter * line.GetDirection();
 
@@ -154,7 +154,7 @@ Real Mathematics::StaticFindIntersectorLine3Triangle3<Real>::GetTriangleBary2() 
 }
 
 template <typename Real>
-typename Mathematics::StaticFindIntersectorLine3Triangle3<Real>::Vector3 Mathematics::StaticFindIntersectorLine3Triangle3<Real>::GetPoint() const noexcept
+typename Mathematics::StaticFindIntersectorLine3Triangle3<Real>::Vector3Type Mathematics::StaticFindIntersectorLine3Triangle3<Real>::GetPoint() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

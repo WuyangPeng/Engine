@@ -17,6 +17,8 @@
 #include "Mathematics/Rational/BinaryScientificRational.h"
 #include "Mathematics/Rational/UIntegerArbitraryPrecision32.h"
 
+#include <type_traits>
+
 /// 计算具有实值系数的三次多项式的实值根。
 /// 一般的三次多项式是g(x) = g0 + g1 * x + g2 * x^2 + g3 * x^3，其中g3不为零。
 /// 一次三次多项式为m(x) = m0 + m1 * x + m2 * x^2 + x^3。
@@ -53,11 +55,11 @@ namespace Mathematics
         /// roots[]数组必须至少有2个元素。
         /// 返回的int是roots[]数组中有效根的数目。
         using Rational = BinaryScientificRational<UIntegerArbitraryPrecision32>;
-        using PolynomialRoot = Algebra::PolynomialRoot<T>;
-        using PolynomialRootContainer = std::vector<PolynomialRoot>;
+        using PolynomialRootType = Algebra::PolynomialRoot<T>;
+        using PolynomialRootContainer = std::vector<PolynomialRootType>;
         using RationalPolynomialRoot = Algebra::PolynomialRoot<Rational>;
         using RationalPolynomialRootContainer = std::array<RationalPolynomialRoot, 3>;
-        using Math = Math<T>;
+        using MathType = Math<T>;
 
     public:
         RootsCubic() noexcept;
@@ -91,8 +93,8 @@ namespace Mathematics
                                                    RationalPolynomialRootContainer& rRoots);
 
     private:
-        using RootsLinear = RootsLinear<T>;
-        using RootsQuadratic = RootsQuadratic<T>;
+        using RootsLinearType = RootsLinear<T>;
+        using RootsQuadraticType = RootsQuadratic<T>;
 
     private:
         /// 确定多项式是否具有零值根。
@@ -128,8 +130,9 @@ namespace Mathematics
                                        Rational& rD1,
                                        Rational& rM2Div3);
 
-        NODISCARD static int ComputeDepressedRootsBisection(const Rational& rD0, const Rational& rD1, RationalPolynomialRootContainer& rRoots) requires(std::is_arithmetic_v<T>);
-        NODISCARD static int ComputeDepressedRootsBisection(const Rational& rD0, const Rational& rD1, RationalPolynomialRootContainer& rRoots) requires(!std::is_arithmetic_v<T>);
+        NODISCARD static int ComputeDepressedRootsBisection(const Rational& rD0, const Rational& rD1, RationalPolynomialRootContainer& rRoots);
+        NODISCARD static int ComputeDepressedRootsBisection0(const Rational& rD0, const Rational& rD1, RationalPolynomialRootContainer& rRoots) requires(std::is_arithmetic_v<T>);
+        NODISCARD static int ComputeDepressedRootsBisection1(const Rational& rD0, const Rational& rD1, RationalPolynomialRootContainer& rRoots) requires(!std::is_arithmetic_v<T>);
 
         NODISCARD static int ComputeDepressedRootsClosedForm(const Rational& rD0, const Rational& rD1, RationalPolynomialRootContainer& rRoots);
     };

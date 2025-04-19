@@ -37,7 +37,7 @@ Mathematics::Vector2Information<Real>::Vector2Information(const ContainerType& p
       indexMin{},
       indexMax{}
 {
-    if (points.empty() || epsilon < Math::GetValue(0))
+    if (points.empty() || epsilon < MathType::GetValue(0))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("无效输入在Vector2Information\n"s));
     }
@@ -93,13 +93,13 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 void Mathematics::Vector2Information<Real>::ComputeAxisAlignedBoundingBox()
 {
-    Vector2 min{ Math::maxReal, Math::maxReal };
-    Vector2 max{ Math::minReal, Math::minReal };
+    Vector2Type min{ MathType::maxReal, MathType::maxReal };
+    Vector2Type max{ MathType::minReal, MathType::minReal };
 
     auto pointsIndex = 0;
     for (const auto& point : points)
     {
-        for (auto directionIndex = 0u; directionIndex < Vector2::pointSize; ++directionIndex)
+        for (auto directionIndex = 0u; directionIndex < Vector2Type::pointSize; ++directionIndex)
         {
             if (point[directionIndex] < min[directionIndex])
             {
@@ -119,7 +119,7 @@ void Mathematics::Vector2Information<Real>::ComputeAxisAlignedBoundingBox()
         ++pointsIndex;
     }
 
-    axesAlignBoundingBox = AxesAlignBoundingBox2{ min, max };
+    axesAlignBoundingBox = AxesAlignBoundingBox2Type{ min, max };
 }
 
 template <typename Real>
@@ -136,15 +136,15 @@ void Mathematics::Vector2Information<Real>::DetermineMaximumRange() noexcept
     {
         maxRange = maxYRange;
 
-        minExtreme = indexMin.at(Vector2::yIndex);
-        maxExtreme = indexMax.at(Vector2::yIndex);
+        minExtreme = indexMin.at(Vector2Type::yIndex);
+        maxExtreme = indexMax.at(Vector2Type::yIndex);
     }
     else
     {
         maxRange = maxXRange;
 
-        minExtreme = indexMin.at(Vector2::xIndex);
-        maxExtreme = indexMax.at(Vector2::xIndex);
+        minExtreme = indexMin.at(Vector2Type::xIndex);
+        maxExtreme = indexMax.at(Vector2Type::xIndex);
     }
 }
 
@@ -173,10 +173,10 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector2Information<Real>::
     /// 测试向量集是否（几乎）是线段。我们需要directionY来跨越directionX的正交补码。
     directionX = points.at(maxExtreme) - origin;
     directionX.Normalize(epsilon);
-    directionY = -Vector2Tools::GetPerp(directionX);
+    directionY = -Vector2ToolsType::GetPerp(directionX);
 
     /// 计算点与直线的最大距离origin + t * directionX.
-    auto maxDistance = Math::GetValue(0);
+    auto maxDistance = MathType::GetValue(0);
     auto maxSign = NumericalValueSymbol::Zero;
     perpendicularExtreme = minExtreme;
 
@@ -184,9 +184,9 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector2Information<Real>::
     for (const auto& point : points)
     {
         auto difference = point - origin;
-        auto distance = Vector2Tools::DotProduct(directionY, difference);
-        const auto sign = Math::Sign(distance);
-        distance = Math::FAbs(distance);
+        auto distance = Vector2ToolsType::DotProduct(directionY, difference);
+        const auto sign = MathType::Sign(distance);
+        distance = MathType::FAbs(distance);
         if (maxDistance < distance)
         {
             maxDistance = distance;
@@ -249,7 +249,7 @@ int Mathematics::Vector2Information<Real>::GetDimension() const noexcept
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector2Information<Real>::AxesAlignBoundingBox2 Mathematics::Vector2Information<Real>::GetAxesAlignBoundingBox() const noexcept
+typename Mathematics::Vector2Information<Real>::AxesAlignBoundingBox2Type Mathematics::Vector2Information<Real>::GetAxesAlignBoundingBox() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -267,7 +267,7 @@ Real Mathematics::Vector2Information<Real>::GetMaxRange() const noexcept
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector2Information<Real>::Vector2 Mathematics::Vector2Information<Real>::GetOrigin() const noexcept
+typename Mathematics::Vector2Information<Real>::Vector2Type Mathematics::Vector2Information<Real>::GetOrigin() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -276,7 +276,7 @@ typename Mathematics::Vector2Information<Real>::Vector2 Mathematics::Vector2Info
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector2Information<Real>::Vector2 Mathematics::Vector2Information<Real>::GetDirectionX() const noexcept
+typename Mathematics::Vector2Information<Real>::Vector2Type Mathematics::Vector2Information<Real>::GetDirectionX() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -285,7 +285,7 @@ typename Mathematics::Vector2Information<Real>::Vector2 Mathematics::Vector2Info
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector2Information<Real>::Vector2 Mathematics::Vector2Information<Real>::GetDirectionY() const noexcept
+typename Mathematics::Vector2Information<Real>::Vector2Type Mathematics::Vector2Information<Real>::GetDirectionY() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -294,7 +294,7 @@ typename Mathematics::Vector2Information<Real>::Vector2 Mathematics::Vector2Info
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector2Information<Real>::Vector2 Mathematics::Vector2Information<Real>::GetMinExtreme() const
+typename Mathematics::Vector2Information<Real>::Vector2Type Mathematics::Vector2Information<Real>::GetMinExtreme() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -303,7 +303,7 @@ typename Mathematics::Vector2Information<Real>::Vector2 Mathematics::Vector2Info
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector2Information<Real>::Vector2 Mathematics::Vector2Information<Real>::GetMaxExtreme() const
+typename Mathematics::Vector2Information<Real>::Vector2Type Mathematics::Vector2Information<Real>::GetMaxExtreme() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -312,7 +312,7 @@ typename Mathematics::Vector2Information<Real>::Vector2 Mathematics::Vector2Info
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector2Information<Real>::Vector2 Mathematics::Vector2Information<Real>::GetPerpendicularExtreme() const
+typename Mathematics::Vector2Information<Real>::Vector2Type Mathematics::Vector2Information<Real>::GetPerpendicularExtreme() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

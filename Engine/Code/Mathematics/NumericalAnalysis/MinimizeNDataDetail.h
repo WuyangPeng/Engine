@@ -18,7 +18,7 @@
 
 template <typename Real>
 Mathematics::MinimizeNData<Real>::MinimizeNData() noexcept
-    : minLocation{}, minValue{ Math::maxReal }
+    : minLocation{}, minValue{ MathType::maxReal }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }

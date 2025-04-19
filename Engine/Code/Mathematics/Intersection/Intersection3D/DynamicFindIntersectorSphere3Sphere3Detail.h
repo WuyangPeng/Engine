@@ -14,11 +14,11 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorSphere3Sphere3<Real>::DynamicFindIntersectorSphere3Sphere3(const Sphere3& sphere0, const Sphere3& sphere1, Real tMax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorSphere3Sphere3<Real>::DynamicFindIntersectorSphere3Sphere3(const Sphere3Type& sphere0, const Sphere3Type& sphere1, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon },
       sphere0{ sphere0 },
       sphere1{ sphere1 },
-      circle{ Vector3::GetZero(), Vector3::GetZero(), Vector3::GetZero(), Vector3::GetZero(), 0 },
+      circle{ Vector3Type::GetZero(), Vector3Type::GetZero(), Vector3Type::GetZero(), Vector3Type::GetZero(), 0 },
       contactPoint{}
 {
     Find();
@@ -63,36 +63,36 @@ void Mathematics::DynamicFindIntersectorSphere3Sphere3<Real>::Find()
     auto tMax = this->GetTMax();
 
     auto relVelocity = rhsVelocity - lhsVelocity;
-    auto relVelocitySquared = Vector3Tools::GetLengthSquared(relVelocity);
+    auto relVelocitySquared = Vector3ToolsType::GetLengthSquared(relVelocity);
     auto diff = sphere1.GetCenter() - sphere0.GetCenter();
-    auto diffSqr = Vector3Tools::GetLengthSquared(diff);
+    auto diffSqr = Vector3ToolsType::GetLengthSquared(diff);
     auto radiusSum = sphere0.GetRadius() + sphere1.GetRadius();
     auto radiusSumSqr = radiusSum * radiusSum;
 
-    if (Math::GetValue(0) < relVelocitySquared)
+    if (MathType::GetValue(0) < relVelocitySquared)
     {
-        auto dot = Vector3Tools::DotProduct(diff, relVelocity);
-        if (dot <= Math::GetValue(0))
+        auto dot = Vector3ToolsType::DotProduct(diff, relVelocity);
+        if (dot <= MathType::GetValue(0))
         {
-            if (-tMax * relVelocitySquared <= dot || tMax * (tMax * relVelocitySquared + Math::GetValue(2) * dot) + diffSqr <= radiusSumSqr)
+            if (-tMax * relVelocitySquared <= dot || tMax * (tMax * relVelocitySquared + MathType::GetValue(2) * dot) + diffSqr <= radiusSumSqr)
             {
                 auto minus = diffSqr - radiusSumSqr;
                 auto discr = dot * dot - relVelocitySquared * minus;
-                if (Math::GetValue(0) <= discr)
+                if (MathType::GetValue(0) <= discr)
                 {
-                    if (minus <= Math::GetValue(0))
+                    if (minus <= MathType::GetValue(0))
                     {
                         // 球体最初是相交的。 通过使用连接球体中心的线段的中点来估计接触点。
-                        this->SetContactTime(Math::GetValue(0));
-                        contactPoint = Math::GetRational(1, 2) * (sphere0.GetCenter() + sphere1.GetCenter());
+                        this->SetContactTime(MathType::GetValue(0));
+                        contactPoint = MathType::GetRational(1, 2) * (sphere0.GetCenter() + sphere1.GetCenter());
                     }
                     else
                     {
                         // 第一次接触是在[0,tmax]中。
-                        this->SetContactTime(-(dot + Math::Sqrt(discr)) / relVelocitySquared);
-                        if (this->GetContactTime() < Math::GetValue(0))
+                        this->SetContactTime(-(dot + MathType::Sqrt(discr)) / relVelocitySquared);
+                        if (this->GetContactTime() < MathType::GetValue(0))
                         {
-                            this->SetContactTime(Math::GetValue(0));
+                            this->SetContactTime(MathType::GetValue(0));
                         }
                         else if (this->GetContactTime() > tMax)
                         {
@@ -116,8 +116,8 @@ void Mathematics::DynamicFindIntersectorSphere3Sphere3<Real>::Find()
     if (diffSqr <= radiusSumSqr)
     {
         // 球体最初是相交的。 通过使用连接球心的线段的中点来估计接触点。
-        this->SetContactTime(Math::GetValue(0));
-        contactPoint = (Math::GetRational(1, 2)) * (sphere0.GetCenter() + sphere1.GetCenter());
+        this->SetContactTime(MathType::GetValue(0));
+        contactPoint = (MathType::GetRational(1, 2)) * (sphere0.GetCenter() + sphere1.GetCenter());
         this->SetIntersectionType(IntersectionType::Other);
     }
     else

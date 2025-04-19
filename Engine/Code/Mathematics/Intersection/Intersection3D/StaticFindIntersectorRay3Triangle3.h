@@ -27,19 +27,19 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorRay3Triangle3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Ray3 = Ray3<Real>;
-        using Triangle3 = Triangle3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Ray3Type = Ray3<Real>;
+        using Triangle3Type = Triangle3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorRay3Triangle3(const Ray3& ray, const Triangle3& triangle, const Real epsilon = Math::GetZeroTolerance());
+        StaticFindIntersectorRay3Triangle3(const Ray3Type& ray, const Triangle3Type& triangle, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Ray3 GetRay() const noexcept;
-        NODISCARD Triangle3 GetTriangle() const noexcept;
+        NODISCARD Ray3Type GetRay() const noexcept;
+        NODISCARD Triangle3Type GetTriangle() const noexcept;
 
         NODISCARD Real GetRayParameter() const noexcept;
         NODISCARD Real GetTriangleBary0() const noexcept;
@@ -51,8 +51,8 @@ namespace Mathematics
 
     private:
         // 相交对象
-        Ray3 ray;
-        Triangle3 triangle;
+        Ray3Type ray;
+        Triangle3Type triangle;
 
         // 相交对象集信息
         Real rayParameter;

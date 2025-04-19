@@ -45,14 +45,14 @@ void Mathematics::BSplineBasis<Real>::Create(int numCtrlPoints, int newDegree, b
 
     const auto numKnots = Initialize(numCtrlPoints, newDegree, newOpen);
     const auto temp = ctrlPointsCount - degree;
-    const auto factor = (Math::GetValue(1)) / (temp);
+    const auto factor = (MathType::GetValue(1)) / (temp);
 
     if (open)
     {
         auto i = 0;
         for (; i <= degree; ++i)
         {
-            knot.at(i) = Math::GetValue(0);
+            knot.at(i) = MathType::GetValue(0);
         }
 
         for (; i < ctrlPointsCount; ++i)
@@ -63,7 +63,7 @@ void Mathematics::BSplineBasis<Real>::Create(int numCtrlPoints, int newDegree, b
 
         for (; i < numKnots; ++i)
         {
-            knot.at(i) = Math::GetValue(1);
+            knot.at(i) = MathType::GetValue(1);
         }
     }
     else
@@ -96,7 +96,7 @@ void Mathematics::BSplineBasis<Real>::Create(int numCtrlPoints, int newDegree, c
     auto i = 0;
     for (; i <= degree; ++i)
     {
-        knot.at(i) = Math ::GetValue(0);
+        knot.at(i) = MathType::GetValue(0);
     }
 
     for (auto j = 0; i < ctrlPointsCount; ++i, ++j)
@@ -106,7 +106,7 @@ void Mathematics::BSplineBasis<Real>::Create(int numCtrlPoints, int newDegree, c
 
     for (; i < numKnots; ++i)
     {
-        knot.at(i) = Math::GetValue(1);
+        knot.at(i) = MathType::GetValue(1);
     }
 }
 
@@ -243,7 +243,7 @@ Real Mathematics::BSplineBasis<Real>::GetKnot(int j) const
         return knot.at(i);
     }
 
-    return Math::maxReal;
+    return MathType::maxReal;
 }
 
 template <typename Real>
@@ -253,22 +253,22 @@ int Mathematics::BSplineBasis<Real>::GetKey(Real& t) const
 
     if (open)
     {
-        if (t <= Math::GetValue(0))
+        if (t <= MathType::GetValue(0))
         {
-            t = Math::GetValue(0);
+            t = MathType::GetValue(0);
             return degree;
         }
-        else if (t >= Math::GetValue(1))
+        else if (t >= MathType::GetValue(1))
         {
-            t = Math::GetValue(1);
+            t = MathType::GetValue(1);
             return ctrlPointsCount - 1;
         }
     }
     else
     {
-        if (t < Math::GetValue(0) || t >= Math::GetValue(1))
+        if (t < MathType::GetValue(0) || t >= MathType::GetValue(1))
         {
-            t -= Math::Floor(t);
+            t -= MathType::Floor(t);
         }
     }
 
@@ -325,17 +325,17 @@ void Mathematics::BSplineBasis<Real>::Compute(Real t, int order, int& minIndex, 
     }
 
     auto i = GetKey(t);
-    bD0.at(0).at(i) = Math::GetValue(1);
+    bD0.at(0).at(i) = MathType::GetValue(1);
 
     if (order >= 1)
     {
-        bD1.at(0).at(i) = Math::GetValue(0);
+        bD1.at(0).at(i) = MathType::GetValue(0);
         if (order >= 2)
         {
-            bD2.at(0).at(i) = Math::GetValue(0);
+            bD2.at(0).at(i) = MathType::GetValue(0);
             if (order >= 3)
             {
-                bD3.at(0).at(i) = Math::GetValue(0);
+                bD3.at(0).at(i) = MathType::GetValue(0);
             }
         }
     }
@@ -352,8 +352,8 @@ void Mathematics::BSplineBasis<Real>::Compute(Real t, int order, int& minIndex, 
         const auto iReduceJ = i - j;
         const auto nextIReduceJ = iReduceJ + 1;
         const auto previousJ = j - 1;
-        invD0 = (Math::GetValue(1)) / (knot.at(iAddJ) - knot.at(i));
-        invD1 = (Math::GetValue(1)) / (knot.at(nextI) - knot.at(nextIReduceJ));
+        invD0 = (MathType::GetValue(1)) / (knot.at(iAddJ) - knot.at(i));
+        invD1 = (MathType::GetValue(1)) / (knot.at(nextI) - knot.at(nextIReduceJ));
 
         bD0.at(j).at(i) = n0 * bD0.at(previousJ).at(i) * invD0;
         bD0.at(j).at(iReduceJ) = n1 * bD0.at(previousJ).at(nextIReduceJ) * invD1;
@@ -365,13 +365,13 @@ void Mathematics::BSplineBasis<Real>::Compute(Real t, int order, int& minIndex, 
 
             if (order >= 2)
             {
-                bD2.at(j).at(i) = (n0 * bD2.at(previousJ).at(i) + (Math::GetValue(2)) * bD1.at(previousJ).at(i)) * invD0;
-                bD2.at(j).at(iReduceJ) = (n1 * bD2.at(previousJ).at(nextIReduceJ) - (Math::GetValue(2)) * bD1.at(previousJ).at(nextIReduceJ)) * invD1;
+                bD2.at(j).at(i) = (n0 * bD2.at(previousJ).at(i) + (MathType::GetValue(2))*bD1.at(previousJ).at(i)) * invD0;
+                bD2.at(j).at(iReduceJ) = (n1 * bD2.at(previousJ).at(nextIReduceJ) - (MathType::GetValue(2))*bD1.at(previousJ).at(nextIReduceJ)) * invD1;
 
                 if (order >= 3)
                 {
-                    bD3.at(j).at(i) = (n0 * bD3.at(previousJ).at(i) + Math::GetValue(3) * bD2.at(previousJ).at(i)) * invD0;
-                    bD3.at(j).at(iReduceJ) = (n1 * bD3.at(previousJ).at(nextIReduceJ) - Math::GetValue(3) * bD2.at(previousJ).at(nextIReduceJ)) * invD1;
+                    bD3.at(j).at(i) = (n0 * bD3.at(previousJ).at(i) + MathType::GetValue(3) * bD2.at(previousJ).at(i)) * invD0;
+                    bD3.at(j).at(iReduceJ) = (n1 * bD3.at(previousJ).at(nextIReduceJ) - MathType::GetValue(3) * bD2.at(previousJ).at(nextIReduceJ)) * invD1;
                 }
             }
         }
@@ -388,8 +388,8 @@ void Mathematics::BSplineBasis<Real>::Compute(Real t, int order, int& minIndex, 
 
             n0 = t - knot.at(k);
             n1 = knot.at(nextKAddJ) - t;
-            invD0 = (Math::GetValue(1)) / (knot.at(kAddJ) - knot.at(k));
-            invD1 = (Math::GetValue(1)) / (knot.at(nextKAddJ) - knot.at(nextK));
+            invD0 = (MathType::GetValue(1)) / (knot.at(kAddJ) - knot.at(k));
+            invD1 = (MathType::GetValue(1)) / (knot.at(nextKAddJ) - knot.at(nextK));
 
             bD0.at(j).at(k) = n0 * bD0.at(previousJ).at(k) * invD0 + n1 * bD0.at(previousJ).at(nextK) * invD1;
 
@@ -399,11 +399,11 @@ void Mathematics::BSplineBasis<Real>::Compute(Real t, int order, int& minIndex, 
 
                 if (order >= 2)
                 {
-                    bD2.at(j).at(k) = (n0 * bD2.at(previousJ).at(k) + (Math::GetValue(2)) * bD1.at(previousJ).at(k)) * invD0 + (n1 * bD2.at(previousJ).at(nextK) - (Math::GetValue(2)) * bD1.at(previousJ).at(nextK)) * invD1;
+                    bD2.at(j).at(k) = (n0 * bD2.at(previousJ).at(k) + (MathType::GetValue(2))*bD1.at(previousJ).at(k)) * invD0 + (n1 * bD2.at(previousJ).at(nextK) - (MathType::GetValue(2))*bD1.at(previousJ).at(nextK)) * invD1;
 
                     if (order >= 3)
                     {
-                        bD3.at(j).at(k) = (n0 * bD3.at(previousJ).at(k) + Math::GetValue(3) * bD2.at(previousJ).at(k)) * invD0 + (n1 * bD3.at(previousJ).at(nextK) - Math::GetValue(3) * bD2.at(previousJ).at(nextK)) * invD1;
+                        bD3.at(j).at(k) = (n0 * bD3.at(previousJ).at(k) + MathType::GetValue(3) * bD2.at(previousJ).at(k)) * invD0 + (n1 * bD3.at(previousJ).at(nextK) - MathType::GetValue(3) * bD2.at(previousJ).at(nextK)) * invD1;
                     }
                 }
             }

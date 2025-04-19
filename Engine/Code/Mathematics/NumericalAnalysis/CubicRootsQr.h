@@ -29,9 +29,9 @@ namespace Mathematics
     public:
         using ClassType = CubicRootsQr<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Roots = std::array<Real, 3>;
-        using Matrix = std::array<Roots, 3>;
+        using MatrixType = std::array<Roots, 3>;
 
     public:
         CubicRootsQr() noexcept;
@@ -44,21 +44,21 @@ namespace Mathematics
         /// 计算上Hessenberg矩阵A的实本征值。
         /// 矩阵是通过原位运算修改的，所以如果你需要记住A，
         /// 你必须在调用这个函数之前制作自己的副本。
-        NODISCARD int operator()(int maxIterations, Matrix& a, int& numRoots, Roots& roots) const;
+        NODISCARD int operator()(int maxIterations, MatrixType& a, int& numRoots, Roots& roots) const;
 
     private:
-        void DoIteration(const Roots& v, Matrix& a) const;
+        void DoIteration(const Roots& v, MatrixType& a) const;
 
         template <int N>
         NODISCARD std::array<Real, N> House(const std::array<Real, N>& x) const;
 
         template <int N>
-        void RowHouse(int rMin, int rMax, int cMin, int cMax, const std::array<Real, N>& v, const std::array<Real, N>& mv, Matrix& a) const;
+        void RowHouse(int rMin, int rMax, int cMin, int cMax, const std::array<Real, N>& v, const std::array<Real, N>& mv, MatrixType& a) const;
 
         template <int N>
-        void ColHouse(int rMin, int rMax, int cMin, int cMax, const std::array<Real, N>& v, const std::array<Real, N>& mv, Matrix& a) const;
+        void ColHouse(int rMin, int rMax, int cMin, int cMax, const std::array<Real, N>& v, const std::array<Real, N>& mv, MatrixType& a) const;
 
-        void GetQuadraticRoots(int i0, int i1, const Matrix& a, int& numRoots, Roots& roots) const;
+        void GetQuadraticRoots(int i0, int i1, const MatrixType& a, int& numRoots, Roots& roots) const;
     };
 }
 

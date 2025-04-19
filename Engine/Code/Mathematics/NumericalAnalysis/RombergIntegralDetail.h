@@ -37,21 +37,21 @@ void Mathematics::RombergIntegral<Real, UserDataType>::Calculate()
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-    rom[0][0] = Math::GetRational(1, 2) * difference * (function(begin, userData) + function(end, userData));
+    rom[0][0] = MathType::GetRational(1, 2) * difference * (function(begin, userData) + function(end, userData));
 
     auto p0 = 1;
     for (auto orderIndex = 2; orderIndex <= order; ++orderIndex)
     {
         // 通过梯形规则逼近。
-        auto sum = Math::GetValue(0);
+        auto sum = MathType::GetValue(0);
 
         for (auto i = 1; i <= p0; ++i)
         {
-            sum += function(begin + difference * (i - (Math::GetRational(1, 2))), userData);
+            sum += function(begin + difference * (i - (MathType::GetRational(1, 2))), userData);
         }
 
         // Richardson 外推法。
-        rom[1][0] = (Math::GetRational(1, 2) * (rom[0][0] + difference * sum));
+        rom[1][0] = (MathType::GetRational(1, 2) * (rom[0][0] + difference * sum));
 
         auto p2 = 4;
         for (auto i = 1; i < orderIndex; ++i)
@@ -71,7 +71,7 @@ void Mathematics::RombergIntegral<Real, UserDataType>::Calculate()
         }
 
         p0 *= 2;
-        difference *= Math::GetRational(1, 2);
+        difference *= MathType::GetRational(1, 2);
     }
 
     const auto orderMinus1 = order - 1;

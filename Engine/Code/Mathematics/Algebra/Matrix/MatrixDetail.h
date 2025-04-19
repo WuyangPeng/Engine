@@ -295,7 +295,7 @@ void Mathematics::Algebra::Matrix<NumRows, NumColumns, Real>::MakeUnit(int row, 
     MakeZero();
     if (0 <= row && row < NumRows && 0 <= column && column < NumColumns)
     {
-        table(row, column) = Math::GetValue(1);
+        table(row, column) = MathType::GetValue(1);
     }
 }
 
@@ -415,7 +415,7 @@ Mathematics::Algebra::Matrix<NumRows, NumColumns, Real>& Mathematics::Algebra::M
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    if (Math::GetZeroTolerance() < scalar)
+    if (MathType::GetZeroTolerance() < scalar)
     {
         for (auto i = 0; i < numElements; ++i)
         {

@@ -65,7 +65,7 @@ namespace Rendering
 
         NODISCARD static ProgramFactorySharedPtr Create(RendererTypes rendererTypes);
 
-        NODISCARD void SetVersion(const std::string& defaultVersion);
+        void SetVersion(const std::string& defaultVersion);
 
     protected:
         NODISCARD virtual VisualProgramSharedPtr CreateFromNamedSources(const std::string& vertexShaderName,

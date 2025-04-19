@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorLine2Circle2<Real>::StaticFindIntersectorLine2Circle2(const Line2& line, const Circle2& circle, const Real epsilon)
+Mathematics::StaticFindIntersectorLine2Circle2<Real>::StaticFindIntersectorLine2Circle2(const Line2Type& line, const Circle2Type& circle, const Real epsilon)
     : ParentType{ epsilon }, line{ line }, circle{ circle }, quantity{}, point0{}, point1{}
 {
     Find();

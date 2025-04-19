@@ -18,7 +18,7 @@
 
 template <typename Real, bool Robust>
 requires std::is_arithmetic_v<Real>
-Mathematics::Vector3Orthonormalize<Real, Robust>::Vector3Orthonormalize(const Vector3& uVector, const Vector3& vVector, const Vector3& wVector, const Real epsilon)
+Mathematics::Vector3Orthonormalize<Real, Robust>::Vector3Orthonormalize(const Vector3Type& uVector, const Vector3Type& vVector, const Vector3Type& wVector, const Real epsilon)
     : uVector{ uVector }, vVector{ vVector }, wVector{ wVector }, epsilon{ epsilon }
 {
     Generate();
@@ -29,7 +29,7 @@ Mathematics::Vector3Orthonormalize<Real, Robust>::Vector3Orthonormalize(const Ve
 template <typename Real, bool Robust>
 requires std::is_arithmetic_v<Real>
 Mathematics::Vector3Orthonormalize<Real, Robust>::Vector3Orthonormalize(const ContainerType& vectors, const Real epsilon)
-    : uVector{ vectors.at(Vector3::xIndex) }, vVector{ vectors.at(Vector3::yIndex) }, wVector{ vectors.at(Vector3::zIndex) }, epsilon{ epsilon }
+    : uVector{ vectors.at(Vector3Type::xIndex) }, vVector{ vectors.at(Vector3Type::yIndex) }, wVector{ vectors.at(Vector3Type::zIndex) }, epsilon{ epsilon }
 {
     Generate();
 
@@ -58,9 +58,9 @@ void Mathematics::Vector3Orthonormalize<Real, Robust>::Generate()
     }
 
     // 计算 u1
-    const auto dotUV = Vector3Tools::DotProduct(uVector, vVector);
+    const auto dotUV = Vector3ToolsType::DotProduct(uVector, vVector);
 
-    MATHEMATICS_ASSERTION_1(epsilon < Math::FAbs(dotUV), "输入向量必须是线性无关的！");
+    MATHEMATICS_ASSERTION_1(epsilon < MathType::FAbs(dotUV), "输入向量必须是线性无关的！");
 
     vVector -= dotUV * uVector;
     if constexpr (Robust)
@@ -73,8 +73,8 @@ void Mathematics::Vector3Orthonormalize<Real, Robust>::Generate()
     }
 
     // 计算 u2
-    const auto dotVW = Vector3Tools::DotProduct(vVector, wVector);
-    const auto dotUW = Vector3Tools::DotProduct(uVector, wVector);
+    const auto dotVW = Vector3ToolsType::DotProduct(vVector, wVector);
+    const auto dotUW = Vector3ToolsType::DotProduct(uVector, wVector);
 
     wVector -= dotUW * uVector + dotVW * vVector;
     if constexpr (Robust)
@@ -94,9 +94,9 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Orthonormalize<Real
 {
     try
     {
-        if (Math::FAbs(Vector3Tools::DotProduct(uVector, vVector)) <= epsilon &&
-            Math::FAbs(Vector3Tools::DotProduct(uVector, wVector)) <= epsilon &&
-            Math::FAbs(Vector3Tools::DotProduct(vVector, wVector)) <= epsilon &&
+        if (MathType::FAbs(Vector3ToolsType::DotProduct(uVector, vVector)) <= epsilon &&
+            MathType::FAbs(Vector3ToolsType::DotProduct(uVector, wVector)) <= epsilon &&
+            MathType::FAbs(Vector3ToolsType::DotProduct(vVector, wVector)) <= epsilon &&
             uVector.IsNormalize(epsilon) &&
             vVector.IsNormalize(epsilon) &&
             wVector.IsNormalize(epsilon))

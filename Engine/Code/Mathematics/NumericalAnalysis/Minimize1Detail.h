@@ -52,13 +52,13 @@ const UserDataType* Mathematics::Minimize1<Real, UserDataType>::GetUserData() co
 }
 
 template <typename Real, typename UserDataType>
-typename Mathematics::Minimize1<Real, UserDataType>::Minimize1Data Mathematics::Minimize1<Real, UserDataType>::GetMinimum(Real begin, Real end, Real initial) const
+typename Mathematics::Minimize1<Real, UserDataType>::Minimize1DataType Mathematics::Minimize1<Real, UserDataType>::GetMinimum(Real begin, Real end, Real initial) const
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
     MATHEMATICS_ASSERTION_1(begin <= initial && initial <= end, "无效的初始t值\n");
 
-    Minimize1Data minimize1Data;
+    Minimize1DataType minimize1Data;
 
     const auto beginFunction = function(begin, userData);
     minimize1Data.CompareData(begin, beginFunction);
@@ -75,18 +75,18 @@ typename Mathematics::Minimize1<Real, UserDataType>::Minimize1Data Mathematics::
 }
 
 template <typename Real, typename UserDataType>
-void Mathematics::Minimize1<Real, UserDataType>::CompareMinimum(Real begin, Real beginFunction, Real end, Real endFunction, int level, Minimize1Data& minimize1Data) const
+void Mathematics::Minimize1<Real, UserDataType>::CompareMinimum(Real begin, Real beginFunction, Real end, Real endFunction, int level, Minimize1DataType& minimize1Data) const
 {
     if (level-- == 0)
     {
         return;
     }
 
-    const auto middle = Math::GetRational(1, 2) * (begin + end);
+    const auto middle = MathType::GetRational(1, 2) * (begin + end);
     const auto middleFunction = function(middle, userData);
     minimize1Data.CompareData(middle, middleFunction);
 
-    if (Math::GetValue(0) < beginFunction - (Math::GetValue(2) * middleFunction + endFunction))
+    if (MathType::GetValue(0) < beginFunction - (MathType::GetValue(2) * middleFunction + endFunction))
     {
         // 二次拟合具有中点正二阶导数。
         if (beginFunction < endFunction)
@@ -146,7 +146,7 @@ void Mathematics::Minimize1<Real, UserDataType>::CompareMinimum(Real begin, Real
 }
 
 template <typename Real, typename UserDataType>
-void Mathematics::Minimize1<Real, UserDataType>::CompareMinimum(Real begin, Real beginFunction, Real middle, Real middleFunction, Real end, Real endFunction, int level, Minimize1Data& minimize1Data) const
+void Mathematics::Minimize1<Real, UserDataType>::CompareMinimum(Real begin, Real beginFunction, Real middle, Real middleFunction, Real end, Real endFunction, int level, Minimize1DataType& minimize1Data) const
 {
     if (level-- == 0)
     {
@@ -212,7 +212,7 @@ void Mathematics::Minimize1<Real, UserDataType>::CompareMinimum(Real begin, Real
 }
 
 template <typename Real, typename UserDataType>
-void Mathematics::Minimize1<Real, UserDataType>::CompareBracketedMinimum(Real begin, Real beginFunction, Real middle, Real middleFunction, Real end, Real endFunction, int level, Minimize1Data& minimize1Data) const
+void Mathematics::Minimize1<Real, UserDataType>::CompareBracketedMinimum(Real begin, Real beginFunction, Real middle, Real middleFunction, Real end, Real endFunction, int level, Minimize1DataType& minimize1Data) const
 {
     for (auto i = 0; i < maxBracket; ++i)
     {
@@ -221,7 +221,7 @@ void Mathematics::Minimize1<Real, UserDataType>::CompareBracketedMinimum(Real be
 
         // 测试收敛。
 
-        if (Math::FAbs(end - begin) <= Math::GetValue(2) * Math::GetZeroTolerance() * Math::FAbs(middle) + Math::epsilon)
+        if (MathType::FAbs(end - begin) <= MathType::GetValue(2) * MathType::GetZeroTolerance() * MathType::FAbs(middle) + MathType::epsilon)
         {
             break;
         }
@@ -234,12 +234,12 @@ void Mathematics::Minimize1<Real, UserDataType>::CompareBracketedMinimum(Real be
         auto product0 = beginMinusMiddle * endFunctionMinusMiddleFunction;
         auto product1 = endMinusMiddle * beginFunctionMinusMiddleFunction;
         auto denom = product1 - product0;
-        if (Math::FAbs(denom) < Math::epsilon)
+        if (MathType::FAbs(denom) < MathType::epsilon)
         {
             return;
         }
 
-        auto vertex = Math::GetRational(1, 2) * (endMinusMiddle * product1 - beginMinusMiddle * product0) / denom + middle;
+        auto vertex = MathType::GetRational(1, 2) * (endMinusMiddle * product1 - beginMinusMiddle * product0) / denom + middle;
 
         MATHEMATICS_ASSERTION_1(begin <= vertex && vertex <= end, "顶点不在区间\n");
 

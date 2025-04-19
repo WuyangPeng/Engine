@@ -10,6 +10,6 @@
 #include "ConsoleMainFunctionHelperBase1.h"
 #include "Framework/Helper/MainFunctionMacro.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 CONSOLE_MAIN_FUNCTION(Framework, ConsoleMainFunctionHelperBase1, SYSTEM_TEXT("ConsoleMainFunctionHelperBase1"), SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT(""));

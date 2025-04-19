@@ -23,22 +23,22 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Real>
-requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Tools<Real>::Approximate(const Vector3& lhs, const Vector3& rhs, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
+requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Tools<Real>::Approximate(const Vector3Type& lhs, const Vector3Type& rhs, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
-    MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= epsilon, "epsilon必须大于或等于0！");
+    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= epsilon, "epsilon必须大于或等于0！");
 
-    return Math::FAbs(lhs.GetX() - rhs.GetX()) < epsilon &&
-           Math::FAbs(lhs.GetY() - rhs.GetY()) < epsilon &&
-           Math::FAbs(lhs.GetZ() - rhs.GetZ()) < epsilon;
+    return MathType::FAbs(lhs.GetX() - rhs.GetX()) < epsilon &&
+           MathType::FAbs(lhs.GetY() - rhs.GetY()) < epsilon &&
+           MathType::FAbs(lhs.GetZ() - rhs.GetZ()) < epsilon;
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::Vector3Tools<Real>::GetRobustLength(const Vector3& vector)
+Real Mathematics::Vector3Tools<Real>::GetRobustLength(const Vector3Type& vector)
 {
     const auto maxAbsComp = vector.GetMaxAbsComp();
 
-    if (Math::GetZeroTolerance() < maxAbsComp)
+    if (MathType::GetZeroTolerance() < maxAbsComp)
     {
         const auto scaled = vector / maxAbsComp;
         return maxAbsComp * GetLength(scaled);
@@ -51,51 +51,51 @@ Real Mathematics::Vector3Tools<Real>::GetRobustLength(const Vector3& vector)
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::Vector3Tools<Real>::GetLength(const Vector3& vector) noexcept(gAssert < 3 || gMathematicsAssert < 3)
+Real Mathematics::Vector3Tools<Real>::GetLength(const Vector3Type& vector) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    return Math::Sqrt(GetLengthSquared(vector));
+    return MathType::Sqrt(GetLengthSquared(vector));
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::Vector3Tools<Real>::GetLengthSquared(const Vector3& vector) noexcept
+Real Mathematics::Vector3Tools<Real>::GetLengthSquared(const Vector3Type& vector) noexcept
 {
     return vector.GetX() * vector.GetX() + vector.GetY() * vector.GetY() + vector.GetZ() * vector.GetZ();
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::Vector3Tools<Real>::DotProduct(const Vector3& lhs, const Vector3& rhs) noexcept
+Real Mathematics::Vector3Tools<Real>::DotProduct(const Vector3Type& lhs, const Vector3Type& rhs) noexcept
 {
     return (lhs.GetX() * rhs.GetX() + lhs.GetY() * rhs.GetY() + lhs.GetZ() * rhs.GetZ());
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector3Tools<Real>::Vector3 Mathematics::Vector3Tools<Real>::CrossProduct(const Vector3& lhs, const Vector3& rhs) noexcept
+typename Mathematics::Vector3Tools<Real>::Vector3Type Mathematics::Vector3Tools<Real>::CrossProduct(const Vector3Type& lhs, const Vector3Type& rhs) noexcept
 {
-    return Vector3{ lhs.GetY() * rhs.GetZ() - lhs.GetZ() * rhs.GetY(),
+    return Vector3Type{ lhs.GetY() * rhs.GetZ() - lhs.GetZ() * rhs.GetY(),
                     lhs.GetZ() * rhs.GetX() - lhs.GetX() * rhs.GetZ(),
                     lhs.GetX() * rhs.GetY() - lhs.GetY() * rhs.GetX() };
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector3Tools<Real>::Vector3 Mathematics::Vector3Tools<Real>::CrossProductWithReduceMultiplication(const Vector3& lhs, const Vector3& rhs) noexcept
+typename Mathematics::Vector3Tools<Real>::Vector3Type Mathematics::Vector3Tools<Real>::CrossProductWithReduceMultiplication(const Vector3Type& lhs, const Vector3Type& rhs) noexcept
 {
     const auto t1 = lhs.GetX() - lhs.GetY();
     const auto t2 = rhs.GetY() + rhs.GetZ();
     const auto t3 = lhs.GetX() * rhs.GetZ();
     const auto t4 = t1 * t2 - t3;
 
-    return Vector3{ rhs.GetY() * (t1 - lhs.GetZ()) - t4,
+    return Vector3Type{ rhs.GetY() * (t1 - lhs.GetZ()) - t4,
                     lhs.GetZ() * rhs.GetX() - t3,
                     t4 - lhs.GetY() * (rhs.GetX() - t2) };
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector3Tools<Real>::Vector3 Mathematics::Vector3Tools<Real>::UnitCrossProduct(const Vector3& lhs, const Vector3& rhs, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
+typename Mathematics::Vector3Tools<Real>::Vector3Type Mathematics::Vector3Tools<Real>::UnitCrossProduct(const Vector3Type& lhs, const Vector3Type& rhs, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     auto cross = CrossProduct(lhs, rhs);
     cross.Normalize(epsilon);
@@ -105,14 +105,14 @@ typename Mathematics::Vector3Tools<Real>::Vector3 Mathematics::Vector3Tools<Real
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::Vector3Tools<Real>::Distance(const Vector3& lhs, const Vector3& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3)
+Real Mathematics::Vector3Tools<Real>::Distance(const Vector3Type& lhs, const Vector3Type& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    return Math::Sqrt(DistanceSquared(lhs, rhs));
+    return MathType::Sqrt(DistanceSquared(lhs, rhs));
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::Vector3Tools<Real>::DistanceSquared(const Vector3& lhs, const Vector3& rhs) noexcept
+Real Mathematics::Vector3Tools<Real>::DistanceSquared(const Vector3Type& lhs, const Vector3Type& rhs) noexcept
 {
     const auto distanceX = lhs.GetX() - rhs.GetX();
     const auto distanceY = lhs.GetY() - rhs.GetY();
@@ -123,7 +123,7 @@ Real Mathematics::Vector3Tools<Real>::DistanceSquared(const Vector3& lhs, const 
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector3Tools<Real>::Vector3 Mathematics::Vector3Tools<Real>::ParallelVectorLhsToRhs(const Vector3& lhs, const Vector3& rhs, Real epsilon)
+typename Mathematics::Vector3Tools<Real>::Vector3Type Mathematics::Vector3Tools<Real>::ParallelVectorLhsToRhs(const Vector3Type& lhs, const Vector3Type& rhs, Real epsilon)
 {
     const auto moduleSquare = GetLengthSquared(rhs);
 
@@ -135,47 +135,47 @@ typename Mathematics::Vector3Tools<Real>::Vector3 Mathematics::Vector3Tools<Real
     {
         MATHEMATICS_ASSERTION_1(false, "除零错误！");
 
-        return Vector3();
+        return Vector3Type();
     }
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector3Tools<Real>::Vector3 Mathematics::Vector3Tools<Real>::ApeakVectorLhsToRhs(const Vector3& lhs, const Vector3& rhs, Real epsilon)
+typename Mathematics::Vector3Tools<Real>::Vector3Type Mathematics::Vector3Tools<Real>::ApeakVectorLhsToRhs(const Vector3Type& lhs, const Vector3Type& rhs, Real epsilon)
 {
     return lhs - ParallelVectorLhsToRhs(lhs, rhs, epsilon);
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector3Tools<Real>::Vector3 Mathematics::Vector3Tools<Real>::ReflectionVector(const Vector3& ray, const Vector3& normal)
+typename Mathematics::Vector3Tools<Real>::Vector3Type Mathematics::Vector3Tools<Real>::ReflectionVector(const Vector3Type& ray, const Vector3Type& normal)
 {
     return 2 * DotProduct(normal, ray) * normal - ray;
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector3Tools<Real>::Vector3 Mathematics::Vector3Tools<Real>::RefractionVector(const Vector3& ray, const Vector3& normal, Real consistencyRatio)
+typename Mathematics::Vector3Tools<Real>::Vector3Type Mathematics::Vector3Tools<Real>::RefractionVector(const Vector3Type& ray, const Vector3Type& normal, Real consistencyRatio)
 {
     MATHEMATICS_ASSERTION_1(consistencyRatio <= 1, "consistencyRatio必须小于或等于1！");
 
     const auto cosphi = DotProduct(-ray, normal);
     const auto conphiSquare = cosphi * cosphi;
     const auto consistencyRatioSquare = consistencyRatio * consistencyRatio;
-    const auto costheta = 1 / consistencyRatioSquare * Math::Sqrt(1 - consistencyRatioSquare * (1 - conphiSquare));
+    const auto costheta = 1 / consistencyRatioSquare * MathType::Sqrt(1 - consistencyRatioSquare * (1 - conphiSquare));
 
     return consistencyRatio * ray - (costheta + consistencyRatio * cosphi) * normal;
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector3Tools<Real>::Vector3 Mathematics::Vector3Tools<Real>::FeatheringOutZAxes(const Vector3& vector, Function function)
+typename Mathematics::Vector3Tools<Real>::Vector3Type Mathematics::Vector3Tools<Real>::FeatheringOutZAxes(const Vector3Type& vector, Function function)
 {
     if (function != nullptr)
     {
         const auto r = function(vector.GetZ());
 
-        return Vector3{ vector.GetX() * r, vector.GetY() * r, vector.GetZ() };
+        return Vector3Type{ vector.GetX() * r, vector.GetY() * r, vector.GetZ() };
     }
     else
     {
@@ -185,14 +185,14 @@ typename Mathematics::Vector3Tools<Real>::Vector3 Mathematics::Vector3Tools<Real
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector3Tools<Real>::Vector3 Mathematics::Vector3Tools<Real>::TwistZAxes(const Vector3& vector, Function function)
+typename Mathematics::Vector3Tools<Real>::Vector3Type Mathematics::Vector3Tools<Real>::TwistZAxes(const Vector3Type& vector, Function function)
 {
     if (function != nullptr)
     {
         const auto delta = function(vector.GetZ());
 
-        return Vector3{ vector.GetX() * Math::Cos(delta) - vector.GetY() * Math::Sin(delta),
-                        vector.GetX() * Math::Sin(delta) - vector.GetY() * Math::Cos(delta),
+        return Vector3Type{ vector.GetX() * MathType::Cos(delta) - vector.GetY() * MathType::Sin(delta),
+                        vector.GetX() * MathType::Sin(delta) - vector.GetY() * MathType::Cos(delta),
                         vector.GetZ() };
     }
     else
@@ -203,7 +203,7 @@ typename Mathematics::Vector3Tools<Real>::Vector3 Mathematics::Vector3Tools<Real
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector3Tools<Real>::Vector3 Mathematics::Vector3Tools<Real>::BendYAxes(const Vector3& vector, Real curvatureRadius, Real bendCenter, Real bendAreaMin, Real bendAreaMax) noexcept(gAssert < 1 || gMathematicsAssert < 1)
+typename Mathematics::Vector3Tools<Real>::Vector3Type Mathematics::Vector3Tools<Real>::BendYAxes(const Vector3Type& vector, Real curvatureRadius, Real bendCenter, Real bendAreaMin, Real bendAreaMax) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_ASSERTION_1(bendAreaMin <= bendAreaMax, "bendAreaMin值必须小于或等于bendAreaMax！");
 
@@ -216,26 +216,26 @@ typename Mathematics::Vector3Tools<Real>::Vector3 Mathematics::Vector3Tools<Real
 
     const auto delta = 1 / curvatureRadius * (y - bendCenter);
 
-    Vector3 bendVector{};
+    Vector3Type bendVector{};
 
     bendVector.SetX(vector.GetX());
 
     if (bendAreaMin <= vector.GetY() && vector.GetY() <= bendAreaMax)
     {
-        bendVector.SetY(-Math::Sin(delta) * (vector.GetZ() - curvatureRadius) + bendCenter);
-        bendVector.SetZ(-Math::Cos(delta) * (vector.GetZ() - curvatureRadius) + bendCenter);
+        bendVector.SetY(-MathType::Sin(delta) * (vector.GetZ() - curvatureRadius) + bendCenter);
+        bendVector.SetZ(-MathType::Cos(delta) * (vector.GetZ() - curvatureRadius) + bendCenter);
     }
     else if (vector.GetY() < bendAreaMin)
     {
-        bendVector.SetY(-Math::Sin(delta) * (vector.GetZ() - curvatureRadius) + bendCenter + Math::Cos(delta) * (vector.GetY() - bendAreaMin));
+        bendVector.SetY(-MathType::Sin(delta) * (vector.GetZ() - curvatureRadius) + bendCenter + MathType::Cos(delta) * (vector.GetY() - bendAreaMin));
 
-        bendVector.SetZ(-Math::Cos(delta) * (vector.GetZ() - curvatureRadius) + bendCenter + Math::Sin(delta) * (vector.GetY() - bendAreaMin));
+        bendVector.SetZ(-MathType::Cos(delta) * (vector.GetZ() - curvatureRadius) + bendCenter + MathType::Sin(delta) * (vector.GetY() - bendAreaMin));
     }
     else if (bendAreaMax < vector.GetY())
     {
-        bendVector.SetY(-Math::Sin(delta) * (vector.GetZ() - curvatureRadius) + curvatureRadius + Math::Cos(delta) * (vector.GetY() - bendAreaMax));
+        bendVector.SetY(-MathType::Sin(delta) * (vector.GetZ() - curvatureRadius) + curvatureRadius + MathType::Cos(delta) * (vector.GetY() - bendAreaMax));
 
-        bendVector.SetZ(-Math::Cos(delta) * (vector.GetZ() - curvatureRadius) + curvatureRadius + Math::Sin(delta) * (vector.GetY() - bendAreaMax));
+        bendVector.SetZ(-MathType::Cos(delta) * (vector.GetZ() - curvatureRadius) + curvatureRadius + MathType::Sin(delta) * (vector.GetY() - bendAreaMax));
     }
 
     return bendVector;
@@ -243,28 +243,28 @@ typename Mathematics::Vector3Tools<Real>::Vector3 Mathematics::Vector3Tools<Real
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::Vector3Tools<Real>::ScalarTripleProduct(const Vector3& vector0, const Vector3& vector1, const Vector3& vector2) noexcept
+Real Mathematics::Vector3Tools<Real>::ScalarTripleProduct(const Vector3Type& vector0, const Vector3Type& vector1, const Vector3Type& vector2) noexcept
 {
     return DotProduct(CrossProduct(vector0, vector1), vector2);
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Real Mathematics::Vector3Tools<Real>::GetVectorIncludedAngle(const Vector3& lhs, const Vector3& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3)
+Real Mathematics::Vector3Tools<Real>::GetVectorIncludedAngle(const Vector3Type& lhs, const Vector3Type& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    return Math::ACos(DotProduct(lhs, rhs) / (GetLength(lhs) * GetLength(rhs)));
+    return MathType::ACos(DotProduct(lhs, rhs) / (GetLength(lhs) * GetLength(rhs)));
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
 typename Mathematics::Vector3Tools<Real>::AxesAlignBoundingBox3D Mathematics::Vector3Tools<Real>::ComputeExtremes(const ContainerType& vectors)
 {
-    Vector3 min{ Math::maxReal, Math::maxReal, Math::maxReal };
-    Vector3 max{ Math::minReal, Math::minReal, Math::minReal };
+    Vector3Type min{ MathType::maxReal, MathType::maxReal, MathType::maxReal };
+    Vector3Type max{ MathType::minReal, MathType::minReal, MathType::minReal };
 
     for (const auto& eachVector : vectors)
     {
-        for (auto i = 0; i < Vector3::pointSize; ++i)
+        for (auto i = 0; i < Vector3Type::pointSize; ++i)
         {
             if (eachVector[i] < min[i])
             {
@@ -283,7 +283,7 @@ typename Mathematics::Vector3Tools<Real>::AxesAlignBoundingBox3D Mathematics::Ve
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector3Tools<Real>::Vector3Orthonormalize Mathematics::Vector3Tools<Real>::Orthonormalize(const Vector3& uVector, const Vector3& vVector, const Vector3& wVector, const Real epsilon)
+typename Mathematics::Vector3Tools<Real>::Vector3OrthonormalizeType Mathematics::Vector3Tools<Real>::Orthonormalize(const Vector3Type& uVector, const Vector3Type& vVector, const Vector3Type& wVector, const Real epsilon)
 {
     /// 如果输入向量v0、v1和v2，则Gram-Schmidt正交向量产生矢量u0、u1和u2如下，
     ///   u0 = v0 / |v0|
@@ -293,57 +293,57 @@ typename Mathematics::Vector3Tools<Real>::Vector3Orthonormalize Mathematics::Vec
     ///
     /// 其中|A|表示向量A的长度和A * B表示向量A和B的点积
 
-    return Vector3Orthonormalize{ uVector, vVector, wVector, epsilon };
+    return Vector3OrthonormalizeType{ uVector, vVector, wVector, epsilon };
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector3Tools<Real>::Vector3Orthonormalize Mathematics::Vector3Tools<Real>::Orthonormalize(const ContainerType& vectors, Real epsilon)
+typename Mathematics::Vector3Tools<Real>::Vector3OrthonormalizeType Mathematics::Vector3Tools<Real>::Orthonormalize(const ContainerType& vectors, Real epsilon)
 {
     MATHEMATICS_ASSERTION_0(vectors.size() == 3, "vectors的大小错误！");
 
-    return Vector3Orthonormalize{ vectors, epsilon };
+    return Vector3OrthonormalizeType{ vectors, epsilon };
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector3Tools<Real>::Vector3OrthonormalBasis Mathematics::Vector3Tools<Real>::GenerateOrthonormalBasis(const Vector3& nonzeroVector, Real epsilon)
+typename Mathematics::Vector3Tools<Real>::Vector3OrthonormalBasisType Mathematics::Vector3Tools<Real>::GenerateOrthonormalBasis(const Vector3Type& nonzeroVector, Real epsilon)
 {
     MATHEMATICS_ASSERTION_0(!nonzeroVector.IsZero(epsilon), "输入必须是非零向量！");
 
-    return Vector3OrthonormalBasis{ nonzeroVector, false, epsilon };
+    return Vector3OrthonormalBasisType{ nonzeroVector, false, epsilon };
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector3Tools<Real>::Vector3OrthonormalBasis Mathematics::Vector3Tools<Real>::GenerateComplementBasis(const Vector3& unitVector, Real epsilon)
+typename Mathematics::Vector3Tools<Real>::Vector3OrthonormalBasisType Mathematics::Vector3Tools<Real>::GenerateComplementBasis(const Vector3Type& unitVector, Real epsilon)
 {
     MATHEMATICS_ASSERTION_0(unitVector.IsNormalize(epsilon), "输入必须是单位向量！");
 
-    return Vector3OrthonormalBasis{ unitVector, true, epsilon };
+    return Vector3OrthonormalBasisType{ unitVector, true, epsilon };
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Vector4<Real> Mathematics::Vector3Tools<Real>::LiftHomogeneous(const Vector3& vector, Real last) noexcept
+Mathematics::Vector4<Real> Mathematics::Vector3Tools<Real>::LiftHomogeneous(const Vector3Type& vector, Real last) noexcept
 {
-    return Vector4{ vector.GetX(), vector.GetY(), vector.GetZ(), last };
+    return Vector4Type{ vector.GetX(), vector.GetY(), vector.GetZ(), last };
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Vector4<Real> Mathematics::Vector3Tools<Real>::Lift(const Vector3& vector, int inject, Real value)
+Mathematics::Vector4<Real> Mathematics::Vector3Tools<Real>::Lift(const Vector3Type& vector, int inject, Real value)
 {
-    Vector4 result{};
+    Vector4Type result{};
 
     auto i = 0;
-    for (; i < inject && i < Vector3::pointSize; ++i)
+    for (; i < inject && i < Vector3Type::pointSize; ++i)
     {
         result[i] = vector[i];
     }
     result[i] = value;
 
-    for (; i < Vector4::pointSize; ++i)
+    for (; i < Vector4Type::pointSize; ++i)
     {
         result[i + 1] = vector[i];
     }
@@ -353,20 +353,20 @@ Mathematics::Vector4<Real> Mathematics::Vector3Tools<Real>::Lift(const Vector3& 
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Vector2<Real> Mathematics::Vector3Tools<Real>::ProjectHomogeneous(const Vector3& vector) noexcept
+Mathematics::Vector2<Real> Mathematics::Vector3Tools<Real>::ProjectHomogeneous(const Vector3Type& vector) noexcept
 {
-    return Vector2{ vector.GetX(), vector.GetY() };
+    return Vector2Type{ vector.GetX(), vector.GetY() };
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::Vector2<Real> Mathematics::Vector3Tools<Real>::Project(const Vector3& vector, int reject)
+Mathematics::Vector2<Real> Mathematics::Vector3Tools<Real>::Project(const Vector3Type& vector, int reject)
 {
-    Vector2 result{};
+    Vector2Type result{};
 
     auto i = 0;
     auto j = 0;
-    while (i < Vector2::pointSize)
+    while (i < Vector2Type::pointSize)
     {
         if (j == reject)
         {
@@ -384,7 +384,7 @@ Mathematics::Vector2<Real> Mathematics::Vector3Tools<Real>::Project(const Vector
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::Vector3Tools<Real>::Vector3Orthonormalize Mathematics::Vector3Tools<Real>::ComputeOrthogonalComplement(int numInputs, const ArrayType& vector)
+typename Mathematics::Vector3Tools<Real>::Vector3OrthonormalizeType Mathematics::Vector3Tools<Real>::ComputeOrthogonalComplement(int numInputs, const ArrayType& vector)
 {
     auto uVector = vector.at(0);
     auto vVector = vector.at(1);
@@ -392,7 +392,7 @@ typename Mathematics::Vector3Tools<Real>::Vector3Orthonormalize Mathematics::Vec
 
     if (numInputs == 1)
     {
-        if (Math::FAbs(uVector[0]) > Math::FAbs(uVector[1]))
+        if (MathType::FAbs(uVector[0]) > MathType::FAbs(uVector[1]))
         {
             vVector = { -uVector[2], Real{}, +uVector[0] };
         }

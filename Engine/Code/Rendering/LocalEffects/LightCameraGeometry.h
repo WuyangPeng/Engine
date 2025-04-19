@@ -26,7 +26,7 @@ namespace Rendering
     public:
         COPY_UNSHARED_TYPE_DECLARE(LightCameraGeometry);
 
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
         using BufferTarget = CoreTools::BufferTarget;
         using BufferSource = CoreTools::BufferSource;
         using LightCameraGeometrySharedPtr = std::shared_ptr<ClassType>;
@@ -40,22 +40,22 @@ namespace Rendering
         void Save(BufferTarget& target) const;
         void Load(BufferSource& source);
 
-        NODISCARD Colour GetLightModelPosition() const noexcept;
-        void SetLightModelPosition(const Colour& lightModelPosition) noexcept;
-        NODISCARD Colour GetLightModelDirection() const noexcept;
-        void SetLightModelDirection(const Colour& lightModelDirection) noexcept;
-        NODISCARD Colour GetLightModelUp() const noexcept;
-        void SetLightModelUp(const Colour& lightModelUp) noexcept;
-        NODISCARD Colour GetLightModelRight() const noexcept;
-        void SetLightModelRight(const Colour& lightModelRight) noexcept;
-        NODISCARD Colour GetCameraModelPosition() const noexcept;
-        void SetCameraModelPosition(const Colour& cameraModelPosition) noexcept;
-        NODISCARD Colour GetCameraModelDirection() const noexcept;
-        void SetCameraModelDirection(const Colour& cameraModelDirection) noexcept;
-        NODISCARD Colour GetCameraModelUp() const noexcept;
-        void SetCameraModelUp(const Colour& cameraModelUp) noexcept;
-        NODISCARD Colour GetCameraModelRight() const noexcept;
-        void SetCameraModelRight(const Colour& cameraModelRight) noexcept;
+        NODISCARD ColourType GetLightModelPosition() const noexcept;
+        void SetLightModelPosition(const ColourType& lightModelPosition) noexcept;
+        NODISCARD ColourType GetLightModelDirection() const noexcept;
+        void SetLightModelDirection(const ColourType& lightModelDirection) noexcept;
+        NODISCARD ColourType GetLightModelUp() const noexcept;
+        void SetLightModelUp(const ColourType& lightModelUp) noexcept;
+        NODISCARD ColourType GetLightModelRight() const noexcept;
+        void SetLightModelRight(const ColourType& lightModelRight) noexcept;
+        NODISCARD ColourType GetCameraModelPosition() const noexcept;
+        void SetCameraModelPosition(const ColourType& cameraModelPosition) noexcept;
+        NODISCARD ColourType GetCameraModelDirection() const noexcept;
+        void SetCameraModelDirection(const ColourType& cameraModelDirection) noexcept;
+        NODISCARD ColourType GetCameraModelUp() const noexcept;
+        void SetCameraModelUp(const ColourType& cameraModelUp) noexcept;
+        NODISCARD ColourType GetCameraModelRight() const noexcept;
+        void SetCameraModelRight(const ColourType& cameraModelRight) noexcept;
 
     private:
         enum class LightCameraGeometryCreate

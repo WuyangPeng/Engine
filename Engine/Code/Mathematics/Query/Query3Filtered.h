@@ -24,8 +24,8 @@ namespace Mathematics
         using ClassType = Query3Filtered<Real>;
         using ParentType = Query3<Real>;
 
-        using Math = typename ParentType::Math;
-        using Vector3 = typename ParentType::Vector3;
+        using MathType = typename ParentType::MathType;
+        using Vector3 = typename ParentType::Vector3Type;
         using VerticesType = typename ParentType::VerticesType;
 
     public:
@@ -50,10 +50,10 @@ namespace Mathematics
         NODISCARD CircumsphereQueryType ToCircumsphere(const Vector3& testVector, int v0, int v1, int v2, int v3) const override;
 
     private:
-        using Query3Rational = Query3Rational<Real>;
+        using Query3RationalType = Query3Rational<Real>;
 
     private:
-        Query3Rational rationalQuery;
+        Query3RationalType rationalQuery;
         Real uncertainty;
     };
 

@@ -29,7 +29,7 @@ namespace Rendering
         using ParentType = VisualEffect;
         using ProgramFactorySharedPtr = std::shared_ptr<ProgramFactory>;
         using Texture2DSharedPtr = std::shared_ptr<Texture2D>;
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
 
     public:
         TextEffect(ProgramFactory& factory, const std::string& shaderExtendName, const Texture2DSharedPtr& texture);
@@ -48,7 +48,7 @@ namespace Rendering
 
         void SetTranslate(float x, float y);
         void SetNormalizedZ(float z);
-        void SetColor(const Colour& aColor);
+        void SetColor(const ColourType& aColor);
 
     private:
         PackageType impl;

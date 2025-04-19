@@ -69,10 +69,14 @@ bool System::ThreadTokenTesting::RandomShuffleFlags()
 
 void System::ThreadTokenTesting::ThreadTest()
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     const auto mutexHandle = CreateSystemMutex(nullptr, false, nullptr);
     ASSERT_NOT_THROW_EXCEPTION_1(DoThreadTest, mutexHandle);
 
     ASSERT_NOT_THROW_EXCEPTION_1(CloseMutexTest, mutexHandle);
+
+#endif  // !SYSTEM_PLATFORM_WIN32
 }
 
 void System::ThreadTokenTesting::TokenTest(ThreadHandle threadHandle, TokenStandardAccess tokenStandardAccess, TokenSpecificAccess tokenSpecificAccess)
@@ -99,6 +103,8 @@ System::WindowsDWord System::ThreadTokenTesting::ThreadStartRoutine(void* thread
 
 void System::ThreadTokenTesting::DoThreadTest(ThreadHandle mutexHandle)
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     ASSERT_TRUE(IsSystemMutexValid(mutexHandle));
 
     ASSERT_TRUE(WaitForSystemMutex(mutexHandle));
@@ -111,10 +117,14 @@ void System::ThreadTokenTesting::DoThreadTest(ThreadHandle mutexHandle)
     ASSERT_NOT_THROW_EXCEPTION_3(TokenThreadTest, threadHandle, threadId, mutexHandle);
 
     ASSERT_NOT_THROW_EXCEPTION_1(CloseThreadTest, threadHandle);
+
+#endif  // !SYSTEM_PLATFORM_WIN32
 }
 
 void System::ThreadTokenTesting::TokenThreadTest(ThreadHandle threadHandle, WindowsDWord threadId, ThreadHandle mutexHandle)
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     ASSERT_TRUE(IsThreadHandleValid(threadHandle));
     ASSERT_LESS(0u, threadId);
 
@@ -125,6 +135,8 @@ void System::ThreadTokenTesting::TokenThreadTest(ThreadHandle threadHandle, Wind
 
     ASSERT_TRUE(ReleaseSystemMutex(mutexHandle));
     ASSERT_TRUE(WaitForSystemThread(threadHandle));
+
+#endif  // !SYSTEM_PLATFORM_WIN32
 }
 
 void System::ThreadTokenTesting::DoTokenThreadTest(size_t index, ThreadHandle threadHandle)

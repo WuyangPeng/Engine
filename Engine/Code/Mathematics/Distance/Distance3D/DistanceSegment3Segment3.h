@@ -24,38 +24,38 @@ namespace Mathematics
     {
     public:
         using ClassType = DistanceSegment3Segment3<Real>;
-        using Vector3 = Vector3<Real>;
-        using ParentType = DistanceBase<Real, Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3Type>;
 
-        using Segment3 = Segment3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using DistanceLine3Line3Tool = DistanceLine3Line3Tool<Real>;
-        using Math = typename ParentType::Math;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using Segment3Type = Segment3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using DistanceLine3Line3ToolType = DistanceLine3Line3Tool<Real>;
+        using MathType = typename ParentType::MathType;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistanceSegment3Segment3(const Segment3& lhsSegment, const Segment3& rhsSegment) noexcept;
+        DistanceSegment3Segment3(const Segment3Type& lhsSegment, const Segment3Type& rhsSegment) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Segment3 GetLhsSegment() const noexcept;
-        NODISCARD Segment3 GetRhsSegment() const noexcept;
+        NODISCARD Segment3Type GetLhsSegment() const noexcept;
+        NODISCARD Segment3Type GetRhsSegment() const noexcept;
 
         // æ≤Ã¨æ‡¿Î≤È—Ø°£
         NODISCARD DistanceResult GetSquared() const override;
 
         // ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£
-        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
     private:
-        NODISCARD DistanceResult GetSquaredWithClosestPointsIsLhsSide(const DistanceLine3Line3Tool& tool, Real lhsExtent, Real rhsExtent) const;
-        NODISCARD DistanceResult GetSquaredWithClosestPointsIsRhsSide(const DistanceLine3Line3Tool& tool, Real lhsExtent, Real rhsExtent) const;
-        NODISCARD DistanceResult GetSquaredWithClosestPointsIsLhsCorner(const DistanceLine3Line3Tool& tool, Real lhsExtent, Real rhsExtent) const;
-        NODISCARD DistanceResult GetSquaredWithClosestPointsIsRhsCorner(const DistanceLine3Line3Tool& tool, Real lhsExtent, Real rhsExtent) const;
+        NODISCARD DistanceResult GetSquaredWithClosestPointsIsLhsSide(const DistanceLine3Line3ToolType& tool, Real lhsExtent, Real rhsExtent) const;
+        NODISCARD DistanceResult GetSquaredWithClosestPointsIsRhsSide(const DistanceLine3Line3ToolType& tool, Real lhsExtent, Real rhsExtent) const;
+        NODISCARD DistanceResult GetSquaredWithClosestPointsIsLhsCorner(const DistanceLine3Line3ToolType& tool, Real lhsExtent, Real rhsExtent) const;
+        NODISCARD DistanceResult GetSquaredWithClosestPointsIsRhsCorner(const DistanceLine3Line3ToolType& tool, Real lhsExtent, Real rhsExtent) const;
 
     private:
-        Segment3 lhsSegment;
-        Segment3 rhsSegment;
+        Segment3Type lhsSegment;
+        Segment3Type rhsSegment;
     };
 
     using DistanceSegment3Segment3F = DistanceSegment3Segment3<float>;

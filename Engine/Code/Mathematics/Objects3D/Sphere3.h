@@ -26,23 +26,23 @@ namespace Mathematics
 
         using ClassType = Sphere3<Real>;
 
-        using Math = Math<Real>;
-        using Vector3 = Vector3<Real>;
+        using MathType = Math<Real>;
+        using Vector3Type = Vector3<Real>;
 
     public:
         // 球体被表示为|X-C| = Real，其中C为中心，Real为半径。
-        Sphere3(const Vector3& center, Real radius) noexcept;
+        Sphere3(const Vector3Type& center, Real radius) noexcept;
         Sphere3() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector3 GetCenter() const noexcept;
+        NODISCARD Vector3Type GetCenter() const noexcept;
         NODISCARD Real GetRadius() const noexcept;
 
-        void SetSphere(const Vector3& aCenter, Real aRadius) noexcept;
+        void SetSphere(const Vector3Type& aCenter, Real aRadius) noexcept;
 
     private:
-        Vector3 center;
+        Vector3Type center;
         Real radius;
     };
 

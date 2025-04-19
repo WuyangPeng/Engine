@@ -70,72 +70,72 @@ void Mathematics::TransformMatrix<Real>::MakeUnitScale()
 }
 
 template <typename Real>
-void Mathematics::TransformMatrix<Real>::Modification(const APoint& translate) noexcept
+void Mathematics::TransformMatrix<Real>::Modification(const APointType& translate) noexcept
 {
     /// 对于仿射变换，transformMatrix的最后一行总是(0,0,0,1)，
     /// 因此在构造函数中设置一次。没有必要在此处重置它。
 
 #if defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
-    transformMatrix.SetValue<0, 3>(translate.GetX());
-    transformMatrix.SetValue<1, 3>(translate.GetY());
-    transformMatrix.SetValue<2, 3>(translate.GetZ());
+    transformMatrix.template SetValue<0, 3>(translate.GetX());
+    transformMatrix.template SetValue<1, 3>(translate.GetY());
+    transformMatrix.template SetValue<2, 3>(translate.GetZ());
 
 #else  // !defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
-    transformMatrix.SetValue<3, 0>(translate.GetX());
-    transformMatrix.SetValue<3, 1>(translate.GetY());
-    transformMatrix.SetValue<3, 2>(translate.GetZ());
+    transformMatrix.template SetValue<3, 0>(translate.GetX());
+    transformMatrix.template SetValue<3, 1>(translate.GetY());
+    transformMatrix.template SetValue<3, 2>(translate.GetZ());
 
 #endif  // defined(MATHEMATICS_USE_MATRIX_VECTOR)
 }
 
 template <typename Real>
-void Mathematics::TransformMatrix<Real>::Modification(const Matrix& matrix) noexcept
+void Mathematics::TransformMatrix<Real>::Modification(const MatrixType& matrix) noexcept
 {
-    transformMatrix.SetValue<0, 0>(matrix.template GetValue<0, 0>());
-    transformMatrix.SetValue<0, 1>(matrix.template GetValue<0, 1>());
-    transformMatrix.SetValue<0, 2>(matrix.template GetValue<0, 2>());
+    transformMatrix.template SetValue<0, 0>(matrix.template GetValue<0, 0>());
+    transformMatrix.template SetValue<0, 1>(matrix.template GetValue<0, 1>());
+    transformMatrix.template SetValue<0, 2>(matrix.template GetValue<0, 2>());
 
-    transformMatrix.SetValue<1, 0>(matrix.template GetValue<1, 0>());
-    transformMatrix.SetValue<1, 1>(matrix.template GetValue<1, 1>());
-    transformMatrix.SetValue<1, 2>(matrix.template GetValue<1, 2>());
+    transformMatrix.template SetValue<1, 0>(matrix.template GetValue<1, 0>());
+    transformMatrix.template SetValue<1, 1>(matrix.template GetValue<1, 1>());
+    transformMatrix.template SetValue<1, 2>(matrix.template GetValue<1, 2>());
 
-    transformMatrix.SetValue<2, 0>(matrix.template GetValue<2, 0>());
-    transformMatrix.SetValue<2, 1>(matrix.template GetValue<2, 1>());
-    transformMatrix.SetValue<2, 2>(matrix.template GetValue<2, 2>());
+    transformMatrix.template SetValue<2, 0>(matrix.template GetValue<2, 0>());
+    transformMatrix.template SetValue<2, 1>(matrix.template GetValue<2, 1>());
+    transformMatrix.template SetValue<2, 2>(matrix.template GetValue<2, 2>());
 }
 
 template <typename Real>
-void Mathematics::TransformMatrix<Real>::Modification(const Matrix& rotate, const APoint& scale) noexcept
+void Mathematics::TransformMatrix<Real>::Modification(const MatrixType& rotate, const APointType& scale) noexcept
 {
 #if defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
-    transformMatrix.SetValue<0, 0>(rotate.template GetValue<0, 0>() * scale.GetX());
-    transformMatrix.SetValue<0, 1>(rotate.template GetValue<0, 1>() * scale.GetY());
-    transformMatrix.SetValue<0, 2>(rotate.template GetValue<0, 2>() * scale.GetZ());
+    transformMatrix.template SetValue<0, 0>(rotate.template GetValue<0, 0>() * scale.GetX());
+    transformMatrix.template SetValue<0, 1>(rotate.template GetValue<0, 1>() * scale.GetY());
+    transformMatrix.template SetValue<0, 2>(rotate.template GetValue<0, 2>() * scale.GetZ());
 
-    transformMatrix.SetValue<1, 0>(rotate.template GetValue<1, 0>() * scale.GetX());
-    transformMatrix.SetValue<1, 1>(rotate.template GetValue<1, 1>() * scale.GetY());
-    transformMatrix.SetValue<1, 2>(rotate.template GetValue<1, 2>() * scale.GetZ());
+    transformMatrix.template SetValue<1, 0>(rotate.template GetValue<1, 0>() * scale.GetX());
+    transformMatrix.template SetValue<1, 1>(rotate.template GetValue<1, 1>() * scale.GetY());
+    transformMatrix.template SetValue<1, 2>(rotate.template GetValue<1, 2>() * scale.GetZ());
 
-    transformMatrix.SetValue<2, 0>(rotate.template GetValue<2, 0>() * scale.GetX());
-    transformMatrix.SetValue<2, 1>(rotate.template GetValue<2, 1>() * scale.GetY());
-    transformMatrix.SetValue<2, 2>(rotate.template GetValue<2, 2>() * scale.GetZ());
+    transformMatrix.template SetValue<2, 0>(rotate.template GetValue<2, 0>() * scale.GetX());
+    transformMatrix.template SetValue<2, 1>(rotate.template GetValue<2, 1>() * scale.GetY());
+    transformMatrix.template SetValue<2, 2>(rotate.template GetValue<2, 2>() * scale.GetZ());
 
 #else  // !defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
-    transformMatrix.SetValue<0, 0>(scale.GetX() * rotate.template GetValue<0, 0>());
-    transformMatrix.SetValue<0, 1>(scale.GetY() * rotate.template GetValue<0, 1>());
-    transformMatrix.SetValue<0, 2>(scale.GetZ() * rotate.template GetValue<0, 2>());
+    transformMatrix.template SetValue<0, 0>(scale.GetX() * rotate.template GetValue<0, 0>());
+    transformMatrix.template SetValue<0, 1>(scale.GetY() * rotate.template GetValue<0, 1>());
+    transformMatrix.template SetValue<0, 2>(scale.GetZ() * rotate.template GetValue<0, 2>());
 
-    transformMatrix.SetValue<1, 0>(scale.GetX() * rotate.template GetValue<1, 0>());
-    transformMatrix.SetValue<1, 1>(scale.GetY() * rotate.template GetValue<1, 1>());
-    transformMatrix.SetValue<1, 2>(scale.GetZ() * rotate.template GetValue<1, 2>());
+    transformMatrix.template SetValue<1, 0>(scale.GetX() * rotate.template GetValue<1, 0>());
+    transformMatrix.template SetValue<1, 1>(scale.GetY() * rotate.template GetValue<1, 1>());
+    transformMatrix.template SetValue<1, 2>(scale.GetZ() * rotate.template GetValue<1, 2>());
 
-    transformMatrix.SetValue<2, 0>(scale.GetX() * rotate.template GetValue<2, 0>());
-    transformMatrix.SetValue<2, 1>(scale.GetY() * rotate.template GetValue<2, 1>());
-    transformMatrix.SetValue<2, 2>(scale.GetZ() * rotate.template GetValue<2, 2>());
+    transformMatrix.template SetValue<2, 0>(scale.GetX() * rotate.template GetValue<2, 0>());
+    transformMatrix.template SetValue<2, 1>(scale.GetY() * rotate.template GetValue<2, 1>());
+    transformMatrix.template SetValue<2, 2>(scale.GetZ() * rotate.template GetValue<2, 2>());
 
 #endif  // defined(MATHEMATICS_USE_MATRIX_VECTOR)
 }
@@ -165,7 +165,7 @@ bool Mathematics::TransformMatrix<Real>::IsUniformScale() const noexcept
 }
 
 template <typename Real>
-void Mathematics::TransformMatrix<Real>::SetRotate(const Matrix& rotate, const APoint& scale) noexcept
+void Mathematics::TransformMatrix<Real>::SetRotate(const MatrixType& rotate, const APointType& scale) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -177,7 +177,7 @@ void Mathematics::TransformMatrix<Real>::SetRotate(const Matrix& rotate, const A
 }
 
 template <typename Real>
-void Mathematics::TransformMatrix<Real>::SetMatrix(const Matrix& matrix) noexcept
+void Mathematics::TransformMatrix<Real>::SetMatrix(const MatrixType& matrix) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -189,7 +189,7 @@ void Mathematics::TransformMatrix<Real>::SetMatrix(const Matrix& matrix) noexcep
 }
 
 template <typename Real>
-void Mathematics::TransformMatrix<Real>::SetTranslate(const APoint& translate) noexcept
+void Mathematics::TransformMatrix<Real>::SetTranslate(const APointType& translate) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -199,7 +199,7 @@ void Mathematics::TransformMatrix<Real>::SetTranslate(const APoint& translate) n
 }
 
 template <typename Real>
-void Mathematics::TransformMatrix<Real>::SetScale(const Matrix& rotate, const APoint& scale)
+void Mathematics::TransformMatrix<Real>::SetScale(const MatrixType& rotate, const APointType& scale)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
     MATHEMATICS_ASSERTION_0(isRotationOrScaleMatrix, "Matrix不是旋转矩阵。\n");
@@ -211,7 +211,7 @@ void Mathematics::TransformMatrix<Real>::SetScale(const Matrix& rotate, const AP
 }
 
 template <typename Real>
-void Mathematics::TransformMatrix<Real>::SetUniformScale(const Matrix& rotate, Real scale)
+void Mathematics::TransformMatrix<Real>::SetUniformScale(const MatrixType& rotate, Real scale)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
     MATHEMATICS_ASSERTION_0(isRotationOrScaleMatrix, "Matrix不是旋转矩阵。\n");
@@ -219,11 +219,11 @@ void Mathematics::TransformMatrix<Real>::SetUniformScale(const Matrix& rotate, R
     isIdentity = false;
     isUniformScale = true;
 
-    Modification(rotate, APoint{ scale, scale, scale });
+    Modification(rotate, APointType{ scale, scale, scale });
 }
 
 template <typename Real>
-typename Mathematics::TransformMatrix<Real>::Matrix Mathematics::TransformMatrix<Real>::GetMatrix() const noexcept
+typename Mathematics::TransformMatrix<Real>::MatrixType Mathematics::TransformMatrix<Real>::GetMatrix() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

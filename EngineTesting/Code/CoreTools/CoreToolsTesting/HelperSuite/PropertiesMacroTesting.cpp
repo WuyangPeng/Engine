@@ -92,6 +92,8 @@ void CoreTools::PropertiesMacroTesting::PropertiesValue3Test()
 
 void CoreTools::PropertiesMacroTesting::PropertiesValue4Test()
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     Properties properties{};
 
     ASSERT_EQUAL(properties.Value4, 0);
@@ -99,10 +101,14 @@ void CoreTools::PropertiesMacroTesting::PropertiesValue4Test()
     properties.Value4 = 2;
 
     ASSERT_EQUAL(properties.Value4, 2);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 void CoreTools::PropertiesMacroTesting::PropertiesValue5Test()
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     Properties properties{};
 
     auto result = static_cast<std::string>(properties.Value5);
@@ -114,17 +120,25 @@ void CoreTools::PropertiesMacroTesting::PropertiesValue5Test()
 
     result = properties.Value5;
     ASSERT_EQUAL(result, newValue);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 void CoreTools::PropertiesMacroTesting::PropertiesValue6Test()
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     Properties properties{};
 
     ASSERT_TRUE(properties.Value6.empty());
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 void CoreTools::PropertiesMacroTesting::PropertiesValue8Test()
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     Properties properties{};
 
     const auto newValue = "newValue"s;
@@ -132,10 +146,14 @@ void CoreTools::PropertiesMacroTesting::PropertiesValue8Test()
     ASSERT_TRUE(properties.GetValue7().empty());
     properties.Value8 = newValue;
     ASSERT_EQUAL(properties.GetValue7(), newValue);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 void CoreTools::PropertiesMacroTesting::PropertiesValue9Test()
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     Properties properties{};
 
     const auto newValue = "newValue"s;
@@ -143,4 +161,6 @@ void CoreTools::PropertiesMacroTesting::PropertiesValue9Test()
     ASSERT_TRUE(properties.Value9.empty());
     properties.Value9 = newValue;
     ASSERT_EQUAL(properties.Value9, newValue);
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }

@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorSegment3Plane3<Real>::StaticTestIntersectorSegment3Plane3(const Segment3& segment, const Plane3& plane, const Real epsilon) noexcept
+Mathematics::StaticTestIntersectorSegment3Plane3<Real>::StaticTestIntersectorSegment3Plane3(const Segment3Type& segment, const Plane3Type& plane, const Real epsilon) noexcept
     : ParentType{ epsilon }, segment{ segment }, plane{ plane }
 {
     Test();
@@ -57,32 +57,32 @@ void Mathematics::StaticTestIntersectorSegment3Plane3<Real>::Test() noexcept
 {
     const auto p0 = segment.GetBeginPoint();
     auto sdistance0 = plane.DistanceTo(p0);
-    if (Math::FAbs(sdistance0) <= Math::GetZeroTolerance())
+    if (MathType::FAbs(sdistance0) <= MathType::GetZeroTolerance())
     {
-        sdistance0 = Math::GetValue(0);
+        sdistance0 = MathType::GetValue(0);
     }
 
     const auto p1 = segment.GetEndPoint();
     auto sdistance1 = plane.DistanceTo(p1);
-    if (Math::FAbs(sdistance1) <= Math::GetZeroTolerance())
+    if (MathType::FAbs(sdistance1) <= MathType::GetZeroTolerance())
     {
-        sdistance1 = Math::GetValue(0);
+        sdistance1 = MathType::GetValue(0);
     }
 
     auto prod = sdistance0 * sdistance1;
-    if (prod < Math::GetValue(0))
+    if (prod < MathType::GetValue(0))
     {
         this->SetIntersectionType(IntersectionType::Point);
         return;
     }
 
-    if (Math::GetValue(0) < prod)
+    if (MathType::GetValue(0) < prod)
     {
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
-    if (this->GetEpsilon() <= Math::FAbs(sdistance0) || this->GetEpsilon() <= Math::FAbs(sdistance1))
+    if (this->GetEpsilon() <= MathType::FAbs(sdistance0) || this->GetEpsilon() <= MathType::FAbs(sdistance1))
     {
         this->SetIntersectionType(IntersectionType::Point);
         return;

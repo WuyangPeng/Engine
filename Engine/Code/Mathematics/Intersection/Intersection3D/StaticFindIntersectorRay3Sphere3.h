@@ -25,34 +25,34 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorRay3Sphere3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Ray3 = Ray3<Real>;
-        using Sphere3 = Sphere3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Ray3Type = Ray3<Real>;
+        using Sphere3Type = Sphere3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorRay3Sphere3(const Ray3& ray, const Sphere3& sphere, const Real epsilon = Math::GetZeroTolerance());
+        StaticFindIntersectorRay3Sphere3(const Ray3Type& ray, const Sphere3Type& sphere, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Ray3 GetRay() const noexcept;
-        NODISCARD Sphere3 GetSphere() const noexcept;
+        NODISCARD Ray3Type GetRay() const noexcept;
+        NODISCARD Sphere3Type GetSphere() const noexcept;
 
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
         NODISCARD Real GetRayParameter(int index) const;
 
     private:
         void Find();
 
     private:
-        Ray3 ray;
-        Sphere3 sphere;
+        Ray3Type ray;
+        Sphere3Type sphere;
 
         int quantity;
-        Vector3 point0;
-        Vector3 point1;
+        Vector3Type point0;
+        Vector3Type point1;
         Real rayParameter0;
         Real rayParameter1;
     };

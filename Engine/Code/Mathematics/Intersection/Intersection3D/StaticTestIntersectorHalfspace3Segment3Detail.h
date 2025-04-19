@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorHalfspace3Segment3<Real>::StaticTestIntersectorHalfspace3Segment3(const Plane3& halfspace, const Segment3& segment, const Real epsilon) noexcept
+Mathematics::StaticTestIntersectorHalfspace3Segment3<Real>::StaticTestIntersectorHalfspace3Segment3(const Plane3Type& halfspace, const Segment3Type& segment, const Real epsilon) noexcept
     : ParentType{ epsilon }, halfspace{ halfspace }, segment{ segment }
 {
     Test();
@@ -56,7 +56,7 @@ Mathematics::Segment3<Real> Mathematics::StaticTestIntersectorHalfspace3Segment3
 template <typename Real>
 void Mathematics::StaticTestIntersectorHalfspace3Segment3<Real>::Test() noexcept
 {
-    const std::array<Vector3, 2> segmentType{ segment.GetBeginPoint(), segment.GetEndPoint() };
+    const std::array<Vector3Type, 2> segmentType{ segment.GetBeginPoint(), segment.GetEndPoint() };
 
     if (const auto projection = TestIntersectorAxis<Real>::GetProjection(halfspace.GetNormal(), segmentType);
         projection.first <= halfspace.GetConstant())

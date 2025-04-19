@@ -29,11 +29,11 @@ namespace Mathematics
 
         using ClassType = Intersector<Real, Vector>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using VectorType = Vector<Real>;
 
     public:
-        explicit Intersector(Real epsilon = Math::GetZeroTolerance()) noexcept;
+        explicit Intersector(Real epsilon = MathType::GetZeroTolerance()) noexcept;
         virtual ~Intersector() noexcept = 0;
         Intersector(const Intersector& rhs) noexcept = default;
         virtual Intersector& operator=(const Intersector& rhs) noexcept = default;

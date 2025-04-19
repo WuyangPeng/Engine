@@ -24,31 +24,31 @@ namespace Mathematics
     {
     public:
         using ClassType = DistancePoint2Ray2<Real>;
-        using Vector2 = Vector2<Real>;
-        using ParentType = DistanceBase<Real, Vector2>;
+        using Vector2Type = Vector2<Real>;
+        using ParentType = DistanceBase<Real, Vector2Type>;
 
-        using Ray2 = Ray2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
-        using Math = typename ParentType::Math;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using Ray2Type = Ray2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
+        using MathType = typename ParentType::MathType;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistancePoint2Ray2(const Vector2& point, const Ray2& ray) noexcept;
+        DistancePoint2Ray2(const Vector2Type& point, const Ray2Type& ray) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Vector2 GetPoint() const noexcept;
-        NODISCARD Ray2 GetRay() const noexcept;
+        NODISCARD Vector2Type GetPoint() const noexcept;
+        NODISCARD Ray2Type GetRay() const noexcept;
 
         // æ≤Ã¨æ‡¿Î≤È—Ø°£
         NODISCARD DistanceResult GetSquared() const override;
 
         // ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£
-        NODISCARD DistanceResult GetSquared(Real t, const Vector2& lhsVelocity, const Vector2& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector2Type& lhsVelocity, const Vector2Type& rhsVelocity) const override;
 
     private:
-        Vector2 point;
-        Ray2 ray;
+        Vector2Type point;
+        Ray2Type ray;
     };
 
     using DistancePoint2Ray2F = DistancePoint2Ray2<float>;

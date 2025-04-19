@@ -37,7 +37,7 @@ void Mathematics::Algebra::OdeMidpoint<Real, TVector>::Update(Real tIn, const TV
     MATHEMATICS_CLASS_IS_VALID_9;
 
     /// 计算第一步。
-    const auto halfTDelta = Math::GetRational(1, 2) * this->GetTDelta();
+    const auto halfTDelta = MathType::GetRational(1, 2) * this->GetTDelta();
     TVector fVector = this->GetFunction(tIn, xIn);
     TVector xTemp = xIn + halfTDelta * fVector;
 

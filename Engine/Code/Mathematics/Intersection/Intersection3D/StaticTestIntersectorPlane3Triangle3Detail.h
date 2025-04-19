@@ -14,8 +14,8 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorPlane3Triangle3<Real>::StaticTestIntersectorPlane3Triangle3(const Plane3& plane, const Triangle3& triangle, Real epsilon)
-    : ParentType{ Math::GetValue(0) <= epsilon ? epsilon : Math::GetValue(0) }, plane{ plane }, triangle{ triangle }
+Mathematics::StaticTestIntersectorPlane3Triangle3<Real>::StaticTestIntersectorPlane3Triangle3(const Plane3Type& plane, const Triangle3Type& triangle, Real epsilon)
+    : ParentType{ MathType::GetValue(0) <= epsilon ? epsilon : MathType::GetValue(0) }, plane{ plane }, triangle{ triangle }
 {
     Test();
 
@@ -54,12 +54,12 @@ Mathematics::Triangle3<Real> Mathematics::StaticTestIntersectorPlane3Triangle3<R
 template <typename Real>
 void Mathematics::StaticTestIntersectorPlane3Triangle3<Real>::Test()
 {
-    constexpr auto zero = Math::GetValue(0);
+    constexpr auto zero = MathType::GetValue(0);
     std::array<Real, 3> sd{};
     for (auto i = 0; i < 3; ++i)
     {
         sd.at(i) = plane.DistanceTo(triangle.GetVertex(i));
-        if (Math::FAbs(sd.at(i)) <= this->GetEpsilon())
+        if (MathType::FAbs(sd.at(i)) <= this->GetEpsilon())
         {
             sd.at(i) = zero;
         }

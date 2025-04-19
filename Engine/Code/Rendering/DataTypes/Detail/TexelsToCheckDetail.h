@@ -12,7 +12,7 @@
 
 #include "Rendering/RenderingExport.h"
 
-#include "ColourTextureFormatTraits.h"
+#include "Rendering/DataTypes/ColourTextureFormatTraits.h"
 #include "TexelsToCheck.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 

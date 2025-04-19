@@ -25,39 +25,39 @@ namespace Mathematics
         using ClassType = DynamicFindIntersectorPlane3Plane3<Real>;
         using ParentType = DynamicIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Plane3 = Plane3<Real>;
-        using Line3 = Line3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Plane3Type = Plane3<Real>;
+        using Line3Type = Line3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        DynamicFindIntersectorPlane3Plane3(const Plane3& plane0,
-                                           const Plane3& plane1,
+        DynamicFindIntersectorPlane3Plane3(const Plane3Type& plane0,
+                                           const Plane3Type& plane1,
                                            Real tmax,
-                                           const Vector3& lhsVelocity,
-                                           const Vector3& rhsVelocity,
-                                           const Real epsilon = Math::GetZeroTolerance());
+                                           const Vector3Type& lhsVelocity,
+                                           const Vector3Type& rhsVelocity,
+                                           const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Plane3 GetPlane0() const noexcept;
-        NODISCARD Plane3 GetPlane1() const noexcept;
+        NODISCARD Plane3Type GetPlane0() const noexcept;
+        NODISCARD Plane3Type GetPlane1() const noexcept;
 
         /// 有关交集的信息。 仅获取与交点类型（IT_LINE或IT_PLANE）相对应的交点的特定对象。
-        NODISCARD Line3 GetIntersectionLine() const noexcept;
-        NODISCARD Plane3 GetIntersectionPlane() const noexcept;
+        NODISCARD Line3Type GetIntersectionLine() const noexcept;
+        NODISCARD Plane3Type GetIntersectionPlane() const noexcept;
 
     private:
         void Find();
 
     private:
-        Plane3 plane0;
-        Plane3 plane1;
+        Plane3Type plane0;
+        Plane3Type plane1;
 
         // 有关交集的信息。
-        Line3 intersectionLine;
-        Plane3 intersectionPlane;
+        Line3Type intersectionLine;
+        Plane3Type intersectionPlane;
     };
 }
 

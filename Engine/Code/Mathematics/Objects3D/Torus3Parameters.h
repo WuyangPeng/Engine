@@ -26,7 +26,7 @@ namespace Mathematics
 
         using ClassType = Torus3Parameters<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         Torus3Parameters(Real s, Real t) noexcept;

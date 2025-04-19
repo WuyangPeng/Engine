@@ -49,7 +49,7 @@ bool Mathematics::ApproximationGaussian3<Real>::FitIndexed(const ObservationType
         {
             mean += observations.at(currentIndex++);
         }
-        auto invSize = Math::GetValue(1) / boost::numeric_cast<Real>(indices.size());
+        auto invSize = MathType::GetValue(1) / boost::numeric_cast<Real>(indices.size());
         mean *= invSize;
 
         if (std::isfinite(mean[0]) && std::isfinite(mean[1]))

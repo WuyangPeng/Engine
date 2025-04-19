@@ -170,9 +170,9 @@ void Rendering::BumpMapEffectImpl::ComputeLightVectors(const VisualSharedPtr& me
 
             const auto bitangent = Mathematics::Vector3Tools<float>::UnitCrossProduct(normal, tangent);
 
-            const auto dotUT = Vector3Tools::DotProduct(modelLightDirection, tangent);
-            const auto dotUB = Vector3Tools::DotProduct(modelLightDirection, bitangent);
-            const auto dotUN = Vector3Tools::DotProduct(modelLightDirection, normal);
+            const auto dotUT = Vector3ToolsType::DotProduct(modelLightDirection, tangent);
+            const auto dotUB = Vector3ToolsType::DotProduct(modelLightDirection, bitangent);
+            const auto dotUN = Vector3ToolsType::DotProduct(modelLightDirection, normal);
 
             auto data = vertexBuffer->GetStorage(vertexSize * vertex + lightDirectionShifting);
             data.Increase(0.5f * (dotUT + 1.0f));
@@ -196,7 +196,7 @@ bool Rendering::BumpMapEffectImpl::ComputeTangent(const Vector3& position0,
     const auto deltaPosition2 = position2 - position0;
 
     constexpr auto epsilon = Math::GetZeroTolerance();
-    if (Vector3Tools::GetLength(deltaPosition1) <= epsilon || Vector3Tools::GetLength(deltaPosition2) <= epsilon)
+    if (Vector3ToolsType::GetLength(deltaPosition1) <= epsilon || Vector3ToolsType::GetLength(deltaPosition2) <= epsilon)
     {
         return false;
     }

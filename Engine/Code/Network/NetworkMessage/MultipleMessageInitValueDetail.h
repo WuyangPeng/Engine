@@ -15,10 +15,10 @@
 
 template <int Index, typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
 template <typename T, typename... OtherT>
-Network::MultipleMessageInitValue<Index, Network::MultipleMessageContainer<E, ByteType, Types...>>::MultipleMessageInitValue(MultipleMessageContainer& container, T value, OtherT&&... otherValues)
+Network::MultipleMessageInitValue<Index, Network::MultipleMessageContainer<E, ByteType, Types...>>::MultipleMessageInitValue(MultipleMessageContainerType& container, T value, OtherT&&... otherValues)
     : ParentType{ container, std::forward<OtherT>(otherValues)... }
 {
-    container.SetValue<MultipleMessageSize<MultipleMessageContainer>::value - Index>(value);
+    container.template SetValue<MultipleMessageSize<MultipleMessageContainerType>::value - Index>(value);
 
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -35,9 +35,9 @@ bool Network::MultipleMessageInitValue<Index, Network::MultipleMessageContainer<
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
 template <typename T>
-Network::MultipleMessageInitValue<1, Network::MultipleMessageContainer<E, ByteType, Types...>>::MultipleMessageInitValue(MultipleMessageContainer& container, T value)
+Network::MultipleMessageInitValue<1, Network::MultipleMessageContainer<E, ByteType, Types...>>::MultipleMessageInitValue(MultipleMessageContainerType& container, T value)
 {
-    container.SetValue<MultipleMessageSize<MultipleMessageContainer>::value - 1>(value);
+    container.template SetValue<MultipleMessageSize<MultipleMessageContainerType>::value - 1>(value);
 
     NETWORK_SELF_CLASS_IS_VALID_9;
 }

@@ -28,7 +28,7 @@ Mathematics::Bisect1<Real>::Bisect1(Function function, int maxLevel, Real tolera
 template <typename Real>
 bool Mathematics::Bisect1<Real>::IsValid() const noexcept
 {
-    if (function != nullptr && 0 < maxLevel && Math::GetValue(0) <= tolerance)
+    if (function != nullptr && 0 < maxLevel && MathType::GetValue(0) <= tolerance)
     {
         return true;
     }
@@ -41,7 +41,7 @@ bool Mathematics::Bisect1<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename Mathematics::Bisect1<Real>::Bisect1Root Mathematics::Bisect1<Real>::Bisect(Real beginPoint, Real endPoint)
+typename Mathematics::Bisect1<Real>::Bisect1RootType Mathematics::Bisect1<Real>::Bisect(Real beginPoint, Real endPoint)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -50,49 +50,49 @@ typename Mathematics::Bisect1<Real>::Bisect1Root Mathematics::Bisect1<Real>::Bis
 
     // 测试两个端点。
     auto beginPointFunctionValue = function(beginPoint);
-    if (Math::FAbs(beginPointFunctionValue) <= tolerance)
+    if (MathType::FAbs(beginPointFunctionValue) <= tolerance)
     {
-        return Bisect1Root{ beginPoint, BisectRootType::HaveSolution };
+        return Bisect1RootType{ beginPoint, BisectRootType::HaveSolution };
     }
 
     auto endPointFunctionValue = function(endPoint);
-    if (Math::FAbs(endPointFunctionValue) <= tolerance)
+    if (MathType::FAbs(endPointFunctionValue) <= tolerance)
     {
-        return Bisect1Root{ endPoint, BisectRootType::HaveSolution };
+        return Bisect1RootType{ endPoint, BisectRootType::HaveSolution };
     }
 
     // 方程无解
-    if (Math::GetValue(0) < beginPointFunctionValue * endPointFunctionValue)
+    if (MathType::GetValue(0) < beginPointFunctionValue * endPointFunctionValue)
     {
-        return Bisect1Root{};
+        return Bisect1RootType{};
     }
 
-    auto middlePoints = Math::GetRational(1, 2) * (beginPoint + endPoint);
+    auto middlePoints = MathType::GetRational(1, 2) * (beginPoint + endPoint);
 
     for (auto level = 0; level < maxLevel; ++level)
     {
         auto middlePointFunctionValue = function(middlePoints);
-        if (Math::FAbs(middlePointFunctionValue) <= tolerance)
+        if (MathType::FAbs(middlePointFunctionValue) <= tolerance)
         {
-            return Bisect1Root{ middlePoints, BisectRootType::HaveSolution };
+            return Bisect1RootType{ middlePoints, BisectRootType::HaveSolution };
         }
 
-        if (beginPointFunctionValue * middlePointFunctionValue < Math::GetValue(0))
+        if (beginPointFunctionValue * middlePointFunctionValue < MathType::GetValue(0))
         {
             endPoint = middlePoints;
             endPointFunctionValue = middlePointFunctionValue;
         }
-        else if (endPointFunctionValue * middlePointFunctionValue < Math::GetValue(0))
+        else if (endPointFunctionValue * middlePointFunctionValue < MathType::GetValue(0))
         {
             beginPoint = middlePoints;
             beginPointFunctionValue = middlePointFunctionValue;
         }
 
-        middlePoints = Math::GetRational(1, 2) * (beginPoint + endPoint);
+        middlePoints = MathType::GetRational(1, 2) * (beginPoint + endPoint);
     }
 
     // 循环超出了次数，返回一个中间值。
-    return Bisect1Root{ middlePoints, BisectRootType::Unknown };
+    return Bisect1RootType{ middlePoints, BisectRootType::Unknown };
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_BISECT1_ACHIEVE_H

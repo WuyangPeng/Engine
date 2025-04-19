@@ -16,7 +16,7 @@
 
 CLASS_INVARIANT_STUB_DEFINE(FrameworkToolset, WindowMessage)
 
-namespace FrameworkToolset
+namespace Framework
 {
     template class Framework::WindowMessage<Framework::MiddleLayerInterface>;
 }

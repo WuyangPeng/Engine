@@ -17,7 +17,7 @@
 #include "Mathematics/NumericalAnalysis/Bisect3Root.h"
 
 template <typename Real>
-Mathematics::Bisect3Storage<Real>::Bisect3Storage(const Bisect3& bisect) noexcept
+Mathematics::Bisect3Storage<Real>::Bisect3Storage(const Bisect3Type& bisect) noexcept
     : bisect{ bisect },
       beginPointX{},
       endPointX{},
@@ -205,9 +205,9 @@ bool Mathematics::Bisect3Storage<Real>::ZeroTest(Real x, Real y, Real z, Bisect3
 
     SetStorageValue(value0, value1, value2, type);
 
-    if (Math::FAbs(value0) <= bisect.GetTolerance() && Math::FAbs(value1) <= bisect.GetTolerance() && Math::FAbs(value2) <= bisect.GetTolerance())
+    if (MathType::FAbs(value0) <= bisect.GetTolerance() && MathType::FAbs(value1) <= bisect.GetTolerance() && MathType::FAbs(value2) <= bisect.GetTolerance())
     {
-        bisect3Root = std::make_shared<Bisect3Root>(x, y, z, BisectRootType::HaveSolution);
+        bisect3Root = std::make_shared<Bisect3RootType>(x, y, z, BisectRootType::HaveSolution);
 
         return true;
     }
@@ -1160,9 +1160,9 @@ void Mathematics::Bisect3Storage<Real>::SetStorageValue(const Bisect3NodeSharedP
     endPointX = endNode->GetX();
     endPointY = endNode->GetY();
     endPointZ = endNode->GetZ();
-    midpointX = (Math::GetRational(1, 2) * (beginPointX + endPointX));
-    midpointY = (Math::GetRational(1, 2) * (beginPointY + endPointY));
-    midpointZ = (Math::GetRational(1, 2) * (beginPointZ + endPointZ));
+    midpointX = (MathType::GetRational(1, 2) * (beginPointX + endPointX));
+    midpointY = (MathType::GetRational(1, 2) * (beginPointY + endPointY));
+    midpointZ = (MathType::GetRational(1, 2) * (beginPointZ + endPointZ));
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_STORAGE_DETAIL_H

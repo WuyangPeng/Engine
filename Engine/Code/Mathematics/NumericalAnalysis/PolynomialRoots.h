@@ -47,11 +47,11 @@ namespace Mathematics
 
         using ClassType = PolynomialRoots<Real>;
 
-        using Math = Math<Real>;
-        using Vector3 = Vector3<Real>;
-        using Polynomial = Polynomial<Real>;
-        using VariableMatrix = VariableMatrix<Real>;
-        using VariableLengthVector = VariableLengthVector<Real>;
+        using MathType = Math<Real>;
+        using Vector3Type = Vector3<Real>;
+        using PolynomialType = Polynomial<Real>;
+        using VariableMatrixType = VariableMatrix<Real>;
+        using VariableLengthVectorType = VariableLengthVector<Real>;
         using Container = std::vector<Real>;
         using ContainerConstIter = typename Container::const_iterator;
 
@@ -95,52 +95,52 @@ namespace Mathematics
         NODISCARD Real GetBound(Real constant, Real once, Real secondary, Real thrice, Real quartic);
 
         // 一般方程: sum_{i=0}^{degree} c(i) * x^i = 0
-        NODISCARD bool FindBisection(const Polynomial& polynomial, int digits);
-        NODISCARD Real GetBound(const Polynomial& polynomial);
+        NODISCARD bool FindBisection(const PolynomialType& polynomial, int digits);
+        NODISCARD Real GetBound(const PolynomialType& polynomial);
 
         // 查找要在指定的间隔。
-        NODISCARD bool FindBisection(const Polynomial& polynomial, Real xMin, Real xMax, int digits);
+        NODISCARD bool FindBisection(const PolynomialType& polynomial, Real xMin, Real xMax, int digits);
 
-        NODISCARD bool AllRealPartsNegative(const Polynomial& polynomial);
-        NODISCARD bool AllRealPartsPositive(const Polynomial& polynomial);
+        NODISCARD bool AllRealPartsNegative(const PolynomialType& polynomial);
+        NODISCARD bool AllRealPartsPositive(const PolynomialType& polynomial);
 
         // 计算[begin,end]中根的数目。
-        // 利用Sturm序列做计数。它允许通过在 -Math<Real>::sm_MaxReal或 end = Math<Real>::sm_MaxReal。
+        // 利用Sturm序列做计数。它允许通过在 -MathType<Real>::sm_MaxReal或 end = MathType<Real>::sm_MaxReal。
         // m_Epsilon的值被用作在终点上的Sturm多项式的值的阈值。
         // 如果更小，则该值被假设为零。返回值是根数。如果有无穷多个，则返回-1。
-        NODISCARD int GetRootCount(const Polynomial& polynomial, Real begin, Real end);
+        NODISCARD int GetRootCount(const PolynomialType& polynomial, Real begin, Real end);
 
     private:
-        void BalanceCompanion3(VariableMatrix& matrix, Real tolerance);
+        void BalanceCompanion3(VariableMatrixType& matrix, Real tolerance);
 
         NODISCARD bool IsBalancedCompanion3(Real a10, Real a21, Real a02, Real a12, Real a22, Real tolerance) noexcept;
 
-        NODISCARD bool QRIteration3(VariableMatrix& matrix);
+        NODISCARD bool QRIteration3(VariableMatrixType& matrix);
 
-        void FrancisQRStep(VariableMatrix& hessenbergMatrix, VariableLengthVector& vector);
+        void FrancisQRStep(VariableMatrixType& hessenbergMatrix, VariableLengthVectorType& vector);
 
         // 支持FindE.
-        NODISCARD Vector3 GetHouseholderVector(int size, const Vector3& uVector);
+        NODISCARD Vector3Type GetHouseholderVector(int size, const Vector3Type& uVector);
 
-        void PremultiplyHouseholder(VariableMatrix& mat,
-                                    VariableLengthVector& variableLengthVector,
+        void PremultiplyHouseholder(VariableMatrixType& mat,
+                                    VariableLengthVectorType& variableLengthVector,
                                     int rowMin,
                                     int rowMax,
                                     int columnMin,
                                     int columnMax,
                                     int vSize,
-                                    const Vector3& vVector);
+                                    const Vector3Type& vVector);
 
-        void PostmultiplyHouseholder(VariableMatrix& mat,
-                                     VariableLengthVector& variableLengthVector,
+        void PostmultiplyHouseholder(VariableMatrixType& mat,
+                                     VariableLengthVectorType& variableLengthVector,
                                      int rowMin,
                                      int rowMax,
                                      int columnMin,
                                      int columnMax,
                                      int vSize,
-                                     const Vector3& vVector);
+                                     const Vector3Type& vVector);
 
-        void BalanceCompanion4(VariableMatrix& matrix, Real tolerance);
+        void BalanceCompanion4(VariableMatrixType& matrix, Real tolerance);
         NODISCARD bool IsBalancedCompanion4(Real a10,
                                             Real a21,
                                             Real a32,
@@ -149,20 +149,20 @@ namespace Mathematics
                                             Real a23,
                                             Real a33,
                                             Real tolerance) noexcept;
-        NODISCARD bool QRIteration4(VariableMatrix& matrix);
+        NODISCARD bool QRIteration4(VariableMatrixType& matrix);
 
         // 支持 FindB.
-        NODISCARD bool Bisection(const Polynomial& polynomial, Real xMin, Real xMax, int digits, Real& root) noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD bool Bisection(const PolynomialType& polynomial, Real xMin, Real xMax, int digits, Real& root) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 支持测试，如果所有根具有负实部。
         NODISCARD bool AllRealPartsNegative(int degree, Container& coeff);
 
-        void Balance3(VariableMatrix& matrix, Real tolerance);
-        NODISCARD bool IsBalanced3(VariableMatrix& matrix, Real tolerance);
-        NODISCARD Real GetRowNorm(int row, VariableMatrix& matrix);
-        NODISCARD Real GetColumnNorm(int column, VariableMatrix& matrix);
-        void ScaleRow(int row, Real scale, VariableMatrix& matrix);
-        void ScaleColumn(int column, Real scale, VariableMatrix& matrix);
+        void Balance3(VariableMatrixType& matrix, Real tolerance);
+        NODISCARD bool IsBalanced3(VariableMatrixType& matrix, Real tolerance);
+        NODISCARD Real GetRowNorm(int row, VariableMatrixType& matrix);
+        NODISCARD Real GetColumnNorm(int column, VariableMatrixType& matrix);
+        void ScaleRow(int row, Real scale, VariableMatrixType& matrix);
+        void ScaleColumn(int column, Real scale, VariableMatrixType& matrix);
 
         void SetRoot(int index, Real value);
 

@@ -18,7 +18,7 @@
 #include "Mathematics/Intersection/Intersection3D/IntersectorConfigurationDetail.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorSegment3Box3<Real>::DynamicFindIntersectorSegment3Box3(const Segment3& segment, const Box3& box, bool solid, Real tMax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorSegment3Box3<Real>::DynamicFindIntersectorSegment3Box3(const Segment3Type& segment, const Box3Type& box, bool solid, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon }, segment{ segment }, box{ box }, solid{ solid }, quantity{}, point0{}, point1{}
 {
     Find();
@@ -60,9 +60,9 @@ void Mathematics::DynamicFindIntersectorSegment3Box3<Real>::Find()
 {
     quantity = 0;
     this->SetIntersectionType(IntersectionType::Empty);
-    this->SetContactTime(Math::GetValue(0));
+    this->SetContactTime(MathType::GetValue(0));
 
-    using SegmentType = std::array<Vector3, 2>;
+    using SegmentType = std::array<Vector3Type, 2>;
 
     // 获取线段的端点。
     const SegmentType segmentType{ segment.GetBeginPoint(), segment.GetEndPoint() };
@@ -98,7 +98,7 @@ void Mathematics::DynamicFindIntersectorSegment3Box3<Real>::Find()
     // 测试线段方向的交叉盒边缘。
     for (auto i = 0; i < 3; i++)
     {
-        const auto axis = Vector3Tools::CrossProduct(box.GetAxis(i), segment.GetDirection());
+        const auto axis = Vector3ToolsType::CrossProduct(box.GetAxis(i), segment.GetDirection());
 
         const FindIntersectorAxis<Real> findIntersectorAxis{ axis, segmentType, box, relVelocity, this->GetTMax() };
         contactTime = findIntersectorAxis.GetTFirst();
@@ -117,7 +117,7 @@ void Mathematics::DynamicFindIntersectorSegment3Box3<Real>::Find()
     /// 测试速度跨箱表面。
     for (auto i = 0; i < 3; i++)
     {
-        const auto axis = Vector3Tools::CrossProduct(relVelocity, box.GetAxis(i));
+        const auto axis = Vector3ToolsType::CrossProduct(relVelocity, box.GetAxis(i));
 
         const FindIntersectorAxis<Real> findIntersectorAxis{ axis, segmentType, box, relVelocity, this->GetTMax() };
         contactTime = findIntersectorAxis.GetTFirst();
@@ -133,7 +133,7 @@ void Mathematics::DynamicFindIntersectorSegment3Box3<Real>::Find()
         }
     }
 
-    if (contactTime < Math::GetValue(0) || side == ContactSide::None)
+    if (contactTime < MathType::GetValue(0) || side == ContactSide::None)
     {
         // 现在相交
         this->SetContactTime(contactTime);

@@ -40,9 +40,9 @@ namespace Mathematics::Algebra
     public:
         using ClassType = Polyhedron3<Real>;
 
-        using Math = Math<Real>;
-        using Vector3 = Vector3<Real>;
-        using VertexPool = std::vector<Vector3>;
+        using MathType = Math<Real>;
+        using Vector3Type = Vector3<Real>;
+        using VertexPool = std::vector<Vector3Type>;
         using ConstVertexPoolSharedPtr = std::shared_ptr<const VertexPool>;
         using ConstVertexPoolWeakPtr = std::weak_ptr<const VertexPool>;
         using UniqueIndices = std::set<int>;
@@ -67,7 +67,7 @@ namespace Mathematics::Algebra
         NODISCARD bool CounterClockwise() const noexcept;
 
         /// 几何查询。
-        NODISCARD Vector3 ComputeVertexAverage() const;
+        NODISCARD Vector3Type ComputeVertexAverage() const;
         NODISCARD Real ComputeSurfaceArea() const;
         NODISCARD Real ComputeVolume() const;
 

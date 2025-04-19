@@ -16,7 +16,7 @@
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::OrientedBox<N, Real>::OrientedBox() noexcept requires(N == 2)
-    : center{}, axis{ Vector{ Math::GetValue(1), Math::GetValue(0) }, Vector{ Math::GetValue(0), Math::GetValue(1) } }, extent{ Math::GetValue(1), Math::GetValue(1) }
+    : center{}, axis{ Vector{ MathType::GetValue(1), MathType::GetValue(0) }, Vector{ MathType::GetValue(0), MathType::GetValue(1) } }, extent{ MathType::GetValue(1), MathType::GetValue(1) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -25,10 +25,10 @@ template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::OrientedBox<N, Real>::OrientedBox() noexcept requires(N == 3)
     : center{},
-      axis{ Vector{ Math::GetValue(1), Math::GetValue(0), Math::GetValue(0) },
-            Vector{ Math::GetValue(0), Math::GetValue(1), Math::GetValue(0) },
-            Vector{ Math::GetValue(0), Math::GetValue(0), Math::GetValue(1) } },
-      extent{ Math::GetValue(1), Math::GetValue(1), Math::GetValue(1) }
+      axis{ Vector{ MathType::GetValue(1), MathType::GetValue(0), MathType::GetValue(0) },
+            Vector{ MathType::GetValue(0), MathType::GetValue(1), MathType::GetValue(0) },
+            Vector{ MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(1) } },
+      extent{ MathType::GetValue(1), MathType::GetValue(1), MathType::GetValue(1) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }

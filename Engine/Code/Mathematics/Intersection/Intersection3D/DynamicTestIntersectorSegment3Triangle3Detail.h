@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::DynamicTestIntersectorSegment3Triangle3<Real>::DynamicTestIntersectorSegment3Triangle3(const Segment3& segment, const Triangle3& triangle, Real tMax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicTestIntersectorSegment3Triangle3<Real>::DynamicTestIntersectorSegment3Triangle3(const Segment3Type& segment, const Triangle3Type& triangle, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon }, segment{ segment }, triangle{ triangle }
 {
     Test();
@@ -56,7 +56,7 @@ template <typename Real>
 void Mathematics::DynamicTestIntersectorSegment3Triangle3<Real>::Test()
 {
     // 获取该段的终点。
-    using SegmentType = std::array<Vector3, 2>;
+    using SegmentType = std::array<Vector3Type, 2>;
     SegmentType segmentType{ segment.GetBeginPoint(), segment.GetEndPoint() };
 
     // 获取三角形的边缘。
@@ -67,7 +67,7 @@ void Mathematics::DynamicTestIntersectorSegment3Triangle3<Real>::Test()
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
     // 测试三角形法线.
-    const auto edgeNormal = Vector3Tools::CrossProduct(edge0, edge1);
+    const auto edgeNormal = Vector3ToolsType::CrossProduct(edge0, edge1);
     const TestIntersectorAxis<Real> intersector{ edgeNormal, segmentType, triangle, relVelocity, this->GetTMax() };
     auto contactTime = intersector.GetTFirst();
 
@@ -81,11 +81,11 @@ void Mathematics::DynamicTestIntersectorSegment3Triangle3<Real>::Test()
     // 测试线段是否平行于三角形，有效地测试： sin(Angle(NormV,DirU)) > 1 - epsilon
     auto directionU = segmentType.at(1) - segmentType.at(0);
 
-    const auto normalU = Vector3Tools::CrossProduct(edgeNormal, directionU);
-    auto directionUSqrLen = Vector3Tools::GetLengthSquared(directionU);
-    auto normalUSqrLen = Vector3Tools::GetLengthSquared(normalU);
-    auto edgeNormalSqrLen = Vector3Tools::GetLengthSquared(edgeNormal);
-    auto oneMinusEpsilon = Math::GetValue(1) - Math::GetZeroTolerance();
+    const auto normalU = Vector3ToolsType::CrossProduct(edgeNormal, directionU);
+    auto directionUSqrLen = Vector3ToolsType::GetLengthSquared(directionU);
+    auto normalUSqrLen = Vector3ToolsType::GetLengthSquared(normalU);
+    auto edgeNormalSqrLen = Vector3ToolsType::GetLengthSquared(edgeNormal);
+    auto oneMinusEpsilon = MathType::GetValue(1) - MathType::GetZeroTolerance();
 
     // 平行
     if (oneMinusEpsilon * edgeNormalSqrLen * directionUSqrLen < normalUSqrLen)
@@ -104,7 +104,7 @@ void Mathematics::DynamicTestIntersectorSegment3Triangle3<Real>::Test()
         //  测试三角形法线横截线段边。
         for (auto i0 = 2, i1 = 0; i1 < 3; i0 = i1++)
         {
-            const auto axis = Vector3Tools::CrossProduct(edgeNormal, (triangle.GetVertex(i1) - triangle.GetVertex(i0)));
+            const auto axis = Vector3ToolsType::CrossProduct(edgeNormal, (triangle.GetVertex(i1) - triangle.GetVertex(i0)));
 
             const TestIntersectorAxis<Real> testIntersectorAxis{ axis, segmentType, triangle, relVelocity, this->GetTMax() };
             contactTime = testIntersectorAxis.GetTFirst();
@@ -122,7 +122,7 @@ void Mathematics::DynamicTestIntersectorSegment3Triangle3<Real>::Test()
         // 测试线段方向横截三角形边。
         for (auto i0 = 2, i1 = 0; i1 < 3; i0 = i1++)
         {
-            const auto axis = Vector3Tools::CrossProduct(directionU, (triangle.GetVertex(i1) - triangle.GetVertex(i0)));
+            const auto axis = Vector3ToolsType::CrossProduct(directionU, (triangle.GetVertex(i1) - triangle.GetVertex(i0)));
 
             const TestIntersectorAxis<Real> testIntersectorAxis{ axis, segmentType, triangle, relVelocity, this->GetTMax() };
             contactTime = testIntersectorAxis.GetTFirst();

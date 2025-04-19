@@ -83,7 +83,7 @@ namespace Mathematics
 
         NODISCARD bool IsClosed() const noexcept;
 
-        NODISCARD void Print(const std::string& filename);
+        void Print(const std::string& filename);
 
     protected:
         NODISCARD static VertexSharedPtr CreateVertex(int v0);

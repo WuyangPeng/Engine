@@ -26,7 +26,7 @@ namespace Mathematics::Algebra
         using ClassType = Vector<N, Real>;
 
         using Container = std::array<Real, N>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         Vector() noexcept;

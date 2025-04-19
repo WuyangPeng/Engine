@@ -29,8 +29,8 @@ namespace Mathematics
     public:
         using ClassType = Polynomial<Real>;
 
-        using PolynomialDivide = PolynomialDivide<Real>;
-        using Math = Math<Real>;
+        using PolynomialDivideType = PolynomialDivide<Real>;
+        using MathType = Math<Real>;
         using ContainerType = std::vector<Real>;
 
     public:
@@ -110,7 +110,7 @@ namespace Mathematics
         /// 值epsilon被用作剩余多项式系统的阈值。
         /// 如果比epsilon小，则系数被假设为零。
         /// 返回值第一个部分为quotient，第二部分为remainder。
-        NODISCARD PolynomialDivide Divide(const Polynomial& divisor, Real epsilon) const;
+        NODISCARD PolynomialDivideType Divide(const Polynomial& divisor, Real epsilon) const;
 
         NODISCARD bool Equal(const Polynomial& rhs) const;
         NODISCARD bool Less(const Polynomial& rhs) const;

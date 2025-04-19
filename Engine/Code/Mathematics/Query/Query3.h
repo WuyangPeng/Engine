@@ -26,9 +26,9 @@ namespace Mathematics
         using ClassType = Query3<Real>;
         using ParentType = QueryBase;
 
-        using Math = Math<Real>;
-        using Vector3 = Vector3<Real>;
-        using VerticesType = std::vector<Vector3>;
+        using MathType = Math<Real>;
+        using Vector3Type = Vector3<Real>;
+        using VerticesType = std::vector<Vector3Type>;
 
     public:
         // 基类处理浮点查询。
@@ -39,7 +39,7 @@ namespace Mathematics
         NODISCARD QueryType GetType() const noexcept override;
 
         NODISCARD int GetNumVertices() const;
-        NODISCARD Vector3 GetVertex(int index) const;
+        NODISCARD Vector3Type GetVertex(int index) const;
 
         // 关于一个点的各种几何对象之间的关系查询。
 
@@ -48,14 +48,14 @@ namespace Mathematics
         // PlaneQueryType::NegativeSide, 在平面的负面
         // PlaneQueryType::OnPlane, 在平面上
         NODISCARD virtual PlaneQueryType ToPlane(int index, int v0, int v1, int v2) const;
-        NODISCARD virtual PlaneQueryType ToPlane(const Vector3& testVector, int v0, int v1, int v2) const;
+        NODISCARD virtual PlaneQueryType ToPlane(const Vector3Type& testVector, int v0, int v1, int v2) const;
 
         // 返回:
         // TetrahedronQueryType::Outside, 四面体外
         // TetrahedronQueryType::Inside, 四面体内
         // TetrahedronQueryType::OnTetrahedron,在四面体上
         NODISCARD virtual TetrahedronQueryType ToTetrahedron(int index, int v0, int v1, int v2, int v3) const;
-        NODISCARD virtual TetrahedronQueryType ToTetrahedron(const Vector3& testVector, int v0, int v1, int v2, int v3) const;
+        NODISCARD virtual TetrahedronQueryType ToTetrahedron(const Vector3Type& testVector, int v0, int v1, int v2, int v3) const;
 
         // 返回:
         // Returns:
@@ -63,7 +63,7 @@ namespace Mathematics
         // CircumsphereQueryType::Inside,在四面体的外切球内
         // CircumsphereQueryType::OnCircumsphere, 在四面体的外切球上
         NODISCARD virtual CircumsphereQueryType ToCircumsphere(int index, int v0, int v1, int v2, int v3) const;
-        NODISCARD virtual CircumsphereQueryType ToCircumsphere(const Vector3& testVector, int v0, int v1, int v2, int v3) const;
+        NODISCARD virtual CircumsphereQueryType ToCircumsphere(const Vector3Type& testVector, int v0, int v1, int v2, int v3) const;
 
     private:
         // 输入点

@@ -16,7 +16,7 @@
 #include "Mathematics/Distance/DistanceBaseDetail.h"
 
 template <typename Real>
-Mathematics::DistancePoint3Rectangle3<Real>::DistancePoint3Rectangle3(const Vector3& point, const Rectangle3& rectangle) noexcept
+Mathematics::DistancePoint3Rectangle3<Real>::DistancePoint3Rectangle3(const Vector3Type& point, const Rectangle3Type& rectangle) noexcept
     : ParentType{}, point{ point }, rectangle{ rectangle }, rectCoord{}
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -57,11 +57,11 @@ typename Mathematics::DistancePoint3Rectangle3<Real>::DistanceResult Mathematics
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     auto diff = rectangle.GetCenter() - point;
-    auto dot0 = Vector3Tools::DotProduct(diff, rectangle.GetAxis(0));
-    auto dot1 = Vector3Tools::DotProduct(diff, rectangle.GetAxis(1));
+    auto dot0 = Vector3ToolsType::DotProduct(diff, rectangle.GetAxis(0));
+    auto dot1 = Vector3ToolsType::DotProduct(diff, rectangle.GetAxis(1));
     auto s0 = -dot0;
     auto s1 = -dot1;
-    auto sqrDistance = Vector3Tools::GetLengthSquared(diff);
+    auto sqrDistance = Vector3ToolsType::GetLengthSquared(diff);
 
     if (s0 < -rectangle.GetExtent(0))
     {
@@ -71,7 +71,7 @@ typename Mathematics::DistancePoint3Rectangle3<Real>::DistanceResult Mathematics
     {
         s0 = rectangle.GetExtent(0);
     }
-    sqrDistance += s0 * (s0 + (Math::GetValue(2)) * dot0);
+    sqrDistance += s0 * (s0 + (MathType::GetValue(2)) * dot0);
 
     if (s1 < -rectangle.GetExtent(1))
     {
@@ -81,23 +81,23 @@ typename Mathematics::DistancePoint3Rectangle3<Real>::DistanceResult Mathematics
     {
         s1 = rectangle.GetExtent(1);
     }
-    sqrDistance += s1 * (s1 + (Math::GetValue(2)) * dot1);
+    sqrDistance += s1 * (s1 + (MathType::GetValue(2)) * dot1);
 
     // 解决数字舍入误差。
-    if (sqrDistance < Math::GetValue(0))
+    if (sqrDistance < MathType::GetValue(0))
     {
-        sqrDistance = Math::GetValue(0);
+        sqrDistance = MathType::GetValue(0);
     }
 
     auto closestPoint = rectangle.GetCenter() + s0 * rectangle.GetAxis(0) + s1 * rectangle.GetAxis(1);
     rectCoord[0] = s0;
     rectCoord[1] = s1;
 
-    return DistanceResult{ sqrDistance, Math::GetValue(0), point, closestPoint };
+    return DistanceResult{ sqrDistance, MathType::GetValue(0), point, closestPoint };
 }
 
 template <typename Real>
-typename Mathematics::DistancePoint3Rectangle3<Real>::DistanceResult Mathematics::DistancePoint3Rectangle3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistancePoint3Rectangle3<Real>::DistanceResult Mathematics::DistancePoint3Rectangle3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

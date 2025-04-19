@@ -34,7 +34,7 @@ bool CoreTools::TelegramLess<EventType>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename EventType>
-bool CoreTools::TelegramLess<EventType>::operator()(const Telegram& lhs, const Telegram& rhs) const
+bool CoreTools::TelegramLess<EventType>::operator()(const TelegramType& lhs, const TelegramType& rhs) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -58,7 +58,7 @@ bool CoreTools::TelegramLess<EventType>::operator()(const Telegram& lhs, const T
 }
 
 template <typename EventType>
-bool CoreTools::TelegramLess<EventType>::DoNotCompareTime(const Telegram& lhs, const Telegram& rhs)
+bool CoreTools::TelegramLess<EventType>::DoNotCompareTime(const TelegramType& lhs, const TelegramType& rhs)
 {
     if (lhs.GetMessageType() < rhs.GetMessageType())
         return true;

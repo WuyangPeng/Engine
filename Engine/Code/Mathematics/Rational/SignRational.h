@@ -26,14 +26,14 @@ namespace Mathematics
     public:
         using ClassType = SignRational<N>;
 
-        using Integer = Integer<N>;
+        using IntegerType = Integer<N>;
 
     public:
         // 默认有理数是0/1
         SignRational() noexcept;
 
-        explicit SignRational(const Integer& numerator) noexcept;
-        SignRational(const Integer& numerator, const Integer& denominator);
+        explicit SignRational(const IntegerType& numerator) noexcept;
+        SignRational(const IntegerType& numerator, const IntegerType& denominator);
 
         // 构造转换。
         template <typename T>
@@ -45,9 +45,9 @@ namespace Mathematics
         CLASS_INVARIANT_DECLARE;
 
         // 成员访问
-        NODISCARD Integer GetNumerator() const noexcept;
-        NODISCARD Integer GetDenominator() const noexcept;
-        void Set(const Integer& newNumerator, const Integer& newDenominator);
+        NODISCARD IntegerType GetNumerator() const noexcept;
+        NODISCARD IntegerType GetDenominator() const noexcept;
+        void Set(const IntegerType& newNumerator, const IntegerType& newDenominator);
 
         NODISCARD SignRational operator-() const;
         SignRational& operator+=(const SignRational& rhs);
@@ -55,10 +55,10 @@ namespace Mathematics
         SignRational& operator*=(const SignRational& rhs);
         SignRational& operator/=(const SignRational& rhs);
 
-        SignRational& operator+=(const Integer& rhs);
-        SignRational& operator-=(const Integer& rhs);
-        SignRational& operator*=(const Integer& rhs);
-        SignRational& operator/=(const Integer& rhs);
+        SignRational& operator+=(const IntegerType& rhs);
+        SignRational& operator-=(const IntegerType& rhs);
+        SignRational& operator*=(const IntegerType& rhs);
+        SignRational& operator/=(const IntegerType& rhs);
 
         template <typename T>
         NODISCARD T ConvertTo() const;
@@ -77,8 +77,8 @@ namespace Mathematics
         void ConvertToRational(T value);
 
     private:
-        Integer numerator;
-        Integer denominator;
+        IntegerType numerator;
+        IntegerType denominator;
     };
 
     template <int N>

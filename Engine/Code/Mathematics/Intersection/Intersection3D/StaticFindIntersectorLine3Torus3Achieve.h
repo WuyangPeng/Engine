@@ -17,7 +17,7 @@
 #include "Mathematics/Objects3D/Torus3Detail.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorLine3Torus3<Real>::StaticFindIntersectorLine3Torus3(const Line3& line, const Torus3& torus, const Real epsilon)
+Mathematics::StaticFindIntersectorLine3Torus3<Real>::StaticFindIntersectorLine3Torus3(const Line3Type& line, const Torus3Type& torus, const Real epsilon)
     : ParentType{ epsilon }, line{ line }, torus{ torus }, quantity{}, point0{}, point1{}, point2{}, point3{}
 {
     Find();
@@ -60,21 +60,21 @@ void Mathematics::StaticFindIntersectorLine3Torus3<Real>::Find()
     // 计算四次多项式的系数。
     auto outerRadiusSquare = torus.GetOuterRadius() * torus.GetOuterRadius();
     auto innerRadiusSquare = torus.GetInnerRadius() * torus.GetInnerRadius();
-    auto directionDotDirection = Vector3Tools::DotProduct(line.GetDirection(), line.GetDirection());
-    auto originDotDirection = Vector3Tools::DotProduct(line.GetOrigin(), line.GetDirection());
-    auto dot = Vector3Tools::DotProduct(line.GetOrigin(), line.GetOrigin()) - (outerRadiusSquare + innerRadiusSquare);
+    auto directionDotDirection = Vector3ToolsType::DotProduct(line.GetDirection(), line.GetDirection());
+    auto originDotDirection = Vector3ToolsType::DotProduct(line.GetOrigin(), line.GetDirection());
+    auto dot = Vector3ToolsType::DotProduct(line.GetOrigin(), line.GetOrigin()) - (outerRadiusSquare + innerRadiusSquare);
 
     Polynomial<Real> poly{ 4 };
     auto zOrigin = line.GetOrigin().GetZ();
     auto zDir = line.GetDirection().GetZ();
-    poly[0] = dot * dot - Math::GetValue(4) * outerRadiusSquare * (innerRadiusSquare - zOrigin * zOrigin);
-    poly[1] = Math::GetValue(4) * originDotDirection * dot + Math::GetValue(8) * outerRadiusSquare * zDir * zOrigin;
-    poly[2] = (Math::GetValue(2)) * directionDotDirection * dot + Math::GetValue(4) * originDotDirection * originDotDirection + Math::GetValue(4) * outerRadiusSquare * zDir * zDir;
-    poly[3] = Math::GetValue(4) * directionDotDirection * originDotDirection;
+    poly[0] = dot * dot - MathType::GetValue(4) * outerRadiusSquare * (innerRadiusSquare - zOrigin * zOrigin);
+    poly[1] = MathType::GetValue(4) * originDotDirection * dot + MathType::GetValue(8) * outerRadiusSquare * zDir * zOrigin;
+    poly[2] = (MathType::GetValue(2)) * directionDotDirection * dot + MathType::GetValue(4) * originDotDirection * originDotDirection + MathType::GetValue(4) * outerRadiusSquare * zDir * zDir;
+    poly[3] = MathType::GetValue(4) * directionDotDirection * originDotDirection;
     poly[4] = directionDotDirection * directionDotDirection;
 
     // 解决四次方程。
-    PolynomialRoots<Real> proots{ Math::GetZeroTolerance() };
+    PolynomialRoots<Real> proots{ MathType::GetZeroTolerance() };
     if (!proots.FindBisection(poly, 6))
     {
         this->SetIntersectionType(IntersectionType::Empty);

@@ -24,37 +24,37 @@ namespace Mathematics
         using ClassType = DynamicFindIntersectorBox3Box3<Real>;
         using ParentType = DynamicIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Box3 = Box3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Box3Type = Box3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        DynamicFindIntersectorBox3Box3(const Box3& box0,
-                                       const Box3& box1,
+        DynamicFindIntersectorBox3Box3(const Box3Type& box0,
+                                       const Box3Type& box1,
                                        Real tmax,
-                                       const Vector3& lhsVelocity,
-                                       const Vector3& rhsVelocity,
-                                       const Real epsilon = Math::GetZeroTolerance());
+                                       const Vector3Type& lhsVelocity,
+                                       const Vector3Type& rhsVelocity,
+                                       const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Box3 GetBox0() const noexcept;
-        NODISCARD Box3 GetBox1() const noexcept;
+        NODISCARD Box3Type GetBox0() const noexcept;
+        NODISCARD Box3Type GetBox1() const noexcept;
 
         NODISCARD int GetQuantity() const;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
 
     private:
-        using Container = std::vector<Vector3>;
+        using Container = std::vector<Vector3Type>;
 
     private:
         // 动态查找交叉点查询。 该触点组被计算出来。
         void Find();
 
     private:
-        Box3 box0;
-        Box3 box1;
+        Box3Type box0;
+        Box3Type box1;
 
         // 动态查找相交的相交集。 最坏的情况是具有8个顶点的多边形。
         Container point;

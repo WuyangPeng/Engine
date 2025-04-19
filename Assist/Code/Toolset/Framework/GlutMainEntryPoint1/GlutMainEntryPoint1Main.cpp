@@ -11,7 +11,7 @@
 #include "Framework/Helper/MainFunctionMacro.h"
 #include "Framework/OpenGLGlutFrame/Flags/FrameParameter.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 int main(int argc, char** argv)
 {

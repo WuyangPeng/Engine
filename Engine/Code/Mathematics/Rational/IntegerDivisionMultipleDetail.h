@@ -20,7 +20,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <int N>
-Mathematics::IntegerDivisionMultiple<N>::IntegerDivisionMultiple(const IntegerData& absNumerator, const IntegerData& absDenominator)
+Mathematics::IntegerDivisionMultiple<N>::IntegerDivisionMultiple(const IntegerDataType& absNumerator, const IntegerDataType& absDenominator)
     : absNumerator{ absNumerator },
       absDenominator{ absDenominator },
       adjustNumerator{},
@@ -49,22 +49,22 @@ void Mathematics::IntegerDivisionMultiple<N>::Adjust()
     // 断言在这种情况下将失败。理想情况下，溢出将被允许，
     // 并在溢出位置的位变为在所述分割算法的分子的第一个数字。
     // 虽然这将需要混合整数<N>和整数<N+1>。
-    const IntegerDataAnalysis denominatorAnalysis{ absDenominator };
+    const IntegerDataAnalysisType denominatorAnalysis{ absDenominator };
     denominatorInit = denominatorAnalysis.GetLeadingBlock();
     const auto leadingDigit = denominatorAnalysis.ToInt(denominatorInit);
     adjust = integerCarry / (leadingDigit + 1);
 
-    IntegerMultiplication<N> numeratorAdjust{ IntegerData{ adjust }, absNumerator };
+    IntegerMultiplication<N> numeratorAdjust{ IntegerDataType{ adjust }, absNumerator };
     adjustNumerator = numeratorAdjust.GetMultiplication();
 
-    IntegerMultiplication<N> denominatorAdjust{ IntegerData{ adjust }, absDenominator };
+    IntegerMultiplication<N> denominatorAdjust{ IntegerDataType{ adjust }, absDenominator };
     adjustDenominator = denominatorAdjust.GetMultiplication();
 }
 
 template <int N>
 void Mathematics::IntegerDivisionMultiple<N>::Calculate()
 {
-    const IntegerDataAnalysis adjustDenominatorAnalysis{ adjustDenominator };
+    const IntegerDataAnalysisType adjustDenominatorAnalysis{ adjustDenominator };
 
     MATHEMATICS_ASSERTION_1(adjustDenominatorAnalysis.GetLeadingBlock() == denominatorInit, "异常的结果\n");
 
@@ -73,7 +73,7 @@ void Mathematics::IntegerDivisionMultiple<N>::Calculate()
     secondDigit = adjustDenominatorAnalysis.ToUnsignedInt(denominatorInit - 1);
 
     // 确定所需的最大除法的步骤
-    const IntegerDataAnalysis adjustNumeratorAnalysis(adjustNumerator);
+    const IntegerDataAnalysisType adjustNumeratorAnalysis(adjustNumerator);
     numeratorInit = adjustNumeratorAnalysis.GetLeadingBlock();
 
     MATHEMATICS_ASSERTION_1(denominatorInit <= numeratorInit, "异常的结果\n");
@@ -105,8 +105,8 @@ void Mathematics::IntegerDivisionMultiple<N>::Calculate()
 template <int N>
 void Mathematics::IntegerDivisionMultiple<N>::Calculate(int quotientInit)
 {
-    const IntegerDataAnalysis adjustDenominatorAnalysis{ adjustDenominator };
-    const IntegerDataAnalysis adjustNumeratorAnalysis{ adjustNumerator };
+    const IntegerDataAnalysisType adjustDenominatorAnalysis{ adjustDenominator };
+    const IntegerDataAnalysisType adjustNumeratorAnalysis{ adjustNumerator };
 
     // 获取余数最先的三个索引
     auto numerator0 = 0u;
@@ -149,7 +149,7 @@ void Mathematics::IntegerDivisionMultiple<N>::Calculate(int quotientInit)
     MATHEMATICS_ASSERTION_1((quotientHat & low) != 0, "异常的结果");
 
     // 计算除法的每一步的商。
-    IntegerData localQuotient;
+    IntegerDataType localQuotient;
     IntegerDataAmend<N> localQuotientAmend{ localQuotient };
     localQuotientAmend.FromUnsignedInt(quotientInit, quotientHat);
 
@@ -178,11 +178,11 @@ template <int N>
 void Mathematics::IntegerDivisionMultiple<N>::Recover()
 {
     // 反正则化余数
-    if (IntegerData{ 0 } < adjustNumerator)
+    if (IntegerDataType{ 0 } < adjustNumerator)
     {
         auto divisor = boost::numeric_cast<uint16_t>(adjust & low);
 
-        const IntegerDivisionModulo<N> divisionSingle{ adjustNumerator, IntegerData{ divisor } };
+        const IntegerDivisionModulo<N> divisionSingle{ adjustNumerator, IntegerDataType{ divisor } };
         remainder = divisionSingle.GetQuotient();
 
         MATHEMATICS_ASSERTION_1(divisionSingle.GetRemainder().IsZero(), "余数必须为零");
@@ -204,7 +204,7 @@ bool Mathematics::IntegerDivisionMultiple<N>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <int N>
-typename Mathematics::IntegerDivisionMultiple<N>::IntegerData Mathematics::IntegerDivisionMultiple<N>::GetQuotient() const noexcept
+typename Mathematics::IntegerDivisionMultiple<N>::IntegerDataType Mathematics::IntegerDivisionMultiple<N>::GetQuotient() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -212,7 +212,7 @@ typename Mathematics::IntegerDivisionMultiple<N>::IntegerData Mathematics::Integ
 }
 
 template <int N>
-typename Mathematics::IntegerDivisionMultiple<N>::IntegerData Mathematics::IntegerDivisionMultiple<N>::GetRemainder() const noexcept
+typename Mathematics::IntegerDivisionMultiple<N>::IntegerDataType Mathematics::IntegerDivisionMultiple<N>::GetRemainder() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

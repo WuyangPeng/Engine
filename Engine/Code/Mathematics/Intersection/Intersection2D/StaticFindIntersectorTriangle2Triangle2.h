@@ -25,34 +25,34 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorTriangle2Triangle2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Math = typename ParentType::Math;
-        using Vector2 = Vector2<Real>;
-        using Triangle2 = Triangle2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
+        using MathType = typename ParentType::MathType;
+        using Vector2Type = Vector2<Real>;
+        using Triangle2Type = Triangle2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
 
     public:
-        StaticFindIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1, const Real epsilon = Math::GetZeroTolerance());
+        StaticFindIntersectorTriangle2Triangle2(const Triangle2Type& triangle0, const Triangle2Type& triangle1, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Triangle2 GetTriangle0() const noexcept;
-        NODISCARD Triangle2 GetTriangle1() const noexcept;
+        NODISCARD Triangle2Type GetTriangle0() const noexcept;
+        NODISCARD Triangle2Type GetTriangle1() const noexcept;
 
         NODISCARD int GetQuantity() const;
-        NODISCARD Vector2 GetPoint(int index) const;
+        NODISCARD Vector2Type GetPoint(int index) const;
 
     private:
-        using Intersection = std::vector<Vector2>;
+        using Intersection = std::vector<Vector2Type>;
 
     private:
         void Find();
 
-        static Intersection ClipConvexPolygonAgainstLine(const Vector2& axis, Real dot, const Intersection& intersection);
+        static Intersection ClipConvexPolygonAgainstLine(const Vector2Type& axis, Real dot, const Intersection& intersection);
 
     private:
         // 要相交的对象。
-        Triangle2 triangle0;
-        Triangle2 triangle1;
+        Triangle2Type triangle0;
+        Triangle2Type triangle1;
 
         // 有关交集的信息。
         Intersection point;

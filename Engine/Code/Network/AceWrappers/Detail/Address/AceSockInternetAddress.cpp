@@ -13,7 +13,7 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "Network/ACEWrappers/Detail/BaseMainManager/StringConversion.h"
+#include "Network/AceWrappers/Detail/BaseMainManager/StringConversion.h"
 
 #include <array>
 

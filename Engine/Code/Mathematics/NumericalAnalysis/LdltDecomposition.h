@@ -33,7 +33,7 @@ namespace Mathematics
 
         using Matrix = Algebra::Matrix<N, N, T>;
         using Vector = Algebra::Vector<N, T>;
-        using Math = Math<T>;
+        using MathType = Math<T>;
 
     public:
         LdltDecomposition() noexcept;
@@ -58,9 +58,9 @@ namespace Mathematics
     public:
         using ClassType = LdltDecomposition<T>;
 
-        using VariableMatrix = VariableMatrix<T>;
-        using VariableLengthVector = VariableLengthVector<T>;
-        using Math = Math<T>;
+        using VariableMatrixType = VariableMatrix<T>;
+        using VariableLengthVectorType = VariableLengthVector<T>;
+        using MathType = Math<T>;
 
     public:
         explicit LdltDecomposition(int n);
@@ -69,13 +69,13 @@ namespace Mathematics
 
         /// 矩阵A必须是正定的。该实现仅使用A的下三角部分。
         /// 在输出时，L是下单位三角形，D是对角线。
-        bool Factor(const VariableMatrix& a, VariableMatrix& l, VariableMatrix& d);
+        bool Factor(const VariableMatrixType& a, VariableMatrixType& l, VariableMatrixType& d);
 
         /// 在调用前用因子分解法求解正定A = L * D * L^T的A*X = B。
-        void Solve(const VariableMatrix& l, const VariableMatrix& d, const VariableLengthVector& b, VariableLengthVector& x);
+        void Solve(const VariableMatrixType& l, const VariableMatrixType& d, const VariableLengthVectorType& b, VariableLengthVectorType& x);
 
         /// 在调用过程中用因子分解法求解正定A = L * D * L^T的A*X = B。
-        void Solve(const VariableMatrix& a, const VariableLengthVector& b, VariableLengthVector& x);
+        void Solve(const VariableMatrixType& a, const VariableLengthVectorType& b, VariableLengthVectorType& x);
 
     private:
         const int n;

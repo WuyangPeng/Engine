@@ -15,7 +15,7 @@
 #include "System/Helper/PragmaWarning/AsioIpTcp.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/MessageEvent/MessageEventFwd.h"
-#include "Network/ACEWrappers/Using/ACEUsing.h"
+#include "Network/AceWrappers/Using/AceUsing.h"
 
 #include <memory>
 

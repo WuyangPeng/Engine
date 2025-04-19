@@ -50,12 +50,12 @@ bool Mathematics::LdltDecomposition<T, N>::Factor(const Matrix& a, Matrix& l, Ma
             djj -= ljk * ljk * dkk;
         }
         d(j, j) = djj;
-        if (Math::Approximate(djj, T{}))
+        if (MathType::Approximate(djj, T{}))
         {
             return false;
         }
 
-        l(j, j) = Math::GetValue(1);
+        l(j, j) = MathType::GetValue(1);
         for (auto i = j + 1; i < N; ++i)
         {
             auto lij = a(i, j);
@@ -140,7 +140,7 @@ bool Mathematics::LdltDecomposition<T>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
-bool Mathematics::LdltDecomposition<T>::Factor(const VariableMatrix& a, VariableMatrix& l, VariableMatrix& d)
+bool Mathematics::LdltDecomposition<T>::Factor(const VariableMatrixType& a, VariableMatrixType& l, VariableMatrixType& d)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -164,12 +164,12 @@ bool Mathematics::LdltDecomposition<T>::Factor(const VariableMatrix& a, Variable
             djj -= ljk * ljk * dkk;
         }
         d(j, j) = djj;
-        if (Math::Approximate(djj, T{}))
+        if (MathType::Approximate(djj, T{}))
         {
             return false;
         }
 
-        l(j, j) = Math::GetValue(1);
+        l(j, j) = MathType::GetValue(1);
         for (auto i = j + 1; i < n; ++i)
         {
             auto lij = a(i, j);
@@ -189,7 +189,7 @@ bool Mathematics::LdltDecomposition<T>::Factor(const VariableMatrix& a, Variable
 }
 
 template <typename T>
-void Mathematics::LdltDecomposition<T>::Solve(const VariableMatrix& l, const VariableMatrix& d, const VariableLengthVector& b, VariableLengthVector& x)
+void Mathematics::LdltDecomposition<T>::Solve(const VariableMatrixType& l, const VariableMatrixType& d, const VariableLengthVectorType& b, VariableLengthVectorType& x)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -231,7 +231,7 @@ void Mathematics::LdltDecomposition<T>::Solve(const VariableMatrix& l, const Var
 }
 
 template <typename T>
-void Mathematics::LdltDecomposition<T>::Solve(const VariableMatrix& a, const VariableLengthVector& b, VariableLengthVector& x)
+void Mathematics::LdltDecomposition<T>::Solve(const VariableMatrixType& a, const VariableLengthVectorType& b, VariableLengthVectorType& x)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -240,8 +240,8 @@ void Mathematics::LdltDecomposition<T>::Solve(const VariableMatrix& a, const Var
         THROW_EXCEPTION(SYSTEM_TEXT("无效大小。"))
     }
 
-    VariableMatrix l{};
-    VariableMatrix d{};
+    VariableMatrixType l{};
+    VariableMatrixType d{};
 
     Factor(a, l, d);
     Solve(l, d, b, x);

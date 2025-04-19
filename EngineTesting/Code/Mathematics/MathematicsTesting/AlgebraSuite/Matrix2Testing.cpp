@@ -303,14 +303,14 @@ void Mathematics::Matrix2Testing::OperatorCalculateTest()
 
         ASSERT_TRUE(Approximate(matrix3, matrix6, 1e-8f));
 
-        Matrix2F::Vector2 vector0(randomDistribution(generator),
-                                  randomDistribution(generator));
+        Matrix2F::Vector2Type vector0(randomDistribution(generator),
+                                      randomDistribution(generator));
 
-        const Matrix2F::Vector2 vector1 = matrix6 * vector0;
-        const Matrix2F::Vector2 vector2 = vector0 * matrix6;
+        const Matrix2F::Vector2Type vector1 = matrix6 * vector0;
+        const Matrix2F::Vector2Type vector2 = vector0 * matrix6;
 
-        Matrix2F::Vector2 vector3(matrix6(0, 0) * vector0[0] + matrix6(0, 1) * vector0[1],
-                                  matrix6(1, 0) * vector0[0] + matrix6(1, 1) * vector0[1]);
+        Matrix2F::Vector2Type vector3(matrix6(0, 0) * vector0[0] + matrix6(0, 1) * vector0[1],
+                                      matrix6(1, 0) * vector0[0] + matrix6(1, 1) * vector0[1]);
 
         ASSERT_TRUE(Vector2ToolsF::Approximate(vector1, vector3, 1e-3f));
 
@@ -345,11 +345,11 @@ void Mathematics::Matrix2Testing::ArithmeticCalculateTest()
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
-        const Matrix2F::Vector2 vector0(randomDistribution(generator),
-                                        randomDistribution(generator));
+        const Matrix2F::Vector2Type vector0(randomDistribution(generator),
+                                            randomDistribution(generator));
 
-        const Matrix2F::Vector2 vector1(randomDistribution(generator),
-                                        randomDistribution(generator));
+        const Matrix2F::Vector2Type vector1(randomDistribution(generator),
+                                            randomDistribution(generator));
 
         Matrix2F matrix0(randomDistribution(generator),
                          randomDistribution(generator),
@@ -412,7 +412,7 @@ void Mathematics::Matrix2Testing::ArithmeticCalculateTest()
         Vector2F vector4(matrix5(0, 1), matrix5(1, 1));
         const Vector2F vector5(matrix6(0, 1), matrix6(1, 1));
 
-        vector4 -= (Vector2ToolsF::DotProduct(vector3, vector4)) * vector3;
+        vector4 -= (Vector2ToolsF::DotProduct(vector3, vector4))*vector3;
 
         vector4.Normalize();
 
@@ -420,7 +420,7 @@ void Mathematics::Matrix2Testing::ArithmeticCalculateTest()
 
         const Matrix2D matrix7(randomDistribution(generator), angle, angle, randomDistribution(generator));
 
-        const Matrix2D::Matrix2EigenDecomposition eigenDecomposition = matrix7.EigenDecomposition(1e-10);
+        const Matrix2D::Matrix2EigenDecompositionType eigenDecomposition = matrix7.EigenDecomposition(1e-10);
 
         const Matrix2D rotation = eigenDecomposition.GetRotation();
         const Matrix2D diagonal = eigenDecomposition.GetDiagonal();

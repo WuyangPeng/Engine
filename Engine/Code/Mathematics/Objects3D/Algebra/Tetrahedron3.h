@@ -32,22 +32,22 @@ namespace Mathematics::Algebra
 
         constexpr static auto vertexSize = 4;
 
-        using Math = Math<Real>;
-        using Vector3 = Vector3<Real>;
-        using ArrayType = std::array<Vector3, vertexSize>;
+        using MathType = Math<Real>;
+        using Vector3Type = Vector3<Real>;
+        using ArrayType = std::array<Vector3Type, vertexSize>;
         using FaceIndexType = std::array<int, 3>;
         using AllFaceIndexType = std::array<int, 12>;
         using EdgeIndexType = std::array<int, 2>;
         using AllEdgeIndexType = std::array<int, 12>;
         using EdgeAugmentedType = std::array<int, 4>;
         using VertexAugmentedType = std::array<int, 4>;
-        using Plane3 = Plane3<Real>;
-        using Plane3Container = std::array<Plane3, 4>;
+        using Plane3Type = Plane3<Real>;
+        using Plane3Container = std::array<Plane3Type, 4>;
 
     public:
         /// 默认构造函数将顶点设置为(0,0,0), (1,0,0), (0,1,0) 和 (0,0,1)。
         Tetrahedron3() noexcept;
-        Tetrahedron3(const Vector3& v0, const Vector3& v1, const Vector3& v2, const Vector3& v3) noexcept;
+        Tetrahedron3(const Vector3Type& v0, const Vector3Type& v1, const Vector3Type& v2, const Vector3Type& v3) noexcept;
         explicit Tetrahedron3(const ArrayType& vertex) noexcept;
 
         CLASS_INVARIANT_DECLARE;
@@ -76,24 +76,24 @@ namespace Mathematics::Algebra
         /// 计算面法线。
         /// 输入'face'必须在 {0,1,2,3}中，
         /// 并对应于面 {{0,2,1},{0,1,3},{0,3,2},{1,2,3}}。
-        NODISCARD Vector3 ComputeFaceNormal(int face) const;
+        NODISCARD Vector3Type ComputeFaceNormal(int face) const;
 
         /// 计算边法线，即面向边的2个法线的平均值。
         /// 输入'edge'必须在{0,1,2,3,4,5}中，
         /// 并对应于边{{0,1},{0,2},{0,3},{1,2},{1,3},{2,3}}。
-        NODISCARD Vector3 ComputeEdgeNormal(int edge) const;
+        NODISCARD Vector3Type ComputeEdgeNormal(int edge) const;
 
         /// 计算顶点法线，即共享该顶点的3个面的法线的平均值。
         /// 输入“顶点”必须在{0,1,2,3}中，并且是四面体顶点数组的索引。
         /// 代数表明，顶点法线是与顶点相对的面的负法线。
-        NODISCARD Vector3 ComputeVertexNormal(int vertexIndex) const;
+        NODISCARD Vector3Type ComputeVertexNormal(int vertexIndex) const;
 
         /// 构造面的平面。
         /// 这些平面具有指向外部的法线向量。
         /// 平面索引与前面提到的面索引相同。
         NODISCARD Plane3Container GetPlanes() const;
 
-        NODISCARD Vector3 ComputeCentroid() const;
+        NODISCARD Vector3Type ComputeCentroid() const;
 
         NODISCARD bool Equal(const Tetrahedron3& rhs) const;
         NODISCARD bool Less(const Tetrahedron3& rhs) const;

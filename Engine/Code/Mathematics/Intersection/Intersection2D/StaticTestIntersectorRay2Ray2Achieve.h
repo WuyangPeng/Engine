@@ -19,7 +19,7 @@
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorRay2Ray2<Real>::StaticTestIntersectorRay2Ray2(const Ray2& lhsRay, const Ray2& rhsRay, const Real dotThreshold)
+Mathematics::StaticTestIntersectorRay2Ray2<Real>::StaticTestIntersectorRay2Ray2(const Ray2Type& lhsRay, const Ray2Type& rhsRay, const Real dotThreshold)
     : ParentType{ dotThreshold }, lhsRay{ lhsRay }, rhsRay{ rhsRay }, quantity{ 0 }
 {
     Test();
@@ -38,7 +38,7 @@ void Mathematics::StaticTestIntersectorRay2Ray2<Real>::Test()
     if (intersectionType == IntersectionType::Point)
     {
         // 测试直线交点是否在射线上。
-        if (Math::GetValue(0) <= classify.GetParameter0() && Math::GetValue(0) <= classify.GetParameter1())
+        if (MathType::GetValue(0) <= classify.GetParameter0() && MathType::GetValue(0) <= classify.GetParameter1())
         {
             quantity = 1;
             intersectionType = IntersectionType::Point;
@@ -51,7 +51,7 @@ void Mathematics::StaticTestIntersectorRay2Ray2<Real>::Test()
     }
     else if (intersectionType == IntersectionType::Line)
     {
-        if (Math::GetValue(0) < Vector2Tools::DotProduct(lhsRay.GetDirection(), rhsRay.GetDirection()))
+        if (MathType::GetValue(0) < Vector2ToolsType::DotProduct(lhsRay.GetDirection(), rhsRay.GetDirection()))
         {
             // 射线是共线的并且在相同的方向，所以它们必须是重叠的。
             quantity = std::numeric_limits<int>::max();
@@ -62,7 +62,7 @@ void Mathematics::StaticTestIntersectorRay2Ray2<Real>::Test()
             // 射线是共线的，且方向相反。 测试它们是否重叠。
             // lhsRay具有间隔[0，+无穷大），
             // rhsRay具有相对于ray0方向的间隔（-infinity，dotProduct] 。
-            auto dotProduct = Vector2Tools::DotProduct(lhsRay.GetDirection(), rhsRay.GetOrigin() - lhsRay.GetOrigin());
+            auto dotProduct = Vector2ToolsType::DotProduct(lhsRay.GetDirection(), rhsRay.GetOrigin() - lhsRay.GetOrigin());
             if (dotThreshold < dotProduct)
             {
                 quantity = 2;

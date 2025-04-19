@@ -10,6 +10,7 @@
 #ifndef SYSTEM_CONSOLE_CONSOLE_SCREEN_BUFFER_USING_H
 #define SYSTEM_CONSOLE_CONSOLE_SCREEN_BUFFER_USING_H
 
+#include "ConsoleColourUsing.h"
 #include "System/Helper/Platform.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
@@ -41,6 +42,7 @@ namespace System
         ConsoleCoord dwMaximumWindowSize;
     };
     using ConsoleScreenBufferInfoPtr = ConsoleScreenBufferInfo*;
+    using ConsoleColorRef = uint32_t;
 
     struct ConsoleScreenBufferInfoEx
     {

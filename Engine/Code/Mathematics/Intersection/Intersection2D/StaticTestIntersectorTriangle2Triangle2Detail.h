@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorTriangle2Triangle2<Real>::StaticTestIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1, const Real dotThreshold)
+Mathematics::StaticTestIntersectorTriangle2Triangle2<Real>::StaticTestIntersectorTriangle2Triangle2(const Triangle2Type& triangle0, const Triangle2Type& triangle1, const Real dotThreshold)
     : ParentType{ dotThreshold }, triangle0{ triangle0 }, triangle1{ triangle1 }
 {
     Test();
@@ -89,7 +89,7 @@ void Mathematics::StaticTestIntersectorTriangle2Triangle2<Real>::Test()
 }
 
 template <typename Real>
-Mathematics::NumericalValueSymbol Mathematics::StaticTestIntersectorTriangle2Triangle2<Real>::WhichSide(const Container& vertex, const Vector2& point, const Vector2& direction)
+Mathematics::NumericalValueSymbol Mathematics::StaticTestIntersectorTriangle2Triangle2<Real>::WhichSide(const Container& vertex, const Vector2Type& point, const Vector2Type& direction)
 {
     /// 顶点投影为P + t * D形式。 如果所有t> 0，则返回值为+1；
     /// 如果所有t <0，则返回-1；否则，则返回0，在这种情况下，该线将三角形分开。
@@ -99,12 +99,12 @@ Mathematics::NumericalValueSymbol Mathematics::StaticTestIntersectorTriangle2Tri
     auto zero = 0;
     for (const auto& value : vertex)
     {
-        auto t = Vector2Tools::DotProduct(direction, (value - point));
-        if (Math::GetValue(0) < t)
+        auto t = Vector2ToolsType::DotProduct(direction, (value - point));
+        if (MathType::GetValue(0) < t)
         {
             ++positive;
         }
-        else if (t < Math::GetValue(0))
+        else if (t < MathType::GetValue(0))
         {
             ++negative;
         }

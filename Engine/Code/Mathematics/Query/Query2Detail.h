@@ -69,7 +69,7 @@ Mathematics::LineQueryType Mathematics::Query2<Real>::ToLine(int index, int lhsV
 }
 
 template <typename Real>
-Mathematics::LineQueryType Mathematics::Query2<Real>::ToLine(const Vector2& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const
+Mathematics::LineQueryType Mathematics::Query2<Real>::ToLine(const Vector2Type& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -91,9 +91,9 @@ Mathematics::LineQueryType Mathematics::Query2<Real>::ToLine(const Vector2& test
         det = -det;
     }
 
-    if (Math::FAbs(det) <= Math::GetZeroTolerance())
+    if (MathType::FAbs(det) <= MathType::GetZeroTolerance())
         return LineQueryType::OnLine;
-    else if (Math::GetValue(0) < det)
+    else if (MathType::GetValue(0) < det)
         return LineQueryType::Right;
     else
         return LineQueryType::Left;
@@ -108,7 +108,7 @@ Mathematics::TriangleQueryType Mathematics::Query2<Real>::ToTriangle(int index, 
 }
 
 template <typename Real>
-Mathematics::TriangleQueryType Mathematics::Query2<Real>::ToTriangle(const Vector2& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
+Mathematics::TriangleQueryType Mathematics::Query2<Real>::ToTriangle(const Vector2Type& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_3(ToLine(lhsVerticesIndex, mhsVerticesIndex, rhsVerticesIndex) != LineQueryType::Right, "三角形顶点不是逆时针顺序！");
@@ -150,7 +150,7 @@ Mathematics::CircumcircleQueryType Mathematics::Query2<Real>::ToCircumcircle(int
 }
 
 template <typename Real>
-Mathematics::CircumcircleQueryType Mathematics::Query2<Real>::ToCircumcircle(const Vector2& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
+Mathematics::CircumcircleQueryType Mathematics::Query2<Real>::ToCircumcircle(const Vector2Type& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -184,9 +184,9 @@ Mathematics::CircumcircleQueryType Mathematics::Query2<Real>::ToCircumcircle(con
         det = -det;
     }
 
-    if (Math::FAbs(det) <= Math::GetZeroTolerance())
+    if (MathType::FAbs(det) <= MathType::GetZeroTolerance())
         return CircumcircleQueryType::OnCircumcircle;
-    else if (det < Math::GetValue(0))
+    else if (det < MathType::GetValue(0))
         return CircumcircleQueryType::Outside;
     else
         return CircumcircleQueryType::Inside;

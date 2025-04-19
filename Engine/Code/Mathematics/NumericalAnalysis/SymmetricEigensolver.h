@@ -102,11 +102,11 @@ namespace Mathematics
     public:
         using ClassType = SymmetricEigensolver<Real>;
 
-        using Math = Math<Real>;
-        using GivensRotation = GivensRotation<Real>;
+        using MathType = Math<Real>;
+        using GivensRotationType = GivensRotation<Real>;
         using MatrixType = std::vector<Real>;
         using DiagonalType = std::vector<Real>;
-        using GivensRotationContainer = std::vector<GivensRotation>;
+        using GivensRotationContainer = std::vector<GivensRotationType>;
         using PermutationType = std::vector<int>;
         using VisitedType = std::vector<int>;
 
@@ -172,8 +172,8 @@ namespace Mathematics
         void ComputePermutation(int sortType);
 
     private:
-        using SortItem = SortItem<Real>;
-        using SortItemContainer = std::vector<SortItem>;
+        using SortItemType = SortItem<Real>;
+        using SortItemContainer = std::vector<SortItemType>;
 
     private:
         // 要处理的矩阵的行和列的数量N。

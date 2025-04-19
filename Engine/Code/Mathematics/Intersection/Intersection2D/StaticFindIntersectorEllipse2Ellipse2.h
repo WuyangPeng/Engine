@@ -26,32 +26,32 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorEllipse2Ellipse2<Real>;
         using ParentType = StaticIntersector<Real, Vector2>;
 
-        using Vector2 = Vector2<Real>;
-        using Ellipse2 = Ellipse2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector2Type = Vector2<Real>;
+        using Ellipse2Type = Ellipse2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorEllipse2Ellipse2(const Ellipse2& ellipse0, const Ellipse2& ellipse1, const Real epsilon = Math::GetZeroTolerance());
+        StaticFindIntersectorEllipse2Ellipse2(const Ellipse2Type& ellipse0, const Ellipse2Type& ellipse1, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Ellipse2 GetEllipse0() const noexcept;
-        NODISCARD Ellipse2 GetEllipse1() const noexcept;
+        NODISCARD Ellipse2Type GetEllipse0() const noexcept;
+        NODISCARD Ellipse2Type GetEllipse1() const noexcept;
 
         /// 用于静态查找相交点查询的交叉点集。 Q满足0 <= Q <= 4。
         /// 当Q > 0时，解释取决于交叉点类型。
         ///   IT_POINT：Q个不同的交点
         ///   IT_OTHER：椭圆是相同的。 GetIntersectionEllipse返回椭圆对象之一。 Q无效。
         NODISCARD int GetQuantity() const;
-        NODISCARD Vector2 GetPoint(int index) const;
-        NODISCARD Ellipse2 GetIntersectionEllipse() const noexcept;
+        NODISCARD Vector2Type GetPoint(int index) const;
+        NODISCARD Ellipse2Type GetIntersectionEllipse() const noexcept;
         NODISCARD bool IsTransverseIntersection(int index) const;
 
     private:
         using CoeffType = std::array<Real, 6>;
         using RootsType = std::vector<Real>;
-        using Intersection = std::vector<Vector2>;
+        using Intersection = std::vector<Vector2Type>;
         using TransverseType = std::array<bool, 4>;
 
     private:
@@ -66,7 +66,7 @@ namespace Mathematics
             NODISCARD bool operator<(const Measurement& measure) const noexcept;
 
             // <x, y, sqrt(Q0(x,y)^2 + Q1(x,y)^2)>
-            Vector2 point;
+            Vector2Type point;
             Real q0;
             Real q1;
             Real norm;
@@ -74,14 +74,14 @@ namespace Mathematics
             bool transverse;
         };
 
-        NODISCARD static Polynomial<Real> GetQuartic(const Ellipse2& ellipse0, const Ellipse2& ellipse1);
+        NODISCARD static Polynomial<Real> GetQuartic(const Ellipse2Type& ellipse0, const Ellipse2Type& ellipse1);
 
-        NODISCARD Measurement RefinePoint(const CoeffType& coeff, const Vector2& vector2);
+        NODISCARD Measurement RefinePoint(const CoeffType& coeff, const Vector2Type& vector2);
 
     private:
         // 要相交的对象。
-        Ellipse2 ellipse0;
-        Ellipse2 ellipse1;
+        Ellipse2Type ellipse0;
+        Ellipse2Type ellipse1;
 
         // 相交点。
         Intersection point;

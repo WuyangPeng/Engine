@@ -10,7 +10,7 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 
-#include "ACEWrappers/ACEWrappers.h"
+#include "AceWrappers/AceWrappers.h"
 #include "ActiveMQ/ActiveMQ.h"
 #include "BoostWrappers/BoostWrappers.h"
 #include "Configuration/Configuration.h"

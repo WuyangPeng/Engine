@@ -28,32 +28,32 @@ namespace Mathematics
 
         using ClassType = Triangle3<Real>;
 
-        using Math = Math<Real>;
-        using Vector3 = Vector3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using ContainerType = std::vector<Vector3>;
+        using MathType = Math<Real>;
+        using Vector3Type = Vector3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using ContainerType = std::vector<Vector3Type>;
 
     public:
         // 三角形表示为三个顶点数组：
-        Triangle3(const Vector3& vector0, const Vector3& vector1, const Vector3& vector2) noexcept;
+        Triangle3(const Vector3Type& vector0, const Vector3Type& vector1, const Vector3Type& vector2) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         // 从点point到三角形的距离。
-        NODISCARD Real DistanceTo(const Vector3& point) const;
+        NODISCARD Real DistanceTo(const Vector3Type& point) const;
 
         NODISCARD ContainerType GetVertex() const;
-        NODISCARD Vector3 GetVertex(int index) const;
+        NODISCARD Vector3Type GetVertex(int index) const;
         NODISCARD ContainerType GetEdgeVectors() const;
 
-        NODISCARD Vector3 GetNormal() const;
+        NODISCARD Vector3Type GetNormal() const;
 
-        NODISCARD Triangle3 GetMove(Real t, const Vector3& velocity) const;
+        NODISCARD Triangle3 GetMove(Real t, const Vector3Type& velocity) const;
 
     private:
         constexpr static auto vertexSize = 3;
 
-        using ArrayType = std::array<Vector3, vertexSize>;
+        using ArrayType = std::array<Vector3Type, vertexSize>;
 
     private:
         ArrayType vertex;

@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorPlane3Sphere3<Real>::StaticTestIntersectorPlane3Sphere3(const Plane3& plane, const Sphere3& sphere, const Real epsilon) noexcept
+Mathematics::StaticTestIntersectorPlane3Sphere3<Real>::StaticTestIntersectorPlane3Sphere3(const Plane3Type& plane, const Sphere3Type& sphere, const Real epsilon) noexcept
     : ParentType{ epsilon }, plane{ plane }, sphere{ sphere }
 {
     Test();
@@ -55,7 +55,7 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorPlane3Sphere3<Real>::Test() noexcept
 {
     if (const auto signedDistance = plane.DistanceTo(sphere.GetCenter());
-        Math::FAbs(signedDistance) <= sphere.GetRadius())
+        MathType::FAbs(signedDistance) <= sphere.GetRadius())
     {
         this->SetIntersectionType(IntersectionType::Other);
     }

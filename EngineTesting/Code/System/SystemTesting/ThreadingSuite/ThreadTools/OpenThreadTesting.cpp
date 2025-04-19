@@ -86,16 +86,22 @@ void System::OpenThreadTesting::DoWaitForSystemMutexTest(size_t index, WindowsHa
 
 void System::OpenThreadTesting::DoThreadTest(WindowsHandle mutexHandle, ThreadStandardAccess threadStandardAccess, ThreadSpecificAccess threadSpecificAccess)
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     WindowsDWord threadId{ 0 };
     const auto threadHandle = CreateSystemThread(nullptr, 0, ClassType::ThreadStartRoutine, mutexHandle, ThreadCreation::Default, &threadId);
 
     ThreadResultTest(threadHandle, threadId, threadStandardAccess, threadSpecificAccess, mutexHandle);
 
     ASSERT_NOT_THROW_EXCEPTION_1(CloseThreadTest, threadHandle);
+
+#endif  // !SYSTEM_PLATFORM_WIN32
 }
 
 void System::OpenThreadTesting::ThreadResultTest(WindowsHandle threadHandle, WindowsDWord threadId, ThreadStandardAccess threadStandardAccess, ThreadSpecificAccess threadSpecificAccess, WindowsHandle mutexHandle)
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     ASSERT_TRUE(IsThreadHandleValid(threadHandle));
     ASSERT_LESS(0u, threadId);
 
@@ -104,10 +110,14 @@ void System::OpenThreadTesting::ThreadResultTest(WindowsHandle threadHandle, Win
     OpenThreadTest(openThreadHandle, threadId, mutexHandle, threadHandle);
 
     ASSERT_NOT_THROW_EXCEPTION_1(CloseThreadTest, openThreadHandle);
+
+#endif  // !SYSTEM_PLATFORM_WIN32
 }
 
 void System::OpenThreadTesting::OpenThreadTest(WindowsHandle openThreadHandle, WindowsDWord threadId, WindowsHandle mutexHandle, WindowsHandle threadHandle)
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
     ASSERT_TRUE(IsThreadHandleValid(openThreadHandle));
 
     const auto openThreadId = GetSystemThreadId(openThreadHandle);
@@ -120,6 +130,8 @@ void System::OpenThreadTesting::OpenThreadTest(WindowsHandle openThreadHandle, W
     WindowsDWord exitCode{ 0 };
     ASSERT_TRUE(GetThreadExitCode(openThreadHandle, &exitCode));
     ASSERT_EQUAL(exitCode, exitFunctionCode);
+
+#endif  // !SYSTEM_PLATFORM_WIN32
 }
 
 System::WindowsDWord System::OpenThreadTesting::ThreadStartRoutine(void* threadParameter) noexcept

@@ -27,11 +27,11 @@ namespace Mathematics
     public:
         using ClassType = BarycentricCoordinates<Real, WindowSize>;
 
-        using Tuple = CoreTools::Tuple<WindowSize, Real>;
-        using Math = Math<Real>;
+        using TupleType = CoreTools::Tuple<WindowSize, Real>;
+        using MathType = Math<Real>;
 
     public:
-        BarycentricCoordinates(bool isValid, const Tuple& tuple) noexcept;
+        BarycentricCoordinates(bool isValid, const TupleType& tuple) noexcept;
         BarycentricCoordinates() noexcept;
 
         CLASS_INVARIANT_DECLARE;
@@ -42,7 +42,7 @@ namespace Mathematics
 
     private:
         bool isValid;
-        Tuple tuple;
+        TupleType tuple;
     };
 }
 

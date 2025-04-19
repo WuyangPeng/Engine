@@ -36,21 +36,21 @@ namespace Mathematics
     public:
         using ClassType = Matrix2<Real>;
 
-        using Vector2 = Vector2<Real>;
-        using VectorIndex = typename Vector2::PointIndex;
+        using Vector2Type = Vector2<Real>;
+        using VectorIndex = typename Vector2Type::PointIndex;
 
-        static constexpr auto xIndex = Vector2::xIndex;
-        static constexpr auto yIndex = Vector2::yIndex;
-        static constexpr auto vectorSize = Vector2::pointSize;
-        static constexpr auto matrixSize = vectorSize * Vector2::pointSize;
+        static constexpr auto xIndex = Vector2Type::xIndex;
+        static constexpr auto yIndex = Vector2Type::yIndex;
+        static constexpr auto vectorSize = Vector2Type::pointSize;
+        static constexpr auto matrixSize = vectorSize * Vector2Type::pointSize;
 
-        using Math = Math<Real>;
-        using Matrix3 = Matrix3<Real>;
-        using Matrix2EigenDecomposition = Matrix2EigenDecomposition<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
+        using MathType = Math<Real>;
+        using Matrix3Type = Matrix3<Real>;
+        using Matrix2EigenDecompositionType = Matrix2EigenDecomposition<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
         using ContainerType = std::vector<Real>;
         using ArrayType = std::array<Real, matrixSize>;
-        using Vector2ContainerType = std::vector<Vector2>;
+        using Vector2ContainerType = std::vector<Vector2Type>;
 
     public:
         // 如果标志为MatrixFlagsZero，创建零矩阵，否则创建单位矩阵。
@@ -74,12 +74,12 @@ namespace Mathematics
         /// 创建基于输入矢量的矩阵。MatrixMajorFlags解释为
         /// MatrixTypeFlagsRow：向量是矩阵的行
         /// MatrixTypeFlagsColumn：向量是矩阵的列
-        Matrix2(const Vector2& vector0, const Vector2& vector1, MatrixMajorFlags majorFlag);
+        Matrix2(const Vector2Type& vector0, const Vector2Type& vector1, MatrixMajorFlags majorFlag);
         explicit Matrix2(const Vector2ContainerType& vectors, MatrixMajorFlags majorFlag = MatrixMajorFlags::Column);
 
         // 创建一个对角矩阵, member01 = member10 = 0.
         constexpr Matrix2(Real member00, Real member11) noexcept
-            : x{ member00, Math::GetValue(0) }, y{ Math::GetValue(0), member11 }
+            : x{ member00, MathType::GetValue(0) }, y{ MathType::GetValue(0), member11 }
         {
         }
 
@@ -87,7 +87,7 @@ namespace Mathematics
         explicit Matrix2(Real angle) noexcept;
 
         // 创建一个张量积 U * V^T
-        Matrix2(const Vector2& vector0, const Vector2& vector1) noexcept;
+        Matrix2(const Vector2Type& vector0, const Vector2Type& vector1) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -96,10 +96,10 @@ namespace Mathematics
         void MakeIdentity() noexcept;
         void MakeDiagonal(Real member00, Real member11) noexcept;
         void MakeRotation(Real angle) noexcept;
-        void MakeTensorProduct(const Vector2& lhs, const Vector2& rhs) noexcept;
+        void MakeTensorProduct(const Vector2Type& lhs, const Vector2Type& rhs) noexcept;
 
-        NODISCARD const Vector2& operator[](int row) const;
-        NODISCARD Vector2& operator[](int row);
+        NODISCARD const Vector2Type& operator[](int row) const;
+        NODISCARD Vector2Type& operator[](int row);
         NODISCARD const Real& operator()(int row, int column) const;
         NODISCARD Real& operator()(int row, int column);
 
@@ -116,7 +116,7 @@ namespace Mathematics
         Matrix2& operator/=(Real scalar) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // lhs^T * M * rhs
-        NODISCARD Real QuadraticForm(const Vector2& lhs, const Vector2& rhs) const noexcept;
+        NODISCARD Real QuadraticForm(const Vector2Type& lhs, const Vector2Type& rhs) const noexcept;
 
         // M^T
         NODISCARD Matrix2 Transpose() const noexcept;
@@ -125,12 +125,12 @@ namespace Mathematics
         Matrix2& operator*=(const Matrix2& rhs) noexcept;
 
         // 其它运算
-        NODISCARD Matrix2 Inverse(Real epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD Matrix2 Inverse(Real epsilon = MathType::GetZeroTolerance()) const;
         NODISCARD Matrix2 Adjoint() const noexcept;
         NODISCARD Real Determinant() const noexcept;
 
-        NODISCARD Matrix2 GaussianEliminationInverse(Real epsilon = Math::GetZeroTolerance()) const;
-        NODISCARD Real GaussianEliminationDeterminant(Real epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD Matrix2 GaussianEliminationInverse(Real epsilon = MathType::GetZeroTolerance()) const;
+        NODISCARD Real GaussianEliminationDeterminant(Real epsilon = MathType::GetZeroTolerance()) const;
 
         // 矩阵必须是一个旋转矩阵，下面函数才有效。
         // Orthonormalize函数使用Gram-Schmidt正交化施加到所述旋转矩阵。
@@ -143,7 +143,7 @@ namespace Mathematics
         // D = diag(d0,d1)是一个对角矩阵，这里对角线项为d0和d1。
         // 特征向量u[i]对应的特征向量d[i]。特征值排序为d0 <= d1。
         // 返回值的第一部分为rotation，第二部分为diagonal。
-        NODISCARD Matrix2EigenDecomposition EigenDecomposition(Real epsilon = Math::GetZeroTolerance()) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        NODISCARD Matrix2EigenDecompositionType EigenDecomposition(Real epsilon = MathType::GetZeroTolerance()) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // 特殊矩阵。
         NODISCARD static constexpr Matrix2 GetZero()
@@ -161,42 +161,42 @@ namespace Mathematics
 
         NODISCARD ContainerType GetContainer() const;
 
-        NODISCARD Matrix3 Lift() const;
+        NODISCARD Matrix3Type Lift() const;
         NODISCARD Real Trace() const noexcept;
 
     private:
-        NODISCARD static constexpr Vector2 Create(MatrixInitType flag, VectorIndex vectorIndex)
+        NODISCARD static constexpr Vector2Type Create(MatrixInitType flag, VectorIndex vectorIndex)
         {
             if (flag == MatrixInitType::Zero)
             {
-                return Vector2{};
+                return Vector2Type{};
             }
             else if (vectorIndex == VectorIndex::X)
             {
-                return Vector2::GetUnitX();
+                return Vector2Type::GetUnitX();
             }
             else
             {
-                return Vector2::GetUnitY();
+                return Vector2Type::GetUnitY();
             }
         }
 
         template <int Row>
-        NODISCARD const Vector2& GetVector() const noexcept;
+        NODISCARD const Vector2Type& GetVector() const noexcept;
 
         template <int Row>
-        NODISCARD Vector2& GetVector() noexcept;
+        NODISCARD Vector2Type& GetVector() noexcept;
 
         template <int Column>
-        NODISCARD typename Vector2::GetCoordinateFunction GetVectorGetFunction() const noexcept;
+        NODISCARD typename Vector2Type::GetCoordinateFunction GetVectorGetFunction() const noexcept;
 
         template <int Column>
-        NODISCARD typename Vector2::SetCoordinateFunction GetVectorSetFunction() const noexcept;
+        NODISCARD typename Vector2Type::SetCoordinateFunction GetVectorSetFunction() const noexcept;
 
     private:
         // 存储为行主序。
-        Vector2 x;
-        Vector2 y;
+        Vector2Type x;
+        Vector2Type y;
     };
 
     // mat * mat

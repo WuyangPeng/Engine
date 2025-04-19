@@ -25,27 +25,27 @@ namespace Mathematics
         using ClassType = DynamicFindIntersectorTriangle2Triangle2<Real>;
         using ParentType = DynamicIntersector<Real, Vector2>;
 
-        using Math = typename ParentType::Math;
-        using Vector2 = Vector2<Real>;
-        using Triangle2 = Triangle2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
+        using MathType = typename ParentType::MathType;
+        using Vector2Type = Vector2<Real>;
+        using Triangle2Type = Triangle2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
 
     public:
-        DynamicFindIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1, Real tmax, const Vector2& velocity0, const Vector2& velocity1, const Real epsilon = Math::GetZeroTolerance());
+        DynamicFindIntersectorTriangle2Triangle2(const Triangle2Type& triangle0, const Triangle2Type& triangle1, Real tmax, const Vector2Type& velocity0, const Vector2Type& velocity1, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Triangle2 GetTriangle0() const noexcept;
-        NODISCARD Triangle2 GetTriangle1() const noexcept;
+        NODISCARD Triangle2Type GetTriangle0() const noexcept;
+        NODISCARD Triangle2Type GetTriangle1() const noexcept;
 
         // 有关交集的信息。
         NODISCARD int GetQuantity() const;
-        NODISCARD Vector2 GetPoint(int index) const;
+        NODISCARD Vector2Type GetPoint(int index) const;
 
     private:
-        using Intersection = std::vector<Vector2>;
+        using Intersection = std::vector<Vector2Type>;
         static constexpr auto size = 3;
-        using Vector2Container = std::array<Vector2, size>;
+        using Vector2Container = std::array<Vector2Type, size>;
 
     private:
         enum class SideType
@@ -91,9 +91,9 @@ namespace Mathematics
             IntersectInfo(bool result, SideType side, const Configuration& tCfg0, const Configuration& tCfg1, Real tFirst, Real tLast) noexcept;
         };
 
-        NODISCARD Configuration ComputeTwo(const Intersection& vertex, const Vector2& axis, int i0, int i1, int i2);
+        NODISCARD Configuration ComputeTwo(const Intersection& vertex, const Vector2Type& axis, int i0, int i1, int i2);
 
-        NODISCARD Configuration ComputeThree(const Intersection& vertex, const Vector2& axis, const Vector2& vector);
+        NODISCARD Configuration ComputeThree(const Intersection& vertex, const Vector2Type& axis, const Vector2Type& vector);
 
         NODISCARD static IntersectInfo NoIntersect(const Configuration& cfg0, const Configuration& cfg1, Real tmax, Real speed) noexcept;
 
@@ -101,8 +101,8 @@ namespace Mathematics
 
     private:
         // 要相交的对象。
-        Triangle2 triangle0;
-        Triangle2 triangle1;
+        Triangle2Type triangle0;
+        Triangle2Type triangle1;
 
         // 有关交集的信息。
         Intersection point;

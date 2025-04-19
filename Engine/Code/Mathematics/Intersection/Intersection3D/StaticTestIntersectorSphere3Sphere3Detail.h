@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorSphere3Sphere3<Real>::StaticTestIntersectorSphere3Sphere3(const Sphere3& rkSphere0, const Sphere3& rkSphere1, const Real epsilon)
+Mathematics::StaticTestIntersectorSphere3Sphere3<Real>::StaticTestIntersectorSphere3Sphere3(const Sphere3Type& rkSphere0, const Sphere3Type& rkSphere1, const Real epsilon)
     : ParentType{ epsilon }, sphere0{ rkSphere0 }, sphere1{ rkSphere1 }
 {
     Test();
@@ -56,7 +56,7 @@ void Mathematics::StaticTestIntersectorSphere3Sphere3<Real>::Test()
 {
     const auto diff = sphere1.GetCenter() - sphere0.GetCenter();
     const auto rSum = sphere0.GetRadius() + sphere1.GetRadius();
-    if (Vector3Tools::GetLengthSquared(diff) <= rSum * rSum)
+    if (Vector3ToolsType::GetLengthSquared(diff) <= rSum * rSum)
     {
         this->SetIntersectionType(IntersectionType::Point);
     }

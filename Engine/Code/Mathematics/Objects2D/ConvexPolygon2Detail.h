@@ -109,12 +109,12 @@ void Mathematics::ConvexPolygon2<Real>::UpdateLine(int index, const Vector2& ave
     auto edge = vertex1 - vertex0;
     auto normal = Vector2Tools::GetPerp(-edge);
     auto length = Vector2Tools::GetLength(normal);
-    if (Math::GetZeroTolerance() < length)
+    if (MathType::GetZeroTolerance() < length)
     {
         normal /= length;
         auto dot = Vector2Tools::DotProduct(normal, diff);
-        MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= dot, "点积必须为非负数\n");
-        if (dot < Math::GetValue(0))
+        MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= dot, "点积必须为非负数\n");
+        if (dot < MathType::GetValue(0))
         {
             normal = -normal;
         }
@@ -145,15 +145,15 @@ template <typename Real>
 bool Mathematics::ConvexPolygon2<Real>::IsConvex(Real threshold) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_1(threshold <= Math::GetValue(0), "threshold必须为负值！");
+    MATHEMATICS_ASSERTION_1(threshold <= MathType::GetValue(0), "threshold必须为负值！");
 
     if (IsUpdateLines())
     {
         THROW_EXCEPTION(SYSTEM_TEXT("需要更新线段。\n"s))
     }
 
-    auto maxDistance = -Math::maxReal;
-    auto minDistance = Math::maxReal;
+    auto maxDistance = -MathType::maxReal;
+    auto minDistance = MathType::maxReal;
 
     for (const auto& line : lines)
     {
@@ -182,7 +182,7 @@ template <typename Real>
 bool Mathematics::ConvexPolygon2<Real>::Contains(const Vector2& point, Real threshold) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_1(threshold <= Math::GetValue(0), "threshold必须为负值！");
+    MATHEMATICS_ASSERTION_1(threshold <= MathType::GetValue(0), "threshold必须为负值！");
 
     if (IsUpdateLines())
     {

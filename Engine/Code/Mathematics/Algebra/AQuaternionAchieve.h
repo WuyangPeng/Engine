@@ -32,7 +32,7 @@ Mathematics::AQuaternion<Real>::AQuaternion(const ArrayType& coordinate) noexcep
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::AQuaternion<Real>::AQuaternion(const Matrix& matrix)
+Mathematics::AQuaternion<Real>::AQuaternion(const MatrixType& matrix)
     : w{}, x{}, y{}, z{}
 {
     FromRotationMatrix(matrix);
@@ -42,7 +42,7 @@ Mathematics::AQuaternion<Real>::AQuaternion(const Matrix& matrix)
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::AQuaternion<Real>::FromRotationMatrix(const Matrix& matrix)
+void Mathematics::AQuaternion<Real>::FromRotationMatrix(const MatrixType& matrix)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -50,13 +50,13 @@ void Mathematics::AQuaternion<Real>::FromRotationMatrix(const Matrix& matrix)
 
     const auto trace = matrix.template GetValue<0>() + matrix.template GetValue<5>() + matrix.template GetValue<10>();
 
-    if (Math::GetValue(0) < trace)
+    if (MathType::GetValue(0) < trace)
     {
         // |w| > 1/2, 可能选择 w > 1/2
-        auto root = Math::Sqrt(trace + Math::GetValue(1));  // 2w
+        auto root = MathType::Sqrt(trace + MathType::GetValue(1));  // 2w
 
-        w = Math::GetRational(1, 2) * root;
-        root = Math::GetRational(1, 2) / root;  // 1 / (4w)
+        w = MathType::GetRational(1, 2) * root;
+        root = MathType::GetRational(1, 2) / root;  // 1 / (4w)
         x = (matrix.template GetValue<9>() - matrix.template GetValue<6>()) * root;
         y = (matrix.template GetValue<2>() - matrix.template GetValue<8>()) * root;
         z = (matrix.template GetValue<4>() - matrix.template GetValue<1>()) * root;
@@ -82,10 +82,10 @@ void Mathematics::AQuaternion<Real>::FromRotationMatrix(const Matrix& matrix)
         const auto index1 = (index0 + 1) % indexSize;
         const auto index2 = (index1 + 1) % indexSize;
 
-        auto root = Math::Sqrt(maxValue - matrix(index1, index1) - matrix(index2, index2) + Math::GetValue(1));
+        auto root = MathType::Sqrt(maxValue - matrix(index1, index1) - matrix(index2, index2) + MathType::GetValue(1));
 
-        (*this)[index0 + 1] = Math::GetRational(1, 2) * root;
-        root = Math::GetRational(1, 2) / root;
+        (*this)[index0 + 1] = MathType::GetRational(1, 2) * root;
+        root = MathType::GetRational(1, 2) / root;
         w = (matrix(index2, index1) - matrix(index1, index2)) * root;
         (*this)[index1 + 1] = (matrix(index1, index0) + matrix(index0, index1)) * root;
         (*this)[index2 + 1] = (matrix(index2, index0) + matrix(index0, index2)) * root;
@@ -94,7 +94,7 @@ void Mathematics::AQuaternion<Real>::FromRotationMatrix(const Matrix& matrix)
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::AQuaternion<Real>::AQuaternion(const AVector& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
+Mathematics::AQuaternion<Real>::AQuaternion(const AVectorType& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
     : w{}, x{}, y{}, z{}
 {
     MATHEMATICS_ASSERTION_1(axis.IsNormalize(), "axis必须是单位向量！");
@@ -106,7 +106,7 @@ Mathematics::AQuaternion<Real>::AQuaternion(const AVector& axis, Real angle) noe
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-void Mathematics::AQuaternion<Real>::FromAxisAngle(const AVector& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
+void Mathematics::AQuaternion<Real>::FromAxisAngle(const AVectorType& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
     MATHEMATICS_ASSERTION_1(axis.IsNormalize(), "axis必须是单位向量！");
@@ -114,10 +114,10 @@ void Mathematics::AQuaternion<Real>::FromAxisAngle(const AVector& axis, Real ang
     // 代表旋转的四元数是
     // q = cos(A/2) + sin(A/2) * (x * i + y * j + z * k)
 
-    const auto halfAngle = Math::GetRational(1, 2) * angle;
+    const auto halfAngle = MathType::GetRational(1, 2) * angle;
 
-    const auto sinValue = Math::Sin(halfAngle);
-    w = Math::Cos(halfAngle);
+    const auto sinValue = MathType::Sin(halfAngle);
+    w = MathType::Cos(halfAngle);
 
     x = sinValue * axis.GetX();
     y = sinValue * axis.GetY();
@@ -306,14 +306,14 @@ Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>::operator/=(Real 
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    if (Math::FAbs(scalar) <= Math::GetZeroTolerance())
+    if (MathType::FAbs(scalar) <= MathType::GetZeroTolerance())
     {
         MATHEMATICS_ASSERTION_1(false, "除零错误！");
 
-        w = Math::maxReal;
-        x = Math::maxReal;
-        y = Math::maxReal;
-        z = Math::maxReal;
+        w = MathType::maxReal;
+        x = MathType::maxReal;
+        y = MathType::maxReal;
+        z = MathType::maxReal;
     }
     else
     {
@@ -328,13 +328,13 @@ Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>::operator/=(Real 
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::AQuaternion<Real>::Matrix Mathematics::AQuaternion<Real>::ToRotationMatrix() const noexcept
+typename Mathematics::AQuaternion<Real>::MatrixType Mathematics::AQuaternion<Real>::ToRotationMatrix() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto twoX = Math::GetValue(2) * x;
-    const auto twoY = Math::GetValue(2) * y;
-    const auto twoZ = Math::GetValue(2) * z;
+    const auto twoX = MathType::GetValue(2) * x;
+    const auto twoY = MathType::GetValue(2) * y;
+    const auto twoZ = MathType::GetValue(2) * z;
     const auto twoWX = twoX * w;
     const auto twoWY = twoY * w;
     const auto twoWZ = twoZ * w;
@@ -345,30 +345,30 @@ typename Mathematics::AQuaternion<Real>::Matrix Mathematics::AQuaternion<Real>::
     const auto twoYZ = twoZ * y;
     const auto twoZZ = twoZ * z;
 
-    return Matrix{ Math::GetValue(1) - (twoYY + twoZZ),
+    return MatrixType{ MathType::GetValue(1) - (twoYY + twoZZ),
                    twoXY - twoWZ,
                    twoXZ + twoWY,
-                   Math::GetValue(0),
+                   MathType::GetValue(0),
 
                    twoXY + twoWZ,
-                   Math::GetValue(1) - (twoXX + twoZZ),
+                   MathType::GetValue(1) - (twoXX + twoZZ),
                    twoYZ - twoWX,
-                   Math::GetValue(0),
+                   MathType::GetValue(0),
 
                    twoXZ - twoWY,
                    twoYZ + twoWX,
-                   Math::GetValue(1) - (twoXX + twoYY),
-                   Math::GetValue(0),
+                   MathType::GetValue(1) - (twoXX + twoYY),
+                   MathType::GetValue(0),
 
-                   Math::GetValue(0),
-                   Math::GetValue(0),
-                   Math::GetValue(0),
-                   Math::GetValue(1) };
+                   MathType::GetValue(0),
+                   MathType::GetValue(0),
+                   MathType::GetValue(0),
+                   MathType::GetValue(1) };
 }
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::AQuaternion<Real>::AVector Mathematics::AQuaternion<Real>::ToAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
+typename Mathematics::AQuaternion<Real>::AVectorType Mathematics::AQuaternion<Real>::ToAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -377,16 +377,16 @@ typename Mathematics::AQuaternion<Real>::AVector Mathematics::AQuaternion<Real>:
 
     const auto squareLength = x * x + y * y + z * z;
 
-    if (Math::GetZeroTolerance() < squareLength)
+    if (MathType::GetZeroTolerance() < squareLength)
     {
-        const auto invLength = Math::InvSqrt(squareLength);
+        const auto invLength = MathType::InvSqrt(squareLength);
 
-        return AVector{ x * invLength, y * invLength, z * invLength };
+        return AVectorType{ x * invLength, y * invLength, z * invLength };
     }
     else
     {
         // 角度是 0 (2 * pi的模), 所以任何轴都行。
-        return AVector::GetUnitX();
+        return AVectorType::GetUnitX();
     }
 }
 
@@ -398,13 +398,13 @@ Real Mathematics ::AQuaternion<Real>::ToAngle() const noexcept
 
     const auto squareLength = x * x + y * y + z * z;
 
-    if (Math::GetZeroTolerance() < squareLength)
+    if (MathType::GetZeroTolerance() < squareLength)
     {
-        return Math::GetValue(2) * Math::ACos(w);
+        return MathType::GetValue(2) * MathType::ACos(w);
     }
     else
     {
-        return Math::GetValue(0);
+        return MathType::GetValue(0);
     }
 }
 
@@ -414,7 +414,7 @@ Real Mathematics::AQuaternion<Real>::Length() const noexcept(gAssert < 3 || gMat
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return Math::Sqrt(SquaredLength());
+    return MathType::Sqrt(SquaredLength());
 }
 
 template <typename Real>
@@ -445,10 +445,10 @@ void Mathematics::AQuaternion<Real>::Normalize(Real epsilon) noexcept(gAssert < 
     {
         MATHEMATICS_ASSERTION_1(false, "四元数正则化错误！");
 
-        w = Math::GetValue(0);
-        x = Math::GetValue(0);
-        y = Math::GetValue(0);
-        z = Math::GetValue(0);
+        w = MathType::GetValue(0);
+        x = MathType::GetValue(0);
+        y = MathType::GetValue(0);
+        z = MathType::GetValue(0);
     }
 }
 
@@ -459,7 +459,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::AQuaternion<Real>::IsNorma
 
     const auto length = Length();
 
-    if (Math::FAbs(length - Math::GetValue(1)) <= epsilon)
+    if (MathType::FAbs(length - MathType::GetValue(1)) <= epsilon)
     {
         return true;
     }
@@ -477,7 +477,7 @@ Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Inverse() const n
 
     const auto norm = SquaredLength();
 
-    if (Math::GetZeroTolerance() < norm)
+    if (MathType::GetZeroTolerance() < norm)
     {
         return AQuaternion{ w / norm, -x / norm, -y / norm, -z / norm };
     }
@@ -503,7 +503,7 @@ requires std::is_arithmetic_v<Real>
 Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Exp() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    MATHEMATICS_ASSERTION_1(Math::FAbs(w) <= Math::GetZeroTolerance(), "四元数w必须等于0！");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(w) <= MathType::GetZeroTolerance(), "四元数w必须等于0！");
 
     // 如果 q = A * (x * i + y * j + z * k) 这里 (x,y,z) 是单位长度，然后
     // exp(q) = cos(A) + sin(A) * (x * i + y * j + z * k)。
@@ -512,12 +512,12 @@ Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Exp() const noexc
 
     AQuaternion result{};
 
-    const auto angle = Math::Sqrt(x * x + y * y + z * z);
+    const auto angle = MathType::Sqrt(x * x + y * y + z * z);
 
-    const auto sinValue = Math::Sin(angle);
-    result.w = Math::Cos(angle);
+    const auto sinValue = MathType::Sin(angle);
+    result.w = MathType::Cos(angle);
 
-    if (Math::GetZeroTolerance() <= Math::FAbs(sinValue))
+    if (MathType::GetZeroTolerance() <= MathType::FAbs(sinValue))
     {
         const auto coefficient = sinValue / angle;
 
@@ -548,13 +548,13 @@ Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Log() const noexc
     // 因为 A/sin(A) 趋向于 1。
 
     AQuaternion result{ *this };
-    result.w = Math::GetValue(0);
+    result.w = MathType::GetValue(0);
 
-    if (Math::FAbs(w) < Math::GetValue(1))
+    if (MathType::FAbs(w) < MathType::GetValue(1))
     {
-        const auto angle = Math::ACos(w);
-        const auto sinValue = Math::Sin(angle);
-        if (Math::GetZeroTolerance() <= Math::FAbs(sinValue))
+        const auto angle = MathType::ACos(w);
+        const auto sinValue = MathType::Sin(angle);
+        if (MathType::GetZeroTolerance() <= MathType::FAbs(sinValue))
         {
             const auto coefficient = angle / sinValue;
 
@@ -571,7 +571,7 @@ Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Log() const noexc
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::AQuaternion<Real>::AVector Mathematics::AQuaternion<Real>::Rotate(const AVector& vector) const noexcept
+typename Mathematics::AQuaternion<Real>::AVectorType Mathematics::AQuaternion<Real>::Rotate(const AVectorType& vector) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -603,14 +603,14 @@ void Mathematics::AQuaternion<Real>::Slerp(Real t, const AQuaternion& quaternion
     MATHEMATICS_CLASS_IS_VALID_9;
 
     const auto cosValue = Dot(quaternion0, quaternion1);
-    const auto angle = Math::ACos(cosValue);
+    const auto angle = MathType::ACos(cosValue);
 
-    if (Math::GetZeroTolerance() <= Math::FAbs(angle))
+    if (MathType::GetZeroTolerance() <= MathType::FAbs(angle))
     {
-        const auto sinValue = Math::Sin(angle);
+        const auto sinValue = MathType::Sin(angle);
         const auto tAngle = t * angle;
-        const auto coefficient0 = Math::Sin(angle - tAngle) / sinValue;
-        const auto coefficient1 = Math::Sin(tAngle) / sinValue;
+        const auto coefficient0 = MathType::Sin(angle - tAngle) / sinValue;
+        const auto coefficient1 = MathType::Sin(tAngle) / sinValue;
 
         w = coefficient0 * quaternion0.w + coefficient1 * quaternion1.w;
         x = coefficient0 * quaternion0.x + coefficient1 * quaternion1.x;
@@ -635,7 +635,7 @@ void Mathematics::AQuaternion<Real>::Intermediate(const AQuaternion& quaternion0
     const auto p0 = quaternion1Conjugate * quaternion0;
     const auto p2 = quaternion1Conjugate * quaternion2;
 
-    const auto arg = -Math::GetRational(1, 4) * (p0.Log() + p2.Log());
+    const auto arg = -MathType::GetRational(1, 4) * (p0.Log() + p2.Log());
     *this = quaternion1 * arg.Exp();
 }
 
@@ -645,7 +645,7 @@ void Mathematics::AQuaternion<Real>::Squad(Real t, const AQuaternion& q0, const 
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    const auto slerpT = Math::GetValue(2) * t * (Math::GetValue(1) - t);
+    const auto slerpT = MathType::GetValue(2) * t * (MathType::GetValue(1) - t);
 
     AQuaternion slerpP{};
     slerpP.Slerp(t, q0, q1);

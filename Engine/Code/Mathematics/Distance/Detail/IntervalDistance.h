@@ -21,16 +21,16 @@ namespace Mathematics
         using ClassType = IntervalDistance<Real, Vector>;
         using ParentType = IntervalDistanceBase<Real, Vector>;
 
-        using DistanceBase = DistanceBase<Real, Vector>;
-        using DistanceResult = DistanceResult<Real, Vector>;
+        using DistanceBaseType = DistanceBase<Real, Vector>;
+        using DistanceResultType = DistanceResult<Real, Vector>;
 
     public:
-        IntervalDistance(const DistanceBase& distance, Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity);
+        IntervalDistance(const DistanceBaseType& distance, Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        NODISCARD DistanceResult Get(Real t) const final;
+        NODISCARD DistanceResultType Get(Real t) const final;
         NODISCARD Real GetDerivative(Real t) const final;
     };
 }

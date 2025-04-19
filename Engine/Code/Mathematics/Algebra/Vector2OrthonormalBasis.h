@@ -27,24 +27,24 @@ namespace Mathematics
     public:
         using ClassType = Vector2OrthonormalBasis<Real>;
 
-        using Math = Math<Real>;
-        using Vector2 = Vector2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
+        using MathType = Math<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
 
     public:
-        explicit Vector2OrthonormalBasis(const Vector2& nonzeroVector, Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        explicit Vector2OrthonormalBasis(const Vector2Type& nonzeroVector, Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector2 GetUVector() const noexcept;
-        NODISCARD Vector2 GetVVector() const noexcept;
+        NODISCARD Vector2Type GetUVector() const noexcept;
+        NODISCARD Vector2Type GetVVector() const noexcept;
 
     private:
         void Generate() noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
     private:
-        Vector2 uVector;
-        Vector2 vVector;
+        Vector2Type uVector;
+        Vector2Type vVector;
         Real epsilon;
     };
 

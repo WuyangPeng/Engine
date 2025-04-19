@@ -89,16 +89,16 @@ void Mathematics::QuadraticSphereFit3<Real>::Calculate(const Points& points)
     auto eigenVector = eigenSystem.GetEigenvector(0);
 
     // 当心除零
-    if (Math::GetZeroTolerance() < Math::FAbs(eigenVector[4]))
+    if (MathType::GetZeroTolerance() < MathType::FAbs(eigenVector[4]))
     {
-        auto inv = Math::GetValue(1) / eigenVector[4];
+        auto inv = MathType::GetValue(1) / eigenVector[4];
 
         std::array<Real, 4> coeff{ inv * eigenVector[0], inv * eigenVector[1], inv * eigenVector[2], inv * eigenVector[3] };
 
-        center[0] = -Math::GetRational(1, 2) * coeff.at(1);
-        center[1] = -Math::GetRational(1, 2) * coeff.at(2);
-        center[2] = -Math::GetRational(1, 2) * coeff.at(3);
-        radius = Math::Sqrt(Math::FAbs(center.GetX() * center.GetX() + center.GetY() * center.GetY() + center.GetZ() * center.GetZ() - coeff.at(0)));
+        center[0] = -MathType::GetRational(1, 2) * coeff.at(1);
+        center[1] = -MathType::GetRational(1, 2) * coeff.at(2);
+        center[2] = -MathType::GetRational(1, 2) * coeff.at(3);
+        radius = MathType::Sqrt(MathType::FAbs(center.GetX() * center.GetX() + center.GetY() * center.GetY() + center.GetZ() * center.GetZ() - coeff.at(0)));
     }
     else
     {
@@ -107,7 +107,7 @@ void Mathematics::QuadraticSphereFit3<Real>::Calculate(const Points& points)
 
     // 对于精确配合，数字舍入误差可能使最小特征值仅仅略为负值。
     // 返回的绝对值，因为应用程序可能依赖的返回值是非负数。
-    eigenValue = Math::FAbs(eigenSystem.GetEigenvalue(0));
+    eigenValue = MathType::FAbs(eigenSystem.GetEigenvalue(0));
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -115,7 +115,7 @@ void Mathematics::QuadraticSphereFit3<Real>::Calculate(const Points& points)
 template <typename Real>
 bool Mathematics::QuadraticSphereFit3<Real>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) < radius && Math::GetValue(0) <= eigenValue)
+    if (MathType::GetValue(0) < radius && MathType::GetValue(0) <= eigenValue)
         return true;
     else
         return false;

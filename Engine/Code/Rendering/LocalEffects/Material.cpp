@@ -29,7 +29,7 @@ Rendering::Material::MaterialSharedPtr Rendering::Material::Create(const std::st
     return std::make_shared<ClassType>(MaterialCreate::Init, name);
 }
 
-Rendering::Material::MaterialSharedPtr Rendering::Material::Create(const std::string& name, const Colour& emissive, const Colour& ambient, const Colour& diffuse, const Colour& specular)
+Rendering::Material::MaterialSharedPtr Rendering::Material::Create(const std::string& name, const ColourType& emissive, const ColourType& ambient, const ColourType& diffuse, const ColourType& specular)
 {
     return std::make_shared<ClassType>(MaterialCreate::Init, name, emissive, ambient, diffuse, specular);
 }
@@ -43,7 +43,7 @@ Rendering::Material::Material(MaterialCreate materialCreate, const std::string& 
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::Material::Material(MaterialCreate materialCreate, const std::string& name, const Colour& emissive, const Colour& ambient, const Colour& diffuse, const Colour& specular)
+Rendering::Material::Material(MaterialCreate materialCreate, const std::string& name, const ColourType& emissive, const ColourType& ambient, const ColourType& diffuse, const ColourType& specular)
     : ParentType{ name },
       impl{ emissive, ambient, diffuse, specular }
 {
@@ -125,56 +125,56 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::Material::CloneObject() const
     return std::make_shared<ClassType>(*this);
 }
 
-Rendering::Material::Colour Rendering::Material::GetEmissive() const noexcept
+Rendering::Material::ColourType Rendering::Material::GetEmissive() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetEmissive();
 }
 
-Rendering::Material::Colour Rendering::Material::GetAmbient() const noexcept
+Rendering::Material::ColourType Rendering::Material::GetAmbient() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetAmbient();
 }
 
-Rendering::Material::Colour Rendering::Material::GetDiffuse() const noexcept
+Rendering::Material::ColourType Rendering::Material::GetDiffuse() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetDiffuse();
 }
 
-Rendering::Material::Colour Rendering::Material::GetSpecular() const noexcept
+Rendering::Material::ColourType Rendering::Material::GetSpecular() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetSpecular();
 }
 
-void Rendering::Material::SetEmissive(const Colour& emissive) noexcept
+void Rendering::Material::SetEmissive(const ColourType& emissive) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetEmissive(emissive);
 }
 
-void Rendering::Material::SetAmbient(const Colour& ambient) noexcept
+void Rendering::Material::SetAmbient(const ColourType& ambient) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetAmbient(ambient);
 }
 
-void Rendering::Material::SetDiffuse(const Colour& diffuse) noexcept
+void Rendering::Material::SetDiffuse(const ColourType& diffuse) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetDiffuse(diffuse);
 }
 
-void Rendering::Material::SetSpecular(const Colour& specular) noexcept
+void Rendering::Material::SetSpecular(const ColourType& specular) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 

@@ -18,7 +18,7 @@
 #include "Mathematics/Objects2D/Arc2Detail.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorArc2Arc2<Real>::StaticFindIntersectorArc2Arc2(const Arc2& lhsArc, const Arc2& rhsArc, const Real epsilon)
+Mathematics::StaticFindIntersectorArc2Arc2<Real>::StaticFindIntersectorArc2Arc2(const Arc2Type& lhsArc, const Arc2Type& rhsArc, const Real epsilon)
     : ParentType{ epsilon }, lhsArc{ lhsArc }, rhsArc{ rhsArc }, point{}, intersectionArc{ lhsArc }
 {
     Find();
@@ -29,8 +29,8 @@ Mathematics::StaticFindIntersectorArc2Arc2<Real>::StaticFindIntersectorArc2Arc2(
 template <typename Real>
 void Mathematics::StaticFindIntersectorArc2Arc2<Real>::Find()
 {
-    const Circle2 lhsCircle{ lhsArc.GetCenter(), lhsArc.GetRadius() };
-    const Circle2 rhsCircle{ rhsArc.GetCenter(), rhsArc.GetRadius() };
+    const Circle2Type lhsCircle{ lhsArc.GetCenter(), lhsArc.GetRadius() };
+    const Circle2Type rhsCircle{ rhsArc.GetCenter(), rhsArc.GetRadius() };
     StaticFindIntersectorCircle2Circle2<Real> intersector{ lhsCircle, rhsCircle };
     if (!intersector.IsIntersection())
     {
@@ -54,18 +54,18 @@ void Mathematics::StaticFindIntersectorArc2Arc2<Real>::Find()
             }
             else
             {
-                if (!Vector2Tools::Approximate(lhsArc.GetEnd0(), rhsArc.GetEnd1(), this->GetEpsilon()))
+                if (!Vector2ToolsType::Approximate(lhsArc.GetEnd0(), rhsArc.GetEnd1(), this->GetEpsilon()))
                 {
                     // m_LhsArc和m_RhsArc重叠, <B0,A0,B1,A1>.
                     this->SetIntersectionType(IntersectionType::Other);
-                    const Arc2 arc{ lhsArc.GetCenter(), lhsArc.GetRadius(), lhsArc.GetEnd0(), rhsArc.GetEnd1(), this->GetEpsilon() };
+                    const Arc2Type arc{ lhsArc.GetCenter(), lhsArc.GetRadius(), lhsArc.GetEnd0(), rhsArc.GetEnd1(), this->GetEpsilon() };
                     intersectionArc = arc;
                 }
                 else
                 {
                     // m_LhsArc和m_RhsArc共享端点 <B0,A0,B1,A1>, A0 = B1.
                     this->SetIntersectionType(IntersectionType::Point);
-                    point.emplace_back((lhsArc.GetEnd0() + rhsArc.GetEnd1()) / Math::GetValue(2));
+                    point.emplace_back((lhsArc.GetEnd0() + rhsArc.GetEnd1()) / MathType::GetValue(2));
                 }
             }
 
@@ -74,18 +74,18 @@ void Mathematics::StaticFindIntersectorArc2Arc2<Real>::Find()
 
         if (rhsArc.Contains(lhsArc.GetEnd1()))
         {
-            if (!Vector2Tools::Approximate(lhsArc.GetEnd1(), rhsArc.GetEnd0(), this->GetEpsilon()))
+            if (!Vector2ToolsType::Approximate(lhsArc.GetEnd1(), rhsArc.GetEnd0(), this->GetEpsilon()))
             {
                 // m_LhsArc和m_RhsArc重叠, <A0,B0,A1,B1>.
                 this->SetIntersectionType(IntersectionType::Other);
-                const Arc2 arc{ lhsArc.GetCenter(), lhsArc.GetRadius(), rhsArc.GetEnd0(), lhsArc.GetEnd1(), this->GetEpsilon() };
+                const Arc2Type arc{ lhsArc.GetCenter(), lhsArc.GetRadius(), rhsArc.GetEnd0(), lhsArc.GetEnd1(), this->GetEpsilon() };
                 intersectionArc = arc;
             }
             else
             {
                 // m_LhsArc和m_RhsArc共享端点， <A0,B0,A1,B1>, B0 = A1.
                 this->SetIntersectionType(IntersectionType::Point);
-                point.emplace_back((rhsArc.GetEnd0() + lhsArc.GetEnd1()) / Math::GetValue(2));
+                point.emplace_back((rhsArc.GetEnd0() + lhsArc.GetEnd1()) / MathType::GetValue(2));
             }
 
             return;

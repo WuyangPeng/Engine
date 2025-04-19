@@ -25,37 +25,37 @@ namespace Mathematics
     {
     public:
         using ClassType = DistanceLine3Segment3<Real>;
-        using Vector3 = Vector3<Real>;
-        using ParentType = DistanceBase<Real, Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3Type>;
 
-        using Line3 = Line3<Real>;
-        using Segment3 = Segment3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using DistanceLine3Line3Tool = DistanceLine3Line3Tool<Real>;
-        using Math = typename ParentType::Math;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using Line3Type = Line3<Real>;
+        using Segment3Type = Segment3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using DistanceLine3Line3ToolType = DistanceLine3Line3Tool<Real>;
+        using MathType = typename ParentType::MathType;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistanceLine3Segment3(const Line3& line, const Segment3& segment) noexcept;
+        DistanceLine3Segment3(const Line3Type& line, const Segment3Type& segment) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Line3 GetLine() const noexcept;
-        NODISCARD Segment3 GetSegment() const noexcept;
+        NODISCARD Line3Type GetLine() const noexcept;
+        NODISCARD Segment3Type GetSegment() const noexcept;
 
         // æ≤Ã¨æ‡¿Î≤È—Ø°£
         NODISCARD DistanceResult GetSquared() const override;
 
         // ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£
-        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
     private:
-        NODISCARD DistanceResult GetSquaredWithClosestPoints(const DistanceLine3Line3Tool& tool, Real rhsExtent) const;
-        NODISCARD DistanceResult GetSquaredWithClosestPointsIsParallel(const DistanceLine3Line3Tool& tool) const;
+        NODISCARD DistanceResult GetSquaredWithClosestPoints(const DistanceLine3Line3ToolType& tool, Real rhsExtent) const;
+        NODISCARD DistanceResult GetSquaredWithClosestPointsIsParallel(const DistanceLine3Line3ToolType& tool) const;
 
     private:
-        Line3 line;
-        Segment3 segment;
+        Line3Type line;
+        Segment3Type segment;
     };
 
     using DistanceLine3Segment3F = DistanceLine3Segment3<float>;

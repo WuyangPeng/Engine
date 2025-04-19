@@ -231,8 +231,8 @@ namespace System
 
 #else  // !SYSTEM_USE_WINDOWS_MACRO
 
-    #define SYSTEM_CALL_BACK __stdcall
-    #define SYSTEM_WIN_API __stdcall
+    #define SYSTEM_CALL_BACK
+    #define SYSTEM_WIN_API
     #define SYSTEM_IN
     #define SYSTEM_IN_OPT
     #define SYSTEM_OUT

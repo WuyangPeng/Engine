@@ -14,6 +14,8 @@
 
 #include "Flags/RootType.h"
 
+#include <type_traits>
+
 // 二分法解方程的根
 namespace Mathematics
 {

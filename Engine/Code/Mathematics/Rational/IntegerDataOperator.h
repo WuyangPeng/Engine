@@ -27,24 +27,24 @@ namespace Mathematics
     public:
         using ClassType = IntegerDataOperator<N>;
 
-        using IntegerDataAmend = IntegerDataAmend<N>;
-        using IntegerData = IntegerData<N>;
-        using IntegerDataAnalysis = IntegerDataAnalysis<N>;
+        using IntegerDataAmendType = IntegerDataAmend<N>;
+        using IntegerDataType = IntegerData<N>;
+        using IntegerDataAnalysisType = IntegerDataAnalysis<N>;
 
     public:
-        explicit IntegerDataOperator(IntegerData& master) noexcept;
+        explicit IntegerDataOperator(IntegerDataType& master) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         // 算术更新。
-        IntegerDataOperator& operator+=(const IntegerData& rhs);
-        IntegerDataOperator& operator-=(const IntegerData& rhs);
-        IntegerDataOperator& operator*=(const IntegerData& rhs);
+        IntegerDataOperator& operator+=(const IntegerDataType& rhs);
+        IntegerDataOperator& operator-=(const IntegerDataType& rhs);
+        IntegerDataOperator& operator*=(const IntegerDataType& rhs);
 
         // 如果要同时求出商和余数，
         // 直接调用IntegerDataAnalysis::GetDivisionModulo
-        IntegerDataOperator& operator/=(const IntegerData& rhs);
-        IntegerDataOperator& operator%=(const IntegerData& rhs);
+        IntegerDataOperator& operator/=(const IntegerDataType& rhs);
+        IntegerDataOperator& operator%=(const IntegerDataType& rhs);
 
         // 移位更新。
         IntegerDataOperator& operator<<=(int shift);
@@ -59,9 +59,9 @@ namespace Mathematics
         static constexpr uint16_t symbol{ 0x8000 };
         static constexpr auto positive = 0xFFFFFFFFu;
 
-        IntegerData& master;
-        IntegerDataAmend amend;
-        IntegerDataAnalysis analysis;
+        IntegerDataType& master;
+        IntegerDataAmendType amend;
+        IntegerDataAnalysisType analysis;
     };
 
     template <int N>

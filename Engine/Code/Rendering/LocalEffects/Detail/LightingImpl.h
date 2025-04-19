@@ -24,7 +24,7 @@ namespace Rendering
     public:
         using ClassType = LightingImpl;
 
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
         using Math = Mathematics::Math<float>;
         using BufferSource = CoreTools::BufferSource;
         using BufferTarget = CoreTools::BufferTarget;
@@ -44,13 +44,13 @@ namespace Rendering
         NODISCARD float GetSinAngle() const noexcept;
         NODISCARD float GetExponent() const noexcept;
 
-        void SetAmbient(const Colour& aAmbient) noexcept;
-        void SetDiffuse(const Colour& aDiffuse) noexcept;
-        void SetSpecular(const Colour& aSpecular) noexcept;
+        void SetAmbient(const ColourType& aAmbient) noexcept;
+        void SetDiffuse(const ColourType& aDiffuse) noexcept;
+        void SetSpecular(const ColourType& aSpecular) noexcept;
 
-        NODISCARD Colour GetAmbient() const noexcept;
-        NODISCARD Colour GetDiffuse() const noexcept;
-        NODISCARD Colour GetSpecular() const noexcept;
+        NODISCARD ColourType GetAmbient() const noexcept;
+        NODISCARD ColourType GetDiffuse() const noexcept;
+        NODISCARD ColourType GetSpecular() const noexcept;
 
         void SetAttenuation(float aConstant, float aLinear, float aQuadratic, float aIntensity) noexcept;
 
@@ -65,9 +65,9 @@ namespace Rendering
 
     private:
         // 光的颜色
-        Colour ambient;  // 默认: (1,1,1,1)
-        Colour diffuse;  // 默认: (1,1,1,1)
-        Colour specular;  // 默认: (1,1,1,1)
+        ColourType ambient;  // 默认: (1,1,1,1)
+        ColourType diffuse;  // 默认: (1,1,1,1)
+        ColourType specular;  // 默认: (1,1,1,1)
 
         // 位置光源的参数。锥角必须满足在弧度0 < Angle <= pi。
         float angle;  // 默认: pi / 2

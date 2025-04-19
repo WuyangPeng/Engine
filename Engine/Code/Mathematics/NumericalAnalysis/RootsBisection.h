@@ -35,7 +35,7 @@ namespace Mathematics
     public:
         using ClassType = RootsBisection<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         RootsBisection() noexcept;

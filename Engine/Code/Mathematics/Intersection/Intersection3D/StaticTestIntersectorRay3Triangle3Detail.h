@@ -18,7 +18,7 @@
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorRay3Triangle3<Real>::StaticTestIntersectorRay3Triangle3(const Ray3& ray, const Triangle3& triangle, const Real epsilon)
+Mathematics::StaticTestIntersectorRay3Triangle3<Real>::StaticTestIntersectorRay3Triangle3(const Ray3Type& ray, const Triangle3Type& triangle, const Real epsilon)
     : ParentType{ epsilon }, ray{ ray }, triangle{ triangle }
 {
     Test();
@@ -61,17 +61,17 @@ void Mathematics::StaticTestIntersectorRay3Triangle3<Real>::Test()
     const auto diff = ray.GetOrigin() - triangle.GetVertex(0);
     const auto edge1 = triangle.GetVertex(1) - triangle.GetVertex(0);
     const auto edge2 = triangle.GetVertex(2) - triangle.GetVertex(0);
-    const auto normal = Vector3Tools::CrossProduct(edge1, edge2);
+    const auto normal = Vector3ToolsType::CrossProduct(edge1, edge2);
 
-    auto ddn = Vector3Tools::DotProduct(ray.GetDirection(), normal);
+    auto ddn = Vector3ToolsType::DotProduct(ray.GetDirection(), normal);
     Real sign{};
-    if (Math::GetZeroTolerance() < ddn)
+    if (MathType::GetZeroTolerance() < ddn)
     {
-        sign = Math::GetValue(1);
+        sign = MathType::GetValue(1);
     }
-    else if (ddn < -Math::GetZeroTolerance())
+    else if (ddn < -MathType::GetZeroTolerance())
     {
-        sign = Math::GetValue(-1);
+        sign = MathType::GetValue(-1);
         ddn = -ddn;
     }
     else
@@ -80,16 +80,16 @@ void Mathematics::StaticTestIntersectorRay3Triangle3<Real>::Test()
         return;
     }
 
-    auto ddqxe2 = sign * Vector3Tools::DotProduct(ray.GetDirection(), Vector3Tools::CrossProduct(diff, edge2));
-    if (Math::GetValue(0) <= ddqxe2)
+    auto ddqxe2 = sign * Vector3ToolsType::DotProduct(ray.GetDirection(), Vector3ToolsType::CrossProduct(diff, edge2));
+    if (MathType::GetValue(0) <= ddqxe2)
     {
-        auto dde1xq = sign * Vector3Tools::DotProduct(ray.GetDirection(), Vector3Tools::CrossProduct(edge1, diff));
-        if (Math::GetValue(0) <= dde1xq)
+        auto dde1xq = sign * Vector3ToolsType::DotProduct(ray.GetDirection(), Vector3ToolsType::CrossProduct(edge1, diff));
+        if (MathType::GetValue(0) <= dde1xq)
         {
             if (ddqxe2 + dde1xq <= ddn)
             {
-                auto qdn = -sign * Vector3Tools::DotProduct(diff, normal);
-                if (Math::GetValue(0) <= qdn)
+                auto qdn = -sign * Vector3ToolsType::DotProduct(diff, normal);
+                if (MathType::GetValue(0) <= qdn)
                 {
                     this->SetIntersectionType(IntersectionType::Point);
                     return;

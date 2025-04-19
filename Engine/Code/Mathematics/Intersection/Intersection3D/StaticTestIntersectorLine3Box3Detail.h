@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorLine3Box3<Real>::StaticTestIntersectorLine3Box3(const Line3& line, const Box3& box, const Real epsilon)
+Mathematics::StaticTestIntersectorLine3Box3<Real>::StaticTestIntersectorLine3Box3(const Line3Type& line, const Box3Type& box, const Real epsilon)
     : ParentType{ epsilon }, line{ line }, box{ box }
 {
     Test();
@@ -59,14 +59,14 @@ void Mathematics::StaticTestIntersectorLine3Box3<Real>::Test()
     std::array<Real, 3> awxddu{};
 
     auto diff = line.GetOrigin() - box.GetCenter();
-    const auto wxD = Vector3Tools::CrossProduct(line.GetDirection(), diff);
+    const auto wxD = Vector3ToolsType::CrossProduct(line.GetDirection(), diff);
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-    awdu[1] = Math::FAbs(Vector3Tools::DotProduct(line.GetDirection(), box.GetAxis(1)));
-    awdu[2] = Math::FAbs(Vector3Tools::DotProduct(line.GetDirection(), box.GetAxis(2)));
-    awxddu[0] = Math::FAbs(Vector3Tools::DotProduct(wxD, box.GetAxis(0)));
+    awdu[1] = MathType::FAbs(Vector3ToolsType::DotProduct(line.GetDirection(), box.GetAxis(1)));
+    awdu[2] = MathType::FAbs(Vector3ToolsType::DotProduct(line.GetDirection(), box.GetAxis(2)));
+    awxddu[0] = MathType::FAbs(Vector3ToolsType::DotProduct(wxD, box.GetAxis(0)));
     auto rhs = box.GetExtent(1) * awdu[2] + box.GetExtent(2) * awdu[1];
     if (rhs < awxddu[0])
     {
@@ -74,8 +74,8 @@ void Mathematics::StaticTestIntersectorLine3Box3<Real>::Test()
         return;
     }
 
-    awdu[0] = Math::FAbs(Vector3Tools::DotProduct(line.GetDirection(), box.GetAxis(0)));
-    awxddu[1] = Math::FAbs(Vector3Tools::DotProduct(wxD, box.GetAxis(1)));
+    awdu[0] = MathType::FAbs(Vector3ToolsType::DotProduct(line.GetDirection(), box.GetAxis(0)));
+    awxddu[1] = MathType::FAbs(Vector3ToolsType::DotProduct(wxD, box.GetAxis(1)));
     rhs = box.GetExtent(0) * awdu[2] + box.GetExtent(2) * awdu[0];
     if (rhs < awxddu[1])
     {
@@ -83,7 +83,7 @@ void Mathematics::StaticTestIntersectorLine3Box3<Real>::Test()
         return;
     }
 
-    awxddu[2] = Math::FAbs(Vector3Tools::DotProduct(wxD, box.GetAxis(2)));
+    awxddu[2] = MathType::FAbs(Vector3ToolsType::DotProduct(wxD, box.GetAxis(2)));
     rhs = box.GetExtent(0) * awdu[1] + box.GetExtent(1) * awdu[0];
     if (rhs < awxddu[2])
     {

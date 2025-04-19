@@ -16,7 +16,7 @@
 
 template <typename Real>
 Mathematics::PolynomialCurve2<Real>::PolynomialCurve2(const Polynomial<Real>& xPoly, const Polynomial<Real>& yPoly)
-    : ParentType{ Math::GetValue(0), Math::GetValue(1) },
+    : ParentType{ MathType::GetValue(0), MathType::GetValue(1) },
       xPoly{ xPoly },
       yPoly{ yPoly },
       xDer1{ xPoly.GetDerivative() },

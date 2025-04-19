@@ -18,7 +18,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <int N, typename T>
-Mathematics::IntegerDataConversion<N, T>::IntegerDataConversion(const IntegerData& data)
+Mathematics::IntegerDataConversion<N, T>::IntegerDataConversion(const IntegerDataType& data)
     : absData{ IntegerDataAnalysis<N>(data).GetAbsoluteValue() },
       shifting{ absData.IsZero() ? 0 : IntegerDataAnalysis<N>(absData).GetLeadingBit() },
       mantissa{ 0 },

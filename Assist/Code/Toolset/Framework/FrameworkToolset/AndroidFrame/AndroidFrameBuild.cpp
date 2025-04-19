@@ -16,7 +16,7 @@
 
 CLASS_INVARIANT_STUB_DEFINE(FrameworkToolset, AndroidFrameBuild)
 
-namespace FrameworkToolset
+namespace Framework
 {
-    template class Framework::AndroidFrameBuild<Framework::AndroidProcessInterface>;
+    template class AndroidFrameBuild<AndroidProcessInterface>;
 }

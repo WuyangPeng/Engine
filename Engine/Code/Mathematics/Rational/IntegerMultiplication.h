@@ -24,15 +24,15 @@ namespace Mathematics
     public:
         using ClassType = IntegerMultiplication<N>;
 
-        using IntegerData = IntegerData<N>;
-        using IntegerDataAnalysis = IntegerDataAnalysis<N>;
+        using IntegerDataType = IntegerData<N>;
+        using IntegerDataAnalysisType = IntegerDataAnalysis<N>;
 
     public:
-        IntegerMultiplication(const IntegerData& lhs, const IntegerData& rhs);
+        IntegerMultiplication(const IntegerDataType& lhs, const IntegerDataType& rhs);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD IntegerData GetMultiplication() const noexcept;
+        NODISCARD IntegerDataType GetMultiplication() const noexcept;
 
     private:
         void Calculate();
@@ -53,14 +53,14 @@ namespace Mathematics
         static constexpr auto high = 0xFFFF0000u;
         static constexpr auto integerCarry = 0x00010000u;
 
-        const IntegerData& lhsData;
-        const IntegerData& rhsData;
+        const IntegerDataType& lhsData;
+        const IntegerDataType& rhsData;
         NumericalValueSymbol productSign;
-        IntegerData absLhsData;
-        IntegerData absRhsData;
+        IntegerDataType absLhsData;
+        IntegerDataType absRhsData;
         DataType product;
         DataType result;
-        IntegerData multiplication;
+        IntegerDataType multiplication;
     };
 }
 

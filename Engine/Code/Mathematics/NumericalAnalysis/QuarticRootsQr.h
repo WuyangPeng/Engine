@@ -29,7 +29,7 @@ namespace Mathematics
     public:
         using ClassType = QuarticRootsQr<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using Matrix = std::array<std::array<Real, 4>, 4>;
 
     public:

@@ -23,7 +23,7 @@ CoreTools::Entity::Entity(int value)
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, Entity)
 
-bool CoreTools::Entity::EventFunction(const Telegram& telegram)
+bool CoreTools::Entity::EventFunction(const Telegram<>& telegram)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 

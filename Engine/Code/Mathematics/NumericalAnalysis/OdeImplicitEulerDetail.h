@@ -74,9 +74,9 @@ typename Mathematics::OdeImplicitEuler<Real, UserDataType>::Data Mathematics::Od
 }
 
 template <typename Real, typename UserDataType>
-void Mathematics::OdeImplicitEuler<Real, UserDataType>::Update(const VariableMatrix& derivative)
+void Mathematics::OdeImplicitEuler<Real, UserDataType>::Update(const VariableMatrixType& derivative)
 {
-    const auto derivativeInverse = LinearSystem{}.Inverse(derivative);
+    const auto derivativeInverse = LinearSystemType{}.Inverse(derivative);
 
     const VariableLengthVector variableLengthVector{ this->GetFunctionValue() };
     const auto functionValue = derivativeInverse * variableLengthVector;

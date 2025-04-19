@@ -560,7 +560,7 @@ void Mathematics::QuaternionTesting::ArithmeticCalculateTest()
 
         ASSERT_TRUE(Approximate(seventhQuaternion, fifthQuaternion, 1e-6));
 
-        QuaternionD::QuaternionSwingTwist quaternionSwingTwist = eighthQuaternion.DecomposeTwistTimesSwing(Vector3D{ vector0 }, 1e-7);
+        QuaternionD::QuaternionSwingTwistType quaternionSwingTwist = eighthQuaternion.DecomposeTwistTimesSwing(Vector3D{ vector0 }, 1e-7);
 
         seventhQuaternion = quaternionSwingTwist.GetTwist() * quaternionSwingTwist.GetSwing();
 

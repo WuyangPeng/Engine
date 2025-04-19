@@ -80,7 +80,7 @@ void Mathematics::ConvexHull3<Real>::Init()
     if (eQueryType != QueryType::Rational && eQueryType != QueryType::Filtered)
     {
         const auto minValue = info.GetMinExtreme();
-        const auto scale = Math::GetValue(1) / info.GetMaxRange();
+        const auto scale = MathType::GetValue(1) / info.GetMaxRange();
         for (auto i = 0; i < mNumVertices; ++i)
         {
             sVertices.at(i) = (vertices.at(i) - minValue) * scale;
@@ -89,18 +89,18 @@ void Mathematics::ConvexHull3<Real>::Init()
         Real expand{};
         if (eQueryType == QueryType::Int64)
         {
-            expand = Math::GetValue(1 << 20);
+            expand = MathType::GetValue(1 << 20);
             query = std::make_shared<Query3Int64<Real>>(sVertices);
         }
         else if (eQueryType == QueryType::Integer)
         {
-            expand = Math::GetValue(1 << 24);
+            expand = MathType::GetValue(1 << 24);
             query = std::make_shared<Query3Integer<Real>>(sVertices);
         }
         else
         {
-            expand = Math::GetValue(1);
-            query = std::make_shared<Query3>(sVertices);
+            expand = MathType::GetValue(1);
+            query = std::make_shared<Query3Type>(sVertices);
         }
 
         for (auto i = 0; i < mNumVertices; ++i)
@@ -213,14 +213,14 @@ Mathematics::ConvexHull1<Real> Mathematics::ConvexHull3<Real>::GetConvexHull1() 
     }
 
     const auto mNumVertices = this->GetNumVertices();
-    typename ConvexHull1::Vertices projection{};
+    typename ConvexHull1Type::Vertices projection{};
     for (auto i = 0; i < mNumVertices; ++i)
     {
         auto diff = vertices.at(i) - lineOrigin;
         projection.emplace_back(Vector3Tools<Real>::DotProduct(lineDirection, diff));
     }
 
-    return ConvexHull1{ projection, this->GetEpsilon(), this->GetQueryType() };
+    return ConvexHull1Type{ projection, this->GetEpsilon(), this->GetQueryType() };
 }
 
 template <typename Real>
@@ -236,7 +236,7 @@ Mathematics::ConvexHull2<Real> Mathematics::ConvexHull3<Real>::GetConvexHull2() 
     }
 
     const auto numVertices = this->GetNumVertices();
-    typename ConvexHull2::Vertices projection(numVertices);
+    typename ConvexHull2Type::Vertices projection(numVertices);
     for (auto i = 0; i < numVertices; ++i)
     {
         auto diff = vertices.at(i) - planeOrigin;
@@ -249,7 +249,7 @@ Mathematics::ConvexHull2<Real> Mathematics::ConvexHull3<Real>::GetConvexHull2() 
 
 template <typename Real>
 Mathematics::ConvexHull3<Real>::ConvexHull3(const String& filename)
-    : ParentType{ 0, Math::GetValue(0), QueryType::Real },
+    : ParentType{ 0, MathType::GetValue(0), QueryType::Real },
       vertices{},
       sVertices{},
       query{},
@@ -293,14 +293,14 @@ void Mathematics::ConvexHull3<Real>::LoadFile(const String& filename)
     vertices.resize(numVertices);
     sVertices.resize(numVertices);
 
-    const auto size = Vector3::pointSize * numVertices;
+    const auto size = Vector3Type::pointSize * numVertices;
 
     inFile.Read(sizeof(Real), size, vertices.data());
     inFile.Read(sizeof(Real), size, sVertices.data());
-    inFile.Read(sizeof(Real), Vector3::pointSize, &lineOrigin);
-    inFile.Read(sizeof(Real), Vector3::pointSize, &lineDirection);
-    inFile.Read(sizeof(Real), Vector3::pointSize, &planeOrigin);
-    inFile.Read(sizeof(Real), Vector3::pointSize * 2, planeDirection.data());
+    inFile.Read(sizeof(Real), Vector3Type::pointSize, &lineOrigin);
+    inFile.Read(sizeof(Real), Vector3Type::pointSize, &lineDirection);
+    inFile.Read(sizeof(Real), Vector3Type::pointSize, &planeOrigin);
+    inFile.Read(sizeof(Real), Vector3Type::pointSize * 2, planeDirection.data());
 
     switch (this->GetQueryType())
     {
@@ -321,7 +321,7 @@ void Mathematics::ConvexHull3<Real>::LoadFile(const String& filename)
         }
         case QueryType::Real:
         {
-            query = std::make_shared<Query3>(sVertices);
+            query = std::make_shared<Query3Type>(sVertices);
             break;
         }
         case QueryType::Filtered:
@@ -346,14 +346,14 @@ void Mathematics::ConvexHull3<Real>::SaveFile(const String& filename) const
 
     const auto numVertices = this->GetNumVertices();
 
-    const auto size = Vector3::pointSize * numVertices;
+    const auto size = Vector3Type::pointSize * numVertices;
 
     outFile.Write(sizeof(Real), size, vertices.data());
     outFile.Write(sizeof(Real), size, sVertices.data());
-    outFile.Write(sizeof(Real), Vector3::pointSize, &lineOrigin);
-    outFile.Write(sizeof(Real), Vector3::pointSize, &lineDirection);
-    outFile.Write(sizeof(Real), Vector3::pointSize, &planeOrigin);
-    outFile.Write(sizeof(Real), Vector3::pointSize * 2, planeDirection.data());
+    outFile.Write(sizeof(Real), Vector3Type::pointSize, &lineOrigin);
+    outFile.Write(sizeof(Real), Vector3Type::pointSize, &lineDirection);
+    outFile.Write(sizeof(Real), Vector3Type::pointSize, &planeOrigin);
+    outFile.Write(sizeof(Real), Vector3Type::pointSize * 2, planeDirection.data());
 }
 
 template <typename Real>
@@ -486,7 +486,7 @@ Mathematics::ConvexHull3<Real>::Triangle::Triangle(int32_t v0, int32_t v1, int32
 }
 
 template <typename Real>
-Mathematics::PlaneQueryType Mathematics::ConvexHull3<Real>::Triangle::GetSign(int32_t i, const Query3& query)
+Mathematics::PlaneQueryType Mathematics::ConvexHull3<Real>::Triangle::GetSign(int32_t i, const Query3Type& query)
 {
     if (i != time)
     {

@@ -23,12 +23,12 @@
 #include <algorithm>
 
 template <typename Real>
-Mathematics::CylinderFit3Update<Real>::CylinderFit3Update(Points points, const Vector3& guessCenter, const Vector3& guessAxis, const Real epsilon) noexcept
+Mathematics::CylinderFit3Update<Real>::CylinderFit3Update(Points points, const Vector3Type& guessCenter, const Vector3Type& guessAxis, const Real epsilon) noexcept
     : points{ std::move(points) },
-      inverseRadiusSquare{ Math::GetValue(1) },
+      inverseRadiusSquare{ MathType::GetValue(1) },
       axis{ guessAxis },
       center{ guessCenter },
-      exactly{ Math::maxReal },
+      exactly{ MathType::maxReal },
       epsilon{ epsilon },
       updateData{}
 {
@@ -66,8 +66,8 @@ void Mathematics::CylinderFit3Update<Real>::CalculateUpdateData()
 template <typename Real>
 void Mathematics::CylinderFit3Update<Real>::UpdateInverseRadiusSquare() noexcept(gAssert < 2 || gMathematicsAssert < 2)
 {
-    auto deltaCrossAxisLengthSquaredSum = Math::GetValue(0);
-    auto deltaCrossAxisLengthQuarticSum = Math::GetValue(0);
+    auto deltaCrossAxisLengthSquaredSum = MathType::GetValue(0);
+    auto deltaCrossAxisLengthQuarticSum = MathType::GetValue(0);
 
     for (const auto& data : updateData)
     {
@@ -77,52 +77,52 @@ void Mathematics::CylinderFit3Update<Real>::UpdateInverseRadiusSquare() noexcept
     }
 
     inverseRadiusSquare = deltaCrossAxisLengthSquaredSum / deltaCrossAxisLengthQuarticSum;
-    exactly = Math::GetValue(1) - inverseRadiusSquare * deltaCrossAxisLengthSquaredSum / static_cast<Real>(updateData.size());
+    exactly = MathType::GetValue(1) - inverseRadiusSquare * deltaCrossAxisLengthSquaredSum / static_cast<Real>(updateData.size());
 
-    MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= exactly && exactly <= Math::GetValue(1), "误差值错误！");
+    MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= exactly && exactly <= MathType::GetValue(1), "误差值错误！");
 }
 
 template <typename Real>
 void Mathematics::CylinderFit3Update<Real>::UpdateDirection()
 {
     // 计算的最快下降的方向。
-    Vector3 descentDirection{};
-    auto aMean = Math::GetValue(0);
-    auto aaMean = Math::GetValue(0);
+    Vector3Type descentDirection{};
+    auto aMean = MathType::GetValue(0);
+    auto aaMean = MathType::GetValue(0);
 
     for (const auto& data : updateData)
     {
         const auto delta = data.GetDelta();
-        auto a = inverseRadiusSquare * data.GetDeltaCrossAxisLengthQuartic() - Math::GetValue(1);
+        auto a = inverseRadiusSquare * data.GetDeltaCrossAxisLengthQuartic() - MathType::GetValue(1);
         aMean += a;
         aaMean += a * a;
         descentDirection += a * data.GetDescentDirection();
     }
 
-    auto inverseNumPoints = Math::GetValue(1) / static_cast<Real>(points.size());
+    auto inverseNumPoints = MathType::GetValue(1) / static_cast<Real>(points.size());
 
     aMean *= inverseNumPoints;
     aaMean *= inverseNumPoints;
     if (descentDirection.IsZero(epsilon))
     {
         exactly = aaMean;
-        MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= exactly && exactly <= Math::GetValue(1), "误差值错误！");
+        MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= exactly && exactly <= MathType::GetValue(1), "误差值错误！");
 
         return;
     }
 
     // 计算用于最快下降的线的四次多项式。
-    auto abMean = Math::GetValue(0);
-    auto acMean = Math::GetValue(0);
-    auto bbMean = Math::GetValue(0);
-    auto bcMean = Math::GetValue(0);
-    auto ccMean = Math::GetValue(0);
+    auto abMean = MathType::GetValue(0);
+    auto acMean = MathType::GetValue(0);
+    auto bbMean = MathType::GetValue(0);
+    auto bcMean = MathType::GetValue(0);
+    auto ccMean = MathType::GetValue(0);
     for (const auto& data : updateData)
     {
         const auto delta = data.GetDelta();
         const auto deltaCrossAxis = data.GetDeltaCrossAxis();
         const auto deltaCrossDescentDirection = Vector3Tools<Real>::CrossProduct(delta, descentDirection);
-        auto a = inverseRadiusSquare * data.GetDeltaCrossAxisLengthQuartic() - Math::GetValue(1);
+        auto a = inverseRadiusSquare * data.GetDeltaCrossAxisLengthQuartic() - MathType::GetValue(1);
         auto b = inverseRadiusSquare * Vector3Tools<Real>::DotProduct(deltaCrossAxis, deltaCrossDescentDirection);
         auto c = inverseRadiusSquare * Vector3Tools<Real>::GetLengthSquared(deltaCrossDescentDirection);
         abMean += a * b;
@@ -139,9 +139,9 @@ void Mathematics::CylinderFit3Update<Real>::UpdateDirection()
     ccMean *= inverseNumPoints;
 
     std::vector<Real> tuple{ aaMean,
-                             Math::GetValue(-4) * abMean,
-                             (Math::GetValue(2) * acMean + Math::GetValue(4) * bbMean),
-                             Math::GetValue(-4) * bcMean,
+                             MathType::GetValue(-4) * abMean,
+                             (MathType::GetValue(2) * acMean + MathType::GetValue(4) * bbMean),
+                             MathType::GetValue(-4) * bcMean,
                              ccMean };
 
     Polynomial<Real> polynomial{ tuple };
@@ -156,7 +156,7 @@ void Mathematics::CylinderFit3Update<Real>::UpdateDirection()
 
     const auto count = polynomialRoots.GetCount();
 
-    auto min = polynomial(Math::GetValue(0));
+    auto min = polynomial(MathType::GetValue(0));
     auto minIndex = -1;
     for (auto i = 0; i < count; ++i)
     {
@@ -169,7 +169,7 @@ void Mathematics::CylinderFit3Update<Real>::UpdateDirection()
     }
 
     exactly = min;
-    MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= exactly && exactly <= Math::GetValue(1), "误差值错误！");
+    MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= exactly && exactly <= MathType::GetValue(1), "误差值错误！");
 
     if (0 <= minIndex)
     {
@@ -183,18 +183,18 @@ void Mathematics::CylinderFit3Update<Real>::UpdateDirection()
 template <typename Real>
 void Mathematics::CylinderFit3Update<Real>::UpdateCenter()
 {
-    auto inverseNumPoints = Math::GetValue(1) / static_cast<Real>(updateData.size());
+    auto inverseNumPoints = MathType::GetValue(1) / static_cast<Real>(updateData.size());
 
     // 计算的最快下降的方向。
-    Vector3 descentDirection{};
-    auto aMean = Math::GetValue(0);
-    auto aaMean = Math::GetValue(0);
+    Vector3Type descentDirection{};
+    auto aMean = MathType::GetValue(0);
+    auto aaMean = MathType::GetValue(0);
 
     for (const auto& data : updateData)
     {
         auto delta = data.GetPoint() - center;
         const auto deltaCrossAxis = Vector3Tools<Real>::CrossProduct(delta, axis);
-        auto a = inverseRadiusSquare * Vector3Tools<Real>::GetLength(deltaCrossAxis) - Math::GetValue(1);
+        auto a = inverseRadiusSquare * Vector3Tools<Real>::GetLength(deltaCrossAxis) - MathType::GetValue(1);
 
         aMean += a;
         aaMean += a * a;
@@ -209,7 +209,7 @@ void Mathematics::CylinderFit3Update<Real>::UpdateCenter()
     if (descentDirection.IsZero(epsilon))
     {
         exactly = aaMean;
-        MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= exactly && exactly <= Math::GetValue(1), "误差值错误！");
+        MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= exactly && exactly <= MathType::GetValue(1), "误差值错误！");
 
         return;
     }
@@ -217,14 +217,14 @@ void Mathematics::CylinderFit3Update<Real>::UpdateCenter()
     // 计算用于最快下降的线的四次多项式。
     const auto descentDirectionCrossAxis = Vector3Tools<Real>::CrossProduct(descentDirection, axis);
     auto c = Vector3Tools<Real>::GetLength(descentDirectionCrossAxis) * inverseNumPoints * inverseRadiusSquare;
-    auto bMean = Math::GetValue(0);
-    auto abMean = Math::GetValue(0);
-    auto bbMean = Math::GetValue(0);
+    auto bMean = MathType::GetValue(0);
+    auto abMean = MathType::GetValue(0);
+    auto bbMean = MathType::GetValue(0);
 
     for (const auto& data : updateData)
     {
         const auto deltaCrossAxis = data.GetDeltaCrossAxis();
-        auto a = inverseRadiusSquare * data.GetDeltaCrossAxisLengthQuartic() - Math::GetValue(1);
+        auto a = inverseRadiusSquare * data.GetDeltaCrossAxisLengthQuartic() - MathType::GetValue(1);
         auto b = inverseRadiusSquare * (Vector3Tools<Real>::DotProduct(deltaCrossAxis, descentDirectionCrossAxis));
         bMean += b;
         abMean += a * b;
@@ -235,9 +235,9 @@ void Mathematics::CylinderFit3Update<Real>::UpdateCenter()
     bbMean *= inverseNumPoints;
 
     std::vector<Real> tuple{ aaMean,
-                             Math::GetValue(4) * abMean,
-                             Math::GetValue(2) * c * aMean + Math::GetValue(4) * bbMean,
-                             Math::GetValue(4) * c * bMean,
+                             MathType::GetValue(4) * abMean,
+                             MathType::GetValue(2) * c * aMean + MathType::GetValue(4) * bbMean,
+                             MathType::GetValue(4) * c * bMean,
                              c * c };
 
     Polynomial<Real> polynomial{ tuple };
@@ -251,7 +251,7 @@ void Mathematics::CylinderFit3Update<Real>::UpdateCenter()
     }
     const auto count = polynomialRoots.GetCount();
 
-    auto min = polynomial(Math::GetValue(0));
+    auto min = polynomial(MathType::GetValue(0));
     auto minIndex = -1;
     for (auto i = 0; i < count; ++i)
     {
@@ -264,7 +264,7 @@ void Mathematics::CylinderFit3Update<Real>::UpdateCenter()
     }
 
     exactly = min;
-    MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= exactly && exactly <= Math::GetValue(1), "误差值错误！");
+    MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= exactly && exactly <= MathType::GetValue(1), "误差值错误！");
 
     if (0 <= minIndex)
     {
@@ -279,7 +279,7 @@ bool Mathematics::CylinderFit3Update<Real>::IsValid() const noexcept
 {
     try
     {
-        if (Math::GetValue(0) <= inverseRadiusSquare && Math::GetValue(0) <= exactly && Math::GetValue(0) <= epsilon && axis.IsNormalize(epsilon))
+        if (MathType::GetValue(0) <= inverseRadiusSquare && MathType::GetValue(0) <= exactly && MathType::GetValue(0) <= epsilon && axis.IsNormalize(epsilon))
         {
             return true;
         }
@@ -305,7 +305,7 @@ Real Mathematics::CylinderFit3Update<Real>::GetExactly() const noexcept
 }
 
 template <typename Real>
-typename Mathematics::CylinderFit3Update<Real>::Vector3 Mathematics::CylinderFit3Update<Real>::GetCenter() const noexcept
+typename Mathematics::CylinderFit3Update<Real>::Vector3Type Mathematics::CylinderFit3Update<Real>::GetCenter() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -313,7 +313,7 @@ typename Mathematics::CylinderFit3Update<Real>::Vector3 Mathematics::CylinderFit
 }
 
 template <typename Real>
-typename Mathematics::CylinderFit3Update<Real>::Vector3 Mathematics::CylinderFit3Update<Real>::GetAxis() const noexcept
+typename Mathematics::CylinderFit3Update<Real>::Vector3Type Mathematics::CylinderFit3Update<Real>::GetAxis() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

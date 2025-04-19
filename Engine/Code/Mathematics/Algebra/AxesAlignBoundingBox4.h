@@ -23,10 +23,10 @@ namespace Mathematics
     public:
         using ClassType = AxesAlignBoundingBox4<T>;
 
-        using Vector4 = Vector4<T>;
+        using Vector4Type = Vector4<T>;
 
     public:
-        AxesAlignBoundingBox4(const Vector4& minPoint, const Vector4& maxPoint) noexcept;
+        AxesAlignBoundingBox4(const Vector4Type& minPoint, const Vector4Type& maxPoint) noexcept;
 
         template <typename RhsType>
         explicit AxesAlignBoundingBox4(const AxesAlignBoundingBox4<RhsType>& aabb);
@@ -35,12 +35,12 @@ namespace Mathematics
 
         NODISCARD bool IsBoxValid() const noexcept;
 
-        NODISCARD Vector4 GetMinPoint() const noexcept;
-        NODISCARD Vector4 GetMaxPoint() const noexcept;
+        NODISCARD Vector4Type GetMinPoint() const noexcept;
+        NODISCARD Vector4Type GetMaxPoint() const noexcept;
 
     private:
-        Vector4 minPoint;
-        Vector4 maxPoint;
+        Vector4Type minPoint;
+        Vector4Type maxPoint;
     };
 
     using AxesAlignBoundingBox4F = AxesAlignBoundingBox4<float>;

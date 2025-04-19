@@ -12,7 +12,7 @@
 #include "Framework/OpenGLGlutFrame/Flags/FrameParameter.h"
 #include "Framework/WindowCreate/WindowSize.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 GLUT_CONSOLE_MAIN_FUNCTION(Rendering,
                            TestingHelper,

@@ -17,7 +17,7 @@
 
 template <typename T>
 requires std::is_arithmetic_v<T>
-Mathematics::AxesAlignBoundingBox4<T>::AxesAlignBoundingBox4(const Vector4& minPoint, const Vector4& maxPoint) noexcept
+Mathematics::AxesAlignBoundingBox4<T>::AxesAlignBoundingBox4(const Vector4Type& minPoint, const Vector4Type& maxPoint) noexcept
     : minPoint{ minPoint }, maxPoint{ maxPoint }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;

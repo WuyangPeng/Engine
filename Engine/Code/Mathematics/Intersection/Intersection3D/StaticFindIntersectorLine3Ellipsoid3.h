@@ -25,22 +25,22 @@ namespace Mathematics
         using ClassType = StaticFindIntersectorLine3Ellipsoid3<Real>;
         using ParentType = StaticIntersector<Real, Vector3>;
 
-        using Vector3 = Vector3<Real>;
-        using Line3 = Line3<Real>;
-        using Ellipsoid3 = Ellipsoid3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
+        using Vector3Type = Vector3<Real>;
+        using Line3Type = Line3<Real>;
+        using Ellipsoid3Type = Ellipsoid3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
 
     public:
-        StaticFindIntersectorLine3Ellipsoid3(const Line3& line, const Ellipsoid3& ellipsoid, const Real epsilon = Math::GetZeroTolerance());
+        StaticFindIntersectorLine3Ellipsoid3(const Line3Type& line, const Ellipsoid3Type& ellipsoid, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Line3 GetLine() const noexcept;
-        NODISCARD Ellipsoid3 GetEllipsoid() const noexcept;
+        NODISCARD Line3Type GetLine() const noexcept;
+        NODISCARD Ellipsoid3Type GetEllipsoid() const noexcept;
 
         NODISCARD int GetQuantity() const noexcept;
-        NODISCARD Vector3 GetPoint(int index) const;
+        NODISCARD Vector3Type GetPoint(int index) const;
 
         /// 小阈值用于测试与计算有关的二次方程的判别式：Q(t) = a2 * t^2 + 2 * a1 * t + a0。
         /// 判别式为D = a1 * a1 - a0 * a2。
@@ -59,12 +59,12 @@ namespace Mathematics
         void Find();
 
     private:
-        Line3 line;
-        Ellipsoid3 ellipsoid;
+        Line3Type line;
+        Ellipsoid3Type ellipsoid;
 
         int quantity;
-        Vector3 point0;
-        Vector3 point1;
+        Vector3Type point0;
+        Vector3Type point1;
 
         /// 用于测试判别式。 默认值为零。 您可以将负阈值设置为（小）负数，将正阈值设置为（小）正数。
         Real negativeThreshold;

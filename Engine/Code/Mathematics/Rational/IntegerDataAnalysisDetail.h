@@ -21,7 +21,7 @@
 #include <iostream>
 
 template <int N>
-Mathematics::IntegerDataAnalysis<N>::IntegerDataAnalysis(const IntegerData& master) noexcept
+Mathematics::IntegerDataAnalysis<N>::IntegerDataAnalysis(const IntegerDataType& master) noexcept
     : master{ master }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -59,7 +59,7 @@ Mathematics::IntegerData<N> Mathematics::IntegerDataAnalysis<N>::operator-() con
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    IntegerData result{ master };
+    IntegerDataType result{ master };
     IntegerDataAmend<N> integerDataAmend{ result };
 
     integerDataAmend.Negative();
@@ -229,7 +229,7 @@ int Mathematics::IntegerDataAnalysis<N>::GetTrailingBit() const
 }
 
 template <int N>
-Mathematics::IntegerDivisionModulo<N> Mathematics::IntegerDataAnalysis<N>::GetDivisionModulo(const IntegerData& rhs) const
+Mathematics::IntegerDivisionModulo<N> Mathematics::IntegerDataAnalysis<N>::GetDivisionModulo(const IntegerDataType& rhs) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

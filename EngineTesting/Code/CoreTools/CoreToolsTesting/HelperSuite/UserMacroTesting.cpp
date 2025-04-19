@@ -87,7 +87,11 @@ void CoreTools::UserMacroTesting::MacroExistTest() noexcept(!gOpenClassInvariant
 
 #ifdef OPEN_IMPORTANT_EXCEPTION_ASSERT
 
+    #ifdef TCRE_USE_MSVC
+
     SYSTEM_PLATFORM_WIN32;
+
+    #endif  // TCRE_USE_MSVC
 
 #endif  // OPEN_IMPORTANT_EXCEPTION_ASSERT
 

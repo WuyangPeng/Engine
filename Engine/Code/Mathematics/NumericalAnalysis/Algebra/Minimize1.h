@@ -35,14 +35,14 @@ namespace Mathematics::Algebra
     public:
         using ClassType = Minimize1<T>;
 
-        using Math = Math<T>;
+        using MathType = Math<T>;
 
     public:
         Minimize1(const std::function<T(T)>& f,
                   int maxSubdivisions,
                   int maxBisections,
-                  T epsilon = Math::GetValue(1e-08),
-                  T tolerance = Math::GetValue(1e-04));
+                  T epsilon = MathType::GetValue(1e-08),
+                  T tolerance = MathType::GetValue(1e-04));
 
         CLASS_INVARIANT_DECLARE;
 

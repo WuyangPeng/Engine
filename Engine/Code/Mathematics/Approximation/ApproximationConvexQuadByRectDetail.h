@@ -37,7 +37,7 @@ typename Mathematics::ApproximationConvexQuadByRect<Real>::OrientedBox2 Mathemat
 {
     OrientedBox2 rectangle{};
 
-    rectangle.SetCenter(Math::GetRational(1, 4) * (p.at(0) + p.at(1) + p.at(2) + p.at(3)));
+    rectangle.SetCenter(MathType::GetRational(1, 4) * (p.at(0) + p.at(1) + p.at(2) + p.at(3)));
 
     std::array<Vector2, 4> q{};
     for (auto i = 0; i < 4; ++i)
@@ -49,7 +49,7 @@ typename Mathematics::ApproximationConvexQuadByRect<Real>::OrientedBox2 Mathemat
     auto q1MQ3 = q.at(1) - q.at(3);
     auto k0 = q1MQ3[0] * q0MQ2[1] + q0MQ2[0] * q1MQ3[1];
     auto k1 = q1MQ3[0] * q0MQ2[0] - q1MQ3[1] * q0MQ2[1];
-    auto theta = Math::GetRational(1, 2) * std::atan2(k0, k1);
+    auto theta = MathType::GetRational(1, 2) * std::atan2(k0, k1);
     const auto cosTheta = std::cos(theta);
     const auto sinTheta = std::sin(theta);
     rectangle.SetAxis(0, { cosTheta, sinTheta });
@@ -71,8 +71,8 @@ typename Mathematics::ApproximationConvexQuadByRect<Real>::OrientedBox2 Mathemat
         s0Ms2 = oldT0Mt2;
         s1Ms3 = oldT1Mt3;
     }
-    rectangle.SetExtent(0, Math::GetRational(1, 4) * (s0Ms2 + s1Ms3));
-    rectangle.SetExtent(1, Math::GetRational(1, 4) * (t0Mt2 - t1Mt3));
+    rectangle.SetExtent(0, MathType::GetRational(1, 4) * (s0Ms2 + s1Ms3));
+    rectangle.SetExtent(1, MathType::GetRational(1, 4) * (t0Mt2 - t1Mt3));
 
     return rectangle;
 }

@@ -16,7 +16,7 @@
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-Mathematics::PolynomialDivide<Real>::PolynomialDivide(Polynomial quotient, Polynomial remainder) noexcept
+Mathematics::PolynomialDivide<Real>::PolynomialDivide(PolynomialType quotient, PolynomialType remainder) noexcept
     : quotient{ std::move(quotient) }, remainder{ std::move(remainder) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -35,7 +35,7 @@ bool Mathematics::PolynomialDivide<Real>::IsValid() const noexcept
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::PolynomialDivide<Real>::Polynomial Mathematics::PolynomialDivide<Real>::GetQuotient() const
+typename Mathematics::PolynomialDivide<Real>::PolynomialType Mathematics::PolynomialDivide<Real>::GetQuotient() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -44,7 +44,7 @@ typename Mathematics::PolynomialDivide<Real>::Polynomial Mathematics::Polynomial
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
-typename Mathematics::PolynomialDivide<Real>::Polynomial Mathematics::PolynomialDivide<Real>::GetRemainder() const
+typename Mathematics::PolynomialDivide<Real>::PolynomialType Mathematics::PolynomialDivide<Real>::GetRemainder() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

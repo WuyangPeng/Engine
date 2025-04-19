@@ -25,7 +25,7 @@ namespace Mathematics
         using FactoryType = DistanceResultFactory<Real, Vector>;
 
         using ImplTypeSharedPtr = std::shared_ptr<ClassType>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         explicit DistanceResultImpl(Real distance) noexcept;

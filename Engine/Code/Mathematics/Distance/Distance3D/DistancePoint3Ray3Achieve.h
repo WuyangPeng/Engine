@@ -18,7 +18,7 @@
 #include "Mathematics/Objects3D/Ray3Detail.h"
 
 template <typename Real>
-Mathematics::DistancePoint3Ray3<Real>::DistancePoint3Ray3(const Vector3& point, const Ray3& ray) noexcept
+Mathematics::DistancePoint3Ray3<Real>::DistancePoint3Ray3(const Vector3Type& point, const Ray3Type& ray) noexcept
     : ParentType{}, point{ point }, ray{ ray }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -59,26 +59,26 @@ typename Mathematics::DistancePoint3Ray3<Real>::DistanceResult Mathematics::Dist
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     auto difference = point - ray.GetOrigin();
-    auto param = Vector3Tools::DotProduct(ray.GetDirection(), difference);
+    auto param = Vector3ToolsType::DotProduct(ray.GetDirection(), difference);
 
-    if (param <= Math::GetValue(0))
+    if (param <= MathType::GetValue(0))
     {
-        param = Math::GetValue(0);
+        param = MathType::GetValue(0);
     }
 
     const auto rhsClosestPoint = ray.GetOrigin() + param * ray.GetDirection();
     difference = rhsClosestPoint - point;
 
-    return DistanceResult{ Vector3Tools::GetLengthSquared(difference),
-                           Math::GetValue(0),
+    return DistanceResult{ Vector3ToolsType::GetLengthSquared(difference),
+                           MathType::GetValue(0),
                            point,
                            rhsClosestPoint,
-                           Math::GetValue(0),
+                           MathType::GetValue(0),
                            param };
 }
 
 template <typename Real>
-typename Mathematics::DistancePoint3Ray3<Real>::DistanceResult Mathematics::DistancePoint3Ray3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistancePoint3Ray3<Real>::DistanceResult Mathematics::DistancePoint3Ray3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

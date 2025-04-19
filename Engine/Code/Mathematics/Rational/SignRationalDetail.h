@@ -23,20 +23,20 @@
 
 template <int N>
 Mathematics::SignRational<N>::SignRational() noexcept
-    : numerator{}, denominator{ Integer::CreateOne() }
+    : numerator{}, denominator{ IntegerType::CreateOne() }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <int N>
-Mathematics::SignRational<N>::SignRational(const Integer& numerator) noexcept
-    : numerator{ numerator }, denominator{ Integer::CreateOne() }
+Mathematics::SignRational<N>::SignRational(const IntegerType& numerator) noexcept
+    : numerator{ numerator }, denominator{ IntegerType::CreateOne() }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <int N>
-Mathematics::SignRational<N>::SignRational(const Integer& numerator, const Integer& denominator)
+Mathematics::SignRational<N>::SignRational(const IntegerType& numerator, const IntegerType& denominator)
     : numerator{ numerator }, denominator{ denominator }
 {
     EliminatePowersOfTwo();
@@ -101,10 +101,10 @@ bool Mathematics::SignRational<N>::IsValid() const noexcept
 template <int N>
 void Mathematics::SignRational<N>::EliminatePowersOfTwo()
 {
-    if (numerator == Integer{ 0 })
+    if (numerator == IntegerType{ 0 })
     {
         // ·Ö×ÓÊÇÁã¡£
-        denominator = Integer{ 1 };
+        denominator = IntegerType{ 1 };
 
         return;
     }
@@ -147,7 +147,7 @@ int Mathematics::SignRational<N>::GetPowers() const
 }
 
 template <int N>
-typename Mathematics::SignRational<N>::Integer Mathematics::SignRational<N>::GetNumerator() const noexcept
+typename Mathematics::SignRational<N>::IntegerType Mathematics::SignRational<N>::GetNumerator() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -155,7 +155,7 @@ typename Mathematics::SignRational<N>::Integer Mathematics::SignRational<N>::Get
 }
 
 template <int N>
-typename Mathematics::SignRational<N>::Integer Mathematics::SignRational<N>::GetDenominator() const noexcept
+typename Mathematics::SignRational<N>::IntegerType Mathematics::SignRational<N>::GetDenominator() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -163,7 +163,7 @@ typename Mathematics::SignRational<N>::Integer Mathematics::SignRational<N>::Get
 }
 
 template <int N>
-void Mathematics::SignRational<N>::Set(const Integer& newNumerator, const Integer& newDenominator)
+void Mathematics::SignRational<N>::Set(const IntegerType& newNumerator, const IntegerType& newDenominator)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -234,7 +234,7 @@ Mathematics::SignRational<N>& Mathematics::SignRational<N>::operator/=(const Sig
 }
 
 template <int N>
-Mathematics::SignRational<N>& Mathematics::SignRational<N>::operator+=(const Integer& rhs)
+Mathematics::SignRational<N>& Mathematics::SignRational<N>::operator+=(const IntegerType& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -244,7 +244,7 @@ Mathematics::SignRational<N>& Mathematics::SignRational<N>::operator+=(const Int
 }
 
 template <int N>
-Mathematics::SignRational<N>& Mathematics::SignRational<N>::operator-=(const Integer& rhs)
+Mathematics::SignRational<N>& Mathematics::SignRational<N>::operator-=(const IntegerType& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -254,7 +254,7 @@ Mathematics::SignRational<N>& Mathematics::SignRational<N>::operator-=(const Int
 }
 
 template <int N>
-Mathematics::SignRational<N>& Mathematics::SignRational<N>::operator*=(const Integer& rhs)
+Mathematics::SignRational<N>& Mathematics::SignRational<N>::operator*=(const IntegerType& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -264,7 +264,7 @@ Mathematics::SignRational<N>& Mathematics::SignRational<N>::operator*=(const Int
 }
 
 template <int N>
-Mathematics::SignRational<N>& Mathematics::SignRational<N>::operator/=(const Integer& rhs)
+Mathematics::SignRational<N>& Mathematics::SignRational<N>::operator/=(const IntegerType& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 

@@ -30,33 +30,33 @@ namespace Mathematics
     public:
         using ClassType = Vector3Information<Real>;
 
-        using Math = Math<Real>;
-        using Vector3 = Vector3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using AxesAlignBoundingBox3 = AxesAlignBoundingBox3<Real>;
-        using ContainerType = std::vector<Vector3>;
+        using MathType = Math<Real>;
+        using Vector3Type = Vector3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using AxesAlignBoundingBox3Type = AxesAlignBoundingBox3<Real>;
+        using ContainerType = std::vector<Vector3Type>;
         using AlgebraVector3 = Algebra::Vector<3, Real>;
         using AlgebraContainerType = std::vector<AlgebraVector3>;
 
     public:
         /// 值epsilon被使用在计算点集的维度时，作为相对误差。
         /// 构造函数根据输入集设置类成员。
-        explicit Vector3Information(const ContainerType& points, Real epsilon = Math::GetZeroTolerance());
-        explicit Vector3Information(const AlgebraContainerType& points, Real epsilon = Math::GetZeroTolerance());
+        explicit Vector3Information(const ContainerType& points, Real epsilon = MathType::GetZeroTolerance());
+        explicit Vector3Information(const AlgebraContainerType& points, Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD int GetDimension() const noexcept;
-        NODISCARD AxesAlignBoundingBox3 GetAxesAlignBoundingBox() const noexcept;
+        NODISCARD AxesAlignBoundingBox3Type GetAxesAlignBoundingBox() const noexcept;
         NODISCARD Real GetMaxRange() const noexcept;
-        NODISCARD Vector3 GetOrigin() const noexcept;
-        NODISCARD Vector3 GetDirectionX() const noexcept;
-        NODISCARD Vector3 GetDirectionY() const noexcept;
-        NODISCARD Vector3 GetDirectionZ() const noexcept;
-        NODISCARD Vector3 GetMinExtreme() const;
-        NODISCARD Vector3 GetMaxExtreme() const;
-        NODISCARD Vector3 GetPerpendicularExtreme() const;
-        NODISCARD Vector3 GetTetrahedronExtreme() const;
+        NODISCARD Vector3Type GetOrigin() const noexcept;
+        NODISCARD Vector3Type GetDirectionX() const noexcept;
+        NODISCARD Vector3Type GetDirectionY() const noexcept;
+        NODISCARD Vector3Type GetDirectionZ() const noexcept;
+        NODISCARD Vector3Type GetMinExtreme() const;
+        NODISCARD Vector3Type GetMaxExtreme() const;
+        NODISCARD Vector3Type GetPerpendicularExtreme() const;
+        NODISCARD Vector3Type GetTetrahedronExtreme() const;
         NODISCARD bool IsExtremeCCW() const noexcept;
 
         NODISCARD int GetMinExtremeIndex() const noexcept;
@@ -74,7 +74,7 @@ namespace Mathematics
         NODISCARD static ContainerType GetContainer(const AlgebraContainerType& points);
 
     private:
-        using IndexContainerType = std::array<int, Vector3::pointSize>;
+        using IndexContainerType = std::array<int, Vector3Type::pointSize>;
 
     private:
         ContainerType points;
@@ -90,7 +90,7 @@ namespace Mathematics
         /// 最大范围是axesAlignBoundingBox.GetMaxPoint(0) - axesAlignBoundingBox.GetMinPoint(0) 、
         /// axesAlignBoundingBox.GetMaxPoint(1) - axesAlignBoundingBox.GetMinPoint(1)和
         /// axesAlignBoundingBox.GetMaxPoint(2) - axesAlignBoundingBox.GetMinPoint(2)的最大值。
-        AxesAlignBoundingBox3 axesAlignBoundingBox;
+        AxesAlignBoundingBox3Type axesAlignBoundingBox;
         Real maxRange;
 
         /// 坐标系。原点是对任何维度d都有效。
@@ -101,10 +101,10 @@ namespace Mathematics
         /// 如果d = 1，所有点的位置在一条线段上。
         /// 当d = 2时，所有点不共线但在一个平面上。
         /// 当d = 3时，所有点是不共面的。
-        Vector3 origin;
-        Vector3 directionX;
-        Vector3 directionY;
-        Vector3 directionZ;
+        Vector3Type origin;
+        Vector3Type directionX;
+        Vector3Type directionY;
+        Vector3Type directionZ;
 
         /// 定义最大空间范围的索引。
         /// 值minExtreme和maxExtreme是用于定义在坐标轴各个方向中

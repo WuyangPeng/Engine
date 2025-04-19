@@ -25,11 +25,11 @@ namespace Mathematics
         using ClassType = StaticFindIntersector1<Real>;
         using ParentType = Intersector1<Real>;
 
-        using Math = typename ParentType::Math;
+        using MathType = typename ParentType::MathType;
         using IntersectionsType = std::vector<Real>;
 
     public:
-        StaticFindIntersector1(Real u0, Real u1, Real v0, Real v1, Real epsilon = Math::GetZeroTolerance());
+        StaticFindIntersector1(Real u0, Real u1, Real v0, Real v1, Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_FINAL_DECLARE;
 

@@ -32,19 +32,19 @@ namespace Mathematics
     public:
         using ClassType = BoundingSphere<T>;
 
-        using Transform = Transform<T>;
-        using Math = Math<T>;
-        using Plane = Plane<T>;
-        using APoint = APoint<T>;
-        using AVector = AVector<T>;
-        using Vector3 = Vector3<T>;
+        using TransformType = Transform<T>;
+        using MathType = Math<T>;
+        using PlaneType = Plane<T>;
+        using APointType = APoint<T>;
+        using AVectorType = AVector<T>;
+        using Vector3Type = Vector3<T>;
 
         using PixelType = std::vector<char>;
         using PixelTypeConstIter = PixelType::const_iterator;
         using SpanConstIterator = CoreTools::SpanIterator<PixelTypeConstIter>;
 
-        using APointContainer = std::vector<APoint>;
-        using Vector3Container = std::vector<Vector3>;
+        using APointContainer = std::vector<APointType>;
+        using Vector3Container = std::vector<Vector3Type>;
 
         using BufferSource = CoreTools::BufferSource;
         using BufferTarget = CoreTools::BufferTarget;
@@ -57,14 +57,14 @@ namespace Mathematics
         }
 
         // 边界指定为一个指定中心和半径的球体。
-        BoundingSphere(const APoint& center, T radius);
+        BoundingSphere(const APointType& center, T radius);
 
         CLASS_INVARIANT_DECLARE;
 
         // 任何边界必须定义一个中心和一个半径，半径必须是非负的。
-        void SetCenter(const APoint& aCenter) noexcept;
+        void SetCenter(const APointType& aCenter) noexcept;
         void SetRadius(T aRadius);
-        NODISCARD APoint GetCenter() const noexcept;
+        NODISCARD APointType GetCenter() const noexcept;
         NODISCARD T GetRadius() const noexcept;
 
         /// 边界上的操作。
@@ -74,13 +74,13 @@ namespace Mathematics
         /// 当球体完全处于负侧时返回NumericalValueSymbol::Negative，
         /// 当球体被平面横向切割时返回NumericalValueSymbol::Zero（平面两侧的球体体积均为正）。
         /// epsilon为偏向完全切割的误差，如果要偏向正反面，epsilon传入负数。
-        NODISCARD NumericalValueSymbol WhichSide(const Plane& plane, T epsilon = Math::GetZeroTolerance()) const noexcept;
+        NODISCARD NumericalValueSymbol WhichSide(const PlaneType& plane, T epsilon = MathType::GetZeroTolerance()) const noexcept;
 
         /// 增加 'this' 以包含输入球体。
-        void GrowToContain(const BoundingSphere& bound, T epsilon = Math::GetZeroTolerance());
+        void GrowToContain(const BoundingSphere& bound, T epsilon = MathType::GetZeroTolerance());
 
         /// 变换球体。如果变换具有不均匀缩放，则生成的对象为椭球体。将生成一个包含椭球体的球体。
-        NODISCARD BoundingSphere TransformBy(const Transform& transform) const;
+        NODISCARD BoundingSphere TransformBy(const TransformType& transform) const;
 
         /// 此函数仅适用于3通道点 (x,y,z)或4通道矢量 (x,y,z,0)或4通道点(x,y,z,1)。
         /// 在所有情况下，函数都只访问(x,y,z) 个值。stride允许您传入顶点缓冲区数据。
@@ -94,19 +94,19 @@ namespace Mathematics
         // line: tMin = -MathF::maxReal, tMax = MathF::maxReal
         // ray: tMin = 0.0f, tMax = MathF::maxReal
         // segment: tMin >= 0.0f, tMax > tMin
-        NODISCARD bool TestIntersection(const APoint& origin, const AVector& direction, T tMin, T tMax) const;
+        NODISCARD bool TestIntersection(const APointType& origin, const AVectorType& direction, T tMin, T tMax) const;
 
         NODISCARD int GetStreamingSize() const noexcept;
         void ReadAggregate(BufferSource& source);
         void WriteAggregate(BufferTarget& target) const;
 
     private:
-        NODISCARD bool TestLineIntersection(const APoint& origin, const AVector& direction, T tMax) const noexcept(gAssert < 2 || gMathematicsAssert < 2);
-        NODISCARD bool TestRayIntersection(const APoint& origin, const AVector& direction, T tMin) const noexcept(gAssert < 2 || gMathematicsAssert < 2);
-        NODISCARD bool TestSegmentIntersection(const APoint& origin, const AVector& direction, T tMin, T tMax) const;
+        NODISCARD bool TestLineIntersection(const APointType& origin, const AVectorType& direction, T tMax) const noexcept(gAssert < 2 || gMathematicsAssert < 2);
+        NODISCARD bool TestRayIntersection(const APointType& origin, const AVectorType& direction, T tMin) const noexcept(gAssert < 2 || gMathematicsAssert < 2);
+        NODISCARD bool TestSegmentIntersection(const APointType& origin, const AVectorType& direction, T tMin, T tMax) const;
 
     private:
-        APoint center{};
+        APointType center{};
         T radius{};
     };
 

@@ -43,5 +43,5 @@ void RenderingWindowTesting::RenderingDeviceTesting::SwapBuffersTest()
     Rendering::RenderingEnvironment renderingEnvironment{ environmentParameter, rendererParameter };
 
     auto renderingDevice = renderingEnvironment.GetRenderingDevice();
-    renderingDevice.SwapBuffers(0);
+    renderingDevice.DisplayColorBuffer(0);
 }

@@ -14,12 +14,12 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::Segment2<Real>::Segment2(const Vector2& beginPoint, const Vector2& endPoint, Real epsilon)
+Mathematics::Segment2<Real>::Segment2(const Vector2Type& beginPoint, const Vector2Type& endPoint, Real epsilon)
     : beginPoint{ beginPoint },
       endPoint{ endPoint },
-      center{ Math::GetRational(1, 2) * (beginPoint + endPoint) },
+      center{ MathType::GetRational(1, 2) * (beginPoint + endPoint) },
       direction{ endPoint - beginPoint },
-      extent{ Vector2Tools::GetLength(direction) / Math::GetValue(2) },
+      extent{ Vector2ToolsType::GetLength(direction) / MathType::GetValue(2) },
       epsilon{ epsilon }
 {
     direction.Normalize(epsilon);
@@ -29,13 +29,13 @@ Mathematics::Segment2<Real>::Segment2(const Vector2& beginPoint, const Vector2& 
 
 template <typename Real>
 Mathematics::Segment2<Real>::Segment2(const AlgebraVector2& beginPoint, const AlgebraVector2& endPoint, Real epsilon)
-    : Segment2{ Vector2{ beginPoint[0], beginPoint[1] }, Vector2{ endPoint[0], endPoint[1] }, epsilon }
+    : Segment2{ Vector2Type{ beginPoint[0], beginPoint[1] }, Vector2Type{ endPoint[0], endPoint[1] }, epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
-Mathematics::Segment2<Real>::Segment2(Real extent, const Vector2& center, const Vector2& direction, Real epsilon)
+Mathematics::Segment2<Real>::Segment2(Real extent, const Vector2Type& center, const Vector2Type& direction, Real epsilon)
     : beginPoint{ center - extent * direction },
       endPoint{ center + extent * direction },
       center{ center },
@@ -54,9 +54,9 @@ bool Mathematics::Segment2<Real>::IsValid() const noexcept
     try
     {
         if (direction.IsNormalize(epsilon) &&
-            Vector2Tools::Approximate(beginPoint, center - extent * direction, epsilon) &&
-            Vector2Tools::Approximate(endPoint, center + extent * direction, epsilon) &&
-            Vector2Tools::Approximate(center, Math::GetRational(1, 2) * (beginPoint + endPoint), epsilon))
+            Vector2ToolsType::Approximate(beginPoint, center - extent * direction, epsilon) &&
+            Vector2ToolsType::Approximate(endPoint, center + extent * direction, epsilon) &&
+            Vector2ToolsType::Approximate(center, MathType::GetRational(1, 2) * (beginPoint + endPoint), epsilon))
         {
             return true;
         }
@@ -74,7 +74,7 @@ bool Mathematics::Segment2<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename Mathematics::Segment2<Real>::Vector2 Mathematics::Segment2<Real>::GetBeginPoint() const noexcept
+typename Mathematics::Segment2<Real>::Vector2Type Mathematics::Segment2<Real>::GetBeginPoint() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -82,7 +82,7 @@ typename Mathematics::Segment2<Real>::Vector2 Mathematics::Segment2<Real>::GetBe
 }
 
 template <typename Real>
-typename Mathematics::Segment2<Real>::Vector2 Mathematics::Segment2<Real>::GetEndPoint() const noexcept
+typename Mathematics::Segment2<Real>::Vector2Type Mathematics::Segment2<Real>::GetEndPoint() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -90,7 +90,7 @@ typename Mathematics::Segment2<Real>::Vector2 Mathematics::Segment2<Real>::GetEn
 }
 
 template <typename Real>
-typename Mathematics::Segment2<Real>::Vector2 Mathematics::Segment2<Real>::GetCenterPoint() const noexcept
+typename Mathematics::Segment2<Real>::Vector2Type Mathematics::Segment2<Real>::GetCenterPoint() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -98,7 +98,7 @@ typename Mathematics::Segment2<Real>::Vector2 Mathematics::Segment2<Real>::GetCe
 }
 
 template <typename Real>
-typename Mathematics::Segment2<Real>::Vector2 Mathematics::Segment2<Real>::GetDirection() const noexcept
+typename Mathematics::Segment2<Real>::Vector2Type Mathematics::Segment2<Real>::GetDirection() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -116,9 +116,9 @@ Real Mathematics::Segment2<Real>::GetExtent() const noexcept
 template <typename Real>
 void Mathematics::Segment2<Real>::ComputeCenterDirectionExtent()
 {
-    center = Math::GetRational(1, 2) * (beginPoint + endPoint);
+    center = MathType::GetRational(1, 2) * (beginPoint + endPoint);
     direction = endPoint - beginPoint;
-    extent = Math::GetRational(1, 2) * Vector2Tools::GetLength(direction);
+    extent = MathType::GetRational(1, 2) * Vector2ToolsType::GetLength(direction);
 
     direction.Normalize(epsilon);
 }
@@ -131,7 +131,7 @@ void Mathematics::Segment2<Real>::ComputeEndPoints()
 }
 
 template <typename Real>
-Mathematics::Segment2<Real> Mathematics::Segment2<Real>::GetMove(Real t, const Vector2& velocity) const
+Mathematics::Segment2<Real> Mathematics::Segment2<Real>::GetMove(Real t, const Vector2Type& velocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

@@ -67,7 +67,7 @@ namespace Rendering
         NODISCARD std::string GetShaderName(const std::string& name) const;
         NODISCARD std::string GetShaderExtendName() const;
 
-        NODISCARD void Resize(int width, int height);
+        void Resize(int width, int height);
 
         void SwapBuffers(int syncInterval);
 

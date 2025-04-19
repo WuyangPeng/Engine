@@ -88,7 +88,7 @@ typename Mathematics::Algebra::ConvexPolyhedron3<Real>::PlanesType Mathematics::
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-typename Mathematics::Algebra::ConvexPolyhedron3<Real>::AlignedBox3 Mathematics::Algebra::ConvexPolyhedron3<Real>::GetAlignedBox() const noexcept
+typename Mathematics::Algebra::ConvexPolyhedron3<Real>::AlignedBox3Type Mathematics::Algebra::ConvexPolyhedron3<Real>::GetAlignedBox() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -167,8 +167,8 @@ void Mathematics::Algebra::ConvexPolyhedron3<Real>::GenerateAlignedBox()
 {
     if (!vertices.empty() && !indices.empty())
     {
-        Vector3 min{};
-        Vector3 max{};
+        Vector3Type min{};
+        Vector3Type max{};
         if (ComputeExtremes(boost::numeric_cast<int>(vertices.size()), vertices, min, max))
         {
             alignedBox.Set(min, max);

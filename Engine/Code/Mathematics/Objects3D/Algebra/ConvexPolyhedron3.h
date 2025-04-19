@@ -25,12 +25,12 @@ namespace Mathematics::Algebra
     public:
         using ClassType = ConvexPolyhedron3<Real>;
 
-        using AlignedBox3 = AlignedBox3<Real>;
-        using Vector3 = Vector3<Real>;
-        using Vector4 = Vector4<Real>;
-        using VerticesType = std::vector<Vector3>;
+        using AlignedBox3Type = AlignedBox3<Real>;
+        using Vector3Type = Vector3<Real>;
+        using Vector4Type = Vector4<Real>;
+        using VerticesType = std::vector<Vector3Type>;
         using IndicesType = std::vector<int>;
-        using PlanesType = std::vector<Vector4>;
+        using PlanesType = std::vector<Vector4Type>;
 
     public:
         /// 此类所代表的凸多面体具有从多面体外部观察时逆时针排列的三角形面。
@@ -54,7 +54,7 @@ namespace Mathematics::Algebra
         NODISCARD VerticesType GetVertices() const;
         NODISCARD IndicesType GetIndices() const;
         NODISCARD PlanesType GetPlanes() const;
-        NODISCARD AlignedBox3 GetAlignedBox() const noexcept;
+        NODISCARD AlignedBox3Type GetAlignedBox() const noexcept;
 
         void SetVertices(const VerticesType& aVertices, bool wantPlanes, bool wantAlignedBox);
         void SetIndices(const IndicesType& aIndices, bool wantPlanes, bool wantAlignedBox);
@@ -71,7 +71,7 @@ namespace Mathematics::Algebra
         VerticesType vertices;
         IndicesType indices;
         PlanesType planes;
-        AlignedBox3 alignedBox;
+        AlignedBox3Type alignedBox;
     };
 }
 

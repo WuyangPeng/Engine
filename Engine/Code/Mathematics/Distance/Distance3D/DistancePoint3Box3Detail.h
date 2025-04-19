@@ -18,7 +18,7 @@
 #include "Mathematics/Objects3D/Box3Detail.h"
 
 template <typename Real>
-Mathematics::DistancePoint3Box3<Real>::DistancePoint3Box3(const Vector3& point, const Box3& box) noexcept
+Mathematics::DistancePoint3Box3<Real>::DistancePoint3Box3(const Vector3Type& point, const Box3Type& box) noexcept
     : ParentType{}, point{ point }, box{ box }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -62,11 +62,11 @@ typename Mathematics::DistancePoint3Box3<Real>::DistanceResult Mathematics::Dist
     auto difference = point - box.GetCenter();
 
     // 计算平方距离和包围盒上的最近点。
-    Vector3 closest{ Vector3Tools::DotProduct(difference, box.GetAxis0()),
-                     Vector3Tools::DotProduct(difference, box.GetAxis1()),
-                     Vector3Tools::DotProduct(difference, box.GetAxis2()) };
-    auto squaredDistance = Math::GetValue(0);
-    auto delta = Math::GetValue(0);
+    Vector3Type closest{ Vector3ToolsType::DotProduct(difference, box.GetAxis0()),
+                     Vector3ToolsType::DotProduct(difference, box.GetAxis1()),
+                     Vector3ToolsType::DotProduct(difference, box.GetAxis2()) };
+    auto squaredDistance = MathType::GetValue(0);
+    auto delta = MathType::GetValue(0);
 
     if (closest.GetX() < -box.GetExtent0())
     {
@@ -108,13 +108,13 @@ typename Mathematics::DistancePoint3Box3<Real>::DistanceResult Mathematics::Dist
     }
 
     return DistanceResult{ squaredDistance,
-                           Math::GetValue(0),
+                           MathType::GetValue(0),
                            point,
                            box.GetCenter() + closest.GetX() * box.GetAxis0() + closest.GetY() * box.GetAxis1() + closest.GetZ() * box.GetAxis2() };
 }
 
 template <typename Real>
-typename Mathematics::DistancePoint3Box3<Real>::DistanceResult Mathematics::DistancePoint3Box3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistancePoint3Box3<Real>::DistanceResult Mathematics::DistancePoint3Box3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

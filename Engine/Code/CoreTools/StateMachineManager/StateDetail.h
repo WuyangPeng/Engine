@@ -80,7 +80,7 @@ const CoreTools::Rtti& CoreTools::State<EntityType>::GetRttiType() const noexcep
 template <typename EntityType>
 const CoreTools::Rtti& CoreTools::State<EntityType>::GetCurrentRttiType() noexcept
 {
-    static const Rtti rtti{ "CoreTools.State<EntityType>", nullptr };
+    static const Rtti rtti{ "CoreTools.StateType<EntityType>", nullptr };
 
     return rtti;
 }

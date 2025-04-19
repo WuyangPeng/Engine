@@ -110,7 +110,7 @@ int Mathematics::OrientedBoundingBoxTree<Real>::GetHeight() const noexcept
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-std::vector<typename Mathematics::OrientedBoundingBoxTree<Real>::OrientedBoundingBoxNode> Mathematics::OrientedBoundingBoxTree<Real>::GetNodes() const
+std::vector<typename Mathematics::OrientedBoundingBoxTree<Real>::OrientedBoundingBoxNodeType> Mathematics::OrientedBoundingBoxTree<Real>::GetNodes() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

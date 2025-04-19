@@ -12,6 +12,10 @@
 
 #include "System/Helper/PragmaWarning.h"
 
+#ifndef PUGIXML_HAS_LONG_LONG
+    #define PUGIXML_HAS_LONG_LONG
+#endif  // PUGIXML_HAS_LONG_LONG
+
 #include SYSTEM_WARNING_PUSH
 
 #include SYSTEM_WARNING_DISABLE(4459)

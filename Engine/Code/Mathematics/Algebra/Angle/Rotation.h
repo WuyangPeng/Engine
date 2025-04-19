@@ -34,27 +34,27 @@ namespace Mathematics::Algebra
     public:
         using ClassType = Rotation<N, Real>;
 
-        using Matrix = Matrix<N, N, Real>;
-        using Quaternion = Quaternion<Real>;
-        using AxisAngle = AxisAngle<N, Real>;
-        using EulerAngles = EulerAngles<Real>;
+        using MatrixType = Matrix<N, N, Real>;
+        using QuaternionType = Quaternion<Real>;
+        using AxisAngleType = AxisAngle<N, Real>;
+        using EulerAnglesType = EulerAngles<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         /// 从各种表示创建旋转。
-        explicit Rotation(const Matrix& matrix) noexcept;
-        explicit Rotation(const Quaternion& quaternion) noexcept;
-        explicit Rotation(const AxisAngle& axisAngle) noexcept;
-        explicit Rotation(const EulerAngles& eulerAngles) noexcept;
+        explicit Rotation(const MatrixType& matrix) noexcept;
+        explicit Rotation(const QuaternionType& quaternion) noexcept;
+        explicit Rotation(const AxisAngleType& axisAngle) noexcept;
+        explicit Rotation(const EulerAnglesType& eulerAngles) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         /// 将一种表达转换为另一种表达。
-        NODISCARD explicit operator Matrix();
-        NODISCARD explicit operator Quaternion();
-        NODISCARD explicit operator AxisAngle();
-        NODISCARD EulerAngles operator()(int axis0, int axis1, int axis2);
+        NODISCARD explicit operator MatrixType();
+        NODISCARD explicit operator QuaternionType();
+        NODISCARD explicit operator AxisAngleType();
+        NODISCARD EulerAnglesType operator()(int axis0, int axis1, int axis2);
 
     private:
         /// 将旋转矩阵转换为四元数。
@@ -87,7 +87,7 @@ namespace Mathematics::Algebra
         ///         | w*x  w*y  w*z  w*w |
         ///         +-                  -+
         /// 代码提取最大长度的行，对其进行归一化以获得结果q。
-        static void Convert(const Matrix& matrix, Quaternion& quaternion);
+        static void Convert(const MatrixType& matrix, QuaternionType& quaternion);
 
         /// 将四元数q = x*i + y*j + z*k + w转换为旋转矩阵。
         /// [MATHEMATICS_USE_MATRIX_VECTOR]
@@ -102,7 +102,7 @@ namespace Mathematics::Algebra
         ///     | r10 r11 r12 |   | 2(xy-zw)     1-2x^2-2z^2  2(yz+xw)    |
         ///     | r20 r21 r22 |   | 2(xz+yw)     2(yz-xw)     1-2x^2-2y^2 |
         ///     +-           -+   +-                                     -+
-        static void Convert(const Quaternion& quaternion, Matrix& matrix);
+        static void Convert(const QuaternionType& quaternion, MatrixType& matrix);
 
         /// 将旋转矩阵转换为轴角度对。
         /// 设(x0,x1,x2)为轴，设t为旋转角度。
@@ -121,7 +121,7 @@ namespace Mathematics::Algebra
         ///   当t = 0时，旋转是单位，在这种情况下，任何轴方向都是有效的；我们选择(1,0,0)。
         ///   当t = pi时，必须是R - Transpose(R) = 0，这阻止了我们提取轴。
         ///   相反，请注意(R+I)/2 = I+S^2 = U*U^T，其中U是单位长度轴方向。
-        static void Convert(const Matrix& matrix, AxisAngle& axisAngle);
+        static void Convert(const MatrixType& matrix, AxisAngleType& axisAngle);
 
         /// 将轴角对转换为旋转矩阵。
         /// 假设(x0,x1,x2)是一个右手世界（x0向右，x1向上，x2在页面平面外），
@@ -150,13 +150,13 @@ namespace Mathematics::Algebra
         ///      | (1-c)*x0*x1 - s*x2  (1-c)*x1^2  + c     (1-c)*x1*x2 + s*x0 |
         ///      | (1-c)*x0*x2 + s*x1  (1-c)*x1*x2 - s*x0  (1-c)*x2^2  + c    |
         ///      +-                                                          -+
-        static void Convert(const AxisAngle& axisAngle, Matrix& matrix);
+        static void Convert(const AxisAngleType& axisAngle, MatrixType& matrix);
 
         /// 将旋转矩阵转换为Euler角度。
         /// 欧拉角的因子分解不一定是唯一的。如果结果为NotUniqueSum，则会出现多个解，因为angleN2+angleN0是常数。
         /// 如果结果为NotUniqueDifference，则会出现多个解，因为angleN2-angleN0是常数。
         /// 在任何一种类型的非唯一性中，函数都返回angleN0=0。
-        static void Convert(const Matrix& matrix, EulerAngles& eulerAngles);
+        static void Convert(const MatrixType& matrix, EulerAnglesType& eulerAngles);
 
         /// 将欧拉角转换为旋转矩阵。
         /// 三个整数输入以{0,1,2} 为单位，
@@ -175,45 +175,45 @@ namespace Mathematics::Algebra
         /// 注：选择顺序反转，以便使用一个乘法约定构建的旋转矩阵是使用另一个乘法惯例构建的旋转基质的转置。因此
         /// [MATHEMATICS_USE_MATRIX_VECTOR]
         ///   Matrix3x3<Real> R_mvConvention(N0,N1,N2,angleN0,angleN1,angleN2);
-        ///   Vector3<Real> V(...);
-        ///   Vector3<Real> U = R_mvConvention*V;  // (u0,u1,u2) = R2*R1*R0*V
+        ///   Vector3Type<Real> V(...);
+        ///   Vector3Type<Real> U = R_mvConvention*V;  // (u0,u1,u2) = R2*R1*R0*V
         /// [MATHEMATICS_USE_VECTOR_MATRIX]
         ///   Matrix3x3<Real> R_vmConvention(N0,N1,N2,angleN0,angleN1,angleN2);
-        ///   Vector3<Real> V(...);
-        ///   Vector3<Real> U = R_mvConvention*V;  // (u0,u1,u2) = V*R0*R1*R2
+        ///   Vector3Type<Real> V(...);
+        ///   Vector3Type<Real> U = R_mvConvention*V;  // (u0,u1,u2) = V*R0*R1*R2
         /// 在任一约定中，都会得到相同的三元组U。
-        static void Convert(const EulerAngles& eulerAngles, Matrix& matrix);
+        static void Convert(const EulerAnglesType& eulerAngles, MatrixType& matrix);
 
         /// 将四元数转换为轴角度对，其中
         ///   q = sin(angle/2)*(axis[0]*i+axis[1]*j+axis[2]*k)+cos(angle/2)
-        static void Convert(const Quaternion& quaternion, AxisAngle& axisAngle);
+        static void Convert(const QuaternionType& quaternion, AxisAngleType& axisAngle);
 
         /// 将轴角度对转换为四元数，其中
         ///   q = sin(angle/2)*(axis[0]*i+axis[1]*j+axis[2]*k)+cos(angle/2)
-        static void Convert(const AxisAngle& axisAngle, Quaternion& quaternion);
+        static void Convert(const AxisAngleType& axisAngle, QuaternionType& quaternion);
 
         /// 将四元数转换为欧拉角。
         /// 四元数被转换为矩阵，然后矩阵被转换为欧拉角。
-        static void Convert(const Quaternion& quaternion, EulerAngles& eulerAngles);
+        static void Convert(const QuaternionType& quaternion, EulerAnglesType& eulerAngles);
 
         /// 将欧拉角转换为四元数。
         /// 欧拉角被转换为矩阵，然后矩阵被转换为四元数。
-        static void Convert(const EulerAngles& eulerAngles, Quaternion& quaternion);
+        static void Convert(const EulerAnglesType& eulerAngles, QuaternionType& quaternion);
 
         /// 将轴角度对转换为欧拉角。
         /// 轴角度对被转换为四元数，然后四元数被转换为欧拉角。
-        static void Convert(const AxisAngle& axisAngle, EulerAngles& eulerAngles);
+        static void Convert(const AxisAngleType& axisAngle, EulerAnglesType& eulerAngles);
 
         /// 将欧拉角转换为轴角度对。
         /// 欧拉角被转换为四元数，然后四元数被转换为轴角对。
-        static void Convert(const EulerAngles& eulerAngles, AxisAngle& axisAngle);
+        static void Convert(const EulerAnglesType& eulerAngles, AxisAngleType& axisAngle);
 
     private:
         RotationType rotationType;
-        Matrix matrix;
-        Quaternion quaternion;
-        AxisAngle axisAngle;
-        EulerAngles eulerAngles;
+        MatrixType matrix;
+        QuaternionType quaternion;
+        AxisAngleType axisAngle;
+        EulerAnglesType eulerAngles;
     };
 }
 

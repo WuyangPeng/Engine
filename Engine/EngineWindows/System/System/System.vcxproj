@@ -574,6 +574,7 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Timer.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\TypeIndex.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\TypeTraits.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Vld.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\SecuritySidMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\SelectCompilerConfig.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\SelectPlatformConfig.h" />

@@ -19,7 +19,7 @@
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorRay3Plane3<Real>::StaticTestIntersectorRay3Plane3(const Ray3& ray, const Plane3& plane, const Real epsilon) noexcept
+Mathematics::StaticTestIntersectorRay3Plane3<Real>::StaticTestIntersectorRay3Plane3(const Ray3Type& ray, const Plane3Type& plane, const Real epsilon) noexcept
     : ParentType{ epsilon }, ray{ ray }, plane{ plane }
 {
     Test();
@@ -61,7 +61,7 @@ void Mathematics::StaticTestIntersectorRay3Plane3<Real>::Test() noexcept
 {
     const Line3<Real> line{ ray.GetOrigin(), ray.GetDirection() };
     StaticFindIntersectorLine3Plane3<Real> intr{ line, plane };
-    if (intr.IsIntersection() && Math::GetValue(0) <= intr.GetLineParameter())
+    if (intr.IsIntersection() && MathType::GetValue(0) <= intr.GetLineParameter())
     {
         this->SetIntersectionType(intr.GetIntersectionType());
 

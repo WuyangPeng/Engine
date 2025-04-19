@@ -28,31 +28,31 @@ namespace Mathematics
     public:
         using ClassType = Vector3Orthonormalize<Real, Robust>;
 
-        using Math = Math<Real>;
-        using Vector3 = Vector3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using ContainerType = std::vector<Vector3>;
+        using MathType = Math<Real>;
+        using Vector3Type = Vector3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using ContainerType = std::vector<Vector3Type>;
 
     public:
         // Gram-Schmidt正交化.
         // 以线性无关的向量U、V和W，来计算一个正交组（单位长度，相互垂直）。
-        Vector3Orthonormalize(const Vector3& uVector, const Vector3& vVector, const Vector3& wVector, const Real epsilon = Math::GetZeroTolerance());
+        Vector3Orthonormalize(const Vector3Type& uVector, const Vector3Type& vVector, const Vector3Type& wVector, const Real epsilon = MathType::GetZeroTolerance());
 
-        explicit Vector3Orthonormalize(const ContainerType& vectors, const Real epsilon = Math::GetZeroTolerance());
+        explicit Vector3Orthonormalize(const ContainerType& vectors, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector3 GetUVector() const noexcept;
-        NODISCARD Vector3 GetVVector() const noexcept;
-        NODISCARD Vector3 GetWVector() const noexcept;
+        NODISCARD Vector3Type GetUVector() const noexcept;
+        NODISCARD Vector3Type GetVVector() const noexcept;
+        NODISCARD Vector3Type GetWVector() const noexcept;
 
     private:
         void Generate();
 
     private:
-        Vector3 uVector;
-        Vector3 vVector;
-        Vector3 wVector;
+        Vector3Type uVector;
+        Vector3Type vVector;
+        Vector3Type wVector;
         Real epsilon;
     };
 

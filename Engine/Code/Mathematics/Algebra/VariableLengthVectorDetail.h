@@ -195,9 +195,9 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    if (Math::epsilon < Math::FAbs(scalar))
+    if (MathType::epsilon < MathType::FAbs(scalar))
     {
-        this->operator*=(Math::GetValue(1) / scalar);
+        this->operator*=(MathType::GetValue(1) / scalar);
     }
     else
     {
@@ -215,7 +215,7 @@ Real Mathematics::VariableLengthVector<Real>::Length(bool robust) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return Math::Sqrt(SquaredLength(robust));
+    return MathType::Sqrt(SquaredLength(robust));
 }
 
 template <typename Real>
@@ -226,10 +226,10 @@ Real Mathematics::VariableLengthVector<Real>::SquaredLength(bool robust) const
 
     if (robust)
     {
-        auto maxComponent = Math::FAbs(container.at(0));
+        auto maxComponent = MathType::FAbs(container.at(0));
         for (auto i = 1; i < GetSize(); ++i)
         {
-            auto component = Math::FAbs(container.at(i));
+            auto component = MathType::FAbs(container.at(i));
             if (maxComponent < component)
             {
                 maxComponent = component;
@@ -261,10 +261,10 @@ Real Mathematics::VariableLengthVector<Real>::Normalize(Real epsilon, bool robus
 
     if (robust)
     {
-        auto maxComponent = Math::FAbs(container.at(0));
+        auto maxComponent = MathType::FAbs(container.at(0));
         for (auto i = 1; i < GetSize(); ++i)
         {
-            auto component = Math::FAbs(container.at(i));
+            auto component = MathType::FAbs(container.at(i));
             if (maxComponent < component)
             {
                 maxComponent = component;
@@ -275,7 +275,7 @@ Real Mathematics::VariableLengthVector<Real>::Normalize(Real epsilon, bool robus
         if (epsilon < maxComponent)
         {
             (*this) /= maxComponent;
-            length = Math::Sqrt(Dot(*this, *this));
+            length = MathType::Sqrt(Dot(*this, *this));
             (*this) /= length;
             length *= maxComponent;
         }
@@ -288,7 +288,7 @@ Real Mathematics::VariableLengthVector<Real>::Normalize(Real epsilon, bool robus
     }
     else
     {
-        Real length = Math::Sqrt(Dot(*this, *this));
+        Real length = MathType::Sqrt(Dot(*this, *this));
         if (epsilon < length)
         {
             (*this) /= length;
@@ -365,7 +365,7 @@ void Mathematics::VariableLengthVector<Real>::MakeUnit(int dimension)
     std::fill(container.begin(), container.end(), Real{});
     if (0 <= dimension && dimension < boost::numeric_cast<int>(container.size()))
     {
-        container.at(dimension) = Math::GetValue(1);
+        container.at(dimension) = MathType::GetValue(1);
     }
 }
 

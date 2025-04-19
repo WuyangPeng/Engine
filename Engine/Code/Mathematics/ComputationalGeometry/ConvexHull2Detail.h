@@ -64,7 +64,7 @@ void Mathematics::ConvexHull2<Real>::Init()
     if (queryType != QueryType::Rational && queryType != QueryType::Filtered)
     {
         const auto minValue = info.GetMinExtreme();
-        auto scale = Math::GetValue(1) / info.GetMaxRange();
+        auto scale = MathType::GetValue(1) / info.GetMaxRange();
         for (auto i = 0; i < mNumVertices; ++i)
         {
             sVertices.at(i) = (vertices.at(i) - minValue) * scale;
@@ -73,18 +73,18 @@ void Mathematics::ConvexHull2<Real>::Init()
         Real expand{};
         if (queryType == QueryType::Int64)
         {
-            expand = Math::GetValue(1 << 20);
+            expand = MathType::GetValue(1 << 20);
             query = std::make_shared<Query2Int64<Real>>(sVertices);
         }
         else if (queryType == QueryType::Integer)
         {
-            expand = Math::GetValue(1 << 24);
+            expand = MathType::GetValue(1 << 24);
             query = std::make_shared<Query2Integer<Real>>(sVertices);
         }
         else
         {
-            expand = Math::GetValue(1);
-            query = std::make_shared<Query2>(sVertices);
+            expand = MathType::GetValue(1);
+            query = std::make_shared<Query2Type>(sVertices);
         }
 
         for (auto i = 0; i < mNumVertices; ++i)
@@ -172,21 +172,21 @@ Mathematics::ConvexHull1<Real> Mathematics::ConvexHull2<Real>::GetConvexHull1() 
         THROW_EXCEPTION(SYSTEM_TEXT("Î¬¶È±ØÐëÎª1¡£"));
     }
 
-    typename ConvexHull1::Vertices projection{};
+    typename ConvexHull1Type::Vertices projection{};
     for (const auto& value : vertices)
     {
         auto diff = value - lineOrigin;
         projection.emplace_back(Vector2Tools<Real>::DotProduct(lineDirection, diff));
     }
 
-    ConvexHull1 convexHull1(projection, this->GetEpsilon(), this->GetQueryType());
+    ConvexHull1Type convexHull1(projection, this->GetEpsilon(), this->GetQueryType());
 
     return convexHull1;
 }
 
 template <typename Real>
 Mathematics::ConvexHull2<Real>::ConvexHull2(const String& filename)
-    : ParentType{ 0, Math::GetValue(0), QueryType::Real },
+    : ParentType{ 0, MathType::GetValue(0), QueryType::Real },
       vertices{},
       sVertices{},
       query{},
@@ -231,12 +231,12 @@ void Mathematics::ConvexHull2<Real>::LoadFile(const String& filename)
     vertices.resize(numVertices);
     sVertices.resize(numVertices);
 
-    const auto size = Vector2::pointSize * numVertices;
+    const auto size = Vector2Type::pointSize * numVertices;
 
     inFile.Read(sizeof(Real), size, vertices.data());
     inFile.Read(sizeof(Real), size, sVertices.data());
-    inFile.Read(sizeof(Real), Vector2::pointSize, &lineOrigin);
-    inFile.Read(sizeof(Real), Vector2::pointSize, &lineDirection);
+    inFile.Read(sizeof(Real), Vector2Type::pointSize, &lineOrigin);
+    inFile.Read(sizeof(Real), Vector2Type::pointSize, &lineDirection);
 
     switch (this->GetQueryType())
     {
@@ -257,7 +257,7 @@ void Mathematics::ConvexHull2<Real>::LoadFile(const String& filename)
         }
         case QueryType::Real:
         {
-            query = std::make_shared<Query2>(sVertices);
+            query = std::make_shared<Query2Type>(sVertices);
             break;
         }
         case QueryType::Filtered:
@@ -282,12 +282,12 @@ void Mathematics::ConvexHull2<Real>::SaveFile(const String& filename) const
 
     const auto numVertices = this->GetNumVertices();
 
-    const auto size = Vector2::pointSize * numVertices;
+    const auto size = Vector2Type::pointSize * numVertices;
 
     outFile.Write(sizeof(Real), size, vertices.data());
     outFile.Write(sizeof(Real), size, sVertices.data());
-    outFile.Write(sizeof(Real), Vector2::pointSize, &lineOrigin);
-    outFile.Write(sizeof(Real), Vector2::pointSize, &lineDirection);
+    outFile.Write(sizeof(Real), Vector2Type::pointSize, &lineOrigin);
+    outFile.Write(sizeof(Real), Vector2Type::pointSize, &lineDirection);
 }
 
 template <typename Real>
@@ -371,7 +371,7 @@ Mathematics::ConvexHull2<Real>::Edge::Edge(int32_t v0, int32_t v1)
 }
 
 template <typename Real>
-Mathematics::LineQueryType Mathematics::ConvexHull2<Real>::Edge::GetSign(int32_t i, const Query2& query)
+Mathematics::LineQueryType Mathematics::ConvexHull2<Real>::Edge::GetSign(int32_t i, const Query2Type& query)
 {
     if (i != time)
     {

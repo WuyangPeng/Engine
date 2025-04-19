@@ -14,6 +14,7 @@
 
 #include "GenerateDirectory.h"
 #include "GenerateFile.h"
+#include "ModuleGenerate.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/CharacterString/CodeMappingAnalysis.h"
 #include "AssistTools/GenerateProjects/GameParameterAnalysis.h"

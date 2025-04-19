@@ -40,11 +40,11 @@ namespace Mathematics
 
         using Vector3 = Algebra::Vector3<Real>;
         using Vector3Container = std::vector<Vector3>;
-        using VariableLengthVector = VariableLengthVector<Real>;
-        using VariableMatrix = VariableMatrix<Real>;
-        using Math = Math<Real>;
-        using GaussNewtonMinimizerResult = GaussNewtonMinimizerResult<Real>;
-        using LevenbergMarquardtMinimizerResult = LevenbergMarquardtMinimizerResult<Real>;
+        using VariableLengthVectorType = VariableLengthVector<Real>;
+        using VariableMatrixType = VariableMatrix<Real>;
+        using MathType = Math<Real>;
+        using GaussNewtonMinimizerResultType = GaussNewtonMinimizerResult<Real>;
+        using LevenbergMarquardtMinimizerResultType = LevenbergMarquardtMinimizerResult<Real>;
 
     public:
         ApproximationCone3() noexcept;
@@ -57,7 +57,7 @@ namespace Mathematics
         /// 高斯-牛顿最小化器用于使用非线性最小二乘法拟合圆锥体。
         /// 拟合的圆锥体以coneVertex、coneAxis和coneAngle形式返回。
         /// 有关最小二乘算法及其所需参数的描述，请参见GaussNewtonMinimizer.h。
-        NODISCARD GaussNewtonMinimizerResult operator()(const Vector3Container& aPoints,
+        NODISCARD GaussNewtonMinimizerResultType operator()(const Vector3Container& aPoints,
                                                         int maxIterations,
                                                         Real updateLengthTolerance,
                                                         Real errorDifferenceTolerance,
@@ -70,7 +70,7 @@ namespace Mathematics
         /// 调用方必须提供这些的初始猜测。函数估计圆锥体参数并返回这些参数。
         /// 有关最小二乘算法及其所需参数的描述，请参见GaussNewtonMinimizer.h。
         /// （文件LevenbergMarquardtMinimizer.h会将您引导到高斯-牛顿文件以读取有关参数的信息。
-        NODISCARD LevenbergMarquardtMinimizerResult operator()(const Vector3Container& aPoints,
+        NODISCARD LevenbergMarquardtMinimizerResultType operator()(const Vector3Container& aPoints,
                                                                int maxIterations,
                                                                Real updateLengthTolerance,
                                                                Real errorDifferenceTolerance,
@@ -87,8 +87,8 @@ namespace Mathematics
 
     private:
         Vector3Container points;
-        std::function<void(const VariableLengthVector&, VariableLengthVector&)> fFunction;
-        std::function<void(const VariableLengthVector&, VariableMatrix&)> jFunction;
+        std::function<void(const VariableLengthVectorType&, VariableLengthVectorType&)> fFunction;
+        std::function<void(const VariableLengthVectorType&, VariableMatrixType&)> jFunction;
     };
 }
 

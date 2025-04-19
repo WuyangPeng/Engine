@@ -32,25 +32,25 @@ namespace Mathematics
     public:
         using ClassType = CircleFit2<Real>;
 
-        using Vector2 = Vector2<Real>;
-        using Circle2 = Circle2<Real>;
-        using PointType = std::vector<Vector2>;
-        using Math = Math<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Circle2Type = Circle2<Real>;
+        using PointType = std::vector<Vector2Type>;
+        using MathType = Math<Real>;
 
     public:
         CircleFit2(const PointType& points, int maxIterations, bool initialCenterIsAverage);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Circle2 GetCircle() const noexcept;
+        NODISCARD Circle2Type GetCircle() const noexcept;
 
     private:
         void Calculate(const PointType& points, int maxIterations, bool initialCenterIsAverage);
-        NODISCARD Vector2 GetAveragePoint(const PointType& points);
-        void Iteration(const PointType& points, const Vector2& average);
+        NODISCARD Vector2Type GetAveragePoint(const PointType& points);
+        void Iteration(const PointType& points, const Vector2Type& average);
 
     private:
-        Circle2 circle;
+        Circle2Type circle;
     };
 
     using CircleFit2F = CircleFit2<float>;

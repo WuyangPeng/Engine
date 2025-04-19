@@ -24,8 +24,8 @@ namespace Mathematics
         using ClassType = Query2Filtered<Real>;
         using ParentType = Query2<Real>;
 
-        using Math = typename ParentType::Math;
-        using Vector2 = typename ParentType::Vector2;
+        using MathType = typename ParentType::MathType;
+        using Vector2 = typename ParentType::Vector2Type;
         using VerticesType = typename ParentType::VerticesType;
 
     public:
@@ -50,10 +50,10 @@ namespace Mathematics
         NODISCARD CircumcircleQueryType ToCircumcircle(const Vector2& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const override;
 
     private:
-        using Query2Rational = Query2Rational<Real>;
+        using Query2RationalType = Query2Rational<Real>;
 
     private:
-        Query2Rational rationalQuery;
+        Query2RationalType rationalQuery;
         Real uncertainty;
     };
 

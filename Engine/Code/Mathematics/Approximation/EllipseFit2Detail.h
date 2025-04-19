@@ -37,23 +37,23 @@ void Mathematics::EllipseFit2<Real>::Fit2()
 
     InitialGuess();
 
-    auto angle = Math::ATan2(rotate.GetValue<0, 1>(), rotate.GetValue<0, 0>());
-    auto value0 = extent0 * Math::FAbs(rotate.GetValue<0, 0>()) +
-                  extent1 * Math::FAbs(rotate.GetValue<1, 0>());
-    auto value1 = extent0 * Math::FAbs(rotate.GetValue<0, 1>()) +
-                  extent1 * Math::FAbs(rotate.GetValue<1, 1>());
+    auto angle = MathType::ATan2(rotate.template GetValue<0, 1>(), rotate.template GetValue<0, 0>());
+    auto value0 = extent0 * MathType::FAbs(rotate.template GetValue<0, 0>()) +
+                  extent1 * MathType::FAbs(rotate.template GetValue<1, 0>());
+    auto value1 = extent0 * MathType::FAbs(rotate.template GetValue<0, 1>()) +
+                  extent1 * MathType::FAbs(rotate.template GetValue<1, 1>());
 
-    Container begin{ Math::GetRational(1, 2) * extent0,
-                     Math::GetRational(1, 2) * extent1,
+    Container begin{ MathType::GetRational(1, 2) * extent0,
+                     MathType::GetRational(1, 2) * extent1,
                      center.GetX() - value0,
                      center.GetY() - value1,
-                     -Math::GetPI() };
+                     -MathType::GetPI() };
 
-    Container end{ Math::GetValue(2) * extent0,
-                   Math::GetValue(2) * extent1,
+    Container end{ MathType::GetValue(2) * extent0,
+                   MathType::GetValue(2) * extent1,
                    center.GetX() + value0,
                    center.GetY() + value1,
-                   Math::GetPI() };
+                   MathType::GetPI() };
 
     Container initial{ extent0,
                        extent1,
@@ -82,10 +82,10 @@ void Mathematics::EllipseFit2<Real>::InitialGuess()
     const auto box = ContBox2<Real>::ContOrientedBox(points);
 
     center = box.GetCenter();
-    rotate.SetValue<0, 0>(box.GetAxis0().GetX());
-    rotate.SetValue<0, 1>(box.GetAxis0().GetY());
-    rotate.SetValue<1, 0>(box.GetAxis1().GetX());
-    rotate.SetValue<1, 1>(box.GetAxis1().GetY());
+    rotate.template SetValue<0, 0>(box.GetAxis0().GetX());
+    rotate.template SetValue<0, 1>(box.GetAxis0().GetY());
+    rotate.template SetValue<1, 0>(box.GetAxis1().GetX());
+    rotate.template SetValue<1, 1>(box.GetAxis1().GetY());
     extent0 = box.GetExtent0();
     extent1 = box.GetExtent1();
 }
@@ -101,19 +101,19 @@ Real Mathematics::EllipseFit2<Real>::Energy(const Container& input, const Ellips
     const auto& self = *userData;
 
     // 构建旋转矩阵
-    const Matrix2 rotate{ -input.at(4) };
+    const Matrix2Type rotate{ -input.at(4) };
 
-    const Ellipse2<Real> ellipse{ Vector2::GetZero(), Vector2::GetUnitX(), Vector2::GetUnitY(), input.at(0), input.at(1) };
+    const Ellipse2<Real> ellipse{ Vector2Type::GetZero(), Vector2Type::GetUnitX(), Vector2Type::GetUnitY(), input.at(0), input.at(1) };
 
     // 变换点到中心C和旋转Real的列的坐标系统
-    auto energy = Math::GetValue(0);
+    auto energy = MathType::GetValue(0);
 
     const auto numPoints = userData->GetNumPoint();
 
     for (auto i = 0; i < numPoints; ++i)
     {
         const auto& value = self.GetPoint(i);
-        const Vector2 diff{ value.GetX() - input.at(2), value.GetY() - input.at(3) };
+        const Vector2Type diff{ value.GetX() - input.at(2), value.GetY() - input.at(3) };
 
         const auto point = rotate * diff;
 
@@ -131,7 +131,7 @@ Real Mathematics::EllipseFit2<Real>::Energy(const Container& input, const Ellips
 template <typename Real>
 bool Mathematics::EllipseFit2<Real>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) <= exactly)
+    if (MathType::GetValue(0) <= exactly)
         return true;
     else
         return false;

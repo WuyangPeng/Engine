@@ -27,7 +27,7 @@ namespace Mathematics
     public:
         using ClassType = FastTrigonometric<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         // 采用多项式逼近三角函数和反三角函数的快速计算。速度起伏依靠处理器。

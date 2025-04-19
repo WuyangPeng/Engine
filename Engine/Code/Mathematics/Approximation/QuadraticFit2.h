@@ -50,17 +50,17 @@ namespace Mathematics
     public:
         using ClassType = QuadraticFit2<Real>;
 
-        using Vector2 = Vector2<Real>;
-        using VariableLengthVector = VariableLengthVector<Real>;
-        using Points = std::vector<Vector2>;
-        using Math = Math<Real>;
+        using Vector2Type = Vector2<Real>;
+        using VariableLengthVectorType = VariableLengthVector<Real>;
+        using Points = std::vector<Vector2Type>;
+        using MathType = Math<Real>;
 
     public:
         explicit QuadraticFit2(const Points& points);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD VariableLengthVector GetCoeff() const;
+        NODISCARD VariableLengthVectorType GetCoeff() const;
         NODISCARD Real GetEigenValue() const noexcept;
 
     private:
@@ -70,7 +70,7 @@ namespace Mathematics
         constexpr static int eigenSystemSize = 6;
 
     private:
-        VariableLengthVector coeff;
+        VariableLengthVectorType coeff;
         Real eigenValue;
     };
 

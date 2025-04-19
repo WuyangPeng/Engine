@@ -66,7 +66,7 @@ typename Mathematics::SortPointsOnCircle<T>::Indices Mathematics::SortPointsOnCi
 }
 
 template <typename T>
-bool Mathematics::SortPointsOnCircle<T>::LessThanByAngle(const CircleSortObject& lhs, const CircleSortObject& rhs)
+bool Mathematics::SortPointsOnCircle<T>::LessThanByAngle(const CircleSortObjectType& lhs, const CircleSortObjectType& rhs)
 {
     const auto x0 = lhs.GetW(0);
     const auto y0 = lhs.GetW(1);
@@ -89,7 +89,7 @@ bool Mathematics::SortPointsOnCircle<T>::LessThanByAngle(const CircleSortObject&
 }
 
 template <typename T>
-bool Mathematics::SortPointsOnCircle<T>::LessThanByGeometry(const CircleSortObject& lhs, const CircleSortObject& rhs)
+bool Mathematics::SortPointsOnCircle<T>::LessThanByGeometry(const CircleSortObjectType& lhs, const CircleSortObjectType& rhs)
 {
     const auto x0 = lhs.GetW(0);
     const auto y0 = lhs.GetW(1);

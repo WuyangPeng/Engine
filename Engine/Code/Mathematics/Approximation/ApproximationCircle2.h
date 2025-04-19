@@ -25,10 +25,10 @@ namespace Mathematics
     public:
         using ClassType = ApproximationCircle2<Real>;
 
-        using Circle2 = Circle2<Real>;
-        using Vector2 = Algebra::Vector2<Real>;
-        using Vector2Container = std::vector<Vector2>;
-        using Math = Math<Real>;
+        using Circle2Type = Circle2<Real>;
+        using Vector2Type = Algebra::Vector2<Real>;
+        using Vector2Container = std::vector<Vector2Type>;
+        using MathType = Math<Real>;
 
     public:
         ApproximationCircle2() noexcept;
@@ -37,7 +37,7 @@ namespace Mathematics
 
         /// 当算法的线性系统可解时，返回值为'true'，否则为'false'。
         /// 如果返回'false'，则圆心和半径将设置为零值。
-        NODISCARD bool FitUsingSquaredLengths(const Vector2Container& points, Circle2& circle);
+        NODISCARD bool FitUsingSquaredLengths(const Vector2Container& points, Circle2Type& circle);
 
         /// 使用长度来拟合点，以驱动最小二乘算法。
         /// 如果initialCenterIsAverage设置为“false”，
@@ -56,7 +56,7 @@ namespace Mathematics
         NODISCARD int FitUsingLengths(const Vector2Container& points,
                                       int maxIterations,
                                       bool initialCenterIsAverage,
-                                      Circle2& circle,
+                                      Circle2Type& circle,
                                       Real epsilon = Real{});
     };
 }

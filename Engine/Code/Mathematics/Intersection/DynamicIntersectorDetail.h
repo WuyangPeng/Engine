@@ -32,7 +32,7 @@ Mathematics::DynamicIntersector<Real, Vector>::DynamicIntersector(Real tMax, con
 template <typename Real, template <typename> class Vector>
 bool Mathematics::DynamicIntersector<Real, Vector>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && Math::GetValue(0) <= contactTime)
+    if (ParentType::IsValid() && MathType::GetValue(0) <= contactTime)
         return true;
     else
         return false;

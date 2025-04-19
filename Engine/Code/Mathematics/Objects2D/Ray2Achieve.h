@@ -15,7 +15,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-Mathematics::Ray2<Real>::Ray2(const Vector2& origin, const Vector2& direction, Real epsilon) noexcept
+Mathematics::Ray2<Real>::Ray2(const Vector2Type& origin, const Vector2Type& direction, Real epsilon) noexcept
     : origin{ origin },
       direction{ direction },
       epsilon{ epsilon }
@@ -44,7 +44,7 @@ bool Mathematics::Ray2<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename Mathematics::Ray2<Real>::Vector2 Mathematics::Ray2<Real>::GetOrigin() const noexcept
+typename Mathematics::Ray2<Real>::Vector2Type Mathematics::Ray2<Real>::GetOrigin() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -52,7 +52,7 @@ typename Mathematics::Ray2<Real>::Vector2 Mathematics::Ray2<Real>::GetOrigin() c
 }
 
 template <typename Real>
-typename Mathematics::Ray2<Real>::Vector2 Mathematics::Ray2<Real>::GetDirection() const noexcept
+typename Mathematics::Ray2<Real>::Vector2Type Mathematics::Ray2<Real>::GetDirection() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -60,7 +60,7 @@ typename Mathematics::Ray2<Real>::Vector2 Mathematics::Ray2<Real>::GetDirection(
 }
 
 template <typename Real>
-Mathematics::Ray2<Real> Mathematics::Ray2<Real>::GetMove(Real t, const Vector2& velocity) const
+Mathematics::Ray2<Real> Mathematics::Ray2<Real>::GetMove(Real t, const Vector2Type& velocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

@@ -16,7 +16,7 @@
 
 CLASS_INVARIANT_STUB_DEFINE(FrameworkToolset, MacintoshProcess)
 
-namespace FrameworkToolset
+namespace Framework
 {
     template class Framework::MacintoshProcess<Framework::MacintoshCallBackInterface>;
 }

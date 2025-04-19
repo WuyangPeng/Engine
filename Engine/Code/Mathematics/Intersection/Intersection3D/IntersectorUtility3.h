@@ -26,9 +26,9 @@ namespace Mathematics
     public:
         using ClassType = IntersectorUtility3<Real>;
 
-        using Vector3 = Vector3<Real>;
-        using Container = std::vector<Vector3>;
-        using Box3 = Box3<Real>;
+        using Vector3Type = Vector3<Real>;
+        using Container = std::vector<Vector3Type>;
+        using Box3Type = Box3<Real>;
 
     public:
         IntersectorUtility3() = delete;
@@ -36,10 +36,10 @@ namespace Mathematics
         // 杂项支持
 
         // 输入多边形存储在point中。目前，最大数组大小为8以支持当前的相交算法。
-        NODISCARD static Container ClipConvexPolygonAgainstPlane(const Vector3& normal, Real bonstant, const Container& point);
+        NODISCARD static Container ClipConvexPolygonAgainstPlane(const Vector3Type& normal, Real bonstant, const Container& point);
 
         // 将索引转换为盒内的实际坐标。
-        NODISCARD static Vector3 GetPointFromIndex(int index, const Box3& box);
+        NODISCARD static Vector3Type GetPointFromIndex(int index, const Box3Type& box);
     };
 
     using IntersectorUtility3F = IntersectorUtility3<float>;

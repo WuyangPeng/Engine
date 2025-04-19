@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorRay3Cylinder3<Real>::StaticFindIntersectorRay3Cylinder3(const Ray3& ray, const Cylinder3& cylinder, const Real epsilon)
+Mathematics::StaticFindIntersectorRay3Cylinder3<Real>::StaticFindIntersectorRay3Cylinder3(const Ray3Type& ray, const Cylinder3Type& cylinder, const Real epsilon)
     : ParentType{ epsilon }, ray{ ray }, cylinder{ cylinder }, quantity{}, point0{}, point1{}
 {
     Find();
@@ -57,13 +57,13 @@ void Mathematics::StaticFindIntersectorRay3Cylinder3<Real>::Find()
 {
     const auto findShared = StaticFindIntersectorLine3Cylinder3<Real>::Find(ray.GetOrigin(), ray.GetDirection(), cylinder);
 
-    if (0 < findShared.quantity && Math::GetValue(0) <= findShared.parameter0)
+    if (0 < findShared.quantity && MathType::GetValue(0) <= findShared.parameter0)
     {
         point0 = ray.GetOrigin() + findShared.parameter0 * ray.GetDirection();
         ++quantity;
     }
 
-    if (1 < findShared.quantity && Math::GetValue(0) <= findShared.parameter1)
+    if (1 < findShared.quantity && MathType::GetValue(0) <= findShared.parameter1)
     {
         if (quantity == 0)
         {

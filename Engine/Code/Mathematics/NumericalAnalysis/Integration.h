@@ -26,7 +26,7 @@ namespace Mathematics
     public:
         using ClassType = Integration<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         Integration() noexcept;

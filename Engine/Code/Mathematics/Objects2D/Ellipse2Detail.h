@@ -17,9 +17,9 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Real>
-Mathematics::Ellipse2<Real>::Ellipse2(const Vector2& center,
-                                      const Vector2& axis0,
-                                      const Vector2& axis1,
+Mathematics::Ellipse2<Real>::Ellipse2(const Vector2Type& center,
+                                      const Vector2Type& axis0,
+                                      const Vector2Type& axis1,
                                       const Real extent0,
                                       const Real extent1,
                                       const Real epsilon) noexcept
@@ -29,8 +29,8 @@ Mathematics::Ellipse2<Real>::Ellipse2(const Vector2& center,
 }
 
 template <typename Real>
-Mathematics::Ellipse2<Real>::Ellipse2(const Ellipse2Coefficients& coefficients, const Real epsilon)
-    : center{}, axis{ Vector2::GetUnitX(), Vector2::GetUnitY() }, extent{}, epsilon{ epsilon }
+Mathematics::Ellipse2<Real>::Ellipse2(const Ellipse2CoefficientsType& coefficients, const Real epsilon)
+    : center{}, axis{ Vector2Type::GetUnitX(), Vector2Type::GetUnitY() }, extent{}, epsilon{ epsilon }
 {
     FromCoefficients(coefficients, epsilon);
 
@@ -130,7 +130,7 @@ Mathematics::Matrix2<Real> Mathematics::Ellipse2<Real>::GetMatrix() const
     const auto ratio0 = GetAxis0() / GetExtent0();
     const auto ratio1 = GetAxis1() / GetExtent1();
 
-    return Matrix2{ ratio0, ratio0 } + Matrix2{ ratio1, ratio1 };
+    return Matrix2Type{ ratio0, ratio0 } + Matrix2Type{ ratio1, ratio1 };
 }
 
 template <typename Real>
@@ -141,7 +141,7 @@ Mathematics::Matrix2<Real> Mathematics::Ellipse2<Real>::GetMatrixInverse() const
     const auto ratio0 = GetAxis0() * GetExtent0();
     const auto ratio1 = GetAxis1() * GetExtent1();
 
-    return Matrix2{ ratio0, ratio0 } + Matrix2{ ratio1, ratio1 };
+    return Matrix2Type{ ratio0, ratio0 } + Matrix2Type{ ratio1, ratio1 };
 }
 
 template <typename Real>
@@ -149,15 +149,15 @@ Mathematics::Ellipse2Coefficients<Real> Mathematics::Ellipse2<Real>::ToCoefficie
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const Matrix2 matrix{ GetMatrix() };
-    const Vector2 vector{ Math::GetValue(-2) * (matrix * center) };
-    const auto constants = matrix.QuadraticForm(center, center) - Math::GetValue(1);
+    const Matrix2Type matrix{ GetMatrix() };
+    const Vector2Type vector{ MathType::GetValue(-2) * (matrix * center) };
+    const auto constants = matrix.QuadraticForm(center, center) - MathType::GetValue(1);
 
-    return Ellipse2Coefficients{ matrix, vector, constants };
+    return Ellipse2CoefficientsType{ matrix, vector, constants };
 }
 
 template <typename Real>
-void Mathematics::Ellipse2<Real>::FromCoefficients(const Ellipse2Coefficients& coefficients, const Real newEpsilon)
+void Mathematics::Ellipse2<Real>::FromCoefficients(const Ellipse2CoefficientsType& coefficients, const Real newEpsilon)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -170,11 +170,11 @@ void Mathematics::Ellipse2<Real>::FromCoefficients(const Ellipse2Coefficients& c
     // 计算的中心 K = -A^{-1}*B/2.
     const auto invMatrix = matrix.Inverse(epsilon);
 
-    center = Math::GetRational(-1, 2) * (invMatrix * vector);
+    center = MathType::GetRational(-1, 2) * (invMatrix * vector);
 
     // 计算 B^T*A^{-1}*B/4 - C = K^T*A*K - C = -K^T*B/2 - C.
-    const auto rightSide = Math::GetRational(-1, 2) * Vector2Tools::DotProduct(center, vector) - constants;
-    if (Math::FAbs(rightSide) < epsilon)
+    const auto rightSide = MathType::GetRational(-1, 2) * Vector2ToolsType::DotProduct(center, vector) - constants;
+    if (MathType::FAbs(rightSide) < epsilon)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("除零错误！"s));
     }
@@ -201,29 +201,29 @@ void Mathematics::Ellipse2<Real>::FromCoefficients(const Ellipse2Coefficients& c
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
-        extent[i] = Math::InvSqrt(eigenValue);
+        extent[i] = MathType::InvSqrt(eigenValue);
 
-        axis[i] = Vector2(rotation(0, i), rotation(1, i));
+        axis[i] = Vector2Type(rotation(0, i), rotation(1, i));
 
 #include SYSTEM_WARNING_POP
     }
 }
 
 template <typename Real>
-Real Mathematics::Ellipse2<Real>::Evaluate(const Vector2& point) const
+Real Mathematics::Ellipse2<Real>::Evaluate(const Vector2Type& point) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     const auto diff = point - center;
-    const auto ratio0 = Vector2Tools::DotProduct(GetAxis0(), diff) / GetExtent0();
-    const auto ratio1 = Vector2Tools::DotProduct(GetAxis1(), diff) / GetExtent1();
-    const auto value = ratio0 * ratio0 + ratio1 * ratio1 - Math::GetValue(1);
+    const auto ratio0 = Vector2ToolsType::DotProduct(GetAxis0(), diff) / GetExtent0();
+    const auto ratio1 = Vector2ToolsType::DotProduct(GetAxis1(), diff) / GetExtent1();
+    const auto value = ratio0 * ratio0 + ratio1 * ratio1 - MathType::GetValue(1);
 
     return value;
 }
 
 template <typename Real>
-bool Mathematics::Ellipse2<Real>::Contains(const Vector2& point) const
+bool Mathematics::Ellipse2<Real>::Contains(const Vector2Type& point) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -231,7 +231,7 @@ bool Mathematics::Ellipse2<Real>::Contains(const Vector2& point) const
 }
 
 template <typename Real>
-Mathematics::Ellipse2<Real> Mathematics::Ellipse2<Real>::GetMove(Real t, const Vector2& velocity) const
+Mathematics::Ellipse2<Real> Mathematics::Ellipse2<Real>::GetMove(Real t, const Vector2Type& velocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

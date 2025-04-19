@@ -25,10 +25,10 @@ namespace Mathematics
     {
     public:
         using ClassType = IntegerDataAmend<N>;
-        using IntegerData = IntegerData<N>;
+        using IntegerDataType = IntegerData<N>;
 
     public:
-        explicit IntegerDataAmend(IntegerData& master) noexcept;
+        explicit IntegerDataAmend(IntegerDataType& master) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -41,7 +41,7 @@ namespace Mathematics
         static constexpr auto integerCarry = 0x00010000u;
         static constexpr auto low = 0x0000FFFFu;
 
-        IntegerData& master;
+        IntegerDataType& master;
     };
 }
 

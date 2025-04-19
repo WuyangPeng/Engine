@@ -95,11 +95,11 @@ bool Mathematics::Algebra::Polyhedron3<Real>::CounterClockwise() const noexcept
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)
-typename Mathematics::Algebra::Polyhedron3<Real>::Vector3 Mathematics::Algebra::Polyhedron3<Real>::ComputeVertexAverage() const
+typename Mathematics::Algebra::Polyhedron3<Real>::Vector3Type Mathematics::Algebra::Polyhedron3<Real>::ComputeVertexAverage() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    Vector3 average{};
+    Vector3Type average{};
     const auto vertexPoolSharedPtr = GetVertexPool();
 
     for (auto index : uniqueIndices)
@@ -140,7 +140,7 @@ Real Mathematics::Algebra::Polyhedron3<Real>::ComputeSurfaceArea() const
         surfaceArea += Length(cross);
     }
 
-    surfaceArea *= Math::GetRational(1, 2);
+    surfaceArea *= MathType::GetRational(1, 2);
 
     return surfaceArea;
 }
@@ -168,9 +168,9 @@ Real Mathematics::Algebra::Polyhedron3<Real>::ComputeVolume() const
         volume += DotCross(vertexPoolSharedPtr->at(v0), vertexPoolSharedPtr->at(v1), vertexPoolSharedPtr->at(v2));
     }
 
-    volume /= Math::GetValue(6);
+    volume /= MathType::GetValue(6);
 
-    return Math::FAbs(volume);
+    return MathType::FAbs(volume);
 }
 
 #endif  // MATHEMATICS_OBJECTS_3D_ALGEBRA_POLYHEDRON3_DETAIL_H

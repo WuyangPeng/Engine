@@ -29,41 +29,41 @@ namespace Mathematics
     public:
         using ClassType = Vector4Tools;
 
-        using Math = Math<Real>;
-        using Vector3 = Vector3<Real>;
-        using Vector4 = Vector4<Real>;
+        using MathType = Math<Real>;
+        using Vector3Type = Vector3<Real>;
+        using Vector4Type = Vector4<Real>;
         using AxesAlignBoundingBox4D = AxesAlignBoundingBox4<Real>;
-        using ContainerType = std::vector<Vector4>;
+        using ContainerType = std::vector<Vector4Type>;
 
     public:
-        NODISCARD static bool Approximate(const Vector4& lhs, const Vector4& rhs, Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        NODISCARD static bool Approximate(const Vector4Type& lhs, const Vector4Type& rhs, Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        NODISCARD static Real GetRobustLength(const Vector4& vector);
-        NODISCARD static Real GetLength(const Vector4& vector) noexcept(gAssert < 3 || gMathematicsAssert < 3);
-        NODISCARD static Real GetLengthSquared(const Vector4& vector) noexcept;
-        NODISCARD static Real Distance(const Vector4& lhs, const Vector4& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3);
-        NODISCARD static Real DistanceSquared(const Vector4& lhs, const Vector4& rhs) noexcept;
-        NODISCARD static Real DotProduct(const Vector4& lhs, const Vector4& rhs) noexcept;
+        NODISCARD static Real GetRobustLength(const Vector4Type& vector);
+        NODISCARD static Real GetLength(const Vector4Type& vector) noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD static Real GetLengthSquared(const Vector4Type& vector) noexcept;
+        NODISCARD static Real Distance(const Vector4Type& lhs, const Vector4Type& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD static Real DistanceSquared(const Vector4Type& lhs, const Vector4Type& rhs) noexcept;
+        NODISCARD static Real DotProduct(const Vector4Type& lhs, const Vector4Type& rhs) noexcept;
 
-        NODISCARD static Vector4 ParallelVectorLhsToRhs(const Vector4& lhs, const Vector4& rhs, Real epsilon = Math::GetZeroTolerance());
-        NODISCARD static Vector4 ApeakVectorLhsToRhs(const Vector4& lhs, const Vector4& rhs, Real epsilon = Math::GetZeroTolerance());
-        NODISCARD static Real GetVectorIncludedAngle(const Vector4& lhs, const Vector4& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD static Vector4Type ParallelVectorLhsToRhs(const Vector4Type& lhs, const Vector4Type& rhs, Real epsilon = MathType::GetZeroTolerance());
+        NODISCARD static Vector4Type ApeakVectorLhsToRhs(const Vector4Type& lhs, const Vector4Type& rhs, Real epsilon = MathType::GetZeroTolerance());
+        NODISCARD static Real GetVectorIncludedAngle(const Vector4Type& lhs, const Vector4Type& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 计算点的轴对齐包围盒。
         NODISCARD static AxesAlignBoundingBox4D ComputeExtremes(const ContainerType& vectors);
 
-        NODISCARD static Vector3 ProjectHomogeneous(const Vector4& vector) noexcept;
-        NODISCARD static Vector3 Project(const Vector4& vector, int reject);
+        NODISCARD static Vector3Type ProjectHomogeneous(const Vector4Type& vector) noexcept;
+        NODISCARD static Vector3Type Project(const Vector4Type& vector, int reject);
 
-        NODISCARD static Vector4 HyperCross(const Vector4& v0, const Vector4& v1, const Vector4& v2);
-        NODISCARD static Vector4 UnitHyperCross(const Vector4& v0, const Vector4& v1, const Vector4& v2, bool robust = false, const Real epsilon = Math::GetZeroTolerance());
-        NODISCARD static Real DotHyperCross(const Vector4& v0, const Vector4& v1, const Vector4& v2, const Vector4& v3);
+        NODISCARD static Vector4Type HyperCross(const Vector4Type& v0, const Vector4Type& v1, const Vector4Type& v2);
+        NODISCARD static Vector4Type UnitHyperCross(const Vector4Type& v0, const Vector4Type& v1, const Vector4Type& v2, bool robust = false, const Real epsilon = MathType::GetZeroTolerance());
+        NODISCARD static Real DotHyperCross(const Vector4Type& v0, const Vector4Type& v1, const Vector4Type& v2, const Vector4Type& v3);
 
-        NODISCARD static Real ComputeOrthogonalComplement(const ContainerType& container, bool robust = false, Real epsilon = Math::GetZeroTolerance());
-        NODISCARD static Real Orthonormalize(const ContainerType& container, bool robust = false, Real epsilon = Math::GetZeroTolerance());
+        NODISCARD static Real ComputeOrthogonalComplement(const ContainerType& container, bool robust = false, Real epsilon = MathType::GetZeroTolerance());
+        NODISCARD static Real Orthonormalize(const ContainerType& container, bool robust = false, Real epsilon = MathType::GetZeroTolerance());
 
-        NODISCARD static Vector4 CrossProduct(const Vector4& lhs, const Vector4& rhs) noexcept;
-        NODISCARD static Vector4 UnitCrossProduct(const Vector4& lhs, const Vector4& rhs, Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        NODISCARD static Vector4Type CrossProduct(const Vector4Type& lhs, const Vector4Type& rhs) noexcept;
+        NODISCARD static Vector4Type UnitCrossProduct(const Vector4Type& lhs, const Vector4Type& rhs, Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
     };
 
     using Vector4ToolsF = Vector4Tools<float>;

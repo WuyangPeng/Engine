@@ -16,7 +16,7 @@
 
 CLASS_INVARIANT_STUB_DEFINE(FrameworkToolset, LinuxFrameBuild)
 
-namespace FrameworkToolset
+namespace Framework
 {
     template class Framework::LinuxFrameBuild<Framework::LinuxProcessInterface>;
 }

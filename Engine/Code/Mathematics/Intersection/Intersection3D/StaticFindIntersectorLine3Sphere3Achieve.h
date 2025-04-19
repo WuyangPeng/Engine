@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorLine3Sphere3<Real>::StaticFindIntersectorLine3Sphere3(const Line3& line, const Sphere3& sphere, const Real epsilon)
+Mathematics::StaticFindIntersectorLine3Sphere3<Real>::StaticFindIntersectorLine3Sphere3(const Line3Type& line, const Sphere3Type& sphere, const Real epsilon)
     : ParentType{ epsilon }, line{ line }, sphere{ sphere }, quantity{}, point0{}, point1{}, lineParameter0{}, lineParameter1{}
 {
     Find();
@@ -56,18 +56,18 @@ template <typename Real>
 void Mathematics::StaticFindIntersectorLine3Sphere3<Real>::Find()
 {
     auto diff = line.GetOrigin() - sphere.GetCenter();
-    auto a0 = Vector3Tools::DotProduct(diff, diff) - sphere.GetRadius() * sphere.GetRadius();
-    auto a1 = Vector3Tools::DotProduct(line.GetDirection(), diff);
+    auto a0 = Vector3ToolsType::DotProduct(diff, diff) - sphere.GetRadius() * sphere.GetRadius();
+    auto a1 = Vector3ToolsType::DotProduct(line.GetDirection(), diff);
     auto discr = a1 * a1 - a0;
 
-    if (discr < Math::GetValue(0))
+    if (discr < MathType::GetValue(0))
     {
         this->SetIntersectionType(IntersectionType::Empty);
         quantity = 0;
     }
-    else if (Math::GetZeroTolerance() <= discr)
+    else if (MathType::GetZeroTolerance() <= discr)
     {
-        auto root = Math::Sqrt(discr);
+        auto root = MathType::Sqrt(discr);
         lineParameter0 = -a1 - root;
         lineParameter1 = -a1 + root;
         point0 = line.GetOrigin() + lineParameter0 * line.GetDirection();

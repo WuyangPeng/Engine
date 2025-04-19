@@ -24,12 +24,28 @@ CoreTools::ThreadImpl::ThreadImpl(void* function, void* userData, int processorN
       userData{ userData },
       processorNumber{ processorNumber },
       stackSize{ stackSize },
+
+#ifdef TCRE_USE_GCC
+
+      thread{ System::CreateSystemThread(stackSize, reinterpret_cast<System::ThreadStartRoutine>(function), userData, &threadId) }
+
+{
+    if (thread == 0)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("线程创建失败！"s))
+    }
+
+#else  // !TCRE_USE_GCC
+
       thread{ System::CreateSystemThread(stackSize, static_cast<System::ThreadStartRoutine>(function), userData, &threadId) }
+
 {
     if (thread == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("线程创建失败！"s))
     }
+
+#endif  // TCRE_USE_GCC
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }

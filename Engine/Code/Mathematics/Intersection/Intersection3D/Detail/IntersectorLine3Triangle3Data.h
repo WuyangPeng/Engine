@@ -24,22 +24,22 @@ namespace Mathematics
     public:
         using ClassType = IntersectorLine3Triangle3Data<Real>;
 
-        using Vector3 = Vector3<Real>;
-        using Line3 = Line3<Real>;
-        using Triangle3 = Triangle3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
+        using Vector3Type = Vector3<Real>;
+        using Line3Type = Line3<Real>;
+        using Triangle3Type = Triangle3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
 
     public:
-        IntersectorLine3Triangle3Data(const Line3& line, const Triangle3& triangle);
+        IntersectorLine3Triangle3Data(const Line3Type& line, const Triangle3Type& triangle);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Line3 GetLine() const;
-        NODISCARD Triangle3 GetTriangle() const;
+        NODISCARD Line3Type GetLine() const;
+        NODISCARD Triangle3Type GetTriangle() const;
         NODISCARD Real GetDirectionDotNormal() const noexcept;
 
-        NODISCARD Vector3 GetOriginCrossEdge2() const noexcept;
-        NODISCARD Vector3 GetEdge1CrossOrigin() const noexcept;
+        NODISCARD Vector3Type GetOriginCrossEdge2() const noexcept;
+        NODISCARD Vector3Type GetEdge1CrossOrigin() const noexcept;
         NODISCARD Real GetOriginDotNormal() const noexcept;
 
     private:
@@ -47,12 +47,12 @@ namespace Mathematics
 
     private:
         // 相交对象
-        Line3 line;
-        Triangle3 triangle;
-        Vector3 origin;
-        Vector3 edge1;
-        Vector3 edge2;
-        Vector3 normal;
+        Line3Type line;
+        Triangle3Type triangle;
+        Vector3Type origin;
+        Vector3Type edge1;
+        Vector3Type edge2;
+        Vector3Type normal;
         Real directionDotNormal;
     };
 }

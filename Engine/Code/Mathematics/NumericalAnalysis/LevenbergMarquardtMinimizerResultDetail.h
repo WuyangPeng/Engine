@@ -37,7 +37,7 @@ bool Mathematics::LevenbergMarquardtMinimizerResult<T>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
-typename Mathematics::LevenbergMarquardtMinimizerResult<T>::VariableLengthVector Mathematics::LevenbergMarquardtMinimizerResult<T>::GetMinLocation() const
+typename Mathematics::LevenbergMarquardtMinimizerResult<T>::VariableLengthVectorType Mathematics::LevenbergMarquardtMinimizerResult<T>::GetMinLocation() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -93,7 +93,7 @@ bool Mathematics::LevenbergMarquardtMinimizerResult<T>::IsConverged() const noex
 }
 
 template <typename T>
-void Mathematics::LevenbergMarquardtMinimizerResult<T>::SetMinLocation(const VariableLengthVector& aMinLocation)
+void Mathematics::LevenbergMarquardtMinimizerResult<T>::SetMinLocation(const VariableLengthVectorType& aMinLocation)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 

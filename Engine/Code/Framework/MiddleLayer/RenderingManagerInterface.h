@@ -20,7 +20,6 @@
 #include "Framework/Helper/MiddleLayerMacro.h"
 
 FRAMEWORK_NON_COPY_EXPORT_IMPL(RenderingManagerImpl);
-FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
 
 // 渲染中间层接口类。
 namespace Framework

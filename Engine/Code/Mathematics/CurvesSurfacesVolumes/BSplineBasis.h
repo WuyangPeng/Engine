@@ -23,7 +23,7 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = BSplineBasis<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         BSplineBasis() noexcept;

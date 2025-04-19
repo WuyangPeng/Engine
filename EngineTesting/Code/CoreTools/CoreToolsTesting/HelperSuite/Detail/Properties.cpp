@@ -109,7 +109,7 @@ std::string CoreTools::Properties::GetValue7() const
     return value7;
 }
 
-std::string CoreTools::Properties::GetValue8() const
+const std::string& CoreTools::Properties::GetValue8() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -123,8 +123,12 @@ void CoreTools::Properties::SetValue8(const std::string& value)
     value8 = value;
 }
 
+#ifdef SYSTEM_PLATFORM_WIN32
+
 namespace CoreTools
 {
     TCRE_DEFINE_PROPERTY(Properties, Value4);
     TCRE_DEFINE_PROPERTY(Properties, Value5);
 }
+
+#endif  // SYSTEM_PLATFORM_WIN32

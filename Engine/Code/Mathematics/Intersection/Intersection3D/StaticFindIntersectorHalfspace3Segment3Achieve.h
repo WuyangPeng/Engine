@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorHalfspace3Segment3<Real>::StaticFindIntersectorHalfspace3Segment3(const Plane3& halfspace, const Segment3& segment, const Real epsilon)
+Mathematics::StaticFindIntersectorHalfspace3Segment3<Real>::StaticFindIntersectorHalfspace3Segment3(const Plane3Type& halfspace, const Segment3Type& segment, const Real epsilon)
     : ParentType{ epsilon }, halfspace{ halfspace }, segment{ segment }, quantity{}, point0{}, point1{}
 {
     Find();

@@ -10,6 +10,6 @@
 #include "Framework/Helper/MainFunctionMacro.h"
 #include "Toolset/AssistTools/GameTemplate/GameTemplateHelper.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 CONSOLE_MAIN_FUNCTION(GameTemplate, GameTemplateHelper, SYSTEM_TEXT("GameTemplate"), SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT(""))

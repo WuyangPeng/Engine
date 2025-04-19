@@ -35,7 +35,7 @@ namespace Mathematics
     public:
         using ClassType = RootsBisection1<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         /// 当Real是浮点类型时，请使用此构造函数。

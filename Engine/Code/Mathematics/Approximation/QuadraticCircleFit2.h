@@ -31,16 +31,16 @@ namespace Mathematics
     public:
         using ClassType = QuadraticCircleFit2<Real>;
 
-        using Vector2 = Vector2<Real>;
-        using Math = Math<Real>;
-        using Points = std::vector<Vector2>;
+        using Vector2Type = Vector2<Real>;
+        using MathType = Math<Real>;
+        using Points = std::vector<Vector2Type>;
 
     public:
         explicit QuadraticCircleFit2(const Points& points);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD Vector2 GetCenter() const noexcept;
+        NODISCARD Vector2Type GetCenter() const noexcept;
         NODISCARD Real GetRadius() const noexcept;
         NODISCARD Real GetEigenValue() const noexcept;
 
@@ -51,7 +51,7 @@ namespace Mathematics
         constexpr static auto eigenSystemSize = 4;
 
     private:
-        Vector2 center;
+        Vector2Type center;
         Real radius;
         Real eigenValue;
     };

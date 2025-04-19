@@ -42,7 +42,7 @@ Mathematics::MinimizeNGetMinimum<Real, UserDataType>::MinimizeNGetMinimum(int di
         directionIndex.emplace_back(index);
         if (i != dimensions)
         {
-            directionStorage.at(index) = Math::GetValue(1);
+            directionStorage.at(index) = MathType::GetValue(1);
         }
     }
 
@@ -95,7 +95,7 @@ Real Mathematics::MinimizeNGetMinimum<Real, UserDataType>::GetFunctionResult(con
 }
 
 template <typename Real, typename UserDataType>
-const typename Mathematics::MinimizeNGetMinimum<Real, UserDataType>::MinimizeNData& Mathematics::MinimizeNGetMinimum<Real, UserDataType>::GetMinimizeNData() const noexcept
+const typename Mathematics::MinimizeNGetMinimum<Real, UserDataType>::MinimizeNDataType& Mathematics::MinimizeNGetMinimum<Real, UserDataType>::GetMinimizeNData() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -110,9 +110,9 @@ void Mathematics::MinimizeNGetMinimum<Real, UserDataType>::FindEachDirection(int
     const auto domainResult = ComputeDomain(beginContainer, endContainer);
 
     // 对 1D 函数回调
-    const Minimize1 minimizer{ LineFunction, maxLevel, maxBracket, this };
+    const Minimize1Type minimizer{ LineFunction, maxLevel, maxBracket, this };
 
-    const auto minimizerData = minimizer.GetMinimum(domainResult.beginResult, domainResult.endResult, Math::GetValue(0));
+    const auto minimizerData = minimizer.GetMinimum(domainResult.beginResult, domainResult.endResult, MathType::GetValue(0));
 
     auto minLocation = minimizerData.GetMinLocation();
 
@@ -122,7 +122,7 @@ void Mathematics::MinimizeNGetMinimum<Real, UserDataType>::FindEachDirection(int
 template <typename Real, typename UserDataType>
 Real Mathematics::MinimizeNGetMinimum<Real, UserDataType>::EstimateUnitLengthConjugateDirection()
 {
-    auto length = Math::GetValue(0);
+    auto length = MathType::GetValue(0);
     for (auto i = 0; i < dimensions; ++i)
     {
         const auto storageIndex = directionConjugateIndex + i;
@@ -131,7 +131,7 @@ Real Mathematics::MinimizeNGetMinimum<Real, UserDataType>::EstimateUnitLengthCon
         length += directionStorage.at(storageIndex) * directionStorage.at(storageIndex);
     }
 
-    return Math::Sqrt(length);
+    return MathType::Sqrt(length);
 }
 
 template <typename Real, typename UserDataType>
@@ -148,8 +148,8 @@ void Mathematics::MinimizeNGetMinimum<Real, UserDataType>::MinimizeConjugateDire
     directionCurrentIndex = directionConjugateIndex;
     const auto domainResult = ComputeDomain(beginContainer, endContainer);
 
-    const Minimize1 minimizer{ LineFunction, maxLevel, maxBracket, this };
-    const auto minimizerData = minimizer.GetMinimum(domainResult.beginResult, domainResult.endResult, Math::GetValue(0));
+    const Minimize1Type minimizer{ LineFunction, maxLevel, maxBracket, this };
+    const auto minimizerData = minimizer.GetMinimum(domainResult.beginResult, domainResult.endResult, MathType::GetValue(0));
 
     minimizeNData.Set(minimizerData.GetMinValue(), minimizerData.GetMinLocation(), directionStorage, directionCurrentIndex);
 
@@ -175,14 +175,14 @@ Mathematics::MinimizeNGetMinimum<Real, UserDataType>::DomainResult::DomainResult
 template <typename Real, typename UserDataType>
 typename Mathematics::MinimizeNGetMinimum<Real, UserDataType>::DomainResult Mathematics::MinimizeNGetMinimum<Real, UserDataType>::ComputeDomain(const Container& begin, const Container& end)
 {
-    DomainResult result{ -Math::maxReal, +Math::maxReal };
+    DomainResult result{ -MathType::maxReal, +MathType::maxReal };
 
     for (auto i = 0; i < dimensions; ++i)
     {
         auto beginMinus = begin.at(i) - minimizeNData.GetMinLocation(i);
         auto endMinus = end.at(i) - minimizeNData.GetMinLocation(i);
 
-        if (Math::GetValue(0) < GetDirectionCurrent(i))
+        if (MathType::GetValue(0) < GetDirectionCurrent(i))
         {
             // 有效的间隔是[b0,b1]。
             beginMinus /= GetDirectionCurrent(i);
@@ -196,7 +196,7 @@ typename Mathematics::MinimizeNGetMinimum<Real, UserDataType>::DomainResult Math
                 result.endResult = endMinus;
             }
         }
-        else if (GetDirectionCurrent(i) < Math::GetValue(0))
+        else if (GetDirectionCurrent(i) < MathType::GetValue(0))
         {
             // 有效的间隔是[b1,b0]。
             beginMinus /= GetDirectionCurrent(i);
@@ -213,13 +213,13 @@ typename Mathematics::MinimizeNGetMinimum<Real, UserDataType>::DomainResult Math
     }
 
     // 数字差错更正导致值几乎为零。
-    if (Math::GetValue(0) < result.beginResult)
+    if (MathType::GetValue(0) < result.beginResult)
     {
-        result.beginResult = Math::GetValue(0);
+        result.beginResult = MathType::GetValue(0);
     }
-    if (result.endResult < Math::GetValue(0))
+    if (result.endResult < MathType::GetValue(0))
     {
-        result.endResult = Math::GetValue(0);
+        result.endResult = MathType::GetValue(0);
     }
 
     return result;

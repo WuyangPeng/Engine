@@ -23,18 +23,18 @@ namespace Mathematics
     public:
         using ClassType = Line2Triangle2<Real>;
 
-        using Math = Math<Real>;
-        using Vector2 = Vector2<Real>;
-        using Triangle2 = Triangle2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
+        using MathType = Math<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Triangle2Type = Triangle2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
 
     public:
-        Line2Triangle2(const Vector2& origin, const Vector2& direction, const Triangle2& triangle);
+        Line2Triangle2(const Vector2Type& origin, const Vector2Type& direction, const Triangle2Type& triangle);
 
         CLASS_INVARIANT_DECLARE;
 
         // 当三角形与直线相交时，计算相交线段的参数间隔。
-        NODISCARD Vector2 GetInterval() const;
+        NODISCARD Vector2Type GetInterval() const;
 
         NODISCARD int GetPositive() const noexcept;
         NODISCARD int GetNegative() const noexcept;
@@ -53,9 +53,9 @@ namespace Mathematics
         int positive;
         int negative;
         int zero;
-        Vector2 origin;
-        Vector2 direction;
-        Triangle2 triangle;
+        Vector2Type origin;
+        Vector2Type direction;
+        Triangle2Type triangle;
     };
 }
 

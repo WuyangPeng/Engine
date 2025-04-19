@@ -29,12 +29,12 @@ namespace Rendering
     public:
         using ClassType = BumpMapEffectImpl;
 
-        using Colour = Colour<float>;
+        using ColourType = Colour<float>;
         using Math = Mathematics::Math<float>;
         using Vector2 = Mathematics::Vector2<float>;
         using Vector3 = Mathematics::Vector3<float>;
         using Vector4 = Mathematics::Vector4<float>;
-        using Vector3Tools = Mathematics::Vector3Tools<float>;
+        using Vector3ToolsType = Mathematics::Vector3Tools<float>;
         using Texture2DSharedPtr = std::shared_ptr<Texture2D>;
         using ConstTexture2DSharedPtr = std::shared_ptr<const Texture2D>;
         using SamplerStateSharedPtr = std::shared_ptr<SamplerState>;

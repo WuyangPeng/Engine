@@ -76,7 +76,7 @@ void Mathematics::Algebra::Minimize1<T>::GetMinimum(T t0, T t1, T& aTMin, T& aFM
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    GetMinimum(t0, t1, Math::GetRational(1, 2) * (t0 + t1), aTMin, aFMin);
+    GetMinimum(t0, t1, MathType::GetRational(1, 2) * (t0 + t1), aTMin, aFMin);
 }
 
 template <typename T>
@@ -140,7 +140,7 @@ void Mathematics::Algebra::Minimize1<T>::Subdivide(T t0, T f0, T t1, T f1, int s
     }
 
     /// 计算[t0,t1]中点处的函数。
-    const auto tm = Math::GetRational(1, 2) * (t0 + t1);
+    const auto tm = MathType::GetRational(1, 2) * (t0 + t1);
     const auto fm = function(tm);
     if (fm < fMin)
     {
@@ -176,7 +176,7 @@ void Mathematics::Algebra::Minimize1<T>::GetBracketedMinimum(T t0, T f0, T tm, T
 
         /// 收敛性测试
         const auto dt10 = t1 - t0;
-        const auto dtBound = Math::GetValue(2) * tolerance * std::fabs(tm) + epsilon;
+        const auto dtBound = MathType::GetValue(2) * tolerance * std::fabs(tm) + epsilon;
         if (dt10 <= dtBound)
         {
             break;
@@ -196,7 +196,7 @@ void Mathematics::Algebra::Minimize1<T>::GetBracketedMinimum(T t0, T f0, T tm, T
         }
 
         /// 计算tv并箝位到 [t0,t1]以偏移浮点舍入误差。
-        auto tv = tm + Math::GetRational(1, 2) * (dt1M * tmp1 - dt0M * tmp0) / denominator;
+        auto tv = tm + MathType::GetRational(1, 2) * (dt1M * tmp1 - dt0M * tmp0) / denominator;
         tv = std::max(t0, std::min(tv, t1));
         const auto fv = function(tv);
         if (fv < fMin)
@@ -240,9 +240,9 @@ void Mathematics::Algebra::Minimize1<T>::GetBracketedMinimum(T t0, T f0, T tm, T
             /// 抛物线的顶点位于中间采样点。最小值可以出现在任一子区间上，但也可能出现在顶点上。
             /// 在任何一种情况下，都会通过检查顶点的邻域来继续搜索。
             /// 当一个括号有两个选项时，将使用中点处函数值最小的选项。
-            const auto tm0 = Math::GetRational(1, 2) * (t0 + tm);
+            const auto tm0 = MathType::GetRational(1, 2) * (t0 + tm);
             const auto fm0 = function(tm0);
-            const auto tm1 = Math::GetRational(1, 2) * (tm + t1);
+            const auto tm1 = MathType::GetRational(1, 2) * (tm + t1);
             const auto fm1 = function(tm1);
 
             if (fm0 < fm)

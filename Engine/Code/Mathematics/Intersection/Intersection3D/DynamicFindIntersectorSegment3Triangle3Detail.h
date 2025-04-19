@@ -17,7 +17,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorSegment3Triangle3<Real>::DynamicFindIntersectorSegment3Triangle3(const Segment3& segment, const Triangle3& triangle, Real tmax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorSegment3Triangle3<Real>::DynamicFindIntersectorSegment3Triangle3(const Segment3Type& segment, const Triangle3Type& triangle, Real tmax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon },
       segment{ segment },
       triangle{ triangle },
@@ -105,7 +105,7 @@ void Mathematics::DynamicFindIntersectorSegment3Triangle3<Real>::Find()
     quantity = 0;
     this->SetIntersectionType(IntersectionType::Empty);
 
-    using SegmentType = std::array<Vector3, 2>;
+    using SegmentType = std::array<Vector3Type, 2>;
 
     // 获取细分的端点。
     const SegmentType segmentType{ segment.GetBeginPoint(), segment.GetEndPoint() };
@@ -117,10 +117,10 @@ void Mathematics::DynamicFindIntersectorSegment3Triangle3<Real>::Find()
     // 获取相对于线段的三角形速度。
     auto relVelocity = rhsVelocity - lhsVelocity;
 
-    this->SetContactTime(Math::GetValue(0));
+    this->SetContactTime(MathType::GetValue(0));
 
     // 测试三角形法线
-    const auto normal = Vector3Tools::CrossProduct(edge0, edge1);
+    const auto normal = Vector3ToolsType::CrossProduct(edge0, edge1);
     const FindIntersectorAxis<Real> findIntersectorAxis{ normal, segmentType, triangle, relVelocity, tMax };
     auto tLast = findIntersectorAxis.GetTLast();
     auto segmentContact = findIntersectorAxis.GetCfgFinal0();
@@ -137,11 +137,11 @@ void Mathematics::DynamicFindIntersectorSegment3Triangle3<Real>::Find()
 
     // 测试线段是否平行于三角形，有效地测试：sin(Angle(NormV,DirU)) > 1 - epsilon
     auto directionU = segment.GetEndPoint() - segment.GetBeginPoint();
-    const auto normalU = Vector3Tools::CrossProduct(normal, directionU);
-    auto directionSqrLength = Vector3Tools::GetLengthSquared(directionU);
-    auto normalUSqrLength = Vector3Tools::GetLengthSquared(normalU);
-    auto normalVSqrLength = Vector3Tools::GetLengthSquared(normal);
-    auto oneMinusEpsilon = Math::GetValue(1) - Math::GetZeroTolerance();
+    const auto normalU = Vector3ToolsType::CrossProduct(normal, directionU);
+    auto directionSqrLength = Vector3ToolsType::GetLengthSquared(directionU);
+    auto normalUSqrLength = Vector3ToolsType::GetLengthSquared(normalU);
+    auto normalVSqrLength = Vector3ToolsType::GetLengthSquared(normal);
+    auto oneMinusEpsilon = MathType::GetValue(1) - MathType::GetZeroTolerance();
 
     // 平行
     if (oneMinusEpsilon * normalVSqrLength * directionSqrLength < normalUSqrLength)
@@ -164,7 +164,7 @@ void Mathematics::DynamicFindIntersectorSegment3Triangle3<Real>::Find()
         // 查找三角形法线交叉三角形边。
         for (auto i0 = 2, i1 = 0; i1 < 3; i0 = i1++)
         {
-            const auto axis = Vector3Tools::CrossProduct(normal, (triangle.GetVertex(i1) - triangle.GetVertex(i0)));
+            const auto axis = Vector3ToolsType::CrossProduct(normal, (triangle.GetVertex(i1) - triangle.GetVertex(i0)));
 
             const FindIntersectorAxis<Real> findTriangleIntersector{ axis, segmentType, triangle, relVelocity, tMax };
             tLast = findTriangleIntersector.GetTLast();
@@ -186,7 +186,7 @@ void Mathematics::DynamicFindIntersectorSegment3Triangle3<Real>::Find()
         // 查找线段方向交叉三角形边。
         for (auto i0 = 2, i1 = 0; i1 < 3; i0 = i1++)
         {
-            const auto axis = Vector3Tools::CrossProduct(directionU, (triangle.GetVertex(i1) - triangle.GetVertex(i0)));
+            const auto axis = Vector3ToolsType::CrossProduct(directionU, (triangle.GetVertex(i1) - triangle.GetVertex(i0)));
 
             const FindIntersectorAxis<Real> findTriangleIntersector{ axis, segmentType, triangle, relVelocity, tMax };
             tLast = findTriangleIntersector.GetTLast();
@@ -204,7 +204,7 @@ void Mathematics::DynamicFindIntersectorSegment3Triangle3<Real>::Find()
         }
     }
 
-    if (contactTime < Math::GetValue(0))
+    if (contactTime < MathType::GetValue(0))
     {
         this->SetContactTime(contactTime);
         this->SetIntersectionType(IntersectionType::Empty);

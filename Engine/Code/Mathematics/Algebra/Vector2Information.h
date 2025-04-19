@@ -29,31 +29,31 @@ namespace Mathematics
     public:
         using ClassType = Vector2Information<Real>;
 
-        using Math = Math<Real>;
-        using Vector2 = Vector2<Real>;
-        using Vector2Tools = Vector2Tools<Real>;
-        using AxesAlignBoundingBox2 = AxesAlignBoundingBox2<Real>;
-        using ContainerType = std::vector<Vector2>;
+        using MathType = Math<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Vector2ToolsType = Vector2Tools<Real>;
+        using AxesAlignBoundingBox2Type = AxesAlignBoundingBox2<Real>;
+        using ContainerType = std::vector<Vector2Type>;
         using AlgebraVector2 = Algebra::Vector<2, Real>;
         using AlgebraContainerType = std::vector<AlgebraVector2>;
 
     public:
         /// 值epsilon被使用在计算点集的维度时，作为相对误差。
         /// 构造函数根据输入集设置类成员。
-        explicit Vector2Information(const ContainerType& points, Real epsilon = Math::GetZeroTolerance());
-        explicit Vector2Information(const AlgebraContainerType& points, Real epsilon = Math::GetZeroTolerance());
+        explicit Vector2Information(const ContainerType& points, Real epsilon = MathType::GetZeroTolerance());
+        explicit Vector2Information(const AlgebraContainerType& points, Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD int GetDimension() const noexcept;
-        NODISCARD AxesAlignBoundingBox2 GetAxesAlignBoundingBox() const noexcept;
+        NODISCARD AxesAlignBoundingBox2Type GetAxesAlignBoundingBox() const noexcept;
         NODISCARD Real GetMaxRange() const noexcept;
-        NODISCARD Vector2 GetOrigin() const noexcept;
-        NODISCARD Vector2 GetDirectionX() const noexcept;
-        NODISCARD Vector2 GetDirectionY() const noexcept;
-        NODISCARD Vector2 GetMinExtreme() const;
-        NODISCARD Vector2 GetMaxExtreme() const;
-        NODISCARD Vector2 GetPerpendicularExtreme() const;
+        NODISCARD Vector2Type GetOrigin() const noexcept;
+        NODISCARD Vector2Type GetDirectionX() const noexcept;
+        NODISCARD Vector2Type GetDirectionY() const noexcept;
+        NODISCARD Vector2Type GetMinExtreme() const;
+        NODISCARD Vector2Type GetMaxExtreme() const;
+        NODISCARD Vector2Type GetPerpendicularExtreme() const;
         NODISCARD bool IsExtremeCCW() const noexcept;
 
         NODISCARD int GetMinExtremeIndex() const noexcept;
@@ -62,7 +62,7 @@ namespace Mathematics
         NODISCARD int GetIndexMin(int index) const;
 
     private:
-        using IndexContainerType = std::array<int, Vector2::pointSize>;
+        using IndexContainerType = std::array<int, Vector2Type::pointSize>;
 
     private:
         void Init();
@@ -84,7 +84,7 @@ namespace Mathematics
         /// 输入集的轴对齐包围盒。
         /// 最大范围是axesAlignBoundingBox.GetMaxPoint(0) - axesAlignBoundingBox.GetMinPoint(0) 和
         /// axesAlignBoundingBox.GetMaxPoint(1) - axesAlignBoundingBox.GetMinPoint(1)的最大值。
-        AxesAlignBoundingBox2 axesAlignBoundingBox;
+        AxesAlignBoundingBox2Type axesAlignBoundingBox;
         Real maxRange;
 
         /// 坐标系。原点是对任何维度d都有效。
@@ -94,9 +94,9 @@ namespace Mathematics
         /// 但使用一个epsilon的可能会导致末端的索引不为零。
         /// 如果d = 1，所有点的位置在一条线段上。
         /// 当d = 2时，所有点不共线。
-        Vector2 origin;
-        Vector2 directionX;
-        Vector2 directionY;
+        Vector2Type origin;
+        Vector2Type directionX;
+        Vector2Type directionY;
 
         /// 定义最大空间范围的索引。
         /// 值minExtreme和maxExtreme是用于定义在坐标轴各个方向中的一个最大范围的索引数。

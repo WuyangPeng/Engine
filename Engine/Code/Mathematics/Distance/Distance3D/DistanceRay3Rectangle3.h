@@ -23,38 +23,38 @@ namespace Mathematics
     {
     public:
         using ClassType = DistanceRay3Rectangle3<Real>;
-        using Vector3 = Vector3<Real>;
-        using ParentType = DistanceBase<Real, Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3Type>;
 
-        using Ray3 = Ray3<Real>;
-        using Vector2 = Vector2<Real>;
-        using Rectangle3 = Rectangle3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using Ray3Type = Ray3<Real>;
+        using Vector2Type = Vector2<Real>;
+        using Rectangle3Type = Rectangle3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistanceRay3Rectangle3(const Ray3& ray, const Rectangle3& rectangle) noexcept;
+        DistanceRay3Rectangle3(const Ray3Type& ray, const Rectangle3Type& rectangle) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Ray3 GetRay() const noexcept;
-        NODISCARD Rectangle3 GetRectangle() const noexcept;
+        NODISCARD Ray3Type GetRay() const noexcept;
+        NODISCARD Rectangle3Type GetRectangle() const noexcept;
 
         NODISCARD DistanceResult GetSquared() const override;
 
-        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
         // 有关最接近点的信息。
         NODISCARD Real GetRectangleCoordinate(int index) const;
 
     private:
-        Ray3 ray;
-        Rectangle3 rectangle;
+        Ray3Type ray;
+        Rectangle3Type rectangle;
 
         // 有关最接近点的信息。
 
-        mutable Vector2 rectCoord;
+        mutable Vector2Type rectCoord;
     };
 
     using DistanceRay3Rectangle3F = DistanceRay3Rectangle3<float>;

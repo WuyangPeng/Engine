@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/MainFunctionMacro.h"
 #include "Toolset/CoreTools/MainFunction/Helper.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 CORE_TOOLS_MUTEX_INIT(MainFuction);
 

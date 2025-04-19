@@ -16,7 +16,7 @@
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::HalfSpace<N, Real>::HalfSpace() noexcept requires(N == 3)
-    : normal{ Real{}, Real{}, Math::GetValue(1) },
+    : normal{ Real{}, Real{}, MathType::GetValue(1) },
       constant{}
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;

@@ -27,7 +27,7 @@ typename Mathematics::PolynomialRootsRational<Real>::PolynomialRational Mathemat
 template <typename Real>
 typename Mathematics::PolynomialRootsRational<Real>::PolynomialRational Mathematics::PolynomialRootsRational<Real>::GetOne()
 {
-    return PolynomialRational{ Math::GetValue(1) };
+    return PolynomialRational{ MathType::GetValue(1) };
 }
 
 template <typename Real>
@@ -79,7 +79,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Linear(Real constant, Real once
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    if (epsilon < Math::FAbs(once))
+    if (epsilon < MathType::FAbs(once))
     {
         // 方程是 once * x + constant = 0,这里once不是零。
         const auto rationalRoot = PolynomialRational{ -constant } / PolynomialRational{ once };
@@ -92,7 +92,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Linear(Real constant, Real once
         return true;
     }
 
-    if (epsilon < Math::FAbs(constant))
+    if (epsilon < MathType::FAbs(constant))
     {
         // 方程是 c0 = 0, 这里constant不是零,所以方程无解 。
 
@@ -142,7 +142,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Linear(const PolynomialRational
 template <typename Real>
 bool Mathematics::PolynomialRootsRational<Real>::Quadratic(Real constant, Real once, Real secondary)
 {
-    if (Math::FAbs(secondary) <= epsilon)
+    if (MathType::FAbs(secondary) <= epsilon)
     {
         return Linear(constant, once);
     }
@@ -189,9 +189,9 @@ bool Mathematics::PolynomialRootsRational<Real>::Quadratic(const PolynomialRatio
         // 估算判别式。
         auto discriminant = rationalDiscriminant.template ConvertTo<Real>();
 
-        MATHEMATICS_ASSERTION_3(Math::GetValue(0) < discriminant, "意外情况\n");
+        MATHEMATICS_ASSERTION_3(MathType::GetValue(0) < discriminant, "意外情况\n");
 
-        discriminant = Math::Sqrt(discriminant);
+        discriminant = MathType::Sqrt(discriminant);
 
         rationalDiscriminant = PolynomialRational(discriminant);
 
@@ -223,7 +223,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Quadratic(const PolynomialRatio
 template <typename Real>
 bool Mathematics::PolynomialRootsRational<Real>::Cubic(Real constant, Real once, Real secondary, Real thrice)
 {
-    if (Math::FAbs(thrice) <= epsilon)
+    if (MathType::FAbs(thrice) <= epsilon)
     {
         return Quadratic(constant, once, secondary);
     }
@@ -284,20 +284,20 @@ bool Mathematics::PolynomialRootsRational<Real>::Cubic(const PolynomialRational&
 
         // 估计判别式
         auto discriminant = rationalDiscriminant.template ConvertTo<Real>();
-        MATHEMATICS_ASSERTION_3(Math::GetValue(0) < discriminant, "意外情况\n");
-        auto discriminantSqrt = Math::Sqrt(discriminant);
+        MATHEMATICS_ASSERTION_3(MathType::GetValue(0) < discriminant, "意外情况\n");
+        auto discriminantSqrt = MathType::Sqrt(discriminant);
 
         rationalDiscriminant = PolynomialRational{ discriminantSqrt };
 
         auto rationalSum0 = -rationalR + rationalDiscriminant;
         auto sum0 = rationalSum0.template ConvertTo<Real>();
-        sum0 = Math::CubeRoot(sum0);
+        sum0 = MathType::CubeRoot(sum0);
 
         rationalSum0 = PolynomialRational{ sum0 };
 
         auto rationalSum1 = -rationalR - rationalDiscriminant;
         auto sum1 = rationalSum1.template ConvertTo<Real>();
-        sum1 = Math::CubeRoot(sum1);
+        sum1 = MathType::CubeRoot(sum1);
 
         rationalSum1 = PolynomialRational{ sum1 };
 
@@ -317,18 +317,18 @@ bool Mathematics::PolynomialRootsRational<Real>::Cubic(const PolynomialRational&
 
         // 通过计算的特征值求解该多项式的根。
         auto negativeQ = -rationalQ.template ConvertTo<Real>();
-        MATHEMATICS_ASSERTION_3(Math::GetValue(0) < negativeQ, "意外情况\n");
+        MATHEMATICS_ASSERTION_3(MathType::GetValue(0) < negativeQ, "意外情况\n");
 
         auto negativeR = -rationalR.template ConvertTo<Real>();
         auto negativeDiscriminant = -rationalDiscriminant.template ConvertTo<Real>();
         auto negativeSecondaryDivide3 = -rationalSecondaryDivide3.template ConvertTo<Real>();
 
-        auto sqrt3Value = Math::Sqrt(Math::GetValue(3));
-        auto magnitude = Math::Sqrt(negativeQ);
-        auto angle = Math::ATan2(Math::Sqrt(negativeDiscriminant), negativeR) / Math::GetValue(3);
-        auto cosValue = Math::Cos(angle);
-        auto sinValue = Math::Sin(angle);
-        auto root0 = negativeSecondaryDivide3 + Math::GetValue(2) * magnitude * cosValue;
+        auto sqrt3Value = MathType::Sqrt(MathType::GetValue(3));
+        auto magnitude = MathType::Sqrt(negativeQ);
+        auto angle = MathType::ATan2(MathType::Sqrt(negativeDiscriminant), negativeR) / MathType::GetValue(3);
+        auto cosValue = MathType::Cos(angle);
+        auto sinValue = MathType::Sin(angle);
+        auto root0 = negativeSecondaryDivide3 + MathType::GetValue(2) * magnitude * cosValue;
         auto root1 = negativeSecondaryDivide3 - magnitude * (cosValue + sqrt3Value * sinValue);
         auto root2 = negativeSecondaryDivide3 - magnitude * (cosValue - sqrt3Value * sinValue);
 
@@ -376,7 +376,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Cubic(const PolynomialRational&
             quantity = 2;
 
             auto r = rationalR.template ConvertTo<Real>();
-            r = Math::CubeRoot(r);
+            r = MathType::CubeRoot(r);
             rationalR = PolynomialRational{ r };
 
             auto rationalRoot0 = rationalSecondaryDivide3 - rationalR;
@@ -415,7 +415,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Cubic(const PolynomialRational&
 template <typename Real>
 bool Mathematics::PolynomialRootsRational<Real>::Quartic(Real constant, Real once, Real secondary, Real thrice, Real quartic)
 {
-    if (Math::FAbs(quartic) <= epsilon)
+    if (MathType::FAbs(quartic) <= epsilon)
     {
         return Cubic(constant, once, secondary, thrice);
     }
@@ -485,7 +485,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Quartic(const PolynomialRationa
 
     if (epsilon < alphaSqr)
     {
-        auto alpha = Math::Sqrt(alphaSqr);
+        auto alpha = MathType::Sqrt(alphaSqr);
         const auto rationalAlpha = PolynomialRational{ alpha };
         auto rationalBeta = rationalHalf * (thrice * rationalY - once) / rationalAlpha;
 
@@ -531,7 +531,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Quartic(const PolynomialRationa
 
     if (epsilon < betaSqr)
     {
-        auto beta = Math::Sqrt(betaSqr);
+        auto beta = MathType::Sqrt(betaSqr);
         const PolynomialRational rationalBeta{ beta };
 
         auto rationalB0 = rationalY - rationalBeta;

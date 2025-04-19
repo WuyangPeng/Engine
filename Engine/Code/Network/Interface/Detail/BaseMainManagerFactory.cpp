@@ -14,7 +14,7 @@
 #include "NullMainManager.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "Network/ACEWrappers/Detail/BaseMainManager/AceMainManager.h"
+#include "Network/AceWrappers/Detail/BaseMainManager/AceMainManager.h"
 #include "Network/BoostWrappers/Detail/BaseMainManager/BoostMainManager.h"
 #include "Network/BoostWrappers/Detail/BaseMainManager/BoostMainManagerUseMultiContext.h"
 #include "Network/BoostWrappers/Detail/BaseMainManager/BoostMainManagerUseThreads.h"

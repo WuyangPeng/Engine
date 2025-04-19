@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorPlane3Capsule3<Real>::StaticTestIntersectorPlane3Capsule3(const Plane3& plane, const Capsule3& capsule, const Real epsilon) noexcept
+Mathematics::StaticTestIntersectorPlane3Capsule3<Real>::StaticTestIntersectorPlane3Capsule3(const Plane3Type& plane, const Capsule3Type& capsule, const Real epsilon) noexcept
     : ParentType{ epsilon }, plane{ plane }, capsule{ capsule }
 {
     Test();
@@ -56,13 +56,13 @@ void Mathematics::StaticTestIntersectorPlane3Capsule3<Real>::Test() noexcept
 {
     auto pDist = plane.DistanceTo(capsule.GetSegment().GetEndPoint());
     auto nDist = plane.DistanceTo(capsule.GetSegment().GetBeginPoint());
-    if (pDist * nDist <= Math::GetValue(0))
+    if (pDist * nDist <= MathType::GetValue(0))
     {
         this->SetIntersectionType(IntersectionType::Other);
         return;
     }
 
-    if (Math::FAbs(pDist) <= capsule.GetRadius() || Math::FAbs(nDist) <= capsule.GetRadius())
+    if (MathType::FAbs(pDist) <= capsule.GetRadius() || MathType::FAbs(nDist) <= capsule.GetRadius())
     {
         this->SetIntersectionType(IntersectionType::Other);
     }
@@ -78,10 +78,10 @@ bool Mathematics::StaticTestIntersectorPlane3Capsule3<Real>::CapsuleIsCulled() c
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
     auto pDist = plane.DistanceTo(capsule.GetSegment().GetEndPoint());
-    if (pDist < Math::GetValue(0))
+    if (pDist < MathType::GetValue(0))
     {
         auto nDist = plane.DistanceTo(capsule.GetSegment().GetBeginPoint());
-        if (nDist < Math::GetValue(0))
+        if (nDist < MathType::GetValue(0))
         {
             if (pDist <= nDist)
             {

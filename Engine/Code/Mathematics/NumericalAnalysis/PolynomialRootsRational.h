@@ -28,10 +28,10 @@ namespace Mathematics
 
         static constexpr auto signRationalSize = 16;
         using PolynomialRational = SignRational<signRationalSize * sizeof(Real)>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
-        explicit PolynomialRootsRational(Real epsilon = Math::epsilon) noexcept;
+        explicit PolynomialRootsRational(Real epsilon = MathType::epsilon) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

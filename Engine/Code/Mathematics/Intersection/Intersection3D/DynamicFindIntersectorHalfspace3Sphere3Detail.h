@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorHalfspace3Sphere3<Real>::DynamicFindIntersectorHalfspace3Sphere3(const Plane3& halfspace, const Sphere3& sphere, Real tmax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorHalfspace3Sphere3<Real>::DynamicFindIntersectorHalfspace3Sphere3(const Plane3Type& halfspace, const Sphere3Type& sphere, Real tmax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, halfspace{ halfspace }, sphere{ sphere }, point{}
 {
     Find();
@@ -55,12 +55,12 @@ Mathematics::Sphere3<Real> Mathematics::DynamicFindIntersectorHalfspace3Sphere3<
 template <typename Real>
 void Mathematics::DynamicFindIntersectorHalfspace3Sphere3<Real>::Find()
 {
-    this->SetContactTime(Math::GetValue(0));
+    this->SetContactTime(MathType::GetValue(0));
 
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
-    auto distance = Vector3Tools::DotProduct(halfspace.GetNormal(), sphere.GetCenter());
+    auto distance = Vector3ToolsType::DotProduct(halfspace.GetNormal(), sphere.GetCenter());
 
-    const TestIntersectorAxis<Real> testIntersectorAxis{ halfspace.GetNormal(), relVelocity, -Math::maxReal, halfspace.GetConstant(), distance - sphere.GetRadius(), distance + sphere.GetRadius(), this->GetTMax() };
+    const TestIntersectorAxis<Real> testIntersectorAxis{ halfspace.GetNormal(), relVelocity, -MathType::maxReal, halfspace.GetConstant(), distance - sphere.GetRadius(), distance + sphere.GetRadius(), this->GetTMax() };
     auto contactTime = testIntersectorAxis.GetTFirst();
 
     if (!testIntersectorAxis.GetResult())
@@ -71,7 +71,7 @@ void Mathematics::DynamicFindIntersectorHalfspace3Sphere3<Real>::Find()
         return;
     }
 
-    if (Math::Approximate(contactTime, Math::GetValue(0)))
+    if (MathType::Approximate(contactTime, MathType::GetValue(0)))
     {
         // 现在相交。
         this->SetContactTime(contactTime);

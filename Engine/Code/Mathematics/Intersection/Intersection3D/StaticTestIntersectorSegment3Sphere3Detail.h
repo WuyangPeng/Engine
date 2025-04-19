@@ -15,8 +15,8 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorSegment3Sphere3<Real>::StaticTestIntersectorSegment3Sphere3(const Segment3& segment, const Sphere3& sphere, const Real epsilon)
-    : ParentType{ epsilon }, segment{ segment }, sphere{ sphere }, zeroThreshold{ Math::GetZeroTolerance() }
+Mathematics::StaticTestIntersectorSegment3Sphere3<Real>::StaticTestIntersectorSegment3Sphere3(const Segment3Type& segment, const Sphere3Type& sphere, const Real epsilon)
+    : ParentType{ epsilon }, segment{ segment }, sphere{ sphere }, zeroThreshold{ MathType::GetZeroTolerance() }
 {
     Test();
 
@@ -56,26 +56,26 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorSegment3Sphere3<Real>::Test()
 {
     auto diff = segment.GetCenterPoint() - sphere.GetCenter();
-    auto a0 = Vector3Tools::DotProduct(diff, diff) - sphere.GetRadius() * sphere.GetRadius();
-    auto a1 = Vector3Tools::DotProduct(segment.GetDirection(), diff);
+    auto a0 = Vector3ToolsType::DotProduct(diff, diff) - sphere.GetRadius() * sphere.GetRadius();
+    auto a1 = Vector3ToolsType::DotProduct(segment.GetDirection(), diff);
     auto discr = a1 * a1 - a0;
-    if (discr < Math::GetValue(0))
+    if (discr < MathType::GetValue(0))
     {
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
     auto tmp0 = segment.GetExtent() * segment.GetExtent() + a0;
-    auto tmp1 = Math::GetValue(2) * a1 * segment.GetExtent();
+    auto tmp1 = MathType::GetValue(2) * a1 * segment.GetExtent();
     auto qm = tmp0 - tmp1;
     auto qp = tmp0 + tmp1;
-    if (qm * qp <= Math::GetValue(0))
+    if (qm * qp <= MathType::GetValue(0))
     {
         this->SetIntersectionType(IntersectionType::Other);
         return;
     }
 
-    if (qm > Math::GetValue(0) && Math::FAbs(a1) < segment.GetExtent())
+    if (qm > MathType::GetValue(0) && MathType::FAbs(a1) < segment.GetExtent())
     {
         this->SetIntersectionType(IntersectionType::Other);
     }

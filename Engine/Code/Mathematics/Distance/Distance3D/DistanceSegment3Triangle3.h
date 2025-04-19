@@ -23,34 +23,34 @@ namespace Mathematics
     {
     public:
         using ClassType = DistanceSegment3Triangle3<Real>;
-        using Vector3 = Vector3<Real>;
-        using ParentType = DistanceBase<Real, Vector3>;
+        using Vector3Type = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3Type>;
 
-        using Segment3 = Segment3<Real>;
-        using Triangle3 = Triangle3<Real>;
-        using Vector3Tools = Vector3Tools<Real>;
-        using Math = typename ParentType::Math;
-        using DistanceResult = typename ParentType::DistanceResult;
+        using Segment3Type = Segment3<Real>;
+        using Triangle3Type = Triangle3<Real>;
+        using Vector3ToolsType = Vector3Tools<Real>;
+        using MathType = typename ParentType::MathType;
+        using DistanceResult = typename ParentType::DistanceResultType;
 
     public:
-        DistanceSegment3Triangle3(const Segment3& segment, const Triangle3& triangle) noexcept;
+        DistanceSegment3Triangle3(const Segment3Type& segment, const Triangle3Type& triangle) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD Segment3 GetSegment() const noexcept;
-        NODISCARD Triangle3 GetTriangle() const noexcept;
+        NODISCARD Segment3Type GetSegment() const noexcept;
+        NODISCARD Triangle3Type GetTriangle() const noexcept;
 
         NODISCARD DistanceResult GetSquared() const override;
 
-        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
         NODISCARD Real GetTriangleBary(int index) const;
 
     private:
-        Segment3 segment;
-        Triangle3 triangle;
+        Segment3Type segment;
+        Triangle3Type triangle;
 
-        mutable Vector3 triangleBary;
+        mutable Vector3Type triangleBary;
     };
 
     using DistanceSegment3Triangle3F = DistanceSegment3Triangle3<float>;

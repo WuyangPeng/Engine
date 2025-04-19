@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::DynamicTestIntersectorHalfspace3Sphere3<Real>::DynamicTestIntersectorHalfspace3Sphere3(const Plane3& halfspace, const Sphere3& sphere, Real tMax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicTestIntersectorHalfspace3Sphere3<Real>::DynamicTestIntersectorHalfspace3Sphere3(const Plane3Type& halfspace, const Sphere3Type& sphere, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tMax, lhsVelocity, rhsVelocity, epsilon }, halfspace{ halfspace }, sphere{ sphere }
 {
     Test();
@@ -55,12 +55,12 @@ Mathematics::Sphere3<Real> Mathematics::DynamicTestIntersectorHalfspace3Sphere3<
 template <typename Real>
 void Mathematics::DynamicTestIntersectorHalfspace3Sphere3<Real>::Test()
 {
-    this->SetContactTime(Math::GetValue(0));
+    this->SetContactTime(MathType::GetValue(0));
 
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
-    auto distance = Vector3Tools::DotProduct(halfspace.GetNormal(), sphere.GetCenter());
+    auto distance = Vector3ToolsType::DotProduct(halfspace.GetNormal(), sphere.GetCenter());
 
-    const TestIntersectorAxis<Real> testIntersectorAxis{ halfspace.GetNormal(), relVelocity, -Math::maxReal, halfspace.GetConstant(), distance - sphere.GetRadius(), distance + sphere.GetRadius(), this->GetTMax() };
+    const TestIntersectorAxis<Real> testIntersectorAxis{ halfspace.GetNormal(), relVelocity, -MathType::maxReal, halfspace.GetConstant(), distance - sphere.GetRadius(), distance + sphere.GetRadius(), this->GetTMax() };
 
     auto contactTime = testIntersectorAxis.GetTFirst();
 

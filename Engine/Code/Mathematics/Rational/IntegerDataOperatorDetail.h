@@ -21,7 +21,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <int N>
-Mathematics::IntegerDataOperator<N>::IntegerDataOperator(IntegerData& master) noexcept
+Mathematics::IntegerDataOperator<N>::IntegerDataOperator(IntegerDataType& master) noexcept
     : master{ master }, amend{ master }, analysis{ master }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -38,7 +38,7 @@ bool Mathematics::IntegerDataOperator<N>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <int N>
-Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operator+=(const IntegerData& rhs)
+Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operator+=(const IntegerDataType& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -64,11 +64,11 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
 }
 
 template <int N>
-Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operator-=(const IntegerData& rhs)
+Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operator-=(const IntegerDataType& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    const IntegerDataAnalysis integerDataAnalysis{ rhs };
+    const IntegerDataAnalysisType integerDataAnalysis{ rhs };
     *this += (-integerDataAnalysis);
 
     return *this;
@@ -180,7 +180,7 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
 }
 
 template <int N>
-Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operator*=(const IntegerData& rhs)
+Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operator*=(const IntegerDataType& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -192,7 +192,7 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
 }
 
 template <int N>
-Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operator/=(const IntegerData& rhs)
+Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operator/=(const IntegerDataType& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -204,7 +204,7 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
 }
 
 template <int N>
-Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operator%=(const IntegerData& rhs)
+Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operator%=(const IntegerDataType& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 

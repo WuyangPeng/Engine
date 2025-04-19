@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::DynamicFindIntersectorHalfspace3Triangle3<Real>::DynamicFindIntersectorHalfspace3Triangle3(const Plane3& halfspace, const Triangle3& triangle, Real tmax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+Mathematics::DynamicFindIntersectorHalfspace3Triangle3<Real>::DynamicFindIntersectorHalfspace3Triangle3(const Plane3Type& halfspace, const Triangle3Type& triangle, Real tmax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
     : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, halfspace{ halfspace }, triangle{ triangle }, quantity{}, point0{}, point1{}, point2{}
 {
     Find();
@@ -56,13 +56,13 @@ Mathematics::Triangle3<Real> Mathematics::DynamicFindIntersectorHalfspace3Triang
 template <typename Real>
 void Mathematics::DynamicFindIntersectorHalfspace3Triangle3<Real>::Find()
 {
-    this->SetContactTime(Math::GetValue(0));
+    this->SetContactTime(MathType::GetValue(0));
 
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
     const auto cfg = FindIntersectorAxis<Real>::GetConfiguration(halfspace.GetNormal(), triangle);
 
-    const TestIntersectorAxis<Real> testIntersectorAxis{ halfspace.GetNormal(), relVelocity, -Math::maxReal, halfspace.GetConstant(), cfg.GetMin(), cfg.GetMax(), this->GetTMax() };
+    const TestIntersectorAxis<Real> testIntersectorAxis{ halfspace.GetNormal(), relVelocity, -MathType::maxReal, halfspace.GetConstant(), cfg.GetMin(), cfg.GetMax(), this->GetTMax() };
     auto contactTime = testIntersectorAxis.GetTFirst();
 
     if (!testIntersectorAxis.GetResult())
@@ -72,7 +72,7 @@ void Mathematics::DynamicFindIntersectorHalfspace3Triangle3<Real>::Find()
         return;
     }
 
-    if (Math::Approximate(contactTime, Math::GetValue(0)))
+    if (MathType::Approximate(contactTime, MathType::GetValue(0)))
     {
         // 现在相交。.
         this->SetContactTime(contactTime);

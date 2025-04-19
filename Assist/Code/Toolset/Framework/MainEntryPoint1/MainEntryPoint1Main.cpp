@@ -10,7 +10,7 @@
 #include "MainEntryPoint1.h"
 #include "Framework/Helper/MainFunctionMacro.h"
 
-#include <vld.h>
+#include "System/Helper/PragmaWarning/Vld.h"
 
 int main(int argc, char** argv)
 {

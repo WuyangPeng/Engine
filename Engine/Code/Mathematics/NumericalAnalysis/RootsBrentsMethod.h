@@ -41,7 +41,7 @@ namespace Mathematics
     public:
         using ClassType = RootsBrentsMethod<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         RootsBrentsMethod() noexcept;

@@ -222,7 +222,7 @@ Database::BasisDatabase Database::MysqlConnectorConnection::GetBasisDatabase(con
     {
         case DataType::String:
         {
-            const std::string result{ rowView };
+            const std::string result{ static_cast<std::string>(rowView) };
             return BasisDatabase{ fieldName.GetFieldName(), result };
         }
 
@@ -254,7 +254,7 @@ Database::BasisDatabase Database::MysqlConnectorConnection::GetBasisDatabase(con
 
         case DataType::StringArray:
         {
-            const std::string column{ rowView };
+            const std::string column{ static_cast<std::string>(rowView) };
             BasisDatabase::StringArray element{};
             split(element, column, boost::is_any_of("|"), boost::token_compress_off);
 
@@ -263,7 +263,7 @@ Database::BasisDatabase Database::MysqlConnectorConnection::GetBasisDatabase(con
 
         case DataType::Int32Array:
         {
-            const std::string column{ rowView };
+            const std::string column{ static_cast<std::string>(rowView) };
             BasisDatabase::StringArray element{};
             split(element, column, boost::is_any_of("|"), boost::token_compress_off);
 
@@ -277,7 +277,7 @@ Database::BasisDatabase Database::MysqlConnectorConnection::GetBasisDatabase(con
 
         case DataType::Int64Array:
         {
-            const std::string column{ rowView };
+            const std::string column{ static_cast<std::string>(rowView) };
             BasisDatabase::StringArray element{};
             split(element, column, boost::is_any_of("|"), boost::token_compress_off);
 
@@ -291,7 +291,7 @@ Database::BasisDatabase Database::MysqlConnectorConnection::GetBasisDatabase(con
 
         case DataType::DoubleArray:
         {
-            const std::string column{ rowView };
+            const std::string column{ static_cast<std::string>(rowView) };
             BasisDatabase::StringArray element{};
             split(element, column, boost::is_any_of("|"), boost::token_compress_off);
 

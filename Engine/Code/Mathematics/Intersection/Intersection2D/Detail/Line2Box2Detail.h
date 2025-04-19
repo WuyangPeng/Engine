@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 
 template <typename Real>
-Mathematics::Line2Box2<Real>::Line2Box2(Real t0, Real t1, const Vector2& origin, const Vector2& direction, const Box2& box, bool solid)
+Mathematics::Line2Box2<Real>::Line2Box2(Real t0, Real t1, const Vector2Type& origin, const Vector2Type& direction, const Box2Type& box, bool solid)
     : rootCount{}, parameter{}, intersectionType{ IntersectionType::Empty }
 {
     DoClipping(t0, t1, origin, direction, box, solid);
@@ -58,12 +58,12 @@ Mathematics::IntersectionType Mathematics::Line2Box2<Real>::GetIntersects() cons
 }
 
 template <typename Real>
-void Mathematics::Line2Box2<Real>::DoClipping(Real t0, Real t1, const Vector2& origin, const Vector2& direction, const Box2& box, bool solid)
+void Mathematics::Line2Box2<Real>::DoClipping(Real t0, Real t1, const Vector2Type& origin, const Vector2Type& direction, const Box2Type& box, bool solid)
 {
     /// 将线性分量转换为盒子坐标。
     auto diff = origin - box.GetCenter();
-    const Vector2 boxOrigin{ Vector2Tools::DotProduct(diff, box.GetAxis0()), Vector2Tools::DotProduct(diff, box.GetAxis1()) };
-    const Vector2 boxDirection{ Vector2Tools::DotProduct(direction, box.GetAxis0()), Vector2Tools::DotProduct(direction, box.GetAxis1()) };
+    const Vector2Type boxOrigin{ Vector2ToolsType::DotProduct(diff, box.GetAxis0()), Vector2ToolsType::DotProduct(diff, box.GetAxis1()) };
+    const Vector2Type boxDirection{ Vector2ToolsType::DotProduct(direction, box.GetAxis0()), Vector2ToolsType::DotProduct(direction, box.GetAxis1()) };
 
     const ClipType saveClipType{ t0, t1 };
 
@@ -72,7 +72,7 @@ void Mathematics::Line2Box2<Real>::DoClipping(Real t0, Real t1, const Vector2& o
     clipType = Clip(+boxDirection.GetY(), -boxOrigin.GetY() - box.GetExtent1(), clipType);
     clipType = Clip(-boxDirection.GetY(), +boxOrigin.GetY() - box.GetExtent1(), clipType);
 
-    if (clipType.result && (solid || !Math::Approximate(t0, clipType.t0) || !Math::Approximate(t1, clipType.t1)))
+    if (clipType.result && (solid || !MathType::Approximate(t0, clipType.t0) || !MathType::Approximate(t1, clipType.t1)))
     {
         if (t0 < t1)
         {
@@ -119,7 +119,7 @@ typename Mathematics::Line2Box2<Real>::ClipType Mathematics::Line2Box2<Real>::Cl
     /// 如果线段与当前测试平面相交，则返回值为“ true”。 否则，将返回“ false”，在这种情况下，线段将被完全剪切。
     ClipType result{ clipType };
 
-    if (Math::GetValue(0) < denom)
+    if (MathType::GetValue(0) < denom)
     {
         if (numer > denom * result.t1)
         {
@@ -133,7 +133,7 @@ typename Mathematics::Line2Box2<Real>::ClipType Mathematics::Line2Box2<Real>::Cl
         result.result = true;
         return result;
     }
-    else if (denom < Math::GetValue(0))
+    else if (denom < MathType::GetValue(0))
     {
         if (numer > denom * result.t0)
         {
@@ -149,7 +149,7 @@ typename Mathematics::Line2Box2<Real>::ClipType Mathematics::Line2Box2<Real>::Cl
     }
     else
     {
-        result.result = numer <= Math::GetValue(0);
+        result.result = numer <= MathType::GetValue(0);
         return clipType;
     }
 }

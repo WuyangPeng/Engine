@@ -43,8 +43,7 @@ T CoreTools::BufferSource::ReadBoolContainerNotUseNumber()
     return ReadBoolContainerUseNumber<T>(elementsNumber);
 }
 
-template <int Size>
-requires(0 <= Size)
+template <size_t Size>
 std::array<bool, Size> CoreTools::BufferSource::ReadBoolContainer()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -84,8 +83,7 @@ void CoreTools::BufferSource::ReadBoolContainer(T& container)
     ReadBoolContainer(elementsNumber, container);
 }
 
-template <int Size>
-requires(0 <= Size)
+template <size_t Size>
 void CoreTools::BufferSource::ReadContainer(std::array<bool, Size>& container)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -123,8 +121,7 @@ T CoreTools::BufferSource::ReadStringContainerNotUseNumber()
     return ReadStringContainerUseNumber<T>(elementsNumber);
 }
 
-template <int Size>
-requires(0 <= Size)
+template <size_t Size>
 std::array<std::string, Size> CoreTools::BufferSource::ReadStringContainer()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -162,8 +159,7 @@ void CoreTools::BufferSource::ReadStringContainer(T& container)
     ReadStringContainer(elementsNumber, container);
 }
 
-template <int Size>
-requires(0 <= Size)
+template <size_t Size>
 void CoreTools::BufferSource::ReadContainer(std::array<std::string, Size>& container)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -247,8 +243,8 @@ std::vector<T> CoreTools::BufferSource::ReadVectorNotUseNumber()
     return ReadVectorUseNumber<T>(elementsNumber);
 }
 
-template <typename T, int Size>
-requires(std::is_arithmetic_v<T> && 0 <= Size)
+template <typename T, size_t Size>
+requires(std::is_arithmetic_v<T>)
 std::array<T, Size> CoreTools::BufferSource::ReadContainer()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -323,8 +319,8 @@ void CoreTools::BufferSource::ReadContainer(T& container)
     ReadContainer(elementsNumber, container);
 }
 
-template <typename T, int Size>
-requires(std::is_arithmetic_v<T> && 0 <= Size)
+template <typename T, size_t Size>
+requires(std::is_arithmetic_v<T>)
 void CoreTools::BufferSource::ReadContainer(std::array<T, Size>& container)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -405,8 +401,8 @@ std::vector<T> CoreTools::BufferSource::ReadEnumVectorNotUseNumber()
     return ReadEnumVectorUseNumber<T>(elementsNumber);
 }
 
-template <typename T, int Size>
-requires(std::is_enum_v<T> && 0 <= Size)
+template <typename T, size_t Size>
+requires(std::is_enum_v<T>)
 std::array<T, Size> CoreTools::BufferSource::ReadEnumContainer()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -481,8 +477,8 @@ void CoreTools::BufferSource::ReadEnumContainer(T& container)
     ReadEnumContainer(elementsNumber, container);
 }
 
-template <typename T, int Size>
-requires(std::is_enum_v<T> && 0 <= Size)
+template <typename T, size_t Size>
+requires(std::is_enum_v<T>)
 void CoreTools::BufferSource::ReadEnumContainer(std::array<T, Size>& container)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -529,8 +525,7 @@ T CoreTools::BufferSource::ReadAggregateContainerNotUseNumber()
     return ReadAggregateContainerUseNumber<T>(elementsNumber);
 }
 
-template <typename T, int Size>
-requires(0 <= Size)
+template <typename T, size_t Size>
 std::array<T, Size> CoreTools::BufferSource::ReadAggregateContainer()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -583,8 +578,7 @@ void CoreTools::BufferSource::ReadAggregateContainer(T& container)
     ReadAggregateContainer(elementsNumber, container);
 }
 
-template <typename T, int Size>
-requires(0 <= Size)
+template <typename T, size_t Size>
 void CoreTools::BufferSource::ReadAggregateContainer(std::array<T, Size>& container)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -690,8 +684,8 @@ void CoreTools::BufferSource::ReadObjectAssociatedContainer(T& container)
     ReadObjectAssociatedContainer(elementsNumber, container);
 }
 
-template <typename T, int Size>
-requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType> && 0 <= Size)
+template <typename T, size_t Size>
+requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType>)
 void CoreTools::BufferSource::ReadObjectAssociatedContainer(std::array<T, Size>& container)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;

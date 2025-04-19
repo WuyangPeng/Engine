@@ -27,7 +27,7 @@ namespace CoreTools
 
         using EntityTypeSharedPtr = std::shared_ptr<EntityType>;
         using EntityEventType = typename EntityType::EntityEventType;
-        using Telegram = Telegram<EntityEventType>;
+        using TelegramType = Telegram<EntityEventType>;
         using EntityTypeWeakPtr = std::weak_ptr<EntityType>;
         using StateSharedPtr = std::shared_ptr<ClassType>;
         using ConstStateSharedPtr = std::shared_ptr<const ClassType>;
@@ -50,7 +50,7 @@ namespace CoreTools
 
         virtual void Exit() = 0;
 
-        NODISCARD virtual MessageResult OnMessage(const Telegram& telegram) = 0;
+        NODISCARD virtual MessageResult OnMessage(const TelegramType& telegram) = 0;
 
         template <typename StateType, typename ResultType = StateType, typename... Args>
         NODISCARD static std::shared_ptr<ResultType> MakeState(Args&&... args);

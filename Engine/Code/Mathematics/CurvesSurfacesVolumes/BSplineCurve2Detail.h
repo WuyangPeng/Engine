@@ -16,7 +16,7 @@
 
 template <typename Real>
 Mathematics::BSplineCurve2<Real>::BSplineCurve2(const std::vector<Vector2<Real>>& ctrlPoint, int degree, bool loop, bool open)
-    : ParentType{ Math::GetValue(0), Math::GetValue(1) },
+    : ParentType{ MathType::GetValue(0), MathType::GetValue(1) },
       numCtrlPoints{ boost::numeric_cast<int>(ctrlPoint.size()) },
       loop{ loop },
       ctrlPoint{},
@@ -34,7 +34,7 @@ Mathematics::BSplineCurve2<Real>::BSplineCurve2(const std::vector<Vector2<Real>>
 
 template <typename Real>
 Mathematics::BSplineCurve2<Real>::BSplineCurve2(const std::vector<Vector2<Real>>& ctrlPoint, int degree, bool loop, const std::vector<Real>& knot)
-    : ParentType(Math ::GetValue(0), Math::GetValue(1)),
+    : ParentType(MathType::GetValue(0), MathType::GetValue(1)),
       numCtrlPoints{ boost::numeric_cast<int>(ctrlPoint.size()) },
       loop(loop),
       ctrlPoint{},
@@ -143,7 +143,7 @@ Mathematics::Vector2<Real> Mathematics::BSplineCurve2<Real>::GetControlPoint(int
         return ctrlPoint.at(i);
     }
 
-    return Vector2<Real>{ Math::maxReal, Math::maxReal };
+    return Vector2<Real>{ MathType::maxReal, MathType::maxReal };
 }
 
 template <typename Real>

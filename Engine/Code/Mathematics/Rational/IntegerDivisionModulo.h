@@ -23,11 +23,11 @@ namespace Mathematics
     public:
         using ClassType = IntegerDivisionModulo<N>;
 
-        using IntegerData = IntegerData<N>;
-        using IntegerDataAnalysis = IntegerDataAnalysis<N>;
+        using IntegerDataType = IntegerData<N>;
+        using IntegerDataAnalysisType = IntegerDataAnalysis<N>;
 
     public:
-        IntegerDivisionModulo(const IntegerData& division, const IntegerData& modulo);
+        IntegerDivisionModulo(const IntegerDataType& division, const IntegerDataType& modulo);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -37,8 +37,8 @@ namespace Mathematics
 
 #endif  // OPEN_CLASS_INVARIANT
 
-        NODISCARD IntegerData GetQuotient() const noexcept;
-        NODISCARD IntegerData GetRemainder() const noexcept;
+        NODISCARD IntegerDataType GetQuotient() const noexcept;
+        NODISCARD IntegerDataType GetRemainder() const noexcept;
 
     private:
         void Calculate();
@@ -51,12 +51,12 @@ namespace Mathematics
         static constexpr auto high = 0xFFFF0000u;
         static constexpr auto carry = 0x00010000u;
 
-        IntegerData numerator;
-        IntegerData denominator;
-        IntegerData absNumerator;
-        IntegerData absDenominator;
-        IntegerData quotient;
-        IntegerData remainder;
+        IntegerDataType numerator;
+        IntegerDataType denominator;
+        IntegerDataType absNumerator;
+        IntegerDataType absDenominator;
+        IntegerDataType quotient;
+        IntegerDataType remainder;
     };
 }
 

@@ -17,7 +17,7 @@
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <typename Real, typename Vector>
-Mathematics::IntervalDistanceSquared<Real, Vector>::IntervalDistanceSquared(const DistanceBase& distance, Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity)
+Mathematics::IntervalDistanceSquared<Real, Vector>::IntervalDistanceSquared(const DistanceBaseType& distance, Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity)
     : ParentType{ distance, tMin, tMax, lhsVelocity, rhsVelocity }
 {
     this->Solve();
@@ -41,7 +41,7 @@ bool Mathematics::IntervalDistanceSquared<Real, Vector>::IsValid() const noexcep
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real, typename Vector>
-typename Mathematics::IntervalDistanceSquared<Real, Vector>::DistanceResult Mathematics::IntervalDistanceSquared<Real, Vector>::Get(Real t) const
+typename Mathematics::IntervalDistanceSquared<Real, Vector>::DistanceResultType Mathematics::IntervalDistanceSquared<Real, Vector>::Get(Real t) const
 {
     return ParentType::GetDistanceResultSquared(t);
 }

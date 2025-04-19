@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorSegment3Box3<Real>::StaticTestIntersectorSegment3Box3(const Segment3& segment, const Box3& box, bool solid, const Real epsilon)
+Mathematics::StaticTestIntersectorSegment3Box3<Real>::StaticTestIntersectorSegment3Box3(const Segment3Type& segment, const Box3Type& box, bool solid, const Real epsilon)
     : ParentType{ epsilon }, segment{ segment }, box{ box }, solid{ solid }
 {
     Test();
@@ -56,14 +56,14 @@ Mathematics::Box3<Real> Mathematics::StaticTestIntersectorSegment3Box3<Real>::Ge
 template <typename Real>
 void Mathematics::StaticTestIntersectorSegment3Box3<Real>::Test()
 {
-    Vector3 awdu{};
-    Vector3 addu{};
-    Vector3 awxddu{};
+    Vector3Type awdu{};
+    Vector3Type addu{};
+    Vector3Type awxddu{};
 
     auto diff = segment.GetCenterPoint() - box.GetCenter();
 
-    awdu[0] = Math::FAbs(Vector3Tools::DotProduct(segment.GetDirection(), box.GetAxis(0)));
-    addu[0] = Math::FAbs(Vector3Tools::DotProduct(diff, box.GetAxis(0)));
+    awdu[0] = MathType::FAbs(Vector3ToolsType::DotProduct(segment.GetDirection(), box.GetAxis(0)));
+    addu[0] = MathType::FAbs(Vector3ToolsType::DotProduct(diff, box.GetAxis(0)));
     auto rhs = box.GetExtent(0) + segment.GetExtent() * awdu[0];
     if (rhs < addu[0])
     {
@@ -71,8 +71,8 @@ void Mathematics::StaticTestIntersectorSegment3Box3<Real>::Test()
         return;
     }
 
-    awdu[1] = Math::FAbs(Vector3Tools::DotProduct(segment.GetDirection(), box.GetAxis(1)));
-    addu[1] = Math::FAbs(Vector3Tools::DotProduct(diff, box.GetAxis(1)));
+    awdu[1] = MathType::FAbs(Vector3ToolsType::DotProduct(segment.GetDirection(), box.GetAxis(1)));
+    addu[1] = MathType::FAbs(Vector3ToolsType::DotProduct(diff, box.GetAxis(1)));
     rhs = box.GetExtent(1) + segment.GetExtent() * awdu[1];
     if (rhs < addu[1])
     {
@@ -80,8 +80,8 @@ void Mathematics::StaticTestIntersectorSegment3Box3<Real>::Test()
         return;
     }
 
-    awdu[2] = Math::FAbs(Vector3Tools::DotProduct(segment.GetDirection(), box.GetAxis(2)));
-    addu[2] = Math::FAbs(Vector3Tools::DotProduct(diff, box.GetAxis(2)));
+    awdu[2] = MathType::FAbs(Vector3ToolsType::DotProduct(segment.GetDirection(), box.GetAxis(2)));
+    addu[2] = MathType::FAbs(Vector3ToolsType::DotProduct(diff, box.GetAxis(2)));
     rhs = box.GetExtent(2) + segment.GetExtent() * awdu[2];
     if (rhs < addu[2])
     {
@@ -89,9 +89,9 @@ void Mathematics::StaticTestIntersectorSegment3Box3<Real>::Test()
         return;
     }
 
-    const auto wxd = Vector3Tools::CrossProduct(segment.GetDirection(), diff);
+    const auto wxd = Vector3ToolsType::CrossProduct(segment.GetDirection(), diff);
 
-    awxddu[0] = Math::FAbs(Vector3Tools::DotProduct(wxd, box.GetAxis(0)));
+    awxddu[0] = MathType::FAbs(Vector3ToolsType::DotProduct(wxd, box.GetAxis(0)));
     rhs = box.GetExtent(1) * awdu[2] + box.GetExtent(2) * awdu[1];
     if (rhs < awxddu[0])
     {
@@ -99,7 +99,7 @@ void Mathematics::StaticTestIntersectorSegment3Box3<Real>::Test()
         return;
     }
 
-    awxddu[1] = Math::FAbs(Vector3Tools::DotProduct(wxd, box.GetAxis(1)));
+    awxddu[1] = MathType::FAbs(Vector3ToolsType::DotProduct(wxd, box.GetAxis(1)));
     rhs = box.GetExtent(0) * awdu[2] + box.GetExtent(2) * awdu[0];
     if (rhs < awxddu[1])
     {
@@ -107,7 +107,7 @@ void Mathematics::StaticTestIntersectorSegment3Box3<Real>::Test()
         return;
     }
 
-    awxddu[2] = Math::FAbs(Vector3Tools::DotProduct(wxd, box.GetAxis(2)));
+    awxddu[2] = MathType::FAbs(Vector3ToolsType::DotProduct(wxd, box.GetAxis(2)));
     rhs = box.GetExtent(0) * awdu[1] + box.GetExtent(1) * awdu[0];
     if (rhs < awxddu[2])
     {

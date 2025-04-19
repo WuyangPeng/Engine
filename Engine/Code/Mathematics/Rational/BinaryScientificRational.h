@@ -25,7 +25,7 @@ namespace Mathematics
     public:
         using ClassType = BinaryScientificRational<UInteger>;
 
-        using BinaryScientificNumber = BinaryScientificNumber<UInteger>;
+        using BinaryScientificNumberType = BinaryScientificNumber<UInteger>;
 
     public:
         /// 函数生成零BinaryScientificRational。
@@ -38,7 +38,7 @@ namespace Mathematics
         explicit BinaryScientificRational(uint32_t numerator);
         explicit BinaryScientificRational(int64_t numerator) requires(!std::is_same_v<UIntegerFixedPrecision32<1>, UInteger>);
         explicit BinaryScientificRational(uint64_t numerator) requires(!std::is_same_v<UIntegerFixedPrecision32<1>, UInteger>);
-        explicit BinaryScientificRational(const BinaryScientificNumber& numerator);
+        explicit BinaryScientificRational(const BinaryScientificNumberType& numerator);
 
         BinaryScientificRational(float numerator, float denominator);
         BinaryScientificRational(double numerator, double denominator) requires(!std::is_same_v<UIntegerFixedPrecision32<1>, UInteger>);
@@ -46,7 +46,7 @@ namespace Mathematics
         BinaryScientificRational(uint32_t numerator, uint32_t denominator);
         BinaryScientificRational(int64_t numerator, int64_t denominator) requires(!std::is_same_v<UIntegerFixedPrecision32<1>, UInteger>);
         BinaryScientificRational(uint64_t numerator, uint64_t denominator) requires(!std::is_same_v<UIntegerFixedPrecision32<1>, UInteger>);
-        BinaryScientificRational(const BinaryScientificNumber& numerator, const BinaryScientificNumber& denominator);
+        BinaryScientificRational(const BinaryScientificNumberType& numerator, const BinaryScientificNumberType& denominator);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -61,11 +61,11 @@ namespace Mathematics
 
         void Negate() noexcept(!isBinaryScientificShowDouble);
 
-        NODISCARD const BinaryScientificNumber& GetNumerator() const noexcept;
-        NODISCARD BinaryScientificNumber& GetNumerator() noexcept;
+        NODISCARD const BinaryScientificNumberType& GetNumerator() const noexcept;
+        NODISCARD BinaryScientificNumberType& GetNumerator() noexcept;
 
-        NODISCARD const BinaryScientificNumber& GetDenominator() const noexcept;
-        NODISCARD BinaryScientificNumber& GetDenominator() noexcept;
+        NODISCARD const BinaryScientificNumberType& GetDenominator() const noexcept;
+        NODISCARD BinaryScientificNumberType& GetDenominator() noexcept;
 
         /// 一元运算。
         NODISCARD BinaryScientificRational operator+() const noexcept;
@@ -105,8 +105,8 @@ namespace Mathematics
 
 #endif  // MATHEMATICS_BINARY_SCIENTIFIC_SHOW_DOUBLE
 
-        BinaryScientificNumber numerator;
-        BinaryScientificNumber denominator;
+        BinaryScientificNumberType numerator;
+        BinaryScientificNumberType denominator;
     };
 
     /// 显式转换为用户指定的精度。

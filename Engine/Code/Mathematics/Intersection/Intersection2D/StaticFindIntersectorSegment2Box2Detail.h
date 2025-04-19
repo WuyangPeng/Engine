@@ -17,7 +17,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorSegment2Box2<Real>::StaticFindIntersectorSegment2Box2(const Segment2& segment, const Box2& box, bool solid, const Real dotThreshold)
+Mathematics::StaticFindIntersectorSegment2Box2<Real>::StaticFindIntersectorSegment2Box2(const Segment2Type& segment, const Box2Type& box, bool solid, const Real dotThreshold)
     : ParentType{ dotThreshold },
       segment{ segment },
       box{ box },

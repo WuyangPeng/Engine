@@ -20,7 +20,7 @@
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersector<Mathematics::Segment2<Real>, Mathematics::Segment2<Real>>::StaticTestIntersector(const Segment2& lhsSegment, const Segment2& rhsSegment, const Real dotThreshold, const Real intervalThreshold)
+Mathematics::StaticTestIntersector<Mathematics::Segment2<Real>, Mathematics::Segment2<Real>>::StaticTestIntersector(const Segment2Type& lhsSegment, const Segment2Type& rhsSegment, const Real dotThreshold, const Real intervalThreshold)
     : ParentType{ dotThreshold }, lhsSegment{ lhsSegment }, rhsSegment{ rhsSegment }, quantity{ 0 }, intervalThreshold{ intervalThreshold }
 {
     Test();
@@ -39,8 +39,8 @@ void Mathematics::StaticTestIntersector<Mathematics::Segment2<Real>, Mathematics
     if (intersectionType == IntersectionType::Point)
     {
         // 测试直线-直线的相交点是否在线段上。
-        if (Math::FAbs(classify.GetParameter0()) <= lhsSegment.GetExtent() + intervalThreshold &&
-            Math::FAbs(classify.GetParameter1()) <= rhsSegment.GetExtent() + intervalThreshold)
+        if (MathType::FAbs(classify.GetParameter0()) <= lhsSegment.GetExtent() + intervalThreshold &&
+            MathType::FAbs(classify.GetParameter1()) <= rhsSegment.GetExtent() + intervalThreshold)
         {
             quantity = 1;
         }
@@ -54,7 +54,7 @@ void Mathematics::StaticTestIntersector<Mathematics::Segment2<Real>, Mathematics
     {
         // 计算线段m_RhsSegment终点相对于线段m_LhsSegment的位置。
         auto difference = rhsSegment.GetCenterPoint() - lhsSegment.GetCenterPoint();
-        auto dotProduct = Vector2Tools::DotProduct(lhsSegment.GetDirection(), difference);
+        auto dotProduct = Vector2ToolsType::DotProduct(lhsSegment.GetDirection(), difference);
         auto tmin = dotProduct - rhsSegment.GetExtent();
         auto tmax = dotProduct + rhsSegment.GetExtent();
 

@@ -18,7 +18,7 @@
 #include "Mathematics/Objects3D/Line3Detail.h"
 
 template <typename Real>
-Mathematics::DistanceLine3Line3<Real>::DistanceLine3Line3(const Line3& lhsLine, const Line3& rhsLine) noexcept
+Mathematics::DistanceLine3Line3<Real>::DistanceLine3Line3(const Line3Type& lhsLine, const Line3Type& rhsLine) noexcept
     : ParentType{}, lhsLine{ lhsLine }, rhsLine{ rhsLine }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -67,12 +67,12 @@ typename Mathematics::DistanceLine3Line3<Real>::DistanceResult Mathematics::Dist
         // 线不平行。
         const auto lhsT = tool.GetLhsT() / det;
         const auto rhsT = tool.GetRhsT() / det;
-        const auto squaredDistance = lhsT * (lhsT + tool.GetDirectionDot() * rhsT + Math::GetValue(2) * tool.GetOriginDifferenceDotLhsDirection()) +
-                                     rhsT * (tool.GetDirectionDot() * lhsT + rhsT + Math::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) +
+        const auto squaredDistance = lhsT * (lhsT + tool.GetDirectionDot() * rhsT + MathType::GetValue(2) * tool.GetOriginDifferenceDotLhsDirection()) +
+                                     rhsT * (tool.GetDirectionDot() * lhsT + rhsT + MathType::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) +
                                      tool.GetOriginDifferenceSquaredLength();
 
-        return DistanceResult{ Math::GetNumericalRoundOffNonnegative(squaredDistance),
-                               Math::GetValue(0),
+        return DistanceResult{ MathType::GetNumericalRoundOffNonnegative(squaredDistance),
+                               MathType::GetValue(0),
                                lhsLine.GetOrigin() + lhsT * lhsLine.GetDirection(),
                                rhsLine.GetOrigin() + rhsT * rhsLine.GetDirection(),
                                lhsT,
@@ -85,16 +85,16 @@ typename Mathematics::DistanceLine3Line3<Real>::DistanceResult Mathematics::Dist
         const auto squaredDistance = tool.GetSquaredDistanceWithParallel();
 
         return DistanceResult{ squaredDistance,
-                               Math::GetValue(0),
+                               MathType::GetValue(0),
                                lhsLine.GetOrigin() - originDifferenceDotLhsDirection * lhsLine.GetDirection(),
                                rhsLine.GetOrigin(),
                                -originDifferenceDotLhsDirection,
-                               Math::GetValue(0) };
+                               MathType::GetValue(0) };
     }
 }
 
 template <typename Real>
-typename Mathematics::DistanceLine3Line3<Real>::DistanceResult Mathematics::DistanceLine3Line3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
+typename Mathematics::DistanceLine3Line3<Real>::DistanceResult Mathematics::DistanceLine3Line3<Real>::GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

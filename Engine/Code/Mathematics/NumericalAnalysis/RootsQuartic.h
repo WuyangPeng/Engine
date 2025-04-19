@@ -58,7 +58,7 @@ namespace Mathematics
         using PolynomialRootContainer = std::vector<PolynomialRoot>;
         using RationalPolynomialRoot = Algebra::PolynomialRoot<Rational>;
         using RationalPolynomialRootContainer = std::array<RationalPolynomialRoot, 4>;
-        using Math = Math<T>;
+        using MathType = Math<T>;
 
     public:
         RootsQuartic() noexcept;
@@ -97,7 +97,7 @@ namespace Mathematics
 
     private:
         using RationalRootsCubic = RootsCubic<Rational>;
-        using RootsCubic = RootsCubic<T>;
+        using RootsCubicType = RootsCubic<T>;
 
     private:
         /// 确定多项式是否具有零值根。

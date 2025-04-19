@@ -10,7 +10,7 @@
 #ifndef NETWORK_FWD_H
 #define NETWORK_FWD_H
 
-#include "ACEWrappers/ACEWrappersFwd.h"
+#include "AceWrappers/AceWrappersFwd.h"
 #include "ActiveMQ/ActiveMQFwd.h"
 #include "BoostWrappers/BoostWrappersFwd.h"
 #include "Configuration/ConfigurationFwd.h"

@@ -27,7 +27,7 @@ namespace Mathematics
         // 最后一个参数是用户定义的数据。
         using Function = Real (*)(Real, const UserDataType*);
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         TrapezoidRule(int numSamples, Real begin, Real end, Function function, const UserDataType* userData);

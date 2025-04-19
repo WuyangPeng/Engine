@@ -27,7 +27,7 @@ namespace Mathematics
     public:
         using ClassType = RootsBisection2<Real>;
 
-        using RootsBisection1 = RootsBisection1<Real>;
+        using RootsBisection1Type = RootsBisection1<Real>;
 
     public:
         /// 当Real是浮点类型时，请使用此构造函数。
@@ -58,8 +58,8 @@ namespace Mathematics
         NODISCARD bool NoGuaranteeForRootBound() const noexcept;
 
     private:
-        RootsBisection1 xBisector;
-        RootsBisection1 yBisector;
+        RootsBisection1Type xBisector;
+        RootsBisection1Type yBisector;
         Real xRoot;
         Real yRoot;
         Real fAtRoot;

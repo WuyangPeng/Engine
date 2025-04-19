@@ -337,7 +337,6 @@ call $(ProjectDir)/../../../../../Bat/CopyResource.bat $(ProjectDir) ../../../..
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="Configuration\Database.json" />
     <None Include="Configuration\EngineDirectory.json" />
     <None Include="Configuration\EnvironmentVariable.json" />
     <None Include="Configuration\Global.json" />
@@ -346,6 +345,7 @@ call $(ProjectDir)/../../../../../Bat/CopyResource.bat $(ProjectDir) ../../../..
     <None Include="Configuration\Smtp.json" />
     <None Include="Configuration\Testing.json" />
     <None Include="Configuration\ThreadingCoreRenderEngineAssist.json" />
+    <None Include="Configuration\ThreadingCoreRenderEngineAssist\Database.json" />
     <None Include="Configuration\ThreadingCoreRenderEngineAssist\Renderer.json" />
     <None Include="Resource\LearningLibrary.md" />
     <None Include="Resource\ReadMe.md" />

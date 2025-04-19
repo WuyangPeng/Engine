@@ -12,9 +12,9 @@
 
 #include "Rendering/RenderingExport.h"
 
-#include "ColourTextureFormatTraits.h"
 #include "TexelsFromCheck.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "Rendering/DataTypes/ColourTextureFormatTraits.h"
 
 template <Rendering::TextureFormat Format>
 Rendering::TexelsFromCheck<Format>::TexelsFromCheck(size_t inTexelsSize) noexcept

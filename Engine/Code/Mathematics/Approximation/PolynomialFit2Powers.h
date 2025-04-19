@@ -33,7 +33,7 @@ namespace Mathematics
 
         using Samples = std::vector<Real>;
         using Powers = std::vector<int>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         // 构造函数是数据(x[i],w[i])，分别为0 <= i < numSamples。

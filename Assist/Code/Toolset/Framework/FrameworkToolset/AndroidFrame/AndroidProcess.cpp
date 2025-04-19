@@ -16,7 +16,7 @@
 
 CLASS_INVARIANT_STUB_DEFINE(FrameworkToolset, AndroidProcess)
 
-namespace FrameworkToolset
+namespace Framework
 {
-    template class Framework::AndroidProcess<Framework::AndroidCallBackInterface>;
+    template class AndroidProcess<AndroidCallBackInterface>;
 }

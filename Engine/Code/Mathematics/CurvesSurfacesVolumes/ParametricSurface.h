@@ -25,7 +25,7 @@ namespace Mathematics
 
         using ClassType = ParametricSurface<Real>;
         using ParentType = Surface<Real>;
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
 
     public:
         CLASS_INVARIANT_OVERRIDE_DECLARE;

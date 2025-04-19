@@ -44,7 +44,7 @@ void Mathematics::PolynomialFit2<Real>::Calculate(const Samples& xSamples, const
 
     for (auto degreeIndex = 0; degreeIndex <= degree; ++degreeIndex)
     {
-        inputVector.at(degreeIndex) = Math::GetValue(0);
+        inputVector.at(degreeIndex) = MathType::GetValue(0);
         for (auto samplesIndex = 0u; samplesIndex < numSamples; ++samplesIndex)
         {
             inputVector.at(degreeIndex) += wSamples.at(samplesIndex) * power(samplesIndex, degreeIndex);
@@ -52,7 +52,7 @@ void Mathematics::PolynomialFit2<Real>::Calculate(const Samples& xSamples, const
 
         for (auto innerIndex = 0; innerIndex <= degree; ++innerIndex)
         {
-            matrix(degreeIndex, innerIndex) = Math::GetValue(0);
+            matrix(degreeIndex, innerIndex) = MathType::GetValue(0);
             for (auto samplesIndex = 0u; samplesIndex < numSamples; ++samplesIndex)
             {
                 matrix(degreeIndex, innerIndex) += power(samplesIndex, degreeIndex + innerIndex);
@@ -68,7 +68,7 @@ void Mathematics::PolynomialFit2<Real>::Calculate(const Samples& xSamples, const
 
         const auto outputVector = linearSystem.Solve(matrix, inputVector);
 
-        coeff = Polynomial{ outputVector };
+        coeff = PolynomialType{ outputVector };
         solveSucceed = true;
     }
     catch (const CoreTools::Error& error)
@@ -90,7 +90,7 @@ bool Mathematics::PolynomialFit2<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename Mathematics::PolynomialFit2<Real>::Polynomial Mathematics::PolynomialFit2<Real>::GetCoeff() const
+typename Mathematics::PolynomialFit2<Real>::PolynomialType Mathematics::PolynomialFit2<Real>::GetCoeff() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

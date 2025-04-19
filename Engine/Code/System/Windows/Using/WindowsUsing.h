@@ -200,7 +200,7 @@ namespace System
 
     using WindowsWord = uint16_t;
     using WindowsWordPtr = WindowsWord*;
-    using WindowsDWord = uint32_t;
+    using WindowsDWord = unsigned long;
     using WindowsDWordPtr = WindowsDWord*;
 
     constexpr WindowsDWord gMaxPath{ 260 };
@@ -477,15 +477,15 @@ namespace System
             {
                 uint32_t Offset;
                 uint32_t OffsetHigh;
-            } DUMMYSTRUCTNAME;
+            };
             void* Pointer;
-        } DUMMYUNIONNAME;
+        };
 
         WindowsHandle hEvent;
     };
     using WindowOverlappedPtr = WindowOverlapped*;
 
-    using WindowOverlappedCompletionRoutine = void (*)(uint32_t errorCode, uint32_t numberOfBytesTransfered, void* overlapped);
+    using WindowOverlappedCompletionRoutine = void (*)(WindowsDWord errorCode, WindowsDWord numberOfBytesTransfered, WindowOverlappedPtr overlapped);
 
     struct WindowOverlappedEntry
     {

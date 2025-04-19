@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticFindIntersectorSegment3Plane3<Real>::StaticFindIntersectorSegment3Plane3(const Segment3& segment, const Plane3& plane, const Real epsilon) noexcept
+Mathematics::StaticFindIntersectorSegment3Plane3<Real>::StaticFindIntersectorSegment3Plane3(const Segment3Type& segment, const Plane3Type& plane, const Real epsilon) noexcept
     : ParentType{ epsilon }, segment{ segment }, plane{ plane }, segmentParameter{}
 {
     Find();
@@ -62,7 +62,7 @@ void Mathematics::StaticFindIntersectorSegment3Plane3<Real>::Find() noexcept
         // 线与平面相交，但可能在不位于线段上的点处。
         this->SetIntersectionType(intr.GetIntersectionType());
         segmentParameter = intr.GetLineParameter();
-        if (!(Math::FAbs(segmentParameter) <= segment.GetExtent()))
+        if (!(MathType::FAbs(segmentParameter) <= segment.GetExtent()))
         {
             this->SetIntersectionType(IntersectionType::Empty);
             return;

@@ -57,7 +57,7 @@ namespace Mathematics::Algebra
     public:
         using ClassType = SingularValueDecomposition<Real>;
 
-        using Math = Math<Real>;
+        using MathType = Math<Real>;
         using MatrixType = std::vector<Real>;
         using DiagonalType = std::vector<Real>;
 
@@ -78,7 +78,7 @@ namespace Mathematics::Algebra
         /// 但您可以根据应用程序的需要进行调整。
         /// 返回值是发生收敛时消耗的迭代次数，
         /// 或者是未发生收敛时的std::numeric_limits<int>::max() 。
-        int Solve(const MatrixType& input, Real multiplier = Math::GetValue(8));
+        int Solve(const MatrixType& input, Real multiplier = MathType::GetValue(8));
 
         /// 得到U-矩阵，它是MxM，并按行主顺序存储。
         NODISCARD MatrixType GetU() const;
@@ -98,11 +98,11 @@ namespace Mathematics::Algebra
         NODISCARD DiagonalType GetSingularValues() const;
 
     private:
-        using GivensRotation = GivensRotation<Real>;
-        using SingularInfo = SingularInfo<Real>;
+        using GivensRotationType = GivensRotation<Real>;
+        using SingularInfoType = SingularInfo<Real>;
         using HouseholderType = std::vector<DiagonalType>;
-        using GivensRotationContainer = std::vector<GivensRotation>;
-        using SingularInfoContainer = std::vector<SingularInfo>;
+        using GivensRotationContainer = std::vector<GivensRotationType>;
+        using SingularInfoContainer = std::vector<SingularInfoType>;
 
         static constexpr auto unitRoundOff = std::numeric_limits<Real>::epsilon();
 
