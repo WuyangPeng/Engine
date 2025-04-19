@@ -125,7 +125,6 @@ endif()
 link_directories($ENV{LibsEnvironmentX64Lib}/)
 
 # 包含子项目。
-add_subdirectory ("Editor/Editor/EditorTesting")
 add_subdirectory ("Editor/AnimationEditor/AnimationEditorTesting")
 add_subdirectory ("Editor/AnimationEditor/AnimationEditorAssistTesting")
 add_subdirectory ("Editor/DataEditor/DataEditorTesting")
@@ -157,7 +156,6 @@ add_subdirectory ("Editor/TextureEditor/TextureEditorAssistTesting")
 add_subdirectory ("Editor/UserInterfaceEditor/UserInterfaceEditorTesting")
 add_subdirectory ("Editor/UserInterfaceEditor/UserInterfaceEditorAssistTesting")
 
-add_subdirectory ("Example/Example/ExampleTesting")
 add_subdirectory ("Example/ArtificialIntelligenceExample/ArtificialIntelligenceExampleTesting")
 add_subdirectory ("Example/AssistToolsExample/AssistToolsExampleTesting")  
 add_subdirectory ("Example/CoreToolsExample/CoreToolsExampleTesting")  
