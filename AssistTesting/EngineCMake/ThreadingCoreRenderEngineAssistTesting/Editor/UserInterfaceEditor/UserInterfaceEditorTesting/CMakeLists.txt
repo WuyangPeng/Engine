@@ -7,9 +7,9 @@ file(GLOB_RECURSE SRC_DIR_LIST "${CMAKE_SOURCE_DIR}/../../Code/Editor/UserInterf
 
 # 将源代码添加到此项目的可执行文件。
 if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
-     add_library (UserInterfaceEditorTestingD SHARED ${SRC_DIR_LIST})
+     add_executable (UserInterfaceEditorTestingD ${SRC_DIR_LIST})
 else()
-     add_library (UserInterfaceEditorTesting SHARED ${SRC_DIR_LIST})
+     add_executable (UserInterfaceEditorTesting ${SRC_DIR_LIST})
 endif()  
 
 # TODO: 如有需要，请添加测试并安装目标。
