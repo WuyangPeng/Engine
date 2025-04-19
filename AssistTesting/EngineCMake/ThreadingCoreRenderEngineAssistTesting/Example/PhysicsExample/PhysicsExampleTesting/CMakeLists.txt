@@ -7,9 +7,9 @@ file(GLOB_RECURSE SRC_DIR_LIST "${CMAKE_SOURCE_DIR}/../../Code/Example/PhysicsEx
 
 # 将源代码添加到此项目的可执行文件。
 if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
-     add_library (PhysicsExampleTestingD SHARED ${SRC_DIR_LIST})
+     add_executable (PhysicsExampleTestingD ${SRC_DIR_LIST})
 else()
-     add_library (PhysicsExampleTesting SHARED ${SRC_DIR_LIST})
+     add_executable (PhysicsExampleTesting ${SRC_DIR_LIST})
 endif()  
 
 # TODO: 如有需要，请添加测试并安装目标。
