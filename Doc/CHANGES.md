@@ -26,5 +26,6 @@ Threading Core Render Engine 1.0.2.1
 	完成功能：
 	
 		（工程）
+		+ 加入cocos2d-x代码至引擎。@
 	
 ----------------------------
