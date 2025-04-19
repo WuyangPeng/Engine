@@ -269,15 +269,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Code\Example\CoreToolsExample\CoreToolsExampleTesting\Testing.h" />
-    <ClInclude Include="..\..\..\..\Code\Example\CoreToolsExample\CoreToolsExampleTesting\TestingHelper.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\Code\Example\CoreToolsExample\CoreToolsExampleTesting\TestingHelper.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Example\CoreToolsExample\CoreToolsExampleTesting\TestingLib.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Example\CoreToolsExample\CoreToolsExampleTesting\TestingMain.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Configuration\EnvironmentVariable.json" />
     <None Include="Configuration\Log.json" />
     <None Include="Configuration\NetworkExampleTesting.json" />
@@ -296,6 +287,15 @@
     <Text Include="Resource\Todo\Level 7.txt" />
     <Text Include="Resource\Todo\Level 8.txt" />
     <Text Include="Resource\Todo\Level 9.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\NetworkExample\NetworkExampleTesting\Testing.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\NetworkExample\NetworkExampleTesting\TestingHelper.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\NetworkExample\NetworkExampleTesting\TestingHelper.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\NetworkExample\NetworkExampleTesting\TestingLib.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\NetworkExample\NetworkExampleTesting\TestingMain.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
