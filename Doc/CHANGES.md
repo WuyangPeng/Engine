@@ -27,5 +27,22 @@ Threading Core Render Engine 1.0.2.1
 	
 		（工程）
 		+ 加入cocos2d-x代码至引擎。@
+		+ 加入base模块。@
+		+ 加入EventDispatcher模块。@
+		+ 加入math模块。@
+		+ 加入actions模块。@
+		+ 加入2d nodes模块。@
+		+ 加入2d utils模块。@
+		+ 加入Protocol模块。@
+		+ 加入renderer模块。@
+		+ 加入physics模块。@
+		+ 加入platform模块。@
+		+ 加入script_support模块。@
+		+ 加入sprite_nodes模块。@
+		+ 加入text_input_node模块。@
+		+ 加入textures模块。@
+		+ 加入tilemap_parallax_nodes模块。@
+		+ 加入component模块。@
+		+ 加入3d模块。@
 	
 ----------------------------
