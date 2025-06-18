@@ -367,7 +367,7 @@ void Mathematics::Cone<N, Real>::CreateMesh(int numMinVertices, bool inscribed, 
     /// 变换到圆锥体的坐标系。
     Vector3Container basis(3);
     basis.at(0) = ray.GetDirection();
-    ComputeOrthogonalComplement(1, basis);
+    std::ignore = ComputeOrthogonalComplement(1, basis);
     Algebra::Matrix<3, 3, Real> rotate{};
     rotate.SetColumn(0, basis.at(1));
     rotate.SetColumn(1, basis.at(2));
