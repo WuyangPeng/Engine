@@ -32,7 +32,7 @@ namespace System
     }
 }
 
-void System::RecursionDeleteFileDirectory(const String& pathName)
+void System::RecursionDeleteFileDirectory(const std::wstring& pathName)
 {
     for (const auto& element : std::filesystem::directory_iterator(pathName))
     {
