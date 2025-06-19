@@ -19,7 +19,17 @@
 /// 文件管理辅助工具
 namespace System
 {
+#ifdef SYSTEM_PLATFORM_LINUX
+
+    void SYSTEM_DEFAULT_DECLARE RecursionDeleteFileDirectory(const std::string& pathName);
+
+#else // !SYSTEM_PLATFORM_LINUX
+
     void SYSTEM_DEFAULT_DECLARE RecursionDeleteFileDirectory(const std::wstring& pathName);
+
+#endif  // SYSTEM_PLATFORM_LINUX
+
+
     void SYSTEM_DEFAULT_DECLARE CreateFileDirectory(const String& pathName) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE CreateFileDirectory(const String& pathName, WindowSecurityAttributesPtr securityAttributes) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE DeleteFileDirectory(const TChar* pathName) noexcept;

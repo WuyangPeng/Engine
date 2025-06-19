@@ -31,8 +31,16 @@ namespace System
         }
     }
 }
+#ifdef SYSTEM_PLATFORM_LINUX
+
+void System::RecursionDeleteFileDirectory(const std::string& pathName)
+
+#else  // !SYSTEM_PLATFORM_LINUX
 
 void System::RecursionDeleteFileDirectory(const std::wstring& pathName)
+
+#endif  // SYSTEM_PLATFORM_LINUX
+
 {
     for (const auto& element : std::filesystem::directory_iterator(pathName))
     {
