@@ -39,7 +39,16 @@ void GameTemplate::GenerateEngine::Generate()
     const auto input = mainTree.get(SYSTEM_TEXT("input"), System::String{});
     const auto output = mainTree.get(SYSTEM_TEXT("output"), System::String{});
 
-    System::RecursionDeleteFileDirectory(CoreTools::StringConversion::StandardConversionWideChar(output));
+    #ifdef SYSTEM_PLATFORM_LINUX
+
+        System::RecursionDeleteFileDirectory(CoreTools::StringConversion::StandardConversionMultiByte(output));
+
+    #else // !SYSTEM_PLATFORM_LINUX
+
+        System::RecursionDeleteFileDirectory(CoreTools::StringConversion::StandardConversionWideChar(output));
+
+    #endif // SYSTEM_PLATFORM_LINUX
+
 
     const AssistTools::GenerateEngine generateEngine{ input, output };
 
