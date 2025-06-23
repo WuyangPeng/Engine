@@ -77,7 +77,16 @@ void System::CreateDirectoryTesting::RemoveDirectoryTest()
 
 void System::CreateDirectoryTesting::RemoveRecursionDirectoryTest()
 {
+    #ifdef SYSTEM_PLATFORM_LINUX
+
     RecursionDeleteFileDirectory(directoryName);
+
+    #else // !SYSTEM_PLATFORM_LINUX
+
+    RecursionDeleteFileDirectory(CoreTools::StringConversion::StandardConversionWideChar(directoryName));
+
+    #endif  // SYSTEM_PLATFORM_LINUX
+
 
     ASSERT_TRUE(DeleteFileDirectory(directoryName.c_str()));
 }
