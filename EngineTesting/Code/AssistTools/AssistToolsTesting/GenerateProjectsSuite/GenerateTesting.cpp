@@ -29,6 +29,8 @@ void AssistTools::GenerateTesting::ResultTest(const String& directory)
 {
     for (const auto& element : std::filesystem::directory_iterator(directory))
     {
+        #ifdef SYSTEM_PLATFORM_LINUX
+
         if (element.is_directory())
         {
             ResultTest(element.path());
@@ -37,6 +39,19 @@ void AssistTools::GenerateTesting::ResultTest(const String& directory)
         {
             RegularFileTest(element.path());
         }
+
+        #else // !SYSTEM_PLATFORM_LINUX
+
+        if (element.is_directory())
+        {
+            ResultTest(CoreTools::StringConversion::WideCharConversionStandard(element.path()));
+        }
+        else if (element.is_regular_file())
+        {
+            RegularFileTest(CoreTools::StringConversion::WideCharConversionStandard(element.path()));
+        }
+
+        #endif // SYSTEM_PLATFORM_LINUX
     }
 }
 
