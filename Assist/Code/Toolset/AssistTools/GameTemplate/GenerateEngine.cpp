@@ -15,6 +15,7 @@
 #include "CoreTools/FileManager/DeleteFileTools.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 #include "AssistTools/GenerateProjects/GenerateEngine.h"
+#include "CoreTools/CharacterString/StringConversion.h"
 
 GameTemplate::GenerateEngine ::GenerateEngine(std::string configurationFileName)
     : configurationFileName{ std::move(configurationFileName) }
@@ -38,7 +39,7 @@ void GameTemplate::GenerateEngine::Generate()
     const auto input = mainTree.get(SYSTEM_TEXT("input"), System::String{});
     const auto output = mainTree.get(SYSTEM_TEXT("output"), System::String{});
 
-    System::RecursionDeleteFileDirectory(output);
+    System::RecursionDeleteFileDirectory(CoreTools::StringConversion::StandardConversionWideChar(output));
 
     const AssistTools::GenerateEngine generateEngine{ input, output };
 

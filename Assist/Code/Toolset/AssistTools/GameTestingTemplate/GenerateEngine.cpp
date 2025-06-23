@@ -14,6 +14,7 @@
 #include "System/Time/DeltaTime.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 #include "AssistTools/GenerateProjects/GenerateTestingEngine.h"
+#include "CoreTools/CharacterString/StringConversion.h"
 
 GameTestingTemplate::GenerateEngine::GenerateEngine(std::string configurationFileName)
     : configurationFileName{ std::move(configurationFileName) }
@@ -37,7 +38,7 @@ void GameTestingTemplate::GenerateEngine::Generate()
     const auto input = mainTree.get(SYSTEM_TEXT("input"), System::String{});
     const auto output = mainTree.get(SYSTEM_TEXT("output"), System::String{});
 
-    System::RecursionDeleteFileDirectory(output);
+    System::RecursionDeleteFileDirectory(CoreTools::StringConversion::StandardConversionWideChar(output));
 
     const AssistTools::GenerateTestingEngine generateEngine{ input, output };
 
