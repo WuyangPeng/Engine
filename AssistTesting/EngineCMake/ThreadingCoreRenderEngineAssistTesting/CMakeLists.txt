@@ -41,6 +41,7 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 	include_directories($ENV{LibsEnvironmentExtendInclude}/)
 	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Code)
 	include_directories($ENV{EngineInclude}/)
+	include_directories($ENV{AssistInclude}/)
 
 else()
     # 其他平台下的操作
