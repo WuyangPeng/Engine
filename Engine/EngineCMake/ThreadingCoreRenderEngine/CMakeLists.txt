@@ -33,29 +33,39 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     include_directories($ENV{LibsEnvironmentBaseInclude}/)
     include_directories($ENV{LibsEnvironmentExtendInclude}/)
 
-    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Code)
-
     if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
 
-        link_directories($ENV{LibsEnvironmentX64DebugLib}/)
         link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/DebugWindows)
 
         set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/DebugWindows)
 
     else ()
 
-        link_directories($ENV{LibsEnvironmentX64ReleaseLib}/)
         link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/ReleaseWindows)
 
         set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/ReleaseWindows)
 
     endif ()
 
-    link_directories($ENV{LibsEnvironmentX64Lib}/)
-
 else ()
 
     # 其他平台下的操作
+
+endif ()
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Code)
+
+if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+
+    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/DebugWindows)
+
+    set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/DebugWindows)
+
+else ()
+
+    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/ReleaseWindows)
+
+    set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/ReleaseWindows)
 
 endif ()
 
