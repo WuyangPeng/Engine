@@ -50,7 +50,7 @@ bool ThreadingCoreRenderEngine::EngineTesting::EngineTest()
     return ExecuteEngineTesting(select);
 }
 
-bool ThreadingCoreRenderEngine::EngineTesting::ExecuteEngineTesting(int select)
+bool ThreadingCoreRenderEngine::EngineTesting::ExecuteEngineTesting(const int select)
 {
     if (engineTestingName.IsSelectValid(select))
     {

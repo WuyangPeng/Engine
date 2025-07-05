@@ -123,13 +123,52 @@ endif ()
 
 if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
 
-    set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/DebugWindows)
-    set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/DebugWindows)
+    set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake)
+    set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake)
+    set(BAT_NAME CopyDebugX64Dll)
 
 else ()
 
-    set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/ReleaseWindows)
-    set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/ReleaseWindows)
+    set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake)
+    set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake)
+    set(BAT_NAME CopyReleaseX64Dll)
+
+endif ()
+
+if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
+
+elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+
+    # 创建目录
+    set(OUTPUT_DIR "${EXECUTABLE_OUTPUT_PATH}/${CMAKE_BUILD_TYPE}")
+    if (NOT EXISTS ${OUTPUT_DIR})
+        file(MAKE_DIRECTORY ${OUTPUT_DIR})
+        message(STATUS "Created directory: ${OUTPUT_DIR}")
+    else ()
+        message(STATUS "Directory already exists: ${OUTPUT_DIR}")
+    endif ()
+
+    # 执行批处理文件 CopyDebugX64Dll.bat，并传递参数 x64 和 目标路径
+    execute_process(
+            COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/../../../Bat/${BAT_NAME}.bat x64 ${OUTPUT_DIR}
+            RESULT_VARIABLE result
+            OUTPUT_VARIABLE output
+            ERROR_VARIABLE error
+    )
+
+    # 检查执行结果
+    if (result)
+        message(WARNING "Batch file execution failed with exit code: ${result}")
+        message("Error output: ${error}")
+    else ()
+        message(STATUS "Batch file executed successfully.")
+        message("Output: ${output}")
+    endif ()
+
+    add_custom_target(copy_files ALL
+            COMMAND ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -P ${CMAKE_CURRENT_SOURCE_DIR}/CopyFiles.cmake
+            COMMENT "Copying files to destination before build"
+    )
 
 endif ()
 
