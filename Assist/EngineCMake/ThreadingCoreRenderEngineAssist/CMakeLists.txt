@@ -59,10 +59,9 @@ else()
     set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/ReleaseWindows)
 	set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/ReleaseWindows)
 	
-endif()  
- 
+endif()
+
 link_directories($ENV{LibsEnvironmentX64Lib}/)
- 
 
 # 包含子项目。
 
