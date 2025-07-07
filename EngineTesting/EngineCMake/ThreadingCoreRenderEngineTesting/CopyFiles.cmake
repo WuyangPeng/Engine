@@ -8,12 +8,12 @@ function(copy_files_to_destination)
     if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
 
         set(SOURCE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../../../Engine/x64/CMake/DebugWindows")
-        set(DESTINATION_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../../x64/CMake/Debug")
+        set(DESTINATION_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../../x64/CMake/DebugWindows")
 
     else ()
 
         set(SOURCE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../../../Engine/x64/CMake/ReleaseWindows")
-        set(DESTINATION_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../../x64/CMake/Release")
+        set(DESTINATION_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../../x64/CMake/ReleaseWindows")
 
     endif ()
 

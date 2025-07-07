@@ -123,14 +123,14 @@ endif ()
 
 if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
 
-    set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake)
-    set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake)
+    set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/DebugWindows)
+    set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/DebugWindows)
     set(BAT_NAME CopyDebugX64Dll)
 
 else ()
 
-    set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake)
-    set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake)
+    set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/ReleaseWindows)
+    set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/ReleaseWindows)
     set(BAT_NAME CopyReleaseX64Dll)
 
 endif ()
@@ -140,17 +140,16 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
 elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
     # 创建目录
-    set(OUTPUT_DIR "${EXECUTABLE_OUTPUT_PATH}/${CMAKE_BUILD_TYPE}")
-    if (NOT EXISTS ${OUTPUT_DIR})
-        file(MAKE_DIRECTORY ${OUTPUT_DIR})
-        message(STATUS "Created directory: ${OUTPUT_DIR}")
+    if (NOT EXISTS ${EXECUTABLE_OUTPUT_PATH})
+        file(MAKE_DIRECTORY ${EXECUTABLE_OUTPUT_PATH})
+        message(STATUS "Created directory: ${EXECUTABLE_OUTPUT_PATH}")
     else ()
-        message(STATUS "Directory already exists: ${OUTPUT_DIR}")
+        message(STATUS "Directory already exists: ${EXECUTABLE_OUTPUT_PATH}")
     endif ()
 
     # 执行批处理文件 CopyDebugX64Dll.bat，并传递参数 x64 和 目标路径
     execute_process(
-            COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/../../../Bat/${BAT_NAME}.bat x64 ${OUTPUT_DIR}
+            COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/../../../Bat/${BAT_NAME}.bat x64 ${EXECUTABLE_OUTPUT_PATH}
             RESULT_VARIABLE result
             OUTPUT_VARIABLE output
             ERROR_VARIABLE error
