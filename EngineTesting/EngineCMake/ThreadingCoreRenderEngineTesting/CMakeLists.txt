@@ -148,11 +148,11 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     endif ()
 
     # 执行批处理文件 CopyDebugX64Dll.bat，并传递参数 x64 和 目标路径
-    execute_process(
+    add_custom_target(
+            RunBatFile ALL
+            COMMAND
             COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/../../../Bat/${BAT_NAME}.bat x64 ${EXECUTABLE_OUTPUT_PATH}
-            RESULT_VARIABLE result
-            OUTPUT_VARIABLE output
-            ERROR_VARIABLE error
+            COMMENT "Running ${BAT_NAME}.bat after build"
     )
 
     # 检查执行结果
