@@ -1,4 +1,4 @@
-cd ../EngineCMake/ThreadingCoreRenderEngineAssist
+cd ../EngineCMake
 
 mkdir -p build-debug build-release
 
