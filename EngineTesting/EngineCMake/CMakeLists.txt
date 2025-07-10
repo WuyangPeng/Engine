@@ -43,36 +43,74 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     link_directories(/data/coding/Libs/miniz/build)
     link_directories(/data/coding/Libs/hiredis/build)
     link_directories(/data/coding/Libs/protobuf/build)
-    link_directories(/data/coding/Engine/x64/CMake/ReleaseWindows)
-    link_directories(/data/coding/Assist/x64/CMake/ReleaseWindows)
 
-    link_libraries(libSystem.so)
+    if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
 
-    link_libraries(libCoreTools.so)
+        link_directories(/data/coding/Engine/x64/CMake/DebugWindows)
+        link_directories(/data/coding/Assist/x64/CMake/DebugWindows)
 
-    link_libraries(libNetwork.so)
-    link_libraries(libDatabase.so)
-    link_libraries(libScript.so)
-    link_libraries(libMathematics.so)
-    link_libraries(libSoundEffect.so)
-    link_libraries(libInputOutput.so)
+        link_libraries(libSystemD.so)
 
-    link_libraries(libResourceManager.so)
-    link_libraries(libRendering.so)
-    link_libraries(libPhysics.so)
-    link_libraries(libImagics.so)
+        link_libraries(libCoreToolsD.so)
 
-    link_libraries(libAnimation.so)
-    link_libraries(libArtificialIntelligence.so)
-    link_libraries(libUserInterface.so)
+        link_libraries(libNetworkD.so)
+        link_libraries(libDatabaseD.so)
+        link_libraries(libScriptD.so)
+        link_libraries(libMathematicsD.so)
+        link_libraries(libSoundEffectD.so)
+        link_libraries(libInputOutputD.so)
 
-    link_libraries(libAssistTools.so)
+        link_libraries(libResourceManagerD.so)
+        link_libraries(libRenderingD.so)
+        link_libraries(libPhysicsD.so)
+        link_libraries(libImagicsD.so)
 
-    link_libraries(libFramework.so)
+        link_libraries(libAnimationD.so)
+        link_libraries(libArtificialIntelligenceD.so)
+        link_libraries(libUserInterfaceD.so)
 
-    link_libraries(libExportTest.so)
-    link_libraries(libCSVConfigure.so)
-    link_libraries(libDatabaseEntity.so)
+        link_libraries(libAssistToolsD.so)
+
+        link_libraries(libFrameworkD.so)
+
+        link_libraries(libExportTestD.so)
+        link_libraries(libCSVConfigureD.so)
+        link_libraries(libDatabaseEntityD.so)
+
+    else ()
+
+        link_directories(/data/coding/Engine/x64/CMake/ReleaseWindows)
+        link_directories(/data/coding/Assist/x64/CMake/ReleaseWindows)
+
+        link_libraries(libSystem.so)
+
+        link_libraries(libCoreTools.so)
+
+        link_libraries(libNetwork.so)
+        link_libraries(libDatabase.so)
+        link_libraries(libScript.so)
+        link_libraries(libMathematics.so)
+        link_libraries(libSoundEffect.so)
+        link_libraries(libInputOutput.so)
+
+        link_libraries(libResourceManager.so)
+        link_libraries(libRendering.so)
+        link_libraries(libPhysics.so)
+        link_libraries(libImagics.so)
+
+        link_libraries(libAnimation.so)
+        link_libraries(libArtificialIntelligence.so)
+        link_libraries(libUserInterface.so)
+
+        link_libraries(libAssistTools.so)
+
+        link_libraries(libFramework.so)
+
+        link_libraries(libExportTest.so)
+        link_libraries(libCSVConfigure.so)
+        link_libraries(libDatabaseEntity.so)
+
+    endif ()
 
     link_libraries(libboost_system.so)
     link_libraries(libboost_timer.so)
@@ -88,8 +126,6 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     link_libraries(libssl.so)
     link_libraries(libcrypto.so)
     link_libraries(libprotobuf.a)
-
-    link_directories($ENV{LibsEnvironmentX64Lib}/)
 
 elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
