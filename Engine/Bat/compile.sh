@@ -1,4 +1,4 @@
-cd ../EngineCMake/ThreadingCoreRenderEngine
+cd ../EngineCMake
 
 cmake ./
 make
