@@ -7,5 +7,5 @@ cmake -DCMAKE_BUILD_TYPE=Debug ..
 make
 
 cd ../build-release
-cmake -DCMAKE_BUILD_TYPE=Release ..
+cmake ..
 make 
