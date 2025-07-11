@@ -13,16 +13,23 @@
 
 #include "System/Helper/WindowsMacro.h"
 #include "System/SystemOutput/OutputDebugString.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/MainFunctionHelper/ExecuteDllMain.h"
 #include "CoreTools/Threading/Mutex.h"
+
+#include <iostream>
 
 #define MAIN_FUNCTION(namespaceName, helperClassName)                           \
     int main(int argc, char** argv) noexcept                                    \
     {                                                                           \
         try                                                                     \
         {                                                                       \
-            namespaceName::helperClassName helper{ argc, argv };                \
-            return helper.Run();                                                \
+            EXCEPTION_TRY                                                       \
+            {                                                                   \
+                namespaceName::helperClassName helper{ argc, argv };            \
+                return helper.Run();                                            \
+            }                                                                   \
+            EXCEPTION_ENTRY_POINT_CATCH                                         \
         }                                                                       \
         catch (...)                                                             \
         {                                                                       \
