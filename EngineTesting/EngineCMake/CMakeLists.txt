@@ -172,9 +172,7 @@ else ()
 
 endif ()
 
-if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
-
-elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
     # 创建目录
     if (NOT EXISTS ${EXECUTABLE_OUTPUT_PATH})
