@@ -10,7 +10,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "ViewVolumeImpl.h"
-#include "Mathematics/Algebra/Matrix/MatrixDetail.h"
+#include "Mathematics/Algebra/MatrixDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 Rendering::ViewVolumeImpl::ViewVolumeImpl() noexcept
