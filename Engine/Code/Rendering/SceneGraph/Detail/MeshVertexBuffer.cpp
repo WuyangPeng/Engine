@@ -12,6 +12,8 @@
 #include "MeshVertexBuffer.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Resources/Flags/DataFormatType.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
+#include "Mathematics/Algebra/Vector3Detail.h"
 
 Rendering::MeshVertexBuffer::MeshVertexBuffer(VertexBufferSharedPtr vertexBuffer) noexcept
     : vertexBuffer{ std::move(vertexBuffer) },

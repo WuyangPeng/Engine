@@ -99,23 +99,23 @@ void Rendering::Camera::SetProjectionMatrix(const APoint& p00, const APoint& p10
     const auto q000 = origin + nearExtrude * (p00 - origin);
     const auto q100 = origin + nearExtrude * (p10 - origin);
 
-#if 0
+    #if 0
 
     const auto q110 = origin + nearExtrude * (p11 - origin);
 
-#endif  // 0
+    #endif  // 0
 
     const auto q010 = origin + nearExtrude * (p01 - origin);
 
     // 计算最远面的视图体积。注释后的代码行显示了q101和q011应该是什么，但实际的算法不需要计算它。
     const auto q001 = origin + farExtrude * (p00 - origin);
 
-#if 0
+    #if 0
 
     const auto q101 = origin + farExtrude * (p10 - origin);
     const auto q011 = origin + farExtrude * (p01 - origin);
 
-#endif  // 0
+    #endif  // 0
 
     const auto q111 = origin + farExtrude * (p11 - origin);
 
@@ -124,19 +124,19 @@ void Rendering::Camera::SetProjectionMatrix(const APoint& p00, const APoint& p10
     const auto u1 = q010 - q000;
     const auto u2 = q001 - q000;
 
-#if defined(MATHEMATICS_USE_MATRIX_VECTOR)
+    #if defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
     const Matrix matrix{ u0, u1, u2, q000, Mathematics::MatrixMajorFlags::Row };
     const auto inverseMatrix = matrix.Inverse(impl->GetEpsilon());
     auto point = inverseMatrix * q111;
 
-#else  // !defined(MATHEMATICS_USE_MATRIX_VECTOR)
+    #else  // !defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
     const Matrix matrix{ u0, u1, u2, q000, Mathematics::MatrixMajorFlags::Column };
     const auto inverseMatrix = matrix.Inverse(impl->GetEpsilon());
     auto point = q111 * inverseMatrix;
 
-#endif  // defined(MATHEMATICS_USE_MATRIX_VECTOR)
+    #endif  // defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
     // 计算分段线性变换的参数。
     //  y[i] = n[i]*x[i]/(d[0]*x[0] + d[1]*x[1] + d[2]*x[2] + d[3])
@@ -152,7 +152,7 @@ void Rendering::Camera::SetProjectionMatrix(const APoint& p00, const APoint& p10
     const auto twoPoint2divide0 = twoPoint2 / twoPoint0;
     const auto twoPoint2divide1 = twoPoint2 / twoPoint1;
 
-#if defined(MATHEMATICS_USE_MATRIX_VECTOR)
+    #if defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
     Matrix project{};
     project(0, 0) = twoPoint2divide0 * (2.0f * d3 + d0);
@@ -175,7 +175,7 @@ void Rendering::Camera::SetProjectionMatrix(const APoint& p00, const APoint& p10
     project(3, 2) = -d2;
     project(3, 3) = twoPoint2;
 
-#else  // !defined(MATHEMATICS_USE_MATRIX_VECTOR)
+    #else  // !defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
     Matrix project{};
     project(0, 0) = twoPoint2divide0 * (2.0f * d3 + d0);
@@ -198,7 +198,7 @@ void Rendering::Camera::SetProjectionMatrix(const APoint& p00, const APoint& p10
     project(2, 3) = -d2;
     project(3, 3) = twoPoint2;
 
-#endif  // defined(MATHEMATICS_USE_MATRIX_VECTOR)
+    #endif  // defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
     // 全投影需要将挤压四边形投影视图体积映射到规范长方体，然后再将透视投影映射到规范立方体。
     ParentType::SetProjectionMatrix(project * inverseMatrix);
