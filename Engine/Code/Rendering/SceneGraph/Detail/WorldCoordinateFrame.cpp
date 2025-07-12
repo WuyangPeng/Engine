@@ -16,7 +16,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
-#include "Mathematics/Algebra/Matrix/MatrixDetail.h"
+#include "Mathematics/Algebra/MatrixDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/AVectorOrthonormalizeDetail.h"
 #include "Mathematics/Algebra/AlgebraAggregate.h"
