@@ -13,7 +13,7 @@
 #include "EntityManager.h"
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Base/Flags/UniqueIdSelect.h"
-#include "CoreTools/Base/UniqueIdManager.h"
+#include "CoreTools/Base/UniqueIdManagerDetail.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
