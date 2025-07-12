@@ -10,6 +10,7 @@
 #include "Mathematics/MathematicsExport.h"
 
 #include "UIntegerArbitraryPrecision32.h"
+#include "UIntegerArithmeticLogicUnit32Detail.h"
 #include "Detail/UIntegerArbitraryPrecision32Impl.h"
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
