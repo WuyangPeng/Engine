@@ -25,7 +25,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
         link_libraries(libArtificialIntelligenceD.so)
         link_libraries(libUserInterfaceD.so)
         link_libraries(libAssistToolsD.so)
-        link_libraries(libFrameworksD.so)
+        link_libraries(libFrameworkD.so)
 
     else ()
 
@@ -45,7 +45,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
         link_libraries(libArtificialIntelligence.so)
         link_libraries(libUserInterface.so)
         link_libraries(libAssistTools.so)
-        link_libraries(libFrameworks.so)
+        link_libraries(libFramework.so)
 
     endif ()
 
