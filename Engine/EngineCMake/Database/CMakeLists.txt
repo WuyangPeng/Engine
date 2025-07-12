@@ -5,15 +5,19 @@ cmake_minimum_required(VERSION 3.14)
 
 file(GLOB_RECURSE SRC_DIR_LIST "${CMAKE_SOURCE_DIR}/../Code/Database/*.cpp")
 
-if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
-    link_libraries(libSystemD.so)
-    link_libraries(libCoreToolsD.so)
+    if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
 
-else ()
+        link_libraries(libSystemD.so)
+        link_libraries(libCoreToolsD.so)
 
-    link_libraries(libSystem.so)
-    link_libraries(libCoreTools.so)
+    else ()
+
+        link_libraries(libSystem.so)
+        link_libraries(libCoreTools.so)
+
+    endif ()
 
 endif ()
 
