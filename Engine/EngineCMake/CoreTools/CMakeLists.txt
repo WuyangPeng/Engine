@@ -13,3 +13,12 @@ else ()
 endif ()
 
 # TODO: 如有需要，请添加测试并安装目标。
+if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+
+    link_libraries(libSystemD.so)
+
+else ()
+
+    link_libraries(libSystem.so)
+
+endif ()
