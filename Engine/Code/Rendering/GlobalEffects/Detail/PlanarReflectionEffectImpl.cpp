@@ -12,6 +12,7 @@
 #include "PlanarReflectionEffectImpl.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
 #include "Rendering/RendererEngine/BaseRenderer.h"

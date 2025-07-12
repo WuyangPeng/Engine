@@ -14,6 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "Mathematics/Algebra/TransformDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 #include "Rendering/LocalEffects/Texture2DEffect.h"
 #include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
