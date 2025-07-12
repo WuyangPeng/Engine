@@ -20,6 +20,7 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/SceneGraph/Node.h"
+#include "Mathematics/Algebra/BoundingSphereDetail.h"
 
 Rendering::NodeImpl::NodeImpl() noexcept
     : spatialChild{}
