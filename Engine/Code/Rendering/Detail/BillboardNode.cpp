@@ -19,6 +19,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/TransformDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, BillboardNode)
 
