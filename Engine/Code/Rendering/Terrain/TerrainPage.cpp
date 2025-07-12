@@ -17,6 +17,7 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/SceneGraph/MeshFactory.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, TerrainPage)
 
