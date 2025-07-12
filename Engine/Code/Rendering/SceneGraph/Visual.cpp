@@ -413,7 +413,7 @@ void Rendering::Visual::PickTriangles(const SpanIterator& positions,
             v1 = v0 + 1;
             v2 = v0 + 2;
         }
-        else  // primitiveType == IndexFormatType::TriangleStrip
+        else // primitiveType == IndexFormatType::TriangleStrip
         {
             const auto offset = (i & 1);
             v0 = i + offset;
@@ -482,7 +482,7 @@ Rendering::PickRecordContainer Rendering::Visual::PickSegments(const SpanIterato
             v0 = 2 * i;
             v1 = v0 + 1;
         }
-        else  // primitiveType == IndexFormatType::PolygonSegmentContiguous
+        else // primitiveType == IndexFormatType::PolygonSegmentContiguous
         {
             v0 = i;
             v1 = v0 + 1;

@@ -19,6 +19,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, Camera)
 
