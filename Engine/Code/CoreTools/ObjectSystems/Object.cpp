@@ -18,7 +18,7 @@
 #include "ObjectRegister.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Base/Flags/UniqueIdSelect.h"
-#include "CoreTools/Base/UniqueIdManager.h"
+#include "CoreTools/Base/UniqueIdManagerDetail.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
