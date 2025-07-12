@@ -5,6 +5,18 @@ cmake_minimum_required(VERSION 3.14)
 
 file(GLOB_RECURSE SRC_DIR_LIST "${CMAKE_SOURCE_DIR}/../Code/Script/*.cpp")
 
+if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+
+    link_libraries(libSystemD.so)
+    link_libraries(libCoreToolsD.so)
+
+else ()
+
+    link_libraries(libSystem.so)
+    link_libraries(libCoreTools.so)
+
+endif ()
+
 # 将源代码添加到此项目的可执行文件。
 if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
     add_library(ScriptD SHARED ${SRC_DIR_LIST})
