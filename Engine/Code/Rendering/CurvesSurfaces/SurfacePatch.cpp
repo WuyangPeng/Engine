@@ -18,6 +18,7 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/Matrix2Detail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 
 using std::make_shared;
 
