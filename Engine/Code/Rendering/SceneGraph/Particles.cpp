@@ -18,6 +18,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/TransformDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
 #include "Rendering/Resources/Flags/DataFormatType.h"
 #include "Rendering/Resources/Flags/UsageType.h"
