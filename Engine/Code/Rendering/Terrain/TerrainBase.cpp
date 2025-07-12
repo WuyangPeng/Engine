@@ -23,6 +23,7 @@
 #include "Rendering/Resources/Flags/DataFormatType.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/TransformDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, TerrainBase)
 
