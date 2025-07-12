@@ -26,6 +26,7 @@
 #include "Mathematics/Algebra/Vector3Tools.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/TransformDetail.h"
+#include "Mathematics/Algebra/BoundingSphereDetail.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
 #include "Mathematics/Distance/Distance3D/DistanceLine3Segment3Detail.h"
 #include "Mathematics/Distance/Distance3D/DistancePoint3Line3Detail.h"
