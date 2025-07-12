@@ -14,6 +14,7 @@
 #include "Mathematics/Algebra/Matrix4Detail.h"
 #include "Mathematics/Algebra/TransformDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
 #include "Rendering/SceneGraph/Visual.h"
 #include "Rendering/State/SamplerState.h"
