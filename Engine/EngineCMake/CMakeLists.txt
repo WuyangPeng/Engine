@@ -71,6 +71,8 @@ endif ()
 
 link_directories($ENV{LibsEnvironmentX64Lib}/)
 
+set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-z,defs")
+
 # 包含子项目。
 add_subdirectory("System")
 
