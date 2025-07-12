@@ -16,6 +16,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
+#include "Mathematics/Algebra/Matrix/MatrixDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/AVectorOrthonormalizeDetail.h"
 #include "Mathematics/Algebra/AlgebraAggregate.h"
@@ -29,11 +30,11 @@ Rendering::WorldCoordinateFrame::WorldCoordinateFrame() noexcept
       viewMatrix{},
       inverseViewMatrix{},
 
-#ifdef RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
+      #ifdef RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
 
       validateCoordinateFrame{ true },
 
-#endif  // RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
+      #endif  // RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
 
       epsilon{}
 {
@@ -48,11 +49,11 @@ Rendering::WorldCoordinateFrame::WorldCoordinateFrame(float epsilon)
       viewMatrix{ Mathematics::MatrixF::GetZeroMatrix() },
       inverseViewMatrix{ Mathematics::MatrixF::GetZeroMatrix() },
 
-#ifdef RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
+      #ifdef RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
 
       validateCoordinateFrame{ true },
 
-#endif  // RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
+      #endif  // RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
 
       epsilon{ epsilon }
 {
@@ -118,7 +119,7 @@ void Rendering::WorldCoordinateFrame::SetAxes(const AVector& aDirectionVector, c
     if (const auto det = Dot(directionVector, Cross(upVector, rightVector));
         epsilon < Mathematics::MathF::FAbs(1.0f - Mathematics::MathF::FAbs(det)))
     {
-#ifdef RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
+        #ifdef RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
 
         if (validateCoordinateFrame)
         {
@@ -141,7 +142,7 @@ void Rendering::WorldCoordinateFrame::SetAxes(const AVector& aDirectionVector, c
             }
         }
 
-#endif  // RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
+        #endif  // RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
 
         // 输入向量并没有形成一个标准正交集合。这里重新正交化
         const auto orthonormalize = Orthonormalize(directionVector, upVector, rightVector, epsilon);
@@ -198,7 +199,7 @@ Rendering::WorldCoordinateFrame::Matrix Rendering::WorldCoordinateFrame::GetInve
 
 void Rendering::WorldCoordinateFrame::OnFrameChange()
 {
-#ifdef MATHEMATICS_USE_MATRIX_VECTOR
+    #ifdef MATHEMATICS_USE_MATRIX_VECTOR
 
     viewMatrix(0, 0) = rightVector[0];
     viewMatrix(0, 1) = rightVector[1];
@@ -234,7 +235,7 @@ void Rendering::WorldCoordinateFrame::OnFrameChange()
     inverseViewMatrix(3, 2) = 0.0f;
     inverseViewMatrix(3, 3) = 1.0f;
 
-#else  // !MATHEMATICS_USE_MATRIX_VECTOR
+    #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
     viewMatrix(0, 0) = rightVector[0];
     viewMatrix(1, 0) = rightVector[1];
@@ -270,7 +271,7 @@ void Rendering::WorldCoordinateFrame::OnFrameChange()
     inverseViewMatrix(2, 3) = 0.0f;
     inverseViewMatrix(3, 3) = 1.0f;
 
-#endif  // MATHEMATICS_USE_MATRIX_VECTOR
+    #endif  // MATHEMATICS_USE_MATRIX_VECTOR
 }
 
 void Rendering::WorldCoordinateFrame::Load(BufferSource& source)
