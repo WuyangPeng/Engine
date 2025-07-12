@@ -196,7 +196,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
         message("Error output: ${error}")
     else ()
         message(STATUS "Batch file executed successfully.")
-        message("Output: ${output}")
+        message("Output: ${EXECUTABLE_OUTPUT_PATH}")
     endif ()
 
     add_custom_target(copy_files ALL
