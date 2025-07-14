@@ -47,6 +47,7 @@
 #include "Rendering/Shaders/Shader.h"
 #include "Rendering/Shaders/VisualProgram.h"
 #include "Rendering/State/SamplerState.h"
+#include "Rendering/DataTypes/ColourDetail.h"
 
 #include <gsl/util>
 
@@ -759,7 +760,7 @@ int64_t Rendering::OpenGLDevice::DrawPrimitive(const VertexBuffer& vertexBuffer,
     auto topology = System::PrimitiveType::Point;
 
     switch (const auto type = indexBuffer.GetPrimitiveType();
-            type)
+        type)
     {
         case IndexFormatType::PolygonPoint:
             topology = System::PrimitiveType::Point;
@@ -795,14 +796,14 @@ int64_t Rendering::OpenGLDevice::DrawPrimitive(const VertexBuffer& vertexBuffer,
     const auto offset = indexBuffer.GetOffset();
     if (indexBuffer.IsIndexed())
     {
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
+        #include SYSTEM_WARNING_PUSH
+        #include SYSTEM_WARNING_DISABLE(26490)
 
         const auto result = boost::numeric_cast<size_t>(indexSize) * boost::numeric_cast<size_t>(offset);
 
         const auto* data = reinterpret_cast<const void*>(result);
 
-#include SYSTEM_WARNING_POP
+        #include SYSTEM_WARNING_POP
 
         SetGLDrawRangeElements(topology, 0, numActiveVertices - 1, numActiveIndices, indexType, data);
     }
