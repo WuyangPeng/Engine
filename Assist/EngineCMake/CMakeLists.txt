@@ -58,6 +58,8 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
     if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
 
+        link_directories(/data/coding/Engine/x64/CMake/DebugWindows)
+
         link_libraries(libSystemD.so)
         link_libraries(libCoreToolsD.so)
         link_libraries(libNetworkD.so)
@@ -77,6 +79,8 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
         link_libraries(libFrameworkD.so)
 
     else ()
+
+        link_directories(/data/coding/Engine/x64/CMake/ReleaseWindows)
 
         link_libraries(libSystem.so)
         link_libraries(libCoreTools.so)
