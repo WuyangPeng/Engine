@@ -20,7 +20,7 @@
 #include "Rendering/LocalEffects/Detail/TextEffectImpl.h"
 #include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Rendering/Resources/Textures/Texture2D.h"
-#include "Rendering/Shaders/Shader.h"
+#include "Rendering/Shaders/ShaderDetail.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, TextEffect)
 

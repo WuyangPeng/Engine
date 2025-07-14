@@ -17,7 +17,7 @@
 #include "Rendering/DataTypes/ColourDetail.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
-#include "Rendering/Shaders/Shader.h"
+#include "Rendering/Shaders/ShaderDetail.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, ConstantColorEffect)
 
