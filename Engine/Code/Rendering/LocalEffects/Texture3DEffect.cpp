@@ -16,6 +16,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "Rendering/Resources/Textures/Texture3D.h"
 #include "Rendering/Shaders/ShaderDetail.h"
+#include "Rendering/Resources/Buffers/ConstantBufferDetail.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, Texture3DEffect)
 
