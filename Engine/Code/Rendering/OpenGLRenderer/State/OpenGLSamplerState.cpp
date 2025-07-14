@@ -17,6 +17,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/State/Flags/SamplerStateFilter.h"
 #include "Rendering/State/Flags/SamplerStateMode.h"
+#include "Rendering/DataTypes/ColourDetail.h"
 
 Rendering::OpenGLSamplerState::OpenGLSamplerState(const SamplerStateSharedPtr& samplerState, const std::string& name)
     : ParentType{ samplerState, name }
