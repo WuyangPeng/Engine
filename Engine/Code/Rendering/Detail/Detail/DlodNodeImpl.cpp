@@ -17,6 +17,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/TransformDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 
 #include <gsl/util>
 

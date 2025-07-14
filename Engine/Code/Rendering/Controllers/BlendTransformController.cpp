@@ -23,6 +23,7 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/SceneGraph/Spatial.h"
+#include "Mathematics/Algebra/TransformDetail.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, BlendTransformController)
 
