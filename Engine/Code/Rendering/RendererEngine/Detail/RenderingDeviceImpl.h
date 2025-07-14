@@ -66,7 +66,7 @@ namespace Rendering
         NODISCARD virtual bool HasDepthRange01() const = 0;
         NODISCARD virtual std::string GetShaderName(const std::string& name) const = 0;
         NODISCARD virtual std::string GetShaderExtendName() const = 0;
-        NODISCARD virtual void Resize(int width, int height) = 0;
+        virtual void Resize(int width, int height) = 0;
 
         NODISCARD virtual int64_t DrawPrimitive(RendererObjectBridge& rendererObjectBridge,
                                                 const VertexBufferSharedPtr& vertexBuffer,
