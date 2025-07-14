@@ -15,6 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/UnitTestSuite/Suite.h"
+#include "CoreTools/UnitTestSuite/OStreamSharedDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 Framework::WindowMessageUnitTestSuiteImpl::WindowMessageUnitTestSuiteImpl(const std::string& name)
