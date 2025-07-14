@@ -15,6 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/UnitTestSuite/Suite.h"
+#include "CoreTools/UnitTestSuite/OStreamSharedDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestComposite.h"
 
 Framework::OpenGLGlutCallBackUnitTestSuiteImpl::OpenGLGlutCallBackUnitTestSuiteImpl(const std::string& name)
