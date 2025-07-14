@@ -50,8 +50,8 @@ namespace Framework
 
         NODISCARD virtual bool PreCreate();
         NODISCARD virtual bool Initialize();
-        NODISCARD virtual void PreIdle();
-        NODISCARD virtual void Terminate();
+        virtual void PreIdle();
+        virtual void Terminate();
 
     private:
         void ClearAndroidCallBack();
