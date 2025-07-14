@@ -11,7 +11,7 @@
 
 #include "VertexColorEffect.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "Rendering/Shaders/Shader.h"
+#include "Rendering/Shaders/ShaderDetail.h"
 
 Rendering::VertexColorEffect::VertexColorEffect(ProgramFactory& factory, const BaseRendererSharedPtr& baseRenderer)
     : ParentType{ "VertexColorEffect",
