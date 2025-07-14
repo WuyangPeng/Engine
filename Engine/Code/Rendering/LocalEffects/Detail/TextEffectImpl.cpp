@@ -20,6 +20,7 @@
 #include "Rendering/Shaders/ShaderDetail.h"
 #include "Rendering/Shaders/VisualProgram.h"
 #include "Rendering/State/SamplerState.h"
+#include "Rendering/DataTypes/ColourDetail.h"
 
 Rendering::TextEffectImpl::TextEffectImpl(ShaderAPIType shaderAPIType, int numTranslateConstantBytes, int numColorConstantBytes)
     : translate{ std::make_shared<ConstantBuffer>("translate", numTranslateConstantBytes, true) },

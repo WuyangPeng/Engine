@@ -11,7 +11,7 @@
 
 #include "OpenGLBlendState.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
-
+#include "Rendering/DataTypes/ColourDetail.h"
 #include "System/OpenGL/OpenGLBase.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
@@ -59,13 +59,13 @@ void Rendering::OpenGLBlendState::EnableIndependentBlend()
             {
                 EnableGLState(System::OpenGLEnable::Blend, index);
                 SetGLBlendFuncSeparate(index,
-                                               target.GetSourceColor(),
-                                               target.GetDestinationColor(),
-                                               target.GetSourceAlpha(),
-                                               target.GetDestinationAlpha());
+                                       target.GetSourceColor(),
+                                       target.GetDestinationColor(),
+                                       target.GetSourceAlpha(),
+                                       target.GetDestinationAlpha());
                 SetGLBlendEquationSeparate(index,
-                                                   target.GetOperationColor(),
-                                                   target.GetOperationAlpha());
+                                           target.GetOperationColor(),
+                                           target.GetOperationAlpha());
             }
             else
             {
@@ -86,11 +86,11 @@ void Rendering::OpenGLBlendState::EnableIndependentBlend()
             EnableGLState(System::OpenGLEnable::Blend);
 
             SetGLBlendFuncSeparate(target.GetSourceColor(),
-                                           target.GetDestinationColor(),
-                                           target.GetSourceAlpha(),
-                                           target.GetDestinationAlpha());
+                                   target.GetDestinationColor(),
+                                   target.GetSourceAlpha(),
+                                   target.GetDestinationAlpha());
             SetGLBlendEquationSeparate(target.GetOperationColor(),
-                                               target.GetOperationAlpha());
+                                       target.GetOperationAlpha());
         }
         else
         {
