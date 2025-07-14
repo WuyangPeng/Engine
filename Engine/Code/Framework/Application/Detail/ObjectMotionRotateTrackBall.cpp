@@ -13,7 +13,8 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
-#include "Mathematics/Algebra/Transform.h"
+#include "Mathematics/Algebra/TransformDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 
 Framework::ObjectMotionRotateTrackBall::ObjectMotionRotateTrackBall(SpatialSharedPtr motionObject,
                                                                     ConstCameraSharedPtr camera,
@@ -97,7 +98,7 @@ void Framework::ObjectMotionRotateTrackBall::Calculate()
         axis.Normalize();
         angle = Mathematics::MathF::ACos(dot);
     }
-    else  // 向量是平行的。
+    else // 向量是平行的。
     {
         if (dot < 0.0f)
         {
