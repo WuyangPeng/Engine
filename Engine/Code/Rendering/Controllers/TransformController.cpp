@@ -23,6 +23,7 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/SceneGraph/Spatial.h"
+#include "Mathematics/Algebra/TransformDetail.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, TransformController);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TransformController);
