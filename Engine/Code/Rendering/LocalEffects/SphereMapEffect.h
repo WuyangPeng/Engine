@@ -15,9 +15,10 @@
 #include "VisualEffect.h"
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
-#include "Rendering/DataTypes/Colour.h"
+#include "Rendering/DataTypes/ColourDetail.h"
 #include "Rendering/Resources/ResourcesFwd.h"
 #include "Rendering/State/StateFwd.h"
+#include "Rendering/Shaders/ShaderDetail.h"
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(SphereMapEffect, SphereMapEffectImpl);
 
