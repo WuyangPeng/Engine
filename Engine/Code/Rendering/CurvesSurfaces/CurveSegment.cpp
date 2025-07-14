@@ -15,6 +15,7 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, CurveSegment)
 CORE_TOOLS_RTTI_DEFINE(Rendering, CurveSegment);
