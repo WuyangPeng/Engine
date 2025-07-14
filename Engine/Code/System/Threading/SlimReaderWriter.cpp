@@ -49,7 +49,12 @@ void System::ReleaseSlimReaderWriterLockShared(SlimReaderWriterLockPtr slimReade
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
+    #include SYSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26110)
+
     ::ReleaseSRWLockShared(slimReaderWriterLock);
+
+    #include SYSTEM_WARNING_POP
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
