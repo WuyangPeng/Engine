@@ -29,6 +29,7 @@
 #include "Framework/WindowProcess/Flags/MouseTypes.h"
 #include "Framework/WindowProcess/VirtualKeysTypes.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 
 #include <random>
 
