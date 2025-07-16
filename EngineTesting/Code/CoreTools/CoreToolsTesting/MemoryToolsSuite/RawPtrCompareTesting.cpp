@@ -11,7 +11,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/UnitTest/AssertExceptionMacro.h"
 #include "CoreTools/Helper/UnitTest/AssertTestMacro.h"
-#include "CoreTools/MemoryTools/RawIterators.h"
+#include "CoreTools/MemoryTools/RawIteratorsDetail.h"
 #include "CoreTools/MemoryTools/RawPtrCompare.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
