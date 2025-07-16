@@ -119,15 +119,15 @@ bool Rendering::WorldCoordinateFrameTesting::MatrixTest()
 
     for (auto outerIndex = 0; outerIndex < AVector::vectorSize; ++outerIndex)
     {
-#ifdef MATHEMATICS_USE_MATRIX_VECTOR
+        #ifdef MATHEMATICS_USE_MATRIX_VECTOR
 
         const auto vector1 = viewMatrix.GetRow(outerIndex);
 
-#else  // !MATHEMATICS_USE_MATRIX_VECTOR
+        #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
         const auto vector1 = viewMatrix.GetColumn(outerIndex);
 
-#endif  // MATHEMATICS_USE_MATRIX_VECTOR
+        #endif  // MATHEMATICS_USE_MATRIX_VECTOR
 
         for (auto innerIndex = 0; innerIndex < AVector::vectorSize; ++innerIndex)
         {
