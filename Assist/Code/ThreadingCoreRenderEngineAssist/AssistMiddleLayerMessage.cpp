@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.2.1 (2025/04/28 16:48)
+/// 版本：v0.0.0.0 (2025/07/16 20:05:20)
 
 #include "AssistMiddleLayerMessage.h"
 #include "Helper/AssistClassInvariantMacro.h"
@@ -14,7 +14,7 @@
 #include "Framework/MiddleLayer/ObjectLogicManagerDetail.h"
 #include "Framework/WindowProcess/WindowMessageDetail.h"
 
-ThreadingCoreRenderEngineAssist::AssistMiddleLayerMessage::AssistMiddleLayerMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory)
+ThreadingCoreRenderEngineAssist::AssistMiddleLayerMessage::AssistMiddleLayerMessage(const int64_t delta, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ delta, environmentDirectory }, alloc{ ConsoleAlloc::Create() }
 {
     ASSIST_SELF_CLASS_IS_VALID_1;
