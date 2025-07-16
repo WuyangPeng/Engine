@@ -14,6 +14,7 @@
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector2Tools.h"
 #include "Framework/WindowCreate/WindowSize.h"
+#include "Rendering/DataTypes/ColourDetail.h"
 
 Framework::PixelScreenTesting::PixelScreenTesting(const OStreamShared& stream)
     : ParentType{ stream }, random{ minColour, maxColour }
