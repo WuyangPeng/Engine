@@ -22,6 +22,7 @@
 #include "Network/NetworkMessage/MessageTargetDetail.h"
 #include "Network/NetworkMessage/MessageTypeCondition.h"
 #include "Network/NetworkMessage/MultipleMessageDetail.h"
+#include "Network/NetworkMessage/MessageContainerDetail.h"
 
 Network::MultipleMessageTesting::MultipleMessageTesting(const OStreamShared& stream)
     : ParentType{ stream }
