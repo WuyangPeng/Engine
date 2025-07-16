@@ -13,6 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/EntityManagerDetail.h"
 #include "CoreTools/MessageEvent/TelegramDetail.h"
+#include "CoreTools/MessageEvent/TelegramLessDetail.h"
 #include "CoreTools/MessageEvent/TelegramMessageManagerDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
