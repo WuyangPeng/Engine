@@ -12,6 +12,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
+#include "Mathematics/Algebra/Matrix3Detail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Objects3D/Ellipsoid3Detail.h"
 
