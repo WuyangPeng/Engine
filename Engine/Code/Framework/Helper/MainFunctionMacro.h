@@ -49,9 +49,9 @@
         }                                                                                                                                                                                        \
         int main(int argc, char** argv)                                                                                                                                                          \
         {                                                                                                                                                                                        \
-            return Framework::MainEntryPoint<namespaceName::helperClassName>(argc, argv, "", engineEnvironment, engineDirectory);                                                                \
+            System::UnusedFunction(argc, argv);                                                                                                                                                  \
+            return Framework::WinMainEntryPoint<namespaceName::helperClassName>(nullptr, "", engineEnvironment, engineDirectory, renderer, nullptr);                                             \
         }
-
 #endif  // SYSTEM_PLATFORM_WIN32
 
 #define CONSOLE_MAIN_FUNCTION(namespaceName, helperClassName, consoleTitle, engineEnvironment, engineDirectory)                         \
