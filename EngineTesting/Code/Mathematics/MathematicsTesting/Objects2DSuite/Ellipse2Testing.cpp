@@ -12,6 +12,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Objects2D/Ellipse2Detail.h"
 
 #include <random>
