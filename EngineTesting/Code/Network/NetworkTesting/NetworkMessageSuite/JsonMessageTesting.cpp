@@ -20,6 +20,7 @@
 #include "Network/NetworkMessage/MessageManager.h"
 #include "Network/NetworkMessage/MessageTypeCondition.h"
 #include "Network/NetworkMessage/NullMessage.h"
+#include "Network/NetworkMessage/MessageSourceDetail.h"
 
 using System::operator|;
 
