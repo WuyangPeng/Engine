@@ -13,6 +13,7 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "CoreTools/Console/ConsoleInstanceDetail.h"
 
 #include <iostream>
 
