@@ -30,6 +30,7 @@
 #include "Framework/WindowProcess/VirtualKeysTypes.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
+#include "Mathematics/Algebra/TransformDetail.h"
 
 #include <random>
 
