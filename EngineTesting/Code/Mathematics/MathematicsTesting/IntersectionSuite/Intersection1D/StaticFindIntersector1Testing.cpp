@@ -77,9 +77,9 @@ void Mathematics::StaticFindIntersector1Testing::IntersectorTest()
         for (auto i = 0; i < intersector1.GetNumIntersections(); ++i)
         {
             ASSERT_TRUE(MathF::Approximate(u0, intersector1.GetIntersection(i), 1e-8f) ||
-                        MathF::Approximate(u1, intersector1.GetIntersection(i), 1e-8f) ||
-                        MathF::Approximate(v0, intersector1.GetIntersection(i), 1e-8f) ||
-                        MathF::Approximate(v1, intersector1.GetIntersection(i), 1e-8f));
+                MathF::Approximate(u1, intersector1.GetIntersection(i), 1e-8f) ||
+                MathF::Approximate(v0, intersector1.GetIntersection(i), 1e-8f) ||
+                MathF::Approximate(v1, intersector1.GetIntersection(i), 1e-8f));
 
             ASSERT_TRUE(u0 <= intersector1.GetIntersection(i) && intersector1.GetIntersection(i) <= u1);
             ASSERT_TRUE(v0 <= intersector1.GetIntersection(i) && intersector1.GetIntersection(i) <= v1);

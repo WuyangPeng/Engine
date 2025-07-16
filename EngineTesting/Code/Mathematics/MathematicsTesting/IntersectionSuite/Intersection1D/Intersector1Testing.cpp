@@ -12,6 +12,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/MathematicsTesting/IntersectionSuite/Detail/Intersector1TestDetail.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
 
 #include <random>
 
