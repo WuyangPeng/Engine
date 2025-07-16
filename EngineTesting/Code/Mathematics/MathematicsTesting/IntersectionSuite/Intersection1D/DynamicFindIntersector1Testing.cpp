@@ -80,9 +80,9 @@ void Mathematics::DynamicFindIntersector1Testing::IntersectorTest()
             for (int i = 0; i < intersector1.GetNumIntersections(); ++i)
             {
                 ASSERT_TRUE(MathD::Approximate(u0, intersector1.GetIntersection(i), 1e-10) ||
-                            MathD::Approximate(u1, intersector1.GetIntersection(i), 1e-10) ||
-                            MathD::Approximate(v0, intersector1.GetIntersection(i), 1e-10) ||
-                            MathD::Approximate(v1, intersector1.GetIntersection(i), 1e-10));
+                    MathD::Approximate(u1, intersector1.GetIntersection(i), 1e-10) ||
+                    MathD::Approximate(v0, intersector1.GetIntersection(i), 1e-10) ||
+                    MathD::Approximate(v1, intersector1.GetIntersection(i), 1e-10));
 
                 ASSERT_TRUE(u0 <= intersector1.GetIntersection(i) && intersector1.GetIntersection(i) <= u1);
                 ASSERT_TRUE(v0 <= intersector1.GetIntersection(i) && intersector1.GetIntersection(i) <= v1);
@@ -135,9 +135,9 @@ void Mathematics::DynamicFindIntersector1Testing::IntersectorTest()
             for (auto i = 0; i < intersector1.GetNumIntersections(); ++i)
             {
                 ASSERT_TRUE(MathD::Approximate(firstU0, intersector1.GetIntersection(i), 1e-10) ||
-                            MathD::Approximate(firstU1, intersector1.GetIntersection(i), 1e-10) ||
-                            MathD::Approximate(firstV0, intersector1.GetIntersection(i), 1e-10) ||
-                            MathD::Approximate(firstV1, intersector1.GetIntersection(i), 1e-10));
+                    MathD::Approximate(firstU1, intersector1.GetIntersection(i), 1e-10) ||
+                    MathD::Approximate(firstV0, intersector1.GetIntersection(i), 1e-10) ||
+                    MathD::Approximate(firstV1, intersector1.GetIntersection(i), 1e-10));
 
                 ASSERT_TRUE(firstU0 - MathD::GetZeroTolerance() <= intersector1.GetIntersection(i) && intersector1.GetIntersection(i) <= firstU1 + MathD::GetZeroTolerance());
                 ASSERT_TRUE(firstV0 - MathD::GetZeroTolerance() <= intersector1.GetIntersection(i) && intersector1.GetIntersection(i) <= firstV1 + MathD::GetZeroTolerance());

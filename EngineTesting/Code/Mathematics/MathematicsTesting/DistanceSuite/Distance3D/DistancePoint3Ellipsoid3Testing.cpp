@@ -14,6 +14,7 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Distance/Distance3D/DistancePoint3Ellipsoid3Detail.h"
 #include "Mathematics/NumericalAnalysis/Equation.h"
+#include "Mathematics/NumericalAnalysis/EquationResultConstIteratorDetail.h"
 
 #include <random>
 
