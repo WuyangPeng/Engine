@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/QuaternionConstraintsDetail.h"
-#include "Mathematics/Algebra/Vector2.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Base/MathDetail.h"
 
 #include <random>
