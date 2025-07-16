@@ -13,6 +13,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Intersection/DynamicFindIntersector1Detail.h"
 #include "Mathematics/Intersection/StaticTestIntersector1Detail.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
 
 #include <random>
 
