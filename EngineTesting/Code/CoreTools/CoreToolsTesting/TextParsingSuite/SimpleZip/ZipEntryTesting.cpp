@@ -23,6 +23,7 @@
 #include "CoreTools/TextParsing/SimpleZip/ZipArchive.h"
 #include "CoreTools/TextParsing/SimpleZip/ZipEntry.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "CoreTools/Base/UniqueIdManagerDetail.h"
 
 using namespace std::literals;
 
