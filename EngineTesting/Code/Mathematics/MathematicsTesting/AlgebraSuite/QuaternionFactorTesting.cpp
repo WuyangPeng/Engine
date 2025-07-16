@@ -14,6 +14,7 @@
 #include "Mathematics/Algebra/Flags/QuaternionFlags.h"
 #include "Mathematics/Algebra/Polynomial.h"
 #include "Mathematics/Algebra/QuaternionFactorDetail.h"
+#include "Mathematics/Algebra/QuaternionDetail.h"
 
 #include <random>
 
