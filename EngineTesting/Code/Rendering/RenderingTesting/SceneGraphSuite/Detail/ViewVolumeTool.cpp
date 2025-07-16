@@ -13,6 +13,7 @@
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Mathematics/Algebra/TransformDetail.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
+#include "Mathematics/Algebra/BoundingSphereDetail.h"
 
 Rendering::ViewVolumeTool::ViewVolumeTool(uint32_t randomSeed)
     : generator{ randomSeed },
