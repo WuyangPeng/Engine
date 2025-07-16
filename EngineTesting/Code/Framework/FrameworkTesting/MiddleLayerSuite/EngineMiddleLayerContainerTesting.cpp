@@ -23,6 +23,7 @@
 #include "Framework/WindowCreate/WindowSize.h"
 #include "Framework/WindowProcess/Flags/MouseTypes.h"
 #include "Framework/WindowProcess/VirtualKeysTypes.h"
+#include "Framework/MiddleLayer/InputManagerDetail.h"
 
 Framework::EngineMiddleLayerContainerTesting::EngineMiddleLayerContainerTesting(const OStreamShared& stream)
     : ParentType{ stream }
