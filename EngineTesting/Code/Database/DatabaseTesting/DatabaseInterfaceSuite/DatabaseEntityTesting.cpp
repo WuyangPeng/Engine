@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Database/Configuration/ConfigurationStrategy.h"
-#include "Database/DatabaseInterface/BasisDatabase.h"
+#include "Database/DatabaseInterface/BasisDatabaseDetail.h"
 #include "Database/DatabaseInterface/BasisDatabaseManager.h"
 #include "Toolset/Database/DatabaseEntity/DatabaseEntity/Chapter.h"
 
