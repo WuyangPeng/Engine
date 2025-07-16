@@ -14,6 +14,7 @@
 #include "Rendering/RenderingTesting/SceneGraphSuite/Detail/ViewVolumeTest.h"
 #include "Rendering/SceneGraph/Flags/CameraFlags.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
+#include "Mathematics/Algebra/Matrix3Detail.h"
 
 Rendering::ProjectionMatrixTesting::ProjectionMatrixTesting(const OStreamShared& stream)
     : ParentType{ stream },
@@ -64,15 +65,15 @@ void Rendering::ProjectionMatrixTesting::DefaultTest(bool isPerspective, DepthTy
     constexpr auto epsilon = 1e-4f;
     const auto viewVolume = ViewVolumeTest::Create(isPerspective, depthType, epsilon);
 
-#ifdef MATHEMATICS_USE_MATRIX_VECTOR
+    #ifdef MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrixApproximateFunction, viewVolume->GetProjectionViewMatrix(), viewVolume->GetProjectionMatrix() * viewVolume->GetViewMatrix(), epsilon);
 
-#else  // !MATHEMATICS_USE_MATRIX_VECTOR
+    #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrixApproximateFunction, viewVolume->GetProjectionViewMatrix(), viewVolume->GetViewMatrix() * viewVolume->GetProjectionMatrix(), epsilon);
 
-#endif  // MATHEMATICS_USE_MATRIX_VECTOR
+    #endif  // MATHEMATICS_USE_MATRIX_VECTOR
 }
 
 void Rendering::ProjectionMatrixTesting::DefaultFrustumTest(bool isPerspective, DepthType depthType, FrustumTestNotNullFunction frustumTestFunction)
@@ -136,7 +137,7 @@ bool Rendering::ProjectionMatrixTesting::MinusOneToOneNoPerspectiveTest()
 
 void Rendering::ProjectionMatrixTesting::ZeroToOnePerspectiveFrustumTest(const Matrix& projectionViewMatrix, const Container& frustum, float epsilon)
 {
-#ifdef MATHEMATICS_USE_MATRIX_VECTOR
+    #ifdef MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE(projectionViewMatrix(0, 0), 2.0f * frustum.at(0) * frustum.at(8), epsilon);
     ASSERT_APPROXIMATE(projectionViewMatrix(0, 1), 0.0f, epsilon);
@@ -155,7 +156,7 @@ void Rendering::ProjectionMatrixTesting::ZeroToOnePerspectiveFrustumTest(const M
     ASSERT_APPROXIMATE(projectionViewMatrix(3, 2), 1.0f, epsilon);
     ASSERT_APPROXIMATE(projectionViewMatrix(3, 3), 0.0f, epsilon);
 
-#else  // !MATHEMATICS_USE_MATRIX_VECTOR
+    #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE(projectionViewMatrix(0, 0), 2.0f * frustum.at(0) * frustum.at(8), epsilon);
     ASSERT_APPROXIMATE(projectionViewMatrix(1, 0), 0.0f, epsilon);
@@ -174,12 +175,12 @@ void Rendering::ProjectionMatrixTesting::ZeroToOnePerspectiveFrustumTest(const M
     ASSERT_APPROXIMATE(projectionViewMatrix(2, 3), 1.0f, epsilon);
     ASSERT_APPROXIMATE(projectionViewMatrix(3, 3), 0.0f, epsilon);
 
-#endif  // MATHEMATICS_USE_MATRIX_VECTOR
+    #endif  // MATHEMATICS_USE_MATRIX_VECTOR
 }
 
 void Rendering::ProjectionMatrixTesting::ZeroToOneNoPerspectiveFrustumTest(const Matrix& projectionViewMatrix, const Container& frustum, float epsilon)
 {
-#ifdef MATHEMATICS_USE_MATRIX_VECTOR
+    #ifdef MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE(projectionViewMatrix(0, 0), 2.0f * frustum.at(8), epsilon);
     ASSERT_APPROXIMATE(projectionViewMatrix(0, 1), 0.0f, epsilon);
@@ -198,7 +199,7 @@ void Rendering::ProjectionMatrixTesting::ZeroToOneNoPerspectiveFrustumTest(const
     ASSERT_APPROXIMATE(projectionViewMatrix(3, 2), 0.0f, epsilon);
     ASSERT_APPROXIMATE(projectionViewMatrix(3, 3), 1.0f, epsilon);
 
-#else  // !MATHEMATICS_USE_MATRIX_VECTOR
+    #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE(projectionViewMatrix(0, 0), 2.0f * frustum.at(8), epsilon);
     ASSERT_APPROXIMATE(projectionViewMatrix(1, 0), 0.0f, epsilon);
@@ -217,12 +218,12 @@ void Rendering::ProjectionMatrixTesting::ZeroToOneNoPerspectiveFrustumTest(const
     ASSERT_APPROXIMATE(projectionViewMatrix(2, 3), 0.0f, epsilon);
     ASSERT_APPROXIMATE(projectionViewMatrix(3, 3), 1.0f, epsilon);
 
-#endif  // MATHEMATICS_USE_MATRIX_VECTOR
+    #endif  // MATHEMATICS_USE_MATRIX_VECTOR
 }
 
 void Rendering::ProjectionMatrixTesting::MinusOneToOnePerspectiveFrustumTest(const Matrix& projectionViewMatrix, const Container& frustum, float epsilon)
 {
-#ifdef MATHEMATICS_USE_MATRIX_VECTOR
+    #ifdef MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE(projectionViewMatrix(0, 0), 2.0f * frustum.at(0) * frustum.at(8), epsilon);
     ASSERT_APPROXIMATE(projectionViewMatrix(0, 1), 0.0f, epsilon);
@@ -241,7 +242,7 @@ void Rendering::ProjectionMatrixTesting::MinusOneToOnePerspectiveFrustumTest(con
     ASSERT_APPROXIMATE(projectionViewMatrix(3, 2), 1.0f, epsilon);
     ASSERT_APPROXIMATE(projectionViewMatrix(3, 3), 0.0f, epsilon);
 
-#else  // !MATHEMATICS_USE_MATRIX_VECTOR
+    #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE(projectionViewMatrix(0, 0), 2.0f * frustum.at(0) * frustum.at(8), epsilon);
     ASSERT_APPROXIMATE(projectionViewMatrix(1, 0), 0.0f, epsilon);
@@ -260,12 +261,12 @@ void Rendering::ProjectionMatrixTesting::MinusOneToOnePerspectiveFrustumTest(con
     ASSERT_APPROXIMATE(projectionViewMatrix(2, 3), 1.0f, epsilon);
     ASSERT_APPROXIMATE(projectionViewMatrix(3, 3), 0.0f, epsilon);
 
-#endif  // MATHEMATICS_USE_MATRIX_VECTOR
+    #endif  // MATHEMATICS_USE_MATRIX_VECTOR
 }
 
 void Rendering::ProjectionMatrixTesting::MinusOneToOneNoPerspectiveFrustumTest(const Matrix& projectionViewMatrix, const Container& frustum, float epsilon)
 {
-#ifdef MATHEMATICS_USE_MATRIX_VECTOR
+    #ifdef MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE(projectionViewMatrix(0, 0), 2.0f * frustum.at(8), epsilon);
     ASSERT_APPROXIMATE(projectionViewMatrix(0, 1), 0.0f, epsilon);
@@ -284,7 +285,7 @@ void Rendering::ProjectionMatrixTesting::MinusOneToOneNoPerspectiveFrustumTest(c
     ASSERT_APPROXIMATE(projectionViewMatrix(3, 2), 0.0f, epsilon);
     ASSERT_APPROXIMATE(projectionViewMatrix(3, 3), 1.0f, epsilon);
 
-#else  // !MATHEMATICS_USE_MATRIX_VECTOR
+    #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE(projectionViewMatrix(0, 0), 2.0f * frustum.at(8), epsilon);
     ASSERT_APPROXIMATE(projectionViewMatrix(1, 0), 0.0f, epsilon);
@@ -303,5 +304,5 @@ void Rendering::ProjectionMatrixTesting::MinusOneToOneNoPerspectiveFrustumTest(c
     ASSERT_APPROXIMATE(projectionViewMatrix(2, 3), 0.0f, epsilon);
     ASSERT_APPROXIMATE(projectionViewMatrix(3, 3), 1.0f, epsilon);
 
-#endif  // MATHEMATICS_USE_MATRIX_VECTOR
+    #endif  // MATHEMATICS_USE_MATRIX_VECTOR
 }
