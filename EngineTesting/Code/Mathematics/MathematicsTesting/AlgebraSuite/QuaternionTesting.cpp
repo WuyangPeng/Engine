@@ -11,7 +11,7 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Mathematics/Algebra/Matrix3.h"
+#include "Mathematics/Algebra/Matrix3Detail.h"
 #include "Mathematics/Algebra/QuaternionDetail.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
