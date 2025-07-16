@@ -12,6 +12,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
+#include "Mathematics/Algebra/VariableMatrixDetail.h"
 #include "Mathematics/Approximation/ParaboloidFit3Detail.h"
 
 #include <random>
