@@ -21,7 +21,7 @@
 
 #if !defined(ASSIST_ASSERT_LEVEL)
 
-#define ASSIST_ASSERT_LEVEL 4
+    #define ASSIST_ASSERT_LEVEL 4
 
 #endif  // ASSIST_ASSERT_LEVEL
 
@@ -29,14 +29,14 @@ static_assert(ASSIST_ASSERT_LEVEL <= USER_ASSERT_LEVEL, "Assert level definition
 
 #if 0 <= ASSIST_ASSERT_LEVEL
 
-#define ASSIST_ASSERTION_0(condition, format, ...) \
+    #define ASSIST_ASSERTION_0(condition, format, ...) \
         USER_ASSERTION_0((condition), (format), __VA_ARGS__)
-#define ASSIST_ASSERTION_USE_FUNCTION_DESCRIBED_0(condition, functionDescribed, format, ...) \
+    #define ASSIST_ASSERTION_USE_FUNCTION_DESCRIBED_0(condition, functionDescribed, format, ...) \
         USER_ASSERTION_USE_FUNCTION_DESCRIBED_0((condition), (functionDescribed), (format), __VA_ARGS__)
 
-#define ASSIST_ASSERTION_DEBUG(condition, format, ...) \
+    #define ASSIST_ASSERTION_DEBUG(condition, format, ...) \
         USER_ASSERTION_DEBUG((condition), (format), __VA_ARGS__)
-#define ASSIST_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(condition, functionDescribed, format, ...) \
+    #define ASSIST_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(condition, functionDescribed, format, ...) \
         USER_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED((condition), (functionDescribed), (format), __VA_ARGS__)
 
 #else  // ASSIST_ASSERT_LEVEL < 0
@@ -51,9 +51,9 @@ static_assert(ASSIST_ASSERT_LEVEL <= USER_ASSERT_LEVEL, "Assert level definition
 
 #if 1 <= ASSIST_ASSERT_LEVEL
 
-#define ASSIST_ASSERTION_1(condition, format, ...) \
+    #define ASSIST_ASSERTION_1(condition, format, ...) \
         USER_ASSERTION_1((condition), (format), __VA_ARGS__)
-#define ASSIST_ASSERTION_USE_FUNCTION_DESCRIBED_1(condition, functionDescribed, format, ...) \
+    #define ASSIST_ASSERTION_USE_FUNCTION_DESCRIBED_1(condition, functionDescribed, format, ...) \
         USER_ASSERTION_USE_FUNCTION_DESCRIBED_1((condition), (functionDescribed), (format), __VA_ARGS__)
 
 #else  // ASSIST_ASSERT_LEVEL < 1
@@ -65,9 +65,9 @@ static_assert(ASSIST_ASSERT_LEVEL <= USER_ASSERT_LEVEL, "Assert level definition
 
 #if 2 <= ASSIST_ASSERT_LEVEL
 
-#define ASSIST_ASSERTION_2(condition, format, ...) \
+    #define ASSIST_ASSERTION_2(condition, format, ...) \
         USER_ASSERTION_2((condition), (format), __VA_ARGS__)
-#define ASSIST_ASSERTION_USE_FUNCTION_DESCRIBED_2(condition, functionDescribed, format, ...) \
+    #define ASSIST_ASSERTION_USE_FUNCTION_DESCRIBED_2(condition, functionDescribed, format, ...) \
         USER_ASSERTION_USE_FUNCTION_DESCRIBED_2((condition), (functionDescribed), (format), __VA_ARGS__)
 
 #else  // ASSIST_ASSERT_LEVEL < 2
@@ -79,9 +79,9 @@ static_assert(ASSIST_ASSERT_LEVEL <= USER_ASSERT_LEVEL, "Assert level definition
 
 #if 3 <= ASSIST_ASSERT_LEVEL
 
-#define ASSIST_ASSERTION_3(condition, format, ...) \
+    #define ASSIST_ASSERTION_3(condition, format, ...) \
         USER_ASSERTION_3((condition), (format), __VA_ARGS__)
-#define ASSIST_ASSERTION_USE_FUNCTION_DESCRIBED_3(condition, functionDescribed, format, ...) \
+    #define ASSIST_ASSERTION_USE_FUNCTION_DESCRIBED_3(condition, functionDescribed, format, ...) \
         USER_ASSERTION_USE_FUNCTION_DESCRIBED_3((condition), (functionDescribed), (format), __VA_ARGS__)
 
 #else  // ASSIST_ASSERT_LEVEL < 3
@@ -93,9 +93,9 @@ static_assert(ASSIST_ASSERT_LEVEL <= USER_ASSERT_LEVEL, "Assert level definition
 
 #if 4 <= ASSIST_ASSERT_LEVEL
 
-#define ASSIST_ASSERTION_4(condition, format, ...) \
+    #define ASSIST_ASSERTION_4(condition, format, ...) \
         USER_ASSERTION_4((condition), (format), __VA_ARGS__)
-#define ASSIST_ASSERTION_USE_FUNCTION_DESCRIBED_4(condition, functionDescribed, format, ...) \
+    #define ASSIST_ASSERTION_USE_FUNCTION_DESCRIBED_4(condition, functionDescribed, format, ...) \
         USER_ASSERTION_USE_FUNCTION_DESCRIBED_4((condition), (functionDescribed), (format), __VA_ARGS__)
 
 #else  // ASSIST_ASSERT_LEVEL < 4
