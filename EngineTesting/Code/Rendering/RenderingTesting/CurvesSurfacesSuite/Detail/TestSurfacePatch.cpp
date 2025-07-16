@@ -15,6 +15,7 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "Mathematics/Algebra/Matrix2Detail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, TestSurfacePatch);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TestSurfacePatch);
