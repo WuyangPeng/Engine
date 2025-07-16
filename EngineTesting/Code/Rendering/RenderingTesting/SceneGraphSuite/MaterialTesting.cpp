@@ -12,6 +12,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/LocalEffects/Material.h"
+#include "Rendering/DataTypes/ColourDetail.h"
 
 Rendering::MaterialTesting::MaterialTesting(const OStreamShared& stream)
     : ParentType{ stream }
