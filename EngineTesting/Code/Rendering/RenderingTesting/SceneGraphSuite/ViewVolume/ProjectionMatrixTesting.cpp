@@ -13,6 +13,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/RenderingTesting/SceneGraphSuite/Detail/ViewVolumeTest.h"
 #include "Rendering/SceneGraph/Flags/CameraFlags.h"
+#include "Mathematics/Algebra/Vector3Detail.h"
 
 Rendering::ProjectionMatrixTesting::ProjectionMatrixTesting(const OStreamShared& stream)
     : ParentType{ stream },
