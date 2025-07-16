@@ -24,6 +24,7 @@
 #include "Framework/WindowCreate/WindowSize.h"
 #include "Framework/WindowProcess/Flags/MouseTypes.h"
 #include "Framework/WindowProcess/VirtualKeysTypes.h"
+#include "Mathematics/Algebra/TransformDetail.h"
 
 #include <random>
 
