@@ -38,7 +38,11 @@ void Framework::WindowHIcon::CheckUpHIcon() noexcept
     {
         hIcon = System::LoadSystemIcon(nullptr, System::gApplication);
 
+        #ifdef TCRE_SYSTEM_PLATFORM
+
         LOG_SINGLETON_ENGINE_APPENDER(Warn, Framework, SYSTEM_TEXT("º”‘ÿÕº±Í ß∞‹£°"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+
+        #endif // TCRE_SYSTEM_PLATFORM
     }
 }
 
