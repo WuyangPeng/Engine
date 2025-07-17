@@ -93,6 +93,18 @@ else ()
 
 endif ()
 
+if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
+
+    # 编译选项（编译器）
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}   -fPIC")
+
+    # 符号可见性
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}   -fvisibility=hidden")
+
+endif ()
+
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-z,defs")
 
 # 包含子项目。

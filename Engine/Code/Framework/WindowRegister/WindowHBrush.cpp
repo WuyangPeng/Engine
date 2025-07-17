@@ -27,7 +27,7 @@ void Framework::WindowHBrush::CheckUpHBrush() noexcept
     if (hBrush == nullptr)
     {
         hBrush = System::GetSystemStockObject(WindowsBrushTypes::WhiteBrush);
-        
+
         #ifdef SYSTEM_PLATFORM_WIN32
 
         LOG_SINGLETON_ENGINE_APPENDER(Warn, Framework, SYSTEM_TEXT("º”‘ÿ±≥æ∞ª≠À¢ ß∞‹£°"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
