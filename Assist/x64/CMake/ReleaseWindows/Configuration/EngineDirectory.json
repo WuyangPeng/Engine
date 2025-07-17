@@ -1,0 +1,37 @@
+{
+  "Resource": "Resource",
+  "Configuration": "Configuration",
+
+  "OpenGL": {
+    "Directory": "",
+    "BigEndian": "BigEndian",
+    "LittleEndian": "",
+    "Shader": "Shader",
+    "Scene": "Scene",
+    "Texture": "Texture",
+    "Vertex": "Vertex",
+    "Image": "Image"
+  },
+
+  "DirectX": {
+    "Directory": "",
+    "BigEndian": "BigEndian",
+    "LittleEndian": "",
+    "Shader": "Shader",
+    "Scene": "Scene",
+    "Texture": "Texture",
+    "Vertex": "Vertex",
+    "Image": "Image"
+  },
+
+  "Default": {
+    "Directory": "",
+    "BigEndian": "BigEndian",
+    "LittleEndian": "",
+    "Shader": "Shader",
+    "Scene": "Scene",
+    "Texture": "Texture",
+    "Vertex": "Vertex",
+    "Image": "Image"
+  }
+}

@@ -9,7 +9,7 @@ xcopy "%ProjectDir%/Configuration/EngineDirectory.json" "%Target%" /F /Y
 xcopy "%ProjectDir%/Configuration/%ProjectName%/Renderer.json" "%Target%/%ProjectName%/" /F /Y
 xcopy "%ProjectDir%/Configuration/Project.json" "%Target%" /F /Y
 xcopy "%ProjectDir%/Configuration/Testing.json" "%Target%" /F /Y
-xcopy "%ProjectDir%/Configuration/%ProjectName%.json" %Target%" /F /Y
+robocopy "%ProjectDir%/Configuration" "%Target%" %ProjectName%.json /COPY:DAT /R:0 /W:0
 xcopy "%ProjectDir%/Configuration/Global.json" "%Target%" /F /Y
 xcopy "%ProjectDir%/Configuration/Smtp.json" "%Target%" /F /Y
 xcopy "%ProjectDir%/Configuration/%ProjectName%/Database.json" "%Target%/%ProjectName%" /F /Y

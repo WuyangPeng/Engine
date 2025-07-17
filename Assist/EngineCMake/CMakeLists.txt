@@ -133,6 +133,7 @@ if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
 
     set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../x64/CMake/DebugWindows)
     set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../x64/CMake/DebugWindows)
+    set(BAT_NAME CopyDebugX64Dll)
 
 else ()
 
@@ -140,10 +141,45 @@ else ()
 
     set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../x64/CMake/ReleaseWindows)
     set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../x64/CMake/ReleaseWindows)
+    set(BAT_NAME CopyReleaseX64Dll)
 
 endif ()
 
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-z,defs")
+
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+
+    # 创建目录
+    if (NOT EXISTS ${EXECUTABLE_OUTPUT_PATH})
+        file(MAKE_DIRECTORY ${EXECUTABLE_OUTPUT_PATH})
+        message(STATUS "Created directory: ${EXECUTABLE_OUTPUT_PATH}")
+    else ()
+        message(STATUS "Directory already exists: ${EXECUTABLE_OUTPUT_PATH}")
+    endif ()
+
+    # 执行批处理文件 CopyX64Dll.bat，并传递参数 x64 和 目标路径
+    add_custom_target(
+            RunBatFile ALL
+            COMMAND
+            COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/../../Bat/${BAT_NAME}.bat x64 ${EXECUTABLE_OUTPUT_PATH}
+            COMMENT "Running ${BAT_NAME}.bat after build"
+    )
+
+    # 检查执行结果
+    if (result)
+        message(WARNING "Batch file execution failed with exit code: ${result}")
+        message("Error output: ${error}")
+    else ()
+        message(STATUS "Batch file executed successfully.")
+        message("Output: ${EXECUTABLE_OUTPUT_PATH}")
+    endif ()
+
+    add_custom_target(copy_files ALL
+            COMMAND ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -P ${CMAKE_CURRENT_SOURCE_DIR}/CopyFiles.cmake
+            COMMENT "Copying files to destination before build"
+    )
+
+endif ()
 
 # 包含子项目。
 
