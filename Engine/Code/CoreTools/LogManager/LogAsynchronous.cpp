@@ -18,6 +18,7 @@ SINGLETON_GET_PTR_DEFINE(CoreTools, LogAsynchronous);
 
 CoreTools::LogAsynchronous::LogAsynchronousUniquePtr CoreTools::LogAsynchronous::logAsynchronous{};
 #include <iostream>
+
 void CoreTools::LogAsynchronous::Create()
 {
     logAsynchronous = std::make_unique<CoreTools::LogAsynchronous>(LogAsynchronousCreate::Init);
@@ -73,6 +74,7 @@ void CoreTools::LogAsynchronous::Run()
 
     CORE_TOOLS_CLASS_IS_VALID_9;
     std::cout << &logAsynchronous << std::endl;
+    std::cout << this << std::endl;
     impl->SetThread();
 }
 
