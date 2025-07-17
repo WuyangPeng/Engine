@@ -17,10 +17,12 @@
 SINGLETON_GET_PTR_DEFINE(CoreTools, LogAsynchronous);
 
 CoreTools::LogAsynchronous::LogAsynchronousUniquePtr CoreTools::LogAsynchronous::logAsynchronous{};
-
+#include <iostream>
 void CoreTools::LogAsynchronous::Create()
 {
     logAsynchronous = std::make_unique<CoreTools::LogAsynchronous>(LogAsynchronousCreate::Init);
+
+    std::cout << &logAsynchronous << std::endl;
 }
 
 void CoreTools::LogAsynchronous::Destroy() noexcept
@@ -70,7 +72,7 @@ void CoreTools::LogAsynchronous::Run()
     SINGLETON_SCOPED_MUTEX_ENTER_MEMBER;
 
     CORE_TOOLS_CLASS_IS_VALID_9;
-
+    std::cout << &logAsynchronous << std::endl;
     impl->SetThread();
 }
 
