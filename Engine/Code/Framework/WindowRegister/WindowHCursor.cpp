@@ -38,7 +38,11 @@ void Framework::WindowHCursor::CheckUpHCursor() noexcept
     {
         hCursor = System::LoadSystemCursor(nullptr, System::gArrow);
 
+        #ifdef SYSTEM_PLATFORM_WIN32
+
         LOG_SINGLETON_ENGINE_APPENDER(Warn, Framework, SYSTEM_TEXT("º”‘ÿπ‚±Í ß∞‹£°"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+
+        #endif // SYSTEM_PLATFORM_WIN32
     }
 }
 
