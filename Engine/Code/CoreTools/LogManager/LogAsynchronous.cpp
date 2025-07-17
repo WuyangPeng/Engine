@@ -24,6 +24,7 @@ void CoreTools::LogAsynchronous::Create()
     logAsynchronous = std::make_unique<CoreTools::LogAsynchronous>(LogAsynchronousCreate::Init);
 
     std::cout << &logAsynchronous << std::endl;
+    std::cout << GetSingletonPtr() << std::endl;
 }
 
 void CoreTools::LogAsynchronous::Destroy() noexcept
@@ -74,6 +75,7 @@ void CoreTools::LogAsynchronous::Run()
 
     CORE_TOOLS_CLASS_IS_VALID_9;
     std::cout << &logAsynchronous << std::endl;
+    std::cout << GetSingletonPtr() << std::endl;
     std::cout << this << std::endl;
     impl->SetThread();
 }
