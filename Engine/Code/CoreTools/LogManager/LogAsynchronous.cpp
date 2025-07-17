@@ -17,13 +17,10 @@
 SINGLETON_GET_PTR_DEFINE(CoreTools, LogAsynchronous);
 
 CoreTools::LogAsynchronous::LogAsynchronousUniquePtr CoreTools::LogAsynchronous::logAsynchronous{};
-#include <iostream>
+
 void CoreTools::LogAsynchronous::Create()
 {
     logAsynchronous = std::make_unique<CoreTools::LogAsynchronous>(LogAsynchronousCreate::Init);
-    std::cout << "addr = "
-          <<  &ParentType::singleton
-          << '\n';
 }
 
 void CoreTools::LogAsynchronous::Destroy() noexcept
@@ -69,9 +66,7 @@ void CoreTools::LogAsynchronous::Registered(const OStreamShared& streamShared, c
 }
 
 void CoreTools::LogAsynchronous::Run()
-{std::cout << "addr = "
-          <<  &ParentType::singleton
-          << '\n';
+{
     SINGLETON_SCOPED_MUTEX_ENTER_MEMBER;
 
     CORE_TOOLS_CLASS_IS_VALID_9;

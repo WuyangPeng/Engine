@@ -56,7 +56,7 @@ namespace CoreTools
         void DeleteSingleton() const noexcept(gAssert < 2 || gCoreToolsAssert < 2);
         static void CheckSingleton() noexcept(gAssert < 0 || gCoreToolsAssert < 0);
 
-    protected:
+    private:
         static PointType singleton;
     };
 }
