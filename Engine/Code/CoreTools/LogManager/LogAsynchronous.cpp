@@ -25,6 +25,7 @@ void CoreTools::LogAsynchronous::Create()
 
     std::cout << &logAsynchronous << std::endl;
     std::cout << GetSingletonPtr() << std::endl;
+    std::cout << logAsynchronous->GetSingletonPtr() << std::endl;
 }
 
 void CoreTools::LogAsynchronous::Destroy() noexcept
