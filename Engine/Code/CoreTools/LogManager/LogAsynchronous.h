@@ -29,7 +29,7 @@ namespace CoreTools
     {
     public:
         NON_COPY_TYPE_DECLARE(LogAsynchronous);
-        using ParentType = Singleton<LogAsynchronous>;
+        using ParentType = Singleton<LogAsynchronous, MutexCreate::UseNull>;
 
         using String = System::String;
         using AppenderManagerSharedPtr = std::shared_ptr<AppenderManager>;
