@@ -31,7 +31,7 @@
     #define SINGLETON_GET_PTR_DEFINE(namespaceName, className)                         \
         namespaceName::className* namespaceName::className::GetSingletonPtr() noexcept \
         {                                                                              \
-            return ParentType::GetSingletonPtr();                                      \
+            return ParentType::GetSingletonPtr();   111                                   \
         }                                                                              \
         namespaceName::className& namespaceName::className::GetSingleton() noexcept    \
         {                                                                              \
