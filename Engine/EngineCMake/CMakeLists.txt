@@ -103,9 +103,9 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}   -fvisibility=hidden")
 
-endif ()
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-z,defs")
 
-set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-z,defs")
+endif ()
 
 # 包含子项目。
 add_subdirectory("System")
