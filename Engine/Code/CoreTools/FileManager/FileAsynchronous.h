@@ -27,7 +27,7 @@ namespace CoreTools
     {
     public:
         NON_COPY_TYPE_DECLARE(FileAsynchronous);
-        using ParentType = Singleton<FileAsynchronous>;
+        using ParentType = Singleton<FileAsynchronous, MutexCreate::UseNull>;
 
         using String = System::String;
 
