@@ -18,7 +18,6 @@
 
 template <typename T, CoreTools::MutexCreate MutexCreate>
 typename CoreTools::Singleton<T, MutexCreate>::PointType CoreTools::Singleton<T, MutexCreate>::singleton{ nullptr };
-#include <iostream>
 template <typename T, CoreTools::MutexCreate MutexCreate>
 CoreTools::Singleton<T, MutexCreate>::Singleton() noexcept
 {
@@ -30,13 +29,12 @@ void CoreTools::Singleton<T, MutexCreate>::InitSingleton() noexcept(gAssert < 2 
 {
     CORE_TOOLS_ASSERTION_2(singleton == nullptr, "单例%s重复初始化！", typeid(T).name());
 
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26491)
+    #include SYSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26491)
 
     singleton = static_cast<T*>(this);
 
-#include SYSTEM_WARNING_POP
-    std::cout <<"1" << &singleton << std::endl;
+    #include SYSTEM_WARNING_POP
 }
 
 template <typename T, CoreTools::MutexCreate MutexCreate>
@@ -49,7 +47,7 @@ template <typename T, CoreTools::MutexCreate MutexCreate>
 void CoreTools::Singleton<T, MutexCreate>::DeleteSingleton() const noexcept(gAssert < 2 || gCoreToolsAssert < 2)
 {
     CORE_TOOLS_ASSERTION_2(singleton != nullptr, "单例%s重复删除！", typeid(T).name());
-    std::cout<<"2" << &singleton << std::endl;
+
     singleton = nullptr;
 }
 
@@ -63,7 +61,7 @@ template <typename T, CoreTools::MutexCreate MutexCreate>
 typename CoreTools::Singleton<T, MutexCreate>::PointType CoreTools::Singleton<T, MutexCreate>::GetSingletonPtr() noexcept
 {
     System::NoexceptNoReturn(&ClassType::CheckSingleton);
-    std::cout<<"3" << &singleton << std::endl;
+
     return singleton;
 }
 

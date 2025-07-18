@@ -16,17 +16,12 @@
 
 SINGLETON_GET_PTR_DEFINE(CoreTools, LogAsynchronous);
 
-template class CoreTools::Singleton<CoreTools::LogAsynchronous, CoreTools::MutexCreate::UseNull>;
 CoreTools::LogAsynchronous::LogAsynchronousUniquePtr CoreTools::LogAsynchronous::logAsynchronous{};
-#include <iostream>
+
 
 void CoreTools::LogAsynchronous::Create()
 {
     logAsynchronous = std::make_unique<CoreTools::LogAsynchronous>(LogAsynchronousCreate::Init);
-
-    std::cout << &logAsynchronous << std::endl;
-    std::cout << GetSingletonPtr() << std::endl;
-    std::cout << logAsynchronous->GetSingletonPtr() << std::endl;
 }
 
 void CoreTools::LogAsynchronous::Destroy() noexcept
@@ -76,9 +71,7 @@ void CoreTools::LogAsynchronous::Run()
     SINGLETON_SCOPED_MUTEX_ENTER_MEMBER;
 
     CORE_TOOLS_CLASS_IS_VALID_9;
-    std::cout << &logAsynchronous << std::endl;
-    std::cout << GetSingletonPtr() << std::endl;
-    std::cout << this << std::endl;
+
     impl->SetThread();
 }
 
