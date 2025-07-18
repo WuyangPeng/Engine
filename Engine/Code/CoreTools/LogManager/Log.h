@@ -33,7 +33,7 @@ namespace CoreTools
     {
     public:
         NON_COPY_TYPE_DECLARE(Log);
-        using ParentType = Singleton<Log>;
+        using ParentType = Singleton<Log, MutexCreate::UseStdRecursive>;
 
         using String = System::String;
 
