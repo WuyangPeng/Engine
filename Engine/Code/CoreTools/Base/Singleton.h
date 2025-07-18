@@ -34,7 +34,7 @@ namespace CoreTools
 
     public:
         NODISCARD static ReferenceType GetSingleton() noexcept;
-        NODISCARD static PointType GetSingletonPtr(ClassType* self = nullptr, bool isDeleteSingleton = false) noexcept;
+        NODISCARD static PointType GetSingletonPtr() noexcept;
 
     protected:
         static constexpr auto isStdMutex = MutexCreate == MutexCreate::UseOriginalStd || MutexCreate == MutexCreate::UseOriginalStdRecursive;
@@ -52,9 +52,12 @@ namespace CoreTools
         Singleton& operator=(Singleton&& rhs) noexcept = delete;
 
     private:
-        static void InitSingleton(PointType& singleton, ClassType* self) noexcept(gAssert < 2 || gCoreToolsAssert < 2);
-        static void DeleteSingleton(PointType& singleton) noexcept(gAssert < 2 || gCoreToolsAssert < 2);
-        static void CheckSingleton(PointType singleton) noexcept(gAssert < 0 || gCoreToolsAssert < 0);
+        void InitSingleton() noexcept(gAssert < 2 || gCoreToolsAssert < 2);
+        void DeleteSingleton() const noexcept(gAssert < 2 || gCoreToolsAssert < 2);
+        static void CheckSingleton() noexcept(gAssert < 0 || gCoreToolsAssert < 0);
+
+    private:
+        static PointType singleton;
     };
 }
 
