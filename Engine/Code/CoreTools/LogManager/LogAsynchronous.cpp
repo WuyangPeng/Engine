@@ -18,7 +18,6 @@ SINGLETON_GET_PTR_DEFINE(CoreTools, LogAsynchronous);
 
 CoreTools::LogAsynchronous::LogAsynchronousUniquePtr CoreTools::LogAsynchronous::logAsynchronous{};
 
-
 void CoreTools::LogAsynchronous::Create()
 {
     logAsynchronous = std::make_unique<CoreTools::LogAsynchronous>(LogAsynchronousCreate::Init);

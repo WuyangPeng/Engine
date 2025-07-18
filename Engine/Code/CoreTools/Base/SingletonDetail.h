@@ -17,34 +17,30 @@
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 
 template <typename T, CoreTools::MutexCreate MutexCreate>
-typename CoreTools::Singleton<T, MutexCreate>::PointType CoreTools::Singleton<T, MutexCreate>::singleton{ nullptr };
-template <typename T, CoreTools::MutexCreate MutexCreate>
 CoreTools::Singleton<T, MutexCreate>::Singleton() noexcept
 {
-    CoreTools::NoexceptNoReturn(*this, &ClassType::InitSingleton);
+    System::NoexceptNoReturn(&ClassType::GetSingletonPtr, this, false);
 }
 
 template <typename T, CoreTools::MutexCreate MutexCreate>
-void CoreTools::Singleton<T, MutexCreate>::InitSingleton() noexcept(gAssert < 2 || gCoreToolsAssert < 2)
+void CoreTools::Singleton<T, MutexCreate>::InitSingleton(PointType& singleton, ClassType* self) noexcept(gAssert < 2 || gCoreToolsAssert < 2)
 {
-    CORE_TOOLS_ASSERTION_2(singleton == nullptr, "单例%s重复初始化！", typeid(T).name());
+#include SYSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26491)
 
-    #include SYSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26491)
+    singleton = static_cast<T*>(self);
 
-    singleton = static_cast<T*>(this);
-
-    #include SYSTEM_WARNING_POP
+#include SYSTEM_WARNING_POP
 }
 
 template <typename T, CoreTools::MutexCreate MutexCreate>
 CoreTools::Singleton<T, MutexCreate>::~Singleton() noexcept
 {
-    CoreTools::NoexceptNoReturn(*this, &ClassType::DeleteSingleton);
+    System::NoexceptNoReturn(&ClassType::GetSingletonPtr, nullptr, true);
 }
 
 template <typename T, CoreTools::MutexCreate MutexCreate>
-void CoreTools::Singleton<T, MutexCreate>::DeleteSingleton() const noexcept(gAssert < 2 || gCoreToolsAssert < 2)
+void CoreTools::Singleton<T, MutexCreate>::DeleteSingleton(PointType& singleton) noexcept(gAssert < 2 || gCoreToolsAssert < 2)
 {
     CORE_TOOLS_ASSERTION_2(singleton != nullptr, "单例%s重复删除！", typeid(T).name());
 
@@ -58,15 +54,29 @@ typename CoreTools::Singleton<T, MutexCreate>::ReferenceType CoreTools::Singleto
 }
 
 template <typename T, CoreTools::MutexCreate MutexCreate>
-typename CoreTools::Singleton<T, MutexCreate>::PointType CoreTools::Singleton<T, MutexCreate>::GetSingletonPtr() noexcept
+typename CoreTools::Singleton<T, MutexCreate>::PointType CoreTools::Singleton<T, MutexCreate>::GetSingletonPtr(ClassType* self, bool isDeleteSingleton) noexcept
 {
-    System::NoexceptNoReturn(&ClassType::CheckSingleton);
+    static PointType singleton{};
+
+    if (self != nullptr)
+    {
+        System::NoexceptNoReturn(&ClassType::InitSingleton, singleton, self);
+    }
+    
+    if (isDeleteSingleton)
+    {
+        System::NoexceptNoReturn(&ClassType::DeleteSingleton, singleton);
+    }
+    else
+    {
+        System::NoexceptNoReturn(&ClassType::CheckSingleton, singleton);
+    }
 
     return singleton;
 }
 
 template <typename T, CoreTools::MutexCreate MutexCreate>
-void CoreTools::Singleton<T, MutexCreate>::CheckSingleton() noexcept(gAssert < 0 || gCoreToolsAssert < 0)
+void CoreTools::Singleton<T, MutexCreate>::CheckSingleton(PointType singleton) noexcept(gAssert < 0 || gCoreToolsAssert < 0)
 {
     CORE_TOOLS_ASSERTION_0(singleton != nullptr, "单例%s指针为空！", typeid(T).name());
 }
