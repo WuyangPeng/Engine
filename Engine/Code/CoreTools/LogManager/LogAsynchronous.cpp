@@ -16,6 +16,7 @@
 
 SINGLETON_GET_PTR_DEFINE(CoreTools, LogAsynchronous);
 
+template class CoreTools::Singleton<CoreTools::LogAsynchronous, CoreTools::MutexCreate::UseNull>;
 CoreTools::LogAsynchronous::LogAsynchronousUniquePtr CoreTools::LogAsynchronous::logAsynchronous{};
 #include <iostream>
 
