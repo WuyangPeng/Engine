@@ -16,6 +16,14 @@
 
 #include <filesystem>
 
+#ifdef !SYSTEM_PLATFORM_WIN32
+
+#include <sys/stat.h>
+#include <errno.h>
+#include <unistd.h>
+
+#endif  // !SYSTEM_PLATFORM_WIN32
+
 namespace System
 {
     void RecursionDeleteFileDirectory(const std::filesystem::directory_entry& element)
@@ -57,38 +65,39 @@ void System::CreateFileDirectory(const String& pathName) noexcept
 
 bool System::CreateFileDirectory(const String& pathName, WindowSecurityAttributesPtr securityAttributes) noexcept
 {
-#if defined(SYSTEM_PLATFORM_WIN32)
+    #if defined(SYSTEM_PLATFORM_WIN32)
 
     if (::CreateDirectory(pathName.c_str(), securityAttributes) != gFalse)
         return true;
     else
         return false;
 
-#else  // !SYSTEM_PLATFORM_WIN32
+    #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(pathName, securityAttributes);
+    // 尝试创建，若已存在也视为成功
+    if (::mkdir(pathName.c_str(), 0755) == 0) {
+        return true;
+    }
 
-    return false;
+    return errno == EEXIST;
 
-#endif  // SYSTEM_PLATFORM_WIN32
+    #endif  // SYSTEM_PLATFORM_WIN32
 }
 
 bool System::DeleteFileDirectory(const TChar* pathName) noexcept
 {
-#if defined(SYSTEM_PLATFORM_WIN32)
+    #if defined(SYSTEM_PLATFORM_WIN32)
 
     if (::RemoveDirectory(pathName) != gFalse)
         return true;
     else
         return false;
 
-#else  // !SYSTEM_PLATFORM_WIN32
+    #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(pathName);
+    return (::rmdir(pathName) == 0);
 
-    return false;
-
-#endif  // SYSTEM_PLATFORM_WIN32
+    #endif  // SYSTEM_PLATFORM_WIN32
 }
 
 bool System::GetDiskFreeSpaceWithRoot(const TChar* rootPathName,
@@ -97,17 +106,17 @@ bool System::GetDiskFreeSpaceWithRoot(const TChar* rootPathName,
                                       WindowsDWordPtr numberOfFreeClusters,
                                       WindowsDWordPtr totalNumberOfClusters) noexcept
 {
-#if defined(SYSTEM_PLATFORM_WIN32)
+    #if defined(SYSTEM_PLATFORM_WIN32)
 
     return ::GetDiskFreeSpace(rootPathName, sectorsPerCluster, bytesPerSector, numberOfFreeClusters, totalNumberOfClusters) != gFalse;
 
-#else  // !SYSTEM_PLATFORM_WIN32
+    #else  // !SYSTEM_PLATFORM_WIN32
 
     UnusedFunction(rootPathName, sectorsPerCluster, bytesPerSector, numberOfFreeClusters, totalNumberOfClusters);
 
     return false;
 
-#endif  // SYSTEM_PLATFORM_WIN32
+    #endif  // SYSTEM_PLATFORM_WIN32
 }
 
 bool System::GetDiskFreeSpaceWithRoot(const TChar* directoryName,
@@ -115,15 +124,15 @@ bool System::GetDiskFreeSpaceWithRoot(const TChar* directoryName,
                                       WindowsULargeIntegerPtr totalNumberOfBytes,
                                       WindowsULargeIntegerPtr totalNumberOfFreeBytes) noexcept
 {
-#if defined(SYSTEM_PLATFORM_WIN32)
+    #if defined(SYSTEM_PLATFORM_WIN32)
 
     return ::GetDiskFreeSpaceEx(directoryName, freeBytesAvailableToCaller, totalNumberOfBytes, totalNumberOfFreeBytes) != gFalse;
 
-#else  // !SYSTEM_PLATFORM_WIN32
+    #else  // !SYSTEM_PLATFORM_WIN32
 
     UnusedFunction(directoryName, freeBytesAvailableToCaller, totalNumberOfBytes, totalNumberOfFreeBytes);
 
     return false;
 
-#endif  // SYSTEM_PLATFORM_WIN32
+    #endif  // SYSTEM_PLATFORM_WIN32
 }
