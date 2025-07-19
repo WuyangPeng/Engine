@@ -1,1 +1,1 @@
-FileHandleHelp Testing Text
+﻿FileHandleHelp Testing Text

@@ -1,6 +1,6 @@
-TODO Level 4
+﻿TODO Level 4
 
 1.0.1.2
 
-1. （Network）补全网络库API的调用。
-2. （OpenGL）考虑使用类和锁封装opengl是否存在的全局变量。
+1. 锛圢etwork锛夎ˉ鍏ㄧ綉缁滃簱API鐨勮皟鐢ㄣ€?
+2. 锛圤penGL锛夎€冭檻浣跨敤绫诲拰閿佸皝瑁卭pengl鏄惁瀛樺湪鐨勫叏灞€鍙橀噺銆

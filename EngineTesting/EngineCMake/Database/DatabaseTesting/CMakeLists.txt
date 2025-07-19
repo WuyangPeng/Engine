@@ -1,5 +1,5 @@
-# CMakeList.txt: DatabaseTesting µÄ CMake ÏîÄ¿£¬ÔÚ´Ë´¦°üÀ¨Ô´´úÂë²¢¶¨Òå
-# ÏîÄ¿ÌØ¶¨µÄÂß¼­¡£
+ï»¿# CMakeList.txt: DatabaseTesting çš„ CMake é¡¹ç›®ï¼Œåœ¨æ­¤å¤„åŒ…æ‹¬æºä»£ç å¹¶å®šä¹‰
+# é¡¹ç›®ç‰¹å®šçš„é€»è¾‘ã€‚
 #
 cmake_minimum_required (VERSION 3.14)
 
@@ -7,11 +7,11 @@ file(GLOB_RECURSE SRC_DIR_LIST "${CMAKE_SOURCE_DIR}/../Code/Database/DatabaseTes
 
 include_directories($ENV{AssistInclude}) 
 
-# ½«Ô´´úÂëÌí¼Óµ½´ËÏîÄ¿µÄ¿ÉÖ´ĞĞÎÄ¼ş¡£
+# å°†æºä»£ç æ·»åŠ åˆ°æ­¤é¡¹ç›®çš„å¯æ‰§è¡Œæ–‡ä»¶ã€‚
 if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
      add_executable (DatabaseTestingD ${SRC_DIR_LIST})
 else()
      add_executable (DatabaseTesting ${SRC_DIR_LIST})
 endif() 
 
-# TODO: ÈçÓĞĞèÒª£¬ÇëÌí¼Ó²âÊÔ²¢°²×°Ä¿±ê¡£
+# TODO: å¦‚æœ‰éœ€è¦ï¼Œè¯·æ·»åŠ æµ‹è¯•å¹¶å®‰è£…ç›®æ ‡ã€‚

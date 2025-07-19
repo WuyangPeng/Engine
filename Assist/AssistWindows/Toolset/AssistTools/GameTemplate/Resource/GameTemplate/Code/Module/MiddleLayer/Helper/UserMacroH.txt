@@ -1,4 +1,4 @@
-$Copyright$
+ï»¿$Copyright$
 
 #ifndef $ModuleUppercase$_MIDDLE_LAYER_HELPER_USER_MACRO_H
 #define $ModuleUppercase$_MIDDLE_LAYER_HELPER_USER_MACRO_H
@@ -13,7 +13,7 @@ $Copyright$
 
 #define CLOSE_$ModuleUppercase$_MIDDLE_LAYER_MAX ((($ModuleUppercase$_MIDDLE_LAYER_ClOSE_END) << 1) - 1)
 
-// ±àÒë²âÊÔ£¨Ä¬ÈÏÎª0B0000£¬×î´óÖµÎª0B0001£©
+// ç¼–è¯‘æµ‹è¯•ï¼ˆé»˜è®¤ä¸º0B0000ï¼Œæœ€å¤§å€¼ä¸º0B0001ï¼‰
 #define COMPILE_$ModuleUppercase$_MIDDLE_LAYER_CLOSE 0B0000
 
 static_assert(0 <= COMPILE_$ModuleUppercase$_MIDDLE_LAYER_CLOSE, "COMPILE_$ModuleUppercase$_MIDDLE_LAYER_CLOSE Must be greater than or equal 0.");

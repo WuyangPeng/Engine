@@ -1,4 +1,4 @@
-$Copyright$
+Ôªø$Copyright$
 
 #include "$ClassName$.h"
 $EntityContainerInclude$
@@ -20,11 +20,11 @@ $Namespace$::$ClassName$Container::$ClassName$Container(const CSVContent& csvCon
 
 void $Namespace$::$ClassName$Container::Parsing(const CSVContent& csvContent)
 {
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("$ClassNameLetter$±Ìø™ º‘ÿ»Î°≠°≠"));
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("$ClassNameLetter$Ë°®ÂºÄÂßãËΩΩÂÖ•‚Ä¶‚Ä¶"));
 
     Load(csvContent);$CallUnique$
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("$ClassNameLetter$±ÌΩ· ¯‘ÿ»Î°≠°≠"));
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("$ClassNameLetter$Ë°®ÁªìÊùüËΩΩÂÖ•‚Ä¶‚Ä¶"));
 }
 
 void $Namespace$::$ClassName$Container::Load(const CSVContent& csvContent)

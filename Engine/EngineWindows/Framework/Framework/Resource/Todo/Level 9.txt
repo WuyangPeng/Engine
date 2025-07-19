@@ -1,8 +1,8 @@
-TODO Level 9
+ï»¿TODO Level 9
 
 1.0.1.0
 
-1. £¨Application£©½«PixelScreenImplµÄFillµÄº¯ÊıÊµÏÖ·â×°³ÉÒ»¸öÀà¡£
-2. £¨Application£©½«CameraMotionImplÀà²ğ·Ö¡£
-3. £¨Application£©·Ö½âObjectMotionMoveµÄCalculateº¯ÊıµÄÊµÏÖ¡£
-4. £¨Application£©·Ö½âObjectMotionRotateTrackBallµÄCalculateº¯ÊıµÄÊµÏÖ¡£
+1. ï¼ˆApplicationï¼‰å°†PixelScreenImplçš„Fillçš„å‡½æ•°å®ç°å°è£…æˆä¸€ä¸ªç±»ã€‚
+2. ï¼ˆApplicationï¼‰å°†CameraMotionImplç±»æ‹†åˆ†ã€‚
+3. ï¼ˆApplicationï¼‰åˆ†è§£ObjectMotionMoveçš„Calculateå‡½æ•°çš„å®ç°ã€‚
+4. ï¼ˆApplicationï¼‰åˆ†è§£ObjectMotionRotateTrackBallçš„Calculateå‡½æ•°çš„å®ç°ã€‚

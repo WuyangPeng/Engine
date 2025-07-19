@@ -1,4 +1,4 @@
-$Copyright$
+﻿$Copyright$
 
 #include "TestingHelper.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"

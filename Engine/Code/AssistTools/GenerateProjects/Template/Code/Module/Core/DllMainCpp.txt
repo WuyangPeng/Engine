@@ -1,4 +1,4 @@
-$Copyright$
+﻿$Copyright$
 
 #include "$ModuleName$$CoreName$Export.h"
 

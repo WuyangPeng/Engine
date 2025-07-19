@@ -1,4 +1,4 @@
-$Copyright$
+﻿$Copyright$
 
 #include "Helper/$ProjectName$ClassInvariantMacro.h"
 #include "$ProjectName$MiddleLayerMessage.h"

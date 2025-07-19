@@ -1,4 +1,4 @@
-$Copyright$
+﻿$Copyright$
 
 $SubclassInclude$#include "CoreTools/TextParsing/CSV/CSVRowDetail.h"
 

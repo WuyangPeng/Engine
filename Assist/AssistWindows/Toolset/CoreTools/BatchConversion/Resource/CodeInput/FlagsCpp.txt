@@ -1,4 +1,4 @@
-$Copyright$
+ï»¿$Copyright$
 
 #include "$ClassName$.h"
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
@@ -19,7 +19,7 @@ $Namespace$::$ClassName$ $Namespace$::StringCast$ClassName$(const System::String
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½¶ÔÓ¦µÄÀàÐÍ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°å¯¹åº”çš„ç±»åž‹ã€‚"s))
     }
 }
 
@@ -34,7 +34,7 @@ System::String $Namespace$::EnumCastString($ClassName$ type)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½¶ÔÓ¦µÄÀàÐÍ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°å¯¹åº”çš„ç±»åž‹ã€‚"s))
     }
 }
 
@@ -49,7 +49,7 @@ System::String $Namespace$::GetEnumDescribe($ClassName$ type)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½¶ÔÓ¦µÄÀàÐÍ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°å¯¹åº”çš„ç±»åž‹ã€‚"s))
     }
 }
 

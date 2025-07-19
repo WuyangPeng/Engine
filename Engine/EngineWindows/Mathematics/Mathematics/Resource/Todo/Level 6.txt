@@ -1,9 +1,9 @@
-TODO Level 6
+ï»¿TODO Level 6
  
 1.0.0.4
 
-1.  £¨Objects3D£©½«»ù±¾BSPËã·¨ÓÃÓÚConvexPolyhedron3µÄContainsº¯Êı¡£ÕâÊÇÒ»¸öO(log n)µÄËã·¨¡£
-2.  £¨Objects3D£©Rectangle3ÀàµÄÀà²»±äÊ½ÅĞ¶Ïm_Axis[0]ºÍm_Axis[1]ÊÇ»¥Ïà´¹Ö±µÄ¡£
-3.  £¨Objects3D£©Tetrahedron3ÀàµÄÀà²»±äÊ½ÅĞ¶ÏÈı½ÇĞÎµÄÃæÊÇ±»ÄæÊ±ÕëÅÅĞòµÄÈı½ÇĞÎ¡£
-4.  £¨Objects3D£©Triangle3ÀàµÄÀà²»±äÊ½ÅĞ¶ÏÈı½ÇĞÎ²»¹²Ïß¡£ 
-5.  £¨Objects3D£©ĞŞ¸ÄTriangle3µÄDistanceToº¯Êı¡£
+1.  ï¼ˆObjects3Dï¼‰å°†åŸºæœ¬BSPç®—æ³•ç”¨äºConvexPolyhedron3çš„Containså‡½æ•°ã€‚è¿™æ˜¯ä¸€ä¸ªO(log n)çš„ç®—æ³•ã€‚
+2.  ï¼ˆObjects3Dï¼‰Rectangle3ç±»çš„ç±»ä¸å˜å¼åˆ¤æ–­m_Axis[0]å’Œm_Axis[1]æ˜¯äº’ç›¸å‚ç›´çš„ã€‚
+3.  ï¼ˆObjects3Dï¼‰Tetrahedron3ç±»çš„ç±»ä¸å˜å¼åˆ¤æ–­ä¸‰è§’å½¢çš„é¢æ˜¯è¢«é€†æ—¶é’ˆæ’åºçš„ä¸‰è§’å½¢ã€‚
+4.  ï¼ˆObjects3Dï¼‰Triangle3ç±»çš„ç±»ä¸å˜å¼åˆ¤æ–­ä¸‰è§’å½¢ä¸å…±çº¿ã€‚ 
+5.  ï¼ˆObjects3Dï¼‰ä¿®æ”¹Triangle3çš„DistanceToå‡½æ•°ã€‚

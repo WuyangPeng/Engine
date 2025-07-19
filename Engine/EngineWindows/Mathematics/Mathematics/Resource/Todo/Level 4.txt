@@ -1,12 +1,12 @@
-TODO Level 4
+ï»¿TODO Level 4
 
 1.0.0.4
 
-1.  £¨Helper£©Íê³É°ïÖúÄ£¿é¡£
-2.  £¨Algebra£©AQuaternionÀàFromRotationMatrixÔö¼Ó¶ÏÑÔ£¬ÅĞ¶Ï¾ØÕóÊÇ·ñÊÇĞı×ª¾ØÕó¡£
-3.  £¨Algebra£©Matrix3ÀàµÄExtractAngleAxis¡¢Orthonormalize¡¢ExtractEulerÏµÁĞº¯ÊıÔö¼Ó¶ÏÑÔ£¬ÅĞ¶Ï¾ØÕóÊÇ·ñÊÇĞı×ª¾ØÕó¡£
-4.  £¨Algebra£©QuaternionÀàµÄFromRotationMatrixÔö¼Ó¶ÏÑÔ£¬ÅĞ¶Ï¾ØÕóÊÇ·ñÊÇĞı×ª¾ØÕó¡£
-5.  £¨Algebra£©¶ÔÓĞÊµÏÖoperator[]µÄÀàÊµÏÖdataº¯Êı¡£
-6.  £¨Algebra£©ĞŞ¸Ä²¿·Öº¯Êı·µ»Øint£¬µ«AlgebraAggregateĞèÒªint32_t¡£  
-7.  £¨Distance£©×î½üµãÊÇÎŞÇî¶à¸öÊ±£¬DistanceResult³öÏÖ´íÎó¡£
-8.  £¨Distance£©DistanceResultÔö¼ÓÈı½ÇĞÎºÍ¾ØĞÎ²ÎÊı×ÓÀà¡£
+1.  ï¼ˆHelperï¼‰å®Œæˆå¸®åŠ©æ¨¡å—ã€‚
+2.  ï¼ˆAlgebraï¼‰AQuaternionç±»FromRotationMatrixå¢åŠ æ–­è¨€ï¼Œåˆ¤æ–­çŸ©é˜µæ˜¯å¦æ˜¯æ—‹è½¬çŸ©é˜µã€‚
+3.  ï¼ˆAlgebraï¼‰Matrix3ç±»çš„ExtractAngleAxisã€Orthonormalizeã€ExtractEulerç³»åˆ—å‡½æ•°å¢åŠ æ–­è¨€ï¼Œåˆ¤æ–­çŸ©é˜µæ˜¯å¦æ˜¯æ—‹è½¬çŸ©é˜µã€‚
+4.  ï¼ˆAlgebraï¼‰Quaternionç±»çš„FromRotationMatrixå¢åŠ æ–­è¨€ï¼Œåˆ¤æ–­çŸ©é˜µæ˜¯å¦æ˜¯æ—‹è½¬çŸ©é˜µã€‚
+5.  ï¼ˆAlgebraï¼‰å¯¹æœ‰å®ç°operator[]çš„ç±»å®ç°dataå‡½æ•°ã€‚
+6.  ï¼ˆAlgebraï¼‰ä¿®æ”¹éƒ¨åˆ†å‡½æ•°è¿”å›intï¼Œä½†AlgebraAggregateéœ€è¦int32_tã€‚  
+7.  ï¼ˆDistanceï¼‰æœ€è¿‘ç‚¹æ˜¯æ— ç©·å¤šä¸ªæ—¶ï¼ŒDistanceResultå‡ºç°é”™è¯¯ã€‚
+8.  ï¼ˆDistanceï¼‰DistanceResultå¢åŠ ä¸‰è§’å½¢å’ŒçŸ©å½¢å‚æ•°å­ç±»ã€‚

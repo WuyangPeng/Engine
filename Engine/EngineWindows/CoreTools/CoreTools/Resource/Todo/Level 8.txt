@@ -1,6 +1,6 @@
-TODO Level 8
+ï»¿TODO Level 8
  
 1.0.1.0
 
-1.	£¨PerformanceProfiler£©³ÌÐò¸´ÔÓ¶ÈµÄ¼ì²â³ÌÐò¡££¨²Î¿¼´úÂë´óÈ«19.6£©
-2.  £¨Properties£©ÀàMethodPropertySetµÄÒýÓÃÀàÐÍ¸Ä³ÉconstÒýÓÃÀàÐÍ¡£ 
+1.	ï¼ˆPerformanceProfilerï¼‰ç¨‹åºå¤æ‚åº¦çš„æ£€æµ‹ç¨‹åºã€‚ï¼ˆå‚è€ƒä»£ç å¤§å…¨19.6ï¼‰
+2.  ï¼ˆPropertiesï¼‰ç±»MethodPropertySetçš„å¼•ç”¨ç±»åž‹æ”¹æˆconstå¼•ç”¨ç±»åž‹ã€‚ 

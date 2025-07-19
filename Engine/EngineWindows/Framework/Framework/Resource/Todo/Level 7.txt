@@ -1,5 +1,5 @@
-TODO Level 7
+ï»¿TODO Level 7
 
 1.0.1.0
 
-1. £¨Application£©PixelScreenImplµÄDrawLineº¯ÊıÄ¿Ç°Ê¹ÓÃBresenhamËã·¨£¬¸Ä³ÉÖĞµãËã·¨£¬ÒÔ±ÜÃâÆ«²î¡£
+1. ï¼ˆApplicationï¼‰PixelScreenImplçš„DrawLineå‡½æ•°ç›®å‰ä½¿ç”¨Bresenhamç®—æ³•ï¼Œæ”¹æˆä¸­ç‚¹ç®—æ³•ï¼Œä»¥é¿å…åå·®ã€‚

@@ -1,1 +1,1 @@
-IFStreamManagerTest test textIFStreamManagerTest test text
+﻿IFStreamManagerTest test textIFStreamManagerTest test text

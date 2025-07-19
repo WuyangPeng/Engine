@@ -1,11 +1,11 @@
-TODO Level 2
+﻿TODO Level 2
  
 1.0.1.0
 
-1.  （Contract）完成类不变式非Microsoft Visual Studio的实现。 
-2.  （Contract）完成断言类非Microsoft Visual Studio的实现。 
-3.  （FileManager）FileManager增加operator>>和operator<<接口。
-4.  （FileManager）将EnvironmentVariable.json的路径改成配置。 
-5.  （Time）增加获取当前时间相关的信息，如月份，零点时间，周日时间等。
-6.  （Time）创建一个类型安全的秒、毫秒和微秒类。 
-7.  （Time）实现通过时间戳获取相关时间的信息，包含年、月、日，当天零点时间戳，本周日零点时间戳等相关信息。
+1.  锛圕ontract锛夊畬鎴愮被涓嶅彉寮忛潪Microsoft Visual Studio鐨勫疄鐜般€?
+2.  锛圕ontract锛夊畬鎴愭柇瑷€绫婚潪Microsoft Visual Studio鐨勫疄鐜般€?
+3.  锛團ileManager锛塅ileManager澧炲姞operator>>鍜宱perator<<鎺ュ彛銆?
+4.  锛團ileManager锛夊皢EnvironmentVariable.json鐨勮矾寰勬敼鎴愰厤缃€?
+5.  锛圱ime锛夊鍔犺幏鍙栧綋鍓嶆椂闂寸浉鍏崇殑淇℃伅锛屽鏈堜唤锛岄浂鐐规椂闂达紝鍛ㄦ棩鏃堕棿绛夈€?
+6.  锛圱ime锛夊垱寤轰竴涓被鍨嬪畨鍏ㄧ殑绉掋€佹绉掑拰寰绫汇€?
+7.  锛圱ime锛夊疄鐜伴€氳繃鏃堕棿鎴宠幏鍙栫浉鍏虫椂闂寸殑淇℃伅锛屽寘鍚勾銆佹湀銆佹棩锛屽綋澶╅浂鐐规椂闂存埑锛屾湰鍛ㄦ棩闆剁偣鏃堕棿鎴崇瓑鐩稿叧淇℃伅銆

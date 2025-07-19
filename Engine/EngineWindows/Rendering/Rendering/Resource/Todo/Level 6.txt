@@ -1,7 +1,7 @@
-TODO Level 6
+ï»¿TODO Level 6
 
 1.0.0.3
 
-1.	£¨DataTypes£©ºÏ²¢TextureColourµÄÌØ»¯¡£ 
-2.	£¨DataTypes£©¿¼ÂÇÊÇ·ñÒªÔö¼ÓTextureColourºÍColourÖ®¼äµÄ×ª»»¡£ 
-3.	£¨DataTypes£©¿¼ÂÇÊÇ·ñÒªµ¼³öTextureColourÀà¡£ 
+1.	ï¼ˆDataTypesï¼‰åˆå¹¶TextureColourçš„ç‰¹åŒ–ã€‚ 
+2.	ï¼ˆDataTypesï¼‰è€ƒè™‘æ˜¯å¦è¦å¢åŠ TextureColourå’ŒColourä¹‹é—´çš„è½¬æ¢ã€‚ 
+3.	ï¼ˆDataTypesï¼‰è€ƒè™‘æ˜¯å¦è¦å¯¼å‡ºTextureColourç±»ã€‚ 

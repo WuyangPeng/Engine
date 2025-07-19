@@ -1,7 +1,7 @@
-TODO Level 6
+﻿TODO Level 6
  
 1.0.1.0
 
-1.  （ModuleInitializerTerminator）增加一个需要加载模块配置类，对配置进行读取。 
-2.  （ModuleInitializerTerminator）增加一个模块自动加载及终止类。
-3.  （ModuleInitializerTerminator）终止已加载的模块，并加载新的模块。	 
+1.  锛圡oduleInitializerTerminator锛夊鍔犱竴涓渶瑕佸姞杞芥ā鍧楅厤缃被锛屽閰嶇疆杩涜璇诲彇銆?
+2.  锛圡oduleInitializerTerminator锛夊鍔犱竴涓ā鍧楄嚜鍔ㄥ姞杞藉強缁堟绫汇€?
+3.  锛圡oduleInitializerTerminator锛夌粓姝㈠凡鍔犺浇鐨勬ā鍧楋紝骞跺姞杞芥柊鐨勬ā鍧椼€? 

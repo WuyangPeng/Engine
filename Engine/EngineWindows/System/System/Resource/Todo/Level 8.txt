@@ -1,16 +1,16 @@
-TODO Level 8
+﻿TODO Level 8
 
 1.0.1.2
 
-1.（DynamicLink）完成DynamicLink模块非Windows平台的实现：EnumResourceTools、
-														 LoadResourceTools。
-2.（DynamicLink）完成DynamicLink模块非Windows平台的实现：LibraryDirectory、
-														 LibraryTools、
-														 LoadLibrary。
-3.（Console）完成Console非Windows平台的实现：ConsoleHandle、
-											 ConsoleColours、
-											 ConsoleScreenBuffer、
-											 ConsoleFont、
-										     ConsoleMode、
-											 ConsoleCodePage、
-											 ConsoleCreate。
+1.锛圖ynamicLink锛夊畬鎴怐ynamicLink妯″潡闈濿indows骞冲彴鐨勫疄鐜帮細EnumResourceTools銆?
+														 LoadResourceTools銆?
+2.锛圖ynamicLink锛夊畬鎴怐ynamicLink妯″潡闈濿indows骞冲彴鐨勫疄鐜帮細LibraryDirectory銆?
+														 LibraryTools銆?
+														 LoadLibrary銆?
+3.锛圕onsole锛夊畬鎴怌onsole闈濿indows骞冲彴鐨勫疄鐜帮細ConsoleHandle銆?
+											 ConsoleColours銆?
+											 ConsoleScreenBuffer銆?
+											 ConsoleFont銆?
+										     ConsoleMode銆?
+											 ConsoleCodePage銆?
+											 ConsoleCreate銆

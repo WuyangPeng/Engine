@@ -1,7 +1,7 @@
-TODO Level 0
+ï»¿TODO Level 0
 
 1.0.1.2
 
-1. £¨OpenGL£©Ê¹ÓÃglfwÀ´Ö§³ÖOpenGL¡¢OpenGL ESºÍVulkan¿çÆ½Ì¨API¡£
-2. £¨Vulkan£©Íê³ÉVulkan¿â£ºVulkan¡£
-3. £¨DirectX£©Íê³ÉDirectX¿â£ºD3D12¡£
+1. ï¼ˆOpenGLï¼‰ä½¿ç”¨glfwæ¥æ”¯æŒOpenGLã€OpenGL ESå’ŒVulkanè·¨å¹³å°APIã€‚
+2. ï¼ˆVulkanï¼‰å®ŒæˆVulkanåº“ï¼šVulkanã€‚
+3. ï¼ˆDirectXï¼‰å®ŒæˆDirectXåº“ï¼šD3D12ã€‚

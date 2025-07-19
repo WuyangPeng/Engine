@@ -1,4 +1,4 @@
-$Copyright$
+﻿$Copyright$
 
 #include "$ModuleName$MiddleLayerExport.h"
 

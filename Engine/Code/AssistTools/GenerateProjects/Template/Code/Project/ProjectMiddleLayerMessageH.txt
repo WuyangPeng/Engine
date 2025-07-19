@@ -1,4 +1,4 @@
-$Copyright$
+﻿$Copyright$
 
 #ifndef $ProjectCapital$_$ProjectCapital$_MIDDLE_LAYER_MESSAGE_H
 #define $ProjectCapital$_$ProjectCapital$_MIDDLE_LAYER_MESSAGE_H

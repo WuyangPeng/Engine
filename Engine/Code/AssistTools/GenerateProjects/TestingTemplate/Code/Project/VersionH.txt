@@ -1,12 +1,12 @@
-$Copyright$
+ï»¿$Copyright$
 
 #ifndef $ProjectCapital$_VERSION_H
 #define $ProjectCapital$_VERSION_H
 
-//  g$ProjectName$Version % 100 ÊÇĞŞ¶©°æ±¾ºÅ
-//  g$ProjectName$Version / 100 % 100 ÊÇÄÚ²¿°æ±¾ºÅ
-//  g$ProjectName$Version / 10000 % 100 ÊÇ´Î°æ±¾ºÅ
-//  g$ProjectName$Version / 1000000 % 100 ÊÇÖ÷°æ±¾ºÅ
+//  g$ProjectName$Version % 100 æ˜¯ä¿®è®¢ç‰ˆæœ¬å·
+//  g$ProjectName$Version / 100 % 100 æ˜¯å†…éƒ¨ç‰ˆæœ¬å·
+//  g$ProjectName$Version / 10000 % 100 æ˜¯æ¬¡ç‰ˆæœ¬å·
+//  g$ProjectName$Version / 1000000 % 100 æ˜¯ä¸»ç‰ˆæœ¬å·
 
 constexpr auto g$ProjectName$Version = $VersionNum$;
 

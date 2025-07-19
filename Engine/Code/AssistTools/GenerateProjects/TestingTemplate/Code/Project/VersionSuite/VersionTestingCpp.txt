@@ -1,4 +1,4 @@
-$Copyright$
+﻿$Copyright$
 
 #include "$TestingName$/Version.h"
 #include "$ProjectName$/Version.h"

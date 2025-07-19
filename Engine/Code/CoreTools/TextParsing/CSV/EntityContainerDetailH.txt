@@ -1,4 +1,4 @@
-$Copyright$
+ï»¿$Copyright$
 
 #ifndef $NamespaceUppercaseSeparator$_$ClassNameUppercase$_CONTAINER_DETAIL_H
 #define $NamespaceUppercaseSeparator$_$ClassNameUppercase$_CONTAINER_DETAIL_H
@@ -13,7 +13,7 @@ $Namespace$::$ClassName$Container::Const$ClassName$SharedPtr $Namespace$::$Class
     USER_CLASS_IS_VALID_CONST_9;
 
 $GetEntityFirstDefine$
-    THROW_EXCEPTION(SYSTEM_TEXT("$ClassNameLetter$±íÎ´ÕÒµ½Âú×ãÌõ¼şµÄÅäÖÃĞÅÏ¢¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("$ClassNameLetter$è¡¨æœªæ‰¾åˆ°æ»¡è¶³æ¡ä»¶çš„é…ç½®ä¿¡æ¯ã€‚"s))
 }
 
 template <typename Function>

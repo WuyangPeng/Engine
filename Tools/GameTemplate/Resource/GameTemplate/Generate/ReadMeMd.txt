@@ -1,6 +1,6 @@
-@ingroup group_Documentation
+﻿@ingroup group_Documentation
 
 ----------------------------
-$ProjectChineseName$$Configuration$ִ��Ŀ¼
+$ProjectChineseName$$Configuration$执行目录
 
 ----------------------------

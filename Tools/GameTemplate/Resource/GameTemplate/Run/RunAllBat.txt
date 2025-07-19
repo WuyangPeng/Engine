@@ -1,4 +1,4 @@
-@echo on
+﻿@echo on
  
 call RunAllClient.bat 
 

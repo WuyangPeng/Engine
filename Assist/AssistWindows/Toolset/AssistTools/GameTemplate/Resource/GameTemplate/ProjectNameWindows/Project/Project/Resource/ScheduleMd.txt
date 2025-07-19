@@ -1,4 +1,4 @@
-@ingroup group_$ProjectName$_Documentation
+ï»¿@ingroup group_$ProjectName$_Documentation
 
 ----------------------------
 $ProjectChineseName$
@@ -7,23 +7,23 @@ $ProjectChineseName$
 $ProjectName$
 
 ----------------------------	
-¹¤³ÌÀàĞÍ
-	exe£¬´°¿Ú¡£
+å·¥ç¨‹ç±»å‹
+	exeï¼Œçª—å£ã€‚
 
 ----------------------------
-×´Ì¬
-	Ä¿Ç°°æ±¾£º$Version$¡£
+çŠ¶æ€
+	ç›®å‰ç‰ˆæœ¬ï¼š$Version$ã€‚
 
 ----------------------------
-ÊµÏÖÄÚÈİ
-	1. ¸´ÖÆ±ØÒªµÄdllµ½ÔËĞĞÄ¿Â¼¡£ 
-	2. ¸´ÖÆ¹¤³ÌµÄEnvironmentVariable.jsonµ½$ProjectChineseName$¹¤³ÌÔËĞĞÄ¿Â¼¡£
-	3. ¸´ÖÆ¹¤³ÌµÄRenderer.jsonµ½$ProjectChineseName$¹¤³ÌÔËĞĞÄ¿Â¼¡£
-	4. ¸´ÖÆ¹¤³ÌµÄProject.jsonµ½$ProjectChineseName$ÔËĞĞÄ¿Â¼¡£
-	5. ¸´ÖÆ¹¤³ÌµÄ$ProjectName$.jsonµ½$ProjectChineseName$¹¤³ÌÔËĞĞÄ¿Â¼¡£
-	6. °æ±¾ºÅ¶¨ÒåÔÚVersion.hÖĞ¡£
-	7. $ProjectChineseName$¹¤³ÌÑùÀı¹¤³Ì¡£
-	8. ÖÆ¶¨$ProjectChineseName$Ä£¿éÉè¼Æ¡£
-	9. $ProjectChineseName$¹¤³Ì×ÜÈë¿Ú£¬¿É¸ù¾İÓÃ»§Ñ¡ÔñÔËĞĞÄ³¸ö¿Í»§¶Ë»ò·şÎñÆ÷¡£
+å®ç°å†…å®¹
+	1. å¤åˆ¶å¿…è¦çš„dllåˆ°è¿è¡Œç›®å½•ã€‚ 
+	2. å¤åˆ¶å·¥ç¨‹çš„EnvironmentVariable.jsonåˆ°$ProjectChineseName$å·¥ç¨‹è¿è¡Œç›®å½•ã€‚
+	3. å¤åˆ¶å·¥ç¨‹çš„Renderer.jsonåˆ°$ProjectChineseName$å·¥ç¨‹è¿è¡Œç›®å½•ã€‚
+	4. å¤åˆ¶å·¥ç¨‹çš„Project.jsonåˆ°$ProjectChineseName$è¿è¡Œç›®å½•ã€‚
+	5. å¤åˆ¶å·¥ç¨‹çš„$ProjectName$.jsonåˆ°$ProjectChineseName$å·¥ç¨‹è¿è¡Œç›®å½•ã€‚
+	6. ç‰ˆæœ¬å·å®šä¹‰åœ¨Version.hä¸­ã€‚
+	7. $ProjectChineseName$å·¥ç¨‹æ ·ä¾‹å·¥ç¨‹ã€‚
+	8. åˆ¶å®š$ProjectChineseName$æ¨¡å—è®¾è®¡ã€‚
+	9. $ProjectChineseName$å·¥ç¨‹æ€»å…¥å£ï¼Œå¯æ ¹æ®ç”¨æˆ·é€‰æ‹©è¿è¡ŒæŸä¸ªå®¢æˆ·ç«¯æˆ–æœåŠ¡å™¨ã€‚
 
 ----------------------------

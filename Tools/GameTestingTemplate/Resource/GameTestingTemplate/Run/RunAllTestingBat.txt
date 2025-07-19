@@ -1,4 +1,4 @@
-@echo on
+﻿@echo on
  
 $CallRunTestingBat$
 call Run$ProjectName$.bat

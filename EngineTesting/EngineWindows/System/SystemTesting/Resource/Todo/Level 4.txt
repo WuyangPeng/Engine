@@ -1,5 +1,5 @@
-TODO Level 4
+ï»¿TODO Level 4
 
 1.0.0.7
 
-1.£¨CharacterStringSuite£©CompareStringUseLocaleFlagsTesting²âÊÔLanguageLocale::CustomUiDefaultÊ§°Ü¡£
+1.ï¼ˆCharacterStringSuiteï¼‰CompareStringUseLocaleFlagsTestingæµ‹è¯•LanguageLocale::CustomUiDefaultå¤±è´¥ã€‚

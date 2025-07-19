@@ -1,4 +1,4 @@
-@ingroup group_$ModuleName$_Documentation
+﻿@ingroup group_$ModuleName$_Documentation
 
 ----------------------------
 $ModuleChineseName$

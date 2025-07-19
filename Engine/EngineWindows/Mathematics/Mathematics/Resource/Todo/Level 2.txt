@@ -1,5 +1,5 @@
-TODO Level 2
+ï»¿TODO Level 2
 
 1.0.0.4
  
-1.  £¨Base£©MathÖĞµÄ³£Á¿¸Ä³Éconstexpr£¬ÓÉÓÚHalfFloatÎŞ·¨ÊµÏÖ£¬¿´ÏÂÊÇ·ñÄÜĞŞ¸Ä¡£
+1.  ï¼ˆBaseï¼‰Mathä¸­çš„å¸¸é‡æ”¹æˆconstexprï¼Œç”±äºHalfFloatæ— æ³•å®ç°ï¼Œçœ‹ä¸‹æ˜¯å¦èƒ½ä¿®æ”¹ã€‚

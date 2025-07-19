@@ -1,11 +1,11 @@
-# CMakeList.txt: FrameworkWindowTesting µÄ CMake ÏîÄ¿£¬ÔÚ´Ë´¦°üÀ¨Ô´´úÂë²¢¶¨Òå
-# ÏîÄ¿ÌØ¶¨µÄÂß¼­¡£
+ï»¿# CMakeList.txt: FrameworkWindowTesting çš„ CMake é¡¹ç›®ï¼Œåœ¨æ­¤å¤„åŒ…æ‹¬æºä»£ç å¹¶å®šä¹‰
+# é¡¹ç›®ç‰¹å®šçš„é€»è¾‘ã€‚
 #
 cmake_minimum_required (VERSION 3.14)
 
 file(GLOB_RECURSE SRC_DIR_LIST "${CMAKE_SOURCE_DIR}/../Code/Framework/FrameworkWindowTesting/*.cpp")
 
-# ½«Ô´´úÂëÌí¼Óµ½´ËÏîÄ¿µÄ¿ÉÖ´ĞĞÎÄ¼ş¡£
+# å°†æºä»£ç æ·»åŠ åˆ°æ­¤é¡¹ç›®çš„å¯æ‰§è¡Œæ–‡ä»¶ã€‚
 if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
      add_executable (FrameworkWindowTestingD WIN32 ${SRC_DIR_LIST})
      target_include_directories(FrameworkWindowTestingD BEFORE PUBLIC $ENV{EngineTestingEngineering}/EngineWindows/Framework/FrameworkWindowTesting/) 
@@ -14,4 +14,4 @@ else()
      target_include_directories(FrameworkWindowTesting BEFORE PUBLIC $ENV{EngineTestingEngineering}/EngineWindows/Framework/FrameworkWindowTesting/) 
 endif() 
 
-# TODO: ÈçÓĞĞèÒª£¬ÇëÌí¼Ó²âÊÔ²¢°²×°Ä¿±ê¡£
+# TODO: å¦‚æœ‰éœ€è¦ï¼Œè¯·æ·»åŠ æµ‹è¯•å¹¶å®‰è£…ç›®æ ‡ã€‚

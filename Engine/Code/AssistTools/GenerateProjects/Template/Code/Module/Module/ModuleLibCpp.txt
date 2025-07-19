@@ -1,4 +1,4 @@
-$Copyright$
+﻿$Copyright$
 
 #include "ThreadingCoreRenderEngine/ThreadingCoreRenderEngineLib.h"
 

@@ -1,65 +1,65 @@
-@ingroup group_Documentation
+ï»¿@ingroup group_Documentation
 
 ----------------------------
-$ProjectChineseName$¹¤³Ì
+$ProjectChineseName$å·¥ç¨‹
 
 ----------------------------
-$ProjectName$.props£º
-$ProjectChineseName$¹¤³ÌÊôĞÔ±í
+$ProjectName$.propsï¼š
+$ProjectChineseName$å·¥ç¨‹å±æ€§è¡¨
 
-$ProjectName$StaticWin32DebugLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Élib¡¢Win32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+$ProjectName$StaticWin32DebugLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆlibã€Win32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-$ProjectName$StaticWin32ReleaseLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Élib¡¢Win32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+$ProjectName$StaticWin32ReleaseLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆlibã€Win32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-$ProjectName$StaticX64DebugLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Élib¡¢X64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+$ProjectName$StaticX64DebugLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆlibã€X64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-$ProjectName$StaticX64ReleaseLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Élib¡¢X64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+$ProjectName$StaticX64ReleaseLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆlibã€X64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-$ProjectName$Win32DebugLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Édll¡¢Win32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+$ProjectName$Win32DebugLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆdllã€Win32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-$ProjectName$Win32ReleaseLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Édll¡¢Win32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+$ProjectName$Win32ReleaseLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆdllã€Win32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-$ProjectName$X64DebugLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Édll¡¢X64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+$ProjectName$X64DebugLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆdllã€X64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-$ProjectName$X64ReleaseLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Édll¡¢X64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+$ProjectName$X64ReleaseLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆdllã€X64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-$ProjectName$EngineDynamic$ProjectName$StaticWin32DebugLibs.props£º
-ÒıÇæ£¨dll£©ºÍÓÎÏ·£¨lib£©¶¼±àÒë³ÉWin32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+$ProjectName$EngineDynamic$ProjectName$StaticWin32DebugLibs.propsï¼š
+å¼•æ“ï¼ˆdllï¼‰å’Œæ¸¸æˆï¼ˆlibï¼‰éƒ½ç¼–è¯‘æˆWin32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-$ProjectName$EngineDynamic$ProjectName$StaticWin32ReleaseLibs.props£º
-ÒıÇæ£¨dll£©ºÍÓÎÏ·£¨lib£©¶¼±àÒë³ÉWin32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+$ProjectName$EngineDynamic$ProjectName$StaticWin32ReleaseLibs.propsï¼š
+å¼•æ“ï¼ˆdllï¼‰å’Œæ¸¸æˆï¼ˆlibï¼‰éƒ½ç¼–è¯‘æˆWin32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-$ProjectName$EngineDynamic$ProjectName$StaticX64DebugLibs.props£º
-ÒıÇæ£¨dll£©ºÍÓÎÏ·£¨lib£©¶¼±àÒë³ÉX64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+$ProjectName$EngineDynamic$ProjectName$StaticX64DebugLibs.propsï¼š
+å¼•æ“ï¼ˆdllï¼‰å’Œæ¸¸æˆï¼ˆlibï¼‰éƒ½ç¼–è¯‘æˆX64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-$ProjectName$EngineDynamic$ProjectName$StaticX64ReleaseLibs.props£º
-ÒıÇæ£¨dll£©ºÍÓÎÏ·£¨lib£©¶¼±àÒë³ÉX64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+$ProjectName$EngineDynamic$ProjectName$StaticX64ReleaseLibs.propsï¼š
+å¼•æ“ï¼ˆdllï¼‰å’Œæ¸¸æˆï¼ˆlibï¼‰éƒ½ç¼–è¯‘æˆX64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-$ProjectName$EngineStatic$ProjectName$DynamicWin32DebugLibs.props£º
-ÒıÇæ£¨lib£©ºÍÓÎÏ·£¨dll£©¶¼±àÒë³ÉWin32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+$ProjectName$EngineStatic$ProjectName$DynamicWin32DebugLibs.propsï¼š
+å¼•æ“ï¼ˆlibï¼‰å’Œæ¸¸æˆï¼ˆdllï¼‰éƒ½ç¼–è¯‘æˆWin32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-$ProjectName$EngineStatic$ProjectName$DynamicWin32ReleaseLibs.props£º
-ÒıÇæ£¨lib£©ºÍÓÎÏ·£¨dll£©¶¼±àÒë³ÉWin32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+$ProjectName$EngineStatic$ProjectName$DynamicWin32ReleaseLibs.propsï¼š
+å¼•æ“ï¼ˆlibï¼‰å’Œæ¸¸æˆï¼ˆdllï¼‰éƒ½ç¼–è¯‘æˆWin32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-$ProjectName$EngineStatic$ProjectName$DynamicX64DebugLibs.props£º
-ÒıÇæ£¨lib£©ºÍÓÎÏ·£¨dll£©¶¼±àÒë³ÉX64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+$ProjectName$EngineStatic$ProjectName$DynamicX64DebugLibs.propsï¼š
+å¼•æ“ï¼ˆlibï¼‰å’Œæ¸¸æˆï¼ˆdllï¼‰éƒ½ç¼–è¯‘æˆX64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-$ProjectName$EngineStatic$ProjectName$DynamicX64ReleaseLibs.props£º
-ÒıÇæ£¨lib£©ºÍÓÎÏ·£¨dll£©¶¼±àÒë³ÉX64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+$ProjectName$EngineStatic$ProjectName$DynamicX64ReleaseLibs.propsï¼š
+å¼•æ“ï¼ˆlibï¼‰å’Œæ¸¸æˆï¼ˆdllï¼‰éƒ½ç¼–è¯‘æˆX64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
 ----------------------------
-SetEnvironment.bat£º
-ÉèÖÃ$ProjectChineseName$ËùĞèÒªµÄ»·¾³±äÁ¿
+SetEnvironment.batï¼š
+è®¾ç½®$ProjectChineseName$æ‰€éœ€è¦çš„ç¯å¢ƒå˜é‡
 
-SetAllEnvironment.bat£º
-ÉèÖÃÓÎÏ·ËùĞèÒªµÄËùÓĞ»·¾³±äÁ¿
+SetAllEnvironment.batï¼š
+è®¾ç½®æ¸¸æˆæ‰€éœ€è¦çš„æ‰€æœ‰ç¯å¢ƒå˜é‡
 
 ----------------------------

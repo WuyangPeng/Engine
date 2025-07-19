@@ -1,4 +1,4 @@
-$Copyright$
+﻿$Copyright$
 
 #include "$ClassName$Base.h"
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"

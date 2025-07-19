@@ -1,4 +1,4 @@
-$Copyright$
+﻿$Copyright$
 
 #include "$ModuleName$.h"
 #include "$ModuleName$/$ModuleName$$CoreName$/Helper/$ModuleName$$CoreName$ClassInvariantMacro.h"

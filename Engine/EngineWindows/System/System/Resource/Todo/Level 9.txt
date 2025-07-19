@@ -1,26 +1,26 @@
-TODO Level 9
+﻿TODO Level 9
 
 1.0.1.2
 
-1. （Security）完成Security非Windows平台的实现：LookupPrivilege、
-												CreateSecurity、
-												SecuritySid、
-												SecurityAcl、
-												SecurityDescriptor、
-												SecurityAce、
-												AddAccess、
-												SecurityBase、
-												AccessCheck。
-2. （Network）完成Network非Windows平台的实现：SocketPrototypes、
-											  DatabasePrototypes、
-											  WindowsExtensionPrototypes、
-											  WindowsSockEx。
-3. （OpenGL）完成OpenGL非Windows平台的实现：OpenGLWglPrototypes。
-4. （Windows）完成Windows非Windows平台的实现：WindowsCreate、
-											  WindowsProcess、
-											  WindowsRegister、
-											  WindowsFontInformation、
-											  WindowsSystem、
-											  WindowsNamedPipe、
-											  WindowsUser。 
-5. （Windows）完成Windows非Windows平台的实现：LastWindowError。
+1. 锛圫ecurity锛夊畬鎴怱ecurity闈濿indows骞冲彴鐨勫疄鐜帮細LookupPrivilege銆?
+												CreateSecurity銆?
+												SecuritySid銆?
+												SecurityAcl銆?
+												SecurityDescriptor銆?
+												SecurityAce銆?
+												AddAccess銆?
+												SecurityBase銆?
+												AccessCheck銆?
+2. 锛圢etwork锛夊畬鎴怤etwork闈濿indows骞冲彴鐨勫疄鐜帮細SocketPrototypes銆?
+											  DatabasePrototypes銆?
+											  WindowsExtensionPrototypes銆?
+											  WindowsSockEx銆?
+3. 锛圤penGL锛夊畬鎴怬penGL闈濿indows骞冲彴鐨勫疄鐜帮細OpenGLWglPrototypes銆?
+4. 锛圵indows锛夊畬鎴怶indows闈濿indows骞冲彴鐨勫疄鐜帮細WindowsCreate銆?
+											  WindowsProcess銆?
+											  WindowsRegister銆?
+											  WindowsFontInformation銆?
+											  WindowsSystem銆?
+											  WindowsNamedPipe銆?
+											  WindowsUser銆?
+5. 锛圵indows锛夊畬鎴怶indows闈濿indows骞冲彴鐨勫疄鐜帮細LastWindowError銆

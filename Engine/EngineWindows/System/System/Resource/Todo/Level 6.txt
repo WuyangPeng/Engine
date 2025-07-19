@@ -1,10 +1,10 @@
-TODO Level 6
+﻿TODO Level 6
 
 1.0.1.2
 
-1.（SystemOutput）完成SystemOutput模块非Windows平台的实现：OutputDebugString、MessageBoxSelection。
-2.（SystemOutput）完成SystemOutput模块非Windows平台的实现：LanguageIDData、MessageBoxFlagsData相关的枚举定义。
-3.（MemoryTools）完成MemoryTools非Windows平台的实现：HeapTools。
-4.（CharacterString）完成CharacterString非Windows平台的实现：CodePage。
-5.（CharacterString）完成CharacterString非Windows平台的实现：FormatErrorMessage、StringConversion、FormatString。
-6.（FileManager）完成FileManager非Windows平台的实现： File、FileTime、FileTools。
+1.锛圫ystemOutput锛夊畬鎴怱ystemOutput妯″潡闈濿indows骞冲彴鐨勫疄鐜帮細OutputDebugString銆丮essageBoxSelection銆?
+2.锛圫ystemOutput锛夊畬鎴怱ystemOutput妯″潡闈濿indows骞冲彴鐨勫疄鐜帮細LanguageIDData銆丮essageBoxFlagsData鐩稿叧鐨勬灇涓惧畾涔夈€?
+3.锛圡emoryTools锛夊畬鎴怣emoryTools闈濿indows骞冲彴鐨勫疄鐜帮細HeapTools銆?
+4.锛圕haracterString锛夊畬鎴怌haracterString闈濿indows骞冲彴鐨勫疄鐜帮細CodePage銆?
+5.锛圕haracterString锛夊畬鎴怌haracterString闈濿indows骞冲彴鐨勫疄鐜帮細FormatErrorMessage銆丼tringConversion銆丗ormatString銆?
+6.锛團ileManager锛夊畬鎴怓ileManager闈濿indows骞冲彴鐨勫疄鐜帮細 File銆丗ileTime銆丗ileTools銆

@@ -1,5 +1,5 @@
-TODO Level 2
+ï»¿TODO Level 2
 
 1.0.0.7
 
-1.£¨FileManagerSuite£©CreateFileWithAttributesTesting²âÊÔFileHandleAttributes::EncryptedÊ§°Ü¡£
+1.ï¼ˆFileManagerSuiteï¼‰CreateFileWithAttributesTestingæµ‹è¯•FileHandleAttributes::Encryptedå¤±è´¥ã€‚

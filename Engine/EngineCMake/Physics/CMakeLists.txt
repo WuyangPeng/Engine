@@ -1,5 +1,5 @@
-# CMakeList.txt: Physics �� CMake ��Ŀ���ڴ˴�����Դ���벢����
-# ��Ŀ�ض����߼���
+﻿# CMakeList.txt: Physics 的 CMake 项目，在此处包括源代码并定义
+# 项目特定的逻辑。
 #
 cmake_minimum_required(VERSION 3.14)
 
@@ -33,11 +33,11 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
 endif ()
 
-# ��Դ�������ӵ�����Ŀ�Ŀ�ִ���ļ���
+# 将源代码添加到此项目的可执行文件。
 if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
     add_library(PhysicsD SHARED ${SRC_DIR_LIST})
 else ()
     add_library(Physics SHARED ${SRC_DIR_LIST})
 endif ()
 
-# TODO: ������Ҫ�������Ӳ��Բ���װĿ�ꡣ
+# TODO: 如有需要，请添加测试并安装目标。

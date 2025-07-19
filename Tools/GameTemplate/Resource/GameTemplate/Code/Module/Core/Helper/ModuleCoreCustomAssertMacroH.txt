@@ -1,4 +1,4 @@
-$Copyright$
+﻿$Copyright$
 
 #ifndef $ModuleUppercase$_$CoreCapital$_HELPER_$ModuleUppercase$_$CoreCapital$_CUSTOM_ASSERT_MACRO_H
 #define $ModuleUppercase$_$CoreCapital$_HELPER_$ModuleUppercase$_$CoreCapital$_CUSTOM_ASSERT_MACRO_H

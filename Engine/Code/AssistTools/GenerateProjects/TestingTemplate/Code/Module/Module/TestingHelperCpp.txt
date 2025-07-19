@@ -1,11 +1,11 @@
-$Copyright$
+ï»¿$Copyright$
 
 #include "Testing.h"
 #include "TestingHelper.h"
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
 
 $ModuleName$Testing::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "$ModuleChineseName$µ¥Ôª²âÊÔ" }
+    : ParentType{ argc, argv, "$ModuleChineseName$å•å…ƒæµ‹è¯•" }
 {
     InitSuite();
 

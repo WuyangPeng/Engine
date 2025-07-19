@@ -1,10 +1,10 @@
-TODO Level 5
+ï»¿TODO Level 5
 
 1.0.1.0
  
-1. £¨×ÛºÏ£©¿¼ÂÇ½«Ò»Ğ©windows»ù´¡ÀàÒÆµ½äÖÈ¾²ã£¬ÒÔÈÃäÖÈ¾²ãÊ¹ÓÃwindows·½Ê½ÏÔÊ¾¡£
-2. £¨Application£©¿¼ÂÇ½«Ò»Ğ©ApplicationÄ£¿éÒÆ¶¯µ½¸üµÍµÄ²ã¼¶£¬ÈçÊäÈëÊä³ö²ã¡£
-3. £¨Application£©²¹È«LinuxºÍMacintoshµÄKeyIdentifiers¡¢KeyboardModifiersºÍMouseModifiersÀà¡£
-4. £¨Application£©²¹È«Android¡¢LinuxºÍMacintoshµÄ×ÖÌåĞÅÏ¢£¬²¢²ğ·Ö³ö¹¤³§Àà¡£
-5. £¨Application£©²¹È«Android¡¢LinuxºÍMacintoshµÄÊó±êÎ»ÖÃÀà£¬²¢²ğ·Ö³ö¹¤³§Àà¡£
-6. £¨Application£©²¹È«Android¡¢LinuxºÍMacintoshµÄÓ¦ÓÃĞÅÏ¢Àà¡£
+1. ï¼ˆç»¼åˆï¼‰è€ƒè™‘å°†ä¸€äº›windowsåŸºç¡€ç±»ç§»åˆ°æ¸²æŸ“å±‚ï¼Œä»¥è®©æ¸²æŸ“å±‚ä½¿ç”¨windowsæ–¹å¼æ˜¾ç¤ºã€‚
+2. ï¼ˆApplicationï¼‰è€ƒè™‘å°†ä¸€äº›Applicationæ¨¡å—ç§»åŠ¨åˆ°æ›´ä½çš„å±‚çº§ï¼Œå¦‚è¾“å…¥è¾“å‡ºå±‚ã€‚
+3. ï¼ˆApplicationï¼‰è¡¥å…¨Linuxå’ŒMacintoshçš„KeyIdentifiersã€KeyboardModifierså’ŒMouseModifiersç±»ã€‚
+4. ï¼ˆApplicationï¼‰è¡¥å…¨Androidã€Linuxå’ŒMacintoshçš„å­—ä½“ä¿¡æ¯ï¼Œå¹¶æ‹†åˆ†å‡ºå·¥å‚ç±»ã€‚
+5. ï¼ˆApplicationï¼‰è¡¥å…¨Androidã€Linuxå’ŒMacintoshçš„é¼ æ ‡ä½ç½®ç±»ï¼Œå¹¶æ‹†åˆ†å‡ºå·¥å‚ç±»ã€‚
+6. ï¼ˆApplicationï¼‰è¡¥å…¨Androidã€Linuxå’ŒMacintoshçš„åº”ç”¨ä¿¡æ¯ç±»ã€‚
