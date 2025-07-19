@@ -16,7 +16,7 @@
 
 #include <filesystem>
 
-#ifdef !SYSTEM_PLATFORM_WIN32
+#ifndef SYSTEM_PLATFORM_WIN32
 
 #include <sys/stat.h>
 #include <errno.h>
