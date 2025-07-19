@@ -54,4 +54,52 @@ else ()
     add_library(AssistTools SHARED ${SRC_DIR_LIST})
 endif ()
 
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+
+    if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+
+        target_link_libraries(AssistToolsD
+                PRIVATE
+                SystemD
+                CoreToolsD
+                NetworkD
+                DatabaseD
+                ScriptD
+                MathematicsD
+                SoundEffectD
+                InputOutputD
+                ResourceManagerD
+                RenderingD
+                PhysicsD
+                ImagicsD
+                AnimationD
+                ArtificialIntelligenceD
+                UserInterfaceD
+        )
+
+    else ()
+
+        target_link_libraries(AssistTools
+                PRIVATE
+                System
+                CoreTools
+                Network
+                Database
+                Script
+                Mathematics
+                SoundEffect
+                InputOutput
+                ResourceManager
+                Rendering
+                Physics
+                Imagics
+                Animation
+                ArtificialIntelligence
+                UserInterface
+        )
+
+    endif ()
+
+endif ()
+
 # TODO: 如有需要，请添加测试并安装目标。

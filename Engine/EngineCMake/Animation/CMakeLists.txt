@@ -48,4 +48,46 @@ else ()
     add_library(Animation SHARED ${SRC_DIR_LIST})
 endif ()
 
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+
+    if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+
+        target_link_libraries(AnimationD
+                PRIVATE
+                SystemD
+                CoreToolsD
+                NetworkD
+                DatabaseD
+                ScriptD
+                MathematicsD
+                SoundEffectD
+                InputOutputD
+                ResourceManagerD
+                RenderingD
+                PhysicsD
+                ImagicsD
+        )
+
+    else ()
+
+        target_link_libraries(Animation
+                PRIVATE
+                System
+                CoreTools
+                Network
+                Database
+                Script
+                Mathematics
+                SoundEffect
+                InputOutput
+                ResourceManager
+                Rendering
+                Physics
+                Imagics
+        )
+
+    endif ()
+
+endif ()
+
 # TODO: 如有需要，请添加测试并安装目标。

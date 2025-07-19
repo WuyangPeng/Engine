@@ -58,4 +58,56 @@ else ()
     add_library(ThreadingCoreRenderEngine SHARED ${SRC_DIR_LIST})
 endif ()
 
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+
+    if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+
+        target_link_libraries(ThreadingCoreRenderEngineD
+                PRIVATE
+                SystemD
+                CoreToolsD
+                NetworkD
+                DatabaseD
+                ScriptD
+                MathematicsD
+                SoundEffectD
+                InputOutputD
+                ResourceManagerD
+                RenderingD
+                PhysicsD
+                ImagicsD
+                AnimationD
+                ArtificialIntelligenceD
+                UserInterfaceD
+                AssistToolsD
+                FrameworkD
+        )
+
+    else ()
+
+        target_link_libraries(ThreadingCoreRenderEngine
+                PRIVATE
+                System
+                CoreTools
+                Network
+                Database
+                Script
+                Mathematics
+                SoundEffect
+                InputOutput
+                ResourceManager
+                Rendering
+                Physics
+                Imagics
+                Animation
+                ArtificialIntelligence
+                UserInterface
+                AssistTools
+                Framework
+        )
+
+    endif ()
+
+endif ()
+
 # TODO: 如有需要，请添加测试并安装目标。

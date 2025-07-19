@@ -28,4 +28,26 @@ else ()
     add_library(Database SHARED ${SRC_DIR_LIST})
 endif ()
 
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+
+    if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+
+        target_link_libraries(DatabaseD
+                PRIVATE
+                SystemD
+                CoreToolsD
+        )
+
+    else ()
+
+        target_link_libraries(Database
+                PRIVATE
+                System
+                CoreTools
+        )
+
+    endif ()
+
+endif ()
+
 # TODO: 如有需要，请添加测试并安装目标。
