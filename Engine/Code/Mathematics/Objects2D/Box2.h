@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 11:17)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 11:17)
 
 #ifndef MATHEMATICS_OBJECTS_2D_BOX2_H
 #define MATHEMATICS_OBJECTS_2D_BOX2_H
@@ -33,10 +33,10 @@ namespace Mathematics
         using VerticesType = std::vector<Vector2Type>;
 
     public:
-        // Ò»¸öºĞ×ÓÓĞÖĞĞÄµãC£¬Öá·½ÏòU[0]ºÍU[1]£¨´¹Ö±ºÍµ¥Î»³¤¶ÈµÄÏòÁ¿£©£¬
-        // ºÍ·¶Î§e[0]ºÍe[1]£¨·Ç¸ºÊı£©¡£
-        // A point X = C + y[0] * U[0] + y[1] * U[1]ÊÇÔÚÄÚ²¿»òÔÚºĞ×ÓÉÏ£¬
-        // Ã¿µ±|y[i]| <= e[i]¶ÔÓÚËùÓĞµÄi
+        // ä¸€ä¸ªç›’å­æœ‰ä¸­å¿ƒç‚¹Cï¼Œè½´æ–¹å‘U[0]å’ŒU[1]ï¼ˆå‚ç›´å’Œå•ä½é•¿åº¦çš„å‘é‡ï¼‰ï¼Œ
+        // å’ŒèŒƒå›´e[0]å’Œe[1]ï¼ˆéè´Ÿæ•°ï¼‰ã€‚
+        // A point X = C + y[0] * U[0] + y[1] * U[1]æ˜¯åœ¨å†…éƒ¨æˆ–åœ¨ç›’å­ä¸Šï¼Œ
+        // æ¯å½“|y[i]| <= e[i]å¯¹äºæ‰€æœ‰çš„i
         Box2() noexcept;
         Box2(const Vector2Type& center, const Vector2Type& axis0, const Vector2Type& axis1, const Real extent0, const Real extent1, const Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
@@ -71,7 +71,7 @@ namespace Mathematics
     template <typename Real>
     NODISCARD bool Approximate(const Box2<Real>& lhs, const Box2<Real>& rhs, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-    // µ÷ÊÔÊä³ö
+    // è°ƒè¯•è¾“å‡º
     template <typename Real>
     std::ostream& operator<<(std::ostream& outFile, const Box2<Real>& box);
 }

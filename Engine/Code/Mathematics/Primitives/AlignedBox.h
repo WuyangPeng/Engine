@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.6 (2024/02/23 09:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.6 (2024/02/23 09:19)
 
 #ifndef MATHEMATICS_PRIMITIVES_ALIGNED_BOX_H
 #define MATHEMATICS_PRIMITIVES_ALIGNED_BOX_H
@@ -16,9 +16,9 @@
 #include "Mathematics/Algebra/AlgebraFwd.h"
 #include "Mathematics/Algebra/Vector/Vector.h"
 
-/// ¸Ã¿òÓë±ê×¼×ø±êÖá¶ÔÆë£¬ÕâÊ¹ÎÒÃÇÄÜ¹»Ê¹ÓÃÑØÃ¿¸öÖáµÄ×îĞ¡ÖµºÍ×î´óÖµÀ´±íÊ¾Ëü¡£
-/// Ò»Ğ©Ëã·¨¸üÏ²»¶ÓÃÓÚ¶¨Ïò¿òµÄ¾ÓÖĞ±íÊ¾¡£
-/// ÖĞĞÄÎªC£¬·¶Î§ÎªÃ¿¸ö×ø±êÖá·½ÏòÉÏµÄÒ»°ë³¤¶È¡£
+/// è¯¥æ¡†ä¸æ ‡å‡†åæ ‡è½´å¯¹é½ï¼Œè¿™ä½¿æˆ‘ä»¬èƒ½å¤Ÿä½¿ç”¨æ²¿æ¯ä¸ªè½´çš„æœ€å°å€¼å’Œæœ€å¤§å€¼æ¥è¡¨ç¤ºå®ƒã€‚
+/// ä¸€äº›ç®—æ³•æ›´å–œæ¬¢ç”¨äºå®šå‘æ¡†çš„å±…ä¸­è¡¨ç¤ºã€‚
+/// ä¸­å¿ƒä¸ºCï¼ŒèŒƒå›´ä¸ºæ¯ä¸ªåæ ‡è½´æ–¹å‘ä¸Šçš„ä¸€åŠé•¿åº¦ã€‚
 namespace Mathematics
 {
     template <int N, typename Real>
@@ -34,11 +34,11 @@ namespace Mathematics
         using VerticesType = std::array<Vector, (1 << N)>;
 
     public:
-        /// Ä¬ÈÏ¹¹Ôìº¯Êı½«×îĞ¡ÖµÉèÖÃÎª-1£¬½«×î´óÖµÉèÖÃÎª+1¡£
+        /// é»˜è®¤æ„é€ å‡½æ•°å°†æœ€å°å€¼è®¾ç½®ä¸º-1ï¼Œå°†æœ€å¤§å€¼è®¾ç½®ä¸º+1ã€‚
         AlignedBox() noexcept requires(N == 2);
         AlignedBox() noexcept requires(N == 3);
 
-        /// ÇëÈ·±£ËùÓĞiµÄinMin[i] <= inMax[i]¡£
+        /// è¯·ç¡®ä¿æ‰€æœ‰içš„inMin[i] <= inMax[i]ã€‚
         AlignedBox(const Vector& inMin, const Vector& inMax);
 
         CLASS_INVARIANT_DECLARE;
@@ -48,24 +48,24 @@ namespace Mathematics
 
         void Set(const Vector& aMin, const Vector& aMax);
 
-        /// ¼ÆËã¾ÓÖĞ±íÊ¾¡£
-        /// ×¢Òâ£ºÈç¹ûÉèÖÃ×îĞ¡ÖµºÍ×î´óÖµ£¬¼ÆËãCºÍ·¶Î§£¬
-        /// È»ºóÖØĞÂ¼ÆËã×îĞ¡ÖµºÍ×î¸ßÖµ£¬ÔòÊıÖµÉáÈëÎó²î¿ÉÄÜ»áµ¼ÖÂÓë¿ªÊ¼Ê±²»Í¬µÄ½á¹û¡£
+        /// è®¡ç®—å±…ä¸­è¡¨ç¤ºã€‚
+        /// æ³¨æ„ï¼šå¦‚æœè®¾ç½®æœ€å°å€¼å’Œæœ€å¤§å€¼ï¼Œè®¡ç®—Cå’ŒèŒƒå›´ï¼Œ
+        /// ç„¶åé‡æ–°è®¡ç®—æœ€å°å€¼å’Œæœ€é«˜å€¼ï¼Œåˆ™æ•°å€¼èˆå…¥è¯¯å·®å¯èƒ½ä¼šå¯¼è‡´ä¸å¼€å§‹æ—¶ä¸åŒçš„ç»“æœã€‚
         NODISCARD AlignedBoxCenteredType GetCenteredForm() const;
 
-        /// ¼ÆËã³¤·½ÌåµÄ¶¥µã¡£
-        /// Èç¹ûË÷Òıi¾ßÓĞ±ÈÌØÄ£Ê½i = b[N-1]...b[0]£¬ÔòË÷Òıi´¦µÄ½ÇÊÇvertex[i]£¬
-        /// ÆäÖĞµ±b[d] = 0Ê±¶¥µãvertex[i][d] = min[d] £¬
-        /// »òÕßµ±b[d] = 1Ê±¶¥µãvertex[i][d] = max[d]¡£
+        /// è®¡ç®—é•¿æ–¹ä½“çš„é¡¶ç‚¹ã€‚
+        /// å¦‚æœç´¢å¼•iå…·æœ‰æ¯”ç‰¹æ¨¡å¼i = b[N-1]...b[0]ï¼Œåˆ™ç´¢å¼•iå¤„çš„è§’æ˜¯vertex[i]ï¼Œ
+        /// å…¶ä¸­å½“b[d] = 0æ—¶é¡¶ç‚¹vertex[i][d] = min[d] ï¼Œ
+        /// æˆ–è€…å½“b[d] = 1æ—¶é¡¶ç‚¹vertex[i][d] = max[d]ã€‚
         NODISCARD VerticesType GetVertices() const;
 
     private:
-        /// ÒªÇómin[i] <= max[i]¡£
+        /// è¦æ±‚min[i] <= max[i]ã€‚
         Vector min;
         Vector max;
     };
 
-    /// ÓëÖ§³ÖÅÅĞòÈİÆ÷µÄ±È½Ï¡£
+    /// ä¸æ”¯æŒæ’åºå®¹å™¨çš„æ¯”è¾ƒã€‚
     template <int N, typename Real>
     requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
     NODISCARD bool operator==(const AlignedBox<N, Real>& lhs, const AlignedBox<N, Real>& rhs);
@@ -90,7 +90,7 @@ namespace Mathematics
     requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
     NODISCARD bool operator>=(const AlignedBox<N, Real>& lhs, const AlignedBox<N, Real>& rhs);
 
-    /// Îª·½±ãÆğ¼û£¬ÇëÊ¹ÓÃÄ£°å±ğÃû¡£
+    /// ä¸ºæ–¹ä¾¿èµ·è§ï¼Œè¯·ä½¿ç”¨æ¨¡æ¿åˆ«åã€‚
     template <typename T>
     using AlignedBox2 = AlignedBox<2, T>;
 

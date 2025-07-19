@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 13:48)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 13:48)
 
 #ifndef MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_CYLINDER3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_CYLINDER3_ACHIEVE_H
@@ -96,7 +96,7 @@ Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorLine3Cylinder3<Real
             return point1;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Ë÷ÒıÔ½½ç\n"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•è¶Šç•Œ\n"s));
 }
 
 template <typename Real>
@@ -104,9 +104,9 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
 {
     FindShared findShared{};
 
-    /// ÎªÔ²Öù´´½¨×ø±êÏµ¡£ ÔÚ¸ÃÏµÍ³ÖĞ£¬Ô²Í²Ïß¶ÎÖĞĞÄCÎªÔ­µã£¬Ô²Í²Öá·½ÏòWÎªzÖá¡£ UºÍVÊÇÆäËû×ø±êÖá·½Ïò¡£
-    /// Èç¹ûP = x * U + y * V + z * W£¬ÔòÔ²ÖùÌåÎªx^2 + y^2 = r^2£¬ÆäÖĞrÎªÔ²ÖùÌå°ë¾¶¡£
-    /// ¶Ë¸ÇÎª |z| = h/2£¬ÆäÖĞhÊÇÔ²ÖùÌå¸ß¶È¡£
+    /// ä¸ºåœ†æŸ±åˆ›å»ºåæ ‡ç³»ã€‚ åœ¨è¯¥ç³»ç»Ÿä¸­ï¼Œåœ†ç­’çº¿æ®µä¸­å¿ƒCä¸ºåŸç‚¹ï¼Œåœ†ç­’è½´æ–¹å‘Wä¸ºzè½´ã€‚ Uå’ŒVæ˜¯å…¶ä»–åæ ‡è½´æ–¹å‘ã€‚
+    /// å¦‚æœP = x * U + y * V + z * Wï¼Œåˆ™åœ†æŸ±ä½“ä¸ºx^2 + y^2 = r^2ï¼Œå…¶ä¸­rä¸ºåœ†æŸ±ä½“åŠå¾„ã€‚
+    /// ç«¯ç›–ä¸º |z| = h/2ï¼Œå…¶ä¸­hæ˜¯åœ†æŸ±ä½“é«˜åº¦ã€‚
     const auto wVector = cylinder.GetAxis().GetDirection();
     const auto generateComplementBasis = Vector3ToolsType::GenerateComplementBasis(wVector);
     const auto uVector = generateComplementBasis.GetUVector();
@@ -115,24 +115,24 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
     auto halfHeight = MathType::GetRational(1, 2) * cylinder.GetHeight();
     auto radiusSqr = cylinder.GetRadius() * cylinder.GetRadius();
 
-    // ½«ÊäÈëÏßÔ­µã×ª»»ÎªÔ²Öù×ø±ê
+    // å°†è¾“å…¥çº¿åŸç‚¹è½¬æ¢ä¸ºåœ†æŸ±åæ ‡
     auto diff = origin - cylinder.GetAxis().GetOrigin();
     const Vector3 point{ Vector3ToolsType::DotProduct(uVector, diff), Vector3ToolsType::DotProduct(vVector, diff), Vector3ToolsType::DotProduct(wVector, diff) };
 
-    // »ñÈ¡´«ÈëÏßµÄµ¥Î»³¤¶È·½ÏòµÄzÖµ£¨ÒÔÔ²Öù×ø±ê±íÊ¾£©¡£
+    // è·å–ä¼ å…¥çº¿çš„å•ä½é•¿åº¦æ–¹å‘çš„zå€¼ï¼ˆä»¥åœ†æŸ±åæ ‡è¡¨ç¤ºï¼‰ã€‚
     auto dirZ = Vector3ToolsType::DotProduct(wVector, dir);
 
     if (MathType::GetValue(1) - MathType::GetZeroTolerance() <= MathType::FAbs(dirZ))
     {
-        // ¸ÃÏßÆ½ĞĞÓÚÔ²ÖùÖá¡£ È·¶¨¸ÃÏßÊÇ·ñÓëÔ²Í²¶ËÅÌÏà½»¡£
+        // è¯¥çº¿å¹³è¡Œäºåœ†æŸ±è½´ã€‚ ç¡®å®šè¯¥çº¿æ˜¯å¦ä¸åœ†ç­’ç«¯ç›˜ç›¸äº¤ã€‚
         auto radialSqrDist = radiusSqr - point.GetX() * point.GetX() - point.GetY() * point.GetY();
         if (radialSqrDist < MathType::GetValue(0))
         {
-            // ÏßÔÚÔ²ÖùÌåÍâÃæ£¬Ã»ÓĞÏà½»¡£
+            // çº¿åœ¨åœ†æŸ±ä½“å¤–é¢ï¼Œæ²¡æœ‰ç›¸äº¤ã€‚
             return findShared;
         }
 
-        // ÏßÓëÔ²Í²¶ËÅÌÏà½»¡£
+        // çº¿ä¸åœ†ç­’ç«¯ç›˜ç›¸äº¤ã€‚
         if (MathType::GetValue(0) < dirZ)
         {
             findShared.parameter0 = -point.GetZ() - halfHeight;
@@ -148,33 +148,33 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
         return findShared;
     }
 
-    // ½«ÊäÈëÏßµ¥Î»³¤¶È·½Ïò×ª»»ÎªÔ²Öù×ø±ê
+    // å°†è¾“å…¥çº¿å•ä½é•¿åº¦æ–¹å‘è½¬æ¢ä¸ºåœ†æŸ±åæ ‡
     const Vector3 direction{ Vector3ToolsType::DotProduct(uVector, dir), Vector3ToolsType::DotProduct(vVector, dir), dirZ };
 
     if (MathType::FAbs(direction.GetZ()) <= MathType::GetZeroTolerance())
     {
-        // ¸ÃÏß´¹Ö±ÓÚÔ²ÖùÖá¡£
+        // è¯¥çº¿å‚ç›´äºåœ†æŸ±è½´ã€‚
         if (halfHeight < MathType::FAbs(point.GetZ()))
         {
-            // ÏßÔÚÔ²Í²¶ËÅÌµÄÆ½ÃæÖ®Íâ¡£
+            // çº¿åœ¨åœ†ç­’ç«¯ç›˜çš„å¹³é¢ä¹‹å¤–ã€‚
             return findShared;
         }
 
-        // ²âÊÔÏßP + t * DÓëÎŞÏŞÔ²Öùx^2 + y^2 = r^2µÄ½»µã¡£
-        // Õâ¼ò»¯Îª¼ÆËã¶ş´Î·½³ÌÊ½µÄ¸ù¡£ Èç¹û P = (px,py,pz) ºÍD = (dx,dy,dz)£¬
-        // Ôò¶ş´Î·½³ÌÎª (dx^2 + dy^2) * t^2 + 2 * (px * dx + py * dy) * t + (px^2 + py^2 - r^2) = 0
+        // æµ‹è¯•çº¿P + t * Dä¸æ— é™åœ†æŸ±x^2 + y^2 = r^2çš„äº¤ç‚¹ã€‚
+        // è¿™ç®€åŒ–ä¸ºè®¡ç®—äºŒæ¬¡æ–¹ç¨‹å¼çš„æ ¹ã€‚ å¦‚æœ P = (px,py,pz) å’ŒD = (dx,dy,dz)ï¼Œ
+        // åˆ™äºŒæ¬¡æ–¹ç¨‹ä¸º (dx^2 + dy^2) * t^2 + 2 * (px * dx + py * dy) * t + (px^2 + py^2 - r^2) = 0
         auto a0 = point.GetX() * point.GetX() + point.GetY() * point.GetY() - radiusSqr;
         auto a1 = point.GetX() * direction.GetX() + point.GetY() * direction.GetY();
         auto a2 = direction.GetX() * direction.GetX() + direction.GetY() * direction.GetY();
         auto discr = a1 * a1 - a0 * a2;
         if (discr < MathType::GetValue(0))
         {
-            // Ïß²»ÓëÔ²ÖùÏà½»¡£
+            // çº¿ä¸ä¸åœ†æŸ±ç›¸äº¤ã€‚
             return findShared;
         }
         else if (MathType::GetZeroTolerance() < discr)
         {
-            // ÏßÔÚÁ½¸öÎ»ÖÃÓëÔ²ÖùÏà½»¡£
+            // çº¿åœ¨ä¸¤ä¸ªä½ç½®ä¸åœ†æŸ±ç›¸äº¤ã€‚
             auto root = MathType::Sqrt(discr);
             auto inv = MathType::GetValue(1) / a2;
             findShared.parameter0 = (-a1 - root) * inv;
@@ -184,14 +184,14 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
         }
         else
         {
-            // ÏßÓëÔ²ÖùÏàÇĞ¡£
+            // çº¿ä¸åœ†æŸ±ç›¸åˆ‡ã€‚
             findShared.parameter0 = -a1 / a2;
             findShared.quantity = 1;
             return findShared;
         }
     }
 
-    // Ê×ÏÈ²âÊÔÆ½ÃæÏà½»µã¡£
+    // é¦–å…ˆæµ‹è¯•å¹³é¢ç›¸äº¤ç‚¹ã€‚
     int quantity = 0;
 
     auto t0 = (-halfHeight - point.GetZ()) / direction.GetZ();
@@ -199,7 +199,7 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
     auto y = point.GetY() + t0 * direction.GetY();
     if (x * x + y * y <= radiusSqr)
     {
-        // ¶¥²¿Ô²Í²¶ËÅÌÄÚ²¿µÄÆ½Ãæ½»µã¡£
+        // é¡¶éƒ¨åœ†ç­’ç«¯ç›˜å†…éƒ¨çš„å¹³é¢äº¤ç‚¹ã€‚
         findShared.parameter0 = t0;
         ++quantity;
     }
@@ -209,7 +209,7 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
     y = point.GetY() + t1 * direction.GetY();
     if (x * x + y * y <= radiusSqr)
     {
-        // µ×²¿Ô²Í²¶ËÅÌÄÚ²¿µÄÆ½Ãæ½»µã¡£
+        // åº•éƒ¨åœ†ç­’ç«¯ç›˜å†…éƒ¨çš„å¹³é¢äº¤ç‚¹ã€‚
         if (quantity == 0)
         {
             findShared.parameter0 = t1;
@@ -223,7 +223,7 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
 
     if (quantity == 2)
     {
-        // ÏßÓë¶¥²¿ºÍµ×²¿Ô²Í²¶ËÅÌÏà½»¡£
+        // çº¿ä¸é¡¶éƒ¨å’Œåº•éƒ¨åœ†ç­’ç«¯ç›˜ç›¸äº¤ã€‚
         if (findShared.parameter1 < findShared.parameter0)
         {
             std::swap(findShared.parameter0, findShared.parameter1);
@@ -232,16 +232,16 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
         return findShared;
     }
 
-    /// Èç¹ûquantity == 1£¬Ôò¸ÃÏß±ØĞëÔÚ¶ËÅÌÖ®¼äµÄÄ³¸öµãÓëÔ²Öù±ÚÏà½»¡£
-    /// ÔÚÒÔÏÂ´úÂëÖĞ¼ì²âµ½ÕâÖÖÇé¿ö£¬¸Ã´úÂë²âÊÔÏßÓëÔ²Öù±ÚÖ®¼äµÄÏà½»¡£
+    /// å¦‚æœquantity == 1ï¼Œåˆ™è¯¥çº¿å¿…é¡»åœ¨ç«¯ç›˜ä¹‹é—´çš„æŸä¸ªç‚¹ä¸åœ†æŸ±å£ç›¸äº¤ã€‚
+    /// åœ¨ä»¥ä¸‹ä»£ç ä¸­æ£€æµ‹åˆ°è¿™ç§æƒ…å†µï¼Œè¯¥ä»£ç æµ‹è¯•çº¿ä¸åœ†æŸ±å£ä¹‹é—´çš„ç›¸äº¤ã€‚
     auto a0 = point.GetX() * point.GetX() + point.GetY() * point.GetY() - radiusSqr;
     auto a1 = point.GetX() * direction.GetX() + point.GetY() * direction.GetY();
     auto a2 = direction.GetX() * direction.GetX() + direction.GetY() * direction.GetY();
     auto discr = a1 * a1 - a0 * a2;
     if (discr < MathType::GetValue(0))
     {
-        // Ïß²»ÓëÔ²Í²±ÚÏà½»¡£
-        MATHEMATICS_ASSERTION_0(quantity == 0, "ÒâÍâ×´¿ö\n");
+        // çº¿ä¸ä¸åœ†ç­’å£ç›¸äº¤ã€‚
+        MATHEMATICS_ASSERTION_0(quantity == 0, "æ„å¤–çŠ¶å†µ\n");
         return findShared;
     }
     else if (MathType::GetZeroTolerance() < discr)
@@ -281,7 +281,7 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
 
         if (quantity == 2)
         {
-            // ÏßÓëÔ²Í²¶ËÅÌÖ®Ò»Ïà½»£¬²¢ÓëÔ²Í²±ÚÏà½»¡£
+            // çº¿ä¸åœ†ç­’ç«¯ç›˜ä¹‹ä¸€ç›¸äº¤ï¼Œå¹¶ä¸åœ†ç­’å£ç›¸äº¤ã€‚
             if (findShared.parameter1 < findShared.parameter0)
             {
                 std::swap(findShared.parameter0, findShared.parameter1);

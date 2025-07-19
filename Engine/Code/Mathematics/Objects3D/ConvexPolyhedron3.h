@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.4 (2024/01/12 10:26)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/12 10:26)
 
 #ifndef MATHEMATICS_OBJECTS_3D_CONVEX_POLYHEDRON3_H
 #define MATHEMATICS_OBJECTS_3D_CONVEX_POLYHEDRON3_H
@@ -32,10 +32,10 @@ namespace Mathematics
         using MathType = Math<Real>;
         using Plane3Type = Plane3<Real>;
 
-        // ��Plane��ʾDot(N,X) = c��
-        // N��ʾ��λ���������ƽ�档
-        // c��ʾƽ��ĳ�����
-        // X��ƽ���ϵ�����㡣
+        // 该Plane表示Dot(N,X) = c。
+        // N表示单位法线在这个平面。
+        // c表示平面的常量。
+        // X是平面上的任意点。
         using PlaneContainerType = std::vector<Plane3Type>;
         using TrianglesType = std::set<int>;
 
@@ -45,55 +45,55 @@ namespace Mathematics
         using IndicesType = typename ParentType::IndicesType;
 
     public:
-        // �����߸���ȷ���������һ��͹�����塣
-        // ����������۲�ʱ�������ε�����뱣����ʱ��˳��
+        // 调用者负责确保网格代表一个凸多面体。
+        // 从网格外面观察时，三角形的面必须保持逆时针顺序。
         //
-        // Polyhedron3����һ���������Դ�������ݡ�
-        // �����ʹ������ָ�루SmartPointer1DArray�������������顣
-        // �������ϣ����ɾ�����飬ʹ���Լ�������ָ������顣
+        // Polyhedron3对象一般从其他来源共享数据。
+        // 这个类使用智能指针（SmartPointer1DArray）共享输入数组。
+        // 如果您不希望类删除数组，使用自己的智能指针的数组。
         //
-        // ConvexPolyhedron3�洢���������������ƽ�档ƽ�淨����ָʾ��
-        // ��ƽ����Ա����캯���ṩ��������ǲ�ͨ���������ݣ���planes��Ϊ�գ������Զ��������ǡ�
+        // ConvexPolyhedron3存储与所述面相关联的平面。平面法线内指示。
+        // 该平面可以被构造函数提供，如果他们不通过参数传递（“planes”为空），类自动生成它们。
         ConvexPolyhedron3(const VerticesType& vertices, const IndicesType& indices, const PlaneContainerType& planes);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        // ֻ����Ա���ʡ�
+        // 只读成员访问。
         NODISCARD PlaneContainerType GetPlanes() const;
         NODISCARD const Plane3Type& GetPlane(int index) const;
 
-        // ���������޸ġ������߱���ȷ������������͹�����塣
-        // ֻҪ���޸ľ����ܶ�Ķ���󣬵���UpdatePlanes()��
-        // ���о���SetVertex���޸ģ�
-        // UpdatePlanes����ĸ��£�ֻ���޸ĵĹ����Ķ���������ν��С�
+        // 允许顶点修改。调用者必须确保多面体仍是凸多面体。
+        // 只要你修改尽可能多的顶点后，调用UpdatePlanes()。
+        // 所有经由SetVertex的修改，
+        // UpdatePlanes中面的更新，只在修改的共享的顶点的三角形进行。
         void SetVertex(int index, const Vector3& vertex) override;
         void UpdatePlanes();
         NODISCARD bool IsUpdatePlanes() const noexcept;
 
-        // ����͹�ԡ�
-        // ��������������ö�����������֤ÿ����Ķ�����Ķ��㶼��ƽ��ķǸ��ࡣ
-        // ���ž������ʱ������һ��������һ��ƽ�棨����͹���ķ���ʱ��
-        // ���з��ŵľ�������d < 0����ֵ���������������ȷ͹�Բ��ԣ�
-        // ����һ��С�ĸ���ֵt����ͨ���ú�����
-        // ����������£�������Ի���d < t < 0��
+        // 测试凸性。
+        // 这个函数将遍历该多面体的面和验证每个面的多面体的顶点都在平面的非负侧。
+        // 符号距离测试时，这样一个顶点是一条平面（用于凸）的反面时，
+        // 其有符号的距离满足d < 0，数值舍入误差会产生不正确凸性测试，
+        // 所以一个小的负阈值t可能通过该函数，
+        // 在这种情况下，距离测试会变成d < t < 0。
         NODISCARD bool IsConvex(Real threshold = -MathType::GetZeroTolerance()) const;
 
-        // ���ڶ�����Ĳ��ԣ��ڵ��ƽ����棬��n������֮���ѯִ�У�ΪO(n)�㷨��
-        // �ⲻ�������㷨���ɽ�����BSP�㷨��������ࡣ����һ��O(log n)���㷨��
+        // 点在多面体的测试，在点和平面的面，在n个顶点之间查询执行，为O(n)算法。
+        // 这不是最优算法。可将基本BSP算法用于这个类。这是一个O(log n)的算法。
         NODISCARD bool Contains(const Vector3& point, Real threshold = -MathType::GetZeroTolerance()) const;
 
     private:
         void InitPlanes();
 
-        // ֧�ֵ�ƽ��ĸ�Ч���¡�
-        // set�洢��Щ�޸Ĺ������������ε�������
+        // 支持的平面的高效更新。
+        // set存储那些修改共享顶点三角形的索引。
         void UpdatePlane(int index, const Vector3& average);
 
     private:
-        // 	��������������ε�������
+        // 	面的数量是三角形的数量。
         PlaneContainerType planes;
 
-        // Ҫ��UpdatePlane�����Ĺ���������
+        // 要在UpdatePlane处理的共享三角形
         TrianglesType sharingTriangles;
     };
 

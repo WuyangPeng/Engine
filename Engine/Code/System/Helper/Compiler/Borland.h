@@ -1,33 +1,33 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.7 (2024/03/04 17:23)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/04 17:23)
 
 #ifndef SYSTEM_HELPER_BORLAND_H
 #define SYSTEM_HELPER_BORLAND_H
 
-/// Borland C++���������ã�
+/// Borland C++编译器设置：
 
 #ifdef __BORLANDC__
 
-    /// �汾��飺
+    /// 版本检查：
     #if __BORLANDC__ < 0x540
 
-        /// ���ǲ�֧�ְ汾5.4֮ǰ��Borland��
-        #error "��������֧�����á�������������"
+        /// 我们不支持版本5.4之前的Borland：
+        #error "编译器不支持配置——请重新配置"
 
     #elif (0x613 < __BORLANDC__)
 
-        /// ��֪�����ı������汾��
-        #error "δ֪�ı������汾"
+        /// 所知的最后的编译器版本：
+        #error "未知的编译器版本"
 
     #elif (__BORLANDC__ == 0x600)
 
-        #error "����֧��CBuilderXԤ��������"
+        #error "不再支持CBuilderX预览编译器"
 
     #endif  // __BORLANDC__
 
@@ -51,11 +51,11 @@
 
     #ifndef TCRE_SYSTEM_COMPILER
 
-        #define TCRE_SYSTEM_COMPILER "Borland C++ �汾 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
+        #define TCRE_SYSTEM_COMPILER "Borland C++ 版本 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
 
     #endif  // TCRE_SYSTEM_COMPILER
 
-    /// ֧�ֺ��԰�����׼����
+    /// 支持宏以帮助标准库检测
     #if (__BORLANDC__ < 0x560) || defined(_USE_OLD_RW_STL)
 
         #define TCRE_BCB_WITH_ROGUE_WAVE static_cast<void>(0)
@@ -70,10 +70,10 @@
 
     #endif  // __BORLANDC__
 
-    // �汾5.51�����£�
+    // 版本5.51及以下：
     #if (__BORLANDC__ <= 0x551)
 
-        /// ȱ��WCHAR_MAX/WCHAR_MIN�Ľ������
+        /// 缺少WCHAR_MAX/WCHAR_MIN的解决方法
         #include <climits>
         #include <cwchar>
 
@@ -91,18 +91,18 @@
 
     #endif  // (__BORLANDC__ <= 0x551)
 
-    /// Borland C ++ Builder 6�����°汾��
+    /// Borland C ++ Builder 6及以下版本：
     #if (__BORLANDC__ <= 0x564)
 
         #if defined(NDEBUG)
 
-            // �޸����ϱ�׼��<cstring>
+            // 修复不合标准的<cstring>
             #include <cstring>
             #undef strcmp
 
         #endif  // defined(NDEBUG)
 
-        // �޸����ϱ�׼��errno������
+        // 修复不合标准的errno声明。
         #include <errno.h>
 
         #ifndef errno
@@ -113,16 +113,16 @@
 
     #endif  // (__BORLANDC__ <= 0x564)
 
-    /// Borland C++ Builder 6Ĭ��ʹ��STLPort��
-    /// �������_USE_OLD_RW_STL��
-    /// ��ô���Ƕ�Rogue Waveʵ�־���0x560����߰汾��
-    /// �������std::DBL_MAX����
+    /// Borland C++ Builder 6默认使用STLPort，
+    /// 如果定义_USE_OLD_RW_STL，
+    /// 那么我们对Rogue Wave实现具有0x560或更高版本，
+    /// 这可能有std::DBL_MAX错误。
     #if defined(TCRE_BCB_WITH_ROGUE_WAVE)
 
-        /// <climits>���ֲ��ϱ�׼��
-        /// һЩ�궨���������������ռ�std�еķ��ţ�
-        /// ���������ղ��ò�ʹ��std::DBL_MAX�����ķǷ����죬
-        /// ��Ϊһ���޸�������ֻ��Ҫ����float.h��
+        /// <climits>部分不合标准，
+        /// 一些宏定义了真正在命名空间std中的符号，
+        /// 所以你最终不得不使用std::DBL_MAX这样的非法构造，
+        /// 作为一个修复，我们只需要包含float.h。
         #include <float.h>
 
     #endif  // defined(TCRE_BCB_WITH_ROGUE_WAVE)

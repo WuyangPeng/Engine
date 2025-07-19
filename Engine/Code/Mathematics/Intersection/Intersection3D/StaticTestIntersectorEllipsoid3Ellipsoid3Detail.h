@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:22)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:22)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_ELLIPSOID3_ELLIPSOID3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_ELLIPSOID3_ELLIPSOID3_DETAIL_H
@@ -65,49 +65,49 @@ typename Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::Classific
 template <typename Real>
 void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::Test()
 {
-    // »ñÈ¡ÍÖÇòÌå0µÄ²ÎÊı¡£
+    // è·å–æ¤­çƒä½“0çš„å‚æ•°ã€‚
     const auto center0 = ellipsoid0.GetCenter();
     const Matrix3<Real> rotationMatrix0{ ellipsoid0.GetAxis0(), ellipsoid0.GetAxis1(), ellipsoid0.GetAxis2(), MatrixMajorFlags::Row };
     const Matrix3<Real> extentMatrix0{ (MathType::GetValue(1)) / (ellipsoid0.GetExtent0() * ellipsoid0.GetExtent0()),
                                        (MathType::GetValue(1)) / (ellipsoid0.GetExtent1() * ellipsoid0.GetExtent1()),
                                        (MathType::GetValue(1)) / (ellipsoid0.GetExtent2() * ellipsoid0.GetExtent2()) };
 
-    // »ñÈ¡ÍÖÇòÌå1µÄ²ÎÊı¡£
+    // è·å–æ¤­çƒä½“1çš„å‚æ•°ã€‚
     const auto center1 = ellipsoid1.GetCenter();
     const Matrix3<Real> rotationMatrix1{ ellipsoid1.GetAxis0(), ellipsoid1.GetAxis1(), ellipsoid1.GetAxis2(), MatrixMajorFlags::Row };
     const Matrix3<Real> extentMatrix1{ (MathType::GetValue(1)) / (ellipsoid1.GetExtent0() * ellipsoid1.GetExtent0()),
                                        (MathType::GetValue(1)) / (ellipsoid1.GetExtent1() * ellipsoid1.GetExtent1()),
                                        (MathType::GetValue(1)) / (ellipsoid1.GetExtent2() * ellipsoid1.GetExtent2()) };
 
-    // ¼ÆËã K2.
+    // è®¡ç®— K2.
     const Matrix3<Real> extent0NegHalf{ ellipsoid0.GetExtent0(), ellipsoid0.GetExtent1(), ellipsoid0.GetExtent2() };
     const Matrix3<Real> extent0Half{ (MathType::GetValue(1)) / ellipsoid0.GetExtent0(),
                                      (MathType::GetValue(1)) / ellipsoid0.GetExtent1(),
                                      (MathType::GetValue(1)) / ellipsoid0.GetExtent2() };
     const auto k2 = extent0Half * ((center1 - center0) * rotationMatrix0);
 
-    // ¼ÆËã M2.
+    // è®¡ç®— M2.
     const auto value0 = TransposeTimes(rotationMatrix1, rotationMatrix0 * extent0NegHalf);
     const auto m2 = TransposeTimes(value0, (extentMatrix1)*value0);
 
-    // Òò×Ó M2 = R*D*R^T.
+    // å› å­ M2 = R*D*R^T.
 
     const auto matrix3EigenDecomposition = m2.EigenDecomposition();
     const auto rotatio = matrix3EigenDecomposition.GetRotation();
     auto diagonal = matrix3EigenDecomposition.GetDiagonal();
 
-    // ¼ÆËã K = Real^T*K2.
+    // è®¡ç®— K = Real^T*K2.
     auto k = k2 * rotatio;
 
-    // ±ä»»ºóµÄÍÖÇò0ÎªZ^T*Z = 1£¬¶ø±ä»»ºóµÄÍÖÇò1Îª(Z-K)^T*D*(Z-K) = 0¡£
+    // å˜æ¢åçš„æ¤­çƒ0ä¸ºZ^T*Z = 1ï¼Œè€Œå˜æ¢åçš„æ¤­çƒ1ä¸º(Z-K)^T*D*(Z-K) = 0ã€‚
 
-    // ´Ó±ä»»µÄÍÖÇò1ÉÏµÄµãµÄÔ­µã¿ªÊ¼µÄ×îĞ¡ºÍ×î´óÆ½·½¾àÀëÓÃÓÚÈ·¶¨ÍÖÇòÊÇ·ñÏà½»£¬·Ö¸ô»òÒ»¸ö°üº¬ÁíÒ»¸ö¡£
+    // ä»å˜æ¢çš„æ¤­çƒ1ä¸Šçš„ç‚¹çš„åŸç‚¹å¼€å§‹çš„æœ€å°å’Œæœ€å¤§å¹³æ–¹è·ç¦»ç”¨äºç¡®å®šæ¤­çƒæ˜¯å¦ç›¸äº¤ï¼Œåˆ†éš”æˆ–ä¸€ä¸ªåŒ…å«å¦ä¸€ä¸ªã€‚
     auto minSqrDistance = MathType::maxReal;
     auto maxSqrDistance = MathType::GetValue(0);
 
     if (Vector3ToolsType::Approximate(k, Vector3Type::GetZero()))
     {
-        // ¹²Í¬ÖĞĞÄµÄÌØÊâÇé¿ö±ØĞë·Ö¿ª´¦Àí¡£ ÍÖÔ²Ìå²»¿ÉÄÜ·Ö¿ª¡£
+        // å…±åŒä¸­å¿ƒçš„ç‰¹æ®Šæƒ…å†µå¿…é¡»åˆ†å¼€å¤„ç†ã€‚ æ¤­åœ†ä½“ä¸å¯èƒ½åˆ†å¼€ã€‚
         for (auto i = 0; i < 3; ++i)
         {
             auto invDiagonal = (MathType::GetValue(1)) / diagonal[i][i];
@@ -138,10 +138,10 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::Test()
         }
     }
 
-    /// ¶ÔÓÚÄ³Ğ©ÒÔº¯Êıf(s)Îª¸ùµÄ±êÁ¿s0ºÍs1£¬
-    /// ×î½Ó½üµÄµãP0ºÍ×îÔ¶µÄµãP1ÊÇs0*D*(P0 - K) = P0ºÍs1*D*(P1 - K) = P1µÄ
+    /// å¯¹äºæŸäº›ä»¥å‡½æ•°f(s)ä¸ºæ ¹çš„æ ‡é‡s0å’Œs1ï¼Œ
+    /// æœ€æ¥è¿‘çš„ç‚¹P0å’Œæœ€è¿œçš„ç‚¹P1æ˜¯s0*D*(P0 - K) = P0å’Œs1*D*(P1 - K) = P1çš„
     /// f(s) = d0*k0^2/(d0*s-1)^2+d1*k1^2/(d1*s-1)^2+d2*k2^2/(d2*s-1)^2-1
-    /// ÆäÖĞD = diagonal(d0,d1,d2) ºÍK = (k0,k1,k2)¡£
+    /// å…¶ä¸­D = diagonal(d0,d1,d2) å’ŒK = (k0,k1,k2)ã€‚
     auto d0 = diagonal[0][0];
     auto d1 = diagonal[1][1];
     auto d2 = diagonal[2][2];
@@ -149,7 +149,7 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::Test()
     auto c1 = k[1] * k[1];
     auto c2 = k[2] * k[2];
 
-    // ¶ÔÖµ½øĞĞÅÅĞò£¬ÒÔÊ¹d0 >= d1 >= d2¡£ ÕâÊ¹ÎÒÃÇ¿ÉÒÔ°ó¶¨f(s)µÄ¸ù£¬f(s)µÄ¸ù×î¶àÎª6¡£
+    // å¯¹å€¼è¿›è¡Œæ’åºï¼Œä»¥ä½¿d0 >= d1 >= d2ã€‚ è¿™ä½¿æˆ‘ä»¬å¯ä»¥ç»‘å®šf(s)çš„æ ¹ï¼Œf(s)çš„æ ¹æœ€å¤šä¸º6ã€‚
     using ParamType = std::pair<Real, Real>;
     using ParamContainer = std::vector<ParamType>;
     ParamContainer param{ std::make_pair(d0, c0), std::make_pair(d1, c1), std::make_pair(d2, c2) };
@@ -228,8 +228,8 @@ void Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::Test()
     }
     else
     {
-        // numValid²»ÄÜÎªÁã£¬ÒòÎªÎÒÃÇÒÑ¾­´¦ÀíÁËÇé¿öK = 0
-        MATHEMATICS_ASSERTION_0(false, "ÒâÍâ×´¿ö.\n");
+        // numValidä¸èƒ½ä¸ºé›¶ï¼Œå› ä¸ºæˆ‘ä»¬å·²ç»å¤„ç†äº†æƒ…å†µK = 0
+        MATHEMATICS_ASSERTION_0(false, "æ„å¤–çŠ¶å†µ.\n");
         classification = Classification::EllipsoidsIntersecting;
         return;
     }
@@ -400,10 +400,10 @@ typename Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::RootsType
     RootsType roots{};
 
     // f(s) = d0*c0/(d0*s-1)^2 + d1*c1/(d1*s-1)^2 + d2*c2/(d2*s-1)^2 - 1
-    // ÆäÖĞ d0 > d1 > d2
+    // å…¶ä¸­ d0 > d1 > d2
 
     // f(s) = d0*c0/(d0*s-1)^2 + d1*c1/(d1*s-1)^2 - 1
-    // ÆäÖĞ d0 > d1
+    // å…¶ä¸­ d0 > d1
     auto epsilon = static_cast<Real>(0.001);
 
     auto multiplier0 = MathType::Sqrt(MathType::GetValue(3)) / (MathType::GetValue(1) - epsilon);
@@ -418,7 +418,7 @@ typename Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::RootsType
     auto invD1 = (MathType::GetValue(1)) / d1;
     auto invD2 = (MathType::GetValue(1)) / d2;
 
-    // ¼ÆËã£¨-infinity,1/d0£©ÖĞµÄ¸ù£¨Èç¹ûÓĞ£©¡£
+    // è®¡ç®—ï¼ˆ-infinity,1/d0ï¼‰ä¸­çš„æ ¹ï¼ˆå¦‚æœæœ‰ï¼‰ã€‚
     auto temp0 = (MathType::GetValue(1) - multiplier0 * sqrtd0c0) * invD0;
     auto temp1 = (MathType::GetValue(1) - multiplier0 * sqrtd1c1) * invD1;
     auto temp2 = (MathType::GetValue(1) - multiplier0 * sqrtd2c2) * invD2;
@@ -431,7 +431,7 @@ typename Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::RootsType
     auto invN1Sqr = invN1 * invN1;
     auto invN2Sqr = invN2 * invN2;
     auto fMin = d0c0 * invN0Sqr + d1c1 * invN1Sqr + d2c2 * invN2Sqr - MathType::GetValue(1);
-    MATHEMATICS_ASSERTION_0(fMin < MathType::GetValue(0), "ÒâÍâÇé¿ö.\n");
+    MATHEMATICS_ASSERTION_0(fMin < MathType::GetValue(0), "æ„å¤–æƒ…å†µ.\n");
 
     auto sMax = (MathType::GetValue(1) - multiplier1 * sqrtd0c0) * invD0;
     invN0 = (MathType::GetValue(1)) / (d0 * sMax - MathType::GetValue(1));
@@ -441,12 +441,12 @@ typename Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::RootsType
     invN1Sqr = invN1 * invN1;
     invN2Sqr = invN2 * invN2;
     auto fMax = d0c0 * invN0Sqr + d1c1 * invN1Sqr + d2c2 * invN2Sqr - MathType::GetValue(1);
-    MATHEMATICS_ASSERTION_0(MathType::GetValue(0) < fMax, "ÒâÍâÇé¿ö.\n");
+    MATHEMATICS_ASSERTION_0(MathType::GetValue(0) < fMax, "æ„å¤–æƒ…å†µ.\n");
 
     auto result = BisectF(d0, d1, d2, d0c0, d1c1, d2c2, sMin, fMin, sMax, fMax);
     roots.emplace_back(result.s);
 
-    // ¼ÆËã¸ùÔÚ (1 / d0,1 / d1).
+    // è®¡ç®—æ ¹åœ¨ (1 / d0,1 / d1).
 
     result = BisectDF(d0, d1, d2, d0c0, d1c1, d2c2, invD0, -MathType::maxReal, invD1, MathType::maxReal);
     auto sMid = result.s;
@@ -470,7 +470,7 @@ typename Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::RootsType
         roots.emplace_back(s);
     }
 
-    // ¼ÆËã¸ùÔÚ (1 / d1,1 / d2).
+    // è®¡ç®—æ ¹åœ¨ (1 / d1,1 / d2).
     result = BisectDF(d0, d1, d2, d0c0, d1c1, d2c2, invD1, -MathType::maxReal, invD2, MathType::maxReal);
     sMid = result.s;
     df = result.f;
@@ -493,7 +493,7 @@ typename Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::RootsType
         roots.emplace_back(s);
     }
 
-    // ¼ÆËã¸ùÔÚ (1 / d2,+infinity).
+    // è®¡ç®—æ ¹åœ¨ (1 / d2,+infinity).
     temp0 = (MathType::GetValue(1) + multiplier0 * sqrtd0c0) * invD0;
     temp1 = (MathType::GetValue(1) + multiplier0 * sqrtd1c1) * invD1;
     temp2 = (MathType::GetValue(1) + multiplier0 * sqrtd2c2) * invD2;
@@ -643,7 +643,7 @@ typename Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::RootsType
     RootsType roots{};
 
     // f(s) = d0*c0/(d0*s-1)^2 + d1*c1/(d1*s-1)^2 - 1
-    // ÆäÖĞ d0 > d1
+    // å…¶ä¸­ d0 > d1
 
     auto epsilon = Real{ 0.001 };
     auto multiplier0 = MathType::Sqrt((MathType::GetValue(2)) / (MathType::GetValue(1) - epsilon));
@@ -655,7 +655,7 @@ typename Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::RootsType
     auto invD0 = (MathType::GetValue(1)) / d0;
     auto invD1 = (MathType::GetValue(1)) / d1;
 
-    // ¼ÆËã¸ùÔÚ (-infinity,1 / d0).
+    // è®¡ç®—æ ¹åœ¨ (-infinity,1 / d0).
     auto temp0 = (MathType::GetValue(1) - multiplier0 * sqrtd0c0) * invD0;
     auto temp1 = (MathType::GetValue(1) - multiplier0 * sqrtd1c1) * invD1;
     auto sMin = (temp0 < temp1 ? temp0 : temp1);
@@ -677,7 +677,7 @@ typename Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::RootsType
     auto f = result.f;
     roots.emplace_back(s);
 
-    // ¼ÆËã¸ùÔÚ (1 / d0,1 / d1).
+    // è®¡ç®—æ ¹åœ¨ (1 / d0,1 / d1).
 
     result = BisectDF(d0, d1, d0c0, d1c1, invD0, -MathType::maxReal, invD1, MathType::maxReal);
     auto sMid = result.s;
@@ -699,7 +699,7 @@ typename Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::RootsType
         roots.emplace_back(s);
     }
 
-    // ¼ÆËã¸ùÔÚ (1 / d1,+infinity).
+    // è®¡ç®—æ ¹åœ¨ (1 / d1,+infinity).
     temp0 = (MathType::GetValue(1) + multiplier0 * sqrtd0c0) * invD0;
     temp1 = (MathType::GetValue(1) + multiplier0 * sqrtd1c1) * invD1;
     sMax = (temp0 > temp1 ? temp0 : temp1);

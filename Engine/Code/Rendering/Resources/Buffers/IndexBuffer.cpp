@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/29 14:02)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/29 14:02)
 
 #include "Rendering/RenderingExport.h"
 
@@ -39,7 +39,7 @@ Rendering::IndexBuffer::IndexBuffer(const std::string& name, IndexBufferCreate i
 
     if (numPrimitives <= 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§ÊıÁ¿µÄprimitives¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆæ•°é‡çš„primitivesã€‚"s))
     }
 
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -56,7 +56,7 @@ Rendering::IndexBuffer::IndexBuffer(const std::string& name, IndexBufferCreate i
 
     if (numPrimitives <= 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§ÊıÁ¿µÄprimitives¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆæ•°é‡çš„primitivesã€‚"s))
     }
 
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -209,7 +209,7 @@ void Rendering::IndexBuffer::SetNumActivePrimitives(int numActive)
 
     if (numPrimitives < numActive)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§ÊıÁ¿µÄprimitives¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆæ•°é‡çš„primitivesã€‚"s))
     }
 
     numActivePrimitives = numActive;
@@ -239,7 +239,7 @@ void Rendering::IndexBuffer::SetFirstPrimitive(int first)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§µÄfirst primitives¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆçš„first primitivesã€‚"s))
     }
 }
 
@@ -280,7 +280,7 @@ void Rendering::IndexBuffer::SetPoint(int index, int32_t vertex)
         }
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Ë÷ÒıÔ½½ç¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•è¶Šç•Œã€‚"s))
 }
 
 int32_t Rendering::IndexBuffer::GetPoint(int index) const
@@ -301,7 +301,7 @@ int32_t Rendering::IndexBuffer::GetPoint(int index) const
         }
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Ë÷ÒıÔ½½ç¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•è¶Šç•Œã€‚"s))
 }
 
 void Rendering::IndexBuffer::SetSegment(int index, int32_t vertex0, int32_t vertex1)
@@ -336,7 +336,7 @@ void Rendering::IndexBuffer::SetSegment(int index, int32_t vertex0, int32_t vert
         }
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Ë÷ÒıÔ½½ç¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•è¶Šç•Œã€‚"s))
 }
 
 Rendering::IndexBuffer::SegmentType Rendering::IndexBuffer::GetSegment(int index) const
@@ -371,7 +371,7 @@ Rendering::IndexBuffer::SegmentType Rendering::IndexBuffer::GetSegment(int index
         }
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Ë÷ÒıÔ½½ç¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•è¶Šç•Œã€‚"s))
 }
 
 void Rendering::IndexBuffer::SetTriangle(int index, int32_t vertex0, int32_t vertex1, int32_t vertex2)
@@ -401,11 +401,11 @@ void Rendering::IndexBuffer::SetTriangle(int index, int32_t vertex0, int32_t ver
             }
             else if (primitiveType == IndexFormatType::TriangleMeshAdjacency)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TriangleMeshAdjacency²»Ö§³Ö¡£"s))
+                THROW_EXCEPTION(SYSTEM_TEXT("TriangleMeshAdjacencyä¸æ”¯æŒã€‚"s))
             }
             else if (primitiveType == IndexFormatType::TriangleStripAdjacency)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TriangleStripAdjacency²»Ö§³Ö¡£"s))
+                THROW_EXCEPTION(SYSTEM_TEXT("TriangleStripAdjacencyä¸æ”¯æŒã€‚"s))
             }
         }
         else
@@ -427,11 +427,11 @@ void Rendering::IndexBuffer::SetTriangle(int index, int32_t vertex0, int32_t ver
             }
             else if (primitiveType == IndexFormatType::TriangleMeshAdjacency)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TriangleMeshAdjacency²»Ö§³Ö¡£"s))
+                THROW_EXCEPTION(SYSTEM_TEXT("TriangleMeshAdjacencyä¸æ”¯æŒã€‚"s))
             }
             else if (primitiveType == IndexFormatType::TriangleStripAdjacency)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TriangleStripAdjacency²»Ö§³Ö¡£"s))
+                THROW_EXCEPTION(SYSTEM_TEXT("TriangleStripAdjacencyä¸æ”¯æŒã€‚"s))
             }
         }
     }
@@ -464,11 +464,11 @@ Rendering::IndexBuffer::TriangleType Rendering::IndexBuffer::GetTriangle(int ind
             }
             else if (primitiveType == IndexFormatType::TriangleMeshAdjacency)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TriangleMeshAdjacency²»Ö§³Ö¡£"s))
+                THROW_EXCEPTION(SYSTEM_TEXT("TriangleMeshAdjacencyä¸æ”¯æŒã€‚"s))
             }
             else if (primitiveType == IndexFormatType::TriangleStripAdjacency)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TriangleStripAdjacency²»Ö§³Ö¡£"s))
+                THROW_EXCEPTION(SYSTEM_TEXT("TriangleStripAdjacencyä¸æ”¯æŒã€‚"s))
             }
         }
         else
@@ -490,23 +490,23 @@ Rendering::IndexBuffer::TriangleType Rendering::IndexBuffer::GetTriangle(int ind
             }
             else if (primitiveType == IndexFormatType::TriangleMeshAdjacency)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TriangleMeshAdjacency²»Ö§³Ö¡£"s))
+                THROW_EXCEPTION(SYSTEM_TEXT("TriangleMeshAdjacencyä¸æ”¯æŒã€‚"s))
             }
             else if (primitiveType == IndexFormatType::TriangleStripAdjacency)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TriangleStripAdjacency²»Ö§³Ö¡£"s))
+                THROW_EXCEPTION(SYSTEM_TEXT("TriangleStripAdjacencyä¸æ”¯æŒã€‚"s))
             }
         }
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Ë÷ÒıÔ½½ç¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•è¶Šç•Œã€‚"s))
 }
 
 void Rendering::IndexBuffer::ValidPrimitiveType(IndexFormatType type) const
 {
     if ((primitiveType & type) == IndexFormatType::Zero)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§µÄprimitiveÀàĞÍ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆçš„primitiveç±»å‹ã€‚"s))
     }
 }
 
@@ -539,7 +539,7 @@ Rendering::IndexBuffer::RendererObjectSharedPtr Rendering::IndexBuffer::CreateRe
         }
         default:
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("äÖÈ¾ÀàĞÍ²»´æÔÚ¡£"s))
+            THROW_EXCEPTION(SYSTEM_TEXT("æ¸²æŸ“ç±»å‹ä¸å­˜åœ¨ã€‚"s))
         }
     }
 }

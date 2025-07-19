@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:55)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:55)
 
 #ifndef RENDERING_DATA_TYPES_COLOUR_MANAGE_H
 #define RENDERING_DATA_TYPES_COLOUR_MANAGE_H
@@ -23,13 +23,13 @@ namespace Rendering
         using ClassType = ColourManager;
 
     public:
-        // ´Ó8Î»Í¨µÀ´´½¨Ò»¸ö32Î»RGBµÄÑÕÉ«¡£alphaÍ¨µÀÉèÖÃÎª255¡£
+        // ä»8ä½é€šé“åˆ›å»ºä¸€ä¸ª32ä½RGBçš„é¢œè‰²ã€‚alphaé€šé“è®¾ç½®ä¸º255ã€‚
         NODISCARD static constexpr uint32_t MakeR8G8B8(uint8_t red, uint8_t green, uint8_t blue) noexcept
         {
             return MakeR8G8B8A8(red, green, blue, ColourDefaultTraits<uint8_t>::maxValue);
         }
 
-        // ´Ó8Î»Í¨µÀ´´½¨Ò»¸ö32Î»RGBµÄÑÕÉ«¡£
+        // ä»8ä½é€šé“åˆ›å»ºä¸€ä¸ª32ä½RGBçš„é¢œè‰²ã€‚
         NODISCARD static constexpr uint32_t MakeR8G8B8A8(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha) noexcept
         {
 #ifdef SYSTEM_BIG_ENDIAN
@@ -39,10 +39,10 @@ namespace Rendering
 #endif  // SYSTEM_BIG_ENDIAN
         }
 
-        // ÌáÈ¡8Î»Í¨µÀ´Ó32Î»RGBAÑÕÉ«£¬alphaÍ¨µÀ±»ºöÂÔ¡£
+        // æå–8ä½é€šé“ä»32ä½RGBAé¢œè‰²ï¼Œalphaé€šé“è¢«å¿½ç•¥ã€‚
         NODISCARD static ByteColour ExtractR8G8B8(uint32_t color) noexcept;
 
-        // ÌáÈ¡8Î»Í¨µÀ´Ó32Î»RGBAÑÕÉ«¡£
+        // æå–8ä½é€šé“ä»32ä½RGBAé¢œè‰²ã€‚
         NODISCARD static ByteColour ExtractR8G8B8A8(uint32_t color) noexcept;
     };
 }

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/29 13:48)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/29 13:48)
 
 #ifndef RENDERING_RESOURCES_INDEX_BUFFER_H
 #define RENDERING_RESOURCES_INDEX_BUFFER_H
@@ -29,12 +29,12 @@ namespace Rendering
         using TriangleType = std::tuple<int32_t, int32_t, int32_t>;
 
     public:
-        // Í¼ĞÎÒıÇæÖĞµÄDrawIndexedµ÷ÓÃ¡£
+        // å›¾å½¢å¼•æ“ä¸­çš„DrawIndexedè°ƒç”¨ã€‚
         NODISCARD static IndexBufferSharedPtr Create(const std::string& name, IndexFormatType type, int numPrimitives, int indexSize, bool createStorage = true);
 
-        /// Èç¹ûÏ£ÍûË÷ÒıÓÉ¶¥µã»º³åÇøÖĞ¶¥µãµÄË³ĞòÒşº¬£¬ÇëÊ¹ÓÃ´Ëº¯Êı¹¹Ôì¡£
-        /// Í¼ĞÎÒıÇæÖĞµÄDrawµ÷ÓÃ¡£±ØĞëÈ·±£numPrimitivesºÍnumVertices£¨ÔÚVertexBufferÖĞ£©Ò»ÖÂ¡£
-        /// UsageType±êÖ¾²»ÊÊÓÃ£¬ÒòÎªÃ»ÓĞÏµÍ³ÄÚ´æ×ÊÔ´Êı¾İ¡£
+        /// å¦‚æœå¸Œæœ›ç´¢å¼•ç”±é¡¶ç‚¹ç¼“å†²åŒºä¸­é¡¶ç‚¹çš„é¡ºåºéšå«ï¼Œè¯·ä½¿ç”¨æ­¤å‡½æ•°æ„é€ ã€‚
+        /// å›¾å½¢å¼•æ“ä¸­çš„Drawè°ƒç”¨ã€‚å¿…é¡»ç¡®ä¿numPrimitiveså’ŒnumVerticesï¼ˆåœ¨VertexBufferä¸­ï¼‰ä¸€è‡´ã€‚
+        /// UsageTypeæ ‡å¿—ä¸é€‚ç”¨ï¼Œå› ä¸ºæ²¡æœ‰ç³»ç»Ÿå†…å­˜èµ„æºæ•°æ®ã€‚
         NODISCARD static IndexBufferSharedPtr Create(const std::string& name, IndexFormatType type, int numPrimitives);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -48,29 +48,29 @@ namespace Rendering
         NODISCARD IndexFormatType GetPrimitiveType() const noexcept;
         NODISCARD int GetNumPrimitives() const noexcept;
 
-        /// Ö¸¶¨²»Ï£Íû»æÖÆËùÓĞ»ù±¾ÌåÊ±Òª»æÖÆµÄ»ù±¾ÌåÊıÁ¿¡£
-        /// Ä¬ÈÏÖµÎªnumPrimitives¡£
-        /// º¯ÊıSetNumActivePrimitives¿ÉÈ·±£ÊäÈëÂú×ãnumActive <= numPrimitives¡£
+        /// æŒ‡å®šä¸å¸Œæœ›ç»˜åˆ¶æ‰€æœ‰åŸºæœ¬ä½“æ—¶è¦ç»˜åˆ¶çš„åŸºæœ¬ä½“æ•°é‡ã€‚
+        /// é»˜è®¤å€¼ä¸ºnumPrimitivesã€‚
+        /// å‡½æ•°SetNumActivePrimitiveså¯ç¡®ä¿è¾“å…¥æ»¡è¶³numActive <= numPrimitivesã€‚
         void SetNumActivePrimitives(int numActive);
         NODISCARD int GetNumActivePrimitives() const noexcept;
         NODISCARD int GetNumActiveIndices() const;
 
-        /// Ö¸¶¨Òª»æÖÆµÄµÚÒ»¸ö»ù±¾ÌåµÄË÷Òı¡£Ä¬ÈÏÖµÎªÁã¡£
-        /// Èç¹û¼Æ»®Í¬Ê±ĞŞ¸Ä»î¶¯»ù±¾ÌåµÄÊıÁ¿ºÍÒª»æÖÆµÄµÚÒ»¸ö»ù±¾Ìå£¬ÇëÏÈÉèÖÃ»î¶¯»ù±¾ÌåÊıÁ¿¡£
-        /// SetFirstPrimitiveÈ·±£first < numPrimitives ºÍ first + numActive <= numPrimitives¡£
+        /// æŒ‡å®šè¦ç»˜åˆ¶çš„ç¬¬ä¸€ä¸ªåŸºæœ¬ä½“çš„ç´¢å¼•ã€‚é»˜è®¤å€¼ä¸ºé›¶ã€‚
+        /// å¦‚æœè®¡åˆ’åŒæ—¶ä¿®æ”¹æ´»åŠ¨åŸºæœ¬ä½“çš„æ•°é‡å’Œè¦ç»˜åˆ¶çš„ç¬¬ä¸€ä¸ªåŸºæœ¬ä½“ï¼Œè¯·å…ˆè®¾ç½®æ´»åŠ¨åŸºæœ¬ä½“æ•°é‡ã€‚
+        /// SetFirstPrimitiveç¡®ä¿first < numPrimitives å’Œ first + numActive <= numPrimitivesã€‚
         void SetFirstPrimitive(int first);
         NODISCARD int GetFirstPrimitive() const noexcept;
         NODISCARD int GetFirstIndex() const;
 
-        /// Ö§³Ö»ùÔªË÷ÒıµÄÉèÖÃ/»ñÈ¡¡£
-        /// µ±Ë÷Òıindex²»ÔÚ»ùÔªµÄ·¶Î§ÄÚÊ±£¬º¯Êı½«Å×³öÒì³£¡£
-        /// µ÷ÓÃÕß¸ºÔğÎª»ùÔªÀàĞÍÊ¹ÓÃÕıÈ·µÄº¯Êı¡£
-        /// ÕâĞ©º¯ÊıÓĞÃ¿¸ö»ùÔªµÄ¿ªÏú£¬¼´¸÷ÖÖ·¶Î§¼ì²éºÍÀàĞÍ×ª»»£¬Òò´Ë¿¼ÂÇÕâĞ©ÊÇÒ»ÖÖ·½±ã¡£
-        /// ÎªÁË»ñµÃ×î¼ÑËÙ¶È£¬Äú¿ÉÒÔÊ¹ÓÃ
+        /// æ”¯æŒåŸºå…ƒç´¢å¼•çš„è®¾ç½®/è·å–ã€‚
+        /// å½“ç´¢å¼•indexä¸åœ¨åŸºå…ƒçš„èŒƒå›´å†…æ—¶ï¼Œå‡½æ•°å°†æŠ›å‡ºå¼‚å¸¸ã€‚
+        /// è°ƒç”¨è€…è´Ÿè´£ä¸ºåŸºå…ƒç±»å‹ä½¿ç”¨æ­£ç¡®çš„å‡½æ•°ã€‚
+        /// è¿™äº›å‡½æ•°æœ‰æ¯ä¸ªåŸºå…ƒçš„å¼€é”€ï¼Œå³å„ç§èŒƒå›´æ£€æŸ¥å’Œç±»å‹è½¬æ¢ï¼Œå› æ­¤è€ƒè™‘è¿™äº›æ˜¯ä¸€ç§æ–¹ä¾¿ã€‚
+        /// ä¸ºäº†è·å¾—æœ€ä½³é€Ÿåº¦ï¼Œæ‚¨å¯ä»¥ä½¿ç”¨
         /// auto indexBuffer = std::make_shared<IndexBuffer>(...);
         /// auto indices = indexBuffer->GetStorage();
-        /// Í¨¹ıIncrease<type>º¯Êı  <ÉèÖÃ »ò »ñÈ¡ indices>;
-        /// ÆäÖĞ¡°type¡±ÊÇ¡°int32_t¡±»ò¡°int16_t¡±£¬¾ßÌåÈ¡¾öÓÚ¹¹½¨Ë÷Òı»º³åÇøµÄ·½Ê½¡£
+        /// é€šè¿‡Increase<type>å‡½æ•°  <è®¾ç½® æˆ– è·å– indices>;
+        /// å…¶ä¸­â€œtypeâ€æ˜¯â€œint32_tâ€æˆ–â€œint16_tâ€ï¼Œå…·ä½“å–å†³äºæ„å»ºç´¢å¼•ç¼“å†²åŒºçš„æ–¹å¼ã€‚
         void SetPoint(int index, int32_t vertex);
         NODISCARD int32_t GetPoint(int index) const;
         void SetSegment(int index, int32_t vertex0, int32_t vertex1);
@@ -98,55 +98,55 @@ namespace Rendering
 
         NODISCARD static constexpr int GetPolygonPointIndexCount(int numPrimitives) noexcept
         {
-            // µ±numPrimitivesÎŞĞ§Ê±´´½¨Ò»¸öµã¡£
+            // å½“numPrimitivesæ— æ•ˆæ—¶åˆ›å»ºä¸€ä¸ªç‚¹ã€‚
             return 0 < numPrimitives ? numPrimitives : 1;
         }
 
         NODISCARD static constexpr int GetPolygonSegmentDisjointIndexCount(int numPrimitives) noexcept
         {
-            // µ±numPrimitivesÎŞĞ§Ê±£¬´´½¨Ò»¸öÏß¶Î¡£
+            // å½“numPrimitivesæ— æ•ˆæ—¶ï¼Œåˆ›å»ºä¸€ä¸ªçº¿æ®µã€‚
             return 0 < numPrimitives ? 2 * numPrimitives : 2;
         }
 
         NODISCARD static constexpr int GetPolygonSegmentContiguousIndexCount(int numPrimitives) noexcept
         {
-            // µ±numPrimitivesÎŞĞ§Ê±£¬´´½¨Ò»¸öÏß¶Î¡£
+            // å½“numPrimitivesæ— æ•ˆæ—¶ï¼Œåˆ›å»ºä¸€ä¸ªçº¿æ®µã€‚
             return 0 < numPrimitives ? numPrimitives + 1 : 2;
         }
 
         NODISCARD static constexpr int GetTriangleMeshIndexCount(int numPrimitives) noexcept
         {
-            // µ±numPrimitivesÎŞĞ§Ê±£¬´´½¨Ò»¸öÈı½ÇĞÎ¡£
+            // å½“numPrimitivesæ— æ•ˆæ—¶ï¼Œåˆ›å»ºä¸€ä¸ªä¸‰è§’å½¢ã€‚
             return 0 < numPrimitives ? 3 * numPrimitives : 3;
         }
 
         NODISCARD static constexpr int GetTriangleStripIndexCount(int numPrimitives) noexcept
         {
-            // µ±numPrimitivesÎŞĞ§Ê±£¬´´½¨Ò»¸öÈı½ÇĞÎ¡£
+            // å½“numPrimitivesæ— æ•ˆæ—¶ï¼Œåˆ›å»ºä¸€ä¸ªä¸‰è§’å½¢ã€‚
             return 0 < numPrimitives ? numPrimitives + 2 : 3;
         }
 
         NODISCARD static constexpr int GetPolygonSegmentDisjointAdjacencyIndexCount(int numPrimitives) noexcept
         {
-            // µ±numPrimitivesÎŞĞ§Ê±£¬´´½¨Ò»¸öÏß¶ÎÁ¬½Ó¡£
+            // å½“numPrimitivesæ— æ•ˆæ—¶ï¼Œåˆ›å»ºä¸€ä¸ªçº¿æ®µè¿æ¥ã€‚
             return 0 < numPrimitives ? 4 * numPrimitives : 4;
         }
 
         NODISCARD static constexpr int GetPolygonSegmentContiguousAdjacencyIndexCount(int numPrimitives) noexcept
         {
-            // µ±numPrimitivesÎŞĞ§Ê±£¬´´½¨Ò»¸öÏß¶ÎÁ¬½Ó¡£
+            // å½“numPrimitivesæ— æ•ˆæ—¶ï¼Œåˆ›å»ºä¸€ä¸ªçº¿æ®µè¿æ¥ã€‚
             return 0 < numPrimitives ? numPrimitives + 3 : 4;
         }
 
         NODISCARD static constexpr int GetTriangleMeshAdjacencyIndexCount(int numPrimitives) noexcept
         {
-            // µ±numPrimitivesÎŞĞ§Ê±£¬´´½¨Ò»¸öÈı½ÇĞÎÁ¬½Ó¡£
+            // å½“numPrimitivesæ— æ•ˆæ—¶ï¼Œåˆ›å»ºä¸€ä¸ªä¸‰è§’å½¢è¿æ¥ã€‚
             return 0 < numPrimitives ? 6 * numPrimitives : 6;
         }
 
         NODISCARD static constexpr int GetTriangleStripAdjacencyIndexCount(int numPrimitives) noexcept
         {
-            // µ±numPrimitivesÎŞĞ§Ê±£¬´´½¨Ò»¸öÈı½ÇĞÎÁ¬½Ó¡£
+            // å½“numPrimitivesæ— æ•ˆæ—¶ï¼Œåˆ›å»ºä¸€ä¸ªä¸‰è§’å½¢è¿æ¥ã€‚
             return 0 < numPrimitives ? 2 * (numPrimitives + 2) : 6;
         }
 

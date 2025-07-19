@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 15:43)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 15:43)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_ARRAY2_H
 #define CORE_TOOLS_MEMORY_TOOLS_ARRAY2_H
@@ -14,9 +14,9 @@
 
 #include <vector>
 
-/// Array2Àà±íÊ¾Ò»¸ö2Î¬Êı×é£¬
-/// ¸ÃÊı×é×î´óÏŞ¶ÈµØ¼õÉÙÁËµ÷ÓÃnewºÍdeleteµÄÊıÁ¿¡£
-/// T¶ÔÏó´æ´¢ÔÚÒ»¸öÁ¬ĞøµÄÊı×éÖĞ¡£
+/// Array2ç±»è¡¨ç¤ºä¸€ä¸ª2ç»´æ•°ç»„ï¼Œ
+/// è¯¥æ•°ç»„æœ€å¤§é™åº¦åœ°å‡å°‘äº†è°ƒç”¨newå’Œdeleteçš„æ•°é‡ã€‚
+/// Tå¯¹è±¡å­˜å‚¨åœ¨ä¸€ä¸ªè¿ç»­çš„æ•°ç»„ä¸­ã€‚
 namespace CoreTools
 {
     template <typename T>
@@ -26,10 +26,10 @@ namespace CoreTools
         using ClassType = Array2<T>;
 
     public:
-        /// Ö§³Ö¶¯Ì¬µ÷Õû´óĞ¡¡¢¸´ÖÆ»òÒÆ¶¯¡£
+        /// æ”¯æŒåŠ¨æ€è°ƒæ•´å¤§å°ã€å¤åˆ¶æˆ–ç§»åŠ¨ã€‚
         Array2() noexcept;
 
-        /// ¸ÃÊı×é¾ßÓĞbound0ÁĞºÍbound1ĞĞ¡£
+        /// è¯¥æ•°ç»„å…·æœ‰bound0åˆ—å’Œbound1è¡Œã€‚
         Array2(int bound0, int bound1);
         ~Array2() noexcept = default;
         Array2(const Array2& rhs);
@@ -39,12 +39,12 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        /// ·ÃÎÊÊı×é¡£Ê¾ÀıÓÃ·¨Îª
+        /// è®¿é—®æ•°ç»„ã€‚ç¤ºä¾‹ç”¨æ³•ä¸º
         ///   Array2<T> myArray{ 3, 2 };
-        ///   Êı×éobjectsÎª
+        ///   æ•°ç»„objectsä¸º
         ///   00 01 02
         ///   10 11 12
-        ///   Êı×éindirectÖ¸Ïò 00 10¡£
+        ///   æ•°ç»„indirectæŒ‡å‘ 00 10ã€‚
         ///   T* row1 = myArray[1];
         ///   T row1Column2 = myArray[1][2];
         NODISCARD int GetBound0() const noexcept;

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 11:17)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 11:17)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR3_ORTHONORMALIZE_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_VECTOR3_ORTHONORMALIZE_ACHIEVE_H
@@ -40,14 +40,14 @@ template <typename Real, bool Robust>
 requires std::is_arithmetic_v<Real>
 void Mathematics::Vector3Orthonormalize<Real, Robust>::Generate()
 {
-    /// Èç¹ûÊäÈëÏòÁ¿v0¡¢v1ºÍv2£¬ÔòGram-SchmidtÕı½»ÏòÁ¿²úÉúÊ¸Á¿u0¡¢u1ºÍu2ÈçÏÂ£¬
+    /// å¦‚æœè¾“å…¥å‘é‡v0ã€v1å’Œv2ï¼Œåˆ™Gram-Schmidtæ­£äº¤å‘é‡äº§ç”ŸçŸ¢é‡u0ã€u1å’Œu2å¦‚ä¸‹ï¼Œ
     ///   u0 = v0 / |v0|
     ///   u1 = (v1 - (u0 * v1)u0) / |v1 - (u0 * v1)u0|
     ///   u2 = (v2 - (u0 * v2)u0 - (u1 * v2)u1) / |v2 - (u0 * v2)u0 - (u1 * v2)u1|
     ///
-    /// ÆäÖĞ|A|±íÊ¾ÏòÁ¿AµÄ³¤¶ÈºÍA * B±íÊ¾ÏòÁ¿AºÍBµÄµã»ı
+    /// å…¶ä¸­|A|è¡¨ç¤ºå‘é‡Açš„é•¿åº¦å’ŒA * Bè¡¨ç¤ºå‘é‡Aå’ŒBçš„ç‚¹ç§¯
 
-    // ¼ÆËã u0
+    // è®¡ç®— u0
     if constexpr (Robust)
     {
         uVector.RobustNormalize(epsilon);
@@ -57,10 +57,10 @@ void Mathematics::Vector3Orthonormalize<Real, Robust>::Generate()
         uVector.Normalize(epsilon);
     }
 
-    // ¼ÆËã u1
+    // è®¡ç®— u1
     const auto dotUV = Vector3ToolsType::DotProduct(uVector, vVector);
 
-    MATHEMATICS_ASSERTION_1(epsilon < MathType::FAbs(dotUV), "ÊäÈëÏòÁ¿±ØĞëÊÇÏßĞÔÎŞ¹ØµÄ£¡");
+    MATHEMATICS_ASSERTION_1(epsilon < MathType::FAbs(dotUV), "è¾“å…¥å‘é‡å¿…é¡»æ˜¯çº¿æ€§æ— å…³çš„ï¼");
 
     vVector -= dotUV * uVector;
     if constexpr (Robust)
@@ -72,7 +72,7 @@ void Mathematics::Vector3Orthonormalize<Real, Robust>::Generate()
         vVector.Normalize(epsilon);
     }
 
-    // ¼ÆËã u2
+    // è®¡ç®— u2
     const auto dotVW = Vector3ToolsType::DotProduct(vVector, wVector);
     const auto dotUW = Vector3ToolsType::DotProduct(uVector, wVector);
 

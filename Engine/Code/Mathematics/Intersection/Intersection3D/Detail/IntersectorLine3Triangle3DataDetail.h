@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:02)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:02)
 
 #ifndef MATHEMATICS_INTERSECTION_INTERSECTOR_LINE3_TRIANGLE3_DATA_DETAIL_H
 #define MATHEMATICS_INTERSECTION_INTERSECTOR_LINE3_TRIANGLE3_DATA_DETAIL_H
@@ -25,15 +25,15 @@ Mathematics::IntersectorLine3Triangle3Data<Real>::IntersectorLine3Triangle3Data(
 template <typename Real>
 void Mathematics::IntersectorLine3Triangle3Data<Real>::CalculateDirectionDotNormal()
 {
-    // ¼ÆËãÔ­µã¡¢±ßºÍ·¨ÏßµÄÆ«ÒÆÁ¿¡£
+    // è®¡ç®—åŸç‚¹ã€è¾¹å’Œæ³•çº¿çš„åç§»é‡ã€‚
     origin = line.GetOrigin() - triangle.GetVertex(0);
     edge1 = triangle.GetVertex(1) - triangle.GetVertex(0);
     edge2 = triangle.GetVertex(2) - triangle.GetVertex(0);
     normal = Vector3ToolsType::CrossProduct(edge1, edge2);
 
-    // Çó½â Q + t * D = b1 * E1 + b2 * E2
-    // (ÆäÖĞQ = m_OriginDifference, D = ÏßµÄDirection,
-    // E1 = edge1, E2 = edge2, N = Cross(E1,E2)) ¶Ô
+    // æ±‚è§£ Q + t * D = b1 * E1 + b2 * E2
+    // (å…¶ä¸­Q = m_OriginDifference, D = çº¿çš„Direction,
+    // E1 = edge1, E2 = edge2, N = Cross(E1,E2)) å¯¹
     //   |Dot(D,N)| * b1 = sign(Dot(D,N)) * Dot(D,Cross(Q,E2))
     //   |Dot(D,N)| * b2 = sign(Dot(D,N)) * Dot(D,Cross(E1,Q))
     //   |Dot(D,N)| * t = -sign(Dot(D,N)) * Dot(Q,N)

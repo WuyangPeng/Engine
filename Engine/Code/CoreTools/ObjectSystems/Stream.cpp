@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 22:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 22:19)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,7 +22,7 @@ int CoreTools::Stream::GetStreamingSize(const char* input)
 
 int CoreTools::Stream::GetStreamingSize(int length) noexcept
 {
-    /// ¸Ã×Ö·û´®±»Ğ´Èëµ½´ÅÅÌ£¬Ê×ÏÈÊÇ³¤¶È£¬½Ó×ÅÊÇ×Ö·û£¬µ«Ã»ÓĞ°üÀ¨¿ÕÖÕÖ¹×Ö·û¡£Ëü±»Ìî³äÎªËÄ¸ö×Ö½ÚµÄ±¶Êı¡£
+    /// è¯¥å­—ç¬¦ä¸²è¢«å†™å…¥åˆ°ç£ç›˜ï¼Œé¦–å…ˆæ˜¯é•¿åº¦ï¼Œæ¥ç€æ˜¯å­—ç¬¦ï¼Œä½†æ²¡æœ‰åŒ…æ‹¬ç©ºç»ˆæ­¢å­—ç¬¦ã€‚å®ƒè¢«å¡«å……ä¸ºå››ä¸ªå­—èŠ‚çš„å€æ•°ã€‚
     const auto padding = GetPadding(length);
 
     return GetStreamSize<int32_t>() + length * GetStreamSize<char>() + padding;

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+Ôªø/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-/// ¡™œµ◊˜’ﬂ£∫94458936@qq.com
+/// ‰ΩúËÄÖÔºöÂΩ≠Ê≠¶Èò≥ÔºåÂΩ≠ÊôîÊÅ©ÔºåÂΩ≠ÊôîÊ≥Ω
+/// ËÅîÁ≥ª‰ΩúËÄÖÔºö94458936@qq.com
 ///
-/// ±Í◊º£∫std:c++20
-/// ∞Ê±æ£∫1.0.0.8 (2024/04/12 21:31)
+/// Ê†áÂáÜÔºöstd:c++20
+/// ÁâàÊú¨Ôºö1.0.0.8 (2024/04/12 21:31)
 
 #include "AssertTestApproximateTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -49,8 +49,8 @@ void CoreTools::AssertTestApproximateTesting::AssertApproximateMessageTest()
     constexpr auto lhsExpression = 20.0f;
     constexpr auto rhsExpression = 20.0f;
 
-    ASSERT_APPROXIMATE_USE_MESSAGE(lhsExpression, lhsExpression, Mathematics::MathF::GetZeroTolerance(), "≤‚ ‘");
-    ASSERT_APPROXIMATE_USE_FUNCTION_AND_MESSAGE(ClassType::Approximate, lhsExpression, rhsExpression, Mathematics::MathF::GetZeroTolerance(), "≤‚ ‘");
+    ASSERT_APPROXIMATE_USE_MESSAGE(lhsExpression, lhsExpression, Mathematics::MathF::GetZeroTolerance(), "ÊµãËØï");
+    ASSERT_APPROXIMATE_USE_FUNCTION_AND_MESSAGE(ClassType::Approximate, lhsExpression, rhsExpression, Mathematics::MathF::GetZeroTolerance(), "ÊµãËØï");
 }
 
 void CoreTools::AssertTestApproximateTesting::AssertApproximateFailureThrowTest()
@@ -58,8 +58,8 @@ void CoreTools::AssertTestApproximateTesting::AssertApproximateFailureThrowTest(
     constexpr auto lhsExpression = 20.0f;
     constexpr auto rhsExpression = 20.0f;
 
-    ASSERT_APPROXIMATE_FAILURE_THROW(lhsExpression, lhsExpression, Mathematics::MathF::GetZeroTolerance(), "≤‚ ‘");
-    ASSERT_APPROXIMATE_USE_FUNCTION_FAILURE_THROW(ClassType::Approximate, lhsExpression, rhsExpression, Mathematics::MathF::GetZeroTolerance(), "≤‚ ‘");
+    ASSERT_APPROXIMATE_FAILURE_THROW(lhsExpression, lhsExpression, Mathematics::MathF::GetZeroTolerance(), "ÊµãËØï");
+    ASSERT_APPROXIMATE_USE_FUNCTION_FAILURE_THROW(ClassType::Approximate, lhsExpression, rhsExpression, Mathematics::MathF::GetZeroTolerance(), "ÊµãËØï");
 }
 
 bool CoreTools::AssertTestApproximateTesting::Approximate(float lhs, float rhs, float epsilon) noexcept
@@ -70,13 +70,13 @@ bool CoreTools::AssertTestApproximateTesting::Approximate(float lhs, float rhs, 
 void CoreTools::AssertTestApproximateTesting::AssertApproximateFloatZeroTest()
 {
     ASSERT_APPROXIMATE_FLOAT_ZERO(0.0f);
-    ASSERT_APPROXIMATE_FLOAT_ZERO_USE_MESSAGE(0.0f, "≤‚ ‘");
-    ASSERT_APPROXIMATE_FLOAT_ZERO_FAILURE_THROW(0.0f, "≤‚ ‘");
+    ASSERT_APPROXIMATE_FLOAT_ZERO_USE_MESSAGE(0.0f, "ÊµãËØï");
+    ASSERT_APPROXIMATE_FLOAT_ZERO_FAILURE_THROW(0.0f, "ÊµãËØï");
 }
 
 void CoreTools::AssertTestApproximateTesting::AssertApproximateDoubleZeroTest()
 {
     ASSERT_APPROXIMATE_DOUBLE_ZERO(0.0);
-    ASSERT_APPROXIMATE_DOUBLE_ZERO_USE_MESSAGE(0.0, "≤‚ ‘");
-    ASSERT_APPROXIMATE_DOUBLE_ZERO_FAILURE_THROW(0.0, "≤‚ ‘");
+    ASSERT_APPROXIMATE_DOUBLE_ZERO_USE_MESSAGE(0.0, "ÊµãËØï");
+    ASSERT_APPROXIMATE_DOUBLE_ZERO_FAILURE_THROW(0.0, "ÊµãËØï");
 }

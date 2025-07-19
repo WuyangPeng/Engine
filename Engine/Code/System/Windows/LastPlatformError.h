@@ -1,13 +1,13 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.2 (2024/10/26 15:40)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.2 (2024/10/26 15:40)
 
-/// ¸ÃÎÄ¼þ°üº¬ÓëÆ½Ì¨´íÎó´¦ÀíÏà¹ØµÄº¯ÊýµÄÊµÏÖ¡£
+/// è¯¥æ–‡ä»¶åŒ…å«ä¸Žå¹³å°é”™è¯¯å¤„ç†ç›¸å…³çš„å‡½æ•°çš„å®žçŽ°ã€‚
 #ifndef SYSTEM_WINDOWS_LAST_PLATFORM_ERROR_H
 #define SYSTEM_WINDOWS_LAST_PLATFORM_ERROR_H
 
@@ -15,7 +15,7 @@
 
 #include "Fwd/WindowsFlagsFwd.h"
 
-/// »ñÈ¡ºÍÉèÖÃÏµÍ³´íÎóÂë¡£
+/// èŽ·å–å’Œè®¾ç½®ç³»ç»Ÿé”™è¯¯ç ã€‚
 namespace System
 {
     NODISCARD WindowError SYSTEM_DEFAULT_DECLARE GetPlatformLastError() noexcept;

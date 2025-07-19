@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒýÇæ°æ±¾£º0.9.0.12 (2023/06/09 09:43)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“Žç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 09:43)
 
 #ifndef MATHEMATICS_CONTAINMENT_SCRIBE_CIRCLE2_INSCRIBE_H
 #define MATHEMATICS_CONTAINMENT_SCRIBE_CIRCLE2_INSCRIBE_H
@@ -18,7 +18,7 @@
 
 namespace Mathematics
 {
-    // Ô²ÄÚÇÐÈý¸ö2Dµã×é³ÉµÄÈý½ÇÐÎ¡£
+    // åœ†å†…åˆ‡ä¸‰ä¸ª2Dç‚¹ç»„æˆçš„ä¸‰è§’å½¢ã€‚
     template <typename Real>
     class ScribeCircle2Inscribe
     {
@@ -32,7 +32,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        // Èç¹ûÔ²±»¹¹Ôì£¬·µ»ØÕæ£¬·ñÔò·µ»Ø¼Ù£¬£¨ÊäÈëµãÊÇÏßÐÔÏà¹ØµÄ£©
+        // å¦‚æžœåœ†è¢«æž„é€ ï¼Œè¿”å›žçœŸï¼Œå¦åˆ™è¿”å›žå‡ï¼Œï¼ˆè¾“å…¥ç‚¹æ˜¯çº¿æ€§ç›¸å…³çš„ï¼‰
         NODISCARD bool IsCircleConstructed() const noexcept;
         NODISCARD Circle2Type GetCircle2() const;
 

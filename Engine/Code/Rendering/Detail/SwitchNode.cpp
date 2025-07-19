@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:54)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:54)
 
 #include "Rendering/RenderingExport.h"
 
@@ -41,7 +41,7 @@ void Rendering::SwitchNode::GetVisibleSet(Culler& culler, const CameraSharedPtr&
 {
     if (activeChild != System::EnumCastUnderlying(SwitchNodeType::InvalidChild))
     {
-        // ËùÓĞÊÓ¾õ¶ÔÏóÔÚ»îÔ¾µÄ×ÓÊ÷ÖĞ£¬Ìí¼Óµ½¿É¼û×é¡£
+        // æ‰€æœ‰è§†è§‰å¯¹è±¡åœ¨æ´»è·ƒçš„å­æ ‘ä¸­ï¼Œæ·»åŠ åˆ°å¯è§ç»„ã€‚
         auto child = GetChild(activeChild);
         if (child)
         {
@@ -66,7 +66,7 @@ Rendering::SwitchNode::SwitchNode(LoadConstructor value)
 void Rendering::SwitchNode::SetActiveChild(int aActiveChild)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(aActiveChild == System::EnumCastUnderlying(SwitchNodeType::InvalidChild) || aActiveChild < GetNumChildren(), "Ö¸¶¨µÄ»îÔ¾×Ó½ÚµãÎŞĞ§\n");
+    RENDERING_ASSERTION_0(aActiveChild == System::EnumCastUnderlying(SwitchNodeType::InvalidChild) || aActiveChild < GetNumChildren(), "æŒ‡å®šçš„æ´»è·ƒå­èŠ‚ç‚¹æ— æ•ˆ\n");
 
     activeChild = aActiveChild;
 }

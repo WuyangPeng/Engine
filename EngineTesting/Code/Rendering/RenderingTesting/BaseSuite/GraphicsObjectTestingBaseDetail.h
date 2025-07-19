@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+ï»¿/// Copyright (c) 2010-2023
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.2 (2023/12/11 19:16)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.2 (2023/12/11 19:16)
 
 #ifndef RENDERING_BASE_SUITE_GRAPHICS_OBJECT_TESTING_BASE_DETAIL_H
 #define RENDERING_BASE_SUITE_GRAPHICS_OBJECT_TESTING_BASE_DETAIL_H
@@ -162,7 +162,7 @@ void Rendering::GraphicsObjectTestingBase::GetAllObjectsByNameTest(const Testing
     const auto clone = boost::polymorphic_pointer_cast<TestingType>(testingType.CloneObject());
     const auto allObject = clone->GetAllObjectsByName(name);
 
-    ASSERT_EQUAL_FAILURE_THROW(allObject.size(), 1u, "Î´ÕÒµ½Ãû×ÖÎª" + name + "µÄ¶ÔÏó¡£");
+    ASSERT_EQUAL_FAILURE_THROW(allObject.size(), 1u, "æœªæ‰¾åˆ°åå­—ä¸º" + name + "çš„å¯¹è±¡ã€‚");
 
     const auto object = boost::polymorphic_pointer_cast<TestingType>(allObject.at(0));
 
@@ -176,7 +176,7 @@ void Rendering::GraphicsObjectTestingBase::GetAllConstObjectsByNameTest(const Te
     const auto clone = boost::polymorphic_pointer_cast<TestingType>(testingType.CloneObject());
     const auto allConstObject = clone->GetAllConstObjectsByName(name);
 
-    ASSERT_EQUAL_FAILURE_THROW(allConstObject.size(), 1u, "Î´ÕÒµ½Ãû×ÖÎª" + name + "µÄ¶ÔÏó¡£");
+    ASSERT_EQUAL_FAILURE_THROW(allConstObject.size(), 1u, "æœªæ‰¾åˆ°åå­—ä¸º" + name + "çš„å¯¹è±¡ã€‚");
 
     const auto constObject = boost::polymorphic_pointer_cast<const TestingType>(allConstObject.at(0));
 
@@ -269,7 +269,7 @@ CoreTools::FileBufferSharedPtr Rendering::GraphicsObjectTestingBase::SaveTest(co
 template <typename TestingType>
 void Rendering::GraphicsObjectTestingBase::RttiNameTest(int endIndex, const OriginalBuffer& buffer)
 {
-    ASSERT_LESS_EQUAL_FAILURE_THROW(endIndex, boost::numeric_cast<int>(buffer.size()), "»º³åÇø´óĞ¡²»×ãÓÚ¸´ÖÆ×Ö·û´®¡£");
+    ASSERT_LESS_EQUAL_FAILURE_THROW(endIndex, boost::numeric_cast<int>(buffer.size()), "ç¼“å†²åŒºå¤§å°ä¸è¶³äºå¤åˆ¶å­—ç¬¦ä¸²ã€‚");
 
     std::string rttiName{ buffer.begin(), buffer.begin() + endIndex };
 

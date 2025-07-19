@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/16 14:39)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/16 14:39)
 
 #include "FormatErrorMessageTesting.h"
 #include "System/Windows/Flags/PlatformErrorFlags.h"
@@ -40,7 +40,7 @@ void CoreTools::FormatErrorMessageTesting::MainTest()
 
 void CoreTools::FormatErrorMessageTesting::SucceedMessageTest()
 {
-    const auto errorDescription = SYSTEM_TEXT("²Ù×÷³É¹¦Íê³É¡£"s);
+    const auto errorDescription = SYSTEM_TEXT("æ“ä½œæˆåŠŸå®Œæˆã€‚"s);
 
     const FormatErrorMessage message{ FormatErrorMessage::WindowError::Success };
     const auto error = message.GetErrorMessage();
@@ -50,7 +50,7 @@ void CoreTools::FormatErrorMessageTesting::SucceedMessageTest()
 
 void CoreTools::FormatErrorMessageTesting::FindFileErrorTest()
 {
-    const auto errorDescription = SYSTEM_TEXT("ÏµÍ³ÕÒ²»µ½Ö¸¶¨µÄÎÄ¼ş¡£"s);
+    const auto errorDescription = SYSTEM_TEXT("ç³»ç»Ÿæ‰¾ä¸åˆ°æŒ‡å®šçš„æ–‡ä»¶ã€‚"s);
 
     const FormatErrorMessage message{ FormatErrorMessage::WindowError::FileNotFound };
     const auto error = message.GetErrorMessage();
@@ -60,7 +60,7 @@ void CoreTools::FormatErrorMessageTesting::FindFileErrorTest()
 
 void CoreTools::FormatErrorMessageTesting::PlaceholderErrorTest()
 {
-    const auto errorDescription = SYSTEM_TEXT("ÔÚÇı¶¯Æ÷ %1 ÉÏ²åÈëÈíÅÌ¡£"s);
+    const auto errorDescription = SYSTEM_TEXT("åœ¨é©±åŠ¨å™¨ %1 ä¸Šæ’å…¥è½¯ç›˜ã€‚"s);
 
     const FormatErrorMessage message{ FormatErrorMessage::WindowError::SemUserLimit };
     const auto error = message.GetErrorMessage();
@@ -70,7 +70,7 @@ void CoreTools::FormatErrorMessageTesting::PlaceholderErrorTest()
 
 void CoreTools::FormatErrorMessageTesting::NetworkErrorTest()
 {
-    const auto errorDescription = SYSTEM_TEXT("´ËÍøÂçÁ¬½Ó²»´æÔÚ¡£"s);
+    const auto errorDescription = SYSTEM_TEXT("æ­¤ç½‘ç»œè¿æ¥ä¸å­˜åœ¨ã€‚"s);
 
     const FormatErrorMessage message{ FormatErrorMessage::WindowError{ 2250 } };
     const auto error = message.GetErrorMessage();
@@ -80,7 +80,7 @@ void CoreTools::FormatErrorMessageTesting::NetworkErrorTest()
 
 void CoreTools::FormatErrorMessageTesting::ComErrorTest()
 {
-    const auto errorDescription = SYSTEM_TEXT("ÔÖÄÑĞÔ¹ÊÕÏ"s);
+    const auto errorDescription = SYSTEM_TEXT("ç¾éš¾æ€§æ•…éšœ"s);
 
     constexpr auto lastError = System::WindowError::EUnexpected;
     const FormatErrorMessage message{ lastError };

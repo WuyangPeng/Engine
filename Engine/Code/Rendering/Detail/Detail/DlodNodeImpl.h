@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:51)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:51)
 
 #ifndef RENDERING_DETAIL_DLOD_NODE_IMPL_H
 #define RENDERING_DETAIL_DLOD_NODE_IMPL_H
@@ -39,14 +39,14 @@ namespace Rendering
         void Save(CoreTools::BufferTarget& target) const;
         NODISCARD int GetStreamingSize() const;
 
-        // ·ÃÎÊÖĞĞÄ(LOD)Ï¸½ÚµÈ¼¶¡£
+        // è®¿é—®ä¸­å¿ƒ(LOD)ç»†èŠ‚ç­‰çº§ã€‚
         NODISCARD APoint GetModelCenter() const noexcept;
         NODISCARD APoint GetWorldCenter() const noexcept;
 
         void SetModelCenter(const APoint& modelCenter) noexcept;
         void SetWorldCenter(const Mathematics::TransformF& transform) noexcept;
 
-        // »ñµÃ×Ó½ÚµãµÄ¾àÀë¼ä¸ô¡£
+        // è·å¾—å­èŠ‚ç‚¹çš„è·ç¦»é—´éš”ã€‚
         NODISCARD int GetNumLevelsOfDetail() const noexcept;
         NODISCARD float GetModelMinDistance(int index) const;
         NODISCARD float GetModelMaxDistance(int index) const;
@@ -56,13 +56,13 @@ namespace Rendering
         void SetWorldDistance(float uniformScale) noexcept;
 
     private:
-        // ¸ÃµãµÄ¾àÀë£¬Ïà»ú¾ö¶¨ÕıÈ·µÄ¼¤»î×Ó½Úµã¡£
+        // è¯¥ç‚¹çš„è·ç¦»ï¼Œç›¸æœºå†³å®šæ­£ç¡®çš„æ¿€æ´»å­èŠ‚ç‚¹ã€‚
         APoint modelLodCenter;
         APoint worldLodCenter;
 
-        // ¶ÔÓÚÃ¿¸öLODÇø¼äµÄÆ½·½¾àÀë¡£
+        // å¯¹äºæ¯ä¸ªLODåŒºé—´çš„å¹³æ–¹è·ç¦»ã€‚
 
-        // ×Ó½ÚµãµÄÊıÁ¿
+        // å­èŠ‚ç‚¹çš„æ•°é‡
         int numLevelsOfDetail;
         std::vector<float> modelMinDistance;
         std::vector<float> modelMaxDistance;

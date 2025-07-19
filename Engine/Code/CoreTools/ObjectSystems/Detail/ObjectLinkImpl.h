@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 22:09)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 22:09)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_LINK_IMPL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_LINK_IMPL_H
@@ -49,7 +49,7 @@ namespace CoreTools
         using LinkAssociatedContainer = std::map<int64_t, ObjectInterfaceSharedPtr>;
 
     private:
-        /// ´æ´¢Í¼ĞÎ¼ÓÔØ¹ı³ÌÖĞµÄ¶¥²ã¶ÔÏó¡£
+        /// å­˜å‚¨å›¾å½¢åŠ è½½è¿‡ç¨‹ä¸­çš„é¡¶å±‚å¯¹è±¡ã€‚
         LinkAssociatedContainer linked;
         LinkSequentialContainer ordered;
     };

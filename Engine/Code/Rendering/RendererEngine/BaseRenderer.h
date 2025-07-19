@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/17 09:44)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/17 09:44)
 
 #ifndef RENDERING_RENDERER_ENGINE_RENDERER_H
 #define RENDERING_RENDERER_ENGINE_RENDERER_H
@@ -96,17 +96,17 @@ namespace Rendering
         void SetDepthRange(const DepthRange& depthRange);
         NODISCARD DepthRange GetDepthRange() const;
 
-        /// µ±Éî¶È·¶Î§Îª[0, 1]£¨DirectX£©Ê±£¬¸Ãº¯Êı·µ»Ø¡°true¡±£¬
-        /// µ±Éî¶È·¶Î§ÊÇ[-1, 1]£¨OpenGL£©Ê±£¬º¯Êı·µ»Ø¡°false¡±¡£
+        /// å½“æ·±åº¦èŒƒå›´ä¸º[0, 1]ï¼ˆDirectXï¼‰æ—¶ï¼Œè¯¥å‡½æ•°è¿”å›â€œtrueâ€ï¼Œ
+        /// å½“æ·±åº¦èŒƒå›´æ˜¯[-1, 1]ï¼ˆOpenGLï¼‰æ—¶ï¼Œå‡½æ•°è¿”å›â€œfalseâ€ã€‚
         NODISCARD bool HasDepthRange01() const;
 
-        /// ½«×ÅÉ«Æ÷ÎÄ¼şµÄÀ©Õ¹Ãû¸½¼Óµ½¡°name¡±£¨.hlsl±íÊ¾DirectX£¬.glsl±íÊ¾OpenGL£©¡£
+        /// å°†ç€è‰²å™¨æ–‡ä»¶çš„æ‰©å±•åé™„åŠ åˆ°â€œnameâ€ï¼ˆ.hlslè¡¨ç¤ºDirectXï¼Œ.glslè¡¨ç¤ºOpenGLï¼‰ã€‚
         NODISCARD std::string GetShaderName(const std::string& name) const;
 
-        /// ´°¿Ú´óĞ¡±ä»¯
+        /// çª—å£å¤§å°å˜åŒ–
         void Resize(int width, int height);
 
-        /// ·ÃÎÊÑÕÉ«£¬Éî¶ÈºÍÄ£°å»º³åÇøµÄµ±Ç°Çå³ı²ÎÊı¡£ ÑÕÉ«»º³åÇøÊÇºó»º³åÇø¡£
+        /// è®¿é—®é¢œè‰²ï¼Œæ·±åº¦å’Œæ¨¡æ¿ç¼“å†²åŒºçš„å½“å‰æ¸…é™¤å‚æ•°ã€‚ é¢œè‰²ç¼“å†²åŒºæ˜¯åç¼“å†²åŒºã€‚
         void SetClearColor(const ColourType& clearColor) noexcept;
         NODISCARD ColourType GetClearColor() const noexcept;
         void SetClearDepth(float clearDepth) noexcept;
@@ -116,13 +116,13 @@ namespace Rendering
 
         void DisplayColorBuffer(int syncInterval);
 
-        /// Ö§³ÖÎÄ±¾äÖÈ¾ÖĞÊ¹ÓÃµÄÎ»Í¼×ÖÌå¡£Ä¬ÈÏ×ÖÌåÎªArial£¨¸ß¶È18£¬ÎŞĞ±Ìå£¬ÎŞ´ÖÌå£©¡£
+        /// æ”¯æŒæ–‡æœ¬æ¸²æŸ“ä¸­ä½¿ç”¨çš„ä½å›¾å­—ä½“ã€‚é»˜è®¤å­—ä½“ä¸ºArialï¼ˆé«˜åº¦18ï¼Œæ— æ–œä½“ï¼Œæ— ç²—ä½“ï¼‰ã€‚
         void SetFont(const FontSharedPtr& font);
         NODISCARD FontSharedPtr GetFont() const noexcept;
         void SetDefaultFont();
         NODISCARD FontSharedPtr GetDefaultFont() const noexcept;
 
-        /// È«¾Ö»æÍ¼×´Ì¬¡£
+        /// å…¨å±€ç»˜å›¾çŠ¶æ€ã€‚
         void SetBlendState(const BlendStateSharedPtr& state);
         NODISCARD BlendStateSharedPtr GetBlendState() noexcept;
         NODISCARD BlendStateSharedPtr GetDefaultBlendState() noexcept;
@@ -139,35 +139,35 @@ namespace Rendering
         void InitDevice();
         void Release();
 
-        /// Ö§³ÖÇå³ıÑÕÉ«¡¢Éî¶ÈºÍÄ£°åºó»º³åÇø¡£
+        /// æ”¯æŒæ¸…é™¤é¢œè‰²ã€æ·±åº¦å’Œæ¨¡æ¿åç¼“å†²åŒºã€‚
         void ClearColorBuffer();
         void ClearDepthBuffer();
         void ClearStencilBuffer();
         void ClearBuffers();
 
-        /// Ö§³Ö»æÍ¼¡£Èç¹ûÆôÓÃÁËÕÚµ²²éÑ¯£¬Ôò·µ»ØÖµÊÇÍ¨¹ıÉî¶ÈºÍÄ£°å²âÊÔµÄÑù±¾Êı£¬Êµ¼ÊÉÏ»æÖÆµÄÏñËØÊı¡£
-        /// Èç¹ûÕÚµ²²éÑ¯±»½ûÓÃ£¬º¯Êı½«·µ»Ø0¡£
+        /// æ”¯æŒç»˜å›¾ã€‚å¦‚æœå¯ç”¨äº†é®æŒ¡æŸ¥è¯¢ï¼Œåˆ™è¿”å›å€¼æ˜¯é€šè¿‡æ·±åº¦å’Œæ¨¡æ¿æµ‹è¯•çš„æ ·æœ¬æ•°ï¼Œå®é™…ä¸Šç»˜åˆ¶çš„åƒç´ æ•°ã€‚
+        /// å¦‚æœé®æŒ¡æŸ¥è¯¢è¢«ç¦ç”¨ï¼Œå‡½æ•°å°†è¿”å›0ã€‚
 
-        /// »æÖÆ¼¸ºÎÍ¼Ôª¡£
+        /// ç»˜åˆ¶å‡ ä½•å›¾å…ƒã€‚
         NODISCARD int64_t Draw(Visual& visual);
         NODISCARD int64_t Draw(const VisualContainer& visuals);
 
-        /// »æÖÆ¶şÎ¬ÎÄ±¾¡£
+        /// ç»˜åˆ¶äºŒç»´æ–‡æœ¬ã€‚
         NODISCARD int64_t Draw(int x, int y, const ColourType& color, const std::string& message);
 
-        /// »æÖÆ¶şÎ¬¾ØĞÎ¸²¸Ç¡£Õâ¶ÔÓÚ½«°´Å¥¡¢¿Ø¼ş¡¢ËõÂÔÍ¼ºÍÆäËûGUI¶ÔÏóÌí¼Óµ½Ó¦ÓÃ³ÌĞò´°¿Ú·Ç³£ÓĞÓÃ¡£
+        /// ç»˜åˆ¶äºŒç»´çŸ©å½¢è¦†ç›–ã€‚è¿™å¯¹äºå°†æŒ‰é’®ã€æ§ä»¶ã€ç¼©ç•¥å›¾å’Œå…¶ä»–GUIå¯¹è±¡æ·»åŠ åˆ°åº”ç”¨ç¨‹åºçª—å£éå¸¸æœ‰ç”¨ã€‚
         NODISCARD int64_t Draw(const OverlayEffectSharedPtr& overlay);
 
-        /// Ö§³ÖÕÚµ²²éÑ¯¡£ÆôÓÃÊ±£¬Drawº¯Êı·µ»ØÍ¨¹ıÉî¶ÈºÍÄ£°å²âÊÔµÄÑù±¾Êı£¬Êµ¼ÊÉÏÊÇ»æÖÆµÄÏñËØÊı¡£Ä¬ÈÏÖµÎª¡°false¡±¡£
+        /// æ”¯æŒé®æŒ¡æŸ¥è¯¢ã€‚å¯ç”¨æ—¶ï¼ŒDrawå‡½æ•°è¿”å›é€šè¿‡æ·±åº¦å’Œæ¨¡æ¿æµ‹è¯•çš„æ ·æœ¬æ•°ï¼Œå®é™…ä¸Šæ˜¯ç»˜åˆ¶çš„åƒç´ æ•°ã€‚é»˜è®¤å€¼ä¸ºâ€œfalseâ€ã€‚
         void SetAllowOcclusionQuery(bool allow) noexcept;
 
-        /// Ö§³Ö»æÍ¼µ½ÆÁÄ»Íâ´æ´¢Æ÷£¨¼´²»µ½ºóÌ¨»º³åÇø£©¡£DrawTarget¶ÔÏó·â×°äÖÈ¾Ä¿±ê£¨ÑÕÉ«ĞÅÏ¢£©ºÍÉî¶ÈÄ£°åÄ¿±ê¡£
+        /// æ”¯æŒç»˜å›¾åˆ°å±å¹•å¤–å­˜å‚¨å™¨ï¼ˆå³ä¸åˆ°åå°ç¼“å†²åŒºï¼‰ã€‚DrawTargetå¯¹è±¡å°è£…æ¸²æŸ“ç›®æ ‡ï¼ˆé¢œè‰²ä¿¡æ¯ï¼‰å’Œæ·±åº¦æ¨¡æ¿ç›®æ ‡ã€‚
         void Enable(const DrawTargetSharedPtr& target);
         void Disable(const DrawTargetSharedPtr& target);
 
-        /// Í¼ĞÎ¶ÔÏó¹ÜÀí¡£Bindº¯Êı´´½¨ÓëÊäÈëEngine¶ÔÏóÏà¶ÔÓ¦µÄÍ¼ĞÎAPIÌØ¶¨¶ÔÏó¡£
-        /// GraphicsEngineÔÚÄÚ²¿¹ÜÀí´ËÇÅ½ÓÓ³Éä¡£È¡Ïû°ó¶¨¹¦ÄÜ»áÆÆ»µÍ¼ĞÎAPIÌØ¶¨¶ÔÏó¡£
-        /// ÕâĞ©¿ÉÒÔ±»Ã÷È·µØµ÷ÓÃ£¬µ«ÒıÇæ±»Éè¼ÆÎª°´Ğè´´½¨ºÍ°´Éè±¸Ïú»Ù¡£
+        /// å›¾å½¢å¯¹è±¡ç®¡ç†ã€‚Bindå‡½æ•°åˆ›å»ºä¸è¾“å…¥Engineå¯¹è±¡ç›¸å¯¹åº”çš„å›¾å½¢APIç‰¹å®šå¯¹è±¡ã€‚
+        /// GraphicsEngineåœ¨å†…éƒ¨ç®¡ç†æ­¤æ¡¥æ¥æ˜ å°„ã€‚å–æ¶ˆç»‘å®šåŠŸèƒ½ä¼šç ´åå›¾å½¢APIç‰¹å®šå¯¹è±¡ã€‚
+        /// è¿™äº›å¯ä»¥è¢«æ˜ç¡®åœ°è°ƒç”¨ï¼Œä½†å¼•æ“è¢«è®¾è®¡ä¸ºæŒ‰éœ€åˆ›å»ºå’ŒæŒ‰è®¾å¤‡é”€æ¯ã€‚
         RendererObjectSharedPtr Bind(const GraphicsObjectSharedPtr& graphicsObject);
         NODISCARD RendererDrawTargetSharedPtr Bind(const DrawTargetSharedPtr& target);
         NODISCARD RendererObjectSharedPtr Get(const GraphicsObjectSharedPtr& graphicsObject);
@@ -178,41 +178,41 @@ namespace Rendering
 
         NODISCARD TotalAllocation GetTotalAllocation() const;
 
-        /// Ö§³ÖÍ¨¹ıÓ³ÉäÄÚ´æ´ÓCPU¸´ÖÆµ½GPU¡£
+        /// æ”¯æŒé€šè¿‡æ˜ å°„å†…å­˜ä»CPUå¤åˆ¶åˆ°GPUã€‚
         NODISCARD bool Update(const BufferSharedPtr& buffer);
         NODISCARD bool Update(const TextureSingleSharedPtr& texture);
         NODISCARD bool Update(const TextureSingleSharedPtr& texture, int level);
         NODISCARD bool Update(const TextureArraySharedPtr& textureArray);
         NODISCARD bool Update(const TextureArraySharedPtr& textureArray, int item, int level);
 
-        /// Ö§³ÖÍ¨¹ıÔİ´æÄÚ´æ´ÓCPU¸´ÖÆµ½GPU¡£
+        /// æ”¯æŒé€šè¿‡æš‚å­˜å†…å­˜ä»CPUå¤åˆ¶åˆ°GPUã€‚
         NODISCARD bool CopyCpuToGpu(const BufferSharedPtr& buffer);
         NODISCARD bool CopyCpuToGpu(const TextureSingleSharedPtr& texture);
         NODISCARD bool CopyCpuToGpu(const TextureSingleSharedPtr& texture, int level);
         NODISCARD bool CopyCpuToGpu(const TextureArraySharedPtr& textureArray);
         NODISCARD bool CopyCpuToGpu(const TextureArraySharedPtr& textureArray, int item, int level);
 
-        /// Ö§³ÖÍ¨¹ıÔİ´æÄÚ´æ´ÓGPU¸´ÖÆµ½CPU¡£
+        /// æ”¯æŒé€šè¿‡æš‚å­˜å†…å­˜ä»GPUå¤åˆ¶åˆ°CPUã€‚
         NODISCARD bool CopyGpuToCpu(const BufferSharedPtr& buffer);
         NODISCARD bool CopyGpuToCpu(const TextureSingleSharedPtr& texture);
         NODISCARD bool CopyGpuToCpu(const TextureSingleSharedPtr& texture, int level);
         NODISCARD bool CopyGpuToCpu(const TextureArraySharedPtr& textureArray);
         NODISCARD bool CopyGpuToCpu(const TextureArraySharedPtr& textureArray, int item, int level);
 
-        /// ¼ÆÊı»º³åÇø¹ÜÀí¡£GetNumActiveElements½«½á¹û´æ´¢ÔÚ¡°buffer¡±ÖĞ¡£
+        /// è®¡æ•°ç¼“å†²åŒºç®¡ç†ã€‚GetNumActiveElementså°†ç»“æœå­˜å‚¨åœ¨â€œbufferâ€ä¸­ã€‚
         NODISCARD bool GetNumActiveElements(const StructuredBufferSharedPtr& buffer);
 
-        /// Ö´ĞĞ¼ÆËã³ÌĞò¡£Èç¹ûÄúÏ£ÍûCPUÔİÍ£µÈ´ı½á¹û£¬ÇëÔÚExecute(...)ºóÁ¢¼´µ÷ÓÃWaitForFinish()¡£
-        /// µ«ÊÇ£¬Äú¿ÉÒÔÔÚÉÔºóµÄÄ³¸öÊ±¼äÍ¨¹ıµ÷ÓÃWaitForFinish()¡£
+        /// æ‰§è¡Œè®¡ç®—ç¨‹åºã€‚å¦‚æœæ‚¨å¸Œæœ›CPUæš‚åœç­‰å¾…ç»“æœï¼Œè¯·åœ¨Execute(...)åç«‹å³è°ƒç”¨WaitForFinish()ã€‚
+        /// ä½†æ˜¯ï¼Œæ‚¨å¯ä»¥åœ¨ç¨åçš„æŸä¸ªæ—¶é—´é€šè¿‡è°ƒç”¨WaitForFinish()ã€‚
         void Execute(ComputeProgram& program, int numXGroups, int numYGroups, int numZGroups);
 
-        /// ÈÃCPUµÈ´ı£¬Ö±µ½GPUÍê³ÉÆäµ±Ç°ÃüÁî»º³åÇø¡£
+        /// è®©CPUç­‰å¾…ï¼Œç›´åˆ°GPUå®Œæˆå…¶å½“å‰å‘½ä»¤ç¼“å†²åŒºã€‚
         void WaitForFinish();
 
-        /// Ë¢ĞÂÃüÁî»º³åÇø¡£
+        /// åˆ·æ–°å‘½ä»¤ç¼“å†²åŒºã€‚
         void Flush();
 
-        // Ö§³ÖÖ±½Ó´ÓGPU¸´ÖÆµ½GPU¡£Ä¿Ç°£¬ÏŞÖÆÊÇ×ÊÔ´²»Í¬£¬ÀàĞÍÏàÍ¬£¬³ß´çÏàÍ¬£¬¸ñÊ½¼æÈİ£¨Èç¹ûÊÇÎÆÀíÀàĞÍ£©¡£
+        // æ”¯æŒç›´æ¥ä»GPUå¤åˆ¶åˆ°GPUã€‚ç›®å‰ï¼Œé™åˆ¶æ˜¯èµ„æºä¸åŒï¼Œç±»å‹ç›¸åŒï¼Œå°ºå¯¸ç›¸åŒï¼Œæ ¼å¼å…¼å®¹ï¼ˆå¦‚æœæ˜¯çº¹ç†ç±»å‹ï¼‰ã€‚
         void CopyGpuToGpu(const BufferSharedPtr& buffer0, const BufferSharedPtr& buffer1);
 
         void CopyGpuToGpu(const TextureSingleSharedPtr& texture0, const TextureSingleSharedPtr& texture1);
@@ -229,9 +229,9 @@ namespace Rendering
                           int item,
                           int level);
 
-        /// Èç¹ûÏ£ÍûDirectX11DeviceÎö¹¹º¯Êı±¨¸æÍøÇÅÓ³ÉäÎª·Ç¿Õ£¬Çë½«¾¯¸æÉèÖÃÎª¡°true¡±¡£
-        /// Èç¹ûÊÇ£¬ÔòÔÚÒıÇæ±»Ïú»ÙÖ®Ç°£¬Ó¦ÓÃ³ÌĞòÃ»ÓĞÏú»ÙGraphicsObjectÏî¡£
-        /// Ä¬ÈÏÖµÎª¡°true¡±¡£
+        /// å¦‚æœå¸Œæœ›DirectX11Deviceææ„å‡½æ•°æŠ¥å‘Šç½‘æ¡¥æ˜ å°„ä¸ºéç©ºï¼Œè¯·å°†è­¦å‘Šè®¾ç½®ä¸ºâ€œtrueâ€ã€‚
+        /// å¦‚æœæ˜¯ï¼Œåˆ™åœ¨å¼•æ“è¢«é”€æ¯ä¹‹å‰ï¼Œåº”ç”¨ç¨‹åºæ²¡æœ‰é”€æ¯GraphicsObjecté¡¹ã€‚
+        /// é»˜è®¤å€¼ä¸ºâ€œtrueâ€ã€‚
         void SetWarnOnNonemptyBridges(bool warn) noexcept;
 
     private:

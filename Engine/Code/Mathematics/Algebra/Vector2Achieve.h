@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 11:11)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 11:11)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR2_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_VECTOR2_ACHIEVE_H
@@ -143,7 +143,7 @@ void Mathematics::Vector2<Real>::Normalize(Real epsilon) noexcept(gAssert < 1 ||
     }
     else
     {
-        MATHEMATICS_ASSERTION_1(false, "³ıÁã´íÎó£¡");
+        MATHEMATICS_ASSERTION_1(false, "é™¤é›¶é”™è¯¯ï¼");
 
         ZeroOut();
     }
@@ -251,7 +251,7 @@ const Real& Mathematics::Vector2<Real>::operator[](PointIndex index) const
             break;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òı´íÎó£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•é”™è¯¯ï¼"s))
 }
 
 template <typename Real>
@@ -312,7 +312,7 @@ Mathematics::Vector2<Real>& Mathematics::Vector2<Real>::operator/=(Real rhs) noe
     }
     else
     {
-        MATHEMATICS_ASSERTION_1(false, "³ıÁã´íÎó£¡");
+        MATHEMATICS_ASSERTION_1(false, "é™¤é›¶é”™è¯¯ï¼");
 
         ZeroOut();
     }
@@ -326,7 +326,7 @@ typename Mathematics::Vector2<Real>::BarycentricCoordinatesType Mathematics::Vec
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    // ¼ÆËãÏà¶ÔÓÚ¸ÃÈı½ÇĞÎvector2µÄÏòÁ¿¡£
+    // è®¡ç®—ç›¸å¯¹äºè¯¥ä¸‰è§’å½¢vector2çš„å‘é‡ã€‚
     std::array<Vector2, pointSize + 1> difference{ vector0 - vector2, vector1 - vector2, *this - vector2 };
 
     auto det = ToolsType::DotPerp(difference.at(xIndex), difference.at(yIndex));
@@ -347,7 +347,7 @@ typename Mathematics::Vector2<Real>::BarycentricCoordinatesType Mathematics::Vec
     {
 #ifdef MATHEMATICS_ASSERT_ON_BARYCENTRIC2_DEGENERATE
 
-        MATHEMATICS_ASSERTION_0(false, "ÊäÈëµÄÊÇÍË»¯Èı½ÇĞÎ¡£\n");
+        MATHEMATICS_ASSERTION_0(false, "è¾“å…¥çš„æ˜¯é€€åŒ–ä¸‰è§’å½¢ã€‚\n");
 
 #endif  // MATHEMATICS_ASSERT_ON_BARYCENTRIC2_DEGENERATE
 

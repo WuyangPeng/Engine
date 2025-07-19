@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:09)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:09)
 
 #ifndef MATHEMATICS_APPROXIMATION_ELLIPSE_FIT2_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_ELLIPSE_FIT2_DETAIL_H
@@ -31,7 +31,7 @@ Mathematics::EllipseFit2<Real>::EllipseFit2(const Points& points)
 template <typename Real>
 void Mathematics::EllipseFit2<Real>::Fit2()
 {
-    // ÄÜÁ¿º¯ÊıÎª E : Real^5 -> Real ÆäÖĞ
+    // èƒ½é‡å‡½æ•°ä¸º E : Real^5 -> Real å…¶ä¸­
     // V = (V0, V1, V2, V3, V4)
     //   = (D[0], D[1], U.x, U.y, atan2(Real[1][0],Real[1][1])).
 
@@ -95,17 +95,17 @@ Real Mathematics::EllipseFit2<Real>::Energy(const Container& input, const Ellips
 {
     if (userData == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÖÂÃü´íÎó£¬´«µİ¿ÕÖ¸Õë¡£"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("è‡´å‘½é”™è¯¯ï¼Œä¼ é€’ç©ºæŒ‡é’ˆã€‚"s));
     }
 
     const auto& self = *userData;
 
-    // ¹¹½¨Ğı×ª¾ØÕó
+    // æ„å»ºæ—‹è½¬çŸ©é˜µ
     const Matrix2Type rotate{ -input.at(4) };
 
     const Ellipse2<Real> ellipse{ Vector2Type::GetZero(), Vector2Type::GetUnitX(), Vector2Type::GetUnitY(), input.at(0), input.at(1) };
 
-    // ±ä»»µãµ½ÖĞĞÄCºÍĞı×ªRealµÄÁĞµÄ×ø±êÏµÍ³
+    // å˜æ¢ç‚¹åˆ°ä¸­å¿ƒCå’Œæ—‹è½¬Realçš„åˆ—çš„åæ ‡ç³»ç»Ÿ
     auto energy = MathType::GetValue(0);
 
     const auto numPoints = userData->GetNumPoint();

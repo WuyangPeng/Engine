@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.2 (2024/10/26 17:27)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.2 (2024/10/26 17:27)
 
 #ifndef SYSTEM_SYSTEM_OUTPUT_PRIMARY_LANGUAGE_FLAGS_H
 #define SYSTEM_SYSTEM_OUTPUT_PRIMARY_LANGUAGE_FLAGS_H
@@ -16,7 +16,7 @@ namespace System
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    /// ²»½¨ÒéÊ¹ÓÃÓïÑÔID¸ÅÄî£¬Çë¸ÄÓÃÓïÑÔ»·¾³Ãû³Æ£¬ÀıÈç£º¡°en¡±£¬¶ø²»ÊÇÏñ0x09ÕâÑùµÄLANG_ID¡£
+    /// ä¸å»ºè®®ä½¿ç”¨è¯­è¨€IDæ¦‚å¿µï¼Œè¯·æ”¹ç”¨è¯­è¨€ç¯å¢ƒåç§°ï¼Œä¾‹å¦‚ï¼šâ€œenâ€ï¼Œè€Œä¸æ˜¯åƒ0x09è¿™æ ·çš„LANG_IDã€‚
     enum class PrimaryLanguage
     {
         Neutral = LANG_NEUTRAL,
@@ -34,13 +34,13 @@ namespace System
         Belarusian = LANG_BELARUSIAN,
         Bengali = LANG_BENGALI,
         Breton = LANG_BRETON,
-        Bosnian = LANG_BOSNIAN,  // ÓëBosnian*×ÓÓïÑÔIDÒ»ÆğÊ¹ÓÃ¡£
-        BosnianNeutral = LANG_BOSNIAN_NEUTRAL,  // ÓëConvertDefaultLocaleº¯ÊıÒ»ÆğÊ¹ÓÃ¡£
+        Bosnian = LANG_BOSNIAN,  // ä¸Bosnian*å­è¯­è¨€IDä¸€èµ·ä½¿ç”¨ã€‚
+        BosnianNeutral = LANG_BOSNIAN_NEUTRAL,  // ä¸ConvertDefaultLocaleå‡½æ•°ä¸€èµ·ä½¿ç”¨ã€‚
         Bulgarian = LANG_BULGARIAN,
         Catalan = LANG_CATALAN,
-        Chinese = LANG_CHINESE,  // ÓëChinese*×ÓÓïÑÔIDÒ»ÆğÊ¹ÓÃ¡£
-        ChineseSimplified = LANG_CHINESE_SIMPLIFIED,  // ÓëConvertDefaultLocaleº¯ÊıÒ»ÆğÊ¹ÓÃ¡£
-        ChineseTraditional = LANG_CHINESE_TRADITIONAL,  // ÓëConvertDefaultLocaleº¯ÊıÒ»ÆğÊ¹ÓÃ¡£
+        Chinese = LANG_CHINESE,  // ä¸Chinese*å­è¯­è¨€IDä¸€èµ·ä½¿ç”¨ã€‚
+        ChineseSimplified = LANG_CHINESE_SIMPLIFIED,  // ä¸ConvertDefaultLocaleå‡½æ•°ä¸€èµ·ä½¿ç”¨ã€‚
+        ChineseTraditional = LANG_CHINESE_TRADITIONAL,  // ä¸ConvertDefaultLocaleå‡½æ•°ä¸€èµ·ä½¿ç”¨ã€‚
         Corsican = LANG_CORSICAN,
         Croatian = LANG_CROATIAN,
         Czech = LANG_CZECH,
@@ -51,7 +51,7 @@ namespace System
         English = LANG_ENGLISH,
         Estonian = LANG_ESTONIAN,
         Faeroese = LANG_FAEROESE,
-        Farsi = LANG_FARSI,  // ÒÑÆúÓÃ£º¸ÄÓÃPersian¡£
+        Farsi = LANG_FARSI,  // å·²å¼ƒç”¨ï¼šæ”¹ç”¨Persianã€‚
         Filipino = LANG_FILIPINO,
         Finnish = LANG_FINNISH,
         French = LANG_FRENCH,
@@ -70,7 +70,7 @@ namespace System
         Igbo = LANG_IGBO,
         Indonesian = LANG_INDONESIAN,
         Inuktitut = LANG_INUKTITUT,
-        Irish = LANG_IRISH,  // ÓëIrishIreland*×ÓÓïÑÔIDÒ»ÆğÊ¹ÓÃ¡£
+        Irish = LANG_IRISH,  // ä¸IrishIreland*å­è¯­è¨€IDä¸€èµ·ä½¿ç”¨ã€‚
         Italian = LANG_ITALIAN,
         Japanese = LANG_JAPANESE,
         Kannada = LANG_KANNADA,
@@ -87,7 +87,7 @@ namespace System
         Lithuanian = LANG_LITHUANIAN,
         LowerSorbian = LANG_LOWER_SORBIAN,
         Luxembourgish = LANG_LUXEMBOURGISH,
-        Macedonian = LANG_MACEDONIAN,  // Ç°ÄÏË¹À­·òµÄÂíÆä¶Ù¹²ºÍ¹ú
+        Macedonian = LANG_MACEDONIAN,  // å‰å—æ–¯æ‹‰å¤«çš„é©¬å…¶é¡¿å…±å’Œå›½
         Malay = LANG_MALAY,
         Malayalam = LANG_MALAYALAM,
         Maltese = LANG_MALTESE,
@@ -113,8 +113,8 @@ namespace System
         Sami = LANG_SAMI,
         Sanskrit = LANG_SANSKRIT,
         ScottishGaelic = LANG_SCOTTISH_GAELIC,
-        Serbian = LANG_SERBIAN,  // ÓëSerbian*×ÓÓïÑÔIDÒ»ÆğÊ¹ÓÃ¡£
-        SerbianNeutral = LANG_SERBIAN_NEUTRAL,  // ÓëConvertDefaultLocaleº¯ÊıÒ»ÆğÊ¹ÓÃ¡£
+        Serbian = LANG_SERBIAN,  // ä¸Serbian*å­è¯­è¨€IDä¸€èµ·ä½¿ç”¨ã€‚
+        SerbianNeutral = LANG_SERBIAN_NEUTRAL,  // ä¸ConvertDefaultLocaleå‡½æ•°ä¸€èµ·ä½¿ç”¨ã€‚
         Sindhi = LANG_SINDHI,
         Sinhalese = LANG_SINHALESE,
         Slovak = LANG_SLOVAK,

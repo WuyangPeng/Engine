@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/09 09:54)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 09:54)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_TCB_SPLINE3_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_TCB_SPLINE3_DETAIL_H
@@ -32,7 +32,7 @@ Mathematics::TCBSpline3<Real>::TCBSpline3(int numSegments,
       c(numSegments),
       d(numSegments)
 {
-    MATHEMATICS_ASSERTION_0(numSegments >= 3, "Î´ÓĞ×ã¹»µÄÏß¶Î¡£\n");
+    MATHEMATICS_ASSERTION_0(numSegments >= 3, "æœªæœ‰è¶³å¤Ÿçš„çº¿æ®µã€‚\n");
 
     ComputePoly(0, 0, 1, 2);
 
@@ -203,7 +203,7 @@ Real Mathematics::TCBSpline3<Real>::GetSpeedWithDataKey(Real t, const SplineKey*
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("dataÖ¸ÕëÎª¿Õ¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("dataæŒ‡é’ˆä¸ºç©ºã€‚"));
     }
 }
 

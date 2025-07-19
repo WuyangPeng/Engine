@@ -1,24 +1,24 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 19:55)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 19:55)
 
 #ifndef SYSTEM_HELPER_WIN32_H
 #define SYSTEM_HELPER_WIN32_H
 
 #if defined(_WIN32) || defined(__WIN32__) || defined(WIN32)
 
-    ///  Win32 ¾ßÌåÅäÖÃÑ¡Ïî£º
+    ///  Win32 å…·ä½“é…ç½®é€‰é¡¹ï¼š
 
-    /// Î¢ÈíWindowsÆ½Ì¨
+    /// å¾®è½¯Windowså¹³å°
     #define TCRE_SYSTEM_PLATFORM "Win32"
     #define SYSTEM_PLATFORM_WIN32 static_cast<void>(0)
 
-    /// »ñÈ¡ÓĞ¹ØMinGWÔËĞĞÊ±µÄĞÅÏ¢£¬¼´__MINGW32_ * VERSION¡£
+    /// è·å–æœ‰å…³MinGWè¿è¡Œæ—¶çš„ä¿¡æ¯ï¼Œå³__MINGW32_ * VERSIONã€‚
     #if defined(__MINGW32__)
 
         #include <_mingw.h>
@@ -45,14 +45,14 @@
 
     #define SYSTEM_LITTLE_ENDIAN static_cast<void>(0)
 
-    /// ½ûÓÃ¸÷ÖÖ×ÓÏµÍ³ÔÚ windows.h.
+    /// ç¦ç”¨å„ç§å­ç³»ç»Ÿåœ¨ windows.h.
     #ifndef WIN32_LEAN_AND_MEAN
 
         #define WIN32_LEAN_AND_MEAN 1
 
     #endif  // WIN32_LEAN_AND_MEAN
 
-    /// ½ûÓÃwindows.hÖĞµÄ¡°min¡±ºÍ¡°max¡±ºê£¬ËüÓëstd::numeric_limits<type>::max()³åÍ»¡£
+    /// ç¦ç”¨windows.hä¸­çš„â€œminâ€å’Œâ€œmaxâ€å®ï¼Œå®ƒä¸std::numeric_limits<type>::max()å†²çªã€‚
     #ifndef NOMINMAX
 
         #define NOMINMAX static_cast<void>(0)

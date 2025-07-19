@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/05 16:33)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/05 16:33)
 
 #ifndef SYSTEM_DYNAMIC_LINK_ENUM_RESOURCE_DATA_H
 #define SYSTEM_DYNAMIC_LINK_ENUM_RESOURCE_DATA_H
@@ -23,7 +23,7 @@ namespace System
         using ClassType = EnumResourceData;
 
     public:
-        /// const DynamicLinkCharType*´æµÄÊÇÊ¹ÓÃºêMAKEINTRESOURCEÇ¿×ªµÄÖ¸Õë£¬²»ÄÜ½âÒıÓÃºÍ´òÓ¡¡£
+        /// const DynamicLinkCharType*å­˜çš„æ˜¯ä½¿ç”¨å®MAKEINTRESOURCEå¼ºè½¬çš„æŒ‡é’ˆï¼Œä¸èƒ½è§£å¼•ç”¨å’Œæ‰“å°ã€‚
         constexpr EnumResourceData(const DynamicLinkCharType* type, const DynamicLinkCharType* name, WindowsWord language) noexcept
             : resourceType{ type }, name{ name }, language{ language }
         {

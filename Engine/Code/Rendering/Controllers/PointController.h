@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.2 (2023/07/24 14:57)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.2 (2023/07/24 14:57)
 
 #ifndef RENDERING_CONTROLLERS_POINT_CONTROLLER_H
 #define RENDERING_CONTROLLERS_POINT_CONTROLLER_H
@@ -30,17 +30,17 @@ namespace Rendering
         using BaseRendererSharedPtr = std::shared_ptr<BaseRenderer>;
 
     public:
-        // ËùÁ¬½ÓµÄ¶ÔÏó±ØĞëÊÇPolypoint»òPolypointÅÉÉúµÄÀà¡£
+        // æ‰€è¿æ¥çš„å¯¹è±¡å¿…é¡»æ˜¯Polypointæˆ–Polypointæ´¾ç”Ÿçš„ç±»ã€‚
         explicit PointController(const BaseRendererSharedPtr& baseRenderer);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(PointController);
 
-        // µãÔË¶¯£¬ÔÚ¸ÃÏµÍ³µÄÄ£ĞÍ¿Õ¼ä¡£ËÙ¶ÈÊ¸Á¿Ó¦Îªµ¥Î»µÄ³¤¶È¡£
-        // ÆäÖĞµã´ú±íÒ»¸ö¸ÕÌåÔÚÓ¦ÓÃ³ÌĞò£¬
-        // Äã¿ÉÒÔÑ¡Ôñ¸ÃÏµÍ³µÄÔ­µãÎªµãµÄÖÊÁ¿ÖĞĞÄºÍ
-        // ×ø±êÖá¶ÔÓ¦ÓÚ¹ßĞÔÕÅÁ¿µÄÖ÷·½Ïò¡£
+        // ç‚¹è¿åŠ¨ï¼Œåœ¨è¯¥ç³»ç»Ÿçš„æ¨¡å‹ç©ºé—´ã€‚é€Ÿåº¦çŸ¢é‡åº”ä¸ºå•ä½çš„é•¿åº¦ã€‚
+        // å…¶ä¸­ç‚¹ä»£è¡¨ä¸€ä¸ªåˆšä½“åœ¨åº”ç”¨ç¨‹åºï¼Œ
+        // ä½ å¯ä»¥é€‰æ‹©è¯¥ç³»ç»Ÿçš„åŸç‚¹ä¸ºç‚¹çš„è´¨é‡ä¸­å¿ƒå’Œ
+        // åæ ‡è½´å¯¹åº”äºæƒ¯æ€§å¼ é‡çš„ä¸»æ–¹å‘ã€‚
         NODISCARD int GetNumPoints() const noexcept;
         NODISCARD float GetPointLinearSpeed(int index) const;
         NODISCARD float GetPointAngularSpeed(int index) const;
@@ -61,13 +61,13 @@ namespace Rendering
         NODISCARD AVector GetSystemAngularAxis() const noexcept;
         void SetSystemAngularAxis(const AVector& systemAngularAxis) noexcept;
 
-        // ¶¯»­¸üĞÂ¡£Ó¦ÓÃ³ÌĞòÊ±¼äÒÔºÁÃëÎªµ¥Î»¡£
+        // åŠ¨ç”»æ›´æ–°ã€‚åº”ç”¨ç¨‹åºæ—¶é—´ä»¥æ¯«ç§’ä¸ºå•ä½ã€‚
         NODISCARD bool Update(double applicationTime) override;
         void SetController(const ControllerSharedPtr& object) override;
 
     protected:
-        // ¸ÃÀà´ÓÔË¶¯²ÎÊı¼ÆËãĞÂµÄÎ»ÖÃºÍ·½Ïò¡£
-        // ÅÉÉúÀàÓ¦¸Ã¸üĞÂÔË¶¯²ÎÊı£¬È»ºóÒªÃ´µ÷ÓÃ»ùÀàµÄ¸üĞÂ·½·¨»òÔÚ×Ô¼ºµÄ¸üĞÂ·½·¨ÖĞÌá¹©Î»ÖÃºÍ·½Ïò¡£
+        // è¯¥ç±»ä»è¿åŠ¨å‚æ•°è®¡ç®—æ–°çš„ä½ç½®å’Œæ–¹å‘ã€‚
+        // æ´¾ç”Ÿç±»åº”è¯¥æ›´æ–°è¿åŠ¨å‚æ•°ï¼Œç„¶åè¦ä¹ˆè°ƒç”¨åŸºç±»çš„æ›´æ–°æ–¹æ³•æˆ–åœ¨è‡ªå·±çš„æ›´æ–°æ–¹æ³•ä¸­æä¾›ä½ç½®å’Œæ–¹å‘ã€‚
         virtual void UpdateSystemMotion(float ctrlTime);
         virtual void UpdatePointMotion(float ctrlTime);
 

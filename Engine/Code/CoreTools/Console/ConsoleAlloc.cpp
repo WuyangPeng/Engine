@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/30 14:51)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/30 14:51)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -56,7 +56,7 @@ void CoreTools::ConsoleAlloc::OpenConsole()
     if (const auto allocSuccess = System::AllocConsole();
         !allocSuccess)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¿ØÖÆÌ¨´´½¨´íÎó¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ§åˆ¶å°åˆ›å»ºé”™è¯¯ã€‚"s))
     }
 
     ReOpenConsole();
@@ -71,7 +71,7 @@ void CoreTools::ConsoleAlloc::ReOpenConsole()
     {
         CloseConsole();
 
-        THROW_EXCEPTION(SYSTEM_TEXT("ÖØ¶¨Î»¿ØÖÆÌ¨´íÎó¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("é‡å®šä½æ§åˆ¶å°é”™è¯¯ã€‚"s))
     }
 }
 
@@ -90,7 +90,7 @@ void CoreTools::ConsoleAlloc::CloseConsole() const noexcept
 
     if (!System::FreeConsole())
     {
-        System::OutputDebugStringWithTChar(SYSTEM_TEXT("¹Ø±Õ¿ØÖÆÌ¨´íÎó¡£"));
+        System::OutputDebugStringWithTChar(SYSTEM_TEXT("å…³é—­æ§åˆ¶å°é”™è¯¯ã€‚"));
     }
 }
 
@@ -98,6 +98,6 @@ void CoreTools::ConsoleAlloc::CloseConsole(FILE* file) noexcept
 {
     if (file != nullptr && !System::CloseConsole(file))
     {
-        System::OutputDebugStringWithTChar(SYSTEM_TEXT("ÊÍ·Å¿ØÖÆÌ¨ÎÄ¼şÃèÊö·û´íÎó¡£"));
+        System::OutputDebugStringWithTChar(SYSTEM_TEXT("é‡Šæ”¾æ§åˆ¶å°æ–‡ä»¶æè¿°ç¬¦é”™è¯¯ã€‚"));
     }
 }

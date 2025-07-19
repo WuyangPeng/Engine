@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:17)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:17)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_SEGMENT3_BOX3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_SEGMENT3_BOX3_DETAIL_H
@@ -55,16 +55,16 @@ Mathematics::Box3<Real> Mathematics::DynamicTestIntersectorSegment3Box3<Real>::G
 template <typename Real>
 void Mathematics::DynamicTestIntersectorSegment3Box3<Real>::Test()
 {
-    // »ñÈ¡Ïß¶ÎµÄ¶Ëµã¡£
+    // è·å–çº¿æ®µçš„ç«¯ç‚¹ã€‚
     using SegmentType = std::array<Vector3Type, 2>;
     const SegmentType segmentType{ segment.GetBeginPoint(), segment.GetEndPoint() };
 
-    // »ñÈ¡Ïà¶ÔÓÚÏß¶ÎµÄ¿òËÙ¶È¡£
+    // è·å–ç›¸å¯¹äºçº¿æ®µçš„æ¡†é€Ÿåº¦ã€‚
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
     auto contactTime = MathType::GetValue(0);
 
-    // ²âÊÔºĞ·¨Ïß¡£
+    // æµ‹è¯•ç›’æ³•çº¿ã€‚
     for (auto i = 0; i < 3; ++i)
     {
         const auto axis = box.GetAxis(i);
@@ -79,7 +79,7 @@ void Mathematics::DynamicTestIntersectorSegment3Box3<Real>::Test()
         }
     }
 
-    // ²âÊÔÏß¶Î·½ÏòµÄ½»²æºĞ±ßÔµ¡£
+    // æµ‹è¯•çº¿æ®µæ–¹å‘çš„äº¤å‰ç›’è¾¹ç¼˜ã€‚
     for (auto i = 0; i < 3; ++i)
     {
         const auto axis = Vector3ToolsType::CrossProduct(box.GetAxis(i), segment.GetDirection());
@@ -95,7 +95,7 @@ void Mathematics::DynamicTestIntersectorSegment3Box3<Real>::Test()
         }
     }
 
-    // ²âÊÔËÙ¶È´©Ô½ºĞ¡ª¡ªÃæ¡£
+    // æµ‹è¯•é€Ÿåº¦ç©¿è¶Šç›’â€”â€”é¢ã€‚
     for (auto i = 0; i < 3; i++)
     {
         const auto axis = Vector3ToolsType::CrossProduct(relVelocity, box.GetAxis(i));

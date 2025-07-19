@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 16:09)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 16:09)
 
 #include "Network/NetworkExport.h"
 
@@ -27,18 +27,18 @@ Network::NetworkSockAcceptor::NetworkSockAcceptor(int port)
 {
     if (!System::IsSocketValid(socketHandle))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´´½¨±¾µØ¶Ë¿ÚÊ§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("åˆ›å»ºæœ¬åœ°ç«¯å£å¤±è´¥ï¼"s))
     }
 
     if (NetworkSockInternetAddress sockAddress{ port };
         !System::Bind(socketHandle, &sockAddress.GetWinSockInternetAddress()))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("°ó¶¨Ê§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("ç»‘å®šå¤±è´¥ï¼"s))
     }
 
     if (!System::Listen(socketHandle, System::soMaxConn))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¼àÌıÊ§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("ç›‘å¬å¤±è´¥ï¼"s))
     }
 
     NETWORK_SELF_CLASS_IS_VALID_9;
@@ -49,18 +49,18 @@ Network::NetworkSockAcceptor::NetworkSockAcceptor(const std::string& hostName, i
 {
     if (!System::IsSocketValid(socketHandle))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´´½¨±¾µØ¶Ë¿ÚÊ§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("åˆ›å»ºæœ¬åœ°ç«¯å£å¤±è´¥ï¼"s))
     }
 
     if (NetworkSockInternetAddress sockAddress{ hostName, port };
         !System::Bind(socketHandle, &sockAddress.GetWinSockInternetAddress()))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("°ó¶¨Ê§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("ç»‘å®šå¤±è´¥ï¼"s))
     }
 
     if (!System::Listen(socketHandle, System::soMaxConn))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¼àÌıÊ§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("ç›‘å¬å¤±è´¥ï¼"s))
     }
 
     NETWORK_SELF_CLASS_IS_VALID_9;

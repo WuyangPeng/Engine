@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:29)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:29)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_ANALYSIS_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_ANALYSIS_H
@@ -19,7 +19,7 @@
 
 namespace Mathematics
 {
-    // NÊÇÄãÏëÒªÔªÕûÊıµÄ32Î»×Ö½ÚµÄÊıÄ¿¡£
+    // Næ˜¯ä½ æƒ³è¦å…ƒæ•´æ•°çš„32ä½å­—èŠ‚çš„æ•°ç›®ã€‚
     template <int N>
     class IntegerDataAnalysis final : private boost::noncopyable
     {
@@ -34,7 +34,7 @@ namespace Mathematics
 
         NODISCARD IntegerDataType GetAbsoluteValue() const;
 
-        // ÆäËûÊµÓÃ³ÌĞò¡£
+        // å…¶ä»–å®ç”¨ç¨‹åºã€‚
         NODISCARD uint32_t ToUnsignedInt(int index) const;
         NODISCARD int ToInt(int index) const;
         NODISCARD uint32_t ToUnsignedInt(int lowerIndex, int highIndex) const;
@@ -43,10 +43,10 @@ namespace Mathematics
         NODISCARD int GetTrailingBlock() const;
         NODISCARD int GetLeadingBit(int index) const;  // m_Buffer[i]
         NODISCARD int GetTrailingBit(int index) const;  // m_Buffer[i]
-        NODISCARD int GetLeadingBit() const;  // Õû¸öÊı×Ö
-        NODISCARD int GetTrailingBit() const;  // Õû¸öÊı×Ö
+        NODISCARD int GetLeadingBit() const;  // æ•´ä¸ªæ•°å­—
+        NODISCARD int GetTrailingBit() const;  // æ•´ä¸ªæ•°å­—
 
-        // ËãÊõÔËËã¡£
+        // ç®—æœ¯è¿ç®—ã€‚
         NODISCARD IntegerDataType operator-() const;
 
         NODISCARD IntegerDivisionModulo<N> GetDivisionModulo(const IntegerDataType& rhs) const;
@@ -71,7 +71,7 @@ namespace Mathematics
         // 0101 0101 0101 0101
         static constexpr MaskType trailingMask{ 0x00FF, 0x0F0F, 0x3333, 0x5555 };
 
-        // ×îµÍÎ»´¢´æÔÚË÷Òı0¡£
+        // æœ€ä½ä½å‚¨å­˜åœ¨ç´¢å¼•0ã€‚
         const IntegerDataType& master;
     };
 

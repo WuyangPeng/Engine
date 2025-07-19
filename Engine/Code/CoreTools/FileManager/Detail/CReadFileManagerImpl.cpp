@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/01 09:44)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/01 09:44)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -51,7 +51,7 @@ void CoreTools::CReadFileManagerImpl::Read(size_t itemSize, size_t itemsNumber, 
     if (const auto readNumber = ReadFromFile(itemSize, itemsNumber, data);
         readNumber != itemsNumber)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¶ÁÈëÎÄ¼şÊı¾İ´íÎó£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¯»å…¥æ–‡ä»¶æ•°æ®é”™è¯¯ï¼"s))
     }
 
 #ifdef SYSTEM_BIG_ENDIAN
@@ -68,7 +68,7 @@ size_t CoreTools::CReadFileManagerImpl::WriteToFile(size_t itemSize, size_t item
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    FunctionProhibitedFromCalling("CReadFileManageImpl½ûÖ¹µ÷ÓÃWriteToFile£¡", itemSize, itemsNumber, data);
+    FunctionProhibitedFromCalling("CReadFileManageImplç¦æ­¢è°ƒç”¨WriteToFileï¼", itemSize, itemsNumber, data);
 
     return 0;
 }
@@ -77,7 +77,7 @@ bool CoreTools::CReadFileManagerImpl::PutCharacter(int character) noexcept(gAsse
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    FunctionProhibitedFromCalling("CReadFileManageImpl½ûÖ¹µ÷ÓÃPutCharacter£¡", character);
+    FunctionProhibitedFromCalling("CReadFileManageImplç¦æ­¢è°ƒç”¨PutCharacterï¼", character);
 
     return false;
 }
@@ -86,7 +86,7 @@ bool CoreTools::CReadFileManagerImpl::PutString(const std::string& str) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    FunctionProhibitedFromCalling("CReadFileManageImpl½ûÖ¹µ÷ÓÃPutString£¡", str);
+    FunctionProhibitedFromCalling("CReadFileManageImplç¦æ­¢è°ƒç”¨PutStringï¼", str);
 
     return false;
 }

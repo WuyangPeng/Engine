@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.0 (2024/06/22 10:06)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.0 (2024/06/22 10:06)
 
 #include "Framework/FrameworkExport.h"
 
@@ -40,7 +40,7 @@ bool Framework::NetworkManagerInterface::Create(const EnvironmentParameter& envi
 
     if (ParentType::Create(environmentParameter))
     {
-        /// Á¬½Ó·şÎñÆ÷ºÍ¼àÌı¿Í»§¶Ë¡£
+        /// è¿æ¥æœåŠ¡å™¨å’Œç›‘å¬å®¢æˆ·ç«¯ã€‚
         const auto networkFileName = GetEnvironmentDirectory().GetExecutableConfigurationDirectory() + SYSTEM_TEXT("Network.json");
 
         networkManager->ResetSendSocketManager(CoreTools::StringConversion::StandardConversionMultiByte(networkFileName));
@@ -59,7 +59,7 @@ bool Framework::NetworkManagerInterface::Initialize()
 
     if (ParentType::Initialize())
     {
-        /// ×ÓÀàÔÚÕâÀï×¢²áÏûÏ¢¡£
+        /// å­ç±»åœ¨è¿™é‡Œæ³¨å†Œæ¶ˆæ¯ã€‚
         RegisteredMessages();
 
         return true;
@@ -95,7 +95,7 @@ bool Framework::NetworkManagerInterface::Idle(int64_t timeDelta)
 
     if (ParentType::Idle(timeDelta))
     {
-        /// ·¢ËÍºÍ½ÓÊÕÏûÏ¢
+        /// å‘é€å’Œæ¥æ”¶æ¶ˆæ¯
         return true;
     }
     else

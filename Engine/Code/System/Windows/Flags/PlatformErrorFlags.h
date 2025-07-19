@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.2 (2024/10/26 16:21)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.2 (2024/10/26 16:21)
 
 #ifndef SYSTEM_WINDOWS_PLATFORM_ERROR_FLAGS_H
 #define SYSTEM_WINDOWS_PLATFORM_ERROR_FLAGS_H
@@ -30,7 +30,7 @@ namespace System
         FailCriticalErrors = SEM_FAILCRITICALERRORS,
         NoGeneralProtectionFaultErrorBox = SEM_NOGPFAULTERRORBOX,
 
-        /// Îª½ø³ÌÉèÖÃ´ËÖµºó£¬½«ºöÂÔÇå³ý¸ÃÖµµÄÆäËûÉèÖÃ¡£
+        /// ä¸ºè¿›ç¨‹è®¾ç½®æ­¤å€¼åŽï¼Œå°†å¿½ç•¥æ¸…é™¤è¯¥å€¼çš„å…¶ä»–è®¾ç½®ã€‚
         NoAlignmentFaultExcept = SEM_NOALIGNMENTFAULTEXCEPT,
 
         NoOpenFileErrorBox = SEM_NOOPENFILEERRORBOX,
@@ -540,7 +540,7 @@ namespace System
         UntrustedMountPoint = ERROR_UNTRUSTED_MOUNT_POINT,
         DlpPolicySilentlyFail = ERROR_DLP_POLICY_SILENTLY_FAIL,
 
-        // ÄÜÁ¦ÊÚÈ¨´íÎó´úÂë
+        // èƒ½åŠ›æŽˆæƒé”™è¯¯ä»£ç 
         CapAuthorizationNotDevUnlocked = ERROR_CAPAUTHZ_NOT_DEVUNLOCKED,
         CapAuthorizationChangeType = ERROR_CAPAUTHZ_CHANGE_TYPE,
         CapAuthorizationNotProvisioned = ERROR_CAPAUTHZ_NOT_PROVISIONED,

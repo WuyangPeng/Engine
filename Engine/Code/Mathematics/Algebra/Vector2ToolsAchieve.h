@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 11:16)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 11:16)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR2_TOOLS_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_VECTOR2_TOOLS_ACHIEVE_H
@@ -23,7 +23,7 @@
 template <typename Real>
 requires std::is_arithmetic_v<Real> bool Mathematics::Vector2Tools<Real>::Approximate(const Vector2Type& lhs, const Vector2Type& rhs, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
-    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= epsilon, "epsilon±ØĞë´óÓÚ»òµÈÓÚ0£¡");
+    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= epsilon, "epsilonå¿…é¡»å¤§äºæˆ–ç­‰äº0ï¼");
 
     return MathType::FAbs(lhs.GetX() - rhs.GetX()) < epsilon && MathType::FAbs(lhs.GetY() - rhs.GetY()) < epsilon;
 }
@@ -94,7 +94,7 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 Mathematics::Vector2<Real> Mathematics::Vector2Tools<Real>::ParallelVectorLhsToRhs(const Vector2Type& lhs, const Vector2Type& rhs, Real epsilon)
 {
-    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= epsilon, "epsilon±ØĞë´óÓÚ»òµÈÓÚ0£¡");
+    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= epsilon, "epsilonå¿…é¡»å¤§äºæˆ–ç­‰äº0ï¼");
 
     const auto moduleSquare = GetLengthSquared(rhs);
 
@@ -104,7 +104,7 @@ Mathematics::Vector2<Real> Mathematics::Vector2Tools<Real>::ParallelVectorLhsToR
     }
     else
     {
-        MATHEMATICS_ASSERTION_1(false, "³ıÁã´íÎó£¡");
+        MATHEMATICS_ASSERTION_1(false, "é™¤é›¶é”™è¯¯ï¼");
 
         return Vector2Type{};
     }
@@ -178,12 +178,12 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 typename Mathematics::Vector2Tools<Real>::Vector2OrthonormalizeType Mathematics::Vector2Tools<Real>::Orthonormalize(const Vector2Type& lhs, const Vector2Type& rhs, Real epsilon)
 {
-    /// Èç¹ûÊäÈëÏòÁ¿v0ºÍv1£¬ÔòGram-SchmidtÕı½»ÏòÁ¿²úÉúÊ¸Á¿u0ºÍu1ÈçÏÂ£¬
+    /// å¦‚æœè¾“å…¥å‘é‡v0å’Œv1ï¼Œåˆ™Gram-Schmidtæ­£äº¤å‘é‡äº§ç”ŸçŸ¢é‡u0å’Œu1å¦‚ä¸‹ï¼Œ
     ///
     ///   u0 = v0 / |v0|
     ///   u1 = (v1 - (u0 * v1)u0) / |v1 - (u0 * v1)u0|
     ///
-    /// ÆäÖĞ|A|±íÊ¾ÏòÁ¿AµÄ³¤¶ÈºÍA * B±íÊ¾ÏòÁ¿AºÍBµÄµã»ı
+    /// å…¶ä¸­|A|è¡¨ç¤ºå‘é‡Açš„é•¿åº¦å’ŒA * Bè¡¨ç¤ºå‘é‡Aå’ŒBçš„ç‚¹ç§¯
 
     return Vector2OrthonormalizeType{ lhs, rhs, epsilon };
 }

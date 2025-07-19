@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 13:54)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 13:54)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SPARSE_MATRIX_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SPARSE_MATRIX_DETAIL_H
@@ -54,8 +54,8 @@ template <typename Real>
 const Real& Mathematics::SparseMatrix<Real>::operator()(int row, int column) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_0(0 <= row && row < rowsNumber, "rowË÷Òı´íÎó£¡");
-    MATHEMATICS_ASSERTION_0(0 <= column && column < columnsNumber, "columnË÷Òı´íÎó£¡");
+    MATHEMATICS_ASSERTION_0(0 <= row && row < rowsNumber, "rowç´¢å¼•é”™è¯¯ï¼");
+    MATHEMATICS_ASSERTION_0(0 <= column && column < columnsNumber, "columnç´¢å¼•é”™è¯¯ï¼");
 
     const auto iter = sparseMatrixEntry.find(SparseMatrixIndex{ row, column });
 
@@ -67,7 +67,7 @@ const Real& Mathematics::SparseMatrix<Real>::operator()(int row, int column) con
     {
         static constexpr auto zero = MathType::GetValue(0);
 
-        MATHEMATICS_ASSERTION_0(MathType::Approximate(zero, MathType::GetValue(0), MathType::GetZeroTolerance()), "¾²Ì¬const±äÁ¿±»ĞŞ¸Ä£¡");
+        MATHEMATICS_ASSERTION_0(MathType::Approximate(zero, MathType::GetValue(0), MathType::GetZeroTolerance()), "é™æ€constå˜é‡è¢«ä¿®æ”¹ï¼");
 
         return zero;
     }
@@ -77,8 +77,8 @@ template <typename Real>
 Real& Mathematics::SparseMatrix<Real>::operator()(int row, int column)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
-    MATHEMATICS_ASSERTION_0(0 <= row && row < rowsNumber, "rowË÷Òı´íÎó£¡");
-    MATHEMATICS_ASSERTION_0(0 <= column && column < columnsNumber, "columnË÷Òı´íÎó£¡");
+    MATHEMATICS_ASSERTION_0(0 <= row && row < rowsNumber, "rowç´¢å¼•é”™è¯¯ï¼");
+    MATHEMATICS_ASSERTION_0(0 <= column && column < columnsNumber, "columnç´¢å¼•é”™è¯¯ï¼");
 
     return sparseMatrixEntry[SparseMatrixIndex{ row, column }];
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 17:22)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 17:22)
 
 #ifndef MATHEMATICS_INTERSECTION_LINE2_BOX2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_LINE2_BOX2_DETAIL_H
@@ -60,7 +60,7 @@ Mathematics::IntersectionType Mathematics::Line2Box2<Real>::GetIntersects() cons
 template <typename Real>
 void Mathematics::Line2Box2<Real>::DoClipping(Real t0, Real t1, const Vector2Type& origin, const Vector2Type& direction, const Box2Type& box, bool solid)
 {
-    /// ½«ÏßĞÔ·ÖÁ¿×ª»»ÎªºĞ×Ó×ø±ê¡£
+    /// å°†çº¿æ€§åˆ†é‡è½¬æ¢ä¸ºç›’å­åæ ‡ã€‚
     auto diff = origin - box.GetCenter();
     const Vector2Type boxOrigin{ Vector2ToolsType::DotProduct(diff, box.GetAxis0()), Vector2ToolsType::DotProduct(diff, box.GetAxis1()) };
     const Vector2Type boxDirection{ Vector2ToolsType::DotProduct(direction, box.GetAxis0()), Vector2ToolsType::DotProduct(direction, box.GetAxis1()) };
@@ -116,7 +116,7 @@ Mathematics::Line2Box2<Real>::ClipType::ClipType(Real t0, Real t1) noexcept
 template <typename Real>
 typename Mathematics::Line2Box2<Real>::ClipType Mathematics::Line2Box2<Real>::Clip(Real denom, Real numer, const ClipType& clipType) noexcept
 {
-    /// Èç¹ûÏß¶ÎÓëµ±Ç°²âÊÔÆ½ÃæÏà½»£¬Ôò·µ»ØÖµÎª¡° true¡±¡£ ·ñÔò£¬½«·µ»Ø¡° false¡±£¬ÔÚÕâÖÖÇé¿öÏÂ£¬Ïß¶Î½«±»ÍêÈ«¼ôÇĞ¡£
+    /// å¦‚æœçº¿æ®µä¸å½“å‰æµ‹è¯•å¹³é¢ç›¸äº¤ï¼Œåˆ™è¿”å›å€¼ä¸ºâ€œ trueâ€ã€‚ å¦åˆ™ï¼Œå°†è¿”å›â€œ falseâ€ï¼Œåœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œçº¿æ®µå°†è¢«å®Œå…¨å‰ªåˆ‡ã€‚
     ClipType result{ clipType };
 
     if (MathType::GetValue(0) < denom)

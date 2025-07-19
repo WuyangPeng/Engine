@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/06 16:48)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/06 16:48)
 
 #include "SystemAndroidTestingAndroidCallBack.h"
 #include "Testing.h"
@@ -15,7 +15,7 @@
 #include "Framework/AndroidFrame/AndroidCallBackUnitTestSuiteDetail.h"
 
 System::SystemAndroidTestingAndroidCallBack::SystemAndroidTestingAndroidCallBack(int64_t delta)
-    : ParentType{ delta, "¡¾ÏµÍ³¿â¡¿Androidµ¥Ôª²âÊÔÌ×¼ş" }
+    : ParentType{ delta, "ã€ç³»ç»Ÿåº“ã€‘Androidå•å…ƒæµ‹è¯•å¥—ä»¶" }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -29,7 +29,7 @@ void System::SystemAndroidTestingAndroidCallBack::InitSuite()
 
 void System::SystemAndroidTestingAndroidCallBack::AddAndroidSuite()
 {
-    auto androidSuite = GenerateSuite("°²×¿");
+    auto androidSuite = GenerateSuite("å®‰å“");
 
     auto androidApp = GetAndroidApp();
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 14:40)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 14:40)
 
 #ifndef MATHEMATICS_ALGEBRA_A_VECTOR_H
 #define MATHEMATICS_ALGEBRA_A_VECTOR_H
@@ -38,7 +38,7 @@ namespace Mathematics
         using ArrayType = std::array<T, vectorSize>;
 
     public:
-        // AVector±íÊ¾·ÂÉä×ø±ê (x,y,z,0)¡£Ä¬ÈÏ (0,0,0,0)¡£
+        // AVectorè¡¨ç¤ºä»¿å°„åæ ‡ (x,y,z,0)ã€‚é»˜è®¤ (0,0,0,0)ã€‚
         constexpr AVector() noexcept
             : AVector{ MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) }
         {
@@ -67,14 +67,14 @@ namespace Mathematics
         NODISCARD T GetZ() const noexcept;
         void SetZ(T z) noexcept;
 
-        // ËãÊõ¸üĞÂ
+        // ç®—æœ¯æ›´æ–°
         NODISCARD AVector operator-() const noexcept;
         AVector& operator+=(const AVector& rhs);
         AVector& operator-=(const AVector& rhs);
         AVector& operator*=(T scalar);
         AVector& operator/=(T scalar);
 
-        // ÏòÁ¿ÔËËã¡£
+        // å‘é‡è¿ç®—ã€‚
         NODISCARD T Length() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
         NODISCARD T SquaredLength() const noexcept;
         void Normalize(T epsilon = MathType::GetZeroTolerance());
@@ -139,22 +139,22 @@ namespace Mathematics
     template <typename T>
     NODISCARD AVector<T> UnitCross(const AVector<T>& lhs, const AVector<T>& rhs, T epsilon = Math<T>::GetZeroTolerance());
 
-    // ÊäÈë±ØĞë³õÊ¼»¯Îª·ÇÁãÏòÁ¿
+    // è¾“å…¥å¿…é¡»åˆå§‹åŒ–ä¸ºéé›¶å‘é‡
     template <typename T>
     NODISCARD AVectorOrthonormalize<T> Orthonormalize(const AVector<T>& uVector, const AVector<T>& vVector, const AVector<T>& wVector, T epsilon = Math<T>::GetZeroTolerance());
     template <typename T>
     NODISCARD AVectorOrthonormalize<T> Orthonormalize(const std::vector<AVector<T>>& vectors, T epsilon = Math<T>::GetZeroTolerance());
 
-    // ÊäÈëÖµnonzeroVector±ØĞëÊÇÒ»¸ö·ÇÁãÏòÁ¿¡£·µ»ØÖµÊÇÒ»¸ö±ê×¼Õı½»»ù{U£¬V, W}¡£
-    // ·µ»ØµÄWÎªÍ¨¹ı´Ëº¯ÊıÕıÔò»¯µÄnonzeroVector¡£Èç¹ûÄãÒÑÖªWÊÇµ¥Î»³¤¶È£¬Ê¹ÓÃGenerateComplementBasisÀ´¼ÆËãUºÍV¡£
+    // è¾“å…¥å€¼nonzeroVectorå¿…é¡»æ˜¯ä¸€ä¸ªéé›¶å‘é‡ã€‚è¿”å›å€¼æ˜¯ä¸€ä¸ªæ ‡å‡†æ­£äº¤åŸº{Uï¼ŒV, W}ã€‚
+    // è¿”å›çš„Wä¸ºé€šè¿‡æ­¤å‡½æ•°æ­£åˆ™åŒ–çš„nonzeroVectorã€‚å¦‚æœä½ å·²çŸ¥Wæ˜¯å•ä½é•¿åº¦ï¼Œä½¿ç”¨GenerateComplementBasisæ¥è®¡ç®—Uå’ŒVã€‚
     template <typename T>
     NODISCARD AVectorOrthonormalBasis<T> GenerateOrthonormalBasis(const AVector<T>& nonzeroVector, T epsilon = Math<T>::GetZeroTolerance());
 
-    // ÊäÈëÖµunitVector£¨W£©±ØĞëÊÇÒ»¸öµ¥Î»ÏòÁ¿¡£·µ»ØÖµÖĞµÄÏòÁ¿{U,V}ÊÇµ¥Î»³¤¶ÈÇÒ»¥Ïà´¹Ö±£¬ÇÒ{U,V,W}ÊÇÒ»¸ö±ê×¼Õı½»»ù¡£
+    // è¾“å…¥å€¼unitVectorï¼ˆWï¼‰å¿…é¡»æ˜¯ä¸€ä¸ªå•ä½å‘é‡ã€‚è¿”å›å€¼ä¸­çš„å‘é‡{U,V}æ˜¯å•ä½é•¿åº¦ä¸”äº’ç›¸å‚ç›´ï¼Œä¸”{U,V,W}æ˜¯ä¸€ä¸ªæ ‡å‡†æ­£äº¤åŸºã€‚
     template <typename T>
     NODISCARD AVectorOrthonormalBasis<T> GenerateComplementBasis(const AVector<T>& unitVector, T epsilon = Math<T>::GetZeroTolerance());
 
-    // µ÷ÊÔÊä³ö
+    // è°ƒè¯•è¾“å‡º
     template <typename T>
     std::ostream& operator<<(std::ostream& outFile, const AVector<T>& vector);
 

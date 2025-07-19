@@ -1,15 +1,15 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.5 (2024/02/18 13:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.5 (2024/02/18 13:19)
 
-/// ËùÎ½µÄ´ø×´¾ØÕó¼´£ºÔÚ¾ØÕóAÖĞ£¬
-/// ËùÓĞµÄ·ÇÁãÔªËØ¶¼¼¯ÖĞÔÚÒÔÖ÷¶Ô½ÇÏßÎªÖĞĞÄµÄ´ø×´ÇøÓòÖĞ¡£
-/// Èç a11 a12 0   0   0   0
+/// æ‰€è°“çš„å¸¦çŠ¶çŸ©é˜µå³ï¼šåœ¨çŸ©é˜µAä¸­ï¼Œ
+/// æ‰€æœ‰çš„éé›¶å…ƒç´ éƒ½é›†ä¸­åœ¨ä»¥ä¸»å¯¹è§’çº¿ä¸ºä¸­å¿ƒçš„å¸¦çŠ¶åŒºåŸŸä¸­ã€‚
+/// å¦‚ a11 a12 0   0   0   0
 ///    a21 a22 a23 0   0   0
 ///    a31 a32 a33 a34 0   0
 ///    0   a42 a43 a44 a45 0
@@ -46,27 +46,27 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        // ³ÉÔ±·ÃÎÊ
+        // æˆå‘˜è®¿é—®
         NODISCARD int GetSize() const;
         NODISCARD int GetLowerBandsNumber() const;
         NODISCARD int GetUpperBandsNumber() const;
         NODISCARD int GetStreamSize() const;
 
-        /// ÖØÉè´óĞ¡»áÇå¿ÕÔ­ÓĞÊı¾İ¡£
+        /// é‡è®¾å¤§å°ä¼šæ¸…ç©ºåŸæœ‰æ•°æ®ã€‚
         void ResetSize(int size, int lowerBandsNumber, int upperBandsNumber);
 
-        /// ¶Ô½ÇÏß
+        /// å¯¹è§’çº¿
         NODISCARD ContainerType GetDiagonalBand() const;
         void SetDiagonalBand(const ContainerType& diagonalBand);
 
-        /// ÏÂÈı½Ç
+        /// ä¸‹ä¸‰è§’
         /// GetLowerBand(index):  0 <= index < LowerBandMax
         NODISCARD int GetLowerBandMax(int index) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
         NODISCARD ContainerType GetLowerBand(int index) const;
         void SetLowerBand(int index, const ContainerType& lowerBand);
         void SetLowerBandZero();
 
-        /// ÉÏÈı½Ç
+        /// ä¸Šä¸‰è§’
         /// GetUpperBand(index):  0 <= index < UpperBandMax
         NODISCARD int GetUpperBandMax(int index) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
         NODISCARD ContainerType GetUpperBand(int index) const;
@@ -76,23 +76,23 @@ namespace Mathematics
         NODISCARD Real& operator()(int row, int column);
         NODISCARD const Real& operator()(int row, int column) const;
 
-        // ±ãÀûº¯ÊıÓÃÓÚ³õÊ¼»¯¾ØÕó
+        // ä¾¿åˆ©å‡½æ•°ç”¨äºåˆå§‹åŒ–çŸ©é˜µ
         void SetZero();
         void SetIdentity();
 
         NODISCARD VariableMatrixType ToVariableMatrix() const;
 
-        /// ¼ÆËã´ø×´¾ØÕóµÄÄæ¡£
-        /// µ±¾ØÕó¿ÉÄæÊ±£¬·µ»ØÖµÎªÄæ¾ØÕó¡£
-        /// µ±¾ØÕó²»¿ÉÄæÊ±£¬º¯ÊıÅ×³öÒì³£¡£
-        /// RowMajor±ØĞë¾ßÓĞÓÉÄ£°å²ÎÊıÖ¸¶¨µÄ´æ´¢Ë³Ğò¡£
+        /// è®¡ç®—å¸¦çŠ¶çŸ©é˜µçš„é€†ã€‚
+        /// å½“çŸ©é˜µå¯é€†æ—¶ï¼Œè¿”å›å€¼ä¸ºé€†çŸ©é˜µã€‚
+        /// å½“çŸ©é˜µä¸å¯é€†æ—¶ï¼Œå‡½æ•°æŠ›å‡ºå¼‚å¸¸ã€‚
+        /// RowMajorå¿…é¡»å…·æœ‰ç”±æ¨¡æ¿å‚æ•°æŒ‡å®šçš„å­˜å‚¨é¡ºåºã€‚
         template <bool RowMajor>
         NODISCARD VariableMatrixType ComputeInverse(Real epsilon = MathType::GetZeroTolerance()) const;
 
     private:
-        ContainerType diagonalBandContainer;  // ¶Ô½ÇÏß
-        BandedMatrixDataType lowerBandData;  // ÏÂÈı½Ç
-        BandedMatrixDataType upperBandData;  // ÉÏÈı½Ç
+        ContainerType diagonalBandContainer;  // å¯¹è§’çº¿
+        BandedMatrixDataType lowerBandData;  // ä¸‹ä¸‰è§’
+        BandedMatrixDataType upperBandData;  // ä¸Šä¸‰è§’
     };
 
     using BandedMatrixF = BandedMatrix<float>;

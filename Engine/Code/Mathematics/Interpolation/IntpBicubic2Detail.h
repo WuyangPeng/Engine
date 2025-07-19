@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/09 10:07)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 10:07)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_BICUBIC2_DATAIL_H
 #define MATHEMATICS_INTERPOLATION_INTP_BICUBIC2_DATAIL_H
@@ -30,8 +30,8 @@ Mathematics::IntpBicubic2<Real>::IntpBicubic2(int xBound, int yBound, Real xMin,
       f{ f },
       blend{ (catmullRom ? crBlend : bsBlend) }
 {
-    MATHEMATICS_ASSERTION_0(xBound >= 3 && yBound >= 3, "ÎŞĞ§ÊäÈë¡£\n");
-    MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::GetValue(0) && ySpacing > Math<Real>::GetValue(0), "ÎŞĞ§ÊäÈë¡£\n");
+    MATHEMATICS_ASSERTION_0(xBound >= 3 && yBound >= 3, "æ— æ•ˆè¾“å…¥ã€‚\n");
+    MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::GetValue(0) && ySpacing > Math<Real>::GetValue(0), "æ— æ•ˆè¾“å…¥ã€‚\n");
 
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -320,7 +320,7 @@ Real Mathematics::IntpBicubic2<Real>::operator()(int xOrder, int yOrder, Real x,
         }
     }
 
-    // ¼ÆËã P = M*U ºÍ Q = M*V.
+    // è®¡ç®— P = M*U å’Œ Q = M*V.
     std::array<Real, 4> p{};
     std::array<Real, 4> q{};
 

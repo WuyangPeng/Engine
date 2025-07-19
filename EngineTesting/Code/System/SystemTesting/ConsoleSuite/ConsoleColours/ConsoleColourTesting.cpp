@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/11 18:25)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/11 18:25)
 
 #include "ConsoleColourTesting.h"
 #include "System/Console/ConsoleColour.h"
@@ -20,47 +20,47 @@
 
 System::ConsoleColourTesting::ConsoleColourTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      textColourDescription{ { TextColour::Black, "ºÚÉ«" },
-                             { TextColour::Red, "ºìÉ«" },
-                             { TextColour::Green, "ÂÌÉ«" },
-                             { TextColour::Blue, "À¶É«" },
-                             { TextColour::Yellow, "»ÆÉ«" },
-                             { TextColour::Cyan, "ÇàÉ«" },
-                             { TextColour::Magenta, "Æ·ºìÉ«" },
-                             { TextColour::White, "°×É«" },
-                             { TextColour::IntensifiedBlack, "¸ßÁÁºÚÉ«" },
-                             { TextColour::IntensifiedRed, "¸ßÁÁºìÉ«" },
-                             { TextColour::IntensifiedGreen, "¸ßÁÁÂÌÉ«" },
-                             { TextColour::IntensifiedBlue, "¸ßÁÁÀ¶É«" },
-                             { TextColour::IntensifiedYellow, "¸ßÁÁ»ÆÉ«" },
-                             { TextColour::IntensifiedCyan, "¸ßÁÁÇàÉ«" },
-                             { TextColour::IntensifiedMagenta, "¸ßÁÁÆ·ºìÉ«" },
-                             { TextColour::IntensifiedWhite, "¸ßÁÁ°×É«" } },
-      backgroundColourDescription{ { BackgroundColour::Black, "ºÚÉ«" },
-                                   { BackgroundColour::Red, "ºìÉ«" },
-                                   { BackgroundColour::Green, "ÂÌÉ«" },
-                                   { BackgroundColour::Blue, "À¶É«" },
-                                   { BackgroundColour::Yellow, "»ÆÉ«" },
-                                   { BackgroundColour::Cyan, "ÇàÉ«" },
-                                   { BackgroundColour::Magenta, "Æ·ºìÉ«" },
-                                   { BackgroundColour::White, "°×É«" },
-                                   { BackgroundColour::IntensifiedBlack, "¸ßÁÁºÚÉ«" },
-                                   { BackgroundColour::IntensifiedRed, "¸ßÁÁºìÉ«" },
-                                   { BackgroundColour::IntensifiedGreen, "¸ßÁÁÂÌÉ«" },
-                                   { BackgroundColour::IntensifiedBlue, "¸ßÁÁÀ¶É«" },
-                                   { BackgroundColour::IntensifiedYellow, "¸ßÁÁ»ÆÉ«" },
-                                   { BackgroundColour::IntensifiedCyan, "¸ßÁÁÇàÉ«" },
-                                   { BackgroundColour::IntensifiedMagenta, "¸ßÁÁÆ·ºìÉ«" },
-                                   { BackgroundColour::IntensifiedWhite, "¸ßÁÁ°×É«" } },
-      consoleCommonDescription{ { ConsoleCommon::Default, "Ä¬ÈÏ" },
-                                { ConsoleCommon::LeadingByte, "Ö¸µ¼×Ö½Ú" },
-                                { ConsoleCommon::TrailingByte, "Î²Ëæ×Ö½Ú" },
-                                { ConsoleCommon::GridHorizontal, "¶¥²¿Ë®Æ½Ïß" },
-                                { ConsoleCommon::GridLVertical, "×ó´¹Ö±Ïß" },
-                                { ConsoleCommon::GridRVertical, "ÓÒ´¹Ö±Ïß" },
-                                { ConsoleCommon::ReverseVideo, "·´×ªÇ°¾°ºÍ±³¾°ÊôĞÔ" },
-                                { ConsoleCommon::Underscore, "ÏÂ»®Ïß" },
-                                { ConsoleCommon::SingleByteCharacterSetDoubleByteCharacterSet, "SBCS»òDBCS±êÖ¾" } }
+      textColourDescription{ { TextColour::Black, "é»‘è‰²" },
+                             { TextColour::Red, "çº¢è‰²" },
+                             { TextColour::Green, "ç»¿è‰²" },
+                             { TextColour::Blue, "è“è‰²" },
+                             { TextColour::Yellow, "é»„è‰²" },
+                             { TextColour::Cyan, "é’è‰²" },
+                             { TextColour::Magenta, "å“çº¢è‰²" },
+                             { TextColour::White, "ç™½è‰²" },
+                             { TextColour::IntensifiedBlack, "é«˜äº®é»‘è‰²" },
+                             { TextColour::IntensifiedRed, "é«˜äº®çº¢è‰²" },
+                             { TextColour::IntensifiedGreen, "é«˜äº®ç»¿è‰²" },
+                             { TextColour::IntensifiedBlue, "é«˜äº®è“è‰²" },
+                             { TextColour::IntensifiedYellow, "é«˜äº®é»„è‰²" },
+                             { TextColour::IntensifiedCyan, "é«˜äº®é’è‰²" },
+                             { TextColour::IntensifiedMagenta, "é«˜äº®å“çº¢è‰²" },
+                             { TextColour::IntensifiedWhite, "é«˜äº®ç™½è‰²" } },
+      backgroundColourDescription{ { BackgroundColour::Black, "é»‘è‰²" },
+                                   { BackgroundColour::Red, "çº¢è‰²" },
+                                   { BackgroundColour::Green, "ç»¿è‰²" },
+                                   { BackgroundColour::Blue, "è“è‰²" },
+                                   { BackgroundColour::Yellow, "é»„è‰²" },
+                                   { BackgroundColour::Cyan, "é’è‰²" },
+                                   { BackgroundColour::Magenta, "å“çº¢è‰²" },
+                                   { BackgroundColour::White, "ç™½è‰²" },
+                                   { BackgroundColour::IntensifiedBlack, "é«˜äº®é»‘è‰²" },
+                                   { BackgroundColour::IntensifiedRed, "é«˜äº®çº¢è‰²" },
+                                   { BackgroundColour::IntensifiedGreen, "é«˜äº®ç»¿è‰²" },
+                                   { BackgroundColour::IntensifiedBlue, "é«˜äº®è“è‰²" },
+                                   { BackgroundColour::IntensifiedYellow, "é«˜äº®é»„è‰²" },
+                                   { BackgroundColour::IntensifiedCyan, "é«˜äº®é’è‰²" },
+                                   { BackgroundColour::IntensifiedMagenta, "é«˜äº®å“çº¢è‰²" },
+                                   { BackgroundColour::IntensifiedWhite, "é«˜äº®ç™½è‰²" } },
+      consoleCommonDescription{ { ConsoleCommon::Default, "é»˜è®¤" },
+                                { ConsoleCommon::LeadingByte, "æŒ‡å¯¼å­—èŠ‚" },
+                                { ConsoleCommon::TrailingByte, "å°¾éšå­—èŠ‚" },
+                                { ConsoleCommon::GridHorizontal, "é¡¶éƒ¨æ°´å¹³çº¿" },
+                                { ConsoleCommon::GridLVertical, "å·¦å‚ç›´çº¿" },
+                                { ConsoleCommon::GridRVertical, "å³å‚ç›´çº¿" },
+                                { ConsoleCommon::ReverseVideo, "åè½¬å‰æ™¯å’ŒèƒŒæ™¯å±æ€§" },
+                                { ConsoleCommon::Underscore, "ä¸‹åˆ’çº¿" },
+                                { ConsoleCommon::SingleByteCharacterSetDoubleByteCharacterSet, "SBCSæˆ–DBCSæ ‡å¿—" } }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -71,11 +71,11 @@ void System::ConsoleColourTesting::PrintMessage(StandardHandle standardHandle, T
 {
     auto& stream = (standardHandle == StandardHandle::Output) ? std::cout : std::cerr;
 
-    stream << "\nÕâÌõĞÅÏ¢ÔÚ¿ØÖÆÌ¨ÖĞÎÄ±¾ÏÔÊ¾Îª"
+    stream << "\nè¿™æ¡ä¿¡æ¯åœ¨æ§åˆ¶å°ä¸­æ–‡æœ¬æ˜¾ç¤ºä¸º"
            << textColourDescription.at(textColour)
-           << "£¬±³¾°Îª"
+           << "ï¼ŒèƒŒæ™¯ä¸º"
            << backgroundColourDescription.at(backgroundColour)
-           << "£¬¸ñÊ½Îª"
+           << "ï¼Œæ ¼å¼ä¸º"
            << consoleCommonDescription.at(consoleCommon)
            << "\n";
 }

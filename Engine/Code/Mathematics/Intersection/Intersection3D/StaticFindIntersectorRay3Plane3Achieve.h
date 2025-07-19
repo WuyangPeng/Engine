@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 13:52)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 13:52)
 
 #ifndef MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_RAY3_PLANE3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_RAY3_PLANE3_ACHIEVE_H
@@ -64,7 +64,7 @@ void Mathematics::StaticFindIntersectorRay3Plane3<Real>::Find() noexcept
     rayParameter = intr.GetLineParameter();
     if (intr.IsIntersection() && MathType::GetValue(0) <= rayParameter)
     {
-        // ÏßÓëÆ½ÃæÏà½»£¬µ«¿ÉÄÜÓëÉäÏß²»ÔÚÍ¬Ò»µã¡£
+        // çº¿ä¸å¹³é¢ç›¸äº¤ï¼Œä½†å¯èƒ½ä¸å°„çº¿ä¸åœ¨åŒä¸€ç‚¹ã€‚
         this->SetIntersectionType(intr.GetIntersectionType());
 
         return;

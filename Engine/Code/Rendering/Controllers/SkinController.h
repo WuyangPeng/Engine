@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.2 (2023/07/24 13:49)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.2 (2023/07/24 13:49)
 
 #ifndef RENDERING_CONTROLLERS_SKIN_CONTROLLER_H
 #define RENDERING_CONTROLLERS_SKIN_CONTROLLER_H
@@ -34,7 +34,7 @@ namespace Rendering
         using ConstObjectAssociatedContainer = std::vector<ConstObjectAssociated>;
 
     public:
-        // ¶¥µãºÍ¹Ç÷ÀµÄÊıÄ¿ÔÚ¶ÔÏóµÄÉú´æÆÚÊÇ¹Ì¶¨µÄ¡£
+        // é¡¶ç‚¹å’Œéª¨éª¼çš„æ•°ç›®åœ¨å¯¹è±¡çš„ç”Ÿå­˜æœŸæ˜¯å›ºå®šçš„ã€‚
         SkinController(int numVertices, int numBones, const BaseRendererSharedPtr& baseRenderer);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -48,7 +48,7 @@ namespace Rendering
         NODISCARD float GetWeights(int bonesIndex, int verticesIndex) const;
         NODISCARD APoint GetOffsets(int bonesIndex, int verticesIndex) const;
 
-        // µ÷ÓÃ¹¹Ôìº¯Êıºó£¬Äú±ØĞëÊ¹ÓÃÕâĞ©º¯ÊıÉèÖÃÊı¾İ¡£
+        // è°ƒç”¨æ„é€ å‡½æ•°åï¼Œæ‚¨å¿…é¡»ä½¿ç”¨è¿™äº›å‡½æ•°è®¾ç½®æ•°æ®ã€‚
         void SetBones(int bonesIndex, const ConstNodeSharedPtr& node);
         void SetWeights(int bonesIndex, int verticesIndex, float weights);
         void SetOffsets(int bonesIndex, int verticesIndex, const APoint& offsets);
@@ -57,7 +57,7 @@ namespace Rendering
         void SetWeights(int bonesIndex, const std::vector<float>& weights);
         void SetOffsets(int bonesIndex, const std::vector<APoint>& offsets);
 
-        // ¶¯»­¸üĞÂ¡£Ó¦ÓÃ³ÌĞòÊ±¼äÒÔºÁÃëÎªµ¥Î»¡£
+        // åŠ¨ç”»æ›´æ–°ã€‚åº”ç”¨ç¨‹åºæ—¶é—´ä»¥æ¯«ç§’ä¸ºå•ä½ã€‚
         NODISCARD bool Update(double applicationTime) override;
 
         NODISCARD ControllerSharedPtr Clone() const override;

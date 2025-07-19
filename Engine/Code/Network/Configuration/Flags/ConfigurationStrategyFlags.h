@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 17:20)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 17:20)
 
 #ifndef NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_FLAGS_H
 #define NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_FLAGS_H
@@ -145,9 +145,9 @@ namespace Network
     enum class SocketSendMessage
     {
         Default = 0,
-        Immediately,  // Á¢¼´
-        Cache,  // »º´æ
-        FrameCache,  // Ö¡»º´æ
+        Immediately,  // ç«‹å³
+        Cache,  // ç¼“å­˜
+        FrameCache,  // å¸§ç¼“å­˜
     };
 
     enum class SocketType

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 14:03)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 14:03)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_RATIONAL_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_RATIONAL_DETAIL_H
@@ -81,7 +81,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Linear(Real constant, Real once
 
     if (epsilon < MathType::FAbs(once))
     {
-        // ·½³ÌÊÇ once * x + constant = 0,ÕâÀïonce²»ÊÇÁã¡£
+        // æ–¹ç¨‹æ˜¯ once * x + constant = 0,è¿™é‡Œonceä¸æ˜¯é›¶ã€‚
         const auto rationalRoot = PolynomialRational{ -constant } / PolynomialRational{ once };
 
         quantity = 1;
@@ -94,14 +94,14 @@ bool Mathematics::PolynomialRootsRational<Real>::Linear(Real constant, Real once
 
     if (epsilon < MathType::FAbs(constant))
     {
-        // ·½³ÌÊÇ c0 = 0, ÕâÀïconstant²»ÊÇÁã,ËùÒÔ·½³ÌÎŞ½â ¡£
+        // æ–¹ç¨‹æ˜¯ c0 = 0, è¿™é‡Œconstantä¸æ˜¯é›¶,æ‰€ä»¥æ–¹ç¨‹æ— è§£ ã€‚
 
         quantity = 0;
 
         return false;
     }
 
-    // ¸Ã¶àÏîÊ½·½³ÌÊÇÖØÑÔÊ½£¬0 = 0£¬ËùÒÔÓĞÎŞÇî¶àµÄ½â¾ö·½°¸¡£
+    // è¯¥å¤šé¡¹å¼æ–¹ç¨‹æ˜¯é‡è¨€å¼ï¼Œ0 = 0ï¼Œæ‰€ä»¥æœ‰æ— ç©·å¤šçš„è§£å†³æ–¹æ¡ˆã€‚
     quantity = System::EnumCastUnderlying(QuantityType::Infinite);
 
     return true;
@@ -114,7 +114,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Linear(const PolynomialRational
 
     if (once != GetZero())
     {
-        // ·½³ÌÊÇ once * x + constant = 0,ÕâÀïonce²»ÊÇÁã¡£
+        // æ–¹ç¨‹æ˜¯ once * x + constant = 0,è¿™é‡Œonceä¸æ˜¯é›¶ã€‚
         const auto rationalRoot = constant / once;
         quantity = 1;
 
@@ -126,14 +126,14 @@ bool Mathematics::PolynomialRootsRational<Real>::Linear(const PolynomialRational
 
     if (constant != GetZero())
     {
-        // ·½³ÌÊÇ c0 = 0, ÕâÀïconstant²»ÊÇÁã,ËùÒÔ·½³ÌÎŞ½â ¡£
+        // æ–¹ç¨‹æ˜¯ c0 = 0, è¿™é‡Œconstantä¸æ˜¯é›¶,æ‰€ä»¥æ–¹ç¨‹æ— è§£ ã€‚
 
         quantity = 0;
 
         return false;
     }
 
-    // ¸Ã¶àÏîÊ½·½³ÌÊÇÖØÑÔÊ½£¬0 = 0£¬ËùÒÔÓĞÎŞÇî¶àµÄ½â¾ö·½°¸¡£
+    // è¯¥å¤šé¡¹å¼æ–¹ç¨‹æ˜¯é‡è¨€å¼ï¼Œ0 = 0ï¼Œæ‰€ä»¥æœ‰æ— ç©·å¤šçš„è§£å†³æ–¹æ¡ˆã€‚
     quantity = System::EnumCastUnderlying(QuantityType::Infinite);
 
     return true;
@@ -147,15 +147,15 @@ bool Mathematics::PolynomialRootsRational<Real>::Quadratic(Real constant, Real o
         return Linear(constant, once);
     }
 
-    // ·½³ÌÊÇ secondary * x^2 + once * x + constant = 0, ÕâÀïsecondaryÊÇ·ÇÁã
+    // æ–¹ç¨‹æ˜¯ secondary * x^2 + once * x + constant = 0, è¿™é‡Œsecondaryæ˜¯éé›¶
     const PolynomialRational rationalConstant{ constant };
     const PolynomialRational rationalOnce{ once };
     const PolynomialRational rationalSecondary{ secondary };
 
-    // ´´½¨Ò»¸öÊ×Ò»·½³Ì, x^2 + once * x + constant = 0.
+    // åˆ›å»ºä¸€ä¸ªé¦–ä¸€æ–¹ç¨‹, x^2 + once * x + constant = 0.
     const auto rationalSecondaryInverse = GetOne() / rationalSecondary;
 
-    // ½âÕâ¸ö·½³Ì
+    // è§£è¿™ä¸ªæ–¹ç¨‹
     return Quadratic(rationalConstant * rationalSecondaryInverse, rationalOnce * rationalSecondaryInverse);
 }
 
@@ -167,11 +167,11 @@ bool Mathematics::PolynomialRootsRational<Real>::Quadratic(const PolynomialRatio
         return Linear(constant, once);
     }
 
-    // ·½³ÌÊÇ secondary * x^2 + once * x + constant = 0, ÕâÀïsecondaryÊÇ·ÇÁã
-    // ´´½¨Ò»¸öÊ×Ò»·½³Ì, x^2 + once * x + constant = 0.
+    // æ–¹ç¨‹æ˜¯ secondary * x^2 + once * x + constant = 0, è¿™é‡Œsecondaryæ˜¯éé›¶
+    // åˆ›å»ºä¸€ä¸ªé¦–ä¸€æ–¹ç¨‹, x^2 + once * x + constant = 0.
     const auto rationalSecondaryInverse = GetOne() / secondary;
 
-    // ½âÕâ¸ö·½³Ì
+    // è§£è¿™ä¸ªæ–¹ç¨‹
     return Quadratic(constant * rationalSecondaryInverse, once * rationalSecondaryInverse);
 }
 
@@ -183,13 +183,13 @@ bool Mathematics::PolynomialRootsRational<Real>::Quadratic(const PolynomialRatio
     auto rationalDiscriminant = rationalMinusOnceDivided2 * rationalMinusOnceDivided2 - constant;
     if (GetZero() < rationalDiscriminant)
     {
-        // Á½¸ö²»Í¬µÄÊµÊı¸ù¡£
+        // ä¸¤ä¸ªä¸åŒçš„å®æ•°æ ¹ã€‚
         quantity = 2;
 
-        // ¹ÀËãÅĞ±ğÊ½¡£
+        // ä¼°ç®—åˆ¤åˆ«å¼ã€‚
         auto discriminant = rationalDiscriminant.template ConvertTo<Real>();
 
-        MATHEMATICS_ASSERTION_3(MathType::GetValue(0) < discriminant, "ÒâÍâÇé¿ö\n");
+        MATHEMATICS_ASSERTION_3(MathType::GetValue(0) < discriminant, "æ„å¤–æƒ…å†µ\n");
 
         discriminant = MathType::Sqrt(discriminant);
 
@@ -205,7 +205,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Quadratic(const PolynomialRatio
     }
     else if (rationalDiscriminant.Abs() <= PolynomialRational{ epsilon })
     {
-        // Ò»¸öÊµÊı¸ù¡£
+        // ä¸€ä¸ªå®æ•°æ ¹ã€‚
         quantity = 1;
 
         root.at(0) = rationalMinusOnceDivided2.template ConvertTo<Real>();
@@ -213,7 +213,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Quadratic(const PolynomialRatio
     }
     else
     {
-        // Ã»ÓĞÊµÊı¸ù
+        // æ²¡æœ‰å®æ•°æ ¹
         quantity = 0;
     }
 
@@ -228,17 +228,17 @@ bool Mathematics::PolynomialRootsRational<Real>::Cubic(Real constant, Real once,
         return Quadratic(constant, once, secondary);
     }
 
-    // Õâ·½³ÌÊÇthrice * x^3 + secondary * x^2 + once * x + constant = 0,
-    // ÕâÀï thrice¾Í·ÇÁã¡£
+    // è¿™æ–¹ç¨‹æ˜¯thrice * x^3 + secondary * x^2 + once * x + constant = 0,
+    // è¿™é‡Œ thriceå°±éé›¶ã€‚
     const PolynomialRational rationalConstant{ constant };
     const PolynomialRational rationalOnce{ once };
     const PolynomialRational rationalSecondary{ secondary };
     const PolynomialRational rationalThrice{ thrice };
 
-    // ´´½¨Ò»¸öÊ×Ò»¶àÏîÊ½, x^3 + secondary * x^2 + once * x + constant = 0.
+    // åˆ›å»ºä¸€ä¸ªé¦–ä¸€å¤šé¡¹å¼, x^3 + secondary * x^2 + once * x + constant = 0.
     const auto rationalThriceInverse = GetOne() / rationalThrice;
 
-    // ½âÕâ¸ö·½³Ì
+    // è§£è¿™ä¸ªæ–¹ç¨‹
     return Cubic(rationalConstant * rationalThriceInverse, rationalOnce * rationalThriceInverse, rationalSecondary * rationalThriceInverse);
 }
 
@@ -250,19 +250,19 @@ bool Mathematics::PolynomialRootsRational<Real>::Cubic(const PolynomialRational&
         return Quadratic(constant, once, secondary);
     }
 
-    // Õâ·½³ÌÊÇthrice * x^3 + secondary * x^2 + once * x + constant = 0,
-    // ÕâÀï thrice¾Í·ÇÁã¡£
-    // ´´½¨Ò»¸öÊ×Ò»¶àÏîÊ½, x^3 + secondary * x^2 + once * x + constant = 0.
+    // è¿™æ–¹ç¨‹æ˜¯thrice * x^3 + secondary * x^2 + once * x + constant = 0,
+    // è¿™é‡Œ thriceå°±éé›¶ã€‚
+    // åˆ›å»ºä¸€ä¸ªé¦–ä¸€å¤šé¡¹å¼, x^3 + secondary * x^2 + once * x + constant = 0.
     const auto rationalThriceInverse = GetOne() / thrice;
 
-    // ½âÕâ¸ö·½³Ì
+    // è§£è¿™ä¸ªæ–¹ç¨‹
     return Cubic(constant * rationalThriceInverse, once * rationalThriceInverse, secondary * rationalThriceInverse);
 }
 
 template <typename Real>
 bool Mathematics::PolynomialRootsRational<Real>::Cubic(const PolynomialRational& constant, const PolynomialRational& once, const PolynomialRational& secondary)
 {
-    // ¼õÉÙ·½³ÌÎªy^3 + b1 * y + b0 = 0¡£
+    // å‡å°‘æ–¹ç¨‹ä¸ºy^3 + b1 * y + b0 = 0ã€‚
     static const PolynomialRational rationalHalf{ 1, 2 };
     static const PolynomialRational rationalThird{ 1, 3 };
     static const PolynomialRational rationalTwo{ 2 };
@@ -273,18 +273,18 @@ bool Mathematics::PolynomialRootsRational<Real>::Cubic(const PolynomialRational&
     auto rationalB1 = once - rationalSecondaryDivide3 * secondary;
     auto rationalB0 = constant - once * rationalSecondaryDivide3 + rationalTwo * rationalSecondaryDivide3Cube;
 
-    // ½âÕâ¸ö·½³Ì
+    // è§£è¿™ä¸ªæ–¹ç¨‹
     auto rationalQ = rationalThird * rationalB1;
     auto rationalR = rationalHalf * rationalB0;
     auto rationalDiscriminant = rationalR * rationalR + rationalQ * rationalQ * rationalQ;
     if (PolynomialRational{ epsilon } < rationalDiscriminant)
     {
-        // Ò»¸öÊµÊı¸ù£¬Á½¸ö¸´Êı¹²éî¸ù¡£
+        // ä¸€ä¸ªå®æ•°æ ¹ï¼Œä¸¤ä¸ªå¤æ•°å…±è½­æ ¹ã€‚
         quantity = 1;
 
-        // ¹À¼ÆÅĞ±ğÊ½
+        // ä¼°è®¡åˆ¤åˆ«å¼
         auto discriminant = rationalDiscriminant.template ConvertTo<Real>();
-        MATHEMATICS_ASSERTION_3(MathType::GetValue(0) < discriminant, "ÒâÍâÇé¿ö\n");
+        MATHEMATICS_ASSERTION_3(MathType::GetValue(0) < discriminant, "æ„å¤–æƒ…å†µ\n");
         auto discriminantSqrt = MathType::Sqrt(discriminant);
 
         rationalDiscriminant = PolynomialRational{ discriminantSqrt };
@@ -308,16 +308,16 @@ bool Mathematics::PolynomialRootsRational<Real>::Cubic(const PolynomialRational&
     }
     else if (rationalDiscriminant < PolynomialRational{ epsilon })
     {
-        // Èı¸ö²»Í¬µÄÊµÊı¸ù¡£
+        // ä¸‰ä¸ªä¸åŒçš„å®æ•°æ ¹ã€‚
         quantity = 3;
 
         multiplicity.at(0) = 1;
         multiplicity.at(1) = 1;
         multiplicity.at(2) = 1;
 
-        // Í¨¹ı¼ÆËãµÄÌØÕ÷ÖµÇó½â¸Ã¶àÏîÊ½µÄ¸ù¡£
+        // é€šè¿‡è®¡ç®—çš„ç‰¹å¾å€¼æ±‚è§£è¯¥å¤šé¡¹å¼çš„æ ¹ã€‚
         auto negativeQ = -rationalQ.template ConvertTo<Real>();
-        MATHEMATICS_ASSERTION_3(MathType::GetValue(0) < negativeQ, "ÒâÍâÇé¿ö\n");
+        MATHEMATICS_ASSERTION_3(MathType::GetValue(0) < negativeQ, "æ„å¤–æƒ…å†µ\n");
 
         auto negativeR = -rationalR.template ConvertTo<Real>();
         auto negativeDiscriminant = -rationalDiscriminant.template ConvertTo<Real>();
@@ -335,7 +335,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Cubic(const PolynomialRational&
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-        // ÒÔµİÔöË³ĞòÅÅĞò
+        // ä»¥é€’å¢é¡ºåºæ’åº
         if (root0 <= root1)
         {
             root[0] = root0;
@@ -369,10 +369,10 @@ bool Mathematics::PolynomialRootsRational<Real>::Cubic(const PolynomialRational&
     }
     else
     {
-        // Èı¸öÊµÊı¸ù£¬ÆäÖĞÖÁÉÙÁ½¸öÊÇÏàµÈµÄ¡£
+        // ä¸‰ä¸ªå®æ•°æ ¹ï¼Œå…¶ä¸­è‡³å°‘ä¸¤ä¸ªæ˜¯ç›¸ç­‰çš„ã€‚
         if (PolynomialRational{ epsilon } < rationalQ.Abs())
         {
-            // Á½¸öÊµÖµµÄ¸ù£¬Ò»¸öÖØ¸´¡£
+            // ä¸¤ä¸ªå®å€¼çš„æ ¹ï¼Œä¸€ä¸ªé‡å¤ã€‚
             quantity = 2;
 
             auto r = rationalR.template ConvertTo<Real>();
@@ -401,7 +401,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Cubic(const PolynomialRational&
         }
         else
         {
-            // Ò»¸öÊµÊı¸ù£¬ËùÓĞÖØ¸´
+            // ä¸€ä¸ªå®æ•°æ ¹ï¼Œæ‰€æœ‰é‡å¤
             quantity = 1;
 
             root.at(0) = -rationalSecondaryDivide3.template ConvertTo<Real>();
@@ -420,18 +420,18 @@ bool Mathematics::PolynomialRootsRational<Real>::Quartic(Real constant, Real onc
         return Cubic(constant, once, secondary, thrice);
     }
 
-    // ·½³ÌÊÇ quartic * x^4 + thrice * x^3 + secondary * x^2 + once * x + constant = 0,
-    // ÕâÀïquarticÊÇ·ÇÁã
+    // æ–¹ç¨‹æ˜¯ quartic * x^4 + thrice * x^3 + secondary * x^2 + once * x + constant = 0,
+    // è¿™é‡Œquarticæ˜¯éé›¶
     const PolynomialRational rationalConstant{ constant };
     const PolynomialRational rationalOnce{ once };
     const PolynomialRational rationalSecondary{ secondary };
     const PolynomialRational rationalThrice{ thrice };
     const PolynomialRational rationalQuartic{ quartic };
 
-    // ´´½¨Ê×Ò»¶àÏîÊ½, x^4 + thrice * x^3 + secondary * x^2 + once * x + constant = 0.
+    // åˆ›å»ºé¦–ä¸€å¤šé¡¹å¼, x^4 + thrice * x^3 + secondary * x^2 + once * x + constant = 0.
     const auto rationalQuarticInverse = GetOne() / rationalQuartic;
 
-    // ½âÕâ¸ö·½³Ì
+    // è§£è¿™ä¸ªæ–¹ç¨‹
     return Quartic(rationalConstant * rationalQuarticInverse, rationalOnce * rationalQuarticInverse, rationalSecondary * rationalQuarticInverse, rationalThrice * rationalQuarticInverse);
 }
 
@@ -443,12 +443,12 @@ bool Mathematics::PolynomialRootsRational<Real>::Quartic(const PolynomialRationa
         return Cubic(constant, once, secondary, thrice);
     }
 
-    // ·½³ÌÊÇ quartic * x^4 + thrice * x^3 + secondary * x^2 + once * x + constant = 0,
-    // ÕâÀïquarticÊÇ·ÇÁã
-    // ´´½¨Ê×Ò»¶àÏîÊ½, x^4 + thrice * x^3 + secondary * x^2 + once * x + constant = 0.
+    // æ–¹ç¨‹æ˜¯ quartic * x^4 + thrice * x^3 + secondary * x^2 + once * x + constant = 0,
+    // è¿™é‡Œquarticæ˜¯éé›¶
+    // åˆ›å»ºé¦–ä¸€å¤šé¡¹å¼, x^4 + thrice * x^3 + secondary * x^2 + once * x + constant = 0.
     const auto rationalQuarticInverse = GetOne() / quartic;
 
-    // ½âÕâ¸ö·½³Ì
+    // è§£è¿™ä¸ªæ–¹ç¨‹
     return Quartic(constant * rationalQuarticInverse, once * rationalQuarticInverse, secondary * rationalQuarticInverse, thrice * rationalQuarticInverse);
 }
 
@@ -457,7 +457,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Quartic(const PolynomialRationa
 {
     quantity = 0;
 
-    // ¼õÖÁ»¯½âÈı´Î¶àÏîÊ½ y^3 + secondary * y^2 + once * y + constant = 0
+    // å‡è‡³åŒ–è§£ä¸‰æ¬¡å¤šé¡¹å¼ y^3 + secondary * y^2 + once * y + constant = 0
     static const PolynomialRational rationalHalf{ 1, 2 };
     static const PolynomialRational rationalFourth{ 1, 4 };
     static const PolynomialRational rationalEighth{ 1, 8 };
@@ -467,7 +467,7 @@ bool Mathematics::PolynomialRootsRational<Real>::Quartic(const PolynomialRationa
     auto rationalR1 = rationalFourth * once * thrice - constant;
     auto rationalR0 = -rationalEighth * (once * once + constant * (thrice * thrice - rationalFour * secondary));
 
-    // Õâ×ÜÊÇÖÁÉÙ²úÉúÒ»¸ö¸ù¡£
+    // è¿™æ€»æ˜¯è‡³å°‘äº§ç”Ÿä¸€ä¸ªæ ¹ã€‚
     PolynomialRootsRational<Real> polynomial;
     if (!polynomial.Cubic(rationalR0, rationalR1, rationalR2))
     {
@@ -585,10 +585,10 @@ bool Mathematics::PolynomialRootsRational<Real>::Quartic(const PolynomialRationa
 template <typename Real>
 void Mathematics::PolynomialRootsRational<Real>::SortRoots() noexcept
 {
-    // ÅÅĞò¸ù¾ÍÏñ: root[0] <= ... <= root[quantity - 1].
+    // æ’åºæ ¹å°±åƒ: root[0] <= ... <= root[quantity - 1].
     for (auto i0 = 0; i0 <= quantity - 2; ++i0)
     {
-        // ÕÒµ½×îĞ¡µÄ¸ù¡£
+        // æ‰¾åˆ°æœ€å°çš„æ ¹ã€‚
         auto i1 = i0;
         auto minRoot = root.at(i1);
         auto minMultiplicity = multiplicity.at(i1);
@@ -604,7 +604,7 @@ void Mathematics::PolynomialRootsRational<Real>::SortRoots() noexcept
 
         if (i1 != i0)
         {
-            // ½»»»¸ùºÍ¶àÖØĞÔ¡£
+            // äº¤æ¢æ ¹å’Œå¤šé‡æ€§ã€‚
             root.at(i1) = root.at(i0);
             root.at(i0) = minRoot;
             multiplicity.at(i1) = multiplicity.at(i0);
@@ -612,16 +612,16 @@ void Mathematics::PolynomialRootsRational<Real>::SortRoots() noexcept
         }
     }
 
-    // Èç¹ûĞèÒªµÄ»°£¬ºÏ²¢¶àÖØĞÔ
+    // å¦‚æœéœ€è¦çš„è¯ï¼Œåˆå¹¶å¤šé‡æ€§
     for (auto i0 = 0; i0 < quantity - 1;)
     {
         const auto nextI0 = i0 + 1;
         if (root.at(i0) == root.at(nextI0))
         {
-            // ºÏ²¢¶àÖØĞÔ
+            // åˆå¹¶å¤šé‡æ€§
             multiplicity.at(i0) += multiplicity.at(nextI0);
 
-            // Í¨¹ıÆ½ÒÆÊı×éÔªËØÏû³ı¶àÓàµÄ¸ù¡£
+            // é€šè¿‡å¹³ç§»æ•°ç»„å…ƒç´ æ¶ˆé™¤å¤šä½™çš„æ ¹ã€‚
             --quantity;
             for (auto i1 = i0 + 1; i1 < quantity; i1++)
             {

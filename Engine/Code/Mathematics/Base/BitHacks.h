@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 14:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 14:19)
 
 #ifndef MATHEMATICS_BASE_BIT_HACKS_H
 #define MATHEMATICS_BASE_BIT_HACKS_H
@@ -14,8 +14,8 @@
 
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 
-/// GetLeadingBitÖĞµÄleadingBit±íºÍGetTrailingBitµÄtrailingBit±í»ùÓÚµÂ²¼Â³ÒòĞòÁĞ¡£
-/// ±ÈÌØÆÆ½âº¯ÊıµÄint32ÊäÈëÒªÇóÊÇ·Ç¸ºµÄ£¬ÊäÈëÎª¸ºÊ±Òı·¢Òì³£¡£
+/// GetLeadingBitä¸­çš„leadingBitè¡¨å’ŒGetTrailingBitçš„trailingBitè¡¨åŸºäºå¾·å¸ƒé²å› åºåˆ—ã€‚
+/// æ¯”ç‰¹ç ´è§£å‡½æ•°çš„int32è¾“å…¥è¦æ±‚æ˜¯éè´Ÿçš„ï¼Œè¾“å…¥ä¸ºè´Ÿæ—¶å¼•å‘å¼‚å¸¸ã€‚
 namespace Mathematics
 {
     class MATHEMATICS_DEFAULT_DECLARE BitHacks final
@@ -36,18 +36,18 @@ namespace Mathematics
         NODISCARD static int Log2OfPowerOfTwo(uint64_t powerOfTwo) noexcept;
         NODISCARD static int Log2OfPowerOfTwo(int64_t powerOfTwo);
 
-        // ´ÓIEEE32Î»Çø¼äÔÚ[0,1]µÄ¸¡µãÊıF£¬
-        // ¿ìËÙ×ª»»ÎªÇø¼äÔÚ[0,2^P-1]µÄÒ»¸ö32Î»ÕûÊıI£¬
-        // ÊäÈë¡°scaledFloat¡±ÊÇF£¬ÊäÈë¡°power¡±ÊÇPºÍº¯ÊıµÄ·µ»ØÖµÊÇI¡£
+        // ä»IEEE32ä½åŒºé—´åœ¨[0,1]çš„æµ®ç‚¹æ•°Fï¼Œ
+        // å¿«é€Ÿè½¬æ¢ä¸ºåŒºé—´åœ¨[0,2^P-1]çš„ä¸€ä¸ª32ä½æ•´æ•°Iï¼Œ
+        // è¾“å…¥â€œscaledFloatâ€æ˜¯Fï¼Œè¾“å…¥â€œpowerâ€æ˜¯På’Œå‡½æ•°çš„è¿”å›å€¼æ˜¯Iã€‚
         NODISCARD static int32_t ScaledFloatToInt(float scaledFloat, int power) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        /// º¯ÊıµÄ·µ»ØÖµÊÇ32Î»ÖµµÄË÷Òı¡£
-        /// ÀıÈç£¬ GetLeadingBit(10) = 3£¬GetTrailingBit(10) = 2¡£
-        /// ¶ş½øÖÆÖµÎª0x0000000000001010¡£
-        /// Î»Î»ÖÃ´ÓÍ¼°¸ÓÒ²àµÄ0¿ªÊ¼£¬µ½Í¼°¸×ó²àµÄ31½áÊø¡£
-        /// Èç¹ûÊäÈëÖµÎªÁã£¬ÔòÃ»ÓĞÇ°µ¼Î»ºÍÎ²ËæÎ»¡£
-        /// µ«ÊÇ£¬º¯Êı·µ»Ø0£¬Õâ±»ÈÏÎªÊÇÎŞĞ§µÄ¡£
-        /// ³¢ÊÔ½ö¶ÔÕıÊäÈëµ÷ÓÃÕâĞ©º¯Êı¡£
+        /// å‡½æ•°çš„è¿”å›å€¼æ˜¯32ä½å€¼çš„ç´¢å¼•ã€‚
+        /// ä¾‹å¦‚ï¼Œ GetLeadingBit(10) = 3ï¼ŒGetTrailingBit(10) = 2ã€‚
+        /// äºŒè¿›åˆ¶å€¼ä¸º0x0000000000001010ã€‚
+        /// ä½ä½ç½®ä»å›¾æ¡ˆå³ä¾§çš„0å¼€å§‹ï¼Œåˆ°å›¾æ¡ˆå·¦ä¾§çš„31ç»“æŸã€‚
+        /// å¦‚æœè¾“å…¥å€¼ä¸ºé›¶ï¼Œåˆ™æ²¡æœ‰å‰å¯¼ä½å’Œå°¾éšä½ã€‚
+        /// ä½†æ˜¯ï¼Œå‡½æ•°è¿”å›0ï¼Œè¿™è¢«è®¤ä¸ºæ˜¯æ— æ•ˆçš„ã€‚
+        /// å°è¯•ä»…å¯¹æ­£è¾“å…¥è°ƒç”¨è¿™äº›å‡½æ•°ã€‚
         NODISCARD static int GetLeadingBit(uint32_t value);
         NODISCARD static int GetLeadingBit(int32_t value);
         NODISCARD static int GetLeadingBit(uint64_t value);
@@ -58,13 +58,13 @@ namespace Mathematics
         NODISCARD static int GetTrailingBit(uint64_t value);
         NODISCARD static int GetTrailingBit(int64_t value);
 
-        /// ËÄÉáÎåÈëµ½¶şµÄÃİ¡£
-        /// Èç¹ûÊäÈëÎªÁã£¬Ôò·µ»ØÎª1¡£
-        /// Èç¹ûÊäÈë´óÓÚ2^{31}£¬Ôò·µ»Ø2^{32}¡£
+        /// å››èˆäº”å…¥åˆ°äºŒçš„å¹‚ã€‚
+        /// å¦‚æœè¾“å…¥ä¸ºé›¶ï¼Œåˆ™è¿”å›ä¸º1ã€‚
+        /// å¦‚æœè¾“å…¥å¤§äº2^{31}ï¼Œåˆ™è¿”å›2^{32}ã€‚
         NODISCARD static uint32_t RoundUpToPowerOfTwo(uint32_t value);
 
-        /// ËÄÉáÎåÈëµ½¶şµÄÃİ¡£
-        /// Èç¹ûÊäÈëÎªÁã£¬Ôò·µ»ØÎª0¡£
+        /// å››èˆäº”å…¥åˆ°äºŒçš„å¹‚ã€‚
+        /// å¦‚æœè¾“å…¥ä¸ºé›¶ï¼Œåˆ™è¿”å›ä¸º0ã€‚
         NODISCARD static uint32_t RoundDownToPowerOfTwo(uint32_t value);
 
         NODISCARD static uint64_t RoundUpToPowerOfTwo(uint64_t value);

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.6 (2024/02/23 09:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.6 (2024/02/23 09:19)
 
 #ifndef MATHEMATICS_PRIMITIVES_ALIGNED_BOX_DETAIL_H
 #define MATHEMATICS_PRIMITIVES_ALIGNED_BOX_DETAIL_H
@@ -40,7 +40,7 @@ Mathematics::AlignedBox<N, Real>::AlignedBox(const Vector& inMin, const Vector& 
     {
         if (max[i] < min[i])
         {
-            THROW_EXCEPTION((CoreTools::Error::Format(SYSTEM_TEXT("ÒªÇómin[%1%] <= max[%1%]")) % i).str());
+            THROW_EXCEPTION((CoreTools::Error::Format(SYSTEM_TEXT("è¦æ±‚min[%1%] <= max[%1%]")) % i).str());
         }
     }
 
@@ -101,7 +101,7 @@ void Mathematics::AlignedBox<N, Real>::Set(const Vector& aMin, const Vector& aMa
     {
         if (aMax[i] < aMin[i])
         {
-            THROW_EXCEPTION((CoreTools::Error::Format(SYSTEM_TEXT("ÒªÇómin[%1%] <= max[%1%]")) % i).str());
+            THROW_EXCEPTION((CoreTools::Error::Format(SYSTEM_TEXT("è¦æ±‚min[%1%] <= max[%1%]")) % i).str());
         }
     }
 

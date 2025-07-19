@@ -1,36 +1,36 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 17:25)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 17:25)
 
 #ifndef SYSTEM_HELPER_CODE_GEAR_H
 #define SYSTEM_HELPER_CODE_GEAR_H
 
 #ifdef __CODEGEARC__
 
-    /// CodeGear C++±àÒëÆ÷ÉèÖÃ£º
+    /// CodeGear C++ç¼–è¯‘å™¨è®¾ç½®ï¼š
 
-    /// °æ±¾¼ì²é£º×îºóÒÑÖªµÄ°æ±¾ÊÇ0x621
+    /// ç‰ˆæœ¬æ£€æŸ¥ï¼šæœ€åå·²çŸ¥çš„ç‰ˆæœ¬æ˜¯0x621
     #if (0x740 < __CODEGEARC__)
 
-        #error "Î´Öª°æ±¾"
+        #error "æœªçŸ¥ç‰ˆæœ¬"
 
     #endif  // 0x621 < __CODEGEARC__
 
-    /// ClangÔöÇ¿µÄWindows±àÒëÆ÷
+    /// Clangå¢å¼ºçš„Windowsç¼–è¯‘å™¨
     #ifdef __clang__
 
         #include "Clang.h"
 
-        /// EmbarcaderoÇı¶¯³ÌĞòµÄÌØ¶¨ÉèÖÃ
+        /// Embarcaderoé©±åŠ¨ç¨‹åºçš„ç‰¹å®šè®¾ç½®
         #define TCRE_EMBTC __CODEGEARC__
         #define TCRE_EMBTC_FULL_VER ((__clang_major__ << 16) | (__clang_minor__ << 8) | __clang_patchlevel__)
 
-        /// ¼ì²âÕıÔÚÊ¹ÓÃÄÄ¸öEmbarcaderoÇı¶¯³ÌĞò
+        /// æ£€æµ‹æ­£åœ¨ä½¿ç”¨å“ªä¸ªEmbarcaderoé©±åŠ¨ç¨‹åº
         #if defined(TCRE_EMBTC)
 
             #if defined(_WIN64)
@@ -60,7 +60,7 @@
 
             #elif  // !defined(ALL)
 
-                #error "Î´ÖªµÄEmbarcaderoÇı¶¯³ÌĞò"
+                #error "æœªçŸ¥çš„Embarcaderoé©±åŠ¨ç¨‹åº"
 
             #endif  // defined(ALL)
 
@@ -83,7 +83,7 @@
         #endif  // TCRE_EMBTC_WINDOWS
 
         #undef TCRE_SYSTEM_COMPILER
-        #define TCRE_SYSTEM_COMPILER "Embarcadero-Clang C++ °æ±¾ " SYSTEM_STRINGIZE(TCRE_EMBTC) " clang: " SYSTEM_STRINGIZE(__clang_version__)
+        #define TCRE_SYSTEM_COMPILER "Embarcadero-Clang C++ ç‰ˆæœ¬ " SYSTEM_STRINGIZE(TCRE_EMBTC) " clang: " SYSTEM_STRINGIZE(__clang_version__)
 
     #else  // !__clang__
 
@@ -107,26 +107,26 @@
 
         #ifndef TCRE_SYSTEM_COMPILER
 
-            #define TCRE_SYSTEM_COMPILER "CodeGear C++ °æ±¾ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
+            #define TCRE_SYSTEM_COMPILER "CodeGear C++ ç‰ˆæœ¬ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
 
         #endif  // TCRE_SYSTEM_COMPILER
 
-        /// ÕâĞ©¾¯¸æÆµ·±·¢ÉúÔÚÓÅ»¯µÄÄ£°å´úÂëÖĞ
-        #pragma warn - 8004  // var¸³Öµ£¬µ«´ÓÎ´Ê¹ÓÃ
-        #pragma warn - 8008  // Ìõ¼ş×ÜÊÇÕæ/¼Ù
-        #pragma warn - 8066  // ËÀ´úÂëÓÀÔ¶²»»áÖ´ĞĞ
-        #pragma warn - 8104  // ¾²Ì¬³ÉÔ±¹¹Ôìº¯Êı²»ÊÇÏß³Ì°²È«
-        #pragma warn - 8105  // ÒıÓÃ³ÉÔ±ÔÚÃ»ÓĞ¹¹Ôìº¯ÊıµÄÀàÖĞ
+        /// è¿™äº›è­¦å‘Šé¢‘ç¹å‘ç”Ÿåœ¨ä¼˜åŒ–çš„æ¨¡æ¿ä»£ç ä¸­
+        #pragma warn - 8004  // varèµ‹å€¼ï¼Œä½†ä»æœªä½¿ç”¨
+        #pragma warn - 8008  // æ¡ä»¶æ€»æ˜¯çœŸ/å‡
+        #pragma warn - 8066  // æ­»ä»£ç æ°¸è¿œä¸ä¼šæ‰§è¡Œ
+        #pragma warn - 8104  // é™æ€æˆå‘˜æ„é€ å‡½æ•°ä¸æ˜¯çº¿ç¨‹å®‰å…¨
+        #pragma warn - 8105  // å¼•ç”¨æˆå‘˜åœ¨æ²¡æœ‰æ„é€ å‡½æ•°çš„ç±»ä¸­
 
         #if defined(NDEBUG)
 
-            /// ĞŞ¸´²»ºÏ±ê×¼µÄ<cstring>
+            /// ä¿®å¤ä¸åˆæ ‡å‡†çš„<cstring>
             #include <cstring>
             #undef strcmp
 
         #endif  // defined(NDEBUG)
 
-        /// ĞŞ¸´²»ºÏ±ê×¼µÄerrnoÉùÃ÷¡£
+        /// ä¿®å¤ä¸åˆæ ‡å‡†çš„errnoå£°æ˜ã€‚
         #include <errno.h>
         #ifndef errno
 

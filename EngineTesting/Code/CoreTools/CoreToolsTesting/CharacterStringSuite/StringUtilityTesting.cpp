@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/16 14:52)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/16 14:52)
 
 #include "StringUtilityTesting.h"
 #include "CoreTools/CharacterString/StringConversion.h"
@@ -104,7 +104,7 @@ void CoreTools::StringUtilityTesting::GetTextTokensTest()
 {
     const auto text = StringUtility::GetTextTokens("GetText\r\nTokens"s);
 
-    ASSERT_EQUAL_FAILURE_THROW(text.size(), 2u, "Tokens ´óĞ¡²âÊÔÊ§°Ü¡£");
+    ASSERT_EQUAL_FAILURE_THROW(text.size(), 2u, "Tokens å¤§å°æµ‹è¯•å¤±è´¥ã€‚");
     ASSERT_EQUAL(text.at(0), "GetText");
     ASSERT_EQUAL(text.at(1), "Tokens");
 }
@@ -113,7 +113,7 @@ void CoreTools::StringUtilityTesting::GetAdvancedTextTokensTest()
 {
     const auto text = StringUtility::GetAdvancedTextTokens("GetText\x7FTokens"s);
 
-    ASSERT_EQUAL_FAILURE_THROW(text.size(), 2u, "Tokens ´óĞ¡²âÊÔÊ§°Ü¡£");
+    ASSERT_EQUAL_FAILURE_THROW(text.size(), 2u, "Tokens å¤§å°æµ‹è¯•å¤±è´¥ã€‚");
     ASSERT_EQUAL(text.at(0), "GetText");
     ASSERT_EQUAL(text.at(1), "Tokens");
 }
@@ -122,7 +122,7 @@ void CoreTools::StringUtilityTesting::GetTokensTest()
 {
     const auto text = StringUtility::GetTokens("GetTextTokens"s, "e");
 
-    ASSERT_EQUAL_FAILURE_THROW(text.size(), 4u, "Tokens ´óĞ¡²âÊÔÊ§°Ü¡£");
+    ASSERT_EQUAL_FAILURE_THROW(text.size(), 4u, "Tokens å¤§å°æµ‹è¯•å¤±è´¥ã€‚");
     ASSERT_EQUAL(text.at(0), "G");
     ASSERT_EQUAL(text.at(1), "tT");
     ASSERT_EQUAL(text.at(2), "xtTok");

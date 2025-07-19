@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/29 13:50)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/29 13:50)
 
 #ifndef RENDERING_RESOURCES_RESOURCE_IMPL_H
 #define RENDERING_RESOURCES_RESOURCE_IMPL_H
@@ -80,14 +80,14 @@ namespace Rendering
         NODISCARD int GetStreamingSize() const;
 
     private:
-        int numElements;  // Ä¬ÈÏ: 0
-        int elementSize;  // Ä¬ÈÏ: 0
-        int numBytes;  // Ä¬ÈÏ: 0
-        UsageType usage;  // Ä¬ÈÏ: Immutable
-        CopyType copy;  // Ä¬ÈÏ: None
-        int offset;  // Ä¬ÈÏ: 0
-        int numActiveElements;  // Ä¬ÈÏ: 0
-        std::vector<char> storage;  // Ä¬ÈÏ: ¿Õ
+        int numElements;  // é»˜è®¤: 0
+        int elementSize;  // é»˜è®¤: 0
+        int numBytes;  // é»˜è®¤: 0
+        UsageType usage;  // é»˜è®¤: Immutable
+        CopyType copy;  // é»˜è®¤: None
+        int offset;  // é»˜è®¤: 0
+        int numActiveElements;  // é»˜è®¤: 0
+        std::vector<char> storage;  // é»˜è®¤: ç©º
         bool createStorage;
     };
 }

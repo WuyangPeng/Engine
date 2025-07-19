@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 09:56)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 09:56)
 
 #ifndef MATHEMATICS_BASE_MATH_ACHIEVE_H
 #define MATHEMATICS_BASE_MATH_ACHIEVE_H
@@ -126,7 +126,7 @@ Real Mathematics::Math<Real>::ATan2(Real y, Real x) noexcept
     }
     else
     {
-        // ÔÚÊıÑ§ÉÏ£¬ATan2(0,0)ÊÇ²»È·¶¨µÄ£¬µ«ÊÇANSI±ê×¼ÒªÇóº¯Êı·µ»Ø0¡£
+        // åœ¨æ•°å­¦ä¸Šï¼ŒATan2(0,0)æ˜¯ä¸ç¡®å®šçš„ï¼Œä½†æ˜¯ANSIæ ‡å‡†è¦æ±‚å‡½æ•°è¿”å›0ã€‚
         return GetValue(0);
     }
 }
@@ -170,7 +170,7 @@ Real Mathematics::Math<Real>::Floor(Real value) noexcept
 template <typename Real>
 Real Mathematics::Math<Real>::FMod(Real x, Real y) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(GetZeroTolerance() < FAbs(y), "ÊäÈëÖµÎª0£¡\n");
+    MATHEMATICS_ASSERTION_3(GetZeroTolerance() < FAbs(y), "è¾“å…¥å€¼ä¸º0ï¼\n");
 
     return fmod(x, y);
 }
@@ -189,7 +189,7 @@ Mathematics::NumericalValueSymbol Mathematics::Math<Real>::Sign(Real value) noex
 template <typename Real>
 Real Mathematics::Math<Real>::Log(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(GetValue(0) < value, "LogµÄÊäÈëÖµÎª·ÇÕıÊı£¡\n");
+    MATHEMATICS_ASSERTION_3(GetValue(0) < value, "Logçš„è¾“å…¥å€¼ä¸ºéæ­£æ•°ï¼\n");
 
     return log(value);
 }
@@ -197,7 +197,7 @@ Real Mathematics::Math<Real>::Log(Real value) noexcept(gAssert < 3 || gMathemati
 template <typename Real>
 Real Mathematics::Math<Real>::Log2(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(GetValue(0) < value, "Log2µÄÊäÈëÖµÎª·ÇÕıÊı£¡\n");
+    MATHEMATICS_ASSERTION_3(GetValue(0) < value, "Log2çš„è¾“å…¥å€¼ä¸ºéæ­£æ•°ï¼\n");
 
     return GetInverseLN2() * log(value);
 }
@@ -205,7 +205,7 @@ Real Mathematics::Math<Real>::Log2(Real value) noexcept(gAssert < 3 || gMathemat
 template <typename Real>
 Real Mathematics::Math<Real>::Log10(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(GetValue(0) < value, "Log10µÄÊäÈëÖµÎª·ÇÕıÊı£¡\n");
+    MATHEMATICS_ASSERTION_3(GetValue(0) < value, "Log10çš„è¾“å…¥å€¼ä¸ºéæ­£æ•°ï¼\n");
 
     return std::log10(value);
 }
@@ -213,7 +213,7 @@ Real Mathematics::Math<Real>::Log10(Real value) noexcept(gAssert < 3 || gMathema
 template <typename Real>
 Real Mathematics::Math<Real>::Exp(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(value <= GetExponent(), "ÊäÈëÖµ¹ı´óµ¼ÖÂexp()¼ÆËãÒç³ö£¡\n");
+    MATHEMATICS_ASSERTION_3(value <= GetExponent(), "è¾“å…¥å€¼è¿‡å¤§å¯¼è‡´exp()è®¡ç®—æº¢å‡ºï¼\n");
 
     return exp(value);
 }
@@ -221,8 +221,8 @@ Real Mathematics::Math<Real>::Exp(Real value) noexcept(gAssert < 3 || gMathemati
 template <typename Real>
 Real Mathematics::Math<Real>::Pow(Real base, Real exponent) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(GetValue(0) <= base, "PowÖĞbase²»ÔÊĞíÎª¸ºÊı£¡\n");
-    MATHEMATICS_ASSERTION_3(GetZeroTolerance() < FAbs(base) || GetZeroTolerance() < exponent, "0µÄ·ÇÕıÊı´Î·½²»´æÔÚ£¡\n");
+    MATHEMATICS_ASSERTION_3(GetValue(0) <= base, "Powä¸­baseä¸å…è®¸ä¸ºè´Ÿæ•°ï¼\n");
+    MATHEMATICS_ASSERTION_3(GetZeroTolerance() < FAbs(base) || GetZeroTolerance() < exponent, "0çš„éæ­£æ•°æ¬¡æ–¹ä¸å­˜åœ¨ï¼\n");
 
     return pow(base, exponent);
 }
@@ -236,7 +236,7 @@ Real Mathematics::Math<Real>::Square(Real value) noexcept
 template <typename Real>
 Real Mathematics::Math<Real>::Sqrt(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(GetValue(0) <= value, "SqrtµÄÊäÈëÖµ²»ÔÊĞíÎª¸ºÊı£¡\n");
+    MATHEMATICS_ASSERTION_3(GetValue(0) <= value, "Sqrtçš„è¾“å…¥å€¼ä¸å…è®¸ä¸ºè´Ÿæ•°ï¼\n");
 
     return std::sqrt(value);
 }
@@ -244,7 +244,7 @@ Real Mathematics::Math<Real>::Sqrt(Real value) noexcept(gAssert < 3 || gMathemat
 template <typename Real>
 Real Mathematics::Math<Real>::InvSqrt(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(GetValue(0) < value, "InvSqrtÖĞ³ıÊı±ØĞë´óÓÚ0£¡\n");
+    MATHEMATICS_ASSERTION_3(GetValue(0) < value, "InvSqrtä¸­é™¤æ•°å¿…é¡»å¤§äº0ï¼\n");
 
     return GetValue(1) / Sqrt(value);
 }
@@ -283,7 +283,7 @@ Real Mathematics::Math<Real>::Saturate(Real value) noexcept
 template <typename Real>
 bool Mathematics::Math<Real>::Approximate(Real lhs, Real rhs, const Real zeroTolerance) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(GetValue(0) <= zeroTolerance, "zeroTolerance±ØĞë´óÓÚ0£¡");
+    MATHEMATICS_ASSERTION_3(GetValue(0) <= zeroTolerance, "zeroToleranceå¿…é¡»å¤§äº0ï¼");
 
     if (FAbs(lhs - rhs) <= zeroTolerance)
         return true;
@@ -294,7 +294,7 @@ bool Mathematics::Math<Real>::Approximate(Real lhs, Real rhs, const Real zeroTol
 template <typename Real>
 bool Mathematics::Math<Real>::FloatingPointEqual(Real lhs, Real rhs, int equalDigit) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(0 < equalDigit && equalDigit <= IntegerTraits<Real>::TraitsType::exponentShifting, "equalDigit±ØĞë´óÓÚ0£¡");
+    MATHEMATICS_ASSERTION_3(0 < equalDigit && equalDigit <= IntegerTraits<Real>::TraitsType::exponentShifting, "equalDigitå¿…é¡»å¤§äº0ï¼");
 
     const FloatingPointAnalysis<Real> lhsAnalysis{ lhs };
     const FloatingPointAnalysis<Real> rhsAnalysis{ rhs };

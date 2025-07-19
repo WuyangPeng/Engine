@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 16:34)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 16:34)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT3_TRIANGLE3_DETAIL_H
@@ -74,7 +74,7 @@ typename Mathematics::DistancePoint3Triangle3<Real>::DistanceResult Mathematics:
     {
         if (s < MathType::GetValue(0))
         {
-            if (t < MathType::GetValue(0))  // ÇøÓò 4
+            if (t < MathType::GetValue(0))  // åŒºåŸŸ 4
             {
                 if (diffDotEdge0 < MathType::GetValue(0))
                 {
@@ -110,7 +110,7 @@ typename Mathematics::DistancePoint3Triangle3<Real>::DistanceResult Mathematics:
                     }
                 }
             }
-            else  // ÇøÓò 3
+            else  // åŒºåŸŸ 3
             {
                 s = MathType::GetValue(0);
                 if (MathType::GetValue(0) <= diffDotEdge1)
@@ -130,7 +130,7 @@ typename Mathematics::DistancePoint3Triangle3<Real>::DistanceResult Mathematics:
                 }
             }
         }
-        else if (t < MathType::GetValue(0))  // ÇøÓò 5
+        else if (t < MathType::GetValue(0))  // åŒºåŸŸ 5
         {
             t = MathType::GetValue(0);
             if (diffDotEdge0 >= MathType::GetValue(0))
@@ -149,9 +149,9 @@ typename Mathematics::DistancePoint3Triangle3<Real>::DistanceResult Mathematics:
                 sqrDistance = diffDotEdge0 * s + diffLengthSquared;
             }
         }
-        else  // ÇøÓò 0
+        else  // åŒºåŸŸ 0
         {
-            // ÄÚ²¿µãµÄ×îĞ¡Öµ
+            // å†…éƒ¨ç‚¹çš„æœ€å°å€¼
 
             s /= det;
             t /= det;
@@ -160,7 +160,7 @@ typename Mathematics::DistancePoint3Triangle3<Real>::DistanceResult Mathematics:
     }
     else
     {
-        if (s < MathType::GetValue(0))  // ÇøÓò 2
+        if (s < MathType::GetValue(0))  // åŒºåŸŸ 2
         {
             auto value0 = edge0DotEdge1 + diffDotEdge0;
             auto value1 = edge1LengthSquared + diffDotEdge1;
@@ -201,7 +201,7 @@ typename Mathematics::DistancePoint3Triangle3<Real>::DistanceResult Mathematics:
                 }
             }
         }
-        else if (t < MathType::GetValue(0))  // ÇøÓò 6
+        else if (t < MathType::GetValue(0))  // åŒºåŸŸ 6
         {
             auto value0 = edge0DotEdge1 + diffDotEdge1;
             auto value1 = edge0LengthSquared + diffDotEdge0;
@@ -242,7 +242,7 @@ typename Mathematics::DistancePoint3Triangle3<Real>::DistanceResult Mathematics:
                 }
             }
         }
-        else  // ÇøÓò 1
+        else  // åŒºåŸŸ 1
         {
             auto numer = edge1LengthSquared + diffDotEdge1 - edge0DotEdge1 - diffDotEdge0;
             if (numer <= MathType::GetValue(0))
@@ -270,7 +270,7 @@ typename Mathematics::DistancePoint3Triangle3<Real>::DistanceResult Mathematics:
         }
     }
 
-    // ½â¾öÊı×ÖÉáÈëÎó²î¡£
+    // è§£å†³æ•°å­—èˆå…¥è¯¯å·®ã€‚
     if (sqrDistance < MathType::GetValue(0))
     {
         sqrDistance = MathType::GetValue(0);

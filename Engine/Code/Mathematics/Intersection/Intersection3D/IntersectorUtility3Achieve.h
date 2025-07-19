@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:21)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:21)
 
 #ifndef MATHEMATICS_INTERSECTION_INTERSECTOR_UTILITY3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_INTERSECTOR_UTILITY3_ACHIEVE_H
@@ -17,9 +17,9 @@
 template <typename Real>
 typename Mathematics::IntersectorUtility3<Real>::Container Mathematics::IntersectorUtility3<Real>::ClipConvexPolygonAgainstPlane(const Vector3Type& normal, Real constant, const Container& point)
 {
-    /// ¼Ù¶¨ÊäÈë¶¥µãÎªÄæÊ±ÕëË³Ğò¡£ Ë³ĞòÊÇ´Ëº¯ÊıµÄ²»±äÊ½¡£
+    /// å‡å®šè¾“å…¥é¡¶ç‚¹ä¸ºé€†æ—¶é’ˆé¡ºåºã€‚ é¡ºåºæ˜¯æ­¤å‡½æ•°çš„ä¸å˜å¼ã€‚
 
-    // ²âÊÔÏßµÄÄÄÒ»²àÊÇ¶¥µã
+    // æµ‹è¯•çº¿çš„å“ªä¸€ä¾§æ˜¯é¡¶ç‚¹
     auto result = point;
     auto quantity = boost::numeric_cast<int>(result.size());
     auto positive = 0;
@@ -32,10 +32,10 @@ typename Mathematics::IntersectorUtility3<Real>::Container Mathematics::Intersec
 
     for (auto i = 0; i < quantity; ++i)
     {
-        /// ÕâÀïÊ¹ÓÃepsilonÊÇÒòÎªµã»ıºÍ¡°³£Êı¡±¿ÉÄÜ±Ë´ËÍêÈ«ÏàµÈ£¨ÀíÂÛÉÏ£©£¬µ«ÓÉÓÚ¸¡µãÎÊÌâ¶øÂÔÓĞ²»Í¬¡£
-        /// Òò´Ë£¬ÔÚ²âÊÔÊıÉÏ¼ÓÒ»µã£¬ÒÔ½«Êµ¼ÊÉÏÏàµÈµÄÊıÍÆÏòÕıÊı¡£
+        /// è¿™é‡Œä½¿ç”¨epsilonæ˜¯å› ä¸ºç‚¹ç§¯å’Œâ€œå¸¸æ•°â€å¯èƒ½å½¼æ­¤å®Œå…¨ç›¸ç­‰ï¼ˆç†è®ºä¸Šï¼‰ï¼Œä½†ç”±äºæµ®ç‚¹é—®é¢˜è€Œç•¥æœ‰ä¸åŒã€‚
+        /// å› æ­¤ï¼Œåœ¨æµ‹è¯•æ•°ä¸ŠåŠ ä¸€ç‚¹ï¼Œä»¥å°†å®é™…ä¸Šç›¸ç­‰çš„æ•°æ¨å‘æ­£æ•°ã€‚
 
-        // ¿ÉÄÜÊÇÒ»¸öÏà¶ÔµÄÈİÈÌ¶È¡£ ³ËÒÔ³£Êı¿ÉÄÜ²»ÊÇ×öµ½ÕâÒ»µãµÄ×î¼Ñ·½·¨¡£
+        // å¯èƒ½æ˜¯ä¸€ä¸ªç›¸å¯¹çš„å®¹å¿åº¦ã€‚ ä¹˜ä»¥å¸¸æ•°å¯èƒ½ä¸æ˜¯åšåˆ°è¿™ä¸€ç‚¹çš„æœ€ä½³æ–¹æ³•ã€‚
         dotProduct.at(i) = Vector3Tools<Real>::DotProduct(normal, result.at(i)) - constant + Math<Real>::FAbs(constant) * Math<Real>::GetZeroTolerance();
 
         if (Math<Real>::GetValue(0) <= dotProduct.at(i))
@@ -54,7 +54,7 @@ typename Mathematics::IntersectorUtility3<Real>::Container Mathematics::Intersec
 
     if (quantity == 2)
     {
-        // ÏßÓĞĞ©²»Í¬£¬¼ô²ÃÏß¶ÎÎŞ·¨´´½¨ĞÂµÄÏß¶Î£¬¾ÍÏñ¼ô²Ã¶à±ßĞÎÒ»Ñù
+        // çº¿æœ‰äº›ä¸åŒï¼Œå‰ªè£çº¿æ®µæ— æ³•åˆ›å»ºæ–°çš„çº¿æ®µï¼Œå°±åƒå‰ªè£å¤šè¾¹å½¢ä¸€æ ·
         if (0 < positive)
         {
             if (0 < negative)
@@ -63,12 +63,12 @@ typename Mathematics::IntersectorUtility3<Real>::Container Mathematics::Intersec
 
                 if (index == 0)
                 {
-                    // vertex0ÎªÕı£¬vertex1±»²Ã¼ô
+                    // vertex0ä¸ºæ­£ï¼Œvertex1è¢«è£å‰ª
                     clip = 1;
                 }
                 else  // pIndex == 1
                 {
-                    // vertex1ÎªÕı£¬ vertex0±»²Ã¼ô
+                    // vertex1ä¸ºæ­£ï¼Œ vertex0è¢«è£å‰ª
                     clip = 0;
                 }
 
@@ -77,11 +77,11 @@ typename Mathematics::IntersectorUtility3<Real>::Container Mathematics::Intersec
                 value -= result.at(index);
                 result.at(clip) = result.at(index) + t * (value);
             }
-            // ·ñÔòÁ½Õß¶¼ÊÇÕıµÄ£¬Ã»ÓĞ²Ã¼ô
+            // å¦åˆ™ä¸¤è€…éƒ½æ˜¯æ­£çš„ï¼Œæ²¡æœ‰è£å‰ª
         }
         else
         {
-            // ¶ÏÑÔ£ºÕû¸öĞĞ¶¼ÒÑ¼ôÇĞ£¬µ«ÎÒÃÇ²»Ó¦¸Ãµ½´ï´Ë´¦¡£
+            // æ–­è¨€ï¼šæ•´ä¸ªè¡Œéƒ½å·²å‰ªåˆ‡ï¼Œä½†æˆ‘ä»¬ä¸åº”è¯¥åˆ°è¾¾æ­¤å¤„ã€‚
             result.clear();
         }
     }
@@ -91,24 +91,24 @@ typename Mathematics::IntersectorUtility3<Real>::Container Mathematics::Intersec
         {
             if (0 < negative)
             {
-                // Æ½ÃæÓë¶à±ßĞÎÏà½»
+                // å¹³é¢ä¸å¤šè¾¹å½¢ç›¸äº¤
                 Container container{};
 
                 if (0 < index)
                 {
-                    // ÔÚÏßµÄµÚÒ»¸ö¼ô¼­¶¥µã
+                    // åœ¨çº¿çš„ç¬¬ä¸€ä¸ªå‰ªè¾‘é¡¶ç‚¹
                     auto curIndex = index;
                     auto prvIndex = curIndex - 1;
                     auto t = dotProduct.at(curIndex) / (dotProduct.at(curIndex) - dotProduct.at(prvIndex));
                     container.emplace_back(result.at(curIndex) + t * (result.at(prvIndex) - result.at(curIndex)));
 
-                    // ÏßÕı²àµÄ¶¥µã
+                    // çº¿æ­£ä¾§çš„é¡¶ç‚¹
                     while (curIndex < quantity && dotProduct.at(curIndex) >= Math<Real>::GetValue(0))
                     {
                         container.emplace_back(result.at(curIndex++));
                     }
 
-                    // ÔÚÏßÉÏµÄ×îºóÒ»¸ö¼ô¼­¶¥µã
+                    // åœ¨çº¿ä¸Šçš„æœ€åä¸€ä¸ªå‰ªè¾‘é¡¶ç‚¹
                     if (curIndex < quantity)
                     {
                         prvIndex = curIndex - 1;
@@ -123,32 +123,32 @@ typename Mathematics::IntersectorUtility3<Real>::Container Mathematics::Intersec
                 }
                 else  // index is 0
                 {
-                    // ÏßÕı²àµÄ¶¥µã
+                    // çº¿æ­£ä¾§çš„é¡¶ç‚¹
                     auto curIndex = 0;
                     while (curIndex < quantity && Math<Real>::GetValue(0) <= dotProduct.at(curIndex))
                     {
                         container.emplace_back(result.at(curIndex++));
                     }
 
-                    // ÔÚÏßÉÏµÄ×îºóÒ»¸ö¼ô¼­¶¥µã
+                    // åœ¨çº¿ä¸Šçš„æœ€åä¸€ä¸ªå‰ªè¾‘é¡¶ç‚¹
                     auto prvIndex = curIndex - 1;
                     auto t = dotProduct.at(curIndex) / (dotProduct.at(curIndex) - dotProduct.at(prvIndex));
                     container.emplace_back(result.at(curIndex) + t * (result.at(prvIndex) - result.at(curIndex)));
 
-                    // ÔÚ¸º²àÌø¹ı¶¥µã
+                    // åœ¨è´Ÿä¾§è·³è¿‡é¡¶ç‚¹
                     while (curIndex < quantity && Math<Real>::GetValue(0) < dotProduct.at(curIndex))
                     {
                         curIndex++;
                     }
 
-                    // ÔÚÏßµÄµÚÒ»¸ö¼ô¼­¶¥µã
+                    // åœ¨çº¿çš„ç¬¬ä¸€ä¸ªå‰ªè¾‘é¡¶ç‚¹
                     if (curIndex < quantity)
                     {
                         prvIndex = curIndex - 1;
                         t = dotProduct.at(curIndex) / (dotProduct.at(curIndex) - dotProduct.at(prvIndex));
                         container.emplace_back(result.at(curIndex) + t * (result.at(prvIndex) - result.at(curIndex)));
 
-                        // ÏßÕı²àµÄ¶¥µã
+                        // çº¿æ­£ä¾§çš„é¡¶ç‚¹
                         while (curIndex < quantity && Math<Real>::GetValue(0) <= dotProduct.at(curIndex))
                         {
                             container.emplace_back(result.at(curIndex++));
@@ -164,11 +164,11 @@ typename Mathematics::IntersectorUtility3<Real>::Container Mathematics::Intersec
                 }
                 result = container;
             }
-            // else ¶à±ßĞÎÍêÈ«Î»ÓÚÆ½ÃæµÄÕı²à£¬ÎŞĞèÖ´ĞĞÈÎºÎ²Ù×÷
+            // else å¤šè¾¹å½¢å®Œå…¨ä½äºå¹³é¢çš„æ­£ä¾§ï¼Œæ— éœ€æ‰§è¡Œä»»ä½•æ“ä½œ
         }
         else
         {
-            // ¶à±ßĞÎ²»ÓëÆ½ÃæµÄÕı²àÏà½»£¬ÇëÈ«²¿¼ôÇĞ¡£ Èç¹ûÔÚÈ·¶¨Ïà½»Ö®ºóÓÉfindintersectÀı³Ìµ÷ÓÃ£¬ÔòÓÀÔ¶²»»á·¢ÉúÕâÖÖÇé¿ö¡£
+            // å¤šè¾¹å½¢ä¸ä¸å¹³é¢çš„æ­£ä¾§ç›¸äº¤ï¼Œè¯·å…¨éƒ¨å‰ªåˆ‡ã€‚ å¦‚æœåœ¨ç¡®å®šç›¸äº¤ä¹‹åç”±findintersectä¾‹ç¨‹è°ƒç”¨ï¼Œåˆ™æ°¸è¿œä¸ä¼šå‘ç”Ÿè¿™ç§æƒ…å†µã€‚
 
             result.clear();
         }

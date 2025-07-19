@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:28)
 
 #ifndef MATHEMATICS_RATIONAL_FLOATING_POINT_ANALYSIS_H
 #define MATHEMATICS_RATIONAL_FLOATING_POINT_ANALYSIS_H
@@ -36,8 +36,8 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        // ÄÚ´æ±íÊ¾£º
-        // ·ûºÅÎ»£¨1£©¡¢Ö¸ÊıÎ»£¨float8Î»¡¢double11Î»£©¡¢Î²ÊıÎ»£¨float23Î»¡¢double52Î»£©£¬»ñÈ¡Î´¾­´¦ÀíµÄ´æ´¢Öµ¡£
+        // å†…å­˜è¡¨ç¤ºï¼š
+        // ç¬¦å·ä½ï¼ˆ1ï¼‰ã€æŒ‡æ•°ä½ï¼ˆfloat8ä½ã€double11ä½ï¼‰ã€å°¾æ•°ä½ï¼ˆfloat23ä½ã€double52ä½ï¼‰ï¼Œè·å–æœªç»å¤„ç†çš„å­˜å‚¨å€¼ã€‚
         NODISCARD IntegerType GetSymbolValue() const noexcept;
         NODISCARD IntegerType GetExponent() const noexcept;
         NODISCARD IntegerType GetMantissa() const noexcept;

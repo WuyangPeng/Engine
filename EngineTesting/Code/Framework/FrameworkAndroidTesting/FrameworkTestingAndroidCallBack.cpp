@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.3 (2023/08/11 14:18)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.3 (2023/08/11 14:18)
 
 #include "FrameworkTestingAndroidCallBack.h"
 #include "Testing.h"
@@ -16,7 +16,7 @@
 #include "Framework/AndroidFrame/AndroidCallBackUnitTestSuiteDetail.h"
 
 Framework::FrameworkTestingAndroidCallBack::FrameworkTestingAndroidCallBack(int64_t delta)
-    : ParentType{ delta, "¡¾¿ò¼Ü¿â¡¿µ¥Ôª²âÊÔÌ×¼ş" }
+    : ParentType{ delta, "ã€æ¡†æ¶åº“ã€‘å•å…ƒæµ‹è¯•å¥—ä»¶" }
 {
     InitSuite();
 
@@ -32,7 +32,7 @@ void Framework::FrameworkTestingAndroidCallBack::InitSuite()
 
 void Framework::FrameworkTestingAndroidCallBack::AddAndroidFrameSuite()
 {
-    auto androidFrameSuite = GenerateSuite("°²×¿¿ò¼Ü");
+    auto androidFrameSuite = GenerateSuite("å®‰å“æ¡†æ¶");
 
     System::AndroidApp* app = GetAndroidApp();
 

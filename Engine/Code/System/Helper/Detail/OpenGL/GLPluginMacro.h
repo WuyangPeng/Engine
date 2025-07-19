@@ -1,18 +1,18 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 19:52)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 19:52)
 
 #ifndef SYSTEM_HELPER_GL_PLUGIN_MACRO_H
 #define SYSTEM_HELPER_GL_PLUGIN_MACRO_H
 
 #include "System/Helper/UserMacro.h"
 
-/// ÔÚÃ¿´ÎOpenGLµ÷ÓÃÊ±Ä¬ÈÏÐÐÎªÃ»ÓÐ¶îÍâµÄ²Ù×÷£¬Èç¹û±ØÒª£¬Ìí¼ÓÒ»¸ö¸½¼ÓÓïÒå¡£
+/// åœ¨æ¯æ¬¡OpenGLè°ƒç”¨æ—¶é»˜è®¤è¡Œä¸ºæ²¡æœ‰é¢å¤–çš„æ“ä½œï¼Œå¦‚æžœå¿…è¦ï¼Œæ·»åŠ ä¸€ä¸ªé™„åŠ è¯­ä¹‰ã€‚
 
 #define SYSTEM_ENTER_FUNCTION(glFunction)
 #define SYSTEM_NONNULL_FUNCTION(glFunction)
@@ -21,15 +21,15 @@
 
     #include "System/OpenGL/Fwd/GLPluginFwd.h"
 
-    /// Õâ¸öº¯Êý¶ÏÑÔÔÚÓöµ½Ò»¸ö¿Õº¯ÊýÊ±¡£äÖÈ¾Æ÷Ô¤¼Æº¯Êý´æÔÚ¡£
+    /// è¿™ä¸ªå‡½æ•°æ–­è¨€åœ¨é‡åˆ°ä¸€ä¸ªç©ºå‡½æ•°æ—¶ã€‚æ¸²æŸ“å™¨é¢„è®¡å‡½æ•°å­˜åœ¨ã€‚
     #define SYSTEM_NULL_FUNCTION(glFunction) System::ReportNullFunction(SYSTEM_STRINGIZE(glFunction))
 
-    /// Ã¿´Îµ÷ÓÃOpenGLº¯ÊýÕâ¸öº¯Êý¼ì²églGetError¡£
+    /// æ¯æ¬¡è°ƒç”¨OpenGLå‡½æ•°è¿™ä¸ªå‡½æ•°æ£€æŸ¥glGetErrorã€‚
     #define SYSTEM_EXIT_FUNCTION(glFunction) System::ReportGLError(SYSTEM_STRINGIZE(glFunction))
 
 #else  // !SYSTEM_ENABLE_GL_ERROR_CHECKING
 
-    /// ÆôÓÃÕâÒ»¿éÔò½ûÓÃ´íÎó¼ì²é¡£
+    /// å¯ç”¨è¿™ä¸€å—åˆ™ç¦ç”¨é”™è¯¯æ£€æŸ¥ã€‚
     #define SYSTEM_NULL_FUNCTION(glFunction)
     #define SYSTEM_EXIT_FUNCTION(glFunction)
 

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 15:01)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 15:01)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_PHYSICAL_MODELLING_MANAGER_INTERFACE_H
 #define FRAMEWORK_MIDDLE_LAYER_PHYSICAL_MODELLING_MANAGER_INTERFACE_H
@@ -17,7 +17,7 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Framework/Helper/MiddleLayerMacro.h"
 
-// ÎïÀíÄ£Äâ£¨×÷ÓÃÓÚÓÎÏ·¶ÔÏóÖ®ÉÏµÄÎïÀíÁ¦Ñ§¼°ÆäĞ§¹ûµÄÊıÑ§±í´ï·½Ê½£¬Èç¶ÔÏóµÄÅö×²ÒÔ¼°·Ö½â£©¡£ÒÆ¶¯³ıÏà»úÖ®ÍâµÄÈ«²¿ÓÎÏ·¶ÔÏó¡£
+// ç‰©ç†æ¨¡æ‹Ÿï¼ˆä½œç”¨äºæ¸¸æˆå¯¹è±¡ä¹‹ä¸Šçš„ç‰©ç†åŠ›å­¦åŠå…¶æ•ˆæœçš„æ•°å­¦è¡¨è¾¾æ–¹å¼ï¼Œå¦‚å¯¹è±¡çš„ç¢°æ’ä»¥åŠåˆ†è§£ï¼‰ã€‚ç§»åŠ¨é™¤ç›¸æœºä¹‹å¤–çš„å…¨éƒ¨æ¸¸æˆå¯¹è±¡ã€‚
 namespace Framework
 {
     class FRAMEWORK_DEFAULT_DECLARE PhysicalModellingManagerInterface : public EngineMiddleLayerInterface
@@ -32,18 +32,18 @@ namespace Framework
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        // äÖÈ¾ÖĞ¼ä²ã´¦Àí
+        // æ¸²æŸ“ä¸­é—´å±‚å¤„ç†
         NODISCARD bool Paint() final;
         NODISCARD bool Move(const WindowPoint& point) final;
         NODISCARD bool Resize(WindowDisplay windowDisplay, const WindowSize& size) final;
 
-        // °´¼üÏûÏ¢ÖĞ¼ä²ã´¦Àí
+        // æŒ‰é”®æ¶ˆæ¯ä¸­é—´å±‚å¤„ç†
         NODISCARD bool KeyUp(int key, const WindowPoint& point) final;
         NODISCARD bool KeyDown(int key, const WindowPoint& point) final;
         NODISCARD bool SpecialKeyUp(int key, const WindowPoint& point) final;
         NODISCARD bool SpecialKeyDown(int key, const WindowPoint& point) final;
 
-        // Êó±êÏûÏ¢ÖĞ¼ä²ã´¦Àí
+        // é¼ æ ‡æ¶ˆæ¯ä¸­é—´å±‚å¤„ç†
         NODISCARD bool PassiveMotion(const WindowPoint& point) final;
         NODISCARD bool Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
         NODISCARD bool MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;

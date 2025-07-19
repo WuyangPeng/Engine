@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 14:11)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 14:11)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_SQRT_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_SQRT_H
@@ -16,26 +16,26 @@
 
 namespace CoreTools
 {
-    /// Ö÷Ä£°å¼ÆËãsqrt(N)
+    /// ä¸»æ¨¡æ¿è®¡ç®—sqrt(N)
     template <int N, int Low = 1, int High = N>
     class SqrtAlgorithm0
     {
     private:
-        /// ¼ÆËãÖĞµã£¬È¡Õû
+        /// è®¡ç®—ä¸­ç‚¹ï¼Œå–æ•´
         enum
         {
             Midpoint = (Low + High + 1) / 2
         };
 
     public:
-        /// ËÑË÷Ò»¸ö²»´óµÄÖµÔÚ¼õ°ë¼ä¸ô
+        /// æœç´¢ä¸€ä¸ªä¸å¤§çš„å€¼åœ¨å‡åŠé—´éš”
         enum
         {
             Result = (N < Midpoint * Midpoint) ? (SqrtAlgorithm0<N, Low, Midpoint - 1>::Result) : (SqrtAlgorithm0<N, Midpoint, High>::Result)
         };
     };
 
-    /// ¾Ö²¿ÌØ»¯µ±Low µÈÓÚ High
+    /// å±€éƒ¨ç‰¹åŒ–å½“Low ç­‰äº High
     template <int N, int Midpoint>
     class SqrtAlgorithm0<N, Midpoint, Midpoint>
     {
@@ -46,18 +46,18 @@ namespace CoreTools
         };
     };
 
-    /// Ö÷Ä£°å¶ÔÖ÷Òªµİ¹é²½Öè
+    /// ä¸»æ¨¡æ¿å¯¹ä¸»è¦é€’å½’æ­¥éª¤
     template <int N, int Low = 1, int High = N>
     class SqrtAlgorithm1
     {
     private:
-        /// ¼ÆËãÖĞµã£¬È¡Õû
+        /// è®¡ç®—ä¸­ç‚¹ï¼Œå–æ•´
         enum
         {
             Midpoint = (Low + High + 1) / 2
         };
 
-        /// ËÑË÷Ò»¸ö²»´óµÄÖµÔÚ¼õ°ë¼ä¸ô
+        /// æœç´¢ä¸€ä¸ªä¸å¤§çš„å€¼åœ¨å‡åŠé—´éš”
         using SqrtAlgorithm1Result = typename IfThenElse<(N < Midpoint * Midpoint), SqrtAlgorithm1<N, Low, Midpoint - 1>, SqrtAlgorithm1<N, Midpoint, High>>::ResultType;
 
     public:
@@ -67,7 +67,7 @@ namespace CoreTools
         };
     };
 
-    /// µİ¹é½áÊøµÄÆ«ÌØ»¯
+    /// é€’å½’ç»“æŸçš„åç‰¹åŒ–
     template <int N, int Midpoint>
     class SqrtAlgorithm1<N, Midpoint, Midpoint>
     {
@@ -78,7 +78,7 @@ namespace CoreTools
         };
     };
 
-    /// Ö÷Ä£°å,Í¨¹ıµü´ú¼ÆËãsqrt(N)
+    /// ä¸»æ¨¡æ¿,é€šè¿‡è¿­ä»£è®¡ç®—sqrt(N)
     template <int N, int I = 1>
     class SqrtAlgorithm2
     {
@@ -89,7 +89,7 @@ namespace CoreTools
         };
     };
 
-    // µİ¹é½áÊøµÄÆ«ÌØ»¯
+    // é€’å½’ç»“æŸçš„åç‰¹åŒ–
     template <int N>
     class SqrtAlgorithm2<N, N>
     {
@@ -100,7 +100,7 @@ namespace CoreTools
         };
     };
 
-    /// Ä£°åÉú³ÉÄ£°å²ÎÊı×÷Îª½á¹û
+    /// æ¨¡æ¿ç”Ÿæˆæ¨¡æ¿å‚æ•°ä½œä¸ºç»“æœ
     template <int N>
     class Value
     {
@@ -111,7 +111,7 @@ namespace CoreTools
         };
     };
 
-    /// Ä£°åÍ¨¹ıµü´ú¼ÆËãsqrt(N)
+    /// æ¨¡æ¿é€šè¿‡è¿­ä»£è®¡ç®—sqrt(N)
     template <int N, int I = 1>
     class SqrtAlgorithm3
     {

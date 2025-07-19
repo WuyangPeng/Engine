@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 13:29)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 13:29)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -59,15 +59,15 @@ Mathematics::EquationThrice::Imaginary Mathematics::EquationThrice::Substitution
 
 void Mathematics::EquationThrice::Solving()
 {
-    // Áí t = x - a / 3
-    // È¥µô¶ş´ÎÏî£¬µÃµ½·½³Ìx^3 + px + q = 0
+    // å¦ t = x - a / 3
+    // å»æ‰äºŒæ¬¡é¡¹ï¼Œå¾—åˆ°æ–¹ç¨‹x^3 + px + q = 0
     // p = -a^2/3 + b
     // q = 2a^3/27 - ab/3 +c
     // p' = p / 3 ,q' = q / 2
     const auto pThird = CalculatePThird();
     const auto qHalf = CalculateQHalf();
 
-    // ²î±ğÊ½ D' = p'^3 + q'^2
+    // å·®åˆ«å¼ D' = p'^3 + q'^2
     const auto discriminant = CalculateDiscriminant(pThird, qHalf);
 
     CalculateResult(pThird, qHalf, discriminant);
@@ -75,7 +75,7 @@ void Mathematics::EquationThrice::Solving()
 
 bool Mathematics::EquationThrice::Predigest()
 {
-    // ³£ÊıÏîÎªÁãÊ±£¬»¯½â·½³Ì¡£
+    // å¸¸æ•°é¡¹ä¸ºé›¶æ—¶ï¼ŒåŒ–è§£æ–¹ç¨‹ã€‚
     if (MathD::FAbs(constant) <= GetEpsilon())
     {
         SetRealResult(0.0);
@@ -85,7 +85,7 @@ bool Mathematics::EquationThrice::Predigest()
         return true;
     }
 
-    // Èı´ÎÏîÎªÁãÊ±£¬»¯½â·½³Ì¡£
+    // ä¸‰æ¬¡é¡¹ä¸ºé›¶æ—¶ï¼ŒåŒ–è§£æ–¹ç¨‹ã€‚
     if (MathD::FAbs(thrice) <= GetEpsilon())
     {
         const EquationSecondary equation{ constant, once, secondary };
@@ -122,13 +122,13 @@ double Mathematics::EquationThrice::CalculateQHalf() const noexcept
 
 void Mathematics::EquationThrice::CalculateResult(double pThird, double qHalf, double discriminant)
 {
-    // ·½³Ì½âµÄÈı¸ö¸´Êı¸ùÎª£º
+    // æ–¹ç¨‹è§£çš„ä¸‰ä¸ªå¤æ•°æ ¹ä¸ºï¼š
     // x1 = r     + s
-    // x2 = r¦Ñ   + s¦Ñ^2
-    // x3 = r¦Ñ^2 + s¦Ñ
-    // ÆäÖĞ
-    // ¦Ñ   = -0.5 + i(sqrt(3)/2)
-    // ¦Ñ^2 = -0.5 - i(sqrt(3)/2)
+    // x2 = rÏ   + sÏ^2
+    // x3 = rÏ^2 + sÏ
+    // å…¶ä¸­
+    // Ï   = -0.5 + i(sqrt(3)/2)
+    // Ï^2 = -0.5 - i(sqrt(3)/2)
     if (MathD::FAbs(discriminant) <= GetEpsilon())
         CalculateResultDiscriminantIsZero(qHalf);
     else if (0.0 < discriminant)
@@ -148,12 +148,12 @@ void Mathematics::EquationThrice::CalculateResultDiscriminantIsPlus(double qHalf
     const auto r = MathD::CubeRoot(rCube);
     const auto s = MathD::CubeRoot(sCube);
 
-    // ÇóÊµÊı¸ù
+    // æ±‚å®æ•°æ ¹
     const auto realResult = r + s - two / 3.0;
 
     SetRealResult(realResult);
 
-    // ÇóĞéÊı¸ù
+    // æ±‚è™šæ•°æ ¹
     const Imaginary density{ -0.5, MathD::Sqrt(3.0) / 2.0 };
     const Imaginary densitySquare{ -0.5, -MathD::Sqrt(3.0) / 2.0 };
 
@@ -191,8 +191,8 @@ void Mathematics::EquationThrice::CalculateResultDiscriminantIsNegative(double p
 {
     const auto two = secondary / thrice;
 
-    // ÏÂÃæ½«x = 2mcos¦È´úÈë·½³Ì
-    // ²¢¸ù¾İ4cos^3(¦È) - 3cos¦È = cos(3¦È)Çó³ö·½³ÌµÄ½â¡£
+    // ä¸‹é¢å°†x = 2mcosÎ¸ä»£å…¥æ–¹ç¨‹
+    // å¹¶æ ¹æ®4cos^3(Î¸) - 3cosÎ¸ = cos(3Î¸)æ±‚å‡ºæ–¹ç¨‹çš„è§£ã€‚
     const auto middleAngle = MathD::ACos(-qHalf / MathD::Sqrt(-pThird * pThird * pThird)) / 3.0;
     const auto leastAngle = middleAngle - 2.0 * MathD::GetPI() / 3.0;
     const auto mostAngle = middleAngle + 2.0 * MathD::GetPI() / 3.0;

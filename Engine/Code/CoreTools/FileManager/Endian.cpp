@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/01 10:49)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/01 10:49)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -32,11 +32,11 @@ bool CoreTools::Endian::IsLittleEndian() noexcept(gAssert < 0 || gCoreToolsAsser
 
 #ifdef SYSTEM_LITTLE_ENDIAN
 
-    CORE_TOOLS_ASSERTION_0(isLittleEndian, "Õâ²»ÊÇÒ»¸öĞ¡¶Ë»úÆ÷£¡");
+    CORE_TOOLS_ASSERTION_0(isLittleEndian, "è¿™ä¸æ˜¯ä¸€ä¸ªå°ç«¯æœºå™¨ï¼");
 
 #elif SYSTEM_BIG_ENDIAN
 
-    CORE_TOOLS_ASSERTION_0(!isLittleEndian, "Õâ²»ÊÇÒ»¸ö´ó¶Ë»úÆ÷£¡");
+    CORE_TOOLS_ASSERTION_0(!isLittleEndian, "è¿™ä¸æ˜¯ä¸€ä¸ªå¤§ç«¯æœºå™¨ï¼");
 
 #endif  // SYSTEM_LITTLE_ENDIAN
 
@@ -101,7 +101,7 @@ void CoreTools::Endian::Swap8ByteOrder(size_t itemsNumber, void* data) noexcept(
 
 void CoreTools::Endian::SwapByteOrder(size_t itemSize, void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0)
 {
-    CORE_TOOLS_ASSERTION_0(data != nullptr, "Ö¸ÕëÎŞĞ§£¡");
+    CORE_TOOLS_ASSERTION_0(data != nullptr, "æŒ‡é’ˆæ— æ•ˆï¼");
     CheckItemSize(itemSize);
 
     const gsl::span bytes{ static_cast<uint8_t*>(data), itemSize };
@@ -116,8 +116,8 @@ void CoreTools::Endian::SwapByteOrder(size_t itemSize, void* data) noexcept(gAss
 
 void CoreTools::Endian::SwapByteOrder(size_t itemSize, size_t itemsNumber, void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0)
 {
-    CORE_TOOLS_ASSERTION_0(data != nullptr, "Ö¸ÕëÎŞĞ§£¡");
-    CORE_TOOLS_ASSERTION_2(0 < itemsNumber, "itemsNumber±ØĞë´óÓÚÁã£¡");
+    CORE_TOOLS_ASSERTION_0(data != nullptr, "æŒ‡é’ˆæ— æ•ˆï¼");
+    CORE_TOOLS_ASSERTION_2(0 < itemsNumber, "itemsNumberå¿…é¡»å¤§äºé›¶ï¼");
     CheckItemSize(itemSize);
 
     const gsl::span bytes{ static_cast<uint8_t*>(data), itemsNumber * itemSize };
@@ -130,9 +130,9 @@ void CoreTools::Endian::SwapByteOrder(size_t itemSize, size_t itemsNumber, void*
 
 void CoreTools::Endian::Swap2ByteOrderToTarget(size_t itemsNumber, const uint16_t* source, uint16_t* target) noexcept(gAssert < 0 || gCoreToolsAssert < 0)
 {
-    CORE_TOOLS_ASSERTION_2(0 < itemsNumber, "itemsNumber±ØĞë´óÓÚÁã£¡");
-    CORE_TOOLS_ASSERTION_0(source != nullptr, "Ö¸ÕëÎŞĞ§£¡");
-    CORE_TOOLS_ASSERTION_0(target != nullptr, "Ö¸ÕëÎŞĞ§£¡");
+    CORE_TOOLS_ASSERTION_2(0 < itemsNumber, "itemsNumberå¿…é¡»å¤§äºé›¶ï¼");
+    CORE_TOOLS_ASSERTION_0(source != nullptr, "æŒ‡é’ˆæ— æ•ˆï¼");
+    CORE_TOOLS_ASSERTION_0(target != nullptr, "æŒ‡é’ˆæ— æ•ˆï¼");
 
     System::MemoryCopy(target, source, boost::numeric_cast<uint32_t>(itemsNumber * sizeof(uint16_t)));
 
@@ -141,9 +141,9 @@ void CoreTools::Endian::Swap2ByteOrderToTarget(size_t itemsNumber, const uint16_
 
 void CoreTools::Endian::Swap4ByteOrderToTarget(size_t itemsNumber, const uint32_t* source, uint32_t* target) noexcept(gAssert < 0 || gCoreToolsAssert < 0)
 {
-    CORE_TOOLS_ASSERTION_2(0 < itemsNumber, "itemsNumber±ØĞë´óÓÚÁã£¡");
-    CORE_TOOLS_ASSERTION_0(source != nullptr, "Ö¸ÕëÎŞĞ§£¡");
-    CORE_TOOLS_ASSERTION_0(target != nullptr, "Ö¸ÕëÎŞĞ§£¡");
+    CORE_TOOLS_ASSERTION_2(0 < itemsNumber, "itemsNumberå¿…é¡»å¤§äºé›¶ï¼");
+    CORE_TOOLS_ASSERTION_0(source != nullptr, "æŒ‡é’ˆæ— æ•ˆï¼");
+    CORE_TOOLS_ASSERTION_0(target != nullptr, "æŒ‡é’ˆæ— æ•ˆï¼");
 
     System::MemoryCopy(target, source, boost::numeric_cast<uint32_t>(itemsNumber * sizeof(uint32_t)));
 
@@ -152,9 +152,9 @@ void CoreTools::Endian::Swap4ByteOrderToTarget(size_t itemsNumber, const uint32_
 
 void CoreTools::Endian::Swap8ByteOrderToTarget(size_t itemsNumber, const uint64_t* source, uint64_t* target) noexcept(gAssert < 0 || gCoreToolsAssert < 0)
 {
-    CORE_TOOLS_ASSERTION_2(0 < itemsNumber, "itemsNumber±ØĞë´óÓÚÁã£¡");
-    CORE_TOOLS_ASSERTION_0(source != nullptr, "Ö¸ÕëÎŞĞ§£¡");
-    CORE_TOOLS_ASSERTION_0(target != nullptr, "Ö¸ÕëÎŞĞ§£¡");
+    CORE_TOOLS_ASSERTION_2(0 < itemsNumber, "itemsNumberå¿…é¡»å¤§äºé›¶ï¼");
+    CORE_TOOLS_ASSERTION_0(source != nullptr, "æŒ‡é’ˆæ— æ•ˆï¼");
+    CORE_TOOLS_ASSERTION_0(target != nullptr, "æŒ‡é’ˆæ— æ•ˆï¼");
 
     System::MemoryCopy(target, source, boost::numeric_cast<uint32_t>(itemsNumber * sizeof(uint64_t)));
 

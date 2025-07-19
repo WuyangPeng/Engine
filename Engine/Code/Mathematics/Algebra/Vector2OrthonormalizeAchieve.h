@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 11:15)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 11:15)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR2_ORTHONORMALIZE_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_VECTOR2_ORTHONORMALIZE_ACHIEVE_H
@@ -30,14 +30,14 @@ template <typename Real, bool Robust>
 requires std::is_arithmetic_v<Real>
 void Mathematics::Vector2Orthonormalize<Real, Robust>::Generate()
 {
-    // Èç¹ûÊäÈëÏòÁ¿v0ºÍv1£¬ÔòGram-SchmidtÕı½»ÏòÁ¿²úÉúÊ¸Á¿u0ºÍu1ÈçÏÂ£¬
+    // å¦‚æœè¾“å…¥å‘é‡v0å’Œv1ï¼Œåˆ™Gram-Schmidtæ­£äº¤å‘é‡äº§ç”ŸçŸ¢é‡u0å’Œu1å¦‚ä¸‹ï¼Œ
     //
     //   u0 = v0 / |v0|
     //   u1 = (v1 - (u0 * v1)u0) / |v1 - (u0 * v1)u0|
     //
-    // ÆäÖĞ|A|±íÊ¾ÏòÁ¿AµÄ³¤¶ÈºÍA * B±íÊ¾ÏòÁ¿AºÍBµÄµã»ı
+    // å…¶ä¸­|A|è¡¨ç¤ºå‘é‡Açš„é•¿åº¦å’ŒA * Bè¡¨ç¤ºå‘é‡Aå’ŒBçš„ç‚¹ç§¯
 
-    // ¼ÆËã u0.
+    // è®¡ç®— u0.
     if constexpr (Robust)
     {
         uVector.RobustNormalize(epsilon);
@@ -47,10 +47,10 @@ void Mathematics::Vector2Orthonormalize<Real, Robust>::Generate()
         uVector.Normalize(epsilon);
     }
 
-    // ¼ÆËã u1.
+    // è®¡ç®— u1.
     const auto dot = Vector2ToolsType::DotProduct(uVector, vVector);
 
-    MATHEMATICS_ASSERTION_1(epsilon < MathType::FAbs(dot), "ÊäÈëÏòÁ¿±ØĞëÊÇÏßĞÔÎŞ¹ØµÄ£¡");
+    MATHEMATICS_ASSERTION_1(epsilon < MathType::FAbs(dot), "è¾“å…¥å‘é‡å¿…é¡»æ˜¯çº¿æ€§æ— å…³çš„ï¼");
 
     vVector -= uVector * dot;
 

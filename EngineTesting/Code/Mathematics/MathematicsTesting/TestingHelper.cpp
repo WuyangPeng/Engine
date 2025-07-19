@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 16:21)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 16:21)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -15,7 +15,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
 Mathematics::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "ÊıÑ§¿â" }
+    : ParentType{ argc, argv, "æ•°å­¦åº“" }
 {
     InitSuite();
 
@@ -48,14 +48,14 @@ void Mathematics::TestingHelper::InitSuite()
 
 void Mathematics::TestingHelper::AddHelperSuite()
 {
-    auto helperSuite = GenerateSuite("°ïÖú");
+    auto helperSuite = GenerateSuite("å¸®åŠ©");
 
     AddSuite(helperSuite);
 }
 
 void Mathematics::TestingHelper::AddBaseSuite()
 {
-    auto baseSuite = GenerateSuite("»ù±¾");
+    auto baseSuite = GenerateSuite("åŸºæœ¬");
 
     ADD_TEST(baseSuite, BitHacksTesting);
     ADD_TEST(baseSuite, MathTesting);
@@ -72,7 +72,7 @@ void Mathematics::TestingHelper::AddBaseSuite()
 
 void Mathematics::TestingHelper::AddAlgebraSuite()
 {
-    auto algebraSuite = GenerateSuite("´úÊı");
+    auto algebraSuite = GenerateSuite("ä»£æ•°");
 
     ADD_TEST(algebraSuite, HomogeneousPointTesting);
     ADD_TEST(algebraSuite, BarycentricCoordinatesTesting);
@@ -125,7 +125,7 @@ void Mathematics::TestingHelper::AddAlgebraSuite()
 
 CoreTools::Suite Mathematics::TestingHelper::GetTransformSuite()
 {
-    auto transformSuite = GenerateSuite("×ª»»");
+    auto transformSuite = GenerateSuite("è½¬æ¢");
 
     ADD_TEST(transformSuite, IdentityTransformTesting);
     ADD_TEST(transformSuite, UnitScaleTransformTesting);
@@ -139,7 +139,7 @@ CoreTools::Suite Mathematics::TestingHelper::GetTransformSuite()
 
 void Mathematics::TestingHelper::AddObjects2DSuite()
 {
-    auto objects2DSuite = GenerateSuite("¶ÔÏó2D");
+    auto objects2DSuite = GenerateSuite("å¯¹è±¡2D");
 
     ADD_TEST(objects2DSuite, Arc2Testing);
     ADD_TEST(objects2DSuite, Box2Testing);
@@ -158,7 +158,7 @@ void Mathematics::TestingHelper::AddObjects2DSuite()
 
 void Mathematics::TestingHelper::AddObjects3DSuite()
 {
-    auto objects3DSuite = GenerateSuite("¶ÔÏó3D");
+    auto objects3DSuite = GenerateSuite("å¯¹è±¡3D");
 
     ADD_TEST(objects3DSuite, Box3Testing);
     ADD_TEST(objects3DSuite, Circle3Testing);
@@ -188,14 +188,14 @@ void Mathematics::TestingHelper::AddObjects3DSuite()
 
 void Mathematics::TestingHelper::AddPrimitivesSuite()
 {
-    auto primitivesSuite = GenerateSuite("»ù±¾Ìå");
+    auto primitivesSuite = GenerateSuite("åŸºæœ¬ä½“");
 
     AddSuite(primitivesSuite);
 }
 
 void Mathematics::TestingHelper::AddRationalSuite()
 {
-    auto rationalSuite = GenerateSuite("ÓĞÀíÊı");
+    auto rationalSuite = GenerateSuite("æœ‰ç†æ•°");
 
     ADD_TEST(rationalSuite, FloatingPointAnalysisTesting);
     ADD_TEST(rationalSuite, ConversionIntegerTesting);
@@ -222,7 +222,7 @@ void Mathematics::TestingHelper::AddRationalSuite()
 
 void Mathematics::TestingHelper::AddNumericalAnalysisSuite()
 {
-    auto numericalAnalysisSuite = GenerateSuite("ÊıÖµ·ÖÎö");
+    auto numericalAnalysisSuite = GenerateSuite("æ•°å€¼åˆ†æ");
 
     ADD_TEST(numericalAnalysisSuite, EquationResultConstIteratorTesting);
     ADD_TEST(numericalAnalysisSuite, EquationTesting);
@@ -275,7 +275,7 @@ void Mathematics::TestingHelper::AddNumericalAnalysisSuite()
 
 void Mathematics::TestingHelper::AddQuerySuite()
 {
-    auto querySuite = GenerateSuite("²éÑ¯");
+    auto querySuite = GenerateSuite("æŸ¥è¯¢");
 
     ADD_TEST(querySuite, QuerySortToolsTesting);
     ADD_TEST(querySuite, QueryDotToolsTesting);
@@ -295,7 +295,7 @@ void Mathematics::TestingHelper::AddQuerySuite()
 
 void Mathematics::TestingHelper::AddApproximationSuite()
 {
-    auto approximationSuite = GenerateSuite("½üËÆ");
+    auto approximationSuite = GenerateSuite("è¿‘ä¼¼");
 
     ADD_TEST(approximationSuite, QuadraticCircleFit2Testing);
     ADD_TEST(approximationSuite, QuadraticFit2Testing);
@@ -329,7 +329,7 @@ void Mathematics::TestingHelper::AddApproximationSuite()
 
 void Mathematics::TestingHelper::AddDistanceSuite()
 {
-    auto distanceSuite = GenerateSuite("¾àÀë²âÊÔ");
+    auto distanceSuite = GenerateSuite("è·ç¦»æµ‹è¯•");
 
     ADD_TEST(distanceSuite, DistanceResultTesting);
     ADD_TEST(distanceSuite, DistanceTesting);
@@ -341,7 +341,7 @@ void Mathematics::TestingHelper::AddDistanceSuite()
 
 CoreTools::Suite Mathematics::TestingHelper::GetDistance2DSuite()
 {
-    auto distance2DSuite = GenerateSuite("2D¾àÀë²âÊÔ");
+    auto distance2DSuite = GenerateSuite("2Dè·ç¦»æµ‹è¯•");
 
     ADD_TEST(distance2DSuite, DistanceLine2Line2Testing);
     ADD_TEST(distance2DSuite, DistanceRay2Ray2Testing);
@@ -361,7 +361,7 @@ CoreTools::Suite Mathematics::TestingHelper::GetDistance2DSuite()
 
 CoreTools::Suite Mathematics::TestingHelper::GetDistance3DSuite()
 {
-    auto distance3DSuite = GenerateSuite("3D¾àÀë²âÊÔ");
+    auto distance3DSuite = GenerateSuite("3Dè·ç¦»æµ‹è¯•");
 
     ADD_TEST(distance3DSuite, DistancePoint3Ellipsoid3Testing);
     ADD_TEST(distance3DSuite, DistanceLine3Line3Testing);
@@ -381,7 +381,7 @@ CoreTools::Suite Mathematics::TestingHelper::GetDistance3DSuite()
 
 void Mathematics::TestingHelper::AddIntersectionSuite()
 {
-    auto intersectionSuite = GenerateSuite("Ïà½»²âÊÔ");
+    auto intersectionSuite = GenerateSuite("ç›¸äº¤æµ‹è¯•");
 
     intersectionSuite.AddSuite(GetIntersection1DSuite());
     intersectionSuite.AddSuite(GetIntersection2DSuite());
@@ -392,7 +392,7 @@ void Mathematics::TestingHelper::AddIntersectionSuite()
 
 CoreTools::Suite Mathematics::TestingHelper::GetIntersection1DSuite()
 {
-    auto intersection1DSuite = GenerateSuite("1DÏà½»²âÊÔ");
+    auto intersection1DSuite = GenerateSuite("1Dç›¸äº¤æµ‹è¯•");
 
     ADD_TEST(intersection1DSuite, IntersectorTesting);
     ADD_TEST(intersection1DSuite, StaticIntersectorTesting);
@@ -408,7 +408,7 @@ CoreTools::Suite Mathematics::TestingHelper::GetIntersection1DSuite()
 
 CoreTools::Suite Mathematics::TestingHelper::GetIntersection2DSuite()
 {
-    auto intersection2DSuite = GenerateSuite("2DÏà½»²âÊÔ");
+    auto intersection2DSuite = GenerateSuite("2Dç›¸äº¤æµ‹è¯•");
 
     ADD_TEST(intersection2DSuite, StaticFindIntersectorCircle2Circle2Testing);
     ADD_TEST(intersection2DSuite, StaticFindIntersectorArc2Arc2Testing);
@@ -433,7 +433,7 @@ CoreTools::Suite Mathematics::TestingHelper::GetIntersection2DSuite()
 
 CoreTools::Suite Mathematics::TestingHelper::GetIntersection3DSuite()
 {
-    auto intersection3DSuite = GenerateSuite("3DÏà½»²âÊÔ");
+    auto intersection3DSuite = GenerateSuite("3Dç›¸äº¤æµ‹è¯•");
 
     ADD_TEST(intersection3DSuite, IntersectorLine3Triangle3Testing);
     ADD_TEST(intersection3DSuite, TriangleProjectOntoAxisTesting);
@@ -444,14 +444,14 @@ CoreTools::Suite Mathematics::TestingHelper::GetIntersection3DSuite()
 
 void Mathematics::TestingHelper::AddComputationalGeometrySuite()
 {
-    auto computationalGeometrySuite = GenerateSuite("¼ÆËã¼¸ºÎ");
+    auto computationalGeometrySuite = GenerateSuite("è®¡ç®—å‡ ä½•");
 
     AddSuite(computationalGeometrySuite);
 }
 
 void Mathematics::TestingHelper::AddContainmentSuite()
 {
-    auto containmentSuite = GenerateSuite("°üº¬");
+    auto containmentSuite = GenerateSuite("åŒ…å«");
 
     ADD_TEST(containmentSuite, ScribeCircle2CircumscribeTesting);
     ADD_TEST(containmentSuite, ScribeCircle2InscribeTesting);
@@ -463,21 +463,21 @@ void Mathematics::TestingHelper::AddContainmentSuite()
 
 void Mathematics::TestingHelper::AddCurvesSurfacesVolumesSuite()
 {
-    auto curvesSurfacesVolumesSuite = GenerateSuite("ÇúÏßÇúÃæÌå»ı");
+    auto curvesSurfacesVolumesSuite = GenerateSuite("æ›²çº¿æ›²é¢ä½“ç§¯");
 
     AddSuite(curvesSurfacesVolumesSuite);
 }
 
 void Mathematics::TestingHelper::AddInterpolationSuite()
 {
-    auto interpolationSuite = GenerateSuite("²åÖµ");
+    auto interpolationSuite = GenerateSuite("æ’å€¼");
 
     AddSuite(interpolationSuite);
 }
 
 void Mathematics::TestingHelper::AddMeshesSuite()
 {
-    auto meshesSuite = GenerateSuite("Íø¸ñ²âÊÔ");
+    auto meshesSuite = GenerateSuite("ç½‘æ ¼æµ‹è¯•");
 
     ADD_TEST(meshesSuite, EdgeKeyTesting);
     ADD_TEST(meshesSuite, TriangleKeyTesting);
@@ -487,7 +487,7 @@ void Mathematics::TestingHelper::AddMeshesSuite()
 
 void Mathematics::TestingHelper::AddMiscellaneousSuite()
 {
-    auto miscellaneousSuite = GenerateSuite("ÔÓÏî");
+    auto miscellaneousSuite = GenerateSuite("æ‚é¡¹");
 
     AddSuite(miscellaneousSuite);
 }

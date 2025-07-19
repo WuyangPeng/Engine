@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/29 13:54)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/29 13:54)
 
 #ifndef RENDERING_RESOURCES_VERTEX_FORMAT_FLAGS_H
 #define RENDERING_RESOURCES_VERTEX_FORMAT_FLAGS_H
@@ -16,17 +16,17 @@ namespace Rendering::VertexFormatFlags
 {
     enum class MaximumNumber
     {
-        // ¶¥µã¸ñÊ½ÊôĞÔµÄ×î´óÊıÁ¿¡£
+        // é¡¶ç‚¹æ ¼å¼å±æ€§çš„æœ€å¤§æ•°é‡ã€‚
         Attributes = 16,
 
-        // ÎÆÀí×ø±êµ¥Î»µÄ×î´óÊıÁ¿
+        // çº¹ç†åæ ‡å•ä½çš„æœ€å¤§æ•°é‡
         TextureCoordinateUnits = 8,
 
-        // ÑÕÉ«µ¥Î»µÄ×î´óÊıÁ¿
+        // é¢œè‰²å•ä½çš„æœ€å¤§æ•°é‡
         ColorUnits = 2
     };
 
-    // ¶¥µã¸ñÊ½ÊôĞÔµÄÓÃ·¨(ÓïÒå)¡£
+    // é¡¶ç‚¹æ ¼å¼å±æ€§çš„ç”¨æ³•(è¯­ä¹‰)ã€‚
     enum class Semantic
     {
         None,
@@ -47,7 +47,7 @@ namespace Rendering::VertexFormatFlags
         Quantity
     };
 
-    // ¶¥µã¸ñÊ½ÊôĞÔµÄÍ¨µÀÀàĞÍ¡£
+    // é¡¶ç‚¹æ ¼å¼å±æ€§çš„é€šé“ç±»å‹ã€‚
     enum class AttributeType
     {
         None,

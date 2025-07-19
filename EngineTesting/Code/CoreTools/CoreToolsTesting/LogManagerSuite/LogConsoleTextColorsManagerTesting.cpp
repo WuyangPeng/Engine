@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/05/11 14:26)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/05/11 14:26)
 
 #include "LogConsoleTextColorsManagerTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -39,20 +39,20 @@ void CoreTools::LogConsoleTextColorsManagerTesting::ErrorConsoleTextColorsManage
 {
     LogConsoleTextColorsManager manager0{ LogLevel::Error };
 
-    CERR << SYSTEM_TEXT("ÕâÌõĞÅÏ¢ÔÚ¿ØÖÆÌ¨ÏÔÊ¾ÎªºìÉ«¡£\n");
+    CERR << SYSTEM_TEXT("è¿™æ¡ä¿¡æ¯åœ¨æ§åˆ¶å°æ˜¾ç¤ºä¸ºçº¢è‰²ã€‚\n");
 
     LogConsoleTextColorsManager manager1{ OStreamShared{ false }, LogLevel::Warn };
 
-    std::cerr << "ÕâÌõĞÅÏ¢ÔÚ¿ØÖÆÌ¨ÏÔÊ¾Îª»ÆÉ«¡£\n";
+    std::cerr << "è¿™æ¡ä¿¡æ¯åœ¨æ§åˆ¶å°æ˜¾ç¤ºä¸ºé»„è‰²ã€‚\n";
 }
 
 void CoreTools::LogConsoleTextColorsManagerTesting::OutputConsoleTextColorsManagerTest()
 {
     LogConsoleTextColorsManager manager0{ LogLevel::Debug };
 
-    COUT << SYSTEM_TEXT("ÕâÌõĞÅÏ¢ÔÚ¿ØÖÆÌ¨ÏÔÊ¾ÎªÇàÉ«¡£\n");
+    COUT << SYSTEM_TEXT("è¿™æ¡ä¿¡æ¯åœ¨æ§åˆ¶å°æ˜¾ç¤ºä¸ºé’è‰²ã€‚\n");
 
     LogConsoleTextColorsManager manager1{ OStreamShared{ true }, LogLevel::Info };
 
-    std::cout << "ÕâÌõĞÅÏ¢ÔÚ¿ØÖÆÌ¨ÏÔÊ¾ÎªÂÌÉ«¡£\n";
+    std::cout << "è¿™æ¡ä¿¡æ¯åœ¨æ§åˆ¶å°æ˜¾ç¤ºä¸ºç»¿è‰²ã€‚\n";
 }

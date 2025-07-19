@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:20)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:20)
 
 #ifndef MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_AXIS_DETAIL_H
 #define MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_AXIS_DETAIL_H
@@ -162,12 +162,12 @@ Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Rea
 {
     IntersectorConfigurationType cfg{};
 
-    // ²éÕÒ¶¥µãµ½Ç±ÔÚ·ÖÀëÖáÉÏµÄÍ¶Ó°¡£
+    // æŸ¥æ‰¾é¡¶ç‚¹åˆ°æ½œåœ¨åˆ†ç¦»è½´ä¸Šçš„æŠ•å½±ã€‚
     auto d0 = Vector3Tools<Real>::DotProduct(axis, triangle.GetVertex(0));
     auto d1 = Vector3Tools<Real>::DotProduct(axis, triangle.GetVertex(1));
     auto d2 = Vector3Tools<Real>::DotProduct(axis, triangle.GetVertex(2));
 
-    // ÏÔÊ½µÄÅÅĞò¶¥µãµÄ¹¹½¨IntersectorConfiguration¡£
+    // æ˜¾å¼çš„æ’åºé¡¶ç‚¹çš„æ„å»ºIntersectorConfigurationã€‚
     if (d0 <= d1)
     {
         if (d1 <= d2)  // D0 <= D1 <= D2
@@ -288,8 +288,8 @@ Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Rea
 template <typename Real>
 Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Real>::GetConfiguration(const Vector3Type& axis, const Box3Type& box)
 {
-    // IntersectorConfiguration.mIndexµÄ×ø±êÅÅĞò·½°¸µÄËµÃ÷¡£
-    // ¶¥µãÊı£¨ÏòÉÏ/ÏòÏÂ£©Óë·¶Î§µÄ·ûºÅ£¨½öÔÚÏòºóÓ³ÉäÖĞºÜÖØÒª£©
+    // IntersectorConfiguration.mIndexçš„åæ ‡æ’åºæ–¹æ¡ˆçš„è¯´æ˜ã€‚
+    // é¡¶ç‚¹æ•°ï¼ˆå‘ä¸Š/å‘ä¸‹ï¼‰ä¸èŒƒå›´çš„ç¬¦å·ï¼ˆä»…åœ¨å‘åæ˜ å°„ä¸­å¾ˆé‡è¦ï¼‰
     //   012
     // 0 ---
     // 1 +--
@@ -300,8 +300,8 @@ Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Rea
     // 6 -++
     // 7 +++
     //
-    // µ±ËüÔÚ¡°Ïà½»ÅäÖÃ¡±ÖĞ·µ»ØÅÅĞòÊ±£¬Ò²±£Ö¤ËüÊÇÓĞĞòµÄ¡£
-    // £¨Èç¹ûÓĞ4¸ö¶¥µã£¬Ôò½«°´ÕÕ½«´´½¨Ò»¸ö¿ò£¨ÀıÈç0,1,3,2£©µÄË³Ğò½øĞĞ±£Ö¤£©
+    // å½“å®ƒåœ¨â€œç›¸äº¤é…ç½®â€ä¸­è¿”å›æ’åºæ—¶ï¼Œä¹Ÿä¿è¯å®ƒæ˜¯æœ‰åºçš„ã€‚
+    // ï¼ˆå¦‚æœæœ‰4ä¸ªé¡¶ç‚¹ï¼Œåˆ™å°†æŒ‰ç…§å°†åˆ›å»ºä¸€ä¸ªæ¡†ï¼ˆä¾‹å¦‚0,1,3,2ï¼‰çš„é¡ºåºè¿›è¡Œä¿è¯ï¼‰
 
     IntersectorConfigurationType cfg{};
 
@@ -317,12 +317,12 @@ Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Rea
     {
         if (absAxes.at(1) < Math<Real>::GetZeroTolerance())
         {
-            // Ãæ¡ª¡ªÃæ
+            // é¢â€”â€”é¢
             cfg.SetMap(VertexProjectionMap::M44);
 
             maxProjectedExtent = absAxes.at(2) * box.GetExtent(2);
 
-            // ÃæÑØaxes[2]¾ßÓĞ·¨Ïß¡£
+            // é¢æ²¿axes[2]å…·æœ‰æ³•çº¿ã€‚
             if (Math<Real>::GetValue(0) < axes.at(2))
             {
                 cfg.SetIndex(0, 0);
@@ -350,12 +350,12 @@ Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Rea
         }
         else if (absAxes.at(2) < Math<Real>::GetZeroTolerance())
         {
-            // Ãæ¡ª¡ªÃæ
+            // é¢â€”â€”é¢
             cfg.SetMap(VertexProjectionMap::M44);
 
             maxProjectedExtent = absAxes.at(1) * box.GetExtent(1);
 
-            // ÃæÑØaxes[1]¾ßÓĞ·¨Ïß¡£
+            // é¢æ²¿axes[1]å…·æœ‰æ³•çº¿ã€‚
             if (Math<Real>::GetValue(0) < axes.at(1))
             {
                 cfg.SetIndex(0, 4);
@@ -381,14 +381,14 @@ Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Rea
                 cfg.SetIndex(7, 0);
             }
         }
-        else  // ½öaxes[0]µÈÓÚ0
+        else  // ä»…axes[0]ç­‰äº0
         {
-            // Ïß¶Î¡ª¡ªÏß¶Î
+            // çº¿æ®µâ€”â€”çº¿æ®µ
             cfg.SetMap(VertexProjectionMap::M2_2);
 
             maxProjectedExtent = absAxes.at(1) * box.GetExtent(1) + absAxes.at(2) * box.GetExtent(2);
 
-            // axis0´¹Ö±ÓÚÖá
+            // axis0å‚ç›´äºè½´
             if (Math<Real>::GetValue(0) < axes.at(1))
             {
                 if (Math<Real>::GetValue(0) < axes.at(2))
@@ -433,12 +433,12 @@ Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Rea
     {
         if (absAxes.at(2) < Math<Real>::GetZeroTolerance())
         {
-            // Ãæ¡ª¡ªÃæ
+            // é¢â€”â€”é¢
             cfg.SetMap(VertexProjectionMap::M44);
 
             maxProjectedExtent = absAxes.at(0) * box.GetExtent(0);
 
-            // ÃæÑØaxes[0]¾ßÓĞ·¨Ïß
+            // é¢æ²¿axes[0]å…·æœ‰æ³•çº¿
             if (Math<Real>::GetValue(0) < axes.at(0))
             {
                 cfg.SetIndex(0, 0);
@@ -464,14 +464,14 @@ Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Rea
                 cfg.SetIndex(3, 1);
             }
         }
-        else  // ½öaxes[1]µÈÓÚ0
+        else  // ä»…axes[1]ç­‰äº0
         {
-            // Ïß¶Î¡ª¡ªÏß¶Î
+            // çº¿æ®µâ€”â€”çº¿æ®µ
             cfg.SetMap(VertexProjectionMap::M2_2);
 
             maxProjectedExtent = absAxes.at(0) * box.GetExtent(0) + absAxes.at(2) * box.GetExtent(2);
 
-            // axis1´¹Ö±ÓÚÖá
+            // axis1å‚ç›´äºè½´
             if (Math<Real>::GetValue(0) < axes.at(0))
             {
                 if (Math<Real>::GetValue(0) < axes.at(2))
@@ -515,13 +515,13 @@ Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Rea
 
     else if (absAxes.at(2) < Math<Real>::GetZeroTolerance())
     {
-        // ½öaxis2Ğ¡ÓÚÁã
-        // Ïß¶Î¡ª¡ªÏß¶Î
+        // ä»…axis2å°äºé›¶
+        // çº¿æ®µâ€”â€”çº¿æ®µ
         cfg.SetMap(VertexProjectionMap::M2_2);
 
         maxProjectedExtent = absAxes.at(0) * box.GetExtent(0) + absAxes.at(1) * box.GetExtent(1);
 
-        // axis2´¹Ö±ÓÚÖá
+        // axis2å‚ç›´äºè½´
         if (Math<Real>::GetValue(0) < axes.at(0))
         {
             if (Math<Real>::GetValue(0) < axes.at(1))
@@ -562,20 +562,20 @@ Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Rea
         }
     }
 
-    else  // Ã»ÓĞÖáµÈÓÚÁã
+    else  // æ²¡æœ‰è½´ç­‰äºé›¶
     {
-        // µã¶Ôµã£¨Î¨Ò»×î´óºÍ×îĞ¡¶¥µã£©
+        // ç‚¹å¯¹ç‚¹ï¼ˆå”¯ä¸€æœ€å¤§å’Œæœ€å°é¡¶ç‚¹ï¼‰
         cfg.SetMap(VertexProjectionMap::M1_1);
 
         maxProjectedExtent = absAxes.at(0) * box.GetExtent(0) + absAxes.at(1) * box.GetExtent(1) + absAxes.at(2) * box.GetExtent(2);
 
-        // Ö»ÓĞÕâÁ½¸ö¶¥µãºÜÖØÒª£¬ÆäÓàµÄ¶¼Ã»ÓĞ¹ØÏµ
+        // åªæœ‰è¿™ä¸¤ä¸ªé¡¶ç‚¹å¾ˆé‡è¦ï¼Œå…¶ä½™çš„éƒ½æ²¡æœ‰å…³ç³»
         cfg.SetIndex(0, (Math<Real>::GetValue(0) < axes.at(0) ? 0 : 1) + (Math<Real>::GetValue(0) < axes.at(1) ? 0 : 2) + (Math<Real>::GetValue(0) < axes.at(2) ? 0 : 4));
-        // Í¨¹ıÕâÑùÅÅÁĞ¶¥µã£¬¶Ô½Ç¹²¼Æ7¸ö
+        // é€šè¿‡è¿™æ ·æ’åˆ—é¡¶ç‚¹ï¼Œå¯¹è§’å…±è®¡7ä¸ª
         cfg.SetIndex(7, 7 - cfg.GetIndex(0));
     }
 
-    // ²éÕÒÏßÉÏµÄÍ¶Ó°
+    // æŸ¥æ‰¾çº¿ä¸Šçš„æŠ•å½±
     auto origin = Vector3Tools<Real>::DotProduct(axis, box.GetCenter());
     cfg.SetMin(origin - maxProjectedExtent);
     cfg.SetMax(origin + maxProjectedExtent);
@@ -586,22 +586,22 @@ Mathematics::IntersectorConfiguration<Real> Mathematics::FindIntersectorAxis<Rea
 template <typename Real>
 void Mathematics::FindIntersectorAxis<Real>::Find(const Vector3Type& axis, const Vector3Type& velocity, const IntersectorConfigurationType& cfg0Start, const IntersectorConfigurationType& cfg1Start, Real tmax) noexcept
 {
-    // µÈËÙ·ÖÀëÖá²âÊÔ¡£ ÅäÖÃcfg0StartºÍcfg1StartÊÇµ±Ç°µÄÇ±ÔÚÁªÏµÅäÖÃ£¬¶øcfg0FinalºÍcfg1FinalÊÇ¸Ä½øµÄÅäÖÃ¡£
+    // ç­‰é€Ÿåˆ†ç¦»è½´æµ‹è¯•ã€‚ é…ç½®cfg0Startå’Œcfg1Startæ˜¯å½“å‰çš„æ½œåœ¨è”ç³»é…ç½®ï¼Œè€Œcfg0Finalå’Œcfg1Finalæ˜¯æ”¹è¿›çš„é…ç½®ã€‚
     auto t = Math<Real>::GetValue(0);
     auto speed = Vector3Tools<Real>::DotProduct(axis, velocity);
 
-    if (cfg1Start.GetMax() < cfg0Start.GetMin())  // object1ÔÚobject0µÄ×ó²à
+    if (cfg1Start.GetMax() < cfg0Start.GetMin())  // object1åœ¨object0çš„å·¦ä¾§
     {
-        if (speed <= Math<Real>::GetValue(0))  // object1Ô¶Àëobject0
+        if (speed <= Math<Real>::GetValue(0))  // object1è¿œç¦»object0
         {
             result = false;
             return;
         }
 
-        // ²éÕÒ¸ÃÖáÉÏµÄÊ×´Î½Ó´¥
+        // æŸ¥æ‰¾è¯¥è½´ä¸Šçš„é¦–æ¬¡æ¥è§¦
         t = (cfg0Start.GetMin() - cfg1Start.GetMax()) / speed;
 
-        // Èç¹ûÕâÊÇĞÂµÄ×î´óÊ×´Î½Ó´¥Ê±¼ä£¬Çë½øĞĞÉèÖÃºÍÅäÖÃ¡£
+        // å¦‚æœè¿™æ˜¯æ–°çš„æœ€å¤§é¦–æ¬¡æ¥è§¦æ—¶é—´ï¼Œè¯·è¿›è¡Œè®¾ç½®å’Œé…ç½®ã€‚
         if (tFirst < t)
         {
             tFirst = t;
@@ -610,39 +610,39 @@ void Mathematics::FindIntersectorAxis<Real>::Find(const Vector3Type& axis, const
             cfgFinal1 = cfg1Start;
         }
 
-        // ¿ìËÙÍË³ö£ºËùĞè¼ä¸ôºóµÄ½»µã
+        // å¿«é€Ÿé€€å‡ºï¼šæ‰€éœ€é—´éš”åçš„äº¤ç‚¹
         if (tmax < tFirst)
         {
             result = false;
             return;
         }
 
-        // ²éÕÒ¸ÃÖáÉÏµÄ×îºóÒ»´Î½Ó´¥Ê±¼ä
+        // æŸ¥æ‰¾è¯¥è½´ä¸Šçš„æœ€åä¸€æ¬¡æ¥è§¦æ—¶é—´
         t = (cfg0Start.GetMax() - cfg1Start.GetMin()) / speed;
         if (t < tLast)
         {
             tLast = t;
         }
 
-        // ¿ìËÙÍË³ö£ºËùĞè¼ä¸ôÇ°µÄ½»µã
+        // å¿«é€Ÿé€€å‡ºï¼šæ‰€éœ€é—´éš”å‰çš„äº¤ç‚¹
         if (tLast < tFirst)
         {
             result = false;
             return;
         }
     }
-    else if (cfg0Start.GetMax() < cfg1Start.GetMin())  // obj1ÔÚobj0µÄÓÒ²à
+    else if (cfg0Start.GetMax() < cfg1Start.GetMin())  // obj1åœ¨obj0çš„å³ä¾§
     {
-        if (Math<Real>::GetValue(0) <= speed)  // object1Ô¶Àëobject0
+        if (Math<Real>::GetValue(0) <= speed)  // object1è¿œç¦»object0
         {
             result = false;
             return;
         }
 
-        // ²éÕÒ¸ÃÖáÉÏµÄÊ×´Î½Ó´¥
+        // æŸ¥æ‰¾è¯¥è½´ä¸Šçš„é¦–æ¬¡æ¥è§¦
         t = (cfg0Start.GetMax() - cfg1Start.GetMin()) / speed;
 
-        // Èç¹ûÕâÊÇĞÂµÄ×î´óÊ×´Î½Ó´¥Ê±¼ä£¬Çë½øĞĞÉèÖÃºÍÅäÖÃ¡£
+        // å¦‚æœè¿™æ˜¯æ–°çš„æœ€å¤§é¦–æ¬¡æ¥è§¦æ—¶é—´ï¼Œè¯·è¿›è¡Œè®¾ç½®å’Œé…ç½®ã€‚
         if (tFirst < t)
         {
             tFirst = t;
@@ -651,39 +651,39 @@ void Mathematics::FindIntersectorAxis<Real>::Find(const Vector3Type& axis, const
             cfgFinal1 = cfg1Start;
         }
 
-        // ¿ìËÙÍË³ö£ºËùĞè¼ä¸ôºóµÄ½»µã
+        // å¿«é€Ÿé€€å‡ºï¼šæ‰€éœ€é—´éš”åçš„äº¤ç‚¹
         if (tmax < tFirst)
         {
             result = false;
             return;
         }
 
-        // ²éÕÒ¸ÃÖáÉÏµÄ×îºóÒ»´Î½Ó´¥Ê±¼ä
+        // æŸ¥æ‰¾è¯¥è½´ä¸Šçš„æœ€åä¸€æ¬¡æ¥è§¦æ—¶é—´
         t = (cfg0Start.GetMin() - cfg1Start.GetMax()) / speed;
         if (t < tLast)
         {
             tLast = t;
         }
 
-        // ¿ìËÙÍË³ö£ºËùĞè¼ä¸ôÇ°µÄ½»µã
+        // å¿«é€Ÿé€€å‡ºï¼šæ‰€éœ€é—´éš”å‰çš„äº¤ç‚¹
         if (tLast < tFirst)
         {
             result = false;
             return;
         }
     }
-    else  // ÖØµş¼ä¸ôÉÏµÄobject1ºÍobject0
+    else  // é‡å é—´éš”ä¸Šçš„object1å’Œobject0
     {
         if (Math<Real>::GetValue(0) < speed)
         {
-            // ²éÕÒ¸ÃÖáÉÏµÄ×îºóÒ»´Î½Ó´¥Ê±¼ä
+            // æŸ¥æ‰¾è¯¥è½´ä¸Šçš„æœ€åä¸€æ¬¡æ¥è§¦æ—¶é—´
             t = (cfg0Start.GetMax() - cfg1Start.GetMin()) / speed;
             if (t < tLast)
             {
                 tLast = t;
             }
 
-            // ¿ìËÙÍË³ö£ºËùĞè¼ä¸ôÇ°µÄ½»µã
+            // å¿«é€Ÿé€€å‡ºï¼šæ‰€éœ€é—´éš”å‰çš„äº¤ç‚¹
             if (tLast < tFirst)
             {
                 result = false;
@@ -692,14 +692,14 @@ void Mathematics::FindIntersectorAxis<Real>::Find(const Vector3Type& axis, const
         }
         else if (speed < Math<Real>::GetValue(0))
         {
-            // ²éÕÒ¸ÃÖáÉÏµÄ×îºóÒ»´Î½Ó´¥Ê±¼ä
+            // æŸ¥æ‰¾è¯¥è½´ä¸Šçš„æœ€åä¸€æ¬¡æ¥è§¦æ—¶é—´
             t = (cfg0Start.GetMin() - cfg1Start.GetMax()) / speed;
             if (t < tLast)
             {
                 tLast = t;
             }
 
-            // ¿ìËÙÍË³ö£ºËùĞè¼ä¸ôÇ°µÄ½»µã
+            // å¿«é€Ÿé€€å‡ºï¼šæ‰€éœ€é—´éš”å‰çš„äº¤ç‚¹
             if (tLast < tFirst)
             {
                 result = false;

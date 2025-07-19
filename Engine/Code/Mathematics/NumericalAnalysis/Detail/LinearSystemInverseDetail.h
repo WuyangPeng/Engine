@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 09:37)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 09:37)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_INVERSE_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_INVERSE_DETAIL_H
@@ -85,7 +85,7 @@ bool Mathematics::LinearSystemInverse<Real>::IsValid() const noexcept
 template <typename Real>
 void Mathematics::LinearSystemInverse<Real>::Inverse()
 {
-    // Ïû³ıÁËÍêÈ«Ğı×ª¡£
+    // æ¶ˆé™¤äº†å®Œå…¨æ—‹è½¬ã€‚
     for (auto index = 0; index < size; ++index)
     {
         Inverse(index);
@@ -97,23 +97,23 @@ void Mathematics::LinearSystemInverse<Real>::Inverse()
 template <typename Real>
 void Mathematics::LinearSystemInverse<Real>::Inverse(int index)
 {
-    // ËÑË÷¾ØÕó£¨²»º¬Êà×ªĞĞ£©µÄ×î´ó¾ø¶ÔÖµÏî¡£
+    // æœç´¢çŸ©é˜µï¼ˆä¸å«æ¢è½¬è¡Œï¼‰çš„æœ€å¤§ç»å¯¹å€¼é¡¹ã€‚
     CalculateCurrentMaxValue();
 
     pivoted.at(currentColumn) = true;
 
-    // ½»»»ĞĞÊ¹A[col][col]°üº¬Êà×ªÏî¡£
+    // äº¤æ¢è¡Œä½¿A[col][col]åŒ…å«æ¢è½¬é¡¹ã€‚
     SwapRows();
 
-    // ¸ú×ÙĞĞµÄÅÅÁĞ¡£
+    // è·Ÿè¸ªè¡Œçš„æ’åˆ—ã€‚
 
     rowIndex.at(index) = currentRow;
     columnsIndex.at(index) = currentColumn;
 
-    // Ëõ·ÅĞĞ£¬ÒÔ±ãÊàÖáÏîÊÇ1
+    // ç¼©æ”¾è¡Œï¼Œä»¥ä¾¿æ¢è½´é¡¹æ˜¯1
     ScaleRow();
 
-    // ÇåÁãÔÚÆäËûĞĞµÄÊàÖáÁĞÎ»ÖÃ¡£
+    // æ¸…é›¶åœ¨å…¶ä»–è¡Œçš„æ¢è½´åˆ—ä½ç½®ã€‚
     ZeroOutPivotColumnLocations();
 }
 
@@ -174,7 +174,7 @@ void Mathematics::LinearSystemInverse<Real>::CalculateCurrentMaxValue()
 
     if (currentMaxValue <= zeroTolerance)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¾ØÕóÊÇ²»¿ÉÄæµÄ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("çŸ©é˜µæ˜¯ä¸å¯é€†çš„ã€‚"s))
     }
 }
 
@@ -209,7 +209,7 @@ void Mathematics::LinearSystemInverse<Real>::ZeroOutPivotColumnLocations(int out
 template <typename Real>
 void Mathematics::LinearSystemInverse<Real>::Rearrangement()
 {
-    // ÖØÅÅĞòÁĞÊ¹A[][]´æ´¢¸ÃÔ­Ê¼¾ØÕóµÄÄæ¡£
+    // é‡æ’åºåˆ—ä½¿A[][]å­˜å‚¨è¯¥åŸå§‹çŸ©é˜µçš„é€†ã€‚
     for (auto outerIndex = size - 1; 0 <= outerIndex; --outerIndex)
     {
         auto swapRowIndex = rowIndex.at(outerIndex);

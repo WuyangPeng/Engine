@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.2 (2023/07/24 19:34)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.2 (2023/07/24 19:34)
 
 #include "Rendering/RenderingExport.h"
 
@@ -81,12 +81,12 @@ int Rendering::MorphControllerImpl::GetNumKeys() const noexcept
 Rendering::MorphControllerImpl::APoint Rendering::MorphControllerImpl::GetVertices(int target, int aVertices) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= target && target < numTargets, "Ë÷Òı´íÎó£¡");
-    RENDERING_ASSERTION_0(0 <= aVertices && aVertices < numVertices, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= target && target < numTargets, "ç´¢å¼•é”™è¯¯ï¼");
+    RENDERING_ASSERTION_0(0 <= aVertices && aVertices < numVertices, "ç´¢å¼•é”™è¯¯ï¼");
 
     const int index = aVertices + target * numVertices;
 
-    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(vertices.size()), "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(vertices.size()), "ç´¢å¼•é”™è¯¯ï¼");
 
     return vertices.at(index);
 }
@@ -94,7 +94,7 @@ Rendering::MorphControllerImpl::APoint Rendering::MorphControllerImpl::GetVertic
 float Rendering::MorphControllerImpl::GetTimes(int key) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= key && key < numKeys, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= key && key < numKeys, "ç´¢å¼•é”™è¯¯ï¼");
 
     return times.at(key);
 }
@@ -102,12 +102,12 @@ float Rendering::MorphControllerImpl::GetTimes(int key) const
 float Rendering::MorphControllerImpl::GetWeights(int key, int target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= target && target < numTargets - 1, "Ë÷Òı´íÎó£¡");
-    RENDERING_ASSERTION_0(0 <= key && key < numKeys, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= target && target < numTargets - 1, "ç´¢å¼•é”™è¯¯ï¼");
+    RENDERING_ASSERTION_0(0 <= key && key < numKeys, "ç´¢å¼•é”™è¯¯ï¼");
 
     const auto index = target + key * (numTargets - 1);
 
-    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(weights.size()), "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(weights.size()), "ç´¢å¼•é”™è¯¯ï¼");
 
     return weights.at(index);
 }
@@ -115,12 +115,12 @@ float Rendering::MorphControllerImpl::GetWeights(int key, int target) const
 void Rendering::MorphControllerImpl::SetVertices(int target, int aVertices, const APoint& point)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(0 <= target && target < numTargets, "Ë÷Òı´íÎó£¡");
-    RENDERING_ASSERTION_0(0 <= aVertices && aVertices < numVertices, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= target && target < numTargets, "ç´¢å¼•é”™è¯¯ï¼");
+    RENDERING_ASSERTION_0(0 <= aVertices && aVertices < numVertices, "ç´¢å¼•é”™è¯¯ï¼");
 
     const auto index = aVertices + target * numVertices;
 
-    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(vertices.size()), "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(vertices.size()), "ç´¢å¼•é”™è¯¯ï¼");
 
     vertices.at(index) = point;
 }
@@ -128,7 +128,7 @@ void Rendering::MorphControllerImpl::SetVertices(int target, int aVertices, cons
 void Rendering::MorphControllerImpl::SetTimes(int key, float time)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(0 <= key && key < numKeys, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= key && key < numKeys, "ç´¢å¼•é”™è¯¯ï¼");
 
     times.at(key) = time;
 }
@@ -136,12 +136,12 @@ void Rendering::MorphControllerImpl::SetTimes(int key, float time)
 void Rendering::MorphControllerImpl::SetWeights(int key, int target, float weight)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(0 <= target && target < numTargets - 1, "Ë÷Òı´íÎó£¡");
-    RENDERING_ASSERTION_0(0 <= key && key < numKeys, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= target && target < numTargets - 1, "ç´¢å¼•é”™è¯¯ï¼");
+    RENDERING_ASSERTION_0(0 <= key && key < numKeys, "ç´¢å¼•é”™è¯¯ï¼");
 
     const auto index = target + key * (numTargets - 1);
 
-    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(weights.size()), "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(weights.size()), "ç´¢å¼•é”™è¯¯ï¼");
 
     weights.at(index) = weight;
 }

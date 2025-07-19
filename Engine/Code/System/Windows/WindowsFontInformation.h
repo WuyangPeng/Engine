@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.2 (2024/10/26 15:39)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.2 (2024/10/26 15:39)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_FONT_INFORMATION_H
 #define SYSTEM_WINDOWS_WINDOWS_FONT_INFORMATION_H
@@ -15,7 +15,7 @@
 #include "Using/WindowsUsing.h"
 #include "System/Helper/UnicodeUsing.h"
 
-/// ×ÖÌåĞÅÏ¢º¯Êı¡£
+/// å­—ä½“ä¿¡æ¯å‡½æ•°ã€‚
 namespace System
 {
     NODISCARD int SYSTEM_DEFAULT_DECLARE GetStringWidth(WindowsHWnd hWnd, const String& text);

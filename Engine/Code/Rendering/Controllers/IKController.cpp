@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	����汾��0.9.0.12 (2023/06/12 14:06)
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/12 14:06)
 
 #include "Rendering/RenderingExport.h"
 
@@ -127,8 +127,8 @@ bool Rendering::IKController::Update(double applicationTime)
     using namespace System;
     if (ParentType::Update(applicationTime))
     {
-        // ȷ��Ч�����ڵ�ǰ����ռ䡣
-        // ����joints�γ�һ������ʹjoints I������任��joint I + 1�ĸ��任��
+        // 确保效果都在当前世界空间。
+        // 假设joints形成一个链，使joints I的世界变换是joint I + 1的父变换。
 
         const auto mNumJoints = impl->GetJointsNum();
 
@@ -138,8 +138,8 @@ bool Rendering::IKController::Update(double applicationTime)
             pointer->UpdateWorldTransform();
         }
 
-        // ����jointsһ��һ����������Ŀ�ꡣ
-        // ����ÿ���ؽڱ����£�������֮����������еĽڵ�joint����������ռ䡣
+        // 更新joints一次一个，以满足目标。
+        // 由于每个关节被更新，即联合之后出现在链中的节点joint必须在世界空间。
 
         for (auto iter = 0; iter < impl->GetIterations(); ++iter)
         {

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/12 15:57)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 15:57)
 
 #include "ColourDefaultTraitsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -65,7 +65,7 @@ void Rendering::ColourDefaultTraitsTesting::TraitsTest()
 
 #if 0
 
-    // ÒÔÏÂ´úÂë²»Ó¦¸ÃÍ¨¹ı±àÒë
+    // ä»¥ä¸‹ä»£ç ä¸åº”è¯¥é€šè¿‡ç¼–è¯‘
     ASSERT_EQUAL(ColourDefaultTraits<int8_t>::maxValue, 255);
     ASSERT_EQUAL(ColourDefaultTraits<int8_t>::minValue, 0);
 

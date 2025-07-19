@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	����汾��0.9.0.12 (2023/06/12 13:57)
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/12 13:57)
 
 #include "Rendering/RenderingExport.h"
 
@@ -28,7 +28,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::A8L8>::SetColour(ValueTy
     RENDERING_CLASS_IS_VALID_3;
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // ͨ��ʹ�þ�̬���ԣ��̶���С����ʹ�ó��������Ǳ������ġ�
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     colour[alphaIndex] = alpha;
     colour[luminanceIndex] = luminance;
@@ -53,7 +53,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::G16R16>::SetColour(Value
     RENDERING_CLASS_IS_VALID_3;
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // ͨ��ʹ�þ�̬���ԣ��̶���С����ʹ�ó��������Ǳ������ġ�
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     colour[greenIndex] = green;
     colour[redIndex] = red;
@@ -78,7 +78,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::G16R16F>::SetColour(Valu
     RENDERING_CLASS_IS_VALID_3;
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // ͨ��ʹ�þ�̬���ԣ��̶���С����ʹ�ó��������Ǳ������ġ�
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     colour[greenIndex] = green;
     colour[redIndex] = red;
@@ -103,7 +103,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::G32R32F>::SetColour(Valu
     RENDERING_CLASS_IS_VALID_3;
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // ͨ��ʹ�þ�̬���ԣ��̶���С����ʹ�ó��������Ǳ������ġ�
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     colour[greenIndex] = green;
     colour[redIndex] = red;
@@ -127,7 +127,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::A8>::SetColour(ValueType
     RENDERING_CLASS_IS_VALID_3;
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // ͨ��ʹ�þ�̬���ԣ��̶���С����ʹ�ó��������Ǳ������ġ�
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     colour[alphaIndex] = alpha;
 
@@ -150,7 +150,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::L8>::SetColour(ValueType
     RENDERING_CLASS_IS_VALID_3;
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // ͨ��ʹ�þ�̬���ԣ��̶���С����ʹ�ó��������Ǳ������ġ�
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     colour[luminanceIndex] = luminance;
 
@@ -173,7 +173,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::L16>::SetColour(ValueTyp
     RENDERING_CLASS_IS_VALID_3;
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // ͨ��ʹ�þ�̬���ԣ��̶���С����ʹ�ó��������Ǳ������ġ�
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     colour[luminanceIndex] = luminance;
 
@@ -196,7 +196,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::R16F>::SetColour(ValueTy
     RENDERING_CLASS_IS_VALID_3;
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // ͨ��ʹ�þ�̬���ԣ��̶���С����ʹ�ó��������Ǳ������ġ�
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     colour[redIndex] = red;
 
@@ -219,7 +219,7 @@ void Rendering::TextureColour<Rendering::TextureFormat::R32F>::SetColour(ValueTy
     RENDERING_CLASS_IS_VALID_3;
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // ͨ��ʹ�þ�̬���ԣ��̶���С����ʹ�ó��������Ǳ������ġ�
+#include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
 
     colour[redIndex] = red;
 

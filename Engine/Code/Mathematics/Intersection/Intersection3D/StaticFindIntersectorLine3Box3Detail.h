@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:24)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:24)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_BOX3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_BOX3_DETAIL_H
@@ -85,7 +85,7 @@ Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorLine3Box3<Real>::Ge
             return point1;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Ë÷ÒıÔ½½ç\n"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•è¶Šç•Œ\n"s));
 }
 
 template <typename Real>
@@ -93,7 +93,7 @@ typename Mathematics::StaticFindIntersectorLine3Box3<Real>::FindShared Mathemati
 {
     FindShared findShared{};
 
-    // ½«ÏßĞÔ·ÖÁ¿×ª»»Îª¿ò×ø±ê¡£
+    // å°†çº¿æ€§åˆ†é‡è½¬æ¢ä¸ºæ¡†åæ ‡ã€‚
     auto diff = origin - box.GetCenter();
     const Vector3 boxOrigin{ Vector3ToolsType::DotProduct(diff, box.GetAxis(0)), Vector3ToolsType::DotProduct(diff, box.GetAxis(1)), Vector3ToolsType::DotProduct(diff, box.GetAxis(2)) };
     const Vector3 boxDirection{ Vector3ToolsType::DotProduct(direction, box.GetAxis(0)), Vector3ToolsType::DotProduct(direction, box.GetAxis(1)), Vector3ToolsType::DotProduct(direction, box.GetAxis(2)) };
@@ -152,7 +152,7 @@ typename Mathematics::StaticFindIntersectorLine3Box3<Real>::ClipType Mathematics
     clipType.t0 = t0;
     clipType.t1 = t1;
 
-    // Èç¹ûÏß¶ÎÓëµ±Ç°²âÊÔÆ½ÃæÏà½»£¬Ôò·µ»ØÖµÎª¡°true¡±¡£ ·ñÔò£¬½«·µ»Ø¡°false¡±£¬ÔÚÕâÖÖÇé¿öÏÂ£¬Ïß¶Î½«±»ÍêÈ«¼ôÇĞ¡£
+    // å¦‚æœçº¿æ®µä¸å½“å‰æµ‹è¯•å¹³é¢ç›¸äº¤ï¼Œåˆ™è¿”å›å€¼ä¸ºâ€œtrueâ€ã€‚ å¦åˆ™ï¼Œå°†è¿”å›â€œfalseâ€ï¼Œåœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œçº¿æ®µå°†è¢«å®Œå…¨å‰ªåˆ‡ã€‚
     if (MathType::GetValue(0) < denom)
     {
         if (denom * t1 < numer)

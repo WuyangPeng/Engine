@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.3 (2023/08/10 13:47)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.3 (2023/08/10 13:47)
 
 #include "FrameworkTestingWindowMessage.h"
 #include "Testing.h"
@@ -17,7 +17,7 @@
 using namespace std::literals;
 
 Framework::FrameworkTestingWindowMessage::FrameworkTestingWindowMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory)
-    : ParentType{ delta, "¡¾¿ò¼Ü¿â¡¿µ¥Ôª²âÊÔÌ×¼ş"s }
+    : ParentType{ delta, "ã€æ¡†æ¶åº“ã€‘å•å…ƒæµ‹è¯•å¥—ä»¶"s }
 {
     System::UnusedFunction(environmentDirectory);
 
@@ -38,7 +38,7 @@ void Framework::FrameworkTestingWindowMessage::AddWindowCreateSuite()
 {
     auto hWnd = GetHWnd();
     auto instance = System::GetHInstance();
-    auto windowCreateSuite = GenerateSuite("Window´´½¨"s);
+    auto windowCreateSuite = GenerateSuite("Windowåˆ›å»º"s);
 
     ADD_TEST_USE_PARAMETER_1(windowCreateSuite, WindowInstanceParameterTesting, instance);
     ADD_TEST_USE_PARAMETER_1(windowCreateSuite, WindowCreateParameterTesting, hWnd);
@@ -50,7 +50,7 @@ void Framework::FrameworkTestingWindowMessage::AddWindowCreateSuite()
 void Framework::FrameworkTestingWindowMessage::AddWindowProcessSuite()
 {
     auto hWnd = GetHWnd();
-    auto windowProcessSuite = GenerateSuite("´°¿Ú½ø³Ì"s);
+    auto windowProcessSuite = GenerateSuite("çª—å£è¿›ç¨‹"s);
 
     ADD_TEST_USE_PARAMETER_1(windowProcessSuite, WindowMessageInterfaceTesting, hWnd);
     ADD_TEST_USE_PARAMETER_1(windowProcessSuite, WindowMessageTesting, hWnd);
@@ -63,7 +63,7 @@ void Framework::FrameworkTestingWindowMessage::AddWindowProcessSuite()
 void Framework::FrameworkTestingWindowMessage::AddWindowRegisterSuite()
 {
     auto instance = System::GetHInstance();
-    auto windowRegisterSuite = GenerateSuite("Window×¢²á"s);
+    auto windowRegisterSuite = GenerateSuite("Windowæ³¨å†Œ"s);
 
     ADD_TEST_USE_PARAMETER_1(windowRegisterSuite, WindowRegisterParameterTesting, instance);
     ADD_TEST_USE_PARAMETER_1(windowRegisterSuite, WindowHIconTesting, instance);
@@ -78,7 +78,7 @@ void Framework::FrameworkTestingWindowMessage::AddApplicationSuite()
 {
     auto hWnd = GetHWnd();
     auto instance = System::GetHInstance();
-    auto applicationSuite = GenerateSuite("Ó¦ÓÃ"s);
+    auto applicationSuite = GenerateSuite("åº”ç”¨"s);
 
     ADD_TEST_USE_PARAMETER_1(applicationSuite, FontInformationTesting, hWnd);
     ADD_TEST_USE_PARAMETER_1(applicationSuite, MousePositionTesting, hWnd);

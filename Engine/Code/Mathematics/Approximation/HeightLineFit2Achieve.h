@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:13)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:13)
 
 #ifndef MATHEMATICS_APPROXIMATION_HEIGHT_LINT_FIT2_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_HEIGHT_LINT_FIT2_ACHIEVE_H
@@ -27,11 +27,11 @@ Mathematics::HeightLineFit2<Real>::HeightLineFit2(const Points& points)
 template <typename Real>
 void Mathematics::HeightLineFit2<Real>::Calculate(const Points& points)
 {
-    // ÄãÖÁÉÙÐèÒªÁ½¸öµãÈ·¶¨Ïß¾ÍÐÐÁË
-    // ¼´Ê¹ÕâÑù£¬Èç¹ûµãÔÚÒ»Ìõ´¹Ö±Ïß£¬Ã»ÓÐ×îÐ¡Æ½·½ÄâºÏµÄ¡°¸ß¶È¡±µÄ¸Ð¾õ¡£
-    // Õâ½«ÏÝÈëÓÉÏµÊý¾ØÕó´æÔÚ£¨¼¸ºõ£©ÁãµÄÐÐÁÐÊ½¡£
+    // ä½ è‡³å°‘éœ€è¦ä¸¤ä¸ªç‚¹ç¡®å®šçº¿å°±è¡Œäº†
+    // å³ä½¿è¿™æ ·ï¼Œå¦‚æžœç‚¹åœ¨ä¸€æ¡åž‚ç›´çº¿ï¼Œæ²¡æœ‰æœ€å°å¹³æ–¹æ‹Ÿåˆçš„â€œé«˜åº¦â€çš„æ„Ÿè§‰ã€‚
+    // è¿™å°†é™·å…¥ç”±ç³»æ•°çŸ©é˜µå­˜åœ¨ï¼ˆå‡ ä¹Žï¼‰é›¶çš„è¡Œåˆ—å¼ã€‚
 
-    // ¼ÆËãÏßÐÔÏµÍ³µÄ×ÜºÍ¡£
+    // è®¡ç®—çº¿æ€§ç³»ç»Ÿçš„æ€»å’Œã€‚
     Real sumX{};
     Real sumY{};
     Real sumXX{};
@@ -98,7 +98,7 @@ Real Mathematics::HeightLineFit2<Real>::GetCoeffA() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÄâºÏÊ§°Ü"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ‹Ÿåˆå¤±è´¥"s))
     }
 }
 
@@ -113,7 +113,7 @@ Real Mathematics::HeightLineFit2<Real>::GetCoeffB() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÄâºÏÊ§°Ü"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ‹Ÿåˆå¤±è´¥"s))
     }
 }
 

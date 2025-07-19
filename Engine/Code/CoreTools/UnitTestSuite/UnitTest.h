@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 11:21)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 11:21)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_H
@@ -27,8 +27,8 @@
 EXPORT_SHARED_PTR(CoreTools, CpuTimerData, CORE_TOOLS_DEFAULT_DECLARE);
 EXPORT_SHARED_PTR(CoreTools, UnitTestData, CORE_TOOLS_DEFAULT_DECLARE);
 
-/// µ¥Ôª²âÊÔÀà¡£
-/// UnitTestÎªÍâ²¿½Ó¿Ú»ùÀà£¬×ÓÀàÒªÔËĞĞµÄ²âÊÔÔÚDoRunUnitTestº¯ÊıÖĞÔËĞĞ¡£
+/// å•å…ƒæµ‹è¯•ç±»ã€‚
+/// UnitTestä¸ºå¤–éƒ¨æ¥å£åŸºç±»ï¼Œå­ç±»è¦è¿è¡Œçš„æµ‹è¯•åœ¨DoRunUnitTestå‡½æ•°ä¸­è¿è¡Œã€‚
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE UnitTest : public UnitTestComposite
@@ -37,7 +37,7 @@ namespace CoreTools
         using ClassType = UnitTest;
         using ParentType = UnitTestComposite;
 
-        /// ÈÃ×ÓÀà¿ÉÒÔÖ±½ÓÊ¹ÓÃOStreamShared
+        /// è®©å­ç±»å¯ä»¥ç›´æ¥ä½¿ç”¨OStreamShared
         using OStreamShared = CoreTools::OStreamShared;
 
     public:
@@ -62,8 +62,8 @@ namespace CoreTools
         void PrintRunUnitTest() final;
 
     protected:
-        /// AssertÓÃÀ´²âÊÔ¶ÔÏóµÄÖµÊÇ·ñ·ûºÏÔ¤ÆÚ¡£
-        /// ErrorÓÃÀ´²âÊÔÊÇ·ñÕıÈ·Å×³öÒì³£¡£
+        /// Assertç”¨æ¥æµ‹è¯•å¯¹è±¡çš„å€¼æ˜¯å¦ç¬¦åˆé¢„æœŸã€‚
+        /// Errorç”¨æ¥æµ‹è¯•æ˜¯å¦æ­£ç¡®æŠ›å‡ºå¼‚å¸¸ã€‚
 
         void AssertTest(bool condition,
                         const FunctionDescribed& functionDescribed,
@@ -164,7 +164,7 @@ namespace CoreTools
                                           const std::string& errorMessage = std::string{},
                                           bool failureThrow = false);
 
-        /// ²âÊÔÊÇ·ñÔÚ·¶Î§ÄÚ¡£lhs <= test <= rhs¡£
+        /// æµ‹è¯•æ˜¯å¦åœ¨èŒƒå›´å†…ã€‚lhs <= test <= rhsã€‚
         template <typename TestType, typename RangeType>
         requires(boost::has_less_equal<RangeType, TestType, bool>::value && boost::has_less_equal<TestType, RangeType, bool>::value)
         void AssertRange(const TestType& test,
@@ -319,28 +319,28 @@ namespace CoreTools
         {
             using namespace std::literals;
 
-            return "ÕıÈ·µÄÅ×³öÒì³££º"sv;
+            return "æ­£ç¡®çš„æŠ›å‡ºå¼‚å¸¸ï¼š"sv;
         }
 
         NODISCARD static constexpr std::string_view GetErrorThrowExceptionDescribe()
         {
             using namespace std::literals;
 
-            return "´íÎóµÄÅ×³öÒì³££º"sv;
+            return "é”™è¯¯çš„æŠ›å‡ºå¼‚å¸¸ï¼š"sv;
         }
 
         NODISCARD static constexpr std::string_view GetCorrectNothrowExceptionDescribe()
         {
             using namespace std::literals;
 
-            return "ÕıÈ·µÄÎ´Å×³öÒì³££º"sv;
+            return "æ­£ç¡®çš„æœªæŠ›å‡ºå¼‚å¸¸ï¼š"sv;
         }
 
         NODISCARD static constexpr std::string_view GetErrorNothrowExceptionDescribe()
         {
             using namespace std::literals;
 
-            return "´íÎóµÄÎ´Å×³öÒì³££º"sv;
+            return "é”™è¯¯çš„æœªæŠ›å‡ºå¼‚å¸¸ï¼š"sv;
         }
 
         NODISCARD static std::string GetAssertDescribed(const std::string& assertMessage, const std::string& errorMessage);

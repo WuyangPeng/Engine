@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:26)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:26)
 
 #ifndef MATHEMATICS_APPROXIMATION_HEIGHT_LINT_FIT2_H
 #define MATHEMATICS_APPROXIMATION_HEIGHT_LINT_FIT2_H
@@ -18,8 +18,8 @@
 
 namespace Mathematics
 {
-    // ×îÐ¡¶þ³ËÆ½·½ÄâºÏµ½Ïßµ½(x,f(x)) Í¨¹ýÊ¹ÓÃÔÚy·½ÏòÉÏµÄ¾àÀë²âÁ¿Êý¾Ý¡£
-    // ÓÉ´Ë²úÉúµÄÏßÓÉ y = A * x + B.
+    // æœ€å°äºŒä¹˜å¹³æ–¹æ‹Ÿåˆåˆ°çº¿åˆ°(x,f(x)) é€šè¿‡ä½¿ç”¨åœ¨yæ–¹å‘ä¸Šçš„è·ç¦»æµ‹é‡æ•°æ®ã€‚
+    // ç”±æ­¤äº§ç”Ÿçš„çº¿ç”± y = A * x + B.
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE HeightLineFit2 final
     {
@@ -36,9 +36,9 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        // Èç¹ûÔÚ¶¨ÒåAºÍBÊÇ£¨¼¸ºõ£©ÆæÒìÏßÐÔ·½³Ì×é2x2µÄÏµÊý¾ØÕó¡£
-        // ·µ»ØÖµÊÇfalse¡£
-        // ÔÚÕâÖÖÇé¿öÏÂ£¬·ÃÎÊAºÍB»áÅ×³öÒì³£¡£
+        // å¦‚æžœåœ¨å®šä¹‰Aå’ŒBæ˜¯ï¼ˆå‡ ä¹Žï¼‰å¥‡å¼‚çº¿æ€§æ–¹ç¨‹ç»„2x2çš„ç³»æ•°çŸ©é˜µã€‚
+        // è¿”å›žå€¼æ˜¯falseã€‚
+        // åœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œè®¿é—®Aå’ŒBä¼šæŠ›å‡ºå¼‚å¸¸ã€‚
         NODISCARD bool IsFit2Success() const noexcept;
 
         NODISCARD Real GetCoeffA() const;

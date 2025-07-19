@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/02 13:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/02 13:19)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_ROW_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_ROW_H
@@ -76,7 +76,7 @@ namespace CoreTools
         NODISCARD IntVector3Container GetIntVector3Array(const String& field) const;
         NODISCARD IntVector4Container GetIntVector4Array(const String& field) const;
 
-        /// StringCastEnumĞèÒªÌØ»¯£¬ÕâÀïÃ»ÓĞÌá¹©¶¨Òå¡£
+        /// StringCastEnuméœ€è¦ç‰¹åŒ–ï¼Œè¿™é‡Œæ²¡æœ‰æä¾›å®šä¹‰ã€‚
         template <typename E>
         requires(std::is_enum_v<E>)
         NODISCARD E StringCastEnum(const String& describe) const;

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:13)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:13)
 
 #ifndef MATHEMATICS_APPROXIMATION_GREAT_CIRCLE_FIT3_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_GREAT_CIRCLE_FIT3_ACHIEVE_H
@@ -45,7 +45,7 @@ Mathematics::Vector3<Real> Mathematics::GreatCircleFit3<Real>::GetNormal() noexc
 template <typename Real>
 void Mathematics::GreatCircleFit3<Real>::Calculate(const Points& points)
 {
-    // ¼ÆËãÏòÁ¿µÄĞ­·½²î¾ØÕó¡£
+    // è®¡ç®—å‘é‡çš„åæ–¹å·®çŸ©é˜µã€‚
     auto sumXX = MathType::GetValue(0);
     auto sumXY = MathType::GetValue(0);
     auto sumXZ = MathType::GetValue(0);
@@ -71,7 +71,7 @@ void Mathematics::GreatCircleFit3<Real>::Calculate(const Points& points)
     sumYZ /= numPoints;
     sumZZ /= numPoints;
 
-    // ½¨Á¢ eigensolver.
+    // å»ºç«‹ eigensolver.
     EigenDecomposition<Real> eigenSystem{ 3 };
     eigenSystem(0, 0) = sumXX;
     eigenSystem(0, 1) = sumXY;
@@ -83,10 +83,10 @@ void Mathematics::GreatCircleFit3<Real>::Calculate(const Points& points)
     eigenSystem(2, 1) = eigenSystem(1, 2);
     eigenSystem(2, 2) = sumZZ;
 
-    // ¼ÆËãÌØÕ÷Öµ£¬×îĞ¡µÄÌØÕ÷Öµ´¦ÓÚ×îºóµÄÎ»ÖÃ¡£
+    // è®¡ç®—ç‰¹å¾å€¼ï¼Œæœ€å°çš„ç‰¹å¾å€¼å¤„äºæœ€åçš„ä½ç½®ã€‚
     eigenSystem.Solve(false);
 
-    // ×î¼ÑÄâºÏ´óÔ²µ¥Î»³¤¶È·½Ïò¡£
+    // æœ€ä½³æ‹Ÿåˆå¤§åœ†å•ä½é•¿åº¦æ–¹å‘ã€‚
     normal = eigenSystem.GetEigenvector3(2);
 }
 

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:19)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DIVISION_MULTIPLE_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_DIVISION_MULTIPLE_DETAIL_H
@@ -44,11 +44,11 @@ Mathematics::IntegerDivisionMultiple<N>::IntegerDivisionMultiple(const IntegerDa
 template <int N>
 void Mathematics::IntegerDivisionMultiple<N>::Adjust()
 {
-    // ÕıÔò»¯£¬Ê¹ÉÌÓĞÁ¼ºÃ¹À¼Æ¡£
-    // ·Ö×Ó×ã¹»´óÊÇ¿ÉÄÜµÄ£¬ÕıÔò»¯µ÷Õûµ¼ÖÂadjust * numerator³Ë»ı¼ÆËãÒç³ö¡£
-    // ¶ÏÑÔÔÚÕâÖÖÇé¿öÏÂ½«Ê§°Ü¡£ÀíÏëÇé¿öÏÂ£¬Òç³ö½«±»ÔÊĞí£¬
-    // ²¢ÔÚÒç³öÎ»ÖÃµÄÎ»±äÎªÔÚËùÊö·Ö¸îËã·¨µÄ·Ö×ÓµÄµÚÒ»¸öÊı×Ö¡£
-    // ËäÈ»Õâ½«ĞèÒª»ìºÏÕûÊı<N>ºÍÕûÊı<N+1>¡£
+    // æ­£åˆ™åŒ–ï¼Œä½¿å•†æœ‰è‰¯å¥½ä¼°è®¡ã€‚
+    // åˆ†å­è¶³å¤Ÿå¤§æ˜¯å¯èƒ½çš„ï¼Œæ­£åˆ™åŒ–è°ƒæ•´å¯¼è‡´adjust * numeratorä¹˜ç§¯è®¡ç®—æº¢å‡ºã€‚
+    // æ–­è¨€åœ¨è¿™ç§æƒ…å†µä¸‹å°†å¤±è´¥ã€‚ç†æƒ³æƒ…å†µä¸‹ï¼Œæº¢å‡ºå°†è¢«å…è®¸ï¼Œ
+    // å¹¶åœ¨æº¢å‡ºä½ç½®çš„ä½å˜ä¸ºåœ¨æ‰€è¿°åˆ†å‰²ç®—æ³•çš„åˆ†å­çš„ç¬¬ä¸€ä¸ªæ•°å­—ã€‚
+    // è™½ç„¶è¿™å°†éœ€è¦æ··åˆæ•´æ•°<N>å’Œæ•´æ•°<N+1>ã€‚
     const IntegerDataAnalysisType denominatorAnalysis{ absDenominator };
     denominatorInit = denominatorAnalysis.GetLeadingBlock();
     const auto leadingDigit = denominatorAnalysis.ToInt(denominatorInit);
@@ -66,17 +66,17 @@ void Mathematics::IntegerDivisionMultiple<N>::Calculate()
 {
     const IntegerDataAnalysisType adjustDenominatorAnalysis{ adjustDenominator };
 
-    MATHEMATICS_ASSERTION_1(adjustDenominatorAnalysis.GetLeadingBlock() == denominatorInit, "Òì³£µÄ½á¹û\n");
+    MATHEMATICS_ASSERTION_1(adjustDenominatorAnalysis.GetLeadingBlock() == denominatorInit, "å¼‚å¸¸çš„ç»“æœ\n");
 
-    // »ñÈ¡·ÖÄ¸Á½¸ö×îÏÈµÄ¡°Êı×Ö¡±¡£
+    // è·å–åˆ†æ¯ä¸¤ä¸ªæœ€å…ˆçš„â€œæ•°å­—â€ã€‚
     firstDigit = adjustDenominatorAnalysis.ToUnsignedInt(denominatorInit);
     secondDigit = adjustDenominatorAnalysis.ToUnsignedInt(denominatorInit - 1);
 
-    // È·¶¨ËùĞèµÄ×î´ó³ı·¨µÄ²½Öè
+    // ç¡®å®šæ‰€éœ€çš„æœ€å¤§é™¤æ³•çš„æ­¥éª¤
     const IntegerDataAnalysisType adjustNumeratorAnalysis(adjustNumerator);
     numeratorInit = adjustNumeratorAnalysis.GetLeadingBlock();
 
-    MATHEMATICS_ASSERTION_1(denominatorInit <= numeratorInit, "Òì³£µÄ½á¹û\n");
+    MATHEMATICS_ASSERTION_1(denominatorInit <= numeratorInit, "å¼‚å¸¸çš„ç»“æœ\n");
 
     auto quotientInit = 0;
     if (numeratorInit != denominatorInit)
@@ -91,12 +91,12 @@ void Mathematics::IntegerDivisionMultiple<N>::Calculate()
 
         if (adjustDenominator <= adjustNumerator)
         {
-            // ×¼±¸ÔÙÒ»´ÎµÄ³ı·¨²½Öè¡£
+            // å‡†å¤‡å†ä¸€æ¬¡çš„é™¤æ³•æ­¥éª¤ã€‚
             numeratorInit = adjustNumeratorAnalysis.GetLeadingBlock();
         }
         else
         {
-            // ÓàÊı±È³ıÊıĞ¡£¬Íê³É³ı·¨¡£
+            // ä½™æ•°æ¯”é™¤æ•°å°ï¼Œå®Œæˆé™¤æ³•ã€‚
             break;
         }
     }
@@ -108,7 +108,7 @@ void Mathematics::IntegerDivisionMultiple<N>::Calculate(int quotientInit)
     const IntegerDataAnalysisType adjustDenominatorAnalysis{ adjustDenominator };
     const IntegerDataAnalysisType adjustNumeratorAnalysis{ adjustNumerator };
 
-    // »ñÈ¡ÓàÊı×îÏÈµÄÈı¸öË÷Òı
+    // è·å–ä½™æ•°æœ€å…ˆçš„ä¸‰ä¸ªç´¢å¼•
     auto numerator0 = 0u;
     auto numerator1 = 0u;
     auto numerator2 = 0u;
@@ -125,12 +125,12 @@ void Mathematics::IntegerDivisionMultiple<N>::Calculate(int quotientInit)
         numerator2 = adjustNumeratorAnalysis.ToUnsignedInt(numeratorInit);
     }
 
-    // ¹À¼ÆÉÌµÄÖµ
+    // ä¼°è®¡å•†çš„å€¼
     const auto numeratorFrontTwo = (numerator0 << 16) | numerator1;
     auto quotientHat = (numerator0 != firstDigit ? numeratorFrontTwo / firstDigit : low);
     const auto denominatorProduct = quotientHat * firstDigit;
 
-    MATHEMATICS_ASSERTION_1(denominatorProduct <= numeratorFrontTwo, "Òì³£µÄ½á¹û\n");
+    MATHEMATICS_ASSERTION_1(denominatorProduct <= numeratorFrontTwo, "å¼‚å¸¸çš„ç»“æœ\n");
 
     remainderHat = numeratorFrontTwo - denominatorProduct;
     if (integerCarry * remainderHat + numerator2 < secondDigit * quotientHat)
@@ -139,21 +139,21 @@ void Mathematics::IntegerDivisionMultiple<N>::Calculate(int quotientInit)
         remainderHat += firstDigit;
         if (integerCarry * remainderHat + numerator2 < secondDigit * quotientHat && (quotientHat & low) != 1)
         {
-            // Èç¹û½øÈë¸Ã¿é£¬ÎÒÃÇ¶Ô³ı·¨¾ßÓĞÍêÈ«ÏàÍ¬µÄÉÌ¡£
-            // ´úÂëµ÷Õû¿éÒÔºóÒ²²»»á·¢Éú¡£
+            // å¦‚æœè¿›å…¥è¯¥å—ï¼Œæˆ‘ä»¬å¯¹é™¤æ³•å…·æœ‰å®Œå…¨ç›¸åŒçš„å•†ã€‚
+            // ä»£ç è°ƒæ•´å—ä»¥åä¹Ÿä¸ä¼šå‘ç”Ÿã€‚
             --quotientHat;
             remainderHat += firstDigit;
         }
     }
 
-    MATHEMATICS_ASSERTION_1((quotientHat & low) != 0, "Òì³£µÄ½á¹û");
+    MATHEMATICS_ASSERTION_1((quotientHat & low) != 0, "å¼‚å¸¸çš„ç»“æœ");
 
-    // ¼ÆËã³ı·¨µÄÃ¿Ò»²½µÄÉÌ¡£
+    // è®¡ç®—é™¤æ³•çš„æ¯ä¸€æ­¥çš„å•†ã€‚
     IntegerDataType localQuotient;
     IntegerDataAmend<N> localQuotientAmend{ localQuotient };
     localQuotientAmend.FromUnsignedInt(quotientInit, quotientHat);
 
-    // ¼ÆËãÓàÊı¡£
+    // è®¡ç®—ä½™æ•°ã€‚
     IntegerMultiplication<N> multiplication{ localQuotient, adjustDenominator };
     const auto product = multiplication.GetMultiplication();
 
@@ -165,11 +165,11 @@ void Mathematics::IntegerDivisionMultiple<N>::Calculate(int quotientInit)
         --quotientHat;
         adjustNumeratorOperator += adjustDenominator;
 
-        // ÕıÊı»òÁã
-        MATHEMATICS_ASSERTION_1(adjustNumerator.GetSign() == NumericalValueSymbol::Positive, "Òì³£µÄ½á¹û\n");
+        // æ­£æ•°æˆ–é›¶
+        MATHEMATICS_ASSERTION_1(adjustNumerator.GetSign() == NumericalValueSymbol::Positive, "å¼‚å¸¸çš„ç»“æœ\n");
     }
 
-    // ÉèÖÃÉÌµÄÎ»¡£
+    // è®¾ç½®å•†çš„ä½ã€‚
     IntegerDataAmend<N> quotientAmend{ quotient };
     quotientAmend.FromUnsignedInt(quotientInit, quotientHat);
 }
@@ -177,7 +177,7 @@ void Mathematics::IntegerDivisionMultiple<N>::Calculate(int quotientInit)
 template <int N>
 void Mathematics::IntegerDivisionMultiple<N>::Recover()
 {
-    // ·´ÕıÔò»¯ÓàÊı
+    // åæ­£åˆ™åŒ–ä½™æ•°
     if (IntegerDataType{ 0 } < adjustNumerator)
     {
         auto divisor = boost::numeric_cast<uint16_t>(adjust & low);
@@ -185,7 +185,7 @@ void Mathematics::IntegerDivisionMultiple<N>::Recover()
         const IntegerDivisionModulo<N> divisionSingle{ adjustNumerator, IntegerDataType{ divisor } };
         remainder = divisionSingle.GetQuotient();
 
-        MATHEMATICS_ASSERTION_1(divisionSingle.GetRemainder().IsZero(), "ÓàÊı±ØĞëÎªÁã");
+        MATHEMATICS_ASSERTION_1(divisionSingle.GetRemainder().IsZero(), "ä½™æ•°å¿…é¡»ä¸ºé›¶");
     }
     else
     {

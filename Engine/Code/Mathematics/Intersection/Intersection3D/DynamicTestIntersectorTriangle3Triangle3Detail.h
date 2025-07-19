@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:18)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:18)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_TRIANGLE3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_TRIANGLE3_TRIANGLE3_DETAIL_H
@@ -71,10 +71,10 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::Test()
     const auto velocity1 = this->GetRhsVelocity();
     auto tFirst = MathType::GetValue(0);
 
-    // Ïà¶ÔÓÚÈı½ÇĞÎ0µÄËÙ¶È¡£
+    // ç›¸å¯¹äºä¸‰è§’å½¢0çš„é€Ÿåº¦ã€‚
     auto relVelocity = velocity1 - velocity0;
 
-    // ¼ÆËãÈı½ÇĞÎ0µÄ±ßÔµºÍ·¨Ïß·½Ïò¡£
+    // è®¡ç®—ä¸‰è§’å½¢0çš„è¾¹ç¼˜å’Œæ³•çº¿æ–¹å‘ã€‚
     using TriangleType = std::array<Vector3Type, 3>;
     TriangleType edge0{ triangle0.GetVertex(1) - triangle0.GetVertex(0),
                         triangle0.GetVertex(2) - triangle0.GetVertex(1),
@@ -90,7 +90,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::Test()
         return;
     }
 
-    // ¼ÆËãÈı½ÇĞÎ1µÄ±ßÔµºÍ·¨Ïß·½Ïò¡£
+    // è®¡ç®—ä¸‰è§’å½¢1çš„è¾¹ç¼˜å’Œæ³•çº¿æ–¹å‘ã€‚
     TriangleType edge1{ triangle1.GetVertex(1) - triangle1.GetVertex(0),
                         triangle1.GetVertex(2) - triangle1.GetVertex(1),
                         triangle1.GetVertex(0) - triangle1.GetVertex(2) };
@@ -99,9 +99,9 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::Test()
 
     if (MathType::FAbs(Vector3ToolsType::DotProduct(normal0, normal1)) < MathType::GetValue(1) - MathType::GetZeroTolerance())
     {
-        // Èı½ÇĞÎ²»Æ½ĞĞ¡£
+        // ä¸‰è§’å½¢ä¸å¹³è¡Œã€‚
 
-        // ·½Ïò M.
+        // æ–¹å‘ M.
 
         intersectInfo = TestOverlap(normal1, tMax, relVelocity);
         tFirst = intersectInfo.tFirst;
@@ -111,7 +111,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::Test()
             return;
         }
 
-        // ·½Ïò E[i0]xF[i1].
+        // æ–¹å‘ E[i0]xF[i1].
         for (auto i1 = 0; i1 < 3; ++i1)
         {
             for (auto i0 = 0; i0 < 3; ++i0)
@@ -129,9 +129,9 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::Test()
         }
         this->SetIntersectionType(IntersectionType::Other);
     }
-    else  //  Èı½ÇĞÎÊÇÆ½ĞĞµÄ£¨Êµ¼ÊÉÏÊÇ¹²ÃæµÄ£©
+    else  //  ä¸‰è§’å½¢æ˜¯å¹³è¡Œçš„ï¼ˆå®é™…ä¸Šæ˜¯å…±é¢çš„ï¼‰
     {
-        // ·½Ïò NxE[i0].
+        // æ–¹å‘ NxE[i0].
         for (auto i = 0; i < 3; ++i)
         {
             const auto dir = Vector3ToolsType::UnitCrossProduct(normal0, edge0.at(i));
@@ -145,7 +145,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::Test()
             }
         }
 
-        // ·½Ïò NxF[i1]
+        // æ–¹å‘ NxF[i1]
         for (auto i = 0; i < 3; ++i)
         {
             const auto dir = Vector3ToolsType::UnitCrossProduct(normal1, edge1.at(i));
@@ -200,88 +200,88 @@ typename Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::IntersectI
 template <typename Real>
 typename Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::IntersectInfo Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::TestOverlap(Real tMax, Real speed, Real uMin, Real uMax, Real vMin, Real vMax) noexcept
 {
-    // µÈËÙ·ÖÀëÖá²âÊÔ¡£
+    // ç­‰é€Ÿåˆ†ç¦»è½´æµ‹è¯•ã€‚
 
     IntersectInfo intersectInfo{};
 
-    if (vMax < uMin)  // VÔÚUµÄ×ó²à
+    if (vMax < uMin)  // Våœ¨Uçš„å·¦ä¾§
     {
-        if (speed <= MathType::GetValue(0))  // V´ÓUÒÆ¿ª
+        if (speed <= MathType::GetValue(0))  // Vä»Uç§»å¼€
         {
             return intersectInfo;
         }
 
-        // ²éÕÒ¸ÃÖáÉÏµÄÊ×´Î½Ó´¥¡£
+        // æŸ¥æ‰¾è¯¥è½´ä¸Šçš„é¦–æ¬¡æ¥è§¦ã€‚
         auto t = (uMin - vMax) / speed;
         if (intersectInfo.tFirst < t)
         {
             intersectInfo.tFirst = t;
         }
 
-        // ¿ìËÙÍË³ö£ºÔÚËùĞèµÄÊ±¼ä¼ä¸ôºóÏà½»¡£
+        // å¿«é€Ÿé€€å‡ºï¼šåœ¨æ‰€éœ€çš„æ—¶é—´é—´éš”åç›¸äº¤ã€‚
         if (tMax < intersectInfo.tFirst)
         {
             return intersectInfo;
         }
 
-        // ²éÕÒ¸ÃÖáÉÏµÄ×îºóÒ»´Î½Ó´¥Ê±¼ä¡£
+        // æŸ¥æ‰¾è¯¥è½´ä¸Šçš„æœ€åä¸€æ¬¡æ¥è§¦æ—¶é—´ã€‚
         t = (uMax - vMin) / speed;
         if (t < intersectInfo.tLast)
         {
             intersectInfo.tLast = t;
         }
 
-        // ¿ìËÙÍË³ö£ºÔÚËùĞèÊ±¼ä¼ä¸ôÖ®Ç°Ïà½»¡£
+        // å¿«é€Ÿé€€å‡ºï¼šåœ¨æ‰€éœ€æ—¶é—´é—´éš”ä¹‹å‰ç›¸äº¤ã€‚
         if (intersectInfo.tLast < intersectInfo.tFirst)
         {
             return intersectInfo;
         }
     }
-    else if (uMax < vMin)  // VÔÚUµÄÓÒ±ß
+    else if (uMax < vMin)  // Våœ¨Uçš„å³è¾¹
     {
-        if (MathType::GetValue(0) <= speed)  // V´ÓUÒÆ¿ª
+        if (MathType::GetValue(0) <= speed)  // Vä»Uç§»å¼€
         {
             return intersectInfo;
         }
 
-        // ²éÕÒ¸ÃÖáÉÏµÄÊ×´Î½Ó´¥¡£
+        // æŸ¥æ‰¾è¯¥è½´ä¸Šçš„é¦–æ¬¡æ¥è§¦ã€‚
         auto t = (uMax - vMin) / speed;
         if (intersectInfo.tFirst < t)
         {
             intersectInfo.tFirst = t;
         }
 
-        // ¿ìËÙÍË³ö£ºÔÚËùĞèµÄÊ±¼ä¼ä¸ôºóÏàÒå¡£
+        // å¿«é€Ÿé€€å‡ºï¼šåœ¨æ‰€éœ€çš„æ—¶é—´é—´éš”åç›¸ä¹‰ã€‚
         if (tMax < intersectInfo.tFirst)
         {
             return intersectInfo;
         }
 
-        // ²éÕÒ¸ÃÖáÉÏµÄ×îºóÒ»´Î½Ó´¥Ê±¼ä¡£
+        // æŸ¥æ‰¾è¯¥è½´ä¸Šçš„æœ€åä¸€æ¬¡æ¥è§¦æ—¶é—´ã€‚
         t = (uMin - vMax) / speed;
         if (t < intersectInfo.tLast)
         {
             intersectInfo.tLast = t;
         }
 
-        // ¿ìËÙÍË³ö£ºÔÚËùĞèÊ±¼ä¼ä¸ôÖ®Ç°Ïà½»¡£
+        // å¿«é€Ÿé€€å‡ºï¼šåœ¨æ‰€éœ€æ—¶é—´é—´éš”ä¹‹å‰ç›¸äº¤ã€‚
         if (intersectInfo.tLast < intersectInfo.tFirst)
         {
             return intersectInfo;
         }
     }
-    else  // ÖØµş¼ä¸ôÉÏµÄVºÍU
+    else  // é‡å é—´éš”ä¸Šçš„Vå’ŒU
     {
         if (MathType::GetValue(0) < speed)
         {
-            // ²éÕÒ¸ÃÖáÉÏµÄ×îºóÒ»´Î½Ó´¥Ê±¼ä¡£
+            // æŸ¥æ‰¾è¯¥è½´ä¸Šçš„æœ€åä¸€æ¬¡æ¥è§¦æ—¶é—´ã€‚
             auto t = (uMax - vMin) / speed;
             if (t < intersectInfo.tLast)
             {
                 intersectInfo.tLast = t;
             }
 
-            // ¿ìËÙÍË³ö£ºÔÚËùĞèÊ±¼ä¼ä¸ôÖ®Ç°Ïà½»¡£
+            // å¿«é€Ÿé€€å‡ºï¼šåœ¨æ‰€éœ€æ—¶é—´é—´éš”ä¹‹å‰ç›¸äº¤ã€‚
             if (intersectInfo.tLast < intersectInfo.tFirst)
             {
                 return intersectInfo;
@@ -289,14 +289,14 @@ typename Mathematics::DynamicTestIntersectorTriangle3Triangle3<Real>::IntersectI
         }
         else if (speed < MathType::GetValue(0))
         {
-            // F²éÕÒ¸ÃÖáÉÏµÄ×îºóÒ»´Î½Ó´¥Ê±¼ä¡£
+            // FæŸ¥æ‰¾è¯¥è½´ä¸Šçš„æœ€åä¸€æ¬¡æ¥è§¦æ—¶é—´ã€‚
             auto t = (uMin - vMax) / speed;
             if (t < intersectInfo.tLast)
             {
                 intersectInfo.tLast = t;
             }
 
-            // ¿ìËÙÍË³ö£ºÔÚËùĞèÊ±¼ä¼ä¸ôÖ®Ç°Ïà½»¡£
+            // å¿«é€Ÿé€€å‡ºï¼šåœ¨æ‰€éœ€æ—¶é—´é—´éš”ä¹‹å‰ç›¸äº¤ã€‚
             if (intersectInfo.tLast < intersectInfo.tFirst)
             {
                 return intersectInfo;

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #include "Character.h"
 #include "CharacterContainerDetail.h"
@@ -27,12 +27,12 @@ AncientBooks::CharacterContainer::CharacterContainer(const CSVContent& csvConten
 
 void AncientBooks::CharacterContainer::Parsing(const CSVContent& csvContent)
 {
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("character±í¿ªÊ¼ÔØÈë¡­¡­"));
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("characterè¡¨å¼€å§‹è½½å…¥â€¦â€¦"));
 
     Load(csvContent);
     Unique();
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("character±í½áÊøÔØÈë¡­¡­"));
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("characterè¡¨ç»“æŸè½½å…¥â€¦â€¦"));
 }
 
 void AncientBooks::CharacterContainer::Load(const CSVContent& csvContent)
@@ -57,7 +57,7 @@ void AncientBooks::CharacterContainer::Unique()
     const auto iter = std::ranges::unique(character, [](const auto& lhs, const auto& rhs) noexcept {
         if((*lhs).GetKey() == (*rhs).GetKey())
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, User, SYSTEM_TEXT("character±í´æÔÚÖØ¸´Ö÷¼ü£¬key = "), (*lhs).GetKey(), SYSTEM_TEXT("¡£\n"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, User, SYSTEM_TEXT("characterè¡¨å­˜åœ¨é‡å¤ä¸»é”®ï¼Œkey = "), (*lhs).GetKey(), SYSTEM_TEXT("ã€‚\n"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
 
             return true;
         }
@@ -99,7 +99,7 @@ AncientBooks::CharacterContainer::ConstCharacterSharedPtr AncientBooks::Characte
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("character±íÎ´ÕÒµ½key = "s) + System::ToString(key) + SYSTEM_TEXT("µÄÅäÖÃĞÅÏ¢¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨æœªæ‰¾åˆ°key = "s) + System::ToString(key) + SYSTEM_TEXT("çš„é…ç½®ä¿¡æ¯ã€‚"s))
     }
 }
 

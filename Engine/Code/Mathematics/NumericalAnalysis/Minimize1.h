@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 13:45)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 13:45)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZE1_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZE1_H
@@ -24,32 +24,32 @@ namespace Mathematics
 
         using ClassType = Minimize1<Real, UserDataType>;
 
-        // ×îĞ¡»¯µÄº¯ÊıÀàĞÍ£ºresult = f(t,userData)¡£
-        // userDataÊÇÍ¨¹ı¹¹Ôìº¯Êı»òSetUserData(*)ÉèÖÃµÄÖ¸Õë¡£
-        // ÕâÊ¹Äú¿ÉÒÔÍ¨¹ıÒ»¸öÀàµÄ¾²Ì¬º¯Êı·â×°µ÷ÓÃÒ»¸ö·Ç¾²Ì¬³ÉÔ±º¯Êı£¬
-        // ÔÚÕâÖÖÇé¿öÏÂ£¬ÓÃ»§Êı¾İÊÇÒ»¸öÖ¸ÏòÀà¶ÔÏó¡£
-        // µ±È»£¬µ±ÄãĞèÒªËüÀ´È·±£¡°function¡±ÓµÓĞËùÓĞ¼ÆËãÆäËùĞèµÄĞÅÏ¢£¬
-        // ÓÃ»§Êı¾İ¿ÉÒÔÊÇ¸´ÔÓµÄ¡£
+        // æœ€å°åŒ–çš„å‡½æ•°ç±»å‹ï¼šresult = f(t,userData)ã€‚
+        // userDataæ˜¯é€šè¿‡æ„é€ å‡½æ•°æˆ–SetUserData(*)è®¾ç½®çš„æŒ‡é’ˆã€‚
+        // è¿™ä½¿æ‚¨å¯ä»¥é€šè¿‡ä¸€ä¸ªç±»çš„é™æ€å‡½æ•°å°è£…è°ƒç”¨ä¸€ä¸ªéé™æ€æˆå‘˜å‡½æ•°ï¼Œ
+        // åœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œç”¨æˆ·æ•°æ®æ˜¯ä¸€ä¸ªæŒ‡å‘ç±»å¯¹è±¡ã€‚
+        // å½“ç„¶ï¼Œå½“ä½ éœ€è¦å®ƒæ¥ç¡®ä¿â€œfunctionâ€æ‹¥æœ‰æ‰€æœ‰è®¡ç®—å…¶æ‰€éœ€çš„ä¿¡æ¯ï¼Œ
+        // ç”¨æˆ·æ•°æ®å¯ä»¥æ˜¯å¤æ‚çš„ã€‚
         using Function = Real (*)(Real, const UserDataType*);
         using Minimize1DataType = Minimize1Data<Real>;
         using MathType = Math<Real>;
 
     public:
-        // Çø¼ä[t0,t1]Ìá¹©¸øGetMinimum(Real,Real,Real)
-        // ÊÇÍ¨¹ı¼ì²é×ÓÇø¼ä½øĞĞ´¦Àí¡£
-        // ÔÚÃ¿¸ö×ÓÇø¼ä[a,b]£¬Öµf0 = f(a)£¬f1 = f((a+b)/2)£¬
-        // ºÍf2 = f(b)µÄ¼ì²é¡£
-        // Èç¹û{f0,f1,f2}ÊÇµ¥µ÷µÄ£¬È»ºó°´[a,b]±»Ï¸·ÖºÍ´¦Àí¡£
-        // µİ¹éµÄ×î´óÉî¶ÈÊÇÍ¨¹ı'maxLevel'ÏŞ¶¨¡£
-        // Èç¹û{f0,f1,f2}²»ÊÇµ¥µ÷µÄ£¬Ôò²úÉúÏÂÊöÁ½ÖÖÇé¿ö¡£
-        // Ê×ÏÈ£¬Èç¹ûf1 = min{f0,f1,f2}£¬Ôò{f0,f1,f2}±»±íÊ¾Îª
-        // ¡°À¨ºÅµÄ×îĞ¡Öµ¡±ºÍ
-        // GetBracketedMinimum(*)±»µ÷ÓÃÒÔ¶¨Î»º¯Êı×îĞ¡Öµ¡£
-        // ¸Ã·½·¨Ê¹ÓÃ¶ş·ÖµÄÒ»ÖÖĞÎÊ½±»³ÆÎª¡°Å×ÎïÏß²åÖµ¡±
-        // ¶şµÈ·Ö²½½øµÄ×î´óÊıÄ¿ÊÇ¡°maxBracket'¡£
-        // Æä´Î£¬Èç¹ûÎªf1 = max{f0,f1,f2}£¬
-        // Ôò{f0,f1,f2}ÎªÀ¨ºÅ×î´óÖµ¡£
-        // ×îĞ¡ËÑË÷¼ÌĞøµİ¹éÈçÖ®Ç°ÔÚ[a,(a+b)/2] ºÍ [(a+b)/2,b]ÉÏ¡£
+        // åŒºé—´[t0,t1]æä¾›ç»™GetMinimum(Real,Real,Real)
+        // æ˜¯é€šè¿‡æ£€æŸ¥å­åŒºé—´è¿›è¡Œå¤„ç†ã€‚
+        // åœ¨æ¯ä¸ªå­åŒºé—´[a,b]ï¼Œå€¼f0 = f(a)ï¼Œf1 = f((a+b)/2)ï¼Œ
+        // å’Œf2 = f(b)çš„æ£€æŸ¥ã€‚
+        // å¦‚æœ{f0,f1,f2}æ˜¯å•è°ƒçš„ï¼Œç„¶åæŒ‰[a,b]è¢«ç»†åˆ†å’Œå¤„ç†ã€‚
+        // é€’å½’çš„æœ€å¤§æ·±åº¦æ˜¯é€šè¿‡'maxLevel'é™å®šã€‚
+        // å¦‚æœ{f0,f1,f2}ä¸æ˜¯å•è°ƒçš„ï¼Œåˆ™äº§ç”Ÿä¸‹è¿°ä¸¤ç§æƒ…å†µã€‚
+        // é¦–å…ˆï¼Œå¦‚æœf1 = min{f0,f1,f2}ï¼Œåˆ™{f0,f1,f2}è¢«è¡¨ç¤ºä¸º
+        // â€œæ‹¬å·çš„æœ€å°å€¼â€å’Œ
+        // GetBracketedMinimum(*)è¢«è°ƒç”¨ä»¥å®šä½å‡½æ•°æœ€å°å€¼ã€‚
+        // è¯¥æ–¹æ³•ä½¿ç”¨äºŒåˆ†çš„ä¸€ç§å½¢å¼è¢«ç§°ä¸ºâ€œæŠ›ç‰©çº¿æ’å€¼â€
+        // äºŒç­‰åˆ†æ­¥è¿›çš„æœ€å¤§æ•°ç›®æ˜¯â€œmaxBracket'ã€‚
+        // å…¶æ¬¡ï¼Œå¦‚æœä¸ºf1 = max{f0,f1,f2}ï¼Œ
+        // åˆ™{f0,f1,f2}ä¸ºæ‹¬å·æœ€å¤§å€¼ã€‚
+        // æœ€å°æœç´¢ç»§ç»­é€’å½’å¦‚ä¹‹å‰åœ¨[a,(a+b)/2] å’Œ [(a+b)/2,b]ä¸Šã€‚
         Minimize1(Function function, int maxLevel, int maxBracket, const UserDataType* userData) noexcept;
 
         CLASS_INVARIANT_DECLARE;
@@ -57,21 +57,21 @@ namespace Mathematics
         void SetUserData(const UserDataType* newUserData) noexcept;
         NODISCARD const UserDataType* GetUserData() const noexcept;
 
-        // ËÑË÷'function'µÄ×îĞ¡µÄÇø¼ä[t0,t1]Ê¹ÓÃ
-        // ¡°tInitial¡±Îª³õÊ¼²Â²âÔÚ'function'Öµ¡£
-        // ×îĞ¡µÄÎ»ÖÃÎª'tMin'ºÍ×îĞ¡µÄÖµÊÇ'fMin'¡£
-        // ·µ»ØµÄµÚÒ»²¿·ÖÎªtMinºÍµÚ¶ş²¿·ÖÎªfMin
+        // æœç´¢'function'çš„æœ€å°çš„åŒºé—´[t0,t1]ä½¿ç”¨
+        // â€œtInitialâ€ä¸ºåˆå§‹çŒœæµ‹åœ¨'function'å€¼ã€‚
+        // æœ€å°çš„ä½ç½®ä¸º'tMin'å’Œæœ€å°çš„å€¼æ˜¯'fMin'ã€‚
+        // è¿”å›çš„ç¬¬ä¸€éƒ¨åˆ†ä¸ºtMinå’Œç¬¬äºŒéƒ¨åˆ†ä¸ºfMin
         NODISCARD Minimize1DataType GetMinimum(Real begin, Real end, Real initial) const;
 
     private:
-        // ÕâÊÇµ÷ÓÃµÄ¿ªÊ¼ËÑË÷Ïà¹ØµÄ[t0,tInitial]ºÍ[tInitial,t1]¡£
+        // è¿™æ˜¯è°ƒç”¨çš„å¼€å§‹æœç´¢ç›¸å…³çš„[t0,tInitial]å’Œ[tInitial,t1]ã€‚
         void CompareMinimum(Real begin, Real beginFunction, Real end, Real endFunction, int level, Minimize1DataType& minimize1Data) const;
 
     private:
-        // ÕâÊÇµ÷ÓÃµİ¹éËÑË÷ÔÚ[a,(a+b)/2] ºÍ [(a+b)/2,b]¡£
+        // è¿™æ˜¯è°ƒç”¨é€’å½’æœç´¢åœ¨[a,(a+b)/2] å’Œ [(a+b)/2,b]ã€‚
         void CompareMinimum(Real begin, Real beginFunction, Real middle, Real middleFunction, Real end, Real endFunction, int level, Minimize1DataType& minimize1Data) const;
 
-        // ÕâÊÇµ÷ÓÃµ±{f0,f1,f2}À¨ºÅÊÇ×îĞ¡ÖµÊ±¡£
+        // è¿™æ˜¯è°ƒç”¨å½“{f0,f1,f2}æ‹¬å·æ˜¯æœ€å°å€¼æ—¶ã€‚
         void CompareBracketedMinimum(Real begin,
                                      Real beginFunction,
                                      Real middle,

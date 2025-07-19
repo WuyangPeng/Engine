@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/09 12:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/09 12:19)
 
 #ifndef SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_MESSAGE_BOX_SELECTION_USE_LANGUAGE_ID_DATA_TESTING_H
 #define SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_MESSAGE_BOX_SELECTION_USE_LANGUAGE_ID_DATA_TESTING_H
@@ -14,9 +14,9 @@
 
 namespace System
 {
-    /// @brief ÏûÏ¢¿òÑ¡ÔñÄ£¿éÊ¹ÓÃÓïÑÔidµÄ²âÊÔ¡£
-    /// ÕâÀïÖ»²âÊÔhWnd²ÎÊıÎª¿ÕµÄÇé¿ö¡£
-    /// SystemWindowsTestingÓĞhWnd²ÎÊı²»Îª¿ÕÊ±µÄ²âÊÔ¡£
+    /// @brief æ¶ˆæ¯æ¡†é€‰æ‹©æ¨¡å—ä½¿ç”¨è¯­è¨€idçš„æµ‹è¯•ã€‚
+    /// è¿™é‡Œåªæµ‹è¯•hWndå‚æ•°ä¸ºç©ºçš„æƒ…å†µã€‚
+    /// SystemWindowsTestingæœ‰hWndå‚æ•°ä¸ä¸ºç©ºæ—¶çš„æµ‹è¯•ã€‚
     class MessageBoxSelectionUseLanguageIdDataTesting final : public CoreTools::UnitTest
     {
     public:

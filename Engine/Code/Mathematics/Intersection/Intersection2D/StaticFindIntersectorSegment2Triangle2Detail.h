@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 17:52)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 17:52)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT2_TRIANGLE2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT2_TRIANGLE2_DETAIL_H
@@ -65,7 +65,7 @@ void Mathematics::StaticFindIntersectorSegment2Triangle2<Real>::Find()
 
     if (line2Triangle2.GetPositive() == 3 || line2Triangle2.GetNegative() == 3)
     {
-        // ²»Ïà½»¡£
+        // ä¸ç›¸äº¤ã€‚
         quantity = 0;
         this->SetIntersectionType(IntersectionType::Empty);
     }
@@ -78,21 +78,21 @@ void Mathematics::StaticFindIntersectorSegment2Triangle2<Real>::Find()
         quantity = intr.GetNumIntersections();
         if (quantity == 2)
         {
-            // Ïß¶ÎÏà½»
+            // çº¿æ®µç›¸äº¤
             this->SetIntersectionType(IntersectionType::Segment);
             point0 = segment.GetCenterPoint() + intr.GetIntersection(0) * segment.GetDirection();
             point1 = segment.GetCenterPoint() + intr.GetIntersection(1) * segment.GetDirection();
         }
         else if (quantity == 1)
         {
-            // µãÏà½»
+            // ç‚¹ç›¸äº¤
 
             this->SetIntersectionType(IntersectionType::Point);
             point0 = segment.GetCenterPoint() + intr.GetIntersection(0) * segment.GetDirection();
         }
         else
         {
-            // ²»Ïà½»
+            // ä¸ç›¸äº¤
             this->SetIntersectionType(IntersectionType::Empty);
         }
     }
@@ -121,7 +121,7 @@ Mathematics::Vector2<Real> Mathematics::StaticFindIntersectorSegment2Triangle2<R
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ë÷ÒıÔ½½ç"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•è¶Šç•Œ"s));
     }
 }
 

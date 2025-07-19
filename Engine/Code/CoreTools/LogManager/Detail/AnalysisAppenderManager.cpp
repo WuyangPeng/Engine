@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 13:54)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 13:54)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -75,7 +75,7 @@ void CoreTools::AnalysisAppenderManager::InsertLogger(LogLevel levelType, LogFil
     if (levelType < LogLevel::Disabled || LogLevel::MaxLogLevels <= levelType ||
         !appenderManager->InsertLogger(Logger(filterType, levelType)))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("²åÈë¼ÇÂ¼Æ÷Ê§°Ü£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ’å…¥è®°å½•å™¨å¤±è´¥ï¼"))
     }
 }
 
@@ -85,7 +85,7 @@ void CoreTools::AnalysisAppenderManager::AnalysisAppender()
 
     if (!(AnalysisConsoleAppender() && AnalysisFileAppender() && AnalysisFileConfigurationAppender()))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("²åÈëÊä³öÎ»ÖÃÊ§°Ü£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ’å…¥è¾“å‡ºä½ç½®å¤±è´¥ï¼"))
     }
 }
 

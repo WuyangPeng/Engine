@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 09:55)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 09:55)
 
 #ifndef MATHEMATICS_BASE_FAST_NEGATIVE_EXP_ACHIEVE_H
 #define MATHEMATICS_BASE_FAST_NEGATIVE_EXP_ACHIEVE_H
@@ -18,7 +18,7 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::FastNegativeExp<Real>::FastNegativeExpMoreRoughCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= value, "ÊäÈëÖµ±ØĞëÔÚ·¶Î§[0,ÎŞÇî´ó)£¡\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= value, "è¾“å…¥å€¼å¿…é¡»åœ¨èŒƒå›´[0,æ— ç©·å¤§)ï¼\n");
 
     auto result = static_cast<Real>(0.0038278);
 
@@ -39,7 +39,7 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::FastNegativeExp<Real>::FastNegativeExpRoughCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= value, "ÊäÈëÖµ±ØĞëÔÚ·¶Î§[0,ÎŞÇî´ó)£¡\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= value, "è¾“å…¥å€¼å¿…é¡»åœ¨èŒƒå›´[0,æ— ç©·å¤§)ï¼\n");
 
     auto result = static_cast<Real>(0.00026695);
 
@@ -62,7 +62,7 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::FastNegativeExp<Real>::FastNegativeExpPreciseCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= value, "ÊäÈëÖµ±ØĞëÔÚ·¶Î§[0,ÎŞÇî´ó)£¡\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= value, "è¾“å…¥å€¼å¿…é¡»åœ¨èŒƒå›´[0,æ— ç©·å¤§)ï¼\n");
 
     auto result = static_cast<Real>(0.000014876);
 
@@ -88,7 +88,7 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::FastNegativeExp<Real>::FastNegativeExpMorePreciseCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= value, "ÊäÈëÖµ±ØĞëÔÚ·¶Î§[0,ÎŞÇî´ó)£¡\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= value, "è¾“å…¥å€¼å¿…é¡»åœ¨èŒƒå›´[0,æ— ç©·å¤§)ï¼\n");
 
     auto result = static_cast<Real>(0.0000006906);
 

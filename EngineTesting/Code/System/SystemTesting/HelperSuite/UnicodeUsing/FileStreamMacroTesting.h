@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/07 15:22)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/07 15:22)
 
 #ifndef SYSTEM_TESTING_HELPER_SUITE_FILE_STREAM_MACRO_TESTING_H
 #define SYSTEM_TESTING_HELPER_SUITE_FILE_STREAM_MACRO_TESTING_H
@@ -14,8 +14,8 @@
 
 namespace System
 {
-    /// @brief ÎÄ¼şÁ÷ºê²âÊÔ
-    /// ²âÊÔ×ÊÔ´ÔÚUnicodeMacroTestingÄ¿Â¼ÏÂ
+    /// @brief æ–‡ä»¶æµå®æµ‹è¯•
+    /// æµ‹è¯•èµ„æºåœ¨UnicodeMacroTestingç›®å½•ä¸‹
     class FileStreamMacroTesting final : public CoreTools::UnitTest
     {
     public:

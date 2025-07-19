@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 14:44)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 14:44)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX_H
 #define MATHEMATICS_ALGEBRA_MATRIX_H
@@ -51,13 +51,13 @@ namespace Mathematics
         using EntryTypeConstIter = typename EntryType::const_iterator;
 
     public:
-        // Èç¹û±êÖ¾ÎªMatrixFlagsZero£¬´´½¨Áã¾ØÕó£¬·ñÔò´´½¨µ¥Î»¾ØÕó¡£
+        // å¦‚æœæ ‡å¿—ä¸ºMatrixFlagsZeroï¼Œåˆ›å»ºé›¶çŸ©é˜µï¼Œå¦åˆ™åˆ›å»ºå•ä½çŸ©é˜µã€‚
         explicit constexpr Matrix(const MatrixInitType flag = MatrixInitType::Zero) noexcept
             : entry{ Create(flag) }
         {
         }
 
-        // ÊäÈë¾ØÕóÔÚĞĞrºÍÁĞc
+        // è¾“å…¥çŸ©é˜µåœ¨è¡Œrå’Œåˆ—c
         constexpr Matrix(Real member00,
                          Real member01,
                          Real member02,
@@ -94,7 +94,7 @@ namespace Mathematics
         {
         }
 
-        // ´´½¨Ò»¸ö¶Ô½Ç¾ØÕó,
+        // åˆ›å»ºä¸€ä¸ªå¯¹è§’çŸ©é˜µ,
         constexpr Matrix(Real member00, Real member11, Real member22) noexcept
             : entry{ Create(member00,
                             MathType::GetValue(0),
@@ -118,21 +118,21 @@ namespace Mathematics
 
         explicit Matrix(const Matrix3Type& rhs);
 
-        // ´´½¨¾ØÕóÀ´×ÔÊı×éÊı×Ö¡£
-        // ÊäÈëÊı×éÊÇ»ùÓÚMatrixTypeFlagsµÄÊäÈëµÄ½âÊÍ
+        // åˆ›å»ºçŸ©é˜µæ¥è‡ªæ•°ç»„æ•°å­—ã€‚
+        // è¾“å…¥æ•°ç»„æ˜¯åŸºäºMatrixTypeFlagsçš„è¾“å…¥çš„è§£é‡Š
         // MatrixTypeFlagsRow:
         // entry[0..15] = { m00,m01,m02,m03,m10,m11,m12,m13,m20,m21,m22,m23,m30,m31,m32,m33 } [row major]
         // MatrixTypeFlagsColumn:
         // entry[0..15] = { m00,m10,m20,m30,m01,m11,m21,m31,m02,m12,m22,m32,m03,m13,m23,m33 } [col major]
         Matrix(const ContainerType& entry, MatrixMajorFlags majorFlag);
 
-        // ´´½¨»ùÓÚÊäÈëÊ¸Á¿µÄ¾ØÕó¡£MatrixMajorFlags½âÊÍÎª
-        // MatrixTypeFlagsRow£ºÏòÁ¿ÊÇ¾ØÕóµÄĞĞ
-        // MatrixTypeFlagsColumn£ºÏòÁ¿ÊÇ¾ØÕóµÄÁĞ
+        // åˆ›å»ºåŸºäºè¾“å…¥çŸ¢é‡çš„çŸ©é˜µã€‚MatrixMajorFlagsè§£é‡Šä¸º
+        // MatrixTypeFlagsRowï¼šå‘é‡æ˜¯çŸ©é˜µçš„è¡Œ
+        // MatrixTypeFlagsColumnï¼šå‘é‡æ˜¯çŸ©é˜µçš„åˆ—
         Matrix(const Vector4Type& vector0, const Vector4Type& vector1, const Vector4Type& vector2, const Vector4Type& vector3, MatrixMajorFlags majorFlag);
         Matrix(const AVectorType& vector0, const AVectorType& vector1, const AVectorType& vector2, const APointType& point, MatrixMajorFlags majorFlag);
 
-        // ´´½¨Ò»¸öĞı×ª¾ØÕó£¨½Ç¶ÈÎªÕı->ÄæÊ±Õë·½Ïò£©¡£angle±ØĞëÎª»¡¶È£¬²»ÊÇ½Ç¶È¡£
+        // åˆ›å»ºä¸€ä¸ªæ—‹è½¬çŸ©é˜µï¼ˆè§’åº¦ä¸ºæ­£->é€†æ—¶é’ˆæ–¹å‘ï¼‰ã€‚angleå¿…é¡»ä¸ºå¼§åº¦ï¼Œä¸æ˜¯è§’åº¦ã€‚
         Matrix(const AVectorType& axis, Real angle);
 
         Matrix& operator=(const Matrix3Type& rhs);
@@ -142,12 +142,12 @@ namespace Mathematics
         NODISCARD EntryTypeConstIter begin() const noexcept;
         NODISCARD EntryTypeConstIter end() const noexcept;
 
-        // MatrixµÄÉÏ3x3µÄ¿é¸´ÖÆµ½Matrix3¶ÔÏó¡£
+        // Matrixçš„ä¸Š3x3çš„å—å¤åˆ¶åˆ°Matrix3å¯¹è±¡ã€‚
         NODISCARD Matrix3Type GetMatrix3() const noexcept;
 
         NODISCARD Matrix4Type GetMatrix4() const noexcept;
 
-        // ×ø±ê·ÃÎÊ
+        // åæ ‡è®¿é—®
         NODISCARD EntryType GetData() const noexcept;
         NODISCARD const Real& operator()(int row, int column) const;
         NODISCARD Real& operator()(int row, int column);
@@ -245,20 +245,20 @@ namespace Mathematics
         template <int RowIndex, int ColumnIndex>
         void Divide(Real value);
 
-        // ¾ØÕó´æ´¢ÎªĞĞÖ÷Ğò¡£½«ËüÃÇ´æ´¢ÔÚÖ¸¶¨µÄÁĞÖ÷ĞòµÄÊı×éÖĞ£¬¸ÃÊı×éÓĞ16¸öÔªËØ¡£
+        // çŸ©é˜µå­˜å‚¨ä¸ºè¡Œä¸»åºã€‚å°†å®ƒä»¬å­˜å‚¨åœ¨æŒ‡å®šçš„åˆ—ä¸»åºçš„æ•°ç»„ä¸­ï¼Œè¯¥æ•°ç»„æœ‰16ä¸ªå…ƒç´ ã€‚
         NODISCARD ContainerType GetColumnMajor() const;
 
         NODISCARD EntryType GetRowMajor() const noexcept;
         void Set(const EntryType& rowMajor) noexcept;
 
-        // ËãÊõÔËËã
+        // ç®—æœ¯è¿ç®—
         NODISCARD Matrix operator-() const noexcept;
         Matrix& operator+=(const Matrix& rhs) noexcept;
         Matrix& operator-=(const Matrix& rhs) noexcept;
         Matrix& operator*=(Real scalar) noexcept;
         Matrix& operator/=(Real scalar);
 
-        // ¾ØÕó²Ù×÷
+        // çŸ©é˜µæ“ä½œ
         void MakeZero();  // Z
         void MakeIdentity() noexcept;  // I
         void MakeDiagonal(Real member00, Real member11, Real member22) noexcept;  // D
@@ -268,36 +268,36 @@ namespace Mathematics
         NODISCARD Matrix Adjoint() const noexcept;  // M^{adj}
         NODISCARD Matrix Inverse(const Real epsilon = MathType::GetZeroTolerance()) const;  // M^{-1}
 
-        /// ·´×ªÊäÈë¾ØÕóµÄ×óÉÏ½Ç3x3¿é¡£
+        /// åè½¬è¾“å…¥çŸ©é˜µçš„å·¦ä¸Šè§’3x3å—ã€‚
         NODISCARD Matrix Invert3x3(const Real epsilon = MathType::GetZeroTolerance()) const;
 
         NODISCARD Real Determinant() const noexcept;  // det(M)
 
         Matrix& operator*=(const Matrix& rhs) noexcept;
 
-        // Ö»¶Ô×óÉÏ½Ç3x3¾ØÕó½øĞĞÔËËã
+        // åªå¯¹å·¦ä¸Šè§’3x3çŸ©é˜µè¿›è¡Œè¿ç®—
         NODISCARD Matrix TimesDiagonal(const APointType& diagonal) const noexcept;  // M * D
         NODISCARD Matrix DiagonalTimes(const APointType& diagonal) const noexcept;  // D * M
 
-        // ÊÊÓÃÓÚ×óÉÏ3x3µÄ¿é
+        // é€‚ç”¨äºå·¦ä¸Š3x3çš„å—
         void Orthonormalize() noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        // ¼ÆËãÒ»¸ö¶ş´ÎĞÍ¡£
+        // è®¡ç®—ä¸€ä¸ªäºŒæ¬¡å‹ã€‚
         // p0^T * M * p1
         NODISCARD Real QuadraticForm(const HomogeneousPointType& point0, const HomogeneousPointType& point1) const noexcept;
 
-        // Í¶Ó°¾ØÕóµ½Ò»¸öÖ¸¶¨µÄÆ½Ãæ£¬Õâ¸öÆ½Ãæ°üº¬¡°Ô­µã¡±ºÍµ¥Î»³¤¶ÈµÄ¡°ÏòÁ¿¡±¡£
+        // æŠ•å½±çŸ©é˜µåˆ°ä¸€ä¸ªæŒ‡å®šçš„å¹³é¢ï¼Œè¿™ä¸ªå¹³é¢åŒ…å«â€œåŸç‚¹â€å’Œå•ä½é•¿åº¦çš„â€œå‘é‡â€ã€‚
         void MakeObliqueProjection(const APointType& origin, const AVectorType& normal, const AVectorType& direction);
 
-        // ÉèÖÃÍ¸ÊÓÍ¶Ó°¾ØÕóµ½Ö¸¶¨µÄÆ½ÃæÉÏ£¬Õâ¸öÆ½ÃæÓĞÒ»¸ö¡°origin¡±ºÍµ¥Î»³¤¶ÈµÄ¡°normal¡±£¬¡°eye¡±ÊÇÍ¶Ó°µÄÔ­µã¡£
+        // è®¾ç½®é€è§†æŠ•å½±çŸ©é˜µåˆ°æŒ‡å®šçš„å¹³é¢ä¸Šï¼Œè¿™ä¸ªå¹³é¢æœ‰ä¸€ä¸ªâ€œoriginâ€å’Œå•ä½é•¿åº¦çš„â€œnormalâ€ï¼Œâ€œeyeâ€æ˜¯æŠ•å½±çš„åŸç‚¹ã€‚
         void MakePerspectiveProjection(const APointType& origin, const AVectorType& normal, const APointType& eye);
 
-        // ·´Éä¾ØÕóµ½Ò»¸öÖ¸¶¨µÄÆ½Ãæ£¬Õâ¸öÆ½Ãæ°üº¬¡°Ô­µã¡±ºÍµ¥Î»³¤¶ÈµÄ¡°ÏòÁ¿¡±¡£
+        // åå°„çŸ©é˜µåˆ°ä¸€ä¸ªæŒ‡å®šçš„å¹³é¢ï¼Œè¿™ä¸ªå¹³é¢åŒ…å«â€œåŸç‚¹â€å’Œå•ä½é•¿åº¦çš„â€œå‘é‡â€ã€‚
         void MakeReflection(const APointType& origin, const AVectorType& normal);
 
         NODISCARD Real GetNorm() const;
 
-        // ÌØÊâ¾ØÕó¡£
+        // ç‰¹æ®ŠçŸ©é˜µã€‚
         NODISCARD static constexpr Matrix GetZeroMatrix() noexcept
         {
             return Matrix{};
@@ -397,15 +397,15 @@ namespace Mathematics
         NODISCARD static EntryType Create(const ContainerType& entry, MatrixMajorFlags majorFlag);
 
     private:
-        // ¾ØÕó´æ´¢ÎªĞĞÖ÷Ğò
+        // çŸ©é˜µå­˜å‚¨ä¸ºè¡Œä¸»åº
         EntryType entry{};
     };
 
-    // µ÷ÊÔÊä³ö¡£
+    // è°ƒè¯•è¾“å‡ºã€‚
     template <typename Real>
     std::ostream& operator<<(std::ostream& outFile, const Matrix<Real>& matrix);
 
-    // ±È½Ï£¨½öÊ¹ÓÃÓÚSTLÈİÆ÷£©
+    // æ¯”è¾ƒï¼ˆä»…ä½¿ç”¨äºSTLå®¹å™¨ï¼‰
     template <typename Real>
     NODISCARD bool operator==(const Matrix<Real>& lhs, const Matrix<Real>& rhs);
 
@@ -424,7 +424,7 @@ namespace Mathematics
     template <typename Real>
     NODISCARD Matrix<Real> TransposeTimesTranspose(const Matrix<Real>& lhs, const Matrix<Real>& rhs) noexcept;  // M^T * mat^T
 
-    // ¾ØÕóºÍÆë´ÎµãÖ®¼äµÄÔËËã¡£MºÍpÎªÆë´Î¶ÔÏó£¨M²¢²»±»ÒªÇóÊÇ·ÂÉäµÄ£¬pÒ²²»ÒªÇóÓĞw = 1£©¡£
+    // çŸ©é˜µå’Œé½æ¬¡ç‚¹ä¹‹é—´çš„è¿ç®—ã€‚Må’Œpä¸ºé½æ¬¡å¯¹è±¡ï¼ˆMå¹¶ä¸è¢«è¦æ±‚æ˜¯ä»¿å°„çš„ï¼Œpä¹Ÿä¸è¦æ±‚æœ‰w = 1ï¼‰ã€‚
     // M * p
     template <typename Real>
     NODISCARD HomogeneousPoint<Real> operator*(const Matrix<Real>& matrix, const HomogeneousPoint<Real>& point) noexcept;
@@ -437,7 +437,7 @@ namespace Mathematics
     template <typename Real>
     NODISCARD typename HomogeneousPoint<Real>::ContainerType BatchMultiply(const Matrix<Real>& matrix, const typename HomogeneousPoint<Real>::ContainerType& inputPoints);
 
-    // ·ÂÉä¾ØÕóºÍ·ÂÉäµãÖ®¼äµÄ²Ù×÷¡£
+    // ä»¿å°„çŸ©é˜µå’Œä»¿å°„ç‚¹ä¹‹é—´çš„æ“ä½œã€‚
     // M * p
     template <typename Real>
     NODISCARD APoint<Real> operator*(const Matrix<Real>& matrix, const APoint<Real>& point) noexcept;
@@ -446,7 +446,7 @@ namespace Mathematics
     template <typename Real>
     NODISCARD typename APoint<Real>::ContainerType BatchMultiply(const Matrix<Real>& matrix, const typename APoint<Real>::ContainerType& inputPoints);
 
-    // ·ÂÉä¾ØÕóºÍ·ÂÉäÏòÁ¿Ö®¼äµÄ²Ù×÷¡£
+    // ä»¿å°„çŸ©é˜µå’Œä»¿å°„å‘é‡ä¹‹é—´çš„æ“ä½œã€‚
     // M * v
     template <typename Real>
     NODISCARD AVector<Real> operator*(const Matrix<Real>& matrix, const AVector<Real>& point) noexcept;

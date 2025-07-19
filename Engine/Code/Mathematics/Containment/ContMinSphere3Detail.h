@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/09 09:40)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 09:40)
 
 #ifndef MATHEMATICS_CONTAINMENT_CONT_MIN_SPHERE3_DETAIL_H
 #define MATHEMATICS_CONTAINMENT_CONT_MIN_SPHERE3_DETAIL_H
@@ -72,7 +72,7 @@ Mathematics::ContMinSphere3<Real>::ContMinSphere3(const std::vector<Vector3<Real
     }
     else
     {
-        MATHEMATICS_ASSERTION_0(false, "ÊäÈë±ØĞë°üº¬µã¡£\n");
+        MATHEMATICS_ASSERTION_0(false, "è¾“å…¥å¿…é¡»åŒ…å«ç‚¹ã€‚\n");
     }
 
     minimal.SetSphere(minimal.GetCenter(), Math<Real>::Sqrt(minimal.GetRadius()));

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/02 15:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/02 15:19)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_ZIP_ENTRY_META_DATA_H
 #define CORE_TOOLS_TEXT_PARSING_ZIP_ENTRY_META_DATA_H
@@ -18,7 +18,7 @@
 
 namespace CoreTools::SimpleZip
 {
-    /// ZipEntryMetaData±¾ÖÊÉÏÊÇZipEntryInfo½á¹¹µÄ°ü×°Æ÷£¬ËüÊÇminiz½á¹¹µÄ±ğÃû¡£
+    /// ZipEntryMetaDataæœ¬è´¨ä¸Šæ˜¯ZipEntryInfoç»“æ„çš„åŒ…è£…å™¨ï¼Œå®ƒæ˜¯minizç»“æ„çš„åˆ«åã€‚
     class CORE_TOOLS_HIDDEN_DECLARE ZipEntryMetaData final
     {
     public:

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/29 23:10)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/29 23:10)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -81,21 +81,21 @@ CoreTools::StringUtility::TokensType CoreTools::StringUtility::GetTokens(const s
 
     while (!tokenString.empty())
     {
-        /// ²éÕÒtokenµÄ¿ªÊ¼Î»ÖÃ¡£
+        /// æŸ¥æ‰¾tokençš„å¼€å§‹ä½ç½®ã€‚
         const auto begin = tokenString.find_first_not_of(whiteSpace);
         if (begin == std::string::npos)
         {
-            /// ÒÑÕÒµ½ËùÓĞÁîÅÆ¡£
+            /// å·²æ‰¾åˆ°æ‰€æœ‰ä»¤ç‰Œã€‚
             break;
         }
 
-        /// É¾³ı¿Õ°×¡£
+        /// åˆ é™¤ç©ºç™½ã€‚
         if (0 < begin)
         {
             tokenString = tokenString.substr(begin);
         }
 
-        /// ²éÕÒtokenµÄ½áÊøÎ»ÖÃ¡£
+        /// æŸ¥æ‰¾tokençš„ç»“æŸä½ç½®ã€‚
         if (const auto end = tokenString.find_first_of(whiteSpace);
             end != std::string::npos)
         {
@@ -105,7 +105,7 @@ CoreTools::StringUtility::TokensType CoreTools::StringUtility::GetTokens(const s
         }
         else
         {
-            /// ÕâÊÇ×îºóÒ»¸ötoken¡£
+            /// è¿™æ˜¯æœ€åä¸€ä¸ªtokenã€‚
             tokens.emplace_back(tokenString);
             break;
         }
@@ -165,7 +165,7 @@ System::String CoreTools::StringUtility::ToFirstLetterLower(const String& charac
 
 CoreTools::StringUtility::String CoreTools::StringUtility::ChangeFirstLetter(const String& character, ChangeFirstLetterFunction function)
 {
-    ASSERT_FAIL_THROW_EXCEPTION(function != nullptr, SYSTEM_TEXT("functionÖ¸ÕëÎª¿Õ¡£"));
+    ASSERT_FAIL_THROW_EXCEPTION(function != nullptr, SYSTEM_TEXT("functionæŒ‡é’ˆä¸ºç©ºã€‚"));
 
     if (character.empty())
     {

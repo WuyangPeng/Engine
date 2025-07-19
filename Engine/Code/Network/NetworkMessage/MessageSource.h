@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 16:16)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 16:16)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_SOURCE_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_SOURCE_H
@@ -37,15 +37,15 @@ namespace Network
 
         CLASS_INVARIANT_DECLARE;
 
-        // ¶ÁÈ¡boolÖµÎª4×Ö½Ú
+        // è¯»å–boolå€¼ä¸º4å­—èŠ‚
         NODISCARD bool ReadBool();
         void ReadBool(int elementsNumber, bool* data);
 
-        // ¶ÁÈ¡×Ö·û´®£¬ÔÚ×Ö·û´®Ö®Ç°¶ÁÈ¡4¸ö×Ö½Ú´ú±í³¤¶È¡£Ã»ÓĞ¿ÕÖÕÖ¹·û¡£
+        // è¯»å–å­—ç¬¦ä¸²ï¼Œåœ¨å­—ç¬¦ä¸²ä¹‹å‰è¯»å–4ä¸ªå­—èŠ‚ä»£è¡¨é•¿åº¦ã€‚æ²¡æœ‰ç©ºç»ˆæ­¢ç¬¦ã€‚
         NODISCARD std::string ReadString();
         void ReadString(int elementsNumber, std::string* data);
 
-        // Ô­ÉúÊı¾İ¶ÁÈ¡º¯Êı
+        // åŸç”Ÿæ•°æ®è¯»å–å‡½æ•°
         template <typename T>
         void Read(T& datum);
         template <typename T>
@@ -57,13 +57,13 @@ namespace Network
         void Read(std::string& datum);
         void Read(std::vector<std::string>& datum);
 
-        // ¶ÁÈ¡Ã¶¾ÙÖµÎªÊµ¼Ê³¤¶È¡£
+        // è¯»å–æšä¸¾å€¼ä¸ºå®é™…é•¿åº¦ã€‚
         template <typename T>
         void ReadEnum(T& datum);
         template <typename T>
         void ReadEnum(int elementsNumber, T* data);
 
-        // °ïÖúº¯Êı
+        // å¸®åŠ©å‡½æ•°
         NODISCARD int GetBytesRead() const noexcept;
         NODISCARD int GetBytesTotal() const noexcept;
         void IncrementBytesProcessed(int bytesNumber);

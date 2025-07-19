@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 10:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 10:19)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -65,7 +65,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GetOldContent(const String& file
     }
     catch (const Error&)
     {
-        /// ÎÄ¼ş²»´æÔÚÊÇÕı³£µÄ¡£
+        /// æ–‡ä»¶ä¸å­˜åœ¨æ˜¯æ­£å¸¸çš„ã€‚
         return String{};
     }
 }

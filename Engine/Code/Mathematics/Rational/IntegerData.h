@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:28)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_H
@@ -21,7 +21,7 @@
 
 namespace Mathematics
 {
-    // NÊÇÄãÏëÒªÔªÕûÊıµÄ32Î»×Ö½ÚµÄÊıÄ¿¡£
+    // Næ˜¯ä½ æƒ³è¦å…ƒæ•´æ•°çš„32ä½å­—èŠ‚çš„æ•°ç›®ã€‚
     template <int N>
     class IntegerData final : private boost::totally_ordered<IntegerData<N>>
     {
@@ -60,11 +60,11 @@ namespace Mathematics
         NODISCARD uint16_t& operator[](int index);
         NODISCARD const uint16_t& operator[](int index) const;
 
-        // Ö§³Ö±È½Ï¡£±È½ÏµÄ·µ»ØÖµÊÇ
-        //   -1 µ± lhs < rhs,
-        //    0 µ± lhs == rhs,
-        //   +1 µ± lhs > rhs.
-        // Õâ¸ö±È½Ï½öÓÃÓÚ==ºÍ<Ê¹ÓÃ£¬Ê¹ÓÃÎŞ·ûºÅÊı±È½Ï¡£
+        // æ”¯æŒæ¯”è¾ƒã€‚æ¯”è¾ƒçš„è¿”å›å€¼æ˜¯
+        //   -1 å½“ lhs < rhs,
+        //    0 å½“ lhs == rhs,
+        //   +1 å½“ lhs > rhs.
+        // è¿™ä¸ªæ¯”è¾ƒä»…ç”¨äº==å’Œ<ä½¿ç”¨ï¼Œä½¿ç”¨æ— ç¬¦å·æ•°æ¯”è¾ƒã€‚
         NODISCARD static NumericalValueSymbol UnsignedDataCompare(const IntegerData& lhs, const IntegerData& rhs);
 
     private:
@@ -81,11 +81,11 @@ namespace Mathematics
         using ArrayType = std::array<uint16_t, intSize>;
 
     private:
-        // ×îµÍÎ»´¢´æÔÚË÷Òı0¡£
+        // æœ€ä½ä½å‚¨å­˜åœ¨ç´¢å¼•0ã€‚
         ArrayType buffer;
     };
 
-    // ±È½Ï
+    // æ¯”è¾ƒ
     template <int N>
     NODISCARD bool operator==(const IntegerData<N>& lhs, const IntegerData<N>& rhs);
 

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/23 22:31)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/23 22:31)
 
 #ifndef DATABASE_GENERATE_CORE_CONVERT_ANCIENT_BOOKS_DATABASE_SAVE_IMPL_DETAIL_H
 #define DATABASE_GENERATE_CORE_CONVERT_ANCIENT_BOOKS_DATABASE_SAVE_IMPL_DETAIL_H
@@ -23,7 +23,7 @@ void DatabaseGenerateCore::AncientBooksDatabaseSaveImpl::DatabaseSave(const T& c
 
     const auto databaseName = decltype(convertEntity.Convert(*(container.GetContainer()[0])))::GetDatabaseName();
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("Êı¾İ¿â"), databaseName, SYSTEM_TEXT("¿ªÊ¼Ğ´Èë¡£"));
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("æ•°æ®åº“"), databaseName, SYSTEM_TEXT("å¼€å§‹å†™å…¥ã€‚"));
 
     for (const auto& element : container.GetContainer())
     {
@@ -32,7 +32,7 @@ void DatabaseGenerateCore::AncientBooksDatabaseSaveImpl::DatabaseSave(const T& c
         databaseFlush->ChangeDatabase(entity.GetId(), entity.GetModify());
     }
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("Êı¾İ¿â"), databaseName, SYSTEM_TEXT("Ğ´ÈëÍê³É¡£"));
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("æ•°æ®åº“"), databaseName, SYSTEM_TEXT("å†™å…¥å®Œæˆã€‚"));
 }
 
 #endif  // DATABASE_GENERATE_CORE_CONVERT_ANCIENT_BOOKS_DATABASE_SAVE_IMPL_DETAIL_H

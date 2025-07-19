@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	����汾��0.9.0.12 (2023/06/09 09:49)
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/09 09:49)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_RECTANGLE_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_RECTANGLE_DETAIL_H
@@ -27,10 +27,10 @@ Mathematics::BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int nu
       uReplicate{ (uLoop ? (uOpen ? 1 : uDegree) : 0) },
       vReplicate{ (vLoop ? (vOpen ? 1 : vDegree) : 0) }
 {
-    MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "��Ч���롣\n");
-    MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "��Ч���롣\n");
-    MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "��Ч���롣\n");
-    MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1, "��Ч���롣\n");
+    MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1, "无效输入。\n");
 
     basis.at(0).Create(numUCtrlPoints + uReplicate, uDegree, uOpen);
     basis.at(1).Create(numVCtrlPoints + vReplicate, vDegree, vOpen);
@@ -49,10 +49,10 @@ Mathematics::BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int nu
       uReplicate{ (uLoop ? (uOpen ? 1 : uDegree) : 0) },
       vReplicate{ (vLoop ? 1 : 0) }
 {
-    MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "��Ч���롣\n");
-    MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "��Ч���롣\n");
-    MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "��Ч���롣\n");
-    MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1, "��Ч���롣\n");
+    MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1, "无效输入。\n");
 
     basis.at(0).Create(numUCtrlPoints + uReplicate, uDegree, uOpen);
     basis.at(1).Create(numVCtrlPoints + vReplicate, vDegree, vKnot);
@@ -71,10 +71,10 @@ Mathematics::BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int nu
       uReplicate{ (uLoop ? 1 : 0) },
       vReplicate{ (vLoop ? (vOpen ? 1 : vDegree) : 0) }
 {
-    MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "��Ч���롣\n");
-    MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "��Ч���롣\n");
-    MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "��Ч���롣\n");
-    MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1, "��Ч���롣\n");
+    MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1, "无效输入。\n");
 
     basis.at(0).Create(numUCtrlPoints + uReplicate, uDegree, uKnot);
     basis.at(1).Create(numVCtrlPoints + vReplicate, vDegree, vOpen);
@@ -93,10 +93,10 @@ Mathematics::BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int nu
       uReplicate{ (uLoop ? 1 : 0) },
       vReplicate{ (vLoop ? 1 : 0) }
 {
-    MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "��Ч���롣\n");
-    MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "��Ч���롣\n");
-    MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "��Ч���롣\n");
-    MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1, "��Ч���롣\n");
+    MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1, "无效输入。\n");
 
     basis.at(0).Create(numUCtrlPoints + uReplicate, uDegree, uKnot);
     basis.at(1).Create(numVCtrlPoints + vReplicate, vDegree, vKnot);

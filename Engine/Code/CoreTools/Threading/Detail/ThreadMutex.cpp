@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/30 18:10)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/30 18:10)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -27,24 +27,24 @@ void CoreTools::ThreadMutex::Initialize()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    /// ³É¹¦ = 0
-    /// ´íÎó = ENOMEM
+    /// æˆåŠŸ = 0
+    /// é”™è¯¯ = ENOMEM
     if (System::PThreadMutexAttributeInit(&mutex.attribute) != System::PThreadResult::Successful)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexattrInit³õÊ¼»¯MutexÊ§°Ü¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexattrInitåˆå§‹åŒ–Mutexå¤±è´¥ã€‚"s))
     }
 
-    /// ³É¹¦ = 0
+    /// æˆåŠŸ = 0
     if (System::PThreadMutexAttributeSetType(&mutex.attribute) != System::PThreadResult::Successful)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexattrSettype³õÊ¼»¯MutexÊ§°Ü¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexattrSettypeåˆå§‹åŒ–Mutexå¤±è´¥ã€‚"s))
     }
 
-    /// ³É¹¦ = 0
-    /// ´íÎó = EAGAIN, ENOMEM, EPERM, EBUSY, EINVAL
+    /// æˆåŠŸ = 0
+    /// é”™è¯¯ = EAGAIN, ENOMEM, EPERM, EBUSY, EINVAL
     if (System::PThreadMutexInit(&mutex.attribute, &mutex.mutex) != System::PThreadResult::Successful)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexInit³õÊ¼»¯MutexÊ§°Ü¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexInitåˆå§‹åŒ–Mutexå¤±è´¥ã€‚"s))
     }
 }
 
@@ -52,18 +52,18 @@ void CoreTools::ThreadMutex::Delete() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    /// ³É¹¦ = 0
-    /// ´íÎó = EINVAL
+    /// æˆåŠŸ = 0
+    /// é”™è¯¯ = EINVAL
     if (System::PThreadMutexDestroy(&mutex.mutex) != System::PThreadResult::Successful)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("PthreadMutexDestroyÏú»ÙMutexÊ§°Ü"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("PthreadMutexDestroyé”€æ¯Mutexå¤±è´¥"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 
-    /// ³É¹¦ = 0
-    /// ´íÎó = EBUSY, EINVAL
+    /// æˆåŠŸ = 0
+    /// é”™è¯¯ = EBUSY, EINVAL
     if (System::PThreadMutexAttributeDestroy(&mutex.attribute) != System::PThreadResult::Successful)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("PthreadMutexattrDestroyÏú»ÙMutexÊ§°Ü"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("PthreadMutexattrDestroyé”€æ¯Mutexå¤±è´¥"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -71,11 +71,11 @@ void CoreTools::ThreadMutex::Enter()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    /// ³É¹¦ = 0
-    /// ´íÎó = EINVAL, EDEADLK
+    /// æˆåŠŸ = 0
+    /// é”™è¯¯ = EINVAL, EDEADLK
     if (System::PThreadMutexLock(&mutex.mutex) != System::PThreadResult::Successful)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("½øÈëMutexÊ§°Ü¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¿›å…¥Mutexå¤±è´¥ã€‚"s))
     }
 }
 
@@ -83,11 +83,11 @@ void CoreTools::ThreadMutex::Leave() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    /// ³É¹¦ = 0
-    /// ´íÎó = EINVAL, EPERM
+    /// æˆåŠŸ = 0
+    /// é”™è¯¯ = EINVAL, EPERM
     if (System::PThreadMutexUnlock(&mutex.mutex) != System::PThreadResult::Successful)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("Àë¿ªMutexÊ§°Ü"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("ç¦»å¼€Mutexå¤±è´¥"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

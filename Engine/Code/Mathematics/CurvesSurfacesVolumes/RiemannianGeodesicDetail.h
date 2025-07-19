@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/09 09:53)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 09:53)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_RIEMANNIAN_GEODESIC_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_RIEMANNIAN_GEODESIC_DETAIL_H
@@ -43,7 +43,7 @@ Mathematics::RiemannianGeodesic<Real>::RiemannianGeodesic(int dimension)
       searchStep{ (MathType::GetValue(1)) / MathType::GetValue(searchSamples) },
       derivativeFactor{ MathType::GetRational(1, 2) / derivativeStep }
 {
-    MATHEMATICS_ASSERTION_0(dimension >= 2, "Î¬¶È±ØĞëÖÁÉÙÊÇ2¡£\n");
+    MATHEMATICS_ASSERTION_0(dimension >= 2, "ç»´åº¦å¿…é¡»è‡³å°‘æ˜¯2ã€‚\n");
 
     for (auto i = 0; i < dimension; ++i)
     {
@@ -82,12 +82,12 @@ Real Mathematics::RiemannianGeodesic<Real>::ComputeSegmentLength(const VariableL
     VariableLengthVector<Real> temp{ dimension };
 
     auto qForm = metric.QuadraticForm(diff, diff);
-    MATHEMATICS_ASSERTION_0(qForm > MathType::GetValue(0), "ÒâÍâ½á¹û\n");
+    MATHEMATICS_ASSERTION_0(qForm > MathType::GetValue(0), "æ„å¤–ç»“æœ\n");
     auto length = MathType::Sqrt(qForm);
 
     ComputeMetric(point1);
     qForm = metric.QuadraticForm(diff, diff);
-    MATHEMATICS_ASSERTION_0(qForm > MathType::GetValue(0), "ÒâÍâ½á¹û\n");
+    MATHEMATICS_ASSERTION_0(qForm > MathType::GetValue(0), "æ„å¤–ç»“æœ\n");
     length += MathType::Sqrt(qForm);
     length *= MathType::GetRational(1, 2);
 
@@ -98,7 +98,7 @@ Real Mathematics::RiemannianGeodesic<Real>::ComputeSegmentLength(const VariableL
         temp = point0 + t * diff;
         ComputeMetric(temp);
         qForm = metric.QuadraticForm(diff, diff);
-        MATHEMATICS_ASSERTION_0(qForm > MathType::GetValue(0), "ÒâÍâ½á¹û\n");
+        MATHEMATICS_ASSERTION_0(qForm > MathType::GetValue(0), "æ„å¤–ç»“æœ\n");
         length += MathType::Sqrt(qForm);
     }
     length *= integralStep;
@@ -111,7 +111,7 @@ Real Mathematics::RiemannianGeodesic<Real>::ComputeTotalLength(int quantity, con
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    MATHEMATICS_ASSERTION_0(quantity >= 2, "Â·¾¶±ØĞëÖÁÉÙÓĞÁ½¸öµã¡£\n");
+    MATHEMATICS_ASSERTION_0(quantity >= 2, "è·¯å¾„å¿…é¡»è‡³å°‘æœ‰ä¸¤ä¸ªç‚¹ã€‚\n");
 
     auto length = ComputeSegmentLength(path.at(0), path.at(1));
     for (auto i = 1; i <= quantity - 2; ++i)
@@ -127,7 +127,7 @@ std::vector<Mathematics::VariableLengthVector<Real>> Mathematics::RiemannianGeod
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    MATHEMATICS_ASSERTION_0(subdivisions < 32, "³¬¹ı×î´óµü´ú´ÎÊı\n");
+    MATHEMATICS_ASSERTION_0(subdivisions < 32, "è¶…è¿‡æœ€å¤§è¿­ä»£æ¬¡æ•°\n");
     const auto quantity = (1 << subdivisions) + 1;
 
     std::vector<Mathematics::VariableLengthVector<Real>> path(quantity);
@@ -144,7 +144,7 @@ std::vector<Mathematics::VariableLengthVector<Real>> Mathematics::RiemannianGeod
     for (subdivide = 1; subdivide <= subdivisions; ++subdivide)
     {
         const auto newQuantity = 2 * currentQuantity - 1;
-        MATHEMATICS_ASSERTION_0(newQuantity <= quantity, "ÒâÍâ½á¹û¡£\n");
+        MATHEMATICS_ASSERTION_0(newQuantity <= quantity, "æ„å¤–ç»“æœã€‚\n");
 
         for (auto i = currentQuantity - 1; i > 0; --i)
         {
@@ -167,7 +167,7 @@ std::vector<Mathematics::VariableLengthVector<Real>> Mathematics::RiemannianGeod
         }
     }
 
-    MATHEMATICS_ASSERTION_0(currentQuantity == quantity, "ÒâÍâ½á¹û¡£\n");
+    MATHEMATICS_ASSERTION_0(currentQuantity == quantity, "æ„å¤–ç»“æœã€‚\n");
     subdivide = 0;
     refine = 0;
     currentQuantity = 0;
@@ -299,7 +299,7 @@ Real Mathematics::RiemannianGeodesic<Real>::ComputeTotalCurvature(int quantity, 
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    MATHEMATICS_ASSERTION_0(quantity >= 2, "Â·¾¶±ØĞëÖÁÉÙÓĞÁ½¸öµã¡£\n");
+    MATHEMATICS_ASSERTION_0(quantity >= 2, "è·¯å¾„å¿…é¡»è‡³å°‘æœ‰ä¸¤ä¸ªç‚¹ã€‚\n");
 
     auto curvature = ComputeSegmentCurvature(path.at(0), path.at(1));
     for (auto i = 1; i <= quantity - 2; ++i)
@@ -321,7 +321,7 @@ Real Mathematics::RiemannianGeodesic<Real>::ComputeIntegrand(const VariableLengt
     ComputeChristoffel2();
 
     auto qForm0 = metric.QuadraticForm(der, der);
-    MATHEMATICS_ASSERTION_0(qForm0 > MathType::GetValue(0), "ÒâÍâ½á¹û¡£\n");
+    MATHEMATICS_ASSERTION_0(qForm0 > MathType::GetValue(0), "æ„å¤–ç»“æœã€‚\n");
 
     VariableMatrix<Real> mat{ dimension, dimension };
 

@@ -1,30 +1,30 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.7 (2024/03/04 17:26)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/04 17:26)
 
 #ifndef SYSTEM_HELPER_COMEAU_H
 #define SYSTEM_HELPER_COMEAU_H
 
 #ifdef __COMO__
 
-    /// Comeau C++ ���������ã�
+    /// Comeau C++ 编译器设置：
 
-    /// �汾��飺���ǲ�֪���汾4245֮ǰ��Comeau��
+    /// 版本检查：我们不知道版本4245之前的Comeau：
     #if __COMO_VERSION__ < 4245
 
-        #error "������δ����"
+        #error "编译器未配置"
 
     #endif  // __COMO_VERSION__ < 4245
 
-    /// �����֪�İ汾��4245��
+    /// 最后已知的版本是4245：
     #if (4245 < __COMO_VERSION__)
 
-        #error "δ֪�ı������汾"
+        #error "未知的编译器版本"
 
     #endif  // 4245 < __COMO_VERSION__
 
@@ -48,7 +48,7 @@
 
     #ifndef TCRE_SYSTEM_COMPILER
 
-        #define TCRE_SYSTEM_COMPILER "Comeau C++ �汾 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
+        #define TCRE_SYSTEM_COMPILER "Comeau C++ 版本 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
 
     #endif  // TCRE_SYSTEM_COMPILER
 

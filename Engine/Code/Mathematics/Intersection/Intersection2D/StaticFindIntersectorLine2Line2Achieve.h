@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 17:29)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 17:29)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE2_LINE2_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE2_LINE2_ACHIEVE_H
@@ -55,7 +55,7 @@ void Mathematics::StaticFindIntersectorLine2Line2<Real>::Find()
         }
         default:
         {
-            MATHEMATICS_ASSERTION_3(false, "Ïà½»ÀàĞÍ¼ÆËã´íÎó£¡\n");
+            MATHEMATICS_ASSERTION_3(false, "ç›¸äº¤ç±»å‹è®¡ç®—é”™è¯¯ï¼\n");
             break;
         }
     }
@@ -109,7 +109,7 @@ Mathematics::Vector2<Real> Mathematics::StaticFindIntersectorLine2Line2<Real>::G
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("²»´æÔÚÎ¨Ò»µÄ½»µã¡£\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("ä¸å­˜åœ¨å”¯ä¸€çš„äº¤ç‚¹ã€‚\n"s));
     }
 }
 

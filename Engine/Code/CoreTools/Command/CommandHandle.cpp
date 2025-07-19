@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/04/24 13:17)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/04/24 13:17)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -102,7 +102,7 @@ int CoreTools::CommandHandle::GetInteger(const std::string& name) const
 
     if (IsArgumentOutOfRange(value))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("²ÎÊı³¬³ö·¶Î§£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å‚æ•°è¶…å‡ºèŒƒå›´ï¼"s))
     }
 
     return value;
@@ -116,7 +116,7 @@ float CoreTools::CommandHandle::GetFloat(const std::string& name) const
 
     if (IsArgumentOutOfRange(value))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("²ÎÊı³¬³ö·¶Î§£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å‚æ•°è¶…å‡ºèŒƒå›´ï¼"s))
     }
 
     return value;
@@ -130,7 +130,7 @@ double CoreTools::CommandHandle::GetDouble(const std::string& name) const
 
     if (IsArgumentOutOfRange(value))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("²ÎÊı³¬³ö·¶Î§£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å‚æ•°è¶…å‡ºèŒƒå›´ï¼"s))
     }
 
     return value;

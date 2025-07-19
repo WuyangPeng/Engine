@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:03)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:03)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX3_BOX3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX3_BOX3_DETAIL_H
@@ -82,10 +82,10 @@ void Mathematics::DynamicFindIntersectorBox3Box3<Real>::Find()
     IntersectorConfiguration<Real> box0Cfg{};
     IntersectorConfiguration<Real> box1Cfg{};
 
-    // box1Ïà¶ÔÓÚbox0µÄÏà¶ÔËÙ¶È¡£
+    // box1ç›¸å¯¹äºbox0çš„ç›¸å¯¹é€Ÿåº¦ã€‚
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
-    // box 0 ·¨Ïß¡£
+    // box 0 æ³•çº¿ã€‚
     for (auto i = 0; i < 3; ++i)
     {
         const auto axis = box0.GetAxis(i);
@@ -106,7 +106,7 @@ void Mathematics::DynamicFindIntersectorBox3Box3<Real>::Find()
         this->SetContactTime(contactTime);
     }
 
-    // box 1 ·¨Ïß
+    // box 1 æ³•çº¿
     for (auto i = 0; i < 3; ++i)
     {
         const auto axis = box1.GetAxis(i);
@@ -127,18 +127,18 @@ void Mathematics::DynamicFindIntersectorBox3Box3<Real>::Find()
         this->SetContactTime(contactTime);
     }
 
-    // ºĞ×Ó0±ß½»²æºĞ×Ó1±ß
+    // ç›’å­0è¾¹äº¤å‰ç›’å­1è¾¹
     for (auto outerIndex = 0; outerIndex < 3; ++outerIndex)
     {
         for (auto innerIndex = 0; innerIndex < 3; ++innerIndex)
         {
             const auto axis = Vector3ToolsType::CrossProduct(box0.GetAxis(outerIndex), box1.GetAxis(innerIndex));
 
-            // ÓÉÓÚËùÓĞÖá¶¼ÊÇµ¥Î»³¤¶È£¨¼Ù¶¨£©£¬Òò´Ë¿ÉÒÔ½«ÆäÓëºã¶¨£¨¶ø·ÇÏà¶Ô£©epsilon½øĞĞ±È½Ï¡£
+            // ç”±äºæ‰€æœ‰è½´éƒ½æ˜¯å•ä½é•¿åº¦ï¼ˆå‡å®šï¼‰ï¼Œå› æ­¤å¯ä»¥å°†å…¶ä¸æ’å®šï¼ˆè€Œéç›¸å¯¹ï¼‰epsilonè¿›è¡Œæ¯”è¾ƒã€‚
             if (Vector3ToolsType::GetLengthSquared(axis) <= MathType::GetZeroTolerance())
             {
-                /// Öái0ºÍi1Æ½ĞĞ¡£ Èç¹ûÈÎÒâÁ½¸öÖáÆ½ĞĞ£¬ÔòÎ¨Ò»ĞèÒªµÄ±È½Ï¾ÍÊÇÃæ×ÔÉíÖ®¼äµÄ±È½Ï¡£
-                /// Ä¿Ç°£¬ÕâĞ©ÃæÒÑ¾­¹ı²âÊÔ£¬Ã»ÓĞ·ÖÀë£¬Òò´ËËùÓĞ½øÒ»²½µÄ·ÖÀë²âÊÔ½«½öÏÔÊ¾ÖØµş¡£
+                /// è½´i0å’Œi1å¹³è¡Œã€‚ å¦‚æœä»»æ„ä¸¤ä¸ªè½´å¹³è¡Œï¼Œåˆ™å”¯ä¸€éœ€è¦çš„æ¯”è¾ƒå°±æ˜¯é¢è‡ªèº«ä¹‹é—´çš„æ¯”è¾ƒã€‚
+                /// ç›®å‰ï¼Œè¿™äº›é¢å·²ç»è¿‡æµ‹è¯•ï¼Œæ²¡æœ‰åˆ†ç¦»ï¼Œå› æ­¤æ‰€æœ‰è¿›ä¸€æ­¥çš„åˆ†ç¦»æµ‹è¯•å°†ä»…æ˜¾ç¤ºé‡å ã€‚
 
                 FindContactSet<Real> findContactSet{ box0, box1, side, box0Cfg, box1Cfg, this->GetLhsVelocity(), this->GetRhsVelocity(), contactTime };
                 point = findContactSet.GetPoint();
@@ -164,7 +164,7 @@ void Mathematics::DynamicFindIntersectorBox3Box3<Real>::Find()
         }
     }
 
-    // ËÙ¶È½»²æbox0±ß
+    // é€Ÿåº¦äº¤å‰box0è¾¹
     for (auto i = 0; i < 3; ++i)
     {
         const auto axis = Vector3ToolsType::CrossProduct(relVelocity, box0.GetAxis(i));
@@ -185,7 +185,7 @@ void Mathematics::DynamicFindIntersectorBox3Box3<Real>::Find()
         this->SetContactTime(contactTime);
     }
 
-    // ËÙ¶È½»²æbox1±ß
+    // é€Ÿåº¦äº¤å‰box1è¾¹
     for (auto i = 0; i < 3; ++i)
     {
         const auto axis = Vector3ToolsType::CrossProduct(relVelocity, box1.GetAxis(i));

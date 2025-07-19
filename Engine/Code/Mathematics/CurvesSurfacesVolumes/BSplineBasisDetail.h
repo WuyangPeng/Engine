@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒýÇæ°æ±¾£º0.9.0.12 (2023/06/09 09:49)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“Žç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 09:49)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_BASIS_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_BASIS_DETAIL_H
@@ -199,8 +199,8 @@ int Mathematics::BSplineBasis<Real>::Initialize(int numCtrlPoints, int newDegree
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "ÎÞÐ§ÊäÈë¡£\n");
-    MATHEMATICS_ASSERTION_0(1 <= newDegree && newDegree <= numCtrlPoints - 1, "ÎÞÐ§ÊäÈë¡£\n");
+    MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "æ— æ•ˆè¾“å…¥ã€‚\n");
+    MATHEMATICS_ASSERTION_0(1 <= newDegree && newDegree <= numCtrlPoints - 1, "æ— æ•ˆè¾“å…¥ã€‚\n");
 
     ctrlPointsCount = numCtrlPoints;
     degree = newDegree;
@@ -298,7 +298,7 @@ void Mathematics::BSplineBasis<Real>::Compute(Real t, int order, int& minIndex, 
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    MATHEMATICS_ASSERTION_0(order <= 3, "½öÖ§³ÖÈý½×µ¼Êý¡£\n");
+    MATHEMATICS_ASSERTION_0(order <= 3, "ä»…æ”¯æŒä¸‰é˜¶å¯¼æ•°ã€‚\n");
 
     if (order >= 1)
     {

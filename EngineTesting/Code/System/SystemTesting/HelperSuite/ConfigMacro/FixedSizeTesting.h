@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/06 17:34)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/06 17:34)
 
 #ifndef SYSTEM_TESTING_HELPER_SUITE_FIXED_SIZE_TESTING_H
 #define SYSTEM_TESTING_HELPER_SUITE_FIXED_SIZE_TESTING_H
@@ -14,7 +14,7 @@
 
 namespace System
 {
-    /// @brief ²âÊÔ¹Ì¶¨´óĞ¡ÀàĞÍint8_t¡¢int16_t¡¢int32_t¡¢int64_t¡¢uint8_t¡¢uint16_t¡¢uint32_t¡¢uint64_tµÄ×îĞ¡ÖµºÍ×î´óÖµ¡£
+    /// @brief æµ‹è¯•å›ºå®šå¤§å°ç±»å‹int8_tã€int16_tã€int32_tã€int64_tã€uint8_tã€uint16_tã€uint32_tã€uint64_tçš„æœ€å°å€¼å’Œæœ€å¤§å€¼ã€‚
     class FixedSizeTesting final : public CoreTools::UnitTest
     {
     public:

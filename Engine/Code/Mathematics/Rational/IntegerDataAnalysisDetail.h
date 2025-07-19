@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:17)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:17)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_ANALYSIS_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_ANALYSIS_DETAIL_H
@@ -107,7 +107,7 @@ int Mathematics::IntegerDataAnalysis<N>::GetLeadingBlock() const
         }
     }
 
-    MATHEMATICS_ASSERTION_0(false, "¹¤¾ßº¯ÊıGetLeadingBlock£¬ÖµÎªÁã£¡");
+    MATHEMATICS_ASSERTION_0(false, "å·¥å…·å‡½æ•°GetLeadingBlockï¼Œå€¼ä¸ºé›¶ï¼");
 
     return -1;
 }
@@ -125,7 +125,7 @@ int Mathematics::IntegerDataAnalysis<N>::GetTrailingBlock() const
         }
     }
 
-    MATHEMATICS_ASSERTION_0(false, "¹¤¾ßº¯ÊıGetTrailingBlock£¬ÖµÎªÁã£¡");
+    MATHEMATICS_ASSERTION_0(false, "å·¥å…·å‡½æ•°GetTrailingBlockï¼Œå€¼ä¸ºé›¶ï¼");
 
     return -1;
 }
@@ -134,14 +134,14 @@ template <int N>
 int Mathematics::IntegerDataAnalysis<N>::GetLeadingBit(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    MATHEMATICS_ASSERTION_0(0 <= index && index < intSize, "ÊäÈë³¬³ö·¶Î§£¡\n");
+    MATHEMATICS_ASSERTION_0(0 <= index && index < intSize, "è¾“å…¥è¶…å‡ºèŒƒå›´ï¼\n");
 
-    // ÕâÊÇÒ»¸ö¶ş½øÖÆËÑË÷m_Buffer[i]µÄ¸ß½×Î»¡£
-    // ·µ»ØÖµÊÇ¸ÃË÷ÒıÖĞµÄÎ»£¨0 <= index < 16£©¡£
+    // è¿™æ˜¯ä¸€ä¸ªäºŒè¿›åˆ¶æœç´¢m_Buffer[i]çš„é«˜é˜¶ä½ã€‚
+    // è¿”å›å€¼æ˜¯è¯¥ç´¢å¼•ä¸­çš„ä½ï¼ˆ0 <= index < 16ï¼‰ã€‚
     auto leadingBit = 0;
     auto valueCopy = master[index];
 
-    MATHEMATICS_ASSERTION_0(valueCopy != 0, "¹¤¾ßº¯ÊıGetLeadingBit£¬ÖµÎªÁã£¡");
+    MATHEMATICS_ASSERTION_0(valueCopy != 0, "å·¥å…·å‡½æ•°GetLeadingBitï¼Œå€¼ä¸ºé›¶ï¼");
 
     for (auto maskIndex = 0; maskIndex < maskSize; ++maskIndex)
     {
@@ -165,14 +165,14 @@ template <int N>
 int Mathematics::IntegerDataAnalysis<N>::GetTrailingBit(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    MATHEMATICS_ASSERTION_0(0 <= index && index < intSize, "ÊäÈë³¬³ö·¶Î§£¡\n");
+    MATHEMATICS_ASSERTION_0(0 <= index && index < intSize, "è¾“å…¥è¶…å‡ºèŒƒå›´ï¼\n");
 
-    // ÕâÊÇÒ»¸ö¶ş½øÖÆËÑË÷m_Buffer[i]µÄµÍ½×Î»¡£
-    // ·µ»ØÖµÊÇ¸ÃË÷ÒıÖĞµÄÎ»£¨0 <= index < 16£©¡£
+    // è¿™æ˜¯ä¸€ä¸ªäºŒè¿›åˆ¶æœç´¢m_Buffer[i]çš„ä½é˜¶ä½ã€‚
+    // è¿”å›å€¼æ˜¯è¯¥ç´¢å¼•ä¸­çš„ä½ï¼ˆ0 <= index < 16ï¼‰ã€‚
     auto trailingBit = 0x000F;
     auto valueCopy = master[index];
 
-    MATHEMATICS_ASSERTION_0(valueCopy != 0, "¹¤¾ßº¯ÊıGetTrailingBit£¬ÖµÎªÁã£¡");
+    MATHEMATICS_ASSERTION_0(valueCopy != 0, "å·¥å…·å‡½æ•°GetTrailingBitï¼Œå€¼ä¸ºé›¶ï¼");
 
     for (auto maskIndex = 0; maskIndex < maskSize; ++maskIndex)
     {

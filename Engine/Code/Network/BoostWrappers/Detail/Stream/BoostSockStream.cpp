@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 17:23)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 17:23)
 
 #include "Network/NetworkExport.h"
 
@@ -25,9 +25,9 @@ using namespace std::literals;
 
 namespace
 {
-    constexpr auto synchronizeSendSuccess = SYSTEM_TEXT("Í¬²½·¢ËÍÏûÏ¢³É¹¦£¬×Ö½ÚÊı£º"sv);
+    constexpr auto synchronizeSendSuccess = SYSTEM_TEXT("åŒæ­¥å‘é€æ¶ˆæ¯æˆåŠŸï¼Œå­—èŠ‚æ•°ï¼š"sv);
 
-    constexpr auto synchronizeReceiveSuccess = SYSTEM_TEXT("Í¬²½½ÓÊÕÏûÏ¢³É¹¦£¬×Ö½ÚÊı£º"sv);
+    constexpr auto synchronizeReceiveSuccess = SYSTEM_TEXT("åŒæ­¥æ¥æ”¶æ¶ˆæ¯æˆåŠŸï¼Œå­—èŠ‚æ•°ï¼š"sv);
 }
 
 Network::BoostSockStream::BoostSockStream(CoreTools::DisableNotThrow disableNotThrow)

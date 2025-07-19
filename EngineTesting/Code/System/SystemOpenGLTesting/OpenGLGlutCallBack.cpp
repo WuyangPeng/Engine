@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/06 16:45)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/06 16:45)
 
 #include "OpenGLGlutCallBack.h"
 #include "Testing.h"
@@ -15,7 +15,7 @@
 #include "Framework/OpenGLGlutFrame/OpenGLGlutCallBackUnitTestSuiteDetail.h"
 
 System::OpenGLGlutCallBack::OpenGLGlutCallBack(int64_t delta)
-    : ParentType{ delta, "¡¾ÏµÍ³¿â¡¿OpenGLµ¥Ôª²âÊÔÌ×¼ş" }
+    : ParentType{ delta, "ã€ç³»ç»Ÿåº“ã€‘OpenGLå•å…ƒæµ‹è¯•å¥—ä»¶" }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -47,7 +47,7 @@ void System::OpenGLGlutCallBack::AddOpenGLSuite()
 
 CoreTools::Suite System::OpenGLGlutCallBack::GetOpenGLUtilitySuite()
 {
-    auto openGLUtilitySuite = GenerateSuite("OpenGL ¹¤¾ßÏä");
+    auto openGLUtilitySuite = GenerateSuite("OpenGL å·¥å…·ç®±");
 
     ADD_TEST(openGLUtilitySuite, OpenGLErrorDescriptionTesting);
     ADD_TEST(openGLUtilitySuite, OpenGLSupportsExtensionTesting);
@@ -59,7 +59,7 @@ CoreTools::Suite System::OpenGLGlutCallBack::GetOpenGLUtilitySuite()
 
 CoreTools::Suite System::OpenGLGlutCallBack::GetOpenGLBaseSuite()
 {
-    auto openGLBaseSuite = GenerateSuite("OpenGL »ù´¡");
+    auto openGLBaseSuite = GenerateSuite("OpenGL åŸºç¡€");
 
     ADD_TEST(openGLBaseSuite, OpenGLBaseTesting);
     ADD_TEST(openGLBaseSuite, OpenGLQueryTesting);
@@ -75,7 +75,7 @@ CoreTools::Suite System::OpenGLGlutCallBack::GetOpenGLBaseSuite()
 
 CoreTools::Suite System::OpenGLGlutCallBack::GetOpenGLBuffersSuite()
 {
-    auto openGLBuffersSuite = GenerateSuite("OpenGL »º³åÇø");
+    auto openGLBuffersSuite = GenerateSuite("OpenGL ç¼“å†²åŒº");
 
     ADD_TEST(openGLBuffersSuite, OpenGLGetBuffersTesting);
     ADD_TEST(openGLBuffersSuite, OpenGLSetBufferTesting);
@@ -93,7 +93,7 @@ CoreTools::Suite System::OpenGLGlutCallBack::GetOpenGLBuffersSuite()
 
 CoreTools::Suite System::OpenGLGlutCallBack::GetOpenGLTexturesSuite()
 {
-    auto openGLTexturesSuite = GenerateSuite("OpenGL ÎÆÀí");
+    auto openGLTexturesSuite = GenerateSuite("OpenGL çº¹ç†");
 
     ADD_TEST(openGLTexturesSuite, OpenGLGetTexturesTesting);
     ADD_TEST(openGLTexturesSuite, OpenGLBindTexturesTesting);
@@ -112,7 +112,7 @@ CoreTools::Suite System::OpenGLGlutCallBack::GetOpenGLTexturesSuite()
 
 CoreTools::Suite System::OpenGLGlutCallBack::GetOpenGLPolygonSuite()
 {
-    auto openGLPolygonSuite = GenerateSuite("OpenGL ¶à±ßĞÎ");
+    auto openGLPolygonSuite = GenerateSuite("OpenGL å¤šè¾¹å½¢");
 
     ADD_TEST(openGLPolygonSuite, OpenGLPolygonModeTesting);
     ADD_TEST(openGLPolygonSuite, OpenGLPolygonOffsetTesting);
@@ -147,7 +147,7 @@ CoreTools::Suite System::OpenGLGlutCallBack::GetOpenGLProgramSuite()
 
 CoreTools::Suite System::OpenGLGlutCallBack::GetOpenGLShaderSuite()
 {
-    auto openGLShaderSuite = GenerateSuite("OpenGL ×ÅÉ«Æ÷");
+    auto openGLShaderSuite = GenerateSuite("OpenGL ç€è‰²å™¨");
 
     ADD_TEST(openGLShaderSuite, OpenGLAttachShaderTesting);
     ADD_TEST(openGLShaderSuite, OpenGLCompileShaderTesting);

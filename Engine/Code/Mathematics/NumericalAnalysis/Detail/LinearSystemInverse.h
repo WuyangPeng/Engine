@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 13:52)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 13:52)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_INVERSE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_INVERSE_H
@@ -37,10 +37,10 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        // ÊäÈë:
-        //     matrix[iSize][iSize], ÏîÊÇ matrix[row][col]
-        // Êä³ö:
-        //     ÇóÄæ¾ØÕóÊ§°ÜÅ×³öÒì³££¬·ñÔò·µ»ØÄæ¾ØÕó¡£
+        // è¾“å…¥:
+        //     matrix[iSize][iSize], é¡¹æ˜¯ matrix[row][col]
+        // è¾“å‡º:
+        //     æ±‚é€†çŸ©é˜µå¤±è´¥æŠ›å‡ºå¼‚å¸¸ï¼Œå¦åˆ™è¿”å›é€†çŸ©é˜µã€‚
         NODISCARD VariableMatrixType GetInverse() const;
 
         NODISCARD RealContainer GetResult() const;
@@ -61,8 +61,8 @@ namespace Mathematics
         void Rearrangement();
 
     private:
-        // ÏßĞÔÏµÍ³Çó½âÈİ²î¡£
-        Real zeroTolerance;  // Ä¬ÈÏ = MathType::GetZeroTolerance()
+        // çº¿æ€§ç³»ç»Ÿæ±‚è§£å®¹å·®ã€‚
+        Real zeroTolerance;  // é»˜è®¤ = MathType::GetZeroTolerance()
         VariableMatrixType inverse;
         int size;
         IndexContainer columnsIndex;

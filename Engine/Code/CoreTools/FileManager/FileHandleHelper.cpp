@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/01 10:50)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/01 10:50)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -35,8 +35,8 @@ CoreTools::FileBuffer CoreTools::FileHandleHelper::LoadFromFile(const String& fi
 
 void CoreTools::FileHandleHelper::SaveIntoFile(const String& fileName, int bufferSize, const char* buffer)
 {
-    CORE_TOOLS_ASSERTION_0(buffer != nullptr, "´«ÈëµÄÖ¸ÕëÎª¿Õ£¡");
-    CORE_TOOLS_ASSERTION_2(0 < bufferSize, "´«ÈëµÄ»º³åÇø´óĞ¡Ğ¡ÓÚ»òµÈÓÚÁã£¡");
+    CORE_TOOLS_ASSERTION_0(buffer != nullptr, "ä¼ å…¥çš„æŒ‡é’ˆä¸ºç©ºï¼");
+    CORE_TOOLS_ASSERTION_2(0 < bufferSize, "ä¼ å…¥çš„ç¼“å†²åŒºå¤§å°å°äºæˆ–ç­‰äºé›¶ï¼");
 
     WriteFileHandleImpl handle{ fileName };
 
@@ -45,8 +45,8 @@ void CoreTools::FileHandleHelper::SaveIntoFile(const String& fileName, int buffe
 
 void CoreTools::FileHandleHelper::AppendToFile(const String& fileName, int bufferSize, const char* buffer)
 {
-    CORE_TOOLS_ASSERTION_0(buffer != nullptr, "´«ÈëµÄÖ¸ÕëÎª¿Õ£¡");
-    CORE_TOOLS_ASSERTION_2(0 < bufferSize, "´«ÈëµÄ»º³åÇø´óĞ¡Ğ¡ÓÚ»òµÈÓÚÁã£¡");
+    CORE_TOOLS_ASSERTION_0(buffer != nullptr, "ä¼ å…¥çš„æŒ‡é’ˆä¸ºç©ºï¼");
+    CORE_TOOLS_ASSERTION_2(0 < bufferSize, "ä¼ å…¥çš„ç¼“å†²åŒºå¤§å°å°äºæˆ–ç­‰äºé›¶ï¼");
 
     WriteFileHandleImpl handle{ fileName, System::FileHandleCreationDisposition::OpenAlways };
 

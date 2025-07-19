@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	����汾��0.9.0.12 (2023/06/12 13:55)
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/12 13:55)
 
 #ifndef RENDERING_DATA_TYPES_SPECIALIZED_IO_H
 #define RENDERING_DATA_TYPES_SPECIALIZED_IO_H
@@ -131,7 +131,7 @@ namespace Rendering
     }
 }
 
-// RENDERING_STREAM_SIZE�걻��ϵͳʹ�á�
+// RENDERING_STREAM_SIZE宏被流系统使用。
 #define RENDERING_STREAM_SIZE(value) Rendering::GetStreamSize(value)
 
 #endif  // RENDERING_DATA_TYPES_SPECIALIZED_IO_H

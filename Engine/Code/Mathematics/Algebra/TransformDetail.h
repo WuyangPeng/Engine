@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.6 (2024/02/20 09:15)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.6 (2024/02/20 09:15)
 
 #ifndef MATHEMATICS_ALGEBRA_TRANSFORM_DETAIL_H
 #define MATHEMATICS_ALGEBRA_TRANSFORM_DETAIL_H
@@ -250,7 +250,7 @@ requires std::is_floating_point_v<Real>
 void Mathematics::Transform<Real>::SetScale(const APointType& scale)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
-    MATHEMATICS_ASSERTION_0(!Approximate(scale, APointType::GetOrigin(), MathType::GetZeroTolerance()), "scale²»ÄÜÎªÁã¡£\n");
+    MATHEMATICS_ASSERTION_0(!Approximate(scale, APointType::GetOrigin(), MathType::GetZeroTolerance()), "scaleä¸èƒ½ä¸ºé›¶ã€‚\n");
 
     affineMatrix.SetScale(scale);
     transformMatrix.SetScale(affineMatrix.GetRotationOrGeneralMatrix(), affineMatrix.GetScale());
@@ -308,7 +308,7 @@ requires std::is_floating_point_v<Real>
 void Mathematics::Transform<Real>::SetUniformScale(Real scale)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
-    MATHEMATICS_ASSERTION_0(!MathType::Approximate(scale, Real{}, MathType::GetZeroTolerance()), "scale²»ÄÜÎªÁã¡£\n");
+    MATHEMATICS_ASSERTION_0(!MathType::Approximate(scale, Real{}, MathType::GetZeroTolerance()), "scaleä¸èƒ½ä¸ºé›¶ã€‚\n");
 
     affineMatrix.SetScale(APointType{ scale, scale, scale });
     transformMatrix.SetUniformScale(affineMatrix.GetRotationOrGeneralMatrix(), affineMatrix.GetScale().GetX());
@@ -321,7 +321,7 @@ requires std::is_floating_point_v<Real>
 typename Mathematics::Transform<Real>::MatrixType Mathematics::Transform<Real>::GetRotate() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    MATHEMATICS_ASSERTION_0(transformMatrix.IsRotationOrScaleMatrix(), "Matrix²»ÊÇĞı×ª¾ØÕó\n");
+    MATHEMATICS_ASSERTION_0(transformMatrix.IsRotationOrScaleMatrix(), "Matrixä¸æ˜¯æ—‹è½¬çŸ©é˜µ\n");
 
     return affineMatrix.GetRotationOrGeneralMatrix();
 }
@@ -426,7 +426,7 @@ requires std::is_floating_point_v<Real>
 typename Mathematics::Transform<Real>::APointType Mathematics::Transform<Real>::GetScale() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    MATHEMATICS_ASSERTION_0(transformMatrix.IsRotationOrScaleMatrix(), "Matrix²»ÊÇĞı×ª¾ØÕó\n");
+    MATHEMATICS_ASSERTION_0(transformMatrix.IsRotationOrScaleMatrix(), "Matrixä¸æ˜¯æ—‹è½¬çŸ©é˜µ\n");
 
     return affineMatrix.GetScale();
 }
@@ -469,8 +469,8 @@ requires std::is_floating_point_v<Real>
 Real Mathematics::Transform<Real>::GetUniformScale() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    MATHEMATICS_ASSERTION_0(transformMatrix.IsRotationOrScaleMatrix(), "Matrix²»ÊÇĞı×ª¾ØÕó\n");
-    MATHEMATICS_ASSERTION_0(transformMatrix.IsUniformScale(), "Matrix²»ÊÇµ¥Î»Ëõ·Å\n");
+    MATHEMATICS_ASSERTION_0(transformMatrix.IsRotationOrScaleMatrix(), "Matrixä¸æ˜¯æ—‹è½¬çŸ©é˜µ\n");
+    MATHEMATICS_ASSERTION_0(transformMatrix.IsUniformScale(), "Matrixä¸æ˜¯å•ä½ç¼©æ”¾\n");
 
     return GetScale().GetX();
 }
@@ -691,12 +691,12 @@ Real Mathematics::Transform<Real>::GetNorm() const
 
     if (transformMatrix.IsRotationOrScaleMatrix())
     {
-        // Ê¹ÓÃRS¾ØÕó£¨ÒÑ¶¨ÒåMATHEMATICS_USE_MATRIX_VECTOR£©»òSR¾ØÕó£¨Î´¶¨ÒåMATHEMATICS_USE_MATRIX_VECTOR£©¡£
+        // ä½¿ç”¨RSçŸ©é˜µï¼ˆå·²å®šä¹‰MATHEMATICS_USE_MATRIX_VECTORï¼‰æˆ–SRçŸ©é˜µï¼ˆæœªå®šä¹‰MATHEMATICS_USE_MATRIX_VECTORï¼‰ã€‚
         return GetScale().GetNorm();
     }
 
-    // Ò»°ãµÄ¾ØÕó¡£Ê¹ÓÃ×î´óĞĞºÍ¾ØÕó¹æ·¶¡£¹âÆ×±ê×¼£¨ÌØÕ÷ÖµµÄ×î´ó¾ø¶ÔÖµ£©Ğ¡ÓÚ»òµÈÓÚ¸Ã±ê×¼¡£
-    // Òò´Ë£¬´Ëº¯Êı·µ»Ø×î´ó±ÈÀıµÄ½üËÆÖµ¡£
+    // ä¸€èˆ¬çš„çŸ©é˜µã€‚ä½¿ç”¨æœ€å¤§è¡Œå’ŒçŸ©é˜µè§„èŒƒã€‚å…‰è°±æ ‡å‡†ï¼ˆç‰¹å¾å€¼çš„æœ€å¤§ç»å¯¹å€¼ï¼‰å°äºæˆ–ç­‰äºè¯¥æ ‡å‡†ã€‚
+    // å› æ­¤ï¼Œæ­¤å‡½æ•°è¿”å›æœ€å¤§æ¯”ä¾‹çš„è¿‘ä¼¼å€¼ã€‚
     return affineMatrix.GetRotationOrGeneralMatrix().GetNorm();
 }
 
@@ -805,7 +805,7 @@ typename Mathematics::Transform<Real>::MatrixType Mathematics::Transform<Real>::
                 }
                 else
                 {
-                    // Ìæ»»3¸öµ¹ÊıÎª6´Î³Ë·¨ºÍ1¸öµ¹Êı¡£
+                    // æ›¿æ¢3ä¸ªå€’æ•°ä¸º6æ¬¡ä¹˜æ³•å’Œ1ä¸ªå€’æ•°ã€‚
                     const auto scale01 = scaleMatrix.GetX() * scaleMatrix.GetY();
                     const auto scale02 = scaleMatrix.GetX() * scaleMatrix.GetZ();
                     const auto scale12 = scaleMatrix.GetY() * scaleMatrix.GetZ();
@@ -880,7 +880,7 @@ typename Mathematics::Transform<Real>::MatrixType Mathematics::Transform<Real>::
 
 #endif  // defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
-            // ¶ÔÓÚÒ»¸ö·ÂÉä±ä»»£¬matrixµÄ×îºóÒ»ĞĞ×ÜÊÇ(0,0,0,1)¡£ËùÒÔÔÚ¹¹Ôìº¯ÊıÖĞÉèÖÃÒ»´Î¡£Ã»ÓĞ±ØÒªÔÚÕâÀïÖØÖÃ¡£
+            // å¯¹äºä¸€ä¸ªä»¿å°„å˜æ¢ï¼Œmatrixçš„æœ€åä¸€è¡Œæ€»æ˜¯(0,0,0,1)ã€‚æ‰€ä»¥åœ¨æ„é€ å‡½æ•°ä¸­è®¾ç½®ä¸€æ¬¡ã€‚æ²¡æœ‰å¿…è¦åœ¨è¿™é‡Œé‡ç½®ã€‚
         }
 
         inverseNeedsUpdate = false;
@@ -1143,7 +1143,7 @@ Mathematics::Transform<Real> Mathematics::operator*(const Transform<Real>& lhs, 
 #endif  // defined(MATHEMATICS_USE_MATRIX_VECTOR)
     }
 
-    /// ÔÚËùÓĞÊ£ÓàµÄÇé¿öÏÂ£¬¾ØÕó²»ÄÜĞ´³ÉR * S * X + T¡£
+    /// åœ¨æ‰€æœ‰å‰©ä½™çš„æƒ…å†µä¸‹ï¼ŒçŸ©é˜µä¸èƒ½å†™æˆR * S * X + Tã€‚
 
     const auto matrixA = (lhs.IsRotationOrScaleMatrix() ? lhs.GetMatrix().TimesDiagonal(lhs.GetScale()) : lhs.GetMatrix());
     const auto matrixB = (rhs.IsRotationOrScaleMatrix() ? rhs.GetMatrix().TimesDiagonal(rhs.GetScale()) : rhs.GetMatrix());
@@ -1231,22 +1231,22 @@ std::ostream& Mathematics::operator<<(std::ostream& stream, const Transform<Real
     {
         stream << "Rotate:"
                << transform.GetRotate()
-               << "¡¡"
+               << "ã€€"
                << "Translate:"
                << transform.GetTranslate()
-               << "¡¡"
+               << "ã€€"
                << "Scale:"
                << transform.GetScale()
-               << "¡¡";
+               << "ã€€";
     }
     else
     {
         stream << "Rotate:"
                << transform.GetMatrix()
-               << "¡¡"
+               << "ã€€"
                << "Translate:"
                << transform.GetTranslate()
-               << "¡¡";
+               << "ã€€";
     }
 
     return stream;

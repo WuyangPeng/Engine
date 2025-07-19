@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 11:02)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 11:02)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -60,7 +60,7 @@ int CoreTools::SimpleCSV::CellReferenceImpl::GetRow() const noexcept
     return row;
 }
 
-/// ÉèÖÃCellReference¶ÔÏóµÄĞĞ¡£Èç¹ûÊı×Ö´óÓÚ16384£¨×î´óÖµ£©£¬¸ÃĞĞÉèÖÃÎª 16384¡£
+/// è®¾ç½®CellReferenceå¯¹è±¡çš„è¡Œã€‚å¦‚æœæ•°å­—å¤§äº16384ï¼ˆæœ€å¤§å€¼ï¼‰ï¼Œè¯¥è¡Œè®¾ç½®ä¸º 16384ã€‚
 void CoreTools::SimpleCSV::CellReferenceImpl::SetRow(int aRow)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
@@ -76,7 +76,7 @@ int CoreTools::SimpleCSV::CellReferenceImpl::GetColumn() const noexcept
     return column;
 }
 
-/// ÉèÖÃCellReference¶ÔÏóµÄÁĞ¡£Èç¹ûÊı×Ö´óÓÚ1048576£¨×î´óÖµ£©£¬¸ÃÁĞÉèÖÃÎª1048576¡£
+/// è®¾ç½®CellReferenceå¯¹è±¡çš„åˆ—ã€‚å¦‚æœæ•°å­—å¤§äº1048576ï¼ˆæœ€å¤§å€¼ï¼‰ï¼Œè¯¥åˆ—è®¾ç½®ä¸º1048576ã€‚
 void CoreTools::SimpleCSV::CellReferenceImpl::SetColumn(int aColumn)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
@@ -111,8 +111,8 @@ int CoreTools::SimpleCSV::CellReferenceImpl::GetInScope(int value, int minValue,
         return value;
 }
 
-/// ÉèÖÃCellReference¶ÔÏóµÄµØÖ·£¬ÀıÈç 'B2'¡£
-/// ¼ì²éĞĞºÍÁĞÊÇ·ñĞ¡ÓÚ»òµÈÓÚExcelÔÊĞíµÄ×î´óĞĞÊıºÍÁĞÊı¡£
+/// è®¾ç½®CellReferenceå¯¹è±¡çš„åœ°å€ï¼Œä¾‹å¦‚ 'B2'ã€‚
+/// æ£€æŸ¥è¡Œå’Œåˆ—æ˜¯å¦å°äºæˆ–ç­‰äºExcelå…è®¸çš„æœ€å¤§è¡Œæ•°å’Œåˆ—æ•°ã€‚
 void CoreTools::SimpleCSV::CellReferenceImpl::SetAddress(const std::string& address)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
@@ -128,7 +128,7 @@ std::string CoreTools::SimpleCSV::CellReferenceImpl::GetRowAsString(int aRow)
 {
     if (aRow <= 0)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, SYSTEM_TEXT("ĞĞÊıĞ¡ÓÚ»òµÈÓÚ0¡£"s))
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, SYSTEM_TEXT("è¡Œæ•°å°äºæˆ–ç­‰äº0ã€‚"s))
     }
 
     return std::to_string(aRow);
@@ -143,18 +143,18 @@ std::string CoreTools::SimpleCSV::CellReferenceImpl::GetColumnAsString(int aColu
 {
     std::string result{};
 
-    /// Èç¹ûÁĞÃûÖĞÓĞÒ»¸ö×ÖÄ¸£º
+    /// å¦‚æœåˆ—åä¸­æœ‰ä¸€ä¸ªå­—æ¯ï¼š
     if (aColumn <= alphabetSize)
     {
         result += boost::numeric_cast<char>(aColumn + asciiOffset);
     }
-    /// Èç¹ûÁĞÃûÖĞÓĞÁ½¸ö×ÖÄ¸£º
+    /// å¦‚æœåˆ—åä¸­æœ‰ä¸¤ä¸ªå­—æ¯ï¼š
     else if (aColumn > alphabetSize && aColumn <= alphabetSize * (alphabetSize + 1))
     {
         result += boost::numeric_cast<char>((aColumn - (alphabetSize + 1)) / alphabetSize + asciiOffset + 1);
         result += boost::numeric_cast<char>((aColumn - (alphabetSize + 1)) % alphabetSize + asciiOffset + 1);
     }
-    /// Èç¹ûÁĞÃûÖĞÓĞÈı¸ö×ÖÄ¸£º
+    /// å¦‚æœåˆ—åä¸­æœ‰ä¸‰ä¸ªå­—æ¯ï¼š
     else
     {
         constexpr auto step = (alphabetSize * (alphabetSize + 1)) + 1;

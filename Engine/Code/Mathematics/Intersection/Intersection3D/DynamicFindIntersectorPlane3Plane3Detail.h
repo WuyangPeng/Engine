@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:12)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:12)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_PLANE3_PLANE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_PLANE3_PLANE3_DETAIL_H
@@ -57,7 +57,7 @@ void Mathematics::DynamicFindIntersectorPlane3Plane3<Real>::Find()
     auto dot = Vector3ToolsType::DotProduct(plane0.GetNormal(), plane1.GetNormal());
     if (MathType::FAbs(dot) < MathType::GetValue(1) - MathType::GetZeroTolerance())
     {
-        // Ãæ×î³õÊÇÏà½»µÄ¡£ ÏßËÙ¶È²»»á¸Ä±äËüÃÇÏà½»µÄÊÂÊµ¡£
+        // é¢æœ€åˆæ˜¯ç›¸äº¤çš„ã€‚ çº¿é€Ÿåº¦ä¸ä¼šæ”¹å˜å®ƒä»¬ç›¸äº¤çš„äº‹å®ã€‚
         this->SetContactTime(MathType::GetValue(0));
 
         auto invDet = (MathType::GetValue(1)) / (MathType::GetValue(1) - dot * dot);
@@ -69,22 +69,22 @@ void Mathematics::DynamicFindIntersectorPlane3Plane3<Real>::Find()
         return;
     }
 
-    // ¼ì²éÆ½ÃæÊÇ·ñÒÑ¾­¹²Ãæ¡£
+    // æ£€æŸ¥å¹³é¢æ˜¯å¦å·²ç»å…±é¢ã€‚
     auto diff = MathType::GetValue(0);
     if (MathType::GetValue(0) <= dot)
     {
-        // ·¨Ïß·½ÏòÏàÍ¬£¬ĞèÒª²é¿´c0 - c1¡£
+        // æ³•çº¿æ–¹å‘ç›¸åŒï¼Œéœ€è¦æŸ¥çœ‹c0 - c1ã€‚
         diff = plane0.GetConstant() - plane1.GetConstant();
     }
     else
     {
-        // ·¨Ïß·½ÏòÏà·´£¬ĞèÒª²é¿´c0 + c1¡£
+        // æ³•çº¿æ–¹å‘ç›¸åï¼Œéœ€è¦æŸ¥çœ‹c0 + c1ã€‚
         diff = plane0.GetConstant() + plane1.GetConstant();
     }
 
     if (MathType::FAbs(diff) < MathType::GetZeroTolerance())
     {
-        // Æ½Ãæ×î³õÊÇÏàÍ¬µÄ¡£
+        // å¹³é¢æœ€åˆæ˜¯ç›¸åŒçš„ã€‚
         this->SetContactTime(MathType::GetValue(0));
         this->SetIntersectionType(IntersectionType::Plane);
 
@@ -92,12 +92,12 @@ void Mathematics::DynamicFindIntersectorPlane3Plane3<Real>::Find()
         return;
     }
 
-    // ÕâĞ©Æ½ÃæÊÇÆ½ĞĞÇÒ·Ö¿ªµÄ¡£ È·¶¨ºÎÊ±ËüÃÇ½«³ÉÎª¹²ÃæµÄ¡£
+    // è¿™äº›å¹³é¢æ˜¯å¹³è¡Œä¸”åˆ†å¼€çš„ã€‚ ç¡®å®šä½•æ—¶å®ƒä»¬å°†æˆä¸ºå…±é¢çš„ã€‚
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
     dot = Vector3ToolsType::DotProduct(plane0.GetNormal(), relVelocity);
     if (MathType::FAbs(dot) < MathType::GetZeroTolerance())
     {
-        // Æ½ÃæµÄÏà¶ÔÔË¶¯Ê¹ËüÃÇ±£³ÖÆ½ĞĞ¡£
+        // å¹³é¢çš„ç›¸å¯¹è¿åŠ¨ä½¿å®ƒä»¬ä¿æŒå¹³è¡Œã€‚
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
@@ -105,7 +105,7 @@ void Mathematics::DynamicFindIntersectorPlane3Plane3<Real>::Find()
     this->SetContactTime(diff / dot);
     if (MathType::GetValue(0) <= this->GetContactTime() && this->GetContactTime() <= this->GetTMax())
     {
-        // Æ½Ãæ±Ë´ËÏàÏò£¬²¢»áÔÚÖ¸¶¨µÄÊ±¼ä¼ä¸ôÄÚÏàÓö¡£
+        // å¹³é¢å½¼æ­¤ç›¸å‘ï¼Œå¹¶ä¼šåœ¨æŒ‡å®šçš„æ—¶é—´é—´éš”å†…ç›¸é‡ã€‚
         this->SetIntersectionType(IntersectionType::Plane);
         intersectionPlane = Plane3Type{ plane0.GetNormal(), plane0.GetConstant() + this->GetContactTime() * (Vector3ToolsType::DotProduct(plane0.GetNormal(), this->GetLhsVelocity())) };
 

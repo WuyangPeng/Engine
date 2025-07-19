@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 15:04)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 15:04)
 
 #ifndef CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_SET_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_SET_EXTERNAL_H
@@ -16,15 +16,15 @@
 
 namespace CoreTools
 {
-    /// ´ËÀàÌá¹©¼ä½ÓµÄ»ùÓÚ·½·¨µÄÖ»Ð´ÊôÐÔ·ÃÎÊ
-    /// ÈÝÆ÷Àà¶¨ÒåÁËÒ»¸öset·½·¨¡£
-    /// Ëü»¹¶¨ÒåÁËÒ»¸ö¾²Ì¬·½·¨£¬Ëü°üº¬¸ø¶¨ÊôÐÔÔÚÈÝÆ÷ÄÚµÄÆ«ÒÆÁ¿¡£
-    /// È»ºóÊ¹ÓÃÒýÓÃÀàÐÍ£¬ÈÝÆ÷ÀàÐÍ£¬³ÉÔ±º¯ÊýºÍÆ«ÒÆº¯Êý¶ÔÄ£°å½øÐÐ²ÎÊý»¯¡£
+    /// æ­¤ç±»æä¾›é—´æŽ¥çš„åŸºäºŽæ–¹æ³•çš„åªå†™å±žæ€§è®¿é—®
+    /// å®¹å™¨ç±»å®šä¹‰äº†ä¸€ä¸ªsetæ–¹æ³•ã€‚
+    /// å®ƒè¿˜å®šä¹‰äº†ä¸€ä¸ªé™æ€æ–¹æ³•ï¼Œå®ƒåŒ…å«ç»™å®šå±žæ€§åœ¨å®¹å™¨å†…çš„åç§»é‡ã€‚
+    /// ç„¶åŽä½¿ç”¨å¼•ç”¨ç±»åž‹ï¼Œå®¹å™¨ç±»åž‹ï¼Œæˆå‘˜å‡½æ•°å’Œåç§»å‡½æ•°å¯¹æ¨¡æ¿è¿›è¡Œå‚æ•°åŒ–ã€‚
 
-    template <typename Reference,  /// ÒýÓÃÀàÐÍ
-              typename Container,  /// ·â±ÕÀà
-              ptrdiff_t (*FunctionOffset)(),  /// Ö¸Õëº¯ÊýÌá¹©ÈÝÆ÷ÄÚÆ«ÒÆÊôÐÔ
-              void (Container::*FunctionSet)(Reference)>  /// Ö¸Õëµ½Ò»¸ö³ÉÔ±º¯ÊýÉèÖÃR
+    template <typename Reference,  /// å¼•ç”¨ç±»åž‹
+              typename Container,  /// å°é—­ç±»
+              ptrdiff_t (*FunctionOffset)(),  /// æŒ‡é’ˆå‡½æ•°æä¾›å®¹å™¨å†…åç§»å±žæ€§
+              void (Container::*FunctionSet)(Reference)>  /// æŒ‡é’ˆåˆ°ä¸€ä¸ªæˆå‘˜å‡½æ•°è®¾ç½®R
     class MethodPropertySetExternal final
     {
     public:
@@ -35,7 +35,7 @@ namespace CoreTools
     public:
         CLASS_INVARIANT_DECLARE;
 
-        /// Ìá¹©¶Ô¸ÃÊôÐÔµÄÖ»Ð´·ÃÎÊ
+        /// æä¾›å¯¹è¯¥å±žæ€§çš„åªå†™è®¿é—®
         MethodPropertySetExternal& operator=(ReferenceType value) noexcept;
     };
 }

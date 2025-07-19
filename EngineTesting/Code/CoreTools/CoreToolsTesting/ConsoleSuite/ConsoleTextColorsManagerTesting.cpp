@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/16 15:08)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/16 15:08)
 
 #include "ConsoleTextColorsManagerTesting.h"
 #include "System/Console/Flags/ConsoleHandleFlags.h"
@@ -39,12 +39,12 @@ void CoreTools::ConsoleTextColorsManagerTesting::ConsoleTextColorsManageTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(DoConsoleTextColorsManagerTest);
 
-    std::cerr << "ÕâÌõĞÅÏ¢ÔÚ¿ØÖÆÌ¨ÖĞÏÔÊ¾Îª°×É«¡£\n";
+    std::cerr << "è¿™æ¡ä¿¡æ¯åœ¨æ§åˆ¶å°ä¸­æ˜¾ç¤ºä¸ºç™½è‰²ã€‚\n";
 }
 
 void CoreTools::ConsoleTextColorsManagerTesting::DoConsoleTextColorsManagerTest()
 {
     ConsoleTextColorsManager<StandardHandle::Error> manager{ TextColour::Yellow, false };
 
-    std::cerr << "ÕâÌõĞÅÏ¢ÔÚ¿ØÖÆÌ¨ÖĞÏÔÊ¾Îª»ÆÉ«¡£\n";
+    std::cerr << "è¿™æ¡ä¿¡æ¯åœ¨æ§åˆ¶å°ä¸­æ˜¾ç¤ºä¸ºé»„è‰²ã€‚\n";
 }

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.4 (2024/01/11 15:51)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 15:51)
 
 #ifndef PHYSICS_MACRO_USER_MACRO_H
 #define PHYSICS_MACRO_USER_MACRO_H
@@ -19,13 +19,13 @@
 #define CLOSE_PHYSICS_USE_EXPORT_TEMPLATE (PHYSICS_ClOSE_BEGIN)
 #define CLOSE_LCP_SOLVER_LOG (PHYSICS_ClOSE_BEGIN << 1)
 #define CLOSE_LCP_POLY_DIST_LOG (PHYSICS_ClOSE_BEGIN << 2)
-#define CLOSE_USE_PHYSICS_TEMPLATE_TEST (PHYSICS_ClOSE_BEGIN << 3)  // Ĭ�Ϲر�
+#define CLOSE_USE_PHYSICS_TEMPLATE_TEST (PHYSICS_ClOSE_BEGIN << 3)  // 默认关闭
 
 #define PHYSICS_ClOSE_END CLOSE_USE_PHYSICS_TEMPLATE_TEST
 
 #define CLOSE_PHYSICS_MAX (((PHYSICS_ClOSE_END) << 1) - 1)
 
-// ������ԣ�Ĭ��Ϊ0B1000�����ֵΪ0B1111��
+// 编译测试（默认为0B1000，最大值为0B1111）
 #define COMPILE_PHYSICS_CLOSE 0B0000
 
 static_assert(0 <= COMPILE_PHYSICS_CLOSE, "COMPILE_PHYSICS_CLOSE Must be greater than or equal 0.");
@@ -59,7 +59,7 @@ static_assert(COMPILE_PHYSICS_CLOSE <= CLOSE_PHYSICS_MAX, "COMPILE_PHYSICS_CLOSE
 
 #endif  // !defined(COMPILE_PHYSICS_CLOSE) || (COMPILE_PHYSICS_CLOSE & CLOSE_LCP_POLY_DIST_LOG) != CLOSE_LCP_POLY_DIST_LOG
 
-// ����LCPSolver�Ĳ��Ժ͵����ڼ���Ϣд����־�ļ�
+// 对于LCPSolver的测试和调试期间消息写入日志文件
 #ifdef PHYSICS_LCP_SOLVER_LOG
 
     #define PHYSICS_LCP_SOLVER_FUNCTION(func) func
@@ -70,7 +70,7 @@ static_assert(COMPILE_PHYSICS_CLOSE <= CLOSE_PHYSICS_MAX, "COMPILE_PHYSICS_CLOSE
 
 #endif  // PHYSICS_LCP_SOLVER_LOG
 
-// ����LCPPolynomialDistance�Ĳ��Ժ͵����ڼ���Ϣд����־�ļ���������ôˣ��ڼ������ʱ��ʾ������������
+// 对于LCPPolynomialDistance的测试和调试期间消息写入日志文件。如果启用此，在计算距离时显示会显著减慢。
 #ifdef PHYSICS_LCP_POLY_DIST_LOG
 
     #define PHYSICS_LCP_POLY_DIST_FUNCTION(func) func

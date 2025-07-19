@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 13:03)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 13:03)
 
 #include "AQuaternionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -397,7 +397,7 @@ void Mathematics::AQuaternionTesting::ArithmeticCalculateTest()
 
         quaternion8.Normalize();
 
-        // Ê¹ÓÃÁíÒ»ÖÖËã·¨½øĞĞ²âÊÔ¡£
+        // ä½¿ç”¨å¦ä¸€ç§ç®—æ³•è¿›è¡Œæµ‹è¯•ã€‚
         auto quaternion9 = quaternion6.Inverse();
         quaternion5 = quaternion7.Inverse();
         quaternion4 = quaternion9 * quaternion7;

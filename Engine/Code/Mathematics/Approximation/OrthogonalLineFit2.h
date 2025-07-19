@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:26)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:26)
 
 #ifndef MATHEMATICS_APPROXIMATION_ORTHOGONAL_LINT_FIT2_H
 #define MATHEMATICS_APPROXIMATION_ORTHOGONAL_LINT_FIT2_H
@@ -18,7 +18,7 @@
 
 namespace Mathematics
 {
-    // ×îÐ¡¶þ´Î·½ÄâºÏÏßµ½(x,y,z)µÄÊý¾Ý£¬Í¨¹ýÊ¹ÓÃ¾àÀë²âÁ¿Õý½»½¨ÒéµÄÏß¡£
+    // æœ€å°äºŒæ¬¡æ–¹æ‹Ÿåˆçº¿åˆ°(x,y,z)çš„æ•°æ®ï¼Œé€šè¿‡ä½¿ç”¨è·ç¦»æµ‹é‡æ­£äº¤å»ºè®®çš„çº¿ã€‚
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE OrthogonalLineFit2 final
     {

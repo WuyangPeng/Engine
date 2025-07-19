@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:13)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:13)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_TRIANGLE3_DETAIL_H
@@ -56,13 +56,13 @@ Mathematics::Triangle3<Real> Mathematics::StaticFindIntersectorSegment3Triangle3
 template <typename Real>
 void Mathematics::StaticFindIntersectorSegment3Triangle3<Real>::Find()
 {
-    // ¼ÆËãÆ«ÒÆÔ­µã£¬±ßºÍ·¨Ïß¡£
+    // è®¡ç®—åç§»åŸç‚¹ï¼Œè¾¹å’Œæ³•çº¿ã€‚
     auto diff = segment.GetCenterPoint() - triangle.GetVertex(0);
     auto edge1 = triangle.GetVertex(1) - triangle.GetVertex(0);
     auto edge2 = triangle.GetVertex(2) - triangle.GetVertex(0);
     const auto normal = Vector3ToolsType::CrossProduct(edge1, edge2);
 
-    // Çó½â Q + t*D = b1*E1 + b2*E2 (Q = diff, D = Ïß¶Î·½Ïò,
+    // æ±‚è§£ Q + t*D = b1*E1 + b2*E2 (Q = diff, D = çº¿æ®µæ–¹å‘,
     // E1 = edge1, E2 = edge2, N = Cross(E1,E2))
     //   |Dot(D,N)|*b1 = sign(Dot(D,N))*Dot(D,Cross(Q,E2))
     //   |Dot(D,N)|*b2 = sign(Dot(D,N))*Dot(D,Cross(E1,Q))
@@ -80,7 +80,7 @@ void Mathematics::StaticFindIntersectorSegment3Triangle3<Real>::Find()
     }
     else
     {
-        // Ïß¶ÎºÍÈı½ÇĞÎÊÇÆ½ĞĞµÄ£¬¼´Ê¹Ïß¶ÎÏà½»Ò²³ÆÆäÎª¡°ÎŞ½»¼¯¡±¡£
+        // çº¿æ®µå’Œä¸‰è§’å½¢æ˜¯å¹³è¡Œçš„ï¼Œå³ä½¿çº¿æ®µç›¸äº¤ä¹Ÿç§°å…¶ä¸ºâ€œæ— äº¤é›†â€ã€‚
         this->SetIntersectionType(IntersectionType::Empty);
         quantity = 0;
         return;
@@ -94,12 +94,12 @@ void Mathematics::StaticFindIntersectorSegment3Triangle3<Real>::Find()
         {
             if (value0 + value1 <= directionDotNormal)
             {
-                // ÏßÓëÈı½ÇĞÎÏà½»£¬¼ì²éÏß¶ÎÊÇ·ñÏà½»¡£
+                // çº¿ä¸ä¸‰è§’å½¢ç›¸äº¤ï¼Œæ£€æŸ¥çº¿æ®µæ˜¯å¦ç›¸äº¤ã€‚
                 auto value2 = -sign * Vector3ToolsType::DotProduct(diff, normal);
                 auto value3 = segment.GetExtent() * directionDotNormal;
                 if (-value3 <= value2 && value2 <= value3)
                 {
-                    // Ïß¶ÎÓëÈı½ÇĞÎÏà½»¡£
+                    // çº¿æ®µä¸ä¸‰è§’å½¢ç›¸äº¤ã€‚
                     auto inv = (MathType::GetValue(1)) / directionDotNormal;
                     segmentParameter = value2 * inv;
                     triBary1 = value0 * inv;
@@ -111,13 +111,13 @@ void Mathematics::StaticFindIntersectorSegment3Triangle3<Real>::Find()
                     point0 = segment.GetCenterPoint() + segmentParameter * segment.GetDirection();
                     return;
                 }
-                // else: |t| > extent, Ã»ÓĞ½»¼¯
+                // else: |t| > extent, æ²¡æœ‰äº¤é›†
             }
-            // else: b1+b2 > 1, Ã»ÓĞ½»¼¯
+            // else: b1+b2 > 1, æ²¡æœ‰äº¤é›†
         }
-        // else: b2 < 0, Ã»ÓĞ½»¼¯
+        // else: b2 < 0, æ²¡æœ‰äº¤é›†
     }
-    // else: b1 < 0, Ã»ÓĞ½»¼¯
+    // else: b1 < 0, æ²¡æœ‰äº¤é›†
 
     this->SetIntersectionType(IntersectionType::Empty);
     quantity = 0;
@@ -176,7 +176,7 @@ Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorSegment3Triangle3<R
             return point1;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Ë÷ÒıÔ½½ç\n"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•è¶Šç•Œ\n"s));
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_TRIANGLE3_DETAIL_H

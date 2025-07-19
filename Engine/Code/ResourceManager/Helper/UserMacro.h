@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/21 20:16)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/21 20:16)
 
 #ifndef RESOURCE_MANAGER_MACRO_USER_MACRO_H
 #define RESOURCE_MANAGER_MACRO_USER_MACRO_H
@@ -20,7 +20,7 @@
 
 #define CLOSE_RESOURCE_MANAGER_MAX (((RESOURCE_MANAGER_ClOSE_END) << 1) - 1)
 
-// ±àÒë²âÊÔ£¨Ä¬ÈÏÎª0B0000£¬×î´óÖµÎª0B0001£©
+// ç¼–è¯‘æµ‹è¯•ï¼ˆé»˜è®¤ä¸º0B0000ï¼Œæœ€å¤§å€¼ä¸º0B0001ï¼‰
 #define COMPILE_RESOURCE_MANAGER_CLOSE 0B0000
 
 static_assert(0 <= COMPILE_RESOURCE_MANAGER_CLOSE, "COMPILE_RESOURCE_MANAGER_CLOSE Must be greater than or equal 0.");

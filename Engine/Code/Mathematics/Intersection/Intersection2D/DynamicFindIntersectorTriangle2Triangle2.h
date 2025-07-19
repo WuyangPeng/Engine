@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:46)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:46)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE2_TRIANGLE2_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE2_TRIANGLE2_H
@@ -38,7 +38,7 @@ namespace Mathematics
         NODISCARD Triangle2Type GetTriangle0() const noexcept;
         NODISCARD Triangle2Type GetTriangle1() const noexcept;
 
-        // ÓĞ¹Ø½»¼¯µÄĞÅÏ¢¡£
+        // æœ‰å…³äº¤é›†çš„ä¿¡æ¯ã€‚
         NODISCARD int GetQuantity() const;
         NODISCARD Vector2Type GetPoint(int index) const;
 
@@ -55,14 +55,14 @@ namespace Mathematics
             Right = +1,
         };
 
-        // ¶¯Ì¬²éÑ¯¡£
+        // åŠ¨æ€æŸ¥è¯¢ã€‚
         void Find();
 
         enum class ProjectionMap
         {
-            M21,  // 2¸ö¶¥µãÓ³Éäµ½×îĞ¡Öµ£¬1¸ö¶¥µãÓ³Éäµ½×î´óÖµ
-            M12,  // 1¸ö¶¥µãÓ³Éäµ½×îĞ¡Öµ£¬2¸ö¶¥µãÓ³Éäµ½×î´óÖµ
-            M11  // 1¸ö¶¥µãÓ³Éäµ½×îĞ¡Öµ£¬1¸ö¶¥µãÓ³Éäµ½×î´óÖµ
+            M21,  // 2ä¸ªé¡¶ç‚¹æ˜ å°„åˆ°æœ€å°å€¼ï¼Œ1ä¸ªé¡¶ç‚¹æ˜ å°„åˆ°æœ€å¤§å€¼
+            M12,  // 1ä¸ªé¡¶ç‚¹æ˜ å°„åˆ°æœ€å°å€¼ï¼Œ2ä¸ªé¡¶ç‚¹æ˜ å°„åˆ°æœ€å¤§å€¼
+            M11  // 1ä¸ªé¡¶ç‚¹æ˜ å°„åˆ°æœ€å°å€¼ï¼Œ1ä¸ªé¡¶ç‚¹æ˜ å°„åˆ°æœ€å¤§å€¼
         };
 
         class Configuration final
@@ -70,10 +70,10 @@ namespace Mathematics
         public:
             using IndexContainer = std::array<int, size>;
 
-            ProjectionMap projectionMap;  // ¶¥µãÈçºÎÓ³Éäµ½Í¶Ó°¼ä¸ô
-            IndexContainer index;  // ¶¥µãµÄÅÅĞòË÷Òı
+            ProjectionMap projectionMap;  // é¡¶ç‚¹å¦‚ä½•æ˜ å°„åˆ°æŠ•å½±é—´éš”
+            IndexContainer index;  // é¡¶ç‚¹çš„æ’åºç´¢å¼•
 
-            // ¼ä¸ôÊÇ [min,max]
+            // é—´éš”æ˜¯ [min,max]
             Real min;
             Real max;
         };
@@ -100,11 +100,11 @@ namespace Mathematics
         NODISCARD static Intersection GetIntersection(const Configuration& cfg0, const Configuration& cfg1, SideType side, const Vector2Container& moveV0, const Vector2Container& moveV1);
 
     private:
-        // ÒªÏà½»µÄ¶ÔÏó¡£
+        // è¦ç›¸äº¤çš„å¯¹è±¡ã€‚
         Triangle2Type triangle0;
         Triangle2Type triangle1;
 
-        // ÓĞ¹Ø½»¼¯µÄĞÅÏ¢¡£
+        // æœ‰å…³äº¤é›†çš„ä¿¡æ¯ã€‚
         Intersection point;
     };
 }

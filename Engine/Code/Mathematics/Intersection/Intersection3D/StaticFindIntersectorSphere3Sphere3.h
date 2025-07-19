@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 15:09)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 15:09)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SPHERE3_SPHERE3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SPHERE3_SPHERE3_H
@@ -39,10 +39,10 @@ namespace Mathematics
         NODISCARD Sphere3Type GetSphere0() const noexcept;
         NODISCARD Sphere3Type GetSphere1() const noexcept;
 
-        // ÓÃÓÚ¾²Ì¬²éÕÒ½»²æµã²éÑ¯µÄ½»²æµã¼¯¡£
+        // ç”¨äºé™æ€æŸ¥æ‰¾äº¤å‰ç‚¹æŸ¥è¯¢çš„äº¤å‰ç‚¹é›†ã€‚
         NODISCARD Circle3Type GetCircle() const noexcept;
 
-        // ÓÃÓÚ¶¯Ì¬²éÕÒÏà½»²éÑ¯µÄÏà½»¼¯¡£
+        // ç”¨äºåŠ¨æ€æŸ¥æ‰¾ç›¸äº¤æŸ¥è¯¢çš„ç›¸äº¤é›†ã€‚
         NODISCARD Vector3Type GetContactPoint() const noexcept;
 
     private:
@@ -52,10 +52,10 @@ namespace Mathematics
         Sphere3Type sphere0;
         Sphere3Type sphere1;
 
-        // ¾²Ì¬ÇòÌåµÄÏà½»Ô²¡£
+        // é™æ€çƒä½“çš„ç›¸äº¤åœ†ã€‚
         Circle3Type circle;
 
-        // ¶¯Ì¬ÇòÌåµÄ½»µã¡£
+        // åŠ¨æ€çƒä½“çš„äº¤ç‚¹ã€‚
         Vector3Type contactPoint;
     };
 }

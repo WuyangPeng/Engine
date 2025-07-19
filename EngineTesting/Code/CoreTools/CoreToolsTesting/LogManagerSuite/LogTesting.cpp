@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+О╩©/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// вВуъё╨еМнДяТё╛еМЙй╤Вё╛еМЙйтС
-/// а╙о╣вВуъё╨94458936@qq.com
+/// Д╫°Х─┘О╪ Е╫╜Ф╜╕И≤ЁО╪▄Е╫╜Ф≥■Ф│╘О╪▄Е╫╜Ф≥■ФЁ╫
+/// Х│■ГЁ╩Д╫°Х─┘О╪ 94458936@qq.com
 ///
-/// ╠Йв╪ё╨std:c++20
-/// ╟Ф╠╬ё╨1.0.0.9 (2024/05/11 14:41)
+/// Ф═┤Е┤├О╪ std:c++20
+/// Г┴┬Ф°╛О╪ 1.0.0.9 (2024/05/11 14:41)
 
 #include "LogTesting.h"
 #include "CoreTools/FileManager/DeleteFileTools.h"
@@ -56,17 +56,17 @@ void CoreTools::LogTesting::LoadConfigurationTest()
 
 void CoreTools::LogTesting::OutTest() noexcept
 {
-    LOG_SINGLETON_APPENDER(Trace, CoreTools, SYSTEM_TEXT("хуж╬╦Звыпео╒╡Бйт"));
+    LOG_SINGLETON_APPENDER(Trace, CoreTools, SYSTEM_TEXT("Ф≈╔Е©≈Х╥÷Х╦╙Д©║Ф│╞Ф╣▀Х╞∙"));
 
-    LOG_SINGLETON_APPENDER(Debug, CoreTools, SYSTEM_TEXT("хуж╬╣Вйтпео╒╡Бйт"));
+    LOG_SINGLETON_APPENDER(Debug, CoreTools, SYSTEM_TEXT("Ф≈╔Е©≈Х╟┐Х╞∙Д©║Ф│╞Ф╣▀Х╞∙"));
 
-    LOG_SINGLETON_APPENDER(Info, CoreTools, SYSTEM_TEXT("хуж╬р╩╟Цпео╒╡Бйт"));
+    LOG_SINGLETON_APPENDER(Info, CoreTools, SYSTEM_TEXT("Ф≈╔Е©≈Д╦─Х┬╛Д©║Ф│╞Ф╣▀Х╞∙"));
 
-    LOG_SINGLETON_APPENDER(Warn, CoreTools, SYSTEM_TEXT("хуж╬╬╞╦Фпео╒╡Бйт"));
+    LOG_SINGLETON_APPENDER(Warn, CoreTools, SYSTEM_TEXT("Ф≈╔Е©≈Х╜╕Е▒┼Д©║Ф│╞Ф╣▀Х╞∙"));
 
-    LOG_SINGLETON_APPENDER(Error, CoreTools, SYSTEM_TEXT("хуж╬╢МнСпео╒╡Бйт"));
+    LOG_SINGLETON_APPENDER(Error, CoreTools, SYSTEM_TEXT("Ф≈╔Е©≈И■≥Х╞╞Д©║Ф│╞Ф╣▀Х╞∙"));
 
-    LOG_SINGLETON_APPENDER(Fatal, CoreTools, SYSTEM_TEXT("хуж╬жбцЭ╢МнСпео╒╡Бйт"));
+    LOG_SINGLETON_APPENDER(Fatal, CoreTools, SYSTEM_TEXT("Ф≈╔Е©≈Х┤╢Е▒╫И■≥Х╞╞Д©║Ф│╞Ф╣▀Х╞∙"));
 }
 
 void CoreTools::LogTesting::MessageTest()

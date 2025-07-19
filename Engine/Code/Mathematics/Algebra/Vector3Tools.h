@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 15:17)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 15:17)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR3_TOOLS_H
 #define MATHEMATICS_ALGEBRA_VECTOR3_TOOLS_H
@@ -49,10 +49,10 @@ namespace Mathematics
         NODISCARD static Real GetLengthSquared(const Vector3Type& vector) noexcept;
         NODISCARD static Real DotProduct(const Vector3Type& lhs, const Vector3Type& rhs) noexcept;
 
-        // ²æ»ıÊ¹ÓÃµÄÊÇÓÒÊÖµÄ¹æÔò¼ÆËã¡£
-        // Çë×¢Òâ£¬Ä³Ğ©Í¼ĞÎAPIÊ¹ÓÃ×óÊÖµÄ¹æÔò¡£
-        // Èç¹ûÄã¼ÆËã²æ»ıÊ¹ÓÃÕâĞ©º¯Êı£¬²¢½«½á¹û·¢ËÍ¸øÒ»¸öÆÚÍûÓÃ×óÊÖµÄAPI£¬
-        // Äú½«ĞèÒª¸ü¸ÄµÄÊ¸Á¿·ûºÅ£¨Ìæ»»Ã¿¸ö×é¼şÖµcÎª-c£©¡£
+        // å‰ç§¯ä½¿ç”¨çš„æ˜¯å³æ‰‹çš„è§„åˆ™è®¡ç®—ã€‚
+        // è¯·æ³¨æ„ï¼ŒæŸäº›å›¾å½¢APIä½¿ç”¨å·¦æ‰‹çš„è§„åˆ™ã€‚
+        // å¦‚æœä½ è®¡ç®—å‰ç§¯ä½¿ç”¨è¿™äº›å‡½æ•°ï¼Œå¹¶å°†ç»“æœå‘é€ç»™ä¸€ä¸ªæœŸæœ›ç”¨å·¦æ‰‹çš„APIï¼Œ
+        // æ‚¨å°†éœ€è¦æ›´æ”¹çš„çŸ¢é‡ç¬¦å·ï¼ˆæ›¿æ¢æ¯ä¸ªç»„ä»¶å€¼cä¸º-cï¼‰ã€‚
         NODISCARD static Vector3Type CrossProduct(const Vector3Type& lhs, const Vector3Type& rhs) noexcept;
         NODISCARD static Vector3Type CrossProductWithReduceMultiplication(const Vector3Type& lhs, const Vector3Type& rhs) noexcept;
         NODISCARD static Vector3Type UnitCrossProduct(const Vector3Type& lhs, const Vector3Type& rhs, Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
@@ -69,26 +69,26 @@ namespace Mathematics
         NODISCARD static Real ScalarTripleProduct(const Vector3Type& vector0, const Vector3Type& vector1, const Vector3Type& vector2) noexcept;
         NODISCARD static Real GetVectorIncludedAngle(const Vector3Type& lhs, const Vector3Type& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        // ¼ÆËãµãµÄÖá¶ÔÆë°üÎ§ºĞ¡£
+        // è®¡ç®—ç‚¹çš„è½´å¯¹é½åŒ…å›´ç›’ã€‚
         NODISCARD static AxesAlignBoundingBox3D ComputeExtremes(const ContainerType& vectors);
 
-        // Gram-SchmidtÕı½»»¯.
-        // ÒÔÏßĞÔÎŞ¹ØµÄÏòÁ¿U¡¢VºÍW£¬À´¼ÆËãÒ»¸öÕı½»×é£¨µ¥Î»³¤¶È£¬Ïà»¥´¹Ö±£©¡£
+        // Gram-Schmidtæ­£äº¤åŒ–.
+        // ä»¥çº¿æ€§æ— å…³çš„å‘é‡Uã€Vå’ŒWï¼Œæ¥è®¡ç®—ä¸€ä¸ªæ­£äº¤ç»„ï¼ˆå•ä½é•¿åº¦ï¼Œç›¸äº’å‚ç›´ï¼‰ã€‚
         NODISCARD static Vector3OrthonormalizeType Orthonormalize(const Vector3Type& uVector,
                                                               const Vector3Type& vVector,
                                                               const Vector3Type& wVector,
                                                               const Real epsilon = MathType::GetZeroTolerance());
         NODISCARD static Vector3OrthonormalizeType Orthonormalize(const ContainerType& vectors, Real epsilon = MathType::GetZeroTolerance());
 
-        // ÊäÈëÖµnonzeroVector£¨W£©±ØĞëÊÇÒ»¸ö·ÇÁãÏòÁ¿¡£
-        // ·µ»ØÖµÊÇÒ»¸ö±ê×¼Õı½»»ù{U£¬V, W}¡£
-        // ·µ»ØµÄWÎªÍ¨¹ı´Ëº¯ÊıÕıÔò»¯µÄnonzeroVector¡£
-        // Èç¹ûÄãÒÑÖªWÊÇµ¥Î»³¤¶È£¬Ê¹ÓÃGenerateComplementBasisÀ´¼ÆËãUºÍV¡£
+        // è¾“å…¥å€¼nonzeroVectorï¼ˆWï¼‰å¿…é¡»æ˜¯ä¸€ä¸ªéé›¶å‘é‡ã€‚
+        // è¿”å›å€¼æ˜¯ä¸€ä¸ªæ ‡å‡†æ­£äº¤åŸº{Uï¼ŒV, W}ã€‚
+        // è¿”å›çš„Wä¸ºé€šè¿‡æ­¤å‡½æ•°æ­£åˆ™åŒ–çš„nonzeroVectorã€‚
+        // å¦‚æœä½ å·²çŸ¥Wæ˜¯å•ä½é•¿åº¦ï¼Œä½¿ç”¨GenerateComplementBasisæ¥è®¡ç®—Uå’ŒVã€‚
         NODISCARD static Vector3OrthonormalBasisType GenerateOrthonormalBasis(const Vector3Type& nonzeroVector, Real epsilon = MathType::GetZeroTolerance());
 
-        // ÊäÈëÖµnonzeroVector£¨W£©±ØĞëÊÇÒ»¸öµ¥Î»ÏòÁ¿¡£
-        // ·µ»ØÖµÖĞµÄÏòÁ¿{U,V}ÊÇµ¥Î»³¤¶ÈÇÒ»¥Ïà´¹Ö±£¬
-        // ÇÒ{U,V,W}ÊÇÒ»¸ö±ê×¼Õı½»»ù¡£
+        // è¾“å…¥å€¼nonzeroVectorï¼ˆWï¼‰å¿…é¡»æ˜¯ä¸€ä¸ªå•ä½å‘é‡ã€‚
+        // è¿”å›å€¼ä¸­çš„å‘é‡{U,V}æ˜¯å•ä½é•¿åº¦ä¸”äº’ç›¸å‚ç›´ï¼Œ
+        // ä¸”{U,V,W}æ˜¯ä¸€ä¸ªæ ‡å‡†æ­£äº¤åŸºã€‚
         NODISCARD static Vector3OrthonormalBasisType GenerateComplementBasis(const Vector3Type& unitVector, Real epsilon = MathType::GetZeroTolerance());
 
         NODISCARD static Vector4Type LiftHomogeneous(const Vector3Type& vector, Real last) noexcept;

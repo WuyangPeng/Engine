@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	����汾��0.9.0.12 (2023/06/09 10:22)
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/09 10:22)
 
 #ifndef MATHEMATICS_MISCELLANEOUS_GRID_GRAPH2_DETAIL_H
 #define MATHEMATICS_MISCELLANEOUS_GRID_GRAPH2_DETAIL_H
@@ -27,7 +27,7 @@ Mathematics::GridGraph2<Real>::GridGraph2(int xSize, int ySize)
       pending(numVertices),
       numProcessed{ 0 }
 {
-    MATHEMATICS_ASSERTION_0(xSize > 0 && ySize > 0, "��Ч���롣\n");
+    MATHEMATICS_ASSERTION_0(xSize > 0 && ySize > 0, "无效输入。\n");
 
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -71,8 +71,8 @@ void Mathematics::GridGraph2<Real>::SetWeight(int x, int y, int dx, int dy, Real
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    MATHEMATICS_ASSERTION_0(0 <= x && x < xSize && 0 <= y && y < ySize, "��Ч���롣\n");
-    MATHEMATICS_ASSERTION_0(abs(dx) <= 1 && abs(dy) <= 1, "��Ч���롣\n");
+    MATHEMATICS_ASSERTION_0(0 <= x && x < xSize && 0 <= y && y < ySize, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(abs(dx) <= 1 && abs(dy) <= 1, "无效输入。\n");
 
     vertices.at(GetIndex(x, y)).SetWeight(dx, dy, weight);
 }
@@ -82,8 +82,8 @@ Real Mathematics::GridGraph2<Real>::GetWeight(int x, int y, int dx, int dy) cons
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    MATHEMATICS_ASSERTION_0(0 <= x && x < xSize && 0 <= y && y < ySize, "��Ч���롣\n");
-    MATHEMATICS_ASSERTION_0(abs(dx) <= 1 && abs(dy) <= 1, "��Ч���롣\n");
+    MATHEMATICS_ASSERTION_0(0 <= x && x < xSize && 0 <= y && y < ySize, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(abs(dx) <= 1 && abs(dy) <= 1, "无效输入。\n");
 
     return vertices.at(GetIndex(x, y)).GetWeight(dx, dy);
 }

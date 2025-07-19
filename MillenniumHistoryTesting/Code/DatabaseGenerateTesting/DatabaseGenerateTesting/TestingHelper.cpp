@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/25 23:45)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/25 23:45)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -13,7 +13,7 @@
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 
 DatabaseGenerateTesting::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "Êı¾İ¿âÉú³Éµ¥Ôª²âÊÔ" }
+    : ParentType{ argc, argv, "æ•°æ®åº“ç”Ÿæˆå•å…ƒæµ‹è¯•" }
 {
     InitSuite();
 
@@ -29,7 +29,7 @@ void DatabaseGenerateTesting::TestingHelper::InitSuite()
 
 void DatabaseGenerateTesting::TestingHelper::AddDatabaseGenerateSuite()
 {
-    auto databaseGenerateSuite = GenerateSuite("Êı¾İ¿âÉú³É");
+    auto databaseGenerateSuite = GenerateSuite("æ•°æ®åº“ç”Ÿæˆ");
 
     ADD_TEST(databaseGenerateSuite, DatabaseGenerateHelperTesting);
     ADD_TEST(databaseGenerateSuite, DatabaseGenerateMessageTesting);

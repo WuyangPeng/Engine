@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/13 17:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/13 17:19)
 
 #ifndef SYSTEM_WINDOWS_SUITE_WINDOWS_PROCESS_TESTING_H
 #define SYSTEM_WINDOWS_SUITE_WINDOWS_PROCESS_TESTING_H
@@ -14,7 +14,7 @@
 
 namespace System
 {
-    /// SystemWindowsTestingÓĞwindowsº¯ÊıµÄ²âÊÔ¡£
+    /// SystemWindowsTestingæœ‰windowså‡½æ•°çš„æµ‹è¯•ã€‚
     class WindowsProcessTesting final : public CoreTools::UnitTest
     {
     public:

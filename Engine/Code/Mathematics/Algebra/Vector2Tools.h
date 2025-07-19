@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 15:15)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 15:15)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR2_TOOLS_H
 #define MATHEMATICS_ALGEBRA_VECTOR2_TOOLS_H
@@ -47,34 +47,34 @@ namespace Mathematics
         NODISCARD static Real DistanceSquared(const Vector2Type& lhs, const Vector2Type& rhs) noexcept;
         NODISCARD static Real DotProduct(const Vector2Type& lhs, const Vector2Type& rhs) noexcept;
 
-        // ¼´DotPerp
+        // å³DotPerp
         NODISCARD static Real PseudoCrossProduct(const Vector2Type& lhs, const Vector2Type& rhs) noexcept;
 
         NODISCARD static Vector2Type ParallelVectorLhsToRhs(const Vector2Type& lhs, const Vector2Type& rhs, Real epsilon = MathType::GetZeroTolerance());
         NODISCARD static Vector2Type ApeakVectorLhsToRhs(const Vector2Type& lhs, const Vector2Type& rhs, Real epsilon = MathType::GetZeroTolerance());
         NODISCARD static Real GetVectorIncludedAngle(const Vector2Type& lhs, const Vector2Type& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        // ´¹Ö±ÏßÏà¹Ø
-        // ·µ»Ø (y,-x).
+        // å‚ç›´çº¿ç›¸å…³
+        // è¿”å› (y,-x).
         NODISCARD static Vector2Type GetPerp(const Vector2Type& vector) noexcept;
 
-        // ·µ»Ø (y,-x) / sqrt(x * x + y * y).
+        // è¿”å› (y,-x) / sqrt(x * x + y * y).
         NODISCARD static Vector2Type GetUnitPerp(const Vector2Type& vector, Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        // ·µ»Ø DotPerp((lhs.x,lhs.y),(rhs.x,rhs.y)) = lhs.x * rhs.y - lhs.y * rhs.x.
+        // è¿”å› DotPerp((lhs.x,lhs.y),(rhs.x,rhs.y)) = lhs.x * rhs.y - lhs.y * rhs.x.
         NODISCARD static Real DotPerp(const Vector2Type& lhs, const Vector2Type& rhs) noexcept;
 
-        // ¼ÆËãµãµÄÖá¶ÔÆë°üÎ§ºĞ¡£
+        // è®¡ç®—ç‚¹çš„è½´å¯¹é½åŒ…å›´ç›’ã€‚
         NODISCARD static AxesAlignBoundingBox2Type ComputeExtremes(const ContainerType& vectors);
 
-        // Gram-SchmidtÕı½»»¯¡£
-        // ÒÔÏßĞÔÎŞ¹ØµÄÏòÁ¿UºÍV£¬À´¼ÆËãÒ»¸öÕı½»×é£¨µ¥Î»³¤¶È£¬Ïà»¥´¹Ö±£©¡£
+        // Gram-Schmidtæ­£äº¤åŒ–ã€‚
+        // ä»¥çº¿æ€§æ— å…³çš„å‘é‡Uå’ŒVï¼Œæ¥è®¡ç®—ä¸€ä¸ªæ­£äº¤ç»„ï¼ˆå•ä½é•¿åº¦ï¼Œç›¸äº’å‚ç›´ï¼‰ã€‚
         NODISCARD static Vector2OrthonormalizeType Orthonormalize(const Vector2Type& lhs, const Vector2Type& rhs, Real epsilon = MathType::GetZeroTolerance());
 
-        // ÊäÈëÖµnonzeroVector£¨V£©±ØĞëÊÇÒ»¸ö·ÇÁãÏòÁ¿¡£
-        // ·µ»ØÖµÊÇÒ»¸ö±ê×¼Õı½»»ù{U£¬V}¡£
-        // ·µ»ØµÄVÎªÍ¨¹ı´Ëº¯ÊıÕıÔò»¯µÄnonzeroVector¡£
-        // Èç¹ûÄãÒÑÖªVÊÇµ¥Î»³¤¶È£¬Ê¹ÓÃU = GetPerp(V)¡£
+        // è¾“å…¥å€¼nonzeroVectorï¼ˆVï¼‰å¿…é¡»æ˜¯ä¸€ä¸ªéé›¶å‘é‡ã€‚
+        // è¿”å›å€¼æ˜¯ä¸€ä¸ªæ ‡å‡†æ­£äº¤åŸº{Uï¼ŒV}ã€‚
+        // è¿”å›çš„Vä¸ºé€šè¿‡æ­¤å‡½æ•°æ­£åˆ™åŒ–çš„nonzeroVectorã€‚
+        // å¦‚æœä½ å·²çŸ¥Væ˜¯å•ä½é•¿åº¦ï¼Œä½¿ç”¨U = GetPerp(V)ã€‚
         NODISCARD static Vector2OrthonormalBasisType GenerateOrthonormalBasis(const Vector2Type& nonzeroVector, Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         NODISCARD static Vector3Type LiftHomogeneous(const Vector2Type& vector, Real last) noexcept;

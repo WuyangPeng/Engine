@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 10:09)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 10:09)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_MATRIX3_TOOLS_ACHIEVE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_MATRIX3_TOOLS_ACHIEVE_H
@@ -43,9 +43,9 @@ typename Mathematics::Matrix3Tools<Real>::SingularValueType Mathematics::Matrix3
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    // Í¨¹ýµ÷ÓÃÌØÕ÷·Ö½âºÍQR·Ö½â×¨ÃÅÕë¶Ô3x3µÄ¸ü»»¡£
-    // ËùÊöQDUDecompositionËÆºõ¼Ù¶¨ÊäÈë¾ØÕóÊÇ¿ÉÄæµÄ£¬
-    // µ«Ò»°ãµÄQR·Ö½â¾ßÓÐ´¦Àí·ÇÂúÖÈ¾ØÕó¡£
+    // é€šè¿‡è°ƒç”¨ç‰¹å¾åˆ†è§£å’ŒQRåˆ†è§£ä¸“é—¨é’ˆå¯¹3x3çš„æ›´æ¢ã€‚
+    // æ‰€è¿°QDUDecompositionä¼¼ä¹Žå‡å®šè¾“å…¥çŸ©é˜µæ˜¯å¯é€†çš„ï¼Œ
+    // ä½†ä¸€èˆ¬çš„QRåˆ†è§£å…·æœ‰å¤„ç†éžæ»¡ç§©çŸ©é˜µã€‚
 
     SingularValueType singularValue{ matrix };
 
@@ -67,25 +67,25 @@ typename Mathematics::Matrix3Tools<Real>::QDUDecompositionValueType Mathematics:
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    // Òò×ÓM = QR = QDUÆäÖÐQÊÇÕý½»£¨Ðý×ª£©£¬
-    // DÊÇ¶Ô½Ç£¨Ëõ·Å£©£¬²¢ÇÒUÊÇÓëÄÇÐ©ÔÚËüµÄ¶Ô½ÇÏß£¨¼ôÇÐ£©ÉÏÈý½Ç¡£
-    // Ëã·¨²ÉÓÃÊ©ÃÜÌØÕý½»£¨QRµÄËã·¨£©¡£
+    // å› å­M = QR = QDUå…¶ä¸­Qæ˜¯æ­£äº¤ï¼ˆæ—‹è½¬ï¼‰ï¼Œ
+    // Dæ˜¯å¯¹è§’ï¼ˆç¼©æ”¾ï¼‰ï¼Œå¹¶ä¸”Uæ˜¯ä¸Žé‚£äº›åœ¨å®ƒçš„å¯¹è§’çº¿ï¼ˆå‰ªåˆ‡ï¼‰ä¸Šä¸‰è§’ã€‚
+    // ç®—æ³•é‡‡ç”¨æ–½å¯†ç‰¹æ­£äº¤ï¼ˆQRçš„ç®—æ³•ï¼‰ã€‚
     //
-    // Èç¹û M = [ m0 | m1 | m2 ] ºÍ Q = [ q0 | q1 | q2 ], Ôò
+    // å¦‚æžœ M = [ m0 | m1 | m2 ] å’Œ Q = [ q0 | q1 | q2 ], åˆ™
     //
     //   q0 = m0/|m0|
     //   q1 = (m1-(q0*m1)q0)/|m1-(q0*m1)q0|
     //   q2 = (m2-(q0*m2)q0-(q1*m2)q1)/|m2-(q0*m2)q0-(q1*m2)q1|
     //
-    // ÆäÖÐ|V|±íÊ¾Ê¸Á¿VµÄ³¤¶ÈºÍA*B±íÊ¾ÏòÁ¿AºÍBµÄµã»ý
-    //  ¾ØÕóReal¾ßÓÐÏî
+    // å…¶ä¸­|V|è¡¨ç¤ºçŸ¢é‡Vçš„é•¿åº¦å’ŒA*Bè¡¨ç¤ºå‘é‡Aå’ŒBçš„ç‚¹ç§¯
+    //  çŸ©é˜µRealå…·æœ‰é¡¹
     //
     //   r00 = q0*m0  r01 = q0*m1  r02 = q0*m2
     //   r10 = 0      r11 = q1*m1  r12 = q1*m2
     //   r20 = 0      r21 = 0      r22 = q2*m2
     //
-    // ËùÒÔ D = diag(r00,r11,r22) ºÍ U ¾ßÓÐÏî u01 = r01/r00,
-    // u02 = r02/r00, ºÍ u12 = r12/r11.
+    // æ‰€ä»¥ D = diag(r00,r11,r22) å’Œ U å…·æœ‰é¡¹ u01 = r01/r00,
+    // u02 = r02/r00, å’Œ u12 = r12/r11.
 
     QDUDecompositionValueType qDUDecompositionValue{ matrix };
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/09 09:39)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 09:39)
 
 #ifndef MATHEMATICS_CONTAINMENT_CONT_ELLIPSOID3_MINCR_DETAIL_H
 #define MATHEMATICS_CONTAINMENT_CONT_ELLIPSOID3_MINCR_DETAIL_H
@@ -106,7 +106,7 @@ void Mathematics::ContEllipsoid3MinCR<Real>::FindEdgeMax(std::vector<Vector3<Rea
         auto numer = Math<Real>::GetValue(1) - a.at(i)[0] * d.at(0) - a.at(i)[1] * d.at(1) - a.at(i)[2] * d.at(2);
         if (numer < Math<Real>::GetValue(0))
         {
-            MATHEMATICS_ASSERTION_0(numer >= -Math<Real>::GetZeroTolerance(), "ÒâÍâÇé¿ö\n");
+            MATHEMATICS_ASSERTION_0(numer >= -Math<Real>::GetZeroTolerance(), "æ„å¤–æƒ…å†µ\n");
 
             plane2 = i;
             tMax = Math<Real>::GetValue(0);
@@ -209,7 +209,7 @@ void Mathematics::ContEllipsoid3MinCR<Real>::FindFacetMax(std::vector<Vector3<Re
         auto numer = Math<Real>::GetValue(1) - a.at(i)[0] * d.at(0) - a.at(i)[1] * d.at(1) - a.at(i)[2] * d.at(2);
         if (numer < Math<Real>::GetValue(0))
         {
-            MATHEMATICS_ASSERTION_0(numer >= -Math<Real>::GetZeroTolerance(), "ÒâÍâÇé¿ö\n");
+            MATHEMATICS_ASSERTION_0(numer >= -Math<Real>::GetZeroTolerance(), "æ„å¤–æƒ…å†µ\n");
 
             plane1 = i;
             tMax = Math<Real>::GetValue(0);
@@ -266,7 +266,7 @@ void Mathematics::ContEllipsoid3MinCR<Real>::MaxProduct(std::vector<Vector3<Real
             plane = i;
         }
     }
-    MATHEMATICS_ASSERTION_0(plane != -1, "ÒâÍâÇé¿ö\n");
+    MATHEMATICS_ASSERTION_0(plane != -1, "æ„å¤–æƒ…å†µ\n");
 
     d.at(0) = Math<Real>::GetValue(0);
     d.at(1) = Math<Real>::GetValue(0);

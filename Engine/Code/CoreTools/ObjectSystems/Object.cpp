@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 22:20)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 22:20)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -61,13 +61,13 @@ int CoreTools::Object::GetStreamingSize() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    /// RTTIÃû
+    /// RTTIå
     int size = GetStreamSize(GetRttiType().GetName());
 
     /// UniqueId
     size += GetStreamSize<int64_t>();
 
-    /// ¶ÔÏóÃû
+    /// å¯¹è±¡å
     size += GetStreamSize(objectName.GetName());
 
     return size;
@@ -86,13 +86,13 @@ void CoreTools::Object::Save(BufferTarget& target) const
 
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
-    /// Ğ´ÈëRTTIÃûÓÃÓÚ¼ÓÔØÆÚ¼ä²éÕÒ¹¤³§º¯Êı¡£
+    /// å†™å…¥RTTIåç”¨äºåŠ è½½æœŸé—´æŸ¥æ‰¾å·¥å‚å‡½æ•°ã€‚
     target.Write(GetRttiType().GetName());
 
-    /// Ğ´Èë¶ÔÏóµÄÎ¨Ò»±êÊ¶·û¡£ÕâÊÇ¼ÓÔØºÍÁ´½ÓÊ±Ê¹ÓÃ¡£
+    /// å†™å…¥å¯¹è±¡çš„å”¯ä¸€æ ‡è¯†ç¬¦ã€‚è¿™æ˜¯åŠ è½½å’Œé“¾æ¥æ—¶ä½¿ç”¨ã€‚
     target.WriteUniqueId(shared_from_this());
 
-    /// Ğ´Èë¶ÔÏóµÄÃû×Ö¡£
+    /// å†™å…¥å¯¹è±¡çš„åå­—ã€‚
     target.Write(objectName.GetName());
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
@@ -104,14 +104,14 @@ void CoreTools::Object::Link(ObjectLink& source)
 
     System::UnusedFunction(source);
 
-    /// ObjectÃ»ÓĞObject*³ÉÔ±¡£
+    /// Objectæ²¡æœ‰Object*æˆå‘˜ã€‚
 
     DisableNoexcept();
 }
 
 void CoreTools::Object::PostLink()
 {
-    /// Object Ã»ÓĞºóÁ´½ÓÓïÒå¡£
+    /// Object æ²¡æœ‰åé“¾æ¥è¯­ä¹‰ã€‚
 
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -124,12 +124,12 @@ void CoreTools::Object::Load(BufferSource& source)
 
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
-    /// RTTIÃûÒÑ¾­ÔÚÁ÷ÖĞ¶ÁÈ¡£¬ÒÔ²éÕÒÕıÈ·µÄ¶ÔÏó¼ÓÔØº¯Êı¡£
+    /// RTTIåå·²ç»åœ¨æµä¸­è¯»å–ï¼Œä»¥æŸ¥æ‰¾æ­£ç¡®çš„å¯¹è±¡åŠ è½½å‡½æ•°ã€‚
 
-    /// ¶ÁÈ¡µÄ¶ÔÏóµÄÎ¨Ò»±êÊ¶·û¡£ÕâÌá¹©ĞÅÏ¢ÔÚÁ´½Ó½×¶Î¡£
+    /// è¯»å–çš„å¯¹è±¡çš„å”¯ä¸€æ ‡è¯†ç¬¦ã€‚è¿™æä¾›ä¿¡æ¯åœ¨é“¾æ¥é˜¶æ®µã€‚
     source.ReadUniqueId(*this);
 
-    /// ¶ÁÈ¡¶ÔÏóÃû×Ö¡£
+    /// è¯»å–å¯¹è±¡åå­—ã€‚
     const auto name = source.ReadString();
 
     SetName(name);

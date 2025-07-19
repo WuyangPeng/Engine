@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	�汾��0.9.1.6 (2023/10/28 15:06)
+///	标准：std:c++20
+///	版本：0.9.1.6 (2023/10/28 15:06)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_ELLIPSOID3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_ELLIPSOID3_H
@@ -42,14 +42,14 @@ namespace Mathematics
         NODISCARD int GetQuantity() const noexcept;
         NODISCARD Vector3Type GetPoint(int index) const;
 
-        /// С��ֵ���ڲ���������йصĶ��η��̵��б�ʽ��Q(t) = a2 * t^2 + 2 * a1 * t + a0��
-        /// �б�ʽΪD = a1 * a1 - a0 * a2��
-        ///  Q(t)��D < 0ʱû��ʵֵ������D = 0ʱ��һ��ʵֵ������D > 0ʱ������ʵֵ����
-        /// �����߼��漰�û��������ֵ��if(D < negThreshold){ �޸����޽�����}��
-        /// else if (D > posThreshold) { ����������������}
-        ///  else { һ������һ��������}��ֵ��Ĭ��ֵΪ�㣬�������Խ�������Ϊ���� ��negThreshold <= 0 �� posThreshold >= 0����
-        /// ��ǰ������ֵ��Ӳ����Ϊ�㡣 ����ֵ��Ӳ����ΪMath<Real>::GetZeroTolerance()��
-        /// ����ֵ��������ĳЩ���ݼ�����������Բ��Χ�ܴ�ʱ��������Ĭ��ֵΪ�㡣
+        /// 小阈值用于测试与计算有关的二次方程的判别式：Q(t) = a2 * t^2 + 2 * a1 * t + a0。
+        /// 判别式为D = a1 * a1 - a0 * a2。
+        ///  Q(t)在D < 0时没有实值根，在D = 0时有一个实值根，在D > 0时有两个实值根。
+        /// 代码逻辑涉及用户定义的阈值：if(D < negThreshold){ 无根（无交集）}，
+        /// else if (D > posThreshold) { 两根（两个交集）}
+        ///  else { 一个根（一个交集）}阈值的默认值为零，但您可以将其设置为非零 （negThreshold <= 0 和 posThreshold >= 0）。
+        /// 以前，负阈值被硬编码为零。 正阈值被硬编码为Math<Real>::GetZeroTolerance()，
+        /// 该阈值不适用于某些数据集（即，当椭圆范围很大时）。现在默认值为零。
         void SetNegativeThreshold(Real negThreshold);
         NODISCARD Real GetNegativeThreshold() const noexcept;
         void SetPositiveThreshold(Real posThreshold);
@@ -66,7 +66,7 @@ namespace Mathematics
         Vector3Type point0;
         Vector3Type point1;
 
-        /// ���ڲ����б�ʽ�� Ĭ��ֵΪ�㡣 �����Խ�����ֵ����Ϊ��С��������������ֵ����Ϊ��С��������
+        /// 用于测试判别式。 默认值为零。 您可以将负阈值设置为（小）负数，将正阈值设置为（小）正数。
         Real negativeThreshold;
         Real positiveThreshold;
     };

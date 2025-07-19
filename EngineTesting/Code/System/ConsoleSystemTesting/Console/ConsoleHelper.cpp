@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/11 17:26)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/11 17:26)
 
 #include "ConsoleHelper.h"
 #include "System/Console/ConsoleCreate.h"
@@ -33,7 +33,7 @@ void ConsoleSystemTesting::ConsoleHelper::AllocConsole() noexcept
     {
         isSuccess = false;
 
-        LOG_SINGLETON_APPENDER(Error, System, SYSTEM_TEXT("´´½¨¿ØÖÆÌ¨Ê§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_APPENDER(Error, System, SYSTEM_TEXT("åˆ›å»ºæ§åˆ¶å°å¤±è´¥ï¼"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -48,7 +48,7 @@ void ConsoleSystemTesting::ConsoleHelper::FreeConsole() const noexcept
 {
     if (!DoFreeConsole())
     {
-        LOG_SINGLETON_APPENDER(Error, System, SYSTEM_TEXT("Ïú»Ù¿ØÖÆÌ¨Ê§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_APPENDER(Error, System, SYSTEM_TEXT("é”€æ¯æ§åˆ¶å°å¤±è´¥ï¼"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -70,8 +70,8 @@ bool ConsoleSystemTesting::ConsoleHelper::IsSuccess() const noexcept
 
 void ConsoleSystemTesting::ConsoleHelper::PrintConsoleInfo()
 {
-    std::cout << "Ò»¹²ÓĞÁ½ĞĞÏûÏ¢ÏÔÊ¾ÔÚ¿ØÖÆÌ¨¡£" << std::endl;
-    std::cerr << "¿ØÖÆÌ¨Ã»ÓĞ¹Ø±Õ°´Å¥¡£" << std::endl;
+    std::cout << "ä¸€å…±æœ‰ä¸¤è¡Œæ¶ˆæ¯æ˜¾ç¤ºåœ¨æ§åˆ¶å°ã€‚" << std::endl;
+    std::cerr << "æ§åˆ¶å°æ²¡æœ‰å…³é—­æŒ‰é’®ã€‚" << std::endl;
 }
 
 bool ConsoleSystemTesting::ConsoleHelper::DoAllocConsole() noexcept

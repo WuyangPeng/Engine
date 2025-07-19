@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:13)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:13)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_PLANE3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_PLANE3_ACHIEVE_H
@@ -59,7 +59,7 @@ void Mathematics::StaticFindIntersectorSegment3Plane3<Real>::Find() noexcept
     StaticFindIntersectorLine3Plane3<Real> intr{ line, plane };
     if (intr.IsIntersection())
     {
-        // ÏßÓëÆ½ÃæÏà½»£¬µ«¿ÉÄÜÔÚ²»Î»ÓÚÏß¶ÎÉÏµÄµã´¦¡£
+        // çº¿ä¸å¹³é¢ç›¸äº¤ï¼Œä½†å¯èƒ½åœ¨ä¸ä½äºçº¿æ®µä¸Šçš„ç‚¹å¤„ã€‚
         this->SetIntersectionType(intr.GetIntersectionType());
         segmentParameter = intr.GetLineParameter();
         if (!(MathType::FAbs(segmentParameter) <= segment.GetExtent()))

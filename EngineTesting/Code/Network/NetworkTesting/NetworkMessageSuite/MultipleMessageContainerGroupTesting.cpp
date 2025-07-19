@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.4 (2023/09/16 09:49)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.4 (2023/09/16 09:49)
 
 #include "MultipleMessageContainerGroupTesting.h"
 #include "Flags/MultipleMessageType.h"
@@ -165,14 +165,14 @@ void Network::MultipleMessageContainerGroupTesting::StreamingTest()
 
     resultMultipleMessageContainerGroup.Load(messageSource);
 
-    ASSERT_EQUAL_FAILURE_THROW(resultMultipleMessageContainerGroup.GetSize(), multipleMessageContainerGroup.GetSize(), "Êı×é´óĞ¡²»ÏàµÈ£¡");
+    ASSERT_EQUAL_FAILURE_THROW(resultMultipleMessageContainerGroup.GetSize(), multipleMessageContainerGroup.GetSize(), "æ•°ç»„å¤§å°ä¸ç›¸ç­‰ï¼");
 
     auto index = 0;
     for (const auto& resultValue : resultMultipleMessageContainerGroup)
     {
         const auto& value = multipleMessageContainerGroup.GetValue(index);
 
-        ASSERT_EQUAL_FAILURE_THROW(value.GetSize(), resultValue.GetSize(), "Êı×é´óĞ¡²»ÏàµÈ£¡");
+        ASSERT_EQUAL_FAILURE_THROW(value.GetSize(), resultValue.GetSize(), "æ•°ç»„å¤§å°ä¸ç›¸ç­‰ï¼");
 
         ASSERT_EQUAL(resultValue.GetValue<MultipleMessageField::Int8>(), value.GetValue<MultipleMessageField::Int8>());
         ASSERT_EQUAL(resultValue.GetValue<MultipleMessageField::UInt8>(), value.GetValue<MultipleMessageField::UInt8>());

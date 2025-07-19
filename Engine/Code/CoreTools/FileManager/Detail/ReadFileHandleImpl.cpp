@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/01 10:45)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/01 10:45)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -55,12 +55,12 @@ void CoreTools::ReadFileHandleImpl::WriteToFile(size_t itemSize, size_t itemsNum
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    FunctionProhibitedFromCalling("ReadFileHandleImpl½ûÖ¹µ÷ÓÃWriteToFile£¡", itemSize, itemsNumber, data);
+    FunctionProhibitedFromCalling("ReadFileHandleImplç¦æ­¢è°ƒç”¨WriteToFileï¼", itemSize, itemsNumber, data);
 }
 
 void CoreTools::ReadFileHandleImpl::AppendToFile(size_t itemSize, size_t itemsNumber, const void* data) noexcept(gAssert < 4 || gCoreToolsAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    FunctionProhibitedFromCalling("ReadFileHandleImpl½ûÖ¹µ÷ÓÃAppendToFile£¡", itemSize, itemsNumber, data);
+    FunctionProhibitedFromCalling("ReadFileHandleImplç¦æ­¢è°ƒç”¨AppendToFileï¼", itemSize, itemsNumber, data);
 }

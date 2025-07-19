@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	�汾��0.9.1.6 (2023/10/28 15:08)
+///	标准：std:c++20
+///	版本：0.9.1.6 (2023/10/28 15:08)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_ELLIPSOID3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_ELLIPSOID3_H
@@ -39,10 +39,10 @@ namespace Mathematics
         NODISCARD Segment3Type GetSegment() const noexcept;
         NODISCARD Ellipsoid3Type GetEllipsoid() const noexcept;
 
-        /// �ཻ���� ��Բ�屻��Ϊ��ʵ�壬�������߶��ϸ�λ����Բ���ڲ���
-        /// �򽻵�����ΪIT_SEGMENT������GetPoint(i)�����߶��յ㡣
-        /// �����ϣ������ֻ�Ǳ��汾�������ҵ��߶��ϸ�λ��������ʱϣ���õ����޽������Ľ����
-        /// ��ֻҪ��IT_SEGMENT��Ϊ���ͣ��ͽ��߶��յ���GetPoint(i)��ֵ���бȽϡ� ���������ͬ��������Ϊ���޽�������
+        /// 相交集。 椭圆体被认为是实体，因此如果线段严格位于椭圆体内部，
+        /// 则交点类型为IT_SEGMENT，函数GetPoint(i)返回线段终点。
+        /// 如果您希望椭球只是表面本身，并且当线段严格位于椭球内时希望得到“无交集”的结果，
+        /// 则只要将IT_SEGMENT作为类型，就将线段终点与GetPoint(i)的值进行比较。 如果它们相同，则将其视为“无交集”。
         NODISCARD int GetQuantity() const noexcept;
         NODISCARD Vector3Type GetPoint(int index) const;
 

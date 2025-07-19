@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 15:52)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 15:52)
 
 #include "StaticFindIntersectorArc2Circle2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -66,7 +66,7 @@ void Mathematics::StaticFindIntersectorArc2Circle2Testing::EmptyTest()
 
         const float distance = Vector2ToolsF::Distance(lhsCenter, rhsCenter);
 
-        // µÚ¶ş¸öÔ²ĞÄÔÚµÚÒ»¸öÔ²ÉÏ£¬±ØÏà½»£¬ĞŞ¸Ä°ë¾¶Öµ¡£
+        // ç¬¬äºŒä¸ªåœ†å¿ƒåœ¨ç¬¬ä¸€ä¸ªåœ†ä¸Šï¼Œå¿…ç›¸äº¤ï¼Œä¿®æ”¹åŠå¾„å€¼ã€‚
         if (MathF::Approximate(distance, lhsRadius, 1e-8f))
         {
             lhsRadius = distance / 2.0f;
@@ -89,13 +89,13 @@ void Mathematics::StaticFindIntersectorArc2Circle2Testing::EmptyTest()
 
         float rhsRadius = MathF::FAbs(randomDistribution(generator));
 
-        // µÚ¶ş¸öÔ²ĞÄÔÚµÚÒ»¸öÔ²ÄÚ
+        // ç¬¬äºŒä¸ªåœ†å¿ƒåœ¨ç¬¬ä¸€ä¸ªåœ†å†…
         if (distance < lhsRadius && lhsRadius - rhsRadius <= distance)
         {
             rhsRadius = lhsRadius - distance - 0.01f;
         }
 
-        // µÚ¶ş¸öÔ²ĞÄÔÚµÚÒ»¸öÔ²Íâ
+        // ç¬¬äºŒä¸ªåœ†å¿ƒåœ¨ç¬¬ä¸€ä¸ªåœ†å¤–
         if (lhsRadius < distance && distance - lhsRadius <= rhsRadius)
         {
             rhsRadius = distance - lhsRadius - 0.01f;

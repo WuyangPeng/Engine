@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	�汾��0.9.1.6 (2023/10/28 16:03)
+///	标准：std:c++20
+///	版本：0.9.1.6 (2023/10/28 16:03)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_INTERSECTOR_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_INTERSECTOR_H
@@ -16,9 +16,9 @@
 
 namespace Mathematics
 {
-    // ��̬�ཻ��ѯ��Ĭ��ʵ�ַ��ء�false����
-    // Find��ѯ����һ����һ�νӴ����ཻ���ϡ�
-    // �����ฺ���ṩ����,��Ϊ���ϵ����������ڶ������͡�
+    // 动态相交查询。默认实现返回“false”。
+    // Find查询生成一个第一次接触的相交集合。
+    // 派生类负责提供集合,因为集合的性质依赖于对象类型。
     template <typename Real, template <typename> class Vector>
     class DynamicIntersector : public Intersector<Real, Vector>
     {
@@ -34,7 +34,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        // ���������ڵ�һ�νӴ�ʱ��̬�ཻ��ѯ��ʱ�䡣
+        // 两个物体在第一次接触时动态相交查询的时间。
         NODISCARD Real GetContactTime() const noexcept;
         NODISCARD Real GetTMax() const noexcept;
         NODISCARD VectorType GetLhsVelocity() const noexcept;

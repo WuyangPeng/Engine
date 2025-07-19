@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/01 10:13)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/01 10:13)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -77,7 +77,7 @@ bool CoreTools::EnvironmentImpl::EraseDirectory(const String& directory)
 
 System::String CoreTools::EnvironmentImpl::GetReplaceBackslash(String directory)
 {
-    ASSERT_FAIL_THROW_EXCEPTION(!directory.empty(), SYSTEM_TEXT("Ä¿Â¼±ØĞë·Ç¿Õ¡£"))
+    ASSERT_FAIL_THROW_EXCEPTION(!directory.empty(), SYSTEM_TEXT("ç›®å½•å¿…é¡»éç©ºã€‚"))
 
     boost::algorithm::replace_all(directory, SYSTEM_TEXT("\\"), SYSTEM_TEXT("/"));
 
@@ -87,7 +87,7 @@ System::String CoreTools::EnvironmentImpl::GetReplaceBackslash(String directory)
     }
     else
     {
-        /// È·±£ËùÓĞÄ¿Â¼¶¼ÒÔĞ±¸Ü½áÎ²¡£
+        /// ç¡®ä¿æ‰€æœ‰ç›®å½•éƒ½ä»¥æ–œæ ç»“å°¾ã€‚
         return directory + TextParsing::gForwardSlash;
     }
 }
@@ -137,7 +137,7 @@ System::String CoreTools::EnvironmentImpl::GetPath(const String& fileName, const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒ·ûºÏÌõ¼şµÄÎÄ¼şÃû£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾ç¬¦åˆæ¡ä»¶çš„æ–‡ä»¶åï¼"s))
     }
 }
 
@@ -151,7 +151,7 @@ bool CoreTools::EnvironmentImpl::IsFileInPathExist(const String& decorated, cons
         if (const auto result = System::CloseCFile(file);
             !result)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("ÎÄ¼ş"), decorated, SYSTEM_TEXT("¹Ø±ÕÊ§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+            LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("æ–‡ä»¶"), decorated, SYSTEM_TEXT("å…³é—­å¤±è´¥ï¼"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
 
         return true;

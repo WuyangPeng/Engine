@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 10:25)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 10:25)
 
 #ifndef MATHEMATICS_OBJECTS_3D_SEGMENT3_H
 #define MATHEMATICS_OBJECTS_3D_SEGMENT3_H
@@ -31,17 +31,17 @@ namespace Mathematics
         using Vector3ToolsType = Vector3Tools<Real>;
 
     public:
-        // Ïß¶Î±»±íÊ¾Îª(1-s) * P0 + s * P1£¬ÆäÖĞP0ºÍP1ÊÇÏß¶ÎµÄ¶ËµãºÍ0 <= s <= 1¡£
+        // çº¿æ®µè¢«è¡¨ç¤ºä¸º(1-s) * P0 + s * P1ï¼Œå…¶ä¸­P0å’ŒP1æ˜¯çº¿æ®µçš„ç«¯ç‚¹å’Œ0 <= s <= 1ã€‚
         //
-        // Ò»Ğ©Ëã·¨Éæ¼°Ïß¶Î¿ÉÄÜ¸üÏ²»¶¶¨ÒåÒ»¸öÖĞµãµÄ±íÊ¾ºÍÃæÏò°üÎ§ºĞµÄ·½Ïò¡£
-        // ´Ë±íÊ¾ÎªC + t * D£¬ÆäÖĞC = (P0 + P1) / 2ÊÇ¸ÃÏß¶ÎµÄÖĞĞÄ£¬
-        // D = (P1-P0)/Length(P1-P0)ÊÇÒ»¸öµ¥Î»³¤¶È·½ÏòµÄÊ¸Á¿£¬
-        // ÇÒ|t| <= e¡£Öµ e = Length(P1-P0)/2ÊÇ¸ÃÏß¶ÎµÄ¡°·¶Î§¡±£¨°ë¾¶»ò°ë³¤£©¡£
+        // ä¸€äº›ç®—æ³•æ¶‰åŠçº¿æ®µå¯èƒ½æ›´å–œæ¬¢å®šä¹‰ä¸€ä¸ªä¸­ç‚¹çš„è¡¨ç¤ºå’Œé¢å‘åŒ…å›´ç›’çš„æ–¹å‘ã€‚
+        // æ­¤è¡¨ç¤ºä¸ºC + t * Dï¼Œå…¶ä¸­C = (P0 + P1) / 2æ˜¯è¯¥çº¿æ®µçš„ä¸­å¿ƒï¼Œ
+        // D = (P1-P0)/Length(P1-P0)æ˜¯ä¸€ä¸ªå•ä½é•¿åº¦æ–¹å‘çš„çŸ¢é‡ï¼Œ
+        // ä¸”|t| <= eã€‚å€¼ e = Length(P1-P0)/2æ˜¯è¯¥çº¿æ®µçš„â€œèŒƒå›´â€ï¼ˆåŠå¾„æˆ–åŠé•¿ï¼‰ã€‚
 
-        // ¹¹Ôìº¯Êı¼ÆËãcenter¡¢directionºÍextent´ÓbeginPointºÍendPoint
+        // æ„é€ å‡½æ•°è®¡ç®—centerã€directionå’Œextentä»beginPointå’ŒendPoint
         Segment3(const Vector3Type& beginPoint, const Vector3Type& endPoint, Real epsilon = MathType::GetZeroTolerance());
 
-        // ¹¹Ôìº¯Êı¼ÆËãbeginPointºÍendPoint´Ócenter¡¢directionºÍextent
+        // æ„é€ å‡½æ•°è®¡ç®—beginPointå’ŒendPointä»centerã€directionå’Œextent
         Segment3(Real extent, const Vector3Type& center, const Vector3Type& direction, Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
@@ -55,18 +55,18 @@ namespace Mathematics
         NODISCARD Segment3 GetMove(Real t, const Vector3Type& velocity) const;
 
     private:
-        // µ±Äã¸Ä±äbeginPoint»òendPointÊ±µ÷ÓÃ
+        // å½“ä½ æ”¹å˜beginPointæˆ–endPointæ—¶è°ƒç”¨
         void ComputeCenterDirectionExtent();
 
-        // µ±Äã¸Ä±äcenter»òdirection»òextentÊ±µ÷ÓÃ
+        // å½“ä½ æ”¹å˜centeræˆ–directionæˆ–extentæ—¶è°ƒç”¨
         void ComputeEndPoints();
 
     private:
-        // ÖÕµã±íÊ¾¡£
+        // ç»ˆç‚¹è¡¨ç¤ºã€‚
         Vector3Type beginPoint;
         Vector3Type endPoint;
 
-        // ÖĞĞÄ¡ª·½Ïò¡ª·¶Î§±íÊ¾¡£
+        // ä¸­å¿ƒâ€”æ–¹å‘â€”èŒƒå›´è¡¨ç¤ºã€‚
         Vector3Type center;
         Vector3Type direction;
         Real extent;
@@ -80,7 +80,7 @@ namespace Mathematics
     template <typename Real>
     NODISCARD bool Approximate(const Segment3<Real>& lhs, const Segment3<Real>& rhs, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-    // µ÷ÊÔÊä³ö
+    // è°ƒè¯•è¾“å‡º
     template <typename Real>
     std::ostream& operator<<(std::ostream& outFile, const Segment3<Real>& segment);
 }

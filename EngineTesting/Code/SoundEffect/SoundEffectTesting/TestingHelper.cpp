@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.3 (2023/08/03 14:59)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.3 (2023/08/03 14:59)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -16,7 +16,7 @@
 using namespace std::literals;
 
 SoundEffect::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "ÒôĞ§¿â"s }
+    : ParentType{ argc, argv, "éŸ³æ•ˆåº“"s }
 {
     InitSuite();
 
@@ -40,21 +40,21 @@ void SoundEffect::TestingHelper::InitSuite()
 
 void SoundEffect::TestingHelper::AddHelperSuite()
 {
-    auto helperSuite = GenerateSuite("ºê");
+    auto helperSuite = GenerateSuite("å®");
 
     AddSuite(helperSuite);
 }
 
 void SoundEffect::TestingHelper::AddConfigurationSuite()
 {
-    auto configurationSuite = GenerateSuite("ÅäÖÃ");
+    auto configurationSuite = GenerateSuite("é…ç½®");
 
     AddSuite(configurationSuite);
 }
 
 void SoundEffect::TestingHelper::AddInterfaceSuite()
 {
-    auto interfaceSuite = GenerateSuite("½Ó¿Ú");
+    auto interfaceSuite = GenerateSuite("æ¥å£");
 
     AddSuite(interfaceSuite);
 }

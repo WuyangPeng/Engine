@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 15:16)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 15:16)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -60,36 +60,36 @@ void CoreTools::SpecifyCheckSum::Calculation(const char* data, int length)
 {
     if (powersSize < length)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Êı×Ö²»ÄÜ³¬¹ı10Î»Êı\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ•°å­—ä¸èƒ½è¶…è¿‡10ä½æ•°\n"s))
     }
 
     std::array<char, powersSize> buffer{};
 
-    /// »ñµÃÔ­Ê¼Êı×ÖµÄĞ£ÑéºÍ
+    /// è·å¾—åŸå§‹æ•°å­—çš„æ ¡éªŒå’Œ
     originalCheckSum = GetCheckSum(data, length);
 
-    /// ÏÖÔÚ½«Êı×Ö¸´ÖÆµ½»º³åÇø£¬ÎÒÃÇ½«ÔÚÄÇÀï½øĞĞ×ªÖÃ¡£
+    /// ç°åœ¨å°†æ•°å­—å¤åˆ¶åˆ°ç¼“å†²åŒºï¼Œæˆ‘ä»¬å°†åœ¨é‚£é‡Œè¿›è¡Œè½¬ç½®ã€‚
     System::MemoryCopy(buffer.data(), data, length);
 
-    /// ×ö×ªÖÃºÍĞ£ÑéºÍ
+    /// åšè½¬ç½®å’Œæ ¡éªŒå’Œ
     for (auto index = 0; index < length - 1; ++index)
     {
-        /// ÊÇ·ñÓĞ×ªÖÃ¿ÉÄÜ£¿Èç¹ûÁ½Î»ÊıÏàÍ¬£¬Ôò²»ÄÜ×ªÖÃ; ËùÒÔÌø¹ıÕâĞ©£¬·ñÔòËûÃÇ»á²úÉúĞé¼ÙµÄÅö×²¡£
+        /// æ˜¯å¦æœ‰è½¬ç½®å¯èƒ½ï¼Ÿå¦‚æœä¸¤ä½æ•°ç›¸åŒï¼Œåˆ™ä¸èƒ½è½¬ç½®; æ‰€ä»¥è·³è¿‡è¿™äº›ï¼Œå¦åˆ™ä»–ä»¬ä¼šäº§ç”Ÿè™šå‡çš„ç¢°æ’ã€‚
         const auto nextIndex = index + 1;
 
         if (buffer.at(index) == buffer.at(nextIndex))
             continue;
 
-        /// ·ñÔò£¬×ö×ªÖÃ
+        /// å¦åˆ™ï¼Œåšè½¬ç½®
         std::swap(buffer.at(nextIndex), buffer.at(index));
 
-        /// µÃµ½Ğ£ÑéºÍ
+        /// å¾—åˆ°æ ¡éªŒå’Œ
         if (const auto transpositionCheckSum = GetCheckSum(buffer.data(), boost::numeric_cast<int>(buffer.size())); transpositionCheckSum == originalCheckSum)
         {
             ++collisions;
         }
 
-        /// ÏÖÔÚ³·ÏûÕâ¸ö×ªÖÃ
+        /// ç°åœ¨æ’¤æ¶ˆè¿™ä¸ªè½¬ç½®
 
         std::swap(buffer.at(nextIndex), buffer.at(index));
     }
@@ -99,7 +99,7 @@ int CoreTools::SpecifyCheckSum::GetCheckSum(const char* data, int length) const
 {
     if (data == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("dataÖ¸ÕëÎª¿Õ\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("dataæŒ‡é’ˆä¸ºç©º\n"s))
     }
 
     using Function = int (*)(int index);
@@ -116,51 +116,51 @@ int CoreTools::SpecifyCheckSum::GetCheckSum(const char* data, int length) const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ö»ÄÜÑ¡Ôñ7»ò9´ÎÃİ\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("åªèƒ½é€‰æ‹©7æˆ–9æ¬¡å¹‚\n"s))
     }
 
     if (function == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("powersÖ¸ÕëÎª¿Õ\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("powersæŒ‡é’ˆä¸ºç©º\n"s))
     }
 
     if (powersSize < length)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Êı×Ö²»ÄÜ³¬¹ı10Î»Êı\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ•°å­—ä¸èƒ½è¶…è¿‡10ä½æ•°\n"s))
     }
 
     int64_t sum{};
-    auto position = 0;  // Êı¾İÖĞµÄÊı×ÖÊÇÊ²Ã´
+    auto position = 0;  // æ•°æ®ä¸­çš„æ•°å­—æ˜¯ä»€ä¹ˆ
 
     for (auto i = length; 0 < i; --i)
     {
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
-        /// ÅĞ¶ÏÊÇ·ñÊÇÊı×Ö
+        /// åˆ¤æ–­æ˜¯å¦æ˜¯æ•°å­—
         if (!isdigit(data[i - 1]))
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§Êı×Ö\n"s))
+            THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆæ•°å­—\n"s))
         }
 
-        /// ½«Êı×Ö×Ö·û×ª»»ÎªÊı×Ö
+        /// å°†æ•°å­—å­—ç¬¦è½¬æ¢ä¸ºæ•°å­—
         const int digit{ data[i - 1] - '0' };
 
 #include SYSTEM_WARNING_POP
 
-        /// ²éÕÒÃİ£¬³ËÒÔdigit£¬¼Óµ½ºÍ
+        /// æŸ¥æ‰¾å¹‚ï¼Œä¹˜ä»¥digitï¼ŒåŠ åˆ°å’Œ
 
         sum += function(position) * static_cast<int64_t>(digit);
 
         ++position;
     }
 
-    /// ¸ù¾İ·½·¨µÃµ½×ÜºÍÄ£Êı
+    /// æ ¹æ®æ–¹æ³•å¾—åˆ°æ€»å’Œæ¨¡æ•°
     sum %= mod;
 
     if (mod != 11 && mod != 26 && mod != 10)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ä£ÊıÖµ´íÎó\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ¨¡æ•°å€¼é”™è¯¯\n"s))
     }
 
     if (mod == 11 && sum == 10)

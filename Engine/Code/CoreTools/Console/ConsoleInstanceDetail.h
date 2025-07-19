@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.8 (2024/03/30 14:59)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/03/30 14:59)
 
 #ifndef CORE_TOOLS_CONSOLE_CONSOLE_INSTANCE_DETAIL_H
 #define CORE_TOOLS_CONSOLE_CONSOLE_INSTANCE_DETAIL_H
@@ -31,7 +31,7 @@ CoreTools::ConsoleInstance<Handle>::ConsoleInstance(DisableNotThrow disableNotTh
 
     if (!System::IsHandleValid(handle))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("��ȡ��׼�豸�ľ��ʧ�ܡ�"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("获取标准设备的句柄失败。"s))
     }
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;

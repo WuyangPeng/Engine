@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 16:16)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 16:16)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_TARGET_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_TARGET_H
@@ -36,22 +36,22 @@ namespace Network
 
         CLASS_INVARIANT_DECLARE;
 
-        // WithNumber»áÔÚĞ´ÈëÊı×éÇ°Ğ´ÈëÊı×éµÄÊıÁ¿¡£
-        // º¯ÊıĞ´ÈëÊı×éÓĞÁ½ÖÖĞÎÊ½£ºWithNumberºÍWithoutNumber¡£
-        // WithNumber±íÃ÷Ğ´elementsNumberµ½»º³åÇø¡£
-        // WithoutNumber±íÊ¾²»Ğ´elementsNumberµ½»º³åÇø¡£
+        // WithNumberä¼šåœ¨å†™å…¥æ•°ç»„å‰å†™å…¥æ•°ç»„çš„æ•°é‡ã€‚
+        // å‡½æ•°å†™å…¥æ•°ç»„æœ‰ä¸¤ç§å½¢å¼ï¼šWithNumberå’ŒWithoutNumberã€‚
+        // WithNumberè¡¨æ˜å†™elementsNumberåˆ°ç¼“å†²åŒºã€‚
+        // WithoutNumberè¡¨ç¤ºä¸å†™elementsNumberåˆ°ç¼“å†²åŒºã€‚
 
-        // Ğ´ÈëboolÖµÎª4×Ö½Ú¡£
+        // å†™å…¥boolå€¼ä¸º4å­—èŠ‚ã€‚
         void WriteBool(bool datum);
         void WriteBoolWithNumber(int32_t elementsNumber, const bool* data);
         void WriteBoolWithoutNumber(int32_t elementsNumber, const bool* data);
 
-        // Ğ´Èë×Ö·û´®£¬ÔÚ×Ö·û´®Ö®Ç°Ğ´Èë4¸ö×Ö½Ú´ú±í³¤¶È¡£Ã»ÓĞ¿ÕÖÕÖ¹·û¡£
+        // å†™å…¥å­—ç¬¦ä¸²ï¼Œåœ¨å­—ç¬¦ä¸²ä¹‹å‰å†™å…¥4ä¸ªå­—èŠ‚ä»£è¡¨é•¿åº¦ã€‚æ²¡æœ‰ç©ºç»ˆæ­¢ç¬¦ã€‚
         void WriteString(const std::string& datum);
         void WriteStringWithNumber(int32_t elementsNumber, const std::string* data);
         void WriteStringWithoutNumber(int32_t elementsNumber, const std::string* data);
 
-        // Ô­ÉúÊı¾İĞ´Èëº¯Êı¡£
+        // åŸç”Ÿæ•°æ®å†™å…¥å‡½æ•°ã€‚
         template <typename T>
         void Write(T datum);
         template <typename T>
@@ -65,7 +65,7 @@ namespace Network
         void Write(const std::string& datum);
         void Write(const std::vector<std::string>& datum);
 
-        // Ğ´ÈëÃ¶¾ÙÖµÎªÊµ¼Ê³¤¶È¡£
+        // å†™å…¥æšä¸¾å€¼ä¸ºå®é™…é•¿åº¦ã€‚
         template <typename T>
         void WriteEnum(T datum);
         template <typename T>
@@ -73,7 +73,7 @@ namespace Network
         template <typename T>
         void WriteEnumWithoutNumber(int32_t elementsNumber, const T* data);
 
-        // °ïÖúº¯Êı
+        // å¸®åŠ©å‡½æ•°
         NODISCARD int GetBytesWritten() const noexcept;
 
     private:

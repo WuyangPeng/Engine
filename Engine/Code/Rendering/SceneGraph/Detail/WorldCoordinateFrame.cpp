@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/28 17:53)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/28 17:53)
 
 #include "Rendering/RenderingExport.h"
 
@@ -138,13 +138,13 @@ void Rendering::WorldCoordinateFrame::SetAxes(const AVector& aDirectionVector, c
                 epsilon < Mathematics::MathF::FAbs(dotDpRight) ||
                 epsilon < Mathematics::MathF::FAbs(dotUpRight))
             {
-                LOG_SINGLETON_ENGINE_APPENDER(Info, Rendering, SYSTEM_TEXT("×ø±êÏµ²»ÊÇÕı½»µÄ£¡"));
+                LOG_SINGLETON_ENGINE_APPENDER(Info, Rendering, SYSTEM_TEXT("åæ ‡ç³»ä¸æ˜¯æ­£äº¤çš„ï¼"));
             }
         }
 
         #endif  // RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
 
-        // ÊäÈëÏòÁ¿²¢Ã»ÓĞĞÎ³ÉÒ»¸ö±ê×¼Õı½»¼¯ºÏ¡£ÕâÀïÖØĞÂÕı½»»¯
+        // è¾“å…¥å‘é‡å¹¶æ²¡æœ‰å½¢æˆä¸€ä¸ªæ ‡å‡†æ­£äº¤é›†åˆã€‚è¿™é‡Œé‡æ–°æ­£äº¤åŒ–
         const auto orthonormalize = Orthonormalize(directionVector, upVector, rightVector, epsilon);
 
         directionVector = orthonormalize.GetUVector();

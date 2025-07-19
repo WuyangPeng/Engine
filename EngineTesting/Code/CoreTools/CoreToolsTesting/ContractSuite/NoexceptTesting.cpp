@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/04/26 13:06)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/04/26 13:06)
 
 #include "NoexceptTesting.h"
 #include "System/Helper/Tools.h"
@@ -64,48 +64,48 @@ void CoreTools::NoexceptTesting::NoexceptConstTest()
 
 void CoreTools::NoexceptTesting::Function0()
 {
-    THROW_EXCEPTION(SYSTEM_TEXT("ÕıÈ·µÄÅ×³öÒì³£¡£"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("æ­£ç¡®çš„æŠ›å‡ºå¼‚å¸¸ã€‚"s));
 }
 
 void CoreTools::NoexceptTesting::Function1(int parameter)
 {
     System::UnusedFunction(parameter);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("ÕıÈ·µÄÅ×³öÒì³£¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("æ­£ç¡®çš„æŠ›å‡ºå¼‚å¸¸ã€‚"s))
 }
 
 int CoreTools::NoexceptTesting::Function2()
 {
-    THROW_EXCEPTION(SYSTEM_TEXT("ÕıÈ·µÄÅ×³öÒì³£¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("æ­£ç¡®çš„æŠ›å‡ºå¼‚å¸¸ã€‚"s))
 }
 
 int CoreTools::NoexceptTesting::Function3(int parameter)
 {
     System::UnusedFunction(parameter);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("ÕıÈ·µÄÅ×³öÒì³£¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("æ­£ç¡®çš„æŠ›å‡ºå¼‚å¸¸ã€‚"s))
 }
 
 void CoreTools::NoexceptTesting::ConstFunction0() const
 {
-    THROW_EXCEPTION(SYSTEM_TEXT("ÕıÈ·µÄÅ×³öÒì³£¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("æ­£ç¡®çš„æŠ›å‡ºå¼‚å¸¸ã€‚"s))
 }
 
 void CoreTools::NoexceptTesting::ConstFunction1(int parameter) const
 {
     System::UnusedFunction(parameter);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("ÕıÈ·µÄÅ×³öÒì³£¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("æ­£ç¡®çš„æŠ›å‡ºå¼‚å¸¸ã€‚"s))
 }
 
 int CoreTools::NoexceptTesting::ConstFunction2() const
 {
-    THROW_EXCEPTION(SYSTEM_TEXT("ÕıÈ·µÄÅ×³öÒì³£¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("æ­£ç¡®çš„æŠ›å‡ºå¼‚å¸¸ã€‚"s))
 }
 
 int CoreTools::NoexceptTesting::ConstFunction3(int parameter) const
 {
     System::UnusedFunction(parameter);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("ÕıÈ·µÄÅ×³öÒì³£¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("æ­£ç¡®çš„æŠ›å‡ºå¼‚å¸¸ã€‚"s))
 }

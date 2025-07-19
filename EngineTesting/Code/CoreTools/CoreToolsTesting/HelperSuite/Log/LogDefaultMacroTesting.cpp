@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/13 10:59)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/13 10:59)
 
 #include "LogDefaultMacroTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -33,7 +33,7 @@ void CoreTools::LogDefaultMacroTesting::MainTest()
 
 void CoreTools::LogDefaultMacroTesting::DefaultLogTest() noexcept
 {
-    LOG_SINGLETON_APPENDER(Info, CoreTools, SYSTEM_TEXT("²âÊÔLogMacro£¬ÕâÌõÈÕÖ¾»áÐ´ÈëÒÑÅäÖÃµÄÈÕÖ¾ÎÄ¼þºÍ¿ØÖÆÌ¨¡£"));
+    LOG_SINGLETON_APPENDER(Info, CoreTools, SYSTEM_TEXT("æµ‹è¯•LogMacroï¼Œè¿™æ¡æ—¥å¿—ä¼šå†™å…¥å·²é…ç½®çš„æ—¥å¿—æ–‡ä»¶å’ŒæŽ§åˆ¶å°ã€‚"));
 
-    LOG_SINGLETON_APPENDER_USE_FUNCTION_DESCRIBED(Info, CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED, SYSTEM_TEXT("²âÊÔLogMacro£¬ÕâÌõÈÕÖ¾»áÐ´ÈëÒÑÅäÖÃµÄÈÕÖ¾ÎÄ¼þºÍ¿ØÖÆÌ¨¡£"));
+    LOG_SINGLETON_APPENDER_USE_FUNCTION_DESCRIBED(Info, CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED, SYSTEM_TEXT("æµ‹è¯•LogMacroï¼Œè¿™æ¡æ—¥å¿—ä¼šå†™å…¥å·²é…ç½®çš„æ—¥å¿—æ–‡ä»¶å’ŒæŽ§åˆ¶å°ã€‚"));
 }

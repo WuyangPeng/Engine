@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.3 (2023/08/11 20:44)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.3 (2023/08/11 20:44)
 
 #include "WindowApplicationInformationTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -27,5 +27,5 @@ void Framework::WindowApplicationInformationTesting::DoRunUnitTest()
 
 void Framework::WindowApplicationInformationTesting::MainTest() noexcept
 {
-    // ²âÊÔÔÚFrameworkWindowTestingÖĞ£¬ĞèÒª´°¿Ú»·¾³¡£
+    // æµ‹è¯•åœ¨FrameworkWindowTestingä¸­ï¼Œéœ€è¦çª—å£ç¯å¢ƒã€‚
 }

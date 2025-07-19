@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:31)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:31)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR1_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR1_DETAIL_H
@@ -40,15 +40,15 @@ void Mathematics::DynamicFindIntersector1<Real>::Find(Real tMax, Real speedU, Re
 
     if (u1 + epsilon < v0)
     {
-        // [u0,u1]×î³õÔÚ[v0,v1]µÄ×ó±ß¡£
+        // [u0,u1]æœ€åˆåœ¨[v0,v1]çš„å·¦è¾¹ã€‚
         auto differenceSpeed = speedU - speedV;
         if (MathType::GetValue(0) < differenceSpeed)
         {
-            // Çø¼ä±ØĞë³¯Ïò±Ë´ËÒÆ¶¯¡£
+            // åŒºé—´å¿…é¡»æœå‘å½¼æ­¤ç§»åŠ¨ã€‚
             auto differencePosition = v0 - u1;
             if (differencePosition <= tMax * differenceSpeed)
             {
-                // Çø¼äÔÚÖ¸¶¨Ê±¼äÄÚÏà½»¡£
+                // åŒºé—´åœ¨æŒ‡å®šæ—¶é—´å†…ç›¸äº¤ã€‚
                 firstTime = differencePosition / differenceSpeed;
                 lastTime = (v1 - u0) / differenceSpeed;
 
@@ -58,15 +58,15 @@ void Mathematics::DynamicFindIntersector1<Real>::Find(Real tMax, Real speedU, Re
     }
     else if (v1 + epsilon < u0)
     {
-        // [u0,u1]×î³õÔÚ[v0,v1]µÄÓÒ±ß¡£
+        // [u0,u1]æœ€åˆåœ¨[v0,v1]çš„å³è¾¹ã€‚
         auto differenceSpeed = speedV - speedU;
         if (MathType::GetValue(0) < differenceSpeed)
         {
-            // Çø¼ä±ØĞë³¯Ïò±Ë´ËÒÆ¶¯¡£
+            // åŒºé—´å¿…é¡»æœå‘å½¼æ­¤ç§»åŠ¨ã€‚
             auto differencePosition = u0 - v1;
             if (differencePosition <= tMax * differenceSpeed)
             {
-                // Çø¼äÔÚÖ¸¶¨Ê±¼äÄÚÏà½»¡£
+                // åŒºé—´åœ¨æŒ‡å®šæ—¶é—´å†…ç›¸äº¤ã€‚
                 firstTime = differencePosition / differenceSpeed;
                 lastTime = (u1 - v0) / differenceSpeed;
 
@@ -76,7 +76,7 @@ void Mathematics::DynamicFindIntersector1<Real>::Find(Real tMax, Real speedU, Re
     }
     else
     {
-        // Çø¼ä±¾À´¾ÍÏà½»¡£
+        // åŒºé—´æœ¬æ¥å°±ç›¸äº¤ã€‚
         firstTime = MathType::GetValue(0);
         if (speedU + epsilon < speedV)
         {
@@ -168,7 +168,7 @@ Real Mathematics::DynamicFindIntersector1<Real>::GetFirstTime() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Çø¼ä²»Ïà½»\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("åŒºé—´ä¸ç›¸äº¤\n"s));
     }
 }
 
@@ -183,7 +183,7 @@ Real Mathematics::DynamicFindIntersector1<Real>::GetLastTime() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Çø¼ä²»Ïà½»\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("åŒºé—´ä¸ç›¸äº¤\n"s));
     }
 }
 

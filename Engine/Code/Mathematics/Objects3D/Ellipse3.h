@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 10:26)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 10:26)
 
 #ifndef MATHEMATICS_OBJECTS_3D_ELLIPSE3_H
 #define MATHEMATICS_OBJECTS_3D_ELLIPSE3_H
@@ -31,14 +31,14 @@ namespace Mathematics
         using Vector3Type = Vector3<Real>;
 
     public:
-        // º¬ÍÖÔ²µÄÃæÊÇDot(N,X-C) = 0 £¬
-        // ÆäÖĞXÊÇÔÚÆ½ÃæÉÏµÄÈÎÒâµã¡£
-        // ÏòÁ¿U£¬VºÍNĞÎ³ÉÕı½»ÓÒÊÖ×ø±êÏµ£¨¾ØÕó [U V N]ÊÇÕı½»µÄ£¬ÇÒĞĞÁĞÊ½Îª1£©¡£
-        // ÔÚÆ½ÃæÄÚµÄÍÖÔ²ÎªX = C + a*cos(t)*U + b*sin(t)*V£¬
-        // ÆäÖĞtÎª[0,2*pi)µÄ½Ç¶ÈºÍÆäÖĞ a >= b > 0¡£
-        // ÔÚ´ËÌÖÂÛµÄ·ûºÅ¾ùÓëÀà³ÉÔ±ÈçÏÂ¡£
-        // ³ÉÔ±'Center'ÎªC£¬¡°Normal¡±ÊÇN£¬'Major'ÊÇU£¬'Minor'ÊÇV£¬
-        // 'MajorLength¡°ÊÇaºÍ¡±MinorLength'Îªb¡£
+        // å«æ¤­åœ†çš„é¢æ˜¯Dot(N,X-C) = 0 ï¼Œ
+        // å…¶ä¸­Xæ˜¯åœ¨å¹³é¢ä¸Šçš„ä»»æ„ç‚¹ã€‚
+        // å‘é‡Uï¼ŒVå’ŒNå½¢æˆæ­£äº¤å³æ‰‹åæ ‡ç³»ï¼ˆçŸ©é˜µ [U V N]æ˜¯æ­£äº¤çš„ï¼Œä¸”è¡Œåˆ—å¼ä¸º1ï¼‰ã€‚
+        // åœ¨å¹³é¢å†…çš„æ¤­åœ†ä¸ºX = C + a*cos(t)*U + b*sin(t)*Vï¼Œ
+        // å…¶ä¸­tä¸º[0,2*pi)çš„è§’åº¦å’Œå…¶ä¸­ a >= b > 0ã€‚
+        // åœ¨æ­¤è®¨è®ºçš„ç¬¦å·å‡ä¸ç±»æˆå‘˜å¦‚ä¸‹ã€‚
+        // æˆå‘˜'Center'ä¸ºCï¼Œâ€œNormalâ€æ˜¯Nï¼Œ'Major'æ˜¯Uï¼Œ'Minor'æ˜¯Vï¼Œ
+        // 'MajorLengthâ€œæ˜¯aå’Œâ€MinorLength'ä¸ºbã€‚
         Ellipse3(const Vector3Type& center,
                  const Vector3Type& normal,
                  const Vector3Type& major,

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 10:26)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 10:26)
 
 #ifndef MATHEMATICS_OBJECTS_3D_FRUSTUM3_H
 #define MATHEMATICS_OBJECTS_3D_FRUSTUM3_H
@@ -20,14 +20,14 @@
 
 namespace Mathematics
 {
-    /// Õı½»ÊÓ×¶Ìå¡£
-    /// ÉèEÊÇÔ­µã£¬DÎª·½ÏòÏòÁ¿£¬UÊÇÏòÉÏÏòÁ¿£¬¶øRÊÇÓÒ·½ÏòÏòÁ¿¡£
-    /// Éèu > 0 ÇÒ r > 0·Ö±ğÊÇÔÚUºÍR·½ÏòµÄ³¤¶È¡£
-    /// ÉènºÍfÊÇDµÄ·½ÏòÉÏµÄ·¶Î§0 < n < f¡£
-    /// ËÄ¸ö½Ç£¬ÔÚ½üµÄÆ½Ãæ½Ø×¶ÊÇE + n * D + s0 * u * U + s1 * r * R£¬
-    /// ÆäÖĞ|s0| =|s1| = 1£¨ËÄ¸öÑ¡Ïî£©¡£
-    /// ËÄ¸ö½ÇµÄÔ¶Æ½ÃæµÄ½Ø×¶ÊÇ E + f * D + (f / n) * (s0 * u * U + s1 * r * R)£¬
-    /// ÆäÖĞ|s0| = |s1| = 1£¨ËÄ¸öÑ¡Ïî£©
+    /// æ­£äº¤è§†é”¥ä½“ã€‚
+    /// è®¾Eæ˜¯åŸç‚¹ï¼ŒDä¸ºæ–¹å‘å‘é‡ï¼ŒUæ˜¯å‘ä¸Šå‘é‡ï¼Œè€ŒRæ˜¯å³æ–¹å‘å‘é‡ã€‚
+    /// è®¾u > 0 ä¸” r > 0åˆ†åˆ«æ˜¯åœ¨Uå’ŒRæ–¹å‘çš„é•¿åº¦ã€‚
+    /// è®¾nå’Œfæ˜¯Dçš„æ–¹å‘ä¸Šçš„èŒƒå›´0 < n < fã€‚
+    /// å››ä¸ªè§’ï¼Œåœ¨è¿‘çš„å¹³é¢æˆªé”¥æ˜¯E + n * D + s0 * u * U + s1 * r * Rï¼Œ
+    /// å…¶ä¸­|s0| =|s1| = 1ï¼ˆå››ä¸ªé€‰é¡¹ï¼‰ã€‚
+    /// å››ä¸ªè§’çš„è¿œå¹³é¢çš„æˆªé”¥æ˜¯ E + f * D + (f / n) * (s0 * u * U + s1 * r * R)ï¼Œ
+    /// å…¶ä¸­|s0| = |s1| = 1ï¼ˆå››ä¸ªé€‰é¡¹ï¼‰
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Frustum3 final
@@ -47,14 +47,14 @@ namespace Mathematics
         using ArrayType = std::array<Vector3Type, vertexSize>;
 
     public:
-        /// Ä¬ÈÏ¹¹Ôìº¯ÊıÉèÖÃÒÔÏÂÖµ£º
-        /// Ô­µã(E)Îª(0,0,0)£¬
-        /// dVector(D)Îª(0,0,1)£¬
-        /// uVector(U)Îª(0,1,0)£¬
-        /// rVector(R)Îª(1,0,0)£¬
-        /// dMin(n)Îª1£¬
-        /// dMax(f)Îª2£¬
-        /// uBound(u)Îª1ºÍrBound(r)Îª1¡£
+        /// é»˜è®¤æ„é€ å‡½æ•°è®¾ç½®ä»¥ä¸‹å€¼ï¼š
+        /// åŸç‚¹(E)ä¸º(0,0,0)ï¼Œ
+        /// dVector(D)ä¸º(0,0,1)ï¼Œ
+        /// uVector(U)ä¸º(0,1,0)ï¼Œ
+        /// rVector(R)ä¸º(1,0,0)ï¼Œ
+        /// dMin(n)ä¸º1ï¼Œ
+        /// dMax(f)ä¸º2ï¼Œ
+        /// uBound(u)ä¸º1å’ŒrBound(r)ä¸º1ã€‚
         Frustum3() noexcept;
 
         Frustum3(const Vector3Type& origin,
@@ -97,7 +97,7 @@ namespace Mathematics
         NODISCARD Real GetMTwoUpF() const noexcept;
         NODISCARD Real GetMTwoRightF() const noexcept;
 
-        /// ·µ»Ø8¸ö¶¥µã
+        /// è¿”å›8ä¸ªé¡¶ç‚¹
         NODISCARD VerticesType ComputeVertices() const;
         NODISCARD ArrayType ComputeVerticesToArray() const;
 
@@ -118,8 +118,8 @@ namespace Mathematics
         void SetRightVector(const AlgebraVector3& aRightVector);
 
     private:
-        /// Ã¿µ±¶ÔdirectionMin£¬directionMax£¬upBound»òrightBound½øĞĞ¸ü¸ÄÊ±£¬¶¼±ØĞëµ÷ÓÃUpdate()º¯Êı¡£
-        /// ÖµdirectionRatio£¬mTwoUFºÍmTwoRF¶¼ÒÀÀµÓÚÕâĞ©ÖµµÄ±ä»¯¡£
+        /// æ¯å½“å¯¹directionMinï¼ŒdirectionMaxï¼ŒupBoundæˆ–rightBoundè¿›è¡Œæ›´æ”¹æ—¶ï¼Œéƒ½å¿…é¡»è°ƒç”¨Update()å‡½æ•°ã€‚
+        /// å€¼directionRatioï¼ŒmTwoUFå’ŒmTwoRFéƒ½ä¾èµ–äºè¿™äº›å€¼çš„å˜åŒ–ã€‚
         void Update() noexcept;
 
     private:
@@ -132,7 +132,7 @@ namespace Mathematics
         Real upBound;
         Real rightBound;
 
-        // ÊıÖµ´Ó¹¹Ôìº¯ÊıµÄÊäÈëµÃµ½µÄ¡£
+        // æ•°å€¼ä»æ„é€ å‡½æ•°çš„è¾“å…¥å¾—åˆ°çš„ã€‚
         Real directionRatio;
         Real twoUpF;
         Real twoRightF;
@@ -140,7 +140,7 @@ namespace Mathematics
         Real epsilon;
     };
 
-    /// ÓëÖ§³ÖÅÅĞòÈİÆ÷µÄ±È½Ï
+    /// ä¸æ”¯æŒæ’åºå®¹å™¨çš„æ¯”è¾ƒ
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     NODISCARD bool operator==(const Frustum3<Real>& lhs, const Frustum3<Real>& rhs);

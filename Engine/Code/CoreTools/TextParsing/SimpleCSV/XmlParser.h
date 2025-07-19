@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/02 15:21)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/02 15:21)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_XML_PARSER_H
 #define CORE_TOOLS_TEXT_PARSING_XML_PARSER_H
@@ -23,7 +23,7 @@ namespace pugi
 
 namespace CoreTools::SimpleCSV
 {
-    /// xml_nodeµÄÉúÃüÖÜÆÚÒÀÀµÓÚxml_document¡£
+    /// xml_nodeçš„ç”Ÿå‘½å‘¨æœŸä¾èµ–äºxml_documentã€‚
     using XMLNode = pugi::xml_node;
     using XMLAttribute = pugi::xml_attribute;
     using XMLDocument = pugi::xml_document;

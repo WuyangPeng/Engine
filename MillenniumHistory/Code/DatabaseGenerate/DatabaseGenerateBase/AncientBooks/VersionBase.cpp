@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #include "VersionBase.h"
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
@@ -46,7 +46,7 @@ AncientBooks::VersionBase::ConstBookSharedPtr AncientBooks::VersionBase::GetBook
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("version±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("versionè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 int AncientBooks::VersionBase::GetSource() const noexcept
@@ -60,7 +60,7 @@ System::String AncientBooks::VersionBase::GetSourceName() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("version±í»ùÀà²»ÔÊĞí»ñÈ¡×Ö·û´®¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("versionè¡¨åŸºç±»ä¸å…è®¸è·å–å­—ç¬¦ä¸²ã€‚"s))
 }
 
 int AncientBooks::VersionBase::GetCountry() const noexcept
@@ -76,7 +76,7 @@ AncientBooks::VersionBase::ConstCountrySharedPtr AncientBooks::VersionBase::GetC
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("version±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("versionè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 int64_t AncientBooks::VersionBase::GetReignTitle() const noexcept
@@ -92,7 +92,7 @@ AncientBooks::VersionBase::ConstReignTitleSharedPtr AncientBooks::VersionBase::G
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("version±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("versionè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 int AncientBooks::VersionBase::GetYear() const noexcept
@@ -108,28 +108,28 @@ AncientBooks::VersionBase::ConstYearSharedPtr AncientBooks::VersionBase::GetYear
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("version±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("versionè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 System::String AncientBooks::VersionBase::GetVersion() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("version±í»ùÀà²»ÔÊĞí»ñÈ¡×Ö·û´®¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("versionè¡¨åŸºç±»ä¸å…è®¸è·å–å­—ç¬¦ä¸²ã€‚"s))
 }
 
 AncientBooks::VersionBase::IntContainer AncientBooks::VersionBase::GetOtherAuthor() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("version±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("versionè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 int AncientBooks::VersionBase::GetOtherAuthorCount() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("version±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("versionè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 int AncientBooks::VersionBase::GetOtherAuthor(int index) const
@@ -138,21 +138,21 @@ int AncientBooks::VersionBase::GetOtherAuthor(int index) const
 
     System::UnusedFunction(index);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("version±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("versionè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::VersionBase::IntContainerConstIter AncientBooks::VersionBase::GetOtherAuthorBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("version±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("versionè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::VersionBase::IntContainerConstIter AncientBooks::VersionBase::GetOtherAuthorEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("version±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("versionè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::VersionBase::CharacterContainer AncientBooks::VersionBase::GetOtherAuthor(const AncientBooksContainer& csvContainer) const
@@ -161,21 +161,21 @@ AncientBooks::VersionBase::CharacterContainer AncientBooks::VersionBase::GetOthe
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("version±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("versionè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 AncientBooks::VersionBase::StringContainer AncientBooks::VersionBase::GetAuthorNotes() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("version±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("versionè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 int AncientBooks::VersionBase::GetAuthorNotesCount() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("version±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("versionè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 System::String AncientBooks::VersionBase::GetAuthorNotes(int index) const
@@ -184,20 +184,20 @@ System::String AncientBooks::VersionBase::GetAuthorNotes(int index) const
 
     System::UnusedFunction(index);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("version±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("versionè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::VersionBase::StringContainerConstIter AncientBooks::VersionBase::GetAuthorNotesBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("version±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("versionè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::VersionBase::StringContainerConstIter AncientBooks::VersionBase::GetAuthorNotesEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("version±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("versionè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 

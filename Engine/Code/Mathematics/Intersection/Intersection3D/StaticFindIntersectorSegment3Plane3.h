@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 15:08)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 15:08)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_PLANE3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_PLANE3_H
@@ -42,7 +42,7 @@ namespace Mathematics
         NODISCARD Real GetSegmentParameter() const noexcept;
 
     private:
-        // ²éÕÒ½»²æµã²éÑ¯¡£ Ïà½»µãÎªP = origin + t * direction£¬|t| <= e£¬ÆäÖĞeÊÇÏß¶Î·¶Î§¡£
+        // æŸ¥æ‰¾äº¤å‰ç‚¹æŸ¥è¯¢ã€‚ ç›¸äº¤ç‚¹ä¸ºP = origin + t * directionï¼Œ|t| <= eï¼Œå…¶ä¸­eæ˜¯çº¿æ®µèŒƒå›´ã€‚
         void Find() noexcept;
 
     private:

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #ifndef DATABASE_ENTITY_FWD_H
 #define DATABASE_ENTITY_FWD_H

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+ï»¿/// Copyright (c) 2010-2023
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.1 (2023/11/20 16:36)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.1 (2023/11/20 16:36)
 
 #ifndef RENDERING_CONTROLLERS_CONTROLLER_IMPL_H
 #define RENDERING_CONTROLLERS_CONTROLLER_IMPL_H
@@ -41,10 +41,10 @@ namespace Rendering
         void SetApplicationTime(double aApplicationTime) noexcept;
         NODISCARD double GetApplicationTime() const noexcept;
 
-        // ¶¯»­¸üĞÂ¡£ÒÔºÁÃëÎªµ¥Î»µÄÓ¦ÓÃ³ÌĞòÊ±¼ä¡£
+        // åŠ¨ç”»æ›´æ–°ã€‚ä»¥æ¯«ç§’ä¸ºå•ä½çš„åº”ç”¨ç¨‹åºæ—¶é—´ã€‚
         NODISCARD bool Update(double aApplicationTime) noexcept;
 
-        // ´ÓÓ¦ÓÃ³ÌĞòµ¥Î»Ê±¼ä×ª»»¿ØÖÆÆ÷µ¥Î»Ê±¼ä¡£ÅÉÉúÀà¿ÉÒÔÊ¹ÓÃ´Ë¸üĞÂ³ÌĞò¡£
+        // ä»åº”ç”¨ç¨‹åºå•ä½æ—¶é—´è½¬æ¢æ§åˆ¶å™¨å•ä½æ—¶é—´ã€‚æ´¾ç”Ÿç±»å¯ä»¥ä½¿ç”¨æ­¤æ›´æ–°ç¨‹åºã€‚
         NODISCARD double GetControlTime(double aApplicationTime) const;
 
         NODISCARD ControllerRepeatType GetRepeat() const noexcept;
@@ -69,14 +69,14 @@ namespace Rendering
         NODISCARD ControllerSharedPtr GetControllerObject();
 
     private:
-        ControllerRepeatType repeat;  // Ä¬ÈÏ = ControllerRepeatType::Clamp
-        double minTime;  // Ä¬ÈÏ = 0
-        double maxTime;  // Ä¬ÈÏ = 0
-        double phase;  // Ä¬ÈÏ = 0
-        double frequency;  // Ä¬ÈÏ = 1
-        bool active;  // Ä¬ÈÏ = true
+        ControllerRepeatType repeat;  // é»˜è®¤ = ControllerRepeatType::Clamp
+        double minTime;  // é»˜è®¤ = 0
+        double maxTime;  // é»˜è®¤ = 0
+        double phase;  // é»˜è®¤ = 0
+        double frequency;  // é»˜è®¤ = 1
+        bool active;  // é»˜è®¤ = true
 
-        // Ó¦ÓÃ³ÌĞòµÄÊ±¼ä,ÒÔºÁÃëÎªµ¥Î»¡£
+        // åº”ç”¨ç¨‹åºçš„æ—¶é—´,ä»¥æ¯«ç§’ä¸ºå•ä½ã€‚
         double applicationTime;
 
         ControllerWeakPtr controller;

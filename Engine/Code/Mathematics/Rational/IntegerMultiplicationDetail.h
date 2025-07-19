@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:19)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_MULTIPLICATION_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_MULTIPLICATION_DETAIL_H
@@ -58,8 +58,8 @@ void Mathematics::IntegerMultiplication<N>::Product()
 template <int N>
 void Mathematics::IntegerMultiplication<N>::CalculateProduct(uint32_t lhsBit, uint32_t lhsIndex)
 {
-    // ½«lhsµÄÄ³¸öÎ»Í¬rhsµÄËùÓĞÎ»Ïà³Ë£¬
-    // ½á¹û±£´æÔÚproductÖĞ¡£
+    // å°†lhsçš„æŸä¸ªä½åŒrhsçš„æ‰€æœ‰ä½ç›¸ä¹˜ï¼Œ
+    // ç»“æœä¿å­˜åœ¨productä¸­ã€‚
     auto productBufferIndex = lhsIndex;
     auto carry = 0;
     for (auto rhsIndex = 0; rhsIndex < intSize; ++rhsIndex)
@@ -89,9 +89,9 @@ void Mathematics::IntegerMultiplication<N>::CalculateProduct(uint32_t lhsBit, ui
 template <int N>
 uint32_t Mathematics::IntegerMultiplication<N>::CalculateResult(uint32_t lhsIndex)
 {
-    // ½«productÖĞ±£´æµÄÖµÍ¬resultÖĞ±£´æµÄÖµÏà¼Ó£¬
-    // ½á¹û±£´æÔÚresultÖĞ¡£
-    // È·±£resultµÄ³õÊ¼ÖµÒÑÇåÁã¡£
+    // å°†productä¸­ä¿å­˜çš„å€¼åŒresultä¸­ä¿å­˜çš„å€¼ç›¸åŠ ï¼Œ
+    // ç»“æœä¿å­˜åœ¨resultä¸­ã€‚
+    // ç¡®ä¿resultçš„åˆå§‹å€¼å·²æ¸…é›¶ã€‚
     auto bufferIndex = lhsIndex;
     auto carry = 0u;
     for (auto rhsIndex = 0u; rhsIndex <= intSize; ++rhsIndex)
@@ -117,7 +117,7 @@ uint32_t Mathematics::IntegerMultiplication<N>::CalculateResult(uint32_t lhsInde
 template <int N>
 void Mathematics::IntegerMultiplication<N>::DetermineCarry(uint32_t carry, uint32_t resultBufferIndex)
 {
-    // ÅĞ¶ÏÊÇ·ñÒª½øÎ»£¬ÏÂÃæÌõ¼şÈç¹û³ÉÁ¢£¬Ôò±íÊ¾¼ÆËãÒÑÒç³ö¡£
+    // åˆ¤æ–­æ˜¯å¦è¦è¿›ä½ï¼Œä¸‹é¢æ¡ä»¶å¦‚æœæˆç«‹ï¼Œåˆ™è¡¨ç¤ºè®¡ç®—å·²æº¢å‡ºã€‚
     for (auto rhsIndex = resultBufferIndex; 0 < carry && rhsIndex < result.size(); ++rhsIndex)
     {
 #include SYSTEM_WARNING_PUSH
@@ -136,21 +136,21 @@ void Mathematics::IntegerMultiplication<N>::DetermineCarry(uint32_t carry, uint3
 template <int N>
 void Mathematics::IntegerMultiplication<N>::OverflowTest()
 {
-    // ²âÊÔÒç³ö¡£Äã¿ÉÒÔÔÚÇ°Ãæ¸üÔçµÄÑ­»·ÖĞ²âÊÔ¡£
-    // µ«ÔÚÕâÀï²âÊÔ£¬Äú¿ÉÒÔµÃµ½Òç³ö¶àÉÙ¡£
-    // Õâ¸öĞÅÏ¢¶ÔÒ»¸öÓ¦ÓÃ³ÌĞò¿ÉÄÜÊÇÓĞÓÃµÄ£¬ÒÔ¾ö¶¨ÈçºÎÑ¡ÔñÕûÊı´óĞ¡¡£
+    // æµ‹è¯•æº¢å‡ºã€‚ä½ å¯ä»¥åœ¨å‰é¢æ›´æ—©çš„å¾ªç¯ä¸­æµ‹è¯•ã€‚
+    // ä½†åœ¨è¿™é‡Œæµ‹è¯•ï¼Œæ‚¨å¯ä»¥å¾—åˆ°æº¢å‡ºå¤šå°‘ã€‚
+    // è¿™ä¸ªä¿¡æ¯å¯¹ä¸€ä¸ªåº”ç”¨ç¨‹åºå¯èƒ½æ˜¯æœ‰ç”¨çš„ï¼Œä»¥å†³å®šå¦‚ä½•é€‰æ‹©æ•´æ•°å¤§å°ã€‚
 
     for (auto i = 2 * intSize - 1; intSize <= i; --i)
     {
         if (result.at(i) != 0)
         {
-            THROW_EXCEPTION((CoreTools::Error::Format(SYSTEM_TEXT("IntegerÒç³öÔÚi = %1%\n")) % i).str());
+            THROW_EXCEPTION((CoreTools::Error::Format(SYSTEM_TEXT("Integeræº¢å‡ºåœ¨i = %1%\n")) % i).str());
         }
     }
 
     if ((result.at(intLast) & symbol) != 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("IntegerÒç³ö\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("Integeræº¢å‡º\n"s));
     }
 
     multiplication = IntegerDataType{ result };

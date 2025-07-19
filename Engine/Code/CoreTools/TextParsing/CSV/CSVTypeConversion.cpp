@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/03 09:14)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/03 09:14)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -29,7 +29,7 @@ std::string CoreTools::CSVTypeConversion::GetTypeDescribe(CSVFormatType csvForma
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½¶ÔÓ¦µÄÀàĞÍÃèÊö¡£\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°å¯¹åº”çš„ç±»å‹æè¿°ã€‚\n"s))
     }
 }
 
@@ -44,7 +44,7 @@ CoreTools::CSVFormatType CoreTools::CSVTypeConversion::GetFormatType(const Strin
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½¶ÔÓ¦µÄÀàĞÍ¡£\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°å¯¹åº”çš„ç±»å‹ã€‚\n"s))
     }
 }
 
@@ -332,7 +332,7 @@ std::string CoreTools::CSVTypeConversion::GetTypeDescribe(CSVDataType csvDataTyp
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½¶ÔÓ¦µÄÀàĞÍÃèÊö¡£\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°å¯¹åº”çš„ç±»å‹æè¿°ã€‚\n"s))
     }
 }
 
@@ -362,7 +362,7 @@ CoreTools::CSVDataType CoreTools::CSVTypeConversion::GetEnumDataType(const Strin
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½¶ÔÓ¦µÄÀàĞÍ¡£\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°å¯¹åº”çš„ç±»å‹ã€‚\n"s))
     }
 }
 
@@ -410,7 +410,7 @@ System::String CoreTools::CSVTypeConversion::GetActualType(CSVDataType csvDataTy
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½¶ÔÓ¦µÄÀàĞÍ¡£\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°å¯¹åº”çš„ç±»å‹ã€‚\n"s))
     }
 }
 
@@ -443,7 +443,7 @@ System::String CoreTools::CSVTypeConversion::GetFunctionName(CSVDataType csvData
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½¶ÔÓ¦µÄÀàĞÍ¡£\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°å¯¹åº”çš„ç±»å‹ã€‚\n"s))
     }
 }
 
@@ -458,7 +458,7 @@ System::String CoreTools::CSVTypeConversion::GetValueType(CSVDataType csvDataTyp
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½¶ÔÓ¦µÄÀàĞÍ¡£\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°å¯¹åº”çš„ç±»å‹ã€‚\n"s))
     }
 }
 
@@ -509,7 +509,7 @@ System::String CoreTools::CSVTypeConversion::GetBaseReturnDescribe(CSVDataType c
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½¶ÔÓ¦µÄÀàĞÍ¡£\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°å¯¹åº”çš„ç±»å‹ã€‚\n"s))
     }
 }
 
@@ -524,7 +524,7 @@ System::String CoreTools::CSVTypeConversion::GetAbbreviation(CSVDataType csvData
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½¶ÔÓ¦µÄÀàĞÍ¡£\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°å¯¹åº”çš„ç±»å‹ã€‚\n"s))
     }
 }
 

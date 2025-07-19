@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/12 10:00)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/12 10:00)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_GAUSSIAN_ELIMINATION_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_GAUSSIAN_ELIMINATION_H
@@ -19,14 +19,14 @@
 
 namespace Mathematics
 {
-    /// ÊäÈë¾ØÕómatrix±ØÐëÊÇNxN¡£
-    /// ÔªËØ²éÕÒµÄ´æ´¢Ô¼¶¨ÓÉMATHEMATICS_USE_ROW_MAJOR¾ö¶¨¡£
-    /// Èç¹ûÄãÏëÒªmatrixµÄÄæ£¬´«µÝÒ»¸öwantInverseÎªtrue£»
-    /// ·µ»ØµÄinverseÒ²±ØÐëÊÇNxN£¬²¢Ê¹ÓÃÓëMÏàÍ¬µÄ´æ´¢Ô¼¶¨¡£
-    /// Èç¹û²»ÐèÒªmatrixµÄÄæ£¬ÇëÎªwantInverse´«µÝfalse¡£
-    /// Èç¹ûÒªÇó½âmatrix * x = b µÄ x£¬ÆäÖÐxºÍbÊÇNx1£¬Ôò´«µÝb¡£
-    /// Èç¹ûÒªÎªÇó½âmatrix * y = cµÄ y£¬ÆäÖÐyºÍcÊÇNxK£¬Ôò´«µÝc£¬²¢½«K´«µÝ¸ønumColumns¡£
-    /// ÔÚËùÓÐÇé¿öÏÂ£¬½«N´«µÝ¸ønumRows¡£
+    /// è¾“å…¥çŸ©é˜µmatrixå¿…é¡»æ˜¯NxNã€‚
+    /// å…ƒç´ æŸ¥æ‰¾çš„å­˜å‚¨çº¦å®šç”±MATHEMATICS_USE_ROW_MAJORå†³å®šã€‚
+    /// å¦‚æžœä½ æƒ³è¦matrixçš„é€†ï¼Œä¼ é€’ä¸€ä¸ªwantInverseä¸ºtrueï¼›
+    /// è¿”å›žçš„inverseä¹Ÿå¿…é¡»æ˜¯NxNï¼Œå¹¶ä½¿ç”¨ä¸ŽMç›¸åŒçš„å­˜å‚¨çº¦å®šã€‚
+    /// å¦‚æžœä¸éœ€è¦matrixçš„é€†ï¼Œè¯·ä¸ºwantInverseä¼ é€’falseã€‚
+    /// å¦‚æžœè¦æ±‚è§£matrix * x = b çš„ xï¼Œå…¶ä¸­xå’Œbæ˜¯Nx1ï¼Œåˆ™ä¼ é€’bã€‚
+    /// å¦‚æžœè¦ä¸ºæ±‚è§£matrix * y = cçš„ yï¼Œå…¶ä¸­yå’Œcæ˜¯NxKï¼Œåˆ™ä¼ é€’cï¼Œå¹¶å°†Kä¼ é€’ç»™numColumnsã€‚
+    /// åœ¨æ‰€æœ‰æƒ…å†µä¸‹ï¼Œå°†Nä¼ é€’ç»™numRowsã€‚
     template <typename Real>
     class GaussianElimination final
     {

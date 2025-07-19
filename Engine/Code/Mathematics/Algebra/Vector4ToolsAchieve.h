@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 11:18)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 11:18)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR4_TOOLS_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_VECTOR4_TOOLS_ACHIEVE_H
@@ -18,7 +18,7 @@
 template <typename Real>
 requires std::is_arithmetic_v<Real> bool Mathematics::Vector4Tools<Real>::Approximate(const Vector4Type& lhs, const Vector4Type& rhs, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
-    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= epsilon, "epsilon±ØĞë´óÓÚ»òµÈÓÚ0£¡");
+    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= epsilon, "epsilonå¿…é¡»å¤§äºæˆ–ç­‰äº0ï¼");
 
     return MathType::FAbs(lhs.GetX() - rhs.GetX()) < epsilon &&
            MathType::FAbs(lhs.GetY() - rhs.GetY()) < epsilon &&
@@ -101,7 +101,7 @@ typename Mathematics::Vector4Tools<Real>::Vector4Type Mathematics::Vector4Tools<
     }
     else
     {
-        MATHEMATICS_ASSERTION_1(false, "³ıÁã´íÎó£¡");
+        MATHEMATICS_ASSERTION_1(false, "é™¤é›¶é”™è¯¯ï¼");
 
         return Vector4Type{};
     }

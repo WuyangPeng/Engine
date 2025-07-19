@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.4 (2023/09/16 09:52)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.4 (2023/09/16 09:52)
 
 #include "StringMessageTesting.h"
 #include "Flags/StringMessageType.h"
@@ -100,10 +100,10 @@ void Network::StringMessageTesting::FactoryTest()
     const auto factoryCreateMessage = TestingType::Factory(messageSource, MessageHeadStrategy::Default, messageId);
     const auto polymorphicMessage = boost::dynamic_pointer_cast<TestingType>(factoryCreateMessage);
 
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(polymorphicMessage, "ÏûÏ¢ÀàĞÍ´íÎó£¡");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(polymorphicMessage, "æ¶ˆæ¯ç±»å‹é”™è¯¯ï¼");
 
     ASSERT_EQUAL(polymorphicMessage->GetSize(), System::EnumCastUnderlying(StringMessageField::Count));
-    ASSERT_EQUAL_FAILURE_THROW(polymorphicMessage->GetSize(), boost::numeric_cast<int>(stringType.size()), "ÏûÏ¢´óĞ¡´íÎó£¡");
+    ASSERT_EQUAL_FAILURE_THROW(polymorphicMessage->GetSize(), boost::numeric_cast<int>(stringType.size()), "æ¶ˆæ¯å¤§å°é”™è¯¯ï¼");
 
     for (auto i = 0u; i < stringType.size(); ++i)
     {

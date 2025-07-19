@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 15:00)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 15:00)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_SEGMENT3_TRIANGLE3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_SEGMENT3_TRIANGLE3_H
@@ -49,29 +49,29 @@ namespace Mathematics
         NODISCARD Real GetTriangleBary1() const noexcept;
         NODISCARD Real GetTriangleBary2() const noexcept;
 
-        /// ÕâĞ©º¯ÊıÖ¼ÔÚÔÚ¶¯Ì¬²éÕÒ½»²æµã²éÑ¯Ö®ºóµ÷ÓÃ¡£
-        /// ¶ÔÓÚ¡°Find()¡±²éÑ¯£¬Äú´òËãÊ¹ÓÃGetSegmentParameter()»òÈı¸öGetTriangleBary?()º¯Êı×Ô¼º¼ÆËã½Ó´¥µã¡£
+        /// è¿™äº›å‡½æ•°æ—¨åœ¨åœ¨åŠ¨æ€æŸ¥æ‰¾äº¤å‰ç‚¹æŸ¥è¯¢ä¹‹åè°ƒç”¨ã€‚
+        /// å¯¹äºâ€œFind()â€æŸ¥è¯¢ï¼Œæ‚¨æ‰“ç®—ä½¿ç”¨GetSegmentParameter()æˆ–ä¸‰ä¸ªGetTriangleBary?()å‡½æ•°è‡ªå·±è®¡ç®—æ¥è§¦ç‚¹ã€‚
         NODISCARD int GetQuantity() const noexcept;
         NODISCARD Vector3Type GetPoint(int index) const;
 
     private:
-        /// ¶¯Ì¬²éÕÒ½»²æµã²éÑ¯¡£ µ±ÓĞµ¥¸ö½»µãÊ±£¬¿ÉÒÔÍ¨¹ıGetPoint(0)·ÃÎÊµÚÒ»¸ö½»µã£»
-        /// Èç¹û¸Ã½»µãÊÇÒ»¸ö¶Î£¬Ôò¿ÉÒÔÍ¨¹ıGetPoint(0)ºÍGetPoint(1)·ÃÎÊµÚÒ»¸ö½»µã£¬ÔÚÕâÖÖÇé¿öÏÂ£¬»ñÈ¡µÄµãÊÇ¶Î¶Ëµã¡£
-        /// µÚÒ»´Î½»µãÊÇÍ¨¹ıGetContactTime()·ÃÎÊµÄ¡£
+        /// åŠ¨æ€æŸ¥æ‰¾äº¤å‰ç‚¹æŸ¥è¯¢ã€‚ å½“æœ‰å•ä¸ªäº¤ç‚¹æ—¶ï¼Œå¯ä»¥é€šè¿‡GetPoint(0)è®¿é—®ç¬¬ä¸€ä¸ªäº¤ç‚¹ï¼›
+        /// å¦‚æœè¯¥äº¤ç‚¹æ˜¯ä¸€ä¸ªæ®µï¼Œåˆ™å¯ä»¥é€šè¿‡GetPoint(0)å’ŒGetPoint(1)è®¿é—®ç¬¬ä¸€ä¸ªäº¤ç‚¹ï¼Œåœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œè·å–çš„ç‚¹æ˜¯æ®µç«¯ç‚¹ã€‚
+        /// ç¬¬ä¸€æ¬¡äº¤ç‚¹æ˜¯é€šè¿‡GetContactTime()è®¿é—®çš„ã€‚
         void Find();
 
     private:
-        // ÒªÏà½»µÄ¶ÔÏó¡£
+        // è¦ç›¸äº¤çš„å¯¹è±¡ã€‚
         Segment3Type segment;
         Triangle3Type triangle;
 
-        // ÓĞ¹Ø¹Ì¶¨½»¼¯µÄĞÅÏ¢¡£
+        // æœ‰å…³å›ºå®šäº¤é›†çš„ä¿¡æ¯ã€‚
         Real segmentParameter;
         Real triangleBary0;
         Real triangleBary1;
         Real triangleBary2;
 
-        // ÓĞ¹Ø¶¯Ì¬½»¼¯µÄĞÅÏ¢¡£
+        // æœ‰å…³åŠ¨æ€äº¤é›†çš„ä¿¡æ¯ã€‚
         int quantity;
         Vector3Type point0;
         Vector3Type point1;

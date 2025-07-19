@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 15:18)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 15:18)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RAY2_SEGMENT2_ACHIEVE_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RAY2_SEGMENT2_ACHIEVE_H
@@ -65,7 +65,7 @@ typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathematics::Di
 
     if (this->GetZeroThreshold() <= det)
     {
-        // ÉäÏßºÍÏß¶Î²»Æ½ĞĞ
+        // å°„çº¿å’Œçº¿æ®µä¸å¹³è¡Œ
         const auto lhsT = tool.GetLhsT();
         const auto rhsT = tool.GetRhsT();
         const auto rhsExtentMultiplyDet = rhsExtent * det;
@@ -76,9 +76,9 @@ typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathematics::Di
             {
                 if (rhsT <= rhsExtentMultiplyDet)
                 {
-                    // ÇøÓò 0
+                    // åŒºåŸŸ 0
 
-                    // ×îĞ¡µãÎªÉäÏßºÍÏß¶ÎÄÚ²¿µã¡£
+                    // æœ€å°ç‚¹ä¸ºå°„çº¿å’Œçº¿æ®µå†…éƒ¨ç‚¹ã€‚
                     return DistanceResult{ MathType::GetValue(0),
                                            MathType::GetValue(0),
                                            ray.GetOrigin() + lhsT / det * ray.GetDirection(),
@@ -86,13 +86,13 @@ typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathematics::Di
                 }
                 else
                 {
-                    // ÇøÓò 1
+                    // åŒºåŸŸ 1
                     return GetSquaredWithClosestPointsIsSegmentEndPoint(tool, rhsExtent);
                 }
             }
             else
             {
-                // ÇøÓò 5
+                // åŒºåŸŸ 5
                 return GetSquaredWithClosestPointsIsSegmentEndPoint(tool, -rhsExtent);
             }
         }
@@ -100,32 +100,32 @@ typename Mathematics::DistanceRay2Segment2<Real>::DistanceResult Mathematics::Di
         {
             if (rhsT <= -rhsExtentMultiplyDet)
             {
-                // ÇøÓò 4
+                // åŒºåŸŸ 4
                 return GetSquaredWithClosestPointsIsSegmentBeginPoint(tool, rhsExtent);
             }
             else if (rhsT <= rhsExtentMultiplyDet)
             {
-                // ÇøÓò 3
+                // åŒºåŸŸ 3
                 return GetSquaredWithClosestPointsIsRayOrigin(tool, rhsExtent);
             }
             else
             {
-                // ÇøÓò 2
+                // åŒºåŸŸ 2
                 return GetSquaredWithClosestPointsIsSegmentBeginPoint(tool, -rhsExtent);
             }
         }
     }
     else
     {
-        // ÉäÏßºÍÏß¶ÎÆ½ĞĞ
+        // å°„çº¿å’Œçº¿æ®µå¹³è¡Œ
         if (MathType::GetValue(0) < tool.GetDirectionDot())
         {
-            // Ïà·´µÄ·½ÏòÏòÁ¿¡£
+            // ç›¸åçš„æ–¹å‘å‘é‡ã€‚
             return GetSquaredWithClosestPointsIsSegmentEndPoint(tool, -rhsExtent);
         }
         else
         {
-            // ÏàÍ¬µÄ·½ÏòÏòÁ¿
+            // ç›¸åŒçš„æ–¹å‘å‘é‡
             return GetSquaredWithClosestPointsIsSegmentEndPoint(tool, rhsExtent);
         }
     }

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/28 17:54)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/28 17:54)
 
 #ifndef RENDERING_SCENE_GRAPH_PARTICLES_H
 #define RENDERING_SCENE_GRAPH_PARTICLES_H
@@ -32,13 +32,13 @@ namespace Rendering
         using Container = std::vector<Vector4>;
 
     public:
-        /// VertexFormat¶ÔÏó±ØĞë°üº¬3Ôª×éÎ»ÖÃ¡£
-        /// Ò²±ØĞëÓĞ2Ôª×éµÄÎÆÀí×ø±êÔÚÍ¨µÀÁã£¬
-        /// ÕâĞ©¶¼ÊÇÉèÖÃÎª±ê×¼(Ã¿¸öËÄ±ßĞÎÎªµ¥Î»Õı·½ĞÎ)¡£
-        /// vertexBufferÔªËØµÄÊıÁ¿±ØĞëÊÇ4µÄ±¶Êı¡£
-        /// ÔªËØµÄÁ£×ÓÊıÁ¿µÄÊÇ1/4 vertexBufferÔªËØµÄ¸öÊı¡£
-        /// Ë÷Òı»º³åÇøÊÇ×Ô¶¯Éú³ÉµÄ¡£
-        /// 'positionSizes'°üº¬Î»ÖÃÔÚ¿ªÊ¼µÄÈıÔª×éºÍ´óĞ¡ÔÚµÚËÄÔª×é¡£
+        /// VertexFormatå¯¹è±¡å¿…é¡»åŒ…å«3å…ƒç»„ä½ç½®ã€‚
+        /// ä¹Ÿå¿…é¡»æœ‰2å…ƒç»„çš„çº¹ç†åæ ‡åœ¨é€šé“é›¶ï¼Œ
+        /// è¿™äº›éƒ½æ˜¯è®¾ç½®ä¸ºæ ‡å‡†(æ¯ä¸ªå››è¾¹å½¢ä¸ºå•ä½æ­£æ–¹å½¢)ã€‚
+        /// vertexBufferå…ƒç´ çš„æ•°é‡å¿…é¡»æ˜¯4çš„å€æ•°ã€‚
+        /// å…ƒç´ çš„ç²’å­æ•°é‡çš„æ˜¯1/4 vertexBufferå…ƒç´ çš„ä¸ªæ•°ã€‚
+        /// ç´¢å¼•ç¼“å†²åŒºæ˜¯è‡ªåŠ¨ç”Ÿæˆçš„ã€‚
+        /// 'positionSizes'åŒ…å«ä½ç½®åœ¨å¼€å§‹çš„ä¸‰å…ƒç»„å’Œå¤§å°åœ¨ç¬¬å››å…ƒç»„ã€‚
         Particles(const Container& positionSize, float sizeAdjust, const VertexFormat& vertexFormat);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -52,11 +52,11 @@ namespace Rendering
 
         void SetPosition(int index, const Vector4& position);
 
-        // ÔÊĞíÓ¦ÓÃ³ÌĞòÖ¸¶¨Ğ¡ÓÚ×î´óÊıÁ¿µÄ¶¥µã»æÖÆ¡£
+        // å…è®¸åº”ç”¨ç¨‹åºæŒ‡å®šå°äºæœ€å¤§æ•°é‡çš„é¡¶ç‚¹ç»˜åˆ¶ã€‚
         void SetNumActive(int numActive);
         NODISCARD int GetNumActive() const noexcept;
 
-        // Á£×ÓÊÇ¹ã¸æÅÆ£¬×ÜÊÇÃæ¶Ô¾µÍ·¡£
+        // ç²’å­æ˜¯å¹¿å‘Šç‰Œï¼Œæ€»æ˜¯é¢å¯¹é•œå¤´ã€‚
         void GenerateParticles(const Camera& camera);
 
         NODISCARD ControllerSharedPtr Clone() const override;

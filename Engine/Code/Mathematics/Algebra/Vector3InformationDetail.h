@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.5 (2024/01/30 10:11)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.5 (2024/01/30 10:11)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR3_TOOLS_INFORMATION_DETAIL_H
 #define MATHEMATICS_ALGEBRA_VECTOR3_TOOLS_INFORMATION_DETAIL_H
@@ -42,7 +42,7 @@ Mathematics::Vector3Information<Real>::Vector3Information(const ContainerType& p
 {
     if (points.empty() || epsilon < MathType::GetValue(0))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§ÊäÈëÔÚVector3Information\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆè¾“å…¥åœ¨Vector3Information\n"s));
     }
 
     Init();
@@ -76,16 +76,16 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 void Mathematics::Vector3Information<Real>::Init()
 {
-    /// ¼ÆËãÊäÈëµãµÄÖá¶ÔÆë°üÎ§ºĞ¡£¸ú×Ù¡°points¡±µ±Ç°×îĞ¡ÖµºÍ×î´óÖµµÄË÷Òı¡£
+    /// è®¡ç®—è¾“å…¥ç‚¹çš„è½´å¯¹é½åŒ…å›´ç›’ã€‚è·Ÿè¸ªâ€œpointsâ€å½“å‰æœ€å°å€¼å’Œæœ€å¤§å€¼çš„ç´¢å¼•ã€‚
     ComputeAxisAlignedBoundingBox();
 
-    /// È·¶¨±ß½ç¿òµÄ×î´ó·¶Î§¡£
+    /// ç¡®å®šè¾¹ç•Œæ¡†çš„æœ€å¤§èŒƒå›´ã€‚
     DetermineMaximumRange();
 
-    /// Ô­µãÊÇ×îĞ¡xÖµµÄµã»ò×îĞ¡yÖµ»ò×îĞ¡zÖµµÄµã¡£
+    /// åŸç‚¹æ˜¯æœ€å°xå€¼çš„ç‚¹æˆ–æœ€å°yå€¼æˆ–æœ€å°zå€¼çš„ç‚¹ã€‚
     origin = points.at(minExtreme);
 
-    /// ²âÊÔµã¼¯ÊÇ·ñÊÇ£¨¼¸ºõ£©Ò»¸öµã»òÒ»¸öÏß¶Î»òÒ»¸öÆ½Ãæ¶à±ßĞÎ
+    /// æµ‹è¯•ç‚¹é›†æ˜¯å¦æ˜¯ï¼ˆå‡ ä¹ï¼‰ä¸€ä¸ªç‚¹æˆ–ä¸€ä¸ªçº¿æ®µæˆ–ä¸€ä¸ªå¹³é¢å¤šè¾¹å½¢
     if (!(TestPointSetIsNearlyAPoint() || TestPointSetIsNearlyALineSegment() || TestPointSetIsNearlyAPlanarPolygon()))
     {
         dimension = 3;
@@ -154,7 +154,7 @@ void Mathematics::Vector3Information<Real>::DetermineMaximumRange()
 template <typename Real>
 requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::TestPointSetIsNearlyAPoint() noexcept
 {
-    /// ²âÊÔÏòÁ¿¼¯ÊÇ·ñ£¨¼¸ºõ£©ÊÇÒ»¸öÏòÁ¿¡£
+    /// æµ‹è¯•å‘é‡é›†æ˜¯å¦ï¼ˆå‡ ä¹ï¼‰æ˜¯ä¸€ä¸ªå‘é‡ã€‚
     if (maxRange < epsilon)
     {
         dimension = 0;
@@ -176,7 +176,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::
 template <typename Real>
 requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::TestPointSetIsNearlyALineSegment()
 {
-    /// ²âÊÔÏòÁ¿¼¯ÊÇ·ñ£¨¼¸ºõ£©ÊÇÏß¶Î¡£ÎÒÃÇĞèÒª{directionY£¬directionZ}À´¿çÔ½directionXµÄÕı½»²¹Âë¡£
+    /// æµ‹è¯•å‘é‡é›†æ˜¯å¦ï¼ˆå‡ ä¹ï¼‰æ˜¯çº¿æ®µã€‚æˆ‘ä»¬éœ€è¦{directionYï¼ŒdirectionZ}æ¥è·¨è¶ŠdirectionXçš„æ­£äº¤è¡¥ç ã€‚
     directionX = points.at(maxExtreme) - origin;
     directionX.Normalize(epsilon);
     if (MathType::FAbs(directionX[1]) < MathType::FAbs(directionX[0]))
@@ -194,7 +194,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::
     directionY.Normalize(epsilon);
     directionZ = Vector3ToolsType::CrossProduct(directionX, directionY);
 
-    /// ¼ÆËãµãÓëÖ±ÏßµÄ×î´ó¾àÀë
+    /// è®¡ç®—ç‚¹ä¸ç›´çº¿çš„æœ€å¤§è·ç¦»
     /// origin + t * directionX
     auto maxDistance = MathType::GetValue(0);
     perpendicularExtreme = minExtreme;
@@ -217,7 +217,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::
 
     if (maxDistance < epsilon * maxRange)
     {
-        /// ÕâĞ©µã£¨¼¸ºõ£©ÔÚÏßÉÏ
+        /// è¿™äº›ç‚¹ï¼ˆå‡ ä¹ï¼‰åœ¨çº¿ä¸Š
         /// origin + t * directionX
         dimension = 1;
         perpendicularExtreme = maxExtreme;
@@ -232,19 +232,19 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::
 template <typename Real>
 requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::TestPointSetIsNearlyAPlanarPolygon()
 {
-    /// ²âÊÔÏòÁ¿¼¯ÊÇ·ñ£¨¼¸ºõ£©ÊÇÆ½Ãæ¶à±ßĞÎ¡£
-    /// µãv[extreme[perpendicularExtreme]ÀëÖ±Ïß×îÔ¶£ºorigin + t * direction[0]¡£
-    /// ÏòÁ¿v[extreme[perpendicularExtreme]]- origin ²»Ò»¶¨´¹Ö±ÓÚdirectionX£¬
-    /// Òò´ËÍ¶Ó°³ödirectionX·ÖÁ¿£¬Ê¹½á¹û´¹Ö±ÓÚdirectionX¡£
+    /// æµ‹è¯•å‘é‡é›†æ˜¯å¦ï¼ˆå‡ ä¹ï¼‰æ˜¯å¹³é¢å¤šè¾¹å½¢ã€‚
+    /// ç‚¹v[extreme[perpendicularExtreme]ç¦»ç›´çº¿æœ€è¿œï¼šorigin + t * direction[0]ã€‚
+    /// å‘é‡v[extreme[perpendicularExtreme]]- origin ä¸ä¸€å®šå‚ç›´äºdirectionXï¼Œ
+    /// å› æ­¤æŠ•å½±å‡ºdirectionXåˆ†é‡ï¼Œä½¿ç»“æœå‚ç›´äºdirectionXã€‚
     directionY = points.at(perpendicularExtreme) - origin;
     const auto dot = Vector3ToolsType::DotProduct(directionX, directionY);
     directionY -= dot * directionX;
     directionY.Normalize(epsilon);
 
-    /// ÎÒÃÇĞèÒªdirectionZÀ´¿çÔ½{directionX£¬directionY}µÄÕı½»²¹Âë¡£
+    /// æˆ‘ä»¬éœ€è¦directionZæ¥è·¨è¶Š{directionXï¼ŒdirectionY}çš„æ­£äº¤è¡¥ç ã€‚
     directionZ = Vector3ToolsType::CrossProduct(directionX, directionY);
 
-    /// ¼ÆËãµãÓëÆ½ÃæµÄ×î´ó¾àÀë
+    /// è®¡ç®—ç‚¹ä¸å¹³é¢çš„æœ€å¤§è·ç¦»
     /// origin+t0 * directionX + t1 * directionY
     auto maxDistance = MathType::GetValue(0);
     auto maxSign = NumericalValueSymbol::Zero;
@@ -269,7 +269,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::
 
     if (maxDistance < epsilon * maxRange)
     {
-        /// ÕâĞ©µã£¨¼¸ºõ£©ÔÚÆ½ÃæÉÏ
+        /// è¿™äº›ç‚¹ï¼ˆå‡ ä¹ï¼‰åœ¨å¹³é¢ä¸Š
         /// origin + t0 * directionX + t1 * directionY
         dimension = 2;
         tetrahedronExtreme = perpendicularExtreme;

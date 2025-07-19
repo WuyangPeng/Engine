@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 10:25)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 10:25)
 
 #ifndef MATHEMATICS_OBJECTS_3D_SPHERE3_H
 #define MATHEMATICS_OBJECTS_3D_SPHERE3_H
@@ -30,7 +30,7 @@ namespace Mathematics
         using Vector3Type = Vector3<Real>;
 
     public:
-        // ÇòÌå±»±íÊ¾Îª|X-C| = Real£¬ÆäÖĞCÎªÖĞĞÄ£¬RealÎª°ë¾¶¡£
+        // çƒä½“è¢«è¡¨ç¤ºä¸º|X-C| = Realï¼Œå…¶ä¸­Cä¸ºä¸­å¿ƒï¼ŒRealä¸ºåŠå¾„ã€‚
         Sphere3(const Vector3Type& center, Real radius) noexcept;
         Sphere3() noexcept;
 

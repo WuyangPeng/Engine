@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 22:15)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 22:15)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_H
@@ -19,8 +19,8 @@
 #include <string>
 #include <vector>
 
-/// ¸ùÀà¶ÔÏóÏµÍ³µÄ¸ùÀà¡£
-/// ËüÌá¹©ÁËÒ»¸öÃæÏò¶ÔÏó¿âµÄÒ»Ğ©»ù±¾·şÎñ£¬ÕâÊÇÒ»¸ö³éÏóÀà¡£
+/// æ ¹ç±»å¯¹è±¡ç³»ç»Ÿçš„æ ¹ç±»ã€‚
+/// å®ƒæä¾›äº†ä¸€ä¸ªé¢å‘å¯¹è±¡åº“çš„ä¸€äº›åŸºæœ¬æœåŠ¡ï¼Œè¿™æ˜¯ä¸€ä¸ªæŠ½è±¡ç±»ã€‚
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE Object : public ObjectInterface
@@ -39,7 +39,7 @@ namespace CoreTools
         CORE_TOOLS_NAMES_DECLARE;
 
     public:
-        /// ¶ÔÏóÃû×Ö
+        /// å¯¹è±¡åå­—
         NODISCARD std::string GetName() const;
         void SetName(const std::string& name);
 

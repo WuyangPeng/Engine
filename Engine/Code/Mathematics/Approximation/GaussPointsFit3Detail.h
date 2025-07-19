@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:12)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:12)
 
 #ifndef MATHEMATICS_APPROXIMATION_GAUSS_POINTS_FIT3_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_GAUSS_POINTS_FIT3_DETAIL_H
@@ -45,7 +45,7 @@ Mathematics::Box3<Real> Mathematics::GaussPointsFit3<Real>::Calculate(const Poin
 {
     const auto numPoints = static_cast<Real>(points.size());
 
-    // ¼ÆËãµãµÄÆ½¾ùÖµ¡£
+    // è®¡ç®—ç‚¹çš„å¹³å‡å€¼ã€‚
     Vector3Type center{};
     for (const auto& point : points)
     {
@@ -54,7 +54,7 @@ Mathematics::Box3<Real> Mathematics::GaussPointsFit3<Real>::Calculate(const Poin
 
     center /= numPoints;
 
-    // ¼ÆËãµãµÄĞ­·½²î¾ØÕó¡£
+    // è®¡ç®—ç‚¹çš„åæ–¹å·®çŸ©é˜µã€‚
     auto sumXX = MathType::GetValue(0);
     auto sumXY = MathType::GetValue(0);
     auto sumYY = MathType::GetValue(0);
@@ -80,7 +80,7 @@ Mathematics::Box3<Real> Mathematics::GaussPointsFit3<Real>::Calculate(const Poin
     sumYZ /= numPoints;
     sumZZ /= numPoints;
 
-    // ½¨Á¢ eigensolver.
+    // å»ºç«‹ eigensolver.
     constexpr const auto size = 3;
 
     EigenDecomposition<Real> eigenSystem{ size };

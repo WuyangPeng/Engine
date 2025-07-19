@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 13:49)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 13:49)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_ELLIPSOID3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_ELLIPSOID3_DETAIL_H
@@ -55,10 +55,10 @@ Mathematics::Ellipsoid3<Real> Mathematics::StaticFindIntersectorLine3Ellipsoid3<
 template <typename Real>
 void Mathematics::StaticFindIntersectorLine3Ellipsoid3<Real>::Find()
 {
-    /// ÍÖÇòÊÇ(X - K)^T * M * (X - K)-1 = 0²¢ÇÒÏßÊÇ X = P + t * D¡£
-    /// ½«Ïß·½³Ì´úÈëÍÖÇò·½³ÌÒÔ»ñµÃ¶ş´Î·½³Ì
+    /// æ¤­çƒæ˜¯(X - K)^T * M * (X - K)-1 = 0å¹¶ä¸”çº¿æ˜¯ X = P + t * Dã€‚
+    /// å°†çº¿æ–¹ç¨‹ä»£å…¥æ¤­çƒæ–¹ç¨‹ä»¥è·å¾—äºŒæ¬¡æ–¹ç¨‹
     /// Q(t) = a2 * t^2 + 2 * a1 * t + a0 = 0
-    /// ÆäÖĞa2 = D^T * M * D, a1 = D^T * M * (P - K)£¬a0 = (P - K)^T * M * (P - K) - 1¡£
+    /// å…¶ä¸­a2 = D^T * M * D, a1 = D^T * M * (P - K)ï¼Œa0 = (P - K)^T * M * (P - K) - 1ã€‚
 
     const auto matrix = ellipsoid.GetMatrix();
 
@@ -69,7 +69,7 @@ void Mathematics::StaticFindIntersectorLine3Ellipsoid3<Real>::Find()
     auto a1 = Vector3ToolsType::DotProduct(line.GetDirection(), matrixDiff);
     auto a0 = Vector3ToolsType::DotProduct(diff, matrixDiff) - MathType::GetValue(1);
 
-    // Èç¹ûQ(t)¾ßÓĞÊµ¸ù£¬Ôò·¢ÉúÏà½»¡£
+    // å¦‚æœQ(t)å…·æœ‰å®æ ¹ï¼Œåˆ™å‘ç”Ÿç›¸äº¤ã€‚
     auto discr = a1 * a1 - a0 * a2;
 
     if (discr < negativeThreshold)
@@ -120,7 +120,7 @@ Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorLine3Ellipsoid3<Rea
             return point1;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Ë÷ÒıÔ½½ç\n"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•è¶Šç•Œ\n"s));
 }
 
 template <typename Real>
@@ -128,7 +128,7 @@ void Mathematics::StaticFindIntersectorLine3Ellipsoid3<Real>::SetNegativeThresho
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    MATHEMATICS_ASSERTION_0(MathType::GetValue(0) < negThreshold, "¸ºãĞÖµ±ØĞëÎª·ÇÕıÊı¡£");
+    MATHEMATICS_ASSERTION_0(MathType::GetValue(0) < negThreshold, "è´Ÿé˜ˆå€¼å¿…é¡»ä¸ºéæ­£æ•°ã€‚");
 
     if (negThreshold <= MathType::GetValue(0))
     {
@@ -149,7 +149,7 @@ void Mathematics::StaticFindIntersectorLine3Ellipsoid3<Real>::SetPositiveThresho
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    MATHEMATICS_ASSERTION_0(posThreshold < MathType::GetValue(0), "ÕıãĞÖµ±ØĞëÎª·Ç¸º¡£");
+    MATHEMATICS_ASSERTION_0(posThreshold < MathType::GetValue(0), "æ­£é˜ˆå€¼å¿…é¡»ä¸ºéè´Ÿã€‚");
 
     if (MathType::GetValue(0) <= posThreshold)
     {

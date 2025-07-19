@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.5 (2024/02/05 14:17)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.5 (2024/02/05 14:17)
 
 #ifndef MATHEMATICS_ALGEBRA_VARIABLE_MATRIX_DETAIL_H
 #define MATHEMATICS_ALGEBRA_VARIABLE_MATRIX_DETAIL_H
@@ -144,12 +144,12 @@ void Mathematics::VariableMatrix<Real>::SetSize(int rowsNumber, int columnsNumbe
 
     if (rowsNumber < 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("rowsNumberÎª¸ºÊı£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("rowsNumberä¸ºè´Ÿæ•°ï¼"s))
     }
 
     if (columnsNumber < 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("columnsNumberÎª¸ºÊı£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("columnsNumberä¸ºè´Ÿæ•°ï¼"s))
     }
 
     container.clear();
@@ -307,7 +307,7 @@ void Mathematics::VariableMatrix<Real>::SetContainer(int rowsNumber, int columns
 
     if (size != boost::numeric_cast<int>(entry.size()))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¿É±ä¾ØÕó´óĞ¡´íÎó¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å¯å˜çŸ©é˜µå¤§å°é”™è¯¯ã€‚"s))
     }
 
 #if defined(MATHEMATICS_USE_MATRIX_VECTOR)
@@ -353,7 +353,7 @@ void Mathematics::VariableMatrix<Real>::SetRow(int row, const VariableLengthVect
 
     if (vector.GetSize() != columnsNumber)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÏòÁ¿´óĞ¡Óë¾ØÕóÁĞÊı²»ÏàµÈ£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å‘é‡å¤§å°ä¸çŸ©é˜µåˆ—æ•°ä¸ç›¸ç­‰ï¼"s))
     }
 
 #if defined(MATHEMATICS_USE_MATRIX_VECTOR)
@@ -406,7 +406,7 @@ void Mathematics::VariableMatrix<Real>::SetColumn(int column, const VariableLeng
 
     if (vector.GetSize() != rowsNumber)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÏòÁ¿´óĞ¡Óë¾ØÕóĞĞÊı²»ÏàµÈ£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å‘é‡å¤§å°ä¸çŸ©é˜µè¡Œæ•°ä¸ç›¸ç­‰ï¼"s))
     }
 
 #if defined(MATHEMATICS_USE_MATRIX_VECTOR)
@@ -639,7 +639,7 @@ Mathematics::VariableMatrix<Real>& Mathematics::VariableMatrix<Real>::operator+=
 
     if (columnsNumber != rhs.GetColumnsNumber() || rowsNumber != rhs.GetRowsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¾ØÕó´óĞ¡²»Æ¥Åä£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("çŸ©é˜µå¤§å°ä¸åŒ¹é…ï¼"s))
     }
 
     for (auto index = 0; index < GetElementsNumber(); ++index)
@@ -661,7 +661,7 @@ Mathematics::VariableMatrix<Real>& Mathematics::VariableMatrix<Real>::operator-=
 
     if (columnsNumber != rhs.GetColumnsNumber() || rowsNumber != rhs.GetRowsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¾ØÕó´óĞ¡²»Æ¥Åä£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("çŸ©é˜µå¤§å°ä¸åŒ¹é…ï¼"s))
     }
 
     for (auto index = 0; index < GetElementsNumber(); ++index)
@@ -765,7 +765,7 @@ Mathematics::VariableMatrix<Real> Mathematics::VariableMatrix<Real>::Inverse(boo
 {
     if (GetRowsNumber() != GetColumnsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¾ØÕó±ØĞëÊÇÕı·½ĞÎ¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çŸ©é˜µå¿…é¡»æ˜¯æ­£æ–¹å½¢ã€‚"))
     }
 
     VariableMatrix inverse{ GetRowsNumber(), GetColumnsNumber() };
@@ -788,7 +788,7 @@ Real Mathematics::VariableMatrix<Real>::Determinant() const
 {
     if (GetRowsNumber() != GetColumnsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¾ØÕó±ØĞëÊÇÕı·½ĞÎ¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çŸ©é˜µå¿…é¡»æ˜¯æ­£æ–¹å½¢ã€‚"))
     }
 
     GaussianElimination<Real> gaussianElimination{ GetRowsNumber(), GetContainer(), false };
@@ -804,7 +804,7 @@ Real Mathematics::VariableMatrix<Real>::QuadraticForm(const VariableLengthVector
 
     if (vector0.GetSize() != GetRowsNumber() || vector1.GetSize() != GetColumnsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("QuadraticFormÖĞ´óĞ¡²»Æ¥Åä£¡\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("QuadraticFormä¸­å¤§å°ä¸åŒ¹é…ï¼\n"s))
     }
 
     return Dot(vector0, (*this) * vector1);
@@ -840,7 +840,7 @@ typename Mathematics::VariableMatrix<Real>::Matrix3Type Mathematics::VariableMat
 
     if (GetRowsNumber() != GetColumnsNumber() && GetRowsNumber() != Matrix3Type::matrixSize)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¾ØÕó²»ÊÇMatrix3\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("çŸ©é˜µä¸æ˜¯Matrix3\n"s))
     }
 
     return Matrix3Type{ (*this)(0, 0),
@@ -949,10 +949,10 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 Mathematics::VariableMatrix<Real> Mathematics::Multiply(const VariableMatrix<Real>& lhs, const VariableMatrix<Real>& rhs)
 {
-    /// 'this' ÊÇ Real x N, 'M' ÊÇ N x C, '³Ë»ı = this * M' ÊÇ Real x C
+    /// 'this' æ˜¯ Real x N, 'M' æ˜¯ N x C, 'ä¹˜ç§¯ = this * M' æ˜¯ Real x C
     if (lhs.GetColumnsNumber() != rhs.GetRowsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¾ØÕó´óĞ¡²»Æ¥Åä£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("çŸ©é˜µå¤§å°ä¸åŒ¹é…ï¼"s))
     }
 
     VariableMatrix<Real> result{ lhs.GetRowsNumber(), rhs.GetColumnsNumber() };
@@ -977,7 +977,7 @@ Mathematics::VariableLengthVector<Real> Mathematics::operator*(const VariableMat
 {
     if (vector.GetSize() != matrix.GetColumnsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÏòÁ¿ºÍ¾ØÕóµÄ´óĞ¡²»Æ¥ÅäÔÚ operator*\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å‘é‡å’ŒçŸ©é˜µçš„å¤§å°ä¸åŒ¹é…åœ¨ operator*\n"s))
     }
 
     VariableLengthVector<Real> product{ matrix.GetRowsNumber() };
@@ -999,7 +999,7 @@ Mathematics::VariableLengthVector<Real> Mathematics::operator*(const VariableLen
 {
     if (vector.GetSize() != matrix.GetRowsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÏòÁ¿ºÍ¾ØÕóµÄ´óĞ¡²»Æ¥ÅäÔÚ operator*\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å‘é‡å’ŒçŸ©é˜µçš„å¤§å°ä¸åŒ¹é…åœ¨ operator*\n"s))
     }
 
     VariableLengthVector<Real> product{ matrix.GetColumnsNumber() };
@@ -1022,7 +1022,7 @@ Mathematics::VariableMatrix<Real> Mathematics::TransposeMultiply(const VariableM
     /// P = A^T * B, P[r][c] = sum_m A[m][r] * B[m][c]
     if (lhs.GetRowsNumber() != rhs.GetRowsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¾ØÕóµÄ´óĞ¡²»Æ¥ÅäÔÚ TransposeTimes\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("çŸ©é˜µçš„å¤§å°ä¸åŒ¹é…åœ¨ TransposeTimes\n"s))
     }
 
     VariableMatrix<Real> result{ lhs.GetColumnsNumber(), rhs.GetColumnsNumber() };
@@ -1046,7 +1046,7 @@ Mathematics::VariableMatrix<Real> Mathematics::MultiplyTranspose(const VariableM
     /// P = A * B^T, P[r][c] = sum_m A[r][m] * B[c][m]
     if (lhs.GetColumnsNumber() != rhs.GetColumnsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¾ØÕóµÄ´óĞ¡²»Æ¥ÅäÔÚ TimesTranspose\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("çŸ©é˜µçš„å¤§å°ä¸åŒ¹é…åœ¨ TimesTranspose\n"s))
     }
 
     VariableMatrix<Real> result{ lhs.GetRowsNumber(), rhs.GetRowsNumber() };
@@ -1071,7 +1071,7 @@ Mathematics::VariableMatrix<Real> Mathematics::TransposeMultiplyTranspose(const 
     /// P = A * B^T, P[r][c] = sum_m A[m][r] * B[c][m]
     if (lhs.GetRowsNumber() != rhs.GetColumnsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¾ØÕóµÄ´óĞ¡²»Æ¥ÅäÔÚ TransposeTimesTranspose\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("çŸ©é˜µçš„å¤§å°ä¸åŒ¹é…åœ¨ TransposeTimesTranspose\n"s))
     }
 
     VariableMatrix<Real> result{ lhs.GetColumnsNumber(), rhs.GetRowsNumber() };
@@ -1095,7 +1095,7 @@ Mathematics::VariableMatrix<Real> Mathematics::Multiply(const VariableMatrix<Rea
 {
     if (diagonal.GetSize() != matrix.GetColumnsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÏòÁ¿ºÍ¾ØÕóµÄ´óĞ¡²»Æ¥Åä£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å‘é‡å’ŒçŸ©é˜µçš„å¤§å°ä¸åŒ¹é…ï¼"s))
     }
 
     VariableMatrix<Real> result{ matrix.GetRowsNumber(), matrix.GetColumnsNumber() };
@@ -1117,7 +1117,7 @@ Mathematics::VariableMatrix<Real> Mathematics::Multiply(const VariableLengthVect
 {
     if (diagonal.GetSize() != matrix.GetRowsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÏòÁ¿ºÍ¾ØÕóµÄ´óĞ¡²»Æ¥Åä£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å‘é‡å’ŒçŸ©é˜µçš„å¤§å°ä¸åŒ¹é…ï¼"s))
     }
 
     VariableMatrix<Real> result{ matrix.GetRowsNumber(), matrix.GetColumnsNumber() };
@@ -1200,7 +1200,7 @@ std::ostream& Mathematics::operator<<(std::ostream& stream, const VariableMatrix
     {
         for (auto column = 0; column < matrix.GetColumnsNumber(); ++column)
         {
-            stream << "(" << row << "," << column << ")=" << matrix(row, column) << "¡¡";
+            stream << "(" << row << "," << column << ")=" << matrix(row, column) << "ã€€";
         }
     }
 

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/28 16:02)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/28 16:02)
 
 #include "Rendering/RenderingExport.h"
 
@@ -110,7 +110,7 @@ void Rendering::CullerImpl::SetFrustum(const Container& aFrustum)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    // ¸´ÖÆÆ½½ØÍ·ÌåµÄÖµ¡£
+    // å¤åˆ¶å¹³æˆªå¤´ä½“çš„å€¼ã€‚
     frustum.SetFrustum(aFrustum);
 
     const auto directionMin2 = frustum.GetDirectionMin() * frustum.GetDirectionMin();
@@ -119,7 +119,7 @@ void Rendering::CullerImpl::SetFrustum(const Container& aFrustum)
     const auto rightMin2 = frustum.GetRightMin() * frustum.GetRightMin();
     const auto rightMax2 = frustum.GetRightMax() * frustum.GetRightMax();
 
-    // »ñÈ¡Ïà»ú×ø±êÏµ¡£
+    // è·å–ç›¸æœºåæ ‡ç³»ã€‚
     const auto position = camera->GetPosition();
     const auto directionVector = camera->GetDirectionVector();
     const auto upVector = camera->GetUpVector();
@@ -128,13 +128,13 @@ void Rendering::CullerImpl::SetFrustum(const Container& aFrustum)
 
     constexpr auto epsilon = Mathematics::MathF::GetZeroTolerance();
 
-    // ¸üĞÂ½üÆ½Ãæ
+    // æ›´æ–°è¿‘å¹³é¢
     plane.at(System::EnumCastUnderlying(ViewFrustum::DirectionMin)) = Plane{ directionVector, directionDotEye + frustum.GetDirectionMin(), epsilon };
 
-    // ¸üĞÂÔ¶Æ½Ãæ
+    // æ›´æ–°è¿œå¹³é¢
     plane.at(System::EnumCastUnderlying(ViewFrustum::DirectionMax)) = Plane{ -directionVector, -(directionDotEye + frustum.GetDirectionMax()), epsilon };
 
-    // ¸üĞÂµ×²¿Æ½Ãæ
+    // æ›´æ–°åº•éƒ¨å¹³é¢
     auto invLength = Math::InvSqrt(directionMin2 + upMin2);
     auto c0 = -frustum.GetUpMin() * invLength;
     auto c1 = +frustum.GetDirectionMin() * invLength;
@@ -142,7 +142,7 @@ void Rendering::CullerImpl::SetFrustum(const Container& aFrustum)
     auto constant = Dot(position, normal);
     plane.at(System::EnumCastUnderlying(ViewFrustum::UpMin)) = Plane{ normal, constant, epsilon };
 
-    // ¸üĞÂ¶¥²¿Æ½Ãæ
+    // æ›´æ–°é¡¶éƒ¨å¹³é¢
     invLength = Math::InvSqrt(directionMin2 + upMax2);
     c0 = +frustum.GetUpMax() * invLength;
     c1 = -frustum.GetDirectionMin() * invLength;
@@ -150,7 +150,7 @@ void Rendering::CullerImpl::SetFrustum(const Container& aFrustum)
     constant = Dot(position, normal);
     plane.at(System::EnumCastUnderlying(ViewFrustum::UpMax)) = Plane(normal, constant, epsilon);
 
-    // ¸üĞÂ×óÆ½Ãæ
+    // æ›´æ–°å·¦å¹³é¢
     invLength = Math::InvSqrt(directionMin2 + rightMin2);
     c0 = -frustum.GetRightMin() * invLength;
     c1 = +frustum.GetDirectionMin() * invLength;
@@ -158,7 +158,7 @@ void Rendering::CullerImpl::SetFrustum(const Container& aFrustum)
     constant = Dot(position, normal);
     plane.at(System::EnumCastUnderlying(ViewFrustum::RightMin)) = Plane(normal, constant, epsilon);
 
-    // ¸üĞÂÓÒÆ½Ãæ
+    // æ›´æ–°å³å¹³é¢
     invLength = Math::InvSqrt(directionMin2 + rightMax2);
     c0 = +frustum.GetRightMax() * invLength;
     c1 = -frustum.GetDirectionMin() * invLength;
@@ -166,7 +166,7 @@ void Rendering::CullerImpl::SetFrustum(const Container& aFrustum)
     constant = Dot(position, normal);
     plane.at(System::EnumCastUnderlying(ViewFrustum::RightMax)) = Plane(normal, constant, epsilon);
 
-    // ËùÓĞÆ½Ãæ×î³õÊÇ¼¤»îµÄ¡£
+    // æ‰€æœ‰å¹³é¢æœ€åˆæ˜¯æ¿€æ´»çš„ã€‚
     planeState = 0xFFFFFFFF;
 }
 
@@ -218,7 +218,7 @@ void Rendering::CullerImpl::PushPlane(const Plane& aPlane) noexcept
 
     if (planeQuantity < MaxPlaneQuantity)
     {
-        // ÓÃ»§¶¨ÒåµÄÆ½ÃæÊıÁ¿ÊÇÓĞÏŞµÄ¡£
+        // ç”¨æˆ·å®šä¹‰çš„å¹³é¢æ•°é‡æ˜¯æœ‰é™çš„ã€‚
         plane.at(planeQuantity) = aPlane;
         ++planeQuantity;
     }
@@ -230,7 +230,7 @@ void Rendering::CullerImpl::PopPlane() noexcept
 
     if (System::EnumCastUnderlying(ViewFrustum::Quantity) < planeQuantity)
     {
-        // Æ½½ØÍ·ÌåÆ½Ãæ¿ÉÄÜ²»´Ó¶ÑÕ»ÖĞÉ¾³ı¡£
+        // å¹³æˆªå¤´ä½“å¹³é¢å¯èƒ½ä¸ä»å †æ ˆä¸­åˆ é™¤ã€‚
         --planeQuantity;
     }
 }
@@ -241,11 +241,11 @@ bool Rendering::CullerImpl::IsVisible(const BoundingSphere& bound) noexcept
 
     if (bound.GetRadius() <= Math::GetZeroTolerance())
     {
-        // ½ÚµãÊÇÒ»¸öĞéÄâ½Úµã²»¿É¼û¡£
+        // èŠ‚ç‚¹æ˜¯ä¸€ä¸ªè™šæ‹ŸèŠ‚ç‚¹ä¸å¯è§ã€‚
         return false;
     }
 
-    // ´Ó×îºóÑ¹ÈëµÄÆ½Ãæ¿ªÊ¼,Õâ¿ÉÄÜÊÇÔ¼Êø×î´óµÄÆ½Ãæ
+    // ä»æœ€åå‹å…¥çš„å¹³é¢å¼€å§‹,è¿™å¯èƒ½æ˜¯çº¦æŸæœ€å¤§çš„å¹³é¢
     auto index = planeQuantity - 1;
     auto mask = (1 << index);
 
@@ -257,13 +257,13 @@ bool Rendering::CullerImpl::IsVisible(const BoundingSphere& bound) noexcept
 
             if (side == Mathematics::NumericalValueSymbol::Negative)
             {
-                // ¶ÔÏóÔÚÆ½ÃæµÄ¸º±ß£¬ËùÒÔÌŞ³ı¡£
+                // å¯¹è±¡åœ¨å¹³é¢çš„è´Ÿè¾¹ï¼Œæ‰€ä»¥å‰”é™¤ã€‚
                 return false;
             }
 
             if (side == Mathematics::NumericalValueSymbol::Positive)
             {
-                // ¶ÔÏóÔÚÆ½ÃæµÄÕı±ß¡£Ã»ÓĞ±ØÒª¶ÔÆ½Ãæ±È½Ï×Ó¶ÔÏó,ËùÒÔ½«Æä±ê¼ÇÎª·Ç»î¶¯¡£
+                // å¯¹è±¡åœ¨å¹³é¢çš„æ­£è¾¹ã€‚æ²¡æœ‰å¿…è¦å¯¹å¹³é¢æ¯”è¾ƒå­å¯¹è±¡,æ‰€ä»¥å°†å…¶æ ‡è®°ä¸ºéæ´»åŠ¨ã€‚
                 planeState &= ~mask;
             }
         }
@@ -278,8 +278,8 @@ Mathematics::NumericalValueSymbol Rendering::CullerImpl::WhichSide(const Plane& 
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    /// Æ½ÃæÊÇN * (X - C) = 0,ÕâÀï*±íÊ¾µã»ı¡£
-    /// ÓĞ·ûºÅ¾àÀë´ÓÉãÏñ»úÎ»ÖÃEµ½Æ½ÃæÊÇN * (E - C)¡£
+    /// å¹³é¢æ˜¯N * (X - C) = 0,è¿™é‡Œ*è¡¨ç¤ºç‚¹ç§¯ã€‚
+    /// æœ‰ç¬¦å·è·ç¦»ä»æ‘„åƒæœºä½ç½®Eåˆ°å¹³é¢æ˜¯N * (E - C)ã€‚
     const auto nDotEMinusC = aPlane.DistanceTo(camera->GetPosition());
 
     const auto normal = aPlane.GetNormal();
@@ -291,7 +291,7 @@ Mathematics::NumericalValueSymbol Rendering::CullerImpl::WhichSide(const Plane& 
     auto positive = 0;
     auto negative = 0;
 
-    // ¼ì²é½üÆ½Ãæ¶¥µã¡£
+    // æ£€æŸ¥è¿‘å¹³é¢é¡¶ç‚¹ã€‚
     const auto pDirectionMin = frustum.GetDirectionMin() * nDotDirection;
     const auto nearUpMin = frustum.GetUpMin() * nDotUp;
     const auto nearUpMax = frustum.GetUpMax() * nDotUp;
@@ -346,7 +346,7 @@ Mathematics::NumericalValueSymbol Rendering::CullerImpl::WhichSide(const Plane& 
         ++negative;
     }
 
-    // ¼ì²éÔ¶Æ½Ãæ¶¥µã¡£ (s = dMax / dMin)
+    // æ£€æŸ¥è¿œå¹³é¢é¡¶ç‚¹ã€‚ (s = dMax / dMin)
     const auto pDirectionMax = frustum.GetDirectionMax() * nDotDirection;
     const auto farUpMin = directionRatio * nearUpMin;
     const auto farUpMax = directionRatio * nearUpMax;
@@ -405,15 +405,15 @@ Mathematics::NumericalValueSymbol Rendering::CullerImpl::WhichSide(const Plane& 
     {
         if (0 < negative)
         {
-            // Æ½½ØÍ·ÌåÎ»ÓÚÆ½Ãæ¡£
+            // å¹³æˆªå¤´ä½“ä½äºå¹³é¢ã€‚
             return NumericalValueSymbol::Zero;
         }
 
-        // Æ½½ØÍ·ÌåÍêÈ«ÔÚÕıÃæ¡£
+        // å¹³æˆªå¤´ä½“å®Œå…¨åœ¨æ­£é¢ã€‚
         return NumericalValueSymbol::Positive;
     }
 
-    // Æ½½ØÍ·ÌåÍêÈ«ÔÚ¸ºÃæ¡£
+    // å¹³æˆªå¤´ä½“å®Œå…¨åœ¨è´Ÿé¢ã€‚
     return NumericalValueSymbol::Negative;
 }
 

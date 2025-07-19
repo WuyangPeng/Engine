@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/13 16:15)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/13 16:15)
 
 #include "WinSocketAcceptTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -42,7 +42,7 @@ void System::WinSocketAcceptTesting::MainTest()
 void System::WinSocketAcceptTesting::AcceptTest()
 {
     const auto socketHandle = GetWinSocket(ProtocolFamilies::Inet, SocketTypes::Stream, SocketProtocols::Tcp, nullptr, 0, 0);
-    ASSERT_TRUE_FAILURE_THROW(IsSocketValid(socketHandle), "´´½¨Tcp SocketÊ§°Ü¡£");
+    ASSERT_TRUE_FAILURE_THROW(IsSocketValid(socketHandle), "åˆ›å»ºTcp Socketå¤±è´¥ã€‚");
 
     ASSERT_NOT_THROW_EXCEPTION_1(DoAcceptTest, socketHandle);
 
@@ -62,7 +62,7 @@ void System::WinSocketAcceptTesting::DoAcceptTest(WinSocket socketHandle)
 
 #include SYSTEM_WARNING_POP
 
-    ASSERT_TRUE_FAILURE_THROW(IsSocketValid(acceptHandle), "´´½¨Accept SocketÊ§°Ü¡£");
+    ASSERT_TRUE_FAILURE_THROW(IsSocketValid(acceptHandle), "åˆ›å»ºAccept Socketå¤±è´¥ã€‚");
 
     ASSERT_NOT_THROW_EXCEPTION_1(RecvTest, acceptHandle);
 
@@ -76,7 +76,7 @@ System::WinSockInternetAddress System::WinSocketAcceptTesting::AcceptInit(WinSoc
     ASSERT_TRUE(Bind(socketHandle, &address));
     ASSERT_TRUE(Listen(socketHandle, 5));
 
-    GetStream() << "µ÷ÓÃacceptµÈ´ı¿Í»§¶ËÁ¬½Ó£¡\n";
+    GetStream() << "è°ƒç”¨acceptç­‰å¾…å®¢æˆ·ç«¯è¿æ¥ï¼\n";
 
     return address;
 }
@@ -123,5 +123,5 @@ int System::WinSocketAcceptTesting::DoRecvTest(CharBufferType& buffer, int index
 
 void System::WinSocketAcceptTesting::PrintTipsMessage()
 {
-    GetStream() << "Õâ¸ö²âÊÔÊ§°Ü»áµ¼ÖÂÓÀ¾ÃµÈ´ı¡£\n";
+    GetStream() << "è¿™ä¸ªæµ‹è¯•å¤±è´¥ä¼šå¯¼è‡´æ°¸ä¹…ç­‰å¾…ã€‚\n";
 }

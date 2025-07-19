@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #include "Hero.h"
 #include "HeroContainerDetail.h"
@@ -27,11 +27,11 @@ CSVConfigure::HeroContainer::HeroContainer(const CSVContent& csvContent)
 
 void CSVConfigure::HeroContainer::Parsing(const CSVContent& csvContent)
 {
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("hero±í¿ªÊ¼ÔØÈë¡­¡­"));
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("heroè¡¨å¼€å§‹è½½å…¥â€¦â€¦"));
 
     Load(csvContent);
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("hero±í½áÊøÔØÈë¡­¡­"));
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("heroè¡¨ç»“æŸè½½å…¥â€¦â€¦"));
 }
 
 void CSVConfigure::HeroContainer::Load(const CSVContent& csvContent)
@@ -47,7 +47,7 @@ void CSVConfigure::HeroContainer::Load(const CSVContent& csvContent)
 
         if (!hero.emplace(heroBase->GetKey(), heroBase).second)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, User, SYSTEM_TEXT("hero±í´æÔÚÖØ¸´Ö÷¼ü£º"), heroBase->GetKey(), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, User, SYSTEM_TEXT("heroè¡¨å­˜åœ¨é‡å¤ä¸»é”®ï¼š"), heroBase->GetKey(), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
 
@@ -63,7 +63,7 @@ CSVConfigure::HeroContainer::ConstHeroSharedPtr CSVConfigure::HeroContainer::Get
 
     if (hero.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("hero±íÎª¿Õ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("heroè¡¨ä¸ºç©ºã€‚"s))
     }
     else
     {
@@ -83,7 +83,7 @@ CSVConfigure::HeroContainer::ConstHeroSharedPtr CSVConfigure::HeroContainer::Get
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("hero±íÎ´ÕÒµ½key = "s) + System::ToString(key) + SYSTEM_TEXT("µÄÅäÖÃĞÅÏ¢¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("heroè¡¨æœªæ‰¾åˆ°key = "s) + System::ToString(key) + SYSTEM_TEXT("çš„é…ç½®ä¿¡æ¯ã€‚"s))
     }
 }
 

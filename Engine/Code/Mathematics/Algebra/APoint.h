@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 14:39)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 14:39)
 
 #ifndef MATHEMATICS_ALGEBRA_A_POINT_H
 #define MATHEMATICS_ALGEBRA_A_POINT_H
@@ -38,7 +38,7 @@ namespace Mathematics
         using ArrayType = std::array<T, pointSize>;
 
     public:
-        // APoint±íÊ¾·ÂÉä×ø±ê (x,y,z,1)¡£ Ä¬ÈÏ (0,0,0,1)
+        // APointè¡¨ç¤ºä»¿å°„åæ ‡ (x,y,z,1)ã€‚ é»˜è®¤ (0,0,0,1)
         constexpr APoint() noexcept
             : APoint{ MathType::GetValue(0), MathType::GetValue(0), MathType::GetValue(0) }
         {
@@ -67,9 +67,9 @@ namespace Mathematics
         NODISCARD const T& operator[](int index) const;
         NODISCARD T& operator[](int index);
 
-        // ËãÊõÔËËãÖ§³Ö·ÂÉä´úÊý¡£
+        // ç®—æœ¯è¿ç®—æ”¯æŒä»¿å°„ä»£æ•°ã€‚
 
-        // Ò»¸öµã¼Ó»ò¼õÒ»¸öÏòÁ¿µÄ½á¹ûÊÇÒ»¸öµã
+        // ä¸€ä¸ªç‚¹åŠ æˆ–å‡ä¸€ä¸ªå‘é‡çš„ç»“æžœæ˜¯ä¸€ä¸ªç‚¹
         APoint& operator+=(const AVectorType& rhs);
         APoint& operator-=(const AVectorType& rhs);
 
@@ -98,32 +98,32 @@ namespace Mathematics
         HomogeneousPointType homogeneousPoint;
     };
 
-    // Á½¸öµãÏà¼õÎªÒ»¸öÏòÁ¿
+    // ä¸¤ä¸ªç‚¹ç›¸å‡ä¸ºä¸€ä¸ªå‘é‡
     template <typename T>
     NODISCARD AVector<T> operator-(const APoint<T>& lhs, const APoint<T>& rhs) noexcept;
 
-    // Ò»¸öµãÔö¼Ó»ò¼õÐ¡Ò»¸öÏòÁ¿µÄ½á¹ûÊÇÒ»¸öµã
+    // ä¸€ä¸ªç‚¹å¢žåŠ æˆ–å‡å°ä¸€ä¸ªå‘é‡çš„ç»“æžœæ˜¯ä¸€ä¸ªç‚¹
     template <typename T>
     NODISCARD APoint<T> operator+(const APoint<T>& lhs, const AVector<T>& rhs);
     template <typename T>
     NODISCARD APoint<T> operator-(const APoint<T>& lhs, const AVector<T>& rhs);
 
-    // ÔÚ·ÂÉä´úÊý£¬µã²»ÄÜËæÒâ¼Ó¼õ¡£È»¶ø£¬·ÂÉäºÍºÍ·ÂÉä²îÊÇÔÊÐíµÄ¡£ÄúÓÐÔðÈÎÈ·±£ÄúÔÚ¼ÆËãÄÄÒ»¸ö¡£
+    // åœ¨ä»¿å°„ä»£æ•°ï¼Œç‚¹ä¸èƒ½éšæ„åŠ å‡ã€‚ç„¶è€Œï¼Œä»¿å°„å’Œå’Œä»¿å°„å·®æ˜¯å…è®¸çš„ã€‚æ‚¨æœ‰è´£ä»»ç¡®ä¿æ‚¨åœ¨è®¡ç®—å“ªä¸€ä¸ªã€‚
 
-    // Ò»¸ö·ÂÉäºÍÊÇÀ´×Ô
+    // ä¸€ä¸ªä»¿å°„å’Œæ˜¯æ¥è‡ª
     // r = s1 * p1 + s2 * p2 + ... + sn * pn
-    // ÕâÀïp1µ½pnÊÇÆë´Î×ø±êµÄµã£¨wÖµÊÇ1£©ºÍ s1µ½snÊÇ±êÁ¿£¬ÇÒs1 + s2 + ... + sn = 1£¬Æä½á¹ûrÊÇÆë´Î×ø±êµã¡£
+    // è¿™é‡Œp1åˆ°pnæ˜¯é½æ¬¡åæ ‡çš„ç‚¹ï¼ˆwå€¼æ˜¯1ï¼‰å’Œ s1åˆ°snæ˜¯æ ‡é‡ï¼Œä¸”s1 + s2 + ... + sn = 1ï¼Œå…¶ç»“æžœræ˜¯é½æ¬¡åæ ‡ç‚¹ã€‚
 
-    // Ò»¸ö·ÂÉä²îÊÇÀ´×Ô
+    // ä¸€ä¸ªä»¿å°„å·®æ˜¯æ¥è‡ª
     // r = d1 * p1 + d2 * p2 + ... + dn * pn
-    // ÕâÀïp1µ½pnÊÇÆë´Î×ø±êµÄµã£¨wÖµÊÇ1£©ºÍ d1µ½dnÊÇ±êÁ¿£¬ÇÒd1 + d2 + ... + dn = 0£¬Æä½á¹ûrÊÇÆë´Î×ø±êµã¡£
+    // è¿™é‡Œp1åˆ°pnæ˜¯é½æ¬¡åæ ‡çš„ç‚¹ï¼ˆwå€¼æ˜¯1ï¼‰å’Œ d1åˆ°dnæ˜¯æ ‡é‡ï¼Œä¸”d1 + d2 + ... + dn = 0ï¼Œå…¶ç»“æžœræ˜¯é½æ¬¡åæ ‡ç‚¹ã€‚
 
-    // ×¢Òâ£ºÕâ¸öÀàµÄËã·¨²Ù×÷·µ»ØAPoint¶ÔÏó£¬µ«·ÂÉä²îÐèÒª·µ»ØÒ»¸öAVector¶ÔÏó¡£
-    // ÏÂÃæµÄ´úÂëÏÔÊ¾ÁËÈçºÎÊµÏÖÕâÒ»µã£º
-    // APoint p1, p2, p3;  // ³õÊ¼»¯ÎªÈÎºÎÖµ
+    // æ³¨æ„ï¼šè¿™ä¸ªç±»çš„ç®—æ³•æ“ä½œè¿”å›žAPointå¯¹è±¡ï¼Œä½†ä»¿å°„å·®éœ€è¦è¿”å›žä¸€ä¸ªAVectorå¯¹è±¡ã€‚
+    // ä¸‹é¢çš„ä»£ç æ˜¾ç¤ºäº†å¦‚ä½•å®žçŽ°è¿™ä¸€ç‚¹ï¼š
+    // APoint p1, p2, p3;  // åˆå§‹åŒ–ä¸ºä»»ä½•å€¼
     // APoint difference = 1.5f * p1 + (-0.2f) * p2 + (-0.3f) * p3;
     // AVector r { difference.GetHomogeneousPoint() };
-    // r½ö¸´ÖÆx£¬yºÍz·ÖÁ¿£¬²¢½«w·ÖÁ¿ÉèÖÃÎªÁã¡£
+    // rä»…å¤åˆ¶xï¼Œyå’Œzåˆ†é‡ï¼Œå¹¶å°†wåˆ†é‡è®¾ç½®ä¸ºé›¶ã€‚
     template <typename T>
     NODISCARD APoint<T> operator+(const APoint<T>& lhs, const APoint<T>& rhs);
 
@@ -136,17 +136,17 @@ namespace Mathematics
     template <typename T>
     NODISCARD APoint<T> operator*(T scalar, const APoint<T>& rhs);
 
-    // ÔÚ·ÂÉä´úÊýÊÇ²»ÔÊÐí¼ÆËãÒ»¸öµãºÍÒ»¸öÏòÁ¿µÄÄÚ»ý¡£ È»¶ø£¬µ±´¦ÀíÆ½ÃæÊ±£¬ÕâÊÇÒ»¸ö·½±ãµÄ¶¨Òå¡£
-    // ¾ßÌå¶øÑÔ£¬Æ½ÃæÊÇDot(N,X-P) = 0£¬ÆäÖÐNÊÇÒ»¸öÏòÁ¿£¬PÊÇÆ½ÃæÉÏÒ»¸öÌØ¶¨µÄµã£¬ÇÒXÊÇÔÚÆ½ÃæÉÏµÄÈÎÒâµã¡£
-    // ²îX - PÊÇÒ»¸öÏòÁ¿£¬ÄÇÃ´Dot(N,X - P)±»ºÜºÃµØ¶¨Òå¡£Èç¹ûÆ½Ãæ±»ÖØÐ´ÎªDot(N,X) = Dot(N,P)£¬ÕâÔÚ·ÂÉä´úÊýÖÐÊÇ²»Ö§³ÖµÄ£¬
-    // ÎÞÂÛÎÞÈç£¬ÎÒÃÇÓÐÊ±ÐèÒª¼ÆËãDot(N,P)¡£ÔÚÏÂÎÄÖÐ£¬APointµÄw·ÖÁ¿±»ºöÂÔ£¬ÕâÒâÎ¶×ÅAPoint±»ÊÓÎªÏòÁ¿¡£
+    // åœ¨ä»¿å°„ä»£æ•°æ˜¯ä¸å…è®¸è®¡ç®—ä¸€ä¸ªç‚¹å’Œä¸€ä¸ªå‘é‡çš„å†…ç§¯ã€‚ ç„¶è€Œï¼Œå½“å¤„ç†å¹³é¢æ—¶ï¼Œè¿™æ˜¯ä¸€ä¸ªæ–¹ä¾¿çš„å®šä¹‰ã€‚
+    // å…·ä½“è€Œè¨€ï¼Œå¹³é¢æ˜¯Dot(N,X-P) = 0ï¼Œå…¶ä¸­Næ˜¯ä¸€ä¸ªå‘é‡ï¼ŒPæ˜¯å¹³é¢ä¸Šä¸€ä¸ªç‰¹å®šçš„ç‚¹ï¼Œä¸”Xæ˜¯åœ¨å¹³é¢ä¸Šçš„ä»»æ„ç‚¹ã€‚
+    // å·®X - Pæ˜¯ä¸€ä¸ªå‘é‡ï¼Œé‚£ä¹ˆDot(N,X - P)è¢«å¾ˆå¥½åœ°å®šä¹‰ã€‚å¦‚æžœå¹³é¢è¢«é‡å†™ä¸ºDot(N,X) = Dot(N,P)ï¼Œè¿™åœ¨ä»¿å°„ä»£æ•°ä¸­æ˜¯ä¸æ”¯æŒçš„ï¼Œ
+    // æ— è®ºæ— å¦‚ï¼Œæˆ‘ä»¬æœ‰æ—¶éœ€è¦è®¡ç®—Dot(N,P)ã€‚åœ¨ä¸‹æ–‡ä¸­ï¼ŒAPointçš„wåˆ†é‡è¢«å¿½ç•¥ï¼Œè¿™æ„å‘³ç€APointè¢«è§†ä¸ºå‘é‡ã€‚
     template <typename T>
     NODISCARD T Dot(const APoint<T>& lhs, const AVector<T>& rhs) noexcept;
 
     template <typename T>
     NODISCARD bool Approximate(const APoint<T>& lhs, const APoint<T>& rhs, T epsilon = Math<T>::GetZeroTolerance()) noexcept;
 
-    // µ÷ÊÔÊä³ö
+    // è°ƒè¯•è¾“å‡º
     template <typename T>
     std::ostream& operator<<(std::ostream& outFile, const APoint<T>& point);
 

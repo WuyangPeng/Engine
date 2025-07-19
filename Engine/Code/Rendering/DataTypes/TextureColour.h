@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:56)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:56)
 
 #ifndef RENDERING_DATA_TYPES_TEXTURE_COLOUR_H
 #define RENDERING_DATA_TYPES_TEXTURE_COLOUR_H
@@ -16,8 +16,8 @@
 #include <array>
 #include <type_traits>
 
-// ÑÕÉ«Àà»á½«Öµ½Ø¶ÏÎª[minValue,maxValue]£¬
-// Èç¹ûÒªÇóÑÕÉ«ÀàµÄÆ½¾ùÖµ£¬ÏÈ½«ClampÖµÉèÖÃÎªfalse£¬È»ºóÔÙ½øĞĞÊıÖµÔËËã£¬Ö®ºó½«ClampÖµÖØĞÂÉèÖÃÎªtrue¡£
+// é¢œè‰²ç±»ä¼šå°†å€¼æˆªæ–­ä¸º[minValue,maxValue]ï¼Œ
+// å¦‚æœè¦æ±‚é¢œè‰²ç±»çš„å¹³å‡å€¼ï¼Œå…ˆå°†Clampå€¼è®¾ç½®ä¸ºfalseï¼Œç„¶åå†è¿›è¡Œæ•°å€¼è¿ç®—ï¼Œä¹‹åå°†Clampå€¼é‡æ–°è®¾ç½®ä¸ºtrueã€‚
 namespace Rendering
 {
     template <TextureFormat Format>
@@ -64,7 +64,7 @@ namespace Rendering
             SetColour(red, green, blue, alpha);
         }
 
-        // Èç¹û´æÔÚalpha£¬ÔòÉèÎª×î´óÖµ
+        // å¦‚æœå­˜åœ¨alphaï¼Œåˆ™è®¾ä¸ºæœ€å¤§å€¼
         TextureColour(ValueType red, ValueType green, ValueType blue) noexcept
             : colour{}, isClamp{ true }
         {
@@ -80,7 +80,7 @@ namespace Rendering
             if constexpr (alphaIndex != -1)
             {
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // Í¨¹ıÊ¹ÓÃ¾²Ì¬¶ÏÑÔ£¬¹Ì¶¨´óĞ¡Êı×éÊ¹ÓÃ³£Á¿Ë÷ÒıÊÇ±»ÔÊĞíµÄ¡£
+#include SYSTEM_WARNING_DISABLE(26446)  // é€šè¿‡ä½¿ç”¨é™æ€æ–­è¨€ï¼Œå›ºå®šå¤§å°æ•°ç»„ä½¿ç”¨å¸¸é‡ç´¢å¼•æ˜¯è¢«å…è®¸çš„ã€‚
 
                 colour[alphaIndex] = alphaMaxValue;
 
@@ -94,7 +94,7 @@ namespace Rendering
 
         explicit TextureColour(ValueType value) noexcept;
 
-        // Ö»ÓĞµ±³ÉÔ±ÊÇÒ»ÖÂÊ±£¨alpha³ÉÔ±³ıÍâ£©£¬²ÅÔÊĞí×ª»»
+        // åªæœ‰å½“æˆå‘˜æ˜¯ä¸€è‡´æ—¶ï¼ˆalphaæˆå‘˜é™¤å¤–ï¼‰ï¼Œæ‰å…è®¸è½¬æ¢
         template <TextureFormat RhsFormat>
         TextureColour(const TextureColour<RhsFormat>& colour);
 
@@ -117,7 +117,7 @@ namespace Rendering
             static_assert(0 <= alphaIndex && alphaIndex < arraySize);
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // Í¨¹ıÊ¹ÓÃ¾²Ì¬¶ÏÑÔ£¬¹Ì¶¨´óĞ¡Êı×éÊ¹ÓÃ³£Á¿Ë÷ÒıÊÇ±»ÔÊĞíµÄ¡£
+#include SYSTEM_WARNING_DISABLE(26446)  // é€šè¿‡ä½¿ç”¨é™æ€æ–­è¨€ï¼Œå›ºå®šå¤§å°æ•°ç»„ä½¿ç”¨å¸¸é‡ç´¢å¼•æ˜¯è¢«å…è®¸çš„ã€‚
 
             colour[redIndex] = red;
             colour[greenIndex] = green;
@@ -141,7 +141,7 @@ namespace Rendering
             static_assert(0 <= blueIndex && blueIndex < arraySize);
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // Í¨¹ıÊ¹ÓÃ¾²Ì¬¶ÏÑÔ£¬¹Ì¶¨´óĞ¡Êı×éÊ¹ÓÃ³£Á¿Ë÷ÒıÊÇ±»ÔÊĞíµÄ¡£
+#include SYSTEM_WARNING_DISABLE(26446)  // é€šè¿‡ä½¿ç”¨é™æ€æ–­è¨€ï¼Œå›ºå®šå¤§å°æ•°ç»„ä½¿ç”¨å¸¸é‡ç´¢å¼•æ˜¯è¢«å…è®¸çš„ã€‚
 
             colour[redIndex] = red;
             colour[greenIndex] = green;
@@ -233,7 +233,7 @@ namespace Rendering
                 static_assert(0 <= Index && Index < arraySize, "index is crossing!");
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // Í¨¹ıÊ¹ÓÃ¾²Ì¬¶ÏÑÔ£¬¹Ì¶¨´óĞ¡Êı×éÊ¹ÓÃ³£Á¿Ë÷ÒıÊÇ±»ÔÊĞíµÄ¡£
+#include SYSTEM_WARNING_DISABLE(26446)  // é€šè¿‡ä½¿ç”¨é™æ€æ–­è¨€ï¼Œå›ºå®šå¤§å°æ•°ç»„ä½¿ç”¨å¸¸é‡ç´¢å¼•æ˜¯è¢«å…è®¸çš„ã€‚
 
                 colour[Index] = Clamp(colour[Index], maxValue);
 

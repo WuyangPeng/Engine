@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #ifndef CSV_OUTPUT_INPUT1_CONTAINER_DETAIL_H
 #define CSV_OUTPUT_INPUT1_CONTAINER_DETAIL_H
@@ -25,7 +25,7 @@ CsvOutput::Input1Container::ConstInput1SharedPtr CsvOutput::Input1Container::Get
         return *iter;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("input1±íÎ´ÕÒµ½Âú×ãÌõ¼şµÄÅäÖÃĞÅÏ¢¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("input1è¡¨æœªæ‰¾åˆ°æ»¡è¶³æ¡ä»¶çš„é…ç½®ä¿¡æ¯ã€‚"s))
 }
 
 template <typename Function>

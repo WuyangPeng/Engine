@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 15:06)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 15:06)
 
 #ifndef CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_GET_INTERNAL_H
 #define CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_GET_INTERNAL_H
@@ -14,27 +14,27 @@
 
 #include "CoreTools/Helper/PropertiesMacro.h"
 
-/// Ê¹ÓÃ·½Ê½£º
-/// ÀàÍ¨¹ıÓÑÔªÊµÏÖ¶ÔÊôĞÔµÄÖ»¶Á·ÃÎÊ¡£
-/// ÈçÒ»¸öÀà£¬¶¨ÒåÈçÏÂ£º
+/// ä½¿ç”¨æ–¹å¼ï¼š
+/// ç±»é€šè¿‡å‹å…ƒå®ç°å¯¹å±æ€§çš„åªè¯»è®¿é—®ã€‚
+/// å¦‚ä¸€ä¸ªç±»ï¼Œå®šä¹‰å¦‚ä¸‹ï¼š
 /// class PropTester {
 /// public: CoreTools::DirectPropertyGetInternal<int, int, PropTester> Prop;
-/// Èç¹ûĞèÒªÌá¹©ĞŞ¸ÄÖµµÄ½Ó¿Ú£º
+/// å¦‚æœéœ€è¦æä¾›ä¿®æ”¹å€¼çš„æ¥å£ï¼š
 /// public: void SetPropValue(int i)	{ Prop.value = i;	}
 /// };
 
-/// Ê¹ÓÃ·½Ê½ÈçÏÂ£º
+/// ä½¿ç”¨æ–¹å¼å¦‚ä¸‹ï¼š
 /// PropTester tester{};
-/// Ö»¶Á·ÃÎÊ£º
+/// åªè¯»è®¿é—®ï¼š
 /// int i = tester.Prop;
-/// ÉèÖÃÖµ£º
+/// è®¾ç½®å€¼ï¼š
 /// tester.SetPropValue(100);
 
 namespace CoreTools
 {
-    template <typename Value,  /// Êµ¼ÊÊôĞÔÖµÀàĞÍ
-              typename Reference,  /// ÒıÓÃÀàĞÍ
-              typename Container>  /// ·â±ÕÀà
+    template <typename Value,  /// å®é™…å±æ€§å€¼ç±»å‹
+              typename Reference,  /// å¼•ç”¨ç±»å‹
+              typename Container>  /// å°é—­ç±»
     class DirectPropertyGetInternal final
     {
     public:
@@ -69,7 +69,7 @@ namespace CoreTools
         TCRE_DECLARE_TEMPLATE_PARAM_AS_FRIEND(ContainerType);
 
     public:
-        /// Ìá¹©¶Ô¸ÃÊôĞÔµÄÖ»¶Á·ÃÎÊ
+        /// æä¾›å¯¹è¯¥å±æ€§çš„åªè¯»è®¿é—®
         NODISCARD operator ReferenceType() const noexcept;
 
     private:

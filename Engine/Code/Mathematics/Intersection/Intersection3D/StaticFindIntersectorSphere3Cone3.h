@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	�汾��0.9.1.6 (2023/10/28 15:09)
+///	标准：std:c++20
+///	版本：0.9.1.6 (2023/10/28 15:09)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SPHERE3_CONE3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SPHERE3_CONE3_H
@@ -39,7 +39,7 @@ namespace Mathematics
         NODISCARD Sphere3Type GetSphere() const noexcept;
         NODISCARD Cone3Type GetCone() const noexcept;
 
-        /// �ھ�̬�����ཻ��ѯ�У���������Բ׶��֮�䷢���ཻ������������޼��� �˺���������ӽ�Բ׶����Ľ��㡣
+        /// 在静态查找相交查询中，如果球体和圆锥体之间发生相交，则可能是无限集。 此函数返回最接近圆锥顶点的交点。
         NODISCARD Vector3Type GetPoint() const noexcept;
 
     private:
@@ -49,7 +49,7 @@ namespace Mathematics
         Sphere3Type sphere;
         Cone3Type cone;
 
-        // ��Բ׶����������ཻ�㡣
+        // 与圆锥顶点最近的相交点。
         Vector3Type point;
     };
 }

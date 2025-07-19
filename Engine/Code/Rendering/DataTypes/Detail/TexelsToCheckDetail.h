@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒýÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:54)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“Žç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:54)
 
 #ifndef RENDERING_DATA_TYPES_TEXELS_TO_CHECK_DETAIL_H
 #define RENDERING_DATA_TYPES_TEXELS_TO_CHECK_DETAIL_H
@@ -49,7 +49,7 @@ void Rendering::TexelsToCheck<Format>::CheckOutTexels(MAYBE_UNUSED size_t outTex
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    RENDERING_ASSERTION_2(outTexelsSize == GetOutTexelsLength(), "Êä³öÊý×é´óÐ¡%d´íÎó¡£", outTexelsSize);
+    RENDERING_ASSERTION_2(outTexelsSize == GetOutTexelsLength(), "è¾“å‡ºæ•°ç»„å¤§å°%dé”™è¯¯ã€‚", outTexelsSize);
 }
 
 #endif  // RENDERING_DATA_TYPES_TEXELS_TO_CHECK_DETAIL_H

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 13:50)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 13:50)
 
 #ifndef MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_TORUS3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_TORUS3_ACHIEVE_H
@@ -57,7 +57,7 @@ Mathematics::Torus3<Real> Mathematics::StaticFindIntersectorLine3Torus3<Real>::G
 template <typename Real>
 void Mathematics::StaticFindIntersectorLine3Torus3<Real>::Find()
 {
-    // ¼ÆËãËÄ´Î¶àÏîÊ½µÄÏµÊı¡£
+    // è®¡ç®—å››æ¬¡å¤šé¡¹å¼çš„ç³»æ•°ã€‚
     auto outerRadiusSquare = torus.GetOuterRadius() * torus.GetOuterRadius();
     auto innerRadiusSquare = torus.GetInnerRadius() * torus.GetInnerRadius();
     auto directionDotDirection = Vector3ToolsType::DotProduct(line.GetDirection(), line.GetDirection());
@@ -73,7 +73,7 @@ void Mathematics::StaticFindIntersectorLine3Torus3<Real>::Find()
     poly[3] = MathType::GetValue(4) * directionDotDirection * originDotDirection;
     poly[4] = directionDotDirection * directionDotDirection;
 
-    // ½â¾öËÄ´Î·½³Ì¡£
+    // è§£å†³å››æ¬¡æ–¹ç¨‹ã€‚
     PolynomialRoots<Real> proots{ MathType::GetZeroTolerance() };
     if (!proots.FindBisection(poly, 6))
     {
@@ -81,7 +81,7 @@ void Mathematics::StaticFindIntersectorLine3Torus3<Real>::Find()
         return;
     }
 
-    // »ñÈ¡Ïà½»µã¡£
+    // è·å–ç›¸äº¤ç‚¹ã€‚
     for (auto begin = proots.GetBegin(); begin != proots.GetEnd(); ++begin)
     {
         auto point = line.GetOrigin() + (*begin) * line.GetDirection();
@@ -125,7 +125,7 @@ Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorLine3Torus3<Real>::
             return point3;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Ë÷ÒıÔ½½ç\n"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•è¶Šç•Œ\n"s))
 }
 
 #endif  // MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_TORUS3_ACHIEVE_H

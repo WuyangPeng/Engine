@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.3 (2023/12/28 15:40)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/28 15:40)
 
 #ifndef RENDERING_VISIBILITY_CULLER_IMPL_H
 #define RENDERING_VISIBILITY_CULLER_IMPL_H
@@ -42,8 +42,8 @@ namespace Rendering
         using Container = std::array<float, quantity>;
 
     public:
-        // �ü���Ҫ���ģ�͡������Ҫ�޸������
-        // ��Ӧ����ʹ��ComputeVisibleSet֮ǰ������SetCamera��
+        // 裁剪需要相机模型。如果需要修改相机，
+        // 你应该在使用ComputeVisibleSet之前，调用SetCamera。
         explicit CullerImpl(ConstCameraSharedPtr camera);
         ~CullerImpl() noexcept = default;
         CullerImpl(const CullerImpl& rhs);
@@ -53,13 +53,13 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        // ������������Ƶ�ƽ��ͷ���Ǳ�ڿɼ�����
+        // 访问相机，复制的平截头体和潜在可见集。
         void SetCamera(const ConstCameraSharedPtr& aCamera) noexcept;
         NODISCARD ConstCameraSharedPtr GetCamera() const noexcept;
         void SetFrustum(const Container& aFrustum);
         NODISCARD Container GetFrustum() const noexcept;
 
-        // �������Ϊ�ǿɼ��Ķ��󸽼ӵ��ɼ���(�洢Ϊһ������)��
+        // 基类的行为是可见的对象附加到可见集(存储为一个数组)。
         void Insert(const VisualSharedPtr& visible);
 
         NODISCARD int GetNumVisible() const;
@@ -72,20 +72,20 @@ namespace Rendering
         void PushPlane(const Plane& aPlane) noexcept;
         void PopPlane() noexcept;
 
-        // �Ƚ϶��������߽�����Ĳü�ƽ�档ֻ��Spatial�������������
+        // 比较对象的世界边界对立的裁剪平面。只有Spatial调用这个函数。
         NODISCARD bool IsVisible(const BoundingSphere& bound) noexcept;
 
-        /// ֧���� BspNode::GetVisibleSet.
-        /// ȷ����ͼƽ��ͷ���Ƿ���ȫ��ƽ���һ�ࡣ
-        /// ƽ��ġ����桱�ڰ�ռ䵽ƽ�淨�ߵĵ㡣�����桱������һ��ռ䡣
-        /// ��������+1�����ͼƽ��ͷ����ȫ��ƽ���������,
-        /// ��������-1�����ͼƽ��ͷ����ȫ��ƽ��ĸ����ϣ�
-        /// ����0�������ͼƽ��ͷ��λ��ƽ�档
-        /// ����ƽ������������ϵ�������������ϵ���ڲ��ԡ�
+        /// 支持在 BspNode::GetVisibleSet.
+        /// 确定视图平截头体是否完全在平面的一侧。
+        /// 平面的“正面”在半空间到平面法线的点。“负面”是另外一半空间。
+        /// 函数返回+1如果视图平截头体完全在平面的正面上,
+        /// 函数返回-1如果视图平截头体完全在平面的负面上，
+        /// 或者0，如果视图平截头体位于平面。
+        /// 输入平面在世界坐标系和世界相机坐标系用于测试。
         NODISCARD NumericalValueSymbol WhichSide(const Plane& aPlane) const;
 
-        // ������Ӧ��ʹ�õ���Ҫ������ʹ�õ��ڳ���ͼ�ü���
-        // ��������ͼ,����Ǳ�ڿɼ������������ƽ�档
+        // 这是你应该使用的主要函数中使用的在场景图裁剪。
+        // 遍历场景图,构建潜在可见集相对于世界平面。
         void Clear();
 
         NODISCARD VisualContainerIter begin();
@@ -97,24 +97,24 @@ namespace Rendering
         using PlaneContainer = std::array<Plane, quantity>;
 
     private:
-        // ���������Ϣ,������Ҫ�ü�������
+        // 输入相机信息,可能需要裁剪场景。
         ConstCameraSharedPtr camera;
 
-        // ������ͼƽ��ͷ������������������������ϵͳ�ı��ڲü���ƽ��ͷ�����(����,�Ż�ϵͳ)����Ӱ�����,
-        // ��Ⱦ���ĳ�ʼ״̬�Ǳ�Ҫ�ġ�
+        // 复制视图平截头体的输入相机。这允许各种子系统改变在裁剪的平截头体参数(例如,门户系统)而不影响相机,
+        // 渲染器的初始状态是必要的。
         CameraFrustum frustum;
 
-        // ����ü�ƽ���Ӧ��ͼƽ��ͷ����κζ�����û�����Ĳü�ƽ�档
-        // ��Աm_PlaneState����λ��־�ڲü�ϵͳ�洢ƽ���Ƿ��Ծ��
-        // 1��ζ��ƽ���ǻ�Ծ��,����ƽ���ǲ���Ծ�ġ�
-        // һ����Ծ��ƽ�����,����߽��,������һ�������ƽ�档��֧����һ����Ч�Ĳü��Ĳ�νṹ��
-        // ����,���һ���ڵ�ı߽�����ڵ���ƽ����ͼƽ��ͷ��,
-        // ��������ƽ��ڵ�Ĳ���Ծ��,��Ϊ�ӽڵ㶼�Զ����뿪ƽ�档
+        // 世界裁剪平面对应视图平截头体加任何额外的用户定义的裁剪平面。
+        // 成员m_PlaneState代表位标志在裁剪系统存储平面是否活跃。
+        // 1意味着平面是活跃的,否则平面是不活跃的。
+        // 一个活跃的平面相比,计算边界卷,而不是一个不活动的平面。这支持了一种有效的裁剪的层次结构。
+        // 例如,如果一个节点的边界体积内的左平面视图平截头体,
+        // 则设置左平面节点的不活跃的,因为子节点都自动在离开平面。
         int planeQuantity;
         PlaneContainer plane;
         uint32_t planeState;
 
-        // ���ܿɼ����õ���GetVisibleSet��
+        // 可能可见设置调用GetVisibleSet。
         VisibleSet visibleSet;
     };
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	����汾��0.9.0.12 (2023/06/12 14:01)
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/12 14:01)
 
 #ifndef RENDERING_CONTROLLERS_BLEND_TRANSFORM_CONTROLLER_H
 #define RENDERING_CONTROLLERS_BLEND_TRANSFORM_CONTROLLER_H
@@ -28,28 +28,28 @@ namespace Rendering
         using Matrix = Mathematics::MatrixF;
 
     public:
-        // �趨'rotationScaleMatrices'Ϊ���桱ʱ,�����������������ʽΪ��
-        // Y = R * S * X + T������R����ת�任��SΪһ�����ĶԽ������ž���T��ƽ�ƾ���;
-        // Ҳ����˵��ÿһ���任����IsRotationScaleMatrix���ڡ��桱��
-        // ����������£���ת�ͱ����Ļ�Ͽ����Ǽ��λ����������乹�캯����ָ�����롣
-        // ƽ�ƻ��ʼ������������{R0,S0,T0} ��{R1,S1,T1} ��ת��ͨ����
-        // Ȩ��w�ڷ�Χ[0,1]����{R,S,T}�ǻ�ϵĽ����
-        // ��q0, q1��q��Ӧ��R0��R1��R2��Dot(q0,q1) >= 0 ��
-        // A = angle(q0,q1) = acos(Dot(q0,q1))��
+        // 设定'rotationScaleMatrices'为“真”时,输入控制器管理的形式为：
+        // Y = R * S * X + T，其中R是旋转变换，S为一个正的对角线缩放矩阵，T是平移矩阵;
+        // 也就是说，每一个变换具有IsRotationScaleMatrix等于“真”。
+        // 在这种情况下，旋转和比例的混合可以是几何或算术，在其构造函数中指定输入。
+        // 平移混合始终是算术。让{R0,S0,T0} 和{R1,S1,T1} 是转换通道，
+        // 权重w在范围[0,1]。让{R,S,T}是混合的结果。
+        // 让q0, q1和q对应于R0，R1和R2与Dot(q0,q1) >= 0 和
+        // A = angle(q0,q1) = acos(Dot(q0,q1))。
 
-        // ƽ��:  T = (1 - w) * T0 + w * T1
+        // 平移:  T = (1 - w) * T0 + w * T1
 
-        // ������ת:  q = Normalize((1 - w) * q0 + w * q1)
-        // ������ת:
+        // 算术旋转:  q = Normalize((1 - w) * q0 + w * q1)
+        // 几何旋转:
         //   q = Slerp(w,q0,q1)
         //     = (sin((1 - w) * A) * q0 + sin(w * A) * q1) / sin(A)
 
-        // ��������:  s = (1 - w) * s0 + w * s1 ��ÿ��ͨ�� s0, s1, s
-        // ��������:  s = sign(s0) * sign(s1) * pow(|s0|,1 - w) * pow(|s1|,w)
-        //  �������s0��s1���㣬��s���㡣
+        // 算术缩放:  s = (1 - w) * s0 + w * s1 对每个通道 s0, s1, s
+        // 几何缩放:  s = sign(s0) * sign(s1) * pow(|s0|,1 - w) * pow(|s1|,w)
+        //  如果其中s0或s1是零，则s是零。
 
-        // ���á�rotationScaleMatrices'Ϊ'��'ʱ����mIsRotationMatrix��'��'��ÿ���任��
-        // ����������£����еı任ʹ�ü�Ȩƽ��ֵ���㡣���ǲ��Ƽ��ģ���Ϊ�Ӿ�Ч��������Ԥ�ϵġ�
+        // 设置“rotationScaleMatrices'为'假'时，当mIsRotationMatrix是'假'对每个变换。
+        // 在这种情况下，所有的变换使用加权平均值计算。这是不推荐的，因为视觉效果是难以预料的。
         BlendTransformController(const TransformControllerSharedPtr& firstController,
                                  const TransformControllerSharedPtr& secondController,
                                  bool rotationScaleMatrices,
@@ -61,7 +61,7 @@ namespace Rendering
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(BlendTransformController);
         CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 
-        // Ȩ��w��һ�����ֵ���0 <= w <= 1��
+        // 权重w是一个数字的量0 <= w <= 1。
         NODISCARD ConstTransformControllerSharedPtr GetFirstController() const noexcept;
         NODISCARD ConstTransformControllerSharedPtr GetSecondController() const noexcept;
         NODISCARD bool IsRotationScaleMatrices() const noexcept;
@@ -71,14 +71,14 @@ namespace Rendering
         NODISCARD bool IsGeometricRotation() const noexcept;
         NODISCARD bool IsGeometricScale() const noexcept;
 
-        // �������¡�Ӧ�ó���ʱ���Ժ���Ϊ��λ��
+        // 动画更新。应用程序时间以毫秒为单位。
         NODISCARD bool Update(double applicationTime) override;
 
         NODISCARD ControllerSharedPtr Clone() const override;
 
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
-        // �ԡ�this�����ö��󣬹�����������
+        // 对“this”设置对象，管理控制器。
         void SetController(const ControllerSharedPtr& object) override; 
 
     private:

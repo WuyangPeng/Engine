@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.2 (2024/10/14 14:06)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.2 (2024/10/14 14:06)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_CONTAINER_ADAPTER_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_CONTAINER_ADAPTER_DETAIL_H
@@ -22,7 +22,7 @@ CoreTools::ContainerAdapter<T, N>::ContainerAdapter(T* elements, int numElements
 {
     if (elements == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("elements Ö¸ÕëÎª¿Õ¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("elements æŒ‡é’ˆä¸ºç©ºã€‚"))
     }
 
     System::UnusedFunction(numElements);
@@ -86,7 +86,7 @@ const T& CoreTools::ContainerAdapter<T, N>::operator[](int index) const
 
     if (N <= index)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("indexË÷ÒıÔ½½ç"))
+        THROW_EXCEPTION(SYSTEM_TEXT("indexç´¢å¼•è¶Šç•Œ"))
     }
 
 #include SYSTEM_WARNING_PUSH
@@ -229,7 +229,7 @@ CoreTools::ContainerAdapter<T>::ContainerAdapter(T* elements, int numElements)
 {
     if (numElements <= 0 || elements == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§µÄÔªËØ×´Ì¬¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆçš„å…ƒç´ çŠ¶æ€ã€‚"))
     }
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -276,7 +276,7 @@ const T& CoreTools::ContainerAdapter<T>::operator[](int index) const
 
     if (numElements <= index)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("indexË÷ÒıÔ½½ç"));
+        THROW_EXCEPTION(SYSTEM_TEXT("indexç´¢å¼•è¶Šç•Œ"));
     }
 
 #include SYSTEM_WARNING_PUSH

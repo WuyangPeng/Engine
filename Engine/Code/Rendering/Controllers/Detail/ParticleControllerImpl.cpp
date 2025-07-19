@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.2 (2023/07/24 19:02)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.2 (2023/07/24 19:02)
 
 #include "Rendering/RenderingExport.h"
 
@@ -147,7 +147,7 @@ void Rendering::ParticleControllerImpl::SetSystemSizeChange(float aSystemSizeCha
 float Rendering::ParticleControllerImpl::GetParticleLinearSpeed(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numParticles, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numParticles, "ç´¢å¼•é”™è¯¯ï¼");
 
     return particleLinearSpeeds.at(index);
 }
@@ -155,7 +155,7 @@ float Rendering::ParticleControllerImpl::GetParticleLinearSpeed(int index) const
 Rendering::ParticleControllerImpl::AVector Rendering::ParticleControllerImpl::GetParticleLinearAxis(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numParticles, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numParticles, "ç´¢å¼•é”™è¯¯ï¼");
 
     return particleLinearAxes.at(index);
 }
@@ -163,7 +163,7 @@ Rendering::ParticleControllerImpl::AVector Rendering::ParticleControllerImpl::Ge
 float Rendering::ParticleControllerImpl::GetParticleSizeChange(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numParticles, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numParticles, "ç´¢å¼•é”™è¯¯ï¼");
 
     return particleSizeChanges.at(index);
 }
@@ -171,7 +171,7 @@ float Rendering::ParticleControllerImpl::GetParticleSizeChange(int index) const
 void Rendering::ParticleControllerImpl::SetParticleLinearSpeed(int index, float particleLinearSpeed)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numParticles, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numParticles, "ç´¢å¼•é”™è¯¯ï¼");
 
     particleLinearSpeeds.at(index) = particleLinearSpeed;
 }
@@ -179,7 +179,7 @@ void Rendering::ParticleControllerImpl::SetParticleLinearSpeed(int index, float 
 void Rendering::ParticleControllerImpl::SetParticleLinearAxis(int index, const AVector& particleLinearAxis)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numParticles, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numParticles, "ç´¢å¼•é”™è¯¯ï¼");
 
     particleLinearAxes.at(index) = particleLinearAxis;
 }
@@ -187,7 +187,7 @@ void Rendering::ParticleControllerImpl::SetParticleLinearAxis(int index, const A
 void Rendering::ParticleControllerImpl::SetParticleSizeChange(int index, float particleSizeChange)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numParticles, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numParticles, "ç´¢å¼•é”™è¯¯ï¼");
 
     particleSizeChanges.at(index) = particleSizeChange;
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 14:39)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 14:39)
 
 #ifndef MATHEMATICS_ALGEBRA_A_QUATERNION_H
 #define MATHEMATICS_ALGEBRA_A_QUATERNION_H
@@ -46,8 +46,8 @@ namespace Mathematics
         using ArrayType = std::array<Real, entrySize>;
 
     public:
-        // ËÄÔªÊıq = w + x * i + y * j + z * k
-        // ÕâÀï(w,x,y,z)²»Ò»¶¨ÊÇµ¥Î»³¤¶ÈµÄËÄÎ¬ÏòÁ¿¡£
+        // å››å…ƒæ•°q = w + x * i + y * j + z * k
+        // è¿™é‡Œ(w,x,y,z)ä¸ä¸€å®šæ˜¯å•ä½é•¿åº¦çš„å››ç»´å‘é‡ã€‚
 
         constexpr AQuaternion() noexcept
             : w{}, x{}, y{}, z{}
@@ -61,15 +61,15 @@ namespace Mathematics
 
         explicit AQuaternion(const ArrayType& coordinate) noexcept;
 
-        // ÊäÈëÎªĞı×ª¾ØÕó¹¹ÔìËÄÔªÊı
+        // è¾“å…¥ä¸ºæ—‹è½¬çŸ©é˜µæ„é€ å››å…ƒæ•°
         explicit AQuaternion(const MatrixType& matrix);
 
-        // Í¨¹ıÖá-½ÇµÄĞı×ª¹¹ÔìËÄÔªÊı
+        // é€šè¿‡è½´-è§’çš„æ—‹è½¬æ„é€ å››å…ƒæ•°
         AQuaternion(const AVectorType& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         CLASS_INVARIANT_DECLARE;
 
-        // ×ø±ê·ÃÎÊÀàËÆÓÚÊı×é:  0 = w, 1 = x, 2 = y, 3 = z.
+        // åæ ‡è®¿é—®ç±»ä¼¼äºæ•°ç»„:  0 = w, 1 = x, 2 = y, 3 = z.
         NODISCARD const Real& operator[](int index) const;
         NODISCARD Real& operator[](int index);
         NODISCARD Real GetW() const noexcept;
@@ -81,7 +81,7 @@ namespace Mathematics
         NODISCARD Real GetZ() const noexcept;
         void SetZ(Real aZ) noexcept;
 
-        // ËãÊõÔËËã
+        // ç®—æœ¯è¿ç®—
         AQuaternion& operator*=(const AQuaternion& rhs) noexcept;
 
         NODISCARD AQuaternion operator-() const noexcept;
@@ -91,51 +91,51 @@ namespace Mathematics
         AQuaternion& operator*=(Real scalar) noexcept;
         AQuaternion& operator/=(Real scalar) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        // ËÄÔªÊı£¬¾ØÕóºÍÖá¡ª¡ª½ÇÖ®¼äµÄ×ª»»¡£
+        // å››å…ƒæ•°ï¼ŒçŸ©é˜µå’Œè½´â€”â€”è§’ä¹‹é—´çš„è½¬æ¢ã€‚
         void FromRotationMatrix(const MatrixType& matrix);
         NODISCARD MatrixType ToRotationMatrix() const noexcept;
         void FromAxisAngle(const AVectorType& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
         NODISCARD AVectorType ToAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
         NODISCARD Real ToAngle() const noexcept;
 
-        // 4-tupleµÄ³¤¶È
+        // 4-tupleçš„é•¿åº¦
         NODISCARD Real Length() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        // 4-tupleµÄ³¤¶ÈµÄÆ½·½
+        // 4-tupleçš„é•¿åº¦çš„å¹³æ–¹
         NODISCARD Real SquaredLength() const noexcept;
 
         void Normalize(Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        // ÊÊÓÃÓÚ·ÇÁãËÄÔªÊı
+        // é€‚ç”¨äºéé›¶å››å…ƒæ•°
         NODISCARD AQuaternion Inverse() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        // È¡¸ºÊıÔÚ x, y, ºÍ z ÉÏ
+        // å–è´Ÿæ•°åœ¨ x, y, å’Œ z ä¸Š
         NODISCARD AQuaternion Conjugate() const noexcept;
 
-        // ÊÊÓÃÓÚËÄÔªÊı w = 0
+        // é€‚ç”¨äºå››å…ƒæ•° w = 0
         NODISCARD AQuaternion Exp() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        // ÊÊÓÃÓÚµ¥Î»³¤¶ÈËÄÔªÊı
+        // é€‚ç”¨äºå•ä½é•¿åº¦å››å…ƒæ•°
         NODISCARD AQuaternion Log() const noexcept;
 
         NODISCARD bool IsNormalize(Real epsilon = MathType::GetZeroTolerance()) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        // ÓÉËÄÔªÊıĞı×ªÏòÁ¿¡£
+        // ç”±å››å…ƒæ•°æ—‹è½¬å‘é‡ã€‚
         NODISCARD AVectorType Rotate(const AVectorType& vector) const noexcept;
 
-        // ÇòÃæÏßĞÔ²åÖµ
+        // çƒé¢çº¿æ€§æ’å€¼
         void Slerp(Real t, const AQuaternion& quaternion0, const AQuaternion& quaternion1) noexcept;
 
-        // ÖĞ¼äÌõ¿îÇòÃæ¶ş´Î²åÖµ
+        // ä¸­é—´æ¡æ¬¾çƒé¢äºŒæ¬¡æ’å€¼
         void Intermediate(const AQuaternion& quaternion0, const AQuaternion& quaternion1, const AQuaternion& quaternion2);
 
-        // ÇòÃæ¶ş´Î²åÖµ¡£
+        // çƒé¢äºŒæ¬¡æ’å€¼ã€‚
         void Squad(Real t, const AQuaternion& q0, const AQuaternion& a0, const AQuaternion& a1, const AQuaternion& q1) noexcept;
 
         NODISCARD ArrayType GetCoordinate() const noexcept;
         void Set(const ArrayType& coordinate) noexcept;
 
-        // ÌØÊâËÄÔªÊı
+        // ç‰¹æ®Šå››å…ƒæ•°
         static constexpr AQuaternion GetZero()
         {
             return AQuaternion{};
@@ -147,14 +147,14 @@ namespace Mathematics
         }
 
     private:
-        // ´æ´¢µÄË³ĞòÊÇ(w,x,y,z)¡£
+        // å­˜å‚¨çš„é¡ºåºæ˜¯(w,x,y,z)ã€‚
         Real w;
         Real x;
         Real y;
         Real z;
     };
 
-    // ±È½Ï (½öÊ¹ÓÃÔÚ STL ÈİÆ÷).
+    // æ¯”è¾ƒ (ä»…ä½¿ç”¨åœ¨ STL å®¹å™¨).
     template <typename Real>
     NODISCARD bool operator==(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs);
 
@@ -164,14 +164,14 @@ namespace Mathematics
     template <typename Real>
     NODISCARD AQuaternion<Real> operator*(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs) noexcept;
 
-    // 4Ôª×éµÄµã»ı
+    // 4å…ƒç»„çš„ç‚¹ç§¯
     template <typename Real>
     NODISCARD Real Dot(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs) noexcept;
 
     template <typename Real>
     NODISCARD bool Approximate(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs, Real epsilon = Math<Real>::GetZeroTolerance()) noexcept;
 
-    // µ÷ÊÔÊä³ö
+    // è°ƒè¯•è¾“å‡º
     template <typename Real>
     std::ostream& operator<<(std::ostream& outFile, const AQuaternion<Real>& quaternion);
 

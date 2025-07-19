@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 14:38)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 14:38)
 
 #include "QuaternionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -510,7 +510,7 @@ void Mathematics::QuaternionTesting::ArithmeticCalculateTest()
 
         tenthQuaternion.Normalize();
 
-        // Ê¹ÓÃÁíÒ»ÖÖËã·¨½øĞĞ²âÊÔ¡£
+        // ä½¿ç”¨å¦ä¸€ç§ç®—æ³•è¿›è¡Œæµ‹è¯•ã€‚
         seventhQuaternion = eighthQuaternion.Inverse();
         sixthQuaternion = ninthQuaternion.Inverse();
         fifthQuaternion = seventhQuaternion * ninthQuaternion;
@@ -910,12 +910,12 @@ void Mathematics::QuaternionTesting::ConstraintsClosestCalculateTest()
 
         if (firstQuaternionConstraints.IsValid(secondQuaternion[0], secondQuaternion[1]))
         {
-            // secondQuaternionºÍthirdQuaternionyÓ¦¸ÃÊÇÏàµÈµÄ
+            // secondQuaternionå’ŒthirdQuaternionyåº”è¯¥æ˜¯ç›¸ç­‰çš„
             ASSERT_TRUE(Approximate(secondQuaternion, thirdQuaternion, 1e-8f));
         }
         else
         {
-            // thirdQuaternionµÄÖµÍ¬±ß½çµãÓĞ¹Ø
+            // thirdQuaternionçš„å€¼åŒè¾¹ç•Œç‚¹æœ‰å…³
             float cosValueMin = firstQuaternionConstraints.GetCosMinAngle();
             float sinValueMin = firstQuaternionConstraints.GetSinMinAngle();
             float cosValueMax = firstQuaternionConstraints.GetCosMaxAngle();
@@ -960,12 +960,12 @@ void Mathematics::QuaternionTesting::ConstraintsClosestCalculateTest()
 
         if (firstQuaternionConstraints.IsValid(secondQuaternion[0], secondQuaternion[2]))
         {
-            // secondQuaternionºÍthirdQuaternionyÓ¦¸ÃÊÇÏàµÈµÄ
+            // secondQuaternionå’ŒthirdQuaternionyåº”è¯¥æ˜¯ç›¸ç­‰çš„
             ASSERT_TRUE(Approximate(secondQuaternion, thirdQuaternion, 1e-8f));
         }
         else
         {
-            // thirdQuaternionµÄÖµÍ¬±ß½çµãÓĞ¹Ø
+            // thirdQuaternionçš„å€¼åŒè¾¹ç•Œç‚¹æœ‰å…³
             float cosValueMin = firstQuaternionConstraints.GetCosMinAngle();
             float sinValueMin = firstQuaternionConstraints.GetSinMinAngle();
             float cosValueMax = firstQuaternionConstraints.GetCosMaxAngle();
@@ -1010,12 +1010,12 @@ void Mathematics::QuaternionTesting::ConstraintsClosestCalculateTest()
 
         if (firstQuaternionConstraints.IsValid(secondQuaternion[0], secondQuaternion[3]))
         {
-            // secondQuaternionºÍthirdQuaternionyÓ¦¸ÃÊÇÏàµÈµÄ
+            // secondQuaternionå’ŒthirdQuaternionyåº”è¯¥æ˜¯ç›¸ç­‰çš„
             ASSERT_TRUE(Approximate(secondQuaternion, thirdQuaternion, 1e-8f));
         }
         else
         {
-            // thirdQuaternionµÄÖµÍ¬±ß½çµãÓĞ¹Ø
+            // thirdQuaternionçš„å€¼åŒè¾¹ç•Œç‚¹æœ‰å…³
             float cosValueMin = firstQuaternionConstraints.GetCosMinAngle();
             float sinValueMin = firstQuaternionConstraints.GetSinMinAngle();
             float cosValueMax = firstQuaternionConstraints.GetCosMaxAngle();
@@ -1103,12 +1103,12 @@ void Mathematics::QuaternionTesting::ConstraintsClosestCalculateTest()
 
             if (firstQuaternionConstraints.IsValid(c0, s0) && secondQuaternionConstraints.IsValid(c1, s1))
             {
-                // secondQuaternionºÍthirdQuaternionyÓ¦¸ÃÊÇÏàµÈµÄ
+                // secondQuaternionå’ŒthirdQuaternionyåº”è¯¥æ˜¯ç›¸ç­‰çš„
                 ASSERT_TRUE(Approximate(secondQuaternion, thirdQuaternion, 1e-8f));
             }
             else
             {
-                // thirdQuaternionµÄÖµÍ¬±ß½çµãÓĞ¹Ø
+                // thirdQuaternionçš„å€¼åŒè¾¹ç•Œç‚¹æœ‰å…³
                 QuaternionF r(firstQuaternionConstraints.GetCosMinAngle(), firstQuaternionConstraints.GetSinMinAngle(), 0.0f, 0.0f);
                 QuaternionF rInv = r.Conjugate();
                 QuaternionF prod = rInv * firstQuaternion;
@@ -1241,7 +1241,7 @@ void Mathematics::QuaternionTesting::ConstraintsClosestCalculateTest()
 
         thirdQuaternion = firstQuaternion.GetClosestYX(firstQuaternionConstraints, secondQuaternionConstraints);
 
-        // secondQuaternionºÍthirdQuaternionyÓ¦¸ÃÊÇÏàµÈµÄ
+        // secondQuaternionå’ŒthirdQuaternionyåº”è¯¥æ˜¯ç›¸ç­‰çš„
         ASSERT_TRUE(Approximate(secondQuaternion, thirdQuaternion, 1e-8f));
 
         secondQuaternion = firstQuaternion.GetClosestZX();
@@ -1285,12 +1285,12 @@ void Mathematics::QuaternionTesting::ConstraintsClosestCalculateTest()
 
             if (firstQuaternionConstraints.IsValid(c2, s2) && secondQuaternionConstraints.IsValid(c0, s0))
             {
-                // secondQuaternionºÍthirdQuaternionyÓ¦¸ÃÊÇÏàµÈµÄ
+                // secondQuaternionå’ŒthirdQuaternionyåº”è¯¥æ˜¯ç›¸ç­‰çš„
                 ASSERT_TRUE(Approximate(secondQuaternion, thirdQuaternion, 1e-6f));
             }
             else
             {
-                // thirdQuaternionµÄÖµÍ¬±ß½çµãÓĞ¹Ø
+                // thirdQuaternionçš„å€¼åŒè¾¹ç•Œç‚¹æœ‰å…³
                 QuaternionF r(firstQuaternionConstraints.GetCosMinAngle(), 0.0f, 0.0f, firstQuaternionConstraints.GetSinMinAngle());
                 QuaternionF rInv = r.Conjugate();
                 QuaternionF prod = rInv * firstQuaternion;
@@ -1423,7 +1423,7 @@ void Mathematics::QuaternionTesting::ConstraintsClosestCalculateTest()
 
         thirdQuaternion = firstQuaternion.GetClosestXZ(firstQuaternionConstraints, secondQuaternionConstraints);
 
-        // secondQuaternionºÍthirdQuaternionyÓ¦¸ÃÊÇÏàµÈµÄ
+        // secondQuaternionå’ŒthirdQuaternionyåº”è¯¥æ˜¯ç›¸ç­‰çš„
         ASSERT_TRUE(Approximate(secondQuaternion, thirdQuaternion, 1e-8f));
 
         secondQuaternion = firstQuaternion.GetClosestZY();
@@ -1467,12 +1467,12 @@ void Mathematics::QuaternionTesting::ConstraintsClosestCalculateTest()
 
             if (firstQuaternionConstraints.IsValid(c2, s2) && secondQuaternionConstraints.IsValid(c1, s1))
             {
-                // secondQuaternionºÍthirdQuaternionyÓ¦¸ÃÊÇÏàµÈµÄ
+                // secondQuaternionå’ŒthirdQuaternionyåº”è¯¥æ˜¯ç›¸ç­‰çš„
                 ASSERT_TRUE(Approximate(secondQuaternion, thirdQuaternion, 1e-6f));
             }
             else
             {
-                // thirdQuaternionµÄÖµÍ¬±ß½çµãÓĞ¹Ø
+                // thirdQuaternionçš„å€¼åŒè¾¹ç•Œç‚¹æœ‰å…³
                 QuaternionF r(firstQuaternionConstraints.GetCosMinAngle(), 0.0f, 0.0f, firstQuaternionConstraints.GetSinMinAngle());
                 QuaternionF rInv = r.Conjugate();
                 QuaternionF prod = rInv * firstQuaternion;
@@ -1605,7 +1605,7 @@ void Mathematics::QuaternionTesting::ConstraintsClosestCalculateTest()
 
         thirdQuaternion = firstQuaternion.GetClosestYZ(firstQuaternionConstraints, secondQuaternionConstraints);
 
-        // secondQuaternionºÍthirdQuaternionyÓ¦¸ÃÊÇÏàµÈµÄ
+        // secondQuaternionå’ŒthirdQuaternionyåº”è¯¥æ˜¯ç›¸ç­‰çš„
         ASSERT_TRUE(Approximate(secondQuaternion, thirdQuaternion, 1e-8f));
     }
 }
@@ -1645,7 +1645,7 @@ void Mathematics::QuaternionTesting::CompareTest()
     ASSERT_TRUE(Approximate(secondQuaternion, secondQuaternion, 1e-8f));
     ASSERT_FALSE(Approximate(firstQuaternion, secondQuaternion, 1e-8f));
 
-    GetStream() << "ÒÔÏÂÊÇµ÷ÊÔĞÅÏ¢£º\n";
+    GetStream() << "ä»¥ä¸‹æ˜¯è°ƒè¯•ä¿¡æ¯ï¼š\n";
     GetStream() << firstQuaternion << '\n';
     GetStream() << secondQuaternion << '\n';
 }

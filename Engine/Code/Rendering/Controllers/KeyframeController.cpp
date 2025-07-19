@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.2 (2023/07/25 13:43)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.2 (2023/07/25 13:43)
 
 #include "Rendering/RenderingExport.h"
 
@@ -105,7 +105,7 @@ void Rendering::KeyframeController::SetScales(int index, float scales)
 void Rendering::KeyframeController::SetController(const ControllerSharedPtr& object)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Spatial::GetCurrentRttiType()), "ÎŞĞ§Àà\n");
+    RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Spatial::GetCurrentRttiType()), "æ— æ•ˆç±»\n");
 
     ParentType::SetController(object);
 }
@@ -135,7 +135,7 @@ bool Rendering::KeyframeController::Update(double applicationTime)
     {
         const auto ctrlTime = boost::numeric_cast<float>(GetControlTime(applicationTime));
 
-        // ÕâÀïµÄÂß¼­¼ì²éÍ¬ÑùÊ±¼äµÄÊı×é£¬ÒÔ¼õÉÙµ÷ÓÃGetKeyInfoµÄ´ÎÊı¡£
+        // è¿™é‡Œçš„é€»è¾‘æ£€æŸ¥åŒæ ·æ—¶é—´çš„æ•°ç»„ï¼Œä»¥å‡å°‘è°ƒç”¨GetKeyInfoçš„æ¬¡æ•°ã€‚
         if (0 < GetNumCommonTimes())
         {
             const auto controllerKeyInfo = GetCommonKeyInfo(ctrlTime);

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 16:33)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 16:33)
 
 #include "IntegerDataOperatorTesting.h"
 
@@ -79,7 +79,7 @@ void Mathematics::IntegerDataOperatorTesting::AdditionTest()
         std::vector<uint16_t> firstShortVector(28);
         std::vector<uint16_t> secondShortVector(28);
 
-        // ×î¸ßÎ»ÎªÁã
+        // æœ€é«˜ä½ä¸ºé›¶
         for (auto i = 0; i < 27; ++i)
         {
             firstShortVector.at(i) = randomDistribution1(generator);
@@ -123,11 +123,11 @@ void Mathematics::IntegerDataOperatorTesting::AdditionTest()
 
         ASSERT_EQUAL(fifthInteger, IntegerData<4>(firstValue + secondValue));
 
-        // ¾«È·²âÊÔ
+        // ç²¾ç¡®æµ‹è¯•
         std::vector<uint16_t> thirdShortVector(10);
         std::vector<uint16_t> fourthShortVector(10);
 
-        // ×î¸ßÎ»ÎªÁã
+        // æœ€é«˜ä½ä¸ºé›¶
         for (auto i = 0; i < 9; ++i)
         {
             thirdShortVector.at(i) = randomDistribution1(generator);
@@ -173,7 +173,7 @@ void Mathematics::IntegerDataOperatorTesting::SubtractionTest()
         std::vector<uint16_t> firstShortVector(26);
         std::vector<uint16_t> secondShortVector(26);
 
-        // ×î¸ßÎ»ÎªÁã
+        // æœ€é«˜ä½ä¸ºé›¶
         for (auto i = 0; i < 25; ++i)
         {
             firstShortVector.at(i) = randomDistribution1(generator);
@@ -233,11 +233,11 @@ void Mathematics::IntegerDataOperatorTesting::SubtractionTest()
 
         ASSERT_EQUAL(fifthInteger, IntegerData<4>(firstValue - secondValue));
 
-        // ¾«È·²âÊÔ
+        // ç²¾ç¡®æµ‹è¯•
         std::vector<uint16_t> thirdShortVector(20);
         std::vector<uint16_t> fourthShortVector(20);
 
-        // ×î¸ßÎ»ÎªÁã
+        // æœ€é«˜ä½ä¸ºé›¶
         for (auto i = 0; i < 18; ++i)
         {
             thirdShortVector.at(i) = randomDistribution1(generator);
@@ -285,7 +285,7 @@ void Mathematics::IntegerDataOperatorTesting::MultiplicationTest()
         std::vector<uint16_t> firstShortVector(40);
         std::vector<uint16_t> secondShortVector(40);
 
-        // ±ÜÃâ¼ÆËãÒç³ö
+        // é¿å…è®¡ç®—æº¢å‡º
         for (auto i = 0; i < 19; ++i)
         {
             firstShortVector.at(i) = randomDistribution1(generator);

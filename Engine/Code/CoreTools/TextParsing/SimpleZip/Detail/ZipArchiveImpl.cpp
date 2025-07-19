@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/08 11:44)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/08 11:44)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -103,7 +103,7 @@ void CoreTools::SimpleZip::ZipArchiveImpl::Create()
 {
     CreateZipWriter();
 
-    /// Èç¹ûÒ»ÇĞÕı³££¬´ò¿ªĞÂ´´½¨µÄ´æµµ¡£
+    /// å¦‚æœä¸€åˆ‡æ­£å¸¸ï¼Œæ‰“å¼€æ–°åˆ›å»ºçš„å­˜æ¡£ã€‚
     Open();
 }
 
@@ -127,7 +127,7 @@ void CoreTools::SimpleZip::ZipArchiveImpl::Open()
 
 void CoreTools::SimpleZip::ZipArchiveImpl::DeleteSameEntries()
 {
-    /// É¾³ı¾ßÓĞÏàÍ¬Ãû³ÆµÄÌõÄ¿¡£ ½«±£Áô×îĞÂÌõÄ¿¡£
+    /// åˆ é™¤å…·æœ‰ç›¸åŒåç§°çš„æ¡ç›®ã€‚ å°†ä¿ç•™æœ€æ–°æ¡ç›®ã€‚
     constexpr auto isEqual = [](const auto& lhs, const auto& rhs) {
         return lhs.GetFileName() == rhs.GetFileName();
     };
@@ -140,7 +140,7 @@ void CoreTools::SimpleZip::ZipArchiveImpl::DeleteSameEntries()
 
 void CoreTools::SimpleZip::ZipArchiveImpl::AddFolderEntries()
 {
-    /// Èç¹ûÎÄ¼ş¼ĞÌõÄ¿²»´æÔÚ£¬ÔòÌí¼ÓËüÃÇ¡£
+    /// å¦‚æœæ–‡ä»¶å¤¹æ¡ç›®ä¸å­˜åœ¨ï¼Œåˆ™æ·»åŠ å®ƒä»¬ã€‚
     for (const auto& entry : GetEntryNames(false, true))
     {
         AddFolderEntries(entry);
@@ -171,7 +171,7 @@ CoreTools::SimpleZip::ZipArchiveImpl::EntryNamesType CoreTools::SimpleZip::ZipAr
 
     EntryNamesType result{};
 
-    /// ±éÀú´æµµÖĞµÄËùÓĞÌõÄ¿
+    /// éå†å­˜æ¡£ä¸­çš„æ‰€æœ‰æ¡ç›®
     for (const auto& item : zipEntries)
     {
         if (IsMeetConditionZipEntry(includeDirs, includeFiles, item))
@@ -192,7 +192,7 @@ void CoreTools::SimpleZip::ZipArchiveImpl::CheckZipReader() const
 {
     if (!zipReader)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎÄ¼şÎ´¿ªÆô£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ–‡ä»¶æœªå¼€å¯ï¼"s))
     }
 }
 
@@ -202,13 +202,13 @@ CoreTools::SimpleZip::ZipArchiveImpl::EntryNamesType CoreTools::SimpleZip::ZipAr
 
     CheckZipReader();
 
-    /// »ñÈ¡ÍêÕûµÄÌõÄ¿ÁĞ±í
+    /// è·å–å®Œæ•´çš„æ¡ç›®åˆ—è¡¨
     auto result = GetEntryNames(includeDirs, includeFiles);
 
-    /// É¾³ı²»ÔÚÏà¹ØÄ¿Â¼ÖĞµÄËùÓĞÌõÄ¿£¬ÒÔ¼°¸ùÄ¿Â¼±¾Éí¡£
+    /// åˆ é™¤ä¸åœ¨ç›¸å…³ç›®å½•ä¸­çš„æ‰€æœ‰æ¡ç›®ï¼Œä»¥åŠæ ¹ç›®å½•æœ¬èº«ã€‚
     RemoveConditionDir(dir, result);
 
-    /// È·±£Ö»°üº¬Ò»¼¶×ÓÄ¿Â¼¡£
+    /// ç¡®ä¿åªåŒ…å«ä¸€çº§å­ç›®å½•ã€‚
     RemoveRootDepth(dir, result);
 
     return result;
@@ -319,7 +319,7 @@ void CoreTools::SimpleZip::ZipArchiveImpl::Save(const std::string& fileName)
 
     const auto saveFileName = GetSaveFileName(fileName);
 
-    /// Éú³ÉÓëµ±Ç°ÎÄ¼şÂ·¾¶ÏàÍ¬µÄËæ»úÎÄ¼şÃû
+    /// ç”Ÿæˆä¸å½“å‰æ–‡ä»¶è·¯å¾„ç›¸åŒçš„éšæœºæ–‡ä»¶å
     const auto randomFileName = GetRandomFileName(saveFileName);
 
     SaveZipWriter(randomFileName);
@@ -339,10 +339,10 @@ std::string CoreTools::SimpleZip::ZipArchiveImpl::GetSaveFileName(const std::str
 
 void CoreTools::SimpleZip::ZipArchiveImpl::SaveZipWriter(const std::string& randomFileName) const
 {
-    /// ×¼±¸Ò»¸öËæ»úÎÄ¼şÃûµÄÁÙÊ±´æµµÎÄ¼ş
+    /// å‡†å¤‡ä¸€ä¸ªéšæœºæ–‡ä»¶åçš„ä¸´æ—¶å­˜æ¡£æ–‡ä»¶
     ZipWriter zipWriter{ randomFileName };
 
-    /// ±éÀúZipEntries²¢½«ÌõÄ¿Ìí¼Óµ½ÁÙÊ±ÎÄ¼ş
+    /// éå†ZipEntrieså¹¶å°†æ¡ç›®æ·»åŠ åˆ°ä¸´æ—¶æ–‡ä»¶
     for (const auto& file : zipEntries)
     {
         zipWriter.AddZipEntry(file, zipReader->GetArchive());
@@ -388,7 +388,7 @@ void CoreTools::SimpleZip::ZipArchiveImpl::DoMoveZipFile(const std::string& save
 
         if (!System::MoveSystemFile(StringConversion::MultiByteConversionStandard(randomFileName), StringConversion::MultiByteConversionStandard(saveFileName)))
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("ÒÆ¶¯ÎÄ¼şÊ§°Ü¡£"s))
+            THROW_EXCEPTION(SYSTEM_TEXT("ç§»åŠ¨æ–‡ä»¶å¤±è´¥ã€‚"s))
         }
     }
     EXCEPTION_ALL_CATCH(CoreTools)
@@ -414,19 +414,19 @@ CoreTools::SimpleZip::ZipEntry CoreTools::SimpleZip::ZipArchiveImpl::GetEntry(co
 
     CheckZipReader();
 
-    /// ²éÕÒ ZipEntry ¶ÔÏó¡£
+    /// æŸ¥æ‰¾ ZipEntry å¯¹è±¡ã€‚
     const auto result = std::ranges::find_if(zipEntries, [&](const auto& entry) {
         return name == entry.GetFileName();
     });
 
     if (result == zipEntries.cend())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¾ßÓĞÖ¸¶¨Ãû³ÆµÄÌõÄ¿£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å…·æœ‰æŒ‡å®šåç§°çš„æ¡ç›®ï¼"s))
     }
 
     ReaderExtractFileToMem(name, *result);
 
-    /// ·µ»Ø´øÓĞÎÄ¼şÊı¾İµÄ ZipEntry ¶ÔÏó¡£
+    /// è¿”å›å¸¦æœ‰æ–‡ä»¶æ•°æ®çš„ ZipEntry å¯¹è±¡ã€‚
     return ZipEntry{ *result };
 }
 
@@ -434,14 +434,14 @@ void CoreTools::SimpleZip::ZipArchiveImpl::ReaderExtractFileToMem(const std::str
 {
     auto* archive = zipReader->GetArchive();
 
-    /// Èç¹ûÉĞÎ´´Ó´æµµÖĞÌáÈ¡Êı¾İ£¨¼´m_EntryDataÎª¿Õ£©£¬Ôò½«Êı¾İ´Ó´æµµÖĞÌáÈ¡µ½ZipEntry¶ÔÏó¡£
+    /// å¦‚æœå°šæœªä»å­˜æ¡£ä¸­æå–æ•°æ®ï¼ˆå³m_EntryDataä¸ºç©ºï¼‰ï¼Œåˆ™å°†æ•°æ®ä»å­˜æ¡£ä¸­æå–åˆ°ZipEntryå¯¹è±¡ã€‚
     if (result.IsEntryDataEmpty())
     {
         result.ResizeZipEntryData(boost::numeric_cast<int>(result.GetUncompressedSize()));
         result.ReaderExtractFileToMem(archive, name);
     }
 
-    /// ¼ì²é²Ù×÷ÊÇ·ñ³É¹¦
+    /// æ£€æŸ¥æ“ä½œæ˜¯å¦æˆåŠŸ
     if (!result.IsDirectory() &&
         result.IsEntryDataEmpty())
     {
@@ -458,12 +458,12 @@ void CoreTools::SimpleZip::ZipArchiveImpl::ExtractEntry(const std::string& name,
     if (const auto entry = GetEntry(name);
         entry.IsDirectory())
     {
-        /// Èç¹ûÌõÄ¿ÊÇÄ¿Â¼£¬Ôò½«¸ÃÄ¿Â¼´´½¨ÎªdestµÄ×ÓÄ¿Â¼
+        /// å¦‚æœæ¡ç›®æ˜¯ç›®å½•ï¼Œåˆ™å°†è¯¥ç›®å½•åˆ›å»ºä¸ºdestçš„å­ç›®å½•
         System::CreateFileDirectory(StringConversion::MultiByteConversionStandard(dest + entry.GetFileName()));
     }
     else
     {
-        /// Èç¹ûÌõÄ¿ÊÇÎÄ¼ş£¬Ôò½«ÌõÄ¿Êı¾İÁ÷Ê½´«Êäµ½ÎÄ¼ş¡£
+        /// å¦‚æœæ¡ç›®æ˜¯æ–‡ä»¶ï¼Œåˆ™å°†æ¡ç›®æ•°æ®æµå¼ä¼ è¾“åˆ°æ–‡ä»¶ã€‚
         ExtractEntry(dest, entry);
     }
 }
@@ -509,7 +509,7 @@ CoreTools::SimpleZip::ZipEntry CoreTools::SimpleZip::ZipArchiveImpl::AddEntry(co
 
 void CoreTools::SimpleZip::ZipArchiveImpl::Register(const std::string& name)
 {
-    /// È·±£ËùÓĞÎÄ¼ş¼ĞºÍ×ÓÎÄ¼ş¼ĞÔÚ´æµµÖĞ¶¼ÓĞÒ»¸öÌõÄ¿
+    /// ç¡®ä¿æ‰€æœ‰æ–‡ä»¶å¤¹å’Œå­æ–‡ä»¶å¤¹åœ¨å­˜æ¡£ä¸­éƒ½æœ‰ä¸€ä¸ªæ¡ç›®
     auto folders = GetEntryNames(true, false);
 
     for (auto pos = name.find(forwardSlash, 0);
@@ -518,7 +518,7 @@ void CoreTools::SimpleZip::ZipArchiveImpl::Register(const std::string& name)
     {
         ++pos;
 
-        /// Èç¹ûÎÄ¼ş¼ĞÎ´ÔÚ´æµµÖĞ×¢²á£¬ÇëÌí¼ÓËü¡£
+        /// å¦‚æœæ–‡ä»¶å¤¹æœªåœ¨å­˜æ¡£ä¸­æ³¨å†Œï¼Œè¯·æ·»åŠ å®ƒã€‚
         if (auto folder = name.substr(0, pos);
             std::ranges::find(folders, folder) == folders.cend())
         {
@@ -539,18 +539,18 @@ CoreTools::SimpleZip::ZipEntry CoreTools::SimpleZip::ZipArchiveImpl::AddEntryImp
 
 CoreTools::SimpleZip::ZipEntry CoreTools::SimpleZip::ZipArchiveImpl::DoAddEntryImpl(const std::string& name, const ZipEntryData& data)
 {
-    /// ¼ì²é´æµµÖĞÊÇ·ñÒÑ´æÔÚ¾ßÓĞ¸ø¶¨Ãû³ÆµÄÌõÄ¿¡£
+    /// æ£€æŸ¥å­˜æ¡£ä¸­æ˜¯å¦å·²å­˜åœ¨å…·æœ‰ç»™å®šåç§°çš„æ¡ç›®ã€‚
     const auto result = std::ranges::find_if(zipEntries, [&](const auto& entry) {
         return name == entry.GetFileName();
     });
 
-    /// Èç¹ûÌõÄ¿´æÔÚ£¬ÔòÓÃĞÂÊı¾İÌæ»»ÏÖÓĞÊı¾İ£¬²¢·µ»Ø ZipEntry ¶ÔÏó¡£
+    /// å¦‚æœæ¡ç›®å­˜åœ¨ï¼Œåˆ™ç”¨æ–°æ•°æ®æ›¿æ¢ç°æœ‰æ•°æ®ï¼Œå¹¶è¿”å› ZipEntry å¯¹è±¡ã€‚
     if (result != zipEntries.cend())
     {
         result->SetData(data);
         return ZipEntry{ *result };
     }
 
-    /// ×îºó£¬Ìí¼Ó¾ßÓĞ¸ø¶¨Ãû³ÆºÍÊı¾İµÄĞÂÌõÄ¿£¬²¢·µ»Ø¶ÔÏó¡£
+    /// æœ€åï¼Œæ·»åŠ å…·æœ‰ç»™å®šåç§°å’Œæ•°æ®çš„æ–°æ¡ç›®ï¼Œå¹¶è¿”å›å¯¹è±¡ã€‚
     return ZipEntry{ zipEntries.emplace_back(name, data) };
 }

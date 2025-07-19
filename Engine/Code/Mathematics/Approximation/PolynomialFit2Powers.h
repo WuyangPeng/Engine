@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:27)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:27)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT2_POWERS_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT2_POWERS_H
@@ -19,11 +19,11 @@
 
 namespace Mathematics
 {
-    // ÓëÒÔÏÂÐÎÊ½µÄ¶àÏîÊ½ÄâºÏÊý¾Ý
+    // ä¸Žä»¥ä¸‹å½¢å¼çš„å¤šé¡¹å¼æ‹Ÿåˆæ•°æ®
     //     w = sum_{i=0}^{n-1} c[i]*x^{p[i]}
-    // ÕâÀïp[i] ÓÉµ÷ÓÃÕßÌá¹©²»Í¬µÄ·Ç¸ºµÄÃÝ¡£
-    // ½«Ê¹ÓÃ×îÐ¡¶þ³ËÄâºÏËã·¨£¬
-    // µ«ÊäÈëÊý¾Ý(x,w) Ê×ÏÈ±»Ó³Éäµ½[-1,1]^2 ¶ÔÊýÖµÂ³°ôÐÔ¡£
+    // è¿™é‡Œp[i] ç”±è°ƒç”¨è€…æä¾›ä¸åŒçš„éžè´Ÿçš„å¹‚ã€‚
+    // å°†ä½¿ç”¨æœ€å°äºŒä¹˜æ‹Ÿåˆç®—æ³•ï¼Œ
+    // ä½†è¾“å…¥æ•°æ®(x,w) é¦–å…ˆè¢«æ˜ å°„åˆ°[-1,1]^2 å¯¹æ•°å€¼é²æ£’æ€§ã€‚
 
     template <typename Real>
     class PolynomialFit2Powers final
@@ -36,13 +36,13 @@ namespace Mathematics
         using MathType = Math<Real>;
 
     public:
-        // ¹¹Ôìº¯ÊýÊÇÊý¾Ý(x[i],w[i])£¬·Ö±ðÎª0 <= i < numSamples¡£
+        // æž„é€ å‡½æ•°æ˜¯æ•°æ®(x[i],w[i])ï¼Œåˆ†åˆ«ä¸º0 <= i < numSamplesã€‚
         PolynomialFit2Powers(const Samples& xSamples, const Samples& wSamples, const Powers& powers);
 
         CLASS_INVARIANT_DECLARE;
 
-        // ÕâÊÇÒ»¸ö¹¦ÄÜÀà£¬Èç¹û½âÏßÐÔ·½³Ì×é³É¹¦Ôò·µ»Ø¡°true¡±¡£
-        // Èç¹û²»³É¹¦£¬Ôò¶àÏîÊ½ÇóÖµÊÇÎÞÐ§µÄ£¬×ÜÊÇ·µ»Øfalse¡£
+        // è¿™æ˜¯ä¸€ä¸ªåŠŸèƒ½ç±»ï¼Œå¦‚æžœè§£çº¿æ€§æ–¹ç¨‹ç»„æˆåŠŸåˆ™è¿”å›žâ€œtrueâ€ã€‚
+        // å¦‚æžœä¸æˆåŠŸï¼Œåˆ™å¤šé¡¹å¼æ±‚å€¼æ˜¯æ— æ•ˆçš„ï¼Œæ€»æ˜¯è¿”å›žfalseã€‚
         NODISCARD bool IsSolveSucceed() const noexcept;
 
         NODISCARD Real GetXMin() const;
@@ -50,12 +50,12 @@ namespace Mathematics
         NODISCARD Real GetWMin() const;
         NODISCARD Real GetWMax() const;
 
-        // ÄâºÏ¶àÏîÊ½µÄµÄÆÀ¹À¡£
-        // ÅÉÉúÀà¿ÉÒÔÖØÐ´´ËÊµÏÖ£¬ÓÐÐ§·½·¨»ùÓÚÓÐ¹Ø´«µÝ¸ø¹¹Ôìº¯ÊýµÄ¾ßÌåÃÝµÄÖªÊ¶¡£
+        // æ‹Ÿåˆå¤šé¡¹å¼çš„çš„è¯„ä¼°ã€‚
+        // æ´¾ç”Ÿç±»å¯ä»¥é‡å†™æ­¤å®žçŽ°ï¼Œæœ‰æ•ˆæ–¹æ³•åŸºäºŽæœ‰å…³ä¼ é€’ç»™æž„é€ å‡½æ•°çš„å…·ä½“å¹‚çš„çŸ¥è¯†ã€‚
         NODISCARD Real operator()(Real x) const;
 
     private:
-        // Ö§³Ö¹¹Ôì
+        // æ”¯æŒæž„é€ 
         void Init(const Samples& xSamples, const Samples& wSamples);
         void InitializePowers();
         void TransformToUnit(const Samples& xSourceSamples, const Samples& wSourceSamples, Samples& xTargetSamples, Samples& wTargetSamples);
@@ -63,7 +63,7 @@ namespace Mathematics
         void DoLeastSquaresFit(const Samples& xTargetSamples, const Samples& wTargetSamples);
 
     private:
-        // ¸´ÖÆµÄÃÝÔÚÄâºÏµÄ¶àÏîÊ½µÄÆÀ¹ÀÊ¹ÓÃ¡£
+        // å¤åˆ¶çš„å¹‚åœ¨æ‹Ÿåˆçš„å¤šé¡¹å¼çš„è¯„ä¼°ä½¿ç”¨ã€‚
         Powers powers;
 
         PolynomialFitPowersData<Real, 2> powersData;

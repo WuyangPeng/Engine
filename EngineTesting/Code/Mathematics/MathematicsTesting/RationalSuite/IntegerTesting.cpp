@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 16:37)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 16:37)
 
 #include "IntegerTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -42,7 +42,7 @@ void Mathematics::IntegerTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(UtilitiesTest);
 }
 
-// Construction²âÊÔ
+// Constructionæµ‹è¯•
 void Mathematics::IntegerTesting::ConstructionTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(PositiveTest);
@@ -176,7 +176,7 @@ void Mathematics::IntegerTesting::ZeroTest()
     ASSERT_EQUAL(thirdInteger[1], 0u);
 }
 
-// Calculate²âÊÔ
+// Calculateæµ‹è¯•
 void Mathematics::IntegerTesting::CalculateTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ReverseTest);
@@ -202,7 +202,7 @@ void Mathematics::IntegerTesting::ReverseTest()
     {
         std::vector<uint16_t> shortVector(26);
 
-        // ×î¸ßÎ»ÎªÁã
+        // æœ€é«˜ä½ä¸ºé›¶
         for (auto i = 0; i < 24; ++i)
         {
             shortVector.at(i) = randomDistribution0(generator);
@@ -237,7 +237,7 @@ void Mathematics::IntegerTesting::AbsoluteValueTest()
     {
         std::vector<uint16_t> shortVector(22);
 
-        // ×î¸ßÎ»ÎªÁã
+        // æœ€é«˜ä½ä¸ºé›¶
         for (auto i = 0; i < 20; ++i)
         {
             shortVector.at(i) = randomDistribution1(generator);
@@ -274,7 +274,7 @@ void Mathematics::IntegerTesting::AddTest()
         std::vector<uint16_t> firstShortVector(88);
         std::vector<uint16_t> secondShortVector(88);
 
-        // ×î¸ßÎ»ÎªÁã
+        // æœ€é«˜ä½ä¸ºé›¶
         for (auto i = 0; i < 86; ++i)
         {
             firstShortVector.at(i) = randomDistribution1(generator);
@@ -312,11 +312,11 @@ void Mathematics::IntegerTesting::AddTest()
 
         ASSERT_EQUAL(fifthInteger, Integer<4>(firstValue + secondValue));
 
-        // ¾«È·²âÊÔ
+        // ç²¾ç¡®æµ‹è¯•
         std::vector<uint16_t> thirdShortVector(20);
         std::vector<uint16_t> fourthShortVector(20);
 
-        // ×î¸ßÎ»ÎªÁã
+        // æœ€é«˜ä½ä¸ºé›¶
         for (auto i = 0; i < 18; ++i)
         {
             thirdShortVector.at(i) = randomDistribution1(generator);
@@ -359,7 +359,7 @@ void Mathematics::IntegerTesting::MinusTest()
         std::vector<uint16_t> firstShortVector(66);
         std::vector<uint16_t> secondShortVector(66);
 
-        // ×î¸ßÎ»ÎªÁã
+        // æœ€é«˜ä½ä¸ºé›¶
         for (auto i = 0; i < 64; ++i)
         {
             firstShortVector.at(i) = randomDistribution1(generator);
@@ -397,11 +397,11 @@ void Mathematics::IntegerTesting::MinusTest()
 
         ASSERT_EQUAL(fifthInteger, Integer<4>(firstValue - secondValue));
 
-        // ¾«È·²âÊÔ
+        // ç²¾ç¡®æµ‹è¯•
         std::vector<uint16_t> thirdShortVector(20);
         std::vector<uint16_t> fourthShortVector(20);
 
-        // ×î¸ßÎ»ÎªÁã
+        // æœ€é«˜ä½ä¸ºé›¶
         for (int i = 0; i < 18; ++i)
         {
             thirdShortVector.at(i) = randomDistribution1(generator);
@@ -445,7 +445,7 @@ void Mathematics::IntegerTesting::MultiplyTest()
         std::vector<uint16_t> firstShortVector(40);
         std::vector<uint16_t> secondShortVector(40);
 
-        // ±ÜÃâ¼ÆËãÒç³ö
+        // é¿å…è®¡ç®—æº¢å‡º
         for (uint32_t i = 0; i < 19; ++i)
         {
             firstShortVector.at(i) = randomDistribution1(generator);
@@ -639,8 +639,8 @@ void Mathematics::IntegerTesting::RightShiftTest()
 
         fourthInteger /= thirdInteger;
 
-        // -1ÓÒÒÆºóÒÀÈ»ÊÇ-1£¬³ıÒÔ2ÔòÎª0¡£
-        // Á½ÕßµÄÖµÏà²î1
+        // -1å³ç§»åä¾ç„¶æ˜¯-1ï¼Œé™¤ä»¥2åˆ™ä¸º0ã€‚
+        // ä¸¤è€…çš„å€¼ç›¸å·®1
         if (fourthInteger.GetSign() == NumericalValueSymbol::Negative)
         {
             fourthInteger -= Integer<20>(1);
@@ -676,7 +676,7 @@ void Mathematics::IntegerTesting::SignTest()
     }
 }
 
-// Compare²âÊÔ
+// Compareæµ‹è¯•
 void Mathematics::IntegerTesting::CompareTest()
 {
     std::default_random_engine generator{ GetEngineRandomSeed() };
@@ -811,7 +811,7 @@ void Mathematics::IntegerTesting::CompareTest()
     }
 }
 
-// Utilities²âÊÔ
+// Utilitiesæµ‹è¯•
 void Mathematics::IntegerTesting::UtilitiesTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BlockTest);

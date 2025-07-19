@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 15:27)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 15:27)
 
 #include "Framework/FrameworkExport.h"
 
@@ -86,7 +86,7 @@ bool Framework::PixelScreenImpl::IsDoFlip() const noexcept
 void Framework::PixelScreenImpl::SetPixel(int x, int y, const Colour& color)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
-    FRAMEWORK_ASSERTION_1(0 <= x && x < screenWidth && 0 <= y && y < screenHeight, "Êı×éË÷ÒıÔ½½ç£¡");
+    FRAMEWORK_ASSERTION_1(0 <= x && x < screenWidth && 0 <= y && y < screenHeight, "æ•°ç»„ç´¢å¼•è¶Šç•Œï¼");
 
     const auto index = x + screenWidth * y;
     screen.at(index) = color;
@@ -110,7 +110,7 @@ void Framework::PixelScreenImpl::SetThickPixel(int x, int y, int thick, const Co
 Framework::PixelScreenImpl::Colour Framework::PixelScreenImpl::GetPixel(int x, int y) const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
-    FRAMEWORK_ASSERTION_1(0 <= x && x < screenWidth && 0 <= y && y < screenHeight, "Êı×éË÷ÒıÔ½½ç£¡");
+    FRAMEWORK_ASSERTION_1(0 <= x && x < screenWidth && 0 <= y && y < screenHeight, "æ•°ç»„ç´¢å¼•è¶Šç•Œï¼");
 
     const auto index = x + screenWidth * y;
     return screen.at(index);
@@ -128,7 +128,7 @@ void Framework::PixelScreenImpl::DrawLine(int xMin, int yMin, int xMax, int yMax
     {
         const auto& point = line[i];
 
-        // ´¦ÀíÏñËØ¡£
+        // å¤„ç†åƒç´ ã€‚
         SetPixel(point.GetWindowX(), point.GetWindowY(), color);
     }
 }
@@ -136,8 +136,8 @@ void Framework::PixelScreenImpl::DrawLine(int xMin, int yMin, int xMax, int yMax
 void Framework::PixelScreenImpl::DrawRectangle(int xMin, int yMin, int xMax, int yMax, const Colour& color, bool solid)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
-    FRAMEWORK_ASSERTION_3(0 <= xMin && xMin <= xMax && xMax < screenWidth, "¾ØĞÎ²»ÊÇÓĞĞ§µÄ£¡");
-    FRAMEWORK_ASSERTION_3(0 <= yMin && yMin <= yMax && yMax < screenHeight, "¾ØĞÎ²»ÊÇÓĞĞ§µÄ£¡");
+    FRAMEWORK_ASSERTION_3(0 <= xMin && xMin <= xMax && xMax < screenWidth, "çŸ©å½¢ä¸æ˜¯æœ‰æ•ˆçš„ï¼");
+    FRAMEWORK_ASSERTION_3(0 <= yMin && yMin <= yMax && yMax < screenHeight, "çŸ©å½¢ä¸æ˜¯æœ‰æ•ˆçš„ï¼");
 
     if (xMin == xMax || yMin == yMax)
     {
@@ -298,33 +298,33 @@ void Framework::PixelScreenImpl::Fill(int x, int y, const Colour& foreColor, con
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    // ·ÖÅäËùĞèµÄ×î´ó¿Õ¼äÊıÁ¿¡£Èç¹ûÄãÏ²»¶·ÖÅä¸üÉÙµÄ¿Õ¼ä£¬
-    // ÄãĞèÒªĞŞ¸ÄÕâ¸öÊı¾İ½á¹¹£¬ÒÔ±ãÔÚĞèÒªÊ±¶¯Ì¬ÖØĞÂ·ÖÅä¡£
-    // ¿Õ¶ÑÕ»¶¥²¿ÓĞtop == -1¡£
+    // åˆ†é…æ‰€éœ€çš„æœ€å¤§ç©ºé—´æ•°é‡ã€‚å¦‚æœä½ å–œæ¬¢åˆ†é…æ›´å°‘çš„ç©ºé—´ï¼Œ
+    // ä½ éœ€è¦ä¿®æ”¹è¿™ä¸ªæ•°æ®ç»“æ„ï¼Œä»¥ä¾¿åœ¨éœ€è¦æ—¶åŠ¨æ€é‡æ–°åˆ†é…ã€‚
+    // ç©ºå †æ ˆé¡¶éƒ¨æœ‰top == -1ã€‚
     const auto xMax = screenWidth;
     const auto yMax = screenHeight;
     const auto stackSize = xMax * yMax;
     std::vector<int> xStack(stackSize);
     std::vector<int> yStack(stackSize);
 
-    // Èç¹ûËüÊÇ±³¾°ÑÕÉ«£¬°ÑÖÖ×ÓµãÑ¹Èë¶ÑÕ»¡£±³¾°ÑÕÉ«backColorµÄËùÓĞµãÑ¹Èëµ½¶ÑÕ»¡£
+    // å¦‚æœå®ƒæ˜¯èƒŒæ™¯é¢œè‰²ï¼ŒæŠŠç§å­ç‚¹å‹å…¥å †æ ˆã€‚èƒŒæ™¯é¢œè‰²backColorçš„æ‰€æœ‰ç‚¹å‹å…¥åˆ°å †æ ˆã€‚
     auto top = 0;
     xStack.at(top) = x;
     yStack.at(top) = y;
 
-    while (0 <= top)  // ¶ÑÕ»²»ÊÇ¿ÕµÄ
+    while (0 <= top)  // å †æ ˆä¸æ˜¯ç©ºçš„
     {
-        // ¶Á¶ÑÕ»µÄ¶¥²¿¡£²»Òªµ¯³öËü£¬ÒòÎªÔÚºóÃæÎÒÃÇĞèÒª·µ»ØÕâ¸ö¶¥Öµ£¬²¢ÔÚ²»Í¬µÄ·½ÏòÖØĞÂÌî³ä¡£
+        // è¯»å †æ ˆçš„é¡¶éƒ¨ã€‚ä¸è¦å¼¹å‡ºå®ƒï¼Œå› ä¸ºåœ¨åé¢æˆ‘ä»¬éœ€è¦è¿”å›è¿™ä¸ªé¡¶å€¼ï¼Œå¹¶åœ¨ä¸åŒçš„æ–¹å‘é‡æ–°å¡«å……ã€‚
         x = xStack.at(top);
         y = yStack.at(top);
 
-        // Ìî³äÏñËØ
+        // å¡«å……åƒç´ 
         SetPixel(x, y, foreColor);
 
         if (const auto xPlus1 = x + 1;
             xPlus1 < xMax && GetPixel(xPlus1, y) == backColor)
         {
-            // ÍÆ³öÏñËØÊ¹ÓÃ±³¾°É«¡£
+            // æ¨å‡ºåƒç´ ä½¿ç”¨èƒŒæ™¯è‰²ã€‚
             ++top;
             xStack.at(top) = xPlus1;
             yStack.at(top) = y;
@@ -334,7 +334,7 @@ void Framework::PixelScreenImpl::Fill(int x, int y, const Colour& foreColor, con
         if (const auto xMinus1 = x - 1;
             0 <= xMinus1 && GetPixel(xMinus1, y) == backColor)
         {
-            // ÍÆ³öÏñËØÊ¹ÓÃ±³¾°É«¡£
+            // æ¨å‡ºåƒç´ ä½¿ç”¨èƒŒæ™¯è‰²ã€‚
             ++top;
             xStack.at(top) = xMinus1;
             yStack.at(top) = y;
@@ -344,7 +344,7 @@ void Framework::PixelScreenImpl::Fill(int x, int y, const Colour& foreColor, con
         if (const auto yPlus1 = y + 1;
             yPlus1 < yMax && GetPixel(x, yPlus1) == backColor)
         {
-            // ÍÆ³öÏñËØÊ¹ÓÃ±³¾°É«¡£
+            // æ¨å‡ºåƒç´ ä½¿ç”¨èƒŒæ™¯è‰²ã€‚
             ++top;
             xStack.at(top) = x;
             yStack.at(top) = yPlus1;
@@ -354,21 +354,21 @@ void Framework::PixelScreenImpl::Fill(int x, int y, const Colour& foreColor, con
         if (const auto yMinus1 = y - 1;
             0 <= yMinus1 && GetPixel(x, yMinus1) == backColor)
         {
-            // ÍÆ³öÏñËØÊ¹ÓÃ±³¾°É«¡£
+            // æ¨å‡ºåƒç´ ä½¿ç”¨èƒŒæ™¯è‰²ã€‚
             ++top;
             xStack.at(top) = x;
             yStack.at(top) = yMinus1;
             continue;
         }
 
-        // ÎÒÃÇÕıÔÚ×ö¸÷¸ö·½Ïò£¬ËùÒÔµ¯³ö£¬²¢·µ»Øµ½ËÑË÷ÆäËû·½Ïò¡£
+        // æˆ‘ä»¬æ­£åœ¨åšå„ä¸ªæ–¹å‘ï¼Œæ‰€ä»¥å¼¹å‡ºï¼Œå¹¶è¿”å›åˆ°æœç´¢å…¶ä»–æ–¹å‘ã€‚
         --top;
     }
 }
 
 void Framework::PixelScreenImpl::SetLineOnX(int xMin, int xMax, int y, const Colour& color)
 {
-    FRAMEWORK_ASSERTION_1(0 <= xMin && xMin <= xMax && xMax < screenWidth && 0 <= y && y < screenHeight, "Êı×éË÷ÒıÔ½½ç£¡");
+    FRAMEWORK_ASSERTION_1(0 <= xMin && xMin <= xMax && xMax < screenWidth && 0 <= y && y < screenHeight, "æ•°ç»„ç´¢å¼•è¶Šç•Œï¼");
 
     for (auto x = xMin; x <= xMax; ++x)
     {
@@ -378,7 +378,7 @@ void Framework::PixelScreenImpl::SetLineOnX(int xMin, int xMax, int y, const Col
 
 void Framework::PixelScreenImpl::SetLineOnY(int x, int yMin, int yMax, const Colour& color)
 {
-    FRAMEWORK_ASSERTION_1(0 <= x && x < screenWidth && 0 <= yMin && yMin <= yMax && yMax < screenHeight, "Êı×éË÷ÒıÔ½½ç£¡");
+    FRAMEWORK_ASSERTION_1(0 <= x && x < screenWidth && 0 <= yMin && yMin <= yMax && yMax < screenHeight, "æ•°ç»„ç´¢å¼•è¶Šç•Œï¼");
 
     for (auto y = yMin; y <= yMax; ++y)
     {

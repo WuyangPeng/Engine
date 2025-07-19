@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/28 17:55)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/28 17:55)
 
 #include "Rendering/RenderingExport.h"
 
@@ -91,10 +91,10 @@ void Rendering::Camera::SetProjectionMatrix(const APoint& p00, const APoint& p10
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    RENDERING_ASSERTION_0(0.0f < nearExtrude, "nearExtrude±ØĞë´óÓÚ0\n");
-    RENDERING_ASSERTION_0(nearExtrude < farExtrude, "farExtrude±ØĞë´óÓÚnearExtrude\n");
+    RENDERING_ASSERTION_0(0.0f < nearExtrude, "nearExtrudeå¿…é¡»å¤§äº0\n");
+    RENDERING_ASSERTION_0(nearExtrude < farExtrude, "farExtrudeå¿…é¡»å¤§äºnearExtrude\n");
 
-    /// ¼ÆËã×î½üÃæµÄÊÓÍ¼Ìå»ı¡£×¢ÊÍºóµÄ´úÂëĞĞÏÔÊ¾ÁËq110Ó¦¸ÃÊÇÊ²Ã´£¬µ«Êµ¼ÊµÄËã·¨²»ĞèÒª¼ÆËãËü¡£
+    /// è®¡ç®—æœ€è¿‘é¢çš„è§†å›¾ä½“ç§¯ã€‚æ³¨é‡Šåçš„ä»£ç è¡Œæ˜¾ç¤ºäº†q110åº”è¯¥æ˜¯ä»€ä¹ˆï¼Œä½†å®é™…çš„ç®—æ³•ä¸éœ€è¦è®¡ç®—å®ƒã€‚
     constexpr auto origin = Mathematics::APointF::GetOrigin();
     const auto q000 = origin + nearExtrude * (p00 - origin);
     const auto q100 = origin + nearExtrude * (p10 - origin);
@@ -107,7 +107,7 @@ void Rendering::Camera::SetProjectionMatrix(const APoint& p00, const APoint& p10
 
     const auto q010 = origin + nearExtrude * (p01 - origin);
 
-    // ¼ÆËã×îÔ¶ÃæµÄÊÓÍ¼Ìå»ı¡£×¢ÊÍºóµÄ´úÂëĞĞÏÔÊ¾ÁËq101ºÍq011Ó¦¸ÃÊÇÊ²Ã´£¬µ«Êµ¼ÊµÄËã·¨²»ĞèÒª¼ÆËãËü¡£
+    // è®¡ç®—æœ€è¿œé¢çš„è§†å›¾ä½“ç§¯ã€‚æ³¨é‡Šåçš„ä»£ç è¡Œæ˜¾ç¤ºäº†q101å’Œq011åº”è¯¥æ˜¯ä»€ä¹ˆï¼Œä½†å®é™…çš„ç®—æ³•ä¸éœ€è¦è®¡ç®—å®ƒã€‚
     const auto q001 = origin + farExtrude * (p00 - origin);
 
     #if 0
@@ -119,7 +119,7 @@ void Rendering::Camera::SetProjectionMatrix(const APoint& p00, const APoint& p10
 
     const auto q111 = origin + farExtrude * (p11 - origin);
 
-    // ¼ÆËãq111µÄ±íÊ¾
+    // è®¡ç®—q111çš„è¡¨ç¤º
     const auto u0 = q100 - q000;
     const auto u1 = q010 - q000;
     const auto u2 = q001 - q000;
@@ -138,7 +138,7 @@ void Rendering::Camera::SetProjectionMatrix(const APoint& p00, const APoint& p10
 
     #endif  // defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
-    // ¼ÆËã·Ö¶ÎÏßĞÔ±ä»»µÄ²ÎÊı¡£
+    // è®¡ç®—åˆ†æ®µçº¿æ€§å˜æ¢çš„å‚æ•°ã€‚
     //  y[i] = n[i]*x[i]/(d[0]*x[0] + d[1]*x[1] + d[2]*x[2] + d[3])
     const auto twoPoint0 = 2.0f * point[0];
     const auto twoPoint1 = 2.0f * point[1];
@@ -148,7 +148,7 @@ void Rendering::Camera::SetProjectionMatrix(const APoint& p00, const APoint& p10
     const auto d2 = -point[0] - point[1] + point[2] + 1.0f;
     const auto d3 = +point[0] + point[1] + point[2] - 1.0f;
 
-    // ¼ÆËãÍ¸ÊÓÍ¶Ó°´Ó¹æ·¶»¯³¤·½Ìåµ½¹æ·¶»¯Á¢·½Ìå[-1,1]^2 x [0,1]
+    // è®¡ç®—é€è§†æŠ•å½±ä»è§„èŒƒåŒ–é•¿æ–¹ä½“åˆ°è§„èŒƒåŒ–ç«‹æ–¹ä½“[-1,1]^2 x [0,1]
     const auto twoPoint2divide0 = twoPoint2 / twoPoint0;
     const auto twoPoint2divide1 = twoPoint2 / twoPoint1;
 
@@ -200,7 +200,7 @@ void Rendering::Camera::SetProjectionMatrix(const APoint& p00, const APoint& p10
 
     #endif  // defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
-    // È«Í¶Ó°ĞèÒª½«¼·Ñ¹ËÄ±ßĞÎÍ¶Ó°ÊÓÍ¼Ìå»ıÓ³Éäµ½¹æ·¶³¤·½Ìå£¬È»ºóÔÙ½«Í¸ÊÓÍ¶Ó°Ó³Éäµ½¹æ·¶Á¢·½Ìå¡£
+    // å…¨æŠ•å½±éœ€è¦å°†æŒ¤å‹å››è¾¹å½¢æŠ•å½±è§†å›¾ä½“ç§¯æ˜ å°„åˆ°è§„èŒƒé•¿æ–¹ä½“ï¼Œç„¶åå†å°†é€è§†æŠ•å½±æ˜ å°„åˆ°è§„èŒƒç«‹æ–¹ä½“ã€‚
     ParentType::SetProjectionMatrix(project * inverseMatrix);
     UpdateProjectionViewMatrix();
 }
@@ -237,11 +237,11 @@ Rendering::PickLine Rendering::Camera::GetPickLine(int viewX, int viewY, int vie
         APoint origin{};
         AVector direction{};
 
-        // »ñÈ¡(x,y)µÄ[0,1]^2¹éÒ»»¯×ø±ê¡£
+        // è·å–(x,y)çš„[0,1]^2å½’ä¸€åŒ–åæ ‡ã€‚
         const auto r = (static_cast<float>(x - viewX)) / static_cast<float>(viewWidth);
         const auto u = (static_cast<float>(y - viewY)) / static_cast<float>(viewHigh);
 
-        // »ñÈ¡[rMin,rMax]x[uMin,uMax]ÖĞµÄÏà¶Ô×ø±ê¡£
+        // è·å–[rMin,rMax]x[uMin,uMax]ä¸­çš„ç›¸å¯¹åæ ‡ã€‚
         const auto rBlend = (1.0f - r) * GetRightMin() + r * GetRightMax();
         const auto uBlend = (1.0f - u) * GetUpMin() + u * GetUpMax();
 
@@ -261,7 +261,7 @@ Rendering::PickLine Rendering::Camera::GetPickLine(int viewX, int viewY, int vie
     }
     else
     {
-        // (x,y)ÔÚÊÓ¿ÚÖ®Íâ¡£
+        // (x,y)åœ¨è§†å£ä¹‹å¤–ã€‚
         return PickLine{};
     }
 }

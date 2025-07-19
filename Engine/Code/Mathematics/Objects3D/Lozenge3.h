@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.6 (2024/02/26 15:32)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.6 (2024/02/26 15:32)
 
 #ifndef MATHEMATICS_OBJECTS_3D_LOZENGE3_H
 #define MATHEMATICS_OBJECTS_3D_LOZENGE3_H
@@ -17,7 +17,7 @@
 
 namespace Mathematics
 {
-    /// ÁâĞÎÊÇÒ»×éÊÇµÈ¾àµÄ¾ØĞÎµÄµã£¬¹²Í¬µÄ¾àÀë³ÆÎª°ë¾¶¡£
+    /// è±å½¢æ˜¯ä¸€ç»„æ˜¯ç­‰è·çš„çŸ©å½¢çš„ç‚¹ï¼Œå…±åŒçš„è·ç¦»ç§°ä¸ºåŠå¾„ã€‚
     template <typename Real>
     requires(std::is_arithmetic_v<Real>)
     class Lozenge3 final
@@ -30,9 +30,9 @@ namespace Mathematics
         using AlgebraRectangle3 = Algebra::Rectangle3<Real>;
 
     public:
-        /// Ä¬ÈÏ¹¹Ôìº¯Êı½«¾ØĞÎÉèÖÃÎªÔ­µã(0,0,0)¡¢
-        /// Öá(1,0,0)ºÍ (0,1,0)ÒÔ¼°·¶Î§¾ùÎª1¡£
-        /// Ä¬ÈÏ°ë¾¶Îª1¡£
+        /// é»˜è®¤æ„é€ å‡½æ•°å°†çŸ©å½¢è®¾ç½®ä¸ºåŸç‚¹(0,0,0)ã€
+        /// è½´(1,0,0)å’Œ (0,1,0)ä»¥åŠèŒƒå›´å‡ä¸º1ã€‚
+        /// é»˜è®¤åŠå¾„ä¸º1ã€‚
         Lozenge3() noexcept;
         Lozenge3(const Rectangle3Type& rectangle, Real radius) noexcept;
         Lozenge3(const AlgebraRectangle3& rectangle, Real radius);
@@ -48,7 +48,7 @@ namespace Mathematics
         Real radius;
     };
 
-    /// ÓëÖ§³ÖÅÅĞòÈİÆ÷µÄ±È½Ï¡£
+    /// ä¸æ”¯æŒæ’åºå®¹å™¨çš„æ¯”è¾ƒã€‚
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     NODISCARD bool operator==(const Lozenge3<Real>& lhs, const Lozenge3<Real>& rhs);

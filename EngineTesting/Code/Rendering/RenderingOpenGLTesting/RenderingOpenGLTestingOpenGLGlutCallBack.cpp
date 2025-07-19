@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.0 (2023/06/25 16:19)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.0 (2023/06/25 16:19)
 
 #include "RenderingOpenGLTestingOpenGLGlutCallBack.h"
 #include "Testing.h"
@@ -15,7 +15,7 @@
 #include "Framework/OpenGLGlutFrame/OpenGLGlutCallBackUnitTestSuiteDetail.h"
 
 Rendering::RenderingOpenGLTestingOpenGLGlutCallBack::RenderingOpenGLTestingOpenGLGlutCallBack(int64_t delta)
-    : ParentType{ delta, "¡¾äÖÈ¾¿â¡¿OpenGLµ¥Ôª²âÊÔÌ×¼ş" }
+    : ParentType{ delta, "ã€æ¸²æŸ“åº“ã€‘OpenGLå•å…ƒæµ‹è¯•å¥—ä»¶" }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -30,7 +30,7 @@ void Rendering::RenderingOpenGLTestingOpenGLGlutCallBack::AddSuite()
 
 void Rendering::RenderingOpenGLTestingOpenGLGlutCallBack::AddRendererEngineSuite()
 {
-    auto rendererEngineSuite = GenerateSuite("äÖÈ¾ÒıÇæ");
+    auto rendererEngineSuite = GenerateSuite("æ¸²æŸ“å¼•æ“");
 
     ADD_TEST(rendererEngineSuite, EnvironmentParameterTesting);
     ADD_TEST(rendererEngineSuite, RenderingEnvironmentTesting);
@@ -56,7 +56,7 @@ void Rendering::RenderingOpenGLTestingOpenGLGlutCallBack::AddRendererEngineSuite
 
 void Rendering::RenderingOpenGLTestingOpenGLGlutCallBack::AddOpenGLRendererSuite()
 {
-    auto openGLRendererSuite = GenerateSuite("OpenGLäÖÈ¾Æ÷");
+    auto openGLRendererSuite = GenerateSuite("OpenGLæ¸²æŸ“å™¨");
 
     ADD_TEST(openGLRendererSuite, OpenGLBindTextureTesting);
     ADD_TEST(openGLRendererSuite, OpenGLVertexFormatDataTesting);

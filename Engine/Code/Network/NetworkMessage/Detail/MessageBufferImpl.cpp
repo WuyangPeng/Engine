@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 16:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 16:19)
 
 #include "Network/NetworkExport.h"
 
@@ -112,7 +112,7 @@ void Network::MessageBufferImpl::AddCurrentReadIndex(int stepping)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ôö¼Ó¶ÁË÷ÒıÔ½½ç¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å¢åŠ è¯»ç´¢å¼•è¶Šç•Œã€‚"s))
     }
 }
 
@@ -148,14 +148,14 @@ void Network::MessageBufferImpl::AddCurrentWriteIndex(int stepping)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ôö¼ÓĞ´Ë÷ÒıÔ½½ç¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å¢åŠ å†™ç´¢å¼•è¶Šç•Œã€‚"s))
     }
 }
 
 const char* Network::MessageBufferImpl::GetCurrentReadBufferedPtr() const
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
-    NETWORK_ASSERTION_0(currentReadIndex < GetSize(), "Ë÷ÒıÔ½½ç");
+    NETWORK_ASSERTION_0(currentReadIndex < GetSize(), "ç´¢å¼•è¶Šç•Œ");
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -175,7 +175,7 @@ char* Network::MessageBufferImpl::GetCurrentReadBufferedPtr()
 const char* Network::MessageBufferImpl::GetCurrentWriteBufferedPtr() const
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
-    NETWORK_ASSERTION_0(currentWriteIndex < GetSize(), "Ë÷ÒıÔ½½ç");
+    NETWORK_ASSERTION_0(currentWriteIndex < GetSize(), "ç´¢å¼•è¶Šç•Œ");
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -216,7 +216,7 @@ void Network::MessageBufferImpl::SetReceiveCount(int aReceiveCount)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("½ÓÊÕÊı¾İÔ½½ç¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ¥æ”¶æ•°æ®è¶Šç•Œã€‚"s))
     }
 }
 
@@ -233,7 +233,7 @@ void Network::MessageBufferImpl::DecreaseReceiveCount(int aReceiveCount)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("½ÓÊÕÊı¾İÊıÁ¿²»×ã¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ¥æ”¶æ•°æ®æ•°é‡ä¸è¶³ã€‚"s))
     }
 }
 
@@ -262,7 +262,7 @@ int Network::MessageBufferImpl::GetMessageLength() const
 
 #include SYSTEM_WARNING_POP
 
-        // ´¦Àí×Ö½ÚĞòÎÊÌâ
+        // å¤„ç†å­—èŠ‚åºé—®é¢˜
         if (IsNeedSwap())
         {
             CoreTools::Endian::Swap4ByteOrder(&totalLength);
@@ -272,7 +272,7 @@ int Network::MessageBufferImpl::GetMessageLength() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎŞ·¨»ñÈ¡Êı¾İ³¤¶È¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ— æ³•è·å–æ•°æ®é•¿åº¦ã€‚"s))
     }
 }
 
@@ -301,7 +301,7 @@ void Network::MessageBufferImpl::CheckingMessageHeadSize()
 
     if (GetRemainingWriteCount() <= MessageInterface::GetMessageHeadSize())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("½ÓÊÕÏûÏ¢Í·ÈİÁ¿²»×ã£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ¥æ”¶æ¶ˆæ¯å¤´å®¹é‡ä¸è¶³ï¼"s))
     }
 }
 
@@ -314,7 +314,7 @@ void Network::MessageBufferImpl::CheckingMessageContentSize()
 
     if (bytesTotal < totalLength)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("½ÓÊÕÊı¾İ³¤¶È²»×ã£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ¥æ”¶æ•°æ®é•¿åº¦ä¸è¶³ï¼"s))
     }
 }
 
@@ -346,7 +346,7 @@ void Network::MessageBufferImpl::Read(int itemSize, int itemsNumber, void* data)
 
     if (GetRemainingReadCount() < numberToCopy)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¿É¶ÁÈ¡µÄ»º³åÇø´óĞ¡²»×ã£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å¯è¯»å–çš„ç¼“å†²åŒºå¤§å°ä¸è¶³ï¼"s))
     }
 
     const auto* const currentReadPtr = GetCurrentReadBufferedPtr();
@@ -376,7 +376,7 @@ void Network::MessageBufferImpl::Write(int itemSize, int itemsNumber, const void
 
     if (GetSize() < numberToCopy)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¿ÉĞ´ÈëµÄ»º³åÇø´óĞ¡²»×ã£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å¯å†™å…¥çš„ç¼“å†²åŒºå¤§å°ä¸è¶³ï¼"s))
     }
 
     const auto currentWritePtr = GetCurrentWriteBufferedPtr();
@@ -412,7 +412,7 @@ void Network::MessageBufferImpl ::PushBack(const MessageBufferImpl& messageBuffe
 
     if (GetSize() < GetCurrentWriteIndex() + writeIndex)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("»º³åÇø´óĞ¡²»×ã£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("ç¼“å†²åŒºå¤§å°ä¸è¶³ï¼"s))
     }
 
     System::MemoryCopy(GetCurrentWriteBufferedPtr(), messageBuffer.GetInitialBufferedPtr(), writeIndex);

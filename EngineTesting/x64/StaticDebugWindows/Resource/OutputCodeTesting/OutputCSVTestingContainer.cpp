@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #include "OutputCSVTestingContainer.h"
 
@@ -70,20 +70,20 @@ void OutputCSVTesting::OutputCSVTestingContainer::Verify() const
 {
     if (input1Container == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("input1±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("input1è¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (input2Container == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("input2±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("input2è¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (input3Container == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("input3±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("input3è¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("OutputCSVTesting½áÊøÔØÈë¡­¡­"));
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("OutputCSVTestingç»“æŸè½½å…¥â€¦â€¦"));
 }
 
 #ifdef OPEN_CLASS_INVARIANT

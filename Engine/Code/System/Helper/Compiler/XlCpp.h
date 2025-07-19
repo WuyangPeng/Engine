@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.7 (2024/03/04 17:29)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/04 17:29)
 
 #ifndef SYSTEM_HELPER_XLCPP_H
 #define SYSTEM_HELPER_XLCPP_H
@@ -38,7 +38,7 @@
 
     #ifndef TCRE_SYSTEM_COMPILER
 
-        #define TCRE_SYSTEM_COMPILER "Clang �汾 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
+        #define TCRE_SYSTEM_COMPILER "Clang 版本 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
 
     #endif  // TCRE_SYSTEM_COMPILER
 
@@ -48,10 +48,10 @@
 
     #endif  // defined(__GNUC__) && (4 <= __GNUC__)
 
-    /// �ڶ���__has_extension֮ǰʹ��clang���б���ʱ��
-    /// ��ʹд��'defined(__has_extension) && __has_extension(xxx)'��
-    /// clangҲ�������������
-    /// ��ˣ��ҵ���Ψһ��������ǣ�
+    /// 在定义__has_extension之前使用clang进行编译时，
+    /// 即使写了'defined(__has_extension) && __has_extension(xxx)'，
+    /// clang也报告编译器错误，
+    /// 因此，找到的唯一解决方法是：
 
     #ifndef __has_extension
 
@@ -65,7 +65,7 @@
 
     #endif  // __has_cpp_attribute
 
-    /// ��֧Ԥ����ʾ
+    /// 分支预测提示
     #if defined(__has_builtin)
 
         #if __has_builtin(__builtin_expect)
@@ -77,7 +77,7 @@
 
     #endif  // defined(__has_builtin)
 
-    /// FALLTHROUGH�������ע��switch��ǩ֮�����ʽ��fall-through��
+    /// FALLTHROUGH宏可用于注释switch标签之间的隐式的fall-through。
     #if 201103L <= __cplusplus && defined(__has_warning)
 
         #if __has_feature(cxx_attributes) && __has_warning("-Wimplicit-fallthrough")

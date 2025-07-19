@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 14:11)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 14:11)
 
 #ifndef FRAMEWORK_WINDOW_REGISTER_WINDOW_REGISTER_DETAIL_H
 #define FRAMEWORK_WINDOW_REGISTER_WINDOW_REGISTER_DETAIL_H
@@ -75,14 +75,14 @@ bool Framework::WindowRegisterHandle<WindowsProcess>::IsValid() const noexcept
 template <typename WindowProcessHandle>
 void Framework::WindowRegisterHandle<WindowProcessHandle>::Init()
 {
-    // ÔÊĞíÔÚ´´½¨´°¿ÚÖ®Ç°½øĞĞ¹¤×÷¡£
+    // å…è®¸åœ¨åˆ›å»ºçª—å£ä¹‹å‰è¿›è¡Œå·¥ä½œã€‚
     if (const auto className = windowName.GetWindowClassName();
         !windowProcess.PreCreate() ||
         windowProcess.IsClassNameExist(className) ||
         InitApplication() == 0 ||
         !windowProcess.SetNewClassName(className))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("×¢²á´°¿ÚÊ§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ³¨å†Œçª—å£å¤±è´¥ï¼"s))
     }
 }
 

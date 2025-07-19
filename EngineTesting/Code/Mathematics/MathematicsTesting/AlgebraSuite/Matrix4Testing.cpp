@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 14:33)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 14:33)
 
 #include "Matrix4Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -751,12 +751,12 @@ void Mathematics::Matrix4Testing::ProjectionTest()
 
             const PlaneF firstPlane = PlaneF(AVectorF(vector0), APointF(vector1));
 
-            // ×ª»»ºóµÄµãµÄÆ½ÃæÉÏ¡£
+            // è½¬æ¢åçš„ç‚¹çš„å¹³é¢ä¸Šã€‚
             const float distance = firstPlane.DistanceTo(APointF(vector4[0], vector4[1], vector4[2]));
 
             ASSERT_APPROXIMATE(distance, 0.0f, 1e-2f);
 
-            // Ô­À´µÄµãÓë×ª»»ºóµÄµãµÄ²îÊÇdirection»ò-direction
+            // åŸæ¥çš„ç‚¹ä¸è½¬æ¢åçš„ç‚¹çš„å·®æ˜¯directionæˆ–-direction
             Matrix4F::Vector4Type vector5 = vector3 - vector4;
 
             vector5.Normalize();
@@ -781,7 +781,7 @@ void Mathematics::Matrix4Testing::ProjectionTest()
 
         const PlaneF secondPlane = PlaneF(AVectorF(vector0), APointF(vector1));
 
-        // Ô­À´µÄµãÓë×ª»»ºóµÄµãºÍµãeyeÔÚÍ¬Ò»Ö±ÏßÉÏ
+        // åŸæ¥çš„ç‚¹ä¸è½¬æ¢åçš„ç‚¹å’Œç‚¹eyeåœ¨åŒä¸€ç›´çº¿ä¸Š
         Matrix4F::Vector4Type eleventhVector = vector3 - tenthVector;
 
         ASSERT_APPROXIMATE(eleventhVector[3], 0.0f, 1e-8f);
@@ -802,7 +802,7 @@ void Mathematics::Matrix4Testing::ProjectionTest()
 
         ASSERT_APPROXIMATE(firstDistance, -secondDistance, 1e-4f);
 
-        // MakeFrustumMatrix44²âÊÔ
+        // MakeFrustumMatrix44æµ‹è¯•
         const float left = -MathF::FAbs(randomDistribution(generator));
         const float right = MathF::FAbs(randomDistribution(generator));
         const float bottom = -MathF::FAbs(randomDistribution(generator));
@@ -832,14 +832,14 @@ void Mathematics::Matrix4Testing::ProjectionTest()
         ASSERT_APPROXIMATE(matrix1(3, 2), (-2.0f * farDistance * nearDistance) / (farDistance - nearDistance), 1e-5f);
         ASSERT_APPROXIMATE(matrix1(3, 3), 0.0f, 1e-8f);
 
-        // MakePerspectiveMatrix44²âÊÔ
+        // MakePerspectiveMatrix44æµ‹è¯•
         constexpr float fieldOfViewY = 60.0f;
         constexpr float aspect = 0.6f;
 
         matrix1.MakePerspectiveMatrix44(fieldOfViewY, aspect, nearDistance, farDistance);
 
         float angle = fieldOfViewY / 2.0f;
-        // ½Ç¶È×ª»»³É»¡¶È
+        // è§’åº¦è½¬æ¢æˆå¼§åº¦
         angle *= MathF::GetDegreeToRadian();
 
         const float cot = MathF::Cos(angle) / MathF::Sin(angle);
@@ -864,7 +864,7 @@ void Mathematics::Matrix4Testing::ProjectionTest()
         ASSERT_APPROXIMATE(matrix1(3, 2), (-2.0f * farDistance * nearDistance) / (farDistance - nearDistance), 1e-8f);
         ASSERT_APPROXIMATE(matrix1(3, 3), 0.0f, 1e-8f);
 
-        // MakeOrthoMatrix44²âÊÔ
+        // MakeOrthoMatrix44æµ‹è¯•
         matrix1.MakeOrthoMatrix44(left, right, bottom, top, nearDistance, farDistance);
 
         ASSERT_APPROXIMATE(matrix1(0, 0), 2.0f / (right - left), 1e-7f);
@@ -887,7 +887,7 @@ void Mathematics::Matrix4Testing::ProjectionTest()
         ASSERT_APPROXIMATE(matrix1(3, 2), -(farDistance + nearDistance) / (farDistance - nearDistance), 1e-7f);
         ASSERT_APPROXIMATE(matrix1(3, 3), 1.0f, 1e-8f);
 
-        // MakeOrthoNormalMatrix44²âÊÔ
+        // MakeOrthoNormalMatrix44æµ‹è¯•
         vector0.Normalize();
         vector1.Normalize();
         vector2.Normalize();

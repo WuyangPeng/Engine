@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.2 (2023/07/24 19:35)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.2 (2023/07/24 19:35)
 
 #ifndef RENDERING_CONTROLLERS_MORPH_CONTROLLER_H
 #define RENDERING_CONTROLLERS_MORPH_CONTROLLER_H
@@ -32,15 +32,15 @@ namespace Rendering
         using BaseRendererSharedPtr = std::shared_ptr<BaseRenderer>;
 
     public:
-        // ¶¥µãµÄÊıÄ¿£¬±äĞÎµÄÄ¿±ê£¬±»¹Ì¶¨¶ÔÏóµÄÉú´æÆÚµÄ¼ü¡£
-        // ¹¹Ôìº¯Êı×öÒ»Ğ©´´½¨¿ØÖÆÆ÷µÄ¹¤×÷¡£
-        // Ã¿¸öÄ¿±ê¶¥µã£¬Ê±¼ä£¬ºÍÈ¨ÖØ¶¼±ØĞëÓÉÏàÓ¦µÄ³ÉÔ±·ÃÎÊ·ÖÅä¡£
+        // é¡¶ç‚¹çš„æ•°ç›®ï¼Œå˜å½¢çš„ç›®æ ‡ï¼Œè¢«å›ºå®šå¯¹è±¡çš„ç”Ÿå­˜æœŸçš„é”®ã€‚
+        // æ„é€ å‡½æ•°åšä¸€äº›åˆ›å»ºæ§åˆ¶å™¨çš„å·¥ä½œã€‚
+        // æ¯ä¸ªç›®æ ‡é¡¶ç‚¹ï¼Œæ—¶é—´ï¼Œå’Œæƒé‡éƒ½å¿…é¡»ç”±ç›¸åº”çš„æˆå‘˜è®¿é—®åˆ†é…ã€‚
 
-        // numVertices: Ã¿¸öÄ¿±êµÄ¶¥µãµÄÊıÁ¿¡£ËùÓĞµÄÄ¿±ê¾ßÓĞÏàÍ¬ÊıÁ¿µÄ¶¥µã¡£
+        // numVertices: æ¯ä¸ªç›®æ ‡çš„é¡¶ç‚¹çš„æ•°é‡ã€‚æ‰€æœ‰çš„ç›®æ ‡å…·æœ‰ç›¸åŒæ•°é‡çš„é¡¶ç‚¹ã€‚
 
-        // numTargets:  ±äĞÎµÄÄ¿±êÊı
+        // numTargets:  å˜å½¢çš„ç›®æ ‡æ•°
 
-        // numKeys:  ¼üµÄÊıÄ¿£¬Ã¿¸ö¼ü·¢ÉúÔÚÒ»¸öÌØ¶¨µÄÊ±¼ä¡£
+        // numKeys:  é”®çš„æ•°ç›®ï¼Œæ¯ä¸ªé”®å‘ç”Ÿåœ¨ä¸€ä¸ªç‰¹å®šçš„æ—¶é—´ã€‚
 
         MorphController(int numVertices, int numTargets, int numKeys, const BaseRendererSharedPtr& baseRenderer);
 
@@ -48,7 +48,7 @@ namespace Rendering
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(MorphController);
 
-        // µ÷ÓÃ¹¹Ôìº¯Êıºó£¬Äú±ØĞëÊ¹ÓÃÕâĞ©º¯ÊıÉèÖÃ¶¥µãÊı×é£¬Ê±¼äºÍÈ¨ÖØ¡£
+        // è°ƒç”¨æ„é€ å‡½æ•°åï¼Œæ‚¨å¿…é¡»ä½¿ç”¨è¿™äº›å‡½æ•°è®¾ç½®é¡¶ç‚¹æ•°ç»„ï¼Œæ—¶é—´å’Œæƒé‡ã€‚
         NODISCARD int GetNumVertices() const noexcept;
         NODISCARD int GetNumTargets() const noexcept;
         NODISCARD int GetNumKeys() const noexcept;
@@ -60,7 +60,7 @@ namespace Rendering
         void SetTimes(int key, float times);
         void SetWeights(int key, int target, float weights);
 
-        // ¶¯»­¸üĞÂ¡£Ó¦ÓÃ³ÌĞòÊ±¼äÒÔºÁÃëÎªµ¥Î»¡£
+        // åŠ¨ç”»æ›´æ–°ã€‚åº”ç”¨ç¨‹åºæ—¶é—´ä»¥æ¯«ç§’ä¸ºå•ä½ã€‚
         NODISCARD bool Update(double applicationTime) override;
         void SetController(const ControllerSharedPtr& object) override;
 
@@ -68,7 +68,7 @@ namespace Rendering
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
     protected:
-        // ²éÕÒ±ß½çÉÏµÄ¼ü¡£
+        // æŸ¥æ‰¾è¾¹ç•Œä¸Šçš„é”®ã€‚
         NODISCARD ControllerKeyInfo GetKeyInfo(float ctrlTime) noexcept;
 
     private:

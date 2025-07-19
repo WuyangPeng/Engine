@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/28 17:51)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/28 17:51)
 
 #ifndef RENDERING_SCENE_GRAPH_SPATIAL_IMPL_H
 #define RENDERING_SCENE_GRAPH_SPATIAL_IMPL_H
@@ -89,14 +89,14 @@ namespace Rendering
         NODISCARD virtual SpatialImplSharedPtr Clone() const = 0;
 
     private:
-        // ¾Ö²¿ºÍÊÀ½ç±ä»»¡£ÔÚÄ³Ğ©Çé¿öÏÂ,Äú¿ÉÄÜĞèÒªÖ±½ÓÉèÖÃÊÀ½ç±ä»»ÈÆ¹ıSpatial::Update()»úÖÆ¡£
-        // Èç¹ûÖ±½ÓÉèÖÃworldTransform£¬worldTransformIsCurrentÓ¦¸ÃÉèÖÃÎª¡°true¡±¡£
+        // å±€éƒ¨å’Œä¸–ç•Œå˜æ¢ã€‚åœ¨æŸäº›æƒ…å†µä¸‹,æ‚¨å¯èƒ½éœ€è¦ç›´æ¥è®¾ç½®ä¸–ç•Œå˜æ¢ç»•è¿‡Spatial::Update()æœºåˆ¶ã€‚
+        // å¦‚æœç›´æ¥è®¾ç½®worldTransformï¼ŒworldTransformIsCurrentåº”è¯¥è®¾ç½®ä¸ºâ€œtrueâ€ã€‚
         Transform localTransform;
         Transform worldTransform;
         bool worldTransformIsCurrent;
 
-        // ÊÀ½ç°ó¶¨·ÃÎÊ¡£ÔÚÄ³Ğ©Çé¿öÏÂ,Äú¿ÉÄÜÏëÒªÖ±½ÓÉèÖÃÊÀ½ç°ó¶¨,ÈÆ¹ıSpatial::Update()»úÖÆ¡£
-        // Èç¹ûÖ±½ÓÉèÖÃworldBound£¬worldBoundIsCurrentÓ¦¸ÃÉèÖÃÎª¡°true¡±¡£
+        // ä¸–ç•Œç»‘å®šè®¿é—®ã€‚åœ¨æŸäº›æƒ…å†µä¸‹,æ‚¨å¯èƒ½æƒ³è¦ç›´æ¥è®¾ç½®ä¸–ç•Œç»‘å®š,ç»•è¿‡Spatial::Update()æœºåˆ¶ã€‚
+        // å¦‚æœç›´æ¥è®¾ç½®worldBoundï¼ŒworldBoundIsCurrentåº”è¯¥è®¾ç½®ä¸ºâ€œtrueâ€ã€‚
         BoundingSphere worldBound;
         bool worldBoundIsCurrent;
 

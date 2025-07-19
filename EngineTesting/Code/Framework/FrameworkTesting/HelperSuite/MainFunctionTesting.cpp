@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.3 (2023/08/11 19:22)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.3 (2023/08/11 19:22)
 
 #include "MainFunctionTesting.h"
 #include "System/Threading/Process.h"
@@ -32,9 +32,9 @@ void Framework::MainFunctionTesting::MainTest()
 {
     CoreTools::Directory directory{ System::GetEngineeringDirectory() };
 
-    // ºêWINDOWS_MAIN_FUNCTION_WITH_INFORMATION¡¢WINDOWS_MAIN_FUNCTION_USE_PARAMETER¡¢CONSOLE_MAIN_FUNCTION¡¢
-    // GLUT_CONSOLE_MAIN_FUNCTIONºÍANDROID_MAIN_FUNCTIONÊ¹ÓÃ¹¤¾ßÏäµ÷ÓÃ£¬
-    // ÎÞ·¨µ¥¶ÀÔËÐÐµ¥Ôª²âÊÔ¡£
+    // å®WINDOWS_MAIN_FUNCTION_WITH_INFORMATIONã€WINDOWS_MAIN_FUNCTION_USE_PARAMETERã€CONSOLE_MAIN_FUNCTIONã€
+    // GLUT_CONSOLE_MAIN_FUNCTIONå’ŒANDROID_MAIN_FUNCTIONä½¿ç”¨å·¥å…·ç®±è°ƒç”¨ï¼Œ
+    // æ— æ³•å•ç‹¬è¿è¡Œå•å…ƒæµ‹è¯•ã€‚
 
     ASSERT_NOT_THROW_EXCEPTION_0(WinMainEntryPoint3Test);
     ASSERT_NOT_THROW_EXCEPTION_0(WinMainEntryPoint4Test);

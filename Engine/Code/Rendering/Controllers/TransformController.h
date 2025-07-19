@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.2 (2023/07/24 11:25)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.2 (2023/07/24 11:25)
 
 #ifndef RENDERING_CONTROLLERS_TRANSFORM_CONTROLLER_H
 #define RENDERING_CONTROLLERS_TRANSFORM_CONTROLLER_H
@@ -49,9 +49,9 @@ namespace Rendering
 
         void SetController(const ControllerSharedPtr& object) override;
 
-        // ¶¯»­¸üĞÂ¡£Ó¦ÓÃ³ÌĞòÊ±¼äÒÔºÁÃëÎªµ¥Î»¡£
-        // ¸üĞÂ¼òµ¥µÄ¿½±´m_LocalTransformµ½Spatial m_ObjectµÄLocalTransform¡£
-        // ÔÚÕâ¸öÒâÒåÉÏ£¬TransformController±íÊ¾Ò»¸öËùÓĞÊ±¼äÎª³£ÊıµÄtransform¡£
+        // åŠ¨ç”»æ›´æ–°ã€‚åº”ç”¨ç¨‹åºæ—¶é—´ä»¥æ¯«ç§’ä¸ºå•ä½ã€‚
+        // æ›´æ–°ç®€å•çš„æ‹·è´m_LocalTransformåˆ°Spatial m_Objectçš„LocalTransformã€‚
+        // åœ¨è¿™ä¸ªæ„ä¹‰ä¸Šï¼ŒTransformControllerè¡¨ç¤ºä¸€ä¸ªæ‰€æœ‰æ—¶é—´ä¸ºå¸¸æ•°çš„transformã€‚
         bool Update(double applicationTime) override;
 
         NODISCARD ControllerSharedPtr Clone() const override;

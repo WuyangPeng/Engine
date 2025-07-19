@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 22:24)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 22:24)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -41,8 +41,8 @@ void CoreTools::BufferOutStreamImpl::GenerateBuffer()
 
 void CoreTools::BufferOutStreamImpl::Register()
 {
-    // ´´½¨Î¨Ò»¶ÔÏó¼¯ºÏÔÚ¶ÔÏóÍ¼ÖĞ¡£
-    // Ê¹ÎÒÃÇ¿ÉÒÔ´´½¨ÓÃÓÚĞ´Èë»º³åÇøËùĞèµÄÊı¾İÁ÷µÄ×Ö½ÚÊıµÄÈ·ÇĞ´óĞ¡¡£
+    // åˆ›å»ºå”¯ä¸€å¯¹è±¡é›†åˆåœ¨å¯¹è±¡å›¾ä¸­ã€‚
+    // ä½¿æˆ‘ä»¬å¯ä»¥åˆ›å»ºç”¨äºå†™å…¥ç¼“å†²åŒºæ‰€éœ€çš„æ•°æ®æµçš„å­—èŠ‚æ•°çš„ç¡®åˆ‡å¤§å°ã€‚
     for (const auto& object : topLevel)
     {
         if (const auto uniqueId = object->Register(*objectRegister);
@@ -62,7 +62,7 @@ int CoreTools::BufferOutStreamImpl::GetBufferSize() const
         bufferSize += value.object->GetStreamingSize();
     }
 
-    /// µ÷Õû»º³åÇø´óĞ¡¿¼ÂÇµ½ÁË¡°Top Level¡±×Ö·û´®¡£
+    /// è°ƒæ•´ç¼“å†²åŒºå¤§å°è€ƒè™‘åˆ°äº†â€œTop Levelâ€å­—ç¬¦ä¸²ã€‚
     const auto topLevelBytesNumber = Stream::GetStreamingSize(TopLevel::GetTopLevelDescription());
     bufferSize += topLevelBytesNumber * topLevel.GetTopLevelSize();
 
@@ -71,15 +71,15 @@ int CoreTools::BufferOutStreamImpl::GetBufferSize() const
 
 void CoreTools::BufferOutStreamImpl::ResetBufferSize(int bufferSize)
 {
-    CORE_TOOLS_ASSERTION_0(0 < bufferSize, "»º³åÇø´óĞ¡Ğ¡ÓÚ»òµÈÓÚ0£¡");
+    CORE_TOOLS_ASSERTION_0(0 < bufferSize, "ç¼“å†²åŒºå¤§å°å°äºæˆ–ç­‰äº0ï¼");
 
-    /// ´´½¨¶ÔÏó½«Òª±»Ğ´ÈëµÄ»º³åÇø¡£
+    /// åˆ›å»ºå¯¹è±¡å°†è¦è¢«å†™å…¥çš„ç¼“å†²åŒºã€‚
     target = make_shared<BufferTarget>(bufferSize, objectRegister);
 }
 
 void CoreTools::BufferOutStreamImpl::SaveToBuffer()
 {
-    /// ±£´æ¶ÔÏóµ½Ä¿±ê»º³åÇø¡£
+    /// ä¿å­˜å¯¹è±¡åˆ°ç›®æ ‡ç¼“å†²åŒºã€‚
     for (const auto& element : *objectRegister)
     {
         if (topLevel.IsTopLevel(element.object))

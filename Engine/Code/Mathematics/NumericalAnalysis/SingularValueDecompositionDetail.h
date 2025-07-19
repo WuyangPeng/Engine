@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 13:55)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 13:55)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SINGULAR_VALUE_DECOMPOSITION_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SINGULAR_VALUE_DECOMPOSITION_DETAIL_H
@@ -31,7 +31,7 @@ Mathematics::SingularValueDecomposition<Real>::SingularValueDecomposition(const 
 template <typename Real>
 void Mathematics::SingularValueDecomposition<Real>::Calculate(const VariableMatrixType& matrix)
 {
-    // ´Ó¡°¾ØÕó¼ÆËã¡±ÊµÏÖÆäËûQR·Ö½âºÍÆæÒìÖµ·Ö½â´úÂë£¬È»ºó¸øÓÃ»§Ö¸¶¨ÕâÀïÊ¹ÓÃÄÄĞ©·½·¨µÄÄÜÁ¦¡£
+    // ä»â€œçŸ©é˜µè®¡ç®—â€å®ç°å…¶ä»–QRåˆ†è§£å’Œå¥‡å¼‚å€¼åˆ†è§£ä»£ç ï¼Œç„¶åç»™ç”¨æˆ·æŒ‡å®šè¿™é‡Œä½¿ç”¨å“ªäº›æ–¹æ³•çš„èƒ½åŠ›ã€‚
 
     const auto transposeTimesMatrix = TransposeMultiply(matrix, matrix);
     EigenDecomposition<Real> eigenDecomposition{ transposeTimesMatrix };
@@ -48,17 +48,17 @@ void Mathematics::SingularValueDecomposition<Real>::HouseholderQR()
 {
     using namespace System;
 
-    // ¾ØÕóRealÊÇAµÄ¸±±¾£¬È»ºóÔÚËã·¨ÖĞÓÃÕıÈ·ÏîÖØĞ´ÉÏÈı½Ç¡£
+    // çŸ©é˜µRealæ˜¯Açš„å‰¯æœ¬ï¼Œç„¶ååœ¨ç®—æ³•ä¸­ç”¨æ­£ç¡®é¡¹é‡å†™ä¸Šä¸‰è§’ã€‚
     const auto numRows = diagonal.GetRowsNumber();
     const auto numColumns = diagonal.GetColumnsNumber();
-    MATHEMATICS_ASSERTION_3(numColumns <= numRows, "Ì«¶àµÄÁĞ£¨Ê¹ÓÃ×ªÖÃ¾ØÕó£©\n");
+    MATHEMATICS_ASSERTION_3(numColumns <= numRows, "å¤ªå¤šçš„åˆ—ï¼ˆä½¿ç”¨è½¬ç½®çŸ©é˜µï¼‰\n");
 
     std::vector<VariableLengthVectorType> saveVector{};
     for (auto column = 0; column < numColumns; ++column)
     {
         VariableLengthVectorType vector{ numRows };
 
-        // ´´½¨HouseholderÏòÁ¿¶ÔAµÄ²¿·ÖÁĞ
+        // åˆ›å»ºHouseholderå‘é‡å¯¹Açš„éƒ¨åˆ†åˆ—
         for (auto row = 0; row < column; ++row)
         {
             vector[row] = MathType::GetValue(0);
@@ -80,23 +80,23 @@ void Mathematics::SingularValueDecomposition<Real>::HouseholderQR()
         }
         vector[column] = MathType::GetValue(1);
 
-        // ÓÉV-·´Éä¾ØÕóÔ¤³ËA¡£
+        // ç”±V-åå°„çŸ©é˜µé¢„ä¹˜Aã€‚
         HouseholderPremultiply(vector, diagonal);
 
-        // ±£´æHouseholderÏòÁ¿
+        // ä¿å­˜Householderå‘é‡
         saveVector.emplace_back(vector);
     }
 
-    // Ê×ÏÈ£¬Ê¹QÎªidentity¡£µÚ¶ş£¬ÌáÈ¡HouseholderÏòÁ¿ºÍÒÔV-·´Éä¾ØÕóÔ¤³ËQ¡£
+    // é¦–å…ˆï¼Œä½¿Qä¸ºidentityã€‚ç¬¬äºŒï¼Œæå–Householderå‘é‡å’Œä»¥V-åå°„çŸ©é˜µé¢„ä¹˜Qã€‚
     left.MakeIdentity();
 
     for (auto column = numColumns - 1; 0 <= column; --column)
     {
-        // »ñÈ¡HouseholderÏòÁ¿
+        // è·å–Householderå‘é‡
 
         auto vector = saveVector.at(column);
 
-        // ÓÉV-·´Éä¾ØÕóÔ¤³ËQ¡£
+        // ç”±V-åå°„çŸ©é˜µé¢„ä¹˜Qã€‚
         HouseholderPremultiply(vector, left);
     }
 }

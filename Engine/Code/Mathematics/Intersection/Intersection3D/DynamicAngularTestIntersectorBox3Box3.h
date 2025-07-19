@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	�汾��0.9.1.6 (2023/10/28 14:56)
+///	标准：std:c++20
+///	版本：0.9.1.6 (2023/10/28 14:56)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_ANGULAR_TEST_INTERSECTOR_BOX3_BOX3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_ANGULAR_TEST_INTERSECTOR_BOX3_BOX3_H
@@ -48,8 +48,8 @@ namespace Mathematics
         NODISCARD Box3Type GetBox1() const noexcept;
 
     private:
-        /// ��̬���Խ�����ѯ�����п���к㶨�����ٶȺͺ㶨�Ľ��ٶȡ� ��ת��ĳ����ǽ��ٶȡ�
-        /// ΢�ַ������������Ԥ�⽻�㡣 ����numSteps������ODE������ĵ���������
+        /// 动态测试交叉点查询，其中框具有恒定的线速度和恒定的角速度。 旋转轴的长度是角速度。
+        /// 微分方程求解器用于预测交点。 输入numSteps是数字ODE求解器的迭代次数。
         void Test();
 
     private:

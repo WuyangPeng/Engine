@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:22)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:22)
 
 #ifndef MATHEMATICS_APPROXIMATION_SPHERE_FIT3_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_SPHERE_FIT3_ACHIEVE_H
@@ -49,7 +49,7 @@ void Mathematics::SphereFit3<Real>::Calculate(const Points& points, int maxItera
 {
     const auto average = GetAveragePoint(points);
 
-    // ²Â²â³õÊ¼ÖĞĞÄ¡£
+    // çŒœæµ‹åˆå§‹ä¸­å¿ƒã€‚
     if (initialCenterIsAverage)
     {
         sphere.SetSphere(average, MathType::GetValue(0));
@@ -65,7 +65,7 @@ void Mathematics::SphereFit3<Real>::Calculate(const Points& points, int maxItera
     {
         const auto current = sphere.GetCenter();
 
-        // ¸üĞÂµü´ú
+        // æ›´æ–°è¿­ä»£
         Iteration(points, average);
 
         const auto circleDifference = sphere.GetCenter() - current;
@@ -76,16 +76,16 @@ void Mathematics::SphereFit3<Real>::Calculate(const Points& points, int maxItera
             return;
         }
 
-        MATHEMATICS_ASSERTION_4(loop + 1 != maxIterations, "µü´ú³¬³ö´ÎÊı¡£");
+        MATHEMATICS_ASSERTION_4(loop + 1 != maxIterations, "è¿­ä»£è¶…å‡ºæ¬¡æ•°ã€‚");
     }
 }
 
 template <typename Real>
 Mathematics::Vector3<Real> Mathematics::SphereFit3<Real>::GetAveragePoint(const Points& points)
 {
-    MATHEMATICS_ASSERTION_0(!points.empty(), "ÊäÈëµÄÊı×é´óĞ¡ÎªÁã£¡");
+    MATHEMATICS_ASSERTION_0(!points.empty(), "è¾“å…¥çš„æ•°ç»„å¤§å°ä¸ºé›¶ï¼");
 
-    // ¼ÆËãÊı¾İµãµÄÆ½¾ùÖµ¡£
+    // è®¡ç®—æ•°æ®ç‚¹çš„å¹³å‡å€¼ã€‚
     Vector3Type average{};
 
     const auto numPoints = boost::numeric_cast<Real>(points.size());
@@ -105,7 +105,7 @@ void Mathematics::SphereFit3<Real>::Iteration(const Points& points, const Vector
 {
     auto numPoints = boost::numeric_cast<Real>(points.size());
 
-    // ¼ÆËãÆ½¾ùÖµL, dL/da, dL/db, dL/dc¡£
+    // è®¡ç®—å¹³å‡å€¼L, dL/da, dL/db, dL/dcã€‚
     auto lengthAverage = MathType::GetValue(0);
     Vector3Type derLengthAverage{};
 

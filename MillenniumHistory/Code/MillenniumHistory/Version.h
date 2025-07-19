@@ -1,19 +1,19 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/21 22:51)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/21 22:51)
 
 #ifndef MILLENNIUM_HISTORY_VERSION_H
 #define MILLENNIUM_HISTORY_VERSION_H
 
-//  gMillenniumHistoryVersion % 100 ÊÇĞŞ¶©°æ±¾ºÅ
-//  gMillenniumHistoryVersion / 100 % 100 ÊÇÄÚ²¿°æ±¾ºÅ
-//  gMillenniumHistoryVersion / 10000 % 100 ÊÇ´Î°æ±¾ºÅ
-//  gMillenniumHistoryVersion / 1000000 % 100 ÊÇÖ÷°æ±¾ºÅ
+//  gMillenniumHistoryVersion % 100 æ˜¯ä¿®è®¢ç‰ˆæœ¬å·
+//  gMillenniumHistoryVersion / 100 % 100 æ˜¯å†…éƒ¨ç‰ˆæœ¬å·
+//  gMillenniumHistoryVersion / 10000 % 100 æ˜¯æ¬¡ç‰ˆæœ¬å·
+//  gMillenniumHistoryVersion / 1000000 % 100 æ˜¯ä¸»ç‰ˆæœ¬å·
 
 constexpr auto gMillenniumHistoryVersion = 1000003;
 

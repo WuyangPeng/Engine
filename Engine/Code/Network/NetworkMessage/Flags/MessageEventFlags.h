@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 16:13)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 16:13)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_EVENT_FLAGS_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_EVENT_FLAGS_H
@@ -36,13 +36,13 @@ namespace Network
 
     enum class SocketManagerPosition
     {
-        Event = 0,  // ÀàĞÍint
-        WrappersStrategy = 1,  // ÀàĞÍint
-        Error = 2,  // ÀàĞÍint
-        Port = 3,  // ÀàĞÍint
-        Address = 4,  // ÀàĞÍstring
-        Async = 5,  // ÀàĞÍint
-        BytesTransferred = 6,  // ÀàĞÍint
+        Event = 0,  // ç±»å‹int
+        WrappersStrategy = 1,  // ç±»å‹int
+        Error = 2,  // ç±»å‹int
+        Port = 3,  // ç±»å‹int
+        Address = 4,  // ç±»å‹string
+        Async = 5,  // ç±»å‹int
+        BytesTransferred = 6,  // ç±»å‹int
 
         Count,
     };

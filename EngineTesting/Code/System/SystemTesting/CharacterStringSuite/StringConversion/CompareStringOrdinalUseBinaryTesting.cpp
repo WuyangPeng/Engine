@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/11 14:23)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/11 14:23)
 
 #include "CompareStringOrdinalUseBinaryTesting.h"
 #include "System/CharacterString/Flags/StringConversionFlags.h"
@@ -21,29 +21,29 @@ System::CompareStringOrdinalUseBinaryTesting::CompareStringOrdinalUseBinaryTesti
 
 #ifdef SYSTEM_PLATFORM_WIN32
 
-          L"°¡",
-          L"°É",
-          L"³é",
-          L"µÄ",
-          L"¶î",
-          L"·¢",
-          L"¸ø",
-          L"ºú",
-          L"½±",
-          L"¿´",
-          L"ÁË",
-          L"Âğ",
-          L"Äã",
-          L"Å¶",
-          L"Æ½",
-          L"Æø",
-          L"ÈË",
-          L"ÊÇ",
-          L"Ëû",
-          L"ÎÒ",
-          L"Ïë",
-          L"Òª",
-          L"×ö",
+          L"å•Š",
+          L"å§",
+          L"æŠ½",
+          L"çš„",
+          L"é¢",
+          L"å‘",
+          L"ç»™",
+          L"èƒ¡",
+          L"å¥–",
+          L"çœ‹",
+          L"äº†",
+          L"å—",
+          L"ä½ ",
+          L"å“¦",
+          L"å¹³",
+          L"æ°”",
+          L"äºº",
+          L"æ˜¯",
+          L"ä»–",
+          L"æˆ‘",
+          L"æƒ³",
+          L"è¦",
+          L"åš",
           L"a",
           L"A",
           L"0"

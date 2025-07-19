@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	�汾��0.9.1.6 (2023/10/28 15:07)
+///	标准：std:c++20
+///	版本：0.9.1.6 (2023/10/28 15:07)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_CYLINDER3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_CYLINDER3_H
@@ -46,10 +46,10 @@ namespace Mathematics
         NODISCARD Plane3Type GetPlane() const noexcept;
         NODISCARD Cylinder3Type GetCylinder() const noexcept;
 
-        // �޳�֧�֡� ��׶̨����Ϊλ��ƽ������ࡣ ���Բ����λ��ƽ��ĸ��࣬�����޳���
+        // 剔除支持。 视锥台被认为位于平面的正侧。 如果圆柱体位于平面的负侧，则将其剔除。
         NODISCARD bool CylinderIsCulled() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        // *����*Բ�����ƽ��Ľ�����
+        // *无限*圆柱体和平面的交集。
         enum class CylinderPlaneIntersection
         {
             EmptySet,
@@ -61,27 +61,27 @@ namespace Mathematics
 
         NODISCARD CylinderPlaneIntersection GetType() const noexcept;
 
-        // ��GetType()����OneLineʱ��Ч��
+        // 当GetType()返回OneLine时有效。
         Line3Type GetOneLine() const noexcept;
 
-        // ��GetType()����TwoLinesʱ��Ч��
+        // 当GetType()返回TwoLines时有效。
         TwoLine GetTwoLines() const noexcept;
 
-        // ��GetType()����Circleʱ��Ч��
+        // 当GetType()返回Circle时有效。
         Circle3Type GetCircle() const noexcept;
 
-        // ��GetType()����Ellipseʱ��Ч��
+        // 当GetType()返回Ellipse时有效。
         Ellipse3Type GetEllipse() const noexcept;
 
     private:
-        // *����*Բ����ľ�̬�����ѯ��
+        // *无限*圆柱体的静态交点查询。
         void Find();
 
     private:
         Plane3Type plane;
         Cylinder3Type cylinder;
 
-        // Բ������ʱ���ཻ���á�
+        // 圆柱无限时的相交设置。
         CylinderPlaneIntersection type;
         Line3Type line0;
         Line3Type line1;

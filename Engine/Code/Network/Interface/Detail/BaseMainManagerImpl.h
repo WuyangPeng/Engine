@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 17:16)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 17:16)
 
 #ifndef NETWORK_INTERFACE_BASE_MAIN_MANAGER_IMPL_H
 #define NETWORK_INTERFACE_BASE_MAIN_MANAGER_IMPL_H
@@ -35,7 +35,7 @@ namespace Network
     public:
         virtual void Run() = 0;
 
-        // ·ÇboostÖ÷¹ÜÀíÀàÄ¬ÈÏÅ×³öÒì³£¡£
+        // éboostä¸»ç®¡ç†ç±»é»˜è®¤æŠ›å‡ºå¼‚å¸¸ã€‚
         NODISCARD virtual IoContextType& GetContext();
         virtual void StopContext();
         NODISCARD virtual bool IsContextStop() const;

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 22:10)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 22:10)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_SOURCE_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_SOURCE_H
@@ -38,7 +38,7 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        /// ¸Ãº¯Êı±ØĞë±»ÌØ»¯£¬ÒòÎªËüÃ»ÓĞÌá¹©Ò»¸öÄ¬ÈÏµÄÊµÏÖ¡£
+        /// è¯¥å‡½æ•°å¿…é¡»è¢«ç‰¹åŒ–ï¼Œå› ä¸ºå®ƒæ²¡æœ‰æä¾›ä¸€ä¸ªé»˜è®¤çš„å®ç°ã€‚
         template <typename T>
         void ReadAggregate(T& datum);
 
@@ -66,7 +66,7 @@ namespace CoreTools
         template <typename T, size_t Size>
         NODISCARD std::array<T, Size> ReadAggregateContainer();
 
-        /// ¶ÁÈ¡¶ÔÏóÖ¸Õë£¨uniqueIdÔÚ´ÅÅÌÉÏÎª[ÎŞĞ§]ÄÚ´æÖ¸Õë£©¡£
+        /// è¯»å–å¯¹è±¡æŒ‡é’ˆï¼ˆuniqueIdåœ¨ç£ç›˜ä¸Šä¸º[æ— æ•ˆ]å†…å­˜æŒ‡é’ˆï¼‰ã€‚
         template <typename T>
         requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType>)
         NODISCARD T ReadObjectAssociated();
@@ -99,7 +99,7 @@ namespace CoreTools
         requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType>)
         void ReadObjectAssociatedContainer(std::array<T, Size>& container);
 
-        /// ¶ÁÈ¡boolÖµÎª4×Ö½Ú
+        /// è¯»å–boolå€¼ä¸º4å­—èŠ‚
         NODISCARD bool ReadBool();
 
         template <typename T>
@@ -128,7 +128,7 @@ namespace CoreTools
         template <size_t Size>
         void ReadContainer(std::array<bool, Size>& container);
 
-        /// ¶ÁÈ¡×Ö·û´®£¬ÔÚ×Ö·û´®Ö®Ç°¶ÁÈ¡4¸ö×Ö½Ú´ú±í³¤¶È¡£Ã»ÓĞ¿ÕÖÕÖ¹·û¡£
+        /// è¯»å–å­—ç¬¦ä¸²ï¼Œåœ¨å­—ç¬¦ä¸²ä¹‹å‰è¯»å–4ä¸ªå­—èŠ‚ä»£è¡¨é•¿åº¦ã€‚æ²¡æœ‰ç©ºç»ˆæ­¢ç¬¦ã€‚
         NODISCARD std::string ReadString();
 
         template <typename T>
@@ -157,7 +157,7 @@ namespace CoreTools
         template <size_t Size>
         void ReadContainer(std::array<std::string, Size>& container);
 
-        /// Ô­ÉúÊı¾İ¶ÁÈ¡º¯Êı
+        /// åŸç”Ÿæ•°æ®è¯»å–å‡½æ•°
         template <typename T>
         requires(std::is_arithmetic_v<T>)
         NODISCARD T Read();
@@ -206,7 +206,7 @@ namespace CoreTools
         requires(std::is_arithmetic_v<T>)
         void ReadContainer(std::array<T, Size>& container);
 
-        /// ¶ÁÈ¡Ã¶¾ÙÖµÎª4¸ö×Ö½Ú¡£
+        /// è¯»å–æšä¸¾å€¼ä¸º4ä¸ªå­—èŠ‚ã€‚
         template <typename T>
         requires(std::is_enum_v<T>)
         NODISCARD T ReadEnum();
@@ -255,7 +255,7 @@ namespace CoreTools
         requires(std::is_enum_v<T>)
         void ReadEnumContainer(std::array<T, Size>& container);
 
-        /// °ïÖúº¯Êı
+        /// å¸®åŠ©å‡½æ•°
         NODISCARD int GetBytesRead() const noexcept;
         NODISCARD int GetBytesTotal() const;
         void IncrementBytesProcessed(int bytesNumber);

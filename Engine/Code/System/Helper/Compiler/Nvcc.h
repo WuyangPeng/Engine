@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 17:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 17:28)
 
 #ifndef SYSTEM_HELPER_NVCC_H
 #define SYSTEM_HELPER_NVCC_H
@@ -14,7 +14,7 @@
 
     #define TCRE_USE_NVCC
 
-    /// NVIDIA CUDA C++ ±àÒëÆ÷ÉèÖÃ£º
+    /// NVIDIA CUDA C++ ç¼–è¯‘å™¨è®¾ç½®ï¼š
 
     #if defined(__CUDACC_VER_MAJOR__) && defined(__CUDACC_VER_MINOR__) && defined(__CUDACC_VER_BUILD__)
 
@@ -22,7 +22,7 @@
 
     #else  // !(defined(__CUDACC_VER_MAJOR__) && defined(__CUDACC_VER_MINOR__) && defined(__CUDACC_VER_BUILD__))
 
-        /// ÎÒÃÇ²»ÖªµÀCUDA°æ±¾ÊÇÊ²Ã´£¬µ«ÊÇ¿Ï¶¨ÊÇÔÚ7.5Ö®Ç°µÄ°æ±¾£º
+        /// æˆ‘ä»¬ä¸çŸ¥é“CUDAç‰ˆæœ¬æ˜¯ä»€ä¹ˆï¼Œä½†æ˜¯è‚¯å®šæ˜¯åœ¨7.5ä¹‹å‰çš„ç‰ˆæœ¬ï¼š
         #define TCRE_CUDA_VERSION 7000000
 
     #endif  // defined(__CUDACC_VER_MAJOR__) && defined(__CUDACC_VER_MINOR__) && defined(__CUDACC_VER_BUILD__)
@@ -31,11 +31,11 @@
 
     #ifndef TCRE_SYSTEM_COMPILER
 
-        #define TCRE_SYSTEM_COMPILER "NVIDIA CUDA C++ ±àÒëÆ÷"
+        #define TCRE_SYSTEM_COMPILER "NVIDIA CUDA C++ ç¼–è¯‘å™¨"
 
     #endif  // TCRE_SYSTEM_COMPILER
 
-    /// NVIDIAÌØ¶¨Ö§³Ö£¨TCRE_GPU_ENABLED£©£º½«Ò»¸öº¯Êý»ò·½·¨±ê¼ÇÎªÔÚÖ÷»úºÍÉè±¸ÉÏÆôÓÃ
+    /// NVIDIAç‰¹å®šæ”¯æŒï¼ˆTCRE_GPU_ENABLEDï¼‰ï¼šå°†ä¸€ä¸ªå‡½æ•°æˆ–æ–¹æ³•æ ‡è®°ä¸ºåœ¨ä¸»æœºå’Œè®¾å¤‡ä¸Šå¯ç”¨
     #define TCRE_GPU_ENABLED __host__ __device__
 
 #endif  // defined(__CUDACC__)

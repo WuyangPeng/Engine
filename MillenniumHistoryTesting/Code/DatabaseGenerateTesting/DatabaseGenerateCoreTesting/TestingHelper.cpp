@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/25 22:14)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/25 22:14)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -14,7 +14,7 @@
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 
 DatabaseGenerateCoreTesting::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "Êı¾İ¿âÉú³ÉºËĞÄµ¥Ôª²âÊÔ" }
+    : ParentType{ argc, argv, "æ•°æ®åº“ç”Ÿæˆæ ¸å¿ƒå•å…ƒæµ‹è¯•" }
 {
     InitSuite();
 
@@ -33,14 +33,14 @@ void DatabaseGenerateCoreTesting::TestingHelper::InitSuite()
 
 void DatabaseGenerateCoreTesting::TestingHelper::AddHelperSuite()
 {
-    auto helperSuite = GenerateSuite("°ïÖú");
+    auto helperSuite = GenerateSuite("å¸®åŠ©");
 
     AddSuite(helperSuite);
 }
 
 void DatabaseGenerateCoreTesting::TestingHelper::AddConvertSuite(const AncientBooksContainer& ancientBooksContainer)
 {
-    auto convertSuite = GenerateSuite("×ª»»");
+    auto convertSuite = GenerateSuite("è½¬æ¢");
 
     ADD_TEST_USE_PARAMETER_1(convertSuite, ArticleConvertTesting, *ancientBooksContainer.GetArticleContainer());
     ADD_TEST_USE_PARAMETER_1(convertSuite, BookConvertTesting, *ancientBooksContainer.GetBookContainer());

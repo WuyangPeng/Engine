@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/13 16:12)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/13 16:12)
 
 #include "ConnectTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -44,7 +44,7 @@ void System::ConnectTesting::MainTest()
 void System::ConnectTesting::ConnectTest()
 {
     const auto socketHandle = CreateTcpSocket();
-    ASSERT_TRUE_FAILURE_THROW(IsSocketValid(socketHandle), "´´½¨Tcp SocketÊ§°Ü¡£");
+    ASSERT_TRUE_FAILURE_THROW(IsSocketValid(socketHandle), "åˆ›å»ºTcp Socketå¤±è´¥ã€‚");
 
     ASSERT_NOT_THROW_EXCEPTION_1(DoConnectTest, socketHandle);
 
@@ -105,6 +105,6 @@ void System::ConnectTesting::RecvTest(WinSocket socketHandle)
 
     } while (0 < recvCount);
 
-    GetStream() << "ÊÕµ½µÄÊı¾İÎª£º" << CoreTools::StringConversion::Utf8ConversionMultiByte(data) << "\n";
+    GetStream() << "æ”¶åˆ°çš„æ•°æ®ä¸ºï¼š" << CoreTools::StringConversion::Utf8ConversionMultiByte(data) << "\n";
     ASSERT_FALSE(data.empty());
 }

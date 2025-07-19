@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:51)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:51)
 
 #ifndef RENDERING_DETAIL_DLOD_NODE_H
 #define RENDERING_DETAIL_DLOD_NODE_H
@@ -32,13 +32,13 @@ namespace Rendering
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(DlodNode);
 
-        // ·ÃÎÊÖĞĞÄ(LOD)Ï¸½ÚµÈ¼¶¡£
+        // è®¿é—®ä¸­å¿ƒ(LOD)ç»†èŠ‚ç­‰çº§ã€‚
         NODISCARD APoint GetModelCenter() const noexcept;
         NODISCARD APoint GetWorldCenter() const noexcept;
 
         void SetModelCenter(const APoint& modelCenter) noexcept;
 
-        // »ñµÃ×Ó½ÚµãµÄ¾àÀë¼ä¸ô¡£
+        // è·å¾—å­èŠ‚ç‚¹çš„è·ç¦»é—´éš”ã€‚
         NODISCARD int GetNumLevelsOfDetail() const noexcept;
         NODISCARD float GetModelMinDistance(int index) const;
         NODISCARD float GetModelMaxDistance(int index) const;
@@ -47,11 +47,11 @@ namespace Rendering
         void SetModelDistance(int index, float minDistance, float maxDistance);
 
     protected:
-        // Ö§³Ö·Ö¼¶²Ã¼ô¡£
+        // æ”¯æŒåˆ†çº§è£å‰ªã€‚
         void GetVisibleSet(Culler& culler, const CameraSharedPtr& camera, bool noCull) override;
 
     private:
-        // ¿ª¹Ø»ùÓÚÀ´×ÔÊÀ½çLODÖĞĞÄ£¬ÒÔÉãÏñÍ·¾àÀëÑ¡Ôñ×Ó½Úµã¡£
+        // å¼€å…³åŸºäºæ¥è‡ªä¸–ç•ŒLODä¸­å¿ƒï¼Œä»¥æ‘„åƒå¤´è·ç¦»é€‰æ‹©å­èŠ‚ç‚¹ã€‚
         void SelectLevelOfDetail(const Camera& camera);
 
     private:

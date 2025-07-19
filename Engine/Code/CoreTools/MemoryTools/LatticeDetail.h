@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.2 (2024/10/15 10:44)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.2 (2024/10/15 10:44)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_LATTICE_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_LATTICE_DETAIL_H
@@ -309,7 +309,7 @@ int CoreTools::Lattice<OrderLToR>::GetIndex(IndexTypes... tuple) const
 
     if (sizes.empty() || sizes.size() != sizeof...(IndexTypes))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§Ë÷Òı²ÎÊı"));
+        THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆç´¢å¼•å‚æ•°"));
     }
 
     return MetaGetIndexLToR(tuple...);
@@ -323,7 +323,7 @@ int CoreTools::Lattice<OrderLToR>::GetIndex(const SizeType& coordinate) const
 
     if (sizes.empty() || sizes.size() != coordinate.size())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§Ë÷Òı²ÎÊı"));
+        THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆç´¢å¼•å‚æ•°"));
     }
 
     auto dimension = coordinate.size() - 1;
@@ -345,7 +345,7 @@ int CoreTools::Lattice<OrderLToR>::GetIndex(IndexTypes... tuple) const
 
     if (sizes.empty() || sizes.size() != sizeof...(IndexTypes))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§Ë÷Òı²ÎÊı"));
+        THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆç´¢å¼•å‚æ•°"));
     }
 
     using Type = std::tuple_element_t<0, std::tuple<IndexTypes...>>;
@@ -361,7 +361,7 @@ int CoreTools::Lattice<OrderLToR>::GetIndex(const SizeType& coordinate) const
 
     if (sizes.empty() || sizes.size() != coordinate.size())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§Ë÷Òı²ÎÊı"));
+        THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆç´¢å¼•å‚æ•°"));
     }
 
     auto dimension = 0u;
@@ -473,7 +473,7 @@ void CoreTools::Lattice<OrderLToR>::InternalReset(const Container& container)
 
     if (container.size() == 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÈİÆ÷´óĞ¡Îª¿Õ"));
+        THROW_EXCEPTION(SYSTEM_TEXT("å®¹å™¨å¤§å°ä¸ºç©º"));
     }
 
     numElements = 1;
@@ -482,7 +482,7 @@ void CoreTools::Lattice<OrderLToR>::InternalReset(const Container& container)
     {
         if (size <= 0)
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("Î¬¶È±ØĞëÎªÕıÊı¡£"));
+            THROW_EXCEPTION(SYSTEM_TEXT("ç»´åº¦å¿…é¡»ä¸ºæ­£æ•°ã€‚"));
         }
 
         numElements *= size;

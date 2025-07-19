@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 16:11)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 16:11)
 
 #include "ConvexPolygon2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -53,7 +53,7 @@ void Mathematics::ConvexPolygon2Testing::ConvexPolygonTest()
 
         Polygon2D::VerticesType vector2Ptr(size);
 
-        // x¡¢yÖµÎªÕı
+        // xã€yå€¼ä¸ºæ­£
         Vector2D firstVertex(randomDistribution0(generator), randomDistribution0(generator));
 
         std::uniform_real_distribution<double> randomDistribution1(0.0, firstVertex[0]);
@@ -61,29 +61,29 @@ void Mathematics::ConvexPolygon2Testing::ConvexPolygonTest()
         auto firstRandom = randomDistribution1(generator);
         auto secondRandom = randomDistribution0(generator);
 
-        // x¡¢yÖµÎªÕı
+        // xã€yå€¼ä¸ºæ­£
         Vector2D secondVertex(firstVertex[0] - firstRandom, firstVertex[1] + secondRandom);
 
-        // xÖµÎª¸º¡¢yÖµÎªÕı
+        // xå€¼ä¸ºè´Ÿã€yå€¼ä¸ºæ­£
         Vector2D thirdVertex(-secondVertex[0], secondVertex[1]);
 
-        // xÖµÎª¸º¡¢yÖµÎªÕı
+        // xå€¼ä¸ºè´Ÿã€yå€¼ä¸ºæ­£
         Vector2D fourthVertex(thirdVertex[0] - firstRandom, thirdVertex[1] - secondRandom);
 
-        // xÖµÎª¸º¡¢yÖµÎª¸º
+        // xå€¼ä¸ºè´Ÿã€yå€¼ä¸ºè´Ÿ
         Vector2D fifthVertex(fourthVertex[0], -fourthVertex[1]);
 
-        // xÖµÎª¸º¡¢yÖµÎª¸º
+        // xå€¼ä¸ºè´Ÿã€yå€¼ä¸ºè´Ÿ
         Vector2D sixthVertex(fifthVertex[0] + firstRandom, fifthVertex[1] - secondRandom);
 
-        // xÖµÎªÕı¡¢yÖµÎª¸º
+        // xå€¼ä¸ºæ­£ã€yå€¼ä¸ºè´Ÿ
         Vector2D seventhVertex(-sixthVertex[0], sixthVertex[1]);
 
-        // xÖµÎªÕı¡¢yÖµÎª¸º
+        // xå€¼ä¸ºæ­£ã€yå€¼ä¸ºè´Ÿ
         const Vector2D eighthVertex(seventhVertex[0] + firstRandom, seventhVertex[1] + secondRandom);
 
-        // ÓÉÓÚÊÇ²âÊÔ£¬Ã»ÓĞ¶ÔVector2PtrºÍlinePtr½øĞĞ³õÊ¼»¯£¬
-        // Ê¹ÓÃSetVertexºÍUpdateLines½øĞĞ¼ÆËã¡£
+        // ç”±äºæ˜¯æµ‹è¯•ï¼Œæ²¡æœ‰å¯¹Vector2Ptrå’ŒlinePtrè¿›è¡Œåˆå§‹åŒ–ï¼Œ
+        // ä½¿ç”¨SetVertexå’ŒUpdateLinesè¿›è¡Œè®¡ç®—ã€‚
         ConvexPolygon2D::LineType linePtr(size, Line2D{ Vector2D{}, Vector2D::GetUnitX() });
 
         ConvexPolygon2D firstPolygon{ vector2Ptr, linePtr };

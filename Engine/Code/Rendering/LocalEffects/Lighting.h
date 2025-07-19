@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2024/01/09 20:32)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2024/01/09 20:32)
 
 #ifndef RENDERING_SCENE_GRAPH_LIGHTING_H
 #define RENDERING_SCENE_GRAPH_LIGHTING_H
@@ -42,7 +42,7 @@ namespace Rendering
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Lighting);
 
-        // Ò»¸ö°ïÖúº¯Êı,ÔÊĞíÄúÉèÖÃangleºÍ×Ô¶¯¼ÆËãcosAngleºÍsinAngle¡£
+        // ä¸€ä¸ªå¸®åŠ©å‡½æ•°,å…è®¸æ‚¨è®¾ç½®angleå’Œè‡ªåŠ¨è®¡ç®—cosAngleå’ŒsinAngleã€‚
         void SetAngle(float angle);
 
         void SetExponent(float exponent) noexcept;

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.4 (2024/01/11 15:15)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 15:15)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_CONSOLE_MAIN_FUNCTION_HELPER_BASE_IMPL_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_CONSOLE_MAIN_FUNCTION_HELPER_BASE_IMPL_H
@@ -41,10 +41,10 @@ namespace Framework
     private:
         String consoleTitle;
 
-        // Ψһ�������в�������
+        // 唯一的命令行参数对象
         Command command;
 
-        // Ӧ�ó�����ĿĿ¼��·��
+        // 应用程序项目目录的路径
         String applicationProjectDirectory;
     };
 }

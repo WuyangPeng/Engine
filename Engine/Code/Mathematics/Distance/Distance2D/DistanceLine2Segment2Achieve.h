@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 15:16)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 15:16)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_LINE2_SEGMENT2_ACHIEVE_H
 #define MATHEMATICS_DISTANCE_DISTANCE_LINE2_SEGMENT2_ACHIEVE_H
@@ -64,7 +64,7 @@ typename Mathematics::DistanceLine2Segment2<Real>::DistanceResult Mathematics::D
 
     if (this->GetZeroThreshold() <= det)
     {
-        // Ö±ÏßºÍÏß¶Î²»Æ½ĞĞ¡£
+        // ç›´çº¿å’Œçº¿æ®µä¸å¹³è¡Œã€‚
         const auto rhsT = tool.GetRhsT();
         const auto rhsExtent = segment.GetExtent();
         const auto rhsExtentMultiplyDet = rhsExtent * det;
@@ -73,7 +73,7 @@ typename Mathematics::DistanceLine2Segment2<Real>::DistanceResult Mathematics::D
         {
             if (rhsT <= rhsExtentMultiplyDet)
             {
-                // Á½¸öÄÚ²¿µã×î½Ó½ü£¬Ò»¸öÔÚÖ±ÏßÉÏ£¬Ò»¸öÔÚÏß¶ÎÉÏ¡£
+                // ä¸¤ä¸ªå†…éƒ¨ç‚¹æœ€æ¥è¿‘ï¼Œä¸€ä¸ªåœ¨ç›´çº¿ä¸Šï¼Œä¸€ä¸ªåœ¨çº¿æ®µä¸Šã€‚
                 const auto lhsT = tool.GetLhsT();
 
                 return DistanceResult{ MathType::GetValue(0),
@@ -83,19 +83,19 @@ typename Mathematics::DistanceLine2Segment2<Real>::DistanceResult Mathematics::D
             }
             else
             {
-                // Ïß¶ÎµÄÖÕµãºÍÖ±ÏßµÄÄÚ²¿µã×î½Ó½ü¡£
+                // çº¿æ®µçš„ç»ˆç‚¹å’Œç›´çº¿çš„å†…éƒ¨ç‚¹æœ€æ¥è¿‘ã€‚
                 return GetSquaredWithClosestPoints(tool, rhsExtent);
             }
         }
         else
         {
-            // Ïß¶ÎµÄÆğµãºÍÖ±ÏßµÄÄÚ²¿µã×î½Ó½ü¡£
+            // çº¿æ®µçš„èµ·ç‚¹å’Œç›´çº¿çš„å†…éƒ¨ç‚¹æœ€æ¥è¿‘ã€‚
             return GetSquaredWithClosestPoints(tool, -rhsExtent);
         }
     }
     else
     {
-        // Ö±ÏßºÍÏß¶ÎÊÇÆ½ĞĞµÄ¡£ Ñ¡Ôñ×î½üµÄÒ»¶Ô£¬Ê¹µÃÒ»¸öµãÔÚÏß¶ÎÖĞµã¡£
+        // ç›´çº¿å’Œçº¿æ®µæ˜¯å¹³è¡Œçš„ã€‚ é€‰æ‹©æœ€è¿‘çš„ä¸€å¯¹ï¼Œä½¿å¾—ä¸€ä¸ªç‚¹åœ¨çº¿æ®µä¸­ç‚¹ã€‚
         return GetSquaredWithClosestPointsIsParallel(tool);
     }
 }

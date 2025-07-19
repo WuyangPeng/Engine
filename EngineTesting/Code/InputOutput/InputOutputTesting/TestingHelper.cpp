@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.3 (2023/08/02 13:43)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.3 (2023/08/02 13:43)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -16,7 +16,7 @@
 using namespace std::literals;
 
 InputOutput::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "ÊäÈëÊä³ö¿â"s }
+    : ParentType{ argc, argv, "è¾“å…¥è¾“å‡ºåº“"s }
 {
     InitSuite();
 
@@ -35,28 +35,28 @@ void InputOutput::TestingHelper::InitSuite()
 
 void InputOutput::TestingHelper::AddHelperSuite()
 {
-    auto helperSuite = GenerateSuite("°ïÖú");
+    auto helperSuite = GenerateSuite("å¸®åŠ©");
 
     AddSuite(helperSuite);
 }
 
 void InputOutput::TestingHelper::AddConfigurationSuite()
 {
-    auto configurationSuite = GenerateSuite("ÅäÖÃ");
+    auto configurationSuite = GenerateSuite("é…ç½®");
 
     AddSuite(configurationSuite);
 }
 
 void InputOutput::TestingHelper::AddInputInterfaceSuite()
 {
-    auto inputInterfaceSuite = GenerateSuite("ÊäÈë½Ó¿Ú");
+    auto inputInterfaceSuite = GenerateSuite("è¾“å…¥æ¥å£");
 
     AddSuite(inputInterfaceSuite);
 }
 
 void InputOutput::TestingHelper::AddOutputInterfaceSuite()
 {
-    auto outputInterfaceSuite = GenerateSuite("Êä³ö½Ó¿Ú");
+    auto outputInterfaceSuite = GenerateSuite("è¾“å‡ºæ¥å£");
 
     AddSuite(outputInterfaceSuite);
 }

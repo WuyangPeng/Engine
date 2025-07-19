@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.8 (2024/04/11 14:37)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/11 14:37)
 
 #ifndef CORE_TOOLS_DATA_TYPE_MIN_HEAP_H
 #define CORE_TOOLS_DATA_TYPE_MIN_HEAP_H
@@ -18,24 +18,24 @@
 #include <type_traits>
 #include <vector>
 
-/// ��С����һ�ֶ���������ڵ����Ȩ�أ����Ҿ��и��ڵ��Ȩ��С�ڻ�������ӽڵ��Ȩ�ص�Լ����
-/// �����ݽṹ�����������ȼ����С�
-/// ���std::priority_queue�ӿ�������������������ʹ������
-/// Ȼ��������ĳЩ�����㷨��˵���ýӿڲ�����ʵ��������ܡ�
-/// ���磬���Ҫ�����߶�����г�ȡ����ÿ�������Ȩ��ȡ���������ڶ����λ�á�
-/// �����СȨ�ض������С����ɾ���������������ڶ����Ȩ�ء���
-/// ��������洢Ϊ˫����ʱ������O(1)ʱ�䡣
-/// ���ڶ����Ѿ�����С���У�����޸����ǵ�Ȩ�ض�������С�����Ƴ���
-/// Ȼ�����²��뵽��С������Ҫ�������ƶ����ʵ���λ�ã��Իָ���С�ѵĲ�������
-/// ʹ��std::priority_queue�����޷�ֱ�ӷ����޸ĺ�Ķ��㣬
-/// ����ʹ��������Щ���㣬ɾ�����ǣ��������ǵ�Ȩ�أ�Ȼ�����²������ǡ�
-/// �������С��ʵ��֧�ָ��£��������Ƴ������²��롣
+/// 最小堆是一种二叉树，其节点具有权重，并且具有父节点的权重小于或等于其子节点的权重的约束。
+/// 该数据结构可以用作优先级队列。
+/// 如果std::priority_queue接口足以满足您的需求，请使用它。
+/// 然而，对于某些几何算法来说，该接口不足以实现最佳性能。
+/// 例如，如果要对折线顶点进行抽取，则每个顶点的权重取决于其相邻顶点的位置。
+/// 如果最小权重顶点从最小堆中删除，则必须更新相邻顶点的权重——
+/// 当将顶点存储为双链表时，这是O(1)时间。
+/// 相邻顶点已经在最小堆中，因此修改它们的权重而不从最小堆中移除，
+/// 然后重新插入到最小堆中需要将它们移动到适当的位置，以恢复最小堆的不变量。
+/// 使用std::priority_queue，您无法直接访问修改后的顶点，
+/// 这迫使您搜索这些顶点，删除它们，更新它们的权重，然后重新插入它们。
+/// 这里的最小堆实现支持更新，而无需移除和重新插入。
 ///
-/// ValueType��ʾȨ�أ�������֧�ֱȽ�"<" �� "<="��
-/// ������Ϣ���洢ΪKeyType�����洢����С���У��Է�����ʡ�
-/// �ڣ����ţ����߳�ȡʾ���У�KeyType��һ�ִ洢���㼰�����ڶ��������Ľṹ��
-/// ����Ĵ���˵������С�ѵĴ�����ʹ�á�
-/// Weight()��������ѡ�������ָ���ȴ�������ɾ����Щ����ĺ�����
+/// ValueType表示权重，它必须支持比较"<" 和 "<="。
+/// 附加信息被存储为KeyType，并存储在最小堆中，以方便访问。
+/// 在（开放）折线抽取示例中，KeyType是一种存储顶点及其相邻顶点索引的结构。
+/// 下面的代码说明了最小堆的创建和使用。
+/// Weight()函数是您选择的用于指导先从折线中删除哪些顶点的函数。
 ///
 ///    struct Vertex
 ///    {
@@ -44,9 +44,9 @@
 ///        int next;
 ///    };
 ///
-///    int numVertices = <���߶�����>;
+///    int numVertices = <折线顶点数>;
 ///    std::vector<Vector<N, Real>> positions(numVertices);
-///    <��������λ��[*]>;
+///    <分配所有位置[*]>;
 ///    MinHeap<Vertex, Real> minHeap{ numVertices };
 ///    std::vector<int> records(numVertices);
 ///    for (auto i = 0; i < numVertices; ++i)
@@ -61,18 +61,18 @@
 ///    while (minHeap.GetNumElements() >= 2)
 ///    {
 ///        MinHeapRecordType minHeapRecord = minHeap.Remove();
-///        <����Ӧ�ó������Ҫʹ��'vertex'>;
+///        <根据应用程序的需要使用'vertex'>;
 ///
 ///        Vertex vertex = minHeapRecord.GetHandle();
 ///
-///        // ��˫�����б���ɾ��'vertex'��
+///        // 从双链接列表中删除'vertex'。
 ///        Vertex vertexPrevious = minHeap.GetHandle(records.at(vertex.previous));
 ///        Vertex vertexCurrent = minHeap.GetHandle(records.at(vertex.current));
 ///        Vertex vertexNext = minHeap.GetHandle(records.at(vertex.next));
 ///        vertexPrevious.next = vertexCurrent.next;
 ///        vertexNext.previous = vertexCurrent.previous;
 ///
-///        // ������С�����ھӵ�Ȩ�ء�
+///        // 更新最小堆中邻居的权重。
 ///        minHeap.Update(records.at(vertex.previous), Weight(positions, vertexPrevious));
 ///        minHeap.Update(records.at(vertex.next), Weight(positions, vertexNext));
 ///    }
@@ -90,43 +90,43 @@ namespace CoreTools
     public:
         explicit MinHeap(int maxElements);
 
-        /// ֧�ֵ��ԡ������������ݽṹ�Ƿ�����Ч����С�ѡ�
+        /// 支持调试。函数测试数据结构是否是有效的最小堆。
         NODISCARD bool IsValid() const noexcept;
         NODISCARD bool IsValid(int childIndex) const;
 
-        /// �����С�ѣ�ʹ�����ָ�������Ԫ�أ�
-        /// numElementsΪ�㣬keys����Ϊrecords����Ȼ˳��
+        /// 清除最小堆，使其具有指定的最大元素，
+        /// numElements为零，keys设置为records的自然顺序。
         void Reset(int maxElements);
 
-        // ��ȡ��С�������������Ԫ������
+        // 获取最小堆中允许的最大元素数。
         NODISCARD int GetMaxElements() const;
 
-        // ��ȡ��С���еĵ�ǰԪ��������������{0..maxElements}�ķ�Χ�ڡ�
+        // 获取最小堆中的当前元素数。此数字在{0..maxElements}的范围内。
         NODISCARD int GetNumElements() const noexcept;
 
-        /// ��ȡ��С�ѵĸ����ú�����ȡ������������С����ɾ��Ԫ�ء�
-        /// �������ص���MinHeapRecord��
-        /// �����С�Ѳ�Ϊ�գ���MinHeapRecord�е�'index'��Ч�� 'weight'��Ӧ����С�ѵĸ���'handle'���û�Ϊ��ӦӦ�ó�������ṩ�ı�ʶ����
-        /// �����С��Ϊ�գ����׳��쳣��
+        /// 获取最小堆的根。该函数读取根，但不从最小堆中删除元素。
+        /// 函数返回的是MinHeapRecord。
+        /// 如果最小堆不为空，则MinHeapRecord中的'index'有效， 'weight'对应于最小堆的根，'handle'是用户为相应应用程序对象提供的标识符。
+        /// 如果最小堆为空，则抛出异常。
         NODISCARD MinHeapRecordType GetMinimum() const;
 
-        /// ����handle��weight��������С���С���������Ϊ'index'������ڲ���֮ǰ��С��δ������'index'����Ч�ģ����ң�handle��weight���洢����Ӧ�Ľڵ��С�
-        /// ����ڲ���֮ǰ��С�����������׳��쳣�����Ҳ��޸���С�ѡ�����ɹ���'index'�����Ժ��ڵ���Updateʱʹ�á�
-        /// ���磬�����߳�ȡʾ����ʾ���뽫'index'���ݸ�Update��
+        /// 将（handle、weight）插入最小堆中。函数返回为'index'。如果在插入之前最小堆未满，则'index'是有效的，并且（handle，weight）存储在相应的节点中。
+        /// 如果在插入之前最小堆已满，则抛出异常，并且不修改最小堆。插入成功后，'index'可以稍后在调用Update时使用。
+        /// 例如，如折线抽取示例所示，请将'index'传递给Update：
         /// auto index = minHeap.Insert(key, value);
-        ///    <���κ���>;
+        ///    <做任何事>;
         ///    minHeap.Update(index, newValue);
         NODISCARD int Insert(const KeyType& handle, const ValueType& weight);
 
-        /// �Ƴ�������СȨ�ص���С�ѵĸ����������ص���MinHeapRecord��
-        /// �����С����ɾ��֮ǰ��Ϊ�գ���MinHeapRecord���'index'����Ч�ģ����Ҷ�Ӧ�ڴ洢�Ľڵ㣨handle��weight����
-        /// ���ɾ��ǰ��С��Ϊ�գ����׳��쳣���������ɹ������Ҳ��޸���С�ѡ�
-        /// ��������Ŀ�����õ�����ʹ��'index'�����ڱ�Ҫʱ�����κ��������޸ĵ���֮ǰ������'index'�������κ���Դ��
+        /// 移除包含最小权重的最小堆的根。函数返回的是MinHeapRecord。
+        /// 如果最小堆在删除之前不为空，则MinHeapRecord里的'index'是有效的，并且对应于存储的节点（handle，weight）。
+        /// 如果删除前最小堆为空，则抛出异常，操作不成功，并且不修改最小堆。
+        /// 这样做的目的是让调用者使用'index'，并在必要时，在任何其他堆修改调用之前清理与'index'关联的任何资源。
         NODISCARD MinHeapRecordType Remove();
 
-        /// ��С�ѽڵ��ֵ����ͨ���˺������ý����޸ġ��������ǽ����������ָ�Ϊ��С�ѡ�
-        /// ����'index' Ӧ����ͨ������"index = Insert(handle, oldWeight)"���صļ���
-        /// ����'weight'��Ҫ��ü����;������������ֵ��
+        /// 最小堆节点的值必须通过此函数调用进行修改。副作用是将二进制树恢复为最小堆。
+        /// 输入'index' 应该是通过调用"index = Insert(handle, oldWeight)"返回的键。
+        /// 输入'weight'是要与该键（和句柄）关联的新值。
         void Update(int index, const ValueType& weight);
 
         NODISCARD MinHeapRecordType GetRecord(int index) const;
@@ -146,14 +146,14 @@ namespace CoreTools
         NODISCARD int GetMaxChildIndex(int childIndex);
 
     private:
-        /// ʹ�������洢ϵͳ��pointers���������á�
-        /// ���ȣ����Ƕ�ÿ�������ֵ����Ψһ�ģ��Ա�֧����С�ѵ�Update()���ܡ�
-        /// ��Σ����Ǳ������ڶ��н�������ʱ��Record�������Ǳ�ڵİ����ơ�
+        /// 使用两级存储系统。pointers有两个作用。
+        /// 首先，它们对每个插入的值都是唯一的，以便支持最小堆的Update()功能。
+        /// 其次，它们避免了在堆中进行排序时对Record对象进行潜在的昂贵复制。
 
-        /// ֧�ֶ��������˽ṹ������
+        /// 支持二叉树拓扑结构和排序。
         int numElements;
 
-        /// ���������ڵ��ϵ��û�ָ����Ϣ��
+        /// 二进制树节点上的用户指定信息。
         MinHeapRecordContainer records;
 
         KeysContainer pointers;

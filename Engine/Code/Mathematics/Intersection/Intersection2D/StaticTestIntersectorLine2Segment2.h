@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:54)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:54)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_SEGMENT2_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_SEGMENT2_H
@@ -38,30 +38,30 @@ namespace Mathematics
         NODISCARD Line2Type GetLine() const noexcept;
         NODISCARD Segment2Type GetSegment() const noexcept;
 
-        // Ïà½»²âÊÔÊ¹ÓÃÏß¶ÎµÄÖĞĞÄ-·¶Î§ĞÎÊ½¡£
-        // Èç¹û´Ó¶Ëµã£¨Vector2Type<Real>£©¿ªÊ¼²¢´´½¨ Segment2<Real>¶ÔÏó£¬
-        // Ôòµ½ÖĞĞÄ-·¶Î§¸ñÊ½µÄ×ª»»¿ÉÄÜ°üº¬Ğ¡µÄÊı×ÖÉáÈëÎó²î¡£
-        // ²âÊÔÏà½»Ò»¸ö¶ËµãµÄÁ½¸öÏß¶ÎµÄ½»¼¯¿ÉÄÜÓÉÓÚÉáÈëÎó²î¶øµ¼ÖÂÊ§°Ü¡£
-        // Îª´Ë£¬Äú¿ÉÒÔÖ¸¶¨Ò»¸öĞ¡µÄÕıãĞÖµ£¬ÉÔÎ¢·Å´óÏß¶ÎµÄ¼ä¸ô¡£ Ä¬ÈÏÖµÎªÁã¡£
+        // ç›¸äº¤æµ‹è¯•ä½¿ç”¨çº¿æ®µçš„ä¸­å¿ƒ-èŒƒå›´å½¢å¼ã€‚
+        // å¦‚æœä»ç«¯ç‚¹ï¼ˆVector2Type<Real>ï¼‰å¼€å§‹å¹¶åˆ›å»º Segment2<Real>å¯¹è±¡ï¼Œ
+        // åˆ™åˆ°ä¸­å¿ƒ-èŒƒå›´æ ¼å¼çš„è½¬æ¢å¯èƒ½åŒ…å«å°çš„æ•°å­—èˆå…¥è¯¯å·®ã€‚
+        // æµ‹è¯•ç›¸äº¤ä¸€ä¸ªç«¯ç‚¹çš„ä¸¤ä¸ªçº¿æ®µçš„äº¤é›†å¯èƒ½ç”±äºèˆå…¥è¯¯å·®è€Œå¯¼è‡´å¤±è´¥ã€‚
+        // ä¸ºæ­¤ï¼Œæ‚¨å¯ä»¥æŒ‡å®šä¸€ä¸ªå°çš„æ­£é˜ˆå€¼ï¼Œç¨å¾®æ”¾å¤§çº¿æ®µçš„é—´éš”ã€‚ é»˜è®¤å€¼ä¸ºé›¶ã€‚
         NODISCARD Real GetIntervalThreshold() const noexcept;
 
-        // Ïà½»¼¯¡£ÈÃ q = GetQuantity()¡£Çé¿öÊÇ£º
-        //   q = 0: Ö±Ïß-Ïß¶Î²»Ïà½»£¬ GetIntersection() ·µ»ØIntersectionType::Empty¡£
-        //   q = 1: Ö±Ïß-Ïß¶ÎÏà½»ÓÚÒ»¸öµã¡£GetIntersection()·µ»ØIntersectionType::Point¡£
-        //   q = 2: Ö±Ïß-Ïß¶ÎÊÇÖØµşµÄÇÒÏà½»ÊÇÏß¶Î¡£
-        //          GetIntersection()·µ»ØIntersectionType::Segment¡£
+        // ç›¸äº¤é›†ã€‚è®© q = GetQuantity()ã€‚æƒ…å†µæ˜¯ï¼š
+        //   q = 0: ç›´çº¿-çº¿æ®µä¸ç›¸äº¤ï¼Œ GetIntersection() è¿”å›IntersectionType::Emptyã€‚
+        //   q = 1: ç›´çº¿-çº¿æ®µç›¸äº¤äºä¸€ä¸ªç‚¹ã€‚GetIntersection()è¿”å›IntersectionType::Pointã€‚
+        //   q = 2: ç›´çº¿-çº¿æ®µæ˜¯é‡å çš„ä¸”ç›¸äº¤æ˜¯çº¿æ®µã€‚
+        //          GetIntersection()è¿”å›IntersectionType::Segmentã€‚
         NODISCARD int GetQuantity() const noexcept;
 
     private:
-        // ¾²Ì¬²éÕÒÏà½»²éÑ¯¡£
+        // é™æ€æŸ¥æ‰¾ç›¸äº¤æŸ¥è¯¢ã€‚
         void Test();
 
     private:
-        // ÒªÏà½»µÄ¶ÔÏó¡£
+        // è¦ç›¸äº¤çš„å¯¹è±¡ã€‚
         Line2Type line;
         Segment2Type segment;
 
-        // Ïà½»¼¯
+        // ç›¸äº¤é›†
         int quantity;
 
         Real intervalThreshold;

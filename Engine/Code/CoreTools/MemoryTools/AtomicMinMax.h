@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.2 (2024/10/14 10:52)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.2 (2024/10/14 10:52)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_ATOMIC_MIN_MAX_H
 #define CORE_TOOLS_MEMORY_TOOLS_ATOMIC_MIN_MAX_H
@@ -14,11 +14,11 @@
 
 namespace CoreTools
 {
-    /// º¯Êı·µ»ØÊ±£¬atomic = min(atomic,value)£¬·µ»ØÖµÊÇ´«µİ¸øº¯ÊıµÄatomicµÄÔ­Ê¼Öµ¡£
+    /// å‡½æ•°è¿”å›æ—¶ï¼Œatomic = min(atomic,value)ï¼Œè¿”å›å€¼æ˜¯ä¼ é€’ç»™å‡½æ•°çš„atomicçš„åŸå§‹å€¼ã€‚
     template <typename T>
     T AtomicMin(std::atomic<T>& atomic, const T& value) noexcept;
 
-    /// º¯Êı·µ»ØÊ±£¬atomic = max(atomic,value)£¬·µ»ØÖµÊÇ´«µİ¸øº¯ÊıµÄatomicµÄÔ­Ê¼Öµ¡£
+    /// å‡½æ•°è¿”å›æ—¶ï¼Œatomic = max(atomic,value)ï¼Œè¿”å›å€¼æ˜¯ä¼ é€’ç»™å‡½æ•°çš„atomicçš„åŸå§‹å€¼ã€‚
     template <typename T>
     T AtomicMax(std::atomic<T>& atomic, const T& value) noexcept;
 }

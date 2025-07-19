@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/17 10:17)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/17 10:17)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_VIEW_MIDDLE_LAYER_IMPL_H
 #define FRAMEWORK_MIDDLE_LAYER_VIEW_MIDDLE_LAYER_IMPL_H
@@ -58,8 +58,8 @@ namespace Framework
         SYSTEM_NORETURN static void ThrowException();
 
     private:
-        /// Ê¹ÓÃGPUµÄ´°¿ÚÓ¦ÓÃ³ÌÐò±ØÐëÉèÖÃËüÃÇ¡£
-        /// ²»Ê¹ÓÃGPUµÄ¿ØÖÆÌ¨Ó¦ÓÃ³ÌÐò¿ÉÄÜ²»ÐèÒªÉèÖÃËüÃÇ¡£
+        /// ä½¿ç”¨GPUçš„çª—å£åº”ç”¨ç¨‹åºå¿…é¡»è®¾ç½®å®ƒä»¬ã€‚
+        /// ä¸ä½¿ç”¨GPUçš„æŽ§åˆ¶å°åº”ç”¨ç¨‹åºå¯èƒ½ä¸éœ€è¦è®¾ç½®å®ƒä»¬ã€‚
         RendererSharedPtr renderer;
         ProgramFactorySharedPtr programFactory;
     };

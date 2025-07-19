@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:26)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:26)
 
 #ifndef MATHEMATICS_APPROXIMATION_HEIGHT_PLANE_FIT3_H
 #define MATHEMATICS_APPROXIMATION_HEIGHT_PLANE_FIT3_H
@@ -18,8 +18,8 @@
 
 namespace Mathematics
 {
-    // ×îÐ¡¶þ³ËÆ½ÃæµÄÄâºÏµ½(x,y,f(x,y))Í¨¹ýÊ¹ÓÃÔÚz·½Ïò¾àÀë²âÁ¿Êý¾Ý¡£
-    // ÓÉ´Ë²úÉúµÄÆ½ÃæÓÉz = A*x + B*y + C±íÊ¾¡£
+    // æœ€å°äºŒä¹˜å¹³é¢çš„æ‹Ÿåˆåˆ°(x,y,f(x,y))é€šè¿‡ä½¿ç”¨åœ¨zæ–¹å‘è·ç¦»æµ‹é‡æ•°æ®ã€‚
+    // ç”±æ­¤äº§ç”Ÿçš„å¹³é¢ç”±z = A*x + B*y + Cè¡¨ç¤ºã€‚
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE HeightPlaneFit3 final
     {
@@ -35,8 +35,8 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        // Èç¹ûÔÚÏßÐÔÏµÍ³ÖÐµÄ3¡Á3ÏµÊý¾ØÕóµÄ¶¨ÒåA£¬B£¬CÊÇ£¨¼¸ºõ£©µ¥ÊýµÄÕâ¸öÇé¿öÏÂ£¬
-        // ·µ»ØÖµÊÇ¡°¼Ù¡±¡£
+        // å¦‚æžœåœ¨çº¿æ€§ç³»ç»Ÿä¸­çš„3Ã—3ç³»æ•°çŸ©é˜µçš„å®šä¹‰Aï¼ŒBï¼ŒCæ˜¯ï¼ˆå‡ ä¹Žï¼‰å•æ•°çš„è¿™ä¸ªæƒ…å†µä¸‹ï¼Œ
+        // è¿”å›žå€¼æ˜¯â€œå‡â€ã€‚
         NODISCARD bool IsFit3Success() const noexcept;
 
         NODISCARD Real GetCoeffA() const;

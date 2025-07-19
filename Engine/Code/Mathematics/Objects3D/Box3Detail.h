@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 10:46)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 10:46)
 
 #ifndef MATHEMATICS_OBJECTS_3D_BOX3_DETAIL_H
 #define MATHEMATICS_OBJECTS_3D_BOX3_DETAIL_H
@@ -89,7 +89,7 @@ typename Mathematics::Box3<Real>::VerticesType Mathematics::Box3<Real>::ComputeV
                          center + extAxis0 + extAxis1 + extAxis2,
                          center - extAxis0 + extAxis1 + extAxis2 };
 
-    MATHEMATICS_ASSERTION_1(vertex.size() == 8, "·µ»ØµÄ¶¥µãÊıÄ¿²»ÕıÈ·£¡");
+    MATHEMATICS_ASSERTION_1(vertex.size() == 8, "è¿”å›çš„é¡¶ç‚¹æ•°ç›®ä¸æ­£ç¡®ï¼");
 
     return vertex;
 }

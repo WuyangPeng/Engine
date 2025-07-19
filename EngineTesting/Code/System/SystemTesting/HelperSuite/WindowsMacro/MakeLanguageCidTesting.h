@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/08 09:55)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/08 09:55)
 
 #ifndef SYSTEM_TESTING_HELPER_SUITE_MAKE_LANGUAGE_CID_TESTING_H
 #define SYSTEM_TESTING_HELPER_SUITE_MAKE_LANGUAGE_CID_TESTING_H
@@ -17,7 +17,7 @@
 
 namespace System
 {
-    /// @brief MakeLanguageCidº¯ÊıµÄ²âÊÔÌ×¼ş¡£
+    /// @brief MakeLanguageCidå‡½æ•°çš„æµ‹è¯•å¥—ä»¶ã€‚
     class MakeLanguageCidTesting final : public CoreTools::UnitTest
     {
     public:

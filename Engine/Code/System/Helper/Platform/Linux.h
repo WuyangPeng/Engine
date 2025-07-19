@@ -1,44 +1,44 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 19:54)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 19:54)
 
 #ifndef SYSTEM_HELPER_LINUX_H
 #define SYSTEM_HELPER_LINUX_H
 
 #if (defined(linux) || defined(__linux) || defined(__linux__) || defined(__GNU__) || defined(__GLIBC__)) && !defined(_CRAYC)
 
-    ///  linux ¾ßÌåÅäÖÃÑ¡Ïî£º
+    ///  linux å…·ä½“é…ç½®é€‰é¡¹ï¼š
 
     #define TCRE_SYSTEM_PLATFORM "linux"
     #define SYSTEM_PLATFORM_LINUX static_cast<void>(0)
 
-    // Èç¹û¿ÉÓÃ,È·±£ÎÒÃÇÓĞ__GLIBC_PREREQ
+    // å¦‚æœå¯ç”¨,ç¡®ä¿æˆ‘ä»¬æœ‰__GLIBC_PREREQ
     #include <cstdlib>
 
-    // PC Linux Æ½Ì¨
+    // PC Linux å¹³å°
     #if !defined(__LINUX__) && defined(__linux__)
 
-        /// ÏÔÈ»£¬Ğí¶àPC Linux°æ±¾¶¨Òå__linux__£¬
-        /// µ«ÊÇÎÒÃÇÊ¹ÓÃ__LINUX__
-        /// ÎªÁË±ÜÃâÆÆ»µ´úÂëÍ¨¹ı__LINUX__Ìæ»»__linux__£¬
-        /// ÎÒÃÇÖ»¶¨Òå__LINUX__¡£
+        /// æ˜¾ç„¶ï¼Œè®¸å¤šPC Linuxç‰ˆæœ¬å®šä¹‰__linux__ï¼Œ
+        /// ä½†æ˜¯æˆ‘ä»¬ä½¿ç”¨__LINUX__
+        /// ä¸ºäº†é¿å…ç ´åä»£ç é€šè¿‡__LINUX__æ›¿æ¢__linux__ï¼Œ
+        /// æˆ‘ä»¬åªå®šä¹‰__LINUX__ã€‚
         #define __LINUX__
 
     #endif  // __LINUX__
 
-    /// Ö§³Ö±ê×¼µÄÕûÊıÀàĞÍ¡£
+    /// æ”¯æŒæ ‡å‡†çš„æ•´æ•°ç±»å‹ã€‚
     #include <inttypes.h>
 
     #define SYSTEM_LITTLE_ENDIAN static_cast<void>(0)
 
     #ifndef __GNUC__
 
-        /// Èç¹û±àÒëÆ÷²»ÊÇgcc£¬ÎÒÃÇÈÔÈ»ĞèÒªÄÜ¹»½âÎöGNUÏµÍ³Í·£¬ÆäÖĞÒ»Ğ©£¨Ö÷ÒªÊÇ<stdint.h>£©Ê¹ÓÃGNUÌØ¶¨µÄÀ©Õ¹£º
+        /// å¦‚æœç¼–è¯‘å™¨ä¸æ˜¯gccï¼Œæˆ‘ä»¬ä»ç„¶éœ€è¦èƒ½å¤Ÿè§£æGNUç³»ç»Ÿå¤´ï¼Œå…¶ä¸­ä¸€äº›ï¼ˆä¸»è¦æ˜¯<stdint.h>ï¼‰ä½¿ç”¨GNUç‰¹å®šçš„æ‰©å±•ï¼š
 
         #ifndef __extension__
 

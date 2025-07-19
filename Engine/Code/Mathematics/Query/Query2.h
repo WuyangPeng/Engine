@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:35)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:35)
 
 #ifndef MATHEMATICS_QUERY_QUERY2_H
 #define MATHEMATICS_QUERY_QUERY2_H
@@ -31,7 +31,7 @@ namespace Mathematics
         using VerticesType = std::vector<Vector2Type>;
 
     public:
-        // »ùÀà´¦Àí¸¡µã²éÑ¯¡£
+        // åŸºç±»å¤„ç†æµ®ç‚¹æŸ¥è¯¢ã€‚
         explicit Query2(VerticesType vertices) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -41,31 +41,31 @@ namespace Mathematics
         NODISCARD int GetNumVertices() const;
         NODISCARD Vector2Type GetVertex(int index) const;
 
-        // ¹ØÓÚÒ»¸öµãµÄ¸÷ÖÖ¼¸ºÎ¶ÔÏóÖ®¼äµÄ¹ØÏµ²éÑ¯¡£
+        // å…³äºä¸€ä¸ªç‚¹çš„å„ç§å‡ ä½•å¯¹è±¡ä¹‹é—´çš„å…³ç³»æŸ¥è¯¢ã€‚
 
-        // ·µ»Ø:
-        //   LineQueryType::Right, ÔÚÏßµÄÓÒ²à
-        //   LineQueryType::Left, ÔÚÏßµÄ×ó²à
-        //   LineQueryType::OnLine, ÔÚÏßÉÏ
+        // è¿”å›:
+        //   LineQueryType::Right, åœ¨çº¿çš„å³ä¾§
+        //   LineQueryType::Left, åœ¨çº¿çš„å·¦ä¾§
+        //   LineQueryType::OnLine, åœ¨çº¿ä¸Š
         NODISCARD virtual LineQueryType ToLine(int index, int lhsVerticesIndex, int rhsVerticesIndex) const;
         NODISCARD virtual LineQueryType ToLine(const Vector2Type& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const;
 
-        // ·µ»Ø:
-        // TriangleQueryType::Outside, ÔÚÈı½ÇĞÎÍâ
-        // TriangleQueryType::Inside, ÔÚÈı½ÇĞÎÄÚ
-        // TriangleQueryType::OnTriangle, ÔÚÈı½ÇĞÎÉÏ
+        // è¿”å›:
+        // TriangleQueryType::Outside, åœ¨ä¸‰è§’å½¢å¤–
+        // TriangleQueryType::Inside, åœ¨ä¸‰è§’å½¢å†…
+        // TriangleQueryType::OnTriangle, åœ¨ä¸‰è§’å½¢ä¸Š
         NODISCARD virtual TriangleQueryType ToTriangle(int index, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const;
         NODISCARD virtual TriangleQueryType ToTriangle(const Vector2Type& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const;
 
-        // ·µ»Ø:
-        // CircumcircleQueryType::Outside,ÔÚÈı½ÇĞÎµÄÍâ½ÓÔ²Íâ
-        // CircumcircleQueryType::Inside, ÔÚÈı½ÇĞÎµÄÍâ½ÓÔ²ÄÚ
-        // CircumcircleQueryType::OnCircumcircle,ÔÚÈı½ÇĞÎµÄÍâ½ÓÔ²ÉÏ
+        // è¿”å›:
+        // CircumcircleQueryType::Outside,åœ¨ä¸‰è§’å½¢çš„å¤–æ¥åœ†å¤–
+        // CircumcircleQueryType::Inside, åœ¨ä¸‰è§’å½¢çš„å¤–æ¥åœ†å†…
+        // CircumcircleQueryType::OnCircumcircle,åœ¨ä¸‰è§’å½¢çš„å¤–æ¥åœ†ä¸Š
         NODISCARD virtual CircumcircleQueryType ToCircumcircle(int index, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const;
         NODISCARD virtual CircumcircleQueryType ToCircumcircle(const Vector2Type& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const;
 
     private:
-        // ÊäÈëµã
+        // è¾“å…¥ç‚¹
         VerticesType vertices;
     };
 

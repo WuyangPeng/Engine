@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:17)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:17)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_AMEND_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_AMEND_DETAIL_H
@@ -38,13 +38,13 @@ void Mathematics::IntegerDataAmend<N>::Negative()
 {
     const auto sign = master.GetSign();
 
-    // Î»È¡·´
+    // ä½å–å
     for (auto i = 0; i < intSize; ++i)
     {
         master[i] = ~master[i];
     }
 
-    // ¼Ó1£¨·¢ÉúÔÚ½øÎ»ºÍÌí¼ÓÁãµ½¡°result¡±£©¡£
+    // åŠ 1ï¼ˆå‘ç”Ÿåœ¨è¿›ä½å’Œæ·»åŠ é›¶åˆ°â€œresultâ€ï¼‰ã€‚
     auto carry = 1u;
     for (auto i = 0; i < intSize; ++i)
     {
@@ -56,7 +56,7 @@ void Mathematics::IntegerDataAmend<N>::Negative()
 
     if (sign == master.GetSign() && !master.IsZero())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("IntegerÒç³ö£¡\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("Integeræº¢å‡ºï¼\n"s));
     }
 }
 
@@ -72,9 +72,9 @@ template <int N>
 void Mathematics::IntegerDataAmend<N>::SetValue(int beginIndex, int endIndex, uint32_t value)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
-    MATHEMATICS_ASSERTION_0(0 <= beginIndex && beginIndex <= intSize, "beginË÷Òı´íÎó£¡");
-    MATHEMATICS_ASSERTION_0(0 <= endIndex && endIndex <= intSize, "endË÷Òı´íÎó£¡");
-    MATHEMATICS_ASSERTION_1(beginIndex <= endIndex, "beginË÷Òı´óÓÚendË÷Òı£¡");
+    MATHEMATICS_ASSERTION_0(0 <= beginIndex && beginIndex <= intSize, "beginç´¢å¼•é”™è¯¯ï¼");
+    MATHEMATICS_ASSERTION_0(0 <= endIndex && endIndex <= intSize, "endç´¢å¼•é”™è¯¯ï¼");
+    MATHEMATICS_ASSERTION_1(beginIndex <= endIndex, "beginç´¢å¼•å¤§äºendç´¢å¼•ï¼");
 
     for (auto index = beginIndex; index < endIndex; ++index)
     {

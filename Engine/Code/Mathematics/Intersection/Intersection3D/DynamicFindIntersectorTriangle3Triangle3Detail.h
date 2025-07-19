@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:14)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:14)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_TRIANGLE3_DETAIL_H
@@ -96,10 +96,10 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
     const auto lhsVelocity = this->GetLhsVelocity();
     const auto rhsVelocity = this->GetRhsVelocity();
 
-    // Ïà¶ÔÓÚÈı½ÇĞÎ0µÄËÙ¶È¡£
+    // ç›¸å¯¹äºä¸‰è§’å½¢0çš„é€Ÿåº¦ã€‚
     auto relVelocity = rhsVelocity - lhsVelocity;
 
-    // ¼ÆËãÈı½ÇĞÎ0µÄ±ßÔµºÍ·¨Ïß·½Ïò¡£
+    // è®¡ç®—ä¸‰è§’å½¢0çš„è¾¹ç¼˜å’Œæ³•çº¿æ–¹å‘ã€‚
 
     Vector3Container edge0{ triangle0.GetVertex(1) - triangle0.GetVertex(0),
                             triangle0.GetVertex(2) - triangle0.GetVertex(1),
@@ -112,7 +112,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
         return;
     }
 
-    // ¼ÆËãÈı½ÇĞÎ1µÄ±ßÔµºÍ·¨Ïß·½Ïò¡£
+    // è®¡ç®—ä¸‰è§’å½¢1çš„è¾¹ç¼˜å’Œæ³•çº¿æ–¹å‘ã€‚
     Vector3Container edge1{ triangle1.GetVertex(1) - triangle1.GetVertex(0),
                             triangle1.GetVertex(2) - triangle1.GetVertex(1),
                             triangle1.GetVertex(0) - triangle1.GetVertex(2) };
@@ -120,9 +120,9 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
 
     if (MathType::FAbs(Vector3ToolsType::DotProduct(normal0, normal1)) < MathType::GetValue(1) - MathType::GetZeroTolerance())
     {
-        // Èı½ÇĞÎ²»Æ½ĞĞ¡£
+        // ä¸‰è§’å½¢ä¸å¹³è¡Œã€‚
 
-        // ·½Ïò normal1¡£
+        // æ–¹å‘ normal1ã€‚
 
         intersectInfo = FindOverlap(normal1, tMax, relVelocity);
         if (!intersectInfo.result)
@@ -131,7 +131,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
             return;
         }
 
-        // ·½Ïò E[i0]xF[i1].
+        // æ–¹å‘ E[i0]xF[i1].
         for (auto i1 = 0; i1 < 3; ++i1)
         {
             for (auto i0 = 0; i0 < 3; ++i0)
@@ -147,9 +147,9 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
             }
         }
     }
-    else  // Èı½ÇĞÎÊÇÆ½ĞĞµÄ£¨Êµ¼ÊÉÏÊÇ¹²ÃæµÄ£©¡£
+    else  // ä¸‰è§’å½¢æ˜¯å¹³è¡Œçš„ï¼ˆå®é™…ä¸Šæ˜¯å…±é¢çš„ï¼‰ã€‚
     {
-        // ·½Ïò NxE[i0].
+        // æ–¹å‘ NxE[i0].
         for (auto i = 0; i < 3; ++i)
         {
             const auto dir = Vector3ToolsType::UnitCrossProduct(normal0, edge0.at(i));
@@ -162,7 +162,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
             }
         }
 
-        // ·½Ïò NxF[i1].
+        // æ–¹å‘ NxF[i1].
         for (auto i = 0; i < 3; ++i)
         {
             const auto dir = Vector3ToolsType::UnitCrossProduct(normal1, edge1.at(i));
@@ -184,7 +184,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
 
     this->SetContactTime(intersectInfo.tFirst);
 
-    // ÔÚÕÒµ½´¥µã×éÖ®Ç°£¬µÚÒ»´Îµ÷ÕûUºÍV
+    // åœ¨æ‰¾åˆ°è§¦ç‚¹ç»„ä¹‹å‰ï¼Œç¬¬ä¸€æ¬¡è°ƒæ•´Uå’ŒV
     const Triangle3Type moveTriangle0{ triangle0.GetVertex(0) + intersectInfo.tFirst * lhsVelocity,
                                    triangle0.GetVertex(1) + intersectInfo.tFirst * lhsVelocity,
                                    triangle0.GetVertex(2) + intersectInfo.tFirst * lhsVelocity };
@@ -210,12 +210,12 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Configurat
 {
     Configuration cfg{};
 
-    // ²éÕÒ¶¥µãµ½Ç±ÔÚ·ÖÀëÖáÉÏµÄÍ¶Ó°¡£
+    // æŸ¥æ‰¾é¡¶ç‚¹åˆ°æ½œåœ¨åˆ†ç¦»è½´ä¸Šçš„æŠ•å½±ã€‚
     const auto d0 = Vector3ToolsType::DotProduct(axis, triangle.GetVertex(0));
     const auto d1 = Vector3ToolsType::DotProduct(axis, triangle.GetVertex(1));
     const auto d2 = Vector3ToolsType::DotProduct(axis, triangle.GetVertex(2));
 
-    // ÏÔÊ½ÅÅĞòµÄ¶¥µãÒÔ¹¹ÔìConfiguration¶ÔÏó¡£
+    // æ˜¾å¼æ’åºçš„é¡¶ç‚¹ä»¥æ„é€ Configurationå¯¹è±¡ã€‚
     if (d0 <= d1)
     {
         if (d1 <= d2)  // D0 <= D1 <= D2
@@ -339,21 +339,21 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectI
 {
     IntersectInfo intersectInfo{};
 
-    // µÈËÙ·ÖÀëÖá²âÊÔ¡£ uConfigurationºÍvConfigurationÊÇĞÂµÄÇ±ÔÚÅäÖÃ£¬¶øintersectInfoÊÇ×îºÃµÄÅäÖÃ¡£
+    // ç­‰é€Ÿåˆ†ç¦»è½´æµ‹è¯•ã€‚ uConfigurationå’ŒvConfigurationæ˜¯æ–°çš„æ½œåœ¨é…ç½®ï¼Œè€ŒintersectInfoæ˜¯æœ€å¥½çš„é…ç½®ã€‚
 
     auto t = MathType::GetValue(0);
 
-    if (vConfiguration.max < uConfiguration.min)  // VÔÚUµÄ×ó²à
+    if (vConfiguration.max < uConfiguration.min)  // Våœ¨Uçš„å·¦ä¾§
     {
-        if (speed <= MathType::GetValue(0))  // V´ÓUÒÆ¿ª
+        if (speed <= MathType::GetValue(0))  // Vä»Uç§»å¼€
         {
             return intersectInfo;
         }
 
-        // ²éÕÒ¸ÃÖáÉÏµÄÊ×´Î½Ó´¥¡£
+        // æŸ¥æ‰¾è¯¥è½´ä¸Šçš„é¦–æ¬¡æ¥è§¦ã€‚
         t = (uConfiguration.min - vConfiguration.max) / speed;
 
-        // Èç¹ûÕâÊÇĞÂµÄ×î´óÊ×´Î½Ó´¥Ê±¼ä£¬Çë½øĞĞÉèÖÃºÍÅäÖÃ¡£
+        // å¦‚æœè¿™æ˜¯æ–°çš„æœ€å¤§é¦–æ¬¡æ¥è§¦æ—¶é—´ï¼Œè¯·è¿›è¡Œè®¾ç½®å’Œé…ç½®ã€‚
         if (intersectInfo.tFirst < t)
         {
             intersectInfo.tFirst = t;
@@ -362,36 +362,36 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectI
             intersectInfo.tCfg1 = vConfiguration;
         }
 
-        // ¿ìËÙÍË³ö£ºËùĞèÊ±¼ä¼ä¸ôºóµÄ½»µã¡£
+        // å¿«é€Ÿé€€å‡ºï¼šæ‰€éœ€æ—¶é—´é—´éš”åçš„äº¤ç‚¹ã€‚
         if (tmax < intersectInfo.tFirst)
         {
             return intersectInfo;
         }
 
-        // ²éÕÒ¸ÃÖáÉÏµÄ×îºóÒ»´Î½Ó´¥Ê±¼ä¡£
+        // æŸ¥æ‰¾è¯¥è½´ä¸Šçš„æœ€åä¸€æ¬¡æ¥è§¦æ—¶é—´ã€‚
         t = (uConfiguration.max - vConfiguration.min) / speed;
         if (t < intersectInfo.tLast)
         {
             intersectInfo.tLast = t;
         }
 
-        // ¿ìËÙÍË³ö£ºËùĞèÊ±¼ä¼ä¸ôÖ®Ç°µÄ½»µã¡£
+        // å¿«é€Ÿé€€å‡ºï¼šæ‰€éœ€æ—¶é—´é—´éš”ä¹‹å‰çš„äº¤ç‚¹ã€‚
         if (intersectInfo.tLast < intersectInfo.tFirst)
         {
             return intersectInfo;
         }
     }
-    else if (uConfiguration.max < vConfiguration.min)  // VÔÚUµÄÓÒ±ß
+    else if (uConfiguration.max < vConfiguration.min)  // Våœ¨Uçš„å³è¾¹
     {
-        if (MathType::GetValue(0) <= speed)  // V´ÓUÒÆ¿ª
+        if (MathType::GetValue(0) <= speed)  // Vä»Uç§»å¼€
         {
             return intersectInfo;
         }
 
-        // ²éÕÒ¸ÃÖáÉÏµÄÊ×´Î½Ó´¥¡£
+        // æŸ¥æ‰¾è¯¥è½´ä¸Šçš„é¦–æ¬¡æ¥è§¦ã€‚
         t = (uConfiguration.max - vConfiguration.min) / speed;
 
-        // Èç¹ûÕâÊÇĞÂµÄ×î´óÊ×´Î½Ó´¥Ê±¼ä£¬Çë½øĞĞÉèÖÃºÍÅäÖÃ¡£
+        // å¦‚æœè¿™æ˜¯æ–°çš„æœ€å¤§é¦–æ¬¡æ¥è§¦æ—¶é—´ï¼Œè¯·è¿›è¡Œè®¾ç½®å’Œé…ç½®ã€‚
         if (intersectInfo.tFirst < t)
         {
             intersectInfo.tFirst = t;
@@ -400,37 +400,37 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectI
             intersectInfo.tCfg1 = vConfiguration;
         }
 
-        // ¿ìËÙÍË³ö£ºËùĞèÊ±¼ä¼ä¸ôºóµÄ½»µã¡£
+        // å¿«é€Ÿé€€å‡ºï¼šæ‰€éœ€æ—¶é—´é—´éš”åçš„äº¤ç‚¹ã€‚
         if (tmax < intersectInfo.tFirst)
         {
             return intersectInfo;
         }
 
-        // ²éÕÒ¸ÃÖáÉÏµÄ×îºóÒ»´Î½Ó´¥Ê±¼ä¡£
+        // æŸ¥æ‰¾è¯¥è½´ä¸Šçš„æœ€åä¸€æ¬¡æ¥è§¦æ—¶é—´ã€‚
         t = (uConfiguration.min - vConfiguration.max) / speed;
         if (t < intersectInfo.tLast)
         {
             intersectInfo.tLast = t;
         }
 
-        // ¿ìËÙÍË³ö£ºËùĞèÊ±¼ä¼ä¸ôÖ®Ç°µÄ½»µã¡£
+        // å¿«é€Ÿé€€å‡ºï¼šæ‰€éœ€æ—¶é—´é—´éš”ä¹‹å‰çš„äº¤ç‚¹ã€‚
         if (intersectInfo.tLast < intersectInfo.tFirst)
         {
             return intersectInfo;
         }
     }
-    else  // ÖØµş¼ä¸ôÉÏµÄVºÍU
+    else  // é‡å é—´éš”ä¸Šçš„Vå’ŒU
     {
         if (MathType::GetValue(0) < speed)
         {
-            // ²éÕÒ¸ÃÖáÉÏµÄ×îºóÒ»´Î½Ó´¥Ê±¼ä¡£
+            // æŸ¥æ‰¾è¯¥è½´ä¸Šçš„æœ€åä¸€æ¬¡æ¥è§¦æ—¶é—´ã€‚
             t = (uConfiguration.max - vConfiguration.min) / speed;
             if (t < intersectInfo.tLast)
             {
                 intersectInfo.tLast = t;
             }
 
-            // ¿ìËÙÍË³ö£ºËùĞèÊ±¼ä¼ä¸ôÖ®Ç°µÄ½»µã¡£
+            // å¿«é€Ÿé€€å‡ºï¼šæ‰€éœ€æ—¶é—´é—´éš”ä¹‹å‰çš„äº¤ç‚¹ã€‚
             if (intersectInfo.tLast < intersectInfo.tFirst)
             {
                 return intersectInfo;
@@ -438,14 +438,14 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectI
         }
         else if (speed < MathType::GetValue(0))
         {
-            // ²éÕÒ¸ÃÖáÉÏµÄ×îºóÒ»´Î½Ó´¥Ê±¼ä¡£
+            // æŸ¥æ‰¾è¯¥è½´ä¸Šçš„æœ€åä¸€æ¬¡æ¥è§¦æ—¶é—´ã€‚
             t = (uConfiguration.min - vConfiguration.max) / speed;
             if (t < intersectInfo.tLast)
             {
                 intersectInfo.tLast = t;
             }
 
-            // ¿ìËÙÍË³ö£ºËùĞèÊ±¼ä¼ä¸ôÖ®Ç°µÄ½»µã¡£
+            // å¿«é€Ÿé€€å‡ºï¼šæ‰€éœ€æ—¶é—´é—´éš”ä¹‹å‰çš„äº¤ç‚¹ã€‚
             if (intersectInfo.tLast < intersectInfo.tFirst)
             {
                 return intersectInfo;
@@ -460,18 +460,18 @@ typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectI
 template <typename Real>
 void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindContactSet(const Triangle3Type& moveTriangle0, const Triangle3Type& moveTriangle1, const ContactSide& side, const Configuration& cfg0, const Configuration& cfg1)
 {
-    if (side == ContactSide::Right)  // ri0ÔÚtri1µÄÓÒ±ß
+    if (side == ContactSide::Right)  // ri0åœ¨tri1çš„å³è¾¹
     {
         if (cfg0.vertexProjectionMap == VertexProjectionMap::M21 || cfg0.vertexProjectionMap == VertexProjectionMap::M111)
         {
-            // tri0µ¥µã´¥Ãştri1
+            // tri0å•ç‚¹è§¦æ‘¸tri1
             this->SetIntersectionType(IntersectionType::Point);
 
             point.emplace_back(moveTriangle0.GetVertex(cfg0.index.at(2)));
         }
         else if (cfg1.vertexProjectionMap == VertexProjectionMap::M12 || cfg1.vertexProjectionMap == VertexProjectionMap::M111)
         {
-            // tri1µ¥µã´¥Ãştri0
+            // tri1å•ç‚¹è§¦æ‘¸tri0
             this->SetIntersectionType(IntersectionType::Point);
 
             point.emplace_back(moveTriangle1.GetVertex(cfg1.index.at(0)));
@@ -480,13 +480,13 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindContactSet
         {
             if (cfg1.vertexProjectionMap == VertexProjectionMap::M21)
             {
-                // edge0-edge1 Ïà½»
+                // edge0-edge1 ç›¸äº¤
                 GetEdgeEdgeIntersection(moveTriangle0.GetVertex(cfg0.index.at(1)), moveTriangle0.GetVertex(cfg0.index.at(2)),
                                         moveTriangle1.GetVertex(cfg1.index.at(0)), moveTriangle1.GetVertex(cfg1.index.at(1)));
             }
             else  // cfg1.vertexProjectionMap == m3
             {
-                // u±ß-vÃæ Ïà½»
+                // uè¾¹-vé¢ ç›¸äº¤
                 GetEdgeFaceIntersection(moveTriangle0.GetVertex(cfg0.index.at(1)), moveTriangle0.GetVertex(cfg0.index.at(2)), moveTriangle1);
             }
         }
@@ -494,29 +494,29 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindContactSet
         {
             if (cfg1.vertexProjectionMap == VertexProjectionMap::M21)
             {
-                // Ãæ0-±ß1 Ïà½»
+                // é¢0-è¾¹1 ç›¸äº¤
                 GetEdgeFaceIntersection(moveTriangle1.GetVertex(cfg1.index.at(0)), moveTriangle1.GetVertex(cfg1.index.at(1)), moveTriangle0);
             }
             else  // cfg1.vertexProjectionMap == M3
             {
-                // Ãæ0-Ãæ1 Ïà½»
+                // é¢0-é¢1 ç›¸äº¤
                 const Plane3Type plane0{ moveTriangle0.GetVertex(0), moveTriangle0.GetVertex(1), moveTriangle0.GetVertex(2) };
                 GetCoplanarIntersection(plane0, moveTriangle0, moveTriangle1);
             }
         }
     }
-    else if (side == ContactSide::Left)  // tri1ÔÚtri0µÄ×ó²à
+    else if (side == ContactSide::Left)  // tri1åœ¨tri0çš„å·¦ä¾§
     {
         if (cfg1.vertexProjectionMap == VertexProjectionMap::M21 || cfg1.vertexProjectionMap == VertexProjectionMap::M111)
         {
-            // tri1µ¥µã´¥Ãştri0
+            // tri1å•ç‚¹è§¦æ‘¸tri0
             this->SetIntersectionType(IntersectionType::Point);
 
             point.emplace_back(moveTriangle1.GetVertex(cfg1.index.at(2)));
         }
         else if (cfg0.vertexProjectionMap == VertexProjectionMap::M12 || cfg0.vertexProjectionMap == VertexProjectionMap::M111)
         {
-            // tri0µ¥µã´¥Ãştri1
+            // tri0å•ç‚¹è§¦æ‘¸tri1
             this->SetIntersectionType(IntersectionType::Point);
 
             point.emplace_back(moveTriangle0.GetVertex(cfg0.index.at(0)));
@@ -525,12 +525,12 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindContactSet
         {
             if (cfg0.vertexProjectionMap == VertexProjectionMap::M21)
             {
-                // ±ß0-±ß1 Ïà½»
+                // è¾¹0-è¾¹1 ç›¸äº¤
                 GetEdgeEdgeIntersection(moveTriangle0.GetVertex(cfg0.index.at(0)), moveTriangle0.GetVertex(cfg0.index.at(1)), moveTriangle1.GetVertex(cfg1.index.at(1)), moveTriangle1.GetVertex(cfg1.index.at(2)));
             }
             else  // cfg0.vertexProjectionMap == M3
             {
-                // ±ß1-Ãæ0 Ïà½»
+                // è¾¹1-é¢0 ç›¸äº¤
                 GetEdgeFaceIntersection(moveTriangle1.GetVertex(cfg1.index.at(1)), moveTriangle1.GetVertex(cfg1.index.at(2)), moveTriangle0);
             }
         }
@@ -538,12 +538,12 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindContactSet
         {
             if (cfg0.vertexProjectionMap == VertexProjectionMap::M21)
             {
-                // ±ße0-Ãæ1 Ïà½»
+                // è¾¹e0-é¢1 ç›¸äº¤
                 GetEdgeFaceIntersection(moveTriangle0.GetVertex(cfg0.index.at(0)), moveTriangle0.GetVertex(cfg0.index.at(1)), moveTriangle1);
             }
             else  // cfg0.vertexProjectionMap == M
             {
-                // Ãæ0-Ãæ1 Ïà½»
+                // é¢0-é¢1 ç›¸äº¤
                 const Plane3Type plane0{ moveTriangle0.GetVertex(0), moveTriangle0.GetVertex(1), moveTriangle0.GetVertex(2) };
                 GetCoplanarIntersection(plane0, moveTriangle0, moveTriangle1);
             }
@@ -551,10 +551,10 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindContactSet
     }
     else  // side == CS_NONE
     {
-        // Èı½ÇĞÎÒÑ¾­Ïà½»ÁË¡£
+        // ä¸‰è§’å½¢å·²ç»ç›¸äº¤äº†ã€‚
         StaticFindIntersectorTriangle3Triangle3<Real> calc{ moveTriangle0, moveTriangle1 };
         const auto result = calc.IsIntersection();
-        MATHEMATICS_ASSERTION_0(result, "½»²æµã±ØĞë´æÔÚ\n");
+        MATHEMATICS_ASSERTION_0(result, "äº¤å‰ç‚¹å¿…é¡»å­˜åœ¨\n");
 
         const auto quantity = calc.GetQuantity();
         this->SetIntersectionType(calc.GetIntersectionType());
@@ -568,7 +568,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindContactSet
 template <typename Real>
 void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarIntersection(const Plane3Type& plane, const Triangle3Type& moveTriangle0, const Triangle3Type& moveTriangle1)
 {
-    // ÔÚÓëÆ½Ãæ·¨Ïß×î¶ÔÆëµÄ×ø±êÆ½ÃæÉÏÍ¶Ó°Èı½ÇĞÎ¡£
+    // åœ¨ä¸å¹³é¢æ³•çº¿æœ€å¯¹é½çš„åæ ‡å¹³é¢ä¸ŠæŠ•å½±ä¸‰è§’å½¢ã€‚
     auto maxNormal = 0;
     auto x = MathType::FAbs(plane.GetNormal().GetX());
     auto y = MathType::FAbs(plane.GetNormal().GetY());
@@ -590,7 +590,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInt
 
     if (maxNormal == 0)
     {
-        // Í¶Ó°µ½yzÆ½ÃæÉÏ¡£
+        // æŠ•å½±åˆ°yzå¹³é¢ä¸Šã€‚
         for (auto i = 0; i < 3; ++i)
         {
             projectTriangle0Vector.at(i).SetCoordinate(moveTriangle0.GetVertex(i).GetY(), moveTriangle0.GetVertex(i).GetZ());
@@ -599,7 +599,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInt
     }
     else if (maxNormal == 1)
     {
-        // Í¶Ó°µ½xzÆ½ÃæÉÏ¡£
+        // æŠ•å½±åˆ°xzå¹³é¢ä¸Šã€‚
         for (auto i = 0; i < 3; ++i)
         {
             projectTriangle0Vector.at(i).SetCoordinate(moveTriangle0.GetVertex(i).GetX(), moveTriangle0.GetVertex(i).GetZ());
@@ -608,7 +608,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInt
     }
     else
     {
-        // Í¶Ó°µ½xyÆ½ÃæÉÏ¡£
+        // æŠ•å½±åˆ°xyå¹³é¢ä¸Šã€‚
         for (auto i = 0; i < 3; ++i)
         {
             projectTriangle0Vector.at(i).SetCoordinate(moveTriangle0.GetVertex(i).GetX(), moveTriangle0.GetVertex(i).GetY());
@@ -619,13 +619,13 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInt
     Triangle2<Real> projectTriangle0{ projectTriangle0Vector.at(0), projectTriangle0Vector.at(1), projectTriangle0Vector.at(2) };
     Triangle2<Real> projectTriangle1{ projectTriangle1Vector.at(0), projectTriangle1Vector.at(1), projectTriangle1Vector.at(2) };
 
-    // 2DÈı½ÇĞÎÏà½»Àı³ÌĞèÒªÄæÊ±ÕëÅÅĞò¡£
+    // 2Dä¸‰è§’å½¢ç›¸äº¤ä¾‹ç¨‹éœ€è¦é€†æ—¶é’ˆæ’åºã€‚
 
     auto edge0 = projectTriangle0.GetVertex(1) - projectTriangle0.GetVertex(0);
     auto edge1 = projectTriangle0.GetVertex(2) - projectTriangle0.GetVertex(0);
     if (Vector2Tools<Real>::DotPerp(edge0, edge1) < MathType::GetValue(0))
     {
-        // Èı½ÇĞÎÊÇË³Ê±Õë·½Ïò£¬ÇëÖØĞÂÅÅĞò¡£
+        // ä¸‰è§’å½¢æ˜¯é¡ºæ—¶é’ˆæ–¹å‘ï¼Œè¯·é‡æ–°æ’åºã€‚
         projectTriangle0 = Triangle2<Real>{ projectTriangle0Vector.at(0), projectTriangle0Vector.at(2), projectTriangle0Vector.at(1) };
     }
 
@@ -633,7 +633,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInt
     edge1 = projectTriangle1.GetVertex(2) - projectTriangle1.GetVertex(0);
     if (Vector2Tools<Real>::DotPerp(edge0, edge1) < MathType::GetValue(0))
     {
-        // Èı½ÇĞÎÊÇË³Ê±Õë·½Ïò£¬ÇëÖØĞÂÅÅĞò¡£
+        // ä¸‰è§’å½¢æ˜¯é¡ºæ—¶é’ˆæ–¹å‘ï¼Œè¯·é‡æ–°æ’åºã€‚
         projectTriangle1 = Triangle2<Real>{ projectTriangle1Vector.at(0), projectTriangle1Vector.at(2), projectTriangle1Vector.at(1) };
     }
 
@@ -643,7 +643,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInt
         return;
     }
 
-    // ½«2D½»µãÓ³Éä»Ø3DÈı½ÇĞÎ¿Õ¼ä¡£
+    // å°†2Däº¤ç‚¹æ˜ å°„å›3Dä¸‰è§’å½¢ç©ºé—´ã€‚
     const auto quantity = intr.GetQuantity();
     if (maxNormal == 0)
     {
@@ -682,25 +682,25 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInt
 template <typename Real>
 void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeEdgeIntersection(const Vector3Type& u0, const Vector3Type& u1, const Vector3Type& v0, const Vector3Type& v1)
 {
-    // ¼ÆËãÁ½¸ö±ßÔµÆ½ÃæµÄ·¨Ïß¡£
+    // è®¡ç®—ä¸¤ä¸ªè¾¹ç¼˜å¹³é¢çš„æ³•çº¿ã€‚
     auto edge0 = u1 - u0;
     auto edge1 = v1 - v0;
     const auto normal = Vector3ToolsType::CrossProduct(edge0, edge1);
 
-    /// Çó½âU0 + s * (U1 - U0) = V0 + t * (V1 - V0)¡£
-    /// ÎÒÃÇÖªµÀ±ßÏà½»£¬ËùÒÔ[0,1]ÖĞµÄsºÍ[0,1]ÖĞµÄt¡£ Òò´Ë£¬Ö»Ğè½â¾ös¡£
-    /// ×¢Òâ£¬s * E0 = D + t * E1£¬ÆäÖĞD = V0 - U0¡£
-    /// Òò´Ës * N = s * E0xE1 = DxE1ÇÒs = N * DxE1 / N * N¡£
+    /// æ±‚è§£U0 + s * (U1 - U0) = V0 + t * (V1 - V0)ã€‚
+    /// æˆ‘ä»¬çŸ¥é“è¾¹ç›¸äº¤ï¼Œæ‰€ä»¥[0,1]ä¸­çš„så’Œ[0,1]ä¸­çš„tã€‚ å› æ­¤ï¼Œåªéœ€è§£å†³sã€‚
+    /// æ³¨æ„ï¼Œs * E0 = D + t * E1ï¼Œå…¶ä¸­D = V0 - U0ã€‚
+    /// å› æ­¤s * N = s * E0xE1 = DxE1ä¸”s = N * DxE1 / N * Nã€‚
     auto delta = v0 - u0;
     auto s = Vector3ToolsType::DotProduct(normal, (Vector3ToolsType::CrossProduct(delta, edge1) / Vector3ToolsType::GetLengthSquared(normal)));
     if (s < MathType::GetValue(0))
     {
-        MATHEMATICS_ASSERTION_0(-MathType::GetZeroTolerance() <= s, "ÒâÍâµÄsÖµ¡£\n");
+        MATHEMATICS_ASSERTION_0(-MathType::GetZeroTolerance() <= s, "æ„å¤–çš„så€¼ã€‚\n");
         s = MathType::GetValue(0);
     }
     else if (MathType::GetValue(1) < s)
     {
-        MATHEMATICS_ASSERTION_0(s <= MathType::GetValue(1) + MathType::GetZeroTolerance(), "ÒâÍâµÄsÖµ¡£\n");
+        MATHEMATICS_ASSERTION_0(s <= MathType::GetValue(1) + MathType::GetZeroTolerance(), "æ„å¤–çš„så€¼ã€‚\n");
         s = MathType::GetValue(1);
     }
 
@@ -708,13 +708,13 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeEdgeInt
 
     point.emplace_back(u0 + s * edge0);
 
-    // Èç¹û±ßÔµÊÇÆ½ĞĞµÄÔõÃ´°ì£¿
+    // å¦‚æœè¾¹ç¼˜æ˜¯å¹³è¡Œçš„æ€ä¹ˆåŠï¼Ÿ
 }
 
 template <typename Real>
 void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeFaceIntersection(const Vector3Type& u0, const Vector3Type& u1, const Triangle3Type& triangle)
 {
-    // ¼ÆËãÈı½ÇĞÎµÄÆ½Ãæ¡£
+    // è®¡ç®—ä¸‰è§’å½¢çš„å¹³é¢ã€‚
     const auto vertex = triangle.GetVertex(0);
     const auto edge0 = triangle.GetVertex(1) - vertex;
     const auto edge1 = triangle.GetVertex(2) - vertex;
@@ -724,7 +724,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeFaceInt
     const auto dir0 = Vector3OrthonormalBasis.GetUVector();
     const auto dir1 = Vector3OrthonormalBasis.GetVVector();
 
-    // ½«±ßÔµ¶ËµãÍ¶Ó°µ½Æ½ÃæÉÏ¡£
+    // å°†è¾¹ç¼˜ç«¯ç‚¹æŠ•å½±åˆ°å¹³é¢ä¸Šã€‚
 
     auto diff = u0 - vertex;
     const Vector2<Real> projectU0{ Vector3ToolsType::DotProduct(dir0, diff), Vector3ToolsType::DotProduct(dir1, diff) };
@@ -734,7 +734,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeFaceInt
 
     const Segment2<Real> projectSegment{ projectU0, projectU1 };
 
-    // ¼ÆËãÈı½ÇĞÎµÄÆ½Ãæ×ø±ê¡£
+    // è®¡ç®—ä¸‰è§’å½¢çš„å¹³é¢åæ ‡ã€‚
     using Triangle = std::array<Vector2<Real>, 3>;
     Triangle projectTriangleVector{ Vector2<Real>::GetZero(),
                                     Vector2<Real>(Vector3ToolsType::DotProduct(dir0, edge0), Vector3ToolsType::DotProduct(dir1, edge0)),
@@ -742,7 +742,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeFaceInt
 
     const Triangle2<Real> projectTriangle{ projectTriangleVector.at(0), projectTriangleVector.at(1), projectTriangleVector.at(2) };
 
-    // ¼ÆËã½»¼¯¡£
+    // è®¡ç®—äº¤é›†ã€‚
     StaticFindIntersectorSegment2Triangle2<Real> calc{ projectSegment, projectTriangle };
     if (calc.IsIntersection())
     {
@@ -755,11 +755,11 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeFaceInt
     }
     else
     {
-        /// ±ØĞëÓĞÒ»¸ö½»²æµã¡£ ×îÓĞ¿ÉÄÜµÄÊı×ÖÉáÈëÎó²îµ¼ÖÂÕÒ²»µ½Ëü¡£ Ê¹ÓÃ½ÏÂıµÄ3D¾àÀë¼ÆËãÆ÷ÒÔÌá¸ßÂ³°ôĞÔ¡£
+        /// å¿…é¡»æœ‰ä¸€ä¸ªäº¤å‰ç‚¹ã€‚ æœ€æœ‰å¯èƒ½çš„æ•°å­—èˆå…¥è¯¯å·®å¯¼è‡´æ‰¾ä¸åˆ°å®ƒã€‚ ä½¿ç”¨è¾ƒæ…¢çš„3Dè·ç¦»è®¡ç®—å™¨ä»¥æé«˜é²æ£’æ€§ã€‚
         const Segment3<Real> seg{ u0, u1 };
         DistanceSegment3Triangle3<Real> dcalc{ seg, triangle };
 
-        // ÎÒÃÇ²»ĞèÒª¾àÀë£¬µ«ÊÇÎÒÃÇĞèÒª¶¨Î»×î½Ó½üµãµÄ¸±×÷ÓÃ¡£
+        // æˆ‘ä»¬ä¸éœ€è¦è·ç¦»ï¼Œä½†æ˜¯æˆ‘ä»¬éœ€è¦å®šä½æœ€æ¥è¿‘ç‚¹çš„å‰¯ä½œç”¨ã€‚
 
         auto parameter = dcalc.GetSquared().GetLhsParameter();
 

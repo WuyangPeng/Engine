@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/30 22:53)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/30 22:53)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_ENDIAN_H
 #define CORE_TOOLS_FILE_MANAGER_ENDIAN_H
@@ -16,7 +16,7 @@
 
 namespace CoreTools
 {
-    /// ×Ö½Ú´æ´¢Ë³Ğò£¬½á¹û½«Í¨¹ı²ÎÊı·µ»Ø£¬µ÷ÓÃÕß±ØĞë±£³Öµü´úÆ÷µÄÓĞĞ§ĞÔ¡£
+    /// å­—èŠ‚å­˜å‚¨é¡ºåºï¼Œç»“æœå°†é€šè¿‡å‚æ•°è¿”å›ï¼Œè°ƒç”¨è€…å¿…é¡»ä¿æŒè¿­ä»£å™¨çš„æœ‰æ•ˆæ€§ã€‚
     class CORE_TOOLS_DEFAULT_DECLARE Endian final
     {
     public:
@@ -26,13 +26,13 @@ namespace CoreTools
         Endian() = delete;
 
     public:
-        /// ²âÊÔ»úÆ÷µÄ×Ö½ÚË³ĞòÊÇ·ñÊÇbig endian¡£
+        /// æµ‹è¯•æœºå™¨çš„å­—èŠ‚é¡ºåºæ˜¯å¦æ˜¯big endianã€‚
         NODISCARD static bool IsBigEndian() noexcept(gAssert < 0 || gCoreToolsAssert < 0);
 
-        /// ²âÊÔ»úÆ÷µÄ×Ö½ÚË³ĞòÊÇ·ñÊÇlittle endian¡£
+        /// æµ‹è¯•æœºå™¨çš„å­—èŠ‚é¡ºåºæ˜¯å¦æ˜¯little endianã€‚
         NODISCARD static bool IsLittleEndian() noexcept(gAssert < 0 || gCoreToolsAssert < 0);
 
-        /// ½»»»×Ö½ÚË³Ğò
+        /// äº¤æ¢å­—èŠ‚é¡ºåº
         static void Swap2ByteOrder(void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0);
         static void Swap2ByteOrder(size_t itemsNumber, void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0);
         static void Swap4ByteOrder(void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0);

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 09:52)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 09:52)
 
 #ifndef MATHEMATICS_BASE_FAST_TRIGONOMETRIC_H
 #define MATHEMATICS_BASE_FAST_TRIGONOMETRIC_H
@@ -19,7 +19,7 @@
 
 namespace Mathematics
 {
-    // Ê¹ÓÃ¿ìËÙ½üËÆËã·¨µÄÇ±Á¦£¬¶ø²»ÊÇµ÷ÓÃ±ê×¼µÄÊýÑ§¿âº¯Êý¡£
+    // ä½¿ç”¨å¿«é€Ÿè¿‘ä¼¼ç®—æ³•çš„æ½œåŠ›ï¼Œè€Œä¸æ˜¯è°ƒç”¨æ ‡å‡†çš„æ•°å­¦åº“å‡½æ•°ã€‚
     template <typename Real>
     requires std::is_floating_point_v<Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE FastTrigonometric final
@@ -30,54 +30,54 @@ namespace Mathematics
         using MathType = Math<Real>;
 
     public:
-        // ²ÉÓÃ¶àÏîÊ½±Æ½üÈý½Çº¯ÊýºÍ·´Èý½Çº¯ÊýµÄ¿ìËÙ¼ÆËã¡£ËÙ¶ÈÆð·üÒÀ¿¿´¦ÀíÆ÷¡£
+        // é‡‡ç”¨å¤šé¡¹å¼é€¼è¿‘ä¸‰è§’å‡½æ•°å’Œåä¸‰è§’å‡½æ•°çš„å¿«é€Ÿè®¡ç®—ã€‚é€Ÿåº¦èµ·ä¼ä¾é å¤„ç†å™¨ã€‚
 
-        // ÊäÈë±ØÐëÔÚ·¶Î§[0,pi/2]
+        // è¾“å…¥å¿…é¡»åœ¨èŒƒå›´[0,pi/2]
 
-        // 1.0e-3¾«¶È
+        // 1.0e-3ç²¾åº¦
         NODISCARD static Real FastSinRoughCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3);
-        // 1.0e-6¾«¶È£¨float£©¡¢1.0e-8¾«¶È£¨double£©
+        // 1.0e-6ç²¾åº¦ï¼ˆfloatï¼‰ã€1.0e-8ç²¾åº¦ï¼ˆdoubleï¼‰
         NODISCARD static Real FastSinPreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3);
-        // 1.0e-7¾«¶È£¨float£©¡¢1.0e-10¾«¶È£¨double£©
+        // 1.0e-7ç²¾åº¦ï¼ˆfloatï¼‰ã€1.0e-10ç²¾åº¦ï¼ˆdoubleï¼‰
         NODISCARD static Real FastSinMorePreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        // ÊäÈë±ØÐëÔÚ·¶Î§[0,pi/2]
+        // è¾“å…¥å¿…é¡»åœ¨èŒƒå›´[0,pi/2]
 
-        // 1.0e-2¾«¶È
+        // 1.0e-2ç²¾åº¦
         NODISCARD static Real FastCosRoughCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3);
-        // 1.0e-7¾«¶È£¨float£©¡¢1.0e-8¾«¶È£¨double£©
+        // 1.0e-7ç²¾åº¦ï¼ˆfloatï¼‰ã€1.0e-8ç²¾åº¦ï¼ˆdoubleï¼‰
         NODISCARD static Real FastCosPreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3);
-        // 1.0e-7¾«¶È£¨float£©¡¢1.0e-10¾«¶È£¨double£©
+        // 1.0e-7ç²¾åº¦ï¼ˆfloatï¼‰ã€1.0e-10ç²¾åº¦ï¼ˆdoubleï¼‰
         NODISCARD static Real FastCosMorePreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        // ÊäÈë±ØÐëÔÚ·¶Î§[0,pi/4]
+        // è¾“å…¥å¿…é¡»åœ¨èŒƒå›´[0,pi/4]
 
-        // 1.0e-3¾«¶È
+        // 1.0e-3ç²¾åº¦
         NODISCARD static Real FastTanRoughCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3);
-        // 1.0e-7¾«¶È
+        // 1.0e-7ç²¾åº¦
         NODISCARD static Real FastTanPreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3);
-        // 1.0e-7¾«¶È£¨float£©¡¢1.0e-10¾«¶È£¨double£©
+        // 1.0e-7ç²¾åº¦ï¼ˆfloatï¼‰ã€1.0e-10ç²¾åº¦ï¼ˆdoubleï¼‰
         NODISCARD static Real FastTanMorePreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        // ÊäÈë±ØÐëÔÚ·¶Î§[0,1]
+        // è¾“å…¥å¿…é¡»åœ¨èŒƒå›´[0,1]
 
-        // 1.0e-4¾«¶È
+        // 1.0e-4ç²¾åº¦
         NODISCARD static Real FastInvSinRoughCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
-        // 1.0e-6¾«¶È£¨float£©¡¢1.0e-7¾«¶È£¨double£©
+        // 1.0e-6ç²¾åº¦ï¼ˆfloatï¼‰ã€1.0e-7ç²¾åº¦ï¼ˆdoubleï¼‰
         NODISCARD static Real FastInvSinPreciseCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        // ÊäÈë±ØÐëÔÚ·¶Î§ [0,1]
+        // è¾“å…¥å¿…é¡»åœ¨èŒƒå›´ [0,1]
 
-        // 1.0e-4¾«¶È
+        // 1.0e-4ç²¾åº¦
         NODISCARD static Real FastInvCosRoughCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
-        // 1.0e-6¾«¶È£¨float£©¡¢1.0e-7¾«¶È£¨double£©
+        // 1.0e-6ç²¾åº¦ï¼ˆfloatï¼‰ã€1.0e-7ç²¾åº¦ï¼ˆdoubleï¼‰
         NODISCARD static Real FastInvCosPreciseCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        // ÊäÈë±ØÐëÔÚ·¶Î§ [-1,1]
+        // è¾“å…¥å¿…é¡»åœ¨èŒƒå›´ [-1,1]
 
-        // 1.0e-4¾«¶È
+        // 1.0e-4ç²¾åº¦
         NODISCARD static Real FastInvTanRoughCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
-        // 1.0e-7¾«¶È
+        // 1.0e-7ç²¾åº¦
         NODISCARD static Real FastInvTanPreciseCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
     };
 

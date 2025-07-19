@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 14:46)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 14:46)
 
 #ifndef MATHEMATICS_ALGEBRA_PLANE_H
 #define MATHEMATICS_ALGEBRA_PLANE_H
@@ -37,37 +37,37 @@ namespace Mathematics
         static constexpr auto planeSize = HomogeneousPointType::pointSize;
 
     public:
-        // Æ½Ãæ±íÊ¾ÎªDot(N,X) - c = 0£¬ÆäÖĞN = (n0,n1,n2,0)ÊÇÒ»¸öµ¥Î»³¤¶ÈµÄ·¨ÏßÏòÁ¿£¬
-        // cÊÇÆ½Ãæ³£Êı£¬ÇÒX = (x0,x1,x2,1) ÊÇÔÚÆ½ÃæÉÏµÄÈÎÒâµã¡£
-        // ÓÃ»§±ØĞë±£Ö¤·¨ÏßµÄÏòÁ¿ÊÇµ¥Î»³¤¶È£¬´æ´¢×÷ÎªÒ»¸ö4Ôª×éÊÇ(n0,n1,n2,-c)¡£
+        // å¹³é¢è¡¨ç¤ºä¸ºDot(N,X) - c = 0ï¼Œå…¶ä¸­N = (n0,n1,n2,0)æ˜¯ä¸€ä¸ªå•ä½é•¿åº¦çš„æ³•çº¿å‘é‡ï¼Œ
+        // cæ˜¯å¹³é¢å¸¸æ•°ï¼Œä¸”X = (x0,x1,x2,1) æ˜¯åœ¨å¹³é¢ä¸Šçš„ä»»æ„ç‚¹ã€‚
+        // ç”¨æˆ·å¿…é¡»ä¿è¯æ³•çº¿çš„å‘é‡æ˜¯å•ä½é•¿åº¦ï¼Œå­˜å‚¨ä½œä¸ºä¸€ä¸ª4å…ƒç»„æ˜¯(n0,n1,n2,-c)ã€‚
         Plane() noexcept;
         explicit Plane(const T epsilon) noexcept;
 
-        // Ê¹ÓÃAVector¹¹ÔìÆ½Ãæ±ØĞë±£Ö¤ÊäÈëµÄ·¨ÏßÎªµ¥Î»ÏòÁ¿£¬
-        // Ê¹ÓÃHomogeneousPoint»òÈı¸öT¹¹ÔìÆ½Ãæ£¬Ö»Ğè±£Ö¤ÊäÈëµÄ·¨ÏßÏòÁ¿ÊÇ·ÇÁãÏòÁ¿¡£
+        // ä½¿ç”¨AVectoræ„é€ å¹³é¢å¿…é¡»ä¿è¯è¾“å…¥çš„æ³•çº¿ä¸ºå•ä½å‘é‡ï¼Œ
+        // ä½¿ç”¨HomogeneousPointæˆ–ä¸‰ä¸ªTæ„é€ å¹³é¢ï¼Œåªéœ€ä¿è¯è¾“å…¥çš„æ³•çº¿å‘é‡æ˜¯éé›¶å‘é‡ã€‚
 
-        // Ö±½ÓÖ¸¶¨NºÍc
+        // ç›´æ¥æŒ‡å®šNå’Œc
         Plane(T normalX, T normalY, T normalZ, T constant, T epsilon = MathType::GetZeroTolerance());
         Plane(const AVectorType& normal, T constant, T epsilon = MathType::GetZeroTolerance()) noexcept;
 
-        // N±»Ö¸¶¨£¬c = Dot(N,P)£¬ÆäÖĞ P = (p0,p1,p2,1)ÊÇÔÚÆ½ÃæÉÏµÄµã¡£
+        // Nè¢«æŒ‡å®šï¼Œc = Dot(N,P)ï¼Œå…¶ä¸­ P = (p0,p1,p2,1)æ˜¯åœ¨å¹³é¢ä¸Šçš„ç‚¹ã€‚
         Plane(const AVectorType& normal, const APointType& point, T epsilon = MathType::GetZeroTolerance()) noexcept;
 
-        // N = Cross(P1 - P0,P2 - P0) / Length(Cross(P1 - P0,P2 - P0))£¬c = Dot(N,P0)£¬ÕâÀïP0£¬P1£¬P2ÊÇÔÚÆ½ÃæÉÏµÄµã¡£
+        // N = Cross(P1 - P0,P2 - P0) / Length(Cross(P1 - P0,P2 - P0))ï¼Œc = Dot(N,P0)ï¼Œè¿™é‡ŒP0ï¼ŒP1ï¼ŒP2æ˜¯åœ¨å¹³é¢ä¸Šçš„ç‚¹ã€‚
         Plane(const APointType& lhs, const APointType& mhs, const APointType& rhs, T epsilon = MathType::GetZeroTolerance());
 
-        // Ö¸¶¨Õû¸ö(n0,n1,n2,-c) Ôª×é¡£
+        // æŒ‡å®šæ•´ä¸ª(n0,n1,n2,-c) å…ƒç»„ã€‚
         explicit Plane(const HomogeneousPointType& homogeneousPoint, T epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD HomogeneousPointType GetHomogeneousPoint() const noexcept;
 
-        // ×ø±ê·ÃÎÊ
+        // åæ ‡è®¿é—®
         NODISCARD const T& operator[](int index) const;
         NODISCARD T& operator[](int index);
 
-        // ·ÃÎÊµ¥¸ö×é¼ş¡£
+        // è®¿é—®å•ä¸ªç»„ä»¶ã€‚
         void SetConstant(T constant) noexcept;
         void SetEpsilon(T aEpsilon) noexcept;
         void SetNormal(const AVectorType& normal) noexcept(gAssert < 2 || gMathematicsAssert < 2);
@@ -75,22 +75,22 @@ namespace Mathematics
         NODISCARD T GetEpsilon() const noexcept;
         NODISCARD AVectorType GetNormal() const noexcept;
 
-        // ¼ÆËãd = Dot(N,P)-c ÆäÖĞNÊÇÆ½Ãæ·¨ÏßºÍcÊÇÆ½Ãæ³£Á¿¡£ÕâÊÇÒ»¸ö·ûºÅ¾àÀë¡£
-        // Èç¹û·µ»ØÖµµÄ·ûºÅÊÇÕıµÄ£¬Ôò¸ÃµãÊÇÔÚÆ½ÃæÉÏµÄÕı·½Ïò£¬
-        // Èç¹ûÊÇ¸ºµÄ£¬ÔòÔÚÆ½Ãæ¸º·½Ïò£¬
-        // Èç¹ûÎªÁã£¬ÔòµãÔÚÆ½ÃæÉÏ¡£
+        // è®¡ç®—d = Dot(N,P)-c å…¶ä¸­Næ˜¯å¹³é¢æ³•çº¿å’Œcæ˜¯å¹³é¢å¸¸é‡ã€‚è¿™æ˜¯ä¸€ä¸ªç¬¦å·è·ç¦»ã€‚
+        // å¦‚æœè¿”å›å€¼çš„ç¬¦å·æ˜¯æ­£çš„ï¼Œåˆ™è¯¥ç‚¹æ˜¯åœ¨å¹³é¢ä¸Šçš„æ­£æ–¹å‘ï¼Œ
+        // å¦‚æœæ˜¯è´Ÿçš„ï¼Œåˆ™åœ¨å¹³é¢è´Ÿæ–¹å‘ï¼Œ
+        // å¦‚æœä¸ºé›¶ï¼Œåˆ™ç‚¹åœ¨å¹³é¢ä¸Šã€‚
         NODISCARD T DistanceTo(const APointType& point) const noexcept;
 
-        // Æ½ÃæµÄÕıÃæÊÇ·¨ÏßµãËùÔÚµÄ°ë¿Õ¼ä£¬±³ÃæÊÇÁíÒ»°ë¿Õ¼ä¡£º¯Êı·µ»ØµãÔÚÆ½ÃæµÄÄÄÒ»²à¡£
+        // å¹³é¢çš„æ­£é¢æ˜¯æ³•çº¿ç‚¹æ‰€åœ¨çš„åŠç©ºé—´ï¼ŒèƒŒé¢æ˜¯å¦ä¸€åŠç©ºé—´ã€‚å‡½æ•°è¿”å›ç‚¹åœ¨å¹³é¢çš„å“ªä¸€ä¾§ã€‚
         NODISCARD NumericalValueSymbol WhichSide(const APointType& point) const noexcept;
 
     private:
-        // ¼ÆËã£ºL = Length(n0,n1,n2)£¬²¢ÉèÖÃÆ½ÃæÎª(n0,n1,n2,-c)/L¡£
-        // µ±Æ½ÃæÍ¨¹ıÆë´Î×ø±ê¾ØÕó½øĞĞ×ª»»£¬µ±²»ÄÜ±£Ö¤µ¥Î»³¤¶È·¨ÏßÊ±£¬ÕâÊÇºÜÓĞÓÃµÄ¡£
+        // è®¡ç®—ï¼šL = Length(n0,n1,n2)ï¼Œå¹¶è®¾ç½®å¹³é¢ä¸º(n0,n1,n2,-c)/Lã€‚
+        // å½“å¹³é¢é€šè¿‡é½æ¬¡åæ ‡çŸ©é˜µè¿›è¡Œè½¬æ¢ï¼Œå½“ä¸èƒ½ä¿è¯å•ä½é•¿åº¦æ³•çº¿æ—¶ï¼Œè¿™æ˜¯å¾ˆæœ‰ç”¨çš„ã€‚
         void Normalize();
 
     private:
-        // ´æ´¢(n0,n1,n2,-c).
+        // å­˜å‚¨(n0,n1,n2,-c).
         HomogeneousPointType homogeneousPoint;
         T epsilon;
     };
@@ -98,7 +98,7 @@ namespace Mathematics
     template <typename T>
     NODISCARD bool Approximate(const Plane<T>& lhs, const Plane<T>& rhs, T epsilon = Math<T>::GetZeroTolerance());
 
-    // ±È½Ï£¨½ö¹©STLÈİÆ÷Ê¹ÓÃ£©¡£
+    // æ¯”è¾ƒï¼ˆä»…ä¾›STLå®¹å™¨ä½¿ç”¨ï¼‰ã€‚
     template <typename T>
     NODISCARD bool operator==(const Plane<T>& lhs, const Plane<T>& rhs);
 

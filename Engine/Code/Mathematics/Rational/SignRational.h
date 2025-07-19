@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:30)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:30)
 
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_H
 #define MATHEMATICS_RATIONAL_RATIONAL_H
@@ -19,7 +19,7 @@
 
 namespace Mathematics
 {
-    // NÊÇÃ¿¸öÕûÊı·Ö×Ó/·ÖÄ¸µÄ32Î»×ÖµÄÊıÄ¿
+    // Næ˜¯æ¯ä¸ªæ•´æ•°åˆ†å­/åˆ†æ¯çš„32ä½å­—çš„æ•°ç›®
     template <int N>
     class SignRational final : private boost::arithmetic<SignRational<N>, boost::totally_ordered<SignRational<N>, boost::arithmetic<SignRational<N>, Integer<N>>>>
     {
@@ -29,13 +29,13 @@ namespace Mathematics
         using IntegerType = Integer<N>;
 
     public:
-        // Ä¬ÈÏÓĞÀíÊıÊÇ0/1
+        // é»˜è®¤æœ‰ç†æ•°æ˜¯0/1
         SignRational() noexcept;
 
         explicit SignRational(const IntegerType& numerator) noexcept;
         SignRational(const IntegerType& numerator, const IntegerType& denominator);
 
-        // ¹¹Ôì×ª»»¡£
+        // æ„é€ è½¬æ¢ã€‚
         template <typename T>
         explicit SignRational(T numerator);
 
@@ -44,7 +44,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        // ³ÉÔ±·ÃÎÊ
+        // æˆå‘˜è®¿é—®
         NODISCARD IntegerType GetNumerator() const noexcept;
         NODISCARD IntegerType GetDenominator() const noexcept;
         void Set(const IntegerType& newNumerator, const IntegerType& newDenominator);
@@ -63,13 +63,13 @@ namespace Mathematics
         template <typename T>
         NODISCARD T ConvertTo() const;
 
-        // ¼ÆËãÓĞÀíÊıµÄ¾ø¶ÔÖµ¡£
+        // è®¡ç®—æœ‰ç†æ•°çš„ç»å¯¹å€¼ã€‚
         NODISCARD SignRational Abs() const;
 
         NODISCARD NumericalValueSymbol GetSign() const noexcept;
 
     private:
-        // µÖÏû·Ö×ÓºÍ·ÖÄ¸µÄÈÎºÎ2µÄ³ËÃİ¡£
+        // æŠµæ¶ˆåˆ†å­å’Œåˆ†æ¯çš„ä»»ä½•2çš„ä¹˜å¹‚ã€‚
         void EliminatePowersOfTwo();
         int GetPowers() const;
 
@@ -87,7 +87,7 @@ namespace Mathematics
     template <int N>
     NODISCARD SignRational<N> operator/(const Integer<N>& integer, const SignRational<N>& rational);
 
-    // ±È½Ï¡£
+    // æ¯”è¾ƒã€‚
     template <int N>
     NODISCARD bool operator==(const SignRational<N>& lhs, const SignRational<N>& rhs);
     template <int N>

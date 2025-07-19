@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 11:03)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 11:03)
 
 #ifndef MATHEMATICS_SPHERE_COORDINATES_ACHIEVE_H
 #define MATHEMATICS_SPHERE_COORDINATES_ACHIEVE_H
@@ -24,7 +24,7 @@ Mathematics::SphereCoordinates<Real>::SphereCoordinates(Real r, Real theta, Real
 {
     if (!IsValid())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("rÖµ·¶Î§ÔÚ[0,¡Ş)Ö®¼ä£¬¦ÈÖµ·¶Î§ÔÚ[0,¦Ğ]Ö®¼ä£¬¦ÕÖµ·¶Î§ÔÚ[0,2¦Ğ)Ö®¼ä"))
+        THROW_EXCEPTION(SYSTEM_TEXT("rå€¼èŒƒå›´åœ¨[0,âˆ)ä¹‹é—´ï¼ŒÎ¸å€¼èŒƒå›´åœ¨[0,Ï€]ä¹‹é—´ï¼ŒÏ†å€¼èŒƒå›´åœ¨[0,2Ï€)ä¹‹é—´"))
     }
 
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -48,7 +48,7 @@ void Mathematics::SphereCoordinates<Real>::SetR(Real radius)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("radiusÖµ·¶Î§ÔÚ[0,¡Ş)Ö®¼ä¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("radiuså€¼èŒƒå›´åœ¨[0,âˆ)ä¹‹é—´ã€‚"))
     }
 }
 
@@ -64,7 +64,7 @@ void Mathematics::SphereCoordinates<Real>::SetTheta(Real aTheta)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("thetaÖµ±ØĞèÔÚ[0,¦Ğ]Ö®¼ä¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("thetaå€¼å¿…éœ€åœ¨[0,Ï€]ä¹‹é—´ã€‚"))
     }
 }
 
@@ -80,7 +80,7 @@ void Mathematics::SphereCoordinates<Real>::SetPhi(Real aPhi)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("phiÖµ±ØĞèÔÚ[0,2¦Ğ)Ö®¼ä¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("phiå€¼å¿…éœ€åœ¨[0,2Ï€)ä¹‹é—´ã€‚"))
     }
 }
 

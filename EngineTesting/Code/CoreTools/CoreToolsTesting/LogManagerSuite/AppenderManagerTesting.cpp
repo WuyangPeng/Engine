@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/05/09 21:47)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/05/09 21:47)
 
 #include "AppenderManagerTesting.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -185,7 +185,7 @@ void CoreTools::AppenderManagerTesting::WriteTraceMessageTest(const AppenderMana
     LogMessage traceMessage(LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED);
     traceMessage << gTraceMessage;
 
-    /// ÕâÌõÏûÏ¢±»Ğ´ÈëgAppenderManagerTestingFileName
+    /// è¿™æ¡æ¶ˆæ¯è¢«å†™å…¥gAppenderManagerTestingFileName
     manager.Write(traceMessage);
 }
 
@@ -194,7 +194,7 @@ void CoreTools::AppenderManagerTesting::WriteDebugMessageDoNothingTest(const App
     LogMessage debugMessage{ LogLevel::Debug, LogFilter::System, CORE_TOOLS_FUNCTION_DESCRIBED };
     debugMessage << gDebugMessage;
 
-    /// ÕâÌõÏûÏ¢Ã»ÓĞ±»Ğ´ÈëgAppenderManagerTestingFileName
+    /// è¿™æ¡æ¶ˆæ¯æ²¡æœ‰è¢«å†™å…¥gAppenderManagerTestingFileName
     manager.Write(debugMessage);
 }
 
@@ -203,7 +203,7 @@ void CoreTools::AppenderManagerTesting::WriteInfoMessageTest(const AppenderManag
     LogMessage infoMessage{ LogLevel::Info, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
     infoMessage << gInfoMessage;
 
-    /// ÕâÌõÏûÏ¢±»Ğ´ÈëgAppenderManagerTestingFileName
+    /// è¿™æ¡æ¶ˆæ¯è¢«å†™å…¥gAppenderManagerTestingFileName
     manager.Write(infoMessage);
 }
 
@@ -212,7 +212,7 @@ void CoreTools::AppenderManagerTesting::WriteWarnMessageDoNothingTest(const Appe
     LogMessage warnMessage{ LogLevel::Warn, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
     warnMessage << gWarnMessage;
 
-    /// ÕâÌõÏûÏ¢Ã»ÓĞ±»Ğ´ÈëgAppenderManagerTestingFileName
+    /// è¿™æ¡æ¶ˆæ¯æ²¡æœ‰è¢«å†™å…¥gAppenderManagerTestingFileName
     manager.Write(warnMessage);
 }
 
@@ -221,7 +221,7 @@ void CoreTools::AppenderManagerTesting::WriteErrorMessageTest(const AppenderMana
     LogMessage errorMessage{ LogLevel::Error, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
     errorMessage << gErrorMessage;
 
-    /// ÕâÌõÏûÏ¢±»Ğ´ÈëgAppenderManagerTestingFileName
+    /// è¿™æ¡æ¶ˆæ¯è¢«å†™å…¥gAppenderManagerTestingFileName
     manager.Write(errorMessage);
 }
 
@@ -230,7 +230,7 @@ void CoreTools::AppenderManagerTesting::WriteFatalMessageTest(const AppenderMana
     LogMessage fatalMessage{ LogLevel::Fatal, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
     fatalMessage << gFatalMessage;
 
-    /// ÕâÌõÏûÏ¢±»Ğ´ÈëgAppenderManagerTestingFileName
+    /// è¿™æ¡æ¶ˆæ¯è¢«å†™å…¥gAppenderManagerTestingFileName
     manager.Write(fatalMessage);
 }
 

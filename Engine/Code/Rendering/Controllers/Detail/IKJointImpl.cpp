@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 14:04)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 14:04)
 
 #include "Rendering/RenderingExport.h"
 
@@ -282,14 +282,14 @@ bool Rendering::IKJointImpl::UpdateLocalTranslate(MatrixRotationAxis axisIndex)
 
     if (Mathematics::MathF::FAbs(denom) <= Mathematics::MathF::GetZeroTolerance())
     {
-        // È¨ÖØÌ«Ğ¡£¬Ã»ÓĞ×ª»»¡£
+        // æƒé‡å¤ªå°ï¼Œæ²¡æœ‰è½¬æ¢ã€‚
         return false;
     }
 
-    // ËùĞèÑØaxis(i) ×ª»»µÄ¾àÀë¡£
+    // æ‰€éœ€æ²¿axis(i) è½¬æ¢çš„è·ç¦»ã€‚
     auto distance = numer / denom;
 
-    // ½Ø¶Ïµ½·¶Î§
+    // æˆªæ–­åˆ°èŒƒå›´
     auto translate = object.object->GetLocalTransform().GetTranslate();
     auto desired = translate[System::EnumCastUnderlying(axisIndex)] + distance;
     if (desired > minTranslation.at(System::EnumCastUnderlying(axisIndex)))
@@ -310,7 +310,7 @@ bool Rendering::IKJointImpl::UpdateLocalTranslate(MatrixRotationAxis axisIndex)
         translate[System::EnumCastUnderlying(axisIndex)] = minTranslation.at(System::EnumCastUnderlying(axisIndex));
     }
 
-    // ²âÊÔ²½ÖèÊÇ·ñÓ¦¸Ã²ÉÈ¡¡£
+    // æµ‹è¯•æ­¥éª¤æ˜¯å¦åº”è¯¥é‡‡å–ã€‚
     auto newNorm = 0.0f;
     auto step = distance * axis;
     for (const auto& goal : goals)
@@ -321,11 +321,11 @@ bool Rendering::IKJointImpl::UpdateLocalTranslate(MatrixRotationAxis axisIndex)
     }
     if (oldNorm <= newNorm)
     {
-        // ×ª»»²¢Ã»ÓĞµÃµ½¸ü½Ó½üÄ¿±êµÄĞ§¹û¡£
+        // è½¬æ¢å¹¶æ²¡æœ‰å¾—åˆ°æ›´æ¥è¿‘ç›®æ ‡çš„æ•ˆæœã€‚
         return false;
     }
 
-    // ¸üĞÂ±¾µØµÄ×ª»»¡£
+    // æ›´æ–°æœ¬åœ°çš„è½¬æ¢ã€‚
     object.object->SetLocalTransformTranslate(translate);
 
     return true;
@@ -355,19 +355,19 @@ bool Rendering::IKJointImpl::UpdateLocalRotate(MatrixRotationAxis axisIndex)
 
     if (numer * numer + denom * denom <= Mathematics::MathF::GetZeroTolerance())
     {
-        // Î´¶¨Òå atan2,²»Ğı×ª¡£
+        // æœªå®šä¹‰ atan2,ä¸æ—‹è½¬ã€‚
         return false;
     }
 
-    // ËùĞè½Ç¶ÈÈÆaxis(i)Ğı×ª¡£
+    // æ‰€éœ€è§’åº¦ç»•axis(i)æ—‹è½¬ã€‚
     auto theta = Mathematics::MathF::ATan2(numer, denom);
 
-    // ¾Ö²¿Òò×ÓĞı×ªÅ·À­½Ç¡£
+    // å±€éƒ¨å› å­æ—‹è½¬æ¬§æ‹‰è§’ã€‚
     auto rotate = object.object->GetLocalTransform().GetRotate();
     auto rotateMatrix3 = rotate.GetMatrix3();
     auto euler = rotateMatrix3.ExtractEulerZYX();
 
-    // ½Ø¶Ïµ½·¶Î§
+    // æˆªæ–­åˆ°èŒƒå›´
     auto desired = euler.GetAngle(axisIndex) + theta;
     if (desired > minRotation.at(System::EnumCastUnderlying(axisIndex)))
     {
@@ -387,7 +387,7 @@ bool Rendering::IKJointImpl::UpdateLocalRotate(MatrixRotationAxis axisIndex)
         euler.SetAngle(axisIndex, minRotation.at(System::EnumCastUnderlying(axisIndex)));
     }
 
-    // ²âÊÔ²½ÖèÊÇ·ñÓ¦¸Ã²ÉÈ¡¡£
+    // æµ‹è¯•æ­¥éª¤æ˜¯å¦åº”è¯¥é‡‡å–ã€‚
     auto newNorm = 0.0f;
     rotate.MakeRotation(axis, theta);
     for (const auto& goal : goals)
@@ -400,11 +400,11 @@ bool Rendering::IKJointImpl::UpdateLocalRotate(MatrixRotationAxis axisIndex)
 
     if (oldNorm <= newNorm)
     {
-        // Ğı×ª²¢Ã»ÓĞµÃµ½¸ü½Ó½üÄ¿±êµÄĞ§¹û¡£
+        // æ—‹è½¬å¹¶æ²¡æœ‰å¾—åˆ°æ›´æ¥è¿‘ç›®æ ‡çš„æ•ˆæœã€‚
         return false;
     }
 
-    // ¸üĞÂ¾Ö²¿Ğı×ª
+    // æ›´æ–°å±€éƒ¨æ—‹è½¬
     rotateMatrix3.MakeEulerZYX(euler.GetZ0Angle(), euler.GetY0Angle(), euler.GetX0Angle());
 
     rotate = Mathematics::MatrixF{ rotateMatrix3 };
@@ -423,7 +423,7 @@ Rendering::ConstSpatialSharedPtr Rendering::IKJointImpl::GetObjectSharedPtr() co
 Rendering::ConstIKGoalSharedPtr Rendering::IKJointImpl::GetGoalsSharedPtr(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(goals.size()), "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(goals.size()), "ç´¢å¼•é”™è¯¯ï¼");
 
     return goals.at(index).object;
 }
@@ -438,7 +438,7 @@ int Rendering::IKJointImpl::GetGoalsNum() const
 void Rendering::IKJointImpl::SetAllowTranslation(MatrixRotationAxis axisIndex, bool aAllowTranslation)
 {
     RENDERING_CLASS_IS_VALID_9;
-    RENDERING_ASSERTION_0(0 <= System::EnumCastUnderlying(axisIndex) && System::EnumCastUnderlying(axisIndex) < numAxis, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= System::EnumCastUnderlying(axisIndex) && System::EnumCastUnderlying(axisIndex) < numAxis, "ç´¢å¼•é”™è¯¯ï¼");
 
     allowTranslation.at(System::EnumCastUnderlying(axisIndex)) = aAllowTranslation;
 }
@@ -446,7 +446,7 @@ void Rendering::IKJointImpl::SetAllowTranslation(MatrixRotationAxis axisIndex, b
 void Rendering::IKJointImpl::SetAllowRotation(MatrixRotationAxis axisIndex, bool aAllowRotation)
 {
     RENDERING_CLASS_IS_VALID_9;
-    RENDERING_ASSERTION_0(0 <= System::EnumCastUnderlying(axisIndex) && System::EnumCastUnderlying(axisIndex) < numAxis, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= System::EnumCastUnderlying(axisIndex) && System::EnumCastUnderlying(axisIndex) < numAxis, "ç´¢å¼•é”™è¯¯ï¼");
 
     allowRotation.at(System::EnumCastUnderlying(axisIndex)) = aAllowRotation;
 }
@@ -454,7 +454,7 @@ void Rendering::IKJointImpl::SetAllowRotation(MatrixRotationAxis axisIndex, bool
 bool Rendering::IKJointImpl::IsAllowTranslation(MatrixRotationAxis axisIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    RENDERING_ASSERTION_0(0 <= System::EnumCastUnderlying(axisIndex) && System::EnumCastUnderlying(axisIndex) < numAxis, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= System::EnumCastUnderlying(axisIndex) && System::EnumCastUnderlying(axisIndex) < numAxis, "ç´¢å¼•é”™è¯¯ï¼");
 
     return allowTranslation.at(System::EnumCastUnderlying(axisIndex));
 }
@@ -462,7 +462,7 @@ bool Rendering::IKJointImpl::IsAllowTranslation(MatrixRotationAxis axisIndex) co
 bool Rendering::IKJointImpl::IsAllowRotation(MatrixRotationAxis axisIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    RENDERING_ASSERTION_0(0 <= System::EnumCastUnderlying(axisIndex) && System::EnumCastUnderlying(axisIndex) < numAxis, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= System::EnumCastUnderlying(axisIndex) && System::EnumCastUnderlying(axisIndex) < numAxis, "ç´¢å¼•é”™è¯¯ï¼");
 
     return allowRotation.at(System::EnumCastUnderlying(axisIndex));
 }

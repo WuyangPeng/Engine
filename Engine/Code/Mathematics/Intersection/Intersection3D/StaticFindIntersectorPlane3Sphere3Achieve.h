@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 13:51)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 13:51)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_SPHERE3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_SPHERE3_ACHIEVE_H
@@ -60,14 +60,14 @@ void Mathematics::StaticFindIntersectorPlane3Sphere3<Real>::Find()
     const auto normal = plane.GetNormal();
     if (distance <= sphere.GetRadius())
     {
-        // ÇòÌåÓëÆ½ÃæÏà½»³ÉÒ»¸öÔ²¡£ µ±¾àÀëµÈÓÚm_Sphere.GetRadius()Ê±£¬Ô²»áÍË»¯£¬ÔÚÕâÖÖÇé¿öÏÂ£¬Ô²°ë¾¶ÎªÁã¡£
+        // çƒä½“ä¸å¹³é¢ç›¸äº¤æˆä¸€ä¸ªåœ†ã€‚ å½“è·ç¦»ç­‰äºm_Sphere.GetRadius()æ—¶ï¼Œåœ†ä¼šé€€åŒ–ï¼Œåœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œåœ†åŠå¾„ä¸ºé›¶ã€‚
         auto radius = MathType::Sqrt(MathType::FAbs(sphere.GetRadius() * sphere.GetRadius() - distance * distance));
         this->SetIntersectionType(IntersectionType::Point);
         circle = Circle3Type{ center, Vector3Type::GetZero(), Vector3Type::GetZero(), normal, radius };
         return;
     }
 
-    // Ô²µÄ¸½¼ÓÖ¸Ê¾¡£
+    // åœ†çš„é™„åŠ æŒ‡ç¤ºã€‚
     auto radius = MathType::GetValue(-1);
     circle = Circle3Type{ center, Vector3Type::GetZero(), Vector3Type::GetZero(), normal, radius };
     this->SetIntersectionType(IntersectionType::Empty);

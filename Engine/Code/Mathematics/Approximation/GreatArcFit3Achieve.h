@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:13)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:13)
 
 #ifndef MATHEMATICS_APPROXIMATION_GREAT_ARC_FIT3_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_GREAT_ARC_FIT3_ACHIEVE_H
@@ -27,19 +27,19 @@ Mathematics::GreatArcFit3<Real>::GreatArcFit3(const Points& points)
 template <typename Real>
 void Mathematics::GreatArcFit3<Real>::Calculate(const Points& points)
 {
-    // µÃµ½×îĞ¡¶ş³ËÏòÁ¿µÄ´óÔ²¡£Ô²ÊÇÆ½ÃæÉÏµÄµã Dot(N,X) = 0¡£
+    // å¾—åˆ°æœ€å°äºŒä¹˜å‘é‡çš„å¤§åœ†ã€‚åœ†æ˜¯å¹³é¢ä¸Šçš„ç‚¹ Dot(N,X) = 0ã€‚
     GreatCircleFit3<Real> greatCircleFit{ points };
 
     normal = greatCircleFit.GetNormal();
 
-    // ¼ÆËãÏòÁ¿µÄ×ø±êÏµÍ³ÔÊĞíÍ¶Ó°µ½´óÔ²¡£×ø±êÖáÏß·½ÏòÎªU,VºÍN¡£
+    // è®¡ç®—å‘é‡çš„åæ ‡ç³»ç»Ÿå…è®¸æŠ•å½±åˆ°å¤§åœ†ã€‚åæ ‡è½´çº¿æ–¹å‘ä¸ºU,Vå’ŒNã€‚
     const auto basis = Vector3Tools<Real>::GenerateComplementBasis(normal);
 
-    // ÏòÁ¿ÊÇ X[i] = u[i] * U + v[i] * V + w[i] * N¡£
-    // Í¶Ó°ÊÇP[i] = (u[i] * U + v[i] * V) / sqrt(u[i] * u[i] + v[i] * v[i])
-    // ´óÔ²ÊÇ²ÎÊı»¯ÎªC(t) = cos(t) * U + sin(t) * V¡£
-    // ¼ÆËã½Ç¶ÈtÔÚ[-pi,pi]Í¶Ó°µ½´óÔ²¡£
-    // Ëü²»ÊÇ±ØÒªÕıÔò»¯(u[i],v[i]),Ïà·´È¥¼ÆËãt = atan2(v[i],u[i])
+    // å‘é‡æ˜¯ X[i] = u[i] * U + v[i] * V + w[i] * Nã€‚
+    // æŠ•å½±æ˜¯P[i] = (u[i] * U + v[i] * V) / sqrt(u[i] * u[i] + v[i] * v[i])
+    // å¤§åœ†æ˜¯å‚æ•°åŒ–ä¸ºC(t) = cos(t) * U + sin(t) * Vã€‚
+    // è®¡ç®—è§’åº¦tåœ¨[-pi,pi]æŠ•å½±åˆ°å¤§åœ†ã€‚
+    // å®ƒä¸æ˜¯å¿…è¦æ­£åˆ™åŒ–(u[i],v[i]),ç›¸åå»è®¡ç®—t = atan2(v[i],u[i])
     std::vector<GreatArcFit3Item<Real>> items;
 
     for (const auto& point : points)
@@ -49,8 +49,8 @@ void Mathematics::GreatArcFit3<Real>::Calculate(const Points& points)
 
     std::sort(items.begin(), items.end());
 
-    // Á¬Ğø¶¨Î»µÄ½Ç¶ÈÊÇÒ»¸ö×î´óµÄ²îÖµ¡£
-    // Êµ¼ÊÉÏ, ÎÒÃÇ¹¹½¨Ò»¸öÔ²×¶°üº¬×îĞ¡½ÇµÄµ¥Î»³¤¶ÈÏòÁ¿¡£
+    // è¿ç»­å®šä½çš„è§’åº¦æ˜¯ä¸€ä¸ªæœ€å¤§çš„å·®å€¼ã€‚
+    // å®é™…ä¸Š, æˆ‘ä»¬æ„å»ºä¸€ä¸ªåœ†é”¥åŒ…å«æœ€å°è§’çš„å•ä½é•¿åº¦å‘é‡ã€‚
     const auto numPointsMinus1 = points.size() - 1;
     auto maxDiff = MathType::GetTwoPI() + items.at(0).GetAngle() - items.at(numPointsMinus1).GetAngle();
     auto end0 = 0;

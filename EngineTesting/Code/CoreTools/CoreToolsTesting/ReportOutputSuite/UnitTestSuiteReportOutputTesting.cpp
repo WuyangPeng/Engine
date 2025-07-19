@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/04/23 10:21)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/04/23 10:21)
 
 #include "UnitTestSuiteReportOutputTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -39,8 +39,8 @@ void CoreTools::UnitTestSuiteReportOutputTesting::MainTest()
 
 void CoreTools::UnitTestSuiteReportOutputTesting::UnitTestSuiteReportOutputEquidistantTest()
 {
-    const auto characterContent = "ÕâÀïµÄÎÄ×Ö±»Á½ĞĞ-°üÎ§£¬ÇÒÓëÎÄ×Ö³¤¶ÈÒ»ÖÂ!"s;
-    UnitTestSuiteReportOutput output{ "²âÊÔ"s, 40, GetStream() };
+    const auto characterContent = "è¿™é‡Œçš„æ–‡å­—è¢«ä¸¤è¡Œ-åŒ…å›´ï¼Œä¸”ä¸æ–‡å­—é•¿åº¦ä¸€è‡´!"s;
+    UnitTestSuiteReportOutput output{ "æµ‹è¯•"s, 40, GetStream() };
 
     output.PrintBorderLine('-');
     output.PrintNewLine();
@@ -52,9 +52,9 @@ void CoreTools::UnitTestSuiteReportOutputTesting::UnitTestSuiteReportOutputEquid
 
 void CoreTools::UnitTestSuiteReportOutputTesting::UnitTestSuiteReportOutputTimeTest()
 {
-    const auto currentTimeContent = "*************ÕâÀï´òÓ¡µ±Ç°Ê±¼ä£¬ÇÒÓÒ¶ÔÆë:"s;
-    const auto costTimeContent = "*************ÕâÀï´òÓ¡»¨·ÑÊ±¼ä£¬ÇÒ×ó¶ÔÆë:"s;
-    UnitTestSuiteReportOutput output{ "²âÊÔ"s, boost::numeric_cast<int>(currentTimeContent.size()), GetStream() };
+    const auto currentTimeContent = "*************è¿™é‡Œæ‰“å°å½“å‰æ—¶é—´ï¼Œä¸”å³å¯¹é½:"s;
+    const auto costTimeContent = "*************è¿™é‡Œæ‰“å°èŠ±è´¹æ—¶é—´ï¼Œä¸”å·¦å¯¹é½:"s;
+    UnitTestSuiteReportOutput output{ "æµ‹è¯•"s, boost::numeric_cast<int>(currentTimeContent.size()), GetStream() };
     const boost::timer::cpu_timer cpuTime{};
 
     output.PrintString(currentTimeContent);
@@ -69,12 +69,12 @@ void CoreTools::UnitTestSuiteReportOutputTesting::UnitTestSuiteReportOutputTimeT
 
 void CoreTools::UnitTestSuiteReportOutputTesting::UnitTestSuiteReportOutputTestResultTest()
 {
-    const auto describeContent = "ÏÂÃæµÄÎåĞĞÎÄ×Ö´òÓ¡Ğé¼ÙµÄµ¥Ôª²âÊÔ½á¹û£º"s;
+    const auto describeContent = "ä¸‹é¢çš„äº”è¡Œæ–‡å­—æ‰“å°è™šå‡çš„å•å…ƒæµ‹è¯•ç»“æœï¼š"s;
     const auto colorContent =
-        "µÚÈıĞĞÎÄ×ÖÔÚ¿ØÖÆÌ¨ÖĞÏÔÊ¾Îª°×É«£¬"
-        "µÚËÄĞĞÎÄ×ÖÏÔÊ¾ÎªºìÉ«£¬"
-        "µÚÎåĞĞÎÄ×ÖÏÔÊ¾Îª¼ÓÉîµÄºìÉ«¡£";
-    UnitTestSuiteReportOutput output{ "²âÊÔ"s, 20, GetStream() };
+        "ç¬¬ä¸‰è¡Œæ–‡å­—åœ¨æ§åˆ¶å°ä¸­æ˜¾ç¤ºä¸ºç™½è‰²ï¼Œ"
+        "ç¬¬å››è¡Œæ–‡å­—æ˜¾ç¤ºä¸ºçº¢è‰²ï¼Œ"
+        "ç¬¬äº”è¡Œæ–‡å­—æ˜¾ç¤ºä¸ºåŠ æ·±çš„çº¢è‰²ã€‚";
+    UnitTestSuiteReportOutput output{ "æµ‹è¯•"s, 20, GetStream() };
 
     output.PrintString(describeContent);
     output.PrintString(colorContent);

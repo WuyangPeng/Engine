@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 13:47)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 13:47)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_CAPSULE3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_CAPSULE3_ACHIEVE_H
@@ -102,7 +102,7 @@ Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorLine3Capsule3<Real>
             return point1;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Ë÷ÒıÔ½½ç\n"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•è¶Šç•Œ\n"s));
 }
 
 template <typename Real>
@@ -110,10 +110,10 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
 {
     FindShared findShared{};
 
-    /// Îª½ºÄÒ´´½¨×ø±êÏµ¡£ ÔÚ¸ÃÏµÍ³ÖĞ£¬½ºÄÒ¶ÎÖĞĞÄCÎªÔ­µã£¬½ºÄÒÖá·½ÏòWÎªzÖá¡£
-    /// UºÍVÊÇÆäËû×ø±êÖá·½Ïò¡£ Èç¹ûP = x * U + y * V + z * W£¬Ôò°üº¬½ºÄÒ±ÚµÄÔ²ÖùÌåÎªx^2 + y^2 = r^2£¬ÆäÖĞrÊÇ½ºÄÒ°ë¾¶¡£
-    /// ×é³É½ºÄÒ¼õÈ¥Æä°ëÇòĞÎ¶Ë¸ÇµÄÓĞÏŞÔ²ÖùÌåµÄzÖµ|z| <= e£¬ÆäÖĞeÊÇ½ºÄÒ¶ÎµÄ·¶Î§¡£
-    /// ¶ÔÓÚz > = e£¬ÉÏ°ëÇòÉÏÏŞÎªx^2+y^2+(z-e)^2 = r^2£»¶ÔÓÚz <= -e£¬ÏÂ°ëÇòÉÏÏŞÎªx^2+y^2+(z+e)^2 = r^2¡£
+    /// ä¸ºèƒ¶å›Šåˆ›å»ºåæ ‡ç³»ã€‚ åœ¨è¯¥ç³»ç»Ÿä¸­ï¼Œèƒ¶å›Šæ®µä¸­å¿ƒCä¸ºåŸç‚¹ï¼Œèƒ¶å›Šè½´æ–¹å‘Wä¸ºzè½´ã€‚
+    /// Uå’ŒVæ˜¯å…¶ä»–åæ ‡è½´æ–¹å‘ã€‚ å¦‚æœP = x * U + y * V + z * Wï¼Œåˆ™åŒ…å«èƒ¶å›Šå£çš„åœ†æŸ±ä½“ä¸ºx^2 + y^2 = r^2ï¼Œå…¶ä¸­ræ˜¯èƒ¶å›ŠåŠå¾„ã€‚
+    /// ç»„æˆèƒ¶å›Šå‡å»å…¶åŠçƒå½¢ç«¯ç›–çš„æœ‰é™åœ†æŸ±ä½“çš„zå€¼|z| <= eï¼Œå…¶ä¸­eæ˜¯èƒ¶å›Šæ®µçš„èŒƒå›´ã€‚
+    /// å¯¹äºz > = eï¼Œä¸ŠåŠçƒä¸Šé™ä¸ºx^2+y^2+(z-e)^2 = r^2ï¼›å¯¹äºz <= -eï¼Œä¸‹åŠçƒä¸Šé™ä¸ºx^2+y^2+(z+e)^2 = r^2ã€‚
     const auto segmentDirection = capsule.GetSegment().GetDirection();
     const auto vector3OrthonormalBasis = Vector3ToolsType::GenerateComplementBasis(segmentDirection);
     const auto uVector = vector3OrthonormalBasis.GetUVector();
@@ -121,23 +121,23 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
     auto radiusSqr = capsule.GetRadius() * capsule.GetRadius();
     auto extent = capsule.GetSegment().GetExtent();
 
-    // ½«ÊäÈëÏßµÄÔ­µã×ª»»Îª½ºÄÒ×ø±ê¡£
+    // å°†è¾“å…¥çº¿çš„åŸç‚¹è½¬æ¢ä¸ºèƒ¶å›Šåæ ‡ã€‚
     auto diff = origin - capsule.GetSegment().GetCenterPoint();
     const Vector3 point{ Vector3ToolsType::DotProduct(uVector, diff), Vector3ToolsType::DotProduct(vVector, diff), Vector3ToolsType::DotProduct(segmentDirection, diff) };
 
-    // »ñÈ¡ÏßµÄµ¥Î»³¤¶È·½ÏòÔÚ½ºÄÒ×ø±êÖĞµÄzÖµ¡£
+    // è·å–çº¿çš„å•ä½é•¿åº¦æ–¹å‘åœ¨èƒ¶å›Šåæ ‡ä¸­çš„zå€¼ã€‚
     auto directionDot = Vector3ToolsType::DotProduct(segmentDirection, direction);
     if (MathType::GetValue(1) - MathType::GetZeroTolerance() <= MathType::FAbs(directionDot))
     {
-        // ¸ÃÏßÆ½ĞĞÓÚ½ºÄÒÖáÏß¡£ È·¶¨¸ÃÏßÊÇ·ñÓë½ºÄÒ°ëÇòÏà½»¡£
+        // è¯¥çº¿å¹³è¡Œäºèƒ¶å›Šè½´çº¿ã€‚ ç¡®å®šè¯¥çº¿æ˜¯å¦ä¸èƒ¶å›ŠåŠçƒç›¸äº¤ã€‚
         auto radialSqrDist = radiusSqr - point.GetX() * point.GetX() - point.GetY() * point.GetY();
         if (radialSqrDist < MathType::GetValue(0))
         {
-            // ÏßÔÚ½ºÄÒÔ²ÖùÌåµÄÍâ²¿£¬ÎŞÏà½»´¦¡£
+            // çº¿åœ¨èƒ¶å›Šåœ†æŸ±ä½“çš„å¤–éƒ¨ï¼Œæ— ç›¸äº¤å¤„ã€‚
             return findShared;
         }
 
-        // ÏßÓë°ëÇòÃ±Ïà½»
+        // çº¿ä¸åŠçƒå¸½ç›¸äº¤
         auto zOffset = MathType::Sqrt(radialSqrDist) + extent;
         if (MathType::GetValue(0) < directionDot)
         {
@@ -154,11 +154,11 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
         return findShared;
     }
 
-    // ½«ÊäÈëÏßµ¥Î»³¤¶È·½Ïò×ª»»Îª½ºÄÒ×ø±ê¡£
+    // å°†è¾“å…¥çº¿å•ä½é•¿åº¦æ–¹å‘è½¬æ¢ä¸ºèƒ¶å›Šåæ ‡ã€‚
     const Vector3 dot{ Vector3ToolsType::DotProduct(uVector, direction), Vector3ToolsType::DotProduct(vVector, direction), directionDot };
 
-    /// ²âÊÔÏß P + t * DÓëÎŞÏŞÔ²Öùx^2 + y^2 = r^2µÄ½»µã¡£ Õâ¼ò»¯Îª¼ÆËã¶ş´Î·½³ÌÊ½µÄ¸ù¡£
-    /// Èç¹ûP = (px,py,pz)ºÍ D = (dx,dy,dz)£¬Ôò¶ş´Î·½³ÌÎª
+    /// æµ‹è¯•çº¿ P + t * Dä¸æ— é™åœ†æŸ±x^2 + y^2 = r^2çš„äº¤ç‚¹ã€‚ è¿™ç®€åŒ–ä¸ºè®¡ç®—äºŒæ¬¡æ–¹ç¨‹å¼çš„æ ¹ã€‚
+    /// å¦‚æœP = (px,py,pz)å’Œ D = (dx,dy,dz)ï¼Œåˆ™äºŒæ¬¡æ–¹ç¨‹ä¸º
     /// (dx^2 + dy^2) * t^2 + 2 * (px * dx + py * dy) * t + (px^2 + py^2 - r^2) = 0
     auto a0 = point.GetX() * point.GetX() + point.GetY() * point.GetY() - radiusSqr;
     auto a1 = point.GetX() * dot.GetX() + point.GetY() * dot.GetY();
@@ -166,14 +166,14 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
     auto discr = a1 * a1 - a0 * a2;
     if (discr < MathType::GetValue(0))
     {
-        // Ïß²»ÓëÎŞÏŞÔ²ÖùÏà½»¡£
+        // çº¿ä¸ä¸æ— é™åœ†æŸ±ç›¸äº¤ã€‚
         return findShared;
     }
 
     int quantity = 0;
     if (MathType::GetZeroTolerance() < discr)
     {
-        // ÏßÔÚÁ½¸öµØ·½ÓëÎŞÏŞÔ²ÖùÏà½»¡£
+        // çº¿åœ¨ä¸¤ä¸ªåœ°æ–¹ä¸æ— é™åœ†æŸ±ç›¸äº¤ã€‚
         auto root = MathType::Sqrt(discr);
         auto inv = (MathType::GetValue(1)) / a2;
         auto tValue = (-a1 - root) * inv;
@@ -201,14 +201,14 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
 
         if (quantity == 2)
         {
-            // ÏßÔÚÁ½¸öµØ·½Óë½ºÄÒ±ÚÏà½»¡£
+            // çº¿åœ¨ä¸¤ä¸ªåœ°æ–¹ä¸èƒ¶å›Šå£ç›¸äº¤ã€‚
             findShared.quantity = 2;
             return findShared;
         }
     }
     else
     {
-        // ÏßÓëÎŞÏŞÔ²ÖùÏàÇĞ¡£
+        // çº¿ä¸æ— é™åœ†æŸ±ç›¸åˆ‡ã€‚
         auto tValue = -a1 / a2;
 
         if (auto zValue = point.GetZ() + tValue * dot.GetZ();
@@ -221,8 +221,8 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
         }
     }
 
-    /// ²âÊÔÓëÏÂ°ëÇòµÄ½»µã¡£ ¶ş´Î·½³ÌÊÇt^2 + 2 * (px * dx + py * dy + (pz + e) * dz) * t + (px^2 + py^2 + (pz + e)^2 - r^2) = 0
-    /// Ê¹ÓÃµ±Ç°a1 = px * dx + py * dyºÍa0 = px^2 + py^2 - r^2µÄÊÂÊµ¡£ Ç°µ¼ÏµÊıÎªa2 = 1£¬Òò´ËÎŞĞè°üº¬ÔÚ¹¹ÔìÖĞ¡£
+    /// æµ‹è¯•ä¸ä¸‹åŠçƒçš„äº¤ç‚¹ã€‚ äºŒæ¬¡æ–¹ç¨‹æ˜¯t^2 + 2 * (px * dx + py * dy + (pz + e) * dz) * t + (px^2 + py^2 + (pz + e)^2 - r^2) = 0
+    /// ä½¿ç”¨å½“å‰a1 = px * dx + py * dyå’Œa0 = px^2 + py^2 - r^2çš„äº‹å®ã€‚ å‰å¯¼ç³»æ•°ä¸ºa2 = 1ï¼Œå› æ­¤æ— éœ€åŒ…å«åœ¨æ„é€ ä¸­ã€‚
     auto zPlusExtent = point.GetZ() + extent;
     a1 += zPlusExtent * dot.GetZ();
     a0 += zPlusExtent * zPlusExtent;
@@ -308,9 +308,9 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
         }
     }
 
-    /// ²âÊÔÓëÉÏ°ëÇòµÄ½»µã¡£ ¶ş´Î·½³ÌÊÇt^2 + 2 * (px * dx + py * dy + (pz - e) * dz) * t + (px^2 + py^2 + (pz - e)^2 - r^2) = 0
-    /// Ê¹ÓÃµ±Ç°a1 = px * dx  + py * dy + (pz + e) * dzºÍa0 = px^2 + py^2 + (pz + e)^2 - r^2µÄÊÂÊµ¡£
-    /// Ç°µ¼ÏµÊıÎªa2 = 1£¬Òò´ËÎŞĞè°üº¬ÔÚ¹¹ÔìÖĞ¡£
+    /// æµ‹è¯•ä¸ä¸ŠåŠçƒçš„äº¤ç‚¹ã€‚ äºŒæ¬¡æ–¹ç¨‹æ˜¯t^2 + 2 * (px * dx + py * dy + (pz - e) * dz) * t + (px^2 + py^2 + (pz - e)^2 - r^2) = 0
+    /// ä½¿ç”¨å½“å‰a1 = px * dx  + py * dy + (pz + e) * dzå’Œa0 = px^2 + py^2 + (pz + e)^2 - r^2çš„äº‹å®ã€‚
+    /// å‰å¯¼ç³»æ•°ä¸ºa2 = 1ï¼Œå› æ­¤æ— éœ€åŒ…å«åœ¨æ„é€ ä¸­ã€‚
     a1 -= (MathType::GetValue(2))*extent * dot.GetZ();
     a0 -= (MathType::GetValue(4))*extent * point.GetZ();
     discr = a1 * a1 - a0;

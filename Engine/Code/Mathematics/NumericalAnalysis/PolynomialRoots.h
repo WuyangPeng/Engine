@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 13:44)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 13:44)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_H
@@ -21,23 +21,23 @@
 
 namespace Mathematics
 {
-    // ·½·¨ÃûÊÇ
+    // æ–¹æ³•åæ˜¯
     //
-    // Algebraic£º´úÊıÊ¹ÓÃ·â±ÕĞÎÊ½±í´ï£¨¿ìËÙ£¬Í¨³£²»½¡×³£©
-    // Bisection£º¶ş·Ö·¨£¨¸ù±ß½çºó£¬»ºÂı¶ø½¡×³£©
-    // Newton£ºÅ£¶Ù/µÈ·Ö»ìºÏ£¨¸ù±ß½çºó£¬ÖĞ¶ø½¡×³£©
-    // Eigenvalues£ºÍ¬°é¾ØÕóµÄÌØÕ÷Öµ£¨¿ìËÙ½¡×³£©
+    // Algebraicï¼šä»£æ•°ä½¿ç”¨å°é—­å½¢å¼è¡¨è¾¾ï¼ˆå¿«é€Ÿï¼Œé€šå¸¸ä¸å¥å£®ï¼‰
+    // Bisectionï¼šäºŒåˆ†æ³•ï¼ˆæ ¹è¾¹ç•Œåï¼Œç¼“æ…¢è€Œå¥å£®ï¼‰
+    // Newtonï¼šç‰›é¡¿/ç­‰åˆ†æ··åˆï¼ˆæ ¹è¾¹ç•Œåï¼Œä¸­è€Œå¥å£®ï¼‰
+    // Eigenvaluesï¼šåŒä¼´çŸ©é˜µçš„ç‰¹å¾å€¼ï¼ˆå¿«é€Ÿå¥å£®ï¼‰
 
-    // ¸ù½çÏŞ£º
+    // æ ¹ç•Œé™ï¼š
     //
-    // ¶ÔÓÚÒ»¸öÊ×Ò»¶àÏîÊ½
+    // å¯¹äºä¸€ä¸ªé¦–ä¸€å¤šé¡¹å¼
     // x^n + a[n-1]*x^{n-1} + ... + a[1]*x + a[0]
-    // µÄ¿ÂÎ÷Ô¼ÊøÎªM = 1 + max{|a[0]|,...,|a[n-1]|}¡£
-    // ËùÓĞÊµÊı¸ù±ØĞëÎ»ÓÚÇø¼ä[-M,M]¡£
-    // ¶ÔÓÚ·ÇÊ×Ò»¶àÏîÊ½£¬
-    // b[n]*x^n + b[n-1]*x^{n-1} + ... + b[1]*x + b[0]£¬
-    // ÔÚb[n]Îª²»ÎªÁã£¬Í¨¹ı³ıÒÔËü£¬²¢¼ÆËã¿ÂÎ÷Ô¼Êø£º
-    // 1 + max{|b[0]/b[n]|,...,|b[n-1]/b[n]|}¡£
+    // çš„æŸ¯è¥¿çº¦æŸä¸ºM = 1 + max{|a[0]|,...,|a[n-1]|}ã€‚
+    // æ‰€æœ‰å®æ•°æ ¹å¿…é¡»ä½äºåŒºé—´[-M,M]ã€‚
+    // å¯¹äºéé¦–ä¸€å¤šé¡¹å¼ï¼Œ
+    // b[n]*x^n + b[n-1]*x^{n-1} + ... + b[1]*x + b[0]ï¼Œ
+    // åœ¨b[n]ä¸ºä¸ä¸ºé›¶ï¼Œé€šè¿‡é™¤ä»¥å®ƒï¼Œå¹¶è®¡ç®—æŸ¯è¥¿çº¦æŸï¼š
+    // 1 + max{|b[0]/b[n]|,...,|b[n-1]/b[n]|}ã€‚
 
     template <typename Real>
     class PolynomialRoots final
@@ -67,15 +67,15 @@ namespace Mathematics
         NODISCARD ContainerConstIter GetBegin() const noexcept;
         NODISCARD ContainerConstIter GetEnd() const;
 
-        // Ò»´Î·½³Ì:  once * x + constant = 0
+        // ä¸€æ¬¡æ–¹ç¨‹:  once * x + constant = 0
         NODISCARD bool FindAlgebraic(Real constant, Real once);
         NODISCARD Real GetBound(Real constant, Real once);
 
-        // ¶ş´Î·½³Ì:  secondary * x^2 + once * x + constant = 0
+        // äºŒæ¬¡æ–¹ç¨‹:  secondary * x^2 + once * x + constant = 0
         NODISCARD bool FindAlgebraic(Real constant, Real once, Real secondary);
         NODISCARD Real GetBound(Real constant, Real once, Real secondary);
 
-        // Èı´Î·½³Ì: thrice * x^3 + secondary * x^2+ once * x + constant = 0
+        // ä¸‰æ¬¡æ–¹ç¨‹: thrice * x^3 + secondary * x^2+ once * x + constant = 0
         NODISCARD bool FindAlgebraic(Real constant, Real once, Real secondary, Real thrice);
         NODISCARD bool FindEigenvalues(Real constant,
                                        Real once,
@@ -86,28 +86,28 @@ namespace Mathematics
                                        bool isUseCompanion = true);
         NODISCARD Real GetBound(Real constant, Real once, Real secondary, Real thrice);
 
-        // ½â thrice * r^3 + once * r = constant £¬ÆäÖĞthrice > 0ºÍonce > 0£¬Õâ¸ö·½³ÌÓÀÔ¶¶¼Ö»ÓĞÒ»¸öÊµÊı¸ù¡£
+        // è§£ thrice * r^3 + once * r = constant ï¼Œå…¶ä¸­thrice > 0å’Œonce > 0ï¼Œè¿™ä¸ªæ–¹ç¨‹æ°¸è¿œéƒ½åªæœ‰ä¸€ä¸ªå®æ•°æ ¹ã€‚
         NODISCARD Real SpecialCubic(Real thrice, Real once, Real constant) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        // ËÄ´Î·½³Ì: quartic * x^4 + thrice * x^3 + secondary * x^2 + once * x + constant = 0
+        // å››æ¬¡æ–¹ç¨‹: quartic * x^4 + thrice * x^3 + secondary * x^2 + once * x + constant = 0
         NODISCARD bool FindAlgebraic(Real constant, Real once, Real secondary, Real thrice, Real quartic);
         NODISCARD bool FindEigenvalues(Real constant, Real once, Real secondary, Real thrice, Real quartic, bool doBalancing, Real tolerance = static_cast<Real>(0.001));
         NODISCARD Real GetBound(Real constant, Real once, Real secondary, Real thrice, Real quartic);
 
-        // Ò»°ã·½³Ì: sum_{i=0}^{degree} c(i) * x^i = 0
+        // ä¸€èˆ¬æ–¹ç¨‹: sum_{i=0}^{degree} c(i) * x^i = 0
         NODISCARD bool FindBisection(const PolynomialType& polynomial, int digits);
         NODISCARD Real GetBound(const PolynomialType& polynomial);
 
-        // ²éÕÒÒªÔÚÖ¸¶¨µÄ¼ä¸ô¡£
+        // æŸ¥æ‰¾è¦åœ¨æŒ‡å®šçš„é—´éš”ã€‚
         NODISCARD bool FindBisection(const PolynomialType& polynomial, Real xMin, Real xMax, int digits);
 
         NODISCARD bool AllRealPartsNegative(const PolynomialType& polynomial);
         NODISCARD bool AllRealPartsPositive(const PolynomialType& polynomial);
 
-        // ¼ÆËã[begin,end]ÖĞ¸ùµÄÊıÄ¿¡£
-        // ÀûÓÃSturmĞòÁĞ×ö¼ÆÊı¡£ËüÔÊĞíÍ¨¹ıÔÚ -MathType<Real>::sm_MaxReal»ò end = MathType<Real>::sm_MaxReal¡£
-        // m_EpsilonµÄÖµ±»ÓÃ×÷ÔÚÖÕµãÉÏµÄSturm¶àÏîÊ½µÄÖµµÄãĞÖµ¡£
-        // Èç¹û¸üĞ¡£¬Ôò¸ÃÖµ±»¼ÙÉèÎªÁã¡£·µ»ØÖµÊÇ¸ùÊı¡£Èç¹ûÓĞÎŞÇî¶à¸ö£¬Ôò·µ»Ø-1¡£
+        // è®¡ç®—[begin,end]ä¸­æ ¹çš„æ•°ç›®ã€‚
+        // åˆ©ç”¨Sturmåºåˆ—åšè®¡æ•°ã€‚å®ƒå…è®¸é€šè¿‡åœ¨ -MathType<Real>::sm_MaxRealæˆ– end = MathType<Real>::sm_MaxRealã€‚
+        // m_Epsilonçš„å€¼è¢«ç”¨ä½œåœ¨ç»ˆç‚¹ä¸Šçš„Sturmå¤šé¡¹å¼çš„å€¼çš„é˜ˆå€¼ã€‚
+        // å¦‚æœæ›´å°ï¼Œåˆ™è¯¥å€¼è¢«å‡è®¾ä¸ºé›¶ã€‚è¿”å›å€¼æ˜¯æ ¹æ•°ã€‚å¦‚æœæœ‰æ— ç©·å¤šä¸ªï¼Œåˆ™è¿”å›-1ã€‚
         NODISCARD int GetRootCount(const PolynomialType& polynomial, Real begin, Real end);
 
     private:
@@ -119,7 +119,7 @@ namespace Mathematics
 
         void FrancisQRStep(VariableMatrixType& hessenbergMatrix, VariableLengthVectorType& vector);
 
-        // Ö§³ÖFindE.
+        // æ”¯æŒFindE.
         NODISCARD Vector3Type GetHouseholderVector(int size, const Vector3Type& uVector);
 
         void PremultiplyHouseholder(VariableMatrixType& mat,
@@ -151,10 +151,10 @@ namespace Mathematics
                                             Real tolerance) noexcept;
         NODISCARD bool QRIteration4(VariableMatrixType& matrix);
 
-        // Ö§³Ö FindB.
+        // æ”¯æŒ FindB.
         NODISCARD bool Bisection(const PolynomialType& polynomial, Real xMin, Real xMax, int digits, Real& root) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        // Ö§³Ö²âÊÔ£¬Èç¹ûËùÓĞ¸ù¾ßÓĞ¸ºÊµ²¿¡£
+        // æ”¯æŒæµ‹è¯•ï¼Œå¦‚æœæ‰€æœ‰æ ¹å…·æœ‰è´Ÿå®éƒ¨ã€‚
         NODISCARD bool AllRealPartsNegative(int degree, Container& coeff);
 
         void Balance3(VariableMatrixType& matrix, Real tolerance);
@@ -175,7 +175,7 @@ namespace Mathematics
         Container root;
         Real epsilon;
 
-        // ¶ÔFindEigenvaluesº¯Êı£¬Ä¬ÈÏÊÇ128.
+        // å¯¹FindEigenvalueså‡½æ•°ï¼Œé»˜è®¤æ˜¯128.
         int maxIterations;
     };
 

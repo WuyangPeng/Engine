@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.2 (2024/10/26 17:15)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.2 (2024/10/26 17:15)
 
 #ifndef SYSTEM_THREADING_WAITABLE_TIMER_H
 #define SYSTEM_THREADING_WAITABLE_TIMER_H
@@ -17,7 +17,7 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "System/Security/Using/SecurityBaseUsing.h"
 
-/// µÈ´ı¼ÆÊ±Æ÷µÄ´´½¨¡¢Ïú»Ù¡¢µÈ´ıºÍÉèÖÃ¡£
+/// ç­‰å¾…è®¡æ—¶å™¨çš„åˆ›å»ºã€é”€æ¯ã€ç­‰å¾…å’Œè®¾ç½®ã€‚
 namespace System
 {
     MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemWaitableTimer(WindowSecurityAttributesPtr timerAttributes,

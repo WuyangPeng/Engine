@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 13:56)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 13:56)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SINGULAR_VALUE_ACHIEVE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SINGULAR_VALUE_ACHIEVE_H
@@ -40,8 +40,8 @@ bool Mathematics::SingularValue<Real>::IsValid() const noexcept
 template <typename Real>
 void Mathematics::SingularValue<Real>::Calculate(const Matrix3Type& matrix)
 {
-    // Í¨¹ýµ÷ÓÃÌØÕ÷·Ö½âºÍQR·Ö½â×¨ÃÅÕë¶Ô3x3µÄ¸ü»»¡£
-    // ËùÊöQDUDecompositionËÆºõ¼Ù¶¨ÊäÈë¾ØÕóÊÇ¿ÉÄæµÄ£¬µ«Ò»°ãµÄQR·Ö½â¾ßÓÐ´¦Àí·ÇÂúÖÈ¾ØÕó¡£
+    // é€šè¿‡è°ƒç”¨ç‰¹å¾åˆ†è§£å’ŒQRåˆ†è§£ä¸“é—¨é’ˆå¯¹3x3çš„æ›´æ¢ã€‚
+    // æ‰€è¿°QDUDecompositionä¼¼ä¹Žå‡å®šè¾“å…¥çŸ©é˜µæ˜¯å¯é€†çš„ï¼Œä½†ä¸€èˆ¬çš„QRåˆ†è§£å…·æœ‰å¤„ç†éžæ»¡ç§©çŸ©é˜µã€‚
 
     VariableMatrix<Real> variableMatrix{ matrix };
 

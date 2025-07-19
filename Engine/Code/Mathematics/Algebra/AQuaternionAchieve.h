@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 10:14)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 10:14)
 
 #ifndef MATHEMATICS_ALGEBRA_A_QUATERNION_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_A_QUATERNION_ACHIEVE_H
@@ -46,13 +46,13 @@ void Mathematics::AQuaternion<Real>::FromRotationMatrix(const MatrixType& matrix
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    // Ëã·¨ÔÚKen ShoemakeµÄÎÄÕÂ£¬ÔÚ1987ÄêSIGGRAPH¿Î³ÌÎÄÕÂ¡°ËÄÔªÎ¢»ı·ÖºÍ¿ìËÙ¶¯»­¡±¡£
+    // ç®—æ³•åœ¨Ken Shoemakeçš„æ–‡ç« ï¼Œåœ¨1987å¹´SIGGRAPHè¯¾ç¨‹æ–‡ç« â€œå››å…ƒå¾®ç§¯åˆ†å’Œå¿«é€ŸåŠ¨ç”»â€ã€‚
 
     const auto trace = matrix.template GetValue<0>() + matrix.template GetValue<5>() + matrix.template GetValue<10>();
 
     if (MathType::GetValue(0) < trace)
     {
-        // |w| > 1/2, ¿ÉÄÜÑ¡Ôñ w > 1/2
+        // |w| > 1/2, å¯èƒ½é€‰æ‹© w > 1/2
         auto root = MathType::Sqrt(trace + MathType::GetValue(1));  // 2w
 
         w = MathType::GetRational(1, 2) * root;
@@ -97,7 +97,7 @@ requires std::is_arithmetic_v<Real>
 Mathematics::AQuaternion<Real>::AQuaternion(const AVectorType& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
     : w{}, x{}, y{}, z{}
 {
-    MATHEMATICS_ASSERTION_1(axis.IsNormalize(), "axis±ØĞëÊÇµ¥Î»ÏòÁ¿£¡");
+    MATHEMATICS_ASSERTION_1(axis.IsNormalize(), "axiså¿…é¡»æ˜¯å•ä½å‘é‡ï¼");
 
     FromAxisAngle(axis, angle);
 
@@ -109,9 +109,9 @@ requires std::is_arithmetic_v<Real>
 void Mathematics::AQuaternion<Real>::FromAxisAngle(const AVectorType& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
-    MATHEMATICS_ASSERTION_1(axis.IsNormalize(), "axis±ØĞëÊÇµ¥Î»ÏòÁ¿£¡");
+    MATHEMATICS_ASSERTION_1(axis.IsNormalize(), "axiså¿…é¡»æ˜¯å•ä½å‘é‡ï¼");
 
-    // ´ú±íĞı×ªµÄËÄÔªÊıÊÇ
+    // ä»£è¡¨æ—‹è½¬çš„å››å…ƒæ•°æ˜¯
     // q = cos(A/2) + sin(A/2) * (x * i + y * j + z * k)
 
     const auto halfAngle = MathType::GetRational(1, 2) * angle;
@@ -154,7 +154,7 @@ const Real& Mathematics::AQuaternion<Real>::operator[](int index) const
             break;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òı´íÎó£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•é”™è¯¯ï¼"s))
 }
 
 template <typename Real>
@@ -308,7 +308,7 @@ Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>::operator/=(Real 
 
     if (MathType::FAbs(scalar) <= MathType::GetZeroTolerance())
     {
-        MATHEMATICS_ASSERTION_1(false, "³ıÁã´íÎó£¡");
+        MATHEMATICS_ASSERTION_1(false, "é™¤é›¶é”™è¯¯ï¼");
 
         w = MathType::maxReal;
         x = MathType::maxReal;
@@ -372,7 +372,7 @@ typename Mathematics::AQuaternion<Real>::AVectorType Mathematics::AQuaternion<Re
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    // ´ú±íĞı×ªµÄËÄÔªÊıÊÇ
+    // ä»£è¡¨æ—‹è½¬çš„å››å…ƒæ•°æ˜¯
     // q = cos(A/2) + sin(A/2) * (x*i + y*j + z*k)
 
     const auto squareLength = x * x + y * y + z * z;
@@ -385,7 +385,7 @@ typename Mathematics::AQuaternion<Real>::AVectorType Mathematics::AQuaternion<Re
     }
     else
     {
-        // ½Ç¶ÈÊÇ 0 (2 * piµÄÄ£), ËùÒÔÈÎºÎÖá¶¼ĞĞ¡£
+        // è§’åº¦æ˜¯ 0 (2 * piçš„æ¨¡), æ‰€ä»¥ä»»ä½•è½´éƒ½è¡Œã€‚
         return AVectorType::GetUnitX();
     }
 }
@@ -443,7 +443,7 @@ void Mathematics::AQuaternion<Real>::Normalize(Real epsilon) noexcept(gAssert < 
     }
     else
     {
-        MATHEMATICS_ASSERTION_1(false, "ËÄÔªÊıÕıÔò»¯´íÎó£¡");
+        MATHEMATICS_ASSERTION_1(false, "å››å…ƒæ•°æ­£åˆ™åŒ–é”™è¯¯ï¼");
 
         w = MathType::GetValue(0);
         x = MathType::GetValue(0);
@@ -483,7 +483,7 @@ Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Inverse() const n
     }
     else
     {
-        MATHEMATICS_ASSERTION_1(false, "·µ»ØÒ»¸öÎŞĞ§µÄ½á¹ûÀ´±ê¼Ç´íÎó£¡");
+        MATHEMATICS_ASSERTION_1(false, "è¿”å›ä¸€ä¸ªæ— æ•ˆçš„ç»“æœæ¥æ ‡è®°é”™è¯¯ï¼");
 
         return AQuaternion{};
     }
@@ -503,12 +503,12 @@ requires std::is_arithmetic_v<Real>
 Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Exp() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    MATHEMATICS_ASSERTION_1(MathType::FAbs(w) <= MathType::GetZeroTolerance(), "ËÄÔªÊıw±ØĞëµÈÓÚ0£¡");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(w) <= MathType::GetZeroTolerance(), "å››å…ƒæ•°wå¿…é¡»ç­‰äº0ï¼");
 
-    // Èç¹û q = A * (x * i + y * j + z * k) ÕâÀï (x,y,z) ÊÇµ¥Î»³¤¶È£¬È»ºó
-    // exp(q) = cos(A) + sin(A) * (x * i + y * j + z * k)¡£
-    // Èç¹û sin(A) ÊÇ½Ó½üÎªÁã,
-    // Ê¹ÓÃ exp(q) = cos(A) + A * (x * i + y * j + z * k) ÒòÎª A/sin(A) Ç÷ÏòÓÚ 1¡£
+    // å¦‚æœ q = A * (x * i + y * j + z * k) è¿™é‡Œ (x,y,z) æ˜¯å•ä½é•¿åº¦ï¼Œç„¶å
+    // exp(q) = cos(A) + sin(A) * (x * i + y * j + z * k)ã€‚
+    // å¦‚æœ sin(A) æ˜¯æ¥è¿‘ä¸ºé›¶,
+    // ä½¿ç”¨ exp(q) = cos(A) + A * (x * i + y * j + z * k) å› ä¸º A/sin(A) è¶‹å‘äº 1ã€‚
 
     AQuaternion result{};
 
@@ -541,11 +541,11 @@ Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Log() const noexc
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    // Èç¹û q = cos(A) + sin(A) * (x * i + y * j + z * k) ÕâÀï (x,y,z) ÊÇµ¥Î»³¤¶È,
-    // È»ºó log(q) = A * (x * i + y * j + z * k)¡£
-    // Èç¹û sin(A) ÊÇ½Ó½üÁã£¬
-    // Ê¹ÓÃ log(q) = sin(A) * (x * i + y * j + z * k)
-    // ÒòÎª A/sin(A) Ç÷ÏòÓÚ 1¡£
+    // å¦‚æœ q = cos(A) + sin(A) * (x * i + y * j + z * k) è¿™é‡Œ (x,y,z) æ˜¯å•ä½é•¿åº¦,
+    // ç„¶å log(q) = A * (x * i + y * j + z * k)ã€‚
+    // å¦‚æœ sin(A) æ˜¯æ¥è¿‘é›¶ï¼Œ
+    // ä½¿ç”¨ log(q) = sin(A) * (x * i + y * j + z * k)
+    // å› ä¸º A/sin(A) è¶‹å‘äº 1ã€‚
 
     AQuaternion result{ *this };
     result.w = MathType::GetValue(0);
@@ -575,21 +575,21 @@ typename Mathematics::AQuaternion<Real>::AVectorType Mathematics::AQuaternion<Re
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    // ¸ø¶¨Ò»¸öÏòÁ¿u = (x0,y0,z0)ºÍµ¥Î»³¤¶ÈµÄËÄÔªÊıq = <w,x,y,z>
-    // ÏòÁ¿v = (x1,y1,z1)£¬Ëü´ú±íuÊ¹ÓÃqĞı×ªÎªv = q * u * q^{-1}£¬
-    // ÆäÖĞ*±íÊ¾ËÄÔªÊı³Ë·¨ºÍÆäÖĞu±»ÊÓÎªËÄÔªÊı<0,x0,y0,z0>¡£
-    // ĞèÒª×¢ÒâµÄÊÇq^{-1} = <w,-x,-y,-z>£¬
-    // ËùÒÔÃ»ÓĞÕæÕıµÄ¹¤×÷È¥È¡qµÄÄæ¡£
+    // ç»™å®šä¸€ä¸ªå‘é‡u = (x0,y0,z0)å’Œå•ä½é•¿åº¦çš„å››å…ƒæ•°q = <w,x,y,z>
+    // å‘é‡v = (x1,y1,z1)ï¼Œå®ƒä»£è¡¨uä½¿ç”¨qæ—‹è½¬ä¸ºv = q * u * q^{-1}ï¼Œ
+    // å…¶ä¸­*è¡¨ç¤ºå››å…ƒæ•°ä¹˜æ³•å’Œå…¶ä¸­uè¢«è§†ä¸ºå››å…ƒæ•°<0,x0,y0,z0>ã€‚
+    // éœ€è¦æ³¨æ„çš„æ˜¯q^{-1} = <w,-x,-y,-z>ï¼Œ
+    // æ‰€ä»¥æ²¡æœ‰çœŸæ­£çš„å·¥ä½œå»å–qçš„é€†ã€‚
 
-    // ÏÖÔÚ
+    // ç°åœ¨
     // q * u * q^{-1} = q * <0,x0,y0,z0> * q^{-1}
     //                = q * (x0 * i + y0 * j + z0 * k) * q^{-1}
     //                = x0 * (q * i * q^{-1}) + y0 * (q * j * q^{-1}) + z0 * (q * k * q^{-1})
     //
-    // ÊÇ¼ÆËãÔÚHQuaternion<Real>::ToRotationMatrixÖĞĞı×ª¾ØÕóµÄÁĞ¡£
-    // ÏòÁ¿v±»»ñµÃ×÷ÎªÓëÏòÁ¿uÓëĞı×ª¾ØÕóµÄ³Ë»ı¡£
-    // Òò´Ë£¬Ğı×ª¾ØÕóµÄËÄÔªÊı±íÊ¾£¬ĞèÒª±È¾ØÕó½ÏÉÙµÄ¿Õ¼äºÍ¸ü¶àµÄÊ±¼äÀ´¼ÆËãĞı×ªºóµÄÏòÁ¿¡£
-    // µäĞÍµÄ¿Õ¼ä¡ª¡ªÊ±¼äÈ¨ºâ¡­¡­
+    // æ˜¯è®¡ç®—åœ¨HQuaternion<Real>::ToRotationMatrixä¸­æ—‹è½¬çŸ©é˜µçš„åˆ—ã€‚
+    // å‘é‡vè¢«è·å¾—ä½œä¸ºä¸å‘é‡uä¸æ—‹è½¬çŸ©é˜µçš„ä¹˜ç§¯ã€‚
+    // å› æ­¤ï¼Œæ—‹è½¬çŸ©é˜µçš„å››å…ƒæ•°è¡¨ç¤ºï¼Œéœ€è¦æ¯”çŸ©é˜µè¾ƒå°‘çš„ç©ºé—´å’Œæ›´å¤šçš„æ—¶é—´æ¥è®¡ç®—æ—‹è½¬åçš„å‘é‡ã€‚
+    // å…¸å‹çš„ç©ºé—´â€”â€”æ—¶é—´æƒè¡¡â€¦â€¦
 
     const auto matrix = ToRotationMatrix();
 
@@ -629,7 +629,7 @@ void Mathematics::AQuaternion<Real>::Intermediate(const AQuaternion& quaternion0
 {
     MATHEMATICS_CLASS_IS_VALID_9;
     MATHEMATICS_ASSERTION_1(quaternion0.IsNormalize() && quaternion1.IsNormalize() && quaternion2.IsNormalize(),
-                            "quaternion0¡¢quaternion1¡¢quaternion2±ØĞë¶¼ÊÇµ¥Î»³¤¶È£¡");
+                            "quaternion0ã€quaternion1ã€quaternion2å¿…é¡»éƒ½æ˜¯å•ä½é•¿åº¦ï¼");
 
     const auto quaternion1Conjugate = quaternion1.Conjugate();
     const auto p0 = quaternion1Conjugate * quaternion0;

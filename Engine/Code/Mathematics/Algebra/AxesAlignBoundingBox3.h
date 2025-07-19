@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 14:42)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 14:42)
 
 #ifndef MATHEMATICS_ALGEBRA_AXES_ALIGN_BOUNDING_BOX3_H
 #define MATHEMATICS_ALGEBRA_AXES_ALIGN_BOUNDING_BOX3_H
@@ -35,7 +35,7 @@ namespace Mathematics
 
         AxesAlignBoundingBox3(const Vector3Type& minPoint, const Vector3Type& maxPoint) noexcept;
 
-        // µ÷ÓÃÕß±ØĞëÈ·±£xMin <= xMax ¡¢ yMin <= yMaxºÍzMin <= zMax¡£
+        // è°ƒç”¨è€…å¿…é¡»ç¡®ä¿xMin <= xMax ã€ yMin <= yMaxå’ŒzMin <= zMaxã€‚
         AxesAlignBoundingBox3(Real xMin, Real xMax, Real yMin, Real yMax, Real zMin, Real zMax) noexcept;
 
         template <typename RhsType>
@@ -52,7 +52,7 @@ namespace Mathematics
         NODISCARD Real GetMinPoint(PointIndex index) const;
         NODISCARD Real GetMaxPoint(PointIndex index) const;
 
-        // ¼ÆËãºĞ×ÓµÄÖĞĞÄµãºÍºĞ×ÓÖĞĞÄµ½ºĞ×Ó±ßÔµ£¨°ë¾¶£©µÄ³¤¶È¡£
+        // è®¡ç®—ç›’å­çš„ä¸­å¿ƒç‚¹å’Œç›’å­ä¸­å¿ƒåˆ°ç›’å­è¾¹ç¼˜ï¼ˆåŠå¾„ï¼‰çš„é•¿åº¦ã€‚
         NODISCARD Vector3Type GetCenter() const;
         NODISCARD Real GetExtentX() const noexcept;
         NODISCARD Real GetExtentY() const noexcept;
@@ -63,8 +63,8 @@ namespace Mathematics
         Vector3Type maxPoint;
     };
 
-    // ÖØµşµÄ²âÊÔÊÇÔÚÑÏ¸ñÒâÒåÉÏ¡£
-    // Èç¹ûÁ½¸öºĞ×ÓÑØ¹«¹²±ß¸ÕºÃ½Ó´¥£¬ºĞ×Ó±»±¨¸æÎªÖØµş¡£
+    // é‡å çš„æµ‹è¯•æ˜¯åœ¨ä¸¥æ ¼æ„ä¹‰ä¸Šã€‚
+    // å¦‚æœä¸¤ä¸ªç›’å­æ²¿å…¬å…±è¾¹åˆšå¥½æ¥è§¦ï¼Œç›’å­è¢«æŠ¥å‘Šä¸ºé‡å ã€‚
     template <typename Real>
     NODISCARD bool HasXOverlap(const AxesAlignBoundingBox3<Real>& lhs, const AxesAlignBoundingBox3<Real>& rhs);
 
@@ -77,8 +77,8 @@ namespace Mathematics
     template <typename Real>
     NODISCARD bool IsIntersection(const AxesAlignBoundingBox3<Real>& lhs, const AxesAlignBoundingBox3<Real>& rhs);
 
-    // Èç¹ûÓĞÖØµş¡£ÔÚÕâÖÖÇé¿öÏÂ£¬½»µã±»·µ»Ø¡£
-    // Èç¹ûÃ»ÓĞÖØµş£¬Ôò·µ»ØµÄAxesAlignBoundingBox2ÊÇÎŞĞ§µÄ¡£
+    // å¦‚æœæœ‰é‡å ã€‚åœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œäº¤ç‚¹è¢«è¿”å›ã€‚
+    // å¦‚æœæ²¡æœ‰é‡å ï¼Œåˆ™è¿”å›çš„AxesAlignBoundingBox2æ˜¯æ— æ•ˆçš„ã€‚
     template <typename Real>
     NODISCARD AxesAlignBoundingBox3<Real> FindIntersection(const AxesAlignBoundingBox3<Real>& lhs, const AxesAlignBoundingBox3<Real>& rhs);
 

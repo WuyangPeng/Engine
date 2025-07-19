@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:54)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:54)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_RAY2_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_RAY2_H
@@ -35,26 +35,26 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        // ³ÉÔ±·ÃÎÊ
+        // æˆå‘˜è®¿é—®
         NODISCARD Line2Type GetLine() const noexcept;
         NODISCARD Ray2Type GetRay() const noexcept;
 
-        // Ïà½»¼¯¡£ÈÃ q = GetQuantity()¡£Çé¿öÊÇ£º
-        //   q = 0: ÏßºÍÉäÏß²»Ïà½»£¬ GetIntersection() ·µ»ØIntersectionType::Empty¡£
-        //   q = 1: ÏßºÍÉäÏßÏà½»ÓÚÒ»¸öµã¡£GetIntersection()·µ»ØIntersectionType::Point¡£
-        //   q = INT_MAX:  ÏßºÍÉäÏßÊÇÖØµşµÄ¡£GetIntersection() ·µ»ØIntersectionType::Line¡£
+        // ç›¸äº¤é›†ã€‚è®© q = GetQuantity()ã€‚æƒ…å†µæ˜¯ï¼š
+        //   q = 0: çº¿å’Œå°„çº¿ä¸ç›¸äº¤ï¼Œ GetIntersection() è¿”å›IntersectionType::Emptyã€‚
+        //   q = 1: çº¿å’Œå°„çº¿ç›¸äº¤äºä¸€ä¸ªç‚¹ã€‚GetIntersection()è¿”å›IntersectionType::Pointã€‚
+        //   q = INT_MAX:  çº¿å’Œå°„çº¿æ˜¯é‡å çš„ã€‚GetIntersection() è¿”å›IntersectionType::Lineã€‚
         NODISCARD int GetQuantity() const noexcept;
 
     private:
-        // ¾²Ì¬Ïà½»²éÕÒ²éÑ¯¡£
+        // é™æ€ç›¸äº¤æŸ¥æ‰¾æŸ¥è¯¢ã€‚
         void Test();
 
     private:
-        // ÒªÏà½»µÄ¶ÔÏó¡£
+        // è¦ç›¸äº¤çš„å¯¹è±¡ã€‚
         Line2Type line;
         Ray2Type ray;
 
-        // Ïà½»¼¯ĞÅÏ¢
+        // ç›¸äº¤é›†ä¿¡æ¯
         int quantity;
     };
 }

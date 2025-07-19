@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:30)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:30)
 
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_VECTOR3_H
 #define MATHEMATICS_RATIONAL_RATIONAL_VECTOR3_H
@@ -58,15 +58,15 @@ namespace Mathematics
         RationalVectorType tuple;
     };
 
-    // ·µ»Ø Dot(lhs,rhs).
+    // è¿”å› Dot(lhs,rhs).
     template <int IntSize>
     NODISCARD SignRational<IntSize> Dot(const RationalVector3<IntSize>& lhs, const RationalVector3<IntSize>& rhs);
 
-    // ·µ»Ø Cross(lhs,rhs).
+    // è¿”å› Cross(lhs,rhs).
     template <int IntSize>
     NODISCARD RationalVector3<IntSize> Cross(const RationalVector3<IntSize>& lhs, const RationalVector3<IntSize>& rhs);
 
-    // ·µ»Ø Dot(lhs,Cross(mhs,rhs)).
+    // è¿”å› Dot(lhs,Cross(mhs,rhs)).
     template <int IntSize>
     NODISCARD SignRational<IntSize> TripleScalar(const RationalVector3<IntSize>& lhs, const RationalVector3<IntSize>& mhs, const RationalVector3<IntSize>& rhs);
 

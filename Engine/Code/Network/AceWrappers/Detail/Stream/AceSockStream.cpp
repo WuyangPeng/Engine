@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 17:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 17:28)
 
 #include "Network/NetworkExport.h"
 
@@ -62,14 +62,14 @@ int Network::AceSockStream::Receive(const MessageBufferSharedPtr& messageBuffer)
 
     if (bytesTotal <= headSize)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("½ÓÊÕÏûÏ¢Í·ÈİÁ¿²»×ã£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ¥æ”¶æ¶ˆæ¯å¤´å®¹é‡ä¸è¶³ï¼"s))
     }
 
     const auto buffer = messageBuffer->GetCurrentWriteBufferedPtr();
 
     if (buffer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("µ±Ç°Ğ´Ö¸ÕëÎª¿Õ£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å½“å‰å†™æŒ‡é’ˆä¸ºç©ºï¼"s))
     }
 
     if (const auto receiveSize = aceSockStream.recv_n(buffer, headSize);
@@ -86,7 +86,7 @@ int Network::AceSockStream::Receive(const MessageBufferSharedPtr& messageBuffer)
 
         if (bytesTotal < totalLength)
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("½ÓÊÕÊı¾İ³¤¶È²»×ã£¡"s))
+            THROW_EXCEPTION(SYSTEM_TEXT("æ¥æ”¶æ•°æ®é•¿åº¦ä¸è¶³ï¼"s))
         }
 
         const auto remainLength = totalLength - headSize;
@@ -98,7 +98,7 @@ int Network::AceSockStream::Receive(const MessageBufferSharedPtr& messageBuffer)
 
     #include SYSTEM_WARNING_POP
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("½ÓÊÕÊı¾İ³¤¶È´íÎó£¡"s))
+            THROW_EXCEPTION(SYSTEM_TEXT("æ¥æ”¶æ•°æ®é•¿åº¦é”™è¯¯ï¼"s))
         }
 
         messageBuffer->AddCurrentWriteIndex(remainLength);
@@ -119,7 +119,7 @@ int Network::AceSockStream::Send(const MessageBufferSharedPtr& messageBuffer)
 
     if (aceSockStream.send_n(messageBuffer->GetInitialBufferedPtr(), messageBuffer->GetCurrentWriteIndex()) != messageBuffer->GetCurrentWriteIndex())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("·¢ËÍÊı¾İÊ§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å‘é€æ•°æ®å¤±è´¥ï¼"s))
     }
 
     return messageBuffer->GetCurrentWriteIndex();
@@ -176,7 +176,7 @@ void Network::AceSockStream::AsyncSend(const EventInterfaceSharedPtr& eventInter
 
     if (aceSockStream.send_n(messageBuffer->GetInitialBufferedPtr(), messageBuffer->GetCurrentWriteIndex()) != messageBuffer->GetCurrentWriteIndex())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("·¢ËÍÊı¾İÊ§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å‘é€æ•°æ®å¤±è´¥ï¼"s))
     }
 
     CoreTools::CallbackParameters callbackParameters{ System::EnumCastUnderlying(SocketManagerPosition::WrappersStrategy) };
@@ -184,7 +184,7 @@ void Network::AceSockStream::AsyncSend(const EventInterfaceSharedPtr& eventInter
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::Ace));
     if (!eventInterface->EventFunction(callbackParameters))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("ÊÂ¼ş»Øµ÷Ö´ĞĞÊ§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("äº‹ä»¶å›è°ƒæ‰§è¡Œå¤±è´¥ï¼"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -247,7 +247,7 @@ void Network::AceSockStream::AsyncReceive(const EventInterfaceSharedPtr& eventIn
         callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::Ace));
         if (!eventInterface->EventFunction(callbackParameters))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("ÊÂ¼ş»Øµ÷Ö´ĞĞÊ§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("äº‹ä»¶å›è°ƒæ‰§è¡Œå¤±è´¥ï¼"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
     else

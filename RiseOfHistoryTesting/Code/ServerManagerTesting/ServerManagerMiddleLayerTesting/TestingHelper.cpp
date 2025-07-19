@@ -1,18 +1,18 @@
-/// Copyright (c) 2010-2025
+ï»¿/// Copyright (c) 2010-2025
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.2.0 (2025/01/06 10:11)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.2.0 (2025/01/06 10:11)
 
 #include "ServerManager/ServerManagerMiddleLayer/Helper/ServerManagerMiddleLayerClassInvariantMacro.h"
 #include "Testing.h"
 #include "TestingHelper.h"
 
 ServerManagerTesting::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "·şÎñÆ÷¹ÜÀíÕßÖĞ¼ä²ãµ¥Ôª²âÊÔ" }
+    : ParentType{ argc, argv, "æœåŠ¡å™¨ç®¡ç†è€…ä¸­é—´å±‚å•å…ƒæµ‹è¯•" }
 {
     InitSuite();
 

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2024/01/02 16:05)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2024/01/02 16:05)
 
 #include "Rendering/RenderingExport.h"
 
@@ -58,7 +58,7 @@ void Rendering::AnalysisRendererParameter::AnalysisRendererType()
     {
         rendererParameter->SetRendererType(RendererTypes::Default);
 
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering, SYSTEM_TEXT("³õÊ¼»¯äÖÈ¾Æ÷ÀàĞÍÊ§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering, SYSTEM_TEXT("åˆå§‹åŒ–æ¸²æŸ“å™¨ç±»å‹å¤±è´¥ï¼"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -82,7 +82,7 @@ void Rendering::AnalysisRendererParameter::AnalysisRendererTexture()
     {
         rendererParameter->SetTextureFormat(DataFormatType::R32G32B32A32Float, DataFormatType::D24UNormS8UInt, 0);
 
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering, SYSTEM_TEXT("³õÊ¼»¯äÖÈ¾Æ÷ÎÆÀí¸ñÊ½Ê§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering, SYSTEM_TEXT("åˆå§‹åŒ–æ¸²æŸ“å™¨çº¹ç†æ ¼å¼å¤±è´¥ï¼"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -110,7 +110,7 @@ void Rendering::AnalysisRendererParameter::AnalysisRendererClearColor()
     {
         rendererParameter->SetClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering, SYSTEM_TEXT("³õÊ¼»¯äÖÈ¾Æ÷Çå³ıÑÕÉ«Ê§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering, SYSTEM_TEXT("åˆå§‹åŒ–æ¸²æŸ“å™¨æ¸…é™¤é¢œè‰²å¤±è´¥ï¼"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -133,7 +133,7 @@ void Rendering::AnalysisRendererParameter::AnalysisWindowParameter()
     {
         rendererParameter->SetWindowParameter(windowTitle, 800, 600, x, y, allowResize);
 
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering, SYSTEM_TEXT("³õÊ¼»¯´°¿Ú²ÎÊıÊ§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering, SYSTEM_TEXT("åˆå§‹åŒ–çª—å£å‚æ•°å¤±è´¥ï¼"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/09 09:38)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 09:38)
 
 #ifndef MATHEMATICS_CONTAINMENT_CONT_BOX3_DETAIL_H
 #define MATHEMATICS_CONTAINMENT_CONT_BOX3_DETAIL_H
@@ -55,10 +55,10 @@ typename Mathematics::ContBox3<Real>::Box3Type Mathematics::ContBox3<Real>::Cont
     const GaussPointsFit3<Real> gaussPointsFit3{ points };
     const auto box = gaussPointsFit3.GetBox3();
 
-    // ÁîCÊÇ°üÎ§ºĞÖĞĞÄ£¬ÈÃU0,U1ºÍU2ÊÇ°üÎ§ºĞµÄÖá¡£
-    // Ã¿Ò»¸öÊäÈëµãµÄĞÎÊ½ÎªX = C + y0 * U0 + y1 * U1 + y2 * U2¡£
-    // ÏÂÃæµÄ´úÂë¼ÆËãmin(y0), max(y0), min(y1),max(y1), min(y2)ºÍmax(y2)¡£
-    // È»ºó°üÎ§ºĞÖĞĞÄ±»µ÷ÕûÎª
+    // ä»¤Cæ˜¯åŒ…å›´ç›’ä¸­å¿ƒï¼Œè®©U0,U1å’ŒU2æ˜¯åŒ…å›´ç›’çš„è½´ã€‚
+    // æ¯ä¸€ä¸ªè¾“å…¥ç‚¹çš„å½¢å¼ä¸ºX = C + y0 * U0 + y1 * U1 + y2 * U2ã€‚
+    // ä¸‹é¢çš„ä»£ç è®¡ç®—min(y0), max(y0), min(y1),max(y1), min(y2)å’Œmax(y2)ã€‚
+    // ç„¶ååŒ…å›´ç›’ä¸­å¿ƒè¢«è°ƒæ•´ä¸º
     //   C' = C + 0.5 * (min(y0) + max(y0)) * U0 + 0.5 * (min(y1) + max(y1)) * U1 +
     //        0.5 * (min(y2) + max(y2)) * U2
     std::vector<Real> firstDotCollection{};
@@ -125,15 +125,15 @@ bool Mathematics::ContBox3<Real>::InBox(const Vector3Type& point, const Box3Type
 template <typename Real>
 typename Mathematics::ContBox3<Real>::Box3Type Mathematics::ContBox3<Real>::MergeBoxes(const Box3Type& lhs, const Box3Type& rhs)
 {
-    // ÔÚ°üÎ§ºĞÖĞĞÄµÄµÚÒ»¸ö²ÂÏë¡£ÊäÈë°üÎ§ºĞ¶¥µãÍ¶Ó°µ½È·¶¨µÄÆ½¾ù°üÎ§ºĞµÄÖá£¬
-    // ´ËÖµ½«ÔÚºóÃæ½øĞĞ¸üĞÂ¡£
+    // åœ¨åŒ…å›´ç›’ä¸­å¿ƒçš„ç¬¬ä¸€ä¸ªçŒœæƒ³ã€‚è¾“å…¥åŒ…å›´ç›’é¡¶ç‚¹æŠ•å½±åˆ°ç¡®å®šçš„å¹³å‡åŒ…å›´ç›’çš„è½´ï¼Œ
+    // æ­¤å€¼å°†åœ¨åé¢è¿›è¡Œæ›´æ–°ã€‚
     auto center = MathType::GetRational(1, 2) * (lhs.GetCenter() + rhs.GetCenter());
 
-    // Ò»¸ö°üÎ§ºĞµÄÖá£¬¾ÍÏñÒ»¸öÁĞ¾ØÕóĞÎ³ÉÒ»¸öĞı×ª¾ØÕó¡£
-    // ÊäÈë°üÎ§ºĞµÄÖá±»×ª»»ÎªËÄÔªÊı¡£
-    // ¼ÆËãÆ½¾ùËÄÔªÊı£¬È»ºó±ê×¼»¯Îªµ¥Î»³¤¶È¡£
-    // ½á¹ûÎª¾ßÓĞtÖµÎª1/2µÄÁ½¸öÊäÈëËÄÔªÊıµÄÇòÃæÏßĞÔ²åÖµ¡£
-    // ½á¹û±»×ª»»»ØĞı×ª¾ØÕóºÍËüµÄÁĞ±»Ñ¡Ôñ×÷ÎªºÏ²¢°üÎ§ºĞµÄÖá¡£
+    // ä¸€ä¸ªåŒ…å›´ç›’çš„è½´ï¼Œå°±åƒä¸€ä¸ªåˆ—çŸ©é˜µå½¢æˆä¸€ä¸ªæ—‹è½¬çŸ©é˜µã€‚
+    // è¾“å…¥åŒ…å›´ç›’çš„è½´è¢«è½¬æ¢ä¸ºå››å…ƒæ•°ã€‚
+    // è®¡ç®—å¹³å‡å››å…ƒæ•°ï¼Œç„¶åæ ‡å‡†åŒ–ä¸ºå•ä½é•¿åº¦ã€‚
+    // ç»“æœä¸ºå…·æœ‰tå€¼ä¸º1/2çš„ä¸¤ä¸ªè¾“å…¥å››å…ƒæ•°çš„çƒé¢çº¿æ€§æ’å€¼ã€‚
+    // ç»“æœè¢«è½¬æ¢å›æ—‹è½¬çŸ©é˜µå’Œå®ƒçš„åˆ—è¢«é€‰æ‹©ä½œä¸ºåˆå¹¶åŒ…å›´ç›’çš„è½´ã€‚
     std::vector<Vector3Type> lhsRotationColumn{ lhs.GetAxis0(), lhs.GetAxis1(), lhs.GetAxis2() };
 
     std::vector<Vector3Type> rhsRotationColumn{ rhs.GetAxis0(), rhs.GetAxis1(), rhs.GetAxis2() };
@@ -152,13 +152,13 @@ typename Mathematics::ContBox3<Real>::Box3Type Mathematics::ContBox3<Real>::Merg
 
     const auto sumRotationColumn = sumQuaternion.ToRotationColumnVector3();
 
-    // ÏîÄ¿µÄÊäÈë°üÎ§ºĞ¶¥µãµ½ºÏ²¢ºóµÄ°üÎ§ºĞµÄÖá¡£
-    // ¸÷¸öÖáÏßD[i]°üº¬µ±Ç°ÖĞĞÄC¾ßÓĞ×îĞ¡Í¶Ó°Öµmin[i]ºÍ×î´óÍ¶Ó°Öµmax[i]¡£
-    // ÖáÏßÉÏµÄÏàÓ¦½áÊøµãÊÇC + min[i] * D[i] and C + max[i] * D[i]¡£
-    // Cµã²¢²»Ò»¶¨ÊÇÈÎºÎÊ±¼ä¼ä¸ôµÄÖĞµã¡£
-    // Êµ¼Ê°üÎ§ºĞÖĞĞÄ½«´ÓCµ÷ÕûÎªµãC'ÊÇÃ¿¸ö¼ä¸ôµÄÖĞµã£¬
+    // é¡¹ç›®çš„è¾“å…¥åŒ…å›´ç›’é¡¶ç‚¹åˆ°åˆå¹¶åçš„åŒ…å›´ç›’çš„è½´ã€‚
+    // å„ä¸ªè½´çº¿D[i]åŒ…å«å½“å‰ä¸­å¿ƒCå…·æœ‰æœ€å°æŠ•å½±å€¼min[i]å’Œæœ€å¤§æŠ•å½±å€¼max[i]ã€‚
+    // è½´çº¿ä¸Šçš„ç›¸åº”ç»“æŸç‚¹æ˜¯C + min[i] * D[i] and C + max[i] * D[i]ã€‚
+    // Cç‚¹å¹¶ä¸ä¸€å®šæ˜¯ä»»ä½•æ—¶é—´é—´éš”çš„ä¸­ç‚¹ã€‚
+    // å®é™…åŒ…å›´ç›’ä¸­å¿ƒå°†ä»Cè°ƒæ•´ä¸ºç‚¹C'æ˜¯æ¯ä¸ªé—´éš”çš„ä¸­ç‚¹ï¼Œ
     //   C' = C + sum_{i=0}^2 0.5 * (min[i] + max[i]) * D[i]
-    // °üÎ§ºĞµÄ·¶Î§ÊÇ
+    // åŒ…å›´ç›’çš„èŒƒå›´æ˜¯
     //  e[i] = 0.5 * (max[i] - min[i])
     auto lhsVertices = lhs.ComputeVertices();
     auto rhsVertices = rhs.ComputeVertices();
@@ -192,8 +192,8 @@ typename Mathematics::ContBox3<Real>::Box3Type Mathematics::ContBox3<Real>::Merg
 
     const auto thirdBoundary = std::minmax_element(thirdDotCollection.begin(), thirdDotCollection.end());
 
-    // [min,max] ÎªºÏ²¢ºóµÄ°üÎ§ºĞµÄÖáÔÚ×ø±êÏµÖĞÎªÖá¶ÔÆë°üÎ§ºĞ¡£
-    // ¸üĞÂµ±Ç°°üÎ§ºĞÖĞĞÄ³ÉÎªĞÂ°üÎ§ºĞµÄÖĞĞÄ¡£¼ÆËã»ùÓÚĞÂµÄÖĞĞÄµÄ·¶Î§¡£
+    // [min,max] ä¸ºåˆå¹¶åçš„åŒ…å›´ç›’çš„è½´åœ¨åæ ‡ç³»ä¸­ä¸ºè½´å¯¹é½åŒ…å›´ç›’ã€‚
+    // æ›´æ–°å½“å‰åŒ…å›´ç›’ä¸­å¿ƒæˆä¸ºæ–°åŒ…å›´ç›’çš„ä¸­å¿ƒã€‚è®¡ç®—åŸºäºæ–°çš„ä¸­å¿ƒçš„èŒƒå›´ã€‚
     center += MathType::GetRational(1, 2) * (*firstBoundary.first + *firstBoundary.second) * sumRotationColumn.at(0) +
               MathType::GetRational(1, 2) * (*secondBoundary.first + *secondBoundary.second) * sumRotationColumn.at(1) +
               MathType::GetRational(1, 2) * (*thirdBoundary.first + *thirdBoundary.second) * sumRotationColumn.at(2);

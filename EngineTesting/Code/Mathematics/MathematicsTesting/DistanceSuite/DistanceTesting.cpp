@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 15:31)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 15:31)
 
 #include "DistanceTesting.h"
 #include "Detail/DistanceTestDetail.h"
@@ -217,7 +217,7 @@ void Mathematics::DistanceTesting::IntervalTest()
 
 void Mathematics::DistanceTesting::BeginIntervalTest()
 {
-    // ²âÊÔ¾àÀëÎªÓĞĞ§ÖµÁã¡£¶ÔÏóÊÇÔÚ×î³õÎ»ÖÃ½Ó´¥¡£
+    // æµ‹è¯•è·ç¦»ä¸ºæœ‰æ•ˆå€¼é›¶ã€‚å¯¹è±¡æ˜¯åœ¨æœ€åˆä½ç½®æ¥è§¦ã€‚
     std::default_random_engine generator{ GetEngineRandomSeed() };
     std::uniform_real_distribution<double> randomDistribution(-10.0, 10.0);
 
@@ -266,7 +266,7 @@ void Mathematics::DistanceTesting::BeginIntervalTest()
 
 void Mathematics::DistanceTesting::EndIntervalTest()
 {
-    // ²âÊÔ¾àÀëÎªÓĞĞ§ÖµÁã¡£¶ÔÏóÊÇÔÚ×îÖÕÎ»ÖÃ½Ó´¥¡£
+    // æµ‹è¯•è·ç¦»ä¸ºæœ‰æ•ˆå€¼é›¶ã€‚å¯¹è±¡æ˜¯åœ¨æœ€ç»ˆä½ç½®æ¥è§¦ã€‚
     std::default_random_engine generator{ GetEngineRandomSeed() };
     std::uniform_real_distribution<double> randomDistribution(-10.0, 10.0);
 
@@ -319,7 +319,7 @@ void Mathematics::DistanceTesting::EndIntervalTest()
 
 void Mathematics::DistanceTesting::IterationIntervalTest()
 {
-    // ²âÊÔÅ£¶Ù·¨¹ı³ÌÖĞ·µ»ØµÄÇé¿ö
+    // æµ‹è¯•ç‰›é¡¿æ³•è¿‡ç¨‹ä¸­è¿”å›çš„æƒ…å†µ
     std::default_random_engine generator{ GetEngineRandomSeed() };
     std::uniform_real_distribution<double> randomDistribution(-10.0, 10.0);
 

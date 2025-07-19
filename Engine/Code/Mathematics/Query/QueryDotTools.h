@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:39)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:39)
 
 #ifndef MATHEMATICS_QUERY_QUERY_DOT_TOOLS_H
 #define MATHEMATICS_QUERY_QUERY_DOT_TOOLS_H
@@ -25,7 +25,7 @@ namespace Mathematics
     public:
         CLASS_INVARIANT_DECLARE;
 
-        // °ïÖúº¯Êı
+        // å¸®åŠ©å‡½æ•°
 
         NODISCARD static Real Dot(Real x0, Real y0, Real x1, Real y1) noexcept(std::is_arithmetic_v<Real>);
         NODISCARD static Real Det2(Real x0, Real y0, Real x1, Real y1) noexcept(std::is_arithmetic_v<Real>);

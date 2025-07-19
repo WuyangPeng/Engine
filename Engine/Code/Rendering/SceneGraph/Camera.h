@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.3 (2023/12/28 17:54)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/28 17:54)
 
 #ifndef RENDERING_SCENE_GRAPH_CAMERA_H
 #define RENDERING_SCENE_GRAPH_CAMERA_H
@@ -44,19 +44,19 @@ namespace Rendering
         NODISCARD Matrix GetPostProjectionMatrix() const noexcept;
         NODISCARD bool PostProjectionIsIdentity() const noexcept;
 
-        /// ֧���Ӳ�ͶӰ��ָ��һ��͹�ı����ӿڡ�
-        /// ��Щ���������������У����Ҵ��۵�۲�ʱ����ʱ��˳�����С�
-        /// �ı��ε�ƽ������ͼƽ�棬��"extrude"ֵΪ1��
-        /// nearExtrudeֵ��(0,�����)�У���ָ���˴��ӵ㵽������������ͼ����������ͼƽ��ķ�����
-        /// farExtrudeֵΪ(nearExtrude,�����)����ָ���˷�����������ͼ�����Զ����ӵ�ķ�����
+        /// 支持视差投影。指定一个凸四边形视口。
+        /// 这些点必须在相机坐标中，并且从眼点观察时按逆时针顺序排列。
+        /// 四边形的平面是视图平面，其"extrude"值为1。
+        /// nearExtrude值在(0,无穷大)中；这指定了从视点到包含立方体视图体积近面的视图平面的分数。
+        /// farExtrude值为(nearExtrude,无穷大)；这指定了放置立方体视图体积的远面的视点的分数。
         void SetProjectionMatrix(const APoint& p00, const APoint& p10, const APoint& p11, const APoint& p01, float nearExtrude, float farExtrude);
 
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
         NODISCARD CameraSharedPtr Clone() const;
 
-        /// ����������Ļ����(x,y)���ӿں���Ӱ������ʰȡ�ߡ�
-        /// �����ԭ�㡱�����λ�ã��������ǵ�λ����ʸ������Ϊ�������ꡣ
-        /// ���(x,y)���ӿ��У��򷵻�ֵΪtrue��
+        /// 根据左手屏幕坐标(x,y)、视口和摄影机计算拾取线。
+        /// 输出“原点”是相机位置，“方向”是单位长度矢量，均为世界坐标。
+        /// 如果(x,y)在视口中，则返回值为true。
         NODISCARD PickLine GetPickLine(int viewX, int viewY, int viewWidth, int viewHigh, int x, int y) const;
 
     protected:

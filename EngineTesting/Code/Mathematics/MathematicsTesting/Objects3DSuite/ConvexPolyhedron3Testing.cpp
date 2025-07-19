@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 16:15)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 16:15)
 
 #include "ConvexPolyhedron3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -156,7 +156,7 @@ void Mathematics::ConvexPolyhedron3Testing::ConvexPolyhedronTest()
 
         ASSERT_TRUE(Vector3ToolsD::Approximate(ninthVector, polyhedron.GetVertex(5)));
 
-        // Vector3PtrµÄÖµÒ²±»SetVertexĞŞ¸ÄÁË
+        // Vector3Ptrçš„å€¼ä¹Ÿè¢«SetVertexä¿®æ”¹äº†
         Vector3D average = verticesType.at(0);
         for (auto m = 1; m < numVertices; ++m)
         {

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 16:29)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 16:29)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_LINE3_CIRCLE3_ACHIEVE_H
 #define MATHEMATICS_DISTANCE_DISTANCE_LINE3_CIRCLE3_ACHIEVE_H
@@ -383,7 +383,7 @@ typename Mathematics::DistanceLine3Circle3<Real>::DistanceInfo Mathematics::Dist
     }
     else
     {
-        // ËùÓĞÔ²µã¶¼ÓëPµÈ¾à¡£·µ»ØÆäÖĞÒ»¸ö¡£
+        // æ‰€æœ‰åœ†ç‚¹éƒ½ä¸Pç­‰è·ã€‚è¿”å›å…¶ä¸­ä¸€ä¸ªã€‚
         numClosestCircle = std::numeric_limits<int>::max();
         closestCircle = circle.GetCenter() + circle.GetRadius() * circle.GetDirection0();
     }
@@ -418,7 +418,7 @@ Real Mathematics::DistanceLine3Circle3<Real>::BisectF(Real lineDotDiff, Real rad
         }
     }
 
-    MATHEMATICS_ASSERTION_0(false, "³¬¹ı×î´óµü´ú´ÎÊı¡£");
+    MATHEMATICS_ASSERTION_0(false, "è¶…è¿‡æœ€å¤§è¿­ä»£æ¬¡æ•°ã€‚");
 
     return s;
 }

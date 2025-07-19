@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/05 17:07)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/05 17:07)
 
 #ifndef SYSTEM_CHARACTER_STRING_STRING_CONVERSION_H
 #define SYSTEM_CHARACTER_STRING_STRING_CONVERSION_H
@@ -15,7 +15,7 @@
 #include "Fwd/CharacterStringFlagsFwd.h"
 #include "System/Helper/UnicodeUsing.h"
 
-/// ×Ö·û´®×ª»»
+/// å­—ç¬¦ä¸²è½¬æ¢
 namespace System
 {
     NODISCARD int SYSTEM_DEFAULT_DECLARE MultiByteConversionWideChar(CodePage codePage,
@@ -51,7 +51,7 @@ namespace System
                                                                 char* multiByte,
                                                                 int multiByteLength) noexcept;
 
-    /// lhsCountºÍrhsCount²»°üÀ¨¿ÕÖÕÖ¹·û
+    /// lhsCountå’ŒrhsCountä¸åŒ…æ‹¬ç©ºç»ˆæ­¢ç¬¦
     NODISCARD ComparesStringReturn SYSTEM_DEFAULT_DECLARE CompareStringUseLocale(LanguageLocale locale,
                                                                                  Compares compares,
                                                                                  const String& lhsString,

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 14:49)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 14:49)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,7 +22,7 @@
 
 void CoreTools::DllFunctionHelper::InitializeMutex(DllMutex* mutex)
 {
-    CORE_TOOLS_ASSERTION_0(mutex != nullptr, "DllMutexÖ¸ÕëÎª¿Õ£¡");
+    CORE_TOOLS_ASSERTION_0(mutex != nullptr, "DllMutexæŒ‡é’ˆä¸ºç©ºï¼");
 
     try
     {
@@ -38,20 +38,20 @@ void CoreTools::DllFunctionHelper::InitializeMutex(DllMutex* mutex)
     }
     catch (...)
     {
-        JudgeUserSelectionWithTChar(SYSTEM_TEXT("Î´Öª´íÎó£¡"));
+        JudgeUserSelectionWithTChar(SYSTEM_TEXT("æœªçŸ¥é”™è¯¯ï¼"));
     }
 }
 
 void CoreTools::DllFunctionHelper::DeleteMutex(DllMutex* mutex)
 {
-    CORE_TOOLS_ASSERTION_0(mutex != nullptr, "DllMutexÖ¸ÕëÎª¿Õ£¡");
+    CORE_TOOLS_ASSERTION_0(mutex != nullptr, "DllMutexæŒ‡é’ˆä¸ºç©ºï¼");
 
     mutex->Delete();
 }
 
 void CoreTools::DllFunctionHelper::JudgeUserSelectionWithTChar(const System::String& message) noexcept
 {
-    const System::DialogBoxCommand type = System::MessageBoxSelectionWithTChar(message.c_str(), SYSTEM_TEXT("´íÎó"));
+    const System::DialogBoxCommand type = System::MessageBoxSelectionWithTChar(message.c_str(), SYSTEM_TEXT("é”™è¯¯"));
 
     JudgeSelection(type);
 }
@@ -62,20 +62,20 @@ void CoreTools::DllFunctionHelper::JudgeSelection(System::DialogBoxCommand selec
     {
         case System::DialogBoxCommand::IdYes:
         {
-            /// µ÷ÊÔ¶Ïµã¡£
+            /// è°ƒè¯•æ–­ç‚¹ã€‚
             System::DebugBreak();
 
             break;
         }
         case System::DialogBoxCommand::IdNo:
         {
-            /// ¼ÌÐøÖ´ÐÐ¡£
+            /// ç»§ç»­æ‰§è¡Œã€‚
             break;
         }
         case System::DialogBoxCommand::IdCancel:
         default:
         {
-            /// ÖÕÖ¹Ö´ÐÐ¡£
+            /// ç»ˆæ­¢æ‰§è¡Œã€‚
             System::Exit();
             break;
         }
@@ -84,7 +84,7 @@ void CoreTools::DllFunctionHelper::JudgeSelection(System::DialogBoxCommand selec
 
 void CoreTools::DllFunctionHelper::JudgeUserSelectionWithChar(const std::string& message) noexcept
 {
-    const auto type = System::MessageBoxSelectionWithChar(message.c_str(), "´íÎó");
+    const auto type = System::MessageBoxSelectionWithChar(message.c_str(), "é”™è¯¯");
 
     JudgeSelection(type);
 }

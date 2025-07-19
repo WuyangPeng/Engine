@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 14:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 14:28)
 
 #ifndef FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_INTERFACE_H
 #define FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_INTERFACE_H
@@ -31,8 +31,8 @@ namespace Framework
         using FunctionPointer = LResult (ClassType::*)(HWnd hWnd, WParam wParam, LParam lParam);
 
     public:
-        /// WindowMessageInterfaceÎ´Ê¹ÓÃEnvironmentDirectory²ÎÊı£¬
-        /// ±£ÁôÕâ¸öÖØÔØÊÇĞèÒªÍ³Ò»WindowMessageµÄ¹¹Ôìº¯Êı¡£
+        /// WindowMessageInterfaceæœªä½¿ç”¨EnvironmentDirectoryå‚æ•°ï¼Œ
+        /// ä¿ç•™è¿™ä¸ªé‡è½½æ˜¯éœ€è¦ç»Ÿä¸€WindowMessageçš„æ„é€ å‡½æ•°ã€‚
         explicit WindowMessageInterface(int64_t delta) noexcept;
         WindowMessageInterface(int64_t delta, const EnvironmentDirectory& environmentDirectory) noexcept;
         virtual ~WindowMessageInterface() noexcept = default;

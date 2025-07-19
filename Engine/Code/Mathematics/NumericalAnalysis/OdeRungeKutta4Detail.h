@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 10:22)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 10:22)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_ODE_RUNGE_KUTTA4_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_ODE_RUNGE_KUTTA4_DETAIL_H
@@ -53,7 +53,7 @@ typename Mathematics::OdeRungeKutta4<Real, UserDataType>::Data Mathematics::OdeR
 
     Container xOut{};
 
-    // µÚÒ»²½
+    // ç¬¬ä¸€æ­¥
     this->CalculateFunctionValue(tIn, xIn);
     stepFunctionValue1 = this->GetFunctionValue();
     const auto dimension = this->GetDimension();
@@ -63,7 +63,7 @@ typename Mathematics::OdeRungeKutta4<Real, UserDataType>::Data Mathematics::OdeR
         xIn1.at(i) = xIn.at(i) + halfStep * stepFunctionValue1.at(i);
     }
 
-    // µÚ¶ş²½
+    // ç¬¬äºŒæ­¥
     auto halfT = tIn + halfStep;
     this->CalculateFunctionValue(halfT, xIn1);
     stepFunctionValue2 = this->GetFunctionValue();
@@ -73,7 +73,7 @@ typename Mathematics::OdeRungeKutta4<Real, UserDataType>::Data Mathematics::OdeR
         xIn1.at(i) = xIn.at(i) + halfStep * stepFunctionValue2.at(i);
     }
 
-    // µÚÈı²½
+    // ç¬¬ä¸‰æ­¥
     this->CalculateFunctionValue(halfT, xIn1);
     stepFunctionValue3 = this->GetFunctionValue();
 
@@ -82,7 +82,7 @@ typename Mathematics::OdeRungeKutta4<Real, UserDataType>::Data Mathematics::OdeR
         xIn1.at(i) = xIn.at(i) + this->GetStepSize() * stepFunctionValue3.at(i);
     }
 
-    // µÚËÄ²½
+    // ç¬¬å››æ­¥
     auto tOut = tIn + this->GetStepSize();
     this->CalculateFunctionValue(tOut, xIn1);
     stepFunctionValue4 = this->GetFunctionValue();

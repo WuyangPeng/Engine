@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/01 10:46)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/01 10:46)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -38,7 +38,7 @@ void CoreTools::WriteBufferIOImpl::Write(size_t itemSize, const void* data)
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     CheckItemSize(itemSize);
-    CORE_TOOLS_ASSERTION_0(data != nullptr, "Êı¾İÎŞĞ§");
+    CORE_TOOLS_ASSERTION_0(data != nullptr, "æ•°æ®æ— æ•ˆ");
 
     WriteToBuffer(itemSize, 1, data);
 }
@@ -48,7 +48,7 @@ void CoreTools::WriteBufferIOImpl::Write(size_t itemSize, size_t itemsNumber, co
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     CheckItemSize(itemSize);
-    CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "Êı¾İÎŞĞ§");
+    CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "æ•°æ®æ— æ•ˆ");
 
     WriteToBuffer(itemSize, itemsNumber, data);
 }
@@ -58,15 +58,15 @@ uint32_t CoreTools::WriteBufferIOImpl::WriteToBuffer(size_t itemSize, size_t ite
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     CheckItemSize(itemSize);
-    CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "×¼±¸¶ÁÈ¡µÄÊı¾İÎŞĞ§£¡");
-    CORE_TOOLS_ASSERTION_2(GetBufferIOType() == BufferIO::Write, "»º³åÇø²»Ö§³ÖĞ´Èë£¡");
+    CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "å‡†å¤‡è¯»å–çš„æ•°æ®æ— æ•ˆï¼");
+    CORE_TOOLS_ASSERTION_2(GetBufferIOType() == BufferIO::Write, "ç¼“å†²åŒºä¸æ”¯æŒå†™å…¥ï¼");
 
     const auto numberToCopy = boost::numeric_cast<int>(itemSize * itemsNumber);
 
     if (const auto nextBytesProcessed = GetBytesProcessed() + numberToCopy;
         nextBytesProcessed <= GetBytesTotal())
     {
-        /// »ñµÃ»º³åÇøµ±Ç°Ö¸ÕëÎ»ÖÃ¡£
+        /// è·å¾—ç¼“å†²åŒºå½“å‰æŒ‡é’ˆä½ç½®ã€‚
         auto target = buffer->GetBuffer(GetBytesProcessed());
 
         SetBytesProcessed(nextBytesProcessed);
@@ -85,7 +85,7 @@ uint32_t CoreTools::WriteBufferIOImpl::WriteToBuffer(size_t itemSize, size_t ite
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÒªĞ´ÈëµÄ×Ö½ÚÊı³¬¹ıÁË»º³åÇø´óĞ¡£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¦å†™å…¥çš„å­—èŠ‚æ•°è¶…è¿‡äº†ç¼“å†²åŒºå¤§å°ï¼"s))
     }
 }
 

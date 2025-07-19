@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/01 10:47)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/01 10:47)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -43,7 +43,7 @@ void CoreTools::WriteFileHandleImpl::Write(size_t itemSize, const void* data)
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     CheckItemSize(itemSize);
-    CORE_TOOLS_ASSERTION_0(data != nullptr, "Êı¾İÎŞĞ§");
+    CORE_TOOLS_ASSERTION_0(data != nullptr, "æ•°æ®æ— æ•ˆ");
 
     Write(itemSize, 1, data);
 }
@@ -53,7 +53,7 @@ void CoreTools::WriteFileHandleImpl::Write(size_t itemSize, size_t itemsNumber, 
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     CheckItemSize(itemSize);
-    CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "Êı¾İÎŞĞ§");
+    CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "æ•°æ®æ— æ•ˆ");
 
     WriteToFile(itemSize, itemsNumber, data);
 }
@@ -62,5 +62,5 @@ void CoreTools::WriteFileHandleImpl::ReadFromFile(size_t itemSize, size_t itemsN
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    FunctionProhibitedFromCalling("WriteFileHandleImpl½ûÖ¹µ÷ÓÃReadFromFile£¡", itemSize, itemsNumber, data);
+    FunctionProhibitedFromCalling("WriteFileHandleImplç¦æ­¢è°ƒç”¨ReadFromFileï¼", itemSize, itemsNumber, data);
 }

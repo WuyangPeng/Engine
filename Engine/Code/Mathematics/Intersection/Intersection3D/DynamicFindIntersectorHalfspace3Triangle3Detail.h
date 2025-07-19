@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:05)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:05)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_TRIANGLE3_DETAIL_H
@@ -67,39 +67,39 @@ void Mathematics::DynamicFindIntersectorHalfspace3Triangle3<Real>::Find()
 
     if (!testIntersectorAxis.GetResult())
     {
-        // ÓÀ²»Ïà½»¡£
+        // æ°¸ä¸ç›¸äº¤ã€‚
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
     if (MathType::Approximate(contactTime, MathType::GetValue(0)))
     {
-        // ÏÖÔÚÏà½»¡£.
+        // ç°åœ¨ç›¸äº¤ã€‚.
         this->SetContactTime(contactTime);
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
-    // ½«µãÒ²¼°Ê±µ÷Õûµ½ÕıÈ·µÄÎ»ÖÃ¡£
+    // å°†ç‚¹ä¹ŸåŠæ—¶è°ƒæ•´åˆ°æ­£ç¡®çš„ä½ç½®ã€‚
     auto diff = contactTime * this->GetRhsVelocity();
 
-    // ÕıÃæµÄÈı½ÇĞÎ£¨ÓÒ£©¡£
+    // æ­£é¢çš„ä¸‰è§’å½¢ï¼ˆå³ï¼‰ã€‚
     if ((cfg.GetMap() == VertexProjectionMap::M12) || (cfg.GetMap() == VertexProjectionMap::M111))
     {
-        // µãÏà½»¡£
+        // ç‚¹ç›¸äº¤ã€‚
         quantity = 1;
         point0 = triangle.GetVertex(cfg.GetIndex(0)) + diff;
     }
     else if (cfg.GetMap() == VertexProjectionMap::M21)
     {
-        // Ïß¶ÎÏà½»¡£
+        // çº¿æ®µç›¸äº¤ã€‚
         quantity = 2;
         point0 = triangle.GetVertex(cfg.GetIndex(0)) + diff;
         point1 = triangle.GetVertex(cfg.GetIndex(1)) + diff;
     }
     else
     {
-        // ÃæÏà½»
+        // é¢ç›¸äº¤
         quantity = 3;
         point0 = triangle.GetVertex(0) + diff;
         point1 = triangle.GetVertex(1) + diff;
@@ -133,7 +133,7 @@ Mathematics::Vector3<Real> Mathematics::DynamicFindIntersectorHalfspace3Triangle
             return point1;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Ë÷ÒıÔ½½ç\n"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•è¶Šç•Œ\n"s));
 }
 
 #endif  // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_TRIANGLE3_DETAIL_H

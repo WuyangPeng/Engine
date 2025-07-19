@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:21)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:21)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT_POWERS_DATA_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT_POWERS_DATA_DETAIL_H
@@ -141,7 +141,7 @@ void Mathematics::PolynomialFitPowersData<Real, S>::Solve(const VariableMatrixTy
     {
         solved = false;
 
-        LOG_SINGLETON_APPENDER(Info, CoreTools, SYSTEM_TEXT("Çó½âÏßĞÔÏµÍ³Ê§°Ü\n"), error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_APPENDER(Info, CoreTools, SYSTEM_TEXT("æ±‚è§£çº¿æ€§ç³»ç»Ÿå¤±è´¥\n"), error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/05 16:38)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/05 16:38)
 
 #ifndef SYSTEM_DYNAMIC_LINK_LIBRARY_TOOLS_H
 #define SYSTEM_DYNAMIC_LINK_LIBRARY_TOOLS_H
@@ -16,10 +16,10 @@
 #include "Using/LoadLibraryUsing.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
-/// Ê¹ÓÃ¶¯Ì¬Á´½Ó¿âµÄ¸¨Öúº¯Êı¡£
+/// ä½¿ç”¨åŠ¨æ€é“¾æ¥åº“çš„è¾…åŠ©å‡½æ•°ã€‚
 namespace System
 {
-    /// GetDynamicLinkHandle²»Ôö¼Ó¾ä±úµÄÒıÓÃ¼ÆÊı¡£
+    /// GetDynamicLinkHandleä¸å¢åŠ å¥æŸ„çš„å¼•ç”¨è®¡æ•°ã€‚
     NODISCARD DynamicLinkModule SYSTEM_DEFAULT_DECLARE GetDynamicLinkHandle(const DynamicLinkCharType* moduleName) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetDynamicLinkHandle(GetModuleHandleType flags, const DynamicLinkCharType* moduleName, DynamicLinkModule* module) noexcept;

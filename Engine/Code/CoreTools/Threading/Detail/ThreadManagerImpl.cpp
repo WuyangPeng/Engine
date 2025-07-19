@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/30 18:10)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/30 18:10)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -70,7 +70,7 @@ void CoreTools::ThreadManagerImpl::Wait()
     if (const auto result = System::WaitForSystemThread(boost::numeric_cast<int>(threadHandle.size()), threadHandle.data(), true, EnumCastUnderlying(System::MutexWait::Infinite));
         result == System::MutexWaitReturn::Failed)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("µÈ´ıÏß³ÌÊ§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("ç­‰å¾…çº¿ç¨‹å¤±è´¥ï¼"s))
     }
 
     thread.clear();

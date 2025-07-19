@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:17)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:17)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_SEGMENT3_SPHERE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_SEGMENT3_SPHERE3_DETAIL_H
@@ -56,7 +56,7 @@ Mathematics::Sphere3<Real> Mathematics::DynamicTestIntersectorSegment3Sphere3<Re
 template <typename Real>
 void Mathematics::DynamicTestIntersectorSegment3Sphere3<Real>::Test()
 {
-    // ¼ì²é×î³õÊÇ·ñÏà½»¡£
+    // æ£€æŸ¥æœ€åˆæ˜¯å¦ç›¸äº¤ã€‚
     StaticTestIntersectorSegment3Sphere3<Real> inte{ segment, sphere };
     this->SetIntersectionType(inte.GetIntersectionType());
     if (inte.IsIntersection())
@@ -64,9 +64,9 @@ void Mathematics::DynamicTestIntersectorSegment3Sphere3<Real>::Test()
         return;
     }
 
-    /// ´ÓÇòÌåËÙ¶ÈÖĞ¼õÈ¥Ïß¶ÎËÙ¶È£¬ÒÔ±ã¼ÆËã»ùÓÚÏß¶ÎµÄ×ø±êÏµ¡£
-    /// ÔÚ¸ÃÏµÍ³ÖĞ£¬ÏßÂ·µ±È»ÊÇ¹Ì¶¨µÄ¡£ ÇòÌå¿çÔ½Ò»¸ö½ºÄÒ£¬µ«ÊÇÈ¡¶ø´úÖ®µÄÊÇ£¬ÎÒÃÇ½«¸ù¾İÇòÌå°ë¾¶¡°À©´ó¡±Ïß¶Î£¬²¢½«ÇòÌåÊÕËõµ½ÆäÖĞĞÄ¡£
-    /// ÏÖÔÚµÄÎÊÌâÊÇ¼ì²âÒÆ¶¯ÖĞĞÄµÚÒ»´ÎÓëÓÉÏß¶ÎºÍÇòÌå°ë¾¶ĞÎ³ÉµÄ½ºÄÒÏà½»¡£
+    /// ä»çƒä½“é€Ÿåº¦ä¸­å‡å»çº¿æ®µé€Ÿåº¦ï¼Œä»¥ä¾¿è®¡ç®—åŸºäºçº¿æ®µçš„åæ ‡ç³»ã€‚
+    /// åœ¨è¯¥ç³»ç»Ÿä¸­ï¼Œçº¿è·¯å½“ç„¶æ˜¯å›ºå®šçš„ã€‚ çƒä½“è·¨è¶Šä¸€ä¸ªèƒ¶å›Šï¼Œä½†æ˜¯å–è€Œä»£ä¹‹çš„æ˜¯ï¼Œæˆ‘ä»¬å°†æ ¹æ®çƒä½“åŠå¾„â€œæ‰©å¤§â€çº¿æ®µï¼Œå¹¶å°†çƒä½“æ”¶ç¼©åˆ°å…¶ä¸­å¿ƒã€‚
+    /// ç°åœ¨çš„é—®é¢˜æ˜¯æ£€æµ‹ç§»åŠ¨ä¸­å¿ƒç¬¬ä¸€æ¬¡ä¸ç”±çº¿æ®µå’Œçƒä½“åŠå¾„å½¢æˆçš„èƒ¶å›Šç›¸äº¤ã€‚
 
     const Capsule3<Real> capsule{ segment, sphere.GetRadius() };
 

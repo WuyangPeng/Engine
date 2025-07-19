@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 22:25)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 22:25)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -33,7 +33,7 @@ void CoreTools::BufferInStreamImpl::AnalysisBuffer()
 {
     IncrementBytesProcessed();
 
-    /// ¼ÓÔØ¼¯ºÏÖÐµÄÎ¨Ò»¶ÔÏó¡£
+    /// åŠ è½½é›†åˆä¸­çš„å”¯ä¸€å¯¹è±¡ã€‚
     while (source->GetBytesRead() < source->GetBytesTotal())
     {
         ReadObject();
@@ -55,12 +55,12 @@ void CoreTools::BufferInStreamImpl::IncrementBytesProcessed()
 
 void CoreTools::BufferInStreamImpl::ReadObject()
 {
-    /// ¶ÁÈ¡"Top Level"Ãû»òRTTIÃû¡£
+    /// è¯»å–"Top Level"åæˆ–RTTIåã€‚
     auto name = source->ReadString();
     const auto isTopLevel = (name == TopLevel::GetTopLevelDescription());
     if (isTopLevel)
     {
-        /// ¶ÁÈ¡RTTIÃû¡£
+        /// è¯»å–RTTIåã€‚
         name = source->ReadString();
     }
 
@@ -69,16 +69,16 @@ void CoreTools::BufferInStreamImpl::ReadObject()
 
 void CoreTools::BufferInStreamImpl::CreateObject(bool isTopLevel, const std::string& name)
 {
-    /// µÃµ½½«Òª±»¶ÁÈ¡µÄÀàÐÍµÄ¹¤³§º¯Êý¡£Èç¹û¶ÏÑÔObject::Find(name)Ê§°Ü£¬ÇëÈ·±£ÄúÓÐÔÚÊ¹ÓÃÒýÇæ´úÂëÖ®Ç°
-    /// ÔÚ'main' »ò 'WinMain'ÖÐµ÷ÓÃInitTerm::ExecuteInitializer() ,³õÊ¼»¯»á·ÖÅä¹¤³§mapºÍ¶Ô¹¤³§º¯Êý½øÐÐÌî³ä¡£
+    /// å¾—åˆ°å°†è¦è¢«è¯»å–çš„ç±»åž‹çš„å·¥åŽ‚å‡½æ•°ã€‚å¦‚æžœæ–­è¨€Object::Find(name)å¤±è´¥ï¼Œè¯·ç¡®ä¿æ‚¨æœ‰åœ¨ä½¿ç”¨å¼•æ“Žä»£ç ä¹‹å‰
+    /// åœ¨'main' æˆ– 'WinMain'ä¸­è°ƒç”¨InitTerm::ExecuteInitializer() ,åˆå§‹åŒ–ä¼šåˆ†é…å·¥åŽ‚mapå’Œå¯¹å·¥åŽ‚å‡½æ•°è¿›è¡Œå¡«å……ã€‚
     try
     {
         DoCreateObject(isTopLevel, name);
     }
     catch (const Error& error)
     {
-        /// ÇëÈ·¶¨ÄúÒÑ¾­Ìí¼ÓCORE_TOOLS_REGISTER_STREAM(someClass)µ½Ã¿Ò»¸ö'someClass'µÄÍ·ÎÄ¼þÖÐ¡£Õâ¸öºê»á¶ÔÃ¿¸öÀà×¢²á¹¤³§º¯Êý¡£
-        LOG_SINGLETON_ENGINE_APPENDER(Fatal, CoreTools, error, SYSTEM_TEXT("£¨"), name, SYSTEM_TEXT("£©"), LogAppenderIOManageSign::TriggerAssert);
+        /// è¯·ç¡®å®šæ‚¨å·²ç»æ·»åŠ CORE_TOOLS_REGISTER_STREAM(someClass)åˆ°æ¯ä¸€ä¸ª'someClass'çš„å¤´æ–‡ä»¶ä¸­ã€‚è¿™ä¸ªå®ä¼šå¯¹æ¯ä¸ªç±»æ³¨å†Œå·¥åŽ‚å‡½æ•°ã€‚
+        LOG_SINGLETON_ENGINE_APPENDER(Fatal, CoreTools, error, SYSTEM_TEXT("ï¼ˆ"), name, SYSTEM_TEXT("ï¼‰"), LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -86,11 +86,11 @@ void CoreTools::BufferInStreamImpl::DoCreateObject(bool isTopLevel, const std::s
 {
     if (const auto factory = OBJECT_MANAGER_SINGLETON.Find(name); factory != nullptr)
     {
-        /// ´ÓÔ´»º³åÆ÷¼ÓÔØ¸Ã¶ÔÏó¡£
+        /// ä»Žæºç¼“å†²å™¨åŠ è½½è¯¥å¯¹è±¡ã€‚
         const auto object = (*factory)(*source);
         objectLink->Insert(object->GetUniqueId(), object);
 
-        /// ¸ú×ÙËùÓÐÓ¦ÓÃ³ÌÐòÊ¹ÓÃµÄ¶¥²ã¶ÔÏó
+        /// è·Ÿè¸ªæ‰€æœ‰åº”ç”¨ç¨‹åºä½¿ç”¨çš„é¡¶å±‚å¯¹è±¡
         if (isTopLevel)
         {
             topLevel.Insert(object);
@@ -100,8 +100,8 @@ void CoreTools::BufferInStreamImpl::DoCreateObject(bool isTopLevel, const std::s
 
 void CoreTools::BufferInStreamImpl::Link()
 {
-    /// Á´½Ó¶ÔÏó¡£Õâ¸ö³ÌÐò»áÈ¡´ú´æ´¢µÄÈÎÒâObject*µÄÊý¾Ý³ÉÔ±µÄ¾ÉµØÖ·£¬
-    /// ÐÂµØÖ·»áÔÚµ±Ç°ÔËÓÃ³ÌÐòÔËÐÐÊ±´´½¨¡£
+    /// é“¾æŽ¥å¯¹è±¡ã€‚è¿™ä¸ªç¨‹åºä¼šå–ä»£å­˜å‚¨çš„ä»»æ„Object*çš„æ•°æ®æˆå‘˜çš„æ—§åœ°å€ï¼Œ
+    /// æ–°åœ°å€ä¼šåœ¨å½“å‰è¿ç”¨ç¨‹åºè¿è¡Œæ—¶åˆ›å»ºã€‚
 
     for (const auto& element : *objectLink)
     {
@@ -111,9 +111,9 @@ void CoreTools::BufferInStreamImpl::Link()
 
 void CoreTools::BufferInStreamImpl::PostLink()
 {
-    /// ÔÊÐí¶ÔÏóÖ´ÐÐÁ´½ÓºóµÄÓïÒå¡£ÔÚ¶ÁÈ¡¡ª¡ªÁ´½ÓµÄÄ£Ê½ÖÐ£¬
-    /// Ä¬ÈÏ¹¹Ôìº¯ÊýÓÃÓÚ´´½¨Ò»¸ö¶ÔÏó£¬ÆäÖÐµÄÊý¾ÝÔÙ¼ÓÔØ¡£Á´½ÓÆ÷Á¬½Ó´´½¨µÄ¶ÔÏó¡£
-    /// ºóÁ´½Óº¯ÊýÔÚÓ¦ÓÃ³ÌÐòÔËÐÐÊ±´´½¨¶ÔÏóÊ±¿ÉÒÔ×öÒ»Ð©·ÇÄ¬ÈÏ¹¹Ôìº¯ÊýËù×öµÄ¹¤×÷¡£
+    /// å…è®¸å¯¹è±¡æ‰§è¡Œé“¾æŽ¥åŽçš„è¯­ä¹‰ã€‚åœ¨è¯»å–â€”â€”é“¾æŽ¥çš„æ¨¡å¼ä¸­ï¼Œ
+    /// é»˜è®¤æž„é€ å‡½æ•°ç”¨äºŽåˆ›å»ºä¸€ä¸ªå¯¹è±¡ï¼Œå…¶ä¸­çš„æ•°æ®å†åŠ è½½ã€‚é“¾æŽ¥å™¨è¿žæŽ¥åˆ›å»ºçš„å¯¹è±¡ã€‚
+    /// åŽé“¾æŽ¥å‡½æ•°åœ¨åº”ç”¨ç¨‹åºè¿è¡Œæ—¶åˆ›å»ºå¯¹è±¡æ—¶å¯ä»¥åšä¸€äº›éžé»˜è®¤æž„é€ å‡½æ•°æ‰€åšçš„å·¥ä½œã€‚
 
     for (const auto& element : *objectLink)
     {

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/13 23:58)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/13 23:58)
 
 #include "Rendering/RenderingExport.h"
 
@@ -58,7 +58,7 @@ Rendering::ProgramFactoryImpl::VisualProgramSharedPtr Rendering::ProgramFactoryI
 
     if (vertexShaderFile.empty() || pixelShaderFile.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ò»¸ö³ÌĞò±ØĞëÓĞÒ»¸ö¶¥µã×ÅÉ«Æ÷ºÍÒ»¸öÏñËØ×ÅÉ«Æ÷¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("ä¸€ä¸ªç¨‹åºå¿…é¡»æœ‰ä¸€ä¸ªé¡¶ç‚¹ç€è‰²å™¨å’Œä¸€ä¸ªåƒç´ ç€è‰²å™¨ã€‚"s))
     }
 
     const auto vertexShaderSource = GetStringFromFile(vertexShaderFile);
@@ -86,7 +86,7 @@ Rendering::ProgramFactoryImpl::ComputeProgramSharedPtr Rendering::ProgramFactory
 
     if (computeShaderFile.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ò»¸ö³ÌĞò±ØĞëÓĞÒ»¸ö¼ÆËã×ÅÉ«Æ÷¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("ä¸€ä¸ªç¨‹åºå¿…é¡»æœ‰ä¸€ä¸ªè®¡ç®—ç€è‰²å™¨ã€‚"s))
     }
 
     const auto computeShaderSource = GetStringFromFile(computeShaderFile);
@@ -109,7 +109,7 @@ std::string Rendering::ProgramFactoryImpl::GetStringFromFile(const std::string& 
 
     if (shaderSource.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¿ÕµÄ×ÅÉ«Æ÷Ô´×Ö·û´®¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("ç©ºçš„ç€è‰²å™¨æºå­—ç¬¦ä¸²ã€‚"s))
     }
 
     return shaderSource;
@@ -172,7 +172,7 @@ Rendering::ProgramFactoryImpl::ProgramFactorySharedPtr Rendering::ProgramFactory
             break;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Program¹¤³§ÀàĞÍÎ´¶¨Òå¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("Programå·¥å‚ç±»å‹æœªå®šä¹‰ã€‚"s))
 }
 
 std::string Rendering::ProgramFactoryImpl::GetVersion() const

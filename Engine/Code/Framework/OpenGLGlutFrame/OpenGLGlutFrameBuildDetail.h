@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 14:55)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 14:55)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_FRAME_BUILD_DETAIL_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_FRAME_BUILD_DETAIL_H
@@ -95,7 +95,7 @@ bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::InitGlutFunctionLibrary
 
     if (!System::RemoveConsoleCloseButton())
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("RemoveConsoleCloseButton Ê§°Ü¡£"));
+        LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("RemoveConsoleCloseButton å¤±è´¥ã€‚"));
     }
 
     return true;
@@ -134,7 +134,7 @@ bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::SetCallBackFunction() n
     System::GlutPassiveMotionFunc(openGLGlutProcess.GetPassiveMotionCallback());
     System::GlutTimerFunc(System::EnumCastUnderlying(glutInformation.GetFrame()), openGLGlutProcess.GetTimerFunctionCallback(), 1);
 
-    // ×¢²áÖÕÖ¹º¯Êı£¬ÕâÑùÎÒÃÇ¾Í¿ÉÒÔÔÚGLUTµ÷ÓÃexitÇ°Ïú»Ù´°¿Ú¡£
+    // æ³¨å†Œç»ˆæ­¢å‡½æ•°ï¼Œè¿™æ ·æˆ‘ä»¬å°±å¯ä»¥åœ¨GLUTè°ƒç”¨exitå‰é”€æ¯çª—å£ã€‚
     if (atexit(openGLGlutProcess.GetTerminateCallback()) != 0)
     {
         return false;

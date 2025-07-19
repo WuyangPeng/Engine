@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/26 15:07)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/26 15:07)
 
 #include "Rendering/RenderingExport.h"
 
@@ -213,7 +213,7 @@ CoreTools::ObjectSharedPtr Rendering::ShaderDataImpl::GetObjectByName(const std:
 
     if (object.object == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("objectÖ¸ÕëÎª¿Õ¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("objectæŒ‡é’ˆä¸ºç©ºã€‚"))
     }
 
     return object->GetObjectByName(name);
@@ -225,7 +225,7 @@ Rendering::ShaderDataImpl::ObjectSharedPtrContainer Rendering::ShaderDataImpl::G
 
     if (object.object == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("objectÖ¸ÕëÎª¿Õ¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("objectæŒ‡é’ˆä¸ºç©ºã€‚"))
     }
 
     return object->GetAllObjectsByName(name);
@@ -237,7 +237,7 @@ CoreTools::ConstObjectSharedPtr Rendering::ShaderDataImpl::GetConstObjectByName(
 
     if (object.object == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("objectÖ¸ÕëÎª¿Õ¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("objectæŒ‡é’ˆä¸ºç©ºã€‚"))
     }
 
     return object->GetConstObjectByName(name);
@@ -249,7 +249,7 @@ Rendering::ShaderDataImpl::ConstObjectSharedPtrContainer Rendering::ShaderDataIm
 
     if (object.object == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("objectÖ¸ÕëÎª¿Õ¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("objectæŒ‡é’ˆä¸ºç©ºã€‚"))
     }
 
     return object->GetAllConstObjectsByName(name);

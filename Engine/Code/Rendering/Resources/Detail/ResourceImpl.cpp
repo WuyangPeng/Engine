@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/29 14:05)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/29 14:05)
 
 #include "Rendering/RenderingExport.h"
 
@@ -60,7 +60,7 @@ Rendering::ResourceImpl::ResourceImpl(int numElements, int elementSize, const St
 {
     if (boost::numeric_cast<int>(storage.size()) != numBytes)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Êı¾İºÍÊı×é´óĞ¡²»Ò»ÖÂ"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ•°æ®å’Œæ•°ç»„å¤§å°ä¸ä¸€è‡´"s))
     }
 
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -102,9 +102,9 @@ void Rendering::ResourceImpl::DestroyStorage()
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    /// DestroyStorageµÄÄ¿µÄÊÇÔÚÖ»ĞèÒªGPUÄÚ´æ×ÊÔ´µÄÇé¿öÏÂÊÍ·Å²»ĞèÒªµÄCPUÄÚ´æ¡£
-    /// clearµ÷ÓÃ½«´óĞ¡ÉèÖÃÎª0£¬µ«ÈİÁ¿±£³Ö²»±ä£»Ò²¾ÍÊÇËµ£¬ÄÚ´æÃ»ÓĞ±»ÊÍ·Å¡£
-    /// ĞèÒªshrink_to_fitµ÷ÓÃ²ÅÄÜÊÍ·ÅÄÚ´æ¡£
+    /// DestroyStorageçš„ç›®çš„æ˜¯åœ¨åªéœ€è¦GPUå†…å­˜èµ„æºçš„æƒ…å†µä¸‹é‡Šæ”¾ä¸éœ€è¦çš„CPUå†…å­˜ã€‚
+    /// clearè°ƒç”¨å°†å¤§å°è®¾ç½®ä¸º0ï¼Œä½†å®¹é‡ä¿æŒä¸å˜ï¼›ä¹Ÿå°±æ˜¯è¯´ï¼Œå†…å­˜æ²¡æœ‰è¢«é‡Šæ”¾ã€‚
+    /// éœ€è¦shrink_to_fitè°ƒç”¨æ‰èƒ½é‡Šæ”¾å†…å­˜ã€‚
     if (!storage.empty() && createStorage)
     {
         createStorage = false;
@@ -215,12 +215,12 @@ void Rendering::ResourceImpl::SetOffset(int aOffset)
     }
     else
     {
-        const auto message = SYSTEM_TEXT("ÎŞĞ§µÄoffset (") +
+        const auto message = SYSTEM_TEXT("æ— æ•ˆçš„offset (") +
                              System::ToString(offset) +
                              SYSTEM_TEXT(")") +
-                             SYSTEM_TEXT("; ×ÜÔªËØ = ") +
+                             SYSTEM_TEXT("; æ€»å…ƒç´  = ") +
                              System::ToString(numElements) +
-                             SYSTEM_TEXT("¡£");
+                             SYSTEM_TEXT("ã€‚");
         THROW_EXCEPTION(message)
     }
 }
@@ -249,14 +249,14 @@ void Rendering::ResourceImpl::SetNumActiveElements(int aNumActiveElements)
     }
     else
     {
-        const auto message = SYSTEM_TEXT("»î¶¯ÔªËØµÄÊıÁ¿ÎŞĞ§ (") +
+        const auto message = SYSTEM_TEXT("æ´»åŠ¨å…ƒç´ çš„æ•°é‡æ— æ•ˆ (") +
                              System::ToString(numActiveElements) +
                              SYSTEM_TEXT(")") +
                              SYSTEM_TEXT("; offset = ") +
                              System::ToString(offset) +
-                             SYSTEM_TEXT("; ×ÜÔªËØ = ") +
+                             SYSTEM_TEXT("; æ€»å…ƒç´  = ") +
                              System::ToString(numElements) +
-                             SYSTEM_TEXT("¡£");
+                             SYSTEM_TEXT("ã€‚");
 
         THROW_EXCEPTION(message)
     }
@@ -268,7 +268,7 @@ void Rendering::ResourceImpl::SetStorage(const StorageType& aStorage)
 
     if (boost::numeric_cast<int>(aStorage.size()) != numBytes)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Êı¾İºÍÊı×é´óĞ¡²»Ò»ÖÂ"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ•°æ®å’Œæ•°ç»„å¤§å°ä¸ä¸€è‡´"s))
     }
 
     storage = aStorage;
@@ -280,7 +280,7 @@ const char* Rendering::ResourceImpl::GetOriginalData() const
 
     if (storage.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Êı¾İÎª¿Õ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ•°æ®ä¸ºç©ºã€‚"s))
     }
 
     return storage.data();
@@ -292,7 +292,7 @@ char* Rendering::ResourceImpl::GetOriginalData(int aOffset)
 
     if (boost::numeric_cast<int>(storage.size()) <= aOffset)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Êı¾İÈİÆ÷Ğ¡ÓÚÆ«ÒÆÖµ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ•°æ®å®¹å™¨å°äºåç§»å€¼ã€‚"s))
     }
 
     return &storage.at(aOffset);
@@ -311,7 +311,7 @@ const char* Rendering::ResourceImpl::GetOriginalData(int aOffset) const
 
     if (boost::numeric_cast<int>(storage.size()) <= aOffset)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Êı¾İÈİÆ÷Ğ¡ÓÚÆ«ÒÆÖµ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ•°æ®å®¹å™¨å°äºåç§»å€¼ã€‚"s))
     }
 
     return &storage.at(aOffset);
@@ -323,7 +323,7 @@ char* Rendering::ResourceImpl::GetOriginalData()
 
     if (storage.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Êı¾İÎª¿Õ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ•°æ®ä¸ºç©ºã€‚"s))
     }
 
     return storage.data();

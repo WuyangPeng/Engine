@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/28 16:44)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/28 16:44)
 
 #ifndef CORE_TOOLS_BASE_SPAN_ITERATOR_DETAIL_H
 #define CORE_TOOLS_BASE_SPAN_ITERATOR_DETAIL_H
@@ -56,7 +56,7 @@ typename CoreTools::SpanIterator<Iter>::ConstReferenceType CoreTools::SpanIterat
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("µü´úÆ÷ÎŞĞ§¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¿­ä»£å™¨æ— æ•ˆã€‚"s))
     }
 }
 
@@ -83,7 +83,7 @@ CoreTools::SpanIterator<Iter>& CoreTools::SpanIterator<Iter>::operator++()
 
     if (end <= current)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("µü´úÆ÷Ôö¼ÓÊ±Ô½½ç¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¿­ä»£å™¨å¢åŠ æ—¶è¶Šç•Œã€‚"s))
     }
 
     ++current;
@@ -109,7 +109,7 @@ CoreTools::SpanIterator<Iter>& CoreTools::SpanIterator<Iter>::operator--()
 
     if (current <= begin)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("µü´úÆ÷¼õÉÙÊ±Ô½½ç¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¿­ä»£å™¨å‡å°‘æ—¶è¶Šç•Œã€‚"s))
     }
 
     --current;
@@ -138,12 +138,12 @@ CoreTools::SpanIterator<Iter>& CoreTools::SpanIterator<Iter>::operator+=(int ste
 
     if (step > 0 && end - current < step)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("µü´úÆ÷Ôö¼ÓÊ±Ô½½ç¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¿­ä»£å™¨å¢åŠ æ—¶è¶Šç•Œã€‚"s))
     }
 
     if (step < 0 && current - begin < -step)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("µü´úÆ÷¼õÉÙÊ±Ô½½ç¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¿­ä»£å™¨å‡å°‘æ—¶è¶Šç•Œã€‚"s))
     }
 
     current += step;
@@ -195,12 +195,12 @@ Iter CoreTools::SpanIterator<Iter>::Get(int step) const
 
     if (step > 0 && end - current < step)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("µü´úÆ÷Ôö¼ÓÊ±Ô½½ç¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¿­ä»£å™¨å¢åŠ æ—¶è¶Šç•Œã€‚"s))
     }
 
     if (step < 0 && current - begin < -step)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("µü´úÆ÷¼õÉÙÊ±Ô½½ç¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¿­ä»£å™¨å‡å°‘æ—¶è¶Šç•Œã€‚"s))
     }
 
     return current + step;
@@ -223,7 +223,7 @@ const T& CoreTools::SpanIterator<Iter>::ReinterpretCast() const requires(std::is
     const auto remainingCount = GetRemainingCount();
     if (remainingCount * sizeof(ValueType) < sizeof(T))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("µü´úÆ÷³¤¶È²»×ã"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¿­ä»£å™¨é•¿åº¦ä¸è¶³"s))
     }
 
 #include SYSTEM_WARNING_PUSH
@@ -258,7 +258,7 @@ const T& CoreTools::SpanIterator<Iter>::ReinterpretCast(int step) const requires
     const auto remainingCount = GetRemainingCount();
     if ((remainingCount - step) * sizeof(ValueType) < sizeof(T))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("µü´úÆ÷³¤¶È²»×ã"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¿­ä»£å™¨é•¿åº¦ä¸è¶³"s))
     }
 
     const auto endStep = current + step;
@@ -406,7 +406,7 @@ typename Iter::difference_type CoreTools::operator-(const SpanIterator<Iter>& lh
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("µü´úÆ÷ÆğÊ¼Î»ÖÃ²»ÏàÍ¬¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¿­ä»£å™¨èµ·å§‹ä½ç½®ä¸ç›¸åŒã€‚"s))
     }
 }
 
@@ -419,7 +419,7 @@ void CoreTools::IterSwap(const SpanIterator<Iter>& lhs, const SpanIterator<Iter>
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("µü´úÆ÷ÆğÊ¼Î»ÖÃ²»ÏàÍ¬¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¿­ä»£å™¨èµ·å§‹ä½ç½®ä¸ç›¸åŒã€‚"s))
     }
 }
 

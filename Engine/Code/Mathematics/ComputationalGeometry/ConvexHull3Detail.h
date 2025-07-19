@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/09 09:35)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 09:35)
 
 #ifndef MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL3_DETAIL_H
 #define MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL3_DETAIL_H
@@ -209,7 +209,7 @@ Mathematics::ConvexHull1<Real> Mathematics::ConvexHull3<Real>::GetConvexHull1() 
 
     if (dimension != 1)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î¬¶È±ØĞëÎª1¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("ç»´åº¦å¿…é¡»ä¸º1ã€‚"));
     }
 
     const auto mNumVertices = this->GetNumVertices();
@@ -232,7 +232,7 @@ Mathematics::ConvexHull2<Real> Mathematics::ConvexHull3<Real>::GetConvexHull2() 
 
     if (dimension != 2)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î¬¶È±ØĞëÎª2¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("ç»´åº¦å¿…é¡»ä¸º2ã€‚"));
     }
 
     const auto numVertices = this->GetNumVertices();
@@ -286,7 +286,7 @@ void Mathematics::ConvexHull3<Real>::LoadFile(const String& filename)
 
     if (!ParentType::Load(inFile))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¼ÓÔØÎÄ¼şÊ§°Ü\n"));
+        THROW_EXCEPTION(SYSTEM_TEXT("åŠ è½½æ–‡ä»¶å¤±è´¥\n"));
     }
 
     const auto numVertices = this->GetNumVertices();
@@ -341,7 +341,7 @@ void Mathematics::ConvexHull3<Real>::SaveFile(const String& filename) const
 
     if (!ParentType::Save(outFile))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("±£´æÎÄ¼şÊ§°Ü\n"));
+        THROW_EXCEPTION(SYSTEM_TEXT("ä¿å­˜æ–‡ä»¶å¤±è´¥\n"));
     }
 
     const auto numVertices = this->GetNumVertices();
@@ -413,7 +413,7 @@ bool Mathematics::ConvexHull3<Real>::Update(int32_t i)
     }
 
     const auto size = boost::numeric_cast<int>(terminator.size());
-    MATHEMATICS_ASSERTION_0(3 <= size, "Terminator±ØĞëÖÁÉÙÊÇÒ»¸öÈı½ÇĞÎ¡£\n");
+    MATHEMATICS_ASSERTION_0(3 <= size, "Terminatorå¿…é¡»è‡³å°‘æ˜¯ä¸€ä¸ªä¸‰è§’å½¢ã€‚\n");
 
     auto edge = terminator.begin();
     auto v0 = edge->second.v.at(0);
@@ -431,7 +431,7 @@ bool Mathematics::ConvexHull3<Real>::Update(int32_t i)
         edge = terminator.find(v1);
         if (edge == terminator.cend())
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("ÒâÍâÇé¿ö\n"));
+            THROW_EXCEPTION(SYSTEM_TEXT("æ„å¤–æƒ…å†µ\n"));
         }
 
         v0 = v1;
@@ -448,7 +448,7 @@ bool Mathematics::ConvexHull3<Real>::Update(int32_t i)
         tri = next;
     }
 
-    MATHEMATICS_ASSERTION_0(v1 == saveV0, "ÆÚÍû³õÊ¼¶¥µã\n");
+    MATHEMATICS_ASSERTION_0(v1 == saveV0, "æœŸæœ›åˆå§‹é¡¶ç‚¹\n");
 
     saveTri->triangle.at(0) = tri;
     tri->triangle.at(2) = saveTri;
@@ -508,7 +508,7 @@ void Mathematics::ConvexHull3<Real>::Triangle::AttachTo(const TriangleSharedPtr&
 template <typename Real>
 int Mathematics::ConvexHull3<Real>::Triangle::DetachFrom(int32_t adjIndex, const TriangleSharedPtr& adj)
 {
-    MATHEMATICS_ASSERTION_0(0 <= adjIndex && adjIndex < 3 && triangle.at(adjIndex).lock() == adj, "ÎŞĞ§ÊäÈë¡£\n");
+    MATHEMATICS_ASSERTION_0(0 <= adjIndex && adjIndex < 3 && triangle.at(adjIndex).lock() == adj, "æ— æ•ˆè¾“å…¥ã€‚\n");
 
     triangle.at(adjIndex).reset();
     for (auto i = 0; i < 3; ++i)

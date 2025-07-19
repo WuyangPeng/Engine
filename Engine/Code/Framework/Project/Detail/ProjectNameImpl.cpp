@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 14:50)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 14:50)
 
 #include "Framework/FrameworkExport.h"
 
@@ -32,7 +32,7 @@ System::String Framework::ProjectNameImpl::GetSelectDescribe() const
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
     auto index = 1;
-    auto result = SYSTEM_TEXT("ÇëÑ¡ÔñÒªÖ´ĞĞµÄ¹¤³Ì£º\n"s);
+    auto result = SYSTEM_TEXT("è¯·é€‰æ‹©è¦æ‰§è¡Œçš„å·¥ç¨‹ï¼š\n"s);
 
     for (const auto& element : container)
     {
@@ -50,7 +50,7 @@ System::String Framework::ProjectNameImpl::GetSelectDescribe(const String& eleme
 
     System::StringStream ss{};
 
-    ss << std::setw(width) << std::setfill(SYSTEM_TEXT('0')) << index << SYSTEM_TEXT("£º") << element << SYSTEM_TEXT('\n');
+    ss << std::setw(width) << std::setfill(SYSTEM_TEXT('0')) << index << SYSTEM_TEXT("ï¼š") << element << SYSTEM_TEXT('\n');
 
     return ss.str();
 }

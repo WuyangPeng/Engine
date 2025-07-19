@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.2 (2024/10/26 15:35)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.2 (2024/10/26 15:35)
 
 #include "System/SystemExport.h"
 
@@ -16,12 +16,12 @@
 
 namespace System
 {
-    /// »ñÈ¡Ö¸¶¨´°¿ÚµÄĞÅÏ¢¡£
+    /// è·å–æŒ‡å®šçª—å£çš„ä¿¡æ¯ã€‚
     ///
-    /// @param hWnd ´°¿Ú¾ä±ú¡£
-    /// @param result ´æ´¢´°¿ÚĞÅÏ¢µÄ×Ö·û´®¡£
-    /// @param getWindowsInformationFunction ÓÃÓÚ»ñÈ¡´°¿ÚĞÅÏ¢µÄº¯ÊıÖ¸Õë¡£
-    /// @return Èç¹û³É¹¦»ñÈ¡´°¿ÚĞÅÏ¢£¬Ôò·µ»Øtrue£¬·ñÔò·µ»Øfalse¡£
+    /// @param hWnd çª—å£å¥æŸ„ã€‚
+    /// @param result å­˜å‚¨çª—å£ä¿¡æ¯çš„å­—ç¬¦ä¸²ã€‚
+    /// @param getWindowsInformationFunction ç”¨äºè·å–çª—å£ä¿¡æ¯çš„å‡½æ•°æŒ‡é’ˆã€‚
+    /// @return å¦‚æœæˆåŠŸè·å–çª—å£ä¿¡æ¯ï¼Œåˆ™è¿”å›trueï¼Œå¦åˆ™è¿”å›falseã€‚
     bool GetWindowsInformation(WindowsHWnd hWnd, String& result, GetWindowsInformationFunction getWindowsInformationFunction)
     {
         TCharContainer name{};

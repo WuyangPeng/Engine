@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 15:25)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 15:25)
 
 #ifndef MATHEMATICS_BASE_SUITE_BIT_HACKS_TESTING_H
 #define MATHEMATICS_BASE_SUITE_BIT_HACKS_TESTING_H
@@ -31,18 +31,18 @@ namespace Mathematics
         void Log2OfPowerOfTwoTest();
         void ScaledFloatToIntTest();
 
-        // IsPowerOfTwo²âÊÔ
+        // IsPowerOfTwoæµ‹è¯•
         void SignIntIsPowerOfTwoTrueTest();
         void UnsignIntIsPowerOfTwoTrueTest();
         void SignIntIsPowerOfTwoFalseTest();
         void UnsignIntIsPowerOfTwoFalseTest();
 
-        // Log2OfPowerOfTwo²âÊÔ
+        // Log2OfPowerOfTwoæµ‹è¯•
         void FixedValueLog2OfPowerOfTwoTest();
         void SignIntLog2OfPowerOfTwoTest();
         void UnsignIntLog2OfPowerOfTwoTest();
 
-        // ScaledFloatToInt²âÊÔ
+        // ScaledFloatToIntæµ‹è¯•
         void ScaledFloatToIntMinTest();
         void ScaledFloatToIntMaxTest();
         void ScaledFloatToIntRandomTest();

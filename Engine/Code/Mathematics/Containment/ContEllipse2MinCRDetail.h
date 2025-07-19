@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/09 09:39)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 09:39)
 
 #ifndef MATHEMATICS_CONTAINMENT_CONT_ELLIPSE2_MINCR_DETAIL_H
 #define MATHEMATICS_CONTAINMENT_CONT_ELLIPSE2_MINCR_DETAIL_H
@@ -119,7 +119,7 @@ void Mathematics::ContEllipse2MinCR<Real>::MaxProduct(std::vector<Vector2<Real>>
             iYMin = i;
         }
     }
-    MATHEMATICS_ASSERTION_0(iXMin != -1 && iYMin != -1, "ÒâÍâÇé¿ö¡£\n");
+    MATHEMATICS_ASSERTION_0(iXMin != -1 && iYMin != -1, "æ„å¤–æƒ…å†µã€‚\n");
 
     used.at(iYMin) = true;
 
@@ -161,7 +161,7 @@ void Mathematics::ContEllipse2MinCR<Real>::MaxProduct(std::vector<Vector2<Real>>
             break;
         }
 
-        MATHEMATICS_ASSERTION_0(line != -1, "ÒâÍâÇé¿ö¡£\n");
+        MATHEMATICS_ASSERTION_0(line != -1, "æ„å¤–æƒ…å†µã€‚\n");
         x0 = x1;
         x1 = xMax;
         used.at(line) = true;

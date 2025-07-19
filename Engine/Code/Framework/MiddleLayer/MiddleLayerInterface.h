@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 15:00)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 15:00)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_MIDDLE_LAYER_INTERFACE_H
 #define FRAMEWORK_MIDDLE_LAYER_MIDDLE_LAYER_INTERFACE_H
@@ -23,7 +23,7 @@
 template class FRAMEWORK_DEFAULT_DECLARE std::weak_ptr<Framework::MiddleLayerInterface>;
 template class FRAMEWORK_DEFAULT_DECLARE std::enable_shared_from_this<Framework::MiddleLayerInterface>;
 
-// ÖĞ¼ä²ã½Ó¿ÚÀà£¬»ùÀàÌá¹©Ğéº¯ÊıµÄÄ¬ÈÏÊµÏÖ¡£
+// ä¸­é—´å±‚æ¥å£ç±»ï¼ŒåŸºç±»æä¾›è™šå‡½æ•°çš„é»˜è®¤å®ç°ã€‚
 namespace Framework
 {
     class FRAMEWORK_DEFAULT_DECLARE MiddleLayerInterface : public std::enable_shared_from_this<MiddleLayerInterface>
@@ -47,31 +47,31 @@ namespace Framework
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        // ´´½¨´°¿ÚÖĞ¼ä²ã´¦Àí
+        // åˆ›å»ºçª—å£ä¸­é—´å±‚å¤„ç†
         virtual bool PreCreate();
         virtual bool Create(const EnvironmentParameter& environmentParameter);
         virtual bool Initialize();
 
-        // Ïú»Ù´°¿ÚÖĞ¼ä²ã´¦Àí
+        // é”€æ¯çª—å£ä¸­é—´å±‚å¤„ç†
         virtual bool Destroy();
         virtual void Terminate();
 
-        // ¿ÕÏĞÊ±¼äÖĞ¼ä²ã´¦Àí
+        // ç©ºé—²æ—¶é—´ä¸­é—´å±‚å¤„ç†
         virtual void PreIdle();
         virtual bool Idle(int64_t timeDelta);
 
-        // äÖÈ¾ÖĞ¼ä²ã´¦Àí
+        // æ¸²æŸ“ä¸­é—´å±‚å¤„ç†
         virtual bool Paint();
         virtual bool Move(const WindowPoint& point);
         virtual bool Resize(WindowDisplay windowDisplay, const WindowSize& size);
 
-        // °´¼üÏûÏ¢ÖĞ¼ä²ã´¦Àí
+        // æŒ‰é”®æ¶ˆæ¯ä¸­é—´å±‚å¤„ç†
         virtual bool KeyUp(int key, const WindowPoint& point);
         virtual bool KeyDown(int key, const WindowPoint& point);
         virtual bool SpecialKeyUp(int key, const WindowPoint& point);
         virtual bool SpecialKeyDown(int key, const WindowPoint& point);
 
-        // Êó±êÏûÏ¢ÖĞ¼ä²ã´¦Àí
+        // é¼ æ ‡æ¶ˆæ¯ä¸­é—´å±‚å¤„ç†
         virtual bool PassiveMotion(const WindowPoint& point);
         virtual bool Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys);
         virtual bool MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys);

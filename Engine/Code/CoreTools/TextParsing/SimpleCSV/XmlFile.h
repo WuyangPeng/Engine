@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/02 15:21)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/02 15:21)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_XML_FILE_H
 #define CORE_TOOLS_TEXT_PARSING_XML_FILE_H
@@ -23,8 +23,8 @@ template class CORE_TOOLS_DEFAULT_DECLARE CoreTools::CopyUnsharedImpl<CoreTools:
 
 namespace CoreTools::SimpleCSV
 {
-    /// XmlFileÀàÌá¹©ÁËÒ»¸ö¹©ÅÉÉúÀàÊ¹ÓÃµÄ½Ó¿Ú¡£
-    /// Ëü³äµ±ËùÓĞÀàµÄ»ùÀà£¬ÕâĞ©ÀàÓÉ.xlsx °üÖĞµÄ.xml ÎÄ¼ş±íÊ¾¡£
+    /// XmlFileç±»æä¾›äº†ä¸€ä¸ªä¾›æ´¾ç”Ÿç±»ä½¿ç”¨çš„æ¥å£ã€‚
+    /// å®ƒå……å½“æ‰€æœ‰ç±»çš„åŸºç±»ï¼Œè¿™äº›ç±»ç”±.xlsx åŒ…ä¸­çš„.xml æ–‡ä»¶è¡¨ç¤ºã€‚
     class CORE_TOOLS_DEFAULT_DECLARE XmlFile
     {
     public:
@@ -46,13 +46,13 @@ namespace CoreTools::SimpleCSV
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
     protected:
-        /// »ñÈ¡¶ÔÏóËù±íÊ¾µÄXMLÊı¾İµÄ·½·¨¡£
+        /// è·å–å¯¹è±¡æ‰€è¡¨ç¤ºçš„XMLæ•°æ®çš„æ–¹æ³•ã€‚
         NODISCARD std::string GetXmlData() const;
 
-        /// Ìá¹©¶ÔÏó±íÊ¾µÄXMLÊı¾İ¡£
+        /// æä¾›å¯¹è±¡è¡¨ç¤ºçš„XMLæ•°æ®ã€‚
         void SetXmlData(const std::string& data);
 
-        /// ´Ëº¯Êı·µ»Ø¶ÔÏóµÄ¹ØÏµID£¨Relationships¶ÔÏóÖĞÊ¹ÓÃµÄID£©¡£
+        /// æ­¤å‡½æ•°è¿”å›å¯¹è±¡çš„å…³ç³»IDï¼ˆRelationshipså¯¹è±¡ä¸­ä½¿ç”¨çš„IDï¼‰ã€‚
         NODISCARD std::string GetRelationshipId() const;
 
         NODISCARD DocumentSharedPtr GetParentDocument();

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.3 (2023/08/11 19:22)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.3 (2023/08/11 19:22)
 
 #include "MiddleLayerMacroTesting.h"
 #include "Detail/ChildHelperInterface.h"
@@ -44,7 +44,7 @@ void Framework::MiddleLayerMacroTesting::DoRunUnitTest()
 
 void Framework::MiddleLayerMacroTesting::MainTest()
 {
-    // MiddleLayerMacroºê¹©MiddleLayerÄ£¿éÄÚ²¿Ê¹ÓÃ¡£
+    // MiddleLayerMacroå®ä¾›MiddleLayeræ¨¡å—å†…éƒ¨ä½¿ç”¨ã€‚
 
     ASSERT_NOT_THROW_EXCEPTION_0(HelperManagerSuccessTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ChildHelperManagerSuccessTest);

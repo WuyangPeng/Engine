@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/14 11:41)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/14 11:41)
 
 #include "ExceptionMacroTesting.h"
 #include "System/Windows/Flags/PlatformErrorFlags.h"
@@ -37,7 +37,7 @@ void CoreTools::ExceptionMacroTesting::MainTest()
 
 void CoreTools::ExceptionMacroTesting::ThrowErrorTest()
 {
-    THROW_EXCEPTION(SYSTEM_TEXT("ÕâÀï²âÊÔÅ×³öÒì³£¡£"))
+    THROW_EXCEPTION(SYSTEM_TEXT("è¿™é‡Œæµ‹è¯•æŠ›å‡ºå¼‚å¸¸ã€‚"))
 }
 
 void CoreTools::ExceptionMacroTesting::ThrowWindowsErrorTest()
@@ -47,15 +47,15 @@ void CoreTools::ExceptionMacroTesting::ThrowWindowsErrorTest()
 
 void CoreTools::ExceptionMacroTesting::ThrowComErrorTest()
 {
-    THROW_LAST_ERROR_EXCEPTION(System::WindowError::EUnexpected, SYSTEM_TEXT("ÕâÀï²âÊÔÅ×³öCOMÒì³£¡£"))
+    THROW_LAST_ERROR_EXCEPTION(System::WindowError::EUnexpected, SYSTEM_TEXT("è¿™é‡Œæµ‹è¯•æŠ›å‡ºCOMå¼‚å¸¸ã€‚"))
 }
 
 void CoreTools::ExceptionMacroTesting::AssertFailThrowExceptionSuccessTest()
 {
-    ASSERT_FAIL_THROW_EXCEPTION(true, SYSTEM_TEXT("ÕâÀï²âÊÔÅ×³öÒì³£¡£"));
+    ASSERT_FAIL_THROW_EXCEPTION(true, SYSTEM_TEXT("è¿™é‡Œæµ‹è¯•æŠ›å‡ºå¼‚å¸¸ã€‚"));
 }
 
 void CoreTools::ExceptionMacroTesting::AssertFailThrowExceptionFailTest()
 {
-    ASSERT_FAIL_THROW_EXCEPTION(false, SYSTEM_TEXT("ÕâÀï²âÊÔÅ×³öÒì³£¡£"));
+    ASSERT_FAIL_THROW_EXCEPTION(false, SYSTEM_TEXT("è¿™é‡Œæµ‹è¯•æŠ›å‡ºå¼‚å¸¸ã€‚"));
 }

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #ifndef ANCIENT_BOOKS_CHARACTER_H
 #define ANCIENT_BOOKS_CHARACTER_H
@@ -109,27 +109,27 @@ namespace AncientBooks
 
     private:
         int id;  // Id
-        int country;  // ‡ø¼Ò
-        int identity;  // Éí·İ
-        String family;  // ĞÕ
-        String name;  // Ãû
-        String fullName;  // È«Ãû
-        StringContainer alias;  // „eÃû
-        String styleName;  // ×Ö
-        int sex;  // ĞÕ„e
-        int father;  // ¸¸
-        int mother;  // Ä¸
-        IntContainer fosterFather;  // ğB¸¸
-        IntContainer fosterMother;  // ğBÄ¸
-        int birthYear;  // ³öÉúÄê
-        int birthMonth;  // ³öÉúÔÂ
-        int birthSexagenaryCycle;  // ³öÉú¸ÉÖ§ÈÕ
-        int birthDay;  // ³öÉúÈÕ
-        int deathYear;  // ËÀÍöÄê
-        int deathMonth;  // ËÀÍöÔÂ
-        int deathSexagenaryCycle;  // ËÀÍö¸ÉÖ§ÈÕ
-        int deathDay;  // ËÀÍöÈÕ
-        StringContainer unansweredQuestion;  // ´æÒÉ
+        int country;  // åœ‹å®¶
+        int identity;  // èº«ä»½
+        String family;  // å§“
+        String name;  // å
+        String fullName;  // å…¨å
+        StringContainer alias;  // åˆ¥å
+        String styleName;  // å­—
+        int sex;  // å§“åˆ¥
+        int father;  // çˆ¶
+        int mother;  // æ¯
+        IntContainer fosterFather;  // é¤Šçˆ¶
+        IntContainer fosterMother;  // é¤Šæ¯
+        int birthYear;  // å‡ºç”Ÿå¹´
+        int birthMonth;  // å‡ºç”Ÿæœˆ
+        int birthSexagenaryCycle;  // å‡ºç”Ÿå¹²æ”¯æ—¥
+        int birthDay;  // å‡ºç”Ÿæ—¥
+        int deathYear;  // æ­»äº¡å¹´
+        int deathMonth;  // æ­»äº¡æœˆ
+        int deathSexagenaryCycle;  // æ­»äº¡å¹²æ”¯æ—¥
+        int deathDay;  // æ­»äº¡æ—¥
+        StringContainer unansweredQuestion;  // å­˜ç–‘
     };
 }
 

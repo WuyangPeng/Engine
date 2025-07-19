@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 16:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 16:19)
 
 #include "Network/NetworkExport.h"
 
@@ -83,7 +83,7 @@ void Network::BufferReceiveStreamImpl::ReadMessageByDescribe(MessageSource& mess
         if (const auto factory = MESSAGE_MANAGER_SINGLETON.Find(messageDescribe, fullVersion);
             factory != nullptr)
         {
-            // ´ÓÔ´»º³åÆ÷¼ÓÔØ¸Ã¶ÔÏó¡£
+            // ä»Žæºç¼“å†²å™¨åŠ è½½è¯¥å¯¹è±¡ã€‚
             const auto message = (*factory)(messageSource, messageHeadStrategy, 0);
 
             topLevel.Insert(message);
@@ -91,7 +91,7 @@ void Network::BufferReceiveStreamImpl::ReadMessageByDescribe(MessageSource& mess
     }
     catch (const CoreTools::Error& error)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, Network, error, SYSTEM_TEXT("£¨"), messageDescribe, SYSTEM_TEXT("£©"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Error, Network, error, SYSTEM_TEXT("ï¼ˆ"), messageDescribe, SYSTEM_TEXT("ï¼‰"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -114,7 +114,7 @@ void Network::BufferReceiveStreamImpl::ReadMessageById(MessageSource& messageSou
         if (const auto factory = MESSAGE_MANAGER_SINGLETON.Find(messageType, fullVersion);
             factory != nullptr)
         {
-            // ´ÓÔ´»º³åÆ÷¼ÓÔØ¸Ã¶ÔÏó¡£
+            // ä»Žæºç¼“å†²å™¨åŠ è½½è¯¥å¯¹è±¡ã€‚
             const auto message = (*factory)(messageSource, messageHeadStrategy, messageType);
 
             topLevel.Insert(message);
@@ -122,13 +122,13 @@ void Network::BufferReceiveStreamImpl::ReadMessageById(MessageSource& messageSou
     }
     catch (const CoreTools::Error& error)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, Network, error, SYSTEM_TEXT("£¨"), messageType, SYSTEM_TEXT("£©"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Error, Network, error, SYSTEM_TEXT("ï¼ˆ"), messageType, SYSTEM_TEXT("ï¼‰"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
 void Network::BufferReceiveStreamImpl::ReadMessage(MessageSource& messageSource, int fullVersion)
 {
-    // ¶ÁÈ¡ÀàÐÍ
+    // è¯»å–ç±»åž‹
     MessageHeadStrategy messageHeadStrategy{ 0 };
     messageSource.ReadEnum(messageHeadStrategy);
 
@@ -149,7 +149,7 @@ void Network::BufferReceiveStreamImpl::SpliceMessageSource(const MessageBufferSh
         if (const auto messageLength = lastMessageBuffer->GetMessageLength();
             messageLength < messageBuffer->GetCurrentWriteIndex() + lastMessageBuffer->GetCurrentWriteIndex())
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("ÏûÏ¢³¤¶È¶ÁÈ¡´íÎó£¡"s))
+            THROW_EXCEPTION(SYSTEM_TEXT("æ¶ˆæ¯é•¿åº¦è¯»å–é”™è¯¯ï¼"s))
         }
 
         lastMessageBuffer->PushBack(*messageBuffer);

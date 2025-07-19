@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 10:39)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 10:39)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX_DETAIL_H
 #define MATHEMATICS_ALGEBRA_MATRIX_DETAIL_H
@@ -53,7 +53,7 @@ typename Mathematics::Matrix<Real>::EntryType Mathematics::Matrix<Real>::Create(
 {
     if (entry.size() != entrySize)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Êı¾İ´óĞ¡´íÎó£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ•°æ®å¤§å°é”™è¯¯ï¼"s))
     }
 
 #include SYSTEM_WARNING_PUSH
@@ -192,7 +192,7 @@ void Mathematics::Matrix<Real>::Divide(Real value)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³ıÁã´íÎó£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("é™¤é›¶é”™è¯¯ï¼"s))
     }
 }
 
@@ -313,7 +313,7 @@ void Mathematics::Matrix<Real>::SetRow(int row, const HomogeneousPointType& poin
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òı´íÎó£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•é”™è¯¯ï¼"s))
     }
 }
 
@@ -331,7 +331,7 @@ typename Mathematics::Matrix<Real>::HomogeneousPointType Mathematics::Matrix<Rea
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òı´íÎó£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•é”™è¯¯ï¼"s))
     }
 }
 
@@ -352,7 +352,7 @@ void Mathematics::Matrix<Real>::SetColumn(int column, const HomogeneousPointType
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òı´íÎó£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•é”™è¯¯ï¼"s))
     }
 }
 
@@ -370,7 +370,7 @@ typename Mathematics::Matrix<Real>::HomogeneousPointType Mathematics::Matrix<Rea
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òı´íÎó£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•é”™è¯¯ï¼"s))
     }
 }
 
@@ -397,7 +397,7 @@ typename Mathematics::Matrix<Real>::ContainerType Mathematics::Matrix<Real>::Get
                                 GetValue<11>(),
                                 GetValue<15>() };
 
-    MATHEMATICS_ASSERTION_0(columnMatrix.size() == entrySize, "Êı¾İ´óĞ¡´íÎó£¡");
+    MATHEMATICS_ASSERTION_0(columnMatrix.size() == entrySize, "æ•°æ®å¤§å°é”™è¯¯ï¼");
 
     return columnMatrix;
 }
@@ -529,7 +529,7 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator/=(Real scalar)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³ıÁã´íÎó¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("é™¤é›¶é”™è¯¯ã€‚"s))
     }
 
     return *this;
@@ -712,7 +712,7 @@ Mathematics::Matrix<Real> Mathematics::Matrix<Real>::Inverse(const Real epsilon)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¸Ã¾ØÕó²»´æÔÚÄæ¾ØÕó£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¯¥çŸ©é˜µä¸å­˜åœ¨é€†çŸ©é˜µï¼"s))
     }
 }
 
@@ -759,7 +759,7 @@ Mathematics::Matrix<Real> Mathematics::Matrix<Real>::Invert3x3(const Real epsilo
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    // ¼ÆËãM (3x3)µÄ°éËæ¾ØÕó¡£
+    // è®¡ç®—M (3x3)çš„ä¼´éšçŸ©é˜µã€‚
     Matrix adjoint{ GetValue<1, 1>() * GetValue<2, 2>() - GetValue<1, 2>() * GetValue<2, 1>(),
                     GetValue<0, 2>() * GetValue<2, 1>() - GetValue<0, 1>() * GetValue<2, 2>(),
                     GetValue<0, 1>() * GetValue<1, 2>() - GetValue<0, 2>() * GetValue<1, 1>(),
@@ -777,7 +777,7 @@ Mathematics::Matrix<Real> Mathematics::Matrix<Real>::Invert3x3(const Real epsilo
                     GetValue<3, 2>(),
                     GetValue<3, 3>() };
 
-    // ¼ÆËãMµÄĞĞÁĞÊ½¡£
+    // è®¡ç®—Mçš„è¡Œåˆ—å¼ã€‚
     if (const auto det = GetValue<0, 0>() * adjoint.GetValue<0, 0>() + GetValue<0, 1>() * adjoint.GetValue<1, 0>() + GetValue<0, 2>() * adjoint.GetValue<2, 0>();
         epsilon < MathType::FAbs(det))
     {
@@ -798,7 +798,7 @@ Mathematics::Matrix<Real> Mathematics::Matrix<Real>::Invert3x3(const Real epsilo
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¸Ã¾ØÕó²»´æÔÚÄæ¾ØÕó£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¯¥çŸ©é˜µä¸å­˜åœ¨é€†çŸ©é˜µï¼"s))
     }
 }
 
@@ -897,22 +897,22 @@ void Mathematics::Matrix<Real>::Orthonormalize() noexcept(gAssert < 3 || gMathem
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    // Ëã·¨²ÉÓÃGram-SchmidtÕı½»¡£
-    // Èç¹û'this'¾ØÕóµÄ×óÉÏ3x3¿éM = [m0|m1|m2]£¬È»ºóÊä³öÕı½»¾ØÕóQ = [q0|q1|q2]
+    // ç®—æ³•é‡‡ç”¨Gram-Schmidtæ­£äº¤ã€‚
+    // å¦‚æœ'this'çŸ©é˜µçš„å·¦ä¸Š3x3å—M = [m0|m1|m2]ï¼Œç„¶åè¾“å‡ºæ­£äº¤çŸ©é˜µQ = [q0|q1|q2]
     //
     //   q0 = m0 / |m0|
     //   q1 = (m1 - (q0 * m1)q0) / |m1-(q0 * m1)q0|
     //   q2 = (m2 - (q0 * m2)q0 - (q1 * m2)q1) / |m2 - (q0 * m2)q0-(q1 * m2)q1|
-    // ÆäÖĞ|V|±íÊ¾ÏòÁ¿VµÄ³¤¶ÈºÍA * B±íÊ¾ÏòÁ¿AºÍBµÄµã»ı
+    // å…¶ä¸­|V|è¡¨ç¤ºå‘é‡Vçš„é•¿åº¦å’ŒA * Bè¡¨ç¤ºå‘é‡Aå’ŒBçš„ç‚¹ç§¯
 
-    // ¼ÆËã q0.
+    // è®¡ç®— q0.
     auto invLength = MathType::InvSqrt(GetValue<0>() * GetValue<0>() + GetValue<4>() * GetValue<4>() + GetValue<8>() * GetValue<8>());
 
     Multiply<0>(invLength);
     Multiply<4>(invLength);
     Multiply<8>(invLength);
 
-    // ¼ÆËã q1.
+    // è®¡ç®— q1.
     auto dot0 = GetValue<0>() * GetValue<1>() + GetValue<4>() * GetValue<5>() + GetValue<8>() * GetValue<9>();
 
     Minus<1>(dot0 * GetValue<0>());
@@ -925,7 +925,7 @@ void Mathematics::Matrix<Real>::Orthonormalize() noexcept(gAssert < 3 || gMathem
     Multiply<5>(invLength);
     Multiply<9>(invLength);
 
-    // ¼ÆËã q2.
+    // è®¡ç®— q2.
     auto dot1 = GetValue<1>() * GetValue<2>() + GetValue<5>() * GetValue<6>() + GetValue<9>() * GetValue<10>();
 
     dot0 = GetValue<0>() * GetValue<2>() + GetValue<4>() * GetValue<6>() + GetValue<8>() * GetValue<10>();
@@ -962,24 +962,24 @@ requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix<Real>::MakeObliqueProjection(const APointType& origin, const AVectorType& normal, const AVectorType& direction)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
-    MATHEMATICS_ASSERTION_1(normal.IsNormalize() && direction.IsNormalize(), "normalºÍdirection±ØĞëÊÇµ¥Î»ÏòÁ¿£¡");
+    MATHEMATICS_ASSERTION_1(normal.IsNormalize() && direction.IsNormalize(), "normalå’Œdirectionå¿…é¡»æ˜¯å•ä½å‘é‡ï¼");
 
-    // Í¶Ó°Æ½ÃæÊÇDot(N , X - P) = 0 £¬ÆäÖĞNÊÇÒ»¸ö3¡Á1¸öµ¥Î»³¤¶ÈµÄ·¨ÏßÏòÁ¿£¬PÊÇÒ»¸ö3¡Á1µãÔÚÆ½Ãæ¡£Í¶Ó°ÑØ3¡Á1ÏòÁ¿DµÄ·½ÏòÇãĞ±ÓÚÆ½Ãæ¡£
-    // ÎªÊ¹´ËÍ¶Ó°ÓĞÒâÒå£¬ Dot(N,D)Ò»¶¨²»ÊÇÁã¡£
-    // ¸ø¶¨Ò»¸ö3¡Á1µãU£¬¼ÆËãÏß U + t * DºÍÆ½ÃæµÄ½»²æµãt = -Dot(N,U - P)/Dot(N,D)¡£
-    // È»ºó£¬
+    // æŠ•å½±å¹³é¢æ˜¯Dot(N , X - P) = 0 ï¼Œå…¶ä¸­Næ˜¯ä¸€ä¸ª3Ã—1ä¸ªå•ä½é•¿åº¦çš„æ³•çº¿å‘é‡ï¼ŒPæ˜¯ä¸€ä¸ª3Ã—1ç‚¹åœ¨å¹³é¢ã€‚æŠ•å½±æ²¿3Ã—1å‘é‡Dçš„æ–¹å‘å€¾æ–œäºå¹³é¢ã€‚
+    // ä¸ºä½¿æ­¤æŠ•å½±æœ‰æ„ä¹‰ï¼Œ Dot(N,D)ä¸€å®šä¸æ˜¯é›¶ã€‚
+    // ç»™å®šä¸€ä¸ª3Ã—1ç‚¹Uï¼Œè®¡ç®—çº¿ U + t * Då’Œå¹³é¢çš„äº¤å‰ç‚¹t = -Dot(N,U - P)/Dot(N,D)ã€‚
+    // ç„¶åï¼Œ
     //
     //   projection(U) = P + [I - D * N^T / Dot(N,D)]*(U - P)
     //
-    // Ò»¸ö4¡Á4µÄÆë´Î±ä»»¾ØÕóÊÇ
+    // ä¸€ä¸ª4Ã—4çš„é½æ¬¡å˜æ¢çŸ©é˜µæ˜¯
     //
     //       +-                                   -+
     //   M = | D * N^T - Dot(N,D) * I   -Dot(N,P)D |
     //       |           0^T            -Dot(N,D)  |
     //       +-                                   -+
     //
-    // ÆäÖĞMÊÊÓÃÓÚ[U^T 1]^T Îª  M*[U^T 1]^T¡£
-    // Ñ¡Ôñ¾ØÕó£¬Ê¹µÃÃ¿µ±Dot(N,D) < 0Ê±M[3][3] > 0£¨Í¶Ó°µ½Æ½ÃæÉÏµÄ¡°Õı²à¡±£©¡£
+    // å…¶ä¸­Mé€‚ç”¨äº[U^T 1]^T ä¸º  M*[U^T 1]^Tã€‚
+    // é€‰æ‹©çŸ©é˜µï¼Œä½¿å¾—æ¯å½“Dot(N,D) < 0æ—¶M[3][3] > 0ï¼ˆæŠ•å½±åˆ°å¹³é¢ä¸Šçš„â€œæ­£ä¾§â€ï¼‰ã€‚
 
     const auto dotNormalDirection = Dot(normal, direction);
     const auto dotNormalOrigin = Dot(origin, normal);
@@ -1012,14 +1012,14 @@ requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix<Real>::MakePerspectiveProjection(const APointType& origin, const AVectorType& normal, const APointType& eye)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
-    MATHEMATICS_ASSERTION_1(normal.IsNormalize(), "normal±ØĞëÊÇµ¥Î»ÏòÁ¿£¡");
+    MATHEMATICS_ASSERTION_1(normal.IsNormalize(), "normalå¿…é¡»æ˜¯å•ä½å‘é‡ï¼");
 
     //     +-                                                               -+
     // M = | Dot(N,E - P) * I - E * N^T    -(Dot(N,E - P) * I - E * N^T) * E |
     //     |         -N^t                          Dot(N,E)                  |
     //     +-                                                               -+
     //
-    // ÆäÖĞEÎªÑÛµã£¬PÎªÆ½ÃæÉÏµÄÒ»¸öµã£¬¶øNÊÇµ¥Î»³¤¶ÈµÄÆ½Ãæ·¨Ïß¡£
+    // å…¶ä¸­Eä¸ºçœ¼ç‚¹ï¼ŒPä¸ºå¹³é¢ä¸Šçš„ä¸€ä¸ªç‚¹ï¼Œè€ŒNæ˜¯å•ä½é•¿åº¦çš„å¹³é¢æ³•çº¿ã€‚
 
     const auto dotNormalDirection = Dot(normal, eye - origin);
 
@@ -1051,14 +1051,14 @@ requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix<Real>::MakeReflection(const APointType& origin, const AVectorType& normal)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
-    MATHEMATICS_ASSERTION_1(normal.IsNormalize(), "normal±ØĞëÊÇµ¥Î»ÏòÁ¿£¡");
+    MATHEMATICS_ASSERTION_1(normal.IsNormalize(), "normalå¿…é¡»æ˜¯å•ä½å‘é‡ï¼");
 
     //     +-                                   -+
     // M = | I - 2 * N * N^T    2 * Dot(N,P) * N |
     //     |     0^T                      1      |
     //     +-                                   -+
     //
-    // ÆäÖĞPÊÇÆ½ÃæÉÏµÄµã£¬NÊÇÒ»¸öµ¥Î»³¤¶ÈµÄÆ½Ãæ·¨Ïß¡£
+    // å…¶ä¸­Pæ˜¯å¹³é¢ä¸Šçš„ç‚¹ï¼ŒNæ˜¯ä¸€ä¸ªå•ä½é•¿åº¦çš„å¹³é¢æ³•çº¿ã€‚
 
     const auto twoDotNormalOrigin = MathType::GetValue(2) * Dot(origin, normal);
 
@@ -1093,14 +1093,14 @@ Real Mathematics::Matrix<Real>::GetNorm() const
 
 #if defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
-    // Ê¹ÓÃ×î´óĞĞºÍ¾ØÕó·¶Êı¡£
+    // ä½¿ç”¨æœ€å¤§è¡Œå’ŒçŸ©é˜µèŒƒæ•°ã€‚
     const auto sum0 = MathType::FAbs(GetValue<0, 0>()) + MathType::FAbs(GetValue<0, 1>()) + MathType::FAbs(GetValue<0, 2>());
     const auto sum1 = MathType::FAbs(GetValue<1, 0>()) + MathType::FAbs(GetValue<1, 1>()) + MathType::FAbs(GetValue<1, 2>());
     const auto sum2 = MathType::FAbs(GetValue<2, 0>()) + MathType::FAbs(GetValue<2, 1>()) + MathType::FAbs(GetValue<2, 2>());
 
 #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
-    // Ê¹ÓÃ×î´óÁĞºÍ¾ØÕó·¶Êı¡£
+    // ä½¿ç”¨æœ€å¤§åˆ—å’ŒçŸ©é˜µèŒƒæ•°ã€‚
     const auto sum0 = MathType::FAbs(GetValue<0, 0>()) + MathType::FAbs(GetValue<1, 0>()) + MathType::FAbs(GetValue<2, 0>());
     const auto sum1 = MathType::FAbs(GetValue<0, 1>()) + MathType::FAbs(GetValue<1, 1>()) + MathType::FAbs(GetValue<2, 1>());
     const auto sum2 = MathType::FAbs(GetValue<0, 2>()) + MathType::FAbs(GetValue<1, 2>()) + MathType::FAbs(GetValue<2, 2>());
@@ -1117,7 +1117,7 @@ std::ostream& Mathematics::operator<<(std::ostream& out, const Matrix<Real>& mat
     {
         for (auto column = 0; column < Matrix<Real>::columnSize; ++column)
         {
-            out << "(" << row << "," << column << ")¡¡=¡¡" << matrix(row, column) << "¡¡";
+            out << "(" << row << "," << column << ")ã€€=ã€€" << matrix(row, column) << "ã€€";
         }
     }
 
@@ -1249,7 +1249,7 @@ typename Mathematics::HomogeneousPoint<Real>::ContainerType Mathematics::BatchMu
         outputPoints.emplace_back(matrix * point);
     }
 
-    MATHEMATICS_ASSERTION_2(outputPoints.size() == inputPoints.size(), "ÊäÈëºÍÊä³öÊı×é´óĞ¡²»ÏàµÈ£¡");
+    MATHEMATICS_ASSERTION_2(outputPoints.size() == inputPoints.size(), "è¾“å…¥å’Œè¾“å‡ºæ•°ç»„å¤§å°ä¸ç›¸ç­‰ï¼");
 
     return outputPoints;
 }
@@ -1272,7 +1272,7 @@ typename Mathematics::APoint<Real>::ContainerType Mathematics::BatchMultiply(con
         outputPoints.emplace_back(matrix * point);
     }
 
-    MATHEMATICS_ASSERTION_1(outputPoints.size() == inputPoints.size(), "ÊäÈëºÍÊä³öÊı×é´óĞ¡²»ÏàµÈ£¡");
+    MATHEMATICS_ASSERTION_1(outputPoints.size() == inputPoints.size(), "è¾“å…¥å’Œè¾“å‡ºæ•°ç»„å¤§å°ä¸ç›¸ç­‰ï¼");
 
     return outputPoints;
 }
@@ -1295,7 +1295,7 @@ typename Mathematics::AVector<Real>::ContainerType Mathematics::BatchMultiply(co
         outputPoints.emplace_back(matrix * point);
     }
 
-    MATHEMATICS_ASSERTION_1(outputPoints.size() == inputPoints.size(), "ÊäÈëºÍÊä³öÊı×é´óĞ¡²»ÏàµÈ£¡");
+    MATHEMATICS_ASSERTION_1(outputPoints.size() == inputPoints.size(), "è¾“å…¥å’Œè¾“å‡ºæ•°ç»„å¤§å°ä¸ç›¸ç­‰ï¼");
 
     return outputPoints;
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:20)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:20)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_POWERS_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_POWERS_DETAIL_H
@@ -44,13 +44,13 @@ void Mathematics::PolynomialFit4Powers<Real>::Init(const Samples& xSamples, cons
 
     if (isRepackage)
     {
-        // ÖØĞÂ´ò°üÊäÈëÑùÆ· (x[i],y[i],z[i],w[i])¡£
+        // é‡æ–°æ‰“åŒ…è¾“å…¥æ ·å“ (x[i],y[i],z[i],w[i])ã€‚
         Repackage(xSamples, ySamples, zSamples, xRepackage, yRepackage, zRepackage);
     }
     else
     {
-        MATHEMATICS_ASSERTION_2(xSamples.size() == ySamples.size(), "ÑùÆ·´óĞ¡²»ÏàµÈ\n");
-        MATHEMATICS_ASSERTION_2(xSamples.size() == zSamples.size(), "ÑùÆ·´óĞ¡²»ÏàµÈ\n");
+        MATHEMATICS_ASSERTION_2(xSamples.size() == ySamples.size(), "æ ·å“å¤§å°ä¸ç›¸ç­‰\n");
+        MATHEMATICS_ASSERTION_2(xSamples.size() == zSamples.size(), "æ ·å“å¤§å°ä¸ç›¸ç­‰\n");
 
         xRepackage = xSamples;
         yRepackage = ySamples;
@@ -69,8 +69,8 @@ void Mathematics::PolynomialFit4Powers<Real>::Init(const Samples& xSamples, cons
 template <typename Real>
 void Mathematics::PolynomialFit4Powers<Real>::InitializePowers()
 {
-    // È·¶¨×î´óµÄÃİ¹¦ÂÊ¡£x¡¢yºÍzµÄÃİ¹¹ÔìµÄ¶àÏîÊ½ÄâºÏ¼ÆËãÁ½±¶µÄÃİ¡£
-    // x¡¢yºÍzµÄÃİ¼ÆËã¿ÉÎªÄâºÏµÄ¶àÏîÊ½µÄÆÀ¶¨µÄÃİ¡£
+    // ç¡®å®šæœ€å¤§çš„å¹‚åŠŸç‡ã€‚xã€yå’Œzçš„å¹‚æ„é€ çš„å¤šé¡¹å¼æ‹Ÿåˆè®¡ç®—ä¸¤å€çš„å¹‚ã€‚
+    // xã€yå’Œzçš„å¹‚è®¡ç®—å¯ä¸ºæ‹Ÿåˆçš„å¤šé¡¹å¼çš„è¯„å®šçš„å¹‚ã€‚
     for (auto i = 0; i < 3; ++i)
     {
         auto maxPowerConstIter = std::max_element(powers.begin(), powers.end(), CoreTools::TupleLess<3, int>(i));
@@ -113,7 +113,7 @@ void Mathematics::PolynomialFit4Powers<Real>::TransformToUnit(const Samples& xSo
                                                               Samples& zTargetSamples,
                                                               Samples& wTargetSamples)
 {
-    // ÎªÊıÖµÂ³°ôĞÔ×ª»»Êı¾İÎª [-1,1]^4¡£
+    // ä¸ºæ•°å€¼é²æ£’æ€§è½¬æ¢æ•°æ®ä¸º [-1,1]^4ã€‚
     TransformToUnit(xSourceSamples, xTargetSamples, 0);
     TransformToUnit(ySourceSamples, yTargetSamples, 1);
     TransformToUnit(zSourceSamples, zTargetSamples, 2);
@@ -141,9 +141,9 @@ void Mathematics::PolynomialFit4Powers<Real>::DoLeastSquaresFit(const Samples& x
                                                                 const Samples& zTargetSamples,
                                                                 const Samples& wTargetSamples)
 {
-    MATHEMATICS_ASSERTION_2(xTargetSamples.size() == wTargetSamples.size(), "ÑùÆ·µãÊı×é´óĞ¡²»Í¬\n");
-    MATHEMATICS_ASSERTION_2(yTargetSamples.size() == wTargetSamples.size(), "ÑùÆ·µãÊı×é´óĞ¡²»Í¬\n");
-    MATHEMATICS_ASSERTION_2(zTargetSamples.size() == wTargetSamples.size(), "ÑùÆ·µãÊı×é´óĞ¡²»Í¬\n");
+    MATHEMATICS_ASSERTION_2(xTargetSamples.size() == wTargetSamples.size(), "æ ·å“ç‚¹æ•°ç»„å¤§å°ä¸åŒ\n");
+    MATHEMATICS_ASSERTION_2(yTargetSamples.size() == wTargetSamples.size(), "æ ·å“ç‚¹æ•°ç»„å¤§å°ä¸åŒ\n");
+    MATHEMATICS_ASSERTION_2(zTargetSamples.size() == wTargetSamples.size(), "æ ·å“ç‚¹æ•°ç»„å¤§å°ä¸åŒ\n");
 
     const auto maxXPower = powersData.GetMaxPower(0);
     const auto xPowersSize = 2 * maxXPower + 1;
@@ -162,7 +162,7 @@ void Mathematics::PolynomialFit4Powers<Real>::DoLeastSquaresFit(const Samples& x
 
     auto numPowers = boost::numeric_cast<int>(powers.size());
 
-    // ¶ÔÓÚÈ·¶¨µÄÄâºÏ¶àÏîÊ½µÄÏµÊıµÄÏßĞÔÏµÍ³µÄ¾ØÕóºÍÊ¸Á¿
+    // å¯¹äºç¡®å®šçš„æ‹Ÿåˆå¤šé¡¹å¼çš„ç³»æ•°çš„çº¿æ€§ç³»ç»Ÿçš„çŸ©é˜µå’ŒçŸ¢é‡
     VariableMatrix<Real> matrix{ numPowers, numPowers };
     VariableLengthVector<Real> vector{ numPowers };
 
@@ -195,7 +195,7 @@ void Mathematics::PolynomialFit4Powers<Real>::DoLeastSquaresFit(const Samples& x
 
         for (auto row = 0; row < numPowers; ++row)
         {
-            // ¸üĞÂ¶Ô³Æ¾ØÕóµÄÉÏÈı½Ç²¿·Ö¡£
+            // æ›´æ–°å¯¹ç§°çŸ©é˜µçš„ä¸Šä¸‰è§’éƒ¨åˆ†ã€‚
             for (auto column = row; column < numPowers; ++column)
             {
                 auto xPowersIndex = powers.at(row)[0] + powers.at(column)[0];
@@ -207,7 +207,7 @@ void Mathematics::PolynomialFit4Powers<Real>::DoLeastSquaresFit(const Samples& x
                 matrix(row, column) += xp * yp * zp;
             }
 
-            // ¸üĞÂÏµÍ³ÔÚÓÒÊÖ×ø±êÏµ¡£
+            // æ›´æ–°ç³»ç»Ÿåœ¨å³æ‰‹åæ ‡ç³»ã€‚
             auto xp = xPowers.at(powers.at(row)[0]);
             auto yp = yPowers.at(powers.at(row)[1]);
             auto zp = zPowers.at(powers.at(row)[2]);
@@ -215,7 +215,7 @@ void Mathematics::PolynomialFit4Powers<Real>::DoLeastSquaresFit(const Samples& x
         }
     }
 
-    // ¶ÔºÍ½øĞĞÕıÔò»¯
+    // å¯¹å’Œè¿›è¡Œæ­£åˆ™åŒ–
     matrix /= boost::numeric_cast<Real>(numSamples);
     vector /= boost::numeric_cast<Real>(numSamples);
 
@@ -316,12 +316,12 @@ Real Mathematics::PolynomialFit4Powers<Real>::operator()(Real x, Real y, Real z)
     Samples zPowers(zPowersSize);
     zPowers.at(0) = MathType::GetValue(1);
 
-    // ±ä»»(x,y,z) ´ÓÔ­À´µÄ¿Õ¼äµ½[-1,1]^3¡£
+    // å˜æ¢(x,y,z) ä»åŸæ¥çš„ç©ºé—´åˆ°[-1,1]^3ã€‚
     x = MathType::GetValue(-1) + (MathType::GetValue(2) * (x - powersData.GetMin(0)) * powersData.GetScale(0));
     y = MathType::GetValue(-1) + (MathType::GetValue(2) * (y - powersData.GetMin(1)) * powersData.GetScale(1));
     z = MathType::GetValue(-1) + (MathType::GetValue(2) * (z - powersData.GetMin(2)) * powersData.GetScale(2));
 
-    // ¼ÆËãx¡¢yºÍzµÄÓĞ¹ØÃİ
+    // è®¡ç®—xã€yå’Œzçš„æœ‰å…³å¹‚
     for (auto power = 1; power <= maxXPower; ++power)
     {
         const auto beforeIndex = power - 1;
@@ -347,7 +347,7 @@ Real Mathematics::PolynomialFit4Powers<Real>::operator()(Real x, Real y, Real z)
         w += powersData.GetCoefficients(i) * xp * yp * zp;
     }
 
-    // ±ä»»w´Ó[-1,1]»Øµ½Ô­À´µÄ¿Õ¼ä¡£
+    // å˜æ¢wä»[-1,1]å›åˆ°åŸæ¥çš„ç©ºé—´ã€‚
     w = (w + MathType::GetValue(1)) * powersData.GetInvTwoWScale() + powersData.GetMin(3);
 
     return w;

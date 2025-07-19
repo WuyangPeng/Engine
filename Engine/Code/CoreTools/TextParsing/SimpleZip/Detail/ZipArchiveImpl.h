@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/08 11:44)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/08 11:44)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_ZIP_ARCHIVE_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_ZIP_ARCHIVE_IMPL_H
@@ -20,11 +20,11 @@
 
 namespace CoreTools::SimpleZip
 {
-    /// ZipArchiveImplÀà´ú±íÕû¸özip´æµµÎÄ¼ş¡£
-    /// ËüÓÉµ¥¶ÀµÄzipÌõÄ¿×é³É£¬¿ÉÒÔÊÇÎÄ¼şºÍÎÄ¼ş¼Ğ¡£
-    /// ËüÊÇ´ÅÅÌÉÏ.zip ´æµµµÄÖ÷Òª·ÃÎÊµã£¬¿ÉÓÃÓÚ´´½¨ĞÂ´æµµÒÔ¼°´ò¿ªºÍĞŞ¸ÄÏÖÓĞ´æµµ¡£
-    /// Ê¹ÓÃZipArchiveImpl Àà£¬¿ÉÒÔ´´½¨ĞÂµÄ.zip ´æµµÎÄ¼ş£¬ÒÔ¼°´ò¿ªºÍĞŞ¸ÄÏÖÓĞÎÄ¼ş¡£
-    /// Çë×¢Òâ£¬.zip ´æµµÖĞµÄÊµ¼ÊÎÄ¼ş¿ÉÒÔÍ¨¹ıZipEntry½Ó¿Ú¶ø²»ÊÇZipArchiveImpl½Ó¿Ú¼ìË÷¡£
+    /// ZipArchiveImplç±»ä»£è¡¨æ•´ä¸ªzipå­˜æ¡£æ–‡ä»¶ã€‚
+    /// å®ƒç”±å•ç‹¬çš„zipæ¡ç›®ç»„æˆï¼Œå¯ä»¥æ˜¯æ–‡ä»¶å’Œæ–‡ä»¶å¤¹ã€‚
+    /// å®ƒæ˜¯ç£ç›˜ä¸Š.zip å­˜æ¡£çš„ä¸»è¦è®¿é—®ç‚¹ï¼Œå¯ç”¨äºåˆ›å»ºæ–°å­˜æ¡£ä»¥åŠæ‰“å¼€å’Œä¿®æ”¹ç°æœ‰å­˜æ¡£ã€‚
+    /// ä½¿ç”¨ZipArchiveImpl ç±»ï¼Œå¯ä»¥åˆ›å»ºæ–°çš„.zip å­˜æ¡£æ–‡ä»¶ï¼Œä»¥åŠæ‰“å¼€å’Œä¿®æ”¹ç°æœ‰æ–‡ä»¶ã€‚
+    /// è¯·æ³¨æ„ï¼Œ.zip å­˜æ¡£ä¸­çš„å®é™…æ–‡ä»¶å¯ä»¥é€šè¿‡ZipEntryæ¥å£è€Œä¸æ˜¯ZipArchiveImplæ¥å£æ£€ç´¢ã€‚
     class CORE_TOOLS_HIDDEN_DECLARE ZipArchiveImpl final
     {
     public:
@@ -34,7 +34,7 @@ namespace CoreTools::SimpleZip
         using ZipEntryMetaDataType = std::vector<ZipEntryMetaData>;
 
     public:
-        /// Ê¹ÓÃfileNameÊäÈë²ÎÊı¹¹Ôì¹éµµ¶ÔÏó¡£ Èç¹ûÎÄ¼şÒÑ¾­´æÔÚ£¬Ëü½«±»´ò¿ª¡£ ·ñÔò£¬½«´´½¨Ò»¸öĞÂ¶ÔÏó¡£
+        /// ä½¿ç”¨fileNameè¾“å…¥å‚æ•°æ„é€ å½’æ¡£å¯¹è±¡ã€‚ å¦‚æœæ–‡ä»¶å·²ç»å­˜åœ¨ï¼Œå®ƒå°†è¢«æ‰“å¼€ã€‚ å¦åˆ™ï¼Œå°†åˆ›å»ºä¸€ä¸ªæ–°å¯¹è±¡ã€‚
         ZipArchiveImpl() noexcept;
         explicit ZipArchiveImpl(std::string fileName);
         ZipArchiveImpl(std::string fileName, bool isCreate);
@@ -47,35 +47,35 @@ namespace CoreTools::SimpleZip
 
         CLASS_INVARIANT_DECLARE;
 
-        /// »ñÈ¡µµ°¸ÖĞÌõÄ¿µÄÁĞ±í¡£ ¸ù¾İÊäÈë²ÎÊı£¬ÁĞ±í½«°üÀ¨Ä¿Â¼¡¢ÎÄ¼ş»òÁ½Õß¡£
+        /// è·å–æ¡£æ¡ˆä¸­æ¡ç›®çš„åˆ—è¡¨ã€‚ æ ¹æ®è¾“å…¥å‚æ•°ï¼Œåˆ—è¡¨å°†åŒ…æ‹¬ç›®å½•ã€æ–‡ä»¶æˆ–ä¸¤è€…ã€‚
         NODISCARD EntryNamesType GetEntryNames(bool includeDirs = true, bool includeFiles = true) const;
 
-        /// »ñÈ¡µµ°¸ÌØ¶¨Ä¿Â¼ÖĞµÄÌõÄ¿ÁĞ±í¡£ ¸ù¾İÊäÈë²ÎÊı£¬ÁĞ±í½«°üÀ¨Ä¿Â¼¡¢ÎÄ¼ş»òÁ½Õß¡£
-        /// ´Ëº¯ÊıµÄĞĞÎªÓëGetEntryNames()º¯ÊıÂÔÓĞ²»Í¬¡£ÇëÇóÎÄ¼ş¼ĞÖĞµÄËùÓĞÌõÄ¿½«×÷Îª¾ø¶ÔÂ·¾¶·µ»Ø£¬µ«ÊÇ£¬Ö»»á·µ»ØÒ»¼¶×ÓÎÄ¼ş¼Ğ¡£
+        /// è·å–æ¡£æ¡ˆç‰¹å®šç›®å½•ä¸­çš„æ¡ç›®åˆ—è¡¨ã€‚ æ ¹æ®è¾“å…¥å‚æ•°ï¼Œåˆ—è¡¨å°†åŒ…æ‹¬ç›®å½•ã€æ–‡ä»¶æˆ–ä¸¤è€…ã€‚
+        /// æ­¤å‡½æ•°çš„è¡Œä¸ºä¸GetEntryNames()å‡½æ•°ç•¥æœ‰ä¸åŒã€‚è¯·æ±‚æ–‡ä»¶å¤¹ä¸­çš„æ‰€æœ‰æ¡ç›®å°†ä½œä¸ºç»å¯¹è·¯å¾„è¿”å›ï¼Œä½†æ˜¯ï¼Œåªä¼šè¿”å›ä¸€çº§å­æ–‡ä»¶å¤¹ã€‚
         NODISCARD EntryNamesType GetEntryNamesInDir(const std::string& dir, bool includeDirs = true, bool includeFiles = true) const;
 
-        /// »ñÈ¡µµ°¸ÖĞÌõÄ¿µÄÔªÊı¾İÁĞ±í¡£ ¸ù¾İÊäÈë²ÎÊı£¬ÁĞ±í½«°üÀ¨Ä¿Â¼¡¢ÎÄ¼ş»òÁ½Õß¡£
+        /// è·å–æ¡£æ¡ˆä¸­æ¡ç›®çš„å…ƒæ•°æ®åˆ—è¡¨ã€‚ æ ¹æ®è¾“å…¥å‚æ•°ï¼Œåˆ—è¡¨å°†åŒ…æ‹¬ç›®å½•ã€æ–‡ä»¶æˆ–ä¸¤è€…ã€‚
         NODISCARD ZipEntryMetaDataType GetMetaData(bool includeDirs = true, bool includeFiles = true) const;
 
-        /// »ñÈ¡µµ°¸ÌØ¶¨Ä¿Â¼ÖĞÌõÄ¿µÄÔªÊı¾İÁĞ±í¡£ ¸ù¾İÊäÈë²ÎÊı£¬ÁĞ±í½«°üÀ¨Ä¿Â¼¡¢ÎÄ¼ş»òÁ½Õß¡£
-        /// Ä¿Â¼±¾Éí²»°üÀ¨ÔÚÄÚ¡£
+        /// è·å–æ¡£æ¡ˆç‰¹å®šç›®å½•ä¸­æ¡ç›®çš„å…ƒæ•°æ®åˆ—è¡¨ã€‚ æ ¹æ®è¾“å…¥å‚æ•°ï¼Œåˆ—è¡¨å°†åŒ…æ‹¬ç›®å½•ã€æ–‡ä»¶æˆ–ä¸¤è€…ã€‚
+        /// ç›®å½•æœ¬èº«ä¸åŒ…æ‹¬åœ¨å†…ã€‚
         NODISCARD ZipEntryMetaDataType GetMetaDataInDir(const std::string& dir, bool includeDirs = true, bool includeFiles = true) const;
 
         NODISCARD int GetNumEntries(bool includeDirs = true, bool includeFiles = true) const;
         NODISCARD int GetNumEntriesInDir(const std::string& dir, bool includeDirs = true, bool includeFiles = true) const;
         NODISCARD bool HasEntry(const std::string& entryName) const;
 
-        /// Ê¹ÓÃĞÂÃû³Æ±£´æ´æµµ¡£ Ô­Ê¼´æµµ½«±£³Ö²»±ä¡£
-        /// Èç¹ûÃ»ÓĞÌá¹©ÎÄ¼şÃû£¬ÎÄ¼ş½«ÒÔÏÖÓĞÃû³Æ±£´æ£¬¸²¸ÇÈÎºÎÏÖÓĞÊı¾İ¡£
+        /// ä½¿ç”¨æ–°åç§°ä¿å­˜å­˜æ¡£ã€‚ åŸå§‹å­˜æ¡£å°†ä¿æŒä¸å˜ã€‚
+        /// å¦‚æœæ²¡æœ‰æä¾›æ–‡ä»¶åï¼Œæ–‡ä»¶å°†ä»¥ç°æœ‰åç§°ä¿å­˜ï¼Œè¦†ç›–ä»»ä½•ç°æœ‰æ•°æ®ã€‚
         void Save(const std::string& fileName = std::string{});
 
-        /// ´Óµµ°¸ÖĞÉ¾³ıÒ»¸öÌõÄ¿¡£
+        /// ä»æ¡£æ¡ˆä¸­åˆ é™¤ä¸€ä¸ªæ¡ç›®ã€‚
         void DeleteEntry(const std::string& name);
 
-        /// »ñÈ¡¾ßÓĞÖ¸¶¨Ãû³ÆµÄÌõÄ¿¡£
+        /// è·å–å…·æœ‰æŒ‡å®šåç§°çš„æ¡ç›®ã€‚
         NODISCARD ZipEntry GetEntry(const std::string& name);
 
-        /// ½«¾ßÓĞÌá¹©Ãû³ÆµÄÌõÄ¿ÌáÈ¡µ½Ä¿±êÂ·¾¶¡£
+        /// å°†å…·æœ‰æä¾›åç§°çš„æ¡ç›®æå–åˆ°ç›®æ ‡è·¯å¾„ã€‚
         void ExtractEntry(const std::string& name, const std::string& dest);
 
         ZipEntry AddEntry(const std::string& name, const ZipEntryData& data);

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/09 09:35)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 09:35)
 
 #ifndef MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL_DETAIL_H
 #define MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL_DETAIL_H
@@ -19,7 +19,7 @@ template <typename Real>
 Mathematics::ConvexHull<Real>::ConvexHull(int numVertices, Real epsilon, QueryType queryType)
     : queryType{ queryType }, numVertices{ numVertices }, dimension{ 0 }, numSimplices{ 0 }, indices{}, epsilon{ epsilon }
 {
-    MATHEMATICS_ASSERTION_0(0 < numVertices && Math<Real>::GetValue(0) <= epsilon, "ÎŞĞ§ÊäÈë\n");
+    MATHEMATICS_ASSERTION_0(0 < numVertices && Math<Real>::GetValue(0) <= epsilon, "æ— æ•ˆè¾“å…¥\n");
 
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -100,7 +100,7 @@ bool Mathematics::ConvexHull<Real>::Load(CoreTools::ReadFileManager& inFile)
     inFile.Read(sizeof(int32_t), &numIndices);
     if (1 <= dimension && dimension <= 3)
     {
-        MATHEMATICS_ASSERTION_0(numIndices == (dimension + 1) * numSimplices, "²»Ò»ÖÂµÄË÷Òı¼ÆÊı¡£\n");
+        MATHEMATICS_ASSERTION_0(numIndices == (dimension + 1) * numSimplices, "ä¸ä¸€è‡´çš„ç´¢å¼•è®¡æ•°ã€‚\n");
         indices.resize(numIndices);
         inFile.Read(sizeof(int32_t), numIndices, indices.data());
 

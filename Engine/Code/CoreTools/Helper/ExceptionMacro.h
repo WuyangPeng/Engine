@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/28 11:04)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/28 11:04)
 
 #ifndef CORE_TOOLS_HELPER_EXCEPTION_MACRO_H
 #define CORE_TOOLS_HELPER_EXCEPTION_MACRO_H
@@ -52,7 +52,7 @@
 #define EXCEPTION_UNKNOWN_CATCH(filterType)                                                                                             \
     catch (...)                                                                                                                         \
     {                                                                                                                                   \
-        LOG_SINGLETON_ENGINE_APPENDER(Fatal, filterType, SYSTEM_TEXT("Î´Öª´íÎó¡£"), CoreTools::LogAppenderIOManageSign::TriggerAssert); \
+        LOG_SINGLETON_ENGINE_APPENDER(Fatal, filterType, SYSTEM_TEXT("æœªçŸ¥é”™è¯¯ã€‚"), CoreTools::LogAppenderIOManageSign::TriggerAssert); \
     }
 
 #define EXCEPTION_ALL_CATCH(filterType)          \
@@ -71,21 +71,21 @@
     }                                                  \
     catch (...)                                        \
     {                                                  \
-        CERR << SYSTEM_TEXT("Î´Öª´íÎó\n");             \
+        CERR << SYSTEM_TEXT("æœªçŸ¥é”™è¯¯\n");             \
     }
 
 #define EXCEPTION_WINDOWS_ENTRY_POINT_CATCH                                                                                              \
     catch (const CoreTools::Error& error)                                                                                                \
     {                                                                                                                                    \
-        MAYBE_UNUSED const auto dialogBoxCommand = System::MessageBoxSelectionWithTChar(error.GetError().c_str(), SYSTEM_TEXT("´íÎó"));  \
+        MAYBE_UNUSED const auto dialogBoxCommand = System::MessageBoxSelectionWithTChar(error.GetError().c_str(), SYSTEM_TEXT("é”™è¯¯"));  \
     }                                                                                                                                    \
     catch (const std::runtime_error& error)                                                                                              \
     {                                                                                                                                    \
-        MAYBE_UNUSED const auto dialogBoxCommand = System::MessageBoxSelectionWithChar(error.what(), "´íÎó");                            \
+        MAYBE_UNUSED const auto dialogBoxCommand = System::MessageBoxSelectionWithChar(error.what(), "é”™è¯¯");                            \
     }                                                                                                                                    \
     catch (...)                                                                                                                          \
     {                                                                                                                                    \
-        MAYBE_UNUSED const auto dialogBoxCommand = System::MessageBoxSelectionWithTChar(SYSTEM_TEXT("Î´Öª´íÎó£¡"), SYSTEM_TEXT("´íÎó")); \
+        MAYBE_UNUSED const auto dialogBoxCommand = System::MessageBoxSelectionWithTChar(SYSTEM_TEXT("æœªçŸ¥é”™è¯¯ï¼"), SYSTEM_TEXT("é”™è¯¯")); \
     }
 
 #define ASSERT_FAIL_THROW_EXCEPTION(condition, error) \

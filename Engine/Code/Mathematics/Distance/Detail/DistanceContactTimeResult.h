@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 16:41)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 16:41)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_CONTACT_TIME_RESULT_H
 #define MATHEMATICS_DISTANCE_DISTANCE_CONTACT_TIME_RESULT_H
@@ -30,7 +30,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        // ·¢ÉúÔÚ¶¯Ì¬²éÑ¯Æä×îÐ¡¾àÀëµÄÊ±¼ä¡£
+        // å‘ç”Ÿåœ¨åŠ¨æ€æŸ¥è¯¢å…¶æœ€å°è·ç¦»çš„æ—¶é—´ã€‚
         NODISCARD Real GetContactTime() const noexcept override;
         void SetContactTime(Real newContactTime) noexcept override;
 

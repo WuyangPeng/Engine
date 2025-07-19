@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/11 14:16)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/11 14:16)
 
 #include "FormatStringMessageUseArgumentArrayAndLocalAllocTesting.h"
 #include "System/CharacterString/FormatErrorMessage.h"
@@ -41,7 +41,7 @@ void System::FormatStringMessageUseArgumentArrayAndLocalAllocTesting::FormatStri
 
     const auto size = FormatStringMessage(message.c_str(), resultMessage, GetArgumentsData());
     ASSERT_LESS(0u, size);
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(resultMessage, "¸ñÊ½»¯´íÎóÂëÊ§°Ü¡£");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(resultMessage, "æ ¼å¼åŒ–é”™è¯¯ç å¤±è´¥ã€‚");
 
     const String testMessage{ static_cast<TChar*>(resultMessage) };
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	�汾��0.9.1.2 (2023/07/24 14:57)
+///	标准：std:c++20
+///	版本：0.9.1.2 (2023/07/24 14:57)
 
 #ifndef RENDERING_CONTROLLERS_POINT_CONTROLLER_IMPL_H
 #define RENDERING_CONTROLLERS_POINT_CONTROLLER_IMPL_H
@@ -37,10 +37,10 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        // ���˶����ڸ�ϵͳ��ģ�Ϳռ䡣�ٶ�ʸ��ӦΪ��λ�ĳ��ȡ�
-        // ���е����һ��������Ӧ�ó���
-        // �����ѡ���ϵͳ��ԭ��Ϊ����������ĺ�
-        // �������Ӧ�ڹ���������������
+        // 点运动，在该系统的模型空间。速度矢量应为单位的长度。
+        // 其中点代表一个刚体在应用程序，
+        // 你可以选择该系统的原点为点的质量中心和
+        // 坐标轴对应于惯性张量的主方向。
         NODISCARD int GetNumPoints() const noexcept;
         NODISCARD float GetPointLinearSpeed(int index) const;
         NODISCARD float GetPointAngularSpeed(int index) const;
@@ -71,7 +71,7 @@ namespace Rendering
         void UpdatePointMotion(Visual& visual, float ctrlTime);
 
     private:
-        // ϵͳ���˶����ھֲ����ꡣ�ٶ�ʸ��ӦΪ��λ�ĳ��ȡ�
+        // 系统的运动，在局部坐标。速度矢量应为单位的长度。
         float systemLinearSpeed;
         float systemAngularSpeed;
         AVector systemLinearAxis;

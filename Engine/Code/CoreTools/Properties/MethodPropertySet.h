@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 15:04)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 15:04)
 
 #ifndef CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_SET_H
 #define CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_SET_H
@@ -14,19 +14,19 @@
 
 #include "CoreTools/Helper/PropertiesMacro.h"
 
-/// Ê¹ÓÃºêTCRE_METHOD_PROPERTY_SET¶¨ÒåÊôÐÔ
+/// ä½¿ç”¨å®TCRE_METHOD_PROPERTY_SETå®šä¹‰å±žæ€§
 namespace CoreTools
 {
-    /// ´ËÀàÌá¹©»ùÓÚ·½·¨µÄÖ»Ð´ÊôÐÔ·ÃÎÊ
+    /// æ­¤ç±»æä¾›åŸºäºŽæ–¹æ³•çš„åªå†™å±žæ€§è®¿é—®
 
-    /// containsÀà¶¨ÒåÁËÒ»¸öset·½·¨¡£
-    /// Ëü»¹¶¨ÒåÁËÒ»¸ö¾²Ì¬·½·¨£¬Ëü°üº¬¸ø¶¨ÊôÐÔÔÚÈÝÆ÷ÄÚµÄÆ«ÒÆÁ¿¡£
-    /// È»ºó£¬Ê¹ÓÃÖµÀàÐÍ£¬ÒýÓÃÀàÐÍ£¬ÈÝÆ÷ÀàÐÍ£¬³ÉÔ±º¯ÊýºÍÆ«ÒÆº¯Êý¶ÔÄ£°å½øÐÐ²ÎÊý»¯¡£
-    template <typename Value,  /// Êµ¼ÊÊôÐÔÖµÀàÐÍ
-              typename Reference,  /// ÒýÓÃÀàÐÍ
-              typename Container,  /// ·â±ÕÀà
-              ptrdiff_t (*FunctionOffset)(),  /// Ö¸Õëº¯ÊýÌá¹©ÈÝÆ÷ÄÚÆ«ÒÆÊôÐÔ
-              void (Container::*FunctionSet)(Reference)>  /// Ö¸Ïò·µ»ØRµÄ³ÉÔ±º¯ÊýµÄÖ¸Õë
+    /// containsç±»å®šä¹‰äº†ä¸€ä¸ªsetæ–¹æ³•ã€‚
+    /// å®ƒè¿˜å®šä¹‰äº†ä¸€ä¸ªé™æ€æ–¹æ³•ï¼Œå®ƒåŒ…å«ç»™å®šå±žæ€§åœ¨å®¹å™¨å†…çš„åç§»é‡ã€‚
+    /// ç„¶åŽï¼Œä½¿ç”¨å€¼ç±»åž‹ï¼Œå¼•ç”¨ç±»åž‹ï¼Œå®¹å™¨ç±»åž‹ï¼Œæˆå‘˜å‡½æ•°å’Œåç§»å‡½æ•°å¯¹æ¨¡æ¿è¿›è¡Œå‚æ•°åŒ–ã€‚
+    template <typename Value,  /// å®žé™…å±žæ€§å€¼ç±»åž‹
+              typename Reference,  /// å¼•ç”¨ç±»åž‹
+              typename Container,  /// å°é—­ç±»
+              ptrdiff_t (*FunctionOffset)(),  /// æŒ‡é’ˆå‡½æ•°æä¾›å®¹å™¨å†…åç§»å±žæ€§
+              void (Container::*FunctionSet)(Reference)>  /// æŒ‡å‘è¿”å›žRçš„æˆå‘˜å‡½æ•°çš„æŒ‡é’ˆ
     class MethodPropertySet final
     {
     public:

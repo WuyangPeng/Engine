@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/09 09:49)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 09:49)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_CURVE_FIT_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_CURVE_FIT_DETAIL_H
@@ -25,9 +25,9 @@ Mathematics::BSplineCurveFit<Real>::BSplineCurveFit(int dimension, int numSample
       controlData(gsl::narrow_cast<size_t>(dimension) * gsl::narrow_cast<size_t>(numControls)),
       basis{ numControls, degree }
 {
-    MATHEMATICS_ASSERTION_0(dimension >= 1, "ÎŞĞ§ÊäÈë¡£\n");
-    MATHEMATICS_ASSERTION_0(1 <= degree && degree < numControls, "ÎŞĞ§ÊäÈë¡£\n");
-    MATHEMATICS_ASSERTION_0(numControls <= numSamples, "ÎŞĞ§ÊäÈë¡£\n");
+    MATHEMATICS_ASSERTION_0(dimension >= 1, "æ— æ•ˆè¾“å…¥ã€‚\n");
+    MATHEMATICS_ASSERTION_0(1 <= degree && degree < numControls, "æ— æ•ˆè¾“å…¥ã€‚\n");
+    MATHEMATICS_ASSERTION_0(numControls <= numSamples, "æ— æ•ˆè¾“å…¥ã€‚\n");
 
     BSplineFitBasis<Real> dBasis{ numControls, degree };
     auto tMultiplier = MathType::GetValue(1) / static_cast<Real>(gsl::narrow_cast<size_t>(numSamples) - 1);

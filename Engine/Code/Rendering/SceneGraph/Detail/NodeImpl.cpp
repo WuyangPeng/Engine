@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.3 (2023/12/28 17:42)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/28 17:42)
 
 #include "Rendering/RenderingExport.h"
 
@@ -54,17 +54,17 @@ int Rendering::NodeImpl::AttachChild(const SpatialSharedPtr& child, const Spatia
 
     if (!child)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("�㲻�ܸ���һ���սڵ㵽Node��\n"))
+        THROW_EXCEPTION(SYSTEM_TEXT("你不能附加一个空节点到Node。\n"))
     }
 
     if (!child->GetParent()->IsNullObject())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("�ӽڵ��ѱ����ӵ���һNode��\n"))
+        THROW_EXCEPTION(SYSTEM_TEXT("子节点已被附加到另一Node。\n"))
     }
 
     child->SetParent(self);
 
-    // �����ӽڵ㵽��һ�����ò��(����еĻ�)��
+    // 插入子节点到第一个可用插槽(如果有的话)。
     const auto numChildren = GetNumChildren();
 
     if (const auto index = GetFirstNullIndex();
@@ -75,7 +75,7 @@ int Rendering::NodeImpl::AttachChild(const SpatialSharedPtr& child, const Spatia
     }
     else
     {
-        // ���в�۶���ʹ�ã������ӽڵ㵽������档
+        // 所有插槽都被使用，附加子节点到数组后面。
         spatialChild.emplace_back(child);
         return numChildren;
     }
@@ -158,19 +158,19 @@ Rendering::SpatialSharedPtr Rendering::NodeImpl::SetChild(int index, const Spati
 
     if (child != nullptr && !child->GetParent()->IsNullObject())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("�ӽڵ��ѱ����ӵ���һNode��\n"))
+        THROW_EXCEPTION(SYSTEM_TEXT("子节点已被附加到另一Node。\n"))
     }
 
     if (0 <= index && index < GetNumChildren())
     {
-        // �Ӳ�����Ƴ���ǰ���ӽڵ㡣
+        // 从插槽中移除当前的子节点。
         auto previousChild = spatialChild.at(index).object;
         if (previousChild != nullptr && !previousChild->IsNullObject())
         {
             previousChild->SetParent(nullptr);
         }
 
-        // ����һ���µ��ӽڵ㵽��ۡ�
+        // 插入一个新的子节点到插槽。
         if (child != nullptr)
         {
             child->SetParent(self);
@@ -181,7 +181,7 @@ Rendering::SpatialSharedPtr Rendering::NodeImpl::SetChild(int index, const Spati
         return previousChild == nullptr ? Spatial::GetNullObject() : previousChild;
     }
 
-    // ���������˷�Χ�������ӽڵ㵽���顣
+    // 索引超出了范围，附加子节点到数组。
     if (child)
     {
         child->SetParent(self);
@@ -240,7 +240,7 @@ Mathematics::BoundingSphereF Rendering::NodeImpl::GetWorldBound() const
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    // ��һ����Ч�ı߽翪ʼ��
+    // 从一个无效的边界开始。
     BoundingSphere bound{ Mathematics::APointF::GetOrigin(), 0.0f };
 
     for (const auto& element : spatialChild)
@@ -248,9 +248,9 @@ Mathematics::BoundingSphereF Rendering::NodeImpl::GetWorldBound() const
         if (auto child = element.object;
             child != nullptr)
         {
-            // GrowToContain������Ч���ӱ߽硣
-            // �����������Ч�ĺ��ӱ߽�����Ч,�ӱ߽�Ḵ�Ƶ�����߽硣
-            // �������߽���ӱ߽綼����Ч��,��С�İ��������߽�ı߽�ḳֵ������߽硣
+            // GrowToContain忽略无效的子边界。
+            // 如果世界是无效的和子边界是有效,子边界会复制到世界边界。
+            // 如果世界边界和子边界都是有效的,最小的包含两个边界的边界会赋值给世界边界。
             bound.GrowToContain(child->GetWorldBound());
         }
     }

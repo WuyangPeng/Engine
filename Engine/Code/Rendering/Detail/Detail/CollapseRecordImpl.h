@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:50)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:50)
 
 #ifndef RENDERING_DETAIL_COLLAPSE_RECORD_IMPL_H
 #define RENDERING_DETAIL_COLLAPSE_RECORD_IMPL_H
@@ -51,17 +51,17 @@ namespace Rendering
         NODISCARD int GetStreamingSize() const;
 
     private:
-        // ±ß<VKeep£¬VThrow>ÕÛµşÊ¹VThrow±»VKeepÈ¡´ú¡£
+        // è¾¹<VKeepï¼ŒVThrow>æŠ˜å ä½¿VThrowè¢«VKeepå–ä»£ã€‚
         int recordVKeep;
         int recordVThrow;
 
-        // ±ßÕÛµşºóµÄ¶¥µãÊı¡£
+        // è¾¹æŠ˜å åçš„é¡¶ç‚¹æ•°ã€‚
         int numVertices;
 
-        // ±ßÕÛµşºóµÄÈı½ÇĞÎÊı
+        // è¾¹æŠ˜å åçš„ä¸‰è§’å½¢æ•°
         int numTriangles;
 
-        // [0..NumTriangles-1]ÖĞ°üº¬VThrowµÄË÷ÒıÊı×é
+        // [0..NumTriangles-1]ä¸­åŒ…å«VThrowçš„ç´¢å¼•æ•°ç»„
         std::vector<int> indices;
     };
 }

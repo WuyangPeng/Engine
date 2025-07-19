@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 17:52)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 17:52)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRIANGLE2_TRIANGLE2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRIANGLE2_TRIANGLE2_DETAIL_H
@@ -70,7 +70,7 @@ Mathematics::Vector2<Real> Mathematics::StaticFindIntersectorTriangle2Triangle2<
 template <typename Real>
 void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::Find()
 {
-    // µçÎ»½»µã±»³õÊ¼»¯Îªtriangle1¡£ ¶¥µã¼¯»ùÓÚ¶ÔÈı½ÇĞÎ0µÄÃ¿¸ö±ß½øĞĞĞŞ¼ô¶øµÃµ½ÓÅ»¯¡£
+    // ç”µä½äº¤ç‚¹è¢«åˆå§‹åŒ–ä¸ºtriangle1ã€‚ é¡¶ç‚¹é›†åŸºäºå¯¹ä¸‰è§’å½¢0çš„æ¯ä¸ªè¾¹è¿›è¡Œä¿®å‰ªè€Œå¾—åˆ°ä¼˜åŒ–ã€‚
     auto vertex0 = triangle0.GetVertex();
     auto vertex1 = triangle1.GetVertex();
     auto intersection = vertex1;
@@ -80,13 +80,13 @@ void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::Find()
         const auto& vector0 = vertex1.at(i0);
         const auto& vector1 = vertex1.at(i1);
 
-        // ²Ã¼ô±ßÑØ <V0[i1],V0[i0]>.
+        // è£å‰ªè¾¹æ²¿ <V0[i1],V0[i0]>.
         const Vector2 axis{ vector1.GetY() - vector0.GetY(), vector0.GetX() - vector1.GetX() };
         auto dot = Vector2ToolsType::DotProduct(axis, vector1);
         intersection = ClipConvexPolygonAgainstLine(axis, dot, intersection);
         if (intersection.empty())
         {
-            // Èı½ÇĞÎÍêÈ«±»ĞŞ¼ô£¬Ã»ÓĞÏà½»·¢Éú¡£
+            // ä¸‰è§’å½¢å®Œå…¨è¢«ä¿®å‰ªï¼Œæ²¡æœ‰ç›¸äº¤å‘ç”Ÿã€‚
             this->SetIntersectionType(IntersectionType::Empty);
             return;
         }
@@ -100,9 +100,9 @@ template <typename Real>
 typename Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::Intersection Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::ClipConvexPolygonAgainstLine(const Vector2Type& axis, Real dot, const Intersection& intersection)
 {
     using Container = std::vector<Real>;
-    // ¼Ù¶¨ÊäÈë¶¥µãÎªÄæÊ±ÕëË³Ğò¡£ Ë³ĞòÊÇ´Ëº¯ÊıµÄ²»±äÊ½¡£
+    // å‡å®šè¾“å…¥é¡¶ç‚¹ä¸ºé€†æ—¶é’ˆé¡ºåºã€‚ é¡ºåºæ˜¯æ­¤å‡½æ•°çš„ä¸å˜å¼ã€‚
 
-    // ²âÊÔ¶¥µãÔÚÏßµÄÄÄÒ»²à¡£
+    // æµ‹è¯•é¡¶ç‚¹åœ¨çº¿çš„å“ªä¸€ä¾§ã€‚
     auto positive = 0;
     auto negative = 0;
     auto firstIndex = -1;
@@ -134,24 +134,24 @@ typename Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::Intersectio
     {
         if (0 < negative)
         {
-            // ÏßÓë¶à±ßĞÎºáÏòÏà½»¡£
+            // çº¿ä¸å¤šè¾¹å½¢æ¨ªå‘ç›¸äº¤ã€‚
             Intersection result{};
 
             if (0 < firstIndex)
             {
-                // ÔÚÏßÉÏµÄµÚÒ»¸ö¼ô¼­¶¥µã¡£
+                // åœ¨çº¿ä¸Šçš„ç¬¬ä¸€ä¸ªå‰ªè¾‘é¡¶ç‚¹ã€‚
                 auto currentIndex = firstIndex;
                 auto previousIndex = currentIndex - 1;
                 auto t = dotProduct.at(currentIndex) / (dotProduct.at(currentIndex) - dotProduct.at(previousIndex));
                 result.emplace_back(intersection.at(currentIndex) + t * (intersection.at(previousIndex) - intersection.at(currentIndex)));
 
-                // ¶¥µãÔÚÏßµÄÕı²à¡£
+                // é¡¶ç‚¹åœ¨çº¿çš„æ­£ä¾§ã€‚
                 while (currentIndex < quantity && MathType::GetValue(0) < dotProduct.at(currentIndex))
                 {
                     result.emplace_back(intersection.at(currentIndex++));
                 }
 
-                // ÔÚÏßÉÏµÄ×îºóÒ»¸ö¼ô¼­¶¥µã¡£
+                // åœ¨çº¿ä¸Šçš„æœ€åä¸€ä¸ªå‰ªè¾‘é¡¶ç‚¹ã€‚
                 if (currentIndex < quantity)
                 {
                     previousIndex = currentIndex - 1;
@@ -164,34 +164,34 @@ typename Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::Intersectio
                 t = dotProduct.at(currentIndex) / (dotProduct.at(currentIndex) - dotProduct.at(previousIndex));
                 result.emplace_back(intersection.at(currentIndex) + t * (intersection.at(previousIndex) - intersection.at(currentIndex)));
             }
-            else  // firstIndex Îª 0
+            else  // firstIndex ä¸º 0
             {
-                // ¶¥µãÔÚĞĞµÄÕı²à¡£
+                // é¡¶ç‚¹åœ¨è¡Œçš„æ­£ä¾§ã€‚
                 auto currentIndex = 0;
                 while (currentIndex < quantity && MathType::GetValue(0) < dotProduct.at(currentIndex))
                 {
                     result.emplace_back(intersection.at(currentIndex++));
                 }
 
-                // ÔÚÏßÉÏµÄ×îºóÒ»¸ö¼ô¼­¶¥µã¡£
+                // åœ¨çº¿ä¸Šçš„æœ€åä¸€ä¸ªå‰ªè¾‘é¡¶ç‚¹ã€‚
                 auto previousIndex = currentIndex - 1;
                 auto t = dotProduct.at(currentIndex) / (dotProduct.at(currentIndex) - dotProduct.at(previousIndex));
                 result.emplace_back(intersection.at(currentIndex) + t * (intersection.at(previousIndex) - intersection.at(currentIndex)));
 
-                // Ìø¹ı¸º²àµÄ¶¥µã¡£
+                // è·³è¿‡è´Ÿä¾§çš„é¡¶ç‚¹ã€‚
                 while (currentIndex < quantity && dotProduct.at(currentIndex) <= MathType::GetValue(0))
                 {
                     ++currentIndex;
                 }
 
-                // ÔÚÏßÉÏµÄµÚÒ»¸ö¼ô¼­¶¥µã¡£
+                // åœ¨çº¿ä¸Šçš„ç¬¬ä¸€ä¸ªå‰ªè¾‘é¡¶ç‚¹ã€‚
                 if (currentIndex < quantity)
                 {
                     previousIndex = currentIndex - 1;
                     t = dotProduct.at(currentIndex) / (dotProduct.at(currentIndex) - dotProduct.at(previousIndex));
                     result.emplace_back(intersection.at(currentIndex) + t * (intersection.at(previousIndex) - intersection.at(currentIndex)));
 
-                    // ¶¥µãÔÚÏßµÄÕı²à¡£
+                    // é¡¶ç‚¹åœ¨çº¿çš„æ­£ä¾§ã€‚
                     while (currentIndex < quantity && MathType::GetValue(0) < dotProduct.at(currentIndex))
                     {
                         result.emplace_back(intersection.at(currentIndex++));
@@ -210,13 +210,13 @@ typename Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::Intersectio
         }
         else
         {
-            // ·ñÔò£¬¶à±ßĞÎÍêÈ«Î»ÓÚÏßµÄÕı²à£¬ÎŞĞèÖ´ĞĞÈÎºÎ²Ù×÷¡£
+            // å¦åˆ™ï¼Œå¤šè¾¹å½¢å®Œå…¨ä½äºçº¿çš„æ­£ä¾§ï¼Œæ— éœ€æ‰§è¡Œä»»ä½•æ“ä½œã€‚
             return intersection;
         }
     }
     else
     {
-        // ¶à±ßĞÎ²»ÓëÏßµÄÕı²àÏà½»£¬ÇëÈ«²¿¼ôÇĞ¡£
+        // å¤šè¾¹å½¢ä¸ä¸çº¿çš„æ­£ä¾§ç›¸äº¤ï¼Œè¯·å…¨éƒ¨å‰ªåˆ‡ã€‚
         return Intersection{};
     }
 }

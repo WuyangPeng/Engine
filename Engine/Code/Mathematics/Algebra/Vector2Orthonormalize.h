@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 15:15)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 15:15)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR2_ORTHONORMALIZE_H
 #define MATHEMATICS_ALGEBRA_VECTOR2_ORTHONORMALIZE_H
@@ -32,8 +32,8 @@ namespace Mathematics
         using Vector2ToolsType = Vector2Tools<Real>;
 
     public:
-        // Gram-SchmidtÕı½»»¯.
-        // ÒÔÏßĞÔÎŞ¹ØµÄÏòÁ¿UºÍV£¬À´¼ÆËãÒ»¸öÕı½»×é£¨µ¥Î»³¤¶È£¬Ïà»¥´¹Ö±£©¡£
+        // Gram-Schmidtæ­£äº¤åŒ–.
+        // ä»¥çº¿æ€§æ— å…³çš„å‘é‡Uå’ŒVï¼Œæ¥è®¡ç®—ä¸€ä¸ªæ­£äº¤ç»„ï¼ˆå•ä½é•¿åº¦ï¼Œç›¸äº’å‚ç›´ï¼‰ã€‚
         Vector2Orthonormalize(const Vector2Type& lhs, const Vector2Type& rhs, const Real epsilon = MathType::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;

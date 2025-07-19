@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 13:55)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 13:55)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_ALGEBRA_SINGULAR_VALUE_DECOMPOSITION_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_ALGEBRA_SINGULAR_VALUE_DECOMPOSITION_DETAIL_H
@@ -35,7 +35,7 @@ Mathematics::Algebra::SingularValueDecomposition<Real>::SingularValueDecompositi
 {
     if (numCols < 2 || numRows < numCols || maxIterations <= 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§ÊäÈë¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆè¾“å…¥ã€‚"))
     }
 
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -60,22 +60,22 @@ int Mathematics::Algebra::SingularValueDecomposition<Real>::Solve(const MatrixTy
 
     if (multiplier <= Real{} || input.size() != matrix.size())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÒªÇó½âµÄÊäÈëÎŞĞ§¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¦æ±‚è§£çš„è¾“å…¥æ— æ•ˆã€‚"))
     }
 
-    /// ½«ÊäÈë¸´ÖÆµ½matrix¡£½âËãÆ÷ÔÚÄÚ²¿ĞŞ¸ÄºóÒ»¸ö¾ØÕó¡£
+    /// å°†è¾“å…¥å¤åˆ¶åˆ°matrixã€‚è§£ç®—å™¨åœ¨å†…éƒ¨ä¿®æ”¹åä¸€ä¸ªçŸ©é˜µã€‚
     matrix = input;
 
-    /// ½«matrix»¹Ô­ÎªË«¶Ô½ÇÏßĞÎÊ½£¬
-    /// ½«¶Ô½ÇÏßmatrix(d,d)ºÍ³¬¶Ô½ÇÏßmatrix(d,d+1)·Ö±ğ´æ´¢ÔÚdiagonalºÍsuperDiagonalÖĞ¡£
+    /// å°†matrixè¿˜åŸä¸ºåŒå¯¹è§’çº¿å½¢å¼ï¼Œ
+    /// å°†å¯¹è§’çº¿matrix(d,d)å’Œè¶…å¯¹è§’çº¿matrix(d,d+1)åˆ†åˆ«å­˜å‚¨åœ¨diagonalå’ŒsuperDiagonalä¸­ã€‚
     Bidiagonalize();
 
-    /// ãĞÖµÓÃÓÚÈ·¶¨Ë«¶Ô½Ç¾ØÕóBµÄ¶Ô½ÇÏßÌõÄ¿ÊÇ·ñ×ã¹»Ğ¡£¬ÒÔ±»ÊÓÎªÁã¡£
-    /// ËüÓÉÒÔÏÂ¹«Ê½¶¨Òå£º
-    ///   threshold = multiplier * unitRoundOff * |B|,ÆäÖĞ
-    /// »úÆ÷¾«¶ÈÊÇstd::numeric_limits<Real>::epsilon()£¬|B|ÊÇ¾ØÕóµÄ·¶Êı£¬
-    /// ±¶ÊıÊÇÒ»¸öĞ¡Êı [ÈçGolubºÍVan LoanµÄËã·¨8.3.2£¨SVDËã·¨£©Ö®Ç°½¨ÒéµÄ]¡£
-    /// BµÄL-infinity·¶ÊıÓÃÓÚ¼ÆËã¡£
+    /// é˜ˆå€¼ç”¨äºç¡®å®šåŒå¯¹è§’çŸ©é˜µBçš„å¯¹è§’çº¿æ¡ç›®æ˜¯å¦è¶³å¤Ÿå°ï¼Œä»¥è¢«è§†ä¸ºé›¶ã€‚
+    /// å®ƒç”±ä»¥ä¸‹å…¬å¼å®šä¹‰ï¼š
+    ///   threshold = multiplier * unitRoundOff * |B|,å…¶ä¸­
+    /// æœºå™¨ç²¾åº¦æ˜¯std::numeric_limits<Real>::epsilon()ï¼Œ|B|æ˜¯çŸ©é˜µçš„èŒƒæ•°ï¼Œ
+    /// å€æ•°æ˜¯ä¸€ä¸ªå°æ•° [å¦‚Golubå’ŒVan Loançš„ç®—æ³•8.3.2ï¼ˆSVDç®—æ³•ï¼‰ä¹‹å‰å»ºè®®çš„]ã€‚
+    /// Bçš„L-infinityèŒƒæ•°ç”¨äºè®¡ç®—ã€‚
     Real epsilon{};
     Real threshold{};
     ComputeCutoffs(multiplier, epsilon, threshold);
@@ -85,7 +85,7 @@ int Mathematics::Algebra::SingularValueDecomposition<Real>::Solve(const MatrixTy
     lGivens.clear();
     for (auto iteration = 0; iteration < maxIterations; ++iteration)
     {
-        /// Èç¹û³¬¶Ô½ÇÏßÌõÄ¿ÓëÏàÁÚµÄ¶Ô½ÇÏßÌõÄ¿Ïà±ÈÊµ¼ÊÉÏÎªÁã£¬Ôò½«ÆäÉèÖÃÎªÁã¡£
+        /// å¦‚æœè¶…å¯¹è§’çº¿æ¡ç›®ä¸ç›¸é‚»çš„å¯¹è§’çº¿æ¡ç›®ç›¸æ¯”å®é™…ä¸Šä¸ºé›¶ï¼Œåˆ™å°†å…¶è®¾ç½®ä¸ºé›¶ã€‚
         auto numZero = 0;
         for (auto i = 0; i <= numCols - 2; ++i)
         {
@@ -102,14 +102,14 @@ int Mathematics::Algebra::SingularValueDecomposition<Real>::Solve(const MatrixTy
 
         if (numZero == numCols - 1)
         {
-            /// ³¬¶Ô½ÇÏßÏîÊµ¼ÊÉÏ¶¼ÎªÁã£¬Òò´ËËã·¨ÒÑ¾­ÊÕÁ²¡£¼ÆËãU¡¢VºÍS¡£
+            /// è¶…å¯¹è§’çº¿é¡¹å®é™…ä¸Šéƒ½ä¸ºé›¶ï¼Œå› æ­¤ç®—æ³•å·²ç»æ”¶æ•›ã€‚è®¡ç®—Uã€Vå’ŒSã€‚
             ComputeOrthogonalMatrices();
             return iteration;
         }
 
-        /// ÕÒµ½×î´óĞòÁĞ{iMin,...,iMax}£¬¶ÔÓÚ¸ÃĞòÁĞ£¬³¬¶Ô½ÇÏßÌõÄ¿²¢·ÇÈ«²¿ÓĞĞ§ÎªÁã¡£
-        /// »ØÂ·¶Ë½Ó£¬ iMax != invalid£¬ÒòÎªÈç¹ûËùÓĞ³¬¶Ô½ÇÏßÏî¶¼ÎªÁã£¬
-        /// ÔòÇ°ÃæµÄifÓï¾ä"if (numZero == numCols - 1)"½«È·±£ÍË³ö¸Ãº¯Êı
+        /// æ‰¾åˆ°æœ€å¤§åºåˆ—{iMin,...,iMax}ï¼Œå¯¹äºè¯¥åºåˆ—ï¼Œè¶…å¯¹è§’çº¿æ¡ç›®å¹¶éå…¨éƒ¨æœ‰æ•ˆä¸ºé›¶ã€‚
+        /// å›è·¯ç«¯æ¥ï¼Œ iMax != invalidï¼Œå› ä¸ºå¦‚æœæ‰€æœ‰è¶…å¯¹è§’çº¿é¡¹éƒ½ä¸ºé›¶ï¼Œ
+        /// åˆ™å‰é¢çš„ifè¯­å¥"if (numZero == numCols - 1)"å°†ç¡®ä¿é€€å‡ºè¯¥å‡½æ•°
         auto iMax = numCols - 2;
         for (; iMax != 0; --iMax)
         {
@@ -130,9 +130,9 @@ int Mathematics::Algebra::SingularValueDecomposition<Real>::Solve(const MatrixTy
         }
         ++iMin;
 
-        /// ¶ÔÓ¦ÓÚ {iMin,...,iMax} µÄ×Ó¿éµÄËùÓĞ³¬¶Ô½ÇÏßÌõÄ¿Êµ¼ÊÉÏ¶¼²»ÊÇÁã¡£
-        /// È·¶¨´Ë×Ó¿éÊÇ·ñ¾ßÓĞÊµ¼ÊÉÏÎªÁãµÄ¶Ô½ÇÏßÌõÄ¿¡£
-        /// Èç¹ûÊÇ£¬ÇëÊ¹ÓÃGivensĞı×ª½«°üº¬¸ÃÌõÄ¿µÄĞĞ¹éÁã¡£
+        /// å¯¹åº”äº {iMin,...,iMax} çš„å­å—çš„æ‰€æœ‰è¶…å¯¹è§’çº¿æ¡ç›®å®é™…ä¸Šéƒ½ä¸æ˜¯é›¶ã€‚
+        /// ç¡®å®šæ­¤å­å—æ˜¯å¦å…·æœ‰å®é™…ä¸Šä¸ºé›¶çš„å¯¹è§’çº¿æ¡ç›®ã€‚
+        /// å¦‚æœæ˜¯ï¼Œè¯·ä½¿ç”¨Givensæ—‹è½¬å°†åŒ…å«è¯¥æ¡ç›®çš„è¡Œå½’é›¶ã€‚
         if (DiagonalEntriesNonzero(iMin, iMax, threshold))
         {
             DoGolubKahanStep(iMin, iMax);
@@ -176,7 +176,7 @@ Real Mathematics::Algebra::SingularValueDecomposition<Real>::GetSingularValue(in
 
     if (numCols <= index)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÆæÒìÖµµÄË÷ÒıÎŞĞ§¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("å¥‡å¼‚å€¼çš„ç´¢å¼•æ— æ•ˆã€‚"))
     }
 
     const auto matrixIndex = index + numCols * index;
@@ -192,7 +192,7 @@ typename Mathematics::Algebra::SingularValueDecomposition<Real>::DiagonalType Ma
 
     if (numRows <= index)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("UÁĞµÄË÷ÒıÎŞĞ§¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("Uåˆ—çš„ç´¢å¼•æ— æ•ˆã€‚"))
     }
 
     DiagonalType column{};
@@ -215,7 +215,7 @@ typename Mathematics::Algebra::SingularValueDecomposition<Real>::DiagonalType Ma
 
     if (numCols <= index)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("VÁĞµÄË÷ÒıÎŞĞ§¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("Våˆ—çš„ç´¢å¼•æ— æ•ˆã€‚"))
     }
 
     DiagonalType column{};
@@ -252,9 +252,9 @@ template <typename Real>
 requires(std::is_arithmetic_v<Real>)
 void Mathematics::Algebra::SingularValueDecomposition<Real>::ComputeHouseholderU(int numRows, int numCols, const MatrixType& a, int selectCol, DiagonalType& v)
 {
-    /// ÌáÈ¡ÁĞÏòÁ¿v[]£¬ÆäÖĞv[row] = A(row, selectCol)¡£
-    /// ÔªËØv[row] = 0±íÊ¾0 <= row < selectCol£¬ÒÔ±ÜÃâ¸ÅÄîÉÏÎ´³õÊ¼»¯µÄÄÚ´æ£»
-    /// µ÷ÓÃ·½²»Ó¦ÒıÓÃÕâĞ©ÔªËØ¡£
+    /// æå–åˆ—å‘é‡v[]ï¼Œå…¶ä¸­v[row] = A(row, selectCol)ã€‚
+    /// å…ƒç´ v[row] = 0è¡¨ç¤º0 <= row < selectColï¼Œä»¥é¿å…æ¦‚å¿µä¸Šæœªåˆå§‹åŒ–çš„å†…å­˜ï¼›
+    /// è°ƒç”¨æ–¹ä¸åº”å¼•ç”¨è¿™äº›å…ƒç´ ã€‚
     auto row = 0;
     for (; row < selectCol; ++row)
     {
@@ -287,9 +287,9 @@ template <typename Real>
 requires(std::is_arithmetic_v<Real>)
 void Mathematics::Algebra::SingularValueDecomposition<Real>::ComputeHouseholderV(int numRows, int numCols, const MatrixType& a, int selectRow, DiagonalType& v)
 {
-    /// ÌáÈ¡ĞĞÏòÁ¿v[]£¬ÆäÖĞv[col] = A(selectRow, col)¡£
-    /// ÔªËØv[col] = 0±íÊ¾0 <= col <= selectRow£¬
-    /// ÒÔ±ÜÃâ¸ÅÄîÉÏÎ´³õÊ¼»¯µÄÄÚ´æ£»µ÷ÓÃ·½²»Ó¦ÒıÓÃÕâĞ©ÔªËØ¡£
+    /// æå–è¡Œå‘é‡v[]ï¼Œå…¶ä¸­v[col] = A(selectRow, col)ã€‚
+    /// å…ƒç´ v[col] = 0è¡¨ç¤º0 <= col <= selectRowï¼Œ
+    /// ä»¥é¿å…æ¦‚å¿µä¸Šæœªåˆå§‹åŒ–çš„å†…å­˜ï¼›è°ƒç”¨æ–¹ä¸åº”å¼•ç”¨è¿™äº›å…ƒç´ ã€‚
 
     System::UnusedFunction(numRows);
 
@@ -396,23 +396,23 @@ void Mathematics::Algebra::SingularValueDecomposition<Real>::Bidiagonalize()
     DiagonalType vVector(numCols);
     for (auto i = 0; i < numCols; ++i)
     {
-        /// ¼ÆËãu-HouseholderÏòÁ¿¡£
+        /// è®¡ç®—u-Householderå‘é‡ã€‚
         ComputeHouseholderU(numRows, numCols, matrix, i, lHouseholder.at(i));
 
-        /// ¸üĞÂ A = (I - 2*u*u^T/u^T*u) * A.
+        /// æ›´æ–° A = (I - 2*u*u^T/u^T*u) * A.
         DoHouseholderPreMultiply(numRows, numCols, lHouseholder.at(i), i, matrix);
 
         if (i < boost::numeric_cast<int>(rHouseholder.size()))
         {
-            /// ¼ÆËãv-HouseholderÏòÁ¿¡£
+            /// è®¡ç®—v-Householderå‘é‡ã€‚
             ComputeHouseholderV(numRows, numCols, matrix, i, rHouseholder.at(i));
 
-            // ¸üĞÂ A = A * (I - 2*v*v^T/v^T*v).
+            // æ›´æ–° A = A * (I - 2*v*v^T/v^T*v).
             DoHouseholderPostMultiply(numRows, numCols, rHouseholder.at(i), i, matrix);
         }
     }
 
-    /// ÔÚGolub-Kahanµü´úÖĞ¸´ÖÆ¶Ô½ÇÏßºÍ´Î¶Ô½ÇÏßÒÔ»ñµÃ»º´æÒ»ÖÂĞÔ¡£
+    /// åœ¨Golub-Kahanè¿­ä»£ä¸­å¤åˆ¶å¯¹è§’çº¿å’Œæ¬¡å¯¹è§’çº¿ä»¥è·å¾—ç¼“å­˜ä¸€è‡´æ€§ã€‚
     for (auto d = 0; d < numCols; ++d)
     {
         const auto index = d + numCols * d;
@@ -487,7 +487,7 @@ bool Mathematics::Algebra::SingularValueDecomposition<Real>::DiagonalEntriesNonz
     {
         if (MathType::FAbs(diagonal.at(i)) <= threshold)
         {
-            /// Ê¹ÓÃÆ½ÃæĞı×ª½«³¬¶Ô½ÇÏßÌõÄ¿´Ó¾ØÕóÖĞÖğ³ö£¬´Ó¶øÉú³ÉÒ»ĞĞÁã¡£
+            /// ä½¿ç”¨å¹³é¢æ—‹è½¬å°†è¶…å¯¹è§’çº¿æ¡ç›®ä»çŸ©é˜µä¸­é€å‡ºï¼Œä»è€Œç”Ÿæˆä¸€è¡Œé›¶ã€‚
             Real cs{};
             Real sn{};
             auto y = superDiagonal.at(i);
@@ -497,7 +497,7 @@ bool Mathematics::Algebra::SingularValueDecomposition<Real>::DiagonalEntriesNonz
                 auto x = diagonal.at(j);
                 GetSinCos(x, y, cs, sn);
 
-                /// ×¢£ºGivens²ÎÊıÎª(cs,-sn)¡£¸ººÅ²»ÊÇ±àÂë´íÎó¡£
+                /// æ³¨ï¼šGivenså‚æ•°ä¸º(cs,-sn)ã€‚è´Ÿå·ä¸æ˜¯ç¼–ç é”™è¯¯ã€‚
                 lGivens.emplace_back(i, j, cs, -sn);
                 diagonal.at(j) = cs * x - sn * y;
                 if (j < iMax)
@@ -517,9 +517,9 @@ template <typename Real>
 requires(std::is_arithmetic_v<Real>)
 void Mathematics::Algebra::SingularValueDecomposition<Real>::DoGolubKahanStep(int iMin, int iMax)
 {
-    /// ÒşÊ½µÄ×ª±ä¡£
-    /// ÉèA = {{a00,a01},{a01,a11}}ÊÇB^T*BµÄÓÒÏÂ2x2¿é¡£
-    /// ¼ÆËãAµÄÌØÕ÷Öµu£¬Æä¸ü½Ó½üa11¶ø²»ÊÇa00¡£
+    /// éšå¼çš„è½¬å˜ã€‚
+    /// è®¾A = {{a00,a01},{a01,a11}}æ˜¯B^T*Bçš„å³ä¸‹2x2å—ã€‚
+    /// è®¡ç®—Açš„ç‰¹å¾å€¼uï¼Œå…¶æ›´æ¥è¿‘a11è€Œä¸æ˜¯a00ã€‚
 
     Real f0{};
     Real f1{};
@@ -540,15 +540,15 @@ void Mathematics::Algebra::SingularValueDecomposition<Real>::DoGolubKahanStep(in
         d2 = diagonal.at(1);
     }
 
-    /// ¼ÆËãB^T*BµÄÓÒÏÂ2x2¿é¡£
+    /// è®¡ç®—B^T*Bçš„å³ä¸‹2x2å—ã€‚
     const auto a00 = d1 * d1 + f0 * f0;
     const auto a01 = d1 * f1;
     auto a11 = d2 * d2 + f1 * f1;
 
-    /// ÌØÕ÷ÖµÎª((a00+a11) +/- sqrt((a00-a11)^2+a01^2))/2£¬
-    /// Óë(a00+a11)/2µÈ¾à¡£
-    /// Èç¹ûa11 >= a00£¬ÔòËùĞèÌØÕ÷ÖµÊ¹ÓÃ(+)sqrtÏî¡£
-    /// Èç¹ûa11 <= a00£¬ÔòËùĞèÌØÕ÷ÖµÊ¹ÓÃ(-)sqrtÏî¡£
+    /// ç‰¹å¾å€¼ä¸º((a00+a11) +/- sqrt((a00-a11)^2+a01^2))/2ï¼Œ
+    /// ä¸(a00+a11)/2ç­‰è·ã€‚
+    /// å¦‚æœa11 >= a00ï¼Œåˆ™æ‰€éœ€ç‰¹å¾å€¼ä½¿ç”¨(+)sqrté¡¹ã€‚
+    /// å¦‚æœa11 <= a00ï¼Œåˆ™æ‰€éœ€ç‰¹å¾å€¼ä½¿ç”¨(-)sqrté¡¹ã€‚
     const auto sum = a00 + a11;
     const auto dif = a00 - a11;
     const auto root = MathType::Sqrt(dif * dif + a01 * a01);
@@ -561,11 +561,11 @@ void Mathematics::Algebra::SingularValueDecomposition<Real>::DoGolubKahanStep(in
     Real sn{};
     for (auto i0 = iMin - 1, i1 = iMin, i2 = iMin + 1; i1 <= iMax - 1; ++i0, ++i1, ++i2)
     {
-        /// ¼ÆËãGivensĞı×ªG£¬²¢½«Æä±£´æÒÔÓÃÓÚ¼ÆËãU^T*A*V = SÖĞµÄV¡£
+        /// è®¡ç®—Givensæ—‹è½¬Gï¼Œå¹¶å°†å…¶ä¿å­˜ä»¥ç”¨äºè®¡ç®—U^T*A*V = Sä¸­çš„Vã€‚
         GetSinCos(x, y, cs, sn);
         rGivens.emplace_back(i1, i2, cs, sn);
 
-        // ¸üĞÂ B0 = B*G.
+        // æ›´æ–° B0 = B*G.
         if (iMin < i1)
         {
             superDiagonal.at(i0) = cs * superDiagonal.at(i0) - sn * a02;
@@ -579,15 +579,15 @@ void Mathematics::Algebra::SingularValueDecomposition<Real>::DoGolubKahanStep(in
         diagonal.at(i2) = cs * a22;
         auto a21 = -sn * a22;
 
-        /// ¸üĞÂÏÂÒ»´ÎGivensĞı×ªµÄ²ÎÊı
+        /// æ›´æ–°ä¸‹ä¸€æ¬¡Givensæ—‹è½¬çš„å‚æ•°
         x = diagonal.at(i1);
         y = a21;
 
-        /// ¼ÆËãGivensĞı×ªG£¬²¢½«Æä±£´æÒÔÓÃÓÚÔÚU^T*A*V = SÖĞ¼ÆËãU¡£
+        /// è®¡ç®—Givensæ—‹è½¬Gï¼Œå¹¶å°†å…¶ä¿å­˜ä»¥ç”¨äºåœ¨U^T*A*V = Sä¸­è®¡ç®—Uã€‚
         GetSinCos(x, y, cs, sn);
         lGivens.emplace_back(i1, i2, cs, sn);
 
-        // ¸üĞÂ B1 = G^T*B0.
+        // æ›´æ–° B1 = G^T*B0.
         a11 = diagonal.at(i1);
         a12 = superDiagonal.at(i1);
         a22 = diagonal.at(i2);
@@ -601,7 +601,7 @@ void Mathematics::Algebra::SingularValueDecomposition<Real>::DoGolubKahanStep(in
             a02 = -sn * a23;
             superDiagonal.at(i2) = cs * a23;
 
-            /// ¸üĞÂÏÂÒ»´ÎGivensĞı×ªµÄ²ÎÊı¡£
+            /// æ›´æ–°ä¸‹ä¸€æ¬¡Givensæ—‹è½¬çš„å‚æ•°ã€‚
             x = superDiagonal.at(i1);
             y = a02;
         }
@@ -612,17 +612,17 @@ template <typename Real>
 requires(std::is_arithmetic_v<Real>)
 void Mathematics::Algebra::SingularValueDecomposition<Real>::ComputeOrthogonalMatrices()
 {
-    /// ¸ø¶¨µ±Ç°ÓĞ·ûºÅÆæÒìÖµ£¬¼ÆËãUºÍV¡£
+    /// ç»™å®šå½“å‰æœ‰ç¬¦å·å¥‡å¼‚å€¼ï¼Œè®¡ç®—Uå’ŒVã€‚
     ComputeUOrthogonal();
     ComputeVOrthogonal();
 
-    /// È·±£ÆæÒìÖµÊÇ·Ç¸ºµÄ¡£
-    /// ·ûºÅµÄ±ä»¯±»U¾ØÕóÎüÊÕ£¬
-    /// ·Ç¸ºÖµ±»´æ´¢ÔÚS¾ØÕóÖĞ¡£
+    /// ç¡®ä¿å¥‡å¼‚å€¼æ˜¯éè´Ÿçš„ã€‚
+    /// ç¬¦å·çš„å˜åŒ–è¢«UçŸ©é˜µå¸æ”¶ï¼Œ
+    /// éè´Ÿå€¼è¢«å­˜å‚¨åœ¨SçŸ©é˜µä¸­ã€‚
     EnsureNonnegativeSingularValues();
 
-    /// °´½µĞò¶ÔÆæÒìÖµ½øĞĞÅÅĞò¡£
-    /// ÅÅĞòÅÅÁĞ±»U¾ØÕóºÍV¾ØÕóÎüÊÕ¡£
+    /// æŒ‰é™åºå¯¹å¥‡å¼‚å€¼è¿›è¡Œæ’åºã€‚
+    /// æ’åºæ’åˆ—è¢«UçŸ©é˜µå’ŒVçŸ©é˜µå¸æ”¶ã€‚
     SortSingularValues();
 }
 
@@ -630,7 +630,7 @@ template <typename Real>
 requires(std::is_arithmetic_v<Real>)
 void Mathematics::Algebra::SingularValueDecomposition<Real>::ComputeUOrthogonal()
 {
-    /// ´ÓUµÄµ¥Î»¾ØÕó¿ªÊ¼¡£
+    /// ä»Uçš„å•ä½çŸ©é˜µå¼€å§‹ã€‚
     std::fill(uMatrix.begin(), uMatrix.end(), Real{});
     for (auto d = 0; d < numRows; ++d)
     {
@@ -638,16 +638,16 @@ void Mathematics::Algebra::SingularValueDecomposition<Real>::ComputeUOrthogonal(
         uMatrix.at(index) = MathType::GetValue(1);
     }
 
-    /// Ê¹ÓÃÏòºóÀÛ¼Ó³ËÒÔHouseholder·´Éä¡£
-    /// ÕâÔÊĞíDoHouseholderÔ¤³Ë¡£
-    /// Ê¹ÓÃDoHouseholderPostMultiplyµÄÕıÏòÀÛ¼Ó²»Æğ×÷ÓÃ£¬
-    /// ÒòÎªDoHouseHolderPostMultipleµÄÓïÒåÓëDoHousehouserPreMultiplyµÄÓïÒåÂÔÓĞ²»Í¬¡£
+    /// ä½¿ç”¨å‘åç´¯åŠ ä¹˜ä»¥Householderåå°„ã€‚
+    /// è¿™å…è®¸DoHouseholderé¢„ä¹˜ã€‚
+    /// ä½¿ç”¨DoHouseholderPostMultiplyçš„æ­£å‘ç´¯åŠ ä¸èµ·ä½œç”¨ï¼Œ
+    /// å› ä¸ºDoHouseHolderPostMultipleçš„è¯­ä¹‰ä¸DoHousehouserPreMultiplyçš„è¯­ä¹‰ç•¥æœ‰ä¸åŒã€‚
     for (auto k = 0, col = numCols - 1; k <= numCols - 1; ++k, --col)
     {
         DoHouseholderPreMultiply(numRows, numRows, lHouseholder.at(col), col, uMatrix);
     }
 
-    /// Ê¹ÓÃÕıÏòÀÛ¼Ó³ËÒÔGivensĞı×ª¡£
+    /// ä½¿ç”¨æ­£å‘ç´¯åŠ ä¹˜ä»¥Givensæ—‹è½¬ã€‚
     for (const auto& givens : lGivens)
     {
         auto j0 = givens.GetIndex0();
@@ -668,7 +668,7 @@ template <typename Real>
 requires(std::is_arithmetic_v<Real>)
 void Mathematics::Algebra::SingularValueDecomposition<Real>::ComputeVOrthogonal()
 {
-    /// ´ÓVµÄµ¥Î»¾ØÕó¿ªÊ¼¡£
+    /// ä»Vçš„å•ä½çŸ©é˜µå¼€å§‹ã€‚
     std::fill(vMatrix.begin(), vMatrix.end(), Real{});
     for (auto d = 0; d < numCols; ++d)
     {
@@ -676,16 +676,16 @@ void Mathematics::Algebra::SingularValueDecomposition<Real>::ComputeVOrthogonal(
         vMatrix.at(index) = MathType::GetValue(1);
     }
 
-    /// Ê¹ÓÃÏòºóÀÛ¼Ó³ËÒÔHouseholder·´Éä¡£
-    /// ÕâÔÊĞíDoHouseholderÔ¤³Ë¡£
-    /// Ê¹ÓÃDoHouseholderPostMultiplyµÄÕıÏòÀÛ¼Ó²»Æğ×÷ÓÃ£¬
-    /// ÒòÎªDoHouseHolderPostMultipleµÄÓïÒåÓëDoHousehouserPreMultiplyµÄÓïÒåÂÔÓĞ²»Í¬¡£
+    /// ä½¿ç”¨å‘åç´¯åŠ ä¹˜ä»¥Householderåå°„ã€‚
+    /// è¿™å…è®¸DoHouseholderé¢„ä¹˜ã€‚
+    /// ä½¿ç”¨DoHouseholderPostMultiplyçš„æ­£å‘ç´¯åŠ ä¸èµ·ä½œç”¨ï¼Œ
+    /// å› ä¸ºDoHouseHolderPostMultipleçš„è¯­ä¹‰ä¸DoHousehouserPreMultiplyçš„è¯­ä¹‰ç•¥æœ‰ä¸åŒã€‚
     for (auto k = 0, col = numCols - 3; k <= numCols - 3; ++k, --col)
     {
         DoHouseholderPreMultiply(numCols, numCols, rHouseholder.at(col), col, vMatrix);
     }
 
-    /// Ê¹ÓÃÕıÏòÀÛ¼Ó³ËÒÔGivensĞı×ª¡£
+    /// ä½¿ç”¨æ­£å‘ç´¯åŠ ä¹˜ä»¥Givensæ—‹è½¬ã€‚
     for (const auto& givens : rGivens)
     {
         auto j0 = givens.GetIndex0();
@@ -732,7 +732,7 @@ template <typename Real>
 requires(std::is_arithmetic_v<Real>)
 void Mathematics::Algebra::SingularValueDecomposition<Real>::SortSingularValues()
 {
-    /// ¶Ô·Ç¸ºÆæÒìÖµ½øĞĞÅÅĞò¡£
+    /// å¯¹éè´Ÿå¥‡å¼‚å€¼è¿›è¡Œæ’åºã€‚
     SingularInfoContainer sorted(numCols);
     for (auto i = 0; i < numCols; ++i)
     {
@@ -747,14 +747,14 @@ void Mathematics::Algebra::SingularValueDecomposition<Real>::SortSingularValues(
         sMatrix.at(index) = sorted.at(i).GetSingular();
     }
 
-    // ¼ÆËãÅÅĞòµÄÄæÅÅÁĞ¡£
+    // è®¡ç®—æ’åºçš„é€†æ’åˆ—ã€‚
     std::vector<int> permute(numCols);
     for (auto i = 0; i < numCols; ++i)
     {
         permute.at(sorted.at(i).GetInversePermute()) = i;
     }
 
-    /// ¶ÔU¾ØÕóµÄÁĞ½øĞĞPermute´¦Àí£¬Ê¹ÆäÓëÅÅĞòµÄÆæÒìÖµÒ»ÖÂ¡£
+    /// å¯¹UçŸ©é˜µçš„åˆ—è¿›è¡ŒPermuteå¤„ç†ï¼Œä½¿å…¶ä¸æ’åºçš„å¥‡å¼‚å€¼ä¸€è‡´ã€‚
     const auto sortedUMatrixCount = numRows * numRows;
     MatrixType sortedUMatrix(sortedUMatrixCount);
     auto col = 0;
@@ -781,7 +781,7 @@ void Mathematics::Algebra::SingularValueDecomposition<Real>::SortSingularValues(
     }
     uMatrix = std::move(sortedUMatrix);
 
-    /// ¶ÔV¾ØÕóµÄÁĞ½øĞĞPermute´¦Àí£¬Ê¹ÆäÓëÅÅĞòµÄÆæÒìÖµÒ»ÖÂ¡£
+    /// å¯¹VçŸ©é˜µçš„åˆ—è¿›è¡ŒPermuteå¤„ç†ï¼Œä½¿å…¶ä¸æ’åºçš„å¥‡å¼‚å€¼ä¸€è‡´ã€‚
     const auto sortedVMatrixCount = numCols * numCols;
     MatrixType sortedVMatrix(sortedVMatrixCount);
     for (col = 0; col < numCols; ++col)

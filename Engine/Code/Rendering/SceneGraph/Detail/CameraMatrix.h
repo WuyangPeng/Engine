@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.3 (2023/12/28 17:34)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/28 17:34)
 
 #ifndef RENDERING_SCENE_GRAPH_CAMERA_MATRIX_H
 #define RENDERING_SCENE_GRAPH_CAMERA_MATRIX_H
@@ -36,13 +36,13 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        /// Ԥ��������ģ�͵�����֮��Ӧ�ã�������ͼ����֮ǰӦ�á�
-        /// �����ڱ任�������������ķ��䡣Ĭ��ֵΪ��λ����
+        /// 预览矩阵在模型到世界之后应用，但在视图矩阵之前应用。
+        /// 它用于变换，例如世界对象的反射。默认值为单位矩阵。
         void SetPreViewMatrix(const Matrix& aPreViewMatrix);
         NODISCARD Matrix GetPreViewMatrix() const noexcept;
         NODISCARD bool PreViewIsIdentity() const noexcept;
 
-        /// ��ͶӰ����������Ļ�ռ�任��������Ⱦͼ��ķ��䡣Ĭ��ֵΪ��λ����
+        /// 后投影矩阵用于屏幕空间变换，例如渲染图像的反射。默认值为单位矩阵。
         void SetPostProjectionMatrix(const Matrix& postProjMatrix);
         NODISCARD Matrix GetPostProjectionMatrix() const noexcept;
         NODISCARD bool PostProjectionIsIdentity() const noexcept;
@@ -54,14 +54,14 @@ namespace Rendering
         NODISCARD float GetEpsilon() const noexcept;
 
     private:
-        // �������Ԥ������
+        // 摄像机的预览矩阵。
         Matrix preViewMatrix;
-        // ָʾ�û��Ƿ�ָ���˷ǵ�λ��Ԥ��ͼ����
+        // 指示用户是否指定了非单位的预视图矩阵。
         bool preViewIsIdentity;
 
-        // ��Ӱ����ͶӰ����
+        // 摄影机后投影矩阵。
         Matrix postProjectionMatrix;
-        // ָʾ�û��Ƿ�ָ���˷ǵ�λ��ͶӰ����
+        // 指示用户是否指定了非单位后投影矩阵。
         bool postProjectionIsIdentity;
 
         float epsilon;

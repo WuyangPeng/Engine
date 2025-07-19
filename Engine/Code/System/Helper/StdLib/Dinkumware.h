@@ -1,18 +1,18 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 21:42)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 21:42)
 
 #ifndef SYSTEM_HELPER_DINKUMWARE_H
 #define SYSTEM_HELPER_DINKUMWARE_H
 
 #if (defined(_YVALS) && !defined(__IBMCPP__)) || defined(_CPPLIB_VER)
 
-    ///  Dinkumware ±ê×¼¿âÅäÖÃ£º
+    ///  Dinkumware æ ‡å‡†åº“é…ç½®ï¼š
 
     #ifdef _CPPLIB_VER
 
@@ -32,11 +32,11 @@
 
     #ifdef _CPPLIB_VER
 
-        #define TCRE_SYSTEM_STD_LIB "Dinkumware ±ê×¼¿â°æ±¾ " SYSTEM_STRINGIZE(TCRE_CPP_LIB_VERSION)
+        #define TCRE_SYSTEM_STD_LIB "Dinkumware æ ‡å‡†åº“ç‰ˆæœ¬ " SYSTEM_STRINGIZE(TCRE_CPP_LIB_VERSION)
 
     #else  // !_CPPLIB_VER
 
-        #define TCRE_SYSTEM_STD_LIB "Dinkumware ±ê×¼¿â°æ±¾ 1.x"
+        #define TCRE_SYSTEM_STD_LIB "Dinkumware æ ‡å‡†åº“ç‰ˆæœ¬ 1.x"
 
     #endif  // _CPPLIB_VER
 

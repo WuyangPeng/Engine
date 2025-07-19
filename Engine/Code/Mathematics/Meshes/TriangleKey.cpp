@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/09 10:21)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 10:21)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -27,12 +27,12 @@ std::array<int, Mathematics::TriangleKey::vertexSize> Mathematics::TriangleKey::
     {
         if (first < third)
         {
-            // firstÊÇ×îĞ¡
+            // firstæ˜¯æœ€å°
             return std::array<int, Mathematics::TriangleKey::vertexSize>{ first, second, third };
         }
         else
         {
-            // thirdÊÇ×îĞ¡
+            // thirdæ˜¯æœ€å°
             return std::array<int, Mathematics::TriangleKey::vertexSize>{ third, first, second };
         }
     }
@@ -40,12 +40,12 @@ std::array<int, Mathematics::TriangleKey::vertexSize> Mathematics::TriangleKey::
     {
         if (second < third)
         {
-            // secondÊÇ×îĞ¡
+            // secondæ˜¯æœ€å°
             return std::array<int, Mathematics::TriangleKey::vertexSize>{ second, third, first };
         }
         else
         {
-            // thirdÊÇ×îĞ¡
+            // thirdæ˜¯æœ€å°
             return std::array<int, Mathematics::TriangleKey::vertexSize>{ third, first, second };
         }
     }
@@ -78,7 +78,7 @@ int Mathematics::TriangleKey::GetKeyIndex(int key) const
         }
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½Ö¸¶¨µÄÖµ¡£"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°æŒ‡å®šçš„å€¼ã€‚"s));
 }
 
 void Mathematics::TriangleKey::SetKey(int index, int value)
@@ -98,7 +98,7 @@ void Mathematics::TriangleKey::Swap(int lhsIndex, int rhsIndex)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òı´íÎó£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•é”™è¯¯ï¼"s));
     }
 }
 

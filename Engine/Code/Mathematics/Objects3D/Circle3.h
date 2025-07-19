@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 10:26)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 10:26)
 
 #ifndef MATHEMATICS_OBJECTS_3D_CIRCLE3_H
 #define MATHEMATICS_OBJECTS_3D_CIRCLE3_H
@@ -31,14 +31,14 @@ namespace Mathematics
         using Vector3ToolsType = Vector3Tools<Real>;
 
     public:
-        // º¬ÓĞ¸ÃÔ²µÄÆ½ÃæÊÇDot(N,X-C) = 0£¬ÆäÖĞXÊÇÔÚÆ½ÃæÉÏµÄÈÎÒâµã¡£
-        // ÏòÁ¿U£¬VºÍNĞÎ³ÉÕı½»ÓÒÊÖ×ø±êÏµ¼¯ºÏ¡£
-        // £¨¾ØÕó[U V N]ÊÇÕı½»µÄ£¬¾ßÓĞĞĞÁĞÊ½1£©¡£
-        // ÔÚÆ½ÃæÄÚµÄÔ²ÖÜ²ÎÊıÎªX = C + Real * (cos(t) * U + sin(t) * V)£¬
-        // ÆäÖĞtÊÇÔÚ[-pi,pi)µÄ½Ç¶È¡£
+        // å«æœ‰è¯¥åœ†çš„å¹³é¢æ˜¯Dot(N,X-C) = 0ï¼Œå…¶ä¸­Xæ˜¯åœ¨å¹³é¢ä¸Šçš„ä»»æ„ç‚¹ã€‚
+        // å‘é‡Uï¼ŒVå’ŒNå½¢æˆæ­£äº¤å³æ‰‹åæ ‡ç³»é›†åˆã€‚
+        // ï¼ˆçŸ©é˜µ[U V N]æ˜¯æ­£äº¤çš„ï¼Œå…·æœ‰è¡Œåˆ—å¼1ï¼‰ã€‚
+        // åœ¨å¹³é¢å†…çš„åœ†å‘¨å‚æ•°ä¸ºX = C + Real * (cos(t) * U + sin(t) * V)ï¼Œ
+        // å…¶ä¸­tæ˜¯åœ¨[-pi,pi)çš„è§’åº¦ã€‚
 
-        // U ÊÇÊäÈëÏòÁ¿ 'direction0', V ÊÇÊäÈëÏòÁ¿ 'direction1,
-        // ºÍ N ÊÇÊäÈëÏòÁ¿ 'normal'.
+        // U æ˜¯è¾“å…¥å‘é‡ 'direction0', V æ˜¯è¾“å…¥å‘é‡ 'direction1,
+        // å’Œ N æ˜¯è¾“å…¥å‘é‡ 'normal'.
         Circle3(const Vector3Type& center,
                 const Vector3Type& direction0,
                 const Vector3Type& direction1,
@@ -71,7 +71,7 @@ namespace Mathematics
     template <typename Real>
     NODISCARD bool Approximate(const Circle3<Real>& lhs, const Circle3<Real>& rhs, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-    // µ÷ÊÔÊä³ö
+    // è°ƒè¯•è¾“å‡º
     template <typename Real>
     std::ostream& operator<<(std::ostream& outFile, const Circle3<Real>& circle);
 }

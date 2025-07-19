@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2024/01/09 20:30)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2024/01/09 20:30)
 
 #ifndef RENDERING_SCENE_GRAPH_LIGHTINT_IMPL_H
 #define RENDERING_SCENE_GRAPH_LIGHTINT_IMPL_H
@@ -34,7 +34,7 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        // Ò»¸ö°ïÖúº¯Êı,ÔÊĞíÄúÉèÖÃangleºÍ×Ô¶¯¼ÆËãcosAngleºÍsinAngle¡£
+        // ä¸€ä¸ªå¸®åŠ©å‡½æ•°,å…è®¸æ‚¨è®¾ç½®angleå’Œè‡ªåŠ¨è®¡ç®—cosAngleå’ŒsinAngleã€‚
         void SetAngle(float aAngle);
 
         void SetExponent(float aExponent) noexcept;
@@ -64,25 +64,25 @@ namespace Rendering
         NODISCARD int GetStreamingSize() const noexcept;
 
     private:
-        // ¹âµÄÑÕÉ«
-        ColourType ambient;  // Ä¬ÈÏ: (1,1,1,1)
-        ColourType diffuse;  // Ä¬ÈÏ: (1,1,1,1)
-        ColourType specular;  // Ä¬ÈÏ: (1,1,1,1)
+        // å…‰çš„é¢œè‰²
+        ColourType ambient;  // é»˜è®¤: (1,1,1,1)
+        ColourType diffuse;  // é»˜è®¤: (1,1,1,1)
+        ColourType specular;  // é»˜è®¤: (1,1,1,1)
 
-        // Î»ÖÃ¹âÔ´µÄ²ÎÊı¡£×¶½Ç±ØĞëÂú×ãÔÚ»¡¶È0 < Angle <= pi¡£
-        float angle;  // Ä¬ÈÏ: pi / 2
-        float cosAngle;  // Ä¬ÈÏ: 0
-        float sinAngle;  // Ä¬ÈÏ:  0
-        float exponent;  // Ä¬ÈÏ:  1
+        // ä½ç½®å…‰æºçš„å‚æ•°ã€‚é”¥è§’å¿…é¡»æ»¡è¶³åœ¨å¼§åº¦0 < Angle <= piã€‚
+        float angle;  // é»˜è®¤: pi / 2
+        float cosAngle;  // é»˜è®¤: 0
+        float sinAngle;  // é»˜è®¤:  0
+        float exponent;  // é»˜è®¤:  1
 
-        /// Ë¥¼õÎª£ºintensity / (constant + linear * (d + quadratic * d)¡£
-        /// ÆäÖĞdÊÇ´Ó¹âÎ»ÖÃµ½¶¥µãÎ»ÖÃµÄ¾àÀë¡£
-        /// ¾àÀëÔÚÄ£ĞÍ¿Õ¼äÖĞ¡£
-        /// Èç¹û´ÓÄ£ĞÍ¿Õ¼äµ½ÊÀ½ç¿Õ¼äµÄ×ª»»Éæ¼°Í³Ò»Ëõ·Å£¬Ôò¿ÉÒÔÔÚ¡°Ç¿¶È¡±·ÖÁ¿ÖĞ°üº¬Ëõ·ÅÒò×Ó£¨Í¨¹ı³Ë·¨£©¡£
-        float constant;  // Ä¬ÈÏ: 1
-        float linear;  // Ä¬ÈÏ: 0
-        float quadratic;  // Ä¬ÈÏ: 0
-        float intensity;  // Ä¬ÈÏ: 1
+        /// è¡°å‡ä¸ºï¼šintensity / (constant + linear * (d + quadratic * d)ã€‚
+        /// å…¶ä¸­dæ˜¯ä»å…‰ä½ç½®åˆ°é¡¶ç‚¹ä½ç½®çš„è·ç¦»ã€‚
+        /// è·ç¦»åœ¨æ¨¡å‹ç©ºé—´ä¸­ã€‚
+        /// å¦‚æœä»æ¨¡å‹ç©ºé—´åˆ°ä¸–ç•Œç©ºé—´çš„è½¬æ¢æ¶‰åŠç»Ÿä¸€ç¼©æ”¾ï¼Œåˆ™å¯ä»¥åœ¨â€œå¼ºåº¦â€åˆ†é‡ä¸­åŒ…å«ç¼©æ”¾å› å­ï¼ˆé€šè¿‡ä¹˜æ³•ï¼‰ã€‚
+        float constant;  // é»˜è®¤: 1
+        float linear;  // é»˜è®¤: 0
+        float quadratic;  // é»˜è®¤: 0
+        float intensity;  // é»˜è®¤: 1
 
         float epsilon;
     };

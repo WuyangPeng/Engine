@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 10:04)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 10:04)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_ACHIEVE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_ACHIEVE_H
@@ -66,7 +66,7 @@ typename Mathematics::LinearSystem<Real>::Vector2 Mathematics::LinearSystem<Real
 
     if (MathType::FAbs(det) <= zeroTolerance)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Solve2 Ê§°Ü£¡detÎª0¡£"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("Solve2 å¤±è´¥ï¼detä¸º0ã€‚"s));
     }
 
     return Vector2{ (matrix[1][1] * vector[0] - matrix[0][1] * vector[1]) / det,
@@ -101,7 +101,7 @@ typename Mathematics::LinearSystem<Real>::Vector3Type Mathematics::LinearSystem<
 
     if (MathType::FAbs(det) <= zeroTolerance)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Solve3 Ê§°Ü£¡detÎª0¡£"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("Solve3 å¤±è´¥ï¼detä¸º0ã€‚"s));
     }
 
     for (auto& invVector : invMatrix)
@@ -126,7 +126,7 @@ template <typename Real>
 Mathematics::VariableMatrix<Real> Mathematics::LinearSystem<Real>::Inverse(const VariableMatrixType& matrix) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_1(matrix.GetRowsNumber() == matrix.GetColumnsNumber(), "¾ØÕó±ØĞëÊÇ·½Õó\n");
+    MATHEMATICS_ASSERTION_1(matrix.GetRowsNumber() == matrix.GetColumnsNumber(), "çŸ©é˜µå¿…é¡»æ˜¯æ–¹é˜µ\n");
 
     LinearSystemInverse<Real> inverse{ matrix, zeroTolerance };
 
@@ -147,7 +147,7 @@ template <typename Real>
 typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSystem<Real>::SolveTriDiagonal(int size, const RealContainer& lower, const RealContainer& mainDdiagonal, const RealContainer& upper, const RealContainer& right) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_0(0 < size, "´«ÈëµÄ´óĞ¡ÎªÁã»ò¸ºÊı£¡");
+    MATHEMATICS_ASSERTION_0(0 < size, "ä¼ å…¥çš„å¤§å°ä¸ºé›¶æˆ–è´Ÿæ•°ï¼");
 
     const auto upperAmendSize = size - 1;
 
@@ -156,12 +156,12 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
         boost::numeric_cast<int>(mainDdiagonal.size()) != size ||
         boost::numeric_cast<int>(right.size()) != size)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Êı×é´óĞ¡´íÎó£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("æ•°ç»„å¤§å°é”™è¯¯ï¼"s));
     }
 
     if (MathType::FAbs(mainDdiagonal.at(0)) <= zeroTolerance)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Çó½âÊ§°Ü£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("æ±‚è§£å¤±è´¥ï¼"s));
     }
 
     RealContainer output(size);
@@ -179,7 +179,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
         mainAmend = mainDdiagonal.at(next) - lower.at(i) * upperAmend.at(i);
         if (MathType::FAbs(mainAmend) <= zeroTolerance)
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("Çó½âÊ§°Ü£¡"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("æ±‚è§£å¤±è´¥ï¼"s));
         }
 
         output.at(next) = (right.at(next) - lower.at(i) * output.at(i)) / mainAmend;
@@ -201,12 +201,12 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
 
     if (boost::numeric_cast<int>(right.size()) != size)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Êı×é´óĞ¡´íÎó£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("æ•°ç»„å¤§å°é”™è¯¯ï¼"s));
     }
 
     if (MathType::FAbs(mainDdiagonal) <= zeroTolerance)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Çó½âÊ§°Ü£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("æ±‚è§£å¤±è´¥ï¼"s));
     }
 
     RealContainer output(size);
@@ -223,7 +223,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
         mainAmend = mainDdiagonal - lower * upperAmend.at(i);
         if (MathType::FAbs(mainAmend) <= zeroTolerance)
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("Çó½âÊ§°Ü£¡"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("æ±‚è§£å¤±è´¥ï¼"s));
         }
 
         const auto next = i + 1;
@@ -245,8 +245,8 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    // »ùÓÚÓÉGolumºÍVan LoanµÄ¡°¾ØÕó¼ÆËã¡±Ëã·¨¡£
-    MATHEMATICS_ASSERTION_1(matrix.GetRowsNumber() == matrix.GetColumnsNumber(), "¾ØÕó±ØĞëÊÇ·½Õó\n");
+    // åŸºäºç”±Golumå’ŒVan Loançš„â€œçŸ©é˜µè®¡ç®—â€ç®—æ³•ã€‚
+    MATHEMATICS_ASSERTION_1(matrix.GetRowsNumber() == matrix.GetColumnsNumber(), "çŸ©é˜µå¿…é¡»æ˜¯æ–¹é˜µ\n");
 
     Mathematics::SolveSymmetricConjugateGradient<Real, Mathematics::VariableMatrix> solve{ matrix, vector, zeroTolerance };
 
@@ -258,8 +258,8 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    // »ùÓÚÓÉGolumºÍVan LoanµÄ¡°¾ØÕó¼ÆËã¡±Ëã·¨¡£
-    MATHEMATICS_ASSERTION_1(matrix.GetRowsNumber() == matrix.GetColumnsNumber(), "¾ØÕó±ØĞëÊÇ·½Õó\n");
+    // åŸºäºç”±Golumå’ŒVan Loançš„â€œçŸ©é˜µè®¡ç®—â€ç®—æ³•ã€‚
+    MATHEMATICS_ASSERTION_1(matrix.GetRowsNumber() == matrix.GetColumnsNumber(), "çŸ©é˜µå¿…é¡»æ˜¯æ–¹é˜µ\n");
 
     Mathematics::SolveSymmetricConjugateGradient<Real, Mathematics::SparseMatrix> solve{ matrix, vector, zeroTolerance };
 
@@ -436,7 +436,7 @@ bool Mathematics::LinearSystem<Real>::SolveConstantTriDiagonal(int n, Real subDi
 template <typename Real>
 int Mathematics::LinearSystem<Real>::SolveSymmetricConjugateGradient(int n, RealContainer& a, const RealContainer& b, RealContainer& x, int maxIterations, Real tolerance)
 {
-    /// µÚÒ»´Îµü´ú¡£
+    /// ç¬¬ä¸€æ¬¡è¿­ä»£ã€‚
     RealContainer r(n);
     RealContainer p(n);
     RealContainer w(n);
@@ -452,7 +452,7 @@ int Mathematics::LinearSystem<Real>::SolveSymmetricConjugateGradient(int n, Real
     UpdateR(n, r, alpha, w);
     auto rho1 = Dot(n, r, r);
 
-    /// Ê£ÏÂµÄµü´ú¡£
+    /// å‰©ä¸‹çš„è¿­ä»£ã€‚
     auto iteration = 1;
     for (; iteration <= maxIterations; ++iteration)
     {
@@ -479,7 +479,7 @@ int Mathematics::LinearSystem<Real>::SolveSymmetricConjugateGradient(int n, Real
 template <typename Real>
 int Mathematics::LinearSystem<Real>::SolveSymmetricConjugateGradient(int n, AlgebraSparseMatrix const& a, const RealContainer& b, RealContainer& x, int maxIterations, Real tolerance)
 {
-    /// µÚÒ»´Îµü´ú¡£
+    /// ç¬¬ä¸€æ¬¡è¿­ä»£ã€‚
     RealContainer r(n);
     RealContainer p(n);
     RealContainer w(n);
@@ -494,7 +494,7 @@ int Mathematics::LinearSystem<Real>::SolveSymmetricConjugateGradient(int n, Alge
     UpdateR(n, r, alpha, w);
     auto rho1 = Dot(n, r, r);
 
-    /// Ê£ÏÂµÄµü´ú¡£
+    /// å‰©ä¸‹çš„è¿­ä»£ã€‚
     auto iteration = 1;
     for (; iteration <= maxIterations; ++iteration)
     {

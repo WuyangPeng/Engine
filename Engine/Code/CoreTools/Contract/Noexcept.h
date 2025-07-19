@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/28 15:23)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/28 15:23)
 
 #ifndef CORE_TOOLS_CONTRACT_NOEXCEPT_H
 #define CORE_TOOLS_CONTRACT_NOEXCEPT_H
@@ -21,19 +21,19 @@ namespace CoreTools
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26440)
 
-    // Õâ¸öº¯ÊıÊÇÎªÁËÏû³ı±àÒëÆ÷¾¯¸æ£¬±ØĞëÃ»ÓĞĞÔÄÜÏûºÄ¡£
+    // è¿™ä¸ªå‡½æ•°æ˜¯ä¸ºäº†æ¶ˆé™¤ç¼–è¯‘å™¨è­¦å‘Šï¼Œå¿…é¡»æ²¡æœ‰æ€§èƒ½æ¶ˆè€—ã€‚
     inline void DisableNoexcept()
     {
     }
 
 #include SYSTEM_WARNING_POP
 
-    /// ²¶»ñ³ÉÔ±º¯ÊıËùÓĞÒì³££¬ÕâĞ©º¯ÊıµÄÄ¿µÄÊÇÎªÁËÏû³ı±àÒëÆ÷¾¯¸æ£¬ÆäÄ¿µÄ²¢²»ÊÇÎªÁËÊµÏÖnoexceptº¯Êı¡£
-    /// ÈÕÖ¾¿âÊ¹ÓÃÕâĞ©º¯Êı£¬ËùÒÔ³ö´íÊ±²»´òÓ¡ÈÕÖ¾¡£
-    /// Ö»ÔÊĞíÔÚÒÔÏÂÇé¿öÏÂÊ¹ÓÃ£º
-    /// 1. Îö¹¹º¯Êıµ÷ÓÃµÄº¯Êı¡£
-    /// 2. º¯ÊıÅ×³öÒì³£µÄ¸ÅÂÊºÜµÍ£¨ÈçÄÚ´æ²»×ã£©£¬¶¨Òå³Énoexcept£¬¿ÉÒÔ·½±ãÉÏ²ãº¯ÊıµÄµ÷ÓÃ¡£
-    /// ³ıÁË²¶»ñÈÕÖ¾¿âµÄÒì³£Íâ£¬ÆäËûÇé¿öÏÂ¾¡Á¿Ê¹ÓÃNoexceptLog¡£
+    /// æ•è·æˆå‘˜å‡½æ•°æ‰€æœ‰å¼‚å¸¸ï¼Œè¿™äº›å‡½æ•°çš„ç›®çš„æ˜¯ä¸ºäº†æ¶ˆé™¤ç¼–è¯‘å™¨è­¦å‘Šï¼Œå…¶ç›®çš„å¹¶ä¸æ˜¯ä¸ºäº†å®ç°noexceptå‡½æ•°ã€‚
+    /// æ—¥å¿—åº“ä½¿ç”¨è¿™äº›å‡½æ•°ï¼Œæ‰€ä»¥å‡ºé”™æ—¶ä¸æ‰“å°æ—¥å¿—ã€‚
+    /// åªå…è®¸åœ¨ä»¥ä¸‹æƒ…å†µä¸‹ä½¿ç”¨ï¼š
+    /// 1. ææ„å‡½æ•°è°ƒç”¨çš„å‡½æ•°ã€‚
+    /// 2. å‡½æ•°æŠ›å‡ºå¼‚å¸¸çš„æ¦‚ç‡å¾ˆä½ï¼ˆå¦‚å†…å­˜ä¸è¶³ï¼‰ï¼Œå®šä¹‰æˆnoexceptï¼Œå¯ä»¥æ–¹ä¾¿ä¸Šå±‚å‡½æ•°çš„è°ƒç”¨ã€‚
+    /// é™¤äº†æ•è·æ—¥å¿—åº“çš„å¼‚å¸¸å¤–ï¼Œå…¶ä»–æƒ…å†µä¸‹å°½é‡ä½¿ç”¨NoexceptLogã€‚
     template <typename T, typename Function, typename... ParamType>
     void NoexceptNoReturn(const T& master, Function function, ParamType&&... parameter) noexcept
     {
@@ -43,7 +43,7 @@ namespace CoreTools
         }
         catch (...)
         {
-            System::OutputDebugStringWithTChar(SYSTEM_TEXT("Noexcept Å×³öÒì³£¡£"));
+            System::OutputDebugStringWithTChar(SYSTEM_TEXT("Noexcept æŠ›å‡ºå¼‚å¸¸ã€‚"));
         }
     }
 
@@ -56,7 +56,7 @@ namespace CoreTools
         }
         catch (...)
         {
-            System::OutputDebugStringWithTChar(SYSTEM_TEXT("Noexcept Å×³öÒì³£¡£"));
+            System::OutputDebugStringWithTChar(SYSTEM_TEXT("Noexcept æŠ›å‡ºå¼‚å¸¸ã€‚"));
 
             return defaultResult;
         }
@@ -71,7 +71,7 @@ namespace CoreTools
         }
         catch (...)
         {
-            System::OutputDebugStringWithTChar(SYSTEM_TEXT("Noexcept Å×³öÒì³£¡£"));
+            System::OutputDebugStringWithTChar(SYSTEM_TEXT("Noexcept æŠ›å‡ºå¼‚å¸¸ã€‚"));
         }
     }
 
@@ -84,7 +84,7 @@ namespace CoreTools
         }
         catch (...)
         {
-            System::OutputDebugStringWithTChar(SYSTEM_TEXT("Noexcept Å×³öÒì³£¡£"));
+            System::OutputDebugStringWithTChar(SYSTEM_TEXT("Noexcept æŠ›å‡ºå¼‚å¸¸ã€‚"));
 
             return defaultResult;
         }

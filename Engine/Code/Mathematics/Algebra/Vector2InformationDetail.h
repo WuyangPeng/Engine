@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.5 (2024/01/29 17:30)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.5 (2024/01/29 17:30)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR2_TOOLS_INFORMATION_DETAIL_H
 #define MATHEMATICS_ALGEBRA_VECTOR2_TOOLS_INFORMATION_DETAIL_H
@@ -39,7 +39,7 @@ Mathematics::Vector2Information<Real>::Vector2Information(const ContainerType& p
 {
     if (points.empty() || epsilon < MathType::GetValue(0))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§ÊäÈëÔÚVector2Information\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆè¾“å…¥åœ¨Vector2Information\n"s));
     }
 
     Init();
@@ -73,16 +73,16 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 void Mathematics::Vector2Information<Real>::Init()
 {
-    /// ¼ÆËãÊäÈëµãµÄÖá¶ÔÆë°üÎ§ºĞ¡£¸ú×Ù¡°points¡±µ±Ç°×îĞ¡ÖµºÍ×î´óÖµµÄË÷Òı¡£
+    /// è®¡ç®—è¾“å…¥ç‚¹çš„è½´å¯¹é½åŒ…å›´ç›’ã€‚è·Ÿè¸ªâ€œpointsâ€å½“å‰æœ€å°å€¼å’Œæœ€å¤§å€¼çš„ç´¢å¼•ã€‚
     ComputeAxisAlignedBoundingBox();
 
-    /// È·¶¨±ß½ç¿òµÄ×î´ó·¶Î§¡£
+    /// ç¡®å®šè¾¹ç•Œæ¡†çš„æœ€å¤§èŒƒå›´ã€‚
     DetermineMaximumRange();
 
-    /// Ô­µãÊÇ×îĞ¡xÖµµÄµã»ò×îĞ¡yÖµµÄµã¡£
+    /// åŸç‚¹æ˜¯æœ€å°xå€¼çš„ç‚¹æˆ–æœ€å°yå€¼çš„ç‚¹ã€‚
     origin = points.at(minExtreme);
 
-    /// ²âÊÔµã¼¯ÊÇ·ñÊÇ£¨¼¸ºõ£©Ò»¸öµã»òÒ»¸öÏß¶Î
+    /// æµ‹è¯•ç‚¹é›†æ˜¯å¦æ˜¯ï¼ˆå‡ ä¹ï¼‰ä¸€ä¸ªç‚¹æˆ–ä¸€ä¸ªçº¿æ®µ
     if (!(TestPointSetIsNearlyAPoint() || TestPointSetIsNearlyALineSegment()))
     {
         dimension = 2;
@@ -170,12 +170,12 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector2Information<Real>::
 template <typename Real>
 requires std::is_arithmetic_v<Real> bool Mathematics::Vector2Information<Real>::TestPointSetIsNearlyALineSegment()
 {
-    /// ²âÊÔÏòÁ¿¼¯ÊÇ·ñ£¨¼¸ºõ£©ÊÇÏß¶Î¡£ÎÒÃÇĞèÒªdirectionYÀ´¿çÔ½directionXµÄÕı½»²¹Âë¡£
+    /// æµ‹è¯•å‘é‡é›†æ˜¯å¦ï¼ˆå‡ ä¹ï¼‰æ˜¯çº¿æ®µã€‚æˆ‘ä»¬éœ€è¦directionYæ¥è·¨è¶ŠdirectionXçš„æ­£äº¤è¡¥ç ã€‚
     directionX = points.at(maxExtreme) - origin;
     directionX.Normalize(epsilon);
     directionY = -Vector2ToolsType::GetPerp(directionX);
 
-    /// ¼ÆËãµãÓëÖ±ÏßµÄ×î´ó¾àÀëorigin + t * directionX.
+    /// è®¡ç®—ç‚¹ä¸ç›´çº¿çš„æœ€å¤§è·ç¦»origin + t * directionX.
     auto maxDistance = MathType::GetValue(0);
     auto maxSign = NumericalValueSymbol::Zero;
     perpendicularExtreme = minExtreme;
@@ -199,7 +199,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Vector2Information<Real>::
 
     if (maxDistance <= epsilon * maxRange)
     {
-        /// ÕâĞ©µã£¨¼¸ºõ£©ÔÚÖ±Ïß origin + t * directionX¡£
+        /// è¿™äº›ç‚¹ï¼ˆå‡ ä¹ï¼‰åœ¨ç›´çº¿ origin + t * directionXã€‚
         dimension = 1;
         perpendicularExtreme = maxExtreme;
 

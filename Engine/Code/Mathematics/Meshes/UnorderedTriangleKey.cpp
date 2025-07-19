@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/09 10:22)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 10:22)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -27,14 +27,14 @@ Mathematics::UnorderedTriangleKey::UnorderedTriangleKey(int first, int second, i
     {
         if (first < third)
         {
-            // firstÊÇ×îĞ¡
+            // firstæ˜¯æœ€å°
             vertex[0] = first;
             vertex[1] = std::min(second, third);
             vertex[2] = std::max(second, third);
         }
         else
         {
-            // thirdÊÇ×îĞ¡
+            // thirdæ˜¯æœ€å°
             vertex[0] = third;
             vertex[1] = std::min(first, second);
             vertex[2] = std::max(first, second);
@@ -44,14 +44,14 @@ Mathematics::UnorderedTriangleKey::UnorderedTriangleKey(int first, int second, i
     {
         if (second < third)
         {
-            // secondÊÇ×îĞ¡
+            // secondæ˜¯æœ€å°
             vertex[0] = second;
             vertex[1] = std::min(third, first);
             vertex[2] = std::max(third, first);
         }
         else
         {
-            // thirdÊÇ×îĞ¡
+            // thirdæ˜¯æœ€å°
             vertex[0] = third;
             vertex[1] = std::min(first, second);
             vertex[2] = std::max(first, second);

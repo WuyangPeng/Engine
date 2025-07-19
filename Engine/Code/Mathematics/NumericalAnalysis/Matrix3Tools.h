@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.4 (2024/01/12 13:45)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/12 13:45)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_MATRIX3_TOOLS_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_MATRIX3_TOOLS_H
@@ -39,20 +39,20 @@ namespace Mathematics
         CLASS_INVARIANT_DECLARE;
 
     public:
-        // ����ֵ�ֽ⣬M = L * D * Transpose(Real)������L��Real�������ģ�
-        // D�ǶԽǾ�����Խ�Ԫ���ǷǸ��ġ�
-        // ����ֵ��һ����Ϊleft, �ڶ�����Ϊdiag,��������ΪrightTranspose
+        // 奇异值分解，M = L * D * Transpose(Real)，其中L和Real是正交的，
+        // D是对角矩阵，其对角元素是非负的。
+        // 返回值第一部分为left, 第二部分为diag,第三部分为rightTranspose
         NODISCARD SingularValueType SingularValueDecomposition() const;
 
-        // ���ֽ⣬M = Q * S������Q�������ģ�S�ǶԳƵġ�
-        // ����ʹ������ֵ�ֽ⣺
+        // 极分解，M = Q * S，其中Q是正交的，S是对称的。
+        // 这里使用奇异值分解：
         // M = L * D * Transpose(Real) = (L * Transpose(Real)) * (Real * D * Transpose(Real)) = Q * S
-        // ����Q = L * Transpose(Real)��S = Real * D * Transpose(Real)��
-        // ����ֵ��һ����ΪQ���ڶ�����ΪS
+        // 其中Q = L * Transpose(Real)和S = Real * D * Transpose(Real)。
+        // 返回值第一部分为Q，第二部分为S
         NODISCARD PolarDecompositionValueType PolarDecomposition() const;
 
-        // ϵ��M = Q * D * Uʹ����������Q���ԽǾ���D�������Ǿ���U��
-        // ����ֵ��һ����ΪQ���ڶ�����ΪD����������ΪU
+        // 系数M = Q * D * U使用正交矩阵Q，对角矩阵D，上三角矩阵U。
+        // 返回值第一部分为Q，第二部分为D，第三部分为U
         NODISCARD QDUDecompositionValueType QDUDecomposition() const;
 
     private:

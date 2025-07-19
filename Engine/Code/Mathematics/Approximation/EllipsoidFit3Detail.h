@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:09)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:09)
 
 #ifndef MATHEMATICS_APPROXIMATION_ELLIPSOID_FIT3_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_ELLIPSOID_FIT3_DETAIL_H
@@ -31,10 +31,10 @@ Mathematics::EllipsoidFit3<Real>::EllipsoidFit3(const Points& points)
 template <typename Real>
 void Mathematics::EllipsoidFit3<Real>::Fit3()
 {
-    // ÄÜÁ¿º¯ÊıÎª E : Real^9 -> Real  ÆäÖĞ
+    // èƒ½é‡å‡½æ•°ä¸º E : Real^9 -> Real  å…¶ä¸­
     // V = (V0,V1,V2,V3,V4,V5,V6,V7,V8)
-    //   = (D[0],D[1],D[2],U.X(),U,y,U.Z(),A0,A1,A2)¡£
-    // ¶ÔÓÚÕæÕı·ÖÉ¢µÄÊı¾İ£¬Äã¿ÉÄÜĞèÒªÒ»¸öËÑË÷º¯Êı
+    //   = (D[0],D[1],D[2],U.X(),U,y,U.Z(),A0,A1,A2)ã€‚
+    // å¯¹äºçœŸæ­£åˆ†æ•£çš„æ•°æ®ï¼Œä½ å¯èƒ½éœ€è¦ä¸€ä¸ªæœç´¢å‡½æ•°
 
     InitialGuess();
 
@@ -115,7 +115,7 @@ Real Mathematics::EllipsoidFit3<Real>::Energy(const Angle& input, const Ellipsoi
 {
     if (userData == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÖÂÃü´íÎó£¬´«µİ¿ÕÖ¸Õë¡£"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("è‡´å‘½é”™è¯¯ï¼Œä¼ é€’ç©ºæŒ‡é’ˆã€‚"s));
     }
 
     const auto& self = *userData;
@@ -123,11 +123,11 @@ Real Mathematics::EllipsoidFit3<Real>::Energy(const Angle& input, const Ellipsoi
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-    // ¹¹½¨Ğı×ª¾ØÕó
+    // æ„å»ºæ—‹è½¬çŸ©é˜µ
     Angle angle{ input[6], input[7], input[8] };
     const auto rotate = AnglesToMatrix(angle);
 
-    // ¾ùÔÈËõ·Å³Ì¶È£¬ÒÔ±£³ÖºÏÀíµÄ¸¡µãÖµ¾àÀë¼ÆËã¡£
+    // å‡åŒ€ç¼©æ”¾ç¨‹åº¦ï¼Œä»¥ä¿æŒåˆç†çš„æµ®ç‚¹å€¼è·ç¦»è®¡ç®—ã€‚
     auto maxValue = input[0];
     if (maxValue < input[1])
     {
@@ -140,7 +140,7 @@ Real Mathematics::EllipsoidFit3<Real>::Energy(const Angle& input, const Ellipsoi
 
     const Ellipsoid3<Real> ellipsoid{ Vector3Type::GetZero(), Vector3Type::GetUnitX(), Vector3Type::GetUnitY(), Vector3Type::GetUnitZ(), input[0] / maxValue, input[1] / maxValue, input[2] / maxValue };
 
-    // ±ä»»µãµ½ÖĞĞÄCºÍĞı×ªRealµÄÁĞµÄ×ø±êÏµÍ³
+    // å˜æ¢ç‚¹åˆ°ä¸­å¿ƒCå’Œæ—‹è½¬Realçš„åˆ—çš„åæ ‡ç³»ç»Ÿ
     auto energy = MathType::GetValue(0);
 
     const auto numPoints = userData->GetNumPoint();
@@ -167,8 +167,8 @@ Real Mathematics::EllipsoidFit3<Real>::Energy(const Angle& input, const Ellipsoi
 template <typename Real>
 typename Mathematics::EllipsoidFit3<Real>::Angle Mathematics::EllipsoidFit3<Real>::MatrixToAngles(const Matrix3Type& rotate)
 {
-    // Ğı×ªÖá = (cos(a0)sin(a1),sin(a0)sin(a1),cos(a1))
-    // a0 ÔÚ [-pi,pi], a1 ÔÚ [0,pi], a2 ÔÚ [0,pi]
+    // æ—‹è½¬è½´ = (cos(a0)sin(a1),sin(a0)sin(a1),cos(a1))
+    // a0 åœ¨ [-pi,pi], a1 åœ¨ [0,pi], a2 åœ¨ [0,pi]
 
     const auto extract = rotate.ExtractAngleAxis();
     const auto axis = extract.GetAxis();
@@ -206,8 +206,8 @@ typename Mathematics::EllipsoidFit3<Real>::Angle Mathematics::EllipsoidFit3<Real
 template <typename Real>
 Mathematics::Matrix3<Real> Mathematics::EllipsoidFit3<Real>::AnglesToMatrix(const Angle& angle) noexcept
 {
-    // Ğı×ªÖá = (cos(a0)sin(a1),sin(a0)sin(a1),cos(a1))
-    // a0 ÔÚ  [-pi,pi], a1 ÔÚ [0,pi], a2 ÔÚ [0,pi]
+    // æ—‹è½¬è½´ = (cos(a0)sin(a1),sin(a0)sin(a1),cos(a1))
+    // a0 åœ¨  [-pi,pi], a1 åœ¨ [0,pi], a2 åœ¨ [0,pi]
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)

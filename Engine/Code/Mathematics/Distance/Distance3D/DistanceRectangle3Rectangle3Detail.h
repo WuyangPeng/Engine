@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 16:35)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 16:35)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RECTANGLE3_RECTANGLE3_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RECTANGLE3_RECTANGLE3_DETAIL_H
@@ -62,7 +62,7 @@ typename Mathematics::DistanceRectangle3Rectangle3<Real>::DistanceResult Mathema
 
     auto sqrDist = MathType::maxReal;
 
-    // ½«¾ØĞÎ0µÄ±ßÔµÓë¾ØĞÎ1µÄÄÚ²¿½øĞĞ±È½Ï¡£
+    // å°†çŸ©å½¢0çš„è¾¹ç¼˜ä¸çŸ©å½¢1çš„å†…éƒ¨è¿›è¡Œæ¯”è¾ƒã€‚
     for (auto outerIndex = 0; outerIndex < 2; ++outerIndex)
     {
         for (auto innerIndex = -1; innerIndex <= 1; innerIndex += 2)
@@ -84,7 +84,7 @@ typename Mathematics::DistanceRectangle3Rectangle3<Real>::DistanceResult Mathema
         }
     }
 
-    // ±È½Ï¾ØĞÎ1µÄ±ßÔµÓë¾ØĞÎ0µÄÄÚ²¿¡£
+    // æ¯”è¾ƒçŸ©å½¢1çš„è¾¹ç¼˜ä¸çŸ©å½¢0çš„å†…éƒ¨ã€‚
     for (auto outerIndex = 0; outerIndex < 2; ++outerIndex)
     {
         for (auto innerIndex = -1; innerIndex <= 1; innerIndex += 2)

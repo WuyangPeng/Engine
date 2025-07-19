@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 13:47)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 13:47)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BISECT2_ROOT_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BISECT2_ROOT_H
@@ -16,7 +16,7 @@
 
 #include <type_traits>
 
-// ¶ş·Ö·¨½â·½³ÌµÄ¸ù
+// äºŒåˆ†æ³•è§£æ–¹ç¨‹çš„æ ¹
 namespace Mathematics
 {
     template <typename Real>
@@ -28,19 +28,19 @@ namespace Mathematics
         using ClassType = Bisect2Root<Real>;
 
     public:
-        // ·½³ÌÎŞ½â
+        // æ–¹ç¨‹æ— è§£
         Bisect2Root() noexcept;
-        // ·½³ÌÓĞ½â
+        // æ–¹ç¨‹æœ‰è§£
         Bisect2Root(Real xRoot, Real yRoot, BisectRootType type) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        // µ±m_BisectRootType == BisectRootType::HaveSolutionÊ±£¬
-        // m_XRoot¡¢m_YRootÊÇÓĞĞ§µÄ¡£
-        // µ±m_BisectRootType == BisectRootType::UnknownÊ±£¬
-        // m_XRoot¡¢m_YRootÊÇ½üËÆÖµ£¬²»±£Ö¤½á¹ûÊÇÕıÈ·µÄ¡£
-        // µ±m_BisectRootType == BisectRootType::NoSolutionÊ±£¬
-        // GetXRoot()¡¢GetYRoot()Å×³öÒì³£¡£
+        // å½“m_BisectRootType == BisectRootType::HaveSolutionæ—¶ï¼Œ
+        // m_XRootã€m_YRootæ˜¯æœ‰æ•ˆçš„ã€‚
+        // å½“m_BisectRootType == BisectRootType::Unknownæ—¶ï¼Œ
+        // m_XRootã€m_YRootæ˜¯è¿‘ä¼¼å€¼ï¼Œä¸ä¿è¯ç»“æœæ˜¯æ­£ç¡®çš„ã€‚
+        // å½“m_BisectRootType == BisectRootType::NoSolutionæ—¶ï¼Œ
+        // GetXRoot()ã€GetYRoot()æŠ›å‡ºå¼‚å¸¸ã€‚
         NODISCARD Real GetXRoot() const;
         NODISCARD Real GetYRoot() const;
         NODISCARD BisectRootType GetBisectRootType() const noexcept;

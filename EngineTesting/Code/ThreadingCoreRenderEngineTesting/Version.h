@@ -1,19 +1,19 @@
-/// Copyright (c) 2010-2025
+ï»¿/// Copyright (c) 2010-2025
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£ºv0.0.0.0 (2025/07/01 15:00:29)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼šv0.0.0.0 (2025/07/01 15:00:29)
 
 #ifndef THREADING_CORE_RENDER_ENGINE_TESTING_VERSION_H
 #define THREADING_CORE_RENDER_ENGINE_TESTING_VERSION_H
 
-//  gTcreTestingVersion % 100 ÊÇĞŞ¶©°æ±¾ºÅ
-//  gTcreTestingVersion / 100 % 100 ÊÇÄÚ²¿°æ±¾ºÅ
-//  gTcreTestingVersion / 10000 % 100 ÊÇ´Î°æ±¾ºÅ
-//  gTcreTestingVersion / 1000000 % 100 ÊÇÖ÷°æ±¾ºÅ
+//  gTcreTestingVersion % 100 æ˜¯ä¿®è®¢ç‰ˆæœ¬å·
+//  gTcreTestingVersion / 100 % 100 æ˜¯å†…éƒ¨ç‰ˆæœ¬å·
+//  gTcreTestingVersion / 10000 % 100 æ˜¯æ¬¡ç‰ˆæœ¬å·
+//  gTcreTestingVersion / 1000000 % 100 æ˜¯ä¸»ç‰ˆæœ¬å·
 
 constexpr auto gTcreTestingVersion = 0000000;
 

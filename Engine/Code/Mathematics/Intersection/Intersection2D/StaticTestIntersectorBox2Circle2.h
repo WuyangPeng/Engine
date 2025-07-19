@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	�汾��0.9.1.6 (2023/10/28 14:53)
+///	标准：std:c++20
+///	版本：0.9.1.6 (2023/10/28 14:53)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_BOX2_CIRCLE2_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_BOX2_CIRCLE2_H
@@ -37,11 +37,11 @@ namespace Mathematics
         NODISCARD Circle2Type GetCircle() const noexcept;
 
     private:
-        // ��̬�����ཻ��ѯ��
+        // 静态查找相交查询。
         void Test();
 
     private:
-        // Ҫ�ཻ�Ķ���
+        // 要相交的对象。
         Box2Type box;
         Circle2Type circle;
     };

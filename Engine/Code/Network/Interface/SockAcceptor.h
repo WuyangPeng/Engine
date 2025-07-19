@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 16:33)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 16:33)
 
 #ifndef NETWORK_NETWORK_INTERFACE_SOCK_ACCEPTOR_H
 #define NETWORK_NETWORK_INTERFACE_SOCK_ACCEPTOR_H
@@ -35,19 +35,19 @@ namespace Network
         NODISCARD bool Accept(SockStream& sockStream, SockAddress& sockAddress);
         NODISCARD bool Accept(SockStream& sockStream);
 
-        // Òì²½»Øµ÷£¬±ØĞë±£Ö¤this¡¢EventInterface¡¢SockStreamºÍSockAddressµÄÉúÃüÖÜÆÚºÍÏß³Ì°²È«¡£
+        // å¼‚æ­¥å›è°ƒï¼Œå¿…é¡»ä¿è¯thisã€EventInterfaceã€SockStreamå’ŒSockAddressçš„ç”Ÿå‘½å‘¨æœŸå’Œçº¿ç¨‹å®‰å…¨ã€‚
         void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream);
         void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress);
 
         NODISCARD bool EnableNonBlock();
 
-        // ACE ×¨ÓÃ£¬ÆäËûÀàµ÷ÓÃÅ×³öÒì³£¡£
+        // ACE ä¸“ç”¨ï¼Œå…¶ä»–ç±»è°ƒç”¨æŠ›å‡ºå¼‚å¸¸ã€‚
         NODISCARD ACEHandleType GetACEHandle();
 
-        // boost ×¨ÓÃ£¬ÆäËûÀàµ÷ÓÃÅ×³öÒì³£¡£
+        // boost ä¸“ç”¨ï¼Œå…¶ä»–ç±»è°ƒç”¨æŠ›å‡ºå¼‚å¸¸ã€‚
         NODISCARD BoostHandleType GetBoostHandle();
 
-        // Network ×¨ÓÃ£¬ÆäËûÀàµ÷ÓÃÅ×³öÒì³£¡£
+        // Network ä¸“ç”¨ï¼Œå…¶ä»–ç±»è°ƒç”¨æŠ›å‡ºå¼‚å¸¸ã€‚
         NODISCARD WinSocketType GetWinSocket();
 
         NODISCARD std::string GetAddress() const;

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 15:44)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 15:44)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_ARRAY4_H
 #define CORE_TOOLS_MEMORY_TOOLS_ARRAY4_H
@@ -14,9 +14,9 @@
 
 #include <vector>
 
-/// Array4Àà±íÊ¾Ò»¸ö4Î¬Êı×é£¬
-/// ¸ÃÊı×é×î´óÏŞ¶ÈµØ¼õÉÙÁËµ÷ÓÃnewºÍdeleteµÄÊıÁ¿¡£
-/// T¶ÔÏó´æ´¢ÔÚÒ»¸öÁ¬ĞøµÄÊı×éÖĞ¡£
+/// Array4ç±»è¡¨ç¤ºä¸€ä¸ª4ç»´æ•°ç»„ï¼Œ
+/// è¯¥æ•°ç»„æœ€å¤§é™åº¦åœ°å‡å°‘äº†è°ƒç”¨newå’Œdeleteçš„æ•°é‡ã€‚
+/// Tå¯¹è±¡å­˜å‚¨åœ¨ä¸€ä¸ªè¿ç»­çš„æ•°ç»„ä¸­ã€‚
 namespace CoreTools
 {
     template <typename T>
@@ -26,10 +26,10 @@ namespace CoreTools
         using ClassType = Array4<T>;
 
     public:
-        /// Ö§³Ö¶¯Ì¬µ÷Õû´óĞ¡¡¢¸´ÖÆ»òÒÆ¶¯¡£
+        /// æ”¯æŒåŠ¨æ€è°ƒæ•´å¤§å°ã€å¤åˆ¶æˆ–ç§»åŠ¨ã€‚
         Array4() noexcept;
 
-        /// ¸ÃÊı×é¾ßÓĞbound0ÁĞ¡¢bound1ĞĞ¡¢bound2ÇĞÆ¬ºÍbound3³¤·½Ìå¡£
+        /// è¯¥æ•°ç»„å…·æœ‰bound0åˆ—ã€bound1è¡Œã€bound2åˆ‡ç‰‡å’Œbound3é•¿æ–¹ä½“ã€‚
         Array4(int bound0, int bound1, int bound2, int bound3);
         ~Array4() noexcept = default;
         Array4(const Array4& rhs);
@@ -39,7 +39,7 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        /// ·ÃÎÊÕóÁĞ¡£Ê¾ÀıÓÃ·¨Îª
+        /// è®¿é—®é˜µåˆ—ã€‚ç¤ºä¾‹ç”¨æ³•ä¸º
         //   Array4<T> myArray{ 5, 4, 3, 2 };
         //   T*** cuboid1 = myArray[1];
         //   T** cuboid1Slice2 = myArray[1][2];

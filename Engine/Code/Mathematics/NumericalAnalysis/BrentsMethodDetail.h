@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 09:54)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 09:54)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BRENTS_METHOD_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BRENTS_METHOD_DETAIL_H
@@ -62,7 +62,7 @@ template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethod<Real, UserDataType>::SetFunction(Function newFunction)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
-    MATHEMATICS_ASSERTION_0(newFunction != nullptr, "ÎŞĞ§ function¡£\n");
+    MATHEMATICS_ASSERTION_0(newFunction != nullptr, "æ— æ•ˆ functionã€‚\n");
 
     function = newFunction;
 }
@@ -79,7 +79,7 @@ template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethod<Real, UserDataType>::SetMaxIterations(int newMaxIterations) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
-    MATHEMATICS_ASSERTION_1(1 <= newMaxIterations, "ÎŞĞ§ maxIterations¡£\n");
+    MATHEMATICS_ASSERTION_1(1 <= newMaxIterations, "æ— æ•ˆ maxIterationsã€‚\n");
 
     maxIterations = newMaxIterations;
 }
@@ -96,7 +96,7 @@ template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethod<Real, UserDataType>::SetNegativeFTolerance(Real newNegativeFTolerance) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
-    MATHEMATICS_ASSERTION_1(newNegativeFTolerance <= MathType::GetValue(0), "ÎŞĞ§ negativeFTolerance¡£\n");
+    MATHEMATICS_ASSERTION_1(newNegativeFTolerance <= MathType::GetValue(0), "æ— æ•ˆ negativeFToleranceã€‚\n");
 
     negativeFTolerance = newNegativeFTolerance;
 }
@@ -113,7 +113,7 @@ template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethod<Real, UserDataType>::SetPositiveFTolerance(Real newPositiveFTolerance) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
-    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= positiveFTolerance, "ÎŞĞ§ positiveFTolerance¡£\n");
+    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= positiveFTolerance, "æ— æ•ˆ positiveFToleranceã€‚\n");
 
     positiveFTolerance = newPositiveFTolerance;
 }
@@ -130,7 +130,7 @@ template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethod<Real, UserDataType>::SetStepXTolerance(Real newStepXTolerance) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
-    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= newStepXTolerance, "ÎŞĞ§ stepXTolerance¡£\n");
+    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= newStepXTolerance, "æ— æ•ˆ stepXToleranceã€‚\n");
 
     stepXTolerance = newStepXTolerance;
 }
@@ -147,7 +147,7 @@ template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethod<Real, UserDataType>::SetConvXTolerance(Real newConvXTolerance) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
-    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= newConvXTolerance, "ÎŞĞ§ convXTolerance¡£\n");
+    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= newConvXTolerance, "æ— æ•ˆ convXToleranceã€‚\n");
 
     convXTolerance = newConvXTolerance;
 }
@@ -180,7 +180,7 @@ template <typename Real, typename UserDataType>
 typename Mathematics::BrentsMethod<Real, UserDataType>::BrentsMethodRootType Mathematics::BrentsMethod<Real, UserDataType>::GetRoot(Real begin, Real end)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
-    MATHEMATICS_ASSERTION_1(begin <= end, "¼ä¸ôÊÇÎŞĞ§ÔÚGetRoot¡£\n");
+    MATHEMATICS_ASSERTION_1(begin <= end, "é—´éš”æ˜¯æ— æ•ˆåœ¨GetRootã€‚\n");
 
     BrentsMethodCalculate<Real, UserDataType> calculate{ *this, begin, end };
 

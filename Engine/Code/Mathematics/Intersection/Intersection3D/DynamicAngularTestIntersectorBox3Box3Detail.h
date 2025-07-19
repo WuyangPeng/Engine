@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:03)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:03)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_ANGULAR_TEST_INTERSECTOR_BOX3_BOX3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_ANGULAR_TEST_INTERSECTOR_BOX3_BOX3_DETAIL_H
@@ -75,17 +75,17 @@ Mathematics::Box3<Real> Mathematics::DynamicAngularTestIntersectorBox3Box3<Real>
 template <typename Real>
 void Mathematics::DynamicAngularTestIntersectorBox3Box3<Real>::Test()
 {
-    // ¼¯³ÉµÄÊ±¼ä²½Öè¡£
+    // é›†æˆçš„æ—¶é—´æ­¥éª¤ã€‚
     auto stepSize = this->GetTMax() / static_cast<Real>(numSteps);
 
-    // ³õÊ¼»¯×Ó¼ä¸ô¿ò¡£
+    // åˆå§‹åŒ–å­é—´éš”æ¡†ã€‚
     auto subBox0 = box0;
     auto subBox1 = box1;
 
-    // Ê¹ÓÃÅ·À­·½·¨¶ÔÎ¢·Ö·½³Ì½øĞĞ»ı·Ö¡£
+    // ä½¿ç”¨æ¬§æ‹‰æ–¹æ³•å¯¹å¾®åˆ†æ–¹ç¨‹è¿›è¡Œç§¯åˆ†ã€‚
     for (auto step = 1; step <= numSteps; ++step)
     {
-        // ¼ÆËã¿òËÙ¶ÈºÍÏà½»µÄ²âÊÔ¿ò¡£
+        // è®¡ç®—æ¡†é€Ÿåº¦å’Œç›¸äº¤çš„æµ‹è¯•æ¡†ã€‚
         auto subTime = stepSize * static_cast<Real>(step);
         auto newRotCenter0 = lhsRotCenter + subTime * this->GetLhsVelocity();
         auto newRotCenter1 = rhsRotCenter + subTime * this->GetRhsVelocity();
@@ -101,11 +101,11 @@ void Mathematics::DynamicAngularTestIntersectorBox3Box3<Real>::Test()
             return;
         }
 
-        // ¸üĞÂºĞ×ÓÖĞĞÄ¡£
+        // æ›´æ–°ç›’å­ä¸­å¿ƒã€‚
         subBox0 = subBox0.GetMove(1, subVelocity0);
         subBox1 = subBox1.GetMove(1, subVelocity1);
 
-        // ¸üĞÂºĞ×ÓÖá¡£
+        // æ›´æ–°ç›’å­è½´ã€‚
         using AxisType = std::vector<Vector3Type>;
         AxisType axis0{ subBox0.GetAxis(0) + stepSize * Vector3ToolsType::CrossProduct(lhsRotAxis, subBox0.GetAxis(0)),
                         subBox0.GetAxis(1) + stepSize * Vector3ToolsType::CrossProduct(lhsRotAxis, subBox0.GetAxis(1)),
@@ -114,8 +114,8 @@ void Mathematics::DynamicAngularTestIntersectorBox3Box3<Real>::Test()
                         subBox1.GetAxis(1) + stepSize * Vector3ToolsType::CrossProduct(rhsRotAxis, subBox1.GetAxis(1)),
                         subBox1.GetAxis(2) + stepSize * Vector3ToolsType::CrossProduct(rhsRotAxis, subBox1.GetAxis(2)) };
 
-        /// Ê¹ÓÃGram-Schmidt¶Ô¸üĞÂµÄÖá½øĞĞÕıÔò»¯¡£
-        /// ×¢Òâ£ºÈç¹ûT/NĞ¡¶øNĞ¡£¬Ôò¿ÉÒÔÔÚ¼Ù¶¨¸üĞÂÖá½Ó½üÕı½»µÄÇé¿öÏÂÉ¾³ı´Ë°º¹óµÄ²½³¤¡£
+        /// ä½¿ç”¨Gram-Schmidtå¯¹æ›´æ–°çš„è½´è¿›è¡Œæ­£åˆ™åŒ–ã€‚
+        /// æ³¨æ„ï¼šå¦‚æœT/Nå°è€ŒNå°ï¼Œåˆ™å¯ä»¥åœ¨å‡å®šæ›´æ–°è½´æ¥è¿‘æ­£äº¤çš„æƒ…å†µä¸‹åˆ é™¤æ­¤æ˜‚è´µçš„æ­¥é•¿ã€‚
         const auto vector3Orthonormalize0 = Vector3ToolsType::Orthonormalize(axis0);
         const auto vector3Orthonormalize1 = Vector3ToolsType::Orthonormalize(axis1);
 
@@ -128,9 +128,9 @@ void Mathematics::DynamicAngularTestIntersectorBox3Box3<Real>::Test()
                         subBox1.GetExtent0(), subBox1.GetExtent1(), subBox1.GetExtent2() };
     }
 
-    /// ×¢Òâ£ºÈç¹û¿ò²»Ïà½»£¬ÔòÓ¦ÓÃ³ÌĞò¿ÉÄÜĞèÒª½«¿òÒÆ¶¯/Ğı×ªµ½ÆäĞÂÎ»ÖÃ¡£
-    /// ÔÚÕâÖÖÇé¿öÏÂ£¬ÄúÏë·µ»ØsubBox0ºÍsubBox1µÄ×îÖÕÖµ£¬ÒÔ±ãÓ¦ÓÃ³ÌĞò¿ÉÒÔÉèÖÃbox0 < -subBox0ºÍbox1 < -subBox1¡£
-    /// ·ñÔò£¬Ó¦ÓÃ³ÌĞò½«²»µÃ²»ÔÙ´ÎÇó½âÎ¢·Ö·½³Ì»òÊ¹ÓÃ·â±ÕĞÎÊ½µÄ¸ÕĞÔÔË¶¯½âÀ´¼ÆËãĞÂµÄºĞÎ»ÖÃ¡£
+    /// æ³¨æ„ï¼šå¦‚æœæ¡†ä¸ç›¸äº¤ï¼Œåˆ™åº”ç”¨ç¨‹åºå¯èƒ½éœ€è¦å°†æ¡†ç§»åŠ¨/æ—‹è½¬åˆ°å…¶æ–°ä½ç½®ã€‚
+    /// åœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œæ‚¨æƒ³è¿”å›subBox0å’ŒsubBox1çš„æœ€ç»ˆå€¼ï¼Œä»¥ä¾¿åº”ç”¨ç¨‹åºå¯ä»¥è®¾ç½®box0 < -subBox0å’Œbox1 < -subBox1ã€‚
+    /// å¦åˆ™ï¼Œåº”ç”¨ç¨‹åºå°†ä¸å¾—ä¸å†æ¬¡æ±‚è§£å¾®åˆ†æ–¹ç¨‹æˆ–ä½¿ç”¨å°é—­å½¢å¼çš„åˆšæ€§è¿åŠ¨è§£æ¥è®¡ç®—æ–°çš„ç›’ä½ç½®ã€‚
 
     this->SetIntersectionType(IntersectionType::Empty);
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:56)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:56)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX3_SPHERE3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX3_SPHERE3_H
@@ -44,13 +44,13 @@ namespace Mathematics
         NODISCARD Box3Type GetBox() const noexcept;
         NODISCARD Sphere3Type GetSphere() const noexcept;
 
-        // ÓÃÓÚ¶¯Ì¬²éÕÒÏà½»²éÑ¯µÄÏà½»¼¯¡£
+        // ç”¨äºåŠ¨æ€æŸ¥æ‰¾ç›¸äº¤æŸ¥è¯¢çš„ç›¸äº¤é›†ã€‚
         NODISCARD Vector3Type GetContactPoint() const noexcept;
 
     private:
         void Find();
 
-        // ¶¯Ì¬²éÕÒ¹¦ÄÜµÄÖ§³Öº¯Êı¡£
+        // åŠ¨æ€æŸ¥æ‰¾åŠŸèƒ½çš„æ”¯æŒå‡½æ•°ã€‚
         NODISCARD static Real GetVertexIntersection(Real diffX, Real diffY, Real diffZ, Real relativeVelocityDotX, Real relativeVelocityDotY, Real relativeVelocityDotZ, Real radiusSqr) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         NODISCARD static Real GetEdgeIntersection(Real diffX, Real diffZ, Real relativeVelocityDotX, Real relativeVelocityDotZ, Real velocitySqr, Real radiusSqr) noexcept(gAssert < 3 || gMathematicsAssert < 3);

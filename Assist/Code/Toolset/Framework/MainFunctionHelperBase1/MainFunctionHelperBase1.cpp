@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.2 (2023/07/28 13:42)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.2 (2023/07/28 13:42)
 
 #include "MainFunctionHelperBase1.h"
 #include "System/Time/DeltaTime.h"
@@ -26,14 +26,14 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, MainFunctionHelperBase1)
 
 int Framework::MainFunctionHelperBase1::DoRun()
 {
-    COUT << SYSTEM_TEXT("ÒıÇæ°²×°Ä¿Â¼Îª£¨Îª¿Õ±íÊ¾³ÌĞòµ±Ç°Â·¾¶£©£º")
+    COUT << SYSTEM_TEXT("å¼•æ“å®‰è£…ç›®å½•ä¸ºï¼ˆä¸ºç©ºè¡¨ç¤ºç¨‹åºå½“å‰è·¯å¾„ï¼‰ï¼š")
          << GetEngineInstallationDirectory()
          << SYSTEM_TEXT('\n')
-         << SYSTEM_TEXT("º¯ÊıIsDestroy·µ»ØÖµÓ¦¸ÃÎªfalse£º")
+         << SYSTEM_TEXT("å‡½æ•°IsDestroyè¿”å›å€¼åº”è¯¥ä¸ºfalseï¼š")
          << std::boolalpha
          << IsDestroy()
          << std::noboolalpha
-         << SYSTEM_TEXT("¡£\n");
+         << SYSTEM_TEXT("ã€‚\n");
 
     System::SystemPause();
 

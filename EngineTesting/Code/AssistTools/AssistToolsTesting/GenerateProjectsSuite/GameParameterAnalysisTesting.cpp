@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º1.0.0.0 (2023/11/09 15:34)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š1.0.0.0 (2023/11/09 15:34)
 
 #include "GameParameterAnalysisTesting.h"
 #include "CoreTools/Base/Version.h"
@@ -46,7 +46,7 @@ void AssistTools::GameParameterAnalysisTesting::ParameterTest()
 
     ASSERT_EQUAL(gameParameterAnalysis.GetGameParameter(GameParameterType::CoreName), SYSTEM_TEXT("Test"));
     ASSERT_EQUAL(gameParameterAnalysis.GetGameParameter(GameParameterType::CoreCapital), SYSTEM_TEXT("TEST"));
-    ASSERT_EQUAL(gameParameterAnalysis.GetGameParameter(GameParameterType::ProjectChineseName), SYSTEM_TEXT("²âÊÔ"));
+    ASSERT_EQUAL(gameParameterAnalysis.GetGameParameter(GameParameterType::ProjectChineseName), SYSTEM_TEXT("æµ‹è¯•"));
     ASSERT_EQUAL(gameParameterAnalysis.GetGameParameter(GameParameterType::ProjectDescribeName), SYSTEM_TEXT("The Test"));
     ASSERT_EQUAL(gameParameterAnalysis.GetGameParameter(GameParameterType::ProjectName), SYSTEM_TEXT("TheTest"));
     ASSERT_EQUAL(gameParameterAnalysis.GetGameParameter(GameParameterType::ProjectCapital), SYSTEM_TEXT("THE_TEST"));

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:04)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:04)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX3_SPHERE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX3_SPHERE3_DETAIL_H
@@ -63,7 +63,7 @@ Mathematics::Vector3<Real> Mathematics::DynamicFindIntersectorBox3Sphere3<Real>:
 template <typename Real>
 void Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::Find()
 {
-    /// ²éÕÒÏà¶ÔÓÚºĞ×ÓµÄ×ø±êÏµµÄ½»µã¡£ ÇòÌå½«×ª»»ÎªºĞ×Ó×ø±ê£¬²¢ÇÒÇòÌåµÄËÙ¶ÈÊÇÏà¶ÔÓÚºĞ×ÓµÄ¡£
+    /// æŸ¥æ‰¾ç›¸å¯¹äºç›’å­çš„åæ ‡ç³»çš„äº¤ç‚¹ã€‚ çƒä½“å°†è½¬æ¢ä¸ºç›’å­åæ ‡ï¼Œå¹¶ä¸”çƒä½“çš„é€Ÿåº¦æ˜¯ç›¸å¯¹äºç›’å­çš„ã€‚
     auto centerDiff = sphere.GetCenter() - box.GetCenter();
     auto relativeVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
     auto centerDiffDotX = Vector3ToolsType::DotProduct(centerDiff, box.GetAxis(0));
@@ -73,7 +73,7 @@ void Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::Find()
     auto relativeVelocityDotY = Vector3ToolsType::DotProduct(relativeVelocity, box.GetAxis(1));
     auto relativeVelocityDotZ = Vector3ToolsType::DotProduct(relativeVelocity, box.GetAxis(2));
 
-    // ½«×ø±ê¿ò·­×ªµ½µÚÒ»¸ö°Ë·ÖÔ²¡£
+    // å°†åæ ‡æ¡†ç¿»è½¬åˆ°ç¬¬ä¸€ä¸ªå…«åˆ†åœ†ã€‚
     auto signX = 1;
     if (centerDiffDotX < MathType::GetValue(0))
     {
@@ -98,7 +98,7 @@ void Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::Find()
         signZ = -1;
     }
 
-    // ½»²æµã×ø±ê¡£
+    // äº¤å‰ç‚¹åæ ‡ã€‚
     auto result = 0;
 
     if (centerDiffDotX <= box.GetExtent(0))
@@ -107,7 +107,7 @@ void Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::Find()
         {
             if (centerDiffDotZ <= box.GetExtent(2))
             {
-                // ÇòÌåÖĞĞÄÔÚºĞ×ÓÄÚ²¿¡£ ½«Æä·µ»ØÎª½Ó´¥µã£¬µ«±¨¸æ¡°ÆäËû¡±½»²æµãÀàĞÍ¡£
+                // çƒä½“ä¸­å¿ƒåœ¨ç›’å­å†…éƒ¨ã€‚ å°†å…¶è¿”å›ä¸ºæ¥è§¦ç‚¹ï¼Œä½†æŠ¥å‘Šâ€œå…¶ä»–â€äº¤å‰ç‚¹ç±»å‹ã€‚
                 this->SetContactTime(MathType::GetValue(0));
                 contactPoint = sphere.GetCenter();
                 this->SetIntersectionType(IntersectionType::Other);
@@ -115,7 +115,7 @@ void Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::Find()
             }
             else
             {
-                // ÇòÃæÔÚZÖáÉÏµÄÉÏ·½¡£
+                // çƒé¢åœ¨Zè½´ä¸Šçš„ä¸Šæ–¹ã€‚
                 result = FindFaceRegionIntersection(box.GetExtent(0), box.GetExtent(1), box.GetExtent(2), centerDiffDotX, centerDiffDotY, centerDiffDotZ, relativeVelocityDotX, relativeVelocityDotY, relativeVelocityDotZ, true);
             }
         }
@@ -123,12 +123,12 @@ void Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::Find()
         {
             if (centerDiffDotZ <= box.GetExtent(2))
             {
-                // ÇòÃæÔÚYÖáÉÏµÄÉÏ·½¡£
+                // çƒé¢åœ¨Yè½´ä¸Šçš„ä¸Šæ–¹ã€‚
                 result = FindFaceRegionIntersection(box.GetExtent(0), box.GetExtent(2), box.GetExtent(1), centerDiffDotX, centerDiffDotZ, centerDiffDotY, relativeVelocityDotX, relativeVelocityDotZ, relativeVelocityDotY, true);
             }
             else
             {
-                // ÇòÃæÎ»ÓÚÃæyºÍzĞÎ³ÉµÄ±ßÔµÉÏ·½¡£
+                // çƒé¢ä½äºé¢yå’Œzå½¢æˆçš„è¾¹ç¼˜ä¸Šæ–¹ã€‚
                 result = FindEdgeRegionIntersection(box.GetExtent(1), box.GetExtent(0), box.GetExtent(2), centerDiffDotY, centerDiffDotX, centerDiffDotZ, relativeVelocityDotY, relativeVelocityDotX, relativeVelocityDotZ, true);
             }
         }
@@ -139,12 +139,12 @@ void Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::Find()
         {
             if (centerDiffDotZ <= box.GetExtent(2))
             {
-                // ÇòÃæÔÚXÖáÉÏµÄÉÏ·½¡£
+                // çƒé¢åœ¨Xè½´ä¸Šçš„ä¸Šæ–¹ã€‚
                 result = FindFaceRegionIntersection(box.GetExtent(1), box.GetExtent(2), box.GetExtent(0), centerDiffDotY, centerDiffDotZ, centerDiffDotX, relativeVelocityDotY, relativeVelocityDotZ, relativeVelocityDotX, true);
             }
             else
             {
-                // ÇòÌåÔÚÃæxºÍzĞÎ³ÉµÄ±ßÔµÉÏ·½¡£
+                // çƒä½“åœ¨é¢xå’Œzå½¢æˆçš„è¾¹ç¼˜ä¸Šæ–¹ã€‚
                 result = FindEdgeRegionIntersection(box.GetExtent(0), box.GetExtent(1), box.GetExtent(2), centerDiffDotX, centerDiffDotY, centerDiffDotZ, relativeVelocityDotX, relativeVelocityDotY, relativeVelocityDotZ, true);
             }
         }
@@ -152,12 +152,12 @@ void Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::Find()
         {
             if (centerDiffDotZ <= box.GetExtent(2))
             {
-                // ÇòÌåÎ»ÓÚÃæxºÍyĞÎ³ÉµÄ±ßÔµÉÏ·½¡£
+                // çƒä½“ä½äºé¢xå’Œyå½¢æˆçš„è¾¹ç¼˜ä¸Šæ–¹ã€‚
                 result = FindEdgeRegionIntersection(box.GetExtent(0), box.GetExtent(2), box.GetExtent(1), centerDiffDotX, centerDiffDotZ, centerDiffDotY, relativeVelocityDotX, relativeVelocityDotZ, relativeVelocityDotY, true);
             }
             else
             {
-                // ÇòÌåÔÚÓÉÃæx£¬y£¬zĞÎ³ÉµÄ½ÇµÄÉÏ·½
+                // çƒä½“åœ¨ç”±é¢xï¼Œyï¼Œzå½¢æˆçš„è§’çš„ä¸Šæ–¹
                 result = FindVertexRegionIntersection(box.GetExtent(0), box.GetExtent(1), box.GetExtent(2), centerDiffDotX, centerDiffDotY, centerDiffDotZ, relativeVelocityDotX, relativeVelocityDotY, relativeVelocityDotZ);
             }
         }
@@ -169,7 +169,7 @@ void Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::Find()
         return;
     }
 
-    // ¼ÆËãÊµ¼ÊµÄÏà½»£¨½«µãÒÆ»ØÊÀ½ç×ø±ê£©¡£
+    // è®¡ç®—å®é™…çš„ç›¸äº¤ï¼ˆå°†ç‚¹ç§»å›ä¸–ç•Œåæ ‡ï¼‰ã€‚
     this->SetIntersectionType(IntersectionType::Point);
     contactPoint = box.GetCenter() + (signX * x) * box.GetAxis(0) + (signY * y) * box.GetAxis(1) + (signZ * z) * box.GetAxis(2);
 }
@@ -183,8 +183,8 @@ Real Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::GetVertexIntersection
                                                                                  Real relativeVelocityDotZ,
                                                                                  Real radiusSqr) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    /// ²éÕÒÖ±ÏßP = Dt£¨ÆäÖĞP = (dx, dy, dz)ºÍ D = (vx, vy, vz)Óëradius^ 2 rsqrµÄÇòÌåÖ®¼äµÄ3DÏßÇò½»µãµÄÊ±¼ä¡£
-    /// ×¢Òâ£º½öÔÚÊµ¼ÊÉÏ´æÔÚ½»²æµãÊ±²ÅÓĞĞ§¡£
+    /// æŸ¥æ‰¾ç›´çº¿P = Dtï¼ˆå…¶ä¸­P = (dx, dy, dz)å’Œ D = (vx, vy, vz)ä¸radius^ 2 rsqrçš„çƒä½“ä¹‹é—´çš„3Dçº¿çƒäº¤ç‚¹çš„æ—¶é—´ã€‚
+    /// æ³¨æ„ï¼šä»…åœ¨å®é™…ä¸Šå­˜åœ¨äº¤å‰ç‚¹æ—¶æ‰æœ‰æ•ˆã€‚
 
     const auto velocitySqr = relativeVelocityDotX * relativeVelocityDotX + relativeVelocityDotY * relativeVelocityDotY + relativeVelocityDotZ * relativeVelocityDotZ;
     const auto dot = diffX * relativeVelocityDotX + diffY * relativeVelocityDotY + diffZ * relativeVelocityDotZ;
@@ -201,8 +201,8 @@ Real Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::GetEdgeIntersection(R
                                                                                Real velocitySqr,
                                                                                Real radiusSqr) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    /// ²éÕÒÏßP = Dt£¨ÆäÖĞP = (dx,dz)ºÍD = (vx, vz)£©Óëradius^ 2 rsqrµÄÔ²Ö®¼äµÄ¶şÎ¬ÏßÔ²½»µãµÄÊ±¼ä¡£
-    /// ×¢Òâ£º½öÔÚÊµ¼ÊÉÏ´æÔÚ½»²æµãÊ±²ÅÓĞĞ§¡£
+    /// æŸ¥æ‰¾çº¿P = Dtï¼ˆå…¶ä¸­P = (dx,dz)å’ŒD = (vx, vz)ï¼‰ä¸radius^ 2 rsqrçš„åœ†ä¹‹é—´çš„äºŒç»´çº¿åœ†äº¤ç‚¹çš„æ—¶é—´ã€‚
+    /// æ³¨æ„ï¼šä»…åœ¨å®é™…ä¸Šå­˜åœ¨äº¤å‰ç‚¹æ—¶æ‰æœ‰æ•ˆã€‚
 
     const auto dot = relativeVelocityDotX * diffX + relativeVelocityDotZ * diffZ;
     const auto diff = diffX * diffX + diffZ * diffZ - radiusSqr;
@@ -222,19 +222,19 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::FindFaceRegionIntersec
                                                                                      Real relativeVelocityDotZ,
                                                                                      bool aboveFace) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    /// ·µ»ØÃæ+ZÉÏ·½ÇøÓòÖĞµÄÇòºÎÊ±ÒÔ¼°ÊÇ·ñÓëÃæ+Z»òÆäÈÎºÎ¶¥µã»ò±ßÔµÏà½»¡£
-    /// µ±xºÍy×ø±êÔÚxºÍy·¶Î§ÄÚÊ±£¬aboveFaceµÄÊäÈëÎªtrue¡£
-    /// Èç¹û²»ÊÇ£¬¸Ãº¯ÊıÈÔ½«Æğ×÷ÓÃ£¬µ«ÊÇËü±ØĞëÎªfalse£¬ÒÔ±ÜÃâÄ³Ğ©¼ÙÉèxºÍyÔÚ·¶Î§ÄÚµÄ¼ì²é¡£
-    /// ´Ë¹¦ÄÜ¼ì²éÃæzÒÔ¼°ËÙ¶È³¯ÏòÃæµÄ¶¥µãºÍÁ½¸ö±ß¡£
+    /// è¿”å›é¢+Zä¸Šæ–¹åŒºåŸŸä¸­çš„çƒä½•æ—¶ä»¥åŠæ˜¯å¦ä¸é¢+Zæˆ–å…¶ä»»ä½•é¡¶ç‚¹æˆ–è¾¹ç¼˜ç›¸äº¤ã€‚
+    /// å½“xå’Œyåæ ‡åœ¨xå’ŒyèŒƒå›´å†…æ—¶ï¼ŒaboveFaceçš„è¾“å…¥ä¸ºtrueã€‚
+    /// å¦‚æœä¸æ˜¯ï¼Œè¯¥å‡½æ•°ä»å°†èµ·ä½œç”¨ï¼Œä½†æ˜¯å®ƒå¿…é¡»ä¸ºfalseï¼Œä»¥é¿å…æŸäº›å‡è®¾xå’Œyåœ¨èŒƒå›´å†…çš„æ£€æŸ¥ã€‚
+    /// æ­¤åŠŸèƒ½æ£€æŸ¥é¢zä»¥åŠé€Ÿåº¦æœå‘é¢çš„é¡¶ç‚¹å’Œä¸¤ä¸ªè¾¹ã€‚
 
-    // Èç¹ûÃæÉÏ·½£¬Ôò¼ì²éÊÇ·ñÒÑ¾­Ïà½»¡£
+    // å¦‚æœé¢ä¸Šæ–¹ï¼Œåˆ™æ£€æŸ¥æ˜¯å¦å·²ç»ç›¸äº¤ã€‚
     if (centerDiffDotZ <= extentZ + sphere.GetRadius() && aboveFace)
     {
         this->SetContactTime(MathType::GetValue(0));
         return -1;
     }
 
-    /// ¼ì²éÊÇ·ñÈİÒ×ËÉ¿ª£¨ÑØZÖáÒÆ¶¯£©¡£
+    /// æ£€æŸ¥æ˜¯å¦å®¹æ˜“æ¾å¼€ï¼ˆæ²¿Zè½´ç§»åŠ¨ï¼‰ã€‚
     if (MathType::GetValue(0) <= relativeVelocityDotZ)
     {
         return 0;
@@ -252,8 +252,8 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::FindFaceRegionIntersec
     auto signX = 0;
     auto signY = 0;
 
-    /// ÕâÑù¿ÉÒÔÈ·¶¨¿òµÄÇ°½ø·½Ïò£¬²¢ÕÒµ½CrossXºÍCrossYµÄÖµ£¬Èç¹ûÇòĞÄ²»´©¹ı¿ò£¬ÔòËüÃÇµÄÖµÎªÕı¡£
-    /// È»ºóÖ»ĞèÒª¼ì²éÁ½¸ö±ß£¬ÃæºÍ¶¥µãÊÇ·ñÏà½»¡£
+    /// è¿™æ ·å¯ä»¥ç¡®å®šæ¡†çš„å‰è¿›æ–¹å‘ï¼Œå¹¶æ‰¾åˆ°CrossXå’ŒCrossYçš„å€¼ï¼Œå¦‚æœçƒå¿ƒä¸ç©¿è¿‡æ¡†ï¼Œåˆ™å®ƒä»¬çš„å€¼ä¸ºæ­£ã€‚
+    /// ç„¶ååªéœ€è¦æ£€æŸ¥ä¸¤ä¸ªè¾¹ï¼Œé¢å’Œé¡¶ç‚¹æ˜¯å¦ç›¸äº¤ã€‚
 
     if (MathType::GetValue(0) <= relativeVelocityDotX)
     {
@@ -281,22 +281,22 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::FindFaceRegionIntersec
         crossY = relativeVelocityDotZ * diffY - relativeVelocityDotY * diffZ;
     }
 
-    // Ô²ÑØx±ßÔµÏà½»Âğ£¿
+    // åœ†æ²¿xè¾¹ç¼˜ç›¸äº¤å—ï¼Ÿ
     if (sphere.GetRadius() * relativeVelocityDotX * signX < crossX)
     {
         if (radiusSqr * velocitySqrX < crossX * crossX)
         {
-            // ÇòÌåÔÚXÖá£¨ÈÎÒ»²à£©ÉÏµÄ¹ı³å¿ò¡£
+            // çƒä½“åœ¨Xè½´ï¼ˆä»»ä¸€ä¾§ï¼‰ä¸Šçš„è¿‡å†²æ¡†ã€‚
             return 0;
         }
 
-        // Ô²ÊÇ·ñ´¥¼°y±ßÔµ£¿
+        // åœ†æ˜¯å¦è§¦åŠyè¾¹ç¼˜ï¼Ÿ
         if (sphere.GetRadius() * relativeVelocityDotY * signY < crossY)
         {
-            // Ç±ÔÚµÄ¶¥µãÏà½»¡£
+            // æ½œåœ¨çš„é¡¶ç‚¹ç›¸äº¤ã€‚
             if (radiusSqr * velocitySqrY < crossY * crossY)
             {
-                // ÇòÌåÔÚyÖá£¨ÈÎÒ»²à£©ÉÏµÄ¹ı³å¿ò¡£
+                // çƒä½“åœ¨yè½´ï¼ˆä»»ä¸€ä¾§ï¼‰ä¸Šçš„è¿‡å†²æ¡†ã€‚
                 return 0;
             }
 
@@ -305,7 +305,7 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::FindFaceRegionIntersec
             const auto cross = Vector3ToolsType::CrossProduct(diff, relVelocity);
             if (radiusSqr * Vector3ToolsType::GetLengthSquared(relVelocity) < Vector3ToolsType::GetLengthSquared(cross))
             {
-                // Ô²³¬³öÁË½ÇÂäµÄ¿ò¡£
+                // åœ†è¶…å‡ºäº†è§’è½çš„æ¡†ã€‚
                 return 0;
             }
 
@@ -315,7 +315,7 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::FindFaceRegionIntersec
         }
         else
         {
-            // x±ß½»µã
+            // xè¾¹äº¤ç‚¹
             this->SetContactTime(GetEdgeIntersection(diffX, diffZ, relativeVelocityDotX, relativeVelocityDotZ, velocitySqrX, radiusSqr));
             x = extentX * signX;
             y = centerDiffDotY + relativeVelocityDotY * this->GetContactTime();
@@ -323,13 +323,13 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::FindFaceRegionIntersec
     }
     else
     {
-        // Ô²ÊÇ·ñ´¥¼°y±ßÔµ£¿
+        // åœ†æ˜¯å¦è§¦åŠyè¾¹ç¼˜ï¼Ÿ
         if (sphere.GetRadius() * relativeVelocityDotY * signY < crossY)
         {
-            // Ç±ÔÚµÄy±ßÏà½»¡£
+            // æ½œåœ¨çš„yè¾¹ç›¸äº¤ã€‚
             if (radiusSqr * velocitySqrY < crossY * crossY)
             {
-                // ÇòÌåÔÚyÖá£¨ÈÎÒ»²à£©ÉÏµÄ¹ı³å¿ò¡£
+                // çƒä½“åœ¨yè½´ï¼ˆä»»ä¸€ä¾§ï¼‰ä¸Šçš„è¿‡å†²æ¡†ã€‚
                 return 0;
             }
 
@@ -339,14 +339,14 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::FindFaceRegionIntersec
         }
         else
         {
-            // Ãæ²¿Ïà½»£¨¼òµ¥£©¡£
+            // é¢éƒ¨ç›¸äº¤ï¼ˆç®€å•ï¼‰ã€‚
             this->SetContactTime((-diffZ + sphere.GetRadius()) / relativeVelocityDotZ);
             x = this->GetContactTime() * relativeVelocityDotX + centerDiffDotX;
             y = this->GetContactTime() * relativeVelocityDotY + centerDiffDotY;
         }
     }
 
-    // ÈÎºÎ½»µãµÄz×ø±ê±ØĞëÊÇzµÄÃæ¡£
+    // ä»»ä½•äº¤ç‚¹çš„zåæ ‡å¿…é¡»æ˜¯zçš„é¢ã€‚
     z = extentZ;
     return 1;
 }
@@ -362,15 +362,15 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::FindJustEdgeIntersecti
                                                                                    Real relativeVelocityDotY,
                                                                                    Real relativeVelocityDotZ) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    /// ²éÕÒÔ¶Àëy·½ÏòµÄ±ßµÄµãdxºÍdzµÄ½»µã¡£ ÇòÌåÔÚcyµã´¦£¬±ßÔµÔÚexµã´¦¡£ ¼ì²éËÙ¶È³¯ÏòµÄ±ßÔµºÍ¶¥µã¡£
+    /// æŸ¥æ‰¾è¿œç¦»yæ–¹å‘çš„è¾¹çš„ç‚¹dxå’Œdzçš„äº¤ç‚¹ã€‚ çƒä½“åœ¨cyç‚¹å¤„ï¼Œè¾¹ç¼˜åœ¨exç‚¹å¤„ã€‚ æ£€æŸ¥é€Ÿåº¦æœå‘çš„è¾¹ç¼˜å’Œé¡¶ç‚¹ã€‚
 
     auto radiusSqr = sphere.GetRadius() * sphere.GetRadius();
     auto diffY = MathType::GetValue(0);
     auto crossZ = MathType::GetValue(0);
-    auto crossX = MathType::GetValue(0);  // ¿ÉÄÜµÄ±ß/¶¥µãÏà½»
+    auto crossX = MathType::GetValue(0);  // å¯èƒ½çš„è¾¹/é¡¶ç‚¹ç›¸äº¤
     auto signY = 0;
 
-    // ¸ù¾İVyµÄ·ûºÅ£¬Ñ¡ÔñËÙ¶È³¯Ïò±ßÔµµÄ¶¥µã£¬²¢´´½¨crossXºÍcrossZ£¬ÒÔ±ãÈç¹ûÇòÌåÖĞĞÄÔ½¹ı¸Ã±ßÔµ£¬ËüÃÇµÄ·ûºÅ½«Ê¼ÖÕÎªÕı¡£
+    // æ ¹æ®Vyçš„ç¬¦å·ï¼Œé€‰æ‹©é€Ÿåº¦æœå‘è¾¹ç¼˜çš„é¡¶ç‚¹ï¼Œå¹¶åˆ›å»ºcrossXå’ŒcrossZï¼Œä»¥ä¾¿å¦‚æœçƒä½“ä¸­å¿ƒè¶Šè¿‡è¯¥è¾¹ç¼˜ï¼Œå®ƒä»¬çš„ç¬¦å·å°†å§‹ç»ˆä¸ºæ­£ã€‚
 
     if (MathType::GetValue(0) <= relativeVelocityDotY)
     {
@@ -387,20 +387,20 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::FindJustEdgeIntersecti
         crossX = diffY * relativeVelocityDotZ - diffZ * relativeVelocityDotY;
     }
 
-    // ¼ì²é´ËÏà½»»áÔÚ±ßÔµµÄÄÄ¸öÎ»ÖÃ·¢Éú¡£
+    // æ£€æŸ¥æ­¤ç›¸äº¤ä¼šåœ¨è¾¹ç¼˜çš„å“ªä¸ªä½ç½®å‘ç”Ÿã€‚
     if (MathType::GetValue(0) <= crossZ && MathType::GetValue(0) <= crossX && relativeVelocityDotY * relativeVelocityDotY * sphere.GetRadius() * sphere.GetRadius() < crossX * crossX + crossZ * crossZ)
     {
-        // ÇòÌå¿ÉÄÜÓë¶¥µãÏà½»¡£
+        // çƒä½“å¯èƒ½ä¸é¡¶ç‚¹ç›¸äº¤ã€‚
         const Vector3 relVelocity{ relativeVelocityDotX, relativeVelocityDotY, relativeVelocityDotZ };
         const Vector3 diff{ diffX, diffY, diffZ };
         const auto cross = Vector3ToolsType::CrossProduct(diff, relVelocity);
         if (radiusSqr * Vector3ToolsType::GetLengthSquared(relVelocity) < Vector3ToolsType::GetLengthSquared(cross))
         {
-            // ÇòÌå»á³¬³ö¶¥µãÉÏµÄ¿ò¡£
+            // çƒä½“ä¼šè¶…å‡ºé¡¶ç‚¹ä¸Šçš„æ¡†ã€‚
             return 0;
         }
 
-        // ÇòÌåÈ·ÊµÓë¶¥µãÏà½»¡£
+        // çƒä½“ç¡®å®ä¸é¡¶ç‚¹ç›¸äº¤ã€‚
         this->SetContactTime(GetVertexIntersection(diffX, diffY, diffZ, relativeVelocityDotX, relativeVelocityDotY, relativeVelocityDotZ, radiusSqr));
         x = extentX;
         y = signY * extentY;
@@ -408,7 +408,7 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::FindJustEdgeIntersecti
     }
     else
     {
-        // ÇòÌåÓë±ßÏà½»¡£
+        // çƒä½“ä¸è¾¹ç›¸äº¤ã€‚
         auto vsqrX = relativeVelocityDotZ * relativeVelocityDotZ + relativeVelocityDotX * relativeVelocityDotX;
         this->SetContactTime(GetEdgeIntersection(diffX, diffZ, relativeVelocityDotX, relativeVelocityDotZ, vsqrX, radiusSqr));
         x = extentX;
@@ -430,9 +430,9 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::FindEdgeRegionIntersec
                                                                                      Real relativeVelocityDotZ,
                                                                                      bool aboveEdge) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    /// ¼ÙÉèÇòĞÄÔÚxºÍzÆ½ÃæÉÏ·½µÄÇøÓòÖĞ¡£ µ±y×ø±êÔÚy·¶Î§ÄÚÊ±£¬ÉÏ±ßµÄÊäÈëÎªtrue¡£
-    /// Èç¹û²»ÊÇ£¬¸Ãº¯ÊıÈÔ½«Æğ×÷ÓÃ£¬µ«ÊÇ¸Ãº¯Êı±ØĞëÎªfalse£¬ÒÔ±ÜÃâÄ³Ğ©¼ì²é¼ÙÉèyÔÚ·¶Î§ÄÚ¡£
-    /// ¸Ã¹¦ÄÜ¼ì²éÇøÓòÉÏ·½µÄ±ßÔµ£¬²¢¼ì²éÆä³¯ÏòµÄÃæ²¿µÄ¡°Ãæ²¿ÇøÓò¡±¡£
+    /// å‡è®¾çƒå¿ƒåœ¨xå’Œzå¹³é¢ä¸Šæ–¹çš„åŒºåŸŸä¸­ã€‚ å½“yåæ ‡åœ¨yèŒƒå›´å†…æ—¶ï¼Œä¸Šè¾¹çš„è¾“å…¥ä¸ºtrueã€‚
+    /// å¦‚æœä¸æ˜¯ï¼Œè¯¥å‡½æ•°ä»å°†èµ·ä½œç”¨ï¼Œä½†æ˜¯è¯¥å‡½æ•°å¿…é¡»ä¸ºfalseï¼Œä»¥é¿å…æŸäº›æ£€æŸ¥å‡è®¾yåœ¨èŒƒå›´å†…ã€‚
+    /// è¯¥åŠŸèƒ½æ£€æŸ¥åŒºåŸŸä¸Šæ–¹çš„è¾¹ç¼˜ï¼Œå¹¶æ£€æŸ¥å…¶æœå‘çš„é¢éƒ¨çš„â€œé¢éƒ¨åŒºåŸŸâ€ã€‚
 
     auto diffX = centerDiffDotX - extentX;
     auto diffZ = centerDiffDotZ - extentZ;
@@ -443,7 +443,7 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::FindEdgeRegionIntersec
         auto diff = diffX * diffX + diffZ * diffZ - radiusSqr;
         if (diff <= MathType::GetValue(0))
         {
-            // È¦×ÓÒÑ¾­ÓëºĞ×ÓÏà½»ÁË¡£
+            // åœˆå­å·²ç»ä¸ç›’å­ç›¸äº¤äº†ã€‚
             this->SetContactTime(MathType::GetValue(0));
             return -1;
         }
@@ -452,51 +452,51 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::FindEdgeRegionIntersec
     auto dot = relativeVelocityDotX * diffX + relativeVelocityDotZ * diffZ;
     if (MathType::GetValue(0) <= dot)
     {
-        // Ô²È¦Î´ÒÆÏò·½¿ò¡£
+        // åœ†åœˆæœªç§»å‘æ–¹æ¡†ã€‚
         return 0;
     }
 
-    // dotPerpÖµÑØ¸ÃÇøÓòµÄÖĞ¼ä±ßÔµ½«¸ĞĞËÈ¤ÇøÓò·Ö¸î¿ª¡£
+    // dotPerpå€¼æ²¿è¯¥åŒºåŸŸçš„ä¸­é—´è¾¹ç¼˜å°†æ„Ÿå…´è¶£åŒºåŸŸåˆ†å‰²å¼€ã€‚
     auto dotPerp = relativeVelocityDotZ * diffX - relativeVelocityDotX * diffZ;
     if (MathType::GetValue(0) <= dotPerp)
     {
-        // ÇòÃæ³¯+ zÃæÒÆ¶¯¡£
+        // çƒé¢æœ+ zé¢ç§»åŠ¨ã€‚
         if (MathType::GetValue(0) <= relativeVelocityDotX)
         {
-            // ¾­¹ı½ÇÇò£¬Àë¿ª½ûÇø¡£
+            // ç»è¿‡è§’çƒï¼Œç¦»å¼€ç¦åŒºã€‚
             return 0;
         }
 
-        /// ¾ßÓĞx-z±ßÔµµÄ½»µã¡£ Èç¹û´æÔÚ¡°¹Î²Á¡±±íÃæµÄ¶ÔÏó
-        /// £¨´¹Ö±ÓÚÃæ·¨ÏßµÄËÙ¶È£¬ÒÔ¼°Óë°ë¾¶·½ÏòÆ½ĞĞÓÚÃæ·¨ÏßµÄ½Ó´¥µã£©µÄÎÊÌâ£¬
-        /// Ôò´Ë¼ì²é¿ÉÄÜĞèÒª¸ü¾ß°üÈİĞÔ£¨ÓÉÓÚ¸¡¶¯¶øµ¼ÖÂµÄ½ÏĞ¡¹«²îµÄ´íÎó£©£¬
-        /// ÒòÎª±ßÔµ¼ì²éĞèÒª»ñÈ¡¡°¹Î²Á¡±¶ÔÏó£¨ÒòÎªËüÃÇÓÃ¸Ãµã×²»÷±ßÔµ£©£¬
-        /// ¶øÃæ²¿ÇøÓò¼ì²é½«ÎŞ·¨²¶»ñ¸Ã¶ÔÏó£¬ÒòÎª¶ÔÏóÃ»ÓĞ³¯×ÅÃæ²¿ÒÆ¶¯¡£
+        /// å…·æœ‰x-zè¾¹ç¼˜çš„äº¤ç‚¹ã€‚ å¦‚æœå­˜åœ¨â€œåˆ®æ“¦â€è¡¨é¢çš„å¯¹è±¡
+        /// ï¼ˆå‚ç›´äºé¢æ³•çº¿çš„é€Ÿåº¦ï¼Œä»¥åŠä¸åŠå¾„æ–¹å‘å¹³è¡Œäºé¢æ³•çº¿çš„æ¥è§¦ç‚¹ï¼‰çš„é—®é¢˜ï¼Œ
+        /// åˆ™æ­¤æ£€æŸ¥å¯èƒ½éœ€è¦æ›´å…·åŒ…å®¹æ€§ï¼ˆç”±äºæµ®åŠ¨è€Œå¯¼è‡´çš„è¾ƒå°å…¬å·®çš„é”™è¯¯ï¼‰ï¼Œ
+        /// å› ä¸ºè¾¹ç¼˜æ£€æŸ¥éœ€è¦è·å–â€œåˆ®æ“¦â€å¯¹è±¡ï¼ˆå› ä¸ºå®ƒä»¬ç”¨è¯¥ç‚¹æ’å‡»è¾¹ç¼˜ï¼‰ï¼Œ
+        /// è€Œé¢éƒ¨åŒºåŸŸæ£€æŸ¥å°†æ— æ³•æ•è·è¯¥å¯¹è±¡ï¼Œå› ä¸ºå¯¹è±¡æ²¡æœ‰æœç€é¢éƒ¨ç§»åŠ¨ã€‚
         if (dotPerp <= -sphere.GetRadius() * relativeVelocityDotX)
         {
             return FindJustEdgeIntersection(centerDiffDotY, extentZ, extentY, extentX, diffZ, diffX, relativeVelocityDotZ, relativeVelocityDotY, relativeVelocityDotX);
         }
 
-        // ÏÖÔÚ£¬¼ì²ézµÄÃæÊÇ·ñÓĞ½»µã¡£
+        // ç°åœ¨ï¼Œæ£€æŸ¥zçš„é¢æ˜¯å¦æœ‰äº¤ç‚¹ã€‚
         return FindFaceRegionIntersection(extentX, extentY, extentZ, centerDiffDotX, centerDiffDotY, centerDiffDotZ, relativeVelocityDotX, relativeVelocityDotY, relativeVelocityDotZ, false);
     }
     else
     {
-        // ÇòÃæ³¯+ xÃæÒÆ¶¯¡£
+        // çƒé¢æœ+ xé¢ç§»åŠ¨ã€‚
         if (MathType::GetValue(0) <= relativeVelocityDotZ)
         {
-            // ¾­¹ı½ÇÇò£¬Àë¿ª½ûÇø¡£
+            // ç»è¿‡è§’çƒï¼Œç¦»å¼€ç¦åŒºã€‚
             return 0;
         }
 
-        /// ¼ì²éÓëx-z±ßÔµµÄ½»µã¡£ Çë²ÎÔÄÉÏÃæÓĞ¹Ø¡°¹ÎÈ¡¡±¶ÔÏóµÄ×¢ÊÍ¡£
+        /// æ£€æŸ¥ä¸x-zè¾¹ç¼˜çš„äº¤ç‚¹ã€‚ è¯·å‚é˜…ä¸Šé¢æœ‰å…³â€œåˆ®å–â€å¯¹è±¡çš„æ³¨é‡Šã€‚
         if (sphere.GetRadius() * relativeVelocityDotZ <= dotPerp)
         {
-            // ¿ÉÄÜµÄ±ß/¶¥µãÏà½»¡£
+            // å¯èƒ½çš„è¾¹/é¡¶ç‚¹ç›¸äº¤ã€‚
             return FindJustEdgeIntersection(centerDiffDotY, extentX, extentY, extentZ, diffX, diffZ, relativeVelocityDotX, relativeVelocityDotY, relativeVelocityDotZ);
         }
 
-        // ÏÖÔÚ£¬¼ì²éxµÄ½»µã¡£
+        // ç°åœ¨ï¼Œæ£€æŸ¥xçš„äº¤ç‚¹ã€‚
         const auto result = FindFaceRegionIntersection(extentZ, extentY, extentX, centerDiffDotZ, centerDiffDotY, centerDiffDotX, relativeVelocityDotZ, relativeVelocityDotY, relativeVelocityDotX, false);
         std::swap(x, z);
         return result;
@@ -514,7 +514,7 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::FindVertexRegionInters
                                                                                        Real relativeVelocityDotY,
                                                                                        Real relativeVelocityDotZ) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    /// ¼ÙÉèÇòÌåÎ»ÓÚ¶¥µã +ex, +ey, +ezÉÏ·½¡£
+    /// å‡è®¾çƒä½“ä½äºé¡¶ç‚¹ +ex, +ey, +ezä¸Šæ–¹ã€‚
     auto diffX = centerDiffDotX - extentX;
     auto diffY = centerDiffDotY - extentY;
     auto diffZ = centerDiffDotZ - extentZ;
@@ -522,29 +522,29 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::FindVertexRegionInters
     auto diff = diffX * diffX + diffY * diffY + diffZ * diffZ - radiusSqr;
     if (diff <= MathType::GetValue(0))
     {
-        // ÇòÒÑ¾­ÓëºĞ×ÓÏà½»ÁË¡£
+        // çƒå·²ç»ä¸ç›’å­ç›¸äº¤äº†ã€‚
         this->SetContactTime(MathType::GetValue(0));
         return -1;
     }
 
     if (MathType::GetValue(0) <= relativeVelocityDotX * diffX + relativeVelocityDotY * diffY + relativeVelocityDotZ * diffZ)
     {
-        // ÇòÌåÎ´ÒÆÏòºĞ×Ó¡£
+        // çƒä½“æœªç§»å‘ç›’å­ã€‚
         return 0;
     }
 
-    /// ¸Ã¿ò¿É·ÖÎª3¸öÇøÓò£¬´Ó¶ø¼ò»¯ÁË²é¿´ÇòÌå×²»÷µÄ¼ì²é¡£ ÇøÓò±»ÄÄ¸ö±ßÔµ£¨ÓÉ¶¥µãºÍÄ³¸öÖáĞÎ³É£©×î½Ó½üËÙ¶ÈÊ¸Á¿»®·Ö¡£
+    /// è¯¥æ¡†å¯åˆ†ä¸º3ä¸ªåŒºåŸŸï¼Œä»è€Œç®€åŒ–äº†æŸ¥çœ‹çƒä½“æ’å‡»çš„æ£€æŸ¥ã€‚ åŒºåŸŸè¢«å“ªä¸ªè¾¹ç¼˜ï¼ˆç”±é¡¶ç‚¹å’ŒæŸä¸ªè½´å½¢æˆï¼‰æœ€æ¥è¿‘é€Ÿåº¦çŸ¢é‡åˆ’åˆ†ã€‚
 
-    /// Òª¼ì²éËüÊÇ·ñÅöµ½¶¥µã£¬Çë²é¿´ËüÒª³¯ÏòµÄ±ßÔµ£¨E£©¡£
-    /// ´´½¨Ò»¸öÓÉÆäËûÁ½¸ö±ß£¨ÒÔEÎªÆ½Ãæ·¨Ïß£©ĞÎ³ÉµÄÆ½Ãæ£¬¶¥µãÎªÔ­µã¡£
-    /// ÑØ¸ÃÆ½ÃæÖĞÓÉÇòĞÄºÍËÙ¶È×÷Îª·½ÏòµÄÖ±ÏßµÄÖáÉÏµÄ½Ø¾à½«ÎªfCrossAxis/fVEdge¡£
-    /// Òò´Ë£¬´ÓÔ­µãµ½ËÙ¶È·½ÏòÉÏÓëÇòÌåµÄÖ±ÏßÏà½»µÄÆ½ÃæÖĞµÄµãµÄ¾àÀë½«ÊÇÕâÁ½¸ö½Ø¾àµÄÆ½·½ºÍ¡£
-    /// Èç¹û¸Ã×ÜºÍĞ¡ÓÚ°ë¾¶µÄÆ½·½£¬ÔòÇòÌå½«×²»÷¶¥µã£¬·ñÔòËü½«¼ÌĞø¾­¹ı¶¥µã¡£
-    /// Èç¹ûÎ´ÃüÖĞ£¬ÔòÓÉÓÚÖªµÀºĞ×ÓÔÚÄÄ¸ö±ßÔµ¸½½ü£¬Òò´Ë¿ÉÒÔÊ¹ÓÃ²éÕÒ±ßÔµÇøÓò²âÊÔ¡£
+    /// è¦æ£€æŸ¥å®ƒæ˜¯å¦ç¢°åˆ°é¡¶ç‚¹ï¼Œè¯·æŸ¥çœ‹å®ƒè¦æœå‘çš„è¾¹ç¼˜ï¼ˆEï¼‰ã€‚
+    /// åˆ›å»ºä¸€ä¸ªç”±å…¶ä»–ä¸¤ä¸ªè¾¹ï¼ˆä»¥Eä¸ºå¹³é¢æ³•çº¿ï¼‰å½¢æˆçš„å¹³é¢ï¼Œé¡¶ç‚¹ä¸ºåŸç‚¹ã€‚
+    /// æ²¿è¯¥å¹³é¢ä¸­ç”±çƒå¿ƒå’Œé€Ÿåº¦ä½œä¸ºæ–¹å‘çš„ç›´çº¿çš„è½´ä¸Šçš„æˆªè·å°†ä¸ºfCrossAxis/fVEdgeã€‚
+    /// å› æ­¤ï¼Œä»åŸç‚¹åˆ°é€Ÿåº¦æ–¹å‘ä¸Šä¸çƒä½“çš„ç›´çº¿ç›¸äº¤çš„å¹³é¢ä¸­çš„ç‚¹çš„è·ç¦»å°†æ˜¯è¿™ä¸¤ä¸ªæˆªè·çš„å¹³æ–¹å’Œã€‚
+    /// å¦‚æœè¯¥æ€»å’Œå°äºåŠå¾„çš„å¹³æ–¹ï¼Œåˆ™çƒä½“å°†æ’å‡»é¡¶ç‚¹ï¼Œå¦åˆ™å®ƒå°†ç»§ç»­ç»è¿‡é¡¶ç‚¹ã€‚
+    /// å¦‚æœæœªå‘½ä¸­ï¼Œåˆ™ç”±äºçŸ¥é“ç›’å­åœ¨å“ªä¸ªè¾¹ç¼˜é™„è¿‘ï¼Œå› æ­¤å¯ä»¥ä½¿ç”¨æŸ¥æ‰¾è¾¹ç¼˜åŒºåŸŸæµ‹è¯•ã€‚
 
-    /// Í¬Ñù£¬ÓÉÓÚÌõ¼şµÄÏŞÖÆ£¬½ö»á³öÏÖfCrossEdgeÖµµÄÕâÁù¸öÇé¿ö£¨Ã¿¸öÇøÓòÁ½¸ö£¬ÒòÎªfCrossEdge¿ÉÒÔÎª+»ò-£©¡£
+    /// åŒæ ·ï¼Œç”±äºæ¡ä»¶çš„é™åˆ¶ï¼Œä»…ä¼šå‡ºç°fCrossEdgeå€¼çš„è¿™å…­ä¸ªæƒ…å†µï¼ˆæ¯ä¸ªåŒºåŸŸä¸¤ä¸ªï¼Œå› ä¸ºfCrossEdgeå¯ä»¥ä¸º+æˆ–-ï¼‰ã€‚
 
-    /// µÚÈıÖÖÇé¿öÒ²»áÊ°È¡D = VµÄÇé¿ö£¬´Ó¶øµ¼ÖÂÁã½»²æ¡£
+    /// ç¬¬ä¸‰ç§æƒ…å†µä¹Ÿä¼šæ‹¾å–D = Vçš„æƒ…å†µï¼Œä»è€Œå¯¼è‡´é›¶äº¤å‰ã€‚
 
     auto crossX = relativeVelocityDotY * diffZ - relativeVelocityDotZ * diffY;
     auto crossY = relativeVelocityDotX * diffZ - relativeVelocityDotZ * diffX;
@@ -556,10 +556,10 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::FindVertexRegionInters
     auto relativeVelocityDotYSqr = relativeVelocityDotY * relativeVelocityDotY;
     auto relativeVelocityDotZSqr = relativeVelocityDotZ * relativeVelocityDotZ;
 
-    // Óë¶¥µãÏà½»£¿
+    // ä¸é¡¶ç‚¹ç›¸äº¤ï¼Ÿ
     if ((crossY < MathType::GetValue(0) && MathType::GetValue(0) <= crossZ && crossYSqr + crossZSqr <= radiusSqr * relativeVelocityDotXSqr) || (crossZ < MathType::GetValue(0) && crossX < MathType::GetValue(0) && crossXSqr + crossZSqr <= radiusSqr * relativeVelocityDotYSqr) || (MathType::GetValue(0) <= crossY && MathType::GetValue(0) <= crossX && crossXSqr + crossYSqr <= radiusSqr * relativeVelocityDotZSqr))
     {
-        // ±ê×¼ÏßÇò½»µã¡£
+        // æ ‡å‡†çº¿çƒäº¤ç‚¹ã€‚
         this->SetContactTime(GetVertexIntersection(diffX, diffY, diffZ, relativeVelocityDotX, relativeVelocityDotY, relativeVelocityDotZ, sphere.GetRadius() * sphere.GetRadius()));
         x = this->GetContactTime() * relativeVelocityDotX + centerDiffDotX;
         y = this->GetContactTime() * relativeVelocityDotY + centerDiffDotY;
@@ -568,19 +568,19 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::FindVertexRegionInters
     }
     else if (crossY < MathType::GetValue(0) && MathType::GetValue(0) <= crossZ)
     {
-        // x±ßÔµÇøÓò£¬¼ì²éy£¬zÆ½Ãæ¡£
+        // xè¾¹ç¼˜åŒºåŸŸï¼Œæ£€æŸ¥yï¼Œzå¹³é¢ã€‚
         const auto result = FindEdgeRegionIntersection(extentY, extentX, extentZ, centerDiffDotY, centerDiffDotX, centerDiffDotZ, relativeVelocityDotY, relativeVelocityDotX, relativeVelocityDotZ, false);
         std::swap(x, y);
         return result;
     }
     else if (crossZ < MathType::GetValue(0) && crossX < MathType::GetValue(0))
     {
-        // y±ßÔµÇøÓò£¬¼ì²éx£¬zÆ½Ãæ¡£
+        // yè¾¹ç¼˜åŒºåŸŸï¼Œæ£€æŸ¥xï¼Œzå¹³é¢ã€‚
         return FindEdgeRegionIntersection(extentX, extentY, extentZ, centerDiffDotX, centerDiffDotY, centerDiffDotZ, relativeVelocityDotX, relativeVelocityDotY, relativeVelocityDotZ, false);
     }
     else  // crossY >= 0 && crossX >= 0
     {
-        // z±ßÔµÇøÓò£¬¼ì²éx£¬yÆ½Ãæ¡£
+        // zè¾¹ç¼˜åŒºåŸŸï¼Œæ£€æŸ¥xï¼Œyå¹³é¢ã€‚
         const auto result = FindEdgeRegionIntersection(extentX, extentZ, extentY, centerDiffDotX, centerDiffDotZ, centerDiffDotY, relativeVelocityDotX, relativeVelocityDotZ, relativeVelocityDotY, false);
         std::swap(z, y);
         return result;

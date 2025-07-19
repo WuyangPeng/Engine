@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:30)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:30)
 
 #ifndef MATHEMATICS_INTERSECTION_TEST_INTERSECTOR_AXIS_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_TEST_INTERSECTOR_AXIS_ACHIEVE_H
@@ -158,97 +158,97 @@ typename Mathematics::TestIntersectorAxis<Real>::Projections Mathematics::TestIn
 template <typename Real>
 void Mathematics::TestIntersectorAxis<Real>::Test(const Vector3Type& axis, const Vector3Type& velocity, Real min0, Real max0, Real min1, Real max1, Real tmax) noexcept
 {
-    /// ¾²Ì¬·ÖÀëÖá²âÊÔ¡£ Èç¹ûÔÚÊ±¼ä¼ä¸ô£¨¼´¿ìËÙÍË³ö£©ÖĞobject0ºÍobject1Ã»ÓĞÔÚÈÎºÎ·Ö¸ôÖá( TFirst > TLast || TFirst > TMax )ÉÏµÄ¼ä¸ô[0£¬TMax]ÖĞÏà½»£¬Ôò·µ»Øfalse¡£ ·ñÔò·µ»Øtrue¡£
-    //  min0£¬max0£¬min1ºÍmax1ÊÇ½«¶ÔÏóobject0ºÍobject1Í¶Ó°µ½²âÊÔÖáÉÏµÄ×îĞ¡ºÍ×î´óµã¡£
-    // ËÙ¶ÈÎªVelocity1-Velocity0
+    /// é™æ€åˆ†ç¦»è½´æµ‹è¯•ã€‚ å¦‚æœåœ¨æ—¶é—´é—´éš”ï¼ˆå³å¿«é€Ÿé€€å‡ºï¼‰ä¸­object0å’Œobject1æ²¡æœ‰åœ¨ä»»ä½•åˆ†éš”è½´( TFirst > TLast || TFirst > TMax )ä¸Šçš„é—´éš”[0ï¼ŒTMax]ä¸­ç›¸äº¤ï¼Œåˆ™è¿”å›falseã€‚ å¦åˆ™è¿”å›trueã€‚
+    //  min0ï¼Œmax0ï¼Œmin1å’Œmax1æ˜¯å°†å¯¹è±¡object0å’Œobject1æŠ•å½±åˆ°æµ‹è¯•è½´ä¸Šçš„æœ€å°å’Œæœ€å¤§ç‚¹ã€‚
+    // é€Ÿåº¦ä¸ºVelocity1-Velocity0
 
     auto t = Math<Real>::GetValue(0);
     auto speed = Vector3Tools<Real>::DotProduct(axis, velocity);
 
-    if (max1 < min0)  // object1Î»ÓÚobject0µÄ×ó²à
+    if (max1 < min0)  // object1ä½äºobject0çš„å·¦ä¾§
     {
-        if (speed <= Math<Real>::GetValue(0))  // object1Ô¶Àëobject0
+        if (speed <= Math<Real>::GetValue(0))  // object1è¿œç¦»object0
         {
             result = false;
             return;
         }
 
-        // ²éÕÒ¸ÃÖáÉÏµÄÊ×´Î½Ó´¥
+        // æŸ¥æ‰¾è¯¥è½´ä¸Šçš„é¦–æ¬¡æ¥è§¦
         t = (min0 - max1) / speed;
         if (tFirst < t)
         {
             tFirst = t;
         }
 
-        // ¿ìËÙÍË³ö£ºËùĞè¼ä¸ôºóµÄ½»µã
+        // å¿«é€Ÿé€€å‡ºï¼šæ‰€éœ€é—´éš”åçš„äº¤ç‚¹
         if (tmax < tFirst)
         {
             result = false;
             return;
         }
 
-        // ²éÕÒ¸ÃÖáÉÏµÄ×îºóÒ»´Î½Ó´¥Ê±¼ä
+        // æŸ¥æ‰¾è¯¥è½´ä¸Šçš„æœ€åä¸€æ¬¡æ¥è§¦æ—¶é—´
         t = (max0 - min1) / speed;
         if (t < tLast)
         {
             tLast = t;
         }
 
-        // ¿ìËÙÍË³ö£ºËùĞè¼ä¸ôÇ°µÄ½»µã
+        // å¿«é€Ÿé€€å‡ºï¼šæ‰€éœ€é—´éš”å‰çš„äº¤ç‚¹
         if (tLast < tFirst)
         {
             result = false;
             return;
         }
     }
-    else if (max0 < min1)  // object1Î»ÓÚobject0µÄÓÒ²à
+    else if (max0 < min1)  // object1ä½äºobject0çš„å³ä¾§
     {
-        if (Math<Real>::GetValue(0) <= speed)  // object1Ô¶Àëobject0
+        if (Math<Real>::GetValue(0) <= speed)  // object1è¿œç¦»object0
         {
             result = false;
             return;
         }
 
-        // ²éÕÒ¸ÃÖáÉÏµÄÊ×´Î½Ó´¥
+        // æŸ¥æ‰¾è¯¥è½´ä¸Šçš„é¦–æ¬¡æ¥è§¦
         t = (max0 - min1) / speed;
         if (tFirst < t)
         {
             tFirst = t;
         }
 
-        // ¿ìËÙÍË³ö£ºËùĞè¼ä¸ôºóµÄ½»µã
+        // å¿«é€Ÿé€€å‡ºï¼šæ‰€éœ€é—´éš”åçš„äº¤ç‚¹
         if (tmax < tFirst)
         {
             result = false;
             return;
         }
 
-        // ²éÕÒ¸ÃÖáÉÏµÄ×îºóÒ»´Î½Ó´¥Ê±¼ä
+        // æŸ¥æ‰¾è¯¥è½´ä¸Šçš„æœ€åä¸€æ¬¡æ¥è§¦æ—¶é—´
         t = (min0 - max1) / speed;
         if (t < tLast)
         {
             tLast = t;
         }
 
-        // ¿ìËÙÍË³ö£ºËùĞè¼ä¸ôÇ°µÄ½»µã
+        // å¿«é€Ÿé€€å‡ºï¼šæ‰€éœ€é—´éš”å‰çš„äº¤ç‚¹
         if (tLast < tFirst)
         {
             result = false;
             return;
         }
     }
-    else  // ÖØµş¼ä¸ôÉÏµÄobject1ºÍobject0
+    else  // é‡å é—´éš”ä¸Šçš„object1å’Œobject0
     {
         if (Math<Real>::GetValue(0) < speed)
         {
-            // ²éÕÒ¸ÃÖáÉÏµÄ×îºóÒ»´Î½Ó´¥Ê±¼ä
+            // æŸ¥æ‰¾è¯¥è½´ä¸Šçš„æœ€åä¸€æ¬¡æ¥è§¦æ—¶é—´
             t = (max0 - min1) / speed;
             if (t < tLast)
             {
                 tLast = t;
             }
 
-            // ¿ìËÙÍË³ö£ºËùĞè¼ä¸ôÇ°µÄ½»µã
+            // å¿«é€Ÿé€€å‡ºï¼šæ‰€éœ€é—´éš”å‰çš„äº¤ç‚¹
             if (tLast < tFirst)
             {
                 result = false;
@@ -257,14 +257,14 @@ void Mathematics::TestIntersectorAxis<Real>::Test(const Vector3Type& axis, const
         }
         else if (speed < Math<Real>::GetValue(0))
         {
-            //  ²éÕÒ¸ÃÖáÉÏµÄ×îºóÒ»´Î½Ó´¥Ê±¼ä
+            //  æŸ¥æ‰¾è¯¥è½´ä¸Šçš„æœ€åä¸€æ¬¡æ¥è§¦æ—¶é—´
             t = (min0 - max1) / speed;
             if (t < tLast)
             {
                 tLast = t;
             }
 
-            // ¿ìËÙÍË³ö£ºËùĞè¼ä¸ôÇ°µÄ½»µã
+            // å¿«é€Ÿé€€å‡ºï¼šæ‰€éœ€é—´éš”å‰çš„äº¤ç‚¹
             if (tLast < tFirst)
             {
                 result = false;

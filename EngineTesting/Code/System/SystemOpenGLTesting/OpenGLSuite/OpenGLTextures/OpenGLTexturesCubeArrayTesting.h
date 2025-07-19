@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/13 16:40)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/13 16:40)
 
 #ifndef SYSTEM_OPENGL_TESTING_OPENGL_SUITE_OPENGL_TEXTURES_CUBE_ARRAY_TESTING_H
 #define SYSTEM_OPENGL_TESTING_OPENGL_SUITE_OPENGL_TEXTURES_CUBE_ARRAY_TESTING_H
@@ -47,7 +47,7 @@ namespace System
         static constexpr auto textureTarget = TextureTarget::TextureCubeMapArray;
         static constexpr auto openGLData = OpenGLData::Byte;
 
-        static_assert(depth % 6 == 0, "depthÖµ±ØĞëÊÇ6µÄ±¶Êı¡£");
+        static_assert(depth % 6 == 0, "depthå€¼å¿…é¡»æ˜¯6çš„å€æ•°ã€‚");
     };
 }
 

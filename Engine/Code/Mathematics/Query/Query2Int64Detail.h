@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:32)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:32)
 
 #ifndef MATHEMATICS_QUERY_QUERY2_INT64_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY2_INT64_DETAIL_H
@@ -55,8 +55,8 @@ template <typename Real>
 Mathematics::LineQueryType Mathematics::Query2Int64<Real>::ToLine(const Vector2& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_0(0 <= lhsVerticesIndex && lhsVerticesIndex < this->GetNumVertices(), "Ë÷Òı´íÎó£¡");
-    MATHEMATICS_ASSERTION_0(0 <= rhsVerticesIndex && rhsVerticesIndex < this->GetNumVertices(), "Ë÷Òı´íÎó£¡");
+    MATHEMATICS_ASSERTION_0(0 <= lhsVerticesIndex && lhsVerticesIndex < this->GetNumVertices(), "ç´¢å¼•é”™è¯¯ï¼");
+    MATHEMATICS_ASSERTION_0(0 <= rhsVerticesIndex && rhsVerticesIndex < this->GetNumVertices(), "ç´¢å¼•é”™è¯¯ï¼");
 
     const auto vector0 = this->GetVertex(lhsVerticesIndex);
     const auto vector1 = this->GetVertex(rhsVerticesIndex);
@@ -88,9 +88,9 @@ template <typename Real>
 Mathematics::CircumcircleQueryType Mathematics::Query2Int64<Real>::ToCircumcircle(const Vector2& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_0(0 <= lhsVerticesIndex && lhsVerticesIndex < this->GetNumVertices(), "Ë÷Òı´íÎó£¡");
-    MATHEMATICS_ASSERTION_0(0 <= mhsVerticesIndex && mhsVerticesIndex < this->GetNumVertices(), "Ë÷Òı´íÎó£¡");
-    MATHEMATICS_ASSERTION_0(0 <= rhsVerticesIndex && rhsVerticesIndex < this->GetNumVertices(), "Ë÷Òı´íÎó£¡");
+    MATHEMATICS_ASSERTION_0(0 <= lhsVerticesIndex && lhsVerticesIndex < this->GetNumVertices(), "ç´¢å¼•é”™è¯¯ï¼");
+    MATHEMATICS_ASSERTION_0(0 <= mhsVerticesIndex && mhsVerticesIndex < this->GetNumVertices(), "ç´¢å¼•é”™è¯¯ï¼");
+    MATHEMATICS_ASSERTION_0(0 <= rhsVerticesIndex && rhsVerticesIndex < this->GetNumVertices(), "ç´¢å¼•é”™è¯¯ï¼");
 
     const Vector2 lhsVector{ this->GetVertex(lhsVerticesIndex) };
     const Vector2 mhsVector{ this->GetVertex(mhsVerticesIndex) };

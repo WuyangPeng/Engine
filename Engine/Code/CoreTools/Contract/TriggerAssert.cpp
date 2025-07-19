@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/28 15:54)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/28 15:54)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -63,7 +63,7 @@ std::string CoreTools::TriggerAssert::GenerateMessagePrefix(const FunctionDescri
 
 std::string CoreTools::TriggerAssert::GenerateMessagePrefix(const FunctionDescribed& functionDescribed, const std::string& triggerAssertCheckMessage)
 {
-    /// ÏûÏ¢Ç°×º¡£
+    /// æ¶ˆæ¯å‰ç¼€ã€‚
     Format format{ GetMessagePrefix() };
 
     format % triggerAssertCheckMessage % functionDescribed.GetFileName() % functionDescribed.GetCurrentFunction() % functionDescribed.GetLine();
@@ -75,7 +75,7 @@ std::string CoreTools::TriggerAssert::GenerateMessagePrefix(const FunctionDescri
 
 void CoreTools::TriggerAssert::WriteToOutputDebug(const std::string& message) noexcept
 {
-    /// ÏûÏ¢Êä³öµ½µ÷ÊÔ´°¿Ú¡£
+    /// æ¶ˆæ¯è¾“å‡ºåˆ°è°ƒè¯•çª—å£ã€‚
     System::OutputDebugStringWithChar(message.c_str());
 }
 
@@ -85,7 +85,7 @@ void CoreTools::TriggerAssert::WriteToOutputDebug(const std::string& message) no
 
 void CoreTools::TriggerAssert::JudgeUserSelection(const std::string& message) const
 {
-    /// ¸øÓÃ»§Ò»¸ö»ú»áµ÷ÊÔ¶Ïµã£¬¼ÌĞø£¬»òÖÕÖ¹Ö´ĞĞ¡£
+    /// ç»™ç”¨æˆ·ä¸€ä¸ªæœºä¼šè°ƒè¯•æ–­ç‚¹ï¼Œç»§ç»­ï¼Œæˆ–ç»ˆæ­¢æ‰§è¡Œã€‚
     const auto debugMessage = message + GetDebugPrompt();
 
     const auto type = System::MessageBoxSelectionWithChar(debugMessage.c_str(), GetMessageBoxTitle().c_str());
@@ -99,14 +99,14 @@ void CoreTools::TriggerAssert::JudgeSelection(DialogBoxCommand selection, const 
     {
         case DialogBoxCommand::IdYes:
         {
-            /// µ÷ÊÔ¶Ïµã¡£
+            /// è°ƒè¯•æ–­ç‚¹ã€‚
             System::DebugBreak();
 
             break;
         }
         case DialogBoxCommand::IdNo:
         {
-            /// ¼ÌĞøÖ´ĞĞ¡£
+            /// ç»§ç»­æ‰§è¡Œã€‚
 
             break;
         }
@@ -115,12 +115,12 @@ void CoreTools::TriggerAssert::JudgeSelection(DialogBoxCommand selection, const 
         {
             if (triggerAssertCheck == TriggerAssertCheck::Assertion)
             {
-                /// ’³öÒì³£¡£
+                /// æ‹‹å‡ºå¼‚å¸¸ã€‚
                 THROW_EXCEPTION(StringConversion::MultiByteConversionStandard(message))
             }
             else
             {
-                /// ÍË³ö³ÌĞò¡£
+                /// é€€å‡ºç¨‹åºã€‚
                 System::Exit();
             }
 
@@ -131,7 +131,7 @@ void CoreTools::TriggerAssert::JudgeSelection(DialogBoxCommand selection, const 
 
 std::string CoreTools::TriggerAssert::GetMessageBoxTitle()
 {
-    static const auto messageBoxTitle = "¶ÏÑÔÊ§°Ü£¡"s;
+    static const auto messageBoxTitle = "æ–­è¨€å¤±è´¥ï¼"s;
 
     return messageBoxTitle;
 }
@@ -140,28 +140,28 @@ std::string CoreTools::TriggerAssert::GetMessageBoxTitle()
 
 std::string CoreTools::TriggerAssert::GetDebugPrompt()
 {
-    static const auto debugPrompt = "ÄÚ²¿³ÌĞò´íÎó£¬ÊÇ·ñÒª½øĞĞµ÷ÊÔ£¿"s;
+    static const auto debugPrompt = "å†…éƒ¨ç¨‹åºé”™è¯¯ï¼Œæ˜¯å¦è¦è¿›è¡Œè°ƒè¯•ï¼Ÿ"s;
 
     return debugPrompt;
 }
 
 std::string CoreTools::TriggerAssert::GetMessagePrefix()
 {
-    static const auto messagePrefix = "\n%sÊ§°ÜÔÚ%s£¨%s£¬%d£©:\n"s;
+    static const auto messagePrefix = "\n%så¤±è´¥åœ¨%sï¼ˆ%sï¼Œ%dï¼‰:\n"s;
 
     return messagePrefix;
 }
 
 std::string CoreTools::TriggerAssert::GetTriggerAssertCheckInvariant()
 {
-    static const auto triggerAssertCheckInvariant = "²»±äÊ½"s;
+    static const auto triggerAssertCheckInvariant = "ä¸å˜å¼"s;
 
     return triggerAssertCheckInvariant;
 }
 
 std::string CoreTools::TriggerAssert::GetTriggerAssertCheckAssertion()
 {
-    static const auto triggerAssertCheckAssertion = "¶ÏÑÔ"s;
+    static const auto triggerAssertCheckAssertion = "æ–­è¨€"s;
 
     return triggerAssertCheckAssertion;
 }

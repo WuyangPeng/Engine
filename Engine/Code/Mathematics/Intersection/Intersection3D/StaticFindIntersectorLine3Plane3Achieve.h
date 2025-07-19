@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 13:50)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 13:50)
 
 #ifndef MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_PLANE3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_PLANE3_ACHIEVE_H
@@ -59,17 +59,17 @@ void Mathematics::StaticFindIntersectorLine3Plane3<Real>::Find() noexcept
     auto signedDistance = plane.DistanceTo(line.GetOrigin());
     if (MathType::GetZeroTolerance() < MathType::FAbs(directionDotNormal))
     {
-        // ¸ÃÏß²»Æ½ĞĞÓÚÆ½Ãæ£¬Òò´ËËüÃÇ±ØĞëÏà½»¡£
+        // è¯¥çº¿ä¸å¹³è¡Œäºå¹³é¢ï¼Œå› æ­¤å®ƒä»¬å¿…é¡»ç›¸äº¤ã€‚
         lineParameter = -signedDistance / directionDotNormal;
 
         this->SetIntersectionType(IntersectionType::Point);
         return;
     }
 
-    // ÏßºÍÆ½ÃæÆ½ĞĞ¡£ È·¶¨ËüÃÇÔÚÊıÖµÉÏÊÇ·ñ×ã¹»½Ó½üÒÔÖØºÏ¡£
+    // çº¿å’Œå¹³é¢å¹³è¡Œã€‚ ç¡®å®šå®ƒä»¬åœ¨æ•°å€¼ä¸Šæ˜¯å¦è¶³å¤Ÿæ¥è¿‘ä»¥é‡åˆã€‚
     if (MathType::FAbs(signedDistance) <= MathType::GetZeroTolerance())
     {
-        // ¸ÃÏßÓëÆ½ÃæÖØºÏ£¬Òò´Ë½«²ÎÊıÑ¡ÔñÎªt = 0¡£
+        // è¯¥çº¿ä¸å¹³é¢é‡åˆï¼Œå› æ­¤å°†å‚æ•°é€‰æ‹©ä¸ºt = 0ã€‚
         lineParameter = MathType::GetValue(0);
         this->SetIntersectionType(IntersectionType::Line);
 

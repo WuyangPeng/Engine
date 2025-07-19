@@ -1,21 +1,21 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 15:02)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 15:02)
 
 #ifndef CORE_TOOLS_PROPERTIES_PROPERTY_GET_EXTERNAL_OFFSET_H
 #define CORE_TOOLS_PROPERTIES_PROPERTY_GET_EXTERNAL_OFFSET_H
 
 #include "CoreTools/CoreToolsDll.h"
 
-/// Ê¹ÓÃ·½Ê½£º
-/// Àà±ØĞëÊÇ1×Ö½Ú¶ÔÆë
+/// ä½¿ç”¨æ–¹å¼ï¼š
+/// ç±»å¿…é¡»æ˜¯1å­—èŠ‚å¯¹é½
 /// #pragma pack(push, 1)
-/// ĞèÒª¶¨ÒåÒ»¸öÀàËÆÏÂÃæµÄ¾²Ì¬º¯Êı£º
+/// éœ€è¦å®šä¹‰ä¸€ä¸ªç±»ä¼¼ä¸‹é¢çš„é™æ€å‡½æ•°ï¼š
 /// static ptrdiff_t GetOffset()
 /// { enum { offset = offsetof(Class, Property) }; return offset; }
 

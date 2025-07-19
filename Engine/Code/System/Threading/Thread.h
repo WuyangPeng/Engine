@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.2 (2024/10/26 17:14)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.2 (2024/10/26 17:14)
 
 #ifndef SYSTEM_THREADING_THREAD_H
 #define SYSTEM_THREADING_THREAD_H
@@ -16,7 +16,7 @@
 #include "Using/ThreadUsing.h"
 #include "System/Security/Using/SecurityBaseUsing.h"
 
-/// ´´½¨ºÍÏú»ÙÏß³Ì
+/// åˆ›å»ºå’Œé”€æ¯çº¿ç¨‹
 namespace System
 {
     MAYBE_NULLPTR ThreadHandle SYSTEM_DEFAULT_DECLARE CreateSystemThread(WindowSecurityAttributesPtr threadAttributes,

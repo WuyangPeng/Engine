@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 22:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 22:28)
 
 #ifndef CORE_TOOLS_TIME_TIMER_H
 #define CORE_TOOLS_TIME_TIMER_H
@@ -25,7 +25,7 @@ namespace CoreTools
         COPY_UNSHARED_TYPE_DECLARE(Timer);
 
     public:
-        /// ¹¹Ôì¸ß·Ö±æÂÊ¼ÆÊ±Æ÷£¨64Î»£©¡£
+        /// æ„é€ é«˜åˆ†è¾¨ç‡è®¡æ—¶å™¨ï¼ˆ64ä½ï¼‰ã€‚
         NODISCARD static Timer Create();
 
     private:
@@ -34,13 +34,13 @@ namespace CoreTools
     public:
         CLASS_INVARIANT_DECLARE;
 
-        /// »ñÈ¡Ïà¶ÔÓÚ³õÊ¼Ê±¼äµÄµ±Ç°Ê±¼ä¡£
+        /// è·å–ç›¸å¯¹äºåˆå§‹æ—¶é—´çš„å½“å‰æ—¶é—´ã€‚
         NODISCARD int64_t GetNanoseconds() const noexcept;
         NODISCARD int64_t GetMicroseconds() const noexcept;
         NODISCARD int64_t GetMilliseconds() const noexcept;
         NODISCARD double GetSeconds() const noexcept;
 
-        /// ÖØÖÃÊ¹µ±Ç°Ê±¼äÎª³õÊ¼Ê±¼ä¡£
+        /// é‡ç½®ä½¿å½“å‰æ—¶é—´ä¸ºåˆå§‹æ—¶é—´ã€‚
         void Reset() noexcept;
 
     private:

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/29 13:48)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/29 13:48)
 
 #ifndef RENDERING_RESOURCES_RESOURCE_H
 #define RENDERING_RESOURCES_RESOURCE_H
@@ -22,7 +22,7 @@
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(Resource, ResourceImpl);
 
-// ´´½¨»òÏú»ÙÓë×ÊÔ´¹ØÁªµÄÏµÍ³ÄÚ´æ´æ´¢¡£Èç¹û×ÊÔ´½öÓÃÓÚÎªGPU×ÊÔ´´´½¨Ìá¹©ĞÅÏ¢£¬ÔòËü²»Ò»¶¨ĞèÒªÏµÍ³ÄÚ´æ¡£
+// åˆ›å»ºæˆ–é”€æ¯ä¸èµ„æºå…³è”çš„ç³»ç»Ÿå†…å­˜å­˜å‚¨ã€‚å¦‚æœèµ„æºä»…ç”¨äºä¸ºGPUèµ„æºåˆ›å»ºæä¾›ä¿¡æ¯ï¼Œåˆ™å®ƒä¸ä¸€å®šéœ€è¦ç³»ç»Ÿå†…å­˜ã€‚
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE Resource : public GraphicsObject
@@ -36,7 +36,7 @@ namespace Rendering
         using ConstSpanIterator = CoreTools::SpanIterator<StorageType::const_iterator>;
 
     public:
-        // Ä¬ÈÏµÄUsageTypeÎªUsageType::Immutable¡£
+        // é»˜è®¤çš„UsageTypeä¸ºUsageType::Immutableã€‚
         Resource(const std::string& name, GraphicsObjectType type);
         Resource(const std::string& name, int numElements, int elementSize, GraphicsObjectType type, bool createStorage = true);
         Resource(const std::string& name, int numElements, int elementSize, const StorageType& storage, GraphicsObjectType type);
@@ -47,8 +47,8 @@ namespace Rendering
 
         NODISCARD bool IsCreateStorage() const noexcept;
 
-        /// ´´½¨»òÏú»ÙÓë×ÊÔ´¹ØÁªµÄÏµÍ³ÄÚ´æ´æ´¢¡£
-        /// Èç¹û×ÊÔ´½öÓÃÓÚÎªGPU×ÊÔ´´´½¨Ìá¹©ĞÅÏ¢£¬ÔòËü²»Ò»¶¨ĞèÒªÏµÍ³ÄÚ´æ¡£
+        /// åˆ›å»ºæˆ–é”€æ¯ä¸èµ„æºå…³è”çš„ç³»ç»Ÿå†…å­˜å­˜å‚¨ã€‚
+        /// å¦‚æœèµ„æºä»…ç”¨äºä¸ºGPUèµ„æºåˆ›å»ºæä¾›ä¿¡æ¯ï¼Œåˆ™å®ƒä¸ä¸€å®šéœ€è¦ç³»ç»Ÿå†…å­˜ã€‚
         void CreateStorage();
         void DestroyStorage();
 
@@ -62,15 +62,15 @@ namespace Rendering
         void SetCopy(CopyType copyType) noexcept;
         NODISCARD CopyType GetCopy() const noexcept;
 
-        /// Ö¸¶¨×ÊÔ´ÖĞ»î¶¯ÔªËØµÄÁ¬Ğø¿é¡£Ò»¸öÔªËØÕ¼ÓÃelementSize×Ö½Ú¡£
-        /// ½«Êı¾İÊı×éÊÓÎªÔªËØÊı×é£¬offsetÊÇµÚÒ»¸ö»î¶¯ÔªËØµÄË÷Òı£»Ò²¾ÍÊÇËµ£¬µÚÒ»¸öÔªËØ¾ßÓĞµØÖ·£º
+        /// æŒ‡å®šèµ„æºä¸­æ´»åŠ¨å…ƒç´ çš„è¿ç»­å—ã€‚ä¸€ä¸ªå…ƒç´ å ç”¨elementSizeå­—èŠ‚ã€‚
+        /// å°†æ•°æ®æ•°ç»„è§†ä¸ºå…ƒç´ æ•°ç»„ï¼Œoffsetæ˜¯ç¬¬ä¸€ä¸ªæ´»åŠ¨å…ƒç´ çš„ç´¢å¼•ï¼›ä¹Ÿå°±æ˜¯è¯´ï¼Œç¬¬ä¸€ä¸ªå…ƒç´ å…·æœ‰åœ°å€ï¼š
         /// data + offset * elementSize
-        /// Æ«ÒÆÁ¿±ØĞëÂú×ã
+        /// åç§»é‡å¿…é¡»æ»¡è¶³
         /// offset < numElements
-        /// »î¶¯ÔªËØµÄÊıÁ¿ÎªnumActiveElements¡£Ëü±ØĞëÂú×ã£º
+        /// æ´»åŠ¨å…ƒç´ çš„æ•°é‡ä¸ºnumActiveElementsã€‚å®ƒå¿…é¡»æ»¡è¶³ï¼š
         /// nNumActiveElements <= numElements - offset
-        /// Èç¹û¼Æ»®Í¬Ê±ĞŞ¸ÄÍ¬Ò»¶ÔÏóµÄoffsetºÍnumActiveElements£¬
-        /// ÇëÔÚSetNumActiveElement()Ö®Ç°µ÷ÓÃSetOffset()£¬ÒòÎª»î¶¯ÊıÁ¿Ô¼ÊøÒÀÀµÓÚÆ«ÒÆÁ¿¡£
+        /// å¦‚æœè®¡åˆ’åŒæ—¶ä¿®æ”¹åŒä¸€å¯¹è±¡çš„offsetå’ŒnumActiveElementsï¼Œ
+        /// è¯·åœ¨SetNumActiveElement()ä¹‹å‰è°ƒç”¨SetOffset()ï¼Œå› ä¸ºæ´»åŠ¨æ•°é‡çº¦æŸä¾èµ–äºåç§»é‡ã€‚
         void SetOffset(int offset);
         NODISCARD int GetOffset() const noexcept;
 
@@ -86,7 +86,7 @@ namespace Rendering
 
         void SetStorage(const StorageType& storage);
 
-        // Í¬ÏµÍ³APIµÄ½»»¥¡£
+        // åŒç³»ç»ŸAPIçš„äº¤äº’ã€‚
         NODISCARD const char* GetOriginalData() const;
         NODISCARD const char* GetOriginalData(int offset) const;
 

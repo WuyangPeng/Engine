@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 22:17)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 22:17)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_STREAM_SIZE_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_STREAM_SIZE_H
@@ -23,7 +23,7 @@
 
 namespace CoreTools
 {
-    /// Ä£°åSteamSize±»Á÷ÏµÍ³Ê¹ÓÃ
+    /// æ¨¡æ¿SteamSizeè¢«æµç³»ç»Ÿä½¿ç”¨
     template <typename T, typename Enable = void>
     struct StreamSize
     {
@@ -40,7 +40,7 @@ namespace CoreTools
         }
     };
 
-    /// Ò»¸ö¶ÀÌØµÄIdÊÇÒ»¸öÓĞ·ûºÅÕûÊıĞ´Èë8¸ö×Ö½Úµ½´ÅÅÌÉÏ¡£
+    /// ä¸€ä¸ªç‹¬ç‰¹çš„Idæ˜¯ä¸€ä¸ªæœ‰ç¬¦å·æ•´æ•°å†™å…¥8ä¸ªå­—èŠ‚åˆ°ç£ç›˜ä¸Šã€‚
     template <typename T>
     struct StreamSize<T, std::enable_if_t<IsObjectAssociated<T>::result>>
     {
@@ -57,7 +57,7 @@ namespace CoreTools
         }
     };
 
-    /// Ò»¸öboolÖµ±»Ğ´Èë4×Ö½Úµ½´ÅÅÌÉÏ¡£
+    /// ä¸€ä¸ªboolå€¼è¢«å†™å…¥4å­—èŠ‚åˆ°ç£ç›˜ä¸Šã€‚
     template <>
     struct StreamSize<bool>
     {

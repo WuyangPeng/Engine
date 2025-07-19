@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 16:32)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 16:32)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_CIRCLE3_ACHIEVE_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT3_CIRCLE3_ACHIEVE_H
@@ -56,7 +56,7 @@ typename Mathematics::DistancePoint3Circle3<Real>::DistanceResult Mathematics::D
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    // P-CÔÚÆ½ÃæÉÏµÄÍ¶Ó°Îª Q-C = P-C - Dot(N,P - C) * N¡£
+    // P-Cåœ¨å¹³é¢ä¸Šçš„æŠ•å½±ä¸º Q-C = P-C - Dot(N,P - C) * Nã€‚
     const auto pointMinusCenter = point - circle.GetCenter();
     const auto discriminant = pointMinusCenter - Vector3ToolsType::DotProduct(circle.GetNormal(), pointMinusCenter) * circle.GetNormal();
     const auto lengthDiscriminant = Vector3ToolsType::GetLength(discriminant);
@@ -68,7 +68,7 @@ typename Mathematics::DistancePoint3Circle3<Real>::DistanceResult Mathematics::D
     }
     else
     {
-        // ËùÓĞÔ²µã¶¼ÓëPµÈ¾à¡£·µ»ØÆäÖĞÒ»¸ö¡£
+        // æ‰€æœ‰åœ†ç‚¹éƒ½ä¸Pç­‰è·ã€‚è¿”å›å…¶ä¸­ä¸€ä¸ªã€‚
         closestPoint = circle.GetCenter() + circle.GetRadius() * circle.GetDirection0();
     }
 

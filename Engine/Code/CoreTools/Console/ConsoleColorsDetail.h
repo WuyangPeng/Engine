@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/30 15:00)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/30 15:00)
 
 #ifndef CORE_TOOLS_CONSOLE_CONSOLE_COLORS_DETAIL_H
 #define CORE_TOOLS_CONSOLE_CONSOLE_COLORS_DETAIL_H
@@ -51,7 +51,7 @@ void CoreTools::ConsoleColors<Handle>::ResetColor()
     if (auto handle = console.GetHandle();
         !System::SetSystemConsoleTextAttribute(handle, defaultTextColor, defaultBackgroundColor, System::ConsoleCommon::Default))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³õÊ¼»¯¿ØÖÆÌ¨ÑÕÉ«Ê§°Ü¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("åˆå§‹åŒ–æ§åˆ¶å°é¢œè‰²å¤±è´¥ã€‚"s))
     }
     else
     {
@@ -68,7 +68,7 @@ void CoreTools::ConsoleColors<Handle>::SetTextColor(TextColour aTextColor)
     if (auto handle = console.GetHandle();
         !System::SetSystemConsoleTextAttribute(handle, aTextColor, backgroundColor, System::ConsoleCommon::Default))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÉèÖÃ¿ØÖÆÌ¨ÎÄ±¾ÑÕÉ«Ê§°Ü¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è®¾ç½®æ§åˆ¶å°æ–‡æœ¬é¢œè‰²å¤±è´¥ã€‚"s))
     }
     else
     {
@@ -93,7 +93,7 @@ void CoreTools::ConsoleColors<Handle>::SetBackgroundColor(BackgroundColour aBack
     if (auto handle = console.GetHandle();
         !System::SetSystemConsoleTextAttribute(handle, textColor, aBackgroundColor, System::ConsoleCommon::Default))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÉèÖÃ¿ØÖÆÌ¨±³¾°ÑÕÉ«Ê§°Ü¡£"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("è®¾ç½®æ§åˆ¶å°èƒŒæ™¯é¢œè‰²å¤±è´¥ã€‚"s));
     }
     else
     {

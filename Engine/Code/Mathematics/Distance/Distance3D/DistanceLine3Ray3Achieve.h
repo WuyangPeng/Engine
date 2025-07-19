@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 16:31)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 16:31)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_LINE3_RAY3_ACHIEVE_H
 #define MATHEMATICS_DISTANCE_DISTANCE_LINE3_RAY3_ACHIEVE_H
@@ -69,7 +69,7 @@ typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics::Dista
 
         if (MathType::GetValue(0) <= rhsT)
         {
-            // Á½¸öÄÚ²¿µã×î½Ó½ü£¬Ò»¸öÔÚÖ±ÏßÉÏ£¬Ò»¸öÔÚÉäÏßÉÏ¡£
+            // ä¸¤ä¸ªå†…éƒ¨ç‚¹æœ€æ¥è¿‘ï¼Œä¸€ä¸ªåœ¨ç›´çº¿ä¸Šï¼Œä¸€ä¸ªåœ¨å°„çº¿ä¸Šã€‚
             auto lhsT = tool.GetLhsT() / det;
             rhsT /= det;
             auto squaredDistance = lhsT * (lhsT + tool.GetDirectionDot() * rhsT + MathType::GetValue(2) * tool.GetOriginDifferenceDotLhsDirection()) +
@@ -85,13 +85,13 @@ typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics::Dista
         }
         else
         {
-            // ÉäÏßµÄÔ­µãÍ¬Ö±ÏßµÄÄ³Ò»µã×î½Ó½ü¡£
+            // å°„çº¿çš„åŸç‚¹åŒç›´çº¿çš„æŸä¸€ç‚¹æœ€æ¥è¿‘ã€‚
             return GetSquaredWithClosestPoints(tool);
         }
     }
     else
     {
-        // ÏßÊÇÆ½ĞĞµÄ£¬×î½Ó½üµÄÒ»¶ÔµãÔÚÉäÏßÔ­µã¡£
+        // çº¿æ˜¯å¹³è¡Œçš„ï¼Œæœ€æ¥è¿‘çš„ä¸€å¯¹ç‚¹åœ¨å°„çº¿åŸç‚¹ã€‚
         return GetSquaredWithClosestPoints(tool);
     }
 }

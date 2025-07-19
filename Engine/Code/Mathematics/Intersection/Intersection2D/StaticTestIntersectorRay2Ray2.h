@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:55)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:55)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_RAY2_RAY2_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_RAY2_RAY2_H
@@ -37,26 +37,26 @@ namespace Mathematics
         NODISCARD Ray2Type GetLhsRay() const noexcept;
         NODISCARD Ray2Type GetRhsRay() const noexcept;
 
-        // Ïà½»¼¯¡£ÈÃ q = GetQuantity()¡£Çé¿öÊÇ£º
-        //   q = 0: ÉäÏß²»Ïà½»£¬ GetIntersection() ·µ»ØIntersectionType::Empty¡£
-        //   q = 1: ÉäÏßÏà½»ÓÚÒ»¸öµã¡£GetIntersection()·µ»ØIntersectionType::Point¡£
-        //   q = 2: ÉäÏßÊÇÖØµşµÄÇÒÏà½»ÊÇÏß¶Î¡£ ÕâÖÖÇé¿öÖ»·¢ÉúÔÚD1 = -D0¡£
-        //          GetIntersection()·µ»ØIntersectionType::Segment¡£
-        //   q = INT_MAX:  ÉäÏßÊÇÖØµşµÄÇÒÏà½»ÊÇÉäÏß¡£
-        //                 ÕâÖÖÇé¿öÖ»·¢ÉúÔÚD1 = D0¡£
-        //                 GetIntersection()·µ»ØIntersectionType::Ray¡£
+        // ç›¸äº¤é›†ã€‚è®© q = GetQuantity()ã€‚æƒ…å†µæ˜¯ï¼š
+        //   q = 0: å°„çº¿ä¸ç›¸äº¤ï¼Œ GetIntersection() è¿”å›IntersectionType::Emptyã€‚
+        //   q = 1: å°„çº¿ç›¸äº¤äºä¸€ä¸ªç‚¹ã€‚GetIntersection()è¿”å›IntersectionType::Pointã€‚
+        //   q = 2: å°„çº¿æ˜¯é‡å çš„ä¸”ç›¸äº¤æ˜¯çº¿æ®µã€‚ è¿™ç§æƒ…å†µåªå‘ç”Ÿåœ¨D1 = -D0ã€‚
+        //          GetIntersection()è¿”å›IntersectionType::Segmentã€‚
+        //   q = INT_MAX:  å°„çº¿æ˜¯é‡å çš„ä¸”ç›¸äº¤æ˜¯å°„çº¿ã€‚
+        //                 è¿™ç§æƒ…å†µåªå‘ç”Ÿåœ¨D1 = D0ã€‚
+        //                 GetIntersection()è¿”å›IntersectionType::Rayã€‚
         NODISCARD int GetQuantity() const noexcept;
 
     private:
         void Test();
 
     private:
-        // ÒªÏà½»µÄ¶ÔÏó¡£
+        // è¦ç›¸äº¤çš„å¯¹è±¡ã€‚
         Ray2Type lhsRay;
         Ray2Type rhsRay;
 
     private:
-        // Ïà½»¼¯
+        // ç›¸äº¤é›†
         int quantity;
     };
 }

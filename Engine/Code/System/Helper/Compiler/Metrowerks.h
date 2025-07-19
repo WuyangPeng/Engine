@@ -1,28 +1,28 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 17:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 17:28)
 
 #ifndef SYSTEM_HELPER_METROWERKS_H
 #define SYSTEM_HELPER_METROWERKS_H
 
 #if defined(__MWERKS__)
 
-    /// Metrowerks C++ ±àÒëÆ÷ÉèÖÃ£º
+    /// Metrowerks C++ ç¼–è¯‘å™¨è®¾ç½®ï¼š
 
     #if __MWERKS__ < 0x2301
 
-        #error "±àÒëÆ÷Î´ÉèÖÃ"
+        #error "ç¼–è¯‘å™¨æœªè®¾ç½®"
 
     #endif  // __MWERKS__ < 0x2301
 
     #if (0x3205 < __MWERKS__)
 
-        #error "Î´Öª±àÒëÆ÷"
+        #error "æœªçŸ¥ç¼–è¯‘å™¨"
 
     #endif  // (0x3205 < __MWERKS__)
 
@@ -96,7 +96,7 @@
 
     #endif  // (__INTEL__ && _WIN32) || (__POWERPC__ && macintosh)
 
-    #define TCRE_SYSTEM_COMPILER "Metrowerks CodeWarrior C++ °æ±¾ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
+    #define TCRE_SYSTEM_COMPILER "Metrowerks CodeWarrior C++ ç‰ˆæœ¬ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
 
 #endif  // __MWERKS__
 

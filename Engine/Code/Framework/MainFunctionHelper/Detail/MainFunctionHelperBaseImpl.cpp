@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 15:11)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 15:11)
 
 #include "Framework/FrameworkExport.h"
 
@@ -26,9 +26,9 @@ System::String Framework::MainFunctionHelperBaseImpl::GetEngineInstallationDirec
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    // Ó¦ÓÃ²ãÒÀÀµÓÚÄ¿Â¼½á¹¹¸½´øµÄ¿â¡£
-    // ÄúĞèÒª´´½¨EnvironmentDirectoryÄÚÉèÖÃµÄ»·¾³±äÁ¿²ÅÄÜÔÚÓ¦ÓÃ³ÌĞò²éÕÒ¸÷ÖÖÊı¾İÎÄ¼ş¡£
-    // EnvironmentDirectoryÉèÖÃµÄÖµ¿ÉÒÔ´ÓÅäÖÃÖĞ¶ÁÈ¡£¬»òÖ±½ÓÊ¹ÓÃÄ¬ÈÏÖµ¡£
+    // åº”ç”¨å±‚ä¾èµ–äºç›®å½•ç»“æ„é™„å¸¦çš„åº“ã€‚
+    // æ‚¨éœ€è¦åˆ›å»ºEnvironmentDirectoryå†…è®¾ç½®çš„ç¯å¢ƒå˜é‡æ‰èƒ½åœ¨åº”ç”¨ç¨‹åºæŸ¥æ‰¾å„ç§æ•°æ®æ–‡ä»¶ã€‚
+    // EnvironmentDirectoryè®¾ç½®çš„å€¼å¯ä»¥ä»é…ç½®ä¸­è¯»å–ï¼Œæˆ–ç›´æ¥ä½¿ç”¨é»˜è®¤å€¼ã€‚
     return environmentDirectory.GetEngineDirectory();
 }
 

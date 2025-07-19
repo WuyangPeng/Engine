@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2025
+ï»¿/// Copyright (c) 2010-2025
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.2.0 (2025/03/22 18:04)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.2.0 (2025/03/22 18:04)
 
 #include "EngineTesting.h"
 #include "System/Threading/Process.h"
@@ -66,7 +66,7 @@ bool ThreadingCoreRenderEngineAssist::EngineTesting::ExecuteEngineTesting(int se
 
 void ThreadingCoreRenderEngineAssist::EngineTesting::ExecuteSelectEngineTesting(const String& engineeringName)
 {
-    GetStream() << "ÕıÔÚÖ´ĞĞ¸¨Öúµ¥Ôª²âÊÔ¹¤³Ì£º" << CoreTools::StringConversion::StandardConversionMultiByte(engineeringName) << "\n";
+    GetStream() << "æ­£åœ¨æ‰§è¡Œè¾…åŠ©å•å…ƒæµ‹è¯•å·¥ç¨‹ï¼š" << CoreTools::StringConversion::StandardConversionMultiByte(engineeringName) << "\n";
 
     ASSERT_TRUE(System::CreateSystemProcess(engineeringName));
 }

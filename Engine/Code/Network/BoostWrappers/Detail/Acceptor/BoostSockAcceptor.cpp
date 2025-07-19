@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 17:26)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 17:26)
 
 #include "Network/NetworkExport.h"
 
@@ -24,9 +24,9 @@ using namespace std::literals;
 
 namespace
 {
-    constexpr auto synchronizeAccept = SYSTEM_TEXT("×¼±¸½øĞĞÍ¬²½½ÓÊÜ£¬µØÖ·£º"sv);
-    constexpr auto asynchronousAccept = SYSTEM_TEXT("×¼±¸½øĞĞÒì²½½ÓÊÜ£¬µØÖ·£º"sv);
-    constexpr auto synchronizeAcceptSuccess = SYSTEM_TEXT("Í¬²½½ÓÊÜ³É¹¦£¬µØÖ·£º"sv);
+    constexpr auto synchronizeAccept = SYSTEM_TEXT("å‡†å¤‡è¿›è¡ŒåŒæ­¥æ¥å—ï¼Œåœ°å€ï¼š"sv);
+    constexpr auto asynchronousAccept = SYSTEM_TEXT("å‡†å¤‡è¿›è¡Œå¼‚æ­¥æ¥å—ï¼Œåœ°å€ï¼š"sv);
+    constexpr auto synchronizeAcceptSuccess = SYSTEM_TEXT("åŒæ­¥æ¥å—æˆåŠŸï¼Œåœ°å€ï¼š"sv);
 }
 
 Network::BoostSockAcceptor::BoostSockAcceptor(int port)

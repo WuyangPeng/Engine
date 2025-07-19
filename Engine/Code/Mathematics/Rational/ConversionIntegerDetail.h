@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:15)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:15)
 
 #ifndef MATHEMATICS_RATIONAL_CONVERSION_INTEGER_DETAIL_H
 #define MATHEMATICS_RATIONAL_CONVERSION_INTEGER_DETAIL_H
@@ -86,7 +86,7 @@ void Mathematics::ConversionInteger<T>::Init(T value, const FloatType&)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´«ÈëµÄ¸¡µãÊıÎŞĞ§£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("ä¼ å…¥çš„æµ®ç‚¹æ•°æ— æ•ˆï¼"s));
     }
 }
 
@@ -108,14 +108,14 @@ void Mathematics::ConversionInteger<T>::Init(T value, const DoubleType&)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´«ÈëµÄ¸¡µãÊıÎŞĞ§£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("ä¼ å…¥çš„æµ®ç‚¹æ•°æ— æ•ˆï¼"s));
     }
 }
 
 template <typename T>
 void Mathematics::ConversionInteger<T>::Amendment() noexcept
 {
-    // ¶ÔÓÚ£¨-1£¬1£©Ö®¼äµÄÊı£¬½Ø¶ÏÎª0
+    // å¯¹äºï¼ˆ-1ï¼Œ1ï¼‰ä¹‹é—´çš„æ•°ï¼Œæˆªæ–­ä¸º0
     if (shifting < 0)
     {
         mantissa = 0;
@@ -124,7 +124,7 @@ void Mathematics::ConversionInteger<T>::Amendment() noexcept
         symbol = NumericalValueSymbol::Positive;
     }
 
-    // ½Ø¶ÏĞ¡ÊıµãºóµÄÊıÖµ
+    // æˆªæ–­å°æ•°ç‚¹åçš„æ•°å€¼
     const auto difference = maxMantissaBit - shifting;
 
     if (0 < difference)
@@ -137,7 +137,7 @@ void Mathematics::ConversionInteger<T>::Amendment() noexcept
 template <typename T>
 void Mathematics::ConversionInteger<T>::ShiftingMantissa() noexcept
 {
-    // ¶ÔÆë¸öÎ»µÄÊıÖµ
+    // å¯¹é½ä¸ªä½çš„æ•°å€¼
     const auto difference = shifting - maxMantissaBit;
     const auto newShifting = difference % blockSize;
 

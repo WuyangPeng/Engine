@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 13:43)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 13:43)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_RATIONAL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_RATIONAL_H
@@ -55,7 +55,7 @@ namespace Mathematics
         NODISCARD bool Cubic(const PolynomialRational& constant, const PolynomialRational& once, const PolynomialRational& secondary, const PolynomialRational& thrice);
         NODISCARD bool Cubic(const PolynomialRational& constant, const PolynomialRational& once, const PolynomialRational& secondary);
 
-        // p(x) = constant + once * x + secondary * x^2 + thrice * x^3 + quartic * x^4 (Ê×Ò»µ± c4 = 1)
+        // p(x) = constant + once * x + secondary * x^2 + thrice * x^3 + quartic * x^4 (é¦–ä¸€å½“ c4 = 1)
         // m(x) = constant + once * x + secondary * x^2 + thrice * x^3 + x^4
         NODISCARD bool Quartic(Real constant, Real once, Real secondary, Real thrice, Real quartic);
         NODISCARD bool Quartic(const PolynomialRational& constant,

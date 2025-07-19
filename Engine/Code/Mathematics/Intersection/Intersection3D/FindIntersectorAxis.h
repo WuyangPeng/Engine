@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 15:04)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 15:04)
 
 #ifndef MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_AXIS_H
 #define MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_AXIS_H
@@ -33,8 +33,8 @@ namespace Mathematics
         using IntersectorConfigurationType = IntersectorConfiguration<Real>;
 
     public:
-        /// ²éÕÒ²éÑ¯Í¶Ó°Çø¼äµÄ½»¼¯¡£ ÊäÈëµÄËÙ¶ÈÊÇobjectVelocity1 - objectVelocity0Ö®²î¡£
-        /// ¼ÆËã½Ó´¥µÄµÚÒ»´ÎºÍ×îºóÒ»´Î£¬ÒÔ¼°¹ØÓÚ½Ó´¥½á¹¹ºÍÍ¶Ó°£¨½Ó´¥²à£©Ë³ĞòµÄĞÅÏ¢¡£
+        /// æŸ¥æ‰¾æŸ¥è¯¢æŠ•å½±åŒºé—´çš„äº¤é›†ã€‚ è¾“å…¥çš„é€Ÿåº¦æ˜¯objectVelocity1 - objectVelocity0ä¹‹å·®ã€‚
+        /// è®¡ç®—æ¥è§¦çš„ç¬¬ä¸€æ¬¡å’Œæœ€åä¸€æ¬¡ï¼Œä»¥åŠå…³äºæ¥è§¦ç»“æ„å’ŒæŠ•å½±ï¼ˆæ¥è§¦ä¾§ï¼‰é¡ºåºçš„ä¿¡æ¯ã€‚
         FindIntersectorAxis(const Vector3Type& axis, const SegmentType& segment, const Triangle3Type& triangle, const Vector3Type& velocity, Real tmax);
 
         FindIntersectorAxis(const Vector3Type& axis, const SegmentType& segment, const Box3Type& box, const Vector3Type& velocity, Real tmax);
@@ -61,7 +61,7 @@ namespace Mathematics
         NODISCARD static IntersectorConfigurationType GetConfiguration(const Vector3Type& axis, const Box3Type& box);
 
     private:
-        // Í¶Ó°µÄµÍ¼¶²éÕÒ²éÑ¯¡£
+        // æŠ•å½±çš„ä½çº§æŸ¥æ‰¾æŸ¥è¯¢ã€‚
         void Find(const Vector3Type& axis, const Vector3Type& velocity, const IntersectorConfigurationType& cfg0Start, const IntersectorConfigurationType& cfg1Start, Real tmax) noexcept;
 
     private:

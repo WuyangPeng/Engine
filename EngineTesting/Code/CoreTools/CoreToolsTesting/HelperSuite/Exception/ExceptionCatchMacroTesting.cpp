@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/14 11:41)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/14 11:41)
 
 #include "ExceptionCatchMacroTesting.h"
 #include "System/Time/DeltaTime.h"
@@ -41,7 +41,7 @@ void CoreTools::ExceptionCatchMacroTesting::Catch0Test()
 {
     EXCEPTION_TRY
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÕâÀï²âÊÔÅ×³öÒì³££¬²¢±»²¶»ñ¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("è¿™é‡Œæµ‹è¯•æŠ›å‡ºå¼‚å¸¸ï¼Œå¹¶è¢«æ•èŽ·ã€‚"));
     }
     EXCEPTION_ENGINE_EXCEPTION_CATCH(CoreTools)
     EXCEPTION_STD_EXCEPTION_CATCH(CoreTools)
@@ -52,7 +52,7 @@ void CoreTools::ExceptionCatchMacroTesting::Catch1Test()
 {
     EXCEPTION_TRY
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÕâÀï²âÊÔÅ×³öÒì³££¬²¢±»²¶»ñ¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("è¿™é‡Œæµ‹è¯•æŠ›å‡ºå¼‚å¸¸ï¼Œå¹¶è¢«æ•èŽ·ã€‚"));
     }
     EXCEPTION_ALL_CATCH(CoreTools)
 }
@@ -61,7 +61,7 @@ void CoreTools::ExceptionCatchMacroTesting::Catch2Test()
 {
     EXCEPTION_TRY
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÕâÀï²âÊÔÅ×³öÒì³££¬²¢±»²¶»ñ¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("è¿™é‡Œæµ‹è¯•æŠ›å‡ºå¼‚å¸¸ï¼Œå¹¶è¢«æ•èŽ·ã€‚"));
     }
     EXCEPTION_ENTRY_POINT_CATCH
 }
@@ -70,14 +70,14 @@ void CoreTools::ExceptionCatchMacroTesting::Catch3Test()
 {
     EXCEPTION_TRY
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÕâÀï²âÊÔÅ×³öÒì³££¬²¢±»²¶»ñ¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("è¿™é‡Œæµ‹è¯•æŠ›å‡ºå¼‚å¸¸ï¼Œå¹¶è¢«æ•èŽ·ã€‚"));
     }
     EXCEPTION_WINDOWS_ENTRY_POINT_CATCH
 }
 
 void CoreTools::ExceptionCatchMacroTesting::PrintTipsMessage()
 {
-    GetStream() << "Õâ¸ö²âÊÔ»á´¥·¢Ê§°Ü¶ÏÑÔ£¬Çë°´·ñÈ¡Ïû¡£\n";
+    GetStream() << "è¿™ä¸ªæµ‹è¯•ä¼šè§¦å‘å¤±è´¥æ–­è¨€ï¼Œè¯·æŒ‰å¦å–æ¶ˆã€‚\n";
 
     System::SystemPause();
 }

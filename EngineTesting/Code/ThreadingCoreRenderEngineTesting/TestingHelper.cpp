@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2025
+ï»¿/// Copyright (c) 2010-2025
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£ºv0.0.0.0 (2025/07/01 15:02:44)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼šv0.0.0.0 (2025/07/01 15:02:44)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -14,7 +14,7 @@
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 
 ThreadingCoreRenderEngine::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "ÒıÇæ²âÊÔ" }
+    : ParentType{ argc, argv, "å¼•æ“æµ‹è¯•" }
 {
     InitSuite();
 
@@ -31,7 +31,7 @@ void ThreadingCoreRenderEngine::TestingHelper::InitSuite()
 
 void ThreadingCoreRenderEngine::TestingHelper::AddVersionSuite()
 {
-    auto versionSuite = GenerateSuite("°æ±¾");
+    auto versionSuite = GenerateSuite("ç‰ˆæœ¬");
 
     ADD_TEST(versionSuite, VersionTesting);
 
@@ -40,7 +40,7 @@ void ThreadingCoreRenderEngine::TestingHelper::AddVersionSuite()
 
 void ThreadingCoreRenderEngine::TestingHelper::AddEngineSuite()
 {
-    auto engineSuite = GenerateSuite("ÒıÇæ");
+    auto engineSuite = GenerateSuite("å¼•æ“");
 
     ADD_TEST(engineSuite, EngineTesting);
 

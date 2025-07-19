@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:28)
 
 #ifndef MATHEMATICS_RATIONAL_INT64_VECTOR2_H
 #define MATHEMATICS_RATIONAL_INT64_VECTOR2_H
@@ -47,7 +47,7 @@ namespace Mathematics
         NODISCARD int64_t GetY() const;
         void SetY(int64_t y);
 
-        // ·µ»Ø (y,-x).
+        // è¿”å› (y,-x).
         NODISCARD Int64Vector2 Perp() const;
 
         NODISCARD Int64Vector2 operator-() const;
@@ -59,10 +59,10 @@ namespace Mathematics
 
         NODISCARD int64_t SquaredLength() const noexcept;
 
-        // ·µ»Ø Dot(lhs,rhs).
+        // è¿”å› Dot(lhs,rhs).
         NODISCARD int64_t Dot(const Int64Vector2& rhs) const;
 
-        // ·µ»Ø Cross((lhs.x,lhs.y,0),(rhs.x,rhs.y,0)) = lhs.x*rhs.y - lhs.y*rhs.x.
+        // è¿”å› Cross((lhs.x,lhs.y,0),(rhs.x,rhs.y,0)) = lhs.x*rhs.y - lhs.y*rhs.x.
         NODISCARD int64_t DotPerp(const Int64Vector2& rhs) const;
 
         NODISCARD bool operator==(const Int64Vector2& rhs) const;

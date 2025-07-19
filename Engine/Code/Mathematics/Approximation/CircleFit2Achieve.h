@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:08)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:08)
 
 #ifndef MATHEMATICS_APPROXIMATION_CIRCLE_FIT2_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_CIRCLE_FIT2_ACHIEVE_H
@@ -29,10 +29,10 @@ Mathematics::CircleFit2<Real>::CircleFit2(const PointType& points, int maxIterat
 template <typename Real>
 void Mathematics::CircleFit2<Real>::Calculate(const PointType& points, int maxIterations, bool initialCenterIsAverage)
 {
-    // ¼ÆËãÊı¾İµãµÄÆ½¾ùÖµ¡£
+    // è®¡ç®—æ•°æ®ç‚¹çš„å¹³å‡å€¼ã€‚
     const auto average = GetAveragePoint(points);
 
-    // ²Â²â³õÊ¼ÖĞĞÄ¡£
+    // çŒœæµ‹åˆå§‹ä¸­å¿ƒã€‚
     if (initialCenterIsAverage)
     {
         circle.SetCircle(average, MathType::GetValue(0));
@@ -48,7 +48,7 @@ void Mathematics::CircleFit2<Real>::Calculate(const PointType& points, int maxIt
     {
         const auto current = circle.GetCenter();
 
-        // ¸üĞÂµü´ú
+        // æ›´æ–°è¿­ä»£
         Iteration(points, average);
 
         const auto circleDifference = circle.GetCenter() - current;
@@ -59,14 +59,14 @@ void Mathematics::CircleFit2<Real>::Calculate(const PointType& points, int maxIt
             return;
         }
 
-        MATHEMATICS_ASSERTION_4(loop + 1 != maxIterations, "µü´ú³¬³ö´ÎÊı¡£");
+        MATHEMATICS_ASSERTION_4(loop + 1 != maxIterations, "è¿­ä»£è¶…å‡ºæ¬¡æ•°ã€‚");
     }
 }
 
 template <typename Real>
 Mathematics::Vector2<Real> Mathematics::CircleFit2<Real>::GetAveragePoint(const PointType& points)
 {
-    MATHEMATICS_ASSERTION_0(!points.empty(), "ÊäÈëµÄÊı×é´óĞ¡ÎªÁã£¡");
+    MATHEMATICS_ASSERTION_0(!points.empty(), "è¾“å…¥çš„æ•°ç»„å¤§å°ä¸ºé›¶ï¼");
 
     Vector2Type average{};
 
@@ -83,7 +83,7 @@ Mathematics::Vector2<Real> Mathematics::CircleFit2<Real>::GetAveragePoint(const 
 template <typename Real>
 void Mathematics::CircleFit2<Real>::Iteration(const PointType& points, const Vector2Type& average)
 {
-    // ¼ÆËãÆ½¾ùÖµL, dL/da, dL/db¡£
+    // è®¡ç®—å¹³å‡å€¼L, dL/da, dL/dbã€‚
     auto lengthAverage = MathType::GetValue(0);
     Vector2Type derLengthAverage{};
 

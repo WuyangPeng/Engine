@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 17:55)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 17:55)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_CLASSIFY_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_CLASSIFY_ACHIEVE_H
@@ -38,17 +38,17 @@ void Mathematics::StaticTestIntersectorLine2Classify<Real>::Test(const Vector2Ty
 {
     auto dotThreshold = this->GetEpsilon();
 
-    /// Á½ÌõÏßµÄ½»µãÊÇP0 + s0 * D0 = P1 + s1 * D1µÄ½â¡£
-    /// ½«ÆäÖØĞ´Îªs0 * D0 - s1 * D1 = P1 - P0 = Q¡£
-    /// Èç¹ûD0.Dot(Perp(D1)) = 0£¬ÔòÕâĞ©ÏßÊÇÆ½ĞĞµÄ¡£
-    /// ´ËÍâ£¬Èç¹ûQ.Dot(Perp(D1)) = 0£¬ÔòĞĞÊÇÏàÍ¬µÄ¡£
-    /// Èç¹ûD0.Dot(Perp(D1))²»ÎªÁã£¬Ôòs0 = Q.Dot(Perp(D1)) / D0.Dot(Perp(D1))²úÉú½»µã¡£
-    /// Í¬Ñù£¬s1 = Q.Dot(Perp(D0)) / D0.Dot(Perp(D1))
+    /// ä¸¤æ¡çº¿çš„äº¤ç‚¹æ˜¯P0 + s0 * D0 = P1 + s1 * D1çš„è§£ã€‚
+    /// å°†å…¶é‡å†™ä¸ºs0 * D0 - s1 * D1 = P1 - P0 = Qã€‚
+    /// å¦‚æœD0.Dot(Perp(D1)) = 0ï¼Œåˆ™è¿™äº›çº¿æ˜¯å¹³è¡Œçš„ã€‚
+    /// æ­¤å¤–ï¼Œå¦‚æœQ.Dot(Perp(D1)) = 0ï¼Œåˆ™è¡Œæ˜¯ç›¸åŒçš„ã€‚
+    /// å¦‚æœD0.Dot(Perp(D1))ä¸ä¸ºé›¶ï¼Œåˆ™s0 = Q.Dot(Perp(D1)) / D0.Dot(Perp(D1))äº§ç”Ÿäº¤ç‚¹ã€‚
+    /// åŒæ ·ï¼Œs1 = Q.Dot(Perp(D0)) / D0.Dot(Perp(D1))
     auto difference = rhsOrigin - lhsOrigin;
     auto lhsDirectionDotPerpRhsDirection = Vector2ToolsType::DotPerp(lhsDirection, rhsDirection);
     if (dotThreshold < MathType::FAbs(lhsDirectionDotPerpRhsDirection))
     {
-        // ÏßÔÚµ¥¸öµãÏà½»¡£
+        // çº¿åœ¨å•ä¸ªç‚¹ç›¸äº¤ã€‚
         if (isCalculateParameter)
         {
             auto differenceDotPerpLhsDirection = Vector2ToolsType::DotPerp(difference, lhsDirection);
@@ -61,10 +61,10 @@ void Mathematics::StaticTestIntersectorLine2Classify<Real>::Test(const Vector2Ty
         return;
     }
 
-    // ÏßÊÇÆ½ĞĞµÄ¡£
+    // çº¿æ˜¯å¹³è¡Œçš„ã€‚
     if (difference.IsZero(dotThreshold))
     {
-        // ÏßÊÇ¹²ÏßµÄ.
+        // çº¿æ˜¯å…±çº¿çš„.
         this->SetIntersectionType(IntersectionType::Line);
         return;
     }
@@ -73,12 +73,12 @@ void Mathematics::StaticTestIntersectorLine2Classify<Real>::Test(const Vector2Ty
     auto differenceDotPerpRhsDirection = Vector2ToolsType::DotPerp(difference, rhsDirection);
     if (MathType::FAbs(differenceDotPerpRhsDirection) <= dotThreshold)
     {
-        // ÏßÊÇ¹²ÏßµÄ.
+        // çº¿æ˜¯å…±çº¿çš„.
         this->SetIntersectionType(IntersectionType::Line);
     }
     else
     {
-        // ÏßÊÇÆ½ĞĞµÄ£¬µ«ÊÇ²»ÏàÍ¬¡£
+        // çº¿æ˜¯å¹³è¡Œçš„ï¼Œä½†æ˜¯ä¸ç›¸åŒã€‚
         this->SetIntersectionType(IntersectionType::Empty);
     }
 }

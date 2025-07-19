@@ -1,18 +1,18 @@
-/// Copyright (c) 2010-2025
+ï»¿/// Copyright (c) 2010-2025
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.2.0 (2025/01/06 10:52)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.2.0 (2025/01/06 10:52)
 
 #include "GameClient/GameClientMiddleLayer/Helper/GameClientMiddleLayerClassInvariantMacro.h"
 #include "Testing.h"
 #include "TestingHelper.h"
 
 GameClientTesting::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "ÓÎÏ·¿Í»§¶ËÖĞ¼ä²ãµ¥Ôª²âÊÔ" }
+    : ParentType{ argc, argv, "æ¸¸æˆå®¢æˆ·ç«¯ä¸­é—´å±‚å•å…ƒæµ‹è¯•" }
 {
     InitSuite();
 

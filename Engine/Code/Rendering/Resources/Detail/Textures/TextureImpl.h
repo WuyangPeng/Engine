@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/29 13:52)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/29 13:52)
 
 #ifndef RENDERING_RESOURCES_TEXTURE_IMPL_H
 #define RENDERING_RESOURCES_TEXTURE_IMPL_H
@@ -72,7 +72,7 @@ namespace Rendering
         NODISCARD virtual int GetLevelDataStreamingSize() const = 0;
 
     private:
-        // ³ÉÔ±µÄÖµÍ¨¹ı¹¹Ôìº¯Êı´«µİ¡£
+        // æˆå‘˜çš„å€¼é€šè¿‡æ„é€ å‡½æ•°ä¼ é€’ã€‚
         TextureData textureData;
     };
 }

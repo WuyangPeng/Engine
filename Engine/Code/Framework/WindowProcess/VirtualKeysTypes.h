@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 14:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 14:28)
 
 #ifndef FRAMEWORK_WINDOW_PROCESS_VIRTUAL_KEYS_TYPES_H
 #define FRAMEWORK_WINDOW_PROCESS_VIRTUAL_KEYS_TYPES_H
@@ -24,10 +24,10 @@ namespace Framework
         using WParam = System::WindowsWParam;
 
     public:
-        // Ö»Ö§³ÖGLUT
+        // åªæ”¯æŒGLUT
         VirtualKeysTypes() noexcept = default;
 
-        // Ö»Ö§³ÖWindow
+        // åªæ”¯æŒWindow
         explicit VirtualKeysTypes(WParam wParam) noexcept;
 
         CLASS_INVARIANT_DECLARE;
@@ -39,7 +39,7 @@ namespace Framework
         NODISCARD bool IsShiftKeyDown() const noexcept;
         NODISCARD bool IsMouseDown() const noexcept;
 
-        // Ö»Ö§³ÖGLUT
+        // åªæ”¯æŒGLUT
         void SetModifiers(int modifiers) noexcept;
         void SetMouseButtonsTypes(int button) noexcept;
         void ClearMouseButtonsTypes() noexcept;

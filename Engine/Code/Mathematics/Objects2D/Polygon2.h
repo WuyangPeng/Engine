@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 11:17)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 11:17)
 
 #ifndef MATHEMATICS_OBJECTS_2D_POLYGON2_H
 #define MATHEMATICS_OBJECTS_2D_POLYGON2_H
@@ -31,7 +31,7 @@ namespace Mathematics
         using VerticesType = std::vector<Vector2Type>;
 
     public:
-        // µ÷ÓÃ·½¸ºÔğÈ·±£¶¥µãÊı×éÄæÊ±Õë£¬´ú±íÒ»¸ö¼òµ¥µÄ¶à±ßĞÎ¡£
+        // è°ƒç”¨æ–¹è´Ÿè´£ç¡®ä¿é¡¶ç‚¹æ•°ç»„é€†æ—¶é’ˆï¼Œä»£è¡¨ä¸€ä¸ªç®€å•çš„å¤šè¾¹å½¢ã€‚
         explicit Polygon2(const VerticesType& vertices);
 
         virtual ~Polygon2() noexcept = default;
@@ -42,15 +42,15 @@ namespace Mathematics
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        // Ö»¶Á³ÉÔ±·ÃÎÊ¡£
+        // åªè¯»æˆå‘˜è®¿é—®ã€‚
         NODISCARD int GetNumVertices() const;
         NODISCARD const VerticesType& GetVertices() const noexcept;
         NODISCARD const Vector2Type& GetVertex(int index) const;
 
-        // ÔÊĞí¶¥µãĞŞ¸Ä¡£µ÷ÓÃÕß±ØĞëÈ·±£¶à±ßĞÎÈÔÈ»ÊÇ¼òµ¥¶à±ßĞÎ¡£
+        // å…è®¸é¡¶ç‚¹ä¿®æ”¹ã€‚è°ƒç”¨è€…å¿…é¡»ç¡®ä¿å¤šè¾¹å½¢ä»ç„¶æ˜¯ç®€å•å¤šè¾¹å½¢ã€‚
         virtual void SetVertex(int index, const Vector2Type& vertex);
 
-        // ¼ÆËã¹ØÓÚËùÊö¶à±ßĞÎµÄ¸÷ÖÖĞÅÏ¢¡£
+        // è®¡ç®—å…³äºæ‰€è¿°å¤šè¾¹å½¢çš„å„ç§ä¿¡æ¯ã€‚
         NODISCARD Vector2Type ComputeVertexAverage() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
         NODISCARD Real ComputePerimeterLength() const;
         NODISCARD Real ComputeArea() const;

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 17:29)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 17:29)
 
 #include "Network/NetworkExport.h"
 
@@ -43,7 +43,7 @@ int Network::AceIovecSockStream::Send(const MessageBufferSharedPtr& messageBuffe
 
     if (messageBuffer->GetCurrentWriteIndex() <= headSize)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Êı¾İ´óĞ¡´íÎó£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ•°æ®å¤§å°é”™è¯¯ï¼"s))
     }
 
     std::array<iovec, 2> iov{};
@@ -60,7 +60,7 @@ int Network::AceIovecSockStream::Send(const MessageBufferSharedPtr& messageBuffe
 
     if (GetACESockStream().sendv_n(iov.data(), 2) != messageBuffer->GetCurrentWriteIndex())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("·¢ËÍÊı¾İÊ§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å‘é€æ•°æ®å¤±è´¥ï¼"s))
     }
 
     return messageBuffer->GetCurrentWriteIndex();
@@ -75,7 +75,7 @@ void Network::AceIovecSockStream::AsyncSend(const EventInterfaceSharedPtr& event
     if (const auto currentWriteIndex = Send(messageBuffer);
         currentWriteIndex != messageBuffer->GetCurrentWriteIndex())
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("ÏûÏ¢·¢ËÍÊ§°Ü¡£"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("æ¶ˆæ¯å‘é€å¤±è´¥ã€‚"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 
     CoreTools::CallbackParameters callbackParameters{ System::EnumCastUnderlying(SocketManagerPosition::WrappersStrategy) };
@@ -83,7 +83,7 @@ void Network::AceIovecSockStream::AsyncSend(const EventInterfaceSharedPtr& event
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::Ace));
     if (!eventInterface->EventFunction(callbackParameters))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("ÊÂ¼ş»Øµ÷Ö´ĞĞÊ§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("äº‹ä»¶å›è°ƒæ‰§è¡Œå¤±è´¥ï¼"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

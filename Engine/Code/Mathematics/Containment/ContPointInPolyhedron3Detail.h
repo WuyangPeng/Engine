@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/09 09:40)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 09:40)
 
 #ifndef MATHEMATICS_CONTAINMENT_CONT_POINT_IN_POLYHEDRON3_DETAIL_H
 #define MATHEMATICS_CONTAINMENT_CONT_POINT_IN_POLYHEDRON3_DETAIL_H
@@ -213,7 +213,7 @@ bool Mathematics::ContPointInPolyhedron3<Real>::ContainsS0(const Vector3<Real>& 
             }
 
             const int numTriangles = boost::numeric_cast<int>(face.triangles.size() / 3);
-            MATHEMATICS_ASSERTION_0(numTriangles > 0, "Èı½Ç²âÁ¿±ØĞë´æÔÚ¡£\n");
+            MATHEMATICS_ASSERTION_0(numTriangles > 0, "ä¸‰è§’æµ‹é‡å¿…é¡»å­˜åœ¨ã€‚\n");
 
             auto currIndex = 0;
             for (auto t = 0; t < numTriangles; ++t)
@@ -264,7 +264,7 @@ bool Mathematics::ContPointInPolyhedron3<Real>::ContainsC1C2(const Vector3<Real>
             StaticFindIntersectorRay3Plane3<Real> calc{ ray, face.plane };
             const auto intersects = calc.IsIntersection();
 
-            MATHEMATICS_ASSERTION_0(intersects, "ÒâÍâÇé¿ö¡£\n");
+            MATHEMATICS_ASSERTION_0(intersects, "æ„å¤–æƒ…å†µã€‚\n");
 
             auto intr = ray.GetOrigin() + calc.GetRayParameter() * ray.GetDirection();
 
@@ -343,7 +343,7 @@ bool Mathematics::ContPointInPolyhedron3<Real>::ContainsS1(const Vector3<Real>& 
             StaticFindIntersectorRay3Plane3<Real> calc{ ray, face.plane };
             const auto intersects = calc.IsIntersection();
 
-            MATHEMATICS_ASSERTION_0(intersects, "ÒâÍâ½á¹û¡£\n");
+            MATHEMATICS_ASSERTION_0(intersects, "æ„å¤–ç»“æœã€‚\n");
 
             auto intr = ray.GetOrigin() + calc.GetRayParameter() * ray.GetDirection();
 

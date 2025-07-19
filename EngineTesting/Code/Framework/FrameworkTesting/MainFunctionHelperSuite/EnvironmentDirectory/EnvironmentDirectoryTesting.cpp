@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.0 (2024/08/08 22:38)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.0 (2024/08/08 22:38)
 
 #include "EnvironmentDirectoryTesting.h"
 #include "System/DynamicLink/LibraryTools.h"
@@ -218,7 +218,7 @@ System::String Framework::EnvironmentDirectoryTesting::GetDescription(Descriptio
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½Ïà¹ØÃèÊö"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°ç›¸å…³æè¿°"s))
     }
 }
 
@@ -231,7 +231,7 @@ System::String Framework::EnvironmentDirectoryTesting::GetPrefix(Description des
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½Ïà¹ØÃèÊö"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°ç›¸å…³æè¿°"s))
     }
 }
 

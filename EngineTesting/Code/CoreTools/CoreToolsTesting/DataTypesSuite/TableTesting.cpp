@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/04/26 23:23)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/04/26 23:23)
 
 #include "TableTesting.h"
 #include "CoreTools/DataTypes/TableDetail.h"
@@ -316,7 +316,7 @@ void CoreTools::TableTesting::CompileErrorTest() noexcept
 {
 #ifdef COMPILE_ERROR_TEST
 
-    /// ÒÔÏÂ´úÂëÎŞ·¨Í¨¹ı±àÒë
+    /// ä»¥ä¸‹ä»£ç æ— æ³•é€šè¿‡ç¼–è¯‘
     TestingType2 table1{ 5, 6, 7, 8, 9, 10, 11, 12, 13 };
     TestingType3 table2{ 5, 6, 7, 8 };
     TestingType4 table3{ 5, 6, 7, 8 };

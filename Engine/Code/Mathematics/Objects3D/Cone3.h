@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.4 (2024/01/12 10:26)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/12 10:26)
 
 #ifndef MATHEMATICS_OBJECTS_3D_CONE3_H
 #define MATHEMATICS_OBJECTS_3D_CONE3_H
@@ -29,31 +29,31 @@ namespace Mathematics
         using Vector3Type = Vector3<Real>;
 
     public:
-        // ���׶����Dot(A,X-V) = |X-V| cos(t)
-        // ����V�Ƕ��㣬AΪԲ׶����ĵ�λ���ȷ���
-        // ����T��Բ׶����0 < t < pi/2��
-        // Բ׶�ڲ��ĵ㶨��ΪDot(A,X-V) >= |X-V| cos(t)��
-        // ����cos(t) > 0���ɱ������ƽ������
-        // ����׶���ɲ���ʽ����Ϊ Dot(A,X-V)^2 >= Dot(X-V,X-V) cos(t)^2��
-        // ����һ�����޵ģ�����׶��
+        // 锐角锥体是Dot(A,X-V) = |X-V| cos(t)
+        // 其中V是顶点，A为圆锥的轴的单位长度方向，
+        // 并且T是圆锥角在0 < t < pi/2。
+        // 圆锥内部的点定义为Dot(A,X-V) >= |X-V| cos(t)。
+        // 由于cos(t) > 0，可避免计算平方根。
+        // 固体锥是由不等式定义为 Dot(A,X-V)^2 >= Dot(X-V,X-V) cos(t)^2。
+        // 这是一个无限的，单面锥。
         //
-        // ׶�������ƽ��ضϴ�ֱ�����ڴӶ���ĸ߶�h����
-        // ���Ӷ�����ƽ��Ľ�������ľ��룩��
-        // ����׶��h = �����
-        // ����׶����һ�������ϵ�ƽ�������׶��֮�佻�档
-        // ���̵İ뾶rΪr = h*tan(t)��
+        // 锥体可以由平面截断垂直于它在从顶点的高度h的轴
+        // （从顶点至平面的交点与轴的距离）。
+        // 无限锥体h = 无穷大。
+        // 有限锥体有一个底盘上的平面和无限锥体之间交叉。
+        // 底盘的半径r为r = h*tan(t)。
 
-        // axis�����ǵ�λ���ȺͽǶȱ�����(0,pi/2)��
-        // ��������׶�����á�height��ΪMath<Real>::sm_MaxReal
+        // axis必须是单位长度和角度必须在(0,pi/2)。
+        // 对于无限锥，设置“height”为Math<Real>::sm_MaxReal
         Cone3(const Vector3Type& vertex,
               const Vector3Type& axis,
               const Real angle,
               const Real height,
               const Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        // axis�����ǵ�λ���ȡ�
-        // һ��(cosAngle,sinAngle)�����ϸ���ƽ��ĵ�һ���ޣ��Ա�֤׶��Ϊ(0,pi/2)
-        // ��������׶�����á�height��ΪMath<Real>::sm_MaxReal
+        // axis必须是单位长度。
+        // 一对(cosAngle,sinAngle)必须严格在平面的第一象限，以保证锥角为(0,pi/2)
+        // 对于无限锥，设置“height”为Math<Real>::sm_MaxReal
         Cone3(const Real cosAngle,
               const Real sinAngle,
               const Real height,

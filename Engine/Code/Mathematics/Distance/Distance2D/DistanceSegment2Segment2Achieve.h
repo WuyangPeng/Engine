@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 15:18)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 15:18)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_SEGMENT2_SEGMENT2_ACHIEVE_H
 #define MATHEMATICS_DISTANCE_DISTANCE_SEGMENT2_SEGMENT2_ACHIEVE_H
@@ -65,7 +65,7 @@ typename Mathematics::DistanceSegment2Segment2<Real>::DistanceResult Mathematics
 
     if (this->GetZeroThreshold() <= det)
     {
-        // Ïß¶Î²»Æ½ĞĞ¡£
+        // çº¿æ®µä¸å¹³è¡Œã€‚
         const auto lhsT = tool.GetLhsT();
         const auto rhsT = tool.GetRhsT();
 
@@ -80,8 +80,8 @@ typename Mathematics::DistanceSegment2Segment2<Real>::DistanceResult Mathematics
                 {
                     if (rhsT <= rhsExtentMultiplyDet)
                     {
-                        // ÇøÓò0£¨ÄÚ²¿£©
-                        // ×îĞ¡ÖµÎªÁ½¸öÏß¶ÎÄÚ²¿µã¡£
+                        // åŒºåŸŸ0ï¼ˆå†…éƒ¨ï¼‰
+                        // æœ€å°å€¼ä¸ºä¸¤ä¸ªçº¿æ®µå†…éƒ¨ç‚¹ã€‚
                         return DistanceResult{ MathType::GetValue(0),
                                                MathType::GetValue(0),
                                                lhsSegment.GetCenterPoint() + lhsT / det * lhsSegment.GetDirection(),
@@ -89,13 +89,13 @@ typename Mathematics::DistanceSegment2Segment2<Real>::DistanceResult Mathematics
                     }
                     else
                     {
-                        // ÇøÓò3£¨±ß£©
+                        // åŒºåŸŸ3ï¼ˆè¾¹ï¼‰
                         return GetSquaredWithClosestPointsIsLhsSide(tool, lhsExtent, rhsExtent);
                     }
                 }
                 else
                 {
-                    // ÇøÓò7£¨±ß£©
+                    // åŒºåŸŸ7ï¼ˆè¾¹ï¼‰
                     return GetSquaredWithClosestPointsIsLhsSide(tool, lhsExtent, -rhsExtent);
                 }
             }
@@ -105,18 +105,18 @@ typename Mathematics::DistanceSegment2Segment2<Real>::DistanceResult Mathematics
                 {
                     if (rhsT <= rhsExtentMultiplyDet)
                     {
-                        // ÇøÓò1£¨±ß£©
+                        // åŒºåŸŸ1ï¼ˆè¾¹ï¼‰
                         return GetSquaredWithClosestPointsIsRhsSide(tool, lhsExtent, rhsExtent);
                     }
                     else
                     {
-                        // ÇøÓò2£¨½Ç£©
+                        // åŒºåŸŸ2ï¼ˆè§’ï¼‰
                         return GetSquaredWithClosestPointsIsLhsCorner(tool, lhsExtent, rhsExtent);
                     }
                 }
                 else
                 {
-                    // ÇøÓò8£¨½Ç£©
+                    // åŒºåŸŸ8ï¼ˆè§’ï¼‰
                     return GetSquaredWithClosestPointsIsLhsCorner(tool, lhsExtent, -rhsExtent);
                 }
             }
@@ -127,27 +127,27 @@ typename Mathematics::DistanceSegment2Segment2<Real>::DistanceResult Mathematics
             {
                 if (rhsT <= rhsExtentMultiplyDet)
                 {
-                    // ÇøÓò5£¨±ß£©
+                    // åŒºåŸŸ5ï¼ˆè¾¹ï¼‰
                     return GetSquaredWithClosestPointsIsRhsSide(tool, -lhsExtent, rhsExtent);
                 }
                 else
                 {
-                    // ÇøÓò4£¨½Ç£©
+                    // åŒºåŸŸ4ï¼ˆè§’ï¼‰
                     return GetSquaredWithClosestPointsIsRhsCorner(tool, lhsExtent, rhsExtent);
                 }
             }
             else
             {
-                // ÇøÓò6£¨½Ç£©
+                // åŒºåŸŸ6ï¼ˆè§’ï¼‰
                 return GetSquaredWithClosestPointsIsRhsCorner(tool, lhsExtent, -rhsExtent);
             }
         }
     }
     else
     {
-        // Ïß¶ÎÊÇÆ½ĞĞµÄ¡£
-        // Æ½¾ùÏîoriginDifferenceDotLhsDirection±»Éè¼ÆÎªÈ·±£º¯ÊıµÄ¶Ô³ÆĞÔ¡£
-        // Ò²¾ÍÊÇËµ£¬DistanceSegment2Segment2£¨seg0£¬seg1£©ºÍDistanceSegment2Segment2£¨seg1£¬seg0£©Ó¦¸Ã²úÉúÏàÍ¬µÄÊı¡£
+        // çº¿æ®µæ˜¯å¹³è¡Œçš„ã€‚
+        // å¹³å‡é¡¹originDifferenceDotLhsDirectionè¢«è®¾è®¡ä¸ºç¡®ä¿å‡½æ•°çš„å¯¹ç§°æ€§ã€‚
+        // ä¹Ÿå°±æ˜¯è¯´ï¼ŒDistanceSegment2Segment2ï¼ˆseg0ï¼Œseg1ï¼‰å’ŒDistanceSegment2Segment2ï¼ˆseg1ï¼Œseg0ï¼‰åº”è¯¥äº§ç”Ÿç›¸åŒçš„æ•°ã€‚
         const auto extentSum = lhsExtent + rhsExtent;
         const auto sign = (MathType::GetValue(0) < tool.GetDirectionDot() ? MathType::GetValue(-1) : MathType::GetValue(1));
         const auto originDifferenceDotLhsDirectionAverage = tool.GetOriginDifferenceDotDirectionAverage();

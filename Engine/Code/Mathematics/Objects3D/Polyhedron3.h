@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 10:25)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 10:25)
 
 #ifndef MATHEMATICS_OBJECTS_3D_POLYHEDRON3_H
 #define MATHEMATICS_OBJECTS_3D_POLYHEDRON3_H
@@ -35,13 +35,13 @@ namespace Mathematics
         using IndicesType = std::vector<int>;
 
     public:
-        // µ÷ÓÃÕß¸ºÔğÈ·±£Íø¸ñ´ú±íÒ»¸ö¼òµ¥µÄ¶àÃæÌå
-        // £¨¶şÎ¬Á÷ĞÎÓëÇòÌåµÄÍØÆË£¬·Ç×ÔÏà½»µÄÍØÆË½á¹¹£©¡£
-        // Èı½ÇĞÎÃæ£¬´ÓÍø¸ñÍâ¹Û²ìÊ±±ØĞëÄæÊ±ÕëË³Ğò¡£
+        // è°ƒç”¨è€…è´Ÿè´£ç¡®ä¿ç½‘æ ¼ä»£è¡¨ä¸€ä¸ªç®€å•çš„å¤šé¢ä½“
+        // ï¼ˆäºŒç»´æµå½¢ä¸çƒä½“çš„æ‹“æ‰‘ï¼Œéè‡ªç›¸äº¤çš„æ‹“æ‰‘ç»“æ„ï¼‰ã€‚
+        // ä¸‰è§’å½¢é¢ï¼Œä»ç½‘æ ¼å¤–è§‚å¯Ÿæ—¶å¿…é¡»é€†æ—¶é’ˆé¡ºåºã€‚
         //
-        // Polyhedron3¶ÔÏóÒ»°ã´ÓÆäËûÀ´Ô´¹²ÏíÊı¾İ¡£
-        // Õâ¸öÀàÊ¹ÓÃÖÇÄÜÖ¸Õë£¨SmartPointer1DArray£©¹²ÏíÊäÈëÊı×é¡£
-        // Èç¹ûÄú²»Ï£ÍûÀàÉ¾³ıÊı×é£¬Ê¹ÓÃ×Ô¼ºµÄÖÇÄÜÖ¸ÕëµÄÊı×é¡£
+        // Polyhedron3å¯¹è±¡ä¸€èˆ¬ä»å…¶ä»–æ¥æºå…±äº«æ•°æ®ã€‚
+        // è¿™ä¸ªç±»ä½¿ç”¨æ™ºèƒ½æŒ‡é’ˆï¼ˆSmartPointer1DArrayï¼‰å…±äº«è¾“å…¥æ•°ç»„ã€‚
+        // å¦‚æœæ‚¨ä¸å¸Œæœ›ç±»åˆ é™¤æ•°ç»„ï¼Œä½¿ç”¨è‡ªå·±çš„æ™ºèƒ½æŒ‡é’ˆçš„æ•°ç»„ã€‚
         Polyhedron3(const VerticesType& vertices, const IndicesType& indices);
 
         virtual ~Polyhedron3() noexcept = default;
@@ -58,7 +58,7 @@ namespace Mathematics
 
 #endif  // OPEN_CLASS_INVARIANT
 
-        // Ö»¶Á³ÉÔ±·ÃÎÊ¡£
+        // åªè¯»æˆå‘˜è®¿é—®ã€‚
         NODISCARD int GetNumVertices() const;
         NODISCARD VerticesType GetVertices() const;
         NODISCARD const Vector3Type& GetVertex(int index) const;
@@ -67,10 +67,10 @@ namespace Mathematics
         NODISCARD IndicesType GetIndices() const;
         NODISCARD IndicesType GetTriangle(int index) const;
 
-        // ÔÊĞí¶¥µãĞŞ¸Ä¡£µ÷ÓÃÕß±ØĞëÈ·±£¶àÃæÌåÈÔÈ»ÊÇ¼òµ¥¶àÃæÌå¡£
+        // å…è®¸é¡¶ç‚¹ä¿®æ”¹ã€‚è°ƒç”¨è€…å¿…é¡»ç¡®ä¿å¤šé¢ä½“ä»ç„¶æ˜¯ç®€å•å¤šé¢ä½“ã€‚
         virtual void SetVertex(int index, const Vector3Type& vertex);
 
-        // ¼ÆËã¹ØÓÚËùÊö¶àÃæÌåµÄ¸÷ÖÖĞÅÏ¢¡£
+        // è®¡ç®—å…³äºæ‰€è¿°å¤šé¢ä½“çš„å„ç§ä¿¡æ¯ã€‚
         NODISCARD Vector3Type ComputeVertexAverage() const;
         NODISCARD Real ComputeSurfaceArea() const;
         NODISCARD Real ComputeVolume() const;

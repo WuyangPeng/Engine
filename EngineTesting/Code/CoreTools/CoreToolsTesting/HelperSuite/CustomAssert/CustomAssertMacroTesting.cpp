@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+О╩©/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// вВуъё╨еМнДяТё╛еМЙй╤Вё╛еМЙйтС
-/// а╙о╣вВуъё╨94458936@qq.com
+/// Д╫°Х─┘О╪ Е╫╜Ф╜╕И≤ЁО╪▄Е╫╜Ф≥■Ф│╘О╪▄Е╫╜Ф≥■ФЁ╫
+/// Х│■ГЁ╩Д╫°Х─┘О╪ 94458936@qq.com
 ///
-/// ╠Йв╪ё╨std:c++20
-/// ╟Ф╠╬ё╨1.0.0.8 (2024/04/13 00:13)
+/// Ф═┤Е┤├О╪ std:c++20
+/// Г┴┬Ф°╛О╪ 1.0.0.8 (2024/04/13 00:13)
 
 #include "CustomAssertMacroTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -35,26 +35,26 @@ void CoreTools::CustomAssertMacroTesting::MainTest()
 
 void CoreTools::CustomAssertMacroTesting::AssertMacroTest()
 {
-    ASSERTION(true, "╤оят╡Бйтё║");
-    ASSERTION_USE_FUNCTION_DESCRIBED(true, CORE_TOOLS_FUNCTION_DESCRIBED, "╤оят╡Бйтё║");
+    ASSERTION(true, "Ф√╜Х╗─Ф╣▀Х╞∙О╪│");
+    ASSERTION_USE_FUNCTION_DESCRIBED(true, CORE_TOOLS_FUNCTION_DESCRIBED, "Ф√╜Х╗─Ф╣▀Х╞∙О╪│");
 
-    ASSERTION_0(true, "╤оят╡Бйтё║");
-    ASSERTION_USE_FUNCTION_DESCRIBED_0(true, CORE_TOOLS_FUNCTION_DESCRIBED, "╤оят╡Бйтё║");
+    ASSERTION_0(true, "Ф√╜Х╗─Ф╣▀Х╞∙О╪│");
+    ASSERTION_USE_FUNCTION_DESCRIBED_0(true, CORE_TOOLS_FUNCTION_DESCRIBED, "Ф√╜Х╗─Ф╣▀Х╞∙О╪│");
 
-    ASSERTION_1(true, "╤оят╡Бйтё║");
-    ASSERTION_USE_FUNCTION_DESCRIBED_1(true, CORE_TOOLS_FUNCTION_DESCRIBED, "╤оят╡Бйтё║");
+    ASSERTION_1(true, "Ф√╜Х╗─Ф╣▀Х╞∙О╪│");
+    ASSERTION_USE_FUNCTION_DESCRIBED_1(true, CORE_TOOLS_FUNCTION_DESCRIBED, "Ф√╜Х╗─Ф╣▀Х╞∙О╪│");
 
-    ASSERTION_2(true, "╤оят╡Бйтё║");
-    ASSERTION_USE_FUNCTION_DESCRIBED_2(true, CORE_TOOLS_FUNCTION_DESCRIBED, "╤оят╡Бйтё║");
+    ASSERTION_2(true, "Ф√╜Х╗─Ф╣▀Х╞∙О╪│");
+    ASSERTION_USE_FUNCTION_DESCRIBED_2(true, CORE_TOOLS_FUNCTION_DESCRIBED, "Ф√╜Х╗─Ф╣▀Х╞∙О╪│");
 
-    ASSERTION_3(true, "╤оят╡Бйтё║");
-    ASSERTION_USE_FUNCTION_DESCRIBED_3(true, CORE_TOOLS_FUNCTION_DESCRIBED, "╤оят╡Бйтё║");
+    ASSERTION_3(true, "Ф√╜Х╗─Ф╣▀Х╞∙О╪│");
+    ASSERTION_USE_FUNCTION_DESCRIBED_3(true, CORE_TOOLS_FUNCTION_DESCRIBED, "Ф√╜Х╗─Ф╣▀Х╞∙О╪│");
 
-    ASSERTION_4(true, "╤оят╡Бйтё║");
-    ASSERTION_USE_FUNCTION_DESCRIBED_4(true, CORE_TOOLS_FUNCTION_DESCRIBED, "╤оят╡Бйтё║");
+    ASSERTION_4(true, "Ф√╜Х╗─Ф╣▀Х╞∙О╪│");
+    ASSERTION_USE_FUNCTION_DESCRIBED_4(true, CORE_TOOLS_FUNCTION_DESCRIBED, "Ф√╜Х╗─Ф╣▀Х╞∙О╪│");
 
-    ASSERTION_DEBUG(true, "╤оят╡Бйтё║");
-    ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(true, CORE_TOOLS_FUNCTION_DESCRIBED, "╤оят╡Бйтё║");
+    ASSERTION_DEBUG(true, "Ф√╜Х╗─Ф╣▀Х╞∙О╪│");
+    ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(true, CORE_TOOLS_FUNCTION_DESCRIBED, "Ф√╜Х╗─Ф╣▀Х╞∙О╪│");
 }
 
 void CoreTools::CustomAssertMacroTesting::LevelTest()

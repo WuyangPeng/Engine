@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/30 18:06)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/30 18:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,7 +22,7 @@ CoreTools::SemaphoreImpl::SemaphoreImpl(int initialCount, int maximumCount)
 {
     if (!System::IsSystemSemaphoreValid(handle))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³õÊ¼»¯ĞÅºÅÁ¿Ê§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("åˆå§‹åŒ–ä¿¡å·é‡å¤±è´¥ï¼"s))
     }
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -34,7 +34,7 @@ CoreTools::SemaphoreImpl::~SemaphoreImpl() noexcept
 
     if (!System::CloseSystemSemaphore(handle))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("Ïú»ÙĞÅºÅÁ¿Ê§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("é”€æ¯ä¿¡å·é‡å¤±è´¥ï¼"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -50,13 +50,13 @@ bool CoreTools::SemaphoreImpl::IsValid() const noexcept
 void CoreTools::SemaphoreImpl::Release(int releaseCount)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
-    CORE_TOOLS_ASSERTION_0(0 < releaseCount, "ÒªÊÍ·ÅµÄĞÅºÅÁ¿ÊıÄ¿Îª¸ºÊı¡£");
+    CORE_TOOLS_ASSERTION_0(0 < releaseCount, "è¦é‡Šæ”¾çš„ä¿¡å·é‡æ•°ç›®ä¸ºè´Ÿæ•°ã€‚");
 
     currentCount += releaseCount;
 
     if (!System::ReleaseSystemSemaphore(handle, releaseCount, nullptr))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÊÍ·ÅĞÅºÅÁ¿Ê§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("é‡Šæ”¾ä¿¡å·é‡å¤±è´¥ï¼"s))
     }
 }
 
@@ -66,7 +66,7 @@ void CoreTools::SemaphoreImpl::Wait()
 
     if (!System::WaitForSystemSemaphore(handle))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("½øÈëĞÅºÅÁ¿Ê§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¿›å…¥ä¿¡å·é‡å¤±è´¥ï¼"s))
     }
 
     --currentCount;

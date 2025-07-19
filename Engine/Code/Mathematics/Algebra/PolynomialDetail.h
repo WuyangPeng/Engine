@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.5 (2024/02/18 10:57)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.5 (2024/02/18 10:57)
 
 #ifndef MATHEMATICS_ALGEBRA_POLYNOMIAL_DETAIL_H
 #define MATHEMATICS_ALGEBRA_POLYNOMIAL_DETAIL_H
@@ -26,7 +26,7 @@ Mathematics::Polynomial<Real>::Polynomial(int degree)
 {
     if (coefficient.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¹¹ÔìµÄ¶àÏîÊ½degreeÎª¸ºÊı£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ„é€ çš„å¤šé¡¹å¼degreeä¸ºè´Ÿæ•°ï¼"s))
     }
 
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -39,7 +39,7 @@ Mathematics::Polynomial<Real>::Polynomial(const ContainerType& coefficient)
 {
     if (coefficient.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¶àÏîÊ½Îª¿Õ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å¤šé¡¹å¼ä¸ºç©ºã€‚"s))
     }
 
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -74,7 +74,7 @@ void Mathematics::Polynomial<Real>::SetDegree(int degree)
 
     if (degree < 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¹¹ÔìµÄ¶àÏîÊ½degreeÎª¸ºÊı£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ„é€ çš„å¤šé¡¹å¼degreeä¸ºè´Ÿæ•°ï¼"))
     }
 
     const auto coefficientSize = degree + 1;
@@ -97,7 +97,7 @@ int Mathematics::Polynomial<Real>::GetDegree() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    /// ¸ù¾İÉè¼Æ£¬coefficient.size() > 0¡£
+    /// æ ¹æ®è®¾è®¡ï¼Œcoefficient.size() > 0ã€‚
     return boost::numeric_cast<int>(coefficient.size() - 1);
 }
 
@@ -171,7 +171,7 @@ void Mathematics::Polynomial<Real>::SetCoefficients(const ContainerType& aCoeffi
 
     if (aCoefficient.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¶àÏîÊ½Îª¿Õ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å¤šé¡¹å¼ä¸ºç©ºã€‚"s))
     }
     else
     {
@@ -187,7 +187,7 @@ void Mathematics::Polynomial<Real>::SetCoefficients(ContainerType&& aCoefficient
 
     if (aCoefficient.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¶àÏîÊ½Îª¿Õ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å¤šé¡¹å¼ä¸ºç©ºã€‚"s))
     }
     else
     {
@@ -316,7 +316,7 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator/=(Real sc
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³ıÁã´íÎó£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("é™¤é›¶é”™è¯¯ï¼"s))
     }
 
     return *this;
@@ -470,10 +470,10 @@ typename Mathematics::Polynomial<Real>::PolynomialDivideType Mathematics::Polyno
     {
         Polynomial quotient{ quotientDegree };
 
-        /// ÁÙÊ±´æ´¢µÄÓàÊı¡£
+        /// ä¸´æ—¶å­˜å‚¨çš„ä½™æ•°ã€‚
         Polynomial remainder{ *this };
 
-        /// ×ö³ı·¨£¨Å·¼¸ÀïµÃËã·¨£©¡£
+        /// åšé™¤æ³•ï¼ˆæ¬§å‡ é‡Œå¾—ç®—æ³•ï¼‰ã€‚
         const auto inv = MathType::GetValue(1) / divisor[divisorDegree];
         for (auto quotientIndex = quotientDegree; 0 <= quotientIndex; --quotientIndex)
         {
@@ -486,7 +486,7 @@ typename Mathematics::Polynomial<Real>::PolynomialDivideType Mathematics::Polyno
             }
         }
 
-        // ¼ÆËãremainderÕıÈ·µÄdegree¡£
+        // è®¡ç®—remainderæ­£ç¡®çš„degreeã€‚
         if (1 <= divisorDegree)
         {
             auto remainderDegree = divisorDegree - 1;
@@ -524,7 +524,7 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 Mathematics::Polynomial<Real> Mathematics::GreatestCommonDivisor(const Polynomial<Real>& lhs, const Polynomial<Real>& rhs, Real epsilon)
 {
-    /// ·Ö×ÓÓ¦¸ÃÊÇ½Ï´ó´ÎÊıµÄ¶àÏîÊ½¡£
+    /// åˆ†å­åº”è¯¥æ˜¯è¾ƒå¤§æ¬¡æ•°çš„å¤šé¡¹å¼ã€‚
     auto a = rhs.GetDegree() <= lhs.GetDegree() ? lhs : rhs;
     auto b = rhs.GetDegree() <= lhs.GetDegree() ? rhs : lhs;
 
@@ -534,7 +534,7 @@ Mathematics::Polynomial<Real> Mathematics::GreatestCommonDivisor(const Polynomia
         return (!Approximate(a, zero) ? a : zero);
     }
 
-    /// µ±Ê¹ÓÃ¸¡µãÊµÊı½øĞĞ¼ÆËãÊ±£¬Ê¹¶àÏîÊ½Ñ¹Ëõ±£³ÖÏµÊıµÄºÏÀí´óĞ¡¡£
+    /// å½“ä½¿ç”¨æµ®ç‚¹å®æ•°è¿›è¡Œè®¡ç®—æ—¶ï¼Œä½¿å¤šé¡¹å¼å‹ç¼©ä¿æŒç³»æ•°çš„åˆç†å¤§å°ã€‚
     a.MakeCompress(epsilon);
     b.MakeCompress(epsilon);
 
@@ -543,7 +543,7 @@ Mathematics::Polynomial<Real> Mathematics::GreatestCommonDivisor(const Polynomia
         if (const auto polynomialDivide = Divide(a, b);
             !Approximate(polynomialDivide.GetRemainder(), zero, epsilon))
         {
-            /// a = q * b + r, ËùÒÔ gcd(a,b) = gcd(b, r)
+            /// a = q * b + r, æ‰€ä»¥ gcd(a,b) = gcd(b, r)
             a = b;
             b = polynomialDivide.GetRemainder();
             b.MakeCompress(epsilon);
@@ -562,9 +562,9 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 std::vector<Mathematics::Polynomial<Real>> Mathematics::SquareFreeFactorization(const Polynomial<Real>& f)
 {
-    /// ÔÚ¶ÔDivide(...)µÄµ÷ÓÃÖĞ£¬
-    /// ÎÒÃÇÖªµÀ³ıÊıÕıºÃ³ıÒÔ·Ö×Ó£¬
-    /// ËùÒÔÔÚËùÓĞÕâÑùµÄµ÷ÓÃÖ®ºó r = 0 a¡£
+    /// åœ¨å¯¹Divide(...)çš„è°ƒç”¨ä¸­ï¼Œ
+    /// æˆ‘ä»¬çŸ¥é“é™¤æ•°æ­£å¥½é™¤ä»¥åˆ†å­ï¼Œ
+    /// æ‰€ä»¥åœ¨æ‰€æœ‰è¿™æ ·çš„è°ƒç”¨ä¹‹å r = 0 aã€‚
     std::vector<Polynomial<Real>> factors{};
 
     const auto fDerivative = f.GetDerivative();

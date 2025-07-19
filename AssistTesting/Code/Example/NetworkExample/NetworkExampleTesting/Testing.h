@@ -1,8 +1,8 @@
-// Copyright (c) 2011-2020
+ï»¿// Copyright (c) 2011-2020
 // Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
 //
-// ÒýÇæ¸¨Öú²âÊÔ°æ±¾£º0.0.2.2 (2020/01/23 23:14)
+// å¼•æ“Žè¾…åŠ©æµ‹è¯•ç‰ˆæœ¬ï¼š0.0.2.2 (2020/01/23 23:14)
 
 #ifndef NETWORK_EXAMPLE_TESTING_H
 #define NETWORK_EXAMPLE_TESTING_H

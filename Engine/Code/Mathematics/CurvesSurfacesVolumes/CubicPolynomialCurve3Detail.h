@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/09 09:50)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 09:50)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_CUBIC_POLYNOMIAL_CURVE3_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_CUBIC_POLYNOMIAL_CURVE3_DETAIL_H
@@ -18,9 +18,9 @@ template <typename Real>
 Mathematics::CubicPolynomialCurve3<Real>::CubicPolynomialCurve3(const Polynomial<Real>& xPoly, const Polynomial<Real>& yPoly, const Polynomial<Real>& zPoly)
     : ParentType{ xPoly, yPoly, zPoly }, vertices{}
 {
-    MATHEMATICS_ASSERTION_0(xPoly.GetDegree() == 3, "ÎŞĞ§ÊäÈë\n");
-    MATHEMATICS_ASSERTION_0(yPoly.GetDegree() == 3, "ÎŞĞ§ÊäÈë\n");
-    MATHEMATICS_ASSERTION_0(xPoly.GetDegree() == 3, "ÎŞĞ§ÊäÈë\n");
+    MATHEMATICS_ASSERTION_0(xPoly.GetDegree() == 3, "æ— æ•ˆè¾“å…¥\n");
+    MATHEMATICS_ASSERTION_0(yPoly.GetDegree() == 3, "æ— æ•ˆè¾“å…¥\n");
+    MATHEMATICS_ASSERTION_0(xPoly.GetDegree() == 3, "æ— æ•ˆè¾“å…¥\n");
 }
 
 #ifdef OPEN_CLASS_INVARIANT

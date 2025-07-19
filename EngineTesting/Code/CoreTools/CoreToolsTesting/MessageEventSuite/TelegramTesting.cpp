@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/05/19 19:54)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/05/19 19:54)
 
 #include "TelegramTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -47,7 +47,7 @@ void CoreTools::TelegramTesting::Telegram0Test()
     const auto callbackParameters = telegram.GetCallbackParameters();
 
     ASSERT_EQUAL(sender, 1);
-    ASSERT_EQUAL_FAILURE_THROW(receiverInfo.size(), 1u, "½ÓÊÕÕßÊıÁ¿Ó¦¸Ã²»Îª¿Õ¡£");
+    ASSERT_EQUAL_FAILURE_THROW(receiverInfo.size(), 1u, "æ¥æ”¶è€…æ•°é‡åº”è¯¥ä¸ä¸ºç©ºã€‚");
     ASSERT_EQUAL(receiverInfo.at(0), 5);
     ASSERT_EQUAL(eventType, 3);
     ASSERT_EQUAL(dispatchMillisecondTime, 2);
@@ -70,7 +70,7 @@ void CoreTools::TelegramTesting::Telegram1Test()
     const auto callbackParameters1 = telegram.GetCallbackParameters();
 
     ASSERT_EQUAL(sender, 1);
-    ASSERT_EQUAL_FAILURE_THROW(receiverInfo.size(), 1u, "½ÓÊÕÕßÊıÁ¿Ó¦¸Ã²»Îª¿Õ¡£");
+    ASSERT_EQUAL_FAILURE_THROW(receiverInfo.size(), 1u, "æ¥æ”¶è€…æ•°é‡åº”è¯¥ä¸ä¸ºç©ºã€‚");
     ASSERT_EQUAL(receiverInfo.at(0), 5);
     ASSERT_EQUAL(eventType, 3);
     ASSERT_EQUAL(dispatchMillisecondTime, 2);

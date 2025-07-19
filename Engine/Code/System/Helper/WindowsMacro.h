@@ -1,16 +1,16 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 22:57)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 22:57)
 
 #ifndef SYSTEM_HELPER_WINDOWS_MACRO_H
 #define SYSTEM_HELPER_WINDOWS_MACRO_H
 
-/// WindowsÆ½Ì¨Ê¹ÓÃµÄºê£¬°´ĞèÒªÌí¼ÓÓÚ´Ë¡£
+/// Windowså¹³å°ä½¿ç”¨çš„å®ï¼ŒæŒ‰éœ€è¦æ·»åŠ äºæ­¤ã€‚
 
 #include "Platform.h"
 #include "UnicodeUsing.h"
@@ -198,19 +198,19 @@ namespace System
 
 #endif  // SYSTEM_USE_WINDOWS_MACRO
 
-    /// Òì³£Âë
+    /// å¼‚å¸¸ç 
     constexpr auto exceptionShift = 0u;
 
-    /// Éè±¸Âë
+    /// è®¾å¤‡ç 
     constexpr auto facilityShift = 16u;
 
-    /// ±£ÁôµÄ(0)
+    /// ä¿ç•™çš„(0)
     constexpr auto reservedShift = 28u;
 
-    /// MS(0) »ò ×Ô¶¨Òå(1)
+    /// MS(0) æˆ– è‡ªå®šä¹‰(1)
     constexpr auto customerShift = 29u;
 
-    /// ÑÏÖØĞÔ
+    /// ä¸¥é‡æ€§
     constexpr auto severityShift = 30u;
 
     constexpr auto exceptionBit = (1u << facilityShift) - 1u;

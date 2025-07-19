@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+ï»¿/// Copyright (c) 2010-2023
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.1 (2023/11/20 16:42)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.1 (2023/11/20 16:42)
 
 #include "Rendering/RenderingExport.h"
 
@@ -78,7 +78,7 @@ double Rendering::ControllerImpl::GetControlTime(double aApplicationTime) const
 
     if (repeat == ControllerRepeatType::Clamp)
     {
-        // ½Ø¶ÏÊ±¼äÔÚ¼ä¸ô[min,max]
+        // æˆªæ–­æ—¶é—´åœ¨é—´éš”[min,max]
         if (controlTime < minTime)
         {
             return minTime;
@@ -105,17 +105,17 @@ double Rendering::ControllerImpl::GetControlTime(double aApplicationTime) const
         // repeat == ControllerRepeatType::ClampCycle
         if ((boost::numeric_cast<int>(integerTime) & 1) != 0)
         {
-            // Ê±¼äÏòºó×ß¡£
+            // æ—¶é—´å‘åèµ°ã€‚
             return maxTime - fractionTime * timeRange;
         }
         else
         {
-            // Ê±¼äÏòÇ°×ß¡£
+            // æ—¶é—´å‘å‰èµ°ã€‚
             return minTime + fractionTime * timeRange;
         }
     }
 
-    // ×îĞ¡ÖµºÍ×î´óÖµÊÇÏàµÈµÄ£¬ËùÒÔ·µ»Ø×îĞ¡Öµ¡£
+    // æœ€å°å€¼å’Œæœ€å¤§å€¼æ˜¯ç›¸ç­‰çš„ï¼Œæ‰€ä»¥è¿”å›æœ€å°å€¼ã€‚
     return minTime;
 }
 
@@ -174,7 +174,7 @@ void Rendering::ControllerImpl::SetTime(double aMinTime, double aMaxTime)
 
     if (minTime > maxTime)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÉèÖÃ×îĞ¡Ê±¼ä´óÓÚ×î´óÊ±¼ä¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("è®¾ç½®æœ€å°æ—¶é—´å¤§äºæœ€å¤§æ—¶é—´ã€‚"))
     }
 
     minTime = aMinTime;
@@ -257,7 +257,7 @@ Rendering::ControllerImpl::ConstControllerSharedPtr Rendering::ControllerImpl::G
 
     if (!result)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ControllerObject ÒÑÊÍ·Å"))
+        THROW_EXCEPTION(SYSTEM_TEXT("ControllerObject å·²é‡Šæ”¾"))
     }
 
     return result;

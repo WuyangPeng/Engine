@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 13:53)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 13:53)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_LOG_ASYNCHRONOUS_H
 #define CORE_TOOLS_LOG_MANAGER_LOG_ASYNCHRONOUS_H
@@ -24,7 +24,7 @@ CORE_TOOLS_NON_COPY_EXPORT_IMPL(LogAsynchronousImpl);
 
 namespace CoreTools
 {
-    /// ÓÉÓÚÊµÏÖÀà±¾ÉíÊ¹ÓÃÁËËø£¬µ¥Àý²»ÔÙÊ¹ÓÃËø¡£
+    /// ç”±äºŽå®žçŽ°ç±»æœ¬èº«ä½¿ç”¨äº†é”ï¼Œå•ä¾‹ä¸å†ä½¿ç”¨é”ã€‚
     class CORE_TOOLS_DEFAULT_DECLARE LogAsynchronous final : public Singleton<LogAsynchronous, MutexCreate::UseNull>
     {
     public:

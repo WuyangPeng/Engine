@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 15:08)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 15:08)
 
 #ifndef MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_RAY3_TRIANGLE3_H
 #define MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_RAY3_TRIANGLE3_H
@@ -18,7 +18,7 @@
 
 namespace Mathematics
 {
-    // ²éÕÒ½»²æµã²éÑ¯¡£ Ïà½»µãÊÇ
+    // æŸ¥æ‰¾äº¤å‰ç‚¹æŸ¥è¯¢ã€‚ ç›¸äº¤ç‚¹æ˜¯
     // P = origin + t * direction = b0 * V0 + b1 * V1 + b2 * V2
     template <typename Real>
     class StaticFindIntersectorRay3Triangle3 : public StaticIntersector<Real, Vector3>
@@ -50,11 +50,11 @@ namespace Mathematics
         void Find();
 
     private:
-        // Ïà½»¶ÔÏó
+        // ç›¸äº¤å¯¹è±¡
         Ray3Type ray;
         Triangle3Type triangle;
 
-        // Ïà½»¶ÔÏó¼¯ĞÅÏ¢
+        // ç›¸äº¤å¯¹è±¡é›†ä¿¡æ¯
         Real rayParameter;
         Real triangleBary0;
         Real triangleBary1;

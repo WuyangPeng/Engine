@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 11:16)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 11:16)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR3_ORTHONORMAL_BASIS_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_VECTOR3_ORTHONORMAL_BASIS_ACHIEVE_H
@@ -21,7 +21,7 @@ requires std::is_arithmetic_v<Real>
 Mathematics::Vector3OrthonormalBasis<Real>::Vector3OrthonormalBasis(const Vector3Type& nonzeroVector, bool isUnit, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
     : isUnit{ isUnit }, uVector{}, vVector{}, wVector{ nonzeroVector }, epsilon{ epsilon }
 {
-    MATHEMATICS_ASSERTION_1(!nonzeroVector.IsZero(epsilon), "ÊäÈë±ØĞëÊÇ·ÇÁãÏòÁ¿£¡");
+    MATHEMATICS_ASSERTION_1(!nonzeroVector.IsZero(epsilon), "è¾“å…¥å¿…é¡»æ˜¯éé›¶å‘é‡ï¼");
 
     Generate();
 
@@ -51,7 +51,7 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 void Mathematics::Vector3OrthonormalBasis<Real>::GenerateOnXOrZIsMax() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    // unitVector.x»òunitVector.zÊÇ´óĞ¡×î´óµÄ×é³É²¿·Ö£¬½»»»ËûÃÇ
+    // unitVector.xæˆ–unitVector.zæ˜¯å¤§å°æœ€å¤§çš„ç»„æˆéƒ¨åˆ†ï¼Œäº¤æ¢ä»–ä»¬
     const auto invLength = MathType::InvSqrt(wVector.GetX() * wVector.GetX() + wVector.GetZ() * wVector.GetZ());
 
     uVector = Vector3Type{ -wVector.GetZ() * invLength, MathType::GetValue(0), wVector.GetX() * invLength };
@@ -63,7 +63,7 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 void Mathematics::Vector3OrthonormalBasis<Real>::GenerateOnYOrZIsMax() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    // unitVector.y»òunitVector.zÊÇ´óĞ¡×î´óµÄ×é³É²¿·Ö£¬½»»»ËûÃÇ
+    // unitVector.yæˆ–unitVector.zæ˜¯å¤§å°æœ€å¤§çš„ç»„æˆéƒ¨åˆ†ï¼Œäº¤æ¢ä»–ä»¬
     const auto invLength = MathType::InvSqrt(wVector.GetY() * wVector.GetY() + wVector.GetZ() * wVector.GetZ());
 
     uVector = Vector3Type{ MathType::GetValue(0), wVector.GetZ() * invLength, -wVector.GetY() * invLength };

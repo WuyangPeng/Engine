@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.5 (2024/02/02 12:37)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.5 (2024/02/02 12:37)
 
 #ifndef MATHEMATICS_ALGEBRA_ALGEBRA_AXIS_ANGLE_H
 #define MATHEMATICS_ALGEBRA_ALGEBRA_AXIS_ANGLE_H
@@ -14,8 +14,8 @@
 
 #include "Mathematics/Algebra/Vector/Vector.h"
 
-/// N=3»òN=4µÄÖá½Ç¶È±íÊ¾¡£
-/// µ±N=4Ê±£¬Öá±ØÐëÊÇÐÎÊ½Îª(x,y,z,0)[ÈýÔª×é·½ÏòµÄ·ÂÉä±íÊ¾]µÄÏòÁ¿¡£
+/// N=3æˆ–N=4çš„è½´è§’åº¦è¡¨ç¤ºã€‚
+/// å½“N=4æ—¶ï¼Œè½´å¿…é¡»æ˜¯å½¢å¼ä¸º(x,y,z,0)[ä¸‰å…ƒç»„æ–¹å‘çš„ä»¿å°„è¡¨ç¤º]çš„å‘é‡ã€‚
 namespace Mathematics::Algebra
 {
     template <int N, typename Real>

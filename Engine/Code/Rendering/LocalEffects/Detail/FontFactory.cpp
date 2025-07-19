@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.1 (2023/07/12 15:46)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.1 (2023/07/12 15:46)
 
 #include "Rendering/RenderingExport.h"
 
@@ -43,7 +43,7 @@ Rendering::FontFactory::FontSharedPtr Rendering::FontFactory::Create(FontType fo
             return std::make_shared<FontArialW700H18>(factory, shaderExtendName, maxMessageLength);
         default:
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½Ö¸¶¨µÄ×ÖÌåÀàĞÍ¡£"))
+            THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°æŒ‡å®šçš„å­—ä½“ç±»å‹ã€‚"))
         }
     }
 }

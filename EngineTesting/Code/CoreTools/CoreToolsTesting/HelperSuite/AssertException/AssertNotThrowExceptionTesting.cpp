@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 21:31)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 21:31)
 
 #include "AssertNotThrowExceptionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -41,10 +41,10 @@ void CoreTools::AssertNotThrowExceptionTesting::AssertExceptionMacroTest()
     ASSERT_NOT_THROW_EXCEPTION_2(AssertNotThrowExceptionTestWith2Parameter, parameter0, parameter1);
     ASSERT_NOT_THROW_EXCEPTION_3(AssertNotThrowExceptionTestWith3Parameter, parameter0, parameter1, parameter2);
 
-    ASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_0(AssertNotThrowExceptionTest, "²âÊÔAssertExceptionMacro");
-    ASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_1(AssertNotThrowExceptionTestWithParameter, parameter0, "²âÊÔAssertExceptionMacro");
-    ASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_2(AssertNotThrowExceptionTestWith2Parameter, parameter0, parameter1, "²âÊÔAssertExceptionMacro");
-    ASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_3(AssertNotThrowExceptionTestWith3Parameter, parameter0, parameter1, parameter2, "²âÊÔAssertExceptionMacro");
+    ASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_0(AssertNotThrowExceptionTest, "æµ‹è¯•AssertExceptionMacro");
+    ASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_1(AssertNotThrowExceptionTestWithParameter, parameter0, "æµ‹è¯•AssertExceptionMacro");
+    ASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_2(AssertNotThrowExceptionTestWith2Parameter, parameter0, parameter1, "æµ‹è¯•AssertExceptionMacro");
+    ASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_3(AssertNotThrowExceptionTestWith3Parameter, parameter0, parameter1, parameter2, "æµ‹è¯•AssertExceptionMacro");
 }
 
 void CoreTools::AssertNotThrowExceptionTesting::AssertNotThrowExceptionTest() noexcept

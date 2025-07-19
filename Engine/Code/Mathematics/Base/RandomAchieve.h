@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 09:57)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 09:57)
 
 #ifndef MATHEMATICS_BASE_RANDOM_ACHIEVE_H
 #define MATHEMATICS_BASE_RANDOM_ACHIEVE_H
@@ -35,7 +35,7 @@ Real Mathematics::Random<Real>::UnitRandom(uint32_t seed)
 
     const auto ratio = (static_cast<Real>(randomDistribution(generator))) / (static_cast<Real>(RAND_MAX));
 
-    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= ratio && ratio <= MathType::GetValue(1), "ratioÖµ±ØĞëÔÚÇø¼ä[0,1]£¡\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= ratio && ratio <= MathType::GetValue(1), "ratioå€¼å¿…é¡»åœ¨åŒºé—´[0,1]ï¼\n");
 
     return ratio;
 }
@@ -46,7 +46,7 @@ Real Mathematics::Random<Real>::SymmetricRandom(uint32_t seed)
 {
     const auto ratio = (MathType::GetValue(2) * UnitRandom(seed)) - MathType::GetValue(1);
 
-    MATHEMATICS_ASSERTION_3(MathType::GetValue(-1) <= ratio && ratio <= MathType::GetValue(1), "ratioÖµ±ØĞëÔÚÇø¼ä[-1,1]£¡\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(-1) <= ratio && ratio <= MathType::GetValue(1), "ratioå€¼å¿…é¡»åœ¨åŒºé—´[-1,1]ï¼\n");
 
     return ratio;
 }
@@ -55,11 +55,11 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::Random<Real>::IntervalRandom(Real min, Real max, uint32_t seed)
 {
-    MATHEMATICS_ASSERTION_3(min <= max, "Éè¶¨µÄ×îĞ¡Öµ´óÓÚ×î´óÖµ");
+    MATHEMATICS_ASSERTION_3(min <= max, "è®¾å®šçš„æœ€å°å€¼å¤§äºæœ€å¤§å€¼");
 
     const auto ratio = min + (max - min) * UnitRandom(seed);
 
-    MATHEMATICS_ASSERTION_3(min <= ratio && ratio <= max, "ratioÖµ±ØĞëÔÚÇø¼ä[min,max]£¡\n");
+    MATHEMATICS_ASSERTION_3(min <= ratio && ratio <= max, "ratioå€¼å¿…é¡»åœ¨åŒºé—´[min,max]ï¼\n");
 
     return ratio;
 }

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/10 09:23)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/10 09:23)
 
 #ifndef RENDERING_LOCAL_EFFECTS_VISUAL_EFFECT_IMPL_H
 #define RENDERING_LOCAL_EFFECTS_VISUAL_EFFECT_IMPL_H
@@ -89,7 +89,7 @@ namespace Rendering
         VisualProgramSharedPtr program;
         BaseRendererWeakPtr baseRenderer;
 
-        // ÓÃÓÚ´æ´¢¸½¼Ó´ËĞ§¹ûµÄVisual¶ÔÏóµÄ4x4Í¶Ó°ÊÓÍ¼ÊÀ½ç±ä»»µÄ³£Á¿»º³åÇø¡£
+        // ç”¨äºå­˜å‚¨é™„åŠ æ­¤æ•ˆæœçš„Visualå¯¹è±¡çš„4x4æŠ•å½±è§†å›¾ä¸–ç•Œå˜æ¢çš„å¸¸é‡ç¼“å†²åŒºã€‚
         ConstantBufferObjectAssociated projectionViewWorldMatrixConstant;
     };
 }

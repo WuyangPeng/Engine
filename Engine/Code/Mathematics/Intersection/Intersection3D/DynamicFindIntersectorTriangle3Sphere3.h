@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 15:01)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 15:01)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_SPHERE3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_SPHERE3_H
@@ -44,30 +44,30 @@ namespace Mathematics
         NODISCARD Triangle3Type GetTriangle() const noexcept;
         NODISCARD Sphere3Type GetSphere() const noexcept;
 
-        // ½Ó´¥µã¡£
+        // æ¥è§¦ç‚¹ã€‚
         NODISCARD Vector3Type GetPoint() const noexcept;
 
     private:
         using VertexType = std::vector<Vector3Type>;
 
     private:
-        /// ¶¯Ì¬²éÕÒ½»²æµã²éÑ¯¡£ Èç¹û²éÑ¯·µ»Ø¡° true¡±£¬ÇëÊ¹ÓÃGetContactTime()»ñÈ¡µÚÒ»´ÎÏà½»¡£
-        /// Èç¹û¸ÃÊ±¼äÎªÁã£¬ÔòÈı½ÇĞÎÒÑ¾­ÓëÇòÌåÏà½»£¬²¢ÇÒ²»¼ÆËãÈÎºÎÏà½»¼¯¡£
-        /// Èç¹ûÕâ¸öÊ±¼äÊÇÕıÊı£¬ÇëÊ¹ÓÃGetPoint()»ñÈ¡µÚÒ»¸öÏà½»µã¡£
+        /// åŠ¨æ€æŸ¥æ‰¾äº¤å‰ç‚¹æŸ¥è¯¢ã€‚ å¦‚æœæŸ¥è¯¢è¿”å›â€œ trueâ€ï¼Œè¯·ä½¿ç”¨GetContactTime()è·å–ç¬¬ä¸€æ¬¡ç›¸äº¤ã€‚
+        /// å¦‚æœè¯¥æ—¶é—´ä¸ºé›¶ï¼Œåˆ™ä¸‰è§’å½¢å·²ç»ä¸çƒä½“ç›¸äº¤ï¼Œå¹¶ä¸”ä¸è®¡ç®—ä»»ä½•ç›¸äº¤é›†ã€‚
+        /// å¦‚æœè¿™ä¸ªæ—¶é—´æ˜¯æ­£æ•°ï¼Œè¯·ä½¿ç”¨GetPoint()è·å–ç¬¬ä¸€ä¸ªç›¸äº¤ç‚¹ã€‚
         void Find();
 
     private:
-        // Ö§³Ö¶¯Ì¬²éÑ¯¡£
+        // æ”¯æŒåŠ¨æ€æŸ¥è¯¢ã€‚
         NODISCARD bool FindTriangleSphereCoplanarIntersection(int index, const VertexType& vertexs, const Vector3Type& sideNorm, const Vector3Type& side, Real tmax, const Vector3Type& velocity0, const Vector3Type& velocity1);
 
         NODISCARD bool FindSphereVertexIntersection(const Vector3Type& vertex, Real tmax, const Vector3Type& velocity0, const Vector3Type& velocity1);
 
     private:
-        // ÒªÏà½»µÄ¶ÔÏó¡£
+        // è¦ç›¸äº¤çš„å¯¹è±¡ã€‚
         Triangle3Type triangle;
         Sphere3Type sphere;
 
-        // ¶¯Ì¬²éÑ¯µÄÏà½»µã¡£
+        // åŠ¨æ€æŸ¥è¯¢çš„ç›¸äº¤ç‚¹ã€‚
         Vector3Type point;
     };
 }

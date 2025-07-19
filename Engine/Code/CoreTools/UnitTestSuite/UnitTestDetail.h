@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 11:14)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 11:14)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_DETAIL_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_DETAIL_H
@@ -41,7 +41,7 @@ void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const RhsType& rhs, co
         {
             std::stringstream stream{};
 
-            stream << lhs << "²»µÈÓÚ" << rhs;
+            stream << lhs << "ä¸ç­‰äº" << rhs;
 
             const auto described = GetAssertDescribed(stream.str(), errorMessage);
 
@@ -80,11 +80,11 @@ void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const MhsType& mhs, co
             std::stringstream stream{};
 
             if (!(lhsCondition || rhsCondition))
-                stream << lhs << "¡¢" << mhs << "ºÍ" << rhs << "²»ÏàµÈ";
+                stream << lhs << "ã€" << mhs << "å’Œ" << rhs << "ä¸ç›¸ç­‰";
             else if (!lhsCondition)
-                stream << lhs << "²»µÈÓÚ" << mhs;
+                stream << lhs << "ä¸ç­‰äº" << mhs;
             else
-                stream << mhs << "²»µÈÓÚ" << rhs;
+                stream << mhs << "ä¸ç­‰äº" << rhs;
 
             const auto described = GetAssertDescribed(stream.str(), errorMessage);
 
@@ -113,7 +113,7 @@ void CoreTools::UnitTest::AssertUnequal(const LhsType& lhs, const RhsType& rhs, 
         {
             std::stringstream stream{};
 
-            stream << lhs << "µÈÓÚ" << rhs;
+            stream << lhs << "ç­‰äº" << rhs;
 
             const auto described = GetAssertDescribed(stream.str(), errorMessage);
 
@@ -152,7 +152,7 @@ void CoreTools::UnitTest::AssertApproximate(const LhsType& lhs, const RhsType& r
         {
             std::stringstream stream{};
 
-            stream << lhs << "ºÍ" << rhs << "Ö®¼äµÄ²îÖµÎª" << difference << "£¬´óÓÚ" << epsilon;
+            stream << lhs << "å’Œ" << rhs << "ä¹‹é—´çš„å·®å€¼ä¸º" << difference << "ï¼Œå¤§äº" << epsilon;
 
             const auto described = GetAssertDescribed(stream.str(), errorMessage);
 
@@ -179,7 +179,7 @@ void CoreTools::UnitTest::AssertApproximateUseFunction(Function function, const 
         {
             std::stringstream stream{};
 
-            stream << lhs << "ºÍ" << rhs << "Ö®¼äµÄ²îÖµ´óÓÚ" << epsilon;
+            stream << lhs << "å’Œ" << rhs << "ä¹‹é—´çš„å·®å€¼å¤§äº" << epsilon;
 
             const auto described = GetAssertDescribed(stream.str(), errorMessage);
 
@@ -195,7 +195,7 @@ void CoreTools::UnitTest::AssertApproximateUseFunction(Function function, const 
 template <typename PtrType>
 void CoreTools::UnitTest::AssertEqualNullPtr(const PtrType& ptr, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
-    /// ÎªÁËÖ§³ÖÖÇÄÜÖ¸Õë£¬²»Ê¹ÓÃ
+    /// ä¸ºäº†æ”¯æŒæ™ºèƒ½æŒ‡é’ˆï¼Œä¸ä½¿ç”¨
     /// static_assert(std::is_pointer_v<PtrType>, "PtrType is pointer.");
 
     if (const auto condition = (ptr == nullptr);
@@ -207,7 +207,7 @@ void CoreTools::UnitTest::AssertEqualNullPtr(const PtrType& ptr, const FunctionD
     {
         std::stringstream stream{};
 
-        stream << "ptr²»ÊÇ¿ÕÖ¸Õë";
+        stream << "pträ¸æ˜¯ç©ºæŒ‡é’ˆ";
 
         const auto described = GetAssertDescribed(stream.str(), errorMessage);
 
@@ -218,7 +218,7 @@ void CoreTools::UnitTest::AssertEqualNullPtr(const PtrType& ptr, const FunctionD
 template <typename PtrType>
 void CoreTools::UnitTest::AssertUnequalNullPtr(const PtrType& ptr, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
-    /// ÎªÁËÖ§³ÖÖÇÄÜÖ¸Õë£¬²»Ê¹ÓÃ
+    /// ä¸ºäº†æ”¯æŒæ™ºèƒ½æŒ‡é’ˆï¼Œä¸ä½¿ç”¨
     /// static_assert(std::is_pointer_v<PtrType>, "PtrType is pointer.");
 
     if (const auto condition = (ptr != nullptr);
@@ -230,7 +230,7 @@ void CoreTools::UnitTest::AssertUnequalNullPtr(const PtrType& ptr, const Functio
     {
         std::stringstream stream{};
 
-        stream << "ptrÊÇ¿ÕÖ¸Õë";
+        stream << "ptræ˜¯ç©ºæŒ‡é’ˆ";
 
         const auto described = GetAssertDescribed(stream.str(), errorMessage);
 
@@ -253,7 +253,7 @@ void CoreTools::UnitTest::AssertRange(const TestType& test, const RangeType& lhs
         {
             std::stringstream stream{};
 
-            stream << test << "²»ÔÚ" << lhs << "ºÍ" << rhs << "Ö®¼ä";
+            stream << test << "ä¸åœ¨" << lhs << "å’Œ" << rhs << "ä¹‹é—´";
 
             const auto described = GetAssertDescribed(stream.str(), errorMessage);
 
@@ -282,7 +282,7 @@ void CoreTools::UnitTest::AssertLess(const LhsType& lhs, const RhsType& rhs, con
         {
             std::stringstream stream{};
 
-            stream << lhs << "²»Ğ¡ÓÚ" << rhs;
+            stream << lhs << "ä¸å°äº" << rhs;
 
             const auto described = GetAssertDescribed(stream.str(), errorMessage);
 
@@ -318,7 +318,7 @@ void CoreTools::UnitTest::AssertLessEqual(const LhsType& lhs, const RhsType& rhs
         {
             std::stringstream stream{};
 
-            stream << lhs << "²»Ğ¡ÓÚ»òµÈÓÚ" << rhs;
+            stream << lhs << "ä¸å°äºæˆ–ç­‰äº" << rhs;
 
             const auto described = GetAssertDescribed(stream.str(), errorMessage);
 
@@ -354,7 +354,7 @@ void CoreTools::UnitTest::AssertGreater(const LhsType& lhs, const RhsType& rhs, 
         {
             std::stringstream stream{};
 
-            stream << lhs << "²»´óÓÚ" << rhs;
+            stream << lhs << "ä¸å¤§äº" << rhs;
 
             const auto described = GetAssertDescribed(stream.str(), errorMessage);
 
@@ -390,7 +390,7 @@ void CoreTools::UnitTest::AssertGreaterEqual(const LhsType& lhs, const RhsType& 
         {
             std::stringstream stream{};
 
-            stream << lhs << "²»´óÓÚ»òµÈÓÚ" << rhs;
+            stream << lhs << "ä¸å¤§äºæˆ–ç­‰äº" << rhs;
 
             const auto described = GetAssertDescribed(stream.str(), errorMessage);
 
@@ -427,7 +427,7 @@ void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const RhsType& rhs, co
     {
         std::stringstream stream{};
 
-        stream << StringConversion::WideCharConversionMultiByte(lhsValue) << "²»µÈÓÚ" << StringConversion::WideCharConversionMultiByte(rhsValue);
+        stream << StringConversion::WideCharConversionMultiByte(lhsValue) << "ä¸ç­‰äº" << StringConversion::WideCharConversionMultiByte(rhsValue);
 
         const auto described = GetAssertDescribed(stream.str(), errorMessage);
 
@@ -452,7 +452,7 @@ void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const RhsType& rhs, co
     {
         std::stringstream stream{};
 
-        stream << lhsValue << "²»µÈÓÚ" << rhsValue;
+        stream << lhsValue << "ä¸ç­‰äº" << rhsValue;
 
         const auto described = GetAssertDescribed(stream.str(), errorMessage);
 

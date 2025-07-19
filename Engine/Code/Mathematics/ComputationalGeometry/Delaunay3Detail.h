@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/09 09:35)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 09:35)
 
 #ifndef MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY3_DETAIL_H
 #define MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY3_DETAIL_H
@@ -198,7 +198,7 @@ void Mathematics::Delaunay3<Real>::Init()
             }
         }
 
-        MATHEMATICS_ASSERTION_0(i == 4 * numSimplices, "ÒâÍâµÄ²»Æ¥Åä¡£\n");
+        MATHEMATICS_ASSERTION_0(i == 4 * numSimplices, "æ„å¤–çš„ä¸åŒ¹é…ã€‚\n");
 
         pathLast = -1;
 
@@ -248,7 +248,7 @@ Mathematics::Delaunay1<Real> Mathematics::Delaunay3<Real>::GetDelaunay1() const
 
     if (dimension != 1)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î¬¶È±ØĞëÎª1¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("ç»´åº¦å¿…é¡»ä¸º1ã€‚"));
     }
 
     typename Delaunay1Type::Vertices projection{};
@@ -288,7 +288,7 @@ Mathematics::Delaunay2<Real> Mathematics::Delaunay3<Real>::GetDelaunay2() const
 
     if (dimension != 2)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î¬¶È±ØĞëÎª2¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("ç»´åº¦å¿…é¡»ä¸º2ã€‚"));
     }
 
     const auto numVertices = this->GetNumVertices();
@@ -312,7 +312,7 @@ typename Mathematics::Delaunay3<Real>::HullType Mathematics::Delaunay3<Real>::Ge
 
     if (dimension != 3)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î¬¶È±ØĞëÎª3¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("ç»´åº¦å¿…é¡»ä¸º3ã€‚"));
     }
 
     auto numTriangles = 0;
@@ -326,7 +326,7 @@ typename Mathematics::Delaunay3<Real>::HullType Mathematics::Delaunay3<Real>::Ge
         }
     }
 
-    MATHEMATICS_ASSERTION_0(numTriangles > 0, "±ØĞëÖÁÉÙÓĞÒ»¸öËÄÃæÌå¡£\n");
+    MATHEMATICS_ASSERTION_0(numTriangles > 0, "å¿…é¡»è‡³å°‘æœ‰ä¸€ä¸ªå››é¢ä½“ã€‚\n");
 
     if (numTriangles == 0)
     {
@@ -372,7 +372,7 @@ int Mathematics::Delaunay3<Real>::GetContainingTetrahedron(const Vector3Type& p)
 
     if (dimension != 3)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î¬¶È±ØĞëÎª3¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("ç»´åº¦å¿…é¡»ä¸º3ã€‚"));
     }
 
     auto scP = (p - min) * scale;
@@ -500,7 +500,7 @@ typename Mathematics::Delaunay3<Real>::VertexType Mathematics::Delaunay3<Real>::
 
     if (dimension != 3)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î¬¶È±ØĞëÎª3¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("ç»´åº¦å¿…é¡»ä¸º3ã€‚"));
     }
 
     const auto numSimplices = this->GetNumSimplices();
@@ -526,7 +526,7 @@ typename Mathematics::Delaunay3<Real>::IndexType Mathematics::Delaunay3<Real>::G
 
     if (dimension != 3)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î¬¶È±ØĞëÎª3¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("ç»´åº¦å¿…é¡»ä¸º3ã€‚"));
     }
 
     const auto numSimplices = this->GetNumSimplices();
@@ -548,7 +548,7 @@ typename Mathematics::Delaunay3<Real>::IndexType Mathematics::Delaunay3<Real>::G
 
     if (dimension != 3)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î¬¶È±ØĞëÎª3¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("ç»´åº¦å¿…é¡»ä¸º3ã€‚"));
     }
 
     const auto numSimplices = this->GetNumSimplices();
@@ -570,7 +570,7 @@ typename Mathematics::Delaunay3<Real>::BaryType Mathematics::Delaunay3<Real>::Ge
 
     if (dimension != 3)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î¬¶È±ØĞëÎª3¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("ç»´åº¦å¿…é¡»ä¸º3ã€‚"));
     }
 
     const auto numSimplices = this->GetNumSimplices();
@@ -623,7 +623,7 @@ void Mathematics::Delaunay3<Real>::LoadFile(const String& filename)
 
     if (!ParentType::Load(inFile))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¼ÓÔØÎÄ¼şÊ§°Ü\n"));
+        THROW_EXCEPTION(SYSTEM_TEXT("åŠ è½½æ–‡ä»¶å¤±è´¥\n"));
     }
 
     const auto numVertices = this->GetNumVertices();
@@ -695,7 +695,7 @@ void Mathematics::Delaunay3<Real>::SaveFile(const String& filename) const
 
     if (!ParentType::Save(outFile))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("±£´æÎÄ¼şÊ§°Ü\n"));
+        THROW_EXCEPTION(SYSTEM_TEXT("ä¿å­˜æ–‡ä»¶å¤±è´¥\n"));
     }
 
     const auto numSimplices = this->GetNumSimplices();
@@ -845,10 +845,10 @@ void Mathematics::Delaunay3<Real>::Update(int i)
                 const auto iter = trimap.find(UnorderedTriangleKey(key.GetKey(0), key.GetKey(1), key.GetKey(2)));
                 if (iter == trimap.end())
                 {
-                    THROW_EXCEPTION(SYSTEM_TEXT("ÒâÍâÇé¿ö\n"));
+                    THROW_EXCEPTION(SYSTEM_TEXT("æ„å¤–æƒ…å†µ\n"));
                 }
 
-                MATHEMATICS_ASSERTION_0(iter->second->t.at(1) == 0, "ÒâÍâÇé¿ö\n");
+                MATHEMATICS_ASSERTION_0(iter->second->t.at(1) == 0, "æ„å¤–æƒ…å†µ\n");
 
                 auto adj = iter->second->t.at(0);
                 if (adj && candidates.find(adj) == candidates.end())

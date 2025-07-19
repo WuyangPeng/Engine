@@ -1,29 +1,29 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/08 19:31)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/08 19:31)
 
 #ifndef SYSTEM_HELPER_GREEN_HILLS_H
 #define SYSTEM_HELPER_GREEN_HILLS_H
 
 #ifdef __ghs
 
-    /// GreenHills C++ ±àÒëÆ÷ÉèÖÃ£º
+    /// GreenHills C++ ç¼–è¯‘å™¨è®¾ç½®ï¼š
 
-    /// °æ±¾¼ì²é£º
+    /// ç‰ˆæœ¬æ£€æŸ¥ï¼š
     #if (__ghs < 0)
 
-        #error "±àÒëÆ÷Î´ÅäÖÃ"
+        #error "ç¼–è¯‘å™¨æœªé…ç½®"
 
     #endif  // __ghs < 0
 
     #if (0 < __ghs)
 
-        #error "Î´ÖªµÄ±àÒëÆ÷°æ±¾"
+        #error "æœªçŸ¥çš„ç¼–è¯‘å™¨ç‰ˆæœ¬"
 
     #endif  // 0 < __ghs
 
@@ -47,7 +47,7 @@
 
     #ifndef TCRE_SYSTEM_COMPILER
 
-        #define TCRE_SYSTEM_COMPILER "Greenhills C++ °æ±¾ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
+        #define TCRE_SYSTEM_COMPILER "Greenhills C++ ç‰ˆæœ¬ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
 
     #endif  // TCRE_SYSTEM_COMPILER
 

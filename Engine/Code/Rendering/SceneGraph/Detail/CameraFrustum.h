@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/28 17:31)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/28 17:31)
 
 #ifndef RENDERING_SCENE_GRAPH_CAMERA_FRUSTUM_H
 #define RENDERING_SCENE_GRAPH_CAMERA_FRUSTUM_H
@@ -21,8 +21,8 @@
 
 namespace Rendering
 {
-    /// Ä¬ÈÏµÄÍ¸ÊÓÊÓ×¶Ìå¾ßÓĞ90¶ÈµÄÊÓÒ°¡¢1.0µÄ¿í¸ß±È¡¢½üÖµ1ºÍÔ¶Öµ10000¡£
-    /// Ä¬ÈÏÕı½»ÊÓÍ¼½ØÍ·ÌåµÄ(r,u,d)Îª[-1,1]^2 x [0,1]¡£
+    /// é»˜è®¤çš„é€è§†è§†é”¥ä½“å…·æœ‰90åº¦çš„è§†é‡ã€1.0çš„å®½é«˜æ¯”ã€è¿‘å€¼1å’Œè¿œå€¼10000ã€‚
+    /// é»˜è®¤æ­£äº¤è§†å›¾æˆªå¤´ä½“çš„(r,u,d)ä¸º[-1,1]^2 x [0,1]ã€‚
     class RENDERING_HIDDEN_DECLARE CameraFrustum
     {
     public:
@@ -42,33 +42,33 @@ namespace Rendering
 
         NODISCARD bool IsPerspective() const noexcept;
 
-        /// ÉèÖÃÊÓÍ¼Æ½½ØÍ·Ìå¡£Çø¼ä[rMin,rMax] ²âÁ¿ÔÚÓÒ·½ÏòR¡£
-        /// ÕâĞ©¶¼ÊÇÔÚÆ½½ØÍ·ÌåµÄ¡°left¡±ºÍ¡°right¡±Öµ¡£
-        /// Çø¼ä[uMin,uMax] ²âÁ¿ÔÚÉÏ·½ÏòU¡£
-        /// ÕâĞ©ÊÇ¡°bottom¡±ºÍ¡°top¡±Öµ¡£
-        /// Çø¼ä[dMin,dMax] ²âÁ¿ÊÓÍ¼·½ÏòD¡£
-        /// ÕâĞ©ÊÇ¡°near¡±ºÍ¡°far¡±Öµ¡£
+        /// è®¾ç½®è§†å›¾å¹³æˆªå¤´ä½“ã€‚åŒºé—´[rMin,rMax] æµ‹é‡åœ¨å³æ–¹å‘Rã€‚
+        /// è¿™äº›éƒ½æ˜¯åœ¨å¹³æˆªå¤´ä½“çš„â€œleftâ€å’Œâ€œrightâ€å€¼ã€‚
+        /// åŒºé—´[uMin,uMax] æµ‹é‡åœ¨ä¸Šæ–¹å‘Uã€‚
+        /// è¿™äº›æ˜¯â€œbottomâ€å’Œâ€œtopâ€å€¼ã€‚
+        /// åŒºé—´[dMin,dMax] æµ‹é‡è§†å›¾æ–¹å‘Dã€‚
+        /// è¿™äº›æ˜¯â€œnearâ€å’Œâ€œfarâ€å€¼ã€‚
         void SetFrustum(float directionMin, float directionMax, float upMin, float upMax, float rightMin, float rightMax);
 
-        /// Í¬Ê±ÉèÖÃÊÓÍ¼Æ½½ØÍ·ÌåËùÓĞµÄÖµ¡£
-        /// ÊäÈëÊı×é±ØĞë°´dMin, dMax, uMin, uMax, rMin, rMaxµÄË³Ğò¡£
+        /// åŒæ—¶è®¾ç½®è§†å›¾å¹³æˆªå¤´ä½“æ‰€æœ‰çš„å€¼ã€‚
+        /// è¾“å…¥æ•°ç»„å¿…é¡»æŒ‰dMin, dMax, uMin, uMax, rMin, rMaxçš„é¡ºåºã€‚
         void SetFrustum(const Container& aFrustum) noexcept;
 
-        /// ÉèÖÃÒ»¸ö¶Ô³ÆµÄÊÓÍ¼Æ½½ØÍ·Ìå(uMin = -uMax, rMin = -rMax)
-        /// Ê¹ÓÃÒ»¸öÊÓÍ¼×Ö¶ÎÔÚup·½ÏòºÍÒ»¸ö¿í¸ß±È¡£
-        /// Õâ¸öµ÷ÓÃÏàµ±ÓÚOpenGLµÄgluPerspective¡£
-        /// Òò´Ë£¬Õâ¸öº¯Êı±ØĞëÖ¸¶¨ÊÓÍ¼µÄ¶ÈÊı£¬ÔÚÇø¼ä(0,180)
+        /// è®¾ç½®ä¸€ä¸ªå¯¹ç§°çš„è§†å›¾å¹³æˆªå¤´ä½“(uMin = -uMax, rMin = -rMax)
+        /// ä½¿ç”¨ä¸€ä¸ªè§†å›¾å­—æ®µåœ¨upæ–¹å‘å’Œä¸€ä¸ªå®½é«˜æ¯”ã€‚
+        /// è¿™ä¸ªè°ƒç”¨ç›¸å½“äºOpenGLçš„gluPerspectiveã€‚
+        /// å› æ­¤ï¼Œè¿™ä¸ªå‡½æ•°å¿…é¡»æŒ‡å®šè§†å›¾çš„åº¦æ•°ï¼Œåœ¨åŒºé—´(0,180)
         void SetFrustum(float upFieldOfViewDegrees, float aspectRatio, float directionMin, float directionMax);
 
-        /// Í¬Ê±»ñµÃËùÓĞÊÓÍ¼Æ½½ØÍ·ÌåµÄÖµ¡£
+        /// åŒæ—¶è·å¾—æ‰€æœ‰è§†å›¾å¹³æˆªå¤´ä½“çš„å€¼ã€‚
         NODISCARD Container GetFrustum() const noexcept;
 
-        /// µÃµ½Ò»¸ö¶Ô³ÆÊÓÍ¼Æ½½ØÍ·ÌåµÄ²ÎÊı¡£
-        /// ·µ»ØµÄCameraFrustumDataµ÷ÓÃIsSymmetricÊÇtrueµ±ÇÒ½öµ±Æ½½ØÍ·ÌåÊÇ¶Ô³ÆµÄ£¬
-        /// Ö»ÓĞÔÚÕâÖÖÇé¿öÏÂ£¬·µ»ØÖµ²ÅÊÇÓĞĞ§µÄ¡£
+        /// å¾—åˆ°ä¸€ä¸ªå¯¹ç§°è§†å›¾å¹³æˆªå¤´ä½“çš„å‚æ•°ã€‚
+        /// è¿”å›çš„CameraFrustumDataè°ƒç”¨IsSymmetricæ˜¯trueå½“ä¸”ä»…å½“å¹³æˆªå¤´ä½“æ˜¯å¯¹ç§°çš„ï¼Œ
+        /// åªæœ‰åœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œè¿”å›å€¼æ‰æ˜¯æœ‰æ•ˆçš„ã€‚
         NODISCARD CameraFrustumData GetSymmetricFrustum() const;
 
-        /// »ñµÃµ¥Ò»ÊÓÍ¼Æ½½ØÍ·ÌåµÄÖµ¡£
+        /// è·å¾—å•ä¸€è§†å›¾å¹³æˆªå¤´ä½“çš„å€¼ã€‚
         NODISCARD float GetDirectionMin() const;
         NODISCARD float GetDirectionMax() const;
         NODISCARD float GetUpMin() const;
@@ -85,10 +85,10 @@ namespace Rendering
         NODISCARD float GetFrustum(ViewFrustum viewFrustum) const;
 
     private:
-        /// ÊÓÍ¼Æ½½ØÍ·Ìå,´æ´¢ÔÚË³ĞòÎªdMin (near), dMax (far),uMin (bottom), uMax (top), rMin (left), ºÍ rMax (right)µÄË³Ğò´æ´¢¡£
+        /// è§†å›¾å¹³æˆªå¤´ä½“,å­˜å‚¨åœ¨é¡ºåºä¸ºdMin (near), dMax (far),uMin (bottom), uMax (top), rMin (left), å’Œ rMax (right)çš„é¡ºåºå­˜å‚¨ã€‚
         Container frustum;
 
-        /// Õâ¸ö³ÉÔ±ÊÇ¡°true¡±ÔòÊÇÍ¸ÊÓÏà»ú£¬ÊÇ¡°false¡±ÔòÊÇÕı½»Ïà»ú¡£
+        /// è¿™ä¸ªæˆå‘˜æ˜¯â€œtrueâ€åˆ™æ˜¯é€è§†ç›¸æœºï¼Œæ˜¯â€œfalseâ€åˆ™æ˜¯æ­£äº¤ç›¸æœºã€‚
         bool isPerspective;
 
         float epsilon;

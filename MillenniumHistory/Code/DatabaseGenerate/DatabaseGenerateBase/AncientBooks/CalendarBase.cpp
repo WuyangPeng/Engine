@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #include "CalendarBase.h"
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
@@ -37,21 +37,21 @@ System::String AncientBooks::CalendarBase::GetName() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡×Ö·û´®¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–å­—ç¬¦ä¸²ã€‚"s))
 }
 
 AncientBooks::CalendarBase::StringContainer AncientBooks::CalendarBase::GetAlias() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 int AncientBooks::CalendarBase::GetAliasCount() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 System::String AncientBooks::CalendarBase::GetAlias(int index) const
@@ -60,35 +60,35 @@ System::String AncientBooks::CalendarBase::GetAlias(int index) const
 
     System::UnusedFunction(index);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::CalendarBase::StringContainerConstIter AncientBooks::CalendarBase::GetAliasBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::CalendarBase::StringContainerConstIter AncientBooks::CalendarBase::GetAliasEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::CalendarBase::IntContainer AncientBooks::CalendarBase::GetSource() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 int AncientBooks::CalendarBase::GetSourceCount() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 int AncientBooks::CalendarBase::GetSource(int index) const
@@ -97,21 +97,21 @@ int AncientBooks::CalendarBase::GetSource(int index) const
 
     System::UnusedFunction(index);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::CalendarBase::IntContainerConstIter AncientBooks::CalendarBase::GetSourceBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::CalendarBase::IntContainerConstIter AncientBooks::CalendarBase::GetSourceEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::CalendarBase::BookContainer AncientBooks::CalendarBase::GetSource(const AncientBooksContainer& csvContainer) const
@@ -120,28 +120,28 @@ AncientBooks::CalendarBase::BookContainer AncientBooks::CalendarBase::GetSource(
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 System::String AncientBooks::CalendarBase::GetPublication() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡×Ö·û´®¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–å­—ç¬¦ä¸²ã€‚"s))
 }
 
 AncientBooks::CalendarBase::IntContainer AncientBooks::CalendarBase::GetCreator() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 int AncientBooks::CalendarBase::GetCreatorCount() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 int AncientBooks::CalendarBase::GetCreator(int index) const
@@ -150,21 +150,21 @@ int AncientBooks::CalendarBase::GetCreator(int index) const
 
     System::UnusedFunction(index);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::CalendarBase::IntContainerConstIter AncientBooks::CalendarBase::GetCreatorBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::CalendarBase::IntContainerConstIter AncientBooks::CalendarBase::GetCreatorEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::CalendarBase::CharacterContainer AncientBooks::CalendarBase::GetCreator(const AncientBooksContainer& csvContainer) const
@@ -173,7 +173,7 @@ AncientBooks::CalendarBase::CharacterContainer AncientBooks::CalendarBase::GetCr
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 int AncientBooks::CalendarBase::GetFormulate() const noexcept
@@ -189,7 +189,7 @@ AncientBooks::CalendarBase::ConstYearSharedPtr AncientBooks::CalendarBase::GetFo
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 int AncientBooks::CalendarBase::GetCountry() const noexcept
@@ -205,7 +205,7 @@ AncientBooks::CalendarBase::ConstCountrySharedPtr AncientBooks::CalendarBase::Ge
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 int AncientBooks::CalendarBase::GetBegin() const noexcept
@@ -221,7 +221,7 @@ AncientBooks::CalendarBase::ConstYearSharedPtr AncientBooks::CalendarBase::GetBe
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 int AncientBooks::CalendarBase::GetEnd() const noexcept
@@ -237,7 +237,7 @@ AncientBooks::CalendarBase::ConstYearSharedPtr AncientBooks::CalendarBase::GetEn
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 int AncientBooks::CalendarBase::GetAgainBegin() const noexcept
@@ -253,7 +253,7 @@ AncientBooks::CalendarBase::ConstYearSharedPtr AncientBooks::CalendarBase::GetAg
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 int AncientBooks::CalendarBase::GetAgainEnd() const noexcept
@@ -269,6 +269,6 @@ AncientBooks::CalendarBase::ConstYearSharedPtr AncientBooks::CalendarBase::GetAg
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("calendar±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 

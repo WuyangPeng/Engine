@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 17:26)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 17:26)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_ARC2_ARC2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_ARC2_ARC2_DETAIL_H
@@ -34,21 +34,21 @@ void Mathematics::StaticFindIntersectorArc2Arc2<Real>::Find()
     StaticFindIntersectorCircle2Circle2<Real> intersector{ lhsCircle, rhsCircle };
     if (!intersector.IsIntersection())
     {
-        // Ô²»¡²»Ïà½»¡£
+        // åœ†å¼§ä¸ç›¸äº¤ã€‚
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
     if (intersector.GetIntersectionType() == IntersectionType::Other)
     {
-        // Ô²»¡ÊÇÍ¬¸öÔ²¡£ È·¶¨Ô²»¡ÊÇ·ñÖØµş¡£
-        // Áîm_LhsArcÎª<A0£¬A1>£¬m_RhsArcÎª<B0£¬B1>£¬
-        // µãÎ§ÈÆÔ²»¡ÄæÊ±ÕëÅÅÁĞ¡£
+        // åœ†å¼§æ˜¯åŒä¸ªåœ†ã€‚ ç¡®å®šåœ†å¼§æ˜¯å¦é‡å ã€‚
+        // ä»¤m_LhsArcä¸º<A0ï¼ŒA1>ï¼Œm_RhsArcä¸º<B0ï¼ŒB1>ï¼Œ
+        // ç‚¹å›´ç»•åœ†å¼§é€†æ—¶é’ˆæ’åˆ—ã€‚
         if (rhsArc.Contains(lhsArc.GetEnd0()))
         {
             if (rhsArc.Contains(lhsArc.GetEnd1()))
             {
-                // m_LhsArcµÄm_RhsArcÀï, <B0,A0,A1,B1>.
+                // m_LhsArcçš„m_RhsArcé‡Œ, <B0,A0,A1,B1>.
                 this->SetIntersectionType(IntersectionType::Other);
                 intersectionArc = lhsArc;
             }
@@ -56,14 +56,14 @@ void Mathematics::StaticFindIntersectorArc2Arc2<Real>::Find()
             {
                 if (!Vector2ToolsType::Approximate(lhsArc.GetEnd0(), rhsArc.GetEnd1(), this->GetEpsilon()))
                 {
-                    // m_LhsArcºÍm_RhsArcÖØµş, <B0,A0,B1,A1>.
+                    // m_LhsArcå’Œm_RhsArcé‡å , <B0,A0,B1,A1>.
                     this->SetIntersectionType(IntersectionType::Other);
                     const Arc2Type arc{ lhsArc.GetCenter(), lhsArc.GetRadius(), lhsArc.GetEnd0(), rhsArc.GetEnd1(), this->GetEpsilon() };
                     intersectionArc = arc;
                 }
                 else
                 {
-                    // m_LhsArcºÍm_RhsArc¹²Ïí¶Ëµã <B0,A0,B1,A1>, A0 = B1.
+                    // m_LhsArcå’Œm_RhsArcå…±äº«ç«¯ç‚¹ <B0,A0,B1,A1>, A0 = B1.
                     this->SetIntersectionType(IntersectionType::Point);
                     point.emplace_back((lhsArc.GetEnd0() + rhsArc.GetEnd1()) / MathType::GetValue(2));
                 }
@@ -76,14 +76,14 @@ void Mathematics::StaticFindIntersectorArc2Arc2<Real>::Find()
         {
             if (!Vector2ToolsType::Approximate(lhsArc.GetEnd1(), rhsArc.GetEnd0(), this->GetEpsilon()))
             {
-                // m_LhsArcºÍm_RhsArcÖØµş, <A0,B0,A1,B1>.
+                // m_LhsArcå’Œm_RhsArcé‡å , <A0,B0,A1,B1>.
                 this->SetIntersectionType(IntersectionType::Other);
                 const Arc2Type arc{ lhsArc.GetCenter(), lhsArc.GetRadius(), rhsArc.GetEnd0(), lhsArc.GetEnd1(), this->GetEpsilon() };
                 intersectionArc = arc;
             }
             else
             {
-                // m_LhsArcºÍm_RhsArc¹²Ïí¶Ëµã£¬ <A0,B0,A1,B1>, B0 = A1.
+                // m_LhsArcå’Œm_RhsArcå…±äº«ç«¯ç‚¹ï¼Œ <A0,B0,A1,B1>, B0 = A1.
                 this->SetIntersectionType(IntersectionType::Point);
                 point.emplace_back((rhsArc.GetEnd0() + lhsArc.GetEnd1()) / MathType::GetValue(2));
             }
@@ -93,7 +93,7 @@ void Mathematics::StaticFindIntersectorArc2Arc2<Real>::Find()
 
         if (lhsArc.Contains(rhsArc.GetEnd0()))
         {
-            // m_RhsArcÔÚm_LhsArcÀï, <A0,B0,B1,A1>.
+            // m_RhsArcåœ¨m_LhsArcé‡Œ, <A0,B0,B1,A1>.
             this->SetIntersectionType(IntersectionType::Other);
             intersectionArc = rhsArc;
 
@@ -101,13 +101,13 @@ void Mathematics::StaticFindIntersectorArc2Arc2<Real>::Find()
         }
         else
         {
-            // Ô²»¡²»ÖØµş <A0,A1,B0,B1>.
+            // åœ†å¼§ä¸é‡å  <A0,A1,B0,B1>.
             this->SetIntersectionType(IntersectionType::Empty);
             return;
         }
     }
 
-    // ²âÊÔÔ²»¡ÉÏÊÇ·ñÓĞ½»µã¡£
+    // æµ‹è¯•åœ†å¼§ä¸Šæ˜¯å¦æœ‰äº¤ç‚¹ã€‚
     for (auto i = 0; i < intersector.GetQuantity(); ++i)
     {
         if (lhsArc.Contains(intersector.GetPoint(i)) && rhsArc.Contains(intersector.GetPoint(i)))
@@ -175,7 +175,7 @@ Mathematics::Arc2<Real> Mathematics::StaticFindIntersectorArc2Arc2<Real>::GetInt
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Òª²éÑ¯µÄÔ²»¡²¢²»ÊÇÖØµşµÄ¡£\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("è¦æŸ¥è¯¢çš„åœ†å¼§å¹¶ä¸æ˜¯é‡å çš„ã€‚\n"s));
     }
 }
 

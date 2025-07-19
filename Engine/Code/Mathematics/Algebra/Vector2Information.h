@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.5 (2024/01/29 17:30)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.5 (2024/01/29 17:30)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR2_INFORMATION_H
 #define MATHEMATICS_ALGEBRA_VECTOR2_INFORMATION_H
@@ -19,9 +19,9 @@
 
 namespace Mathematics
 {
-    /// »ñÈ¡ÓĞ¹ØÊ¸Á¿ÊäÈëÊı×éµÄÄÚ²¿ĞÅÏ¢¡£
-    /// Èç¹ûÊäÈëÓĞĞ§£¨points²»Õâ¿Õ£¬epsilon >= 0£©£¬
-    /// ÔÚÕâÖÖÇé¿öÏÂ£¬Àà³ÉÔ±ÓĞĞ§¡£
+    /// è·å–æœ‰å…³çŸ¢é‡è¾“å…¥æ•°ç»„çš„å†…éƒ¨ä¿¡æ¯ã€‚
+    /// å¦‚æœè¾“å…¥æœ‰æ•ˆï¼ˆpointsä¸è¿™ç©ºï¼Œepsilon >= 0ï¼‰ï¼Œ
+    /// åœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œç±»æˆå‘˜æœ‰æ•ˆã€‚
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     class Vector2Information final
@@ -38,8 +38,8 @@ namespace Mathematics
         using AlgebraContainerType = std::vector<AlgebraVector2>;
 
     public:
-        /// Öµepsilon±»Ê¹ÓÃÔÚ¼ÆËãµã¼¯µÄÎ¬¶ÈÊ±£¬×÷ÎªÏà¶ÔÎó²î¡£
-        /// ¹¹Ôìº¯Êı¸ù¾İÊäÈë¼¯ÉèÖÃÀà³ÉÔ±¡£
+        /// å€¼epsilonè¢«ä½¿ç”¨åœ¨è®¡ç®—ç‚¹é›†çš„ç»´åº¦æ—¶ï¼Œä½œä¸ºç›¸å¯¹è¯¯å·®ã€‚
+        /// æ„é€ å‡½æ•°æ ¹æ®è¾“å…¥é›†è®¾ç½®ç±»æˆå‘˜ã€‚
         explicit Vector2Information(const ContainerType& points, Real epsilon = MathType::GetZeroTolerance());
         explicit Vector2Information(const AlgebraContainerType& points, Real epsilon = MathType::GetZeroTolerance());
 
@@ -75,45 +75,45 @@ namespace Mathematics
     private:
         ContainerType points;
 
-        /// Ò»ÖÖ·Ç¸º¹«²î£¬ÓÃÓÚÈ·¶¨¼¯ºÏµÄÄÚ²¿Î¬Êı¡£
+        /// ä¸€ç§éè´Ÿå…¬å·®ï¼Œç”¨äºç¡®å®šé›†åˆçš„å†…éƒ¨ç»´æ•°ã€‚
         Real epsilon;
 
-        /// ÊäÈë¼¯µÄÄÚ²¿Î¬¶È¡£ÆäÖĞ£¬²ÎÊı¡°epsilon¡±±»ÓÃÓÚÈ·¶¨³ß´çÊ±Ìá¹©Èİ²î¡£
+        /// è¾“å…¥é›†çš„å†…éƒ¨ç»´åº¦ã€‚å…¶ä¸­ï¼Œå‚æ•°â€œepsilonâ€è¢«ç”¨äºç¡®å®šå°ºå¯¸æ—¶æä¾›å®¹å·®ã€‚
         int dimension;
 
-        /// ÊäÈë¼¯µÄÖá¶ÔÆë°üÎ§ºĞ¡£
-        /// ×î´ó·¶Î§ÊÇaxesAlignBoundingBox.GetMaxPoint(0) - axesAlignBoundingBox.GetMinPoint(0) ºÍ
-        /// axesAlignBoundingBox.GetMaxPoint(1) - axesAlignBoundingBox.GetMinPoint(1)µÄ×î´óÖµ¡£
+        /// è¾“å…¥é›†çš„è½´å¯¹é½åŒ…å›´ç›’ã€‚
+        /// æœ€å¤§èŒƒå›´æ˜¯axesAlignBoundingBox.GetMaxPoint(0) - axesAlignBoundingBox.GetMinPoint(0) å’Œ
+        /// axesAlignBoundingBox.GetMaxPoint(1) - axesAlignBoundingBox.GetMinPoint(1)çš„æœ€å¤§å€¼ã€‚
         AxesAlignBoundingBox2Type axesAlignBoundingBox;
         Real maxRange;
 
-        /// ×ø±êÏµ¡£Ô­µãÊÇ¶ÔÈÎºÎÎ¬¶Èd¶¼ÓĞĞ§¡£
-        /// µ¥Î»³¤¶ÈµÄ·½ÏòÏòÁ¿Ö»ÊÊÓÃÓÚ0 <= i < d¡£
-        /// Ä©¶ËµÄË÷ÒıÊÇÏà¶ÔÓÚÊäÈëµÄµãµÄÊı×é£¬²¢ÇÒÒ²Ö»ÊÊÓÃÓÚ0 <= i < d¡£
-        /// Èç¹ûd = 0£¬ËùÓĞµÄµãÊµ¼ÊÉÏÊÇÏàÍ¬µÄ£¬
-        /// µ«Ê¹ÓÃÒ»¸öepsilonµÄ¿ÉÄÜ»áµ¼ÖÂÄ©¶ËµÄË÷Òı²»ÎªÁã¡£
-        /// Èç¹ûd = 1£¬ËùÓĞµãµÄÎ»ÖÃÔÚÒ»ÌõÏß¶ÎÉÏ¡£
-        /// µ±d = 2Ê±£¬ËùÓĞµã²»¹²Ïß¡£
+        /// åæ ‡ç³»ã€‚åŸç‚¹æ˜¯å¯¹ä»»ä½•ç»´åº¦déƒ½æœ‰æ•ˆã€‚
+        /// å•ä½é•¿åº¦çš„æ–¹å‘å‘é‡åªé€‚ç”¨äº0 <= i < dã€‚
+        /// æœ«ç«¯çš„ç´¢å¼•æ˜¯ç›¸å¯¹äºè¾“å…¥çš„ç‚¹çš„æ•°ç»„ï¼Œå¹¶ä¸”ä¹Ÿåªé€‚ç”¨äº0 <= i < dã€‚
+        /// å¦‚æœd = 0ï¼Œæ‰€æœ‰çš„ç‚¹å®é™…ä¸Šæ˜¯ç›¸åŒçš„ï¼Œ
+        /// ä½†ä½¿ç”¨ä¸€ä¸ªepsilonçš„å¯èƒ½ä¼šå¯¼è‡´æœ«ç«¯çš„ç´¢å¼•ä¸ä¸ºé›¶ã€‚
+        /// å¦‚æœd = 1ï¼Œæ‰€æœ‰ç‚¹çš„ä½ç½®åœ¨ä¸€æ¡çº¿æ®µä¸Šã€‚
+        /// å½“d = 2æ—¶ï¼Œæ‰€æœ‰ç‚¹ä¸å…±çº¿ã€‚
         Vector2Type origin;
         Vector2Type directionX;
         Vector2Type directionY;
 
-        /// ¶¨Òå×î´ó¿Õ¼ä·¶Î§µÄË÷Òı¡£
-        /// ÖµminExtremeºÍmaxExtremeÊÇÓÃÓÚ¶¨ÒåÔÚ×ø±êÖá¸÷¸ö·½ÏòÖĞµÄÒ»¸ö×î´ó·¶Î§µÄË÷ÒıÊı¡£
-        /// Èç¹ûÎ¬¶ÈÊÇ2£¬ÔòperpendicularExtremeÊÇ
-        /// ´¹Ö±ÓÚÏàÓ¦µÄminExtremeºÍmaxExtreme
-        /// ×î´ó·¶Î§Éú³ÉµÄµãµÄË÷Òı¡£
-        /// ÓÉµãV[minExtreme], V[maxExtreme],
-        /// ºÍ V[perpendicularExtreme]ËùĞÎ³ÉµÄÈı½ÇĞÎ£¬
-        /// ÊÇË³Ê±Õë»òÄæÊ±Õë£¬´æ´¢ÔÚextremeCCW¡£
+        /// å®šä¹‰æœ€å¤§ç©ºé—´èŒƒå›´çš„ç´¢å¼•ã€‚
+        /// å€¼minExtremeå’ŒmaxExtremeæ˜¯ç”¨äºå®šä¹‰åœ¨åæ ‡è½´å„ä¸ªæ–¹å‘ä¸­çš„ä¸€ä¸ªæœ€å¤§èŒƒå›´çš„ç´¢å¼•æ•°ã€‚
+        /// å¦‚æœç»´åº¦æ˜¯2ï¼Œåˆ™perpendicularExtremeæ˜¯
+        /// å‚ç›´äºç›¸åº”çš„minExtremeå’ŒmaxExtreme
+        /// æœ€å¤§èŒƒå›´ç”Ÿæˆçš„ç‚¹çš„ç´¢å¼•ã€‚
+        /// ç”±ç‚¹V[minExtreme], V[maxExtreme],
+        /// å’Œ V[perpendicularExtreme]æ‰€å½¢æˆçš„ä¸‰è§’å½¢ï¼Œ
+        /// æ˜¯é¡ºæ—¶é’ˆæˆ–é€†æ—¶é’ˆï¼Œå­˜å‚¨åœ¨extremeCCWã€‚
         int minExtreme;
         int maxExtreme;
         int perpendicularExtreme;
 
-        /// ÊÇ·ñÊÇÄæÊ±Õë
+        /// æ˜¯å¦æ˜¯é€†æ—¶é’ˆ
         bool extremeCCW;
 
-        /// ×îĞ¡µãºÍ×î´óµãË÷Òı
+        /// æœ€å°ç‚¹å’Œæœ€å¤§ç‚¹ç´¢å¼•
         IndexContainerType indexMin;
         IndexContainerType indexMax;
     };

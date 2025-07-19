@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 16:37)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 16:37)
 
 #include "IntegerDataTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -81,7 +81,7 @@ void Mathematics::IntegerDataTesting::CopyTest()
 
 void Mathematics::IntegerDataTesting::Bit1Test()
 {
-    std::vector<uint16_t> data{ 0b11111111'00000000,  // ×îµÍÎ»
+    std::vector<uint16_t> data{ 0b11111111'00000000,  // æœ€ä½ä½
                                 0b10111111'11111111,
                                 0b10000000'11111111,
                                 0b10000000'00000001,
@@ -104,7 +104,7 @@ void Mathematics::IntegerDataTesting::Bit1Test()
                                 0b00110000'00000000,
                                 0b01100000'00000000,
                                 0b01000000'00000000,
-                                0b11111111'00000000 };  // ×î¸ßÎ»
+                                0b11111111'00000000 };  // æœ€é«˜ä½
 
     IntegerData<12> firstIntegerData(data);
 

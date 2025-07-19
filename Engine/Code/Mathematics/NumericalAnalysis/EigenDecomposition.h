@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 13:46)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 13:46)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_EIGEN_DECOMPOSITION_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_EIGEN_DECOMPOSITION_H
@@ -38,7 +38,7 @@ namespace Mathematics
         using VariableLengthVectorType = VariableLengthVector<Real>;
 
     public:
-        // Ò»¸öÌØÕ÷ÏµÍ³µÄ¾ØÕó±ØĞëÊÇ¶Ô³ÆµÄ¡£
+        // ä¸€ä¸ªç‰¹å¾ç³»ç»Ÿçš„çŸ©é˜µå¿…é¡»æ˜¯å¯¹ç§°çš„ã€‚
         explicit EigenDecomposition(int size);
         explicit EigenDecomposition(const Matrix2Type& rhs);
         explicit EigenDecomposition(const Matrix3Type& rhs);
@@ -52,18 +52,18 @@ namespace Mathematics
 
         NODISCARD int GetSize() const noexcept;
 
-        // ÉèÖÃÌØÕ÷ÏµÍ³µÄ¾ØÕó¡£
+        // è®¾ç½®ç‰¹å¾ç³»ç»Ÿçš„çŸ©é˜µã€‚
         NODISCARD const Real& operator()(int row, int column) const;
         NODISCARD Real& operator()(int row, int column);
 
-        // ½âÕâ¸öÌØÕ÷ÏµÍ³¡£
-        // µ±ÄãÏëÒªµÄÌØÕ÷ÖµÔÚµİÔöË³Ğò½øĞĞÅÅĞò£¬
-        // ÉèÖÃ¡°increasingSort'Îª'true'£¬
-        // ·ñÔò£¬ÌØÕ÷ÖµÒÔµİ¼õË³Ğò½øĞĞÅÅĞò¡£
+        // è§£è¿™ä¸ªç‰¹å¾ç³»ç»Ÿã€‚
+        // å½“ä½ æƒ³è¦çš„ç‰¹å¾å€¼åœ¨é€’å¢é¡ºåºè¿›è¡Œæ’åºï¼Œ
+        // è®¾ç½®â€œincreasingSort'ä¸º'true'ï¼Œ
+        // å¦åˆ™ï¼Œç‰¹å¾å€¼ä»¥é€’å‡é¡ºåºè¿›è¡Œæ’åºã€‚
         void Solve(bool increasingSort);
 
-        // µÃµ½½á¹û¡£Èç¹ûÄãÖªµÀÌØÕ÷ÏµÍ³µÄÏàÓ¦³ß´çÓ¦¸Ãµ÷ÓÃ
-        // GetEigenvector2ºÍGetEigenvector3¡£
+        // å¾—åˆ°ç»“æœã€‚å¦‚æœä½ çŸ¥é“ç‰¹å¾ç³»ç»Ÿçš„ç›¸åº”å°ºå¯¸åº”è¯¥è°ƒç”¨
+        // GetEigenvector2å’ŒGetEigenvector3ã€‚
         NODISCARD Real GetEigenvalue(int index) const;
         NODISCARD Vector2Type GetEigenvector2(int index) const;
         NODISCARD Matrix2Type GetEigenvectors2() const;
@@ -77,7 +77,7 @@ namespace Mathematics
 
         void GuaranteeRotation();
 
-        // ¾ØÕó¼õÉÙµ½Èı¶Ô½Ç¾ØÕóĞÎÊ½
+        // çŸ©é˜µå‡å°‘åˆ°ä¸‰å¯¹è§’çŸ©é˜µå½¢å¼
         void Tridiagonal2();
         void Tridiagonal3();
         void TridiagonalN();
@@ -90,7 +90,7 @@ namespace Mathematics
         void CalculateDiagonal(int index, Real scale);
         void CalculateSubdiagonal(int index);
 
-        // QLËã·¨Òşº¬µÄ×ª»»¡£Õâ¸öº¯Êıµ÷ÓÃÈı¶Ô½Ç¾ØÕó¡£
+        // QLç®—æ³•éšå«çš„è½¬æ¢ã€‚è¿™ä¸ªå‡½æ•°è°ƒç”¨ä¸‰å¯¹è§’çŸ©é˜µã€‚
         void QLAlgorithm();
         void QLAlgorithm(int index);
         NODISCARD int QLAlgorithmWithLoopTime(int totalIndex);
@@ -99,10 +99,10 @@ namespace Mathematics
         void QLAlgorithmAmendSolveMatrix(int innerIndex, Real sine, Real cosine);
         NODISCARD Real GetQLAlgorithmSubDiagonalValue(int totalIndex, int outerIndex) const;
 
-        // ÅÅĞòÌØÕ÷Öµ´Ó×î´óµ½×îĞ¡¡£
+        // æ’åºç‰¹å¾å€¼ä»æœ€å¤§åˆ°æœ€å°ã€‚
         void DecreasingSort();
 
-        // ÅÅĞòÌØÕ÷Öµ´Ó×îĞ¡µ½×î´ó¡£
+        // æ’åºç‰¹å¾å€¼ä»æœ€å°åˆ°æœ€å¤§ã€‚
         void IncreasingSort();
 
     private:
@@ -118,18 +118,18 @@ namespace Mathematics
         Diagonal diagonal;
         Subdiagonal subdiagonal;
 
-        // ÆæÊı´óĞ¡µÄ¾ØÕó£¬Householder¾ØÕó¼õÉÙÆæÊıÉæ¼°·´Éä¡£
-        // ÕâĞ©³Ë»ıÊÇÒ»¸ö·´Éä¡£
-        // QLËã·¨ÓÃÀ´½øÒ»²½½µµÍĞı×ª¡£
-        // ×îºóµÄÕı½»¾ØÕó£¬ÆäÁĞÊÇÌØÕ÷ÏòÁ¿µÄÒ»ÖÖÌåÏÖ£¬ËùÒÔËüµÄĞĞÁĞÊ½ÊÇ-1¡£
-        // ¶ÔÓÚÅ¼Êı´óĞ¡¾ØÕó£¬Householder¾ØÕó¼õÉÙÅ¼ÊıÉæ¼°·´Éä¡£
-        // ÕâĞ©³Ë»ıÊÇÒ»¸öĞı×ª¡£
-        // ×îºóµÄÕı½»¾ØÕóµÄĞĞÁĞÊ½ÊÇ+1¡£
-        // ÕâĞèÒªÒ»¸öºÜ¶àÌØÕ÷·Ö½âËã·¨ÏëÒªÒ»¸öĞı×ª¾ØÕó¡£
-        // ÎÒÃÇÒª±£Ö¤ÊÇÕâÖÖÇé¿ö£¬ÄÇÃ´m_Rotation»á×Ô¶¯¸ú×Ù¡£
-        // DecrSortºÍIncrSortÎÊÌâ½øÒ»²½¸´ÔÓ»¯£¬ÒòÎªËûÃÇ½»»»ÁËÕı½»¾ØÕóµÄÁĞ£¬
-        // Ôì³É¾ØÕóĞı×ªºÍ·´ÉäÖ®¼äÇĞ»»¡£
-        // Öµm_Rotation±ØĞëÏàÓ¦µØÇĞ»»¡£
+        // å¥‡æ•°å¤§å°çš„çŸ©é˜µï¼ŒHouseholderçŸ©é˜µå‡å°‘å¥‡æ•°æ¶‰åŠåå°„ã€‚
+        // è¿™äº›ä¹˜ç§¯æ˜¯ä¸€ä¸ªåå°„ã€‚
+        // QLç®—æ³•ç”¨æ¥è¿›ä¸€æ­¥é™ä½æ—‹è½¬ã€‚
+        // æœ€åçš„æ­£äº¤çŸ©é˜µï¼Œå…¶åˆ—æ˜¯ç‰¹å¾å‘é‡çš„ä¸€ç§ä½“ç°ï¼Œæ‰€ä»¥å®ƒçš„è¡Œåˆ—å¼æ˜¯-1ã€‚
+        // å¯¹äºå¶æ•°å¤§å°çŸ©é˜µï¼ŒHouseholderçŸ©é˜µå‡å°‘å¶æ•°æ¶‰åŠåå°„ã€‚
+        // è¿™äº›ä¹˜ç§¯æ˜¯ä¸€ä¸ªæ—‹è½¬ã€‚
+        // æœ€åçš„æ­£äº¤çŸ©é˜µçš„è¡Œåˆ—å¼æ˜¯+1ã€‚
+        // è¿™éœ€è¦ä¸€ä¸ªå¾ˆå¤šç‰¹å¾åˆ†è§£ç®—æ³•æƒ³è¦ä¸€ä¸ªæ—‹è½¬çŸ©é˜µã€‚
+        // æˆ‘ä»¬è¦ä¿è¯æ˜¯è¿™ç§æƒ…å†µï¼Œé‚£ä¹ˆm_Rotationä¼šè‡ªåŠ¨è·Ÿè¸ªã€‚
+        // DecrSortå’ŒIncrSorté—®é¢˜è¿›ä¸€æ­¥å¤æ‚åŒ–ï¼Œå› ä¸ºä»–ä»¬äº¤æ¢äº†æ­£äº¤çŸ©é˜µçš„åˆ—ï¼Œ
+        // é€ æˆçŸ©é˜µæ—‹è½¬å’Œåå°„ä¹‹é—´åˆ‡æ¢ã€‚
+        // å€¼m_Rotationå¿…é¡»ç›¸åº”åœ°åˆ‡æ¢ã€‚
 
         bool isRotation;
         bool solve;

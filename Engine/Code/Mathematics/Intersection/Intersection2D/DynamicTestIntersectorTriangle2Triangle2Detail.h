@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 17:26)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 17:26)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_TRIANGLE2_TRIANGLE2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_TRIANGLE2_TRIANGLE2_DETAIL_H
@@ -55,7 +55,7 @@ Mathematics::Triangle2<Real> Mathematics::DynamicTestIntersectorTriangle2Triangl
 template <typename Real>
 void Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::Test()
 {
-    // ºÃÏñV0Èı½ÇĞÎÊÇ¹Ì¶¨µÄ£¬¶øV1Èı½ÇĞÎÊÇÒÆ¶¯µÄ¡£
+    // å¥½åƒV0ä¸‰è§’å½¢æ˜¯å›ºå®šçš„ï¼Œè€ŒV1ä¸‰è§’å½¢æ˜¯ç§»åŠ¨çš„ã€‚
     const auto velocityDiff = this->GetRhsVelocity() - this->GetLhsVelocity();
 
     IntersectInfo intersectInfo{};
@@ -63,13 +63,13 @@ void Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::Test()
     const auto vertex0 = triangle0.GetVertex();
     const auto vertex1 = triangle1.GetVertex();
 
-    // ´¦ÀíV0Èı½ÇĞÎµÄ±ßÔµ¡£
+    // å¤„ç†V0ä¸‰è§’å½¢çš„è¾¹ç¼˜ã€‚
     for (auto i0 = 1, i1 = 2, i2 = 0; i2 < size; i0 = i1, i1 = i2++)
     {
         const auto& vertor1 = vertex0.at(i1);
         const auto& vertor2 = vertex0.at(i2);
 
-        // ²âÊÔÖá V0[i1] + t*perp(V0[i2]-V0[i1]), perp(x,y) = (y,-x).
+        // æµ‹è¯•è½´ V0[i1] + t*perp(V0[i2]-V0[i1]), perp(x,y) = (y,-x).
         const Vector2Type axis{ vertor2.GetY() - vertor1.GetY(), vertor1.GetX() - vertor2.GetX() };
 
         const auto speed = Vector2ToolsType::DotProduct(axis, velocityDiff);
@@ -84,13 +84,13 @@ void Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::Test()
         }
     }
 
-    // ´¦ÀíV1Èı½ÇĞÎµÄ±ßÔµ¡£
+    // å¤„ç†V1ä¸‰è§’å½¢çš„è¾¹ç¼˜ã€‚
     for (auto i0 = 1, i1 = 2, i2 = 0; i2 < 3; i0 = i1, i1 = i2++)
     {
         const auto& vertor1 = vertex1.at(i1);
         const auto& vertor2 = vertex1.at(i2);
 
-        // ²âÊÔÖá V1[i1] + t*perp(V1[i2]-V1[i1]), perp(x,y) = (y,-x).
+        // æµ‹è¯•è½´ V1[i1] + t*perp(V1[i2]-V1[i1]), perp(x,y) = (y,-x).
 
         const Vector2Type axis{ vertor2.GetY() - vertor1.GetY(), vertor1.GetX() - vertor2.GetX() };
         const auto speed = Vector2ToolsType::DotProduct(axis, velocityDiff);
@@ -132,7 +132,7 @@ typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::Configurat
     const auto d1 = Vector2ToolsType::DotProduct(axis, (vertex.at(1) - point));
     const auto d2 = Vector2ToolsType::DotProduct(axis, (vertex.at(2) - point));
 
-    /// Ã¿µ±Ó³ÉäÖµÎªM12»òM21Ê±£¬ÇëÈ·±£m_aiIndex[...]ÊÇ£¨0,1,2£©µÄÅ¼ÊıÅÅÁĞ¡£ ÕâĞèÒªÈ·±£ÖØµş±ßÔµµÄ½»µãµÃµ½ÕıÈ·¼ÆËã¡£
+    /// æ¯å½“æ˜ å°„å€¼ä¸ºM12æˆ–M21æ—¶ï¼Œè¯·ç¡®ä¿m_aiIndex[...]æ˜¯ï¼ˆ0,1,2ï¼‰çš„å¶æ•°æ’åˆ—ã€‚ è¿™éœ€è¦ç¡®ä¿é‡å è¾¹ç¼˜çš„äº¤ç‚¹å¾—åˆ°æ­£ç¡®è®¡ç®—ã€‚
 
     if (d0 <= d1)
     {
@@ -230,15 +230,15 @@ typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::IntersectI
 
     if (cfg1.max < cfg0.min)
     {
-        // V1¼ä¸ô×î³õÎ»ÓÚV0¼ä¸ôµÄ×ó²à¡£
+        // V1é—´éš”æœ€åˆä½äºV0é—´éš”çš„å·¦ä¾§ã€‚
         if (speed <= MathType::GetValue(0))
         {
-            // ¼ä¸ô·Ö¿ª¡£
+            // é—´éš”åˆ†å¼€ã€‚
             intersectInfo.result = true;
             return intersectInfo;
         }
 
-        // µÚÒ»´Î¸üĞÂ¡£
+        // ç¬¬ä¸€æ¬¡æ›´æ–°ã€‚
         auto invSpeed = (MathType::GetValue(1)) / speed;
         auto t = (cfg0.min - cfg1.max) * invSpeed;
         if (intersectInfo.tFirst < t)
@@ -249,21 +249,21 @@ typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::IntersectI
             intersectInfo.tCfg1 = cfg1;
         }
 
-        // ²âÊÔÊÇ·ñ³¬¹ıÊ±¼ä¼ä¸ô¡£
+        // æµ‹è¯•æ˜¯å¦è¶…è¿‡æ—¶é—´é—´éš”ã€‚
         if (tmax < intersectInfo.tFirst)
         {
             intersectInfo.result = true;
             return intersectInfo;
         }
 
-        // ¸üĞÂ last time.
+        // æ›´æ–° last time.
         t = (cfg0.max - cfg1.min) * invSpeed;
         if (t < intersectInfo.tLast)
         {
             intersectInfo.tLast = t;
         }
 
-        // ²âÊÔ·ÖÀë¡£
+        // æµ‹è¯•åˆ†ç¦»ã€‚
         if (intersectInfo.tLast < intersectInfo.tFirst)
         {
             intersectInfo.result = true;
@@ -272,15 +272,15 @@ typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::IntersectI
     }
     else if (cfg0.max < cfg1.min)
     {
-        // V1¼ä¸ô×î³õÎ»ÓÚV0¼ä¸ôµÄÓÒ²à¡£
+        // V1é—´éš”æœ€åˆä½äºV0é—´éš”çš„å³ä¾§ã€‚
         if (MathType::GetValue(0) <= speed)
         {
-            // ¼ä¸ô·Ö¿ª¡£
+            // é—´éš”åˆ†å¼€ã€‚
             intersectInfo.result = true;
             return intersectInfo;
         }
 
-        // ¸üĞÂ first time.
+        // æ›´æ–° first time.
         auto invSpeed = (MathType::GetValue(1)) / speed;
         auto t = (cfg0.max - cfg1.min) * invSpeed;
         if (intersectInfo.tFirst < t)
@@ -291,21 +291,21 @@ typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::IntersectI
             intersectInfo.tCfg1 = cfg1;
         }
 
-        // ²âÊÔÊÇ·ñ³¬¹ıÊ±¼ä¼ä¸ô¡£
+        // æµ‹è¯•æ˜¯å¦è¶…è¿‡æ—¶é—´é—´éš”ã€‚
         if (tmax < intersectInfo.tFirst)
         {
             intersectInfo.result = true;
             return intersectInfo;
         }
 
-        // ¸üĞÂ last time.
+        // æ›´æ–° last time.
         t = (cfg0.min - cfg1.max) * invSpeed;
         if (t < intersectInfo.tLast)
         {
             intersectInfo.tLast = t;
         }
 
-        // ²âÊÔ·ÖÀë¡£.
+        // æµ‹è¯•åˆ†ç¦»ã€‚.
         if (intersectInfo.tLast < intersectInfo.tFirst)
         {
             intersectInfo.result = true;
@@ -314,10 +314,10 @@ typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::IntersectI
     }
     else
     {
-        // V0¼ä¸ôºÍV1¼ä¸ô×î³õÖØµş¡£
+        // V0é—´éš”å’ŒV1é—´éš”æœ€åˆé‡å ã€‚
         if (MathType::GetValue(0) < speed)
         {
-            // ¸üĞÂ last time.
+            // æ›´æ–° last time.
             auto invSpeed = (MathType::GetValue(1)) / speed;
             auto t = (cfg0.max - cfg1.min) * invSpeed;
             if (t < intersectInfo.tLast)
@@ -325,7 +325,7 @@ typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::IntersectI
                 intersectInfo.tLast = t;
             }
 
-            // ²âÊÔ·ÖÀë¡£
+            // æµ‹è¯•åˆ†ç¦»ã€‚
             if (intersectInfo.tLast < intersectInfo.tFirst)
             {
                 intersectInfo.result = true;
@@ -334,7 +334,7 @@ typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::IntersectI
         }
         else if (speed < MathType::GetValue(0))
         {
-            // ¸üĞÂ last time.
+            // æ›´æ–° last time.
             auto invSpeed = (MathType::GetValue(1)) / speed;
             auto t = (cfg0.min - cfg1.max) * invSpeed;
             if (t < intersectInfo.tLast)
@@ -342,7 +342,7 @@ typename Mathematics::DynamicTestIntersectorTriangle2Triangle2<Real>::IntersectI
                 intersectInfo.tLast = t;
             }
 
-            // ²âÊÔ·ÖÀë¡£
+            // æµ‹è¯•åˆ†ç¦»ã€‚
             if (intersectInfo.tLast < intersectInfo.tFirst)
             {
                 intersectInfo.result = true;

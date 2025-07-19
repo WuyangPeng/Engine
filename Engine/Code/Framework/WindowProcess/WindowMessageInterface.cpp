@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 14:30)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 14:30)
 
 #include "Framework/FrameworkExport.h"
 
@@ -70,7 +70,7 @@ System::WindowsLResult Framework::WindowMessageInterface::CreateMessage(HWnd hWn
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    // Ö»±£´æµÚÒ»¸ö´´½¨´°¿ÚµÄHWnd
+    // åªä¿å­˜ç¬¬ä¸€ä¸ªåˆ›å»ºçª—å£çš„HWnd
     if (windowsHWnd == nullptr)
     {
         windowsHWnd = hWnd;
@@ -87,7 +87,7 @@ System::WindowsLResult Framework::WindowMessageInterface::SizeMessage(HWnd hWnd,
 
     if (windowsHWnd == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´°¿Ú»¹Î´´´½¨£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çª—å£è¿˜æœªåˆ›å»ºï¼"))
     }
 
     return DefaultSystemWindowProcess(hWnd, System::WindowsMessages::Size, wParam, lParam);
@@ -99,7 +99,7 @@ System::WindowsLResult Framework::WindowMessageInterface::CloseMessage(HWnd hWnd
 
     if (windowsHWnd == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´°¿Ú»¹Î´´´½¨£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çª—å£è¿˜æœªåˆ›å»ºï¼"))
     }
 
     return DefaultSystemWindowProcess(hWnd, System::WindowsMessages::Close, wParam, lParam);
@@ -111,7 +111,7 @@ System::WindowsLResult Framework::WindowMessageInterface::MoveMessage(HWnd hWnd,
 
     if (windowsHWnd == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´°¿Ú»¹Î´´´½¨£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çª—å£è¿˜æœªåˆ›å»ºï¼"))
     }
 
     return DefaultSystemWindowProcess(hWnd, System::WindowsMessages::Move, wParam, lParam);
@@ -123,7 +123,7 @@ System::WindowsLResult Framework::WindowMessageInterface::CharMessage(HWnd hWnd,
 
     if (windowsHWnd == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´°¿Ú»¹Î´´´½¨£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çª—å£è¿˜æœªåˆ›å»ºï¼"))
     }
 
     return DefaultSystemWindowProcess(hWnd, System::WindowsMessages::Char, wParam, lParam);
@@ -135,7 +135,7 @@ System::WindowsLResult Framework::WindowMessageInterface::KeyDownMessage(HWnd hW
 
     if (windowsHWnd == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´°¿Ú»¹Î´´´½¨£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çª—å£è¿˜æœªåˆ›å»ºï¼"))
     }
 
     return DefaultSystemWindowProcess(hWnd, System::WindowsMessages::KeyDown, wParam, lParam);
@@ -147,7 +147,7 @@ System::WindowsLResult Framework::WindowMessageInterface::KeyUpMessage(HWnd hWnd
 
     if (windowsHWnd == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´°¿Ú»¹Î´´´½¨£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çª—å£è¿˜æœªåˆ›å»ºï¼"))
     }
 
     return DefaultSystemWindowProcess(hWnd, System::WindowsMessages::KeyUp, wParam, lParam);
@@ -159,7 +159,7 @@ System::WindowsLResult Framework::WindowMessageInterface::LeftButtonDownMessage(
 
     if (windowsHWnd == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´°¿Ú»¹Î´´´½¨£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çª—å£è¿˜æœªåˆ›å»ºï¼"))
     }
 
     return DefaultSystemWindowProcess(hWnd, System::WindowsMessages::LButtonDown, wParam, lParam);
@@ -171,7 +171,7 @@ System::WindowsLResult Framework::WindowMessageInterface::LeftButtonUpMessage(HW
 
     if (windowsHWnd == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´°¿Ú»¹Î´´´½¨£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çª—å£è¿˜æœªåˆ›å»ºï¼"))
     }
 
     return DefaultSystemWindowProcess(hWnd, System::WindowsMessages::LButtonUp, wParam, lParam);
@@ -183,7 +183,7 @@ System::WindowsLResult Framework::WindowMessageInterface::MiddleButtonDownMessag
 
     if (windowsHWnd == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´°¿Ú»¹Î´´´½¨£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çª—å£è¿˜æœªåˆ›å»ºï¼"))
     }
 
     return DefaultSystemWindowProcess(hWnd, System::WindowsMessages::MButtonDown, wParam, lParam);
@@ -195,7 +195,7 @@ System::WindowsLResult Framework::WindowMessageInterface::MiddleButtonUpMessage(
 
     if (windowsHWnd == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´°¿Ú»¹Î´´´½¨£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çª—å£è¿˜æœªåˆ›å»ºï¼"))
     }
 
     return DefaultSystemWindowProcess(hWnd, System::WindowsMessages::MButtonUp, wParam, lParam);
@@ -207,7 +207,7 @@ System::WindowsLResult Framework::WindowMessageInterface::RightButtonDownMessage
 
     if (windowsHWnd == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´°¿Ú»¹Î´´´½¨£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çª—å£è¿˜æœªåˆ›å»ºï¼"))
     }
 
     return DefaultSystemWindowProcess(hWnd, System::WindowsMessages::RButtonDown, wParam, lParam);
@@ -219,7 +219,7 @@ System::WindowsLResult Framework::WindowMessageInterface::RightButtonUpMessage(H
 
     if (windowsHWnd == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´°¿Ú»¹Î´´´½¨£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çª—å£è¿˜æœªåˆ›å»ºï¼"))
     }
 
     return DefaultSystemWindowProcess(hWnd, System::WindowsMessages::RButtonUp, wParam, lParam);
@@ -231,7 +231,7 @@ System::WindowsLResult Framework::WindowMessageInterface::MouseMoveMessage(HWnd 
 
     if (windowsHWnd == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´°¿Ú»¹Î´´´½¨£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çª—å£è¿˜æœªåˆ›å»ºï¼"))
     }
 
     return DefaultSystemWindowProcess(hWnd, System::WindowsMessages::MouseMove, wParam, lParam);
@@ -243,7 +243,7 @@ System::WindowsLResult Framework::WindowMessageInterface::MouseWheelMessage(HWnd
 
     if (windowsHWnd == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´°¿Ú»¹Î´´´½¨£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çª—å£è¿˜æœªåˆ›å»ºï¼"))
     }
 
     return DefaultSystemWindowProcess(hWnd, System::WindowsMessages::MouseWheel, wParam, lParam);
@@ -255,10 +255,10 @@ System::WindowsLResult Framework::WindowMessageInterface::DestroyMessage(HWnd hW
 
     if (windowsHWnd == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´°¿Ú»¹Î´´´½¨£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çª—å£è¿˜æœªåˆ›å»ºï¼"))
     }
 
-    // Ö»ÊÕµ½Ö÷´°¿ÚÏú»ÙÊ±²ÅÍË³ö³ÌĞò¡£
+    // åªæ”¶åˆ°ä¸»çª—å£é”€æ¯æ—¶æ‰é€€å‡ºç¨‹åºã€‚
     if (hWnd == windowsHWnd)
     {
         windowsHWnd = nullptr;
@@ -277,7 +277,7 @@ System::WindowsLResult Framework::WindowMessageInterface::PaintMessage(HWnd hWnd
 
     if (windowsHWnd == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´°¿Ú»¹Î´´´½¨£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çª—å£è¿˜æœªåˆ›å»ºï¼"))
     }
 
     return DefaultSystemWindowProcess(hWnd, System::WindowsMessages::Paint, wParam, lParam);
@@ -289,7 +289,7 @@ System::WindowsLResult Framework::WindowMessageInterface::EraseBackgroundMessage
 
     if (windowsHWnd == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´°¿Ú»¹Î´´´½¨£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çª—å£è¿˜æœªåˆ›å»ºï¼"))
     }
 
     return DefaultSystemWindowProcess(hWnd, System::WindowsMessages::EraseBackground, wParam, lParam);
@@ -301,7 +301,7 @@ void Framework::WindowMessageInterface::Display(HWnd hWnd, int64_t timeDelta)
 
     if (windowsHWnd == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´°¿Ú»¹Î´´´½¨£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çª—å£è¿˜æœªåˆ›å»ºï¼"))
     }
 
     System::UnusedFunction(hWnd, timeDelta);
@@ -327,10 +327,10 @@ void Framework::WindowMessageInterface::SetMainWindow(HWnd hWnd)
 
     if (windowsHWnd == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´°¿Ú»¹Î´´´½¨£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çª—å£è¿˜æœªåˆ›å»ºï¼"))
     }
 
-    // ĞŞ¸ÄÖ÷´°¿Ú
+    // ä¿®æ”¹ä¸»çª—å£
     windowsHWnd = hWnd;
 
     CoreTools::DisableNoexcept();

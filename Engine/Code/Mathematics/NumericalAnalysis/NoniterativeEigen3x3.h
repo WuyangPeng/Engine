@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 13:45)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 13:45)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_NONITERATIVE_EIGEN3X3_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_NONITERATIVE_EIGEN3X3_H
@@ -33,12 +33,12 @@ namespace Mathematics
         using Vector3ToolsType = Vector3Tools<Real>;
 
     public:
-        // ÊäÈë¾ØÕó±ØĞëÊÇ¶Ô³ÆµÄ¡£
+        // è¾“å…¥çŸ©é˜µå¿…é¡»æ˜¯å¯¹ç§°çš„ã€‚
         explicit NoniterativeEigen3x3(const Matrix3Type& matrix);
 
         CLASS_INVARIANT_DECLARE;
 
-        // µÃµ½ÌØÕ÷ÏòÁ¿¡£ÌØÕ÷ÖµÒÔµİÔöµÄË³Ğò´æ´¢¡£
+        // å¾—åˆ°ç‰¹å¾å‘é‡ã€‚ç‰¹å¾å€¼ä»¥é€’å¢çš„é¡ºåºå­˜å‚¨ã€‚
         NODISCARD Real GetEigenvalue(int index) const;
         NODISCARD Vector3Type GetEigenvector(int index) const;
 
@@ -47,14 +47,14 @@ namespace Mathematics
         void Compute(const Matrix3Type& matrix);
         void RescaleBack(Real maxValue) noexcept;
 
-        // ¼ÆËãÈı´Î¶àÏîÊ½µÄ¸ù¡£Ë«¾«¶ÈÔËËã±»Ê¹ÓÃÔÚÓÉÓÚ×îĞ¡»¯µÄÓ°Ïì¼õÏû³ı¡£¸ù°´µİÔöË³Ğò·µ»Ø¡£
+        // è®¡ç®—ä¸‰æ¬¡å¤šé¡¹å¼çš„æ ¹ã€‚åŒç²¾åº¦è¿ç®—è¢«ä½¿ç”¨åœ¨ç”±äºæœ€å°åŒ–çš„å½±å“å‡æ¶ˆé™¤ã€‚æ ¹æŒ‰é€’å¢é¡ºåºè¿”å›ã€‚
         void ComputeRoots(const Matrix3Type& matrix);
 
-        // È·¶¨matrixÊÇ·ñÓĞµÄÕıµÄÁĞ¡£·µ»ØmatrixµÄ×î´óÁ¿ÖµÏîÄ¿¡£
-        // Ëü°üº¬µÄÁĞÒ²±»·µ»Ø¡£
+        // ç¡®å®šmatrixæ˜¯å¦æœ‰çš„æ­£çš„åˆ—ã€‚è¿”å›matrixçš„æœ€å¤§é‡å€¼é¡¹ç›®ã€‚
+        // å®ƒåŒ…å«çš„åˆ—ä¹Ÿè¢«è¿”å›ã€‚
         NODISCARD bool PositiveRank(Matrix3Type& matrix, Real& maxEntry, Vector3Type& maxRow) const;
 
-        // ¼ÆËãÌØÕ÷ÏòÁ¿¡£
+        // è®¡ç®—ç‰¹å¾å‘é‡ã€‚
         void ComputeVectors(const Matrix3Type& matrix, const Vector3Type& vector, int index0, int index1, int index2);
 
     private:

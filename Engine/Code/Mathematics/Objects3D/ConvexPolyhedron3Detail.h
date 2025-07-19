@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 10:39)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 10:39)
 
 #ifndef MATHEMATICS_OBJECTS_3D_CONVEX_POLYHEDRON3_DETAIL_H
 #define MATHEMATICS_OBJECTS_3D_CONVEX_POLYHEDRON3_DETAIL_H
@@ -62,7 +62,7 @@ typename Mathematics::ConvexPolyhedron3<Real>::PlaneContainerType Mathematics::C
 
     if (IsUpdatePlanes())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ĞèÒª¸üĞÂÆ½Ãæ!\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("éœ€è¦æ›´æ–°å¹³é¢!\n"s));
     }
 
     return planes;
@@ -75,7 +75,7 @@ const Mathematics::Plane3<Real>& Mathematics::ConvexPolyhedron3<Real>::GetPlane(
 
     if (IsUpdatePlanes())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ĞèÒª¸üĞÂÆ½Ãæ!\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("éœ€è¦æ›´æ–°å¹³é¢!\n"s));
     }
 
     return planes.at(index);
@@ -88,7 +88,7 @@ void Mathematics::ConvexPolyhedron3<Real>::SetVertex(int index, const Vector3& v
 
     ParentType::SetVertex(index, vertex);
 
-    // ¸ú×ÙÃæ·ÖÏíµÄ¶¥µã¡£ËûÃÇµÄÆ½ÃæĞèÒªÔÚÒÔºó¸üĞÂ¡£
+    // è·Ÿè¸ªé¢åˆ†äº«çš„é¡¶ç‚¹ã€‚ä»–ä»¬çš„å¹³é¢éœ€è¦åœ¨ä»¥åæ›´æ–°ã€‚
     const auto numTriangles = this->GetNumTriangles();
     for (auto i = 0; i < numTriangles; ++i)
     {
@@ -150,7 +150,7 @@ void Mathematics::ConvexPolyhedron3<Real>::UpdatePlane(int index, const Vector3&
     {
         normal /= length;
         auto dot = Vector3ToolsType::DotProduct(normal, diff);
-        MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= dot, "µã»ı±ØĞëÎª·Ç¸ºÊı\n");
+        MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= dot, "ç‚¹ç§¯å¿…é¡»ä¸ºéè´Ÿæ•°\n");
         if (dot < MathType::GetValue(0))
         {
             normal = -normal;
@@ -158,12 +158,12 @@ void Mathematics::ConvexPolyhedron3<Real>::UpdatePlane(int index, const Vector3&
     }
     else
     {
-        // Èı½ÇĞÎÍË»¯¡£Ê¹ÓÃ¡°normal¡±Ö¸ÏòÆ½¾ùÖµ³¯Ïò¡£
+        // ä¸‰è§’å½¢é€€åŒ–ã€‚ä½¿ç”¨â€œnormalâ€æŒ‡å‘å¹³å‡å€¼æœå‘ã€‚
         normal = diff;
         normal.Normalize();
     }
 
-    // Æ½Ãæ¾ßÓĞÄÚÖ¸ÏòµÄ·¨Ïß¡£
+    // å¹³é¢å…·æœ‰å†…æŒ‡å‘çš„æ³•çº¿ã€‚
     auto& plane = planes.at(index);
 
     plane.SetPlane(normal, vertex0);
@@ -181,11 +181,11 @@ template <typename Real>
 bool Mathematics::ConvexPolyhedron3<Real>::IsConvex(Real threshold) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
-    MATHEMATICS_ASSERTION_1(threshold <= MathType::GetValue(0), "threshold±ØĞëÎª¸ºÖµ£¡");
+    MATHEMATICS_ASSERTION_1(threshold <= MathType::GetValue(0), "thresholdå¿…é¡»ä¸ºè´Ÿå€¼ï¼");
 
     if (IsUpdatePlanes())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ĞèÒª¸üĞÂÆ½Ãæ¡£\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("éœ€è¦æ›´æ–°å¹³é¢ã€‚\n"s))
     }
 
     auto maxDistance = -MathType::maxReal;
@@ -220,11 +220,11 @@ template <typename Real>
 bool Mathematics::ConvexPolyhedron3<Real>::Contains(const Vector3& point, Real threshold) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
-    MATHEMATICS_ASSERTION_1(threshold <= MathType::GetValue(0), "threshold±ØĞëÎª¸ºÖµ£¡");
+    MATHEMATICS_ASSERTION_1(threshold <= MathType::GetValue(0), "thresholdå¿…é¡»ä¸ºè´Ÿå€¼ï¼");
 
     if (IsUpdatePlanes())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ĞèÒª¸üĞÂÆ½Ãæ¡£\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("éœ€è¦æ›´æ–°å¹³é¢ã€‚\n"s))
     }
 
     for (const auto& plane : planes)

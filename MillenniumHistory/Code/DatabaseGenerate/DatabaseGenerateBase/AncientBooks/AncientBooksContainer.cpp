@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #include "AncientBooksContainer.h"
 
@@ -166,100 +166,100 @@ void AncientBooks::AncientBooksContainer::Verify() const
 {
     if (articleContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("article±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("articleè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (bookContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("book±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("bookè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (calendarContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("calendar±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("calendarè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (categoryContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("category±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("categoryè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (characterContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("character±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (countryContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("country±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("countryè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (dayContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("day±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("dayè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (emperorContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("emperor±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("emperorè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (gatherContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("gather±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("gatherè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (genusContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("genus±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("genusè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (geographicContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("geographic±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("geographicè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (identityContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("identity±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("identityè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (imperialCourtContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("imperialCourt±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("imperialCourtè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (monthContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("month±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("monthè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (reignTitleContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("reignTitle±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("reignTitleè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (sexagenaryCycleContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("sexagenaryCycle±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("sexagenaryCycleè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (sourceContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("source±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("sourceè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (versionContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("version±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("versionè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (yearContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("year±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("yearè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("AncientBooks½áÊøÔØÈë¡­¡­"));
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("AncientBooksç»“æŸè½½å…¥â€¦â€¦"));
 }
 
 #ifdef OPEN_CLASS_INVARIANT

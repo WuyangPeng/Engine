@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:58)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:58)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_SEGMENT3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_SEGMENT3_H
@@ -16,8 +16,8 @@
 #include "Mathematics/Objects3D/Plane3.h"
 #include "Mathematics/Objects3D/Segment3.h"
 
-/// °ë¿Õ¼äÊÇÆ½Ãæ·¨ÏßÖ¸ÏòµÄÆ½Ãæ²àÃæÉÏµÄµã¼¯¡£ ÕâÀïµÄ²éÑ¯ÓÃÓÚÏß¶ÎºÍ°ë½ÇµÄ½»¼¯¡£
-/// ÔÚ¶¯Ì¬²éÕÒ²éÑ¯ÖĞ£¬Èç¹ûÏß¶ÎÒÑ¾­Óë°ë¿Õ¼äÏà½»£¬Ôò·µ»ØÖµÎª'false'¡£ Õâ¸öÏë·¨ÊÇÑ°ÕÒµÚÒ»´Î½Ó´¥¡£
+/// åŠç©ºé—´æ˜¯å¹³é¢æ³•çº¿æŒ‡å‘çš„å¹³é¢ä¾§é¢ä¸Šçš„ç‚¹é›†ã€‚ è¿™é‡Œçš„æŸ¥è¯¢ç”¨äºçº¿æ®µå’ŒåŠè§’çš„äº¤é›†ã€‚
+/// åœ¨åŠ¨æ€æŸ¥æ‰¾æŸ¥è¯¢ä¸­ï¼Œå¦‚æœçº¿æ®µå·²ç»ä¸åŠç©ºé—´ç›¸äº¤ï¼Œåˆ™è¿”å›å€¼ä¸º'false'ã€‚ è¿™ä¸ªæƒ³æ³•æ˜¯å¯»æ‰¾ç¬¬ä¸€æ¬¡æ¥è§¦ã€‚
 
 namespace Mathematics
 {
@@ -47,19 +47,19 @@ namespace Mathematics
         NODISCARD Plane3Type GetHalfspace() const noexcept;
         NODISCARD Segment3Type GetSegment() const noexcept;
 
-        /// Ïà½»¼¯Îª¿Õ£¬µã»òÏß¶Î¡£ º¯ÊıGetQuantity() ·µ»Ø0¡¢1»ò2¡£
+        /// ç›¸äº¤é›†ä¸ºç©ºï¼Œç‚¹æˆ–çº¿æ®µã€‚ å‡½æ•°GetQuantity() è¿”å›0ã€1æˆ–2ã€‚
         NODISCARD int GetQuantity() const noexcept;
         NODISCARD Vector3Type GetPoint(int index) const;
 
     private:
-        // ¶¯Ì¬²éÑ¯¡£
+        // åŠ¨æ€æŸ¥è¯¢ã€‚
         void Find();
 
-        // ÒªÏà½»µÄ¶ÔÏó¡£
+        // è¦ç›¸äº¤çš„å¯¹è±¡ã€‚
         Plane3Type halfspace;
         Segment3Type segment;
 
-        // ÓĞ¹Ø½»¼¯µÄĞÅÏ¢¡£
+        // æœ‰å…³äº¤é›†çš„ä¿¡æ¯ã€‚
         int quantity;
         Vector3Type point0;
         Vector3Type point1;

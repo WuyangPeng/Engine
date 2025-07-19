@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	�汾��0.9.1.6 (2023/10/28 14:58)
+///	标准：std:c++20
+///	版本：0.9.1.6 (2023/10/28 14:58)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_SPHERE3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_SPHERE3_H
@@ -16,9 +16,9 @@
 #include "Mathematics/Objects3D/Plane3.h"
 #include "Mathematics/Objects3D/Sphere3.h"
 
-/// ��ռ���ƽ�淨��ָ���ƽ������ϵĵ㼯�� ����Ĳ�ѯ������Ͱ�ռ�Ľ�����
-/// �ڶ�̬���Ҳ�ѯ�У���������Ѿ����ռ��ཻ���򷵻�ֵΪ�� false����
-/// ����뷨���ҵ���һ�νӴ�������������£�ֻ��һ���Ӵ��㡣
+/// 半空间是平面法线指向的平面侧面上的点集。 这里的查询是球体和半空间的交集。
+/// 在动态查找查询中，如果球体已经与半空间相交，则返回值为“ false”。
+/// 这个想法是找到第一次接触，在这种情况下，只有一个接触点。
 
 namespace Mathematics
 {
@@ -48,7 +48,7 @@ namespace Mathematics
         NODISCARD Plane3Type GetHalfspace() const noexcept;
         NODISCARD Sphere3Type GetSphere() const noexcept;
 
-        // �ཻ��Ϊ�ջ�㡣
+        // 相交集为空或点。
         NODISCARD Vector3Type GetPoint() const noexcept;
 
     private:

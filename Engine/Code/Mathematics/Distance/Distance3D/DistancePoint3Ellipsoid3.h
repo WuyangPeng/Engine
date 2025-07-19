@@ -1,11 +1,11 @@
- /// Copyright (c) 2010-2025
+ï»¿ /// Copyright (c) 2010-2025
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.2.0 (2025/03/28 10:09)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.2.0 (2025/03/28 10:09)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_ELLIPSOID3_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT3_ELLIPSOID3_H
@@ -39,10 +39,10 @@ namespace Mathematics
         NODISCARD Vector3Type GetPoint() const noexcept;
         NODISCARD Ellipsoid3Type GetEllipsoid() const noexcept;
 
-        // ¾²Ì¬¾àÀë²éÑ¯¡£
+        // é™æ€è·ç¦»æŸ¥è¯¢ã€‚
         NODISCARD DistanceResult GetSquared() const override;
 
-        // º¯Êı¼ÆËã¶¯Ì¬¾àÀë²éÑ¯¡£
+        // å‡½æ•°è®¡ç®—åŠ¨æ€è·ç¦»æŸ¥è¯¢ã€‚
         NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
     private:

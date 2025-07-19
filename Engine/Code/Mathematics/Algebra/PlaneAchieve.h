@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 10:42)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 10:42)
 
 #ifndef MATHEMATICS_ALGEBRA_PLANE_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_PLANE_ACHIEVE_H
@@ -97,7 +97,7 @@ void Mathematics::Plane<T>::Normalize()
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³ıÁã´íÎó¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("é™¤é›¶é”™è¯¯ã€‚"s))
     }
 }
 
@@ -153,7 +153,7 @@ void Mathematics::Plane<T>::SetNormal(const AVectorType& normal) noexcept(gAsser
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    MATHEMATICS_ASSERTION_2(normal.IsNormalize(epsilon), "´«ÈëµÄÏòÁ¿²»ÊÇµ¥Î»ÏòÁ¿£¡");
+    MATHEMATICS_ASSERTION_2(normal.IsNormalize(epsilon), "ä¼ å…¥çš„å‘é‡ä¸æ˜¯å•ä½å‘é‡ï¼");
 
     homogeneousPoint.SetX(normal.GetX());
     homogeneousPoint.SetY(normal.GetY());

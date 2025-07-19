@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 14:03)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 14:03)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_QDU_DECOMPOSITION_VALUE_ACHIEVE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_QDU_DECOMPOSITION_VALUE_ACHIEVE_H
@@ -40,27 +40,27 @@ bool Mathematics::QDUDecompositionValue<Real>::IsValid() const noexcept
 template <typename Real>
 void Mathematics::QDUDecompositionValue<Real>::Calculate(const Matrix3Type& matrix)
 {
-    // Òò×ÓM = QR = QDUÆäÖĞQÊÇÕı½»£¨Ğı×ª£©£¬
-    // DÊÇ¶Ô½Ç£¨Ëõ·Å£©£¬²¢ÇÒUÊÇÓëÄÇĞ©ÔÚËüµÄ¶Ô½ÇÏß£¨¼ôÇĞ£©ÉÏÈı½Ç¡£
-    // Ëã·¨²ÉÓÃÊ©ÃÜÌØÕı½»£¨QRµÄËã·¨£©¡£
+    // å› å­M = QR = QDUå…¶ä¸­Qæ˜¯æ­£äº¤ï¼ˆæ—‹è½¬ï¼‰ï¼Œ
+    // Dæ˜¯å¯¹è§’ï¼ˆç¼©æ”¾ï¼‰ï¼Œå¹¶ä¸”Uæ˜¯ä¸é‚£äº›åœ¨å®ƒçš„å¯¹è§’çº¿ï¼ˆå‰ªåˆ‡ï¼‰ä¸Šä¸‰è§’ã€‚
+    // ç®—æ³•é‡‡ç”¨æ–½å¯†ç‰¹æ­£äº¤ï¼ˆQRçš„ç®—æ³•ï¼‰ã€‚
     //
-    // Èç¹û M = [ m0 | m1 | m2 ] ºÍ Q = [ q0 | q1 | q2 ], Ôò
+    // å¦‚æœ M = [ m0 | m1 | m2 ] å’Œ Q = [ q0 | q1 | q2 ], åˆ™
     //
     //   q0 = m0/|m0|
     //   q1 = (m1-(q0*m1)q0)/|m1-(q0*m1)q0|
     //   q2 = (m2-(q0*m2)q0-(q1*m2)q1)/|m2-(q0*m2)q0-(q1*m2)q1|
     //
-    // ÆäÖĞ|V|±íÊ¾Ê¸Á¿VµÄ³¤¶ÈºÍA*B±íÊ¾ÏòÁ¿AºÍBµÄµã»ı
-    //  ¾ØÕóReal¾ßÓĞÏî
+    // å…¶ä¸­|V|è¡¨ç¤ºçŸ¢é‡Vçš„é•¿åº¦å’ŒA*Bè¡¨ç¤ºå‘é‡Aå’ŒBçš„ç‚¹ç§¯
+    //  çŸ©é˜µRealå…·æœ‰é¡¹
     //
     //   r00 = q0*m0  r01 = q0*m1  r02 = q0*m2
     //   r10 = 0      r11 = q1*m1  r12 = q1*m2
     //   r20 = 0      r21 = 0      r22 = q2*m2
     //
-    // ËùÒÔ D = diag(r00,r11,r22) ºÍ U ¾ßÓĞÏî u01 = r01/r00,
-    // u02 = r02/r00, ºÍ u12 = r12/r11.
+    // æ‰€ä»¥ D = diag(r00,r11,r22) å’Œ U å…·æœ‰é¡¹ u01 = r01/r00,
+    // u02 = r02/r00, å’Œ u12 = r12/r11.
 
-    // ¹¹½¨Õı½»¾ØÕóQ.
+    // æ„å»ºæ­£äº¤çŸ©é˜µQ.
     auto invLength = MathType::InvSqrt(matrix.template GetValue<0, 0>() * matrix.template GetValue<0, 0>() + matrix.template GetValue<1, 0>() * matrix.template GetValue<1, 0>() + matrix.template GetValue<2, 0>() * matrix.template GetValue<2, 0>());
 
     orthogonal.template SetValue<0, 0>(matrix.template GetValue<0, 0>() * invLength);
@@ -93,7 +93,7 @@ void Mathematics::QDUDecompositionValue<Real>::Calculate(const Matrix3Type& matr
     orthogonal(1, 2) *= invLength;
     orthogonal(2, 2) *= invLength;
 
-    // ±£Ö¤Õı½»¾ØÕóĞĞÁĞÊ½1£¨ÎŞ·´Éä£©
+    // ä¿è¯æ­£äº¤çŸ©é˜µè¡Œåˆ—å¼1ï¼ˆæ— åå°„ï¼‰
     auto det = orthogonal.Determinant();
 
     if (det < MathType::GetValue(0))
@@ -101,7 +101,7 @@ void Mathematics::QDUDecompositionValue<Real>::Calculate(const Matrix3Type& matr
         orthogonal = -orthogonal;
     }
 
-    // ½¨Á¢¡°ÓÒ±ß¡±µÄ¾ØÕóReal.
+    // å»ºç«‹â€œå³è¾¹â€çš„çŸ©é˜µReal.
     Matrix3Type right{};
     right(0, 0) = orthogonal.template GetValue<0, 0>() * matrix.template GetValue<0, 0>() + orthogonal.template GetValue<1, 0>() * matrix.template GetValue<1, 0>() + orthogonal.template GetValue<2, 0>() * matrix.template GetValue<2, 0>();
 
@@ -115,10 +115,10 @@ void Mathematics::QDUDecompositionValue<Real>::Calculate(const Matrix3Type& matr
 
     right(2, 2) = orthogonal.template GetValue<0, 2>() * matrix.template GetValue<0, 2>() + orthogonal.template GetValue<1, 2>() * matrix.template GetValue<1, 2>() + orthogonal.template GetValue<2, 2>() * matrix.template GetValue<2, 2>();
 
-    // Ëõ·Å×é¼ş¡£
+    // ç¼©æ”¾ç»„ä»¶ã€‚
     diagonal.MakeDiagonal(right.template GetValue<0, 0>(), right.template GetValue<1, 1>(), right.template GetValue<2, 2>());
 
-    // ¼ôÇĞ×é¼ş¡£
+    // å‰ªåˆ‡ç»„ä»¶ã€‚
     auto invD00 = MathType::GetValue(1) / diagonal.template GetValue<0, 0>();
     upperTriangular = Matrix3Type{ MathType::GetValue(1),
                                right.template GetValue<0, 1>() * invD00,

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 16:43)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 16:43)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_H
 #define MATHEMATICS_DISTANCE_DISTANCE_H
@@ -39,7 +39,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        // ¶ÔÓÚµ¼Êı±Æ½ü¡£
+        // å¯¹äºå¯¼æ•°é€¼è¿‘ã€‚
         void SetDifferenceStep(Real newDifferenceStep) noexcept(gAssert < 2 || gMathematicsAssert < 2);
         NODISCARD Real GetDifferenceStep() const noexcept;
 
@@ -49,24 +49,24 @@ namespace Mathematics
         void SetZeroThreshold(Real newZeroThreshold) noexcept(gAssert < 2 || gMathematicsAssert < 2);
         NODISCARD Real GetZeroThreshold() const noexcept;
 
-        // ¾²Ì¬¾àÀë²éÑ¯¡£
-        // ¾àÀë£¨Ä¬ÈÏÊµÏÖÎªµ÷ÓÃGetSquared£¬¶ÔDistanceResultÖĞµÄ¾àÀëÖµ½øĞĞ¿ª·½£©
+        // é™æ€è·ç¦»æŸ¥è¯¢ã€‚
+        // è·ç¦»ï¼ˆé»˜è®¤å®ç°ä¸ºè°ƒç”¨GetSquaredï¼Œå¯¹DistanceResultä¸­çš„è·ç¦»å€¼è¿›è¡Œå¼€æ–¹ï¼‰
         NODISCARD virtual DistanceResultType Get() const;
-        // ¾àÀëÆ½·½
+        // è·ç¦»å¹³æ–¹
         NODISCARD virtual DistanceResultType GetSquared() const = 0;
 
-        // º¯Êı¼ÆËã¶¯Ì¬¾àÀë²éÑ¯¡£
-        // £¨Ä¬ÈÏÊµÏÖÎªµ÷ÓÃGetSquared£¬¶ÔDistanceResultÖĞµÄ¾àÀëÖµ½øĞĞ¿ª·½£©
+        // å‡½æ•°è®¡ç®—åŠ¨æ€è·ç¦»æŸ¥è¯¢ã€‚
+        // ï¼ˆé»˜è®¤å®ç°ä¸ºè°ƒç”¨GetSquaredï¼Œå¯¹DistanceResultä¸­çš„è·ç¦»å€¼è¿›è¡Œå¼€æ–¹ï¼‰
         NODISCARD virtual DistanceResultType Get(Real t, const Vector& lhsVelocity, const Vector& rhsVelocity) const;
         NODISCARD virtual DistanceResultType GetSquared(Real t, const Vector& lhsVelocity, const Vector& rhsVelocity) const = 0;
 
-        // Î¢·Ö¼ÆËã¶¯Ì¬¾àÀë²éÑ¯¡£Ä¬ÈÏÊ¹ÓÃÓĞÏŞ²î·Ö¹À¼Æf'(t) = (f(t + h) - f(t - h)) / (2 * h)£¬ÆäÖĞh = m_DifferenceStep¡£
-        // ÅÉÉúÀà¿ÉÒÔ¸²¸ÇÕâĞ©£¬²¢Ìá¹©²»ÒªÇóhµÄ¾«È·¹«Ê½µÄÊµÏÖ¡£
+        // å¾®åˆ†è®¡ç®—åŠ¨æ€è·ç¦»æŸ¥è¯¢ã€‚é»˜è®¤ä½¿ç”¨æœ‰é™å·®åˆ†ä¼°è®¡f'(t) = (f(t + h) - f(t - h)) / (2 * h)ï¼Œå…¶ä¸­h = m_DifferenceStepã€‚
+        // æ´¾ç”Ÿç±»å¯ä»¥è¦†ç›–è¿™äº›ï¼Œå¹¶æä¾›ä¸è¦æ±‚hçš„ç²¾ç¡®å…¬å¼çš„å®ç°ã€‚
         NODISCARD virtual Real GetDerivative(Real t, const Vector& lhsVelocity, const Vector& rhsVelocity) const;
         NODISCARD virtual Real GetDerivativeSquared(Real t, const Vector& lhsVelocity, const Vector& rhsVelocity) const;
 
-        // ¶¯Ì¬¾àÀë²éÑ¯¡£º¯Êı¼ÆËãÔÚÊ±¼ä¼ä¸ô[tmin,tmax]Á½¸ö¶ÔÏóÖ®¼äµÄ×îĞ¡¾àÀë¡£
-        // Ä¬ÈÏÊµÏÖ¼ÙÉèÊÇ£¬¾àÀëf(t)ÊÇÒ»¸öÍ¹º¯Êı¡£
+        // åŠ¨æ€è·ç¦»æŸ¥è¯¢ã€‚å‡½æ•°è®¡ç®—åœ¨æ—¶é—´é—´éš”[tmin,tmax]ä¸¤ä¸ªå¯¹è±¡ä¹‹é—´çš„æœ€å°è·ç¦»ã€‚
+        // é»˜è®¤å®ç°å‡è®¾æ˜¯ï¼Œè·ç¦»f(t)æ˜¯ä¸€ä¸ªå‡¸å‡½æ•°ã€‚
         NODISCARD virtual DistanceResultType GetInterval(Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity) const;
         NODISCARD virtual DistanceResultType GetIntervalSquared(Real tMin, Real tMax, const Vector& lhsVelocity, const Vector& rhsVelocity) const;
 
@@ -76,13 +76,13 @@ namespace Mathematics
         static constexpr Real defaultDifferenceStep = MathType::GetRational(1, 1000);
 
     private:
-        // ¶ÔÓÚÅ£¶Ù·¨ºÍÄæÅ×ÎïÏß²åÖµ¡£
-        // Ä¬ÈÏ = 8
+        // å¯¹äºç‰›é¡¿æ³•å’Œé€†æŠ›ç‰©çº¿æ’å€¼ã€‚
+        // é»˜è®¤ = 8
         int maximumIterations;
-        // Ä¬ÈÏ = MathType<Real>::GetZeroTolerance()
+        // é»˜è®¤ = MathType<Real>::GetZeroTolerance()
         Real zeroThreshold;
 
-        // Ä¬ÈÏ = 1e-03
+        // é»˜è®¤ = 1e-03
         Real differenceStep;
         Real inverseTwoDifferenceStep;
     };

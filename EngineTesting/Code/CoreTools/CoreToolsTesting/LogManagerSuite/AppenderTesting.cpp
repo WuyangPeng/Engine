@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/05/10 20:24)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/05/10 20:24)
 
 #include "AppenderTesting.h"
 #include "System/Helper/PragmaWarning/Format.h"
@@ -37,12 +37,12 @@ namespace
     const auto gFileFatalMessage = SYSTEM_TEXT("fatalMessage\n"s);
     const auto gBackupMessage = SYSTEM_TEXT("backupMessage"s);
 
-    const auto gConsoleTraceMessage = SYSTEM_TEXT("ÕâÌõÈÕÖ¾ÔÚ¿ØÖÆÌ¨ÏÔÊ¾Îª°×É«¡£\n"s);
-    const auto gConsoleDebugMessage = SYSTEM_TEXT("ÕâÌõÈÕÖ¾ÔÚ¿ØÖÆÌ¨ÏÔÊ¾ÎªÇàÉ«¡£\n"s);
-    const auto gConsoleInfoMessage = SYSTEM_TEXT("ÕâÌõÈÕÖ¾ÔÚ¿ØÖÆÌ¨ÏÔÊ¾ÎªÂÌÉ«¡£\n"s);
-    const auto gConsoleWarnMessage = SYSTEM_TEXT("ÕâÌõÈÕÖ¾ÔÚ¿ØÖÆÌ¨ÏÔÊ¾Îª»ÆÉ«¡£\n"s);
-    const auto gConsoleErrorMessage = SYSTEM_TEXT("ÕâÌõÈÕÖ¾ÔÚ¿ØÖÆÌ¨ÏÔÊ¾ÎªºìÉ«¡£\n"s);
-    const auto gConsoleFatalMessage = SYSTEM_TEXT("ÕâÌõÈÕÖ¾ÔÚ¿ØÖÆÌ¨ÏÔÊ¾Îª¼ÓÉîµÄºìÉ«¡£\n"s);
+    const auto gConsoleTraceMessage = SYSTEM_TEXT("è¿™æ¡æ—¥å¿—åœ¨æ§åˆ¶å°æ˜¾ç¤ºä¸ºç™½è‰²ã€‚\n"s);
+    const auto gConsoleDebugMessage = SYSTEM_TEXT("è¿™æ¡æ—¥å¿—åœ¨æ§åˆ¶å°æ˜¾ç¤ºä¸ºé’è‰²ã€‚\n"s);
+    const auto gConsoleInfoMessage = SYSTEM_TEXT("è¿™æ¡æ—¥å¿—åœ¨æ§åˆ¶å°æ˜¾ç¤ºä¸ºç»¿è‰²ã€‚\n"s);
+    const auto gConsoleWarnMessage = SYSTEM_TEXT("è¿™æ¡æ—¥å¿—åœ¨æ§åˆ¶å°æ˜¾ç¤ºä¸ºé»„è‰²ã€‚\n"s);
+    const auto gConsoleErrorMessage = SYSTEM_TEXT("è¿™æ¡æ—¥å¿—åœ¨æ§åˆ¶å°æ˜¾ç¤ºä¸ºçº¢è‰²ã€‚\n"s);
+    const auto gConsoleFatalMessage = SYSTEM_TEXT("è¿™æ¡æ—¥å¿—åœ¨æ§åˆ¶å°æ˜¾ç¤ºä¸ºåŠ æ·±çš„çº¢è‰²ã€‚\n"s);
 }
 
 CoreTools::AppenderTesting::AppenderTesting(const OStreamShared& stream)

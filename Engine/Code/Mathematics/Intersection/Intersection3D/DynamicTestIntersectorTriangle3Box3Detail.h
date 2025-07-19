@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:18)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:18)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_TRIANGLE3_BOX3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_TRIANGLE3_BOX3_DETAIL_H
@@ -55,10 +55,10 @@ Mathematics::Box3<Real> Mathematics::DynamicTestIntersectorTriangle3Box3<Real>::
 template <typename Real>
 void Mathematics::DynamicTestIntersectorTriangle3Box3<Real>::Test()
 {
-    // ºÃÏñÈı½ÇĞÎÊÇ¾²Ö¹µÄ£¬ºĞ×ÓÔÚÒÆ¶¯¡£
+    // å¥½åƒä¸‰è§’å½¢æ˜¯é™æ­¢çš„ï¼Œç›’å­åœ¨ç§»åŠ¨ã€‚
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
-    // ²âÊÔÈı½ÇĞÎ·¨ÏßµÄ·½Ïò¡£
+    // æµ‹è¯•ä¸‰è§’å½¢æ³•çº¿çš„æ–¹å‘ã€‚
     using TriangleType = std::array<Vector3Type, 3>;
     TriangleType edge{ triangle.GetVertex(1) - triangle.GetVertex(0),
                        triangle.GetVertex(2) - triangle.GetVertex(0),
@@ -75,7 +75,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Box3<Real>::Test()
         return;
     }
 
-    // ²âÊÔºĞÃæµÄ·½Ïò¡£
+    // æµ‹è¯•ç›’é¢çš„æ–¹å‘ã€‚
     for (auto i = 0; i < 3; ++i)
     {
         crossProduct = box.GetAxis(i);
@@ -89,7 +89,7 @@ void Mathematics::DynamicTestIntersectorTriangle3Box3<Real>::Test()
         }
     }
 
-    // ²âÊÔÈı½ÇĞÎÏä±ßÔµ²æ»ıµÄ·½Ïò¡£
+    // æµ‹è¯•ä¸‰è§’å½¢ç®±è¾¹ç¼˜å‰ç§¯çš„æ–¹å‘ã€‚
     for (auto i0 = 0; i0 < 3; ++i0)
     {
         for (auto i1 = 0; i1 < 3; ++i1)

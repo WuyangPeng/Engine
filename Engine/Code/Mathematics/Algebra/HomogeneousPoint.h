@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 14:43)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 14:43)
 
 #ifndef MATHEMATICS_ALGEBRA_HOMOGENEOUS_POINT_H
 #define MATHEMATICS_ALGEBRA_HOMOGENEOUS_POINT_H
@@ -19,8 +19,8 @@
 #include <array>
 #include <vector>
 
-// µ±Æë´Îµã´æ´¢µÄÖµÎª¸¡µãÊıÊ±£¬±È½ÏÁ½µãÏàµÈ£¬
-// ÇëÊ¹ÓÃº¯ÊıApproximate£¬¶ø²»ÊÇ==¡£
+// å½“é½æ¬¡ç‚¹å­˜å‚¨çš„å€¼ä¸ºæµ®ç‚¹æ•°æ—¶ï¼Œæ¯”è¾ƒä¸¤ç‚¹ç›¸ç­‰ï¼Œ
+// è¯·ä½¿ç”¨å‡½æ•°Approximateï¼Œè€Œä¸æ˜¯==ã€‚
 
 namespace Mathematics
 {
@@ -51,8 +51,8 @@ namespace Mathematics
         using ArrayType = std::array<T, pointSize>;
 
     public:
-        // HomogeneousPoint±íÊ¾Ò»¸ö´Ó (x,y,z,w)µÄÆë´Î×ø±êµã¡£
-        // ·ÂÉäµãµÄÌØÕ÷ÊÇw = 1£¨¼ûÀàAPoint£©ºÍ·ÂÉäÏòÁ¿µÄÌØÕ÷ÊÇw = 0£¨¼ûÀàAVector£©¡£
+        // HomogeneousPointè¡¨ç¤ºä¸€ä¸ªä» (x,y,z,w)çš„é½æ¬¡åæ ‡ç‚¹ã€‚
+        // ä»¿å°„ç‚¹çš„ç‰¹å¾æ˜¯w = 1ï¼ˆè§ç±»APointï¼‰å’Œä»¿å°„å‘é‡çš„ç‰¹å¾æ˜¯w = 0ï¼ˆè§ç±»AVectorï¼‰ã€‚
         constexpr HomogeneousPoint() noexcept
             : x{}, y{}, z{}, w{}
         {
@@ -65,7 +65,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        // ×ø±ê·ÃÎÊ
+        // åæ ‡è®¿é—®
         NODISCARD ArrayType GetCoordinate() const noexcept;
         NODISCARD const T& operator[](int index) const;
         NODISCARD T& operator[](int index);
@@ -97,7 +97,7 @@ namespace Mathematics
         T w{};
     };
 
-    // ±È½Ï£¨½ö¹©STLÈİÆ÷Ê¹ÓÃ£©
+    // æ¯”è¾ƒï¼ˆä»…ä¾›STLå®¹å™¨ä½¿ç”¨ï¼‰
     template <typename T>
     NODISCARD bool operator==(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs);
 

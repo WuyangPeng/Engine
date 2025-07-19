@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.7 (2024/03/05 16:33)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/05 16:33)
 
 #ifndef SYSTEM_DYNAMIC_LINK_GET_MODULE_HANDLE_FLAGS_H
 #define SYSTEM_DYNAMIC_LINK_GET_MODULE_HANDLE_FLAGS_H
@@ -18,10 +18,10 @@ namespace System
 
     enum class GetModuleHandleType
     {
-        Default = 0,  // �򵱵��øú���ʱ��ģ������ü����Զ�����
-        Pin = GET_MODULE_HANDLE_EX_FLAG_PIN,  // ģ��һֱӳ���ڵ��øú����Ľ����У�ֱ���ý��̽���
-        UnchangedRefCount = GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,  // ͬGetModuleHandle��ͬ�����������ü���
-        FromAddress = GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS,  // moduleName��ģ���е�һ����ַ
+        Default = 0,  // 则当调用该函数时，模块的引用计数自动增加
+        Pin = GET_MODULE_HANDLE_EX_FLAG_PIN,  // 模块一直映射在调用该函数的进程中，直到该进程结束
+        UnchangedRefCount = GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,  // 同GetModuleHandle相同，不增加引用计数
+        FromAddress = GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS,  // moduleName是模块中的一个地址
     };
 
 #else  // !SYSTEM_PLATFORM_WIN32

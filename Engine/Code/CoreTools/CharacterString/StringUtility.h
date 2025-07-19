@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/29 22:36)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/29 22:36)
 
 #ifndef CORE_TOOLS_CHARACTER_STRING_STRING_UTILITY_H
 #define CORE_TOOLS_CHARACTER_STRING_STRING_UTILITY_H
@@ -34,17 +34,17 @@ namespace CoreTools
         NODISCARD static std::string ToLower(const std::string& input);
         NODISCARD static std::string ToUpper(const std::string& input);
 
-        /// ÔÚC++×Ö·û´®µÄÄ¬ÈÏÇøÓòÉèÖÃÖĞ£¬
-        /// ¿Õ°××Ö·ûÊÇ¿Õ¸ñ(0x20, ' ')¡¢»»ĞĞ·û(0x0C, '\f')¡¢»»ĞĞ(0x0A, '\n')¡¢»Ø³µ·û(0x0D, '\r')¡¢Ë®Æ½ÖÆ±í·û(0x09, '\t') ºÍ´¹Ö±ÖÆ±í·û(0x0B, '\v')¡£
-        /// ¼û https://en.cppreference.com/w/cpp/string/byte/isspace
-        /// ¶ÔÓÚASCIIÖµ±íÒÔ¼°Ïà¹ØµÄis*ºÍisw*º¯Êı£¬´øÓĞ'int ch'ÊäÈë£¬·µ»Ø0»ò·ÇÁã¡£
+        /// åœ¨C++å­—ç¬¦ä¸²çš„é»˜è®¤åŒºåŸŸè®¾ç½®ä¸­ï¼Œ
+        /// ç©ºç™½å­—ç¬¦æ˜¯ç©ºæ ¼(0x20, ' ')ã€æ¢è¡Œç¬¦(0x0C, '\f')ã€æ¢è¡Œ(0x0A, '\n')ã€å›è½¦ç¬¦(0x0D, '\r')ã€æ°´å¹³åˆ¶è¡¨ç¬¦(0x09, '\t') å’Œå‚ç›´åˆ¶è¡¨ç¬¦(0x0B, '\v')ã€‚
+        /// è§ https://en.cppreference.com/w/cpp/string/byte/isspace
+        /// å¯¹äºASCIIå€¼è¡¨ä»¥åŠç›¸å…³çš„is*å’Œisw*å‡½æ•°ï¼Œå¸¦æœ‰'int ch'è¾“å…¥ï¼Œè¿”å›0æˆ–éé›¶ã€‚
         NODISCARD static TokensType GetTokens(const std::string& input, const std::string& whiteSpace);
 
-        /// ¶ÔÓÚ»ù´¡ÎÄ±¾ÌáÈ¡£¬ÔÚGetTokens(...)ÖĞÑ¡Ôñ'whiteSpace'ÎªASCIIÖµ0x00-0x20,0x7F-0xFF¡£
+        /// å¯¹äºåŸºç¡€æ–‡æœ¬æå–ï¼Œåœ¨GetTokens(...)ä¸­é€‰æ‹©'whiteSpace'ä¸ºASCIIå€¼0x00-0x20,0x7F-0xFFã€‚
         NODISCARD static TokensType GetTextTokens(const std::string& input);
 
-        /// ¶ÔÓÚ¸ß¼¶ÎÄ±¾ÌáÈ¡£¬ÔÚGetTokens(...)ÖĞÑ¡Ôñ'whiteSpace'ÎªASCIIÖµ0x00-0x20,0x7F¡£
-        /// ASCIIÖµ0x80»ò¸ü´óµÄÈÎºÎÌØÊâ×Ö·û¶¼½«±£ÁôÎªÎÄ±¾¡£
+        /// å¯¹äºé«˜çº§æ–‡æœ¬æå–ï¼Œåœ¨GetTokens(...)ä¸­é€‰æ‹©'whiteSpace'ä¸ºASCIIå€¼0x00-0x20,0x7Fã€‚
+        /// ASCIIå€¼0x80æˆ–æ›´å¤§çš„ä»»ä½•ç‰¹æ®Šå­—ç¬¦éƒ½å°†ä¿ç•™ä¸ºæ–‡æœ¬ã€‚
         NODISCARD static TokensType GetAdvancedTextTokens(const std::string& input);
 
         NODISCARD static String ToFirstLetterUpper(const String& character);

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º1.0.0.0 (2023/11/08 09:10)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š1.0.0.0 (2023/11/08 09:10)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -15,7 +15,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
 AssistTools::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "¸¨Öú¹¤¾ß¿â" }
+    : ParentType{ argc, argv, "è¾…åŠ©å·¥å…·åº“" }
 {
     InitSuite();
 
@@ -32,14 +32,14 @@ void AssistTools::TestingHelper::InitSuite()
 
 void AssistTools::TestingHelper::AddHelperSuite()
 {
-    auto helperSuite = GenerateSuite("°ïÖú");
+    auto helperSuite = GenerateSuite("å¸®åŠ©");
 
     AddSuite(helperSuite);
 }
 
 void AssistTools::TestingHelper::AddGenerateProjectsSuite()
 {
-    auto generateProjectsSuite = GenerateSuite("Éú³ÉÏîÄ¿");
+    auto generateProjectsSuite = GenerateSuite("ç”Ÿæˆé¡¹ç›®");
 
     ADD_TEST(generateProjectsSuite, GameModuleTesting);
     ADD_TEST(generateProjectsSuite, MiddleLayerModuleTesting);
@@ -54,7 +54,7 @@ void AssistTools::TestingHelper::AddGenerateProjectsSuite()
 
 CoreTools::Suite AssistTools::TestingHelper::GetProjectGenerationSuite()
 {
-    auto projectGenerationSuite = GenerateSuite("¹¤³ÌÉú³É");
+    auto projectGenerationSuite = GenerateSuite("å·¥ç¨‹ç”Ÿæˆ");
 
     ADD_TEST(projectGenerationSuite, DefaultProjectGenerationTesting);
     ADD_TEST(projectGenerationSuite, ClientProjectGenerationTesting);

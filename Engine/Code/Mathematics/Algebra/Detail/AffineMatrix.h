@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.6 (2024/02/20 09:16)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.6 (2024/02/20 09:16)
 
 #ifndef RENDERING_DATA_TYPES_AFFINE_MATRIX_H
 #define RENDERING_DATA_TYPES_AFFINE_MATRIX_H
@@ -35,10 +35,10 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        // ÉèÖÃ×ª»»Îªµ¥Î»¾ØÕó¡£
+        // è®¾ç½®è½¬æ¢ä¸ºå•ä½çŸ©é˜µã€‚
         void MakeIdentity() noexcept;
 
-        // ÉèÖÃ×ª»»µÄËõ·ÅÖµÎª1¡£
+        // è®¾ç½®è½¬æ¢çš„ç¼©æ”¾å€¼ä¸º1ã€‚
         void MakeUnitScale() noexcept;
 
         NODISCARD MatrixType GetRotationOrGeneralMatrix() const noexcept;
@@ -49,7 +49,7 @@ namespace Mathematics
         void SetScale(const APointType& aScale) noexcept;
 
     private:
-        MatrixType rotationOrGeneralMatrix;  // M (ÆÕÍ¨) or R (Ğı×ª)
+        MatrixType rotationOrGeneralMatrix;  // M (æ™®é€š) or R (æ—‹è½¬)
         APointType translate;  // T
         APointType scale;  // S
     };

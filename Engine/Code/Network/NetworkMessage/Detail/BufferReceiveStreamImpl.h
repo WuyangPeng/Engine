@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 16:11)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 16:11)
 
 #ifndef NETWORK_NETWORK_MESSAGE_BUFFER_RECEIVE_STREAM_IMPL_H
 #define NETWORK_NETWORK_MESSAGE_BUFFER_RECEIVE_STREAM_IMPL_H
@@ -30,7 +30,7 @@ namespace Network
 
         void OnEvent(int64_t socketId, MessageEventManager& messageEventManager);
 
-        // Èç¹û¶ÁÈ¡Î´Íê³É£¬ĞèÒª¼ÌĞø½âÎö
+        // å¦‚æœè¯»å–æœªå®Œæˆï¼Œéœ€è¦ç»§ç»­è§£æ
         NODISCARD bool IsFinish() const noexcept;
 
         void PushBack(const MessageBufferSharedPtr& messageBuffer);

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 10:26)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 10:26)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX2_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_MATRIX2_ACHIEVE_H
@@ -28,7 +28,7 @@ Mathematics::Matrix2<Real>::Matrix2(const ContainerType& entry, MatrixMajorFlags
 {
     if (entry.size() != matrixSize)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Êı¾İ´óĞ¡´íÎó£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ•°æ®å¤§å°é”™è¯¯ï¼"s))
     }
 
 #include SYSTEM_WARNING_PUSH
@@ -76,7 +76,7 @@ Mathematics::Matrix2<Real>::Matrix2(const Vector2ContainerType& vectors, MatrixM
 {
     if (vectors.size() != vectorSize)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Êı¾İ´óĞ¡´íÎó£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ•°æ®å¤§å°é”™è¯¯ï¼"s))
     }
 
 #include SYSTEM_WARNING_PUSH
@@ -203,7 +203,7 @@ const Mathematics::Vector2<Real>& Mathematics::Matrix2<Real>::operator[](int row
             break;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òı´íÎó£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•é”™è¯¯ï¼"s))
 }
 
 template <typename Real>
@@ -220,8 +220,8 @@ requires std::is_arithmetic_v<Real>
 const Real& Mathematics::Matrix2<Real>::operator()(int row, int column) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    MATHEMATICS_ASSERTION_0(xIndex <= row && row < vectorSize, "rowË÷Òı´íÎó£¡");
-    MATHEMATICS_ASSERTION_0(Vector2Type::xIndex <= column && column < Vector2Type::pointSize, "columnË÷Òı´íÎó£¡");
+    MATHEMATICS_ASSERTION_0(xIndex <= row && row < vectorSize, "rowç´¢å¼•é”™è¯¯ï¼");
+    MATHEMATICS_ASSERTION_0(Vector2Type::xIndex <= column && column < Vector2Type::pointSize, "columnç´¢å¼•é”™è¯¯ï¼");
 
     return (*this)[row][column];
 }
@@ -323,7 +323,7 @@ Mathematics::Matrix2<Real> Mathematics::Matrix2<Real>::Inverse(Real epsilon) con
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    // ÓÉÓÚ³ıÁã´íÎóµÄepsilonºÍÕâÀïµÄepsilon²»Í¬£¬¸ÄÓÉÏÈ³ıºó³Ë¡£
+    // ç”±äºé™¤é›¶é”™è¯¯çš„epsilonå’Œè¿™é‡Œçš„epsilonä¸åŒï¼Œæ”¹ç”±å…ˆé™¤åä¹˜ã€‚
     const auto inv = 1 / Determinant();
 
     if (epsilon < MathType::FAbs(inv))
@@ -332,7 +332,7 @@ Mathematics::Matrix2<Real> Mathematics::Matrix2<Real>::Inverse(Real epsilon) con
     }
     else
     {
-        MATHEMATICS_ASSERTION_0(false, "¸Ã¾ØÕó²»´æÔÚÄæ¾ØÕó£¡");
+        MATHEMATICS_ASSERTION_0(false, "è¯¥çŸ©é˜µä¸å­˜åœ¨é€†çŸ©é˜µï¼");
 
         return GetZero();
     }
@@ -351,7 +351,7 @@ Mathematics::Matrix2<Real> Mathematics::Matrix2<Real>::GaussianEliminationInvers
     }
     else
     {
-        MATHEMATICS_ASSERTION_0(false, "¸Ã¾ØÕó²»´æÔÚÄæ¾ØÕó£¡");
+        MATHEMATICS_ASSERTION_0(false, "è¯¥çŸ©é˜µä¸å­˜åœ¨é€†çŸ©é˜µï¼");
 
         return GetZero();
     }
@@ -392,9 +392,9 @@ Real Mathematics::Matrix2<Real>::ExtractAngle() const noexcept(gAssert < 1 || gM
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 0>() - GetValue<1, 1>()) <= MathType::GetZeroTolerance(), "¸Ã¾ØÕó²»ÊÇĞı×ª¾ØÕó£¡");
-    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 1>() + GetValue<1, 0>()) <= MathType::GetZeroTolerance(), "¸Ã¾ØÕó²»ÊÇĞı×ª¾ØÕó£¡");
-    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 0>() * GetValue<1, 1>() - GetValue<0, 1>() * GetValue<1, 0>() - MathType::GetValue(1)) <= MathType::GetZeroTolerance(), "¸Ã¾ØÕó²»ÊÇĞı×ª¾ØÕó£¡");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 0>() - GetValue<1, 1>()) <= MathType::GetZeroTolerance(), "è¯¥çŸ©é˜µä¸æ˜¯æ—‹è½¬çŸ©é˜µï¼");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 1>() + GetValue<1, 0>()) <= MathType::GetZeroTolerance(), "è¯¥çŸ©é˜µä¸æ˜¯æ—‹è½¬çŸ©é˜µï¼");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 0>() * GetValue<1, 1>() - GetValue<0, 1>() * GetValue<1, 0>() - MathType::GetValue(1)) <= MathType::GetZeroTolerance(), "è¯¥çŸ©é˜µä¸æ˜¯æ—‹è½¬çŸ©é˜µï¼");
 
     return MathType::ATan2(GetValue<1, 0>(), GetValue<0, 0>());
 }
@@ -403,26 +403,26 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix2<Real>::Orthonormalize()
 {
-    // Ëã·¨²ÉÓÃGram-SchmidtÕı½»¡£
-    // Èç¹û'this'¾ØÕóÎªM = [m0|m1]£¬È»ºóÊä³öÕı½»¾ØÕóQ = [q0|q1]
+    // ç®—æ³•é‡‡ç”¨Gram-Schmidtæ­£äº¤ã€‚
+    // å¦‚æœ'this'çŸ©é˜µä¸ºM = [m0|m1]ï¼Œç„¶åè¾“å‡ºæ­£äº¤çŸ©é˜µQ = [q0|q1]
     //
     //   q0 = m0 / |m0|
     //   q1 = (m1 - (q0 * m1)q0) / |m1 - (q0 * m1)q0|
-    // ÆäÖĞ|V|±íÊ¾ÏòÁ¿VµÄ³¤¶ÈºÍA * B±íÊ¾ÏòÁ¿AºÍBµÄµã»ı
+    // å…¶ä¸­|V|è¡¨ç¤ºå‘é‡Vçš„é•¿åº¦å’ŒA * Bè¡¨ç¤ºå‘é‡Aå’ŒBçš„ç‚¹ç§¯
 
-    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 0>() - GetValue<1, 1>()) <= MathType::GetZeroTolerance(), "¸Ã¾ØÕó²»ÊÇĞı×ª¾ØÕó£¡");
-    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 1>() + GetValue<1, 0>()) <= MathType::GetZeroTolerance(), "¸Ã¾ØÕó²»ÊÇĞı×ª¾ØÕó£¡");
-    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 0>() * GetValue<1, 1>() - GetValue<0, 1>() * GetValue<1, 0>() - MathType::GetValue(1)) <= MathType::GetZeroTolerance(), "¸Ã¾ØÕó²»ÊÇĞı×ª¾ØÕó£¡");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 0>() - GetValue<1, 1>()) <= MathType::GetZeroTolerance(), "è¯¥çŸ©é˜µä¸æ˜¯æ—‹è½¬çŸ©é˜µï¼");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 1>() + GetValue<1, 0>()) <= MathType::GetZeroTolerance(), "è¯¥çŸ©é˜µä¸æ˜¯æ—‹è½¬çŸ©é˜µï¼");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 0>() * GetValue<1, 1>() - GetValue<0, 1>() * GetValue<1, 0>() - MathType::GetValue(1)) <= MathType::GetZeroTolerance(), "è¯¥çŸ©é˜µä¸æ˜¯æ—‹è½¬çŸ©é˜µï¼");
 
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    // ¼ÆËã q0.
+    // è®¡ç®— q0.
     auto invLength = MathType::InvSqrt(GetValue<0, 0>() * GetValue<0, 0>() + GetValue<1, 0>() * GetValue<1, 0>());
 
     (*this)(0, 0) *= invLength;
     (*this)(1, 0) *= invLength;
 
-    // ¼ÆËã q1.
+    // è®¡ç®— q1.
     const auto dot = GetValue<0, 0>() * GetValue<0, 1>() + GetValue<1, 0>() * GetValue<1, 1>();
 
     (*this)(0, 1) -= dot * GetValue<0, 0>();
@@ -439,13 +439,13 @@ requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix2<Real>::Matrix2EigenDecompositionType Mathematics::Matrix2<Real>::EigenDecomposition(Real epsilon) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 1>() - GetValue<1, 0>()) <= epsilon, "¾ØÕó±ØĞëÊÇ¶Ô³Æ¾ØÕó¡£");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 1>() - GetValue<1, 0>()) <= epsilon, "çŸ©é˜µå¿…é¡»æ˜¯å¯¹ç§°çŸ©é˜µã€‚");
 
     auto sum = MathType::FAbs(GetValue<0, 0>()) + MathType::FAbs(GetValue<1, 1>());
 
     if (MathType::FAbs(MathType::FAbs(GetValue<0, 1>()) + sum - sum) < epsilon)
     {
-        // ¾ØÕó M ÊÇ¶Ô½Ç¾ØÕó£¨Êı×ÖËÄÉáÎåÈë£©¡£
+        // çŸ©é˜µ M æ˜¯å¯¹è§’çŸ©é˜µï¼ˆæ•°å­—å››èˆäº”å…¥ï¼‰ã€‚
         const Matrix2<Real> rotation{ MatrixInitType::Identity };
         const Matrix2<Real> diagonal{ GetValue<0, 0>(), GetValue<1, 1>() };
 

@@ -1,18 +1,18 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 21:43)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 21:43)
 
 #ifndef SYSTEM_HELPER_MSL_H
 #define SYSTEM_HELPER_MSL_H
 
 #if defined(__MSL_CPP__)
 
-    ///  Metrowerks ±ê×¼¿â
+    ///  Metrowerks æ ‡å‡†åº“
 
     #ifndef TCRE_CPP_LIB_VERSION
 
@@ -22,7 +22,7 @@
 
     #ifndef TCRE_SYSTEM_STD_LIB
 
-        #define TCRE_SYSTEM_STD_LIB "Metrowerks ±ê×¼¿â°æ±¾ " SYSTEM_STRINGIZE(TCRE_CPP_LIB_VERSION)
+        #define TCRE_SYSTEM_STD_LIB "Metrowerks æ ‡å‡†åº“ç‰ˆæœ¬ " SYSTEM_STRINGIZE(TCRE_CPP_LIB_VERSION)
 
     #endif  // !TCRE_SYSTEM_STD_LIB
 

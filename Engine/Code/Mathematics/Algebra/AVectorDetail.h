@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 10:17)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 10:17)
 
 #ifndef MATHEMATICS_ALGEBRA_A_VECTOR_DETAIL_H
 #define MATHEMATICS_ALGEBRA_A_VECTOR_DETAIL_H
@@ -56,12 +56,12 @@ Mathematics::AVector<T> Mathematics::UnitCross(const AVector<T>& lhs, const AVec
 template <typename T>
 Mathematics::AVectorOrthonormalize<T> Mathematics::Orthonormalize(const AVector<T>& uVector, const AVector<T>& vVector, const AVector<T>& wVector, T epsilon)
 {
-    /// Èç¹ûÊäÈëÏòÁ¿v0¡¢v1ºÍv2£¬ÔòGram-SchmidtÕı½»ÏòÁ¿²úÉúÊ¸Á¿u0¡¢u1ºÍu2ÈçÏÂ£¬
+    /// å¦‚æœè¾“å…¥å‘é‡v0ã€v1å’Œv2ï¼Œåˆ™Gram-Schmidtæ­£äº¤å‘é‡äº§ç”ŸçŸ¢é‡u0ã€u1å’Œu2å¦‚ä¸‹ï¼Œ
     ///   u0 = v0 / |v0|
     ///   u1 = (v1 - (u0 * v1)u0) / |v1 - (u0 * v1)u0|
     ///   u2 = (v2 - (u0 * v2)u0 - (u1 * v2)u1) / |v2 - (u0 * v2)u0 - (u1 * v2)u1|
     ///
-    /// ÆäÖĞ|A|±íÊ¾ÏòÁ¿AµÄ³¤¶ÈºÍA * B±íÊ¾ÏòÁ¿AºÍBµÄµã»ı
+    /// å…¶ä¸­|A|è¡¨ç¤ºå‘é‡Açš„é•¿åº¦å’ŒA * Bè¡¨ç¤ºå‘é‡Aå’ŒBçš„ç‚¹ç§¯
 
     return AVectorOrthonormalize<T>{ uVector, vVector, wVector, epsilon };
 }
@@ -69,7 +69,7 @@ Mathematics::AVectorOrthonormalize<T> Mathematics::Orthonormalize(const AVector<
 template <typename T>
 Mathematics::AVectorOrthonormalize<T> Mathematics::Orthonormalize(const std::vector<AVector<T>>& vectors, T epsilon)
 {
-    MATHEMATICS_ASSERTION_1(vectors.size() == 3, "vectorsµÄ´óĞ¡´íÎó£¡");
+    MATHEMATICS_ASSERTION_1(vectors.size() == 3, "vectorsçš„å¤§å°é”™è¯¯ï¼");
 
     return AVectorOrthonormalize<T>{ vectors, epsilon };
 }
@@ -77,7 +77,7 @@ Mathematics::AVectorOrthonormalize<T> Mathematics::Orthonormalize(const std::vec
 template <typename T>
 Mathematics::AVectorOrthonormalBasis<T> Mathematics::GenerateOrthonormalBasis(const AVector<T>& nonzeroVector, T epsilon)
 {
-    MATHEMATICS_ASSERTION_1(!nonzeroVector.IsZero(epsilon), "ÊäÈë±ØĞëÊÇ·ÇÁãÏòÁ¿£¡");
+    MATHEMATICS_ASSERTION_1(!nonzeroVector.IsZero(epsilon), "è¾“å…¥å¿…é¡»æ˜¯éé›¶å‘é‡ï¼");
 
     return AVectorOrthonormalBasis<T>(nonzeroVector, false, epsilon);
 }
@@ -85,7 +85,7 @@ Mathematics::AVectorOrthonormalBasis<T> Mathematics::GenerateOrthonormalBasis(co
 template <typename T>
 Mathematics::AVectorOrthonormalBasis<T> Mathematics::GenerateComplementBasis(const AVector<T>& unitVector, T epsilon)
 {
-    MATHEMATICS_ASSERTION_3(unitVector.IsNormalize(epsilon), "ÊäÈë±ØĞëÊÇµ¥Î»ÏòÁ¿£¡");
+    MATHEMATICS_ASSERTION_3(unitVector.IsNormalize(epsilon), "è¾“å…¥å¿…é¡»æ˜¯å•ä½å‘é‡ï¼");
 
     return AVectorOrthonormalBasis<T>(unitVector, true, epsilon);
 }
@@ -93,7 +93,7 @@ Mathematics::AVectorOrthonormalBasis<T> Mathematics::GenerateComplementBasis(con
 template <typename T>
 std::ostream& Mathematics::operator<<(std::ostream& outFile, const AVector<T>& vector)
 {
-    outFile << vector.GetX() << "¡¡" << vector.GetY() << "¡¡" << vector.GetZ();
+    outFile << vector.GetX() << "ã€€" << vector.GetY() << "ã€€" << vector.GetZ();
 
     return outFile;
 }

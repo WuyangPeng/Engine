@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/30 22:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/30 22:28)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_C_FILE_MANAGER_IMPL_H
 #define CORE_TOOLS_FILE_MANAGER_C_FILE_MANAGER_IMPL_H
@@ -20,12 +20,12 @@
 
 #include <string>
 
-/// Ö§³Ö¶ÁÈ¡»òĞ´Èë¶ş½øÖÆÎÄ¼ş¡£
-/// Èç¹ûÄãÃ»ÓĞ´ò¿ªÎÄ¼şĞ´Èë£¬µ÷ÓÃ×Ó³ÌĞòWriteToFile½«²úÉú´íÎó¡£
-/// Èç¹ûÄãÃ»ÓĞ´ò¿ªÎÄ¼ş¶ÁÈ¡£¬µ÷ÓÃ×Ó³ÌĞòReadFromFile½«²úÉú´íÎó¡£
-/// Õâ¸öÀà·â×°ÁË_tfopen_sµÄÎÄ¼ş²Ù×÷£ºfclose¡¢freadºÍfwriteµÈ¡£
+/// æ”¯æŒè¯»å–æˆ–å†™å…¥äºŒè¿›åˆ¶æ–‡ä»¶ã€‚
+/// å¦‚æœä½ æ²¡æœ‰æ‰“å¼€æ–‡ä»¶å†™å…¥ï¼Œè°ƒç”¨å­ç¨‹åºWriteToFileå°†äº§ç”Ÿé”™è¯¯ã€‚
+/// å¦‚æœä½ æ²¡æœ‰æ‰“å¼€æ–‡ä»¶è¯»å–ï¼Œè°ƒç”¨å­ç¨‹åºReadFromFileå°†äº§ç”Ÿé”™è¯¯ã€‚
+/// è¿™ä¸ªç±»å°è£…äº†_tfopen_sçš„æ–‡ä»¶æ“ä½œï¼šfcloseã€freadå’Œfwriteç­‰ã€‚
 ///
-/// ËùÓĞµÄÊı¾İÎÄ¼ş¶¼´æ´¢Îªlittle endian¸ñÊ½£¬ÒòÎª´ó¶àÊıÆ½Ì¨¶¼ÊÇlittle endian¡£
+/// æ‰€æœ‰çš„æ•°æ®æ–‡ä»¶éƒ½å­˜å‚¨ä¸ºlittle endianæ ¼å¼ï¼Œå› ä¸ºå¤§å¤šæ•°å¹³å°éƒ½æ˜¯little endianã€‚
 namespace CoreTools
 {
     class CORE_TOOLS_HIDDEN_DECLARE CFileManagerImpl
@@ -52,27 +52,27 @@ namespace CoreTools
 
         NODISCARD OffType GetFileLength() const;
 
-        /// @param data ±ØĞëÖÁÉÙÓĞitemSize * itemsNumber´óĞ¡¡£
-        /// @param itemSize Ã¿¸öÊı¾İÏîµÄ´óĞ¡£¨ÒÔ×Ö½ÚÎªµ¥Î»£©£¬ÓĞĞ§ÖµÎª1¡¢2¡¢4¡¢8¡£
-        /// @param itemsNumber Òª¶ÁÈ¡µÄÊı¾İÏîµÄÊıÁ¿¡£
+        /// @param data å¿…é¡»è‡³å°‘æœ‰itemSize * itemsNumberå¤§å°ã€‚
+        /// @param itemSize æ¯ä¸ªæ•°æ®é¡¹çš„å¤§å°ï¼ˆä»¥å­—èŠ‚ä¸ºå•ä½ï¼‰ï¼Œæœ‰æ•ˆå€¼ä¸º1ã€2ã€4ã€8ã€‚
+        /// @param itemsNumber è¦è¯»å–çš„æ•°æ®é¡¹çš„æ•°é‡ã€‚
 
-        /// ÊäÈë
+        /// è¾“å…¥
         NODISCARD virtual size_t ReadFromFile(size_t itemSize, size_t itemsNumber, void* data);
-        /// Êä³ö
+        /// è¾“å‡º
         NODISCARD virtual size_t WriteToFile(size_t itemSize, size_t itemsNumber, const void* data);
 
-        /// ÊäÈë
+        /// è¾“å…¥
         NODISCARD virtual int GetCharacter();
-        /// ÊäÈë
+        /// è¾“å…¥
         NODISCARD virtual bool UnGetCharacter(int character);
-        /// Êä³ö
+        /// è¾“å‡º
         NODISCARD virtual bool PutCharacter(int character);
-        /// Êä³ö
+        /// è¾“å‡º
         NODISCARD virtual bool PutString(const std::string& str);
-        /// ÊäÈë
+        /// è¾“å…¥
         NODISCARD virtual std::string GetString(int count);
 
-        /// ¸¨Öúº¯Êı
+        /// è¾…åŠ©å‡½æ•°
         NODISCARD bool IsEof() const noexcept;
         NODISCARD bool Flush() const noexcept;
         NODISCARD bool Seek(long offset, FileSeek whence) const noexcept;

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 21:48)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 21:48)
 
 #ifndef SYSTEM_HELPER_GL_EXTENSIONS_MACRO_H
 #define SYSTEM_HELPER_GL_EXTENSIONS_MACRO_H
@@ -15,37 +15,37 @@
 
 #if defined(__gl_h_) || defined(__GL_H__) || defined(_GL_H) || defined(__gl_gl_h_) || defined(__X_GL_H)
 
-    #error "gl.h°üº¬ÔÚGLExtensionsMacro.hÖ®Ç°"
+    #error "gl.håŒ…å«åœ¨GLExtensionsMacro.hä¹‹å‰"
 
 #endif  // defined(__gl_h_) || defined(__GL_H__) || defined(_GL_H) || defined(__gl_gl_h_) || defined(__X_GL_H)
 
 #if defined(__gl2_h_)
 
-    #error "gl2.h°üº¬ÔÚGLExtensionsMacro.hÖ®Ç°"
+    #error "gl2.håŒ…å«åœ¨GLExtensionsMacro.hä¹‹å‰"
 
 #endif  // __gl2_h_
 
 #if defined(__gltypes_h_)
 
-    #error "gltypes.h°üº¬ÔÚGLExtensionsMacro.hÖ®Ç°"
+    #error "gltypes.håŒ…å«åœ¨GLExtensionsMacro.hä¹‹å‰"
 
 #endif  // __gltypes_h_
 
 #if defined(__REGAL_H__)
 
-    #error "Regal.h°üº¬ÔÚGLExtensionsMacro.hÖ®Ç°"
+    #error "Regal.håŒ…å«åœ¨GLExtensionsMacro.hä¹‹å‰"
 
 #endif  // __REGAL_H__
 
 #if defined(__glext_h_) || defined(__GLEXT_H_) || defined(__gl_glext_h_)
 
-    #error "glext.h°üº¬ÔÚGLExtensionsMacro.hÖ®Ç°"
+    #error "glext.håŒ…å«åœ¨GLExtensionsMacro.hä¹‹å‰"
 
 #endif  // defined(__glext_h_) || defined(__GLEXT_H_) || defined(__gl_glext_h_)
 
 #if defined(__gl_ATI_h_)
 
-    #error "glATI.h°üº¬ÔÚGLExtensionsMacro.hÖ®Ç°"
+    #error "glATI.håŒ…å«åœ¨GLExtensionsMacro.hä¹‹å‰"
 
 #endif  // __gl_ATI_h_
 

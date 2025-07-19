@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 09:54)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 09:54)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_TARGET_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_TARGET_H
@@ -33,13 +33,13 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        /// º¯ÊıĞ´ÈëÊı×éÓĞÁ½ÖÖĞÎÊ½£ºWithNumberºÍWithoutNumber¡£
-        /// ¼ÙÉèÊı×éÊıÁ¿ÎªelementsNumber£¬
-        /// WithNumber±íÃ÷Ğ´elementsNumberµ½»º³åÇø£¬
-        /// WithoutNumber±íÊ¾²»Ğ´elementsNumberµ½»º³åÇø¡£
-        /// arrayÈİÆ÷²»Ğ´ÈëÊı×éµÄÊıÁ¿¡£
+        /// å‡½æ•°å†™å…¥æ•°ç»„æœ‰ä¸¤ç§å½¢å¼ï¼šWithNumberå’ŒWithoutNumberã€‚
+        /// å‡è®¾æ•°ç»„æ•°é‡ä¸ºelementsNumberï¼Œ
+        /// WithNumberè¡¨æ˜å†™elementsNumberåˆ°ç¼“å†²åŒºï¼Œ
+        /// WithoutNumberè¡¨ç¤ºä¸å†™elementsNumberåˆ°ç¼“å†²åŒºã€‚
+        /// arrayå®¹å™¨ä¸å†™å…¥æ•°ç»„çš„æ•°é‡ã€‚
 
-        // ÕâĞ©Ä£°åº¯ÊıÊÇ¼¯ºÏÀàĞÍ¡£¸Ãº¯Êı±ØĞë±»ÌØ»¯£¬ÒòÎªËüÃ»ÓĞÌá¹©Ò»¸öÄ¬ÈÏµÄÊµÏÖ¡£
+        // è¿™äº›æ¨¡æ¿å‡½æ•°æ˜¯é›†åˆç±»å‹ã€‚è¯¥å‡½æ•°å¿…é¡»è¢«ç‰¹åŒ–ï¼Œå› ä¸ºå®ƒæ²¡æœ‰æä¾›ä¸€ä¸ªé»˜è®¤çš„å®ç°ã€‚
         template <typename T>
         void WriteAggregate(const T& datum);
 
@@ -52,7 +52,7 @@ namespace CoreTools
         template <typename T, size_t Size>
         void WriteAggregateContainer(const std::array<T, Size>& objects);
 
-        // Ğ´Èë¶ÔÏóÖ¸Õë£¨uniqueIDÔÚ´ÅÅÌÉÏÎª[ÎŞĞ§]ÄÚ´æÖ¸Õë£©¡£
+        // å†™å…¥å¯¹è±¡æŒ‡é’ˆï¼ˆuniqueIDåœ¨ç£ç›˜ä¸Šä¸º[æ— æ•ˆ]å†…å­˜æŒ‡é’ˆï¼‰ã€‚
         template <typename T>
         requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType>)
         void WriteObjectAssociated(const T& object);
@@ -73,7 +73,7 @@ namespace CoreTools
         requires(std::is_base_of_v<CoreTools::ObjectInterface, typename T::ObjectType>)
         void WriteObjectAssociatedContainer(const std::array<T, Size>& objects);
 
-        // Ğ´ÈëboolÖµÎª4×Ö½Ú¡£
+        // å†™å…¥boolå€¼ä¸º4å­—èŠ‚ã€‚
         void Write(bool datum);
 
         template <typename T>
@@ -87,7 +87,7 @@ namespace CoreTools
         template <size_t Size>
         void WriteContainer(const std::array<bool, Size>& objects);
 
-        // Ğ´Èë×Ö·û´®£¬ÔÚ×Ö·û´®Ö®Ç°Ğ´Èë4¸ö×Ö½Ú´ú±í³¤¶È¡£Ã»ÓĞ¿ÕÖÕÖ¹·û¡£
+        // å†™å…¥å­—ç¬¦ä¸²ï¼Œåœ¨å­—ç¬¦ä¸²ä¹‹å‰å†™å…¥4ä¸ªå­—èŠ‚ä»£è¡¨é•¿åº¦ã€‚æ²¡æœ‰ç©ºç»ˆæ­¢ç¬¦ã€‚
         void Write(const char* datum);
         void Write(const std::string& datum);
 
@@ -105,7 +105,7 @@ namespace CoreTools
         template <size_t Size>
         void WriteContainer(const std::array<const char*, Size>& objects);
 
-        // Ô­ÉúÊı¾İĞ´Èëº¯Êı¡£
+        // åŸç”Ÿæ•°æ®å†™å…¥å‡½æ•°ã€‚
         template <typename T>
         requires(std::is_arithmetic_v<T>)
         void Write(T datum);
@@ -122,7 +122,7 @@ namespace CoreTools
         requires(std::is_arithmetic_v<T>)
         void WriteContainer(const std::array<T, Size>& objects);
 
-        // Ğ´ÈëÃ¶¾ÙÖµ¡£
+        // å†™å…¥æšä¸¾å€¼ã€‚
         template <typename T>
         requires(std::is_enum_v<T>)
         void WriteEnum(T datum);
@@ -139,7 +139,7 @@ namespace CoreTools
         requires(std::is_enum_v<T>)
         void WriteEnumContainer(const std::array<T, Size>& objects);
 
-        // °ïÖúº¯Êı
+        // å¸®åŠ©å‡½æ•°
         NODISCARD int GetBytesWritten() const noexcept;
         void WriteUniqueId(const ConstObjectInterfaceSharedPtr& object);
 

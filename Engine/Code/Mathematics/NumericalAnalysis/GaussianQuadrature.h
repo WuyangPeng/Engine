@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 13:45)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 13:45)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_GAUSSIAN_QUADRATURE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_GAUSSIAN_QUADRATURE_H
@@ -28,7 +28,7 @@ namespace Mathematics
 
         using MathType = Math<Real>;
 
-        // ×îºóÒ»¸ö²ÎÊıÊÇÓÃ»§¶¨ÒåµÄÊı¾İ¡£
+        // æœ€åä¸€ä¸ªå‚æ•°æ˜¯ç”¨æˆ·å®šä¹‰çš„æ•°æ®ã€‚
         using Function = Real (*)(Real, const UserDataType*) noexcept;
 
     public:

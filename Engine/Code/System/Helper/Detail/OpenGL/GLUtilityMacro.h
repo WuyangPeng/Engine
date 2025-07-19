@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.7 (2024/03/04 19:52)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/04 19:52)
 
 #ifndef SYSTEM_HELPER_GL_UTILITY_MACRO_H
 #define SYSTEM_HELPER_GL_UTILITY_MACRO_H
@@ -55,7 +55,7 @@ namespace System
 #define SYSTEM_GET_FUNCTION(glFunction) \
     System::GetFunction(SYSTEM_STRINGIZE(glFunction), glFunction)
 
-/// ����ں���û�з���ֵ��
+/// 宏对于函数没有返回值。
 
 #define SYSTEM_BODY_0(function)            \
     SYSTEM_ENTER_FUNCTION(function);       \
@@ -239,7 +239,7 @@ namespace System
     }                                                                                             \
     SYSTEM_EXIT_FUNCTION(function)
 
-// ��Ժ����з���ֵ��
+// 宏对函数有返回值。
 
 #define SYSTEM_BODY_0_RESULT(function, nullReturnValue) \
     using Type = decltype(function());                  \
@@ -403,7 +403,7 @@ namespace System
 
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    /// ��������ȴ��ڵĺ���û�з���ֵ��
+    /// 宏对于事先存在的函数没有返回值。
 
     #define SYSTEM_PREVIOUSLY_BODY_0(function) \
         SYSTEM_ENTER_FUNCTION(function);       \
@@ -471,7 +471,7 @@ namespace System
         function(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);                               \
         SYSTEM_EXIT_FUNCTION(function)
 
-    /// ��������ȴ��ڵĺ����з���ֵ��
+    /// 宏对于事先存在的函数有返回值。
 
     #define SYSTEM_PREVIOUSLY_BODY_0_RESULT(function, nullReturnValue) \
         SYSTEM_ENTER_FUNCTION(function);                               \
@@ -550,7 +550,7 @@ namespace System
     #define SYSTEM_PREVIOUSLY_BODY_10(function, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) \
         SYSTEM_BODY_10(function, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
 
-    /// ��������ȴ��ڵĺ����з���ֵ��
+    /// 宏对于事先存在的函数有返回值。
 
     #define SYSTEM_PREVIOUSLY_BODY_0_RESULT(function, nullReturnValue) \
         SYSTEM_BODY_0_RESULT(function, nullReturnValue)

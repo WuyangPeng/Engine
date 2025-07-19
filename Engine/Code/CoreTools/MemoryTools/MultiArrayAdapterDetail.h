@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 18:11)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 18:11)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_MULTI_ARRAY_ADAPTER_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_MULTI_ARRAY_ADAPTER_DETAIL_H
@@ -22,7 +22,7 @@ CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::MultiArrayAdapter(T* conta
 {
     if (container == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÈİÆ÷±ØĞë´æÔÚ¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("å®¹å™¨å¿…é¡»å­˜åœ¨ã€‚"))
     }
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -45,7 +45,7 @@ void CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::Reset(T* aContainer)
 
     if (aContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÈİÆ÷±ØĞë´æÔÚ¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("å®¹å™¨å¿…é¡»å­˜åœ¨ã€‚"));
     }
 
     container = aContainer;
@@ -74,7 +74,7 @@ const T& CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator[](int in
 
     if (this->GetSize() <= index)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ë÷ÒıÎŞĞ§¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•æ— æ•ˆã€‚"));
     }
 
 #include SYSTEM_WARNING_PUSH
@@ -216,7 +216,7 @@ CoreTools::MultiArrayAdapter<T, OrderLToR>::MultiArrayAdapter(const SizeType& si
 {
     if (container == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÈİÆ÷±ØĞë´æÔÚ¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("å®¹å™¨å¿…é¡»å­˜åœ¨ã€‚"));
     }
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -242,7 +242,7 @@ void CoreTools::MultiArrayAdapter<T, OrderLToR>::Reset(const SizeType& sizes, T*
 
     if (aContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÈİÆ÷±ØĞë´æÔÚ¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("å®¹å™¨å¿…é¡»å­˜åœ¨ã€‚"));
     }
 
     ParentType::Reset(sizes);
@@ -272,7 +272,7 @@ const T& CoreTools::MultiArrayAdapter<T, OrderLToR>::operator[](int index) const
 
     if (this->GetSize() <= index)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ë÷ÒıÎŞĞ§¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•æ— æ•ˆã€‚"));
     }
 
 #include SYSTEM_WARNING_PUSH

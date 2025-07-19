@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 11:03)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 11:03)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -41,14 +41,14 @@ CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::CellValueProxyImpl::GetXMLNo
 
     if (!cellSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("cellÒÑ±»ÊÍ·Å¡£"s))
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("cellå·²è¢«é‡Šæ”¾ã€‚"s))
     }
 
     const auto cellNode = cellSharedPtr->GetXMLNode();
 
     if (cellNode.empty())
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("cellNodeÎÞÐ§£¡"s))
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("cellNodeæ— æ•ˆï¼"s))
     }
 
     return cellNode;
@@ -251,7 +251,7 @@ void CoreTools::SimpleCSV::CellValueProxyImpl::SetString(const std::string& stri
 
     if (cellSharedPtr == nullptr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("cellÒÑ±»ÊÍ·Å¡£"s))
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("cellå·²è¢«é‡Šæ”¾ã€‚"s))
     }
 
     const auto sharedStrings = cellSharedPtr->GetSharedStrings();
@@ -291,7 +291,7 @@ CoreTools::SimpleCSV::CellValue CoreTools::SimpleCSV::CellValueProxyImpl::GetVal
 
             if (!cellSharedPtr)
             {
-                THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("cellÒÑ±»ÊÍ·Å¡£"s))
+                THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("cellå·²è¢«é‡Šæ”¾ã€‚"s))
             }
 
             if (const auto attributeValue = GetAttributeValue(); attributeValue == "s")
@@ -306,7 +306,7 @@ CoreTools::SimpleCSV::CellValue CoreTools::SimpleCSV::CellValueProxyImpl::GetVal
             }
             else
             {
-                THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, "Î´ÖªµÄ×Ö·û´®ÀàÐÍ¡£"s)
+                THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, "æœªçŸ¥çš„å­—ç¬¦ä¸²ç±»åž‹ã€‚"s)
             }
         }
         case ValueType::Boolean:

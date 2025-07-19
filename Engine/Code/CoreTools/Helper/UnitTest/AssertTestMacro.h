@@ -1,19 +1,19 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/28 11:04)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/28 11:04)
 
-/// µ¥Ôª²âÊÔÀàËùĞèÒªµÄ²âÊÔ¶ÏÑÔºê
+/// å•å…ƒæµ‹è¯•ç±»æ‰€éœ€è¦çš„æµ‹è¯•æ–­è¨€å®
 #ifndef CORE_TOOLS_HELPER_ASSERT_TEST_MACRO_H
 #define CORE_TOOLS_HELPER_ASSERT_TEST_MACRO_H
 
 #include "Detail/AssertTestMacroDetail.h"
 
-/// Èôcondition¡¢lhs¡¢rhsÖĞº¬ÓĞÄ£°å£¬ÇëÊ¹ÓÃË«ÖØÀ¨ºÅ¡£
+/// è‹¥conditionã€lhsã€rhsä¸­å«æœ‰æ¨¡æ¿ï¼Œè¯·ä½¿ç”¨åŒé‡æ‹¬å·ã€‚
 
 /// assert true
 #define ASSERT_TRUE(condition) \

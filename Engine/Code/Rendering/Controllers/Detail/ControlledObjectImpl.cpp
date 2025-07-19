@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+ï»¿/// Copyright (c) 2010-2023
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.1 (2023/11/21 09:16)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.1 (2023/11/21 09:16)
 
 #include "Rendering/RenderingExport.h"
 
@@ -76,19 +76,19 @@ void Rendering::ControlledObjectImpl::AttachController(const ControllerInterface
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    // ²âÊÔ¿ØÖÆÆ÷ÊÇ·ñÒÑ¾­ÔÚÊý×éÖÐ¡£
+    // æµ‹è¯•æŽ§åˆ¶å™¨æ˜¯å¦å·²ç»åœ¨æ•°ç»„ä¸­ã€‚
     for (const auto& value : controllers)
     {
         if (aController == value.object)
         {
-            // ¿ØÖÆÆ÷ÒÑÔÚÁÐ±íÖÐ£¬Òò´ËÎÞÐèÖ´ÐÐÈÎºÎ²Ù×÷¡£
+            // æŽ§åˆ¶å™¨å·²åœ¨åˆ—è¡¨ä¸­ï¼Œå› æ­¤æ— éœ€æ‰§è¡Œä»»ä½•æ“ä½œã€‚
             return;
         }
     }
 
     aController->SetController(self);
 
-    // ¿ØÖÆÆ÷²»ÔÚµ±Ç°ÁÐ±íÖÐ£¬ÇëÌí¼ÓËü¡£
+    // æŽ§åˆ¶å™¨ä¸åœ¨å½“å‰åˆ—è¡¨ä¸­ï¼Œè¯·æ·»åŠ å®ƒã€‚
     controllers.emplace_back(aController);
 }
 
@@ -100,10 +100,10 @@ void Rendering::ControlledObjectImpl::DetachController(const ControllerInterface
     {
         if (aController == iter->object)
         {
-            // È¡Ïû°ó¶¨µÄ¿ØÖÆÆ÷¶ÔÏó¡£
+            // å–æ¶ˆç»‘å®šçš„æŽ§åˆ¶å™¨å¯¹è±¡ã€‚
             aController->SetController(nullptr);
 
-            // ´ÓÁÐ±íÖÐÉ¾³ý¿ØÖÆÆ÷¡£
+            // ä»Žåˆ—è¡¨ä¸­åˆ é™¤æŽ§åˆ¶å™¨ã€‚
             controllers.erase(iter);
             break;
         }
@@ -116,7 +116,7 @@ void Rendering::ControlledObjectImpl::DetachAllControllers()
 
     for (const auto& element : controllers)
     {
-        // È¡Ïû°ó¶¨µÄ¿ØÖÆÆ÷¶ÔÏó¡£
+        // å–æ¶ˆç»‘å®šçš„æŽ§åˆ¶å™¨å¯¹è±¡ã€‚
         element.object->SetController(nullptr);
     }
 

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/28 10:55)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/28 10:55)
 
 #ifndef CORE_TOOLS_HELPER_STREAM_MACRO_H
 #define CORE_TOOLS_HELPER_STREAM_MACRO_H
@@ -26,7 +26,7 @@
         const auto endLoad = source.GetBytesRead();                                                    \
         const auto usedLoad = endLoad - beginLoad + CoreTools::GetStreamSize(GetRttiType().GetName()); \
         const auto usedReported = ClassType::GetStreamingSize();                                       \
-        CORE_TOOLS_ASSERTION_0(usedLoad == usedReported, "¶ÁÈ¡²»Æ¥ÅäµÄ×Ö½ÚÊı£º¶ÁÈ¡ = %d£¬ËùĞè = %d\n", usedLoad, usedReported)
+        CORE_TOOLS_ASSERTION_0(usedLoad == usedReported, "è¯»å–ä¸åŒ¹é…çš„å­—èŠ‚æ•°ï¼šè¯»å– = %dï¼Œæ‰€éœ€ = %d\n", usedLoad, usedReported)
 
     #define CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target) \
         const auto beginSave = target.GetBytesWritten()
@@ -35,7 +35,7 @@
         const auto endSave = target.GetBytesWritten();           \
         const auto usedSave = endSave - beginSave;               \
         const auto usedReported = ClassType::GetStreamingSize(); \
-        CORE_TOOLS_ASSERTION_0(usedSave == usedReported, "±£´æ²»Æ¥ÅäµÄ×Ö½ÚÊı£º±£´æ = %d£¬ËùĞè = %d\n", usedSave, usedReported)
+        CORE_TOOLS_ASSERTION_0(usedSave == usedReported, "ä¿å­˜ä¸åŒ¹é…çš„å­—èŠ‚æ•°ï¼šä¿å­˜ = %dï¼Œæ‰€éœ€ = %d\n", usedSave, usedReported)
 
 #else  // !defined(CORE_TOOLS_USE_ASSERT) || USER_ASSERT_LEVEL < 2
 
@@ -70,7 +70,7 @@ public:                                                  \
 #define CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(namespaceName, className)                                \
     CoreTools::ObjectInterfaceSharedPtr namespaceName::className::Factory(CoreTools::BufferSource&) \
     {                                                                                               \
-        THROW_EXCEPTION(SYSTEM_TEXT("³éÏóÀàÃ»ÓĞ¹¤³§£¡\n"s))                                         \
+        THROW_EXCEPTION(SYSTEM_TEXT("æŠ½è±¡ç±»æ²¡æœ‰å·¥å‚ï¼\n"s))                                         \
     }
 
 #define CORE_TOOLS_FACTORY_DEFINE(namespaceName, className)                                                \

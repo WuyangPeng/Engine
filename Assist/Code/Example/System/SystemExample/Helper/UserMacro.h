@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/13 17:53)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/13 17:53)
 
 #ifndef SYSTEM_EXAMPLE_HELPER_USER_MACRO_H
 #define SYSTEM_EXAMPLE_HELPER_USER_MACRO_H
@@ -20,7 +20,7 @@
 
 #define CLOSE_SYSTEM_EXAMPLE_MAX ((SYSTEM_EXAMPLE_ClOSE_END << 1) - 1)
 
-// ±àÒë²âÊÔ£¨Ä¬ÈÏÎª0B0000£¬×î´óÖµÎª0B0001£©
+// ç¼–è¯‘æµ‹è¯•ï¼ˆé»˜è®¤ä¸º0B0000ï¼Œæœ€å¤§å€¼ä¸º0B0001ï¼‰
 #define COMPILE_SYSTEM_EXAMPLE_CLOSE 0B0000
 
 static_assert(0 <= COMPILE_SYSTEM_EXAMPLE_CLOSE, "COMPILE_SYSTEM_EXAMPLE_CLOSE Must be greater than or equal 0.");

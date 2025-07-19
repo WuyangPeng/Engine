@@ -1,30 +1,30 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 14:45)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 14:45)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX3_H
 #define MATHEMATICS_ALGEBRA_MATRIX3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-/// (x,y,z)×ø±êÏµÍ³±»¼Ù¶¨ÎªÓÒÊÖ×ø±êÏµ¡£×ø±êÖáµÄĞı×ª¾ØÕóµÄĞÎÊ½Îª
+/// (x,y,z)åæ ‡ç³»ç»Ÿè¢«å‡å®šä¸ºå³æ‰‹åæ ‡ç³»ã€‚åæ ‡è½´çš„æ—‹è½¬çŸ©é˜µçš„å½¢å¼ä¸º
 ///   RX =    1       0       0
 ///           0     cos(t) -sin(t)
 ///           0     sin(t)  cos(t)
-/// ÆäÖĞt > 0±íÊ¾ÔÚyzÆ½ÃæÄÚµÄÄæÊ±ÕëĞı×ª
+/// å…¶ä¸­t > 0è¡¨ç¤ºåœ¨yzå¹³é¢å†…çš„é€†æ—¶é’ˆæ—‹è½¬
 ///   RY =  cos(t)    0     sin(t)
 ///           0       1       0
 ///        -sin(t)    0     cos(t)
-/// ÆäÖĞt > 0±íÊ¾ÔÚzxÆ½ÃæÄÚµÄÄæÊ±ÕëĞı×ª
+/// å…¶ä¸­t > 0è¡¨ç¤ºåœ¨zxå¹³é¢å†…çš„é€†æ—¶é’ˆæ—‹è½¬
 ///   RZ =  cos(t) -sin(t)    0
 ///         sin(t)  cos(t)    0
 ///           0       0       1
-/// ÆäÖĞt > 0±íÊ¾ÔÚxyÆ½ÃæÄÚµÄÄæÊ±ÕëĞı×ª
+/// å…¶ä¸­t > 0è¡¨ç¤ºåœ¨xyå¹³é¢å†…çš„é€†æ—¶é’ˆæ—‹è½¬
 
 #include "AlgebraFwd.h"
 #include "AxisAngle.h"
@@ -65,14 +65,14 @@ namespace Mathematics
         using Vector3ContainerType = std::vector<Vector3Type>;
 
     public:
-        // Èç¹û±êÖ¾ÎªMatrixFlagsZero£¬´´½¨Áã¾ØÕó£¬
-        // ·ñÔò´´½¨µ¥Î»¾ØÕó¡£
+        // å¦‚æœæ ‡å¿—ä¸ºMatrixFlagsZeroï¼Œåˆ›å»ºé›¶çŸ©é˜µï¼Œ
+        // å¦åˆ™åˆ›å»ºå•ä½çŸ©é˜µã€‚
         constexpr explicit Matrix3(MatrixInitType flag = MatrixInitType::Zero) noexcept
             : x{ Create(flag, VectorIndex::X) }, y{ Create(flag, VectorIndex::Y) }, z{ Create(flag, VectorIndex::Z) }
         {
         }
 
-        // ÊäÈë¾ØÕóÔÚĞĞrºÍÁĞc
+        // è¾“å…¥çŸ©é˜µåœ¨è¡Œrå’Œåˆ—c
         constexpr Matrix3(Real member00,
                           Real member01,
                           Real member02,
@@ -86,21 +86,21 @@ namespace Mathematics
         {
         }
 
-        /// ´´½¨¾ØÕóÀ´×ÔÊı×éÊı×Ö¡£
-        /// ÊäÈëÊı×éÊÇ»ùÓÚMatrixTypeFlagsµÄÊäÈëµÄ½âÊÍ
+        /// åˆ›å»ºçŸ©é˜µæ¥è‡ªæ•°ç»„æ•°å­—ã€‚
+        /// è¾“å…¥æ•°ç»„æ˜¯åŸºäºMatrixTypeFlagsçš„è¾“å…¥çš„è§£é‡Š
         /// MatrixTypeFlagsRow:
         /// entry[0..8]={ m00,m01,m02,m10,m11,m12,m20,m21,m22 }  [row major]
         /// MatrixTypeFlagsColumn:
         /// entry[0..8]={ m00,m10,m20,m01,m11,m21,m02,m12,m22 }  [column major]
         Matrix3(const ContainerType& entry, MatrixMajorFlags majorFlag);
 
-        // ´´½¨»ùÓÚÊäÈëÊ¸Á¿µÄ¾ØÕó¡£MatrixMajorFlags½âÊÍÎª
-        // MatrixTypeFlagsRow£ºÏòÁ¿ÊÇ¾ØÕóµÄĞĞ
-        // MatrixTypeFlagsColumn£ºÏòÁ¿ÊÇ¾ØÕóµÄÁĞ
+        // åˆ›å»ºåŸºäºè¾“å…¥çŸ¢é‡çš„çŸ©é˜µã€‚MatrixMajorFlagsè§£é‡Šä¸º
+        // MatrixTypeFlagsRowï¼šå‘é‡æ˜¯çŸ©é˜µçš„è¡Œ
+        // MatrixTypeFlagsColumnï¼šå‘é‡æ˜¯çŸ©é˜µçš„åˆ—
         Matrix3(const Vector3Type& vector0, const Vector3Type& vector1, const Vector3Type& vector2, MatrixMajorFlags majorFlag);
         Matrix3(const Vector3ContainerType& vectors, MatrixMajorFlags majorFlag);
 
-        // ´´½¨Ò»¸ö¶Ô½Ç¾ØÕó,
+        // åˆ›å»ºä¸€ä¸ªå¯¹è§’çŸ©é˜µ,
         // member01 = member10 = member02 = member20 = member12 = member21 = 0
         constexpr Matrix3(Real member00, Real member11, Real member22) noexcept
             : x{ member00, MathType::GetValue(0), MathType::GetValue(0) },
@@ -109,17 +109,17 @@ namespace Mathematics
         {
         }
 
-        // ´´½¨Ò»¸öĞı×ª¾ØÕó£¨½Ç¶ÈÎªÕı->ÄæÊ±Õë·½Ïò£©
-        // angle±ØĞëÎª»¡¶È£¬²»ÊÇ½Ç¶È¡£
+        // åˆ›å»ºä¸€ä¸ªæ—‹è½¬çŸ©é˜µï¼ˆè§’åº¦ä¸ºæ­£->é€†æ—¶é’ˆæ–¹å‘ï¼‰
+        // angleå¿…é¡»ä¸ºå¼§åº¦ï¼Œä¸æ˜¯è§’åº¦ã€‚
         Matrix3(const Vector3Type& axis, Real angle) noexcept;
         Matrix3(MatrixRotationAxis axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        // ´´½¨Ò»¸öÕÅÁ¿»ı U * V^T
+        // åˆ›å»ºä¸€ä¸ªå¼ é‡ç§¯ U * V^T
         Matrix3(const Vector3Type& vector0, const Vector3Type& vector1) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        // ´´½¨¸÷ÖÖ¾ØÕó¡£
+        // åˆ›å»ºå„ç§çŸ©é˜µã€‚
         void MakeZero() noexcept;
         void MakeIdentity() noexcept;
         void MakeDiagonal(Real member00, Real member11, Real member22) noexcept;
@@ -153,7 +153,7 @@ namespace Mathematics
         // M * rhs
         Matrix3& operator*=(const Matrix3& rhs) noexcept;
 
-        // ÆäËüÔËËã
+        // å…¶å®ƒè¿ç®—
         NODISCARD Matrix3 TimesDiagonal(const Vector3Type& diagonal) const noexcept;  // M * D
         NODISCARD Matrix3 DiagonalTimes(const Vector3Type& diagonal) const noexcept;  // D * M
         NODISCARD Matrix3 Inverse(const Real epsilon = MathType::GetZeroTolerance()) const;
@@ -163,23 +163,23 @@ namespace Mathematics
         NODISCARD Matrix3 GaussianEliminationInverse(Real epsilon = MathType::GetZeroTolerance()) const;
         NODISCARD Real GaussianEliminationDeterminant(Real epsilon = MathType::GetZeroTolerance()) const;
 
-        // ¾ØÕó±ØĞëÊÇÒ»¸öĞı×ª¾ØÕó£¬ÏÂÃæº¯Êı²ÅÓĞĞ§¡£
-        // Orthonormalizeº¯ÊıÊ¹ÓÃGram-SchmidtÕı½»»¯Ê©¼Óµ½ËùÊöĞı×ª¾ØÕó¡£
-        // ½Ç¶È±ØĞëÎª»¡¶È£¬¶ø²»ÊÇ¶ÈÊı¡£
+        // çŸ©é˜µå¿…é¡»æ˜¯ä¸€ä¸ªæ—‹è½¬çŸ©é˜µï¼Œä¸‹é¢å‡½æ•°æ‰æœ‰æ•ˆã€‚
+        // Orthonormalizeå‡½æ•°ä½¿ç”¨Gram-Schmidtæ­£äº¤åŒ–æ–½åŠ åˆ°æ‰€è¿°æ—‹è½¬çŸ©é˜µã€‚
+        // è§’åº¦å¿…é¡»ä¸ºå¼§åº¦ï¼Œè€Œä¸æ˜¯åº¦æ•°ã€‚
         NODISCARD Real ExtractAngle() const noexcept;
         NODISCARD Vector3Type ExtractAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
         NODISCARD Matrix3Extract ExtractAngleAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
         void Orthonormalize();
 
-        // ¾ØÕó±ØĞëÊÇ¶Ô³Æ¾ØÕó¡£
-        // ÏµÊıM = Real * D * Real^T £¬ÆäÖĞReal = [u0|u1|u2] ÊÇ
-        // Ò»¸öÁĞÎªu0¡¢u1ºÍu2µÄĞı×ª¾ØÕóÇÒ
-        // D = diag(d0,d1,d2)ÊÇÒ»¸ö¶Ô½Ç¾ØÕó£¬ÕâÀï¶Ô½ÇÏßÏîÎªd0¡¢d1ºÍd2¡£
-        // ÌØÕ÷ÏòÁ¿u[i]¶ÔÓ¦µÄÌØÕ÷ÏòÁ¿d[i]¡£ÌØÕ÷ÖµÅÅĞòÎªd0 <= d1 <= d2¡£
-        // ·µ»ØÖµµÄµÚÒ»²¿·ÖÎªrotation£¬µÚ¶ş²¿·ÖÎªdiagonal¡£
+        // çŸ©é˜µå¿…é¡»æ˜¯å¯¹ç§°çŸ©é˜µã€‚
+        // ç³»æ•°M = Real * D * Real^T ï¼Œå…¶ä¸­Real = [u0|u1|u2] æ˜¯
+        // ä¸€ä¸ªåˆ—ä¸ºu0ã€u1å’Œu2çš„æ—‹è½¬çŸ©é˜µä¸”
+        // D = diag(d0,d1,d2)æ˜¯ä¸€ä¸ªå¯¹è§’çŸ©é˜µï¼Œè¿™é‡Œå¯¹è§’çº¿é¡¹ä¸ºd0ã€d1å’Œd2ã€‚
+        // ç‰¹å¾å‘é‡u[i]å¯¹åº”çš„ç‰¹å¾å‘é‡d[i]ã€‚ç‰¹å¾å€¼æ’åºä¸ºd0 <= d1 <= d2ã€‚
+        // è¿”å›å€¼çš„ç¬¬ä¸€éƒ¨åˆ†ä¸ºrotationï¼Œç¬¬äºŒéƒ¨åˆ†ä¸ºdiagonalã€‚
         NODISCARD Matrix3EigenDecompositionType EigenDecomposition(Real epsilon = MathType::GetZeroTolerance()) const;
 
-        // ´ÓÅ·À­½Ç´´½¨Ğı×ª¾ØÕó
+        // ä»æ¬§æ‹‰è§’åˆ›å»ºæ—‹è½¬çŸ©é˜µ
         void MakeEulerXYZ(Real xAngle, Real yAngle, Real zAngle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
         void MakeEulerXZY(Real xAngle, Real zAngle, Real yAngle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
         void MakeEulerYXZ(Real yAngle, Real xAngle, Real zAngle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
@@ -197,130 +197,130 @@ namespace Mathematics
 
         NODISCARD EulerType ExtractEuler(ExtractEulerResultOrder euler) const noexcept;
 
-        /// ·µ»ØÖµË³ĞòÎªxAngle¡¢yAngle¡¢zAngle
-        /// ÇÒÔÚÖ¸¶¨µÄ·¶Î§ÄÚ£º
-        /// xAngleÔÚ[-pi,pi]£¬yAngleÔÚ[-pi/2,pi/2]£¬zAngleÔÚ[-pi,pi]
-        /// µ±½â¾ö·½°¸²»ÊÇÎ¨Ò»£¬·µ»ØzAngle = 0¡£
-        /// Ò»°ãÇé¿öÏÂ£¬Ò»ÕûÌ×½â¾ö·½°¸ÊÇ
-        /// ExtractEulerResultType::Sum£ºzAngle + xAngle= c
-        /// ExtractEulerResultType::Difference£ºzAngle - xAngle= c
-        /// ¶ÔÒ»Ğ©½Ç¶Èc¡£
+        /// è¿”å›å€¼é¡ºåºä¸ºxAngleã€yAngleã€zAngle
+        /// ä¸”åœ¨æŒ‡å®šçš„èŒƒå›´å†…ï¼š
+        /// xAngleåœ¨[-pi,pi]ï¼ŒyAngleåœ¨[-pi/2,pi/2]ï¼ŒzAngleåœ¨[-pi,pi]
+        /// å½“è§£å†³æ–¹æ¡ˆä¸æ˜¯å”¯ä¸€ï¼Œè¿”å›zAngle = 0ã€‚
+        /// ä¸€èˆ¬æƒ…å†µä¸‹ï¼Œä¸€æ•´å¥—è§£å†³æ–¹æ¡ˆæ˜¯
+        /// ExtractEulerResultType::Sumï¼šzAngle + xAngle= c
+        /// ExtractEulerResultType::Differenceï¼šzAngle - xAngle= c
+        /// å¯¹ä¸€äº›è§’åº¦cã€‚
         NODISCARD EulerType ExtractEulerXYZ() const noexcept;
 
-        /// ·µ»ØÖµË³ĞòÎªxAngle¡¢zAngle¡¢yAngle
-        /// ÇÒÔÚÖ¸¶¨µÄ·¶Î§ÄÚ£º
-        /// xAngleÔÚ[-pi,pi]£¬zAngleÔÚ[-pi/2,pi/2]£¬yAngleÔÚ[-pi,pi]
-        /// µ±½â¾ö·½°¸²»ÊÇÎ¨Ò»£¬·µ»ØyAngle = 0¡£
-        /// Ò»°ãÇé¿öÏÂ£¬Ò»ÕûÌ×½â¾ö·½°¸ÊÇ
-        /// ExtractEulerResultType::Sum£ºyAngle + xAngle = c
-        /// ExtractEulerResultType::Difference£ºyAngle - xAngle = c
-        /// ¶ÔÒ»Ğ©½Ç¶Èc¡£
+        /// è¿”å›å€¼é¡ºåºä¸ºxAngleã€zAngleã€yAngle
+        /// ä¸”åœ¨æŒ‡å®šçš„èŒƒå›´å†…ï¼š
+        /// xAngleåœ¨[-pi,pi]ï¼ŒzAngleåœ¨[-pi/2,pi/2]ï¼ŒyAngleåœ¨[-pi,pi]
+        /// å½“è§£å†³æ–¹æ¡ˆä¸æ˜¯å”¯ä¸€ï¼Œè¿”å›yAngle = 0ã€‚
+        /// ä¸€èˆ¬æƒ…å†µä¸‹ï¼Œä¸€æ•´å¥—è§£å†³æ–¹æ¡ˆæ˜¯
+        /// ExtractEulerResultType::Sumï¼šyAngle + xAngle = c
+        /// ExtractEulerResultType::Differenceï¼šyAngle - xAngle = c
+        /// å¯¹ä¸€äº›è§’åº¦cã€‚
         NODISCARD EulerType ExtractEulerXZY() const noexcept;
 
-        /// ·µ»ØÖµË³ĞòÎªyAngle¡¢xAngle¡¢zAngle
-        /// ÇÒÔÚÖ¸¶¨µÄ·¶Î§ÄÚ£º
-        /// yAngleÔÚ[-pi,pi]£¬xAngleÔÚ[-pi/2,pi/2]£¬zAngleÔÚ[-pi,pi]
-        /// µ±½â¾ö·½°¸²»ÊÇÎ¨Ò»£¬·µ»ØzAngle = 0¡£
-        /// Ò»°ãÇé¿öÏÂ£¬Ò»ÕûÌ×½â¾ö·½°¸ÊÇ
-        /// ExtractEulerResultType::Sum£ºzAngle + yAngle = c
-        /// ExtractEulerResultType::Difference£ºzAngle - yAngle = c
-        /// ¶ÔÒ»Ğ©½Ç¶Èc¡£
+        /// è¿”å›å€¼é¡ºåºä¸ºyAngleã€xAngleã€zAngle
+        /// ä¸”åœ¨æŒ‡å®šçš„èŒƒå›´å†…ï¼š
+        /// yAngleåœ¨[-pi,pi]ï¼ŒxAngleåœ¨[-pi/2,pi/2]ï¼ŒzAngleåœ¨[-pi,pi]
+        /// å½“è§£å†³æ–¹æ¡ˆä¸æ˜¯å”¯ä¸€ï¼Œè¿”å›zAngle = 0ã€‚
+        /// ä¸€èˆ¬æƒ…å†µä¸‹ï¼Œä¸€æ•´å¥—è§£å†³æ–¹æ¡ˆæ˜¯
+        /// ExtractEulerResultType::Sumï¼šzAngle + yAngle = c
+        /// ExtractEulerResultType::Differenceï¼šzAngle - yAngle = c
+        /// å¯¹ä¸€äº›è§’åº¦cã€‚
         NODISCARD EulerType ExtractEulerYXZ() const noexcept;
 
-        /// ·µ»ØÖµË³ĞòÎªyAngle¡¢zAngle¡¢xAngle
-        /// ÇÒÔÚÖ¸¶¨µÄ·¶Î§ÄÚ£º
-        /// yAngleÔÚ[-pi,pi]£¬zAngleÔÚ[-pi/2,pi/2]£¬xAngleÔÚ[-pi,pi]
-        /// µ±½â¾ö·½°¸²»ÊÇÎ¨Ò»£¬·µ»ØxAngle = 0¡£
-        /// Ò»°ãÇé¿öÏÂ£¬Ò»ÕûÌ×½â¾ö·½°¸ÊÇ
-        /// ExtractEulerResultType::Sum£ºxAngle + yAngle = c
-        /// ExtractEulerResultType::Difference£ºxAngle - yAngle = c
-        /// ¶ÔÒ»Ğ©½Ç¶Èc¡£
+        /// è¿”å›å€¼é¡ºåºä¸ºyAngleã€zAngleã€xAngle
+        /// ä¸”åœ¨æŒ‡å®šçš„èŒƒå›´å†…ï¼š
+        /// yAngleåœ¨[-pi,pi]ï¼ŒzAngleåœ¨[-pi/2,pi/2]ï¼ŒxAngleåœ¨[-pi,pi]
+        /// å½“è§£å†³æ–¹æ¡ˆä¸æ˜¯å”¯ä¸€ï¼Œè¿”å›xAngle = 0ã€‚
+        /// ä¸€èˆ¬æƒ…å†µä¸‹ï¼Œä¸€æ•´å¥—è§£å†³æ–¹æ¡ˆæ˜¯
+        /// ExtractEulerResultType::Sumï¼šxAngle + yAngle = c
+        /// ExtractEulerResultType::Differenceï¼šxAngle - yAngle = c
+        /// å¯¹ä¸€äº›è§’åº¦cã€‚
         NODISCARD EulerType ExtractEulerYZX() const noexcept;
 
-        /// ·µ»ØÖµË³ĞòÎªzAngle¡¢xAngle¡¢yAngle
-        /// ÇÒÔÚÖ¸¶¨µÄ·¶Î§ÄÚ£º
-        /// zAngleÔÚ[-pi,pi]£¬xAngleÔÚ[-pi/2,pi/2]£¬yAngleÔÚ[-pi,pi]
-        /// µ±½â¾ö·½°¸²»ÊÇÎ¨Ò»£¬·µ»ØyAngle = 0¡£
-        /// Ò»°ãÇé¿öÏÂ£¬Ò»ÕûÌ×½â¾ö·½°¸ÊÇ
-        /// ExtractEulerResultType::Sum£ºyAngle + zAngle = c
-        /// ExtractEulerResultType::Difference£ºyAngle - zAngle = c
-        /// ¶ÔÒ»Ğ©½Ç¶Èc¡£
+        /// è¿”å›å€¼é¡ºåºä¸ºzAngleã€xAngleã€yAngle
+        /// ä¸”åœ¨æŒ‡å®šçš„èŒƒå›´å†…ï¼š
+        /// zAngleåœ¨[-pi,pi]ï¼ŒxAngleåœ¨[-pi/2,pi/2]ï¼ŒyAngleåœ¨[-pi,pi]
+        /// å½“è§£å†³æ–¹æ¡ˆä¸æ˜¯å”¯ä¸€ï¼Œè¿”å›yAngle = 0ã€‚
+        /// ä¸€èˆ¬æƒ…å†µä¸‹ï¼Œä¸€æ•´å¥—è§£å†³æ–¹æ¡ˆæ˜¯
+        /// ExtractEulerResultType::Sumï¼šyAngle + zAngle = c
+        /// ExtractEulerResultType::Differenceï¼šyAngle - zAngle = c
+        /// å¯¹ä¸€äº›è§’åº¦cã€‚
         NODISCARD EulerType ExtractEulerZXY() const noexcept;
 
-        /// ·µ»ØÖµË³ĞòÎªzAngle¡¢yAngle¡¢xAngle
-        /// ÇÒÔÚÖ¸¶¨µÄ·¶Î§ÄÚ£º
-        /// zAngleÔÚ[-pi,pi]£¬yAngleÔÚ[-pi/2,pi/2]£¬xAngleÔÚ[-pi,pi]
-        /// µ±½â¾ö·½°¸²»ÊÇÎ¨Ò»£¬·µ»ØxAngle = 0¡£
-        /// Ò»°ãÇé¿öÏÂ£¬Ò»ÕûÌ×½â¾ö·½°¸ÊÇ
-        /// ExtractEulerResultType::Sum£ºxAngle + zAngle = c
-        /// ExtractEulerResultType::Difference£ºxAngle - zAngle = c
-        /// ¶ÔÒ»Ğ©½Ç¶Èc¡£
+        /// è¿”å›å€¼é¡ºåºä¸ºzAngleã€yAngleã€xAngle
+        /// ä¸”åœ¨æŒ‡å®šçš„èŒƒå›´å†…ï¼š
+        /// zAngleåœ¨[-pi,pi]ï¼ŒyAngleåœ¨[-pi/2,pi/2]ï¼ŒxAngleåœ¨[-pi,pi]
+        /// å½“è§£å†³æ–¹æ¡ˆä¸æ˜¯å”¯ä¸€ï¼Œè¿”å›xAngle = 0ã€‚
+        /// ä¸€èˆ¬æƒ…å†µä¸‹ï¼Œä¸€æ•´å¥—è§£å†³æ–¹æ¡ˆæ˜¯
+        /// ExtractEulerResultType::Sumï¼šxAngle + zAngle = c
+        /// ExtractEulerResultType::Differenceï¼šxAngle - zAngle = c
+        /// å¯¹ä¸€äº›è§’åº¦cã€‚
         NODISCARD EulerType ExtractEulerZYX() const noexcept;
 
-        /// ·µ»ØÖµË³ĞòÎªx0Angle¡¢yAngle¡¢x1Angle
-        /// ÇÒÔÚÖ¸¶¨µÄ·¶Î§ÄÚ£º
-        /// x0AngleÔÚ[-pi,pi]£¬yAngleÔÚ[0,pi]£¬x1AngleÔÚ[-pi,pi]
-        /// µ±½â¾ö·½°¸²»ÊÇÎ¨Ò»£¬·µ»Øx1Angle = 0¡£
-        /// Ò»°ãÇé¿öÏÂ£¬Ò»ÕûÌ×½â¾ö·½°¸ÊÇ
-        /// ExtractEulerResultType::Sum£ºx1Angle + x0Angle = c
-        /// ExtractEulerResultType::Difference£º x1Angle - x0Angle = c
-        /// ¶ÔÒ»Ğ©½Ç¶Èc¡£
+        /// è¿”å›å€¼é¡ºåºä¸ºx0Angleã€yAngleã€x1Angle
+        /// ä¸”åœ¨æŒ‡å®šçš„èŒƒå›´å†…ï¼š
+        /// x0Angleåœ¨[-pi,pi]ï¼ŒyAngleåœ¨[0,pi]ï¼Œx1Angleåœ¨[-pi,pi]
+        /// å½“è§£å†³æ–¹æ¡ˆä¸æ˜¯å”¯ä¸€ï¼Œè¿”å›x1Angle = 0ã€‚
+        /// ä¸€èˆ¬æƒ…å†µä¸‹ï¼Œä¸€æ•´å¥—è§£å†³æ–¹æ¡ˆæ˜¯
+        /// ExtractEulerResultType::Sumï¼šx1Angle + x0Angle = c
+        /// ExtractEulerResultType::Differenceï¼š x1Angle - x0Angle = c
+        /// å¯¹ä¸€äº›è§’åº¦cã€‚
         NODISCARD EulerType ExtractEulerXYX() const noexcept;
 
-        /// ·µ»ØÖµË³ĞòÎªx0Angle¡¢zAngle¡¢x1Angle
-        /// ÇÒÔÚÖ¸¶¨µÄ·¶Î§ÄÚ£º
-        /// x0AngleÔÚ[-pi,pi]£¬zAngleÔÚ[0,pi]£¬x1AngleÔÚ[-pi,pi]
-        /// µ±½â¾ö·½°¸²»ÊÇÎ¨Ò»£¬·µ»Øx1Angle = 0¡£
-        /// Ò»°ãÇé¿öÏÂ£¬Ò»ÕûÌ×½â¾ö·½°¸ÊÇ
-        /// ExtractEulerResultType::Sum£ºx1Angle + x0Angle = c
-        /// ExtractEulerResultType::Difference£º x1Angle - x0Angle = c
-        /// ¶ÔÒ»Ğ©½Ç¶Èc¡£
+        /// è¿”å›å€¼é¡ºåºä¸ºx0Angleã€zAngleã€x1Angle
+        /// ä¸”åœ¨æŒ‡å®šçš„èŒƒå›´å†…ï¼š
+        /// x0Angleåœ¨[-pi,pi]ï¼ŒzAngleåœ¨[0,pi]ï¼Œx1Angleåœ¨[-pi,pi]
+        /// å½“è§£å†³æ–¹æ¡ˆä¸æ˜¯å”¯ä¸€ï¼Œè¿”å›x1Angle = 0ã€‚
+        /// ä¸€èˆ¬æƒ…å†µä¸‹ï¼Œä¸€æ•´å¥—è§£å†³æ–¹æ¡ˆæ˜¯
+        /// ExtractEulerResultType::Sumï¼šx1Angle + x0Angle = c
+        /// ExtractEulerResultType::Differenceï¼š x1Angle - x0Angle = c
+        /// å¯¹ä¸€äº›è§’åº¦cã€‚
         NODISCARD EulerType ExtractEulerXZX() const noexcept;
 
-        /// ·µ»ØÖµË³ĞòÎªy0Angle¡¢xAngle¡¢y1Angle
-        /// ÇÒÔÚÖ¸¶¨µÄ·¶Î§ÄÚ£º
-        /// y0AngleÔÚ[-pi,pi]£¬xAngleÔÚ[0,pi]£¬y1AngleÔÚ[-pi,pi]
-        /// µ±½â¾ö·½°¸²»ÊÇÎ¨Ò»£¬·µ»Øy1Angle = 0¡£
-        /// Ò»°ãÇé¿öÏÂ£¬Ò»ÕûÌ×½â¾ö·½°¸ÊÇ
-        /// ExtractEulerResultType::Sum£ºy1Angle + y0Angle = c
-        /// ExtractEulerResultType::Difference£º y1Angle - y0Angle = c
-        /// ¶ÔÒ»Ğ©½Ç¶Èc¡£
+        /// è¿”å›å€¼é¡ºåºä¸ºy0Angleã€xAngleã€y1Angle
+        /// ä¸”åœ¨æŒ‡å®šçš„èŒƒå›´å†…ï¼š
+        /// y0Angleåœ¨[-pi,pi]ï¼ŒxAngleåœ¨[0,pi]ï¼Œy1Angleåœ¨[-pi,pi]
+        /// å½“è§£å†³æ–¹æ¡ˆä¸æ˜¯å”¯ä¸€ï¼Œè¿”å›y1Angle = 0ã€‚
+        /// ä¸€èˆ¬æƒ…å†µä¸‹ï¼Œä¸€æ•´å¥—è§£å†³æ–¹æ¡ˆæ˜¯
+        /// ExtractEulerResultType::Sumï¼šy1Angle + y0Angle = c
+        /// ExtractEulerResultType::Differenceï¼š y1Angle - y0Angle = c
+        /// å¯¹ä¸€äº›è§’åº¦cã€‚
         NODISCARD EulerType ExtractEulerYXY() const noexcept;
 
-        /// ·µ»ØÖµË³ĞòÎªy0Angle¡¢zAngle¡¢y1Angle
-        /// ÇÒÔÚÖ¸¶¨µÄ·¶Î§ÄÚ£º
-        /// y0AngleÔÚ[-pi,pi]£¬zAngleÔÚ[0,pi]£¬y1AngleÔÚ[-pi,pi]
-        /// µ±½â¾ö·½°¸²»ÊÇÎ¨Ò»£¬·µ»Øy1Angle = 0¡£
-        /// Ò»°ãÇé¿öÏÂ£¬Ò»ÕûÌ×½â¾ö·½°¸ÊÇ
-        /// ExtractEulerResultType::Sum£ºy1Angle + y0Angle = c
-        /// ExtractEulerResultType::Difference£º y1Angle - y0Angle = c
-        /// ¶ÔÒ»Ğ©½Ç¶Èc¡£
+        /// è¿”å›å€¼é¡ºåºä¸ºy0Angleã€zAngleã€y1Angle
+        /// ä¸”åœ¨æŒ‡å®šçš„èŒƒå›´å†…ï¼š
+        /// y0Angleåœ¨[-pi,pi]ï¼ŒzAngleåœ¨[0,pi]ï¼Œy1Angleåœ¨[-pi,pi]
+        /// å½“è§£å†³æ–¹æ¡ˆä¸æ˜¯å”¯ä¸€ï¼Œè¿”å›y1Angle = 0ã€‚
+        /// ä¸€èˆ¬æƒ…å†µä¸‹ï¼Œä¸€æ•´å¥—è§£å†³æ–¹æ¡ˆæ˜¯
+        /// ExtractEulerResultType::Sumï¼šy1Angle + y0Angle = c
+        /// ExtractEulerResultType::Differenceï¼š y1Angle - y0Angle = c
+        /// å¯¹ä¸€äº›è§’åº¦cã€‚
         NODISCARD EulerType ExtractEulerYZY() const noexcept;
 
-        /// ·µ»ØÖµË³ĞòÎªz0Angle¡¢xAngle¡¢z1Angle
-        /// ÇÒÔÚÖ¸¶¨µÄ·¶Î§ÄÚ£º
-        /// x0AngleÔÚ[-pi,pi]£¬xAngleÔÚ[0,pi]£¬x1AngleÔÚ[-pi,pi]
-        /// µ±½â¾ö·½°¸²»ÊÇÎ¨Ò»£¬·µ»Øz1Angle = 0¡£
-        /// Ò»°ãÇé¿öÏÂ£¬Ò»ÕûÌ×½â¾ö·½°¸ÊÇ
-        /// ExtractEulerResultType::Sum£ºz1Angle + z0Angle = c
-        /// ExtractEulerResultType::Difference£º z1Angle - z0Angle = c
-        /// ¶ÔÒ»Ğ©½Ç¶Èc¡£
+        /// è¿”å›å€¼é¡ºåºä¸ºz0Angleã€xAngleã€z1Angle
+        /// ä¸”åœ¨æŒ‡å®šçš„èŒƒå›´å†…ï¼š
+        /// x0Angleåœ¨[-pi,pi]ï¼ŒxAngleåœ¨[0,pi]ï¼Œx1Angleåœ¨[-pi,pi]
+        /// å½“è§£å†³æ–¹æ¡ˆä¸æ˜¯å”¯ä¸€ï¼Œè¿”å›z1Angle = 0ã€‚
+        /// ä¸€èˆ¬æƒ…å†µä¸‹ï¼Œä¸€æ•´å¥—è§£å†³æ–¹æ¡ˆæ˜¯
+        /// ExtractEulerResultType::Sumï¼šz1Angle + z0Angle = c
+        /// ExtractEulerResultType::Differenceï¼š z1Angle - z0Angle = c
+        /// å¯¹ä¸€äº›è§’åº¦cã€‚
         NODISCARD EulerType ExtractEulerZXZ() const noexcept;
 
-        /// ·µ»ØÖµË³ĞòÎªz0Angle¡¢yAngle¡¢z1Angle
-        /// ÇÒÔÚÖ¸¶¨µÄ·¶Î§ÄÚ£º
-        /// x0AngleÔÚ[-pi,pi]£¬yAngleÔÚ[0,pi]£¬x1AngleÔÚ[-pi,pi]
-        /// µ±½â¾ö·½°¸²»ÊÇÎ¨Ò»£¬·µ»Øz1Angle = 0¡£
-        /// Ò»°ãÇé¿öÏÂ£¬Ò»ÕûÌ×½â¾ö·½°¸ÊÇ
-        /// ExtractEulerResultType::Sum£ºz1Angle + z0Angle = c
-        /// ExtractEulerResultType::Difference£º z1Angle - z0Angle = c
-        /// ¶ÔÒ»Ğ©½Ç¶Èc¡£
+        /// è¿”å›å€¼é¡ºåºä¸ºz0Angleã€yAngleã€z1Angle
+        /// ä¸”åœ¨æŒ‡å®šçš„èŒƒå›´å†…ï¼š
+        /// x0Angleåœ¨[-pi,pi]ï¼ŒyAngleåœ¨[0,pi]ï¼Œx1Angleåœ¨[-pi,pi]
+        /// å½“è§£å†³æ–¹æ¡ˆä¸æ˜¯å”¯ä¸€ï¼Œè¿”å›z1Angle = 0ã€‚
+        /// ä¸€èˆ¬æƒ…å†µä¸‹ï¼Œä¸€æ•´å¥—è§£å†³æ–¹æ¡ˆæ˜¯
+        /// ExtractEulerResultType::Sumï¼šz1Angle + z0Angle = c
+        /// ExtractEulerResultType::Differenceï¼š z1Angle - z0Angle = c
+        /// å¯¹ä¸€äº›è§’åº¦cã€‚
         NODISCARD EulerType ExtractEulerZYZ() const noexcept;
 
-        /// SLERP£¨ÇòÃæÏßĞÔ²åÖµ£©¶ø²»Ê¹ÓÃËÄÔªÊı¡£
-        /// ¼ÆËã Real(t) = R0*(Transpose(R0)*R1)^t
-        /// Èç¹ûQÊÇÒ»¸öĞı×ª¾ØÕóÊ¹ÓÃµ¥Î»³¤¶ÈÖáUºÍ½ÇA£¬
-        /// ÔòQ^ tÊÇÒ»¸öĞı×ª¾ØÕóÊ¹ÓÃµ¥Î»³¤¶ÈÖáUºÍĞı×ª½Ç¶Èt*A¡£
+        /// SLERPï¼ˆçƒé¢çº¿æ€§æ’å€¼ï¼‰è€Œä¸ä½¿ç”¨å››å…ƒæ•°ã€‚
+        /// è®¡ç®— Real(t) = R0*(Transpose(R0)*R1)^t
+        /// å¦‚æœQæ˜¯ä¸€ä¸ªæ—‹è½¬çŸ©é˜µä½¿ç”¨å•ä½é•¿åº¦è½´Uå’Œè§’Aï¼Œ
+        /// åˆ™Q^ tæ˜¯ä¸€ä¸ªæ—‹è½¬çŸ©é˜µä½¿ç”¨å•ä½é•¿åº¦è½´Uå’Œæ—‹è½¬è§’åº¦t*Aã€‚
         void Slerp(Real t, const Matrix3& rot0, const Matrix3& rot1) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         NODISCARD ArrayType GetCoordinate() const noexcept;
@@ -328,7 +328,7 @@ namespace Mathematics
 
         NODISCARD ContainerType GetContainer() const;
 
-        // ÌØÊâ¾ØÕó¡£
+        // ç‰¹æ®ŠçŸ©é˜µã€‚
         NODISCARD static constexpr Matrix3 GetZero()
         {
             return Matrix3{ MatrixInitType::Zero };
@@ -378,7 +378,7 @@ namespace Mathematics
         NODISCARD typename Vector3Type::SetCoordinateFunction GetVectorSetFunction() const noexcept;
 
     private:
-        // ´æ´¢ÎªĞĞÖ÷Ğò¡£
+        // å­˜å‚¨ä¸ºè¡Œä¸»åºã€‚
         Vector3Type x;
         Vector3Type y;
         Vector3Type z;
@@ -411,7 +411,7 @@ namespace Mathematics
     template <typename Real>
     NODISCARD bool Approximate(const Matrix3<Real>& lhs, const Matrix3<Real>& rhs, Real epsilon = Math<Real>::GetZeroTolerance());
 
-    // µ÷ÊÔÊä³ö¡£
+    // è°ƒè¯•è¾“å‡ºã€‚
     template <typename Real>
     std::ostream& operator<<(std::ostream& outFile, const Matrix3<Real>& matrix);
 

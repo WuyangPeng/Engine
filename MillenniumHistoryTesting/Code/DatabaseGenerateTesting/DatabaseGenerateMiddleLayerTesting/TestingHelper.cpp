@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/26 22:59)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/26 22:59)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -14,7 +14,7 @@
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 
 DatabaseGenerateMiddleLayerTesting::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "Êı¾İ¿âÉú³ÉÖĞ¼ä²ãµ¥Ôª²âÊÔ" }
+    : ParentType{ argc, argv, "æ•°æ®åº“ç”Ÿæˆä¸­é—´å±‚å•å…ƒæµ‹è¯•" }
 {
     InitSuite();
 
@@ -43,14 +43,14 @@ void DatabaseGenerateMiddleLayerTesting::TestingHelper::InitSuite()
 
 void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddHelperSuite()
 {
-    auto helperSuite = GenerateSuite("°ïÖú");
+    auto helperSuite = GenerateSuite("å¸®åŠ©");
 
     AddSuite(helperSuite);
 }
 
 void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddArtificialIntelligenceSuite()
 {
-    auto artificialIntelligenceSuite = GenerateSuite("ÈË¹¤ÖÇÄÜ");
+    auto artificialIntelligenceSuite = GenerateSuite("äººå·¥æ™ºèƒ½");
 
     ADD_TEST(artificialIntelligenceSuite, AIManagerTesting);
 
@@ -59,7 +59,7 @@ void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddArtificialIntelligenc
 
 void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddAudioSuite()
 {
-    auto audioSuite = GenerateSuite("ÒôĞ§");
+    auto audioSuite = GenerateSuite("éŸ³æ•ˆ");
 
     ADD_TEST(audioSuite, AudioManagerTesting);
 
@@ -68,7 +68,7 @@ void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddAudioSuite()
 
 void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddCameraSystemsSuite()
 {
-    auto cameraSystemsSuite = GenerateSuite("Ïà»úÏµÍ³");
+    auto cameraSystemsSuite = GenerateSuite("ç›¸æœºç³»ç»Ÿ");
 
     ADD_TEST(cameraSystemsSuite, CameraSystemsManagerTesting);
 
@@ -77,7 +77,7 @@ void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddCameraSystemsSuite()
 
 void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddEventSuite()
 {
-    auto eventSuite = GenerateSuite("ÊÂ¼ş");
+    auto eventSuite = GenerateSuite("äº‹ä»¶");
 
     ADD_TEST(eventSuite, EventManagerTesting);
 
@@ -95,7 +95,7 @@ void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddGUISuite()
 
 void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddInputSuite()
 {
-    auto inputSuite = GenerateSuite("ÊäÈë");
+    auto inputSuite = GenerateSuite("è¾“å…¥");
 
     ADD_TEST(inputSuite, InputManagerTesting);
 
@@ -104,7 +104,7 @@ void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddInputSuite()
 
 void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddMessageSuite()
 {
-    auto messageSuite = GenerateSuite("ÏûÏ¢");
+    auto messageSuite = GenerateSuite("æ¶ˆæ¯");
 
     ADD_TEST(messageSuite, MessageManagerTesting);
 
@@ -113,7 +113,7 @@ void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddMessageSuite()
 
 void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddNetworkSuite()
 {
-    auto networkSuite = GenerateSuite("ÍøÂç");
+    auto networkSuite = GenerateSuite("ç½‘ç»œ");
 
     ADD_TEST(networkSuite, NetworkManagerTesting);
 
@@ -122,7 +122,7 @@ void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddNetworkSuite()
 
 void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddObjectLogicSuite()
 {
-    auto objectLogicSuite = GenerateSuite("¶ÔÏóÂß¼­");
+    auto objectLogicSuite = GenerateSuite("å¯¹è±¡é€»è¾‘");
 
     ADD_TEST(objectLogicSuite, ObjectLogicManagerTesting);
 
@@ -131,7 +131,7 @@ void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddObjectLogicSuite()
 
 void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddPhysicalModellingSuite()
 {
-    auto physicalModellingSuite = GenerateSuite("ÎïÀí½¨Ä£");
+    auto physicalModellingSuite = GenerateSuite("ç‰©ç†å»ºæ¨¡");
 
     ADD_TEST(physicalModellingSuite, PhysicalModellingManagerTesting);
 
@@ -140,7 +140,7 @@ void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddPhysicalModellingSuit
 
 void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddRenderingSuite()
 {
-    auto renderingSuite = GenerateSuite("äÖÈ¾");
+    auto renderingSuite = GenerateSuite("æ¸²æŸ“");
 
     ADD_TEST(renderingSuite, RenderingManagerTesting);
 
@@ -149,7 +149,7 @@ void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddRenderingSuite()
 
 void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddResourceSuite()
 {
-    auto resourceSuite = GenerateSuite("×ÊÔ´");
+    auto resourceSuite = GenerateSuite("èµ„æº");
 
     ADD_TEST(resourceSuite, ResourceManagerTesting);
 
@@ -158,7 +158,7 @@ void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddResourceSuite()
 
 void DatabaseGenerateMiddleLayerTesting::TestingHelper::AddSystemSuite()
 {
-    auto systemSuit = GenerateSuite("ÏµÍ³");
+    auto systemSuit = GenerateSuite("ç³»ç»Ÿ");
 
     ADD_TEST(systemSuit, SystemManagerTesting);
 

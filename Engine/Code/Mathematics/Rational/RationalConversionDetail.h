@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:19)
 
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_CONVERSION_DETAIL_H
 #define MATHEMATICS_RATIONAL_RATIONAL_CONVERSION_DETAIL_H
@@ -83,8 +83,8 @@ void Mathematics::RationalConversion<N, T>::InitToFloatingPoint()
     }
     else
     {
-        // ´óÓÚmax_normal_float¡£
-        THROW_EXCEPTION(SYSTEM_TEXT("×ª»»Òç³ö£¡"s))
+        // å¤§äºmax_normal_floatã€‚
+        THROW_EXCEPTION(SYSTEM_TEXT("è½¬æ¢æº¢å‡ºï¼"s))
     }
 
     Negative();
@@ -102,8 +102,8 @@ void Mathematics::RationalConversion<N, T>::InitToFloatingPoint()
 template <int N, typename T>
 void Mathematics::RationalConversion<N, T>::CorrectWithShifting()
 {
-    // ÓĞÀíÊıµÄĞÎÊ½ÎªN/D = 2^{nbit-dbit}*(1+n)/(1+d)ËùÊ¾£¬
-    // ÆäÖĞnºÍdÊÇÔÚ·¶Î§[0,1£©¡£×ª»»µ½N'/D' = (1+n)/(1+d)¡£
+    // æœ‰ç†æ•°çš„å½¢å¼ä¸ºN/D = 2^{nbit-dbit}*(1+n)/(1+d)æ‰€ç¤ºï¼Œ
+    // å…¶ä¸­nå’Œdæ˜¯åœ¨èŒƒå›´[0,1ï¼‰ã€‚è½¬æ¢åˆ°N'/D' = (1+n)/(1+d)ã€‚
     if (0 < shifting)
     {
         absDenominator <<= shifting;
@@ -113,8 +113,8 @@ void Mathematics::RationalConversion<N, T>::CorrectWithShifting()
         absNumerator <<= -shifting;
     }
 
-    // ±íÊ¾(1+n)/(1+d) = 1+m£¬ÆäÖĞmÔÚ[0,1)£¬ÎÒÃÇĞèÒªn >= d¡£
-    // Èç¹ûn < d£¬×ª»»ÎªN"/D" = (2*(1+n))/(1+d) = 1+m£¬ÕâÊÇÔÚ [0,1)¡£
+    // è¡¨ç¤º(1+n)/(1+d) = 1+mï¼Œå…¶ä¸­måœ¨[0,1)ï¼Œæˆ‘ä»¬éœ€è¦n >= dã€‚
+    // å¦‚æœn < dï¼Œè½¬æ¢ä¸ºN"/D" = (2*(1+n))/(1+d) = 1+mï¼Œè¿™æ˜¯åœ¨ [0,1)ã€‚
     if (absNumerator < absDenominator)
     {
         absNumerator <<= 1;
@@ -177,7 +177,7 @@ void Mathematics::RationalConversion<N, T>::CalculateMantissa()
     }
     else
     {
-        // Ğ¡ÓÚ min_subnormal_float, ½Ø¶ÏÎª0¡£
+        // å°äº min_subnormal_float, æˆªæ–­ä¸º0ã€‚
         mantissa = 0;
     }
 }

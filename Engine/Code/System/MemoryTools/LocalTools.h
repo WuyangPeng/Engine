@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 15:57)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 15:57)
 
 #ifndef SYSTEM_MEMORY_TOOLS_LOCAL_TOOLS_H
 #define SYSTEM_MEMORY_TOOLS_LOCAL_TOOLS_H
@@ -15,7 +15,7 @@
 #include "Fwd/MemoryToolsFlagsFwd.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
-/// Localº¯Êý¾ßÓÐ¸ü´óµÄ¿ªÏú²¢ÇÒÌá¹©±ÈÆäËû´æ´¢Æ÷¹ÜÀíº¯Êý¸üÉÙµÄÌØÕ÷¡£
+/// Localå‡½æ•°å…·æœ‰æ›´å¤§çš„å¼€é”€å¹¶ä¸”æä¾›æ¯”å…¶ä»–å­˜å‚¨å™¨ç®¡ç†å‡½æ•°æ›´å°‘çš„ç‰¹å¾ã€‚
 namespace System
 {
     NODISCARD bool SYSTEM_DEFAULT_DECLARE LocalMemoryFree(WindowsHLocal& memory) noexcept;

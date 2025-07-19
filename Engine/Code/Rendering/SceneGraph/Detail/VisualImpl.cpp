@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/28 17:53)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/28 17:53)
 
 #include "Rendering/RenderingExport.h"
 
@@ -300,19 +300,19 @@ void Rendering::VisualImpl::UpdateModelNormals()
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    // »ñÈ¡¶¥µãÎ»ÖÃ¡£
+    // è·å–é¡¶ç‚¹ä½ç½®ã€‚
     const VisualData::DataFormatTypeContainer required{ DataFormatType::R32G32B32Float, DataFormatType::R32G32B32A32Float };
 
     const auto positions = visualData.GetConstChannel(VertexFormatFlags::Semantic::Position, 0, required);
 
-    // »ñÈ¡¶¥µã·¨Ïß¡£
+    // è·å–é¡¶ç‚¹æ³•çº¿ã€‚
     const auto normals = visualData.GetChannel(VertexFormatFlags::Semantic::Normal, 0, required);
 
-    // »ñÈ¡Èı½ÇĞÎ»ù±¾Ìå¡£
+    // è·å–ä¸‰è§’å½¢åŸºæœ¬ä½“ã€‚
     const auto primitiveType = visualData.GetPrimitiveType();
     if ((primitiveType & IndexFormatType::HasTriangles) == IndexFormatType::Zero)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ã»ÓĞÎªµã»òÏß¶Î»ù±¾Ìå¶¨Òå·¨ÏßÏòÁ¿¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ²¡æœ‰ä¸ºç‚¹æˆ–çº¿æ®µåŸºæœ¬ä½“å®šä¹‰æ³•çº¿å‘é‡ã€‚"))
     }
 
     const auto vertexBuffer = visualData.GetConstVertexBuffer();
@@ -325,7 +325,7 @@ void Rendering::VisualImpl::UpdateModelNormals()
     const auto difference = stride - dataSize * Vector3::pointSize;
     if (difference < 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("²½½øÖµ´íÎó¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ­¥è¿›å€¼é”™è¯¯ã€‚"))
     }
 
     ClearNormals(normals, numVertices, difference);
@@ -354,7 +354,7 @@ void Rendering::VisualImpl::SetNormals(const ConstSpanIterator& positions, SpanI
     const auto isIndexed = indexBuffer.IsIndexed();
     for (auto i = 0; i < numTriangles; ++i)
     {
-        // »ñÈ¡Èı½ÇĞÎµÄ¶¥µãË÷Òı¡£
+        // è·å–ä¸‰è§’å½¢çš„é¡¶ç‚¹ç´¢å¼•ã€‚
         IndexBuffer::TriangleType triangle{};
         if (isIndexed)
         {
@@ -374,17 +374,17 @@ void Rendering::VisualImpl::SetNormals(const ConstSpanIterator& positions, SpanI
         const auto index1 = std::get<1>(triangle) * stride;
         const auto index2 = std::get<2>(triangle) * stride;
 
-        // »ñÈ¡¶¥µãÎ»ÖÃ¡£
+        // è·å–é¡¶ç‚¹ä½ç½®ã€‚
         const Vector3 position0{ positions.GetValue<float, Vector3::pointSize>(index0) };
         const Vector3 position1{ positions.GetValue<float, Vector3::pointSize>(index1) };
         const Vector3 position2{ positions.GetValue<float, Vector3::pointSize>(index2) };
 
-        // ¼ÆËãÈı½ÇĞÎ·¨Ïß¡£´Ë·¨ÏßµÄ³¤¶ÈÓÃÓÚ·¨ÏßµÄ¼ÓÈ¨ºÍ¡£
+        // è®¡ç®—ä¸‰è§’å½¢æ³•çº¿ã€‚æ­¤æ³•çº¿çš„é•¿åº¦ç”¨äºæ³•çº¿çš„åŠ æƒå’Œã€‚
         const auto edge1 = position1 - position0;
         const auto edge2 = position2 - position0;
         const auto normal = Mathematics::Vector3ToolsF::CrossProduct(edge1, edge2);
 
-        // ½«Èı½ÇĞÎ·¨ÏßÓë¶¥µãµÄ·¨ÏßºÍÏà¼Ó¡£
+        // å°†ä¸‰è§’å½¢æ³•çº¿ä¸é¡¶ç‚¹çš„æ³•çº¿å’Œç›¸åŠ ã€‚
         Vector3 normal0{ normals.GetValue<float, Vector3::pointSize>(index0) };
         Vector3 normal1{ normals.GetValue<float, Vector3::pointSize>(index1) };
         Vector3 normal2{ normals.GetValue<float, Vector3::pointSize>(index2) };
@@ -401,7 +401,7 @@ void Rendering::VisualImpl::SetNormals(const ConstSpanIterator& positions, SpanI
 
 void Rendering::VisualImpl::NormalizeNormals(SpanIterator normals, int numVertices, int stride)
 {
-    // ¶¥µã·¨Ïß±ØĞëÊÇµ¥Î»³¤¶ÈÏòÁ¿¡£
+    // é¡¶ç‚¹æ³•çº¿å¿…é¡»æ˜¯å•ä½é•¿åº¦å‘é‡ã€‚
     for (auto i = 0; i < numVertices; ++i)
     {
         const auto index = i * stride;

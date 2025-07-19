@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:56)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:56)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX3_BOX3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX3_BOX3_H
@@ -49,14 +49,14 @@ namespace Mathematics
         using Container = std::vector<Vector3Type>;
 
     private:
-        // ¶¯Ì¬²éÕÒ½»²æµã²éÑ¯¡£ ¸Ã´¥µã×é±»¼ÆËã³öÀ´¡£
+        // åŠ¨æ€æŸ¥æ‰¾äº¤å‰ç‚¹æŸ¥è¯¢ã€‚ è¯¥è§¦ç‚¹ç»„è¢«è®¡ç®—å‡ºæ¥ã€‚
         void Find();
 
     private:
         Box3Type box0;
         Box3Type box1;
 
-        // ¶¯Ì¬²éÕÒÏà½»µÄÏà½»¼¯¡£ ×î»µµÄÇé¿öÊÇ¾ßÓÐ8¸ö¶¥µãµÄ¶à±ßÐÎ¡£
+        // åŠ¨æ€æŸ¥æ‰¾ç›¸äº¤çš„ç›¸äº¤é›†ã€‚ æœ€åçš„æƒ…å†µæ˜¯å…·æœ‰8ä¸ªé¡¶ç‚¹çš„å¤šè¾¹å½¢ã€‚
         Container point;
     };
 }

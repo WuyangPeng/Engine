@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 15:15)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 15:15)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT2_ELLIPSE2_TOOL_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT2_ELLIPSE2_TOOL_DETAIL_H
@@ -28,10 +28,10 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>::ComputeSquaredDistance()
 {
     constexpr auto size = 2;
 
-    // È·¶¨m_InputVectorµÄ·´Éäµ½µÚÒ»ÏóÏŞ¡£
+    // ç¡®å®šm_InputVectorçš„åå°„åˆ°ç¬¬ä¸€è±¡é™ã€‚
     const std::array<bool, size> reflect{ inputVector.GetX() < MathType::GetValue(0), inputVector.GetY() < MathType::GetValue(0) };
 
-    // È·¶¨µİ¼õ·ø¶ÈÖáË³Ğò¡£
+    // ç¡®å®šé€’å‡è¾åº¦è½´é¡ºåºã€‚
     std::array<int, size> permute{};
     if (extent[0] < extent[1])
     {
@@ -67,7 +67,7 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>::ComputeSquaredDistance()
 
     auto local = outputVector;
 
-    // »Ö¸´ÖáË³ĞòºÍ·´Éä¡£
+    // æ¢å¤è½´é¡ºåºå’Œåå°„ã€‚
     for (auto index = 0; index < size; ++index)
     {
         const auto invPermuteIndex = invPermute.at(index);
@@ -86,7 +86,7 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>::ComputeSquaredDistanceSpecia
     {
         if (zeroThreshold < queryPoint[0])
         {
-            // Æ½·Ö¼ÆËãF(t)µÄ¸ùt >= -e1 * e1¡£
+            // å¹³åˆ†è®¡ç®—F(t)çš„æ ¹t >= -e1 * e1ã€‚
             Vector2Type extentSquared{ localExtent[0] * localExtent[0], localExtent[1] * localExtent[1] };
             Vector2Type extentMultiplyQueryPoint{ localExtent[0] * queryPoint[0], localExtent[1] * queryPoint[1] };
             auto beginT = -extentSquared[1] + extentMultiplyQueryPoint[1];
@@ -138,7 +138,7 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>::ComputeSquaredDistanceSpecia
         const auto extentMultiplyQueryPoint = localExtent[0] * queryPoint[0];
         if (extentMultiplyQueryPoint < denom)
         {
-            // queryPoint.yÎª×ÓÇø¼äÄÚ¡£
+            // queryPoint.yä¸ºå­åŒºé—´å†…ã€‚
             const auto xDividedExtent = extentMultiplyQueryPoint / denom;
             const auto x0de0squared = xDividedExtent * xDividedExtent;
             outputVector[0] = localExtent[0] * xDividedExtent;
@@ -148,9 +148,9 @@ void Mathematics::DistancePoint2Ellipse2Tool<Real>::ComputeSquaredDistanceSpecia
         }
         else
         {
-            // queryPoint.yÎª×ÓÇø¼äÍâ¡£
-            // ×î½üµÄÍÖÔ²µãÓĞm_OutputVector.y == 0£¬
-            // ÔÚÓò±ß½ç¼ä¸ô(x0/e0)^2 = 1¡£
+            // queryPoint.yä¸ºå­åŒºé—´å¤–ã€‚
+            // æœ€è¿‘çš„æ¤­åœ†ç‚¹æœ‰m_OutputVector.y == 0ï¼Œ
+            // åœ¨åŸŸè¾¹ç•Œé—´éš”(x0/e0)^2 = 1ã€‚
             outputVector[0] = localExtent[0];
             outputVector[1] = MathType::GetValue(0);
             const auto difference = queryPoint[0] - localExtent[0];

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒýÇæ°æ±¾£º0.9.0.12 (2023/06/09 10:08)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“Žç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 10:08)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_BSPLINE_UNIFORM_DETAIL_H
 #define MATHEMATICS_INTERPOLATION_INTP_BSPLINE_UNIFORM_DETAIL_H
@@ -39,11 +39,11 @@ Mathematics::IntpBSplineUniform<Real>::IntpBSplineUniform(int dims, int degree, 
       skip{},
       evaluateCallback{ nullptr }
 {
-    MATHEMATICS_ASSERTION_0(dims > 0 && degree > 0, "ÎÞÐ§ÊäÈë¡£\n");
+    MATHEMATICS_ASSERTION_0(dims > 0 && degree > 0, "æ— æ•ˆè¾“å…¥ã€‚\n");
 
     for (auto i = 0; i < dims; ++i)
     {
-        MATHEMATICS_ASSERTION_0(dim.at(i) > degree + 1, "ÎÞÐ§ÊäÈë¡£\n");
+        MATHEMATICS_ASSERTION_0(dim.at(i) > degree + 1, "æ— æ•ˆè¾“å…¥ã€‚\n");
     }
 
     for (auto i = 0; i < dims; ++i)
@@ -361,7 +361,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::IntpBSplineUniform<Real>::
 {
     System::UnusedFunction(index);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("º¯ÊýÎ´ÊµÏÖ"))
+    THROW_EXCEPTION(SYSTEM_TEXT("å‡½æ•°æœªå®žçŽ°"))
 }
 
 template <typename Real>

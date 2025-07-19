@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/09 09:35)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 09:35)
 
 #ifndef MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY1_DETAIL_H
 #define MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY1_DETAIL_H
@@ -105,7 +105,7 @@ typename Mathematics::Delaunay1<Real>::HullType Mathematics::Delaunay1<Real>::Ge
 
     const auto dimension = this->GetDimension();
 
-    MATHEMATICS_ASSERTION_0(dimension == 1, "Î¬¶È±ØĞëÎª 1¡£\n");
+    MATHEMATICS_ASSERTION_0(dimension == 1, "ç»´åº¦å¿…é¡»ä¸º 1ã€‚\n");
     if (dimension != 1)
     {
         return { -1, -1, false };
@@ -120,7 +120,7 @@ int Mathematics::Delaunay1<Real>::GetContainingSegment(const Real p) const
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     const auto dimension = this->GetDimension();
-    MATHEMATICS_ASSERTION_0(dimension == 1, "Î¬¶È±ØĞëÎª 1¡£\n");
+    MATHEMATICS_ASSERTION_0(dimension == 1, "ç»´åº¦å¿…é¡»ä¸º 1ã€‚\n");
 
     if (dimension != 1)
     {
@@ -147,7 +147,7 @@ int Mathematics::Delaunay1<Real>::GetContainingSegment(const Real p) const
         }
     }
 
-    MATHEMATICS_ASSERTION_0(i < numSimplices, "ÊäÈë´íÎó¡£\n");
+    MATHEMATICS_ASSERTION_0(i < numSimplices, "è¾“å…¥é”™è¯¯ã€‚\n");
 
     return i;
 }
@@ -158,7 +158,7 @@ typename Mathematics::Delaunay1<Real>::VertexType Mathematics::Delaunay1<Real>::
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     const auto dimension = this->GetDimension();
-    MATHEMATICS_ASSERTION_0(dimension == 1, "Î¬¶È±ØĞëÎª 1¡£\n");
+    MATHEMATICS_ASSERTION_0(dimension == 1, "ç»´åº¦å¿…é¡»ä¸º 1ã€‚\n");
 
     if (dimension != 1)
     {
@@ -180,7 +180,7 @@ typename Mathematics::Delaunay1<Real>::HullType Mathematics::Delaunay1<Real>::Ge
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     const auto dimension = this->GetDimension();
-    MATHEMATICS_ASSERTION_0(dimension == 1, "Î¬¶È±ØĞëÎª 1¡£\n");
+    MATHEMATICS_ASSERTION_0(dimension == 1, "ç»´åº¦å¿…é¡»ä¸º 1ã€‚\n");
 
     if (dimension != 1)
     {
@@ -202,7 +202,7 @@ typename Mathematics::Delaunay1<Real>::HullType Mathematics::Delaunay1<Real>::Ge
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     const auto dimension = this->GetDimension();
-    MATHEMATICS_ASSERTION_0(dimension == 1, "Î¬¶È±ØĞëÎª 1¡£\n");
+    MATHEMATICS_ASSERTION_0(dimension == 1, "ç»´åº¦å¿…é¡»ä¸º 1ã€‚\n");
 
     if (dimension != 1)
     {
@@ -224,7 +224,7 @@ typename Mathematics::Delaunay1<Real>::VertexType Mathematics::Delaunay1<Real>::
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     const auto dimension = this->GetDimension();
-    MATHEMATICS_ASSERTION_0(dimension == 1, "Î¬¶È±ØĞëÎª 1¡£\n");
+    MATHEMATICS_ASSERTION_0(dimension == 1, "ç»´åº¦å¿…é¡»ä¸º 1ã€‚\n");
 
     if (dimension != 1)
     {
@@ -269,7 +269,7 @@ void Mathematics::Delaunay1<Real>::LoadFile(const String& filename)
 
     if (!ParentType::Load(inFile))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¼ÓÔØÎÄ¼şÊ§°Ü\n"));
+        THROW_EXCEPTION(SYSTEM_TEXT("åŠ è½½æ–‡ä»¶å¤±è´¥\n"));
     }
 
     vertices.resize(this->GetNumVertices());
@@ -283,7 +283,7 @@ void Mathematics::Delaunay1<Real>::SaveFile(const String& filename) const
 
     if (!ParentType::Save(outFile))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("±£´æÎÄ¼şÊ§°Ü\n"));
+        THROW_EXCEPTION(SYSTEM_TEXT("ä¿å­˜æ–‡ä»¶å¤±è´¥\n"));
     }
 
     outFile.Write(sizeof(Real), this->GetNumVertices(), vertices.data());

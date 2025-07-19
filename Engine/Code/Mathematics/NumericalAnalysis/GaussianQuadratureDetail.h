@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 10:04)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 10:04)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_GAUSSIAN_QUADRATURE_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_GAUSSIAN_QUADRATURE_DETAIL_H
@@ -30,7 +30,7 @@ Mathematics::GaussianQuadrature<Real, UserDataType>::GaussianQuadrature(Real beg
 template <typename Real, typename UserDataType>
 void Mathematics::GaussianQuadrature<Real, UserDataType>::Calculate() noexcept
 {
-    // Legendre ¶àÏîÊ½£º
+    // Legendre å¤šé¡¹å¼ï¼š
     // P_0(x) = 1
     // P_1(x) = x
     // P_2(x) = (3x^2 - 1) / 2
@@ -38,7 +38,7 @@ void Mathematics::GaussianQuadrature<Real, UserDataType>::Calculate() noexcept
     // P_4(x) = (35x^4 - 30x^2 + 3) / 8
     // P_5(x) = x(63x^4 - 70x^2 + 15) / 8
 
-    // Éú³É¶àÏîÊ½£º
+    // ç”Ÿæˆå¤šé¡¹å¼ï¼š
     //   d / dx[ (1-x^2) dP_n(x) / dx ] + n(n+1) P_n(x) = 0
     //   P_n(x) = sum_{k=0}^{floor(n / 2)} c_k x^{n - 2k}
     //     c_k = (-1)^k (2n - 2k)! / [ 2^n k! (n - k)! (n - 2k)! ]
@@ -46,7 +46,7 @@ void Mathematics::GaussianQuadrature<Real, UserDataType>::Calculate() noexcept
     //   (n + 1)P_{n + 1}(x) = (2n + 1) x P_n(x) - n P_{n - 1}(x)
     //   (1 - x^2) dP_n(x) / dx = -n x P_n(x) + n P_{n - 1}(x)
 
-    // Ö¸¶¨¶ÈÊıLegendre¶àÏîÊ½µÄ¸ù¡£
+    // æŒ‡å®šåº¦æ•°Legendreå¤šé¡¹å¼çš„æ ¹ã€‚
     constexpr auto degree = 5;
     constexpr std::array<Real, degree> root{ static_cast<Real>(-0.9061798459),
                                              static_cast<Real>(-0.5384693101),
@@ -59,9 +59,9 @@ void Mathematics::GaussianQuadrature<Real, UserDataType>::Calculate() noexcept
                                               static_cast<Real>(0.4786286705),
                                               static_cast<Real>(0.2369268850) };
 
-    // ĞèÒª±ä»»Óò[begin,end]Îª[-1,1]¡£
-    // Èç¹ûbegin <= x <= endºÍ-1 <= t <= 1,
-    // È»ºóx = ((end - begin) * t + (end + begin)) / 2¡£
+    // éœ€è¦å˜æ¢åŸŸ[begin,end]ä¸º[-1,1]ã€‚
+    // å¦‚æœbegin <= x <= endå’Œ-1 <= t <= 1,
+    // ç„¶åx = ((end - begin) * t + (end + begin)) / 2ã€‚
     for (auto i = 0; i < degree; ++i)
     {
 #include SYSTEM_WARNING_PUSH

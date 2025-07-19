@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:17)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:17)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_SEGMENT3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_SEGMENT3_TRIANGLE3_DETAIL_H
@@ -55,18 +55,18 @@ Mathematics::Triangle3<Real> Mathematics::DynamicTestIntersectorSegment3Triangle
 template <typename Real>
 void Mathematics::DynamicTestIntersectorSegment3Triangle3<Real>::Test()
 {
-    // »ñÈ¡¸Ã¶ÎµÄÖÕµã¡£
+    // è·å–è¯¥æ®µçš„ç»ˆç‚¹ã€‚
     using SegmentType = std::array<Vector3Type, 2>;
     SegmentType segmentType{ segment.GetBeginPoint(), segment.GetEndPoint() };
 
-    // »ñÈ¡Èı½ÇĞÎµÄ±ßÔµ¡£
+    // è·å–ä¸‰è§’å½¢çš„è¾¹ç¼˜ã€‚
     auto edge0 = triangle.GetVertex(1) - triangle.GetVertex(0);
     auto edge1 = triangle.GetVertex(2) - triangle.GetVertex(0);
 
-    // »ñÈ¡Ïà¶ÔÓÚÏß¶ÎµÄÈı½ÇĞÎËÙ¶È
+    // è·å–ç›¸å¯¹äºçº¿æ®µçš„ä¸‰è§’å½¢é€Ÿåº¦
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
-    // ²âÊÔÈı½ÇĞÎ·¨Ïß.
+    // æµ‹è¯•ä¸‰è§’å½¢æ³•çº¿.
     const auto edgeNormal = Vector3ToolsType::CrossProduct(edge0, edge1);
     const TestIntersectorAxis<Real> intersector{ edgeNormal, segmentType, triangle, relVelocity, this->GetTMax() };
     auto contactTime = intersector.GetTFirst();
@@ -78,7 +78,7 @@ void Mathematics::DynamicTestIntersectorSegment3Triangle3<Real>::Test()
         return;
     }
 
-    // ²âÊÔÏß¶ÎÊÇ·ñÆ½ĞĞÓÚÈı½ÇĞÎ£¬ÓĞĞ§µØ²âÊÔ£º sin(Angle(NormV,DirU)) > 1 - epsilon
+    // æµ‹è¯•çº¿æ®µæ˜¯å¦å¹³è¡Œäºä¸‰è§’å½¢ï¼Œæœ‰æ•ˆåœ°æµ‹è¯•ï¼š sin(Angle(NormV,DirU)) > 1 - epsilon
     auto directionU = segmentType.at(1) - segmentType.at(0);
 
     const auto normalU = Vector3ToolsType::CrossProduct(edgeNormal, directionU);
@@ -87,10 +87,10 @@ void Mathematics::DynamicTestIntersectorSegment3Triangle3<Real>::Test()
     auto edgeNormalSqrLen = Vector3ToolsType::GetLengthSquared(edgeNormal);
     auto oneMinusEpsilon = MathType::GetValue(1) - MathType::GetZeroTolerance();
 
-    // Æ½ĞĞ
+    // å¹³è¡Œ
     if (oneMinusEpsilon * edgeNormalSqrLen * directionUSqrLen < normalUSqrLen)
     {
-        // ²âÊÔÈı½ÇĞÎ·¨Ïßºá½ØÏß¶Î·½Ïò¡£
+        // æµ‹è¯•ä¸‰è§’å½¢æ³•çº¿æ¨ªæˆªçº¿æ®µæ–¹å‘ã€‚
         const TestIntersectorAxis<Real> normalUIntersector{ normalU, segmentType, triangle, relVelocity, this->GetTMax() };
         contactTime = normalUIntersector.GetTFirst();
 
@@ -101,7 +101,7 @@ void Mathematics::DynamicTestIntersectorSegment3Triangle3<Real>::Test()
             return;
         }
 
-        //  ²âÊÔÈı½ÇĞÎ·¨Ïßºá½ØÏß¶Î±ß¡£
+        //  æµ‹è¯•ä¸‰è§’å½¢æ³•çº¿æ¨ªæˆªçº¿æ®µè¾¹ã€‚
         for (auto i0 = 2, i1 = 0; i1 < 3; i0 = i1++)
         {
             const auto axis = Vector3ToolsType::CrossProduct(edgeNormal, (triangle.GetVertex(i1) - triangle.GetVertex(i0)));
@@ -117,9 +117,9 @@ void Mathematics::DynamicTestIntersectorSegment3Triangle3<Real>::Test()
             }
         }
     }
-    else  // ²»Æ½ĞĞ
+    else  // ä¸å¹³è¡Œ
     {
-        // ²âÊÔÏß¶Î·½Ïòºá½ØÈı½ÇĞÎ±ß¡£
+        // æµ‹è¯•çº¿æ®µæ–¹å‘æ¨ªæˆªä¸‰è§’å½¢è¾¹ã€‚
         for (auto i0 = 2, i1 = 0; i1 < 3; i0 = i1++)
         {
             const auto axis = Vector3ToolsType::CrossProduct(directionU, (triangle.GetVertex(i1) - triangle.GetVertex(i0)));

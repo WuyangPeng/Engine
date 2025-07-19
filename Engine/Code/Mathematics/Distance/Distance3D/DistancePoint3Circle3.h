@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	�汾��0.9.1.6 (2023/10/27 17:09)
+///	标准：std:c++20
+///	版本：0.9.1.6 (2023/10/27 17:09)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_CIRCLE3_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT3_CIRCLE3_H
@@ -39,11 +39,11 @@ namespace Mathematics
         NODISCARD Vector3Type GetPoint() const noexcept;
         NODISCARD Circle3Type GetCircle() const noexcept;
 
-        /// ��̬�����ѯ�� ����ӵ�P��Բ�ľ��롣 ��P�ڷ���C + t * N�ϣ�����C��Բ�Ĳ���N�ǰ�����Բ��ƽ��ķ���ʱ��������Բ�㶼��P�Ⱦࡣ
-        /// ����������£����ص�ΪC + r * U������U�Ǵ�ֱ��N��������
+        /// 静态距离查询。 计算从点P到圆的距离。 当P在法线C + t * N上，其中C是圆心并且N是包含该圆的平面的法线时，则所有圆点都与P等距。
+        /// 在这种情况下，返回点为C + r * U，其中U是垂直于N的向量。
         NODISCARD DistanceResult GetSquared() const override;
 
-        // ��̬�����ѯ�ĺ������㡣
+        // 动态距离查询的函数计算。
         NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
     private:

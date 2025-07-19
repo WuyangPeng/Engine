@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 11:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 11:19)
 
 #ifndef MATHEMATICS_OBJECTS_2D_CONVEX_POLYGON2_DETAIL_H
 #define MATHEMATICS_OBJECTS_2D_CONVEX_POLYGON2_DETAIL_H
@@ -21,7 +21,7 @@ Mathematics::ConvexPolygon2<Real>::ConvexPolygon2(const VerticesType& vertices, 
 {
     if (vertices.size() != lines.size())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ïß¶ÎºÍ¶¥µãµÄ´óĞ¡²»ÏàµÈ¡£\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("çº¿æ®µå’Œé¡¶ç‚¹çš„å¤§å°ä¸ç›¸ç­‰ã€‚\n"s));
     }
 
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -47,7 +47,7 @@ typename Mathematics::ConvexPolygon2<Real>::LineType Mathematics::ConvexPolygon2
 
     if (IsUpdateLines())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ĞèÒª¸üĞÂÏß¶Î¡£\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("éœ€è¦æ›´æ–°çº¿æ®µã€‚\n"s))
     }
 
     return lines;
@@ -60,7 +60,7 @@ const Mathematics::Line2<Real>& Mathematics::ConvexPolygon2<Real>::GetLine(int i
 
     if (IsUpdateLines())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ĞèÒª¸üĞÂÏß¶Î¡£\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("éœ€è¦æ›´æ–°çº¿æ®µã€‚\n"s))
     }
 
     return lines.at(index);
@@ -73,10 +73,10 @@ void Mathematics::ConvexPolygon2<Real>::SetVertex(int index, const Vector2& vert
 
     ParentType::SetVertex(index, vertex);
 
-    // ¸ú×ÙÕâ¸ö¶¥µãµÄ¹²Ïí±ß¡£
-    // ÕâĞ©±ß»áÔÚÉÔºó¸üĞÂ¡£
-    // ¶¥µãË÷ÒıÏà¹ØÁªµÄ±ßiÊÇE[i] = <V[i],V[i+1]> ºÍ E[i-1] = <V[i-1],V[i]>£¬
-    // ÆäÖĞi+1 ºÍ i-1±»¼ÆËãÎª¶¥µãÊıµÄÄ£¡£
+    // è·Ÿè¸ªè¿™ä¸ªé¡¶ç‚¹çš„å…±äº«è¾¹ã€‚
+    // è¿™äº›è¾¹ä¼šåœ¨ç¨åæ›´æ–°ã€‚
+    // é¡¶ç‚¹ç´¢å¼•ç›¸å…³è”çš„è¾¹iæ˜¯E[i] = <V[i],V[i+1]> å’Œ E[i-1] = <V[i-1],V[i]>ï¼Œ
+    // å…¶ä¸­i+1 å’Œ i-1è¢«è®¡ç®—ä¸ºé¡¶ç‚¹æ•°çš„æ¨¡ã€‚
     const auto previous = index - 1;
     sharingEdges.emplace(previous % boost::numeric_cast<int>(lines.size()));
     sharingEdges.emplace(index);
@@ -113,7 +113,7 @@ void Mathematics::ConvexPolygon2<Real>::UpdateLine(int index, const Vector2& ave
     {
         normal /= length;
         auto dot = Vector2Tools::DotProduct(normal, diff);
-        MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= dot, "µã»ı±ØĞëÎª·Ç¸ºÊı\n");
+        MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= dot, "ç‚¹ç§¯å¿…é¡»ä¸ºéè´Ÿæ•°\n");
         if (dot < MathType::GetValue(0))
         {
             normal = -normal;
@@ -121,12 +121,12 @@ void Mathematics::ConvexPolygon2<Real>::UpdateLine(int index, const Vector2& ave
     }
     else
     {
-        // ±ßÔµÍË»¯¡£Ê¹ÓÃ¡°normal¡±Ö¸ÏòÆ½¾ùÖµ³¯Ïò¡£
+        // è¾¹ç¼˜é€€åŒ–ã€‚ä½¿ç”¨â€œnormalâ€æŒ‡å‘å¹³å‡å€¼æœå‘ã€‚
         normal = diff;
         normal.Normalize();
     }
 
-    // ´ËÏß¾ßÓĞÄÚÖ¸ÏòµÄ·¨Ïß¡£
+    // æ­¤çº¿å…·æœ‰å†…æŒ‡å‘çš„æ³•çº¿ã€‚
     auto& line = lines.at(index);
 
     line.SetOrigin(vertex0);
@@ -145,11 +145,11 @@ template <typename Real>
 bool Mathematics::ConvexPolygon2<Real>::IsConvex(Real threshold) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_1(threshold <= MathType::GetValue(0), "threshold±ØĞëÎª¸ºÖµ£¡");
+    MATHEMATICS_ASSERTION_1(threshold <= MathType::GetValue(0), "thresholdå¿…é¡»ä¸ºè´Ÿå€¼ï¼");
 
     if (IsUpdateLines())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ĞèÒª¸üĞÂÏß¶Î¡£\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("éœ€è¦æ›´æ–°çº¿æ®µã€‚\n"s))
     }
 
     auto maxDistance = -MathType::maxReal;
@@ -182,11 +182,11 @@ template <typename Real>
 bool Mathematics::ConvexPolygon2<Real>::Contains(const Vector2& point, Real threshold) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_1(threshold <= MathType::GetValue(0), "threshold±ØĞëÎª¸ºÖµ£¡");
+    MATHEMATICS_ASSERTION_1(threshold <= MathType::GetValue(0), "thresholdå¿…é¡»ä¸ºè´Ÿå€¼ï¼");
 
     if (IsUpdateLines())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ĞèÒª¸üĞÂÏß¶Î¡£\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("éœ€è¦æ›´æ–°çº¿æ®µã€‚\n"s))
     }
 
     for (const auto& line : lines)

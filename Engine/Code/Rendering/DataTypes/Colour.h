@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	����汾��0.9.0.12 (2023/06/12 13:55)
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/12 13:55)
 
 #ifndef RENDERING_DATA_TYPES_COLOUR_H
 #define RENDERING_DATA_TYPES_COLOUR_H
@@ -20,8 +20,8 @@
 #include <iosfwd>
 #include <type_traits>
 
-// ��ɫ��Ὣֵ�ض�Ϊ[minValue,maxValue]��
-// ���Ҫ����ɫ���ƽ��ֵ���Ƚ�Clampֵ����Ϊfalse��Ȼ���ٽ�����ֵ���㣬֮��Clampֵ��������Ϊtrue��
+// 颜色类会将值截断为[minValue,maxValue]，
+// 如果要求颜色类的平均值，先将Clamp值设置为false，然后再进行数值运算，之后将Clamp值重新设置为true。
 namespace Rendering
 {
     template <typename T>

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 15:16)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 15:16)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT2_HYPERBOLA2_ACHIEVE_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT2_HYPERBOLA2_ACHIEVE_H
@@ -59,15 +59,15 @@ typename Mathematics::DistancePoint2Hyperbola2<Real>::DistanceResult Mathematics
     Vector2Type extentSquared{ extent.GetX() * extent.GetX(), extent.GetY() * extent.GetY() };
     const Vector2Type reciprocalExtentSquared{ MathType::GetValue(1) / extentSquared[0], MathType::GetValue(1) / extentSquared[1] };
 
-    // ³õÊ¼»¯¶ş·Ö·¨¡£ ÓëH(-a^2)= +ÎŞÇî´óºÍH(b^2)= -infinity²»Ïà¹Ø£¬
-    // Òò´ËÎÒÃÇÖ»ĞèÒªÓÃÏàÓ¦µÄÓĞ·ûºÅÊı×Ö³õÊ¼»¯º¯ÊıÖµ¡£
+    // åˆå§‹åŒ–äºŒåˆ†æ³•ã€‚ ä¸H(-a^2)= +æ— ç©·å¤§å’ŒH(b^2)= -infinityä¸ç›¸å…³ï¼Œ
+    // å› æ­¤æˆ‘ä»¬åªéœ€è¦ç”¨ç›¸åº”çš„æœ‰ç¬¦å·æ•°å­—åˆå§‹åŒ–å‡½æ•°å€¼ã€‚
     auto t0 = -extentSquared.GetX();
     auto t1 = extentSquared.GetY();
     auto tRoot = MathType::GetRational(1, 2) * (t0 + t1);
     auto hyperbolaRoot = GetHyperbola(tRoot, reciprocalExtentSquared);
 
-    // µü´úÖ±µ½ H(troot)ÕıºÃÎªÁã»òÖ±µ½Ò»¸ö¸¡µã¶Ëµã²»ÔÙ¸Ä±ä¡£
-    // ºóÒ»Ìõ¼şÀûÓÃIEEE¸¡µãÊıµÄĞÔÖÊ£¬Òò´ËÑ­»·±ØĞëÒÔÓĞÏŞÊıÁ¿µÄ²½ÖèÖÕÖ¹¡£
+    // è¿­ä»£ç›´åˆ° H(troot)æ­£å¥½ä¸ºé›¶æˆ–ç›´åˆ°ä¸€ä¸ªæµ®ç‚¹ç«¯ç‚¹ä¸å†æ”¹å˜ã€‚
+    // åä¸€æ¡ä»¶åˆ©ç”¨IEEEæµ®ç‚¹æ•°çš„æ€§è´¨ï¼Œå› æ­¤å¾ªç¯å¿…é¡»ä»¥æœ‰é™æ•°é‡çš„æ­¥éª¤ç»ˆæ­¢ã€‚
     const auto maximumIterations = this->GetMaximumIterations();
     for (auto loop = 0; loop < maximumIterations; ++loop)
     {
@@ -93,7 +93,7 @@ typename Mathematics::DistancePoint2Hyperbola2<Real>::DistanceResult Mathematics
 
         if (loop + 1 == maximumIterations)
         {
-            MATHEMATICS_ASSERTION_2(false, "Î´ÄÜµü´úËùĞè´ÎÊıÄÚÊÕÁ²");
+            MATHEMATICS_ASSERTION_2(false, "æœªèƒ½è¿­ä»£æ‰€éœ€æ¬¡æ•°å†…æ”¶æ•›");
         }
     }
 

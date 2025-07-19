@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.3 (2023/08/01 19:20)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.3 (2023/08/01 19:20)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -14,7 +14,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
 UserInterface::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "ÓÃ»§½çÃæ¿â" }
+    : ParentType{ argc, argv, "ç”¨æˆ·ç•Œé¢åº“" }
 {
     InitSuite();
 
@@ -36,21 +36,21 @@ void UserInterface::TestingHelper::InitSuite()
 
 void UserInterface::TestingHelper::AddHelperSuite()
 {
-    auto helperSuite = GenerateSuite("°ïÖú");
+    auto helperSuite = GenerateSuite("å¸®åŠ©");
 
     AddSuite(helperSuite);
 }
 
 void UserInterface::TestingHelper::AddConfigurationSuite()
 {
-    auto configurationSuite = GenerateSuite("ÅäÖÃ");
+    auto configurationSuite = GenerateSuite("é…ç½®");
 
     AddSuite(configurationSuite);
 }
 
 void UserInterface::TestingHelper::AddInterfaceSuite()
 {
-    auto interfaceSuite = GenerateSuite("½Ó¿Ú");
+    auto interfaceSuite = GenerateSuite("æ¥å£");
 
     AddSuite(interfaceSuite);
 }

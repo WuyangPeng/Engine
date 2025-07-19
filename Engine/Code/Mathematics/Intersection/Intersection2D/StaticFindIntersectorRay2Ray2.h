@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:50)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:50)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_RAY2_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_RAY2_H
@@ -37,17 +37,17 @@ namespace Mathematics
         NODISCARD Ray2Type GetLhsRay() const noexcept;
         NODISCARD Ray2Type GetRhsRay() const noexcept;
 
-        // Ïà½»¼¯¡£ÈÃ q = GetQuantity()¡£Çé¿öÊÇ£º
-        //   q = 0: ÉäÏß²»Ïà½»£¬ GetIntersection() ·µ»ØIntersectionType::Empty¡£
-        //   q = 1: ÉäÏßÏà½»ÓÚÒ»¸öµã¡£GetIntersection()·µ»ØIntersectionType::Point¡£
-        //          ·ÃÎÊÏà½»µãÊ¹ÓÃGetPoint(0)¡£
-        //   q = 2: ÉäÏßÊÇÖØµşµÄÇÒÏà½»ÊÇÏß¶Î¡£ ÕâÖÖÇé¿öÖ»·¢ÉúÔÚD1 = -D0¡£
-        //          GetIntersection()·µ»ØIntersectionType::Segment¡£
-        //          ·ÃÎÊÏà½»Ïß¶ÎÖÕµãÊ¹ÓÃGetPoint(0)ºÍGetPoint(1)¡£
-        //   q = INT_MAX:  ÉäÏßÊÇÖØµşµÄÇÒÏà½»ÊÇÉäÏß¡£
-        //                 ÕâÖÖÇé¿öÖ»·¢ÉúÔÚD1 = D0¡£
-        //                 GetIntersection()·µ»ØIntersectionType::Ray¡£
-        //          ·ÃÎÊÏà½»ÉäµãÔ­µãÊ¹ÓÃGetPoint(0)¡£
+        // ç›¸äº¤é›†ã€‚è®© q = GetQuantity()ã€‚æƒ…å†µæ˜¯ï¼š
+        //   q = 0: å°„çº¿ä¸ç›¸äº¤ï¼Œ GetIntersection() è¿”å›IntersectionType::Emptyã€‚
+        //   q = 1: å°„çº¿ç›¸äº¤äºä¸€ä¸ªç‚¹ã€‚GetIntersection()è¿”å›IntersectionType::Pointã€‚
+        //          è®¿é—®ç›¸äº¤ç‚¹ä½¿ç”¨GetPoint(0)ã€‚
+        //   q = 2: å°„çº¿æ˜¯é‡å çš„ä¸”ç›¸äº¤æ˜¯çº¿æ®µã€‚ è¿™ç§æƒ…å†µåªå‘ç”Ÿåœ¨D1 = -D0ã€‚
+        //          GetIntersection()è¿”å›IntersectionType::Segmentã€‚
+        //          è®¿é—®ç›¸äº¤çº¿æ®µç»ˆç‚¹ä½¿ç”¨GetPoint(0)å’ŒGetPoint(1)ã€‚
+        //   q = INT_MAX:  å°„çº¿æ˜¯é‡å çš„ä¸”ç›¸äº¤æ˜¯å°„çº¿ã€‚
+        //                 è¿™ç§æƒ…å†µåªå‘ç”Ÿåœ¨D1 = D0ã€‚
+        //                 GetIntersection()è¿”å›IntersectionType::Rayã€‚
+        //          è®¿é—®ç›¸äº¤å°„ç‚¹åŸç‚¹ä½¿ç”¨GetPoint(0)ã€‚
 
         NODISCARD int GetQuantity() const noexcept;
         NODISCARD Vector2Type GetPoint(int index) const;
@@ -56,11 +56,11 @@ namespace Mathematics
         void Find();
 
     private:
-        // ÒªÏà½»µÄ¶ÔÏó¡£
+        // è¦ç›¸äº¤çš„å¯¹è±¡ã€‚
         Ray2Type lhsRay;
         Ray2Type rhsRay;
 
-        // Ïà½»¼¯
+        // ç›¸äº¤é›†
         int quantity;
         Vector2Type point0;
         Vector2Type point1;

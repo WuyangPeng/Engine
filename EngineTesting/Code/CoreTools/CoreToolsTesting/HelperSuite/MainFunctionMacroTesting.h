@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/13 20:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/13 20:28)
 
 #ifndef CORE_TOOLS_HELPER_SUITE_MAIN_FUNCTION_MACRO_TESTING_H
 #define CORE_TOOLS_HELPER_SUITE_MAIN_FUNCTION_MACRO_TESTING_H
@@ -14,9 +14,9 @@
 
 namespace CoreTools
 {
-    /// ºêMAIN_FUNCTION¡¢CORE_TOOLS_MUTEX_INITºÍCORE_TOOLS_MUTEX_EXTERNÊ¹ÓÃToolsetÖĞµÄMainFunction²âÊÔ¡£
-    /// ºêDLL_MAIN_FUNCTIONÊ¹ÓÃToolsetÖĞµÄDllMainFunction²âÊÔ¡£
-    /// ÕâÀïÎª¿Õ²âÊÔ¡£
+    /// å®MAIN_FUNCTIONã€CORE_TOOLS_MUTEX_INITå’ŒCORE_TOOLS_MUTEX_EXTERNä½¿ç”¨Toolsetä¸­çš„MainFunctionæµ‹è¯•ã€‚
+    /// å®DLL_MAIN_FUNCTIONä½¿ç”¨Toolsetä¸­çš„DllMainFunctionæµ‹è¯•ã€‚
+    /// è¿™é‡Œä¸ºç©ºæµ‹è¯•ã€‚
     class MainFunctionMacroTesting final : public UnitTest
     {
     public:

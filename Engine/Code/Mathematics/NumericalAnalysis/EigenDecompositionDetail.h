@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 09:54)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 09:54)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_EIGEN_DECOMPOSITION_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_EIGEN_DECOMPOSITION_DETAIL_H
@@ -213,7 +213,7 @@ void Mathematics::EigenDecomposition<Real>::Solve(bool increasingSort)
 template <typename Real>
 void Mathematics::EigenDecomposition<Real>::Tridiagonal2()
 {
-    // ¸Ã¾ØÕóÊÇÒÑ¾­ÊÇÈı¶Ô½Ç¾ØÕó¡£
+    // è¯¥çŸ©é˜µæ˜¯å·²ç»æ˜¯ä¸‰å¯¹è§’çŸ©é˜µã€‚
 
     diagonal.at(0) = matrix(0, 0);
     diagonal.at(1) = matrix(1, 1);
@@ -428,7 +428,7 @@ void Mathematics::EigenDecomposition<Real>::Step2()
 template <typename Real>
 void Mathematics::EigenDecomposition<Real>::Step3()
 {
-    // ÖØĞÂÅÅĞòĞèÒªÔÚEigenDecomposition::QLAlgorithm¡£
+    // é‡æ–°æ’åºéœ€è¦åœ¨EigenDecomposition::QLAlgorithmã€‚
 
     for (auto index = 1; index < size; ++index)
     {
@@ -454,7 +454,7 @@ void Mathematics::EigenDecomposition<Real>::QLAlgorithm(int index)
     if (const auto loopTime = QLAlgorithmWithLoopTime(index);
         maxIter <= loopTime)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ñ­»·³¬³ö´ÎÊı¡£"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("å¾ªç¯è¶…å‡ºæ¬¡æ•°ã€‚"s));
     }
 }
 
@@ -576,10 +576,10 @@ bool Mathematics::EigenDecomposition<Real>::IsQLAlgorithmQuit(int outerIndex) co
 template <typename Real>
 void Mathematics::EigenDecomposition<Real>::DecreasingSort()
 {
-    // ÅÅĞòÌØÕ÷Öµ°´µİ¼õË³Ğò£¬e[0] >= ... >= e[mSize-1]
+    // æ’åºç‰¹å¾å€¼æŒ‰é€’å‡é¡ºåºï¼Œe[0] >= ... >= e[mSize-1]
     for (auto outerIndex = 0; outerIndex <= size - 2; ++outerIndex)
     {
-        // ÕÒµ½×î´óÌØÕ÷Öµ¡£
+        // æ‰¾åˆ°æœ€å¤§ç‰¹å¾å€¼ã€‚
         auto minIndex = outerIndex;
         auto maxValue = diagonal.at(minIndex);
 
@@ -594,11 +594,11 @@ void Mathematics::EigenDecomposition<Real>::DecreasingSort()
 
         if (minIndex != outerIndex)
         {
-            // ½»»»µÄÌØÕ÷Öµ¡£
+            // äº¤æ¢çš„ç‰¹å¾å€¼ã€‚
             diagonal.at(minIndex) = diagonal.at(outerIndex);
             diagonal.at(outerIndex) = maxValue;
 
-            // ½»»»¶ÔÓ¦ÓÚÌØÕ÷ÖµµÄÌØÕ÷ÏòÁ¿¡£
+            // äº¤æ¢å¯¹åº”äºç‰¹å¾å€¼çš„ç‰¹å¾å‘é‡ã€‚
             for (auto innerIndex = 0; innerIndex < size; ++innerIndex)
             {
                 std::swap(solveMatrix(innerIndex, outerIndex), solveMatrix(innerIndex, minIndex));
@@ -612,9 +612,9 @@ void Mathematics::EigenDecomposition<Real>::DecreasingSort()
 template <typename Real>
 void Mathematics::EigenDecomposition<Real>::IncreasingSort()
 {
-    // ÅÅĞòÌØÕ÷Öµ°´µİÔöË³Ğò£¬ e[0] <= ... <= e[mSize-1]
+    // æ’åºç‰¹å¾å€¼æŒ‰é€’å¢é¡ºåºï¼Œ e[0] <= ... <= e[mSize-1]
     for (auto outerIndex = 0; outerIndex <= size - 2; ++outerIndex)
-    {  // ÕÒµ½×îĞ¡ÌØÕ÷Öµ¡£
+    {  // æ‰¾åˆ°æœ€å°ç‰¹å¾å€¼ã€‚
         auto minIndex = outerIndex;
         auto minValue = diagonal.at(minIndex);
 
@@ -629,11 +629,11 @@ void Mathematics::EigenDecomposition<Real>::IncreasingSort()
 
         if (minIndex != outerIndex)
         {
-            // ½»»»ÌØÕ÷Öµ¡£
+            // äº¤æ¢ç‰¹å¾å€¼ã€‚
             diagonal.at(minIndex) = diagonal.at(outerIndex);
             diagonal.at(outerIndex) = minValue;
 
-            // ½»»»¶ÔÓ¦ÓÚÌØÕ÷ÖµµÄÌØÕ÷ÏòÁ¿¡£
+            // äº¤æ¢å¯¹åº”äºç‰¹å¾å€¼çš„ç‰¹å¾å‘é‡ã€‚
             for (auto innerIndex = 0; innerIndex < size; ++innerIndex)
             {
                 std::swap(solveMatrix(innerIndex, outerIndex), solveMatrix(innerIndex, minIndex));
@@ -649,7 +649,7 @@ void Mathematics::EigenDecomposition<Real>::GuaranteeRotation()
 {
     if (!isRotation)
     {
-        // ¸Ä±ä·ûºÅÔÚµÚÒ»ÁĞÖĞ¡£
+        // æ”¹å˜ç¬¦å·åœ¨ç¬¬ä¸€åˆ—ä¸­ã€‚
         for (auto row = 0; row < size; ++row)
         {
             solveMatrix(row, 0) = -solveMatrix(row, 0);
@@ -661,7 +661,7 @@ template <typename Real>
 Real Mathematics::EigenDecomposition<Real>::GetEigenvalue(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_0(solve, "Î´½âÎö£¡");
+    MATHEMATICS_ASSERTION_0(solve, "æœªè§£æï¼");
 
     return diagonal.at(index);
 }
@@ -670,9 +670,9 @@ template <typename Real>
 Mathematics::Vector2<Real> Mathematics::EigenDecomposition<Real>::GetEigenvector2(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_0(solve, "Î´½âÎö£¡");
-    MATHEMATICS_ASSERTION_1(0 <= index && index < size, "ÎŞĞ§Ë÷ÒıÔÚGetEigenvector2\n");
-    MATHEMATICS_ASSERTION_1(size == Matrix2Type::vectorSize, "Î¬¶È²»Æ¥ÅäÔÚGetEigenvector2\n");
+    MATHEMATICS_ASSERTION_0(solve, "æœªè§£æï¼");
+    MATHEMATICS_ASSERTION_1(0 <= index && index < size, "æ— æ•ˆç´¢å¼•åœ¨GetEigenvector2\n");
+    MATHEMATICS_ASSERTION_1(size == Matrix2Type::vectorSize, "ç»´åº¦ä¸åŒ¹é…åœ¨GetEigenvector2\n");
 
     Vector2Type eigenVector{};
     for (auto row = 0; row < size; ++row)
@@ -687,8 +687,8 @@ template <typename Real>
 Mathematics::Matrix2<Real> Mathematics::EigenDecomposition<Real>::GetEigenvectors2() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_0(solve, "Î´½âÎö£¡");
-    MATHEMATICS_ASSERTION_1(size == Matrix2Type::vectorSize, "Î¬¶È²»Æ¥ÅäÔÚGetEigenvector2\n");
+    MATHEMATICS_ASSERTION_0(solve, "æœªè§£æï¼");
+    MATHEMATICS_ASSERTION_1(size == Matrix2Type::vectorSize, "ç»´åº¦ä¸åŒ¹é…åœ¨GetEigenvector2\n");
 
     Matrix2Type eigenVectors{};
     for (auto row = 0; row < Matrix2Type::vectorSize; ++row)
@@ -706,9 +706,9 @@ template <typename Real>
 Mathematics::Vector3<Real> Mathematics::EigenDecomposition<Real>::GetEigenvector3(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_0(solve, "Î´½âÎö£¡");
-    MATHEMATICS_ASSERTION_1(0 <= index && index < size, "ÎŞĞ§Ë÷ÒıÔÚGetEigenvector3\n");
-    MATHEMATICS_ASSERTION_1(size == Matrix3Type::vectorSize, "Î¬¶È²»Æ¥ÅäÔÚGetEigenvector3\n");
+    MATHEMATICS_ASSERTION_0(solve, "æœªè§£æï¼");
+    MATHEMATICS_ASSERTION_1(0 <= index && index < size, "æ— æ•ˆç´¢å¼•åœ¨GetEigenvector3\n");
+    MATHEMATICS_ASSERTION_1(size == Matrix3Type::vectorSize, "ç»´åº¦ä¸åŒ¹é…åœ¨GetEigenvector3\n");
 
     Vector3Type eigenVector{};
     for (auto row = 0; row < size; ++row)
@@ -723,8 +723,8 @@ template <typename Real>
 Mathematics::Matrix3<Real> Mathematics::EigenDecomposition<Real>::GetEigenvectors3() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_0(solve, "Î´½âÎö£¡");
-    MATHEMATICS_ASSERTION_1(size == Matrix3Type::vectorSize, "Î¬¶È²»Æ¥ÅäÔÚGetEigenvector3\n");
+    MATHEMATICS_ASSERTION_0(solve, "æœªè§£æï¼");
+    MATHEMATICS_ASSERTION_1(size == Matrix3Type::vectorSize, "ç»´åº¦ä¸åŒ¹é…åœ¨GetEigenvector3\n");
 
     return solveMatrix.GetMatrix3();
 }
@@ -733,8 +733,8 @@ template <typename Real>
 Mathematics::VariableLengthVector<Real> Mathematics::EigenDecomposition<Real>::GetEigenvector(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_0(solve, "Î´½âÎö£¡");
-    MATHEMATICS_ASSERTION_1(0 <= index && index < size, "ÎŞĞ§Ë÷ÒıÔÚGetEigenvector3\n");
+    MATHEMATICS_ASSERTION_0(solve, "æœªè§£æï¼");
+    MATHEMATICS_ASSERTION_1(0 <= index && index < size, "æ— æ•ˆç´¢å¼•åœ¨GetEigenvector3\n");
 
     return solveMatrix.GetColumn(index);
 }
@@ -743,7 +743,7 @@ template <typename Real>
 Mathematics::VariableMatrix<Real> Mathematics::EigenDecomposition<Real>::GetEigenvectors() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_0(solve, "Î´½âÎö£¡");
+    MATHEMATICS_ASSERTION_0(solve, "æœªè§£æï¼");
 
     return solveMatrix;
 }

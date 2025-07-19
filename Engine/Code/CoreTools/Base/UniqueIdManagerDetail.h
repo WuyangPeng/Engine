@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/28 16:47)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/28 16:47)
 
 #ifndef CORE_TOOLS_BASE_UNIQUE_ID_MANAGER_DETAIL_H
 #define CORE_TOOLS_BASE_UNIQUE_ID_MANAGER_DETAIL_H
@@ -16,7 +16,7 @@
 template <typename E>
 void CoreTools::UniqueIdManager::Create(E count) requires(std::is_enum_v<E>)
 {
-    /// ÓÉÓÚËø¶¨ÒåÃ»ÓĞµ¼³ö£¬ÕâÀï²»Ê¹ÓÃÈ«¾ÖËø£¬Createº¯ÊıÖĞ»áÊ¹ÓÃÈ«¾ÖËø¡£
+    /// ç”±äºé”å®šä¹‰æ²¡æœ‰å¯¼å‡ºï¼Œè¿™é‡Œä¸ä½¿ç”¨å…¨å±€é”ï¼ŒCreateå‡½æ•°ä¸­ä¼šä½¿ç”¨å…¨å±€é”ã€‚
 
     return Create(System::EnumCastUnderlying<int>(count));
 }

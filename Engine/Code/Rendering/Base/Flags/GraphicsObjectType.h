@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+ï»¿/// Copyright (c) 2010-2023
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.2 (2023/12/08 16:21)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.2 (2023/12/08 16:21)
 
 #ifndef RENDERING_BASE_GRAPHICS_OBJECT_TYPE_H
 #define RENDERING_BASE_GRAPHICS_OBJECT_TYPE_H
@@ -14,7 +14,7 @@
 
 namespace Rendering
 {
-    /// Í¼ĞÎ¶ÔÏóµÄµ±Ç°²ã´Î½á¹¹Îª
+    /// å›¾å½¢å¯¹è±¡çš„å½“å‰å±‚æ¬¡ç»“æ„ä¸º
     ///  GraphicsObject
     ///      Resource
     ///          Buffer
@@ -50,14 +50,14 @@ namespace Rendering
     ///          DepthStencilState
     ///          RasterizerState
 
-    /// Í¼ĞÎ¶ÔÏóÀàĞÍÓÃÓÚÔËĞĞÊ±ÀàĞÍĞÅÏ¢¡£
+    /// å›¾å½¢å¯¹è±¡ç±»å‹ç”¨äºè¿è¡Œæ—¶ç±»å‹ä¿¡æ¯ã€‚
     enum class GraphicsObjectType
     {
-        None,  // ³éÏóµÄ
+        None,  // æŠ½è±¡çš„
 
-        Resource,  // ³éÏóµÄ
+        Resource,  // æŠ½è±¡çš„
 
-        Buffer,  // ³éÏóµÄ
+        Buffer,  // æŠ½è±¡çš„
         ConstantBuffer,
         TextureBuffer,
         VertexBuffer,
@@ -67,26 +67,26 @@ namespace Rendering
         RawBuffer,
         IndirectArgumentsBuffer,
 
-        Texture,  // ³éÏóµÄ
-        TextureSingle,  // ³éÏóµÄ
+        Texture,  // æŠ½è±¡çš„
+        TextureSingle,  // æŠ½è±¡çš„
         Texture1,
         Texture2,
         TextureRenderTarget,
         TextureDepthStencil,
         Texture3,
-        TextureArray,  // ³éÏóµÄ
+        TextureArray,  // æŠ½è±¡çš„
         Texture1Array,
         Texture2Array,
         TextureCube,
         TextureCubeArray,
 
-        Shader,  // ³éÏóµÄ
+        Shader,  // æŠ½è±¡çš„
         VertexShader,
         GeometryShader,
         PixelShader,
         ComputeShader,
 
-        DrawingState,  // ³éÏóµÄ
+        DrawingState,  // æŠ½è±¡çš„
         SamplerState,
         BlendState,
         DepthStencilState,

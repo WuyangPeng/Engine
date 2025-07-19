@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/28 16:37)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/28 16:37)
 
 #ifndef CORE_TOOLS_BASE_SPAN_ITERATOR_H
 #define CORE_TOOLS_BASE_SPAN_ITERATOR_H
@@ -55,7 +55,7 @@ namespace CoreTools
 
         NODISCARD DifferenceType GetRemainingCount() const noexcept;
 
-        /// Increaseº¯ÊıĞŞ¸Äcurrent¡£
+        /// Increaseå‡½æ•°ä¿®æ”¹currentã€‚
         template <typename T>
         requires(sizeof(typename Iter::value_type) <= sizeof(T) && sizeof(T) % sizeof(typename Iter::value_type) == 0)
         NODISCARD T Increase();
@@ -72,7 +72,7 @@ namespace CoreTools
         requires(sizeof(typename Iter::value_type) <= sizeof(T) && sizeof(T) % sizeof(typename Iter::value_type) == 0)
         void Increase(const std::array<T, Size>& value);
 
-        /// GetValueºÍSetValueº¯Êı²»ĞŞ¸Äcurrent¡£
+        /// GetValueå’ŒSetValueå‡½æ•°ä¸ä¿®æ”¹currentã€‚
         template <typename T>
         requires(sizeof(typename Iter::value_type) <= sizeof(T) && sizeof(T) % sizeof(typename Iter::value_type) == 0)
         NODISCARD T GetValue(int step) const;
@@ -111,7 +111,7 @@ namespace CoreTools
     template <typename Iter>
     NODISCARD typename Iter::difference_type operator-(const SpanIterator<Iter>& lhs, const SpanIterator<Iter>& rhs);
 
-    /// ½»»»Á½¸öµü´úÆ÷µÄÖµ¡£
+    /// äº¤æ¢ä¸¤ä¸ªè¿­ä»£å™¨çš„å€¼ã€‚
     template <typename Iter>
     void IterSwap(const SpanIterator<Iter>& lhs, const SpanIterator<Iter>& rhs);
 }

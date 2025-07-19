@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 10:29)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 10:29)
 
 #ifndef MATHEMATICS_OBJECTS_3D_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_OBJECTS_3D_TRIANGLE3_DETAIL_H
@@ -105,7 +105,7 @@ Real Mathematics::Triangle3<Real>::DistanceTo(const Vector3Type& point) const
     {
         if (s < MathType::GetValue(0))
         {
-            if (t < MathType::GetValue(0))  // ÇøÓò4
+            if (t < MathType::GetValue(0))  // åŒºåŸŸ4
             {
                 if (b0 < MathType::GetValue(0))
                 {
@@ -134,7 +134,7 @@ Real Mathematics::Triangle3<Real>::DistanceTo(const Vector3Type& point) const
                     }
                 }
             }
-            else  // ÇøÓò3
+            else  // åŒºåŸŸ3
             {
                 if (MathType::GetValue(0) <= b1)
                 {
@@ -150,7 +150,7 @@ Real Mathematics::Triangle3<Real>::DistanceTo(const Vector3Type& point) const
                 }
             }
         }
-        else if (t < MathType::GetValue(0))  // ÇøÓò5
+        else if (t < MathType::GetValue(0))  // åŒºåŸŸ5
         {
             if (MathType::GetValue(0) <= b0)
             {
@@ -165,9 +165,9 @@ Real Mathematics::Triangle3<Real>::DistanceTo(const Vector3Type& point) const
                 sqrDistance = b0 * s + c - b0 * b0 / a00;
             }
         }
-        else  // ÇøÓò0
+        else  // åŒºåŸŸ0
         {
-            // ×îĞ¡ÊÇÔÚÈı½ÇĞÎµÄÄÚ²¿µã¡£
+            // æœ€å°æ˜¯åœ¨ä¸‰è§’å½¢çš„å†…éƒ¨ç‚¹ã€‚
             Real invDet = MathType::GetValue(1) / det;
             s *= invDet;
             t *= invDet;
@@ -177,7 +177,7 @@ Real Mathematics::Triangle3<Real>::DistanceTo(const Vector3Type& point) const
     }
     else
     {
-        if (s < MathType::GetValue(0))  // ÇøÓò2
+        if (s < MathType::GetValue(0))  // åŒºåŸŸ2
         {
             auto tmp0 = a01 + b0;
             auto tmp1 = a11 + b1;
@@ -214,7 +214,7 @@ Real Mathematics::Triangle3<Real>::DistanceTo(const Vector3Type& point) const
                 }
             }
         }
-        else if (t < MathType::GetValue(0))  // ÇøÓò 6
+        else if (t < MathType::GetValue(0))  // åŒºåŸŸ 6
         {
             auto tmp0 = a01 + b1;
             auto tmp1 = a00 + b0;
@@ -253,7 +253,7 @@ Real Mathematics::Triangle3<Real>::DistanceTo(const Vector3Type& point) const
                 }
             }
         }
-        else  // ÇøÓò 1
+        else  // åŒºåŸŸ 1
         {
             auto numer = a11 + b1 - a01 - b0;
             if (numer <= MathType::GetValue(0))

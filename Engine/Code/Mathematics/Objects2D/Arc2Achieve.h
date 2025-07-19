@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.6 (2024/02/20 19:13)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.6 (2024/02/20 19:13)
 
 #ifndef MATHEMATICS_OBJECTS_2D_ARC2_ACHIEVE_H
 #define MATHEMATICS_OBJECTS_2D_ARC2_ACHIEVE_H
@@ -73,7 +73,7 @@ bool Mathematics::Arc2<Real>::Contains(const Vector2Type& point) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    /// Èç¹ûepsilonÎª¸º£¬Ôò¹«²îµÄĞĞÎª¾ÍÏñ´«µİÁËepsilonµÄÁãÖµÒ»Ñù¡£
+    /// å¦‚æœepsilonä¸ºè´Ÿï¼Œåˆ™å…¬å·®çš„è¡Œä¸ºå°±åƒä¼ é€’äº†epsilonçš„é›¶å€¼ä¸€æ ·ã€‚
 
     const auto length = Vector2ToolsType::GetLength(point - center);
     if (MathType::FAbs(length - radius) <= epsilon)

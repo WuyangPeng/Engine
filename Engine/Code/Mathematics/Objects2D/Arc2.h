@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.6 (2024/02/20 19:13)
+/// 标准：std:c++20
+/// 版本：1.0.0.6 (2024/02/20 19:13)
 
 #ifndef MATHEMATICS_OBJECTS_2D_ARC2_H
 #define MATHEMATICS_OBJECTS_2D_ARC2_H
@@ -22,10 +22,10 @@
 
 namespace Mathematics
 {
-    /// ����Բ����Բ��ʾΪ|X-C| = r������C�����ģ�r�ǰ뾶��
-    /// Բ���Ƕ�����Բ�ϵ�����end0��end1��
-    /// �Ա�end1ͨ��end0��ʱ�뷽�������á�
-    /// Ӧ�ó�����ȷ��end0��end1��Բ���ϣ���������ȷ������
+    /// 包含圆弧的圆表示为|X-C| = r，其中C是中心，r是半径。
+    /// 圆弧是定义在圆上的两点end0和end1，
+    /// 以便end1通过end0逆时针方向遍历获得。
+    /// 应用程序负责确保end0和end1在圆环上，和他们正确的排序。
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Arc2 final
@@ -39,7 +39,7 @@ namespace Mathematics
         using AlgebraVector2 = Algebra::Vector2<Real>;
 
     public:
-        /// Ĭ�Ϲ��캯������������Ϊ(0,0)�����뾶����Ϊ1�����˵�0����Ϊ(1,0)�����˵�1����Ϊ (0,1)��
+        /// 默认构造函数将中心设置为(0,0)，将半径设置为1，将端点0设置为(1,0)，将端点1设置为 (0,1)。
         Arc2() noexcept;
 
         Arc2(const Vector2Type& center, Real radius, const Vector2Type& end0, const Vector2Type& end1, Real epsilon = MathType::GetZeroTolerance()) noexcept;
@@ -47,21 +47,21 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        /// ����point�Ƿ��ڻ��ϡ�
+        /// 检验point是否在弧上。
         ///
-        /// ����ʵ�����㣬|P-C| - r = 0��P�ڻ���Բ�ϵı�Ҫ������
-        /// ���P��Բ�ϣ���P�ڰ���E0���ߵı���ʱ��P�ڴ�E0��E1�Ļ��ϣ�����Perp(u,v) = (v,-u)��
-        /// �ò���������E0-C��E1-C֮����κνǶȣ���ʹ�ýǶȴ��ڻ����pi���ȡ�
+        /// 对于实数运算，|P-C| - r = 0是P在弧的圆上的必要条件。
+        /// 如果P在圆上，则当P在包含E0的线的边上时，P在从E0到E1的弧上，其中Perp(u,v) = (v,-u)。
+        /// 该测试适用于E0-C和E1-C之间的任何角度，即使该角度大于或等于pi弧度。
         ///
-        /// ���ڸ�����������ͣ��������ᵼ�µ�P��Բ�ϣ����������Ͽ�����ʱ|P-C| - r����Ϊ0��
-        /// ���ǵ���һ�㣬ѡ��һ��С�ķǸ�����epsilon��
-        /// ���P��Բ�ϣ���epsilon���������ϣ�����||P-C| - r| <= epsilon��
-        /// ����P����Բ�ϡ�
-        /// ��Ӧ��ǰһ��/������߲���ԡ�
+        /// 对于浮点或有理类型，舍入错误会导致当P在圆上（或在数字上靠近）时|P-C| - r很少为0。
+        /// 考虑到这一点，选择一个小的非负公差epsilon。
+        /// 如果P在圆上（在epsilon公差意义上），则||P-C| - r| <= epsilon。
+        /// 否则，P不在圆上。
+        /// 则应用前一段/段落的线侧测试。
         NODISCARD bool Contains(const Vector2Type& point) const;
         NODISCARD bool Contains(const AlgebraVector2& point) const;
 
-        /// �˺����ٶ�Pλ�ڰ���Բ����Բ�ϣ����ܴ�������������������
+        /// 此函数假定P位于包含圆弧的圆上（可能存在少量浮点舍入误差）。
         NODISCARD bool CircleContains(const Vector2Type& point) const;
         NODISCARD bool CircleContains(const AlgebraVector2& point) const;
 
@@ -110,7 +110,7 @@ namespace Mathematics
     requires std::is_arithmetic_v<Real>
     NODISCARD bool Approximate(const Arc2<Real>& lhs, const Arc2<Real>& rhs, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-    // �������
+    // 调试输出
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     std::ostream& operator<<(std::ostream& out, const Arc2<Real>& arc2);

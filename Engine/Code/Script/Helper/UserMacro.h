@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/21 20:13)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/21 20:13)
 
 #ifndef SCRIPT_MACRO_USER_MACRO_H
 #define SCRIPT_MACRO_USER_MACRO_H
@@ -23,7 +23,7 @@
 
 #define CLOSE_SCRIPT_MAX (((SCRIPT_CLOSE_END) << 1) - 1)
 
-// ±àÒë²âÊÔ£¨Ä¬ÈÏÎª0B0000£¬×î´óÖµÎª0B1111£©
+// ç¼–è¯‘æµ‹è¯•ï¼ˆé»˜è®¤ä¸º0B0000ï¼Œæœ€å¤§å€¼ä¸º0B1111ï¼‰
 #define COMPILE_SCRIPT_CLOSE 0B0000
 
 static_assert(0 <= COMPILE_SCRIPT_CLOSE, "COMPILE_SCRIPT_CLOSE Must be greater than or equal 0.");

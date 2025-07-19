@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.2 (2023/07/24 19:36)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.2 (2023/07/24 19:36)
 
 #include "Rendering/RenderingExport.h"
 
@@ -85,12 +85,12 @@ bool Rendering::MorphController::Update(double applicationTime)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    // ¼ü²åÖµ²Ù×÷Ê¹ÓÃÏßĞÔÄÚ²å¡£ÎªÁË»ñµÃ¸ü¸ß¼¶µÄ²åÖµ£¬
-    // ÄúĞèÒªÌá¹©Ò»¸ö¸ü¸´ÔÓµÄÃÜÔ¿£¨ÀıÈç±´Èû¶ûÈı´Î»òTCBÑùÌõÇúÏß£©¡£
+    // é”®æ’å€¼æ“ä½œä½¿ç”¨çº¿æ€§å†…æ’ã€‚ä¸ºäº†è·å¾—æ›´é«˜çº§çš„æ’å€¼ï¼Œ
+    // æ‚¨éœ€è¦æä¾›ä¸€ä¸ªæ›´å¤æ‚çš„å¯†é’¥ï¼ˆä¾‹å¦‚è´å¡å°”ä¸‰æ¬¡æˆ–TCBæ ·æ¡æ›²çº¿ï¼‰ã€‚
 
     if (ParentType::Update(applicationTime))
     {
-        // ·ÃÎÊ¸Ã¶¥µã»º³åÆ÷À´´æ´¢»ìºÏÄ¿±ê¡£
+        // è®¿é—®è¯¥é¡¶ç‚¹ç¼“å†²å™¨æ¥å­˜å‚¨æ··åˆç›®æ ‡ã€‚
         const auto visual = boost::polymorphic_pointer_cast<Visual>(GetController());
 
         return impl->Update(GetControlTime(applicationTime), *visual);
@@ -102,7 +102,7 @@ bool Rendering::MorphController::Update(double applicationTime)
 void Rendering::MorphController::SetController(const ControllerSharedPtr& object)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Visual::GetCurrentRttiType()), "ÎŞĞ§Àà\n");
+    RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Visual::GetCurrentRttiType()), "æ— æ•ˆç±»\n");
 
     const auto visual = boost::polymorphic_pointer_cast<Visual>(object);
 

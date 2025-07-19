@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/29 13:49)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/29 13:49)
 
 #ifndef RENDERING_RESOURCES_STRUCTURED_BUFFER_H
 #define RENDERING_RESOURCES_STRUCTURED_BUFFER_H
@@ -38,19 +38,19 @@ namespace Rendering
 
         NODISCARD CounterType GetCounterType() const noexcept;
 
-        /// ÔÚ½«»º³åÇø°ó¶¨µ½ÒıÇæÖ®Ç°£¬µ÷ÓÃÆäÖĞÒ»¸öº¯Êı¡£
-        /// Õâ½«ÉèÖÃCounterType£¬²¢½«ÓÃ·¨ÉèÖÃÎªShaderOutput¡£
+        /// åœ¨å°†ç¼“å†²åŒºç»‘å®šåˆ°å¼•æ“ä¹‹å‰ï¼Œè°ƒç”¨å…¶ä¸­ä¸€ä¸ªå‡½æ•°ã€‚
+        /// è¿™å°†è®¾ç½®CounterTypeï¼Œå¹¶å°†ç”¨æ³•è®¾ç½®ä¸ºShaderOutputã€‚
         void MakeAppendConsume() noexcept;
         void MakeCounter() noexcept;
 
-        /// µ±»º³åÇøÓĞ¼ÆÊıÆ÷£¨AppendConsume»òCounter£©Ê±£¬
-        /// ÈÃGPUÖªµÀÊÇ·ñ¸ü¸ÄÆäÄÚ²¿¼ÆÊı¡£
-        /// ¡°true¡±µÄÊäÈëÒâÎ¶×ÅGPU½«ÈÃ¼ÆÊıÆ÷±£³ÖÆäµ±Ç°Öµ¡£
-        /// µ±»º³åÇøµÄ¼ÆÊıÆ÷ÀàĞÍÎªNoneÊ±£¬´Ëº¯Êı½«±»ºöÂÔ¡£
+        /// å½“ç¼“å†²åŒºæœ‰è®¡æ•°å™¨ï¼ˆAppendConsumeæˆ–Counterï¼‰æ—¶ï¼Œ
+        /// è®©GPUçŸ¥é“æ˜¯å¦æ›´æ”¹å…¶å†…éƒ¨è®¡æ•°ã€‚
+        /// â€œtrueâ€çš„è¾“å…¥æ„å‘³ç€GPUå°†è®©è®¡æ•°å™¨ä¿æŒå…¶å½“å‰å€¼ã€‚
+        /// å½“ç¼“å†²åŒºçš„è®¡æ•°å™¨ç±»å‹ä¸ºNoneæ—¶ï¼Œæ­¤å‡½æ•°å°†è¢«å¿½ç•¥ã€‚
         void SetKeepInternalCount(bool aKeepInternalCount) noexcept;
         NODISCARD bool GetKeepInternalCount() const noexcept;
 
-        // ¹©×ÅÉ«Æ÷ÀàÓÃÓÚ´æ´¢·´ÉäĞÅÏ¢¡£
+        // ä¾›ç€è‰²å™¨ç±»ç”¨äºå­˜å‚¨åå°„ä¿¡æ¯ã€‚
         NODISCARD static constexpr auto GetShaderDataLookup() noexcept
         {
             return 2;

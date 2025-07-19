@@ -1,16 +1,16 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 17:24)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 17:24)
 
 #ifndef SYSTEM_HELPER_CLANG_H
 #define SYSTEM_HELPER_CLANG_H
 
-/// Clang±àÒëÆ÷ÉèÖÃ£º
+/// Clangç¼–è¯‘å™¨è®¾ç½®ï¼š
 
 #if defined(__clang__) && !defined(__CUDACC__) && !defined(__ibmxl__)
 
@@ -42,13 +42,13 @@
 
     #ifndef TCRE_SYSTEM_COMPILER
 
-        #define TCRE_SYSTEM_COMPILER "Clang °æ±¾ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
+        #define TCRE_SYSTEM_COMPILER "Clang ç‰ˆæœ¬ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
 
     #endif  // TCRE_SYSTEM_COMPILER
 
-    /// ÔÚ¶¨Òå__has_extensionÖ®Ç°Ê¹ÓÃclang½øĞĞ±àÒëÊ±£¬
-    /// ¼´Ê¹±àĞ´ÁË¡°defined(__has_extension) && __has_extension(xxx)¡±£¬
-    /// clangÒ²»á±¨¸æ±àÒëÆ÷´íÎó£¬ËùÒÔÎ¨Ò»µÄ½â¾ö·½·¨ÊÇ£º
+    /// åœ¨å®šä¹‰__has_extensionä¹‹å‰ä½¿ç”¨clangè¿›è¡Œç¼–è¯‘æ—¶ï¼Œ
+    /// å³ä½¿ç¼–å†™äº†â€œdefined(__has_extension) && __has_extension(xxx)â€ï¼Œ
+    /// clangä¹Ÿä¼šæŠ¥å‘Šç¼–è¯‘å™¨é”™è¯¯ï¼Œæ‰€ä»¥å”¯ä¸€çš„è§£å†³æ–¹æ³•æ˜¯ï¼š
     #ifndef __has_extension
 
         #define __has_extension __has_feature
@@ -67,10 +67,10 @@
 
     #endif  // __has_cpp_attribute
 
-    /// ×ÔµÚÒ»¸ö°æ±¾ÒÔÀ´£¬ClangÒ»Ö±Ö§³Ö¡°unused¡±ÊôĞÔ¡£
+    /// è‡ªç¬¬ä¸€ä¸ªç‰ˆæœ¬ä»¥æ¥ï¼ŒClangä¸€ç›´æ”¯æŒâ€œunusedâ€å±æ€§ã€‚
     #define MAYBE_UNUSED __attribute__((__unused__))
 
-    /// FALLTHROUGHºê¿ÉÓÃÓÚ×¢ÊÍswitch±êÇ©Ö®¼äµÄÒşÊ½µÄfall-through¡£
+    /// FALLTHROUGHå®å¯ç”¨äºæ³¨é‡Šswitchæ ‡ç­¾ä¹‹é—´çš„éšå¼çš„fall-throughã€‚
     #if 201103L <= __cplusplus && defined(__has_warning)
 
         #if __has_feature(cxx_attributes) && __has_warning("-Wimplicit-fallthrough")

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #include "Chapter.h"
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
@@ -33,7 +33,7 @@ void CSVConfigure::Chapter::Checking() const
 {
     if (!((1 <= reward) && (reward < 5)))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("reward Êı¾İĞ£ÑéÊ§°Ü¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("reward æ•°æ®æ ¡éªŒå¤±è´¥ã€‚"s))
     }
 }
 

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/15 09:53)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/15 09:53)
 
 #include "TriggerAssertTesting.h"
 #include "System/Time/DeltaTime.h"
@@ -27,7 +27,7 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, TriggerAssertTesting)
 
 void CoreTools::TriggerAssertTesting::PrintTipsMessage()
 {
-    GetStream() << "Õâ¸ö²âÊÔ»á´¥·¢Ê§°Ü¶ÏÑÔ£¬Çë°´·ñÈ¡Ïû¡£\n";
+    GetStream() << "è¿™ä¸ªæµ‹è¯•ä¼šè§¦å‘å¤±è´¥æ–­è¨€ï¼Œè¯·æŒ‰å¦å–æ¶ˆã€‚\n";
 
     System::SystemPause();
 }
@@ -54,16 +54,16 @@ void CoreTools::TriggerAssertTesting::MainTest()
 
 void CoreTools::TriggerAssertTesting::TriggerInvariantTest()
 {
-    const auto promptMessage = "±¾´ÎÀà²»±äÊ½Ê§°ÜÖ»ÊÇ²âÊÔ£¬²¢Ã»ÓĞ´íÎó²úÉú¡£"s;
-    const auto cancelMessage = "Çëµã»÷¡°·ñ¡±È¡Ïû¡£"s;
+    const auto promptMessage = "æœ¬æ¬¡ç±»ä¸å˜å¼å¤±è´¥åªæ˜¯æµ‹è¯•ï¼Œå¹¶æ²¡æœ‰é”™è¯¯äº§ç”Ÿã€‚"s;
+    const auto cancelMessage = "è¯·ç‚¹å‡»â€œå¦â€å–æ¶ˆã€‚"s;
 
     const TriggerAssert triggerAssert{ TriggerAssertCheck::Invariant, CORE_TOOLS_FUNCTION_DESCRIBED, "%s%s\n"s, promptMessage, cancelMessage };
 }
 
 void CoreTools::TriggerAssertTesting::TriggerAssertionTest()
 {
-    const auto promptMessage = "±¾´Î¶ÏÑÔ´¥·¢Ö»ÊÇ²âÊÔ£¬²¢Ã»ÓĞ´íÎó²úÉú¡£"s;
-    const auto cancelMessage = "Çëµã»÷¡°·ñ¡±È¡Ïû¡£"s;
+    const auto promptMessage = "æœ¬æ¬¡æ–­è¨€è§¦å‘åªæ˜¯æµ‹è¯•ï¼Œå¹¶æ²¡æœ‰é”™è¯¯äº§ç”Ÿã€‚"s;
+    const auto cancelMessage = "è¯·ç‚¹å‡»â€œå¦â€å–æ¶ˆã€‚"s;
 
     const TriggerAssert triggerAssert{ TriggerAssertCheck::Assertion, CORE_TOOLS_FUNCTION_DESCRIBED, "%s%s\n"s, promptMessage, cancelMessage };
 }

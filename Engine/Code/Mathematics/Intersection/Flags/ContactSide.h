@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	�汾��0.9.1.6 (2023/10/28 14:45)
+///	标准：std:c++20
+///	版本：0.9.1.6 (2023/10/28 14:45)
 
 #ifndef MATHEMATICS_INTERSECTION_CONTACT_SIDE_H
 #define MATHEMATICS_INTERSECTION_CONTACT_SIDE_H
@@ -14,7 +14,7 @@
 
 namespace Mathematics
 {
-    // �Ӵ��棨ͶӰ�����˳�򣩡�
+    // 接触面（投影间隔的顺序）。
     enum class ContactSide
     {
         Left,

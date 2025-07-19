@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 14:00)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 14:00)
 
 #include "Rendering/RenderingExport.h"
 
@@ -87,7 +87,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SurfacePatch, IsRectangu
 Rendering::SurfacePatch::AVector Rendering::SurfacePatch::GetTangent0(float u, float v) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_2(IsParameterValid(u, v), "²ÎÊıÓòÎŞĞ§\n");
+    RENDERING_ASSERTION_2(IsParameterValid(u, v), "å‚æ•°åŸŸæ— æ•ˆ\n");
 
     auto tangent0 = GetDerivativesU(u, v);
     tangent0.Normalize();
@@ -97,7 +97,7 @@ Rendering::SurfacePatch::AVector Rendering::SurfacePatch::GetTangent0(float u, f
 Rendering::SurfacePatch::AVector Rendering::SurfacePatch::GetTangent1(float u, float v) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_2(IsParameterValid(u, v), "²ÎÊıÓòÎŞĞ§\n");
+    RENDERING_ASSERTION_2(IsParameterValid(u, v), "å‚æ•°åŸŸæ— æ•ˆ\n");
 
     auto tangent0 = GetDerivativesU(u, v);
     auto tangent1 = GetDerivativesV(u, v);
@@ -111,12 +111,12 @@ Rendering::SurfacePatch::AVector Rendering::SurfacePatch::GetTangent1(float u, f
 Rendering::SurfacePatch::AVector Rendering::SurfacePatch::GetNormal(float u, float v) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_2(IsParameterValid(u, v), "²ÎÊıÓòÎŞĞ§\n");
+    RENDERING_ASSERTION_2(IsParameterValid(u, v), "å‚æ•°åŸŸæ— æ•ˆ\n");
 
     auto tangent0 = GetDerivativesU(u, v);
     const auto tangent1 = GetDerivativesV(u, v);
 
-    // °üº¬Õâ¸öÊÇÓë GetFrame Ò»ÖÂ¡£
+    // åŒ…å«è¿™ä¸ªæ˜¯ä¸ GetFrame ä¸€è‡´ã€‚
     tangent0.Normalize();
 
     auto normal = UnitCross(tangent0, tangent1);
@@ -127,7 +127,7 @@ Rendering::SurfacePatch::AVector Rendering::SurfacePatch::GetNormal(float u, flo
 Rendering::SurfacePatchFrame Rendering::SurfacePatch::GetFrame(float u, float v) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_2(IsParameterValid(u, v), "²ÎÊıÓòÎŞĞ§\n");
+    RENDERING_ASSERTION_2(IsParameterValid(u, v), "å‚æ•°åŸŸæ— æ•ˆ\n");
 
     const auto position = GetPosition(u, v);
 
@@ -136,8 +136,8 @@ Rendering::SurfacePatchFrame Rendering::SurfacePatch::GetFrame(float u, float v)
     tangent0.Normalize();
     const auto normal = UnitCross(tangent0, tangent1);
 
-    // ¹éÒ»»¯Ò»½×µ¼Êı²»±ØÊÇÕı½»µÄ¡£
-    // ÖØĞÂ¼ÆËãT1£¬Ê¹{T0,T1,N}ÊÇÒ»¸ö±ê×¼Õı½»¼¯ºÏ¡£
+    // å½’ä¸€åŒ–ä¸€é˜¶å¯¼æ•°ä¸å¿…æ˜¯æ­£äº¤çš„ã€‚
+    // é‡æ–°è®¡ç®—T1ï¼Œä½¿{T0,T1,N}æ˜¯ä¸€ä¸ªæ ‡å‡†æ­£äº¤é›†åˆã€‚
     tangent1 = Cross(normal, tangent0);
 
     return SurfacePatchFrame{ position, tangent0, tangent1, normal };
@@ -146,42 +146,42 @@ Rendering::SurfacePatchFrame Rendering::SurfacePatch::GetFrame(float u, float v)
 Rendering::PrincipalCurvatureInfo Rendering::SurfacePatch::ComputePrincipalCurvatureInfo(float u, float v) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_2(IsParameterValid(u, v), "²ÎÊıÓòÎŞĞ§\n");
+    RENDERING_ASSERTION_2(IsParameterValid(u, v), "å‚æ•°åŸŸæ— æ•ˆ\n");
 
-    // ÇĞÏß:  T0 = dP/du = (x_u,y_u,z_u), T1 = dP/dv = (x_v,y_v,z_v)
-    // ·¨Ïß:    N = Cross(T0,T1)/Length(Cross(T0,T1))
-    // ¶ÈÁ¿ÕÅÁ¿:    G = +-                      -+
+    // åˆ‡çº¿:  T0 = dP/du = (x_u,y_u,z_u), T1 = dP/dv = (x_v,y_v,z_v)
+    // æ³•çº¿:    N = Cross(T0,T1)/Length(Cross(T0,T1))
+    // åº¦é‡å¼ é‡:    G = +-                      -+
     //                  | Dot(T0,T0)  Dot(T0,T1) |
     //                  | Dot(T1,T0)  Dot(T1,T1) |
     //                  +-                      -+
 
-    // ÇúÂÊÕÅÁ¿:  B = +-                          -+
+    // æ›²ç‡å¼ é‡:  B = +-                          -+
     //                | -Dot(N,T0_u)  -Dot(N,T0_v) |
     //                | -Dot(N,T1_u)  -Dot(N,T1_v) |
     //                +-                          -+
 
-    // Ö÷ÇúÂÊkÎª¹ãÒåÌØÕ÷Öµ
+    // ä¸»æ›²ç‡kä¸ºå¹¿ä¹‰ç‰¹å¾å€¼
     //
     //     Bw = kGw
-    // Èç¹ûkÊÇÇúÂÊÒÔ¼°w=(a,b)ÊÇÏàÓ¦µÄ½â¾ö·½°¸£¬ÒÔ Bw = kGw£¬
-    // Ö÷·½ÏòÊÇ3DÊ¸Á¿Îª d = a*U+b*V¡£
-    // k1ºÍk2ÊÇÖ÷ÇúÂÊ¡£Æ½¾ùÇúÂÊÎª(k1+k2)/2 ºÍ¸ßË¹ÇúÂÊÊÇk1*k2¡£
+    // å¦‚æœkæ˜¯æ›²ç‡ä»¥åŠw=(a,b)æ˜¯ç›¸åº”çš„è§£å†³æ–¹æ¡ˆï¼Œä»¥ Bw = kGwï¼Œ
+    // ä¸»æ–¹å‘æ˜¯3DçŸ¢é‡ä¸º d = a*U+b*Vã€‚
+    // k1å’Œk2æ˜¯ä¸»æ›²ç‡ã€‚å¹³å‡æ›²ç‡ä¸º(k1+k2)/2 å’Œé«˜æ–¯æ›²ç‡æ˜¯k1*k2ã€‚
 
-    // ¼ÆËãµ¼Êı
+    // è®¡ç®—å¯¼æ•°
     const auto derivativesU = GetDerivativesU(u, v);
     const auto derivativesV = GetDerivativesV(u, v);
     const auto derivativesUU = GetDerivativesUU(u, v);
     const auto derivativesUV = GetDerivativesUV(u, v);
     const auto derivativesVV = GetDerivativesVV(u, v);
 
-    // ¼ÆËã¶ÈÁ¿ÕÅÁ¿¡£
+    // è®¡ç®—åº¦é‡å¼ é‡ã€‚
     Mathematics::Matrix2F metricTensor{};
     metricTensor(0, 0) = Dot(derivativesU, derivativesU);
     metricTensor(0, 1) = Dot(derivativesU, derivativesV);
     metricTensor(1, 0) = metricTensor(0, 1);
     metricTensor(1, 1) = Dot(derivativesV, derivativesV);
 
-    // ¼ÆËãÇúÂÊÕÅÁ¿¡£
+    // è®¡ç®—æ›²ç‡å¼ é‡ã€‚
     const auto normal = UnitCross(derivativesU, derivativesV);
     Mathematics::Matrix2F curvatureTensor{};
     curvatureTensor(0, 0) = -Dot(normal, derivativesUU);
@@ -189,18 +189,18 @@ Rendering::PrincipalCurvatureInfo Rendering::SurfacePatch::ComputePrincipalCurva
     curvatureTensor(1, 0) = curvatureTensor(0, 1);
     curvatureTensor(1, 1) = -Dot(normal, derivativesVV);
 
-    // ÌØÕ÷¶àÏîÊ½Îª 0 = det(B-kG) = c2*k^2+c1*k+c0.
+    // ç‰¹å¾å¤šé¡¹å¼ä¸º 0 = det(B-kG) = c2*k^2+c1*k+c0.
     const auto constant = curvatureTensor(0, 0) * curvatureTensor(1, 1) - curvatureTensor(0, 1) * curvatureTensor(1, 0);
     const auto once = 2.0f * curvatureTensor(0, 1) * metricTensor(0, 1) - curvatureTensor(0, 0) * metricTensor(1, 1) - curvatureTensor(1, 1) * metricTensor(0, 0);
     const auto twice = metricTensor(0, 0) * metricTensor(1, 1) - metricTensor(0, 1) * metricTensor(1, 0);
 
-    // Ö÷ÇúÂÊµÄÌØÕ÷¶àÏîÊ½µÄ¸ù¡£
+    // ä¸»æ›²ç‡çš„ç‰¹å¾å¤šé¡¹å¼çš„æ ¹ã€‚
     const auto discriminant = Mathematics::MathF::Sqrt(Mathematics::MathF::FAbs(once * once - 4.0f * constant * twice));
     const auto principalCurvature0 = -0.5f * (once + discriminant);
     const auto principalCurvature1 = 0.5f * (-once + discriminant);
 
-    // Ö÷·½ÏòÊÇ(B-kG)w = 0µÄ½â,
-    // w1 = (b12-k1*g12,-(b11-k1*g11)) »ò (b22-k1*g22,-(b12-k1*g12))
+    // ä¸»æ–¹å‘æ˜¯(B-kG)w = 0çš„è§£,
+    // w1 = (b12-k1*g12,-(b11-k1*g11)) æˆ– (b22-k1*g22,-(b12-k1*g12))
     auto a0 = curvatureTensor(0, 1) - principalCurvature0 * metricTensor(0, 1);
     auto a1 = principalCurvature0 * metricTensor(0, 0) - curvatureTensor(0, 0);
     auto length = Mathematics::MathF::Sqrt(a0 * a0 + a1 * a1);
@@ -220,13 +220,13 @@ Rendering::PrincipalCurvatureInfo Rendering::SurfacePatch::ComputePrincipalCurva
         }
         else
         {
-            // Umbilic£¨±íÃæ¾Ö²¿ÇòÌå£¬ÈÎÒâ·½Ïò¶¼ÎªÖ÷·½Ïò£©
+            // Umbilicï¼ˆè¡¨é¢å±€éƒ¨çƒä½“ï¼Œä»»æ„æ–¹å‘éƒ½ä¸ºä¸»æ–¹å‘ï¼‰
             principalDirection0 = derivativesU;
         }
     }
     principalDirection0.Normalize();
 
-    // µÚ¶şÇĞÏßÊÇµÚÒ»ÇĞÏßºÍ·¨ÏßµÄ²æ³Ë
+    // ç¬¬äºŒåˆ‡çº¿æ˜¯ç¬¬ä¸€åˆ‡çº¿å’Œæ³•çº¿çš„å‰ä¹˜
     const auto principalDirection1 = Cross(principalDirection0, normal);
 
     return PrincipalCurvatureInfo{ principalCurvature0, principalCurvature1, principalDirection0, principalDirection1 };

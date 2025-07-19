@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+ï»¿/// Copyright (c) 2010-2023
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.1 (2023/12/05 10:29)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.1 (2023/12/05 10:29)
 
 #ifndef MATHEMATICS_ALGEBRA_BOUNDING_SPHERE_DETAIL_H
 #define MATHEMATICS_ALGEBRA_BOUNDING_SPHERE_DETAIL_H
@@ -24,11 +24,11 @@ bool Mathematics::TestIntersection(const BoundingSphere<T>& lhsBound, const Boun
 {
     if (lhsBound.GetRadius() <= epsilon || rhsBound.GetRadius() <= epsilon)
     {
-        // ÆäÖĞÒ»¸ö±ß½çÊÇÎŞĞ§µÄ£¬²»Ïà½»¡£
+        // å…¶ä¸­ä¸€ä¸ªè¾¹ç•Œæ˜¯æ— æ•ˆçš„ï¼Œä¸ç›¸äº¤ã€‚
         return false;
     }
 
-    // ²âÊÔ¾²Ì¬ÇòºÍ¾²Ì¬ÇòµÄÏà½»¡£
+    // æµ‹è¯•é™æ€çƒå’Œé™æ€çƒçš„ç›¸äº¤ã€‚
     const auto difference = lhsBound.GetCenter() - rhsBound.GetCenter();
     const auto radiusSum = lhsBound.GetRadius() + rhsBound.GetRadius();
 
@@ -44,11 +44,11 @@ bool Mathematics::TestIntersection(const BoundingSphere<T>& lhsBound,
 {
     if (lhsBound.GetRadius() <= Math<T>::GetZeroTolerance() || rhsBound.GetRadius() <= Math<T>::GetZeroTolerance())
     {
-        // ÆäÖĞÒ»¸ö±ß½çÊÇÎŞĞ§µÄ£¬²»Ïà½»¡£
+        // å…¶ä¸­ä¸€ä¸ªè¾¹ç•Œæ˜¯æ— æ•ˆçš„ï¼Œä¸ç›¸äº¤ã€‚
         return false;
     }
 
-    // ²âÊÔ¶¯Ì¬ÇòºÍ¶¯Ì¬ÇòµÄÏà½»¡£
+    // æµ‹è¯•åŠ¨æ€çƒå’ŒåŠ¨æ€çƒçš„ç›¸äº¤ã€‚
     auto realVelocity = rhsVelocity - lhsVelocity;
     const auto centerDifference = rhsBound.GetCenter() - lhsBound.GetCenter();
 
@@ -79,7 +79,7 @@ bool Mathematics::TestIntersection(const BoundingSphere<T>& lhsBound,
 template <typename T>
 bool Mathematics::Approximate(const BoundingSphere<T>& lhs, const BoundingSphere<T>& rhs, T epsilon)
 {
-    MATHEMATICS_ASSERTION_0(T{} <= epsilon, "epsilon±ØĞë´óÓÚ0£¡");
+    MATHEMATICS_ASSERTION_0(T{} <= epsilon, "epsilonå¿…é¡»å¤§äº0ï¼");
 
     if (Approximate(lhs.GetCenter(), rhs.GetCenter(), epsilon) && Math<T>::Approximate(lhs.GetRadius(), rhs.GetRadius(), epsilon))
         return true;

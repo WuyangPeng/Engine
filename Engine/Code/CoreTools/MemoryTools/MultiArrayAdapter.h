@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 15:50)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 15:50)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_MULTI_ARRAY_ADAPTER_H
 #define CORE_TOOLS_MEMORY_TOOLS_MULTI_ARRAY_ADAPTER_H
@@ -14,11 +14,11 @@
 
 #include "Lattice.h"
 
-/// ÀàMultiArrayAdapterÊµ¼ÊÉÏÓëMultiArray¾ßÓĞÏàÍ¬µÄ½Ó¿Ú£¬Ö»ÊÇ´æ´¢µÄÔ­Ê¼Ö¸ÕëÊÇÓÉÍâ²¿Ô´Ìá¹©µÄ¡£
-/// ÒòÎªÔ­Ê¼Ö¸ÕëÊÇÍâ²¿µÄ£¬²¢ÇÒÀà¹²ÏíÔ­Ê¼Ö¸Õë£¬ËùÒÔ¸´ÖÆºÍÒÆ¶¯ÓïÒå±»½ûÓÃ¡£
+/// ç±»MultiArrayAdapterå®é™…ä¸Šä¸MultiArrayå…·æœ‰ç›¸åŒçš„æ¥å£ï¼Œåªæ˜¯å­˜å‚¨çš„åŸå§‹æŒ‡é’ˆæ˜¯ç”±å¤–éƒ¨æºæä¾›çš„ã€‚
+/// å› ä¸ºåŸå§‹æŒ‡é’ˆæ˜¯å¤–éƒ¨çš„ï¼Œå¹¶ä¸”ç±»å…±äº«åŸå§‹æŒ‡é’ˆï¼Œæ‰€ä»¥å¤åˆ¶å’Œç§»åŠ¨è¯­ä¹‰è¢«ç¦ç”¨ã€‚
 namespace CoreTools
 {
-    /// ±àÒëÊ±ÒÑÖª´óĞ¡µÄ¶àÎ¬Êı×éÊÊÅäÆ÷µÄÊµÏÖ¡£
+    /// ç¼–è¯‘æ—¶å·²çŸ¥å¤§å°çš„å¤šç»´æ•°ç»„é€‚é…å™¨çš„å®ç°ã€‚
     template <typename T, bool OrderLToR, int... Sizes>
     class MultiArrayAdapter final : public Lattice<OrderLToR, Sizes...>, private boost::totally_ordered<MultiArrayAdapter<T, OrderLToR, Sizes...>>
     {
@@ -40,38 +40,38 @@ namespace CoreTools
 
         void Reset(T* aContainer);
 
-        /// »ñÈ¡Ö¸ÏòÔªËØÊı×éµÄÖ¸Õë¡£
+        /// è·å–æŒ‡å‘å…ƒç´ æ•°ç»„çš„æŒ‡é’ˆã€‚
         NODISCARD const T* GetData() const noexcept;
         NODISCARD T* GetData() noexcept;
 
-        /// ·ÃÎÊÖ¸¶¨Ë÷Òı´¦µÄÔªËØ¡£
+        /// è®¿é—®æŒ‡å®šç´¢å¼•å¤„çš„å…ƒç´ ã€‚
         NODISCARD const T& operator[](int index) const;
         NODISCARD T& operator[](int index);
 
-        /// ½«ËùÓĞÔªËØÉèÖÃÎªÖ¸¶¨Öµ¡£
+        /// å°†æ‰€æœ‰å…ƒç´ è®¾ç½®ä¸ºæŒ‡å®šå€¼ã€‚
         void Fill(const T& value) noexcept;
 
-        /// »ñÈ¡ÓëË÷ÒıµÄnÎ¬²ÎÊı°üÏà¶ÔÓ¦µÄÔªËØ¡£
+        /// è·å–ä¸ç´¢å¼•çš„nç»´å‚æ•°åŒ…ç›¸å¯¹åº”çš„å…ƒç´ ã€‚
         template <typename... IndexTypes>
         NODISCARD const T& operator()(IndexTypes... tuple) const noexcept;
 
         template <typename... IndexTypes>
         NODISCARD T& operator()(IndexTypes... tuple) noexcept;
 
-        /// »ñÈ¡ÓënÎ¬×ø±ê¶ÔÓ¦µÄÔªËØ¡£
+        /// è·å–ä¸nç»´åæ ‡å¯¹åº”çš„å…ƒç´ ã€‚
         NODISCARD const T& operator()(const std::array<int, sizeof...(Sizes)>& coordinate) const;
         NODISCARD T& operator()(const std::array<int, sizeof...(Sizes)>& coordinate);
 
-        /// Ö§³Ö¶ÔMultiArrayAdapter¶ÔÏó½øĞĞÅÅĞòºÍ±È½Ï¡£
+        /// æ”¯æŒå¯¹MultiArrayAdapterå¯¹è±¡è¿›è¡Œæ’åºå’Œæ¯”è¾ƒã€‚
         NODISCARD bool operator==(const MultiArrayAdapter& rhs) const noexcept;
         NODISCARD bool operator<(const MultiArrayAdapter& rhs) const noexcept;
 
     private:
-        /// Ö¸Õë±ØĞëÖ¸Ïò´æ´¢Lattice<OrderLToR, Sizes...>::GetSize()¸öÄÚ´æ¿éµÄT¶ÔÏó¡£
+        /// æŒ‡é’ˆå¿…é¡»æŒ‡å‘å­˜å‚¨Lattice<OrderLToR, Sizes...>::GetSize()ä¸ªå†…å­˜å—çš„Tå¯¹è±¡ã€‚
         T* container;
     };
 
-    /// ½öÔÚÔËĞĞÊ±²ÅÖªµÀÆä´óĞ¡µÄ¶àÎ¬Êı×éµÄÊµÏÖ¡£
+    /// ä»…åœ¨è¿è¡Œæ—¶æ‰çŸ¥é“å…¶å¤§å°çš„å¤šç»´æ•°ç»„çš„å®ç°ã€‚
     template <typename T, bool OrderLToR>
     class MultiArrayAdapter<T, OrderLToR> final : public Lattice<OrderLToR>
     {
@@ -95,34 +95,34 @@ namespace CoreTools
         MultiArrayAdapter(MultiArrayAdapter&& rhs) noexcept = delete;
         MultiArrayAdapter& operator=(MultiArrayAdapter&& rhs) noexcept = delete;
 
-        /// »ñÈ¡Ö¸ÏòÔªËØÊı×éµÄÖ¸Õë¡£
+        /// è·å–æŒ‡å‘å…ƒç´ æ•°ç»„çš„æŒ‡é’ˆã€‚
         NODISCARD const T* GetData() const noexcept;
         NODISCARD T* GetData() noexcept;
 
-        /// ·ÃÎÊÖ¸¶¨Ë÷Òı´¦µÄÔªËØ¡£
+        /// è®¿é—®æŒ‡å®šç´¢å¼•å¤„çš„å…ƒç´ ã€‚
         NODISCARD const T& operator[](int index) const;
         NODISCARD T& operator[](int index);
 
-        /// ½«ËùÓĞÔªËØÉèÖÃÎªÖ¸¶¨Öµ¡£
+        /// å°†æ‰€æœ‰å…ƒç´ è®¾ç½®ä¸ºæŒ‡å®šå€¼ã€‚
         void Fill(const T& value) noexcept;
 
-        /// »ñÈ¡ÓëË÷ÒıµÄnÎ¬²ÎÊı°üÏà¶ÔÓ¦µÄÔªËØ¡£
+        /// è·å–ä¸ç´¢å¼•çš„nç»´å‚æ•°åŒ…ç›¸å¯¹åº”çš„å…ƒç´ ã€‚
         template <typename... IndexTypes>
         NODISCARD const T& operator()(IndexTypes... tuple) const;
 
         template <typename... IndexTypes>
         NODISCARD T& operator()(IndexTypes... tuple);
 
-        /// »ñÈ¡ÓënÎ¬×ø±ê¶ÔÓ¦µÄÔªËØ¡£
+        /// è·å–ä¸nç»´åæ ‡å¯¹åº”çš„å…ƒç´ ã€‚
         NODISCARD const T& operator()(const SizeType& coordinate) const;
         NODISCARD T& operator()(const SizeType& coordinate);
 
-        /// Ö§³Ö¶ÔMultiArrayAdapter¶ÔÏó½øĞĞÅÅĞòºÍ±È½Ï¡£
+        /// æ”¯æŒå¯¹MultiArrayAdapterå¯¹è±¡è¿›è¡Œæ’åºå’Œæ¯”è¾ƒã€‚
         NODISCARD bool operator==(const MultiArrayAdapter& rhs) const noexcept;
         NODISCARD bool operator<(const MultiArrayAdapter& rhs) const noexcept;
 
     private:
-        /// Ö¸Õë±ØĞëÖ¸Ïò´æ´¢Lattice<OrderLToR>::GetSize()¸öÄÚ´æ¿éµÄT¶ÔÏó¡£
+        /// æŒ‡é’ˆå¿…é¡»æŒ‡å‘å­˜å‚¨Lattice<OrderLToR>::GetSize()ä¸ªå†…å­˜å—çš„Tå¯¹è±¡ã€‚
         T* container;
     };
 }

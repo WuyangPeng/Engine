@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.2 (2023/07/24 17:33)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.2 (2023/07/24 17:33)
 
 #ifndef RENDERING_CONTROLLERS_PARTICLE_CONTROLLER_IMPL_H
 #define RENDERING_CONTROLLERS_PARTICLE_CONTROLLER_IMPL_H
@@ -49,10 +49,10 @@ namespace Rendering
         NODISCARD float GetSystemSizeChange() const noexcept;
         void SetSystemSizeChange(float aSystemSizeChange) noexcept;
 
-        // Á£×ÓÔË¶¯£¬ÔÚ¸ÃÏµÍ³µÄÄ£ĞÍ¿Õ¼ä¡£ËÙ¶ÈÊ¸Á¿Ó¦Îªµ¥Î»µÄ³¤¶È¡£
-        // ÆäÖĞµã´ú±íÒ»¸ö¸ÕÌåÔÚÓ¦ÓÃ³ÌĞò£¬
-        // Äã¿ÉÒÔÑ¡Ôñ¸ÃÏµÍ³µÄÔ­µãÎªÁ£×ÓµÄÖÊÁ¿ÖĞĞÄºÍ
-        // ×ø±êÖá¶ÔÓ¦ÓÚ¹ßĞÔÕÅÁ¿µÄÖ÷·½Ïò¡£
+        // ç²’å­è¿åŠ¨ï¼Œåœ¨è¯¥ç³»ç»Ÿçš„æ¨¡å‹ç©ºé—´ã€‚é€Ÿåº¦çŸ¢é‡åº”ä¸ºå•ä½çš„é•¿åº¦ã€‚
+        // å…¶ä¸­ç‚¹ä»£è¡¨ä¸€ä¸ªåˆšä½“åœ¨åº”ç”¨ç¨‹åºï¼Œ
+        // ä½ å¯ä»¥é€‰æ‹©è¯¥ç³»ç»Ÿçš„åŸç‚¹ä¸ºç²’å­çš„è´¨é‡ä¸­å¿ƒå’Œ
+        // åæ ‡è½´å¯¹åº”äºæƒ¯æ€§å¼ é‡çš„ä¸»æ–¹å‘ã€‚
         int GetNumParticles() const noexcept;
         NODISCARD float GetParticleLinearSpeed(int index) const;
         NODISCARD AVector GetParticleLinearAxis(int index) const;
@@ -75,7 +75,7 @@ namespace Rendering
         void UpdatePointMotion(Particles& particles, float ctrlTime);
 
     private:
-        // ÏµÍ³µÄÔË¶¯£¬ÔÚ¾Ö²¿×ø±ê¡£ËÙ¶ÈÊ¸Á¿Ó¦Îªµ¥Î»µÄ³¤¶È¡£
+        // ç³»ç»Ÿçš„è¿åŠ¨ï¼Œåœ¨å±€éƒ¨åæ ‡ã€‚é€Ÿåº¦çŸ¢é‡åº”ä¸ºå•ä½çš„é•¿åº¦ã€‚
         float systemLinearSpeed;
         float systemAngularSpeed;
         AVector systemLinearAxis;

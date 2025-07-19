@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/22 10:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/22 10:19)
 
 #include "Rendering/RenderingExport.h"
 
@@ -25,7 +25,7 @@ Rendering::WglEnvironment::WglEnvironment(const EnvironmentParameter& environmen
 {
     if (handle == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§µÄ´°¿Ú¾ä±ú¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆçš„çª—å£å¥æŸ„ã€‚"s))
     }
 
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -46,12 +46,12 @@ void Rendering::WglEnvironment::Release() noexcept
         {
             if (!System::MakeWglCurrent(device, nullptr))
             {
-                LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering, SYSTEM_TEXT("WglMakeCurrentÊ§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+                LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering, SYSTEM_TEXT("WglMakeCurrentå¤±è´¥ï¼"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
             }
 
             if (!System::DeleteWglContext(immediate))
             {
-                LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering, SYSTEM_TEXT("WglDeleteContextÊ§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+                LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering, SYSTEM_TEXT("WglDeleteContextå¤±è´¥ï¼"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
             }
 
             immediate = nullptr;
@@ -59,7 +59,7 @@ void Rendering::WglEnvironment::Release() noexcept
 
         if (!System::ReleaseSystemDC(handle, device))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering, SYSTEM_TEXT("ÊÍ·ÅÉè±¸ÉÏÏÂÎÄÊ§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering, SYSTEM_TEXT("é‡Šæ”¾è®¾å¤‡ä¸Šä¸‹æ–‡å¤±è´¥ï¼"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
 
         device = nullptr;
@@ -101,7 +101,7 @@ void Rendering::WglEnvironment::CreateDevice()
     device = System::GetSystemDC(handle);
     if (device == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§µÄÉè±¸ÉÏÏÂÎÄ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆçš„è®¾å¤‡ä¸Šä¸‹æ–‡ã€‚"s))
     }
 }
 
@@ -136,32 +136,32 @@ System::PixelFormatDescriptor Rendering::WglEnvironment::GetPixelFormatDescripto
 
 void Rendering::WglEnvironment::SetWindowPixelFormat(const PixelFormatDescriptor& pixelFormatDescriptor)
 {
-    /// ÉèÖÃäÖÈ¾ÉÏÏÂÎÄµÄÏñËØ¸ñÊ½¡£
+    /// è®¾ç½®æ¸²æŸ“ä¸Šä¸‹æ–‡çš„åƒç´ æ ¼å¼ã€‚
     const auto pixelFormat = System::ChooseWindowPixelFormat(device, &pixelFormatDescriptor);
     if (pixelFormat == 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ChoosePixelFormatÊ§°Ü¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("ChoosePixelFormatå¤±è´¥ã€‚"))
     }
 
     if (!System::SetWindowPixelFormat(device, pixelFormat, &pixelFormatDescriptor))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("SetPixelFormatÊ§°Ü¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("SetPixelFormatå¤±è´¥ã€‚"))
     }
 }
 
 void Rendering::WglEnvironment::CreateContext()
 {
-    /// ´´½¨OpenGLÉÏÏÂÎÄ¡£
+    /// åˆ›å»ºOpenGLä¸Šä¸‹æ–‡ã€‚
     immediate = System::CreateWglContext(device);
     if (immediate == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("wglCreateContextÊ§°Ü¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("wglCreateContextå¤±è´¥ã€‚"))
     }
 
-    /// ¼¤»îÉÏÏÂÎÄ¡£
+    /// æ¿€æ´»ä¸Šä¸‹æ–‡ã€‚
     if (!System::MakeWglCurrent(device, immediate))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("wglMakeCurrentÊ§°Ü¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("wglMakeCurrentå¤±è´¥ã€‚"))
     }
 }
 

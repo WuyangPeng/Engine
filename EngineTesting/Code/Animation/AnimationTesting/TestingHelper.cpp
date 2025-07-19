@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.3 (2023/08/01 20:04)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.3 (2023/08/01 20:04)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -14,7 +14,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
 Animation::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "¶¯»­¿â" }
+    : ParentType{ argc, argv, "åŠ¨ç”»åº“" }
 {
     InitSuite();
 
@@ -38,63 +38,63 @@ void Animation::TestingHelper::InitSuite()
 
 void Animation::TestingHelper::AddHelperSuite()
 {
-    auto helperSuite = GenerateSuite("°ïÖú");
+    auto helperSuite = GenerateSuite("å¸®åŠ©");
 
     AddSuite(helperSuite);
 }
 
 void Animation::TestingHelper::AddSpriteAnimationSuite()
 {
-    auto spriteAnimationSuite = GenerateSuite("¾«Áé¶¯»­");
+    auto spriteAnimationSuite = GenerateSuite("ç²¾çµåŠ¨ç”»");
 
     AddSuite(spriteAnimationSuite);
 }
 
 void Animation::TestingHelper::AddTextureAnimationSuite()
 {
-    auto textureAnimationSuite = GenerateSuite("ÎÆÀí¶¯»­");
+    auto textureAnimationSuite = GenerateSuite("çº¹ç†åŠ¨ç”»");
 
     AddSuite(textureAnimationSuite);
 }
 
 void Animation::TestingHelper::AddRigidBodyHierarchyAnimationSuite()
 {
-    auto rigidBodyHierarchyAnimationSuite = GenerateSuite("¸ÕÌå²ã´Î½á¹¹¶¯»­");
+    auto rigidBodyHierarchyAnimationSuite = GenerateSuite("åˆšä½“å±‚æ¬¡ç»“æ„åŠ¨ç”»");
 
     AddSuite(rigidBodyHierarchyAnimationSuite);
 }
 
 void Animation::TestingHelper::AddSkeletonAnimationSuite()
 {
-    auto skeletonAnimationSuite = GenerateSuite("¹Ç÷À¶¯»­");
+    auto skeletonAnimationSuite = GenerateSuite("éª¨éª¼åŠ¨ç”»");
 
     AddSuite(skeletonAnimationSuite);
 }
 
 void Animation::TestingHelper::AddPerVertexAnimationSuite()
 {
-    auto perVertexAnimationSuite = GenerateSuite("Ã¿¶¥µã¶¯»­");
+    auto perVertexAnimationSuite = GenerateSuite("æ¯é¡¶ç‚¹åŠ¨ç”»");
 
     AddSuite(perVertexAnimationSuite);
 }
 
 void Animation::TestingHelper::AddMorphTargetAnimationSuite()
 {
-    auto morphTargetAnimationSuite = GenerateSuite("±äĞÎÄ¿±ê¶¯»­");
+    auto morphTargetAnimationSuite = GenerateSuite("å˜å½¢ç›®æ ‡åŠ¨ç”»");
 
     AddSuite(morphTargetAnimationSuite);
 }
 
 void Animation::TestingHelper::AddGradientAnimationSuite()
 {
-    auto gradientAnimationSuite = GenerateSuite("½¥±ä¶¯»­");
+    auto gradientAnimationSuite = GenerateSuite("æ¸å˜åŠ¨ç”»");
 
     AddSuite(gradientAnimationSuite);
 }
 
 void Animation::TestingHelper::AddAnimationManagerSuite()
 {
-    auto animationManagerSuite = GenerateSuite("¶¯»­¹ÜÀíÆ÷");
+    auto animationManagerSuite = GenerateSuite("åŠ¨ç”»ç®¡ç†å™¨");
 
     AddSuite(animationManagerSuite);
 }

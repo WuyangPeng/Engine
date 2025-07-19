@@ -1,19 +1,19 @@
-/// Copyright (c) 2010-2025
+ï»¿/// Copyright (c) 2010-2025
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.2.0 (2025/03/22 18:03)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.2.0 (2025/03/22 18:03)
 
 #ifndef THREADING_CORE_RENDER_ENGINE_ASSIST_TESTING_VERSION_H
 #define THREADING_CORE_RENDER_ENGINE_ASSIST_TESTING_VERSION_H
 
-//  gTcreAssistTestingVersion % 100 ÊÇĞŞ¶©°æ±¾ºÅ
-//  gTcreAssistTestingVersion / 100 % 100 ÊÇÄÚ²¿°æ±¾ºÅ
-//  gTcreAssistTestingVersion / 10000 % 100 ÊÇ´Î°æ±¾ºÅ
-//  gTcreAssistTestingVersion / 1000000 % 100 ÊÇÖ÷°æ±¾ºÅ
+//  gTcreAssistTestingVersion % 100 æ˜¯ä¿®è®¢ç‰ˆæœ¬å·
+//  gTcreAssistTestingVersion / 100 % 100 æ˜¯å†…éƒ¨ç‰ˆæœ¬å·
+//  gTcreAssistTestingVersion / 10000 % 100 æ˜¯æ¬¡ç‰ˆæœ¬å·
+//  gTcreAssistTestingVersion / 1000000 % 100 æ˜¯ä¸»ç‰ˆæœ¬å·
 
 constexpr auto gTcreAssistTestingVersion = 1000200;
 

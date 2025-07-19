@@ -1,13 +1,13 @@
-/// Ô­Ê¼ÎÄ¼şÔÚSystemTestingÏÂ£¬SystemWindowsTestingÏÂµÄÎª×Ô¶¯¸´ÖÆÎÄ¼ş£¬ÇëÎğĞŞ¸Ä¡£
+ï»¿/// åŸå§‹æ–‡ä»¶åœ¨SystemTestingä¸‹ï¼ŒSystemWindowsTestingä¸‹çš„ä¸ºè‡ªåŠ¨å¤åˆ¶æ–‡ä»¶ï¼Œè¯·å‹¿ä¿®æ”¹ã€‚
 
 /// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/09 21:22)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/09 21:22)
 
 #ifndef SYSTEM_TESTING_DYNAMIC_LINK_SUITE_RESOURCE_ENUM_TESTING_H
 #define SYSTEM_TESTING_DYNAMIC_LINK_SUITE_RESOURCE_ENUM_TESTING_H
@@ -17,9 +17,9 @@
 
 namespace System
 {
-    /// @brief ×ÊÔ´Ã¶¾ÙÄ£¿éµÄ²âÊÔ¡£
-    /// ÕâÀïÖ»²âÊÔdllModule²ÎÊı²»ÎªinstanceµÄÇé¿ö¡£
-    /// SystemWindowsTestingÓĞdllModuleÎªinstanceÊ±µÄ²âÊÔ¡£
+    /// @brief èµ„æºæšä¸¾æ¨¡å—çš„æµ‹è¯•ã€‚
+    /// è¿™é‡Œåªæµ‹è¯•dllModuleå‚æ•°ä¸ä¸ºinstanceçš„æƒ…å†µã€‚
+    /// SystemWindowsTestingæœ‰dllModuleä¸ºinstanceæ—¶çš„æµ‹è¯•ã€‚
     class ResourceEnumTesting : public EnumResourceToolsTestingBase
     {
     public:

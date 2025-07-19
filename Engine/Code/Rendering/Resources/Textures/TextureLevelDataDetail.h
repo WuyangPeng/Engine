@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/29 13:46)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/29 13:46)
 
 #ifndef RENDERING_RESOURCES_TEXTURE_LEVEL_DATA_DETAIL_H
 #define RENDERING_RESOURCES_TEXTURE_LEVEL_DATA_DETAIL_H
@@ -211,7 +211,7 @@ template <int NumDimensions>
 int Rendering::TextureLevelData<NumDimensions>::GetDimension(int level, int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    RENDERING_ASSERTION_1(0 <= index && index < NumDimensions && 0 <= level && level < textureMaximumMipmapLevels, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_1(0 <= index && index < NumDimensions && 0 <= level && level < textureMaximumMipmapLevels, "ç´¢å¼•é”™è¯¯ï¼");
 
     return levelDimension.at(level).at(index);
 }
@@ -220,7 +220,7 @@ template <int NumDimensions>
 int Rendering::TextureLevelData<NumDimensions>::GetNumLevelBytes(int level) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    RENDERING_ASSERTION_1(0 <= level && level < textureMaximumMipmapLevels, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_1(0 <= level && level < textureMaximumMipmapLevels, "ç´¢å¼•é”™è¯¯ï¼");
 
     return levelNumBytes.at(level);
 }
@@ -229,7 +229,7 @@ template <int NumDimensions>
 int Rendering::TextureLevelData<NumDimensions>::GetLevelOffset(int item, int level) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    RENDERING_ASSERTION_1(0 <= level && level < textureMaximumMipmapLevels && 0 <= item && item < numItems, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_1(0 <= level && level < textureMaximumMipmapLevels && 0 <= item && item < numItems, "ç´¢å¼•é”™è¯¯ï¼");
 
     return levelOffsets.at(item).at(level);
 }
@@ -238,7 +238,7 @@ template <int NumDimensions>
 void Rendering::TextureLevelData<NumDimensions>::SetDimension(int level, int index, int dimension)
 {
     RENDERING_CLASS_IS_VALID_9;
-    RENDERING_ASSERTION_1(0 <= index && index < NumDimensions && 0 <= level && level < textureMaximumMipmapLevels, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_1(0 <= index && index < NumDimensions && 0 <= level && level < textureMaximumMipmapLevels, "ç´¢å¼•é”™è¯¯ï¼");
 
     levelDimension.at(level).at(index) = dimension;
 }
@@ -247,7 +247,7 @@ template <int NumDimensions>
 void Rendering::TextureLevelData<NumDimensions>::SetNumLevelBytes(int level, int aNumLevelBytes)
 {
     RENDERING_CLASS_IS_VALID_9;
-    RENDERING_ASSERTION_1(0 <= level && level < textureMaximumMipmapLevels, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_1(0 <= level && level < textureMaximumMipmapLevels, "ç´¢å¼•é”™è¯¯ï¼");
 
     levelNumBytes.at(level) = aNumLevelBytes;
 }

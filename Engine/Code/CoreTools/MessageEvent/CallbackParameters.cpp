@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 15:21)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 15:21)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -125,7 +125,7 @@ void CoreTools::CallbackParameters::SetValue(int index, const ParametersInterfac
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    /// ¸´ÖÆÒ»·Ý£¬È·±£CallbackParametersÄÚ±£´æµÄsmartPointerÎÞ·¨±»¶þ´ÎÐÞ¸Ä¡£
+    /// å¤åˆ¶ä¸€ä»½ï¼Œç¡®ä¿CallbackParameterså†…ä¿å­˜çš„smartPointeræ— æ³•è¢«äºŒæ¬¡ä¿®æ”¹ã€‚
     return impl->SetValue<ConstParametersInterfaceSharedPtr>(index, parameters.Clone());
 }
 

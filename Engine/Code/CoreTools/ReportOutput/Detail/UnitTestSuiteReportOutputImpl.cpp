@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 11:11)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 11:11)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -31,7 +31,7 @@ void CoreTools::UnitTestSuiteReportOutputImpl::PrintTestName(const std::string& 
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    const auto characterString = "²âÊÔ \"" + testName + "\"£º";
+    const auto characterString = "æµ‹è¯• \"" + testName + "\"ï¼š";
     PrintString(characterString);
 }
 
@@ -39,7 +39,7 @@ void CoreTools::UnitTestSuiteReportOutputImpl::PrintSuiteName(const std::string&
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    const auto characterString = "²âÊÔÌ×¼ş \"" + suiteName + "\"£º";
+    const auto characterString = "æµ‹è¯•å¥—ä»¶ \"" + suiteName + "\"ï¼š";
     PrintString(characterString);
 }
 
@@ -51,11 +51,11 @@ void CoreTools::UnitTestSuiteReportOutputImpl::PrintTestResult(int passedNumber,
 
     std::stringstream ss{};
 
-    ss << std::setw(characterWidth) << std::right << "Í¨¹ı£º"
+    ss << std::setw(characterWidth) << std::right << "é€šè¿‡ï¼š"
        << std::setw(characterWidth) << std::left << passedNumber
-       << std::setw(characterWidth) << std::right << "Ê§°Ü: "
+       << std::setw(characterWidth) << std::right << "å¤±è´¥: "
        << std::setw(characterWidth) << std::left << failedNumber
-       << std::setw(characterWidth) << std::right << "´íÎó: "
+       << std::setw(characterWidth) << std::right << "é”™è¯¯: "
        << std::setw(characterWidth) << std::left << errorNumber;
 
     LOG_ASYNCHRONOUS_SINGLETON.Registered(GetStream(), ss.str(), logLevel);

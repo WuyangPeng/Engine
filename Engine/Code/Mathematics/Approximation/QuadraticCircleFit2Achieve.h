@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:21)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:21)
 
 #ifndef MATHEMATICS_APPROXIMATION_QUADRATIC_CIRCLE_FIT2_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_QUADRATIC_CIRCLE_FIT2_ACHIEVE_H
@@ -76,7 +76,7 @@ void Mathematics::QuadraticCircleFit2<Real>::Calculate(const Points& points)
     eigenSystem.Solve(true);
 
     auto eigenVector = eigenSystem.GetEigenvector(0);
-    // µ±ĞÄ³ıÁã
+    // å½“å¿ƒé™¤é›¶
     if (MathType::GetZeroTolerance() < MathType::FAbs(eigenVector[3]))
     {
         auto inv = MathType::GetValue(1) / eigenVector[3];
@@ -92,13 +92,13 @@ void Mathematics::QuadraticCircleFit2<Real>::Calculate(const Points& points)
 
 #include SYSTEM_WARNING_POP
 
-        // ¶ÔÓÚ¾«È·ÅäºÏ£¬Êı×ÖÉáÈëÎó²î¿ÉÄÜÊ¹×îĞ¡ÌØÕ÷Öµ½ö½öÂÔÎª¸ºÖµ¡£
-        // ·µ»ØµÄ¾ø¶ÔÖµ£¬ÒòÎªÓ¦ÓÃ³ÌĞò¿ÉÄÜÒÀÀµµÄ·µ»ØÖµÊÇ·Ç¸ºÊı¡£
+        // å¯¹äºç²¾ç¡®é…åˆï¼Œæ•°å­—èˆå…¥è¯¯å·®å¯èƒ½ä½¿æœ€å°ç‰¹å¾å€¼ä»…ä»…ç•¥ä¸ºè´Ÿå€¼ã€‚
+        // è¿”å›çš„ç»å¯¹å€¼ï¼Œå› ä¸ºåº”ç”¨ç¨‹åºå¯èƒ½ä¾èµ–çš„è¿”å›å€¼æ˜¯éè´Ÿæ•°ã€‚
         eigenValue = MathType::FAbs(eigenSystem.GetEigenvalue(0));
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³ıÁã´íÎó£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("é™¤é›¶é”™è¯¯ï¼"s));
     }
 }
 

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/17 09:47)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/17 09:47)
 
 #ifndef RENDERING_RENDERER_ENGINE_DEPTH_RANGE_H
 #define RENDERING_RENDERER_ENGINE_DEPTH_RANGE_H
@@ -14,9 +14,9 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 
-/// ÊÓ´°¹ÜÀí£¬ÊÓÍ¼Ìå»ýµÄÉî¶È·¶Î§Îª[zMin£¬zMax]¡£
-/// DirectXÉî¶È·¶Î§Îª[0, 1] µÄ×Ó¼¯¡£
-/// OpenGLÉî¶È·¶Î§ÊÇ[-1, 1] µÄ×Ó¼¯¡£
+/// è§†çª—ç®¡ç†ï¼Œè§†å›¾ä½“ç§¯çš„æ·±åº¦èŒƒå›´ä¸º[zMinï¼ŒzMax]ã€‚
+/// DirectXæ·±åº¦èŒƒå›´ä¸º[0, 1] çš„å­é›†ã€‚
+/// OpenGLæ·±åº¦èŒƒå›´æ˜¯[-1, 1] çš„å­é›†ã€‚
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE DepthRange final

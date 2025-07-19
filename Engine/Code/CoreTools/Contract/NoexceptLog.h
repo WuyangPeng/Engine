@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/28 15:47)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/28 15:47)
 
 #ifndef CORE_TOOLS_CONTRACT_NOEXCEPT_LOG_H
 #define CORE_TOOLS_CONTRACT_NOEXCEPT_LOG_H
@@ -16,10 +16,10 @@
 
 namespace CoreTools
 {
-    /// ²¶»ñ³ÉÔ±º¯ÊıËùÓĞÒì³££¬²¢´òÓ¡ÈÕÖ¾£¬ÕâĞ©º¯ÊıµÄÄ¿µÄÊÇÎªÁËÏû³ı±àÒëÆ÷¾¯¸æ£¬ÆäÄ¿µÄ²¢²»ÊÇÎªÁËÊµÏÖnoexceptº¯Êı¡£
-    /// Ö»ÔÊĞíÔÚÒÔÏÂÇé¿öÏÂÊ¹ÓÃ£º
-    /// 1. Îö¹¹º¯Êıµ÷ÓÃµÄº¯Êı¡£
-    /// 2. º¯ÊıÅ×³öÒì³£µÄ¸ÅÂÊºÜµÍ£¨ÈçÄÚ´æ²»×ã£©£¬¶¨Òå³Énoexcept£¬¿ÉÒÔ·½±ãÉÏ²ãº¯ÊıµÄµ÷ÓÃ¡£
+    /// æ•è·æˆå‘˜å‡½æ•°æ‰€æœ‰å¼‚å¸¸ï¼Œå¹¶æ‰“å°æ—¥å¿—ï¼Œè¿™äº›å‡½æ•°çš„ç›®çš„æ˜¯ä¸ºäº†æ¶ˆé™¤ç¼–è¯‘å™¨è­¦å‘Šï¼Œå…¶ç›®çš„å¹¶ä¸æ˜¯ä¸ºäº†å®ç°noexceptå‡½æ•°ã€‚
+    /// åªå…è®¸åœ¨ä»¥ä¸‹æƒ…å†µä¸‹ä½¿ç”¨ï¼š
+    /// 1. ææ„å‡½æ•°è°ƒç”¨çš„å‡½æ•°ã€‚
+    /// 2. å‡½æ•°æŠ›å‡ºå¼‚å¸¸çš„æ¦‚ç‡å¾ˆä½ï¼ˆå¦‚å†…å­˜ä¸è¶³ï¼‰ï¼Œå®šä¹‰æˆnoexceptï¼Œå¯ä»¥æ–¹ä¾¿ä¸Šå±‚å‡½æ•°çš„è°ƒç”¨ã€‚
     template <typename T, typename Function, typename... ParamType>
     void NoexceptNoReturnUseLog(const T& master, Function function, ParamType&&... parameter) noexcept
     {
@@ -29,7 +29,7 @@ namespace CoreTools
         }
         catch (...)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("Noexcept Å×³öÒì³£¡£"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("Noexcept æŠ›å‡ºå¼‚å¸¸ã€‚"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
 
@@ -42,7 +42,7 @@ namespace CoreTools
         }
         catch (...)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("Noexcept Å×³öÒì³£¡£"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("Noexcept æŠ›å‡ºå¼‚å¸¸ã€‚"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
 
             return defaultResult;
         }
@@ -57,7 +57,7 @@ namespace CoreTools
         }
         catch (...)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("Noexcept Å×³öÒì³£¡£"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("Noexcept æŠ›å‡ºå¼‚å¸¸ã€‚"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
 
@@ -70,7 +70,7 @@ namespace CoreTools
         }
         catch (...)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("Noexcept Å×³öÒì³£¡£"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("Noexcept æŠ›å‡ºå¼‚å¸¸ã€‚"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
 
             return defaultResult;
         }
@@ -85,7 +85,7 @@ namespace CoreTools
         }
         catch (...)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("Noexcept Å×³öÒì³£¡£"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("Noexcept æŠ›å‡ºå¼‚å¸¸ã€‚"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
 
@@ -98,7 +98,7 @@ namespace CoreTools
         }
         catch (...)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("Noexcept Å×³öÒì³£¡£"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("Noexcept æŠ›å‡ºå¼‚å¸¸ã€‚"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
 
             return defaultResult;
         }

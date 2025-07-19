@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 14:11)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 14:11)
 
 #ifndef FRAMEWORK_WINDOWS_API_FRAME_BUILD_DETAIL_H
 #define FRAMEWORK_WINDOWS_API_FRAME_BUILD_DETAIL_H
@@ -85,14 +85,14 @@ int Framework::WindowsAPIFrameBuild<Process>::EnterMessageLoop()
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("½ø³Ì³õÊ¼»¯Ê§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¿›ç¨‹åˆå§‹åŒ–å¤±è´¥ï¼"s))
     }
 }
 
 template <typename Process>
 int Framework::WindowsAPIFrameBuild<Process>::EnterMessageLoop(Process& process)
 {
-    // Ä¬ÈÏPreIdle()Çå³ı»º³åÇø¡£ÔÊĞíÓ¦ÓÃ³ÌĞòÌî³äËûÃÇµÄ´°¿ÚÔÚ´°¿ÚÏÔÊ¾Ö®ºóºÍÊÂ¼şÑ­»·¿ªÊ¼Ö®Ç°¡£
+    // é»˜è®¤PreIdle()æ¸…é™¤ç¼“å†²åŒºã€‚å…è®¸åº”ç”¨ç¨‹åºå¡«å……ä»–ä»¬çš„çª—å£åœ¨çª—å£æ˜¾ç¤ºä¹‹åå’Œäº‹ä»¶å¾ªç¯å¼€å§‹ä¹‹å‰ã€‚
     process.PreIdle();
 
     const auto result = DoEnterMessageLoop();

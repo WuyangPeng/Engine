@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.5 (2024/01/31 10:25)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.5 (2024/01/31 10:25)
 
 #ifndef MATHEMATICS_ALGEBRA_ALGEBRA_MATRIX_H
 #define MATHEMATICS_ALGEBRA_ALGEBRA_MATRIX_H
@@ -36,9 +36,9 @@ namespace Mathematics::Algebra
     public:
         Matrix() noexcept;
 
-        /// ¸Ã±íÍêÈ«ÓÉÊäÈë³õÊ¼»¯¡£
-        /// ÎŞÂÛ»î¶¯´æ´¢·½°¸ÊÇ·ñÊÇMATHEMATICS_USE_ROW_MAJOR£¬
-        /// ¶¼±ØĞë°´ĞĞÖ÷Ë³ĞòÖ¸¶¨¡°Öµ¡±¡£
+        /// è¯¥è¡¨å®Œå…¨ç”±è¾“å…¥åˆå§‹åŒ–ã€‚
+        /// æ— è®ºæ´»åŠ¨å­˜å‚¨æ–¹æ¡ˆæ˜¯å¦æ˜¯MATHEMATICS_USE_ROW_MAJORï¼Œ
+        /// éƒ½å¿…é¡»æŒ‰è¡Œä¸»é¡ºåºæŒ‡å®šâ€œå€¼â€ã€‚
         explicit Matrix(const Container& values);
         explicit Matrix(const BaseContainer& values);
         Matrix(Real m00, Real m01, Real m10, Real m11) noexcept requires(NumRows == 2 && NumColumns == 2);
@@ -60,38 +60,38 @@ namespace Mathematics::Algebra
                Real m32,
                Real m33) noexcept requires(NumRows == 4 && NumColumns == 4);
 
-        /// ¶ÔÓÚ0 <= row < NumRows and 0 <= column < NumColumns£¬
-        /// ÔªËØ(row,column) Îª1£¬ËùÓĞÆäËûÔªËØ¾ùÎª0¡£
-        /// Èç¹ûrow»òcolumnÖĞµÄÈÎºÎÒ»¸öÎŞĞ§£¬Ôò´´½¨Áã¾ØÕó¡£
-        /// ÕâÎª´´½¨±ê×¼Å·¼¸ÀïµÃ»ù¾ØÕóÌá¹©ÁË±ãÀû£»
-        /// ÁíÇë²Î¼ûMakeUnit(int,int)ºÍUnit(int,int)¡£
+        /// å¯¹äº0 <= row < NumRows and 0 <= column < NumColumnsï¼Œ
+        /// å…ƒç´ (row,column) ä¸º1ï¼Œæ‰€æœ‰å…¶ä»–å…ƒç´ å‡ä¸º0ã€‚
+        /// å¦‚æœrowæˆ–columnä¸­çš„ä»»ä½•ä¸€ä¸ªæ— æ•ˆï¼Œåˆ™åˆ›å»ºé›¶çŸ©é˜µã€‚
+        /// è¿™ä¸ºåˆ›å»ºæ ‡å‡†æ¬§å‡ é‡Œå¾—åŸºçŸ©é˜µæä¾›äº†ä¾¿åˆ©ï¼›
+        /// å¦è¯·å‚è§MakeUnit(int,int)å’ŒUnit(int,int)ã€‚
         Matrix(int row, int column);
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD BaseContainer GetBaseContainer() const;
 
-        /// ´æ´¢±íÊ¾ĞÎÊ½Í¸Ã÷µÄ³ÉÔ±·ÃÎÊ¡£
-        /// ÔÚĞĞrowºÍÁĞcolumnÖĞµÄ¾ØÕóÌõÄ¿ÊÇA(row,column)¡£
-        /// µÚÒ»¸öoperator()·µ»ØµÄÊÇconstÒıÓÃ£¬¶ø²»ÊÇRealÖµ¡£
-        /// ÕâÖ§³ÖÍ¨¹ıĞèÒªÖ¸ÏòÊı¾İµÄ³£Á¿Ö¸ÕëµÄ±ê×¼ÎÄ¼ş²Ù×÷½øĞĞĞ´Èë¡£
+        /// å­˜å‚¨è¡¨ç¤ºå½¢å¼é€æ˜çš„æˆå‘˜è®¿é—®ã€‚
+        /// åœ¨è¡Œrowå’Œåˆ—columnä¸­çš„çŸ©é˜µæ¡ç›®æ˜¯A(row,column)ã€‚
+        /// ç¬¬ä¸€ä¸ªoperator()è¿”å›çš„æ˜¯constå¼•ç”¨ï¼Œè€Œä¸æ˜¯Realå€¼ã€‚
+        /// è¿™æ”¯æŒé€šè¿‡éœ€è¦æŒ‡å‘æ•°æ®çš„å¸¸é‡æŒ‡é’ˆçš„æ ‡å‡†æ–‡ä»¶æ“ä½œè¿›è¡Œå†™å…¥ã€‚
         NODISCARD const Real& operator()(int row, int column) const;
         NODISCARD Real& operator()(int row, int column);
 
-        /// °´ĞĞ»ò°´ÁĞ·ÃÎÊ³ÉÔ±¡£
+        /// æŒ‰è¡Œæˆ–æŒ‰åˆ—è®¿é—®æˆå‘˜ã€‚
         void SetRow(int row, const Vector<NumColumns, Real>& vector);
         void SetColumn(int column, const Vector<NumRows, Real>& vector);
 
         NODISCARD Vector<NumColumns, Real> GetRow(int row) const;
         NODISCARD Vector<NumRows, Real> GetColumn(int column) const;
 
-        /// Í¨¹ıÒ»Î¬Ë÷Òı·ÃÎÊ³ÉÔ±¡£
-        /// ×¢£ºµ±´æ´¢Æ÷ÊÇĞĞÖ÷´æ´¢Æ÷»¹ÊÇÁĞÖ÷´æ´¢Æ÷ÎŞ¹Ø½ôÒªÊ±£¬ÕâĞ©·ÃÎÊÆ÷¶ÔÓÚ¾ØÕóÏîµÄ²Ù×÷·Ç³£ÓĞÓÃ¡£
-        /// ²»ÒªÊ¹ÓÃ¹«¿ª´æ´¢Ô¼¶¨µÄ½á¹¹£¬Èçmatrix[column + NumColumns * row]»òmatrix[row + NumRows * column]¡£
+        /// é€šè¿‡ä¸€ç»´ç´¢å¼•è®¿é—®æˆå‘˜ã€‚
+        /// æ³¨ï¼šå½“å­˜å‚¨å™¨æ˜¯è¡Œä¸»å­˜å‚¨å™¨è¿˜æ˜¯åˆ—ä¸»å­˜å‚¨å™¨æ— å…³ç´§è¦æ—¶ï¼Œè¿™äº›è®¿é—®å™¨å¯¹äºçŸ©é˜µé¡¹çš„æ“ä½œéå¸¸æœ‰ç”¨ã€‚
+        /// ä¸è¦ä½¿ç”¨å…¬å¼€å­˜å‚¨çº¦å®šçš„ç»“æ„ï¼Œå¦‚matrix[column + NumColumns * row]æˆ–matrix[row + NumRows * column]ã€‚
         NODISCARD const Real& operator[](int index) const;
         NODISCARD Real& operator[](int index);
 
-        /// ÅÅĞòÈİÆ÷ºÍ¼¸ºÎÅÅĞòµÄ±È½Ï¡£
+        /// æ’åºå®¹å™¨å’Œå‡ ä½•æ’åºçš„æ¯”è¾ƒã€‚
         NODISCARD bool operator==(const Matrix& rhs) const;
         NODISCARD bool operator!=(const Matrix& rhs) const;
         NODISCARD bool operator<(const Matrix& rhs) const;
@@ -99,26 +99,26 @@ namespace Mathematics::Algebra
         NODISCARD bool operator>(const Matrix& rhs) const;
         NODISCARD bool operator>=(const Matrix& rhs) const;
 
-        /// ÌØÊâ¾ØÕó¡£
+        /// ç‰¹æ®ŠçŸ©é˜µã€‚
 
-        /// ËùÓĞ×é¼ş¾ùÎª0¡£
+        /// æ‰€æœ‰ç»„ä»¶å‡ä¸º0ã€‚
         void MakeZero();
 
-        /// ·ÖÁ¿(row,column)Îª1£¬ÆäÓà¾ùÎªÁã¡£
+        /// åˆ†é‡(row,column)ä¸º1ï¼Œå…¶ä½™å‡ä¸ºé›¶ã€‚
         void MakeUnit(int row, int column);
 
-        /// ¶Ô½ÇÏßÌõÄ¿1£¬ÆäËûÌõÄ¿0£¬¼´Ê¹²»ÊÇÕı·½ĞÎ
+        /// å¯¹è§’çº¿æ¡ç›®1ï¼Œå…¶ä»–æ¡ç›®0ï¼Œå³ä½¿ä¸æ˜¯æ­£æ–¹å½¢
         void MakeIdentity();
 
         static Matrix Zero() noexcept;
         static Matrix Unit(int row, int column);
         static Matrix Identity();
 
-        /// Ò»ÔªÔËËã¡£
+        /// ä¸€å…ƒè¿ç®—ã€‚
         NODISCARD Matrix operator+() const noexcept;
         NODISCARD Matrix operator-() const;
 
-        /// ÏßĞÔ´úÊıÔËËã¡£
+        /// çº¿æ€§ä»£æ•°è¿ç®—ã€‚
         Matrix& operator+=(const Matrix& rhs);
         Matrix& operator-=(const Matrix& rhs);
         Matrix& operator*=(Real scalar);
@@ -148,7 +148,7 @@ namespace Mathematics::Algebra
     requires(1 <= NumRows && NumRows <= 4 && 1 <= NumColumns && NumColumns <= 4 && std::is_arithmetic_v<Real>)
     NODISCARD Matrix<NumRows, NumColumns, Real> operator/(const Matrix<NumRows, NumColumns, Real>& lhs, Real scalar);
 
-    /// ¼¸ºÎÔËËã¡£
+    /// å‡ ä½•è¿ç®—ã€‚
     template <int NumRows, int NumColumns, typename Real>
     requires(1 <= NumRows && NumRows <= 4 && 1 <= NumColumns && NumColumns <= 4 && std::is_arithmetic_v<Real>)
     NODISCARD Real L1Norm(const Matrix<NumRows, NumColumns, Real>& matrix);
@@ -208,34 +208,34 @@ namespace Mathematics::Algebra
     requires(1 <= NumRows && NumRows <= 4 && 1 <= NumColumns && NumColumns <= 4 && std::is_arithmetic_v<Real>)
     NODISCARD Matrix<NumRows, NumColumns, Real> TranspositionMultiplyTransposition(const Matrix<NumRows, NumCommon, Real>& lhs, const Matrix<NumCommon, NumColumns, Real>& rhs);
 
-    /// M*D, D ÊÇ¶Ô½ÇÏß NumColumns-by-NumColumns
+    /// M*D, D æ˜¯å¯¹è§’çº¿ NumColumns-by-NumColumns
     template <int NumRows, int NumColumns, typename Real>
     requires(1 <= NumRows && NumRows <= 4 && 1 <= NumColumns && NumColumns <= 4 && std::is_arithmetic_v<Real>)
     NODISCARD Matrix<NumRows, NumColumns, Real> Multiply(const Matrix<NumRows, NumColumns, Real>& matrix, const Vector<NumColumns, Real>& diagonal);
 
-    /// D*M, D ÊÇ¶Ô½ÇÏß NumRows-by-NumRows
+    /// D*M, D æ˜¯å¯¹è§’çº¿ NumRows-by-NumRows
     template <int NumRows, int NumColumns, typename Real>
     requires(1 <= NumRows && NumRows <= 4 && 1 <= NumColumns && NumColumns <= 4 && std::is_arithmetic_v<Real>)
     NODISCARD Matrix<NumRows, NumColumns, Real> Multiply(const Vector<NumRows, Real>& diagonal, const Matrix<NumRows, NumColumns, Real>& matrix);
 
-    /// U*V^T, U ÊÇ NumRows-by-1, V ÊÇ Num-Cols-by-1, ½á¹ûÊÇ NumRows-by-NumCols.
+    /// U*V^T, U æ˜¯ NumRows-by-1, V æ˜¯ Num-Cols-by-1, ç»“æœæ˜¯ NumRows-by-NumCols.
     template <int NumRows, int NumColumns, typename Real>
     requires(1 <= NumRows && NumRows <= 4 && 1 <= NumColumns && NumColumns <= 4 && std::is_arithmetic_v<Real>)
     NODISCARD Matrix<NumRows, NumColumns, Real> OuterProduct(const Vector<NumRows, Real>& u, const Vector<NumColumns, Real>& v);
 
-    /// ¶Ô½Ç¾ØÕóµÄ³õÊ¼»¯£¬Æä¶Ô½ÇÏîÊÇDµÄ·ÖÁ¿¡£
+    /// å¯¹è§’çŸ©é˜µçš„åˆå§‹åŒ–ï¼Œå…¶å¯¹è§’é¡¹æ˜¯Dçš„åˆ†é‡ã€‚
     template <int N, typename Real>
     requires(1 <= N && N <= 4 && std::is_arithmetic_v<Real>)
     NODISCARD Matrix<N, N, Real> MakeDiagonal(const Vector<N, Real>& diagonal);
 
-    /// Í¨¹ı½«ÉÏ²¿N-by-N¿éÉèÖÃÎªÊäÈëN-by-N¾ØÕó£¬
-    /// ²¢½«³ı×îºóÒ»ĞĞºÍ×îºóÒ»ÁĞÌõÄ¿ÉèÖÃÎª1Ö®ÍâµÄËùÓĞÆäËûÌõÄ¿ÉèÖÃÎª0£¬
-    /// ´´½¨(N+1)-by-(N+1)¾ØÕóH¡£
+    /// é€šè¿‡å°†ä¸Šéƒ¨N-by-Nå—è®¾ç½®ä¸ºè¾“å…¥N-by-NçŸ©é˜µï¼Œ
+    /// å¹¶å°†é™¤æœ€åä¸€è¡Œå’Œæœ€åä¸€åˆ—æ¡ç›®è®¾ç½®ä¸º1ä¹‹å¤–çš„æ‰€æœ‰å…¶ä»–æ¡ç›®è®¾ç½®ä¸º0ï¼Œ
+    /// åˆ›å»º(N+1)-by-(N+1)çŸ©é˜µHã€‚
     template <int N, typename Real>
     requires(1 <= N && N <= 3 && std::is_arithmetic_v<Real>)
     NODISCARD Matrix<N + 1, N + 1, Real> HomogeneousLift(const Matrix<N, N, Real>& matrix);
 
-    /// ÌáÈ¡ÊäÈëN-by-N ¾ØÕóµÄÉÏ(N-1)-by-(N-1)¿é¡£
+    /// æå–è¾“å…¥N-by-N çŸ©é˜µçš„ä¸Š(N-1)-by-(N-1)å—ã€‚
     template <int N, typename Real>
     requires(2 <= N && N <= 4 && std::is_arithmetic_v<Real>)
     NODISCARD Matrix<N - 1, N - 1, Real> HomogeneousProject(const Matrix<N, N, Real>& matrix);

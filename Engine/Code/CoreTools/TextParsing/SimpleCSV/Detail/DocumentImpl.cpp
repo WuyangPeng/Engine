@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 11:06)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 11:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -622,7 +622,7 @@ void CoreTools::SimpleCSV::DocumentImpl::SetAppVersionProperty(const std::string
     }
     catch (...)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Property, "ÎŞĞ§µÄÊôĞÔÖµ¡£"s)
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Property, "æ— æ•ˆçš„å±æ€§å€¼ã€‚"s)
     }
 
     if (value.find('.') != std::string::npos)
@@ -631,7 +631,7 @@ void CoreTools::SimpleCSV::DocumentImpl::SetAppVersionProperty(const std::string
     }
     else
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Property, "ÎŞĞ§µÄÊôĞÔÖµ¡£"s)
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Property, "æ— æ•ˆçš„å±æ€§å€¼ã€‚"s)
     }
 }
 
@@ -645,12 +645,12 @@ void CoreTools::SimpleCSV::DocumentImpl::DoSetAppVersionProperty(const std::stri
         }
         else
         {
-            THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Property, "ÎŞĞ§µÄÊôĞÔÖµ¡£"s)
+            THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Property, "æ— æ•ˆçš„å±æ€§å€¼ã€‚"s)
         }
     }
     else
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Property, "ÎŞĞ§µÄÊôĞÔÖµ¡£"s)
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Property, "æ— æ•ˆçš„å±æ€§å€¼ã€‚"s)
     }
 }
 
@@ -703,7 +703,7 @@ void CoreTools::SimpleCSV::DocumentImpl::SetProperty(Property prop, const std::s
             }
             else
             {
-                THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Property, "ÎŞĞ§µÄÊôĞÔÖµ¡£"s)
+                THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Property, "æ— æ•ˆçš„å±æ€§å€¼ã€‚"s)
             }
         }
         break;
@@ -720,7 +720,7 @@ void CoreTools::SimpleCSV::DocumentImpl::SetProperty(Property prop, const std::s
             }
             else
             {
-                THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Property, "ÎŞĞ§µÄÊôĞÔÖµ¡£"s)
+                THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Property, "æ— æ•ˆçš„å±æ€§å€¼ã€‚"s)
             }
         }
         break;
@@ -747,7 +747,7 @@ void CoreTools::SimpleCSV::DocumentImpl::SetProperty(Property prop, const std::s
             }
             else
             {
-                THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Property, "ÎŞĞ§µÄÊôĞÔÖµ¡£"s)
+                THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Property, "æ— æ•ˆçš„å±æ€§å€¼ã€‚"s)
             }
         }
         break;
@@ -769,7 +769,7 @@ void CoreTools::SimpleCSV::DocumentImpl::SetProperty(Property prop, const std::s
             }
             else
             {
-                THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Property, "ÎŞĞ§µÄÊôĞÔÖµ¡£"s)
+                THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Property, "æ— æ•ˆçš„å±æ€§å€¼ã€‚"s)
             }
         }
         break;
@@ -781,7 +781,7 @@ void CoreTools::SimpleCSV::DocumentImpl::SetProperty(Property prop, const std::s
             }
             else
             {
-                THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Property, "ÎŞĞ§µÄÊôĞÔÖµ¡£"s)
+                THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Property, "æ— æ•ˆçš„å±æ€§å€¼ã€‚"s)
             }
         }
         break;
@@ -882,7 +882,7 @@ void CoreTools::SimpleCSV::DocumentImpl::ExecuteCommand(const CommandAddWorkshee
 
     if (!documentSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("documentÒÑ±»ÊÍ·Å¡£"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("documentå·²è¢«é‡Šæ”¾ã€‚"s));
     }
 
     const std::string emptyWorksheet{
@@ -945,7 +945,7 @@ void CoreTools::SimpleCSV::DocumentImpl::ExecuteCommand(const CommandCloneSheet&
 
     if (documentSharedPtr == nullptr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("documentÒÑ±»ÊÍ·Å¡£"s))
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("documentå·²è¢«é‡Šæ”¾ã€‚"s))
     }
 
     const auto internalId = workbook->CreateInternalSheetId();
@@ -1088,7 +1088,7 @@ CoreTools::SimpleCSV::QueryXmlData CoreTools::SimpleCSV::DocumentImpl::ExecuteQu
 
     if (result == data.cend())
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, "zip ´æµµÖĞ²»´æÔÚÂ·¾¶¡£"s)
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, "zip å­˜æ¡£ä¸­ä¸å­˜åœ¨è·¯å¾„ã€‚"s)
     }
 
     return QueryXmlData{ query.GetXmlPath(), *result };
@@ -1123,7 +1123,7 @@ CoreTools::SimpleCSV::DocumentImpl::ConstXmlDataSharedPtr CoreTools::SimpleCSV::
 
     if (result == data.cend())
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, "zip ´æµµÖĞ²»´æÔÚÂ·¾¶¡£"s)
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, "zip å­˜æ¡£ä¸­ä¸å­˜åœ¨è·¯å¾„ã€‚"s)
     }
 
     return *result;

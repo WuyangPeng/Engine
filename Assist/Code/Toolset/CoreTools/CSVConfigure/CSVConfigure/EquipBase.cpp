@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #include "EquipBase.h"
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
@@ -51,7 +51,7 @@ System::String CSVConfigure::EquipBase::GetEquipName() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("equip±í»ùÀà²»ÔÊĞí»ñÈ¡×Ö·û´®¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("equipè¡¨åŸºç±»ä¸å…è®¸è·å–å­—ç¬¦ä¸²ã€‚"s))
 }
 
 System::TChar CSVConfigure::EquipBase::GetLogo() const noexcept
@@ -72,14 +72,14 @@ CSVConfigure::EquipBase::BoolContainer CSVConfigure::EquipBase::GetMask() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("equip±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("equipè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 int CSVConfigure::EquipBase::GetMaskCount() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("equip±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("equipè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 bool CSVConfigure::EquipBase::GetMask(int index) const
@@ -88,21 +88,21 @@ bool CSVConfigure::EquipBase::GetMask(int index) const
 
     System::UnusedFunction(index);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("equip±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("equipè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 CSVConfigure::EquipBase::BoolContainerConstIter CSVConfigure::EquipBase::GetMaskBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("equip±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("equipè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 CSVConfigure::EquipBase::BoolContainerConstIter CSVConfigure::EquipBase::GetMaskEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("equip±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("equipè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 int CSVConfigure::EquipBase::GetHeroId() const noexcept
@@ -118,6 +118,6 @@ CSVConfigure::EquipBase::ConstHeroSharedPtr CSVConfigure::EquipBase::GetHeroId(c
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("equip±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("equipè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 

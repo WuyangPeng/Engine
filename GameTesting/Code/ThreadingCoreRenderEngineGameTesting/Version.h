@@ -1,19 +1,19 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæÓÎÏ·²âÊÔ°æ±¾£º0.9.0.12 (2023/06/17 11:11)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æ¸¸æˆæµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/17 11:11)
 
 #ifndef THREADING_CORE_RENDER_ENGINE_GAME_TESTING_VERSION_H
 #define THREADING_CORE_RENDER_ENGINE_GAME_TESTING_VERSION_H
 
-//  gTCREGameTestingVersion % 100 ÊÇĞŞ¶©°æ±¾ºÅ
-//  gTCREGameTestingVersion / 100 % 100 ÊÇÄÚ²¿°æ±¾ºÅ
-//  gTCREGameTestingVersion / 10000 % 100 ÊÇ´Î°æ±¾ºÅ
-//  gTCREGameTestingVersion / 1000000 % 100 ÊÇÖ÷°æ±¾ºÅ
+//  gTCREGameTestingVersion % 100 æ˜¯ä¿®è®¢ç‰ˆæœ¬å·
+//  gTCREGameTestingVersion / 100 % 100 æ˜¯å†…éƒ¨ç‰ˆæœ¬å·
+//  gTCREGameTestingVersion / 10000 % 100 æ˜¯æ¬¡ç‰ˆæœ¬å·
+//  gTCREGameTestingVersion / 1000000 % 100 æ˜¯ä¸»ç‰ˆæœ¬å·
 
 constexpr auto gTCREGameTestingVersion = 90102;
 

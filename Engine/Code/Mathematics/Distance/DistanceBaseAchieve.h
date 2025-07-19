@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 15:14)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 15:14)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_ACHIEVE_H
 #define MATHEMATICS_DISTANCE_DISTANCE_ACHIEVE_H
@@ -57,7 +57,7 @@ template <typename Real, typename Vector>
 void Mathematics::DistanceBase<Real, Vector>::SetDifferenceStep(Real newDifferenceStep) noexcept(gAssert < 2 || gMathematicsAssert < 2)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
-    MATHEMATICS_ASSERTION_2(MathType::GetValue(0) < newDifferenceStep, "ÎŞĞ§µÄÏà²î²½½øÖµ\n");
+    MATHEMATICS_ASSERTION_2(MathType::GetValue(0) < newDifferenceStep, "æ— æ•ˆçš„ç›¸å·®æ­¥è¿›å€¼\n");
 
     differenceStep = newDifferenceStep;
     inverseTwoDifferenceStep = MathType::GetRational(1, 2) / differenceStep;
@@ -75,7 +75,7 @@ template <typename Real, typename Vector>
 void Mathematics::DistanceBase<Real, Vector>::SetMaximumIterations(int newMaximumIterations) noexcept(gAssert < 2 || gMathematicsAssert < 2)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
-    MATHEMATICS_ASSERTION_2(0 < newMaximumIterations, "ÎŞĞ§µÄ×î´óµü´ú´ÎÊı\n");
+    MATHEMATICS_ASSERTION_2(0 < newMaximumIterations, "æ— æ•ˆçš„æœ€å¤§è¿­ä»£æ¬¡æ•°\n");
 
     maximumIterations = newMaximumIterations;
 }
@@ -84,7 +84,7 @@ template <typename Real, typename Vector>
 void Mathematics::DistanceBase<Real, Vector>::SetZeroThreshold(Real newZeroThreshold) noexcept(gAssert < 2 || gMathematicsAssert < 2)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
-    MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= newZeroThreshold, "ÎŞĞ§µÄÁÙ½çÖµ\n");
+    MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= newZeroThreshold, "æ— æ•ˆçš„ä¸´ç•Œå€¼\n");
 
     zeroThreshold = newZeroThreshold;
 }
@@ -132,7 +132,7 @@ Real Mathematics::DistanceBase<Real, Vector>::GetDerivative(Real t, const Vector
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    // Ê¹ÓÃÓĞÏŞ²î·Ö½üËÆ£º f'(t) = (f(t + h) - f(t - h))/(2 * h)
+    // ä½¿ç”¨æœ‰é™å·®åˆ†è¿‘ä¼¼ï¼š f'(t) = (f(t + h) - f(t - h))/(2 * h)
     const auto funcPlus = Get(t + differenceStep, lhsVelocity, rhsVelocity);
     const auto funcMinus = Get(t - differenceStep, lhsVelocity, rhsVelocity);
     const auto derivativeApproximation = inverseTwoDifferenceStep * (funcPlus.GetDistance() - funcMinus.GetDistance());
@@ -145,7 +145,7 @@ Real Mathematics::DistanceBase<Real, Vector>::GetDerivativeSquared(Real t, const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    // Èç¹û¼ÆËãÆ½·½¾àÀëµÄµ¼ÊıÎªÌØ¶¨Àà±ğ¸ü¿ìµÄ·½·¨£¬ÅÉÉúÀàÓ¦¸ÃÖØĞ´Ëü¡£
+    // å¦‚æœè®¡ç®—å¹³æ–¹è·ç¦»çš„å¯¼æ•°ä¸ºç‰¹å®šç±»åˆ«æ›´å¿«çš„æ–¹æ³•ï¼Œæ´¾ç”Ÿç±»åº”è¯¥é‡å†™å®ƒã€‚
     const auto distance = Get(t, lhsVelocity, rhsVelocity);
     const auto derivative = GetDerivative(t, lhsVelocity, rhsVelocity);
 
@@ -157,9 +157,9 @@ typename Mathematics::DistanceBase<Real, Vector>::DistanceResultType Mathematics
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    // ÕâÀïµÄ¼ÙÉèÊÇ£¬¾àÀëf(t)ÊÇÒ»¸öÍ¹º¯Êı¡£
-    // f'(tmin) >= 0£¬Ôò×îĞ¡³öÏÖÔÚtmin¡£Èôf'(tmax) <= 0£¬Ôò×îĞ¡³öÏÖÔÚtmax¡£
-    // ·ñÔò£¬f'(0) < 0ÇÒf'(tmax) > 0 Ôò×îĞ¡·¢ÉúÔÚ(tmin,tmax)µÄÒ»Ğ©t¡£
+    // è¿™é‡Œçš„å‡è®¾æ˜¯ï¼Œè·ç¦»f(t)æ˜¯ä¸€ä¸ªå‡¸å‡½æ•°ã€‚
+    // f'(tmin) >= 0ï¼Œåˆ™æœ€å°å‡ºç°åœ¨tminã€‚è‹¥f'(tmax) <= 0ï¼Œåˆ™æœ€å°å‡ºç°åœ¨tmaxã€‚
+    // å¦åˆ™ï¼Œf'(0) < 0ä¸”f'(tmax) > 0 åˆ™æœ€å°å‘ç”Ÿåœ¨(tmin,tmax)çš„ä¸€äº›tã€‚
 
     IntervalDistance<Real, Vector> intervalDistance{ *this, tMin, tMax, lhsVelocity, rhsVelocity };
 
@@ -171,9 +171,9 @@ typename Mathematics::DistanceBase<Real, Vector>::DistanceResultType Mathematics
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    // ÕâÀïµÄ¼ÙÉèÊÇ£¬¾àÀëf(t)ÊÇÒ»¸öÍ¹º¯Êı¡£
-    // f'(tmin) >= 0£¬Ôò×îĞ¡³öÏÖÔÚtmin¡£Èôf'(tmax) <= 0£¬Ôò×îĞ¡³öÏÖÔÚtmax¡£
-    // ·ñÔò£¬f'(0) < 0ÇÒf'(tmax) > 0 Ôò×îĞ¡·¢ÉúÔÚ(tmin,tmax)µÄÒ»Ğ©t¡£
+    // è¿™é‡Œçš„å‡è®¾æ˜¯ï¼Œè·ç¦»f(t)æ˜¯ä¸€ä¸ªå‡¸å‡½æ•°ã€‚
+    // f'(tmin) >= 0ï¼Œåˆ™æœ€å°å‡ºç°åœ¨tminã€‚è‹¥f'(tmax) <= 0ï¼Œåˆ™æœ€å°å‡ºç°åœ¨tmaxã€‚
+    // å¦åˆ™ï¼Œf'(0) < 0ä¸”f'(tmax) > 0 åˆ™æœ€å°å‘ç”Ÿåœ¨(tmin,tmax)çš„ä¸€äº›tã€‚
 
     IntervalDistanceSquared<Real, Vector> intervalDistanceSquared{ *this, tMin, tMax, lhsVelocity, rhsVelocity };
 
