@@ -1,0 +1,68 @@
+{
+  "systemOutputSuite": {
+  },
+
+  "messageBoxSelectionSuite": {
+    "MessageBoxSelectionUseFlagsDataWindowsTesting": 0,
+    "MessageBoxSelectionUseLanguageIdDataWindowsTesting": 0
+  },
+
+  "dynamicLinkSuite": {
+
+  },
+
+  "loadResourceToolsSuite": {
+    "FindResourceWindowsTesting": 1,
+    "LoadResourceWindowsTesting": 1,
+    "LoadStringWindowsTesting": 1
+  },
+
+  "enumResourceToolsSuite": {
+    "EnumResourceToolsWindowsTesting": 1,
+    "ResourceEnumWindowsTesting": 1
+  },
+
+  "openGLSuite": {
+    "OpenGLWglSwapIntervalTesting": 1,
+    "OpenGLGetCurrentWglContextTesting": 1,
+    "OpenGLGetWglProcAddressTesting": 1,
+    "OpenGLSwapDeviceBuffersTesting": 1
+  },
+
+  "windowsSuite": {
+    "WindowsFontInformationTesting": 1,
+    "WindowsUserTesting": 1
+  },
+
+  "windowsCreateSuite": {
+    "CreateSystemWindowTesting": 1,
+    "GetHInstanceTesting": 1,
+    "WindowsCreateMenuTesting": 1
+  },
+
+  "windowsSystemSuite": {
+    "GetActiveWindowTesting": 1,
+    "GetSystemClientRectTesting": 1
+  },
+
+  "windowsProcessSuite": {
+    "GetMessageTesting": 1,
+    "PeekMessageTesting": 1,
+    "PostQuitMessageTesting": 1,
+    "ValidateRectTesting": 1,
+    "DefWindowProcTesting": 1,
+    "MessageBoxTesting": 0,
+    "DestroyWindowTesting": 1,
+    "SendMessageTesting": 1,
+    "GetCommandLineTesting": 1,
+    "WindowPaintTesting": 1
+  },
+
+  "windowsRegisterSuite": {
+    "GetStockObjectTesting": 1,
+    "LoadCursorTesting": 1,
+    "LoadIconTesting": 1,
+    "RegisterClassTesting": 1,
+    "RegisterWindowMessageTesting": 1
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "helperSuite": {
+
+  },
+
+  "configurationSuite": {
+
+  },
+
+  "interfaceSuite": {
+
+  },
+
+  "csynUtilSuite": {
+
+  },
+
+  "directSoundSuite": {
+
+  },
+
+  "oggSuite": {
+
+  },
+
+  "openALSuite": {
+
+  },
+
+  "vorbisSuite": {
+
+  },
+
+  "freeAlutSuite": {
+
+  }
+}

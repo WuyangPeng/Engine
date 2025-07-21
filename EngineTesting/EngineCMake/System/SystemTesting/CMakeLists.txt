@@ -15,24 +15,4 @@ else ()
     add_executable(SystemTesting ${SRC_DIR_LIST})
 endif ()
 
-if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
-
-    if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
-
-        set(DESTINATION_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../x64/CMake/DebugWindows/Configuration)
-
-    else ()
-
-        set(DESTINATION_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../x64/CMake/ReleaseWindows/Configuration)
-
-    endif ()
-
-    set(SOURCE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../EngineWindows/System/SystemTesting/Configuration/SystemTesting.json)
-
-    message("CopyFrom: ${SOURCE_PATH}")
-    message("CopyTo: ${DESTINATION_PATH}")
-    file(COPY ${SOURCE_PATH}/ DESTINATION ${DESTINATION_PATH})
-    
-endif ()
-
 # TODO: 如有需要，请添加测试并安装目标。
