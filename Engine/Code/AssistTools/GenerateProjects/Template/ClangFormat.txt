@@ -1,4 +1,4 @@
-﻿# http://clang.llvm.org/docs/ClangFormatStyleOptions.html
+# http://clang.llvm.org/docs/ClangFormatStyleOptions.html
 ---
 Language: Cpp
 BasedOnStyle: Microsoft
