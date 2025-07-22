@@ -18,6 +18,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/PickLine.h"
+#include "Mathematics/Algebra/MatrixDetail.h"
 
 Rendering::CameraTesting::CameraTesting(const OStreamShared& stream)
     : ParentType{ stream },
@@ -100,67 +101,67 @@ bool Rendering::CameraTesting::DefaultProjectionViewMatrixTest()
     constexpr auto identityMatrix = Matrix::GetIdentityMatrix();
     const auto camera = Camera::Create(false, DepthType::MinusOneToOne, epsilon);
 
-#ifdef MATHEMATICS_USE_MATRIX_VECTOR
+    #ifdef MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrixApproximateFunction, camera->GetProjectionViewMatrix(), camera->GetPostProjectionMatrix() * (camera->GetProjectionMatrix() * camera->GetViewMatrix()) * camera->GetPreViewMatrix(), epsilon);
 
-#else  // !MATHEMATICS_USE_MATRIX_VECTOR
+    #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrixApproximateFunction, camera->GetProjectionViewMatrix(), camera->GetPreViewMatrix() * (camera->GetViewMatrix() * camera->GetProjectionMatrix()) * camera->GetPostProjectionMatrix(), epsilon);
 
-#endif  // MATHEMATICS_USE_MATRIX_VECTOR
+    #endif  // MATHEMATICS_USE_MATRIX_VECTOR
 
     const auto matrix0 = viewVolumeTool.ComputeMatrix(epsilon);
 
     camera->SetPreViewMatrix(matrix0);
 
-#ifdef MATHEMATICS_USE_MATRIX_VECTOR
+    #ifdef MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrixApproximateFunction, camera->GetProjectionViewMatrix(), camera->GetPostProjectionMatrix() * (camera->GetProjectionMatrix() * camera->GetViewMatrix()) * camera->GetPreViewMatrix(), epsilon);
 
-#else  // !MATHEMATICS_USE_MATRIX_VECTOR
+    #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrixApproximateFunction, camera->GetProjectionViewMatrix(), camera->GetPreViewMatrix() * (camera->GetViewMatrix() * camera->GetProjectionMatrix()) * camera->GetPostProjectionMatrix(), epsilon);
 
-#endif  // MATHEMATICS_USE_MATRIX_VECTOR
+    #endif  // MATHEMATICS_USE_MATRIX_VECTOR
 
     const auto matrix1 = viewVolumeTool.ComputeMatrix(epsilon);
 
     camera->SetPostProjectionMatrix(matrix1);
 
-#ifdef MATHEMATICS_USE_MATRIX_VECTOR
+    #ifdef MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrixApproximateFunction, camera->GetProjectionViewMatrix(), camera->GetPostProjectionMatrix() * (camera->GetProjectionMatrix() * camera->GetViewMatrix()) * camera->GetPreViewMatrix(), epsilon);
 
-#else  // !MATHEMATICS_USE_MATRIX_VECTOR
+    #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrixApproximateFunction, camera->GetProjectionViewMatrix(), camera->GetPreViewMatrix() * (camera->GetViewMatrix() * camera->GetProjectionMatrix()) * camera->GetPostProjectionMatrix(), epsilon);
 
-#endif  // MATHEMATICS_USE_MATRIX_VECTOR
+    #endif  // MATHEMATICS_USE_MATRIX_VECTOR
 
     camera->SetPreViewMatrix(identityMatrix);
 
-#ifdef MATHEMATICS_USE_MATRIX_VECTOR
+    #ifdef MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrixApproximateFunction, camera->GetProjectionViewMatrix(), camera->GetPostProjectionMatrix() * (camera->GetProjectionMatrix() * camera->GetViewMatrix()) * camera->GetPreViewMatrix(), epsilon);
 
-#else  // !MATHEMATICS_USE_MATRIX_VECTOR
+    #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrixApproximateFunction, camera->GetProjectionViewMatrix(), camera->GetPreViewMatrix() * (camera->GetViewMatrix() * camera->GetProjectionMatrix()) * camera->GetPostProjectionMatrix(), epsilon);
 
-#endif  // MATHEMATICS_USE_MATRIX_VECTOR
+    #endif  // MATHEMATICS_USE_MATRIX_VECTOR
 
     camera->SetPostProjectionMatrix(identityMatrix);
 
-#ifdef MATHEMATICS_USE_MATRIX_VECTOR
+    #ifdef MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrixApproximateFunction, camera->GetProjectionViewMatrix(), camera->GetPostProjectionMatrix() * (camera->GetProjectionMatrix() * camera->GetViewMatrix()) * camera->GetPreViewMatrix(), epsilon);
 
-#else  // !MATHEMATICS_USE_MATRIX_VECTOR
+    #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrixApproximateFunction, camera->GetProjectionViewMatrix(), camera->GetPreViewMatrix() * (camera->GetViewMatrix() * camera->GetProjectionMatrix()) * camera->GetPostProjectionMatrix(), epsilon);
 
-#endif  // MATHEMATICS_USE_MATRIX_VECTOR
+    #endif  // MATHEMATICS_USE_MATRIX_VECTOR
 
     return true;
 }
@@ -193,15 +194,15 @@ bool Rendering::CameraTesting::ProjectionViewMatrixTest()
     camera->SetPreViewMatrix(matrix0);
     camera->SetPostProjectionMatrix(matrix1);
 
-#ifdef MATHEMATICS_USE_MATRIX_VECTOR
+    #ifdef MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrixApproximateFunction, camera->GetProjectionViewMatrix(), camera->GetPostProjectionMatrix() * (camera->GetProjectionMatrix() * camera->GetViewMatrix()) * camera->GetPreViewMatrix(), epsilon);
 
-#else  // !MATHEMATICS_USE_MATRIX_VECTOR
+    #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrixApproximateFunction, camera->GetProjectionViewMatrix(), camera->GetPreViewMatrix() * (camera->GetViewMatrix() * camera->GetProjectionMatrix()) * camera->GetPostProjectionMatrix(), epsilon);
 
-#endif  // MATHEMATICS_USE_MATRIX_VECTOR
+    #endif  // MATHEMATICS_USE_MATRIX_VECTOR
 
     return true;
 }
@@ -217,15 +218,15 @@ bool Rendering::CameraTesting::SetProjectionMatrixTest()
     camera->SetPreViewMatrix(matrix0);
     camera->SetPostProjectionMatrix(matrix1);
 
-#ifdef MATHEMATICS_USE_MATRIX_VECTOR
+    #ifdef MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrixApproximateFunction, camera->GetProjectionViewMatrix(), camera->GetPostProjectionMatrix() * (camera->GetProjectionMatrix() * camera->GetViewMatrix()) * camera->GetPreViewMatrix(), epsilon);
 
-#else  // !MATHEMATICS_USE_MATRIX_VECTOR
+    #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrixApproximateFunction, camera->GetProjectionViewMatrix(), camera->GetPreViewMatrix() * (camera->GetViewMatrix() * camera->GetProjectionMatrix()) * camera->GetPostProjectionMatrix(), epsilon);
 
-#endif  // MATHEMATICS_USE_MATRIX_VECTOR
+    #endif  // MATHEMATICS_USE_MATRIX_VECTOR
 
     const auto point0 = viewVolumeTool.ComputePosition();
     const auto point1 = viewVolumeTool.ComputePosition();
@@ -236,15 +237,15 @@ bool Rendering::CameraTesting::SetProjectionMatrixTest()
 
     camera->SetProjectionMatrix(point0, point1, point2, point3, nearExtrude, farExtrude);
 
-#ifdef MATHEMATICS_USE_MATRIX_VECTOR
+    #ifdef MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrixApproximateFunction, camera->GetProjectionViewMatrix(), camera->GetPostProjectionMatrix() * camera->GetProjectionMatrix() * camera->GetViewMatrix() * camera->GetPreViewMatrix(), epsilon);
 
-#else  // !MATHEMATICS_USE_MATRIX_VECTOR
+    #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
     ASSERT_APPROXIMATE_USE_FUNCTION(matrixApproximateFunction, camera->GetProjectionViewMatrix(), camera->GetPreViewMatrix() * camera->GetViewMatrix() * camera->GetProjectionMatrix() * camera->GetPostProjectionMatrix(), epsilon);
 
-#endif  // MATHEMATICS_USE_MATRIX_VECTOR
+    #endif  // MATHEMATICS_USE_MATRIX_VECTOR
 
     return true;
 }
