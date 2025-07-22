@@ -19,6 +19,7 @@
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/PickLine.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 
 Rendering::CameraTesting::CameraTesting(const OStreamShared& stream)
     : ParentType{ stream },
