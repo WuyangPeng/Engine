@@ -41,5 +41,12 @@ int64_t System::GetTimeInSeconds() noexcept
 
 void System::SystemPause() noexcept
 {
-    SystemCommand("PAUSE");
+#ifdef SYSTEM_PLATFORM_WIN32
+
+     SystemCommand("PAUSE");
+
+#else  // !SYSTEM_PLATFORM_WIN32
+
+
+#endif  // SYSTEM_PLATFORM_WIN32
 }
