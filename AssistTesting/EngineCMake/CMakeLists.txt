@@ -33,21 +33,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	include_directories(/data/coding/EngineTesting/Code/Network/NetworkTesting/NetworkMessageSuite/Detail/)
 	include_directories(/data/coding/EngineTesting/EngineWindows)
 	include_directories(/data/coding/Assist/AssistWindows)	
-	include_directories(/data/coding/AssistTesting/Code)	
-	
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-
-	include_directories($ENV{LibsEnvironmentBaseInclude}/)
-	include_directories($ENV{LibsEnvironmentExtendInclude}/)
-	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../Code)
-	include_directories($ENV{EngineInclude}/)
-	include_directories($ENV{AssistInclude}/)
-
-else()
-    # 其他平台下的操作
-endif()
-
-if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+	include_directories(/data/coding/AssistTesting/Code)
 
 	link_directories(/data/coding/Libs/boost/stage/lib)
 	link_directories(/data/coding/Libs/ACE/ACE_wrappers/lib)
@@ -124,34 +110,54 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 		link_libraries(libDatabaseEntity.so)
 
 	endif ()
-	
-	link_libraries(libboost_system.so)	
-	link_libraries(libboost_timer.so)	
+
+	link_libraries(libboost_system.so)
+	link_libraries(libboost_timer.so)
 	link_libraries(libboost_date_time.so)
 	link_libraries(libboost_thread.so)
-	link_libraries(libACE.so)	
-	link_libraries(libmongocxx.so)	
+	link_libraries(libACE.so)
+	link_libraries(libmongocxx.so)
 	link_libraries(libmysqlcppconnx.so)
 	link_libraries(libactivemq-cpp.so)
 	link_libraries(libminiz.a)
 	link_libraries(libhiredis.so)
 	link_libraries(libGL.so)
 	link_libraries(libssl.so)
-	link_libraries(libcrypto.so)	
-	link_libraries(libprotobuf.a)	
+	link_libraries(libcrypto.so)
+	link_libraries(libprotobuf.a)
 
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-	
+
+	include_directories($ENV{LibsEnvironmentBaseInclude}/)
+	include_directories($ENV{LibsEnvironmentExtendInclude}/)
+	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../Code)
+	include_directories($ENV{EngineInclude}/)
+	include_directories($ENV{AssistInclude}/)
+
+	link_directories($ENV{LibsEnvironmentX64Lib}/)
+
+	if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+
+		link_directories($ENV{LibsEnvironmentX64DebugLib}/)
+		link_directories($ENV{EngineEngineering}/x64/CMake/DebugWindows/)
+		link_directories($ENV{AssistEngineering}/x64/CMake/DebugWindows/)
+
+	else()
+
+		link_directories($ENV{LibsEnvironmentX64ReleaseLib}/)
+		link_directories($ENV{EngineEngineering}/x64/CMake/ReleaseWindows)
+		link_directories($ENV{AssistEngineering}/x64/CMake/ReleaseWindows/)
+
+	endif()
 
 else()
+
     # 其他平台下的操作
+
 endif()
 
 if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
 
-	link_directories($ENV{LibsEnvironmentX64DebugLib}/)   
-	link_directories($ENV{EngineEngineering}/x64/CMake/DebugWindows/)  
-	link_directories($ENV{AssistEngineering}/x64/CMake/DebugWindows/)   
 	link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../x64/CMake/DebugWindows)
 
 	set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../x64/CMake/DebugWindows)
@@ -159,17 +165,75 @@ if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
 
 else()
 
-	link_directories($ENV{LibsEnvironmentX64ReleaseLib}/) 
-	link_directories($ENV{EngineEngineering}/x64/CMake/ReleaseWindows)  
-	link_directories($ENV{AssistEngineering}/x64/CMake/ReleaseWindows/)  
 	link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../x64/CMake/ReleaseWindows)
 
 	set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../x64/CMake/ReleaseWindows)
 	set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../x64/CMake/ReleaseWindows)
 
-endif() 
- 
-link_directories($ENV{LibsEnvironmentX64Lib}/)
+endif()
+
+
+if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+
+	set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../x64/CMake/DebugWindows)
+	set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../x64/CMake/DebugWindows)
+	set(BAT_NAME CopyDebugX64Dll)
+
+else ()
+
+	set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../x64/CMake/ReleaseWindows)
+	set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../x64/CMake/ReleaseWindows)
+	set(BAT_NAME CopyReleaseX64Dll)
+
+endif ()
+
+if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
+
+	# 编译选项（编译器）
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}   -fPIC")
+
+	# 符号可见性
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}   -fvisibility=hidden")
+
+	set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-z,defs")
+
+endif ()
+
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+
+	# 创建目录
+	if (NOT EXISTS ${EXECUTABLE_OUTPUT_PATH})
+		file(MAKE_DIRECTORY ${EXECUTABLE_OUTPUT_PATH})
+		message(STATUS "Created directory: ${EXECUTABLE_OUTPUT_PATH}")
+	else ()
+		message(STATUS "Directory already exists: ${EXECUTABLE_OUTPUT_PATH}")
+	endif ()
+
+	# 执行批处理文件 CopyDebugX64Dll.bat，并传递参数 x64 和 目标路径
+	add_custom_target(
+			RunBatFile ALL
+			COMMAND
+			COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/../../Bat/${BAT_NAME}.bat x64 ${EXECUTABLE_OUTPUT_PATH}
+			COMMENT "Running ${BAT_NAME}.bat after build"
+	)
+
+	# 检查执行结果
+	if (result)
+		message(WARNING "Batch file execution failed with exit code: ${result}")
+		message("Error output: ${error}")
+	else ()
+		message(STATUS "Batch file executed successfully.")
+		message("Output: ${EXECUTABLE_OUTPUT_PATH}")
+	endif ()
+
+	add_custom_target(copy_files ALL
+			COMMAND ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -P ${CMAKE_CURRENT_SOURCE_DIR}/CopyFiles.cmake
+			COMMENT "Copying files to destination before build"
+	)
+
+endif ()
 
 # 包含子项目。
 add_subdirectory ("Editor/AnimationEditor/AnimationEditorTesting")
