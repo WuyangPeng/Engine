@@ -233,6 +233,11 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 			COMMENT "Copying files to destination before build"
 	)
 
+	add_custom_target(copy_testing_files ALL
+			COMMAND ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -P ${CMAKE_CURRENT_SOURCE_DIR}/CopyTestingFiles.cmake
+			COMMENT "Copying Testing files to destination before build"
+	)
+
 endif ()
 
 # 包含子项目。
@@ -267,6 +272,7 @@ add_subdirectory ("Editor/TextureEditor/TextureEditorAssistTesting")
 add_subdirectory ("Editor/UserInterfaceEditor/UserInterfaceEditorTesting")
 add_subdirectory ("Editor/UserInterfaceEditor/UserInterfaceEditorAssistTesting")
 
+add_subdirectory ("Example/AnimationExample/AnimationExampleTesting")
 add_subdirectory ("Example/ArtificialIntelligenceExample/ArtificialIntelligenceExampleTesting")
 add_subdirectory ("Example/AssistToolsExample/AssistToolsExampleTesting")  
 add_subdirectory ("Example/CoreToolsExample/CoreToolsExampleTesting")  
