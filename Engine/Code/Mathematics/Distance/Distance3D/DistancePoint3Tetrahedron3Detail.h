@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 16:34)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 16:34)
 
 #ifndef MATHEMATICS_DISTANCE_DIST_POINT3_TETRAHEDRON3_DETAIL_H
 #define MATHEMATICS_DISTANCE_DIST_POINT3_TETRAHEDRON3_DETAIL_H
@@ -58,11 +58,11 @@ typename Mathematics::DistancePoint3Tetrahedron3<Real>::DistanceResult Mathemati
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    /// ÎªËÄÃæÌåµÄÃæ¹¹ÔìÆ½Ãæ¡£ ·¨ÏßÊÇÍâ²¿Ö¸Ïò£¬µ«Î´Ö¸¶¨Îªµ¥Î»³¤¶È¡£
-    /// ÎÒÃÇÖ»ĞèÒªÖªµÀ²éÑ¯µãµÄ²àÃæ£¬Òò´Ë¿ÉÒÔÍ¨¹ı²»¼ÆËãµ¥Î»³¤¶ÈµÄ·¨ÏßÀ´½ÚÊ¡ÖÜÆÚ¡£
+    /// ä¸ºå››é¢ä½“çš„é¢æ„é€ å¹³é¢ã€‚ æ³•çº¿æ˜¯å¤–éƒ¨æŒ‡å‘ï¼Œä½†æœªæŒ‡å®šä¸ºå•ä½é•¿åº¦ã€‚
+    /// æˆ‘ä»¬åªéœ€è¦çŸ¥é“æŸ¥è¯¢ç‚¹çš„ä¾§é¢ï¼Œå› æ­¤å¯ä»¥é€šè¿‡ä¸è®¡ç®—å•ä½é•¿åº¦çš„æ³•çº¿æ¥èŠ‚çœå‘¨æœŸã€‚
     auto planes = tetrahedron.GetPlanes();
 
-    /// È·¶¨ÄÄĞ©Ãæ¶Ô²éÑ¯µã¿É¼û¡£ µãµ½Èı½ÇĞÎµÄ¾àÀë²éÑ¯Ö»ĞèÒª´¦ÀíÕâĞ©¡£
+    /// ç¡®å®šå“ªäº›é¢å¯¹æŸ¥è¯¢ç‚¹å¯è§ã€‚ ç‚¹åˆ°ä¸‰è§’å½¢çš„è·ç¦»æŸ¥è¯¢åªéœ€è¦å¤„ç†è¿™äº›ã€‚
     auto minSqrDistance = MathType::maxReal;
     auto minTetraClosest = Vector3Type::GetZero();
     constexpr auto tetrahedronSize = 4;
@@ -86,12 +86,12 @@ typename Mathematics::DistancePoint3Tetrahedron3<Real>::DistanceResult Mathemati
     Vector3Type closestPoint{};
     if (MathType::Approximate(minSqrDistance, MathType::maxReal))
     {
-        // ²éÑ¯µãÔÚ¡°ÊµĞÄ¡±ËÄÃæÌåÖ®Íâ¡£
+        // æŸ¥è¯¢ç‚¹åœ¨â€œå®å¿ƒâ€å››é¢ä½“ä¹‹å¤–ã€‚
         closestPoint = minTetraClosest;
     }
     else
     {
-        // ²éÑ¯µãÔÚ¡°ÊµĞÄ¡±ËÄÃæÌåÄÚ²¿¡£ ·µ»ØÁã¾àÀë¡£ ×î½Ó½üµÄµãÊÇÏàÍ¬µÄ¡£
+        // æŸ¥è¯¢ç‚¹åœ¨â€œå®å¿ƒâ€å››é¢ä½“å†…éƒ¨ã€‚ è¿”å›é›¶è·ç¦»ã€‚ æœ€æ¥è¿‘çš„ç‚¹æ˜¯ç›¸åŒçš„ã€‚
         minSqrDistance = MathType::GetValue(0);
         closestPoint = point;
     }

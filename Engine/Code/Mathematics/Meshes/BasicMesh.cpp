@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒýÇæ°æ±¾£º0.9.0.12 (2023/06/09 10:17)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“Žç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 10:17)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -28,7 +28,7 @@ Mathematics::BasicMesh::BasicMesh(int numVertices, int numTriangles, const std::
       triangles(numTriangles),
       isValid{ true }
 {
-    MATHEMATICS_ASSERTION_0(numVertices > 0 && numTriangles > 0, "ÊäÈëÎÞÐ§¡£\n");
+    MATHEMATICS_ASSERTION_0(numVertices > 0 && numTriangles > 0, "è¾“å…¥æ— æ•ˆã€‚\n");
 
     if (numVertices <= 0 || numTriangles <= 0 || indices.empty())
     {

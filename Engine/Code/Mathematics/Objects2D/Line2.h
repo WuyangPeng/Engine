@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 11:17)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 11:17)
 
 #ifndef MATHEMATICS_OBJECTS_2D_LINE2_H
 #define MATHEMATICS_OBJECTS_2D_LINE2_H
@@ -32,8 +32,8 @@ namespace Mathematics
         using Vector2ToolsType = Vector2Tools<Real>;
 
     public:
-        // Ïß±íÊ¾ÎªP+t*D£¬ÆäÖĞPÊÇÏßÔ­µã£¬DÊÇµ¥Î»³¤¶ÈµÄ·½ÏòÏòÁ¿£¬tÊÇÈÎÒâÊµÊı¡£
-        // ÓÃ»§±ØĞëÈ·±£DÊÇµ¥Î»³¤¶È¡£
+        // çº¿è¡¨ç¤ºä¸ºP+t*Dï¼Œå…¶ä¸­Pæ˜¯çº¿åŸç‚¹ï¼ŒDæ˜¯å•ä½é•¿åº¦çš„æ–¹å‘å‘é‡ï¼Œtæ˜¯ä»»æ„å®æ•°ã€‚
+        // ç”¨æˆ·å¿…é¡»ç¡®ä¿Dæ˜¯å•ä½é•¿åº¦ã€‚
 
         Line2(const Vector2Type& origin, const Vector2Type& direction, Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
@@ -47,7 +47,7 @@ namespace Mathematics
         void SetOrigin(const Vector2Type& newOrigin) noexcept;
         void SetDirection(const Vector2Type& newDirection) noexcept;
 
-        // Line±íÊ¾Dot(N,X) = c¡£N±íÊ¾µ¥Î»·¨Ïß£¬c±íÊ¾ÏßµÄ³£Á¿c£¬XÊÇÏßÉÏµÄÈÎÒâµã¡£
+        // Lineè¡¨ç¤ºDot(N,X) = cã€‚Nè¡¨ç¤ºå•ä½æ³•çº¿ï¼Œcè¡¨ç¤ºçº¿çš„å¸¸é‡cï¼ŒXæ˜¯çº¿ä¸Šçš„ä»»æ„ç‚¹ã€‚
         NODISCARD Real DotProduct() const noexcept;
 
     private:
@@ -59,7 +59,7 @@ namespace Mathematics
     template <typename Real>
     NODISCARD bool Approximate(const Line2<Real>& lhs, const Line2<Real>& rhs, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-    // µ÷ÊÔÊä³ö
+    // è°ƒè¯•è¾“å‡º
     template <typename Real>
     std::ostream& operator<<(std::ostream& outFile, const Line2<Real>& line);
 

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/04/23 10:52)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/04/23 10:52)
 
 #include "UnitTestTesting.h"
 #include "Detail/TestEnum.h"
@@ -34,7 +34,7 @@ bool CoreTools::UnitTestTesting::IsValid() const noexcept
 
 void CoreTools::UnitTestTesting::PrintTipsMessage()
 {
-    GetStream() << "Õâ¸ö²âÊÔ²âÊÔµ¥Ôª²âÊÔ±¾Éí£¬»á³öÏÖ²âÊÔÊ§°ÜºÍ²âÊÔ´íÎó£¬Çë°´¡°·ñ¡±È¡Ïû¡£\n";
+    GetStream() << "è¿™ä¸ªæµ‹è¯•æµ‹è¯•å•å…ƒæµ‹è¯•æœ¬èº«ï¼Œä¼šå‡ºç°æµ‹è¯•å¤±è´¥å’Œæµ‹è¯•é”™è¯¯ï¼Œè¯·æŒ‰â€œå¦â€å–æ¶ˆã€‚\n";
 
     System::SystemPause();
 }
@@ -72,13 +72,13 @@ void CoreTools::UnitTestTesting::NameTest()
 {
     ASSERT_EQUAL(GetName(), typeid(*this).name());
 
-    /// NameTest°üº¬Ò»¸öASSERT_EQUAL³É¹¦²âÊÔºÍÒ»¸öASSERT_NOT_THROW³É¹¦²âÊÔ¡£
+    /// NameTeståŒ…å«ä¸€ä¸ªASSERT_EQUALæˆåŠŸæµ‹è¯•å’Œä¸€ä¸ªASSERT_NOT_THROWæˆåŠŸæµ‹è¯•ã€‚
     passNumber += 2;
 }
 
 void CoreTools::UnitTestTesting::StreamTest() noexcept
 {
-    /// StreamTest°üº¬0¸öASSERT³É¹¦²âÊÔºÍÒ»¸öASSERT_NOT_THROW³É¹¦²âÊÔ¡£
+    /// StreamTeståŒ…å«0ä¸ªASSERTæˆåŠŸæµ‹è¯•å’Œä¸€ä¸ªASSERT_NOT_THROWæˆåŠŸæµ‹è¯•ã€‚
     passNumber += 1;
 }
 
@@ -88,14 +88,14 @@ void CoreTools::UnitTestTesting::AssertTestTest()
     ASSERT_EQUAL(GetFailedNumber(), failNumber);
     ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
-    GetStream() << "ÒÔÏÂ´úÂë²âÊÔµ¥Ôª²âÊÔÎ´Í¨¹ıµÄÇé¿ö¡£´æÔÚÒ»¸ö²âÊÔÊ§°Ü£¡\n";
+    GetStream() << "ä»¥ä¸‹ä»£ç æµ‹è¯•å•å…ƒæµ‹è¯•æœªé€šè¿‡çš„æƒ…å†µã€‚å­˜åœ¨ä¸€ä¸ªæµ‹è¯•å¤±è´¥ï¼\n";
 
     ASSERT_TRUE(true);
     ASSERT_TRUE(false);
 
-    GetStream() << "ÒÔÉÏ´úÂë²âÊÔµ¥Ôª²âÊÔÎ´Í¨¹ıµÄÇé¿ö¡£\n";
+    GetStream() << "ä»¥ä¸Šä»£ç æµ‹è¯•å•å…ƒæµ‹è¯•æœªé€šè¿‡çš„æƒ…å†µã€‚\n";
 
-    /// ÉÏÃæÓĞ5¸ö²âÊÔ¡£ÆäÖĞ4¸öÎª³É¹¦²âÊÔ£¬1¸öÎªÊ§°Ü²âÊÔ¡£
+    /// ä¸Šé¢æœ‰5ä¸ªæµ‹è¯•ã€‚å…¶ä¸­4ä¸ªä¸ºæˆåŠŸæµ‹è¯•ï¼Œ1ä¸ªä¸ºå¤±è´¥æµ‹è¯•ã€‚
     passNumber += 4;
     failNumber += 1;
 
@@ -103,7 +103,7 @@ void CoreTools::UnitTestTesting::AssertTestTest()
     ASSERT_EQUAL(GetFailedNumber(), failNumber);
     ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
-    /// ÉÏÃæÓĞ3¸öASSERT_EQUAL³É¹¦²âÊÔ£¬¼ÓÉÏÒ»¸öASSERT_NOT_THROW³É¹¦²âÊÔ¡£
+    /// ä¸Šé¢æœ‰3ä¸ªASSERT_EQUALæˆåŠŸæµ‹è¯•ï¼ŒåŠ ä¸Šä¸€ä¸ªASSERT_NOT_THROWæˆåŠŸæµ‹è¯•ã€‚
     passNumber += 4;
 }
 
@@ -111,7 +111,7 @@ void CoreTools::UnitTestTesting::AssertTrueTest() noexcept
 {
     AssertTrue();
 
-    /// AssertTrueTest°üº¬1¸öASSERT³É¹¦²âÊÔ¡£
+    /// AssertTrueTeståŒ…å«1ä¸ªASSERTæˆåŠŸæµ‹è¯•ã€‚
     passNumber += 2;
 }
 
@@ -121,14 +121,14 @@ void CoreTools::UnitTestTesting::ErrorTestTest()
     ASSERT_EQUAL(GetFailedNumber(), failNumber);
     ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
-    GetStream() << "ÒÔÏÂ´úÂë²âÊÔµ¥Ôª²âÊÔÎ´Í¨¹ıµÄÇé¿ö¡£´æÔÚÒ»¸ö²âÊÔ´íÎó£¡\n";
+    GetStream() << "ä»¥ä¸‹ä»£ç æµ‹è¯•å•å…ƒæµ‹è¯•æœªé€šè¿‡çš„æƒ…å†µã€‚å­˜åœ¨ä¸€ä¸ªæµ‹è¯•é”™è¯¯ï¼\n";
 
     ErrorTest(true, CORE_TOOLS_FUNCTION_DESCRIBED);
     ErrorTest(false, CORE_TOOLS_FUNCTION_DESCRIBED);
 
-    GetStream() << "ÒÔÉÏ´úÂë²âÊÔµ¥Ôª²âÊÔÎ´Í¨¹ıµÄÇé¿ö¡£\n";
+    GetStream() << "ä»¥ä¸Šä»£ç æµ‹è¯•å•å…ƒæµ‹è¯•æœªé€šè¿‡çš„æƒ…å†µã€‚\n";
 
-    /// ÉÏÃæÓĞ5¸ö²âÊÔ¡£ÆäÖĞ4¸öÎª³É¹¦²âÊÔ£¬1¸öÎª´íÎó²âÊÔ¡£
+    /// ä¸Šé¢æœ‰5ä¸ªæµ‹è¯•ã€‚å…¶ä¸­4ä¸ªä¸ºæˆåŠŸæµ‹è¯•ï¼Œ1ä¸ªä¸ºé”™è¯¯æµ‹è¯•ã€‚
     passNumber += 4;
     errorNumber += 1;
 
@@ -136,7 +136,7 @@ void CoreTools::UnitTestTesting::ErrorTestTest()
     ASSERT_EQUAL(GetFailedNumber(), failNumber);
     ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
-    /// ÉÏÃæÓĞ3¸öASSERT_EQUAL³É¹¦²âÊÔ£¬¼ÓÉÏÒ»¸öASSERT_NOT_THROW³É¹¦²âÊÔ¡£
+    /// ä¸Šé¢æœ‰3ä¸ªASSERT_EQUALæˆåŠŸæµ‹è¯•ï¼ŒåŠ ä¸Šä¸€ä¸ªASSERT_NOT_THROWæˆåŠŸæµ‹è¯•ã€‚
     passNumber += 4;
 }
 
@@ -146,7 +146,7 @@ void CoreTools::UnitTestTesting::AssertEqualTest()
     ASSERT_EQUAL(GetFailedNumber(), failNumber);
     ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
-    GetStream() << "ÒÔÏÂ´úÂë²âÊÔµ¥Ôª²âÊÔÎ´Í¨¹ıµÄÇé¿ö¡£´æÔÚÊ®Îå¸ö²âÊÔÊ§°Ü£¡\n";
+    GetStream() << "ä»¥ä¸‹ä»£ç æµ‹è¯•å•å…ƒæµ‹è¯•æœªé€šè¿‡çš„æƒ…å†µã€‚å­˜åœ¨åäº”ä¸ªæµ‹è¯•å¤±è´¥ï¼\n";
 
     int* ptr{ nullptr };
 
@@ -175,28 +175,28 @@ void CoreTools::UnitTestTesting::AssertEqualTest()
     ASSERT_UNEQUAL(1, 1);
     ASSERT_UNEQUAL(1, 2);
 
-    ASSERT_EQUAL_USE_MESSAGE(1, 1, "²âÊÔASSERT_EQUAL_USE_MESSAGE");
-    ASSERT_EQUAL_USE_MESSAGE(1, 2, "²âÊÔASSERT_EQUAL_USE_MESSAGE");
-    ASSERT_UNEQUAL_USE_MESSAGE(1, 1, "²âÊÔASSERT_UNEQUAL_USE_MESSAGE");
-    ASSERT_UNEQUAL_USE_MESSAGE(1, 2, "²âÊÔASSERT_UNEQUAL_USE_MESSAGE");
-    ASSERT_APPROXIMATE_USE_MESSAGE(1.0f, 1.01f, 0.02f, "²âÊÔASSERT_APPROXIMATE_USE_MESSAGE");
-    ASSERT_APPROXIMATE_USE_MESSAGE(1.0f, 1.11f, 0.1f, "²âÊÔASSERT_APPROXIMATE_USE_MESSAGE");
-    ASSERT_EQUAL_NULL_PTR_USE_MESSAGE(ptr, "²âÊÔASSERT_EQUAL_NULL_PTR_USE_MESSAGE");
-    ASSERT_EQUAL_NULL_PTR_USE_MESSAGE(this, "²âÊÔASSERT_EQUAL_NULL_PTR_USE_MESSAGE");
-    ASSERT_UNEQUAL_NULL_PTR_USE_MESSAGE(ptr, "²âÊÔASSERT_UNEQUAL_NULL_PTR_USE_MESSAGE");
-    ASSERT_UNEQUAL_NULL_PTR_USE_MESSAGE(this, "²âÊÔASSERT_UNEQUAL_NULL_PTR_USE_MESSAGE");
-    ASSERT_FLOATING_POINT_COMPLETE_EQUAL_USE_MESSAGE(value, value, "²âÊÔASSERT_FLOATING_POINT_COMPLETE_EQUAL_USE_MESSAGE");
-    ASSERT_FLOATING_POINT_COMPLETE_UNEQUAL_USE_MESSAGE(value, value + 0.00001f, "²âÊÔASSERT_FLOATING_POINT_COMPLETE_UNEQUAL_USE_MESSAGE");
+    ASSERT_EQUAL_USE_MESSAGE(1, 1, "æµ‹è¯•ASSERT_EQUAL_USE_MESSAGE");
+    ASSERT_EQUAL_USE_MESSAGE(1, 2, "æµ‹è¯•ASSERT_EQUAL_USE_MESSAGE");
+    ASSERT_UNEQUAL_USE_MESSAGE(1, 1, "æµ‹è¯•ASSERT_UNEQUAL_USE_MESSAGE");
+    ASSERT_UNEQUAL_USE_MESSAGE(1, 2, "æµ‹è¯•ASSERT_UNEQUAL_USE_MESSAGE");
+    ASSERT_APPROXIMATE_USE_MESSAGE(1.0f, 1.01f, 0.02f, "æµ‹è¯•ASSERT_APPROXIMATE_USE_MESSAGE");
+    ASSERT_APPROXIMATE_USE_MESSAGE(1.0f, 1.11f, 0.1f, "æµ‹è¯•ASSERT_APPROXIMATE_USE_MESSAGE");
+    ASSERT_EQUAL_NULL_PTR_USE_MESSAGE(ptr, "æµ‹è¯•ASSERT_EQUAL_NULL_PTR_USE_MESSAGE");
+    ASSERT_EQUAL_NULL_PTR_USE_MESSAGE(this, "æµ‹è¯•ASSERT_EQUAL_NULL_PTR_USE_MESSAGE");
+    ASSERT_UNEQUAL_NULL_PTR_USE_MESSAGE(ptr, "æµ‹è¯•ASSERT_UNEQUAL_NULL_PTR_USE_MESSAGE");
+    ASSERT_UNEQUAL_NULL_PTR_USE_MESSAGE(this, "æµ‹è¯•ASSERT_UNEQUAL_NULL_PTR_USE_MESSAGE");
+    ASSERT_FLOATING_POINT_COMPLETE_EQUAL_USE_MESSAGE(value, value, "æµ‹è¯•ASSERT_FLOATING_POINT_COMPLETE_EQUAL_USE_MESSAGE");
+    ASSERT_FLOATING_POINT_COMPLETE_UNEQUAL_USE_MESSAGE(value, value + 0.00001f, "æµ‹è¯•ASSERT_FLOATING_POINT_COMPLETE_UNEQUAL_USE_MESSAGE");
 
     ASSERT_APPROXIMATE_USE_FUNCTION(Approximate, 1.0, 1.01, 0.02);
     ASSERT_APPROXIMATE_USE_FUNCTION(Approximate, 1.0, 1.11, 0.1);
 
-    ASSERT_APPROXIMATE_USE_FUNCTION_AND_MESSAGE(Approximate, 1.0, 1.01, 0.02, "²âÊÔASSERT_APPROXIMATE_USE_FUNCTION_AND_MESSAGE");
-    ASSERT_APPROXIMATE_USE_FUNCTION_AND_MESSAGE(Approximate, 1.0, 1.11, 0.1, "²âÊÔASSERT_APPROXIMATE_USE_FUNCTION_AND_MESSAGE");
+    ASSERT_APPROXIMATE_USE_FUNCTION_AND_MESSAGE(Approximate, 1.0, 1.01, 0.02, "æµ‹è¯•ASSERT_APPROXIMATE_USE_FUNCTION_AND_MESSAGE");
+    ASSERT_APPROXIMATE_USE_FUNCTION_AND_MESSAGE(Approximate, 1.0, 1.11, 0.1, "æµ‹è¯•ASSERT_APPROXIMATE_USE_FUNCTION_AND_MESSAGE");
 
-    GetStream() << "ÒÔÉÏ´úÂë²âÊÔµ¥Ôª²âÊÔÎ´Í¨¹ıµÄÇé¿ö¡£\n";
+    GetStream() << "ä»¥ä¸Šä»£ç æµ‹è¯•å•å…ƒæµ‹è¯•æœªé€šè¿‡çš„æƒ…å†µã€‚\n";
 
-    /// ÉÏÃæÓĞ40¸ö²âÊÔ¡£ÆäÖĞ25¸öÎª³É¹¦²âÊÔ£¬15¸öÎªÊ§°Ü²âÊÔ¡£
+    /// ä¸Šé¢æœ‰40ä¸ªæµ‹è¯•ã€‚å…¶ä¸­25ä¸ªä¸ºæˆåŠŸæµ‹è¯•ï¼Œ15ä¸ªä¸ºå¤±è´¥æµ‹è¯•ã€‚
     passNumber += 25;
     failNumber += 15;
 
@@ -204,7 +204,7 @@ void CoreTools::UnitTestTesting::AssertEqualTest()
     ASSERT_EQUAL(GetFailedNumber(), failNumber);
     ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
-    /// ÉÏÃæÓĞ3¸öASSERT_EQUAL³É¹¦²âÊÔ£¬¼ÓÉÏÒ»¸öASSERT_NOT_THROW³É¹¦²âÊÔ¡£
+    /// ä¸Šé¢æœ‰3ä¸ªASSERT_EQUALæˆåŠŸæµ‹è¯•ï¼ŒåŠ ä¸Šä¸€ä¸ªASSERT_NOT_THROWæˆåŠŸæµ‹è¯•ã€‚
     passNumber += 4;
 }
 
@@ -223,7 +223,7 @@ void CoreTools::UnitTestTesting::AssertStringTest()
     ASSERT_EQUAL('1', '1');
     ASSERT_EQUAL(L'1', L'1');
 
-    /// ÉÏÃæÓĞ10¸öASSERT_EQUAL³É¹¦²âÊÔ¡£
+    /// ä¸Šé¢æœ‰10ä¸ªASSERT_EQUALæˆåŠŸæµ‹è¯•ã€‚
     passNumber += 11;
 }
 
@@ -231,7 +231,7 @@ void CoreTools::UnitTestTesting::AssertCellValueTest()
 {
     ASSERT_EQUAL(SimpleCSV::CellValue{ 7 }, SimpleCSV::CellValue{ 7 });
 
-    /// ÉÏÃæÓĞ1¸öASSERT_EQUAL³É¹¦²âÊÔ¡£
+    /// ä¸Šé¢æœ‰1ä¸ªASSERT_EQUALæˆåŠŸæµ‹è¯•ã€‚
     passNumber += 2;
 }
 
@@ -241,7 +241,7 @@ void CoreTools::UnitTestTesting::AssertCompareTest()
     ASSERT_EQUAL(GetFailedNumber(), failNumber);
     ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
-    GetStream() << "ÒÔÏÂ´úÂë²âÊÔµ¥Ôª²âÊÔÎ´Í¨¹ıµÄÇé¿ö¡£´æÔÚÊ®¸ö²âÊÔÊ§°Ü£¡\n";
+    GetStream() << "ä»¥ä¸‹ä»£ç æµ‹è¯•å•å…ƒæµ‹è¯•æœªé€šè¿‡çš„æƒ…å†µã€‚å­˜åœ¨åä¸ªæµ‹è¯•å¤±è´¥ï¼\n";
 
     ASSERT_LESS(1, 1);
     ASSERT_LESS(2, 4);
@@ -259,20 +259,20 @@ void CoreTools::UnitTestTesting::AssertCompareTest()
     ASSERT_GREATER(TestEnum::Fifteen, TestEnum::Ten);
     ASSERT_GREATER_EQUAL(TestEnum::Fifteen, TestEnum::Ten);
 
-    ASSERT_LESS_USE_MESSAGE(1, 7, "²âÊÔASSERT_LESS_USE_MESSAGE");
-    ASSERT_LESS_USE_MESSAGE(10, 2, "²âÊÔASSERT_LESS_USE_MESSAGE");
-    ASSERT_LESS_EQUAL_USE_MESSAGE(1, 11, "²âÊÔASSERT_LESS_EQUAL_USE_MESSAGE");
-    ASSERT_LESS_EQUAL_USE_MESSAGE(11, 2, "²âÊÔASSERT_LESS_EQUAL_USE_MESSAGE");
-    ASSERT_RANGE_USE_MESSAGE(1.011f, 1.01f, 1.012f, "²âÊÔASSERT_RANGE_USE_MESSAGE");
-    ASSERT_RANGE_USE_MESSAGE(1.0f, 1.11f, 0.12f, "²âÊÔASSERT_RANGE_USE_MESSAGE");
-    ASSERT_GREATER_USE_MESSAGE(7, 6, "²âÊÔASSERT_GREATER_USE_MESSAGE");
-    ASSERT_GREATER_USE_MESSAGE(6, 7, "²âÊÔASSERT_GREATER_USE_MESSAGE");
-    ASSERT_GREATER_EQUAL_USE_MESSAGE(70, 85, "²âÊÔASSERT_GREATER_EQUAL_USE_MESSAGE");
-    ASSERT_GREATER_EQUAL_USE_MESSAGE(85, 70, "²âÊÔASSERT_GREATER_EQUAL_USE_MESSAGE");
+    ASSERT_LESS_USE_MESSAGE(1, 7, "æµ‹è¯•ASSERT_LESS_USE_MESSAGE");
+    ASSERT_LESS_USE_MESSAGE(10, 2, "æµ‹è¯•ASSERT_LESS_USE_MESSAGE");
+    ASSERT_LESS_EQUAL_USE_MESSAGE(1, 11, "æµ‹è¯•ASSERT_LESS_EQUAL_USE_MESSAGE");
+    ASSERT_LESS_EQUAL_USE_MESSAGE(11, 2, "æµ‹è¯•ASSERT_LESS_EQUAL_USE_MESSAGE");
+    ASSERT_RANGE_USE_MESSAGE(1.011f, 1.01f, 1.012f, "æµ‹è¯•ASSERT_RANGE_USE_MESSAGE");
+    ASSERT_RANGE_USE_MESSAGE(1.0f, 1.11f, 0.12f, "æµ‹è¯•ASSERT_RANGE_USE_MESSAGE");
+    ASSERT_GREATER_USE_MESSAGE(7, 6, "æµ‹è¯•ASSERT_GREATER_USE_MESSAGE");
+    ASSERT_GREATER_USE_MESSAGE(6, 7, "æµ‹è¯•ASSERT_GREATER_USE_MESSAGE");
+    ASSERT_GREATER_EQUAL_USE_MESSAGE(70, 85, "æµ‹è¯•ASSERT_GREATER_EQUAL_USE_MESSAGE");
+    ASSERT_GREATER_EQUAL_USE_MESSAGE(85, 70, "æµ‹è¯•ASSERT_GREATER_EQUAL_USE_MESSAGE");
 
-    GetStream() << "ÒÔÉÏ´úÂë²âÊÔµ¥Ôª²âÊÔÎ´Í¨¹ıµÄÇé¿ö¡£\n";
+    GetStream() << "ä»¥ä¸Šä»£ç æµ‹è¯•å•å…ƒæµ‹è¯•æœªé€šè¿‡çš„æƒ…å†µã€‚\n";
 
-    /// ÉÏÃæÓĞ27¸ö²âÊÔ¡£ÆäÖĞ17¸öÎª³É¹¦²âÊÔ£¬10¸öÎªÊ§°Ü²âÊÔ¡£
+    /// ä¸Šé¢æœ‰27ä¸ªæµ‹è¯•ã€‚å…¶ä¸­17ä¸ªä¸ºæˆåŠŸæµ‹è¯•ï¼Œ10ä¸ªä¸ºå¤±è´¥æµ‹è¯•ã€‚
     passNumber += 17;
     failNumber += 10;
 
@@ -280,7 +280,7 @@ void CoreTools::UnitTestTesting::AssertCompareTest()
     ASSERT_EQUAL(GetFailedNumber(), failNumber);
     ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
-    /// ÉÏÃæÓĞ3¸öASSERT_EQUAL³É¹¦²âÊÔ£¬¼ÓÉÏÒ»¸öASSERT_NOT_THROW³É¹¦²âÊÔ¡£
+    /// ä¸Šé¢æœ‰3ä¸ªASSERT_EQUALæˆåŠŸæµ‹è¯•ï¼ŒåŠ ä¸Šä¸€ä¸ªASSERT_NOT_THROWæˆåŠŸæµ‹è¯•ã€‚
     passNumber += 4;
 }
 
@@ -290,18 +290,18 @@ void CoreTools::UnitTestTesting::AssertNotThrowTest()
     ASSERT_EQUAL(GetFailedNumber(), failNumber);
     ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
-    GetStream() << "ÒÔÏÂ´úÂë²âÊÔµ¥Ôª²âÊÔÎ´Í¨¹ıµÄÇé¿ö¡£´æÔÚÈı¸ö²âÊÔ´íÎó£¡\n";
+    GetStream() << "ä»¥ä¸‹ä»£ç æµ‹è¯•å•å…ƒæµ‹è¯•æœªé€šè¿‡çš„æƒ…å†µã€‚å­˜åœ¨ä¸‰ä¸ªæµ‹è¯•é”™è¯¯ï¼\n";
 
-    ASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_0(NotThrowException, "²âÊÔASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_0");
+    ASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_0(NotThrowException, "æµ‹è¯•ASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_0");
     ASSERT_NOT_THROW_EXCEPTION_1(NotThrowExceptionWithParameter, 0);
-    ASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_2(NotThrowExceptionWithTwoParameter, 0, 0.2f, "²âÊÔASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_2");
-    ASSERT_THROW_EXCEPTION_USE_MESSAGE_0(NotThrowException, "²âÊÔASSERT_THROW_EXCEPTION_USE_MESSAGE_0");
+    ASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_2(NotThrowExceptionWithTwoParameter, 0, 0.2f, "æµ‹è¯•ASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_2");
+    ASSERT_THROW_EXCEPTION_USE_MESSAGE_0(NotThrowException, "æµ‹è¯•ASSERT_THROW_EXCEPTION_USE_MESSAGE_0");
     ASSERT_THROW_EXCEPTION_1(NotThrowExceptionWithParameter, 0);
     ASSERT_THROW_EXCEPTION_2(NotThrowExceptionWithTwoParameter, 0, 0.2f);
 
-    GetStream() << "ÒÔÉÏ´úÂë²âÊÔµ¥Ôª²âÊÔÎ´Í¨¹ıµÄÇé¿ö¡£\n";
+    GetStream() << "ä»¥ä¸Šä»£ç æµ‹è¯•å•å…ƒæµ‹è¯•æœªé€šè¿‡çš„æƒ…å†µã€‚\n";
 
-    /// ÉÏÃæÓĞ9¸ö²âÊÔ¡£ÆäÖĞ6¸öÎª³É¹¦²âÊÔ£¬3¸öÎª´íÎó²âÊÔ¡£
+    /// ä¸Šé¢æœ‰9ä¸ªæµ‹è¯•ã€‚å…¶ä¸­6ä¸ªä¸ºæˆåŠŸæµ‹è¯•ï¼Œ3ä¸ªä¸ºé”™è¯¯æµ‹è¯•ã€‚
     passNumber += 6;
     errorNumber += 3;
 
@@ -309,7 +309,7 @@ void CoreTools::UnitTestTesting::AssertNotThrowTest()
     ASSERT_EQUAL(GetFailedNumber(), failNumber);
     ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
-    /// ÉÏÃæÓĞ3¸öASSERT_EQUAL³É¹¦²âÊÔ£¬¼ÓÉÏÒ»¸öASSERT_NOT_THROW³É¹¦²âÊÔ¡£
+    /// ä¸Šé¢æœ‰3ä¸ªASSERT_EQUALæˆåŠŸæµ‹è¯•ï¼ŒåŠ ä¸Šä¸€ä¸ªASSERT_NOT_THROWæˆåŠŸæµ‹è¯•ã€‚
     passNumber += 4;
 }
 
@@ -319,18 +319,18 @@ void CoreTools::UnitTestTesting::AssertThrowTest()
     ASSERT_EQUAL(GetFailedNumber(), failNumber);
     ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
-    GetStream() << "ÒÔÏÂ´úÂë²âÊÔµ¥Ôª²âÊÔÎ´Í¨¹ıµÄÇé¿ö¡£´æÔÚÈı¸ö²âÊÔ´íÎó£¡\n";
+    GetStream() << "ä»¥ä¸‹ä»£ç æµ‹è¯•å•å…ƒæµ‹è¯•æœªé€šè¿‡çš„æƒ…å†µã€‚å­˜åœ¨ä¸‰ä¸ªæµ‹è¯•é”™è¯¯ï¼\n";
 
     ASSERT_NOT_THROW_EXCEPTION_0(ThrowException);
-    ASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_1(ThrowExceptionWithParameter, 0, "²âÊÔASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_1");
+    ASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_1(ThrowExceptionWithParameter, 0, "æµ‹è¯•ASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_1");
     ASSERT_NOT_THROW_EXCEPTION_2(ThrowExceptionWithTwoParameter, 0, 0.2f);
     ASSERT_THROW_EXCEPTION_0(ThrowException);
-    ASSERT_THROW_EXCEPTION_USE_MESSAGE_1(ThrowExceptionWithParameter, 0, "²âÊÔASSERT_THROW_EXCEPTION_USE_MESSAGE_1");
-    ASSERT_THROW_EXCEPTION_USE_MESSAGE_2(ThrowExceptionWithTwoParameter, 0, 0.2f, "²âÊÔASSERT_THROW_EXCEPTION_USE_MESSAGE_2");
+    ASSERT_THROW_EXCEPTION_USE_MESSAGE_1(ThrowExceptionWithParameter, 0, "æµ‹è¯•ASSERT_THROW_EXCEPTION_USE_MESSAGE_1");
+    ASSERT_THROW_EXCEPTION_USE_MESSAGE_2(ThrowExceptionWithTwoParameter, 0, 0.2f, "æµ‹è¯•ASSERT_THROW_EXCEPTION_USE_MESSAGE_2");
 
-    GetStream() << "ÒÔÉÏ´úÂë²âÊÔµ¥Ôª²âÊÔÎ´Í¨¹ıµÄÇé¿ö¡£\n";
+    GetStream() << "ä»¥ä¸Šä»£ç æµ‹è¯•å•å…ƒæµ‹è¯•æœªé€šè¿‡çš„æƒ…å†µã€‚\n";
 
-    /// ÉÏÃæÓĞ9¸ö²âÊÔ¡£ÆäÖĞ6¸öÎª³É¹¦²âÊÔ£¬3¸öÎª´íÎó²âÊÔ¡£
+    /// ä¸Šé¢æœ‰9ä¸ªæµ‹è¯•ã€‚å…¶ä¸­6ä¸ªä¸ºæˆåŠŸæµ‹è¯•ï¼Œ3ä¸ªä¸ºé”™è¯¯æµ‹è¯•ã€‚
     passNumber += 6;
     errorNumber += 3;
 
@@ -338,7 +338,7 @@ void CoreTools::UnitTestTesting::AssertThrowTest()
     ASSERT_EQUAL(GetFailedNumber(), failNumber);
     ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
-    /// ÉÏÃæÓĞ3¸öASSERT_EQUAL³É¹¦²âÊÔ£¬¼ÓÉÏÒ»¸öASSERT_NOT_THROW³É¹¦²âÊÔ¡£
+    /// ä¸Šé¢æœ‰3ä¸ªASSERT_EQUALæˆåŠŸæµ‹è¯•ï¼ŒåŠ ä¸Šä¸€ä¸ªASSERT_NOT_THROWæˆåŠŸæµ‹è¯•ã€‚
     passNumber += 4;
 }
 
@@ -378,21 +378,21 @@ void CoreTools::UnitTestTesting::NotThrowExceptionWithTwoParameter(int parameter
 
 void CoreTools::UnitTestTesting::ThrowException()
 {
-    THROW_EXCEPTION(SYSTEM_TEXT("ÕâÀï²âÊÔÅ×³öÒì³£¡£Èç¹û´¥·¢¶ÏÑÔ£¬Çë°´¡°·ñ¡±È¡Ïû¡£"));
+    THROW_EXCEPTION(SYSTEM_TEXT("è¿™é‡Œæµ‹è¯•æŠ›å‡ºå¼‚å¸¸ã€‚å¦‚æœè§¦å‘æ–­è¨€ï¼Œè¯·æŒ‰â€œå¦â€å–æ¶ˆã€‚"));
 }
 
 void CoreTools::UnitTestTesting::ThrowExceptionWithParameter(int parameter)
 {
     System::UnusedFunction(parameter);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("ÕâÀï²âÊÔÅ×³öÒì³£¡£Èç¹û´¥·¢¶ÏÑÔ£¬Çë°´¡°·ñ¡±È¡Ïû¡£"));
+    THROW_EXCEPTION(SYSTEM_TEXT("è¿™é‡Œæµ‹è¯•æŠ›å‡ºå¼‚å¸¸ã€‚å¦‚æœè§¦å‘æ–­è¨€ï¼Œè¯·æŒ‰â€œå¦â€å–æ¶ˆã€‚"));
 }
 
 void CoreTools::UnitTestTesting::ThrowExceptionWithTwoParameter(int parameter1, float parameter2)
 {
     System::UnusedFunction(parameter1, parameter2);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("ÕâÀï²âÊÔÅ×³öÒì³£¡£Èç¹û´¥·¢¶ÏÑÔ£¬Çë°´¡°·ñ¡±È¡Ïû¡£"));
+    THROW_EXCEPTION(SYSTEM_TEXT("è¿™é‡Œæµ‹è¯•æŠ›å‡ºå¼‚å¸¸ã€‚å¦‚æœè§¦å‘æ–­è¨€ï¼Œè¯·æŒ‰â€œå¦â€å–æ¶ˆã€‚"));
 }
 
 bool CoreTools::Approximate(double lhs, double rhs, double epsilon) noexcept

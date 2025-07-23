@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:19)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DIVISION_MODULO_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_DIVISION_MODULO_DETAIL_H
@@ -40,23 +40,23 @@ Mathematics::IntegerDivisionModulo<N>::IntegerDivisionModulo(const IntegerDataTy
 template <int N>
 void Mathematics::IntegerDivisionModulo<N>::Calculate()
 {
-    // ¼ÆËãÖĞÊ¹ÓÃ¾ø¶ÔÖµµÄ·Ö×ÓÖµºÍ·ÖÄ¸Öµ¡£
+    // è®¡ç®—ä¸­ä½¿ç”¨ç»å¯¹å€¼çš„åˆ†å­å€¼å’Œåˆ†æ¯å€¼ã€‚
     const auto compare = IntegerDataType::UnsignedDataCompare(absNumerator, absDenominator);
     if (compare == NumericalValueSymbol::Negative)
     {
-        // ·Ö×Ó < ·ÖÄ¸:  numerator = 0 * denominator + numerator
+        // åˆ†å­ < åˆ†æ¯:  numerator = 0 * denominator + numerator
         quotient.SetZero();
         remainder = numerator;
     }
     else if (compare == NumericalValueSymbol::Zero)
     {
-        // ·Ö×Ó == ·ÖÄ¸:  numerator = 1 * denominator + 0
+        // åˆ†å­ == åˆ†æ¯:  numerator = 1 * denominator + 0
         quotient = IntegerDataType{ 1 };
         remainder.SetZero();
     }
     else
     {
-        // ·Ö×Ó > ·ÖÄ¸, Ê¹ÓÃ³ı·¨¼ÆËãÉÌºÍÓàÊı
+        // åˆ†å­ > åˆ†æ¯, ä½¿ç”¨é™¤æ³•è®¡ç®—å•†å’Œä½™æ•°
         if (IntegerDataType{ low } < absDenominator)
         {
             DivisionMultiple();
@@ -66,7 +66,7 @@ void Mathematics::IntegerDivisionModulo<N>::Calculate()
             DivisionSingle();
         }
 
-        // Ó¦ÓÃ·Ö×ÓºÍ·ÖÄ¸µÄÔ­Ê¼·ûºÅ¡£
+        // åº”ç”¨åˆ†å­å’Œåˆ†æ¯çš„åŸå§‹ç¬¦å·ã€‚
         if (numerator.GetSign() != denominator.GetSign())
         {
             IntegerDataAmend<N> integerDataAmend{ quotient };
@@ -84,16 +84,16 @@ void Mathematics::IntegerDivisionModulo<N>::Calculate()
 template <int N>
 void Mathematics::IntegerDivisionModulo<N>::DivisionSingle()
 {
-    // ·ÖÄ¸ÊÇµ¥¸öµÄ¡°Î»¡±¡£
+    // åˆ†æ¯æ˜¯å•ä¸ªçš„â€œä½â€ã€‚
     const auto lowDenominator = low & boost::numeric_cast<uint32_t>(absDenominator[0]);
 
-    // »ñÈ¡·Ö×Ó¡£
+    // è·å–åˆ†å­ã€‚
     const IntegerDataAnalysisType numeratorAnalysis{ absNumerator };
     const auto start = numeratorAnalysis.GetLeadingBlock();
 
     auto remainderDigit = 0u;
 
-    // µÃµ½ÉÌ¡£
+    // å¾—åˆ°å•†ã€‚
     auto lastNonZero = -1;
     for (auto index = start; 0 <= index; --index)
     {
@@ -110,9 +110,9 @@ void Mathematics::IntegerDivisionModulo<N>::DivisionSingle()
         }
     }
 
-    MATHEMATICS_ASSERTION_1(0 <= lastNonZero, "Òì³£µÄ½á¹û\n");
+    MATHEMATICS_ASSERTION_1(0 <= lastNonZero, "å¼‚å¸¸çš„ç»“æœ\n");
 
-    // µÃµ½ÓàÊı
+    // å¾—åˆ°ä½™æ•°
     if (remainderDigit & high)
     {
         remainder = IntegerDataType{ remainderDigit };
@@ -140,10 +140,10 @@ void Mathematics::IntegerDivisionModulo<N>::CalculateRemainder()
     auto loop = 0;
     while (absDenominator <= remainder)
     {
-        // ÓàÊı±È³ıÊı´ó£¬Òª¼ÌĞø¼ÆËã
+        // ä½™æ•°æ¯”é™¤æ•°å¤§ï¼Œè¦ç»§ç»­è®¡ç®—
         MAYBE_UNUSED constexpr auto maxLoop = 20;
 
-        MATHEMATICS_ASSERTION_1(loop < maxLoop, "¼ÆËãÁ¿¹ı´ó£¡");
+        MATHEMATICS_ASSERTION_1(loop < maxLoop, "è®¡ç®—é‡è¿‡å¤§ï¼");
 
         if (absDenominator == remainder)
         {

@@ -1,17 +1,18 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/04/24 22:20)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/04/24 22:20)
 
 #include "ConsoleColorsTesting.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "CoreTools/Console/ConsoleInstanceDetail.h"
 
 #include <iostream>
 
@@ -39,13 +40,13 @@ void CoreTools::ConsoleColorsTesting::MainTest()
 void CoreTools::ConsoleColorsTesting::IntensifiedColorsTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_2(SetColorsTest, TextColour::Red, BackgroundColour::Yellow);
-    GetStream() << "ÕâÌõĞÅÏ¢ÔÚ¿ØÖÆÌ¨ÖĞÎÄ±¾ÏÔÊ¾ÎªºìÉ«£¬±³¾°Îª»ÆÉ«¡£\n";
+    GetStream() << "è¿™æ¡ä¿¡æ¯åœ¨æ§åˆ¶å°ä¸­æ–‡æœ¬æ˜¾ç¤ºä¸ºçº¢è‰²ï¼ŒèƒŒæ™¯ä¸ºé»„è‰²ã€‚\n";
 
     ASSERT_NOT_THROW_EXCEPTION_2(SetIntensifiedTextColorsTest, TextColour::Red, BackgroundColour::Yellow);
-    GetStream() << "ÕâÌõĞÅÏ¢ÔÚ¿ØÖÆÌ¨ÖĞÎÄ±¾ÏÔÊ¾Îª¼ÓÉîµÄºìÉ«£¬±³¾°Îª»ÆÉ«¡£\n";
+    GetStream() << "è¿™æ¡ä¿¡æ¯åœ¨æ§åˆ¶å°ä¸­æ–‡æœ¬æ˜¾ç¤ºä¸ºåŠ æ·±çš„çº¢è‰²ï¼ŒèƒŒæ™¯ä¸ºé»„è‰²ã€‚\n";
 
     ASSERT_NOT_THROW_EXCEPTION_2(SetIntensifiedBackgroundColorsTest, TextColour::Red, BackgroundColour::Yellow);
-    GetStream() << "ÕâÌõĞÅÏ¢ÔÚ¿ØÖÆÌ¨ÖĞÎÄ±¾ÏÔÊ¾ÎªºìÉ«£¬±³¾°Îª¼ÓÉîµÄ»ÆÉ«¡£\n";
+    GetStream() << "è¿™æ¡ä¿¡æ¯åœ¨æ§åˆ¶å°ä¸­æ–‡æœ¬æ˜¾ç¤ºä¸ºçº¢è‰²ï¼ŒèƒŒæ™¯ä¸ºåŠ æ·±çš„é»„è‰²ã€‚\n";
 }
 
 void CoreTools::ConsoleColorsTesting::SetColorsTest(TextColour textColor, BackgroundColour backgroundColor)
@@ -69,20 +70,20 @@ void CoreTools::ConsoleColorsTesting::SetIntensifiedBackgroundColorsTest(TextCol
 void CoreTools::ConsoleColorsTesting::BlackBackgroundColorTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_2(SetColorsTest, TextColour::Magenta, BackgroundColour::Black);
-    GetStream() << "ÕâÌõĞÅÏ¢ÔÚ¿ØÖÆÌ¨ÖĞÎÄ±¾ÏÔÊ¾Îª×ÏÉ«£¬±³¾°ÎªºÚÉ«¡£\n";
+    GetStream() << "è¿™æ¡ä¿¡æ¯åœ¨æ§åˆ¶å°ä¸­æ–‡æœ¬æ˜¾ç¤ºä¸ºç´«è‰²ï¼ŒèƒŒæ™¯ä¸ºé»‘è‰²ã€‚\n";
 }
 
 void CoreTools::ConsoleColorsTesting::ColorsTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_2(SetColorsTest, TextColour::Green, BackgroundColour::Magenta);
-    GetStream() << "ÕâÌõĞÅÏ¢ÔÚ¿ØÖÆÌ¨ÖĞÎÄ±¾ÏÔÊ¾ÎªÂÌÉ«£¬±³¾°Îª×ÏÉ«¡£\n";
+    GetStream() << "è¿™æ¡ä¿¡æ¯åœ¨æ§åˆ¶å°ä¸­æ–‡æœ¬æ˜¾ç¤ºä¸ºç»¿è‰²ï¼ŒèƒŒæ™¯ä¸ºç´«è‰²ã€‚\n";
 
     ASSERT_NOT_THROW_EXCEPTION_2(SetColorsTest, TextColour::Blue, BackgroundColour::Red);
-    GetStream() << "ÕâÌõĞÅÏ¢ÔÚ¿ØÖÆÌ¨ÖĞÎÄ±¾ÏÔÊ¾ÎªÀ¶É«£¬±³¾°ÎªºìÉ«¡£\n";
+    GetStream() << "è¿™æ¡ä¿¡æ¯åœ¨æ§åˆ¶å°ä¸­æ–‡æœ¬æ˜¾ç¤ºä¸ºè“è‰²ï¼ŒèƒŒæ™¯ä¸ºçº¢è‰²ã€‚\n";
 }
 
 void CoreTools::ConsoleColorsTesting::ResetColorsTest()
 {
     console.ResetColor();
-    GetStream() << "ÕâÌõĞÅÏ¢ÔÚ¿ØÖÆÌ¨ÖĞÎÄ±¾ÏÔÊ¾Îª°×É«£¬±³¾°ÎªºÚÉ«¡£\n";
+    GetStream() << "è¿™æ¡ä¿¡æ¯åœ¨æ§åˆ¶å°ä¸­æ–‡æœ¬æ˜¾ç¤ºä¸ºç™½è‰²ï¼ŒèƒŒæ™¯ä¸ºé»‘è‰²ã€‚\n";
 }

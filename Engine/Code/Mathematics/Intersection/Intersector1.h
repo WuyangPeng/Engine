@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 16:04)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 16:04)
 
 #ifndef MATHEMATICS_INTERSECTION_INTERSECTOR1_H
 #define MATHEMATICS_INTERSECTION_INTERSECTOR1_H
@@ -32,10 +32,10 @@ namespace Mathematics
         using Vector2Type = Vector2<Real>;
 
     public:
-        // ¼ä¸ô[u0,u1]ºÍ[v0,v1]½»¼¯µÄÀà¡£
-        // ÖÕµã±ØÐëÅÅÐò£ºu0 <= u1ºÍv0 <= v1¡£
-        // ÔÊÐísm_MaxRealºÍ-sm_MaxRealµÄÖµ£¬
-        // ÔÊÐíÍË»¯¼ä¸ô£ºu0 = u1»òv0 = v1¡£
+        // é—´éš”[u0,u1]å’Œ[v0,v1]äº¤é›†çš„ç±»ã€‚
+        // ç»ˆç‚¹å¿…é¡»æŽ’åºï¼šu0 <= u1å’Œv0 <= v1ã€‚
+        // å…è®¸sm_MaxRealå’Œ-sm_MaxRealçš„å€¼ï¼Œ
+        // å…è®¸é€€åŒ–é—´éš”ï¼šu0 = u1æˆ–v0 = v1ã€‚
         Intersector1(Real u0, Real u1, Real v0, Real v1, Real epsilon = MathType::GetZeroTolerance()) noexcept;
         virtual ~Intersector1() = default;
         Intersector1(const Intersector1& rhs) noexcept = default;
@@ -56,7 +56,7 @@ namespace Mathematics
         virtual void Swap(Intersector1& rhs) noexcept;
 
     private:
-        // Ïà½»µÄ¼ä¸ô¡£
+        // ç›¸äº¤çš„é—´éš”ã€‚
         Vector2Type u;
         Vector2Type v;
 

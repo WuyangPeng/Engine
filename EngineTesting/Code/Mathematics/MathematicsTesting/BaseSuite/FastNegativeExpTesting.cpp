@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 15:26)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 15:26)
 
 #include "FastNegativeExpTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -48,7 +48,7 @@ void Mathematics::FastNegativeExpTesting::MainTest()
 
 void Mathematics::FastNegativeExpTesting::FloatFastExpTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
     std::uniform_real_distribution<float> randomDistribution{ MathF::GetValue(0), MathF::GetExponent() };
 
@@ -67,7 +67,7 @@ void Mathematics::FastNegativeExpTesting::FloatFastExpTest()
 
 void Mathematics::FastNegativeExpTesting::DoubleFastExpTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
     std::uniform_real_distribution<double> randomDistribution{ MathD::GetValue(0), MathD::GetExponent() };
 
@@ -86,7 +86,7 @@ void Mathematics::FastNegativeExpTesting::DoubleFastExpTest()
 
 void Mathematics::FastNegativeExpTesting::FloatFastExpBoundaryTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
     std::uniform_real_distribution<float> randomDistribution{ MathF::GetExponent(), MathF::maxReal };
 
@@ -105,7 +105,7 @@ void Mathematics::FastNegativeExpTesting::FloatFastExpBoundaryTest()
 
 void Mathematics::FastNegativeExpTesting::DoubleFastExpBoundaryTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
     std::uniform_real_distribution<double> randomDistribution{ MathD::GetExponent(), MathD::maxReal };
 

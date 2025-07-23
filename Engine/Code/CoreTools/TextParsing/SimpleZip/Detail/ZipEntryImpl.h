@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/02 15:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/02 15:19)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_ZIP_ENTRY_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_ZIP_ENTRY_IMPL_H
@@ -17,8 +17,8 @@
 
 namespace CoreTools::SimpleZip
 {
-    /// ZipEntryImplÀàÊµÏÖÁË²Ù×÷zip´æµµÖĞµÄÌõÄ¿ËùĞèµÄ¹¦ÄÜ¡£
-    /// ÕâÊÇÊµÏÖÀà¡£
+    /// ZipEntryImplç±»å®ç°äº†æ“ä½œzipå­˜æ¡£ä¸­çš„æ¡ç›®æ‰€éœ€çš„åŠŸèƒ½ã€‚
+    /// è¿™æ˜¯å®ç°ç±»ã€‚
     class CORE_TOOLS_HIDDEN_DECLARE ZipEntryImpl final
     {
     public:
@@ -27,10 +27,10 @@ namespace CoreTools::SimpleZip
     public:
         explicit ZipEntryImpl(const ZipEntryInfo& info);
 
-        /// Ê¹ÓÃ¸ø¶¨µÄÃû³ÆºÍ¶ş½øÖÆÊı¾İ´´½¨Ò»¸öĞÂµÄZipEntryImpl£¬ÕâÓ¦¸Ã½öÓÃÓÚ´´½¨ĞÂÌõÄ¿¡£
+        /// ä½¿ç”¨ç»™å®šçš„åç§°å’ŒäºŒè¿›åˆ¶æ•°æ®åˆ›å»ºä¸€ä¸ªæ–°çš„ZipEntryImplï¼Œè¿™åº”è¯¥ä»…ç”¨äºåˆ›å»ºæ–°æ¡ç›®ã€‚
         ZipEntryImpl(const std::string& name, ZipEntryData data);
 
-        /// Ê¹ÓÃ¸ø¶¨µÄÃû³ÆºÍ×Ö·û´®Êı¾İ´´½¨Ò»¸öĞÂµÄZipEntryImpl£¬ÕâÓ¦¸Ã½öÓÃÓÚ´´½¨ĞÂÌõÄ¿¡£
+        /// ä½¿ç”¨ç»™å®šçš„åç§°å’Œå­—ç¬¦ä¸²æ•°æ®åˆ›å»ºä¸€ä¸ªæ–°çš„ZipEntryImplï¼Œè¿™åº”è¯¥ä»…ç”¨äºåˆ›å»ºæ–°æ¡ç›®ã€‚
         ZipEntryImpl(const std::string& name, const std::string& data);
 
         ~ZipEntryImpl() noexcept = default;
@@ -70,9 +70,9 @@ namespace CoreTools::SimpleZip
         NODISCARD bool WriterAddMem(mz_zip_archive* archive) const;
 
     private:
-        /// ´´½¨Ò»¸öĞÂµÄZipEntryInfo½á¹¹¡£
-        /// ´Ëº¯Êı½«¸ù¾İÊäÈëµÄÎÄ¼şÃû´´½¨Ò»¸öĞÂµÄZipEntryInfo½á¹¹¡£
-        /// ³ıÁËÎÄ¼şË÷Òı¡¢Ê±¼ä´Á¡¢ÎÄ¼şÃûºÍis_directory±êÖ¾Íâ£¬½á¹¹Öµ´ó¶àÊÇĞéÄâÖµ¡£
+        /// åˆ›å»ºä¸€ä¸ªæ–°çš„ZipEntryInfoç»“æ„ã€‚
+        /// æ­¤å‡½æ•°å°†æ ¹æ®è¾“å…¥çš„æ–‡ä»¶ååˆ›å»ºä¸€ä¸ªæ–°çš„ZipEntryInfoç»“æ„ã€‚
+        /// é™¤äº†æ–‡ä»¶ç´¢å¼•ã€æ—¶é—´æˆ³ã€æ–‡ä»¶åå’Œis_directoryæ ‡å¿—å¤–ï¼Œç»“æ„å€¼å¤§å¤šæ˜¯è™šæ‹Ÿå€¼ã€‚
         NODISCARD static ZipEntryInfo CreateInfo(const std::string& fileName);
 
     private:

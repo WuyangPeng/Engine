@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:55)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:55)
 
 #ifndef RENDERING_DATA_TYPES_TEXTURE_COLOUR_DETAIL_H
 #define RENDERING_DATA_TYPES_TEXTURE_COLOUR_DETAIL_H
@@ -189,7 +189,7 @@ void Rendering::TextureColour<Format>::ConvertingAlpha([[maybe_unused]] const Te
     static_assert(0 <= alphaIndex && alphaIndex < arraySize, "index is crossing!");
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // Í¨¹ıÊ¹ÓÃ¾²Ì¬¶ÏÑÔ£¬¹Ì¶¨´óĞ¡Êı×éÊ¹ÓÃ³£Á¿Ë÷ÒıÊÇ±»ÔÊĞíµÄ¡£
+#include SYSTEM_WARNING_DISABLE(26446)  // é€šè¿‡ä½¿ç”¨é™æ€æ–­è¨€ï¼Œå›ºå®šå¤§å°æ•°ç»„ä½¿ç”¨å¸¸é‡ç´¢å¼•æ˜¯è¢«å…è®¸çš„ã€‚
 
     colour[alphaIndex] = alphaMaxValue;
 
@@ -216,7 +216,7 @@ void Rendering::TextureColour<Format>::ConvertingBit(const TextureColour<RhsForm
     const auto difference = textureColour[RhsIndex] - rhsMinValue;
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // Í¨¹ıÊ¹ÓÃ¾²Ì¬¶ÏÑÔ£¬¹Ì¶¨´óĞ¡Êı×éÊ¹ÓÃ³£Á¿Ë÷ÒıÊÇ±»ÔÊĞíµÄ¡£
+#include SYSTEM_WARNING_DISABLE(26446)  // é€šè¿‡ä½¿ç”¨é™æ€æ–­è¨€ï¼Œå›ºå®šå¤§å°æ•°ç»„ä½¿ç”¨å¸¸é‡ç´¢å¼•æ˜¯è¢«å…è®¸çš„ã€‚
 #include SYSTEM_WARNING_DISABLE(26467)
 
     colour[Index] = boost::numeric_cast<ValueType>(difference * lhsFormatDistance / rhsFormatDistance) + minValue;
@@ -244,7 +244,7 @@ void Rendering::TextureColour<Format>::ConvertingBit(const TextureColour<RhsForm
     const auto difference = textureColour[RhsIndex] - rhsMinValue;
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // Í¨¹ıÊ¹ÓÃ¾²Ì¬¶ÏÑÔ£¬¹Ì¶¨´óĞ¡Êı×éÊ¹ÓÃ³£Á¿Ë÷ÒıÊÇ±»ÔÊĞíµÄ¡£
+#include SYSTEM_WARNING_DISABLE(26446)  // é€šè¿‡ä½¿ç”¨é™æ€æ–­è¨€ï¼Œå›ºå®šå¤§å°æ•°ç»„ä½¿ç”¨å¸¸é‡ç´¢å¼•æ˜¯è¢«å…è®¸çš„ã€‚
 #include SYSTEM_WARNING_DISABLE(26467)
 
     colour[Index] = boost::numeric_cast<ValueType>(difference * lhsFormatDistance / rhsFormatDistance + 0.5f) + minValue;
@@ -321,7 +321,7 @@ typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Fo
     RENDERING_CLASS_IS_VALID_CONST_3;
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // Í¨¹ıÊ¹ÓÃ¾²Ì¬¶ÏÑÔ£¬¹Ì¶¨´óĞ¡Êı×éÊ¹ÓÃ³£Á¿Ë÷ÒıÊÇ±»ÔÊĞíµÄ¡£
+#include SYSTEM_WARNING_DISABLE(26446)  // é€šè¿‡ä½¿ç”¨é™æ€æ–­è¨€ï¼Œå›ºå®šå¤§å°æ•°ç»„ä½¿ç”¨å¸¸é‡ç´¢å¼•æ˜¯è¢«å…è®¸çš„ã€‚
 
     return colour[redIndex];
 
@@ -337,7 +337,7 @@ typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Fo
     RENDERING_CLASS_IS_VALID_CONST_3;
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // Í¨¹ıÊ¹ÓÃ¾²Ì¬¶ÏÑÔ£¬¹Ì¶¨´óĞ¡Êı×éÊ¹ÓÃ³£Á¿Ë÷ÒıÊÇ±»ÔÊĞíµÄ¡£
+#include SYSTEM_WARNING_DISABLE(26446)  // é€šè¿‡ä½¿ç”¨é™æ€æ–­è¨€ï¼Œå›ºå®šå¤§å°æ•°ç»„ä½¿ç”¨å¸¸é‡ç´¢å¼•æ˜¯è¢«å…è®¸çš„ã€‚
 
     return colour[greenIndex];
 
@@ -353,7 +353,7 @@ typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Fo
     RENDERING_CLASS_IS_VALID_CONST_3;
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // Í¨¹ıÊ¹ÓÃ¾²Ì¬¶ÏÑÔ£¬¹Ì¶¨´óĞ¡Êı×éÊ¹ÓÃ³£Á¿Ë÷ÒıÊÇ±»ÔÊĞíµÄ¡£
+#include SYSTEM_WARNING_DISABLE(26446)  // é€šè¿‡ä½¿ç”¨é™æ€æ–­è¨€ï¼Œå›ºå®šå¤§å°æ•°ç»„ä½¿ç”¨å¸¸é‡ç´¢å¼•æ˜¯è¢«å…è®¸çš„ã€‚
 
     return colour[blueIndex];
 
@@ -369,7 +369,7 @@ typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Fo
     RENDERING_CLASS_IS_VALID_CONST_3;
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // Í¨¹ıÊ¹ÓÃ¾²Ì¬¶ÏÑÔ£¬¹Ì¶¨´óĞ¡Êı×éÊ¹ÓÃ³£Á¿Ë÷ÒıÊÇ±»ÔÊĞíµÄ¡£
+#include SYSTEM_WARNING_DISABLE(26446)  // é€šè¿‡ä½¿ç”¨é™æ€æ–­è¨€ï¼Œå›ºå®šå¤§å°æ•°ç»„ä½¿ç”¨å¸¸é‡ç´¢å¼•æ˜¯è¢«å…è®¸çš„ã€‚
 
     return colour[alphaIndex];
 
@@ -385,7 +385,7 @@ typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Fo
     RENDERING_CLASS_IS_VALID_CONST_3;
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // Í¨¹ıÊ¹ÓÃ¾²Ì¬¶ÏÑÔ£¬¹Ì¶¨´óĞ¡Êı×éÊ¹ÓÃ³£Á¿Ë÷ÒıÊÇ±»ÔÊĞíµÄ¡£
+#include SYSTEM_WARNING_DISABLE(26446)  // é€šè¿‡ä½¿ç”¨é™æ€æ–­è¨€ï¼Œå›ºå®šå¤§å°æ•°ç»„ä½¿ç”¨å¸¸é‡ç´¢å¼•æ˜¯è¢«å…è®¸çš„ã€‚
 
     return colour[luminanceIndex];
 
@@ -417,7 +417,7 @@ void Rendering::TextureColour<Format>::SetRed(ValueType red) noexcept
     RENDERING_CLASS_IS_VALID_3;
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // Í¨¹ıÊ¹ÓÃ¾²Ì¬¶ÏÑÔ£¬¹Ì¶¨´óĞ¡Êı×éÊ¹ÓÃ³£Á¿Ë÷ÒıÊÇ±»ÔÊĞíµÄ¡£
+#include SYSTEM_WARNING_DISABLE(26446)  // é€šè¿‡ä½¿ç”¨é™æ€æ–­è¨€ï¼Œå›ºå®šå¤§å°æ•°ç»„ä½¿ç”¨å¸¸é‡ç´¢å¼•æ˜¯è¢«å…è®¸çš„ã€‚
 
     colour[redIndex] = red;
 
@@ -433,7 +433,7 @@ void Rendering::TextureColour<Format>::SetGreen(ValueType green) noexcept
     RENDERING_CLASS_IS_VALID_3;
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // Í¨¹ıÊ¹ÓÃ¾²Ì¬¶ÏÑÔ£¬¹Ì¶¨´óĞ¡Êı×éÊ¹ÓÃ³£Á¿Ë÷ÒıÊÇ±»ÔÊĞíµÄ¡£
+#include SYSTEM_WARNING_DISABLE(26446)  // é€šè¿‡ä½¿ç”¨é™æ€æ–­è¨€ï¼Œå›ºå®šå¤§å°æ•°ç»„ä½¿ç”¨å¸¸é‡ç´¢å¼•æ˜¯è¢«å…è®¸çš„ã€‚
 
     colour[greenIndex] = green;
 
@@ -449,7 +449,7 @@ void Rendering::TextureColour<Format>::SetBlue(ValueType blue) noexcept
     RENDERING_CLASS_IS_VALID_3;
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // Í¨¹ıÊ¹ÓÃ¾²Ì¬¶ÏÑÔ£¬¹Ì¶¨´óĞ¡Êı×éÊ¹ÓÃ³£Á¿Ë÷ÒıÊÇ±»ÔÊĞíµÄ¡£
+#include SYSTEM_WARNING_DISABLE(26446)  // é€šè¿‡ä½¿ç”¨é™æ€æ–­è¨€ï¼Œå›ºå®šå¤§å°æ•°ç»„ä½¿ç”¨å¸¸é‡ç´¢å¼•æ˜¯è¢«å…è®¸çš„ã€‚
 
     colour[blueIndex] = blue;
 
@@ -465,7 +465,7 @@ void Rendering::TextureColour<Format>::SetAlpha(ValueType alpha) noexcept
     RENDERING_CLASS_IS_VALID_3;
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // Í¨¹ıÊ¹ÓÃ¾²Ì¬¶ÏÑÔ£¬¹Ì¶¨´óĞ¡Êı×éÊ¹ÓÃ³£Á¿Ë÷ÒıÊÇ±»ÔÊĞíµÄ¡£
+#include SYSTEM_WARNING_DISABLE(26446)  // é€šè¿‡ä½¿ç”¨é™æ€æ–­è¨€ï¼Œå›ºå®šå¤§å°æ•°ç»„ä½¿ç”¨å¸¸é‡ç´¢å¼•æ˜¯è¢«å…è®¸çš„ã€‚
 
     colour[alphaIndex] = alpha;
 
@@ -481,7 +481,7 @@ void Rendering::TextureColour<Format>::SetLuminance(ValueType luminance) noexcep
     RENDERING_CLASS_IS_VALID_3;
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // Í¨¹ıÊ¹ÓÃ¾²Ì¬¶ÏÑÔ£¬¹Ì¶¨´óĞ¡Êı×éÊ¹ÓÃ³£Á¿Ë÷ÒıÊÇ±»ÔÊĞíµÄ¡£
+#include SYSTEM_WARNING_DISABLE(26446)  // é€šè¿‡ä½¿ç”¨é™æ€æ–­è¨€ï¼Œå›ºå®šå¤§å°æ•°ç»„ä½¿ç”¨å¸¸é‡ç´¢å¼•æ˜¯è¢«å…è®¸çš„ã€‚
 
     colour[luminanceIndex] = luminance;
 
@@ -553,7 +553,7 @@ void Rendering::TextureColour<Format>::Multiply(const std::integral_constant<boo
     static_assert(0 <= Index && Index < arraySize, "index is crossing!");
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // Í¨¹ıÊ¹ÓÃ¾²Ì¬¶ÏÑÔ£¬¹Ì¶¨´óĞ¡Êı×éÊ¹ÓÃ³£Á¿Ë÷ÒıÊÇ±»ÔÊĞíµÄ¡£
+#include SYSTEM_WARNING_DISABLE(26446)  // é€šè¿‡ä½¿ç”¨é™æ€æ–­è¨€ï¼Œå›ºå®šå¤§å°æ•°ç»„ä½¿ç”¨å¸¸é‡ç´¢å¼•æ˜¯è¢«å…è®¸çš„ã€‚
 #include SYSTEM_WARNING_DISABLE(26467)
 
     colour[Index] = boost::numeric_cast<ValueType>(textureColour[Index] * textureColour[Index] / maxValue);
@@ -612,7 +612,7 @@ void Rendering::TextureColour<Format>::Divide(RhsType rhs, const std::integral_c
 {
     if (Mathematics::Math<RhsType>::FAbs(rhs) <= Mathematics::Math<RhsType>::GetZeroTolerance())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³ıÁã´íÎó£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("é™¤é›¶é”™è¯¯ï¼"s));
     }
 
     for (auto& value : colour)
@@ -637,7 +637,7 @@ void Rendering::TextureColour<Format>::Divide(RhsType rhs, const std::false_type
 {
     if (rhs == 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³ıÁã´íÎó£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("é™¤é›¶é”™è¯¯ï¼"s));
     }
 
     for (auto& value : colour)

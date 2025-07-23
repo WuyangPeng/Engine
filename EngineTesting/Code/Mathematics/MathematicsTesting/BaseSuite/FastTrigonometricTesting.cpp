@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 15:26)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 15:26)
 
 #include "FastTrigonometricTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -57,7 +57,7 @@ void Mathematics::FastTrigonometricTesting::FastSinTest()
 
 void Mathematics::FastTrigonometricTesting::FloatFastSinTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
     std::uniform_real_distribution<float> randomDistribution{ MathF::GetValue(0), MathF::GetHalfPI() };
 
@@ -77,7 +77,7 @@ void Mathematics::FastTrigonometricTesting::FloatFastSinTest()
 
 void Mathematics::FastTrigonometricTesting::DoubleFastSinTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
     std::uniform_real_distribution<double> randomDistribution{ MathD::GetValue(0), MathD::GetHalfPI() };
 
@@ -103,7 +103,7 @@ void Mathematics::FastTrigonometricTesting::FastCosTest()
 
 void Mathematics::FastTrigonometricTesting::FloatFastCosTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
     std::uniform_real_distribution<float> randomDistribution{ MathF::GetValue(0), MathF::GetHalfPI() };
 
@@ -123,7 +123,7 @@ void Mathematics::FastTrigonometricTesting::FloatFastCosTest()
 
 void Mathematics::FastTrigonometricTesting::DoubleFastCosTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
     std::uniform_real_distribution<double> randomDistribution{ MathD::GetValue(0), MathD::GetHalfPI() };
 
@@ -149,7 +149,7 @@ void Mathematics::FastTrigonometricTesting::FastTanTest()
 
 void Mathematics::FastTrigonometricTesting::FloatFastTanTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
     std::uniform_real_distribution<float> randomDistribution{ MathF::GetValue(0), MathF::GetQuarterPI() };
 
@@ -169,7 +169,7 @@ void Mathematics::FastTrigonometricTesting::FloatFastTanTest()
 
 void Mathematics::FastTrigonometricTesting::DoubleFastTanTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
     std::uniform_real_distribution<double> randomDistribution{ MathD::GetValue(0), MathD::GetQuarterPI() };
 
@@ -195,7 +195,7 @@ void Mathematics::FastTrigonometricTesting::FastInvSinTest()
 
 void Mathematics::FastTrigonometricTesting::FloatFastInvSinTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
     std::uniform_real_distribution<float> randomDistribution{ MathF::GetValue(0), MathF::GetValue(1) };
 
@@ -213,7 +213,7 @@ void Mathematics::FastTrigonometricTesting::FloatFastInvSinTest()
 
 void Mathematics::FastTrigonometricTesting::DoubleFastInvSinTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
     std::uniform_real_distribution<double> randomDistribution{ MathD::GetValue(0), MathD::GetValue(1) };
 
@@ -237,7 +237,7 @@ void Mathematics::FastTrigonometricTesting::FastInvCosTest()
 
 void Mathematics::FastTrigonometricTesting::FloatFastInvCosTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
     std::uniform_real_distribution<float> randomDistribution{ MathF::GetValue(0), MathF::GetValue(1) };
 
@@ -255,7 +255,7 @@ void Mathematics::FastTrigonometricTesting::FloatFastInvCosTest()
 
 void Mathematics::FastTrigonometricTesting::DoubleFastInvCosTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
     std::uniform_real_distribution<double> randomDistribution{ MathD::GetValue(0), MathD::GetValue(1) };
 
@@ -279,7 +279,7 @@ void Mathematics::FastTrigonometricTesting::FastInvTanTest()
 
 void Mathematics::FastTrigonometricTesting::FloatFastInvTanTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
     std::uniform_real_distribution<float> randomDistribution{ MathF::GetValue(-1), MathF::GetValue(1) };
 
@@ -297,7 +297,7 @@ void Mathematics::FastTrigonometricTesting::FloatFastInvTanTest()
 
 void Mathematics::FastTrigonometricTesting::DoubleFastInvTanTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
     std::uniform_real_distribution<double> randomDistribution{ MathD::GetValue(-1), MathD::GetValue(1) };
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:52)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:52)
 
 #include "Rendering/RenderingExport.h"
 
@@ -105,14 +105,14 @@ void Rendering::ClodMeshImpl::SelectLevelOfDetail(VertexBuffer& vertexbuffer, co
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    // Èç¹û±ØÒªµÄ»°£¬ËúÏİÍø¸ñ¡£
+    // å¦‚æœå¿…è¦çš„è¯ï¼Œå¡Œé™·ç½‘æ ¼ã€‚
     const auto bufferChanged = (currentRecord != aTargetRecord);
 
     while (currentRecord < aTargetRecord)
     {
         ++currentRecord;
 
-        // ¸ü»»Á¬½ÓÊı×éÖĞµÄË÷Òı
+        // æ›´æ¢è¿æ¥æ•°ç»„ä¸­çš„ç´¢å¼•
         auto record = recordArray.object->GetRecord(currentRecord);
         for (auto i = 0; i < record.GetIndicesSize(); ++i)
         {
@@ -120,17 +120,17 @@ void Rendering::ClodMeshImpl::SelectLevelOfDetail(VertexBuffer& vertexbuffer, co
             indexbuffer->SetPoint(recordIndex, record.GetVKeep());
         }
 
-        // ¼õÉÙ¶¥µãÊı£¬¶¥µãÕıÈ·ÅÅĞò¡£
+        // å‡å°‘é¡¶ç‚¹æ•°ï¼Œé¡¶ç‚¹æ­£ç¡®æ’åºã€‚
         vertexbuffer.SetNumActiveElements(record.GetNumVertices());
 
-        // ¼õÉÙÈı½ÇĞÎÊıÁ¿£¬Èı½ÇĞÎÕıÈ·ÅÅĞò¡£
+        // å‡å°‘ä¸‰è§’å½¢æ•°é‡ï¼Œä¸‰è§’å½¢æ­£ç¡®æ’åºã€‚
         indexbuffer->SetNumActiveElements(3 * record.GetNumTriangles());
     }
 
-    // Èç¹ûĞèÒªµÄ»°,À©´óÍø¸ñ
+    // å¦‚æœéœ€è¦çš„è¯,æ‰©å¤§ç½‘æ ¼
     while (targetRecord < currentRecord)
     {
-        // ¸ü»»Á¬½ÓÊı×éÖĞµÄË÷Òı
+        // æ›´æ¢è¿æ¥æ•°ç»„ä¸­çš„ç´¢å¼•
         auto record = recordArray.object->GetRecord(currentRecord);
         for (auto i = 0; i < record.GetIndicesSize(); ++i)
         {
@@ -141,10 +141,10 @@ void Rendering::ClodMeshImpl::SelectLevelOfDetail(VertexBuffer& vertexbuffer, co
         --currentRecord;
         auto prevRecord = recordArray.object->GetRecord(currentRecord);
 
-        // Ôö¼Ó¶¥µãÊı£¬¶¥µãÕıÈ·ÅÅĞò¡£
+        // å¢åŠ é¡¶ç‚¹æ•°ï¼Œé¡¶ç‚¹æ­£ç¡®æ’åºã€‚
         vertexbuffer.SetNumActiveElements(prevRecord.GetNumVertices());
 
-        // Ôö¼ÓÈı½ÇĞÎÊıÁ¿£¬Èı½ÇĞÎÕıÈ·ÅÅĞò¡£
+        // å¢åŠ ä¸‰è§’å½¢æ•°é‡ï¼Œä¸‰è§’å½¢æ­£ç¡®æ’åºã€‚
         indexbuffer->SetNumActiveElements(3 * prevRecord.GetNumTriangles());
     }
 

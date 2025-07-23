@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 14:21)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 14:21)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -33,7 +33,7 @@ int32_t Mathematics::BitHacks::Log2OfPowerOfTwo(int32_t powerOfTwo)
 {
     if (powerOfTwo < 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§ÊäÈë¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆè¾“å…¥ã€‚"s))
     }
 
     return boost::numeric_cast<int32_t>(Log2OfPowerOfTwo(boost::numeric_cast<uint32_t>(powerOfTwo)));
@@ -59,8 +59,8 @@ int Mathematics::BitHacks::Log2OfPowerOfTwo(int64_t powerOfTwo)
 
 int32_t Mathematics::BitHacks::ScaledFloatToInt(float scaledFloat, int power) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(0 <= scaledFloat && scaledFloat <= 1, "valueµÄÇø¼äÎª[0,1]¡£");
-    MATHEMATICS_ASSERTION_3(0 <= power && power <= 24, "powerµÄÇø¼äÎª[0,24]¡£");
+    MATHEMATICS_ASSERTION_3(0 <= scaledFloat && scaledFloat <= 1, "valueçš„åŒºé—´ä¸º[0,1]ã€‚");
+    MATHEMATICS_ASSERTION_3(0 <= power && power <= 24, "powerçš„åŒºé—´ä¸º[0,24]ã€‚");
 
     const Mathematics::ScaledFloatToInt scaledFloatToInt{ scaledFloat, power };
 
@@ -147,10 +147,10 @@ int Mathematics::BitHacks::GetTrailingBit(uint32_t value)
 {
 #ifndef BIT_HACKS_BETTER
 
-    /// GetTrailingBit(int32_t)º¯Êı°üº¬Êµ¼ÊÊµÏÖ¡£
-    /// Èç¹ûÒªÊµÏÖ»ùÓÚuint32_tµÄº¯Êı£¬
-    /// £¨value&-value£©Óï¾ä»áÉú³ÉÒ»¸ö±àÒëÆ÷¾¯¸æ£¬
-    /// ¾¯¸æ·ñ¶¨Ò»¸öÎŞ·ûºÅÕûÊı£¬ÕâĞèÒª¶îÍâµÄÂß¼­À´±ÜÃâ¡£
+    /// GetTrailingBit(int32_t)å‡½æ•°åŒ…å«å®é™…å®ç°ã€‚
+    /// å¦‚æœè¦å®ç°åŸºäºuint32_tçš„å‡½æ•°ï¼Œ
+    /// ï¼ˆvalue&-valueï¼‰è¯­å¥ä¼šç”Ÿæˆä¸€ä¸ªç¼–è¯‘å™¨è­¦å‘Šï¼Œ
+    /// è­¦å‘Šå¦å®šä¸€ä¸ªæ— ç¬¦å·æ•´æ•°ï¼Œè¿™éœ€è¦é¢å¤–çš„é€»è¾‘æ¥é¿å…ã€‚
     return GetTrailingBit(boost::numeric_cast<int32_t>(value));
 
 #else  // !BIT_HACKS_BETTER
@@ -199,12 +199,12 @@ uint32_t Mathematics::BitHacks::RoundUpToPowerOfTwo(uint32_t value)
         if (const auto mask = (1 << leading);
             (value & ~mask) == 0)
         {
-            /// ÖµÊÇ¶şµÄÃİ
+            /// å€¼æ˜¯äºŒçš„å¹‚
             return value;
         }
         else
         {
-            /// ËÄÉáÎåÈëµ½¶şµÄÃİ
+            /// å››èˆäº”å…¥åˆ°äºŒçš„å¹‚
             if ((mask & 0x80000000u) == 0)
                 return (mask << 1);
             else

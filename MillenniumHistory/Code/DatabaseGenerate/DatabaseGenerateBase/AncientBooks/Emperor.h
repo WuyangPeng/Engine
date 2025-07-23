@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #ifndef ANCIENT_BOOKS_EMPEROR_H
 #define ANCIENT_BOOKS_EMPEROR_H
@@ -112,29 +112,29 @@ namespace AncientBooks
 
     private:
         int id;  // Id
-        int character;  // ÈËÎï
-        String name;  // Ãû×Ö
-        String dynasticTitle;  // ÃíºÅ
-        StringContainer dynasticTitleAlias;  // ÃíºÅ±ğÃû
-        String posthumousTitle;  // ÚÖºÅ
-        StringContainer posthumousTitleAlias;  // ÚÖºÅ±ğÃû
-        int beginYear;  // ¼ÌÎ»Äê
-        int beginMonth;  // ¼ÌÎ»ÔÂ
-        int beginSexagenaryCycle;  // ¼ÌÎ»¸ÉÖ§ÈÕ
-        int beginDay;  // ¼ÌÎ»ÈÕ
-        int endYear;  // ÍËÎ»Äê
-        int endMonth;  // ÍËÎ»ÔÂ
-        int endSexagenaryCycle;  // ÍËÎ»¸ÉÖ§ÈÕ
-        int endDay;  // ÍËÎ»ÈÕ
-        int againBeginYear;  // ÔÙ´Î¼ÌÎ»Äê
-        int againBeginMonth;  // ÔÙ´Î¼ÌÎ»ÔÂ
-        int againBeginSexagenaryCycle;  // ÔÙ´Î¼ÌÎ»¸ÉÖ§ÈÕ
-        int againBeginDay;  // ÔÙ´Î¼ÌÎ»ÈÕ
-        int againEndYear;  // ÔÙ´ÎÍËÎ»Äê
-        int againEndMonth;  // ÔÙ´ÎÍËÎ»ÔÂ
-        int againEndSexagenaryCycle;  // ÔÙ´ÎÍËÎ»¸ÉÖ§ÈÕ
-        int againEndDay;  // ÔÙ´ÎÍËÎ»ÈÕ
-        StringContainer unansweredQuestion;  // ´æÒÉ
+        int character;  // äººç‰©
+        String name;  // åå­—
+        String dynasticTitle;  // åº™å·
+        StringContainer dynasticTitleAlias;  // åº™å·åˆ«å
+        String posthumousTitle;  // è°¥å·
+        StringContainer posthumousTitleAlias;  // è°¥å·åˆ«å
+        int beginYear;  // ç»§ä½å¹´
+        int beginMonth;  // ç»§ä½æœˆ
+        int beginSexagenaryCycle;  // ç»§ä½å¹²æ”¯æ—¥
+        int beginDay;  // ç»§ä½æ—¥
+        int endYear;  // é€€ä½å¹´
+        int endMonth;  // é€€ä½æœˆ
+        int endSexagenaryCycle;  // é€€ä½å¹²æ”¯æ—¥
+        int endDay;  // é€€ä½æ—¥
+        int againBeginYear;  // å†æ¬¡ç»§ä½å¹´
+        int againBeginMonth;  // å†æ¬¡ç»§ä½æœˆ
+        int againBeginSexagenaryCycle;  // å†æ¬¡ç»§ä½å¹²æ”¯æ—¥
+        int againBeginDay;  // å†æ¬¡ç»§ä½æ—¥
+        int againEndYear;  // å†æ¬¡é€€ä½å¹´
+        int againEndMonth;  // å†æ¬¡é€€ä½æœˆ
+        int againEndSexagenaryCycle;  // å†æ¬¡é€€ä½å¹²æ”¯æ—¥
+        int againEndDay;  // å†æ¬¡é€€ä½æ—¥
+        StringContainer unansweredQuestion;  // å­˜ç–‘
     };
 }
 

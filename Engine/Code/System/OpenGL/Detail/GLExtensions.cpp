@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/02 23:18)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/02 23:18)
 
 #include "System/SystemExport.h"
 
@@ -33,7 +33,7 @@
 #include "System/OpenGL/Flags/GLExtensionsFlags.h"
 #include "System/OpenGL/OpenGLUtility.h"
 
-/// ·ÃÎÊOpenGLÇı¶¯³ÌĞòµÄĞÅÏ¢¡£
+/// è®¿é—®OpenGLé©±åŠ¨ç¨‹åºçš„ä¿¡æ¯ã€‚
 const char* System::GetVendorString() noexcept
 {
 #include SYSTEM_WARNING_PUSH
@@ -74,7 +74,7 @@ const char* System::GetShadingLanguageVersion() noexcept
 #include SYSTEM_WARNING_POP
 }
 
-/// OpenGLµÄÏµÍ³³õÊ¼»¯
+/// OpenGLçš„ç³»ç»Ÿåˆå§‹åŒ–
 bool System::InitGL() noexcept
 {
     InitOpenGL10();

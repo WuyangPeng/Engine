@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 10:20)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 10:20)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_GET_MINIMUM_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_GET_MINIMUM_DETAIL_H
@@ -24,7 +24,7 @@ Mathematics::MinimizeNGetMinimum<Real, UserDataType>::MinimizeNGetMinimum(int di
                                                                           const Container& begin,
                                                                           const Container& end)
     : dimensions{ dimensions },
-      // ³õÊ¼»¯ÉèÖÃÎª±ê×¼Å·¼¸ÀïµÃ»ù´¡·½Ïò¡£
+      // åˆå§‹åŒ–è®¾ç½®ä¸ºæ ‡å‡†æ¬§å‡ é‡Œå¾—åŸºç¡€æ–¹å‘ã€‚
       directionStorage(GetStorageSize(dimensions)),
       directionIndex{},
       directionConjugateIndex{ dimensions },
@@ -74,7 +74,7 @@ template <typename Real, typename UserDataType>
 Real Mathematics::MinimizeNGetMinimum<Real, UserDataType>::CalculateLineArg(int index, Real value) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_0(0 <= index && index < dimensions, "Ë÷Òı´íÎó£¡");
+    MATHEMATICS_ASSERTION_0(0 <= index && index < dimensions, "ç´¢å¼•é”™è¯¯ï¼");
 
     return minimizeNData.GetMinLocation(index) + value * GetDirectionCurrent(index);
 }
@@ -90,7 +90,7 @@ Real Mathematics::MinimizeNGetMinimum<Real, UserDataType>::GetFunctionResult(con
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("function Ö¸ÕëÎª¿Õ¡£"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("function æŒ‡é’ˆä¸ºç©ºã€‚"s));
     }
 }
 
@@ -109,7 +109,7 @@ void Mathematics::MinimizeNGetMinimum<Real, UserDataType>::FindEachDirection(int
 
     const auto domainResult = ComputeDomain(beginContainer, endContainer);
 
-    // ¶Ô 1D º¯Êı»Øµ÷
+    // å¯¹ 1D å‡½æ•°å›è°ƒ
     const Minimize1Type minimizer{ LineFunction, maxLevel, maxBracket, this };
 
     const auto minimizerData = minimizer.GetMinimum(domainResult.beginResult, domainResult.endResult, MathType::GetValue(0));
@@ -144,7 +144,7 @@ void Mathematics::MinimizeNGetMinimum<Real, UserDataType>::MinimizeConjugateDire
         directionStorage.at(index) /= length;
     }
 
-    // ×îĞ¡»¯¹²éî·½Ïò¡£
+    // æœ€å°åŒ–å…±è½­æ–¹å‘ã€‚
     directionCurrentIndex = directionConjugateIndex;
     const auto domainResult = ComputeDomain(beginContainer, endContainer);
 
@@ -153,7 +153,7 @@ void Mathematics::MinimizeNGetMinimum<Real, UserDataType>::MinimizeConjugateDire
 
     minimizeNData.Set(minimizerData.GetMinValue(), minimizerData.GetMinLocation(), directionStorage, directionCurrentIndex);
 
-    // Ñ­»··½Ïò£¬²¢Ìí¼Ó¹²éî·½Ïòµ½¼¯ºÏ
+    // å¾ªç¯æ–¹å‘ï¼Œå¹¶æ·»åŠ å…±è½­æ–¹å‘åˆ°é›†åˆ
     directionConjugateIndex = 0;
     for (auto i = 0; i < dimensions; ++i)
     {
@@ -162,7 +162,7 @@ void Mathematics::MinimizeNGetMinimum<Real, UserDataType>::MinimizeConjugateDire
         directionStorage.at(directionIndex.at(i)) = directionStorage.at(directionIndex.at(next));
     }
 
-    // ÉèÖÃÏÂ´ÎµÄ²ÎÊı¡£
+    // è®¾ç½®ä¸‹æ¬¡çš„å‚æ•°ã€‚
     save = minimizeNData.GetMinLocation();
 }
 
@@ -184,7 +184,7 @@ typename Mathematics::MinimizeNGetMinimum<Real, UserDataType>::DomainResult Math
 
         if (MathType::GetValue(0) < GetDirectionCurrent(i))
         {
-            // ÓĞĞ§µÄ¼ä¸ôÊÇ[b0,b1]¡£
+            // æœ‰æ•ˆçš„é—´éš”æ˜¯[b0,b1]ã€‚
             beginMinus /= GetDirectionCurrent(i);
             if (result.beginResult < beginMinus)
             {
@@ -198,7 +198,7 @@ typename Mathematics::MinimizeNGetMinimum<Real, UserDataType>::DomainResult Math
         }
         else if (GetDirectionCurrent(i) < MathType::GetValue(0))
         {
-            // ÓĞĞ§µÄ¼ä¸ôÊÇ[b1,b0]¡£
+            // æœ‰æ•ˆçš„é—´éš”æ˜¯[b1,b0]ã€‚
             beginMinus /= GetDirectionCurrent(i);
             if (beginMinus < result.endResult)
             {
@@ -212,7 +212,7 @@ typename Mathematics::MinimizeNGetMinimum<Real, UserDataType>::DomainResult Math
         }
     }
 
-    // Êı×Ö²î´í¸üÕıµ¼ÖÂÖµ¼¸ºõÎªÁã¡£
+    // æ•°å­—å·®é”™æ›´æ­£å¯¼è‡´å€¼å‡ ä¹ä¸ºé›¶ã€‚
     if (MathType::GetValue(0) < result.beginResult)
     {
         result.beginResult = MathType::GetValue(0);
@@ -230,7 +230,7 @@ Real Mathematics::MinimizeNGetMinimum<Real, UserDataType>::LineFunction(Real val
 {
     if (userData == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("userDataÖ¸ÕëÎª¿Õ"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("userDataæŒ‡é’ˆä¸ºç©º"s));
     }
 
     const auto dimensions = userData->GetDimensions();

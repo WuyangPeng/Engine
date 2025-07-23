@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:04)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:04)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_BOX3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_BOX3_DETAIL_H
@@ -84,7 +84,7 @@ void Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::Find()
 
     if (!testIntersectorAxis.GetResult())
     {
-        // ÓÀ²»Ïà½»¡£
+        // æ°¸ä¸ç›¸äº¤ã€‚
         this->SetContactTime(contactTime);
         this->SetIntersectionType(IntersectionType::Empty);
         return;
@@ -92,7 +92,7 @@ void Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::Find()
 
     if (MathType::Approximate(contactTime, MathType::GetValue(0)))
     {
-        // ÏÖÔÚÏà½»¡£
+        // ç°åœ¨ç›¸äº¤ã€‚
         this->SetContactTime(contactTime);
         this->SetIntersectionType(IntersectionType::Empty);
         return;
@@ -100,21 +100,21 @@ void Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::Find()
 
     Container container{};
 
-    // ÕıÃæÉÏµÄ·½¿ò£¨ÓÒ£©¡£
+    // æ­£é¢ä¸Šçš„æ–¹æ¡†ï¼ˆå³ï¼‰ã€‚
     if (cfg.GetMap() == VertexProjectionMap::M1_1)
     {
-        // µãÏà½»¡£
+        // ç‚¹ç›¸äº¤ã€‚
         container.emplace_back(IntersectorUtility3<Real>::GetPointFromIndex(cfg.GetIndex(0), box));
     }
     else if (cfg.GetMap() == VertexProjectionMap::M2_2)
     {
-        // Ïß¶ÎÏà½»¡£
+        // çº¿æ®µç›¸äº¤ã€‚
         container.emplace_back(IntersectorUtility3<Real>::GetPointFromIndex(cfg.GetIndex(0), box));
         container.emplace_back(IntersectorUtility3<Real>::GetPointFromIndex(cfg.GetIndex(1), box));
     }
     else  // cfg.mMap == VertexProjectionMap::M44
     {
-        // ÃæÏà½»
+        // é¢ç›¸äº¤
 
         container.emplace_back(IntersectorUtility3<Real>::GetPointFromIndex(cfg.GetIndex(0), box));
         container.emplace_back(IntersectorUtility3<Real>::GetPointFromIndex(cfg.GetIndex(1), box));
@@ -122,7 +122,7 @@ void Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::Find()
         container.emplace_back(IntersectorUtility3<Real>::GetPointFromIndex(cfg.GetIndex(3), box));
     }
 
-    // ½«µãÒ²¼°Ê±µ÷Õûµ½ÕıÈ·µÄÎ»ÖÃ¡£
+    // å°†ç‚¹ä¹ŸåŠæ—¶è°ƒæ•´åˆ°æ­£ç¡®çš„ä½ç½®ã€‚
     auto diff = contactTime * this->GetRhsVelocity();
     for (auto& value : container)
     {

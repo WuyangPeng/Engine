@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/30 22:33)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/30 22:33)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_FILE_HANDLE_IMPL_H
 #define CORE_TOOLS_FILE_MANAGER_FILE_HANDLE_IMPL_H
@@ -45,9 +45,9 @@ namespace CoreTools
 
         NODISCARD uint64_t GetFileLength() const;
 
-        /// @param data ±ØĞëÖÁÉÙÓĞitemSize * itemsNumber´óĞ¡¡£
-        /// @param itemSize Ã¿¸öÊı¾İÏîµÄ´óĞ¡£¨ÒÔ×Ö½ÚÎªµ¥Î»£©£¬ÓĞĞ§ÖµÎª1¡¢2¡¢4¡¢8¡£
-        /// @param itemsNumber Òª¶ÁÈ¡µÄÊı¾İÏîµÄÊıÁ¿¡£
+        /// @param data å¿…é¡»è‡³å°‘æœ‰itemSize * itemsNumberå¤§å°ã€‚
+        /// @param itemSize æ¯ä¸ªæ•°æ®é¡¹çš„å¤§å°ï¼ˆä»¥å­—èŠ‚ä¸ºå•ä½ï¼‰ï¼Œæœ‰æ•ˆå€¼ä¸º1ã€2ã€4ã€8ã€‚
+        /// @param itemsNumber è¦è¯»å–çš„æ•°æ®é¡¹çš„æ•°é‡ã€‚
         virtual void ReadFromFile(size_t itemSize, size_t itemsNumber, void* data);
         virtual void WriteToFile(size_t itemSize, size_t itemsNumber, const void* data);
         virtual void AppendToFile(size_t itemSize, size_t itemsNumber, const void* data);

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/17 17:07)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/17 17:07)
 
 #include "SimpleCSVExceptionTesting.h"
 #include "System/Windows/Flags/PlatformErrorFlags.h"
@@ -43,28 +43,28 @@ void CoreTools::SimpleCSVExceptionTesting::MainTest()
 
 void CoreTools::SimpleCSVExceptionTesting::ThrowSimpleCSVExceptionTest()
 {
-    THROW_SIMPLE_CSV_EXCEPTION(SimpleCSV::CSVExceptionType::CellAddress, SYSTEM_TEXT("²âÊÔÅ×³öCSVÒì³£¡£"s));
+    THROW_SIMPLE_CSV_EXCEPTION(SimpleCSV::CSVExceptionType::CellAddress, SYSTEM_TEXT("æµ‹è¯•æŠ›å‡ºCSVå¼‚å¸¸ã€‚"s));
 }
 
 void CoreTools::SimpleCSVExceptionTesting::ThrowSimpleCSVLastErrorExceptionTest()
 {
-    THROW_LAST_ERROR_SIMPLE_CSV_EXCEPTION(System::WindowError::NoAccess, SimpleCSV::CSVExceptionType::CellAddress, SYSTEM_TEXT("²âÊÔÅ×³öCSVÒì³£¡£"s));
+    THROW_LAST_ERROR_SIMPLE_CSV_EXCEPTION(System::WindowError::NoAccess, SimpleCSV::CSVExceptionType::CellAddress, SYSTEM_TEXT("æµ‹è¯•æŠ›å‡ºCSVå¼‚å¸¸ã€‚"s));
 }
 
 void CoreTools::SimpleCSVExceptionTesting::ThrowSimpleCSVExceptionMultiByteTest()
 {
-    THROW_SIMPLE_CSV_EXCEPTION(SimpleCSV::CSVExceptionType::CellAddress, "²âÊÔÅ×³öCSVÒì³£¡£"s);
+    THROW_SIMPLE_CSV_EXCEPTION(SimpleCSV::CSVExceptionType::CellAddress, "æµ‹è¯•æŠ›å‡ºCSVå¼‚å¸¸ã€‚"s);
 }
 
 void CoreTools::SimpleCSVExceptionTesting::ThrowSimpleCSVLastErrorExceptionMultiByteTest()
 {
-    THROW_LAST_ERROR_SIMPLE_CSV_EXCEPTION(System::WindowError::NoAccess, SimpleCSV::CSVExceptionType::CellAddress, "²âÊÔÅ×³öCSVÒì³£¡£"s);
+    THROW_LAST_ERROR_SIMPLE_CSV_EXCEPTION(System::WindowError::NoAccess, SimpleCSV::CSVExceptionType::CellAddress, "æµ‹è¯•æŠ›å‡ºCSVå¼‚å¸¸ã€‚"s);
 }
 
 void CoreTools::SimpleCSVExceptionTesting::SimpleCSVExceptionTest()
 {
     const LastError lastError{};
-    const auto errorMessage = SYSTEM_TEXT("²âÊÔÅ×³öCSVÒì³£¡£"s);
+    const auto errorMessage = SYSTEM_TEXT("æµ‹è¯•æŠ›å‡ºCSVå¼‚å¸¸ã€‚"s);
     constexpr auto csvType = SimpleCSV::CSVExceptionType::CellAddress;
     const auto functionDescribed = CORE_TOOLS_FUNCTION_DESCRIBED;
     const SimpleCSV::SimpleCSVException simpleCSVException{ functionDescribed, lastError, csvType, errorMessage };
@@ -76,7 +76,7 @@ void CoreTools::SimpleCSVExceptionTesting::SimpleCSVExceptionTest()
 
 void CoreTools::SimpleCSVExceptionTesting::SimpleCSVLastErrorExceptionTest()
 {
-    const auto errorMessage = SYSTEM_TEXT("²âÊÔÅ×³öCSVÒì³£¡£"s);
+    const auto errorMessage = SYSTEM_TEXT("æµ‹è¯•æŠ›å‡ºCSVå¼‚å¸¸ã€‚"s);
     constexpr auto csvType = SimpleCSV::CSVExceptionType::CellAddress;
     const auto functionDescribed = CORE_TOOLS_FUNCTION_DESCRIBED;
     constexpr auto lastError = System::WindowError::NoAccess;

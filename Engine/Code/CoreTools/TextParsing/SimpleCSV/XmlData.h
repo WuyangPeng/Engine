@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.8 (2024/04/02 15:22)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/02 15:22)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_XML_DATA_H
 #define CORE_TOOLS_TEXT_PARSING_XML_DATA_H
@@ -25,8 +25,8 @@ template class CORE_TOOLS_DEFAULT_DECLARE CoreTools::NonCopyImpl<CoreTools::Simp
 
 namespace CoreTools::SimpleCSV
 {
-    /// XmlData�ཫ.xml�ļ������Ժ���Ϊ��װ��.xlsx �ļ�zip���С�
-    /// XmlData���͵Ķ���ּ�ڼ��д洢��Document�����У�������װExcelԪ����Ϊ�Ķ������� Workbook �� Worksheet�����Դ��м������ǡ�
+    /// XmlData类将.xml文件的属性和行为封装在.xlsx 文件zip包中。
+    /// XmlData类型的对象旨在集中存储在Document对象中，其他封装Excel元素行为的对象（例如 Workbook 和 Worksheet）可以从中检索它们。
     class CORE_TOOLS_DEFAULT_DECLARE XmlData final
     {
     public:
@@ -36,8 +36,8 @@ namespace CoreTools::SimpleCSV
         using DocumentWeakPtr = std::weak_ptr<Document>;
 
     public:
-        /// �˹��캯���������и��������Ķ��� xmlId �� xmlType ��������Ĭ��ֵ��
-        /// ��Щ���Թ�ϵ (.rels)�ļ���λ��zip����Ŀ¼�е�[Content_Types].xml�ļ����á�
+        /// 此构造函数创建具有给定参数的对象。 xmlId 和 xmlType 参数具有默认值。
+        /// 这些仅对关系 (.rels)文件和位于zip包根目录中的[Content_Types].xml文件有用。
         XmlData(const DocumentSharedPtr& parentDocument,
                 const std::string& xmlPath,
                 const std::string& xmlId = std::string{},
@@ -45,24 +45,24 @@ namespace CoreTools::SimpleCSV
 
         CLASS_INVARIANT_DECLARE;
 
-        /// ���õײ�XML�ĵ���ԭʼ���ݡ���ʹ��XML�ļ�ģ�崴�����ļ�ʱ���ܹ�ֱ������XML���ݷǳ����á�
-        /// ���磬�ڴ����¹�����ʱ������ʹ�ô˺���������С��Worksheet�����XML���롣
+        /// 设置底层XML文档的原始数据。在使用XML文件模板创建新文件时，能够直接设置XML数据非常有用。
+        /// 例如，在创建新工作表时，可以使用此函数添加最小行Worksheet对象的XML代码。
         void SetRawData(const std::string& data);
 
-        /// ��ȡ�ײ�XML�ĵ���ԭʼ���ݡ��˺������ӵײ�XMLDocument�����м���ԭʼXML�ı����ݡ�
-        /// �⽫��Ҫ����ʹ��Document���е�Save���������ݱ��浽.xlsx ��ʱ��
+        /// 获取底层XML文档的原始数据。此函数将从底层XMLDocument对象中检索原始XML文本数据。
+        /// 这将主要用于使用Document类中的Save函数将数据保存到.xlsx 包时。
         NODISCARD std::string GetRawData() const;
 
-        /// ����.xlsx zip�浵��XML���ݵ�·����
+        /// 检索.xlsx zip存档中XML数据的路径。
         NODISCARD std::string GetXmlPath() const;
 
-        /// ����XML�ļ��Ĺ�ϵID��
+        /// 检索XML文件的关系ID。
         NODISCARD std::string GetXmlId() const;
 
-        /// ����XML���ݱ�ʾ�����͡�
+        /// 检索XML数据表示的类型。
         NODISCARD ContentType GetXmlType() const noexcept;
 
-        /// ���ʻ���XMLDocument����
+        /// 访问基础XMLDocument对象。
         NODISCARD XMLDocumentSharedPtr GetXmlDocument() noexcept;
         NODISCARD ConstXMLDocumentSharedPtr GetXmlDocument() const noexcept;
 

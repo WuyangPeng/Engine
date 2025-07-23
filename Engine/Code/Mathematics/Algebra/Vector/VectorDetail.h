@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.5 (2024/01/27 15:29)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.5 (2024/01/27 15:29)
 
 #ifndef MATHEMATICS_ALGEBRA_ALGEBRA_VECTOR_DETAIL_H
 #define MATHEMATICS_ALGEBRA_ALGEBRA_VECTOR_DETAIL_H
@@ -287,7 +287,7 @@ Mathematics::Algebra::Vector<N, Real>& Mathematics::Algebra::Vector<N, Real>::op
     {
         MakeZero();
 
-        LOG_SINGLETON_ENGINE_APPENDER(Info, Mathematics, SYSTEM_TEXT("³ıÁã´íÎó¡£scalar = "), scalar, SYSTEM_TEXT(", N = "), N);
+        LOG_SINGLETON_ENGINE_APPENDER(Info, Mathematics, SYSTEM_TEXT("é™¤é›¶é”™è¯¯ã€‚scalar = "), scalar, SYSTEM_TEXT(", N = "), N);
     }
 
     return *this;

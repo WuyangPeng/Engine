@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 16:28)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 16:28)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_LINE3_BOX3_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_LINE3_BOX3_DETAIL_H
@@ -72,7 +72,7 @@ typename Mathematics::DistanceLine3Box3<Real>::DistanceResult Mathematics::Dista
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    // ÔÚºĞ×ø±êÏµÖĞ¼ÆËãÏßµÄ×ø±ê¡£
+    // åœ¨ç›’åæ ‡ç³»ä¸­è®¡ç®—çº¿çš„åæ ‡ã€‚
     auto diff = line.GetOrigin() - box.GetCenter();
     auto point = Vector3Type{ Vector3ToolsType::DotProduct(diff, box.GetAxis0()),
                           Vector3ToolsType::DotProduct(diff, box.GetAxis1()),
@@ -81,7 +81,7 @@ typename Mathematics::DistanceLine3Box3<Real>::DistanceResult Mathematics::Dista
                        Vector3ToolsType::DotProduct(line.GetDirection(), box.GetAxis1()),
                        Vector3ToolsType::DotProduct(line.GetDirection(), box.GetAxis2()) };
 
-    // Ó¦ÓÃ·´Éä£¬Ê¹·½ÏòÏòÁ¿¾ßÓĞ·Ç¸º·ÖÁ¿¡£
+    // åº”ç”¨åå°„ï¼Œä½¿æ–¹å‘å‘é‡å…·æœ‰éè´Ÿåˆ†é‡ã€‚
     constexpr auto size = 3;
     std::array<bool, size> reflect{};
 
@@ -157,14 +157,14 @@ typename Mathematics::DistanceLine3Box3<Real>::DistanceResult Mathematics::Dista
         }
     }
 
-    // ¼ÆËãÏßÉÏµÄ×î½üµã¡£
+    // è®¡ç®—çº¿ä¸Šçš„æœ€è¿‘ç‚¹ã€‚
     const auto closestPoint0 = line.GetOrigin() + lineParameter * line.GetDirection();
 
-    // ¼ÆËãºĞÉÏµÄ×î½üµã¡£
+    // è®¡ç®—ç›’ä¸Šçš„æœ€è¿‘ç‚¹ã€‚
     auto closestPoint1 = box.GetCenter();
     for (auto i = 0; i < size; ++i)
     {
-        // ³·ÏûÏÈÇ°Ó¦ÓÃµÄ·´Éä¡£
+        // æ’¤æ¶ˆå…ˆå‰åº”ç”¨çš„åå°„ã€‚
         if (reflect.at(i))
         {
             point[i] = -point[i];
@@ -195,12 +195,12 @@ Real Mathematics::DistanceLine3Box3<Real>::CaseNoZeros(const Vector3Type& direct
         prodDxPz = direction.GetX() * pointMinusExtent.GetZ();
         if (prodDxPz <= prodDzPx)
         {
-            // ÏßÏà½»x = e0
+            // çº¿ç›¸äº¤x = e0
             sqrDistance = Face(0, 1, 2, direction, pointMinusExtent, lineParameter, point);
         }
         else
         {
-            // ÏßÏà½» z = e2
+            // çº¿ç›¸äº¤ z = e2
             sqrDistance = Face(2, 0, 1, direction, pointMinusExtent, lineParameter, point);
         }
     }
@@ -210,12 +210,12 @@ Real Mathematics::DistanceLine3Box3<Real>::CaseNoZeros(const Vector3Type& direct
         prodDyPz = direction.GetY() * pointMinusExtent.GetZ();
         if (prodDyPz <= prodDzPy)
         {
-            // ÏßÏà½» y = e1
+            // çº¿ç›¸äº¤ y = e1
             sqrDistance = Face(1, 2, 0, direction, pointMinusExtent, lineParameter, point);
         }
         else
         {
-            // ÏßÏà½» z = e2
+            // çº¿ç›¸äº¤ z = e2
             sqrDistance = Face(2, 0, 1, direction, pointMinusExtent, lineParameter, point);
         }
     }
@@ -316,7 +316,7 @@ Real Mathematics::DistanceLine3Box3<Real>::Face(int i0, int i1, int i2, const Ve
             auto value = lenSqr * pointPlusExtent[i1] - direction[i1] * (direction[i0] * pointMinusExtent[i0] + direction[i2] * pointPlusExtent[i2]);
             if (value >= MathType::GetValue(0))
             {
-                // v[i1]-±ßÊÇ×î½üµã
+                // v[i1]-è¾¹æ˜¯æœ€è¿‘ç‚¹
                 if (value <= (MathType::GetValue(2)) * lenSqr * box.GetExtent(i1))
                 {
                     auto t = value / lenSqr;
@@ -350,7 +350,7 @@ Real Mathematics::DistanceLine3Box3<Real>::Face(int i0, int i1, int i2, const Ve
             value = lenSqr * pointPlusExtent[i2] - direction[i2] * (direction[i0] * pointMinusExtent[i0] + direction[i1] * pointPlusExtent[i1]);
             if (MathType::GetValue(0) <= value)
             {
-                // v[i2]-±ßÊÇ×î½üµã
+                // v[i2]-è¾¹æ˜¯æœ€è¿‘ç‚¹
                 if (value <= (MathType::GetValue(2)) * lenSqr * box.GetExtent(i2))
                 {
                     auto t = value / lenSqr;
@@ -380,7 +380,7 @@ Real Mathematics::DistanceLine3Box3<Real>::Face(int i0, int i1, int i2, const Ve
                 return sqrDistance;
             }
 
-            // (v[i1],v[i2])-½ÇÊÇ×î½üµã
+            // (v[i1],v[i2])-è§’æ˜¯æœ€è¿‘ç‚¹
             lenSqr += direction[i2] * direction[i2];
             auto delta = direction[i0] * pointMinusExtent[i0] + direction[i1] * pointPlusExtent[i1] + direction[i2] * pointPlusExtent[i2];
             auto param = -delta / lenSqr;
@@ -407,7 +407,7 @@ Real Mathematics::DistanceLine3Box3<Real>::Case0(int i0, int i1, int i2, const V
 
     if (prod1 <= prod0)
     {
-        // ÏßÏà½» P[i0] = e[i0]
+        // çº¿ç›¸äº¤ P[i0] = e[i0]
         point[i0] = box.GetExtent(i0);
 
         auto pointPlusE1 = point[i1] + box.GetExtent(i1);
@@ -427,7 +427,7 @@ Real Mathematics::DistanceLine3Box3<Real>::Case0(int i0, int i1, int i2, const V
     }
     else
     {
-        // ÏßÏà½» P[i1] = e[i1]
+        // çº¿ç›¸äº¤ P[i1] = e[i1]
         point[i1] = box.GetExtent(i1);
 
         auto pointPlusE0 = point[i0] + box.GetExtent(i0);

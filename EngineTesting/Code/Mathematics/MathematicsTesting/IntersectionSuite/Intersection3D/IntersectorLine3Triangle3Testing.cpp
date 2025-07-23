@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 15:54)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 15:54)
 
 #include "IntersectorLine3Triangle3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -102,7 +102,7 @@ void Mathematics::IntersectorLine3Triangle3Testing::FindTest()
         ASSERT_TRUE(Vector3ToolsD::Approximate(intersector.GetTriangle().GetVertex(2),
                                                point2, 1e-10));
 
-        // Öµ²âÊÔ
+        // å€¼æµ‹è¯•
         const Vector3D lineOrigin = line.GetOrigin() - triangle.GetVertex(0);
         const Vector3D edge1 = triangle.GetVertex(1) - triangle.GetVertex(0);
         const Vector3D edge2 = triangle.GetVertex(2) - triangle.GetVertex(0);
@@ -225,7 +225,7 @@ void Mathematics::IntersectorLine3Triangle3Testing::IntersectTest()
         ASSERT_TRUE(Vector3ToolsF::Approximate(intersector.GetTriangle().GetVertex(2),
                                                point2, 1e-8f));
 
-        // Öµ²âÊÔ
+        // å€¼æµ‹è¯•
         const Vector3F lineOrigin = line.GetOrigin() - triangle.GetVertex(0);
         const Vector3F edge1 = triangle.GetVertex(1) - triangle.GetVertex(0);
         const Vector3F edge2 = triangle.GetVertex(2) - triangle.GetVertex(0);

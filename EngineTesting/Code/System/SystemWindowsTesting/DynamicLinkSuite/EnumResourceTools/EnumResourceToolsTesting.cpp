@@ -1,13 +1,13 @@
-/// Ô­Ê¼ÎÄ¼şÔÚSystemTestingÏÂ£¬SystemWindowsTestingÏÂµÄÎª×Ô¶¯¸´ÖÆÎÄ¼ş£¬ÇëÎğĞŞ¸Ä¡£
+ï»¿/// åŸå§‹æ–‡ä»¶åœ¨SystemTestingä¸‹ï¼ŒSystemWindowsTestingä¸‹çš„ä¸ºè‡ªåŠ¨å¤åˆ¶æ–‡ä»¶ï¼Œè¯·å‹¿ä¿®æ”¹ã€‚
 
 /// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/09 21:24)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/09 21:24)
 
 #include "EnumResourceToolsTesting.h"
 #include "System/DynamicLink/EnumResourceTools.h"

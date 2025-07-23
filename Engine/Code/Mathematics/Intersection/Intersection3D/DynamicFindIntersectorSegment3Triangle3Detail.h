@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:13)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:13)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_SEGMENT3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_SEGMENT3_TRIANGLE3_DETAIL_H
@@ -107,19 +107,19 @@ void Mathematics::DynamicFindIntersectorSegment3Triangle3<Real>::Find()
 
     using SegmentType = std::array<Vector3Type, 2>;
 
-    // »ñÈ¡Ï¸·ÖµÄ¶Ëµã¡£
+    // è·å–ç»†åˆ†çš„ç«¯ç‚¹ã€‚
     const SegmentType segmentType{ segment.GetBeginPoint(), segment.GetEndPoint() };
 
-    // »ñÈ¡Èı½ÇĞÎµÄ±ßÔµ¡£
+    // è·å–ä¸‰è§’å½¢çš„è¾¹ç¼˜ã€‚
     auto edge0 = triangle.GetVertex(1) - triangle.GetVertex(0);
     auto edge1 = triangle.GetVertex(2) - triangle.GetVertex(0);
 
-    // »ñÈ¡Ïà¶ÔÓÚÏß¶ÎµÄÈı½ÇĞÎËÙ¶È¡£
+    // è·å–ç›¸å¯¹äºçº¿æ®µçš„ä¸‰è§’å½¢é€Ÿåº¦ã€‚
     auto relVelocity = rhsVelocity - lhsVelocity;
 
     this->SetContactTime(MathType::GetValue(0));
 
-    // ²âÊÔÈı½ÇĞÎ·¨Ïß
+    // æµ‹è¯•ä¸‰è§’å½¢æ³•çº¿
     const auto normal = Vector3ToolsType::CrossProduct(edge0, edge1);
     const FindIntersectorAxis<Real> findIntersectorAxis{ normal, segmentType, triangle, relVelocity, tMax };
     auto tLast = findIntersectorAxis.GetTLast();
@@ -135,7 +135,7 @@ void Mathematics::DynamicFindIntersectorSegment3Triangle3<Real>::Find()
         return;
     }
 
-    // ²âÊÔÏß¶ÎÊÇ·ñÆ½ĞĞÓÚÈı½ÇĞÎ£¬ÓĞĞ§µØ²âÊÔ£ºsin(Angle(NormV,DirU)) > 1 - epsilon
+    // æµ‹è¯•çº¿æ®µæ˜¯å¦å¹³è¡Œäºä¸‰è§’å½¢ï¼Œæœ‰æ•ˆåœ°æµ‹è¯•ï¼šsin(Angle(NormV,DirU)) > 1 - epsilon
     auto directionU = segment.GetEndPoint() - segment.GetBeginPoint();
     const auto normalU = Vector3ToolsType::CrossProduct(normal, directionU);
     auto directionSqrLength = Vector3ToolsType::GetLengthSquared(directionU);
@@ -143,10 +143,10 @@ void Mathematics::DynamicFindIntersectorSegment3Triangle3<Real>::Find()
     auto normalVSqrLength = Vector3ToolsType::GetLengthSquared(normal);
     auto oneMinusEpsilon = MathType::GetValue(1) - MathType::GetZeroTolerance();
 
-    // Æ½ĞĞ
+    // å¹³è¡Œ
     if (oneMinusEpsilon * normalVSqrLength * directionSqrLength < normalUSqrLength)
     {
-        // ²éÕÒÈı½ÇĞÎ·¨Ïß½»²æÏß¶Î·½Ïò¡£
+        // æŸ¥æ‰¾ä¸‰è§’å½¢æ³•çº¿äº¤å‰çº¿æ®µæ–¹å‘ã€‚
         const FindIntersectorAxis<Real> findIntersectorAxisU{ normalU, segmentType, triangle, relVelocity, tMax };
         tLast = findIntersectorAxisU.GetTLast();
         segmentContact = findIntersectorAxisU.GetCfgFinal0();
@@ -161,7 +161,7 @@ void Mathematics::DynamicFindIntersectorSegment3Triangle3<Real>::Find()
             return;
         }
 
-        // ²éÕÒÈı½ÇĞÎ·¨Ïß½»²æÈı½ÇĞÎ±ß¡£
+        // æŸ¥æ‰¾ä¸‰è§’å½¢æ³•çº¿äº¤å‰ä¸‰è§’å½¢è¾¹ã€‚
         for (auto i0 = 2, i1 = 0; i1 < 3; i0 = i1++)
         {
             const auto axis = Vector3ToolsType::CrossProduct(normal, (triangle.GetVertex(i1) - triangle.GetVertex(i0)));
@@ -183,7 +183,7 @@ void Mathematics::DynamicFindIntersectorSegment3Triangle3<Real>::Find()
     }
     else
     {
-        // ²éÕÒÏß¶Î·½Ïò½»²æÈı½ÇĞÎ±ß¡£
+        // æŸ¥æ‰¾çº¿æ®µæ–¹å‘äº¤å‰ä¸‰è§’å½¢è¾¹ã€‚
         for (auto i0 = 2, i1 = 0; i1 < 3; i0 = i1++)
         {
             const auto axis = Vector3ToolsType::CrossProduct(directionU, (triangle.GetVertex(i1) - triangle.GetVertex(i0)));
@@ -250,7 +250,7 @@ Mathematics::Vector3<Real> Mathematics::DynamicFindIntersectorSegment3Triangle3<
             return point1;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Ë÷ÒıÔ½½ç\n"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•è¶Šç•Œ\n"s));
 }
 
 #endif  // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_SEGMENT3_TRIANGLE3_DETAIL_H

@@ -1,10 +1,10 @@
-TODO Level 9
+﻿TODO Level 9
 
 1.0.0.3
 
-1. ���ۺϣ�����һ���꣬�õ���ֱ��ʹ��std���� 	
-2. ���ۺϣ�TextureBuffer��SaveToFile��ReadFromFile����Big endian����������Ҫ������ɫ����ɫͨ���� 
-3. ���ۺϣ���д���������Զ�����ObjectSystems�Ķ�ȡ��д����롣 
-4. ���ۺϣ���д��������ͨ��Impl���Զ����ɵ�����Ĵ��롣 
-5. ���ۺϣ�ShaderBase��Ĵ���ṹ�������⡣ 	
-6. ���ۺϣ������ļ�����������int��Ҫ�ĳ�int32_t�� 
+1. （综合）增加一个宏，让单例直接使用std锁。 	
+2. （综合）TextureBuffer的SaveToFile和ReadFromFile函数Big endian机器可能需要交换红色和蓝色通道。 
+3. （综合）编写辅助工具自动生成ObjectSystems的读取和写入代码。 
+4. （综合）编写辅助工具通过Impl类自动生成导出类的代码。 
+5. （综合）ShaderBase类的代码结构存在问题。 	
+6. （综合）存入文件的数据类型int需要改成int32_t。 

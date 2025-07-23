@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.4 (2023/09/16 09:45)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.4 (2023/09/16 09:45)
 
 #include "MessageContainerGroupTesting.h"
 #include "Flags/IntegerMessageType.h"
@@ -50,7 +50,7 @@ void Network::MessageContainerGroupTesting::BaseTest()
     const TestingType::StructureType group{ { 100, 10, 10000, 5, 100 }, { 101, 11, 10001, 6, 101 }, { 102, 12, 10002, 7, 102 }, { 103, 13, 10003, 8, 103 } };
     const TestingType messageContainer{ group };
 
-    ASSERT_EQUAL_FAILURE_THROW(messageContainer.GetSize(), boost::numeric_cast<int>(group.size()), "Êı×é´óĞ¡²»ÏàµÈ£¡");
+    ASSERT_EQUAL_FAILURE_THROW(messageContainer.GetSize(), boost::numeric_cast<int>(group.size()), "æ•°ç»„å¤§å°ä¸ç›¸ç­‰ï¼");
 
     auto index = 0;
     for (const auto& value : messageContainer)
@@ -82,14 +82,14 @@ void Network::MessageContainerGroupTesting::StreamingTest()
 
     resultMessageContainer.Load(messageSource);
 
-    ASSERT_EQUAL_FAILURE_THROW(messageContainer.GetSize(), resultMessageContainer.GetSize(), "Êı×é´óĞ¡²»ÏàµÈ£¡");
+    ASSERT_EQUAL_FAILURE_THROW(messageContainer.GetSize(), resultMessageContainer.GetSize(), "æ•°ç»„å¤§å°ä¸ç›¸ç­‰ï¼");
 
     auto index = 0;
     for (const auto& resultValue : resultMessageContainer)
     {
         const auto& value = messageContainer.GetValue(index);
 
-        ASSERT_EQUAL_FAILURE_THROW(value.GetSize(), resultValue.GetSize(), "Êı×é´óĞ¡²»ÏàµÈ£¡");
+        ASSERT_EQUAL_FAILURE_THROW(value.GetSize(), resultValue.GetSize(), "æ•°ç»„å¤§å°ä¸ç›¸ç­‰ï¼");
 
         for (auto i = 0; i < resultValue.GetSize(); ++i)
         {

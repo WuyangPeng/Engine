@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 16:50)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 16:50)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_LINE3_CIRCLE3_H
 #define MATHEMATICS_DISTANCE_DISTANCE_LINE3_CIRCLE3_H
@@ -38,16 +38,16 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        // ¶ÔÏó·ÃÎÊ¡£
+        // å¯¹è±¡è®¿é—®ã€‚
         NODISCARD Line3Type GetLine() const noexcept;
         NODISCARD Circle3Type GetCircle() const noexcept;
 
-        /// ¾²Ì¬¾àÀë²éÑ¯¡£ ¼ÆËã´ÓµãPµ½Ô²µÄ¾àÀë¡£
-        /// µ±PÔÚ·¨ÏßC + t * NÉÏ£¬ÆäÖĞCÊÇÔ²ĞÄ²¢ÇÒNÊÇ°üº¬¸ÃÔ²µÄÆ½ÃæµÄ·¨ÏßÊ±£¬ÔòËùÓĞÔ²µã¶¼ÓëPµÈ¾à¡£
-        /// ÔÚÕâÖÖÇé¿öÏÂ£¬·µ»ØµãÎªC + r * U £¬ÆäÖĞUÊÇ´¹Ö±ÓÚNµÄÏòÁ¿¡£
+        /// é™æ€è·ç¦»æŸ¥è¯¢ã€‚ è®¡ç®—ä»ç‚¹Påˆ°åœ†çš„è·ç¦»ã€‚
+        /// å½“Påœ¨æ³•çº¿C + t * Nä¸Šï¼Œå…¶ä¸­Cæ˜¯åœ†å¿ƒå¹¶ä¸”Næ˜¯åŒ…å«è¯¥åœ†çš„å¹³é¢çš„æ³•çº¿æ—¶ï¼Œåˆ™æ‰€æœ‰åœ†ç‚¹éƒ½ä¸Pç­‰è·ã€‚
+        /// åœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œè¿”å›ç‚¹ä¸ºC + r * U ï¼Œå…¶ä¸­Uæ˜¯å‚ç›´äºNçš„å‘é‡ã€‚
         NODISCARD DistanceResult GetSquared() const override;
 
-        // ¶¯Ì¬¾àÀë²éÑ¯µÄº¯Êı¼ÆËã¡£
+        // åŠ¨æ€è·ç¦»æŸ¥è¯¢çš„å‡½æ•°è®¡ç®—ã€‚
         NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
     private:
@@ -60,11 +60,11 @@ namespace Mathematics
             DistanceInfo(Real sqrDistance, int numClosestCircle, const Vector3Type& closestCircle) noexcept;
         };
 
-        /// mClosestLine[i]ÊÇÊäÈë¡£ mClosestCircle[i]ÊÇÊä³ö¡£
-        /// ·µ»ØËüÃÇÖ®¼äµÄÆ½·½¾àÀë¡£ mNumClosestµÄÖµÉèÖÃÎª1»òINT_MAX¡£ Èç¹ûÊÇºóÕß£¬ÔòËùÓĞÔ²µã¶¼ÓëmClosestLine[i]µÈ¾à¡£
+        /// mClosestLine[i]æ˜¯è¾“å…¥ã€‚ mClosestCircle[i]æ˜¯è¾“å‡ºã€‚
+        /// è¿”å›å®ƒä»¬ä¹‹é—´çš„å¹³æ–¹è·ç¦»ã€‚ mNumClosestçš„å€¼è®¾ç½®ä¸º1æˆ–INT_MAXã€‚ å¦‚æœæ˜¯åè€…ï¼Œåˆ™æ‰€æœ‰åœ†ç‚¹éƒ½ä¸mClosestLine[i]ç­‰è·ã€‚
         NODISCARD DistanceInfo SqrDistancePointCircle(const Vector3Type& closestLine) const;
 
-        // ½«º¯ÊıF(s) = s + m2b2 - r * m0sqr * s / sqrt(m0sqr * s * s + b1sqr)·Ö³ÉÖ¸¶¨¼ä¸ô[smin£¬smax]¡£
+        // å°†å‡½æ•°F(s) = s + m2b2 - r * m0sqr * s / sqrt(m0sqr * s * s + b1sqr)åˆ†æˆæŒ‡å®šé—´éš”[sminï¼Œsmax]ã€‚
         NODISCARD static Real BisectF(Real lineDotDiff, Real radiusMultiplyDot, Real dot, Real diffCrossNormalDot, Real smin, Real smax);
 
     private:

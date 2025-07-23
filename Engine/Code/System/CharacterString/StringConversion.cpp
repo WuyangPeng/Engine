@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/05 17:10)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/05 17:10)
 
 #include "System/SystemExport.h"
 
@@ -43,7 +43,7 @@ namespace System
 {
     NODISCARD int SYSTEM_HIDDEN_DECLARE IncreaseNullNumber(int readSize) noexcept
     {
-        /// ´íÎóÍ³Ò»·µ»Ø0
+        /// é”™è¯¯ç»Ÿä¸€è¿”å›0
         if (readSize < 0)
             return 0;
         else
@@ -56,7 +56,7 @@ namespace System
 
         const auto readSize = gsl::narrow_cast<int>(::mbstowcs(wideChar, multiByte, wideCharLength));
 
-        /// ·µ»ØÖµ°üÀ¨¿ÕÖÕÖ¹·û
+        /// è¿”å›å€¼åŒ…æ‹¬ç©ºç»ˆæ­¢ç¬¦
         return IncreaseNullNumber(readSize);
     }
 
@@ -66,7 +66,7 @@ namespace System
 
         const auto readSize = gsl::narrow_cast<int>(::wcstombs(multiByte, wideChar, multiByteLength));
 
-        /// ·µ»ØÖµ°üÀ¨¿ÕÖÕÖ¹·û
+        /// è¿”å›å€¼åŒ…æ‹¬ç©ºç»ˆæ­¢ç¬¦
         return IncreaseNullNumber(readSize);
     }
 
@@ -102,7 +102,7 @@ int System::MultiByteConversionWideChar(CodePage codePage, MultiByte flag, const
 
     UnusedFunction(flag);
 
-    /// ·µ»ØÖµ°üÀ¨¿ÕÖÕÖ¹·û
+    /// è¿”å›å€¼åŒ…æ‹¬ç©ºç»ˆæ­¢ç¬¦
     if (wideChar != nullptr)
         return MultiByteToWideCharUseMbstowcs(codePage, multiByte, wideChar, wideCharLength);
     else
@@ -141,7 +141,7 @@ int System::WideCharConversionMultiByte(CodePage codePage,
 
     UnusedFunction(flag, defaultChar, usedDefaultChar);
 
-    /// ·µ»ØÖµ°üÀ¨¿ÕÖÕÖ¹·û
+    /// è¿”å›å€¼åŒ…æ‹¬ç©ºç»ˆæ­¢ç¬¦
     if (multiByte != nullptr)
         return WideCharToMultiByteUseWcstombs(codePage, wideChar, multiByte, multiByteLength);
     else

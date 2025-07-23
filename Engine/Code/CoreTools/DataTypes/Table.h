@@ -1,16 +1,16 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 14:44)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 14:44)
 
 #ifndef CORE_TOOLS_DATA_TYPE_TABLE_H
 #define CORE_TOOLS_DATA_TYPE_TABLE_H
 
-/// ÀàT¿ÉÒÔÊÇÔ­ÉúÊı¾İ»òÊı¾İÀàÓĞÏÂÃæµÄ³ÉÔ±º¯Êı£º
+/// ç±»Tå¯ä»¥æ˜¯åŸç”Ÿæ•°æ®æˆ–æ•°æ®ç±»æœ‰ä¸‹é¢çš„æˆå‘˜å‡½æ•°ï¼š
 /// T::T();
 /// T::T(const T&);
 /// T& T::operator= (const T&);
@@ -35,7 +35,7 @@ namespace CoreTools
         using RowTuple = Tuple<Rows, Type>;
         using ParamType = typename boost::call_traits<Type>::param_type;
 
-        /// ¸ÃÊı×é´æ´¢ÎªĞĞÖ÷Ğò¡£
+        /// è¯¥æ•°ç»„å­˜å‚¨ä¸ºè¡Œä¸»åºã€‚
         static constexpr auto rowsNumber = Rows;
         static constexpr auto columnsNumber = Columns;
         static constexpr auto elementNumber = rowsNumber * columnsNumber;

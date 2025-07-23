@@ -1,14 +1,14 @@
-@ingroup group_$ModuleName$CoreTesting_Documentation
+ï»¿@ingroup group_$ModuleName$CoreTesting_Documentation
 
 ----------------------------
-$ModuleChineseName$ºËĞÄµ¥Ôª²âÊÔ
+$ModuleChineseName$æ ¸å¿ƒå•å…ƒæµ‹è¯•
 
-Ä¿Ç°°üº¬£º
-
-----------------------------
-1.   Helper£¨°ïÖú£© 
+ç›®å‰åŒ…å«ï¼š
 
 ----------------------------
-2.   Engine£¨ÒıÇæ£© 
+1.   Helperï¼ˆå¸®åŠ©ï¼‰ 
+
+----------------------------
+2.   Engineï¼ˆå¼•æ“ï¼‰ 
 
 ----------------------------

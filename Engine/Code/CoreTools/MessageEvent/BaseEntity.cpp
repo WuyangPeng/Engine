@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 15:21)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 15:21)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,7 +13,7 @@
 #include "EntityManager.h"
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Base/Flags/UniqueIdSelect.h"
-#include "CoreTools/Base/UniqueIdManager.h"
+#include "CoreTools/Base/UniqueIdManagerDetail.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -32,7 +32,7 @@ CoreTools::BaseEntity::~BaseEntity() noexcept
     {
         if (!ENTITY_MANAGER_SINGLETON.UnRegister(entityId))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("×¢ÏúEntityID = "), entityId, SYSTEM_TEXT(" Ê§°Ü¡£"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("æ³¨é”€EntityID = "), entityId, SYSTEM_TEXT(" å¤±è´¥ã€‚"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
     EXCEPTION_ALL_CATCH(CoreTools)
@@ -53,7 +53,7 @@ void CoreTools::BaseEntity::Register()
 {
     if (!ENTITY_MANAGER_SINGLETON.Register(shared_from_this()))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÖØ¸´×¢²áEntity"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("é‡å¤æ³¨å†ŒEntity"s))
     }
     else
     {

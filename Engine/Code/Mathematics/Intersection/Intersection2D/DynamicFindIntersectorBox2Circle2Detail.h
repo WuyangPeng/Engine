@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 17:25)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 17:25)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX2_CIRCLE2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX2_CIRCLE2_DETAIL_H
@@ -76,7 +76,7 @@ Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo::RegionInfo(Int
 template <typename Real>
 void Mathematics::DynamicFindIntersectorBox2Circle2<Real>::Find()
 {
-    // ½«Ô²ĞÄ×ª»»ÎªºĞ×ø±ê¡£
+    // å°†åœ†å¿ƒè½¬æ¢ä¸ºç›’åæ ‡ã€‚
     const auto centerDiff = circle.GetCenter() - box.GetCenter();
     const auto velocityDiff = this->GetRhsVelocity() - this->GetLhsVelocity();
     const auto centerDotX = Vector2Tools<Real>::DotProduct(centerDiff, box.GetAxis0());
@@ -94,7 +94,7 @@ void Mathematics::DynamicFindIntersectorBox2Circle2<Real>::Find()
     {
         if (centerDotY < -extent1)
         {
-            // ÇøÓò Rmm
+            // åŒºåŸŸ Rmm
             const auto regionInfo = TestVertexRegion(centerDotX, centerDotY, velocityDotX, velocityDotY, extent0, extent1);
             type = regionInfo.type;
             indexX = regionInfo.x;
@@ -102,7 +102,7 @@ void Mathematics::DynamicFindIntersectorBox2Circle2<Real>::Find()
         }
         else if (centerDotY <= extent1)
         {
-            // ÇøÓò Rmz
+            // åŒºåŸŸ Rmz
             const auto regionInfo = TestEdgeRegion(centerDotX, centerDotY, velocityDotX, velocityDotY, extent0, extent1);
             type = regionInfo.type;
             indexX = regionInfo.x;
@@ -110,7 +110,7 @@ void Mathematics::DynamicFindIntersectorBox2Circle2<Real>::Find()
         }
         else
         {
-            // ÇøÓò Rmp
+            // åŒºåŸŸ Rmp
             const auto regionInfo = TestVertexRegion(centerDotX, -centerDotY, velocityDotX, -velocityDotY, extent0, extent1);
             type = regionInfo.type;
             indexX = regionInfo.x;
@@ -121,7 +121,7 @@ void Mathematics::DynamicFindIntersectorBox2Circle2<Real>::Find()
     {
         if (centerDotY < -extent1)
         {
-            // ÇøÓò Rzm
+            // åŒºåŸŸ Rzm
             const auto regionInfo = TestEdgeRegion(centerDotY, centerDotX, velocityDotY, velocityDotX, extent1, extent0);
             type = regionInfo.type;
             indexX = regionInfo.y;
@@ -129,8 +129,8 @@ void Mathematics::DynamicFindIntersectorBox2Circle2<Real>::Find()
         }
         else if (centerDotY <= extent1)
         {
-            // ÇøÓò Rzz:
-            // Ô²È¦ÒÑ¾­ÓëºĞ×ÓÏà½»ÁË¡£ Ê¹ÓÃÔ²ĞÄ×÷Îª½»µã£¬µ«Í¨¹ı·µ»Ø¡°ÆäËû¡±½»µã£¬¿ÉÒÔÊ¹µ÷ÓÃÕßÖªµÀ¶ÔÏóÖØµş¡£
+            // åŒºåŸŸ Rzz:
+            // åœ†åœˆå·²ç»ä¸ç›’å­ç›¸äº¤äº†ã€‚ ä½¿ç”¨åœ†å¿ƒä½œä¸ºäº¤ç‚¹ï¼Œä½†é€šè¿‡è¿”å›â€œå…¶ä»–â€äº¤ç‚¹ï¼Œå¯ä»¥ä½¿è°ƒç”¨è€…çŸ¥é“å¯¹è±¡é‡å ã€‚
             this->SetContactTime(MathType::GetValue(0));
             contactPoint = circle.GetCenter();
             this->SetIntersectionType(IntersectionType::Other);
@@ -138,7 +138,7 @@ void Mathematics::DynamicFindIntersectorBox2Circle2<Real>::Find()
         }
         else
         {
-            // ÇøÓò Rzp
+            // åŒºåŸŸ Rzp
             const auto regionInfo = TestEdgeRegion(-centerDotY, centerDotX, -velocityDotY, velocityDotX, extent1, extent0);
             type = regionInfo.type;
             indexX = regionInfo.y;
@@ -149,7 +149,7 @@ void Mathematics::DynamicFindIntersectorBox2Circle2<Real>::Find()
     {
         if (centerDotY < -extent1)
         {
-            // ÇøÓò Rpm
+            // åŒºåŸŸ Rpm
             const auto regionInfo = TestVertexRegion(-centerDotX, centerDotY, -velocityDotX, velocityDotY, extent0, extent1);
             type = regionInfo.type;
             indexX = -regionInfo.x;
@@ -157,7 +157,7 @@ void Mathematics::DynamicFindIntersectorBox2Circle2<Real>::Find()
         }
         else if (centerDotY <= extent1)
         {
-            // ÇøÓò Rpz
+            // åŒºåŸŸ Rpz
             const auto regionInfo = TestEdgeRegion(-centerDotX, centerDotY, -velocityDotX, velocityDotY, extent0, extent1);
             type = regionInfo.type;
             indexX = -regionInfo.x;
@@ -165,7 +165,7 @@ void Mathematics::DynamicFindIntersectorBox2Circle2<Real>::Find()
         }
         else
         {
-            // ÇøÓò Rpp
+            // åŒºåŸŸ Rpp
             const auto regionInfo = TestVertexRegion(-centerDotX, -centerDotY, -velocityDotX, -velocityDotY, extent0, extent1);
             type = regionInfo.type;
             indexX = -regionInfo.x;
@@ -193,7 +193,7 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
     auto diff = dx * dx + dy * dy - radiusSqr;
     if (diff <= MathType::GetValue(0))
     {
-        // Ô²È¦ÒÑ¾­ÓëºĞ×ÓÏà½»ÁË¡£
+        // åœ†åœˆå·²ç»ä¸ç›’å­ç›¸äº¤äº†ã€‚
         this->SetContactTime(MathType::GetValue(0));
         return RegionInfo{ IntersectingType::Initially };
     }
@@ -201,7 +201,7 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
     auto dot = velocityDotX * dx + velocityDotY * dy;
     if (MathType::GetValue(0) <= dot)
     {
-        // Ô²È¦Î´ÒÆÏòºĞ×Ó¡£
+        // åœ†åœˆæœªç§»å‘ç›’å­ã€‚
         return RegionInfo{ IntersectingType::NoIntersection };
     }
 
@@ -211,10 +211,10 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
 
     if (MathType::GetValue(0) <= dotPerp)
     {
-        // Ç±ÔÚ½Ó´¥ÔÚ×ó±ßÔµ¡£
+        // æ½œåœ¨æ¥è§¦åœ¨å·¦è¾¹ç¼˜ã€‚
         if (dotPerp <= circle.GetRadius() * velocityDotY)
         {
-            // ×óÏÂ½ÇÊÇµÚÒ»¸ö½Ó´¥µã¡£
+            // å·¦ä¸‹è§’æ˜¯ç¬¬ä¸€ä¸ªæ¥è§¦ç‚¹ã€‚
             auto velocitySqr = velocityDotX * velocityDotX + velocityDotY * velocityDotY;
             auto inv = MathType::InvSqrt(MathType::FAbs(dot * dot - velocitySqr * diff));
             this->SetContactTime(diff * inv / (MathType::GetValue(1) - dot * inv));
@@ -224,7 +224,7 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
 
         if (velocityDotX <= MathType::GetValue(0))
         {
-            // ¾­¹ı½Ç£¬Àë¿ªºĞ×Ó¡£
+            // ç»è¿‡è§’ï¼Œç¦»å¼€ç›’å­ã€‚
             return RegionInfo{ IntersectingType::NoIntersection };
         }
 
@@ -233,22 +233,22 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
         dotPerp = velocityDotX * dy - velocityDotY * dx;
         if (MathType::GetValue(0) <= dotPerp && radiusSqr * velocitySqr < dotPerp * dotPerp)
         {
-            // Ô²È¦Î´ÃüÖĞºĞ×Ó¡£
+            // åœ†åœˆæœªå‘½ä¸­ç›’å­ã€‚
             return RegionInfo{ IntersectingType::NoIntersection, indexX, indexY };
         }
 
-        // Ô²È¦½«ÓëºĞ×ÓÏà½»¡£ ÓÃx = xminÈ·¶¨µÚÒ»´Î½Ó´¥µÄÊ±¼äºÍÎ»ÖÃ¡£
+        // åœ†åœˆå°†ä¸ç›’å­ç›¸äº¤ã€‚ ç”¨x = xminç¡®å®šç¬¬ä¸€æ¬¡æ¥è§¦çš„æ—¶é—´å’Œä½ç½®ã€‚
         indexX = -extent0;
 
         if (dotPerp <= circle.GetRadius() * velocityDotY)
         {
-            // µÚÒ»´Î½Ó´¥ÔÚºĞ×ÓµÄ×ó±ßÔµ¡£
+            // ç¬¬ä¸€æ¬¡æ¥è§¦åœ¨ç›’å­çš„å·¦è¾¹ç¼˜ã€‚
             this->SetContactTime(-(dx + circle.GetRadius()) / velocityDotX);
             indexY = centerDotY + this->GetContactTime() * velocityDotY;
         }
         else
         {
-            // ºĞ×ÓµÄ×óÉÏ½ÇµÄµÚÒ»¸ö½Ó´¥µã¡£
+            // ç›’å­çš„å·¦ä¸Šè§’çš„ç¬¬ä¸€ä¸ªæ¥è§¦ç‚¹ã€‚
             dot = velocityDotX * dx + velocityDotY * dy;
             diff = dx * dx + dy * dy - radiusSqr;
             auto inv = MathType::InvSqrt(MathType::FAbs(dot * dot - velocitySqr * diff));
@@ -258,10 +258,10 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
     }
     else
     {
-        // ÉÏµ×²¿±ßÔµÇ±ÔÚ½Ó´¥¡£
+        // ä¸Šåº•éƒ¨è¾¹ç¼˜æ½œåœ¨æ¥è§¦ã€‚
         if (-dotPerp <= circle.GetRadius() * velocityDotX)
         {
-            // ×óÏÂ½ÇÊÇµÚÒ»¸ö½Ó´¥µã¡£
+            // å·¦ä¸‹è§’æ˜¯ç¬¬ä¸€ä¸ªæ¥è§¦ç‚¹ã€‚
 
             auto velocitySqr = velocityDotX * velocityDotX + velocityDotY * velocityDotY;
             auto inv = MathType::InvSqrt(MathType::FAbs(dot * dot - velocitySqr * diff));
@@ -272,7 +272,7 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
 
         if (velocityDotY <= MathType::GetValue(0))
         {
-            // ¾­¹ı½Ç£¬Àë¿ªºĞ×Ó¡£
+            // ç»è¿‡è§’ï¼Œç¦»å¼€ç›’å­ã€‚
             return RegionInfo{ IntersectingType::NoIntersection, indexX, indexY };
         }
 
@@ -281,22 +281,22 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
         dotPerp = velocityDotX * dy - velocityDotY * dx;
         if (MathType::GetValue(0) <= -dotPerp && radiusSqr * velocitySqr < dotPerp * dotPerp)
         {
-            // Ô²È¦Î´ÃüÖĞºĞ×Ó¡£
+            // åœ†åœˆæœªå‘½ä¸­ç›’å­ã€‚
             return RegionInfo{ IntersectingType::NoIntersection, indexX, indexY };
         }
 
-        // Ô²½«ÓëºĞ×ÓÏà½»¡£ È·¶¨µÚÒ»´Î½Ó´¥µÄÊ±¼äºÍµØµã£¬y = ymin¡£
+        // åœ†å°†ä¸ç›’å­ç›¸äº¤ã€‚ ç¡®å®šç¬¬ä¸€æ¬¡æ¥è§¦çš„æ—¶é—´å’Œåœ°ç‚¹ï¼Œy = yminã€‚
         indexY = -extent1;
 
         if (-dotPerp <= circle.GetRadius() * velocityDotX)
         {
-            // ºĞ×Óµ×²¿±ßÔµµÄµÚÒ»´Î½Ó´¥¡£
+            // ç›’å­åº•éƒ¨è¾¹ç¼˜çš„ç¬¬ä¸€æ¬¡æ¥è§¦ã€‚
             this->SetContactTime(-(dy + circle.GetRadius()) / velocityDotY);
             indexX = centerDotX + this->GetContactTime() * velocityDotX;
         }
         else
         {
-            // µÚÒ»´Î½Ó´¥ÔÚºĞ×ÓµÄÓÒÏÂ½Ç¡£
+            // ç¬¬ä¸€æ¬¡æ¥è§¦åœ¨ç›’å­çš„å³ä¸‹è§’ã€‚
             dot = velocityDotX * dx + velocityDotY * dy;
             diff = dx * dx + dy * dy - radiusSqr;
             auto inv = MathType::InvSqrt(MathType::FAbs(dot * dot - velocitySqr * diff));
@@ -317,7 +317,7 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
     auto xSignedDist = dx + circle.GetRadius();
     if (MathType::GetValue(0) <= xSignedDist)
     {
-        // Ô²È¦ÒÑ¾­ÓëºĞ×ÓÏà½»ÁË¡£
+        // åœ†åœˆå·²ç»ä¸ç›’å­ç›¸äº¤äº†ã€‚
         this->SetContactTime(MathType::GetValue(0));
 
         return RegionInfo{ IntersectingType::Initially, indexX, indexY };
@@ -325,7 +325,7 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
 
     if (velocityDotX <= MathType::GetValue(0))
     {
-        // Ô²È¦Î´ÒÆÏòºĞ×Ó¡£
+        // åœ†åœˆæœªç§»å‘ç›’å­ã€‚
         return RegionInfo{ IntersectingType::NoIntersection, indexX, indexY };
     }
 
@@ -338,22 +338,22 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
         auto dotPerp = velocityDotX * dy - velocityDotY * dx;
         if (MathType::GetValue(0) <= dotPerp && radiusSqr * velocitySqr < dotPerp * dotPerp)
         {
-            // Ô²È¦Î´ÃüÖĞºĞ×Ó¡£
+            // åœ†åœˆæœªå‘½ä¸­ç›’å­ã€‚
             return RegionInfo{ IntersectingType::NoIntersection, indexX, indexY };
         }
 
-        // Ô²È¦½«ÓëºĞ×ÓÏà½»¡£ ÓÃx = xminÈ·¶¨µÚÒ»´Î½Ó´¥µÄÊ±¼äºÍÎ»ÖÃ¡£
+        // åœ†åœˆå°†ä¸ç›’å­ç›¸äº¤ã€‚ ç”¨x = xminç¡®å®šç¬¬ä¸€æ¬¡æ¥è§¦çš„æ—¶é—´å’Œä½ç½®ã€‚
         indexX = -extent0;
 
         if (dotPerp <= circle.GetRadius() * velocityDotY)
         {
-            // µÚÒ»´Î½Ó´¥ÔÚºĞ×ÓµÄ×ó±ßÔµ¡£
+            // ç¬¬ä¸€æ¬¡æ¥è§¦åœ¨ç›’å­çš„å·¦è¾¹ç¼˜ã€‚
             this->SetContactTime(-xSignedDist / velocityDotX);
             indexY = centerDotY + this->GetContactTime() * velocityDotY;
         }
         else
         {
-            // µÚÒ»´Î½Ó´¥ÔÚºĞ×ÓµÄÒ»½Ç¡£
+            // ç¬¬ä¸€æ¬¡æ¥è§¦åœ¨ç›’å­çš„ä¸€è§’ã€‚
             auto dot = velocityDotX * dx + velocityDotY * dy;
             auto diff = dx * dx + dy * dy - radiusSqr;
             auto inv = MathType::InvSqrt(MathType::FAbs(dot * dot - velocitySqr * diff));
@@ -367,22 +367,22 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
         auto dotPerp = velocityDotX * dy - velocityDotY * dx;
         if (dotPerp <= MathType::GetValue(0) && radiusSqr * velocitySqr < dotPerp * dotPerp)
         {
-            // Ô²È¦Î´ÃüÖĞºĞ×Ó¡£
+            // åœ†åœˆæœªå‘½ä¸­ç›’å­ã€‚
             return RegionInfo{ IntersectingType::NoIntersection, indexX, indexY };
         }
 
-        // Ô²È¦½«ÓëºĞ×ÓÏà½»¡£ È·¶¨µÚÒ»´Î½Ó´¥µÄµØ·½£¬x = xmin¡£
+        // åœ†åœˆå°†ä¸ç›’å­ç›¸äº¤ã€‚ ç¡®å®šç¬¬ä¸€æ¬¡æ¥è§¦çš„åœ°æ–¹ï¼Œx = xminã€‚
         indexX = -extent0;
 
         if (dotPerp >= circle.GetRadius() * velocityDotY)
         {
-            // µÚÒ»´Î½Ó´¥ÔÚºĞ×ÓµÄ×ó±ßÔµ¡£
+            // ç¬¬ä¸€æ¬¡æ¥è§¦åœ¨ç›’å­çš„å·¦è¾¹ç¼˜ã€‚
             this->SetContactTime(-xSignedDist / velocityDotX);
             indexY = centerDotY + this->GetContactTime() * velocityDotY;
         }
         else
         {
-            // µÚÒ»´Î½Ó´¥ÔÚºĞ×ÓµÄÒ»½Ç¡£
+            // ç¬¬ä¸€æ¬¡æ¥è§¦åœ¨ç›’å­çš„ä¸€è§’ã€‚
             auto dot = velocityDotX * dx + velocityDotY * dy;
             auto diff = dx * dx + dy * dy - radiusSqr;
             auto inv = MathType::InvSqrt(MathType::FAbs(dot * dot - velocitySqr * diff));

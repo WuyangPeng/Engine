@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 15:07)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 15:07)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_TRIANGLE3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_TRIANGLE3_H
@@ -32,7 +32,7 @@ namespace Mathematics
         using MathType = typename ParentType::MathType;
 
     public:
-        // Èç¹ûÒª½øĞĞÄ£ºıÈ·¶¨£¬Çë½«epsilonÖµÉèÖÃÎª½ÏĞ¡µÄÕıÊı¡£
+        // å¦‚æœè¦è¿›è¡Œæ¨¡ç³Šç¡®å®šï¼Œè¯·å°†epsilonå€¼è®¾ç½®ä¸ºè¾ƒå°çš„æ­£æ•°ã€‚
         StaticFindIntersectorPlane3Triangle3(const Plane3Type& plane, const Triangle3Type& triangle, Real epsilon = MathType::GetValue(0));
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -40,7 +40,7 @@ namespace Mathematics
         NODISCARD Plane3Type GetPlane() const noexcept;
         NODISCARD Triangle3Type GetTriangle() const noexcept;
 
-        // Ïà½»¼¯£¬ËüÊÇ¿ÕµÄ£¬µã£¬Ïß¶Î»òÕû¸öÈı½ÇĞÎ£¨GetQuantity·µ»Ø0¡¢1¡¢2»ò3£©
+        // ç›¸äº¤é›†ï¼Œå®ƒæ˜¯ç©ºçš„ï¼Œç‚¹ï¼Œçº¿æ®µæˆ–æ•´ä¸ªä¸‰è§’å½¢ï¼ˆGetQuantityè¿”å›0ã€1ã€2æˆ–3ï¼‰
         NODISCARD int GetQuantity() const noexcept;
         NODISCARD Vector3Type GetPoint(int index) const;
 

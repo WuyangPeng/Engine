@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.2 (2023/07/24 13:46)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.2 (2023/07/24 13:46)
 
 #ifndef RENDERING_CONTROLLERS_SKIN_CONTROLLER_IMPL_H
 #define RENDERING_CONTROLLERS_SKIN_CONTROLLER_IMPL_H
@@ -35,7 +35,7 @@ namespace Rendering
         using ConstObjectAssociatedContainer = std::vector<ConstObjectAssociated>;
 
     public:
-        // ¶¥µãºÍ¹Ç÷ÀµÄÊıÄ¿ÔÚ¶ÔÏóµÄÉú´æÆÚÊÇ¹Ì¶¨µÄ¡£
+        // é¡¶ç‚¹å’Œéª¨éª¼çš„æ•°ç›®åœ¨å¯¹è±¡çš„ç”Ÿå­˜æœŸæ˜¯å›ºå®šçš„ã€‚
         SkinControllerImpl(int numVertices, int numBones, const BaseRendererSharedPtr& baseRenderer);
         SkinControllerImpl() noexcept;
 
@@ -49,7 +49,7 @@ namespace Rendering
         NODISCARD float GetWeights(int bonesIndex, int verticesIndex) const;
         NODISCARD APoint GetOffsets(int bonesIndex, int verticesIndex) const;
 
-        // µ÷ÓÃ¹¹Ôìº¯Êıºó£¬Äú±ØĞëÊ¹ÓÃÕâĞ©º¯ÊıÉèÖÃÊı¾İ¡£
+        // è°ƒç”¨æ„é€ å‡½æ•°åï¼Œæ‚¨å¿…é¡»ä½¿ç”¨è¿™äº›å‡½æ•°è®¾ç½®æ•°æ®ã€‚
         void SetBones(int bonesIndex, const ConstNodeSharedPtr& node);
         void SetWeights(int bonesIndex, int verticesIndex, float weight);
         void SetOffsets(int bonesIndex, int verticesIndex, const APoint& offset);
@@ -77,8 +77,8 @@ namespace Rendering
         int numBones;
         int size;
         std::vector<ConstWeakObjectAssociated> bones;  // bones[numBones]
-        std::vector<float> weights;  // weight[numBones][numVertices], Ë÷Òı vertex + numVertices * bone
-        std::vector<APoint> offsets;  // offset[numBones][numVertices], Ë÷Òı vertex + numVertices * bone
+        std::vector<float> weights;  // weight[numBones][numVertices], ç´¢å¼• vertex + numVertices * bone
+        std::vector<APoint> offsets;  // offset[numBones][numVertices], ç´¢å¼• vertex + numVertices * bone
 
         BaseRendererWeakPtr baseRenderer;
         int position;

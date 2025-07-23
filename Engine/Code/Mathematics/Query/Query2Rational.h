@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:38)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:38)
 
 #ifndef MATHEMATICS_QUERY_QUERY2_RATIONAL_H
 #define MATHEMATICS_QUERY_QUERY2_RATIONAL_H
@@ -30,14 +30,14 @@ namespace Mathematics
         using VerticesType = typename ParentType::VerticesType;
 
     public:
-        // ÊäÈë¶¥µãµÄ×é³É²¿·Ö±»±íÊ¾ÍêÈ«ÏàÍ¬ÓĞÀíÊıÖµ¡£
+        // è¾“å…¥é¡¶ç‚¹çš„ç»„æˆéƒ¨åˆ†è¢«è¡¨ç¤ºå®Œå…¨ç›¸åŒæœ‰ç†æ•°å€¼ã€‚
         explicit Query2Rational(const VerticesType& vertices);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         NODISCARD QueryType GetType() const noexcept override;
 
-        // ¹ØÓÚÒ»¸öµãµÄ¸÷ÖÖ¼¸ºÎ¶ÔÏóÖ®¼äµÄ¹ØÏµ²éÑ¯¡£
+        // å…³äºä¸€ä¸ªç‚¹çš„å„ç§å‡ ä½•å¯¹è±¡ä¹‹é—´çš„å…³ç³»æŸ¥è¯¢ã€‚
 
         NODISCARD LineQueryType ToLine(int index, int lhsVerticesIndex, int rhsVerticesIndex) const override;
         NODISCARD LineQueryType ToLine(const Vector2& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const override;
@@ -60,7 +60,7 @@ namespace Mathematics
         NODISCARD CircumcircleQueryType ToCircumcircle(const QueryRationalVector& rationalTest, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const;
 
     private:
-        // »º´æÊäÈëµÄÓĞÀíÊı±íÊ¾¡£¸¡µãÊıµÄ¶ÔÓĞÀíÊıĞÎÊ½µÄ×ª»¯ÊÇ»ºÂıµÄ£¬ ËùÒÔ×îºÃÊÇ¸ú×ÙÄÄĞ©ÖµÒÑ×ª»»¡£
+        // ç¼“å­˜è¾“å…¥çš„æœ‰ç†æ•°è¡¨ç¤ºã€‚æµ®ç‚¹æ•°çš„å¯¹æœ‰ç†æ•°å½¢å¼çš„è½¬åŒ–æ˜¯ç¼“æ…¢çš„ï¼Œ æ‰€ä»¥æœ€å¥½æ˜¯è·Ÿè¸ªå“ªäº›å€¼å·²è½¬æ¢ã€‚
         Container rationalVertices;
     };
 

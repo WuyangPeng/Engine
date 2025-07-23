@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 09:46)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 09:46)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BANDED_MATRIX_INVERT_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BANDED_MATRIX_INVERT_DETAIL_H
@@ -49,13 +49,13 @@ void Mathematics::BandedMatrixInvert<Real>::Solve()
         }
     }
 
-    // ÕıÏòÏû³ı.
+    // æ­£å‘æ¶ˆé™¤.
     for (auto row = 0; row < size; ++row)
     {
         ForwardEliminate(row);
     }
 
-    // ·´ÏòÏû³ı¡£
+    // åå‘æ¶ˆé™¤ã€‚
     for (auto row = size - 1; 1 <= row; --row)
     {
         BackwardEliminate(row);
@@ -65,16 +65,16 @@ void Mathematics::BandedMatrixInvert<Real>::Solve()
 template <typename Real>
 void Mathematics::BandedMatrixInvert<Real>::ForwardEliminate(int reduceRow)
 {
-    // ÊàÖá±ØĞë°´Ë³Ğò½øĞĞÇÒ·ÇÁã¡£
+    // æ¢è½´å¿…é¡»æŒ‰é¡ºåºè¿›è¡Œä¸”éé›¶ã€‚
     const auto diag = matrix(reduceRow, reduceRow);
     if (MathType::FAbs(diag) <= zeroTolerance)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ö§µã±ØĞë·ÇÁã£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("æ”¯ç‚¹å¿…é¡»éé›¶ï¼"s));
     }
 
     matrix(reduceRow, reduceRow) = MathType::GetValue(1);
 
-    // ĞĞÏà³ËÊ¹¶Ô½ÇÏßÏîÎª1Ò»ÖÂ
+    // è¡Œç›¸ä¹˜ä½¿å¯¹è§’çº¿é¡¹ä¸º1ä¸€è‡´
     const auto columnMin = reduceRow + 1;
     auto columnMax = columnMin + matrix.GetUpperBandsNumber();
     if (matrix.GetSize() < columnMax)
@@ -92,7 +92,7 @@ void Mathematics::BandedMatrixInvert<Real>::ForwardEliminate(int reduceRow)
         output(reduceRow, column) /= diag;
     }
 
-    // ¼õÉÙÊ£ÓàĞĞ¡£
+    // å‡å°‘å‰©ä½™è¡Œã€‚
     const auto rowMin = reduceRow + 1;
     auto rowMax = rowMin + matrix.GetLowerBandsNumber();
     if (matrix.GetSize() < rowMax)

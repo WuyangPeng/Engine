@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 15:59)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 15:59)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_ELLIPSOID3_ELLIPSOID3_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_ELLIPSOID3_ELLIPSOID3_H
@@ -37,7 +37,7 @@ namespace Mathematics
         NODISCARD Ellipsoid3Type GetEllipsoid0() const noexcept;
         NODISCARD Ellipsoid3Type GetEllipsoid1() const noexcept;
 
-        // ²âÊÔ²éÑ¯µÄÒ»ÖÖĞÎÊ½¡£ ÍÖÇòÊÇ·Ö¿ªµÄ£¬Ïà½»µÄ£¨ÔÚµã»òÇúÏßÉÏ£©£¬ÍÖÇò0ÑÏ¸ñ°üº¬ÔÚÍÖÇò1ÖĞ£¬»òÍÖÇò1ÑÏ¸ñ°üº¬ÔÚÍÖÇò0ÖĞ¡£
+        // æµ‹è¯•æŸ¥è¯¢çš„ä¸€ç§å½¢å¼ã€‚ æ¤­çƒæ˜¯åˆ†å¼€çš„ï¼Œç›¸äº¤çš„ï¼ˆåœ¨ç‚¹æˆ–æ›²çº¿ä¸Šï¼‰ï¼Œæ¤­çƒ0ä¸¥æ ¼åŒ…å«åœ¨æ¤­çƒ1ä¸­ï¼Œæˆ–æ¤­çƒ1ä¸¥æ ¼åŒ…å«åœ¨æ¤­çƒ0ä¸­ã€‚
         enum class Classification
         {
             EllipsoidsSeparated,
@@ -54,7 +54,7 @@ namespace Mathematics
     private:
         void Test();
 
-        // GetClassification()µÄÖ§³Öº¯Êı¡£
+        // GetClassification()çš„æ”¯æŒå‡½æ•°ã€‚
         NODISCARD static RootsType GetRoots(Real d0, Real d1, Real c0, Real c1);
 
         NODISCARD static RootsType GetRoots(Real d0, Real c0);

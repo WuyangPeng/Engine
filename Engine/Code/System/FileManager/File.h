@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/05 09:27)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/05 09:27)
 
 #ifndef SYSTEM_FILE_MANAGER_FILE_H
 #define SYSTEM_FILE_MANAGER_FILE_H
@@ -16,7 +16,7 @@
 #include "Using/CFileUsing.h"
 #include "System/Security/Using/SecurityBaseUsing.h"
 
-/// ÎÄ¼şµÄ´ò¿ª¡¢¹Ø±Õ¡¢´´½¨¡¢¶ÁĞ´ºÍÉ¾³ı¡£
+/// æ–‡ä»¶çš„æ‰“å¼€ã€å…³é—­ã€åˆ›å»ºã€è¯»å†™å’Œåˆ é™¤ã€‚
 namespace System
 {
     NODISCARD WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemFile(const String& fileName,

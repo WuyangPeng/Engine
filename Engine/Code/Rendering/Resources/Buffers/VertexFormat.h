@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/29 13:49)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/29 13:49)
 
 #ifndef RENDERING_RESOURCES_VERTEX_FORMAT_H
 #define RENDERING_RESOURCES_VERTEX_FORMAT_H
@@ -42,8 +42,8 @@ namespace Rendering
 
         NODISCARD static VertexFormatSharedPtr Create(const std::string& name);
 
-        // ±ãÀûº¯ÊıÓÃÓÚ´´½¨Ò»¸ö¶¥µã¸ñÊ½Í¨¹ıÖ¸¶¨ËüµÄËùÓĞÊôĞÔ¡£
-        // ÏÖÔÚÕâ¸ö¹¤×÷Ö»ÓĞÒ»¸öÍ¨ÓÃµÄÁ÷Ë÷ÒıÎªÁã(Á÷Ë÷ÒıÉĞÎ´ÊµÏÖÈÎºÎÊıÖµ)¡£
+        // ä¾¿åˆ©å‡½æ•°ç”¨äºåˆ›å»ºä¸€ä¸ªé¡¶ç‚¹æ ¼å¼é€šè¿‡æŒ‡å®šå®ƒçš„æ‰€æœ‰å±æ€§ã€‚
+        // ç°åœ¨è¿™ä¸ªå·¥ä½œåªæœ‰ä¸€ä¸ªé€šç”¨çš„æµç´¢å¼•ä¸ºé›¶(æµç´¢å¼•å°šæœªå®ç°ä»»ä½•æ•°å€¼)ã€‚
         NODISCARD static VertexFormatSharedPtr Create(const std::string& name, const AttributeContainer& triple);
 
         NODISCARD int GetNumAttributes() const noexcept;
@@ -55,15 +55,15 @@ namespace Rendering
 
         NODISCARD int GetVertexSize() const noexcept;
 
-        // ·µ»ØÖ¸¶¨ÊôĞÔµÄÊ¹ÓÃÇé¿öµÄË÷Òı¡£Ö¸¶¨Ê¹ÓÃË÷ÒıÄ¿Ç°½öÕë¶ÔÑÕÉ«Í¨µÀºÍÎÆÀí×ø±êÊ¹ÓÃ¡£
-        // µ±ÊôĞÔµÄÊ¹ÓÃ³öÏÖÔÚ¸ñÊ½ÖĞ£¬·µ»ØÖµµÄË÷ÒıiÔÚ0 <= i < GetNumAttributes()¡£
-        // Èç¹ûÊôĞÔµÄÊ¹ÓÃ²»³öÏÖÔÚ¸ñÊ½ÖĞ£¬·µ»ØÖµÊÇ-1¡£
+        // è¿”å›æŒ‡å®šå±æ€§çš„ä½¿ç”¨æƒ…å†µçš„ç´¢å¼•ã€‚æŒ‡å®šä½¿ç”¨ç´¢å¼•ç›®å‰ä»…é’ˆå¯¹é¢œè‰²é€šé“å’Œçº¹ç†åæ ‡ä½¿ç”¨ã€‚
+        // å½“å±æ€§çš„ä½¿ç”¨å‡ºç°åœ¨æ ¼å¼ä¸­ï¼Œè¿”å›å€¼çš„ç´¢å¼•iåœ¨0 <= i < GetNumAttributes()ã€‚
+        // å¦‚æœå±æ€§çš„ä½¿ç”¨ä¸å‡ºç°åœ¨æ ¼å¼ä¸­ï¼Œè¿”å›å€¼æ˜¯-1ã€‚
         NODISCARD int GetIndex(Semantic semantic, int unit = 0) const noexcept;
 
-        /// Ö§³ÖÔÚ·¶Î§ÄÚÖØÓÃVertexFormat¶ÔÏó¡£´Ëµ÷ÓÃ½«¶ÔÏóÖØÖÃÎªÄ¬ÈÏ¹¹Ôìº¯Êıµ÷ÓÃ²úÉúµÄ×´Ì¬¡£
+        /// æ”¯æŒåœ¨èŒƒå›´å†…é‡ç”¨VertexFormatå¯¹è±¡ã€‚æ­¤è°ƒç”¨å°†å¯¹è±¡é‡ç½®ä¸ºé»˜è®¤æ„é€ å‡½æ•°è°ƒç”¨äº§ç”Ÿçš„çŠ¶æ€ã€‚
         void Reset() noexcept;
 
-        /// ´´½¨Ò»¸öÑ¹Ëõ¶¥µã¸ñÊ½£¬ÆäÖĞËùÓĞÊôĞÔÔÚÄÚ´æÖĞ¶¼ÊÇÁ¬ĞøµÄ¡£ÊôĞÔµÄË³ĞòÓÉBindµ÷ÓÃµÄË³Ğò¾ö¶¨¡£
+        /// åˆ›å»ºä¸€ä¸ªå‹ç¼©é¡¶ç‚¹æ ¼å¼ï¼Œå…¶ä¸­æ‰€æœ‰å±æ€§åœ¨å†…å­˜ä¸­éƒ½æ˜¯è¿ç»­çš„ã€‚å±æ€§çš„é¡ºåºç”±Bindè°ƒç”¨çš„é¡ºåºå†³å®šã€‚
         void Bind(DataFormatType type, Semantic semantic, int unit);
 
         NODISCARD virtual VertexFormatSharedPtr Clone() const;
@@ -79,11 +79,11 @@ namespace Rendering
         VertexFormat(VertexFormatCreate vertexFormatCreate, const std::string& name, int numAttributes);
 
     private:
-        // Ö§³ÖÑÓ³Ù¹¹Ôì¡£µ÷ÓÃ¹¹Ôìº¯ÊıÖ®ºó£¬±ØĞëÍ¨¹ıÊ¹ÓÃ SetAttribute 'numAttributes'´ÎÉèÖÃËùÓĞÊôĞÔ¡£
-        // µ±Íê³ÉÊ±£¬µ÷ÓÃSetVertexSize£¬ÕâÊÇÒ»¸öĞÅºÅ£¬¼´¹¹ÔìÒÑÍê³É¡£È»ºó´´½¨Ïà¹ØµÄäÖÈ¾×ÊÔ´¡£
+        // æ”¯æŒå»¶è¿Ÿæ„é€ ã€‚è°ƒç”¨æ„é€ å‡½æ•°ä¹‹åï¼Œå¿…é¡»é€šè¿‡ä½¿ç”¨ SetAttribute 'numAttributes'æ¬¡è®¾ç½®æ‰€æœ‰å±æ€§ã€‚
+        // å½“å®Œæˆæ—¶ï¼Œè°ƒç”¨SetVertexSizeï¼Œè¿™æ˜¯ä¸€ä¸ªä¿¡å·ï¼Œå³æ„é€ å·²å®Œæˆã€‚ç„¶ååˆ›å»ºç›¸å…³çš„æ¸²æŸ“èµ„æºã€‚
 
-        // ×¢Òâ£ºVertexBufferËùÊöµÄ¶Á/Ğ´Ìõ¼şÊÇÊôĞÔµÄÆ«ÒÆ¡£
-        // VertexFormat::Create±£Ö¤ÕâÒ»µã£¬µ«ÄãÒ²Ó¦¸ÃÃ÷È·µÄÊ¹ÓÃSetAttribute¡£
+        // æ³¨æ„ï¼šVertexBufferæ‰€è¿°çš„è¯»/å†™æ¡ä»¶æ˜¯å±æ€§çš„åç§»ã€‚
+        // VertexFormat::Createä¿è¯è¿™ä¸€ç‚¹ï¼Œä½†ä½ ä¹Ÿåº”è¯¥æ˜ç¡®çš„ä½¿ç”¨SetAttributeã€‚
         void SetAttribute(int attribute, DataFormatType type, Semantic semantic, int unit, int offset);
 
         void SetAttribute(int attribute, const VertexFormatAttribute& vertexFormatElement);

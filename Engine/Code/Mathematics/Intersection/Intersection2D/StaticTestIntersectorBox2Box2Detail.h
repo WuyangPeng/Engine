@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 17:53)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 17:53)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_BOX2_BOX2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_BOX2_BOX2_DETAIL_H
@@ -30,10 +30,10 @@ Mathematics::StaticTestIntersectorBox2Box2<Real>::StaticTestIntersectorBox2Box2(
 template <typename Real>
 void Mathematics::StaticTestIntersectorBox2Box2<Real>::Test()
 {
-    // ¼ÆËãºĞÖĞĞÄµÄ¾àÀë£¬D = C1 - C0¡£
+    // è®¡ç®—ç›’ä¸­å¿ƒçš„è·ç¦»ï¼ŒD = C1 - C0ã€‚
     auto boxCentersDifference = rhsBox.GetCenter() - lhsBox.GetCenter();
 
-    // Öá C0 + t * A0
+    // è½´ C0 + t * A0
     auto absLhs0DotRhs0 = MathType::FAbs(Vector2ToolsType::DotProduct(lhsBox.GetAxis0(), rhsBox.GetAxis0()));
     auto absLhs0DotRhs1 = MathType::FAbs(Vector2ToolsType::DotProduct(lhsBox.GetAxis0(), rhsBox.GetAxis1()));
 
@@ -46,7 +46,7 @@ void Mathematics::StaticTestIntersectorBox2Box2<Real>::Test()
         return;
     }
 
-    // Öá C0 + t * A1
+    // è½´ C0 + t * A1
     auto absLhs1DotRhs0 = MathType::FAbs(Vector2ToolsType::DotProduct(lhsBox.GetAxis1(), rhsBox.GetAxis0()));
     auto absLhs1DotRhs1 = MathType::FAbs(Vector2ToolsType::DotProduct(lhsBox.GetAxis1(), rhsBox.GetAxis1()));
 
@@ -60,7 +60,7 @@ void Mathematics::StaticTestIntersectorBox2Box2<Real>::Test()
         return;
     }
 
-    // Öá C0 + t * B0
+    // è½´ C0 + t * B0
     auto absRhs0DotDifference = MathType::FAbs(Vector2ToolsType::DotProduct(rhsBox.GetAxis0(), boxCentersDifference));
 
     sum = rhsBox.GetExtent0() + lhsBox.GetExtent0() * absLhs0DotRhs0 + lhsBox.GetExtent1() * absLhs1DotRhs0;
@@ -71,7 +71,7 @@ void Mathematics::StaticTestIntersectorBox2Box2<Real>::Test()
         return;
     }
 
-    // Öá C0 + t * B1
+    // è½´ C0 + t * B1
     auto absRhs1DotDifference = MathType::FAbs(Vector2ToolsType::DotProduct(rhsBox.GetAxis1(), boxCentersDifference));
     sum = rhsBox.GetExtent1() + lhsBox.GetExtent0() * absLhs0DotRhs1 + lhsBox.GetExtent1() * absLhs1DotRhs1;
 

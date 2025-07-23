@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 16:15)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 16:15)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_BUFFER_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_BUFFER_H
@@ -38,7 +38,7 @@ namespace Network
 
         CLASS_INVARIANT_DECLARE;
 
-        // ¶Á
+        // è¯»
         NODISCARD int GetCurrentReadIndex() const noexcept;
         NODISCARD int GetRemainingReadCount() const noexcept;
         void ClearCurrentReadIndex() noexcept;
@@ -46,7 +46,7 @@ namespace Network
         void Read(int itemSize, void* data);
         void Read(int itemSize, int itemsNumber, void* data);
 
-        // Ğ´
+        // å†™
         NODISCARD int GetCurrentWriteIndex() const noexcept;
         NODISCARD int GetRemainingWriteCount() const;
         void ClearCurrentWriteIndex() noexcept;
@@ -54,7 +54,7 @@ namespace Network
         void Write(int itemSize, const void* data);
         void Write(int itemSize, int itemsNumber, const void* data);
 
-        // »º³åÇø
+        // ç¼“å†²åŒº
         NODISCARD const char* GetCurrentReadBufferedPtr() const;
         NODISCARD char* GetCurrentReadBufferedPtr();
         NODISCARD const char* GetCurrentWriteBufferedPtr() const;
@@ -62,20 +62,20 @@ namespace Network
         NODISCARD const char* GetInitialBufferedPtr() const;
         NODISCARD char* GetInitialBufferedPtr();
 
-        // ½ÓÊÕÊıÁ¿
+        // æ¥æ”¶æ•°é‡
         NODISCARD int GetReceiveCount() const;
         void SetReceiveCount(int receiveCount);
         void DecreaseReceiveCount(int receiveCount);
         void SetMessageHeadReceiveCount();
         void SetMessageContentReceiveCount();
 
-        // ÏûÏ¢³¤¶È
+        // æ¶ˆæ¯é•¿åº¦
         NODISCARD int GetMessageLength() const;
         NODISCARD bool IsMessageReceiveEnd() const;
         void CheckingMessageHeadSize();
         void CheckingMessageContentSize();
 
-        // ¸¨Öúº¯Êı
+        // è¾…åŠ©å‡½æ•°
         NODISCARD ParserStrategy GetParserStrategy() const noexcept;
         NODISCARD int GetSize() const;
         void PushBack(const MessageBuffer& messageBuffer);

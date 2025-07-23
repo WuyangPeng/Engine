@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:21)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:21)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_CIRCLE3_PLANE3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_CIRCLE3_PLANE3_ACHIEVE_H
@@ -58,31 +58,31 @@ void Mathematics::StaticFindIntersectorCircle3Plane3<Real>::Find()
 {
     quantity = 0;
 
-    // ¹¹ÔìÔ²µÄÆ½Ãæ¡£
+    // æ„é€ åœ†çš„å¹³é¢ã€‚
     const Plane3Type cPlane{ circle.GetNormal(), circle.GetCenter() };
 
-    // ¼ÆËã´ËÆ½ÃæÓëÊäÈëÆ½ÃæµÄ½»µã¡£
+    // è®¡ç®—æ­¤å¹³é¢ä¸è¾“å…¥å¹³é¢çš„äº¤ç‚¹ã€‚
     StaticFindIntersectorPlane3Plane3<Real> intersector{ plane, cPlane };
     if (!intersector.IsIntersection())
     {
-        // Æ½ÃæÊÇÆ½ĞĞÇÒ²»Ïà½»µÄ¡£
+        // å¹³é¢æ˜¯å¹³è¡Œä¸”ä¸ç›¸äº¤çš„ã€‚
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
     if (intersector.GetIntersectionType() == IntersectionType::Plane)
     {
-        // Æ½ÃæÏàÍ¬£¬Ô²ÊÇ¹²Í¬µÄ½»¼¯¡£
+        // å¹³é¢ç›¸åŒï¼Œåœ†æ˜¯å…±åŒçš„äº¤é›†ã€‚
         this->SetIntersectionType(IntersectionType::Other);
         return;
     }
 
-    // Æ½ÃæÏà½»³ÉÒ»ÌõÏß¡£
+    // å¹³é¢ç›¸äº¤æˆä¸€æ¡çº¿ã€‚
     const auto line = intersector.GetIntersectionLine();
 
-    /// ÕÒµ½Ô²ºÍÖ±ÏßÉÏµÄÒ»Á½¸öµã¡£ Èç¹ûÏßÎªt * D + P£¬Ô²ĞÄÎªC£¬Ô²°ë¾¶Îªr£¬
-    /// Ôòr^2 = |t * D + P - C|^2 = |D|^2 * t^2 + 2 * Dot(D,P - C) * t + |P - C|^2¡£
-    /// ÕâÊÇĞÎÊ½Îªa2 * t^2 + 2 * a1 * t + a0 = 0µÄ¶ş´Î·½³Ì¡£
+    /// æ‰¾åˆ°åœ†å’Œç›´çº¿ä¸Šçš„ä¸€ä¸¤ä¸ªç‚¹ã€‚ å¦‚æœçº¿ä¸ºt * D + Pï¼Œåœ†å¿ƒä¸ºCï¼Œåœ†åŠå¾„ä¸ºrï¼Œ
+    /// åˆ™r^2 = |t * D + P - C|^2 = |D|^2 * t^2 + 2 * Dot(D,P - C) * t + |P - C|^2ã€‚
+    /// è¿™æ˜¯å½¢å¼ä¸ºa2 * t^2 + 2 * a1 * t + a0 = 0çš„äºŒæ¬¡æ–¹ç¨‹ã€‚
     auto diff = line.GetOrigin() - circle.GetCenter();
     auto directionSquared = Vector3ToolsType::GetLengthSquared(line.GetDirection());
     auto dotProduct = Vector3ToolsType::DotProduct(diff, line.GetDirection());
@@ -91,7 +91,7 @@ void Mathematics::StaticFindIntersectorCircle3Plane3<Real>::Find()
     auto discr = dotProduct * dotProduct - a0 * directionSquared;
     if (discr < MathType::GetValue(0))
     {
-        // Ã»ÓĞÊµÊıµÄ¸ù£¬Ô²²»ÓëÆ½ÃæÏà½»¡£
+        // æ²¡æœ‰å®æ•°çš„æ ¹ï¼Œåœ†ä¸ä¸å¹³é¢ç›¸äº¤ã€‚
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
@@ -101,13 +101,13 @@ void Mathematics::StaticFindIntersectorCircle3Plane3<Real>::Find()
     auto inv = (MathType::GetValue(1)) / directionSquared;
     if (discr < MathType::GetZeroTolerance())
     {
-        // Ò»¸öÖØ¸´µÄ¸ù£¬Ô²¸ÕÅöµ½Æ½Ãæ¡£
+        // ä¸€ä¸ªé‡å¤çš„æ ¹ï¼Œåœ†åˆšç¢°åˆ°å¹³é¢ã€‚
         quantity = 1;
         point0 = line.GetOrigin() - (dotProduct * inv) * line.GetDirection();
         return;
     }
 
-    // Ô²ÓĞÁ½¸ö²»Í¬µÄÊµÊıµÄ¸ù£¬ÓëÆ½ÃæÔÚÁ½¸öµãÉÏÏà½»¡£
+    // åœ†æœ‰ä¸¤ä¸ªä¸åŒçš„å®æ•°çš„æ ¹ï¼Œä¸å¹³é¢åœ¨ä¸¤ä¸ªç‚¹ä¸Šç›¸äº¤ã€‚
     auto root = MathType::Sqrt(discr);
     quantity = 2;
     point0 = line.GetOrigin() - ((dotProduct + root) * inv) * line.GetDirection();
@@ -135,7 +135,7 @@ Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorCircle3Plane3<Real>
             return point1;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Ë÷ÒıÔ½½ç\n"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•è¶Šç•Œ\n"s));
 }
 
 template <typename Real>

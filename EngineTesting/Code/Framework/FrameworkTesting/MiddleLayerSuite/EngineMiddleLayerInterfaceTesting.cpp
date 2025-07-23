@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.3 (2023/08/12 17:52)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.3 (2023/08/12 17:52)
 
 #include "EngineMiddleLayerInterfaceTesting.h"
 #include "MiddleLayerInterfaceTestingBaseDetail.h"
@@ -37,13 +37,13 @@ void Framework::EngineMiddleLayerInterfaceTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerTest<EngineMiddleLayerInterface>);
     ASSERT_NOT_THROW_EXCEPTION_0(SetMiddleLayerTest);
 
-    // ²âÊÔGetManagerº¯ÊıÅ×³öÒì³£
+    // æµ‹è¯•GetManagerå‡½æ•°æŠ›å‡ºå¼‚å¸¸
     ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerMemberTest<EngineMiddleLayerInterfaceTest>);
     ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerTest<EngineMiddleLayerInterfaceTest>);
     ASSERT_NOT_THROW_EXCEPTION_0(GetMiddleLayerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(GetConstMiddleLayerTest);
 
-    // ²âÊÔGetManagerº¯Êı·µ»Ø¿ÕÖ¸Õë
+    // æµ‹è¯•GetManagerå‡½æ•°è¿”å›ç©ºæŒ‡é’ˆ
     ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerMemberTest<EngineMiddleLayerInterfaceNullTest>);
     ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerTest<EngineMiddleLayerInterfaceNullTest>);
     ASSERT_NOT_THROW_EXCEPTION_0(GetNullMiddleLayerTest);

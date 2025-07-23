@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 10:25)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 10:25)
 
 #ifndef MATHEMATICS_OBJECTS_3D_PLANE3_H
 #define MATHEMATICS_OBJECTS_3D_PLANE3_H
@@ -34,21 +34,21 @@ namespace Mathematics
         using Triangle3Type = Triangle3<Real>;
 
     public:
-        // Æ½Ãæ±íÊ¾ÎªDot(N,X) = c£¬
-        // ÆäÖĞNÊÇÒ»¸öµ¥Î»³¤¶ÈµÄ·¨ÏßÏòÁ¿£¬
-        // cÊÇÆ½Ãæ³£Êı£¬ÇÒXÊÇÔÚÆ½ÃæÉÏµÄÈÎÒâµã¡£
-        // ÓÃ»§±ØĞë±£Ö¤·¨ÏßµÄÏòÁ¿ÊÇµ¥Î»³¤¶È
+        // å¹³é¢è¡¨ç¤ºä¸ºDot(N,X) = cï¼Œ
+        // å…¶ä¸­Næ˜¯ä¸€ä¸ªå•ä½é•¿åº¦çš„æ³•çº¿å‘é‡ï¼Œ
+        // cæ˜¯å¹³é¢å¸¸æ•°ï¼Œä¸”Xæ˜¯åœ¨å¹³é¢ä¸Šçš„ä»»æ„ç‚¹ã€‚
+        // ç”¨æˆ·å¿…é¡»ä¿è¯æ³•çº¿çš„å‘é‡æ˜¯å•ä½é•¿åº¦
 
         Plane3() noexcept;
 
-        // Ö±½ÓÖ¸¶¨NºÍC¡£
+        // ç›´æ¥æŒ‡å®šNå’ŒCã€‚
         Plane3(const Vector3Type& normal, Real constant, Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
-        // Ö¸¶¨N£¬c = Dot(N,P)£¬ÕâÀïPÊÇÆ½ÃæÊÇµÄÒ»µã¡£
+        // æŒ‡å®šNï¼Œc = Dot(N,P)ï¼Œè¿™é‡ŒPæ˜¯å¹³é¢æ˜¯çš„ä¸€ç‚¹ã€‚
         Plane3(const Vector3Type& normal, const Vector3Type& point, Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
-        // N = Cross(P1 - P0,P2 - P0)/Length(Cross(P1 - P0,P2 - P0))£¬
-        // c = Dot(N,P0)£¬ÆäÖĞP0£¬P1£¬P2ÊÇÔÚÆ½ÃæÉÏµÄµã¡£
+        // N = Cross(P1 - P0,P2 - P0)/Length(Cross(P1 - P0,P2 - P0))ï¼Œ
+        // c = Dot(N,P0)ï¼Œå…¶ä¸­P0ï¼ŒP1ï¼ŒP2æ˜¯åœ¨å¹³é¢ä¸Šçš„ç‚¹ã€‚
         Plane3(const Vector3Type& point0, const Vector3Type& point1, const Vector3Type& point2, Real epsilon = MathType::GetZeroTolerance());
 
         explicit Plane3(const Triangle3Type& triangle, Real epsilon = MathType::GetZeroTolerance());
@@ -58,15 +58,15 @@ namespace Mathematics
         NODISCARD Vector3Type GetNormal() const noexcept;
         NODISCARD Real GetConstant() const noexcept;
 
-        // ¼ÆËãd = Dot(N,P)-c ÆäÖĞNÊÇÆ½Ãæ·¨ÏßºÍcÊÇÆ½Ãæ³£Á¿¡£
-        // ÕâÊÇÒ»¸ö·ûºÅ¾àÀë¡£
-        // Èç¹û·µ»ØÖµµÄ·ûºÅÊÇÕıµÄ£¬Ôò¸ÃµãÊÇÔÚÆ½ÃæÉÏµÄÕı·½Ïò£¬
-        // Èç¹ûÊÇ¸ºµÄ£¬ÔòÔÚÆ½Ãæ¸º·½Ïò£¬
-        // Èç¹ûÎªÁã£¬ÔòµãÔÚÆ½ÃæÉÏ¡£
+        // è®¡ç®—d = Dot(N,P)-c å…¶ä¸­Næ˜¯å¹³é¢æ³•çº¿å’Œcæ˜¯å¹³é¢å¸¸é‡ã€‚
+        // è¿™æ˜¯ä¸€ä¸ªç¬¦å·è·ç¦»ã€‚
+        // å¦‚æœè¿”å›å€¼çš„ç¬¦å·æ˜¯æ­£çš„ï¼Œåˆ™è¯¥ç‚¹æ˜¯åœ¨å¹³é¢ä¸Šçš„æ­£æ–¹å‘ï¼Œ
+        // å¦‚æœæ˜¯è´Ÿçš„ï¼Œåˆ™åœ¨å¹³é¢è´Ÿæ–¹å‘ï¼Œ
+        // å¦‚æœä¸ºé›¶ï¼Œåˆ™ç‚¹åœ¨å¹³é¢ä¸Šã€‚
         NODISCARD Real DistanceTo(const Vector3Type& point) const noexcept;
 
-        // Æ½ÃæµÄÕıÃæÊÇ·¨ÏßµãËùÔÚµÄ°ë¿Õ¼ä£¬±³ÃæÊÇÁíÒ»°ë¿Õ¼ä¡£
-        // º¯Êı·µ»ØµãÔÚÆ½ÃæµÄÄÄÒ»²à¡£
+        // å¹³é¢çš„æ­£é¢æ˜¯æ³•çº¿ç‚¹æ‰€åœ¨çš„åŠç©ºé—´ï¼ŒèƒŒé¢æ˜¯å¦ä¸€åŠç©ºé—´ã€‚
+        // å‡½æ•°è¿”å›ç‚¹åœ¨å¹³é¢çš„å“ªä¸€ä¾§ã€‚
         NODISCARD NumericalValueSymbol WhichSide(const Vector3Type& point) const noexcept;
 
         void SetPlane(const Vector3Type& newNormal, const Vector3Type& point) noexcept;

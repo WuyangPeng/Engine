@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 09:55)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 09:55)
 
 #ifndef MATHEMATICS_BASE_FAST_TRIGONOMETRIC_ACHIEVE_H
 #define MATHEMATICS_BASE_FAST_TRIGONOMETRIC_ACHIEVE_H
@@ -18,7 +18,7 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::FastTrigonometric<Real>::FastSinRoughCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= angle && angle <= MathType::GetHalfPI(), "ÊäÈëÖµ±ØĞëÔÚ·¶Î§[0,pi/2]£¡\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= angle && angle <= MathType::GetHalfPI(), "è¾“å…¥å€¼å¿…é¡»åœ¨èŒƒå›´[0,pi/2]ï¼\n");
 
     const auto angleSquare = MathType::Square(angle);
 
@@ -36,7 +36,7 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::FastTrigonometric<Real>::FastSinPreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= angle && angle <= MathType::GetHalfPI(), "ÊäÈëÖµ±ØĞëÔÚ·¶Î§[0,pi/2]£¡\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= angle && angle <= MathType::GetHalfPI(), "è¾“å…¥å€¼å¿…é¡»åœ¨èŒƒå›´[0,pi/2]ï¼\n");
 
     const auto angleSquare = MathType::Square(angle);
 
@@ -60,7 +60,7 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::FastTrigonometric<Real>::FastSinMorePreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= angle && angle <= MathType::GetHalfPI(), "ÊäÈëÖµ±ØĞëÔÚ·¶Î§[0,pi/2]£¡\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= angle && angle <= MathType::GetHalfPI(), "è¾“å…¥å€¼å¿…é¡»åœ¨èŒƒå›´[0,pi/2]ï¼\n");
 
     const auto angleSquare = MathType::Square(angle);
 
@@ -93,7 +93,7 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::FastTrigonometric<Real>::FastCosRoughCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= angle && angle <= MathType::GetHalfPI(), "ÊäÈëÖµ±ØĞëÔÚ·¶Î§[0,pi/2]£¡\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= angle && angle <= MathType::GetHalfPI(), "è¾“å…¥å€¼å¿…é¡»åœ¨èŒƒå›´[0,pi/2]ï¼\n");
 
     const auto angleSquare = MathType::Square(angle);
 
@@ -110,7 +110,7 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::FastTrigonometric<Real>::FastCosPreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= angle && angle <= MathType::GetHalfPI(), "ÊäÈëÖµ±ØĞëÔÚ·¶Î§[0,pi/2]£¡\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= angle && angle <= MathType::GetHalfPI(), "è¾“å…¥å€¼å¿…é¡»åœ¨èŒƒå›´[0,pi/2]ï¼\n");
 
     const auto angleSquare = MathType::Square(angle);
 
@@ -133,7 +133,7 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::FastTrigonometric<Real>::FastCosMorePreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= angle && angle <= MathType::GetHalfPI(), "ÊäÈëÖµ±ØĞëÔÚ·¶Î§[0,pi/2]£¡\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= angle && angle <= MathType::GetHalfPI(), "è¾“å…¥å€¼å¿…é¡»åœ¨èŒƒå›´[0,pi/2]ï¼\n");
 
     const auto angleSquare = MathType::Square(angle);
 
@@ -167,7 +167,7 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::FastTrigonometric<Real>::FastTanRoughCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= angle && angle <= MathType::GetQuarterPI(), "ÊäÈëÖµ±ØĞëÔÚ·¶Î§[0,pi/4]£¡\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= angle && angle <= MathType::GetQuarterPI(), "è¾“å…¥å€¼å¿…é¡»åœ¨èŒƒå›´[0,pi/4]ï¼\n");
 
     const auto angleSquare = MathType::Square(angle);
 
@@ -185,7 +185,7 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::FastTrigonometric<Real>::FastTanPreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= angle && angle <= MathType::GetQuarterPI(), "ÊäÈëÖµ±ØĞëÔÚ·¶Î§[0,pi/4]£¡\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= angle && angle <= MathType::GetQuarterPI(), "è¾“å…¥å€¼å¿…é¡»åœ¨èŒƒå›´[0,pi/4]ï¼\n");
 
     const auto angleSquare = MathType::Square(angle);
 
@@ -211,7 +211,7 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::FastTrigonometric<Real>::FastTanMorePreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= angle && angle <= MathType::GetQuarterPI(), "ÊäÈëÖµ±ØĞëÔÚ·¶Î§[0,pi/4]£¡\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= angle && angle <= MathType::GetQuarterPI(), "è¾“å…¥å€¼å¿…é¡»åœ¨èŒƒå›´[0,pi/4]ï¼\n");
 
     return FastSinMorePreciseCalculation(angle) / FastCosMorePreciseCalculation(angle);
 }
@@ -220,7 +220,7 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::FastTrigonometric<Real>::FastInvSinRoughCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= value && value <= MathType::GetValue(1), "ÊäÈëÖµ±ØĞëÔÚ·¶Î§[0,1]£¡\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= value && value <= MathType::GetValue(1), "è¾“å…¥å€¼å¿…é¡»åœ¨èŒƒå›´[0,1]ï¼\n");
 
     const auto root = MathType::Sqrt(MathType::GetValue(1) - value);
 
@@ -241,7 +241,7 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::FastTrigonometric<Real>::FastInvSinPreciseCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= value && value <= MathType::GetValue(1), "ÊäÈëÖµ±ØĞëÔÚ·¶Î§[0,1]£¡\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= value && value <= MathType::GetValue(1), "è¾“å…¥å€¼å¿…é¡»åœ¨èŒƒå›´[0,1]ï¼\n");
 
     const auto root = MathType::Sqrt(MathType::GetValue(1) - value);
 
@@ -270,7 +270,7 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::FastTrigonometric<Real>::FastInvCosRoughCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= value && value <= MathType::GetValue(1), "ÊäÈëÖµ±ØĞëÔÚ·¶Î§[0,1]£¡\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= value && value <= MathType::GetValue(1), "è¾“å…¥å€¼å¿…é¡»åœ¨èŒƒå›´[0,1]ï¼\n");
 
     const auto root = MathType::Sqrt(MathType::GetValue(1) - value);
 
@@ -290,7 +290,7 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::FastTrigonometric<Real>::FastInvCosPreciseCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= value && value <= MathType::GetValue(1), "ÊäÈëÖµ±ØĞëÔÚ·¶Î§[0,1]£¡\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(0) <= value && value <= MathType::GetValue(1), "è¾“å…¥å€¼å¿…é¡»åœ¨èŒƒå›´[0,1]ï¼\n");
 
     const auto root = MathType::Sqrt(MathType::GetValue(1) - value);
 
@@ -318,7 +318,7 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::FastTrigonometric<Real>::FastInvTanRoughCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(MathType::GetValue(-1) <= value && value <= MathType::GetValue(1), "ÊäÈëÖµ±ØĞëÔÚ·¶Î§[-1,1]£¡\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(-1) <= value && value <= MathType::GetValue(1), "è¾“å…¥å€¼å¿…é¡»åœ¨èŒƒå›´[-1,1]ï¼\n");
 
     const auto valueSquare = MathType::Square(value);
 
@@ -340,7 +340,7 @@ template <typename Real>
 requires std::is_floating_point_v<Real>
 Real Mathematics::FastTrigonometric<Real>::FastInvTanPreciseCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(MathType::GetValue(-1) <= value && value <= MathType::GetValue(1), "ÊäÈëÖµ±ØĞëÔÚ·¶Î§[-1,1]£¡\n");
+    MATHEMATICS_ASSERTION_3(MathType::GetValue(-1) <= value && value <= MathType::GetValue(1), "è¾“å…¥å€¼å¿…é¡»åœ¨èŒƒå›´[-1,1]ï¼\n");
 
     const auto valueSquare = MathType::Square(value);
 

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/04/23 12:36)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/04/23 12:36)
 
 #include "LiteralCastTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -44,19 +44,19 @@ void CoreTools::LiteralCastTesting::Int8CastTest() noexcept
     MAYBE_UNUSED const int8_t s8{ LiteralCast<int8_t, 0>() };
     std::ignore = LiteralCast<int8_t, 100>();
 
-#ifdef LITERAL_CAST_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef LITERAL_CAST_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     std::ignore = LiteralCast<int8_t, 1000>();
 
 #endif  // LITERAL_CAST_COMPILE_ERROR
 
-#ifdef LITERAL_CAST_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef LITERAL_CAST_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     std::ignore = LiteralCast<int8_t, 10000000>();
 
 #endif  // LITERAL_CAST_COMPILE_ERROR
 
-#ifdef LITERAL_CAST_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef LITERAL_CAST_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     std::ignore = LiteralCast<int8_t, 10000000000000LL>();
 
@@ -66,7 +66,7 @@ void CoreTools::LiteralCastTesting::Int8CastTest() noexcept
     std::ignore = LiteralCast<int8_t, 100U>();
     std::ignore = LiteralCast<int8_t, 127U>();
 
-#ifdef LITERAL_CAST_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef LITERAL_CAST_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     std::ignore = LiteralCast<int8_t, 128>();
 
@@ -74,7 +74,7 @@ void CoreTools::LiteralCastTesting::Int8CastTest() noexcept
 
     std::ignore = LiteralCast<int8_t, -128>();
 
-#ifdef LITERAL_CAST_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef LITERAL_CAST_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     std::ignore = LiteralCast<int8_t, -129>();
 
@@ -85,7 +85,7 @@ void CoreTools::LiteralCastTesting::UInt8CastTest() noexcept
 {
     MAYBE_UNUSED const uint8_t u8{ LiteralCast<uint8_t, 0>() };
 
-#ifdef LITERAL_CAST_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef LITERAL_CAST_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     std::ignore = LiteralCast<uint8_t, -1>();
 
@@ -94,7 +94,7 @@ void CoreTools::LiteralCastTesting::UInt8CastTest() noexcept
     std::ignore = LiteralCast<uint8_t, 128>();
     std::ignore = LiteralCast<uint8_t, 255>();
 
-#ifdef LITERAL_CAST_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef LITERAL_CAST_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     std::ignore = LiteralCast<uint8_t, 256>();
 
@@ -107,7 +107,7 @@ void CoreTools::LiteralCastTesting::UInt32CastTest() noexcept
     std::ignore = LiteralCast<uint32_t, 100000>();
     std::ignore = LiteralCast<uint32_t, 1000000000>();
 
-#ifdef LITERAL_CAST_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef LITERAL_CAST_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     std::ignore = LiteralCast<uint32_t, 10000000000000LL>();
 
@@ -116,7 +116,7 @@ void CoreTools::LiteralCastTesting::UInt32CastTest() noexcept
 
 void CoreTools::LiteralCastTesting::Int64CastTest() noexcept
 {
-#ifdef LITERAL_CAST_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef LITERAL_CAST_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     MAYBE_UNUSED int64_t s64{ LiteralCast<int64_t, 0>() };
 
@@ -125,7 +125,7 @@ void CoreTools::LiteralCastTesting::Int64CastTest() noexcept
 
 void CoreTools::LiteralCastTesting::UInt64CastTest() noexcept
 {
-#ifdef LITERAL_CAST_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef LITERAL_CAST_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     MAYBE_UNUSED uint64_t u64{ LiteralCast<uint64_t, 1>() };
 

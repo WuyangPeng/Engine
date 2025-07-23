@@ -1,4 +1,4 @@
-$Copyright$
+﻿$Copyright$
 
 #ifndef $ProjectCapital$_H
 #define $ProjectCapital$_H

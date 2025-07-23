@@ -1,172 +1,125 @@
-﻿# CMakeList.txt: 顶层 CMake 项目文件，在此处执行全局配置
-# 并包含子项目。
+﻿# CMakeList.txt: ThreadingCoreRenderEngineAssist 的 CMake 项目，在此处包括源代码并定义
+# 项目特定的逻辑。
 #
-cmake_minimum_required (VERSION 3.8)
+cmake_minimum_required(VERSION 3.14)
 
-project ("ThreadingCoreRenderEngine")
+file(GLOB_RECURSE SRC_DIR_LIST "${CMAKE_SOURCE_DIR}/../Code/ThreadingCoreRenderEngineAssist/*.cpp")
 
-set(CMAKE_CXX_STANDARD 20)
+# 将源代码添加到此项目的可执行文件。
+if (CMAKE_BUILD_TYPE AND CMAKE_BUILD_TYPE STREQUAL "Debug")
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    set(TARGET_NAME ThreadingCoreRenderEngineAssistD)
 
-	include_directories(/data/coding/Libs/boost/)
-	include_directories(/data/coding/Libs/GSL/include/)
-	include_directories(/data/coding/Libs/STLSoft/include/)
-	include_directories(/data/coding/Libs/miniz/)
-	include_directories(/data/coding/Libs/miniz/build/)
-	include_directories(/data/coding/Libs/pugixml/src/) 
-	include_directories(/data/coding/Libs/ACE/ACE_wrappers/)
-	include_directories(/data/coding/Libs/protobuf/src/)
-	include_directories(/data/coding/Libs/activemq/src/main/)
-	include_directories(/data/coding/Libs/mongo-cxx-driver/src/mongocxx/include/mongocxx/v_noabi/)
-	include_directories(/data/coding/Libs/mongo-cxx-driver/build/src/mongocxx/lib/)
-	include_directories(/data/coding/Libs/mongo-cxx-driver/src/mongocxx/include/)	
-	include_directories(/data/coding/Libs/mongo-cxx-driver/src/bsoncxx/include/bsoncxx/v_noabi/)		
-	include_directories(/data/coding/Libs/mongo-cxx-driver/build/src/bsoncxx/lib/)
-	include_directories(/data/coding/Libs/mongo-cxx-driver/src/bsoncxx/include/)	
-	include_directories(/data/coding/Libs/mysql-connector-c++/include/)
-	include_directories(/data/coding/Libs/mysql-connector-c++/build/include/mysqlx/) 
-	include_directories(/data/coding/Libs/hiredis/) 	
-	include_directories(/data/coding/Assist/Code/)
-	include_directories(/data/coding/Engine/Code/)	
-	
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+else ()
 
-	include_directories($ENV{LibsEnvironmentBaseInclude}/)
-	include_directories($ENV{LibsEnvironmentExtendInclude}/)
-	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Code)
-	include_directories($ENV{EngineInclude}/)
+    set(TARGET_NAME ThreadingCoreRenderEngineAssist)
 
-else()
-    # 其他平台下的操作
-endif()
+endif ()
 
-if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
-    link_directories($ENV{LibsEnvironmentX64DebugLib}/)   
-    link_directories($ENV{EngineEngineering}/x64/CMake/DebugWindows/)   
-    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/DebugWindows) 
+    add_executable(${TARGET_NAME} ${SRC_DIR_LIST})
 
-    set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/DebugWindows)
-	set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/DebugWindows)
-	
-else()
+else ()
 
-    link_directories($ENV{LibsEnvironmentX64ReleaseLib}/) 
-    link_directories($ENV{EngineEngineering}/x64/CMake/ReleaseWindows)   
-    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/ReleaseWindows) 
+    add_executable(${TARGET_NAME} WIN32 ${SRC_DIR_LIST})
 
-    set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/ReleaseWindows)
-	set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/ReleaseWindows)
-	
-endif()  
- 
-link_directories($ENV{LibsEnvironmentX64Lib}/)
- 
+endif ()
 
-# 包含子项目。
+# TODO: 如有需要，请添加测试并安装目标。
 
-add_subdirectory ("Editor/Editor/Editor")
-add_subdirectory ("Editor/AnimationEditor/AnimationEditor")
-add_subdirectory ("Editor/AnimationEditor/AnimationEditorAssist")
-add_subdirectory ("Editor/DataEditor/DataEditor")
-add_subdirectory ("Editor/DataEditor/DataEditorAssist")
-add_subdirectory ("Editor/EffectEditor/EffectEditor")
-add_subdirectory ("Editor/EffectEditor/EffectEditorAssist")
-add_subdirectory ("Editor/FontEditor/FontEditor")
-add_subdirectory ("Editor/FontEditor/FontEditorAssist")
-add_subdirectory ("Editor/LevelEditor/LevelEditor")
-add_subdirectory ("Editor/LevelEditor/LevelEditorAssist")
-add_subdirectory ("Editor/MaterialEditor/MaterialEditor")
-add_subdirectory ("Editor/MaterialEditor/MaterialEditorAssist")
-add_subdirectory ("Editor/ModelEditor/ModelEditor")
-add_subdirectory ("Editor/ModelEditor/ModelEditorAssist")
-add_subdirectory ("Editor/SceneEditor/SceneEditor")
-add_subdirectory ("Editor/SceneEditor/SceneEditorAssist")
-add_subdirectory ("Editor/ScriptEditor/ScriptEditor")
-add_subdirectory ("Editor/ScriptEditor/ScriptEditorAssist")
-add_subdirectory ("Editor/ShaderEditor/ShaderEditor")
-add_subdirectory ("Editor/ShaderEditor/ShaderEditorAssist")
-add_subdirectory ("Editor/ShadowEditor/ShadowEditor")
-add_subdirectory ("Editor/ShadowEditor/ShadowEditorAssist")
-add_subdirectory ("Editor/SkeletonEditor/SkeletonEditor")
-add_subdirectory ("Editor/SkeletonEditor/SkeletonEditorAssist")
-add_subdirectory ("Editor/TerrainEditor/TerrainEditor")
-add_subdirectory ("Editor/TerrainEditor/TerrainEditorAssist")
-add_subdirectory ("Editor/TextureEditor/TextureEditor")
-add_subdirectory ("Editor/TextureEditor/TextureEditorAssist")
-add_subdirectory ("Editor/UserInterfaceEditor/UserInterfaceEditor")
-add_subdirectory ("Editor/UserInterfaceEditor/UserInterfaceEditorAssist")
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
-add_subdirectory ("Toolset/Animation/AnimationToolset")
-add_subdirectory ("Toolset/ArtificialIntelligence/ArtificialIntelligenceToolset")
-add_subdirectory ("Toolset/AssistTools/AssistToolsToolset")
-add_subdirectory ("Toolset/AssistTools/GameTemplate")
-add_subdirectory ("Toolset/AssistTools/GameTestingTemplate")
-add_subdirectory ("Toolset/CoreTools/BatchConversion")
-add_subdirectory ("Toolset/CoreTools/CMainFunctionHelper")
-add_subdirectory ("Toolset/CoreTools/CoreToolsToolset")
-add_subdirectory ("Toolset/CoreTools/CSVConfigure")
-add_subdirectory ("Toolset/CoreTools/DllMainFunction")
-add_subdirectory ("Toolset/CoreTools/ExportTest")
-add_subdirectory ("Toolset/CoreTools/JsonConfigure")
-add_subdirectory ("Toolset/CoreTools/MainFunction")
-add_subdirectory ("Toolset/Database/DatabaseEntity")
-add_subdirectory ("Toolset/Database/DatabaseToolset")
-add_subdirectory ("Toolset/Editor/EditorToolset")
-add_subdirectory ("Toolset/Example/ExampleToolset")
-add_subdirectory ("Toolset/Framework/AndroidMainEntryPoint1")
-add_subdirectory ("Toolset/Framework/AndroidMainEntryPoint2")
-add_subdirectory ("Toolset/Framework/AndroidMainFunctionHelper1")
-add_subdirectory ("Toolset/Framework/ConsoleMainFunctionHelper1")
-add_subdirectory ("Toolset/Framework/ConsoleMainFunctionHelperBase1")
-add_subdirectory ("Toolset/Framework/FrameworkToolset")
-add_subdirectory ("Toolset/Framework/GlutMainEntryPoint1")
-add_subdirectory ("Toolset/Framework/GlutMainEntryPoint2")
-add_subdirectory ("Toolset/Framework/MacintoshMainFunctionHelper1")
-add_subdirectory ("Toolset/Framework/MainEntryPoint1")
-add_subdirectory ("Toolset/Framework/MainEntryPoint2")
-add_subdirectory ("Toolset/Framework/MainFunctionHelperBase1")
-add_subdirectory ("Toolset/Framework/OpenGLGlutMainFunctionHelper1")
-add_subdirectory ("Toolset/Framework/WindowMainFunctionHelper1")
-add_subdirectory ("Toolset/Framework/WindowMessageLoop1")
-add_subdirectory ("Toolset/Framework/WinMainEntryPoint1")
-add_subdirectory ("Toolset/Framework/WinMainEntryPoint2")
-add_subdirectory ("Toolset/Framework/WinMainEntryPoint3")
-add_subdirectory ("Toolset/Framework/WinMainEntryPoint4")
-add_subdirectory ("Toolset/Imagics/ImagicsToolset")
-add_subdirectory ("Toolset/InputOutput/InputOutputToolset")
-add_subdirectory ("Toolset/Mathematics/MathematicsToolset")
-add_subdirectory ("Toolset/Network/NetworkToolset")
-add_subdirectory ("Toolset/Physics/PhysicsToolset")
-add_subdirectory ("Toolset/Rendering/RenderingToolset")
-add_subdirectory ("Toolset/ResourceManager/ResourceManagerToolset")
-add_subdirectory ("Toolset/Script/ScriptToolset")
-add_subdirectory ("Toolset/SoundEffect/SoundEffectToolset")
-add_subdirectory ("Toolset/System/ProcessTest")
-add_subdirectory ("Toolset/System/ResourcesLibrary")
-add_subdirectory ("Toolset/System/SystemToolset")
-add_subdirectory ("Toolset/System/TcpClient")
-add_subdirectory ("Toolset/System/UdpClient")
-add_subdirectory ("Toolset/Toolset/Toolset")
-add_subdirectory ("Toolset/UserInterface/UserInterfaceToolset")
+    if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
 
-add_subdirectory ("Example/Example/Example")
-add_subdirectory ("Example/ArtificialIntelligenceExample/ArtificialIntelligenceExample")
-add_subdirectory ("Example/AssistToolsExample/AssistToolsExample")  
-add_subdirectory ("Example/CoreToolsExample/CoreToolsExample")  
-add_subdirectory ("Example/DatabaseExample/DatabaseExample")  
-add_subdirectory ("Example/FrameworkExample/FrameworkExample") 
-add_subdirectory ("Example/ImagicsExample/ImagicsExample")
-add_subdirectory ("Example/InputOutputExample/InputOutputExample")
-add_subdirectory ("Example/MathematicsExample/MathematicsExample")
-add_subdirectory ("Example/NetworkExample/NetworkExample")
-add_subdirectory ("Example/PhysicsExample/PhysicsExample")
-add_subdirectory ("Example/RenderingExample/RenderingExample")
-add_subdirectory ("Example/ResourceManagerExample/ResourceManagerExample")
-add_subdirectory ("Example/ScriptExample/ScriptExample")
-add_subdirectory ("Example/SoundEffectExample/SoundEffectExample") 
-add_subdirectory ("Example/SystemExample/SystemExample") 
-add_subdirectory ("Example/UserInterfaceExample/UserInterfaceExample")
+        set(CONFIGURATION_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/DebugWindows/Configuration)
+        set(SHADER_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/DebugWindows/Resource/Shader)
 
-add_subdirectory ("ThreadingCoreRenderEngineAssist")
+    else ()
+
+        set(CONFIGURATION_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/ReleaseWindows/Configuration)
+        set(SHADER_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/ReleaseWindows/Resource/Shader)
+
+    endif ()
+
+    set(CONFIGURATION_INPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../AssistWindows/ThreadingCoreRenderEngineAssist/ThreadingCoreRenderEngineAssist/ThreadingCoreRenderEngineAssist)
+    set(CONFIGURATION_BAT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../Bat/CopyConfiguration.bat)
+
+    if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+
+        # 执行批处理文件 CopyConfiguration.bat，并传递参数 x64 和 目标路径
+        add_custom_target(
+                RunCopyConfigurationBatFileD ALL
+                COMMAND
+                COMMAND ${CONFIGURATION_BAT_PATH} ${CONFIGURATION_INPUT_PATH} ThreadingCoreRenderEngineAssist ${CONFIGURATION_OUTPUT_PATH}
+                COMMENT "Running CopyConfiguration.bat after build"
+        )
+
+    else ()
+
+        # 执行批处理文件 CopyConfiguration.bat，并传递参数 x64 和 目标路径
+        add_custom_target(
+                RunCopyConfigurationBatFile ALL
+                COMMAND
+                COMMAND ${CONFIGURATION_BAT_PATH} ${CONFIGURATION_INPUT_PATH} ThreadingCoreRenderEngineAssist ${CONFIGURATION_OUTPUT_PATH}
+                COMMENT "Running CopyConfiguration.bat after build"
+        )
+
+    endif ()
+
+    # 检查执行结果
+    if (result)
+        message(WARNING "Copy Configuration Batch file execution failed with exit code: ${result}")
+        message("Error output: ${error}")
+    else ()
+        message(STATUS "Copy Configuration Batch file executed successfully.")
+        message("Bat: ${CONFIGURATION_BAT_PATH}")
+        message("Input: ${CONFIGURATION_INPUT_PATH}")
+        message("Output: ${CONFIGURATION_OUTPUT_PATH}")
+    endif ()
+
+    # 创建目录
+    if (NOT EXISTS ${SHADER_OUTPUT_PATH})
+        file(MAKE_DIRECTORY ${SHADER_OUTPUT_PATH})
+        message(STATUS "Created directory: ${SHADER_OUTPUT_PATH}")
+    else ()
+        message(STATUS "Directory already exists: ${SHADER_OUTPUT_PATH}")
+    endif ()
+
+    set(RESOURCE_INPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../AssistWindows/ThreadingCoreRenderEngineAssist/ThreadingCoreRenderEngineAssist/ThreadingCoreRenderEngineAssist)
+    set(RESOURCE_BAT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../Bat/CopyResource.bat)
+
+    if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+
+        # 执行批处理文件 CopyResource.bat，并传递参数 x64 和 目标路径
+        add_custom_target(
+                RunCopyResourceBatFileD ALL
+                COMMAND
+                COMMAND ${RESOURCE_BAT_PATH} ${RESOURCE_INPUT_PATH} ${SHADER_OUTPUT_PATH}
+                COMMENT "Running CopyResource.bat after build"
+        )
+
+    else ()
+
+        # 执行批处理文件 CopyResource.bat，并传递参数 x64 和 目标路径
+        add_custom_target(
+                RunCopyResourceBatFile ALL
+                COMMAND
+                COMMAND ${RESOURCE_BAT_PATH} ${RESOURCE_INPUT_PATH} ${SHADER_OUTPUT_PATH}
+                COMMENT "Running CopyResource.bat after build"
+        )
+
+    endif ()
+
+    # 检查执行结果
+    if (result)
+        message(WARNING "Copy Resource Batch file execution failed with exit code: ${result}")
+        message("Error output: ${error}")
+    else ()
+        message(STATUS "Copy Resource Batch file executed successfully.")
+        message("Bat: ${RESOURCE_BAT_PATH}")
+        message("Input: ${RESOURCE_INPUT_PATH}")
+        message("Output: ${SHADER_OUTPUT_PATH}")
+    endif ()
+
+endif ()

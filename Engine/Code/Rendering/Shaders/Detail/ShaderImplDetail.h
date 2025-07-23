@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/26 15:02)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/26 15:02)
 
 #ifndef RENDERING_SHADERS_SHADER_IMPL_DETAIL_H
 #define RENDERING_SHADERS_SHADER_IMPL_DETAIL_H
@@ -40,7 +40,7 @@ int Rendering::ShaderImpl::Set(const std::string& name, const std::shared_ptr<T>
         ++handle;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("ÎŞ·¨ÕÒµ½¶ÔÏó"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("æ— æ³•æ‰¾åˆ°å¯¹è±¡"s))
 }
 
 #endif  // RENDERING_SHADERS_SHADER_IMPL_DETAIL_H

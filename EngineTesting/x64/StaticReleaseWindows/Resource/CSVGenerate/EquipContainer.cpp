@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #include "Equip.h"
 #include "EquipContainerDetail.h"
@@ -27,11 +27,11 @@ CSVConfigure::EquipContainer::EquipContainer(const CSVContent& csvContent)
 
 void CSVConfigure::EquipContainer::Parsing(const CSVContent& csvContent)
 {
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("equip±í¿ªÊ¼ÔØÈë¡­¡­"));
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("equipè¡¨å¼€å§‹è½½å…¥â€¦â€¦"));
 
     Load(csvContent);
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("equip±í½áÊøÔØÈë¡­¡­"));
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("equipè¡¨ç»“æŸè½½å…¥â€¦â€¦"));
 }
 
 void CSVConfigure::EquipContainer::Load(const CSVContent& csvContent)
@@ -74,7 +74,7 @@ CSVConfigure::EquipContainer::ConstEquipSharedPtr CSVConfigure::EquipContainer::
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("equip±íÎ´ÕÒµ½key = "s) + System::ToString(key) + SYSTEM_TEXT("µÄÅäÖÃĞÅÏ¢¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("equipè¡¨æœªæ‰¾åˆ°key = "s) + System::ToString(key) + SYSTEM_TEXT("çš„é…ç½®ä¿¡æ¯ã€‚"s))
     }
 }
 

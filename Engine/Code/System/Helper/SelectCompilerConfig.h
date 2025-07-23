@@ -1,33 +1,33 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 21:50)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 21:50)
 
 #ifndef SYSTEM_HELPER_SELECT_COMPILER_CONFIG_H
 #define SYSTEM_HELPER_SELECT_COMPILER_CONFIG_H
 
-/// ¶¨ÒåºêTCRE_COMPILER_VERSION±íÊ¾±àÒëÆ÷°æ±¾£¬
-/// ¶¨ÒåºêTCRE_SYSTEM_COMPILER±íÊ¾±àÒëÆ÷Ãû³Æ¡£
+/// å®šä¹‰å®TCRE_COMPILER_VERSIONè¡¨ç¤ºç¼–è¯‘å™¨ç‰ˆæœ¬ï¼Œ
+/// å®šä¹‰å®TCRE_SYSTEM_COMPILERè¡¨ç¤ºç¼–è¯‘å™¨åç§°ã€‚
 
 #if defined(__CUDACC__)
 
-    /// ÊÊÓÃÓÚGPUµÄNVIDIA CUDA C ++±àÒëÆ÷
+    /// é€‚ç”¨äºŽGPUçš„NVIDIA CUDA C ++ç¼–è¯‘å™¨
     #include "Compiler/Nvcc.h"
 
 #endif  // defined(__CUDACC__)
 
 #if defined(__GCCXML__)
 
-    /// GCC-XMLÄ£ÄâÆäËû±àÒëÆ÷£¬Ëü±ØÐë×÷ÎªµÚÒ»¸ö³öÏÖ£¡
+    /// GCC-XMLæ¨¡æ‹Ÿå…¶ä»–ç¼–è¯‘å™¨ï¼Œå®ƒå¿…é¡»ä½œä¸ºç¬¬ä¸€ä¸ªå‡ºçŽ°ï¼
     #define TCRE_COMPILER_CONFIG "Compiler/GccXml.h"
 
 #elif defined(_CRAYC)
 
-    /// »ùÓÚEDGµÄCray±àÒëÆ÷
+    /// åŸºäºŽEDGçš„Crayç¼–è¯‘å™¨
     #define TCRE_COMPILER_CONFIG "Compiler/Cray.h"
 
 #elif defined(__COMO__)
@@ -37,7 +37,7 @@
 
 #elif defined(__PATHSCALE__) && (4 <= __PATHCC__)
 
-    /// PathScale EKOPath±àÒëÆ÷£¨±ØÐëÏÈÓÚclangºÍgcc£©
+    /// PathScale EKOPathç¼–è¯‘å™¨ï¼ˆå¿…é¡»å…ˆäºŽclangå’Œgccï¼‰
     #define TCRE_COMPILER_CONFIG "Compiler/PathScale.h"
 
 #elif defined(__INTEL_COMPILER) || defined(__ICL) || defined(__ICC) || defined(__ECC)
@@ -47,7 +47,7 @@
 
 #elif defined(__clang__) && !defined(__CUDACC__) && !defined(__ibmxl__)
 
-    /// Clang C++Ä£ÄâGCC£¬ËùÒÔËü±ØÐë³öÏÖ¸üÔç¡£
+    /// Clang C++æ¨¡æ‹ŸGCCï¼Œæ‰€ä»¥å®ƒå¿…é¡»å‡ºçŽ°æ›´æ—©ã€‚
     #define TCRE_COMPILER_CONFIG "Compiler/Clang.h"
 
 #elif defined(__DMC__)
@@ -92,7 +92,7 @@
 
 #elif defined(__CODEGEARC__)
 
-    /// CodeGear¡ª¡ª±ØÐëÔÚBorlandÖ®Ç°¼ì²é
+    /// CodeGearâ€”â€”å¿…é¡»åœ¨Borlandä¹‹å‰æ£€æŸ¥
     #define TCRE_COMPILER_CONFIG "Compiler/CodeGear.h"
 
 #elif defined(__BORLANDC__)
@@ -107,7 +107,7 @@
 
 #elif defined(__SUNPRO_CC)
 
-    /// Sun Workshop C++ ±àÒëÆ÷
+    /// Sun Workshop C++ ç¼–è¯‘å™¨
     #define TCRE_COMPILER_CONFIG "Compiler/SunproCc.h"
 
 #elif defined(__HP_aCC)
@@ -117,7 +117,7 @@
 
 #elif defined(__MRC__) || defined(__SC__)
 
-    /// MPW MrCpp »ò SCpp
+    /// MPW MrCpp æˆ– SCpp
     #define TCRE_COMPILER_CONFIG "Compiler/Mpw.h"
 
 #elif defined(__IBMCPP__) && defined(__COMPILER_VER__) && defined(__MVS__)
@@ -127,23 +127,23 @@
 
 #elif defined(__ibmxl__)
 
-    /// ÓÃÓÚLinuxµÄIBM XL C/C++£¨Ð¡¶Ë£©
+    /// ç”¨äºŽLinuxçš„IBM XL C/C++ï¼ˆå°ç«¯ï¼‰
     #define TCRE_COMPILER_CONFIG "Compiler/XlCpp.h"
 
 #elif defined(__IBMCPP__)
 
-    /// IBM Visual Age »òÓÃÓÚLinuxµÄIBM XL C/C++£¨´ó¶Ë£©
+    /// IBM Visual Age æˆ–ç”¨äºŽLinuxçš„IBM XL C/C++ï¼ˆå¤§ç«¯ï¼‰
     #define TCRE_COMPILER_CONFIG "Compiler/VaCpp.h"
 
 #elif defined _MSC_VER
 
-    /// Î¢ÈíVisual C++£¬±ØÐë±£³ÖÔÚ×îºóÒ»¸ö#elif£¬ÒòÎªÒ»Ð©ÆäËû¹©Ó¦ÉÌ£¨ÀýÈçMetrowerks£©£¬Ò²¶¨Òå_MSC_VER
+    /// å¾®è½¯Visual C++ï¼Œå¿…é¡»ä¿æŒåœ¨æœ€åŽä¸€ä¸ª#elifï¼Œå› ä¸ºä¸€äº›å…¶ä»–ä¾›åº”å•†ï¼ˆä¾‹å¦‚Metrowerksï¼‰ï¼Œä¹Ÿå®šä¹‰_MSC_VER
     #define TCRE_COMPILER_CONFIG "Compiler/VisualC.h"
 
 #else  // !defined(ALL_COMPILER)
 
-    /// Õâ±ØÐëÔÚ×îºó£¬Éú³ÉÒ»¸ö´íÎó£¬Èç¹ûÎÒÃÇÎÞ·¨Ê¶±ð±àÒëÆ÷¡£
-    #error "±àÒëÆ÷ÎÞ·¨±»ÕýÈ·Ê¶±ð¡£"
+    /// è¿™å¿…é¡»åœ¨æœ€åŽï¼Œç”Ÿæˆä¸€ä¸ªé”™è¯¯ï¼Œå¦‚æžœæˆ‘ä»¬æ— æ³•è¯†åˆ«ç¼–è¯‘å™¨ã€‚
+    #error "ç¼–è¯‘å™¨æ— æ³•è¢«æ­£ç¡®è¯†åˆ«ã€‚"
 
 #endif  // defined(ALL_COMPILER)
 

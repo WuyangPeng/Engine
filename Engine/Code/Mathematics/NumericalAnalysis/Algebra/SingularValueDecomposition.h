@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.6 (2024/02/27 13:55)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.6 (2024/02/27 13:55)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_ALGEBRA_SINGULAR_VALUE_DECOMPOSITION_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_ALGEBRA_SINGULAR_VALUE_DECOMPOSITION_H
@@ -18,35 +18,35 @@
 
 #include <vector>
 
-/// SingularValueDecompositionÀàÊÇG. H. GolubºÍCharles F. Van LoanµÄ¡°¾ØÕó¼ÆËã£¬µÚ2°æ¡±ÖĞÃèÊöµÄËã·¨8.3.2£¨SVDËã·¨£©µÄÊµÏÖ£¬
-/// Ô¼º²¡¤»ôÆÕ½ğË¹³ö°æÉç£¬ÂíÀïÀ¼Öİ°Í¶ûµÄÄ¦£¬1993ÄêµÚ4°æ¡£
-/// Ëã·¨5.4.2£¨HouseholderË«¶Ô½Ç»¯£©ÓÃÓÚ½«AËõ¼õÎªË«¶Ô½ÇB¡£
-/// Ëã·¨8.3.1£¨Golub-Kahan SVD²½Öè£©ÓÃÓÚ´ÓË«¶Ô½Çµ½¶Ô½ÇµÄµü´úËõ¼õ¡£
-/// Èç¹ûAÊÇÔ­Ê¼¾ØÕó£¬SÊÇ¶Ô½ÇÏîÎªÆæÒìÖµµÄ¾ØÕó£¬UºÍVÊÇÏàÓ¦µÄ¾ØÕó£¬ÄÇÃ´ÀíÂÛÉÏU^T*A*V = S¡£
-/// ÔÚÊı×ÖÉÏ£¬ÎÒÃÇÓĞÎó²îE = U^T*A*V-S¡£
-/// Ëã·¨8.3.2Ìáµ½£¬ÎÒÃÇÆÚÍû|E|½üËÆÎªunitRoundOff*|A|£¬
-/// ÆäÖĞ|A|±íÊ¾AµÄFrobenius·¶Êı£¬
-/// ÆäÖĞ¶ÔÓÚReal=float£¬µ¥Î»unitRoundOff is 2^{-23}£¬¼´
+/// SingularValueDecompositionç±»æ˜¯G. H. Golubå’ŒCharles F. Van Loançš„â€œçŸ©é˜µè®¡ç®—ï¼Œç¬¬2ç‰ˆâ€ä¸­æè¿°çš„ç®—æ³•8.3.2ï¼ˆSVDç®—æ³•ï¼‰çš„å®ç°ï¼Œ
+/// çº¦ç¿°Â·éœæ™®é‡‘æ–¯å‡ºç‰ˆç¤¾ï¼Œé©¬é‡Œå…°å·å·´å°”çš„æ‘©ï¼Œ1993å¹´ç¬¬4ç‰ˆã€‚
+/// ç®—æ³•5.4.2ï¼ˆHouseholderåŒå¯¹è§’åŒ–ï¼‰ç”¨äºå°†Aç¼©å‡ä¸ºåŒå¯¹è§’Bã€‚
+/// ç®—æ³•8.3.1ï¼ˆGolub-Kahan SVDæ­¥éª¤ï¼‰ç”¨äºä»åŒå¯¹è§’åˆ°å¯¹è§’çš„è¿­ä»£ç¼©å‡ã€‚
+/// å¦‚æœAæ˜¯åŸå§‹çŸ©é˜µï¼ŒSæ˜¯å¯¹è§’é¡¹ä¸ºå¥‡å¼‚å€¼çš„çŸ©é˜µï¼ŒUå’ŒVæ˜¯ç›¸åº”çš„çŸ©é˜µï¼Œé‚£ä¹ˆç†è®ºä¸ŠU^T*A*V = Sã€‚
+/// åœ¨æ•°å­—ä¸Šï¼Œæˆ‘ä»¬æœ‰è¯¯å·®E = U^T*A*V-Sã€‚
+/// ç®—æ³•8.3.2æåˆ°ï¼Œæˆ‘ä»¬æœŸæœ›|E|è¿‘ä¼¼ä¸ºunitRoundOff*|A|ï¼Œ
+/// å…¶ä¸­|A|è¡¨ç¤ºAçš„FrobeniusèŒƒæ•°ï¼Œ
+/// å…¶ä¸­å¯¹äºReal=floatï¼Œå•ä½unitRoundOff is 2^{-23}ï¼Œå³
 ///   std::numeric_limits<float>::epsilon() = 1.192092896e-7f
-/// »ò2^{-52}±íÊ¾Real=double£¬¼´
+/// æˆ–2^{-52}è¡¨ç¤ºReal=doubleï¼Œå³
 ///   std::numeric_limits<double>::epsilon() = 2.2204460492503131e-16.
 ///
-/// ÔÚ´¦ÀíBµÄµü´úÆÚ¼ä£¬Ë«¶Ô½Ç»¯µÄA£¬
-/// µ±ÓëËüµÄÏàÁÚ¶Ô½ÇÏßºÍ³¬¶Ô½ÇÏßÔªËØÏà±ÈÊ±£¬³¬¶Ô½ÇÏßÌõÄ¿±»È·¶¨ÎªÓĞĞ§µØÎªÁã£¬
+/// åœ¨å¤„ç†Bçš„è¿­ä»£æœŸé—´ï¼ŒåŒå¯¹è§’åŒ–çš„Aï¼Œ
+/// å½“ä¸å®ƒçš„ç›¸é‚»å¯¹è§’çº¿å’Œè¶…å¯¹è§’çº¿å…ƒç´ ç›¸æ¯”æ—¶ï¼Œè¶…å¯¹è§’çº¿æ¡ç›®è¢«ç¡®å®šä¸ºæœ‰æ•ˆåœ°ä¸ºé›¶ï¼Œ
 ///   |b(i,i+1)| <= e * (|b(i,i) + b(i+1,i+1)|)
-/// GolubºÍvan Loan½¨ÒéÊÇÑ¡Ôñe×÷Îªµ¥Î»ÉáÈëµÄĞ¡Õı±¶Êı£¬
-/// e = multiplier * unitRoundOff¡£
-/// ¶Ô½ÇÏßÌõÄ¿±»È·¶¨ÎªÏà¶ÔÓÚBµÄ·¶ÊıÓĞĞ§µØÎªÁã£¬
+/// Golubå’Œvan Loanå»ºè®®æ˜¯é€‰æ‹©eä½œä¸ºå•ä½èˆå…¥çš„å°æ­£å€æ•°ï¼Œ
+/// e = multiplier * unitRoundOffã€‚
+/// å¯¹è§’çº¿æ¡ç›®è¢«ç¡®å®šä¸ºç›¸å¯¹äºBçš„èŒƒæ•°æœ‰æ•ˆåœ°ä¸ºé›¶ï¼Œ
 ///   |b(i,i)| <= e * |B|
-/// ÊµÏÖÊ¹ÓÃ|B|µÄL-ÎŞÇî´ó·¶Êı£¬ÕâÊÇBµÄ¶Ô½ÇÏßºÍ³¬¶Ô½ÇÏßÔªËØµÄ×î´ó¾ø¶ÔÖµ¡£
+/// å®ç°ä½¿ç”¨|B|çš„L-æ— ç©·å¤§èŒƒæ•°ï¼Œè¿™æ˜¯Bçš„å¯¹è§’çº¿å’Œè¶…å¯¹è§’çº¿å…ƒç´ çš„æœ€å¤§ç»å¯¹å€¼ã€‚
 ///
-/// ×÷Õß½¨Òé£¬Ò»µ©ÄãÓĞÁËË«¶Ô½Ç¾ØÕó£¬
-/// Ò»¸öÊµ¼ÊµÄÊµÏÖ½«°Ñ¶Ô½ÇºÍ³¬¶Ô½ÇÏî´æ´¢ÔÚÏßĞÔÕóÁĞÖĞ£¬
-/// ºöÂÔ²»ÔÚ2´øÖĞµÄÀíÂÛÁãÖµ¡£
-/// ÕâÓĞÀûÓÚ»º´æÒ»ÖÂĞÔ¡£
-/// ÊµÏÖ¶ÔHouseholder uÏòÁ¿Ê¹ÓÃµ¥¶ÀµÄ´æ´¢£¬
-/// Òò´ËÕâĞ©ÏòÁ¿µÄ»ù±¾²¿·Ö²»´æ´¢ÔÚAµÄ±¾µØ¸±±¾ÖĞ£¨ÈçGolubºÍvan LoanËù½¨ÒéµÄ£©£¬
-/// ÒÔÊ¹ÊµÏÖ¸ü¾ß¿É¶ÁĞÔ¡£
+/// ä½œè€…å»ºè®®ï¼Œä¸€æ—¦ä½ æœ‰äº†åŒå¯¹è§’çŸ©é˜µï¼Œ
+/// ä¸€ä¸ªå®é™…çš„å®ç°å°†æŠŠå¯¹è§’å’Œè¶…å¯¹è§’é¡¹å­˜å‚¨åœ¨çº¿æ€§é˜µåˆ—ä¸­ï¼Œ
+/// å¿½ç•¥ä¸åœ¨2å¸¦ä¸­çš„ç†è®ºé›¶å€¼ã€‚
+/// è¿™æœ‰åˆ©äºç¼“å­˜ä¸€è‡´æ€§ã€‚
+/// å®ç°å¯¹Householder uå‘é‡ä½¿ç”¨å•ç‹¬çš„å­˜å‚¨ï¼Œ
+/// å› æ­¤è¿™äº›å‘é‡çš„åŸºæœ¬éƒ¨åˆ†ä¸å­˜å‚¨åœ¨Açš„æœ¬åœ°å‰¯æœ¬ä¸­ï¼ˆå¦‚Golubå’Œvan Loanæ‰€å»ºè®®çš„ï¼‰ï¼Œ
+/// ä»¥ä½¿å®ç°æ›´å…·å¯è¯»æ€§ã€‚
 
 namespace Mathematics::Algebra
 {
@@ -62,31 +62,31 @@ namespace Mathematics::Algebra
         using DiagonalType = std::vector<Real>;
 
     public:
-        /// Çó½âÆ÷´¦ÀíMxN¸ö¶Ô³Æ¾ØÕó£¬ÆäÖĞM >= N > 1£¨'numRows'ÎªM£¬'numCols'ÎªN£©£¬¾ØÕó°´ĞĞÖ÷Ë³Ğò´æ´¢¡£
-        /// ±ØĞëÖ¸¶¨×î´óµü´ú´ÎÊı£¨¡°×î´óµü´ú´ÎÊı¡±£©£¬
-        /// ÒÔ½«Ò»¸öË«¶Ô½Ç¾ØÕó¼ò»¯Îª¶Ô½Ç¾ØÕó¡£
-        /// Ä¿±êÊÇ¼ÆËãMxMÕı½»U¡¢NxNÕı½»VºÍMxN¾ØÕóS£¬
-        /// ÆäÖĞ U^T*A*V = S¡£
-        /// SµÄÎ¨Ò»·ÇÁãÏîÔÚ¶Ô½ÇÏßÉÏ£»
-        /// ¶Ô½ÇÏîÊÇÔ­Ê¼¾ØÕóµÄÆæÒìÖµ¡£
+        /// æ±‚è§£å™¨å¤„ç†MxNä¸ªå¯¹ç§°çŸ©é˜µï¼Œå…¶ä¸­M >= N > 1ï¼ˆ'numRows'ä¸ºMï¼Œ'numCols'ä¸ºNï¼‰ï¼ŒçŸ©é˜µæŒ‰è¡Œä¸»é¡ºåºå­˜å‚¨ã€‚
+        /// å¿…é¡»æŒ‡å®šæœ€å¤§è¿­ä»£æ¬¡æ•°ï¼ˆâ€œæœ€å¤§è¿­ä»£æ¬¡æ•°â€ï¼‰ï¼Œ
+        /// ä»¥å°†ä¸€ä¸ªåŒå¯¹è§’çŸ©é˜µç®€åŒ–ä¸ºå¯¹è§’çŸ©é˜µã€‚
+        /// ç›®æ ‡æ˜¯è®¡ç®—MxMæ­£äº¤Uã€NxNæ­£äº¤Vå’ŒMxNçŸ©é˜µSï¼Œ
+        /// å…¶ä¸­ U^T*A*V = Sã€‚
+        /// Sçš„å”¯ä¸€éé›¶é¡¹åœ¨å¯¹è§’çº¿ä¸Šï¼›
+        /// å¯¹è§’é¡¹æ˜¯åŸå§‹çŸ©é˜µçš„å¥‡å¼‚å€¼ã€‚
         SingularValueDecomposition(int numRows, int numCols, int maxIterations);
 
         CLASS_INVARIANT_DECLARE;
 
-        /// MxNÊäÈëµÄ¸±±¾ÊÇÔÚÄÚ²¿ÖÆ×÷µÄ¡£
-        /// ³ËÊıÊÇÒ»¸öÓÃÓÚ¼ÆËãeµÄĞ¡ÕıÊı£¬ÔÚ¸ÃÎÄ¼şµÄÇ°µ¼×¢ÊÍÖĞ½øĞĞÁËÃèÊö¡£Ä¬ÈÏÖµÎª8£¬
-        /// µ«Äú¿ÉÒÔ¸ù¾İÓ¦ÓÃ³ÌĞòµÄĞèÒª½øĞĞµ÷Õû¡£
-        /// ·µ»ØÖµÊÇ·¢ÉúÊÕÁ²Ê±ÏûºÄµÄµü´ú´ÎÊı£¬
-        /// »òÕßÊÇÎ´·¢ÉúÊÕÁ²Ê±µÄstd::numeric_limits<int>::max() ¡£
+        /// MxNè¾“å…¥çš„å‰¯æœ¬æ˜¯åœ¨å†…éƒ¨åˆ¶ä½œçš„ã€‚
+        /// ä¹˜æ•°æ˜¯ä¸€ä¸ªç”¨äºè®¡ç®—eçš„å°æ­£æ•°ï¼Œåœ¨è¯¥æ–‡ä»¶çš„å‰å¯¼æ³¨é‡Šä¸­è¿›è¡Œäº†æè¿°ã€‚é»˜è®¤å€¼ä¸º8ï¼Œ
+        /// ä½†æ‚¨å¯ä»¥æ ¹æ®åº”ç”¨ç¨‹åºçš„éœ€è¦è¿›è¡Œè°ƒæ•´ã€‚
+        /// è¿”å›å€¼æ˜¯å‘ç”Ÿæ”¶æ•›æ—¶æ¶ˆè€—çš„è¿­ä»£æ¬¡æ•°ï¼Œ
+        /// æˆ–è€…æ˜¯æœªå‘ç”Ÿæ”¶æ•›æ—¶çš„std::numeric_limits<int>::max() ã€‚
         int Solve(const MatrixType& input, Real multiplier = MathType::GetValue(8));
 
-        /// µÃµ½U-¾ØÕó£¬ËüÊÇMxM£¬²¢°´ĞĞÖ÷Ë³Ğò´æ´¢¡£
+        /// å¾—åˆ°U-çŸ©é˜µï¼Œå®ƒæ˜¯MxMï¼Œå¹¶æŒ‰è¡Œä¸»é¡ºåºå­˜å‚¨ã€‚
         NODISCARD MatrixType GetU() const;
 
-        /// µÃµ½V-¾ØÕó£¬ËüÊÇNxN£¬²¢°´ĞĞÖ÷Ë³Ğò´æ´¢¡£
+        /// å¾—åˆ°V-çŸ©é˜µï¼Œå®ƒæ˜¯NxNï¼Œå¹¶æŒ‰è¡Œä¸»é¡ºåºå­˜å‚¨ã€‚
         NODISCARD MatrixType GetV() const;
 
-        /// µÃµ½S-¾ØÕó£¬ËüÊÇMxN £¬²¢°´ĞĞÖ÷Ë³Ğò´æ´¢¡£
+        /// å¾—åˆ°S-çŸ©é˜µï¼Œå®ƒæ˜¯MxN ï¼Œå¹¶æŒ‰è¡Œä¸»é¡ºåºå­˜å‚¨ã€‚
         NODISCARD MatrixType GetS() const;
 
         NODISCARD Real GetSingularValue(int index) const;
@@ -94,7 +94,7 @@ namespace Mathematics::Algebra
         NODISCARD DiagonalType GetUColumn(int index) const;
         NODISCARD DiagonalType GetVColumn(int index) const;
 
-        /// »ñÈ¡ÆæÒìÖµ£¬ÕâÊÇÒ»¸öNÔªËØÊı×é¡£
+        /// è·å–å¥‡å¼‚å€¼ï¼Œè¿™æ˜¯ä¸€ä¸ªNå…ƒç´ æ•°ç»„ã€‚
         NODISCARD DiagonalType GetSingularValues() const;
 
     private:
@@ -106,39 +106,39 @@ namespace Mathematics::Algebra
 
         static constexpr auto unitRoundOff = std::numeric_limits<Real>::epsilon();
 
-        /// Ëã·¨5.1.1£¨Householder Vector£©¡£
-        /// ¾ØÕóAµÄ´óĞ¡ÎªnumRows x numCols£¬
-        /// ÆäÖĞnumRows >= numCols²¢ÇÒÏòÁ¿vµÄ´óĞ¡ÎªnumRows¡£
+        /// ç®—æ³•5.1.1ï¼ˆHouseholder Vectorï¼‰ã€‚
+        /// çŸ©é˜µAçš„å¤§å°ä¸ºnumRows x numColsï¼Œ
+        /// å…¶ä¸­numRows >= numColså¹¶ä¸”å‘é‡vçš„å¤§å°ä¸ºnumRowsã€‚
         static void ComputeHouseholderU(int numRows, int numCols, const MatrixType& a, int selectCol, DiagonalType& v);
 
-        /// Ëã·¨5.1.1£¨Householder Vector£©¡£
-        /// ¾ØÕóAµÄ´óĞ¡ÎªnumRows x numCols£¬
-        /// ÆäÖĞnumRows >= numCols²¢ÇÒÏòÁ¿vµÄ´óĞ¡ÎªnumCols¡£
+        /// ç®—æ³•5.1.1ï¼ˆHouseholder Vectorï¼‰ã€‚
+        /// çŸ©é˜µAçš„å¤§å°ä¸ºnumRows x numColsï¼Œ
+        /// å…¶ä¸­numRows >= numColså¹¶ä¸”å‘é‡vçš„å¤§å°ä¸ºnumColsã€‚
         static void ComputeHouseholderV(int numRows, int numCols, const MatrixType& a, int selectRow, DiagonalType& v);
 
-        // Ëã·¨ 5.1.2 (Householder Ô¤³Ë)
+        // ç®—æ³• 5.1.2 (Householder é¢„ä¹˜)
         static void DoHouseholderPreMultiply(int numRows, int numCols, const DiagonalType& v, int selectCol, MatrixType& a);
 
-        // Ëã·¨ 5.1.3 (Householder ºó³Ë·¨)
+        // ç®—æ³• 5.1.3 (Householder åä¹˜æ³•)
         static void DoHouseholderPostMultiply(int numRows, int numCols, const DiagonalType& v, int selectRow, MatrixType& a);
 
-        /// Ê¹ÓÃHouseholder·´Éä½øĞĞË«ÏòÊÊÅä¡£
-        /// ÔÚÊäÈëÊ±£¬matrixÊÇ´«µİ¸øSolve(...)µÄÊäÈë¾ØÕóµÄ¸±±¾¡£
-        /// ÔÚÊä³öÊ±£¬diagonalºÍsuperDiagonal¶Ô½ÇÏß°üº¬Ë«Ïò»¯µÄ½á¹û¡£
+        /// ä½¿ç”¨Householderåå°„è¿›è¡ŒåŒå‘é€‚é…ã€‚
+        /// åœ¨è¾“å…¥æ—¶ï¼Œmatrixæ˜¯ä¼ é€’ç»™Solve(...)çš„è¾“å…¥çŸ©é˜µçš„å‰¯æœ¬ã€‚
+        /// åœ¨è¾“å‡ºæ—¶ï¼Œdiagonalå’ŒsuperDiagonalå¯¹è§’çº¿åŒ…å«åŒå‘åŒ–çš„ç»“æœã€‚
         void Bidiagonalize();
 
         void ComputeCutoffs(Real multiplier, Real& epsilon, Real& threshold) const;
 
-        /// µ±Çó½âsn * x + cs * y = 0Ê±£¬
-        /// ÓÃÓÚÎÈ½¡µØÉú³ÉGivensĞı×ªÕıÏÒºÍÓàÏÒµÄ¸¨Öú¶ÔÏó¡£
+        /// å½“æ±‚è§£sn * x + cs * y = 0æ—¶ï¼Œ
+        /// ç”¨äºç¨³å¥åœ°ç”ŸæˆGivensæ—‹è½¬æ­£å¼¦å’Œä½™å¼¦çš„è¾…åŠ©å¯¹è±¡ã€‚
         void GetSinCos(Real x, Real y, Real& cs, Real& sn) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        /// ²âÊÔ³ıÁË×îºóÒ»¸öÒÔÍâµÄËùÓĞ¶Ô½ÇÏßÌõÄ¿ÊÇ·ñÓĞĞ§ÎªÁã¡£
-        /// ¶ÔÓÚÃ¿¸öÕâÑùµÄÌõÄ¿£¬B¾ØÕó½âñî¡£
-        /// Èç¹ûÃ»ÓĞÁãÖµÌõÄ¿£¬Ôò±ØĞëÖ´ĞĞGolub Kahan²½ÖèÖ´ĞĞ½âñî¡£
+        /// æµ‹è¯•é™¤äº†æœ€åä¸€ä¸ªä»¥å¤–çš„æ‰€æœ‰å¯¹è§’çº¿æ¡ç›®æ˜¯å¦æœ‰æ•ˆä¸ºé›¶ã€‚
+        /// å¯¹äºæ¯ä¸ªè¿™æ ·çš„æ¡ç›®ï¼ŒBçŸ©é˜µè§£è€¦ã€‚
+        /// å¦‚æœæ²¡æœ‰é›¶å€¼æ¡ç›®ï¼Œåˆ™å¿…é¡»æ‰§è¡ŒGolub Kahanæ­¥éª¤æ‰§è¡Œè§£è€¦ã€‚
         bool DiagonalEntriesNonzero(int iMin, int iMax, Real threshold);
 
-        // Ëã·¨ 8.3.1 (Golub-Kahan SVD ²½Öè).
+        // ç®—æ³• 8.3.1 (Golub-Kahan SVD æ­¥éª¤).
         void DoGolubKahanStep(int iMin, int iMax);
 
         void ComputeOrthogonalMatrices();
@@ -148,28 +148,28 @@ namespace Mathematics::Algebra
         void SortSingularValues();
 
     private:
-        /// Òª´¦ÀíµÄ¾ØÕóµÄĞĞÊıºÍÁĞÊı¡£
+        /// è¦å¤„ç†çš„çŸ©é˜µçš„è¡Œæ•°å’Œåˆ—æ•°ã€‚
         int numRows;
         int numCols;
 
-        /// ½«Ë«¶Ô½Ç¾ØÕó¼ò»¯Îª¶Ô½Ç¾ØÕóµÄ×î´óµü´ú´ÎÊı¡£
+        /// å°†åŒå¯¹è§’çŸ©é˜µç®€åŒ–ä¸ºå¯¹è§’çŸ©é˜µçš„æœ€å¤§è¿­ä»£æ¬¡æ•°ã€‚
         int maxIterations;
 
-        /// ´«µİ¸ø½âËãÆ÷µÄ¾ØÕóµÄÄÚ²¿¸±±¾¡£
-        /// ÕâÊÇ°´ĞĞÖ÷Ë³Ğò´æ´¢µÄ¡£
-        MatrixType matrix;  // MxN ÔªËØ
+        /// ä¼ é€’ç»™è§£ç®—å™¨çš„çŸ©é˜µçš„å†…éƒ¨å‰¯æœ¬ã€‚
+        /// è¿™æ˜¯æŒ‰è¡Œä¸»é¡ºåºå­˜å‚¨çš„ã€‚
+        MatrixType matrix;  // MxN å…ƒç´ 
 
-        /// U*A*V^T = SµÄU¾ØÕó¡¢V¾ØÕóºÍS¾ØÕó¡£
-        /// ËüÃÇ°´ĞĞÖ÷Ë³Ğò´æ´¢¡£
+        /// U*A*V^T = Sçš„UçŸ©é˜µã€VçŸ©é˜µå’ŒSçŸ©é˜µã€‚
+        /// å®ƒä»¬æŒ‰è¡Œä¸»é¡ºåºå­˜å‚¨ã€‚
         MatrixType uMatrix;  // MxM
         MatrixType vMatrix;  // NxN
         MatrixType sMatrix;  // MxN
 
-        /// ¶ş¶Ô½Ç¾ØÕóµÄ¶Ô½ÇÏßºÍ³¬¶Ô½ÇÏß¡£
-        DiagonalType diagonal;  // N ÔªËØ
-        DiagonalType superDiagonal;  // N-1 ÔªËØ
+        /// äºŒå¯¹è§’çŸ©é˜µçš„å¯¹è§’çº¿å’Œè¶…å¯¹è§’çº¿ã€‚
+        DiagonalType diagonal;  // N å…ƒç´ 
+        DiagonalType superDiagonal;  // N-1 å…ƒç´ 
 
-        // Householder·´ÉäÓÃÓÚ½«ÊäÈë¾ØÕó¼ò»¯ÎªË«Ïò¾ØÕó¡£
+        // Householderåå°„ç”¨äºå°†è¾“å…¥çŸ©é˜µç®€åŒ–ä¸ºåŒå‘çŸ©é˜µã€‚
         HouseholderType lHouseholder;
         HouseholderType rHouseholder;
 

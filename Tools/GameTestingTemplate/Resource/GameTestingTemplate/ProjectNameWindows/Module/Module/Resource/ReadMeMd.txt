@@ -1,12 +1,12 @@
-@ingroup group_$ModuleName$Testing_Documentation
+ï»¿@ingroup group_$ModuleName$Testing_Documentation
 
 ----------------------------
-$ModuleChineseName$µ¥Ôª²âÊÔ
+$ModuleChineseName$å•å…ƒæµ‹è¯•
 
-Ä¿Ç°°üº¬£º
+ç›®å‰åŒ…å«ï¼š
 
-1. $ModuleName$£¨$ModuleChineseName$£©
+1. $ModuleName$ï¼ˆ$ModuleChineseName$ï¼‰
 
-£¨1£©$ModuleChineseName$¡£
+ï¼ˆ1ï¼‰$ModuleChineseName$ã€‚
 
 ----------------------------

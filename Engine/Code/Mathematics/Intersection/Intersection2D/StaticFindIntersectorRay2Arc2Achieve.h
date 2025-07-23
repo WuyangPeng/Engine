@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 17:42)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 17:42)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_ARC2_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_ARC2_ACHIEVE_H
@@ -60,7 +60,7 @@ void Mathematics::StaticFindIntersectorRay2Arc2<Real>::Find()
     auto rootCount = line2Circle2.GetRootCount();
     if (line2Circle2.IsIntersects())
     {
-        /// Èç¹ûÏßÓëÔ²µÄ½»µã²»ÔÚÉäÏßÖĞ£¬Ôò¼õÉÙ¸ùÊı¡£
+        /// å¦‚æœçº¿ä¸åœ†çš„äº¤ç‚¹ä¸åœ¨å°„çº¿ä¸­ï¼Œåˆ™å‡å°‘æ ¹æ•°ã€‚
         if (rootCount == 1)
         {
             if (line2Circle2.GetParameter(0) < MathType::GetValue(0))
@@ -126,7 +126,7 @@ Mathematics::Vector2<Real> Mathematics::StaticFindIntersectorRay2Arc2<Real>::Get
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ë÷ÒıÔ½½ç"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•è¶Šç•Œ"s));
     }
 }
 

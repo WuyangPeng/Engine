@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/28 16:47)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/28 16:47)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,7 +22,7 @@ CoreTools::LoadingLibraryImpl::LoadingLibraryImpl(const String& fileName, LoadLi
 {
     if (library == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¼ÓÔØ£¨"s) + fileName + SYSTEM_TEXT("£©¶¯Ì¬Á´½Ó¿âÊ§°Ü¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("åŠ è½½ï¼ˆ"s) + fileName + SYSTEM_TEXT("ï¼‰åŠ¨æ€é“¾æ¥åº“å¤±è´¥ã€‚"s))
     }
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -34,7 +34,7 @@ CoreTools::LoadingLibraryImpl::~LoadingLibraryImpl() noexcept
 
     if (!System::FreeDynamicLibrary(library))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("ÊÍ·ÅÒÑ¼ÓÔØµÄ£¨"), fileName, SYSTEM_TEXT("£©¶¯Ì¬Á´½Ó¿âÊ§°Ü¡£"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("é‡Šæ”¾å·²åŠ è½½çš„ï¼ˆ"), fileName, SYSTEM_TEXT("ï¼‰åŠ¨æ€é“¾æ¥åº“å¤±è´¥ã€‚"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -64,6 +64,6 @@ CoreTools::LoadingLibraryImpl::DynamicLinkProcess CoreTools::LoadingLibraryImpl:
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("»ñÈ¡º¯Êı£¨"s) + StringConversion::MultiByteConversionStandard(processName) + SYSTEM_TEXT("£©µØÖ·Ê§°ÜÊ§°Ü¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è·å–å‡½æ•°ï¼ˆ"s) + StringConversion::MultiByteConversionStandard(processName) + SYSTEM_TEXT("ï¼‰åœ°å€å¤±è´¥å¤±è´¥ã€‚"s))
     }
 }

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/30 22:54)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/30 22:54)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_ENVIRONMENT_H
 #define CORE_TOOLS_FILE_MANAGER_ENVIRONMENT_H
@@ -41,19 +41,19 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        /// Ö§³ÖÊ¹ÓÃÂ·¾¶À´¶¨Î»ÎÄ¼þ¡£¶ÔÓÚÆ½Ì¨¶ÀÁ¢ÐÔ£¬Ê¹ÓÃ¡°/¡±×÷ÎªÂ·¾¶·Ö¸ô·û¡£
-        /// Èç¹ûÊäÈëµÄ¡°Ä¿Â¼¡±µÄÖµÎ´ÒÔ¡°/¡±»ò¡°\\¡±½áÎ²£¬ÔòËü½«×Ô¶¯¸½¼ÓÒ»¸öÎ²ËæµÄ¡°/¡±¡£
-        /// Èç¹û²Ù×÷³É¹¦£¬²åÈë/É¾³ýº¯Êý·µ»Ø¡°Õæ¡±¡£
+        /// æ”¯æŒä½¿ç”¨è·¯å¾„æ¥å®šä½æ–‡ä»¶ã€‚å¯¹äºŽå¹³å°ç‹¬ç«‹æ€§ï¼Œä½¿ç”¨â€œ/â€ä½œä¸ºè·¯å¾„åˆ†éš”ç¬¦ã€‚
+        /// å¦‚æžœè¾“å…¥çš„â€œç›®å½•â€çš„å€¼æœªä»¥â€œ/â€æˆ–â€œ\\â€ç»“å°¾ï¼Œåˆ™å®ƒå°†è‡ªåŠ¨é™„åŠ ä¸€ä¸ªå°¾éšçš„â€œ/â€ã€‚
+        /// å¦‚æžœæ“ä½œæˆåŠŸï¼Œæ’å…¥/åˆ é™¤å‡½æ•°è¿”å›žâ€œçœŸâ€ã€‚
         NODISCARD int GetNumDirectories() const;
         NODISCARD String GetDirectory(int index) const;
         NODISCARD bool InsertDirectory(const String& directory);
         NODISCARD bool EraseDirectory(const String& directory);
         void EraseAllDirectories() noexcept;
 
-        /// GetPath*º¯ÊýËÑË÷Ä¿Â¼ÁÐ±í£¬¼ÙÉèËüÂú×ãËùÒªÇóµÄÌõ¼þ£¬Ëü·µ»ØÍêÈ«ÐÞÊÎµÄÎÄ¼þÃû£¬Èç¹ûÌõ¼þ²»¾ß±¸£¬ËüÅ×³öÒ»¸öÒì³£¡£
-        /// GetPathReading³É¹¦Ê±£¬¿ÉÒÔ´ò¿ªÓÃÓÚ¶ÁÈ¡µÄÎÄ¼þ¡£
-        /// GetPathWriting³É¹¦Ê±£¬¿ÉÒÔ´ò¿ªÓÃÓÚÐ´ÈëµÄÎÄ¼þ¡£
-        /// GetPathReadingAndWriting³É¹¦Ê±£¬¿ÉÒÔ´ò¿ªÓÃÓÚ¶ÁÈ¡ºÍ/»òÐ´ÈëµÄÎÄ¼þ¡£
+        /// GetPath*å‡½æ•°æœç´¢ç›®å½•åˆ—è¡¨ï¼Œå‡è®¾å®ƒæ»¡è¶³æ‰€è¦æ±‚çš„æ¡ä»¶ï¼Œå®ƒè¿”å›žå®Œå…¨ä¿®é¥°çš„æ–‡ä»¶åï¼Œå¦‚æžœæ¡ä»¶ä¸å…·å¤‡ï¼Œå®ƒæŠ›å‡ºä¸€ä¸ªå¼‚å¸¸ã€‚
+        /// GetPathReadingæˆåŠŸæ—¶ï¼Œå¯ä»¥æ‰“å¼€ç”¨äºŽè¯»å–çš„æ–‡ä»¶ã€‚
+        /// GetPathWritingæˆåŠŸæ—¶ï¼Œå¯ä»¥æ‰“å¼€ç”¨äºŽå†™å…¥çš„æ–‡ä»¶ã€‚
+        /// GetPathReadingAndWritingæˆåŠŸæ—¶ï¼Œå¯ä»¥æ‰“å¼€ç”¨äºŽè¯»å–å’Œ/æˆ–å†™å…¥çš„æ–‡ä»¶ã€‚
         NODISCARD String GetPathReading(const String& fileName) const;
         NODISCARD String GetPathWriting(const String& fileName) const;
         NODISCARD String GetPathReadingAndWriting(const String& fileName) const;

@@ -1,0 +1,33 @@
+{
+  "helperSuite": {
+
+  },
+
+  "collisionDetectionSuite": {
+
+  },
+
+  "fluidSuite": {
+
+  },
+
+  "intersectionSuite": {
+
+  },
+
+  "lCPSolverSuite": {
+
+  },
+
+  "particleSystemSuite": {
+
+  },
+
+  "rigidBodySuite": {
+
+  },
+
+  "miscellaneousSuite": {
+
+  }
+}

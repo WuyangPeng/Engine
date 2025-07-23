@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 15:26)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 15:26)
 
 #include "Framework/FrameworkExport.h"
 
@@ -32,7 +32,7 @@ Framework::PixelScreenDrawLine::PixelScreenDrawLine(int xMin, int yMin, int xMax
 
 void Framework::PixelScreenDrawLine::Calculate()
 {
-    // ÏñËØ¾ö¶¨²ÎÊıµÄÑ¡Ôñ¡£
+    // åƒç´ å†³å®šå‚æ•°çš„é€‰æ‹©ã€‚
     if (distanceX < 0)
     {
         distanceX = -distanceX;
@@ -42,7 +42,7 @@ void Framework::PixelScreenDrawLine::Calculate()
         distanceY = -distanceY;
     }
 
-    // Ê¹ÓÃÓĞ¹ØµÄ±äÁ¿È·¶¨µ¥²½µÄ×î´ó·½Ïò·ÖÁ¿¡£ Ê¹ÓÃBresenhamËã·¨±éÀúÏß¶Î¡£
+    // ä½¿ç”¨æœ‰å…³çš„å˜é‡ç¡®å®šå•æ­¥çš„æœ€å¤§æ–¹å‘åˆ†é‡ã€‚ ä½¿ç”¨Bresenhamç®—æ³•éå†çº¿æ®µã€‚
     if (distanceY < distanceX)
     {
         DrawLineOnX();
@@ -73,7 +73,7 @@ void Framework::PixelScreenDrawLine::DrawLineOnX()
         x += stepX;
         decY += twiceDistanceY;
 
-        // ´¦ÀíÏñËØ¡£
+        // å¤„ç†åƒç´ ã€‚
         line.emplace_back(x, y);
     }
 }
@@ -98,7 +98,7 @@ void Framework::PixelScreenDrawLine::DrawLineOnY()
         y += stepY;
         decX += twiceDistanceX;
 
-        // ´¦ÀíÏñËØ¡£
+        // å¤„ç†åƒç´ ã€‚
         line.emplace_back(x, y);
     }
 }

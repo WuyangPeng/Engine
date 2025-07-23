@@ -1,4 +1,4 @@
-$Copyright$
+﻿$Copyright$
 
 #ifndef $NamespaceUppercaseSeparator$_FWD_H
 #define $NamespaceUppercaseSeparator$_FWD_H

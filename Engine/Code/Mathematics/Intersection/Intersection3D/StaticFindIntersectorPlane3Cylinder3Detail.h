@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 13:50)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 13:50)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_CYLINDER3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_CYLINDER3_DETAIL_H
@@ -68,7 +68,7 @@ void Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::Find()
 
     if (MathType::GetValue(0) < absCosTheta)
     {
-        // Ô²ÖùÖáÔÚÎ¨Ò»µãÉÏÓëÆ½ÃæÏà½»¡£
+        // åœ†æŸ±è½´åœ¨å”¯ä¸€ç‚¹ä¸Šä¸å¹³é¢ç›¸äº¤ã€‚
         if (absCosTheta < MathType::GetValue(1))
         {
             type = CylinderPlaneIntersection::Ellipse;
@@ -97,7 +97,7 @@ void Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::Find()
     }
     else
     {
-        // Ô²ÖùÌåÆ½ĞĞÓÚÆ½Ãæ¡£
+        // åœ†æŸ±ä½“å¹³è¡Œäºå¹³é¢ã€‚
         auto absDistance = MathType::FAbs(distance);
         if (absDistance < cylinder.GetRadius())
         {
@@ -132,7 +132,7 @@ void Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::Find()
 template <typename Real>
 bool Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::CylinderIsCulled() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    // ¼ÆËãÔ²ÖùÌåÉÏµãµÄ·ûºÅ¾àÀëDot(N,X) - dµÄ¼«Öµ¡£ ÕâĞ©ÊÇ
+    // è®¡ç®—åœ†æŸ±ä½“ä¸Šç‚¹çš„ç¬¦å·è·ç¦»Dot(N,X) - dçš„æå€¼ã€‚ è¿™äº›æ˜¯
     //   min = (Dot(N,C)-d) - r*sqrt(1-Dot(N,W)^2) - (h/2)*|Dot(N,W)|
     //   max = (Dot(N,C)-d) + r*sqrt(1-Dot(N,W)^2) + (h/2)*|Dot(N,W)|
     const auto distance = plane.DistanceTo(cylinder.GetAxis().GetOrigin());
@@ -140,7 +140,7 @@ bool Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::CylinderIsCulled()
     const auto root = MathType::Sqrt(MathType::FAbs(MathType::GetValue(1) - absNormalDotDirection * absNormalDotDirection));
     const auto term = cylinder.GetRadius() * root + MathType::GetRational(1, 2) * cylinder.GetHeight() * absNormalDotDirection;
 
-    // µ±ÇÒ½öµ±max <= 0Ê±²Å·¢ÉúÌŞ³ı¡£
+    // å½“ä¸”ä»…å½“max <= 0æ—¶æ‰å‘ç”Ÿå‰”é™¤ã€‚
     return distance + term <= MathType::GetValue(0);
 }
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:14)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:14)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_SPHERE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_SPHERE3_DETAIL_H
@@ -68,31 +68,31 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
     const auto lhsVelocity = this->GetLhsVelocity();
     const auto rhsVelocity = this->GetRhsVelocity();
 
-    // »ñÈ¡Èı½ÇĞÎ¶¥µã¡£
+    // è·å–ä¸‰è§’å½¢é¡¶ç‚¹ã€‚
     auto vertices = triangle.GetVertex();
 
     using EdgesType = std::array<Vector3Type, 3>;
 
-    // »ñÈ¡Èı½ÇĞÎµÄ±ßÔµ¡£
+    // è·å–ä¸‰è§’å½¢çš„è¾¹ç¼˜ã€‚
     EdgesType edges{ vertices.at(1) - vertices.at(0), vertices.at(2) - vertices.at(1), vertices.at(0) - vertices.at(2) };
 
-    // µÃµ½Èı½ÇĞÎ·¨Ïß¡£
+    // å¾—åˆ°ä¸‰è§’å½¢æ³•çº¿ã€‚
     auto normal = Vector3ToolsType::CrossProduct(edges.at(1), edges.at(0));
 
-    // ÇòÌåÖĞĞÄÍ¶Ó°ÔÚÈı½ÇĞÎ·¨ÏßÉÏ¡£
+    // çƒä½“ä¸­å¿ƒæŠ•å½±åœ¨ä¸‰è§’å½¢æ³•çº¿ä¸Šã€‚
     auto normalDotCenter = Vector3ToolsType::DotProduct(normal, sphere.GetCenter());
 
-    // °ë¾¶ÔÚ·¨Ïß·½ÏòÉÏµÄÍ¶Ó°³¤¶È¡£ Ö±µ½¾ø¶ÔĞèÒªÊ±£¬Õâ²ÅÊ¹Æ½·½¸ù¹éÒ»»¯·¨Ïß¡£
+    // åŠå¾„åœ¨æ³•çº¿æ–¹å‘ä¸Šçš„æŠ•å½±é•¿åº¦ã€‚ ç›´åˆ°ç»å¯¹éœ€è¦æ—¶ï¼Œè¿™æ‰ä½¿å¹³æ–¹æ ¹å½’ä¸€åŒ–æ³•çº¿ã€‚
     auto radiusSqr = sphere.GetRadius() * sphere.GetRadius();
     auto normRadiusSqr = Vector3ToolsType::GetLengthSquared(normal) * radiusSqr;
 
-    // Èı½ÇĞÎ·¨ÏßÉÏµÄÈı½ÇĞÎÍ¶Ó°¡£
+    // ä¸‰è§’å½¢æ³•çº¿ä¸Šçš„ä¸‰è§’å½¢æŠ•å½±ã€‚
     auto normalDotTriangle = Vector3ToolsType::DotProduct(normal, vertices.at(0));
 
-    // ÇòÌåµ½Èı½ÇĞÎÑØ·¨ÏßµÄ¾àÀë¡£
+    // çƒä½“åˆ°ä¸‰è§’å½¢æ²¿æ³•çº¿çš„è·ç¦»ã€‚
     auto distance = normalDotCenter - normalDotTriangle;
 
-    // ÓÉ±ßiºÍÈı½ÇĞÎ·¨ÏßĞÎ³ÉµÄÆ½ÃæµÄ·¨Ïß¡£
+    // ç”±è¾¹iå’Œä¸‰è§’å½¢æ³•çº¿å½¢æˆçš„å¹³é¢çš„æ³•çº¿ã€‚
     EdgesType edgesCrossNormal{ Vector3ToolsType::CrossProduct(edges.at(0), normal),
                                 Vector3ToolsType::CrossProduct(edges.at(1), normal),
                                 Vector3ToolsType::CrossProduct(edges.at(2), normal) };
@@ -101,9 +101,9 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
 
     if (distance * distance <= normRadiusSqr)
     {
-        // ÇòÌåµ±Ç°ÓëÈı½ÇĞÎµÄÆ½ÃæÏà½»¡£
+        // çƒä½“å½“å‰ä¸ä¸‰è§’å½¢çš„å¹³é¢ç›¸äº¤ã€‚
 
-        // ²é¿´ÇòÌåÖĞĞÄÔÚÄÚ²¿/Íâ²¿µÄ±ßÔµ¡£
+        // æŸ¥çœ‹çƒä½“ä¸­å¿ƒåœ¨å†…éƒ¨/å¤–éƒ¨çš„è¾¹ç¼˜ã€‚
 
         InsideType inside{};
         for (auto i = 0u; i < inside.size(); ++i)
@@ -117,14 +117,14 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
             {
                 if (inside.at(2))
                 {
-                    // ÇòÌåÄÚµÄÈı½ÇĞÎ¡£
+                    // çƒä½“å†…çš„ä¸‰è§’å½¢ã€‚
                     this->SetContactTime(MathType::GetValue(0));
                     this->SetIntersectionType(IntersectionType::Empty);
                     return;
                 }
                 else  // !inside[2]
                 {
-                    // Óë±ß<V2,V0>¿ÉÄÜÏà½»¡£
+                    // ä¸è¾¹<V2,V0>å¯èƒ½ç›¸äº¤ã€‚
                     const Segment3<Real> segment{ vertices.at(2), vertices.at(0) };
                     DynamicFindIntersectorSegment3Sphere3<Real> calc{ segment, sphere, tMax, lhsVelocity, rhsVelocity };
                     if (calc.IsIntersection())
@@ -143,7 +143,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
             {
                 if (inside.at(2))
                 {
-                    // Óë±ß<V1,V2>¿ÉÄÜÏà½»¡£
+                    // ä¸è¾¹<V1,V2>å¯èƒ½ç›¸äº¤ã€‚
                     const Segment3<Real> segment(vertices.at(1), vertices.at(2));
                     DynamicFindIntersectorSegment3Sphere3<Real> calc{ segment, sphere, tMax, lhsVelocity, rhsVelocity };
                     if (calc.IsIntersection())
@@ -159,7 +159,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
                 }
                 else  // !inside[2]
                 {
-                    // ±ßÔµÎª <V1,V2>, <V2,V0>µÄ¿ÉÄÜÏà½»¡£
+                    // è¾¹ç¼˜ä¸º <V1,V2>, <V2,V0>çš„å¯èƒ½ç›¸äº¤ã€‚
                     if (FindTriangleSphereCoplanarIntersection(2, vertices, edgesCrossNormal.at(2), edges.at(2), tMax, lhsVelocity, rhsVelocity))
                     {
                         this->SetIntersectionType(IntersectionType::Point);
@@ -179,7 +179,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
             {
                 if (inside.at(2))
                 {
-                    // Óë±ß<V0,V1>¿ÉÄÜÏà½»¡£
+                    // ä¸è¾¹<V0,V1>å¯èƒ½ç›¸äº¤ã€‚
                     const Segment3<Real> segment(vertices.at(0), vertices.at(1));
                     DynamicFindIntersectorSegment3Sphere3<Real> calc{ segment, sphere, tMax, lhsVelocity, rhsVelocity };
                     if (calc.IsIntersection())
@@ -195,7 +195,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
                 }
                 else  // !inside[2]
                 {
-                    // ±ßÔµÎª <V2,V0>, <V0,V1>µÄ¿ÉÄÜÏà½»¡£
+                    // è¾¹ç¼˜ä¸º <V2,V0>, <V0,V1>çš„å¯èƒ½ç›¸äº¤ã€‚
                     if (FindTriangleSphereCoplanarIntersection(0, vertices, edgesCrossNormal.at(0), edges.at(0), tMax, lhsVelocity, rhsVelocity))
                     {
                         this->SetIntersectionType(IntersectionType::Point);
@@ -212,7 +212,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
             {
                 if (inside.at(2))
                 {
-                    // ±ßÔµÎª <V0,V1>, <V1,V2>µÄ¿ÉÄÜÏà½»¡£
+                    // è¾¹ç¼˜ä¸º <V0,V1>, <V1,V2>çš„å¯èƒ½ç›¸äº¤ã€‚
                     if (FindTriangleSphereCoplanarIntersection(1, vertices, edgesCrossNormal.at(1), edges.at(1), tMax, lhsVelocity, rhsVelocity))
                     {
                         this->SetIntersectionType(IntersectionType::Point);
@@ -226,8 +226,8 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
                 }
                 else  // !inside[2]
                 {
-                    // ÎÒÃÇ²»Ó¦¸Ãµ½ÕâÀï¡£
-                    MATHEMATICS_ASSERTION_0(false, "ÒâÍâ×´¿ö\n");
+                    // æˆ‘ä»¬ä¸åº”è¯¥åˆ°è¿™é‡Œã€‚
+                    MATHEMATICS_ASSERTION_0(false, "æ„å¤–çŠ¶å†µ\n");
                     this->SetIntersectionType(IntersectionType::Empty);
                     return;
                 }
@@ -236,21 +236,21 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
     }
     else
     {
-        // ÇòÌåµ±Ç°²»ÓëÈı½ÇĞÎµÄÆ½ÃæÏà½»¡£
+        // çƒä½“å½“å‰ä¸ä¸ä¸‰è§’å½¢çš„å¹³é¢ç›¸äº¤ã€‚
 
-        // ÇòÌåÒÆ¶¯£¬Èı½ÇĞÎ¹Ì¶¨¡£
+        // çƒä½“ç§»åŠ¨ï¼Œä¸‰è§’å½¢å›ºå®šã€‚
         const Vector3 relVelocity = rhsVelocity - lhsVelocity;
 
-        // ²éÕÒÇòÌåºÍÈı½ÇĞÎÆ½ÃæµÄ½»µã¡£ ÔÚÏà¶ÔÓÚÈı½ÇĞÎµÄÆ½ÃæÉÏ·¢Éú´ËµãµÄÎ»ÖÃÈ·¶¨ÁË¿ÉÄÜµÄÏà½»ÀàĞÍ¡£
+        // æŸ¥æ‰¾çƒä½“å’Œä¸‰è§’å½¢å¹³é¢çš„äº¤ç‚¹ã€‚ åœ¨ç›¸å¯¹äºä¸‰è§’å½¢çš„å¹³é¢ä¸Šå‘ç”Ÿæ­¤ç‚¹çš„ä½ç½®ç¡®å®šäº†å¯èƒ½çš„ç›¸äº¤ç±»å‹ã€‚
         normal.Normalize();
 
-        // ÇòÉÏµÄµãÎÒÃÇ¹ØĞÄÓëÈı½ÇĞÎÆ½ÃæÏà½»¡£
+        // çƒä¸Šçš„ç‚¹æˆ‘ä»¬å…³å¿ƒä¸ä¸‰è§’å½¢å¹³é¢ç›¸äº¤ã€‚
         Vector3Type spherePoint{};
 
-        // ÇòÃæÔÚÈı½ÇĞÎµÄÄÄÒ»²à£¿
+        // çƒé¢åœ¨ä¸‰è§’å½¢çš„å“ªä¸€ä¾§ï¼Ÿ
         if (normalDotTriangle < normalDotCenter)
         {
-            // ÕıÃæ
+            // æ­£é¢
             if (MathType::GetValue(0) <= Vector3ToolsType::DotProduct(relVelocity, normal))
             {
                 this->SetIntersectionType(IntersectionType::Empty);
@@ -261,7 +261,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
         }
         else
         {
-            // ¸ºÃæ
+            // è´Ÿé¢
             if (Vector3ToolsType::DotProduct(relVelocity, normal) <= MathType::GetValue(0))
             {
                 this->SetIntersectionType(IntersectionType::Empty);
@@ -271,18 +271,18 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
             spherePoint = sphere.GetCenter() + sphere.GetRadius() * normal;
         }
 
-        // ÕÒµ½ËÙ¶ÈÉäÏßÓëÈı½ÇĞÎÆ½ÃæµÄ½»µã¡£
+        // æ‰¾åˆ°é€Ÿåº¦å°„çº¿ä¸ä¸‰è§’å½¢å¹³é¢çš„äº¤ç‚¹ã€‚
 
-        // ½«ÉäÏßºÍÆ½ÃæÍ¶Ó°µ½·¨ÏßÆ½ÃæÉÏ¡£
+        // å°†å°„çº¿å’Œå¹³é¢æŠ•å½±åˆ°æ³•çº¿å¹³é¢ä¸Šã€‚
         auto plane = Vector3ToolsType::DotProduct(normal, vertices.at(0));
         auto dotProduct = Vector3ToolsType::DotProduct(normal, spherePoint);
         auto velocity = Vector3ToolsType::DotProduct(normal, relVelocity);
         auto time = (plane - dotProduct) / velocity;
 
-        // ÕâÏà½»µÄµØ·½¡£
+        // è¿™ç›¸äº¤çš„åœ°æ–¹ã€‚
         auto intrPoint = spherePoint + time * relVelocity;
 
-        // ²é¿´´ËÏà½»µãÔÚÄÄĞ©±ßµÄÄÚ²¿/Íâ²¿¡£
+        // æŸ¥çœ‹æ­¤ç›¸äº¤ç‚¹åœ¨å“ªäº›è¾¹çš„å†…éƒ¨/å¤–éƒ¨ã€‚
         InsideType inside{};
         for (auto i = 0u; i < inside.size(); ++i)
         {
@@ -295,16 +295,16 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
             {
                 if (inside.at(2))
                 {
-                    // ÔÚÊ±¼äÉÏÏà½»¡£
+                    // åœ¨æ—¶é—´ä¸Šç›¸äº¤ã€‚
                     if (tMax < time)
                     {
-                        // tMaxÖ®ºóµÄ½»µã¡£
+                        // tMaxä¹‹åçš„äº¤ç‚¹ã€‚
                         this->SetIntersectionType(IntersectionType::Empty);
                         return;
                     }
                     else
                     {
-                        // intrPointÊÇ¿Õ¼äÖĞµÄµã£¬¼Ù¶¨TriVelÎª0¡£Èç¹û²»ÊÇ£¬Ôò½«ÆäÖØĞÂµ÷Õûµ½Ó¦¸ÃµÄÎ»ÖÃ¡£
+                        // intrPointæ˜¯ç©ºé—´ä¸­çš„ç‚¹ï¼Œå‡å®šTriVelä¸º0ã€‚å¦‚æœä¸æ˜¯ï¼Œåˆ™å°†å…¶é‡æ–°è°ƒæ•´åˆ°åº”è¯¥çš„ä½ç½®ã€‚
                         this->SetContactTime(time);
                         point = intrPoint + time * lhsVelocity;
                         this->SetIntersectionType(IntersectionType::Empty);
@@ -313,7 +313,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
                 }
                 else  // !inside[2]
                 {
-                    // Óë±ß<V2,V0>µÄ¿ÉÄÜÏà½»¡£
+                    // ä¸è¾¹<V2,V0>çš„å¯èƒ½ç›¸äº¤ã€‚
                     const Segment3<Real> segment{ vertices.at(2), vertices.at(0) };
                     DynamicFindIntersectorSegment3Sphere3<Real> calc{ segment, sphere, tMax, lhsVelocity, rhsVelocity };
                     if (calc.IsIntersection())
@@ -331,7 +331,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
             {
                 if (inside.at(2))
                 {
-                    // Óë±ß<V1,V2>µÄ¿ÉÄÜÏà½»¡£
+                    // ä¸è¾¹<V1,V2>çš„å¯èƒ½ç›¸äº¤ã€‚
                     const Segment3<Real> segment{ vertices.at(1), vertices.at(2) };
                     DynamicFindIntersectorSegment3Sphere3<Real> calc{ segment, sphere, tMax, lhsVelocity, rhsVelocity };
                     if (calc.IsIntersection())
@@ -346,7 +346,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
                 }
                 else  // !inside[2]
                 {
-                    // Óë¶¥µãV2µÄÇ±ÔÚ½»µã¡£
+                    // ä¸é¡¶ç‚¹V2çš„æ½œåœ¨äº¤ç‚¹ã€‚
                     if (FindSphereVertexIntersection(vertices.at(2), tMax, rhsVelocity, lhsVelocity))
                     {
                         this->SetIntersectionType(IntersectionType::Point);
@@ -366,7 +366,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
             {
                 if (inside.at(2))
                 {
-                    // Óë±ß<V0,V1>µÄ¿ÉÄÜÏà½»¡£
+                    // ä¸è¾¹<V0,V1>çš„å¯èƒ½ç›¸äº¤ã€‚
                     const Segment3<Real> segment{ vertices.at(0), vertices.at(1) };
                     DynamicFindIntersectorSegment3Sphere3<Real> calc{ segment, sphere, tMax, lhsVelocity, rhsVelocity };
 
@@ -382,7 +382,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
                 }
                 else  // !inside[2]
                 {
-                    // Óë¶¥µãV0µÄÇ±ÔÚ½»µã¡£
+                    // ä¸é¡¶ç‚¹V0çš„æ½œåœ¨äº¤ç‚¹ã€‚
                     if (FindSphereVertexIntersection(vertices.at(0), tMax, rhsVelocity, lhsVelocity))
                     {
                         this->SetIntersectionType(IntersectionType::Point);
@@ -399,7 +399,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
             {
                 if (inside.at(2))
                 {
-                    // Óë¶¥µãV1µÄÇ±ÔÚ½»µã¡£
+                    // ä¸é¡¶ç‚¹V1çš„æ½œåœ¨äº¤ç‚¹ã€‚
                     if (FindSphereVertexIntersection(vertices.at(1), tMax, rhsVelocity, lhsVelocity))
                     {
                         this->SetIntersectionType(IntersectionType::Point);
@@ -413,8 +413,8 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
                 }
                 else  // !inside[2]
                 {
-                    // ÎÒÃÇ²»Ó¦¸Ãµ½ÕâÀï¡£
-                    MATHEMATICS_ASSERTION_0(false, "ÒâÍâ×´¿ö\n");
+                    // æˆ‘ä»¬ä¸åº”è¯¥åˆ°è¿™é‡Œã€‚
+                    MATHEMATICS_ASSERTION_0(false, "æ„å¤–çŠ¶å†µ\n");
                     this->SetIntersectionType(IntersectionType::Empty);
                     return;
                 }
@@ -426,19 +426,19 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::Find()
 template <typename Real>
 bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::FindTriangleSphereCoplanarIntersection(int index, const VertexType& vertexs, const Vector3Type& sideNorm, const Vector3Type& side, Real tmax, const Vector3Type& velocity0, const Vector3Type& velocity1)
 {
-    // ¶¥µãÊÇÇòÌå¿ÉÒÔÏà½»µÄÁ½¸öÇ±ÔÚ±ßËùÁ¬½ÓµÄ¡°¹Ø¼ü¡±¶¥µã£¬ËüË÷ÒıÎªvertex¡£
-    // sideNormÊÇÓÉ£¨vertex£¬vertex + 1£©ºÍtri normĞÎ³ÉµÄÆ½ÃæµÄ·¨Ïß£¬ÎªÁË±ÜÃâÖØĞÂ¼ÆËã¶øÍ¨¹ı
+    // é¡¶ç‚¹æ˜¯çƒä½“å¯ä»¥ç›¸äº¤çš„ä¸¤ä¸ªæ½œåœ¨è¾¹æ‰€è¿æ¥çš„â€œå…³é”®â€é¡¶ç‚¹ï¼Œå®ƒç´¢å¼•ä¸ºvertexã€‚
+    // sideNormæ˜¯ç”±ï¼ˆvertexï¼Œvertex + 1ï¼‰å’Œtri normå½¢æˆçš„å¹³é¢çš„æ³•çº¿ï¼Œä¸ºäº†é¿å…é‡æ–°è®¡ç®—è€Œé€šè¿‡
 
-    // ÔÚÊ±¼ä0¼ì²é½»²æµã¡£
+    // åœ¨æ—¶é—´0æ£€æŸ¥äº¤å‰ç‚¹ã€‚
     auto dist = vertexs.at(index) - sphere.GetCenter();
     if (Vector3ToolsType::GetLengthSquared(dist) < sphere.GetRadius() * sphere.GetRadius())
     {
-        // ÒÑ¾­Óë¸Ã¶¥µãÏà½»¡£
+        // å·²ç»ä¸è¯¥é¡¶ç‚¹ç›¸äº¤ã€‚
         this->SetContactTime(MathType::GetValue(0));
         return false;
     }
 
-    // Èı½ÇĞÎ¾²Ö¹²»¶¯£¬ÇòÔË¶¯¡£
+    // ä¸‰è§’å½¢é™æ­¢ä¸åŠ¨ï¼Œçƒè¿åŠ¨ã€‚
     auto relVelocity = velocity1 - velocity0;
 
     if (Vector3ToolsType::DotProduct(relVelocity, dist) <= MathType::GetValue(0))
@@ -446,28 +446,28 @@ bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::FindTriangleSphe
         return false;
     }
 
-    // ÕÒµ½ËÙ¶ÈÉäÏßÓë²àÃæ·¨ÏßµÄ½»µã¡£
+    // æ‰¾åˆ°é€Ÿåº¦å°„çº¿ä¸ä¾§é¢æ³•çº¿çš„äº¤ç‚¹ã€‚
 
-    // ½«ÉäÏßºÍÆ½ÃæÍ¶Ó°µ½·¨ÏßÆ½ÃæÉÏ¡£
+    // å°†å°„çº¿å’Œå¹³é¢æŠ•å½±åˆ°æ³•çº¿å¹³é¢ä¸Šã€‚
     auto plane = Vector3ToolsType::DotProduct(sideNorm, vertexs.at(index));
     auto center = Vector3ToolsType::DotProduct(sideNorm, sphere.GetCenter());
     auto velocity = Vector3ToolsType::DotProduct(sideNorm, relVelocity);
     auto factor = (plane - center) / velocity;
     auto spherePoint = sphere.GetCenter() + factor * relVelocity;
 
-    // Í¨¹ı½«¶¥µãºÍĞÂµã¶¼Í¶Ó°µ½Èı½ÇĞÎ±ßÔµ£¨Ê¹ÓÃÆä¡°·¨Ïß¡±ÕÒµ½¸ÃµãµÄÍ¬Ò»±ßÔµ£©ÉÏ£¬À´ÕÒµ½¶¥µãÎ»ÓÚÄÄÒ»²à¡£
+    // é€šè¿‡å°†é¡¶ç‚¹å’Œæ–°ç‚¹éƒ½æŠ•å½±åˆ°ä¸‰è§’å½¢è¾¹ç¼˜ï¼ˆä½¿ç”¨å…¶â€œæ³•çº¿â€æ‰¾åˆ°è¯¥ç‚¹çš„åŒä¸€è¾¹ç¼˜ï¼‰ä¸Šï¼Œæ¥æ‰¾åˆ°é¡¶ç‚¹ä½äºå“ªä¸€ä¾§ã€‚
     auto vertexDot = Vector3ToolsType::DotProduct(side, vertexs.at(index));
     auto pointDot = Vector3ToolsType::DotProduct(side, spherePoint);
     const Vector3Type end0 = vertexs.at(index);
     Vector3Type end1{};
     if (vertexDot <= pointDot)
     {
-        // Óë±ßµÄ½»µã (vertex,vertex+1).
+        // ä¸è¾¹çš„äº¤ç‚¹ (vertex,vertex+1).
         end1 = vertexs.at((index + 1) % 3);
     }
     else
     {
-        // Óë±ßµÄ½»µã (vertex-1,vertex).
+        // ä¸è¾¹çš„äº¤ç‚¹ (vertex-1,vertex).
         if (index != 0)
         {
             const auto nextIndex = index - 1;
@@ -480,7 +480,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::FindTriangleSphe
     }
     const Segment3<Real> seg{ end0, end1 };
 
-    // Õâ¿ÉÄÜÊÇÇòÌå±ßÔµ»òÇòÌåÓë¶¥µãµÄ½»µã£¨´Ë²âÊÔ²»×ãÒÔÇø·Ö£©£¬Òò´ËÇëÊ¹ÓÃÍêÈ«ÔÚÏßÇòÌå²âÊÔ¡£
+    // è¿™å¯èƒ½æ˜¯çƒä½“è¾¹ç¼˜æˆ–çƒä½“ä¸é¡¶ç‚¹çš„äº¤ç‚¹ï¼ˆæ­¤æµ‹è¯•ä¸è¶³ä»¥åŒºåˆ†ï¼‰ï¼Œå› æ­¤è¯·ä½¿ç”¨å®Œå…¨åœ¨çº¿çƒä½“æµ‹è¯•ã€‚
     DynamicFindIntersectorSegment3Sphere3<Real> calc{ seg, sphere, tmax, velocity0, velocity1 };
     if (calc.IsIntersection())
     {
@@ -496,8 +496,8 @@ bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::FindTriangleSphe
 template <typename Real>
 bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::FindSphereVertexIntersection(const Vector3Type& vertex, Real tmax, const Vector3Type& velocity0, const Vector3Type& velocity1)
 {
-    /// ²éÕÒrkOrigin´¦rkDir´¦µÄfRadiusÇòÃæ³¯¶¥µã´¦µÄ¶¥µãÒÆ¶¯µÄ½»µãµÄÊ±¼äºÍµØµã
-    /// £¨ÒÔ¼°¿ÉÄÜ´í¹ıµÄ¿ÉÄÜ·¢ÉúµÄÇé¿ö£©¡£
+    /// æŸ¥æ‰¾rkOriginå¤„rkDirå¤„çš„fRadiusçƒé¢æœé¡¶ç‚¹å¤„çš„é¡¶ç‚¹ç§»åŠ¨çš„äº¤ç‚¹çš„æ—¶é—´å’Œåœ°ç‚¹
+    /// ï¼ˆä»¥åŠå¯èƒ½é”™è¿‡çš„å¯èƒ½å‘ç”Ÿçš„æƒ…å†µï¼‰ã€‚
     auto relVelocity = velocity1 - velocity0;
     auto minus = sphere.GetCenter() - vertex;
     const auto cross = Vector3ToolsType::CrossProduct(minus, relVelocity);
@@ -506,11 +506,11 @@ bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::FindSphereVertex
 
     if (radiusSqr * velocitySqr < Vector3ToolsType::GetLengthSquared(cross))
     {
-        // ÉäÏßÔ½¹ıÇòÌå¡£
+        // å°„çº¿è¶Šè¿‡çƒä½“ã€‚
         return false;
     }
 
-    // ÕÒµ½Ïà½»µÄÊ±¼ä¡£
+    // æ‰¾åˆ°ç›¸äº¤çš„æ—¶é—´ã€‚
     auto dot = Vector3ToolsType::DotProduct(minus, relVelocity);
     auto diff = Vector3ToolsType::GetLengthSquared(minus) - radiusSqr;
     auto inv = MathType::InvSqrt(MathType::FAbs(dot * dot - velocitySqr * diff));
@@ -519,11 +519,11 @@ bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>::FindSphereVertex
     this->SetContactTime(contactTime);
     if (tmax < contactTime)
     {
-        // Ïà½»·¢ÉúÔÚ×î´óÊ±¼äÖ®ºó¡£
+        // ç›¸äº¤å‘ç”Ÿåœ¨æœ€å¤§æ—¶é—´ä¹‹åã€‚
         return false;
     }
 
-    // Ïà½»ÊÇÒ»¸öÈı½ÇĞÎ¶¥µã¡£
+    // ç›¸äº¤æ˜¯ä¸€ä¸ªä¸‰è§’å½¢é¡¶ç‚¹ã€‚
     point = vertex + contactTime * velocity0;
 
     return true;

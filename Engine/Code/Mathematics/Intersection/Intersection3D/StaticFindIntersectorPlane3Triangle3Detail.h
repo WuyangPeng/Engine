@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 13:51)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 13:51)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_TRIANGLE3_DETAIL_H
@@ -61,7 +61,7 @@ Mathematics::Triangle3<Real> Mathematics::StaticFindIntersectorPlane3Triangle3<R
 template <typename Real>
 void Mathematics::StaticFindIntersectorPlane3Triangle3<Real>::Find()
 {
-    // ¼ÆËã´Ó¶¥µãµ½Æ½ÃæµÄ·ûºÅ¾àÀë¡£
+    // è®¡ç®—ä»é¡¶ç‚¹åˆ°å¹³é¢çš„ç¬¦å·è·ç¦»ã€‚
     auto epsilon = this->GetEpsilon();
     auto zero = MathType::GetValue(0);
     std::array<Real, 3> distance{};
@@ -346,7 +346,7 @@ Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorPlane3Triangle3<Rea
             return point2;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Ë÷ÒıÔ½½ç\n"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•è¶Šç•Œ\n"s));
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_TRIANGLE3_DETAIL_H

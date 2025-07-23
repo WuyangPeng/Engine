@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 17:23)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 17:23)
 
 #ifndef MATHEMATICS_INTERSECTION_LINE2_CIRCLE2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_LINE2_CIRCLE2_DETAIL_H
@@ -73,11 +73,11 @@ bool Mathematics::Line2Circle2<Real>::IsIntersects() const noexcept
 template <typename Real>
 void Mathematics::Line2Circle2<Real>::Find(const Vector2Type& origin, const Vector2Type& direction, const Vector2Type& center, Real radius)
 {
-    /// Ö±ÏßP + t * D ÓëÔ²|X - C| = Real¡£ Ïß·½ÏòÊÇµ¥Î»³¤¶È¡£ tÖµÊÇ¶ş´Î·½³ÌÊ½µÄ¸ù£º
+    /// ç›´çº¿P + t * D ä¸åœ†|X - C| = Realã€‚ çº¿æ–¹å‘æ˜¯å•ä½é•¿åº¦ã€‚ tå€¼æ˜¯äºŒæ¬¡æ–¹ç¨‹å¼çš„æ ¹ï¼š
     ///   0 = |t * D + P - C|^2 - Real^2
     ///     = t^2 + 2 * Dot(D, P- C)*t + |P - C|^2 - Real^2
     ///     = t^2 + 2 * a1 * t + a0
-    /// Èç¹û·µ»ØÁ½¸ö¸ù£¬ÔòË³ĞòÎªT [0] <T [1]¡£
+    /// å¦‚æœè¿”å›ä¸¤ä¸ªæ ¹ï¼Œåˆ™é¡ºåºä¸ºT [0] <T [1]ã€‚
 
     auto diff = origin - center;
     auto a0 = Vector2ToolsType::GetLengthSquared(diff) - radius * radius;

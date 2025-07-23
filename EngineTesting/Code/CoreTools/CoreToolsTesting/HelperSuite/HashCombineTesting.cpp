@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/05/06 19:59)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/05/06 19:59)
 
 #include "HashCombineTesting.h"
 
@@ -57,7 +57,7 @@ void CoreTools::HashCombineTesting::FindTest(UnorderedMap& container, const Test
 {
     auto iter = container.find(testHashKey);
 
-    ASSERT_UNEQUAL_FAILURE_THROW(iter, container.cend(), "TestHashKey0ÖµÎ´ÕÒµ½¡£");
+    ASSERT_UNEQUAL_FAILURE_THROW(iter, container.cend(), "TestHashKey0å€¼æœªæ‰¾åˆ°ã€‚");
 
     ASSERT_EQUAL(iter->second, 1);
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.3 (2023/08/02 14:37)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.3 (2023/08/02 14:37)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -16,7 +16,7 @@
 using namespace std::literals;
 
 ResourceManager::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "×ÊÔ´¹ÜÀí¿â"s }
+    : ParentType{ argc, argv, "èµ„æºç®¡ç†åº“"s }
 {
     InitSuite();
 
@@ -41,70 +41,70 @@ void ResourceManager::TestingHelper::InitSuite()
 
 void ResourceManager::TestingHelper::AddHelperSuite()
 {
-    auto helperSuite = GenerateSuite("°ïÖú");
+    auto helperSuite = GenerateSuite("å¸®åŠ©");
 
     AddSuite(helperSuite);
 }
 
 void ResourceManager::TestingHelper::AddThreeDimensionalModelSuite()
 {
-    auto threeDimensionalModelSuite = GenerateSuite("ÈıÎ¬Ä£ĞÍ×ÊÔ´");
+    auto threeDimensionalModelSuite = GenerateSuite("ä¸‰ç»´æ¨¡å‹èµ„æº");
 
     AddSuite(threeDimensionalModelSuite);
 }
 
 void ResourceManager::TestingHelper::AddTextureSuite()
 {
-    auto textureSuite = GenerateSuite("ÎÆÀí×ÊÔ´");
+    auto textureSuite = GenerateSuite("çº¹ç†èµ„æº");
 
     AddSuite(textureSuite);
 }
 
 void ResourceManager::TestingHelper::AddMaterialSuite()
 {
-    auto materialSuite = GenerateSuite("²ÄÖÊ×ÊÔ´");
+    auto materialSuite = GenerateSuite("æè´¨èµ„æº");
 
     AddSuite(materialSuite);
 }
 
 void ResourceManager::TestingHelper::AddFontSuite()
 {
-    auto fontSuite = GenerateSuite("×ÖÌå×ÊÔ´");
+    auto fontSuite = GenerateSuite("å­—ä½“èµ„æº");
 
     AddSuite(fontSuite);
 }
 
 void ResourceManager::TestingHelper::AddSkeletonSuite()
 {
-    auto skeletonSuite = GenerateSuite("¹Ç÷À×ÊÔ´");
+    auto skeletonSuite = GenerateSuite("éª¨éª¼èµ„æº");
 
     AddSuite(skeletonSuite);
 }
 
 void ResourceManager::TestingHelper::AddCollisionSuite()
 {
-    auto collisionSuite = GenerateSuite("Åö×²×ÊÔ´");
+    auto collisionSuite = GenerateSuite("ç¢°æ’èµ„æº");
 
     AddSuite(collisionSuite);
 }
 
 void ResourceManager::TestingHelper::AddPhysicalParametersSuite()
 {
-    auto physicalParametersSuite = GenerateSuite("ÎïÀí²ÎÊı");
+    auto physicalParametersSuite = GenerateSuite("ç‰©ç†å‚æ•°");
 
     AddSuite(physicalParametersSuite);
 }
 
 void ResourceManager::TestingHelper::AddGameWorldMapSuite()
 {
-    auto gameWorldMapSuite = GenerateSuite("ÓÎÏ·ÊÀ½çºÍµØÍ¼");
+    auto gameWorldMapSuite = GenerateSuite("æ¸¸æˆä¸–ç•Œå’Œåœ°å›¾");
 
     AddSuite(gameWorldMapSuite);
 }
 
 void ResourceManager::TestingHelper::AddMiscellaneousSuite()
 {
-    auto miscellaneousSuite = GenerateSuite("ÔÓÏî");
+    auto miscellaneousSuite = GenerateSuite("æ‚é¡¹");
 
     AddSuite(miscellaneousSuite);
 }

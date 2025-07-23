@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 09:50)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 09:50)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BRENTS_METHOD_CALCULATE_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BRENTS_METHOD_CALCULATE_DETAIL_H
@@ -62,12 +62,12 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::Calculate()
 {
     if (IsBeginSatisfyConditions())
     {
-        // ¸Ã¶ËµãÊÇÂú×ãº¯Êı¹«²îµÄ½üËÆ¸ù¡£
+        // è¯¥ç«¯ç‚¹æ˜¯æ»¡è¶³å‡½æ•°å…¬å·®çš„è¿‘ä¼¼æ ¹ã€‚
         bisect2Root = BrentsMethodRootR{ begin, beginFunction, BrentsMethodRootType::HaveSolution };
     }
     else if (IsEndSatisfyConditions())
     {
-        // ¸Ã¶ËµãÊÇÂú×ãº¯Êı¹«²îµÄ½üËÆ¸ù¡£
+        // è¯¥ç«¯ç‚¹æ˜¯æ»¡è¶³å‡½æ•°å…¬å·®çš„è¿‘ä¼¼æ ¹ã€‚
         bisect2Root = BrentsMethodRootR{ end, endFunction, BrentsMethodRootType::HaveSolution };
     }
     else if (beginFunction * endFunction < MathType::GetValue(0))
@@ -107,10 +107,10 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::Search()
 {
     SwapBeginEnd();
 
-    // ³õÊ¼»¯¸ùËÑË÷µÄÖµ¡£
+    // åˆå§‹åŒ–æ ¹æœç´¢çš„å€¼ã€‚
     InitSearchValue();
 
-    // ¸ùËÑË÷
+    // æ ¹æœç´¢
     const auto maxIterations = brentsMethod.GetMaxIterations();
     for (auto i = 0; i < maxIterations; ++i)
     {
@@ -128,8 +128,8 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::SwapBeginEnd() noex
 {
     if (MathType::FAbs(beginFunction) < MathType::FAbs(endFunction))
     {
-        // ½»»»m_BeginºÍm_End£¬Ê¹µÃ|f(end)| <= |f(begin)|¡£
-        // ÊıÖµm_End±»ÈÏÎªÊÇ¸ùµÄ×î¼Ñ¹À¼Æ¡£
+        // äº¤æ¢m_Beginå’Œm_Endï¼Œä½¿å¾—|f(end)| <= |f(begin)|ã€‚
+        // æ•°å€¼m_Endè¢«è®¤ä¸ºæ˜¯æ ¹çš„æœ€ä½³ä¼°è®¡ã€‚
         std::swap(begin, end);
         std::swap(beginFunction, endFunction);
     }
@@ -152,31 +152,31 @@ bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::RootSearch()
     if (MathType::GetZeroTolerance() < MathType::FAbs(beginSearchFunctionDifference) &&
         MathType::GetZeroTolerance() < MathType::FAbs(endSearchFunctionDifference))
     {
-        // Ê¹ÓÃÄæ¶ş´Î²åÖµ¡£
+        // ä½¿ç”¨é€†äºŒæ¬¡æ’å€¼ã€‚
         InverseQuadratic();
     }
     else
     {
-        // Ê¹ÓÃÄæÏßĞÔ²åÖµ£¨¸îÏß·¨£©¡£
+        // ä½¿ç”¨é€†çº¿æ€§æ’å€¼ï¼ˆå‰²çº¿æ³•ï¼‰ã€‚
         InverseLinear();
     }
 
-    // ¼ÆËãÖµĞèÒª½øĞĞ½ÓÊÜ»ò¾Ü¾ø²âÊÔ¡£
+    // è®¡ç®—å€¼éœ€è¦è¿›è¡Œæ¥å—æˆ–æ‹’ç»æµ‹è¯•ã€‚
     AcceptOrRejectTests();
 
     solutionFunction = brentsMethod.GetFunctionValue(solution);
 
-    // ÆÀ¹Àº¯ÊıÔÚĞÂµÄ¹À¼ÆºÍÊÕÁ²²âÊÔ¡£
+    // è¯„ä¼°å‡½æ•°åœ¨æ–°çš„ä¼°è®¡å’Œæ”¶æ•›æµ‹è¯•ã€‚
     if (IsSolutionSatisfyConditions())
     {
         bisect2Root = BrentsMethodRootR{ solution, solutionFunction, BrentsMethodRootType::HaveSolution };
         return true;
     }
 
-    // ¸üĞÂµÄ×Ó¼ä¸ô£¬ÒÔ°üÀ¨ĞÂµÄ¹À¼Æ×÷ÎªÖÕµã¡£
+    // æ›´æ–°çš„å­é—´éš”ï¼Œä»¥åŒ…æ‹¬æ–°çš„ä¼°è®¡ä½œä¸ºç»ˆç‚¹ã€‚
     UpdateSubinterval();
 
-    // ÔÊĞí¸ÃËã·¨×Ó¼ä¸ô×ã¹»Ğ¡Ê±ÖÕÖ¹¡£
+    // å…è®¸è¯¥ç®—æ³•å­é—´éš”è¶³å¤Ÿå°æ—¶ç»ˆæ­¢ã€‚
     if (IsConvXTolerance())
     {
         bisect2Root = BrentsMethodRootR{ end, endFunction, BrentsMethodRootType::HaveSolution };
@@ -184,8 +184,8 @@ bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::RootSearch()
         return true;
     }
 
-    // Ò»¸öÑ­»·²»±äÊ½ÊÇ£¬x1ÊÇ¸ù¹À¼Æ£¬
-    // f(begin) * f(end) < 0£¬|f(end)| <= |f(begin)|¡£
+    // ä¸€ä¸ªå¾ªç¯ä¸å˜å¼æ˜¯ï¼Œx1æ˜¯æ ¹ä¼°è®¡ï¼Œ
+    // f(begin) * f(end) < 0ï¼Œ|f(end)| <= |f(begin)|ã€‚
     SwapBeginEnd();
 
     return false;
@@ -229,26 +229,26 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::AcceptOrRejectTests
     auto currentBisected = false;
     if (MathType::GetZeroTolerance() < solutionAvrDiff * solutionEndDiff)
     {
-        // Öµs²»ÊÇÔÚ0.75 * x0+0.25 * x1ºÍx1Ö®¼ä¡£
-        // ×¢£º¸ÃËã·¨ÓĞÊ±ÓĞx0 < x1µ«ÓĞÊ±x1 < x0£¬
-        // ËùÒÔ²âÊÔ²¢Ã»ÓĞÊ¹ÓÃ¼òµ¥µÄ±È½Ï¡£
+        // å€¼sä¸æ˜¯åœ¨0.75 * x0+0.25 * x1å’Œx1ä¹‹é—´ã€‚
+        // æ³¨ï¼šè¯¥ç®—æ³•æœ‰æ—¶æœ‰x0 < x1ä½†æœ‰æ—¶x1 < x0ï¼Œ
+        // æ‰€ä»¥æµ‹è¯•å¹¶æ²¡æœ‰ä½¿ç”¨ç®€å•çš„æ¯”è¾ƒã€‚
         currentBisected = true;
     }
     else if (previousBisected)
     {
-        // BrentµÄµÚÒ»²âÊÔ£¬ÒÔÈ·¶¨ÊÇ·ñ½ÓÊÜ¸Ã²åÖµ ¡£
+        // Brentçš„ç¬¬ä¸€æµ‹è¯•ï¼Œä»¥ç¡®å®šæ˜¯å¦æ¥å—è¯¥æ’å€¼ ã€‚
         currentBisected = (MathType::GetRational(1, 2) * absEndSearchBeginDiff) <= absSolutionEndDiff || (absEndSearchBeginDiff <= brentsMethod.GetStepXTolerance());
     }
     else
     {
-        // BrentµÄµÚ¶ş²âÊÔ£¬ÒÔÈ·¶¨ÊÇ·ñ½ÓÊÜ¸Ã²åÖµ ¡£
+        // Brentçš„ç¬¬äºŒæµ‹è¯•ï¼Œä»¥ç¡®å®šæ˜¯å¦æ¥å—è¯¥æ’å€¼ ã€‚
         currentBisected = ((MathType::GetRational(1, 2) * absSearchBeginSearchEndDiff) <= absSolutionEndDiff || (absSearchBeginSearchEndDiff <= brentsMethod.GetStepXTolerance()));
     }
 
     if (currentBisected)
     {
-        // ÆäÖĞÒ»¸ö¶îÍâµÄ²âÊÔÊ§°Ü£¬
-        // ËùÒÔ¾Ü¾ø²åÖµ£¬²¢ÓÃ¶ş·Ö·¨À´´úÌæ¡£
+        // å…¶ä¸­ä¸€ä¸ªé¢å¤–çš„æµ‹è¯•å¤±è´¥ï¼Œ
+        // æ‰€ä»¥æ‹’ç»æ’å€¼ï¼Œå¹¶ç”¨äºŒåˆ†æ³•æ¥ä»£æ›¿ã€‚
         solution = MathType::GetRational(1, 2) * (begin + end);
         previousBisected = true;
     }

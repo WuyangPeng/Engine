@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 11:17)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 11:17)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR3_TOOLS_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_VECTOR3_TOOLS_ACHIEVE_H
@@ -25,7 +25,7 @@
 template <typename Real>
 requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Tools<Real>::Approximate(const Vector3Type& lhs, const Vector3Type& rhs, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
-    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= epsilon, "epsilon±ØĞë´óÓÚ»òµÈÓÚ0£¡");
+    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= epsilon, "epsilonå¿…é¡»å¤§äºæˆ–ç­‰äº0ï¼");
 
     return MathType::FAbs(lhs.GetX() - rhs.GetX()) < epsilon &&
            MathType::FAbs(lhs.GetY() - rhs.GetY()) < epsilon &&
@@ -133,7 +133,7 @@ typename Mathematics::Vector3Tools<Real>::Vector3Type Mathematics::Vector3Tools<
     }
     else
     {
-        MATHEMATICS_ASSERTION_1(false, "³ıÁã´íÎó£¡");
+        MATHEMATICS_ASSERTION_1(false, "é™¤é›¶é”™è¯¯ï¼");
 
         return Vector3Type();
     }
@@ -157,7 +157,7 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 typename Mathematics::Vector3Tools<Real>::Vector3Type Mathematics::Vector3Tools<Real>::RefractionVector(const Vector3Type& ray, const Vector3Type& normal, Real consistencyRatio)
 {
-    MATHEMATICS_ASSERTION_1(consistencyRatio <= 1, "consistencyRatio±ØĞëĞ¡ÓÚ»òµÈÓÚ1£¡");
+    MATHEMATICS_ASSERTION_1(consistencyRatio <= 1, "consistencyRatioå¿…é¡»å°äºæˆ–ç­‰äº1ï¼");
 
     const auto cosphi = DotProduct(-ray, normal);
     const auto conphiSquare = cosphi * cosphi;
@@ -179,7 +179,7 @@ typename Mathematics::Vector3Tools<Real>::Vector3Type Mathematics::Vector3Tools<
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("º¯ÊıÖ¸ÕëÎª¿Õ£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å‡½æ•°æŒ‡é’ˆä¸ºç©ºï¼"s))
     }
 }
 
@@ -197,7 +197,7 @@ typename Mathematics::Vector3Tools<Real>::Vector3Type Mathematics::Vector3Tools<
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("º¯ÊıÖ¸ÕëÎª¿Õ£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å‡½æ•°æŒ‡é’ˆä¸ºç©ºï¼"s))
     }
 }
 
@@ -205,7 +205,7 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 typename Mathematics::Vector3Tools<Real>::Vector3Type Mathematics::Vector3Tools<Real>::BendYAxes(const Vector3Type& vector, Real curvatureRadius, Real bendCenter, Real bendAreaMin, Real bendAreaMax) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
-    MATHEMATICS_ASSERTION_1(bendAreaMin <= bendAreaMax, "bendAreaMinÖµ±ØĞëĞ¡ÓÚ»òµÈÓÚbendAreaMax£¡");
+    MATHEMATICS_ASSERTION_1(bendAreaMin <= bendAreaMax, "bendAreaMinå€¼å¿…é¡»å°äºæˆ–ç­‰äºbendAreaMaxï¼");
 
     auto y = vector.GetY();
 
@@ -285,13 +285,13 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 typename Mathematics::Vector3Tools<Real>::Vector3OrthonormalizeType Mathematics::Vector3Tools<Real>::Orthonormalize(const Vector3Type& uVector, const Vector3Type& vVector, const Vector3Type& wVector, const Real epsilon)
 {
-    /// Èç¹ûÊäÈëÏòÁ¿v0¡¢v1ºÍv2£¬ÔòGram-SchmidtÕı½»ÏòÁ¿²úÉúÊ¸Á¿u0¡¢u1ºÍu2ÈçÏÂ£¬
+    /// å¦‚æœè¾“å…¥å‘é‡v0ã€v1å’Œv2ï¼Œåˆ™Gram-Schmidtæ­£äº¤å‘é‡äº§ç”ŸçŸ¢é‡u0ã€u1å’Œu2å¦‚ä¸‹ï¼Œ
     ///   u0 = v0 / |v0|
     ///   u1 = (v1 - (u0 * v1)u0) / |v1 - (u0 * v1)u0|
     ///   u2 = (v2 - (u0 * v2)u0 - (u1 * v2)u1) /
     ///        |v2 - (u0 * v2)u0 - (u1 * v2)u1|
     ///
-    /// ÆäÖĞ|A|±íÊ¾ÏòÁ¿AµÄ³¤¶ÈºÍA * B±íÊ¾ÏòÁ¿AºÍBµÄµã»ı
+    /// å…¶ä¸­|A|è¡¨ç¤ºå‘é‡Açš„é•¿åº¦å’ŒA * Bè¡¨ç¤ºå‘é‡Aå’ŒBçš„ç‚¹ç§¯
 
     return Vector3OrthonormalizeType{ uVector, vVector, wVector, epsilon };
 }
@@ -300,7 +300,7 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 typename Mathematics::Vector3Tools<Real>::Vector3OrthonormalizeType Mathematics::Vector3Tools<Real>::Orthonormalize(const ContainerType& vectors, Real epsilon)
 {
-    MATHEMATICS_ASSERTION_0(vectors.size() == 3, "vectorsµÄ´óĞ¡´íÎó£¡");
+    MATHEMATICS_ASSERTION_0(vectors.size() == 3, "vectorsçš„å¤§å°é”™è¯¯ï¼");
 
     return Vector3OrthonormalizeType{ vectors, epsilon };
 }
@@ -309,7 +309,7 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 typename Mathematics::Vector3Tools<Real>::Vector3OrthonormalBasisType Mathematics::Vector3Tools<Real>::GenerateOrthonormalBasis(const Vector3Type& nonzeroVector, Real epsilon)
 {
-    MATHEMATICS_ASSERTION_0(!nonzeroVector.IsZero(epsilon), "ÊäÈë±ØĞëÊÇ·ÇÁãÏòÁ¿£¡");
+    MATHEMATICS_ASSERTION_0(!nonzeroVector.IsZero(epsilon), "è¾“å…¥å¿…é¡»æ˜¯éé›¶å‘é‡ï¼");
 
     return Vector3OrthonormalBasisType{ nonzeroVector, false, epsilon };
 }
@@ -318,7 +318,7 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 typename Mathematics::Vector3Tools<Real>::Vector3OrthonormalBasisType Mathematics::Vector3Tools<Real>::GenerateComplementBasis(const Vector3Type& unitVector, Real epsilon)
 {
-    MATHEMATICS_ASSERTION_0(unitVector.IsNormalize(epsilon), "ÊäÈë±ØĞëÊÇµ¥Î»ÏòÁ¿£¡");
+    MATHEMATICS_ASSERTION_0(unitVector.IsNormalize(epsilon), "è¾“å…¥å¿…é¡»æ˜¯å•ä½å‘é‡ï¼");
 
     return Vector3OrthonormalBasisType{ unitVector, true, epsilon };
 }

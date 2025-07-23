@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/13 16:13)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/13 16:13)
 
 #include "IoctlSocketTesting.h"
 #include "System/Helper/WindowsMacro.h"
@@ -42,7 +42,7 @@ void System::IoctlSocketTesting::MainTest()
 void System::IoctlSocketTesting::IoctlSocketTest()
 {
     const auto socketHandle = CreateTcpSocket();
-    ASSERT_TRUE_FAILURE_THROW(IsSocketValid(socketHandle), "´´½¨Tcp SocketÊ§°Ü¡£");
+    ASSERT_TRUE_FAILURE_THROW(IsSocketValid(socketHandle), "åˆ›å»ºTcp Socketå¤±è´¥ã€‚");
 
     ASSERT_NOT_THROW_EXCEPTION_1(DoIoctlSocketTest, socketHandle);
 

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #include "YearBase.h"
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
@@ -37,7 +37,7 @@ System::String AncientBooks::YearBase::GetName() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("year±í»ùÀà²»ÔÊĞí»ñÈ¡×Ö·û´®¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("yearè¡¨åŸºç±»ä¸å…è®¸è·å–å­—ç¬¦ä¸²ã€‚"s))
 }
 
 int AncientBooks::YearBase::GetSexagenaryCycle() const noexcept
@@ -53,7 +53,7 @@ AncientBooks::YearBase::ConstSexagenaryCycleSharedPtr AncientBooks::YearBase::Ge
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("year±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("yearè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 int64_t AncientBooks::YearBase::GetReignTitle() const noexcept
@@ -69,7 +69,7 @@ AncientBooks::YearBase::ConstReignTitleSharedPtr AncientBooks::YearBase::GetReig
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("year±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("yearè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 int AncientBooks::YearBase::GetYear() const noexcept
@@ -83,14 +83,14 @@ AncientBooks::YearBase::Int64Container AncientBooks::YearBase::GetUnorthodoxReig
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("year±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("yearè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 int AncientBooks::YearBase::GetUnorthodoxReignTitleCount() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("year±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("yearè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 int64_t AncientBooks::YearBase::GetUnorthodoxReignTitle(int index) const
@@ -99,21 +99,21 @@ int64_t AncientBooks::YearBase::GetUnorthodoxReignTitle(int index) const
 
     System::UnusedFunction(index);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("year±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("yearè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::YearBase::Int64ContainerConstIter AncientBooks::YearBase::GetUnorthodoxReignTitleBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("year±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("yearè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::YearBase::Int64ContainerConstIter AncientBooks::YearBase::GetUnorthodoxReignTitleEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("year±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("yearè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::YearBase::ReignTitleContainer AncientBooks::YearBase::GetUnorthodoxReignTitle(const AncientBooksContainer& csvContainer) const
@@ -122,21 +122,21 @@ AncientBooks::YearBase::ReignTitleContainer AncientBooks::YearBase::GetUnorthodo
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("year±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("yearè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 AncientBooks::YearBase::IntContainer AncientBooks::YearBase::GetUnorthodoxYear() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("year±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("yearè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 int AncientBooks::YearBase::GetUnorthodoxYearCount() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("year±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("yearè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 int AncientBooks::YearBase::GetUnorthodoxYear(int index) const
@@ -145,21 +145,21 @@ int AncientBooks::YearBase::GetUnorthodoxYear(int index) const
 
     System::UnusedFunction(index);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("year±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("yearè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::YearBase::IntContainerConstIter AncientBooks::YearBase::GetUnorthodoxYearBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("year±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("yearè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::YearBase::IntContainerConstIter AncientBooks::YearBase::GetUnorthodoxYearEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("year±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("yearè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::YearBase::YearContainer AncientBooks::YearBase::GetUnorthodoxYear(const AncientBooksContainer& csvContainer) const
@@ -168,6 +168,6 @@ AncientBooks::YearBase::YearContainer AncientBooks::YearBase::GetUnorthodoxYear(
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("year±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("yearè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 

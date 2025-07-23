@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 14:34)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 14:34)
 
 #include "MatrixTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -1169,12 +1169,12 @@ void Mathematics::MatrixTesting::ProjectionTest()
 
             const PlaneF firstPlane = PlaneF(vector0, point0);
 
-            // ×ª»»ºóµÄµãµÄÆ½ÃæÉÏ¡£
+            // è½¬æ¢åçš„ç‚¹çš„å¹³é¢ä¸Šã€‚
             const float distance = firstPlane.DistanceTo(point2);
 
             ASSERT_APPROXIMATE(distance, 0.0f, 1e-2f);
 
-            // Ô­À´µÄµãÓë×ª»»ºóµÄµãµÄ²îÊÇdirection»ò-direction
+            // åŸæ¥çš„ç‚¹ä¸è½¬æ¢åçš„ç‚¹çš„å·®æ˜¯directionæˆ–-direction
             AVectorF vector5 = point1 - point2;
 
             vector5.Normalize();
@@ -1197,7 +1197,7 @@ void Mathematics::MatrixTesting::ProjectionTest()
 
         const PlaneF secondPlane = PlaneF(vector0, point0);
 
-        // Ô­À´µÄµãÓë×ª»»ºóµÄµãºÍµãeyeÔÚÍ¬Ò»Ö±ÏßÉÏ
+        // åŸæ¥çš„ç‚¹ä¸è½¬æ¢åçš„ç‚¹å’Œç‚¹eyeåœ¨åŒä¸€ç›´çº¿ä¸Š
         AVectorF eleventhVector = point1 - fifthPoint;
 
         eleventhVector.Normalize();

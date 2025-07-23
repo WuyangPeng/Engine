@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/05/07 21:38)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/05/07 21:38)
 
 #include "NameMacroTesting.h"
 #include "Detail/NameFinalMacro.h"
@@ -53,7 +53,7 @@ void CoreTools::NameMacroTesting::BaseTest()
 void CoreTools::NameMacroTesting::BaseGetObjectByNameTest(NameMacroBase& nameMacroBase)
 {
     const auto result = nameMacroBase.GetObjectByName(name);
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(result, "²éÕÒ¶ÔÏóÊ§°Ü¡£");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(result, "æŸ¥æ‰¾å¯¹è±¡å¤±è´¥ã€‚");
     ASSERT_FALSE(result->IsNullObject());
     ASSERT_EQUAL(result->GetName(), name);
 }
@@ -61,7 +61,7 @@ void CoreTools::NameMacroTesting::BaseGetObjectByNameTest(NameMacroBase& nameMac
 void CoreTools::NameMacroTesting::BaseGetConstObjectByNameTest(const NameMacroBase& nameMacroBase)
 {
     const auto constResult = nameMacroBase.GetConstObjectByName(name);
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(constResult, "²éÕÒ¶ÔÏóÊ§°Ü¡£");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(constResult, "æŸ¥æ‰¾å¯¹è±¡å¤±è´¥ã€‚");
     ASSERT_FALSE(constResult->IsNullObject());
     ASSERT_EQUAL(constResult->GetName(), name);
 }
@@ -69,7 +69,7 @@ void CoreTools::NameMacroTesting::BaseGetConstObjectByNameTest(const NameMacroBa
 void CoreTools::NameMacroTesting::BaseGetAllObjectsByNameTest(NameMacroBase& nameMacroBase)
 {
     const auto container = nameMacroBase.GetAllObjectsByName(name);
-    ASSERT_FALSE_FAILURE_THROW(container.empty(), "²éÕÒ¶ÔÏóÊ§°Ü¡£");
+    ASSERT_FALSE_FAILURE_THROW(container.empty(), "æŸ¥æ‰¾å¯¹è±¡å¤±è´¥ã€‚");
     for (const auto& object : container)
     {
         ASSERT_EQUAL(object->GetName(), name);
@@ -79,7 +79,7 @@ void CoreTools::NameMacroTesting::BaseGetAllObjectsByNameTest(NameMacroBase& nam
 void CoreTools::NameMacroTesting::BaseGetAllConstObjectsByNameTest(const NameMacroBase& nameMacroBase)
 {
     const auto constContainer = nameMacroBase.GetAllConstObjectsByName(name);
-    ASSERT_FALSE_FAILURE_THROW(constContainer.empty(), "²éÕÒ¶ÔÏóÊ§°Ü¡£");
+    ASSERT_FALSE_FAILURE_THROW(constContainer.empty(), "æŸ¥æ‰¾å¯¹è±¡å¤±è´¥ã€‚");
     for (const auto& object : constContainer)
     {
         ASSERT_EQUAL(object->GetName(), name);
@@ -99,7 +99,7 @@ void CoreTools::NameMacroTesting::ImplTest()
 void CoreTools::NameMacroTesting::ImplGetObjectByNameTest(NameMacro& nameMacro)
 {
     const auto result = nameMacro.GetObjectByName(name);
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(result, "²éÕÒ¶ÔÏóÊ§°Ü¡£");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(result, "æŸ¥æ‰¾å¯¹è±¡å¤±è´¥ã€‚");
     ASSERT_FALSE(result->IsNullObject());
     ASSERT_EQUAL(result->GetName(), name);
 }
@@ -107,7 +107,7 @@ void CoreTools::NameMacroTesting::ImplGetObjectByNameTest(NameMacro& nameMacro)
 void CoreTools::NameMacroTesting::ImplGetConstObjectByNameTest(const NameMacro& nameMacro)
 {
     const auto constResult = nameMacro.GetConstObjectByName(name);
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(constResult, "²éÕÒ¶ÔÏóÊ§°Ü¡£");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(constResult, "æŸ¥æ‰¾å¯¹è±¡å¤±è´¥ã€‚");
     ASSERT_FALSE(constResult->IsNullObject());
     ASSERT_EQUAL(constResult->GetName(), name);
 }
@@ -115,7 +115,7 @@ void CoreTools::NameMacroTesting::ImplGetConstObjectByNameTest(const NameMacro& 
 void CoreTools::NameMacroTesting::ImplGetAllObjectsByNameTest(NameMacro& nameMacro)
 {
     const auto container = nameMacro.GetAllObjectsByName(name);
-    ASSERT_FALSE_FAILURE_THROW(container.empty(), "²éÕÒ¶ÔÏóÊ§°Ü¡£");
+    ASSERT_FALSE_FAILURE_THROW(container.empty(), "æŸ¥æ‰¾å¯¹è±¡å¤±è´¥ã€‚");
     for (const auto& object : container)
     {
         ASSERT_EQUAL(object->GetName(), name);
@@ -125,7 +125,7 @@ void CoreTools::NameMacroTesting::ImplGetAllObjectsByNameTest(NameMacro& nameMac
 void CoreTools::NameMacroTesting::ImplGetAllConstObjectsByNameTest(const NameMacro& nameMacro)
 {
     const auto constContainer = nameMacro.GetAllConstObjectsByName(name);
-    ASSERT_FALSE_FAILURE_THROW(constContainer.empty(), "²éÕÒ¶ÔÏóÊ§°Ü¡£");
+    ASSERT_FALSE_FAILURE_THROW(constContainer.empty(), "æŸ¥æ‰¾å¯¹è±¡å¤±è´¥ã€‚");
     for (const auto& object : constContainer)
     {
         ASSERT_EQUAL(object->GetName(), name);
@@ -145,7 +145,7 @@ void CoreTools::NameMacroTesting::FinalTest()
 void CoreTools::NameMacroTesting::FinalGetObjectByNameTest(NameMacro& nameFinalMacro)
 {
     const auto result = nameFinalMacro.GetObjectByName(name);
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(result, "²éÕÒ¶ÔÏóÊ§°Ü¡£");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(result, "æŸ¥æ‰¾å¯¹è±¡å¤±è´¥ã€‚");
     ASSERT_FALSE(result->IsNullObject());
     ASSERT_EQUAL(result->GetName(), name);
 }
@@ -153,7 +153,7 @@ void CoreTools::NameMacroTesting::FinalGetObjectByNameTest(NameMacro& nameFinalM
 void CoreTools::NameMacroTesting::FinalGetConstObjectByNameTest(const NameMacro& nameFinalMacro)
 {
     const auto constResult = nameFinalMacro.GetConstObjectByName(name);
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(constResult, "²éÕÒ¶ÔÏóÊ§°Ü¡£");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(constResult, "æŸ¥æ‰¾å¯¹è±¡å¤±è´¥ã€‚");
     ASSERT_FALSE(constResult->IsNullObject());
     ASSERT_EQUAL(constResult->GetName(), name);
 }
@@ -161,7 +161,7 @@ void CoreTools::NameMacroTesting::FinalGetConstObjectByNameTest(const NameMacro&
 void CoreTools::NameMacroTesting::FinalGetAllObjectsByNameTest(NameMacro& nameFinalMacro)
 {
     const auto container = nameFinalMacro.GetAllObjectsByName(name);
-    ASSERT_FALSE_FAILURE_THROW(container.empty(), "²éÕÒ¶ÔÏóÊ§°Ü¡£");
+    ASSERT_FALSE_FAILURE_THROW(container.empty(), "æŸ¥æ‰¾å¯¹è±¡å¤±è´¥ã€‚");
     for (const auto& object : container)
     {
         ASSERT_EQUAL(object->GetName(), name);
@@ -171,7 +171,7 @@ void CoreTools::NameMacroTesting::FinalGetAllObjectsByNameTest(NameMacro& nameFi
 void CoreTools::NameMacroTesting::FinalGetAllConstObjectsByNameTest(const NameMacro& nameFinalMacro)
 {
     const auto constContainer = nameFinalMacro.GetAllConstObjectsByName(name);
-    ASSERT_FALSE_FAILURE_THROW(constContainer.empty(), "²éÕÒ¶ÔÏóÊ§°Ü¡£");
+    ASSERT_FALSE_FAILURE_THROW(constContainer.empty(), "æŸ¥æ‰¾å¯¹è±¡å¤±è´¥ã€‚");
     for (const auto& object : constContainer)
     {
         ASSERT_EQUAL(object->GetName(), name);

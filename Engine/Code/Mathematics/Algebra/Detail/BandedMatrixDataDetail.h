@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.5 (2024/02/18 13:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.5 (2024/02/18 13:19)
 
 #ifndef MATHEMATICS_ALGEBRA_BANDED_MATRIX_DATA_DETAIL_H
 #define MATHEMATICS_ALGEBRA_BANDED_MATRIX_DATA_DETAIL_H
@@ -122,7 +122,7 @@ requires std::is_arithmetic_v<Real>
 int Mathematics::BandedMatrixData<Real>::GetBandMax(int index) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
-    MATHEMATICS_ASSERTION_1(0 <= index && index < GetBandsNumber(), "ÎŞĞ§Ë÷ÒıÔÚ GetBandMax\n");
+    MATHEMATICS_ASSERTION_1(0 <= index && index < GetBandsNumber(), "æ— æ•ˆç´¢å¼•åœ¨ GetBandMax\n");
 
     return size - 1 - index;
 }
@@ -146,7 +146,7 @@ void Mathematics::BandedMatrixData<Real>::SetBand(int index, const ContainerType
 
     if (element.size() != band.size())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÔªËØ´óĞ¡²»ÏàµÈ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å…ƒç´ å¤§å°ä¸ç›¸ç­‰ã€‚"s))
     }
 
     element = band;
@@ -186,14 +186,14 @@ const Real& Mathematics::BandedMatrixData<Real>::operator()(int row, int column)
         }
     }
 
-    /// ¶ÔÓÚoperator(int,int)·µ»ØµÄ²»ÔÚ´øÖĞµÄÓĞĞ§Ë÷Òı£¬
-    /// ÔÚÕâÖÖÇé¿öÏÂ£¬¾ØÕóÏîÎªÁã¡£
+    /// å¯¹äºoperator(int,int)è¿”å›çš„ä¸åœ¨å¸¦ä¸­çš„æœ‰æ•ˆç´¢å¼•ï¼Œ
+    /// åœ¨è¿™ç§æƒ…å†µä¸‹ï¼ŒçŸ©é˜µé¡¹ä¸ºé›¶ã€‚
     static Real zero{};
 
-    MATHEMATICS_ASSERTION_1(MathType::FAbs(zero) <= MathType::GetZeroTolerance(), "¾²Ì¬±äÁ¿dummyÖµ±»ĞŞ¸Ä£¡dummyÖµ±ØĞëÎªÁã£¡");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(zero) <= MathType::GetZeroTolerance(), "é™æ€å˜é‡dummyå€¼è¢«ä¿®æ”¹ï¼dummyå€¼å¿…é¡»ä¸ºé›¶ï¼");
 
-    /// ½«¸ÃÖµÉèÖÃÎªÁã£¬
-    /// ÒÔ·ÀÓĞÈËÔÚÇ°Ò»´Îµ÷ÓÃoperator(int,int)Ê±ÎŞÒâÖĞĞŞ¸ÄÁËdummy¡£
+    /// å°†è¯¥å€¼è®¾ç½®ä¸ºé›¶ï¼Œ
+    /// ä»¥é˜²æœ‰äººåœ¨å‰ä¸€æ¬¡è°ƒç”¨operator(int,int)æ—¶æ— æ„ä¸­ä¿®æ”¹äº†dummyã€‚
     zero = MathType::GetValue(0);
 
     return zero;

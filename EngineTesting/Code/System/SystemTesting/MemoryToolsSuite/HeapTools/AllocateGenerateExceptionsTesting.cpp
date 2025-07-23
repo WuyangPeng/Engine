@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/12 10:14)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/12 10:14)
 
 #include "AllocateGenerateExceptionsTesting.h"
 #include "System/MemoryTools/HeapToolsDetail.h"
@@ -36,7 +36,7 @@ void System::AllocateGenerateExceptionsTesting::AllocateGenerateExceptionsHeapSu
 {
     const auto handle = CreateProcessHeap(HeapCreate::GenerateExceptions, 0, 0);
 
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(handle, "CreateProcessHeap Ê§°Ü¡£");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(handle, "CreateProcessHeap å¤±è´¥ã€‚");
 
     ASSERT_NOT_THROW_EXCEPTION_1(AllocateGenerateExceptionsHeapSucceedLoop, handle);
 
@@ -55,7 +55,7 @@ void System::AllocateGenerateExceptionsTesting::DoAllocateGenerateExceptionsHeap
 {
     auto memory = AllocateProcessHeap(handle, flag, size);
 
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(memory, "AllocateProcessHeap Ê§°Ü¡£");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(memory, "AllocateProcessHeap å¤±è´¥ã€‚");
 
     ASSERT_NOT_THROW_EXCEPTION_3(GetProcessHeapSizeSucceedTest, handle, flag, memory);
 
@@ -72,7 +72,7 @@ void System::AllocateGenerateExceptionsTesting::AllocateGenerateExceptionsHeapFa
 {
     const auto handle = CreateProcessHeap(HeapCreate::GenerateExceptions, size, size);
 
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(handle, "CreateProcessHeap Ê§°Ü¡£");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(handle, "CreateProcessHeap å¤±è´¥ã€‚");
 
     ASSERT_NOT_THROW_EXCEPTION_1(AllocateGenerateExceptionsHeapFailureLoop, handle);
 

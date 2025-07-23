@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 13:50)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 13:50)
 
 #ifndef MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_TRIANGLE3_DETAIL_H
@@ -86,8 +86,8 @@ void Mathematics::StaticFindIntersectorLine3Triangle3<Real>::Find()
     }
     else
     {
-        // ÏßºÍÈı½ÇĞÎÊÇÆ½ĞĞµÄ,³ÆÖ®Îª¡°Ã»ÓĞ½»¼¯¡±¡£
-        // ¼´Ê¹ÏßÊÇÏà½»¡£
+        // çº¿å’Œä¸‰è§’å½¢æ˜¯å¹³è¡Œçš„,ç§°ä¹‹ä¸ºâ€œæ²¡æœ‰äº¤é›†â€ã€‚
+        // å³ä½¿çº¿æ˜¯ç›¸äº¤ã€‚
         return;
     }
 
@@ -102,7 +102,7 @@ void Mathematics::StaticFindIntersectorLine3Triangle3<Real>::Find()
         {
             if (directionDotOriginCrossEdge2 + directionDotEdge1CrossOrigin <= directionDotNormal)
             {
-                // ÏßºÍÈı½ÇĞÎÏà½»
+                // çº¿å’Œä¸‰è§’å½¢ç›¸äº¤
                 auto originDotNormal = -System::EnumCastUnderlying(sign) * data.GetOriginDotNormal();
 
                 lineParameter = originDotNormal / directionDotNormal;
@@ -114,11 +114,11 @@ void Mathematics::StaticFindIntersectorLine3Triangle3<Real>::Find()
 
                 this->SetIntersectionType(IntersectionType::Point);
             }
-            // else: 1 < b1 + b2, ²»Ïà½»
+            // else: 1 < b1 + b2, ä¸ç›¸äº¤
         }
-        // else: b2 < 0, ²»Ïà½»
+        // else: b2 < 0, ä¸ç›¸äº¤
     }
-    // else: b1 < 0, ²»Ïà½»
+    // else: b1 < 0, ä¸ç›¸äº¤
 }
 
 template <typename Real>

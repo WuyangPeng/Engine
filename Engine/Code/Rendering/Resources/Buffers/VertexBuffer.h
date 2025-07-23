@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/29 13:49)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/29 13:49)
 
 #ifndef RENDERING_RESOURCES_VERTEX_BUFFER_H
 #define RENDERING_RESOURCES_VERTEX_BUFFER_H
@@ -50,14 +50,14 @@ namespace Rendering
         NODISCARD StructuredBufferSharedPtr GetStructuredBuffer();
         NODISCARD ConstStructuredBufferSharedPtr GetStructuredBuffer() const;
 
-        /// µ±Ê¹ÓÃµÚÒ»¸ö¹¹Ôìº¯ÊıÊ±£¬º¯ÊıStandardUsage()·µ»Øtrue£¬
-        /// µ±Ê¹ÓÃµÚ¶ş¸ö¹¹Ôìº¯ÊıÊ±·µ»Øfalse¡£
+        /// å½“ä½¿ç”¨ç¬¬ä¸€ä¸ªæ„é€ å‡½æ•°æ—¶ï¼Œå‡½æ•°StandardUsage()è¿”å›trueï¼Œ
+        /// å½“ä½¿ç”¨ç¬¬äºŒä¸ªæ„é€ å‡½æ•°æ—¶è¿”å›falseã€‚
         NODISCARD bool StandardUsage() const noexcept;
 
-        /// »ñÈ¡Ö¸ÏòÖ¸¶¨ÓïÒåºÍµ¥Î»µÄÊôĞÔÊı¾İ£¨Èç¹û´æÔÚ£©µÄÖ¸Õë¡£
-        /// ´ËÍâ£¬Äú»¹ÒªÇó¸ÃÊôĞÔÊÇËùĞèÀàĞÍÁĞ±í£¨Î»±êÖ¾£©ÖĞµÄÒ»¸ö¡£
-        /// Èç¹û²»¹ØĞÄÀàĞÍ£¬ÇëÎªËùĞèµÄÊäÈë´«µİUnknown¡£
-        /// Èç¹ûÇëÇóÊ§°Ü£¬½«Å×³öÒ»¸öÒì³£¡£
+        /// è·å–æŒ‡å‘æŒ‡å®šè¯­ä¹‰å’Œå•ä½çš„å±æ€§æ•°æ®ï¼ˆå¦‚æœå­˜åœ¨ï¼‰çš„æŒ‡é’ˆã€‚
+        /// æ­¤å¤–ï¼Œæ‚¨è¿˜è¦æ±‚è¯¥å±æ€§æ˜¯æ‰€éœ€ç±»å‹åˆ—è¡¨ï¼ˆä½æ ‡å¿—ï¼‰ä¸­çš„ä¸€ä¸ªã€‚
+        /// å¦‚æœä¸å…³å¿ƒç±»å‹ï¼Œè¯·ä¸ºæ‰€éœ€çš„è¾“å…¥ä¼ é€’Unknownã€‚
+        /// å¦‚æœè¯·æ±‚å¤±è´¥ï¼Œå°†æŠ›å‡ºä¸€ä¸ªå¼‚å¸¸ã€‚
         NODISCARD SpanIterator GetChannel(Semantic semantic, int unit, const DataFormatTypeContainer& requiredTypes);
         NODISCARD ConstSpanIterator GetConstChannel(Semantic semantic, int unit, const DataFormatTypeContainer& requiredTypes) const;
 
@@ -73,15 +73,15 @@ namespace Rendering
         };
 
     public:
-        /// ´Ë¹¹Ôìº¯ÊıÊÊÓÃÓÚ¹âÕ¤»¯Æ÷Ê¹ÓÃ¶¥µã»º³åÇøÏò¶¥µã×ÅÉ«Æ÷Ìá¹©¶¥µãµÄ±ê×¼ÓÃÍ¾¡£
+        /// æ­¤æ„é€ å‡½æ•°é€‚ç”¨äºå…‰æ …åŒ–å™¨ä½¿ç”¨é¡¶ç‚¹ç¼“å†²åŒºå‘é¡¶ç‚¹ç€è‰²å™¨æä¾›é¡¶ç‚¹çš„æ ‡å‡†ç”¨é€”ã€‚
         VertexBuffer(VertexBufferCreate vertexBufferCreate, const std::string& name, const VertexFormat& format, int numVertices, bool createStorage);
 
-        /// ´Ë¹¹Ôìº¯ÊıÓÃÓÚ»ùÓÚ¶¥µãidµÄ»æÖÆ£¬ÆäÖĞ¶¥µãÊÇ´Ó¶¥µã×ÅÉ«Æ÷ÖĞµÄ½á¹¹»¯»º³åÇø×ÊÔ´¶ÁÈ¡µÄ¡£
-        /// ÊäÈëstructuredBuffer±ØĞëÎª·Çnullptr£¬²¢ÇÒÆä¶¥µãÊı½«¸´ÖÆµ½'this'¶¥µãÊı¡£
+        /// æ­¤æ„é€ å‡½æ•°ç”¨äºåŸºäºé¡¶ç‚¹idçš„ç»˜åˆ¶ï¼Œå…¶ä¸­é¡¶ç‚¹æ˜¯ä»é¡¶ç‚¹ç€è‰²å™¨ä¸­çš„ç»“æ„åŒ–ç¼“å†²åŒºèµ„æºè¯»å–çš„ã€‚
+        /// è¾“å…¥structuredBufferå¿…é¡»ä¸ºénullptrï¼Œå¹¶ä¸”å…¶é¡¶ç‚¹æ•°å°†å¤åˆ¶åˆ°'this'é¡¶ç‚¹æ•°ã€‚
         VertexBuffer(VertexBufferCreate vertexBufferCreate, const std::string& name, const VertexFormat& format, const StructuredBuffer& structuredBuffer);
 
-        /// ´Ë¹¹Ôìº¯ÊıÓÃÓÚ²»ĞèÒª¶¥µãµÄ»ùÓÚ¶¥µãidµÄ»æÍ¼£»
-        /// ÀıÈç£¬×ÅÉ«Æ÷±¾Éí¿ÉÒÔ¸ù¾İ±êÊ¶·ûÉú³ÉÎ»ÖÃ¡£
+        /// æ­¤æ„é€ å‡½æ•°ç”¨äºä¸éœ€è¦é¡¶ç‚¹çš„åŸºäºé¡¶ç‚¹idçš„ç»˜å›¾ï¼›
+        /// ä¾‹å¦‚ï¼Œç€è‰²å™¨æœ¬èº«å¯ä»¥æ ¹æ®æ ‡è¯†ç¬¦ç”Ÿæˆä½ç½®ã€‚
         VertexBuffer(VertexBufferCreate vertexBufferCreate, const std::string& name, int numVertices);
 
     private:

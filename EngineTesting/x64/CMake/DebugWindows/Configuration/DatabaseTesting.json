@@ -1,0 +1,80 @@
+{
+  "helperSuite": {
+    "UserMacroTesting": 1
+  },
+
+  "configurationSuite": {
+    "ConfigurationStrategyTesting": 1,
+    "AnalysisDatabaseConfigurationTesting": 1
+  },
+
+  "databaseInterfaceSuite": {
+    "BasisDatabaseTesting": 1,
+    "BasisDatabaseContainerTesting": 1,
+    "BasisDatabaseManagerTesting": 1,
+    "DatabaseEntityTesting": 1,
+    "EntityTesting": 1,
+    "DatabaseManagerTesting": 1,
+    "DatabaseFieldTesting": 1,
+    "DatabaseEnvironmentTesting": 1,
+    "DatabaseFlushTesting": 1
+  },
+
+  "statementSuite": {
+    "RedisStatementTesting": 1,
+    "SqlStatementTesting": 1
+  },
+
+  "mysqlWrappersSuite": {
+
+  },
+
+  "mysqlConnectorWrappersSuite": {
+    "MysqlConnectorDatabaseFlushTesting": 1
+  },
+
+  "mysqlBoostWrappersSuite": {
+    "MysqlBoostDatabaseFlushTesting": 1
+  },
+
+  "sqlServerWrappersSuite": {
+
+
+  },
+
+  "sQLiteWrappersSuite": {
+
+  },
+
+  "postgreSQLSuite": {
+
+  },
+
+  "oracleSuite": {
+
+  },
+
+  "flatFileWrappersSuite": {
+
+  },
+
+  "mariaDBWrappersSuite": {
+
+  },
+
+  "mongoWrappersSuite": {
+    "MongoEnvironmentTesting": 1,
+    "MongoDatabaseFlushTesting": 1
+  },
+
+  "redisWrappersSuite": {
+    "RedisDatabaseFlushTesting": 1
+  },
+
+  "databaseEntityCodeGenerationSuite": {
+    "CodeHeaderFileGenerationTesting": 1,
+    "CodeFwdHeaderFileGenerationTesting": 1,
+    "EntityHeaderFileGenerationTesting": 1,
+    "EntitySourceFileGenerationTesting": 1
+  }
+}

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:21)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:21)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_SAMPLES_POWER_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_SAMPLES_POWER_DETAIL_H
@@ -54,8 +54,8 @@ template <typename Real>
 Real Mathematics::PolynomialSamplesPower<Real>::operator()(int samplesIndex, int degreeIndex) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_0(0 <= samplesIndex && samplesIndex < GetNumSamples(), "Ë÷ÒıÔ½½ç£¡\n");
-    MATHEMATICS_ASSERTION_0(0 <= degreeIndex && degreeIndex < GetNumDegree(), "Ë÷ÒıÔ½½ç£¡\n");
+    MATHEMATICS_ASSERTION_0(0 <= samplesIndex && samplesIndex < GetNumSamples(), "ç´¢å¼•è¶Šç•Œï¼\n");
+    MATHEMATICS_ASSERTION_0(0 <= degreeIndex && degreeIndex < GetNumDegree(), "ç´¢å¼•è¶Šç•Œï¼\n");
 
     return power(samplesIndex, degreeIndex);
 }

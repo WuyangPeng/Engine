@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.0 (2023/06/25 16:09)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.0 (2023/06/25 16:09)
 
 #include "RenderingEnvironmentMessage.h"
 #include "Testing.h"
@@ -21,7 +21,7 @@
 using namespace std::literals;
 
 RenderingWindowTesting::RenderingEnvironmentMessage::RenderingEnvironmentMessage(int64_t delta, MAYBE_UNUSED const EnvironmentDirectory& environmentDirectory)
-    : ParentType{ delta, "¡¾äÖÈ¾¿â¡¿Windowµ¥Ôª²âÊÔÌ×¼ş"s }
+    : ParentType{ delta, "ã€æ¸²æŸ“åº“ã€‘Windowå•å…ƒæµ‹è¯•å¥—ä»¶"s }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -36,7 +36,7 @@ void RenderingWindowTesting::RenderingEnvironmentMessage::InitSuite()
 void RenderingWindowTesting::RenderingEnvironmentMessage::AddRendererEngineSuite()
 {
     const auto hWnd = GetHWnd();
-    auto rendererEngineSuite = GenerateSuite("äÖÈ¾ÒıÇæ"s);
+    auto rendererEngineSuite = GenerateSuite("æ¸²æŸ“å¼•æ“"s);
 
     ADD_TEST_USE_PARAMETER_1(rendererEngineSuite, RenderingEnvironmentTesting, hWnd);
     ADD_TEST_USE_PARAMETER_1(rendererEngineSuite, RenderingDeviceTesting, hWnd);

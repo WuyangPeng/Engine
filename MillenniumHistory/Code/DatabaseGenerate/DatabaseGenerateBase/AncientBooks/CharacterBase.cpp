@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #include "CharacterBase.h"
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
@@ -46,7 +46,7 @@ AncientBooks::CharacterBase::ConstCountrySharedPtr AncientBooks::CharacterBase::
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 int AncientBooks::CharacterBase::GetIdentity() const noexcept
@@ -62,42 +62,42 @@ AncientBooks::CharacterBase::ConstIdentitySharedPtr AncientBooks::CharacterBase:
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 System::String AncientBooks::CharacterBase::GetFamily() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡×Ö·û´®¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–å­—ç¬¦ä¸²ã€‚"s))
 }
 
 System::String AncientBooks::CharacterBase::GetName() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡×Ö·û´®¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–å­—ç¬¦ä¸²ã€‚"s))
 }
 
 System::String AncientBooks::CharacterBase::GetFullName() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡×Ö·û´®¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–å­—ç¬¦ä¸²ã€‚"s))
 }
 
 AncientBooks::CharacterBase::StringContainer AncientBooks::CharacterBase::GetAlias() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 int AncientBooks::CharacterBase::GetAliasCount() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 System::String AncientBooks::CharacterBase::GetAlias(int index) const
@@ -106,28 +106,28 @@ System::String AncientBooks::CharacterBase::GetAlias(int index) const
 
     System::UnusedFunction(index);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::CharacterBase::StringContainerConstIter AncientBooks::CharacterBase::GetAliasBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::CharacterBase::StringContainerConstIter AncientBooks::CharacterBase::GetAliasEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 System::String AncientBooks::CharacterBase::GetStyleName() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡×Ö·û´®¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–å­—ç¬¦ä¸²ã€‚"s))
 }
 
 int AncientBooks::CharacterBase::GetSex() const noexcept
@@ -150,7 +150,7 @@ AncientBooks::CharacterBase::ConstCharacterSharedPtr AncientBooks::CharacterBase
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 int AncientBooks::CharacterBase::GetMother() const noexcept
@@ -166,21 +166,21 @@ AncientBooks::CharacterBase::ConstCharacterSharedPtr AncientBooks::CharacterBase
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 AncientBooks::CharacterBase::IntContainer AncientBooks::CharacterBase::GetFosterFather() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 int AncientBooks::CharacterBase::GetFosterFatherCount() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 int AncientBooks::CharacterBase::GetFosterFather(int index) const
@@ -189,21 +189,21 @@ int AncientBooks::CharacterBase::GetFosterFather(int index) const
 
     System::UnusedFunction(index);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::CharacterBase::IntContainerConstIter AncientBooks::CharacterBase::GetFosterFatherBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::CharacterBase::IntContainerConstIter AncientBooks::CharacterBase::GetFosterFatherEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::CharacterBase::CharacterContainer AncientBooks::CharacterBase::GetFosterFather(const AncientBooksContainer& csvContainer) const
@@ -212,21 +212,21 @@ AncientBooks::CharacterBase::CharacterContainer AncientBooks::CharacterBase::Get
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 AncientBooks::CharacterBase::IntContainer AncientBooks::CharacterBase::GetFosterMother() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 int AncientBooks::CharacterBase::GetFosterMotherCount() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 int AncientBooks::CharacterBase::GetFosterMother(int index) const
@@ -235,21 +235,21 @@ int AncientBooks::CharacterBase::GetFosterMother(int index) const
 
     System::UnusedFunction(index);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::CharacterBase::IntContainerConstIter AncientBooks::CharacterBase::GetFosterMotherBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::CharacterBase::IntContainerConstIter AncientBooks::CharacterBase::GetFosterMotherEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::CharacterBase::CharacterContainer AncientBooks::CharacterBase::GetFosterMother(const AncientBooksContainer& csvContainer) const
@@ -258,7 +258,7 @@ AncientBooks::CharacterBase::CharacterContainer AncientBooks::CharacterBase::Get
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 int AncientBooks::CharacterBase::GetBirthYear() const noexcept
@@ -274,7 +274,7 @@ AncientBooks::CharacterBase::ConstYearSharedPtr AncientBooks::CharacterBase::Get
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 int AncientBooks::CharacterBase::GetBirthMonth() const noexcept
@@ -290,7 +290,7 @@ AncientBooks::CharacterBase::ConstMonthSharedPtr AncientBooks::CharacterBase::Ge
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 int AncientBooks::CharacterBase::GetBirthSexagenaryCycle() const noexcept
@@ -306,7 +306,7 @@ AncientBooks::CharacterBase::ConstSexagenaryCycleSharedPtr AncientBooks::Charact
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 int AncientBooks::CharacterBase::GetBirthDay() const noexcept
@@ -322,7 +322,7 @@ AncientBooks::CharacterBase::ConstDaySharedPtr AncientBooks::CharacterBase::GetB
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 int AncientBooks::CharacterBase::GetDeathYear() const noexcept
@@ -338,7 +338,7 @@ AncientBooks::CharacterBase::ConstYearSharedPtr AncientBooks::CharacterBase::Get
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 int AncientBooks::CharacterBase::GetDeathMonth() const noexcept
@@ -354,7 +354,7 @@ AncientBooks::CharacterBase::ConstMonthSharedPtr AncientBooks::CharacterBase::Ge
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 int AncientBooks::CharacterBase::GetDeathSexagenaryCycle() const noexcept
@@ -370,7 +370,7 @@ AncientBooks::CharacterBase::ConstSexagenaryCycleSharedPtr AncientBooks::Charact
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 int AncientBooks::CharacterBase::GetDeathDay() const noexcept
@@ -386,21 +386,21 @@ AncientBooks::CharacterBase::ConstDaySharedPtr AncientBooks::CharacterBase::GetD
 
     System::UnusedFunction(csvContainer);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Ó³ÉäÖµ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ˜ å°„å€¼ã€‚"s))
 }
 
 AncientBooks::CharacterBase::StringContainer AncientBooks::CharacterBase::GetUnansweredQuestion() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 int AncientBooks::CharacterBase::GetUnansweredQuestionCount() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 System::String AncientBooks::CharacterBase::GetUnansweredQuestion(int index) const
@@ -409,20 +409,20 @@ System::String AncientBooks::CharacterBase::GetUnansweredQuestion(int index) con
 
     System::UnusedFunction(index);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::CharacterBase::StringContainerConstIter AncientBooks::CharacterBase::GetUnansweredQuestionBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 
 AncientBooks::CharacterBase::StringContainerConstIter AncientBooks::CharacterBase::GetUnansweredQuestionEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("character±í»ùÀà²»ÔÊĞí»ñÈ¡Êı×é¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("characterè¡¨åŸºç±»ä¸å…è®¸è·å–æ•°ç»„ã€‚"s))
 }
 

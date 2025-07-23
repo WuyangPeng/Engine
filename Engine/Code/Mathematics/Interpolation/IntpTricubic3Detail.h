@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒýÇæ°æ±¾£º0.9.0.12 (2023/06/09 10:09)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“Žç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 10:09)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_TRICUBIC3_DETAIL_H
 #define MATHEMATICS_INTERPOLATION_INTP_TRICUBIC3_DETAIL_H
@@ -36,8 +36,8 @@ Mathematics::IntpTricubic3<Real>::IntpTricubic3(int xBound, int yBound, int zBou
       f{ f },
       blend{ (catmullRom ? crBlend : bsBlend) }
 {
-    MATHEMATICS_ASSERTION_0(xBound >= 4 && yBound >= 4 && zBound >= 4, "ÎÞÐ§ÊäÈë¡£\n");
-    MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::GetValue(0) && ySpacing > Math<Real>::GetValue(0) && zSpacing > Math<Real>::GetValue(0), "ÎÞÐ§ÊäÈë¡£\n");
+    MATHEMATICS_ASSERTION_0(xBound >= 4 && yBound >= 4 && zBound >= 4, "æ— æ•ˆè¾“å…¥ã€‚\n");
+    MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::GetValue(0) && ySpacing > Math<Real>::GetValue(0) && zSpacing > Math<Real>::GetValue(0), "æ— æ•ˆè¾“å…¥ã€‚\n");
 
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }

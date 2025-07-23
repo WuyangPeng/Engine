@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/30 18:10)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/30 18:10)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -31,7 +31,7 @@ void CoreTools::WindowsMutex::Initialize()
 
     if (mutex == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³õÊ¼»¯MutexÊ§°Ü¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("åˆå§‹åŒ–Mutexå¤±è´¥ã€‚"s))
     }
 }
 
@@ -41,7 +41,7 @@ void CoreTools::WindowsMutex::Delete() noexcept
 
     if (!System::CloseSystemMutex(mutex))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("Ïú»ÙMutexÊ§°Ü"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("é”€æ¯Mutexå¤±è´¥"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -51,14 +51,14 @@ void CoreTools::WindowsMutex::Enter()
 
     if (!System::WaitForSystemMutex(mutex))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("½øÈëMutexÊ§°Ü¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¿›å…¥Mutexå¤±è´¥ã€‚"s))
     }
 
-    /// ½á¹û:
+    /// ç»“æœ:
     /// WAIT_ABANDONED(0x00000080)
-    /// WAIT_OBJECT_0(0x00000000)£¬ÓĞĞÅºÅ
-    /// WAIT_TIMEOUT(0x00000102), [¶ÔINFINITE²»¿ÉÄÜ]
-    /// WAIT_FAILED(0xFFFFFFFF)£¬ÎŞĞÅºÅ
+    /// WAIT_OBJECT_0(0x00000000)ï¼Œæœ‰ä¿¡å·
+    /// WAIT_TIMEOUT(0x00000102), [å¯¹INFINITEä¸å¯èƒ½]
+    /// WAIT_FAILED(0xFFFFFFFF)ï¼Œæ— ä¿¡å·
 }
 
 void CoreTools::WindowsMutex::Leave() noexcept
@@ -67,7 +67,7 @@ void CoreTools::WindowsMutex::Leave() noexcept
 
     if (!System::ReleaseSystemMutex(mutex))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("ÊÍ·Å»¥³âÌåÊ§°Ü"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("é‡Šæ”¾äº’æ–¥ä½“å¤±è´¥"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

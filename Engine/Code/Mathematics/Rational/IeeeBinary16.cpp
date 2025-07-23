@@ -10,6 +10,7 @@
 #include "Mathematics/MathematicsExport.h"
 
 #include "IeeeBinary16.h"
+#include "IeeeBinaryDetail.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/BitHacks.h"
 #include "Mathematics/Base/Functions.h"

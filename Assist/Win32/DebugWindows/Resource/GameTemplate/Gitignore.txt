@@ -1,4 +1,4 @@
-*.aps
+﻿*.aps
 *.bin
 *.config
 *.cso

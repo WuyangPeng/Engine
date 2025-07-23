@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 15:27)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 15:27)
 
 #include "Framework/FrameworkExport.h"
 
@@ -20,7 +20,7 @@ Framework::WindowApplicationInformationImpl::WindowApplicationInformationImpl(St
       position{ point },
       style{ allowResize ?
                  WindowsStyles::Default :
-                 // ÕâÀïÉ¾³ı ThickFrame ºÍ MaximizeBox£¬ËüÃÇ¶¼ÔÊĞíµ÷Õû´°¿ÚµÄ´óĞ¡¡£
+                 // è¿™é‡Œåˆ é™¤ ThickFrame å’Œ MaximizeBoxï¼Œå®ƒä»¬éƒ½å…è®¸è°ƒæ•´çª—å£çš„å¤§å°ã€‚
                  WindowsStyles::Overlapped | WindowsStyles::Caption | WindowsStyles::SysMenu | WindowsStyles::MinimizeBox | WindowsStyles::Visible },
       windowName{ SYSTEM_TEXT("Window") },
       windowPictorial{ System::WindowsBrushTypes::WhiteBrush }
@@ -40,7 +40,7 @@ Framework::WindowApplicationInformationImpl::WindowApplicationInformationImpl(Wi
       position{ rendererParameter.GetXPosition(), rendererParameter.GetYPosition() },
       style{ rendererParameter.IsAllowResize() ?
                  WindowsStyles::Default :
-                 // ÕâÀïÉ¾³ı ThickFrame ºÍ MaximizeBox£¬ËüÃÇ¶¼ÔÊĞíµ÷Õû´°¿ÚµÄ´óĞ¡¡£
+                 // è¿™é‡Œåˆ é™¤ ThickFrame å’Œ MaximizeBoxï¼Œå®ƒä»¬éƒ½å…è®¸è°ƒæ•´çª—å£çš„å¤§å°ã€‚
                  WindowsStyles::Overlapped | WindowsStyles::Caption | WindowsStyles::SysMenu | WindowsStyles::MinimizeBox | WindowsStyles::Visible },
       windowName{ rendererParameter.GetWindowClassName(), rendererParameter.GetWindowMenuName() },
       windowPictorial{ GetWindowPictorial(instance, rendererParameter) }

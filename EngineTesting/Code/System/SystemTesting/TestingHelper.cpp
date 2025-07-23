@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/06 16:42)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/06 16:42)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -14,7 +14,7 @@
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 
 System::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "ÏµÍ³¿â" }
+    : ParentType{ argc, argv, "ç³»ç»Ÿåº“" }
 {
     InitSuite();
 
@@ -47,7 +47,7 @@ void System::TestingHelper::InitSuite()
 
 void System::TestingHelper::AddHelperSuite()
 {
-    auto helperSuite = GenerateSuite("°ïÖú");
+    auto helperSuite = GenerateSuite("å¸®åŠ©");
 
     helperSuite.AddSuite(GetConfigMacroSuite());
     ADD_TEST(helperSuite, UserMacroTesting);
@@ -74,8 +74,8 @@ void System::TestingHelper::AddHelperSuite()
 
 CoreTools::Suite System::TestingHelper::GetConfigMacroSuite()
 {
-    /// ²âÊÔConfigMacro.h
-    auto configMacroSuite = GenerateSuite("ÅäÖÃºê");
+    /// æµ‹è¯•ConfigMacro.h
+    auto configMacroSuite = GenerateSuite("é…ç½®å®");
 
     ADD_TEST(configMacroSuite, FixedSizeTesting);
     ADD_TEST(configMacroSuite, CompilerConfigTesting);
@@ -103,7 +103,7 @@ CoreTools::Suite System::TestingHelper::GetUnicodeUsingSuite()
 
 CoreTools::Suite System::TestingHelper::GetWindowsMacroSuite()
 {
-    auto windowsMacroSuite = GenerateSuite("Windowsºê");
+    auto windowsMacroSuite = GenerateSuite("Windowså®");
 
     ADD_TEST(windowsMacroSuite, MakeLanguageIdTesting);
     ADD_TEST(windowsMacroSuite, MakeIntResourceTesting);
@@ -118,7 +118,7 @@ CoreTools::Suite System::TestingHelper::GetWindowsMacroSuite()
 
 CoreTools::Suite System::TestingHelper::GetEnumOperatorSuite()
 {
-    auto enumOperatorSuite = GenerateSuite("Ã¶¾ÙÔËËã·û");
+    auto enumOperatorSuite = GenerateSuite("æšä¸¾è¿ç®—ç¬¦");
 
     ADD_TEST(enumOperatorSuite, EnumAddableTesting);
     ADD_TEST(enumOperatorSuite, EnumSubtractableTesting);
@@ -136,7 +136,7 @@ CoreTools::Suite System::TestingHelper::GetEnumOperatorSuite()
 
 CoreTools::Suite System::TestingHelper::GetOpenGLMacroSuite()
 {
-    auto openGLMacroSuite = GenerateSuite("OpenGLºê");
+    auto openGLMacroSuite = GenerateSuite("OpenGLå®");
 
     ADD_TEST(openGLMacroSuite, WglExtensionsMacroTesting);
     ADD_TEST(openGLMacroSuite, GlxExtensionsMacroTesting);
@@ -148,7 +148,7 @@ CoreTools::Suite System::TestingHelper::GetOpenGLMacroSuite()
 
 CoreTools::Suite System::TestingHelper::GetGlUtilityMacroSuite()
 {
-    auto glUtilityMacroSuite = GenerateSuite("OpenGL¹¤¾ßºê");
+    auto glUtilityMacroSuite = GenerateSuite("OpenGLå·¥å…·å®");
 
     ADD_TEST(glUtilityMacroSuite, GlUtilityMarkTesting);
     ADD_TEST(glUtilityMacroSuite, GlUtilityGetFunctionTesting);
@@ -162,7 +162,7 @@ CoreTools::Suite System::TestingHelper::GetGlUtilityMacroSuite()
 
 CoreTools::Suite System::TestingHelper::GetToolsSuite()
 {
-    auto toolsSuite = GenerateSuite("¹¤¾ßºê");
+    auto toolsSuite = GenerateSuite("å·¥å…·å®");
 
     ADD_TEST(toolsSuite, GetArraySizeTesting);
     ADD_TEST(toolsSuite, UnusedFunctionTesting);
@@ -174,7 +174,7 @@ CoreTools::Suite System::TestingHelper::GetToolsSuite()
 
 void System::TestingHelper::AddSystemOutputSuite()
 {
-    auto systemOutputSuite = GenerateSuite("ÏµÍ³Êä³ö");
+    auto systemOutputSuite = GenerateSuite("ç³»ç»Ÿè¾“å‡º");
 
     ADD_TEST(systemOutputSuite, LanguageIdDataTesting);
     ADD_TEST(systemOutputSuite, MessageBoxFlagsDataTesting);
@@ -186,7 +186,7 @@ void System::TestingHelper::AddSystemOutputSuite()
 
 CoreTools::Suite System::TestingHelper::GetMessageBoxSelectionSuite()
 {
-    auto messageBoxSelectionSuite = GenerateSuite("ÏûÏ¢¿òÑ¡Ôñ");
+    auto messageBoxSelectionSuite = GenerateSuite("æ¶ˆæ¯æ¡†é€‰æ‹©");
 
     ADD_TEST(messageBoxSelectionSuite, MessageBoxSelectionUseYesNoCancelTesting);
     ADD_TEST(messageBoxSelectionSuite, MessageBoxSelectionUseFlagsDataTesting);
@@ -197,7 +197,7 @@ CoreTools::Suite System::TestingHelper::GetMessageBoxSelectionSuite()
 
 void System::TestingHelper::AddDynamicLinkSuite()
 {
-    auto dynamicLinkSuite = GenerateSuite("¶¯Ì¬Á´½Ó¿â");
+    auto dynamicLinkSuite = GenerateSuite("åŠ¨æ€é“¾æ¥åº“");
 
     dynamicLinkSuite.AddSuite(GetLoadLibrarySuite());
     dynamicLinkSuite.AddSuite(GetLibraryToolsSuite());
@@ -211,7 +211,7 @@ void System::TestingHelper::AddDynamicLinkSuite()
 
 CoreTools::Suite System::TestingHelper::GetLoadLibrarySuite()
 {
-    auto loadLibrarySuite = GenerateSuite("¼ÓÔØ¶¯Ì¬Á´½Ó¿â");
+    auto loadLibrarySuite = GenerateSuite("åŠ è½½åŠ¨æ€é“¾æ¥åº“");
 
     ADD_TEST(loadLibrarySuite, LoadLibraryTesting);
     ADD_TEST(loadLibrarySuite, GetProcessAddressTesting);
@@ -222,7 +222,7 @@ CoreTools::Suite System::TestingHelper::GetLoadLibrarySuite()
 
 CoreTools::Suite System::TestingHelper::GetLibraryToolsSuite()
 {
-    auto libraryToolsSuite = GenerateSuite("¶¯Ì¬Á´½Ó¿â¹¤¾ß");
+    auto libraryToolsSuite = GenerateSuite("åŠ¨æ€é“¾æ¥åº“å·¥å…·");
 
     ADD_TEST(libraryToolsSuite, GetModuleFileNameTesting);
     ADD_TEST(libraryToolsSuite, GetModuleHandleTesting);
@@ -232,7 +232,7 @@ CoreTools::Suite System::TestingHelper::GetLibraryToolsSuite()
 
 CoreTools::Suite System::TestingHelper::GetLoadResourceToolsSuite()
 {
-    auto loadResourceToolsSuite = GenerateSuite("¼ÓÔØ×ÊÔ´¹¤¾ß");
+    auto loadResourceToolsSuite = GenerateSuite("åŠ è½½èµ„æºå·¥å…·");
 
     ADD_TEST(loadResourceToolsSuite, FindResourceTesting);
     ADD_TEST(loadResourceToolsSuite, LoadResourceTesting);
@@ -243,7 +243,7 @@ CoreTools::Suite System::TestingHelper::GetLoadResourceToolsSuite()
 
 CoreTools::Suite System::TestingHelper::GetEnumResourceToolsSuite()
 {
-    auto enumResourceToolsSuite = GenerateSuite("Ã¶¾Ù×ÊÔ´¹¤¾ß");
+    auto enumResourceToolsSuite = GenerateSuite("æšä¸¾èµ„æºå·¥å…·");
 
     ADD_TEST(enumResourceToolsSuite, EnumResourceToolsTesting);
     ADD_TEST(enumResourceToolsSuite, ResourceEnumTesting);
@@ -253,7 +253,7 @@ CoreTools::Suite System::TestingHelper::GetEnumResourceToolsSuite()
 
 void System::TestingHelper::AddCharacterStringSuite()
 {
-    auto characterStringSuite = GenerateSuite("×Ö·û´®¿â");
+    auto characterStringSuite = GenerateSuite("å­—ç¬¦ä¸²åº“");
 
     characterStringSuite.AddSuite(GetFormatErrorMessageSuite());
     characterStringSuite.AddSuite(GetCodePageSuite());
@@ -265,7 +265,7 @@ void System::TestingHelper::AddCharacterStringSuite()
 
 CoreTools::Suite System::TestingHelper::GetFormatErrorMessageSuite()
 {
-    auto formatErrorMessageSuite = GenerateSuite("¸ñÊ½»¯´íÎóÏûÏ¢");
+    auto formatErrorMessageSuite = GenerateSuite("æ ¼å¼åŒ–é”™è¯¯æ¶ˆæ¯");
 
     ADD_TEST(formatErrorMessageSuite, FormatErrorMessageUseLocalAllocTesting);
     ADD_TEST(formatErrorMessageSuite, FormatErrorMessageUseBufferTesting);
@@ -285,7 +285,7 @@ CoreTools::Suite System::TestingHelper::GetFormatErrorMessageSuite()
 
 CoreTools::Suite System::TestingHelper::GetCodePageSuite()
 {
-    auto codePageSuite = GenerateSuite("´úÂëÒ³");
+    auto codePageSuite = GenerateSuite("ä»£ç é¡µ");
 
     ADD_TEST(codePageSuite, CodePageValidTesting);
     ADD_TEST(codePageSuite, CodePageTesting);
@@ -296,7 +296,7 @@ CoreTools::Suite System::TestingHelper::GetCodePageSuite()
 
 CoreTools::Suite System::TestingHelper::GetStringConversionSuite()
 {
-    auto stringConversionSuite = GenerateSuite("×Ö·û´®×ª»»");
+    auto stringConversionSuite = GenerateSuite("å­—ç¬¦ä¸²è½¬æ¢");
 
     ADD_TEST(stringConversionSuite, MultiByteConversionWideCharTesting);
     ADD_TEST(stringConversionSuite, WideCharConversionMultiByteTesting);
@@ -312,7 +312,7 @@ CoreTools::Suite System::TestingHelper::GetStringConversionSuite()
 
 CoreTools::Suite System::TestingHelper::GetFormatStringSuite()
 {
-    auto formatStringSuite = GenerateSuite("¸ñÊ½»¯ÏûÏ¢");
+    auto formatStringSuite = GenerateSuite("æ ¼å¼åŒ–æ¶ˆæ¯");
 
     ADD_TEST(formatStringSuite, VsnPrintFTesting);
     ADD_TEST(formatStringSuite, StringCatTesting);
@@ -327,7 +327,7 @@ CoreTools::Suite System::TestingHelper::GetFormatStringSuite()
 
 void System::TestingHelper::AddConsoleSuite()
 {
-    auto consoleSuite = GenerateSuite("¿ØÖÆÌ¨");
+    auto consoleSuite = GenerateSuite("æ§åˆ¶å°");
 
     ADD_TEST(consoleSuite, ConsoleHandleTesting);
     consoleSuite.AddSuite(GetConsoleColourSuite());
@@ -342,7 +342,7 @@ void System::TestingHelper::AddConsoleSuite()
 
 CoreTools::Suite System::TestingHelper::GetConsoleColourSuite()
 {
-    auto consoleColourSuite = GenerateSuite("¿ØÖÆÌ¨ÑÕÉ«");
+    auto consoleColourSuite = GenerateSuite("æ§åˆ¶å°é¢œè‰²");
 
     ADD_TEST(consoleColourSuite, TextColourTesting);
     ADD_TEST(consoleColourSuite, BackgroundColourTesting);
@@ -357,7 +357,7 @@ CoreTools::Suite System::TestingHelper::GetConsoleColourSuite()
 
 CoreTools::Suite System::TestingHelper::GetConsoleFontSuite()
 {
-    auto consoleFontSuite = GenerateSuite("¿ØÖÆÌ¨×ÖÌå");
+    auto consoleFontSuite = GenerateSuite("æ§åˆ¶å°å­—ä½“");
 
     ADD_TEST(consoleFontSuite, ConsoleFontSizeTesting);
     ADD_TEST(consoleFontSuite, CurrentConsoleFontTesting);
@@ -368,7 +368,7 @@ CoreTools::Suite System::TestingHelper::GetConsoleFontSuite()
 
 CoreTools::Suite System::TestingHelper::GetConsoleModeSuite()
 {
-    auto consoleModeSuite = GenerateSuite("¿ØÖÆÌ¨Ä£Ê½");
+    auto consoleModeSuite = GenerateSuite("æ§åˆ¶å°æ¨¡å¼");
 
     ADD_TEST(consoleModeSuite, ConsoleInputModeTesting);
     ADD_TEST(consoleModeSuite, ConsoleOutputModeTesting);
@@ -378,7 +378,7 @@ CoreTools::Suite System::TestingHelper::GetConsoleModeSuite()
 
 CoreTools::Suite System::TestingHelper::GetConsoleScreenBufferSuite()
 {
-    auto consoleScreenBufferSuite = GenerateSuite("¿ØÖÆÌ¨»º³åÇø");
+    auto consoleScreenBufferSuite = GenerateSuite("æ§åˆ¶å°ç¼“å†²åŒº");
 
     ADD_TEST(consoleScreenBufferSuite, CreateSystemConsoleScreenBufferTesting);
     ADD_TEST(consoleScreenBufferSuite, ConsoleScreenBufferInfoTesting);
@@ -390,7 +390,7 @@ CoreTools::Suite System::TestingHelper::GetConsoleScreenBufferSuite()
 
 void System::TestingHelper::AddMemoryToolsSuite()
 {
-    auto memoryToolsSuite = GenerateSuite("ÄÚ´æ¹¤¾ß¿â");
+    auto memoryToolsSuite = GenerateSuite("å†…å­˜å·¥å…·åº“");
 
     memoryToolsSuite.AddSuite(GetHeapToolsSuite());
     memoryToolsSuite.AddSuite(GetVirtualToolsSuite());
@@ -403,7 +403,7 @@ void System::TestingHelper::AddMemoryToolsSuite()
 
 CoreTools::Suite System::TestingHelper::GetHeapToolsSuite()
 {
-    auto heapToolsSuite = GenerateSuite("¶Ñ¹¤¾ß¿â");
+    auto heapToolsSuite = GenerateSuite("å †å·¥å…·åº“");
 
     ADD_TEST(heapToolsSuite, CreateHeapTesting);
     ADD_TEST(heapToolsSuite, AllocateHeapTesting);
@@ -417,7 +417,7 @@ CoreTools::Suite System::TestingHelper::GetHeapToolsSuite()
 
 CoreTools::Suite System::TestingHelper::GetVirtualToolsSuite()
 {
-    auto virtualToolsSuite = GenerateSuite("ĞéÄâÄÚ´æ¹¤¾ß¿â");
+    auto virtualToolsSuite = GenerateSuite("è™šæ‹Ÿå†…å­˜å·¥å…·åº“");
 
     ADD_TEST(virtualToolsSuite, AllocateVirtualOneStepTesting);
     ADD_TEST(virtualToolsSuite, AllocateVirtualSeparationTesting);
@@ -429,7 +429,7 @@ CoreTools::Suite System::TestingHelper::GetVirtualToolsSuite()
 
 CoreTools::Suite System::TestingHelper::GetViewOfFileSuite()
 {
-    auto viewOfFileSuite = GenerateSuite("ÎÄ¼şÓ³Éä¿â");
+    auto viewOfFileSuite = GenerateSuite("æ–‡ä»¶æ˜ å°„åº“");
 
     ADD_TEST(viewOfFileSuite, CreateFileMappingTesting);
     ADD_TEST(viewOfFileSuite, OpenFileMappingTesting);
@@ -440,7 +440,7 @@ CoreTools::Suite System::TestingHelper::GetViewOfFileSuite()
 
 CoreTools::Suite System::TestingHelper::GetMemoryHelperSuite()
 {
-    auto memoryHelperSuite = GenerateSuite("ÄÚ´æ°ïÖú¿â");
+    auto memoryHelperSuite = GenerateSuite("å†…å­˜å¸®åŠ©åº“");
 
     ADD_TEST(memoryHelperSuite, MemorySetTesting);
     ADD_TEST(memoryHelperSuite, MemoryCopyTesting);
@@ -453,7 +453,7 @@ CoreTools::Suite System::TestingHelper::GetMemoryHelperSuite()
 
 CoreTools::Suite System::TestingHelper::GetLocalToolsSuite()
 {
-    auto localToolsSuite = GenerateSuite("¾Ö²¿ÄÚ´æ¿â");
+    auto localToolsSuite = GenerateSuite("å±€éƒ¨å†…å­˜åº“");
 
     ADD_TEST(localToolsSuite, LocalMemoryAllocTesting);
     ADD_TEST(localToolsSuite, LocalMemorySizeTesting);
@@ -463,7 +463,7 @@ CoreTools::Suite System::TestingHelper::GetLocalToolsSuite()
 
 void System::TestingHelper::AddThreadingSuite()
 {
-    auto threadingSuite = GenerateSuite("Ïß³Ì¿â");
+    auto threadingSuite = GenerateSuite("çº¿ç¨‹åº“");
 
     threadingSuite.AddSuite(GetCriticalSectionSuite());
     threadingSuite.AddSuite(GetSemaphoreSuite());
@@ -486,7 +486,7 @@ void System::TestingHelper::AddThreadingSuite()
 
 CoreTools::Suite System::TestingHelper::GetCriticalSectionSuite()
 {
-    auto criticalSectionSuite = GenerateSuite("ÁÙ½çÇø");
+    auto criticalSectionSuite = GenerateSuite("ä¸´ç•ŒåŒº");
 
     ADD_TEST(criticalSectionSuite, CriticalSectionTesting);
     ADD_TEST(criticalSectionSuite, CriticalSectionThreadTesting);
@@ -498,7 +498,7 @@ CoreTools::Suite System::TestingHelper::GetCriticalSectionSuite()
 
 CoreTools::Suite System::TestingHelper::GetSemaphoreSuite()
 {
-    auto semaphoreSuite = GenerateSuite("ĞÅºÅÁ¿");
+    auto semaphoreSuite = GenerateSuite("ä¿¡å·é‡");
 
     ADD_TEST(semaphoreSuite, CreateSemaphoreThreadTesting);
     ADD_TEST(semaphoreSuite, CreateSemaphoreThreadUseNameTesting);
@@ -512,7 +512,7 @@ CoreTools::Suite System::TestingHelper::GetSemaphoreSuite()
 
 CoreTools::Suite System::TestingHelper::GetEventSuite()
 {
-    auto eventSuite = GenerateSuite("ÊÂ¼ş¶ÔÏó");
+    auto eventSuite = GenerateSuite("äº‹ä»¶å¯¹è±¡");
 
     ADD_TEST(eventSuite, CreateEventTesting);
     ADD_TEST(eventSuite, CreateEventUseNameTesting);
@@ -528,7 +528,7 @@ CoreTools::Suite System::TestingHelper::GetEventSuite()
 
 CoreTools::Suite System::TestingHelper::GetMutexSuite()
 {
-    auto mutexSuite = GenerateSuite("»¥³âËø");
+    auto mutexSuite = GenerateSuite("äº’æ–¥é”");
 
     ADD_TEST(mutexSuite, CreateDefaultMutexTesting);
     ADD_TEST(mutexSuite, CreateMutexTesting);
@@ -545,7 +545,7 @@ CoreTools::Suite System::TestingHelper::GetMutexSuite()
 
 CoreTools::Suite System::TestingHelper::GetSlimReaderWriterSuite()
 {
-    auto slimReaderWriterSuite = GenerateSuite("¶ÁĞ´Ëø");
+    auto slimReaderWriterSuite = GenerateSuite("è¯»å†™é”");
 
     ADD_TEST(slimReaderWriterSuite, SlimReaderWriterInitializeTesting);
     ADD_TEST(slimReaderWriterSuite, SlimReaderWriterReaderTesting);
@@ -556,7 +556,7 @@ CoreTools::Suite System::TestingHelper::GetSlimReaderWriterSuite()
 
 CoreTools::Suite System::TestingHelper::GetConditionVariableSuite()
 {
-    auto conditionVariableSuite = GenerateSuite("Ìõ¼ş±äÁ¿");
+    auto conditionVariableSuite = GenerateSuite("æ¡ä»¶å˜é‡");
 
     ADD_TEST(conditionVariableSuite, ConditionVariableSlimReaderWriterLockTesting);
     ADD_TEST(conditionVariableSuite, ConditionVariableCriticalSectionTesting);
@@ -566,7 +566,7 @@ CoreTools::Suite System::TestingHelper::GetConditionVariableSuite()
 
 CoreTools::Suite System::TestingHelper::GetInitOnceSuite()
 {
-    auto initOnceSuite = GenerateSuite("Ò»´Î¶ÔÏó");
+    auto initOnceSuite = GenerateSuite("ä¸€æ¬¡å¯¹è±¡");
 
     ADD_TEST(initOnceSuite, InitOnceSynchronousTesting);
     ADD_TEST(initOnceSuite, InitOnceAsynchronousTesting);
@@ -576,7 +576,7 @@ CoreTools::Suite System::TestingHelper::GetInitOnceSuite()
 
 CoreTools::Suite System::TestingHelper::GetWaitableTimerSuite()
 {
-    auto waitableTimerSuite = GenerateSuite("¶¨Ê±Æ÷");
+    auto waitableTimerSuite = GenerateSuite("å®šæ—¶å™¨");
 
     ADD_TEST(waitableTimerSuite, CreateWaitableTimerManualTesting);
     ADD_TEST(waitableTimerSuite, CreateWaitableTimerSynchronizationTesting);
@@ -594,7 +594,7 @@ CoreTools::Suite System::TestingHelper::GetWaitableTimerSuite()
 
 CoreTools::Suite System::TestingHelper::GetSyncToolsSuite()
 {
-    auto syncToolsSuite = GenerateSuite("Í¬²½¹¤¾ß");
+    auto syncToolsSuite = GenerateSuite("åŒæ­¥å·¥å…·");
 
     ADD_TEST(syncToolsSuite, SleepTesting);
     ADD_TEST(syncToolsSuite, SignalObjectAndWaitTesting);
@@ -604,7 +604,7 @@ CoreTools::Suite System::TestingHelper::GetSyncToolsSuite()
 
 CoreTools::Suite System::TestingHelper::GetInterlockedSuite()
 {
-    auto interlockedSuite = GenerateSuite("Ô­×Ó²Ù×÷");
+    auto interlockedSuite = GenerateSuite("åŸå­æ“ä½œ");
 
     ADD_TEST(interlockedSuite, InterlockedTesting);
     ADD_TEST(interlockedSuite, InterlockedSubtractTesting);
@@ -615,7 +615,7 @@ CoreTools::Suite System::TestingHelper::GetInterlockedSuite()
 
 CoreTools::Suite System::TestingHelper::GetThreadSuite()
 {
-    auto threadSuite = GenerateSuite("Ïß³Ì");
+    auto threadSuite = GenerateSuite("çº¿ç¨‹");
 
     ADD_TEST(threadSuite, CreateDefaultThreadTesting);
     ADD_TEST(threadSuite, CreateSuspendedThreadTesting);
@@ -630,7 +630,7 @@ CoreTools::Suite System::TestingHelper::GetThreadSuite()
 
 CoreTools::Suite System::TestingHelper::GetThreadToolsSuite()
 {
-    auto threadToolsSuite = GenerateSuite("Ïß³Ì¹¤¾ß");
+    auto threadToolsSuite = GenerateSuite("çº¿ç¨‹å·¥å…·");
 
     ADD_TEST(threadToolsSuite, OpenThreadTesting);
     ADD_TEST(threadToolsSuite, PriorityBoostTesting);
@@ -642,7 +642,7 @@ CoreTools::Suite System::TestingHelper::GetThreadToolsSuite()
 
 CoreTools::Suite System::TestingHelper::GetProcessSuite()
 {
-    auto processSuite = GenerateSuite("½ø³Ì");
+    auto processSuite = GenerateSuite("è¿›ç¨‹");
 
     ADD_TEST(processSuite, CreateDefaultProcessTesting);
     ADD_TEST(processSuite, CreateProcessTesting);
@@ -656,7 +656,7 @@ CoreTools::Suite System::TestingHelper::GetProcessSuite()
 
 CoreTools::Suite System::TestingHelper::GetProcessToolsSuite()
 {
-    auto processToolsSuite = GenerateSuite("½ø³Ì¹¤¾ß");
+    auto processToolsSuite = GenerateSuite("è¿›ç¨‹å·¥å…·");
 
     ADD_TEST(processToolsSuite, ProcessTokenTesting);
 
@@ -665,7 +665,7 @@ CoreTools::Suite System::TestingHelper::GetProcessToolsSuite()
 
 void System::TestingHelper::AddTimeSuite()
 {
-    auto timeSuite = GenerateSuite("Ê±¼ä");
+    auto timeSuite = GenerateSuite("æ—¶é—´");
 
     ADD_TEST(timeSuite, CurrentDeltaTimeTesting);
     ADD_TEST(timeSuite, DeltaTimeValueDataTesting);
@@ -677,7 +677,7 @@ void System::TestingHelper::AddTimeSuite()
 
 void System::TestingHelper::AddFileManagerSuite()
 {
-    auto fileManagerSuite = GenerateSuite("ÎÄ¼ş¹ÜÀí¿â");
+    auto fileManagerSuite = GenerateSuite("æ–‡ä»¶ç®¡ç†åº“");
 
     fileManagerSuite.AddSuite(GetCFileSuite());
     fileManagerSuite.AddSuite(GetFileSuite());
@@ -690,7 +690,7 @@ void System::TestingHelper::AddFileManagerSuite()
 
 CoreTools::Suite System::TestingHelper::GetCFileSuite()
 {
-    auto cFileSuite = GenerateSuite("Cº¯ÊıÎÄ¼ş");
+    auto cFileSuite = GenerateSuite("Cå‡½æ•°æ–‡ä»¶");
 
     ADD_TEST(cFileSuite, CFileOpenTesting);
     ADD_TEST(cFileSuite, CFileWriteReadTesting);
@@ -703,7 +703,7 @@ CoreTools::Suite System::TestingHelper::GetCFileSuite()
 
 CoreTools::Suite System::TestingHelper::GetFileSuite()
 {
-    auto fileSuite = GenerateSuite("ÎÄ¼ş");
+    auto fileSuite = GenerateSuite("æ–‡ä»¶");
 
     ADD_TEST(fileSuite, CreateExistingFileTesting);
     ADD_TEST(fileSuite, CreateFileWithDefaultAttributesTesting);
@@ -729,7 +729,7 @@ CoreTools::Suite System::TestingHelper::GetFileSuite()
 
 CoreTools::Suite System::TestingHelper::GetFileToolsSuite()
 {
-    auto fileToolsSuite = GenerateSuite("ÎÄ¼ş¹¤¾ß");
+    auto fileToolsSuite = GenerateSuite("æ–‡ä»¶å·¥å…·");
 
     ADD_TEST(fileToolsSuite, CreateDirectoryTesting);
     ADD_TEST(fileToolsSuite, DiskFreeTesting);
@@ -739,7 +739,7 @@ CoreTools::Suite System::TestingHelper::GetFileToolsSuite()
 
 CoreTools::Suite System::TestingHelper::GetFileTimeSuite()
 {
-    auto fileTimeSuite = GenerateSuite("ÎÄ¼şÊ±¼ä");
+    auto fileTimeSuite = GenerateSuite("æ–‡ä»¶æ—¶é—´");
 
     ADD_TEST(fileTimeSuite, FileTimeCompareTesting);
     ADD_TEST(fileTimeSuite, FileTimeConvertTesting);
@@ -750,7 +750,7 @@ CoreTools::Suite System::TestingHelper::GetFileTimeSuite()
 
 void System::TestingHelper::AddSecuritySuite()
 {
-    auto securitySuite = GenerateSuite("°²È«ĞÔ");
+    auto securitySuite = GenerateSuite("å®‰å…¨æ€§");
 
     securitySuite.AddSuite(GetLookupPrivilegeSuite());
     securitySuite.AddSuite(GetCreateSecuritySuite());
@@ -767,7 +767,7 @@ void System::TestingHelper::AddSecuritySuite()
 
 CoreTools::Suite System::TestingHelper::GetLookupPrivilegeSuite()
 {
-    auto lookupPrivilegeSuite = GenerateSuite("²éÕÒÈ¨ÏŞ");
+    auto lookupPrivilegeSuite = GenerateSuite("æŸ¥æ‰¾æƒé™");
 
     ADD_TEST(lookupPrivilegeSuite, GetLookupPrivilegeDisplayNameTesting);
     ADD_TEST(lookupPrivilegeSuite, GetLookupPrivilegeNameTesting);
@@ -778,7 +778,7 @@ CoreTools::Suite System::TestingHelper::GetLookupPrivilegeSuite()
 
 CoreTools::Suite System::TestingHelper::GetCreateSecuritySuite()
 {
-    auto createSecuritySuite = GenerateSuite("´´½¨°²È«");
+    auto createSecuritySuite = GenerateSuite("åˆ›å»ºå®‰å…¨");
 
     ADD_TEST(createSecuritySuite, FileSecurityTesting);
     ADD_TEST(createSecuritySuite, KernelObjectSecurityTesting);
@@ -795,7 +795,7 @@ CoreTools::Suite System::TestingHelper::GetCreateSecuritySuite()
 
 CoreTools::Suite System::TestingHelper::GetSecuritySidSuite()
 {
-    auto securitySidSuite = GenerateSuite("°²È«ÏµÍ³Ê¶±ğÂë");
+    auto securitySidSuite = GenerateSuite("å®‰å…¨ç³»ç»Ÿè¯†åˆ«ç ");
 
     ADD_TEST(securitySidSuite, InitializeSecurityIdentifierTesting);
     ADD_TEST(securitySidSuite, AllocateAndInitializeSecurityIdentifierTesting);
@@ -808,7 +808,7 @@ CoreTools::Suite System::TestingHelper::GetSecuritySidSuite()
 
 CoreTools::Suite System::TestingHelper::GetSecurityAclSuite()
 {
-    auto securityAclSuite = GenerateSuite("·ÃÎÊ¿ØÖÆÁĞ±í");
+    auto securityAclSuite = GenerateSuite("è®¿é—®æ§åˆ¶åˆ—è¡¨");
 
     ADD_TEST(securityAclSuite, InitializeAclTesting);
     ADD_TEST(securityAclSuite, AclInformationTesting);
@@ -818,7 +818,7 @@ CoreTools::Suite System::TestingHelper::GetSecurityAclSuite()
 
 CoreTools::Suite System::TestingHelper::GetSecurityDescriptorSuite()
 {
-    auto securityDescriptorSuite = GenerateSuite("°²È«ÃèÊö·û");
+    auto securityDescriptorSuite = GenerateSuite("å®‰å…¨æè¿°ç¬¦");
 
     ADD_TEST(securityDescriptorSuite, UserObjectSecurityTesting);
     ADD_TEST(securityDescriptorSuite, InitializeSecurityDescriptorTesting);
@@ -834,7 +834,7 @@ CoreTools::Suite System::TestingHelper::GetSecurityDescriptorSuite()
 
 CoreTools::Suite System::TestingHelper::GetSecurityAceSuite()
 {
-    auto securityAceSuite = GenerateSuite("·ÃÎÊ¿ØÖÆÏî");
+    auto securityAceSuite = GenerateSuite("è®¿é—®æ§åˆ¶é¡¹");
 
     ADD_TEST(securityAceSuite, AddAccessControlEntriesTesting);
     ADD_TEST(securityAceSuite, FindFirstFreeAccessControlEntriesTesting);
@@ -845,7 +845,7 @@ CoreTools::Suite System::TestingHelper::GetSecurityAceSuite()
 
 CoreTools::Suite System::TestingHelper::GetAddAccessSuite()
 {
-    auto addAccessSuite = GenerateSuite("Ôö¼Ó·ÃÎÊ");
+    auto addAccessSuite = GenerateSuite("å¢åŠ è®¿é—®");
 
     ADD_TEST(addAccessSuite, AddAccessAllowedAceTesting);
     ADD_TEST(addAccessSuite, AddAccessAllowedAceUseAceFlagsTesting);
@@ -860,7 +860,7 @@ CoreTools::Suite System::TestingHelper::GetAddAccessSuite()
 
 CoreTools::Suite System::TestingHelper::GetSecurityBaseSuite()
 {
-    auto securityBaseSuite = GenerateSuite("°²È«»ù´¡");
+    auto securityBaseSuite = GenerateSuite("å®‰å…¨åŸºç¡€");
 
     ADD_TEST(securityBaseSuite, IsSystemTokenElevatedTesting);
     ADD_TEST(securityBaseSuite, TokenInformationTesting);
@@ -880,7 +880,7 @@ CoreTools::Suite System::TestingHelper::GetSecurityBaseSuite()
 
 CoreTools::Suite System::TestingHelper::GetAccessCheckSuite()
 {
-    auto accessCheckSuite = GenerateSuite("·ÃÎÊ¼ì²é");
+    auto accessCheckSuite = GenerateSuite("è®¿é—®æ£€æŸ¥");
 
     ADD_TEST(accessCheckSuite, MapGenericMaskTesting);
     ADD_TEST(accessCheckSuite, EnlistmentMapGenericMaskTesting);
@@ -897,7 +897,7 @@ CoreTools::Suite System::TestingHelper::GetAccessCheckSuite()
 
 void System::TestingHelper::AddNetworkSuite()
 {
-    auto networkSuite = GenerateSuite("ÍøÂç");
+    auto networkSuite = GenerateSuite("ç½‘ç»œ");
 
     networkSuite.AddSuite(GetSocketPrototypesSuite());
     networkSuite.AddSuite(GetDatabasePrototypesSuite());
@@ -909,7 +909,7 @@ void System::TestingHelper::AddNetworkSuite()
 
 CoreTools::Suite System::TestingHelper::GetSocketPrototypesSuite()
 {
-    auto socketPrototypesSuite = GenerateSuite("Ì×½Ó×ÖÔ­ĞÍ");
+    auto socketPrototypesSuite = GenerateSuite("å¥—æ¥å­—åŸå‹");
 
     ADD_TEST(socketPrototypesSuite, GetSocketTesting);
     ADD_TEST(socketPrototypesSuite, HostNetConversionTesting);
@@ -928,7 +928,7 @@ CoreTools::Suite System::TestingHelper::GetSocketPrototypesSuite()
 
 CoreTools::Suite System::TestingHelper::GetDatabasePrototypesSuite()
 {
-    auto databasePrototypesSuite = GenerateSuite("Êı¾İÔ­ĞÍ");
+    auto databasePrototypesSuite = GenerateSuite("æ•°æ®åŸå‹");
 
     ADD_TEST(databasePrototypesSuite, WinSockHostTesting);
     ADD_TEST(databasePrototypesSuite, WinSockServerEntTesting);
@@ -939,7 +939,7 @@ CoreTools::Suite System::TestingHelper::GetDatabasePrototypesSuite()
 
 CoreTools::Suite System::TestingHelper::GetWindowsSockExSuite()
 {
-    auto windowsSockExSuite = GenerateSuite("WindowsÌ×½Ó×ÖÀ©Õ¹");
+    auto windowsSockExSuite = GenerateSuite("Windowså¥—æ¥å­—æ‰©å±•");
 
     ADD_TEST(windowsSockExSuite, GetWinSocketTesting);
     ADD_TEST(windowsSockExSuite, WinSocketAcceptTesting);
@@ -1008,7 +1008,7 @@ void System::TestingHelper::AddWindowsSuite()
 
 CoreTools::Suite System::TestingHelper::GetWindowsCreateSuite()
 {
-    auto windowsCreateSuite = GenerateSuite("Windows´´½¨");
+    auto windowsCreateSuite = GenerateSuite("Windowsåˆ›å»º");
 
     ADD_TEST(windowsCreateSuite, WindowsCreateLParamTesting);
     ADD_TEST(windowsCreateSuite, WindowsCreateWParamTesting);
@@ -1018,7 +1018,7 @@ CoreTools::Suite System::TestingHelper::GetWindowsCreateSuite()
 
 CoreTools::Suite System::TestingHelper::GetEngineeringSuite()
 {
-    auto engineeringSuite = GenerateSuite("WindowsÒıÇæ");
+    auto engineeringSuite = GenerateSuite("Windowså¼•æ“");
 
     ADD_TEST(engineeringSuite, EngineeringNumDigitsTesting);
     ADD_TEST(engineeringSuite, EngineeringOffsetTesting);
@@ -1031,7 +1031,7 @@ CoreTools::Suite System::TestingHelper::GetEngineeringSuite()
 
 CoreTools::Suite System::TestingHelper::GetWindowsSystemSuite()
 {
-    auto windowsSystemSuite = GenerateSuite("WindowsÏµÍ³");
+    auto windowsSystemSuite = GenerateSuite("Windowsç³»ç»Ÿ");
 
     ADD_TEST(windowsSystemSuite, GetSystemInfoTesting);
     ADD_TEST(windowsSystemSuite, DebugBreakTesting);
@@ -1065,7 +1065,7 @@ void System::TestingHelper::AddMacintoshSuite()
 
 void System::TestingHelper::AddAndroidSuite()
 {
-    auto androidSuite = GenerateSuite("°²×¿");
+    auto androidSuite = GenerateSuite("å®‰å“");
 
     ADD_TEST(androidSuite, AndroidInputEventFacadeTesting);
     ADD_TEST(androidSuite, AndroidInputMotionEventFacadeTesting);

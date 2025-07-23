@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	�汾��0.9.1.6 (2023/10/28 15:05)
+///	标准：std:c++20
+///	版本：0.9.1.6 (2023/10/28 15:05)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_HALFSPACE3_SEGMENT3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_HALFSPACE3_SEGMENT3_H
@@ -16,8 +16,8 @@
 #include "Mathematics/Objects3D/Plane3.h"
 #include "Mathematics/Objects3D/Segment3.h"
 
-/// ��ռ���ƽ�淨��ָ���ƽ������ϵĵ㼯�� ����Ĳ�ѯ�����߶κͰ�ǵĽ�����
-/// �ڶ�̬���Ҳ�ѯ�У�����߶��Ѿ����ռ��ཻ���򷵻�ֵΪ'false'�� ����뷨��Ѱ�ҵ�һ�νӴ���
+/// 半空间是平面法线指向的平面侧面上的点集。 这里的查询用于线段和半角的交集。
+/// 在动态查找查询中，如果线段已经与半空间相交，则返回值为'false'。 这个想法是寻找第一次接触。
 
 namespace Mathematics
 {
@@ -42,7 +42,7 @@ namespace Mathematics
         NODISCARD Plane3Type GetHalfspace() const noexcept;
         NODISCARD Segment3Type GetSegment() const noexcept;
 
-        // �ཻ��Ϊ�գ�����߶Ρ� ����GetQuantity()����0��1��2��
+        // 相交集为空，点或线段。 函数GetQuantity()返回0、1或2。
         NODISCARD int GetQuantity() const noexcept;
         NODISCARD Vector3Type GetPoint(int index) const;
 

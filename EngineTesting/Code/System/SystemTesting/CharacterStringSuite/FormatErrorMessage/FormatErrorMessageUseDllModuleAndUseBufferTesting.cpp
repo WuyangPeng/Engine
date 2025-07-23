@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/11 14:15)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/11 14:15)
 
 #include "FormatErrorMessageUseDllModuleAndUseBufferTesting.h"
 #include "System/CharacterString/FormatErrorMessage.h"
@@ -39,7 +39,7 @@ void System::FormatErrorMessageUseDllModuleAndUseBufferTesting::MainTest()
 
 void System::FormatErrorMessageUseDllModuleAndUseBufferTesting::FormatErrorMessageUseDllModuleAndUseBufferTest(ConstDynamicLinkModule dynamicLinkModule)
 {
-    /// ÕâÀïÖ»²âÊÔµ½DlpPolicySilentlyFail£¬Ö®ºóµÄWindow´íÎóÂëÃ¶¾Ù²¢Î´ÍêÈ«²¹È«£¬²âÊÔ½«Ê§°Ü¡£
+    /// è¿™é‡Œåªæµ‹è¯•åˆ°DlpPolicySilentlyFailï¼Œä¹‹åçš„Windowé”™è¯¯ç æšä¸¾å¹¶æœªå®Œå…¨è¡¥å…¨ï¼Œæµ‹è¯•å°†å¤±è´¥ã€‚
     for (auto flag = WindowError::Success; flag <= WindowError::DlpPolicySilentlyFail; ++flag)
     {
         ASSERT_NOT_THROW_EXCEPTION_2(FormatErrorMessageTest, dynamicLinkModule, flag);

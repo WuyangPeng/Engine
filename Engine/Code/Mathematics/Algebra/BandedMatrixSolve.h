@@ -1,15 +1,15 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.5 (2024/02/18 13:34)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.5 (2024/02/18 13:34)
 
-/// ËùÎ½µÄ´ø×´¾ØÕó¼´£ºÔÚ¾ØÕóAÖĞ£¬
-/// ËùÓĞµÄ·ÇÁãÔªËØ¶¼¼¯ÖĞÔÚÒÔÖ÷¶Ô½ÇÏßÎªÖĞĞÄµÄ´ø×´ÇøÓòÖĞ¡£
-/// Èç a11 a12 0   0   0   0
+/// æ‰€è°“çš„å¸¦çŠ¶çŸ©é˜µå³ï¼šåœ¨çŸ©é˜µAä¸­ï¼Œ
+/// æ‰€æœ‰çš„éé›¶å…ƒç´ éƒ½é›†ä¸­åœ¨ä»¥ä¸»å¯¹è§’çº¿ä¸ºä¸­å¿ƒçš„å¸¦çŠ¶åŒºåŸŸä¸­ã€‚
+/// å¦‚ a11 a12 0   0   0   0
 ///    a21 a22 a23 0   0   0
 ///    a31 a32 a33 a34 0   0
 ///    0   a42 a43 a44 a45 0
@@ -52,7 +52,7 @@ namespace Mathematics
 
 #endif  // OPEN_CLASS_INVARIANT
 
-        /// ³ÉÔ±·ÃÎÊ
+        /// æˆå‘˜è®¿é—®
         NODISCARD int GetSize() const;
         NODISCARD int GetLowerBandsNumber() const;
         NODISCARD int GetUpperBandsNumber() const;
@@ -60,20 +60,20 @@ namespace Mathematics
         NODISCARD BandedMatrixSolveFlags GetSolve() const noexcept;
         NODISCARD Real GetEpsilon() const noexcept;
 
-        /// ÖØÉè´óĞ¡»áÇå¿ÕÔ­ÓĞÊı¾İ¡£
+        /// é‡è®¾å¤§å°ä¼šæ¸…ç©ºåŸæœ‰æ•°æ®ã€‚
         void ResetSize(int size, int lowerBandsNumber, int upperBandsNumber, Real aEpsilon = MathType::GetZeroTolerance());
 
-        /// ¶Ô½ÇÏß
+        /// å¯¹è§’çº¿
         NODISCARD ContainerType GetDiagonalBand() const;
         void SetDiagonalBand(const ContainerType& diagonalBand);
 
-        /// ÏÂÈı½Ç
+        /// ä¸‹ä¸‰è§’
         /// GetLowerBand(index):  0 <= index < LowerBandMax
         NODISCARD int GetLowerBandMax(int index) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
         NODISCARD ContainerType GetLowerBand(int index) const;
         void SetLowerBand(int index, const ContainerType& lowerBand);
 
-        /// ÉÏÈı½Ç
+        /// ä¸Šä¸‰è§’
         /// GetUpperBand(index):  0 <= index < UpperBandMax
         NODISCARD int GetUpperBandMax(int index) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
         NODISCARD ContainerType GetUpperBand(int index) const;
@@ -82,28 +82,28 @@ namespace Mathematics
         NODISCARD Real& operator()(int row, int column);
         NODISCARD const Real& operator()(int row, int column) const;
 
-        // ±ãÀûº¯ÊıÓÃÓÚ³õÊ¼»¯¾ØÕó
+        // ä¾¿åˆ©å‡½æ•°ç”¨äºåˆå§‹åŒ–çŸ©é˜µ
         void SetZero();
         void SetIdentity();
 
-        /// ·½´ø×´¾ØÕóµÄÏµÊıAÎªA = L * L^T£¬ÆäÖĞLÊÇÏÂÈı½Ç¾ØÕó£¨L^TÊÇÒ»¸öÉÏÈı½Ç¾ØÕó£©¡£
-        /// ÕâÊÇÒ»¸öLU·Ö½â£¬ÔÊĞíAµÄÎÈ¶¨µÄÄæÀ´½â¾öA * X = B¡£
-        /// µ±Òò×Ó·Ö½âÊÇÊ§°ÜÊ±£¬·µ»Øfalse¡££¨LÊÇ²»¿ÉÄæµÄ£©¡£
-        /// Èç¹û³É¹¦£¬°üÀ¨Cholesky·Ö½â¡££¨LÔÚAµÄÏÂÈı½Ç²¿·ÖºÍL^ TÔÚAµÄÉÏÈı½Ç²¿·Ö£©
+        /// æ–¹å¸¦çŠ¶çŸ©é˜µçš„ç³»æ•°Aä¸ºA = L * L^Tï¼Œå…¶ä¸­Læ˜¯ä¸‹ä¸‰è§’çŸ©é˜µï¼ˆL^Tæ˜¯ä¸€ä¸ªä¸Šä¸‰è§’çŸ©é˜µï¼‰ã€‚
+        /// è¿™æ˜¯ä¸€ä¸ªLUåˆ†è§£ï¼Œå…è®¸Açš„ç¨³å®šçš„é€†æ¥è§£å†³A * X = Bã€‚
+        /// å½“å› å­åˆ†è§£æ˜¯å¤±è´¥æ—¶ï¼Œè¿”å›falseã€‚ï¼ˆLæ˜¯ä¸å¯é€†çš„ï¼‰ã€‚
+        /// å¦‚æœæˆåŠŸï¼ŒåŒ…æ‹¬Choleskyåˆ†è§£ã€‚ï¼ˆLåœ¨Açš„ä¸‹ä¸‰è§’éƒ¨åˆ†å’ŒL^ Tåœ¨Açš„ä¸Šä¸‰è§’éƒ¨åˆ†ï¼‰
         NODISCARD bool CholeskyFactor();
 
-        /// Çó½âÏßĞÔÏµÍ³A * X = B£¬ÆäÖĞAÊÇÒ»¸öNxNµÄ´ø×´¾ØÕó£¬BÊÇÒ»¸öNx1µÄÊ¸Á¿¡£Î´ÖªµÄXÊÇÒ²ÊÇNx1¡£
-        /// º¯ÊıµÄÊäÈëvectorÊÇB£¬X±»¼ÆËã²¢±»·µ»Ø¡£
-        /// µ±ÇÒ½öµ±ÓĞÒ»¸ö½â¾ö·½°¸Ê±£¬·µ»ØÖµÊÇÓĞĞ§µÄ£¬·ñÔò»áÅ×³öÒì³£¡£
-        /// Èç¹û³É¹¦£¬°üÀ¨Cholesky·Ö½â¡££¨LÔÚAµÄÏÂÈı½Ç²¿·ÖºÍL^ TÔÚAµÄÉÏÈı½Ç²¿·Ö£©
+        /// æ±‚è§£çº¿æ€§ç³»ç»ŸA * X = Bï¼Œå…¶ä¸­Aæ˜¯ä¸€ä¸ªNxNçš„å¸¦çŠ¶çŸ©é˜µï¼ŒBæ˜¯ä¸€ä¸ªNx1çš„çŸ¢é‡ã€‚æœªçŸ¥çš„Xæ˜¯ä¹Ÿæ˜¯Nx1ã€‚
+        /// å‡½æ•°çš„è¾“å…¥vectoræ˜¯Bï¼ŒXè¢«è®¡ç®—å¹¶è¢«è¿”å›ã€‚
+        /// å½“ä¸”ä»…å½“æœ‰ä¸€ä¸ªè§£å†³æ–¹æ¡ˆæ—¶ï¼Œè¿”å›å€¼æ˜¯æœ‰æ•ˆçš„ï¼Œå¦åˆ™ä¼šæŠ›å‡ºå¼‚å¸¸ã€‚
+        /// å¦‚æœæˆåŠŸï¼ŒåŒ…æ‹¬Choleskyåˆ†è§£ã€‚ï¼ˆLåœ¨Açš„ä¸‹ä¸‰è§’éƒ¨åˆ†å’ŒL^ Tåœ¨Açš„ä¸Šä¸‰è§’éƒ¨åˆ†ï¼‰
         NODISCARD VariableLengthVectorType SolveSystem(const VariableLengthVectorType& vector);
 
-        /// Çó½âÏßĞÔÏµÍ³A * X= B£¬ÆäÖĞAÊÇÒ»¸öNxNµÄ´ø×´¾ØÕó£¬BÊÇÒ»¸öNxMµÄ¾ØÕó¡£Î´ÖªµÄXÊÇÒ²ÊÇNxM¡£
-        /// º¯ÊıµÄÊäÈëmatrixÊÇB£¬X±»¼ÆËã²¢±»·µ»Ø¡£
-        /// µ±ÇÒ½öµ±ÓĞÒ»¸ö½â¾ö·½°¸Ê±£¬·µ»ØÖµÊÇÓĞĞ§µÄ£¬·ñÔò»áÅ×³öÒì³£¡£
-        /// Èç¹û³É¹¦£¬°üÀ¨Cholesky·Ö½â¡££¨LÔÚAµÄÏÂÈı½Ç²¿·ÖºÍL^ TÔÚAµÄÉÏÈı½Ç²¿·Ö£©
+        /// æ±‚è§£çº¿æ€§ç³»ç»ŸA * X= Bï¼Œå…¶ä¸­Aæ˜¯ä¸€ä¸ªNxNçš„å¸¦çŠ¶çŸ©é˜µï¼ŒBæ˜¯ä¸€ä¸ªNxMçš„çŸ©é˜µã€‚æœªçŸ¥çš„Xæ˜¯ä¹Ÿæ˜¯NxMã€‚
+        /// å‡½æ•°çš„è¾“å…¥matrixæ˜¯Bï¼ŒXè¢«è®¡ç®—å¹¶è¢«è¿”å›ã€‚
+        /// å½“ä¸”ä»…å½“æœ‰ä¸€ä¸ªè§£å†³æ–¹æ¡ˆæ—¶ï¼Œè¿”å›å€¼æ˜¯æœ‰æ•ˆçš„ï¼Œå¦åˆ™ä¼šæŠ›å‡ºå¼‚å¸¸ã€‚
+        /// å¦‚æœæˆåŠŸï¼ŒåŒ…æ‹¬Choleskyåˆ†è§£ã€‚ï¼ˆLåœ¨Açš„ä¸‹ä¸‰è§’éƒ¨åˆ†å’ŒL^ Tåœ¨Açš„ä¸Šä¸‰è§’éƒ¨åˆ†ï¼‰
         ///
-        /// RowMajor±ØĞë¾ßÓĞÓÉÄ£°å²ÎÊıÖ¸¶¨µÄ´æ´¢Ë³Ğò¡£
+        /// RowMajorå¿…é¡»å…·æœ‰ç”±æ¨¡æ¿å‚æ•°æŒ‡å®šçš„å­˜å‚¨é¡ºåºã€‚
         template <bool RowMajor = true>
         NODISCARD VariableMatrixType SolveSystem(const VariableMatrixType& matrix);
 
@@ -111,21 +111,21 @@ namespace Mathematics
         NODISCARD VariableMatrixType ToCholeskyVariableMatrix() const;
 
     private:
-        /// ÏßĞÔÏµÍ³ÎªL * U * X = B£¬ÆäÖĞA = L * UºÍU = L^T£¬
-        /// ¼õÉÙµ½U * X = L^{-1} * B¡£·µ»ØÖµÓĞĞ§µ±ÇÒ½öµ±²Ù×÷³É¹¦¡£
+        /// çº¿æ€§ç³»ç»Ÿä¸ºL * U * X = Bï¼Œå…¶ä¸­A = L * Uå’ŒU = L^Tï¼Œ
+        /// å‡å°‘åˆ°U * X = L^{-1} * Bã€‚è¿”å›å€¼æœ‰æ•ˆå½“ä¸”ä»…å½“æ“ä½œæˆåŠŸã€‚
         NODISCARD VariableLengthVectorType SolveLower(const VariableLengthVectorType& vector) const;
 
-        /// ÏßĞÔÏµÍ³ÎªU * X = L^{-1} * B£¬¼õÉÙµ½ X = U^{-1} * L^{-1} * B¡£
-        /// ·µ»ØÖµÓĞĞ§µ±ÇÒ½öµ±²Ù×÷³É¹¦¡£
+        /// çº¿æ€§ç³»ç»Ÿä¸ºU * X = L^{-1} * Bï¼Œå‡å°‘åˆ° X = U^{-1} * L^{-1} * Bã€‚
+        /// è¿”å›å€¼æœ‰æ•ˆå½“ä¸”ä»…å½“æ“ä½œæˆåŠŸã€‚
         NODISCARD VariableLengthVectorType SolveUpper(const VariableLengthVectorType& vector) const;
 
-        /// ÏßĞÔÏµÍ³ÎªL * U * X = B£¬ÆäÖĞA = L * UºÍU = L^T£¬
-        /// ¼õÉÙµ½U * X = L^{-1} * B¡£·µ»ØÖµÓĞĞ§µ±ÇÒ½öµ±²Ù×÷³É¹¦¡£
+        /// çº¿æ€§ç³»ç»Ÿä¸ºL * U * X = Bï¼Œå…¶ä¸­A = L * Uå’ŒU = L^Tï¼Œ
+        /// å‡å°‘åˆ°U * X = L^{-1} * Bã€‚è¿”å›å€¼æœ‰æ•ˆå½“ä¸”ä»…å½“æ“ä½œæˆåŠŸã€‚
         template <bool RowMajor>
         NODISCARD VariableMatrixType SolveLower(const VariableMatrixType& matrix) const;
 
-        /// ÏßĞÔÏµÍ³ÎªU * X = L^{-1} * B£¬¼õÉÙµ½ X = U^{-1} * L^{-1} * B¡£
-        /// ·µ»ØÖµÓĞĞ§µ±ÇÒ½öµ±²Ù×÷³É¹¦¡£
+        /// çº¿æ€§ç³»ç»Ÿä¸ºU * X = L^{-1} * Bï¼Œå‡å°‘åˆ° X = U^{-1} * L^{-1} * Bã€‚
+        /// è¿”å›å€¼æœ‰æ•ˆå½“ä¸”ä»…å½“æ“ä½œæˆåŠŸã€‚
         template <bool RowMajor>
         NODISCARD VariableMatrixType SolveUpper(const VariableMatrixType& matrix) const;
 

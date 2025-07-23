@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.5 (2024/02/03 18:20)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.5 (2024/02/03 18:20)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_ACHIEVE_H
@@ -43,12 +43,12 @@ void Mathematics::Quaternion<Real>::FromRotationMatrix(const Matrix3Type& matrix
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    /// Ëã·¨ÔÚKen ShoemakeµÄÎÄÕÂ£¬ÔÚ1987ÄêSIGGRAPH¿Î³ÌÎÄÕÂ¡°ËÄÔªÎ¢»ı·ÖºÍ¿ìËÙ¶¯»­¡±¡£
+    /// ç®—æ³•åœ¨Ken Shoemakeçš„æ–‡ç« ï¼Œåœ¨1987å¹´SIGGRAPHè¯¾ç¨‹æ–‡ç« â€œå››å…ƒå¾®ç§¯åˆ†å’Œå¿«é€ŸåŠ¨ç”»â€ã€‚
     const auto trace = matrix.template GetValue<0, 0>() + matrix.template GetValue<1, 1>() + matrix.template GetValue<2, 2>();
 
     if (MathType::GetValue(0) < trace)
     {
-        // |w| > 1/2, ¿ÉÄÜÑ¡Ôñ w > 1/2
+        // |w| > 1/2, å¯èƒ½é€‰æ‹© w > 1/2
         auto root = MathType::Sqrt(trace + MathType::GetValue(1));  // 2w
 
         w = MathType::GetRational(1, 2) * root;
@@ -94,7 +94,7 @@ requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real>::Quaternion(const Vector3Type& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
     : w{}, x{}, y{}, z{}
 {
-    MATHEMATICS_ASSERTION_1(axis.IsNormalize(), "axis±ØĞëÊÇµ¥Î»ÏòÁ¿£¡");
+    MATHEMATICS_ASSERTION_1(axis.IsNormalize(), "axiså¿…é¡»æ˜¯å•ä½å‘é‡ï¼");
 
     FromAxisAngle(axis, angle);
 
@@ -106,9 +106,9 @@ requires std::is_arithmetic_v<Real>
 void Mathematics::Quaternion<Real>::FromAxisAngle(const Vector3Type& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
-    MATHEMATICS_ASSERTION_1(axis.IsNormalize(), "axis±ØĞëÊÇµ¥Î»ÏòÁ¿£¡");
+    MATHEMATICS_ASSERTION_1(axis.IsNormalize(), "axiså¿…é¡»æ˜¯å•ä½å‘é‡ï¼");
 
-    /// ´ú±íĞı×ªµÄËÄÔªÊıÊÇ
+    /// ä»£è¡¨æ—‹è½¬çš„å››å…ƒæ•°æ˜¯
     ///   q = cos(A/2) + sin(A/2) * (x * i + y * j + z * k)
 
     const auto halfAngle = MathType::GetRational(1, 2) * angle;
@@ -128,7 +128,7 @@ Mathematics::Quaternion<Real>::Quaternion(const ContainerType& rotationColumn)
 {
     if (rotationColumn.size() != zIndex)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Êı¾İ´óĞ¡´íÎó£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ•°æ®å¤§å°é”™è¯¯ï¼"s))
     }
 
     FromRotationColumnVector3(rotationColumn);
@@ -144,7 +144,7 @@ void Mathematics::Quaternion<Real>::FromRotationColumnVector3(const ContainerTyp
 
     if (rotationColumn.size() != zIndex)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Êı¾İ´óĞ¡´íÎó£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ•°æ®å¤§å°é”™è¯¯ï¼"s))
     }
 
     FromRotationMatrix(Matrix3Type{ rotationColumn, MatrixMajorFlags::Column });
@@ -181,7 +181,7 @@ const Real& Mathematics::Quaternion<Real>::operator[](int index) const
             break;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òı´íÎó£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•é”™è¯¯ï¼"s))
 }
 
 template <typename Real>
@@ -405,7 +405,7 @@ typename Mathematics::Quaternion<Real>::ContainerType Mathematics::Quaternion<Re
         container.emplace_back(matrix(Vector3Type::xIndex, column), matrix(Vector3Type::yIndex, column), matrix(Vector3Type::zIndex, column));
     }
 
-    MATHEMATICS_ASSERTION_1(container.size() == Matrix3Type::vectorSize, "·µ»ØµÄÏòÁ¿´óĞ¡´íÎó£¡");
+    MATHEMATICS_ASSERTION_1(container.size() == Matrix3Type::vectorSize, "è¿”å›çš„å‘é‡å¤§å°é”™è¯¯ï¼");
 
     return container;
 }
@@ -416,7 +416,7 @@ typename Mathematics::Quaternion<Real>::Vector3Type Mathematics::Quaternion<Real
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    /// ´ú±íĞı×ªµÄËÄÔªÊıÊÇ
+    /// ä»£è¡¨æ—‹è½¬çš„å››å…ƒæ•°æ˜¯
     ///   q = cos(A/2) + sin(A/2) * (x*i + y*j + z*k)
 
     const auto squareLength = x * x + y * y + z * z;
@@ -429,7 +429,7 @@ typename Mathematics::Quaternion<Real>::Vector3Type Mathematics::Quaternion<Real
     }
     else
     {
-        /// ½Ç¶ÈÊÇ 0 (2 * piµÄÄ£), ËùÒÔÈÎºÎÖá¶¼ĞĞ¡£
+        /// è§’åº¦æ˜¯ 0 (2 * piçš„æ¨¡), æ‰€ä»¥ä»»ä½•è½´éƒ½è¡Œã€‚
         return Vector3Type::GetUnitX();
     }
 }
@@ -532,12 +532,12 @@ requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::Exp() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    MATHEMATICS_ASSERTION_1(MathType::FAbs(w) <= MathType::GetZeroTolerance(), "ËÄÔªÊıw±ØĞëµÈÓÚ0£¡");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(w) <= MathType::GetZeroTolerance(), "å››å…ƒæ•°wå¿…é¡»ç­‰äº0ï¼");
 
-    /// Èç¹û q = A * (x*i+y*j+z*k) ÕâÀï (x,y,z) ÊÇµ¥Î»³¤¶È£¬È»ºó
-    /// exp(q) = cos(A) + sin(A)*(x*i+y*j+z*k)¡£
-    /// Èç¹û sin(A) ÊÇ½Ó½üÎªÁã,
-    /// Ê¹ÓÃ exp(q) = cos(A) + A*(x*i+y*j+z*k) ÒòÎª A/sin(A) Ç÷ÏòÓÚ 1¡£
+    /// å¦‚æœ q = A * (x*i+y*j+z*k) è¿™é‡Œ (x,y,z) æ˜¯å•ä½é•¿åº¦ï¼Œç„¶å
+    /// exp(q) = cos(A) + sin(A)*(x*i+y*j+z*k)ã€‚
+    /// å¦‚æœ sin(A) æ˜¯æ¥è¿‘ä¸ºé›¶,
+    /// ä½¿ç”¨ exp(q) = cos(A) + A*(x*i+y*j+z*k) å› ä¸º A/sin(A) è¶‹å‘äº 1ã€‚
 
     Quaternion result{};
 
@@ -570,11 +570,11 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::Log() const noexcep
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    /// Èç¹û q = cos(A) + sin(A) * (x*i+y*j+z*k) ÕâÀï (x,y,z) ÊÇµ¥Î»³¤¶È,
-    /// È»ºó log(q) = A * (x*i+y*j+z*k)¡£
-    /// Èç¹û sin(A) ÊÇ½Ó½üÁã£¬
-    /// Ê¹ÓÃ log(q) = sin(A) * (x*i+y*j+z*k)
-    /// ÒòÎª A/sin(A) Ç÷ÏòÓÚ 1¡£
+    /// å¦‚æœ q = cos(A) + sin(A) * (x*i+y*j+z*k) è¿™é‡Œ (x,y,z) æ˜¯å•ä½é•¿åº¦,
+    /// ç„¶å log(q) = A * (x*i+y*j+z*k)ã€‚
+    /// å¦‚æœ sin(A) æ˜¯æ¥è¿‘é›¶ï¼Œ
+    /// ä½¿ç”¨ log(q) = sin(A) * (x*i+y*j+z*k)
+    /// å› ä¸º A/sin(A) è¶‹å‘äº 1ã€‚
 
     Quaternion result{ MathType::GetValue(0), GetX(), GetY(), GetZ() };
 
@@ -827,7 +827,7 @@ void Mathematics::Quaternion<Real>::Intermediate(const Quaternion& quaternion0, 
 {
     MATHEMATICS_CLASS_IS_VALID_9;
     MATHEMATICS_ASSERTION_1(quaternion0.IsNormalize() && quaternion1.IsNormalize() && quaternion2.IsNormalize(),
-                            "quaternion0¡¢quaternion1¡¢quaternion2±ØĞë¶¼ÊÇµ¥Î»³¤¶È£¡");
+                            "quaternion0ã€quaternion1ã€quaternion2å¿…é¡»éƒ½æ˜¯å•ä½é•¿åº¦ï¼");
 
     const auto quaternion1Conjugate = quaternion1.Conjugate();
     const auto p0 = quaternion1Conjugate * quaternion0;
@@ -860,31 +860,31 @@ requires std::is_arithmetic_v<Real>
 void Mathematics::Quaternion<Real>::Align(const Vector3Type& vector0, const Vector3Type& vector1, Real epsilon)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
-    MATHEMATICS_ASSERTION_1(vector0.IsNormalize(epsilon) && vector1.IsNormalize(epsilon), "vector0ºÍvector1±ØĞëÊÇµ¥Î»ÏòÁ¿£¡");
+    MATHEMATICS_ASSERTION_1(vector0.IsNormalize(epsilon) && vector1.IsNormalize(epsilon), "vector0å’Œvector1å¿…é¡»æ˜¯å•ä½å‘é‡ï¼");
 
-    /// Èç¹ûvector0ºÍvector1ÊÇ²»Æ½ĞĞµÄ£¬
-    /// Ğı×ªµÄÖáÊÇµ¥Î»³¤¶ÈµÄÏòÁ¿
-    /// U = Cross(vector0,vector1)/Length(Cross(vector0,vector1))¡£
-    /// Ğı×ª½Ç¶ÈAÎªvector0ºÍvector1Ö®¼äµÄ½Ç¶È¡£
-    /// Ğı×ªµÄËÄÔªÊıÎªq = cos(A/2) + sin(A/2) * (ux * i + uy * j + uz * k)£¬
-    /// ÆäÖĞU = (ux,uy,uz)¡£
+    /// å¦‚æœvector0å’Œvector1æ˜¯ä¸å¹³è¡Œçš„ï¼Œ
+    /// æ—‹è½¬çš„è½´æ˜¯å•ä½é•¿åº¦çš„å‘é‡
+    /// U = Cross(vector0,vector1)/Length(Cross(vector0,vector1))ã€‚
+    /// æ—‹è½¬è§’åº¦Aä¸ºvector0å’Œvector1ä¹‹é—´çš„è§’åº¦ã€‚
+    /// æ—‹è½¬çš„å››å…ƒæ•°ä¸ºq = cos(A/2) + sin(A/2) * (ux * i + uy * j + uz * k)ï¼Œ
+    /// å…¶ä¸­U = (ux,uy,uz)ã€‚
     ///
-    /// (1) ÓëÆäÌáÈ¡A = acos(Dot(vector0,vector1))£¬
-    ///     ³ËÒÔ1/2£¬È»ºó¼ÆËãsin(A/2)ºÍcos(A/2)£¬
-    ///     ÎÒÃÇ¼õÉÙ¼ÆËã³É±¾È¥¼ÆËãÆ½·ÖÏß
-    ///     B = (vector0 + vector1)/Length(vector0 + vector1)£¬
-    ///     ´Ó¶øcos(A/2) =  Dot(vector0,B)¡£
+    /// (1) ä¸å…¶æå–A = acos(Dot(vector0,vector1))ï¼Œ
+    ///     ä¹˜ä»¥1/2ï¼Œç„¶åè®¡ç®—sin(A/2)å’Œcos(A/2)ï¼Œ
+    ///     æˆ‘ä»¬å‡å°‘è®¡ç®—æˆæœ¬å»è®¡ç®—å¹³åˆ†çº¿
+    ///     B = (vector0 + vector1)/Length(vector0 + vector1)ï¼Œ
+    ///     ä»è€Œcos(A/2) =  Dot(vector0,B)ã€‚
     ///
-    /// (2) Ğı×ªÖáÎªU = Cross(vector0,B)/Length(Cross(vector0,B))£¬
-    ///     µ« Length(Cross(vector0,B)) =
-    ///     Length(vector0) * Length(B) * sin(A/2) = sin(A/2)£¬
-    ///     ÔÚÕâÖÖÇé¿öÏÂ£¬sin(A/2) * (ux * i + uy * j + uz * k) = (cx * i + cy * j + cz * k)£¬
-    ///     ÆäÖĞC = Cross(vector0,B)¡£
+    /// (2) æ—‹è½¬è½´ä¸ºU = Cross(vector0,B)/Length(Cross(vector0,B))ï¼Œ
+    ///     ä½† Length(Cross(vector0,B)) =
+    ///     Length(vector0) * Length(B) * sin(A/2) = sin(A/2)ï¼Œ
+    ///     åœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œsin(A/2) * (ux * i + uy * j + uz * k) = (cx * i + cy * j + cz * k)ï¼Œ
+    ///     å…¶ä¸­C = Cross(vector0,B)ã€‚
     ///
-    /// Èç¹ûvector0 = vector1£¬
-    /// ÔòB = vector0£¬ cos(A/2) = 1, and U = (0,0,0)¡£
-    /// Èç¹ûvector0 = -vector1£¬ÔòB = 0¡£
-    /// ÔÚÕâÖÖÇé¿öÏÂ£¬A = piºÍ´¹Ö±ÓÚvector0µÄÈÎºÎÖá¶¼¿ÉÒÔ±»ÓÃ×÷Ğı×ªÖá¡£
+    /// å¦‚æœvector0 = vector1ï¼Œ
+    /// åˆ™B = vector0ï¼Œ cos(A/2) = 1, and U = (0,0,0)ã€‚
+    /// å¦‚æœvector0 = -vector1ï¼Œåˆ™B = 0ã€‚
+    /// åœ¨è¿™ç§æƒ…å†µä¸‹ï¼ŒA = piå’Œå‚ç›´äºvector0çš„ä»»ä½•è½´éƒ½å¯ä»¥è¢«ç”¨ä½œæ—‹è½¬è½´ã€‚
 
     auto bisector = vector0 + vector1;
     if (MathType::Approximate(Vector3ToolsType::GetLength(bisector), MathType::GetValue(0), epsilon))
@@ -911,7 +911,7 @@ void Mathematics::Quaternion<Real>::Align(const Vector3Type& vector0, const Vect
     {
         if (MathType::FAbs(vector0.GetY()) <= MathType::FAbs(vector0.GetX()))
         {
-            /// V1.x»òV1.zÊÇ×î´ó¹æÄ£µÄ×é³É²¿·Ö¡£
+            /// V1.xæˆ–V1.zæ˜¯æœ€å¤§è§„æ¨¡çš„ç»„æˆéƒ¨åˆ†ã€‚
             auto invLength = MathType::InvSqrt(vector0.GetX() * vector0.GetX() + vector0.GetZ() * vector0.GetZ());
             x = -vector0.GetZ() * invLength;
             y = MathType::GetValue(0);
@@ -919,7 +919,7 @@ void Mathematics::Quaternion<Real>::Align(const Vector3Type& vector0, const Vect
         }
         else
         {
-            /// V1.y»òV1.zÊÇ×î´ó¹æÄ£µÄ×é³É²¿·Ö¡£
+            /// V1.yæˆ–V1.zæ˜¯æœ€å¤§è§„æ¨¡çš„ç»„æˆéƒ¨åˆ†ã€‚
             auto invLength = MathType::InvSqrt(vector0.GetY() * vector0.GetY() + vector0.GetZ() * vector0.GetZ());
             x = MathType::GetValue(0);
             y = +vector0.GetZ() * invLength;
@@ -997,14 +997,14 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosest(Quaterni
     const auto sqrLength = p0 * p0 + p1 * p1;
     if (MathType::GetZeroTolerance() < sqrLength)
     {
-        /// Î¨Ò»µÄ×î½üµã¡£
+        /// å”¯ä¸€çš„æœ€è¿‘ç‚¹ã€‚
         const auto invLength = MathType::InvSqrt(sqrLength);
         quaternion.SetW(p0 * invLength);
         quaternion[axisIndex] = p1 * invLength;
     }
     else
     {
-        /// ÎŞÇî¶à½â£¬Ñ¡Ôñtheta = 0¡£
+        /// æ— ç©·å¤šè§£ï¼Œé€‰æ‹©theta = 0ã€‚
         quaternion.SetW(MathType::GetValue(1));
         quaternion[axisIndex] = MathType::GetValue(0);
     }
@@ -1228,7 +1228,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosest(Quaterni
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    /// ¸÷ÔªËØ³õÊ¼»¯ÎªÁã
+    /// å„å…ƒç´ åˆå§‹åŒ–ä¸ºé›¶
     Quaternion quaternion{};
 
     auto p0 = w;
@@ -1241,13 +1241,13 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosest(Quaterni
         p1 *= invLength;
         if (con.IsValid(p0, p1))
         {
-            /// ×î´óÖµ³öÏÖÔÚÄÚ²¿µã
+            /// æœ€å¤§å€¼å‡ºç°åœ¨å†…éƒ¨ç‚¹
             quaternion.SetW(p0);
             quaternion[System::EnumCastUnderlying(axis)] = p1;
         }
         else
         {
-            /// ×î´óÖµ³öÏÖÔÚ±ß½çµã
+            /// æœ€å¤§å€¼å‡ºç°åœ¨è¾¹ç•Œç‚¹
             auto cosValueMin = con.GetCosMinAngle();
             auto sinValueMin = con.GetSinMinAngle();
             auto dotMinAngle = p0 * cosValueMin + p1 * sinValueMin;
@@ -1282,7 +1282,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosest(Quaterni
     }
     else
     {
-        /// ÎŞÇî¶à½â£¬Ñ¡ÔñÒ»¸öÂú×ãµÄ½Ç¶ÈÔ¼Êø¡£
+        /// æ— ç©·å¤šè§£ï¼Œé€‰æ‹©ä¸€ä¸ªæ»¡è¶³çš„è§’åº¦çº¦æŸã€‚
         quaternion.SetW(con.GetCosAvrAngle());
         quaternion[System::EnumCastUnderlying(axis)] = con.GetSinAvrAngle();
     }
@@ -1330,12 +1330,12 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestXY(const 
 
         if (xCon.IsValid(c0, s0) && yCon.IsValid(c1, s1))
         {
-            /// ×î´óÖµ·¢ÉúÔÚÄÚ²¿µã¡£
+            /// æœ€å¤§å€¼å‘ç”Ÿåœ¨å†…éƒ¨ç‚¹ã€‚
             return Quaternion{ c0 * c1, s0 * c1, c0 * s1, s0 * s1 };
         }
         else
         {
-            /// ×î´óÖµ³öÏÖÔÚ±ß½çµã¡£
+            /// æœ€å¤§å€¼å‡ºç°åœ¨è¾¹ç•Œç‚¹ã€‚
             Quaternion r{ xCon.GetCosMinAngle(), xCon.GetSinMinAngle(), MathType::GetValue(0), MathType::GetValue(0) };
             Quaternion rInv{ xCon.GetCosMinAngle(), -xCon.GetSinMinAngle(), MathType::GetValue(0), MathType::GetValue(0) };
             auto prod = rInv * (*this);
@@ -1381,7 +1381,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestXY(const 
     }
     else
     {
-        /// ÎŞÇî¶à½â£¬Ñ¡ÔñÒ»¸öÂú×ãÔ¼ÊøµÄ½Ç¶È¡£
+        /// æ— ç©·å¤šè§£ï¼Œé€‰æ‹©ä¸€ä¸ªæ»¡è¶³çº¦æŸçš„è§’åº¦ã€‚
         auto c0 = MathType::GetValue(0);
         auto s0 = MathType::GetValue(0);
         auto c1 = MathType::GetValue(0);
@@ -1400,7 +1400,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestXY(const 
             {
                 angle -= (MathType::GetValue(0) <= closest.GetX() ? MathType::GetPI() : -MathType::GetPI());
 
-                MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angleµÄÖµ±ØĞëÔÚminAngleºÍmaxAngleÖ®¼ä£¡");
+                MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angleçš„å€¼å¿…é¡»åœ¨minAngleå’ŒmaxAngleä¹‹é—´ï¼");
             }
 
             if (angle <= xCon.GetMaxAngle() - yCon.GetMaxAngle())
@@ -1433,7 +1433,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestXY(const 
             {
                 angle -= (MathType::GetValue(0) <= closest.GetX() ? MathType::GetPI() : -MathType::GetPI());
 
-                MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angleµÄÖµ±ØĞëÔÚminAngleºÍmaxAngleÖ®¼ä£¡");
+                MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angleçš„å€¼å¿…é¡»åœ¨minAngleå’ŒmaxAngleä¹‹é—´ï¼");
             }
 
             if (xCon.GetMinAngle() + yCon.GetMaxAngle() <= angle)
@@ -1520,12 +1520,12 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestZX(const 
 
         if (zCon.IsValid(c2, s2) && xCon.IsValid(c0, s0))
         {
-            /// ×î´óÖµ·¢ÉúÔÚÄÚ²¿µã¡£
+            /// æœ€å¤§å€¼å‘ç”Ÿåœ¨å†…éƒ¨ç‚¹ã€‚
             return Quaternion{ c2 * c0, c2 * s0, s2 * s0, s2 * c0 };
         }
         else
         {
-            /// ×î´óÖµ³öÏÖÔÚ±ß½çµã¡£
+            /// æœ€å¤§å€¼å‡ºç°åœ¨è¾¹ç•Œç‚¹ã€‚
             Quaternion r{ zCon.GetCosMinAngle(), MathType::GetValue(0), MathType::GetValue(0), zCon.GetSinMinAngle() };
             Quaternion rInv{ zCon.GetCosMinAngle(), MathType::GetValue(0), MathType::GetValue(0), -zCon.GetSinMinAngle() };
             auto prod = rInv * (*this);
@@ -1571,7 +1571,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestZX(const 
     }
     else
     {
-        /// ÎŞÇî¶à½â£¬Ñ¡ÔñÒ»¸öÂú×ãÔ¼ÊøµÄ½Ç¶È¡£
+        /// æ— ç©·å¤šè§£ï¼Œé€‰æ‹©ä¸€ä¸ªæ»¡è¶³çº¦æŸçš„è§’åº¦ã€‚
         auto c0 = MathType::GetValue(0);
         auto s0 = MathType::GetValue(0);
         auto c2 = MathType::GetValue(0);
@@ -1590,7 +1590,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestZX(const 
             {
                 angle -= (MathType::GetValue(0) <= closest.GetX() ? MathType::GetPI() : -MathType::GetPI());
 
-                MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angleµÄÖµ±ØĞëÔÚminAngleºÍmaxAngleÖ®¼ä£¡");
+                MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angleçš„å€¼å¿…é¡»åœ¨minAngleå’ŒmaxAngleä¹‹é—´ï¼");
             }
 
             if (angle <= xCon.GetMaxAngle() - zCon.GetMaxAngle())
@@ -1623,7 +1623,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestZX(const 
             {
                 angle -= (MathType::GetValue(0) <= closest.GetX() ? MathType::GetPI() : -MathType::GetPI());
 
-                MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angleµÄÖµ±ØĞëÔÚminAngleºÍmaxAngleÖ®¼ä£¡");
+                MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angleçš„å€¼å¿…é¡»åœ¨minAngleå’ŒmaxAngleä¹‹é—´ï¼");
             }
 
             if (xCon.GetMinAngle() + zCon.GetMaxAngle() <= angle)
@@ -1709,12 +1709,12 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestZY(const 
 
         if (zCon.IsValid(c2, s2) && yCon.IsValid(c1, s1))
         {
-            /// ×î´óÖµ·¢ÉúÔÚÄÚ²¿µã¡£
+            /// æœ€å¤§å€¼å‘ç”Ÿåœ¨å†…éƒ¨ç‚¹ã€‚
             return Quaternion{ c2 * c1, -s2 * s1, c2 * s1, s2 * c1 };
         }
         else
         {
-            /// ×î´óÖµ³öÏÖÔÚ±ß½çµã¡£
+            /// æœ€å¤§å€¼å‡ºç°åœ¨è¾¹ç•Œç‚¹ã€‚
             Quaternion r{ zCon.GetCosMinAngle(), MathType::GetValue(0), MathType::GetValue(0), zCon.GetSinMinAngle() };
             Quaternion rInv{ zCon.GetCosMinAngle(), MathType::GetValue(0), MathType::GetValue(0), -zCon.GetSinMinAngle() };
             auto prod = rInv * (*this);
@@ -1760,7 +1760,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestZY(const 
     }
     else
     {
-        /// ÎŞÇî¶à½â£¬Ñ¡ÔñÒ»¸öÂú×ãÔ¼ÊøµÄ½Ç¶È¡£
+        /// æ— ç©·å¤šè§£ï¼Œé€‰æ‹©ä¸€ä¸ªæ»¡è¶³çº¦æŸçš„è§’åº¦ã€‚
         auto c1 = MathType::GetValue(0);
         auto s1 = MathType::GetValue(0);
         auto c2 = MathType::GetValue(0);
@@ -1779,7 +1779,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestZY(const 
             {
                 angle -= (MathType::GetValue(0) <= closest.GetY() ? MathType::GetPI() : -MathType::GetPI());
 
-                MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angleµÄÖµ±ØĞëÔÚminAngleºÍmaxAngleÖ®¼ä£¡");
+                MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angleçš„å€¼å¿…é¡»åœ¨minAngleå’ŒmaxAngleä¹‹é—´ï¼");
             }
 
             if (angle <= yCon.GetMaxAngle() - zCon.GetMaxAngle())
@@ -1812,7 +1812,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestZY(const 
             {
                 angle -= (MathType::GetValue(0) <= closest.GetY() ? MathType::GetPI() : -MathType::GetPI());
 
-                MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angleµÄÖµ±ØĞëÔÚminAngleºÍmaxAngleÖ®¼ä£¡");
+                MATHEMATICS_ASSERTION_1(minAngle <= angle && angle <= maxAngle, "angleçš„å€¼å¿…é¡»åœ¨minAngleå’ŒmaxAngleä¹‹é—´ï¼");
             }
 
             if (yCon.GetMinAngle() + zCon.GetMaxAngle() <= angle)

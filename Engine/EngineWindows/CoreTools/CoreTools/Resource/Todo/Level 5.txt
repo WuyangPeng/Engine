@@ -1,15 +1,15 @@
-TODO Level 5
+﻿TODO Level 5
 
 1.0.1.0
 
-1.  （LogManager）考虑修改AnalysisAppenderManager实现的设计，不返回解析完的类指针。
-2.  （LogManager）考虑修改LogAppenderIOManagerImpl的指针设计。
-3.  （LogManager）将LogFilterManager返回的字符串改成配置。
-4.  （LogManager）将日志库的名字的月份名改成数字。
-5.  （LogManager）日志库使用CFileManager或FileHandle代替目前的StreamManager。
-6.  （LogManager）需要修改日志库在没有配置的情况下会死循环。
-7.  （LogManager）检查日志库的多线程是否还存在问题。 
-8.  （LogManager）支持日志库扩展性（通过注册的方式），可将日志写入数据库和将日志发送到日志服务器（包含日志原来的各种写入性）。 
-9.  （LogManager）根据ACE的日志库重整，增加日志级别等内容。 
-10. （LogManager）对同样的日志进行过滤。
-11. （LogManager）日志是否打印到控制台改成配置。
+1.  锛圠ogManager锛夎€冭檻淇敼AnalysisAppenderManager瀹炵幇鐨勮璁★紝涓嶈繑鍥炶В鏋愬畬鐨勭被鎸囬拡銆?
+2.  锛圠ogManager锛夎€冭檻淇敼LogAppenderIOManagerImpl鐨勬寚閽堣璁°€?
+3.  锛圠ogManager锛夊皢LogFilterManager杩斿洖鐨勫瓧绗︿覆鏀规垚閰嶇疆銆?
+4.  锛圠ogManager锛夊皢鏃ュ織搴撶殑鍚嶅瓧鐨勬湀浠藉悕鏀规垚鏁板瓧銆?
+5.  锛圠ogManager锛夋棩蹇楀簱浣跨敤CFileManager鎴朏ileHandle浠ｆ浛鐩墠鐨凷treamManager銆?
+6.  锛圠ogManager锛夐渶瑕佷慨鏀规棩蹇楀簱鍦ㄦ病鏈夐厤缃殑鎯呭喌涓嬩細姝诲惊鐜€?
+7.  锛圠ogManager锛夋鏌ユ棩蹇楀簱鐨勫绾跨▼鏄惁杩樺瓨鍦ㄩ棶棰樸€?
+8.  锛圠ogManager锛夋敮鎸佹棩蹇楀簱鎵╁睍鎬э紙閫氳繃娉ㄥ唽鐨勬柟寮忥級锛屽彲灏嗘棩蹇楀啓鍏ユ暟鎹簱鍜屽皢鏃ュ織鍙戦€佸埌鏃ュ織鏈嶅姟鍣紙鍖呭惈鏃ュ織鍘熸潵鐨勫悇绉嶅啓鍏ユ€э級銆?
+9.  锛圠ogManager锛夋牴鎹瓵CE鐨勬棩蹇楀簱閲嶆暣锛屽鍔犳棩蹇楃骇鍒瓑鍐呭銆?
+10. 锛圠ogManager锛夊鍚屾牱鐨勬棩蹇楄繘琛岃繃婊ゃ€?
+11. 锛圠ogManager锛夋棩蹇楁槸鍚︽墦鍗板埌鎺у埗鍙版敼鎴愰厤缃€

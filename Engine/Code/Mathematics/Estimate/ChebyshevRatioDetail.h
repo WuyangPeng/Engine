@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/11 13:26)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/11 13:26)
 
 #ifndef MATHEMATICS_ESTIMATE_CHEBYSHEV_RATIO_DETAIL_H
 #define MATHEMATICS_ESTIMATE_CHEBYSHEV_RATIO_DETAIL_H
@@ -21,19 +21,19 @@ T Mathematics::ChebyshevRatio(T t, T angle)
     {
         if (angle < Math<T>::GetPI())
         {
-            // ½Ç¶ÈAÔÚ(0,pi)ÖĞ¡£
+            // è§’åº¦Aåœ¨(0,pi)ä¸­ã€‚
             return std::sin(t * angle) / std::sin(angle);
         }
     }
     else if (Math<T>::Approximate(angle, Math<T>::GetValue(0)))
     {
-        // ½Ç¶ÈAÎª0¡£Ê¹ÓÃl'Hospital's¹æÔò£¬
-        // lim_{A->0} sin(t*A)/sin(A) = lim_{A->0} t*cos(t*A)/cos(A) = t.¡£
+        // è§’åº¦Aä¸º0ã€‚ä½¿ç”¨l'Hospital'sè§„åˆ™ï¼Œ
+        // lim_{A->0} sin(t*A)/sin(A) = lim_{A->0} t*cos(t*A)/cos(A) = t.ã€‚
         return t;
     }
 
-    // ½Ç¶ÈA²»ÔÚ [0,pi)ÖĞ¡£
-    THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§½Ç¶È"))
+    // è§’åº¦Aä¸åœ¨ [0,pi)ä¸­ã€‚
+    THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆè§’åº¦"))
 }
 
 template <typename T>
@@ -43,21 +43,21 @@ T Mathematics::ChebyshevRatioUsingCosAngle(T t, T cosAngle)
     {
         if (cosAngle > Math<T>::GetValue(-1))
         {
-            // ½Ç¶ÈAÔÚ(0,pi)ÖĞ¡£
+            // è§’åº¦Aåœ¨(0,pi)ä¸­ã€‚
             const auto angle = std::acos(cosAngle);
 
             return std::sin(t * angle) / std::sin(angle);
         }
         else
         {
-            // ½Ç¶ÈAÊÇpi¡£
-            THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§½Ç¶È"))
+            // è§’åº¦Aæ˜¯piã€‚
+            THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆè§’åº¦"))
         }
     }
     else
     {
-        // ½Ç¶ÈAÎª0¡£Ê¹ÓÃl'Hospital's¹æÔò£¬
-        // lim_{A->0} sin(t*A)/sin(A) = lim_{A->0} t*cos(t*A)/cos(A) = t¡£
+        // è§’åº¦Aä¸º0ã€‚ä½¿ç”¨l'Hospital'sè§„åˆ™ï¼Œ
+        // lim_{A->0} sin(t*A)/sin(A) = lim_{A->0} t*cos(t*A)/cos(A) = tã€‚
         return t;
     }
 }
@@ -69,7 +69,7 @@ std::array<T, 2> Mathematics::ChebyshevRatios(T t, T angle)
     {
         if (angle < Math<T>::GetPI())
         {
-            // ½Ç¶ÈAÔÚ(0,pi)ÖĞ¡£
+            // è§’åº¦Aåœ¨(0,pi)ä¸­ã€‚
             const auto sinAngle = std::sin(angle);
             const std::array<T, 2> f{ std::sin((Math<T>::GetValue(1) - t) * angle) / sinAngle, std::sin(t * angle) / sinAngle };
 
@@ -78,15 +78,15 @@ std::array<T, 2> Mathematics::ChebyshevRatios(T t, T angle)
     }
     else if (Math<T>::Approximate(angle, Math<T>::GetValue(0)))
     {
-        // ½Ç¶ÈAÎª0¡£Ê¹ÓÃl'Hospital's¹æÔò£¬
+        // è§’åº¦Aä¸º0ã€‚ä½¿ç”¨l'Hospital'sè§„åˆ™ï¼Œ
         // lim_{A->0} sin(t*A)/sin(A) = lim_{A->0} t*cos(t*A)/cos(A) = t.
         const std::array<T, 2> f{ Math<T>::GetValue(1) - t, t };
 
         return f;
     }
 
-    // ½Ç¶ÈA²»ÔÚ[0,pi)ÖĞ¡£
-    THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§½Ç¶È"))
+    // è§’åº¦Aä¸åœ¨[0,pi)ä¸­ã€‚
+    THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆè§’åº¦"))
 }
 
 template <typename T>
@@ -96,7 +96,7 @@ std::array<T, 2> Mathematics::ChebyshevRatiosUsingCosAngle(T t, T cosAngle)
     {
         if (cosAngle > -Math<T>::GetValue(1))
         {
-            // ½Ç¶ÈAÔÚ(0,pi)ÖĞ¡£
+            // è§’åº¦Aåœ¨(0,pi)ä¸­ã€‚
             const auto angle = std::acos(cosAngle);
             const auto sinAngle = std::sin(angle);
             const std::array<T, 2> f{ std::sin((Math<T>::GetValue(1) - t) * angle) / sinAngle, std::sin(t * angle) / sinAngle };
@@ -105,13 +105,13 @@ std::array<T, 2> Mathematics::ChebyshevRatiosUsingCosAngle(T t, T cosAngle)
         }
         else
         {
-            // ½Ç¶ÈAÊÇpi¡£
-            THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§½Ç¶È"))
+            // è§’åº¦Aæ˜¯piã€‚
+            THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆè§’åº¦"))
         }
     }
     else
     {
-        // ½Ç¶ÈAÎª0¡£Ê¹ÓÃl'Hospital's¹æÔò£¬
+        // è§’åº¦Aä¸º0ã€‚ä½¿ç”¨l'Hospital'sè§„åˆ™ï¼Œ
         // lim_{A->0} sin(t*A)/sin(A) = lim_{A->0} t*cos(t*A)/cos(A) = t.
         const std::array<T, 2> f{ Math<T>::GetValue(1) - t, t };
 

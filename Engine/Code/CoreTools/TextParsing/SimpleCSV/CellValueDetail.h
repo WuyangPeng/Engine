@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/02 11:22)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/02 11:22)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CELL_VALUE_DETAIL_H
 #define CORE_TOOLS_TEXT_PARSING_CELL_VALUE_DETAIL_H
@@ -69,7 +69,7 @@ T CoreTools::SimpleCSV::CellValue::Get() const
     }
     catch (const std::bad_variant_access&)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::ValueType, SYSTEM_TEXT("CellValue ¶ÔÏó²»°üº¬ÇëÇóµÄÀàĞÍ¡£"s))
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::ValueType, SYSTEM_TEXT("CellValue å¯¹è±¡ä¸åŒ…å«è¯·æ±‚çš„ç±»å‹ã€‚"s))
     }
 }
 

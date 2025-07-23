@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 17:25)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 17:25)
 
 #include "Network/NetworkExport.h"
 
@@ -23,9 +23,9 @@ using namespace std::literals;
 
 namespace
 {
-    constexpr auto synchronizeConnector = SYSTEM_TEXT("×¼±¸½øĞĞÍ¬²½Á¬½Ó£¬µØÖ·£º"sv);
-    constexpr auto asynchronousConnector = SYSTEM_TEXT("×¼±¸½øĞĞÒì²½Á¬½Ó£¬µØÖ·£º"sv);
-    constexpr auto synchronizeConnectorSuccess = SYSTEM_TEXT("Í¬²½Á¬½Ó³É¹¦£¬µØÖ·£º"sv);
+    constexpr auto synchronizeConnector = SYSTEM_TEXT("å‡†å¤‡è¿›è¡ŒåŒæ­¥è¿æ¥ï¼Œåœ°å€ï¼š"sv);
+    constexpr auto asynchronousConnector = SYSTEM_TEXT("å‡†å¤‡è¿›è¡Œå¼‚æ­¥è¿æ¥ï¼Œåœ°å€ï¼š"sv);
+    constexpr auto synchronizeConnectorSuccess = SYSTEM_TEXT("åŒæ­¥è¿æ¥æˆåŠŸï¼Œåœ°å€ï¼š"sv);
 }
 
 Network::BoostSockConnector::BoostSockConnector() noexcept

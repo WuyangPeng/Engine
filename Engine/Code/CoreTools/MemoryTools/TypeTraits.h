@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 15:51)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 15:51)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_TYPE_TRAITS_H
 #define CORE_TOOLS_MEMORY_TOOLS_TYPE_TRAITS_H
@@ -14,11 +14,11 @@
 
 #include <type_traits>
 
-/// ¼üÈëtraitsÒÔÖ§³ÖÓÃÓÚÊıÖµ¼ÆËãµÄstd::enable_ifÌõ¼ş±àÒë¡£
+/// é”®å…¥traitsä»¥æ”¯æŒç”¨äºæ•°å€¼è®¡ç®—çš„std::enable_ifæ¡ä»¶ç¼–è¯‘ã€‚
 namespace CoreTools
 {
-    /// float, double»òlong doubleµÄIsArbitraryPrecision<T>::valueÊÇ'false'¡£
-    /// ¶ÔÓÚ×Ô¶¨ÒåÀàĞÍBinaryScientificNumber¡¢BinaryScientificRational ºÍ QuadraticFieldsNumber£¬ĞèÒªÌØ»¯Îª'true'¡£
+    /// float, doubleæˆ–long doubleçš„IsArbitraryPrecision<T>::valueæ˜¯'false'ã€‚
+    /// å¯¹äºè‡ªå®šä¹‰ç±»å‹BinaryScientificNumberã€BinaryScientificRational å’Œ QuadraticFieldsNumberï¼Œéœ€è¦ç‰¹åŒ–ä¸º'true'ã€‚
     template <typename T>
     struct IsArbitraryPrecisionInternal : std::false_type
     {
@@ -29,8 +29,8 @@ namespace CoreTools
     {
     };
 
-    /// float, double»òlong doubleµÄHasDivisionOperator<T>::valueÊÇ'true'¡£
-    /// ÈÎÒâ¾«¶ÈËãÊõµÄÊµÏÖ¿ÉÒÔÔÚArbitraryPrecision.hÖĞÕÒµ½¡£
+    /// float, doubleæˆ–long doubleçš„HasDivisionOperator<T>::valueæ˜¯'true'ã€‚
+    /// ä»»æ„ç²¾åº¦ç®—æœ¯çš„å®ç°å¯ä»¥åœ¨ArbitraryPrecision.hä¸­æ‰¾åˆ°ã€‚
     template <typename T>
     struct HasDivisionOperatorInternal : std::false_type
     {
@@ -56,8 +56,8 @@ namespace CoreTools
     {
     };
 
-    /// Ä£°å²ÎÊıÎª¡°Parameters£¬bool Condition¡±µÄÀàÖĞ»ùÓÚÄ£°åµÄÌõ¼ş±àÒë(SFINAE)µÄÄ£°å±ğÃû¡£
-    /// Ê¾ÀıÓÃ·¨Îª
+    /// æ¨¡æ¿å‚æ•°ä¸ºâ€œParametersï¼Œbool Conditionâ€çš„ç±»ä¸­åŸºäºæ¨¡æ¿çš„æ¡ä»¶ç¼–è¯‘(SFINAE)çš„æ¨¡æ¿åˆ«åã€‚
+    /// ç¤ºä¾‹ç”¨æ³•ä¸º
     /// template <Parameters, bool Condition = DefaultCondition, TraitSelector<Condition> = 0>
     /// ReturnType MemberFunction(inputs)
     /// { implementation for Condition = true; }
@@ -68,8 +68,8 @@ namespace CoreTools
     template <bool Condition>
     using TraitSelector = std::enable_if_t<Condition, int>;
 
-    /// ÓÃÓÚ¾ßÓĞÊı×ÖÄ£°å²ÎÊıµÄÀàÖĞ»ùÓÚÄ£°åµÄÌõ¼ş±àÒë(SFINAE)µÄÄ£°å±ğÃû¡£Ñ¡ÔñµÄÒÀ¾İÊÇÊı×ÖÀàĞÍÊÇ¸¡µã»¹ÊÇÈÎÒâ¾«¶È¡£
-    /// Ê¾ÀıÓÃ·¨Îª
+    /// ç”¨äºå…·æœ‰æ•°å­—æ¨¡æ¿å‚æ•°çš„ç±»ä¸­åŸºäºæ¨¡æ¿çš„æ¡ä»¶ç¼–è¯‘(SFINAE)çš„æ¨¡æ¿åˆ«åã€‚é€‰æ‹©çš„ä¾æ®æ˜¯æ•°å­—ç±»å‹æ˜¯æµ®ç‚¹è¿˜æ˜¯ä»»æ„ç²¾åº¦ã€‚
+    /// ç¤ºä¾‹ç”¨æ³•ä¸º
     /// template <typename Numeric, IsNotArbitraryPrecisionType<Numeric> = 0>
     /// Numeric MemberFunction(Numeric inputs)
     /// { floating-point computations }
@@ -83,8 +83,8 @@ namespace CoreTools
     template <typename T>
     using IsArbitraryPrecisionType = std::enable_if_t<IsArbitraryPrecision<T>::value, int>;
 
-    /// ÓÃÓÚ¾ßÓĞÊı×ÖÄ£°å²ÎÊıµÄÀàÖĞ»ùÓÚÄ£°åµÄÌõ¼ş±àÒë(SFINAE)µÄÄ£°å±ğÃû¡£Ñ¡ÔñµÄÒÀ¾İÊÇÊı×ÖÀàĞÍÊÇ·ñÖ§³Ö³ı·¨¡£
-    /// Ê¾ÀıÓÃ·¨Îª
+    /// ç”¨äºå…·æœ‰æ•°å­—æ¨¡æ¿å‚æ•°çš„ç±»ä¸­åŸºäºæ¨¡æ¿çš„æ¡ä»¶ç¼–è¯‘(SFINAE)çš„æ¨¡æ¿åˆ«åã€‚é€‰æ‹©çš„ä¾æ®æ˜¯æ•°å­—ç±»å‹æ˜¯å¦æ”¯æŒé™¤æ³•ã€‚
+    /// ç¤ºä¾‹ç”¨æ³•ä¸º
     /// template <typename Numeric, IsDivisionType<Numeric> = 0>
     /// Numeric MemberFunction(Numeric inputs)
     /// { Numeric computations that use divisions }
@@ -92,7 +92,7 @@ namespace CoreTools
     /// template <typename Numeric, IsNotDivisionType<Numeric> = 0>
     /// Numeric MemberFunction(Numeric inputs)
     /// { Numeric computations without divisions }
-    /// µäĞÍµÄÊ¾ÀıÊÇµ±NumericÎª BinaryScientificNumber<*>£¨²»Ö§³Ö³ı·¨£©»òNumericÊÇBinaryScientificRational<*> Ê±£¨Ö§³Ö³ı·¨£©¡£
+    /// å…¸å‹çš„ç¤ºä¾‹æ˜¯å½“Numericä¸º BinaryScientificNumber<*>ï¼ˆä¸æ”¯æŒé™¤æ³•ï¼‰æˆ–Numericæ˜¯BinaryScientificRational<*> æ—¶ï¼ˆæ”¯æŒé™¤æ³•ï¼‰ã€‚
     template <typename T>
     using IsDivisionType = std::enable_if_t<HasDivisionOperator<T>::value, int>;
 

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.4 (2024/01/11 15:22)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/11 15:22)
 
 #ifndef FRAMEWORK_APPLICATION_PIXEL_SCREEN_IMPL_H
 #define FRAMEWORK_APPLICATION_PIXEL_SCREEN_IMPL_H
@@ -48,35 +48,35 @@ namespace Framework
 
         void ClearScreen(const Colour& color);
 
-        // ��������ֻ��ơ��������Ի��Ƶ�������Ļ������������֮ǰ����Ļ�����Ƶ�����һ�����л�������
-        // ��ֻ��Ҫ��Ӧ�ó������DoFlip (true)һ�εġ�Ĭ��ֵ�ǡ�false����
+        // 相对于右手绘制。您还可以绘制到左手屏幕，在立即绘制之前，屏幕被复制到了另一个逆行缓冲区。
+        // 你只需要在应用程序调用DoFlip (true)一次的。默认值是“false”。
         void DoFlip(bool doFlip) noexcept;
 
         NODISCARD bool IsDoFlip() const noexcept;
 
-        // ����λ��(x,y)������Ϊָ������ɫ��
+        // 设置位置(x,y)的像素为指定的颜色。
         void SetPixel(int x, int y, const Colour& color);
 
-        // �������� (x',y') �� x - thick <= x' <= x + thick �� y - thick <= y' <= y + thick.
+        // 设置像素 (x',y') 对 x - thick <= x' <= x + thick 和 y - thick <= y' <= y + thick.
         void SetThickPixel(int x, int y, int thick, const Colour& color);
 
-        // ��ȡλ��(x,y)��������ɫ��
+        // 获取位置(x,y)的像素颜色。
         NODISCARD Colour GetPixel(int x, int y) const;
 
-        // ʹ��Bresenham�㷨��������Ϊָ���ĵ���ɫ�ӻ���(xMin, yMin) �� (xMax, yMax)��
-        // ���㷨����ƫ��ģ�ͨ��DrawLine(xMin, yMin, xMax, yMax)�趨�����ز�һ��ͬDrawLine(xMax, yMax, xMin, yMin)���õ���ͬ��
+        // 使用Bresenham算法绘制像素为指定的的颜色从画线(xMin, yMin) 到 (xMax, yMax)。
+        // 该算法是有偏差的，通过DrawLine(xMin, yMin, xMax, yMax)设定的像素不一定同DrawLine(xMax, yMax, xMin, yMin)设置的相同。
         void DrawLine(int xMin, int yMin, int xMax, int yMax, const Colour& color);
 
-        // ʹ��ָ������ɫ�����������Ρ�solid����ָʾ�Ƿ������Ρ�
+        // 使用指定的颜色绘制轴对齐矩形。solid参数指示是否填充矩形。
         void DrawRectangle(int xMin, int yMin, int xMax, int yMax, const Colour& color, bool solid = false);
 
-        // ʹ��Bresenham�㷨����������(xCenter,yCenter)��ָ�����뾶����
-        // ��ʹ��ָ������ɫ��Բ����solid������ָʾ�Ƿ����Ȧ��
+        // 使用Bresenham算法绘制中心在(xCenter,yCenter)和指定“半径”，
+        // 并使用指定的颜色的圆。“solid”参数指示是否填充圈。
         void DrawCircle(int xCenter, int yCenter, int radius, const Colour& color, bool solid = false);
 
-        // ��ˮ���һ������ͨ���ı���������ɫ������ɫ��Ϊ��ǰ��ɫ����
-        // ��䴦��4������Ҳ����˵����(x,y)�����ʣ���(x + 1,y), (x,y - 1), �� (x,y + 1) �����ʣ���Ϊ����������Ļ�ı߽磩��
-        // �ú���ͨ��ʹ��ջ���Ӷ������������ĵݹ���ۺ͵��ö�ջ����Ŀ��ܡ�
+        // 漫水填充一个区域，通过改变其像素颜色“背景色”为“前景色”。
+        // 填充处理4连屏；也就是说，在(x,y)被访问，则(x + 1,y), (x,y - 1), 和 (x,y + 1) 被访问（因为它们是在屏幕的边界）。
+        // 该函数通过使用栈，从而避免了真正的递归代价和调用堆栈溢出的可能。
         void Fill(int x, int y, const Colour& foreColor, const Colour& backColor);
 
     private:

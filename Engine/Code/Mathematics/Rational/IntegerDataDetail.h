@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:18)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:18)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_DETAIL_H
@@ -89,7 +89,7 @@ void Mathematics::IntegerData<N>::Init(T value)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Êı×éÔ½½ç£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("æ•°ç»„è¶Šç•Œï¼"s));
     }
 
     Init(data);
@@ -162,7 +162,7 @@ template <int N>
 void Mathematics::IntegerData<N>::SetBit(int index, bool on)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
-    MATHEMATICS_ASSERTION_0(0 <= index && index < intSize * blockSize, "Ë÷Òı´íÎó£¡");
+    MATHEMATICS_ASSERTION_0(0 <= index && index < intSize * blockSize, "ç´¢å¼•é”™è¯¯ï¼");
 
     const auto block = index / blockSize;
     const auto bit = index % blockSize;
@@ -180,7 +180,7 @@ template <int N>
 bool Mathematics::IntegerData<N>::GetBit(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    MATHEMATICS_ASSERTION_0(0 <= index && index < intSize * blockSize, "Ë÷Òı´íÎó£¡");
+    MATHEMATICS_ASSERTION_0(0 <= index && index < intSize * blockSize, "ç´¢å¼•é”™è¯¯ï¼");
 
     const auto block = index / blockSize;
     const auto bit = index % blockSize;

@@ -1,47 +1,47 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.7 (2024/03/04 17:27)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/04 17:27)
 
 #ifndef SYSTEM_HELPER_HP_ACC_H
 #define SYSTEM_HELPER_HP_ACC_H
 
 #ifdef __HP_aCC
 
-    /// HP aCC C++ ���������ã�
+    /// HP aCC C++ 编译器设置：
 
-    /// �汾��飺���ǲ�֧�ְ汾33000֮ǰ��HP aCC��
+    /// 版本检查：我们不支持版本33000之前的HP aCC：
     #if __HP_aCC < 33000
 
-        #error "����������֧��"
+        #error "编译器不被支持"
 
     #endif  // __HP_aCC < 33000
 
-    /// ��PA-RISC��֧��aCC����չ���
+    /// 在PA-RISC上支持aCC的扩展检查
     #if 30000 < __HP_aCC && __HP_aCC < 50000
 
         #if __HP_aCC < 38000
 
-            /// ��֧�ְ汾A.03.80֮ǰ�İ汾
-            #error "����������֧��"
+            /// 不支持版本A.03.80之前的版本
+            #error "编译器不被支持"
 
         #elif !defined(__hpxstd98)
 
-            /// ����ʹ��ѡ��+hpxstd98�ͱ�A.03.80���߰汾���б���
-            #error "������ѡ�+hpxstd98������ȷ֧���������"
+            /// 必须使用选项+hpxstd98和比A.03.80更高版本进行编译
+            #error "编译器选项“+hpxstd98”是正确支持所必需的"
 
         #endif  // PA-RISC
 
     #endif  // 30000 < __HP_aCC && __HP_aCC < 50000
 
-    /// HP-UX/ia64������ѵİ汾Ϊ61300��PA-RISC������ѵİ汾Ϊ38000
+    /// HP-UX/ia64的最后已的版本为61300，PA-RISC的最后已的版本为38000
     #if ((61300 < __HP_aCC) || ((38000 < __HP_aCC) && defined(__hpxstd98)))
 
-        #error "δ֪�������汾"
+        #error "未知编译器版本"
 
     #endif  // ((61300 < __HP_aCC) || ((38000 < __HP_aCC) && defined(__hpxstd98)))
 
@@ -65,7 +65,7 @@
 
     #ifndef TCRE_SYSTEM_COMPILER
 
-        #define TCRE_SYSTEM_COMPILER "HP aCC �汾 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
+        #define TCRE_SYSTEM_COMPILER "HP aCC 版本 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
 
     #endif  // TCRE_SYSTEM_COMPILER
 

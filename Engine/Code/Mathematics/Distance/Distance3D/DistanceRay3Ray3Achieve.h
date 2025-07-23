@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 16:34)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 16:34)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RAY3_RAY3_ACHIEVE_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RAY3_RAY3_ACHIEVE_H
@@ -64,13 +64,13 @@ typename Mathematics::DistanceRay3Ray3<Real>::DistanceResult Mathematics::Distan
 
     if (this->GetZeroThreshold() <= det)
     {
-        // ÉäÏß²»Æ½ĞĞ¡£
+        // å°„çº¿ä¸å¹³è¡Œã€‚
         auto lhsT = tool.GetLhsT();
         auto rhsT = tool.GetRhsT();
 
         if (MathType::GetValue(0) <= lhsT)
         {
-            // ÇøÓò0£¨ÄÚ²¿£©
+            // åŒºåŸŸ0ï¼ˆå†…éƒ¨ï¼‰
             if (MathType::GetValue(0) <= rhsT)
             {
                 lhsT /= det;
@@ -87,7 +87,7 @@ typename Mathematics::DistanceRay3Ray3<Real>::DistanceResult Mathematics::Distan
                                        lhsT,
                                        rhsT };
             }
-            else  // ÇøÓò3£¨±ß£©
+            else  // åŒºåŸŸ3ï¼ˆè¾¹ï¼‰
             {
                 if (MathType::GetValue(0) <= originDifferenceDotLhsDirection)
                 {
@@ -103,7 +103,7 @@ typename Mathematics::DistanceRay3Ray3<Real>::DistanceResult Mathematics::Distan
         {
             const auto originDifferenceDotRhsDirection = tool.GetOriginDifferenceDotRhsDirection();
 
-            if (MathType::GetValue(0) <= rhsT)  // ÇøÓò1£¨±ß£©
+            if (MathType::GetValue(0) <= rhsT)  // åŒºåŸŸ1ï¼ˆè¾¹ï¼‰
             {
                 if (MathType::GetValue(0) <= originDifferenceDotRhsDirection)
                 {
@@ -114,7 +114,7 @@ typename Mathematics::DistanceRay3Ray3<Real>::DistanceResult Mathematics::Distan
                     return GetSquaredWithClosestPointsIsRhs(tool);
                 }
             }
-            else  // ÇøÓò2£¨½Ç£©
+            else  // åŒºåŸŸ2ï¼ˆè§’ï¼‰
             {
                 if (originDifferenceDotLhsDirection < MathType::GetValue(0))
                 {
@@ -136,12 +136,12 @@ typename Mathematics::DistanceRay3Ray3<Real>::DistanceResult Mathematics::Distan
     }
     else
     {
-        // ÉäÏßÊÇÆ½ĞĞµÄ¡£
+        // å°„çº¿æ˜¯å¹³è¡Œçš„ã€‚
         const auto directionDot = tool.GetDirectionDot();
 
         if (MathType::GetValue(0) < directionDot)
         {
-            // Ïà·´µÄ·½ÏòÏòÁ¿¡£
+            // ç›¸åçš„æ–¹å‘å‘é‡ã€‚
             if (MathType::GetValue(0) <= originDifferenceDotLhsDirection)
             {
                 return GetSquaredWithClosestPointsIsOrigin(tool);
@@ -153,7 +153,7 @@ typename Mathematics::DistanceRay3Ray3<Real>::DistanceResult Mathematics::Distan
         }
         else
         {
-            // ÏàÍ¬µÄ·½ÏòÏòÁ¿
+            // ç›¸åŒçš„æ–¹å‘å‘é‡
             if (MathType::GetValue(0) <= originDifferenceDotLhsDirection)
             {
                 return GetSquaredWithClosestPointsIsRhs(tool);

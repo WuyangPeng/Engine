@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/04/23 11:11)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/04/23 11:11)
 
 #include "ConstraintTesting.h"
 #include "CoreTools/DataTypes/TupleDetail.h"
@@ -48,13 +48,13 @@ void CoreTools::ConstraintTesting::MustBePodTest() noexcept
 {
     MAYBE_UNUSED const MustBePod<int> integerMustBePod{};
 
-#ifdef CONSTRAINT_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef CONSTRAINT_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     MAYBE_UNUSED MustBePod<void> voidMustBePod{};
 
 #endif  // CONSTRAINT_COMPILE_ERROR
 
-#ifdef CONSTRAINT_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef CONSTRAINT_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     MAYBE_UNUSED MustBePod<ConstraintTesting> constraintTestingMustBePod{};
 
@@ -66,7 +66,7 @@ void CoreTools::ConstraintTesting::MustBePodOrVoidTest() noexcept
     MAYBE_UNUSED const MustBePodOrVoid<float> floatMustBePodOrVoid{};
     MAYBE_UNUSED constexpr MustBePodOrVoid<void> voidMustBePodOrVoid{};
 
-#ifdef CONSTRAINT_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef CONSTRAINT_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     MAYBE_UNUSED MustBePodOrVoid<ConstraintTesting> constraintTestingMustBePodOrVoid{};
 
@@ -78,7 +78,7 @@ void CoreTools::ConstraintTesting::MustBeSameSizeTest() noexcept
     MAYBE_UNUSED const MustBeSameSize<int, unsigned int> integerMustBeSameSize{};
     MAYBE_UNUSED const MustBeSameSize<long, unsigned long> longMustBeSameSize{};
 
-#ifdef CONSTRAINT_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef CONSTRAINT_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     MAYBE_UNUSED MustBeSameSize<char, long> charAndLongMustBeSameSize{};
 
@@ -90,7 +90,7 @@ void CoreTools::ConstraintTesting::MustBeSubscriptableTest() noexcept
     MAYBE_UNUSED const MustBeSubscriptable<Tuple<3, int>> tupleMustBeSubscriptable{};
     MAYBE_UNUSED const MustBeSubscriptable<std::string> stringMustBeSubscriptable{};
 
-#ifdef CONSTRAINT_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef CONSTRAINT_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     MAYBE_UNUSED MustBeSubscriptable<int> integerMustBeSubscriptable{};
 
@@ -101,13 +101,13 @@ void CoreTools::ConstraintTesting::MustBeSubscriptableAsDecayablePointerTest() n
 {
     MAYBE_UNUSED const MustBeSubscriptableAsDecayablePointer<std::string*> stringPtrMustBeSubscriptableAsDecayablePointer{};
 
-#ifdef CONSTRAINT_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef CONSTRAINT_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     MAYBE_UNUSED MustBeSubscriptableAsDecayablePointer<Tuple<3, int>> tupleMustBeSubscriptableAsDecayablePointer{};
 
 #endif  // CONSTRAINT_COMPILE_ERROR
 
-#ifdef CONSTRAINT_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef CONSTRAINT_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     MAYBE_UNUSED MustBeSubscriptableAsDecayablePointer<std::string> stringMustBeSubscriptableAsDecayablePointer{};
 
@@ -118,7 +118,7 @@ void CoreTools::ConstraintTesting::MustHaveBaseTest() noexcept
 {
     MAYBE_UNUSED const MustHaveBase<ClassType, ParentType> mustHaveBase{};
 
-#ifdef CONSTRAINT_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef CONSTRAINT_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     MAYBE_UNUSED MustHaveBase<ParentType, ClassType> errorMustHaveBase{};
 

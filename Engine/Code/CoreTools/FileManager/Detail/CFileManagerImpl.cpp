@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/30 23:27)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/30 23:27)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -31,7 +31,7 @@ void CoreTools::CFileManagerImpl::Open()
 {
     if (!System::OpenCFile(file, StringConversion::StandardConversionCFileString(fileName), StringConversion::StandardConversionCFileString(mode)))
     {
-        THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("´ò¿ªÎÄ¼ş¡°%1%¡±Ê§°Ü£¡"s)) % fileName).str());
+        THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("æ‰“å¼€æ–‡ä»¶â€œ%1%â€å¤±è´¥ï¼"s)) % fileName).str());
     }
 }
 
@@ -46,7 +46,7 @@ void CoreTools::CFileManagerImpl::Close() const noexcept
 {
     if (!System::CloseCFile(file))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("¹Ø±ÕÎÄ¼ş"), fileName, SYSTEM_TEXT("Ê§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("å…³é—­æ–‡ä»¶"), fileName, SYSTEM_TEXT("å¤±è´¥ï¼"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -64,7 +64,7 @@ size_t CoreTools::CFileManagerImpl::ReadFromFile(size_t itemSize, size_t itemsNu
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     CheckItemSize(itemSize);
-    CORE_TOOLS_ASSERTION_0(0u < itemsNumber && data != nullptr, "×¼±¸Ğ´ÈëµÄÊı¾İÎŞĞ§£¡");
+    CORE_TOOLS_ASSERTION_0(0u < itemsNumber && data != nullptr, "å‡†å¤‡å†™å…¥çš„æ•°æ®æ— æ•ˆï¼");
 
     return System::ReadCFile(data, itemSize, itemsNumber, file);
 }
@@ -74,7 +74,7 @@ size_t CoreTools::CFileManagerImpl::WriteToFile(size_t itemSize, size_t itemsNum
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     CheckItemSize(itemSize);
-    CORE_TOOLS_ASSERTION_0(0u < itemsNumber && data != nullptr, "×¼±¸¶ÁÈ¡µÄÊı¾İÎŞĞ§£¡");
+    CORE_TOOLS_ASSERTION_0(0u < itemsNumber && data != nullptr, "å‡†å¤‡è¯»å–çš„æ•°æ®æ— æ•ˆï¼");
 
     return System::WriteCFile(data, itemSize, itemsNumber, file);
 }
@@ -86,7 +86,7 @@ CoreTools::CFileManagerImpl::OffType CoreTools::CFileManagerImpl::GetFileLength(
     OffType length{ 0 };
     if (!System::GetFileLength(fileName, &length))
     {
-        THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("ÎÄ¼ş¡°%1%¡±²»´æÔÚ£¡"s)) % fileName).str());
+        THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("æ–‡ä»¶â€œ%1%â€ä¸å­˜åœ¨ï¼"s)) % fileName).str());
     }
 
     return length;
@@ -179,7 +179,7 @@ CoreTools::CFileManagerImpl::PosType CoreTools::CFileManagerImpl::GetPosition() 
     }
     else
     {
-        THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("»ñÈ¡ÎÄ¼ş¡°%1%¡±µÄÎ»ÖÃÊ§°Ü£¡"s)) % fileName).str())
+        THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("è·å–æ–‡ä»¶â€œ%1%â€çš„ä½ç½®å¤±è´¥ï¼"s)) % fileName).str())
     }
 }
 

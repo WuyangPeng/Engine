@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/30 18:05)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/30 18:05)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,7 +19,7 @@ CoreTools::EventImpl::EventImpl(bool manualReset, bool initialState)
 {
     if (!System::IsSystemEventValid(handle))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³õÊ¼»¯ÊÂ¼ş¶ÔÏóÊ§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("åˆå§‹åŒ–äº‹ä»¶å¯¹è±¡å¤±è´¥ï¼"s))
     }
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -46,7 +46,7 @@ CoreTools::EventImpl::~EventImpl() noexcept
 
     if (!System::CloseSystemEvent(handle))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("Ïú»ÙÊÂ¼ş¶ÔÏóÊ§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("é”€æ¯äº‹ä»¶å¯¹è±¡å¤±è´¥ï¼"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -65,7 +65,7 @@ void CoreTools::EventImpl::SetEvent() const
 
     if (!System::SetSystemEvent(handle))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("SetEventÊ§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("SetEventå¤±è´¥ï¼"s))
     }
 }
 
@@ -75,7 +75,7 @@ void CoreTools::EventImpl::ResetEvent() const
 
     if (!System::ResetSystemEvent(handle))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ResetEventÊ§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("ResetEventå¤±è´¥ï¼"s))
     }
 }
 
@@ -85,6 +85,6 @@ void CoreTools::EventImpl::Wait() const
 
     if (!System::WaitForSystemEvent(handle))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("½øÈëEventÊ§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¿›å…¥Eventå¤±è´¥ï¼"s))
     }
 }

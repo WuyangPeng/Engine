@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒýÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:50)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“Žç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:50)
 
 #ifndef RENDERING_DETAIL_CLOD_MESH_COLLAPSE_INFO_H
 #define RENDERING_DETAIL_CLOD_MESH_COLLAPSE_INFO_H
@@ -14,7 +14,7 @@
 
 namespace Rendering
 {
-    // ÓÐ¹ØËú±ßµÄÐÅÏ¢¡£
+    // æœ‰å…³å¡Œè¾¹çš„ä¿¡æ¯ã€‚
     class RENDERING_HIDDEN_DECLARE ClodMeshCollapseInfo
     {
     public:

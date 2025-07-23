@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 13:53)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 13:53)
 
 #ifndef MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_RAY3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_RAY3_TRIANGLE3_DETAIL_H
@@ -58,13 +58,13 @@ Mathematics::Triangle3<Real> Mathematics::StaticFindIntersectorRay3Triangle3<Rea
 template <typename Real>
 void Mathematics::StaticFindIntersectorRay3Triangle3<Real>::Find()
 {
-    // ¼ÆËãÆ«ÒÆÔ­µã£¬±ßºÍ·¨Ïß¡£
+    // è®¡ç®—åç§»åŸç‚¹ï¼Œè¾¹å’Œæ³•çº¿ã€‚
     auto diff = ray.GetOrigin() - triangle.GetVertex(0);
     auto edge1 = triangle.GetVertex(1) - triangle.GetVertex(0);
     auto edge2 = triangle.GetVertex(2) - triangle.GetVertex(0);
     const auto normal = Vector3ToolsType::CrossProduct(edge1, edge2);
 
-    // Çó½â Q + t * D = b1 * E1 + b2 * E2£¨Q = kDiff£¬D = ÉäÏß·½Ïò£¬
+    // æ±‚è§£ Q + t * D = b1 * E1 + b2 * E2ï¼ˆQ = kDiffï¼ŒD = å°„çº¿æ–¹å‘ï¼Œ
     // E1 = kEdge1, E2 = kEdge2, N = Cross(E1,E2))
     //   |Dot(D,N)| * b1 = sign(Dot(D,N)) * Dot(D,Cross(Q,E2))
     //   |Dot(D,N)| * b2 = sign(Dot(D,N)) * Dot(D,Cross(E1,Q))
@@ -82,7 +82,7 @@ void Mathematics::StaticFindIntersectorRay3Triangle3<Real>::Find()
     }
     else
     {
-        // ÉäÏßºÍÈı½ÇĞÎÊÇÆ½ĞĞµÄ£¬¼´Ê¹ÉäÏßÏà½»Ò²³ÆÆäÎª¡°ÎŞ½»¼¯¡±¡£
+        // å°„çº¿å’Œä¸‰è§’å½¢æ˜¯å¹³è¡Œçš„ï¼Œå³ä½¿å°„çº¿ç›¸äº¤ä¹Ÿç§°å…¶ä¸ºâ€œæ— äº¤é›†â€ã€‚
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
@@ -95,11 +95,11 @@ void Mathematics::StaticFindIntersectorRay3Triangle3<Real>::Find()
         {
             if (value0 + value1 <= directionDotNormal)
             {
-                // ÏßÓëÈı½ÇĞÎÏà½»£¬¼ì²éÉäÏßÊÇ·ñÏà½»¡£
+                // çº¿ä¸ä¸‰è§’å½¢ç›¸äº¤ï¼Œæ£€æŸ¥å°„çº¿æ˜¯å¦ç›¸äº¤ã€‚
                 auto value2 = -sign * Vector3ToolsType::DotProduct(diff, normal);
                 if (MathType::GetValue(0) <= value2)
                 {
-                    // ÉäÏßÓëÈı½ÇĞÎÏà½»¡£
+                    // å°„çº¿ä¸ä¸‰è§’å½¢ç›¸äº¤ã€‚
                     auto inv = (MathType::GetValue(1)) / directionDotNormal;
                     rayParameter = value2 * inv;
                     triangleBary1 = value0 * inv;
@@ -108,13 +108,13 @@ void Mathematics::StaticFindIntersectorRay3Triangle3<Real>::Find()
                     this->SetIntersectionType(IntersectionType::Point);
                     return;
                 }
-                // else: t < 0, Ã»ÓĞ½»¼¯
+                // else: t < 0, æ²¡æœ‰äº¤é›†
             }
-            // else: b1+b2 > 1, Ã»ÓĞ½»¼¯
+            // else: b1+b2 > 1, æ²¡æœ‰äº¤é›†
         }
-        // else: b2 < 0,  Ã»ÓĞ½»¼¯
+        // else: b2 < 0,  æ²¡æœ‰äº¤é›†
     }
-    // else: b1 < 0, Ã»ÓĞ½»¼¯
+    // else: b1 < 0, æ²¡æœ‰äº¤é›†
 
     this->SetIntersectionType(IntersectionType::Empty);
 }

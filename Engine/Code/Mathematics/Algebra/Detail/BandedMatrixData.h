@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.5 (2024/02/18 13:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.5 (2024/02/18 13:19)
 
 #ifndef MATHEMATICS_ALGEBRA_BANDED_MATRIX_DATA_H
 #define MATHEMATICS_ALGEBRA_BANDED_MATRIX_DATA_H
@@ -35,15 +35,15 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        // ³ÉÔ±·ÃÎÊ
+        // æˆå‘˜è®¿é—®
         NODISCARD int GetSize() const noexcept;
         NODISCARD int GetBandsNumber() const;
         NODISCARD int GetStreamSize() const;
 
-        // ÖØÉè´óĞ¡»áÇå¿ÕÔ­ÓĞÊı¾İ¡£
+        // é‡è®¾å¤§å°ä¼šæ¸…ç©ºåŸæœ‰æ•°æ®ã€‚
         void ResetSize(int aSize, int bandsNumber);
 
-        // ÏÂÈı½Ç
+        // ä¸‹ä¸‰è§’
         // GetBand(index):  0 <= index < bandMax
         NODISCARD int GetBandMax(int index) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
@@ -53,7 +53,7 @@ namespace Mathematics
         NODISCARD Real& operator()(int row, int column);
         NODISCARD const Real& operator()(int row, int column) const;
 
-        // ±ãÀûº¯ÊıÓÃÓÚ³õÊ¼»¯¾ØÕó
+        // ä¾¿åˆ©å‡½æ•°ç”¨äºåˆå§‹åŒ–çŸ©é˜µ
         void SetZero();
 
     private:

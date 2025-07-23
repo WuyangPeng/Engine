@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/12 16:04)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 16:04)
 
 #include "ControlledObjectTesting.h"
 #include "Detail/ControlledObjectTest.h"
@@ -70,8 +70,8 @@ void Rendering::ControlledObjectTesting::SearchSelfTest()
 
     const auto objects0 = controlledObjectTest->GetAllConstObjectsByName(controlledObjectTestName);
     const auto objects1 = controlledObjectTest->GetAllObjectsByName(controlledObjectTestName);
-    ASSERT_EQUAL_FAILURE_THROW(1u, objects0.size(), "¶ÔÏóÎ´ÕÒµ½¡£");
-    ASSERT_EQUAL_FAILURE_THROW(1u, objects1.size(), "¶ÔÏóÎ´ÕÒµ½¡£");
+    ASSERT_EQUAL_FAILURE_THROW(1u, objects0.size(), "å¯¹è±¡æœªæ‰¾åˆ°ã€‚");
+    ASSERT_EQUAL_FAILURE_THROW(1u, objects1.size(), "å¯¹è±¡æœªæ‰¾åˆ°ã€‚");
     ASSERT_EQUAL(objects0.at(0), objects1.at(0));
 
     const auto nullName = "null";
@@ -98,14 +98,14 @@ void Rendering::ControlledObjectTesting::SearchChildTest()
 
     const auto objects0 = controlledObjectTest->GetAllConstObjectsByName(controllerTestName + "0");
     const auto objects1 = controlledObjectTest->GetAllObjectsByName(controllerTestName + "0");
-    ASSERT_EQUAL_FAILURE_THROW(1u, objects0.size(), "¶ÔÏóÎ´ÕÒµ½¡£");
-    ASSERT_EQUAL_FAILURE_THROW(1u, objects1.size(), "¶ÔÏóÎ´ÕÒµ½¡£");
+    ASSERT_EQUAL_FAILURE_THROW(1u, objects0.size(), "å¯¹è±¡æœªæ‰¾åˆ°ã€‚");
+    ASSERT_EQUAL_FAILURE_THROW(1u, objects1.size(), "å¯¹è±¡æœªæ‰¾åˆ°ã€‚");
     ASSERT_EQUAL(objects0.at(0), objects1.at(0));
 
     const auto objects2 = controlledObjectTest->GetAllConstObjectsByName(controllerTestName + "1");
     const auto objects3 = controlledObjectTest->GetAllObjectsByName(controllerTestName + "1");
-    ASSERT_EQUAL_FAILURE_THROW(2u, objects2.size(), "¶ÔÏóÎ´ÕÒµ½¡£");
-    ASSERT_EQUAL_FAILURE_THROW(2u, objects3.size(), "¶ÔÏóÎ´ÕÒµ½¡£");
+    ASSERT_EQUAL_FAILURE_THROW(2u, objects2.size(), "å¯¹è±¡æœªæ‰¾åˆ°ã€‚");
+    ASSERT_EQUAL_FAILURE_THROW(2u, objects3.size(), "å¯¹è±¡æœªæ‰¾åˆ°ã€‚");
     ASSERT_EQUAL(objects2.at(0), objects3.at(0));
     ASSERT_EQUAL(objects2.at(1), objects3.at(1));
 }
@@ -211,10 +211,10 @@ void Rendering::ControlledObjectTesting::StreamTest()
 
     const auto inTopLevel = bufferInStream.GetTopLevel();
 
-    ASSERT_EQUAL_FAILURE_THROW(inTopLevel.GetTopLevelSize(), 1, "Á÷¶ÁÈ¡Ê§°Ü¡£");
+    ASSERT_EQUAL_FAILURE_THROW(inTopLevel.GetTopLevelSize(), 1, "æµè¯»å–å¤±è´¥ã€‚");
 
     const auto begin = boost::polymorphic_pointer_cast<ControlledObjectTest>(*inTopLevel.begin());
-    ASSERT_EQUAL_FAILURE_THROW(begin->GetNumControllers(), 3, "Á÷¶ÁÈ¡Ê§°Ü¡£");
+    ASSERT_EQUAL_FAILURE_THROW(begin->GetNumControllers(), 3, "æµè¯»å–å¤±è´¥ã€‚");
 
     const auto controllerTest3 = boost::polymorphic_pointer_cast<ControllerTest>(begin->GetController(0));
     const auto controllerTest4 = boost::polymorphic_pointer_cast<ControllerTest>(begin->GetController(1));

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #ifndef ANCIENT_BOOKS_REIGN_TITLE_H
 #define ANCIENT_BOOKS_REIGN_TITLE_H
@@ -72,17 +72,17 @@ namespace AncientBooks
 
     private:
         int64_t id;  // Id
-        String name;  // Ãû³Æ
-        IntContainer emperor;  // »ÊµÛ
-        int serial;  // ĞòÌ–
-        int beginYear;  // ¿ªÊ¼Äê
-        int beginMonth;  // ¿ªÊ¼ÔÂ
-        int beginSexagenaryCycle;  // ¿ªÊ¼¸ÉÖ§ÈÕ
-        int beginDay;  // ¿ªÊ¼ÈÕ
-        int endYear;  // ½áÊøÄê
-        int endMonth;  // ½áÊøÔÂ
-        int endSexagenaryCycle;  // ½áÊø¸ÉÖ§ÈÕ
-        int endDay;  // ½áÊøÈÕ
+        String name;  // åç§°
+        IntContainer emperor;  // çš‡å¸
+        int serial;  // åºè™Ÿ
+        int beginYear;  // å¼€å§‹å¹´
+        int beginMonth;  // å¼€å§‹æœˆ
+        int beginSexagenaryCycle;  // å¼€å§‹å¹²æ”¯æ—¥
+        int beginDay;  // å¼€å§‹æ—¥
+        int endYear;  // ç»“æŸå¹´
+        int endMonth;  // ç»“æŸæœˆ
+        int endSexagenaryCycle;  // ç»“æŸå¹²æ”¯æ—¥
+        int endDay;  // ç»“æŸæ—¥
     };
 }
 

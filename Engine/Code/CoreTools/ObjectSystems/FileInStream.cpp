@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 22:22)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 22:22)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -36,27 +36,27 @@ void CoreTools::FileInStream::Load(const System::String& fileName)
 
     const auto readSize = manager.GetFileByteSize();
 
-    /// »ñÈ¡¸ÃÎÄ¼şµÄ°æ±¾¡£
+    /// è·å–è¯¥æ–‡ä»¶çš„ç‰ˆæœ¬ã€‚
     const auto version = Version::GetVersion();
 
     const auto length = version.length();
     if (readSize < boost::numeric_cast<int>(length + 1))
     {
-        THROW_EXCEPTION(fileName + SYSTEM_TEXT("°æ±¾×Ö·û´®²»´æÔÚ»òÕß´æ´¢µÄ°æ±¾×Ö·û´®²»¹»´ó"s))
+        THROW_EXCEPTION(fileName + SYSTEM_TEXT("ç‰ˆæœ¬å­—ç¬¦ä¸²ä¸å­˜åœ¨æˆ–è€…å­˜å‚¨çš„ç‰ˆæœ¬å­—ç¬¦ä¸²ä¸å¤Ÿå¤§"s))
     }
 
     const auto bufferInformation = std::make_shared<FileBuffer>(readSize);
 
     manager.Read(CoreTools::GetStreamSize<char>(), bufferInformation->GetSize(), bufferInformation->GetBufferBegin());
 
-    /// ±È½ÏËùĞèµÄÎÄ¼ş°æ±¾¡£
+    /// æ¯”è¾ƒæ‰€éœ€çš„æ–‡ä»¶ç‰ˆæœ¬ã€‚
     if (const std::string fileVersion{ bufferInformation->GetBufferBegin(), length };
         fileVersion != version)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("°æ±¾×Ö·û´®²»Æ¥Åä£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("ç‰ˆæœ¬å­—ç¬¦ä¸²ä¸åŒ¹é…ï¼"s))
     }
 
-    /// ´Ó»º³åÇøÖØ¹¹³¡¾°Í¼¡£
+    /// ä»ç¼“å†²åŒºé‡æ„åœºæ™¯å›¾ã€‚
     const BufferInStream stream{ bufferInformation, boost::numeric_cast<int>(length) };
 
     inTopLevel = stream.GetTopLevel();

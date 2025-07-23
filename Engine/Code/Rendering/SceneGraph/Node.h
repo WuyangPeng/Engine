@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.3 (2023/12/28 17:54)
+/// 标准：std:c++20
+/// 版本：1.0.0.3 (2023/12/28 17:54)
 
 #ifndef RENDERING_SCENE_GRAPH_NODE_H
 #define RENDERING_SCENE_GRAPH_NODE_H
@@ -18,7 +18,7 @@
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(Node, NodeImpl);
 
-// �����ʾ�ڿռ��νṹ�жԽڵ���з��顣
+// 此类表示在空间层次结构中对节点进行分组。
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE Node : public Spatial
@@ -51,64 +51,64 @@ namespace Rendering
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Node);
         CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 
-        /// ���ǵ�ǰ���������Ԫ����������ЩԪ�ز�����֤���ж��Ƿǿա�
-        /// ���,���������������ͷ�����Ԫ��GetChild(...)��
-        /// ��Ӧ���ڽ�����֮ǰ���Է���ָ�롣
+        /// 这是当前的子数组的元素数量。这些元素并不保证所有都是非空。
+        /// 因此,当您遍历这个数组和访问子元素GetChild(...)，
+        /// 你应该在解引用之前测试返回指针。
         NODISCARD int GetNumChildren() const;
 
-        /// ����һ����Ԫ�ص��ڵ㡣
-        /// ��������ɹ�,���ص�ֵ����Ԫ�ر��洢�����������,
-        /// ����0 <= i < GetNumChildren()��
-        /// �洢�ڵ�һ������������Ŀղ۵ġ�
-        /// ������в۱�����֮�������Ԫ�ر����ӵ������С�
-        /// (���ܵ������·��������)
+        /// 附加一个子元素到节点。
+        /// 如果函数成功,返回的值是子元素被存储在数组的索引,
+        /// 其中0 <= i < GetNumChildren()。
+        /// 存储于第一个可用子数组的空槽的。
+        /// 如果所有槽被填满之后，这个子元素被附加到数组中。
+        /// (可能导致重新分配的数组)
 
-        /// ����ʧ�ܵ���child����null�򵱡�child���Ѿ���һ��parent,
-        /// �����������,��������-1��
-        /// �ڵ��γ�һ����,������һ����һ��������޻�ͼ��
-        /// �����,һ���ڵ㲻����һ�����ϵ�parent������,
+        /// 函数失败当‘child’是null或当“child”已经有一个parent,
+        /// 在这种情况下,函数返回-1。
+        /// 节点形成一个树,而不是一个更一般的有向无环图。
+        /// 结果是,一个节点不能有一个以上的parent。例如,
 
         /// NodeSharedPtr node0 = <some node>;
         /// SpatialSharedPtr child = <some child>;
         /// int index = node0->AttachChild(child);
         /// NodeSharedPtr node1 = <some node>;
 
-        /// ���ﴥ������,��Ϊ��child���Ѿ���һ��parent(node0)��
+        /// 这里触发断言,因为“child”已经有一个parent(node0)。
         /// node1->AttachChild(child);
 
-        /// ��������ȷ��childһ����parent�ķ�����
+        /// 以下是正确给child一个新parent的方法。
         /// node0->DetachChild(child);
-        /// �� node0->DetachChildAt(index);
+        /// 或 node0->DetachChildAt(index);
         /// node1->AttachChild(child);
 
-        /// ���һ��������DetachChild����֮ǰ,�����child��ֻ��node0����,
-        /// Ҫɾ���ķ���ᵼ�¡�child����ɾ��(���ӽڵ��ڲ�ʹ�����ü���)��
-        /// ������뱣�桰child���Ա����ã������²�����
+        /// 最后一个例子在DetachChild调用之前,如果‘child’只有node0引用,
+        /// 要删除的分离会导致“child”被删除(其子节点内部使用引用计数)。
+        /// 如果你想保存“child”以备后用，做以下操作。
         /// SpatialSharedPtr saveChild = node0->GetChild(0);
         /// node0->DetachChild(saveChild);
         /// node1->AttachChild(saveChild);
         int AttachChild(const SpatialSharedPtr& child);
 
-        /// ����һ���ӽڵ������ڵ㡣����ӽڵ��������зǿ�,
-        /// ����ֵ�������д洢���ӽڵ������������,�ú�������-1��
+        /// 分离一个子节点从这个节点。如果子节点在数组中非空,
+        /// 返回值是数组中存储的子节点的索引。否则,该函数返回-1。
         int DetachChild(const SpatialSharedPtr& child);
 
-        /// ����һ���ӽڵ������ڵ㡣
-        /// ���0 <= i < GetNumChildren(),����ֵ���ӽڵ������;
-        /// ����,��������nullptr��
+        /// 分离一个子节点从这个节点。
+        /// 如果0 <= i < GetNumChildren(),返回值是子节点的索引;
+        /// 否则,函数返回nullptr。
         SpatialSharedPtr DetachChildAt(int index);
 
-        /// �Ӵ˽ڵ���������ӽڵ㡣
+        /// 从此节点分离所有子节点。
         void DetachAllChildren();
 
-        // ������ͬ��������ͬAttachChildһ�������ڲ����ж��parents��
-        // ���0 <= index < GetNumChildren(),�ú����ɹ�,����index��
-        // ���index������Χ,�������*��Ȼ*�ɹ�,�����ӽڵ㵽�����ĩβ��
-        // ����ֵ��֮ǰ�洢������index���ӽڵ㡣
+        // 在这里同样的限制同AttachChild一样，关于不能有多个parents。
+        // 如果0 <= index < GetNumChildren(),该函数成功,返回index。
+        // 如果index超出范围,这个函数*依然*成功,附加子节点到数组的末尾。
+        // 返回值是之前存储在索引index的子节点。
         NODISCARD SpatialSharedPtr SetChild(int index, const SpatialSharedPtr& child);
 
-        /// ��ȡָ�����������ӽڵ㡣���0 <= i < GetNumChildren(),�ú����ɹ�,�����������ӽڵ㡣
-        /// ������ס,child[i]�ܿ�����null�����������Χ,�������ؿն���
+        /// 获取指定的索引的子节点。如果0 <= i < GetNumChildren(),该函数成功,返回索引的子节点。
+        /// ——记住,child[i]很可能是null。如果超出范围,函数返回空对象。
         NODISCARD SpatialSharedPtr GetChild(int index);
         NODISCARD ConstSpatialSharedPtr GetConstChild(int index) const;
 
@@ -118,10 +118,10 @@ namespace Rendering
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
     protected:
-        /// �Էּ��ü���֧�֡�
+        /// 对分级裁剪的支持。
         void GetVisibleSet(Culler& culler, const CameraSharedPtr& camera, bool noCull) override;
 
-        /// �Լ��θ��µ�֧�֡�
+        /// 对几何更新的支持。
         NODISCARD bool UpdateWorldData(double applicationTime) override;
         void UpdateWorldBound() override;
         NODISCARD bool UpdateChildWorldData(double applicationTime);

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:59)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:59)
 
 #include "Rendering/RenderingExport.h"
 
@@ -16,6 +16,7 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 #include "Mathematics/CurvesSurfacesVolumes/BSplineBasisDetail.h"
 #include "Mathematics/CurvesSurfacesVolumes/BSplineRectangleDetail.h"
 #include "Mathematics/CurvesSurfacesVolumes/ParametricSurfaceDetail.h"
@@ -199,7 +200,7 @@ void Rendering::BSplineSurfacePatch::Load(CoreTools::BufferSource& source)
         break;
         default:
         {
-            RENDERING_ASSERTION_0(false, "ÒâÍâÇé¿ö\n");
+            RENDERING_ASSERTION_0(false, "æ„å¤–æƒ…å†µ\n");
         }
         break;
     }
@@ -316,7 +317,7 @@ void Rendering::BSplineSurfacePatch::Save(CoreTools::BufferTarget& target) const
         break;
         default:
         {
-            RENDERING_ASSERTION_0(false, "ÒâÍâÇé¿ö\n");
+            RENDERING_ASSERTION_0(false, "æ„å¤–æƒ…å†µ\n");
         }
         break;
     }
@@ -340,38 +341,38 @@ int Rendering::BSplineSurfacePatch::GetStreamingSize() const
     size += CoreTools::GetStreamSize(numCtrlPoints1);
     size += CoreTools::GetStreamSize(degree0);
     size += CoreTools::GetStreamSize(degree1);
-    size += 2 * CoreTools::GetStreamSize(loop0);  // loop0, loop1
+    size += 2 * CoreTools::GetStreamSize(loop0); // loop0, loop1
 
     switch (constructor)
     {
         case 1:
         {
-            size += 2 * CoreTools::GetStreamSize(loop0);  // open0, open1
+            size += 2 * CoreTools::GetStreamSize(loop0); // open0, open1
         }
         break;
         case 2:
         {
-            size += CoreTools::GetStreamSize(loop0);  // open0
+            size += CoreTools::GetStreamSize(loop0); // open0
 
-            size += (numCtrlPoints1 - degree1 - 1) * CoreTools::GetStreamSize(float{});  // knot1[]
+            size += (numCtrlPoints1 - degree1 - 1) * CoreTools::GetStreamSize(float{}); // knot1[]
         }
         break;
         case 3:
         {
-            size += (numCtrlPoints0 - degree0 - 1) * CoreTools::GetStreamSize(float{});  // knot0[]
+            size += (numCtrlPoints0 - degree0 - 1) * CoreTools::GetStreamSize(float{}); // knot0[]
 
-            size += CoreTools::GetStreamSize(loop0);  // open1
+            size += CoreTools::GetStreamSize(loop0); // open1
         }
         break;
         case 4:
         {
-            size += (numCtrlPoints0 - degree0 - 1) * CoreTools::GetStreamSize(float{});  // knot0[]
-            size += (numCtrlPoints1 - degree1 - 1) * CoreTools::GetStreamSize(float{});  // knot1[]
+            size += (numCtrlPoints0 - degree0 - 1) * CoreTools::GetStreamSize(float{}); // knot0[]
+            size += (numCtrlPoints1 - degree1 - 1) * CoreTools::GetStreamSize(float{}); // knot1[]
         }
         break;
         default:
         {
-            RENDERING_ASSERTION_0(false, "ÒâÍâÇé¿ö\n");
+            RENDERING_ASSERTION_0(false, "æ„å¤–æƒ…å†µ\n");
         }
         break;
     }

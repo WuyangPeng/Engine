@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.2 (2024/10/26 15:39)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.2 (2024/10/26 15:39)
 
 #ifndef SYSTEM_WINDOWS_WINDOW_NAMED_PIPE_H
 #define SYSTEM_WINDOWS_WINDOW_NAMED_PIPE_H
@@ -15,7 +15,7 @@
 #include "Using/WindowsUsing.h"
 #include "System/Security/Using/SecurityBaseUsing.h"
 
-/// ÃüÃû¹ÜµÀµÄ´´½¨ºÍ¹Ø±Õ¡£
+/// å‘½åç®¡é“çš„åˆ›å»ºå’Œå…³é—­ã€‚
 namespace System
 {
     NODISCARD bool SYSTEM_DEFAULT_DECLARE CreateSystemPipe(WindowsHandlePtr readPipe,

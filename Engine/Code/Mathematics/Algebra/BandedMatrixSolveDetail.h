@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.5 (2024/02/18 13:34)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.5 (2024/02/18 13:34)
 
 #ifndef MATHEMATICS_ALGEBRA_BANDED_MATRIX_SOLVE_DETAIL_H
 #define MATHEMATICS_ALGEBRA_BANDED_MATRIX_SOLVE_DETAIL_H
@@ -305,8 +305,8 @@ requires std::is_arithmetic_v<Real> bool Mathematics::BandedMatrixSolve<Real>::C
 
     if (input.GetLowerBandsNumber() != input.GetUpperBandsNumber())
     {
-        /// ÎŞĞ§µÄ´ø×´ÊıÁ¿¡£
-        THROW_EXCEPTION(SYSTEM_TEXT("Bands ±ØĞëÏàµÈÔÚ CholeskyFactor\n"s))
+        /// æ— æ•ˆçš„å¸¦çŠ¶æ•°é‡ã€‚
+        THROW_EXCEPTION(SYSTEM_TEXT("Bands å¿…é¡»ç›¸ç­‰åœ¨ CholeskyFactor\n"s))
     }
 
     if (solve == BandedMatrixSolveFlags::Unsolved)
@@ -318,10 +318,10 @@ requires std::is_arithmetic_v<Real> bool Mathematics::BandedMatrixSolve<Real>::C
 
         for (auto index = 0; index < size; ++index)
         {
-            // Ã¿´Î¿ªÊ¼±éÀúµÄ×îĞ¡ÁĞÊı¡££¨ÖÁÉÙ´Ó0¿ªÊ¼£©
+            // æ¯æ¬¡å¼€å§‹éå†çš„æœ€å°åˆ—æ•°ã€‚ï¼ˆè‡³å°‘ä»0å¼€å§‹ï¼‰
             const auto minColumn = std::max(0, index - lowerBandsNumber);
 
-            // ´Ó×îĞ¡ÁĞÊı±éÀúµ½Ë÷ÒıÊı
+            // ä»æœ€å°åˆ—æ•°éå†åˆ°ç´¢å¼•æ•°
             for (auto column = minColumn; column < index; ++column)
             {
                 const auto maxColumn = std::min(column + lowerBandsNumber, sizeMinusOne);
@@ -332,10 +332,10 @@ requires std::is_arithmetic_v<Real> bool Mathematics::BandedMatrixSolve<Real>::C
                 }
             }
 
-            // ±éÀúµ½µÄ×î´óÁĞÊı£¬£¨ÖÁ¶àÎª×Ü´óĞ¡¼õ1£©
+            // éå†åˆ°çš„æœ€å¤§åˆ—æ•°ï¼Œï¼ˆè‡³å¤šä¸ºæ€»å¤§å°å‡1ï¼‰
             const auto maxColumn = std::min(index + lowerBandsNumber, sizeMinusOne);
 
-            // ½«ÏÂÈı½Ç¾ØÕóµÄÖµ¸´ÖÆµ½ÉÏÈı½Ç¾ØÕó
+            // å°†ä¸‹ä¸‰è§’çŸ©é˜µçš„å€¼å¤åˆ¶åˆ°ä¸Šä¸‰è§’çŸ©é˜µ
             for (auto i = 0; i < index; ++i)
             {
                 cholesky(i, index) = cholesky(index, i);
@@ -367,11 +367,11 @@ requires std::is_arithmetic_v<Real>
 typename Mathematics::BandedMatrixSolve<Real>::VariableLengthVectorType Mathematics::BandedMatrixSolve<Real>::SolveSystem(const VariableLengthVectorType& vector)
 {
     MATHEMATICS_CLASS_IS_VALID_6;
-    MATHEMATICS_ASSERTION_0(vector.GetSize() == GetSize(), "¾ØÕóºÍÏòÁ¿´óĞ¡²»ÏàµÈ");
+    MATHEMATICS_ASSERTION_0(vector.GetSize() == GetSize(), "çŸ©é˜µå’Œå‘é‡å¤§å°ä¸ç›¸ç­‰");
 
     if (!CholeskyFactor())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Òò×Ó·Ö½âÊ§°ÜÔÚSolveSystem£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å› å­åˆ†è§£å¤±è´¥åœ¨SolveSystemï¼"s))
     }
 
     auto solveLowerVector = SolveLower(vector);
@@ -392,7 +392,7 @@ typename Mathematics::BandedMatrixSolve<Real>::VariableLengthVectorType Mathemat
         const auto lowerRowRow = cholesky(row, row);
         if (MathType::FAbs(lowerRowRow) < epsilon)
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("Òò×Ó·Ö½âÊ§°ÜÔÚSolveLower£¡"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("å› å­åˆ†è§£å¤±è´¥åœ¨SolveLowerï¼"s));
         }
 
         for (auto column = 0; column < row; ++column)
@@ -420,7 +420,7 @@ typename Mathematics::BandedMatrixSolve<Real>::VariableLengthVectorType Mathemat
         const auto upperRowRow = cholesky(row, row);
         if (MathType::FAbs(upperRowRow) < epsilon)
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("Òò×Ó·Ö½âÊ§°ÜÔÚSolveUpper£¡"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("å› å­åˆ†è§£å¤±è´¥åœ¨SolveUpperï¼"s));
         }
 
         for (auto column = row + 1; column < size; ++column)
@@ -441,11 +441,11 @@ template <bool RowMajor>
 typename Mathematics::BandedMatrixSolve<Real>::VariableMatrixType Mathematics::BandedMatrixSolve<Real>::SolveSystem(const VariableMatrixType& matrix)
 {
     MATHEMATICS_CLASS_IS_VALID_6;
-    MATHEMATICS_ASSERTION_0(matrix.GetColumnsNumber() == GetSize() && matrix.GetRowsNumber() == GetSize(), "¾ØÕó´óĞ¡²»ÏàµÈ");
+    MATHEMATICS_ASSERTION_0(matrix.GetColumnsNumber() == GetSize() && matrix.GetRowsNumber() == GetSize(), "çŸ©é˜µå¤§å°ä¸ç›¸ç­‰");
 
     if (!CholeskyFactor())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Òò×Ó·Ö½âÊ§°ÜÔÚSolveSystem£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å› å­åˆ†è§£å¤±è´¥åœ¨SolveSystemï¼"s))
     }
 
     auto solveLowerMatrix = SolveLower<RowMajor>(matrix);
@@ -467,7 +467,7 @@ typename Mathematics::BandedMatrixSolve<Real>::VariableMatrixType Mathematics::B
         const auto lowerRowRow = cholesky(row, row);
         if (MathType::FAbs(lowerRowRow) < epsilon)
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("Òò×Ó·Ö½âÊ§°ÜÔÚSolveLower£¡"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("å› å­åˆ†è§£å¤±è´¥åœ¨SolveLowerï¼"s));
         }
 
         for (auto column = 0; column < row; ++column)
@@ -504,7 +504,7 @@ typename Mathematics::BandedMatrixSolve<Real>::VariableMatrixType Mathematics::B
         const auto upperRowRow = cholesky(row, row);
         if (MathType::FAbs(upperRowRow) < epsilon)
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("Òò×Ó·Ö½âÊ§°ÜÔÚSolveUpper£¡"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("å› å­åˆ†è§£å¤±è´¥åœ¨SolveUpperï¼"s));
         }
 
         for (auto column = row + 1; column < GetSize(); ++column)

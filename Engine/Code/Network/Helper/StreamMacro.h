@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.11 (2024/06/04 20:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.11 (2024/06/04 20:28)
 
 #ifndef NETWORK_NETWORK_HELPER_NETWORK_STREAM_MACRO_H
 #define NETWORK_NETWORK_HELPER_NETWORK_STREAM_MACRO_H
@@ -18,7 +18,7 @@
 #define NETWORK_ABSTRACT_FACTORY_DEFINE(namespaceName, className)                                                               \
     Network::MessageInterfaceSharedPtr namespaceName::className::Factory(Network::MessageSource&, MessageHeadStrategy, int64_t) \
     {                                                                                                                           \
-        ASSERTION_0(false, "³éÏóÀàÃ»ÓĞ¹¤³§£¡\n");                                                                               \
+        ASSERTION_0(false, "æŠ½è±¡ç±»æ²¡æœ‰å·¥å‚ï¼\n");                                                                               \
         return Network::MessageInterfaceSharedPtr{};                                                                            \
     }
 
@@ -39,7 +39,7 @@
     const auto usedReported = ClassType::GetStreamingSize();                                            \
     if (usedReported < usedLoad)                                                                        \
     {                                                                                                   \
-        CoreTools::Error::Format format{ SYSTEM_TEXT("¶ÁÈ¡²»Æ¥ÅäµÄ×Ö½ÚÊı£º¶ÁÈ¡ = %1%£¬ËùĞè = %2%\n") }; \
+        CoreTools::Error::Format format{ SYSTEM_TEXT("è¯»å–ä¸åŒ¹é…çš„å­—èŠ‚æ•°ï¼šè¯»å– = %1%ï¼Œæ‰€éœ€ = %2%\n") }; \
         format % usedLoad % usedReported;                                                               \
         THROW_EXCEPTION(format.str());                                                                  \
     }
@@ -53,7 +53,7 @@
     const auto usedReported = ClassType::GetStreamingSize();                                            \
     if (usedReported < usedSave)                                                                        \
     {                                                                                                   \
-        CoreTools::Error::Format format{ SYSTEM_TEXT("±£´æ²»Æ¥ÅäµÄ×Ö½ÚÊı£º±£´æ = %1%£¬ËùĞè = %2%\n") }; \
+        CoreTools::Error::Format format{ SYSTEM_TEXT("ä¿å­˜ä¸åŒ¹é…çš„å­—èŠ‚æ•°ï¼šä¿å­˜ = %1%ï¼Œæ‰€éœ€ = %2%\n") }; \
         format % usedSave % usedReported;                                                               \
         THROW_EXCEPTION(format.str());                                                                  \
     }

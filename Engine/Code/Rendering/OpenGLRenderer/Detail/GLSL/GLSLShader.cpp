@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2024/01/09 17:12)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2024/01/09 17:12)
 
 #include "Rendering/RenderingExport.h"
 
@@ -342,7 +342,7 @@ void Rendering::GLSLShader::Set(const std::string& textureName, const TextureSin
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    // GLSL textureNameÃ»ÓĞÊ¹ÓÃ
+    // GLSL textureNameæ²¡æœ‰ä½¿ç”¨
     System::UnusedFunction(textureName);
 
     ParentType::Set(samplerName, texture);
@@ -353,7 +353,7 @@ void Rendering::GLSLShader::Set(const std::string& textureName, const TextureArr
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    // GLSL textureNameÃ»ÓĞÊ¹ÓÃ
+    // GLSL textureNameæ²¡æœ‰ä½¿ç”¨
     System::UnusedFunction(textureName);
 
     ParentType::Set(samplerName, texture);

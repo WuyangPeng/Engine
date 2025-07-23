@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 16:31)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 16:31)
 
 #ifndef MATHEMATICS_DISTANCE_DIST_LINE3_RECTANGLE3_DETAIL_H
 #define MATHEMATICS_DISTANCE_DIST_LINE3_RECTANGLE3_DETAIL_H
@@ -57,13 +57,13 @@ typename Mathematics::DistanceLine3Rectangle3<Real>::DistanceResult Mathematics:
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    // ²âÊÔÏßÊÇ·ñÓë¾ØĞÎÏà½»¡£ Èç¹ûÊÇÕâÑù£¬ÔòÆ½·½¾àÀëÎªÁã¡£
+    // æµ‹è¯•çº¿æ˜¯å¦ä¸çŸ©å½¢ç›¸äº¤ã€‚ å¦‚æœæ˜¯è¿™æ ·ï¼Œåˆ™å¹³æ–¹è·ç¦»ä¸ºé›¶ã€‚
     const auto crossProduct = Vector3ToolsType::CrossProduct(rectangle.GetAxis0(), rectangle.GetAxis1());
 
     if (const auto dot = Vector3ToolsType::DotProduct(crossProduct, line.GetDirection());
         MathType::GetZeroTolerance() < MathType::FAbs(dot))
     {
-        // ÏßºÍ¾ØĞÎ²»Æ½ĞĞ£¬Òò´ËÏßÓë¾ØĞÎµÄÆ½ÃæÏà½»¡£
+        // çº¿å’ŒçŸ©å½¢ä¸å¹³è¡Œï¼Œå› æ­¤çº¿ä¸çŸ©å½¢çš„å¹³é¢ç›¸äº¤ã€‚
         const auto diff = line.GetOrigin() - rectangle.GetCenter();
 
         const auto vector3OrthonormalBasis = Vector3ToolsType::GenerateComplementBasis(line.GetDirection());
@@ -77,23 +77,23 @@ typename Mathematics::DistanceLine3Rectangle3<Real>::DistanceResult Mathematics:
         const auto vVectorDotDiff = Vector3ToolsType::DotProduct(vVector, diff);
         const auto invDet = (MathType::GetValue(1)) / (uVectorDotAxis0 * vVectorDotAxis1 - uVectorDotAxis1 * vVectorDotAxis0);
 
-        // Ïà½»µãµÄ¾ØĞÎ×ø±ê¡£
+        // ç›¸äº¤ç‚¹çš„çŸ©å½¢åæ ‡ã€‚
         const auto s0 = (vVectorDotAxis1 * uVectorDotDiff - uVectorDotAxis1 * vVectorDotDiff) * invDet;
         const auto s1 = (uVectorDotAxis0 * vVectorDotDiff - vVectorDotAxis0 * uVectorDotDiff) * invDet;
 
         if (MathType::FAbs(s0) <= rectangle.GetExtent0() && MathType::FAbs(s1) <= rectangle.GetExtent1())
         {
-            // Ïà½»µãµÄÏß²ÎÊı¡£
+            // ç›¸äº¤ç‚¹çš„çº¿å‚æ•°ã€‚
             const auto directionDotAxis0 = Vector3ToolsType::DotProduct(line.GetDirection(), rectangle.GetAxis0());
             const auto directionDotAxis1 = Vector3ToolsType::DotProduct(line.GetDirection(), rectangle.GetAxis1());
             const auto directionDotDiff = Vector3ToolsType::DotProduct(line.GetDirection(), diff);
             const auto lineParameter = s0 * directionDotAxis0 + s1 * directionDotAxis1 - directionDotDiff;
 
-            // Ïà½»µãµÄ¾ØĞÎ×ø±ê¡£
+            // ç›¸äº¤ç‚¹çš„çŸ©å½¢åæ ‡ã€‚
             rectCoord[0] = s0;
             rectCoord[1] = s1;
 
-            // Ïà½»µãÔÚ¾ØĞÎµÄÄÚ²¿»òÉÏ·½¡£
+            // ç›¸äº¤ç‚¹åœ¨çŸ©å½¢çš„å†…éƒ¨æˆ–ä¸Šæ–¹ã€‚
             const auto closestPoint0 = line.GetOrigin() + lineParameter * line.GetDirection();
 
             const auto closestPoint1 = rectangle.GetCenter() + s0 * rectangle.GetAxis0() + s1 * rectangle.GetAxis1();
@@ -106,8 +106,8 @@ typename Mathematics::DistanceLine3Rectangle3<Real>::DistanceResult Mathematics:
     Vector3Type closestPoint1{};
     Real lineParameter{};
 
-    /// £¨1£©Ïß²»Óë¾ØĞÎÆ½ĞĞ£¬ÇÒÏßºÍ¾ØĞÎÆ½ÃæµÄ½»µãÔÚ¾ØĞÎÍâ²¿£¬»òÕß£¨2£©ÏßºÍ¾ØĞÎÆ½ĞĞ¡£
-    /// ÎŞÂÛÈçºÎ£¬¾ØĞÎÉÏµÄ×î½Ó½üµãÔÚ¾ØĞÎµÄ±ßÔµÉÏ¡£ ½«ÏßÓë¾ØĞÎµÄËùÓĞËÄ¸ö±ßÔµ½øĞĞ±È½Ï¡£
+    /// ï¼ˆ1ï¼‰çº¿ä¸ä¸çŸ©å½¢å¹³è¡Œï¼Œä¸”çº¿å’ŒçŸ©å½¢å¹³é¢çš„äº¤ç‚¹åœ¨çŸ©å½¢å¤–éƒ¨ï¼Œæˆ–è€…ï¼ˆ2ï¼‰çº¿å’ŒçŸ©å½¢å¹³è¡Œã€‚
+    /// æ— è®ºå¦‚ä½•ï¼ŒçŸ©å½¢ä¸Šçš„æœ€æ¥è¿‘ç‚¹åœ¨çŸ©å½¢çš„è¾¹ç¼˜ä¸Šã€‚ å°†çº¿ä¸çŸ©å½¢çš„æ‰€æœ‰å››ä¸ªè¾¹ç¼˜è¿›è¡Œæ¯”è¾ƒã€‚
 
     auto sqrDist = MathType::maxReal;
     constexpr auto size = 2;

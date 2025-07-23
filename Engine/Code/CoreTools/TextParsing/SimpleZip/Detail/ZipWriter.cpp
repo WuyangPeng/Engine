@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/07 20:10)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/07 20:10)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -33,7 +33,7 @@ CoreTools::SimpleZip::ZipWriter::~ZipWriter() noexcept
 
 void CoreTools::SimpleZip::ZipWriter::Init() noexcept
 {
-    /// ×¼±¸Ò»¸ö´æµµÎÄ¼ş
+    /// å‡†å¤‡ä¸€ä¸ªå­˜æ¡£æ–‡ä»¶
     mz_zip_writer_init_file(&archive, archivePath.c_str(), 0);
 }
 
@@ -43,7 +43,7 @@ void CoreTools::SimpleZip::ZipWriter::Close() noexcept
 
     if (!isClose)
     {
-        /// Íê³É²¢¹Ø±ÕÁÙÊ±´æµµ
+        /// å®Œæˆå¹¶å…³é—­ä¸´æ—¶å­˜æ¡£
         mz_zip_writer_finalize_archive(&archive);
         mz_zip_writer_end(&archive);
 
@@ -64,7 +64,7 @@ void CoreTools::SimpleZip::ZipWriter::ValidateFileArchive() const
 
 #include SYSTEM_WARNING_POP
 
-    /// ÑéÖ¤ÁÙÊ±ÎÄ¼ş
+    /// éªŒè¯ä¸´æ—¶æ–‡ä»¶
     if (!mz_zip_validate_file_archive(archivePath.c_str(), 0, &errorData))
     {
         THROW_EXCEPTION(GetArchiveLastError(errorData))
@@ -77,7 +77,7 @@ void CoreTools::SimpleZip::ZipWriter::AddZipEntry(const ZipEntry& zipEntry, mz_z
 
     if (isClose)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎÄ¼şÒÑ¹Ø±Õ¡£\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ–‡ä»¶å·²å…³é—­ã€‚\n"s))
     }
 
     if (zipEntry.IsDirectory())

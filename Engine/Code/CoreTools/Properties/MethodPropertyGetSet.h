@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 15:05)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 15:05)
 
 #ifndef CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_SET_H
 #define CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_SET_H
@@ -14,22 +14,22 @@
 
 #include "CoreTools/Helper/PropertiesMacro.h"
 
-/// Ê¹ÓÃºêTCRE_METHOD_PROPERTY_GET_SET¶¨ÒåÊôÐÔ
+/// ä½¿ç”¨å®TCRE_METHOD_PROPERTY_GET_SETå®šä¹‰å±žæ€§
 namespace CoreTools
 {
-    /// ´ËÀàÌá¹©»ùÓÚ·½·¨µÄ¶Á/Ð´ÊôÐÔ·ÃÎÊ
+    /// æ­¤ç±»æä¾›åŸºäºŽæ–¹æ³•çš„è¯»/å†™å±žæ€§è®¿é—®
 
-    /// ÈÝÆ÷Àà¶¨ÒågetºÍset·½·¨¡£
-    /// Ëü»¹¶¨ÒåÁËÒ»¸ö¾²Ì¬·½·¨£¬Ëü°üº¬¸ø¶¨ÊôÐÔÔÚÈÝÆ÷ÄÚµÄÆ«ÒÆÁ¿¡£
-    /// È»ºóÊ¹ÓÃÖµÀàÐÍ£¬ÉèÖÃÒýÓÃÀàÐÍ£¬»ñÈ¡ÒýÓÃÀàÐÍ£¬ÈÝÆ÷ÀàÐÍ£¬³ÉÔ±º¯ÊýºÍÆ«ÒÆº¯Êý¶ÔÄ£°å½øÐÐ²ÎÊý»¯¡£
+    /// å®¹å™¨ç±»å®šä¹‰getå’Œsetæ–¹æ³•ã€‚
+    /// å®ƒè¿˜å®šä¹‰äº†ä¸€ä¸ªé™æ€æ–¹æ³•ï¼Œå®ƒåŒ…å«ç»™å®šå±žæ€§åœ¨å®¹å™¨å†…çš„åç§»é‡ã€‚
+    /// ç„¶åŽä½¿ç”¨å€¼ç±»åž‹ï¼Œè®¾ç½®å¼•ç”¨ç±»åž‹ï¼ŒèŽ·å–å¼•ç”¨ç±»åž‹ï¼Œå®¹å™¨ç±»åž‹ï¼Œæˆå‘˜å‡½æ•°å’Œåç§»å‡½æ•°å¯¹æ¨¡æ¿è¿›è¡Œå‚æ•°åŒ–ã€‚
 
-    template <typename Value,  /// Êµ¼ÊÊôÐÔÖµÀàÐÍ
-              typename GetReference,  /// »ñÈ¡ÒýÓÃÀàÐÍ
-              typename SetReference,  /// ÉèÖÃÒýÓÃÀàÐÍ
-              typename Container,  /// ·â±ÕÀà
-              ptrdiff_t (*FunctionOffset)(),  /// Ö¸Õëº¯ÊýÌá¹©ÈÝÆ÷ÄÚÆ«ÒÆÊôÐÔ
-              GetReference (Container::*FunctionGet)() const,  /// Ö¸Ïò·µ»ØRµÄconst³ÉÔ±º¯ÊýµÄÖ¸Õë
-              void (Container::*FunctionSet)(SetReference)>  /// Ö¸ÏòRµÄ³ÉÔ±º¯ÊýµÄÖ¸Õë
+    template <typename Value,  /// å®žé™…å±žæ€§å€¼ç±»åž‹
+              typename GetReference,  /// èŽ·å–å¼•ç”¨ç±»åž‹
+              typename SetReference,  /// è®¾ç½®å¼•ç”¨ç±»åž‹
+              typename Container,  /// å°é—­ç±»
+              ptrdiff_t (*FunctionOffset)(),  /// æŒ‡é’ˆå‡½æ•°æä¾›å®¹å™¨å†…åç§»å±žæ€§
+              GetReference (Container::*FunctionGet)() const,  /// æŒ‡å‘è¿”å›žRçš„constæˆå‘˜å‡½æ•°çš„æŒ‡é’ˆ
+              void (Container::*FunctionSet)(SetReference)>  /// æŒ‡å‘Rçš„æˆå‘˜å‡½æ•°çš„æŒ‡é’ˆ
     class MethodPropertyGetSet final
     {
     public:

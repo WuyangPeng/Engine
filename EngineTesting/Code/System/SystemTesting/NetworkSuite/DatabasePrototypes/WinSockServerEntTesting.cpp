@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/13 16:12)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/13 16:12)
 
 #include "WinSockServerEntTesting.h"
 #include "System/Network/DatabasePrototypes.h"
@@ -43,7 +43,7 @@ void System::WinSockServerEntTesting::GetServerEntTest()
 
 void System::WinSockServerEntTesting::WinSockServerEntTest(const WinSockServerEnt* winSockServEnt)
 {
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(winSockServEnt, "»ñÈ¡µÄWinSockServentÎª¿Õ¡£");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(winSockServEnt, "è·å–çš„WinSockServentä¸ºç©ºã€‚");
 
     ASSERT_UNEQUAL_NULL_PTR(winSockServEnt->s_name);
     ASSERT_UNEQUAL_NULL_PTR(winSockServEnt->s_aliases);

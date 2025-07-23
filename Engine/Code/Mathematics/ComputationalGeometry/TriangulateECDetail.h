@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/09 09:36)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 09:36)
 
 #ifndef MATHEMATICS_COMPUTATIONAL_GEOMETRY_TRIANGULATE_EC_DETAIL_H
 #define MATHEMATICS_COMPUTATIONAL_GEOMETRY_TRIANGULATE_EC_DETAIL_H
@@ -162,13 +162,13 @@ template <typename Real>
 void Mathematics::TriangulateEC<Real>::InitializePositions(const Positions& positions, QueryType queryType, Real epsilon, int extraElements)
 {
     auto numPositions = boost::numeric_cast<int>(positions.size());
-    MATHEMATICS_ASSERTION_0(numPositions >= 3, "±ØĞëÖÁÉÙÊÇ¸öÈı½ÇĞÎ¡£\n");
+    MATHEMATICS_ASSERTION_0(numPositions >= 3, "å¿…é¡»è‡³å°‘æ˜¯ä¸ªä¸‰è§’å½¢ã€‚\n");
     const auto numPosExtras = numPositions + extraElements;
     sPositions.resize(numPosExtras);
 
     if (queryType == QueryType::Filtered)
     {
-        MATHEMATICS_ASSERTION_0(Math<Real>::GetValue(0) <= epsilon && epsilon <= Math<Real>::GetValue(1), "Epsilon ±ØĞëÔÚ0ºÍ1Ö®¼ä¡£\n");
+        MATHEMATICS_ASSERTION_0(Math<Real>::GetValue(0) <= epsilon && epsilon <= Math<Real>::GetValue(1), "Epsilon å¿…é¡»åœ¨0å’Œ1ä¹‹é—´ã€‚\n");
     }
 
     switch (queryType)
@@ -517,7 +517,7 @@ void Mathematics::TriangulateEC<Real>::CombinePolygons(QueryType queryType,
         }
         else if (t == intr[0])
         {
-            MATHEMATICS_ASSERTION_0(endMin != -1 && currentEndMin != -1, "ÒâÍâÇé¿ö\n");
+            MATHEMATICS_ASSERTION_0(endMin != -1 && currentEndMin != -1, "æ„å¤–æƒ…å†µ\n");
 
             const auto& shared = sPositions.at(outer.at(i1));
 
@@ -540,7 +540,7 @@ void Mathematics::TriangulateEC<Real>::CombinePolygons(QueryType queryType,
     auto maxCosIndex = 0;
     if (endMin == -1)
     {
-        MATHEMATICS_ASSERTION_0(v0min >= 0 && v1min >= 0, "ÒâÍâÇé¿ö\n");
+        MATHEMATICS_ASSERTION_0(v0min >= 0 && v1min >= 0, "æ„å¤–æƒ…å†µ\n");
 
         std::array<Vector2Type, 3> sTriangle{};
         auto pIndex = 0;
@@ -840,7 +840,7 @@ int Mathematics::TriangulateEC<Real>::RemoveE(int i)
 template <typename Real>
 void Mathematics::TriangulateEC<Real>::RemoveR(int i)
 {
-    MATHEMATICS_ASSERTION_0(rFirst != -1 && rLast != -1, "·´Éä¶¥µã±ØĞë´æÔÚ¡£\n");
+    MATHEMATICS_ASSERTION_0(rFirst != -1 && rLast != -1, "åå°„é¡¶ç‚¹å¿…é¡»å­˜åœ¨ã€‚\n");
 
     if (i == rFirst)
     {

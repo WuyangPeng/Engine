@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 10:19)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 10:19)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_DETAIL_H
@@ -48,22 +48,22 @@ typename Mathematics::MinimizeN<Real, UserDataType>::MinimizeNDataType Mathemati
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    // ³õÊ¼²Â²â¡£
+    // åˆå§‹çŒœæµ‹ã€‚
     MinimizeNGetMinimumType minimizeNGetMinimum{ dimensions, initial, function, userData, begin, end };
 
     for (auto iter = 0; iter < maxIterations; ++iter)
     {
-        // ²éÕÒÔÚÃ¿¸ö·½Ïò×îĞ¡Öµ²¢¸üĞÂµ±Ç°Î»ÖÃ¡£
+        // æŸ¥æ‰¾åœ¨æ¯ä¸ªæ–¹å‘æœ€å°å€¼å¹¶æ›´æ–°å½“å‰ä½ç½®ã€‚
         for (auto index = 0; index < dimensions; ++index)
         {
             minimizeNGetMinimum.FindEachDirection(index, maxLevel, maxBracket);
         }
 
-        // ¹À¼ÆÒ»¸öµ¥Î»³¤¶ÈµÄ¹²éî·½Ïò¡£
+        // ä¼°è®¡ä¸€ä¸ªå•ä½é•¿åº¦çš„å…±è½­æ–¹å‘ã€‚
         const auto length = minimizeNGetMinimum.EstimateUnitLengthConjugateDirection();
         if (length < MathType::epsilon)
         {
-            // ĞÂµÄÎ»ÖÃ²¢Ã»ÓĞ´Ó¾ÉµÄÎ»ÖÃÓĞÏÔÖø¸Ä±ä¡£ÔÚÕâÀïÊÇ·ñÓĞ¸üºÃµÄÊÕÁ²×¼Ôò£¿
+            // æ–°çš„ä½ç½®å¹¶æ²¡æœ‰ä»æ—§çš„ä½ç½®æœ‰æ˜¾è‘—æ”¹å˜ã€‚åœ¨è¿™é‡Œæ˜¯å¦æœ‰æ›´å¥½çš„æ”¶æ•›å‡†åˆ™ï¼Ÿ
             break;
         }
 

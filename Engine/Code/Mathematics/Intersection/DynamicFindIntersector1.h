@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 16:03)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 16:03)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR1_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR1_H
@@ -35,13 +35,13 @@ namespace Mathematics
 
         NODISCARD bool IsIntersection() const noexcept final;
 
-        // ¶¯Ì¬Ïà½»²éÑ¯µÄÁ½¸öÇø¼ä´¦ÓÚµÚÒ»´Î/×îºóÒ»´Î½Ó´¥µÄÊ±¼ä¡£
+        // åŠ¨æ€ç›¸äº¤æŸ¥è¯¢çš„ä¸¤ä¸ªåŒºé—´å¤„äºç¬¬ä¸€æ¬¡/æœ€åä¸€æ¬¡æ¥è§¦çš„æ—¶é—´ã€‚
         NODISCARD Real GetFirstTime() const;
         NODISCARD Real GetLastTime() const;
 
-        // ÓĞ¹Ø½»¼¯µÄĞÅÏ¢¡£
-        // Ïà½»ÊıÎª0£¨Çø¼ä²»ÖØµş£©£¬
-        // 1£¨Çø¼ä±ß½çÏà½»£©»ò2£¨Çø¼äÓëÇø¼äÏà½»£©¡£
+        // æœ‰å…³äº¤é›†çš„ä¿¡æ¯ã€‚
+        // ç›¸äº¤æ•°ä¸º0ï¼ˆåŒºé—´ä¸é‡å ï¼‰ï¼Œ
+        // 1ï¼ˆåŒºé—´è¾¹ç•Œç›¸äº¤ï¼‰æˆ–2ï¼ˆåŒºé—´ä¸åŒºé—´ç›¸äº¤ï¼‰ã€‚
         NODISCARD int GetNumIntersections() const;
         NODISCARD Real GetIntersection(int index) const;
 
@@ -49,7 +49,7 @@ namespace Mathematics
         void Find(Real tMax, Real speedU, Real speedV);
 
     private:
-        // ÓĞ¹ØÏà½»µÄĞÅÏ¢¡£
+        // æœ‰å…³ç›¸äº¤çš„ä¿¡æ¯ã€‚
         Real firstTime;
         Real lastTime;
 

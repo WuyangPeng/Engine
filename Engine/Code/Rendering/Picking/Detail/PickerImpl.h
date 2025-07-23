@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2024/01/04 10:27)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2024/01/04 10:27)
 
 #ifndef RENDERING_PICKING_PICKER_IMPL_H
 #define RENDERING_PICKING_PICKER_IMPL_H
@@ -45,20 +45,20 @@ namespace Rendering
 
         NODISCARD bool IsRecordsExist() const noexcept;
 
-        /// ÒÔÏÂÈý¸öº¯Êý·µ»ØÂú×ãÔ¼ÊøµÄ¼ÇÂ¼¡£
-        /// ËûÃÇÓ¦¸ÃÔÚ0 < records.GetSize()Ê±µ÷ÓÃ¡£
+        /// ä»¥ä¸‹ä¸‰ä¸ªå‡½æ•°è¿”å›žæ»¡è¶³çº¦æŸçš„è®°å½•ã€‚
+        /// ä»–ä»¬åº”è¯¥åœ¨0 < records.GetSize()æ—¶è°ƒç”¨ã€‚
 
-        /// ¶¨Î»¼ÇÂ¼ÖÐ×îÐ¡¾ø¶ÔÖµµÄTÖµ¡£
+        /// å®šä½è®°å½•ä¸­æœ€å°ç»å¯¹å€¼çš„Tå€¼ã€‚
         NODISCARD PickRecord GetClosestToZero() const;
 
-        /// ¶¨Î»¼ÇÂ¼×î½Ó½üÁãµÄÓë·Ç¸ºÖµµÄTÖµ¡£
+        /// å®šä½è®°å½•æœ€æŽ¥è¿‘é›¶çš„ä¸Žéžè´Ÿå€¼çš„Tå€¼ã€‚
         NODISCARD PickRecord GetClosestNonnegative() const;
 
-        /// ¶¨Î»¼ÇÂ¼×î½Ó½üÁãµÄÓë·ÇÕýÖµµÄTÖµ¡£
+        /// å®šä½è®°å½•æœ€æŽ¥è¿‘é›¶çš„ä¸Žéžæ­£å€¼çš„Tå€¼ã€‚
         NODISCARD PickRecord GetClosestNonpositive() const;
 
     private:
-        // Ñ¡Ôñ·¢ÉúµÝ¹é±éÀúµÄÊäÈë³¡¾°¡£
+        // é€‰æ‹©å‘ç”Ÿé€’å½’éåŽ†çš„è¾“å…¥åœºæ™¯ã€‚
         void ExecuteRecursive(Spatial& object);
 
     private:
@@ -71,7 +71,7 @@ namespace Rendering
         float tMin;
         float tMax;
 
-        // ·ÃÎÊËùÓÐµÄ¼ÇÂ¼ÔÚÑ¡Ôñ²Ù×÷¡£
+        // è®¿é—®æ‰€æœ‰çš„è®°å½•åœ¨é€‰æ‹©æ“ä½œã€‚
         PickRecordContainer records;
     };
 }

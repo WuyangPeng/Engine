@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/17 10:52)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/17 10:52)
 
 #include "Rendering/RenderingExport.h"
 
@@ -204,8 +204,8 @@ void Rendering::BaseRendererImpl::DisplayColorBuffer(int syncInterval)
 
 void Rendering::BaseRendererImpl::Unbind(Font* currentActiveFont) noexcept
 {
-    /// Ïú»ÙGPUÄÚ´æÖÐµÄ×ÖÌå×ÊÔ´¡£
-    /// Ö»ÓÐÔÚ´´½¨defaultFontÊ±£¬activeFont²ÅÓ¦Îªnull¡£
+    /// é”€æ¯GPUå†…å­˜ä¸­çš„å­—ä½“èµ„æºã€‚
+    /// åªæœ‰åœ¨åˆ›å»ºdefaultFontæ—¶ï¼ŒactiveFontæ‰åº”ä¸ºnullã€‚
     if (currentActiveFont != nullptr)
     {
         using UnbindGraphicsObjectFuncType = void (ClassType::*)(const GraphicsObjectSharedPtr&);
@@ -225,13 +225,13 @@ void Rendering::BaseRendererImpl::SetFont(const FontSharedPtr& font)
 
     if (font == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÊäÈëµÄ×ÖÌåÎª¿Õ¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¾“å…¥çš„å­—ä½“ä¸ºç©ºã€‚"))
     }
 
     if (const auto currentActiveFont = GetFont();
         font != currentActiveFont)
     {
-        // ÔÚGPUÄÚ´æÖÐ´´½¨×ÖÌå×ÊÔ´¡£
+        // åœ¨GPUå†…å­˜ä¸­åˆ›å»ºå­—ä½“èµ„æºã€‚
         Bind(*font);
 
         globalFont.SetFont(font);
@@ -286,7 +286,7 @@ void Rendering::BaseRendererImpl::SetBlendState(const BlendStateSharedPtr& state
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÊäÈëµÄ×´Ì¬ÊÇ¿Õ¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¾“å…¥çš„çŠ¶æ€æ˜¯ç©ºã€‚"))
     }
 }
 
@@ -326,7 +326,7 @@ void Rendering::BaseRendererImpl::SetDepthStencilState(const DepthStencilStateSh
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÊäÈëµÄ×´Ì¬ÊÇ¿Õ¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¾“å…¥çš„çŠ¶æ€æ˜¯ç©ºã€‚"))
     }
 }
 
@@ -359,7 +359,7 @@ void Rendering::BaseRendererImpl::SetRasterizerState(const RasterizerStateShared
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÊäÈëµÄ×´Ì¬ÊÇ¿Õ¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¾“å…¥çš„çŠ¶æ€æ˜¯ç©ºã€‚"))
     }
 }
 
@@ -466,7 +466,7 @@ void Rendering::BaseRendererImpl::Update(Font& activeFont)
 
 int64_t Rendering::BaseRendererImpl::SetState(Font& activeFont)
 {
-    // ÎÒÃÇÐèÒª»Ö¸´ÎÄ±¾»æÍ¼µÄÄ¬ÈÏ×´Ì¬¡£¼Ç×¡µ±Ç°×´Ì¬£¬ÒÔ±ãÎÒÃÇ¿ÉÒÔÔÚ»æÖÆºóÖØÖÃËü¡£
+    // æˆ‘ä»¬éœ€è¦æ¢å¤æ–‡æœ¬ç»˜å›¾çš„é»˜è®¤çŠ¶æ€ã€‚è®°ä½å½“å‰çŠ¶æ€ï¼Œä»¥ä¾¿æˆ‘ä»¬å¯ä»¥åœ¨ç»˜åˆ¶åŽé‡ç½®å®ƒã€‚
     const auto currentBlendState = GetBlendState();
     const auto currentDepthStencilState = GetDepthStencilState();
     const auto currentRasterizerState = GetRasterizerState();
@@ -511,7 +511,7 @@ int64_t Rendering::BaseRendererImpl::Draw(const OverlayEffectSharedPtr& overlay)
 
     if (overlay == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÊäÈëµÄoverlayÎª¿Õ¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¾“å…¥çš„overlayä¸ºç©ºã€‚"))
     }
 
     const auto vertexBuffer = overlay->GetVertexBuffer();
@@ -787,7 +787,7 @@ void Rendering::BaseRendererImpl::CopyGpuToGpu(const BufferSharedPtr& buffer0, c
 
     System::UnusedFunction(buffer0, buffer1);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("º¯ÊýÎ´ÊµÏÖ¡£"))
+    THROW_EXCEPTION(SYSTEM_TEXT("å‡½æ•°æœªå®žçŽ°ã€‚"))
 }
 
 void Rendering::BaseRendererImpl::CopyGpuToGpu(const TextureSingleSharedPtr& texture0, const TextureSingleSharedPtr& texture1)
@@ -796,7 +796,7 @@ void Rendering::BaseRendererImpl::CopyGpuToGpu(const TextureSingleSharedPtr& tex
 
     System::UnusedFunction(texture0, texture1);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("º¯ÊýÎ´ÊµÏÖ¡£"))
+    THROW_EXCEPTION(SYSTEM_TEXT("å‡½æ•°æœªå®žçŽ°ã€‚"))
 }
 
 void Rendering::BaseRendererImpl::CopyGpuToGpu(const TextureSingleSharedPtr& texture0, const TextureSingleSharedPtr& texture1, int level)
@@ -805,7 +805,7 @@ void Rendering::BaseRendererImpl::CopyGpuToGpu(const TextureSingleSharedPtr& tex
 
     System::UnusedFunction(texture0, texture1, level);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("º¯ÊýÎ´ÊµÏÖ¡£"))
+    THROW_EXCEPTION(SYSTEM_TEXT("å‡½æ•°æœªå®žçŽ°ã€‚"))
 }
 
 void Rendering::BaseRendererImpl::CopyGpuToGpu(const TextureArraySharedPtr& textureArray0, const TextureArraySharedPtr& textureArray1)
@@ -814,7 +814,7 @@ void Rendering::BaseRendererImpl::CopyGpuToGpu(const TextureArraySharedPtr& text
 
     System::UnusedFunction(textureArray0, textureArray1);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("º¯ÊýÎ´ÊµÏÖ¡£"))
+    THROW_EXCEPTION(SYSTEM_TEXT("å‡½æ•°æœªå®žçŽ°ã€‚"))
 }
 
 void Rendering::BaseRendererImpl::CopyGpuToGpu(const TextureArraySharedPtr& textureArray0, const TextureArraySharedPtr& textureArray1, int item, int level)
@@ -823,7 +823,7 @@ void Rendering::BaseRendererImpl::CopyGpuToGpu(const TextureArraySharedPtr& text
 
     System::UnusedFunction(textureArray0, textureArray1, item, level);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("º¯ÊýÎ´ÊµÏÖ¡£"))
+    THROW_EXCEPTION(SYSTEM_TEXT("å‡½æ•°æœªå®žçŽ°ã€‚"))
 }
 
 void Rendering::BaseRendererImpl::SetWarnOnNonemptyBridges(bool warn) noexcept

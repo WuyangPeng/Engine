@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:28)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:28)
 
 #ifndef MATHEMATICS_APPROXIMATION_QUADRATIC_CIRCLE_FIT2_H
 #define MATHEMATICS_APPROXIMATION_QUADRATIC_CIRCLE_FIT2_H
@@ -18,13 +18,13 @@
 
 namespace Mathematics
 {
-    // Èç¹ûÄã¾õµÃÄãµÄµã¼¸ºõÊÇÔ²ÐÎµÄ£¬Ê¹ÓÃÕâ¸ö¡£
-    // Ô²µÄÐÎÊ½C'[0]+C'[1]*X+C'[2]*Y+C'[3]*(X^2+Y^2)£¬
-    // ÆäÖÐLength(C') = 1
-    // ¸Ãº¯Êý·µ»ØC = (C'[0]/C'[3],C'[1]/C'[3],C'[2]/C'[3])£¬
-    // ËùÒÔÄâºÏÔ²ÊÇC[0]+C[1]*X+C[2]*Y+X^2+Y^2¡£
-    // ¸ÃÖÐÐÄÊÇ(xc,yc) = -0.5*(C[1],C[2])ºÍ
-    // °ë¾¶Îªr = sqrt(xc*xc+yc*yc-C[0])¡£
+    // å¦‚æžœä½ è§‰å¾—ä½ çš„ç‚¹å‡ ä¹Žæ˜¯åœ†å½¢çš„ï¼Œä½¿ç”¨è¿™ä¸ªã€‚
+    // åœ†çš„å½¢å¼C'[0]+C'[1]*X+C'[2]*Y+C'[3]*(X^2+Y^2)ï¼Œ
+    // å…¶ä¸­Length(C') = 1
+    // è¯¥å‡½æ•°è¿”å›žC = (C'[0]/C'[3],C'[1]/C'[3],C'[2]/C'[3])ï¼Œ
+    // æ‰€ä»¥æ‹Ÿåˆåœ†æ˜¯C[0]+C[1]*X+C[2]*Y+X^2+Y^2ã€‚
+    // è¯¥ä¸­å¿ƒæ˜¯(xc,yc) = -0.5*(C[1],C[2])å’Œ
+    // åŠå¾„ä¸ºr = sqrt(xc*xc+yc*yc-C[0])ã€‚
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE QuadraticCircleFit2 final
     {

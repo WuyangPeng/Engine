@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:33)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:33)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY3_DETAIL_H
@@ -117,10 +117,10 @@ template <typename Real>
 Mathematics::TetrahedronQueryType Mathematics::Query3<Real>::ToTetrahedron(const Vector3Type& testVector, int v0, int v1, int v2, int v3) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_0(0 <= v0 && v0 < GetNumVertices(), "Ë÷Òı´íÎó£¡");
-    MATHEMATICS_ASSERTION_0(0 <= v1 && v1 < GetNumVertices(), "Ë÷Òı´íÎó£¡");
-    MATHEMATICS_ASSERTION_0(0 <= v2 && v2 < GetNumVertices(), "Ë÷Òı´íÎó£¡");
-    MATHEMATICS_ASSERTION_0(0 <= v3 && v3 < GetNumVertices(), "Ë÷Òı´íÎó£¡");
+    MATHEMATICS_ASSERTION_0(0 <= v0 && v0 < GetNumVertices(), "ç´¢å¼•é”™è¯¯ï¼");
+    MATHEMATICS_ASSERTION_0(0 <= v1 && v1 < GetNumVertices(), "ç´¢å¼•é”™è¯¯ï¼");
+    MATHEMATICS_ASSERTION_0(0 <= v2 && v2 < GetNumVertices(), "ç´¢å¼•é”™è¯¯ï¼");
+    MATHEMATICS_ASSERTION_0(0 <= v3 && v3 < GetNumVertices(), "ç´¢å¼•é”™è¯¯ï¼");
 
     const auto sign0 = ToPlane(testVector, v1, v2, v3);
     if (sign0 == PlaneQueryType::PositiveSide)

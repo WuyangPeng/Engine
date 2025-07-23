@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 16:07)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 16:07)
 
 #include "PolynomialRootsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -265,7 +265,7 @@ void Mathematics::PolynomialRootsTesting::ThriceTest()
         }
     }
 
-    // ¹¹ÔìÅĞ±ğÊ½ÎªÁã
+    // æ„é€ åˆ¤åˆ«å¼ä¸ºé›¶
     constexpr auto constant = 1.0;
     constexpr auto once = 3.0;
     constexpr auto secondary = 3.0001;
@@ -400,7 +400,7 @@ void Mathematics::PolynomialRootsTesting::AllRealPartsNegativeTest()
 
         const auto result = firstPolynomialRoots.AllRealPartsNegative(firstPolynomial);
 
-        // Ê¹¶àÏîÊ½Ê×Ò»¡£
+        // ä½¿å¤šé¡¹å¼é¦–ä¸€ã€‚
         auto degree = firstPolynomial.GetDegree();
         if (1e-6 < MathD::FAbs(firstPolynomial.GetEnd() - 1.0))
         {
@@ -497,7 +497,7 @@ void Mathematics::PolynomialRootsTesting::AllRealPartsPositiveTest()
 
         const auto result = firstPolynomialRoots.AllRealPartsPositive(firstPolynomial);
 
-        // Ê¹¶àÏîÊ½Ê×Ò»¡£
+        // ä½¿å¤šé¡¹å¼é¦–ä¸€ã€‚
         auto degree = firstPolynomial.GetDegree();
         if (1e-6 < MathD::FAbs(firstPolynomial.GetEnd() - 1.0))
         {

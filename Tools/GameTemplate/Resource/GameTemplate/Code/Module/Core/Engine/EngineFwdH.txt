@@ -1,4 +1,4 @@
-$Copyright$
+﻿$Copyright$
 
 #ifndef $ModuleUppercase$_$CoreCapital$_ENGINE_FWD_H
 #define $ModuleUppercase$_$CoreCapital$_ENGINE_FWD_H

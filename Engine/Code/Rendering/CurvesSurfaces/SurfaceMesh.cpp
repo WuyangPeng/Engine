@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 14:00)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 14:00)
 
 #include "Rendering/RenderingExport.h"
 
@@ -87,13 +87,13 @@ void Rendering::SurfaceMesh::SetLevel(int aLevel)
         const auto nextNumEdges = 2 * numEdges + 3 * numTriangles;
         const auto nextNumTriangles = 4 * numTriangles;
         Subdivide(numVertices, numEdges, edgeMap, numTriangles, triangles);
-        RENDERING_ASSERTION_0(numVertices == nextNumVertices && numEdges == nextNumEdges && numTriangles == nextNumTriangles, "ÒâÍâÇé¿ö\n");
+        RENDERING_ASSERTION_0(numVertices == nextNumVertices && numEdges == nextNumEdges && numTriangles == nextNumTriangles, "æ„å¤–æƒ…å†µ\n");
         numVertices = nextNumVertices;
         numEdges = nextNumEdges;
         numTriangles = nextNumTriangles;
     }
 
-    RENDERING_ASSERTION_0(numVertices == numTotalVertices && numEdges == numTotalEdges && numTriangles == numTotalTriangles, "ÒâÍâÇé¿ö\n");
+    RENDERING_ASSERTION_0(numVertices == numTotalVertices && numEdges == numTotalEdges && numTriangles == numTotalTriangles, "æ„å¤–æƒ…å†µ\n");
     numFullVertices = numTotalVertices;
 
     const auto numTotalIndices = 3 * numTotalTriangles;
@@ -200,7 +200,7 @@ std::vector<Rendering::SurfaceMesh::Triangle> Rendering::SurfaceMesh::Allocate(i
         InsertInto(edgeMap, tri.patch.object, v2, v0, param2, param0, 1);
     }
 
-    RENDERING_ASSERTION_0(numOrigEdges == boost::numeric_cast<int>(edgeMap.size()), "ÒâÍâÇé¿ö\n");
+    RENDERING_ASSERTION_0(numOrigEdges == boost::numeric_cast<int>(edgeMap.size()), "æ„å¤–æƒ…å†µ\n");
 
     return triangles;
 }

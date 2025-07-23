@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 17:47)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 17:47)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_SEGMENT2_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_SEGMENT2_ACHIEVE_H
@@ -38,7 +38,7 @@ void Mathematics::StaticFindIntersectorRay2Segment2<Real>::Find()
 
     if (intersectionType == IntersectionType::Point)
     {
-        // ²âÊÔÖ±Ïß-Ö±ÏßµÄÏà½»µãÊÇ·ñÔÚÉäÏßºÍÏß¶ÎÉÏ¡£
+        // æµ‹è¯•ç›´çº¿-ç›´çº¿çš„ç›¸äº¤ç‚¹æ˜¯å¦åœ¨å°„çº¿å’Œçº¿æ®µä¸Šã€‚
         if (0 <= classify.GetParameter0() && MathType::FAbs(classify.GetParameter1()) <= segment.GetExtent() + intervalThreshold)
         {
             quantity = 1;
@@ -52,15 +52,15 @@ void Mathematics::StaticFindIntersectorRay2Segment2<Real>::Find()
     }
     else if (intersectionType == IntersectionType::Line)
     {
-        // ¼ÆËãÏß¶ÎsegmentÖĞĞÄÏà¶ÔÓÚÉäÏßrayµÄÎ»ÖÃ¡£
+        // è®¡ç®—çº¿æ®µsegmentä¸­å¿ƒç›¸å¯¹äºå°„çº¿rayçš„ä½ç½®ã€‚
         auto difference = segment.GetCenterPoint() - ray.GetOrigin();
         auto dotProduct = Vector2ToolsType::DotProduct(ray.GetDirection(), difference);
 
-        // ¼ÆËãÏß¶ÎÏà¶ÔÓÚÉäÏß·½ÏòµÄÖÕµãµÄÎ»ÖÃ¡£
+        // è®¡ç®—çº¿æ®µç›¸å¯¹äºå°„çº¿æ–¹å‘çš„ç»ˆç‚¹çš„ä½ç½®ã€‚
         auto tmin = dotProduct - segment.GetExtent();
         auto tmax = dotProduct + segment.GetExtent();
 
-        // ¼ÆËãÇø¼ä [0,+infinity) ºÍ [tmin,tmax]Ïà½»µã¡£
+        // è®¡ç®—åŒºé—´ [0,+infinity) å’Œ [tmin,tmax]ç›¸äº¤ç‚¹ã€‚
         StaticFindIntersector1<Real> calc{ MathType::GetValue(0), MathType::maxReal, tmin, tmax, dotThreshold };
 
         quantity = calc.GetNumIntersections();
@@ -151,7 +151,7 @@ typename Mathematics::StaticFindIntersectorRay2Segment2<Real>::Vector2Type Mathe
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ë÷ÒıÔ½½ç"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•è¶Šç•Œ"s));
     }
 }
 

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 14:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 14:19)
 
 #ifndef MATHEMATICS_BASE_BIT_HACKS_DETAIL_H
 #define MATHEMATICS_BASE_BIT_HACKS_DETAIL_H
@@ -20,7 +20,7 @@ requires std::is_integral_v<T> bool Mathematics::BitHacks::IsPowerOfTwo(T value)
 {
     if (value < 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Öµvalue±ØĞëÊÇ·Ç¸ºÊı¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å€¼valueå¿…é¡»æ˜¯éè´Ÿæ•°ã€‚"s))
     }
 
     return (0 < value) && ((value & (value - 1)) == 0);

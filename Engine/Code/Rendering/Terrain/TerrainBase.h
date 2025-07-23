@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/25 21:53)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/25 21:53)
 
 #ifndef RENDERING_TERRAIN_TERRAIN_BASE_H
 #define RENDERING_TERRAIN_TERRAIN_BASE_H
@@ -15,6 +15,7 @@
 #include "TerrainPage.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/ObjectSystems/ObjectAssociated.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/Node.h"
 
@@ -83,12 +84,12 @@ namespace Rendering
         PackageType impl;
     };
 
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
+    #include SYSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26426)
 
     CORE_TOOLS_INITIALIZE_TERMINATE_REGISTER(TerrainBase);
 
-#include SYSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
 
     CORE_TOOLS_SHARED_PTR_DECLARE(TerrainBase);
 }

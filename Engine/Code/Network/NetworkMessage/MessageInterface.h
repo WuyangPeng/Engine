@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 16:16)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 16:16)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_INTERFACE_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_INTERFACE_H
@@ -52,9 +52,9 @@ namespace Network
 
         NODISCARD int GetBaseStreamingSize() const;
 
-        // int32_t ×Ü³¤¶È
-        // int32_t °æ±¾ºÅ
-        // int64_t Ê±¼ä´Á
+        // int32_t æ€»é•¿åº¦
+        // int32_t ç‰ˆæœ¬å·
+        // int64_t æ—¶é—´æˆ³
         NODISCARD static consteval int GetMessageHeadSize() noexcept
         {
             return sizeof(int32_t) + sizeof(int32_t) + sizeof(int64_t);
@@ -67,7 +67,7 @@ namespace Network
         NODISCARD MessageHeadStrategy GetMessageHeadStrategy() const noexcept;
 
     protected:
-        // ¼ÓÔØÏµÍ³ËùÊ¹ÓÃµÄ¹¹Ôìº¯Êı¡£
+        // åŠ è½½ç³»ç»Ÿæ‰€ä½¿ç”¨çš„æ„é€ å‡½æ•°ã€‚
         enum class LoadConstructor
         {
             ConstructorLoader

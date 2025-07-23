@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.4 (2024/01/17 09:47)
+/// 标准：std:c++20
+/// 版本：1.0.0.4 (2024/01/17 09:47)
 
 #ifndef RENDERING_RENDERER_ENGINE_VIEWPORT_H
 #define RENDERING_RENDERER_ENGINE_VIEWPORT_H
@@ -14,10 +14,10 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 
-/// �Ӵ�����������ֵ�ڴ��������С�
-/// ���ڵ�ԭ��Ϊ(xPosition��yPosition)�����ڿ���Ϊwidth�����ڸ߶�Ϊheight��
-/// DirectX�Ӵ�Ϊ��������ϵ��ԭ���ڴ��ڵ����Ͻǣ�x��ָ���Ҳ࣬y��ָ���·���
-/// OpenGL�Ӵ�����������ϵ��ԭ���ڴ��ڵ����½ǣ�x��ָ���Ҳ࣬y��ָ���Ϸ���
+/// 视窗管理，测量值在窗口坐标中。
+/// 窗口的原点为(xPosition，yPosition)，窗口宽度为width，窗口高度为height。
+/// DirectX视窗为左手坐标系，原点在窗口的左上角，x轴指向右侧，y轴指向下方。
+/// OpenGL视窗是右手坐标系，原点在窗口的左下角，x轴指向右侧，y轴指向上方。
 namespace Rendering
 {
     class Viewport final

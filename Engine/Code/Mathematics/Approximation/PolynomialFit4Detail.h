@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:20)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:20)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_DETAIL_H
@@ -46,12 +46,12 @@ void Mathematics::PolynomialFit4<Real>::Calculate(const Samples& xSamples,
     const auto zBound = zDegree + 1;
     const auto quantity = xBound * yBound * zBound;
 
-    // x¡¢y¡¢zµÄÃİ¡£
+    // xã€yã€zçš„å¹‚ã€‚
     PolynomialSamplesPower<Real> xPower{ xSamples, xDegree };
     PolynomialSamplesPower<Real> yPower{ ySamples, yDegree };
     PolynomialSamplesPower<Real> zPower{ zSamples, zDegree };
 
-    // Vandermonde¾ØÕóºÍÓÒÊÖ×ø±êÏµµÄÏßĞÔÏµÍ³¡£
+    // VandermondeçŸ©é˜µå’Œå³æ‰‹åæ ‡ç³»çš„çº¿æ€§ç³»ç»Ÿã€‚
     VariableMatrix<Real> matrix{ quantity, quantity };
     Samples inputVector(quantity);
 
@@ -96,7 +96,7 @@ void Mathematics::PolynomialFit4<Real>::Calculate(const Samples& xSamples,
 
     try
     {
-        // Çó½â¶àÏîÊ½ÏµÊı¡£
+        // æ±‚è§£å¤šé¡¹å¼ç³»æ•°ã€‚
         const LinearSystem<Real> linearSystem{};
 
         coeff = linearSystem.Solve(matrix, inputVector);
@@ -107,7 +107,7 @@ void Mathematics::PolynomialFit4<Real>::Calculate(const Samples& xSamples,
     {
         solveSucceed = false;
 
-        LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools, SYSTEM_TEXT("Çó½âÏßĞÔÏµÍ³Ê§°Ü\n"), error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools, SYSTEM_TEXT("æ±‚è§£çº¿æ€§ç³»ç»Ÿå¤±è´¥\n"), error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

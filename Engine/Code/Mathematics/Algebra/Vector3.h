@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2025
+ï»¿/// Copyright (c) 2010-2025
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.2.0 (2025/03/27 14:33)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.2.0 (2025/03/27 14:33)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR3_H
 #define MATHEMATICS_ALGEBRA_VECTOR3_H
@@ -20,9 +20,9 @@
 
 #include <type_traits>
 
-// µ±ÏòÁ¿´æ´¢µÄÖµÎª¸¡µãÊıÊ±£¬±È½ÏÁ½ÏòÁ¿ÏàµÈ£¬
-// ÇëÊ¹ÓÃº¯ÊıVector2Tools::Approximate£¬¶ø²»ÊÇ==¡£
-// == ½öÓÃÓÚSTL
+// å½“å‘é‡å­˜å‚¨çš„å€¼ä¸ºæµ®ç‚¹æ•°æ—¶ï¼Œæ¯”è¾ƒä¸¤å‘é‡ç›¸ç­‰ï¼Œ
+// è¯·ä½¿ç”¨å‡½æ•°Vector2Tools::Approximateï¼Œè€Œä¸æ˜¯==ã€‚
+// == ä»…ç”¨äºSTL
 namespace Mathematics
 {
     template <typename Real>
@@ -79,7 +79,7 @@ namespace Mathematics
 
         NODISCARD AlgebraVector3 GetVector() const noexcept;
 
-        // ×ø±ê·ÃÎÊ
+        // åæ ‡è®¿é—®
         NODISCARD Real GetX() const noexcept;
         NODISCARD Real GetY() const noexcept;
         NODISCARD Real GetZ() const noexcept;
@@ -109,7 +109,7 @@ namespace Mathematics
         Vector3& operator*=(Real rhs) noexcept;
         Vector3& operator/=(Real rhs) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        // ÌØÊâVector3
+        // ç‰¹æ®ŠVector3
         // (0,0,0)
         static constexpr Vector3 GetZero() noexcept
         {
@@ -140,11 +140,11 @@ namespace Mathematics
             return Vector3{ MathType::GetValue(1), MathType::GetValue(1), MathType::GetValue(1) };
         }
 
-        // Ïà¶ÔÓÚ¼ÆËã³öµãVµÄÖØĞÄ×ø±êµ½ËÄÃæÌå<V0,V1,V2,V3>
-        // V = b0 * V0 + b1 * V1 + b2 * V2 + b3 * V3£¬
-        // ÕâÀïb0 + b1 + b2 + b3 = 1¡£
-        // µ±ÇÒ½öµ±{V0£¬V1£¬V2, V3}ÊÇÏßĞÔÎŞ¹Ø×éÊ±·µ»ØÖµÊÇÓĞĞ§µÄ¡£
-        // ÊıÖµÉÏ£¬²âÊÔ |det[V0 V1 V2 V3]| <= epsilon¡£
+        // ç›¸å¯¹äºè®¡ç®—å‡ºç‚¹Vçš„é‡å¿ƒåæ ‡åˆ°å››é¢ä½“<V0,V1,V2,V3>
+        // V = b0 * V0 + b1 * V1 + b2 * V2 + b3 * V3ï¼Œ
+        // è¿™é‡Œb0 + b1 + b2 + b3 = 1ã€‚
+        // å½“ä¸”ä»…å½“{V0ï¼ŒV1ï¼ŒV2, V3}æ˜¯çº¿æ€§æ— å…³ç»„æ—¶è¿”å›å€¼æ˜¯æœ‰æ•ˆçš„ã€‚
+        // æ•°å€¼ä¸Šï¼Œæµ‹è¯• |det[V0 V1 V2 V3]| <= epsilonã€‚
         NODISCARD BarycentricCoordinatesType GetBarycentrics(const Vector3& vector0,
                                                          const Vector3& vector1,
                                                          const Vector3& vector2,
@@ -168,7 +168,7 @@ namespace Mathematics
     template <typename Real>
     NODISCARD bool operator<(const Vector3<Real>& lhs, const Vector3<Real>& rhs) noexcept;
 
-    // µ÷ÊÔÊä³ö¡£
+    // è°ƒè¯•è¾“å‡ºã€‚
     template <typename Real>
     std::ostream& operator<<(std::ostream& outFile, const Vector3<Real>& vector);
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:59)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:59)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_PLANE3_PLANE3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_PLANE3_PLANE3_H
@@ -44,7 +44,7 @@ namespace Mathematics
         NODISCARD Plane3Type GetPlane0() const noexcept;
         NODISCARD Plane3Type GetPlane1() const noexcept;
 
-        /// ÓĞ¹Ø½»¼¯µÄĞÅÏ¢¡£ ½ö»ñÈ¡Óë½»µãÀàĞÍ£¨IT_LINE»òIT_PLANE£©Ïà¶ÔÓ¦µÄ½»µãµÄÌØ¶¨¶ÔÏó¡£
+        /// æœ‰å…³äº¤é›†çš„ä¿¡æ¯ã€‚ ä»…è·å–ä¸äº¤ç‚¹ç±»å‹ï¼ˆIT_LINEæˆ–IT_PLANEï¼‰ç›¸å¯¹åº”çš„äº¤ç‚¹çš„ç‰¹å®šå¯¹è±¡ã€‚
         NODISCARD Line3Type GetIntersectionLine() const noexcept;
         NODISCARD Plane3Type GetIntersectionPlane() const noexcept;
 
@@ -55,7 +55,7 @@ namespace Mathematics
         Plane3Type plane0;
         Plane3Type plane1;
 
-        // ÓĞ¹Ø½»¼¯µÄĞÅÏ¢¡£
+        // æœ‰å…³äº¤é›†çš„ä¿¡æ¯ã€‚
         Line3Type intersectionLine;
         Plane3Type intersectionPlane;
     };

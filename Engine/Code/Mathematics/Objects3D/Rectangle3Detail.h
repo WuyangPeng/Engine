@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 10:37)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 10:37)
 
 #ifndef MATHEMATICS_OBJECTS_3D_RECTANGLE3_DETAIL_H
 #define MATHEMATICS_OBJECTS_3D_RECTANGLE3_DETAIL_H
@@ -154,7 +154,7 @@ typename Mathematics::Rectangle3<Real>::VerticesType Mathematics::Rectangle3<Rea
 
     VerticesType vertex{ center - extAxis0 - extAxis1, center + extAxis0 - extAxis1, center + extAxis0 + extAxis1, center - extAxis0 + extAxis1 };
 
-    MATHEMATICS_ASSERTION_1(vertex.size() == 4, "·µ»ØµÄÊı×é´óĞ¡´íÎó£¡");
+    MATHEMATICS_ASSERTION_1(vertex.size() == 4, "è¿”å›çš„æ•°ç»„å¤§å°é”™è¯¯ï¼");
 
     return vertex;
 }

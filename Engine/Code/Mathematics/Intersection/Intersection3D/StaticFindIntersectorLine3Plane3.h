@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 15:06)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 15:06)
 
 #ifndef MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_PLANE3_H
 #define MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_PLANE3_H
@@ -16,7 +16,7 @@
 
 namespace Mathematics
 {
-    // ²éÕÒ½»²æµã²éÑ¯¡£ Ïà½»µãÎªP = origin + t*direction¡£
+    // æŸ¥æ‰¾äº¤å‰ç‚¹æŸ¥è¯¢ã€‚ ç›¸äº¤ç‚¹ä¸ºP = origin + t*directionã€‚
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorLine3Plane3 : public StaticIntersector<Real, Vector3>
     {
@@ -44,11 +44,11 @@ namespace Mathematics
         void Find() noexcept;
 
     private:
-        // Ïà½»¶ÔÏó
+        // ç›¸äº¤å¯¹è±¡
         Line3Type line;
         Plane3Type plane;
 
-        // Ïà½»¶ÔÏó¼¯ĞÅÏ¢
+        // ç›¸äº¤å¯¹è±¡é›†ä¿¡æ¯
         Real lineParameter;
     };
 }

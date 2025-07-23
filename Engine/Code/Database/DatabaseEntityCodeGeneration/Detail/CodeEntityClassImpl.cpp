@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 13:51)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 13:51)
 
 #include "Database/DatabaseExport.h"
 
@@ -21,7 +21,7 @@ Database::CodeEntityClassImpl::CodeEntityClassImpl(String entityClassName, Strin
 {
     if (!IsValid())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´«ÈëµÄÀàÃû»òÊı¾İ¿âÃû³Æ»ò´úÂëÊµÌåÈİÆ÷Îª¿Õ¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("ä¼ å…¥çš„ç±»åæˆ–æ•°æ®åº“åç§°æˆ–ä»£ç å®ä½“å®¹å™¨ä¸ºç©ºã€‚"));
     }
 }
 
@@ -70,7 +70,7 @@ System::String Database::CodeEntityClassImpl::GetKeyType() const
         }
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½Êı¾İ¿âµÄ¼üÖµ"))
+    THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°æ•°æ®åº“çš„é”®å€¼"))
 }
 
 System::String Database::CodeEntityClassImpl::GetKeyName() const
@@ -85,7 +85,7 @@ System::String Database::CodeEntityClassImpl::GetKeyName() const
         }
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½Êı¾İ¿âµÄ¼üÖµ"))
+    THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°æ•°æ®åº“çš„é”®å€¼"))
 }
 
 int Database::CodeEntityClassImpl::GetSize() const

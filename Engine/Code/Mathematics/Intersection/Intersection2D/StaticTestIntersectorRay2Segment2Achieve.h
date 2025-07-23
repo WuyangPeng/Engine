@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 17:57)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 17:57)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_RAY2_SEGMENT2_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_RAY2_SEGMENT2_ACHIEVE_H
@@ -37,7 +37,7 @@ void Mathematics::StaticTestIntersectorRay2Segment2<Real>::Test()
 
     if (intersectionType == IntersectionType::Point)
     {
-        // ²âÊÔÖ±Ïß-Ö±ÏßµÄÏà½»µãÊÇ·ñÔÚÉäÏßºÍÏß¶ÎÉÏ¡£
+        // æµ‹è¯•ç›´çº¿-ç›´çº¿çš„ç›¸äº¤ç‚¹æ˜¯å¦åœ¨å°„çº¿å’Œçº¿æ®µä¸Šã€‚
         if (0 <= classify.GetParameter0() && MathType::FAbs(classify.GetParameter1()) <= segment.GetExtent() + intervalThreshold)
         {
             quantity = 1;
@@ -50,11 +50,11 @@ void Mathematics::StaticTestIntersectorRay2Segment2<Real>::Test()
     }
     else if (intersectionType == IntersectionType::Line)
     {
-        // ¼ÆËãÏß¶ÎsegmentÖĞĞÄÏà¶ÔÓÚÉäÏßrayµÄÎ»ÖÃ¡£
+        // è®¡ç®—çº¿æ®µsegmentä¸­å¿ƒç›¸å¯¹äºå°„çº¿rayçš„ä½ç½®ã€‚
         auto difference = segment.GetCenterPoint() - ray.GetOrigin();
         auto dotProduct = Vector2ToolsType::DotProduct(ray.GetDirection(), difference);
 
-        // ¼ÆËãÏß¶ÎÏà¶ÔÓÚÉäÏß·½ÏòµÄ×îÓÒµãµÄÎ»ÖÃ¡£
+        // è®¡ç®—çº¿æ®µç›¸å¯¹äºå°„çº¿æ–¹å‘çš„æœ€å³ç‚¹çš„ä½ç½®ã€‚
         auto tmax = dotProduct + segment.GetExtent();
 
         if (dotThreshold < tmax)

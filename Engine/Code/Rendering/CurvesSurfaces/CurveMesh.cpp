@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:59)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:59)
 
 #include "Rendering/RenderingExport.h"
 
@@ -74,12 +74,12 @@ void Rendering::CurveMesh::SetLevel(int aLevel)
         const auto nextNumVertices = numVertices + numEdges;
         const auto nextNumEdges = 2 * numEdges;
         Subdivide(numVertices, numEdges, edges);
-        RENDERING_ASSERTION_0(numVertices == nextNumVertices && numEdges == nextNumEdges, "ÒâÍâÇé¿ö¡£\n");
+        RENDERING_ASSERTION_0(numVertices == nextNumVertices && numEdges == nextNumEdges, "æ„å¤–æƒ…å†µã€‚\n");
         numVertices = nextNumVertices;
         numEdges = nextNumEdges;
     }
 
-    RENDERING_ASSERTION_0(numVertices == numTotalVertices && numEdges == numTotalEdges, "ÒâÍâÇé¿ö¡£\n");
+    RENDERING_ASSERTION_0(numVertices == numTotalVertices && numEdges == numTotalEdges, "æ„å¤–æƒ…å†µã€‚\n");
 
     numFullVertices = numTotalVertices;
 

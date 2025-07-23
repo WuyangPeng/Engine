@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/11 18:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/11 18:28)
 
 #include "ReadAttributeTesting.h"
 #include "System/Console/ConsoleColour.h"
@@ -76,7 +76,7 @@ void System::ReadAttributeTesting::AttributeResultTest(const AttributeType& attr
 
 void System::ReadAttributeTesting::DoAttributeResultTest(WindowsWord word)
 {
-    /// ¸ù¾İTextColour¡¢BackgroundColourºÍConsoleCommonÃ¶¾ÙµÄÊµ¼ÊÖµËùÕ¼µÄÎ»µÃ³ö0x000F¡¢0x00F0ºÍ0xFF00µÄÖµ¡£
+    /// æ ¹æ®TextColourã€BackgroundColourå’ŒConsoleCommonæšä¸¾çš„å®é™…å€¼æ‰€å çš„ä½å¾—å‡º0x000Fã€0x00F0å’Œ0xFF00çš„å€¼ã€‚
     ASSERT_TRUE(HasTextColour(UnderlyingCastEnum<TextColour>(word & textColourMask)));
     ASSERT_TRUE(HasBackgroundColour(UnderlyingCastEnum<BackgroundColour>(word & backgroundColourMask)));
     ASSERT_TRUE(HasConsoleCommon(UnderlyingCastEnum<ConsoleCommon>(word & consoleCommonMask)));

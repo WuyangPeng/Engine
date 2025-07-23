@@ -1,15 +1,15 @@
-TODO Level 8
+﻿TODO Level 8
  
 1.0.0.4
 
-1.  ��Base��������֧��ʵ�ֵ�ƽ̨���ṩMath���SIMD�汾�� 
-2.  ��Base��������ScaledFloatToInt�еĳ�����
-3.  ��Algebra���޸İ�Χ�е�FindIntersection����������ֵ�ĳ�һ��pair���Ա�ʾ�Ƿ��ҵ����ཻ�İ�Χ�У����ﲻ�ʺ��׳��쳣��
-4.  ��Rational��������������ת���������
-5.  ��Rational����ȷ��MATHEMATICS_ASSERT_ON_RATIONAL_CONVERT_NAN���ô���û�þ�ɾ����
-6.  ��Rational���ع�Integer�ࡣ
-7.  ��Rational��Integer����������������ڳ���Ϊ��ʱ��������Ч���з��ŵ������
-8.  ��Query��Query3Rational��Query2Rational�޸���ԭ�еĻ�����ƣ��ĳɹ���ʱֱ��ת���������Ƿ���ʡ� 
-9.  ��Distance���ع�DistanceLine3Box3�࣬ɾ��mutable������
-10. ���ۺϣ���ѧ������ʹ���׳��쳣�����ȴ���Ӧ����ô������Ҫ�����޸ġ�
-11. ���ۺϣ�����ʹ��MathType::FloatingPointEqual�滻MathType::Approximate���Ƚϸ������Ľ�����ȡ�
+1.  （Base）在我们支持实现的平台上提供Math类的SIMD版本。 
+2.  （Base）定义类ScaledFloatToInt中的常量。
+3.  （Algebra）修改包围盒的FindIntersection函数，返回值改成一个pair，以表示是否找到及相交的包围盒，这里不适合抛出异常。
+4.  （Rational）定义有理数的转换运算符。
+5.  （Rational）明确宏MATHEMATICS_ASSERT_ON_RATIONAL_CONVERT_NAN的用处，没用就删掉。
+6.  （Rational）重构Integer类。
+7.  （Rational）Integer除法和求余操作，在除数为零时，返回无效或有符号的无穷大？
+8.  （Query）Query3Rational、Query2Rational修改了原有的缓存机制，改成构造时直接转换，看下是否合适。 
+9.  （Distance）重构DistanceLine3Box3类，删除mutable变量。
+10. （综合）数学库过多的使用抛出异常，精度错误不应该这么做，需要进行修改。
+11. （综合）考虑使用MathType::FloatingPointEqual替换MathType::Approximate来比较浮点数的近似相等。

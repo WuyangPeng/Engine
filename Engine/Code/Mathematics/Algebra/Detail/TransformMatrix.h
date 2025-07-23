@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.6 (2024/02/20 09:16)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.6 (2024/02/20 09:16)
 
 #ifndef RENDERING_DATA_TYPES_TRANSFORM_MATRIX_H
 #define RENDERING_DATA_TYPES_TRANSFORM_MATRIX_H
@@ -51,8 +51,8 @@ namespace Mathematics
         NODISCARD int GetStreamingSize() const noexcept;
 
     private:
-        /// Ã¿µ±×é¼şmatrix¡¢translate»òscaleÖ®Ò»·¢Éú±ä»¯Ê±£¬
-        /// ÇëÌîĞ´transformMatrixµÄÌõÄ¿¡£
+        /// æ¯å½“ç»„ä»¶matrixã€translateæˆ–scaleä¹‹ä¸€å‘ç”Ÿå˜åŒ–æ—¶ï¼Œ
+        /// è¯·å¡«å†™transformMatrixçš„æ¡ç›®ã€‚
         void Modification(const APointType& translate) noexcept;
         void Modification(const MatrixType& matrix) noexcept;
         void Modification(const MatrixType& rotate, const APointType& scale) noexcept;

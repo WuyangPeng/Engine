@@ -1,14 +1,14 @@
-@ingroup group_$ModuleName$Core_Documentation
+ï»¿@ingroup group_$ModuleName$Core_Documentation
 
 ----------------------------
-$ModuleChineseName$ºËĞÄ
+$ModuleChineseName$æ ¸å¿ƒ
 
-Ä¿Ç°°üº¬£º
-
-----------------------------
-1.   Helper£¨°ïÖú£© 
+ç›®å‰åŒ…å«ï¼š
 
 ----------------------------
-2.   Engine£¨ÒıÇæ£© 
+1.   Helperï¼ˆå¸®åŠ©ï¼‰ 
+
+----------------------------
+2.   Engineï¼ˆå¼•æ“ï¼‰ 
 
 ----------------------------

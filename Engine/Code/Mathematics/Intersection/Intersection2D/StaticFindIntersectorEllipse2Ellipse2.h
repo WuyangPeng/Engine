@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:47)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:47)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_ELLIPSE2_ELLIPSE2_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_ELLIPSE2_ELLIPSE2_H
@@ -39,10 +39,10 @@ namespace Mathematics
         NODISCARD Ellipse2Type GetEllipse0() const noexcept;
         NODISCARD Ellipse2Type GetEllipse1() const noexcept;
 
-        /// ÓÃÓÚ¾²Ì¬²éÕÒÏà½»µã²éÑ¯µÄ½»²æµã¼¯¡£ QÂú×ã0 <= Q <= 4¡£
-        /// µ±Q > 0Ê±£¬½âÊÍÈ¡¾öÓÚ½»²æµãÀàĞÍ¡£
-        ///   IT_POINT£ºQ¸ö²»Í¬µÄ½»µã
-        ///   IT_OTHER£ºÍÖÔ²ÊÇÏàÍ¬µÄ¡£ GetIntersectionEllipse·µ»ØÍÖÔ²¶ÔÏóÖ®Ò»¡£ QÎŞĞ§¡£
+        /// ç”¨äºé™æ€æŸ¥æ‰¾ç›¸äº¤ç‚¹æŸ¥è¯¢çš„äº¤å‰ç‚¹é›†ã€‚ Qæ»¡è¶³0 <= Q <= 4ã€‚
+        /// å½“Q > 0æ—¶ï¼Œè§£é‡Šå–å†³äºäº¤å‰ç‚¹ç±»å‹ã€‚
+        ///   IT_POINTï¼šQä¸ªä¸åŒçš„äº¤ç‚¹
+        ///   IT_OTHERï¼šæ¤­åœ†æ˜¯ç›¸åŒçš„ã€‚ GetIntersectionEllipseè¿”å›æ¤­åœ†å¯¹è±¡ä¹‹ä¸€ã€‚ Qæ— æ•ˆã€‚
         NODISCARD int GetQuantity() const;
         NODISCARD Vector2Type GetPoint(int index) const;
         NODISCARD Ellipse2Type GetIntersectionEllipse() const noexcept;
@@ -55,10 +55,10 @@ namespace Mathematics
         using TransverseType = std::array<bool, 4>;
 
     private:
-        // ¾²Ì¬½»¼¯²éÑ¯
+        // é™æ€äº¤é›†æŸ¥è¯¢
         void Find();
 
-        //  Ö§³Ö¶ÔÇ±ÔÚµÄÏà½»µã½øĞĞÅÅĞò¡£
+        //  æ”¯æŒå¯¹æ½œåœ¨çš„ç›¸äº¤ç‚¹è¿›è¡Œæ’åºã€‚
         struct Measurement final
         {
         public:
@@ -79,15 +79,15 @@ namespace Mathematics
         NODISCARD Measurement RefinePoint(const CoeffType& coeff, const Vector2Type& vector2);
 
     private:
-        // ÒªÏà½»µÄ¶ÔÏó¡£
+        // è¦ç›¸äº¤çš„å¯¹è±¡ã€‚
         Ellipse2Type ellipse0;
         Ellipse2Type ellipse1;
 
-        // Ïà½»µã¡£
+        // ç›¸äº¤ç‚¹ã€‚
         Intersection point;
         TransverseType transverse;
 
-        // Çó¸ùµÄ×¼È·ĞÔÎ»Êı¡£ Ä¬ÈÏÖµÎª10¡£
+        // æ±‚æ ¹çš„å‡†ç¡®æ€§ä½æ•°ã€‚ é»˜è®¤å€¼ä¸º10ã€‚
         int digitsAccuracy;
     };
 }

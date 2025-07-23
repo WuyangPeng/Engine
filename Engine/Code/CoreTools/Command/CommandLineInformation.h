@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 14:22)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 14:22)
 
 #ifndef CORE_TOOLS_COMMAND_COMMAND_LINE_INFORMATION_H
 #define CORE_TOOLS_COMMAND_COMMAND_LINE_INFORMATION_H
@@ -32,11 +32,11 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        /// ·µ»ØµÚÒ»¸öÎ´´¦Àí²ÎÊıµÄÃû×Ö¡£
+        /// è¿”å›ç¬¬ä¸€ä¸ªæœªå¤„ç†å‚æ•°çš„åå­—ã€‚
         NODISCARD std::string ExcessArguments() const;
         NODISCARD int GetExcessArgumentsCount() const noexcept;
 
-        /// ·µ»Ø´æÔÚµÄÑ¡Ïî
+        /// è¿”å›å­˜åœ¨çš„é€‰é¡¹
         NODISCARD bool GetBoolean(const std::string& name) const;
 
         NODISCARD int GetInteger(const std::string& name) const;

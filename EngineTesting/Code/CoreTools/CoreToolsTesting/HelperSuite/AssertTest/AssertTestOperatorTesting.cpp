@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+Ôªø/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-/// ¡™œµ◊˜’ﬂ£∫94458936@qq.com
+/// ‰ΩúËÄÖÔºöÂΩ≠Ê≠¶Èò≥ÔºåÂΩ≠ÊôîÊÅ©ÔºåÂΩ≠ÊôîÊ≥Ω
+/// ËÅîÁ≥ª‰ΩúËÄÖÔºö94458936@qq.com
 ///
-/// ±Í◊º£∫std:c++20
-/// ∞Ê±æ£∫1.0.0.8 (2024/04/12 21:31)
+/// Ê†áÂáÜÔºöstd:c++20
+/// ÁâàÊú¨Ôºö1.0.0.8 (2024/04/12 21:31)
 
 #include "AssertTestOperatorTesting.h"
 #include "CoreTools/CoreToolsTesting/HelperSuite/Detail/MacroTestEnum.h"
@@ -62,12 +62,12 @@ void CoreTools::AssertTestOperatorTesting::AssertOperatorMessageTest()
     constexpr auto lhsExpression = 5;
     constexpr auto rhsExpression = 6;
 
-    ASSERT_EQUAL_USE_MESSAGE(lhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_UNEQUAL_USE_MESSAGE(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_LESS_USE_MESSAGE(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_LESS_EQUAL_USE_MESSAGE(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_GREATER_USE_MESSAGE(rhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_GREATER_EQUAL_USE_MESSAGE(rhsExpression, lhsExpression, "≤‚ ‘");
+    ASSERT_EQUAL_USE_MESSAGE(lhsExpression, lhsExpression, "ÊµãËØï");
+    ASSERT_UNEQUAL_USE_MESSAGE(lhsExpression, rhsExpression, "ÊµãËØï");
+    ASSERT_LESS_USE_MESSAGE(lhsExpression, rhsExpression, "ÊµãËØï");
+    ASSERT_LESS_EQUAL_USE_MESSAGE(lhsExpression, rhsExpression, "ÊµãËØï");
+    ASSERT_GREATER_USE_MESSAGE(rhsExpression, lhsExpression, "ÊµãËØï");
+    ASSERT_GREATER_EQUAL_USE_MESSAGE(rhsExpression, lhsExpression, "ÊµãËØï");
 }
 
 void CoreTools::AssertTestOperatorTesting::AssertOperatorFailureThrowTest()
@@ -75,12 +75,12 @@ void CoreTools::AssertTestOperatorTesting::AssertOperatorFailureThrowTest()
     constexpr auto lhsExpression = 5;
     constexpr auto rhsExpression = 6;
 
-    ASSERT_EQUAL_FAILURE_THROW(lhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_LESS_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_LESS_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_GREATER_FAILURE_THROW(rhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_GREATER_EQUAL_FAILURE_THROW(rhsExpression, lhsExpression, "≤‚ ‘");
+    ASSERT_EQUAL_FAILURE_THROW(lhsExpression, lhsExpression, "ÊµãËØï");
+    ASSERT_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "ÊµãËØï");
+    ASSERT_LESS_FAILURE_THROW(lhsExpression, rhsExpression, "ÊµãËØï");
+    ASSERT_LESS_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "ÊµãËØï");
+    ASSERT_GREATER_FAILURE_THROW(rhsExpression, lhsExpression, "ÊµãËØï");
+    ASSERT_GREATER_EQUAL_FAILURE_THROW(rhsExpression, lhsExpression, "ÊµãËØï");
 }
 
 void CoreTools::AssertTestOperatorTesting::AssertOperatorDoNotUseMessageTest()
@@ -97,8 +97,8 @@ void CoreTools::AssertTestOperatorTesting::AssertOperatorDoNotUseMessageFailureT
     constexpr auto lhsExpression = 5;
     constexpr auto rhsExpression = 6;
 
-    ASSERT_EQUAL_FAILURE_THROW(lhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
+    ASSERT_EQUAL_FAILURE_THROW(lhsExpression, lhsExpression, "ÊµãËØï");
+    ASSERT_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "ÊµãËØï");
 }
 
 void CoreTools::AssertTestOperatorTesting::AssertEnumOperatorTest()
@@ -119,12 +119,12 @@ void CoreTools::AssertTestOperatorTesting::AssertEnumOperatorMessageTest()
     constexpr auto lhsExpression = MacroTestEnum::One;
     constexpr auto rhsExpression = MacroTestEnum::Two;
 
-    ASSERT_EQUAL_USE_MESSAGE(lhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_UNEQUAL_USE_MESSAGE(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_LESS_USE_MESSAGE(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_LESS_EQUAL_USE_MESSAGE(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_GREATER_USE_MESSAGE(rhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_GREATER_EQUAL_USE_MESSAGE(rhsExpression, lhsExpression, "≤‚ ‘");
+    ASSERT_EQUAL_USE_MESSAGE(lhsExpression, lhsExpression, "ÊµãËØï");
+    ASSERT_UNEQUAL_USE_MESSAGE(lhsExpression, rhsExpression, "ÊµãËØï");
+    ASSERT_LESS_USE_MESSAGE(lhsExpression, rhsExpression, "ÊµãËØï");
+    ASSERT_LESS_EQUAL_USE_MESSAGE(lhsExpression, rhsExpression, "ÊµãËØï");
+    ASSERT_GREATER_USE_MESSAGE(rhsExpression, lhsExpression, "ÊµãËØï");
+    ASSERT_GREATER_EQUAL_USE_MESSAGE(rhsExpression, lhsExpression, "ÊµãËØï");
 }
 
 void CoreTools::AssertTestOperatorTesting::AssertEnumOperatorFailureThrowTest()
@@ -132,12 +132,12 @@ void CoreTools::AssertTestOperatorTesting::AssertEnumOperatorFailureThrowTest()
     constexpr auto lhsExpression = MacroTestEnum::One;
     constexpr auto rhsExpression = MacroTestEnum::Two;
 
-    ASSERT_EQUAL_FAILURE_THROW(lhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_LESS_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_LESS_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_GREATER_FAILURE_THROW(rhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_GREATER_EQUAL_FAILURE_THROW(rhsExpression, lhsExpression, "≤‚ ‘");
+    ASSERT_EQUAL_FAILURE_THROW(lhsExpression, lhsExpression, "ÊµãËØï");
+    ASSERT_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "ÊµãËØï");
+    ASSERT_LESS_FAILURE_THROW(lhsExpression, rhsExpression, "ÊµãËØï");
+    ASSERT_LESS_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "ÊµãËØï");
+    ASSERT_GREATER_FAILURE_THROW(rhsExpression, lhsExpression, "ÊµãËØï");
+    ASSERT_GREATER_EQUAL_FAILURE_THROW(rhsExpression, lhsExpression, "ÊµãËØï");
 }
 
 void CoreTools::AssertTestOperatorTesting::AssertSignedEnumOperatorTest()
@@ -158,12 +158,12 @@ void CoreTools::AssertTestOperatorTesting::AssertSignedEnumOperatorMessageTest()
     constexpr auto lhsExpression = MacroTestSignedEnum::NegativeOne;
     constexpr auto rhsExpression = MacroTestSignedEnum::Zero;
 
-    ASSERT_EQUAL_USE_MESSAGE(lhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_UNEQUAL_USE_MESSAGE(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_LESS_USE_MESSAGE(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_LESS_EQUAL_USE_MESSAGE(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_GREATER_USE_MESSAGE(rhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_GREATER_EQUAL_USE_MESSAGE(rhsExpression, lhsExpression, "≤‚ ‘");
+    ASSERT_EQUAL_USE_MESSAGE(lhsExpression, lhsExpression, "ÊµãËØï");
+    ASSERT_UNEQUAL_USE_MESSAGE(lhsExpression, rhsExpression, "ÊµãËØï");
+    ASSERT_LESS_USE_MESSAGE(lhsExpression, rhsExpression, "ÊµãËØï");
+    ASSERT_LESS_EQUAL_USE_MESSAGE(lhsExpression, rhsExpression, "ÊµãËØï");
+    ASSERT_GREATER_USE_MESSAGE(rhsExpression, lhsExpression, "ÊµãËØï");
+    ASSERT_GREATER_EQUAL_USE_MESSAGE(rhsExpression, lhsExpression, "ÊµãËØï");
 }
 
 void CoreTools::AssertTestOperatorTesting::AssertSignedEnumOperatorFailureThrowTest()
@@ -171,12 +171,12 @@ void CoreTools::AssertTestOperatorTesting::AssertSignedEnumOperatorFailureThrowT
     constexpr auto lhsExpression = MacroTestSignedEnum::NegativeOne;
     constexpr auto rhsExpression = MacroTestSignedEnum::Zero;
 
-    ASSERT_EQUAL_FAILURE_THROW(lhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_LESS_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_LESS_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_GREATER_FAILURE_THROW(rhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_GREATER_EQUAL_FAILURE_THROW(rhsExpression, lhsExpression, "≤‚ ‘");
+    ASSERT_EQUAL_FAILURE_THROW(lhsExpression, lhsExpression, "ÊµãËØï");
+    ASSERT_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "ÊµãËØï");
+    ASSERT_LESS_FAILURE_THROW(lhsExpression, rhsExpression, "ÊµãËØï");
+    ASSERT_LESS_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "ÊµãËØï");
+    ASSERT_GREATER_FAILURE_THROW(rhsExpression, lhsExpression, "ÊµãËØï");
+    ASSERT_GREATER_EQUAL_FAILURE_THROW(rhsExpression, lhsExpression, "ÊµãËØï");
 }
 
 void CoreTools::AssertTestOperatorTesting::AssertThreeOperatorTest()
@@ -194,7 +194,7 @@ void CoreTools::AssertTestOperatorTesting::AssertThreeOperatorMessageTest()
     constexpr auto mhsExpression = 5;
     constexpr auto rhsExpression = 5;
 
-    ASSERT_THREE_EQUAL_USE_MESSAGE(lhsExpression, mhsExpression, rhsExpression, "≤‚ ‘");
+    ASSERT_THREE_EQUAL_USE_MESSAGE(lhsExpression, mhsExpression, rhsExpression, "ÊµãËØï");
 }
 
 void CoreTools::AssertTestOperatorTesting::AssertThreeOperatorFailureThrowTest()
@@ -203,7 +203,7 @@ void CoreTools::AssertTestOperatorTesting::AssertThreeOperatorFailureThrowTest()
     constexpr auto mhsExpression = 5;
     constexpr auto rhsExpression = 5;
 
-    ASSERT_THREE_EQUAL_FAILURE_THROW(lhsExpression, mhsExpression, rhsExpression, "≤‚ ‘");
+    ASSERT_THREE_EQUAL_FAILURE_THROW(lhsExpression, mhsExpression, rhsExpression, "ÊµãËØï");
 }
 
 void CoreTools::AssertTestOperatorTesting::AssertFloatingPointCompleteOperatorTest()
@@ -221,9 +221,9 @@ void CoreTools::AssertTestOperatorTesting::AssertFloatingPointCompleteOperatorMe
     constexpr auto lhsExpression = 20.0f;
     constexpr auto rhsExpression = 20.1f;
 
-    ASSERT_FLOATING_POINT_COMPLETE_EQUAL_USE_MESSAGE(lhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_FLOATING_POINT_COMPLETE_EQUAL_USE_MESSAGE(rhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_FLOATING_POINT_COMPLETE_UNEQUAL_USE_MESSAGE(lhsExpression, rhsExpression, "≤‚ ‘");
+    ASSERT_FLOATING_POINT_COMPLETE_EQUAL_USE_MESSAGE(lhsExpression, lhsExpression, "ÊµãËØï");
+    ASSERT_FLOATING_POINT_COMPLETE_EQUAL_USE_MESSAGE(rhsExpression, rhsExpression, "ÊµãËØï");
+    ASSERT_FLOATING_POINT_COMPLETE_UNEQUAL_USE_MESSAGE(lhsExpression, rhsExpression, "ÊµãËØï");
 }
 
 void CoreTools::AssertTestOperatorTesting::AssertFloatingPointCompleteOperatorFailureThrowTest()
@@ -231,7 +231,7 @@ void CoreTools::AssertTestOperatorTesting::AssertFloatingPointCompleteOperatorFa
     constexpr auto lhsExpression = 20.0f;
     constexpr auto rhsExpression = 20.1f;
 
-    ASSERT_FLOATING_POINT_COMPLETE_EQUAL_FAILURE_THROW(lhsExpression, lhsExpression, "≤‚ ‘");
-    ASSERT_FLOATING_POINT_COMPLETE_EQUAL_FAILURE_THROW(rhsExpression, rhsExpression, "≤‚ ‘");
-    ASSERT_FLOATING_POINT_COMPLETE_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
+    ASSERT_FLOATING_POINT_COMPLETE_EQUAL_FAILURE_THROW(lhsExpression, lhsExpression, "ÊµãËØï");
+    ASSERT_FLOATING_POINT_COMPLETE_EQUAL_FAILURE_THROW(rhsExpression, rhsExpression, "ÊµãËØï");
+    ASSERT_FLOATING_POINT_COMPLETE_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "ÊµãËØï");
 }

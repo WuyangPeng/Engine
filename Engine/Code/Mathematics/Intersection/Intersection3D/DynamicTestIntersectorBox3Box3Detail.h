@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:15)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:15)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_BOX3_BOX3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_BOX3_BOX3_DETAIL_H
@@ -69,12 +69,12 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
         return;
     }
 
-    /// ¿òÖáÖ®¼äµÄ½Ç¶ÈµÄÓàÏÒÖµµÄ½ØÖ¹Öµ¡£ ÓÃÓÚ²¶×½ÖÁÉÙÒ»¶ÔÖáÆ½ĞĞµÄÇé¿ö¡£
-    /// Èç¹û·¢ÉúÕâÖÖÇé¿ö£¬ÔòÎŞĞè°üÀ¨²æ»ıÖáÒÔ½øĞĞ·ÖÀë¡£
+    /// æ¡†è½´ä¹‹é—´çš„è§’åº¦çš„ä½™å¼¦å€¼çš„æˆªæ­¢å€¼ã€‚ ç”¨äºæ•æ‰è‡³å°‘ä¸€å¯¹è½´å¹³è¡Œçš„æƒ…å†µã€‚
+    /// å¦‚æœå‘ç”Ÿè¿™ç§æƒ…å†µï¼Œåˆ™æ— éœ€åŒ…æ‹¬å‰ç§¯è½´ä»¥è¿›è¡Œåˆ†ç¦»ã€‚
     constexpr auto cutoff = MathType::GetValue(1) - MathType::GetZeroTolerance();
     auto existsParallelPair = false;
 
-    // ±ãÀû±äÁ¿
+    // ä¾¿åˆ©å˜é‡
     auto centerDiff = box1.GetCenter() - box0.GetCenter();
     auto velocityDiff = this->GetRhsVelocity() - this->GetLhsVelocity();
 
@@ -112,7 +112,7 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
     this->SetContactTime(MathType::GetValue(0));
     Separated tLast{ false, MathType::maxReal };
 
-    // Öá C0 + t * A[i]
+    // è½´ C0 + t * A[i]
     constexpr auto size = 3;
     for (auto i = 0; i < size; ++i)
     {
@@ -143,7 +143,7 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
         }
     }
 
-    // Öá C0 + t * B[i]
+    // è½´ C0 + t * B[i]
     for (auto i = 0; i < size; ++i)
     {
         auto radius = box0.GetExtent(0) * absMatrix(0, i) + box0.GetExtent(1) * absMatrix(1, i) + box0.GetExtent(2) * absMatrix(2, i);
@@ -161,14 +161,14 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
         }
     }
 
-    /// ÖÁÉÙÒ»¶ÔºĞµÄÖáÊÇÆ½ĞĞµÄ£¬Òò´ËÔÚ2DÖĞ·ÖÀëÊÇÓĞĞ§µÄ£¬ÆäÖĞ¼ì²é¡°±ßÔµ¡±·¨Ïß×ãÒÔ·ÖÀëºĞ×Ó¡£
+    /// è‡³å°‘ä¸€å¯¹ç›’çš„è½´æ˜¯å¹³è¡Œçš„ï¼Œå› æ­¤åœ¨2Dä¸­åˆ†ç¦»æ˜¯æœ‰æ•ˆçš„ï¼Œå…¶ä¸­æ£€æŸ¥â€œè¾¹ç¼˜â€æ³•çº¿è¶³ä»¥åˆ†ç¦»ç›’å­ã€‚
     if (existsParallelPair)
     {
         this->SetIntersectionType(IntersectionType::Other);
         return;
     }
 
-    // Öá C0 + t * A0 x B0
+    // è½´ C0 + t * A0 x B0
     auto radius = box0.GetExtent(1) * absMatrix.template GetValue<2, 0>() + box0.GetExtent(2) * absMatrix.template GetValue<1, 0>();
     auto min0 = -radius;
     auto max0 = +radius;
@@ -184,7 +184,7 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
         return;
     }
 
-    // Öá C0 + t * A0 x B1
+    // è½´ C0 + t * A0 x B1
     radius = box0.GetExtent(1) * absMatrix.template GetValue<2, 1>() + box0.GetExtent(2) * absMatrix.template GetValue<1, 1>();
     min0 = -radius;
     max0 = +radius;
@@ -200,7 +200,7 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
         return;
     }
 
-    // Öá C0 + t * A0 x B2
+    // è½´ C0 + t * A0 x B2
     radius = box0.GetExtent(1) * absMatrix.template GetValue<2, 2>() + box0.GetExtent(2) * absMatrix.template GetValue<1, 2>();
     min0 = -radius;
     max0 = +radius;
@@ -216,7 +216,7 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
         return;
     }
 
-    // Öá C0 + t * A1 x B0
+    // è½´ C0 + t * A1 x B0
     radius = box0.GetExtent(0) * absMatrix.template GetValue<2, 0>() + box0.GetExtent(2) * absMatrix.template GetValue<0, 0>();
     min0 = -radius;
     max0 = +radius;
@@ -232,7 +232,7 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
         return;
     }
 
-    // Öá C0 + t * A1 x B1
+    // è½´ C0 + t * A1 x B1
     radius = box0.GetExtent(0) * absMatrix.template GetValue<2, 1>() + box0.GetExtent(2) * absMatrix.template GetValue<0, 1>();
     min0 = -radius;
     max0 = +radius;
@@ -248,7 +248,7 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
         return;
     }
 
-    // Öá C0 + t * A1xB2
+    // è½´ C0 + t * A1xB2
     radius = box0.GetExtent(0) * absMatrix.template GetValue<2, 2>() + box0.GetExtent(2) * absMatrix.template GetValue<0, 2>();
     min0 = -radius;
     max0 = +radius;
@@ -264,7 +264,7 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
         return;
     }
 
-    // Öá C0 + t * A2 x B0
+    // è½´ C0 + t * A2 x B0
     radius = box0.GetExtent(0) * absMatrix.template GetValue<1, 0>() + box0.GetExtent(1) * absMatrix.template GetValue<0, 0>();
     min0 = -radius;
     max0 = +radius;
@@ -280,7 +280,7 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
         return;
     }
 
-    // Öá C0 + t * A2 x B1
+    // è½´ C0 + t * A2 x B1
     radius = box0.GetExtent(0) * absMatrix.template GetValue<1, 1>() + box0.GetExtent(1) * absMatrix.template GetValue<0, 1>();
     min0 = -radius;
     max0 = +radius;
@@ -296,7 +296,7 @@ void Mathematics::DynamicTestIntersectorBox3Box3<Real>::Test()
         return;
     }
 
-    // Öá C0 + t * A2 x B2
+    // è½´ C0 + t * A2 x B2
     radius = box0.GetExtent(0) * absMatrix.template GetValue<1, 2>() + box0.GetExtent(1) * absMatrix.template GetValue<0, 2>();
     min0 = -radius;
     max0 = +radius;
@@ -321,12 +321,12 @@ typename Mathematics::DynamicTestIntersectorBox3Box3<Real>::Separated Mathematic
     auto invSpeed = MathType::GetValue(0);
     auto t = MathType::GetValue(0);
 
-    // box1×î³õÎ»ÓÚbox0µÄ×ó²à
+    // box1æœ€åˆä½äºbox0çš„å·¦ä¾§
     if (max1 < min0)
     {
         if (speed <= MathType::GetValue(0))
         {
-            // Í¶Ó°¼ä¸ô·ÖÀë¡£
+            // æŠ•å½±é—´éš”åˆ†ç¦»ã€‚
             return { true, tlast };
         }
         invSpeed = (MathType::GetValue(1)) / speed;
@@ -339,7 +339,7 @@ typename Mathematics::DynamicTestIntersectorBox3Box3<Real>::Separated Mathematic
 
         if (tmax < this->GetContactTime())
         {
-            // ¼ä¸ôÔÚÖ¸¶¨Ê±¼äÄÚ²»Ïà½»¡£
+            // é—´éš”åœ¨æŒ‡å®šæ—¶é—´å†…ä¸ç›¸äº¤ã€‚
             return { true, tlast };
         }
 
@@ -351,16 +351,16 @@ typename Mathematics::DynamicTestIntersectorBox3Box3<Real>::Separated Mathematic
 
         if (tlast < this->GetContactTime())
         {
-            // ÎïÀíÉÏ²»Ò»ÖÂµÄÊ±¼ä¡ª¡ª¶ÔÏóÎŞ·¨Ïà½»¡£
+            // ç‰©ç†ä¸Šä¸ä¸€è‡´çš„æ—¶é—´â€”â€”å¯¹è±¡æ— æ³•ç›¸äº¤ã€‚
             return { true, tlast };
         }
     }
-    // box1×î³õÎ»ÓÚbox0µÄÓÒ²à
+    // box1æœ€åˆä½äºbox0çš„å³ä¾§
     else if (max0 < min1)
     {
         if (speed >= MathType::GetValue(0))
         {
-            // Í¶Ó°¼ä¸ô·ÖÀë¡£
+            // æŠ•å½±é—´éš”åˆ†ç¦»ã€‚
             return { true, tlast };
         }
         invSpeed = (MathType::GetValue(1)) / speed;
@@ -373,7 +373,7 @@ typename Mathematics::DynamicTestIntersectorBox3Box3<Real>::Separated Mathematic
 
         if (tmax < this->GetContactTime())
         {
-            // ¼ä¸ôÔÚÖ¸¶¨Ê±¼äÄÚ²»Ïà½»¡£
+            // é—´éš”åœ¨æŒ‡å®šæ—¶é—´å†…ä¸ç›¸äº¤ã€‚
             return { true, tlast };
         }
 
@@ -385,11 +385,11 @@ typename Mathematics::DynamicTestIntersectorBox3Box3<Real>::Separated Mathematic
 
         if (tlast < this->GetContactTime())
         {
-            // ÎïÀíÉÏ²»Ò»ÖÂµÄÊ±¼ä¡ª¡ª¶ÔÏóÎŞ·¨Ïà½»¡£
+            // ç‰©ç†ä¸Šä¸ä¸€è‡´çš„æ—¶é—´â€”â€”å¯¹è±¡æ— æ³•ç›¸äº¤ã€‚
             return { true, tlast };
         }
     }
-    // box0ºÍbox1×î³õÖØµş
+    // box0å’Œbox1æœ€åˆé‡å 
     else
     {
         if (MathType::GetValue(0) < speed)
@@ -402,7 +402,7 @@ typename Mathematics::DynamicTestIntersectorBox3Box3<Real>::Separated Mathematic
 
             if (tlast < this->GetContactTime())
             {
-                // ÎïÀíÉÏ²»Ò»ÖÂµÄÊ±¼ä¡ª¡ª¶ÔÏóÎŞ·¨Ïà½»¡£
+                // ç‰©ç†ä¸Šä¸ä¸€è‡´çš„æ—¶é—´â€”â€”å¯¹è±¡æ— æ³•ç›¸äº¤ã€‚
                 return { true, tlast };
             }
         }
@@ -416,7 +416,7 @@ typename Mathematics::DynamicTestIntersectorBox3Box3<Real>::Separated Mathematic
 
             if (tlast < this->GetContactTime())
             {
-                // ÎïÀíÉÏ²»Ò»ÖÂµÄÊ±¼ä¡ª¡ª¶ÔÏóÎŞ·¨Ïà½»¡£
+                // ç‰©ç†ä¸Šä¸ä¸€è‡´çš„æ—¶é—´â€”â€”å¯¹è±¡æ— æ³•ç›¸äº¤ã€‚
                 return { true, tlast };
             }
         }

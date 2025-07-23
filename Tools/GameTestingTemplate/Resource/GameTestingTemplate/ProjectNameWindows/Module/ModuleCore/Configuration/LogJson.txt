@@ -1,4 +1,4 @@
-{
+﻿{
   "Logger": {
     "System": 1,
     "CoreTools": 1,

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:28)
 
 #ifndef MATHEMATICS_RATIONAL_INT64_VECTOR3_H
 #define MATHEMATICS_RATIONAL_INT64_VECTOR3_H
@@ -58,13 +58,13 @@ namespace Mathematics
 
         NODISCARD int64_t SquaredLength() const noexcept;
 
-        // ·µ»Ø Dot(lhs,rhs).
+        // è¿”å› Dot(lhs,rhs).
         NODISCARD int64_t Dot(const Int64Vector3& rhs) const;
 
-        // ·µ»Ø Cross(this,V)
+        // è¿”å› Cross(this,V)
         NODISCARD Int64Vector3 Cross(const Int64Vector3& rhs) const;
 
-        // ·µ»Ø Dot(this,Cross(U,V))
+        // è¿”å› Dot(this,Cross(U,V))
         NODISCARD int64_t TripleScalar(const Int64Vector3& mhs, const Int64Vector3& rhs) const;
 
         NODISCARD bool operator==(const Int64Vector3& rhs) const;

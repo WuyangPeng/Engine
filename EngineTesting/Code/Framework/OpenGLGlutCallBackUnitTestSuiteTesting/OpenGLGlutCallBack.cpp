@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/13 23:27)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/13 23:27)
 
 #include "OpenGLGlutCallBack.h"
 #include "Testing.h"
@@ -16,7 +16,7 @@
 #include "Framework/OpenGLGlutFrame/OpenGLGlutCallBackUnitTestSuiteDetail.h"
 
 OpenGLGlutCallBackUnitTestSuiteTesting::OpenGLGlutCallBack::OpenGLGlutCallBack(int64_t delta)
-    : ParentType(delta, "¡¾OpenGL Glut Call Back Unit Test Suite Testing¡¿µ¥Ôª²âÊÔÌ×¼ş")
+    : ParentType(delta, "ã€OpenGL Glut Call Back Unit Test Suite Testingã€‘å•å…ƒæµ‹è¯•å¥—ä»¶")
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -25,7 +25,7 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(OpenGLGlutCallBackUnitTestSuiteTesting, O
 
 void OpenGLGlutCallBackUnitTestSuiteTesting::OpenGLGlutCallBack::AddSuite()
 {
-    auto openGLGlutFrameSuite = GenerateSuite("OpenGL GLUT ¿ò¼Ü´´½¨");
+    auto openGLGlutFrameSuite = GenerateSuite("OpenGL GLUT æ¡†æ¶åˆ›å»º");
 
     ADD_TEST_USE_PARAMETER_1(openGLGlutFrameSuite, OpenGLGlutCallBackUnitTestSuiteTesting, shared_from_this());
 

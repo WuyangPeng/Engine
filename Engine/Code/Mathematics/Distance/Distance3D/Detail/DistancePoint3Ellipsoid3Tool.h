@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 16:50)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 16:50)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_ELLIPSOID3_TOOL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT3_ELLIPSOID3_TOOL_H
@@ -39,19 +39,19 @@ namespace Mathematics
         using Container = std::vector<Real>;
 
     private:
-        // ÍÖÔ²ÊÇ(x0 / e0)^2 + (x1 / e1)^2 + (x2 / e2)^2 = 1ÇÒe0 >= e1 >= e2¡£
-        // ²éÑ¯µãÊÇ(y0,y1,y2)Óë y0 >= 0 ,y1 >= 0ºÍy2 >= 0
-        // º¯Êı·µ»Ø´Ó²éÑ¯µãµ½ÍÖÔ²µÄÆ½·½¾àÀë¡£
-        // ËüÒ²¼ÆËãÔÚµÚÒ»ÏóÏŞ×î½Ó½ü(y0,y1,y2)µÄÍÖÔ²µã(x0,x1,x2) ¡£
+        // æ¤­åœ†æ˜¯(x0 / e0)^2 + (x1 / e1)^2 + (x2 / e2)^2 = 1ä¸”e0 >= e1 >= e2ã€‚
+        // æŸ¥è¯¢ç‚¹æ˜¯(y0,y1,y2)ä¸ y0 >= 0 ,y1 >= 0å’Œy2 >= 0
+        // å‡½æ•°è¿”å›ä»æŸ¥è¯¢ç‚¹åˆ°æ¤­åœ†çš„å¹³æ–¹è·ç¦»ã€‚
+        // å®ƒä¹Ÿè®¡ç®—åœ¨ç¬¬ä¸€è±¡é™æœ€æ¥è¿‘(y0,y1,y2)çš„æ¤­åœ†ç‚¹(x0,x1,x2) ã€‚
         void ComputeSquaredDistance();
 
-        // ÍÖÔ²ÊÇ (x0 / e0)^2 + (x1 / e1)^2 + (x2 / e2)^2 = 1¡£
-        // ²éÑ¯µãÊÇ (y0,y1,y2)¡£
-        // º¯Êı·µ»Ø´Ó²éÑ¯µãµ½ÍÖÔ²µÄÆ½·½¾àÀë¡£
-        // ËüÒ²¼ÆËã×î½Ó½ü(y0,y1,y2)µÄÍÖÔ²µã (x0,x1,x2)  ¡£
+        // æ¤­åœ†æ˜¯ (x0 / e0)^2 + (x1 / e1)^2 + (x2 / e2)^2 = 1ã€‚
+        // æŸ¥è¯¢ç‚¹æ˜¯ (y0,y1,y2)ã€‚
+        // å‡½æ•°è¿”å›ä»æŸ¥è¯¢ç‚¹åˆ°æ¤­åœ†çš„å¹³æ–¹è·ç¦»ã€‚
+        // å®ƒä¹Ÿè®¡ç®—æœ€æ¥è¿‘(y0,y1,y2)çš„æ¤­åœ†ç‚¹ (x0,x1,x2)  ã€‚
         void ComputeSquaredDistanceSpecial(const Vector3Type& extent, const Vector3Type& queryPoint);
 
-        // ¸ÃÆ½·ÖËã·¨À´Ñ°ÕÒF(t)µÄÎ¨Ò»¸ù¡£
+        // è¯¥å¹³åˆ†ç®—æ³•æ¥å¯»æ‰¾F(t)çš„å”¯ä¸€æ ¹ã€‚
         NODISCARD Container Bisector(const Container& extent, const Container& queryPoint);
 
     private:

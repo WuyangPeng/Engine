@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.3 (2023/08/12 15:19)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.3 (2023/08/12 15:19)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_SUITE_MODEL_VIEW_CONTROLLER_MIDDLE_LAYER_TEST_H
 #define FRAMEWORK_MIDDLE_LAYER_SUITE_MODEL_VIEW_CONTROLLER_MIDDLE_LAYER_TEST_H
@@ -26,7 +26,7 @@ namespace Framework
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     public:
-        // ¿ªÆôprotected½Ó¿ÚÎªpublic£¬ÒÔ¹©²âÊÔ¡£
+        // å¼€å¯protectedæ¥å£ä¸ºpublicï¼Œä»¥ä¾›æµ‹è¯•ã€‚
         NODISCARD MiddleLayerSharedPtr GetPublicModelMiddleLayer() noexcept;
         NODISCARD MiddleLayerSharedPtr GetPublicViewMiddleLayer() noexcept;
         NODISCARD MiddleLayerSharedPtr GetPublicControllerMiddleLayer() noexcept;

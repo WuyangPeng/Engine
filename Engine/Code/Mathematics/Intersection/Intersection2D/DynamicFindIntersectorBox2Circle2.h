@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	�汾��0.9.1.6 (2023/10/28 14:46)
+///	标准：std:c++20
+///	版本：0.9.1.6 (2023/10/28 14:46)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX2_CIRCLE2_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX2_CIRCLE2_H
@@ -38,7 +38,7 @@ namespace Mathematics
         NODISCARD Box2Type GetBox() const noexcept;
         NODISCARD Circle2Type GetCircle() const noexcept;
 
-        // ���ڶ�̬�����ཻ��ѯ���ཻ����
+        // 用于动态查找相交查询的相交集。
         NODISCARD Vector2Type GetContactPoint() const noexcept;
 
     private:
@@ -59,20 +59,20 @@ namespace Mathematics
             explicit RegionInfo(IntersectingType type) noexcept;
         };
 
-        // ��̬���ҽ�����ѯ��
+        // 动态查找交叉点查询。
         void Find();
 
-        // ֧�ֶ�̬���ҡ� �����������ཻ������������������-1�����û���ཻ���򷵻�0�����������ĳ����ʱ�ཻ���򷵻�+1��
+        // 支持动态查找。 如果对象最初相交，则两个函数都返回-1；如果没有相交，则返回0；如果它们在某个正时相交，则返回+1。
         NODISCARD RegionInfo TestVertexRegion(Real centerDotX, Real centerDotY, Real velocityDotX, Real velocityDotY, Real extent0, Real extent1) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         NODISCARD RegionInfo TestEdgeRegion(Real centerDotX, Real centerDotY, Real velocityDotX, Real velocityDotY, Real extent0, Real extent1) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
     private:
-        // Ҫ�ཻ�Ķ���
+        // 要相交的对象。
         Box2Type box;
         Circle2Type circle;
 
-        // �ཻ�㡣
+        // 相交点。
         Vector2Type contactPoint;
     };
 

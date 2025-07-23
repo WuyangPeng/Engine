@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 15:01)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 15:01)
 
 #include "Framework/FrameworkExport.h"
 
@@ -334,12 +334,12 @@ bool Framework::CameraModelMiddleLayerImpl::Idle(int64_t aTimeDelta)
     {
         if (!MoveCamera())
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("MoveCamera Ê§°Ü¡£"));
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("MoveCamera å¤±è´¥ã€‚"));
         }
 
         if (!MoveObject())
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("MoveObject Ê§°Ü¡£"));
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("MoveObject å¤±è´¥ã€‚"));
         }
 
         timeDelta += System::gMicroseconds;
@@ -358,7 +358,7 @@ Framework::CameraModelMiddleLayerImpl::CameraSharedPtr Framework::CameraModelMid
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("CameraMotion Î´³õÊ¼»¯"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("CameraMotion æœªåˆå§‹åŒ–"s))
     }
 }
 
@@ -372,7 +372,7 @@ Framework::CameraModelMiddleLayerImpl::ConstCameraSharedPtr Framework::CameraMod
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("CameraMotion Î´³õÊ¼»¯"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("CameraMotion æœªåˆå§‹åŒ–"s))
     }
 }
 
@@ -430,7 +430,7 @@ float Framework::CameraModelMiddleLayerImpl::GetRotationSpeed() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("CameraMotion Î´³õÊ¼»¯"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("CameraMotion æœªåˆå§‹åŒ–"s))
     }
 }
 
@@ -444,7 +444,7 @@ float Framework::CameraModelMiddleLayerImpl::GetTranslationSpeed() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("CameraMotion Î´³õÊ¼»¯"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("CameraMotion æœªåˆå§‹åŒ–"s))
     }
 }
 
@@ -458,6 +458,6 @@ Framework::CameraModelMiddleLayerImpl::Transform Framework::CameraModelMiddleLay
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ObjectMotion Î´³õÊ¼»¯"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("ObjectMotion æœªåˆå§‹åŒ–"s))
     }
 }

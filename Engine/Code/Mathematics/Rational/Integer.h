@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:28)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_H
 #define MATHEMATICS_RATIONAL_INTEGER_H
@@ -20,16 +20,16 @@
 #include <iosfwd>
 #include <vector>
 
-// IntegerDataÖ»¶¨Òå³õÊ¼»¯ºÍ[]ÔËËã·û¡£
-// IntegerDataAmend¶¨ÒåĞŞ¸ÄIntegerDataµÄº¯Êı¡£
-// IntegerDataAnalysis¶¨Òå½âÎöº¯Êı¡£
-// IntegerDataOperator¶¨ÒåÊıÑ§ÔËËã·û¡£
-// IntegerMultiplication¶¨Òå³Ë·¨¡£
-// IntegerDivisionModulo¶¨Òå³ı·¨ºÍÇóÓà¡£
-// IntegerÖ»°üº¬±ØÒªµÄÍâ²¿½Ó¿Ú¡£
+// IntegerDataåªå®šä¹‰åˆå§‹åŒ–å’Œ[]è¿ç®—ç¬¦ã€‚
+// IntegerDataAmendå®šä¹‰ä¿®æ”¹IntegerDataçš„å‡½æ•°ã€‚
+// IntegerDataAnalysiså®šä¹‰è§£æå‡½æ•°ã€‚
+// IntegerDataOperatorå®šä¹‰æ•°å­¦è¿ç®—ç¬¦ã€‚
+// IntegerMultiplicationå®šä¹‰ä¹˜æ³•ã€‚
+// IntegerDivisionModuloå®šä¹‰é™¤æ³•å’Œæ±‚ä½™ã€‚
+// IntegeråªåŒ…å«å¿…è¦çš„å¤–éƒ¨æ¥å£ã€‚
 namespace Mathematics
 {
-    // NÊÇÄãÏëÒªÔªÕûÊıµÄ32Î»×Ö½ÚµÄÊıÄ¿¡£
+    // Næ˜¯ä½ æƒ³è¦å…ƒæ•´æ•°çš„32ä½å­—èŠ‚çš„æ•°ç›®ã€‚
     template <int N>
     class Integer final : private boost::integer_arithmetic<Integer<N>, boost::totally_ordered<Integer<N>, boost::shiftable<Integer<N>>>>
     {
@@ -67,21 +67,21 @@ namespace Mathematics
         NODISCARD uint16_t& operator[](int index);
         NODISCARD const uint16_t& operator[](int index) const;
 
-        // ËãÊõÔËËã¡£
+        // ç®—æœ¯è¿ç®—ã€‚
         NODISCARD Integer operator-() const;
         NODISCARD Integer GetAbsoluteValue() const;
 
-        // ËãÊõ¸üĞÂ¡£
+        // ç®—æœ¯æ›´æ–°ã€‚
         Integer& operator+=(const Integer& rhs);
         Integer& operator-=(const Integer& rhs);
         Integer& operator*=(const Integer& rhs);
 
-        // Èç¹ûÒªÍ¬Ê±Çó³öÉÌºÍÓàÊı£¬Ö±½Óµ÷ÓÃGetDivisionModulo
+        // å¦‚æœè¦åŒæ—¶æ±‚å‡ºå•†å’Œä½™æ•°ï¼Œç›´æ¥è°ƒç”¨GetDivisionModulo
         NODISCARD IntegerDivisionModuloType GetDivisionModulo(const Integer& rhs) const;
         Integer& operator/=(const Integer& rhs);
         Integer& operator%=(const Integer& rhs);
 
-        // ÒÆÎ»¸üĞÂ¡£
+        // ç§»ä½æ›´æ–°ã€‚
         Integer& operator<<=(int shift);
         Integer& operator>>=(int shift);
 
@@ -95,11 +95,11 @@ namespace Mathematics
         void SetBit(int index, bool on);
         NODISCARD bool GetBit(int index) const;
 
-        // ±È½Ï
+        // æ¯”è¾ƒ
         NODISCARD bool operator==(const Integer& rhs) const;
         NODISCARD bool operator<(const Integer& rhs) const;
 
-        // ·µ»ØÖµÈô±»½Ø¶Ï£¬Å×³öÒì³£
+        // è¿”å›å€¼è‹¥è¢«æˆªæ–­ï¼ŒæŠ›å‡ºå¼‚å¸¸
         template <typename T>
         NODISCARD T GetValue() const;
 

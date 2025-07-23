@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/05 16:38)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/05 16:38)
 
 #ifndef SYSTEM_DYNAMIC_LINK_LIBRARY_DIRECTORY_H
 #define SYSTEM_DYNAMIC_LINK_LIBRARY_DIRECTORY_H
@@ -15,7 +15,7 @@
 #include "Using/LoadLibraryUsing.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
-/// ÉèÖÃ¶¯Ì¬Á´½Ó¿âµÄÔØÈëÄ¿Â¼¡£
+/// è®¾ç½®åŠ¨æ€é“¾æ¥åº“çš„è½½å…¥ç›®å½•ã€‚
 namespace System
 {
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SetLibraryDirectory(const DynamicLinkCharType* pathName) noexcept;

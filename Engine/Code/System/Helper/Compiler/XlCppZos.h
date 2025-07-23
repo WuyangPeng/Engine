@@ -1,29 +1,29 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 17:29)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 17:29)
 
 #ifndef SYSTEM_HELPER_XL_CPP_ZOS_H
 #define SYSTEM_HELPER_XL_CPP_ZOS_H
 
 #if defined(__IBMCPP__) && defined(__COMPILER_VER__) && defined(__MVS__)
 
-    /// IBM z/OS XL C/C++ ±àÒëÆ÷ÉèÖÃ£º
+    /// IBM z/OS XL C/C++ ç¼–è¯‘å™¨è®¾ç½®ï¼š
 
-    /// µ±Ç°Ö§³ÖµÄ×î¾ÉµÄ±àÒëÆ÷°æ±¾ÊÇ2.1£¨V2R1£©
+    /// å½“å‰æ”¯æŒçš„æœ€æ—§çš„ç¼–è¯‘å™¨ç‰ˆæœ¬æ˜¯2.1ï¼ˆV2R1ï¼‰
     #if !defined(__IBMCPP__) || !defined(__COMPILER_VER__) || __COMPILER_VER__ < 0x42010000
 
-        #error "²»Ö§³Ö»òÎ´ÅäÖÃµÄ±àÒëÆ÷"
+        #error "ä¸æ”¯æŒæˆ–æœªé…ç½®çš„ç¼–è¯‘å™¨"
 
     #endif  // !defined(__IBMCPP__) || !defined(__COMPILER_VER__) || __COMPILER_VER__ < 0x42010000
 
     #if (0x42010000 < __COMPILER_VER__)
 
-        #error "Î´Öª±àÒëÆ÷"
+        #error "æœªçŸ¥ç¼–è¯‘å™¨"
 
     #endif  // (0x42010000 < __COMPILER_VER__)
 
@@ -47,11 +47,11 @@
 
     #ifndef SYSTEM_COMPILER
 
-        #define SYSTEM_COMPILER "IBM z/OS XL C/C++ °æ±¾ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
+        #define SYSTEM_COMPILER "IBM z/OS XL C/C++ ç‰ˆæœ¬ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
 
     #endif  // SYSTEM_COMPILER
 
-    // ¶Ô __UU, __C99, __TR1, ...
+    // å¯¹ __UU, __C99, __TR1, ...
     #include <features.h>
 
 extern "builtin" long __builtin_expect(long, long);

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/10 18:17)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/10 18:17)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -45,7 +45,7 @@ void CoreTools::CSVHeadImpl::Init()
 
     if (dataType.size() != variableName.size())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("±äÁ¿ÃûºÍÊı¾İÀàĞÍ³¤¶È²»Ò»ÖÂ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å˜é‡åå’Œæ•°æ®ç±»å‹é•¿åº¦ä¸ä¸€è‡´ã€‚"s))
     }
 }
 
@@ -96,7 +96,7 @@ CoreTools::CSVDataType CoreTools::CSVHeadImpl::ParsingDataType(const String& ele
     auto type = CSVTypeConversion::GetDataType(element);
     if (type == CSVDataType::Bit || type == CSVDataType::BitArray)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("bitÀàĞÍ²»Ó¦¸Ã´æÔÚÓÚcsvÖĞ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("bitç±»å‹ä¸åº”è¯¥å­˜åœ¨äºcsvä¸­ã€‚"s))
     }
 
     dataType.emplace_back(type);
@@ -117,7 +117,7 @@ void CoreTools::CSVHeadImpl::ParsingEnumTypeName(CSVDataType type, const String&
         }
         else
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("enumÀàĞÍ¶¨Òå´íÎó¡£"s))
+            THROW_EXCEPTION(SYSTEM_TEXT("enumç±»å‹å®šä¹‰é”™è¯¯ã€‚"s))
         }
     }
     else
@@ -251,7 +251,7 @@ CoreTools::CSVDataType CoreTools::CSVHeadImpl::GetDataType(const String& field) 
         ++index;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½Ö¸¶¨×Ö¶ÎÃû¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°æŒ‡å®šå­—æ®µåã€‚"s))
 }
 
 int CoreTools::CSVHeadImpl::GetDataIndex(const String& field) const
@@ -264,7 +264,7 @@ int CoreTools::CSVHeadImpl::GetDataIndex(const String& field) const
         return boost::numeric_cast<int>(iter - variableName.begin());
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½Ö¸¶¨×Ö¶ÎÃû¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°æŒ‡å®šå­—æ®µåã€‚"s))
 }
 
 int CoreTools::CSVHeadImpl::GetDataIndex(const StringView& field) const
@@ -277,7 +277,7 @@ int CoreTools::CSVHeadImpl::GetDataIndex(const StringView& field) const
         return boost::numeric_cast<int>(iter - variableName.begin());
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½Ö¸¶¨×Ö¶ÎÃû¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°æŒ‡å®šå­—æ®µåã€‚"s))
 }
 
 bool CoreTools::CSVHeadImpl::HasDataField(const String& field) const

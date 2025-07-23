@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 21:31)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 21:31)
 
 #include "AssertTestExceptionThrowTesting.h"
 #include "System/Time/DeltaTime.h"
@@ -97,7 +97,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertTrueFailureThrowException
 
     constexpr auto condition = false;
 
-    ASSERT_TRUE_FAILURE_THROW(condition, "²âÊÔASSERT_TRUEÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_TRUE_FAILURE_THROW(condition, "æµ‹è¯•ASSERT_TRUEæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertFalseFailureThrowExceptionTest()
@@ -106,7 +106,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertFalseFailureThrowExceptio
 
     constexpr auto condition = true;
 
-    ASSERT_FALSE_FAILURE_THROW(condition, "²âÊÔASSERT_FALSEÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_FALSE_FAILURE_THROW(condition, "æµ‹è¯•ASSERT_FALSEæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertEqualFailureThrowExceptionTest()
@@ -116,7 +116,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertEqualFailureThrowExceptio
     constexpr auto lhsExpression = 5;
     constexpr auto rhsExpression = 6;
 
-    ASSERT_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "²âÊÔASSERT_EQUALÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "æµ‹è¯•ASSERT_EQUALæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertEqualDoNotUseMessageFailureThrowExceptionTest()
@@ -126,7 +126,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertEqualDoNotUseMessageFailu
     constexpr auto lhsExpression = 5;
     constexpr auto rhsExpression = 6;
 
-    ASSERT_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "²âÊÔASSERT_EQUALÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "æµ‹è¯•ASSERT_EQUALæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertEnumEqualFailureThrowExceptionTest()
@@ -136,7 +136,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertEnumEqualFailureThrowExce
     constexpr auto lhsExpression = MacroTestEnum::One;
     constexpr auto rhsExpression = MacroTestEnum::Two;
 
-    ASSERT_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "²âÊÔASSERT_EQUALÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "æµ‹è¯•ASSERT_EQUALæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumEqualFailureThrowExceptionTest()
@@ -146,7 +146,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumEqualFailureThr
     constexpr auto lhsExpression = MacroTestSignedEnum::NegativeOne;
     constexpr auto rhsExpression = MacroTestSignedEnum::Zero;
 
-    ASSERT_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "²âÊÔASSERT_SIGNED_ENUM_EQUALÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "æµ‹è¯•ASSERT_SIGNED_ENUM_EQUALæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertThreeEqualFailureThrowExceptionTest()
@@ -157,7 +157,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertThreeEqualFailureThrowExc
     constexpr auto mhsExpression = 5;
     constexpr auto rhsExpression = 6;
 
-    ASSERT_THREE_EQUAL_FAILURE_THROW(lhsExpression, mhsExpression, rhsExpression, "²âÊÔASSERT_THREE_EQUALÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_THREE_EQUAL_FAILURE_THROW(lhsExpression, mhsExpression, rhsExpression, "æµ‹è¯•ASSERT_THREE_EQUALæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertFloatingPointCompleteEqualFailureThrowExceptionTest()
@@ -167,7 +167,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertFloatingPointCompleteEqua
     constexpr auto lhsExpression = 20.0f;
     constexpr auto rhsExpression = 20.1f;
 
-    ASSERT_FLOATING_POINT_COMPLETE_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "²âÊÔASSERT_FLOATING_POINT_COMPLETE_EQUALÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_FLOATING_POINT_COMPLETE_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "æµ‹è¯•ASSERT_FLOATING_POINT_COMPLETE_EQUALæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertUnequalFailureThrowExceptionTest()
@@ -177,7 +177,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertUnequalFailureThrowExcept
     constexpr auto lhsExpression = 5;
     constexpr auto rhsExpression = 5;
 
-    ASSERT_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "²âÊÔASSERT_UNEQUALÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "æµ‹è¯•ASSERT_UNEQUALæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertUnequalDoNotUseMessageFailureThrowExceptionTest()
@@ -187,9 +187,9 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertUnequalDoNotUseMessageFai
     constexpr auto lhsExpression = 5;
     constexpr auto rhsExpression = 5;
 
-    ASSERT_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "²âÊÔASSERT_UNEQUALÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "æµ‹è¯•ASSERT_UNEQUALæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 
-    GetStream() << "²âÊÔASSERT_UNEQUALÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡";
+    GetStream() << "æµ‹è¯•ASSERT_UNEQUALæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼";
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertEnumUnequalFailureThrowExceptionTest()
@@ -199,7 +199,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertEnumUnequalFailureThrowEx
     constexpr auto lhsExpression = MacroTestEnum::One;
     constexpr auto rhsExpression = MacroTestEnum::One;
 
-    ASSERT_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "²âÊÔASSERT_UNENUM_EQUALÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "æµ‹è¯•ASSERT_UNENUM_EQUALæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumUnequalFailureThrowExceptionTest()
@@ -209,7 +209,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumUnequalFailureT
     constexpr auto lhsExpression = MacroTestSignedEnum::NegativeOne;
     constexpr auto rhsExpression = MacroTestSignedEnum::NegativeOne;
 
-    ASSERT_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "²âÊÔASSERT_SIGNED_ENUM_UNEQUALÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "æµ‹è¯•ASSERT_SIGNED_ENUM_UNEQUALæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertFloatingPointCompleteUnequalFailureThrowExceptionTest()
@@ -219,7 +219,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertFloatingPointCompleteUneq
     constexpr auto lhsExpression = 20.0f;
     constexpr auto rhsExpression = 20.0f;
 
-    ASSERT_FLOATING_POINT_COMPLETE_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "²âÊÔASSERT_FLOATING_POINT_COMPLETE_UNEQUALÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_FLOATING_POINT_COMPLETE_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "æµ‹è¯•ASSERT_FLOATING_POINT_COMPLETE_UNEQUALæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertApproximateFailureThrowExceptionTest()
@@ -229,7 +229,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertApproximateFailureThrowEx
     constexpr auto lhsExpression = 20.0f;
     constexpr auto rhsExpression = 20.1f;
 
-    ASSERT_APPROXIMATE_FAILURE_THROW(lhsExpression, rhsExpression, 1e-6f, "²âÊÔASSERT_APPROXIMATEÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_APPROXIMATE_FAILURE_THROW(lhsExpression, rhsExpression, 1e-6f, "æµ‹è¯•ASSERT_APPROXIMATEæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertApproximateFloatZeroFailureThrowExceptionTest()
@@ -238,7 +238,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertApproximateFloatZeroFailu
 
     constexpr auto expression = 10.0f;
 
-    ASSERT_APPROXIMATE_FLOAT_ZERO_FAILURE_THROW(expression, "²âÊÔASSERT_APPROXIMATE_FLOAT_ZEROÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_APPROXIMATE_FLOAT_ZERO_FAILURE_THROW(expression, "æµ‹è¯•ASSERT_APPROXIMATE_FLOAT_ZEROæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertApproximateDoubleZeroFailureThrowExceptionTest()
@@ -247,7 +247,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertApproximateDoubleZeroFail
 
     constexpr auto expression = 11.0;
 
-    ASSERT_APPROXIMATE_DOUBLE_ZERO_FAILURE_THROW(expression, "²âÊÔASSERT_APPROXIMATE_DOUBLE_ZEROÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_APPROXIMATE_DOUBLE_ZERO_FAILURE_THROW(expression, "æµ‹è¯•ASSERT_APPROXIMATE_DOUBLE_ZEROæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertApproximateUseFunctionFailureThrowExceptionTest()
@@ -257,7 +257,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertApproximateUseFunctionFai
     constexpr auto lhsExpression = 20.0f;
     constexpr auto rhsExpression = 20.1f;
 
-    ASSERT_APPROXIMATE_USE_FUNCTION_FAILURE_THROW(ClassType::Approximate, lhsExpression, rhsExpression, 1e-6f, "²âÊÔASSERT_APPROXIMATE_USE_FUNCTIONÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_APPROXIMATE_USE_FUNCTION_FAILURE_THROW(ClassType::Approximate, lhsExpression, rhsExpression, 1e-6f, "æµ‹è¯•ASSERT_APPROXIMATE_USE_FUNCTIONæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertLessFailureThrowExceptionTest()
@@ -267,7 +267,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertLessFailureThrowException
     constexpr auto lhsExpression = 5;
     constexpr auto rhsExpression = 5;
 
-    ASSERT_LESS_FAILURE_THROW(lhsExpression, rhsExpression, "²âÊÔASSERT_LESSÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_LESS_FAILURE_THROW(lhsExpression, rhsExpression, "æµ‹è¯•ASSERT_LESSæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertEnumLessFailureThrowExceptionTest()
@@ -277,7 +277,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertEnumLessFailureThrowExcep
     constexpr auto lhsExpression = MacroTestEnum::One;
     constexpr auto rhsExpression = MacroTestEnum::One;
 
-    ASSERT_LESS_FAILURE_THROW(lhsExpression, rhsExpression, "²âÊÔASSERT_LESSÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_LESS_FAILURE_THROW(lhsExpression, rhsExpression, "æµ‹è¯•ASSERT_LESSæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumLessFailureThrowExceptionTest()
@@ -287,7 +287,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumLessFailureThro
     constexpr auto lhsExpression = MacroTestSignedEnum::NegativeOne;
     constexpr auto rhsExpression = MacroTestSignedEnum::NegativeOne;
 
-    ASSERT_LESS_FAILURE_THROW(lhsExpression, rhsExpression, "²âÊÔASSERT_SIGNED_ENUM_LESSÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_LESS_FAILURE_THROW(lhsExpression, rhsExpression, "æµ‹è¯•ASSERT_SIGNED_ENUM_LESSæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertLessEqualFailureThrowExceptionTest()
@@ -297,7 +297,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertLessEqualFailureThrowExce
     constexpr auto lhsExpression = 5;
     constexpr auto rhsExpression = 4;
 
-    ASSERT_LESS_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "²âÊÔASSERT_LESS_EQUALÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_LESS_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "æµ‹è¯•ASSERT_LESS_EQUALæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertEnumLessEqualFailureThrowExceptionTest()
@@ -307,7 +307,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertEnumLessEqualFailureThrow
     constexpr auto lhsExpression = MacroTestEnum::Two;
     constexpr auto rhsExpression = MacroTestEnum::One;
 
-    ASSERT_LESS_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "²âÊÔASSERT_LESS_EQUALÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_LESS_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "æµ‹è¯•ASSERT_LESS_EQUALæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumLessEqualFailureThrowExceptionTest()
@@ -317,7 +317,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumLessEqualFailur
     constexpr auto lhsExpression = MacroTestSignedEnum::Zero;
     constexpr auto rhsExpression = MacroTestSignedEnum::NegativeOne;
 
-    ASSERT_LESS_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "²âÊÔASSERT_SIGNED_ENUM_LESS_EQUALÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_LESS_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "æµ‹è¯•ASSERT_SIGNED_ENUM_LESS_EQUALæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertGreaterFailureThrowExceptionTest()
@@ -327,7 +327,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertGreaterFailureThrowExcept
     constexpr auto lhsExpression = 3;
     constexpr auto rhsExpression = 4;
 
-    ASSERT_GREATER_FAILURE_THROW(lhsExpression, rhsExpression, "²âÊÔASSERT_GREATERÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_GREATER_FAILURE_THROW(lhsExpression, rhsExpression, "æµ‹è¯•ASSERT_GREATERæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertEnumGreaterFailureThrowExceptionTest()
@@ -337,7 +337,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertEnumGreaterFailureThrowEx
     constexpr auto lhsExpression = MacroTestEnum::One;
     constexpr auto rhsExpression = MacroTestEnum::Two;
 
-    ASSERT_GREATER_FAILURE_THROW(lhsExpression, rhsExpression, "²âÊÔASSERT_GREATERÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_GREATER_FAILURE_THROW(lhsExpression, rhsExpression, "æµ‹è¯•ASSERT_GREATERæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumGreaterFailureThrowExceptionTest()
@@ -347,7 +347,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumGreaterFailureT
     constexpr auto lhsExpression = MacroTestSignedEnum::NegativeOne;
     constexpr auto rhsExpression = MacroTestSignedEnum::Zero;
 
-    ASSERT_GREATER_FAILURE_THROW(lhsExpression, rhsExpression, "²âÊÔASSERT_SIGNED_ENUM_GREATERÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_GREATER_FAILURE_THROW(lhsExpression, rhsExpression, "æµ‹è¯•ASSERT_SIGNED_ENUM_GREATERæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertGreaterEqualFailureThrowExceptionTest()
@@ -357,7 +357,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertGreaterEqualFailureThrowE
     constexpr auto lhsExpression = 3;
     constexpr auto rhsExpression = 4;
 
-    ASSERT_GREATER_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "²âÊÔASSERT_GREATER_EQUALÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_GREATER_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "æµ‹è¯•ASSERT_GREATER_EQUALæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertEnumGreaterEqualFailureThrowExceptionTest()
@@ -367,7 +367,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertEnumGreaterEqualFailureTh
     constexpr auto lhsExpression = MacroTestEnum::One;
     constexpr auto rhsExpression = MacroTestEnum::Two;
 
-    ASSERT_GREATER_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "²âÊÔASSERT_GREATER_EQUALÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_GREATER_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "æµ‹è¯•ASSERT_GREATER_EQUALæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumGreaterEqualFailureThrowExceptionTest()
@@ -377,7 +377,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumGreaterEqualFai
     constexpr auto lhsExpression = MacroTestSignedEnum::NegativeOne;
     constexpr auto rhsExpression = MacroTestSignedEnum::Zero;
 
-    ASSERT_GREATER_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "²âÊÔASSERT_SIGNED_ENUM_GREATER_EQUALÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_GREATER_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "æµ‹è¯•ASSERT_SIGNED_ENUM_GREATER_EQUALæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertEqualNullptrFailureThrowExceptionTest()
@@ -387,7 +387,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertEqualNullptrFailureThrowE
     auto value = 0;
     const auto ptr = &value;
 
-    ASSERT_EQUAL_NULL_PTR_FAILURE_THROW(ptr, "²âÊÔASSERT_EQUAL_NULL_PTRÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_EQUAL_NULL_PTR_FAILURE_THROW(ptr, "æµ‹è¯•ASSERT_EQUAL_NULL_PTRæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertUnequalNullptrFailureThrowExceptionTest()
@@ -396,7 +396,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertUnequalNullptrFailureThro
 
     int* ptr{ nullptr };
 
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(ptr, "²âÊÔASSERT_UNEQUAL_NULL_PTRÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(ptr, "æµ‹è¯•ASSERT_UNEQUAL_NULL_PTRæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertRangeFailureThrowExceptionTest()
@@ -407,19 +407,19 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertRangeFailureThrowExceptio
     constexpr auto mhsExpression = 4;
     constexpr auto rhsExpression = 2;
 
-    ASSERT_RANGE_FAILURE_THROW(mhsExpression, lhsExpression, rhsExpression, "²âÊÔASSERT_RANGEÎ´Í¨¹ıµÄÇé¿öÅ×³öÒì³£¡£´æÔÚÒ»¸öÕı³£µÄ²âÊÔÊ§°Ü£¡");
+    ASSERT_RANGE_FAILURE_THROW(mhsExpression, lhsExpression, rhsExpression, "æµ‹è¯•ASSERT_RANGEæœªé€šè¿‡çš„æƒ…å†µæŠ›å‡ºå¼‚å¸¸ã€‚å­˜åœ¨ä¸€ä¸ªæ­£å¸¸çš„æµ‹è¯•å¤±è´¥ï¼");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::PrintTipsMessage()
 {
-    GetStream() << "Õâ¸ö²âÊÔ»á³öÏÖÒ»Ğ©Õı³£µÄ²âÊÔÊ§°Ü¡£\n";
+    GetStream() << "è¿™ä¸ªæµ‹è¯•ä¼šå‡ºç°ä¸€äº›æ­£å¸¸çš„æµ‹è¯•å¤±è´¥ã€‚\n";
 
     System::SystemPause();
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::TestEnd()
 {
-    GetStream() << "²âÊÔ½áÊø£¬ÑéÖ¤²âÊÔÊ§°ÜÊÇ·ñÕıÈ·¡£\n";
+    GetStream() << "æµ‹è¯•ç»“æŸï¼ŒéªŒè¯æµ‹è¯•å¤±è´¥æ˜¯å¦æ­£ç¡®ã€‚\n";
 
     System::SystemPause();
 }

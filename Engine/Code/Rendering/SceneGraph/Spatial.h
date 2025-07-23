@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/28 17:55)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/28 17:55)
 
 #ifndef RENDERING_SCENE_GRAPH_SPATIAL_H
 #define RENDERING_SCENE_GRAPH_SPATIAL_H
@@ -22,11 +22,11 @@
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(Spatial, SpatialImpl);
 
-/// Ö§³Ö¶ÔÏóµÄ¿Õ¼ä²ã´Î½á¹¹¡£ÀàSpatialÓĞÒ»¸ö¸¸Ö¸Õë¡£
-/// ´ÓSpatialÅÉÉúµÄÀàNodeÓĞÒ»¸ö×ÓÖ¸ÕëÊı×é¡£
-/// ²ã´Î½á¹¹µÄÒ¶½ÚµãÒªÃ´ÊÇÍ¼ĞÎµÄ£¬ÒªÃ´ÊÇÌı¾õµÄ¡£
-/// ÀàVisualÅÉÉú×ÔSpatial£¬±íÊ¾Í¼ĞÎÊı¾İ¡£
-/// ÀàAudialÅÉÉú×ÔSpatial£¬±íÊ¾ÉùÒôÊı¾İ¡£
+/// æ”¯æŒå¯¹è±¡çš„ç©ºé—´å±‚æ¬¡ç»“æ„ã€‚ç±»Spatialæœ‰ä¸€ä¸ªçˆ¶æŒ‡é’ˆã€‚
+/// ä»Spatialæ´¾ç”Ÿçš„ç±»Nodeæœ‰ä¸€ä¸ªå­æŒ‡é’ˆæ•°ç»„ã€‚
+/// å±‚æ¬¡ç»“æ„çš„å¶èŠ‚ç‚¹è¦ä¹ˆæ˜¯å›¾å½¢çš„ï¼Œè¦ä¹ˆæ˜¯å¬è§‰çš„ã€‚
+/// ç±»Visualæ´¾ç”Ÿè‡ªSpatialï¼Œè¡¨ç¤ºå›¾å½¢æ•°æ®ã€‚
+/// ç±»Audialæ´¾ç”Ÿè‡ªSpatialï¼Œè¡¨ç¤ºå£°éŸ³æ•°æ®ã€‚
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE Spatial : public ControlledObject
@@ -54,23 +54,23 @@ namespace Rendering
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Spatial);
 
-        /// ¼¸ºÎ×´Ì¬µÄ¸üĞÂ¡£
-        /// ¸Ãº¯ÊıÔÚ³¡¾°Í¼±éÀúµÄÏòÏÂ¹ı³ÌÖĞ¼ÆËãÊÀ½ç±ä»»£¬ÔÚ±éÀúµÄÏòÉÏ¹ı³ÌÖĞ¼ÆËãÊÀ½ç±ß½çÌå»ı¡£
-        /// µ÷ÓÃ¸üĞÂµÄ¶ÔÏóÊÇÆô¶¯Æ÷¡£¸üĞÂÆÚ¼ä·ÃÎÊµÄÆäËû¶ÔÏó²»ÊÇÆô¶¯Æ÷¡£
-        /// Ó¦ÓÃ³ÌĞòÊ±¼äÒÔºÁÃëÎªµ¥Î»¡£
+        /// å‡ ä½•çŠ¶æ€çš„æ›´æ–°ã€‚
+        /// è¯¥å‡½æ•°åœ¨åœºæ™¯å›¾éå†çš„å‘ä¸‹è¿‡ç¨‹ä¸­è®¡ç®—ä¸–ç•Œå˜æ¢ï¼Œåœ¨éå†çš„å‘ä¸Šè¿‡ç¨‹ä¸­è®¡ç®—ä¸–ç•Œè¾¹ç•Œä½“ç§¯ã€‚
+        /// è°ƒç”¨æ›´æ–°çš„å¯¹è±¡æ˜¯å¯åŠ¨å™¨ã€‚æ›´æ–°æœŸé—´è®¿é—®çš„å…¶ä»–å¯¹è±¡ä¸æ˜¯å¯åŠ¨å™¨ã€‚
+        /// åº”ç”¨ç¨‹åºæ—¶é—´ä»¥æ¯«ç§’ä¸ºå•ä½ã€‚
         NODISCARD bool Update(double applicationTime, bool initiator);
 
-        // ·ÃÎÊ¸¸¶ÔÏó¡£¸Ã¶ÔÏó¶ÔÓÚ²ã´Î½á¹¹µÄ¸ùÎª¿Õ¶ÔÏó¡£
+        // è®¿é—®çˆ¶å¯¹è±¡ã€‚è¯¥å¯¹è±¡å¯¹äºå±‚æ¬¡ç»“æ„çš„æ ¹ä¸ºç©ºå¯¹è±¡ã€‚
         NODISCARD SpatialSharedPtr GetParent();
         NODISCARD ConstSpatialSharedPtr GetParent() const;
 
-        // Ö§³Ö·Ö¼¶²Ã¼ô¡£
+        // æ”¯æŒåˆ†çº§è£å‰ªã€‚
         void OnGetVisibleSet(Culler& culler, const CameraSharedPtr& camera, bool noCull);
         virtual void GetVisibleSet(Culler& culler, const CameraSharedPtr& camera, bool noCull) = 0;
 
         NODISCARD bool Update(double applicationTime = -Mathematics::MathD::maxReal) override;
 
-        // ·ÃÎÊ¸¸¶ÔÏó¡£½ÚµãÖĞµ÷ÓÃattach/detachÔÚ×Ó¶ÔÏó¡£
+        // è®¿é—®çˆ¶å¯¹è±¡ã€‚èŠ‚ç‚¹ä¸­è°ƒç”¨attach/detachåœ¨å­å¯¹è±¡ã€‚
         void SetParent(const SpatialSharedPtr& parent);
 
         void SetLocalTransform(const Transform& transform) noexcept;
@@ -96,14 +96,14 @@ namespace Rendering
         void InitWorldBound();
         void BoundGrowToContain(const BoundingSphere& worldBound);
 
-        // ¶Ô¼¸ºÎ¸üĞÂµÄÖ§³Ö¡£
+        // å¯¹å‡ ä½•æ›´æ–°çš„æ”¯æŒã€‚
         virtual bool UpdateWorldData(double applicationTime);
 
         NODISCARD bool GetWorldBoundIsCurrent() const noexcept;
         void SetWorldTransformOnUpdate(const Transform& transform) noexcept;
 
     private:
-        // ¶Ô¼¸ºÎ¸üĞÂµÄÖ§³Ö¡£
+        // å¯¹å‡ ä½•æ›´æ–°çš„æ”¯æŒã€‚
         virtual void UpdateWorldBound() = 0;
         void PropagateBoundToRoot();
 

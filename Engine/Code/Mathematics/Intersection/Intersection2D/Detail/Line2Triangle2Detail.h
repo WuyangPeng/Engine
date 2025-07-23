@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 17:24)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 17:24)
 
 #ifndef MATHEMATICS_INTERSECTION_LINE2_TRIANGLE2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_LINE2_TRIANGLE2_DETAIL_H
@@ -84,7 +84,7 @@ Mathematics::Vector2<Real> Mathematics::Line2Triangle2<Real>::GetInterval() cons
 
     auto vertex = triangle.GetVertex();
 
-    // ½«Èı½ÇĞÎÍ¶Ó°µ½ÏßÉÏ¡£
+    // å°†ä¸‰è§’å½¢æŠ•å½±åˆ°çº¿ä¸Šã€‚
     DistanceType proj{};
 
     for (auto i = 0; i < size; ++i)
@@ -95,7 +95,7 @@ Mathematics::Vector2<Real> Mathematics::Line2Triangle2<Real>::GetInterval() cons
 
     using System::operator*;
 
-    // ÓÃÏß¼ÆËãÈı½ÇĞÎ±ßÔµµÄºáÏò½»µã¡£
+    // ç”¨çº¿è®¡ç®—ä¸‰è§’å½¢è¾¹ç¼˜çš„æ¨ªå‘äº¤ç‚¹ã€‚
 
     auto quantity = 0;
     Vector2Type param{};
@@ -103,7 +103,7 @@ Mathematics::Vector2<Real> Mathematics::Line2Triangle2<Real>::GetInterval() cons
     {
         if (sign.at(i0) * System::EnumCastUnderlying(sign.at(i1)) < 0)
         {
-            MATHEMATICS_ASSERTION_0(quantity < 2, "½»²æµãÌ«¶à\n");
+            MATHEMATICS_ASSERTION_0(quantity < 2, "äº¤å‰ç‚¹å¤ªå¤š\n");
 
             auto numer = distance.at(i0) * proj.at(i1) - distance.at(i1) * proj.at(i0);
             auto denom = distance.at(i0) - distance.at(i1);
@@ -117,14 +117,14 @@ Mathematics::Vector2<Real> Mathematics::Line2Triangle2<Real>::GetInterval() cons
         {
             if (sign.at(i2) == NumericalValueSymbol::Zero)
             {
-                MATHEMATICS_ASSERTION_0(quantity < 2, "½»²æµãÌ«¶à\n");
+                MATHEMATICS_ASSERTION_0(quantity < 2, "äº¤å‰ç‚¹å¤ªå¤š\n");
                 param[quantity++] = proj.at(i2);
             }
         }
     }
 
-    // ÅÅĞò
-    MATHEMATICS_ASSERTION_0(1 <= quantity, "ĞèÒªÖÁÉÙÒ»¸öÏà½»µã\n");
+    // æ’åº
+    MATHEMATICS_ASSERTION_0(1 <= quantity, "éœ€è¦è‡³å°‘ä¸€ä¸ªç›¸äº¤ç‚¹\n");
 
     if (quantity == 2)
     {

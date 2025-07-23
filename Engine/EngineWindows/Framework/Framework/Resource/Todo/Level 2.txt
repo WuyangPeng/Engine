@@ -1,6 +1,6 @@
-TODO Level 2
+ï»¿TODO Level 2
 
 1.0.1.0
 
-1.£¨Application£© PixelScreen debug°æ±¾µÄGetPixelºÍ±È½ÏPixelScreen::ColourĞ§ÂÊºÜµÍ£¬¸Ä³Éµü´úÆ÷¡£
-2.£¨Application£© PixelScreenDrawLineµÄ·µ»Ø¸Ä³Éµü´úÆ÷´úÌæoperator[]¡£
+1.ï¼ˆApplicationï¼‰ PixelScreen debugç‰ˆæœ¬çš„GetPixelå’Œæ¯”è¾ƒPixelScreen::Colouræ•ˆç‡å¾ˆä½ï¼Œæ”¹æˆè¿­ä»£å™¨ã€‚
+2.ï¼ˆApplicationï¼‰ PixelScreenDrawLineçš„è¿”å›æ”¹æˆè¿­ä»£å™¨ä»£æ›¿operator[]ã€‚

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.8 (2024/04/12 11:21)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/12 11:21)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_SUITE_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_SUITE_H
@@ -19,8 +19,8 @@
 
 EXPORT_SHARED_PTR(CoreTools, UnitTestComposite, CORE_TOOLS_DEFAULT_DECLARE);
 
-/// ��Ԫ�����׼��ࡣ
-/// SuiteΪ�ⲿ�ӿ��࣬�����ӻ�ɾ����Ԫ���ԣ�����ȡ���ԵĽ����
+/// 单元测试套件类。
+/// Suite为外部接口类，可增加或删除单元测试，并获取测试的结果。
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE Suite final

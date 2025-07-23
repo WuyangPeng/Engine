@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:51)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:51)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_TRIANGLE2_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_TRIANGLE2_H
@@ -39,9 +39,9 @@ namespace Mathematics
         NODISCARD Ray2Type GetRay() const noexcept;
         NODISCARD Triangle2Type GetTriangle() const noexcept;
 
-        /// Ïà½»¼¯¡£ Èç¹ûÉäÏßºÍÈý½ÇÐÎ²»Ïà½»£¬ÔòGetQuantity()·µ»Ø0£¬ÔÚÕâÖÖÇé¿öÏÂ£¬Ïà½»ÀàÐÍÎªIT_EMPTY¡£
-        /// Èç¹ûÉäÏßºÍÈý½ÇÐÎÔÚµ¥¸öµã´¦Ïà½»£¬ÔòGetQuantity()·µ»Ø1£¬ÔÚÕâÖÖÇé¿öÏÂ£¬Ïà½»ÀàÐÍÎªIT_POINT£¬¶øGetPoint()·µ»ØÏà½»µã¡£
-        ///  Èç¹ûÉäÏßºÍÈý½ÇÐÎÔÚ¶ÎÖÐÏà½»£¬ÔòGetQuantity()·µ»Ø2£¬ÔÚÕâÖÖÇé¿öÏÂ£¬Ïà½»ÀàÐÍÎªIT_SEGMENT£¬¶øGetPoint()·µ»Ø¶Î¶Ëµã¡£
+        /// ç›¸äº¤é›†ã€‚ å¦‚æžœå°„çº¿å’Œä¸‰è§’å½¢ä¸ç›¸äº¤ï¼Œåˆ™GetQuantity()è¿”å›ž0ï¼Œåœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œç›¸äº¤ç±»åž‹ä¸ºIT_EMPTYã€‚
+        /// å¦‚æžœå°„çº¿å’Œä¸‰è§’å½¢åœ¨å•ä¸ªç‚¹å¤„ç›¸äº¤ï¼Œåˆ™GetQuantity()è¿”å›ž1ï¼Œåœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œç›¸äº¤ç±»åž‹ä¸ºIT_POINTï¼Œè€ŒGetPoint()è¿”å›žç›¸äº¤ç‚¹ã€‚
+        ///  å¦‚æžœå°„çº¿å’Œä¸‰è§’å½¢åœ¨æ®µä¸­ç›¸äº¤ï¼Œåˆ™GetQuantity()è¿”å›ž2ï¼Œåœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œç›¸äº¤ç±»åž‹ä¸ºIT_SEGMENTï¼Œè€ŒGetPoint()è¿”å›žæ®µç«¯ç‚¹ã€‚
         NODISCARD int GetQuantity() const noexcept;
         NODISCARD Vector2Type GetPoint(int index) const;
 

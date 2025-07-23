@@ -1,13 +1,13 @@
-/// Ô­Ê¼ÎÄ¼şÔÚSystemTestingÏÂ£¬SystemWindowsTestingÏÂµÄÎª×Ô¶¯¸´ÖÆÎÄ¼ş£¬ÇëÎğĞŞ¸Ä¡£
+ï»¿/// åŸå§‹æ–‡ä»¶åœ¨SystemTestingä¸‹ï¼ŒSystemWindowsTestingä¸‹çš„ä¸ºè‡ªåŠ¨å¤åˆ¶æ–‡ä»¶ï¼Œè¯·å‹¿ä¿®æ”¹ã€‚
 
 /// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/09 21:27)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/09 21:27)
 
 #include "ResourceEnumTesting.h"
 #include "System/DynamicLink/EnumResourceTools.h"
@@ -20,9 +20,9 @@
 
 System::ResourceEnumTesting::ResourceEnumTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      /// Ö§³ÖµÄÓĞĞ§Öµ£ºResourceEnum::Ln¡¢ResourceEnum::Mui¡¢ResourceEnum::Validate
-      /// ²»Ö§³ÖµÄÖµResourceEnum::MuiSystemºÍResourceEnum::ModuleExact¡£
-      /// TODO: ResourceEnum::MuiĞèÒªMUIÎÄ¼ş£¬ËùÒÔResourceEnum::MuiºÍResourceEnum::Mui | ResourceEnum::Validate²âÊÔÊ§°Ü¡£
+      /// æ”¯æŒçš„æœ‰æ•ˆå€¼ï¼šResourceEnum::Lnã€ResourceEnum::Muiã€ResourceEnum::Validate
+      /// ä¸æ”¯æŒçš„å€¼ResourceEnum::MuiSystemå’ŒResourceEnum::ModuleExactã€‚
+      /// TODO: ResourceEnum::Muiéœ€è¦MUIæ–‡ä»¶ï¼Œæ‰€ä»¥ResourceEnum::Muiå’ŒResourceEnum::Mui | ResourceEnum::Validateæµ‹è¯•å¤±è´¥ã€‚
       resourceEnum{ ResourceEnum::Default,
                     ResourceEnum::Ln,
                     ResourceEnum::Validate,

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 15:07)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 15:07)
 
 #ifndef MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_TORUS3_H
 #define MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_TORUS3_H
@@ -39,7 +39,7 @@ namespace Mathematics
         NODISCARD Line3Type GetLine() const noexcept;
         NODISCARD Torus3Type GetTorus() const noexcept;
 
-        // Ïà½»¼¯£¨ÊıÁ¿×î¶àÎª4£©¡£
+        // ç›¸äº¤é›†ï¼ˆæ•°é‡æœ€å¤šä¸º4ï¼‰ã€‚
         NODISCARD int GetQuantity() const noexcept;
         NODISCARD Vector3Type GetPoint(int index) const;
 

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 15:05)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 15:05)
 
 #ifndef CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_EXTERNAL_H
@@ -16,15 +16,15 @@
 
 namespace CoreTools
 {
-    /// ¸ÃÀàÌá¹©ÁË»ùÓÚ·½·¨µÄÖ»¶ÁÊôÐÔ·ÃÎÊ
+    /// è¯¥ç±»æä¾›äº†åŸºäºŽæ–¹æ³•çš„åªè¯»å±žæ€§è®¿é—®
 
-    /// ÈÝÆ÷Àà¶¨ÒåÁËÒ»¸öget·½·¨¡£
-    /// Ëü»¹¶¨ÒåÁËÒ»¸ö¾²Ì¬·½·¨£¬Ëü°üº¬¸ø¶¨ÊôÐÔÔÚÈÝÆ÷ÄÚµÄÆ«ÒÆÁ¿¡£
-    /// È»ºóÊ¹ÓÃÒýÓÃÀàÐÍ£¬ÈÝÆ÷ÀàÐÍ£¬³ÉÔ±º¯ÊýºÍÆ«ÒÆº¯Êý¶ÔÄ£°å½øÐÐ²ÎÊý»¯¡£
-    template <typename ConstReference,  /// ÒýÓÃÀàÐÍ
-              typename Container,  /// ·â±ÕÀà
-              ptrdiff_t (*FunctionOffset)(),  /// Ö¸Õëº¯ÊýÌá¹©ÈÝÆ÷ÄÚÆ«ÒÆÊôÐÔ
-              ConstReference (Container::*FunctionGet)() const>  /// Ö¸ÕëÖ¸ÏòÒ»¸öconst³ÉÔ±º¯Êý·µ»ØCR
+    /// å®¹å™¨ç±»å®šä¹‰äº†ä¸€ä¸ªgetæ–¹æ³•ã€‚
+    /// å®ƒè¿˜å®šä¹‰äº†ä¸€ä¸ªé™æ€æ–¹æ³•ï¼Œå®ƒåŒ…å«ç»™å®šå±žæ€§åœ¨å®¹å™¨å†…çš„åç§»é‡ã€‚
+    /// ç„¶åŽä½¿ç”¨å¼•ç”¨ç±»åž‹ï¼Œå®¹å™¨ç±»åž‹ï¼Œæˆå‘˜å‡½æ•°å’Œåç§»å‡½æ•°å¯¹æ¨¡æ¿è¿›è¡Œå‚æ•°åŒ–ã€‚
+    template <typename ConstReference,  /// å¼•ç”¨ç±»åž‹
+              typename Container,  /// å°é—­ç±»
+              ptrdiff_t (*FunctionOffset)(),  /// æŒ‡é’ˆå‡½æ•°æä¾›å®¹å™¨å†…åç§»å±žæ€§
+              ConstReference (Container::*FunctionGet)() const>  /// æŒ‡é’ˆæŒ‡å‘ä¸€ä¸ªconstæˆå‘˜å‡½æ•°è¿”å›žCR
     class MethodPropertyGetExternal final
     {
     public:
@@ -42,11 +42,11 @@ namespace CoreTools
     public:
         CLASS_INVARIANT_DECLARE;
 
-        /// Ìá¹©¶Ô¸ÃÊôÐÔµÄÖ»¶Á·ÃÎÊ
+        /// æä¾›å¯¹è¯¥å±žæ€§çš„åªè¯»è®¿é—®
         NODISCARD operator ConstReferenceType() const noexcept;
 
-        /// ÕâÖÖ·½·¨ÊÇÒþ²ØµÄ£¬ÒÔ·ÀÖ¹ÊìÏ¤Õâ¸öÀàµÄÓÃ»§ÔÚ°üº¬µÄÀàÖÐ¶ÔÊôÐÔÊµÀýÊ¹ÓÃoperator=£¬
-        /// ÒòÎªÊ¹ÓÃMethodPropertyGetSet<>»áµ¼ÖÂÎÞÏÞÑ­»·¡£
+        /// è¿™ç§æ–¹æ³•æ˜¯éšè—çš„ï¼Œä»¥é˜²æ­¢ç†Ÿæ‚‰è¿™ä¸ªç±»çš„ç”¨æˆ·åœ¨åŒ…å«çš„ç±»ä¸­å¯¹å±žæ€§å®žä¾‹ä½¿ç”¨operator=ï¼Œ
+        /// å› ä¸ºä½¿ç”¨MethodPropertyGetSet<>ä¼šå¯¼è‡´æ— é™å¾ªçŽ¯ã€‚
         MethodPropertyGetExternal& operator=(ConstReferenceType value) = delete;
     };
 }

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/09 12:20)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/09 12:20)
 
 #include "MessageBoxSelectionUseLanguageIdDataTesting.h"
 #include "System/SystemOutput/Data/LanguageIdData.h"
@@ -45,7 +45,7 @@ void System::MessageBoxSelectionUseLanguageIdDataTesting::OkCancelTest()
 
     constexpr LanguageIdData languageIdData{};
 
-    const auto type = MessageBoxSelection(nullptr, SYSTEM_TEXT("Õâ¸ö¶Ô»°¿òÖ»ÊÇ²âÊÔ£¬Çëµã»÷ÈÎÒâ°´Å¥¡£"), SYSTEM_TEXT("²âÊÔ"), flagsData, languageIdData);
+    const auto type = MessageBoxSelection(nullptr, SYSTEM_TEXT("è¿™ä¸ªå¯¹è¯æ¡†åªæ˜¯æµ‹è¯•ï¼Œè¯·ç‚¹å‡»ä»»æ„æŒ‰é’®ã€‚"), SYSTEM_TEXT("æµ‹è¯•"), flagsData, languageIdData);
 
     ASSERT_TRUE(type == DialogBoxCommand::IdOk || type == DialogBoxCommand::IdCancel);
 }

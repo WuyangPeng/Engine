@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+ï»¿/// Copyright (c) 2010-2023
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.1 (2023/11/21 09:10)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.1 (2023/11/21 09:10)
 
 #ifndef RENDERING_CONTROLLERS_CONTROLLED_OBJECT_IMPL_H
 #define RENDERING_CONTROLLERS_CONTROLLED_OBJECT_IMPL_H
@@ -49,7 +49,7 @@ namespace Rendering
 
         NODISCARD bool Update(double applicationTime);
 
-        // ·ÃÎÊ¿ØÖÆÆ÷¿ØÖÆ¸Ã¶ÔÏó¡£
+        // è®¿é—®æ§åˆ¶å™¨æ§åˆ¶è¯¥å¯¹è±¡ã€‚
         NODISCARD int GetNumControllers() const;
         NODISCARD ConstControllerInterfaceSharedPtr GetConstController(int index) const;
         NODISCARD ControllerInterfaceSharedPtr GetController(int index);
@@ -68,7 +68,7 @@ namespace Rendering
         using ControllerContainer = std::vector<ObjectAssociated>;
 
     private:
-        // ¿ØÖÆÆ÷¿ØÖÆ¸Ã¶ÔÏóµÄÊı×é¡£
+        // æ§åˆ¶å™¨æ§åˆ¶è¯¥å¯¹è±¡çš„æ•°ç»„ã€‚
         ControllerContainer controllers;
     };
 }

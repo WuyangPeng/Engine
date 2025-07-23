@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:57)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:57)
 
 #include "Rendering/RenderingExport.h"
 
@@ -16,7 +16,7 @@
 
 void Rendering::Utility::ReflectX(PixelTypeIter begin, PixelTypeIter end, int xSize, int ySize, int numBytesPerPixel)
 {
-    RENDERING_ASSERTION_1(GetNumBytes(xSize, ySize, numBytesPerPixel) <= (end - begin), "µü´úÆ÷·¶Î§²»×ã");
+    RENDERING_ASSERTION_1(GetNumBytes(xSize, ySize, numBytesPerPixel) <= (end - begin), "è¿­ä»£å™¨èŒƒå›´ä¸è¶³");
 
     if (1 < xSize && 0 < ySize && 0 < numBytesPerPixel)
     {
@@ -38,7 +38,7 @@ void Rendering::Utility::ReflectX(PixelTypeIter begin, PixelTypeIter end, int xS
 // private
 void Rendering::Utility::ReflectX(const SpanIterator& lhs, const SpanIterator& rhs, int xSize, int numBytesPerPixel)
 {
-    RENDERING_ASSERTION_1(GetNumBytes(xSize, 1, numBytesPerPixel) <= (rhs - lhs), "µü´úÆ÷·¶Î§²»×ã");
+    RENDERING_ASSERTION_1(GetNumBytes(xSize, 1, numBytesPerPixel) <= (rhs - lhs), "è¿­ä»£å™¨èŒƒå›´ä¸è¶³");
 
     SpanIterator begin{ lhs.GetCurrent(), rhs.GetCurrent(), lhs.GetCurrent() };
     SpanIterator end{ lhs.GetCurrent(), rhs.GetCurrent(), rhs.GetCurrent() };
@@ -61,7 +61,7 @@ void Rendering::Utility::ReflectX(const SpanIterator& lhs, const SpanIterator& r
 
 void Rendering::Utility::ReflectY(PixelTypeIter begin, PixelTypeIter end, int xSize, int ySize, int numBytesPerPixel)
 {
-    RENDERING_ASSERTION_1(GetNumBytes(xSize, ySize, numBytesPerPixel) <= (end - begin), "µü´úÆ÷·¶Î§²»×ã");
+    RENDERING_ASSERTION_1(GetNumBytes(xSize, ySize, numBytesPerPixel) <= (end - begin), "è¿­ä»£å™¨èŒƒå›´ä¸è¶³");
 
     if (0 < xSize && 1 < ySize && 0 < numBytesPerPixel)
     {

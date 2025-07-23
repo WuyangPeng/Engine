@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 11:15)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 11:15)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR2_ORTHONORMAL_BASIS_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_VECTOR2_ORTHONORMAL_BASIS_ACHIEVE_H
@@ -21,7 +21,7 @@ requires std::is_arithmetic_v<Real>
 Mathematics::Vector2OrthonormalBasis<Real>::Vector2OrthonormalBasis(const Vector2Type& nonzeroVector, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
     : uVector{ nonzeroVector }, vVector{}, epsilon{ epsilon }
 {
-    MATHEMATICS_ASSERTION_1(!nonzeroVector.IsZero(epsilon), "ÊäÈë±ØĞëÊÇ·ÇÁãÏòÁ¿£¡");
+    MATHEMATICS_ASSERTION_1(!nonzeroVector.IsZero(epsilon), "è¾“å…¥å¿…é¡»æ˜¯éé›¶å‘é‡ï¼");
 
     Generate();
 

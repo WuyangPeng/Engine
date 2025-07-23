@@ -12,6 +12,7 @@
 #include "ProjectionViewWorldUpdaterImpl.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Resources/Buffers/ConstantBufferDetail.h"
+#include "Mathematics/Algebra/TransformDetail.h"
 
 Rendering::ProjectionViewWorldUpdaterImpl::ProjectionViewWorldUpdaterImpl(CameraSharedPtr camera, const BaseRendererSharedPtr& baseRenderer)
     : camera{ std::move(camera) }, baseRenderer{ baseRenderer }, subscribers{}

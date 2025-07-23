@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.1 (2024/09/14 11:15)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.1 (2024/09/14 11:15)
 
 #include "Network/NetworkExport.h"
 
@@ -77,7 +77,7 @@ void Network::BoostTcpClientServiceSession::Close()
 
 void Network::BoostTcpClientServiceSession::DoResponse(const std::function<void(const std::string&)>& processDataCallback)
 {
-    /// Òì²½¶ÁÈ¡£¬Ö±µ½Óöµ½·Ö¸ô·û
+    /// å¼‚æ­¥è¯»å–ï¼Œç›´åˆ°é‡åˆ°åˆ†éš”ç¬¦
     async_read_until(socket, response, "\r\n",
                      [processDataCallback, this](const boost::system::error_code& error, size_t bytesTransferred) {
                          System::UnusedFunction(bytesTransferred);
@@ -92,7 +92,7 @@ void Network::BoostTcpClientServiceSession::DoResponse(const std::function<void(
 
                              response.consume(response.size());
 
-                             /// µ÷ÓÃ»Øµ÷º¯Êı´¦ÀíÊı¾İ
+                             /// è°ƒç”¨å›è°ƒå‡½æ•°å¤„ç†æ•°æ®
                              processDataCallback(result);
                          }
                          else

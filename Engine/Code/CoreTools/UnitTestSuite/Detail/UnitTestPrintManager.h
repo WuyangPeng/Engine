@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 11:20)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 11:20)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_PRINT_MANAGER_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_PRINT_MANAGER_H
@@ -18,7 +18,7 @@
 #include <memory>
 #include <string>
 
-/// µ¥Ôª²âÊÔÀàÊä³ö²âÊÔ½á¹û¹ÜÀíÀà£¬UnitTestPrintManageÎªÄÚ²¿½Ó¿ÚÀà£¬¿ÉÊä³ö²âÊÔ½á¹û¡£
+/// å•å…ƒæµ‹è¯•ç±»è¾“å‡ºæµ‹è¯•ç»“æœç®¡ç†ç±»ï¼ŒUnitTestPrintManageä¸ºå†…éƒ¨æ¥å£ç±»ï¼Œå¯è¾“å‡ºæµ‹è¯•ç»“æœã€‚
 namespace CoreTools
 {
     class CORE_TOOLS_HIDDEN_DECLARE UnitTestPrintManager final

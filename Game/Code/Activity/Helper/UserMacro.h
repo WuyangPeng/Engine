@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.2 (2023/07/25 15:18)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.2 (2023/07/25 15:18)
 
 #ifndef ACTIVITY_HELPER_USER_HELPER_H
 #define ACTIVITY_HELPER_USER_HELPER_H
@@ -21,7 +21,7 @@
 
 #define CLOSE_ACTIVITY_MAX (((ACTIVITY_CLOSE_END) << 1) - 1)
 
-// ±àÒë²âÊÔ£¨Ä¬ÈÏÎª0£¬×î´óÖµÎª0x01£©
+// ç¼–è¯‘æµ‹è¯•ï¼ˆé»˜è®¤ä¸º0ï¼Œæœ€å¤§å€¼ä¸º0x01ï¼‰
 #define COMPILE_ACTIVITY_CLOSE 0x00
 
 static_assert(0 <= COMPILE_ACTIVITY_CLOSE, "COMPILE_ACTIVITY_CLOSE Must be greater than or equal 0.");

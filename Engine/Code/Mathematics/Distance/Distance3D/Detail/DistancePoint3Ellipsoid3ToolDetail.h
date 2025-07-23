@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 16:26)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 16:26)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_ELLIPSOID3_TOOL_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT3_ELLIPSOID3_TOOL_DETAIL_H
@@ -28,13 +28,13 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistance()
 {
     constexpr auto size = 3;
 
-    // È·¶¨m_InputVectorµÄ·´Éäµ½µÚÒ»ÏóÏŞ¡£
+    // ç¡®å®šm_InputVectorçš„åå°„åˆ°ç¬¬ä¸€è±¡é™ã€‚
     const std::array<bool, size> reflect{ inputVector.GetX() < MathType::GetValue(0), inputVector.GetY() < MathType::GetValue(0), inputVector.GetZ() < MathType::GetValue(0) };
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-    // È·¶¨µİ¼õ·ø¶ÈÖáË³Ğò¡£
+    // ç¡®å®šé€’å‡è¾åº¦è½´é¡ºåºã€‚
     std::array<int, size> permute{};
     if (toolExtent[0] < toolExtent[1])
     {
@@ -104,7 +104,7 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistance()
 
     auto local = outputVector;
 
-    // »Ö¸´ÖáË³ĞòºÍ·´Éä¡£
+    // æ¢å¤è½´é¡ºåºå’Œåå°„ã€‚
     for (auto index = 0; index < size; ++index)
     {
         const auto invPermuteIndex = invPermute.at(index);
@@ -146,7 +146,7 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistanceSpec
     {
         auto extent2Squared = extent[2] * extent[2];
 
-        MATHEMATICS_ASSERTION_2(extentPos.size() == queryPointPos.size(), "Á½¸öÊı×é´óĞ¡²»ÏàµÈ\n");
+        MATHEMATICS_ASSERTION_2(extentPos.size() == queryPointPos.size(), "ä¸¤ä¸ªæ•°ç»„å¤§å°ä¸ç›¸ç­‰\n");
 
         const auto numPos = extentPos.size();
         std::array<Real, size> denom{};
@@ -172,8 +172,8 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistanceSpec
         auto inSubEllipse = false;
         if (inAABBSubEllipse)
         {
-            // queryPoint[]ÔÚÖá¶ÔÆë°üÎ§ºĞµÄ×ÓÍÖÔ²±ß½ç¿ò¡£
-            // ÕâÖĞ¼ä²âÊÔÖ¼ÔÚ·À·¶³ıÁã´íÎó£¬µ±¶ÔÒ»Ğ©i£¬extentPos[i] == extent[N - 1]¡£
+            // queryPoint[]åœ¨è½´å¯¹é½åŒ…å›´ç›’çš„å­æ¤­åœ†è¾¹ç•Œæ¡†ã€‚
+            // è¿™ä¸­é—´æµ‹è¯•æ—¨åœ¨é˜²èŒƒé™¤é›¶é”™è¯¯ï¼Œå½“å¯¹ä¸€äº›iï¼ŒextentPos[i] == extent[N - 1]ã€‚
             std::array<Real, size> xde{};
             auto discriminant = MathType::GetValue(1);
             for (auto i = 0u; i < numPos; ++i)
@@ -183,7 +183,7 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistanceSpec
             }
             if (zeroThreshold < discriminant)
             {
-                // queryPoint[]ÔÚ×ÓÍÖÔ²ÄÚ£¬×î½Ó½üÍÖÔ²µãÓĞoutputPos[2] > 0.
+                // queryPoint[]åœ¨å­æ¤­åœ†å†…ï¼Œæœ€æ¥è¿‘æ¤­åœ†ç‚¹æœ‰outputPos[2] > 0.
                 squaredDistance = MathType::GetValue(0);
                 for (auto i = 0u; i < numPos; ++i)
                 {
@@ -199,15 +199,15 @@ void Mathematics::DistancePoint3Ellipsoid3Tool<Real>::ComputeSquaredDistanceSpec
 
         if (!inSubEllipse)
         {
-            // queryPoint[]ÔÚ×ÓÍÖÔ²Ö®Íâ¡£×î½üµÄÍÖÇòµãÓĞx[2] == 0£¬ÊÇÔÚÓò±ß½çÍÖÔ²¡£
+            // queryPoint[]åœ¨å­æ¤­åœ†ä¹‹å¤–ã€‚æœ€è¿‘çš„æ¤­çƒç‚¹æœ‰x[2] == 0ï¼Œæ˜¯åœ¨åŸŸè¾¹ç•Œæ¤­åœ†ã€‚
             outputVector[2] = MathType::GetValue(0);
             outputPos = Bisector(extentPos, queryPointPos);
         }
     }
 
-    MATHEMATICS_ASSERTION_2(outputPos.size() == 3, "Êı×é´óĞ¡´íÎó");
+    MATHEMATICS_ASSERTION_2(outputPos.size() == 3, "æ•°ç»„å¤§å°é”™è¯¯");
 
-    // ÌîĞ´ÔÚ×î³õÃ»ÓĞÇåÁãµÄm_OutputVector[]Öµ¡£
+    // å¡«å†™åœ¨æœ€åˆæ²¡æœ‰æ¸…é›¶çš„m_OutputVector[]å€¼ã€‚
     auto outputVectorIndex = 0;
     for (auto i = 0; i < size; ++i)
     {
@@ -226,7 +226,7 @@ typename Mathematics::DistancePoint3Ellipsoid3Tool<Real>::Container Mathematics:
     const auto temp = numComponents - 1;
     if (!(0 <= temp && temp < 3))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ë÷ÒıÔ½½ç¡£"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•è¶Šç•Œã€‚"s));
     }
 
     std::array<Real, 3> extentSquared{};

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:55)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:55)
 
 #ifndef RENDERING_DATA_TYPES_COLOUR_CONVERT_FROM_H
 #define RENDERING_DATA_TYPES_COLOUR_CONVERT_FROM_H
@@ -22,7 +22,7 @@
 
 namespace Rendering
 {
-    // ´ÓÖ¸¶¨µÄ¸ñÊ½×ª»»ÎªColour<float>¡£
+    // ä»æŒ‡å®šçš„æ ¼å¼è½¬æ¢ä¸ºColour<float>ã€‚
     class RENDERING_DEFAULT_DECLARE ColourConvertFrom
     {
     public:
@@ -35,60 +35,60 @@ namespace Rendering
     public:
         static constexpr auto convertFromQuantity = System::EnumCastUnderlying(TextureFormat::Quantity);
 
-        // ´ÓÖ¸¶¨µÄ¸ñÊ½×ª»»µ½Colour<float>¡£
+        // ä»æŒ‡å®šçš„æ ¼å¼è½¬æ¢åˆ°Colour<float>ã€‚
 
-        // outTexelsµÄ³¤¶ÈÎªinTexelsµÄ³¤¶È / 2¡£
+        // outTexelsçš„é•¿åº¦ä¸ºinTexelsçš„é•¿åº¦ / 2ã€‚
         NODISCARD static OutTexelsType ConvertFromR5G6B5(const InTexelsType& inTexels);
 
-        // outTexelsµÄ³¤¶ÈÎªinTexelsµÄ³¤¶È / 2¡£
+        // outTexelsçš„é•¿åº¦ä¸ºinTexelsçš„é•¿åº¦ / 2ã€‚
         NODISCARD static OutTexelsType ConvertFromA1R5G5B5(const InTexelsType& inTexels);
 
-        // outTexelsµÄ³¤¶ÈÎªinTexelsµÄ³¤¶È / 2¡£
+        // outTexelsçš„é•¿åº¦ä¸ºinTexelsçš„é•¿åº¦ / 2ã€‚
         NODISCARD static OutTexelsType ConvertFromA4R4G4B4(const InTexelsType& inTexels);
 
-        // outTexelsµÄ³¤¶ÈÎªinTexelsµÄ³¤¶È¡£
+        // outTexelsçš„é•¿åº¦ä¸ºinTexelsçš„é•¿åº¦ã€‚
         NODISCARD static OutTexelsType ConvertFromA8(const InTexelsType& inTexels);
 
-        // outTexelsµÄ³¤¶ÈÎªinTexelsµÄ³¤¶È¡£
+        // outTexelsçš„é•¿åº¦ä¸ºinTexelsçš„é•¿åº¦ã€‚
         NODISCARD static OutTexelsType ConvertFromL8(const InTexelsType& inTexels);
 
-        // outTexelsµÄ³¤¶ÈÎªinTexelsµÄ³¤¶È / 2¡£
+        // outTexelsçš„é•¿åº¦ä¸ºinTexelsçš„é•¿åº¦ / 2ã€‚
         NODISCARD static OutTexelsType ConvertFromA8L8(const InTexelsType& inTexels);
 
-        // outTexelsµÄ³¤¶ÈÎªinTexelsµÄ³¤¶È / 3¡£
+        // outTexelsçš„é•¿åº¦ä¸ºinTexelsçš„é•¿åº¦ / 3ã€‚
         NODISCARD static OutTexelsType ConvertFromR8G8B8(const InTexelsType& inTexels);
 
-        // outTexelsµÄ³¤¶ÈÎªinTexelsµÄ³¤¶È / 4¡£
+        // outTexelsçš„é•¿åº¦ä¸ºinTexelsçš„é•¿åº¦ / 4ã€‚
         NODISCARD static OutTexelsType ConvertFromA8R8G8B8(const InTexelsType& inTexels);
 
-        // outTexelsµÄ³¤¶ÈÎªinTexelsµÄ³¤¶È / 4¡£
+        // outTexelsçš„é•¿åº¦ä¸ºinTexelsçš„é•¿åº¦ / 4ã€‚
         NODISCARD static OutTexelsType ConvertFromA8B8G8R8(const InTexelsType& inTexels);
 
-        // outTexelsµÄ³¤¶ÈÎªinTexelsµÄ³¤¶È / 2¡£
+        // outTexelsçš„é•¿åº¦ä¸ºinTexelsçš„é•¿åº¦ / 2ã€‚
         NODISCARD static OutTexelsType ConvertFromL16(const InTexelsType& inTexels);
 
-        // outTexelsµÄ³¤¶ÈÎªinTexelsµÄ³¤¶È / 4¡£
+        // outTexelsçš„é•¿åº¦ä¸ºinTexelsçš„é•¿åº¦ / 4ã€‚
         NODISCARD static OutTexelsType ConvertFromG16R16(const InTexelsType& inTexels);
 
-        // outTexelsµÄ³¤¶ÈÎªinTexelsµÄ³¤¶È / 8¡£
+        // outTexelsçš„é•¿åº¦ä¸ºinTexelsçš„é•¿åº¦ / 8ã€‚
         NODISCARD static OutTexelsType ConvertFromA16B16G16R16(const InTexelsType& inTexels);
 
-        // outTexelsµÄ³¤¶ÈÎªinTexelsµÄ³¤¶È / 2¡£
+        // outTexelsçš„é•¿åº¦ä¸ºinTexelsçš„é•¿åº¦ / 2ã€‚
         NODISCARD static OutTexelsType ConvertFromR16F(const InTexelsType& inTexels);
 
-        // outTexelsµÄ³¤¶ÈÎªinTexelsµÄ³¤¶È / 4¡£
+        // outTexelsçš„é•¿åº¦ä¸ºinTexelsçš„é•¿åº¦ / 4ã€‚
         NODISCARD static OutTexelsType ConvertFromG16R16F(const InTexelsType& inTexels);
 
-        // outTexelsµÄ³¤¶ÈÎªinTexelsµÄ³¤¶È / 8¡£
+        // outTexelsçš„é•¿åº¦ä¸ºinTexelsçš„é•¿åº¦ / 8ã€‚
         NODISCARD static OutTexelsType ConvertFromA16B16G16R16F(const InTexelsType& inTexels);
 
-        // outTexelsµÄ³¤¶ÈÎªinTexelsµÄ³¤¶È / 4¡£
+        // outTexelsçš„é•¿åº¦ä¸ºinTexelsçš„é•¿åº¦ / 4ã€‚
         NODISCARD static OutTexelsType ConvertFromR32F(const InTexelsType& inTexels);
 
-        // outTexelsµÄ³¤¶ÈÎªinTexelsµÄ³¤¶È / 8¡£
+        // outTexelsçš„é•¿åº¦ä¸ºinTexelsçš„é•¿åº¦ / 8ã€‚
         NODISCARD static OutTexelsType ConvertFromG32R32F(const InTexelsType& inTexels);
 
-        // outTexelsµÄ³¤¶ÈÎªinTexelsµÄ³¤¶È / 16¡£
+        // outTexelsçš„é•¿åº¦ä¸ºinTexelsçš„é•¿åº¦ / 16ã€‚
         NODISCARD static OutTexelsType ConvertFromA32B32G32R32F(const InTexelsType& inTexels);
 
         using ConvertFromFunction = OutTexelsType (*)(const InTexelsType&);

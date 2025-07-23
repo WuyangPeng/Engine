@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-%EndYear%
+ï»¿///	Copyright (c) 2010-%EndYear%
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	%ProjectChineseName%°æ±¾£º%Versions% (%Date% %Hour%:%Minute%)
+///	æ ‡å‡†ï¼šstd:c++20
+///	%ProjectChineseName%ç‰ˆæœ¬ï¼š%Versions% (%Date% %Hour%:%Minute%)
 
 #ifndef %ProjectCapital%_%ManagerCapital%_MACRO_USER_MACRO_H
 #define %ProjectCapital%_%ManagerCapital%_MACRO_USER_MACRO_H
@@ -15,7 +15,7 @@
 #define CLOSE_USE_%ProjectCapital%_CORE (0x01) 
 #define CLOSE_%ProjectCapital%_CORE_MAX (((CLOSE_USE_%ProjectCapital%_CORE) << 1) - 1)
 
-// ±àÒë²âÊÔ£¨Ä¬ÈÏÎª0£¬×î´óÖµÎª0x01£©
+// ç¼–è¯‘æµ‹è¯•ï¼ˆé»˜è®¤ä¸º0ï¼Œæœ€å¤§å€¼ä¸º0x01ï¼‰
 #define COMPILE_%ProjectCapital%_CORE_CLOSE 0x00
 
 static_assert(0 <= COMPILE_%ProjectCapital%_CORE_CLOSE, "COMPILE_%ProjectCapital%_CORE_CLOSE Must be greater than or equal 0.");
@@ -25,7 +25,7 @@ static_assert(COMPILE_%ProjectCapital%_CORE_CLOSE <= CLOSE_GAME_CLIENT_CORE_MAX,
 
 #endif // !defined(COMPILE_%ProjectCapital%_CORE_CLOSE) || (COMPILE_%ProjectCapital%_CORE_CLOSE & CLOSE_USE_%ProjectCapital%_CORE) != CLOSE_USE_%ProjectCapital%_CORE  
 
-// ÊÇ·ñ±àÒë³É¾²Ì¬¿â
+// æ˜¯å¦ç¼–è¯‘æˆé™æ€åº“
 #ifdef BUILDING_STATIC
 	#define  BUILDING_%ProjectCapital%_CORE_STATIC
 #endif // BUILDING_STATIC

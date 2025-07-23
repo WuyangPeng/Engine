@@ -1,32 +1,39 @@
-/// Copyright (c) 2010-2024
+Ôªø/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-/// ¡™œµ◊˜’ﬂ£∫94458936@qq.com
+/// ‰ΩúËÄÖÔºöÂΩ≠Ê≠¶Èò≥ÔºåÂΩ≠ÊôîÊÅ©ÔºåÂΩ≠ÊôîÊ≥Ω
+/// ËÅîÁ≥ª‰ΩúËÄÖÔºö94458936@qq.com
 ///
-/// ±Í◊º£∫std:c++20
-/// ∞Ê±æ£∫1.0.0.8 (2024/03/28 11:01)
+/// Ê†áÂáÜÔºöstd:c++20
+/// ÁâàÊú¨Ôºö1.0.0.8 (2024/03/28 11:01)
 
-/// main∫Ø ˝À˘–Ë“™µƒ∫Í
+/// mainÂáΩÊï∞ÊâÄÈúÄË¶ÅÁöÑÂÆè
 #ifndef CORE_TOOLS_HELPER_MAIN_FUNCTION_MACRO_H
 #define CORE_TOOLS_HELPER_MAIN_FUNCTION_MACRO_H
 
 #include "System/Helper/WindowsMacro.h"
 #include "System/SystemOutput/OutputDebugString.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/MainFunctionHelper/ExecuteDllMain.h"
 #include "CoreTools/Threading/Mutex.h"
+
+#include <iostream>
 
 #define MAIN_FUNCTION(namespaceName, helperClassName)                           \
     int main(int argc, char** argv) noexcept                                    \
     {                                                                           \
         try                                                                     \
         {                                                                       \
-            namespaceName::helperClassName helper{ argc, argv };                \
-            return helper.Run();                                                \
+            EXCEPTION_TRY                                                       \
+            {                                                                   \
+                namespaceName::helperClassName helper{ argc, argv };            \
+                return helper.Run();                                            \
+            }                                                                   \
+            EXCEPTION_ENTRY_POINT_CATCH                                         \
         }                                                                       \
         catch (...)                                                             \
         {                                                                       \
-            System::OutputDebugStringWithTChar(SYSTEM_TEXT("main ≈◊≥ˆ“Ï≥£°£")); \
+            System::OutputDebugStringWithTChar(SYSTEM_TEXT("main ÊäõÂá∫ÂºÇÂ∏∏„ÄÇ")); \
         }                                                                       \
         return 0;                                                               \
     }
@@ -72,7 +79,7 @@
             }                                                                                                                                \
             catch (...)                                                                                                                      \
             {                                                                                                                                \
-                System::OutputDebugStringWithTChar(SYSTEM_TEXT("ExecuteDllMain ≈◊≥ˆ“Ï≥£°£"));                                                \
+                System::OutputDebugStringWithTChar(SYSTEM_TEXT("ExecuteDllMain ÊäõÂá∫ÂºÇÂ∏∏„ÄÇ"));                                                \
             }                                                                                                                                \
             return System::gTrue;                                                                                                            \
         }

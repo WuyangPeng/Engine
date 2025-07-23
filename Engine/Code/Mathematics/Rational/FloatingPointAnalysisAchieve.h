@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:16)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:16)
 
 #ifndef MATHEMATICS_RATIONAL_FLOATING_POINT_ANALYSIS_ACHIEVE_H
 #define MATHEMATICS_RATIONAL_FLOATING_POINT_ANALYSIS_ACHIEVE_H
@@ -103,12 +103,12 @@ Mathematics::FloatingPointAnalysisType Mathematics::FloatingPointAnalysis<T>::Ge
 
     if (1 <= exponentAnalysis && exponentAnalysis < maxExponent)
     {
-        // Êı×ÖÊÇ¹æ¸ñ»¯µÄ(double)£º  (-1)^s * 2^{e-1023} * 1.m
+        // æ•°å­—æ˜¯è§„æ ¼åŒ–çš„(double)ï¼š  (-1)^s * 2^{e-1023} * 1.m
         return FloatingPointAnalysisType::Valid;
     }
     else if (exponentAnalysis == 0)
     {
-        // Êı×ÖÊÇ´Î±ê×¼µÄ£¨·Ç¹æ¸ñ»¯double)£º  (-1)^s * 2^{-1022} * 0.m
+        // æ•°å­—æ˜¯æ¬¡æ ‡å‡†çš„ï¼ˆéè§„æ ¼åŒ–double)ï¼š  (-1)^s * 2^{-1022} * 0.m
         return FloatingPointAnalysisType::Zero;
     }
     else  // exponent == maxExponent
@@ -123,7 +123,7 @@ Mathematics::FloatingPointAnalysisType Mathematics::FloatingPointAnalysis<T>::Ge
             }
             else
             {
-                // ÓĞĞ§¸ºÔØÊÇ(double) (mantissa & 0x0007FFFFFFFFFFFFLL)¡£
+                // æœ‰æ•ˆè´Ÿè½½æ˜¯(double) (mantissa & 0x0007FFFFFFFFFFFFLL)ã€‚
                 return FloatingPointAnalysisType::SignalingNaN;
             }
         }

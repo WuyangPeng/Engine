@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 09:53)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 09:53)
 
 #ifndef MATHEMATICS_BASE_MATH_H
 #define MATHEMATICS_BASE_MATH_H
@@ -27,8 +27,8 @@ namespace Mathematics
         using ClassType = Math<Real>;
 
     public:
-        // ·â×°Òş²Øº¯ÊıµÄÊµÏÖ¡£
-        // ÔÚACosºÍASinº¯ÊıÖĞ½Ø¶ÏÊäÈë²ÎÊıÎª[-1,1]£¬ÒÔ±ÜÃâµ±ÊäÈëÎªÂÔ´óÓÚ1»òÂÔĞ¡ÓÚ-1Ê±²úÉúNaNµÄÎÊÌâ¡£
+        // å°è£…éšè—å‡½æ•°çš„å®ç°ã€‚
+        // åœ¨ACoså’ŒASinå‡½æ•°ä¸­æˆªæ–­è¾“å…¥å‚æ•°ä¸º[-1,1]ï¼Œä»¥é¿å…å½“è¾“å…¥ä¸ºç•¥å¤§äº1æˆ–ç•¥å°äº-1æ—¶äº§ç”ŸNaNçš„é—®é¢˜ã€‚
 
         NODISCARD static Real ACos(Real value) noexcept;
         NODISCARD static Real ASin(Real value) noexcept;
@@ -52,23 +52,23 @@ namespace Mathematics
         NODISCARD static Real Pow(Real base, Real exponent) noexcept(gAssert < 3 || gMathematicsAssert < 3);
         NODISCARD static Real Square(Real value) noexcept;
 
-        /// @brief  ¼ÆËã¸¡µãÊıµÄÆ½·½¸ù¡£
-        /// @pre    value >= 0¡£
-        /// @post   Fabs(result * result - value) <= GetZeroTolerance()¡£
+        /// @brief  è®¡ç®—æµ®ç‚¹æ•°çš„å¹³æ–¹æ ¹ã€‚
+        /// @pre    value >= 0ã€‚
+        /// @post   Fabs(result * result - value) <= GetZeroTolerance()ã€‚
         NODISCARD static Real Sqrt(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         NODISCARD static Real InvSqrt(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
         NODISCARD static Real CubeRoot(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        // ½Ø¶ÏÊäÈëÖµÎªÌØ¶¨µÄ·¶Î§[min,max]
+        // æˆªæ–­è¾“å…¥å€¼ä¸ºç‰¹å®šçš„èŒƒå›´[min,max]
         NODISCARD static Real Clamp(Real value, Real minValue, Real maxValue) noexcept;
 
-        // ½Ø¶ÏÊäÈëÖµÎª[0,1].
+        // æˆªæ–­è¾“å…¥å€¼ä¸º[0,1].
         NODISCARD static Real Saturate(Real value) noexcept;
 
         NODISCARD static bool Approximate(Real lhs, Real rhs, const Real zeroTolerance = GetZeroTolerance()) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        // equalDigitĞèÒª±È½ÏµÄÎ²ÊıÎ»£¨float×î´óÎª23Î»¡¢double×î´óÎª52Î»£©
+        // equalDigitéœ€è¦æ¯”è¾ƒçš„å°¾æ•°ä½ï¼ˆfloatæœ€å¤§ä¸º23ä½ã€doubleæœ€å¤§ä¸º52ä½ï¼‰
         NODISCARD static bool FloatingPointEqual(Real lhs, Real rhs, int equalDigit) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         NODISCARD static Real GetNumericalRoundOffNonnegative(Real value) noexcept;
@@ -83,7 +83,7 @@ namespace Mathematics
         NODISCARD static int GetNumberDigits(int64_t number);
 
     public:
-        // ¹«ÓÃ³£Êı¡£
+        // å…¬ç”¨å¸¸æ•°ã€‚
         NODISCARD static Real GetExponent() noexcept(gAssert < 3 || gMathematicsAssert < 3);
         NODISCARD static Real GetLN2() noexcept(gAssert < 3 || gMathematicsAssert < 3);
         NODISCARD static Real GetLN10() noexcept(gAssert < 3 || gMathematicsAssert < 3);

@@ -1,4 +1,4 @@
-$Copyright$
+﻿$Copyright$
 
 #ifndef $NamespaceUppercaseSeparator$_$NamespaceUppercaseSeparator$_CONTAINER_H
 #define $NamespaceUppercaseSeparator$_$NamespaceUppercaseSeparator$_CONTAINER_H

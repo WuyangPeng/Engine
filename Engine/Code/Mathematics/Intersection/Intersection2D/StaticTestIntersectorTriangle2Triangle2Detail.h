@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:02)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:02)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_TRIANGLE2_TRIANGLE2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_TRIANGLE2_TRIANGLE2_DETAIL_H
@@ -54,32 +54,32 @@ Mathematics::Triangle2<Real> Mathematics::StaticTestIntersectorTriangle2Triangle
 template <typename Real>
 void Mathematics::StaticTestIntersectorTriangle2Triangle2<Real>::Test()
 {
-    // ²âÊÔÈı½ÇĞÎ0µÄ±ßÔµÊÇ·ñ·ÖÀë¡£
+    // æµ‹è¯•ä¸‰è§’å½¢0çš„è¾¹ç¼˜æ˜¯å¦åˆ†ç¦»ã€‚
     for (auto i0 = 0, i1 = 2; i0 < 3; i1 = i0++)
     {
         auto vertex = triangle0.GetVertex();
-        // ²âÊÔÖá V0[i1] + t * perp(V0[i0]-V0[i1]), perp(x,y) = (y,-x).
+        // æµ‹è¯•è½´ V0[i1] + t * perp(V0[i0]-V0[i1]), perp(x,y) = (y,-x).
         const Vector2 direction{ vertex.at(i0).GetY() - vertex.at(i1).GetY(),
                                  vertex.at(i1).GetX() - vertex.at(i0).GetX() };
 
         if (WhichSide(triangle1.GetVertex(), vertex.at(i1), direction) == NumericalValueSymbol::Positive)
         {
-            // Triangle1ÍêÈ«ÔÚtriangle0±ßµÄÕı²à¡£
+            // Triangle1å®Œå…¨åœ¨triangle0è¾¹çš„æ­£ä¾§ã€‚
             this->SetIntersectionType(IntersectionType::Empty);
             return;
         }
     }
 
-    // ²âÊÔÈı½ÇĞÎ1µÄ±ßÔµÊÇ·ñ·ÖÀë¡£
+    // æµ‹è¯•ä¸‰è§’å½¢1çš„è¾¹ç¼˜æ˜¯å¦åˆ†ç¦»ã€‚
     for (auto i0 = 0, i1 = 2; i0 < 3; i1 = i0++)
     {
         auto vertex = triangle1.GetVertex();
-        // ²âÊÔÖá V1[i1] + t*perp(V1[i0]-V1[i1]), perp(x,y) = (y,-x).
+        // æµ‹è¯•è½´ V1[i1] + t*perp(V1[i0]-V1[i1]), perp(x,y) = (y,-x).
         const Vector2 direction{ vertex.at(i0).GetY() - vertex.at(i1).GetY(),
                                  vertex.at(i1).GetX() - vertex.at(i0).GetX() };
         if (WhichSide(triangle0.GetVertex(), vertex.at(i1), direction) == NumericalValueSymbol::Positive)
         {
-            // Triangle0ÍêÈ«ÔÚtriangle1±ßµÄÕı²à¡£
+            // Triangle0å®Œå…¨åœ¨triangle1è¾¹çš„æ­£ä¾§ã€‚
             this->SetIntersectionType(IntersectionType::Empty);
             return;
         }
@@ -91,8 +91,8 @@ void Mathematics::StaticTestIntersectorTriangle2Triangle2<Real>::Test()
 template <typename Real>
 Mathematics::NumericalValueSymbol Mathematics::StaticTestIntersectorTriangle2Triangle2<Real>::WhichSide(const Container& vertex, const Vector2Type& point, const Vector2Type& direction)
 {
-    /// ¶¥µãÍ¶Ó°ÎªP + t * DĞÎÊ½¡£ Èç¹ûËùÓĞt> 0£¬Ôò·µ»ØÖµÎª+1£»
-    /// Èç¹ûËùÓĞt <0£¬Ôò·µ»Ø-1£»·ñÔò£¬Ôò·µ»Ø0£¬ÔÚÕâÖÖÇé¿öÏÂ£¬¸ÃÏß½«Èı½ÇĞÎ·Ö¿ª¡£
+    /// é¡¶ç‚¹æŠ•å½±ä¸ºP + t * Då½¢å¼ã€‚ å¦‚æœæ‰€æœ‰t> 0ï¼Œåˆ™è¿”å›å€¼ä¸º+1ï¼›
+    /// å¦‚æœæ‰€æœ‰t <0ï¼Œåˆ™è¿”å›-1ï¼›å¦åˆ™ï¼Œåˆ™è¿”å›0ï¼Œåœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œè¯¥çº¿å°†ä¸‰è§’å½¢åˆ†å¼€ã€‚
 
     auto positive = 0;
     auto negative = 0;

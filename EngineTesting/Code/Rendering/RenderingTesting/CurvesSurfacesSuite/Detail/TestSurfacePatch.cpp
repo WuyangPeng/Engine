@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/12 15:59)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 15:59)
 
 #include "TestSurfacePatch.h"
 #include "System/Helper/Helper.h"
@@ -14,6 +14,8 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "Mathematics/Algebra/Matrix2Detail.h"
+#include "Mathematics/Algebra/AVectorDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, TestSurfacePatch);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TestSurfacePatch);
@@ -31,7 +33,7 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, TestSurfacePatch)
 Rendering::TestSurfacePatch::APoint Rendering::TestSurfacePatch::GetPosition(float u, float v) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(IsParameterValid(u, v), "²ÎÊıÓòÎŞĞ§\n");
+    RENDERING_ASSERTION_0(IsParameterValid(u, v), "å‚æ•°åŸŸæ— æ•ˆ\n");
 
     return APoint(u, v, 0.0f);
 }
@@ -39,7 +41,7 @@ Rendering::TestSurfacePatch::APoint Rendering::TestSurfacePatch::GetPosition(flo
 Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivativesU(float u, MAYBE_UNUSED float v) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_2(IsParameterValid(u, v), "²ÎÊıÓòÎŞĞ§\n");
+    RENDERING_ASSERTION_2(IsParameterValid(u, v), "å‚æ•°åŸŸæ— æ•ˆ\n");
 
     return AVector::GetUnitX() * u;
 }
@@ -47,7 +49,7 @@ Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivatives
 Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivativesV(MAYBE_UNUSED float u, float v) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_2(IsParameterValid(u, v), "²ÎÊıÓòÎŞĞ§\n");
+    RENDERING_ASSERTION_2(IsParameterValid(u, v), "å‚æ•°åŸŸæ— æ•ˆ\n");
 
     return AVector::GetUnitY() * v;
 }
@@ -55,7 +57,7 @@ Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivatives
 Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivativesUU(float u, MAYBE_UNUSED float v) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_2(IsParameterValid(u, v), "²ÎÊıÓòÎŞĞ§\n");
+    RENDERING_ASSERTION_2(IsParameterValid(u, v), "å‚æ•°åŸŸæ— æ•ˆ\n");
 
     return AVector::GetUnitX() * u + AVector::GetUnitY() * u;
 }
@@ -63,7 +65,7 @@ Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivatives
 Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivativesUV(float u, float v) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_2(IsParameterValid(u, v), "²ÎÊıÓòÎŞĞ§\n");
+    RENDERING_ASSERTION_2(IsParameterValid(u, v), "å‚æ•°åŸŸæ— æ•ˆ\n");
 
     return AVector::GetUnitX() * u + AVector::GetUnitY() * v;
 }
@@ -71,7 +73,7 @@ Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivatives
 Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivativesVV(MAYBE_UNUSED float u, float v) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_2(IsParameterValid(u, v), "²ÎÊıÓòÎŞĞ§\n");
+    RENDERING_ASSERTION_2(IsParameterValid(u, v), "å‚æ•°åŸŸæ— æ•ˆ\n");
 
     return AVector::GetUnitX() * v + AVector::GetUnitY() * v;
 }

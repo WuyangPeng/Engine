@@ -1,19 +1,19 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.2 (2024/10/26 17:17)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.2 (2024/10/26 17:17)
 
 #include "System/SystemExport.h"
 
 #if defined(SYSTEM_USING_VC80) && defined(SYSTEM_USE_SPIN_COUNT_CRITICAL_SECTION)
 
-    /// ²é¿´ÆÀÂÛÔÚ
-    /// http://msdn.microsoft.com/en-us/library/ms683476(VS.85).aspx£¬
-    /// ¹ØÓÚÎªÊ²Ã´ÕâĞ©#definesÒªÔÚInitializeCriticalSectionAndSpinCountÖĞ±©Â¶¡£
+    /// æŸ¥çœ‹è¯„è®ºåœ¨
+    /// http://msdn.microsoft.com/en-us/library/ms683476(VS.85).aspxï¼Œ
+    /// å…³äºä¸ºä»€ä¹ˆè¿™äº›#definesè¦åœ¨InitializeCriticalSectionAndSpinCountä¸­æš´éœ²ã€‚
     #define WIN32_LEAN_AND_MEAN
     #define _WIN32_WINNT 0x0500
 
@@ -81,7 +81,7 @@ bool System::InitializeSystemCriticalSection(ThreadingCriticalSectionPtr critica
 {
 #if defined(SYSTEM_USE_SPIN_COUNT_CRITICAL_SECTION)
 
-    /// ÔÚMSVC2010ÎÄµµÖĞÌáµ½£¬¶Ñ¹ÜÀíÆ÷×ÔĞıËøÉè¶¨Îª´óÔ¼4000¡£ÈÃÎÒÃÇ¿´¿´ÈçºÎ×öµ½4096¡£
+    /// åœ¨MSVC2010æ–‡æ¡£ä¸­æåˆ°ï¼Œå †ç®¡ç†å™¨è‡ªæ—‹é”è®¾å®šä¸ºå¤§çº¦4000ã€‚è®©æˆ‘ä»¬çœ‹çœ‹å¦‚ä½•åšåˆ°4096ã€‚
     return InitializeSystemCriticalSectionAndSpinCount(criticalSection, 4096);
 
 #else  // !SYSTEM_SPIN_COUNT_CRITICAL_SECTION

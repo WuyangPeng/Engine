@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.3 (2023/08/02 10:31)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.3 (2023/08/02 10:31)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
 ArtificialIntelligence::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "ÈË¹¤ÖÇÄÜ¿â" }
+    : ParentType{ argc, argv, "äººå·¥æ™ºèƒ½åº“" }
 {
     InitSuite();
 
@@ -35,49 +35,49 @@ void ArtificialIntelligence::TestingHelper::InitSuite()
 
 void ArtificialIntelligence::TestingHelper::AddHelperSuite()
 {
-    auto helperSuite = GenerateSuite("°ïÖú");
+    auto helperSuite = GenerateSuite("å¸®åŠ©");
 
     AddSuite(helperSuite);
 }
 
 void ArtificialIntelligence::TestingHelper::AddMiscellaneousSuite()
 {
-    auto miscellaneousSuite = GenerateSuite("ÔÓÏî");
+    auto miscellaneousSuite = GenerateSuite("æ‚é¡¹");
 
     AddSuite(miscellaneousSuite);
 }
 
 void ArtificialIntelligence::TestingHelper::AddPathSearchSuite()
 {
-    auto pathSearchSuite = GenerateSuite("Ñ°Â·");
+    auto pathSearchSuite = GenerateSuite("å¯»è·¯");
 
     AddSuite(pathSearchSuite);
 }
 
 void ArtificialIntelligence::TestingHelper::AddFiniteStateMachineSuite()
 {
-    auto finiteStateMachineSuite = GenerateSuite("ÓĞÏŞ×´Ì¬»ú");
+    auto finiteStateMachineSuite = GenerateSuite("æœ‰é™çŠ¶æ€æœº");
 
     AddSuite(finiteStateMachineSuite);
 }
 
 void ArtificialIntelligence::TestingHelper::AddFuzzyStateMachineSuite()
 {
-    auto fuzzyStateMachineSuite = GenerateSuite("Ä£ºı×´Ì¬»ú");
+    auto fuzzyStateMachineSuite = GenerateSuite("æ¨¡ç³ŠçŠ¶æ€æœº");
 
     AddSuite(fuzzyStateMachineSuite);
 }
 
 void ArtificialIntelligence::TestingHelper::AddGeneticAlgorithmSuite()
 {
-    auto geneticAlgorithmSuite = GenerateSuite("ÒÅ´«Ëã·¨");
+    auto geneticAlgorithmSuite = GenerateSuite("é—ä¼ ç®—æ³•");
 
     AddSuite(geneticAlgorithmSuite);
 }
 
 void ArtificialIntelligence::TestingHelper::AddNeuralNetworkSuite()
 {
-    auto neuralNetworkSuite = GenerateSuite("Éñ¾­ÍøÂç");
+    auto neuralNetworkSuite = GenerateSuite("ç¥ç»ç½‘ç»œ");
 
     AddSuite(neuralNetworkSuite);
 }

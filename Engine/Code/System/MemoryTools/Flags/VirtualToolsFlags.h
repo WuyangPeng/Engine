@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.7 (2024/03/04 15:56)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/04 15:56)
 
 #ifndef SYSTEM_MEMORY_TOOLS_VIRTUAL_FLAGS_H
 #define SYSTEM_MEMORY_TOOLS_VIRTUAL_FLAGS_H
@@ -56,12 +56,12 @@ namespace System
 
         ReadOnly = PAGE_READONLY,
         ReadWrite = PAGE_READWRITE,
-        WriteCopy = PAGE_WRITECOPY,  // AllocateVirtual��֧�ִ˱�־
+        WriteCopy = PAGE_WRITECOPY,  // AllocateVirtual不支持此标志
 
         Execute = PAGE_EXECUTE,
         ExecuteRead = PAGE_EXECUTE_READ,
         ExecuteReadWrite = PAGE_EXECUTE_READWRITE,
-        ExecuteWriteCopy = PAGE_EXECUTE_WRITECOPY,  // AllocateVirtual��֧�ִ˱�־
+        ExecuteWriteCopy = PAGE_EXECUTE_WRITECOPY,  // AllocateVirtual不支持此标志
 
         Guard = PAGE_GUARD,
         Nocache = PAGE_NOCACHE,

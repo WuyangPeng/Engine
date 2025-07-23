@@ -1,30 +1,30 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.7 (2024/03/04 17:29)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/04 17:29)
 
 #ifndef SYSTEM_HELPER_VISUAL_C_H
 #define SYSTEM_HELPER_VISUAL_C_H
 
 #ifdef _MSC_VER
 
-    /// Microsoft Visual C++ ���������ã�
+    /// Microsoft Visual C++ 编译器设置：
 
-    /// ������ҪС������ļ��еļ�飬
-    /// ��Ϊ��ͨ���������෴��
-    /// ���ھ���_MSC_VER���������ַ���İ汾����Ҫ��MIPS�������������
+    /// 我们需要小心这个文件中的检查，
+    /// 因为与通常的理论相反，
+    /// 存在具有_MSC_VER的最终数字非零的版本（主要是MIPS交叉编译器）。
 
-    /// �������ǲ���X <= _MSC_VER����_MSC_VER < X��
-    /// û�������Ƚ��ǰ�ȫ�ġ�
+    /// 所以我们测试X <= _MSC_VER或者_MSC_VER < X，
+    /// 没有其他比较是安全的。
 
-    /// �汾��飺���ǲ�֧�ְ汾7.1֮ǰ��Visual C++��
+    /// 版本检查：我们不支持版本7.1之前的Visual C++：
     #if _MSC_VER < 1310
 
-        #error "������δ����"
+        #error "编译器未配置"
 
     #endif  // _MSC_VER < 1310
 
@@ -62,7 +62,7 @@
 
     #ifndef TCRE_SYSTEM_COMPILER
 
-        #define TCRE_SYSTEM_COMPILER "Microsoft Visual C++ �汾 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
+        #define TCRE_SYSTEM_COMPILER "Microsoft Visual C++ 版本 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
 
     #endif  // TCRE_SYSTEM_COMPILER
 
@@ -98,8 +98,8 @@
 
             #if _MSC_VER < 1400
 
-                /// ע�⣺�Ҳ�֪���κ�CE������13xx�汾
-                #error "δ֪��EVC++�������汾"
+                /// 注意：我不知道任何CE编译器13xx版本
+                #error "未知的EVC++编译器版本"
 
             #elif _MSC_VER < 1500
 
@@ -133,28 +133,28 @@
 
             #else  // 2000 <= _MSC_VER
 
-                #error "δ֪�� EVC++ �������汾"
+                #error "未知的 EVC++ 编译器版本"
 
             #endif  // _MSC_VER
 
         #else  // !defined(UNDER_CE)
 
-            /// ΢����Visual Studio�汾��
-            /// MSVC 6�ǰ汾12.00
-            /// MSVC 7.0�ǰ汾13.00��MSVS 2002��
-            /// MSVC 7.1�ǰ汾13.10��MSVS 2003��
-            /// MSVC 8.0�ǰ汾14.00��MSVS 2005��
-            /// MSVC 9.0�ǰ汾15.00��MSVS 2008��
-            /// MSVC 10.0�ǰ汾16.00��MSVS 2010��
-            /// MSVC 11.0�ǰ汾17.00��MSVS 2012��
-            /// MSVC 12.0�ǰ汾18.00��MSVS 2013��
-            /// MSVC 14.0�ǰ汾19.00��MSVS 2015��
-            /// MSVC 14.1�ǰ汾19.10��MSVS 2017��
-            /// MSVC 14.2�ǰ汾19.20��MSVS 2019��
-            /// MSVC 14.3�ǰ汾19.30��MSVS 2022��
+            /// 微软的Visual Studio版本：
+            /// MSVC 6是版本12.00
+            /// MSVC 7.0是版本13.00（MSVS 2002）
+            /// MSVC 7.1是版本13.10（MSVS 2003）
+            /// MSVC 8.0是版本14.00（MSVS 2005）
+            /// MSVC 9.0是版本15.00（MSVS 2008）
+            /// MSVC 10.0是版本16.00（MSVS 2010）
+            /// MSVC 11.0是版本17.00（MSVS 2012）
+            /// MSVC 12.0是版本18.00（MSVS 2013）
+            /// MSVC 14.0是版本19.00（MSVS 2015）
+            /// MSVC 14.1是版本19.10（MSVS 2017）
+            /// MSVC 14.2是版本19.20（MSVS 2019）
+            /// MSVC 14.3是版本19.30（MSVS 2022）
             #if _MSC_VER < 1310
 
-                /// ע�⣺��֧��7.0���µİ汾��
+                /// 注意：不支持7.0以下的版本。
                 #define MSVC_COMPILER_VERSION 5.0
 
             #elif _MSC_VER < 1300
@@ -236,7 +236,7 @@
 
     #else  // _MSC_VER < 1600
 
-        #error "��֧�ֵͰ汾��Visual Studio��"
+        #error "不支持低版本的Visual Studio。"
 
     #endif  // 1600 <= _MSC_VER
 

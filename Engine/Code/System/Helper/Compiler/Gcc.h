@@ -1,18 +1,18 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 17:27)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 17:27)
 
 #ifndef SYSTEM_HELPER_GCC_H
 #define SYSTEM_HELPER_GCC_H
 
 #if defined(__GNUC__) && !defined(__ibmxl__)
 
-    /// GNU C++ ±àÒëÆ÷ÉèÖÃ£º
+    /// GNU C++ ç¼–è¯‘å™¨è®¾ç½®ï¼š
 
     #ifndef TCRE_USE_GCC
 
@@ -26,10 +26,10 @@
 
     #endif  // GCC_VERSION
 
-    /// °æ±¾¼ì²é£º
+    /// ç‰ˆæœ¬æ£€æŸ¥ï¼š
     #if (GCC_VERSION < 30300)
 
-        #error "±àÒëÆ÷Î´ÅäÖÃ"
+        #error "ç¼–è¯‘å™¨æœªé…ç½®"
 
     #endif  // GCC_VERSION < 30300
 
@@ -47,12 +47,12 @@
 
         #ifdef __GXX_CONCEPTS__
 
-            /// ConceptGCC ±àÒëÆ÷£ºhttp://www.generic-programming.org/software/ConceptGCC/
-            #define TCRE_SYSTEM_COMPILER "ConceptGCC °æ±¾ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
+            /// ConceptGCC ç¼–è¯‘å™¨ï¼šhttp://www.generic-programming.org/software/ConceptGCC/
+            #define TCRE_SYSTEM_COMPILER "ConceptGCC ç‰ˆæœ¬ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
 
         #else  // !__GXX_CONCEPTS__
 
-            #define TCRE_SYSTEM_COMPILER "GNU C++ °æ±¾ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
+            #define TCRE_SYSTEM_COMPILER "GNU C++ ç‰ˆæœ¬ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
 
         #endif  // __GXX_CONCEPTS__
 
@@ -99,7 +99,7 @@
 
     #endif  // (7 <= __GNUC__) && (SYSTEM_CPP_STANDARD < 17)
 
-    /// ·ÖÖ§Ô¤²âÌáÊ¾
+    /// åˆ†æ”¯é¢„æµ‹æç¤º
     #define TCRE_LIKELY(x) __builtin_expect(x, 1)
     #define TCRE_UNLIKELY(x) __builtin_expect(x, 0)
 

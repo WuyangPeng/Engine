@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 14:24)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 14:24)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -48,7 +48,7 @@ std::string CoreTools::NumberCommandArgument::GetString() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("NumberCommandArgument²»ÊÇ×Ö·û´®£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("NumberCommandArgumentä¸æ˜¯å­—ç¬¦ä¸²ï¼"s))
 }
 
 bool CoreTools::NumberCommandArgument::IsInteger() const noexcept
@@ -99,5 +99,5 @@ void CoreTools::NumberCommandArgument::AddArgumentValue(const std::string& aValu
 
     System::UnusedFunction(aValue);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("NumberCommandArgument²»ÄÜÌí¼ÓÖµ£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("NumberCommandArgumentä¸èƒ½æ·»åŠ å€¼ï¼"s))
 }

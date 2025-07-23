@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/29 13:54)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/29 13:54)
 
 #ifndef RENDERING_RESOURCES_DRAW_TARGET_H
 #define RENDERING_RESOURCES_DRAW_TARGET_H
@@ -34,7 +34,7 @@ namespace Rendering
         using RendererObjectContainer = std::vector<RendererObjectSharedPtr>;
 
     public:
-        // Ö§³ÖÄ¿±êµÄÊıÁ¿È¡¾öÓÚÍ¼ĞÎÓ²¼şºÍÇı¶¯³ÌĞò¡£¡°numRenderTargets¡±±ØĞëÖÁÉÙ1¡£
+        // æ”¯æŒç›®æ ‡çš„æ•°é‡å–å†³äºå›¾å½¢ç¡¬ä»¶å’Œé©±åŠ¨ç¨‹åºã€‚â€œnumRenderTargetsâ€å¿…é¡»è‡³å°‘1ã€‚
         DrawTarget(const std::string& name,
                    int numRenderTargets,
                    DataFormatType renderTargetFormat,

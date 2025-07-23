@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.5 (2024/02/18 13:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.5 (2024/02/18 13:19)
 
 #ifndef MATHEMATICS_ALGEBRA_BANDED_MATRIX_DETAIL_H
 #define MATHEMATICS_ALGEBRA_BANDED_MATRIX_DETAIL_H
@@ -31,7 +31,7 @@ Mathematics::BandedMatrix<Real>::BandedMatrix(int size, int lowerBandsNumber, in
         upperBandsNumber < 0 ||
         size <= upperBandsNumber)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§²ÎÊı¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆå‚æ•°ã€‚"))
     }
 
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -120,7 +120,7 @@ void Mathematics::BandedMatrix<Real>::SetDiagonalBand(const ContainerType& diago
 
     if (diagonalBand.size() != diagonalBandContainer.size())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¶Ô½ÇÏßÔªËØ´óĞ¡²»ÏàµÈ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å¯¹è§’çº¿å…ƒç´ å¤§å°ä¸ç›¸ç­‰ã€‚"s))
     }
 
     diagonalBandContainer = diagonalBand;
@@ -220,7 +220,7 @@ const Real& Mathematics::BandedMatrix<Real>::operator()(int row, int column) con
 
     if (row < 0 || GetSize() <= row || column < 0 || GetSize() <= column)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§ row »ò column ÔÚ BandedMatrixImpl::operator\n"));
+        THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆ row æˆ– column åœ¨ BandedMatrixImpl::operator\n"));
     }
 
     if (column == row)
@@ -307,20 +307,20 @@ typename Mathematics::BandedMatrix<Real>::VariableMatrixType Mathematics::Banded
 
     BandedMatrix result = *this;
 
-    /// ÕıÏòÏû³ı¡£
+    /// æ­£å‘æ¶ˆé™¤ã€‚
     for (auto row = 0; row < size; ++row)
     {
-        /// ÊàÖá±ØĞëÎª·ÇÁã²ÅÄÜ¼ÌĞø¡£
+        /// æ¢è½´å¿…é¡»ä¸ºéé›¶æ‰èƒ½ç»§ç»­ã€‚
         const auto diagonal = result(row, row);
         if (MathType::FAbs(diagonal) <= epsilon)
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("²»´æÔÚÄæ¾ØÕó¡£"))
+            THROW_EXCEPTION(SYSTEM_TEXT("ä¸å­˜åœ¨é€†çŸ©é˜µã€‚"))
         }
 
         Real invDiagonal = MathType::GetValue(1) / diagonal;
         result(row, row) = MathType::GetValue(1);
 
-        /// ½«ĞĞÏà³Ë£¬Ê¹ÆäÓë¶Ô½ÇÏßÏî1Ò»ÖÂ¡£
+        /// å°†è¡Œç›¸ä¹˜ï¼Œä½¿å…¶ä¸å¯¹è§’çº¿é¡¹1ä¸€è‡´ã€‚
         const auto columnMin = row + 1;
         auto columnMax = columnMin + GetUpperBandsNumber();
         if (size < columnMax)
@@ -337,7 +337,7 @@ typename Mathematics::BandedMatrix<Real>::VariableMatrixType Mathematics::Banded
             inverseLexicoArray(row, c) *= invDiagonal;
         }
 
-        /// ¼õÉÙÊ£ÓàµÄĞĞÊı¡£
+        /// å‡å°‘å‰©ä½™çš„è¡Œæ•°ã€‚
         const auto rowMin = row + 1;
         auto rowMax = rowMin + GetLowerBandsNumber();
         if (size < rowMax)
@@ -360,7 +360,7 @@ typename Mathematics::BandedMatrix<Real>::VariableMatrixType Mathematics::Banded
         }
     }
 
-    /// ºóÏòÏû³ı
+    /// åå‘æ¶ˆé™¤
     for (auto row = size - 1; row >= 1; --row)
     {
         const auto rowMax = row - 1;

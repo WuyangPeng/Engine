@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 14:45)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 14:45)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX4_H
 #define MATHEMATICS_ALGEBRA_MATRIX4_H
@@ -47,7 +47,7 @@ namespace Mathematics
         using ContainerType = std::vector<Real>;
 
     public:
-        // Èç¹û±êÖ¾ÎªMatrixFlagsZero£¬´´½¨Áã¾ØÕó£¬·ñÔò´´½¨µ¥Î»¾ØÕó¡£
+        // å¦‚æœæ ‡å¿—ä¸ºMatrixFlagsZeroï¼Œåˆ›å»ºé›¶çŸ©é˜µï¼Œå¦åˆ™åˆ›å»ºå•ä½çŸ©é˜µã€‚
         explicit Matrix4(MatrixInitType flag = MatrixInitType::Zero) noexcept
             : x{ Create(flag, VectorIndex::X) },
               y{ Create(flag, VectorIndex::Y) },
@@ -56,7 +56,7 @@ namespace Mathematics
         {
         }
 
-        // ÊäÈë¾ØÕóÔÚĞĞrºÍÁĞc
+        // è¾“å…¥çŸ©é˜µåœ¨è¡Œrå’Œåˆ—c
         Matrix4(Real member00,
                 Real member01,
                 Real member02,
@@ -80,8 +80,8 @@ namespace Mathematics
         {
         }
 
-        // ´´½¨¾ØÕóÀ´×ÔÊı×éÊı×Ö¡£
-        // ÊäÈëÊı×éÊÇ»ùÓÚMatrixTypeFlagsµÄÊäÈëµÄ½âÊÍ
+        // åˆ›å»ºçŸ©é˜µæ¥è‡ªæ•°ç»„æ•°å­—ã€‚
+        // è¾“å…¥æ•°ç»„æ˜¯åŸºäºMatrixTypeFlagsçš„è¾“å…¥çš„è§£é‡Š
         // MatrixTypeFlagsRow:
         // entry[0..15]={ m00,m01,m02,m03,m10,m11,m12,m13,m20,m21,m22,m23,m30,m31,m32,m33 } [row major]
         // MatrixTypeFlagsColumn:
@@ -90,7 +90,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        // ´´½¨¸÷ÖÖ¾ØÕó¡£
+        // åˆ›å»ºå„ç§çŸ©é˜µã€‚
         void MakeZero() noexcept;
         void MakeIdentity() noexcept;
 
@@ -120,7 +120,7 @@ namespace Mathematics
         // M * rhs
         Matrix4& operator*=(const Matrix4& rhs) noexcept;
 
-        // ÆäËüÔËËã
+        // å…¶å®ƒè¿ç®—
         NODISCARD Matrix4 Inverse(Real epsilon = MathType::GetZeroTolerance()) const;
         NODISCARD Matrix4 Adjoint() const noexcept;
         NODISCARD Real Determinant() const noexcept;
@@ -128,13 +128,13 @@ namespace Mathematics
         NODISCARD Matrix4 GaussianEliminationInverse(Real epsilon = MathType::GetZeroTolerance()) const;
         NODISCARD Real GaussianEliminationDeterminant(Real epsilon = MathType::GetZeroTolerance()) const;
 
-        // Í¶Ó°¾ØÕóµ½Ò»¸öÖ¸¶¨µÄÆ½Ãæ
-        // £¨°üº¬¡°Ô­µã¡±ºÍµ¥Î»³¤¶ÈµÄ¡°ÏòÁ¿¡±£©¡£
+        // æŠ•å½±çŸ©é˜µåˆ°ä¸€ä¸ªæŒ‡å®šçš„å¹³é¢
+        // ï¼ˆåŒ…å«â€œåŸç‚¹â€å’Œå•ä½é•¿åº¦çš„â€œå‘é‡â€ï¼‰ã€‚
         void MakeObliqueProjection(const Vector3Type& normal, const Vector3Type& origin, const Vector3Type& direction) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         void MakePerspectiveProjection(const Vector3Type& normal, const Vector3Type& origin, const Vector3Type& eye);
 
-        // Í¨¹ıÖ¸¶¨µÄÆ½Ãæ·´Éä¾ØÕó¡£
+        // é€šè¿‡æŒ‡å®šçš„å¹³é¢åå°„çŸ©é˜µã€‚
         void MakeReflection(const Vector3Type& normal, const Vector3Type& origin) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         void MakeFrustumMatrix44(Real left, Real right, Real bottom, Real top, Real nearDistance, Real farDistance) noexcept;
@@ -147,7 +147,7 @@ namespace Mathematics
 
         NODISCARD ContainerType GetContainer() const;
 
-        // ÌØÊâ¾ØÕó¡£
+        // ç‰¹æ®ŠçŸ©é˜µã€‚
         NODISCARD static constexpr Matrix4 GetZero()
         {
             return Matrix4{ MatrixInitType::Zero };
@@ -200,7 +200,7 @@ namespace Mathematics
         NODISCARD typename Vector4Type::SetCoordinateFunction GetVectorSetFunction() const noexcept;
 
     private:
-        // ´æ´¢ÎªĞĞÖ÷Ğò¡£
+        // å­˜å‚¨ä¸ºè¡Œä¸»åºã€‚
         Vector4Type x;
         Vector4Type y;
         Vector4Type z;
@@ -233,7 +233,7 @@ namespace Mathematics
     template <typename Real>
     NODISCARD bool Approximate(const Matrix4<Real>& lhs, const Matrix4<Real>& rhs, Real epsilon = Math<Real>::GetZeroTolerance());
 
-    // µ÷ÊÔÊä³ö¡£
+    // è°ƒè¯•è¾“å‡ºã€‚
     template <typename Real>
     std::ostream& operator<<(std::ostream& outFile, const Matrix4<Real>& matrix);
 

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 13:45)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 13:45)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_GET_MINIMUM_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_GET_MINIMUM_H
@@ -61,13 +61,13 @@ namespace Mathematics
             DomainResult(Real beginResult, Real endResult) noexcept;
         };
 
-        // ×îµÍÎ»ÖÃµÄÄ¿Ç°µÄ¹À¼ÆÊÇm_TCurr[0..d-1]¡£
-        // µ±Ç°ÏßËÑË÷µÄ·½ÏòÊÇm_DCurr[0..d-1]¡£´ËÏß±ØĞë¶ÔµÑ¿¨¶û³Ë»ıÓò£¬ÔÚÕâ¸öº¯ÊıÊµÏÖµÄ¹ı³Ì±»²Ã¼ô¡£
-        // Èç¹û¸ÃÏßÊÇm_TCurr + s * m_DCurr£¬²Ã¼ô½á¹ûÊÇÇø¼ä[beginResult£¬endResult]¡£
+        // æœ€ä½ä½ç½®çš„ç›®å‰çš„ä¼°è®¡æ˜¯m_TCurr[0..d-1]ã€‚
+        // å½“å‰çº¿æœç´¢çš„æ–¹å‘æ˜¯m_DCurr[0..d-1]ã€‚æ­¤çº¿å¿…é¡»å¯¹ç¬›å¡å°”ä¹˜ç§¯åŸŸï¼Œåœ¨è¿™ä¸ªå‡½æ•°å®ç°çš„è¿‡ç¨‹è¢«è£å‰ªã€‚
+        // å¦‚æœè¯¥çº¿æ˜¯m_TCurr + s * m_DCurrï¼Œè£å‰ªç»“æœæ˜¯åŒºé—´[beginResultï¼ŒendResult]ã€‚
         NODISCARD DomainResult ComputeDomain(const Container& begin, const Container& end);
 
-        // Minimize1<Real>¶ÔÏóĞèÒªC·ç¸ñµÄº¯ÊıÀ´Ö´ĞĞËüµÄÒ»Î¬ËÑË÷
-        // £¨ÑØÏßm_TCurr + s * m_DCurr£©¡£
+        // Minimize1<Real>å¯¹è±¡éœ€è¦Cé£æ ¼çš„å‡½æ•°æ¥æ‰§è¡Œå®ƒçš„ä¸€ç»´æœç´¢
+        // ï¼ˆæ²¿çº¿m_TCurr + s * m_DCurrï¼‰ã€‚
         NODISCARD static Real LineFunction(Real value, const MinimizeNGetMinimum* userData);
 
         NODISCARD Real GetDirectionCurrent(int index) const;

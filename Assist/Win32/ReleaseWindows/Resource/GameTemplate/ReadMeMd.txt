@@ -1,10 +1,10 @@
-@ingroup group_Documentation
+ï»¿@ingroup group_Documentation
 
 ---------------------------
-$ProjectChineseName$£¨$ProjectDescribeName$£©
+$ProjectChineseName$ï¼ˆ$ProjectDescribeName$ï¼‰
 
 ----------------------------
-$ProjectChineseName$°üº¬$ModuleCount$¸öÄ£¿é£º
+$ProjectChineseName$åŒ…å«$ModuleCount$ä¸ªæ¨¡å—ï¼š
 
 ---------------------------
 

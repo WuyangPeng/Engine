@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 15:23)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 15:23)
 
 #ifndef FRAMEWORK_APPLICATION_KEY_IDENTIFIERS_H
 #define FRAMEWORK_APPLICATION_KEY_IDENTIFIERS_H
@@ -17,8 +17,8 @@
 #include "System/OpenGL/Flags/GlutKeyCodesFlags.h"
 #include "System/Windows/Flags/WindowsKeyCodesFlags.h"
 
-// °´¼ü±êÊ¶·û¡£ÕâĞ©ÊÇÌØ¶¨ÓÚÆ½Ì¨µÄ¡£
-// °üº¬Õâ¸öÍ·ÎÄ¼şĞèÒª¿¼ÂÇopenglµÄ°üº¬Ë³Ğò¡£ÏÈ°üº¬Õâ¸öÍ·ÎÄ¼ş£¬ÔÙ°üº¬freeglutµÈopenglÎÄ¼ş¡£
+// æŒ‰é”®æ ‡è¯†ç¬¦ã€‚è¿™äº›æ˜¯ç‰¹å®šäºå¹³å°çš„ã€‚
+// åŒ…å«è¿™ä¸ªå¤´æ–‡ä»¶éœ€è¦è€ƒè™‘openglçš„åŒ…å«é¡ºåºã€‚å…ˆåŒ…å«è¿™ä¸ªå¤´æ–‡ä»¶ï¼Œå†åŒ…å«freeglutç­‰openglæ–‡ä»¶ã€‚
 namespace Framework
 {
     struct WindowKeyIdentifiers

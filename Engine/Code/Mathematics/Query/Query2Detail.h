@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:31)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:31)
 
 #ifndef MATHEMATICS_QUERY_QUERY2_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY2_DETAIL_H
@@ -111,7 +111,7 @@ template <typename Real>
 Mathematics::TriangleQueryType Mathematics::Query2<Real>::ToTriangle(const Vector2Type& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_3(ToLine(lhsVerticesIndex, mhsVerticesIndex, rhsVerticesIndex) != LineQueryType::Right, "Èı½ÇĞÎ¶¥µã²»ÊÇÄæÊ±ÕëË³Ğò£¡");
+    MATHEMATICS_ASSERTION_3(ToLine(lhsVerticesIndex, mhsVerticesIndex, rhsVerticesIndex) != LineQueryType::Right, "ä¸‰è§’å½¢é¡¶ç‚¹ä¸æ˜¯é€†æ—¶é’ˆé¡ºåºï¼");
 
     const auto sign0 = ToLine(testVector, mhsVerticesIndex, rhsVerticesIndex);
     if (sign0 == LineQueryType::Right)

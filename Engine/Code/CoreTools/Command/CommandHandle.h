@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/04/24 13:17)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/04/24 13:17)
 
 #ifndef CORE_TOOLS_COMMAND_COMMAND_HANDLE_H
 #define CORE_TOOLS_COMMAND_COMMAND_HANDLE_H
@@ -27,12 +27,12 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        /// ·µ»ØµÚÒ»¸öÎ´´¦Àí²ÎÊıµÄÃû×Ö¡£
+        /// è¿”å›ç¬¬ä¸€ä¸ªæœªå¤„ç†å‚æ•°çš„åå­—ã€‚
         NODISCARD std::string ExcessArguments() const;
         NODISCARD int GetExcessArgumentsCount() const noexcept;
 
-        /// ÉèÖÃÊı×Ö²ÎÊıµÄ·¶Î§¡£
-        /// Èç¹û·¶Î§ÊÇ±ØĞèµÄ£¬ËûÃÇ±ØĞëÎªÃ¿¸ö²ÎÊıÉèÖÃ¡£
+        /// è®¾ç½®æ•°å­—å‚æ•°çš„èŒƒå›´ã€‚
+        /// å¦‚æœèŒƒå›´æ˜¯å¿…éœ€çš„ï¼Œä»–ä»¬å¿…é¡»ä¸ºæ¯ä¸ªå‚æ•°è®¾ç½®ã€‚
         CommandHandle& SetMinValue(double value) noexcept;
         CommandHandle& SetMaxValue(double value) noexcept;
         CommandHandle& SetInfimumValue(double value) noexcept;
@@ -40,13 +40,13 @@ namespace CoreTools
 
         void ClearBoundary() noexcept;
 
-        /// ÏÂÁĞ·½·¨Ã¿¸öµÄ·µ»ØÖµÊÇ²ÎÊıÊı×éÖĞµÄË÷ÒıÑ¡ÏîºÍÖµ¡£
+        /// ä¸‹åˆ—æ–¹æ³•æ¯ä¸ªçš„è¿”å›å€¼æ˜¯å‚æ•°æ•°ç»„ä¸­çš„ç´¢å¼•é€‰é¡¹å’Œå€¼ã€‚
 
-        /// Ê¹ÓÃ²¼¶û·½·¨ÔÚ²»²ÉÈ¡ÈÎºÎ²ÎÊıµÄÑ¡Ïî£¬ÀıÈçÏÂÃæµÄÀı×Ó
+        /// ä½¿ç”¨å¸ƒå°”æ–¹æ³•åœ¨ä¸é‡‡å–ä»»ä½•å‚æ•°çš„é€‰é¡¹ï¼Œä¾‹å¦‚ä¸‹é¢çš„ä¾‹å­
         /// MyProgram -debug -x 10 -y 20 -fileName fileName
-        /// Ñ¡Ïî -debug Ã»ÓĞ²ÎÊı¡£
+        /// é€‰é¡¹ -debug æ²¡æœ‰å‚æ•°ã€‚
 
-        /// ·µ»Ø´æÔÚµÄÑ¡Ïî
+        /// è¿”å›å­˜åœ¨çš„é€‰é¡¹
         NODISCARD bool GetBoolean(const std::string& name) const;
 
         NODISCARD int GetInteger(const std::string& name) const;
@@ -62,16 +62,16 @@ namespace CoreTools
         NODISCARD bool IsArgumentOutOfRange(double value) const noexcept;
 
     private:
-        /// ÃüÁîĞĞĞÅÏ¢¡£
+        /// å‘½ä»¤è¡Œä¿¡æ¯ã€‚
         CommandLineInformation commandLineInformation;
 
-        /// ²ÎÊıµÄ±ß½ç¼ì²é¡£
-        double small;  /// ÊıÖµ²ÎÊıµÄÏÂ½ç (min »ò inf)
-        double large;  /// ÊıÖµ²ÎÊıµÄÉÏ½ç (max »ò sup)
-        bool minSet;  /// Èç¹ûÎªÕæ£¬±È½Ï£ºsmall <= arg
-        bool maxSet;  /// Èç¹ûÎªÕæ£¬±È½Ï£ºarg <= large
-        bool infimumSet;  /// Èç¹ûÎªÕæ£¬±È½Ï£ºsmall < arg
-        bool supremumSet;  /// Èç¹ûÎªÕæ£¬±È½Ï£ºarg < large
+        /// å‚æ•°çš„è¾¹ç•Œæ£€æŸ¥ã€‚
+        double small;  /// æ•°å€¼å‚æ•°çš„ä¸‹ç•Œ (min æˆ– inf)
+        double large;  /// æ•°å€¼å‚æ•°çš„ä¸Šç•Œ (max æˆ– sup)
+        bool minSet;  /// å¦‚æœä¸ºçœŸï¼Œæ¯”è¾ƒï¼šsmall <= arg
+        bool maxSet;  /// å¦‚æœä¸ºçœŸï¼Œæ¯”è¾ƒï¼šarg <= large
+        bool infimumSet;  /// å¦‚æœä¸ºçœŸï¼Œæ¯”è¾ƒï¼šsmall < arg
+        bool supremumSet;  /// å¦‚æœä¸ºçœŸï¼Œæ¯”è¾ƒï¼šarg < large
     };
 }
 

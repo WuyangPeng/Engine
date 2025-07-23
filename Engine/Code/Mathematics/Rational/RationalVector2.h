@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:29)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:29)
 
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_VECTOR2_H
 #define MATHEMATICS_RATIONAL_RATIONAL_VECTOR2_H
@@ -50,7 +50,7 @@ namespace Mathematics
         RationalVector2& operator*=(const Rational& rational);
         RationalVector2& operator/=(const Rational& rational);
 
-        // ·µ»Ø (y,-x).
+        // è¿”å› (y,-x).
         NODISCARD RationalVector2 Perp() const;
 
         NODISCARD Rational SquaredLength() const;
@@ -59,11 +59,11 @@ namespace Mathematics
         RationalVectorType tuple;
     };
 
-    // ·µ»Ø Dot(lhs,rhs).
+    // è¿”å› Dot(lhs,rhs).
     template <int IntSize>
     NODISCARD SignRational<IntSize> Dot(const RationalVector2<IntSize>& lhs, const RationalVector2<IntSize>& rhs);
 
-    // ·µ»Ø Cross((lhs.x,lhs.y,0),(rhs.x,rhs.y,0)) = lhs.x*rhs.y - lhs.y*rhs.x
+    // è¿”å› Cross((lhs.x,lhs.y,0),(rhs.x,rhs.y,0)) = lhs.x*rhs.y - lhs.y*rhs.x
     template <int IntSize>
     NODISCARD SignRational<IntSize> DotPerp(const RationalVector2<IntSize>& lhs, const RationalVector2<IntSize>& rhs);
 

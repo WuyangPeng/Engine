@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #ifndef C_S_V_CONFIGURE_HERO_H
 #define C_S_V_CONFIGURE_HERO_H
@@ -59,12 +59,12 @@ namespace CSVConfigure
 
     private:
         int id;  // Id
-        int nextId;  // ÏÂÒ»¼¶Id
-        int reward;  // ¹ı¹Ø½±Àø
-        String heroName;  // Ó¢ĞÛÃû³Æ
-        int64_t uniqueIdentifier;  // Î¨Ò»±êÊ¶·û
-        CoreTools::Vector4 position;  // Î»ÖÃ
-        CharContainer describe;  // ÃèÊö
+        int nextId;  // ä¸‹ä¸€çº§Id
+        int reward;  // è¿‡å…³å¥–åŠ±
+        String heroName;  // è‹±é›„åç§°
+        int64_t uniqueIdentifier;  // å”¯ä¸€æ ‡è¯†ç¬¦
+        CoreTools::Vector4 position;  // ä½ç½®
+        CharContainer describe;  // æè¿°
     };
 }
 

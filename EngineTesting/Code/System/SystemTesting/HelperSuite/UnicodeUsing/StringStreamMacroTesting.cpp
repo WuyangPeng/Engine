@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/07 15:23)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/07 15:23)
 
 #include "StringStreamMacroTesting.h"
 #include "System/Helper/UnicodeUsing.h"
@@ -39,7 +39,7 @@ void System::StringStreamMacroTesting::MainTest()
 void System::StringStreamMacroTesting::StringStreamMacroTest() const
 {
     OStringStream testOStringStream{};
-    testOStringStream << SYSTEM_TEXT("ÇëÊäÈëÒ»ĞĞ²âÊÔÊı¾İ£º");
+    testOStringStream << SYSTEM_TEXT("è¯·è¾“å…¥ä¸€è¡Œæµ‹è¯•æ•°æ®ï¼š");
 
     OStream& testOStream{ COUT };
     testOStream << testOStringStream.str();
@@ -52,7 +52,7 @@ void System::StringStreamMacroTesting::StringStreamMacroTest() const
 
     StringStream testStringStream{};
     Stream& testStream{ testStringStream };
-    testStringStream << SYSTEM_TEXT("ÕâÀïÏÔÊ¾¸Õ²ÅÊäÈëµÄÊı¾İ£º");
+    testStringStream << SYSTEM_TEXT("è¿™é‡Œæ˜¾ç¤ºåˆšæ‰è¾“å…¥çš„æ•°æ®ï¼š");
     testStream << stringView << TChar{ '\n' };
 
     CERR << testStringStream.str();
@@ -66,7 +66,7 @@ void System::StringStreamMacroTesting::StringStreamMacroTest() const
 
 void System::StringStreamMacroTesting::PrintTipsMessage()
 {
-    GetStream() << "Õâ¸ö²âÊÔĞèÒª¿ØÖÆÌ¨ÊäÈë¡£\n";
+    GetStream() << "è¿™ä¸ªæµ‹è¯•éœ€è¦æ§åˆ¶å°è¾“å…¥ã€‚\n";
 
     SystemPause();
 }

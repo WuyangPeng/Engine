@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:53)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:53)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_CLASSIFY_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_CLASSIFY_H
@@ -28,16 +28,16 @@ namespace Mathematics
         using MathType = typename ParentType::MathType;
 
     public:
-        // ÏßĞÔ·ÖÁ¿µÄ·ÖÀà¡£
-        // ÏßÊÇP0 + s * D0ºÍP1 + s * D1¡£
-        // µ±Ïß²»Ïà½»Ê±£¬·µ»ØÖµÎªIntersectionType::Empty£¬
-        // µ±ÏßÖ»ÓĞÎ¨Ò»µÄ½»µãÊ±£¬·µ»ØÖµÎªIntersectionType::Point£¬
-        // »òµ±ÏßÖØµşÊ±£¬·µ»ØÖµÎªIntersectionType::Line¡£
-        // µ±Ö»ÓĞÎ¨Ò»µÄ½»µãÊ±£¬µãÎªP0 + s[0] * D0 = P1 + s[1] * D1¡£
-        // 'epsilon'²ÎÊıÊÇÓÃÓÚ²âÊÔÆ½ĞĞ»ò´¹Ö±ÏòÁ¿µÄ·Ç¸ºÊı¡£
-        // ÔÚTest() ºÍ Find() º¯ÊıÖĞÊ¹ÓÃµÄÖµÊÇm_Epsilon¡£
-        // Èç¹ûÄãÏëÖªµÀs[]Öµ£¬´«µİisCalculateParameterÎª'true'¡£
-        // ´úÂëÓÃÓÚÉäÏß-ÉäÏß£¬Ö±Ïß-Ö±ÏßºÍÏß¶Î-Ïß¶ÎµÄÏà½»²âÊÔ¹²Ïí¡£
+        // çº¿æ€§åˆ†é‡çš„åˆ†ç±»ã€‚
+        // çº¿æ˜¯P0 + s * D0å’ŒP1 + s * D1ã€‚
+        // å½“çº¿ä¸ç›¸äº¤æ—¶ï¼Œè¿”å›å€¼ä¸ºIntersectionType::Emptyï¼Œ
+        // å½“çº¿åªæœ‰å”¯ä¸€çš„äº¤ç‚¹æ—¶ï¼Œè¿”å›å€¼ä¸ºIntersectionType::Pointï¼Œ
+        // æˆ–å½“çº¿é‡å æ—¶ï¼Œè¿”å›å€¼ä¸ºIntersectionType::Lineã€‚
+        // å½“åªæœ‰å”¯ä¸€çš„äº¤ç‚¹æ—¶ï¼Œç‚¹ä¸ºP0 + s[0] * D0 = P1 + s[1] * D1ã€‚
+        // 'epsilon'å‚æ•°æ˜¯ç”¨äºæµ‹è¯•å¹³è¡Œæˆ–å‚ç›´å‘é‡çš„éè´Ÿæ•°ã€‚
+        // åœ¨Test() å’Œ Find() å‡½æ•°ä¸­ä½¿ç”¨çš„å€¼æ˜¯m_Epsilonã€‚
+        // å¦‚æœä½ æƒ³çŸ¥é“s[]å€¼ï¼Œä¼ é€’isCalculateParameterä¸º'true'ã€‚
+        // ä»£ç ç”¨äºå°„çº¿-å°„çº¿ï¼Œç›´çº¿-ç›´çº¿å’Œçº¿æ®µ-çº¿æ®µçš„ç›¸äº¤æµ‹è¯•å…±äº«ã€‚
         StaticTestIntersectorLine2Classify(const Vector2Type& lhsOrigin,
                                            const Vector2Type& lhsDirection,
                                            const Vector2Type& rhsOrigin,

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:21)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:21)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_BOX3_SPHERE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_BOX3_SPHERE3_DETAIL_H
@@ -55,7 +55,7 @@ Mathematics::Sphere3<Real> Mathematics::StaticTestIntersectorBox3Sphere3<Real>::
 template <typename Real>
 void Mathematics::StaticTestIntersectorBox3Sphere3<Real>::Test()
 {
-    // Í¨¹ı½«ÇòÌå×ª»»Îª¸Ã×ø±êÏµÀ´²âÊÔºĞ×Ó×ø±êÏµÖĞµÄ½»¼¯¡£
+    // é€šè¿‡å°†çƒä½“è½¬æ¢ä¸ºè¯¥åæ ‡ç³»æ¥æµ‹è¯•ç›’å­åæ ‡ç³»ä¸­çš„äº¤é›†ã€‚
     auto centerDiff = sphere.GetCenter() - box.GetCenter();
 
     auto centerDiffX = MathType::FAbs(Vector3ToolsType::DotProduct(centerDiff, box.GetAxis(0)));
@@ -71,13 +71,13 @@ void Mathematics::StaticTestIntersectorBox3Sphere3<Real>::Test()
         {
             if (centerDiffZ <= box.GetExtent(2))
             {
-                // ÇòÌåÖĞĞÄÔÚ¿òÄÚ
+                // çƒä½“ä¸­å¿ƒåœ¨æ¡†å†…
                 this->SetIntersectionType(IntersectionType::Other);
                 return;
             }
             else
             {
-                // ÓëÃæzµÄÇ±ÔÚÇòÃæÏà½»¡£
+                // ä¸é¢zçš„æ½œåœ¨çƒé¢ç›¸äº¤ã€‚
                 if (diffZ <= sphere.GetRadius())
                 {
                     this->SetIntersectionType(IntersectionType::Other);
@@ -104,7 +104,7 @@ void Mathematics::StaticTestIntersectorBox3Sphere3<Real>::Test()
             }
             else
             {
-                // Ç±ÔÚµÄÇòÃæÓë±ßµÄ½»µã£¬Æä±ßÓÉÃæyºÍzĞÎ³É¡£
+                // æ½œåœ¨çš„çƒé¢ä¸è¾¹çš„äº¤ç‚¹ï¼Œå…¶è¾¹ç”±é¢yå’Œzå½¢æˆã€‚
                 auto radiusSqr = sphere.GetRadius() * sphere.GetRadius();
                 if (diffY * diffY + diffZ * diffZ <= radiusSqr)
                 {
@@ -123,7 +123,7 @@ void Mathematics::StaticTestIntersectorBox3Sphere3<Real>::Test()
         {
             if (centerDiffZ <= box.GetExtent(2))
             {
-                // ÓëÃæxµÄÇ±ÔÚÇòÃæÏà½»¡£
+                // ä¸é¢xçš„æ½œåœ¨çƒé¢ç›¸äº¤ã€‚
                 if (diffX <= sphere.GetRadius())
                 {
                     this->SetIntersectionType(IntersectionType::Other);
@@ -135,7 +135,7 @@ void Mathematics::StaticTestIntersectorBox3Sphere3<Real>::Test()
             }
             else
             {
-                // Ç±ÔÚµÄÇòÃæ±ßÔµÏà½»£¬Æä±ßÓÉÃæxºÍzĞÎ³É¡£
+                // æ½œåœ¨çš„çƒé¢è¾¹ç¼˜ç›¸äº¤ï¼Œå…¶è¾¹ç”±é¢xå’Œzå½¢æˆã€‚
                 auto radiusSqr = sphere.GetRadius() * sphere.GetRadius();
                 if (diffX * diffX + diffZ * diffZ <= radiusSqr)
                 {
@@ -151,7 +151,7 @@ void Mathematics::StaticTestIntersectorBox3Sphere3<Real>::Test()
         {
             if (centerDiffZ <= box.GetExtent(2))
             {
-                // Ç±ÔÚµÄÇòÃæÓë±ßµÄ½»µã£¬Æä±ßÓÉÃæxºÍyĞÎ³É¡£
+                // æ½œåœ¨çš„çƒé¢ä¸è¾¹çš„äº¤ç‚¹ï¼Œå…¶è¾¹ç”±é¢xå’Œyå½¢æˆã€‚
                 auto radiusSqr = sphere.GetRadius() * sphere.GetRadius();
                 if (diffX * diffX + diffY * diffY <= radiusSqr)
                 {
@@ -164,7 +164,7 @@ void Mathematics::StaticTestIntersectorBox3Sphere3<Real>::Test()
             }
             else
             {
-                // ÓÉÃæx£¬y£¬zĞÎ³ÉµÄ¹Õ½Ç´¦µÄÇ±ÔÚÇòÌå-¶¥µã½»µã¡£
+                // ç”±é¢xï¼Œyï¼Œzå½¢æˆçš„æ‹è§’å¤„çš„æ½œåœ¨çƒä½“-é¡¶ç‚¹äº¤ç‚¹ã€‚
                 auto radiusSqr = sphere.GetRadius() * sphere.GetRadius();
                 if (diffX * diffX + diffY * diffY + diffZ * diffZ <= radiusSqr)
                 {

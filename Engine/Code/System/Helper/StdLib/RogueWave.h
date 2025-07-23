@@ -1,18 +1,18 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 21:43)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 21:43)
 
 #ifndef SYSTEM_HELPER_ROGUE_WAVE_H
 #define SYSTEM_HELPER_ROGUE_WAVE_H
 
 #if defined(__STD_RWCOMPILER_H__) || defined(_RWSTD_VER)
 
-    ///  Rogue Wave ±ê×¼¿â
+    ///  Rogue Wave æ ‡å‡†åº“
 
     #define TCRE_ROGUE_WAVE_STD_LIB 1
 
@@ -38,21 +38,21 @@
 
     #ifndef _RWSTD_VER
 
-        #define TCRE_SYSTEM_STD_LIB "Rogue Wave ±ê×¼¿â°æ±¾ (Î´Öª°æ±¾)"
+        #define TCRE_SYSTEM_STD_LIB "Rogue Wave æ ‡å‡†åº“ç‰ˆæœ¬ (æœªçŸ¥ç‰ˆæœ¬)"
 
     #elif _RWSTD_VER < 0x04010200
 
-        #define TCRE_SYSTEM_STD_LIB "Rogue Wave ±ê×¼¿â°æ±¾ " SYSTEM_STRINGIZE(TCRE_CPP_LIB_VERSION)
+        #define TCRE_SYSTEM_STD_LIB "Rogue Wave æ ‡å‡†åº“ç‰ˆæœ¬ " SYSTEM_STRINGIZE(TCRE_CPP_LIB_VERSION)
 
     #else  // 0x04010200 <= _RWSTD_VER
 
         #ifdef _RWSTD_VER_STR
 
-            #define TCRE_SYSTEM_STD_LIB "Apache STDCXX ±ê×¼¿â°æ±¾ " _RWSTD_VER_STR
+            #define TCRE_SYSTEM_STD_LIB "Apache STDCXX æ ‡å‡†åº“ç‰ˆæœ¬ " _RWSTD_VER_STR
 
         #else  // !_RWSTD_VER_STR
 
-            #define TCRE_SYSTEM_STD_LIB "Apache STDCXX ±ê×¼¿â°æ±¾ " SYSTEM_STRINGIZE(TCRE_CPP_LIB_VERSION)
+            #define TCRE_SYSTEM_STD_LIB "Apache STDCXX æ ‡å‡†åº“ç‰ˆæœ¬ " SYSTEM_STRINGIZE(TCRE_CPP_LIB_VERSION)
 
         #endif  // _RWSTD_VER_STR
 

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 15:49)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 15:49)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_LEXICO_ARRAY2_H
 #define CORE_TOOLS_MEMORY_TOOLS_LEXICO_ARRAY2_H
@@ -18,13 +18,13 @@
 
 namespace CoreTools
 {
-    /// Ò»¸öÄ£°åÀà£¬ÓÃÓÚÌá¹©·ûºÏĞĞÖ÷Ğò£¨RowMajor = true£©»òÁĞÖ÷Ğò£¨RowMajor = false£©µÄ¶şÎ¬Êı×é·ÃÎÊ¡£
+    /// ä¸€ä¸ªæ¨¡æ¿ç±»ï¼Œç”¨äºæä¾›ç¬¦åˆè¡Œä¸»åºï¼ˆRowMajor = trueï¼‰æˆ–åˆ—ä¸»åºï¼ˆRowMajor = falseï¼‰çš„äºŒç»´æ•°ç»„è®¿é—®ã€‚
     template <bool RowMajor, typename Iter, int... Dimensions>
     class LexicoArray2
     {
     };
 
-    /// Êı×éÎ¬¶ÈÖ»ÓĞÔÚÔËĞĞÊ±²ÅÖªµÀ¡£
+    /// æ•°ç»„ç»´åº¦åªæœ‰åœ¨è¿è¡Œæ—¶æ‰çŸ¥é“ã€‚
     template <typename Iter>
     class LexicoArray2<true, Iter>
     {
@@ -87,7 +87,7 @@ namespace CoreTools
         SpanIteratorType matrix;
     };
 
-    /// Êı×éÎ¬¶ÈÔÚ±àÒëÊ±ÊÇÒÑÖªµÄ¡£
+    /// æ•°ç»„ç»´åº¦åœ¨ç¼–è¯‘æ—¶æ˜¯å·²çŸ¥çš„ã€‚
     template <typename Iter, int NumRows, int NumColumns>
     class LexicoArray2<true, Iter, NumRows, NumColumns>
     {

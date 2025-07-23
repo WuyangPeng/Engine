@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 16:37)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 16:37)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_TRIANGLE3_RECTANGLE3_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_TRIANGLE3_RECTANGLE3_DETAIL_H
@@ -61,7 +61,7 @@ typename Mathematics::DistanceTriangle3Rectangle3<Real>::DistanceResult Mathemat
     Vector3Type closestPoint0{};
     Vector3Type closestPoint1{};
 
-    // ±È½ÏÈı½ÇĞÎµÄ±ßÔµÓë¾ØĞÎµÄÄÚ²¿¡£
+    // æ¯”è¾ƒä¸‰è§’å½¢çš„è¾¹ç¼˜ä¸çŸ©å½¢çš„å†…éƒ¨ã€‚
     auto sqrDist = MathType::maxReal;
 
     for (auto index0 = 2, index1 = 0; index1 < 3; index0 = index1++)
@@ -77,16 +77,16 @@ typename Mathematics::DistanceTriangle3Rectangle3<Real>::DistanceResult Mathemat
         if (auto squared = distanceSegment3Rectangle3.GetSquared();
             squared.GetDistance() < sqrDist)
         {
-            // Èı½ÇĞÎµãÔÚclosestPoint0ÖĞ±¨¸æ£¬¶ø¾ØĞÎµãÔÚclosestPoint1ÖĞ±¨¸æ¡£
-            // distanceSegment3Rectangle3¼ÆËãÆ÷ÊÊÓÃÓÚtriangleEdge-rectangle£¬
-            // Òò´Ë±ØĞë°´ÈçÏÂËùÊ¾µ÷ÓÃGetLhsClosestPoint()ºÍGetRhsClosestPoint()¡£
+            // ä¸‰è§’å½¢ç‚¹åœ¨closestPoint0ä¸­æŠ¥å‘Šï¼Œè€ŒçŸ©å½¢ç‚¹åœ¨closestPoint1ä¸­æŠ¥å‘Šã€‚
+            // distanceSegment3Rectangle3è®¡ç®—å™¨é€‚ç”¨äºtriangleEdge-rectangleï¼Œ
+            // å› æ­¤å¿…é¡»æŒ‰å¦‚ä¸‹æ‰€ç¤ºè°ƒç”¨GetLhsClosestPoint()å’ŒGetRhsClosestPoint()ã€‚
             closestPoint0 = squared.GetLhsClosestPoint();
             closestPoint1 = squared.GetRhsClosestPoint();
             sqrDist = squared.GetDistance();
         }
     }
 
-    // ±È½Ï¾ØĞÎµÄ±ßÔµÓëÈı½ÇĞÎµÄÄÚ²¿¡£
+    // æ¯”è¾ƒçŸ©å½¢çš„è¾¹ç¼˜ä¸ä¸‰è§’å½¢çš„å†…éƒ¨ã€‚
     for (auto index1 = 0; index1 < 2; ++index1)
     {
         for (auto index0 = -1; index0 <= 1; index0 += 2)
@@ -102,9 +102,9 @@ typename Mathematics::DistanceTriangle3Rectangle3<Real>::DistanceResult Mathemat
             if (auto squared = distanceSegment3Triangle3.GetSquared();
                 squared.GetDistance() < sqrDist)
             {
-                // ¾ØĞÎµãÔÚclosestPoint0ÖĞ±¨¸æ£¬¶øÈı½ÇĞÎµãÔÚclosestPoint1ÖĞ±¨¸æ¡£
-                // distanceSegment3Triangle3¼ÆËãÆ÷ÊÊÓÃÓÚrectangleEdge-triangle£¬
-                // Òò´Ë±ØĞë°´ÈçÏÂËùÊ¾µ÷ÓÃGetRhsClosestPoint()ºÍGetLhsClosestPoint()¡£
+                // çŸ©å½¢ç‚¹åœ¨closestPoint0ä¸­æŠ¥å‘Šï¼Œè€Œä¸‰è§’å½¢ç‚¹åœ¨closestPoint1ä¸­æŠ¥å‘Šã€‚
+                // distanceSegment3Triangle3è®¡ç®—å™¨é€‚ç”¨äºrectangleEdge-triangleï¼Œ
+                // å› æ­¤å¿…é¡»æŒ‰å¦‚ä¸‹æ‰€ç¤ºè°ƒç”¨GetRhsClosestPoint()å’ŒGetLhsClosestPoint()ã€‚
                 closestPoint0 = squared.GetRhsClosestPoint();
                 closestPoint1 = squared.GetLhsClosestPoint();
                 sqrDist = squared.GetDistance();

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 21:48)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 21:48)
 
 #ifndef SYSTEM_HELPER_NOEXCEPT_H
 #define SYSTEM_HELPER_NOEXCEPT_H
@@ -15,14 +15,14 @@
 
 namespace System
 {
-    /// ²¶»ñËùÓÐÒì³£¡£
+    /// æ•èŽ·æ‰€æœ‰å¼‚å¸¸ã€‚
     ///
-    /// ÕâÐ©º¯ÊýµÄÄ¿µÄÊÇÎªÁËÏû³ý±àÒëÆ÷¾¯¸æ£¬²¢²»ÊÇÎªÁËÊµÏÖnoexceptº¯Êý¡£
-    /// Ö»ÔÊÐíÔÚÒÔÏÂÇé¿öÏÂÊ¹ÓÃ£º
-    /// 1. Îö¹¹º¯Êýµ÷ÓÃµÄº¯Êý¡£
-    /// 2. º¯ÊýÅ×³öÒì³£µÄ¸ÅÂÊºÜµÍ£¨ÈçÄÚ´æ²»×ã£©£¬¶¨Òå³Énoexcept£¬¿ÉÒÔ·½±ãÉÏ²ãº¯ÊýµÄµ÷ÓÃ¡£
-    /// Èç¹û²»ÊÇSystem¿âµÄº¯Êý£¬»ò²¶»ñÈÕÖ¾¿âµÄÒì³££¬
-    /// ¾¡Á¿²»ÒªÊ¹ÓÃÕâÐ©º¯Êý£¬Ê¹ÓÃNoexceptUseLogº¯ÊýÌæ´ú¡£
+    /// è¿™äº›å‡½æ•°çš„ç›®çš„æ˜¯ä¸ºäº†æ¶ˆé™¤ç¼–è¯‘å™¨è­¦å‘Šï¼Œå¹¶ä¸æ˜¯ä¸ºäº†å®žçŽ°noexceptå‡½æ•°ã€‚
+    /// åªå…è®¸åœ¨ä»¥ä¸‹æƒ…å†µä¸‹ä½¿ç”¨ï¼š
+    /// 1. æžæž„å‡½æ•°è°ƒç”¨çš„å‡½æ•°ã€‚
+    /// 2. å‡½æ•°æŠ›å‡ºå¼‚å¸¸çš„æ¦‚çŽ‡å¾ˆä½Žï¼ˆå¦‚å†…å­˜ä¸è¶³ï¼‰ï¼Œå®šä¹‰æˆnoexceptï¼Œå¯ä»¥æ–¹ä¾¿ä¸Šå±‚å‡½æ•°çš„è°ƒç”¨ã€‚
+    /// å¦‚æžœä¸æ˜¯Systemåº“çš„å‡½æ•°ï¼Œæˆ–æ•èŽ·æ—¥å¿—åº“çš„å¼‚å¸¸ï¼Œ
+    /// å°½é‡ä¸è¦ä½¿ç”¨è¿™äº›å‡½æ•°ï¼Œä½¿ç”¨NoexceptUseLogå‡½æ•°æ›¿ä»£ã€‚
 
     template <typename Function, typename... T>
     void NoexceptNoReturn(Function function, T&&... parameter) noexcept
@@ -33,7 +33,7 @@ namespace System
         }
         catch (...)
         {
-            OutputDebugStringWithTChar(SYSTEM_TEXT("NoexceptNoReturn Å×³öÒì³£¡£"));
+            OutputDebugStringWithTChar(SYSTEM_TEXT("NoexceptNoReturn æŠ›å‡ºå¼‚å¸¸ã€‚"));
         }
     }
 
@@ -46,7 +46,7 @@ namespace System
         }
         catch (...)
         {
-            OutputDebugStringWithTChar(SYSTEM_TEXT("Noexcept Å×³öÒì³£¡£"));
+            OutputDebugStringWithTChar(SYSTEM_TEXT("Noexcept æŠ›å‡ºå¼‚å¸¸ã€‚"));
 
             return defaultResult;
         }

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/28 17:56)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/28 17:56)
 
 #include "Rendering/RenderingExport.h"
 
@@ -76,10 +76,10 @@ bool Rendering::Spatial::UpdateWorldData(double applicationTime)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    // ¸üÐÂÓë¸Ã¶ÔÏóÏà¹ØµÄÈÎºÎ¿ØÖÆÆ÷¡£
+    // æ›´æ–°ä¸Žè¯¥å¯¹è±¡ç›¸å…³çš„ä»»ä½•æŽ§åˆ¶å™¨ã€‚
     const auto result = ParentType::Update(applicationTime);
 
-    // ¸üÐÂÊÀ½ç±ä»»¡£
+    // æ›´æ–°ä¸–ç•Œå˜æ¢ã€‚
     if (!impl->GetWorldTransformIsCurrent())
     {
         if (const auto parent = GetParent();
@@ -321,5 +321,5 @@ Rendering::PickRecordContainer Rendering::Spatial::ExecuteRecursive(const APoint
 
     System::UnusedFunction(origin, direction, tMin, tMax, numThreads, maxDistance);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("ÎÞÐ§¶ÔÏóÀàÐÍ¡£"))
+    THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆå¯¹è±¡ç±»åž‹ã€‚"))
 }

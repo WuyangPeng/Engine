@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/13 11:00)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/13 11:00)
 
 #include "LogTriggerAssertMacroTesting.h"
 #include "System/Time/DeltaTime.h"
@@ -34,12 +34,12 @@ void CoreTools::LogTriggerAssertMacroTesting::MainTest()
 
 void CoreTools::LogTriggerAssertMacroTesting::TriggerAssertTest() noexcept
 {
-    LOG_SINGLETON_APPENDER(Info, CoreTools, SYSTEM_TEXT("²âÊÔLogMacro£¬ÕâÌõÈÕÖ¾»á´¥·¢¶ÏÑÔ£¬Çë°´¡°·ñ¡±È¡Ïû¡£"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+    LOG_SINGLETON_APPENDER(Info, CoreTools, SYSTEM_TEXT("æµ‹è¯•LogMacroï¼Œè¿™æ¡æ—¥å¿—ä¼šè§¦å‘æ–­è¨€ï¼Œè¯·æŒ‰â€œå¦â€å–æ¶ˆã€‚"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
 }
 
 void CoreTools::LogTriggerAssertMacroTesting::PrintTipsMessage()
 {
-    GetStream() << "Õâ¸ö²âÊÔ»á´¥·¢Ê§°Ü¶ÏÑÔ£¬Çë°´·ñÈ¡Ïû¡£\n";
+    GetStream() << "è¿™ä¸ªæµ‹è¯•ä¼šè§¦å‘å¤±è´¥æ–­è¨€ï¼Œè¯·æŒ‰å¦å–æ¶ˆã€‚\n";
 
     System::SystemPause();
 }

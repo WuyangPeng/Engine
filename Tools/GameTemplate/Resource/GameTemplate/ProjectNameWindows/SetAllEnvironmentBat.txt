@@ -1,4 +1,4 @@
-@echo on 
+﻿@echo on 
 
 call SetEnvironment.bat
 cd ../../Engine/EngineWindows

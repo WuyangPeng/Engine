@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.8 (2024/03/28 11:04)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/03/28 11:04)
 
 #ifndef CORE_TOOLS_HELPER_CUSTOM_ASSERT_MACRO_H
 #define CORE_TOOLS_HELPER_CUSTOM_ASSERT_MACRO_H
@@ -15,7 +15,7 @@
 
 #include <string>
 
-/// �������û���ø��ֶ�����ϵͳ�ĺꡣĿǰ����ϵͳֻ��Microsoft Visual Studio��ʵ�֡�
+/// 用来启用或禁用各种断言子系统的宏。目前断言系统只在Microsoft Visual Studio中实现。
 #if defined(OPEN_ASSERT) || defined(OPEN_IMPORTANT_EXCEPTION_ASSERT)
 
     #if defined(SYSTEM_PLATFORM_WIN32) && defined(TCRE_USE_MSVC)
@@ -32,11 +32,11 @@
 
 #endif  // OPEN_IMPORTANT_EXCEPTION_ASSERT
 
-/// 0���ǳ���Ҫ�Ķ��ԡ�����ʧ�ܻᵼ�³��������
-/// 1����Ҫ�Ķ��ԡ�����ʧ�ܻᵼ�³����׳��쳣���ڴ�й¶��
-/// 2��һ��Ķ��ԡ�����ʧ�ܻᵼ���߼�����
-/// 3������Ҫ�Ķ��ԡ�����ʧ�ܻᵼ����ʾ��������
-/// 4�����Ժ��ԵĶ��ԡ�����ʧ�ܻᵼ����ֵ���Ȳ��㡣
+/// 0：非常重要的断言。断言失败会导致程序崩溃。
+/// 1：重要的断言。断言失败会导致程序抛出异常或内存泄露。
+/// 2：一般的断言。断言失败会导致逻辑错误。
+/// 3：不重要的断言。断言失败会导致显示或计算错误。
+/// 4：可以忽略的断言。断言失败会导致数值精度不足。
 #if !defined(ASSERT_LEVEL)
 
     #define ASSERT_LEVEL 4
@@ -55,7 +55,7 @@ constexpr auto gAssert = ASSERT_LEVEL;
 
 #else  // !CORE_TOOLS_USE_ASSERT
 
-    // �رն��ԡ�
+    // 关闭断言。
     #define ASSERTION(condition, format, ...) (static_cast<void>(0))
     #define ASSERTION_USE_FUNCTION_DESCRIBED(condition, functionDescribed, format, ...) (static_cast<void>(0))
 

@@ -1,18 +1,18 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 17:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 17:28)
 
 #ifndef SYSTEM_HELPER_PATH_SCALE_H
 #define SYSTEM_HELPER_PATH_SCALE_H
 
 #if defined(__PATHSCALE__) && (4 <= __PATHCC__)
 
-    /// PathScale EKOPath C++ ±àÒëÆ÷ÉèÖÃ£º
+    /// PathScale EKOPath C++ ç¼–è¯‘å™¨è®¾ç½®ï¼š
 
     #ifndef SYSTEM_CPP_STANDARD
 
@@ -34,7 +34,7 @@
 
     #ifndef TCRE_SYSTEM_COMPILER
 
-        #define TCRE_SYSTEM_COMPILER "PathScale EKOPath C++ °æ±¾ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
+        #define TCRE_SYSTEM_COMPILER "PathScale EKOPath C++ ç‰ˆæœ¬ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
 
     #endif  // TCRE_SYSTEM_COMPILER
 

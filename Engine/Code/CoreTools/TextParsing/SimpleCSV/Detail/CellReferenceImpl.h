@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/02 17:53)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/02 17:53)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CELL_REFERENCE_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_CELL_REFERENCE_IMPL_H
@@ -25,15 +25,15 @@ namespace CoreTools::SimpleCSV
         using ClassType = CellReferenceImpl;
 
     public:
-        /// @brief ÒÔµ¥Ôª¸ñµØÖ·Îª²ÎÊıµÄ¹¹Ôìº¯Êı¡£
-        /// @param cellAddress µ¥Ôª¸ñµÄµØÖ·£¬ÀıÈç 'A1'¡£
-        /// @details ¹¹Ôìº¯Êı´Ó×Ö·û´®´´½¨Ò»¸öĞÂµÄCellReference£¬ÀıÈç 'A1'¡£ Èç¹ûÃ»ÓĞÊäÈë£¬Ä¬ÈÏÒıÓÃ½«ÊÇµ¥Ôª¸ñ A1¡£
+        /// @brief ä»¥å•å…ƒæ ¼åœ°å€ä¸ºå‚æ•°çš„æ„é€ å‡½æ•°ã€‚
+        /// @param cellAddress å•å…ƒæ ¼çš„åœ°å€ï¼Œä¾‹å¦‚ 'A1'ã€‚
+        /// @details æ„é€ å‡½æ•°ä»å­—ç¬¦ä¸²åˆ›å»ºä¸€ä¸ªæ–°çš„CellReferenceï¼Œä¾‹å¦‚ 'A1'ã€‚ å¦‚æœæ²¡æœ‰è¾“å…¥ï¼Œé»˜è®¤å¼•ç”¨å°†æ˜¯å•å…ƒæ ¼ A1ã€‚
         explicit CellReferenceImpl(const std::string& cellAddress);
 
-        /// ½«µ¥Ôª¸ñ×ø±ê×÷Îª²ÎÊıµÄ¹¹Ôìº¯Êı¡£
+        /// å°†å•å…ƒæ ¼åæ ‡ä½œä¸ºå‚æ•°çš„æ„é€ å‡½æ•°ã€‚
         CellReferenceImpl(int row, int column);
 
-        /// ¹¹Ôìº¯ÊıÒÔĞĞºÅºÍÁĞ×ÖÄ¸×÷Îª²ÎÊı¡£
+        /// æ„é€ å‡½æ•°ä»¥è¡Œå·å’Œåˆ—å­—æ¯ä½œä¸ºå‚æ•°ã€‚
         CellReferenceImpl(int row, const std::string& column);
 
         CLASS_INVARIANT_DECLARE;
@@ -44,13 +44,13 @@ namespace CoreTools::SimpleCSV
         void SetColumn(int aColumn);
         void SetRowAndColumn(int aRow, int aColumn);
 
-        /// @brief »ñÈ¡ CellReferenceµÄµØÖ·
-        /// @return µØÖ·£¬ÀıÈç 'A1'
+        /// @brief è·å– CellReferenceçš„åœ°å€
+        /// @return åœ°å€ï¼Œä¾‹å¦‚ 'A1'
         NODISCARD std::string GetAddress() const;
 
-        /// @brief ÉèÖÃCellReferenceµÄµØÖ·
-        /// @param address µØÖ·£¬ÀıÈç 'A1'
-        /// @pre µØÖ·ÊäÈë×Ö·û´®±ØĞëÊÇÓĞĞ§µÄExcelµ¥Ôª¸ñÒıÓÃ¡£·ñÔòĞĞÎªÊÇÎ´¶¨ÒåµÄ¡£
+        /// @brief è®¾ç½®CellReferenceçš„åœ°å€
+        /// @param address åœ°å€ï¼Œä¾‹å¦‚ 'A1'
+        /// @pre åœ°å€è¾“å…¥å­—ç¬¦ä¸²å¿…é¡»æ˜¯æœ‰æ•ˆçš„Excelå•å…ƒæ ¼å¼•ç”¨ã€‚å¦åˆ™è¡Œä¸ºæ˜¯æœªå®šä¹‰çš„ã€‚
         void SetAddress(const std::string& address);
 
     private:

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 15:16)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 15:16)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT2_ELLIPSE2_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT2_ELLIPSE2_DETAIL_H
@@ -56,7 +56,7 @@ typename Mathematics::DistancePoint2Ellipse2<Real>::DistanceResult Mathematics::
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    // ÔÚÍÖÔ²×ø±êÏµ¼ÆËãµãµÄ×ø±ê¡£
+    // åœ¨æ¤­åœ†åæ ‡ç³»è®¡ç®—ç‚¹çš„åæ ‡ã€‚
     const auto difference = point - ellipse.GetCenter();
     const Vector2Type dot{ Vector2ToolsType::DotProduct(difference, ellipse.GetAxis0()),
                            Vector2ToolsType::DotProduct(difference, ellipse.GetAxis1()) };

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/11 18:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/11 18:28)
 
 #include "WriteAttributeTesting.h"
 #include "System/Console/ConsoleColour.h"
@@ -46,7 +46,7 @@ bool System::WriteAttributeTesting::RandomShuffleFlags()
 
 void System::WriteAttributeTesting::PrintTipsMessage()
 {
-    GetStream() << "Õâ¸ö²âÊÔ»áµ¼ÖÂ¿ØÖÆÌ¨µÄÇ°512×Ö½Ú±»Ìî³äÎª¸÷ÖÖÑÕÉ«¡£\n";
+    GetStream() << "è¿™ä¸ªæµ‹è¯•ä¼šå¯¼è‡´æ§åˆ¶å°çš„å‰512å­—èŠ‚è¢«å¡«å……ä¸ºå„ç§é¢œè‰²ã€‚\n";
 
     SystemPause();
 }

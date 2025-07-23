@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.5 (2024/02/18 10:57)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.5 (2024/02/18 10:57)
 
 #ifndef MATHEMATICS_ALGEBRA_POLYNOMIAL_H
 #define MATHEMATICS_ALGEBRA_POLYNOMIAL_H
@@ -34,10 +34,10 @@ namespace Mathematics
         using ContainerType = std::vector<Real>;
 
     public:
-        /// µÚÒ»¸ö¹¹Ôìº¯Êı´´½¨Ö¸¶¨´ÎÊıµÄ¶àÏîÊ½£¬µ«½«ËùÓĞÏµÊıÉèÖÃÎªÁã£¨ÒÔÈ·±£³õÊ¼»¯£©¡£
-        /// Äú¸ºÔğÉèÖÃÏµÊı£¬´ó¸ÅÊÇ½«´ÎÊıÏîÉèÖÃÎª·ÇÁãÖµ¡£
-        /// ÔÚµÚ¶ş¸ö¹¹Ôìº¯ÊıÖĞ£¬¶ÈÊÇ³õÊ¼»¯Æ÷µÄÊıÁ¿¼Ó1£¬
-        /// µ«Ëæºó½øĞĞµ÷Õû£¬Ê¹ÏµÊı[¶È]²»ÎªÁã£¨³ı·ÇËùÓĞ³õÊ¼»¯Æ÷Öµ¶¼ÎªÁã£©¡£
+        /// ç¬¬ä¸€ä¸ªæ„é€ å‡½æ•°åˆ›å»ºæŒ‡å®šæ¬¡æ•°çš„å¤šé¡¹å¼ï¼Œä½†å°†æ‰€æœ‰ç³»æ•°è®¾ç½®ä¸ºé›¶ï¼ˆä»¥ç¡®ä¿åˆå§‹åŒ–ï¼‰ã€‚
+        /// æ‚¨è´Ÿè´£è®¾ç½®ç³»æ•°ï¼Œå¤§æ¦‚æ˜¯å°†æ¬¡æ•°é¡¹è®¾ç½®ä¸ºéé›¶å€¼ã€‚
+        /// åœ¨ç¬¬äºŒä¸ªæ„é€ å‡½æ•°ä¸­ï¼Œåº¦æ˜¯åˆå§‹åŒ–å™¨çš„æ•°é‡åŠ 1ï¼Œ
+        /// ä½†éšåè¿›è¡Œè°ƒæ•´ï¼Œä½¿ç³»æ•°[åº¦]ä¸ä¸ºé›¶ï¼ˆé™¤éæ‰€æœ‰åˆå§‹åŒ–å™¨å€¼éƒ½ä¸ºé›¶ï¼‰ã€‚
         explicit Polynomial(int degree);
         explicit Polynomial(const ContainerType& coefficient);
 
@@ -45,13 +45,13 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        /// Ö§³Ö²¿·Ö¹¹Ôì£¬µ±¶ÈÎ´ÖªÊ±Ê¹ÓÃÄ¬ÈÏ¹¹Ôìº¯Êı¡£ÏµÊıÎ´³õÊ¼»¯¡£
+        /// æ”¯æŒéƒ¨åˆ†æ„é€ ï¼Œå½“åº¦æœªçŸ¥æ—¶ä½¿ç”¨é»˜è®¤æ„é€ å‡½æ•°ã€‚ç³»æ•°æœªåˆå§‹åŒ–ã€‚
         void SetDegree(int degree);
 
-        /// ½«ËùÓĞÏµÊıÉèÖÃÎªÖ¸¶¨Öµ¡£
+        /// å°†æ‰€æœ‰ç³»æ•°è®¾ç½®ä¸ºæŒ‡å®šå€¼ã€‚
         void SetCoefficients(Real value);
 
-        /// ³ÉÔ±·ÃÎÊ
+        /// æˆå‘˜è®¿é—®
 
         NODISCARD int GetDegree() const;
 
@@ -64,52 +64,52 @@ namespace Mathematics
         NODISCARD Real GetBegin() const noexcept;
         NODISCARD Real GetEnd() const noexcept;
 
-        /// ¼ÆËã¶àÏîÊ½£¬p(t)¡£
-        /// Èç¹û¶àÏîÊ½ÎŞĞ§£¬º¯Êı½«·µ»ØÁã¡£
+        /// è®¡ç®—å¤šé¡¹å¼ï¼Œp(t)ã€‚
+        /// å¦‚æœå¤šé¡¹å¼æ— æ•ˆï¼Œå‡½æ•°å°†è¿”å›é›¶ã€‚
         NODISCARD Real operator()(Real value) const noexcept;
 
-        /// Ò»ÔªÔËËã¡£
+        /// ä¸€å…ƒè¿ç®—ã€‚
         NODISCARD Polynomial operator+() const;
         NODISCARD Polynomial operator-() const;
 
-        /// ÏßĞÔ´úÊıÔËËã¡£
+        /// çº¿æ€§ä»£æ•°è¿ç®—ã€‚
         Polynomial& operator+=(const Polynomial& rhs);
         Polynomial& operator-=(const Polynomial& rhs);
         Polynomial& operator*=(const Polynomial& rhs);
-        Polynomial& operator+=(Real scalar) noexcept;  // ÊäÈëÊÇÁã½×µÄ¶àÏîÊ½
-        Polynomial& operator-=(Real scalar) noexcept;  // ÊäÈëÊÇÁã½×µÄ¶àÏîÊ½
+        Polynomial& operator+=(Real scalar) noexcept;  // è¾“å…¥æ˜¯é›¶é˜¶çš„å¤šé¡¹å¼
+        Polynomial& operator-=(Real scalar) noexcept;  // è¾“å…¥æ˜¯é›¶é˜¶çš„å¤šé¡¹å¼
         Polynomial& operator*=(Real scalar) noexcept;
         Polynomial& operator/=(Real scalar);
 
-        /// ¼ÆËã¶àÏîÊ½µÄµ¼Êı¡£
+        /// è®¡ç®—å¤šé¡¹å¼çš„å¯¼æ•°ã€‚
         NODISCARD Polynomial GetDerivative() const;
 
-        /// ·´×ª( inv_poly[i] = poly[degree-i] for 0 <= i <= degree ).
+        /// åè½¬( inv_poly[i] = poly[degree-i] for 0 <= i <= degree ).
         NODISCARD Polynomial GetInversion() const;
 
-        /// ×ª»».  Èç¹û 'this' ÊÇ p(t}, ·µ»Ø p(t-t0).
+        /// è½¬æ¢.  å¦‚æœ 'this' æ˜¯ p(t}, è¿”å› p(t-t0).
         NODISCARD Polynomial GetTranslation(Real t0) const;
 
-        /// Ïû³ı¶àÏîÊ½ÖĞµÄÈÎºÎÇ°µ¼Áã£¬³ı·Ç½×ÊıÎª0ÇÒÏµÊıÎª0¡£
-        /// µ±ËãÊõÔËËãµ¼ÖÂ½á¹ûµÄ³Ì¶È½µµÍÊ±£¬Ïû³ıÊÇ±ØÒªµÄ¡£
-        /// ÀıÈç£¬(1 + x + x^2) + (1 + 2*x - x^2) = (2 + 3*x)¡£
-        /// ÕâÁ½¸öÊäÈë¶¼¾ßÓĞ½×Êı2£¬Òò´Ë½á¹ûÊÇÒÔ½×Êı2´´½¨µÄ¡£
-        /// Ïà¼Óºó£¬ÎÒÃÇ·¢ÏÖ½×ÊıÊµ¼ÊÉÏÊÇ1£¬²¢µ÷ÕûÏµÊıÊı×éµÄ´óĞ¡¡£
-        /// ´Ëº¯ÊıÓÉËãÊõÔËËã·ûÄÚ²¿µ÷ÓÃ£¬
-        /// µ«ËüÔÚ¹«¹²½Ó¿ÚÖĞ¹«¿ª£¬ÒÔ·ÀÄú³öÓÚ×Ô¼ºµÄÄ¿µÄĞèÒªËü¡£
+        /// æ¶ˆé™¤å¤šé¡¹å¼ä¸­çš„ä»»ä½•å‰å¯¼é›¶ï¼Œé™¤éé˜¶æ•°ä¸º0ä¸”ç³»æ•°ä¸º0ã€‚
+        /// å½“ç®—æœ¯è¿ç®—å¯¼è‡´ç»“æœçš„ç¨‹åº¦é™ä½æ—¶ï¼Œæ¶ˆé™¤æ˜¯å¿…è¦çš„ã€‚
+        /// ä¾‹å¦‚ï¼Œ(1 + x + x^2) + (1 + 2*x - x^2) = (2 + 3*x)ã€‚
+        /// è¿™ä¸¤ä¸ªè¾“å…¥éƒ½å…·æœ‰é˜¶æ•°2ï¼Œå› æ­¤ç»“æœæ˜¯ä»¥é˜¶æ•°2åˆ›å»ºçš„ã€‚
+        /// ç›¸åŠ åï¼Œæˆ‘ä»¬å‘ç°é˜¶æ•°å®é™…ä¸Šæ˜¯1ï¼Œå¹¶è°ƒæ•´ç³»æ•°æ•°ç»„çš„å¤§å°ã€‚
+        /// æ­¤å‡½æ•°ç”±ç®—æœ¯è¿ç®—ç¬¦å†…éƒ¨è°ƒç”¨ï¼Œ
+        /// ä½†å®ƒåœ¨å…¬å…±æ¥å£ä¸­å…¬å¼€ï¼Œä»¥é˜²æ‚¨å‡ºäºè‡ªå·±çš„ç›®çš„éœ€è¦å®ƒã€‚
         void EliminateLeadingZeros(Real epsilon);
 
-        /// Í¨¹ıÏû³ıËùÓĞµÄ£¨½Ó½ü£©ÁãµÄÏµÊıºÍÊ¹Ö÷µ¼ÏµÊı¼õÉÙ1½×¡£
-        /// ÊäÈë²ÎÊıÊÇãĞÖµ£¬ÓÃÓÚÖ¸¶¨Ò»¸öÏµÊıÊµ¼ÊÉÏÎªÁã¡£
+        /// é€šè¿‡æ¶ˆé™¤æ‰€æœ‰çš„ï¼ˆæ¥è¿‘ï¼‰é›¶çš„ç³»æ•°å’Œä½¿ä¸»å¯¼ç³»æ•°å‡å°‘1é˜¶ã€‚
+        /// è¾“å…¥å‚æ•°æ˜¯é˜ˆå€¼ï¼Œç”¨äºæŒ‡å®šä¸€ä¸ªç³»æ•°å®é™…ä¸Šä¸ºé›¶ã€‚
         void MakeCompress(Real epsilon);
 
-        /// Èç¹û'this'ÎªP(t)ºÍ³ıÊı(divisor)ÎªD(t)£¬Ê¹degree(P) >= degree(D)£¬
-        /// ÔòP(t) = Q(t) * D(t) + R(t) ÆäÖĞQ(t)ÊÇquotient
-        /// Ê¹degree(Q) = degree(P) - degree(D)ºÍR(t)ÊÇremainderÊ¹
-        /// degree(R) < degree(D)¡£ Èç¹ûQ = 0 ºÍ R = PÔò·µ»Ø¡£
-        /// Öµepsilon±»ÓÃ×÷Ê£Óà¶àÏîÊ½ÏµÍ³µÄãĞÖµ¡£
-        /// Èç¹û±ÈepsilonĞ¡£¬ÔòÏµÊı±»¼ÙÉèÎªÁã¡£
-        /// ·µ»ØÖµµÚÒ»¸ö²¿·ÖÎªquotient£¬µÚ¶ş²¿·ÖÎªremainder¡£
+        /// å¦‚æœ'this'ä¸ºP(t)å’Œé™¤æ•°(divisor)ä¸ºD(t)ï¼Œä½¿degree(P) >= degree(D)ï¼Œ
+        /// åˆ™P(t) = Q(t) * D(t) + R(t) å…¶ä¸­Q(t)æ˜¯quotient
+        /// ä½¿degree(Q) = degree(P) - degree(D)å’ŒR(t)æ˜¯remainderä½¿
+        /// degree(R) < degree(D)ã€‚ å¦‚æœQ = 0 å’Œ R = Påˆ™è¿”å›ã€‚
+        /// å€¼epsilonè¢«ç”¨ä½œå‰©ä½™å¤šé¡¹å¼ç³»ç»Ÿçš„é˜ˆå€¼ã€‚
+        /// å¦‚æœæ¯”epsilonå°ï¼Œåˆ™ç³»æ•°è¢«å‡è®¾ä¸ºé›¶ã€‚
+        /// è¿”å›å€¼ç¬¬ä¸€ä¸ªéƒ¨åˆ†ä¸ºquotientï¼Œç¬¬äºŒéƒ¨åˆ†ä¸ºremainderã€‚
         NODISCARD PolynomialDivideType Divide(const Polynomial& divisor, Real epsilon) const;
 
         NODISCARD bool Equal(const Polynomial& rhs) const;
@@ -119,11 +119,11 @@ namespace Mathematics
         NODISCARD int GetCompressDegree(Real epsilon) const;
 
     private:
-        /// ¸ÃÀàµÄÉè¼ÆÊ¹coefficient.size() >= 1¡£
+        /// è¯¥ç±»çš„è®¾è®¡ä½¿coefficient.size() >= 1ã€‚
         ContainerType coefficient;
     };
 
-    /// ±È½Ï¡£
+    /// æ¯”è¾ƒã€‚
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     NODISCARD bool operator==(const Polynomial<Real>& lhs, const Polynomial<Real>& rhs);
@@ -152,14 +152,14 @@ namespace Mathematics
     requires std::is_arithmetic_v<Real>
     NODISCARD Polynomial<Real> operator*(const Polynomial<Real>& lhs, const Polynomial<Real>& rhs);
 
-    /// ¼ÆËãÁ½¸ö¶àÏîÊ½µÄ×î´ó¹«Ô¼Êı¡£
-    /// ·µ»ØµÄ¶àÏîÊ½¾ßÓĞÇ°µ¼ÏµÊı1£¨ÁãÖµ¶àÏîÊ½´«µİ¸øº¯ÊıÊ±³ıÍâ£©¡£
+    /// è®¡ç®—ä¸¤ä¸ªå¤šé¡¹å¼çš„æœ€å¤§å…¬çº¦æ•°ã€‚
+    /// è¿”å›çš„å¤šé¡¹å¼å…·æœ‰å‰å¯¼ç³»æ•°1ï¼ˆé›¶å€¼å¤šé¡¹å¼ä¼ é€’ç»™å‡½æ•°æ—¶é™¤å¤–ï¼‰ã€‚
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     NODISCARD Polynomial<Real> GreatestCommonDivisor(const Polynomial<Real>& lhs, const Polynomial<Real>& rhs, Real epsilon = Math<Real>::GetZeroTolerance());
 
-    /// ÏµÊıf = factor[0]*factor[1]^2*factor[2]^3*...*factor[n-1]^n
-    /// ¸ù¾İÎŞÆ½·½ÒòÊ½·Ö½âËã·¨
+    /// ç³»æ•°f = factor[0]*factor[1]^2*factor[2]^3*...*factor[n-1]^n
+    /// æ ¹æ®æ— å¹³æ–¹å› å¼åˆ†è§£ç®—æ³•
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     NODISCARD std::vector<Polynomial<Real>> SquareFreeFactorization(const Polynomial<Real>& f);

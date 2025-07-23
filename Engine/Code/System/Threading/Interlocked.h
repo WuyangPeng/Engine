@@ -1,18 +1,18 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.2 (2024/10/26 17:14)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.2 (2024/10/26 17:14)
 
 #ifndef SYSTEM_THREADING_INTERLOCKED_H
 #define SYSTEM_THREADING_INTERLOCKED_H
 
 #include "System/SystemDll.h"
 
-/// Ô­×Ó²Ù×÷
+/// åŸå­æ“ä½œ
 namespace System
 {
     template <typename T>
@@ -21,7 +21,7 @@ namespace System
     template <typename T>
     NODISCARD T SystemInterlockedDecrement(T* addend) noexcept(std::is_same_v<long, T>);
 
-    /// ·µ»ØµÄÊÇÔ­À´µÄÖµ¡£
+    /// è¿”å›çš„æ˜¯åŸæ¥çš„å€¼ã€‚
     template <typename T>
     NODISCARD T SystemInterlockedExchangeAdd(T* addend, T value) noexcept(std::is_same_v<long, T>);
 

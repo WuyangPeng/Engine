@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 15:30)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 15:30)
 
 #include "Framework/FrameworkExport.h"
 
@@ -52,7 +52,7 @@ bool Framework::AndroidProcessManagerImpl::PreCreate()
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("AndroidCallBackÖ¸ÕëÎª¿Õ£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("AndroidCallBackæŒ‡é’ˆä¸ºç©ºï¼"s))
     }
 }
 
@@ -64,7 +64,7 @@ bool Framework::AndroidProcessManagerImpl::Initialize()
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("AndroidCallBackÖ¸ÕëÎª¿Õ£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("AndroidCallBackæŒ‡é’ˆä¸ºç©ºï¼"s))
     }
 }
 
@@ -76,7 +76,7 @@ void Framework::AndroidProcessManagerImpl::PreIdle()
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("AndroidCallBackÖ¸ÕëÎª¿Õ£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("AndroidCallBackæŒ‡é’ˆä¸ºç©ºï¼"s))
     }
 }
 
@@ -88,7 +88,7 @@ void Framework::AndroidProcessManagerImpl::Terminate()
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("AndroidCallBackÖ¸ÕëÎª¿Õ£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("AndroidCallBackæŒ‡é’ˆä¸ºç©ºï¼"s))
     }
 }
 
@@ -100,10 +100,10 @@ int Framework::AndroidProcessManagerImpl::HandleInput(AndroidApp* app, AndroidIn
             eventType)
     {
         case System::AndroidInputEventType::Key:
-            // ÏûÏ¢À´×Ô°´¼üÊÂ¼ş
+            // æ¶ˆæ¯æ¥è‡ªæŒ‰é”®äº‹ä»¶
             return HandleKeyInput(app, event);
         case System::AndroidInputEventType::Motion:
-            // ÏûÏ¢À´×ÔÒÆ¶¯ÊÂ¼ş
+            // æ¶ˆæ¯æ¥è‡ªç§»åŠ¨äº‹ä»¶
             return HandleMotionInput(app, event);
         default:
             return 0;
@@ -133,7 +133,7 @@ void Framework::AndroidProcessManagerImpl::Display(AndroidApp* androidApp, int64
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("AndroidCallBackÖ¸ÕëÎª¿Õ£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("AndroidCallBackæŒ‡é’ˆä¸ºç©ºï¼"s))
     }
 }
 

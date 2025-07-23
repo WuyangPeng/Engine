@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 15:51)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 15:51)
 
 #include "DynamicFindIntersector1Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -13,6 +13,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Intersection/DynamicFindIntersector1Detail.h"
 #include "Mathematics/Intersection/StaticTestIntersector1Detail.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
 
 #include <random>
 
@@ -79,9 +80,9 @@ void Mathematics::DynamicFindIntersector1Testing::IntersectorTest()
             for (int i = 0; i < intersector1.GetNumIntersections(); ++i)
             {
                 ASSERT_TRUE(MathD::Approximate(u0, intersector1.GetIntersection(i), 1e-10) ||
-                            MathD::Approximate(u1, intersector1.GetIntersection(i), 1e-10) ||
-                            MathD::Approximate(v0, intersector1.GetIntersection(i), 1e-10) ||
-                            MathD::Approximate(v1, intersector1.GetIntersection(i), 1e-10));
+                    MathD::Approximate(u1, intersector1.GetIntersection(i), 1e-10) ||
+                    MathD::Approximate(v0, intersector1.GetIntersection(i), 1e-10) ||
+                    MathD::Approximate(v1, intersector1.GetIntersection(i), 1e-10));
 
                 ASSERT_TRUE(u0 <= intersector1.GetIntersection(i) && intersector1.GetIntersection(i) <= u1);
                 ASSERT_TRUE(v0 <= intersector1.GetIntersection(i) && intersector1.GetIntersection(i) <= v1);
@@ -134,9 +135,9 @@ void Mathematics::DynamicFindIntersector1Testing::IntersectorTest()
             for (auto i = 0; i < intersector1.GetNumIntersections(); ++i)
             {
                 ASSERT_TRUE(MathD::Approximate(firstU0, intersector1.GetIntersection(i), 1e-10) ||
-                            MathD::Approximate(firstU1, intersector1.GetIntersection(i), 1e-10) ||
-                            MathD::Approximate(firstV0, intersector1.GetIntersection(i), 1e-10) ||
-                            MathD::Approximate(firstV1, intersector1.GetIntersection(i), 1e-10));
+                    MathD::Approximate(firstU1, intersector1.GetIntersection(i), 1e-10) ||
+                    MathD::Approximate(firstV0, intersector1.GetIntersection(i), 1e-10) ||
+                    MathD::Approximate(firstV1, intersector1.GetIntersection(i), 1e-10));
 
                 ASSERT_TRUE(firstU0 - MathD::GetZeroTolerance() <= intersector1.GetIntersection(i) && intersector1.GetIntersection(i) <= firstU1 + MathD::GetZeroTolerance());
                 ASSERT_TRUE(firstV0 - MathD::GetZeroTolerance() <= intersector1.GetIntersection(i) && intersector1.GetIntersection(i) <= firstV1 + MathD::GetZeroTolerance());

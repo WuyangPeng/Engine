@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:22)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:22)
 
 #ifndef MATHEMATICS_APPROXIMATION_QUADRATIC_FIT2_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_QUADRATIC_FIT2_DETAIL_H
@@ -92,8 +92,8 @@ void Mathematics::QuadraticFit2<Real>::Calculate(const Points& points)
 
     coeff = eigenSystem.GetEigenvector(0);
 
-    // ¶ÔÓÚ¾«È·ÅäºÏ£¬Êý×ÖÉáÈëÎó²î¿ÉÄÜÊ¹×îÐ¡ÌØÕ÷Öµ½ö½öÂÔÎª¸ºÖµ¡£
-    // ·µ»ØµÄ¾ø¶ÔÖµ£¬ÒòÎªÓ¦ÓÃ³ÌÐò¿ÉÄÜÒÀÀµµÄ·µ»ØÖµÊÇ·Ç¸ºÊý¡£
+    // å¯¹äºŽç²¾ç¡®é…åˆï¼Œæ•°å­—èˆå…¥è¯¯å·®å¯èƒ½ä½¿æœ€å°ç‰¹å¾å€¼ä»…ä»…ç•¥ä¸ºè´Ÿå€¼ã€‚
+    // è¿”å›žçš„ç»å¯¹å€¼ï¼Œå› ä¸ºåº”ç”¨ç¨‹åºå¯èƒ½ä¾èµ–çš„è¿”å›žå€¼æ˜¯éžè´Ÿæ•°ã€‚
     eigenValue = MathType::FAbs(eigenSystem.GetEigenvalue(0));
 }
 

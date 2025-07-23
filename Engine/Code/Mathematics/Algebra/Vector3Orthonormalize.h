@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 15:17)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 15:17)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR3_ORTHONORMALIZE_H
 #define MATHEMATICS_ALGEBRA_VECTOR3_ORTHONORMALIZE_H
@@ -34,8 +34,8 @@ namespace Mathematics
         using ContainerType = std::vector<Vector3Type>;
 
     public:
-        // Gram-SchmidtÕı½»»¯.
-        // ÒÔÏßĞÔÎŞ¹ØµÄÏòÁ¿U¡¢VºÍW£¬À´¼ÆËãÒ»¸öÕı½»×é£¨µ¥Î»³¤¶È£¬Ïà»¥´¹Ö±£©¡£
+        // Gram-Schmidtæ­£äº¤åŒ–.
+        // ä»¥çº¿æ€§æ— å…³çš„å‘é‡Uã€Vå’ŒWï¼Œæ¥è®¡ç®—ä¸€ä¸ªæ­£äº¤ç»„ï¼ˆå•ä½é•¿åº¦ï¼Œç›¸äº’å‚ç›´ï¼‰ã€‚
         Vector3Orthonormalize(const Vector3Type& uVector, const Vector3Type& vVector, const Vector3Type& wVector, const Real epsilon = MathType::GetZeroTolerance());
 
         explicit Vector3Orthonormalize(const ContainerType& vectors, const Real epsilon = MathType::GetZeroTolerance());

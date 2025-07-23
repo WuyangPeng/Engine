@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.6 (2024/02/22 16:38)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.6 (2024/02/22 16:38)
 
 #ifndef MATHEMATICS_OBJECTS_3D_ALGEBRA_CIRCLE3_H
 #define MATHEMATICS_OBJECTS_3D_ALGEBRA_CIRCLE3_H
@@ -16,8 +16,8 @@
 
 namespace Mathematics::Algebra
 {
-    /// Ô²ÊÇÇòÌå|X-C|^2 = r^2ºÍÆ½ÃæDot(N,X-C) = 0µÄ½»µã£¬
-    /// ÆäÖĞCÊÇÔ²ĞÄ£¬rÊÇ°ë¾¶£¬NÊÇµ¥Î»³¤¶ÈµÄÆ½Ãæ·¨Ïß¡£
+    /// åœ†æ˜¯çƒä½“|X-C|^2 = r^2å’Œå¹³é¢Dot(N,X-C) = 0çš„äº¤ç‚¹ï¼Œ
+    /// å…¶ä¸­Cæ˜¯åœ†å¿ƒï¼Œræ˜¯åŠå¾„ï¼ŒNæ˜¯å•ä½é•¿åº¦çš„å¹³é¢æ³•çº¿ã€‚
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     class Circle3
@@ -29,7 +29,7 @@ namespace Mathematics::Algebra
         using MathType = Math<Real>;
 
     public:
-        /// Ä¬ÈÏ¹¹Ôìº¯Êı½«ÖĞĞÄÉèÖÃÎª(0,0,0)£¬·¨ÏßÉèÖÃÎª(0,0,1)£¬°ë¾¶ÉèÖÃÎª1¡£
+        /// é»˜è®¤æ„é€ å‡½æ•°å°†ä¸­å¿ƒè®¾ç½®ä¸º(0,0,0)ï¼Œæ³•çº¿è®¾ç½®ä¸º(0,0,1)ï¼ŒåŠå¾„è®¾ç½®ä¸º1ã€‚
         Circle3() noexcept;
 
         Circle3(const Vector3Type& inCenter, const Vector3Type& inNormal, Real inRadius) noexcept;
@@ -50,7 +50,7 @@ namespace Mathematics::Algebra
         Real radius;
     };
 
-    /// ÓëÖ§³ÖÅÅĞòÈİÆ÷µÄ±È½Ï¡£
+    /// ä¸æ”¯æŒæ’åºå®¹å™¨çš„æ¯”è¾ƒã€‚
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     NODISCARD bool operator==(const Circle3<Real>& lhs, const Circle3<Real>& rhs);

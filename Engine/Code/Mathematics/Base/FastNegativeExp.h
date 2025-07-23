@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 09:51)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 09:51)
 
 #ifndef MATHEMATICS_BASE_FAST_NEGATIVE_EXP_H
 #define MATHEMATICS_BASE_FAST_NEGATIVE_EXP_H
@@ -29,15 +29,15 @@ namespace Mathematics
         using MathType = Math<Real>;
 
     public:
-        // ¿ìËÙ±Æ½üexp(-x)¡£ÊäÈëx±ØĞëÔÚ·¶Î§[0,ÎŞÇî´ó)
+        // å¿«é€Ÿé€¼è¿‘exp(-x)ã€‚è¾“å…¥xå¿…é¡»åœ¨èŒƒå›´[0,æ— ç©·å¤§)
 
-        // 1.0e-3¾«¶È£¨float£©¡¢1.0e-4¾«¶È£¨double£©
+        // 1.0e-3ç²¾åº¦ï¼ˆfloatï¼‰ã€1.0e-4ç²¾åº¦ï¼ˆdoubleï¼‰
         NODISCARD static Real FastNegativeExpMoreRoughCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
-        // 1.0e-4¾«¶È
+        // 1.0e-4ç²¾åº¦
         NODISCARD static Real FastNegativeExpRoughCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
-        // 1.0e-5¾«¶È
+        // 1.0e-5ç²¾åº¦
         NODISCARD static Real FastNegativeExpPreciseCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
-        // 1.0e-6¾«¶È
+        // 1.0e-6ç²¾åº¦
         NODISCARD static Real FastNegativeExpMorePreciseCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
     };
 

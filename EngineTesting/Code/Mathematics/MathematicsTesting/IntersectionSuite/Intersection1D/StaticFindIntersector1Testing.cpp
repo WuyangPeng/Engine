@@ -1,17 +1,18 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 15:52)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 15:52)
 
 #include "StaticFindIntersector1Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Intersection/StaticFindIntersector1Detail.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
 
 #include <random>
 
@@ -76,9 +77,9 @@ void Mathematics::StaticFindIntersector1Testing::IntersectorTest()
         for (auto i = 0; i < intersector1.GetNumIntersections(); ++i)
         {
             ASSERT_TRUE(MathF::Approximate(u0, intersector1.GetIntersection(i), 1e-8f) ||
-                        MathF::Approximate(u1, intersector1.GetIntersection(i), 1e-8f) ||
-                        MathF::Approximate(v0, intersector1.GetIntersection(i), 1e-8f) ||
-                        MathF::Approximate(v1, intersector1.GetIntersection(i), 1e-8f));
+                MathF::Approximate(u1, intersector1.GetIntersection(i), 1e-8f) ||
+                MathF::Approximate(v0, intersector1.GetIntersection(i), 1e-8f) ||
+                MathF::Approximate(v1, intersector1.GetIntersection(i), 1e-8f));
 
             ASSERT_TRUE(u0 <= intersector1.GetIntersection(i) && intersector1.GetIntersection(i) <= u1);
             ASSERT_TRUE(v0 <= intersector1.GetIntersection(i) && intersector1.GetIntersection(i) <= v1);

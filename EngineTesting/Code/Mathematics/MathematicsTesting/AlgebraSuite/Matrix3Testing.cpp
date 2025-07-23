@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 14:30)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 14:30)
 
 #include "Matrix3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -724,7 +724,7 @@ void Mathematics::Matrix3Testing::ArithmeticCalculateTest()
 
         ASSERT_APPROXIMATE(MathF::GetPI(), matrix6.ExtractAngle(), 1e-3f);
 
-        // ÓÉÓÚĞı×ªµÄ½Ç¶ÈÊÇPI£¬ËùÒÔĞı×ªµÄ·½Ïò¿ÉÄÜÊÇÏà·´µÄ¡£
+        // ç”±äºæ—‹è½¬çš„è§’åº¦æ˜¯PIï¼Œæ‰€ä»¥æ—‹è½¬çš„æ–¹å‘å¯èƒ½æ˜¯ç›¸åçš„ã€‚
         ASSERT_TRUE(Vector3ToolsF::Approximate(matrix6.ExtractAxis(), vector0) || Vector3ToolsF::Approximate(-matrix6.ExtractAxis(), vector0));
 
         const Matrix3F matrix10(vector0, angle);
@@ -743,7 +743,7 @@ void Mathematics::Matrix3Testing::ArithmeticCalculateTest()
 
         ASSERT_TRUE(Approximate(matrix6, thirteenthMatrix, 1e-8f));
 
-        // ²âÊÔm_Matrix(0,2)ÎªÁãµÄÇé¿ö
+        // æµ‹è¯•m_Matrix(0,2)ä¸ºé›¶çš„æƒ…å†µ
         const Matrix3F fourteenthMatrix(randomDistribution(generator), angle, 0.0f, angle, randomDistribution(generator), thirdAngle, 0.0f, thirdAngle, randomDistribution(generator));
 
         eigenDecomposition = fourteenthMatrix.EigenDecomposition();
@@ -893,7 +893,7 @@ void Mathematics::Matrix3Testing::EulerTest()
 
         ASSERT_EQUAL(euler0.GetType(), EulerResult::Unique);
 
-        // ²âÊÔÌØÊâÇé¿ö
+        // æµ‹è¯•ç‰¹æ®Šæƒ…å†µ
         matrix0.MakeEulerXYZ(firstAngle + thirdAngle, -MathD::GetHalfPI(), thirdAngle);
 
         euler0 = matrix0.ExtractEulerXYZ();

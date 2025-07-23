@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2024/01/09 10:01)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2024/01/09 10:01)
 
 #ifndef RENDERING_OPENGL_RENDERER_OPENGL_DEVICE_H
 #define RENDERING_OPENGL_RENDERER_OPENGL_DEVICE_H
@@ -88,7 +88,7 @@ namespace Rendering
         void EnableSamplers(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program);
         void DisableSamplers(RendererObjectBridge& rendererObjectBridge, Shader& shader, OpenGLUInt program);
 
-        /// Ö§³Ö»æÍ¼¡£
+        /// æ”¯æŒç»˜å›¾ã€‚
         NODISCARD static int64_t DrawPrimitive(const VertexBuffer& vertexBuffer, const IndexBuffer& indexBuffer);
 
     private:
@@ -101,10 +101,10 @@ namespace Rendering
         ProgramIndexUnitContainer uniformUnit;
         ProgramIndexUnitContainer shaderStorageUnit;
 
-        /// ÎªÃ¿¸öÉùÃ÷ÓÃÓÚÖ´ĞĞµÄ×ÅÉ«Æ÷µÄÔ­×Ó¼ÆÊıÆ÷»º³åÇø¶ÔÏó´´½¨Ò»¸öÇ°¶Ë¶ÔÏó£¨¶ÔÓÃ»§Òş²Ø£©¡£
-        /// Ö´ĞĞÖ®ºó£¬ÕâĞ©¶ÔÏó½«±£ÁôÒÔ¹©ÏÂ´ÎÊ¹ÓÃ¡£
-        /// Ö»ÓĞµ±ĞèÒª¸ü´óµÄ»º³åÇøÊ±£¬ËüÃÇ²Å»á±»Ïú»ÙÒÔ´´½¨ĞÂµÄ»º³åÇø£¬µ«»º³åÇø´óĞ¡ÓÀÔ¶²»»á±äĞ¡¡£
-        /// ÕâÀïÊ¹ÓÃRawBufferÀàĞÍ£¬ÒòÎª¸ù¾İ¶¨Òå£¬ËüÊÇÃ¿¸öÔªËØ4¸ö×Ö½Ú£¬ÆäÖĞ4¸ö×Ö½ÚÊÇÃ¿¸öatomic_uint¼ÆÊıÆ÷µÄ´óĞ¡¡£
+        /// ä¸ºæ¯ä¸ªå£°æ˜ç”¨äºæ‰§è¡Œçš„ç€è‰²å™¨çš„åŸå­è®¡æ•°å™¨ç¼“å†²åŒºå¯¹è±¡åˆ›å»ºä¸€ä¸ªå‰ç«¯å¯¹è±¡ï¼ˆå¯¹ç”¨æˆ·éšè—ï¼‰ã€‚
+        /// æ‰§è¡Œä¹‹åï¼Œè¿™äº›å¯¹è±¡å°†ä¿ç•™ä»¥ä¾›ä¸‹æ¬¡ä½¿ç”¨ã€‚
+        /// åªæœ‰å½“éœ€è¦æ›´å¤§çš„ç¼“å†²åŒºæ—¶ï¼Œå®ƒä»¬æ‰ä¼šè¢«é”€æ¯ä»¥åˆ›å»ºæ–°çš„ç¼“å†²åŒºï¼Œä½†ç¼“å†²åŒºå¤§å°æ°¸è¿œä¸ä¼šå˜å°ã€‚
+        /// è¿™é‡Œä½¿ç”¨RawBufferç±»å‹ï¼Œå› ä¸ºæ ¹æ®å®šä¹‰ï¼Œå®ƒæ˜¯æ¯ä¸ªå…ƒç´ 4ä¸ªå­—èŠ‚ï¼Œå…¶ä¸­4ä¸ªå­—èŠ‚æ˜¯æ¯ä¸ªatomic_uintè®¡æ•°å™¨çš„å¤§å°ã€‚
         RawBufferContainer atomicCounterRawBuffers;
     };
 }

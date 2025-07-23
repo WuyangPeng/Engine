@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.1.2 (2024/10/26 16:50)
+/// 标准：std:c++20
+/// 版本：1.0.1.2 (2024/10/26 16:50)
 
 #ifndef SYSTEM_THREADING_EVENT_FLAGS_H
 #define SYSTEM_THREADING_EVENT_FLAGS_H
@@ -25,13 +25,13 @@ namespace System
 
     enum class CreateEventType
     {
-        /// ��ʼ���źţ��Զ���λ
+        /// 初始无信号，自动复位
         Default = 0x00000000,
-        /// ��ʼ���źţ��Զ���λ
+        /// 初始有信号，自动复位
         InitialSet = CREATE_EVENT_INITIAL_SET,
-        /// ��ʼ���źţ��ֶ���λ
+        /// 初始无信号，手动复位
         ManualReset = CREATE_EVENT_MANUAL_RESET,
-        /// ��ʼ���źţ��ֶ���λ
+        /// 初始有信号，手动复位
         All = InitialSet | ManualReset,
     };
 

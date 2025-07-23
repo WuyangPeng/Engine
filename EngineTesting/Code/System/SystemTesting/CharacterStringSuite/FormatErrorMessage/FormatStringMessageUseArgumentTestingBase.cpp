@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/11 14:16)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/11 14:16)
 
 #include "FormatStringMessageUseArgumentTestingBase.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -44,8 +44,8 @@ System::String System::FormatStringMessageUseArgumentTestingBase::GetMessageForm
 
 System::String System::FormatStringMessageUseArgumentTestingBase::GetMessageFormatResult()
 {
-    /// "%1!*.*s!"£¬¸ù¾İ4 3 "Bill"¸ñÊ½»¯" Bil"
-    /// "%5!*s!"£¬¸ù¾İ6 "Bill"¸ñÊ½»¯"  Bill"
+    /// "%1!*.*s!"ï¼Œæ ¹æ®4 3 "Bill"æ ¼å¼åŒ–" Bil"
+    /// "%5!*s!"ï¼Œæ ¹æ®6 "Bill"æ ¼å¼åŒ–"  Bill"
     return SYSTEM_TEXT(" Bil Bob   Bill");
 }
 

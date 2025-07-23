@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+ï»¿/// Copyright (c) 2010-2023
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.1 (2023/11/20 16:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.1 (2023/11/20 16:28)
 
 #include "Rendering/RenderingExport.h"
 
@@ -35,14 +35,14 @@ Rendering::ControllerInterface::ConstControllerSharedPtr Rendering::ControllerIn
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Controller½ûÖ¹µ÷ÓÃGetController"))
+    THROW_EXCEPTION(SYSTEM_TEXT("Controllerç¦æ­¢è°ƒç”¨GetController"))
 }
 
 Rendering::ControllerInterface::ControllerSharedPtr Rendering::ControllerInterface::GetController()
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Controller½ûÖ¹µ÷ÓÃGetController"))
+    THROW_EXCEPTION(SYSTEM_TEXT("Controllerç¦æ­¢è°ƒç”¨GetController"))
 }
 
 void Rendering::ControllerInterface::SetController(const ControllerSharedPtr& controller)
@@ -51,7 +51,7 @@ void Rendering::ControllerInterface::SetController(const ControllerSharedPtr& co
 
     System::UnusedFunction(controller);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Controller½ûÖ¹µ÷ÓÃSetController"))
+    THROW_EXCEPTION(SYSTEM_TEXT("Controllerç¦æ­¢è°ƒç”¨SetController"))
 }
 
 Rendering::ControllerInterface::ConstControllerSharedPtr Rendering::ControllerInterface::GetConstController(int index) const
@@ -60,7 +60,7 @@ Rendering::ControllerInterface::ConstControllerSharedPtr Rendering::ControllerIn
 
     System::UnusedFunction(index);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Controller½ûÖ¹µ÷ÓÃGetConstController"))
+    THROW_EXCEPTION(SYSTEM_TEXT("Controllerç¦æ­¢è°ƒç”¨GetConstController"))
 }
 
 Rendering::ControllerInterface::ControllerSharedPtr Rendering::ControllerInterface::GetController(int index)
@@ -69,7 +69,7 @@ Rendering::ControllerInterface::ControllerSharedPtr Rendering::ControllerInterfa
 
     System::UnusedFunction(index);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Controller½ûÖ¹µ÷ÓÃGetController"))
+    THROW_EXCEPTION(SYSTEM_TEXT("Controllerç¦æ­¢è°ƒç”¨GetController"))
 }
 
 void Rendering::ControllerInterface::AttachController(const ControllerSharedPtr& controller)
@@ -78,7 +78,7 @@ void Rendering::ControllerInterface::AttachController(const ControllerSharedPtr&
 
     System::UnusedFunction(controller);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Controller½ûÖ¹µ÷ÓÃAttachController"))
+    THROW_EXCEPTION(SYSTEM_TEXT("Controllerç¦æ­¢è°ƒç”¨AttachController"))
 }
 
 void Rendering::ControllerInterface::DetachController(const ControllerSharedPtr& controller)
@@ -87,14 +87,14 @@ void Rendering::ControllerInterface::DetachController(const ControllerSharedPtr&
 
     System::UnusedFunction(controller);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Controller½ûÖ¹µ÷ÓÃDetachController"))
+    THROW_EXCEPTION(SYSTEM_TEXT("Controllerç¦æ­¢è°ƒç”¨DetachController"))
 }
 
 void Rendering::ControllerInterface::DetachAllControllers()
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Controller½ûÖ¹µ÷ÓÃDetachAllControllers"))
+    THROW_EXCEPTION(SYSTEM_TEXT("Controllerç¦æ­¢è°ƒç”¨DetachAllControllers"))
 }
 
 int Rendering::ControllerInterface::GetNumControllers() const

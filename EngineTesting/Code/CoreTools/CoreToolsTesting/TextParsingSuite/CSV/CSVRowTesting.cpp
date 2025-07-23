@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.10 (2024/05/31 15:30)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.10 (2024/05/31 15:30)
 
 #include "CSVRowTesting.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
@@ -71,7 +71,7 @@ CoreTools::CSVDataType CoreTools::CSVRow::StringCastEnum<CoreTools::CSVDataType>
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½¶ÔÓ¦µÄÀàĞÍ¡£\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°å¯¹åº”çš„ç±»å‹ã€‚\n"s))
     }
 }
 
@@ -162,7 +162,7 @@ void CoreTools::CSVRowTesting::CSVRow0BaseTest(const CSVRow& csvRow)
     ASSERT_APPROXIMATE(csvRow.GetDouble(SYSTEM_TEXT("test2"s)), 1.1, Mathematics::MathD::epsilon);
     ASSERT_EQUAL(csvRow.GetInt64(SYSTEM_TEXT("test3"s)), 10001);
     ASSERT_EQUAL(csvRow.GetInt(SYSTEM_TEXT("test4"s)), 7);
-    ASSERT_EQUAL(csvRow.GetString(SYSTEM_TEXT("test5"s)), SYSTEM_TEXT("²âÊÔ4,²âÊÔ5,²âÊÔ6,"s));
+    ASSERT_EQUAL(csvRow.GetString(SYSTEM_TEXT("test5"s)), SYSTEM_TEXT("æµ‹è¯•4,æµ‹è¯•5,æµ‹è¯•6,"s));
     ASSERT_EQUAL(csvRow.GetEnum<CSVDataType>(SYSTEM_TEXT("test6"s)), CSVDataType::String);
 }
 
@@ -285,7 +285,7 @@ void CoreTools::CSVRowTesting::CSVRow1BaseTest(const CSVRow& csvRow)
     ASSERT_APPROXIMATE(csvRow.GetDouble(SYSTEM_TEXT("test2"s)), 1.2, Mathematics::MathD::epsilon);
     ASSERT_EQUAL(csvRow.GetInt64(SYSTEM_TEXT("test3"s)), 10002);
     ASSERT_EQUAL(csvRow.GetInt(SYSTEM_TEXT("test4"s)), 3);
-    ASSERT_EQUAL(csvRow.GetString(SYSTEM_TEXT("test5"s)), SYSTEM_TEXT("²âÊÔ5"s));
+    ASSERT_EQUAL(csvRow.GetString(SYSTEM_TEXT("test5"s)), SYSTEM_TEXT("æµ‹è¯•5"s));
     ASSERT_EQUAL(csvRow.GetEnum<CSVDataType>(SYSTEM_TEXT("test6"s)), CSVDataType::Char);
 }
 

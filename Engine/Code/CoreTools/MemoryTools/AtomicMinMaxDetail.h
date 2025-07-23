@@ -1,22 +1,22 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.2 (2024/10/14 10:52)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.2 (2024/10/14 10:52)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_ATOMIC_MIN_MAX_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_ATOMIC_MIN_MAX_DETAIL_H
 
 #include "AtomicMinMax.h"
 
-/// ÔÚÄ³Ğ©Æ½Ì¨ÉÏ£¬atomic_compare_exchange_weakµÄĞÔÄÜ¾İËµ±ÈÊ¹ÓÃatomic_compare_exchange_strongÒªºÃ¡£
-/// atomic_compare_exchange_weakµÄ±È½ÏºÍ½»»»¿ÉÄÜ»á³öÏÖĞé¼Ù¹ÊÕÏ£¬
-/// ¼´Ê¹*xºÍ*yµÄÖµÏàÍ¬£¬º¯ÊıÒ²»á·µ»Øfalse£¬ÕâÊÇÄÚ´æÏµÍ³µÄÓ²¼ş¼Ü¹¹ÎÊÌâ¡£
-/// ÔÚAtomicMinºÍAtomicMaxµÄ´úÂëÖĞ£¬ÎŞÂÛ±È½Ï»òÕßĞé¼ÙÊ§°Ü»áµ¼ÖÂstd::atomic_compare_exchange_weak·µ»Øfalse£¬
-/// Ñ­»·¶¼»áÈ·±£ÔÙ´Î³¢ÊÔ½øĞĞ±È½ÏºÍ½»»»¡£
+/// åœ¨æŸäº›å¹³å°ä¸Šï¼Œatomic_compare_exchange_weakçš„æ€§èƒ½æ®è¯´æ¯”ä½¿ç”¨atomic_compare_exchange_strongè¦å¥½ã€‚
+/// atomic_compare_exchange_weakçš„æ¯”è¾ƒå’Œäº¤æ¢å¯èƒ½ä¼šå‡ºç°è™šå‡æ•…éšœï¼Œ
+/// å³ä½¿*xå’Œ*yçš„å€¼ç›¸åŒï¼Œå‡½æ•°ä¹Ÿä¼šè¿”å›falseï¼Œè¿™æ˜¯å†…å­˜ç³»ç»Ÿçš„ç¡¬ä»¶æ¶æ„é—®é¢˜ã€‚
+/// åœ¨AtomicMinå’ŒAtomicMaxçš„ä»£ç ä¸­ï¼Œæ— è®ºæ¯”è¾ƒæˆ–è€…è™šå‡å¤±è´¥ä¼šå¯¼è‡´std::atomic_compare_exchange_weakè¿”å›falseï¼Œ
+/// å¾ªç¯éƒ½ä¼šç¡®ä¿å†æ¬¡å°è¯•è¿›è¡Œæ¯”è¾ƒå’Œäº¤æ¢ã€‚
 
 template <typename T>
 T CoreTools::AtomicMin(std::atomic<T>& atomic, const T& value) noexcept

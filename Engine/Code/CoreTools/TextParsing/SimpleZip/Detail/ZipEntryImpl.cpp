@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/07 16:25)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/07 16:25)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -25,7 +25,7 @@
 CoreTools::SimpleZip::ZipEntryImpl::ZipEntryImpl(const ZipEntryInfo& info)
     : entryInfo{ info }, entryData{}, isModified{ false }
 {
-    ///  ¸üĞÂË÷Òı¼ÆÊıÆ÷¡£
+    ///  æ›´æ–°ç´¢å¼•è®¡æ•°å™¨ã€‚
     UNIQUE_ID_MANAGER_SINGLETON.SetUniqueId(UniqueIdSelect::ZipFile, info.m_file_index);
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -49,7 +49,7 @@ CoreTools::SimpleZip::ZipEntryInfo CoreTools::SimpleZip::ZipEntryImpl::CreateInf
 
     if (MZ_ZIP_MAX_ARCHIVE_FILENAME_SIZE <= fileName.size())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¸´ÖÆÎÄ¼şÃûÊ§°Ü¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å¤åˆ¶æ–‡ä»¶åå¤±è´¥ã€‚"s))
     }
 
     const gsl::span span{ info.m_filename };
@@ -130,7 +130,7 @@ void CoreTools::SimpleZip::ZipEntryImpl::SetFileName(const std::string& name)
 
     if (MZ_ZIP_MAX_ARCHIVE_FILENAME_SIZE <= name.size())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¸´ÖÆÎÄ¼şÃûÊ§°Ü¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å¤åˆ¶æ–‡ä»¶åå¤±è´¥ã€‚"s))
     }
 
     const gsl::span span{ entryInfo.m_filename };
@@ -232,7 +232,7 @@ bool CoreTools::SimpleZip::ZipEntryImpl::WriterAddMem(mz_zip_archive* archive) c
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    /// ÕâÀïÊÇ½«MZ_DEFAULT_COMPRESSION£¨-1£©×ª»»³ÉÎŞ·ûºÅÊı¡£
+    /// è¿™é‡Œæ˜¯å°†MZ_DEFAULT_COMPRESSIONï¼ˆ-1ï¼‰è½¬æ¢æˆæ— ç¬¦å·æ•°ã€‚
     return mz_zip_writer_add_mem(archive,
                                  GetFileName().c_str(),
                                  entryData.data(),

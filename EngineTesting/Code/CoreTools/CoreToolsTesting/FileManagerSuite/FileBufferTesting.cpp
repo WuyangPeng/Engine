@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/05/04 23:18)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/05/04 23:18)
 
 #include "FileBufferTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -51,7 +51,7 @@ void CoreTools::FileBufferTesting::DelayCopyTest()
 {
     FileBuffer buffer0{ bufferSize };
     const auto beginPtr0 = buffer0.GetBufferBegin();
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(beginPtr0, "beginPtr0Ö¸ÕëÎª¿Õ¡£");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(beginPtr0, "beginPtr0æŒ‡é’ˆä¸ºç©ºã€‚");
 
     ASSERT_NOT_THROW_EXCEPTION_2(Init, buffer0, 0);
 
@@ -71,9 +71,9 @@ const char* CoreTools::FileBufferTesting::ShallowCopyTest(const FileBuffer& lhs,
     ASSERT_EQUAL(rhs.GetSize(), lhs.GetSize());
 
     const auto rhsPtr = rhs.GetConstBufferBegin();
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(rhsPtr, "rhsPtrÖ¸ÕëÎª¿Õ¡£");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(rhsPtr, "rhsPtræŒ‡é’ˆä¸ºç©ºã€‚");
 
-    /// lhsPtrºÍrhsPtrÒÀÈ»Ö¸ÏòÍ¬Ò»¸ö¸±±¾¡£
+    /// lhsPtrå’ŒrhsPträ¾ç„¶æŒ‡å‘åŒä¸€ä¸ªå‰¯æœ¬ã€‚
     ASSERT_EQUAL(lhsPtr, rhsPtr);
 
     return rhsPtr;
@@ -82,16 +82,16 @@ const char* CoreTools::FileBufferTesting::ShallowCopyTest(const FileBuffer& lhs,
 void CoreTools::FileBufferTesting::DeepCopyTest(const char* ptr0, const char* ptr1, FileBuffer& fileBuffer)
 {
     const auto ptr2 = fileBuffer.GetBufferBegin();
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(ptr2, "beginPtr2Ö¸ÕëÎª¿Õ¡£");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(ptr2, "beginPtr2æŒ‡é’ˆä¸ºç©ºã€‚");
 
-    /// ptr2Ö¸ÏòÁíÒ»¸ö¸±±¾¡£
+    /// ptr2æŒ‡å‘å¦ä¸€ä¸ªå‰¯æœ¬ã€‚
     ASSERT_UNEQUAL(ptr0, ptr2);
     ASSERT_UNEQUAL(ptr1, ptr2);
 }
 
 void CoreTools::FileBufferTesting::NoChangeTest(const FileBuffer& lhs, const FileBuffer& rhs)
 {
-    /// ptr0ºÍptr1µÄÖµÃ»ÓĞ¸Ä±ä
+    /// ptr0å’Œptr1çš„å€¼æ²¡æœ‰æ”¹å˜
     for (auto i = 0; i < lhs.GetSize(); ++i)
     {
         ASSERT_EQUAL(*lhs.GetConstBuffer(i), *rhs.GetConstBuffer(i));
@@ -162,7 +162,7 @@ void CoreTools::FileBufferTesting::CopyBufferTest()
 {
     FileBuffer buffer{ bufferSize };
     const auto beginPtr = buffer.GetBufferBegin();
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(beginPtr, "beginPtr0Ö¸ÕëÎª¿Õ¡£");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(beginPtr, "beginPtr0æŒ‡é’ˆä¸ºç©ºã€‚");
 
     ASSERT_NOT_THROW_EXCEPTION_2(Init, buffer, 0);
 

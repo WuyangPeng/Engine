@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 17:23)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 17:23)
 
 #include "Network/NetworkExport.h"
 
@@ -22,13 +22,13 @@ using namespace std::literals;
 
 namespace
 {
-    constexpr auto port = SYSTEM_TEXT("£¬¶Ë¿Ú£º"sv);
+    constexpr auto port = SYSTEM_TEXT("ï¼Œç«¯å£ï¼š"sv);
 
-    constexpr auto gBytesTransferred = SYSTEM_TEXT("£¬×Ö½ÚÊı£º"sv);
+    constexpr auto gBytesTransferred = SYSTEM_TEXT("ï¼Œå­—èŠ‚æ•°ï¼š"sv);
 
-    constexpr auto asynchronousSendSuccess = SYSTEM_TEXT("Òì²½·¢ËÍÏûÏ¢³É¹¦£¬µØÖ·£º"sv);
+    constexpr auto asynchronousSendSuccess = SYSTEM_TEXT("å¼‚æ­¥å‘é€æ¶ˆæ¯æˆåŠŸï¼Œåœ°å€ï¼š"sv);
 
-    constexpr auto asynchronousReceiveSuccess = SYSTEM_TEXT("Òì²½½ÓÊÕÏûÏ¢³É¹¦£¬µØÖ·£º"sv);
+    constexpr auto asynchronousReceiveSuccess = SYSTEM_TEXT("å¼‚æ­¥æ¥æ”¶æ¶ˆæ¯æˆåŠŸï¼Œåœ°å€ï¼š"sv);
 }
 
 void Network::BoostSockStreamHelper::EventSendFunction(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const AddressData& addressData, int bytesTransferred)
@@ -46,7 +46,7 @@ void Network::BoostSockStreamHelper::EventSendFunction(const ErrorCodeType& erro
 
     if (!eventInterface->EventFunction(callbackParameters))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("ÊÂ¼ş»Øµ÷Ö´ĞĞÊ§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("äº‹ä»¶å›è°ƒæ‰§è¡Œå¤±è´¥ï¼"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 
     PrintSuccessLog(asynchronousSendSuccess.data(), addressData, bytesTransferred);
@@ -67,7 +67,7 @@ void Network::BoostSockStreamHelper::EventReceiveFunction(const ErrorCodeType& e
 
     if (!eventInterface->EventFunction(callbackParameters))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("ÊÂ¼ş»Øµ÷Ö´ĞĞÊ§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("äº‹ä»¶å›è°ƒæ‰§è¡Œå¤±è´¥ï¼"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 
     PrintSuccessLog(asynchronousReceiveSuccess.data(), addressData, bytesTransferred);

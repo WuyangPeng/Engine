@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/05/19 20:24)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/05/19 20:24)
 
 #include "BoolObject.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -31,7 +31,7 @@ CoreTools::BoolObject::BoolObject(DisableNotThrow disableNotThrow)
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 
-    CORE_TOOLS_ASSERTION_1(IsLoadValidity(), "ÔØÈëµÄÊı¾İ³öÏÖ´íÎó£¡");
+    CORE_TOOLS_ASSERTION_1(IsLoadValidity(), "è½½å…¥çš„æ•°æ®å‡ºç°é”™è¯¯ï¼");
 }
 
 CoreTools::BoolObject::BoolObjectSharedPtr CoreTools::BoolObject::Create()
@@ -163,7 +163,7 @@ void CoreTools::BoolObject::Load(BufferSource& source)
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 
-    CORE_TOOLS_ASSERTION_1(IsLoadValidity(), "ÔØÈëµÄÊı¾İ³öÏÖ´íÎó£¡");
+    CORE_TOOLS_ASSERTION_1(IsLoadValidity(), "è½½å…¥çš„æ•°æ®å‡ºç°é”™è¯¯ï¼");
 }
 
 CoreTools::ObjectInterfaceSharedPtr CoreTools::BoolObject::CloneObject() const

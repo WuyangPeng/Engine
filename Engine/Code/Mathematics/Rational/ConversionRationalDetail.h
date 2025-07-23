@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:15)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:15)
 
 #ifndef MATHEMATICS_RATIONAL_CONVERSION_RATIONAL_DETAIL_H
 #define MATHEMATICS_RATIONAL_CONVERSION_RATIONAL_DETAIL_H
@@ -147,7 +147,7 @@ void Mathematics::ConversionRational<T>::InitFloatingPoint(T value)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´«ÈëµÄ¸¡µãÊıÎŞĞ§£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("ä¼ å…¥çš„æµ®ç‚¹æ•°æ— æ•ˆï¼"s));
     }
 }
 
@@ -286,7 +286,7 @@ Mathematics::Integer<N> Mathematics::ConversionRational<T>::GetDenominator() con
 template <typename T>
 int Mathematics::ConversionRational<T>::GetAssignmentNumeratorShifting(int bit) const
 {
-    MATHEMATICS_ASSERTION_0(0 < bit, "ĞèÒªÒÆÎ»µÄ×Ö½ÚÊıÓ¦¸ÃÎªÕıÊı");
+    MATHEMATICS_ASSERTION_0(0 < bit, "éœ€è¦ç§»ä½çš„å­—èŠ‚æ•°åº”è¯¥ä¸ºæ­£æ•°");
 
     if (bit <= reducibilityShifting)
     {
@@ -313,14 +313,14 @@ int Mathematics::ConversionRational<T>::GetAssignmentNumeratorShifting(int bit) 
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´«ÈëµÄÖµÒç³ö£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("ä¼ å…¥çš„å€¼æº¢å‡ºï¼"s));
     }
 }
 
 template <typename T>
 int Mathematics::ConversionRational<T>::GetAssignmentDenominatorShifting(int bit) const
 {
-    MATHEMATICS_ASSERTION_0(0 < bit, "ĞèÒªÒÆÎ»µÄ×Ö½ÚÊıÓ¦¸ÃÎªÕıÊı");
+    MATHEMATICS_ASSERTION_0(0 < bit, "éœ€è¦ç§»ä½çš„å­—èŠ‚æ•°åº”è¯¥ä¸ºæ­£æ•°");
 
     if (bit <= reducibilityShifting)
     {
@@ -347,14 +347,14 @@ int Mathematics::ConversionRational<T>::GetAssignmentDenominatorShifting(int bit
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´«ÈëµÄÖµÒç³ö£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("ä¼ å…¥çš„å€¼æº¢å‡ºï¼"s));
     }
 }
 
 template <typename T>
 uint64_t Mathematics::ConversionRational<T>::GetAssignmentNumeratorMantissa(int bit) const
 {
-    MATHEMATICS_ASSERTION_0(0 < bit, "ĞèÒªÒÆÎ»µÄ×Ö½ÚÊıÓ¦¸ÃÎªÕıÊı");
+    MATHEMATICS_ASSERTION_0(0 < bit, "éœ€è¦ç§»ä½çš„å­—èŠ‚æ•°åº”è¯¥ä¸ºæ­£æ•°");
 
     if (bit <= reducibilityShifting)
     {
@@ -381,14 +381,14 @@ uint64_t Mathematics::ConversionRational<T>::GetAssignmentNumeratorMantissa(int 
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´«ÈëµÄÖµÒç³ö£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("ä¼ å…¥çš„å€¼æº¢å‡ºï¼"s));
     }
 }
 
 template <typename T>
 uint64_t Mathematics::ConversionRational<T>::GetAssignmentDenominatorMantissa(int bit) const
 {
-    MATHEMATICS_ASSERTION_0(0 < bit, "ĞèÒªÒÆÎ»µÄ×Ö½ÚÊıÓ¦¸ÃÎªÕıÊı");
+    MATHEMATICS_ASSERTION_0(0 < bit, "éœ€è¦ç§»ä½çš„å­—èŠ‚æ•°åº”è¯¥ä¸ºæ­£æ•°");
 
     if (bit <= reducibilityShifting)
     {
@@ -415,7 +415,7 @@ uint64_t Mathematics::ConversionRational<T>::GetAssignmentDenominatorMantissa(in
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´«ÈëµÄÖµÒç³ö£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("ä¼ å…¥çš„å€¼æº¢å‡ºï¼"s));
     }
 }
 

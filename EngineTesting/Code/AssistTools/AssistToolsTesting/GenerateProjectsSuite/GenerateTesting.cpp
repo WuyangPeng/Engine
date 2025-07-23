@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º1.0.0.0 (2023/11/08 15:42)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š1.0.0.0 (2023/11/08 15:42)
 
 #include "GenerateTesting.h"
 #include "CoreTools/FileManager/IFileStreamManager.h"
@@ -29,6 +29,8 @@ void AssistTools::GenerateTesting::ResultTest(const String& directory)
 {
     for (const auto& element : std::filesystem::directory_iterator(directory))
     {
+        #ifdef SYSTEM_PLATFORM_LINUX
+
         if (element.is_directory())
         {
             ResultTest(element.path());
@@ -37,6 +39,19 @@ void AssistTools::GenerateTesting::ResultTest(const String& directory)
         {
             RegularFileTest(element.path());
         }
+
+        #else // !SYSTEM_PLATFORM_LINUX
+
+        if (element.is_directory())
+        {
+            ResultTest(CoreTools::StringConversion::WideCharConversionStandard(element.path()));
+        }
+        else if (element.is_regular_file())
+        {
+            RegularFileTest(CoreTools::StringConversion::WideCharConversionStandard(element.path()));
+        }
+
+        #endif // SYSTEM_PLATFORM_LINUX
     }
 }
 

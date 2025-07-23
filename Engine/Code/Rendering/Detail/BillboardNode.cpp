@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:53)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:53)
 
 #include "Rendering/RenderingExport.h"
 
@@ -19,6 +19,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/TransformDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, BillboardNode)
 
@@ -63,21 +64,21 @@ bool Rendering::BillboardNode::UpdateWorldData(double applicationTime)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    // ¼ÆËã¹ã¸æÅÆµÄÊÀ½ç±ä»»»ùÓÚÆä¸¸ÊÀ½ç±ä»»¼°Æä¾Ö²¿±ä»»¡£
-    // Çë×¢Òâ£¬Äã²»Ó¦¸Ãµ÷ÓÃNode::UpdateWorldData£¬ÒòÎª¸Ãº¯Êı¸üĞÂÆä×Ó½Úµã¡£
-    // Ö±µ½¹ã¸æÅÆÓëÉãÏñ»ú¶Ô×¼Ò»¸öBillboardNode£¬×Ó½Úµã²»ÄÜ¸üĞÂ¡£
+    // è®¡ç®—å¹¿å‘Šç‰Œçš„ä¸–ç•Œå˜æ¢åŸºäºå…¶çˆ¶ä¸–ç•Œå˜æ¢åŠå…¶å±€éƒ¨å˜æ¢ã€‚
+    // è¯·æ³¨æ„ï¼Œä½ ä¸åº”è¯¥è°ƒç”¨Node::UpdateWorldDataï¼Œå› ä¸ºè¯¥å‡½æ•°æ›´æ–°å…¶å­èŠ‚ç‚¹ã€‚
+    // ç›´åˆ°å¹¿å‘Šç‰Œä¸æ‘„åƒæœºå¯¹å‡†ä¸€ä¸ªBillboardNodeï¼Œå­èŠ‚ç‚¹ä¸èƒ½æ›´æ–°ã€‚
     Spatial::UpdateWorldData(applicationTime);
 
     auto camera = impl->GetCamera();
 
     if (camera)
     {
-        // Ïà»úÄæ±ä»»µ½¹ã¸æÅÆµÄÄ£ĞÍ¿Õ¼ä¡£
+        // ç›¸æœºé€†å˜æ¢åˆ°å¹¿å‘Šç‰Œçš„æ¨¡å‹ç©ºé—´ã€‚
         auto modelPosition = GetWorldTransform().GetInverseTransform() * camera->GetPosition();
 
-        // Òª¶ÔÆë¹ã¸æÅÆ£¬Ïà»ú¹ã¸æÅÆµÄÄ£ĞÍ¿Õ¼äµÄxzÆ½ÃæµÄÍ¶Ó°¾ö¶¨¶Ô¹ã¸æÅÆµÄÄ£ĞÍyÖáĞı×ªµÄ½Ç¶È¡£
-        // Èç¹ûÍ¶Ó°µÄÕÕÏà»úÊÇÔÚÄ£ĞÍÉÏµÄÖá (x = 0 ºÍ z = 0)£¬
-        // ATan2·µ»ØÁã£¨¶ø·ÇNaNµÄ£©£¬Òò´ËÃ»ÓĞ±ØÒª²¶»ñ´ËÍË»¯Çé¿ö£¬²¢·Ö±ğ½øĞĞ´¦Àí¡£
+        // è¦å¯¹é½å¹¿å‘Šç‰Œï¼Œç›¸æœºå¹¿å‘Šç‰Œçš„æ¨¡å‹ç©ºé—´çš„xzå¹³é¢çš„æŠ•å½±å†³å®šå¯¹å¹¿å‘Šç‰Œçš„æ¨¡å‹yè½´æ—‹è½¬çš„è§’åº¦ã€‚
+        // å¦‚æœæŠ•å½±çš„ç…§ç›¸æœºæ˜¯åœ¨æ¨¡å‹ä¸Šçš„è½´ (x = 0 å’Œ z = 0)ï¼Œ
+        // ATan2è¿”å›é›¶ï¼ˆè€ŒéNaNçš„ï¼‰ï¼Œå› æ­¤æ²¡æœ‰å¿…è¦æ•è·æ­¤é€€åŒ–æƒ…å†µï¼Œå¹¶åˆ†åˆ«è¿›è¡Œå¤„ç†ã€‚
         auto angle = Mathematics::MathF::ATan2(modelPosition[0], modelPosition[2]);
         const Mathematics::MatrixF orient{ Mathematics::AVectorF::GetUnitY(), angle };
 
@@ -87,6 +88,6 @@ bool Rendering::BillboardNode::UpdateWorldData(double applicationTime)
         SetWorldTransformOnUpdate(transform);
     }
 
-    // ÏÖÔÚµÄ¹ã¸æÅÆ·½Ïò¿ÉÒÔ¸æËß×Ó½Úµã½øĞĞ¸üĞÂ¡£
+    // ç°åœ¨çš„å¹¿å‘Šç‰Œæ–¹å‘å¯ä»¥å‘Šè¯‰å­èŠ‚ç‚¹è¿›è¡Œæ›´æ–°ã€‚
     return ParentType::UpdateChildWorldData(applicationTime);
 }

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 15:16)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 15:16)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -43,41 +43,41 @@ void CoreTools::SevenModElevenCheckSum::Calculation(const char* data, int length
 {
     if (data == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("dataÖ¸ÕëÎª¿Õ\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("dataæŒ‡é’ˆä¸ºç©º\n"s))
     }
 
     if (powersSize < length)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Êı×Ö²»ÄÜ³¬¹ı10Î»Êı\n"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ•°å­—ä¸èƒ½è¶…è¿‡10ä½æ•°\n"s))
     }
 
     auto sum = 0;
-    auto position = 0;  /// Êı¾İÖĞµÄÊı×ÖÊÇÊ²Ã´
+    auto position = 0;  /// æ•°æ®ä¸­çš„æ•°å­—æ˜¯ä»€ä¹ˆ
 
     for (auto i = length; 0 < i; --i)
     {
-        /// ÅĞ¶ÏÊÇ·ñÊÇÊı×Ö
+        /// åˆ¤æ–­æ˜¯å¦æ˜¯æ•°å­—
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
         if (!isdigit(data[i - 1]))
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§Êı×Ö\n"s))
+            THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆæ•°å­—\n"s))
         }
 
-        /// ½«Êı×Ö×Ö·û×ª»»ÎªÊı×Ö
+        /// å°†æ•°å­—å­—ç¬¦è½¬æ¢ä¸ºæ•°å­—
         const int digit{ data[i - 1] - '0' };
 
 #include SYSTEM_WARNING_POP
 
-        /// ²éÕÒÃİ£¬³ËÒÔdigit£¬¼Óµ½ºÍ
+        /// æŸ¥æ‰¾å¹‚ï¼Œä¹˜ä»¥digitï¼ŒåŠ åˆ°å’Œ
 
         sum += GetPowers(position) * digit;
 
         ++position;
     }
 
-    /// µÃµ½µÄºÍÇóÄ£11
+    /// å¾—åˆ°çš„å’Œæ±‚æ¨¡11
     auto mod = sum % 11;
 
     if (mod == 10)

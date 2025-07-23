@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:14)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:14)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SPHERE3_CONE3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SPHERE3_CONE3_ACHIEVE_H
@@ -55,7 +55,7 @@ Mathematics::Cone3<Real> Mathematics::StaticFindIntersectorSphere3Cone3<Real>::G
 template <typename Real>
 void Mathematics::StaticFindIntersectorSphere3Cone3<Real>::Find()
 {
-    // ²âÊÔÔ²×¶¶¥µãÊÇ·ñÔÚÇòÌåÖĞ¡£
+    // æµ‹è¯•åœ†é”¥é¡¶ç‚¹æ˜¯å¦åœ¨çƒä½“ä¸­ã€‚
     auto diff = sphere.GetCenter() - cone.GetVertex();
     auto radiusSqr = sphere.GetRadius() * sphere.GetRadius();
     auto lengthSqr = Vector3ToolsType::GetLengthSquared(diff);
@@ -65,31 +65,31 @@ void Mathematics::StaticFindIntersectorSphere3Cone3<Real>::Find()
         return;
     }
 
-    // ²âÊÔÇòĞÄÊÇ·ñÔÚÔ²×¶ÖĞ
+    // æµ‹è¯•çƒå¿ƒæ˜¯å¦åœ¨åœ†é”¥ä¸­
     auto dot = Vector3ToolsType::DotProduct(diff, cone.GetAxis());
     auto dotSqr = dot * dot;
     auto cosSqr = cone.GetCosAngle() * cone.GetCosAngle();
     if (lengthSqr * cosSqr <= dotSqr && MathType::GetValue(0) < dot)
     {
-        // ÇòÌåÖĞĞÄÔÚÔ²×¶ÌåÄÚ²¿£¬Òò´ËÇòÌåºÍÔ²×¶ÌåÏà½»¡£
+        // çƒä½“ä¸­å¿ƒåœ¨åœ†é”¥ä½“å†…éƒ¨ï¼Œå› æ­¤çƒä½“å’Œåœ†é”¥ä½“ç›¸äº¤ã€‚
         this->SetIntersectionType(IntersectionType::Other);
         return;
     }
 
-    /// ÇòÌåÖĞĞÄÔÚÔ²×¶ÌåÍâ²¿¡£ ÏÖÔÚµÄÎÊÌâ¼ò»¯ÎªÔÚ°üº¬Ô²×¶¶¥µã²¢ÓÉÔ²×¶ÖáºÍ´Ó¶¥µãµ½ÇòÌåÖĞĞÄµÄÏòÁ¿¿çÔ½µÄÆ½ÃæÖĞÑ°ÕÒÔ²ÓëÉäÏßÖ®¼äµÄ½»µã¡£
+    /// çƒä½“ä¸­å¿ƒåœ¨åœ†é”¥ä½“å¤–éƒ¨ã€‚ ç°åœ¨çš„é—®é¢˜ç®€åŒ–ä¸ºåœ¨åŒ…å«åœ†é”¥é¡¶ç‚¹å¹¶ç”±åœ†é”¥è½´å’Œä»é¡¶ç‚¹åˆ°çƒä½“ä¸­å¿ƒçš„å‘é‡è·¨è¶Šçš„å¹³é¢ä¸­å¯»æ‰¾åœ†ä¸å°„çº¿ä¹‹é—´çš„äº¤ç‚¹ã€‚
 
-    /// ÉäÏßÊÇ t * D + V (t >= 0)£¬ÆäÖĞ|D| = 1£¬dot(A,D) = cos(angle)¡£
-    /// Í¬Ñù£¬D = e * A + f * (C - V)¡£ ½«ÉäÏß·½³ÌÊ½²åÈëÇòÃæ·½³ÌÊ½»á²úÉúReal^2 = |t * D + V - C|^2£¬
-    /// Òò´Ë½»µãµÄ¶ş´Î·½Îªt^2 - 2 * dot(D,C - V) * t + |C - V|^2 - Real^2 = 0¡£
-    /// µ±ÇÒ½öµ±ÅĞ±ğÊ½Îª·Ç¸ºÊ±£¬²Å·¢Éú½»¼¯¡£ Õâ¸ö²âÊÔ±ä³É
+    /// å°„çº¿æ˜¯ t * D + V (t >= 0)ï¼Œå…¶ä¸­|D| = 1ï¼Œdot(A,D) = cos(angle)ã€‚
+    /// åŒæ ·ï¼ŒD = e * A + f * (C - V)ã€‚ å°†å°„çº¿æ–¹ç¨‹å¼æ’å…¥çƒé¢æ–¹ç¨‹å¼ä¼šäº§ç”ŸReal^2 = |t * D + V - C|^2ï¼Œ
+    /// å› æ­¤äº¤ç‚¹çš„äºŒæ¬¡æ–¹ä¸ºt^2 - 2 * dot(D,C - V) * t + |C - V|^2 - Real^2 = 0ã€‚
+    /// å½“ä¸”ä»…å½“åˆ¤åˆ«å¼ä¸ºéè´Ÿæ—¶ï¼Œæ‰å‘ç”Ÿäº¤é›†ã€‚ è¿™ä¸ªæµ‹è¯•å˜æˆ
     /// dot(D,C - V)^2 >= dot(C - V,C - V) - Real^2
-    /// ×¢Òâ£¬Èç¹ûÓÒ²àÎª·ÇÕı£¬Ôò²»µÈÊ½Îªtrue£¨ÇòÌå°üº¬V£©¡£ ÎÒÒÑ¾­ÔÚ´Ëº¯ÊıµÄµÚÒ»¶Î´úÂëÖĞÅÅ³ıÁËÕâÒ»µã
+    /// æ³¨æ„ï¼Œå¦‚æœå³ä¾§ä¸ºéæ­£ï¼Œåˆ™ä¸ç­‰å¼ä¸ºtrueï¼ˆçƒä½“åŒ…å«Vï¼‰ã€‚ æˆ‘å·²ç»åœ¨æ­¤å‡½æ•°çš„ç¬¬ä¸€æ®µä»£ç ä¸­æ’é™¤äº†è¿™ä¸€ç‚¹
 
     auto length = MathType::Sqrt(MathType::FAbs(lengthSqr - dotSqr));
     auto test = cone.GetCosAngle() * dot + cone.GetSinAngle() * length;
     auto discr = test * test - lengthSqr + radiusSqr;
 
-    // ¼ÆËã×î½Ó½ü¶¥µãVµÄ½»µã
+    // è®¡ç®—æœ€æ¥è¿‘é¡¶ç‚¹Vçš„äº¤ç‚¹
     auto t = test - MathType::Sqrt(discr);
     auto value0 = diff - dot * cone.GetAxis();
     auto value1 = cone.GetSinAngle() / length;

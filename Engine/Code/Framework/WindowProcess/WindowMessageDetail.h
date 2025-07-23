@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 14:14)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 14:14)
 
 #ifndef FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_DETAIL_H
 #define FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_DETAIL_H
@@ -122,18 +122,18 @@ void Framework::WindowMessage<MiddleLayer>::DoCloseMessage(HWnd hWnd) const
 {
     const auto className = GetWindowsClassName(hWnd);
 
-    const auto exitInformation = SYSTEM_TEXT("ÊÇ·ñÍË³ö") + className + SYSTEM_TEXT("£¿");
+    const auto exitInformation = SYSTEM_TEXT("æ˜¯å¦é€€å‡º") + className + SYSTEM_TEXT("ï¼Ÿ");
 
     if (!System::SystemValidateRect(hWnd))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("SystemValidateRect Ê§°Ü¡£"));
+        LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("SystemValidateRect å¤±è´¥ã€‚"));
     }
 
     if (System::DefaultMessageBox(hWnd, exitInformation, className))
     {
         if (!System::DestroySystemWindow(hWnd))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("DestroySystemWindow Ê§°Ü¡£"));
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("DestroySystemWindow å¤±è´¥ã€‚"));
         }
     }
 }
@@ -148,7 +148,7 @@ System::String Framework::WindowMessage<MiddleLayer>::GetWindowsClassName(HWnd h
     }
     else
     {
-        return SYSTEM_TEXT("³ÌĞò");
+        return SYSTEM_TEXT("ç¨‹åº");
     }
 }
 
@@ -157,18 +157,18 @@ System::WindowsLResult Framework::WindowMessage<MiddleLayer>::CharMessage(HWnd h
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    // µ±Terminate¼ü±»°´ÏÂÊ±ÍË³öÓ¦ÓÃ³ÌĞò¡£
+    // å½“Terminateé”®è¢«æŒ‰ä¸‹æ—¶é€€å‡ºåº”ç”¨ç¨‹åºã€‚
     if (const auto key = boost::numeric_cast<int>(wParam);
         key == GetTerminateKey())
     {
         if (!SendSystemMessage(hWnd, System::WindowsMessages::Close, 0, 0))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("SendSystemMessage Ê§°Ü¡£"));
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("SendSystemMessage å¤±è´¥ã€‚"));
         }
     }
     else
     {
-        // »ñÈ¡¿Í»§¶Ë¹â±êµÄÎ»ÖÃ¡£
+        // è·å–å®¢æˆ·ç«¯å…‰æ ‡çš„ä½ç½®ã€‚
         const auto point = GetCursorPosition(hWnd);
 
         middleLayer->KeyDown(key, point);
@@ -185,7 +185,7 @@ Framework::WindowPoint Framework::WindowMessage<MiddleLayer>::GetCursorPosition(
     System::WindowsPoint point{};
     if (!System::GetCursorClientPos(hWnd, point))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("GetCursorClientPos Ê§°Ü¡£"));
+        LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("GetCursorClientPos å¤±è´¥ã€‚"));
     }
 
     return WindowPoint{ point };
@@ -210,7 +210,7 @@ System::WindowsLResult Framework::WindowMessage<MiddleLayer>::KeyDownMessage(HWn
 
     const auto virtualKey = boost::numeric_cast<int>(wParam);
 
-    // »ñÈ¡¿Í»§¶Ë¹â±êµÄÎ»ÖÃ¡£
+    // è·å–å®¢æˆ·ç«¯å…‰æ ‡çš„ä½ç½®ã€‚
     const auto point = GetCursorPosition(hWnd);
 
     if (IsSpecialKey(virtualKey))
@@ -218,7 +218,7 @@ System::WindowsLResult Framework::WindowMessage<MiddleLayer>::KeyDownMessage(HWn
         middleLayer->SpecialKeyDown(virtualKey, point);
     }
 
-    // KeyDownÔÚCharMessageÉÏ¼àÌı¡£
+    // KeyDownåœ¨CharMessageä¸Šç›‘å¬ã€‚
 
     System::UnusedFunction(lParam);
 
@@ -251,7 +251,7 @@ System::WindowsLResult Framework::WindowMessage<MiddleLayer>::KeyUpMessage(HWnd 
 
     const auto virtualKey = boost::numeric_cast<int>(wParam);
 
-    // »ñÈ¡¿Í»§¶Ë¹â±êµÄÎ»ÖÃ¡£
+    // è·å–å®¢æˆ·ç«¯å…‰æ ‡çš„ä½ç½®ã€‚
     const auto point = GetCursorPosition(hWnd);
 
     if (IsSpecialKey(virtualKey))
@@ -414,7 +414,7 @@ System::WindowsLResult Framework::WindowMessage<MiddleLayer>::PaintMessage(HWnd 
 
     if (!System::SystemValidateRect(hWnd))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("SystemValidateRect Ê§°Ü¡£"));
+        LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("SystemValidateRect å¤±è´¥ã€‚"));
     }
 
     System::UnusedFunction(wParam, lParam);
@@ -431,7 +431,7 @@ System::WindowsLResult Framework::WindowMessage<MiddleLayer>::EraseBackgroundMes
 
     System::UnusedFunction(hWnd, wParam, lParam);
 
-    // Õâ¸æËßWindows²»²Á³ı±³¾°£¨ÓÉOpenGL»òDirectXÀ´Íê³É£©¡£
+    // è¿™å‘Šè¯‰Windowsä¸æ“¦é™¤èƒŒæ™¯ï¼ˆç”±OpenGLæˆ–DirectXæ¥å®Œæˆï¼‰ã€‚
     return 1;
 }
 

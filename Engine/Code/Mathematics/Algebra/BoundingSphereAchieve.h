@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+ï»¿/// Copyright (c) 2010-2023
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.1 (2023/12/05 10:29)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.1 (2023/12/05 10:29)
 
 #ifndef MATHEMATICS_ALGEBRA_BOUNDING_SPHERE_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_BOUNDING_SPHERE_ACHIEVE_H
@@ -29,10 +29,10 @@ requires std::is_floating_point_v<T>
 Mathematics::BoundingSphere<T>::BoundingSphere(const APointType& center, T radius)
     : center{ center }, radius{ radius }
 {
-    // °ë¾¶±ØĞëÎªÕıÊı¡£Áã°ë¾¶±íÊ¾±ß½çÎŞĞ§¡£
+    // åŠå¾„å¿…é¡»ä¸ºæ­£æ•°ã€‚é›¶åŠå¾„è¡¨ç¤ºè¾¹ç•Œæ— æ•ˆã€‚
     if (radius < MathType::GetValue(0))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("°ë¾¶±ØĞëÎªÕıÊı"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("åŠå¾„å¿…é¡»ä¸ºæ­£æ•°"s))
     }
 
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -69,7 +69,7 @@ void Mathematics::BoundingSphere<T>::SetRadius(T aRadius)
 
     if (aRadius < MathType::GetValue(0))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("°ë¾¶±ØĞëÎªÕıÊı"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("åŠå¾„å¿…é¡»ä¸ºæ­£æ•°"s))
     }
 
     radius = aRadius;
@@ -123,13 +123,13 @@ void Mathematics::BoundingSphere<T>::GrowToContain(const BoundingSphere& bound, 
 
     if (bound.radius <= epsilon)
     {
-        // ÊäÈë±ß½çÊÇÎŞĞ§µÄ£¬²»Ó°ÏìÔö³¤
+        // è¾“å…¥è¾¹ç•Œæ˜¯æ— æ•ˆçš„ï¼Œä¸å½±å“å¢é•¿
         return;
     }
 
     if (radius <= epsilon)
     {
-        // µ±Ç°±ß½çÊÇÎŞĞ§µÄ£¬ËùÒÔÖ»¸³ÖµÊäÈë±ß½ç
+        // å½“å‰è¾¹ç•Œæ˜¯æ— æ•ˆçš„ï¼Œæ‰€ä»¥åªèµ‹å€¼è¾“å…¥è¾¹ç•Œ
         *this = bound;
         return;
     }
@@ -166,7 +166,7 @@ Mathematics::BoundingSphere<T> Mathematics::BoundingSphere<T>::TransformBy(const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    /// Æ×·¶Êı£¨ÌØÕ÷ÖµµÄ×î´ó¾ø¶ÔÖµ£©Ğ¡ÓÚ»òµÈÓÚmax-row-sumºÍmax-col-sumµÄ·¶Êı¡£Òò´Ë£¬¡°·¶Êı¡±ÊÇ×î´ó³ß¶ÈµÄ½üËÆÖµ¡£
+    /// è°±èŒƒæ•°ï¼ˆç‰¹å¾å€¼çš„æœ€å¤§ç»å¯¹å€¼ï¼‰å°äºæˆ–ç­‰äºmax-row-sumå’Œmax-col-sumçš„èŒƒæ•°ã€‚å› æ­¤ï¼Œâ€œèŒƒæ•°â€æ˜¯æœ€å¤§å°ºåº¦çš„è¿‘ä¼¼å€¼ã€‚
     BoundingSphere bound{ transform * center, transform.GetNorm() * radius };
 
     return bound;
@@ -184,12 +184,12 @@ void Mathematics::BoundingSphere<T>::ComputeFromData(int numElements, int stride
 
     if (difference < 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("²½·ùÖµ´íÎó¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ­¥å¹…å€¼é”™è¯¯ã€‚"s))
     }
 
     for (auto i = 0; i < numElements; ++i)
     {
-        // ¼ÙÉèÎ»ÖÃÆ«ÒÆ0£¬ËüÃÇÓ¦¸ÃÎª¶¥µã»º³åÇøÊı¾İ¡£
+        // å‡è®¾ä½ç½®åç§»0ï¼Œå®ƒä»¬åº”è¯¥ä¸ºé¡¶ç‚¹ç¼“å†²åŒºæ•°æ®ã€‚
         const auto x = data.Increase<T>();
         const auto y = data.Increase<T>();
         const auto z = data.Increase<T>();
@@ -224,7 +224,7 @@ void Mathematics::BoundingSphere<T>::ComputeFromData(const APointContainer& data
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    // ÖĞµãÊÇÎ»ÖÃµÄÆ½¾ùÖµ
+    // ä¸­ç‚¹æ˜¯ä½ç½®çš„å¹³å‡å€¼
     APointType sum{};
     for (const auto& position : data)
     {
@@ -233,7 +233,7 @@ void Mathematics::BoundingSphere<T>::ComputeFromData(const APointContainer& data
 
     center = sum / boost::numeric_cast<T>(data.size());
 
-    // °ë¾¶ÊÇÎ»ÖÃµ½ÖĞĞÄµÄ×î´ó¾àÀë
+    // åŠå¾„æ˜¯ä½ç½®åˆ°ä¸­å¿ƒçš„æœ€å¤§è·ç¦»
     auto maxRadiusSquared = MathType::GetValue(0);
     for (const auto& position : data)
     {
@@ -258,7 +258,7 @@ bool Mathematics::BoundingSphere<T>::TestIntersection(const APointType& origin, 
 
     if (radius <= MathType::GetZeroTolerance())
     {
-        // ±ß½çÊÇÎŞĞ§µÄ£¬²»Ïà½»¡£
+        // è¾¹ç•Œæ˜¯æ— æ•ˆçš„ï¼Œä¸ç›¸äº¤ã€‚
         return false;
     }
 
@@ -279,11 +279,11 @@ template <typename T>
 requires std::is_floating_point_v<T>
 bool Mathematics::BoundingSphere<T>::TestLineIntersection(const APointType& origin, const AVectorType& direction, T tMax) const noexcept(gAssert < 2 || gMathematicsAssert < 2)
 {
-    MATHEMATICS_ASSERTION_2(MathType::Approximate(tMax, MathType::maxReal), "tMax¶ÔÏß±ØĞëÊÇÎŞÇî´ó¡£\n");
+    MATHEMATICS_ASSERTION_2(MathType::Approximate(tMax, MathType::maxReal), "tMaxå¯¹çº¿å¿…é¡»æ˜¯æ— ç©·å¤§ã€‚\n");
 
     System::UnusedFunction(tMax);
 
-    // ²âÊÔÇò¡ª¡ªÖ±ÏßÏà½»
+    // æµ‹è¯•çƒâ€”â€”ç›´çº¿ç›¸äº¤
     const auto pointDifference = origin - center;
     const auto difference = pointDifference.SquaredLength() - radius * radius;
     const auto dot = Dot(direction, pointDifference);
@@ -296,26 +296,26 @@ template <typename T>
 requires std::is_floating_point_v<T>
 bool Mathematics::BoundingSphere<T>::TestRayIntersection(const APointType& origin, const AVectorType& direction, T tMin) const noexcept(gAssert < 2 || gMathematicsAssert < 2)
 {
-    MATHEMATICS_ASSERTION_2(MathType::Approximate(tMin, MathType::GetValue(0)), "tMinÔÚÉäÏßÖĞ±ØĞëÊÇÁã¡£\n");
+    MATHEMATICS_ASSERTION_2(MathType::Approximate(tMin, MathType::GetValue(0)), "tMinåœ¨å°„çº¿ä¸­å¿…é¡»æ˜¯é›¶ã€‚\n");
 
     System::UnusedFunction(tMin);
 
-    // ²âÊÔÇò¡ª¡ªÉäÏßÏà½»
+    // æµ‹è¯•çƒâ€”â€”å°„çº¿ç›¸äº¤
     const auto pointDifference = origin - center;
     auto difference = pointDifference.SquaredLength() - radius * radius;
     if (difference <= 0.0f)
     {
-        // ÉäÏßÔ­µãÔÚÇòÄÚ²¿
+        // å°„çº¿åŸç‚¹åœ¨çƒå†…éƒ¨
         return true;
     }
     else
     {
-        // ÉäÏßÔ­µãÔÚÇòÍâ²¿
+        // å°„çº¿åŸç‚¹åœ¨çƒå¤–éƒ¨
         auto dot = Dot(direction, pointDifference);
         if (0.0f <= dot)
         {
-            // ÉäÏßÓëpointDifferenceĞÎ³ÉÒ»¸öÈñ½Ç£¬Òò´ËÉäÏßÊÇ´ÓÇòÌåÉä³ö¡£
-            // Òò´Ë£¬ÉäÏßÔ­µãÔÚÇòÌåÍâ²¿£¬µãP + t * D¶ÔÓÚt > = 0Ô¶ÀëÇòÃæ¡£
+            // å°„çº¿ä¸pointDifferenceå½¢æˆä¸€ä¸ªé”è§’ï¼Œå› æ­¤å°„çº¿æ˜¯ä»çƒä½“å°„å‡ºã€‚
+            // å› æ­¤ï¼Œå°„çº¿åŸç‚¹åœ¨çƒä½“å¤–éƒ¨ï¼Œç‚¹P + t * Då¯¹äºt > = 0è¿œç¦»çƒé¢ã€‚
             return false;
         }
 
@@ -328,9 +328,9 @@ template <typename T>
 requires std::is_floating_point_v<T>
 bool Mathematics::BoundingSphere<T>::TestSegmentIntersection(const APointType& origin, const AVectorType& direction, T tMin, T tMax) const
 {
-    MATHEMATICS_ASSERTION_1(tMin < tMax, "tmin < tmaxÔÚÏß¶ÎÖĞµÄ±ØĞèµÄ¡£\n");
+    MATHEMATICS_ASSERTION_1(tMin < tMax, "tmin < tmaxåœ¨çº¿æ®µä¸­çš„å¿…éœ€çš„ã€‚\n");
 
-    // ²âÊÔÇò¡ª¡ªÏß¶ÎÏà½»
+    // æµ‹è¯•çƒâ€”â€”çº¿æ®µç›¸äº¤
 
     const auto segmentExtent = MathType::GetRational(1, 2) * (tMin + tMax);
     const auto segmentOrigin = origin + segmentExtent * direction;
@@ -339,7 +339,7 @@ bool Mathematics::BoundingSphere<T>::TestSegmentIntersection(const APointType& o
     auto difference = pointDifference.SquaredLength() - radius * radius;
     if (difference < 0.0f)
     {
-        // Ïß¶ÎÖĞĞÄÎ»ÓÚÇòÌåÄÚ²¿¡£
+        // çº¿æ®µä¸­å¿ƒä½äºçƒä½“å†…éƒ¨ã€‚
         return false;
     }
 
@@ -347,7 +347,7 @@ bool Mathematics::BoundingSphere<T>::TestSegmentIntersection(const APointType& o
     auto discriminant = dot * dot - difference;
     if (discriminant < 0.0f)
     {
-        // Ö±ÏßÔÚÇòÌåÖ®Íâ£¬ÕâÒâÎ¶×ÅÏß¶ÎÒ²ÔÚ¡£
+        // ç›´çº¿åœ¨çƒä½“ä¹‹å¤–ï¼Œè¿™æ„å‘³ç€çº¿æ®µä¹Ÿåœ¨ã€‚
         return false;
     }
 

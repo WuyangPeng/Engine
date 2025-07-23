@@ -1,22 +1,22 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 21:50)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 21:50)
 
 #ifndef SYSTEM_HELPER_SELECT_PLATFORM_CONFIG_H
 #define SYSTEM_HELPER_SELECT_PLATFORM_CONFIG_H
 
-/// ÕÒµ½ÎÒÃÇËùÔÚµÄÆ½Ì¨£¬
-/// ²¢¸ù¾İĞèÒª¶¨ÒåTCRE_PLATFORM_CONFIG¡£
-/// ¸÷¸öÍ·ÎÄ¼şÖĞ¶¨ÒåºêTCRE_SYSTEM_PLATFORM±íÊ¾Æ½Ì¨Ãû³Æ¡£
+/// æ‰¾åˆ°æˆ‘ä»¬æ‰€åœ¨çš„å¹³å°ï¼Œ
+/// å¹¶æ ¹æ®éœ€è¦å®šä¹‰TCRE_PLATFORM_CONFIGã€‚
+/// å„ä¸ªå¤´æ–‡ä»¶ä¸­å®šä¹‰å®TCRE_SYSTEM_PLATFORMè¡¨ç¤ºå¹³å°åç§°ã€‚
 
 #if (defined(linux) || defined(__linux) || defined(__linux__) || defined(__GNU__) || defined(__GLIBC__)) && !defined(_CRAYC)
 
-    /// linux£¬»¹ÓĞÊ¹ÓÃGLIBCµÄÆäËûÆ½Ì¨£¨HurdµÈ£©¡£
+    /// linuxï¼Œè¿˜æœ‰ä½¿ç”¨GLIBCçš„å…¶ä»–å¹³å°ï¼ˆHurdç­‰ï¼‰ã€‚
     #define TCRE_PLATFORM_CONFIG "Platform/Linux.h"
 
 #elif defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__DragonFly__)
@@ -41,7 +41,7 @@
 
 #elif defined(__CYGWIN__)
 
-    /// cygwin ²»ÊÇ Win32
+    /// cygwin ä¸æ˜¯ Win32
     #define TCRE_PLATFORM_CONFIG "Platform/Cygwin.h"
 
 #elif defined(_WIN32) || defined(__WIN32__) || defined(WIN32)
@@ -111,8 +111,8 @@
 
 #else  // !defined(ALL_PLATFORM)
 
-    /// Õâ±ØĞëÔÚ×îºó£¬Éú³ÉÒ»¸ö´íÎó£¬Èç¹ûÎÒÃÇÎŞ·¨Ê¶±ğÆ½Ì¨¡£
-    #error "Æ½Ì¨ÎŞ·¨±»ÕıÈ·Ê¶±ğ¡£"
+    /// è¿™å¿…é¡»åœ¨æœ€åï¼Œç”Ÿæˆä¸€ä¸ªé”™è¯¯ï¼Œå¦‚æœæˆ‘ä»¬æ— æ³•è¯†åˆ«å¹³å°ã€‚
+    #error "å¹³å°æ— æ³•è¢«æ­£ç¡®è¯†åˆ«ã€‚"
 
 #endif  // defined(ALL_PLATFORM)
 

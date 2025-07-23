@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+ï»¿/// Copyright (c) 2010-2023
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.1 (2023/11/23 09:18)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.1 (2023/11/23 09:18)
 
 #include "WorldCoordinateFrameTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -13,6 +13,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 #include "Rendering/RenderingTesting/SceneGraphSuite/Detail/ViewVolumeTest.h"
 
 Rendering::WorldCoordinateFrameTesting::WorldCoordinateFrameTesting(const OStreamShared& stream)
@@ -118,15 +119,15 @@ bool Rendering::WorldCoordinateFrameTesting::MatrixTest()
 
     for (auto outerIndex = 0; outerIndex < AVector::vectorSize; ++outerIndex)
     {
-#ifdef MATHEMATICS_USE_MATRIX_VECTOR
+        #ifdef MATHEMATICS_USE_MATRIX_VECTOR
 
         const auto vector1 = viewMatrix.GetRow(outerIndex);
 
-#else  // !MATHEMATICS_USE_MATRIX_VECTOR
+        #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
         const auto vector1 = viewMatrix.GetColumn(outerIndex);
 
-#endif  // MATHEMATICS_USE_MATRIX_VECTOR
+        #endif  // MATHEMATICS_USE_MATRIX_VECTOR
 
         for (auto innerIndex = 0; innerIndex < AVector::vectorSize; ++innerIndex)
         {

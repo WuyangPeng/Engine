@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 16:32)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 16:32)
 
 #ifndef MATHEMATICS_DISTANCE_DIST_LINE3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_DISTANCE_DIST_LINE3_TRIANGLE3_DETAIL_H
@@ -57,7 +57,7 @@ typename Mathematics::DistanceLine3Triangle3<Real>::DistanceResult Mathematics::
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    // ²âÊÔÏßÊÇ·ñÓëÈı½ÇĞÎÏà½»¡£ Èç¹ûÊÇÕâÑù£¬ÔòÆ½·½¾àÀëÎªÁã¡£
+    // æµ‹è¯•çº¿æ˜¯å¦ä¸ä¸‰è§’å½¢ç›¸äº¤ã€‚ å¦‚æœæ˜¯è¿™æ ·ï¼Œåˆ™å¹³æ–¹è·ç¦»ä¸ºé›¶ã€‚
     const auto edge0 = triangle.GetVertex(1) - triangle.GetVertex(0);
     const auto edge1 = triangle.GetVertex(2) - triangle.GetVertex(0);
     const auto normal = Vector3ToolsType::UnitCrossProduct(edge0, edge1);
@@ -65,7 +65,7 @@ typename Mathematics::DistanceLine3Triangle3<Real>::DistanceResult Mathematics::
     if (const auto normalDotDirection = Vector3ToolsType::DotProduct(normal, line.GetDirection());
         MathType::GetZeroTolerance() < MathType::FAbs(normalDotDirection))
     {
-        // Ö±ÏßºÍÈı½ÇĞÎ²»Æ½ĞĞ£¬Òò´ËÖ±ÏßÓëÈı½ÇĞÎµÄÆ½ÃæÏà½»¡£
+        // ç›´çº¿å’Œä¸‰è§’å½¢ä¸å¹³è¡Œï¼Œå› æ­¤ç›´çº¿ä¸ä¸‰è§’å½¢çš„å¹³é¢ç›¸äº¤ã€‚
         auto diff = line.GetOrigin() - triangle.GetVertex(0);
 
         const auto Vector3OrthonormalBasis = Vector3ToolsType::GenerateComplementBasis(line.GetDirection());
@@ -80,25 +80,25 @@ typename Mathematics::DistanceLine3Triangle3<Real>::DistanceResult Mathematics::
         auto vVectorDotDiff = Vector3ToolsType::DotProduct(vVector, diff);
         auto invDet = (MathType::GetValue(1)) / (uVectorDotEdge0 * vVectorDotEdge1 - uVectorDotEdge1 * vVectorDotEdge0);
 
-        // Ïà½»µãµÄÖØĞÄ×ø±ê¡£
+        // ç›¸äº¤ç‚¹çš„é‡å¿ƒåæ ‡ã€‚
         auto b1 = (vVectorDotEdge1 * uVectorDotDiff - uVectorDotEdge1 * vVectorDotDiff) * invDet;
         auto b2 = (uVectorDotEdge0 * vVectorDotDiff - vVectorDotEdge0 * uVectorDotDiff) * invDet;
         auto b0 = MathType::GetValue(1) - b1 - b2;
 
         if (MathType::GetValue(0) <= b0 && MathType::GetValue(0) <= b1 && MathType::GetValue(0) <= b2)
         {
-            // Ïà½»µãµÄÏß²ÎÊı¡£
+            // ç›¸äº¤ç‚¹çš„çº¿å‚æ•°ã€‚
             auto directionDotEdge0 = Vector3ToolsType::DotProduct(line.GetDirection(), edge0);
             auto directionDotEdge1 = Vector3ToolsType::DotProduct(line.GetDirection(), edge1);
             auto directionDotDiff = Vector3ToolsType::DotProduct(line.GetDirection(), diff);
             auto lineParameter = b1 * directionDotEdge0 + b2 * directionDotEdge1 - directionDotDiff;
 
-            // Ïà½»µãµÄÖØĞÄ×ø±ê¡£
+            // ç›¸äº¤ç‚¹çš„é‡å¿ƒåæ ‡ã€‚
             triangleBary[0] = b0;
             triangleBary[1] = b1;
             triangleBary[2] = b2;
 
-            // Ïà½»µãÔÚÈı½ÇĞÎµÄÄÚ²¿»òÉÏ·½¡£
+            // ç›¸äº¤ç‚¹åœ¨ä¸‰è§’å½¢çš„å†…éƒ¨æˆ–ä¸Šæ–¹ã€‚
             const auto closestPoint0 = line.GetOrigin() + lineParameter * line.GetDirection();
 
             const auto closestPoint1 = triangle.GetVertex(0) + b1 * edge0 + b2 * edge1;
@@ -111,8 +111,8 @@ typename Mathematics::DistanceLine3Triangle3<Real>::DistanceResult Mathematics::
     Vector3Type closestPoint1{};
     auto lineParameter = MathType::GetValue(0);
 
-    /// £¨1£©Ïß²»Æ½ĞĞÓÚÈı½ÇĞÎ£¬²¢ÇÒÏßºÍÈı½ÇĞÎµÄÆ½ÃæµÄ½»µãÔÚÈı½ÇĞÎÖ®Íâ£¬»òÕß£¨2£©ÏßºÍÈı½ÇĞÎÆ½ĞĞ¡£
-    /// ÎŞÂÛÈçºÎ£¬Èı½ÇĞÎÉÏµÄ×î½Ó½üµãÔÚÈı½ÇĞÎµÄ±ßÔµÉÏ¡£ ½«ÏßÓëÈı½ÇĞÎµÄËùÓĞÈı¸ö±ßÔµ½øĞĞ±È½Ï¡£
+    /// ï¼ˆ1ï¼‰çº¿ä¸å¹³è¡Œäºä¸‰è§’å½¢ï¼Œå¹¶ä¸”çº¿å’Œä¸‰è§’å½¢çš„å¹³é¢çš„äº¤ç‚¹åœ¨ä¸‰è§’å½¢ä¹‹å¤–ï¼Œæˆ–è€…ï¼ˆ2ï¼‰çº¿å’Œä¸‰è§’å½¢å¹³è¡Œã€‚
+    /// æ— è®ºå¦‚ä½•ï¼Œä¸‰è§’å½¢ä¸Šçš„æœ€æ¥è¿‘ç‚¹åœ¨ä¸‰è§’å½¢çš„è¾¹ç¼˜ä¸Šã€‚ å°†çº¿ä¸ä¸‰è§’å½¢çš„æ‰€æœ‰ä¸‰ä¸ªè¾¹ç¼˜è¿›è¡Œæ¯”è¾ƒã€‚
     auto sqrDist = MathType::maxReal;
     constexpr auto size = 3;
     for (auto i0 = 2, i1 = 0; i1 < size; i0 = i1++)

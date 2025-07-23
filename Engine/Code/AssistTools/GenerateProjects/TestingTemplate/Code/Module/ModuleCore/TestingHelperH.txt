@@ -1,4 +1,4 @@
-$Copyright$
+﻿$Copyright$
 
 #ifndef $ModuleUppercase$_CORE_TESTING_TESTING_HELPER_H
 #define $ModuleUppercase$_CORE_TESTING_TESTING_HELPER_H

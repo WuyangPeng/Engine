@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/05 09:27)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/05 09:27)
 
 #ifndef SYSTEM_FILE_MANAGER_FILE_TOOLS_H
 #define SYSTEM_FILE_MANAGER_FILE_TOOLS_H
@@ -16,10 +16,20 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "System/Security/Using/SecurityBaseUsing.h"
 
-/// ÎÄ¼ş¹ÜÀí¸¨Öú¹¤¾ß
+/// æ–‡ä»¶ç®¡ç†è¾…åŠ©å·¥å…·
 namespace System
 {
-    void SYSTEM_DEFAULT_DECLARE RecursionDeleteFileDirectory(const String& pathName);
+#ifdef SYSTEM_PLATFORM_LINUX
+
+    void SYSTEM_DEFAULT_DECLARE RecursionDeleteFileDirectory(const std::string& pathName);
+
+#else // !SYSTEM_PLATFORM_LINUX
+
+    void SYSTEM_DEFAULT_DECLARE RecursionDeleteFileDirectory(const std::wstring& pathName);
+
+#endif  // SYSTEM_PLATFORM_LINUX
+
+
     void SYSTEM_DEFAULT_DECLARE CreateFileDirectory(const String& pathName) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE CreateFileDirectory(const String& pathName, WindowSecurityAttributesPtr securityAttributes) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE DeleteFileDirectory(const TChar* pathName) noexcept;

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #include "SexagenaryCycle.h"
 #include "SexagenaryCycleContainerDetail.h"
@@ -27,12 +27,12 @@ AncientBooks::SexagenaryCycleContainer::SexagenaryCycleContainer(const CSVConten
 
 void AncientBooks::SexagenaryCycleContainer::Parsing(const CSVContent& csvContent)
 {
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("sexagenaryCycle±í¿ªÊ¼ÔØÈë¡­¡­"));
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("sexagenaryCycleè¡¨å¼€å§‹è½½å…¥â€¦â€¦"));
 
     Load(csvContent);
     Unique();
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("sexagenaryCycle±í½áÊøÔØÈë¡­¡­"));
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("sexagenaryCycleè¡¨ç»“æŸè½½å…¥â€¦â€¦"));
 }
 
 void AncientBooks::SexagenaryCycleContainer::Load(const CSVContent& csvContent)
@@ -57,7 +57,7 @@ void AncientBooks::SexagenaryCycleContainer::Unique()
     const auto iter = std::ranges::unique(sexagenaryCycle, [](const auto& lhs, const auto& rhs) noexcept {
         if((*lhs).GetKey() == (*rhs).GetKey())
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, User, SYSTEM_TEXT("sexagenaryCycle±í´æÔÚÖØ¸´Ö÷¼ü£¬key = "), (*lhs).GetKey(), SYSTEM_TEXT("¡£\n"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, User, SYSTEM_TEXT("sexagenaryCycleè¡¨å­˜åœ¨é‡å¤ä¸»é”®ï¼Œkey = "), (*lhs).GetKey(), SYSTEM_TEXT("ã€‚\n"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
 
             return true;
         }
@@ -99,7 +99,7 @@ AncientBooks::SexagenaryCycleContainer::ConstSexagenaryCycleSharedPtr AncientBoo
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("sexagenaryCycle±íÎ´ÕÒµ½key = "s) + System::ToString(key) + SYSTEM_TEXT("µÄÅäÖÃĞÅÏ¢¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("sexagenaryCycleè¡¨æœªæ‰¾åˆ°key = "s) + System::ToString(key) + SYSTEM_TEXT("çš„é…ç½®ä¿¡æ¯ã€‚"s))
     }
 }
 

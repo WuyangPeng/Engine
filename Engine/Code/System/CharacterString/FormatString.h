@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/05 17:07)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/05 17:07)
 
 #ifndef SYSTEM_CHARACTER_STRING_FORMAT_STRING_H
 #define SYSTEM_CHARACTER_STRING_FORMAT_STRING_H
@@ -26,14 +26,14 @@ namespace System
     NODISCARD SYSTEM_DEFAULT_DECLARE char* StringToken(char* string, char const* delimiter, char** context) noexcept;
     NODISCARD SYSTEM_DEFAULT_DECLARE const char* StringString(char const* string, char const* subString) noexcept;
 
-    /// ·µ»Ø´æ´¢ÔÚbufferÖĞµÄ×Ö·û£¬²»°üÀ¨ÖÕÖ¹null×Ö·û¡£´íÎó·µ»Ø -1¡£
+    /// è¿”å›å­˜å‚¨åœ¨bufferä¸­çš„å­—ç¬¦ï¼Œä¸åŒ…æ‹¬ç»ˆæ­¢nullå­—ç¬¦ã€‚é”™è¯¯è¿”å› -1ã€‚
     NODISCARD int SYSTEM_DEFAULT_DECLARE VsnPrintF(char* buffer, size_t size, const char* format, va_list argList) noexcept;
 
-    /// ·µ»Ø´æ´¢ÔÚbufferÖĞµÄ×Ö·û£¬
-    /// ²»°üÀ¨ÖÕÖ¹null×Ö·û¡£
-    /// ´«ÈëµÄsizeInBytes´óĞ¡°üÀ¨ÖÕÖ¹null×Ö·û£¬
-    /// bufferµÄ´óĞ¡ÖÁÉÙÎªsizeInBytes¡£
-    /// ´íÎó·µ»Ø-1¡£
+    /// è¿”å›å­˜å‚¨åœ¨bufferä¸­çš„å­—ç¬¦ï¼Œ
+    /// ä¸åŒ…æ‹¬ç»ˆæ­¢nullå­—ç¬¦ã€‚
+    /// ä¼ å…¥çš„sizeInByteså¤§å°åŒ…æ‹¬ç»ˆæ­¢nullå­—ç¬¦ï¼Œ
+    /// bufferçš„å¤§å°è‡³å°‘ä¸ºsizeInBytesã€‚
+    /// é”™è¯¯è¿”å›-1ã€‚
     template <typename... Types>
     NODISCARD int SnPrintF(char* buffer, size_t sizeInBytes, size_t maxCount, const char* format, Types... args) noexcept requires(std::is_same_v<typename IsScalar<Types...>::Type, std::true_type>);
     ;

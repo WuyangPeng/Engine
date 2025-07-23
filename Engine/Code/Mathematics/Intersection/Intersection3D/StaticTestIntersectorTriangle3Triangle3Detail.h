@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:30)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:30)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_TRIANGLE3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_TRIANGLE3_TRIANGLE3_DETAIL_H
@@ -46,13 +46,13 @@ bool Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::IsValid() const
 template <typename Real>
 void Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::Test()
 {
-    // »ñÈ¡lhsTriangleµÄ±ßÏòÁ¿
+    // è·å–lhsTriangleçš„è¾¹å‘é‡
     const auto lhsEdge = lhsTriangle.GetEdgeVectors();
 
-    // »ñÈ¡lhsTriangleµÄ·¨Ïß
+    // è·å–lhsTriangleçš„æ³•çº¿
     const auto lhsNormal = lhsTriangle.GetNormal();
 
-    // ½«Èı½ÇĞÎrhsTriangleÍ¶Ó°µ½Èı½ÇĞÎm_LhsTriangleµÄ·¨ÏßÉÏ£¬½øĞĞ·Ö¸î²âÊÔ¡£
+    // å°†ä¸‰è§’å½¢rhsTriangleæŠ•å½±åˆ°ä¸‰è§’å½¢m_LhsTriangleçš„æ³•çº¿ä¸Šï¼Œè¿›è¡Œåˆ†å‰²æµ‹è¯•ã€‚
     auto lhsNormalDotVertex0 = Vector3ToolsType::DotProduct(lhsNormal, lhsTriangle.GetVertex(0));
 
     const TriangleProjectOntoAxis<Real> rhsTriangleProjectOntoAxis{ rhsTriangle, lhsNormal };
@@ -62,19 +62,19 @@ void Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::Test()
         return;
     }
 
-    // »ñÈ¡m_RhsTriangleµÄ±ßÏòÁ¿
+    // è·å–m_RhsTriangleçš„è¾¹å‘é‡
     auto rhsEdge = rhsTriangle.GetEdgeVectors();
 
-    // »ñÈ¡m_RhsTriangleµÄ·¨Ïß
+    // è·å–m_RhsTriangleçš„æ³•çº¿
     const auto rhsNormal = rhsTriangle.GetNormal();
 
     const auto lhsNormalCrossRhsNormal = Vector3ToolsType::UnitCrossProduct(lhsNormal, rhsNormal);
 
     if (this->GetEpsilon() <= Vector3ToolsType::DotProduct(lhsNormalCrossRhsNormal, lhsNormalCrossRhsNormal))
     {
-        // Èı½ÇĞÎ²»Æ½ĞĞ¡£
+        // ä¸‰è§’å½¢ä¸å¹³è¡Œã€‚
 
-        // ½«Èı½ÇĞÎm_LhsTriangleÍ¶Ó°µ½Èı½ÇĞÎm_RhsTriangleµÄ·¨ÏßÉÏ£¬½øĞĞ·Ö¸î²âÊÔ¡£
+        // å°†ä¸‰è§’å½¢m_LhsTriangleæŠ•å½±åˆ°ä¸‰è§’å½¢m_RhsTriangleçš„æ³•çº¿ä¸Šï¼Œè¿›è¡Œåˆ†å‰²æµ‹è¯•ã€‚
         auto rhsNormalDotVertex0 = Vector3ToolsType::DotProduct(rhsNormal, rhsTriangle.GetVertex(0));
 
         const TriangleProjectOntoAxis<Real> lhsTriangleProjectOntoAxis{ lhsTriangle, rhsNormal };
@@ -84,7 +84,7 @@ void Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::Test()
             return;
         }
 
-        // ·½Ïò lhsEdge[lhsIndex] X rhsEdge[rhsIndex]
+        // æ–¹å‘ lhsEdge[lhsIndex] X rhsEdge[rhsIndex]
         for (auto rhsIndex = 0; rhsIndex < 3; ++rhsIndex)
         {
             for (auto lhsIndex = 0; lhsIndex < 3; ++lhsIndex)
@@ -101,12 +101,12 @@ void Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::Test()
             }
         }
 
-        // ²âÊÔ²éÑ¯²»ÖªµÀ½»¼¯¡£
+        // æµ‹è¯•æŸ¥è¯¢ä¸çŸ¥é“äº¤é›†ã€‚
         this->SetIntersectionType(IntersectionType::Other);
     }
-    else  // Èı½ÇĞÎÊÇÆ½ĞĞµÄ£¨²¢ÇÒÊÂÊµÉÏÊÇ¹²ÃæµÄ£©¡£
+    else  // ä¸‰è§’å½¢æ˜¯å¹³è¡Œçš„ï¼ˆå¹¶ä¸”äº‹å®ä¸Šæ˜¯å…±é¢çš„ï¼‰ã€‚
     {
-        // ·½Ïò lhsTriangle X lhsEdge[index]
+        // æ–¹å‘ lhsTriangle X lhsEdge[index]
         for (auto index = 0; index < 3; ++index)
         {
             const auto dir = Vector3ToolsType::UnitCrossProduct(lhsNormal, lhsEdge.at(index));
@@ -120,7 +120,7 @@ void Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::Test()
             }
         }
 
-        // ·½Ïò rhsTriangle X rhsEdge[index]
+        // æ–¹å‘ rhsTriangle X rhsEdge[index]
         for (auto index = 0; index < 3; ++index)
         {
             const auto dir = Vector3ToolsType::UnitCrossProduct(rhsNormal, rhsEdge.at(index));
@@ -134,7 +134,7 @@ void Mathematics::StaticTestIntersectorTriangle3Triangle3<Real>::Test()
             }
         }
 
-        // ²âÊÔ²éÑ¯²»ÖªµÀ½»¼¯¡£
+        // æµ‹è¯•æŸ¥è¯¢ä¸çŸ¥é“äº¤é›†ã€‚
         this->SetIntersectionType(IntersectionType::Plane);
     }
 }

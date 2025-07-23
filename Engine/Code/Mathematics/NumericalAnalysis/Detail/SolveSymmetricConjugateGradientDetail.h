@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 09:41)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 09:41)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SOLVE_SYMMETRIC_CONJUGATE_GRADIENT_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SOLVE_SYMMETRIC_CONJUGATE_GRADIENT_DETAIL_H
@@ -47,7 +47,7 @@ void Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::CalculateNormal
 template <typename Real, template <typename> class Matrix>
 void Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::FirstIteration()
 {
-    // µÚÒ»´Îµü´ú¡£
+    // ç¬¬ä¸€æ¬¡è¿­ä»£ã€‚
     dot0 = Dot(inputAmend1, inputAmend1);
     Multiply();
     const auto inputAmend2Dot = Dot(inputAmend2, product);
@@ -61,7 +61,7 @@ void Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::FirstIteration(
 template <typename Real, template <typename> class Matrix>
 void Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::RemainingIterations()
 {
-    // Ê£ÓàµÄµü´ú¡£
+    // å‰©ä½™çš„è¿­ä»£ã€‚
     constexpr auto max = 1024;
     auto secondRoot = Math<Real>::Sqrt(normal);
 
@@ -85,7 +85,7 @@ void Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::RemainingIterat
         dot1 = Dot(inputAmend1, inputAmend1);
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Ñ­»·³¬³ö´ÎÊı£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("å¾ªç¯è¶…å‡ºæ¬¡æ•°ï¼"s))
 }
 
 template <typename Real, template <typename> class Matrix>

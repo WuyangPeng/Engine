@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 13:44)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 13:44)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_ODE_SOLVER_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_ODE_SOLVER_H
@@ -35,12 +35,12 @@ namespace Mathematics
             Data(Real t, const Container& x);
         };
 
-        // ¸ÃÏµÍ³ÊÇdx/dt = F(t,x)¡£
-        // xµÄÎ¬¶È´«µİ¸øOdeSolverµÄ¹¹Ôìº¯Êı£¬ÒªºÍxºÍF(t,x) ´óĞ¡Ò»ÖÂ¡£
-        // ·µ»ØÖµF(t,x)
+        // è¯¥ç³»ç»Ÿæ˜¯dx/dt = F(t,x)ã€‚
+        // xçš„ç»´åº¦ä¼ é€’ç»™OdeSolverçš„æ„é€ å‡½æ•°ï¼Œè¦å’Œxå’ŒF(t,x) å¤§å°ä¸€è‡´ã€‚
+        // è¿”å›å€¼F(t,x)
         using Function = Container (*)(Real,  // t
                                        const Container&,  // x
-                                       const UserDataType*);  // ÓÃ»§¶¨ÒåÊı¾İ
+                                       const UserDataType*);  // ç”¨æˆ·å®šä¹‰æ•°æ®
 
     public:
         OdeSolver(int dimension, Real step, Function function, const UserDataType* userData);

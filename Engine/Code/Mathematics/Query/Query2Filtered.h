@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:37)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:37)
 
 #ifndef MATHEMATICS_QUERY_QUERY2_FILTERED_H
 #define MATHEMATICS_QUERY_QUERY2_FILTERED_H
@@ -29,19 +29,19 @@ namespace Mathematics
         using VerticesType = typename ParentType::VerticesType;
 
     public:
-        // »ùÀà´¦Àí¸¡µã²éÑ¯¡£Ã¿¸ö²éÑ¯Éæ¼°ĞĞÁĞÊ½ºÍÁã½øĞĞ±È½Ï¡£
-        // Èç¹û¸ÃĞĞÁĞÊ½×ã¹»½Ó½üÁã£¬ÊıÖµËÄÉáÎåÈëÎó²î¿ÉÄÜ»áµ¼ÖÂĞĞÁĞÊ½·ûºÅ±»´íÎó·ÖÀà¡£
-        // ÎªÁË±ÜÃâÕâÖÖÇé¿ö£¬¸Ã²éÑ¯±»ÖØ¸´Ê¹ÓÃÈ·ÇĞÓĞÀíÊıµÄËãÊõ¡£
-        // ÄúÍ¨¹ı'uncertainty'£¬Ö¸¶¨½Ó½üÁãµÄÇø¼ä[0, 1]µÄÖµÇĞ»»µ½ÓĞÀíĞÔµÄËãÊõ¡£
-        // uncertaintyÎª0»áµ¼ÖÂÀàµÄĞĞÎª¾ÍºÃÏñËüÊÇQuery2¡£
-        // uncertaintyÎª1»áµ¼ÖÂÀàµÄĞĞÎª¾ÍºÃÏñËüÊÇQuery2Rational¡£
+        // åŸºç±»å¤„ç†æµ®ç‚¹æŸ¥è¯¢ã€‚æ¯ä¸ªæŸ¥è¯¢æ¶‰åŠè¡Œåˆ—å¼å’Œé›¶è¿›è¡Œæ¯”è¾ƒã€‚
+        // å¦‚æœè¯¥è¡Œåˆ—å¼è¶³å¤Ÿæ¥è¿‘é›¶ï¼Œæ•°å€¼å››èˆäº”å…¥è¯¯å·®å¯èƒ½ä¼šå¯¼è‡´è¡Œåˆ—å¼ç¬¦å·è¢«é”™è¯¯åˆ†ç±»ã€‚
+        // ä¸ºäº†é¿å…è¿™ç§æƒ…å†µï¼Œè¯¥æŸ¥è¯¢è¢«é‡å¤ä½¿ç”¨ç¡®åˆ‡æœ‰ç†æ•°çš„ç®—æœ¯ã€‚
+        // æ‚¨é€šè¿‡'uncertainty'ï¼ŒæŒ‡å®šæ¥è¿‘é›¶çš„åŒºé—´[0, 1]çš„å€¼åˆ‡æ¢åˆ°æœ‰ç†æ€§çš„ç®—æœ¯ã€‚
+        // uncertaintyä¸º0ä¼šå¯¼è‡´ç±»çš„è¡Œä¸ºå°±å¥½åƒå®ƒæ˜¯Query2ã€‚
+        // uncertaintyä¸º1ä¼šå¯¼è‡´ç±»çš„è¡Œä¸ºå°±å¥½åƒå®ƒæ˜¯Query2Rationalã€‚
         Query2Filtered(const VerticesType& vertices, Real uncertainty);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         NODISCARD QueryType GetType() const noexcept override;
 
-        // ¹ØÓÚÒ»¸öµãµÄ¸÷ÖÖ¼¸ºÎ¶ÔÏóÖ®¼äµÄ¹ØÏµ²éÑ¯¡£
+        // å…³äºä¸€ä¸ªç‚¹çš„å„ç§å‡ ä½•å¯¹è±¡ä¹‹é—´çš„å…³ç³»æŸ¥è¯¢ã€‚
 
         NODISCARD LineQueryType ToLine(int index, int lhsVerticesIndex, int rhsVerticesIndex) const override;
         NODISCARD LineQueryType ToLine(const Vector2& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const override;

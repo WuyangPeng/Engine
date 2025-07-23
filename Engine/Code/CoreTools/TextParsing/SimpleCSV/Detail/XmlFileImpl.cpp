@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 11:25)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 11:25)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,10 +17,10 @@
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVException.h"
 #include "CoreTools/TextParsing/SimpleCSV/XmlData.h"
 
-/// ¹¹Ôìº¯ÊıÒÔ¸¸XLDocumentºÍÎÄ¼şÂ·¾¶×÷ÎªÊäÈë´´½¨Ò»¸öĞÂ¶ÔÏó£¬
-/// ¿ÉÑ¡ÊäÈëÊÇ´øÓĞXMLÊı¾İµÄstd::string¡£
-/// Èç¹û XML Êı¾İÓÉ×Ö·û´®Ìá¹©£¬ÔòÔÚ±£´æÎÄµµÊ±½«¸²¸Ç.zip ÎÄ¼şÖĞ¾ßÓĞÏàÍ¬Â·¾¶µÄÈÎºÎÎÄ¼ş¡£
-/// Èç¹ûÎ´Ìá¹©xmlData£¬Ôò½«Ê¹ÓÃ¸ø¶¨Â·¾¶´Ó.zip ÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ¡£
+/// æ„é€ å‡½æ•°ä»¥çˆ¶XLDocumentå’Œæ–‡ä»¶è·¯å¾„ä½œä¸ºè¾“å…¥åˆ›å»ºä¸€ä¸ªæ–°å¯¹è±¡ï¼Œ
+/// å¯é€‰è¾“å…¥æ˜¯å¸¦æœ‰XMLæ•°æ®çš„std::stringã€‚
+/// å¦‚æœ XML æ•°æ®ç”±å­—ç¬¦ä¸²æä¾›ï¼Œåˆ™åœ¨ä¿å­˜æ–‡æ¡£æ—¶å°†è¦†ç›–.zip æ–‡ä»¶ä¸­å…·æœ‰ç›¸åŒè·¯å¾„çš„ä»»ä½•æ–‡ä»¶ã€‚
+/// å¦‚æœæœªæä¾›xmlDataï¼Œåˆ™å°†ä½¿ç”¨ç»™å®šè·¯å¾„ä».zip æ–‡ä»¶ä¸­è¯»å–æ•°æ®ã€‚
 CoreTools::SimpleCSV::XmlFileImpl::XmlFileImpl(const XmlDataSharedPtr& xmlData) noexcept
     : xmlData{ xmlData }, document{ xmlData->GetParentDocument() }
 {
@@ -29,10 +29,10 @@ CoreTools::SimpleCSV::XmlFileImpl::XmlFileImpl(const XmlDataSharedPtr& xmlData) 
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleCSV, XmlFileImpl)
 
-/// ´Ë·½·¨Ê¹ÓÃstd::string×÷ÎªÊäÈëÉèÖÃXMLÊı¾İ£¬µ×²ãXMLDocument¶ÁÈ¡Êı¾İ¡£
-/// ÔÚPugiXMLÖĞµ÷ÓÃload_string·½·¨Ê±£¬±êÖ¾ 'parse_ws_pcdata' ÓëÄ¬ÈÏ±êÖ¾Ò»Æğ´«µİ¡£ Õâ½«ÆôÓÃ¿Õ°××Ö·ûµÄ½âÎö¡£
-/// Èç¹û²»ÉèÖÃ£¬Ö»ÓĞ¿Õ¸ñµÄExcelµ¥Ôª¸ñ½«×÷Îª¿Õ×Ö·û´®·µ»Ø£¬Õâ²»ÊÇÎÒÃÇÏëÒªµÄ¡£
-/// È±µãÊÇÊäÈëxmlÎÄ¼şÖĞµÄ\\n ºÍ\\tµÈ¿Õ°××Ö·û¿ÉÄÜ»áÈÅÂÒ½âÎö¡£
+/// æ­¤æ–¹æ³•ä½¿ç”¨std::stringä½œä¸ºè¾“å…¥è®¾ç½®XMLæ•°æ®ï¼Œåº•å±‚XMLDocumentè¯»å–æ•°æ®ã€‚
+/// åœ¨PugiXMLä¸­è°ƒç”¨load_stringæ–¹æ³•æ—¶ï¼Œæ ‡å¿— 'parse_ws_pcdata' ä¸é»˜è®¤æ ‡å¿—ä¸€èµ·ä¼ é€’ã€‚ è¿™å°†å¯ç”¨ç©ºç™½å­—ç¬¦çš„è§£æã€‚
+/// å¦‚æœä¸è®¾ç½®ï¼Œåªæœ‰ç©ºæ ¼çš„Excelå•å…ƒæ ¼å°†ä½œä¸ºç©ºå­—ç¬¦ä¸²è¿”å›ï¼Œè¿™ä¸æ˜¯æˆ‘ä»¬æƒ³è¦çš„ã€‚
+/// ç¼ºç‚¹æ˜¯è¾“å…¥xmlæ–‡ä»¶ä¸­çš„\\n å’Œ\\tç­‰ç©ºç™½å­—ç¬¦å¯èƒ½ä¼šæ‰°ä¹±è§£æã€‚
 void CoreTools::SimpleCSV::XmlFileImpl::SetXmlData(const std::string& data)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -40,7 +40,7 @@ void CoreTools::SimpleCSV::XmlFileImpl::SetXmlData(const std::string& data)
     GetXmlDataSharedPtr()->SetRawData(data);
 }
 
-// ´Ë·½·¨½«µ×²ãXMLÊı¾İ×÷Îªstd::string¼ìË÷¡£
+// æ­¤æ–¹æ³•å°†åº•å±‚XMLæ•°æ®ä½œä¸ºstd::stringæ£€ç´¢ã€‚
 std::string CoreTools::SimpleCSV::XmlFileImpl::GetXmlData() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
@@ -74,7 +74,7 @@ CoreTools::SimpleCSV::XmlFileImpl::ConstDocumentSharedPtr CoreTools::SimpleCSV::
     auto documentSharedPtr = document.lock();
     if (documentSharedPtr == nullptr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("documentÒÑ±»ÊÍ·Å¡£"s))
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("documentå·²è¢«é‡Šæ”¾ã€‚"s))
     }
 
     return documentSharedPtr;
@@ -113,7 +113,7 @@ CoreTools::SimpleCSV::XmlFileImpl::ConstXmlDataSharedPtr CoreTools::SimpleCSV::X
     auto xmlDataSharedPtr = xmlData.lock();
     if (xmlDataSharedPtr == nullptr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("xmlDataÒÑ±»ÊÍ·Å¡£"s))
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("xmlDataå·²è¢«é‡Šæ”¾ã€‚"s))
     }
 
     return xmlDataSharedPtr;

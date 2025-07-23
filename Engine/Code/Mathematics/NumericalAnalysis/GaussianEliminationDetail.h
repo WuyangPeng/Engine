@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.5 (2024/01/30 15:40)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.5 (2024/01/30 15:40)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_GAUSSIAN_ELIMINATION_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_GAUSSIAN_ELIMINATION_DETAIL_H
@@ -37,18 +37,18 @@ Mathematics::GaussianElimination<Real>::GaussianElimination(int numRows, const C
     const auto numElement = numRows * numRows;
     if (matrix.empty() || numElement != boost::numeric_cast<int>(matrix.size()))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¾ØÕóÊäÈëÎŞĞ§£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çŸ©é˜µè¾“å…¥æ— æ•ˆï¼"))
     }
 
     if (!b.empty() && b.size() != matrix.size())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("bÎŞĞ§ÊäÈë£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("bæ— æ•ˆè¾“å…¥ï¼"))
     }
 
     const auto numCElement = numRows * numColumns;
     if (!c.empty() && (boost::numeric_cast<int>(c.size()) != numCElement))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("cÎŞĞ§ÊäÈë£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("cæ— æ•ˆè¾“å…¥ï¼"))
     }
 
     Init();
@@ -79,12 +79,12 @@ void Mathematics::GaussianElimination<Real>::Init()
 
     auto odd = false;
 
-    /// Í¨¹ıÍêÈ«Ğı×ªÏû³ı¡£
+    /// é€šè¿‡å®Œå…¨æ—‹è½¬æ¶ˆé™¤ã€‚
     auto row = 0;
     auto column = 0;
     for (auto i0 = 0; i0 < numRows; ++i0)
     {
-        /// ËÑË÷¾ØÕó£¨²»°üÀ¨Ğı×ªĞĞ£©ÒÔ»ñÈ¡×î´ó¾ø¶ÔÌõÄ¿¡£
+        /// æœç´¢çŸ©é˜µï¼ˆä¸åŒ…æ‹¬æ—‹è½¬è¡Œï¼‰ä»¥è·å–æœ€å¤§ç»å¯¹æ¡ç›®ã€‚
         Real maxValue = MathType::GetValue(0);
         for (auto i1 = 0; i1 < numRows; ++i1)
         {
@@ -109,7 +109,7 @@ void Mathematics::GaussianElimination<Real>::Init()
 
         if (maxValue <= epsilon)
         {
-            /// ¾ØÕóÊÇ²»¿ÉÄæµÄ¡£
+            /// çŸ©é˜µæ˜¯ä¸å¯é€†çš„ã€‚
             if (wantInverse)
             {
                 inverseMatrix.FillZero();
@@ -132,7 +132,7 @@ void Mathematics::GaussianElimination<Real>::Init()
 
         pivoted.at(column) = true;
 
-        /// ½»»»ĞĞ£¬Ê¹Ğı×ªĞĞÌõÄ¿Î»ÓÚ¡°col¡±ÖĞ¡£
+        /// äº¤æ¢è¡Œï¼Œä½¿æ—‹è½¬è¡Œæ¡ç›®ä½äºâ€œcolâ€ä¸­ã€‚
         if (row != column)
         {
             odd = !odd;
@@ -155,11 +155,11 @@ void Mathematics::GaussianElimination<Real>::Init()
             }
         }
 
-        /// ¸ú×ÙĞĞµÄÅÅÁĞ¡£
+        /// è·Ÿè¸ªè¡Œçš„æ’åˆ—ã€‚
         rowIndex.at(i0) = row;
         columnIndex.at(i0) = column;
 
-        /// Ëõ·ÅĞĞ£¬Ê¹Ğı×ªÖáÌõÄ¿Îª1¡£
+        /// ç¼©æ”¾è¡Œï¼Œä½¿æ—‹è½¬è½´æ¡ç›®ä¸º1ã€‚
         auto diagonal = inverseMatrix(column, column);
         determinant *= diagonal;
         auto inverse = MathType::GetValue(1) / diagonal;
@@ -182,7 +182,7 @@ void Mathematics::GaussianElimination<Real>::Init()
             }
         }
 
-        // ½«ÆäËûĞĞÖĞµÄĞı×ªÁĞÎ»ÖÃ¹éÁã¡£
+        // å°†å…¶ä»–è¡Œä¸­çš„æ—‹è½¬åˆ—ä½ç½®å½’é›¶ã€‚
         for (auto i1 = 0; i1 < numRows; ++i1)
         {
             if (i1 != column)
@@ -212,7 +212,7 @@ void Mathematics::GaussianElimination<Real>::Init()
 
     if (wantInverse)
     {
-        /// ÖØĞÂÅÅÁĞĞĞÒÔ³·Ïû¸ßË¹Ïû³ıÖĞµÄÈÎºÎÅÅÁĞ¡£
+        /// é‡æ–°æ’åˆ—è¡Œä»¥æ’¤æ¶ˆé«˜æ–¯æ¶ˆé™¤ä¸­çš„ä»»ä½•æ’åˆ—ã€‚
         for (auto i1 = numRows - 1; i1 >= 0; --i1)
         {
             if (rowIndex.at(i1) != columnIndex.at(i1))

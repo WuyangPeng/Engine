@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/02 17:46)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/02 17:46)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_XML_DATA_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_XML_DATA_IMPL_H
@@ -61,19 +61,19 @@ namespace CoreTools::SimpleCSV
         static constexpr auto loadFlags = pugi::parse_default | pugi::parse_ws_pcdata;
 
     private:
-        /// Ö¸Ïò¸¸Document¶ÔÏóµÄÖ¸Õë¡£
+        /// æŒ‡å‘çˆ¶Documentå¯¹è±¡çš„æŒ‡é’ˆã€‚
         DocumentWeakPtr parentDocument;
 
-        /// .xlsx zip ´æµµÖĞXMLÊı¾İµÄÂ·¾¶¡£
+        /// .xlsx zip å­˜æ¡£ä¸­XMLæ•°æ®çš„è·¯å¾„ã€‚
         std::string xmlPath;
 
-        /// XMLÊı¾İµÄ¹ØÏµID¡£
+        /// XMLæ•°æ®çš„å…³ç³»IDã€‚
         std::string xmlId;
 
-        /// XMLÊı¾İ±íÊ¾µÄÀàĞÍ¡£
+        /// XMLæ•°æ®è¡¨ç¤ºçš„ç±»å‹ã€‚
         ContentType xmlType;
 
-        /// µ×²ã XMLDocument ¶ÔÏó
+        /// åº•å±‚ XMLDocument å¯¹è±¡
         XMLDocumentSharedPtr xmlDocument;
     };
 }

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/07 20:10)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/07 20:10)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -72,7 +72,7 @@ CoreTools::SimpleZip::ZipReader::ZipEntryType CoreTools::SimpleZip::ZipReader::G
 
     ZipEntryType zipEntries{};
 
-    /// ±éÀú´æµµ²¢½«ÌõÄ¿Ìí¼Óµ½ÄÚ²¿Êı¾İ½á¹¹ÖĞ
+    /// éå†å­˜æ¡£å¹¶å°†æ¡ç›®æ·»åŠ åˆ°å†…éƒ¨æ•°æ®ç»“æ„ä¸­
     const auto filesNum = mz_zip_reader_get_num_files(&archive);
     for (auto index = 0u; index < filesNum; ++index)
     {

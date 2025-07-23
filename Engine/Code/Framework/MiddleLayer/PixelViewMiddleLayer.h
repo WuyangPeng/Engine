@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 15:01)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 15:01)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_PIXEL_VIEW_MIDDLE_LAYER_H
 #define FRAMEWORK_MIDDLE_LAYER_PIXEL_VIEW_MIDDLE_LAYER_H
@@ -36,7 +36,7 @@ namespace Framework
         NODISCARD bool Idle(int64_t timeDelta) override;
         NODISCARD bool Resize(WindowDisplay windowDisplay, const WindowSize& size) override;
 
-        // ¿ÉÒÔÈÃÄãÔÚäÖÈ¾ÆÁÄ»¶à±ßĞÎºó×ö¸ü¶àµÄäÖÈ¾¡£ÆÁÄ»¸²¸ÇÓ¦Ê¹ÓÃäÖÈ¾Æ÷µ÷ÓÃ£¬¶ø²»ÊÇÖ±½Ó·ÃÎÊscreenÊı×é¡£
+        // å¯ä»¥è®©ä½ åœ¨æ¸²æŸ“å±å¹•å¤šè¾¹å½¢ååšæ›´å¤šçš„æ¸²æŸ“ã€‚å±å¹•è¦†ç›–åº”ä½¿ç”¨æ¸²æŸ“å™¨è°ƒç”¨ï¼Œè€Œä¸æ˜¯ç›´æ¥è®¿é—®screenæ•°ç»„ã€‚
         virtual void ScreenOverlay();
 
         NODISCARD bool IsDoFlip() const noexcept;

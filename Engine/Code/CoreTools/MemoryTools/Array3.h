@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 15:44)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 15:44)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_ARRAY3_H
 #define CORE_TOOLS_MEMORY_TOOLS_ARRAY3_H
@@ -14,9 +14,9 @@
 
 #include <vector>
 
-/// Array3Àà±íÊ¾Ò»¸ö3Î¬Êı×é£¬
-/// ¸ÃÊı×é×î´óÏŞ¶ÈµØ¼õÉÙÁËµ÷ÓÃnewºÍdeleteµÄÊıÁ¿¡£
-/// T¶ÔÏó´æ´¢ÔÚÒ»¸öÁ¬ĞøµÄÊı×éÖĞ¡£
+/// Array3ç±»è¡¨ç¤ºä¸€ä¸ª3ç»´æ•°ç»„ï¼Œ
+/// è¯¥æ•°ç»„æœ€å¤§é™åº¦åœ°å‡å°‘äº†è°ƒç”¨newå’Œdeleteçš„æ•°é‡ã€‚
+/// Tå¯¹è±¡å­˜å‚¨åœ¨ä¸€ä¸ªè¿ç»­çš„æ•°ç»„ä¸­ã€‚
 namespace CoreTools
 {
     template <typename T>
@@ -26,10 +26,10 @@ namespace CoreTools
         using ClassType = Array3<T>;
 
     public:
-        /// Ö§³Ö¶¯Ì¬µ÷Õû´óĞ¡¡¢¸´ÖÆ»òÒÆ¶¯¡£
+        /// æ”¯æŒåŠ¨æ€è°ƒæ•´å¤§å°ã€å¤åˆ¶æˆ–ç§»åŠ¨ã€‚
         Array3() noexcept;
 
-        /// ¸ÃÊı×é¾ßÓĞbound0ÁĞ¡¢bound1ĞĞºÍbound2ÇĞÆ¬¡£
+        /// è¯¥æ•°ç»„å…·æœ‰bound0åˆ—ã€bound1è¡Œå’Œbound2åˆ‡ç‰‡ã€‚
         Array3(int bound0, int bound1, int bound2);
         ~Array3() noexcept = default;
         Array3(const Array3& rhs);
@@ -39,9 +39,9 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        /// ·ÃÎÊÕóÁĞ¡£Ê¾ÀıÓÃ·¨Îª
+        /// è®¿é—®é˜µåˆ—ã€‚ç¤ºä¾‹ç”¨æ³•ä¸º
         /// Array3<T> myArray{ 4, 3, 2 };
-        ///  Êı×éobjectsÎª
+        ///  æ•°ç»„objectsä¸º
         ///   000 001 002 003
         ///   010 011 012 013
         ///   020 021 022 023
@@ -49,8 +49,8 @@ namespace CoreTools
         ///   100 101 102 103
         ///   110 111 112 113
         ///   120 121 122 123
-        ///   Êı×éindirect1Ö¸Ïò 000 010 020 100 110 120¡£
-        ///   Êı×éindirect2Ö¸Ïò 000 100¡£
+        ///   æ•°ç»„indirect1æŒ‡å‘ 000 010 020 100 110 120ã€‚
+        ///   æ•°ç»„indirect2æŒ‡å‘ 000 100ã€‚
         ///   T** slice1 = myArray[1];
         ///   T* slice1row2 = myArray[1][2];
         ///   T slice1Row2Column3 = myArray[1][2][3];

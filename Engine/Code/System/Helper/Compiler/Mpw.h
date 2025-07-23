@@ -1,28 +1,28 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 17:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 17:28)
 
 #ifndef SYSTEM_HELPER_MPW_H
 #define SYSTEM_HELPER_MPW_H
 
 #if defined(__MRC__) || defined(__SC__)
 
-    /// MPW C++ ±àÒëÆ÷ÉèÖÃ£º
+    /// MPW C++ ç¼–è¯‘å™¨è®¾ç½®ï¼š
 
     #if MPW_CPLUS < 0x890
 
-        #error "±àÒëÆ÷Î´ÅäÖÃ"
+        #error "ç¼–è¯‘å™¨æœªé…ç½®"
 
     #endif  // MPW_CPLUS < 0x890
 
     #if (0x890 < MPW_CPLUS)
 
-        #error "Î´Öª±àÒëÆ÷"
+        #error "æœªçŸ¥ç¼–è¯‘å™¨"
 
     #endif  // 0x890 < MPW_CPLUS
 
@@ -41,16 +41,16 @@
     #if defined(__SC__)
 
         #define TCRE_COMPILER_VERSION __SC__
-        #define TCRE_SYSTEM_COMPILER "MPW SCpp °æ±¾ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
+        #define TCRE_SYSTEM_COMPILER "MPW SCpp ç‰ˆæœ¬ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
 
     #elif defined(__MRC__)
 
         #define TCRE_COMPILER_VERSION __MRC__
-        #define TCRE_SYSTEM_COMPILER "MPW MrCpp °æ±¾ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
+        #define TCRE_SYSTEM_COMPILER "MPW MrCpp ç‰ˆæœ¬ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
 
     #else  // !defined(__SC__) && !defined(__MRC__)
 
-        #error "Ê¹ÓÃMPW±àÒëÆ÷ÅäÖÃ´íÎó¡£"
+        #error "ä½¿ç”¨MPWç¼–è¯‘å™¨é…ç½®é”™è¯¯ã€‚"
 
     #endif  // defined(__SC__)
 

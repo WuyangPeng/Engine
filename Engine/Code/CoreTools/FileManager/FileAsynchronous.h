@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/30 22:54)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/30 22:54)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_FILE_ASYNCHRONOUS_H
 #define CORE_TOOLS_FILE_MANAGER_FILE_ASYNCHRONOUS_H
@@ -22,12 +22,12 @@ CORE_TOOLS_NON_COPY_EXPORT_IMPL(FileAsynchronousImpl);
 
 namespace CoreTools
 {
-    /// ÓÉÓÚÊµÏÖÀà±¾ÉíÊ¹ÓÃÁËËø£¬µ¥Àı²»ÔÙÊ¹ÓÃËø¡£
+    /// ç”±äºå®ç°ç±»æœ¬èº«ä½¿ç”¨äº†é”ï¼Œå•ä¾‹ä¸å†ä½¿ç”¨é”ã€‚
     class CORE_TOOLS_DEFAULT_DECLARE FileAsynchronous final : public Singleton<FileAsynchronous, MutexCreate::UseNull>
     {
     public:
         NON_COPY_TYPE_DECLARE(FileAsynchronous);
-        using ParentType = Singleton<FileAsynchronous>;
+        using ParentType = Singleton<FileAsynchronous, MutexCreate::UseNull>;
 
         using String = System::String;
 
@@ -47,7 +47,7 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        /// µ÷ÓÃ·½ĞèÒª±£Ö¤ÊÂ¼ş»Øµ÷µÄ¶àÏß³Ì°²È«ÎÊÌâ¡£
+        /// è°ƒç”¨æ–¹éœ€è¦ä¿è¯äº‹ä»¶å›è°ƒçš„å¤šçº¿ç¨‹å®‰å…¨é—®é¢˜ã€‚
         void RegisteredReadFile(const String& fileName, bool binaryFile, const FileEventInterfaceSharedPtr& event);
         void RegisteredWriteFile(const String& fileName, bool binaryFile, const ConstFileBufferSharedPtr& fileBuffer, bool append);
         void RegisteredWriteFile(const String& fileName, bool binaryFile, const FileEventInterfaceSharedPtr& event, const ConstFileBufferSharedPtr& fileBuffer, bool append);

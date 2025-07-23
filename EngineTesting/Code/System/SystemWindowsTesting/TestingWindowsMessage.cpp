@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/06 16:37)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/06 16:37)
 
 #include "Testing.h"
 #include "TestingWindowsMessage.h"
@@ -16,7 +16,7 @@
 #include "Framework/WindowProcess/WindowMessageUnitTestSuiteDetail.h"
 
 System::TestingWindowsMessage::TestingWindowsMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory)
-    : ParentType{ delta, "¡¾ÏµÍ³¿â¡¿Windowµ¥Ôª²âÊÔÌ×¼ş", environmentDirectory }
+    : ParentType{ delta, "ã€ç³»ç»Ÿåº“ã€‘Windowå•å…ƒæµ‹è¯•å¥—ä»¶", environmentDirectory }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -33,7 +33,7 @@ void System::TestingWindowsMessage::InitSuite()
 
 void System::TestingWindowsMessage::AddSystemOutputSuite()
 {
-    auto systemOutputSuite = GenerateSuite("ÏµÍ³Êä³ö");
+    auto systemOutputSuite = GenerateSuite("ç³»ç»Ÿè¾“å‡º");
 
     systemOutputSuite.AddSuite(GetMessageBoxSelectionSuite());
 
@@ -44,7 +44,7 @@ CoreTools::Suite System::TestingWindowsMessage::GetMessageBoxSelectionSuite()
 {
     const auto hWnd = GetHWnd();
 
-    auto messageBoxSelectionSuite = GenerateSuite("ÏûÏ¢¿òÑ¡Ôñ");
+    auto messageBoxSelectionSuite = GenerateSuite("æ¶ˆæ¯æ¡†é€‰æ‹©");
 
     ADD_TEST_USE_PARAMETER_1(messageBoxSelectionSuite, MessageBoxSelectionUseFlagsDataWindowsTesting, hWnd);
     ADD_TEST_USE_PARAMETER_1(messageBoxSelectionSuite, MessageBoxSelectionUseLanguageIdDataWindowsTesting, hWnd);
@@ -54,7 +54,7 @@ CoreTools::Suite System::TestingWindowsMessage::GetMessageBoxSelectionSuite()
 
 void System::TestingWindowsMessage::AddDynamicLinkSuite()
 {
-    auto dynamicLinkSuite = GenerateSuite("¶¯Ì¬Á´½Ó¿â¹¤¾ß");
+    auto dynamicLinkSuite = GenerateSuite("åŠ¨æ€é“¾æ¥åº“å·¥å…·");
 
     dynamicLinkSuite.AddSuite(GetLoadResourceToolsSuite());
     dynamicLinkSuite.AddSuite(GetEnumResourceToolsSuite());
@@ -66,7 +66,7 @@ CoreTools::Suite System::TestingWindowsMessage::GetLoadResourceToolsSuite()
 {
     const auto instance = System::GetHInstance();
 
-    auto loadResourceToolsSuite = GenerateSuite("¼ÓÔØ×ÊÔ´¹¤¾ß");
+    auto loadResourceToolsSuite = GenerateSuite("åŠ è½½èµ„æºå·¥å…·");
 
     ADD_TEST_USE_PARAMETER_1(loadResourceToolsSuite, FindResourceWindowsTesting, instance);
     ADD_TEST_USE_PARAMETER_1(loadResourceToolsSuite, LoadResourceWindowsTesting, instance);
@@ -79,7 +79,7 @@ CoreTools::Suite System::TestingWindowsMessage::GetEnumResourceToolsSuite()
 {
     const auto instance = System::GetHInstance();
 
-    auto enumResourceToolsSuite = GenerateSuite("ÁĞ¾Ù×ÊÔ´¹¤¾ß");
+    auto enumResourceToolsSuite = GenerateSuite("åˆ—ä¸¾èµ„æºå·¥å…·");
 
     ADD_TEST_USE_PARAMETER_1(enumResourceToolsSuite, EnumResourceToolsWindowsTesting, instance);
     ADD_TEST_USE_PARAMETER_1(enumResourceToolsSuite, ResourceEnumWindowsTesting, instance);
@@ -105,7 +105,7 @@ void System::TestingWindowsMessage::AddWindowsSuite()
 {
     const auto hWnd = GetHWnd();
 
-    auto windowsSuite = GenerateSuite("WindowsÏµÍ³");
+    auto windowsSuite = GenerateSuite("Windowsç³»ç»Ÿ");
 
     windowsSuite.AddSuite(GetWindowsCreateSuite());
     windowsSuite.AddSuite(GetWindowsProcessSuite());
@@ -122,7 +122,7 @@ CoreTools::Suite System::TestingWindowsMessage::GetWindowsCreateSuite()
     const auto instance = System::GetHInstance();
     const auto hWnd = GetHWnd();
 
-    auto windowsCreateSuite = GenerateSuite("Windows´´½¨");
+    auto windowsCreateSuite = GenerateSuite("Windowsåˆ›å»º");
 
     ADD_TEST_USE_PARAMETER_2(windowsCreateSuite, CreateSystemWindowTesting, instance, hWnd);
     ADD_TEST_USE_PARAMETER_1(windowsCreateSuite, GetHInstanceTesting, instance);
@@ -135,7 +135,7 @@ CoreTools::Suite System::TestingWindowsMessage::GetWindowsProcessSuite()
 {
     const auto hWnd = GetHWnd();
 
-    auto windowsProcessSuite = GenerateSuite("Windows½ø³Ì");
+    auto windowsProcessSuite = GenerateSuite("Windowsè¿›ç¨‹");
 
     ADD_TEST_USE_PARAMETER_1(windowsProcessSuite, GetMessageTesting, hWnd);
     ADD_TEST_USE_PARAMETER_1(windowsProcessSuite, PeekMessageTesting, hWnd);
@@ -155,7 +155,7 @@ CoreTools::Suite System::TestingWindowsMessage::GetWindowsRegisterSuite()
 {
     const auto instance = System::GetHInstance();
 
-    auto windowsRegisterSuite = GenerateSuite("Windows×¢²á");
+    auto windowsRegisterSuite = GenerateSuite("Windowsæ³¨å†Œ");
 
     ADD_TEST(windowsRegisterSuite, GetStockObjectTesting);
     ADD_TEST_USE_PARAMETER_1(windowsRegisterSuite, LoadCursorTesting, instance);
@@ -170,7 +170,7 @@ CoreTools::Suite System::TestingWindowsMessage::GetWindowsSystemSuite()
 {
     const auto hWnd = GetHWnd();
 
-    auto windowsSystemSuite = GenerateSuite("WindowsÏµÍ³");
+    auto windowsSystemSuite = GenerateSuite("Windowsç³»ç»Ÿ");
 
     ADD_TEST(windowsSystemSuite, GetActiveWindowTesting);
     ADD_TEST_USE_PARAMETER_1(windowsSystemSuite, GetSystemClientRectTesting, hWnd);

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:39)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:39)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_RATIONAL_H
 #define MATHEMATICS_QUERY_QUERY3_RATIONAL_H
@@ -30,12 +30,12 @@ namespace Mathematics
         using VerticesType = typename ParentType::VerticesType;
 
     public:
-        // ÊäÈë¶¥µãµÄ×é³É²¿·Ö±»±íÊ¾ÍêÈ«ÏàÍ¬ÓĞÀíÊıÖµ¡£
+        // è¾“å…¥é¡¶ç‚¹çš„ç»„æˆéƒ¨åˆ†è¢«è¡¨ç¤ºå®Œå…¨ç›¸åŒæœ‰ç†æ•°å€¼ã€‚
         explicit Query3Rational(const VerticesType& vertices);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        // ÔËĞĞÊ±ÀàĞÍĞÅÏ¢¡£
+        // è¿è¡Œæ—¶ç±»å‹ä¿¡æ¯ã€‚
         NODISCARD QueryType GetType() const noexcept override;
 
         NODISCARD PlaneQueryType ToPlane(int index, int v0, int v1, int v2) const override;
@@ -59,7 +59,7 @@ namespace Mathematics
         NODISCARD CircumsphereQueryType ToCircumsphere(const QueryRationalVector& rationalTest, int v0, int v1, int v2, int v3) const;
 
     private:
-        // »º´æÊäÈëµÄÓĞÀíÊı±íÊ¾¡£¸¡µãÊıµÄ¶ÔÓĞÀíÊıĞÎÊ½µÄ×ª»¯ÊÇ»ºÂıµÄ£¬ ËùÒÔ×îºÃÊÇ¸ú×ÙÄÄĞ©ÖµÒÑ×ª»»¡£
+        // ç¼“å­˜è¾“å…¥çš„æœ‰ç†æ•°è¡¨ç¤ºã€‚æµ®ç‚¹æ•°çš„å¯¹æœ‰ç†æ•°å½¢å¼çš„è½¬åŒ–æ˜¯ç¼“æ…¢çš„ï¼Œ æ‰€ä»¥æœ€å¥½æ˜¯è·Ÿè¸ªå“ªäº›å€¼å·²è½¬æ¢ã€‚
         Container rationalVertices;
     };
 

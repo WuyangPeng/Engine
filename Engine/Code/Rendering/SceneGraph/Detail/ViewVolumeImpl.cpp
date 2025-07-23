@@ -10,6 +10,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "ViewVolumeImpl.h"
+#include "Mathematics/Algebra/MatrixDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 Rendering::ViewVolumeImpl::ViewVolumeImpl() noexcept
@@ -79,7 +80,7 @@ void Rendering::ViewVolumeImpl::OnFrustumChange()
 
     if (IsPerspective())
     {
-#if defined(MATHEMATICS_USE_MATRIX_VECTOR)
+        #if defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
         if (GetDepthType() == DepthType::ZeroToOne)
         {
@@ -120,7 +121,7 @@ void Rendering::ViewVolumeImpl::OnFrustumChange()
             result(3, 3) = 0.0f;
         }
 
-#else  // !MATHEMATICS_USE_MATRIX_VECTOR
+        #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
         if (GetDepthType() == DepthType::ZeroToOne)
         {
@@ -161,11 +162,11 @@ void Rendering::ViewVolumeImpl::OnFrustumChange()
             result(3, 3) = 0.0f;
         }
 
-#endif  // MATHEMATICS_USE_MATRIX_VECTOR
+        #endif  // MATHEMATICS_USE_MATRIX_VECTOR
     }
     else
     {
-#if defined(MATHEMATICS_USE_MATRIX_VECTOR)
+        #if defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
         if (GetDepthType() == DepthType::ZeroToOne)
         {
@@ -206,7 +207,7 @@ void Rendering::ViewVolumeImpl::OnFrustumChange()
             result(3, 3) = 1.0f;
         }
 
-#else  // !MATHEMATICS_USE_MATRIX_VECTOR
+        #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
         if (GetDepthType() == DepthType::ZeroToOne)
         {
@@ -247,7 +248,7 @@ void Rendering::ViewVolumeImpl::OnFrustumChange()
             result(3, 3) = 1.0f;
         }
 
-#endif  // MATHEMATICS_USE_MATRIX_VECTOR
+        #endif  // MATHEMATICS_USE_MATRIX_VECTOR
     }
 
     projectionMatrix.SetProjectionMatrix(result, worldCoordinateFrame.GetViewMatrix());

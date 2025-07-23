@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/09 09:48)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 09:48)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_BEZIER_CURVE2_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_BEZIER_CURVE2_DETAIL_H
@@ -28,7 +28,7 @@ Mathematics::BezierCurve2<Real>::BezierCurve2(int degree, const std::vector<Vect
       der3CtrlPoint{},
       choose(numCtrlPoints, std::vector<Real>(numCtrlPoints))
 {
-    MATHEMATICS_ASSERTION_0(degree >= 2, "Î¬¶È±ØĞëÊÇ3»ò¸ü´ó¡£");
+    MATHEMATICS_ASSERTION_0(degree >= 2, "ç»´åº¦å¿…é¡»æ˜¯3æˆ–æ›´å¤§ã€‚");
 
     for (auto i = 0; i < numCtrlPoints - 1; ++i)
     {

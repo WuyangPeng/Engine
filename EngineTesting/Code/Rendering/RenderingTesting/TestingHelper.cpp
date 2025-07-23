@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+ï»¿/// Copyright (c) 2010-2023
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.1 (2023/11/20 15:13)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.1 (2023/11/20 15:13)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -15,7 +15,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
 Rendering::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "äÖÈ¾¿â" }
+    : ParentType{ argc, argv, "æ¸²æŸ“åº“" }
 {
     InitSuite();
 
@@ -60,7 +60,7 @@ void Rendering::TestingHelper::InitSuite()
 
 void Rendering::TestingHelper::AddHelperSuite()
 {
-    auto helperSuite = GenerateSuite("°ïÖú");
+    auto helperSuite = GenerateSuite("å¸®åŠ©");
 
     ADD_TEST(helperSuite, UserMacroTesting);
 
@@ -69,7 +69,7 @@ void Rendering::TestingHelper::AddHelperSuite()
 
 void Rendering::TestingHelper::AddBaseSuite()
 {
-    auto baseSuite = GenerateSuite("»ù´¡");
+    auto baseSuite = GenerateSuite("åŸºç¡€");
 
     ADD_TEST(baseSuite, GraphicsObjectTesting);
 
@@ -78,7 +78,7 @@ void Rendering::TestingHelper::AddBaseSuite()
 
 void Rendering::TestingHelper::AddDataTypesSuite()
 {
-    auto dataTypeSuite = GenerateSuite("Êı¾İÀàĞÍ");
+    auto dataTypeSuite = GenerateSuite("æ•°æ®ç±»å‹");
 
     ADD_TEST(dataTypeSuite, HalfFloatTesting);
     ADD_TEST(dataTypeSuite, ColourDefaultTraitsTesting);
@@ -97,7 +97,7 @@ void Rendering::TestingHelper::AddDataTypesSuite()
 
 void Rendering::TestingHelper::AddResourcesSuite()
 {
-    auto resourcesSuite = GenerateSuite("×ÊÔ´");
+    auto resourcesSuite = GenerateSuite("èµ„æº");
 
     ADD_TEST(resourcesSuite, ResourceTesting);
     ADD_TEST(resourcesSuite, BufferTesting);
@@ -119,7 +119,7 @@ void Rendering::TestingHelper::AddResourcesSuite()
 
 void Rendering::TestingHelper::AddSceneGraphSuite()
 {
-    auto sceneGraphSuite = GenerateSuite("³¡¾°Í¼");
+    auto sceneGraphSuite = GenerateSuite("åœºæ™¯å›¾");
 
     sceneGraphSuite.AddSuite(GetViewVolumeSuite());
     sceneGraphSuite.AddSuite(GetCameraSuite());
@@ -152,7 +152,7 @@ void Rendering::TestingHelper::AddSceneGraphSuite()
 
 CoreTools::Suite Rendering::TestingHelper::GetViewVolumeSuite()
 {
-    auto viewVolumeSuite = GenerateSuite("ÊÓ¾°Ìå");
+    auto viewVolumeSuite = GenerateSuite("è§†æ™¯ä½“");
 
     ADD_TEST(viewVolumeSuite, WorldCoordinateFrameTesting);
     ADD_TEST(viewVolumeSuite, ProjectionMatrixTesting);
@@ -164,7 +164,7 @@ CoreTools::Suite Rendering::TestingHelper::GetViewVolumeSuite()
 
 Rendering::TestingHelper::Suite Rendering::TestingHelper::GetCameraSuite()
 {
-    auto cameraSuite = GenerateSuite("ÉãÏñ»ú");
+    auto cameraSuite = GenerateSuite("æ‘„åƒæœº");
 
     ADD_TEST(cameraSuite, CameraFrustumDataTesting);
     ADD_TEST(cameraSuite, PickLineTesting);
@@ -175,7 +175,7 @@ Rendering::TestingHelper::Suite Rendering::TestingHelper::GetCameraSuite()
 
 void Rendering::TestingHelper::AddControllersSuite()
 {
-    auto controllersSuite = GenerateSuite("¿ØÖÆÆ÷");
+    auto controllersSuite = GenerateSuite("æ§åˆ¶å™¨");
 
     ADD_TEST(controllersSuite, ControllerTesting);
     ADD_TEST(controllersSuite, ControlledObjectTesting);
@@ -196,14 +196,14 @@ void Rendering::TestingHelper::AddControllersSuite()
 
 void Rendering::TestingHelper::AddShaderFloatsSuite()
 {
-    auto shaderFloatsSuite = GenerateSuite("¸¡µã×ÅÉ«Æ÷");
+    auto shaderFloatsSuite = GenerateSuite("æµ®ç‚¹ç€è‰²å™¨");
 
     AddSuite(shaderFloatsSuite);
 }
 
 void Rendering::TestingHelper::AddDetailSuite()
 {
-    auto detailSuite = GenerateSuite("Ï¸½Ú");
+    auto detailSuite = GenerateSuite("ç»†èŠ‚");
 
     ADD_TEST(detailSuite, SwitchNodeTesting);
     ADD_TEST(detailSuite, BillboardNodeTesting);
@@ -218,7 +218,7 @@ void Rendering::TestingHelper::AddDetailSuite()
 
 void Rendering::TestingHelper::AddShadersSuite()
 {
-    auto shadersSuite = GenerateSuite("×ÅÉ«Æ÷");
+    auto shadersSuite = GenerateSuite("ç€è‰²å™¨");
 
     ADD_TEST(shadersSuite, SingleShaderBaseDataTesting);
     ADD_TEST(shadersSuite, ShaderBaseDataTesting);
@@ -250,21 +250,21 @@ void Rendering::TestingHelper::AddShadersSuite()
 
 void Rendering::TestingHelper::AddLocalEffectsSuite()
 {
-    auto localEffectsSuite = GenerateSuite("¾Ö²¿ÌØĞ§");
+    auto localEffectsSuite = GenerateSuite("å±€éƒ¨ç‰¹æ•ˆ");
 
     AddSuite(localEffectsSuite);
 }
 
 void Rendering::TestingHelper::AddGlobalEffectsSuite()
 {
-    auto globalEffectsSuite = GenerateSuite("È«¾ÖÌØĞ§");
+    auto globalEffectsSuite = GenerateSuite("å…¨å±€ç‰¹æ•ˆ");
 
     AddSuite(globalEffectsSuite);
 }
 
 void Rendering::TestingHelper::AddCurvesSurfacesSuite()
 {
-    auto curvesSurfacesSuite = GenerateSuite("ÇúÏßÇúÃæ");
+    auto curvesSurfacesSuite = GenerateSuite("æ›²çº¿æ›²é¢");
 
     ADD_TEST(curvesSurfacesSuite, FloatArrayTesting);
     ADD_TEST(curvesSurfacesSuite, Float2ArrayTesting);
@@ -277,56 +277,56 @@ void Rendering::TestingHelper::AddCurvesSurfacesSuite()
 
 void Rendering::TestingHelper::AddIlluminationSuite()
 {
-    auto illuminationSuite = GenerateSuite("¹âÕÕ");
+    auto illuminationSuite = GenerateSuite("å…‰ç…§");
 
     AddSuite(illuminationSuite);
 }
 
 void Rendering::TestingHelper::AddImageProcessingSuite()
 {
-    auto imageProcessingSuite = GenerateSuite("Í¼Ïñ´¦Àí");
+    auto imageProcessingSuite = GenerateSuite("å›¾åƒå¤„ç†");
 
     AddSuite(imageProcessingSuite);
 }
 
 void Rendering::TestingHelper::AddPictureSuite()
 {
-    auto pictureSuite = GenerateSuite("Í¼Ïñ");
+    auto pictureSuite = GenerateSuite("å›¾åƒ");
 
     AddSuite(pictureSuite);
 }
 
 void Rendering::TestingHelper::AddSortingSuite()
 {
-    auto sortingSuite = GenerateSuite("ÅÅĞò");
+    auto sortingSuite = GenerateSuite("æ’åº");
 
     AddSuite(sortingSuite);
 }
 
 void Rendering::TestingHelper::AddTerrainSuite()
 {
-    auto terrainSuite = GenerateSuite("µØĞÎ´¦Àí");
+    auto terrainSuite = GenerateSuite("åœ°å½¢å¤„ç†");
 
     AddSuite(terrainSuite);
 }
 
 void Rendering::TestingHelper::AddVertexSuite()
 {
-    auto vertexSuite = GenerateSuite("¶¥µã");
+    auto vertexSuite = GenerateSuite("é¡¶ç‚¹");
 
     AddSuite(vertexSuite);
 }
 
 void Rendering::TestingHelper::AddTextFontsSuite()
 {
-    auto textFontsSuite = GenerateSuite("ÎÄ±¾¼°×ÖÌå");
+    auto textFontsSuite = GenerateSuite("æ–‡æœ¬åŠå­—ä½“");
 
     AddSuite(textFontsSuite);
 }
 
 void Rendering::TestingHelper::AddConsoleGraphSuite()
 {
-    auto consoleGraphSuite = GenerateSuite("¿ØÖÆÌ¨Í¼ĞÎ");
+    auto consoleGraphSuite = GenerateSuite("æ§åˆ¶å°å›¾å½¢");
 
     AddSuite(consoleGraphSuite);
 }
@@ -347,7 +347,7 @@ void Rendering::TestingHelper::AddDirectAPISuite()
 
 void Rendering::TestingHelper::AddRendererEngineSuite()
 {
-    auto rendererEngineSuite = GenerateSuite("äÖÈ¾Æ÷");
+    auto rendererEngineSuite = GenerateSuite("æ¸²æŸ“å™¨");
 
     ADD_TEST(rendererEngineSuite, ViewportTesting);
     ADD_TEST(rendererEngineSuite, DepthRangeTesting);
@@ -379,7 +379,7 @@ void Rendering::TestingHelper::AddRendererEngineSuite()
 
 void Rendering::TestingHelper::AddOpenGLRendererSuite()
 {
-    auto openGLRendererSuite = GenerateSuite("OpenGLäÖÈ¾Æ÷");
+    auto openGLRendererSuite = GenerateSuite("OpenGLæ¸²æŸ“å™¨");
 
     ADD_TEST(openGLRendererSuite, OpenGLBindTextureTesting);
     ADD_TEST(openGLRendererSuite, OpenGLVertexFormatDataTesting);
@@ -393,42 +393,42 @@ void Rendering::TestingHelper::AddOpenGLRendererSuite()
 
 void Rendering::TestingHelper::AddDx9RendererSuite()
 {
-    auto dx9RendererSuite = GenerateSuite("Dx9äÖÈ¾Æ÷");
+    auto dx9RendererSuite = GenerateSuite("Dx9æ¸²æŸ“å™¨");
 
     AddSuite(dx9RendererSuite);
 }
 
 void Rendering::TestingHelper::AddAglRendererSuite()
 {
-    auto aglRendererSuite = GenerateSuite("AgläÖÈ¾Æ÷");
+    auto aglRendererSuite = GenerateSuite("Aglæ¸²æŸ“å™¨");
 
     AddSuite(aglRendererSuite);
 }
 
 void Rendering::TestingHelper::AddGlutRendererSuite()
 {
-    auto glutRendererSuite = GenerateSuite("GlutäÖÈ¾Æ÷");
+    auto glutRendererSuite = GenerateSuite("Glutæ¸²æŸ“å™¨");
 
     AddSuite(glutRendererSuite);
 }
 
 void Rendering::TestingHelper::AddGlxRendererSuite()
 {
-    auto glxRendererSuite = GenerateSuite("GlxäÖÈ¾Æ÷");
+    auto glxRendererSuite = GenerateSuite("Glxæ¸²æŸ“å™¨");
 
     AddSuite(glxRendererSuite);
 }
 
 void Rendering::TestingHelper::AddWglRendererSuite()
 {
-    auto wglRendererSuite = GenerateSuite("WgläÖÈ¾Æ÷");
+    auto wglRendererSuite = GenerateSuite("Wglæ¸²æŸ“å™¨");
 
     AddSuite(wglRendererSuite);
 }
 
 void Rendering::TestingHelper::AddStateSuite()
 {
-    auto stateSuite = GenerateSuite("×´Ì¬");
+    auto stateSuite = GenerateSuite("çŠ¶æ€");
 
     ADD_TEST(stateSuite, DrawingStateTesting);
     ADD_TEST(stateSuite, BlendStateTargetTesting);

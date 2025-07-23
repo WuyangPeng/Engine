@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 10:20)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 10:20)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_NONITERATIVE_EIGEN3X3_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_NONITERATIVE_EIGEN3X3_DETAIL_H
@@ -48,8 +48,8 @@ Real Mathematics::NoniterativeEigen3x3<Real>::GetMaxValue(const Matrix3Type& mat
 template <typename Real>
 void Mathematics::NoniterativeEigen3x3<Real>::Compute(const Matrix3Type& matrix)
 {
-    // Ëõ·Å¾ØÕó£¬ÈÃËüµÄÌõÄ¿¶¼ÔÚ[-1,1]¡£
-    // Ëõ·ÅÓ¦ÓÃÓÚµ±ÖÁÉÙÒ»¸ö¾ØÕóÌõÄ¿¾ßÓĞ´óĞ¡´óÓÚ1¡£
+    // ç¼©æ”¾çŸ©é˜µï¼Œè®©å®ƒçš„æ¡ç›®éƒ½åœ¨[-1,1]ã€‚
+    // ç¼©æ”¾åº”ç”¨äºå½“è‡³å°‘ä¸€ä¸ªçŸ©é˜µæ¡ç›®å…·æœ‰å¤§å°å¤§äº1ã€‚
 
     Matrix3Type scaledEntry{ matrix };
     const auto maxValue = GetMaxValue(scaledEntry);
@@ -59,7 +59,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::Compute(const Matrix3Type& matrix)
         scaledEntry /= maxValue;
     }
 
-    // ¼ÆËãÌØÕ÷Öµ²ÉÓÃË«¾«¶ÈÔËËã¡£
+    // è®¡ç®—ç‰¹å¾å€¼é‡‡ç”¨åŒç²¾åº¦è¿ç®—ã€‚
     ComputeRoots(scaledEntry);
 
     EigenValueType maxEntry{};
@@ -79,7 +79,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::Compute(const Matrix3Type& matrix)
 
 #include SYSTEM_WARNING_POP
         {
-            // ÖØĞÂËõ·Å»ØÔ­À´µÄ´óĞ¡¡£
+            // é‡æ–°ç¼©æ”¾å›åŸæ¥çš„å¤§å°ã€‚
             RescaleBack(maxValue);
 
             eigenvector = EigenVectorType{ Vector3Type::GetUnitX(), Vector3Type::GetUnitY(), Vector3Type::GetUnitZ() };
@@ -107,7 +107,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::Compute(const Matrix3Type& matrix)
 
 #include SYSTEM_WARNING_POP
 
-    // ÖØĞÂËõ·Å»ØÔ­À´µÄ´óĞ¡¡£
+    // é‡æ–°ç¼©æ”¾å›åŸæ¥çš„å¤§å°ã€‚
     RescaleBack(maxValue);
 }
 
@@ -128,7 +128,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::ComputeRoots(const Matrix3Type& ma
 {
     static const auto sqrt3Value = MathType::Sqrt(MathType::GetValue(3));
 
-    // ×ª»»µÄÎ¨Ò»µÄ¾ØÕóÔªËØÎªË«¾«¶È
+    // è½¬æ¢çš„å”¯ä¸€çš„çŸ©é˜µå…ƒç´ ä¸ºåŒç²¾åº¦
     const auto a00 = matrix(0, 0);
     const auto a01 = matrix(0, 1);
     const auto a02 = matrix(0, 2);
@@ -136,8 +136,8 @@ void Mathematics::NoniterativeEigen3x3<Real>::ComputeRoots(const Matrix3Type& ma
     const auto a12 = matrix(1, 2);
     const auto a22 = matrix(2, 2);
 
-    // ÌØÕ÷·½³ÌÎªx^3 - c2 * x^2 + c1 * x - c0 = 0¡£
-    // ÌØÕ÷ÖµÊÇÕâ¸ö·½³ÌµÄ¸ù£¬±£Ö¤¶¼ÊÇÊµÊıÖµ£¬ÒòÎª¾ØÕóÊÇ¶Ô³ÆµÄ¡£
+    // ç‰¹å¾æ–¹ç¨‹ä¸ºx^3 - c2 * x^2 + c1 * x - c0 = 0ã€‚
+    // ç‰¹å¾å€¼æ˜¯è¿™ä¸ªæ–¹ç¨‹çš„æ ¹ï¼Œä¿è¯éƒ½æ˜¯å®æ•°å€¼ï¼Œå› ä¸ºçŸ©é˜µæ˜¯å¯¹ç§°çš„ã€‚
     const auto c0 = a00 * a11 * a22 +
                     MathType::GetValue(2) * a01 * a02 * a12 -
                     a00 * a12 * a12 -
@@ -153,7 +153,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::ComputeRoots(const Matrix3Type& ma
 
     const auto c2 = a00 + a11 + a22;
 
-    // ¹¹Ôì²ÎÊıÊ¹ÓÃÔÚ·½³ÌµÄ¸ù½øĞĞ·ÖÀà£¬²¢ÒÔ±ÕºÏĞÎÊ½¸ù²¿·½³ÌÇó½â¡£
+    // æ„é€ å‚æ•°ä½¿ç”¨åœ¨æ–¹ç¨‹çš„æ ¹è¿›è¡Œåˆ†ç±»ï¼Œå¹¶ä»¥é—­åˆå½¢å¼æ ¹éƒ¨æ–¹ç¨‹æ±‚è§£ã€‚
     const auto c2Divided3 = c2 * MathType::GetRational(1, 3);
     auto aDivided3 = (c1 - c2 * c2Divided3) * MathType::GetRational(1, 3);
 
@@ -170,7 +170,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::ComputeRoots(const Matrix3Type& ma
         q = MathType::GetValue(0);
     }
 
-    // Í¨¹ıÇó½â¸Ã¶àÏîÊ½µÄ¸ù£¬¼ÆËãÌØÕ÷Öµ¡£
+    // é€šè¿‡æ±‚è§£è¯¥å¤šé¡¹å¼çš„æ ¹ï¼Œè®¡ç®—ç‰¹å¾å€¼ã€‚
     const auto magnitude = MathType::Sqrt(-aDivided3);
     const auto angle = MathType::ATan2(MathType::Sqrt(-q), halfMB) * MathType::GetRational(1, 3);
     const auto cosValue = MathType::Cos(angle);
@@ -182,7 +182,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::ComputeRoots(const Matrix3Type& ma
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-    // ÅÅĞò°´ÉıĞòÅÅÁĞ¡£
+    // æ’åºæŒ‰å‡åºæ’åˆ—ã€‚
     if (root0 <= root1)
     {
         eigenvalue[0] = root0;
@@ -218,7 +218,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::ComputeRoots(const Matrix3Type& ma
 template <typename Real>
 bool Mathematics::NoniterativeEigen3x3<Real>::PositiveRank(Matrix3Type& matrix, Real& maxEntry, Vector3Type& maxRow) const
 {
-    // ÕÒµ½¾ØÕóµÄ×î´ó·ù¶ÈÌõÄ¿¡£
+    // æ‰¾åˆ°çŸ©é˜µçš„æœ€å¤§å¹…åº¦æ¡ç›®ã€‚
     maxEntry = MathType::GetValue(-1);
 
     auto maxRowIndex = -1;
@@ -235,7 +235,7 @@ bool Mathematics::NoniterativeEigen3x3<Real>::PositiveRank(Matrix3Type& matrix, 
         }
     }
 
-    // ·µ»Ø°üº¬×î´óÖµµÄĞĞ£¬ÒªÓÃÓÚÌØÕ÷ÏòÁ¿¹¹Ôì¡£
+    // è¿”å›åŒ…å«æœ€å¤§å€¼çš„è¡Œï¼Œè¦ç”¨äºç‰¹å¾å‘é‡æ„é€ ã€‚
     maxRow = Vector3{ matrix(maxRowIndex, 0), matrix(maxRowIndex, 1), matrix(maxRowIndex, 2) };
 
     return MathType::GetZeroTolerance() <= maxEntry;

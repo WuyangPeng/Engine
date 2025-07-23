@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 22:21)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 22:21)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -40,7 +40,7 @@ void CoreTools::InitTermContainer::AddExecuteFunction(ExecuteFunction function)
     }
     else
     {
-        CORE_TOOLS_ASSERTION_0(false, "Ôö¼Ósm_MaxElementsµÄÖµºÍÖØ±àÒëCoreTools¿â\n");
+        CORE_TOOLS_ASSERTION_0(false, "å¢åŠ sm_MaxElementsçš„å€¼å’Œé‡ç¼–è¯‘CoreToolsåº“\n");
     }
 }
 
@@ -48,7 +48,7 @@ void CoreTools::InitTermContainer::Execute()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    /// ÎŞ·¨±£Ö¤function()µ÷ÓÃ²»Å×³öÒì³££¬±àÒëÆ÷Îó±¨¡£
+    /// æ— æ³•ä¿è¯function()è°ƒç”¨ä¸æŠ›å‡ºå¼‚å¸¸ï¼Œç¼–è¯‘å™¨è¯¯æŠ¥ã€‚
     DisableNoexcept();
 
     auto index = 0;

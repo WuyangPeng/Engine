@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 14:24)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 14:24)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -26,28 +26,28 @@ int CoreTools::NoValueCommandArgument::GetInteger() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument²»ÊÇÕûÊı£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgumentä¸æ˜¯æ•´æ•°ï¼"s))
 }
 
 float CoreTools::NoValueCommandArgument::GetFloat() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument²»ÊÇ¸¡µãÊı£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgumentä¸æ˜¯æµ®ç‚¹æ•°ï¼"s))
 }
 
 double CoreTools::NoValueCommandArgument::GetDouble() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument²»ÊÇ¸¡µãÊı£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgumentä¸æ˜¯æµ®ç‚¹æ•°ï¼"s))
 }
 
 std::string CoreTools::NoValueCommandArgument::GetString() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument²»ÊÇ×Ö·û´®£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgumentä¸æ˜¯å­—ç¬¦ä¸²ï¼"s))
 }
 
 bool CoreTools::NoValueCommandArgument::IsInteger() const noexcept
@@ -98,5 +98,5 @@ void CoreTools::NoValueCommandArgument::AddArgumentValue(const std::string& valu
 
     System::UnusedFunction(value);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgumentÃ»ÓĞÖµ£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgumentæ²¡æœ‰å€¼ï¼"s))
 }

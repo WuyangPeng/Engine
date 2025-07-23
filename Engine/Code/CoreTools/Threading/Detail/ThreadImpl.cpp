@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/30 18:09)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/30 18:09)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -32,7 +32,7 @@ CoreTools::ThreadImpl::ThreadImpl(void* function, void* userData, int processorN
 {
     if (thread == 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ïß³Ì´´½¨Ê§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("çº¿ç¨‹åˆ›å»ºå¤±è´¥ï¼"s))
     }
 
 #else  // !TCRE_USE_GCC
@@ -42,7 +42,7 @@ CoreTools::ThreadImpl::ThreadImpl(void* function, void* userData, int processorN
 {
     if (thread == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ïß³Ì´´½¨Ê§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("çº¿ç¨‹åˆ›å»ºå¤±è´¥ï¼"s))
     }
 
 #endif  // TCRE_USE_GCC
@@ -56,7 +56,7 @@ CoreTools::ThreadImpl::~ThreadImpl() noexcept
 
     if (!System::CloseSystemThread(thread))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("ÊÍ·ÅÏß³Ì"), gsl::narrow_cast<int>(threadId), SYSTEM_TEXT("Ê§°Ü¡£"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("é‡Šæ”¾çº¿ç¨‹"), gsl::narrow_cast<int>(threadId), SYSTEM_TEXT("å¤±è´¥ã€‚"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -83,7 +83,7 @@ void CoreTools::ThreadImpl::Resume() const
     if (const auto result = System::ResumeSystemThread(thread);
         result == failResult)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ïß³Ì»Ö¸´Ê§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("çº¿ç¨‹æ¢å¤å¤±è´¥ï¼"s))
     }
 }
 
@@ -94,7 +94,7 @@ void CoreTools::ThreadImpl::Suspend() const
     if (const auto result = System::SuspendSystemThread(thread);
         result == failResult)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ïß³Ì¹ÒÆğÊ§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("çº¿ç¨‹æŒ‚èµ·å¤±è´¥ï¼"s))
     }
 }
 
@@ -104,7 +104,7 @@ void CoreTools::ThreadImpl::Wait() const
 
     if (!System::WaitForSystemThread(thread))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("µÈ´ıÏß³ÌÊ§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("ç­‰å¾…çº¿ç¨‹å¤±è´¥ï¼"s))
     }
 }
 
@@ -121,7 +121,7 @@ void CoreTools::ThreadImpl::SetThreadPriority(int priority) const
 
     if (!System::SetSystemThreadPriority(thread, priority))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÉèÖÃÏß³ÌÓÅÏÈ¼¶Ê§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è®¾ç½®çº¿ç¨‹ä¼˜å…ˆçº§å¤±è´¥ï¼"s))
     }
 }
 
@@ -132,7 +132,7 @@ int CoreTools::ThreadImpl::GetThreadPriority() const
     if (const auto priority = System::GetSystemThreadPriority(thread);
         priority == EnumCastUnderlying(System::ThreadPriority::ErrorReturn))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("»ñÈ¡Ïß³ÌÓÅÏÈ¼¶Ê§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è·å–çº¿ç¨‹ä¼˜å…ˆçº§å¤±è´¥ï¼"s))
     }
     else
     {

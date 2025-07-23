@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:18)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:18)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_OPERATOR_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_OPERATOR_DETAIL_H
@@ -54,10 +54,10 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
         result = (sum & carry) ? 1 : 0;
     }
 
-    // ²âÊÔÒç³ö
+    // æµ‹è¯•æº¢å‡º
     if (sign == rhs.GetSign() && master.GetSign() != sign)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("IntegerData¼Ó¼õÒç³ö\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("IntegerDataåŠ å‡æº¢å‡º\n"s));
     }
 
     return *this;
@@ -78,9 +78,9 @@ template <int N>
 Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operator<<=(int shift)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
-    MATHEMATICS_ASSERTION_1(0 <= shift, "shift±ØĞë´óÓÚ»òµÈÓÚÁã");
+    MATHEMATICS_ASSERTION_1(0 <= shift, "shiftå¿…é¡»å¤§äºæˆ–ç­‰äºé›¶");
 
-    // 16Î»¿éÒªÒÆÎ»µÄÊıÄ¿¡£
+    // 16ä½å—è¦ç§»ä½çš„æ•°ç›®ã€‚
     const auto blocks = shift / 16;
     if (intLast < blocks)
     {
@@ -102,7 +102,7 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
         amend.SetValue(0, shiftLaterIndex + 1, 0);
     }
 
-    // ÒÅÁôµÄÎ»ÒªÒÆÎ»µÄÊıÁ¿
+    // é—ç•™çš„ä½è¦ç§»ä½çš„æ•°é‡
     const auto bits = shift % 16;
     if (0 < bits)
     {
@@ -125,9 +125,9 @@ template <int N>
 Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operator>>=(int shift)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
-    MATHEMATICS_ASSERTION_1(0 <= shift, "shift±ØĞë´óÓÚ»òµÈÓÚÁã");
+    MATHEMATICS_ASSERTION_1(0 <= shift, "shiftå¿…é¡»å¤§äºæˆ–ç­‰äºé›¶");
 
-    // 16Î»¿éÒªÒÆÎ»µÄÊıÄ¿¡£
+    // 16ä½å—è¦ç§»ä½çš„æ•°ç›®ã€‚
     const auto blocks = shift / 16;
     if (intLast < blocks)
     {
@@ -156,7 +156,7 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
         }
     }
 
-    // ÒÅÁôµÄÎ»ÒªÒÆÎ»µÄÊıÁ¿
+    // é—ç•™çš„ä½è¦ç§»ä½çš„æ•°é‡
     const auto bits = shift % 16;
     if (0 < bits)
     {
@@ -170,7 +170,7 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
         auto value = analysis.ToUnsignedInt(intLast);
         if (master.GetSign() == NumericalValueSymbol::Negative)
         {
-            value |= high;  // ·ûºÅÀ©Õ¹
+            value |= high;  // ç¬¦å·æ‰©å±•
         }
         value >>= bits;
         amend.FromUnsignedInt(intLast, value);

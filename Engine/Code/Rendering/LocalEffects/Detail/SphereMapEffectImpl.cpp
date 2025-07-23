@@ -13,8 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
 #include "Rendering/State/SamplerState.h"
-
-#include <Mathematics/Algebra/Matrix4.h>
+#include "Mathematics/Algebra/Matrix4Detail.h"
 
 Rendering::SphereMapEffectImpl::SphereMapEffectImpl() noexcept
     : texture{}, sampler{}, viewWorldMatrixConstant{}

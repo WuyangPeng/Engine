@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 11:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 11:28)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -62,25 +62,25 @@ System::String CoreTools::SimpleCSV::SimpleCSVException::GetErrorCodeDescribed()
     switch (const auto code = GetErrorCode(); code)
     {
         case CSVExceptionType::Overflow:
-            errorCodeDescribed += SYSTEM_TEXT("£¨Overflow Òç³ö£©, "sv);
+            errorCodeDescribed += SYSTEM_TEXT("ï¼ˆOverflow æº¢å‡ºï¼‰, "sv);
             break;
         case CSVExceptionType::ValueType:
-            errorCodeDescribed += SYSTEM_TEXT("£¨ValueType ÖµÀàĞÍ£©, "sv);
+            errorCodeDescribed += SYSTEM_TEXT("ï¼ˆValueType å€¼ç±»å‹ï¼‰, "sv);
             break;
         case CSVExceptionType::CellAddress:
-            errorCodeDescribed += SYSTEM_TEXT("£¨CellAddress µ¥ÔªµØÖ·£©, "sv);
+            errorCodeDescribed += SYSTEM_TEXT("ï¼ˆCellAddress å•å…ƒåœ°å€ï¼‰, "sv);
             break;
         case CSVExceptionType::Input:
-            errorCodeDescribed += SYSTEM_TEXT("£¨Input ÊäÈë£©, "sv);
+            errorCodeDescribed += SYSTEM_TEXT("ï¼ˆInput è¾“å…¥ï¼‰, "sv);
             break;
         case CSVExceptionType::Internal:
-            errorCodeDescribed += SYSTEM_TEXT("£¨Internal ÄÚ²¿µÄ£©, "sv);
+            errorCodeDescribed += SYSTEM_TEXT("ï¼ˆInternal å†…éƒ¨çš„ï¼‰, "sv);
             break;
         case CSVExceptionType::Property:
-            errorCodeDescribed += SYSTEM_TEXT("£¨Property ÊôĞÔ£©, "sv);
+            errorCodeDescribed += SYSTEM_TEXT("ï¼ˆProperty å±æ€§ï¼‰, "sv);
             break;
         case CSVExceptionType::Sheet:
-            errorCodeDescribed += SYSTEM_TEXT("£¨Sheet ¹¤×÷±í£©, "sv);
+            errorCodeDescribed += SYSTEM_TEXT("ï¼ˆSheet å·¥ä½œè¡¨ï¼‰, "sv);
             break;
         default:
             break;

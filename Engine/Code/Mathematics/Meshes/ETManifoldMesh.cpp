@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/09 10:18)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 10:18)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -72,12 +72,12 @@ Mathematics::ETManifoldMesh::TriangleSharedPtr Mathematics::ETManifoldMesh::Inse
 
                 if (edge == 0)
                 {
-                    THROW_EXCEPTION(SYSTEM_TEXT("ÒâÍâÇé¿ö¡£\n"s));
+                    THROW_EXCEPTION(SYSTEM_TEXT("æ„å¤–æƒ…å†µã€‚\n"s));
                 }
 
                 if (edge->t.at(1))
                 {
-                    MATHEMATICS_ASSERTION_0(false, "Íø¸ñ±ØĞëÊÇ¶àÃæµÄ\n");
+                    MATHEMATICS_ASSERTION_0(false, "ç½‘æ ¼å¿…é¡»æ˜¯å¤šé¢çš„\n");
                     return 0;
                 }
                 edge->t.at(1) = tri;
@@ -85,7 +85,7 @@ Mathematics::ETManifoldMesh::TriangleSharedPtr Mathematics::ETManifoldMesh::Inse
                 auto adjacent = edge->t.at(0);
                 if (adjacent == 0)
                 {
-                    THROW_EXCEPTION(SYSTEM_TEXT("ÒâÍâÇé¿ö¡£\n"s));
+                    THROW_EXCEPTION(SYSTEM_TEXT("æ„å¤–æƒ…å†µã€‚\n"s));
                 }
                 for (auto i = 0; i < 3; i++)
                 {
@@ -122,7 +122,7 @@ bool Mathematics::ETManifoldMesh::RemoveTriangle(int v0, int v1, int v2)
         auto edge = tri->e.at(i);
         if (edge == 0)
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("ÒâÍâÇé¿ö¡£\n"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("æ„å¤–æƒ…å†µã€‚\n"s));
         }
         if (edge->t.at(0) == tri)
         {
@@ -135,7 +135,7 @@ bool Mathematics::ETManifoldMesh::RemoveTriangle(int v0, int v1, int v2)
         }
         else
         {
-            MATHEMATICS_ASSERTION_0(false, "ÒâÍâÇé¿ö¡£\n");
+            MATHEMATICS_ASSERTION_0(false, "æ„å¤–æƒ…å†µã€‚\n");
             return false;
         }
 

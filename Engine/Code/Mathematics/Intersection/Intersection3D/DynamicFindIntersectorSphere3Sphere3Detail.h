@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:13)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:13)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_SPHERE3_SPHERE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_SPHERE3_SPHERE3_DETAIL_H
@@ -82,13 +82,13 @@ void Mathematics::DynamicFindIntersectorSphere3Sphere3<Real>::Find()
                 {
                     if (minus <= MathType::GetValue(0))
                     {
-                        // ÇòÌå×î³õÊÇÏà½»µÄ¡£ Í¨¹ıÊ¹ÓÃÁ¬½ÓÇòÌåÖĞĞÄµÄÏß¶ÎµÄÖĞµãÀ´¹À¼Æ½Ó´¥µã¡£
+                        // çƒä½“æœ€åˆæ˜¯ç›¸äº¤çš„ã€‚ é€šè¿‡ä½¿ç”¨è¿æ¥çƒä½“ä¸­å¿ƒçš„çº¿æ®µçš„ä¸­ç‚¹æ¥ä¼°è®¡æ¥è§¦ç‚¹ã€‚
                         this->SetContactTime(MathType::GetValue(0));
                         contactPoint = MathType::GetRational(1, 2) * (sphere0.GetCenter() + sphere1.GetCenter());
                     }
                     else
                     {
-                        // µÚÒ»´Î½Ó´¥ÊÇÔÚ[0,tmax]ÖĞ¡£
+                        // ç¬¬ä¸€æ¬¡æ¥è§¦æ˜¯åœ¨[0,tmax]ä¸­ã€‚
                         this->SetContactTime(-(dot + MathType::Sqrt(discr)) / relVelocitySquared);
                         if (this->GetContactTime() < MathType::GetValue(0))
                         {
@@ -115,7 +115,7 @@ void Mathematics::DynamicFindIntersectorSphere3Sphere3<Real>::Find()
 
     if (diffSqr <= radiusSumSqr)
     {
-        // ÇòÌå×î³õÊÇÏà½»µÄ¡£ Í¨¹ıÊ¹ÓÃÁ¬½ÓÇòĞÄµÄÏß¶ÎµÄÖĞµãÀ´¹À¼Æ½Ó´¥µã¡£
+        // çƒä½“æœ€åˆæ˜¯ç›¸äº¤çš„ã€‚ é€šè¿‡ä½¿ç”¨è¿æ¥çƒå¿ƒçš„çº¿æ®µçš„ä¸­ç‚¹æ¥ä¼°è®¡æ¥è§¦ç‚¹ã€‚
         this->SetContactTime(MathType::GetValue(0));
         contactPoint = (MathType::GetRational(1, 2)) * (sphere0.GetCenter() + sphere1.GetCenter());
         this->SetIntersectionType(IntersectionType::Other);

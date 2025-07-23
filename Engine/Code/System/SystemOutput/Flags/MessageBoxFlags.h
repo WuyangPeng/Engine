@@ -1,18 +1,18 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.2 (2024/10/26 17:27)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.2 (2024/10/26 17:27)
 
 #ifndef SYSTEM_SYSTEM_OUTPUT_MESSAGE_BOX_FLAGS_H
 #define SYSTEM_SYSTEM_OUTPUT_MESSAGE_BOX_FLAGS_H
 
 #include "System/Helper/Platform.h"
 
-///  MessageBox() ±êÖ¾
+///  MessageBox() æ ‡å¿—
 namespace System
 {
 #ifdef SYSTEM_PLATFORM_WIN32
@@ -68,7 +68,7 @@ namespace System
         TopMost = MB_TOPMOST,
         Right = MB_RIGHT,
         RightToLeftReading = MB_RTLREADING,
-        ServiceNotification = MB_SERVICE_NOTIFICATION,  // Èç¹ûÉèÖÃÁË´Ë²ÎÊý£¬ÔòhWnd²ÎÊýÒ»¶¨Îªnullptr¡£
+        ServiceNotification = MB_SERVICE_NOTIFICATION,  // å¦‚æžœè®¾ç½®äº†æ­¤å‚æ•°ï¼Œåˆ™hWndå‚æ•°ä¸€å®šä¸ºnullptrã€‚
         ServiceNotificationNt3X = MB_SERVICE_NOTIFICATION_NT3X,
     };
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:09)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:09)
 
 #ifndef MATHEMATICS_APPROXIMATION_ELLIPSE_BY_ARCS2_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_ELLIPSE_BY_ARCS2_DETAIL_H
@@ -20,9 +20,9 @@ template <typename Real>
 Mathematics::EllipseByArcs2<Real>::EllipseByArcs2(Real begin, Real end, size_t numArcs)
     : points(numArcs + 1), circle(numArcs)
 {
-    MATHEMATICS_ASSERTION_2(2 <= circle.size(), "±ØĞëÖÁÉÙÖ¸¶¨Á½¸öÔ²»¡\n");
-    MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= begin, "begin±ØĞë´óÓÚ»òµÈÓÚ0\n");
-    MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= end, " end±ØĞë´óÓÚ»òµÈÓÚ0\n");
+    MATHEMATICS_ASSERTION_2(2 <= circle.size(), "å¿…é¡»è‡³å°‘æŒ‡å®šä¸¤ä¸ªåœ†å¼§\n");
+    MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= begin, "beginå¿…é¡»å¤§äºæˆ–ç­‰äº0\n");
+    MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= end, " endå¿…é¡»å¤§äºæˆ–ç­‰äº0\n");
 
     Calculate(begin, end);
 
@@ -32,7 +32,7 @@ Mathematics::EllipseByArcs2<Real>::EllipseByArcs2(Real begin, Real end, size_t n
 template <typename Real>
 void Mathematics::EllipseByArcs2<Real>::Calculate(Real begin, Real end)
 {
-    // ÖĞ¼äÍÖÔ²ÊıÁ¿
+    // ä¸­é—´æ¤­åœ†æ•°é‡
     const auto beginSquare = begin * begin;
     const auto endSquare = end * end;
     const auto aMultipliedB = begin * end;
@@ -40,38 +40,38 @@ void Mathematics::EllipseByArcs2<Real>::Calculate(Real begin, Real end)
 
     const auto numArcs = boost::numeric_cast<int>(circle.size());
 
-    // ÔÚµÚÒ»ÏóÏŞÍÖÔ²µÄÖÕµã¡£µã°´ÄæÊ±ÕëË³Ğò²úÉú¡£
+    // åœ¨ç¬¬ä¸€è±¡é™æ¤­åœ†çš„ç»ˆç‚¹ã€‚ç‚¹æŒ‰é€†æ—¶é’ˆé¡ºåºäº§ç”Ÿã€‚
     points.at(0) = Vector2Type{ begin, MathType::GetValue(0) };
     points.at(numArcs) = Vector2Type{ MathType::GetValue(0), end };
 
-    // ÖÕµãµÄÇúÂÊ£¬¶ÔÓÚ¼ÆËãÔ²»¡´æ´¢ÇúÂÊ¡£
+    // ç»ˆç‚¹çš„æ›²ç‡ï¼Œå¯¹äºè®¡ç®—åœ†å¼§å­˜å‚¨æ›²ç‡ã€‚
     auto beginCurvature = begin / endSquare;
     auto endCurvature = end / beginSquare;
 
-    // Ñ¡Ôñ»ùÓÚÇúÂÊÌØĞÔµÄÍÖÔ²µã¡£
+    // é€‰æ‹©åŸºäºæ›²ç‡ç‰¹æ€§çš„æ¤­åœ†ç‚¹ã€‚
     for (auto index = 1; index < numArcs; ++index)
     {
-        // ĞÂµãÇúÂÊÎªÁ½¶ËÇúÂÊ¼ÓÈ¨Æ½¾ùÖµ¡£
+        // æ–°ç‚¹æ›²ç‡ä¸ºä¸¤ç«¯æ›²ç‡åŠ æƒå¹³å‡å€¼ã€‚
         auto weight1 = static_cast<Real>(index) / static_cast<Real>(numArcs);
         auto weight0 = MathType::GetValue(1) - weight1;
         auto curvature = weight0 * beginCurvature + weight1 * endCurvature;
 
-        // Ê¹ÓÃÇúÂÊ¼ÆËãµã¡£
+        // ä½¿ç”¨æ›²ç‡è®¡ç®—ç‚¹ã€‚
         auto pow = MathType::Pow(aMultipliedB / curvature, MathType::GetValue(2) / MathType::GetValue(3));
         points.at(index).SetCoordinate(begin * MathType::Sqrt(MathType::FAbs((pow - beginSquare) * inverseEndSquareMinusBeginSquare)),
                                        end * MathType::Sqrt(MathType::FAbs((pow - endSquare) * inverseEndSquareMinusBeginSquare)));
     }
 
-    // ¼ÆËãÔ²»¡ÔÚ (a,0).
+    // è®¡ç®—åœ†å¼§åœ¨ (a,0).
     ScribeCircle2Circumscribe<Real> beginCircumscribe{ Vector2Type{ points.at(1).GetX(), -points.at(1).GetY() }, points.at(0), points.at(1) };
     circle.at(0) = beginCircumscribe.GetCircle2();
 
-    // ¼ÆËãÔ²»¡ÔÚ (0,b).
+    // è®¡ç®—åœ†å¼§åœ¨ (0,b).
     const auto last = numArcs - 1;
     ScribeCircle2Circumscribe<Real> endCircumscribe{ Vector2Type{ -points.at(last).GetX(), points.at(last).GetY() }, points.at(numArcs), points.at(last) };
     circle.at(last) = endCircumscribe.GetCircle2();
 
-    // ÔÚµã(a,0) ºÍ (0,b)¼ä¼ÆËãÔ²»¡
+    // åœ¨ç‚¹(a,0) å’Œ (0,b)é—´è®¡ç®—åœ†å¼§
     for (auto index = 1; index < last; ++index)
     {
         const auto nextIndex = index + 1;

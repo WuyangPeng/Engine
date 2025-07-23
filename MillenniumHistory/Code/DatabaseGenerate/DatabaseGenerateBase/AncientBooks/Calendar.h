@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #ifndef ANCIENT_BOOKS_CALENDAR_H
 #define ANCIENT_BOOKS_CALENDAR_H
@@ -79,17 +79,17 @@ namespace AncientBooks
 
     private:
         int id;  // Id
-        String name;  // Ãû×Ö
-        StringContainer alias;  // „eÃû
-        IntContainer source;  // ³öÌ
-        String publication;  // ¿¯İd
-        IntContainer creator;  // „“ÖÆÈË
-        int formulate;  // ÖÆ¶¨Äê
-        int country;  // ‡ø¼Ò
-        int begin;  // é_Ê¼
-        int end;  // ½YÊø
-        int againBegin;  // ÔÙ´Îé_Ê¼
-        int againEnd;  // ÔÙ´Î½YÊø
+        String name;  // åå­—
+        StringContainer alias;  // åˆ¥å
+        IntContainer source;  // å‡ºè™•
+        String publication;  // åˆŠè¼‰
+        IntContainer creator;  // å‰µåˆ¶äºº
+        int formulate;  // åˆ¶å®šå¹´
+        int country;  // åœ‹å®¶
+        int begin;  // é–‹å§‹
+        int end;  // çµæŸ
+        int againBegin;  // å†æ¬¡é–‹å§‹
+        int againEnd;  // å†æ¬¡çµæŸ
     };
 }
 

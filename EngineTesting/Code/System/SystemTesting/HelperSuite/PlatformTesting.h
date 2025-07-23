@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/08 10:42)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/08 10:42)
 
 #ifndef SYSTEM_TESTING_HELPER_SUITE_PLATFORM_TESTING_H
 #define SYSTEM_TESTING_HELPER_SUITE_PLATFORM_TESTING_H
@@ -14,9 +14,9 @@
 
 namespace System
 {
-    /// @brief Õâ¸öÀàÓÃÓÚ²âÊÔÆ½Ì¨Í·ÎÄ¼ş
-    /// Í¨¹ı°üº¬System/Helper/Platform.hÀ´ÊµÏÖ²âÊÔ£¬
-    /// Àà±¾ÉíÊÇ¿Õ²âÊÔ¡£
+    /// @brief è¿™ä¸ªç±»ç”¨äºæµ‹è¯•å¹³å°å¤´æ–‡ä»¶
+    /// é€šè¿‡åŒ…å«System/Helper/Platform.hæ¥å®ç°æµ‹è¯•ï¼Œ
+    /// ç±»æœ¬èº«æ˜¯ç©ºæµ‹è¯•ã€‚
     class PlatformTesting final : public CoreTools::UnitTest
     {
     public:

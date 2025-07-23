@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 14:50)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 14:50)
 
 #ifndef CORE_TOOLS_DATA_TYPE_MIN_HEAP_DETAIL_H
 #define CORE_TOOLS_DATA_TYPE_MIN_HEAP_DETAIL_H
@@ -114,13 +114,13 @@ CoreTools::MinHeapRecord<KeyType, ValueType> CoreTools::MinHeap<KeyType, ValueTy
 
     if (0 < numElements)
     {
-        /// ´Ó×îĞ¡¶ÑµÄ¸ùÖĞ»ñÈ¡×îĞ¡Öµ¡£
+        /// ä»æœ€å°å †çš„æ ¹ä¸­è·å–æœ€å°å€¼ã€‚
         return records.at(GetRecordKey(0));
     }
     else
     {
-        /// Èç¹û¹ÊÒâÈ¡Ïû·ÖÅäÈ¨ÖØ£¬ÔòÎŞĞ§¡£
-        THROW_EXCEPTION(SYSTEM_TEXT("×îĞ¡¶ÑÎª¿Õ¡£"))
+        /// å¦‚æœæ•…æ„å–æ¶ˆåˆ†é…æƒé‡ï¼Œåˆ™æ— æ•ˆã€‚
+        THROW_EXCEPTION(SYSTEM_TEXT("æœ€å°å †ä¸ºç©ºã€‚"))
     }
 }
 
@@ -131,38 +131,38 @@ int CoreTools::MinHeap<KeyType, ValueType>::Insert(const KeyType& handle, const 
 
     if (GetMaxElements() <= numElements)
     {
-        /// ¶ÑÂúºóÁ¢¼´·µ»Ø¡£
-        THROW_EXCEPTION(SYSTEM_TEXT("×îĞ¡¶ÑÒÑÂú¡£"))
+        /// å †æ»¡åç«‹å³è¿”å›ã€‚
+        THROW_EXCEPTION(SYSTEM_TEXT("æœ€å°å †å·²æ»¡ã€‚"))
     }
 
-    /// ½«ÊäÈëĞÅÏ¢(handle, weight)´æ´¢ÔÚ×îºóÒ»¸ö¶Ñ¼ÇÂ¼ÖĞ£¬¸Ã¼ÇÂ¼ÊÇÊ÷ÖĞµÄ×îºóÒ»¸öÒ¶½Úµã¡£
+    /// å°†è¾“å…¥ä¿¡æ¯(handle, weight)å­˜å‚¨åœ¨æœ€åä¸€ä¸ªå †è®°å½•ä¸­ï¼Œè¯¥è®°å½•æ˜¯æ ‘ä¸­çš„æœ€åä¸€ä¸ªå¶èŠ‚ç‚¹ã€‚
     auto childIndex = numElements++;
 
     auto& record = records.at(GetRecordKey(childIndex));
     record.SetRecord(childIndex, handle, weight);
 
-    /// ÏòÊ÷µÄ¸ù´«²¥ĞÅÏ¢£¬Ö±µ½Ëüµ½´ïÕıÈ·µÄÎ»ÖÃ£¬´Ó¶ø½«Ê÷»Ö¸´Îª×îĞ¡¶Ñ¡£
+    /// å‘æ ‘çš„æ ¹ä¼ æ’­ä¿¡æ¯ï¼Œç›´åˆ°å®ƒåˆ°è¾¾æ­£ç¡®çš„ä½ç½®ï¼Œä»è€Œå°†æ ‘æ¢å¤ä¸ºæœ€å°å †ã€‚
     while (0 < childIndex)
     {
         const auto parentIndex = (childIndex - 1) / 2;
 
         if (records.at(GetRecordKey(parentIndex)).GetWeight() <= weight)
         {
-            /// ¸¸¶ÔÏóµÄÈ¨ÖØĞ¡ÓÚ»òµÈÓÚ×Ó¶ÔÏóµÄÖµ¡£ÎÒÃÇÏÖÔÚÓĞÒ»¸ö×îĞ¡¶Ñ¡£
+            /// çˆ¶å¯¹è±¡çš„æƒé‡å°äºæˆ–ç­‰äºå­å¯¹è±¡çš„å€¼ã€‚æˆ‘ä»¬ç°åœ¨æœ‰ä¸€ä¸ªæœ€å°å †ã€‚
             break;
         }
 
-        /// ¸¸¶ÔÏóµÄÖµ´óÓÚ×Ó¶ÔÏóµÄÖµ¡£½»»»¸¸¶ÔÏóºÍ×Ó¶ÔÏó¡£
+        /// çˆ¶å¯¹è±¡çš„å€¼å¤§äºå­å¯¹è±¡çš„å€¼ã€‚äº¤æ¢çˆ¶å¯¹è±¡å’Œå­å¯¹è±¡ã€‚
 
-        /// ½«¸¸¶ÔÏóÒÆ¶¯µ½×Ó¶ÔÏóµÄ²ÛÖĞ¡£
+        /// å°†çˆ¶å¯¹è±¡ç§»åŠ¨åˆ°å­å¯¹è±¡çš„æ§½ä¸­ã€‚
         pointers.at(childIndex) = GetRecordKey(parentIndex);
         SetIndex(childIndex);
 
-        /// ½«×Ó¶ÔÏóÒÆ¶¯µ½¸¸¶ÔÏóµÄ²ÛÖĞ¡£
+        /// å°†å­å¯¹è±¡ç§»åŠ¨åˆ°çˆ¶å¯¹è±¡çš„æ§½ä¸­ã€‚
         pointers.at(parentIndex) = record.GetIndex();
         SetIndex(parentIndex);
 
-        /// ÏòÉÏ´«²¥¡£
+        /// å‘ä¸Šä¼ æ’­ã€‚
         childIndex = parentIndex;
     }
 
@@ -176,16 +176,16 @@ CoreTools::MinHeapRecord<KeyType, ValueType> CoreTools::MinHeap<KeyType, ValueTy
 
     if (numElements == 0)
     {
-        /// Èç¹û¹ÊÒâÈ¡Ïû·ÖÅäÈ¨ÖØ£¬ÔòÎŞĞ§¡£
-        THROW_EXCEPTION(SYSTEM_TEXT("×îĞ¡¶ÑÎª¿Õ¡£"))
+        /// å¦‚æœæ•…æ„å–æ¶ˆåˆ†é…æƒé‡ï¼Œåˆ™æ— æ•ˆã€‚
+        THROW_EXCEPTION(SYSTEM_TEXT("æœ€å°å †ä¸ºç©ºã€‚"))
     }
 
-    /// ´Ó×îĞ¡¶ÑµÄ¸ùÖĞ»ñÈ¡×îĞ¡Öµ¡£
+    /// ä»æœ€å°å †çš„æ ¹ä¸­è·å–æœ€å°å€¼ã€‚
     const auto root = records.at(GetRecordKey(0));
     const auto rootIndex = GetRecordKey(0);
 
-    /// ½«Ê÷»Ö¸´Îª¶Ñ¡£³éÏóµØËµ£¬¼ÇÂ¼ÊÇ¶ÑµÄĞÂ¸ù¡£
-    /// ËüÍ¨¹ı¸¸×Ó½»»»ÑØ×ÅÊ÷ÏòÏÂÒÆ¶¯£¬Ö±µ½ËüÎ»ÓÚ½«Ê÷»Ö¸´Îª¶ÑµÄÎ»ÖÃ¡£
+    /// å°†æ ‘æ¢å¤ä¸ºå †ã€‚æŠ½è±¡åœ°è¯´ï¼Œè®°å½•æ˜¯å †çš„æ–°æ ¹ã€‚
+    /// å®ƒé€šè¿‡çˆ¶å­äº¤æ¢æ²¿ç€æ ‘å‘ä¸‹ç§»åŠ¨ï¼Œç›´åˆ°å®ƒä½äºå°†æ ‘æ¢å¤ä¸ºå †çš„ä½ç½®ã€‚
     const auto lastIndex = --numElements;
 
     const auto& record = records.at(GetRecordKey(lastIndex));
@@ -196,7 +196,7 @@ CoreTools::MinHeapRecord<KeyType, ValueType> CoreTools::MinHeap<KeyType, ValueTy
     {
         if (childIndex < lastIndex)
         {
-            /// ÈçÓĞ±ØÒª£¬Ñ¡Ôñ¾ßÓĞ×îĞ¡ÖµµÄ×Ó¶ÔÏó×÷ÎªÓë¸¸¶ÔÏó½»»»µÄ¶ÔÏó¡£
+            /// å¦‚æœ‰å¿…è¦ï¼Œé€‰æ‹©å…·æœ‰æœ€å°å€¼çš„å­å¯¹è±¡ä½œä¸ºä¸çˆ¶å¯¹è±¡äº¤æ¢çš„å¯¹è±¡ã€‚
             if (const auto nextChildIndex = childIndex + 1;
                 records.at(GetRecordKey(nextChildIndex)).GetWeight() < records.at(GetRecordKey(childIndex)).GetWeight())
             {
@@ -206,25 +206,25 @@ CoreTools::MinHeapRecord<KeyType, ValueType> CoreTools::MinHeap<KeyType, ValueTy
 
         if (record.GetWeight() <= records.at(GetRecordKey(childIndex)).GetWeight())
         {
-            /// Ê÷ÏÖÔÚ³ÉÁË×îĞ¡¶Ñ¡£
+            /// æ ‘ç°åœ¨æˆäº†æœ€å°å †ã€‚
             break;
         }
 
-        /// ½«×Ó¶ÔÏóÒÆ¶¯µ½¸¸¶ÔÏóµÄ²ÛÖĞ¡£
+        /// å°†å­å¯¹è±¡ç§»åŠ¨åˆ°çˆ¶å¯¹è±¡çš„æ§½ä¸­ã€‚
         pointers.at(parentIndex) = GetRecordKey(childIndex);
         SetIndex(parentIndex);
 
-        /// ÏòÏÂ´«²¥¡£
+        /// å‘ä¸‹ä¼ æ’­ã€‚
         parentIndex = childIndex;
         childIndex = 2 * childIndex + 1;
     }
 
-    /// ÉÏÒ»¸ö¡°×îºó¡±¼ÇÂ¼±»ÒÆµ½¸ùÉÏ£¬²¢ÑØ×ÅÊ÷´«²¥µ½ËüµÄ×îÖÕÎ»ÖÃ£¬½«Ê÷»Ö¸´Îª¶Ñ¡£
-    /// ²å²Ûpointers.at(parentIndex) ¾ÍÊÇ×îÖÕÎ»ÖÃ.
+    /// ä¸Šä¸€ä¸ªâ€œæœ€åâ€è®°å½•è¢«ç§»åˆ°æ ¹ä¸Šï¼Œå¹¶æ²¿ç€æ ‘ä¼ æ’­åˆ°å®ƒçš„æœ€ç»ˆä½ç½®ï¼Œå°†æ ‘æ¢å¤ä¸ºå †ã€‚
+    /// æ’æ§½pointers.at(parentIndex) å°±æ˜¯æœ€ç»ˆä½ç½®.
     pointers.at(parentIndex) = GetRecordKey(record.GetIndex());
     SetIndex(parentIndex);
 
-    /// ¾ÉµÄ¸ù¼ÇÂ¼²»ÄÜ¶ªÊ§¡£½«ÆäÁ¬½Óµ½°üº¬¾ÉµÄ×îºóÒ»Ìõ¼ÇÂ¼µÄ²å²ÛÖĞ¡£
+    /// æ—§çš„æ ¹è®°å½•ä¸èƒ½ä¸¢å¤±ã€‚å°†å…¶è¿æ¥åˆ°åŒ…å«æ—§çš„æœ€åä¸€æ¡è®°å½•çš„æ’æ§½ä¸­ã€‚
     pointers.at(lastIndex) = rootIndex;
     SetIndex(lastIndex);
 
@@ -252,31 +252,31 @@ void CoreTools::MinHeap<KeyType, ValueType>::UpdateGreater(int index, const Valu
 {
     records.at(index).SetWeight(weight);
 
-    /// ĞÂÖµ´óÓÚ¾ÉÖµ¡£°ÑËü´«²¥µ½½ÚµãÉÏ¡£
+    /// æ–°å€¼å¤§äºæ—§å€¼ã€‚æŠŠå®ƒä¼ æ’­åˆ°èŠ‚ç‚¹ä¸Šã€‚
     auto parentIndex = records.at(index).GetIndex();
     auto childIndex = 2 * parentIndex + 1;
     while (childIndex < numElements)
     {
-        /// ÖÁÉÙ´æÔÚÒ»¸ö×ÓÏî¡£ÕÒµ½×î´óÖµÖ®Ò»¡£
+        /// è‡³å°‘å­˜åœ¨ä¸€ä¸ªå­é¡¹ã€‚æ‰¾åˆ°æœ€å¤§å€¼ä¹‹ä¸€ã€‚
         const auto maxChildIndex = GetMaxChildIndex(childIndex);
 
         if (weight <= records.at(GetRecordKey(maxChildIndex)).GetWeight())
         {
-            /// ĞÂÖµÎ»ÓÚ½«Ê÷»Ö¸´Îª×îĞ¡¶ÑµÄÕıÈ·Î»ÖÃ¡£
+            /// æ–°å€¼ä½äºå°†æ ‘æ¢å¤ä¸ºæœ€å°å †çš„æ­£ç¡®ä½ç½®ã€‚
             break;
         }
 
-        /// ×ÓÏîµÄÖµ´óÓÚ¸¸ÏîµÄÖµ¡£½»»»¸¸¶ÔÏóºÍ×Ó¶ÔÏó£º
+        /// å­é¡¹çš„å€¼å¤§äºçˆ¶é¡¹çš„å€¼ã€‚äº¤æ¢çˆ¶å¯¹è±¡å’Œå­å¯¹è±¡ï¼š
 
-        /// ½«×Ó¶ÔÏóÒÆ¶¯µ½¸¸¶ÔÏóµÄ²ÛÖĞ¡£
+        /// å°†å­å¯¹è±¡ç§»åŠ¨åˆ°çˆ¶å¯¹è±¡çš„æ§½ä¸­ã€‚
         pointers.at(parentIndex) = GetRecordKey(maxChildIndex);
         SetIndex(parentIndex);
 
-        /// ½«¸¸¶ÔÏóÒÆ¶¯µ½×Ó¶ÔÏóµÄ²ÛÖĞ¡£
+        /// å°†çˆ¶å¯¹è±¡ç§»åŠ¨åˆ°å­å¯¹è±¡çš„æ§½ä¸­ã€‚
         pointers.at(maxChildIndex) = index;
         SetIndex(maxChildIndex);
 
-        /// ÏòÏÂ´«²¥¡£
+        /// å‘ä¸‹ä¼ æ’­ã€‚
         parentIndex = maxChildIndex;
         childIndex = 2 * parentIndex + 1;
     }
@@ -288,7 +288,7 @@ int CoreTools::MinHeap<KeyType, ValueType>::GetMaxChildIndex(int childIndex)
     if (const auto nextChildIndex = childIndex + 1;
         nextChildIndex < numElements)
     {
-        /// ÓĞÁ½¸ö×Ó½Úµã¡£
+        /// æœ‰ä¸¤ä¸ªå­èŠ‚ç‚¹ã€‚
         if (records.at(GetRecordKey(childIndex)).GetWeight() <= records.at(GetRecordKey(nextChildIndex)).GetWeight())
         {
             return childIndex;
@@ -309,7 +309,7 @@ void CoreTools::MinHeap<KeyType, ValueType>::UpdateLess(int index, const ValueTy
 {
     records.at(index).SetWeight(weight);
 
-    /// ĞÂÖµĞ¡ÓÚ¾ÉÖµ¡£½«ÆäÏò¸ù²¿´«²¥¡£
+    /// æ–°å€¼å°äºæ—§å€¼ã€‚å°†å…¶å‘æ ¹éƒ¨ä¼ æ’­ã€‚
     auto childIndex = records.at(index).GetIndex();
     while (childIndex > 0)
     {
@@ -317,21 +317,21 @@ void CoreTools::MinHeap<KeyType, ValueType>::UpdateLess(int index, const ValueTy
 
         if (records.at(GetRecordKey(parentIndex)).GetWeight() <= weight)
         {
-            /// ĞÂÖµÎ»ÓÚ½«Ê÷»Ö¸´Îª×îĞ¡¶Ñ¶ÑµÄÕıÈ·Î»ÖÃ¡£
+            /// æ–°å€¼ä½äºå°†æ ‘æ¢å¤ä¸ºæœ€å°å †å †çš„æ­£ç¡®ä½ç½®ã€‚
             break;
         }
 
-        /// ¸¸¶ÔÏóµÄÖµĞ¡ÓÚ×Ó¶ÔÏóµÄÖµ¡£½»»»×Ó¶ÔÏóºÍ¸¸¶ÔÏó¡£
+        /// çˆ¶å¯¹è±¡çš„å€¼å°äºå­å¯¹è±¡çš„å€¼ã€‚äº¤æ¢å­å¯¹è±¡å’Œçˆ¶å¯¹è±¡ã€‚
 
-        /// ½«×Ó¶ÔÏóÒÆ¶¯µ½¸¸¶ÔÏóµÄ²ÛÖĞ¡£
+        /// å°†å­å¯¹è±¡ç§»åŠ¨åˆ°çˆ¶å¯¹è±¡çš„æ§½ä¸­ã€‚
         pointers.at(childIndex) = GetRecordKey(parentIndex);
         records.at(GetRecordKey(childIndex)).SetIndex(childIndex);
 
-        /// ½«¸¸¶ÔÏóÒÆ¶¯µ½×Ó¶ÔÏóµÄ²ÛÖĞ¡£
+        /// å°†çˆ¶å¯¹è±¡ç§»åŠ¨åˆ°å­å¯¹è±¡çš„æ§½ä¸­ã€‚
         pointers.at(parentIndex) = index;
         records.at(GetRecordKey(parentIndex)).SetIndex(parentIndex);
 
-        /// ÏòÏÂ´«²¥¡£
+        /// å‘ä¸‹ä¼ æ’­ã€‚
         childIndex = parentIndex;
     }
 }

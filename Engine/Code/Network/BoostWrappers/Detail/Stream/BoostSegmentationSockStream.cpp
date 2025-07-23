@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 17:24)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 17:24)
 
 #include "Network/NetworkExport.h"
 
@@ -73,7 +73,7 @@ int Network::BoostSegmentationSockStream::ReceiveHead(const MessageBufferSharedP
     }
     else if (receiveSize != 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("½ÓÊÕÏûÏ¢Í·´íÎó£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ¥æ”¶æ¶ˆæ¯å¤´é”™è¯¯ï¼"s))
     }
 
     return receiveSize;
@@ -92,7 +92,7 @@ int Network::BoostSegmentationSockStream::ReceiveContent(const MessageBufferShar
 
         if (0 < messageBuffer->GetReceiveCount())
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("½ÓÊÕÏûÏ¢ÄÚÈİ´íÎó£¡"s))
+            THROW_EXCEPTION(SYSTEM_TEXT("æ¥æ”¶æ¶ˆæ¯å†…å®¹é”™è¯¯ï¼"s))
         }
     }
 
@@ -175,7 +175,7 @@ void Network::BoostSegmentationSockStream::SubclassAsyncReceiveHeadEvent(const E
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("½ÓÊÕÏûÏ¢Í·³¤¶È´íÎó£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ¥æ”¶æ¶ˆæ¯å¤´é•¿åº¦é”™è¯¯ï¼"s))
     }
 }
 

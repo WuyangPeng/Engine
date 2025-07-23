@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 16:42)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 16:42)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RESULT_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RESULT_H
@@ -47,12 +47,12 @@ namespace Mathematics
 
         NODISCARD Real GetDistance() const noexcept;
 
-        // ·¢ÉúÔÚ¶¯Ì¬²éÑ¯Æä×îÐ¡¾àÀëµÄÊ±¼ä¡£
+        // å‘ç”Ÿåœ¨åŠ¨æ€æŸ¥è¯¢å…¶æœ€å°è·ç¦»çš„æ—¶é—´ã€‚
         NODISCARD Real GetContactTime() const noexcept;
 
-        // ¹ØÓÚÁ½¸ö¶ÔÏóµÄ×î½üµã¡£ÕâÐ©ÔÚ¾²Ì¬»ò¶¯Ì¬²éÑ¯Ê±ÊÇÓÐÐ§µÄ¡£
-        // µ¥¸ö¶ÔÏóÉÏµÄ¼¯×î½üµãµÄÈç¹û²»ÊÇÒ»¸öµãÊ±£¬ÔÚÕâÖÖÇé¿öÏÂ£¬GetSizeº¯Êý·µ»ØÖµ´óÓÚ1¡£
-        // GetPoint¿ÉÒÔÖ§³Ö²éÑ¯Õû¸ö×î½üµãµÄÊý×é¡£
+        // å…³äºŽä¸¤ä¸ªå¯¹è±¡çš„æœ€è¿‘ç‚¹ã€‚è¿™äº›åœ¨é™æ€æˆ–åŠ¨æ€æŸ¥è¯¢æ—¶æ˜¯æœ‰æ•ˆçš„ã€‚
+        // å•ä¸ªå¯¹è±¡ä¸Šçš„é›†æœ€è¿‘ç‚¹çš„å¦‚æžœä¸æ˜¯ä¸€ä¸ªç‚¹æ—¶ï¼Œåœ¨è¿™ç§æƒ…å†µä¸‹ï¼ŒGetSizeå‡½æ•°è¿”å›žå€¼å¤§äºŽ1ã€‚
+        // GetPointå¯ä»¥æ”¯æŒæŸ¥è¯¢æ•´ä¸ªæœ€è¿‘ç‚¹çš„æ•°ç»„ã€‚
         NODISCARD Vector GetLhsClosestPoint() const;
         NODISCARD Vector GetRhsClosestPoint() const;
         NODISCARD Vector GetLhsClosestPoint(int index) const;

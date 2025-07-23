@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 13:51)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 13:51)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_PLANE3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_PLANE3_ACHIEVE_H
@@ -54,42 +54,42 @@ Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorPlane3Plane3<Real>::
 template <typename Real>
 void Mathematics::StaticFindIntersectorPlane3Plane3<Real>::Find()
 {
-    /// Èç¹ûN0ºÍN1Æ½ĞĞ£¬ÔòÁ½¸öÆ½ÃæÆ½ĞĞÇÒ·Ö¿ª»òÔÚÍ¬Ò»Æ½ÃæÉÏ¡£
-    /// ÔÚÕâÁ½ÖÖÇé¿öÏÂ£¬¾ù·µ»Ø¡° false¡±¡£ ·ñÔò£¬½»ÏßÎª L(t) = t * Cross(N0,N1) / |Cross(N0,N1)| + c0 * N0 + c1 * N1
-    /// ¶ÔÓÚÄ³Ğ©ÏµÊıc0ºÍc1£¬¶ÔÓÚtÈÎÒâÊµÊı£¨ĞĞ²ÎÊı£©¡£
-    /// Óë·¨ÏßÒ»ÆğÈ¡µã»ı£¬
+    /// å¦‚æœN0å’ŒN1å¹³è¡Œï¼Œåˆ™ä¸¤ä¸ªå¹³é¢å¹³è¡Œä¸”åˆ†å¼€æˆ–åœ¨åŒä¸€å¹³é¢ä¸Šã€‚
+    /// åœ¨è¿™ä¸¤ç§æƒ…å†µä¸‹ï¼Œå‡è¿”å›â€œ falseâ€ã€‚ å¦åˆ™ï¼Œäº¤çº¿ä¸º L(t) = t * Cross(N0,N1) / |Cross(N0,N1)| + c0 * N0 + c1 * N1
+    /// å¯¹äºæŸäº›ç³»æ•°c0å’Œc1ï¼Œå¯¹äºtä»»æ„å®æ•°ï¼ˆè¡Œå‚æ•°ï¼‰ã€‚
+    /// ä¸æ³•çº¿ä¸€èµ·å–ç‚¹ç§¯ï¼Œ
     ///   d0 = Dot(N0,L) = c0 * Dot(N0,N0) + c1 * Dot(N0,N1) = c0 + c1 * d
     ///   d1 = Dot(N1,L) = c0 * Dot(N0,N1) + c1 * Dot(N1,N1) = c0 * d + c1
-    /// ÆäÖĞd = Dot(N0,N1)¡£ ÕâÊÇÁ½¸öÎ´ÖªÊıÖĞµÄÁ½¸ö·½³Ì¡£ ½â¾ö·½·¨ÊÇ
+    /// å…¶ä¸­d = Dot(N0,N1)ã€‚ è¿™æ˜¯ä¸¤ä¸ªæœªçŸ¥æ•°ä¸­çš„ä¸¤ä¸ªæ–¹ç¨‹ã€‚ è§£å†³æ–¹æ³•æ˜¯
     ///   c0 = (d0 - d * d1) / det
     ///   c1 = (d1 - d * d0) / det
-    /// ÆäÖĞdet = 1 - d^2¡£
+    /// å…¶ä¸­det = 1 - d^2ã€‚
 
     auto dot = Vector3ToolsType::DotProduct(plane0.GetNormal(), plane1.GetNormal());
     if (MathType::GetValue(1) - MathType::GetZeroTolerance() <= MathType::FAbs(dot))
     {
-        // ÕâĞ©Æ½ÃæÊÇÆ½ĞĞµÄ¡£ ¼ì²éËüÃÇÊÇ·ñ¹²Ãæ¡£
+        // è¿™äº›å¹³é¢æ˜¯å¹³è¡Œçš„ã€‚ æ£€æŸ¥å®ƒä»¬æ˜¯å¦å…±é¢ã€‚
         auto diff = MathType::GetValue(0);
         if (MathType::GetValue(0) <= dot)
         {
-            // ·¨Ïß·½ÏòÏàÍ¬£¬ĞèÒª²é¿´c0 - c1¡£
+            // æ³•çº¿æ–¹å‘ç›¸åŒï¼Œéœ€è¦æŸ¥çœ‹c0 - c1ã€‚
             diff = plane0.GetConstant() - plane1.GetConstant();
         }
         else
         {
-            // ·¨Ïß·½ÏòÏà·´£¬ĞèÒª²é¿´c0 + c1¡£
+            // æ³•çº¿æ–¹å‘ç›¸åï¼Œéœ€è¦æŸ¥çœ‹c0 + c1ã€‚
             diff = plane0.GetConstant() + plane1.GetConstant();
         }
 
         if (MathType::FAbs(diff) < MathType::GetZeroTolerance())
         {
-            // Æ½Ãæ¹²Ãæ¡£
+            // å¹³é¢å…±é¢ã€‚
             this->SetIntersectionType(IntersectionType::Plane);
             intrPlane = plane0;
             return;
         }
 
-        // Æ½ÃæÊÇÆ½ĞĞµÄ£¬µ«½ØÈ»²»Í¬¡£
+        // å¹³é¢æ˜¯å¹³è¡Œçš„ï¼Œä½†æˆªç„¶ä¸åŒã€‚
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }

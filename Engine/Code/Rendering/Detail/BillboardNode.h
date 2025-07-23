@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:51)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:51)
 
 #ifndef RENDERING_DETAIL_BILLBOARD_NODE_H
 #define RENDERING_DETAIL_BILLBOARD_NODE_H
@@ -17,8 +17,8 @@ RENDERING_COPY_UNSHARED_EXPORT_IMPL(BillboardNode, BillboardNodeImpl);
 
 namespace Rendering
 {
-    // ¹ã¸æÅÆµÄÄ£ĞÍ¿Õ¼ä¾ßÓĞµÄ(0,1,0)ÏòÉÏÊ¸Á¿
-    // ±»Ñ¡ÔñÎªĞı×ªµÄ¹ã¸æÅÆµÄÖá¡£
+    // å¹¿å‘Šç‰Œçš„æ¨¡å‹ç©ºé—´å…·æœ‰çš„(0,1,0)å‘ä¸ŠçŸ¢é‡
+    // è¢«é€‰æ‹©ä¸ºæ—‹è½¬çš„å¹¿å‘Šç‰Œçš„è½´ã€‚
     class RENDERING_DEFAULT_DECLARE BillboardNode : public Node
     {
     public:
@@ -33,7 +33,7 @@ namespace Rendering
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(BillboardNode);
         CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 
-        // ¹ã¸æÅÆ¶ÔÆëµÄÉãÏñÍ·¡£
+        // å¹¿å‘Šç‰Œå¯¹é½çš„æ‘„åƒå¤´ã€‚
         void AlignTo(const CameraSharedPtr& camera) noexcept;
 
         NODISCARD ControllerSharedPtr Clone() const override;
@@ -41,7 +41,7 @@ namespace Rendering
         NODISCARD ConstCameraSharedPtr GetCamera() const noexcept;
 
     private:
-        // ¶Ô¼¸ºÎ¸üĞÂµÄÖ§³Ö¡£
+        // å¯¹å‡ ä½•æ›´æ–°çš„æ”¯æŒã€‚
         bool UpdateWorldData(double applicationTime) override;
 
     private:

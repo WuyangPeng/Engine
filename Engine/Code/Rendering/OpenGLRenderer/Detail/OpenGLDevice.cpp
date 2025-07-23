@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2024/01/09 10:02)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2024/01/09 10:02)
 
 #include "Rendering/RenderingExport.h"
 
@@ -47,6 +47,7 @@
 #include "Rendering/Shaders/Shader.h"
 #include "Rendering/Shaders/VisualProgram.h"
 #include "Rendering/State/SamplerState.h"
+#include "Rendering/DataTypes/ColourDetail.h"
 
 #include <gsl/util>
 
@@ -179,7 +180,7 @@ int64_t Rendering::OpenGLDevice::DrawPrimitive(RendererObjectBridge& rendererObj
 
     if (EnableShaders(rendererObjectBridge, *effect, programHandle))
     {
-        // ÆôÓÃ¶¥µã»º³åÇøºÍÊäÈë²¼¾Ö¡£
+        // å¯ç”¨é¡¶ç‚¹ç¼“å†²åŒºå’Œè¾“å…¥å¸ƒå±€ã€‚
         RendererObjectBridge::RendererObjectSharedPtr gl4VertexBuffer{};
         OpenGLInputLayoutManager::OpenGLInputLayoutSharedPtr gl4Layout{};
         if (vertexBuffer->StandardUsage())
@@ -190,7 +191,7 @@ int64_t Rendering::OpenGLDevice::DrawPrimitive(RendererObjectBridge& rendererObj
             gl4Layout->Enable();
         }
 
-        // ÆôÓÃË÷Òı»º³åÇø¡£
+        // å¯ç”¨ç´¢å¼•ç¼“å†²åŒºã€‚
         RendererObjectBridge::RendererObjectSharedPtr gl4IndexBuffer{};
         if (indexBuffer != nullptr)
         {
@@ -200,13 +201,13 @@ int64_t Rendering::OpenGLDevice::DrawPrimitive(RendererObjectBridge& rendererObj
 
         numPixelsDrawn = DrawPrimitive(*vertexBuffer, *indexBuffer);
 
-        // ½ûÓÃ¶¥µã»º³åÇøºÍÊäÈë²¼¾Ö¡£
+        // ç¦ç”¨é¡¶ç‚¹ç¼“å†²åŒºå’Œè¾“å…¥å¸ƒå±€ã€‚
         if (vertexBuffer->StandardUsage())
         {
             gl4Layout->Disable();
         }
 
-        // ½ûÓÃË÷Òı»º³åÇø¡£
+        // ç¦ç”¨ç´¢å¼•ç¼“å†²åŒºã€‚
         if (gl4IndexBuffer != nullptr)
         {
             gl4IndexBuffer->Disable();
@@ -418,30 +419,30 @@ void Rendering::OpenGLDevice::EnableStructuredBuffers(RendererObjectBridge& rend
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    /// ÅäÖÃ×ÅÉ«Æ÷Ê¹ÓÃµÄÔ­×Ó¼ÆÊıÆ÷»º³åÇø¶ÔÏó¡£
+    /// é…ç½®ç€è‰²å™¨ä½¿ç”¨çš„åŸå­è®¡æ•°å™¨ç¼“å†²åŒºå¯¹è±¡ã€‚
     const auto& atomicCounters = shader.GetData(System::EnumCastUnderlying(ShaderDataLookup::AtomicCounterShaderDataLookup));
     const auto& atomicCounterBuffers = shader.GetData(System::EnumCastUnderlying(ShaderDataLookup::AtomicCounterBufferShaderDataLookup));
     for (auto atomicCounterBufferIndex = 0u; atomicCounterBufferIndex < atomicCounterBuffers.size(); ++atomicCounterBufferIndex)
     {
         auto const& atomicCounterBuffer = atomicCounterBuffers.at(atomicCounterBufferIndex);
 
-        // ÊÇ·ñ·ÖÅäĞÂµÄÔ­Ê¼»º³åÇø£¿
+        // æ˜¯å¦åˆ†é…æ–°çš„åŸå§‹ç¼“å†²åŒºï¼Ÿ
         if (atomicCounterRawBuffers.size() <= atomicCounterBufferIndex)
         {
             atomicCounterRawBuffers.emplace_back(nullptr);
         }
 
-        /// ²é¿´ÔÚ¸ÃË÷Òı´¦¶¨ÒåµÄµ±Ç°Ô­Ê¼»º³åÇø¡£Èç¹û¸Õ²åÈëĞÂÎ»ÖÃ£¬Ôò¿ÉÄÜÎªnullptr¡£
+        /// æŸ¥çœ‹åœ¨è¯¥ç´¢å¼•å¤„å®šä¹‰çš„å½“å‰åŸå§‹ç¼“å†²åŒºã€‚å¦‚æœåˆšæ’å…¥æ–°ä½ç½®ï¼Œåˆ™å¯èƒ½ä¸ºnullptrã€‚
         auto& rawBuffer = atomicCounterRawBuffers.at(atomicCounterBufferIndex);
 
-        /// Èç¹ûÔ­Ê¼»º³åÇø²»¹»´ó£¬Çë½â³ı¾É»º³åÇøµÄ°ó¶¨£¬²¢×¼±¸´´½¨ĞÂ»º³åÇø¡£
+        /// å¦‚æœåŸå§‹ç¼“å†²åŒºä¸å¤Ÿå¤§ï¼Œè¯·è§£é™¤æ—§ç¼“å†²åŒºçš„ç»‘å®šï¼Œå¹¶å‡†å¤‡åˆ›å»ºæ–°ç¼“å†²åŒºã€‚
         if (rawBuffer && rawBuffer->GetNumBytes() < (atomicCounterBuffer.GetNumBytes()))
         {
             rendererObjectBridge.UnbindRendererObject(rawBuffer);
             rawBuffer = nullptr;
         }
 
-        /// ²éÕÒµ±Ç°Ó³ÉäµÄOpenGLAtomicCounterBuffer¡£
+        /// æŸ¥æ‰¾å½“å‰æ˜ å°„çš„OpenGLAtomicCounterBufferã€‚
         std::shared_ptr<OpenGLAtomicCounterBuffer> openGLAtomicCounterBuffer = nullptr;
         if (rawBuffer)
         {
@@ -449,15 +450,15 @@ void Rendering::OpenGLDevice::EnableStructuredBuffers(RendererObjectBridge& rend
         }
         else
         {
-            /// ¸ù¾İ¶¨Òå£¬RawBuffer°üº¬4×Ö½ÚÔªËØ¡£ÎÒÃÇ²»ĞèÒªCPU¶Ë´æ´¢£¬µ«±ØĞëÄÜ¹»ÔÚ»º³åÇøÖ®¼ä¸´ÖÆÖµ¡£
+            /// æ ¹æ®å®šä¹‰ï¼ŒRawBufferåŒ…å«4å­—èŠ‚å…ƒç´ ã€‚æˆ‘ä»¬ä¸éœ€è¦CPUç«¯å­˜å‚¨ï¼Œä½†å¿…é¡»èƒ½å¤Ÿåœ¨ç¼“å†²åŒºä¹‹é—´å¤åˆ¶å€¼ã€‚
             rawBuffer = std::make_shared<RawBuffer>("RawBuffer", (atomicCounterBuffer.GetNumBytes() + 3) / 4, false);
             rawBuffer->SetUsage(UsageType::DynamicUpdate);
 
-            /// Ö´ĞĞÊÖ¶¯°ó¶¨²Ù×÷£¬ÒòÎªÕâÊÇ´ÓRawBufferµ½OpenGLAtomicCounterBufferµÄÌØÊâÓ³Éä
+            /// æ‰§è¡Œæ‰‹åŠ¨ç»‘å®šæ“ä½œï¼Œå› ä¸ºè¿™æ˜¯ä»RawBufferåˆ°OpenGLAtomicCounterBufferçš„ç‰¹æ®Šæ˜ å°„
             openGLAtomicCounterBuffer = boost::polymorphic_pointer_cast<OpenGLAtomicCounterBuffer>(rendererObjectBridge.BindRendererObject(RendererTypes::OpenGL, rawBuffer));
         }
 
-        /// °ó¶¨´ËÔ­×Ó¼ÆÊıÆ÷»º³åÇø¡£
+        /// ç»‘å®šæ­¤åŸå­è®¡æ•°å™¨ç¼“å†²åŒºã€‚
         openGLAtomicCounterBuffer->AttachToUnit(atomicCounterBuffer.GetBindPoint());
     }
 
@@ -474,33 +475,33 @@ void Rendering::OpenGLDevice::EnableStructuredBuffers(RendererObjectBridge& rend
                 const auto unit = shaderStorageUnit.AcquireUnit(program, blockIndex);
                 System::SetGLShaderStorageBlockBinding(program, blockIndex, unit);
 
-                /// ²»ÒªÔÚ´Ë´¦Ê¹ÓÃglBindBufferBase¡£
-                /// ÔÚOpenGLStructuredBufferÖĞÊ¹ÓÃAttachToUnit·½·¨¡£
+                /// ä¸è¦åœ¨æ­¤å¤„ä½¿ç”¨glBindBufferBaseã€‚
+                /// åœ¨OpenGLStructuredBufferä¸­ä½¿ç”¨AttachToUnitæ–¹æ³•ã€‚
                 openGLStructuredBuffer->AttachToUnit(unit);
 
-                /// structuredBuffer.IsGpuWritable()±êÖ¾ÓÃÓÚÖ¸Ê¾ÊÇ·ñ´æÔÚÓë´Ë½á¹¹»¯»º³åÇøÏà¹ØÁªµÄÔ­×Ó¼ÆÊıÆ÷¡£
+                /// structuredBuffer.IsGpuWritable()æ ‡å¿—ç”¨äºæŒ‡ç¤ºæ˜¯å¦å­˜åœ¨ä¸æ­¤ç»“æ„åŒ–ç¼“å†²åŒºç›¸å…³è”çš„åŸå­è®¡æ•°å™¨ã€‚
                 if (structuredBuffer.IsGpuWritable())
                 {
-                    /// ÊÇ·ñĞèÒªÖØÖÃ½á¹¹»¯»º³åÇø¼ÆÊıÆ÷£¿
+                    /// æ˜¯å¦éœ€è¦é‡ç½®ç»“æ„åŒ–ç¼“å†²åŒºè®¡æ•°å™¨ï¼Ÿ
                     if (!openGLStructuredBuffer->SetNumActiveElements())
                     {
-                        LOG_SINGLETON_ENGINE_APPENDER(Info, Rendering, SYSTEM_TEXT("openGLStructuredBuffer SetNumActiveElements Ê§°Ü¡£"));
+                        LOG_SINGLETON_ENGINE_APPENDER(Info, Rendering, SYSTEM_TEXT("openGLStructuredBuffer SetNumActiveElements å¤±è´¥ã€‚"));
                     }
 
-                    /// ´Ë½á¹¹»¯»º³åÇø¾ßÓĞµ½Ïà¹ØÔ­×Ó¼ÆÊıÆ÷±íÏîµÄË÷Òı¡£
+                    /// æ­¤ç»“æ„åŒ–ç¼“å†²åŒºå…·æœ‰åˆ°ç›¸å…³åŸå­è®¡æ•°å™¨è¡¨é¡¹çš„ç´¢å¼•ã€‚
                     auto const acIndex = structuredBuffer.GetExtra();
 
-                    /// ×ÅÉ«Æ÷ÖĞµÄÏà¹Ø¼ÆÊıÆ÷ÔÚÄÄÀï£¿
+                    /// ç€è‰²å™¨ä¸­çš„ç›¸å…³è®¡æ•°å™¨åœ¨å“ªé‡Œï¼Ÿ
                     auto const acbIndex = atomicCounters.at(acIndex).GetBindPoint();
                     auto const acbOffset = atomicCounters.at(acIndex).GetExtra();
 
-                    /// ¼ìË÷OpenGLÔ­×Ó¼ÆÊıÆ÷»º³åÇø¶ÔÏó¡£
+                    /// æ£€ç´¢OpenGLåŸå­è®¡æ•°å™¨ç¼“å†²åŒºå¯¹è±¡ã€‚
                     auto openGLAtomicCounterBuffer = boost::polymorphic_pointer_cast<OpenGLAtomicCounterBuffer>(rendererObjectBridge.GetRendererObject(atomicCounterRawBuffers.at(acbIndex)));
 
-                    /// ½«¼ÆÊıÆ÷Öµ´Ó½á¹¹»¯»º³åÇø¶ÔÏó¸´ÖÆµ½Ô­×Ó¼ÆÊıÆ÷»º³åÇøÖĞµÄÊÊµ±Î»ÖÃ¡£
+                    /// å°†è®¡æ•°å™¨å€¼ä»ç»“æ„åŒ–ç¼“å†²åŒºå¯¹è±¡å¤åˆ¶åˆ°åŸå­è®¡æ•°å™¨ç¼“å†²åŒºä¸­çš„é€‚å½“ä½ç½®ã€‚
                     if (!openGLStructuredBuffer->CopyCounterValueToBuffer(openGLAtomicCounterBuffer.get(), acbOffset))
                     {
-                        LOG_SINGLETON_ENGINE_APPENDER(Info, Rendering, SYSTEM_TEXT("openGLStructuredBuffer CopyCounterValueToBuffer Ê§°Ü¡£"));
+                        LOG_SINGLETON_ENGINE_APPENDER(Info, Rendering, SYSTEM_TEXT("openGLStructuredBuffer CopyCounterValueToBuffer å¤±è´¥ã€‚"));
                     }
                 }
             }
@@ -512,7 +513,7 @@ void Rendering::OpenGLDevice::DisableStructuredBuffers(RendererObjectBridge& ren
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    /// È¡Ïû°ó¶¨ÈÎºÎÔ­×Ó¼ÆÊıÆ÷»º³åÇø¡£
+    /// å–æ¶ˆç»‘å®šä»»ä½•åŸå­è®¡æ•°å™¨ç¼“å†²åŒºã€‚
     const auto& atomicCounters = shader.GetData(System::EnumCastUnderlying(ShaderDataLookup::AtomicCounterShaderDataLookup));
     const auto& atomicCounterBuffers = shader.GetData(System::EnumCastUnderlying(ShaderDataLookup::AtomicCounterBufferShaderDataLookup));
 
@@ -536,23 +537,23 @@ void Rendering::OpenGLDevice::DisableStructuredBuffers(RendererObjectBridge& ren
                 SetGLBindBufferBase(System::BindBuffer::ShaderStorageBuffer, unit, 0);
                 shaderStorageUnit.ReleaseUnit(unit);
 
-                /// structuredBuffer.IsGpuWritable()±êÖ¾ÓÃÓÚÖ¸Ê¾ÊÇ·ñ´æÔÚÓë´Ë½á¹¹»¯»º³åÇøÏà¹ØÁªµÄÔ­×Ó¼ÆÊıÆ÷¡£
+                /// structuredBuffer.IsGpuWritable()æ ‡å¿—ç”¨äºæŒ‡ç¤ºæ˜¯å¦å­˜åœ¨ä¸æ­¤ç»“æ„åŒ–ç¼“å†²åŒºç›¸å…³è”çš„åŸå­è®¡æ•°å™¨ã€‚
                 if (structuredBuffer.IsGpuWritable())
                 {
-                    /// ´Ë½á¹¹»¯»º³åÇø¾ßÓĞµ½Ïà¹ØÔ­×Ó¼ÆÊıÆ÷±íÏîµÄË÷Òı¡£
+                    /// æ­¤ç»“æ„åŒ–ç¼“å†²åŒºå…·æœ‰åˆ°ç›¸å…³åŸå­è®¡æ•°å™¨è¡¨é¡¹çš„ç´¢å¼•ã€‚
                     auto const acIndex = structuredBuffer.GetExtra();
 
-                    /// ×ÅÉ«Æ÷ÖĞµÄÏà¹Ø¼ÆÊıÆ÷ÔÚÄÄÀï£¿
+                    /// ç€è‰²å™¨ä¸­çš„ç›¸å…³è®¡æ•°å™¨åœ¨å“ªé‡Œï¼Ÿ
                     auto const acbIndex = atomicCounters.at(acIndex).GetBindPoint();
                     auto const acbOffset = atomicCounters.at(acIndex).GetExtra();
 
-                    /// ¼ìË÷OpenGLÔ­×Ó¼ÆÊıÆ÷»º³åÇø¶ÔÏó¡£
+                    /// æ£€ç´¢OpenGLåŸå­è®¡æ•°å™¨ç¼“å†²åŒºå¯¹è±¡ã€‚
                     auto openGLAtomicCounterBuffer = boost::polymorphic_pointer_cast<OpenGLAtomicCounterBuffer>(rendererObjectBridge.GetRendererObject(atomicCounterRawBuffers.at(acbIndex)));
 
-                    /// ½«¼ÆÊıÆ÷Öµ´Ó½á¹¹»¯»º³åÇø¶ÔÏó¸´ÖÆµ½Ô­×Ó¼ÆÊıÆ÷»º³åÇøÖĞµÄÊÊµ±Î»ÖÃ¡£
+                    /// å°†è®¡æ•°å™¨å€¼ä»ç»“æ„åŒ–ç¼“å†²åŒºå¯¹è±¡å¤åˆ¶åˆ°åŸå­è®¡æ•°å™¨ç¼“å†²åŒºä¸­çš„é€‚å½“ä½ç½®ã€‚
                     if (!openGLStructuredBuffer->CopyCounterValueFromBuffer(openGLAtomicCounterBuffer.get(), acbOffset))
                     {
-                        LOG_SINGLETON_ENGINE_APPENDER(Info, Rendering, SYSTEM_TEXT("openGLStructuredBuffer openGLAtomicCounterBuffer Ê§°Ü¡£"));
+                        LOG_SINGLETON_ENGINE_APPENDER(Info, Rendering, SYSTEM_TEXT("openGLStructuredBuffer openGLAtomicCounterBuffer å¤±è´¥ã€‚"));
                     }
                 }
             }
@@ -588,14 +589,14 @@ void Rendering::OpenGLDevice::EnableTextures(RendererObjectBridge& rendererObjec
 
         const auto texture = boost::polymorphic_pointer_cast<OpenGLTextureSingle>(rendererObjectBridge.BindRendererObject(RendererTypes::OpenGL, textureSingle.GetGraphicsObject()));
 
-        // ¸ù¾İ¹ßÀı£¬textureSingle.IsGpuWritable()¶Ô¡°image*¡±Îªtrue£¬¶Ô¡°sampler*¡±Îªfalse
+        // æ ¹æ®æƒ¯ä¾‹ï¼ŒtextureSingle.IsGpuWritable()å¯¹â€œimage*â€ä¸ºtrueï¼Œå¯¹â€œsampler*â€ä¸ºfalse
         const auto handle = texture->GetGLHandle();
         if (textureSingle.IsGpuWritable())
         {
-            /// ¶ÔÓÚ×ÅÉ«Æ÷ÖĞµÄ¡°image*¡±¶ÔÏó£¬
-            /// Ê¹ÓÃ²¼¾ÖÖĞµÄ¡°readonly¡±»ò¡°writeonly¡±ÊôĞÔÊ¹ÓÃ×ÅÉ«Æ÷±àÒëÆ÷¿ØÖÆR/W/RW·ÃÎÊ£¬
-            /// È»ºóÔÚ´Ë´¦Á¬½ÓÎªGL_READ_WRITE¡£
-            /// Ê¼ÖÕ°ó¶¨¼¶±ğ0ºÍËùÓĞ²ã¡£
+            /// å¯¹äºç€è‰²å™¨ä¸­çš„â€œimage*â€å¯¹è±¡ï¼Œ
+            /// ä½¿ç”¨å¸ƒå±€ä¸­çš„â€œreadonlyâ€æˆ–â€œwriteonlyâ€å±æ€§ä½¿ç”¨ç€è‰²å™¨ç¼–è¯‘å™¨æ§åˆ¶R/W/RWè®¿é—®ï¼Œ
+            /// ç„¶ååœ¨æ­¤å¤„è¿æ¥ä¸ºGL_READ_WRITEã€‚
+            /// å§‹ç»ˆç»‘å®šçº§åˆ«0å’Œæ‰€æœ‰å±‚ã€‚
             const auto unit = textureImageUnit.AcquireUnit(program, textureSingle.GetBindPoint());
             System::SetGLUniform1(textureSingle.GetBindPoint(), unit);
             const auto format = texture->GetTexture()->GetFormat();
@@ -626,7 +627,7 @@ void Rendering::OpenGLDevice::DisableTextures(RendererObjectBridge& rendererObje
 
         const auto texture = boost::polymorphic_pointer_cast<OpenGLTextureSingle>(rendererObjectBridge.GetRendererObject(textureSingle.GetGraphicsObject()));
 
-        // ¸ù¾İ¹ßÀı£¬textureSingle.IsGpuWritable()¶Ô¡°image*¡±Îªtrue£¬¶Ô¡°sampler*¡±Îªfalse
+        // æ ¹æ®æƒ¯ä¾‹ï¼ŒtextureSingle.IsGpuWritable()å¯¹â€œimage*â€ä¸ºtrueï¼Œå¯¹â€œsampler*â€ä¸ºfalse
         if (textureSingle.IsGpuWritable())
         {
             const auto unit = textureImageUnit.GetUnit(program, textureSingle.GetBindPoint());
@@ -634,10 +635,10 @@ void Rendering::OpenGLDevice::DisableTextures(RendererObjectBridge& rendererObje
         }
         else
         {
-            /// ¶ÔÓÚ×ÅÉ«Æ÷ÖĞµÄ¡°image*¡±¶ÔÏó£¬
-            /// Ê¹ÓÃ²¼¾ÖÖĞµÄ¡°readonly¡±»ò¡°writeonly¡±ÊôĞÔÊ¹ÓÃ×ÅÉ«Æ÷±àÒëÆ÷¿ØÖÆR/W/RW·ÃÎÊ£¬È»ºóÔÚ´Ë´¦Á¬½ÓÎªGL_READ_WRITE¡£
-            /// Ê¼ÖÕ°ó¶¨¼¶±ğ0ºÍËùÓĞ²ã¡£
-            /// ¾ö¶¨ÊÇ·ñĞèÒª´ÓÍ¼Ïñµ¥ÔªÖĞ½â³ıÎÆÀí°ó¶¨¡£glBindImageTexture(unit, 0, 0, 0, 0, 0, 0)¡£
+            /// å¯¹äºç€è‰²å™¨ä¸­çš„â€œimage*â€å¯¹è±¡ï¼Œ
+            /// ä½¿ç”¨å¸ƒå±€ä¸­çš„â€œreadonlyâ€æˆ–â€œwriteonlyâ€å±æ€§ä½¿ç”¨ç€è‰²å™¨ç¼–è¯‘å™¨æ§åˆ¶R/W/RWè®¿é—®ï¼Œç„¶ååœ¨æ­¤å¤„è¿æ¥ä¸ºGL_READ_WRITEã€‚
+            /// å§‹ç»ˆç»‘å®šçº§åˆ«0å’Œæ‰€æœ‰å±‚ã€‚
+            /// å†³å®šæ˜¯å¦éœ€è¦ä»å›¾åƒå•å…ƒä¸­è§£é™¤çº¹ç†ç»‘å®šã€‚glBindImageTexture(unit, 0, 0, 0, 0, 0, 0)ã€‚
             const auto unit = textureSamplerUnit.GetUnit(program, textureSingle.GetBindPoint());
             System::SetGLActiveTexture(EnumCastUnderlying(System::TextureNumber::Type0) + unit);
             SetGLBindTexture(texture->GetTarget(), 0);
@@ -759,7 +760,7 @@ int64_t Rendering::OpenGLDevice::DrawPrimitive(const VertexBuffer& vertexBuffer,
     auto topology = System::PrimitiveType::Point;
 
     switch (const auto type = indexBuffer.GetPrimitiveType();
-            type)
+        type)
     {
         case IndexFormatType::PolygonPoint:
             topology = System::PrimitiveType::Point;
@@ -795,22 +796,22 @@ int64_t Rendering::OpenGLDevice::DrawPrimitive(const VertexBuffer& vertexBuffer,
     const auto offset = indexBuffer.GetOffset();
     if (indexBuffer.IsIndexed())
     {
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
+        #include SYSTEM_WARNING_PUSH
+        #include SYSTEM_WARNING_DISABLE(26490)
 
         const auto result = boost::numeric_cast<size_t>(indexSize) * boost::numeric_cast<size_t>(offset);
 
         const auto* data = reinterpret_cast<const void*>(result);
 
-#include SYSTEM_WARNING_POP
+        #include SYSTEM_WARNING_POP
 
         SetGLDrawRangeElements(topology, 0, numActiveVertices - 1, numActiveIndices, indexType, data);
     }
     else
     {
-        /// ´Ó¹ØÓÚgl_VertexID¶¥µã×ÅÉ«Æ÷±äÁ¿µÄOpenGLÎÄµµÖĞ£º¡°gl_VertexIDÊÇÒ»¸ö¶¥µãÓïÑÔÊäÈë±äÁ¿£¬ËüÎª¶¥µã±£´æÒ»¸öÕûÊıË÷Òı¡£
-        /// ¸ÃË÷ÒıÓÉglDrawArraysºÍÆäËû²»ÒıÓÃGL_ELEMENT_ARRAY_BUFFERÄÚÈİµÄÃüÁîÒşÊ½Éú³É£¬
-        /// »òÓÉglDrawElementsµÈÃüÁî´ÓGL_ELEMENT_ARRAY_BUFFERµÄÄÚÈİÏÔÊ½Éú³É¡£¡±
+        /// ä»å…³äºgl_VertexIDé¡¶ç‚¹ç€è‰²å™¨å˜é‡çš„OpenGLæ–‡æ¡£ä¸­ï¼šâ€œgl_VertexIDæ˜¯ä¸€ä¸ªé¡¶ç‚¹è¯­è¨€è¾“å…¥å˜é‡ï¼Œå®ƒä¸ºé¡¶ç‚¹ä¿å­˜ä¸€ä¸ªæ•´æ•°ç´¢å¼•ã€‚
+        /// è¯¥ç´¢å¼•ç”±glDrawArrayså’Œå…¶ä»–ä¸å¼•ç”¨GL_ELEMENT_ARRAY_BUFFERå†…å®¹çš„å‘½ä»¤éšå¼ç”Ÿæˆï¼Œ
+        /// æˆ–ç”±glDrawElementsç­‰å‘½ä»¤ä»GL_ELEMENT_ARRAY_BUFFERçš„å†…å®¹æ˜¾å¼ç”Ÿæˆã€‚â€
         SetGLDrawArrays(topology, vertexOffset, numActiveVertices);
     }
 

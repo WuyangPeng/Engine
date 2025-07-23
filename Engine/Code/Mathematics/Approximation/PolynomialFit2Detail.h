@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:14)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:14)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT2_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT2_DETAIL_H
@@ -29,16 +29,16 @@ Mathematics::PolynomialFit2<Real>::PolynomialFit2(const Samples& xSamples, const
 template <typename Real>
 void Mathematics::PolynomialFit2<Real>::Calculate(const Samples& xSamples, const Samples& wSamples)
 {
-    MATHEMATICS_ASSERTION_2(xSamples.size() == wSamples.size(), "´«ÈëµÄÑùÆ·´óĞ¡²»Í¬£¡\n");
+    MATHEMATICS_ASSERTION_2(xSamples.size() == wSamples.size(), "ä¼ å…¥çš„æ ·å“å¤§å°ä¸åŒï¼\n");
 
     const auto degree = coeff.GetDegree();
     const auto quantity = degree + 1;
     const auto numSamples = wSamples.size();
 
-    // xµÄÃİ¡£
+    // xçš„å¹‚ã€‚
     PolynomialSamplesPower<Real> power{ xSamples, degree };
 
-    // Vandermonde¾ØÕóºÍÓÒÊÖ×ø±êÏµµÄÏßĞÔÏµÍ³¡£
+    // VandermondeçŸ©é˜µå’Œå³æ‰‹åæ ‡ç³»çš„çº¿æ€§ç³»ç»Ÿã€‚
     VariableMatrix<Real> matrix{ quantity, quantity };
     typename LinearSystem<Real>::RealContainer inputVector(quantity);
 
@@ -62,7 +62,7 @@ void Mathematics::PolynomialFit2<Real>::Calculate(const Samples& xSamples, const
 
     try
     {
-        // Çó½â¶àÏîÊ½ÏµÊı¡£
+        // æ±‚è§£å¤šé¡¹å¼ç³»æ•°ã€‚
 
         const LinearSystem<Real> linearSystem{};
 
@@ -75,7 +75,7 @@ void Mathematics::PolynomialFit2<Real>::Calculate(const Samples& xSamples, const
     {
         solveSucceed = false;
 
-        LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools, SYSTEM_TEXT("Çó½âÏßĞÔÏµÍ³Ê§°Ü\n"), error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools, SYSTEM_TEXT("æ±‚è§£çº¿æ€§ç³»ç»Ÿå¤±è´¥\n"), error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:08)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:08)
 
 #ifndef MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_ACHIEVE_H
@@ -53,7 +53,7 @@ void Mathematics::CylinderFit3<Real>::InitialGuess(const Points& points)
 {
     if (!inputsAreInitialGuess)
     {
-        // ÕÒµ½ÊÊºÏ¸ÃÊı¾İµÄ×îĞ¡¶ş³ËÏß£¬²¢ÓÃËü×÷ÎªÔ²ÖùÌåÖáµÄ³õÊ¼²Â²â¡£
+        // æ‰¾åˆ°é€‚åˆè¯¥æ•°æ®çš„æœ€å°äºŒä¹˜çº¿ï¼Œå¹¶ç”¨å®ƒä½œä¸ºåœ†æŸ±ä½“è½´çš„åˆå§‹çŒœæµ‹ã€‚
         const OrthogonalLineFit3<Real> orthogonalLineFit3{ points };
 
         const auto line = orthogonalLineFit3.GetLine3();
@@ -80,7 +80,7 @@ void Mathematics::CylinderFit3<Real>::Update(const Points& points)
 template <typename Real>
 Real Mathematics::CylinderFit3<Real>::ComputeHeight(const Points& points)
 {
-    // ÏîÄ¿µãÄâºÏµ½ÖáÈ·¶¨Ô²ÖùÌåÑØÖáµÄ·ù¶È¡£
+    // é¡¹ç›®ç‚¹æ‹Ÿåˆåˆ°è½´ç¡®å®šåœ†æŸ±ä½“æ²¿è½´çš„å¹…åº¦ã€‚
     std::vector<Real> dotCollection{};
     for (const auto& point : points)
     {
@@ -90,7 +90,7 @@ Real Mathematics::CylinderFit3<Real>::ComputeHeight(const Points& points)
 
     const auto boundary = std::minmax_element(dotCollection.begin(), dotCollection.end());
 
-    // ¼ÆËã¸ß¶È¡£µ÷ÕûÖĞĞÄµãµ½ÏîÄ¿·ù¶ÈÖĞµã
+    // è®¡ç®—é«˜åº¦ã€‚è°ƒæ•´ä¸­å¿ƒç‚¹åˆ°é¡¹ç›®å¹…åº¦ä¸­ç‚¹
     height = *boundary.second - *boundary.first;
 
     return *boundary.first + *boundary.second;

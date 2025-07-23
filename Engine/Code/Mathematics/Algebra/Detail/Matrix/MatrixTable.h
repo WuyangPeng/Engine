@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.5 (2024/01/30 20:01)
+/// 标准：std:c++20
+/// 版本：1.0.0.5 (2024/01/30 20:01)
 
 #ifndef MATHEMATICS_ALGEBRA_ALGEBRA_MATRIX_TABLE_H
 #define MATHEMATICS_ALGEBRA_ALGEBRA_MATRIX_TABLE_H
@@ -48,12 +48,12 @@ namespace Mathematics::Algebra
 
         CLASS_INVARIANT_DECLARE;
 
-        /// �洢˳�������Ԫ�ط���Ϊ2D���С�
+        /// 存储顺序独立的元素访问为2D阵列。
         NODISCARD const Real& operator()(int row, int column) const;
         NODISCARD Real& operator()(int row, int column);
 
-        /// Ԫ�ط���Ϊ1D���顣
-        /// ������ά�洢˳�����ʱ�������ڲ�ʹ�ô�ѡ�
+        /// 元素访问为1D数组。
+        /// 仅当二维存储顺序不相关时，才在内部使用此选项。
         NODISCARD const Real& operator[](int index) const;
         NODISCARD Real& operator[](int index);
 

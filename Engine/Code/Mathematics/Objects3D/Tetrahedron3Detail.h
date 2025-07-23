@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 10:36)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 10:36)
 
 #ifndef MATHEMATICS_OBJECTS_3D_TETRAHEDRON3_DETAIL_H
 #define MATHEMATICS_OBJECTS_3D_TETRAHEDRON3_DETAIL_H
@@ -27,7 +27,7 @@ Mathematics::Tetrahedron3<Real>::Tetrahedron3(const ContainerType& container)
 {
     if (container.size() != vertexSize)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÊäÈëµÄÊı×é´óĞ¡´íÎó£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("è¾“å…¥çš„æ•°ç»„å¤§å°é”™è¯¯ï¼"s));
     }
 
     for (auto i = 0; i < vertexSize; ++i)
@@ -73,7 +73,7 @@ void Mathematics::Tetrahedron3<Real>::SetVertex(int index, const Vector3Type& aV
 template <typename Real>
 typename Mathematics::Tetrahedron3<Real>::IndicesType Mathematics::Tetrahedron3<Real>::GetFaceIndices(int face)
 {
-    MATHEMATICS_ASSERTION_0(0 <= face && face <= 3, "Ë÷Òı´íÎó£¡");
+    MATHEMATICS_ASSERTION_0(0 <= face && face <= 3, "ç´¢å¼•é”™è¯¯ï¼");
 
     switch (face)
     {
@@ -122,7 +122,7 @@ typename Mathematics::Tetrahedron3<Real>::PlaneContainerType Mathematics::Tetrah
 
     if (det < MathType::GetValue(0))
     {
-        // ·¨ÏßÊÇÖ¸ÏòÄÚ²¿µã£¬¸Ä±äËûÃÇµÄ·½Ïò¡£
+        // æ³•çº¿æ˜¯æŒ‡å‘å†…éƒ¨ç‚¹ï¼Œæ”¹å˜ä»–ä»¬çš„æ–¹å‘ã€‚
         for (auto& value : normal)
         {
             value = -value;
@@ -142,7 +142,7 @@ typename Mathematics::Tetrahedron3<Real>::PlaneContainerType Mathematics::Tetrah
 #include SYSTEM_WARNING_POP
     }
 
-    MATHEMATICS_ASSERTION_1(plane.size() == vertexSize, "·µ»ØµÄÃæ´óĞ¡´íÎó£¡");
+    MATHEMATICS_ASSERTION_1(plane.size() == vertexSize, "è¿”å›çš„é¢å¤§å°é”™è¯¯ï¼");
 
     return plane;
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/09 09:51)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 09:51)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_CURVE3_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_CURVE3_DETAIL_H
@@ -56,7 +56,7 @@ void Mathematics::Curve3<Real>::SetTimeInterval(Real tmin, Real tmax)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    MATHEMATICS_ASSERTION_0(tmin < tmax, "Ê±¼ä¼ä¸ôÎŞĞ§¡£\n");
+    MATHEMATICS_ASSERTION_0(tmin < tmax, "æ—¶é—´é—´éš”æ— æ•ˆã€‚\n");
     tMin = tmin;
     tMax = tmax;
 }
@@ -189,7 +189,7 @@ std::vector<Mathematics::Vector3<Real>> Mathematics::Curve3<Real>::SubdivideByTi
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    MATHEMATICS_ASSERTION_0(numPoints >= 2, "Subdivision ÖÁÉÙĞèÒªÁ½µã¡£\n");
+    MATHEMATICS_ASSERTION_0(numPoints >= 2, "Subdivision è‡³å°‘éœ€è¦ä¸¤ç‚¹ã€‚\n");
     std::vector<Vector3<Real>> points{};
 
     const auto temp1 = tMax - tMin;
@@ -210,7 +210,7 @@ std::vector<Mathematics::Vector3<Real>> Mathematics::Curve3<Real>::SubdivideByLe
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    MATHEMATICS_ASSERTION_0(numPoints >= 2, "Subdivision ÖÁÉÙĞèÒªÁ½µã¡£\n");
+    MATHEMATICS_ASSERTION_0(numPoints >= 2, "Subdivision è‡³å°‘éœ€è¦ä¸¤ç‚¹ã€‚\n");
     std::vector<Mathematics::Vector3<Real>> points{};
 
     const auto temp = numPoints - 1;

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 11:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 11:19)
 
 #ifndef MATHEMATICS_OBJECTS_2D_ELLIPSE2_COEFFICIENTS_DETAIL_H
 #define MATHEMATICS_OBJECTS_2D_ELLIPSE2_COEFFICIENTS_DETAIL_H
@@ -70,7 +70,7 @@ typename Mathematics::Ellipse2Coefficients<Real>::CoefficientsType Mathematics::
 
     CoefficientsType result{ coefficients };
 
-    // °²ÅÅx0^2»òx1^2ÏµÊıÖ®Ò»ÊÇ1¡£
+    // å®‰æ’x0^2æˆ–x1^2ç³»æ•°ä¹‹ä¸€æ˜¯1ã€‚
     auto maxValue = MathType::FAbs(result.at(3));
     auto maxIndex = 3;
     auto absValue = MathType::FAbs(result.at(5));
@@ -111,7 +111,7 @@ bool Mathematics::Approximate(const Ellipse2Coefficients<Real>& lhs, const Ellip
 
     if (lhsCoefficients.size() != coefficientsSize || rhsCoefficients.size() != coefficientsSize)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("GetCoefficients·µ»ØµÄÊı×é´óĞ¡´íÎó£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("GetCoefficientsè¿”å›çš„æ•°ç»„å¤§å°é”™è¯¯ï¼"s));
     }
 
     for (auto i = 0; i < coefficientsSize; ++i)

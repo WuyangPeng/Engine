@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.10 (2024/05/31 09:47)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.10 (2024/05/31 09:47)
 
 #include "TinyTesting.h"
 #include "Detail/TinyTest.h"
@@ -126,7 +126,7 @@ void CoreTools::TinyTesting::PushBackTest() noexcept
     using Tiny5 = boost::mpl::push_back<Tiny4, int>::type;
     using Tiny6 = boost::mpl::push_back<Tiny2, long>::type;
 
-    #ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+    #ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using InvalidTiny = boost::mpl::push_back<Tiny3, int>::type;
 
@@ -166,7 +166,7 @@ void CoreTools::TinyTesting::PushFrontTest() noexcept
     using Tiny5 = boost::mpl::push_front<Tiny1, const long>::type;
     using Tiny6 = boost::mpl::push_front<Tiny2, unsigned short&>::type;
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using InvalidTiny = boost::mpl::push_front<Tiny3, int>::type;
 
@@ -183,7 +183,7 @@ void CoreTools::TinyTesting::EmptyTest() noexcept
 
     MAYBE_UNUSED constexpr TinyTest<Tiny0>::type tiny0{};
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using InvalidType0 = boost::mpl::at<Tiny0, TinyZero>::type;
 
@@ -191,13 +191,13 @@ void CoreTools::TinyTesting::EmptyTest() noexcept
 
     using Beg = boost::mpl::begin<Tiny0>::type;
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using InvalidType1 = boost::mpl::next<Beg>::type;
 
 #endif  // TINY_COMPILE_ERROR
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using InvalidType2 = boost::mpl::deref<Beg>::type;
 
@@ -205,19 +205,19 @@ void CoreTools::TinyTesting::EmptyTest() noexcept
 
     using End = boost::mpl::end<Tiny0>::type;
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using InvalidType3 = boost::mpl::prior<End>::type;
 
 #endif  // TINY_COMPILE_ERROR
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using InvalidType4 = boost::mpl::advance<Beg, TinyOne>::type;
 
 #endif  // TINY_COMPILE_ERROR
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using InvalidType5 = boost::mpl::advance<End, boost::mpl::int_<-1>>::type;
 
@@ -252,7 +252,7 @@ void CoreTools::TinyTesting::Iterator0Test() noexcept
 
     using TinyIterator6 = TinyIterator<TinyIterator5, TinyZero>;
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using InvalidTinyIterator = boost::mpl::insert<TinyIterator5, TinyIterator6, bool>::type;
 
@@ -273,7 +273,7 @@ void CoreTools::TinyTesting::Iterator1Test() noexcept
     BOOST_STATIC_ASSERT((boost::mpl::equal<TinyIterator3, Tiny<int, char, long>>::type::value));
     using TinyIterator4 = TinyIterator<TinyIterator3, TinyOne>;
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using InvalidTinyIterator = boost::mpl::insert<TinyIterator3, TinyIterator4, bool>::type;
 
@@ -290,7 +290,7 @@ void CoreTools::TinyTesting::Iterator2Test() noexcept
     BOOST_STATIC_ASSERT((boost::mpl::equal<TinyIterator1, Tiny<char*, const long, long>>::type::value));
     using TinyIterator2 = TinyIterator<TinyIterator1, TinyTwo>;
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using InvalidTinyIterator = boost::mpl::insert<TinyIterator1, TinyIterator2, char>::type;
 
@@ -312,7 +312,7 @@ void CoreTools::TinyTesting::Iterator3Test() noexcept
     using Tiny5 = boost::mpl::pop_front<Tiny0>::type;
     BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny5, Tiny<>>::type::value));
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using InvalidType = boost::mpl::pop_front<Tiny0>::type;
 
@@ -332,7 +332,7 @@ void CoreTools::TinyTesting::Iterator4Test() noexcept
     using Tiny5 = boost::mpl::pop_back<Tiny0>::type;
     BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny5, Tiny<>>::type::value));
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using InvalidType = boost::mpl::pop_back<Tiny5>::type;
 
@@ -385,7 +385,7 @@ void CoreTools::TinyTesting::Empty1Test() noexcept
 
     using TinyIterator2 = TinyIterator<TinyType, TinyTwo>;
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using Invalid = boost::mpl::erase<TinyType, TinyIterator2>::type;
 
@@ -403,7 +403,7 @@ void CoreTools::TinyTesting::Empty2Test() noexcept
 
     using TinyIterator1 = TinyIterator<TinyType, TinyOne>;
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using Invalid = boost::mpl::erase<TinyType, TinyIterator1>::type;
 
@@ -417,7 +417,7 @@ void CoreTools::TinyTesting::Empty3Test() noexcept
 
     using TinyIterator = TinyIterator<TinyType, TinyZero>;
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using Invalid = boost::mpl::erase<TinyType, TinyIterator>::type;
 
@@ -433,7 +433,7 @@ void CoreTools::TinyTesting::Empty4Test() noexcept
     using TinyIterator2 = TinyIterator<TinyType, TinyTwo>;
     using TinyIterator3 = TinyIterator<TinyType, TinyThree>;
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using Invalid0 = boost::mpl::erase<TinyType, TinyIterator0, TinyIterator0>::type;
 
@@ -448,7 +448,7 @@ void CoreTools::TinyTesting::Empty4Test() noexcept
     using Erase2 = boost::mpl::erase<TinyType, TinyIterator0, TinyIterator3>::type;
     BOOST_STATIC_ASSERT((boost::mpl::equal<Erase2, Tiny<>>::type::value));
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using Invalid1 = boost::mpl::erase<TinyType, TinyIterator1, TinyIterator1>::type;
 
@@ -460,7 +460,7 @@ void CoreTools::TinyTesting::Empty4Test() noexcept
     using Erase4 = boost::mpl::erase<TinyType, TinyIterator1, TinyIterator3>::type;
     BOOST_STATIC_ASSERT((boost::mpl::equal<Erase4, Tiny<unsigned short&>>::type::value));
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using Invalid2 = boost::mpl::erase<TinyType, TinyIterator2, TinyIterator2>::type;
 
@@ -485,7 +485,7 @@ void CoreTools::TinyTesting::Empty5Test() noexcept
     using Erase1 = boost::mpl::erase<TinyType, TinyIterator0, TinyIterator2>::type;
     BOOST_STATIC_ASSERT((boost::mpl::equal<Erase1, Tiny<>>::type::value));
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using Invalid0 = boost::mpl::erase<TinyType, TinyIterator0, TinyIterator3>::type;
 
@@ -494,13 +494,13 @@ void CoreTools::TinyTesting::Empty5Test() noexcept
     using Erase2 = boost::mpl::erase<TinyType, TinyIterator1, TinyIterator2>::type;
     BOOST_STATIC_ASSERT((boost::mpl::equal<Erase2, Tiny<const long>>::type::value));
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using Invalid1 = boost::mpl::erase<TinyType, TinyIterator1, TinyIterator3>::type;
 
 #endif  // TINY_COMPILE_ERROR
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using Invalid2 = boost::mpl::erase<TinyType, TinyIterator2, TinyIterator3>::type;
 
@@ -518,13 +518,13 @@ void CoreTools::TinyTesting::Empty6Test() noexcept
     using EraseType = boost::mpl::erase<TinyType, TinyIterator0, TinyIterator1>::type;
     BOOST_STATIC_ASSERT((boost::mpl::equal<EraseType, Tiny<>>::type::value));
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using Invalid0 = boost::mpl::erase<TinyType, TinyIterator0, TinyIterator2>::type;
 
 #endif  // TINY_COMPILE_ERROR
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using Invalid1 = boost::mpl::erase<TinyType, TinyIterator1, TinyIterator2>::type;
 
@@ -538,7 +538,7 @@ void CoreTools::TinyTesting::Empty7Test() noexcept
     using TinyIterator0 = TinyIterator<TinyType, TinyZero>;
     using TinyIterator1 = TinyIterator<TinyType, TinyOne>;
 
-#ifdef TINY_COMPILE_ERROR  // ÕâÀïÓ¦¸Ã²úÉú±àÒë´íÎó¡£
+#ifdef TINY_COMPILE_ERROR  // è¿™é‡Œåº”è¯¥äº§ç”Ÿç¼–è¯‘é”™è¯¯ã€‚
 
     using Invalid = boost::mpl::erase<TinyType, TinyIterator0, TinyIterator1>::type;
 

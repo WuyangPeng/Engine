@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 17:27)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 17:27)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_CIRCLE2_CIRCLE2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_CIRCLE2_CIRCLE2_DETAIL_H
@@ -31,24 +31,24 @@ Mathematics::StaticFindIntersectorCircle2Circle2<Real>::StaticFindIntersectorCir
 template <typename Real>
 void Mathematics::StaticFindIntersectorCircle2Circle2<Real>::Find()
 {
-    // Á½¸öÔ²ÊÇ|X - C0| = R0ºÍ|X - C1| = R1¡£
-    // ¶¨ÒåU = C1 - C0ºÍV = Perp(U)ÆäÖĞPerpPerp(x,y) = (y,-x)¡£
-    // ×¢ÒâDot(U,V) = 0ºÍ|V|^2 = |U|^2¡£
-    // ½»²æµãX¿ÉÒÔÊÇX = C0 + s * U + t * VºÍX = C1 + (s - 1) * U + t * VµÄĞÎÊ½Ğ´Èë¡£
-    // ¶ÔÔ²·½³Ì½øĞĞÆ½·½£¬²¢½«ÕâĞ©¹«Ê½´úÈë
+    // ä¸¤ä¸ªåœ†æ˜¯|X - C0| = R0å’Œ|X - C1| = R1ã€‚
+    // å®šä¹‰U = C1 - C0å’ŒV = Perp(U)å…¶ä¸­PerpPerp(x,y) = (y,-x)ã€‚
+    // æ³¨æ„Dot(U,V) = 0å’Œ|V|^2 = |U|^2ã€‚
+    // äº¤å‰ç‚¹Xå¯ä»¥æ˜¯X = C0 + s * U + t * Vå’ŒX = C1 + (s - 1) * U + t * Vçš„å½¢å¼å†™å…¥ã€‚
+    // å¯¹åœ†æ–¹ç¨‹è¿›è¡Œå¹³æ–¹ï¼Œå¹¶å°†è¿™äº›å…¬å¼ä»£å…¥
     //   R0^2 = (s^2 + t^2)*|U|^2
     //   R1^2 = ((s-1)^2 + t^2) * |U|^2.
-    // Ïà¼õºÍÇó½âsµÄÖµ
+    // ç›¸å‡å’Œæ±‚è§£sçš„å€¼
     //   s = ((R0^2-R1^2)/|U|^2 + 1)/2
-    // È»ºóÔÚµÚÒ»¸ö·½³ÌÖĞÌæ»»²¢Çó½ât^2
+    // ç„¶ååœ¨ç¬¬ä¸€ä¸ªæ–¹ç¨‹ä¸­æ›¿æ¢å¹¶æ±‚è§£t^2
     //   t^2 = (R0^2/|U|^2) - s^2.
-    // ÎªÁËÓĞ½â£¬ÓÒ²à±ØĞëÊÇ·Ç¸ºµÄ¡£ Ò»Ğ©´úÊıµ¼ÖÂ½âµÄ´æÔÚµÄÌõ¼ş£¬
+    // ä¸ºäº†æœ‰è§£ï¼Œå³ä¾§å¿…é¡»æ˜¯éè´Ÿçš„ã€‚ ä¸€äº›ä»£æ•°å¯¼è‡´è§£çš„å­˜åœ¨çš„æ¡ä»¶ï¼Œ
     //   (|U|^2 - (R0+R1)^2)*(|U|^2 - (R0-R1)^2) <= 0.
-    // Õâ¼õÉÙµ½
+    // è¿™å‡å°‘åˆ°
     //   |R0-R1| <= |U| <= |R0+R1|.
-    // Èç¹û |U| = |R0 - R1|, ÄÇÃ´ÕâĞ©Ô²ÊÇ²¢ÅÅµÄ²¢ÇÒÇ¡ºÃÏàÇĞ¡£
-    // Èç¹û |U| = |R0 + R1|, ÄÇÃ´Ô²ÊÇÇ¶Ì×µÄ£¬²¢ÇÒÇ¡ºÃÏàÇĞ¡£
-    // Èç¹û |R0-R1| < |U| < |R0+R1|£¬ÄÇÃ´Á½¸öÔ²Ïà½»ÓĞÁ½¸ö½»µã
+    // å¦‚æœ |U| = |R0 - R1|, é‚£ä¹ˆè¿™äº›åœ†æ˜¯å¹¶æ’çš„å¹¶ä¸”æ°å¥½ç›¸åˆ‡ã€‚
+    // å¦‚æœ |U| = |R0 + R1|, é‚£ä¹ˆåœ†æ˜¯åµŒå¥—çš„ï¼Œå¹¶ä¸”æ°å¥½ç›¸åˆ‡ã€‚
+    // å¦‚æœ |R0-R1| < |U| < |R0+R1|ï¼Œé‚£ä¹ˆä¸¤ä¸ªåœ†ç›¸äº¤æœ‰ä¸¤ä¸ªäº¤ç‚¹
 
     auto centerDifference = rhsCircle.GetCenter() - lhsCircle.GetCenter();
     auto centerDifferenceSquaredLength = Vector2ToolsType::GetLengthSquared(centerDifference);
@@ -58,7 +58,7 @@ void Mathematics::StaticFindIntersectorCircle2Circle2<Real>::Find()
     auto epsilon = ParentType::GetEpsilon();
     if (centerDifferenceSquaredLength < epsilon && MathType::FAbs(lhsRadiusMinusRhsRadius) < epsilon)
     {
-        // Ô²»ù±¾ÏàÍ¬¡£
+        // åœ†åŸºæœ¬ç›¸åŒã€‚
         this->SetIntersectionType(IntersectionType::Other);
         return;
     }
@@ -85,8 +85,8 @@ void Mathematics::StaticFindIntersectorCircle2Circle2<Real>::Find()
             auto ordinal = MathType::GetRational(1, 2) * ((lhsRadius * lhsRadius - rhsRadius * rhsRadius) / centerDifferenceSquaredLength + MathType::GetValue(1));
             auto amendmentCenter = lhsCircle.GetCenter() + ordinal * centerDifference;
 
-            // ÀíÂÛÉÏ£¬discriminantÊÇ·Ç¸ºµÄ¡£
-            // È»¶ø£¬ÊıÖµËÄÉáÎåÈëÎó²î¿ÉÄÜÊ¹ÆäÂÔ¸º¡£½«Æä½Ø¶ÏÎªÁã¡£
+            // ç†è®ºä¸Šï¼Œdiscriminantæ˜¯éè´Ÿçš„ã€‚
+            // ç„¶è€Œï¼Œæ•°å€¼å››èˆäº”å…¥è¯¯å·®å¯èƒ½ä½¿å…¶ç•¥è´Ÿã€‚å°†å…¶æˆªæ–­ä¸ºé›¶ã€‚
             auto discriminant = lhsRadius * lhsRadius / centerDifferenceSquaredLength - ordinal * ordinal;
             if (discriminant < MathType::GetValue(0))
             {
@@ -110,13 +110,13 @@ void Mathematics::StaticFindIntersectorCircle2Circle2<Real>::Find()
         }
         else
         {
-            // |U| = |R0 - R1|,Ô²ÊÇÏàÇĞµÄ¡£
+            // |U| = |R0 - R1|,åœ†æ˜¯ç›¸åˆ‡çš„ã€‚
             point.emplace_back(lhsCircle.GetCenter() + (lhsRadius / lhsRadiusMinusRhsRadius) * centerDifference);
         }
     }
     else
     {
-        // |U| = |R0 + R1|, Ô²ÊÇÏàÇĞµÄ¡£
+        // |U| = |R0 + R1|, åœ†æ˜¯ç›¸åˆ‡çš„ã€‚
         point.emplace_back(lhsCircle.GetCenter() + (lhsRadius / lhsRadiusPlusRhsRadius) * centerDifference);
     }
 
@@ -179,7 +179,7 @@ Mathematics::Circle2<Real> Mathematics::StaticFindIntersectorCircle2Circle2<Real
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Òª²éÑ¯µÄÔ²²¢²»ÊÇÖØµşµÄ¡£\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("è¦æŸ¥è¯¢çš„åœ†å¹¶ä¸æ˜¯é‡å çš„ã€‚\n"s));
     }
 }
 

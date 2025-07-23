@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 10:25)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 10:25)
 
 #ifndef MATHEMATICS_OBJECTS_3D_TORUS3_H
 #define MATHEMATICS_OBJECTS_3D_TORUS3_H
@@ -32,16 +32,16 @@ namespace Mathematics
         using Torus3ParametersType = Torus3Parameters<Real>;
 
     public:
-        // ÒÔzÖáÎª¶Ô³ÆÖá£¬ÖĞĞÄÔÚ£¨0,0,0£©Ô²»·µÄÊµÏÖ
-        // £¨ÖáÎªÈ¦ĞÎ×ª¶¯ÒÔ²úÉú»·Ãæ£©¡£
+        // ä»¥zè½´ä¸ºå¯¹ç§°è½´ï¼Œä¸­å¿ƒåœ¨ï¼ˆ0,0,0ï¼‰åœ†ç¯çš„å®ç°
+        // ï¼ˆè½´ä¸ºåœˆå½¢è½¬åŠ¨ä»¥äº§ç”Ÿç¯é¢ï¼‰ã€‚
         //
-        // ´úÊıĞÎÊ½£º
-        //      Ro > 0 Îª°ë¾¶µÄÔ²»·£¨Íâ¾¶£©µÄÖĞĞÄ
-        //      Ri > 0 Îª°ë¾¶µÄÔ²»·£¨ÄÚ¾¶£©µÄÖĞĞÄ
+        // ä»£æ•°å½¢å¼ï¼š
+        //      Ro > 0 ä¸ºåŠå¾„çš„åœ†ç¯ï¼ˆå¤–å¾„ï¼‰çš„ä¸­å¿ƒ
+        //      Ri > 0 ä¸ºåŠå¾„çš„åœ†ç¯ï¼ˆå†…å¾„ï¼‰çš„ä¸­å¿ƒ
         //      p^2 = x^2 + y^2 + z^2
         //      p^4 - 2 * (Ro^2 + Ri^2) * p^2 + 4 * Ro^2 * z^2 + (Ro^2 - Ri^2)^2 = 0
         //
-        // ²ÎÊı±í£º
+        // å‚æ•°è¡¨ï¼š
         //      0 <= s <= 1, 0 <= t <= 1
         //      Rc = Ro + Ri * cos(2 * PI * t)
         //      x = Rc * cos(2 * PI * s)
@@ -57,7 +57,7 @@ namespace Mathematics
         NODISCARD Vector3Type GetPosition(Real s, Real t) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
         NODISCARD Vector3Type GetNormal(Real s, Real t) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        // ·µ»ØÖµµÚÒ»²¿·ÖÎªs£¬µÚ¶ş²¿·ÖÎªt
+        // è¿”å›å€¼ç¬¬ä¸€éƒ¨åˆ†ä¸ºsï¼Œç¬¬äºŒéƒ¨åˆ†ä¸ºt
         NODISCARD Torus3ParametersType GetParameters(const Vector3Type& position) const noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
     private:

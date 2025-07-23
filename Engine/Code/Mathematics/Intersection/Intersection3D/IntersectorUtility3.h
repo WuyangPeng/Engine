@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 15:05)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 15:05)
 
 #ifndef MATHEMATICS_INTERSECTION_INTERSECTOR_UTILITY3_H
 #define MATHEMATICS_INTERSECTION_INTERSECTOR_UTILITY3_H
@@ -33,12 +33,12 @@ namespace Mathematics
     public:
         IntersectorUtility3() = delete;
 
-        // ÔÓÏîÖ§³Ö
+        // æ‚é¡¹æ”¯æŒ
 
-        // ÊäÈë¶à±ßĞÎ´æ´¢ÔÚpointÖĞ¡£Ä¿Ç°£¬×î´óÊı×é´óĞ¡Îª8ÒÔÖ§³Öµ±Ç°µÄÏà½»Ëã·¨¡£
+        // è¾“å…¥å¤šè¾¹å½¢å­˜å‚¨åœ¨pointä¸­ã€‚ç›®å‰ï¼Œæœ€å¤§æ•°ç»„å¤§å°ä¸º8ä»¥æ”¯æŒå½“å‰çš„ç›¸äº¤ç®—æ³•ã€‚
         NODISCARD static Container ClipConvexPolygonAgainstPlane(const Vector3Type& normal, Real bonstant, const Container& point);
 
-        // ½«Ë÷Òı×ª»»ÎªºĞÄÚµÄÊµ¼Ê×ø±ê¡£
+        // å°†ç´¢å¼•è½¬æ¢ä¸ºç›’å†…çš„å®é™…åæ ‡ã€‚
         NODISCARD static Vector3Type GetPointFromIndex(int index, const Box3Type& box);
     };
 

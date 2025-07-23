@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/28 16:09)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/28 16:09)
 
 #include "Rendering/RenderingExport.h"
 
@@ -147,7 +147,7 @@ Rendering::Culler::VisualContainerIter Rendering::Culler::end()
 void Rendering::Culler::ComputeVisibleSet(const CameraSharedPtr& camera, const SpatialSharedPtr& scene)
 {
     RENDERING_CLASS_IS_VALID_9;
-    RENDERING_ASSERTION_0(scene != nullptr, "²Ã¼ôÐèÒªÒ»¸ö³¡¾°\n");
+    RENDERING_ASSERTION_0(scene != nullptr, "è£å‰ªéœ€è¦ä¸€ä¸ªåœºæ™¯\n");
 
     impl->PushViewFrustumPlanes(*camera);
     impl->Clear();

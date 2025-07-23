@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/26 15:08)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/26 15:08)
 
 #include "Rendering/RenderingExport.h"
 
@@ -29,12 +29,12 @@ Rendering::ComputeProgram::ComputeProgramSharedPtr Rendering::ComputeProgram::Cr
 {
     if (computeShaderSource.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³ÌĞò±ØĞë¾ßÓĞ¼ÆËã×ÅÉ«Æ÷¡£ "))
+        THROW_EXCEPTION(SYSTEM_TEXT("ç¨‹åºå¿…é¡»å…·æœ‰è®¡ç®—ç€è‰²å™¨ã€‚ "))
     }
 
     const auto programHandle = GLSLProgramHandle::Create();
 
-    GLSLShaderHandle computeShaderHandle{ System::ShaderType::Compute, computeShaderSource, version, defines, programHandle.GetProgramHandle(), SYSTEM_TEXT("±àÒë¼ÆËã×ÅÉ«Æ÷Ê§°Ü¡£") };
+    GLSLShaderHandle computeShaderHandle{ System::ShaderType::Compute, computeShaderSource, version, defines, programHandle.GetProgramHandle(), SYSTEM_TEXT("ç¼–è¯‘è®¡ç®—ç€è‰²å™¨å¤±è´¥ã€‚") };
     programHandle.Link();
 
     const auto program = std::make_shared<ComputeProgram>(programHandle, computeShaderHandle);

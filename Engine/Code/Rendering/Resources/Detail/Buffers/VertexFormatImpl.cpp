@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/29 14:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/29 14:28)
 
 #include "Rendering/RenderingExport.h"
 
@@ -61,41 +61,41 @@ void Rendering::VertexFormatImpl::Bind(DataFormatType type, Semantic semantic, i
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    // ÑéÖ¤ÊäÈë¡£
+    // éªŒè¯è¾“å…¥ã€‚
     if (numAttributes < 0 && attributes <= numAttributes)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³¬¹ı×î´óÊôĞÔ¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¶…è¿‡æœ€å¤§å±æ€§ã€‚"))
     }
 
     if (semantic == Semantic::Color)
     {
         if (System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::ColorUnits) < unit)
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("ÑÕÉ«µ¥Î»ÎŞĞ§¡£"))
+            THROW_EXCEPTION(SYSTEM_TEXT("é¢œè‰²å•ä½æ— æ•ˆã€‚"))
         }
     }
     else if (semantic == Semantic::TextureCoord)
     {
         if (System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits) < unit)
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("ÎÆÀíµ¥Î»ÎŞĞ§¡£"))
+            THROW_EXCEPTION(SYSTEM_TEXT("çº¹ç†å•ä½æ— æ•ˆã€‚"))
         }
     }
     else
     {
         if (unit != 0)
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§µÄÓïÒåµ¥Ôª¡£"))
+            THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆçš„è¯­ä¹‰å•å…ƒã€‚"))
         }
     }
 
-    // ÉèÖÃÊôĞÔ
+    // è®¾ç½®å±æ€§
     auto& attribute = elements.at(numAttributes);
     attribute.SetVertexFormatAttribute(type, semantic, unit, vertexSize);
 
     ++numAttributes;
 
-    // ÍÆ½øÆ«ÒÆ¡£
+    // æ¨è¿›åç§»ã€‚
     vertexSize += DataFormat::GetNumBytesPerStruct(type);
 }
 
@@ -113,11 +113,11 @@ void Rendering::VertexFormatImpl::SetAttribute(int attribute, const VertexFormat
     if (0 < attribute)
     {
         const auto previousIndex = attribute - 1;
-        RENDERING_ASSERTION_0(elements.at(previousIndex).GetOffset() < vertexFormatAttribute.GetOffset(), "Æ«ÒÆÁ¿±ØĞë±ÈÊôĞÔË÷Òı¸ß¡£\n");
+        RENDERING_ASSERTION_0(elements.at(previousIndex).GetOffset() < vertexFormatAttribute.GetOffset(), "åç§»é‡å¿…é¡»æ¯”å±æ€§ç´¢å¼•é«˜ã€‚\n");
     }
     else
     {
-        RENDERING_ASSERTION_0(vertexFormatAttribute.GetOffset() == 0, "µÚÒ»¸öÊôĞÔµÄÆ«ÒÆÁ¿±ØĞëÎªÁã¡£\n");
+        RENDERING_ASSERTION_0(vertexFormatAttribute.GetOffset() == 0, "ç¬¬ä¸€ä¸ªå±æ€§çš„åç§»é‡å¿…é¡»ä¸ºé›¶ã€‚\n");
     }
 
     elements.at(attribute) = vertexFormatAttribute;
@@ -126,7 +126,7 @@ void Rendering::VertexFormatImpl::SetAttribute(int attribute, const VertexFormat
 void Rendering::VertexFormatImpl::SetVertexSize(int aVertexSize)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(0 < aVertexSize, "Stride±ØĞëÊÇÕıÊı¡£\n");
+    RENDERING_ASSERTION_0(0 < aVertexSize, "Strideå¿…é¡»æ˜¯æ­£æ•°ã€‚\n");
 
     vertexSize = aVertexSize;
 }

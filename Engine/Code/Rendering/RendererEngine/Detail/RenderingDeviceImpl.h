@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2024/01/02 15:12)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2024/01/02 15:12)
 
 #ifndef RENDERING_RENDERER_ENGINE_RENDERING_ENVIRONMENT_IMPL_H
 #define RENDERING_RENDERER_ENGINE_RENDERING_ENVIRONMENT_IMPL_H
@@ -66,7 +66,7 @@ namespace Rendering
         NODISCARD virtual bool HasDepthRange01() const = 0;
         NODISCARD virtual std::string GetShaderName(const std::string& name) const = 0;
         NODISCARD virtual std::string GetShaderExtendName() const = 0;
-        NODISCARD virtual void Resize(int width, int height) = 0;
+        virtual void Resize(int width, int height) = 0;
 
         NODISCARD virtual int64_t DrawPrimitive(RendererObjectBridge& rendererObjectBridge,
                                                 const VertexBufferSharedPtr& vertexBuffer,

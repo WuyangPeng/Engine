@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒýÇæ°æ±¾£º0.9.0.12 (2023/06/12 14:02)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“Žç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 14:02)
 
 #ifndef RENDERING_CONTROLLERS_IK_CONTROLLER_H
 #define RENDERING_CONTROLLERS_IK_CONTROLLER_H
@@ -36,7 +36,7 @@ namespace Rendering
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(IKController);
         CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 
-        // ¶¯»­¸üÐÂ¡£Ó¦ÓÃ³ÌÐòÊ±¼äÒÔºÁÃëÎªµ¥Î»¡£
+        // åŠ¨ç”»æ›´æ–°ã€‚åº”ç”¨ç¨‹åºæ—¶é—´ä»¥æ¯«ç§’ä¸ºå•ä½ã€‚
         NODISCARD bool Update(double applicationTime) override;
 
         NODISCARD ControllerSharedPtr Clone() const override;

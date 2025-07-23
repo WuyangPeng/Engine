@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #include "VectorType.h"
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
@@ -28,7 +28,7 @@ CSVConfigure::VectorType CSVConfigure::StringCastVectorType(const System::String
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½¶ÔÓ¦µÄÀàĞÍ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°å¯¹åº”çš„ç±»å‹ã€‚"s))
     }
 }
 
@@ -46,15 +46,15 @@ System::String CSVConfigure::EnumCastString(VectorType type)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½¶ÔÓ¦µÄÀàĞÍ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°å¯¹åº”çš„ç±»å‹ã€‚"s))
     }
 }
 
 System::String CSVConfigure::GetEnumDescribe(VectorType type)
 {
-    static std::map<VectorType, System::String> typeDescribe{ { VectorType::Two, SYSTEM_TEXT("¶şÎ¬"s) },
-                                                              { VectorType::Three, SYSTEM_TEXT("ÈıÎ¬"s) },
-                                                              { VectorType::Four, SYSTEM_TEXT("ËÄÎ¬"s) }
+    static std::map<VectorType, System::String> typeDescribe{ { VectorType::Two, SYSTEM_TEXT("äºŒç»´"s) },
+                                                              { VectorType::Three, SYSTEM_TEXT("ä¸‰ç»´"s) },
+                                                              { VectorType::Four, SYSTEM_TEXT("å››ç»´"s) }
  };    
 
     if (const auto iter = typeDescribe.find(type);
@@ -64,7 +64,7 @@ System::String CSVConfigure::GetEnumDescribe(VectorType type)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½¶ÔÓ¦µÄÀàĞÍ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°å¯¹åº”çš„ç±»å‹ã€‚"s))
     }
 }
 

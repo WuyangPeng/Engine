@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.2 (2024/10/15 10:41)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.2 (2024/10/15 10:41)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_LATTICE_H
 #define CORE_TOOLS_MEMORY_TOOLS_LATTICE_H
@@ -21,10 +21,10 @@
 
 namespace CoreTools
 {
-    /// ±àÒëÊ±ÒÑÖª´óĞ¡µÄ¸ñ×Ó¿ò¼ÜµÄÊµÏÖ¡£
-    /// ¸ÃÀàÃ»ÓĞÊı¾İ³ÉÔ±¡£
-    /// ËüµÄ³ÉÔ±º¯ÊıÊ¹ÓÃÄ£°åÔª±à³Ì½«Ë÷ÒıÓ³Éäµ½¶àË÷ÒıºÍ´Ó¶àË÷ÒıÓ³ÉäË÷Òı¡£
-    /// Sizes²ÎÊı°üÓĞn >= 1¸öÔªËØ£¬±íÊ¾±ß½ç(b[0],...,b[n-1])¡£
+    /// ç¼–è¯‘æ—¶å·²çŸ¥å¤§å°çš„æ ¼å­æ¡†æ¶çš„å®ç°ã€‚
+    /// è¯¥ç±»æ²¡æœ‰æ•°æ®æˆå‘˜ã€‚
+    /// å®ƒçš„æˆå‘˜å‡½æ•°ä½¿ç”¨æ¨¡æ¿å…ƒç¼–ç¨‹å°†ç´¢å¼•æ˜ å°„åˆ°å¤šç´¢å¼•å’Œä»å¤šç´¢å¼•æ˜ å°„ç´¢å¼•ã€‚
+    /// Sizeså‚æ•°åŒ…æœ‰n >= 1ä¸ªå…ƒç´ ï¼Œè¡¨ç¤ºè¾¹ç•Œ(b[0],...,b[n-1])ã€‚
     template <bool OrderLToR, int... Sizes>
     class Lattice
     {
@@ -43,25 +43,25 @@ namespace CoreTools
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        /// Î¬¶ÈÊıÊÇSizes²ÎÊı°üÖĞµÄ²ÎÊıÊıÁ¿¡£
-        /// ÕâÊÇ¹ØÓÚ¸ñ×Ó¿ò¼Ü×¢ÊÍÖĞµÄ'n'¡£
+        /// ç»´åº¦æ•°æ˜¯Sizeså‚æ•°åŒ…ä¸­çš„å‚æ•°æ•°é‡ã€‚
+        /// è¿™æ˜¯å…³äºæ ¼å­æ¡†æ¶æ³¨é‡Šä¸­çš„'n'ã€‚
         NODISCARD static constexpr int GetDimensions() noexcept
         {
             return sizeof...(Sizes);
         }
 
-        /// »ñÈ¡Î¬¶ÈdµÄÔªËØÊı¡£ÕâÊÇ¹ØÓÚ¸ñ×Ó¿ò¼Ü×¢ÊÍÖĞµÄ'b[d]'¡£
+        /// è·å–ç»´åº¦dçš„å…ƒç´ æ•°ã€‚è¿™æ˜¯å…³äºæ ¼å­æ¡†æ¶æ³¨é‡Šä¸­çš„'b[d]'ã€‚
         NODISCARD int GetSize(int dimension) const;
 
-        /// »ñÈ¡ÔªËØµÄÊıÁ¿¡£ÕâÊÇ¹ØÓÚ¸ñ×Ó¿ò¼Ü×¢ÊÍÖĞµÄ'³Ë»ı{d=0}^{n-1} b[d]' ¡£
+        /// è·å–å…ƒç´ çš„æ•°é‡ã€‚è¿™æ˜¯å…³äºæ ¼å­æ¡†æ¶æ³¨é‡Šä¸­çš„'ä¹˜ç§¯{d=0}^{n-1} b[d]' ã€‚
         NODISCARD constexpr int GetSize() const noexcept
         {
             return MetaProduct<Sizes...>::value;
         }
 
-        /// ´Ó×óµ½ÓÒÅÅĞòµÄ×ª»»¡£
+        /// ä»å·¦åˆ°å³æ’åºçš„è½¬æ¢ã€‚
 
-        /// ´ÓnÎ¬Ë÷Òı×ª»»ÎªÒ»Î¬Ë÷Òı£¬´Ó×óµ½ÓÒÅÅĞò¡£
+        /// ä»nç»´ç´¢å¼•è½¬æ¢ä¸ºä¸€ç»´ç´¢å¼•ï¼Œä»å·¦åˆ°å³æ’åºã€‚
         template <typename... IndexTypes, bool Condition = OrderLToR, TraitSelector<Condition> = 0>
         requires(sizeof...(IndexTypes) == sizeof...(Sizes))
         NODISCARD int GetIndex(IndexTypes... tuple) const noexcept;
@@ -69,13 +69,13 @@ namespace CoreTools
         template <typename... IndexTypes, bool Condition = OrderLToR, TraitSelector<Condition> = 0>
         NODISCARD int GetIndex(const std::array<int, sizeof...(Sizes)>& coordinate) const;
 
-        /// ½«Ò»Î¬Ë÷Òı×ª»»ÎªnÎ¬Ë÷Òı£¬´Ó×óµ½ÓÒÅÅĞò¡£
+        /// å°†ä¸€ç»´ç´¢å¼•è½¬æ¢ä¸ºnç»´ç´¢å¼•ï¼Œä»å·¦åˆ°å³æ’åºã€‚
         template <typename... IndexTypes, bool Condition = OrderLToR, TraitSelector<Condition> = 0>
         NODISCARD std::array<int, sizeof...(Sizes)> GetCoordinate(int index) const;
 
-        /// ´ÓÓÒµ½×óÅÅĞòµÄ×ª»»¡£
+        /// ä»å³åˆ°å·¦æ’åºçš„è½¬æ¢ã€‚
 
-        /// ´ÓnÎ¬Ë÷Òı×ª»»ÎªÒ»Î¬Ë÷Òı£¬´ÓÓÒµ½×óÅÅĞò¡£
+        /// ä»nç»´ç´¢å¼•è½¬æ¢ä¸ºä¸€ç»´ç´¢å¼•ï¼Œä»å³åˆ°å·¦æ’åºã€‚
         template <typename... IndexTypes, bool Condition = OrderLToR, TraitSelector<!Condition> = 0>
         requires(sizeof...(IndexTypes) == sizeof...(Sizes))
         NODISCARD int GetIndex(IndexTypes... tuple) const noexcept;
@@ -83,11 +83,11 @@ namespace CoreTools
         template <typename... IndexTypes, bool Condition = OrderLToR, TraitSelector<!Condition> = 0>
         NODISCARD int GetIndex(const std::array<int, sizeof...(Sizes)>& coordinate) const;
 
-        /// ½«Ò»Î¬Ë÷Òı×ª»»ÎªnÎ¬Ë÷Òı£¬´ÓÓÒµ½×óÅÅĞò¡£
+        /// å°†ä¸€ç»´ç´¢å¼•è½¬æ¢ä¸ºnç»´ç´¢å¼•ï¼Œä»å³åˆ°å·¦æ’åºã€‚
         template <typename... IndexTypes, bool Condition = OrderLToR, TraitSelector<!Condition> = 0>
         NODISCARD std::array<int, sizeof...(Sizes)> GetCoordinate(int index) const;
 
-        /// Ö§³Ö¶ÔLattice¶ÔÏó½øĞĞÅÅĞòºÍ±È½Ï¡£
+        /// æ”¯æŒå¯¹Latticeå¯¹è±¡è¿›è¡Œæ’åºå’Œæ¯”è¾ƒã€‚
         NODISCARD bool operator==(const Lattice& rhs) const noexcept;
         NODISCARD bool operator!=(const Lattice& rhs) const noexcept;
         NODISCARD bool operator<(const Lattice& rhs) const noexcept;
@@ -96,7 +96,7 @@ namespace CoreTools
         NODISCARD bool operator>=(const Lattice& rhs) const noexcept;
 
     private:
-        /// Ôª±à³ÌÖ§³Ö´ÓSizes²ÎÊı°üÖĞÑ¡Ôñ²ÎÊı¡£
+        /// å…ƒç¼–ç¨‹æ”¯æŒä»Sizeså‚æ•°åŒ…ä¸­é€‰æ‹©å‚æ•°ã€‚
         template <int I, int F, int... R>
         struct MetaArgument
         {
@@ -109,7 +109,7 @@ namespace CoreTools
             static const auto value = F;
         };
 
-        /// Ôª±à³ÌÖ§³Ö½«Sizes²ÎÊıpack²ÎÊı·ÖÅä¸øÊı×é¡£
+        /// å…ƒç¼–ç¨‹æ”¯æŒå°†Sizeså‚æ•°packå‚æ•°åˆ†é…ç»™æ•°ç»„ã€‚
         template <int I, int F, int... R>
         constexpr void MetaAssignSize(int* sizes) const noexcept
         {
@@ -131,7 +131,7 @@ namespace CoreTools
         {
         }
 
-        /// Ôª±à³ÌÖ§³Ö¼ÆËãSizes²ÎÊı°ü²ÎÊıµÄ³Ë»ı¡£
+        /// å…ƒç¼–ç¨‹æ”¯æŒè®¡ç®—Sizeså‚æ•°åŒ…å‚æ•°çš„ä¹˜ç§¯ã€‚
         template <int...>
         struct MetaProduct : std::integral_constant<int, 1>
         {
@@ -142,7 +142,7 @@ namespace CoreTools
         {
         };
 
-        /// ¶ÔÊ¹ÓÃ´Ó×óµ½ÓÒÅÅĞòµÄË÷Òı(IndexTypes...)µÄÔª±à³ÌÖ§³Ö¡£
+        /// å¯¹ä½¿ç”¨ä»å·¦åˆ°å³æ’åºçš„ç´¢å¼•(IndexTypes...)çš„å…ƒç¼–ç¨‹æ”¯æŒã€‚
         template <typename First, typename... Successors>
         NODISCARD constexpr int MetaGetIndexLToR(First first, Successors... successors) const noexcept requires(std::is_integral_v<First> && !std::is_same_v<First, bool>)
         {
@@ -157,14 +157,14 @@ namespace CoreTools
             return gsl::narrow_cast<int>(last);
         }
 
-        /// Ôª±à³ÌÖ§³ÖÊ¹ÓÃ´Ó×óµ½ÓÒÅÅĞòµÄË÷Òı(const std::array<*,*)>&) ¡£
+        /// å…ƒç¼–ç¨‹æ”¯æŒä½¿ç”¨ä»å·¦åˆ°å³æ’åºçš„ç´¢å¼•(const std::array<*,*)>&) ã€‚
         template <int NumDimensions = sizeof...(Sizes), TraitSelector<(NumDimensions > 1)> = 0>
         NODISCARD int GetIndexLToR(const std::array<int, sizeof...(Sizes)>& coordinate) const;
 
         template <int NumDimensions = sizeof...(Sizes), TraitSelector<NumDimensions == 1> = 0>
         NODISCARD int GetIndexLToR(const std::array<int, 1>& coordinate) const noexcept;
 
-        /// ¶ÔÊ¹ÓÃ´ÓÓÒµ½×óÅÅĞòµÄË÷Òı(IndexTypes...)µÄÔª±à³ÌÖ§³Ö¡£
+        /// å¯¹ä½¿ç”¨ä»å³åˆ°å·¦æ’åºçš„ç´¢å¼•(IndexTypes...)çš„å…ƒç¼–ç¨‹æ”¯æŒã€‚
         template <typename Term, typename First, typename... Successors>
         NODISCARD constexpr int MetaGetIndexRToL(Term t, First first, Successors... successors) const noexcept requires(std::is_integral_v<First> && !std::is_same_v<First, bool>)
         {
@@ -179,7 +179,7 @@ namespace CoreTools
             return gsl::narrow_cast<int>(first + t);
         }
 
-        /// Ôª±à³ÌÖ§³ÖÊ¹ÓÃ´ÓÓÒµ½×óÅÅĞòµÄË÷Òı(const std::array<*,*)>&) ¡£
+        /// å…ƒç¼–ç¨‹æ”¯æŒä½¿ç”¨ä»å³åˆ°å·¦æ’åºçš„ç´¢å¼•(const std::array<*,*)>&) ã€‚
         template <int NumDimensions = sizeof...(Sizes), TraitSelector<(NumDimensions > 1)> = 0>
         NODISCARD int GetIndexRToL(const std::array<int, sizeof...(Sizes)>& coordinate) const;
 
@@ -191,8 +191,8 @@ namespace CoreTools
         static int constexpr numElements = MetaProduct<Sizes...>::value;
     };
 
-    /// ½öÔÚÔËĞĞÊ±²ÅÖªµÀÆä´óĞ¡µÄ¸ñ×Ó¿ò¼ÜµÄÊµÏÖ¡£
-    /// ¸ÃÀàÒÔsize´æ´¢(b[0],...,b[n-1])£¬ÒÔnumElements´æ´¢±ß½çµÄ³Ë»ı¡£
+    /// ä»…åœ¨è¿è¡Œæ—¶æ‰çŸ¥é“å…¶å¤§å°çš„æ ¼å­æ¡†æ¶çš„å®ç°ã€‚
+    /// è¯¥ç±»ä»¥sizeå­˜å‚¨(b[0],...,b[n-1])ï¼Œä»¥numElementså­˜å‚¨è¾¹ç•Œçš„ä¹˜ç§¯ã€‚
     template <bool OrderLToR>
     class Lattice<OrderLToR>
     {
@@ -209,49 +209,49 @@ namespace CoreTools
         Lattice(Lattice&& rhs) noexcept = default;
         Lattice& operator=(Lattice&& rhs) noexcept = default;
 
-        /// ¸ñ×Ó¿ò¼Ü¾ßÓĞÖ¸¶¨µÄ´óĞ¡¡£
+        /// æ ¼å­æ¡†æ¶å…·æœ‰æŒ‡å®šçš„å¤§å°ã€‚
         explicit Lattice(const SizeType& sizes);
         explicit Lattice(const std::initializer_list<int>& sizes);
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        /// Ö§³ÖÓÉÄ¬ÈÏ¹¹Ôìº¯Êı´´½¨³õÊ¼¸ñ×Ó¿ò¼ÜµÄÑÓ³Ù¹¹Ôì¡£
-        /// ÔÚÒÔºóµÄÖ´ĞĞ¹ı³ÌÖĞ£¬¿ÉÒÔ¸ù¾İĞèÒªÉèÖÃ¸ñ×Ó¿ò¼Ü´óĞ¡¡£
+        /// æ”¯æŒç”±é»˜è®¤æ„é€ å‡½æ•°åˆ›å»ºåˆå§‹æ ¼å­æ¡†æ¶çš„å»¶è¿Ÿæ„é€ ã€‚
+        /// åœ¨ä»¥åçš„æ‰§è¡Œè¿‡ç¨‹ä¸­ï¼Œå¯ä»¥æ ¹æ®éœ€è¦è®¾ç½®æ ¼å­æ¡†æ¶å¤§å°ã€‚
         virtual void Reset(const SizeType& aSizes);
         virtual void Reset(const std::initializer_list<int>& aSizes);
 
-        /// Î¬¶ÈÊıÊÇsizeµÄÔªËØÊı¡£ÕâÊÇ¹ØÓÚ¸ñ×Ó¿ò¼Ü×¢ÊÍÖĞµÄ'n'¡£
+        /// ç»´åº¦æ•°æ˜¯sizeçš„å…ƒç´ æ•°ã€‚è¿™æ˜¯å…³äºæ ¼å­æ¡†æ¶æ³¨é‡Šä¸­çš„'n'ã€‚
         NODISCARD int GetDimensions() const;
 
-        /// »ñÈ¡Î¬¶ÈdµÄÔªËØÊı¡£ÕâÊÇ¹ØÓÚ¸ñ×Ó¿ò¼Ü×¢ÊÍÖĞµÄ'b[d]'¡£
+        /// è·å–ç»´åº¦dçš„å…ƒç´ æ•°ã€‚è¿™æ˜¯å…³äºæ ¼å­æ¡†æ¶æ³¨é‡Šä¸­çš„'b[d]'ã€‚
         NODISCARD int GetSize(int dimension) const;
 
-        /// »ñÈ¡ÔªËØµÄÊıÁ¿¡£ÕâÊÇ¹ØÓÚ¸ñ×Ó¿ò¼Ü×¢ÊÍÖĞµÄ'³Ë»ı{d=0}^{n-1} b[d]'¡£
+        /// è·å–å…ƒç´ çš„æ•°é‡ã€‚è¿™æ˜¯å…³äºæ ¼å­æ¡†æ¶æ³¨é‡Šä¸­çš„'ä¹˜ç§¯{d=0}^{n-1} b[d]'ã€‚
         NODISCARD int GetSize() const noexcept;
 
-        /// ´ÓnÎ¬Ë÷Òı×ª»»ÎªÒ»Î¬Ë÷Òı£¬´Ó×óµ½ÓÒÅÅĞò¡£
+        /// ä»nç»´ç´¢å¼•è½¬æ¢ä¸ºä¸€ç»´ç´¢å¼•ï¼Œä»å·¦åˆ°å³æ’åºã€‚
         template <typename... IndexTypes, bool Condition = OrderLToR, TraitSelector<Condition> = 0>
         NODISCARD int GetIndex(IndexTypes... tuple) const;
 
         template <bool Condition = OrderLToR, TraitSelector<Condition> = 0>
         NODISCARD int GetIndex(const SizeType& coordinate) const;
 
-        /// ´ÓnÎ¬Ë÷Òı×ª»»ÎªÒ»Î¬Ë÷Òı£¬´ÓÓÒµ½×óÅÅĞò¡£
+        /// ä»nç»´ç´¢å¼•è½¬æ¢ä¸ºä¸€ç»´ç´¢å¼•ï¼Œä»å³åˆ°å·¦æ’åºã€‚
         template <typename... IndexTypes, bool Condition = OrderLToR, TraitSelector<!Condition> = 0>
         NODISCARD int GetIndex(IndexTypes... tuple) const;
 
         template <bool Condition = OrderLToR, TraitSelector<!Condition> = 0>
         NODISCARD int GetIndex(const SizeType& coordinate) const;
 
-        /// ½«Ò»Î¬Ë÷Òı×ª»»ÎªnÎ¬Ë÷Òı£¬´Ó×óµ½ÓÒÅÅĞò¡£
+        /// å°†ä¸€ç»´ç´¢å¼•è½¬æ¢ä¸ºnç»´ç´¢å¼•ï¼Œä»å·¦åˆ°å³æ’åºã€‚
         template <bool Condition = OrderLToR, TraitSelector<Condition> = 0>
         NODISCARD SizeType GetCoordinate(int index) const;
 
-        /// ½«Ò»Î¬Ë÷Òı×ª»»ÎªnÎ¬Ë÷Òı£¬´ÓÓÒµ½×óÅÅĞò¡£
+        /// å°†ä¸€ç»´ç´¢å¼•è½¬æ¢ä¸ºnç»´ç´¢å¼•ï¼Œä»å³åˆ°å·¦æ’åºã€‚
         template <bool Condition = OrderLToR, TraitSelector<!Condition> = 0>
         NODISCARD SizeType GetCoordinate(int index) const;
 
-        /// Ö§³Ö¶ÔLattice¶ÔÏó½øĞĞÅÅĞòºÍ±È½Ï¡£
+        /// æ”¯æŒå¯¹Latticeå¯¹è±¡è¿›è¡Œæ’åºå’Œæ¯”è¾ƒã€‚
         NODISCARD bool operator==(const Lattice& rhs) const noexcept;
         NODISCARD bool operator!=(const Lattice& rhs) const noexcept;
         NODISCARD bool operator<(const Lattice& rhs) const noexcept;
@@ -263,7 +263,7 @@ namespace CoreTools
         template <typename Container>
         void InternalReset(const Container& container);
 
-        /// ¶ÔÊ¹ÓÃ´Ó×óµ½ÓÒÅÅĞòµÄË÷Òı(IndexTypes...)µÄÔª±à³ÌÖ§³Ö¡£
+        /// å¯¹ä½¿ç”¨ä»å·¦åˆ°å³æ’åºçš„ç´¢å¼•(IndexTypes...)çš„å…ƒç¼–ç¨‹æ”¯æŒã€‚
         template <typename First, typename... Successors>
         requires(std::is_integral_v<First> && !std::is_same_v<First, bool>)
         NODISCARD int MetaGetIndexLToR(First first, Successors... successors) const;
@@ -272,7 +272,7 @@ namespace CoreTools
         requires(std::is_integral_v<Last> && !std::is_same_v<Last, bool>)
         NODISCARD int MetaGetIndexLToR(Last last) const noexcept;
 
-        /// ¶ÔÊ¹ÓÃ´ÓÓÒµ½×óÅÅĞòµÄË÷Òı(IndexTypes...)µÄÔª±à³ÌÖ§³Ö¡£
+        /// å¯¹ä½¿ç”¨ä»å³åˆ°å·¦æ’åºçš„ç´¢å¼•(IndexTypes...)çš„å…ƒç¼–ç¨‹æ”¯æŒã€‚
         template <typename Term, typename First, typename... Successors>
         requires(std::is_integral_v<First> && !std::is_same_v<First, bool>)
         NODISCARD int MetaGetIndexRToL(Term t, First first, Successors... successors) const;

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	�汾��0.9.1.6 (2023/10/27 14:26)
+///	标准：std:c++20
+///	版本：0.9.1.6 (2023/10/27 14:26)
 
 #ifndef MATHEMATICS_APPROXIMATION_GREAT_ARC_FIT3_H
 #define MATHEMATICS_APPROXIMATION_GREAT_ARC_FIT3_H
@@ -18,10 +18,10 @@
 
 namespace Mathematics
 {
-    // ������С���˵�һ����Բ����������ͶӰ��Բ��
-    // ��С�ǵ�����(���ܵ�)��������㡣
-    // ���Ķ˵�����α����ء����صĶ˵�A0��A1�Ǵ�ֱ�ڷ��صķ���N��
-    // ����,����鿴��ͨ���۲�ƽ��Ĵ�Բ�� N����,Բ���Ǳ�����ʱ���A0��A1��
+    // 除了最小二乘的一个大圆，输入向量投影到圆。
+    // 最小角的扇形(可能的)包含点计算。
+    // 弧的端点的扇形被返回。返回的端点A0和A1是垂直于返回的法线N。
+    // 此外,当你查看弧通过观察平面的大圆的 N方向,圆弧是遍历逆时针从A0到A1。
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE GreatArcFit3 final
     {

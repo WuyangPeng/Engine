@@ -1,21 +1,21 @@
-@ingroup group_$ModuleName$Core_Documentation
+ï»¿@ingroup group_$ModuleName$Core_Documentation
 
 ----------------------------
-$ModuleChineseName$ºËĞÄ
+$ModuleChineseName$æ ¸å¿ƒ
 
 ---------------------------- 
 $ModuleName$Core
 
 ----------------------------	
-¹¤³ÌÀàĞÍ
-	dll/lib¡£
+å·¥ç¨‹ç±»å‹
+	dll/libã€‚
 
 ----------------------------
-×´Ì¬
-	Ä¿Ç°°æ±¾£º$Version$¡£
+çŠ¶æ€
+	ç›®å‰ç‰ˆæœ¬ï¼š$Version$ã€‚
 
 ----------------------------
-ÊµÏÖÄÚÈİ
-	1.$ModuleChineseName$ºËĞÄ´úÂë¡£
+å®ç°å†…å®¹
+	1.$ModuleChineseName$æ ¸å¿ƒä»£ç ã€‚
 
 ----------------------------	 

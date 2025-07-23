@@ -18,7 +18,7 @@
 #include "Rendering/DataTypes/SpecializedIO.h"
 #include "Rendering/LocalEffects/Lighting.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
-#include "Rendering/Shaders/Shader.h"
+#include "Rendering/Shaders/ShaderDetail.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, DirectionalLightEffect)
 

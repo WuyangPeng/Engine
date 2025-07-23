@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #ifndef C_S_V_CONFIGURE_CHAPTER_H
 #define C_S_V_CONFIGURE_CHAPTER_H
@@ -51,12 +51,12 @@ namespace CSVConfigure
         void Checking() const;
     private:
         int id;  // Id
-        int nextId;  // ÏÂÒ»¹ØId
-        int reward;  // ¹ı¹Ø½±Àø
-        String chapterName;  // ¹Ø¿¨Ãû³Æ
-        bool isMain;  // ÊÇ·ñÖ÷Ïß
-        CoreTools::Vector2 position;  // Î»ÖÃ
-        CoreTools::IntVector4 point;  // µã
+        int nextId;  // ä¸‹ä¸€å…³Id
+        int reward;  // è¿‡å…³å¥–åŠ±
+        String chapterName;  // å…³å¡åç§°
+        bool isMain;  // æ˜¯å¦ä¸»çº¿
+        CoreTools::Vector2 position;  // ä½ç½®
+        CoreTools::IntVector4 point;  // ç‚¹
     };
 }
 

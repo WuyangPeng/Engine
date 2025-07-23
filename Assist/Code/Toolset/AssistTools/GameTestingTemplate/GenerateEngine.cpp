@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º1.0.0.0 (2023/11/18 14:06)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š1.0.0.0 (2023/11/18 14:06)
 
 #include "GenerateEngine.h"
 #include "System/FileManager/FileTools.h"
@@ -14,6 +14,7 @@
 #include "System/Time/DeltaTime.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 #include "AssistTools/GenerateProjects/GenerateTestingEngine.h"
+#include "CoreTools/CharacterString/StringConversion.h"
 
 GameTestingTemplate::GenerateEngine::GenerateEngine(std::string configurationFileName)
     : configurationFileName{ std::move(configurationFileName) }
@@ -37,7 +38,15 @@ void GameTestingTemplate::GenerateEngine::Generate()
     const auto input = mainTree.get(SYSTEM_TEXT("input"), System::String{});
     const auto output = mainTree.get(SYSTEM_TEXT("output"), System::String{});
 
-    System::RecursionDeleteFileDirectory(output);
+    #ifdef SYSTEM_PLATFORM_LINUX
+
+    System::RecursionDeleteFileDirectory(CoreTools::StringConversion::StandardConversionMultiByte(output));
+
+    #else // !SYSTEM_PLATFORM_LINUX
+
+    System::RecursionDeleteFileDirectory(CoreTools::StringConversion::StandardConversionWideChar(output));
+
+    #endif // SYSTEM_PLATFORM_LINUX
 
     const AssistTools::GenerateTestingEngine generateEngine{ input, output };
 

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/09 21:30)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/09 21:30)
 
 #include "LoadLibraryTesting.h"
 #include "System/DynamicLink/Flags/LoadLibraryFlags.h"
@@ -41,7 +41,7 @@ void System::LoadLibraryTesting::LoadLibrarySucceedTest()
 
     const auto module = LoadDynamicLibrary(wsDll.c_str(), LoadLibraryType::DoNotResolveDllReferences);
 
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(module, "¼ÓÔØws2_32Ê§°Ü¡£"s);
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(module, "åŠ è½½ws2_32å¤±è´¥ã€‚"s);
 
     ASSERT_TRUE(FreeDynamicLibrary(module));
 }

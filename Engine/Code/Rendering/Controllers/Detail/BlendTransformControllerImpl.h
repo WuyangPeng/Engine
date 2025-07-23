@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 14:01)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 14:01)
 
 #ifndef RENDERING_CONTROLLERS_BLEND_TRANSFORM_CONTROLLER_IMPL_H
 #define RENDERING_CONTROLLERS_BLEND_TRANSFORM_CONTROLLER_IMPL_H
@@ -49,7 +49,7 @@ namespace Rendering
         NODISCARD ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const;
         NODISCARD std::vector<ConstObjectSharedPtr> GetAllConstObjectsByName(const std::string& name) const;
 
-        // È¨ÖØwÊÇÒ»¸öÊı×ÖµÄÁ¿0 <= w <= 1¡£
+        // æƒé‡wæ˜¯ä¸€ä¸ªæ•°å­—çš„é‡0 <= w <= 1ã€‚
         NODISCARD ConstTransformControllerSharedPtr GetFirstController() const noexcept;
         NODISCARD ConstTransformControllerSharedPtr GetSecondController() const noexcept;
         NODISCARD bool IsRotationScaleMatrices() const noexcept;

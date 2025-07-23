@@ -1,24 +1,24 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.7 (2024/03/04 21:44)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/04 21:44)
 
 #ifndef SYSTEM_HELPER_CONFIG_MACRO_H
 #define SYSTEM_HELPER_CONFIG_MACRO_H
 
 #include "StringizeMacro.h"
 
-/// �ض���ƽ̨����Ϣ��
+/// 特定于平台的信息。
 #include "SelectPlatformConfig.h"
 
-/// �ض��ڱ���������Ϣ��
+/// 特定于编译器的信息。
 #include "SelectCompilerConfig.h"
 
-/// �ض��ڱ�׼�����Ϣ��
+/// 特定于标准库的信息。
 #include "SelectStdlibConfig.h"
 
 #if !defined(SYSTEM_LITTLE_ENDIAN) && !defined(SYSTEM_BIG_ENDIAN)
@@ -35,7 +35,7 @@
 
 #if SYSTEM_CPP_STANDARD < 20
 
-    #error "ʹ��C++20��׼�����ټ���C++98��C++03��������"
+    #error "使用C++20标准，不再兼容C++98、C++03编译器。"
 
 #endif  // SYSTEM_CPP_STANDARD < 20
 
@@ -77,31 +77,31 @@
 
 #ifndef TCRE_SYSTEM_PLATFORM
 
-    #error "û�ж���ƽ̨��"
+    #error "没有定义平台。"
 
 #endif  // TCRE_SYSTEM_PLATFORM
 
 #ifndef TCRE_COMPILER_VERSION
 
-    #error "û�ж���������汾��"
+    #error "没有定义编译器版本。"
 
 #endif  // TCRE_COMPILER_VERSION
 
 #ifndef TCRE_SYSTEM_COMPILER
 
-    #error "û�ж����������"
+    #error "没有定义编译器。"
 
 #endif  // TCRE_SYSTEM_COMPILER
 
 #ifndef TCRE_CPP_LIB_VERSION
 
-    #error "û�ж����׼��汾��"
+    #error "没有定义标准库版本。"
 
 #endif  // TCRE_CPP_LIB_VERSION
 
 #ifndef TCRE_SYSTEM_STD_LIB
 
-    #error "û�ж����׼�⡣"
+    #error "没有定义标准库。"
 
 #endif  // TCRE_SYSTEM_STD_LIB
 

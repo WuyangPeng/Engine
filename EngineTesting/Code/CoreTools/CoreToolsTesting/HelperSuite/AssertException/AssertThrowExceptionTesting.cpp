@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 21:31)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 21:31)
 
 #include "AssertThrowExceptionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -41,22 +41,22 @@ void CoreTools::AssertThrowExceptionTesting::AssertExceptionMacroTest()
     ASSERT_THROW_EXCEPTION_2(AssertThrowExceptionTestWith2Parameter, parameter0, parameter1);
     ASSERT_THROW_EXCEPTION_3(AssertThrowExceptionTestWith3Parameter, parameter0, parameter1, parameter2);
 
-    ASSERT_THROW_EXCEPTION_USE_MESSAGE_0(AssertThrowExceptionTest, "²âÊÔAssertExceptionMacro");
-    ASSERT_THROW_EXCEPTION_USE_MESSAGE_1(AssertThrowExceptionTestWithParameter, parameter0, "²âÊÔAssertExceptionMacro");
-    ASSERT_THROW_EXCEPTION_USE_MESSAGE_2(AssertThrowExceptionTestWith2Parameter, parameter0, parameter1, "²âÊÔAssertExceptionMacro");
-    ASSERT_THROW_EXCEPTION_USE_MESSAGE_3(AssertThrowExceptionTestWith3Parameter, parameter0, parameter1, parameter2, "²âÊÔAssertExceptionMacro");
+    ASSERT_THROW_EXCEPTION_USE_MESSAGE_0(AssertThrowExceptionTest, "æµ‹è¯•AssertExceptionMacro");
+    ASSERT_THROW_EXCEPTION_USE_MESSAGE_1(AssertThrowExceptionTestWithParameter, parameter0, "æµ‹è¯•AssertExceptionMacro");
+    ASSERT_THROW_EXCEPTION_USE_MESSAGE_2(AssertThrowExceptionTestWith2Parameter, parameter0, parameter1, "æµ‹è¯•AssertExceptionMacro");
+    ASSERT_THROW_EXCEPTION_USE_MESSAGE_3(AssertThrowExceptionTestWith3Parameter, parameter0, parameter1, parameter2, "æµ‹è¯•AssertExceptionMacro");
 }
 
 void CoreTools::AssertThrowExceptionTesting::AssertThrowExceptionTest()
 {
-    THROW_EXCEPTION(SYSTEM_TEXT("²âÊÔÒì³£±»ÕıÈ·Å×³ö£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("æµ‹è¯•å¼‚å¸¸è¢«æ­£ç¡®æŠ›å‡ºï¼"s))
 }
 
 void CoreTools::AssertThrowExceptionTesting::AssertThrowExceptionTestWithParameter(int aParameter)
 {
     ASSERT_EQUAL(aParameter, parameter0);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("²âÊÔÒì³£±»ÕıÈ·Å×³ö£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("æµ‹è¯•å¼‚å¸¸è¢«æ­£ç¡®æŠ›å‡ºï¼"s))
 }
 
 void CoreTools::AssertThrowExceptionTesting::AssertThrowExceptionTestWith2Parameter(int aParameter0, int aParameter1)
@@ -64,7 +64,7 @@ void CoreTools::AssertThrowExceptionTesting::AssertThrowExceptionTestWith2Parame
     ASSERT_EQUAL(aParameter0, parameter0);
     ASSERT_EQUAL(aParameter1, parameter1);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("²âÊÔÒì³£±»ÕıÈ·Å×³ö£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("æµ‹è¯•å¼‚å¸¸è¢«æ­£ç¡®æŠ›å‡ºï¼"s))
 }
 
 void CoreTools::AssertThrowExceptionTesting::AssertThrowExceptionTestWith3Parameter(int aParameter0, int aParameter1, int aParameter2)
@@ -73,5 +73,5 @@ void CoreTools::AssertThrowExceptionTesting::AssertThrowExceptionTestWith3Parame
     ASSERT_EQUAL(aParameter1, parameter1);
     ASSERT_EQUAL(aParameter2, parameter2);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("²âÊÔÒì³£±»ÕıÈ·Å×³ö£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("æµ‹è¯•å¼‚å¸¸è¢«æ­£ç¡®æŠ›å‡ºï¼"s))
 }

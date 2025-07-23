@@ -1,4 +1,4 @@
-$Copyright$
+﻿$Copyright$
 
 #include "$ModuleName$/$ModuleName$$CoreName$/Helper/$ModuleName$$CoreName$ClassInvariantMacro.h"
 #include "$ModuleName$/$ModuleName$MiddleLayer/Input/InputManagerDetail.h"

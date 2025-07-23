@@ -1,17 +1,19 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/05/19 19:51)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/05/19 19:51)
 
 #include "TelegramMessageManagerTesting.h"
 #include "Detail/Entity.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/EntityManagerDetail.h"
+#include "CoreTools/MessageEvent/TelegramDetail.h"
+#include "CoreTools/MessageEvent/TelegramLessDetail.h"
 #include "CoreTools/MessageEvent/TelegramMessageManagerDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
@@ -84,7 +86,7 @@ CoreTools::TelegramMessageManagerTesting::TelegramType CoreTools::TelegramMessag
 
 void CoreTools::TelegramMessageManagerTesting::CallEventTest(TelegramMessageManagerType& telegramMessageManager, const TelegramType& telegram) const
 {
-    /// Ö»»á²úÉúÒ»´ÎÊÂ¼ş
+    /// åªä¼šäº§ç”Ÿä¸€æ¬¡äº‹ä»¶
     telegramMessageManager.CallEvent(telegram);
     telegramMessageManager.CallEvent(telegram);
     telegramMessageManager.CallEvent(telegram);

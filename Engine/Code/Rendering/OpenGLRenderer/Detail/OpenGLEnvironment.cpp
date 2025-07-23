@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2024/01/09 16:47)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2024/01/09 16:47)
 
 #include "Rendering/RenderingExport.h"
 
@@ -34,7 +34,7 @@ void Rendering::OpenGLEnvironment::InitEnvironment()
 
     if (!System::OpenGLInit())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³õÊ¼»¯OpenGL»·¾³Ê§°Ü¡£"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("åˆå§‹åŒ–OpenGLç¯å¢ƒå¤±è´¥ã€‚"s));
     }
 
     System::PrintOpenGLInfo();

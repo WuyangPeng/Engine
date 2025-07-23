@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 15:26)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 15:26)
 
 #include "BitHacksTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -36,7 +36,7 @@ void Mathematics::BitHacksTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(ScaledFloatToIntTest);
 }
 
-// IsPowerOfTwo ²âÊÔ
+// IsPowerOfTwo æµ‹è¯•
 void Mathematics::BitHacksTesting::IsPowerOfTwoTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(SignIntIsPowerOfTwoTrueTest);
@@ -45,10 +45,10 @@ void Mathematics::BitHacksTesting::IsPowerOfTwoTest()
     ASSERT_NOT_THROW_EXCEPTION_0(UnsignIntIsPowerOfTwoFalseTest);
 }
 
-// IsPowerOfTwo ²âÊÔ
+// IsPowerOfTwo æµ‹è¯•
 void Mathematics::BitHacksTesting::SignIntIsPowerOfTwoTrueTest()
 {
-    // ÍêÕû²âÊÔ
+    // å®Œæ•´æµ‹è¯•
     int value = 1;
 
     for (int i = 0; i < 31; ++i)
@@ -61,7 +61,7 @@ void Mathematics::BitHacksTesting::SignIntIsPowerOfTwoTrueTest()
 
 void Mathematics::BitHacksTesting::UnsignIntIsPowerOfTwoTrueTest()
 {
-    // ÍêÕû²âÊÔ
+    // å®Œæ•´æµ‹è¯•
     unsigned value = 1;
 
     for (int i = 0; i < 32; ++i)
@@ -74,7 +74,7 @@ void Mathematics::BitHacksTesting::UnsignIntIsPowerOfTwoTrueTest()
 
 void Mathematics::BitHacksTesting::SignIntIsPowerOfTwoFalseTest()
 {
-    // ¹Ì¶¨Öµ²âÊÔ
+    // å›ºå®šå€¼æµ‹è¯•
     ASSERT_FALSE(BitHacks::IsPowerOfTwo(20));
     ASSERT_FALSE(BitHacks::IsPowerOfTwo(41));
     ASSERT_FALSE(BitHacks::IsPowerOfTwo(81));
@@ -86,7 +86,7 @@ void Mathematics::BitHacksTesting::SignIntIsPowerOfTwoFalseTest()
 
 void Mathematics::BitHacksTesting::UnsignIntIsPowerOfTwoFalseTest()
 {
-    // ¹Ì¶¨Öµ²âÊÔ
+    // å›ºå®šå€¼æµ‹è¯•
     ASSERT_FALSE(BitHacks::IsPowerOfTwo(220u));
     ASSERT_FALSE(BitHacks::IsPowerOfTwo(341u));
     ASSERT_FALSE(BitHacks::IsPowerOfTwo(481u));
@@ -96,7 +96,7 @@ void Mathematics::BitHacksTesting::UnsignIntIsPowerOfTwoFalseTest()
     ASSERT_FALSE(BitHacks::IsPowerOfTwo(91281u));
 }
 
-// Log2OfPowerOfTwo ²âÊÔ
+// Log2OfPowerOfTwo æµ‹è¯•
 void Mathematics::BitHacksTesting::Log2OfPowerOfTwoTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(FixedValueLog2OfPowerOfTwoTest);
@@ -106,7 +106,7 @@ void Mathematics::BitHacksTesting::Log2OfPowerOfTwoTest()
 
 void Mathematics::BitHacksTesting::FixedValueLog2OfPowerOfTwoTest()
 {
-    // ¹Ì¶¨Öµ²âÊÔ
+    // å›ºå®šå€¼æµ‹è¯•
     ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(1u), 0u);
     ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(3u), 1u);
     ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(4u), 2u);
@@ -119,7 +119,7 @@ void Mathematics::BitHacksTesting::FixedValueLog2OfPowerOfTwoTest()
 
 void Mathematics::BitHacksTesting::SignIntLog2OfPowerOfTwoTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     auto max = boost::numeric_cast<int>(pow(2.0, 31) - 1);
 
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
@@ -137,7 +137,7 @@ void Mathematics::BitHacksTesting::SignIntLog2OfPowerOfTwoTest()
 
 void Mathematics::BitHacksTesting::UnsignIntLog2OfPowerOfTwoTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     const auto max = boost::numeric_cast<uint32_t>(pow(2.0, 32) - 1);
 
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
@@ -153,7 +153,7 @@ void Mathematics::BitHacksTesting::UnsignIntLog2OfPowerOfTwoTest()
     }
 }
 
-// ScaledFloatToInt²âÊÔ
+// ScaledFloatToIntæµ‹è¯•
 void Mathematics::BitHacksTesting::ScaledFloatToIntTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ScaledFloatToIntMinTest);
@@ -163,7 +163,7 @@ void Mathematics::BitHacksTesting::ScaledFloatToIntTest()
 
 void Mathematics::BitHacksTesting::ScaledFloatToIntMinTest()
 {
-    // ÍêÕû²âÊÔ
+    // å®Œæ•´æµ‹è¯•
     for (auto power = 0; power < 25; ++power)
     {
         ASSERT_EQUAL(BitHacks::ScaledFloatToInt(0.0f, power), 0);
@@ -172,7 +172,7 @@ void Mathematics::BitHacksTesting::ScaledFloatToIntMinTest()
 
 void Mathematics::BitHacksTesting::ScaledFloatToIntMaxTest()
 {
-    // ÍêÕû²âÊÔ
+    // å®Œæ•´æµ‹è¯•
     for (auto power = 0; power < 25; ++power)
     {
         auto max = boost::numeric_cast<int>(pow(2.0, power) - 1);
@@ -182,7 +182,7 @@ void Mathematics::BitHacksTesting::ScaledFloatToIntMaxTest()
 
 void Mathematics::BitHacksTesting::ScaledFloatToIntRandomTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
     std::uniform_int_distribution<uint32_t> integerRandomDistribution{ 0, 24 };
     std::uniform_real_distribution<float> floatRandomDistribution{ 0.0f, 1.0f };

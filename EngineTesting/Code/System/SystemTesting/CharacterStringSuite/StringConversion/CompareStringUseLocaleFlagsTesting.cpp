@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+Ôªø/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-/// ¡™œµ◊˜’ﬂ£∫94458936@qq.com
+/// ‰ΩúËÄÖÔºöÂΩ≠Ê≠¶Èò≥ÔºåÂΩ≠ÊôîÊÅ©ÔºåÂΩ≠ÊôîÊ≥Ω
+/// ËÅîÁ≥ª‰ΩúËÄÖÔºö94458936@qq.com
 ///
-/// ±Í◊º£∫std:c++20
-/// ∞Ê±æ£∫1.0.0.7 (2024/03/11 14:23)
+/// Ê†áÂáÜÔºöstd:c++20
+/// ÁâàÊú¨Ôºö1.0.0.7 (2024/03/11 14:23)
 
 #include "CompareStringUseLocaleFlagsTesting.h"
 #include "System/CharacterString/Flags/StringConversionFlags.h"
@@ -17,36 +17,36 @@
 
 System::CompareStringUseLocaleFlagsTesting::CompareStringUseLocaleFlagsTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      /// TODO: LanguageLocale::CustomUiDefault≤‚ ‘ ß∞‹°£
+      /// TODO: LanguageLocale::CustomUiDefaultÊµãËØïÂ§±Ë¥•„ÄÇ
       languageLocales{ LanguageLocale::SystemDefault,
                        LanguageLocale::UserDefault,
                        LanguageLocale::CustomDefault,
                        LanguageLocale::Neutral,
                        LanguageLocale::Invariant,
                        LanguageLocale::CustomUnspecified },
-      comparesStrings{ SYSTEM_TEXT("∞°"),
-                       SYSTEM_TEXT("∞…"),
-                       SYSTEM_TEXT("≥È"),
-                       SYSTEM_TEXT("µƒ"),
-                       SYSTEM_TEXT("∂Ó"),
-                       SYSTEM_TEXT("∑¢"),
-                       SYSTEM_TEXT("∏¯"),
-                       SYSTEM_TEXT("∫˙"),
-                       SYSTEM_TEXT("Ω±"),
-                       SYSTEM_TEXT("ø¥"),
-                       SYSTEM_TEXT("¡À"),
-                       SYSTEM_TEXT("¬"),
-                       SYSTEM_TEXT("ƒ„"),
-                       SYSTEM_TEXT("≈∂"),
-                       SYSTEM_TEXT("∆Ω"),
-                       SYSTEM_TEXT("∆¯"),
-                       SYSTEM_TEXT("»À"),
-                       SYSTEM_TEXT(" «"),
-                       SYSTEM_TEXT("À˚"),
-                       SYSTEM_TEXT("Œ“"),
-                       SYSTEM_TEXT("œÎ"),
-                       SYSTEM_TEXT("“™"),
-                       SYSTEM_TEXT("◊ˆ"),
+      comparesStrings{ SYSTEM_TEXT("Âïä"),
+                       SYSTEM_TEXT("Âêß"),
+                       SYSTEM_TEXT("ÊäΩ"),
+                       SYSTEM_TEXT("ÁöÑ"),
+                       SYSTEM_TEXT("È¢ù"),
+                       SYSTEM_TEXT("Âèë"),
+                       SYSTEM_TEXT("Áªô"),
+                       SYSTEM_TEXT("ËÉ°"),
+                       SYSTEM_TEXT("Â•ñ"),
+                       SYSTEM_TEXT("Áúã"),
+                       SYSTEM_TEXT("‰∫Ü"),
+                       SYSTEM_TEXT("Âêó"),
+                       SYSTEM_TEXT("‰Ω†"),
+                       SYSTEM_TEXT("Âì¶"),
+                       SYSTEM_TEXT("Âπ≥"),
+                       SYSTEM_TEXT("Ê∞î"),
+                       SYSTEM_TEXT("‰∫∫"),
+                       SYSTEM_TEXT("ÊòØ"),
+                       SYSTEM_TEXT("‰ªñ"),
+                       SYSTEM_TEXT("Êàë"),
+                       SYSTEM_TEXT("ÊÉ≥"),
+                       SYSTEM_TEXT("Ë¶Å"),
+                       SYSTEM_TEXT("ÂÅö"),
                        SYSTEM_TEXT("a"),
                        SYSTEM_TEXT("A"),
                        SYSTEM_TEXT("0") },

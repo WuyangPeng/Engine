@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/04/28 13:02)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/04/28 13:02)
 
 #include "TupleTesting.h"
 #include "CoreTools/DataTypes/TupleDetail.h"
@@ -45,10 +45,10 @@ void CoreTools::TupleTesting::MainTest()
 
 void CoreTools::TupleTesting::IntegerTest()
 {
-    /// ¹Ì¶¨Öµ²âÊÔ
+    /// å›ºå®šå€¼æµ‹è¯•
     Tuple4 tuple0{};
 
-    /// ²âÊÔÄ¬ÈÏ¹¹Ôìº¯Êı
+    /// æµ‹è¯•é»˜è®¤æ„é€ å‡½æ•°
     ASSERT_NOT_THROW_EXCEPTION_1(IntegerZeroTest, tuple0);
 
     ASSERT_NOT_THROW_EXCEPTION_2(IntegerAssignment, tuple0, 1);
@@ -56,14 +56,14 @@ void CoreTools::TupleTesting::IntegerTest()
 
     Tuple tuple1{ tuple0 };
 
-    /// ²âÊÔ¸´ÖÆ¹¹Ôìº¯Êı
+    /// æµ‹è¯•å¤åˆ¶æ„é€ å‡½æ•°
     ASSERT_NOT_THROW_EXCEPTION_2(IntegerOriginalTest, tuple1, 1);
 
     ASSERT_NOT_THROW_EXCEPTION_2(IntegerAssignment, tuple1, 4);
     ASSERT_NOT_THROW_EXCEPTION_2(IntegerOriginalTest, tuple1, 4);
     ASSERT_NOT_THROW_EXCEPTION_2(IntegerOriginalTest, tuple0, 1);
 
-    /// ²âÊÔ¸³ÖµÔËËã·û
+    /// æµ‹è¯•èµ‹å€¼è¿ç®—ç¬¦
     tuple0 = tuple1;
 
     ASSERT_NOT_THROW_EXCEPTION_2(IntegerOriginalTest, tuple0, 4);
@@ -95,10 +95,10 @@ void CoreTools::TupleTesting::IntegerOriginalTest(const Tuple4& tuple, int value
 
 void CoreTools::TupleTesting::StringTest()
 {
-    /// ¹Ì¶¨Öµ²âÊÔ
+    /// å›ºå®šå€¼æµ‹è¯•
     StringTuple2 tuple0{};
 
-    /// ²âÊÔÄ¬ÈÏ¹¹Ôìº¯Êı
+    /// æµ‹è¯•é»˜è®¤æ„é€ å‡½æ•°
     ASSERT_NOT_THROW_EXCEPTION_1(StringZeroTest, tuple0);
 
     ASSERT_NOT_THROW_EXCEPTION_2(StringAssignment, tuple0, 0);
@@ -107,14 +107,14 @@ void CoreTools::TupleTesting::StringTest()
 
     Tuple tuple1{ tuple0 };
 
-    /// ²âÊÔ¸´ÖÆ¹¹Ôìº¯Êı
+    /// æµ‹è¯•å¤åˆ¶æ„é€ å‡½æ•°
     ASSERT_NOT_THROW_EXCEPTION_2(StringOriginalTest, tuple1, 0);
 
     ASSERT_NOT_THROW_EXCEPTION_2(StringAssignment, tuple1, 2);
     ASSERT_NOT_THROW_EXCEPTION_2(StringOriginalTest, tuple0, 0);
     ASSERT_NOT_THROW_EXCEPTION_2(StringOriginalTest, tuple1, 2);
 
-    /// ²âÊÔ¸³ÖµÔËËã·û
+    /// æµ‹è¯•èµ‹å€¼è¿ç®—ç¬¦
     tuple0 = tuple1;
 
     ASSERT_NOT_THROW_EXCEPTION_2(StringOriginalTest, tuple0, 2);
@@ -228,7 +228,7 @@ void CoreTools::TupleTesting::CompileErrorTest() noexcept
 {
 #ifdef COMPILE_ERROR_TEST
 
-    /// ÒÔÏÂ´úÂëÎŞ·¨Í¨¹ı±àÒë
+    /// ä»¥ä¸‹ä»£ç æ— æ³•é€šè¿‡ç¼–è¯‘
     Tuple1 tuple0{ 5, 6 };
     Tuple2 tuple1{ 5, 6, 7 };
     Tuple3 tuple2{ 5, 6, 7, 8 };

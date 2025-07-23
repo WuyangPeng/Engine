@@ -1,6 +1,6 @@
-@ingroup group_Documentation
+ï»¿@ingroup group_Documentation
 
 ---------------------------
-$ProjectChineseName$Åú´¦ÀíÎÄ¼ş
+$ProjectChineseName$æ‰¹å¤„ç†æ–‡ä»¶
 
 ---------------------------

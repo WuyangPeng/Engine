@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 14:03)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 14:03)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_DETAIL_H
@@ -20,7 +20,7 @@
 template <typename Real>
 Mathematics::PolynomialRoots<Real>::PolynomialRoots(Real epsilon)
     : count{ 0 },
-      maxRoot{ 4 },  // Ä¬ÈÏÖ§³ÖÎ¬¶È <= 4
+      maxRoot{ 4 },  // é»˜è®¤æ”¯æŒç»´åº¦ <= 4
       root(maxRoot),
       epsilon{ epsilon },
       maxIterations{ 128 }
@@ -120,7 +120,7 @@ Real Mathematics::PolynomialRoots<Real>::GetBound(Real constant, Real once)
 
     if (MathType::FAbs(once) <= epsilon)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¶àÏîÊ½ÊÇºã¶¨µÄ£¬Ô¼ÊøÊÇÎŞĞ§µÄ"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("å¤šé¡¹å¼æ˜¯æ’å®šçš„ï¼Œçº¦æŸæ˜¯æ— æ•ˆçš„"s));
     }
 
     auto maxValue = MathType::FAbs(constant) / once;
@@ -135,7 +135,7 @@ bool Mathematics::PolynomialRoots<Real>::FindAlgebraic(Real constant, Real once,
 
     if (MathType::FAbs(secondary) <= epsilon)
     {
-        // ·½³ÌÊÇÒ»´ÎµÄ
+        // æ–¹ç¨‹æ˜¯ä¸€æ¬¡çš„
         return FindAlgebraic(constant, once);
     }
 
@@ -177,7 +177,7 @@ Real Mathematics::PolynomialRoots<Real>::GetBound(Real constant, Real once, Real
 
     if (MathType::FAbs(secondary) <= epsilon)
     {
-        // ·½³ÌÊÇÒ»´ÎµÄ
+        // æ–¹ç¨‹æ˜¯ä¸€æ¬¡çš„
         if (FindAlgebraic(constant, once))
         {
 #include SYSTEM_WARNING_PUSH
@@ -189,7 +189,7 @@ Real Mathematics::PolynomialRoots<Real>::GetBound(Real constant, Real once, Real
         }
         else
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("Ô¼ÊøÊÇÎŞĞ§µÄ¡£"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("çº¦æŸæ˜¯æ— æ•ˆçš„ã€‚"s));
         }
     }
 
@@ -207,16 +207,16 @@ bool Mathematics::PolynomialRoots<Real>::FindAlgebraic(Real constant, Real once,
 
     if (MathType::FAbs(thrice) <= epsilon)
     {
-        // ·½³ÌÊÇ¶ş´ÎµÄ
+        // æ–¹ç¨‹æ˜¯äºŒæ¬¡çš„
         return FindAlgebraic(constant, once, secondary);
     }
 
-    // È·±£¶àÏîÊ½Ê×Ò», x^3 + secondary * x^2 + once * x + constant = 0.
+    // ç¡®ä¿å¤šé¡¹å¼é¦–ä¸€, x^3 + secondary * x^2 + once * x + constant = 0.
     constant /= thrice;
     once /= thrice;
     secondary /= thrice;
 
-    // ×ª»»Îªy^3 + a * y + b = 0 £¬ÓÉx = y - c2 / 3¡£
+    // è½¬æ¢ä¸ºy^3 + a * y + b = 0 ï¼Œç”±x = y - c2 / 3ã€‚
     constexpr auto third = MathType::GetRational(1, 3);
     constexpr auto twentySeventh = MathType::GetRational(1, 27);
     const auto offset = third * secondary;
@@ -237,7 +237,7 @@ bool Mathematics::PolynomialRoots<Real>::FindAlgebraic(Real constant, Real once,
         SetRoot(1, -halfBPowThird - offset);
         count = 2;
     }
-    else if (MathType::GetValue(0) < discriminant)  // 1Êµ,2Ğé¸ù
+    else if (MathType::GetValue(0) < discriminant)  // 1å®,2è™šæ ¹
     {
         discriminant = MathType::Sqrt(discriminant);
         const auto discriminantMinusHalfB = -halfB + discriminant;
@@ -271,17 +271,17 @@ bool Mathematics::PolynomialRoots<Real>::FindEigenvalues(Real constant, Real onc
 
     if (MathType::FAbs(thrice) <= epsilon)
     {
-        // ·½³ÌÊÇ¶ş´ÎµÄ
+        // æ–¹ç¨‹æ˜¯äºŒæ¬¡çš„
         return FindAlgebraic(constant, once, secondary);
     }
 
-    // È·±£¶àÏîÊ½Ê×Ò», x^3 + secondary * x^2 + once * x + constant = 0
+    // ç¡®ä¿å¤šé¡¹å¼é¦–ä¸€, x^3 + secondary * x^2 + once * x + constant = 0
     constant /= thrice;
     once /= thrice;
     secondary /= thrice;
 
-    // ¹¹Ôì3¡Á3Ğ­Í¬¾ØÕó¡£
-    VariableMatrixType matrix{ 3, 3 };  // ³õÊ¼»¯Îª0¡£
+    // æ„é€ 3Ã—3ååŒçŸ©é˜µã€‚
+    VariableMatrixType matrix{ 3, 3 };  // åˆå§‹åŒ–ä¸º0ã€‚
     matrix(1, 0) = MathType::GetValue(1);
     matrix(2, 1) = MathType::GetValue(1);
     matrix(0, 2) = -constant;
@@ -314,14 +314,14 @@ void Mathematics::PolynomialRoots<Real>::BalanceCompanion3(VariableMatrixType& m
 
     for (auto i = 0; i < balanceCompanionIterationMax; ++i)
     {
-        // µÖÏú ĞĞ/ÁĞ 0
+        // æŠµé”€ è¡Œ/åˆ— 0
         auto rowNorm = a02;
         auto columnNorm = a10;
         auto scale = MathType::Sqrt(columnNorm / rowNorm);
         a02 *= scale;
         a10 = a02;
 
-        // µÖÏú ĞĞ/ÁĞ 1
+        // æŠµé”€ è¡Œ/åˆ— 1
         rowNorm = (a12 <= a10 ? a10 : a12);
         columnNorm = a21;
         scale = MathType::Sqrt(columnNorm / rowNorm);
@@ -329,7 +329,7 @@ void Mathematics::PolynomialRoots<Real>::BalanceCompanion3(VariableMatrixType& m
         a12 *= scale;
         a21 /= scale;
 
-        // µÖÏú ĞĞ/ÁĞ 2
+        // æŠµé”€ è¡Œ/åˆ— 2
         rowNorm = (a22 <= a21 ? a21 : a22);
         columnNorm = (a12 <= a02 ? a02 : a12);
         if (columnNorm < a22)
@@ -347,7 +347,7 @@ void Mathematics::PolynomialRoots<Real>::BalanceCompanion3(VariableMatrixType& m
             break;
         }
 
-        MATHEMATICS_ASSERTION_1(i != balanceCompanionIterationMax - 1, "³¬³ö×î´óµü´ú¡£\n");
+        MATHEMATICS_ASSERTION_1(i != balanceCompanionIterationMax - 1, "è¶…å‡ºæœ€å¤§è¿­ä»£ã€‚\n");
     }
 
     matrix(1, 0) = (MathType::GetValue(0) <= matrix(1, 0) ? a10 : -a10);
@@ -360,7 +360,7 @@ void Mathematics::PolynomialRoots<Real>::BalanceCompanion3(VariableMatrixType& m
 template <typename Real>
 bool Mathematics::PolynomialRoots<Real>::IsBalancedCompanion3(Real a10, Real a21, Real a02, Real a12, Real a22, Real tolerance) noexcept
 {
-    // ĞĞ/ÁĞ 0
+    // è¡Œ/åˆ— 0
     auto rowNorm = a02;
     auto columnNorm = a10;
     auto test = MathType::FAbs(MathType::GetValue(1) - columnNorm / rowNorm);
@@ -369,7 +369,7 @@ bool Mathematics::PolynomialRoots<Real>::IsBalancedCompanion3(Real a10, Real a21
         return false;
     }
 
-    // ĞĞ/ÁĞ 1
+    // è¡Œ/åˆ— 1
     rowNorm = (a12 <= a10 ? a10 : a12);
     columnNorm = a21;
     test = MathType::FAbs(MathType::GetValue(1) - columnNorm / rowNorm);
@@ -378,7 +378,7 @@ bool Mathematics::PolynomialRoots<Real>::IsBalancedCompanion3(Real a10, Real a21
         return false;
     }
 
-    // ĞĞ/ÁĞ 2
+    // è¡Œ/åˆ— 2
     rowNorm = (a22 <= a21 ? a21 : a22);
     columnNorm = (a12 <= a02 ? a02 : a12);
     if (columnNorm < a22)
@@ -401,7 +401,7 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration3(VariableMatrixType& matrix
 
         if (MathType::FAbs(matrix(1, 0)) <= rhs)
         {
-            // mat(0,0)ÊÇÒ»¸ö¸ù£¬½â×Ó¾ØÕóµÄ¶ş´Î·½³Ì¡£
+            // mat(0,0)æ˜¯ä¸€ä¸ªæ ¹ï¼Œè§£å­çŸ©é˜µçš„äºŒæ¬¡æ–¹ç¨‹ã€‚
             const auto trace = matrix(1, 1) + matrix(2, 2);
             const auto det = matrix(1, 1) * matrix(2, 2) - matrix(1, 2) * matrix(2, 1);
 
@@ -417,7 +417,7 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration3(VariableMatrixType& matrix
 
         if (MathType::FAbs(matrix(2, 1)) <= rhs)
         {
-            // mat(2,2)ÊÇÒ»¸ö¸ù£¬½âÁË×Ó¾ØÕóµÄ¶ş´Î·½³Ì¡£
+            // mat(2,2)æ˜¯ä¸€ä¸ªæ ¹ï¼Œè§£äº†å­çŸ©é˜µçš„äºŒæ¬¡æ–¹ç¨‹ã€‚
             const auto trace = matrix(0, 0) + matrix(1, 1);
             const auto det = matrix(0, 0) * matrix(1, 1) - matrix(0, 1) * matrix(1, 0);
             MAYBE_UNUSED const auto result = FindAlgebraic(det, -trace, MathType::GetValue(1));
@@ -431,16 +431,16 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration3(VariableMatrixType& matrix
         FrancisQRStep(matrix, variableLengthVector);
     }
 
-    // ´ÓÀíÂÛÉÏ½²£¬Èı´Î¶àÏîÊ½×ÜÊÇÓĞÒ»¸öÊµÊı¸ù£¬µ«Èç¹û³¬¹ı×î´óµü´ú´ÎÊı£¬ÔõÃ´°ì£¿
-    // Ò»Ğ©ÊµÑé±íÃ÷£¬µ±¶àÏîÊ½½ü¾ßÓĞÒ»¸öË«¸ù£¬Ëã·¨µÄÊÕÁ²ËÙ¶ÈÂı¡£
-    // Ò²ĞíÒ»¸öËæ»úÈÅ¶¯¡°kick¡±ÏµÍ³ÖĞµÄÒ»¸öÎ»¿ÉÄÜ»á×àĞ§£¿
+    // ä»ç†è®ºä¸Šè®²ï¼Œä¸‰æ¬¡å¤šé¡¹å¼æ€»æ˜¯æœ‰ä¸€ä¸ªå®æ•°æ ¹ï¼Œä½†å¦‚æœè¶…è¿‡æœ€å¤§è¿­ä»£æ¬¡æ•°ï¼Œæ€ä¹ˆåŠï¼Ÿ
+    // ä¸€äº›å®éªŒè¡¨æ˜ï¼Œå½“å¤šé¡¹å¼è¿‘å…·æœ‰ä¸€ä¸ªåŒæ ¹ï¼Œç®—æ³•çš„æ”¶æ•›é€Ÿåº¦æ…¢ã€‚
+    // ä¹Ÿè®¸ä¸€ä¸ªéšæœºæ‰°åŠ¨â€œkickâ€ç³»ç»Ÿä¸­çš„ä¸€ä¸ªä½å¯èƒ½ä¼šå¥æ•ˆï¼Ÿ
 
-    MATHEMATICS_ASSERTION_4(false, "³¬³ö×î´óµü´ú\n");
+    MATHEMATICS_ASSERTION_4(false, "è¶…å‡ºæœ€å¤§è¿­ä»£\n");
 
-    // ÏÖÔÚ£¬ÇåÁã×îĞ¡µÄ´Î¶Ô½ÇÏîÈ¥·ÖÀë¾ØÕó¡£
+    // ç°åœ¨ï¼Œæ¸…é›¶æœ€å°çš„æ¬¡å¯¹è§’é¡¹å»åˆ†ç¦»çŸ©é˜µã€‚
     if (MathType::FAbs(matrix(1, 0)) <= MathType::FAbs(matrix(2, 1)))
     {
-        // mat(0,0)ÊÇÒ»¸ö¸ù£¬½âÁË×Ó¾ØÕóµÄ¶ş´Î·½³Ì¡£
+        // mat(0,0)æ˜¯ä¸€ä¸ªæ ¹ï¼Œè§£äº†å­çŸ©é˜µçš„äºŒæ¬¡æ–¹ç¨‹ã€‚
         const auto trace = matrix(1, 1) + matrix(2, 2);
         const auto det = matrix(1, 1) * matrix(2, 2) - matrix(1, 2) * matrix(2, 1);
         MAYBE_UNUSED const auto result = FindAlgebraic(det, -trace, MathType::GetValue(1));
@@ -450,7 +450,7 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration3(VariableMatrixType& matrix
     }
     else
     {
-        // mat(2,2)ÊÇÒ»¸ö¸ù£¬½âÁË×Ó¾ØÕóµÄ¶ş´Î·½³Ì¡£
+        // mat(2,2)æ˜¯ä¸€ä¸ªæ ¹ï¼Œè§£äº†å­çŸ©é˜µçš„äºŒæ¬¡æ–¹ç¨‹ã€‚
         const auto trace = matrix(0, 0) + matrix(1, 1);
         const auto det = matrix(0, 0) * matrix(1, 1) - matrix(0, 1) * matrix(1, 0);
         MAYBE_UNUSED const auto result = FindAlgebraic(det, -trace, MathType::GetValue(1));
@@ -465,12 +465,12 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration3(VariableMatrixType& matrix
 template <typename Real>
 void Mathematics::PolynomialRoots<Real>::FrancisQRStep(VariableMatrixType& hessenbergMatrix, VariableLengthVectorType& vector)
 {
-    // ¸ø¶¨Ò»¸ön³ËnÎ´»¹Ô­µÄÉÏHessenberg¾ØÕóHÆäÎ²²¿2¡Á2Ö÷×ÓÕó¾ßÓĞÌØÕ÷Öµa1ºÍa2£¬
-    // ¸²¸Ç HÒÔZ^T * H * ZÆäÖĞZ = P(1) * ... * P(n-2)ÊÇHouseholder¾ØÕóºÍ
-    // Z^T*(H-a1*I)*(H-a2*I)ÊÇÉÏÈı½Ç¡£
-    // assert:  HÊÇÎ´»¹Ô­µÄÉÏHessenbergºÍ n >= 3
+    // ç»™å®šä¸€ä¸ªnä¹˜næœªè¿˜åŸçš„ä¸ŠHessenbergçŸ©é˜µHå…¶å°¾éƒ¨2Ã—2ä¸»å­é˜µå…·æœ‰ç‰¹å¾å€¼a1å’Œa2ï¼Œ
+    // è¦†ç›– Hä»¥Z^T * H * Zå…¶ä¸­Z = P(1) * ... * P(n-2)æ˜¯HouseholderçŸ©é˜µå’Œ
+    // Z^T*(H-a1*I)*(H-a2*I)æ˜¯ä¸Šä¸‰è§’ã€‚
+    // assert:  Hæ˜¯æœªè¿˜åŸçš„ä¸ŠHessenbergå’Œ n >= 3
 
-    // ¼ÆËã(H - a1 * I) * (H - a2 * I)µÄµÚÒ»ÁĞ¡£
+    // è®¡ç®—(H - a1 * I) * (H - a2 * I)çš„ç¬¬ä¸€åˆ—ã€‚
     const auto rowsNumber = hessenbergMatrix.GetRowsNumber();
     auto trace = hessenbergMatrix(rowsNumber - 2, rowsNumber - 2) + hessenbergMatrix(rowsNumber - 1, rowsNumber - 1);
     auto det = hessenbergMatrix(rowsNumber - 2, rowsNumber - 2) * hessenbergMatrix(rowsNumber - 1, rowsNumber - 1) -
@@ -479,23 +479,23 @@ void Mathematics::PolynomialRoots<Real>::FrancisQRStep(VariableMatrixType& hesse
                      hessenbergMatrix(1, 0) * (hessenbergMatrix(0, 0) + hessenbergMatrix(1, 1) - trace),
                      hessenbergMatrix(1, 0) * hessenbergMatrix(2, 1) };
 
-    // ¸²¸ÇH Ê¹ÓÃ P(0) * H * P(0)^T.
+    // è¦†ç›–H ä½¿ç”¨ P(0) * H * P(0)^T.
     auto vVector = GetHouseholderVector(3, uVector);
     PremultiplyHouseholder(hessenbergMatrix, vector, 0, 2, 0, rowsNumber - 1, 3, vVector);
     PostmultiplyHouseholder(hessenbergMatrix, vector, 0, rowsNumber - 1, 0, 2, 3, vVector);
 
     for (auto i = 1; i <= rowsNumber - 3; ++i)
     {
-        // ¸²¸ÇH Ê¹ÓÃ P(i) * H * P(i)^T.
+        // è¦†ç›–H ä½¿ç”¨ P(i) * H * P(i)^T.
         uVector[0] = hessenbergMatrix(i, i - 1);
         uVector[1] = hessenbergMatrix(i + 1, i - 1);
         uVector[2] = hessenbergMatrix(i + 2, i - 1);
         vVector = GetHouseholderVector(3, uVector);
 
-        // ÁĞ·¶Î§²»ĞèÒªÎª0 ÖÁ n - 1£¬ÒòÎªÁãµÄÍ¼°¸·¢ÉúÔÚ¾ØÕóH
+        // åˆ—èŒƒå›´ä¸éœ€è¦ä¸º0 è‡³ n - 1ï¼Œå› ä¸ºé›¶çš„å›¾æ¡ˆå‘ç”Ÿåœ¨çŸ©é˜µH
         PremultiplyHouseholder(hessenbergMatrix, vector, i, i + 2, i - 1, rowsNumber - 1, 3, vVector);
 
-        // ĞĞ·¶Î§²»ĞèÒªÎª0 ÖÁ n - 1£¬ÒòÎªÁãµÄÍ¼°¸·¢ÉúÔÚ¾ØÕóH
+        // è¡ŒèŒƒå›´ä¸éœ€è¦ä¸º0 è‡³ n - 1ï¼Œå› ä¸ºé›¶çš„å›¾æ¡ˆå‘ç”Ÿåœ¨çŸ©é˜µH
         auto rMax = i + 3;
         if (rowsNumber <= rMax)
         {
@@ -504,12 +504,12 @@ void Mathematics::PolynomialRoots<Real>::FrancisQRStep(VariableMatrixType& hesse
         PostmultiplyHouseholder(hessenbergMatrix, vector, 0, rMax, i, i + 2, 3, vVector);
     }
 
-    // ¸²¸ÇH Ê¹ÓÃP(n-2)*H*P(n-2)^T.
+    // è¦†ç›–H ä½¿ç”¨P(n-2)*H*P(n-2)^T.
     uVector[0] = hessenbergMatrix(rowsNumber - 2, rowsNumber - 3);
     uVector[1] = hessenbergMatrix(rowsNumber - 1, rowsNumber - 3);
     vVector = GetHouseholderVector(2, uVector);
 
-    // ÁĞ·¶Î§²»ĞèÒªÎª0 ÖÁ n - 1£¬ÒòÎªÁãµÄÍ¼°¸·¢ÉúÔÚ¾ØÕóH
+    // åˆ—èŒƒå›´ä¸éœ€è¦ä¸º0 è‡³ n - 1ï¼Œå› ä¸ºé›¶çš„å›¾æ¡ˆå‘ç”Ÿåœ¨çŸ©é˜µH
     PremultiplyHouseholder(hessenbergMatrix, vector, rowsNumber - 2, rowsNumber - 1, rowsNumber - 3, rowsNumber - 1, 2, vVector);
     PostmultiplyHouseholder(hessenbergMatrix, vector, 0, rowsNumber - 1, rowsNumber - 2, rowsNumber - 1, 2, vVector);
 }
@@ -519,10 +519,10 @@ typename Mathematics::PolynomialRoots<Real>::Vector3Type Mathematics::Polynomial
 {
     Vector3Type vVector{};
 
-    // HouseholderÏòÁ¿V£º
-    // ¸ø¶¨Ò»¸öÏòÁ¿µÄU£¬¼ÆËãÊ¸Á¿VÏñÕâÑù
-    // Ê¹V[0] = 1 ºÍ (I - 2 * V * V^T / |V|^2) * U ÊÇ³ıµÚÒ»×é·Ö²¿·ÖÍâ¶¼ÊÇÁã¡£
-    // ¾ØÕóP = I - 2 * V * V^T /| V|^2 ÊÇÒ»¸öHouseholder±ä»»£¬Ò»¸ö·´Éä¾ØÕó¡£
+    // Householderå‘é‡Vï¼š
+    // ç»™å®šä¸€ä¸ªå‘é‡çš„Uï¼Œè®¡ç®—çŸ¢é‡Våƒè¿™æ ·
+    // ä½¿V[0] = 1 å’Œ (I - 2 * V * V^T / |V|^2) * U æ˜¯é™¤ç¬¬ä¸€ç»„åˆ†éƒ¨åˆ†å¤–éƒ½æ˜¯é›¶ã€‚
+    // çŸ©é˜µP = I - 2 * V * V^T /| V|^2 æ˜¯ä¸€ä¸ªHouseholderå˜æ¢ï¼Œä¸€ä¸ªåå°„çŸ©é˜µã€‚
 
     auto length = MathType::GetValue(0);
 
@@ -546,7 +546,7 @@ typename Mathematics::PolynomialRoots<Real>::Vector3Type Mathematics::Polynomial
     }
     else
     {
-        // uVectorÊÇÁãÏòÁ¿£¬ÈÎºÎÏòÁ¿¶¼¿ÉÒÔ
+        // uVectoræ˜¯é›¶å‘é‡ï¼Œä»»ä½•å‘é‡éƒ½å¯ä»¥
         vVector[0] = MathType::GetValue(1);
         for (int i = 1; i < size; ++i)
         {
@@ -560,9 +560,9 @@ typename Mathematics::PolynomialRoots<Real>::Vector3Type Mathematics::Polynomial
 template <typename Real>
 void Mathematics::PolynomialRoots<Real>::PremultiplyHouseholder(VariableMatrixType& matrix, VariableLengthVectorType& variableLengthVector, int rowMin, int rowMax, int columnMin, int columnMax, int vSize, const Vector3Type& vVector)
 {
-    // HouseholderÔ¤³Ë£º¸ø¶¨µÄ¾ØÕóAºÍm¡Á1Ê¸Á¿V²ÉÓÃV[0]= 1£¬
-    // ÁîSÊÇAµÄ×Ó¾ØÕómĞĞµÄrmin <= r <= m + rmin - 1ºÍÁĞµÄ×Ócmin <= c <= cmax¡£
-    // ÒÔP * S¸²¸ÇSÆäÖĞ P = I - 2 * V * V^T / |V|^2¡£
+    // Householderé¢„ä¹˜ï¼šç»™å®šçš„çŸ©é˜µAå’ŒmÃ—1çŸ¢é‡Vé‡‡ç”¨V[0]= 1ï¼Œ
+    // ä»¤Sæ˜¯Açš„å­çŸ©é˜µmè¡Œçš„rmin <= r <= m + rmin - 1å’Œåˆ—çš„å­cmin <= c <= cmaxã€‚
+    // ä»¥P * Sè¦†ç›–Så…¶ä¸­ P = I - 2 * V * V^T / |V|^2ã€‚
 
     const auto subRows = rowMax - rowMin + 1;
     const auto subColunms = columnMax - columnMin + 1;
@@ -603,9 +603,9 @@ void Mathematics::PolynomialRoots<Real>::PostmultiplyHouseholder(VariableMatrixT
                                                                  int vSize,
                                                                  const Vector3Type& vVector)
 {
-    // HouseholderÔ¤³Ë£º¸ø¶¨µÄ¾ØÕóAºÍm¡Á1Ê¸Á¿V²ÉÓÃV[0]= 1£¬
-    // ÁîSÊÇAµÄ×Ó¾ØÕómĞĞµÄrmin <= r <= m + rmin - 1ºÍÁĞµÄ×Ócmin <= c <= cmax¡£
-    // ÒÔP * S¸²¸ÇSÆäÖĞ P = I - 2 * V * V^T / |V|^2¡£
+    // Householderé¢„ä¹˜ï¼šç»™å®šçš„çŸ©é˜µAå’ŒmÃ—1çŸ¢é‡Vé‡‡ç”¨V[0]= 1ï¼Œ
+    // ä»¤Sæ˜¯Açš„å­çŸ©é˜µmè¡Œçš„rmin <= r <= m + rmin - 1å’Œåˆ—çš„å­cmin <= c <= cmaxã€‚
+    // ä»¥P * Sè¦†ç›–Så…¶ä¸­ P = I - 2 * V * V^T / |V|^2ã€‚
 
     const auto subRows = rowMax - rowMin + 1;
     const auto subColumns = columnMax - columnMin + 1;
@@ -643,7 +643,7 @@ Real Mathematics::PolynomialRoots<Real>::GetBound(Real constant, Real once, Real
 
     if (MathType::FAbs(thrice) <= epsilon)
     {
-        // ¶àÏîÊ½ÊÇ¶ş´Î¡£
+        // å¤šé¡¹å¼æ˜¯äºŒæ¬¡ã€‚
         return GetBound(constant, once, secondary);
     }
 
@@ -685,7 +685,7 @@ void Mathematics::PolynomialRoots<Real>::Balance3(VariableMatrixType& matrix, Re
             break;
         }
 
-        MATHEMATICS_ASSERTION_1(loop != balanceIterationMax - 1, "³¬¹ı×î´óµü´ú\n");
+        MATHEMATICS_ASSERTION_1(loop != balanceIterationMax - 1, "è¶…è¿‡æœ€å¤§è¿­ä»£\n");
     }
 }
 
@@ -758,13 +758,13 @@ Real Mathematics::PolynomialRoots<Real>::SpecialCubic(Real thrice, Real once, Re
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    // ½â thrice * r^3 + once * r = constant £¬ÆäÖĞthrice > 0ºÍonce > 0£¬
+    // è§£ thrice * r^3 + once * r = constant ï¼Œå…¶ä¸­thrice > 0å’Œonce > 0ï¼Œ
     //
-    // ÈÃ r = D * sinh(u) ÕâÀï D = sqrt(4 * once/(3 * thrice))
-    // sinh(3 * u) = 4 * [sinh(u)]^3 + 3 * sinh(u) = E ÕâÀï E = 4 * C / (A * D^3).
-    // sinh(3 * u) = E ÓĞ½â u = (1 / 3)*log(E + sqrt(E^2 + 1))
-    // Õâµ¼ÖÂ sinh(u) = ((E + sqrt(E^2 + 1))^{1 / 3} - (E + sqrt(E^2 + 1))^{-1 / 3}) / 2.
-    // Òò´Ë,  r = D*((E + sqrt(E^2 + 1))^{1 / 3} - (E + sqrt(E^2 + 1))^{-1 / 3}) / 2
+    // è®© r = D * sinh(u) è¿™é‡Œ D = sqrt(4 * once/(3 * thrice))
+    // sinh(3 * u) = 4 * [sinh(u)]^3 + 3 * sinh(u) = E è¿™é‡Œ E = 4 * C / (A * D^3).
+    // sinh(3 * u) = E æœ‰è§£ u = (1 / 3)*log(E + sqrt(E^2 + 1))
+    // è¿™å¯¼è‡´ sinh(u) = ((E + sqrt(E^2 + 1))^{1 / 3} - (E + sqrt(E^2 + 1))^{-1 / 3}) / 2.
+    // å› æ­¤,  r = D*((E + sqrt(E^2 + 1))^{1 / 3} - (E + sqrt(E^2 + 1))^{-1 / 3}) / 2
 
     const auto sqrt = MathType::Sqrt(MathType::GetValue(4) * once / (MathType::GetValue(3) * thrice));
     const auto value = MathType::GetValue(4) * constant / (thrice * sqrt * sqrt * sqrt);
@@ -781,21 +781,21 @@ bool Mathematics::PolynomialRoots<Real>::FindAlgebraic(Real constant, Real once,
 
     if (MathType::FAbs(quartic) <= epsilon)
     {
-        // ¶àÏîÊ½ÊÇÈı´ÎµÄ
+        // å¤šé¡¹å¼æ˜¯ä¸‰æ¬¡çš„
         return FindAlgebraic(constant, once, secondary, thrice);
     }
 
-    // Ê¹¶àÏîÊ½Ê×Ò», x^4 + thrice * x^3 + secondary * x^2 + once * x + constant.
+    // ä½¿å¤šé¡¹å¼é¦–ä¸€, x^4 + thrice * x^3 + secondary * x^2 + once * x + constant.
     constant /= quartic;
     once /= quartic;
     secondary /= quartic;
     thrice /= quartic;
 
-    // ¼õÖÁ½âÈı´Î¶àÏîÊ½ y^3 + newSecondary * y^2 + newOnce * y + newConstant = 0.
+    // å‡è‡³è§£ä¸‰æ¬¡å¤šé¡¹å¼ y^3 + newSecondary * y^2 + newOnce * y + newConstant = 0.
     const auto newConstant = -thrice * thrice * constant + MathType::GetValue(4) * secondary * constant - once * once;
     const auto newOnce = thrice * once - MathType::GetValue(4) * constant;
     const auto newSecondary = -secondary;
-    // ×ÜÊÇÖÁÉÙ²úÉúÒ»¸ö¸ù
+    // æ€»æ˜¯è‡³å°‘äº§ç”Ÿä¸€ä¸ªæ ¹
     if (!FindAlgebraic(newConstant, newOnce, newSecondary, MathType::GetValue(1)))
     {
         return false;
@@ -855,7 +855,7 @@ bool Mathematics::PolynomialRoots<Real>::FindAlgebraic(Real constant, Real once,
         auto t2 = thriceRoot * thriceRoot - MathType::GetValue(4) * constant;
         if (-epsilon <= t2)
         {
-            // È¡ÕûÎªÁã
+            // å–æ•´ä¸ºé›¶
             if (t2 < MathType::GetValue(0))
             {
                 t2 = MathType::GetValue(0);
@@ -892,17 +892,17 @@ bool Mathematics::PolynomialRoots<Real>::FindEigenvalues(Real constant, Real onc
 {
     if (MathType::FAbs(quartic) <= epsilon)
     {
-        // ¶àÏîÊ½ÊÇÈı´Î¡£
+        // å¤šé¡¹å¼æ˜¯ä¸‰æ¬¡ã€‚
         return FindAlgebraic(constant, once, secondary, thrice);
     }
 
-    // Ê¹¶àÏîÊ½Ê×Ò», x^4 + thrice * x^3 + secondary * x^2 + once * x + constant.
+    // ä½¿å¤šé¡¹å¼é¦–ä¸€, x^4 + thrice * x^3 + secondary * x^2 + once * x + constant.
     constant /= quartic;
     once /= quartic;
     secondary /= quartic;
     thrice /= quartic;
 
-    // ¹¹½¨4¡Á4µÄÍ¬°é¾ØÕó¡£³õÊ¼»¯ÎªÁã
+    // æ„å»º4Ã—4çš„åŒä¼´çŸ©é˜µã€‚åˆå§‹åŒ–ä¸ºé›¶
     VariableMatrixType matrix{ 4, 4 };
     matrix(1, 0) = MathType::GetValue(1);
     matrix(2, 1) = MathType::GetValue(1);
@@ -933,14 +933,14 @@ void Mathematics::PolynomialRoots<Real>::BalanceCompanion4(VariableMatrixType& m
 
     for (auto i = 0; i < balanceCompanionIterationMax; ++i)
     {
-        // Æ½ºâ ĞĞ/ÁĞ 0
+        // å¹³è¡¡ è¡Œ/åˆ— 0
         auto rowNorm = a03;
         auto columnNorm = a10;
         auto scale = MathType::Sqrt(columnNorm / rowNorm);
         a03 *= scale;
         a10 = a03;
 
-        // Æ½ºâ ĞĞ/ÁĞ 1
+        // å¹³è¡¡ è¡Œ/åˆ— 1
         rowNorm = (a13 <= a10 ? a10 : a13);
         columnNorm = a21;
         scale = MathType::Sqrt(columnNorm / rowNorm);
@@ -948,7 +948,7 @@ void Mathematics::PolynomialRoots<Real>::BalanceCompanion4(VariableMatrixType& m
         a13 *= scale;
         a21 /= scale;
 
-        // Æ½ºâ ĞĞ/ÁĞ 2
+        // å¹³è¡¡ è¡Œ/åˆ— 2
         rowNorm = (a21 >= a23 ? a21 : a23);
         columnNorm = a32;
         scale = MathType::Sqrt(columnNorm / rowNorm);
@@ -956,7 +956,7 @@ void Mathematics::PolynomialRoots<Real>::BalanceCompanion4(VariableMatrixType& m
         a23 *= scale;
         a32 /= scale;
 
-        // Æ½ºâ ĞĞ/ÁĞ 3
+        // å¹³è¡¡ è¡Œ/åˆ— 3
         rowNorm = (a33 <= a32 ? a32 : a33);
         columnNorm = (a13 <= a03 ? a03 : a13);
         if (columnNorm < a23)
@@ -978,7 +978,7 @@ void Mathematics::PolynomialRoots<Real>::BalanceCompanion4(VariableMatrixType& m
             break;
         }
 
-        MATHEMATICS_ASSERTION_1(i != balanceCompanionIterationMax - 1, "³¬¹ı×î´óµü´ú\n");
+        MATHEMATICS_ASSERTION_1(i != balanceCompanionIterationMax - 1, "è¶…è¿‡æœ€å¤§è¿­ä»£\n");
     }
 
     matrix(1, 0) = (MathType::GetValue(0) <= matrix(1, 0) ? a10 : -a10);
@@ -993,7 +993,7 @@ void Mathematics::PolynomialRoots<Real>::BalanceCompanion4(VariableMatrixType& m
 template <typename Real>
 bool Mathematics::PolynomialRoots<Real>::IsBalancedCompanion4(Real a10, Real a21, Real a32, Real a03, Real a13, Real a23, Real a33, Real tolerance) noexcept
 {
-    // ĞĞ/ÁĞ 0
+    // è¡Œ/åˆ— 0
     auto rowNorm = a03;
     auto columnNorm = a10;
     auto test = MathType::FAbs(MathType::GetValue(1) - columnNorm / rowNorm);
@@ -1002,7 +1002,7 @@ bool Mathematics::PolynomialRoots<Real>::IsBalancedCompanion4(Real a10, Real a21
         return false;
     }
 
-    // ĞĞ/ÁĞ 1
+    // è¡Œ/åˆ— 1
     rowNorm = (a13 <= a10 ? a10 : a13);
     columnNorm = a21;
     test = MathType::FAbs(MathType::GetValue(1) - columnNorm / rowNorm);
@@ -1011,7 +1011,7 @@ bool Mathematics::PolynomialRoots<Real>::IsBalancedCompanion4(Real a10, Real a21
         return false;
     }
 
-    // ĞĞ/ÁĞ 2
+    // è¡Œ/åˆ— 2
     rowNorm = (a23 <= a21 ? a21 : a23);
     columnNorm = a32;
     test = MathType::FAbs(MathType::GetValue(1) - columnNorm / rowNorm);
@@ -1020,7 +1020,7 @@ bool Mathematics::PolynomialRoots<Real>::IsBalancedCompanion4(Real a10, Real a21
         return false;
     }
 
-    // ĞĞ/ÁĞ 3
+    // è¡Œ/åˆ— 3
     rowNorm = (a33 <= a32 ? a32 : a33);
     columnNorm = (a13 <= a03 ? a03 : a13);
     if (columnNorm < a23)
@@ -1047,8 +1047,8 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrixType& matrix
 
         if (MathType::FAbs(matrix(1, 0)) <= rhs)
         {
-            // matrix(0,0)ÊÇÒ»¸ö¸ù£¬¼õÉÙ3¡Á3×Ó¾ØÕó
-            // ±ÜÃâ¿½±´£¬²¢Í¨¹ıĞĞ/ÁĞÆ«ÒÆÁ¿µÄFrancisQR·½·¨¡£
+            // matrix(0,0)æ˜¯ä¸€ä¸ªæ ¹ï¼Œå‡å°‘3Ã—3å­çŸ©é˜µ
+            // é¿å…æ‹·è´ï¼Œå¹¶é€šè¿‡è¡Œ/åˆ—åç§»é‡çš„FrancisQRæ–¹æ³•ã€‚
             VariableMatrixType matrixMS{ 3, 3 };
 
             matrixMS(0, 0) = matrix(1, 1);
@@ -1073,7 +1073,7 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrixType& matrix
 
         if (MathType::FAbs(matrix(2, 1)) <= rhs)
         {
-            // ¸Ã¾ØÕó±»·Ö½â³ÉÁ½¸ö2¡Á2¿é¡£½âÕâĞ©¿éµÄ¶ş´Î·½³ÌÊ½¡£
+            // è¯¥çŸ©é˜µè¢«åˆ†è§£æˆä¸¤ä¸ª2Ã—2å—ã€‚è§£è¿™äº›å—çš„äºŒæ¬¡æ–¹ç¨‹å¼ã€‚
             auto trace = matrix(0, 0) + matrix(1, 1);
             auto det = matrix(0, 0) * matrix(1, 1) - matrix(0, 1) * matrix(1, 0);
             if (!FindAlgebraic(det, -trace, MathType::GetValue(1)))
@@ -1106,8 +1106,8 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrixType& matrix
 
         if (MathType::FAbs(matrix(3, 2)) <= rhs)
         {
-            // matrix(3,3)ÊÇÒ»¸ö¸ù£¬¼õÉÙ3¡Á3×Ó¾ØÕó
-            // ±ÜÃâ¿½±´£¬²¢Í¨¹ıĞĞ/ÁĞÆ«ÒÆÁ¿µÄFrancisQR·½·¨¡£
+            // matrix(3,3)æ˜¯ä¸€ä¸ªæ ¹ï¼Œå‡å°‘3Ã—3å­çŸ©é˜µ
+            // é¿å…æ‹·è´ï¼Œå¹¶é€šè¿‡è¡Œ/åˆ—åç§»é‡çš„FrancisQRæ–¹æ³•ã€‚
             VariableMatrixType matrixMS{ 3, 3 };
 
             matrixMS(0, 0) = matrix(0, 0);
@@ -1132,12 +1132,12 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrixType& matrix
         FrancisQRStep(matrix, vector);
     }
 
-    // Èç¹û³¬¹ı×î´óµü´ú´ÎÊı£¬ÔõÃ´°ì£¿
-    // Ò²ĞíÒ»¸öËæ»úÈÅ¶¯¡°kick¡±ÏµÍ³ÖĞµÄÒ»¸öÎ»¿ÉÄÜ»á×àĞ§£¿
+    // å¦‚æœè¶…è¿‡æœ€å¤§è¿­ä»£æ¬¡æ•°ï¼Œæ€ä¹ˆåŠï¼Ÿ
+    // ä¹Ÿè®¸ä¸€ä¸ªéšæœºæ‰°åŠ¨â€œkickâ€ç³»ç»Ÿä¸­çš„ä¸€ä¸ªä½å¯èƒ½ä¼šå¥æ•ˆï¼Ÿ
 
-    MATHEMATICS_ASSERTION_4(false, "³¬³ö×î´óµü´ú\n");
+    MATHEMATICS_ASSERTION_4(false, "è¶…å‡ºæœ€å¤§è¿­ä»£\n");
 
-    // ÏÖÔÚ£¬·ÖÀë×îĞ¡´Î¶Ô½ÇÏî¾ØÕó¡£
+    // ç°åœ¨ï¼Œåˆ†ç¦»æœ€å°æ¬¡å¯¹è§’é¡¹çŸ©é˜µã€‚
     auto i = 0;
     auto minValue = MathType::FAbs(matrix(1, 0));
     auto absValue = MathType::FAbs(matrix(2, 1));
@@ -1155,8 +1155,8 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrixType& matrix
 
     if (i == 0)
     {
-        // matrix(0,0)ÊÇÒ»¸ö¸ù£¬¼õÉÙ3¡Á3×Ó¾ØÕó
-        // ±ÜÃâ¿½±´£¬²¢Í¨¹ıĞĞ/ÁĞÆ«ÒÆÁ¿µÄFrancisQR·½·¨¡£
+        // matrix(0,0)æ˜¯ä¸€ä¸ªæ ¹ï¼Œå‡å°‘3Ã—3å­çŸ©é˜µ
+        // é¿å…æ‹·è´ï¼Œå¹¶é€šè¿‡è¡Œ/åˆ—åç§»é‡çš„FrancisQRæ–¹æ³•ã€‚
         VariableMatrixType matrixMS{ 3, 3 };
 
         matrixMS(0, 0) = matrix(1, 1);
@@ -1176,7 +1176,7 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrixType& matrix
     }
     else if (i == 1)
     {
-        // ¸Ã¾ØÕó±»·Ö½â³ÉÁ½¸ö2¡Á2¿é¡£½âÕâĞ©¿éµÄ¶ş´Î·½³ÌÊ½¡£
+        // è¯¥çŸ©é˜µè¢«åˆ†è§£æˆä¸¤ä¸ª2Ã—2å—ã€‚è§£è¿™äº›å—çš„äºŒæ¬¡æ–¹ç¨‹å¼ã€‚
         auto trace = matrix(0, 0) + matrix(1, 1);
         auto det = matrix(0, 0) * matrix(1, 1) - matrix(0, 1) * matrix(1, 0);
         if (!FindAlgebraic(det, -trace, MathType::GetValue(1)))
@@ -1203,8 +1203,8 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrixType& matrix
     }
     else  // i == 2
     {
-        // matrix(3,3)ÊÇÒ»¸ö¸ù£¬¼õÉÙ3¡Á3×Ó¾ØÕó
-        // ±ÜÃâ¿½±´£¬²¢Í¨¹ıĞĞ/ÁĞÆ«ÒÆÁ¿µÄFrancisQR·½·¨¡£
+        // matrix(3,3)æ˜¯ä¸€ä¸ªæ ¹ï¼Œå‡å°‘3Ã—3å­çŸ©é˜µ
+        // é¿å…æ‹·è´ï¼Œå¹¶é€šè¿‡è¡Œ/åˆ—åç§»é‡çš„FrancisQRæ–¹æ³•ã€‚
         VariableMatrixType matrixMS{ 3, 3 };
 
         matrixMS(0, 0) = matrix(0, 0);
@@ -1233,7 +1233,7 @@ Real Mathematics::PolynomialRoots<Real>::GetBound(Real constant, Real once, Real
 
     if (MathType::FAbs(quartic) <= epsilon)
     {
-        // ¶àÏîÊ½ÊÇÈı´ÎµÄ
+        // å¤šé¡¹å¼æ˜¯ä¸‰æ¬¡çš„
         return GetBound(constant, once, secondary, thrice);
     }
 
@@ -1283,7 +1283,7 @@ Real Mathematics::PolynomialRoots<Real>::GetBound(const PolynomialType& polynomi
     const auto degree = copyPolynomial.GetDegree();
     if (degree < 1)
     {
-        // ¶àÏîÊ½ÊÇ³£Êı£¬·µ»ØÎŞĞ§±ß½ç¡£
+        // å¤šé¡¹å¼æ˜¯å¸¸æ•°ï¼Œè¿”å›æ— æ•ˆè¾¹ç•Œã€‚
         return MathType::GetValue(-1);
     }
 
@@ -1306,7 +1306,7 @@ bool Mathematics::PolynomialRoots<Real>::FindBisection(const PolynomialType& pol
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    // Èç¹ûĞèÒªÖØĞÂ·ÖÅäÊı×é¡£
+    // å¦‚æœéœ€è¦é‡æ–°åˆ†é…æ•°ç»„ã€‚
     if (maxRoot < polynomial.GetDegree())
     {
         maxRoot = polynomial.GetDegree();
@@ -1329,7 +1329,7 @@ bool Mathematics::PolynomialRoots<Real>::FindBisection(const PolynomialType& pol
         return false;
     }
 
-    // »ñÈ¡µ¼Êı¶àÏîÊ½µÄ¸ù¡£
+    // è·å–å¯¼æ•°å¤šé¡¹å¼çš„æ ¹ã€‚
     auto derivative = polynomial.GetDerivative();
     if (!FindBisection(derivative, xMin, xMax, digits))
     {
@@ -1342,13 +1342,13 @@ bool Mathematics::PolynomialRoots<Real>::FindBisection(const PolynomialType& pol
 
     if (0 < count)
     {
-        // ²éÕÒ¸ùÔÚ[xmin,root[0]].
+        // æŸ¥æ‰¾æ ¹åœ¨[xmin,root[0]].
         if (Bisection(polynomial, xMin, root.at(0), digits, bisection))
         {
             newRoot.at(newCount++) = bisection;
         }
 
-        // ²éÕÒ¸ùÔÚ[root[i],root[i + 1]] ¶Ô 0 <= i <= count - 2.
+        // æŸ¥æ‰¾æ ¹åœ¨[root[i],root[i + 1]] å¯¹ 0 <= i <= count - 2.
         for (auto i = 0; i <= count - 2; ++i)
         {
             const auto nextRootIndex = i + 1;
@@ -1358,7 +1358,7 @@ bool Mathematics::PolynomialRoots<Real>::FindBisection(const PolynomialType& pol
             }
         }
 
-        // ²éÕÒ¸ùÔÚ [root[count - 1],xmax].
+        // æŸ¥æ‰¾æ ¹åœ¨ [root[count - 1],xmax].
         const auto rootIndex = count - 1;
         if (Bisection(polynomial, root.at(rootIndex), xMax, digits, bisection))
         {
@@ -1367,14 +1367,14 @@ bool Mathematics::PolynomialRoots<Real>::FindBisection(const PolynomialType& pol
     }
     else
     {
-        // ¶àÏîÊ½ÊÇÔÚ[xmin,xmax]µ¥µ÷£¬×î¶àÓĞÒ»¸ö¸ù¡£
+        // å¤šé¡¹å¼æ˜¯åœ¨[xmin,xmax]å•è°ƒï¼Œæœ€å¤šæœ‰ä¸€ä¸ªæ ¹ã€‚
         if (Bisection(polynomial, xMin, xMax, digits, bisection))
         {
             newRoot.at(newCount++) = bisection;
         }
     }
 
-    // ¸´ÖÆµ½¾É»º³åÇø¡£
+    // å¤åˆ¶åˆ°æ—§ç¼“å†²åŒºã€‚
     if (0 < newCount)
     {
         count = 1;
@@ -1420,7 +1420,7 @@ bool Mathematics::PolynomialRoots<Real>::Bisection(const PolynomialType& polynom
         return false;
     }
 
-    // È·¶¨µü´ú´ÎÊıÀ´»ñµÃ'digits'µÄ×¼È·ĞÔ..
+    // ç¡®å®šè¿­ä»£æ¬¡æ•°æ¥è·å¾—'digits'çš„å‡†ç¡®æ€§..
     auto differenceLog = MathType::Log(xMax - xMin);
     auto digitsProductLN10 = static_cast<Real>(digits) * MathType::GetLN10();
     auto arg = (differenceLog + digitsProductLN10) / MathType::GetLN2();
@@ -1453,7 +1453,7 @@ bool Mathematics::PolynomialRoots<Real>::Bisection(const PolynomialType& polynom
 template <typename Real>
 bool Mathematics::PolynomialRoots<Real>::AllRealPartsNegative(const PolynomialType& polynomial)
 {
-    // Ê¹ÓÃÏµÊıµÄÒ»¸ö¸±±¾£¬ÒÔºóµ÷ÓÃ½«¸Ä±ä¸±±¾¡£
+    // ä½¿ç”¨ç³»æ•°çš„ä¸€ä¸ªå‰¯æœ¬ï¼Œä»¥åè°ƒç”¨å°†æ”¹å˜å‰¯æœ¬ã€‚
     const auto degree = polynomial.GetDegree();
     Container coeff{};
     for (auto i = 0; i < degree + 1; ++i)
@@ -1461,7 +1461,7 @@ bool Mathematics::PolynomialRoots<Real>::AllRealPartsNegative(const PolynomialTy
         coeff.emplace_back(polynomial[i]);
     }
 
-    // Ê¹¶àÏîÊ½Ê×Ò»¡£
+    // ä½¿å¤šé¡¹å¼é¦–ä¸€ã€‚
 
     if (epsilon < MathType::FAbs(coeff.at(degree) - MathType::GetValue(1)))
     {
@@ -1479,7 +1479,7 @@ bool Mathematics::PolynomialRoots<Real>::AllRealPartsNegative(const PolynomialTy
 template <typename Real>
 bool Mathematics::PolynomialRoots<Real>::AllRealPartsPositive(const PolynomialType& polynomial)
 {
-    // Ê¹ÓÃÏµÊıµÄÒ»¸ö¸±±¾£¬ÒÔºóµ÷ÓÃ½«¸Ä±ä¸±±¾¡£
+    // ä½¿ç”¨ç³»æ•°çš„ä¸€ä¸ªå‰¯æœ¬ï¼Œä»¥åè°ƒç”¨å°†æ”¹å˜å‰¯æœ¬ã€‚
     const auto degree = polynomial.GetDegree();
     Container coeff{};
     for (auto i = 0; i < degree + 1; ++i)
@@ -1487,7 +1487,7 @@ bool Mathematics::PolynomialRoots<Real>::AllRealPartsPositive(const PolynomialTy
         coeff.emplace_back(polynomial[i]);
     }
 
-    // Ê¹¶àÏîÊ½Ê×Ò»¡£
+    // ä½¿å¤šé¡¹å¼é¦–ä¸€ã€‚
     if (epsilon < MathType::FAbs(coeff.at(degree) - MathType::GetValue(1)))
     {
         for (auto i = 0; i < degree; ++i)
@@ -1498,7 +1498,7 @@ bool Mathematics::PolynomialRoots<Real>::AllRealPartsPositive(const PolynomialTy
         coeff.at(degree) = MathType::GetValue(1);
     }
 
-    // ·´Éä z -> -z.
+    // åå°„ z -> -z.
     auto sign = -1;
     for (auto i = degree - 1; 0 <= i; --i)
     {
@@ -1512,7 +1512,7 @@ bool Mathematics::PolynomialRoots<Real>::AllRealPartsPositive(const PolynomialTy
 template <typename Real>
 bool Mathematics::PolynomialRoots<Real>::AllRealPartsNegative(int degree, Container& coeff)
 {
-    MATHEMATICS_ASSERTION_1(MathType::FAbs(coeff.at(degree) - MathType::GetValue(1)) <= epsilon, "¶àÏîÊ½Ê×1\n");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(coeff.at(degree) - MathType::GetValue(1)) <= epsilon, "å¤šé¡¹å¼é¦–1\n");
 
     const auto degreeMinus1 = degree - 1;
     if (coeff.at(degreeMinus1) <= MathType::GetValue(0))
@@ -1577,19 +1577,19 @@ int Mathematics::PolynomialRoots<Real>::GetRootCount(const PolynomialType& polyn
 
     if (degree == 0)
     {
-        // ¶àÏîÊ½ÊÇÔÚÇø¼äºã¶¨¡£
+        // å¤šé¡¹å¼æ˜¯åœ¨åŒºé—´æ’å®šã€‚
         if (MathType::FAbs(coeff.at(0)) <= epsilon)
         {
             return 0;
         }
         else
         {
-            // ±íÊ¾¡°ÎŞÇî´ó¡±
+            // è¡¨ç¤ºâ€œæ— ç©·å¤§â€
             return -1;
         }
     }
 
-    // Éú³ÉSturmĞòÁĞ¡£
+    // ç”ŸæˆSturmåºåˆ—ã€‚
     std::vector<PolynomialType> sturm{ PolynomialType{ polynomial }, polynomial.GetDerivative() };
     auto beginPolynomialIndex = 0;
     auto endPolynomialIndex = 1;
@@ -1610,7 +1610,7 @@ int Mathematics::PolynomialRoots<Real>::GetRootCount(const PolynomialType& polyn
 
     const auto numSturm = boost::numeric_cast<int>(sturm.size());
 
-    // ¼ÆÊıÔÚbeginµÄ·ûºÅ¸Ä±ä¡£
+    // è®¡æ•°åœ¨beginçš„ç¬¦å·æ”¹å˜ã€‚
     auto signChanges0 = 0;
     if (MathType::FAbs(begin + MathType::maxReal) <= epsilon)
     {
@@ -1685,7 +1685,7 @@ int Mathematics::PolynomialRoots<Real>::GetRootCount(const PolynomialType& polyn
         }
     }
 
-    // ¼ÆÊıÔÚendµÄ·ûºÅ¸Ä±ä¡£
+    // è®¡æ•°åœ¨endçš„ç¬¦å·æ”¹å˜ã€‚
     auto signChanges1 = 0;
     if (MathType::FAbs(end - MathType::maxReal) <= epsilon)
     {
@@ -1741,8 +1741,8 @@ int Mathematics::PolynomialRoots<Real>::GetRootCount(const PolynomialType& polyn
         return signChanges0 - signChanges1;
     }
 
-    // ÀíÂÛÉÏÎÒÃÇ²»Ó¦¸Ãµ½´ïÕâÀï¡£
-    MATHEMATICS_ASSERTION_1(false, "ÒâÍâµÄÇé¿ö\n");
+    // ç†è®ºä¸Šæˆ‘ä»¬ä¸åº”è¯¥åˆ°è¾¾è¿™é‡Œã€‚
+    MATHEMATICS_ASSERTION_1(false, "æ„å¤–çš„æƒ…å†µ\n");
 
     return 0;
 }

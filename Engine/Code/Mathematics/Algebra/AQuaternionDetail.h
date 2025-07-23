@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 10:16)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 10:16)
 
 #ifndef MATHEMATICS_ALGEBRA_A_QUATERNION_DETAIL_H
 #define MATHEMATICS_ALGEBRA_A_QUATERNION_DETAIL_H
@@ -46,7 +46,7 @@ bool Mathematics::operator<(const AQuaternion<Real>& lhs, const AQuaternion<Real
 template <typename Real>
 Mathematics::AQuaternion<Real> Mathematics::operator*(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs) noexcept
 {
-    // ×¢Òâ:  ³Ë·¨Ò»°ã²»ÊÇ¿É½»»»µÄ£¬ËùÒÔÔÚ´ó¶àÊıÇé¿öÏÂ£¬
+    // æ³¨æ„:  ä¹˜æ³•ä¸€èˆ¬ä¸æ˜¯å¯äº¤æ¢çš„ï¼Œæ‰€ä»¥åœ¨å¤§å¤šæ•°æƒ…å†µä¸‹ï¼Œ
     // p * q != q * p
 
     return AQuaternion<Real>{ lhs.GetW() * rhs.GetW() - lhs.GetX() * rhs.GetX() - lhs.GetY() * rhs.GetY() - lhs.GetZ() * rhs.GetZ(),

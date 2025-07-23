@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 11:06)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 11:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -33,7 +33,7 @@ void CoreTools::TimeReportOutput::PrintCurrentTime()
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     const auto nowTime = boost::posix_time::second_clock::local_time();
-    const auto formattingTime = timeDescribe + "Ê±¼ä£º" + to_simple_string(nowTime);
+    const auto formattingTime = timeDescribe + "æ—¶é—´ï¼š" + to_simple_string(nowTime);
 
     std::stringstream ss{};
 
@@ -65,7 +65,7 @@ void CoreTools::TimeReportOutput::PrintCostTime(const CpuTimer& cpuTime)
         logLevel = LogLevel::Warn;
     }
 
-    const auto costTime = timeDescribe + "Ê±¼ä£º\n" + cpuTime.format();
+    const auto costTime = timeDescribe + "æ—¶é—´ï¼š\n" + cpuTime.format();
 
     LOG_ASYNCHRONOUS_SINGLETON.Registered(GetStream(), costTime, logLevel);
 }

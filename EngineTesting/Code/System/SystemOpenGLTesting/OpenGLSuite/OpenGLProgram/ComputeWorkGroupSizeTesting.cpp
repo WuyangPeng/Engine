@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/13 16:45)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/13 16:45)
 
 #include "ComputeWorkGroupSizeTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -51,7 +51,7 @@ void System::ComputeWorkGroupSizeTesting::SetGLDispatchComputeTest(OpenGLUnsigne
 void System::ComputeWorkGroupSizeTesting::ComputeWorkGroupSizeTest()
 {
     const auto programHandle = CreateGLProgram();
-    ASSERT_TRUE_FAILURE_THROW(IsGLProgram(programHandle), "´´½¨GL ProgramÊ§°Ü¡£");
+    ASSERT_TRUE_FAILURE_THROW(IsGLProgram(programHandle), "åˆ›å»ºGL Programå¤±è´¥ã€‚");
 
     const auto shaderHandle = CreateGLShader(ShaderType::Compute);
 
@@ -73,7 +73,7 @@ void System::ComputeWorkGroupSizeTesting::DoCreateGLShaderTest(OpenGLUnsignedInt
     CompileGLShader(shaderHandle);
 
     const auto status = GetGLShader(shaderHandle, ShaderStatus::Compile);
-    ASSERT_TRUE_FAILURE_THROW(status, "×ÅÉ«Æ÷±àÒë´íÎó¡£");
+    ASSERT_TRUE_FAILURE_THROW(status, "ç€è‰²å™¨ç¼–è¯‘é”™è¯¯ã€‚");
 
     AttachGLShader(programHandle, shaderHandle);
 

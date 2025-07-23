@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.2 (2023/07/31 15:25)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.2 (2023/07/31 15:25)
 
 #ifndef EFFECT_EDITOR_MACRO_USER_MACRO_H
 #define EFFECT_EDITOR_MACRO_USER_MACRO_H
@@ -21,7 +21,7 @@
 
 #define CLOSE_EFFECT_EDITOR_MAX (((EFFECT_EDITOR_ClOSE_END) << 1) - 1)
 
-// ±àÒë²âÊÔ£¨Ä¬ÈÏÎª0£¬×î´óÖµÎª0x01£©
+// ç¼–è¯‘æµ‹è¯•ï¼ˆé»˜è®¤ä¸º0ï¼Œæœ€å¤§å€¼ä¸º0x01ï¼‰
 #define COMPILE_EFFECT_EDITOR_CLOSE 0x00
 
 static_assert(0 <= COMPILE_EFFECT_EDITOR_CLOSE, "COMPILE_EFFECT_EDITOR_CLOSE Must be greater than or equal 0.");

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/13 14:29)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/13 14:29)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_RENDERING_MANAGER_INTERFACE_H
 #define FRAMEWORK_MIDDLE_LAYER_RENDERING_MANAGER_INTERFACE_H
@@ -21,7 +21,7 @@
 
 FRAMEWORK_NON_COPY_EXPORT_IMPL(RenderingManagerImpl);
 
-// äÖÈ¾ÖĞ¼ä²ã½Ó¿ÚÀà¡£
+// æ¸²æŸ“ä¸­é—´å±‚æ¥å£ç±»ã€‚
 namespace Framework
 {
     class FRAMEWORK_DEFAULT_DECLARE RenderingManagerInterface : public EngineMiddleLayerInterface
@@ -49,13 +49,13 @@ namespace Framework
         void PreIdle() override;
         NODISCARD bool Idle(int64_t timeDelta) override;
 
-        // äÖÈ¾²ã²»´¦Àí°´¼üÏûÏ¢
+        // æ¸²æŸ“å±‚ä¸å¤„ç†æŒ‰é”®æ¶ˆæ¯
         bool KeyUp(int key, const WindowPoint& point) final;
         bool KeyDown(int key, const WindowPoint& point) final;
         bool SpecialKeyUp(int key, const WindowPoint& point) final;
         bool SpecialKeyDown(int key, const WindowPoint& point) final;
 
-        // äÖÈ¾²ã²»´¦ÀíÊó±êÏûÏ¢
+        // æ¸²æŸ“å±‚ä¸å¤„ç†é¼ æ ‡æ¶ˆæ¯
         bool PassiveMotion(const WindowPoint& point) final;
         bool Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
         bool MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;

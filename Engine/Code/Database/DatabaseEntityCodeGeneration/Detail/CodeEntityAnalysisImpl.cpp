@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 13:51)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 13:51)
 
 #include "Database/DatabaseExport.h"
 
@@ -71,7 +71,7 @@ void Database::CodeEntityAnalysisImpl::AnalysisMain()
         }
         catch (const CoreTools::Error& error)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Error, Database, SYSTEM_TEXT("Êı¾İ¿âÊµÌåÀà£º"), tree.first, SYSTEM_TEXT("ÅäÖÃÖµ´íÎó£º"), error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
+            LOG_SINGLETON_ENGINE_APPENDER(Error, Database, SYSTEM_TEXT("æ•°æ®åº“å®ä½“ç±»ï¼š"), tree.first, SYSTEM_TEXT("é…ç½®å€¼é”™è¯¯ï¼š"), error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
 }

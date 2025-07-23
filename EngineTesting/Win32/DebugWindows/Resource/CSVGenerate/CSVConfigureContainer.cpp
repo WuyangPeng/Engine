@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #include "CSVConfigureContainer.h"
 
@@ -88,35 +88,35 @@ void CSVConfigure::CSVConfigureContainer::Verify() const
 {
     if (chapterContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("chapter±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("chapterè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (equipContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("equip±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("equipè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (heroContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("hero±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("heroè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (sceneContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("scene±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("sceneè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (skillContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("skill±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("skillè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
     if (systemConstantContainer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("systemConstant±í²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("systemConstantè¡¨ä¸å­˜åœ¨ã€‚"s))
     }
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("CSVConfigure½áÊøÔØÈë¡­¡­"));
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("CSVConfigureç»“æŸè½½å…¥â€¦â€¦"));
 }
 
 #ifdef OPEN_CLASS_INVARIANT

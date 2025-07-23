@@ -1,38 +1,38 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/23 21:10)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/23 21:10)
 
 #ifndef SYSTEM_HELPER_SELECT_STDLIB_CONFIG_H
 #define SYSTEM_HELPER_SELECT_STDLIB_CONFIG_H
 
-/// ¶¨ÒåºêTCRE_CPP_LIB_VERSION±íÊ¾±ê×¼¿â°æ±¾£¬¶¨ÒåTCRE_SYSTEM_STD_LIB±íÊ¾±ê×¼¿âÃû³Æ¡£
+/// å®šä¹‰å®TCRE_CPP_LIB_VERSIONè¡¨ç¤ºæ ‡å‡†åº“ç‰ˆæœ¬ï¼Œå®šä¹‰TCRE_SYSTEM_STD_LIBè¡¨ç¤ºæ ‡å‡†åº“åç§°ã€‚
 
 #include <cstddef>
 
 #if defined(__SGI_STL_PORT) || defined(_STLPORT_VERSION)
 
-    /// Õâ¸ö±ØÐë·ÅÔÚµÚÒ»¸ö£¬
-    /// ·ñÔòÓÉÓÚSTLPortÍ¨³£Î»ÓÚÒ»Ð©ÆäËû¿âµÄ¶¥²¿£¬
-    /// ÎÒÃÇ¿ÉÄÜ×îÖÕ¼ì²âµ½µÚÒ»¸ö¶ø²»ÊÇSTLPort¡£
+    /// è¿™ä¸ªå¿…é¡»æ”¾åœ¨ç¬¬ä¸€ä¸ªï¼Œ
+    /// å¦åˆ™ç”±äºŽSTLPorté€šå¸¸ä½äºŽä¸€äº›å…¶ä»–åº“çš„é¡¶éƒ¨ï¼Œ
+    /// æˆ‘ä»¬å¯èƒ½æœ€ç»ˆæ£€æµ‹åˆ°ç¬¬ä¸€ä¸ªè€Œä¸æ˜¯STLPortã€‚
     #define TCRE_STDLIB_CONFIG "StdLib/STLPort.h"
 
 #else  // !defined(__SGI_STL_PORT) && !defined(_STLPORT_VERSION)
 
-    /// Èç¹ûÎÒÃÇµÄstd lib²»ÊÇÄ³¸ö°æ±¾µÄSTLPort£¬
-    /// ²¢ÇÒÃ»ÓÐ±»¼ì²âµ½£¬
-    /// ÄÇÃ´°üº¬<utility>£¬
-    /// ÒòÎªËüÊÇ°üº¬ÕæÕýµÄC++ stdµÄ×îÐ¡µÄÍ·ÎÄ¼þ¡£
+    /// å¦‚æžœæˆ‘ä»¬çš„std libä¸æ˜¯æŸä¸ªç‰ˆæœ¬çš„STLPortï¼Œ
+    /// å¹¶ä¸”æ²¡æœ‰è¢«æ£€æµ‹åˆ°ï¼Œ
+    /// é‚£ä¹ˆåŒ…å«<utility>ï¼Œ
+    /// å› ä¸ºå®ƒæ˜¯åŒ…å«çœŸæ­£çš„C++ stdçš„æœ€å°çš„å¤´æ–‡ä»¶ã€‚
 
-    /// Ò»Ð©std¿â²»°üº¬ËûÃÇµÄC++Ïà¹ØµÄºêÔÚ<cstddef>£¬
-    /// ËùÒÔÕâ¸ö¶îÍâµÄ°üº¬È·±£ÎÒÃÇµÃµ½ÕâÐ©¶¨Òå¡£
-    /// ×¢Òâ£º²»ÒªÒÀÀµÓÚ°üº¬Õâ¸öÍ·ÎÄ¼þ£¬
-    /// ÒòÎªÓÃ»§¿ÉÒÔ¶ÌÂ·Õâ¸ö#include£¬
-    /// Èç¹ûËûÃÇÖªµÀËûÃÇÕýÔÚÊ¹ÓÃÄÄ¸östd¿â¡£
+    /// ä¸€äº›stdåº“ä¸åŒ…å«ä»–ä»¬çš„C++ç›¸å…³çš„å®åœ¨<cstddef>ï¼Œ
+    /// æ‰€ä»¥è¿™ä¸ªé¢å¤–çš„åŒ…å«ç¡®ä¿æˆ‘ä»¬å¾—åˆ°è¿™äº›å®šä¹‰ã€‚
+    /// æ³¨æ„ï¼šä¸è¦ä¾èµ–äºŽåŒ…å«è¿™ä¸ªå¤´æ–‡ä»¶ï¼Œ
+    /// å› ä¸ºç”¨æˆ·å¯ä»¥çŸ­è·¯è¿™ä¸ª#includeï¼Œ
+    /// å¦‚æžœä»–ä»¬çŸ¥é“ä»–ä»¬æ­£åœ¨ä½¿ç”¨å“ªä¸ªstdåº“ã€‚
 
     #if !defined(__LIBCOMO__) &&          \
         !defined(__STD_RWCOMPILER_H__) && \
@@ -58,7 +58,7 @@
 
     #elif defined(__STD_RWCOMPILER_H__) || defined(_RWSTD_VER)
 
-        /// Rogue Wave¿â
+        /// Rogue Waveåº“
         #define TCRE_STDLIB_CONFIG "StdLib/RogueWave.h"
 
     #elif defined(_LIBCPP_VERSION)
@@ -73,12 +73,12 @@
 
     #elif defined(__STL_CONFIG_H)
 
-        /// Í¨ÓÃ SGI STL
+        /// é€šç”¨ SGI STL
         #define TCRE_STDLIB_CONFIG "StdLib/Sgi.h"
 
     #elif defined(__MSL_CPP__)
 
-        /// MSL ±ê×¼¿â
+        /// MSL æ ‡å‡†åº“
         #define TCRE_STDLIB_CONFIG "StdLib/Msl.h"
 
     #elif defined(__IBMCPP__) && defined(__COMPILER_VER__) && defined(__MVS__)
@@ -88,23 +88,23 @@
 
     #elif defined(__IBMCPP__)
 
-        /// ²ÉÓÃÄ¬ÈÏµÄ VaCpp std lib
+        /// é‡‡ç”¨é»˜è®¤çš„ VaCpp std lib
         #define TCRE_STDLIB_CONFIG "StdLib/VaCpp.hpp"
 
     #elif defined(MSIPL_COMPILE_H)
 
-        /// Modena C++ ±ê×¼¿â
+        /// Modena C++ æ ‡å‡†åº“
         #define TCRE_STDLIB_CONFIG "StdLib/Modena.h"
 
     #elif (defined(_YVALS) && !defined(__IBMCPP__)) || defined(_CPPLIB_VER)
 
-        /// Dinkumware ¿â£¨Õâ±ØÐë³öÏÖÔÚÈÎºÎ¿ÉÄÜµÄÌæ»»¿âÖ®ºó£©
+        /// Dinkumware åº“ï¼ˆè¿™å¿…é¡»å‡ºçŽ°åœ¨ä»»ä½•å¯èƒ½çš„æ›¿æ¢åº“ä¹‹åŽï¼‰
         #define TCRE_STDLIB_CONFIG "StdLib/Dinkumware.h"
 
     #else  // !defined(ALL_STDLIB)
 
-        /// Õâ±ØÐëÊÇ·ÅÔÚ×îºó£¬Éú³ÉÒ»¸ö´íÎó£¬Èç¹ûÎÒÃÇÎÞ·¨Ê¶±ð¿â
-        #error "±ê×¼¿âÎÞ·¨±»ÕýÈ·Ê¶±ð¡£"
+        /// è¿™å¿…é¡»æ˜¯æ”¾åœ¨æœ€åŽï¼Œç”Ÿæˆä¸€ä¸ªé”™è¯¯ï¼Œå¦‚æžœæˆ‘ä»¬æ— æ³•è¯†åˆ«åº“
+        #error "æ ‡å‡†åº“æ— æ³•è¢«æ­£ç¡®è¯†åˆ«ã€‚"
 
     #endif  // defined(ALL_STDLIB)
 

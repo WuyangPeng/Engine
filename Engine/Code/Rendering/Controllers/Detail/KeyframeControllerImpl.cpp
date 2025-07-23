@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.2 (2023/07/25 13:41)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.2 (2023/07/25 13:41)
 
 #include "Rendering/RenderingExport.h"
 
@@ -281,7 +281,7 @@ int Rendering::KeyframeControllerImpl::GetNumCommonTimes() const noexcept
 float Rendering::KeyframeControllerImpl::GetCommonTimes(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numCommonTimes, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numCommonTimes, "ç´¢å¼•é”™è¯¯ï¼");
 
     return commonTimes.at(index);
 }
@@ -289,7 +289,7 @@ float Rendering::KeyframeControllerImpl::GetCommonTimes(int index) const
 void Rendering::KeyframeControllerImpl::SetCommonTimes(int index, float aCommonTimes)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numCommonTimes, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numCommonTimes, "ç´¢å¼•é”™è¯¯ï¼");
 
     commonTimes.at(index) = aCommonTimes;
 }
@@ -304,7 +304,7 @@ int Rendering::KeyframeControllerImpl::GetNumTranslations() const noexcept
 float Rendering::KeyframeControllerImpl::GetTranslationTimes(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numTranslations && numCommonTimes == 0, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numTranslations && numCommonTimes == 0, "ç´¢å¼•é”™è¯¯ï¼");
 
     return translationTimes.at(index);
 }
@@ -312,7 +312,7 @@ float Rendering::KeyframeControllerImpl::GetTranslationTimes(int index) const
 Rendering::KeyframeControllerImpl::APoint Rendering::KeyframeControllerImpl::GetTranslations(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numTranslations, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numTranslations, "ç´¢å¼•é”™è¯¯ï¼");
 
     return translations.at(index);
 }
@@ -320,7 +320,7 @@ Rendering::KeyframeControllerImpl::APoint Rendering::KeyframeControllerImpl::Get
 void Rendering::KeyframeControllerImpl::SetTranslationTimes(int index, float translationTime)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numTranslations && numCommonTimes == 0, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numTranslations && numCommonTimes == 0, "ç´¢å¼•é”™è¯¯ï¼");
 
     translationTimes.at(index) = translationTime;
 }
@@ -328,7 +328,7 @@ void Rendering::KeyframeControllerImpl::SetTranslationTimes(int index, float tra
 void Rendering::KeyframeControllerImpl::SetTranslations(int index, const APoint& translation)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numTranslations, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numTranslations, "ç´¢å¼•é”™è¯¯ï¼");
 
     translations.at(index) = translation;
 }
@@ -343,7 +343,7 @@ int Rendering::KeyframeControllerImpl::GetNumRotations() const noexcept
 float Rendering::KeyframeControllerImpl::GetRotationTimes(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numRotations && numCommonTimes == 0, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numRotations && numCommonTimes == 0, "ç´¢å¼•é”™è¯¯ï¼");
 
     return rotationTimes.at(index);
 }
@@ -351,7 +351,7 @@ float Rendering::KeyframeControllerImpl::GetRotationTimes(int index) const
 Rendering::KeyframeControllerImpl::AQuaternion Rendering::KeyframeControllerImpl::GetRotations(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numRotations, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numRotations, "ç´¢å¼•é”™è¯¯ï¼");
 
     return rotations.at(index);
 }
@@ -359,7 +359,7 @@ Rendering::KeyframeControllerImpl::AQuaternion Rendering::KeyframeControllerImpl
 void Rendering::KeyframeControllerImpl::SetRotationTimes(int index, float rotationTime)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numRotations && numCommonTimes == 0, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numRotations && numCommonTimes == 0, "ç´¢å¼•é”™è¯¯ï¼");
 
     rotationTimes.at(index) = rotationTime;
 }
@@ -367,7 +367,7 @@ void Rendering::KeyframeControllerImpl::SetRotationTimes(int index, float rotati
 void Rendering::KeyframeControllerImpl::SetRotations(int index, const AQuaternion& rotation)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numRotations, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numRotations, "ç´¢å¼•é”™è¯¯ï¼");
 
     rotations.at(index) = rotation;
 }
@@ -382,7 +382,7 @@ int Rendering::KeyframeControllerImpl::GetNumScales() const noexcept
 float Rendering::KeyframeControllerImpl::GetScaleTimes(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numScales && numCommonTimes == 0, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numScales && numCommonTimes == 0, "ç´¢å¼•é”™è¯¯ï¼");
 
     return scaleTimes.at(index);
 }
@@ -390,7 +390,7 @@ float Rendering::KeyframeControllerImpl::GetScaleTimes(int index) const
 float Rendering::KeyframeControllerImpl::GetScales(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numScales, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numScales, "ç´¢å¼•é”™è¯¯ï¼");
 
     return scales.at(index);
 }
@@ -398,7 +398,7 @@ float Rendering::KeyframeControllerImpl::GetScales(int index) const
 void Rendering::KeyframeControllerImpl::SetScaleTimes(int index, float scaleTime)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numScales && numCommonTimes == 0, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numScales && numCommonTimes == 0, "ç´¢å¼•é”™è¯¯ï¼");
 
     scaleTimes.at(index) = scaleTime;
 }
@@ -406,7 +406,7 @@ void Rendering::KeyframeControllerImpl::SetScaleTimes(int index, float scaleTime
 void Rendering::KeyframeControllerImpl::SetScales(int index, float scale)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numScales, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numScales, "ç´¢å¼•é”™è¯¯ï¼");
 
     scales.at(index) = scale;
 }

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/13 23:43)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/13 23:43)
 
 #ifndef RENDERING_SHADERS_PROGRAM_FACTORY_H
 #define RENDERING_SHADERS_PROGRAM_FACTORY_H
@@ -38,43 +38,43 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        /// ·µ»ØµÄÖµÓÃ×÷¶ÔÓ¦ÓÚ×ÅÉ«Æ÷³ÌĞòµÄÀàĞÍ¡£
-        /// Ä¿Ç°£¬GLSLProgramFactory·µ»ØGLSL£¬
-        /// HLSLProgramFactoryÔò·µ»ØHLSL¡£
+        /// è¿”å›çš„å€¼ç”¨ä½œå¯¹åº”äºç€è‰²å™¨ç¨‹åºçš„ç±»å‹ã€‚
+        /// ç›®å‰ï¼ŒGLSLProgramFactoryè¿”å›GLSLï¼Œ
+        /// HLSLProgramFactoryåˆ™è¿”å›HLSLã€‚
         NODISCARD ShaderAPIType GetAPI() const noexcept;
 
-        /// ´´½¨GPUÏÔÊ¾³ÌĞò¡£
-        /// ÕâĞ©ÎÄ¼ş½«±»¼ÓÔØ¡¢×ª»»Îª×Ö·û´®£¬²¢´«µİ¸øÊµÏÖÀàµÄCreateFromNamedSourcesº¯Êı¡£
-        /// ÎÄ¼şÃû×÷Îª¡°xShaderName¡±²ÎÊı´«µİ¸øCreateFromNamedSourcesº¯Êı£¬
-        /// ÒÔ·ÀÖ¹×ÅÉ«Æ÷±àÒëÆ÷ÔÚ#includeÂ·¾¶ËÑË÷ÖĞĞèÒª´Ë²ÎÊı¡£
+        /// åˆ›å»ºGPUæ˜¾ç¤ºç¨‹åºã€‚
+        /// è¿™äº›æ–‡ä»¶å°†è¢«åŠ è½½ã€è½¬æ¢ä¸ºå­—ç¬¦ä¸²ï¼Œå¹¶ä¼ é€’ç»™å®ç°ç±»çš„CreateFromNamedSourceså‡½æ•°ã€‚
+        /// æ–‡ä»¶åä½œä¸ºâ€œxShaderNameâ€å‚æ•°ä¼ é€’ç»™CreateFromNamedSourceså‡½æ•°ï¼Œ
+        /// ä»¥é˜²æ­¢ç€è‰²å™¨ç¼–è¯‘å™¨åœ¨#includeè·¯å¾„æœç´¢ä¸­éœ€è¦æ­¤å‚æ•°ã€‚
         NODISCARD VisualProgramSharedPtr CreateFromFiles(const std::string& vertexShaderFile, const std::string& pixelShaderFile, const std::string& geometryShaderFile);
         NODISCARD VisualProgramSharedPtr CreateFromSources(const std::string& vertexShaderSource, const std::string& pixelShaderSource, const std::string& geometryShaderSource);
 
-        /// ´´½¨GPU¼ÆËã³ÌĞò¡£
-        /// ÕâĞ©ÎÄ¼ş½«±»¼ÓÔØ¡¢×ª»»Îª×Ö·û´®£¬²¢´«µİ¸øÊµÏÖÀàµÄCreateFromNamedSourcesº¯Êı¡£
-        /// ÎÄ¼şÃû×÷Îª¡°computeShaderName¡±²ÎÊı´«µİ¸øCreateFromNamedSourcesº¯Êı£¬
-        /// ÒÔ·ÀÖ¹×ÅÉ«Æ÷±àÒëÆ÷ÔÚ#includeÂ·¾¶ËÑË÷ÖĞĞèÒª´Ë²ÎÊı¡£
+        /// åˆ›å»ºGPUè®¡ç®—ç¨‹åºã€‚
+        /// è¿™äº›æ–‡ä»¶å°†è¢«åŠ è½½ã€è½¬æ¢ä¸ºå­—ç¬¦ä¸²ï¼Œå¹¶ä¼ é€’ç»™å®ç°ç±»çš„CreateFromNamedSourceså‡½æ•°ã€‚
+        /// æ–‡ä»¶åä½œä¸ºâ€œcomputeShaderNameâ€å‚æ•°ä¼ é€’ç»™CreateFromNamedSourceså‡½æ•°ï¼Œ
+        /// ä»¥é˜²æ­¢ç€è‰²å™¨ç¼–è¯‘å™¨åœ¨#includeè·¯å¾„æœç´¢ä¸­éœ€è¦æ­¤å‚æ•°ã€‚
         NODISCARD ComputeProgramSharedPtr CreateFromFile(const std::string& computeShaderFile);
         NODISCARD ComputeProgramSharedPtr CreateFromSource(const std::string& computeShaderSource);
 
-        /// ÔÚ¹«¹²·¶Î§ÄÚ£¬ÒÔ·ÀĞ§¹ûĞèÒªÎÄ¼şÖĞµÄÔ´´úÂë×Ö·û´®¡£
-        /// ÀıÈç£¬OverlayEffect¿ÉÒÔÊ¹ÓÃ´ËÑ¡Ïî¡£
+        /// åœ¨å…¬å…±èŒƒå›´å†…ï¼Œä»¥é˜²æ•ˆæœéœ€è¦æ–‡ä»¶ä¸­çš„æºä»£ç å­—ç¬¦ä¸²ã€‚
+        /// ä¾‹å¦‚ï¼ŒOverlayEffectå¯ä»¥ä½¿ç”¨æ­¤é€‰é¡¹ã€‚
         NODISCARD static std::string GetStringFromFile(const std::string& fileName);
 
-        /// Ö§³Ö½«ProgramFactory¶ÔÏó´«µİ¸ø¿ÉÄÜĞŞ¸Ä¡°defines¡±»ò¡°flags¡±£¬
-        /// µ«·µ»ØÊ±ĞèÒª»Ö¸´ÒÔÇ°×´Ì¬µÄº¯Êı¡£
-        /// PushDefines()º¯Êı½«µ±Ç°µÄ¡°defines¡±±£´æÔÚ¶ÑÕ»ÉÏ£¬È»ºóÇå³ı¡°define¡±¡£
-        /// PushFlags()º¯Êı½«µ±Ç°µÄ¡°flags¡±±£´æÔÚ¶ÑÕ»ÉÏ£¬È»ºó½«¡°flags¡±ÉèÖÃÎªÁã¡£
-        /// Èç¹ûĞèÒªĞŞ¸ÄÈÎÒ»³ÉÔ±µÄ×ÓÔªËØ£¬Ôò±ØĞë×Ô¼º½øĞĞ¹ÜÀí¡£
+        /// æ”¯æŒå°†ProgramFactoryå¯¹è±¡ä¼ é€’ç»™å¯èƒ½ä¿®æ”¹â€œdefinesâ€æˆ–â€œflagsâ€ï¼Œ
+        /// ä½†è¿”å›æ—¶éœ€è¦æ¢å¤ä»¥å‰çŠ¶æ€çš„å‡½æ•°ã€‚
+        /// PushDefines()å‡½æ•°å°†å½“å‰çš„â€œdefinesâ€ä¿å­˜åœ¨å †æ ˆä¸Šï¼Œç„¶åæ¸…é™¤â€œdefineâ€ã€‚
+        /// PushFlags()å‡½æ•°å°†å½“å‰çš„â€œflagsâ€ä¿å­˜åœ¨å †æ ˆä¸Šï¼Œç„¶åå°†â€œflagsâ€è®¾ç½®ä¸ºé›¶ã€‚
+        /// å¦‚æœéœ€è¦ä¿®æ”¹ä»»ä¸€æˆå‘˜çš„å­å…ƒç´ ï¼Œåˆ™å¿…é¡»è‡ªå·±è¿›è¡Œç®¡ç†ã€‚
         void PushDefines();
         void PopDefines();
         void PushFlags();
         void PopFlags() noexcept;
 
-        /// Èç¹ûÄúÔÚ¹¹½¨³ÌĞò¹¤³§Ê±ÏëÒªÓëÄ¬ÈÏ°æ±¾²»Í¬µÄGLSL°æ±¾£¬
-        /// Ôò¿ÉÒÔÔÚÓ¦ÓÃ³ÌĞò³õÊ¼»¯Ê±ÉèÖÃÒ»´Î¡°defaultVersion¡±¡£
-        /// ¾¡¹ÜÎÒÃÇÔÚCPU¶ËĞèÒªOpenGL 4.5µÄ½Ó¿Ú£¬
-        /// µ«GLSLËùĞèµÄ°æ±¾ÊÇ4.30£¬ÒÔÖ§³Ö¼ÆËã×ÅÉ«Æ÷¡£
+        /// å¦‚æœæ‚¨åœ¨æ„å»ºç¨‹åºå·¥å‚æ—¶æƒ³è¦ä¸é»˜è®¤ç‰ˆæœ¬ä¸åŒçš„GLSLç‰ˆæœ¬ï¼Œ
+        /// åˆ™å¯ä»¥åœ¨åº”ç”¨ç¨‹åºåˆå§‹åŒ–æ—¶è®¾ç½®ä¸€æ¬¡â€œdefaultVersionâ€ã€‚
+        /// å°½ç®¡æˆ‘ä»¬åœ¨CPUç«¯éœ€è¦OpenGL 4.5çš„æ¥å£ï¼Œ
+        /// ä½†GLSLæ‰€éœ€çš„ç‰ˆæœ¬æ˜¯4.30ï¼Œä»¥æ”¯æŒè®¡ç®—ç€è‰²å™¨ã€‚
         void SetVersion(const std::string& defaultVersion);
 
     private:

@@ -1,4 +1,4 @@
-$Copyright$
+﻿$Copyright$
 
 #ifndef $ModuleUppercase$_MIDDLE_LAYER_$MiddleLayerUppercase$_FWD_H
 #define $ModuleUppercase$_MIDDLE_LAYER_$MiddleLayerUppercase$_FWD_H

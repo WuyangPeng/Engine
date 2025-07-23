@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.2 (2024/10/14 16:39)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.2 (2024/10/14 16:39)
 
 #ifndef CORE_TOOLS_HELPER_HASH_COMBINE_H
 #define CORE_TOOLS_HELPER_HASH_COMBINE_H
@@ -15,7 +15,7 @@
 #include <functional>
 #include <type_traits>
 
-/// ÔÊĞíÎªÀàĞÍÁĞ±í´´½¨¹şÏ£Öµ£¬Ã¿¸öÀàĞÍT¶¼ÓĞÒ»¸öÓĞĞ§µÄstd::hash<T>()º¯Êı¡£
+/// å…è®¸ä¸ºç±»å‹åˆ—è¡¨åˆ›å»ºå“ˆå¸Œå€¼ï¼Œæ¯ä¸ªç±»å‹Téƒ½æœ‰ä¸€ä¸ªæœ‰æ•ˆçš„std::hash<T>()å‡½æ•°ã€‚
 namespace CoreTools
 {
     template <typename T>
@@ -26,7 +26,7 @@ namespace CoreTools
         return seed;
     }
 
-    /// Ê¹ÓÃÖÖ×Ó´´½¨¹şÏ£ÖµµÄº¯Êı¡£
+    /// ä½¿ç”¨ç§å­åˆ›å»ºå“ˆå¸Œå€¼çš„å‡½æ•°ã€‚
     template <typename T>
     NODISCARD size_t DoHashValue(size_t seed, T&& value) noexcept
     {
@@ -41,7 +41,7 @@ namespace CoreTools
         return DoHashValue(seed, std::forward<Tail>(arguments)...);
     }
 
-    /// ÓÃÓÚ´Ó²ÎÊıÁĞ±íÖĞ´´½¨¹şÏ£ÖµµÄº¯Êı¡£
+    /// ç”¨äºä»å‚æ•°åˆ—è¡¨ä¸­åˆ›å»ºå“ˆå¸Œå€¼çš„å‡½æ•°ã€‚
     template <typename... Tail>
     NODISCARD size_t HashValue(Tail&&... arguments) noexcept
     {

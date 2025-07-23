@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 15:27)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 15:27)
 
 #include "MathTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -41,7 +41,7 @@ void Mathematics::MathTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(NumberDigitsTest);
 }
 
-// Constant²âÊÔ
+// Constantæµ‹è¯•
 void Mathematics::MathTesting::ConstantTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(FloatConstantTest);
@@ -52,7 +52,7 @@ void Mathematics::MathTesting::FloatConstantTest()
 {
     constexpr auto pi0 = 3.14159265358979f;
 
-    // ÍêÕû²âÊÔ
+    // å®Œæ•´æµ‹è¯•
     ASSERT_APPROXIMATE(MathF::epsilon, std::numeric_limits<float>::epsilon(), 1.0e-8f);
     ASSERT_APPROXIMATE(MathF::GetZeroTolerance(), std::numeric_limits<float>::epsilon(), 1.0e-6f);
     ASSERT_APPROXIMATE(MathF::maxReal, std::numeric_limits<float>::max(), 1.0e-8f);
@@ -91,7 +91,7 @@ void Mathematics::MathTesting::DoubleConstantTest()
 {
     constexpr auto pi0 = 3.14159265358979;
 
-    // ÍêÕû²âÊÔ
+    // å®Œæ•´æµ‹è¯•
     ASSERT_APPROXIMATE(MathD::epsilon, std::numeric_limits<double>::epsilon(), 1.0e-10);
     ASSERT_APPROXIMATE(MathD::GetZeroTolerance(), std::numeric_limits<double>::epsilon(), 1.0e-8);
     ASSERT_APPROXIMATE(MathD::maxReal, std::numeric_limits<double>::max(), 1.0e-10);
@@ -126,7 +126,7 @@ void Mathematics::MathTesting::DoubleConstantTest()
     ASSERT_APPROXIMATE(MathD::GetRational(1, 3), 1.0 / 3.0, 1.0e-10);
 }
 
-// Trigonometric²âÊÔ
+// Trigonometricæµ‹è¯•
 void Mathematics::MathTesting::TrigonometricTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(FloatTrigonometricTest);
@@ -136,10 +136,10 @@ void Mathematics::MathTesting::TrigonometricTest()
 
 void Mathematics::MathTesting::FloatTrigonometricTest()
 {
-    // µü´ú²âÊÔ
+    // è¿­ä»£æµ‹è¯•
     const auto aTestLoopCount = GetTestLoopCount();
 
-    ASSERT_LESS_EQUAL_FAILURE_THROW(0, aTestLoopCount, "²âÊÔÑ­»·´ÎÊıÎªÁã£¡");
+    ASSERT_LESS_EQUAL_FAILURE_THROW(0, aTestLoopCount, "æµ‹è¯•å¾ªç¯æ¬¡æ•°ä¸ºé›¶ï¼");
 
     constexpr auto begin = -1.0f;
     constexpr auto end = 1.0f;
@@ -157,7 +157,7 @@ void Mathematics::MathTesting::FloatTrigonometricTest()
         value += step;
     }
 
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::uniform_real_distribution<float> randomDistribution{ -MathF::maxReal / 100.0f, MathF::maxReal / 100.0f };
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
@@ -186,10 +186,10 @@ void Mathematics::MathTesting::FloatTrigonometricTest()
 
 void Mathematics::MathTesting::DoubleTrigonometricTest()
 {
-    // µü´ú²âÊÔ
+    // è¿­ä»£æµ‹è¯•
     const auto aTestLoopCount = GetTestLoopCount();
 
-    ASSERT_LESS_EQUAL_FAILURE_THROW(0, aTestLoopCount, "²âÊÔÑ­»·´ÎÊıÎªÁã£¡");
+    ASSERT_LESS_EQUAL_FAILURE_THROW(0, aTestLoopCount, "æµ‹è¯•å¾ªç¯æ¬¡æ•°ä¸ºé›¶ï¼");
 
     constexpr auto begin = -1.0;
     constexpr auto end = 1.0;
@@ -205,7 +205,7 @@ void Mathematics::MathTesting::DoubleTrigonometricTest()
         value += step;
     }
 
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
     std::uniform_real_distribution<double> randomDistribution{ -MathD::maxReal / 100.0, MathD::maxReal / 100.0 };
 
@@ -235,7 +235,7 @@ void Mathematics::MathTesting::DoubleTrigonometricTest()
 
 void Mathematics::MathTesting::TrigonometricBoundaryTest()
 {
-    // ÍêÕû²âÊÔ
+    // å®Œæ•´æµ‹è¯•
     ASSERT_APPROXIMATE(MathF::ACos(-1.0f), MathF::GetPI(), 1.0e-8f);
     ASSERT_APPROXIMATE(MathF::ACos(1.0f), MathF::GetValue(0), 1.0e-8f);
     ASSERT_APPROXIMATE(MathF::ASin(-1.0f), -MathF::GetHalfPI(), 1.0e-8f);
@@ -246,13 +246,13 @@ void Mathematics::MathTesting::TrigonometricBoundaryTest()
     ASSERT_APPROXIMATE(MathD::ASin(-1.0), -MathD::GetHalfPI(), 1.0e-10);
     ASSERT_APPROXIMATE(MathD::ASin(1.0), MathD::GetHalfPI(), 1.0e-10);
 
-    // ¹Ì¶¨Öµ²âÊÔ
+    // å›ºå®šå€¼æµ‹è¯•
     ASSERT_APPROXIMATE(MathF::ATan2(0.0f, 0.0f), MathF::GetValue(0), 1.0e-8f);
 
     ASSERT_APPROXIMATE(MathD::ATan2(0.0, 0.0), MathD::GetValue(0), 1.0e-10);
 }
 
-// BaseMath²âÊÔ
+// BaseMathæµ‹è¯•
 void Mathematics::MathTesting::BaseMathTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(FloatBaseMathTest);
@@ -261,7 +261,7 @@ void Mathematics::MathTesting::BaseMathTest()
 
 void Mathematics::MathTesting::FloatBaseMathTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
     std::uniform_real_distribution<float> randomDistribution{ -MathF::maxReal / 100.0f, MathF::maxReal / 100.0f };
 
@@ -306,7 +306,7 @@ void Mathematics::MathTesting::FloatBaseMathTest()
 
 void Mathematics::MathTesting::DoubleBaseMathTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
     std::uniform_real_distribution<double> randomDistribution{ -MathD::maxReal / 100.0, MathD::maxReal / 100.0 };
 
@@ -351,13 +351,13 @@ void Mathematics::MathTesting::DoubleBaseMathTest()
 
 void Mathematics::MathTesting::BaseMathBoundaryTest()
 {
-    // ¹Ì¶¨Öµ²âÊÔ
+    // å›ºå®šå€¼æµ‹è¯•
     ASSERT_EQUAL(MathF::Sign(MathF::GetValue(0)), NumericalValueSymbol::Zero);
 
     ASSERT_EQUAL(MathD::Sign(MathD::GetValue(0)), NumericalValueSymbol::Zero);
 }
 
-// Log²âÊÔ
+// Logæµ‹è¯•
 void Mathematics::MathTesting::LogTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(FloatLogTest);
@@ -366,7 +366,7 @@ void Mathematics::MathTesting::LogTest()
 
 void Mathematics::MathTesting::FloatLogTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
     std::uniform_real_distribution<float> randomDistribution{ MathF::GetZeroTolerance(), MathF::maxReal };
 
@@ -384,7 +384,7 @@ void Mathematics::MathTesting::FloatLogTest()
 
 void Mathematics::MathTesting::DoubleLogTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
     std::uniform_real_distribution<double> randomDistribution{ MathD::GetZeroTolerance(), MathD::maxReal };
 
@@ -400,7 +400,7 @@ void Mathematics::MathTesting::DoubleLogTest()
     }
 }
 
-// Pow²âÊÔ
+// Powæµ‹è¯•
 void Mathematics::MathTesting::PowTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(FloatPowTest);
@@ -410,11 +410,11 @@ void Mathematics::MathTesting::PowTest()
 
 void Mathematics::MathTesting::FloatPowTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
 
-    // Ê¹ÓÃ-MathF::sm_MaxRealÖÁMathF::GetExponent()£¬
-    // »áµ¼ÖÂÊ¹ÓÃ´óÁ¿ÏàÍ¬×÷ÓÃµÄ¸ºÖµ½øĞĞ²âÊÔ¡£
+    // ä½¿ç”¨-MathF::sm_MaxRealè‡³MathF::GetExponent()ï¼Œ
+    // ä¼šå¯¼è‡´ä½¿ç”¨å¤§é‡ç›¸åŒä½œç”¨çš„è´Ÿå€¼è¿›è¡Œæµ‹è¯•ã€‚
     std::uniform_real_distribution<float> expRandomDistribution{ -MathF::GetExponent(), MathF::GetExponent() };
 
     const auto aTestLoopCount = GetTestLoopCount();
@@ -476,7 +476,7 @@ void Mathematics::MathTesting::FloatPowTest()
 
 void Mathematics::MathTesting::DoublePowTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
 
     std::uniform_real_distribution<double> expRandomDistribution{ -MathD::GetExponent(), MathD::GetExponent() };
@@ -540,7 +540,7 @@ void Mathematics::MathTesting::DoublePowTest()
 
 void Mathematics::MathTesting::PowBoundaryTest()
 {
-    // Ëæ»úÖµ²âÊÔ
+    // éšæœºå€¼æµ‹è¯•
     std::default_random_engine randomEngine{ GetEngineRandomSeed() };
 
     std::uniform_real_distribution<double> doubleRandomDistribution{ MathD::epsilon, MathD::maxReal };
@@ -572,7 +572,7 @@ void Mathematics::MathTesting::TruncationTest()
 
 void Mathematics::MathTesting::FloatTruncationTest()
 {
-    // ¹Ì¶¨Öµ²âÊÔ
+    // å›ºå®šå€¼æµ‹è¯•
 
     ASSERT_APPROXIMATE(MathF::Clamp(-30.0f, -20.0f, 10.0f), -20.0f, 1.0e-8f);
     ASSERT_APPROXIMATE(MathF::Clamp(40.0f, -10.0f, 30.0f), 30.0f, 1.0e-8f);
@@ -585,7 +585,7 @@ void Mathematics::MathTesting::FloatTruncationTest()
 
 void Mathematics::MathTesting::DoubleTruncationTest()
 {
-    // ¹Ì¶¨Öµ²âÊÔ
+    // å›ºå®šå€¼æµ‹è¯•
 
     ASSERT_APPROXIMATE(MathD::Clamp(-20.0, -10.0, 10.0), -10.0, 1.0e-10);
     ASSERT_APPROXIMATE(MathD::Clamp(20.0, -10.0, 10.0), 10.0, 1.0e-10);
@@ -596,10 +596,10 @@ void Mathematics::MathTesting::DoubleTruncationTest()
     ASSERT_APPROXIMATE(MathD::Saturate(0.1), 0.1, 1.0e-10);
 }
 
-// Approximate²âÊÔ
+// Approximateæµ‹è¯•
 void Mathematics::MathTesting::ApproximateTest()
 {
-    // ¹Ì¶¨Öµ²âÊÔ
+    // å›ºå®šå€¼æµ‹è¯•
     ASSERT_TRUE(MathF::Approximate(0.001f, 0.002f, 0.001f));
     ASSERT_FALSE(MathF::Approximate(0.001f, 0.002f, 0.0001f));
 

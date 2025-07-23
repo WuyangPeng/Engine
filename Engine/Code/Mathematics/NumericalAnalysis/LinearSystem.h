@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 13:45)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 13:45)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_H
@@ -23,14 +23,14 @@
 #include "Mathematics/Algebra/Vector/Vector2.h"
 #include "Mathematics/Base/MathDetail.h"
 
-/// Çó½â¾ØÕóAÎªNxNµÄÏßĞÔ·½³Ì×é¡£
-/// µ±a¿ÉÄæÊ±£¬º¯ÊıµÄ·µ»ØÖµÎª¡°true¡±¡£
-/// ÔÚÕâÖÖÇé¿öÏÂ£¬½â¾ö·½°¸XºÍ½â¾ö·½°¸ÊÇÓĞĞ§µÄ¡£
-/// Èç¹û·µ»ØÖµÎª'false'£¬ÔòA²»¿ÉÄæ£¬XºÍYÎŞĞ§£¬Òò´Ë²»ÒªÊ¹ÓÃËüÃÇ¡£
-/// µ±¾ØÕó±»´«µİÎªReal*Ê±£¬´æ´¢Ë³Ğò±»¼Ù¶¨ÎªÓëÄúÑ¡ÔñµÄMATHEMATICS_USE_ROW_MAJOR»ò!MATHEMATICS_USE_ROW_MAJORÒ»ÖÂ¡£
+/// æ±‚è§£çŸ©é˜µAä¸ºNxNçš„çº¿æ€§æ–¹ç¨‹ç»„ã€‚
+/// å½“aå¯é€†æ—¶ï¼Œå‡½æ•°çš„è¿”å›å€¼ä¸ºâ€œtrueâ€ã€‚
+/// åœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œè§£å†³æ–¹æ¡ˆXå’Œè§£å†³æ–¹æ¡ˆæ˜¯æœ‰æ•ˆçš„ã€‚
+/// å¦‚æœè¿”å›å€¼ä¸º'false'ï¼Œåˆ™Aä¸å¯é€†ï¼ŒXå’ŒYæ— æ•ˆï¼Œå› æ­¤ä¸è¦ä½¿ç”¨å®ƒä»¬ã€‚
+/// å½“çŸ©é˜µè¢«ä¼ é€’ä¸ºReal*æ—¶ï¼Œå­˜å‚¨é¡ºåºè¢«å‡å®šä¸ºä¸æ‚¨é€‰æ‹©çš„MATHEMATICS_USE_ROW_MAJORæˆ–!MATHEMATICS_USE_ROW_MAJORä¸€è‡´ã€‚
 //
-/// Ê¹ÓÃ¹²éîÌİ¶ÈËã·¨µÄÏßĞÔÇó½âÆ÷»ùÓÚG.H.GolubºÍCharles F.Van LoanÔÚ¡°¾ØÕó¼ÆËã£¬µÚ¶ş°æ¡±ÖĞµÄÌÖÂÛ£¬
-/// Ô¼º²»ôÆÕ½ğË¹³ö°æÉç£¬°Í¶ûµÄÄ¦Ò½Ñ§Ôº£¬1993ÄêµÚËÄ°æ¡£
+/// ä½¿ç”¨å…±è½­æ¢¯åº¦ç®—æ³•çš„çº¿æ€§æ±‚è§£å™¨åŸºäºG.H.Golubå’ŒCharles F.Van Loanåœ¨â€œçŸ©é˜µè®¡ç®—ï¼Œç¬¬äºŒç‰ˆâ€ä¸­çš„è®¨è®ºï¼Œ
+/// çº¦ç¿°éœæ™®é‡‘æ–¯å‡ºç‰ˆç¤¾ï¼Œå·´å°”çš„æ‘©åŒ»å­¦é™¢ï¼Œ1993å¹´ç¬¬å››ç‰ˆã€‚
 namespace Mathematics
 {
     template <typename Real>
@@ -67,130 +67,130 @@ namespace Mathematics
 
         void SetZeroTolerance(Real newZeroTolerance) noexcept;
 
-        // 2¡Á2ºÍ3x3ÏµÍ³£¨±ÜÃâÁË¸ßË¹ÏûÔªµÄ¿ªÏú£©
+        // 2Ã—2å’Œ3x3ç³»ç»Ÿï¼ˆé¿å…äº†é«˜æ–¯æ¶ˆå…ƒçš„å¼€é”€ï¼‰
         NODISCARD Vector2 Solve2(const Matrix2& matrix, const Vector2& vector) const;
 
         NODISCARD Vector3Type Solve3(const Matrix3& matrix, const Vector3Type& vector) const;
 
-        // ÊäÈë:
-        //     matrix[iSize][iSize], ÏîÊÇ matrix[row][col]
-        // Êä³ö:
-        //     ÇóÄæ¾ØÕóÊ§°ÜÅ×³öÒì³££¬·ñÔò·µ»ØÄæ¾ØÕó¡£
+        // è¾“å…¥:
+        //     matrix[iSize][iSize], é¡¹æ˜¯ matrix[row][col]
+        // è¾“å‡º:
+        //     æ±‚é€†çŸ©é˜µå¤±è´¥æŠ›å‡ºå¼‚å¸¸ï¼Œå¦åˆ™è¿”å›é€†çŸ©é˜µã€‚
         NODISCARD VariableMatrixType Inverse(const VariableMatrixType& matrix) const;
 
-        // ÊäÈë:
-        //     A[iSize][iSize] ÏµÊı¾ØÕó£¬ÏîÊÇ A[row][col]
-        //     B[iSize] ÏòÁ¿, ÏîÊÇ B[row]
-        // Êä³ö:
-        //     ÇóÄæ¾ØÕóÊ§°ÜÅ×³öÒì³££¬·ñÔò·µ»ØX[iSize]¡£
-        //     X[iSize] ÊÇ½âX ÔÚ AX = B
+        // è¾“å…¥:
+        //     A[iSize][iSize] ç³»æ•°çŸ©é˜µï¼Œé¡¹æ˜¯ A[row][col]
+        //     B[iSize] å‘é‡, é¡¹æ˜¯ B[row]
+        // è¾“å‡º:
+        //     æ±‚é€†çŸ©é˜µå¤±è´¥æŠ›å‡ºå¼‚å¸¸ï¼Œå¦åˆ™è¿”å›X[iSize]ã€‚
+        //     X[iSize] æ˜¯è§£X åœ¨ AX = B
 
-        // ±ØĞë±£Ö¤ÊäÈëvectorºÍÊä³övector´óĞ¡ÎªiSizeµÄÒ»Î¬Êı×é¡£
+        // å¿…é¡»ä¿è¯è¾“å…¥vectorå’Œè¾“å‡ºvectorå¤§å°ä¸ºiSizeçš„ä¸€ç»´æ•°ç»„ã€‚
         NODISCARD RealContainer Solve(const VariableMatrixType& matrix, const RealContainer& vector) const;
 
-        // ÊäÈë:
-        //     ¾ØÕóÊÇÈı¶Ô½Ç¾ØÕó¡£
-        //     ÏÂ¶Ô½ÇÏß lower[size - 1]
-        //     Ö÷¶Ô½ÇÏß main[size]
-        //     ÉÏ¶Ô½ÇÏß upper[size - 1]
-        //     ÓÒÊÖ±ß right[size]
-        // Êä³ö:
-        //     Çó½âÊ§°ÜÅ×³öÒì³££¬·ñÔò·µ»ØU[size]£¬ÊÇ½â¡£
+        // è¾“å…¥:
+        //     çŸ©é˜µæ˜¯ä¸‰å¯¹è§’çŸ©é˜µã€‚
+        //     ä¸‹å¯¹è§’çº¿ lower[size - 1]
+        //     ä¸»å¯¹è§’çº¿ main[size]
+        //     ä¸Šå¯¹è§’çº¿ upper[size - 1]
+        //     å³æ‰‹è¾¹ right[size]
+        // è¾“å‡º:
+        //     æ±‚è§£å¤±è´¥æŠ›å‡ºå¼‚å¸¸ï¼Œå¦åˆ™è¿”å›U[size]ï¼Œæ˜¯è§£ã€‚
 
-        // ±ØĞë±£Ö¤lowerºÍupper´óĞ¡Îªsize - 1µÄÒ»Î¬Êı×é¡£
-        // main¡¢rightºÍoutput´óĞ¡ÎªsizeµÄÒ»Î¬Êı×é¡£
+        // å¿…é¡»ä¿è¯lowerå’Œupperå¤§å°ä¸ºsize - 1çš„ä¸€ç»´æ•°ç»„ã€‚
+        // mainã€rightå’Œoutputå¤§å°ä¸ºsizeçš„ä¸€ç»´æ•°ç»„ã€‚
         NODISCARD RealContainer SolveTriDiagonal(int size, const RealContainer& lower, const RealContainer& mainDdiagonal, const RealContainer& upper, const RealContainer& right) const;
 
-        // ÊäÈë:
-        //     ¾ØÕóÊÇÈı¶Ô½Ç¾ØÕó¡£
-        //     ÏÂ¶Ô½ÇÏßÊÇ³£Êılower
-        //     Ö÷¶Ô½ÇÏßÊÇ³£Êımain
-        //     ÉÏ¶Ô½ÇÏßÊÇ³£Êıupper
-        //     ÓÒÊÖ±ß right[size]
-        // Êä³ö:
-        //     Çó½âÊ§°ÜÅ×³öÒì³££¬·ñÔò·µ»ØU[size]£¬ÊÇ½â¡£
+        // è¾“å…¥:
+        //     çŸ©é˜µæ˜¯ä¸‰å¯¹è§’çŸ©é˜µã€‚
+        //     ä¸‹å¯¹è§’çº¿æ˜¯å¸¸æ•°lower
+        //     ä¸»å¯¹è§’çº¿æ˜¯å¸¸æ•°main
+        //     ä¸Šå¯¹è§’çº¿æ˜¯å¸¸æ•°upper
+        //     å³æ‰‹è¾¹ right[size]
+        // è¾“å‡º:
+        //     æ±‚è§£å¤±è´¥æŠ›å‡ºå¼‚å¸¸ï¼Œå¦åˆ™è¿”å›U[size]ï¼Œæ˜¯è§£ã€‚
 
-        // ±ØĞë±£Ö¤rightºÍoutput´óĞ¡ÎªsizeµÄÒ»Î¬Êı×é¡£
+        // å¿…é¡»ä¿è¯rightå’Œoutputå¤§å°ä¸ºsizeçš„ä¸€ç»´æ•°ç»„ã€‚
         NODISCARD RealContainer SolveConstTridiagonal(int size, Real lower, Real mainDdiagonal, Real upper, const RealContainer& right) const;
 
-        // ½â¾ö·½°¸²ÉÓÃ¹²éîÌİ¶È·¨¡£
-        // ÊäÈë:
-        //    A[size][size] Symmetrix¾ØÕó£¬ÏîÊÇ A[row][col]
-        //    B[size] ÏòÁ¿, ÏîÊÇ B[row]
-        // Êä³ö:
-        //    X[size] ÊÇ½â x Îª Ax = B
+        // è§£å†³æ–¹æ¡ˆé‡‡ç”¨å…±è½­æ¢¯åº¦æ³•ã€‚
+        // è¾“å…¥:
+        //    A[size][size] SymmetrixçŸ©é˜µï¼Œé¡¹æ˜¯ A[row][col]
+        //    B[size] å‘é‡, é¡¹æ˜¯ B[row]
+        // è¾“å‡º:
+        //    X[size] æ˜¯è§£ x ä¸º Ax = B
 
-        // ±ØĞë±£Ö¤inputVectorºÍoutputVectorÎª´óĞ¡ÎªsizeµÄÒ»Î¬Êı×é¡£
+        // å¿…é¡»ä¿è¯inputVectorå’ŒoutputVectorä¸ºå¤§å°ä¸ºsizeçš„ä¸€ç»´æ•°ç»„ã€‚
         NODISCARD RealContainer SolveSymmetricConjugateGradient(const VariableMatrixType& matrix, const RealContainer& vector) const;
 
-        // Ï¡Êè¶Ô³Æ¾ØÕó¹²éîÌİ¶È·¨¡£
-        // ÊäÈë:
-        // ÔÚSymmetrix¾ØÕómatrixµÄ·ÇÁãÌõÄ¿´æ´¢ÔÚÒ»¸öÓ³Éä£¬Æä¼ü¶Ô(i,j)£¬ÆäÖµÊÇÊµÊı¡£
-        // Ò»¶Ô(i,j)ÎªËùÊöÊı×éÖĞµÄÖµµÄÎ»ÖÃ¡£
-        // Ö»ÓĞ(i,j) ºÍ(j,i)Ó¦´æ·Å£¬ÒòÎªmatrixÊÇ¶Ô³ÆµÄ¡£
-        // ¸Ã´úÂë¼Ù¶¨ÄãÖªµÀÔõÃ´ÉèÖÃmatrix.
-        // ÁĞÊ¸Á¿vector±»´æ´¢ÎªÁ¬ĞøÖµµÄÊı×é¡£
-        // Êä³ö:
-        //    X[size] ÊÇ½â x Îª Ax = B
+        // ç¨€ç–å¯¹ç§°çŸ©é˜µå…±è½­æ¢¯åº¦æ³•ã€‚
+        // è¾“å…¥:
+        // åœ¨SymmetrixçŸ©é˜µmatrixçš„éé›¶æ¡ç›®å­˜å‚¨åœ¨ä¸€ä¸ªæ˜ å°„ï¼Œå…¶é”®å¯¹(i,j)ï¼Œå…¶å€¼æ˜¯å®æ•°ã€‚
+        // ä¸€å¯¹(i,j)ä¸ºæ‰€è¿°æ•°ç»„ä¸­çš„å€¼çš„ä½ç½®ã€‚
+        // åªæœ‰(i,j) å’Œ(j,i)åº”å­˜æ”¾ï¼Œå› ä¸ºmatrixæ˜¯å¯¹ç§°çš„ã€‚
+        // è¯¥ä»£ç å‡å®šä½ çŸ¥é“æ€ä¹ˆè®¾ç½®matrix.
+        // åˆ—çŸ¢é‡vectorè¢«å­˜å‚¨ä¸ºè¿ç»­å€¼çš„æ•°ç»„ã€‚
+        // è¾“å‡º:
+        //    X[size] æ˜¯è§£ x ä¸º Ax = B
 
-        // ±ØĞë±£Ö¤inputVectorºÍoutputVectorÎª´óĞ¡ÎªsizeµÄÒ»Î¬Êı×é¡£
+        // å¿…é¡»ä¿è¯inputVectorå’ŒoutputVectorä¸ºå¤§å°ä¸ºsizeçš„ä¸€ç»´æ•°ç»„ã€‚
         NODISCARD RealContainer SolveSymmetricConjugateGradient(const SparseMatrixType& matrix, const RealContainer& vector) const;
 
-        // Çó½â´ø×´¾ØÕóÏµÍ³¡£
-        // ÊäÈë:
-        //     matrix, Ò»¸ö´ø×´¾ØÕó
-        //     vector[size] ÏòÁ¿,ÏîÊÇ vector[row]
-        // Êä³ö:
-        //     Çó½âÊ§°ÜÅ×³öÒì³££¬
-        //     ·µ»ØX[size] ÊÇ½â X ÔÚ AX = B
+        // æ±‚è§£å¸¦çŠ¶çŸ©é˜µç³»ç»Ÿã€‚
+        // è¾“å…¥:
+        //     matrix, ä¸€ä¸ªå¸¦çŠ¶çŸ©é˜µ
+        //     vector[size] å‘é‡,é¡¹æ˜¯ vector[row]
+        // è¾“å‡º:
+        //     æ±‚è§£å¤±è´¥æŠ›å‡ºå¼‚å¸¸ï¼Œ
+        //     è¿”å›X[size] æ˜¯è§£ X åœ¨ AX = B
 
-        // ±ØĞë±£Ö¤inputVectorºÍoutputVectorÎª´óĞ¡ÎªsizeµÄÒ»Î¬Êı×é¡£
+        // å¿…é¡»ä¿è¯inputVectorå’ŒoutputVectorä¸ºå¤§å°ä¸ºsizeçš„ä¸€ç»´æ•°ç»„ã€‚
         NODISCARD RealContainer SolveBanded(const BandedMatrixType& matrix, const RealContainer& vector) const;
 
-        // Çó´ø×´¾ØÕóµÄÄæ
-        // ÊäÈë:
-        //     matrix, ´ø×´¾ØÕó
-        // Êä³ö:
-        //     ÇóÄæÊ§°ÜÅ×³öÒì³££¬·ñÔò·µ»ØÄæ¾ØÕó
+        // æ±‚å¸¦çŠ¶çŸ©é˜µçš„é€†
+        // è¾“å…¥:
+        //     matrix, å¸¦çŠ¶çŸ©é˜µ
+        // è¾“å‡º:
+        //     æ±‚é€†å¤±è´¥æŠ›å‡ºå¼‚å¸¸ï¼Œå¦åˆ™è¿”å›é€†çŸ©é˜µ
         NODISCARD VariableMatrixType Invert(const BandedMatrixType& matrix) const;
 
-        /// Í¨¹ıÖ±½Ó·´×ª¾ØÕóÀ´Çó½â2x2¡¢3x3ºÍ4x4ÏµÍ³¡£
-        /// Õâ±ÜÃâÁËÔÚĞ¡Î¬¶ÈÖĞ¸ßË¹Ïû³ıµÄ¿ªÏú¡£
+        /// é€šè¿‡ç›´æ¥åè½¬çŸ©é˜µæ¥æ±‚è§£2x2ã€3x3å’Œ4x4ç³»ç»Ÿã€‚
+        /// è¿™é¿å…äº†åœ¨å°ç»´åº¦ä¸­é«˜æ–¯æ¶ˆé™¤çš„å¼€é”€ã€‚
         NODISCARD static bool Solve(const Matrix2x2& a, const AlgebraVector2& b, AlgebraVector2& x);
 
         NODISCARD static bool Solve(const Matrix3x3& a, const AlgebraVector3& b, AlgebraVector3& x);
 
         NODISCARD static bool Solve(const Matrix4x4& a, const AlgebraVector4& b, AlgebraVector4& x);
 
-        /// Çó½âA*X = B£¬ÆäÖĞBÎªNx1£¬½âXÎªNx1¡£
+        /// æ±‚è§£A*X = Bï¼Œå…¶ä¸­Bä¸ºNx1ï¼Œè§£Xä¸ºNx1ã€‚
         NODISCARD static bool Solve(int n, const RealContainer& a, const RealContainer& b, RealContainer& x);
 
-        /// Çó½âA*X = B£¬ÆäÖĞBÎªNxM£¬½âXÎªNxM¡£
+        /// æ±‚è§£A*X = Bï¼Œå…¶ä¸­Bä¸ºNxMï¼Œè§£Xä¸ºNxMã€‚
         NODISCARD static bool Solve(int n, int m, const RealContainer& a, const RealContainer& b, RealContainer& x);
 
-        /// Çó½âA*X = B£¬ÆäÖĞAÊÇÈı¶Ô½ÇµÄ¡£
-        /// º¯ÊıĞèÒªAµÄ´Î¶Ô½ÇÏß¡¢¶Ô½ÇÏßºÍ³¬¶Ô½ÇÏß¡£
-        /// ¶Ô½ÇÏßÊäÈë±ØĞëÓĞN¸öÔªËØ¡£
-        /// ´Î¶Ô½ÇÏßºÍ³¬¶Ô½ÇÏßÊäÈë±ØĞë¾ßÓĞN-1¸öÔªËØ¡£
+        /// æ±‚è§£A*X = Bï¼Œå…¶ä¸­Aæ˜¯ä¸‰å¯¹è§’çš„ã€‚
+        /// å‡½æ•°éœ€è¦Açš„æ¬¡å¯¹è§’çº¿ã€å¯¹è§’çº¿å’Œè¶…å¯¹è§’çº¿ã€‚
+        /// å¯¹è§’çº¿è¾“å…¥å¿…é¡»æœ‰Nä¸ªå…ƒç´ ã€‚
+        /// æ¬¡å¯¹è§’çº¿å’Œè¶…å¯¹è§’çº¿è¾“å…¥å¿…é¡»å…·æœ‰N-1ä¸ªå…ƒç´ ã€‚
         NODISCARD static bool SolveTriDiagonal(int n, const RealContainer& subDiagonal, const RealContainer& diagonal, const RealContainer& superDiagonal, const RealContainer& b, RealContainer& x);
 
-        /// Çó½âA*X = B£¬ÆäÖĞAÊÇÈı¶Ô½ÇµÄ¡£
-        /// ¸Ãº¯ÊıÆÚÍûAµÄsubDiagonal¡¢¶Ô½ÇÏßºÍsuperDiagonal¡£
-        /// ´ËÍâ£¬subDiagonalÔªËØÊÇ³£Êı£¬¶Ô½ÇÏßÔªËØÊÇ³£Á¿£¬superDiagonalÔªËØÊÇ³£Êı¡£
+        /// æ±‚è§£A*X = Bï¼Œå…¶ä¸­Aæ˜¯ä¸‰å¯¹è§’çš„ã€‚
+        /// è¯¥å‡½æ•°æœŸæœ›Açš„subDiagonalã€å¯¹è§’çº¿å’ŒsuperDiagonalã€‚
+        /// æ­¤å¤–ï¼ŒsubDiagonalå…ƒç´ æ˜¯å¸¸æ•°ï¼Œå¯¹è§’çº¿å…ƒç´ æ˜¯å¸¸é‡ï¼ŒsuperDiagonalå…ƒç´ æ˜¯å¸¸æ•°ã€‚
         NODISCARD static bool SolveConstantTriDiagonal(int n, Real subDiagonal, Real diagonal, Real superDiagonal, const RealContainer& b, RealContainer& x);
 
-        /// Ê¹ÓÃ¹²éîÌİ¶È·¨Çó½âA*X=B£¬ÆäÖĞAÊÇ¶Ô³ÆµÄ¡£
-        /// Äú±ØĞëÖ¸¶¨µü´úµÄ×î´ó´ÎÊıºÍÖÕÖ¹µü´úµÄÈİ²î¡£
-        /// ¹«²îµÄºÏÀíÑ¡ÔñÊÇ1e-06f ±íÊ¾ 'float»ò1e-08 ±íÊ¾ 'double'
+        /// ä½¿ç”¨å…±è½­æ¢¯åº¦æ³•æ±‚è§£A*X=Bï¼Œå…¶ä¸­Aæ˜¯å¯¹ç§°çš„ã€‚
+        /// æ‚¨å¿…é¡»æŒ‡å®šè¿­ä»£çš„æœ€å¤§æ¬¡æ•°å’Œç»ˆæ­¢è¿­ä»£çš„å®¹å·®ã€‚
+        /// å…¬å·®çš„åˆç†é€‰æ‹©æ˜¯1e-06f è¡¨ç¤º 'floatæˆ–1e-08 è¡¨ç¤º 'double'
         NODISCARD static int SolveSymmetricConjugateGradient(int n, RealContainer& a, const RealContainer& b, RealContainer& x, int maxIterations, Real tolerance);
 
-        /// Ê¹ÓÃ¹²éîÌİ¶È·¨Çó½âA*X = B£¬ÆäÖĞAÊÇÏ¡ÊèºÍ¶Ô³ÆµÄ¡£
-        /// ¶Ô³Æ¾ØÕóAµÄ·ÇÁãÏî´æ´¢ÔÚÓ³ÉäÖĞ£¬¸ÃÓ³ÉäµÄ¼üÊÇ¶Ô(i,j)£¬
-        /// ²¢ÇÒÆäÖµÊÇÊµÊı¡£¶Ô(i,j)ÊÇÖµÔÚÊı×éÖĞµÄÎ»ÖÃ¡£
-        /// ÓÉÓÚAÊÇ¶Ô³ÆµÄ£¬Òò´ËÖ»Ó¦´æ´¢(i,j)ºÍ(j,i) ÖĞµÄÒ»¸ö¡£
-        /// ÁĞÏòÁ¿B±»´æ´¢ÎªÁ¬ĞøÖµµÄÊı×é¡£
-        /// Äú±ØĞëÖ¸¶¨µü´úµÄ×î´ó´ÎÊıºÍÖÕÖ¹µü´úµÄÈİ²î¡£
-        /// ¹«²îµÄºÏÀíÑ¡ÔñÊÇ1e-06f ±íÊ¾ 'float»ò1e-08 ±íÊ¾ 'double'
+        /// ä½¿ç”¨å…±è½­æ¢¯åº¦æ³•æ±‚è§£A*X = Bï¼Œå…¶ä¸­Aæ˜¯ç¨€ç–å’Œå¯¹ç§°çš„ã€‚
+        /// å¯¹ç§°çŸ©é˜µAçš„éé›¶é¡¹å­˜å‚¨åœ¨æ˜ å°„ä¸­ï¼Œè¯¥æ˜ å°„çš„é”®æ˜¯å¯¹(i,j)ï¼Œ
+        /// å¹¶ä¸”å…¶å€¼æ˜¯å®æ•°ã€‚å¯¹(i,j)æ˜¯å€¼åœ¨æ•°ç»„ä¸­çš„ä½ç½®ã€‚
+        /// ç”±äºAæ˜¯å¯¹ç§°çš„ï¼Œå› æ­¤åªåº”å­˜å‚¨(i,j)å’Œ(j,i) ä¸­çš„ä¸€ä¸ªã€‚
+        /// åˆ—å‘é‡Bè¢«å­˜å‚¨ä¸ºè¿ç»­å€¼çš„æ•°ç»„ã€‚
+        /// æ‚¨å¿…é¡»æŒ‡å®šè¿­ä»£çš„æœ€å¤§æ¬¡æ•°å’Œç»ˆæ­¢è¿­ä»£çš„å®¹å·®ã€‚
+        /// å…¬å·®çš„åˆç†é€‰æ‹©æ˜¯1e-06f è¡¨ç¤º 'floatæˆ–1e-08 è¡¨ç¤º 'double'
         NODISCARD static int SolveSymmetricConjugateGradient(int n, const AlgebraSparseMatrix& a, const RealContainer& b, RealContainer& x, int maxIterations, Real tolerance);
 
 #if defined(MATHEMATICS_USE_ROW_MAJOR)
@@ -204,7 +204,7 @@ namespace Mathematics
 #endif  // MATHEMATICS_USE_ROW_MAJOR
 
     private:
-        /// Ö§³Ö¹²éîÌİ¶È·¨¡£
+        /// æ”¯æŒå…±è½­æ¢¯åº¦æ³•ã€‚
         NODISCARD static Real Dot(int n, const RealContainer& u, const RealContainer& v);
 
         static void Mul(int n, RealContainer& a, const RealContainer& x, RealContainer& p);
@@ -218,8 +218,8 @@ namespace Mathematics
         static void UpdateP(int n, RealContainer& p, Real beta, const RealContainer& r);
 
     private:
-        // ÏßĞÔÏµÍ³Çó½âÈİ²î¡£
-        // Ä¬ÈÏ = MathType<Real>::GetZeroTolerance()
+        // çº¿æ€§ç³»ç»Ÿæ±‚è§£å®¹å·®ã€‚
+        // é»˜è®¤ = MathType<Real>::GetZeroTolerance()
         Real zeroTolerance;
     };
 

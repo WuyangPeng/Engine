@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/04/28 21:38)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/04/28 21:38)
 
 #include "ErrorTesting.h"
 #include "System/Helper/PragmaWarning/Format.h"
@@ -43,7 +43,7 @@ void CoreTools::ErrorTesting::MainTest()
 
 void CoreTools::ErrorTesting::NormalErrorTest()
 {
-    const auto errorDescription = SYSTEM_TEXT("´íÎó"s);
+    const auto errorDescription = SYSTEM_TEXT("é”™è¯¯"s);
     SetPlatformLastError(System::WindowError::Success);
 
     const LastError lastError{};
@@ -66,7 +66,7 @@ void CoreTools::ErrorTesting::FunctionDescribedTest(const FunctionDescribed& fun
 
 void CoreTools::ErrorTesting::WindowsErrorTest()
 {
-    const auto errorDescription = SYSTEM_TEXT("»·¾³²»ÕıÈ·¡£"s);
+    const auto errorDescription = SYSTEM_TEXT("ç¯å¢ƒä¸æ­£ç¡®ã€‚"s);
     SetPlatformLastError(System::WindowError::BadEnvironment);
 
     const LastError lastError{};
@@ -96,7 +96,7 @@ void CoreTools::ErrorTesting::OpenFileErrorTest()
 CoreTools::Error::Format CoreTools::ErrorTesting::GetOpenFileError(const String& fileName)
 {
     Error::Format format{ SYSTEM_TEXT("%1% %2%") };
-    format % SYSTEM_TEXT("ÏµÍ³ÕÒ²»µ½Ö¸¶¨µÄÎÄ¼ş ");
+    format % SYSTEM_TEXT("ç³»ç»Ÿæ‰¾ä¸åˆ°æŒ‡å®šçš„æ–‡ä»¶ ");
     format % fileName;
 
     return format;
@@ -104,7 +104,7 @@ CoreTools::Error::Format CoreTools::ErrorTesting::GetOpenFileError(const String&
 
 void CoreTools::ErrorTesting::ComErrorTest()
 {
-    const auto errorDescription = SYSTEM_TEXT("ÔÖÄÑĞÔ¹ÊÕÏ"s);
+    const auto errorDescription = SYSTEM_TEXT("ç¾éš¾æ€§æ•…éšœ"s);
 
     const Error comError{ CORE_TOOLS_FUNCTION_DESCRIBED, System::WindowError::EUnexpected, SYSTEM_TEXT(""s) };
 
@@ -118,12 +118,12 @@ void CoreTools::ErrorTesting::ThrowExceptionTest()
     SetPlatformLastError(System::WindowError::BadLength);
 
     Error::ThrowError(CORE_TOOLS_FUNCTION_DESCRIBED,
-                      (Error::Format(SYSTEM_TEXT("%1% %2% %3%")) % 21 % 22 % SYSTEM_TEXT("ÕâÀï²âÊÔÅ×³öÒì³£¡£")).str());
+                      (Error::Format(SYSTEM_TEXT("%1% %2% %3%")) % 21 % 22 % SYSTEM_TEXT("è¿™é‡Œæµ‹è¯•æŠ›å‡ºå¼‚å¸¸ã€‚")).str());
 }
 
 void CoreTools::ErrorTesting::ThrowLastExceptionTest()
 {
     Error::ThrowError(CORE_TOOLS_FUNCTION_DESCRIBED,
                       System::WindowError::FileNotFound,
-                      (Error::Format(SYSTEM_TEXT("%1% %2% %3%")) % 21 % 22 % SYSTEM_TEXT("ÕâÀï²âÊÔÅ×³öÒì³£¡£")).str());
+                      (Error::Format(SYSTEM_TEXT("%1% %2% %3%")) % 21 % 22 % SYSTEM_TEXT("è¿™é‡Œæµ‹è¯•æŠ›å‡ºå¼‚å¸¸ã€‚")).str());
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.1 (2023/07/20 19:35)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.1 (2023/07/20 19:35)
 
 #include "Rendering/RenderingExport.h"
 
@@ -20,7 +20,7 @@
 #include "Rendering/LocalEffects/Detail/TextEffectImpl.h"
 #include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Rendering/Resources/Textures/Texture2D.h"
-#include "Rendering/Shaders/Shader.h"
+#include "Rendering/Shaders/ShaderDetail.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, TextEffect)
 

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2024/01/08 15:03)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2024/01/08 15:03)
 
 #include "Rendering/RenderingExport.h"
 
@@ -312,7 +312,7 @@ System::OpenGLData Rendering::OpenGLTexture::GetGLTextureExternalType(ChannelTyp
     using Container = std::array<OpenGLData, System::EnumCastUnderlying(ChannelType::NumChannelTypes)>;
 
     static Container container{
-        OpenGLData::None,  // ²»ÊÜÖ§³ÖµÄ
+        OpenGLData::None,  // ä¸å—æ”¯æŒçš„
         OpenGLData::Byte,  // BYTE
         OpenGLData::UnsignedByte,  // UBYTE
         OpenGLData::Short,  // SHORT

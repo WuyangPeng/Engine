@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+ï»¿///	Copyright (c) 2010-2020
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++17
-///	ÒıÇæ°æ±¾£º0.5.2.2 (2020/11/11 14:09)
+///	æ ‡å‡†ï¼šstd:c++17
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.5.2.2 (2020/11/11 14:09)
 
 #ifndef MATHEMATICS_ALGEBRA_VARIABLE_LENGTH_VECTOR_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_VARIABLE_LENGTH_VECTOR_ACHIEVE_H
@@ -120,7 +120,7 @@ const Real& Mathematics::VariableLengthVector<Real>::operator[](int index) const
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
 #ifdef MATHEMATICS_ASSERT_VARIABLE_VECTOR_OUT_OF_RANGE
-    MATHEMATICS_ASSERTION_0(0 <= index && index < GetSize(), "Ë÷Òı´íÎó£¡");
+    MATHEMATICS_ASSERTION_0(0 <= index && index < GetSize(), "ç´¢å¼•é”™è¯¯ï¼");
 #endif  // MATHEMATICS_ASSERT_VARIABLE_VECTOR_OUT_OF_RANGE
 
     return (*impl)[index];
@@ -132,7 +132,7 @@ Real& Mathematics::VariableLengthVector<Real>::operator[](int index)
     ;
 
 #ifdef MATHEMATICS_ASSERT_VARIABLE_VECTOR_OUT_OF_RANGE
-    MATHEMATICS_ASSERTION_0(0 <= index && index < GetSize(), "Ë÷Òı´íÎó£¡");
+    MATHEMATICS_ASSERTION_0(0 <= index && index < GetSize(), "ç´¢å¼•é”™è¯¯ï¼");
 #endif  // MATHEMATICS_ASSERT_VARIABLE_VECTOR_OUT_OF_RANGE
 
     return OPERATOR_SQUARE_BRACKETS(Real, index);
@@ -205,7 +205,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
     }
     else
     {
-        MATHEMATICS_ASSERTION_1(false, "³ıÁã´íÎó£¡");
+        MATHEMATICS_ASSERTION_1(false, "é™¤é›¶é”™è¯¯ï¼");
 
         for (auto& value : *impl)
         {
@@ -238,7 +238,7 @@ Real Mathematics::VariableLengthVector<Real>::SquaredLength() const
         squaredLength += value * value;
     }
 
-    MATHEMATICS_ASSERTION_2(0 <= squaredLength, "·µ»ØÖµ²»ÄÜÎª¸ºÊı£¡");
+    MATHEMATICS_ASSERTION_2(0 <= squaredLength, "è¿”å›å€¼ä¸èƒ½ä¸ºè´Ÿæ•°ï¼");
 
     return squaredLength;
 }
@@ -259,7 +259,7 @@ void Mathematics::VariableLengthVector<Real>::Normalize(Real epsilon)
     }
     else
     {
-        MATHEMATICS_ASSERTION_2(false, "ÁãÏòÁ¿²»ÄÜÕıÔò»¯£¡");
+        MATHEMATICS_ASSERTION_2(false, "é›¶å‘é‡ä¸èƒ½æ­£åˆ™åŒ–ï¼");
 
         for (auto& value : *impl)
         {

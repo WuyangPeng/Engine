@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #include "SystemConstant.h"
 #include "SystemConstantContainer.h"
@@ -29,11 +29,11 @@ CSVConfigure::SystemConstantContainer::SystemConstantContainer(const CSVContent&
 
 void CSVConfigure::SystemConstantContainer::Parsing(const CSVContent& csvContent)
 {
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("systemConstant±í¿ªÊ¼ÔØÈë¡­¡­"));
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("systemConstantè¡¨å¼€å§‹è½½å…¥â€¦â€¦"));
 
     Load(csvContent);
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("systemConstant±í½áÊøÔØÈë¡­¡­"));
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("systemConstantè¡¨ç»“æŸè½½å…¥â€¦â€¦"));
 }
 
 void CSVConfigure::SystemConstantContainer::Load(const CSVContent& csvContent)
@@ -43,12 +43,12 @@ void CSVConfigure::SystemConstantContainer::Load(const CSVContent& csvContent)
 
     if (size == 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("systemConstant±íÎª¿Õ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("systemConstantè¡¨ä¸ºç©ºã€‚"s))
     }
 
     if (1 < size)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, User, SYSTEM_TEXT("systemConstant±í²»ÊÇÎ¨Ò»µÄ"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, User, SYSTEM_TEXT("systemConstantè¡¨ä¸æ˜¯å”¯ä¸€çš„"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 
     CoreTools::CSVRow csvRow{ csvContent.GetCSVHead(), csvContent.GetContent(0) };

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/06 23:01)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/06 23:01)
 
 #include "CompilerConfigTesting.h"
 #include "System/Helper/ConfigMacro.h"
@@ -36,11 +36,11 @@ void System::CompilerConfigTesting::CompilerTest()
 {
     auto& stream = GetStream();
 
-    stream << "±àÒëÆ÷Ê¹ÓÃµÄC++±ê×¼ÊÇC++" << SYSTEM_CPP_STANDARD << '\n';
+    stream << "ç¼–è¯‘å™¨ä½¿ç”¨çš„C++æ ‡å‡†æ˜¯C++" << SYSTEM_CPP_STANDARD << '\n';
 
-    stream << "±àÒëÆ÷ÊÇ£º" << TCRE_SYSTEM_COMPILER << '\n';
+    stream << "ç¼–è¯‘å™¨æ˜¯ï¼š" << TCRE_SYSTEM_COMPILER << '\n';
 
-    stream << "±àÒëÆ÷Ê¹ÓÃµÄ°æ±¾ÊÇ£º" << TCRE_COMPILER_VERSION << '\n';
+    stream << "ç¼–è¯‘å™¨ä½¿ç”¨çš„ç‰ˆæœ¬æ˜¯ï¼š" << TCRE_COMPILER_VERSION << '\n';
 }
 
 void System::CompilerConfigTesting::VisualCTest() const noexcept

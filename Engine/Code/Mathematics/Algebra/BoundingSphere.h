@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2023
+ï»¿/// Copyright (c) 2010-2023
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.1 (2023/12/05 10:27)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.1 (2023/12/05 10:27)
 
 #ifndef MATHEMATICS_ALGEBRA_BOUNDING_SPHERE_H
 #define MATHEMATICS_ALGEBRA_BOUNDING_SPHERE_H
@@ -50,47 +50,47 @@ namespace Mathematics
         using BufferTarget = CoreTools::BufferTarget;
 
     public:
-        // Ä¬ÈÏ¹¹Ôìº¯Êı½«ÖĞĞÄÉèÖÃÎªÔ­µã(0,0,0)£¬½«°ë¾¶ÉèÖÃÎª0¡£°ë¾¶Îª0±íÊ¾±ß½çÎŞĞ§¡£
+        // é»˜è®¤æ„é€ å‡½æ•°å°†ä¸­å¿ƒè®¾ç½®ä¸ºåŸç‚¹(0,0,0)ï¼Œå°†åŠå¾„è®¾ç½®ä¸º0ã€‚åŠå¾„ä¸º0è¡¨ç¤ºè¾¹ç•Œæ— æ•ˆã€‚
         constexpr BoundingSphere() noexcept
             : center{}, radius{}
         {
         }
 
-        // ±ß½çÖ¸¶¨ÎªÒ»¸öÖ¸¶¨ÖĞĞÄºÍ°ë¾¶µÄÇòÌå¡£
+        // è¾¹ç•ŒæŒ‡å®šä¸ºä¸€ä¸ªæŒ‡å®šä¸­å¿ƒå’ŒåŠå¾„çš„çƒä½“ã€‚
         BoundingSphere(const APointType& center, T radius);
 
         CLASS_INVARIANT_DECLARE;
 
-        // ÈÎºÎ±ß½ç±ØĞë¶¨ÒåÒ»¸öÖĞĞÄºÍÒ»¸ö°ë¾¶£¬°ë¾¶±ØĞëÊÇ·Ç¸ºµÄ¡£
+        // ä»»ä½•è¾¹ç•Œå¿…é¡»å®šä¹‰ä¸€ä¸ªä¸­å¿ƒå’Œä¸€ä¸ªåŠå¾„ï¼ŒåŠå¾„å¿…é¡»æ˜¯éè´Ÿçš„ã€‚
         void SetCenter(const APointType& aCenter) noexcept;
         void SetRadius(T aRadius);
         NODISCARD APointType GetCenter() const noexcept;
         NODISCARD T GetRadius() const noexcept;
 
-        /// ±ß½çÉÏµÄ²Ù×÷¡£
+        /// è¾¹ç•Œä¸Šçš„æ“ä½œã€‚
 
-        /// Æ½ÃæµÄ¡°ÕıÃæ¡±ÊÇÆ½Ãæ·¨ÏßÖ¸ÏòµÄ°ë¿Õ¼ä¡£¡°·´Ãæ¡±ÊÇÁíÒ»°ë¿Õ¼ä¡£
-        /// µ±ÇòÌåÍêÈ«Î»ÓÚÕı²àÊ±£¬º¯Êı·µ»ØNumericalValueSymbol::Positive£¬
-        /// µ±ÇòÌåÍêÈ«´¦ÓÚ¸º²àÊ±·µ»ØNumericalValueSymbol::Negative£¬
-        /// µ±ÇòÌå±»Æ½ÃæºáÏòÇĞ¸îÊ±·µ»ØNumericalValueSymbol::Zero£¨Æ½ÃæÁ½²àµÄÇòÌåÌå»ı¾ùÎªÕı£©¡£
-        /// epsilonÎªÆ«ÏòÍêÈ«ÇĞ¸îµÄÎó²î£¬Èç¹ûÒªÆ«ÏòÕı·´Ãæ£¬epsilon´«Èë¸ºÊı¡£
+        /// å¹³é¢çš„â€œæ­£é¢â€æ˜¯å¹³é¢æ³•çº¿æŒ‡å‘çš„åŠç©ºé—´ã€‚â€œåé¢â€æ˜¯å¦ä¸€åŠç©ºé—´ã€‚
+        /// å½“çƒä½“å®Œå…¨ä½äºæ­£ä¾§æ—¶ï¼Œå‡½æ•°è¿”å›NumericalValueSymbol::Positiveï¼Œ
+        /// å½“çƒä½“å®Œå…¨å¤„äºè´Ÿä¾§æ—¶è¿”å›NumericalValueSymbol::Negativeï¼Œ
+        /// å½“çƒä½“è¢«å¹³é¢æ¨ªå‘åˆ‡å‰²æ—¶è¿”å›NumericalValueSymbol::Zeroï¼ˆå¹³é¢ä¸¤ä¾§çš„çƒä½“ä½“ç§¯å‡ä¸ºæ­£ï¼‰ã€‚
+        /// epsilonä¸ºåå‘å®Œå…¨åˆ‡å‰²çš„è¯¯å·®ï¼Œå¦‚æœè¦åå‘æ­£åé¢ï¼Œepsilonä¼ å…¥è´Ÿæ•°ã€‚
         NODISCARD NumericalValueSymbol WhichSide(const PlaneType& plane, T epsilon = MathType::GetZeroTolerance()) const noexcept;
 
-        /// Ôö¼Ó 'this' ÒÔ°üº¬ÊäÈëÇòÌå¡£
+        /// å¢åŠ  'this' ä»¥åŒ…å«è¾“å…¥çƒä½“ã€‚
         void GrowToContain(const BoundingSphere& bound, T epsilon = MathType::GetZeroTolerance());
 
-        /// ±ä»»ÇòÌå¡£Èç¹û±ä»»¾ßÓĞ²»¾ùÔÈËõ·Å£¬ÔòÉú³ÉµÄ¶ÔÏóÎªÍÖÇòÌå¡£½«Éú³ÉÒ»¸ö°üº¬ÍÖÇòÌåµÄÇòÌå¡£
+        /// å˜æ¢çƒä½“ã€‚å¦‚æœå˜æ¢å…·æœ‰ä¸å‡åŒ€ç¼©æ”¾ï¼Œåˆ™ç”Ÿæˆçš„å¯¹è±¡ä¸ºæ¤­çƒä½“ã€‚å°†ç”Ÿæˆä¸€ä¸ªåŒ…å«æ¤­çƒä½“çš„çƒä½“ã€‚
         NODISCARD BoundingSphere TransformBy(const TransformType& transform) const;
 
-        /// ´Ëº¯Êı½öÊÊÓÃÓÚ3Í¨µÀµã (x,y,z)»ò4Í¨µÀÊ¸Á¿ (x,y,z,0)»ò4Í¨µÀµã(x,y,z,1)¡£
-        /// ÔÚËùÓĞÇé¿öÏÂ£¬º¯Êı¶¼Ö»·ÃÎÊ(x,y,z) ¸öÖµ¡£strideÔÊĞíÄú´«Èë¶¥µã»º³åÇøÊı¾İ¡£
-        /// µ±µãÔÚÄÚ´æÖĞÁ¬ĞøÊ±£¬½«strideÉèÖÃÎªÁã¡£¡°data¡±Ö¸Õë±ØĞëÖ¸ÏòµÚÒ»¸öµã£¨Æ«ÒÆÁ¿0£©¡£
+        /// æ­¤å‡½æ•°ä»…é€‚ç”¨äº3é€šé“ç‚¹ (x,y,z)æˆ–4é€šé“çŸ¢é‡ (x,y,z,0)æˆ–4é€šé“ç‚¹(x,y,z,1)ã€‚
+        /// åœ¨æ‰€æœ‰æƒ…å†µä¸‹ï¼Œå‡½æ•°éƒ½åªè®¿é—®(x,y,z) ä¸ªå€¼ã€‚strideå…è®¸æ‚¨ä¼ å…¥é¡¶ç‚¹ç¼“å†²åŒºæ•°æ®ã€‚
+        /// å½“ç‚¹åœ¨å†…å­˜ä¸­è¿ç»­æ—¶ï¼Œå°†strideè®¾ç½®ä¸ºé›¶ã€‚â€œdataâ€æŒ‡é’ˆå¿…é¡»æŒ‡å‘ç¬¬ä¸€ä¸ªç‚¹ï¼ˆåç§»é‡0ï¼‰ã€‚
         void ComputeFromData(int numElements, int stride, SpanConstIterator data);
         void ComputeFromData(const APointContainer& data);
         void ComputeFromData(const Vector3Container& data);
 
-        // ²âÊÔÏßĞÔ·ÖÁ¿ºÍ±ß½çÊÇ·ñÏà½»£¨²»¼ÆËã½»Õ½£©¡£ÏßĞÔ·ÖÁ¿Í¨¹ıP + t * D½øĞĞ²ÎÊı»¯£¬
-        // ÕâÀïPÊÇÒ»¸ö·ÖÁ¿ÉÏµÄµã£¨Ô­µã£©£¬DÊÇÒ»¸öµ¥Î»³¤¶ÈÏòÁ¿¡£¼ä¸ô[tMin,tMax]ÊÇ
+        // æµ‹è¯•çº¿æ€§åˆ†é‡å’Œè¾¹ç•Œæ˜¯å¦ç›¸äº¤ï¼ˆä¸è®¡ç®—äº¤æˆ˜ï¼‰ã€‚çº¿æ€§åˆ†é‡é€šè¿‡P + t * Dè¿›è¡Œå‚æ•°åŒ–ï¼Œ
+        // è¿™é‡ŒPæ˜¯ä¸€ä¸ªåˆ†é‡ä¸Šçš„ç‚¹ï¼ˆåŸç‚¹ï¼‰ï¼ŒDæ˜¯ä¸€ä¸ªå•ä½é•¿åº¦å‘é‡ã€‚é—´éš”[tMin,tMax]æ˜¯
         // line: tMin = -MathF::maxReal, tMax = MathF::maxReal
         // ray: tMin = 0.0f, tMax = MathF::maxReal
         // segment: tMin >= 0.0f, tMax > tMin
@@ -110,12 +110,12 @@ namespace Mathematics
         T radius{};
     };
 
-    /// ²âÊÔÁ½¸ö¹Ì¶¨µÄ±ß½çÊÇ·ñÏà½»¡£
-    /// epsilonÎªÏà½»µÄÎó²î£¬Èç¹ûÒªÆ«Ïò²»Ïà½»£¬epsilon´«Èë¸ºÊı¡£
+    /// æµ‹è¯•ä¸¤ä¸ªå›ºå®šçš„è¾¹ç•Œæ˜¯å¦ç›¸äº¤ã€‚
+    /// epsilonä¸ºç›¸äº¤çš„è¯¯å·®ï¼Œå¦‚æœè¦åå‘ä¸ç›¸äº¤ï¼Œepsilonä¼ å…¥è´Ÿæ•°ã€‚
     template <typename T>
     NODISCARD bool TestIntersection(const BoundingSphere<T>& lhsBound, const BoundingSphere<T>& rhsBound, T epsilon = Math<T>::GetZeroTolerance()) noexcept;
 
-    // ²âÊÔÁ½¸öÔË¶¯µÄ±ß½çÊÇ·ñÏà½»¡£ lhsVelocityÊÇlhsBoundµÄËÙ¶È£¬¶ørhsVelocityÊÇrhsBoundµÄËÙ¶È¡£
+    // æµ‹è¯•ä¸¤ä¸ªè¿åŠ¨çš„è¾¹ç•Œæ˜¯å¦ç›¸äº¤ã€‚ lhsVelocityæ˜¯lhsBoundçš„é€Ÿåº¦ï¼Œè€ŒrhsVelocityæ˜¯rhsBoundçš„é€Ÿåº¦ã€‚
     template <typename T>
     NODISCARD bool TestIntersection(const BoundingSphere<T>& lhsBound, const AVector<T>& lhsVelocity, const BoundingSphere<T>& rhsBound, const AVector<T>& rhsVelocity, T tMax);
 

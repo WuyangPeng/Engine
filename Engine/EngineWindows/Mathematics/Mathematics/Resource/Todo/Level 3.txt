@@ -1,7 +1,7 @@
-TODO Level 3
+ï»¿TODO Level 3
 
 1.0.0.4
 
-1.  £¨Algebra£©MatrixÀàÊµÏÖÒ»¸öµü´úÆ÷±éÀúÊı¾İ¡£  
-2.  £¨Algebra£©Ôö¼ÓÒ»¸öÊ¹ÓÃĞĞ¾ØÕó»òÁĞ¾ØÕóµÄÓÃ»§ºê¡£ 
-3.  £¨Algebra£©Ôö¼ÓÒ»¸ötemplate <int32_t NumRows, int32_t NumCols, typename Real> class Matrix¡£ 
+1.  ï¼ˆAlgebraï¼‰Matrixç±»å®ç°ä¸€ä¸ªè¿­ä»£å™¨éå†æ•°æ®ã€‚  
+2.  ï¼ˆAlgebraï¼‰å¢åŠ ä¸€ä¸ªä½¿ç”¨è¡ŒçŸ©é˜µæˆ–åˆ—çŸ©é˜µçš„ç”¨æˆ·å®ã€‚ 
+3.  ï¼ˆAlgebraï¼‰å¢åŠ ä¸€ä¸ªtemplate <int32_t NumRows, int32_t NumCols, typename Real> class Matrixã€‚ 

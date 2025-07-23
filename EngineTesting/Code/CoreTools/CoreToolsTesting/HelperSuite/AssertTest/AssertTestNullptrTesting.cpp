@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 21:31)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 21:31)
 
 #include "AssertTestNullptrTesting.h"
 #include "CoreTools/CoreToolsTesting/HelperSuite/Detail/MacroTestEnum.h"
@@ -49,22 +49,22 @@ void CoreTools::AssertTestNullptrTesting::AssertNullptrMessageTest()
 {
     int* ptr{ nullptr };
 
-    ASSERT_EQUAL_NULL_PTR_USE_MESSAGE(ptr, "²âÊÔ");
+    ASSERT_EQUAL_NULL_PTR_USE_MESSAGE(ptr, "æµ‹è¯•");
 
     auto value = 0;
     ptr = &value;
 
-    ASSERT_UNEQUAL_NULL_PTR_USE_MESSAGE(ptr, "²âÊÔ");
+    ASSERT_UNEQUAL_NULL_PTR_USE_MESSAGE(ptr, "æµ‹è¯•");
 }
 
 void CoreTools::AssertTestNullptrTesting::AssertNullptrFailureThrowTest()
 {
     int* ptr{ nullptr };
 
-    ASSERT_EQUAL_NULL_PTR_FAILURE_THROW(ptr, "²âÊÔ");
+    ASSERT_EQUAL_NULL_PTR_FAILURE_THROW(ptr, "æµ‹è¯•");
 
     auto value = 0;
     ptr = &value;
 
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(ptr, "²âÊÔ");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(ptr, "æµ‹è¯•");
 }

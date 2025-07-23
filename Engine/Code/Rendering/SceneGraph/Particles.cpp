@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/28 17:56)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/28 17:56)
 
 #include "Rendering/RenderingExport.h"
 
@@ -18,6 +18,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/TransformDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
 #include "Rendering/Resources/Flags/DataFormatType.h"
 #include "Rendering/Resources/Flags/UsageType.h"
@@ -50,7 +51,7 @@ Rendering::Particles::Particles(const Container& positionSize, float sizeAdjust,
     const auto step = vertexSize - Mathematics::GetStreamSize<Vector2>();
     if (step < 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("²½½øÖµ´íÎó¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ­¥è¿›å€¼é”™è¯¯ã€‚"))
     }
 
     for (auto i = 0; i < numParticles; ++i)
@@ -139,38 +140,38 @@ void Rendering::Particles::Check(const VertexFormat& vertexFormat) const
     auto index = vertexFormat.GetIndex(VertexFormatFlags::Semantic::Position, 0);
     if (index < 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¶¥µã¸ñÊ½Ã»ÓĞSemantic::Position"))
+        THROW_EXCEPTION(SYSTEM_TEXT("é¡¶ç‚¹æ ¼å¼æ²¡æœ‰Semantic::Position"))
     }
 
     const auto posType = vertexFormat.GetAttributeType(index);
     if (posType != DataFormatType::R32G32B32A32Float && posType != DataFormatType::R32G32B32Float)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î»ÖÃÀàĞÍÎŞĞ§"))
+        THROW_EXCEPTION(SYSTEM_TEXT("ä½ç½®ç±»å‹æ— æ•ˆ"))
     }
 
     auto offset = vertexFormat.GetOffset(index);
     if (offset != 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î»ÖÃÆ«ÒÆ±ØĞëÎª0"))
+        THROW_EXCEPTION(SYSTEM_TEXT("ä½ç½®åç§»å¿…é¡»ä¸º0"))
     }
 
     index = vertexFormat.GetIndex(VertexFormatFlags::Semantic::TextureCoord, 0);
     if (index < 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¶¥µã¸ñÊ½Ã»ÓĞSemantic::TextureCoord"))
+        THROW_EXCEPTION(SYSTEM_TEXT("é¡¶ç‚¹æ ¼å¼æ²¡æœ‰Semantic::TextureCoord"))
     }
 
     if (const auto texType = vertexFormat.GetAttributeType(index);
         texType != DataFormatType::R32G32Float)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎÆÀí×ø±êÀàĞÍÎŞĞ§"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çº¹ç†åæ ‡ç±»å‹æ— æ•ˆ"))
     }
 
     const auto texOffset = (posType == DataFormatType::R32G32B32Float ? 3 * CoreTools::GetStreamSize<float>() : 4 * CoreTools::GetStreamSize<float>());
     offset = vertexFormat.GetOffset(index);
     if (offset != texOffset)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎÆÀí×ø±ê±ØĞë½ô¸úÎ»ÖÃ"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çº¹ç†åæ ‡å¿…é¡»ç´§è·Ÿä½ç½®"))
     }
 }
 
@@ -208,7 +209,7 @@ void Rendering::Particles::GenerateParticles(const Camera& camera)
     const auto step = vertexSize - Mathematics::GetStreamSize<Vector2>();
     if (step < 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("²½½øÖµ´íÎó¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ­¥è¿›å€¼é”™è¯¯ã€‚"))
     }
 
     for (auto i = 0; i < impl->GetNumActive(); ++i)

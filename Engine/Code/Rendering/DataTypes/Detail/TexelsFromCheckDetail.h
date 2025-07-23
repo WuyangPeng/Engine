@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:54)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:54)
 
 #ifndef RENDERING_DATA_TYPES_TEXELS_FROM_CHECK_DETAIL_H
 #define RENDERING_DATA_TYPES_TEXELS_FROM_CHECK_DETAIL_H
@@ -49,7 +49,7 @@ void Rendering::TexelsFromCheck<Format>::CheckInTexels() noexcept(gAssert < 1 ||
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    RENDERING_ASSERTION_1(inTexelsSize % step == 0, "ÊäÈëÊı×é´óĞ¡%d²»ÊÇ%dµÄ±¶Êı¡£", inTexelsSize, step);
+    RENDERING_ASSERTION_1(inTexelsSize % step == 0, "è¾“å…¥æ•°ç»„å¤§å°%dä¸æ˜¯%dçš„å€æ•°ã€‚", inTexelsSize, step);
 }
 
 template <Rendering::TextureFormat Format>
@@ -57,7 +57,7 @@ void Rendering::TexelsFromCheck<Format>::CheckOutTexels(MAYBE_UNUSED size_t outT
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    RENDERING_ASSERTION_2(outTexelsSize == GetOutTexelsLength(), "Êä³öÊı×é´óĞ¡%d´íÎó¡£", outTexelsSize);
+    RENDERING_ASSERTION_2(outTexelsSize == GetOutTexelsLength(), "è¾“å‡ºæ•°ç»„å¤§å°%dé”™è¯¯ã€‚", outTexelsSize);
 }
 
 #endif  // RENDERING_DATA_TYPES_TEXELS_FROM_CHECK_DETAIL_H

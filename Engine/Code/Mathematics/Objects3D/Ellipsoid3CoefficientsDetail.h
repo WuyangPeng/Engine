@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 10:38)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 10:38)
 
 #ifndef MATHEMATICS_OBJECTS_3D_ELLIPSOID3_COEFFICIENTS_DETAIL_H
 #define MATHEMATICS_OBJECTS_3D_ELLIPSOID3_COEFFICIENTS_DETAIL_H
@@ -109,7 +109,7 @@ typename Mathematics::Ellipsoid3Coefficients<Real>::CoefficientsType Mathematics
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-    // °²ÅÅx0^2»òx1^2»òx2^2ÏµÊıÖ®Ò»ÊÇ1¡£
+    // å®‰æ’x0^2æˆ–x1^2æˆ–x2^2ç³»æ•°ä¹‹ä¸€æ˜¯1ã€‚
     auto maxValue = MathType::FAbs(result[4]);
     int maxIndex{ 4 };
     auto absValue = MathType::FAbs(result[7]);
@@ -153,7 +153,7 @@ bool Mathematics::Approximate(const Ellipsoid3Coefficients<Real>& lhs, const Ell
 
     if (lhsCoefficients.size() != coefficientsSize || rhsCoefficients.size() != coefficientsSize)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("GetCoefficients·µ»ØµÄÊı×é´óĞ¡´íÎó£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("GetCoefficientsè¿”å›çš„æ•°ç»„å¤§å°é”™è¯¯ï¼"s));
     }
 
     for (auto i = 0; i < coefficientsSize; ++i)

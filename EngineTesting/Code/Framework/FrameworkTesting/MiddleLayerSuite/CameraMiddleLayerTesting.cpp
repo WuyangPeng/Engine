@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.3 (2023/08/12 16:33)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.3 (2023/08/12 16:33)
 
 #include "CameraMiddleLayerTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -13,6 +13,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 #include "Mathematics/Algebra/TransformDetail.h"
 #include "Framework/WindowCreate/WindowSize.h"
 
@@ -30,7 +31,7 @@ float Framework::CameraMiddleLayerTesting::CalculateMultiplier(const WindowSize&
     const auto height = windowSize.GetWindowHeight();
 
     const auto minValue = std::min(width, height);
-    ASSERT_LESS_EQUAL_FAILURE_THROW(0, minValue, "³ıÁã´íÎó¡£");
+    ASSERT_LESS_EQUAL_FAILURE_THROW(0, minValue, "é™¤é›¶é”™è¯¯ã€‚");
 
     return 1.0f / static_cast<float>(minValue);
 }
@@ -131,7 +132,7 @@ void Framework::CameraMiddleLayerTesting::APointTest(const APoint& lhs, const AP
 {
     using ApproximateFunction = bool (*)(const APoint&, const APoint&, float);
     ApproximateFunction approximateFunction{ Mathematics::Approximate<float> };
-    const auto message = "º¯ÊıÃûÎª£º" + functionName + "£¬ĞòºÅ£º" + std::to_string(index);
+    const auto message = "å‡½æ•°åä¸ºï¼š" + functionName + "ï¼Œåºå·ï¼š" + std::to_string(index);
 
     ASSERT_APPROXIMATE_USE_FUNCTION_AND_MESSAGE(approximateFunction, lhs, rhs, Mathematics::MathF::GetZeroTolerance(), message);
 }
@@ -140,7 +141,7 @@ void Framework::CameraMiddleLayerTesting::AVectorTest(const AVector& lhs, const 
 {
     using ApproximateFunction = bool (*)(const AVector&, const AVector&, float);
     ApproximateFunction approximateFunction{ Mathematics::Approximate<float> };
-    const auto message = "º¯ÊıÃûÎª£º" + functionName + "£¬ĞòºÅ£º" + std::to_string(index);
+    const auto message = "å‡½æ•°åä¸ºï¼š" + functionName + "ï¼Œåºå·ï¼š" + std::to_string(index);
 
     ASSERT_APPROXIMATE_USE_FUNCTION_AND_MESSAGE(approximateFunction, lhs, rhs, Mathematics::MathF::GetZeroTolerance(), message);
 }
@@ -149,7 +150,7 @@ void Framework::CameraMiddleLayerTesting::TransformTest(const Transform& lhs, co
 {
     using ApproximateFunction = bool (*)(const Transform&, const Transform&, float);
     ApproximateFunction approximateFunction{ Mathematics::Approximate };
-    const auto message = "º¯ÊıÃûÎª£º" + functionName + "£¬ĞòºÅ£º" + std::to_string(index);
+    const auto message = "å‡½æ•°åä¸ºï¼š" + functionName + "ï¼Œåºå·ï¼š" + std::to_string(index);
 
     ASSERT_APPROXIMATE_USE_FUNCTION_AND_MESSAGE(approximateFunction, lhs, rhs, Mathematics::MathF::GetZeroTolerance(), message);
 }
@@ -158,7 +159,7 @@ void Framework::CameraMiddleLayerTesting::MatrixTest(const Matrix& lhs, const Ma
 {
     using ApproximateFunction = bool (*)(const Matrix&, const Matrix&, float);
     ApproximateFunction approximateFunction{ Mathematics::Approximate };
-    const auto message = "º¯ÊıÃûÎª£º" + functionName + "£¬ĞòºÅ£º" + std::to_string(index);
+    const auto message = "å‡½æ•°åä¸ºï¼š" + functionName + "ï¼Œåºå·ï¼š" + std::to_string(index);
 
     ASSERT_APPROXIMATE_USE_FUNCTION_AND_MESSAGE(approximateFunction, lhs, rhs, Mathematics::MathF::GetZeroTolerance(), message);
 }

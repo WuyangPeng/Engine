@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/09 09:51)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 09:51)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_NATURAL_SPLINE2_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_NATURAL_SPLINE2_DETAIL_H
@@ -351,7 +351,7 @@ Real Mathematics::NaturalSpline2<Real>::GetSpeedWithDataKey(Real t, const Spline
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("dataÖ¸ÕëÎª¿Õ¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("dataæŒ‡é’ˆä¸ºç©ºã€‚"));
     }
 }
 

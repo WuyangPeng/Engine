@@ -1,13 +1,13 @@
-TODO Level 7
+ï»¿TODO Level 7
 
 1.0.0.4
 
-1. £¨NumericalAnalysis£©PolynomialRootsÀàÍê³ÉÒÔÏÂ¹¦ÄÜ£º
+1. ï¼ˆNumericalAnalysisï¼‰PolynomialRootsç±»å®Œæˆä»¥ä¸‹åŠŸèƒ½ï¼š
 						bool FindNewton(const Polynomial& polynomial, int digits);
 						bool FindEigenvalues(const Polynomial& polynomial, bool doBalancing);
 						bool FindNewton(const Polynomial& polynomial, Real xMin, Real xMax,int digits);
-2. £¨NumericalAnalysis£©½«EquationResultµÄImaginaryLessÀàÌáÈ¡³öÀ´¡£
-3. £¨NumericalAnalysis£©SingularValueDecompositionÀàµÄCalculateº¯ÊıĞèÒª´Ó¡°¾ØÕó¼ÆËã¡±ÊµÏÖÆäËûQR·Ö½âºÍÆæÒìÖµ·Ö½â´úÂë£¬È»ºó¸øÓÃ»§Ö¸¶¨ÕâÀïÊ¹ÓÃÄÄĞ©·½·¨µÄÄÜÁ¦¡£ 
-4. £¨NumericalAnalysis£©½«ÄÚ²¿ÀàImaginaryLessÌá³ö¡£
-5. £¨NumericalAnalysis£©ĞŞ¸ÄNumericalAnalysisµü´úÆ÷µÄÉè¼Æ£¬¿´ÄÜ·ñ¸Ä³Éstd¡£
-6. £¨NumericalAnalysis£©ĞÂ¼ÓSingularValueDecompositionGTE¡¢SymmetricEigensolverGTEÀà¡£
+2. ï¼ˆNumericalAnalysisï¼‰å°†EquationResultçš„ImaginaryLessç±»æå–å‡ºæ¥ã€‚
+3. ï¼ˆNumericalAnalysisï¼‰SingularValueDecompositionç±»çš„Calculateå‡½æ•°éœ€è¦ä»â€œçŸ©é˜µè®¡ç®—â€å®ç°å…¶ä»–QRåˆ†è§£å’Œå¥‡å¼‚å€¼åˆ†è§£ä»£ç ï¼Œç„¶åç»™ç”¨æˆ·æŒ‡å®šè¿™é‡Œä½¿ç”¨å“ªäº›æ–¹æ³•çš„èƒ½åŠ›ã€‚ 
+4. ï¼ˆNumericalAnalysisï¼‰å°†å†…éƒ¨ç±»ImaginaryLessæå‡ºã€‚
+5. ï¼ˆNumericalAnalysisï¼‰ä¿®æ”¹NumericalAnalysisè¿­ä»£å™¨çš„è®¾è®¡ï¼Œçœ‹èƒ½å¦æ”¹æˆstdã€‚
+6. ï¼ˆNumericalAnalysisï¼‰æ–°åŠ SingularValueDecompositionGTEã€SymmetricEigensolverGTEç±»ã€‚

@@ -1,8 +1,8 @@
-TODO Level 5
+ï»¿TODO Level 5
 
 1.0.0.4
  
-1. £¨Objects2D£©Segment2¡¢Segment3ÀàĞŞÕıÏß¶ÎµÄÖµ£¬°´ĞèÇóÌí¼Ó¡£
-2. £¨Objects2D£©Polygon2ÀàµÄÀà²»±äÊ½ÅĞ¶Ï¶à±ßĞÎÎª¼òµ¥¶à±ßĞÎ¡£
-3. £¨Objects2D£©Triangle2ÀàµÄÀà²»±äÊ½ÅĞ¶ÏÈı½ÇĞÎ²»¹²Ïß¡£
-4. £¨Objects2D£©ĞŞ¸ÄTriangle2µÄDistanceToº¯Êı¡£
+1. ï¼ˆObjects2Dï¼‰Segment2ã€Segment3ç±»ä¿®æ­£çº¿æ®µçš„å€¼ï¼ŒæŒ‰éœ€æ±‚æ·»åŠ ã€‚
+2. ï¼ˆObjects2Dï¼‰Polygon2ç±»çš„ç±»ä¸å˜å¼åˆ¤æ–­å¤šè¾¹å½¢ä¸ºç®€å•å¤šè¾¹å½¢ã€‚
+3. ï¼ˆObjects2Dï¼‰Triangle2ç±»çš„ç±»ä¸å˜å¼åˆ¤æ–­ä¸‰è§’å½¢ä¸å…±çº¿ã€‚
+4. ï¼ˆObjects2Dï¼‰ä¿®æ”¹Triangle2çš„DistanceToå‡½æ•°ã€‚

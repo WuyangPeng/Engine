@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/23 22:25)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/23 22:25)
 
 #include "DatabaseEntityTestingDetail.h"
 #include "DatabaseGenerate/DatabaseGenerateBase/AncientBooks/Version.h"
@@ -114,7 +114,7 @@ void DatabaseGenerateBaseTesting::VersionEntityTesting::EqualTest(const Version&
 {
     const auto result = entityContainer.find(version.GetId());
 
-    ASSERT_UNEQUAL_FAILURE_THROW(result, entityContainer.cend(), "Êý¾Ý¿âÖÐÎ´ÕÒµ½¶ÔÓ¦Êý¾Ý¡£id = " + std::to_string(version.GetId()));
+    ASSERT_UNEQUAL_FAILURE_THROW(result, entityContainer.cend(), "æ•°æ®åº“ä¸­æœªæ‰¾åˆ°å¯¹åº”æ•°æ®ã€‚id = " + std::to_string(version.GetId()));
 
     const auto& versionEntity = result->second;
 

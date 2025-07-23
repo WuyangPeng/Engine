@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/11 13:34)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/11 13:34)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_CHEBYSHEV_RATIO_ESTIMATE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_CHEBYSHEV_RATIO_ESTIMATE_H
@@ -16,20 +16,20 @@
 
 #include <array>
 
-/// ¶ÔÓÚ[0,1]ÖĞµÄtºÍ[0,pi/2]ÖĞµÄA£¬Chebyshev±ÈÎªf(t,A) = sin(t*A)/sin(A)¡£
-/// Éèx = cos(A) £¬ y = 1 - cos(A)£¬¶¼ÔÚ[0,1]ÖĞ¡£×÷ÎªyµÄº¯Êı£¬ f(t,y)µÄ¼¶Êı±íÊ¾Îª
-/// f(t,y) = sum_{i=0}^{infinity} c_{i}(t) y^{i}£¬
-/// ÆäÖĞc_0(t) = t, c_{i}(t) = c_{i-1}(t)*(i^2 - t^2)/(i*(2*i+1)) for i >= 1¡£
-/// c_{i}(t)ÊÇtÖĞ½×Îª 2*i+1µÄ¶àÏîÊ½¡£
-/// µ¼³ö½üËÆ g(t,y) = sum_{i=0}^{n-1} c_{i}(t) y^{i} + u_n c_{n}(t) y^n¡£
-/// ChebyshevRatioEstimate<T>::DegreeÊµÏÖÁË¸ÃËã·¨¡£
-/// Èç¹û½Ç¶ÈA±»ÏŞÖÆÎª[0,pi/4]£¬ÄÇÃ´¶ÔÓÚÏàÍ¬µÄ¼ÆËã³É±¾¿ÉÒÔ»ñµÃ¸üºÃµÄ¹À¼Æ¡£
-/// ËùÓĞ²»Í¬µÄÊÇu_nÖµ¡£ChebyshevRatioEstimate<T>::DegreeRealÊµÏÖÁË¸ÃËã·¨¡£
-/// º¯Êı·µ»Ø¶Ô{f(1-t,A), f(t,A)}£¬Õâ¶ÔÓÚÇòÃæÏßĞÔ²åÖµºÜÓĞÓÃ¡£
+/// å¯¹äº[0,1]ä¸­çš„tå’Œ[0,pi/2]ä¸­çš„Aï¼ŒChebyshevæ¯”ä¸ºf(t,A) = sin(t*A)/sin(A)ã€‚
+/// è®¾x = cos(A) ï¼Œ y = 1 - cos(A)ï¼Œéƒ½åœ¨[0,1]ä¸­ã€‚ä½œä¸ºyçš„å‡½æ•°ï¼Œ f(t,y)çš„çº§æ•°è¡¨ç¤ºä¸º
+/// f(t,y) = sum_{i=0}^{infinity} c_{i}(t) y^{i}ï¼Œ
+/// å…¶ä¸­c_0(t) = t, c_{i}(t) = c_{i-1}(t)*(i^2 - t^2)/(i*(2*i+1)) for i >= 1ã€‚
+/// c_{i}(t)æ˜¯tä¸­é˜¶ä¸º 2*i+1çš„å¤šé¡¹å¼ã€‚
+/// å¯¼å‡ºè¿‘ä¼¼ g(t,y) = sum_{i=0}^{n-1} c_{i}(t) y^{i} + u_n c_{n}(t) y^nã€‚
+/// ChebyshevRatioEstimate<T>::Degreeå®ç°äº†è¯¥ç®—æ³•ã€‚
+/// å¦‚æœè§’åº¦Aè¢«é™åˆ¶ä¸º[0,pi/4]ï¼Œé‚£ä¹ˆå¯¹äºç›¸åŒçš„è®¡ç®—æˆæœ¬å¯ä»¥è·å¾—æ›´å¥½çš„ä¼°è®¡ã€‚
+/// æ‰€æœ‰ä¸åŒçš„æ˜¯u_nå€¼ã€‚ChebyshevRatioEstimate<T>::DegreeRealå®ç°äº†è¯¥ç®—æ³•ã€‚
+/// å‡½æ•°è¿”å›å¯¹{f(1-t,A), f(t,A)}ï¼Œè¿™å¯¹äºçƒé¢çº¿æ€§æ’å€¼å¾ˆæœ‰ç”¨ã€‚
 
 namespace Mathematics
 {
-    // ChebyshevRatio<T>::DegreeµÄ³£Êı¡£
+    // ChebyshevRatio<T>::Degreeçš„å¸¸æ•°ã€‚
     constexpr std::array chebyshevRatioEstimateU{ 1.5149656562200644050,
                                                   1.6410179946672027729,
                                                   1.7124880779005808851,
@@ -76,7 +76,7 @@ namespace Mathematics
         return (Degree != (i + 1) ? Math<T>::GetValue(1) : static_cast<T>(chebyshevRatioEstimateU.at(i))) * static_cast<T>(i + 1) / static_cast<T>(2 * (i + 1) + 1);
     }
 
-    // ChebyshevRatio<T>::DegreeRealµÄ³£Êı¡£
+    // ChebyshevRatio<T>::DegreeRealçš„å¸¸æ•°ã€‚
     constexpr std::array chebyshevRatioEstimateRealU{ 1.1021472152138613865,
                                                       1.1239349540626744073,
                                                       1.1351870374370363059,
@@ -115,10 +115,10 @@ namespace Mathematics
         return (Degree != (i + 1) ? Math<T>::GetValue(1) : static_cast<T>(chebyshevRatioEstimateRealU[i])) * static_cast<T>(i + 1) / static_cast<T>(2 * (i + 1) + 1);
     }
 
-    /// ¼ÆËãf(t,x) = sin(t*A)/sin(A)µÄ¹À¼Æ£¬
-    /// ÆäÖĞ£¬tÔÚ[0,1]ÖĞ£¬AÔÚ[0,pi/2]ÖĞ£¬x = cos(A)ÔÚ[0,1]ÖĞ£¬f0ÊÇf(1-t,x)µÄ¹À¼Æ£¬f1ÊÇf(t,x)µÄ¹À¼Æ¡£
-    /// ½üËÆº¯ÊıÊÇÁ½¸ö±äÁ¿µÄ¶àÏîÊ½¡£Ä£°å²ÎÊıDegree±ØĞëÎ»ÓÚ{1..16}ÖĞ¡£
-    /// tÖĞµÄ¶ÈÊıÎª 2*Degree+1£¬xÖĞµÄ¶ÈÊıÊÇDegree¡£
+    /// è®¡ç®—f(t,x) = sin(t*A)/sin(A)çš„ä¼°è®¡ï¼Œ
+    /// å…¶ä¸­ï¼Œtåœ¨[0,1]ä¸­ï¼ŒAåœ¨[0,pi/2]ä¸­ï¼Œx = cos(A)åœ¨[0,1]ä¸­ï¼Œf0æ˜¯f(1-t,x)çš„ä¼°è®¡ï¼Œf1æ˜¯f(t,x)çš„ä¼°è®¡ã€‚
+    /// è¿‘ä¼¼å‡½æ•°æ˜¯ä¸¤ä¸ªå˜é‡çš„å¤šé¡¹å¼ã€‚æ¨¡æ¿å‚æ•°Degreeå¿…é¡»ä½äº{1..16}ä¸­ã€‚
+    /// tä¸­çš„åº¦æ•°ä¸º 2*Degree+1ï¼Œxä¸­çš„åº¦æ•°æ˜¯Degreeã€‚
     template <typename T, int Degree>
     requires(1 <= Degree && Degree <= 16)
     NODISCARD std::array<T, 2> ChebyshevRatioEstimate(T t, T x);
@@ -130,10 +130,10 @@ namespace Mathematics
         return chebyshevRatioEstimateMaxError[Degree - 1];
     }
 
-    /// ¼ÆËãf(t,x) = sin(t*A)/sin(A))µÄ¹À¼Æ£¬
-    /// ÆäÖĞ£¬tÔÚ[0,1]ÖĞ£¬AÔÚ[0,pi/4]ÖĞ£¬x = cos(A)ÔÚ[0,1]ÖĞ£¬f0ÊÇf(1-t,x)µÄ¹À¼Æ£¬f1ÊÇf(t,x)µÄ¹À¼Æ¡£
-    /// ½üËÆº¯ÊıÊÇÁ½¸ö±äÁ¿µÄ¶àÏîÊ½¡£Ä£°å²ÎÊıDegree±ØĞëÎ»ÓÚ{1..12}ÖĞ¡£
-    /// tÖĞµÄ¶ÈÊıÎª 2*Degree+1£¬xÖĞµÄ¶ÈÊıÊÇDegree¡£
+    /// è®¡ç®—f(t,x) = sin(t*A)/sin(A))çš„ä¼°è®¡ï¼Œ
+    /// å…¶ä¸­ï¼Œtåœ¨[0,1]ä¸­ï¼ŒAåœ¨[0,pi/4]ä¸­ï¼Œx = cos(A)åœ¨[0,1]ä¸­ï¼Œf0æ˜¯f(1-t,x)çš„ä¼°è®¡ï¼Œf1æ˜¯f(t,x)çš„ä¼°è®¡ã€‚
+    /// è¿‘ä¼¼å‡½æ•°æ˜¯ä¸¤ä¸ªå˜é‡çš„å¤šé¡¹å¼ã€‚æ¨¡æ¿å‚æ•°Degreeå¿…é¡»ä½äº{1..12}ä¸­ã€‚
+    /// tä¸­çš„åº¦æ•°ä¸º 2*Degree+1ï¼Œxä¸­çš„åº¦æ•°æ˜¯Degreeã€‚
     template <typename T, size_t Degree>
     requires(1 <= Degree && Degree <= 12)
     NODISCARD std::array<T, 2> ChebyshevRatioEstimateReal(T t, T x);

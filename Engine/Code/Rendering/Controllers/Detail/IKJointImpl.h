@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 14:01)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 14:01)
 
 #ifndef RENDERING_CONTROLLERS_IKJOINT_IMPL_H
 #define RENDERING_CONTROLLERS_IKJOINT_IMPL_H
@@ -45,7 +45,7 @@ namespace Rendering
 
         CORE_TOOLS_NAMES_IMPL_DECLARE;
 
-        // Joint¸üĞÂ¡£
+        // Jointæ›´æ–°ã€‚
         NODISCARD AVector GetAxis(MatrixRotationAxis axisIndex) const;
         void UpdateWorldTransform();
         void UpdateWorldRotateAndTranslate();
@@ -63,20 +63,20 @@ namespace Rendering
         NODISCARD bool IsAllowRotation(MatrixRotationAxis axisIndex) const;
 
     private:
-        // Ë÷ÒıiÎªjointµÄ¸¸ÊÀ½çaxis[i]¡£
+        // ç´¢å¼•iä¸ºjointçš„çˆ¶ä¸–ç•Œaxis[i]ã€‚
         static constexpr int numAxis = 3;
 
-        std::array<bool, numAxis> allowTranslation;  // Ä¬ÈÏ = false
-        std::array<float, numAxis> minTranslation;  // Ä¬ÈÏ = -ÎŞÇî´ó
-        std::array<float, numAxis> maxTranslation;  // Ä¬ÈÏ = +ÎŞÇî´ó
-        std::array<bool, numAxis> allowRotation;  // Ä¬ÈÏ = false
-        std::array<float, numAxis> minRotation;  // Ä¬ÈÏ = -ÎŞÇî´ó
-        std::array<float, numAxis> maxRotation;  // Ä¬ÈÏ = +ÎŞÇî´ó
+        std::array<bool, numAxis> allowTranslation;  // é»˜è®¤ = false
+        std::array<float, numAxis> minTranslation;  // é»˜è®¤ = -æ— ç©·å¤§
+        std::array<float, numAxis> maxTranslation;  // é»˜è®¤ = +æ— ç©·å¤§
+        std::array<bool, numAxis> allowRotation;  // é»˜è®¤ = false
+        std::array<float, numAxis> minRotation;  // é»˜è®¤ = -æ— ç©·å¤§
+        std::array<float, numAxis> maxRotation;  // é»˜è®¤ = +æ— ç©·å¤§
 
-        // ¹ÜÀíµÄ¶ÔÏó¡£
+        // ç®¡ç†çš„å¯¹è±¡ã€‚
         CoreTools::ObjectAssociated<Spatial> object;
 
-        // Ó°Ïì±¾jointµÄÄ¿±ê¡£
+        // å½±å“æœ¬jointçš„ç›®æ ‡ã€‚
         IKGoalSharedPtrVector goals;
     };
 }

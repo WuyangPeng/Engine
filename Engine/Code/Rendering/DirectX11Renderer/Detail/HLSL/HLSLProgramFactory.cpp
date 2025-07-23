@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/14 00:04)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/14 00:04)
 
 #include "Rendering/RenderingExport.h"
 
@@ -35,7 +35,7 @@ Rendering::ProgramFactoryImpl::VisualProgramSharedPtr Rendering::HLSLProgramFact
 
     System::UnusedFunction(vertexShaderName, vertexShaderSource, pixelShaderName, pixelShaderSource, geometryShaderName, geometryShaderSource);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("ÎŞ·¨»ñÈ¡VisualProgram"))
+    THROW_EXCEPTION(SYSTEM_TEXT("æ— æ³•è·å–VisualProgram"))
 }
 
 Rendering::ProgramFactoryImpl::ComputeProgramSharedPtr Rendering::HLSLProgramFactory::CreateFromNamedSource(const std::string& computeShaderName, const std::string& computeShaderSource)
@@ -44,5 +44,5 @@ Rendering::ProgramFactoryImpl::ComputeProgramSharedPtr Rendering::HLSLProgramFac
 
     System::UnusedFunction(computeShaderName, computeShaderSource);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("ÎŞ·¨»ñÈ¡ComputeProgram"))
+    THROW_EXCEPTION(SYSTEM_TEXT("æ— æ³•è·å–ComputeProgram"))
 }

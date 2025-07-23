@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.3 (2023/08/10 16:14)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.3 (2023/08/10 16:14)
 
 #include "AndroidCallBackUnitTestSuiteTestingAndroidCallBack.h"
 #include "AndroidFrameSuite/AndroidCallBackUnitTestSuiteTesting.h"
@@ -17,7 +17,7 @@
 #include "Framework/AndroidFrame/AndroidCallBackUnitTestSuiteDetail.h"
 
 AndroidCallBackUnitTestSuiteTesting::AndroidCallBackUnitTestSuiteTestingAndroidCallBack::AndroidCallBackUnitTestSuiteTestingAndroidCallBack(int64_t delta)
-    : ParentType(delta, "¡¾Android Call Back Unit Test Suite Testing¡¿µ¥Ôª²âÊÔÌ×¼ş")
+    : ParentType(delta, "ã€Android Call Back Unit Test Suite Testingã€‘å•å…ƒæµ‹è¯•å¥—ä»¶")
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -26,7 +26,7 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AndroidCallBackUnitTestSuiteTesting, Andr
 
 void AndroidCallBackUnitTestSuiteTesting::AndroidCallBackUnitTestSuiteTestingAndroidCallBack::InitSuite()
 {
-    auto androidFrameSuite = GenerateSuite("°²×¿¿ò¼Ü");
+    auto androidFrameSuite = GenerateSuite("å®‰å“æ¡†æ¶");
 
     ADD_TEST_USE_PARAMETER_1(androidFrameSuite, AndroidCallBackUnitTestSuiteTesting, shared_from_this());
 

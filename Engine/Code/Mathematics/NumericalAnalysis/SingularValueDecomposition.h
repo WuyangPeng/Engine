@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 13:43)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 13:43)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SINGULAR_VALUE_DECOMPOSITION_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SINGULAR_VALUE_DECOMPOSITION_H
@@ -30,10 +30,10 @@ namespace Mathematics
         using VariableLengthVectorType = VariableLengthVector<Real>;
 
     public:
-        // ÆæÒìÖµ·Ö½â£¬M = L * D * Transpose(Real)£¬
-        // ÆäÖĞLºÍRealÊÇÕı½»ºÍDÊÇ¶Ô½Ç¾ØÕó£¬Æä¶Ô½ÇÏîÊÇ·Ç¸ºÊı¡£
-        // ¹Û²ìMÎªm³Ën¾ØÕó£¬ÆäÖĞ m >= nÊ±£¬LÊÇm³Ëm£¬RealÊÇn³ËnºÍDÊÇm³Ën;
-        // ¼´MºÍD¾ßÓĞÏàÍ¬µÄ´óĞ¡£¬µ«²»Ò»¶¨Õı·½ĞÎ¡£
+        // å¥‡å¼‚å€¼åˆ†è§£ï¼ŒM = L * D * Transpose(Real)ï¼Œ
+        // å…¶ä¸­Lå’ŒRealæ˜¯æ­£äº¤å’ŒDæ˜¯å¯¹è§’çŸ©é˜µï¼Œå…¶å¯¹è§’é¡¹æ˜¯éè´Ÿæ•°ã€‚
+        // è§‚å¯ŸMä¸ºmä¹˜nçŸ©é˜µï¼Œå…¶ä¸­ m >= næ—¶ï¼ŒLæ˜¯mä¹˜mï¼ŒRealæ˜¯nä¹˜nå’ŒDæ˜¯mä¹˜n;
+        // å³Må’ŒDå…·æœ‰ç›¸åŒçš„å¤§å°ï¼Œä½†ä¸ä¸€å®šæ­£æ–¹å½¢ã€‚
         explicit SingularValueDecomposition(const VariableMatrixType& matrix);
 
         CLASS_INVARIANT_DECLARE;
@@ -45,16 +45,16 @@ namespace Mathematics
     private:
         void Calculate(const VariableMatrixType& matrix);
 
-        // ¼ÆËãVÊ¹V[0] = 1£¬ºÍ(I - 2 * V * V^T / V^T * V) * X³ıµÚÒ»²¿·ÖÍâÈ«ÊÇÁã¡£·µ»ØV¡£
+        // è®¡ç®—Vä½¿V[0] = 1ï¼Œå’Œ(I - 2 * V * V^T / V^T * V) * Xé™¤ç¬¬ä¸€éƒ¨åˆ†å¤–å…¨æ˜¯é›¶ã€‚è¿”å›Vã€‚
         NODISCARD static VariableLengthVectorType HouseholderVector(const VariableLengthVectorType& vector);
 
-        // ¸²¸Ç A Îª (I - 2 * V * V^T / V^T * V) * A.
+        // è¦†ç›– A ä¸º (I - 2 * V * V^T / V^T * V) * A.
         static void HouseholderPremultiply(const VariableLengthVectorType& vector, VariableMatrixType& matrix);
 
-        // ¸²¸Ç A Îª A * (I - 2 * V * V^T / V^T * V).
+        // è¦†ç›– A ä¸º A * (I - 2 * V * V^T / V^T * V).
         static void HouseholderPostmultiply(const VariableLengthVectorType& vector, VariableMatrixType& matrix);
 
-        // Òò×ÓA = Q * Real£¬QÊÇÕı½»ºÍRealÊÇÉÏÈı½Ç¡£
+        // å› å­A = Q * Realï¼ŒQæ˜¯æ­£äº¤å’ŒRealæ˜¯ä¸Šä¸‰è§’ã€‚
         void HouseholderQR();
 
     private:

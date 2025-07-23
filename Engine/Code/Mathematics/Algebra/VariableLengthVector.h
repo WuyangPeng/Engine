@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.5 (2024/02/05 09:20)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.5 (2024/02/05 09:20)
 
 #ifndef MATHEMATICS_ALGEBRA_VARIABLE_LENGTH_VECTOR_H
 #define MATHEMATICS_ALGEBRA_VARIABLE_LENGTH_VECTOR_H
@@ -33,33 +33,33 @@ namespace Mathematics
         using ContainerTypeConstIter = typename ContainerType::const_iterator;
 
     public:
-        /// Ôª×éµÄ³¤¶ÈÎªÁã¡£
+        /// å…ƒç»„çš„é•¿åº¦ä¸ºé›¶ã€‚
         VariableLengthVector() noexcept;
 
-        /// Ôª×éµÄ³¤¶ÈÎª¡°size¡±¡£
+        /// å…ƒç»„çš„é•¿åº¦ä¸ºâ€œsizeâ€ã€‚
         explicit VariableLengthVector(int size);
 
         explicit VariableLengthVector(const ContainerType& container);
         explicit VariableLengthVector(ContainerType&& container) noexcept;
 
-        /// ¶ÔÓÚ0<=d<=size£¬ÔªËØdÎª1£¬ËùÓĞÆäËûÔªËØ¾ùÎªÁã¡£Èç¹ûdÎŞĞ§£¬Ôò´´½¨ÁãÏòÁ¿¡£Õâ¶ÔÓÚ´´½¨±ê×¼Å·¼¸ÀïµÃ»ùÏòÁ¿ÊÇÒ»ÖÖ·½±ã£»ÁíÇë²Î¼ûMakeUnit£¨int32_t£¬int32_t£©ºÍUnit£¨int32_t£¬int32\ut£©¡£
+        /// å¯¹äº0<=d<=sizeï¼Œå…ƒç´ dä¸º1ï¼Œæ‰€æœ‰å…¶ä»–å…ƒç´ å‡ä¸ºé›¶ã€‚å¦‚æœdæ— æ•ˆï¼Œåˆ™åˆ›å»ºé›¶å‘é‡ã€‚è¿™å¯¹äºåˆ›å»ºæ ‡å‡†æ¬§å‡ é‡Œå¾—åŸºå‘é‡æ˜¯ä¸€ç§æ–¹ä¾¿ï¼›å¦è¯·å‚è§MakeUnitï¼ˆint32_tï¼Œint32_tï¼‰å’ŒUnitï¼ˆint32_tï¼Œint32\utï¼‰ã€‚
         VariableLengthVector(int size, int dimension);
 
         CLASS_INVARIANT_DECLARE;
 
-        /// ³ÉÔ±·ÃÎÊ¡£SetSize(int)Î´³õÊ¼»¯Ôª×é¡£
-        /// µÚÒ»¸öÔËËã·û[]·µ»ØµÄÊÇconstÒıÓÃ£¬¶ø²»ÊÇRealÖµ¡£
-        /// ÕâÖ§³ÖÍ¨¹ıĞèÒªÖ¸ÏòÊı¾İµÄ³£Á¿Ö¸ÕëµÄ±ê×¼ÎÄ¼ş²Ù×÷½øĞĞĞ´Èë¡£
+        /// æˆå‘˜è®¿é—®ã€‚SetSize(int)æœªåˆå§‹åŒ–å…ƒç»„ã€‚
+        /// ç¬¬ä¸€ä¸ªè¿ç®—ç¬¦[]è¿”å›çš„æ˜¯constå¼•ç”¨ï¼Œè€Œä¸æ˜¯Realå€¼ã€‚
+        /// è¿™æ”¯æŒé€šè¿‡éœ€è¦æŒ‡å‘æ•°æ®çš„å¸¸é‡æŒ‡é’ˆçš„æ ‡å‡†æ–‡ä»¶æ“ä½œè¿›è¡Œå†™å…¥ã€‚
 
         NODISCARD int GetSize() const;
 
         void SetSize(int size);
 
-        /// ×ø±ê·ÃÎÊ
+        /// åæ ‡è®¿é—®
         NODISCARD const Real& operator[](int index) const;
         NODISCARD Real& operator[](int index);
 
-        /// Ò»ÔªÔËËã¡£
+        /// ä¸€å…ƒè¿ç®—ã€‚
         NODISCARD VariableLengthVector operator+() const;
         NODISCARD VariableLengthVector operator-() const;
 
@@ -68,12 +68,12 @@ namespace Mathematics
         VariableLengthVector& operator*=(Real scalar) noexcept;
         VariableLengthVector& operator/=(Real scalar) noexcept(gMathematicsAssert < 0);
 
-        /// ¼¸ºÎÔËËã¡£
-        /// ½«'robust'ÉèÖÃÎª'false'µÄº¯ÊıÊ¹ÓÃ±ê×¼Ëã·¨¶ÔÏòÁ¿½øĞĞ¹éÒ»»¯£¬
-        /// ·½·¨ÊÇ½«³¤¶È¼ÆËãÎª³¤¶ÈÆ½·½µÄÆ½·½¸ù²¢³ıÒÔËü¡£
-        /// Èç¹û³¤¶ÈÎªÁã£¬Ôò½á¹û¿ÉÒÔÊÇÎŞÇî´ó£¨»òNaN£©¡£
-        /// µ±'robust'ÉèÖÃÎª'true'Ê±£¬¸ÃËã·¨Ö¼ÔÚ±ÜÃâ¸¡µãÒç³ö£¬
-        /// ²¢ÔÚ³¤¶ÈÎªÁãÊ±½«¹éÒ»»¯ÏòÁ¿ÉèÖÃÎªÁã¡£
+        /// å‡ ä½•è¿ç®—ã€‚
+        /// å°†'robust'è®¾ç½®ä¸º'false'çš„å‡½æ•°ä½¿ç”¨æ ‡å‡†ç®—æ³•å¯¹å‘é‡è¿›è¡Œå½’ä¸€åŒ–ï¼Œ
+        /// æ–¹æ³•æ˜¯å°†é•¿åº¦è®¡ç®—ä¸ºé•¿åº¦å¹³æ–¹çš„å¹³æ–¹æ ¹å¹¶é™¤ä»¥å®ƒã€‚
+        /// å¦‚æœé•¿åº¦ä¸ºé›¶ï¼Œåˆ™ç»“æœå¯ä»¥æ˜¯æ— ç©·å¤§ï¼ˆæˆ–NaNï¼‰ã€‚
+        /// å½“'robust'è®¾ç½®ä¸º'true'æ—¶ï¼Œè¯¥ç®—æ³•æ—¨åœ¨é¿å…æµ®ç‚¹æº¢å‡ºï¼Œ
+        /// å¹¶åœ¨é•¿åº¦ä¸ºé›¶æ—¶å°†å½’ä¸€åŒ–å‘é‡è®¾ç½®ä¸ºé›¶ã€‚
         NODISCARD Real Length(bool robust = false) const;
         NODISCARD Real SquaredLength(bool robust = false) const;
         Real Normalize(Real epsilon = MathType::GetZeroTolerance(), bool robust = false);
@@ -90,23 +90,23 @@ namespace Mathematics
         NODISCARD bool Equal(const VariableLengthVector& rhs) const;
         NODISCARD bool Less(const VariableLengthVector& rhs) const;
 
-        /// ÌØÊâÊ¸Á¿¡£
+        /// ç‰¹æ®ŠçŸ¢é‡ã€‚
 
-        /// ËùÓĞ×é¼ş¾ùÎª0¡£
+        /// æ‰€æœ‰ç»„ä»¶å‡ä¸º0ã€‚
         void MakeZero();
 
-        /// ·ÖÁ¿dimensionÎª1£¬ËùÓĞÆäËû·ÖÁ¿¾ùÎªÁã¡£
+        /// åˆ†é‡dimensionä¸º1ï¼Œæ‰€æœ‰å…¶ä»–åˆ†é‡å‡ä¸ºé›¶ã€‚
         void MakeUnit(int dimension);
 
         NODISCARD static VariableLengthVector Zero(int size);
         NODISCARD static VariableLengthVector Unit(int size, int dimension);
 
     private:
-        /// ´ËÊı¾İ½á¹¹ÀûÓÃÁËMSVCÖĞÄÚÖÃµÄÔËËã·û[]¡¢·¶Î§¼ì²éºÍ¿ÉÊÓ»¯¹¤¾ß¡£
+        /// æ­¤æ•°æ®ç»“æ„åˆ©ç”¨äº†MSVCä¸­å†…ç½®çš„è¿ç®—ç¬¦[]ã€èŒƒå›´æ£€æŸ¥å’Œå¯è§†åŒ–å·¥å…·ã€‚
         ContainerType container;
     };
 
-    // ±È½Ï£¨¹©STLÈİÆ÷Ê¹ÓÃ£©¡£
+    // æ¯”è¾ƒï¼ˆä¾›STLå®¹å™¨ä½¿ç”¨ï¼‰ã€‚
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     NODISCARD bool operator==(const VariableLengthVector<Real>& lhs, const VariableLengthVector<Real>& rhs);
@@ -125,44 +125,44 @@ namespace Mathematics
                                const VariableLengthVector<Real>& rhs,
                                Real epsilon = Math<Real>::GetZeroTolerance());
 
-    /// Gram-SchmidtÕı½»¹éÒ»»¯£¬´ÓÏßĞÔÎŞ¹ØµÄÊäÈëÉú³ÉÕı½»Ê¸Á¿¡£
-    /// º¯Êı·µ»Ø¹ı³ÌÖĞ¼ÆËãµÄÎ´¹æ·¶»¯Ê¸Á¿µÄ×îĞ¡³¤¶È¡£
-    /// Èç¹û¸ÃÖµ¼¸ºõÎªÁã£¬ÔòÊäÈë¿ÉÄÜÊÇÏßĞÔÏà¹ØµÄ£¨ÔÚÊıÖµÉáÈëÎó²îÄÚ£©¡£
-    /// ÔÚÊäÈëÊ±£¬±ØĞë³õÊ¼»¯1<=numElements<=NºÍvector[0]µ½vector[numElements-1]¡£
-    /// ÔÚÊä³öÊ±£¬ÏòÁ¿vector[0]µ½vector[numElements-1]ĞÎ³ÉÕı½»¼¯¡£
+    /// Gram-Schmidtæ­£äº¤å½’ä¸€åŒ–ï¼Œä»çº¿æ€§æ— å…³çš„è¾“å…¥ç”Ÿæˆæ­£äº¤çŸ¢é‡ã€‚
+    /// å‡½æ•°è¿”å›è¿‡ç¨‹ä¸­è®¡ç®—çš„æœªè§„èŒƒåŒ–çŸ¢é‡çš„æœ€å°é•¿åº¦ã€‚
+    /// å¦‚æœè¯¥å€¼å‡ ä¹ä¸ºé›¶ï¼Œåˆ™è¾“å…¥å¯èƒ½æ˜¯çº¿æ€§ç›¸å…³çš„ï¼ˆåœ¨æ•°å€¼èˆå…¥è¯¯å·®å†…ï¼‰ã€‚
+    /// åœ¨è¾“å…¥æ—¶ï¼Œå¿…é¡»åˆå§‹åŒ–1<=numElements<=Nå’Œvector[0]åˆ°vector[numElements-1]ã€‚
+    /// åœ¨è¾“å‡ºæ—¶ï¼Œå‘é‡vector[0]åˆ°vector[numElements-1]å½¢æˆæ­£äº¤é›†ã€‚
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     Real Orthonormalize(int numInputs, std::vector<VariableLengthVector<Real>>& vector, bool robust = false);
 
-    /// ¼ÆËãÊ¸Á¿µÄÖá¶ÔÆë±ß½ç¿ò¡£
-    /// Èç¹ûÊäÈëÎŞĞ§£¬ÔòÅ×³öÒì³££¬
-    /// ÔÚÃ»ÓĞÅ×³öÒì³£µÄÇé¿öÏÂ£¬vectorMinºÍvectorMax¾ßÓĞÓĞĞ§Öµ¡£
+    /// è®¡ç®—çŸ¢é‡çš„è½´å¯¹é½è¾¹ç•Œæ¡†ã€‚
+    /// å¦‚æœè¾“å…¥æ— æ•ˆï¼Œåˆ™æŠ›å‡ºå¼‚å¸¸ï¼Œ
+    /// åœ¨æ²¡æœ‰æŠ›å‡ºå¼‚å¸¸çš„æƒ…å†µä¸‹ï¼ŒvectorMinå’ŒvectorMaxå…·æœ‰æœ‰æ•ˆå€¼ã€‚
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     void ComputeExtremes(int numVectors, const std::vector<VariableLengthVector<Real>>& vector, VariableLengthVector<Real>& vectorMin, VariableLengthVector<Real>& vectorMax);
 
-    /// ½«nÔª×évÌáÉıµ½Æë´Î(n+1)-Ôª×é(v,last)¡£
+    /// å°†nå…ƒç»„væå‡åˆ°é½æ¬¡(n+1)-å…ƒç»„(v,last)ã€‚
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     NODISCARD VariableLengthVector<Real> HomogeneousLift(const VariableLengthVector<Real>& vector, Real last);
 
-    /// ½«Æë´ÎnÔª×év = (u,v[n-1])Í¶Ó°µ½(n-1)-Ôª×éu¡£
+    /// å°†é½æ¬¡nå…ƒç»„v = (u,v[n-1])æŠ•å½±åˆ°(n-1)-å…ƒç»„uã€‚
     template <typename Real>
     NODISCARD VariableLengthVector<Real> HomogeneousProject(const VariableLengthVector<Real>& vector);
 
-    /// ½«nÔª×év = (w0,w1)ÌáÉıµ½(n+1)-Ôª×éu = (w0,u[inject],w1)¡£
-    /// ¸ù¾İÍÆ¶Ï£¬w0ÊÇ(inject)-Ôª×é[µ±inject=0Ê±²»´æÔÚ]£¬
-    /// w1ÊÇ-Ôª×é[inject=nÊ±²»´æÔÚ]¡£
+    /// å°†nå…ƒç»„v = (w0,w1)æå‡åˆ°(n+1)-å…ƒç»„u = (w0,u[inject],w1)ã€‚
+    /// æ ¹æ®æ¨æ–­ï¼Œw0æ˜¯(inject)-å…ƒç»„[å½“inject=0æ—¶ä¸å­˜åœ¨]ï¼Œ
+    /// w1æ˜¯-å…ƒç»„[inject=næ—¶ä¸å­˜åœ¨]ã€‚
     template <typename Real>
     NODISCARD VariableLengthVector<Real> Lift(const VariableLengthVector<Real>& vector, int inject, Real value);
 
-    /// ½«nÔª×é v = (w0,v[reject],w1)Í¶Ó°µ½(n-1)-Ôª×éu = (w0,w1)¡£
-    /// Í¨¹ıÍÆ¶Ï£¬w0ÊÇ(reject)-Ôª×é[µ±reject=0Ê±²»´æÔÚ]£¬
-    /// w1ÊÇ(n-1-reject)-Ôª×é[µ±reject=n-1Ê±²»´æÔÚ]¡£
+    /// å°†nå…ƒç»„ v = (w0,v[reject],w1)æŠ•å½±åˆ°(n-1)-å…ƒç»„u = (w0,w1)ã€‚
+    /// é€šè¿‡æ¨æ–­ï¼Œw0æ˜¯(reject)-å…ƒç»„[å½“reject=0æ—¶ä¸å­˜åœ¨]ï¼Œ
+    /// w1æ˜¯(n-1-reject)-å…ƒç»„[å½“reject=n-1æ—¶ä¸å­˜åœ¨]ã€‚
     template <typename Real>
     NODISCARD VariableLengthVector<Real> Project(const VariableLengthVector<Real>& vector, int reject);
 
-    // µ÷ÊÔÊä³ö¡£
+    // è°ƒè¯•è¾“å‡ºã€‚
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     std::ostream& operator<<(std::ostream& outFile, const VariableLengthVector<Real>& vector);

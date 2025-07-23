@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.6 (2024/02/20 09:16)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.6 (2024/02/20 09:16)
 
 #ifndef MATHEMATICS_DATA_TYPES_TRANSFORM_MATRIX_DETAIL_H
 #define MATHEMATICS_DATA_TYPES_TRANSFORM_MATRIX_DETAIL_H
@@ -62,7 +62,7 @@ void Mathematics::TransformMatrix<Real>::MakeUnitScale()
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    MATHEMATICS_ASSERTION_0(isRotationOrScaleMatrix, "Matrix²»ÊÇĞı×ª¾ØÕó¡£\n");
+    MATHEMATICS_ASSERTION_0(isRotationOrScaleMatrix, "Matrixä¸æ˜¯æ—‹è½¬çŸ©é˜µã€‚\n");
 
     isUniformScale = true;
 
@@ -72,8 +72,8 @@ void Mathematics::TransformMatrix<Real>::MakeUnitScale()
 template <typename Real>
 void Mathematics::TransformMatrix<Real>::Modification(const APointType& translate) noexcept
 {
-    /// ¶ÔÓÚ·ÂÉä±ä»»£¬transformMatrixµÄ×îºóÒ»ĞĞ×ÜÊÇ(0,0,0,1)£¬
-    /// Òò´ËÔÚ¹¹Ôìº¯ÊıÖĞÉèÖÃÒ»´Î¡£Ã»ÓĞ±ØÒªÔÚ´Ë´¦ÖØÖÃËü¡£
+    /// å¯¹äºä»¿å°„å˜æ¢ï¼ŒtransformMatrixçš„æœ€åä¸€è¡Œæ€»æ˜¯(0,0,0,1)ï¼Œ
+    /// å› æ­¤åœ¨æ„é€ å‡½æ•°ä¸­è®¾ç½®ä¸€æ¬¡ã€‚æ²¡æœ‰å¿…è¦åœ¨æ­¤å¤„é‡ç½®å®ƒã€‚
 
 #if defined(MATHEMATICS_USE_MATRIX_VECTOR)
 
@@ -202,7 +202,7 @@ template <typename Real>
 void Mathematics::TransformMatrix<Real>::SetScale(const MatrixType& rotate, const APointType& scale)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
-    MATHEMATICS_ASSERTION_0(isRotationOrScaleMatrix, "Matrix²»ÊÇĞı×ª¾ØÕó¡£\n");
+    MATHEMATICS_ASSERTION_0(isRotationOrScaleMatrix, "Matrixä¸æ˜¯æ—‹è½¬çŸ©é˜µã€‚\n");
 
     isIdentity = false;
     isUniformScale = false;
@@ -214,7 +214,7 @@ template <typename Real>
 void Mathematics::TransformMatrix<Real>::SetUniformScale(const MatrixType& rotate, Real scale)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
-    MATHEMATICS_ASSERTION_0(isRotationOrScaleMatrix, "Matrix²»ÊÇĞı×ª¾ØÕó¡£\n");
+    MATHEMATICS_ASSERTION_0(isRotationOrScaleMatrix, "Matrixä¸æ˜¯æ—‹è½¬çŸ©é˜µã€‚\n");
 
     isIdentity = false;
     isUniformScale = true;

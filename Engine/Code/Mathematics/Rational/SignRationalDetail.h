@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:20)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:20)
 
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_DETAIL_H
 #define MATHEMATICS_RATIONAL_RATIONAL_DETAIL_H
@@ -69,7 +69,7 @@ void Mathematics::SignRational<N>::ConvertToRational(T value)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´«ÈëµÄÖµÒç³ö£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("ä¼ å…¥çš„å€¼æº¢å‡ºï¼"s));
     }
 }
 
@@ -103,7 +103,7 @@ void Mathematics::SignRational<N>::EliminatePowersOfTwo()
 {
     if (numerator == IntegerType{ 0 })
     {
-        // ·Ö×ÓÊÇÁã¡£
+        // åˆ†å­æ˜¯é›¶ã€‚
         denominator = IntegerType{ 1 };
 
         return;
@@ -126,14 +126,14 @@ int Mathematics::SignRational<N>::GetPowers() const
 
     if (0 < (numeratorAbsoluteValue[0] & 1) || 0 < (denominatorAbsoluteValue[0] & 1))
     {
-        // Ã»ÓĞÒ»¸öÏîÄÜ±»2Õû³ı£¨¿ìËÙÍË³ö£©
+        // æ²¡æœ‰ä¸€ä¸ªé¡¹èƒ½è¢«2æ•´é™¤ï¼ˆå¿«é€Ÿé€€å‡ºï¼‰
         return 0;
     }
 
     const auto blockNumerator = numeratorAbsoluteValue.GetTrailingBlock();
     const auto blockDenominator = denominatorAbsoluteValue.GetTrailingBlock();
 
-    MATHEMATICS_ASSERTION_0(0 <= blockDenominator, "·ÖÄ¸±ØĞë²»ÎªÁã£¡\n");
+    MATHEMATICS_ASSERTION_0(0 <= blockDenominator, "åˆ†æ¯å¿…é¡»ä¸ä¸ºé›¶ï¼\n");
 
     const auto minBlock = (blockNumerator < blockDenominator ? blockNumerator : blockDenominator);
 

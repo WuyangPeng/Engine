@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.2 (2023/07/25 13:42)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.2 (2023/07/25 13:42)
 
 #ifndef RENDERING_CONTROLLERS_KEYFRAME_CONTROLLER_H
 #define RENDERING_CONTROLLERS_KEYFRAME_CONTROLLER_H
@@ -32,22 +32,22 @@ namespace Rendering
         using APoint = Mathematics::APointF;
 
     public:
-        // Èç¹ûÆ½ÒÆ£¬Ğı×ªºÍËõ·Å¶¼ÓĞ×ÅÏàÍ¬µÄ¹Ø¼üÖ¡Ê±¼ä£¬ÔònumCommonTimes±»ÉèÖÃÎªÕıÊı¡£
-        // Ã¿¸öÊ£ÓàÊıÁ¿ÎªnumCommonTimes£¬µ±Í¨µÀ´æÔÚ£¬»òÎªÁãÊ±¡£
-        // Èç¹û¹Ø¼üÖ¡Ê±¼ä²»¹²Ïí£¬ÔònumCommonTimes±ØĞëÉèÖÃÎªÁã£¬¶øÆäÓàµÄÊı×ÖÉè¶¨ÎªÊÊµ±µÄÖµ
-        // µ±ĞÅµÀ´æÔÚÊ±ÎªÕıÖµºÍÆäËû·½Ê½ÎªÁã¡£
+        // å¦‚æœå¹³ç§»ï¼Œæ—‹è½¬å’Œç¼©æ”¾éƒ½æœ‰ç€ç›¸åŒçš„å…³é”®å¸§æ—¶é—´ï¼Œåˆ™numCommonTimesè¢«è®¾ç½®ä¸ºæ­£æ•°ã€‚
+        // æ¯ä¸ªå‰©ä½™æ•°é‡ä¸ºnumCommonTimesï¼Œå½“é€šé“å­˜åœ¨ï¼Œæˆ–ä¸ºé›¶æ—¶ã€‚
+        // å¦‚æœå…³é”®å¸§æ—¶é—´ä¸å…±äº«ï¼Œåˆ™numCommonTimeså¿…é¡»è®¾ç½®ä¸ºé›¶ï¼Œè€Œå…¶ä½™çš„æ•°å­—è®¾å®šä¸ºé€‚å½“çš„å€¼
+        // å½“ä¿¡é“å­˜åœ¨æ—¶ä¸ºæ­£å€¼å’Œå…¶ä»–æ–¹å¼ä¸ºé›¶ã€‚
 
-        // ±ä»»ÊäÈë³õÊ¼»¯¿ØÖÆ¶ÔÏóµÄ¾Ö²¿±ä»»¡£
-        // Õâ¸öÀàµÄÒÔÇ°µÄĞĞÎªÊÇÎªÁËÌî²¹Ö»ÄÜÓÉ¹Ø¼üÖ¡´ú±íµÄÍ¨µÀ±ä»»£¬
-        // ÆäÖĞÒşº¬ÒÀ¿¿¿Õ¼äSpatial m_ObjectÓĞËüµÄÓ¦ÓÃ³ÌĞòÊÊµ±µØÉèÖÃÆäËûÍ¨µÀ¡£
-        // ÏÖÔÚKeyframeControllerÉèÖÃ*ËùÓĞ*µÄÍ¨µÀ¡£
+        // å˜æ¢è¾“å…¥åˆå§‹åŒ–æ§åˆ¶å¯¹è±¡çš„å±€éƒ¨å˜æ¢ã€‚
+        // è¿™ä¸ªç±»çš„ä»¥å‰çš„è¡Œä¸ºæ˜¯ä¸ºäº†å¡«è¡¥åªèƒ½ç”±å…³é”®å¸§ä»£è¡¨çš„é€šé“å˜æ¢ï¼Œ
+        // å…¶ä¸­éšå«ä¾é ç©ºé—´Spatial m_Objectæœ‰å®ƒçš„åº”ç”¨ç¨‹åºé€‚å½“åœ°è®¾ç½®å…¶ä»–é€šé“ã€‚
+        // ç°åœ¨KeyframeControllerè®¾ç½®*æ‰€æœ‰*çš„é€šé“ã€‚
         KeyframeController(int numCommonTimes, int numTranslations, int numRotations, int numScales, const Mathematics::TransformF& localTransform);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(KeyframeController);
 
-        // µ÷ÓÃ¹¹Ôìº¯Êıºó£¬Äú±ØĞëÉèÖÃÊı¾İÊ¹ÓÃÕâĞ©º¯Êı¡£
+        // è°ƒç”¨æ„é€ å‡½æ•°åï¼Œæ‚¨å¿…é¡»è®¾ç½®æ•°æ®ä½¿ç”¨è¿™äº›å‡½æ•°ã€‚
         NODISCARD int GetNumCommonTimes() const noexcept;
         NODISCARD float GetCommonTimes(int index) const;
         void SetCommonTimes(int index, float commonTimes);
@@ -73,7 +73,7 @@ namespace Rendering
         void SetScaleTimes(int index, float scaleTimes);
         void SetScales(int index, float scales);
 
-        // ¶¯»­¸üĞÂ¡£Ó¦ÓÃ³ÌĞòÊ±¼äÒÔºÁÃëÎªµ¥Î»¡£
+        // åŠ¨ç”»æ›´æ–°ã€‚åº”ç”¨ç¨‹åºæ—¶é—´ä»¥æ¯«ç§’ä¸ºå•ä½ã€‚
         NODISCARD bool Update(double applicationTime) override;
         void SetController(const ControllerSharedPtr& object) override;
 
@@ -81,7 +81,7 @@ namespace Rendering
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
     protected:
-        // Ö§³Ö²éÕÒ¸ø³öÖ¸¶¨Ê±¼äµÄ¹Ø¼üÖ¡¡£
+        // æ”¯æŒæŸ¥æ‰¾ç»™å‡ºæŒ‡å®šæ—¶é—´çš„å…³é”®å¸§ã€‚
         NODISCARD ControllerKeyInfo GetTranslateKeyInfo(float ctrlTime);
         NODISCARD ControllerKeyInfo GetRotateKeyInfo(float ctrlTime);
         NODISCARD ControllerKeyInfo GetScaleKeyInfo(float ctrlTime);

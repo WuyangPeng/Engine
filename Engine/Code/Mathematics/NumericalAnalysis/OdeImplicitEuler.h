@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 13:44)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 13:44)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_ODE_IMPLICIT_EULER_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_ODE_IMPLICIT_EULER_H
@@ -35,13 +35,13 @@ namespace Mathematics
         using Function = typename ParentType::Function;
         using Data = typename ParentType::Data;
 
-        //  º¯ÊıF(t,x)¾ßÓĞÊäÈët£¬Ò»¸ö±êÁ¿£¬²¢ÊäÈëÖµx£¬Ò»¸ön´óĞ¡µÄÊ¸Á¿¡£
-        // Ò»´Îµ¼Êı¾ØÕóÏà¶ÔÓÚxÊÇDF(t,x)£¬n³Ën¾ØÕó¡£
-        // ½øÈëDF[r][c]ÊÇF[r]Ïà¶ÔÓÚx[c]µÄÅÉÉúÎï¡£
-        // ·µ»ØÖµDF(t,x)
+        //  å‡½æ•°F(t,x)å…·æœ‰è¾“å…¥tï¼Œä¸€ä¸ªæ ‡é‡ï¼Œå¹¶è¾“å…¥å€¼xï¼Œä¸€ä¸ªnå¤§å°çš„çŸ¢é‡ã€‚
+        // ä¸€æ¬¡å¯¼æ•°çŸ©é˜µç›¸å¯¹äºxæ˜¯DF(t,x)ï¼Œnä¹˜nçŸ©é˜µã€‚
+        // è¿›å…¥DF[r][c]æ˜¯F[r]ç›¸å¯¹äºx[c]çš„æ´¾ç”Ÿç‰©ã€‚
+        // è¿”å›å€¼DF(t,x)
         using DerivativeFunction = VariableMatrixType (*)(Real,  // t
                                                           const Container&,  // x
-                                                          const UserDataType*);  // ÓÃ»§¶¨ÒåÊı¾İ
+                                                          const UserDataType*);  // ç”¨æˆ·å®šä¹‰æ•°æ®
     public:
         OdeImplicitEuler(int dimension,
                          Real step,

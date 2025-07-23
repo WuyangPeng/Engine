@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 14:53)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 14:53)
 
 #include "Framework/FrameworkExport.h"
 
@@ -15,6 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/UnitTestSuite/Suite.h"
+#include "CoreTools/UnitTestSuite/OStreamSharedDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestComposite.h"
 
 Framework::OpenGLGlutCallBackUnitTestSuiteImpl::OpenGLGlutCallBackUnitTestSuiteImpl(const std::string& name)
@@ -103,11 +104,11 @@ void Framework::OpenGLGlutCallBackUnitTestSuiteImpl::DoAddTest(const std::string
     else if (testLoopCount < 0)
     {
         LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools,
-                                      SYSTEM_TEXT("²âÊÔ"),
+                                      SYSTEM_TEXT("æµ‹è¯•"),
                                       testName,
-                                      SYSTEM_TEXT("Î´ÅäÖÃ£¡ÔÚ²âÊÔÌ×¼ş£º"),
+                                      SYSTEM_TEXT("æœªé…ç½®ï¼åœ¨æµ‹è¯•å¥—ä»¶ï¼š"),
                                       suite.GetName(),
-                                      SYSTEM_TEXT("¡£"),
+                                      SYSTEM_TEXT("ã€‚"),
                                       CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
@@ -137,5 +138,5 @@ void Framework::OpenGLGlutCallBackUnitTestSuiteImpl::RunUnitTestOnMessage()
 void Framework::OpenGLGlutCallBackUnitTestSuiteImpl::ResetTestDataOnMessage()
 {
     ResetTestData();
-    openglSuite->GetStream() << "²âÊÔÊı¾İÒÑÇåÁã¡£\n";
+    openglSuite->GetStream() << "æµ‹è¯•æ•°æ®å·²æ¸…é›¶ã€‚\n";
 }

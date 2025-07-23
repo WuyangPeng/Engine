@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 16:22)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 16:22)
 
 #include "Network/NetworkExport.h"
 
@@ -20,7 +20,7 @@ Network::SendMessageLevelImpl::SendMessageLevelImpl(int messageMaxSize)
 {
     if (messageMaxSize <= 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÉèÖÃ»º³åÇø´óĞ¡Ğ¡ÓÚÁã£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è®¾ç½®ç¼“å†²åŒºå¤§å°å°äºé›¶ï¼"s))
     }
 
     NETWORK_SELF_CLASS_IS_VALID_1;
@@ -65,7 +65,7 @@ void Network::SendMessageLevelImpl::Insert(const MessageInterfaceSharedPtr& mess
 
     if (messageMaxSize < currentSize + message->GetStreamingSize())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÏûÏ¢ÈİÁ¿²»×ã£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ¶ˆæ¯å®¹é‡ä¸è¶³ï¼"s))
     }
     else
     {

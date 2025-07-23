@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.7 (2024/03/04 21:43)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/04 21:43)
 
 #ifndef SYSTEM_HELPER_XL_CPP_ZOS_H
 #define SYSTEM_HELPER_XL_CPP_ZOS_H
@@ -14,16 +14,16 @@
 
     ///  IBM z/OS XL C/C++
 
-    /// ��ǰ֧�ֵ���ɵĿ�汾��2.1��V2R1��
+    /// 当前支持的最旧的库版本是2.1（V2R1）
     #if __TARGET_LIB__ < 0x42010000
 
-        #error "��֧�ֻ�δ���ÿ�汾��������������"
+        #error "不支持或未配置库版本——请重新配置"
 
     #endif  // __TARGET_LIB__ < 0x42010000
 
     #if 0x42010000 < __TARGET_LIB__
 
-        #error "δ֪�Ŀ�汾"
+        #error "未知的库版本"
 
     #endif  // 0x42010000 < __TARGET_LIB__
 
@@ -35,7 +35,7 @@
 
     #ifndef TCRE_SYSTEM_STD_LIB
 
-        #define TCRE_SYSTEM_STD_LIB "IBM z/OS XL C/C++ ��׼��汾 " SYSTEM_STRINGIZE(TCRE_CPP_LIB_VERSION)
+        #define TCRE_SYSTEM_STD_LIB "IBM z/OS XL C/C++ 标准库版本 " SYSTEM_STRINGIZE(TCRE_CPP_LIB_VERSION)
 
     #endif  // !TCRE_SYSTEM_STD_LIB
 

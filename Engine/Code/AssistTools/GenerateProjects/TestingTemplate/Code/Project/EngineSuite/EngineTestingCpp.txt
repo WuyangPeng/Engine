@@ -1,4 +1,4 @@
-$Copyright$
+ï»¿$Copyright$
 
 #include "EngineTesting.h"
 #include "System/Threading/Process.h"
@@ -59,7 +59,7 @@ bool $ProjectName$::EngineTesting::ExecuteEngineTesting(int select)
 
 void $ProjectName$::EngineTesting::ExecuteSelectEngineTesting(const String& engineeringName)
 {
-    GetStream() << "ÕýÔÚÖ´ÐÐµ¥Ôª²âÊÔ¹¤³Ì£º" << CoreTools::StringConversion::StandardConversionMultiByte(engineeringName) << "\n";
+    GetStream() << "æ­£åœ¨æ‰§è¡Œå•å…ƒæµ‹è¯•å·¥ç¨‹ï¼š" << CoreTools::StringConversion::StandardConversionMultiByte(engineeringName) << "\n";
 
     ASSERT_TRUE(System::CreateSystemProcess(engineeringName));
 }

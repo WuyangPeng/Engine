@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.3 (2023/08/10 10:51)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.3 (2023/08/10 10:51)
 
 #include "WindowMessageUnitTestSuiteTesting.h"
 #include "System/Helper/EnumCast.h"
@@ -39,7 +39,7 @@ void Framework::WindowMessageUnitTestSuiteTesting::KeyDownMessageTest()
 {
     const auto messageSharedPtr = message.lock();
 
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(messageSharedPtr, "ÏûÏ¢Ö¸ÕëÒÑÎÞÐ§£¡");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(messageSharedPtr, "æ¶ˆæ¯æŒ‡é’ˆå·²æ— æ•ˆï¼");
 
     ASSERT_EQUAL(messageSharedPtr->KeyDownMessage(messageSharedPtr->GetHWnd(), System::EnumCastUnderlying<System::WindowsWParam>(System::WindowsKeyCodes::F1), 0), 0);
     ASSERT_EQUAL(messageSharedPtr->GetPassedNumber(), 1);
@@ -49,7 +49,7 @@ void Framework::WindowMessageUnitTestSuiteTesting::CreateMessageTest()
 {
     const auto messageSharedPtr = message.lock();
 
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(messageSharedPtr, "ÏûÏ¢Ö¸ÕëÒÑÎÞÐ§£¡");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(messageSharedPtr, "æ¶ˆæ¯æŒ‡é’ˆå·²æ— æ•ˆï¼");
 
     ASSERT_EQUAL(messageSharedPtr->CreateMessage(messageSharedPtr->GetHWnd(), 0, 0), 0);
 }
@@ -58,7 +58,7 @@ void Framework::WindowMessageUnitTestSuiteTesting::DisplayTest()
 {
     const auto messageSharedPtr = message.lock();
 
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(messageSharedPtr, "ÏûÏ¢Ö¸ÕëÒÑÎÞÐ§£¡");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(messageSharedPtr, "æ¶ˆæ¯æŒ‡é’ˆå·²æ— æ•ˆï¼");
 
     messageSharedPtr->Display(messageSharedPtr->GetHWnd(), 0);
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:55)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:55)
 
 #ifndef RENDERING_DATA_TYPES_COLOUR_DETAIL_H
 #define RENDERING_DATA_TYPES_COLOUR_DETAIL_H
@@ -39,7 +39,7 @@ Rendering::Colour<T>::Colour(const Colour<RhsType>& colour)
     {
         LOG_SINGLETON_ENGINE_APPENDER(Debug, Rendering, error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
 
-        THROW_EXCEPTION(SYSTEM_TEXT("ÑÕÉ«Êı¾İ×ª»»Ê§°Ü¡£"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("é¢œè‰²æ•°æ®è½¬æ¢å¤±è´¥ã€‚"s));
     }
 
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -61,7 +61,7 @@ Rendering::Colour<T>& Rendering::Colour<T>::operator=(const Colour<RhsType>& col
     {
         LOG_SINGLETON_ENGINE_APPENDER(Debug, Rendering, error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
 
-        THROW_EXCEPTION(SYSTEM_TEXT("ÑÕÉ«Êı¾İ×ª»»Ê§°Ü¡£"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("é¢œè‰²æ•°æ®è½¬æ¢å¤±è´¥ã€‚"s));
     }
 
     return *this;
@@ -190,7 +190,7 @@ void Rendering::Colour<T>::Divide(RhsType rhs, const std::integral_constant<bool
 {
     if (Mathematics::Math<RhsType>::FAbs(rhs) <= Mathematics::Math<RhsType>::GetZeroTolerance())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³ıÁã´íÎó£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("é™¤é›¶é”™è¯¯ï¼"s));
     }
 
     red /= boost::numeric_cast<T>(rhs);
@@ -208,7 +208,7 @@ void Rendering::Colour<T>::Divide(RhsType rhs, const std::false_type&)
 {
     if (rhs == 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³ıÁã´íÎó£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("é™¤é›¶é”™è¯¯ï¼"s));
     }
 
     red /= boost::numeric_cast<T>(rhs);

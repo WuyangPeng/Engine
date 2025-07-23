@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.11 (2024/06/04 20:29)
+/// 标准：std:c++20
+/// 版本：1.0.0.11 (2024/06/04 20:29)
 
 #ifndef NETWORK_HELPER_USER_MACRO_H
 #define NETWORK_HELPER_USER_MACRO_H
@@ -16,7 +16,7 @@
 
 #define CLOSE_USE_ACE (NETWORK_ClOSE_BEGIN)
 #define CLOSE_USE_OPENSSL (NETWORK_ClOSE_BEGIN << 1)
-#define CLOSE_USE_ACE_WCHAR (NETWORK_ClOSE_BEGIN << 2)  // Ĭ�Ϲر�
+#define CLOSE_USE_ACE_WCHAR (NETWORK_ClOSE_BEGIN << 2)  // 默认关闭
 #define CLOSE_USE_PROTO_BUF (NETWORK_ClOSE_BEGIN << 3)
 #define CLOSE_USE_ACTIVE_MQ (NETWORK_ClOSE_BEGIN << 4)
 #define CLOSE_USE_NATS (NETWORK_ClOSE_BEGIN << 5)
@@ -26,7 +26,7 @@
 
 #define CLOSE_NETWORK_MAX (((NETWORK_ClOSE_END) << 1) - 1)
 
-// ������ԣ�Ĭ��Ϊ0B0000'0100�����ֵΪ0B0111'1111��
+// 编译测试（默认为0B0000'0100，最大值为0B0111'1111）
 #define COMPILE_NETWORK_CLOSE 0B0000'0100
 
 static_assert(0 <= COMPILE_NETWORK_CLOSE, "COMPILE_NETWORK_CLOSE Must be greater than or equal 0.");

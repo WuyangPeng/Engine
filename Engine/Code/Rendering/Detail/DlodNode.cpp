@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒýÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:54)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“Žç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:54)
 
 #include "Rendering/RenderingExport.h"
 
@@ -18,6 +18,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/TransformDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 #include "Rendering/Visibility/Culler.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, DlodNode)
@@ -73,19 +74,19 @@ void Rendering::DlodNode::GetVisibleSet(Culler& culler, const CameraSharedPtr& c
 
 void Rendering::DlodNode::SelectLevelOfDetail(const Camera& camera)
 {
-    // Ò»¸öDlodNodeµÄ×Ó½ÚµãÊý×é±»Ñ¹Ëõ
-    // ÕâÀïÃ»ÓÐ¿ÕµÄ²å²ÛºÍ×Ó½ÚµãµÄÊýÁ¿ÊÇm_Child.size()£¬
-    // ÁíÍâ£¬¼ÙÉèËùÓÐÄ£ÐÍµÄ¾àÀëÖµ·Ö±ðÉèÖÃÎªÕâÐ©×Ó½Úµã¡£
+    // ä¸€ä¸ªDlodNodeçš„å­èŠ‚ç‚¹æ•°ç»„è¢«åŽ‹ç¼©
+    // è¿™é‡Œæ²¡æœ‰ç©ºçš„æ’æ§½å’Œå­èŠ‚ç‚¹çš„æ•°é‡æ˜¯m_Child.size()ï¼Œ
+    // å¦å¤–ï¼Œå‡è®¾æ‰€æœ‰æ¨¡åž‹çš„è·ç¦»å€¼åˆ†åˆ«è®¾ç½®ä¸ºè¿™äº›å­èŠ‚ç‚¹ã€‚
 
-    // ¼ÆËãÊÀ½çLODÖÐÐÄ
+    // è®¡ç®—ä¸–ç•ŒLODä¸­å¿ƒ
     const auto worldTransform = GetWorldTransform();
 
     impl->SetWorldCenter(worldTransform);
 
-    // ¼ÆËãÊÀ½çÆ½·½¾àÀë¼ä¸ô¡£
+    // è®¡ç®—ä¸–ç•Œå¹³æ–¹è·ç¦»é—´éš”ã€‚
     impl->SetWorldDistance(worldTransform.GetUniformScale());
 
-    // Ñ¡ÔñLOD×Ó½Úµã
+    // é€‰æ‹©LODå­èŠ‚ç‚¹
     SetActiveChild(System::EnumCastUnderlying(SwitchNodeType::InvalidChild));
     const auto difference = impl->GetWorldCenter() - camera.GetPosition();
     auto distance = difference.Length();

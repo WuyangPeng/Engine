@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 09:46)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 09:46)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BISECT1_ACHIEVE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BISECT1_ACHIEVE_H
@@ -45,10 +45,10 @@ typename Mathematics::Bisect1<Real>::Bisect1RootType Mathematics::Bisect1<Real>:
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    // functionµ÷ÓÃ¿ÉÄÜÅ×³öÒì³£¡£
+    // functionè°ƒç”¨å¯èƒ½æŠ›å‡ºå¼‚å¸¸ã€‚
     CoreTools::DisableNoexcept();
 
-    // ²âÊÔÁ½¸ö¶Ëµã¡£
+    // æµ‹è¯•ä¸¤ä¸ªç«¯ç‚¹ã€‚
     auto beginPointFunctionValue = function(beginPoint);
     if (MathType::FAbs(beginPointFunctionValue) <= tolerance)
     {
@@ -61,7 +61,7 @@ typename Mathematics::Bisect1<Real>::Bisect1RootType Mathematics::Bisect1<Real>:
         return Bisect1RootType{ endPoint, BisectRootType::HaveSolution };
     }
 
-    // ·½³ÌÎŞ½â
+    // æ–¹ç¨‹æ— è§£
     if (MathType::GetValue(0) < beginPointFunctionValue * endPointFunctionValue)
     {
         return Bisect1RootType{};
@@ -91,7 +91,7 @@ typename Mathematics::Bisect1<Real>::Bisect1RootType Mathematics::Bisect1<Real>:
         middlePoints = MathType::GetRational(1, 2) * (beginPoint + endPoint);
     }
 
-    // Ñ­»·³¬³öÁË´ÎÊı£¬·µ»ØÒ»¸öÖĞ¼äÖµ¡£
+    // å¾ªç¯è¶…å‡ºäº†æ¬¡æ•°ï¼Œè¿”å›ä¸€ä¸ªä¸­é—´å€¼ã€‚
     return Bisect1RootType{ middlePoints, BisectRootType::Unknown };
 }
 

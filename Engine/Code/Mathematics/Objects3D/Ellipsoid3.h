@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 10:26)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 10:26)
 
 #ifndef MATHEMATICS_OBJECTS_3D_ELLIPSOID3_H
 #define MATHEMATICS_OBJECTS_3D_ELLIPSOID3_H
@@ -32,25 +32,25 @@ namespace Mathematics
         using Vector3ToolsType = Vector3Tools<Real>;
 
     public:
-        // ÍÖÔ²ÌåÓĞÖĞĞÄK£¬Öá·½ÏòU[0], U[1], ºÍ U[2]£¨ËùÓĞµ¥Î»³¤¶ÈÏòÁ¿£©£¬
-        // ºÍÀ©Õ¹e[0], e[1], ºÍ e[2]£¨È«ÊÇÕıÊı£©¡£
-        // µãX = K + y[0] * U[0] + y[1] * U[1] + y[2] * U[2]ÊÇÔÚÍÖÔ²ÌåÉÏ£¬
-        // ²âÊÔÎªÍÖÇòÌåÄÚ²¿µÄµãÓÃ¡°<=¡±£¬´úÌæ¡°=¡±ÔÚÏÈÇ°µÄ±í´ïÊ½ÖĞ¡£
-        // ÍÖÇòÌåµÄ´úÊı±íÊ¾ÊÇ
+        // æ¤­åœ†ä½“æœ‰ä¸­å¿ƒKï¼Œè½´æ–¹å‘U[0], U[1], å’Œ U[2]ï¼ˆæ‰€æœ‰å•ä½é•¿åº¦å‘é‡ï¼‰ï¼Œ
+        // å’Œæ‰©å±•e[0], e[1], å’Œ e[2]ï¼ˆå…¨æ˜¯æ­£æ•°ï¼‰ã€‚
+        // ç‚¹X = K + y[0] * U[0] + y[1] * U[1] + y[2] * U[2]æ˜¯åœ¨æ¤­åœ†ä½“ä¸Šï¼Œ
+        // æµ‹è¯•ä¸ºæ¤­çƒä½“å†…éƒ¨çš„ç‚¹ç”¨â€œ<=â€ï¼Œä»£æ›¿â€œ=â€åœ¨å…ˆå‰çš„è¡¨è¾¾å¼ä¸­ã€‚
+        // æ¤­çƒä½“çš„ä»£æ•°è¡¨ç¤ºæ˜¯
         //   1 = (X-K)^T * (U[0] * U[0]^T / e[0]^2 + U[1] * U[1]^T / e[1]^2 +
         //                  U[2] * U[2]^T / e[2]^2) * (X - K)
         //     = (X-K)^T * M * (X - K)
-        // ÆäÖĞ£¬ÉÏ±êT±íÊ¾×ªÖÃ¡£¹Û²ìµ½U[i] * U[i]^TÊÇÒ»¸ö¾ØÕó£¬¶ø²»ÊÇ±êÁ¿»ı¡£
-        // ¾ØÕóMÊÇ¶Ô³ÆµÄ¡£ÍÖÇòÌåÒ²ÓÉÒ»Ôª¶ş´Î·½³Ì±íÊ¾
+        // å…¶ä¸­ï¼Œä¸Šæ ‡Tè¡¨ç¤ºè½¬ç½®ã€‚è§‚å¯Ÿåˆ°U[i] * U[i]^Tæ˜¯ä¸€ä¸ªçŸ©é˜µï¼Œè€Œä¸æ˜¯æ ‡é‡ç§¯ã€‚
+        // çŸ©é˜µMæ˜¯å¯¹ç§°çš„ã€‚æ¤­çƒä½“ä¹Ÿç”±ä¸€å…ƒäºŒæ¬¡æ–¹ç¨‹è¡¨ç¤º
         //   0 = a0 + a1 * x[0] + a2 * x[1] + a3 * x[2] + a4 * x[0]^2 + a5 * x[0] * x[1] +
         //       a6 * x[0] * x[2] + a7 * x[1]^2 + a8 * x[1] * x[2] + a9 * x[2]^2
         //     = a0 + [a1 a2 a3] * X + X^T * [a4     a5 / 2 a6 / 2] * X
         //                                   [a5 / 2 a7     a8 / 2]
         //                                   [a6 / 2 a8 / 2 a9  ]
         //     = C + B^T * X + X^T * A * X
-        // ÆäÖĞX = (x[0],x[1],x[2])¡£Õâ¸öµÈÊ½¿ÉÒÔ±»·Ö½âµ½(X-K)^T * M * (X - K) = 1£¬
-        // ÆäÖĞK = -A^{-1} * B / 2, M = A / (B^T * A^{-1} * B / 4 - C)¡£
-        // ÎªÍÖÔ²ÌåÊ±£¬M±ØĞë¾ßÓĞËùÓĞÌØÕ÷ÖµÎªÕı¡£
+        // å…¶ä¸­X = (x[0],x[1],x[2])ã€‚è¿™ä¸ªç­‰å¼å¯ä»¥è¢«åˆ†è§£åˆ°(X-K)^T * M * (X - K) = 1ï¼Œ
+        // å…¶ä¸­K = -A^{-1} * B / 2, M = A / (B^T * A^{-1} * B / 4 - C)ã€‚
+        // ä¸ºæ¤­åœ†ä½“æ—¶ï¼ŒMå¿…é¡»å…·æœ‰æ‰€æœ‰ç‰¹å¾å€¼ä¸ºæ­£ã€‚
         Ellipsoid3(const Vector3Type& center,
                    const Vector3Type& axis0,
                    const Vector3Type& axis1,
@@ -72,24 +72,24 @@ namespace Mathematics
         NODISCARD Real GetExtent1() const noexcept;
         NODISCARD Real GetExtent2() const noexcept;
 
-        // ¼ÆËã M = sum_{i = 0}^2 U[i] * U[i]^T/e[i]^2.
+        // è®¡ç®— M = sum_{i = 0}^2 U[i] * U[i]^T/e[i]^2.
         NODISCARD Matrix3Type GetMatrix() const;
 
-        // ¼ÆËã M^{-1} = sum_{i = 0}^2 U[i] * U[i]^T * e[i]^2.
+        // è®¡ç®— M^{-1} = sum_{i = 0}^2 U[i] * U[i]^T * e[i]^2.
         NODISCARD Matrix3Type GetMatrixInverse() const;
 
-        // ¹¹½¨¶ş´Î·½³ÌÊ½£¬±íÊ¾ÍÖÔ²ÌåµÄÏµÊı¡£
+        // æ„å»ºäºŒæ¬¡æ–¹ç¨‹å¼ï¼Œè¡¨ç¤ºæ¤­åœ†ä½“çš„ç³»æ•°ã€‚
         NODISCARD Ellipsoid3CoefficientsType ToCoefficients() const;
 
-        // ¹¹½¨m_Center£¬m_AxisºÍm_Extent´Ó¶ş´Î·½³Ì¡£
-        // Èç¹ûÊäÈëÏµÊı²»ÄÜ±íÊ¾Ò»¸öÍÖÔ²Ìå£¬ÔòÅ×³öÒì³£¡£
+        // æ„å»ºm_Centerï¼Œm_Axiså’Œm_Extentä»äºŒæ¬¡æ–¹ç¨‹ã€‚
+        // å¦‚æœè¾“å…¥ç³»æ•°ä¸èƒ½è¡¨ç¤ºä¸€ä¸ªæ¤­åœ†ä½“ï¼Œåˆ™æŠ›å‡ºå¼‚å¸¸ã€‚
         void FromCoefficients(const Ellipsoid3CoefficientsType& coefficients, const Real newEpsilon = MathType::GetZeroTolerance());
 
-        // ¼ÆËãµÄ¶ş´Îº¯Êı Q(X) = (X-K)^T * M * (X-K) - 1.
+        // è®¡ç®—çš„äºŒæ¬¡å‡½æ•° Q(X) = (X-K)^T * M * (X-K) - 1.
         NODISCARD Real Evaluate(const Vector3Type& point) const;
 
-        // ²âÊÔÊäÈëµãÊÇ·ñÔÚÍÖÔ²ÌåÄÚ²¿»ò±ßÉÏ¡£
-        // ¸Ãµã±»°üº¬µ±Q(X) <= 0£¬ÆäÖĞQ(X)Îªº¯ÊıEvaluate()¡£
+        // æµ‹è¯•è¾“å…¥ç‚¹æ˜¯å¦åœ¨æ¤­åœ†ä½“å†…éƒ¨æˆ–è¾¹ä¸Šã€‚
+        // è¯¥ç‚¹è¢«åŒ…å«å½“Q(X) <= 0ï¼Œå…¶ä¸­Q(X)ä¸ºå‡½æ•°Evaluate()ã€‚
         NODISCARD bool Contains(const Vector3Type& point) const;
 
         NODISCARD Ellipsoid3 GetMove(Real t, const Vector3Type& velocity) const;
@@ -110,7 +110,7 @@ namespace Mathematics
     template <typename Real>
     NODISCARD bool Approximate(const Ellipsoid3<Real>& lhs, const Ellipsoid3<Real>& rhs, Real epsilon);
 
-    // µ÷ÊÔÊä³ö
+    // è°ƒè¯•è¾“å‡º
     template <typename Real>
     std::ostream& operator<<(std::ostream& outFile, const Ellipsoid3<Real>& ellipsoid);
 

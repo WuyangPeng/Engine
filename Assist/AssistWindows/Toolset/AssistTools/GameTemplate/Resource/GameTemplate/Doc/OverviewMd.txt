@@ -1,56 +1,56 @@
-/// @mainpage $ProjectDescribeName$ API ÎÄµµ
+ï»¿/// @mainpage $ProjectDescribeName$ API æ–‡æ¡£
 
 @copyright Copyright (c) 2011-$EndYear$
 $ProjectDescribeName$
 
-@author ÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-ÁªÏµ×÷Õß£º94458936@qq.com
+@author å½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+è”ç³»ä½œè€…ï¼š94458936@qq.com
 
 @version $Version$
-±ê×¼£ºstd:c++20
+æ ‡å‡†ï¼šstd:c++20
 
 @date $Data$ $Hour$:$Minute$
 
-@section sec_Contents ÄÚÈİ
+@section sec_Contents å†…å®¹
 
 @li @ref sec_Overview
 @li @ref sec_Detail
 @li @ref sec_SeeAlso
 
-@section sec_Overview ¸ÅÊö
+@section sec_Overview æ¦‚è¿°
 
-$ProjectChineseName$°üº¬$ModuleCount$¸öÄ£¿é£º
+$ProjectChineseName$åŒ…å«$ModuleCount$ä¸ªæ¨¡å—ï¼š
 
 $ModuleDescribe$
 
-@section sec_Detail ÏêÏ¸ËµÃ÷
+@section sec_Detail è¯¦ç»†è¯´æ˜
 
 @li @ref page_Documentation
 @li @ref page_$ProjectName$_Documentation
 
-@section sec_SeeAlso ²Î¼û
+@section sec_SeeAlso å‚è§
 
 @li @ref page_CoreTools_Base 
 
-@page page_Documentation ËµÃ÷
+@page page_Documentation è¯´æ˜
 
-@link group_Documentation \b ²é¿´ËùÓĞËµÃ÷ @endlink
+@link group_Documentation \b æŸ¥çœ‹æ‰€æœ‰è¯´æ˜ @endlink
 
-@defgroup group_Documentation ËµÃ÷
-ÓĞ¹ØÏêÏ¸ËµÃ÷£¬Çë²Î¼û @ref page_Documentation ¡£
+@defgroup group_Documentation è¯´æ˜
+æœ‰å…³è¯¦ç»†è¯´æ˜ï¼Œè¯·å‚è§ @ref page_Documentation ã€‚
 
-@page page_$ProjectName$_Documentation $ProjectChineseName$ËµÃ÷
+@page page_$ProjectName$_Documentation $ProjectChineseName$è¯´æ˜
 
-@link group_$ProjectName$_Documentation \b ²é¿´ËùÓĞ$ProjectChineseName$ËµÃ÷ @endlink
+@link group_$ProjectName$_Documentation \b æŸ¥çœ‹æ‰€æœ‰$ProjectChineseName$è¯´æ˜ @endlink
 
-@defgroup group_$ProjectName$_Documentation $ProjectChineseName$ËµÃ÷
-ÓĞ¹ØÏêÏ¸$ProjectChineseName$ËµÃ÷£¬Çë²Î¼û @ref group_$ProjectName$_Documentation ¡£ 
+@defgroup group_$ProjectName$_Documentation $ProjectChineseName$è¯´æ˜
+æœ‰å…³è¯¦ç»†$ProjectChineseName$è¯´æ˜ï¼Œè¯·å‚è§ @ref group_$ProjectName$_Documentation ã€‚ 
 
 @page page_CoreTools_Base The CoreTools Base 
 
-ÏêÏ¸ËµÃ÷ÔÚÕâÀï¡£
+è¯¦ç»†è¯´æ˜åœ¨è¿™é‡Œã€‚
 
 @link group_CoreTools_Base \b View All CoreTools Classes @endlink
 
-@defgroup group_CoreTools_Base ºËĞÄ¹¤¾ß¿â»ù´¡¹¦ÄÜ
-ÓĞ¹ØÏêÏ¸ËµÃ÷£¬Çë²Î¼û @ref page_CoreTools_Base ¡£
+@defgroup group_CoreTools_Base æ ¸å¿ƒå·¥å…·åº“åŸºç¡€åŠŸèƒ½
+æœ‰å…³è¯¦ç»†è¯´æ˜ï¼Œè¯·å‚è§ @ref page_CoreTools_Base ã€‚

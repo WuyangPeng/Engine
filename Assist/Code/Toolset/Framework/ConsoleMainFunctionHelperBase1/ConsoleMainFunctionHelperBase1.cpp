@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.2 (2023/07/28 14:30)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.2 (2023/07/28 14:30)
 
 #include "ConsoleMainFunctionHelperBase1.h"
 #include "System/Helper/PragmaWarning.h"
@@ -37,7 +37,7 @@ int Framework::ConsoleMainFunctionHelperBase1::DoRun()
 
 void Framework::ConsoleMainFunctionHelperBase1::PrintConsoleParameterNumber()
 {
-    COUT << SYSTEM_TEXT("ÃüÁîĞĞ²ÎÊı¸öÊıÎª£º")
+    COUT << SYSTEM_TEXT("å‘½ä»¤è¡Œå‚æ•°ä¸ªæ•°ä¸ºï¼š")
          << GetArgc()
          << SYSTEM_TEXT('\n');
 }
@@ -52,9 +52,9 @@ void Framework::ConsoleMainFunctionHelperBase1::PrintConsoleParameter()
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
-            COUT << SYSTEM_TEXT("ÃüÁîĞĞ²ÎÊıµÚ")
+            COUT << SYSTEM_TEXT("å‘½ä»¤è¡Œå‚æ•°ç¬¬")
                  << index + 1
-                 << SYSTEM_TEXT("¸öÎª£º")
+                 << SYSTEM_TEXT("ä¸ªä¸ºï¼š")
                  << aArgv[index]
                  << SYSTEM_TEXT('\n');
 
@@ -65,7 +65,7 @@ void Framework::ConsoleMainFunctionHelperBase1::PrintConsoleParameter()
 
 void Framework::ConsoleMainFunctionHelperBase1::PrintApplicationProjectDirectory()
 {
-    COUT << SYSTEM_TEXT("Ó¦ÓÃ°²×°Ä¿Â¼Îª£º")
+    COUT << SYSTEM_TEXT("åº”ç”¨å®‰è£…ç›®å½•ä¸ºï¼š")
          << GetApplicationProjectDirectory()
          << SYSTEM_TEXT('\n');
 }
@@ -77,7 +77,7 @@ void Framework::ConsoleMainFunctionHelperBase1::PrintCommand()
     for (auto index = 0; index < command.GetExcessArgumentsCount(); ++index)
     {
         auto arguments = command.ExcessArguments();
-        std::cout << "ÃüÁîĞĞ²ÎÊıÃûÎª£º"
+        std::cout << "å‘½ä»¤è¡Œå‚æ•°åä¸ºï¼š"
                   << arguments
                   << '\n';
     }

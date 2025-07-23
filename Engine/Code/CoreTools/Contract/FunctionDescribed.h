@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/28 15:04)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/28 15:04)
 
 #ifndef CORE_TOOLS_CONTRACT_FUNCTION_DESCRIBED_H
 #define CORE_TOOLS_CONTRACT_FUNCTION_DESCRIBED_H
@@ -16,7 +16,7 @@
 
 namespace CoreTools
 {
-    /// FunctionDescribedÀà²»µ¼³ö
+    /// FunctionDescribedç±»ä¸å¯¼å‡º
     class FunctionDescribed final
     {
     public:
@@ -51,7 +51,7 @@ namespace CoreTools
 
     NODISCARD constexpr bool operator==(const FunctionDescribed& lhs, const FunctionDescribed& rhs)
     {
-        /// ÕâÀïÖ±½Ó±È½Ï×Ö·û´®Ö¸Õë£¬¶ø²»ÊÇÊµ¼ÊµÄÖµ¡£
+        /// è¿™é‡Œç›´æ¥æ¯”è¾ƒå­—ç¬¦ä¸²æŒ‡é’ˆï¼Œè€Œä¸æ˜¯å®é™…çš„å€¼ã€‚
         return lhs.GetCurrentFunction() == rhs.GetCurrentFunction() && lhs.GetFileName() == rhs.GetFileName() && lhs.GetLine() == rhs.GetLine();
     }
 }

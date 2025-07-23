@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.2 (2024/10/26 15:40)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.2 (2024/10/26 15:40)
 
 #ifndef SYSTEM_WINDOWS_ENGINEERING_H
 #define SYSTEM_WINDOWS_ENGINEERING_H
@@ -22,9 +22,9 @@ namespace System
     NODISCARD String SYSTEM_DEFAULT_DECLARE GetEngineeringExeSuffix();
     NODISCARD String SYSTEM_DEFAULT_DECLARE GetEngineeringDirectory();
 
-    /// @brief »ñÈ¡Â·¾¶ÖĞ×îºóÒ»¸öĞ±¸ÜµÄÎ»ÖÃ
-    /// @param path Òª²éÕÒµÄÂ·¾¶×Ö·û´®
-    /// @return ·µ»Ø×îºóÒ»¸öĞ±¸ÜµÄÎ»ÖÃ£¬Èç¹ûÃ»ÓĞĞ±¸ÜÔò·µ»Ønpos
+    /// @brief è·å–è·¯å¾„ä¸­æœ€åä¸€ä¸ªæ–œæ çš„ä½ç½®
+    /// @param path è¦æŸ¥æ‰¾çš„è·¯å¾„å­—ç¬¦ä¸²
+    /// @return è¿”å›æœ€åä¸€ä¸ªæ–œæ çš„ä½ç½®ï¼Œå¦‚æœæ²¡æœ‰æ–œæ åˆ™è¿”å›npos
     NODISCARD size_t SYSTEM_DEFAULT_DECLARE GetLastSlashPosition(const String& path) noexcept;
 
     NODISCARD constexpr int GetEngineeringOffsetValue() noexcept
@@ -60,9 +60,9 @@ namespace System
         return offsetValue;
     }
 
-    /// @brief ¼ÆËãÒ»¸öÕûÊıµÄÎ»Êı
-    /// @param number Òª¼ÆËãÎ»ÊıµÄÕûÊı
-    /// @return ·µ»ØÕûÊıµÄÎ»Êı
+    /// @brief è®¡ç®—ä¸€ä¸ªæ•´æ•°çš„ä½æ•°
+    /// @param number è¦è®¡ç®—ä½æ•°çš„æ•´æ•°
+    /// @return è¿”å›æ•´æ•°çš„ä½æ•°
     NODISCARD constexpr int NumDigits(int number) noexcept
     {
         auto digitsSoFar = 1;
@@ -73,7 +73,7 @@ namespace System
         return digitsSoFar;
     }
 
-    /// @brief Õâ¸öÄ£°åÃ»ÓĞ¶¨Òå£¬ÓÃÀ´ÈÃ±àÒëÆ÷´òÓ¡Ä³¸öĞÍ±ğµÄÀàĞÍ¡£
+    /// @brief è¿™ä¸ªæ¨¡æ¿æ²¡æœ‰å®šä¹‰ï¼Œç”¨æ¥è®©ç¼–è¯‘å™¨æ‰“å°æŸä¸ªå‹åˆ«çš„ç±»å‹ã€‚
     template <typename T>
     class TypeDisplayer;
 }

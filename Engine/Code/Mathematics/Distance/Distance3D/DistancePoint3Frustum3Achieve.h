@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 16:33)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 16:33)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_FRUSTUM3_ACHIEVE_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT3_FRUSTUM3_ACHIEVE_H
@@ -56,13 +56,13 @@ typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    // ¼ÆËãÏà¶ÔÓÚÊÓ×¶×ø±êÏµµÄµãµÄ×ø±ê¡£
+    // è®¡ç®—ç›¸å¯¹äºè§†é”¥åæ ‡ç³»çš„ç‚¹çš„åæ ‡ã€‚
     auto diff = point - frustum.GetOrigin();
     Vector3Type test{ Vector3ToolsType::DotProduct(diff, frustum.GetRightVector()),
                   Vector3ToolsType::DotProduct(diff, frustum.GetUpVector()),
                   Vector3ToolsType::DotProduct(diff, frustum.GetDirectionVector()) };
 
-    // ÔÚ¾ßÓĞ·Ç¸ºRealºÍU×ø±êµÄ°Ë·ÖÔ²ÖĞÖ´ĞĞ¼ÆËã¡£
+    // åœ¨å…·æœ‰éè´ŸRealå’ŒUåæ ‡çš„å…«åˆ†åœ†ä¸­æ‰§è¡Œè®¡ç®—ã€‚
     auto rSignChange = false;
     if (test.GetX() < MathType::GetValue(0))
     {
@@ -85,7 +85,7 @@ typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::
         uSignChange = false;
     }
 
-    // ÊÓ×¶µ¼³ö²ÎÊı¡£
+    // è§†é”¥å¯¼å‡ºå‚æ•°ã€‚
     const auto rightMin = frustum.GetRightBound();
     const auto rightMax = frustum.GetDirectionRatio() * rightMin;
     const auto upMin = frustum.GetUpBound();
@@ -103,7 +103,7 @@ typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::
     const auto maxUpDirectionDot = frustum.GetDirectionRatio() * minUpDirectionDot;
     const auto maxRightUpDirectionDot = frustum.GetDirectionRatio() * minRightUpDirectionDot;
 
-    /// ÔÚËùÓĞÇé¿öÏÂ£¬Ëã·¨¶¼»áÍ¨¹ıÈ·¶¨²âÊÔµãËùÔÚµÄÔ²×¶ÌåµÄ¶¥µã£¬±ßÔµºÍÃæµÄÄÄ¸öVoronoiÇøÓòÀ´¼ÆËã×î½Ó½üµÄµã¡£
+    /// åœ¨æ‰€æœ‰æƒ…å†µä¸‹ï¼Œç®—æ³•éƒ½ä¼šé€šè¿‡ç¡®å®šæµ‹è¯•ç‚¹æ‰€åœ¨çš„åœ†é”¥ä½“çš„é¡¶ç‚¹ï¼Œè¾¹ç¼˜å’Œé¢çš„å“ªä¸ªVoronoiåŒºåŸŸæ¥è®¡ç®—æœ€æ¥è¿‘çš„ç‚¹ã€‚
     Vector3Type closest{};
 
     if (directionMax <= test.GetZ())
@@ -309,7 +309,7 @@ typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::
         {
             if (upDot <= MathType::GetValue(0))
             {
-                // Ö¸ÏòÄÚ²¿ÊÓ×¶
+                // æŒ‡å‘å†…éƒ¨è§†é”¥
                 closest = test;
             }
             else
@@ -367,7 +367,7 @@ typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::
                         closest.SetY(test.GetY());
                         closest.SetZ(directionMax);
                     }
-                    else  // assert( rdDot >= minRDDot ) ´Ó¼¸ºÎ¶ÏÑÔ
+                    else  // assert( rdDot >= minRDDot ) ä»å‡ ä½•æ–­è¨€
                     {
                         // L-face
                         auto t = rightDot / minRightDirectionDot;
@@ -389,7 +389,7 @@ typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::
                             closest.SetY(upMax);
                             closest.SetZ(directionMax);
                         }
-                        else  // assert( udDot >= minUDDot ) ´Ó¼¸ºÎ¶ÏÑÔ
+                        else  // assert( udDot >= minUDDot ) ä»å‡ ä½•æ–­è¨€
                         {
                             // U-face
                             auto t = upDot / minUpDirectionDot;
@@ -407,7 +407,7 @@ typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::
                             closest.SetY(upMax);
                             closest.SetZ(directionMax);
                         }
-                        else  // assert( rudDot >= minRUDDot ) ´Ó¼¸ºÎ¶ÏÑÔ
+                        else  // assert( rudDot >= minRUDDot ) ä»å‡ ä½•æ–­è¨€
                         {
                             // LU-edge
                             auto t = rightUpDirectionDot / minRightUpDirectionDot;
@@ -423,7 +423,7 @@ typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::
 
     diff = test - closest;
 
-    // ×ª»»»ØÔ­Ê¼ÏóÏŞ¡£
+    // è½¬æ¢å›åŸå§‹è±¡é™ã€‚
     if (rSignChange)
     {
         closest.SetX(-closest.GetX());
@@ -434,7 +434,7 @@ typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::
         closest.SetY(-closest.GetY());
     }
 
-    // ×ª»»»ØÔ­Ê¼×ø±ê¡£
+    // è½¬æ¢å›åŸå§‹åæ ‡ã€‚
     const auto closestPoint = frustum.GetOrigin() +
                               closest.GetX() * frustum.GetRightVector() +
                               closest.GetY() * frustum.GetUpVector() +

@@ -1,0 +1,10 @@
+{
+  "androidSuite": {
+    "AndroidInputEventFacadeTesting": 1,
+    "AndroidInputMotionEventFacadeTesting": 1,
+    "AndroidInputQueueFacadeTesting": 1,
+    "AndroidLooperTesting": 1,
+    "AndroidNativeAppGlueTesting": 1,
+    "AndroidNativeWindowFacadeTesting": 1
+  }
+}

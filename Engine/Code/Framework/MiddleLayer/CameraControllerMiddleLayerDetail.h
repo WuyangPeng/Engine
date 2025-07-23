@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 14:55)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 14:55)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_CAMERA_CONTROLLER_MIDDLE_LAYER_DETAIL_H
 #define FRAMEWORK_MIDDLE_LAYER_CAMERA_CONTROLLER_MIDDLE_LAYER_DETAIL_H
@@ -24,10 +24,10 @@
 template <typename ApplicationTrait>
 Framework::CameraControllerMiddleLayer<ApplicationTrait>::CameraControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ middleLayerPlatform, environmentDirectory },
-      changeCameraSpeed{ { KeyIdentifiers::lowerT, &CameraModelMiddleLayer::SlowerCameraTranslation },  // ÉãÏñ»úÆ½ÒÆ±äÂı¡£
-                         { KeyIdentifiers::upperT, &CameraModelMiddleLayer::FasterCameraTranslation },  // ÉãÏñ»úÆ½ÒÆ±ä¿ì¡£
-                         { KeyIdentifiers::lowerR, &CameraModelMiddleLayer::SlowerCameraRotation },  // ÉãÏñ»úĞı×ª±äÂı¡£
-                         { KeyIdentifiers::upperR, &CameraModelMiddleLayer::FasterCameraRotation } },  // ÉãÏñ»úĞı×ª±ä¿ì¡£
+      changeCameraSpeed{ { KeyIdentifiers::lowerT, &CameraModelMiddleLayer::SlowerCameraTranslation },  // æ‘„åƒæœºå¹³ç§»å˜æ…¢ã€‚
+                         { KeyIdentifiers::upperT, &CameraModelMiddleLayer::FasterCameraTranslation },  // æ‘„åƒæœºå¹³ç§»å˜å¿«ã€‚
+                         { KeyIdentifiers::lowerR, &CameraModelMiddleLayer::SlowerCameraRotation },  // æ‘„åƒæœºæ—‹è½¬å˜æ…¢ã€‚
+                         { KeyIdentifiers::upperR, &CameraModelMiddleLayer::FasterCameraRotation } },  // æ‘„åƒæœºæ—‹è½¬å˜å¿«ã€‚
       changeCameraMotion{ { KeyIdentifiers::keyF1, { &CameraModelMiddleLayer::SetDoRoll, Mathematics::NumericalValueSymbol::Positive } },
                           { KeyIdentifiers::keyF2, { &CameraModelMiddleLayer::SetDoRoll, Mathematics::NumericalValueSymbol::Negative } },
                           { KeyIdentifiers::keyF3, { &CameraModelMiddleLayer::SetDoYaw, Mathematics::NumericalValueSymbol::Positive } },
@@ -75,7 +75,7 @@ bool Framework::CameraControllerMiddleLayer<ApplicationTrait>::KeyDown(int key, 
         {
             const auto cameraModelMiddleLayer = GetCameraModelMiddleLayer();
 
-            // ±ê×¼¼ü¶ÔÓ¦ÓÃ³ÌĞò¡£
+            // æ ‡å‡†é”®å¯¹åº”ç”¨ç¨‹åºã€‚
             ((*cameraModelMiddleLayer).*(iter->second))();
         }
 

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/01 10:39)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/01 10:39)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -26,7 +26,7 @@ using namespace std::literals;
 CoreTools::IFileStreamManagerImpl::IFileStreamManagerImpl(const String& fileName)
     : iStream{ fileName }, fileName{ fileName }
 {
-    ASSERT_FAIL_THROW_EXCEPTION(iStream, SYSTEM_TEXT("´ò¿ªÎÄ¼ş"s) + fileName + SYSTEM_TEXT("Ê§°Ü£¡"s))
+    ASSERT_FAIL_THROW_EXCEPTION(iStream, SYSTEM_TEXT("æ‰“å¼€æ–‡ä»¶"s) + fileName + SYSTEM_TEXT("å¤±è´¥ï¼"s))
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -60,7 +60,7 @@ System::String CoreTools::IFileStreamManagerImpl::BackupFile() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("±¸·İÎÄ¼şÊ§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å¤‡ä»½æ–‡ä»¶å¤±è´¥ï¼"s))
     }
 
     return backupName;
@@ -84,7 +84,7 @@ System::String CoreTools::IFileStreamManagerImpl::GetBackupName() const
 
 void CoreTools::IFileStreamManagerImpl::CopyContentToStream(OStream* stream) const
 {
-    CORE_TOOLS_ASSERTION_0(stream != nullptr, "Ö¸ÕëÎŞĞ§");
+    CORE_TOOLS_ASSERTION_0(stream != nullptr, "æŒ‡é’ˆæ— æ•ˆ");
 
 #include SYSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26492)
@@ -116,7 +116,7 @@ System::String CoreTools::IFileStreamManagerImpl::GetFileContent() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("»ñÈ¡ÎÄ¼şÄÚÈİÊ§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è·å–æ–‡ä»¶å†…å®¹å¤±è´¥ï¼"s))
     }
 }
 

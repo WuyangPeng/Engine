@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:14)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:14)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_BOX3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_BOX3_DETAIL_H
@@ -62,10 +62,10 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::Find()
     const auto lhsVelocity = this->GetLhsVelocity();
     const auto rhsVelocity = this->GetRhsVelocity();
 
-    // ºÃÏñÈı½ÇĞÎÊÇ¾²Ö¹µÄ£¬ºĞ×ÓÔÚÒÆ¶¯¡£
+    // å¥½åƒä¸‰è§’å½¢æ˜¯é™æ­¢çš„ï¼Œç›’å­åœ¨ç§»åŠ¨ã€‚
     auto relVelocity = rhsVelocity - lhsVelocity;
 
-    // ²âÊÔÈı½ÇĞÎ·¨Ïß
+    // æµ‹è¯•ä¸‰è§’å½¢æ³•çº¿
     using EdgeType = std::array<Vector3Type, 3>;
     EdgeType edge{ triangle.GetVertex(1) - triangle.GetVertex(0),
                    triangle.GetVertex(2) - triangle.GetVertex(1),
@@ -87,7 +87,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::Find()
         return;
     }
 
-    // Èı½ÇĞÎ¹²Ãæ¶ø²»´¹Ö±ÓÚ¿ò
+    // ä¸‰è§’å½¢å…±é¢è€Œä¸å‚ç›´äºæ¡†
     auto coplanar = -1;
 
     for (auto i = 0; i < 3; ++i)
@@ -108,7 +108,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::Find()
             return;
         }
 
-        // ²âÊÔÖáÊÇ·ñÆ½ĞĞÓÚÈı½ÇĞÎ·¨Ïß¡£ ²âÊÔÎª£ºsin(Angle(normal,axis)) < epsilon
+        // æµ‹è¯•è½´æ˜¯å¦å¹³è¡Œäºä¸‰è§’å½¢æ³•çº¿ã€‚ æµ‹è¯•ä¸ºï¼šsin(Angle(normal,axis)) < epsilon
         auto triangleNormDotAxis = Vector3ToolsType::DotProduct(triangleNorm, axis);
         auto triangleNormDotTriangleNorm = Vector3ToolsType::GetLengthSquared(triangleNorm);
         auto axisDotAxis = Vector3ToolsType::GetLengthSquared(axis);
@@ -121,7 +121,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::Find()
 
     if (coplanar == -1)
     {
-        // ²âÊÔÈı½ÇĞÎ´©¹ıºĞÃæ¡£
+        // æµ‹è¯•ä¸‰è§’å½¢ç©¿è¿‡ç›’é¢ã€‚
         for (auto i0 = 0; i0 < 3; ++i0)
         {
             for (auto i1 = 0; i1 < 3; ++i1)
@@ -145,7 +145,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::Find()
     }
     else
     {
-        // ²âÊÔÈı½ÇĞÎ´©¹ıºĞÖá¡£
+        // æµ‹è¯•ä¸‰è§’å½¢ç©¿è¿‡ç›’è½´ã€‚
         for (auto i = 0; i < 3; ++i)
         {
             const auto axis = Vector3ToolsType::CrossProduct(edge.at(i), triangleNorm);
@@ -165,7 +165,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::Find()
         }
     }
 
-    // ²âÊÔÏòÁ¿´©¹ıºĞÃæ¡£
+    // æµ‹è¯•å‘é‡ç©¿è¿‡ç›’é¢ã€‚
     for (auto i = 0; i < 3; ++i)
     {
         const auto axis = Vector3ToolsType::CrossProduct(relVelocity, box.GetAxis(i));

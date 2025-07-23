@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:02)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:02)
 
 #ifndef MATHEMATICS_INTERSECTION_TRIANGLE_PLANE_RELATIONS_DETAIL_H
 #define MATHEMATICS_INTERSECTION_TRIANGLE_PLANE_RELATIONS_DETAIL_H
@@ -27,7 +27,7 @@ Mathematics::TrianglePlaneRelations<Real>::TrianglePlaneRelations(const Triangle
 template <typename Real>
 void Mathematics::TrianglePlaneRelations<Real>::Relations(const Triangle3Type& triangle, const Plane3Type& plane, const Real epsilon)
 {
-    // ¼ÆËãÈı½ÇĞÎ¶¥µãµ½Æ½ÃæµÄ´ø·ûºÅ¾àÀë¡£ Ê¹ÓÃepsilonÆ½Ãæ²âÊÔ¡£
+    // è®¡ç®—ä¸‰è§’å½¢é¡¶ç‚¹åˆ°å¹³é¢çš„å¸¦ç¬¦å·è·ç¦»ã€‚ ä½¿ç”¨epsilonå¹³é¢æµ‹è¯•ã€‚
 
     for (auto i = 0; i < size; ++i)
     {

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.5 (2024/02/05 09:14)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.5 (2024/02/05 09:14)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_H
@@ -24,16 +24,16 @@
 
 namespace Mathematics
 {
-    /// ËÄÔªÊıµÄĞÎÊ½Îª
+    /// å››å…ƒæ•°çš„å½¢å¼ä¸º
     /// q = x*i + y*j + z*k + w*1 = x*i + y*j + z*k + w
-    /// ÆäÖĞw¡¢x¡¢yºÍzÊÇÊµÊı¡£±êÁ¿²¿·ÖºÍÊ¸Á¿²¿·Ö·Ö±ğÎª
+    /// å…¶ä¸­wã€xã€yå’Œzæ˜¯å®æ•°ã€‚æ ‡é‡éƒ¨åˆ†å’ŒçŸ¢é‡éƒ¨åˆ†åˆ†åˆ«ä¸º
     ///   Vector(q) = x * i + y * j + z * k
     ///   Scalar(q) = w
     ///   q = Vector(q) + Scalar(q)
     ///
-    /// ÓëÊ¹ÓÃrotatedU = q * (0,u) * Conjugate(q)£¨¶ÔÓÚMATHEMATICS_USE_MATRIX_VECTOR£©£¬
-    /// rotatedU = Conjugate(q) * (0, u) * q£¨¶ÔÓÚMATHEMATICS_USE_VECTOR_MATRIX£©
-    /// µÄÔ­Ê¼ÊµÏÖÏà±È£¬Rotate(...)º¯ÊıĞèÒª¸üÉÙµÄËãÊõÔËËã¡£
+    /// ä¸ä½¿ç”¨rotatedU = q * (0,u) * Conjugate(q)ï¼ˆå¯¹äºMATHEMATICS_USE_MATRIX_VECTORï¼‰ï¼Œ
+    /// rotatedU = Conjugate(q) * (0, u) * qï¼ˆå¯¹äºMATHEMATICS_USE_VECTOR_MATRIXï¼‰
+    /// çš„åŸå§‹å®ç°ç›¸æ¯”ï¼ŒRotate(...)å‡½æ•°éœ€è¦æ›´å°‘çš„ç®—æœ¯è¿ç®—ã€‚
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Quaternion final : private boost::additive<Quaternion<Real>, boost::multiplicative<Quaternion<Real>, Real, boost::totally_ordered<Quaternion<Real>>>>
@@ -72,8 +72,8 @@ namespace Mathematics
         using AlgebraVector4 = Algebra::Vector<4, Real>;
 
     public:
-        /// ËÄÔªÊıµÄĞÎÊ½Îªq = w + x * i + y * j + z * k
-        /// ÕâÀï(w,x,y,z)²»Ò»¶¨ÊÇµ¥Î»³¤¶ÈµÄËÄÎ¬ÏòÁ¿¡£
+        /// å››å…ƒæ•°çš„å½¢å¼ä¸ºq = w + x * i + y * j + z * k
+        /// è¿™é‡Œ(w,x,y,z)ä¸ä¸€å®šæ˜¯å•ä½é•¿åº¦çš„å››ç»´å‘é‡ã€‚
 
         constexpr Quaternion() noexcept
             : w{}, x{}, y{}, z{}
@@ -85,18 +85,18 @@ namespace Mathematics
         {
         }
 
-        /// ÊäÈëÎªĞı×ª¾ØÕó¹¹ÔìËÄÔªÊı
+        /// è¾“å…¥ä¸ºæ—‹è½¬çŸ©é˜µæ„é€ å››å…ƒæ•°
         explicit Quaternion(const Matrix3Type& matrix);
 
-        /// Í¨¹ıÖá-½ÇµÄĞı×ª¹¹ÔìËÄÔªÊı
+        /// é€šè¿‡è½´-è§’çš„æ—‹è½¬æ„é€ å››å…ƒæ•°
         Quaternion(const Vector3Type& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        /// Í¨¹ıÖ¸¶¨µÄÁĞĞı×ª¾ØÕó¹¹ÔìËÄÔªÊı¡£
+        /// é€šè¿‡æŒ‡å®šçš„åˆ—æ—‹è½¬çŸ©é˜µæ„é€ å››å…ƒæ•°ã€‚
         explicit Quaternion(const ContainerType& rotationColumn);
 
         CLASS_INVARIANT_DECLARE;
 
-        /// ×ø±ê·ÃÎÊÀàËÆÓÚÊı×é:  0 = w, 1 = x, 2 = y, 3 = z.
+        /// åæ ‡è®¿é—®ç±»ä¼¼äºæ•°ç»„:  0 = w, 1 = x, 2 = y, 3 = z.
         NODISCARD const Real& operator[](int index) const;
         NODISCARD Real& operator[](int index);
         NODISCARD Real GetW() const noexcept;
@@ -108,20 +108,20 @@ namespace Mathematics
         NODISCARD Real GetZ() const noexcept;
         void SetZ(Real aZ) noexcept;
 
-        /// Ò»ÔªÔËËã¡£
+        /// ä¸€å…ƒè¿ç®—ã€‚
         NODISCARD Quaternion operator+() const noexcept;
         NODISCARD Quaternion operator-() const noexcept;
 
-        /// ÏßĞÔ´úÊıÔËËã¡£
+        /// çº¿æ€§ä»£æ•°è¿ç®—ã€‚
         Quaternion& operator+=(const Quaternion& rhs) noexcept;
         Quaternion& operator-=(const Quaternion& rhs) noexcept;
         Quaternion& operator*=(Real scalar) noexcept;
         Quaternion& operator/=(Real scalar) noexcept;
 
-        /// ËãÊõÔËËã
+        /// ç®—æœ¯è¿ç®—
         Quaternion& operator*=(const Quaternion& rhs) noexcept;
 
-        /// ËÄÔªÊı£¬¾ØÕóºÍÖá¡ª¡ª½ÇÖ®¼äµÄ×ª»»¡£
+        /// å››å…ƒæ•°ï¼ŒçŸ©é˜µå’Œè½´â€”â€”è§’ä¹‹é—´çš„è½¬æ¢ã€‚
         void FromRotationMatrix(const Matrix3Type& matrix);
         NODISCARD Matrix3Type ToRotationMatrix() const noexcept;
         void FromRotationColumnVector3(const ContainerType& rotationColumn);
@@ -131,87 +131,87 @@ namespace Mathematics
         NODISCARD Real ToAngle() const noexcept;
         NODISCARD AxisAngleType ToAngleAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        /// 4-tupleµÄ³¤¶È
+        /// 4-tupleçš„é•¿åº¦
         NODISCARD Real Length() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        /// 4-tupleµÄ³¤¶ÈµÄÆ½·½
+        /// 4-tupleçš„é•¿åº¦çš„å¹³æ–¹
         NODISCARD Real SquaredLength() const noexcept;
 
         void Normalize(Real epsilon = MathType::GetZeroTolerance()) noexcept(gAssert < 3 || gMathematicsAssert < 3);
         NODISCARD bool IsNormalize(Real epsilon = MathType::GetZeroTolerance()) const noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        /// ¶ÔÓÚ·ÇÁãËÄÔªÊı q = (w,x,y,z)£¬inv(q) = (w,-x,-y,-z)/|q|^2£¬
-        /// ÆäÖĞ|q|ÊÇËÄÔªÊıµÄ³¤¶È¡£
-        /// µ±qÎªÁãÊ±£¬º¯Êı·µ»ØÁã£¬ÕâÈÏÎªÊÇ²»¿ÉÄÜµÄÇé¿ö¡£
+        /// å¯¹äºéé›¶å››å…ƒæ•° q = (w,x,y,z)ï¼Œinv(q) = (w,-x,-y,-z)/|q|^2ï¼Œ
+        /// å…¶ä¸­|q|æ˜¯å››å…ƒæ•°çš„é•¿åº¦ã€‚
+        /// å½“qä¸ºé›¶æ—¶ï¼Œå‡½æ•°è¿”å›é›¶ï¼Œè¿™è®¤ä¸ºæ˜¯ä¸å¯èƒ½çš„æƒ…å†µã€‚
         NODISCARD Quaternion Inverse() const;
 
-        /// q = (w,x,y,z) µÄ¹²éîÊÇconj(q) = (w,-x,-y,-z)¡£
-        /// È¡¸ºÊıÔÚ x, y, ºÍ z ÉÏ
+        /// q = (w,x,y,z) çš„å…±è½­æ˜¯conj(q) = (w,-x,-y,-z)ã€‚
+        /// å–è´Ÿæ•°åœ¨ x, y, å’Œ z ä¸Š
         NODISCARD Quaternion Conjugate() const noexcept;
 
-        /// ÊÊÓÃÓÚËÄÔªÊı w = 0
+        /// é€‚ç”¨äºå››å…ƒæ•° w = 0
         NODISCARD Quaternion Exp() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        /// ÊÊÓÃÓÚµ¥Î»³¤¶ÈËÄÔªÊı
+        /// é€‚ç”¨äºå•ä½é•¿åº¦å››å…ƒæ•°
         NODISCARD Quaternion Log() const noexcept;
 
-        /// ÓÉËÄÔªÊıĞı×ªÏòÁ¿¡£
+        /// ç”±å››å…ƒæ•°æ—‹è½¬å‘é‡ã€‚
 
-        /// Ê¹ÓÃËÄÔªÊı³Ë·¨Ğı×ªÈıÎ¬Ê¸Á¿u = (u0,u1,u2)¡£
-        /// ÊäÈëËÄÔªÊı±ØĞëÊÇµ¥Î»³¤¶È¡£
-        /// Èç¹ûRÊÇ¶ÔÓ¦ÓÚËÄÔªÊıqµÄĞı×ª¾ØÕó£¬
-        /// Ôòµ±¶¨ÒåÁËMATHEMATICS_USE_MATRIX_VECTOR£¨ÏîÄ¿µÄÄ¬ÈÏÖµ£©Ê±£¬¶ÔÓ¦ÓÚuµÄĞı×ªÊ¸Á¿vÎªv = R * u £¬
-        /// »òÕßµ±Î´¶¨ÒåMATHEMATICS_USE_MATRIX_VECTORÊ±£¬Îªv = u * R¡£
+        /// ä½¿ç”¨å››å…ƒæ•°ä¹˜æ³•æ—‹è½¬ä¸‰ç»´çŸ¢é‡u = (u0,u1,u2)ã€‚
+        /// è¾“å…¥å››å…ƒæ•°å¿…é¡»æ˜¯å•ä½é•¿åº¦ã€‚
+        /// å¦‚æœRæ˜¯å¯¹åº”äºå››å…ƒæ•°qçš„æ—‹è½¬çŸ©é˜µï¼Œ
+        /// åˆ™å½“å®šä¹‰äº†MATHEMATICS_USE_MATRIX_VECTORï¼ˆé¡¹ç›®çš„é»˜è®¤å€¼ï¼‰æ—¶ï¼Œå¯¹åº”äºuçš„æ—‹è½¬çŸ¢é‡vä¸ºv = R * u ï¼Œ
+        /// æˆ–è€…å½“æœªå®šä¹‰MATHEMATICS_USE_MATRIX_VECTORæ—¶ï¼Œä¸ºv = u * Rã€‚
         NODISCARD Vector3Type Rotate(const Vector3Type& uVector) const;
         NODISCARD AlgebraVector3 Rotate(const AlgebraVector3& uVector) const;
 
-        /// Ê¹ÓÃËÄÔªÊı³Ë·¨Ğı×ªÈıÎ¬Ê¸Á¿£¬±íÊ¾ÎªÆë´Î4DÊ¸Á¿u = (u0,u1,u2,0)¡£
-        /// ÊäÈëËÄÔªÊı±ØĞëÊÇµ¥Î»³¤¶È¡£
-        /// Èç¹ûRÊÇ¶ÔÓ¦ÓÚËÄÔªÊıqµÄĞı×ª¾ØÕó£¬
-        /// Ôòµ±¶¨ÒåÁËMATHEMATICS_USE_MATRIX_VECTOR£¨ÏîÄ¿µÄÄ¬ÈÏÖµ£©Ê±£¬¶ÔÓ¦ÓÚuµÄĞı×ªÊ¸Á¿vÎªv = R * u £¬
-        /// »òÕßµ±Î´¶¨ÒåMATHEMATICS_USE_MATRIX_VECTORÊ±£¬Îªv = u * R¡£
+        /// ä½¿ç”¨å››å…ƒæ•°ä¹˜æ³•æ—‹è½¬ä¸‰ç»´çŸ¢é‡ï¼Œè¡¨ç¤ºä¸ºé½æ¬¡4DçŸ¢é‡u = (u0,u1,u2,0)ã€‚
+        /// è¾“å…¥å››å…ƒæ•°å¿…é¡»æ˜¯å•ä½é•¿åº¦ã€‚
+        /// å¦‚æœRæ˜¯å¯¹åº”äºå››å…ƒæ•°qçš„æ—‹è½¬çŸ©é˜µï¼Œ
+        /// åˆ™å½“å®šä¹‰äº†MATHEMATICS_USE_MATRIX_VECTORï¼ˆé¡¹ç›®çš„é»˜è®¤å€¼ï¼‰æ—¶ï¼Œå¯¹åº”äºuçš„æ—‹è½¬çŸ¢é‡vä¸ºv = R * u ï¼Œ
+        /// æˆ–è€…å½“æœªå®šä¹‰MATHEMATICS_USE_MATRIX_VECTORæ—¶ï¼Œä¸ºv = u * Rã€‚
         NODISCARD Vector4Type Rotate(const Vector4Type& uVector) const;
         NODISCARD AlgebraVector4 Rotate(const AlgebraVector4& uVector) const;
 
-        /// ÇòÃæÏßĞÔ²åÖµ
-        /// [0,1]ÖĞtµÄµ¥Î»³¤¶ÈËÄÔªÊıq0ºÍq1µÄÇòÃæÏßĞÔ²åÖµ(slerp)Îª
+        /// çƒé¢çº¿æ€§æ’å€¼
+        /// [0,1]ä¸­tçš„å•ä½é•¿åº¦å››å…ƒæ•°q0å’Œq1çš„çƒé¢çº¿æ€§æ’å€¼(slerp)ä¸º
         /// slerp(t,q0,q1) = [sin(t*theta)*q0 + sin((1-t)*theta)*q1]/sin(theta)
-        /// ÆäÖĞthetaÊÇq0ºÍq1Ö®¼äµÄ½Ç¶È[cos(theta) = Dot(q0,q1)]¡£
-        /// Õâ¸öº¯ÊıÊÇµ¥Î»³¬ÇòÃæÉÏq0ºÍq1Ö®¼äµÄ´óÇòÃæ»¡µÄ²ÎÊı»¯¡£
-        /// ´ËÍâ£¬²ÎÊı»¯ÊÇ¹éÒ»»¯»¡³¤µÄÒ»ÖÖ¡ª¡ªÁ£×ÓÑØ×Å»¡ÔÚÊ±¼ätÄÚÒÔºã¶¨ËÙ¶ÈÔË¶¯¡£
+        /// å…¶ä¸­thetaæ˜¯q0å’Œq1ä¹‹é—´çš„è§’åº¦[cos(theta) = Dot(q0,q1)]ã€‚
+        /// è¿™ä¸ªå‡½æ•°æ˜¯å•ä½è¶…çƒé¢ä¸Šq0å’Œq1ä¹‹é—´çš„å¤§çƒé¢å¼§çš„å‚æ•°åŒ–ã€‚
+        /// æ­¤å¤–ï¼Œå‚æ•°åŒ–æ˜¯å½’ä¸€åŒ–å¼§é•¿çš„ä¸€ç§â€”â€”ç²’å­æ²¿ç€å¼§åœ¨æ—¶é—´tå†…ä»¥æ’å®šé€Ÿåº¦è¿åŠ¨ã€‚
         ///
-        /// µ±ÔÚÉæ¼°ËÄÔªÊıĞòÁĞµÄ¶¯»­ÖĞÊ¹ÓÃslerpÊ±£¬Í¨³£¶ÔËÄÔªÊı½øĞĞÔ¤´¦Àí£¬
-        /// ÒÔ±ãÁ¬ĞøµÄËÄÔªÊıÔÚ[0,pi/2]ÖĞĞÎ³ÉÈñ½ÇA¡£
-        /// ÆäËûÔ¤´¦Àí¿ÉÒÔ°ïÖúÌá¸ßĞÔÄÜ¡£Çë²ÎÔÄÏÂÃæµÄ¹¦ÄÜ×¢ÊÍ¡£
+        /// å½“åœ¨æ¶‰åŠå››å…ƒæ•°åºåˆ—çš„åŠ¨ç”»ä¸­ä½¿ç”¨slerpæ—¶ï¼Œé€šå¸¸å¯¹å››å…ƒæ•°è¿›è¡Œé¢„å¤„ç†ï¼Œ
+        /// ä»¥ä¾¿è¿ç»­çš„å››å…ƒæ•°åœ¨[0,pi/2]ä¸­å½¢æˆé”è§’Aã€‚
+        /// å…¶ä»–é¢„å¤„ç†å¯ä»¥å¸®åŠ©æé«˜æ€§èƒ½ã€‚è¯·å‚é˜…ä¸‹é¢çš„åŠŸèƒ½æ³¨é‡Šã€‚
         ///
-        /// Çë²Î¼ûSlerpEstimate.{h,inl}ÓÃÓÚ¸÷ÖÖ½üËÆ£¬
-        /// °üÀ¨SLERP<Real>::EstimateRPH£¬
-        /// ËüÎªÔ¤´¦ÀíµÄËÄÔªÊıÌá¹©ÁËÁ¼ºÃµÄĞÔÄÜºÍ×¼È·µÄ½á¹û¡£
+        /// è¯·å‚è§SlerpEstimate.{h,inl}ç”¨äºå„ç§è¿‘ä¼¼ï¼Œ
+        /// åŒ…æ‹¬SLERP<Real>::EstimateRPHï¼Œ
+        /// å®ƒä¸ºé¢„å¤„ç†çš„å››å…ƒæ•°æä¾›äº†è‰¯å¥½çš„æ€§èƒ½å’Œå‡†ç¡®çš„ç»“æœã€‚
 
-        /// q0ºÍq1Ö®¼äµÄ½Ç¶ÈÔÚ[0,pi)ÖĞ¡£
-        /// Ã»ÓĞ½Ç¶ÈÏŞÖÆ£¬Ò²Ã»ÓĞÔ¤ÏÈ¼ÆËãÈÎºÎÄÚÈİ¡£
+        /// q0å’Œq1ä¹‹é—´çš„è§’åº¦åœ¨[0,pi)ä¸­ã€‚
+        /// æ²¡æœ‰è§’åº¦é™åˆ¶ï¼Œä¹Ÿæ²¡æœ‰é¢„å…ˆè®¡ç®—ä»»ä½•å†…å®¹ã€‚
         void Slerp(Real t, const Quaternion& quaternion0, const Quaternion& quaternion1);
 
-        /// q0ºÍq1Ö®¼äµÄ½Ç¶È±ØĞëÔÚ[0,pi/2]ÖĞ¡£
-        /// ºó×ºRestricted±íÊ¾¡°ÊÜÏŞ¡±¡£
-        /// Ô¤´¦Àí´úÂëÎª
-        ///   Quaternion<Real> q[n];  // ¼ÙÉèÒÑ³õÊ¼»¯
+        /// q0å’Œq1ä¹‹é—´çš„è§’åº¦å¿…é¡»åœ¨[0,pi/2]ä¸­ã€‚
+        /// åç¼€Restrictedè¡¨ç¤ºâ€œå—é™â€ã€‚
+        /// é¢„å¤„ç†ä»£ç ä¸º
+        ///   Quaternion<Real> q[n];  // å‡è®¾å·²åˆå§‹åŒ–
         ///   for (i0 = 0, i1 = 1; i1 < n; i0 = i1++)
         ///   {
         ///       cosA = Dot(q[i0], q[i1]);
         ///       if (cosA < 0)
         ///       {
-        ///           q[i1] = -q[i1];  // ÏÖÔÚ Dot(q[i0], q[i]1) >= 0
+        ///           q[i1] = -q[i1];  // ç°åœ¨ Dot(q[i0], q[i]1) >= 0
         ///       }
         ///   }
         void SlerpChebyshevRatioRestricted(Real t, const Quaternion& quaternion0, const Quaternion& quaternion1);
 
-        /// q0ºÍq1Ö®¼äµÄ½Ç¶È±ØĞëÔÚ[0,pi/2]ÖĞ¡£
-        /// ºó×ºRestricted±íÊ¾¡°ÊÜÏŞ¡±£¬ºó×ºPreprocessed±íÊ¾¡°Ô¤´¦Àí¡±¡£
-        /// Ô¤´¦Àí´úÂëÊÇ
-        ///   Quaternion<Real> q[n];  // ¼ÙÉèÒÑ³õÊ¼»¯
-        ///   Real cosA[n-1]; // ´ıÔ¤¼ÆËã
-        ///   Real omCosA[n-1];  // ´ıÔ¤¼ÆËã
+        /// q0å’Œq1ä¹‹é—´çš„è§’åº¦å¿…é¡»åœ¨[0,pi/2]ä¸­ã€‚
+        /// åç¼€Restrictedè¡¨ç¤ºâ€œå—é™â€ï¼Œåç¼€Preprocessedè¡¨ç¤ºâ€œé¢„å¤„ç†â€ã€‚
+        /// é¢„å¤„ç†ä»£ç æ˜¯
+        ///   Quaternion<Real> q[n];  // å‡è®¾å·²åˆå§‹åŒ–
+        ///   Real cosA[n-1]; // å¾…é¢„è®¡ç®—
+        ///   Real omCosA[n-1];  // å¾…é¢„è®¡ç®—
         ///   for (i0 = 0, i1 = 1; i1 < n; i0 = i1++)
         ///   {
         ///       cs = Dot(q[i0], q[i1]);
@@ -221,25 +221,25 @@ namespace Mathematics
         ///           cs = -cs;
         ///       }
         ///
-        ///       // ¶Ô Quaternion<Real>::SlerpRP
+        ///       // å¯¹ Quaternion<Real>::SlerpRP
         ///       cosA[i0] = cs;
         ///
-        ///       // ¶Ô SLERP<Real>::EstimateRP
+        ///       // å¯¹ SLERP<Real>::EstimateRP
         ///       omCosA[i0] = 1 - cs;
         ///   }
         void SlerpChebyshevRatioRestrictedPreprocessed(Real t, const Quaternion& quaternion0, const Quaternion& quaternion1, Real cosA);
 
-        /// q0ºÍq1Ö®¼äµÄ½Ç¶ÈÊÇA£¬²¢ÇÒ±ØĞëÔÚ[0,pi/2]ÖĞ¡£
-        /// ºó×ºRestricted±íÊ¾¡°ÊÜÏŞ¡±£¬
-        /// ºó×ºPreprocessed±íÊ¾¡°Ô¤´¦Àí¡±£¬
-        /// ºó×ºHalf±íÊ¾¡°°ë¡±£¨Ô¤ÏÈ¼ÆËãq0ºÍq1ÖĞ¼äµÄËÄÔªÊıquaternionHalf£©¡£
-        /// ËÄÔªÊıquaternionHalfÊÇ slerp(1/2,q0,q1) = (q0+q1)/|q0+q1|£¬
-        /// ËùÒÔq0ºÍquaternionHalfÖ®¼äµÄ½Ç¶ÈÊÇA/2£¬
-        /// qhºÍq1Ö®¼äµÄ½Ç¶ÈÎªA/2¡£
-        /// Ô¤´¦Àí´úÂëÊÇ
-        ///  Quaternion<Real> q[n];  // ¼ÙÉèÒÑ³õÊ¼»¯
-        //   Quaternion<Real> qh[n-1];  // ´ıÔ¤¼ÆËã
-        //   Real omCosAH[n-1];  // ´ıÔ¤¼ÆËã
+        /// q0å’Œq1ä¹‹é—´çš„è§’åº¦æ˜¯Aï¼Œå¹¶ä¸”å¿…é¡»åœ¨[0,pi/2]ä¸­ã€‚
+        /// åç¼€Restrictedè¡¨ç¤ºâ€œå—é™â€ï¼Œ
+        /// åç¼€Preprocessedè¡¨ç¤ºâ€œé¢„å¤„ç†â€ï¼Œ
+        /// åç¼€Halfè¡¨ç¤ºâ€œåŠâ€ï¼ˆé¢„å…ˆè®¡ç®—q0å’Œq1ä¸­é—´çš„å››å…ƒæ•°quaternionHalfï¼‰ã€‚
+        /// å››å…ƒæ•°quaternionHalfæ˜¯ slerp(1/2,q0,q1) = (q0+q1)/|q0+q1|ï¼Œ
+        /// æ‰€ä»¥q0å’ŒquaternionHalfä¹‹é—´çš„è§’åº¦æ˜¯A/2ï¼Œ
+        /// qhå’Œq1ä¹‹é—´çš„è§’åº¦ä¸ºA/2ã€‚
+        /// é¢„å¤„ç†ä»£ç æ˜¯
+        ///  Quaternion<Real> q[n];  // å‡è®¾å·²åˆå§‹åŒ–
+        //   Quaternion<Real> qh[n-1];  // å¾…é¢„è®¡ç®—
+        //   Real omCosAH[n-1];  // å¾…é¢„è®¡ç®—
         //   for (i0 = 0, i1 = 1; i1 < n; i0 = i1++)
         //   {
         //       cosA = Dot(q[i0], q[i1]);
@@ -249,11 +249,11 @@ namespace Mathematics
         //           cosA = -cosA;
         //       }
         //
-        //       // ¶Ô Quaternion<Real>::SlerpRPH ºÍ SLERP<Real>::EstimateRPH
+        //       // å¯¹ Quaternion<Real>::SlerpRPH å’Œ SLERP<Real>::EstimateRPH
         //       cosAH[i0] = sqrt((1+cosA)/2);
         //       qh[i0] = (q0 + q1) / (2 * cosAH[i0]);
         //
-        //       // ¶Ô SLERP<Real>::EstimateRPH
+        //       // å¯¹ SLERP<Real>::EstimateRPH
         //       omCosAH[i0] = 1 - cosAH[i0];
         //   }
         void SlerpChebyshevRatioRestrictedPreprocessedHalf(Real t, const Quaternion& quaternion0, const Quaternion& quaternion1, const Quaternion& quaternionHalf, Real cosAHalf);
@@ -261,112 +261,112 @@ namespace Mathematics
         void SlerpExtraSpins(Real t, const Quaternion& quaternion0, const Quaternion& quaternion1, int extraSpins) noexcept;
         void SlerpChebyshevRatio(Real t, const Quaternion& quaternion0, const Quaternion& quaternion1);
 
-        /// ÖĞ¼äÌõ¿îÇòÃæ¶ş´Î²åÖµ
+        /// ä¸­é—´æ¡æ¬¾çƒé¢äºŒæ¬¡æ’å€¼
         void Intermediate(const Quaternion& quaternion0, const Quaternion& quaternion1, const Quaternion& quaternion2);
 
-        /// ÇòÃæ¶ş´Î²åÖµ¡£
+        /// çƒé¢äºŒæ¬¡æ’å€¼ã€‚
         void Squad(Real t, const Quaternion& q0, const Quaternion& a0, const Quaternion& a1, const Quaternion& q1);
 
-        /// ¼ÆËãĞı×ªµ¥Î»³¤¶ÈÊ¸Á¿vector0µ½µ¥Î»³¤¶ÈÊ¸Á¿vector1µÄËÄÔªÊı¡£
-        /// Ğı×ªÊÇÎ§ÈÆ´¹Ö±ÓÚvector0ºÍvector1µÄÖá£¬
-        /// ½Ç¶ÈÊÇvector0ºÍvector1Ö®¼äµÄ½Ç¶È¡£
-        /// Èç¹ûvector0ºÍvector1ÊÇÆ½ĞĞµÄ£¬Ğı×ªÈÎÒâÖá¶¼ĞĞ£¬
-        /// ÀıÈç×éºÏ(z2,x2,y2)£¬ÆäÖĞ£¬vector1 = (x2,y2,z2)¡£
+        /// è®¡ç®—æ—‹è½¬å•ä½é•¿åº¦çŸ¢é‡vector0åˆ°å•ä½é•¿åº¦çŸ¢é‡vector1çš„å››å…ƒæ•°ã€‚
+        /// æ—‹è½¬æ˜¯å›´ç»•å‚ç›´äºvector0å’Œvector1çš„è½´ï¼Œ
+        /// è§’åº¦æ˜¯vector0å’Œvector1ä¹‹é—´çš„è§’åº¦ã€‚
+        /// å¦‚æœvector0å’Œvector1æ˜¯å¹³è¡Œçš„ï¼Œæ—‹è½¬ä»»æ„è½´éƒ½è¡Œï¼Œ
+        /// ä¾‹å¦‚ç»„åˆ(z2,x2,y2)ï¼Œå…¶ä¸­ï¼Œvector1 = (x2,y2,z2)ã€‚
         void Align(const Vector3Type& vector0, const Vector3Type& vector1, Real epsilon = MathType::GetZeroTolerance());
 
-        /// ·Ö½âËÄÔªÊıÎªq = q_twist * q_swing£¬ÆäÖĞqÊÇ'this'ËÄÔªÊı¡£
-        /// Èç¹ûV1ÊÇÊäÈëÖáºÍV2ÎªV1Í¨¹ıqµÄĞı×ª£¬
-        /// q_swing±íÊ¾´óÔ¼´¹Ö±ÓÚV1ºÍV2µÄÖáÏßĞı×ª£¨¼ûQuaternion::Align£©£¬
-        /// ²¢q_twistÊÇ´óÔ¼ÊÇV1Ğı×ª¡£
-        /// ·µ»ØÖµµÄµÚÒ»²¿·ÖÎªtwist£¬µÚ¶ş²¿·ÖÎªswing¡£
+        /// åˆ†è§£å››å…ƒæ•°ä¸ºq = q_twist * q_swingï¼Œå…¶ä¸­qæ˜¯'this'å››å…ƒæ•°ã€‚
+        /// å¦‚æœV1æ˜¯è¾“å…¥è½´å’ŒV2ä¸ºV1é€šè¿‡qçš„æ—‹è½¬ï¼Œ
+        /// q_swingè¡¨ç¤ºå¤§çº¦å‚ç›´äºV1å’ŒV2çš„è½´çº¿æ—‹è½¬ï¼ˆè§Quaternion::Alignï¼‰ï¼Œ
+        /// å¹¶q_twistæ˜¯å¤§çº¦æ˜¯V1æ—‹è½¬ã€‚
+        /// è¿”å›å€¼çš„ç¬¬ä¸€éƒ¨åˆ†ä¸ºtwistï¼Œç¬¬äºŒéƒ¨åˆ†ä¸ºswingã€‚
         NODISCARD QuaternionSwingTwistType DecomposeTwistTimesSwing(const Vector3Type& vector, Real epsilon = MathType::GetZeroTolerance()) const;
 
-        /// ·Ö½âËÄÔªÊıÎªq = swing * twist£¬ÆäÖĞqÊÇ'this'ËÄÔªÊı¡£
-        /// Èç¹ûV1ÊÇÊäÈëÖáºÍV2ÎªV1Í¨¹ıqµÄĞı×ª£¬
-        /// swing±íÊ¾´óÔ¼´¹Ö±ÓÚV1ºÍV2µÄÖáÏßĞı×ª£¨¼ûQuaternion::Align£©£¬
-        /// ²¢twistÊÇ´óÔ¼ÊÇV1Ğı×ª¡£
-        /// ·µ»ØÖµµÄµÚÒ»²¿·ÖÎªswing£¬µÚ¶ş²¿·ÖÎªtwist¡£
+        /// åˆ†è§£å››å…ƒæ•°ä¸ºq = swing * twistï¼Œå…¶ä¸­qæ˜¯'this'å››å…ƒæ•°ã€‚
+        /// å¦‚æœV1æ˜¯è¾“å…¥è½´å’ŒV2ä¸ºV1é€šè¿‡qçš„æ—‹è½¬ï¼Œ
+        /// swingè¡¨ç¤ºå¤§çº¦å‚ç›´äºV1å’ŒV2çš„è½´çº¿æ—‹è½¬ï¼ˆè§Quaternion::Alignï¼‰ï¼Œ
+        /// å¹¶twistæ˜¯å¤§çº¦æ˜¯V1æ—‹è½¬ã€‚
+        /// è¿”å›å€¼çš„ç¬¬ä¸€éƒ¨åˆ†ä¸ºswingï¼Œç¬¬äºŒéƒ¨åˆ†ä¸ºtwistã€‚
 
         NODISCARD QuaternionSwingTwistType DecomposeSwingTimesTwist(const Vector3Type& vector, Real epsilon = MathType::GetZeroTolerance()) const;
 
-        /// *** ²éÕÒ×î½üÎŞÔ¼ÊøµÄ½Ç¶ÈµÄËÄÔªÊı¡£
+        /// *** æŸ¥æ‰¾æœ€è¿‘æ— çº¦æŸçš„è§’åº¦çš„å››å…ƒæ•°ã€‚
 
-        /// ¾àÀë×î½üµÄËÄÔªÊıĞÎÊ½(cx + sx * i)¡£
+        /// è·ç¦»æœ€è¿‘çš„å››å…ƒæ•°å½¢å¼(cx + sx * i)ã€‚
         NODISCARD Quaternion GetClosestX() const;
 
-        /// ¾àÀë×î½üµÄËÄÔªÊıĞÎÊ½ (cy + sy * j).
+        /// è·ç¦»æœ€è¿‘çš„å››å…ƒæ•°å½¢å¼ (cy + sy * j).
         NODISCARD Quaternion GetClosestY() const;
 
-        /// ¾àÀë×î½üµÄËÄÔªÊıĞÎÊ½ (cz + sz * k).
+        /// è·ç¦»æœ€è¿‘çš„å››å…ƒæ•°å½¢å¼ (cz + sz * k).
         NODISCARD Quaternion GetClosestZ() const;
 
-        /// ¾àÀë×î½üµÄËÄÔªÊıĞÎÊ½ (cx + sx * i) * (cy + sy * j).
+        /// è·ç¦»æœ€è¿‘çš„å››å…ƒæ•°å½¢å¼ (cx + sx * i) * (cy + sy * j).
         NODISCARD Quaternion GetClosestXY() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        /// ¾àÀë×î½üµÄËÄÔªÊıĞÎÊ½ (cy + sy * j) * (cx + sx * i).
+        /// è·ç¦»æœ€è¿‘çš„å››å…ƒæ•°å½¢å¼ (cy + sy * j) * (cx + sx * i).
         NODISCARD Quaternion GetClosestYX() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        /// ¾àÀë×î½üµÄËÄÔªÊıĞÎÊ½ (cz + sz * k) * (cx + sx * i).
+        /// è·ç¦»æœ€è¿‘çš„å››å…ƒæ•°å½¢å¼ (cz + sz * k) * (cx + sx * i).
         NODISCARD Quaternion GetClosestZX() const;
 
-        /// ¾àÀë×î½üµÄËÄÔªÊıĞÎÊ½ (cx + sx * i) * (cz + sz * k).
+        /// è·ç¦»æœ€è¿‘çš„å››å…ƒæ•°å½¢å¼ (cx + sx * i) * (cz + sz * k).
         NODISCARD Quaternion GetClosestXZ() const;
 
-        /// ¾àÀë×î½üµÄËÄÔªÊıĞÎÊ½ (cy + sy * j) * (cz + sz * k).
+        /// è·ç¦»æœ€è¿‘çš„å››å…ƒæ•°å½¢å¼ (cy + sy * j) * (cz + sz * k).
         NODISCARD Quaternion GetClosestYZ() const;
 
-        /// ¾àÀë×î½üµÄËÄÔªÊıĞÎÊ½ (cz + sz * k) * (cy + sy * j).
+        /// è·ç¦»æœ€è¿‘çš„å››å…ƒæ•°å½¢å¼ (cz + sz * k) * (cy + sy * j).
         NODISCARD Quaternion GetClosestZY() const;
 
-        /// ÏµÊıÎª (cx + sx * i) * (cy + sy * j) * (cz + sz * k).
+        /// ç³»æ•°ä¸º (cx + sx * i) * (cy + sy * j) * (cz + sz * k).
         NODISCARD QuaternionFactorType FactorXYZ() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        /// ÏµÊıÎª  (cx + sx * i) * (cz + sz * k) * (cy + sy * j).
+        /// ç³»æ•°ä¸º  (cx + sx * i) * (cz + sz * k) * (cy + sy * j).
         NODISCARD QuaternionFactorType FactorXZY() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        /// ÏµÊıÎª  (cy + sy * j) * (cz + sz * k) * (cx + sx * i).
+        /// ç³»æ•°ä¸º  (cy + sy * j) * (cz + sz * k) * (cx + sx * i).
         NODISCARD QuaternionFactorType FactorYZX() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        /// ÏµÊıÎª  (cy + sy * j) * (cx + sx * i) * (cz + sz * k).
+        /// ç³»æ•°ä¸º  (cy + sy * j) * (cx + sx * i) * (cz + sz * k).
         NODISCARD QuaternionFactorType FactorYXZ() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        /// ÏµÊıÎª (cz + sz * k) * (cx + sx * i) * (cy + sy * j).
+        /// ç³»æ•°ä¸º (cz + sz * k) * (cx + sx * i) * (cy + sy * j).
         NODISCARD QuaternionFactorType FactorZXY() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        /// ÏµÊıÎª  (cz + sz * k) * (cy + sy * j) * (cx + sx * i).
+        /// ç³»æ•°ä¸º  (cz + sz * k) * (cy + sy * j) * (cx + sx * i).
         NODISCARD QuaternionFactorType FactorZYX() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        /// ¾àÀë×î½üµÄÔ¼ÊøËÄÔªÊıĞÎÊ½Îª (cx + sx * i).
+        /// è·ç¦»æœ€è¿‘çš„çº¦æŸå››å…ƒæ•°å½¢å¼ä¸º (cx + sx * i).
         NODISCARD Quaternion GetClosestX(const QuaternionConstraintsType& xCon) const;
 
-        /// ¾àÀë×î½üµÄÔ¼ÊøËÄÔªÊıĞÎÊ½Îª (cy + sy * j).
+        /// è·ç¦»æœ€è¿‘çš„çº¦æŸå››å…ƒæ•°å½¢å¼ä¸º (cy + sy * j).
         NODISCARD Quaternion GetClosestY(const QuaternionConstraintsType& yCon) const;
 
-        /// ¾àÀë×î½üµÄÔ¼ÊøËÄÔªÊıĞÎÊ½Îª (cz + sz * k).
+        /// è·ç¦»æœ€è¿‘çš„çº¦æŸå››å…ƒæ•°å½¢å¼ä¸º (cz + sz * k).
         NODISCARD Quaternion GetClosestZ(const QuaternionConstraintsType& zCon) const;
 
-        /// ¾àÀë×î½üµÄÔ¼ÊøËÄÔªÊıĞÎÊ½Îª (cx + sx * i)*(cy + sy * j).
+        /// è·ç¦»æœ€è¿‘çš„çº¦æŸå››å…ƒæ•°å½¢å¼ä¸º (cx + sx * i)*(cy + sy * j).
         NODISCARD Quaternion GetClosestXY(const QuaternionConstraintsType& xCon, const QuaternionConstraintsType& yCon) const;
 
-        /// ¾àÀë×î½üµÄÔ¼ÊøËÄÔªÊıĞÎÊ½Îª  (cy + sy * j)*(cx + sx * i).
+        /// è·ç¦»æœ€è¿‘çš„çº¦æŸå››å…ƒæ•°å½¢å¼ä¸º  (cy + sy * j)*(cx + sx * i).
         NODISCARD Quaternion GetClosestYX(const QuaternionConstraintsType& yCon, const QuaternionConstraintsType& xCon) const;
 
-        /// ¾àÀë×î½üµÄÔ¼ÊøËÄÔªÊıĞÎÊ½Îª  (cz + sz * k)*(cx + sx * i).
+        /// è·ç¦»æœ€è¿‘çš„çº¦æŸå››å…ƒæ•°å½¢å¼ä¸º  (cz + sz * k)*(cx + sx * i).
         NODISCARD Quaternion GetClosestZX(const QuaternionConstraintsType& zCon, const QuaternionConstraintsType& xCon) const;
 
-        /// ¾àÀë×î½üµÄÔ¼ÊøËÄÔªÊıĞÎÊ½Îª  (cx + sx * i)*(cz + sz * k).
+        /// è·ç¦»æœ€è¿‘çš„çº¦æŸå››å…ƒæ•°å½¢å¼ä¸º  (cx + sx * i)*(cz + sz * k).
         NODISCARD Quaternion GetClosestXZ(const QuaternionConstraintsType& xCon, const QuaternionConstraintsType& zCon) const;
 
-        /// ¾àÀë×î½üµÄÔ¼ÊøËÄÔªÊıĞÎÊ½Îª  (cz + sz * k)*(cy + sy * j).
+        /// è·ç¦»æœ€è¿‘çš„çº¦æŸå››å…ƒæ•°å½¢å¼ä¸º  (cz + sz * k)*(cy + sy * j).
         NODISCARD Quaternion GetClosestZY(const QuaternionConstraintsType& zCon, const QuaternionConstraintsType& yCon) const;
 
-        /// ¾àÀë×î½üµÄÔ¼ÊøËÄÔªÊıĞÎÊ½Îª  (cy + sy * j)*(cz + sz * k).
+        /// è·ç¦»æœ€è¿‘çš„çº¦æŸå››å…ƒæ•°å½¢å¼ä¸º  (cy + sy * j)*(cz + sz * k).
         NODISCARD Quaternion GetClosestYZ(const QuaternionConstraintsType& yCon, const QuaternionConstraintsType& zCon) const;
 
         NODISCARD ArrayType GetCoordinate() const noexcept;
         void SetCoordinate(const ArrayType& coordinate) noexcept;
 
-        /// ÌØÊâËÄÔªÊı
+        /// ç‰¹æ®Šå››å…ƒæ•°
         static constexpr Quaternion GetZero() noexcept
         {
             return Quaternion{};
@@ -393,34 +393,34 @@ namespace Mathematics
         }
 
     private:
-        /// ¾àÀë×î½üËÄÔªÊıÔ¼ÊøµÄĞÎÊ½£º
-        ///   (cx + sx * i) µ± QuaternionClosestAxis = QuaternionClosestAxis::X,
-        ///   (cy + sy * j) µ± QuaternionClosestAxis = QuaternionClosestAxis::Y,
-        ///   (cz + sz * k) µ± QuaternionClosestAxis = QuaternionClosestAxis::Z,
+        /// è·ç¦»æœ€è¿‘å››å…ƒæ•°çº¦æŸçš„å½¢å¼ï¼š
+        ///   (cx + sx * i) å½“ QuaternionClosestAxis = QuaternionClosestAxis::X,
+        ///   (cy + sy * j) å½“ QuaternionClosestAxis = QuaternionClosestAxis::Y,
+        ///   (cz + sz * k) å½“ QuaternionClosestAxis = QuaternionClosestAxis::Z,
         NODISCARD Quaternion GetClosest(QuaternionClosestAxis axis) const;
 
-        /// ¾àÀë×î½üËÄÔªÊıÔ¼ÊøµÄĞÎÊ½£º
-        ///   (cx + sx * i) µ± QuaternionClosestAxis = QuaternionClosestAxis::X,
-        ///   (cy + sy * j) µ± QuaternionClosestAxis = QuaternionClosestAxis::Y,
-        ///   (cz + sz * k) µ± QuaternionClosestAxis = QuaternionClosestAxis::Z,
+        /// è·ç¦»æœ€è¿‘å››å…ƒæ•°çº¦æŸçš„å½¢å¼ï¼š
+        ///   (cx + sx * i) å½“ QuaternionClosestAxis = QuaternionClosestAxis::X,
+        ///   (cy + sy * j) å½“ QuaternionClosestAxis = QuaternionClosestAxis::Y,
+        ///   (cz + sz * k) å½“ QuaternionClosestAxis = QuaternionClosestAxis::Z,
         NODISCARD Quaternion GetClosest(QuaternionClosestAxis axis, const QuaternionConstraintsType& con) const;
 
     private:
-        /// ´æ´¢µÄË³ĞòÊÇ(w,x,y,z)¡£
+        /// å­˜å‚¨çš„é¡ºåºæ˜¯(w,x,y,z)ã€‚
         Real w;
         Real x;
         Real y;
         Real z;
     };
 
-    /// ±È½Ï (½öÊ¹ÓÃÔÚ STL ÈİÆ÷).
+    /// æ¯”è¾ƒ (ä»…ä½¿ç”¨åœ¨ STL å®¹å™¨).
     template <typename Real>
     NODISCARD bool operator==(const Quaternion<Real>& lhs, const Quaternion<Real>& rhs) noexcept;
 
     template <typename Real>
     NODISCARD bool operator<(const Quaternion<Real>& lhs, const Quaternion<Real>& rhs) noexcept;
 
-    /// ËÄÔªÊıµÄ³Ë»ı¡£³Ë·¨Ò»°ã²»ÊÇ¿É½»»»µÄ£»ËùÒÔÔÚ´ó¶àÊıÇé¿öÏÂ£¬
+    /// å››å…ƒæ•°çš„ä¹˜ç§¯ã€‚ä¹˜æ³•ä¸€èˆ¬ä¸æ˜¯å¯äº¤æ¢çš„ï¼›æ‰€ä»¥åœ¨å¤§å¤šæ•°æƒ…å†µä¸‹ï¼Œ
     /// p * q != q * p
     /// (x0*i + y0*j + z0*k + w0)*(x1*i + y1*j + z1*k + w1)
     /// =
@@ -431,15 +431,15 @@ namespace Mathematics
     template <typename Real>
     NODISCARD Quaternion<Real> operator*(const Quaternion<Real>& lhs, const Quaternion<Real>& rhs) noexcept;
 
-    /// ¼¸ºÎÔËËã
-    /// 4Ôª×éµÄµã»ı
+    /// å‡ ä½•è¿ç®—
+    /// 4å…ƒç»„çš„ç‚¹ç§¯
     template <typename Real>
     NODISCARD Real Dot(const Quaternion<Real>& lhs, const Quaternion<Real>& rhs) noexcept;
 
     template <typename Real>
     NODISCARD bool Approximate(const Quaternion<Real>& lhs, const Quaternion<Real>& rhs, Real epsilon = Math<Real>::GetZeroTolerance()) noexcept;
 
-    /// µ÷ÊÔÊä³ö¡£
+    /// è°ƒè¯•è¾“å‡ºã€‚
     template <typename Real>
     std::ostream& operator<<(std::ostream& stream, const Quaternion<Real>& quaternion);
 

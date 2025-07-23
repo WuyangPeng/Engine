@@ -1,4 +1,4 @@
-$Copyright$
+﻿$Copyright$
 
 #ifndef $ModuleUppercase$_$ModuleUppercase$_HELPER_H
 #define $ModuleUppercase$_$ModuleUppercase$_HELPER_H

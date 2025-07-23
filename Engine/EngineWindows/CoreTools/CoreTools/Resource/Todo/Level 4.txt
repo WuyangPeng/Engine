@@ -1,7 +1,7 @@
-TODO Level 4
+﻿TODO Level 4
  
 1.0.1.0
 
-1.  （Exception）对异常类进行重命名。
-2.  （TextParsing）完成一个文本查询类，结合《C++ Primer》第4版的第10章和第15章，第5版的第12章和第15章。
-3.  （MemoryTools）增加一个缓存工厂的实现 ，参考Loki的CachedFactory。
+1.  锛圗xception锛夊寮傚父绫昏繘琛岄噸鍛藉悕銆?
+2.  锛圱extParsing锛夊畬鎴愪竴涓枃鏈煡璇㈢被锛岀粨鍚堛€奀++ Primer銆嬬4鐗堢殑绗?0绔犲拰绗?5绔狅紝绗?鐗堢殑绗?2绔犲拰绗?5绔犮€?
+3.  锛圡emoryTools锛夊鍔犱竴涓紦瀛樺伐鍘傜殑瀹炵幇 锛屽弬鑰僉oki鐨凜achedFactory銆

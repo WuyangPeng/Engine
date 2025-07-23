@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/26 15:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/26 15:19)
 
 #include "Rendering/RenderingExport.h"
 
@@ -28,14 +28,14 @@ Rendering::VisualProgram::VisualProgramSharedPtr Rendering::VisualProgram::Creat
 {
     if (vertexShaderSource.empty() || pixelShaderSource.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³ÌĞò±ØĞë¾ßÓĞ¶¥µã×ÅÉ«Æ÷ºÍÏñËØ×ÅÉ«Æ÷¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("ç¨‹åºå¿…é¡»å…·æœ‰é¡¶ç‚¹ç€è‰²å™¨å’Œåƒç´ ç€è‰²å™¨ã€‚"))
     }
 
     const auto programHandle = GLSLProgramHandle::Create();
 
-    GLSLShaderHandle vertexShaderHandle{ System::ShaderType::Vertex, vertexShaderSource, version, defines, programHandle.GetProgramHandle(), SYSTEM_TEXT("±àÒë¶¥µã×ÅÉ«Æ÷Ê§°Ü¡£") };
-    GLSLShaderHandle pixelShaderHandle{ System::ShaderType::Fragment, pixelShaderSource, version, defines, programHandle.GetProgramHandle(), SYSTEM_TEXT("±àÒëÏñËØ×ÅÉ«Æ÷Ê§°Ü¡£") };
-    const auto geometryShaderHandle = !geometryShaderSource.empty() ? GLSLShaderHandle{ System::ShaderType::Geometry, geometryShaderSource, version, defines, programHandle.GetProgramHandle(), SYSTEM_TEXT("±àÒë¼¸ºÎ×ÅÉ«Æ÷Ê§°Ü¡£") } : GLSLShaderHandle{};
+    GLSLShaderHandle vertexShaderHandle{ System::ShaderType::Vertex, vertexShaderSource, version, defines, programHandle.GetProgramHandle(), SYSTEM_TEXT("ç¼–è¯‘é¡¶ç‚¹ç€è‰²å™¨å¤±è´¥ã€‚") };
+    GLSLShaderHandle pixelShaderHandle{ System::ShaderType::Fragment, pixelShaderSource, version, defines, programHandle.GetProgramHandle(), SYSTEM_TEXT("ç¼–è¯‘åƒç´ ç€è‰²å™¨å¤±è´¥ã€‚") };
+    const auto geometryShaderHandle = !geometryShaderSource.empty() ? GLSLShaderHandle{ System::ShaderType::Geometry, geometryShaderSource, version, defines, programHandle.GetProgramHandle(), SYSTEM_TEXT("ç¼–è¯‘å‡ ä½•ç€è‰²å™¨å¤±è´¥ã€‚") } : GLSLShaderHandle{};
 
     programHandle.Link();
 

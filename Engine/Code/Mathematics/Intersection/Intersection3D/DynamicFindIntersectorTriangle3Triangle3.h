@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 15:01)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 15:01)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_TRIANGLE3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_TRIANGLE3_H
@@ -57,7 +57,7 @@ namespace Mathematics
         using Vector3Container = std::array<Vector3Type, vectorSize>;
 
     private:
-        // ¶¯Ì¬²éÑ¯¡£
+        // åŠ¨æ€æŸ¥è¯¢ã€‚
         void Find();
 
         class Configuration final
@@ -66,10 +66,10 @@ namespace Mathematics
             static constexpr auto indexSize = 8;
             using IndexContainer = std::array<int, indexSize>;
 
-            VertexProjectionMap vertexProjectionMap;  // ¶¥µãÈçºÎÓ³Éäµ½Í¶Ó°¼ä¸ô
-            IndexContainer index;  // ¶¥µãµÄÅÅĞòË÷Òı
+            VertexProjectionMap vertexProjectionMap;  // é¡¶ç‚¹å¦‚ä½•æ˜ å°„åˆ°æŠ•å½±é—´éš”
+            IndexContainer index;  // é¡¶ç‚¹çš„æ’åºç´¢å¼•
 
-            // ¼ä¸ôÊÇ [min,max]
+            // é—´éš”æ˜¯ [min,max]
             Real min;
             Real max;
         };

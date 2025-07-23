@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:39)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:39)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_H
 #define MATHEMATICS_QUERY_QUERY3_H
@@ -31,7 +31,7 @@ namespace Mathematics
         using VerticesType = std::vector<Vector3Type>;
 
     public:
-        // »ùÀà´¦Àí¸¡µã²éÑ¯¡£
+        // åŸºç±»å¤„ç†æµ®ç‚¹æŸ¥è¯¢ã€‚
         explicit Query3(const VerticesType& vertices);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -41,32 +41,32 @@ namespace Mathematics
         NODISCARD int GetNumVertices() const;
         NODISCARD Vector3Type GetVertex(int index) const;
 
-        // ¹ØÓÚÒ»¸öµãµÄ¸÷ÖÖ¼¸ºÎ¶ÔÏóÖ®¼äµÄ¹ØÏµ²éÑ¯¡£
+        // å…³äºä¸€ä¸ªç‚¹çš„å„ç§å‡ ä½•å¯¹è±¡ä¹‹é—´çš„å…³ç³»æŸ¥è¯¢ã€‚
 
-        // ·µ»Ø:
-        // PlaneQueryType::PositiveSide, ÔÚÆ½ÃæµÄÕıÃæ
-        // PlaneQueryType::NegativeSide, ÔÚÆ½ÃæµÄ¸ºÃæ
-        // PlaneQueryType::OnPlane, ÔÚÆ½ÃæÉÏ
+        // è¿”å›:
+        // PlaneQueryType::PositiveSide, åœ¨å¹³é¢çš„æ­£é¢
+        // PlaneQueryType::NegativeSide, åœ¨å¹³é¢çš„è´Ÿé¢
+        // PlaneQueryType::OnPlane, åœ¨å¹³é¢ä¸Š
         NODISCARD virtual PlaneQueryType ToPlane(int index, int v0, int v1, int v2) const;
         NODISCARD virtual PlaneQueryType ToPlane(const Vector3Type& testVector, int v0, int v1, int v2) const;
 
-        // ·µ»Ø:
-        // TetrahedronQueryType::Outside, ËÄÃæÌåÍâ
-        // TetrahedronQueryType::Inside, ËÄÃæÌåÄÚ
-        // TetrahedronQueryType::OnTetrahedron,ÔÚËÄÃæÌåÉÏ
+        // è¿”å›:
+        // TetrahedronQueryType::Outside, å››é¢ä½“å¤–
+        // TetrahedronQueryType::Inside, å››é¢ä½“å†…
+        // TetrahedronQueryType::OnTetrahedron,åœ¨å››é¢ä½“ä¸Š
         NODISCARD virtual TetrahedronQueryType ToTetrahedron(int index, int v0, int v1, int v2, int v3) const;
         NODISCARD virtual TetrahedronQueryType ToTetrahedron(const Vector3Type& testVector, int v0, int v1, int v2, int v3) const;
 
-        // ·µ»Ø:
+        // è¿”å›:
         // Returns:
-        // CircumsphereQueryType::Outside, ÔÚËÄÃæÌåµÄÍâÇĞÇòÍâ
-        // CircumsphereQueryType::Inside,ÔÚËÄÃæÌåµÄÍâÇĞÇòÄÚ
-        // CircumsphereQueryType::OnCircumsphere, ÔÚËÄÃæÌåµÄÍâÇĞÇòÉÏ
+        // CircumsphereQueryType::Outside, åœ¨å››é¢ä½“çš„å¤–åˆ‡çƒå¤–
+        // CircumsphereQueryType::Inside,åœ¨å››é¢ä½“çš„å¤–åˆ‡çƒå†…
+        // CircumsphereQueryType::OnCircumsphere, åœ¨å››é¢ä½“çš„å¤–åˆ‡çƒä¸Š
         NODISCARD virtual CircumsphereQueryType ToCircumsphere(int index, int v0, int v1, int v2, int v3) const;
         NODISCARD virtual CircumsphereQueryType ToCircumsphere(const Vector3Type& testVector, int v0, int v1, int v2, int v3) const;
 
     private:
-        // ÊäÈëµã
+        // è¾“å…¥ç‚¹
         VerticesType vertices;
     };
 

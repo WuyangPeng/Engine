@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 11:04)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 11:04)
 
 #ifndef MATHEMATICS_ALGEBRA_TRIDIAGONALIZE_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_TRIDIAGONALIZE_ACHIEVE_H
@@ -19,15 +19,15 @@ requires std::is_arithmetic_v<Real>
 Mathematics::Tridiagonalize<Real>::Tridiagonalize(const Matrix3Type& matrix)
     : inputMatrix{ matrix }, outputMatrix{ MatrixInitType::Identity }, reflection{ false }, diagonal{}, subDiagonal{}
 {
-    MATHEMATICS_ASSERTION_1(MathType::FAbs(inputMatrix.template GetValue<0, 1>() - inputMatrix.template GetValue<1, 0>()) <= MathType::GetZeroTolerance(), "¾ØÕó±ØĞëÊÇ¶Ô³Æ¾ØÕó¡£");
-    MATHEMATICS_ASSERTION_1(MathType::FAbs(inputMatrix.template GetValue<0, 2>() - inputMatrix.template GetValue<2, 0>()) <= MathType::GetZeroTolerance(), "¾ØÕó±ØĞëÊÇ¶Ô³Æ¾ØÕó¡£");
-    MATHEMATICS_ASSERTION_1(MathType::FAbs(inputMatrix.template GetValue<1, 2>() - inputMatrix.template GetValue<2, 1>()) <= MathType::GetZeroTolerance(), "¾ØÕó±ØĞëÊÇ¶Ô³Æ¾ØÕó¡£");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(inputMatrix.template GetValue<0, 1>() - inputMatrix.template GetValue<1, 0>()) <= MathType::GetZeroTolerance(), "çŸ©é˜µå¿…é¡»æ˜¯å¯¹ç§°çŸ©é˜µã€‚");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(inputMatrix.template GetValue<0, 2>() - inputMatrix.template GetValue<2, 0>()) <= MathType::GetZeroTolerance(), "çŸ©é˜µå¿…é¡»æ˜¯å¯¹ç§°çŸ©é˜µã€‚");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(inputMatrix.template GetValue<1, 2>() - inputMatrix.template GetValue<2, 1>()) <= MathType::GetZeroTolerance(), "çŸ©é˜µå¿…é¡»æ˜¯å¯¹ç§°çŸ©é˜µã€‚");
 
     Init();
 
     if (!QLAlgorithm())
     {
-        MATHEMATICS_ASSERTION_0(false, "QLAlgorithm²»ÊÕÁ²£¡");
+        MATHEMATICS_ASSERTION_0(false, "QLAlgorithmä¸æ”¶æ•›ï¼");
     }
 
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -46,12 +46,12 @@ requires std::is_arithmetic_v<Real>
 void Mathematics::Tridiagonalize<Real>::Init()
 {
     // Householder reduction T = Q^t M Q
-    //   ÊäÈë:
-    //     inputMatrix, ¶Ô³Æ 3x3 ¾ØÕó M
-    //   Êä³ö:
-    //     outputMatrix, Õı½»¾ØÕó Q (·´Éä)
-    //     diagonal, TµÄ¶Ô½ÇÏß T
-    //     subDiagonal,TµÄ´Î¶Ô½ÇÏî T (T ÊÇ¶Ô³ÆµÄ)
+    //   è¾“å…¥:
+    //     inputMatrix, å¯¹ç§° 3x3 çŸ©é˜µ M
+    //   è¾“å‡º:
+    //     outputMatrix, æ­£äº¤çŸ©é˜µ Q (åå°„)
+    //     diagonal, Tçš„å¯¹è§’çº¿ T
+    //     subDiagonal,Tçš„æ¬¡å¯¹è§’é¡¹ T (T æ˜¯å¯¹ç§°çš„)
 
     auto m00 = inputMatrix.template GetValue<0, 0>();
     auto m01 = inputMatrix.template GetValue<0, 1>();
@@ -108,7 +108,7 @@ template <typename Real>
 requires std::is_arithmetic_v<Real>
 void Mathematics::Tridiagonalize<Real>::UpdateDiagonal(int lhsIndex, int rhsIndex)
 {
-    // ¼ÆËãÌØÕ÷ÖµµÄÒ»Ôª¶ş´Î·½³ÌµÄ¸ù¡£
+    // è®¡ç®—ç‰¹å¾å€¼çš„ä¸€å…ƒäºŒæ¬¡æ–¹ç¨‹çš„æ ¹ã€‚
     const auto sum = diagonal[lhsIndex] + diagonal[rhsIndex];
     const auto difference = diagonal[lhsIndex] - diagonal[rhsIndex];
     const auto discr = MathType::Sqrt(difference * difference + (MathType::GetValue(4) * subDiagonal[lhsIndex] * subDiagonal[lhsIndex]));
@@ -118,7 +118,7 @@ void Mathematics::Tridiagonalize<Real>::UpdateDiagonal(int lhsIndex, int rhsInde
     auto cosValue = MathType::GetValue(0);
     auto sinValue = MathType::GetValue(0);
 
-    // ¼ÆËãGivensĞı×ª¡£
+    // è®¡ç®—Givensæ—‹è½¬ã€‚
     if (MathType::GetValue(0) <= difference)
     {
         cosValue = subDiagonal[lhsIndex];
@@ -135,10 +135,10 @@ void Mathematics::Tridiagonalize<Real>::UpdateDiagonal(int lhsIndex, int rhsInde
     cosValue *= invSqrt;
     sinValue *= invSqrt;
 
-    // ÓÒ³Ëµ±Ç°Õı½»¾ØÕóÊ¹ÓÃGivensĞı×ª
+    // å³ä¹˜å½“å‰æ­£äº¤çŸ©é˜µä½¿ç”¨Givensæ—‹è½¬
     GivensRotation(lhsIndex, rhsIndex, cosValue, sinValue);
 
-    // ¸üĞÂÈı½Ç¾ØÕó¡£
+    // æ›´æ–°ä¸‰è§’çŸ©é˜µã€‚
     diagonal[lhsIndex] = eigenvalue0;
     diagonal[rhsIndex] = eigenvalue1;
     subDiagonal = Vector2Type::GetZero();
@@ -159,25 +159,25 @@ void Mathematics::Tridiagonalize<Real>::GivensRotation(int lhsIndex, int rhsInde
 template <typename Real>
 requires std::is_arithmetic_v<Real> bool Mathematics::Tridiagonalize<Real>::QLAlgorithm()
 {
-    // ÕâÊÇ»ùÓÚÊé¡°¾ØÕó¼ÆËã¡±µÚ¶ş°æ£¨Gene H. Golub ºÍ Charles F. Van Loan£©
-    // ÊµÏÖµÄ¶Ô³ÆQRËã·¨¡£¸ÃËã·¨ÔÚ8.2.3¡£
-    // ÊµÊ©ÓĞÇáÎ¢µÄ±ä»¯£¬ÒÔÊ¹Ö®Êµ¼Ê³ÉÎªQLËã·¨£¬
-    // ²¢½«Æä²¶»ñÈÎÒ»´Î¶Ô½ÇÏîS0»òS1ÊÇÁãµÄÇé¿öÏÂ£¬Ö±½Ó½µµÍÎª2¡Á2µÄ×Ó¿é¡£
+    // è¿™æ˜¯åŸºäºä¹¦â€œçŸ©é˜µè®¡ç®—â€ç¬¬äºŒç‰ˆï¼ˆGene H. Golub å’Œ Charles F. Van Loanï¼‰
+    // å®ç°çš„å¯¹ç§°QRç®—æ³•ã€‚è¯¥ç®—æ³•åœ¨8.2.3ã€‚
+    // å®æ–½æœ‰è½»å¾®çš„å˜åŒ–ï¼Œä»¥ä½¿ä¹‹å®é™…æˆä¸ºQLç®—æ³•ï¼Œ
+    // å¹¶å°†å…¶æ•è·ä»»ä¸€æ¬¡å¯¹è§’é¡¹S0æˆ–S1æ˜¯é›¶çš„æƒ…å†µä¸‹ï¼Œç›´æ¥é™ä½ä¸º2Ã—2çš„å­å—ã€‚
 
     constexpr auto indexMax = 32;
     for (auto i = 0; i < indexMax; ++i)
     {
         if (IsValueNear(subDiagonal.GetX(), diagonal.GetX(), diagonal.GetY()))
         {
-            // ¸Ã¾ØÕóÊÇÓĞĞ§µÄ
+            // è¯¥çŸ©é˜µæ˜¯æœ‰æ•ˆçš„
             //       +-        -+
             //   M = | d0  0  0 |
             //       | 0  d1 s1 |
             //       | 0  s1 d2 |
             //       +-        -+
-            // Initº¯Êı½«¾ØÕó³õÊ¼»¯ÎªÕâÖÖĞÎÊ½£¬ËùÒÔÏÂÃæµÄÆäËûÂß¼­²»»áÉæ¼°¡£
+            // Initå‡½æ•°å°†çŸ©é˜µåˆå§‹åŒ–ä¸ºè¿™ç§å½¢å¼ï¼Œæ‰€ä»¥ä¸‹é¢çš„å…¶ä»–é€»è¾‘ä¸ä¼šæ¶‰åŠã€‚
 
-            // ²âÊÔMÊÇ·ñÊÇ¶Ô½ÇÏß¾ØÕó£¨Êı×ÖËÄÉáÎåÈë£©¡£
+            // æµ‹è¯•Mæ˜¯å¦æ˜¯å¯¹è§’çº¿çŸ©é˜µï¼ˆæ•°å­—å››èˆäº”å…¥ï¼‰ã€‚
             if (IsValueNear(subDiagonal.GetY(), diagonal.GetY(), diagonal.GetY()))
             {
                 return true;
@@ -190,14 +190,14 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Tridiagonalize<Real>::QLAl
 
         if (IsValueNear(subDiagonal.GetY(), diagonal.GetY(), diagonal.GetY()))
         {
-            // ¸Ã¾ØÕóÊÇÓĞĞ§
+            // è¯¥çŸ©é˜µæ˜¯æœ‰æ•ˆ
             //       +-         -+
             //   M = | d0  s0  0 |
             //       | s0  d1  0 |
             //       | 0   0  d2 |
             //       +-         -+
 
-            // ²âÊÔMÊÇ·ñÊÇ¶Ô½ÇÏß¾ØÕó£¨Êı×ÖËÄÉáÎåÈë£©¡£
+            // æµ‹è¯•Mæ˜¯å¦æ˜¯å¯¹è§’çº¿çŸ©é˜µï¼ˆæ•°å­—å››èˆäº”å…¥ï¼‰ã€‚
             if (IsValueNear(subDiagonal.GetX(), diagonal.GetX(), diagonal.GetY()))
             {
                 return true;
@@ -208,15 +208,15 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Tridiagonalize<Real>::QLAl
             return true;
         }
 
-        // ¾ØÕóÊÇ
+        // çŸ©é˜µæ˜¯
         //       +-        -+
         //   M = | d0 s0  0 |
         //       | s0 d1 s1 |
         //       | 0  s1 d2 |
         //       +-        -+
 
-        // ÉèÖÃ²ÎÊıÎªQL²½ÖèµÄµÚÒ»½×¶ÎÖĞ¡£
-        // ¶ÔÓÚAµÄÖµÊÇÔÚ¶Ô½ÇÏîD[2]ºÍÒşÊ½ÒÆÎ»µÄ²îÓÉWilkinson½¨Òé¡£
+        // è®¾ç½®å‚æ•°ä¸ºQLæ­¥éª¤çš„ç¬¬ä¸€é˜¶æ®µä¸­ã€‚
+        // å¯¹äºAçš„å€¼æ˜¯åœ¨å¯¹è§’é¡¹D[2]å’Œéšå¼ç§»ä½çš„å·®ç”±Wilkinsonå»ºè®®ã€‚
         auto ratio = (diagonal.GetY() - diagonal.GetX()) / (MathType::GetValue(2) * subDiagonal.GetX());
         auto root = MathType::Sqrt(MathType::GetValue(1) + ratio * ratio);
         auto subDiagonalY = subDiagonal.GetY();
@@ -233,7 +233,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Tridiagonalize<Real>::QLAl
         auto cosValue = MathType::GetValue(0);
         auto sinValue = MathType::GetValue(0);
 
-        // ¼ÆËãGivensĞı×ªµÄµÚÒ»±é¡£
+        // è®¡ç®—Givensæ—‹è½¬çš„ç¬¬ä¸€éã€‚
         if (MathType::FAbs(a) <= MathType::FAbs(subDiagonalY))
         {
             ratio = a / subDiagonalY;
@@ -247,18 +247,18 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Tridiagonalize<Real>::QLAl
             sinValue = ratio * cosValue;
         }
 
-        // ÓÒ³Ëµ±Ç°Õı½»¾ØÕóÊ¹ÓÃGivensĞı×ª
+        // å³ä¹˜å½“å‰æ­£äº¤çŸ©é˜µä½¿ç”¨Givensæ—‹è½¬
         GivensRotation(1, 2, cosValue, sinValue);
 
-        // ÉèÖÃ²ÎÊıÎªQL²½ÖèµÄµÚ¶ş²½¡£
-        // Öµtmp0ºÍtmp1ĞèÒªÔÚµÚ¶ş½×¶Î½áÊøÊ±£¬²ÅÄÜÈ«Ãæ¸üĞÂÈı¶Ô½Ç¾ØÕó¡£
+        // è®¾ç½®å‚æ•°ä¸ºQLæ­¥éª¤çš„ç¬¬äºŒæ­¥ã€‚
+        // å€¼tmp0å’Œtmp1éœ€è¦åœ¨ç¬¬äºŒé˜¶æ®µç»“æŸæ—¶ï¼Œæ‰èƒ½å…¨é¢æ›´æ–°ä¸‰å¯¹è§’çŸ©é˜µã€‚
         auto value0 = (diagonal.GetY() - diagonal.GetZ()) * sinValue + MathType::GetValue(2) * subDiagonal.GetY() * cosValue;
         auto value1 = cosValue * subDiagonal.GetX();
         subDiagonalY = sinValue * subDiagonal.GetX();
         a = cosValue * value0 - subDiagonal.GetY();
         value0 *= sinValue;
 
-        // ¼ÆËãGivensĞı×ªµÄµÚ¶ş±é¡£m_SubdiagonalµÄÏîS[1]ÔÚÈı¶Ô½Ç¾ØÕó£¬´ËÊ±±»¸üĞÂ¡£
+        // è®¡ç®—Givensæ—‹è½¬çš„ç¬¬äºŒéã€‚m_Subdiagonalçš„é¡¹S[1]åœ¨ä¸‰å¯¹è§’çŸ©é˜µï¼Œæ­¤æ—¶è¢«æ›´æ–°ã€‚
         if (MathType::FAbs(a) <= MathType::FAbs(subDiagonalY))
         {
             ratio = a / subDiagonalY;
@@ -276,10 +276,10 @@ requires std::is_arithmetic_v<Real> bool Mathematics::Tridiagonalize<Real>::QLAl
             sinValue = ratio * cosValue;
         }
 
-        // ÓÒ³Ëµ±Ç°Õı½»¾ØÕóÊ¹ÓÃGivensĞı×ª
+        // å³ä¹˜å½“å‰æ­£äº¤çŸ©é˜µä½¿ç”¨Givensæ—‹è½¬
         GivensRotation(0, 1, cosValue, sinValue);
 
-        // Íê³ÉÈı¶Ô½Ç¾ØÕóµÄ¸üĞÂ¡£
+        // å®Œæˆä¸‰å¯¹è§’çŸ©é˜µçš„æ›´æ–°ã€‚
         auto tmp2 = diagonal.GetY() - value0;
         diagonal[2] += value0;
         value0 = (diagonal.GetX() - tmp2) * sinValue + MathType::GetValue(2) * value1 * cosValue;

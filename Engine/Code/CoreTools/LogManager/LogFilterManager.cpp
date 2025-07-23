@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 14:06)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 14:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,24 +19,24 @@ using namespace std::literals;
 
 System::String CoreTools::LogFilterManager::GetLogFilterDescribe(LogFilter logFilterType)
 {
-    static const std::map<LogFilter, String> describe{ { LogFilter::System, SYSTEM_TEXT("ÏµÍ³"s) },
-                                                       { LogFilter::CoreTools, SYSTEM_TEXT("ºËĞÄ¹¤¾ß"s) },
-                                                       { LogFilter::Network, SYSTEM_TEXT("ÍøÂç"s) },
-                                                       { LogFilter::Database, SYSTEM_TEXT("Êı¾İ¿â"s) },
-                                                       { LogFilter::Script, SYSTEM_TEXT("½Å±¾"s) },
-                                                       { LogFilter::Mathematics, SYSTEM_TEXT("ÊıÑ§"s) },
-                                                       { LogFilter::SoundEffect, SYSTEM_TEXT("ÒôĞ§"s) },
-                                                       { LogFilter::InputOutput, SYSTEM_TEXT("ÊäÈëÊä³ö"s) },
-                                                       { LogFilter::ResourceManager, SYSTEM_TEXT("×ÊÔ´¹ÜÀí"s) },
-                                                       { LogFilter::Rendering, SYSTEM_TEXT("äÖÈ¾"s) },
-                                                       { LogFilter::Physics, SYSTEM_TEXT("ÎïÀí"s) },
-                                                       { LogFilter::Imagics, SYSTEM_TEXT("Í¼Ïñ·ÖÎö"s) },
-                                                       { LogFilter::Animation, SYSTEM_TEXT("¶¯»­"s) },
-                                                       { LogFilter::ArtificialIntelligence, SYSTEM_TEXT("ÈË¹¤ÖÇÄÜ"s) },
-                                                       { LogFilter::UserInterface, SYSTEM_TEXT("½çÃæ"s) },
-                                                       { LogFilter::AssistTools, SYSTEM_TEXT("¸¨Öú¹¤¾ß"s) },
-                                                       { LogFilter::Framework, SYSTEM_TEXT("¿ò¼Ü"s) },
-                                                       { LogFilter::User, SYSTEM_TEXT("ÓÃ»§×Ô¶¨Òå"s) } };
+    static const std::map<LogFilter, String> describe{ { LogFilter::System, SYSTEM_TEXT("ç³»ç»Ÿ"s) },
+                                                       { LogFilter::CoreTools, SYSTEM_TEXT("æ ¸å¿ƒå·¥å…·"s) },
+                                                       { LogFilter::Network, SYSTEM_TEXT("ç½‘ç»œ"s) },
+                                                       { LogFilter::Database, SYSTEM_TEXT("æ•°æ®åº“"s) },
+                                                       { LogFilter::Script, SYSTEM_TEXT("è„šæœ¬"s) },
+                                                       { LogFilter::Mathematics, SYSTEM_TEXT("æ•°å­¦"s) },
+                                                       { LogFilter::SoundEffect, SYSTEM_TEXT("éŸ³æ•ˆ"s) },
+                                                       { LogFilter::InputOutput, SYSTEM_TEXT("è¾“å…¥è¾“å‡º"s) },
+                                                       { LogFilter::ResourceManager, SYSTEM_TEXT("èµ„æºç®¡ç†"s) },
+                                                       { LogFilter::Rendering, SYSTEM_TEXT("æ¸²æŸ“"s) },
+                                                       { LogFilter::Physics, SYSTEM_TEXT("ç‰©ç†"s) },
+                                                       { LogFilter::Imagics, SYSTEM_TEXT("å›¾åƒåˆ†æ"s) },
+                                                       { LogFilter::Animation, SYSTEM_TEXT("åŠ¨ç”»"s) },
+                                                       { LogFilter::ArtificialIntelligence, SYSTEM_TEXT("äººå·¥æ™ºèƒ½"s) },
+                                                       { LogFilter::UserInterface, SYSTEM_TEXT("ç•Œé¢"s) },
+                                                       { LogFilter::AssistTools, SYSTEM_TEXT("è¾…åŠ©å·¥å…·"s) },
+                                                       { LogFilter::Framework, SYSTEM_TEXT("æ¡†æ¶"s) },
+                                                       { LogFilter::User, SYSTEM_TEXT("ç”¨æˆ·è‡ªå®šä¹‰"s) } };
 
     if (const auto iter = describe.find(logFilterType);
         iter != describe.cend())
@@ -45,7 +45,7 @@ System::String CoreTools::LogFilterManager::GetLogFilterDescribe(LogFilter logFi
     }
     else
     {
-        CORE_TOOLS_ASSERTION_2(false, "Î´ÕÒµ½ÈÕÖ¾¹ıÂËÆ÷µÄÏà¹ØÃèÊö£¡");
+        CORE_TOOLS_ASSERTION_2(false, "æœªæ‰¾åˆ°æ—¥å¿—è¿‡æ»¤å™¨çš„ç›¸å…³æè¿°ï¼");
         return SYSTEM_TEXT(""s);
     }
 }

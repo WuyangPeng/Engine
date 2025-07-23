@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 14:23)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 14:23)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -35,7 +35,7 @@ bool CoreTools::CommandArgumentContainer::IsValid() const noexcept
 void CoreTools::CommandArgumentContainer::AddArgument(int index, const std::string& argumentsName, const std::string& argumentsValue)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
-    CORE_TOOLS_ASSERTION_0(0 < index && index < argumentsNumber, "Ë÷Òı´íÎó£¡");
+    CORE_TOOLS_ASSERTION_0(0 < index && index < argumentsNumber, "ç´¢å¼•é”™è¯¯ï¼");
 
     const CommandArgument argument{ index, argumentsName, argumentsValue };
     commandArgument.insert({ argumentsName, argument });
@@ -44,7 +44,7 @@ void CoreTools::CommandArgumentContainer::AddArgument(int index, const std::stri
 void CoreTools::CommandArgumentContainer::AddArgument(int index, const std::string& argumentsName)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
-    CORE_TOOLS_ASSERTION_0(0 < index && index < argumentsNumber, "Ë÷Òı´íÎó£¡");
+    CORE_TOOLS_ASSERTION_0(0 < index && index < argumentsNumber, "ç´¢å¼•é”™è¯¯ï¼");
 
     const CommandArgument argument{ index, argumentsName };
     commandArgument.insert({ argumentsName, argument });
@@ -77,7 +77,7 @@ void CoreTools::CommandArgumentContainer::SetUsed(const std::string& argumentsNa
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î´ÕÒµ½ÃüÁîĞĞË÷Òı£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æœªæ‰¾åˆ°å‘½ä»¤è¡Œç´¢å¼•ï¼"s))
     }
 }
 
@@ -166,7 +166,7 @@ void CoreTools::CommandArgumentContainer::AddEndArgumentValue(const std::string&
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÃüÁîĞĞ²»ÔÊĞíÒÔ×Ö·û´®´òÍ·£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å‘½ä»¤è¡Œä¸å…è®¸ä»¥å­—ç¬¦ä¸²æ‰“å¤´ï¼"s))
     }
 }
 
@@ -183,7 +183,7 @@ std::string CoreTools::CommandArgumentContainer::ExcessArguments() const
         }
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("ÃüÁîĞĞÃ»ÓĞÎ´´¦ÀíµÄ²ÎÊı£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("å‘½ä»¤è¡Œæ²¡æœ‰æœªå¤„ç†çš„å‚æ•°ï¼"s))
 }
 
 int CoreTools::CommandArgumentContainer::GetExcessArgumentsCount() const noexcept

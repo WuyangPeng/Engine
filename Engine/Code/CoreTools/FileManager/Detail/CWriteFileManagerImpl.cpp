@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/01 09:46)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/01 09:46)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -64,7 +64,7 @@ void CoreTools::CWriteFileManagerImpl::Write(size_t itemSize, size_t itemsNumber
 
     if (writeNumber != itemsNumber)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¶ÁÈëÎÄ¼şÊı¾İ´íÎó£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¯»å…¥æ–‡ä»¶æ•°æ®é”™è¯¯ï¼"s))
     }
 }
 
@@ -73,7 +73,7 @@ void CoreTools::CWriteFileManagerImpl::Write(size_t itemSize, size_t itemsNumber
 size_t CoreTools::CWriteFileManagerImpl::WriteToFileWithBigEndian(size_t itemSize, size_t itemsNumber, const void* data)
 {
     CheckItemSize(itemSize);
-    CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "Êı¾İÎŞĞ§");
+    CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "æ•°æ®æ— æ•ˆ");
 
     switch (itemSize)
     {
@@ -124,7 +124,7 @@ size_t CoreTools::CWriteFileManagerImpl::ReadFromFile(size_t itemSize, size_t it
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    FunctionProhibitedFromCalling("CWriteFileManageImpl½ûÖ¹µ÷ÓÃReadFromFile£¡", itemSize, itemsNumber, data);
+    FunctionProhibitedFromCalling("CWriteFileManageImplç¦æ­¢è°ƒç”¨ReadFromFileï¼", itemSize, itemsNumber, data);
 
     return 0;
 }
@@ -133,7 +133,7 @@ int CoreTools::CWriteFileManagerImpl::GetCharacter() noexcept(gAssert < 4 || gCo
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    FunctionProhibitedFromCalling("CWriteFileManageImpl½ûÖ¹µ÷ÓÃGetCharacter£¡");
+    FunctionProhibitedFromCalling("CWriteFileManageImplç¦æ­¢è°ƒç”¨GetCharacterï¼");
 
     return System::gCFileError;
 }
@@ -142,7 +142,7 @@ bool CoreTools::CWriteFileManagerImpl::UnGetCharacter(int character) noexcept(gA
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    FunctionProhibitedFromCalling("CWriteFileManageImpl½ûÖ¹µ÷ÓÃUnGetCharacter£¡", character);
+    FunctionProhibitedFromCalling("CWriteFileManageImplç¦æ­¢è°ƒç”¨UnGetCharacterï¼", character);
 
     return false;
 }
@@ -151,7 +151,7 @@ std::string CoreTools::CWriteFileManagerImpl::GetString(int count) noexcept(gAss
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    FunctionProhibitedFromCalling("CWriteFileManageImpl½ûÖ¹µ÷ÓÃGetString£¡", count);
+    FunctionProhibitedFromCalling("CWriteFileManageImplç¦æ­¢è°ƒç”¨GetStringï¼", count);
 
     return std::string{};
 }

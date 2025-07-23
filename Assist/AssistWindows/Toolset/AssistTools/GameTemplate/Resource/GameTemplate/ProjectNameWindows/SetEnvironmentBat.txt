@@ -1,4 +1,4 @@
-@echo on
+﻿@echo on
 
 echo $ProjectName$Include = %$ProjectName$Include%
 echo %cd%

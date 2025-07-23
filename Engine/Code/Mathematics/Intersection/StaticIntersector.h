@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 16:04)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 16:04)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_INTERSECTOR_H
 #define MATHEMATICS_INTERSECTION_STATIC_INTERSECTOR_H
@@ -14,8 +14,8 @@
 
 namespace Mathematics
 {
-    // ¾²Ì¬Ïà½»²éÑ¯¡£Ä¬ÈÏÊµÏÖ·µ»Ø¡°false¡±¡£Find²éÑ¯Éú³ÉÒ»¸öÏà½»¼¯ºÏ¡£
-    // ÅÉÉúÀà¸ºÔðÌá¹©¼¯ºÏ,ÒòÎª¼¯ºÏµÄÐÔÖÊÒÀÀµÓÚ¶ÔÏóÀàÐÍ¡£
+    // é™æ€ç›¸äº¤æŸ¥è¯¢ã€‚é»˜è®¤å®žçŽ°è¿”å›žâ€œfalseâ€ã€‚FindæŸ¥è¯¢ç”Ÿæˆä¸€ä¸ªç›¸äº¤é›†åˆã€‚
+    // æ´¾ç”Ÿç±»è´Ÿè´£æä¾›é›†åˆ,å› ä¸ºé›†åˆçš„æ€§è´¨ä¾èµ–äºŽå¯¹è±¡ç±»åž‹ã€‚
     template <typename Real, template <typename> class Vector>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticIntersector : public Intersector<Real, Vector>
     {

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.2 (2024/10/26 15:37)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.2 (2024/10/26 15:37)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_SYSTEM_H
 #define SYSTEM_WINDOWS_WINDOWS_SYSTEM_H
@@ -18,7 +18,7 @@
 
 #include <iostream>
 
-/// ÏµÍ³Ïà¹Øº¯Êı¡£
+/// ç³»ç»Ÿç›¸å…³å‡½æ•°ã€‚
 namespace System
 {
     void SYSTEM_DEFAULT_DECLARE GetWindowSystemInfo(WindowsSystemInfo& systemInfo) noexcept;
@@ -36,10 +36,10 @@ namespace System
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemClientRect(WindowsHWnd hWnd, WindowsRect& windowsRect) noexcept;
 
-    /// SystemCommandº¯Êı²»ÊÇÏß³Ì°²È«µÄ¡£
+    /// SystemCommandå‡½æ•°ä¸æ˜¯çº¿ç¨‹å®‰å…¨çš„ã€‚
     int SYSTEM_DEFAULT_DECLARE SystemCommand(const char* command) noexcept;
 
-    /// ÕıÊ½»·¾³½ûÖ¹µ÷ÓÃDebugBreak¡¢ExitºÍGetSystemInput¡£
+    /// æ­£å¼ç¯å¢ƒç¦æ­¢è°ƒç”¨DebugBreakã€Exitå’ŒGetSystemInputã€‚
     void SYSTEM_DEFAULT_DECLARE DebugBreak() noexcept;
     void SYSTEM_DEFAULT_DECLARE Exit() noexcept;
 

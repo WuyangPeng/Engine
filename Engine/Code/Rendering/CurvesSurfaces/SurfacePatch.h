@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒýÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:59)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“Žç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:59)
 
 #ifndef RENDERING_CURVES_SURFACES_SURFACE_PATCH_H
 #define RENDERING_CURVES_SURFACES_SURFACE_PATCH_H
@@ -45,9 +45,9 @@ namespace Rendering
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(SurfacePatch);
 
-        // ²ÎÊýÓò¿ÉÒÔÊÇ¾ØÐÎ»òÈý½ÇÐÎ¡£
-        // ¶ÔÓÚ¾ØÐÎÓòÓÐÐ§µÄ(u,v)ÖµÂú×ãumin <= u <= umax,  vmin <= v <= vmax
-        // Èý½ÇÓòÓÐÐ§µÄ(u,v)ÖµµÄÂú×ã umin <= u <= umax,  vmin <= v <= vmax£¬
+        // å‚æ•°åŸŸå¯ä»¥æ˜¯çŸ©å½¢æˆ–ä¸‰è§’å½¢ã€‚
+        // å¯¹äºŽçŸ©å½¢åŸŸæœ‰æ•ˆçš„(u,v)å€¼æ»¡è¶³umin <= u <= umax,  vmin <= v <= vmax
+        // ä¸‰è§’åŸŸæœ‰æ•ˆçš„(u,v)å€¼çš„æ»¡è¶³ umin <= u <= umax,  vmin <= v <= vmaxï¼Œ
         //  (vmax - vmin) * (u - umin) + (umax - umin) * (v - vmax) <= 0
         NODISCARD float GetUMin() const noexcept;
         NODISCARD float GetUMax() const noexcept;
@@ -55,7 +55,7 @@ namespace Rendering
         NODISCARD float GetVMax() const noexcept;
         NODISCARD bool IsRectangular() const noexcept;
 
-        // Î»ÖÃ¼°¶þ½×µ¼Êý
+        // ä½ç½®åŠäºŒé˜¶å¯¼æ•°
         NODISCARD virtual APoint GetPosition(float u, float v) const = 0;
         NODISCARD virtual AVector GetDerivativesU(float u, float v) const = 0;
         NODISCARD virtual AVector GetDerivativesV(float u, float v) const = 0;
@@ -63,13 +63,13 @@ namespace Rendering
         NODISCARD virtual AVector GetDerivativesUV(float u, float v) const = 0;
         NODISCARD virtual AVector GetDerivativesVV(float u, float v) const = 0;
 
-        // ¼ÆËãÒ»¸ö×ø±êÏµ¡£¼¯ºÏ{T0,T1,N}ÊÇÒ»¸öÓÒÊÖÕý½»×ø±êÏµ¡£
+        // è®¡ç®—ä¸€ä¸ªåæ ‡ç³»ã€‚é›†åˆ{T0,T1,N}æ˜¯ä¸€ä¸ªå³æ‰‹æ­£äº¤åæ ‡ç³»ã€‚
         NODISCARD AVector GetTangent0(float u, float v) const;
         NODISCARD AVector GetTangent1(float u, float v) const;
         NODISCARD AVector GetNormal(float u, float v) const;
         NODISCARD SurfacePatchFrame GetFrame(float u, float v) const;
 
-        // Î¢·Ö¼¸ºÎÁ¿¡£·µ»ØµÄ±êÁ¿ÊÇÖ÷ÇúÂÊ£¬²¢·µ»ØÊ¸Á¿µÄ¶ÔÓ¦Ö÷·½Ïò¡£
+        // å¾®åˆ†å‡ ä½•é‡ã€‚è¿”å›žçš„æ ‡é‡æ˜¯ä¸»æ›²çŽ‡ï¼Œå¹¶è¿”å›žçŸ¢é‡çš„å¯¹åº”ä¸»æ–¹å‘ã€‚
         NODISCARD PrincipalCurvatureInfo ComputePrincipalCurvatureInfo(float u, float v) const;
 
     private:

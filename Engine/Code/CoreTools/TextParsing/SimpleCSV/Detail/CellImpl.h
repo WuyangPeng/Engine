@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/02 17:53)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/02 17:53)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CELL_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_CELL_IMPL_H
@@ -21,7 +21,7 @@
 #include <memory>
 #include <string>
 
-/// ·â×°µç×Ó±í¸ñµ¥Ôª¸ñµÄÊôÐÔºÍÐÐÎªµÄÊµÏÖÀà¡£
+/// å°è£…ç”µå­è¡¨æ ¼å•å…ƒæ ¼çš„å±žæ€§å’Œè¡Œä¸ºçš„å®žçŽ°ç±»ã€‚
 namespace CoreTools::SimpleCSV
 {
     class CORE_TOOLS_HIDDEN_DECLARE CellImpl final

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	�汾��0.9.1.6 (2023/10/28 15:07)
+///	标准：std:c++20
+///	版本：0.9.1.6 (2023/10/28 15:07)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_SPHERE3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_SPHERE3_H
@@ -41,10 +41,10 @@ namespace Mathematics
         NODISCARD Plane3Type GetPlane() const noexcept;
         NODISCARD Sphere3Type GetSphere() const noexcept;
 
-        /// �޳�֧�֡� ��׶̨����Ϊλ��ƽ������ࡣ ���������ƽ��ĸ��࣬�����޳���
+        /// 剔除支持。 视锥台被认为位于平面的正侧。 如果球面在平面的负侧，则将其剔除。
         NODISCARD bool SphereIsCulled() const noexcept;
 
-        // �ཻ���� ��Բ����Find()���ء� true��ʱ����Ч�� ����������ཻ����Բ�뾶����Ϊ-1���Ը���ָʾԲ��Ч��
+        // 相交集。 该圆仅在Find()返回“ true”时才有效。 如果不存在相交，则将圆半径设置为-1，以附加指示圆无效。
         NODISCARD Circle3Type GetCircle() const noexcept;
 
     private:

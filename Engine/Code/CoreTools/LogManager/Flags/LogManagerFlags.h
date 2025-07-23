@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 13:52)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 13:52)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_LOG_MANAGER_FLAGS_H
 #define CORE_TOOLS_LOG_MANAGER_LOG_MANAGER_FLAGS_H
@@ -16,36 +16,36 @@ namespace CoreTools
 {
     enum class LogFilter
     {
-        System = 0,  // ÏµÍ³
-        CoreTools,  // ºËĞÄ¹¤¾ß
-        Network,  // ÍøÂç
-        Database,  // Êı¾İ¿â
-        Script,  // ½Å±¾
-        Mathematics,  // ÊıÑ§
-        SoundEffect,  // ÒôĞ§
-        InputOutput,  // ÊäÈëÊä³ö
-    	ResourceManager,  // ×ÊÔ´¹ÜÀí
-        Rendering,  // äÖÈ¾
-        Physics,  // ÎïÀí
-        Imagics,  // Í¼Ïñ·ÖÎö
-        Animation,  // ¶¯»­
-        ArtificialIntelligence,  // ÈË¹¤ÖÇÄÜ
-        UserInterface,  // ½çÃæ
-        AssistTools,  // ¸¨Öú¹¤¾ß
-        Framework,  // ¿ò¼Ü
-        User,  // ÓÃ»§×Ô¶¨Òå
+        System = 0,  // ç³»ç»Ÿ
+        CoreTools,  // æ ¸å¿ƒå·¥å…·
+        Network,  // ç½‘ç»œ
+        Database,  // æ•°æ®åº“
+        Script,  // è„šæœ¬
+        Mathematics,  // æ•°å­¦
+        SoundEffect,  // éŸ³æ•ˆ
+        InputOutput,  // è¾“å…¥è¾“å‡º
+    	ResourceManager,  // èµ„æºç®¡ç†
+        Rendering,  // æ¸²æŸ“
+        Physics,  // ç‰©ç†
+        Imagics,  // å›¾åƒåˆ†æ
+        Animation,  // åŠ¨ç”»
+        ArtificialIntelligence,  // äººå·¥æ™ºèƒ½
+        UserInterface,  // ç•Œé¢
+        AssistTools,  // è¾…åŠ©å·¥å…·
+        Framework,  // æ¡†æ¶
+        User,  // ç”¨æˆ·è‡ªå®šä¹‰
         MaxLogFilter
     };
 
     enum class LogLevel
     {
-        Disabled = 0,  // ½ûÓÃ
-        Trace,  // ¸ú×ÙĞÅÏ¢
-        Debug,  // µ÷ÊÔĞÅÏ¢
-        Info,  // Ò»°ãĞÅÏ¢
-        Warn,  // ¾¯¸æĞÅÏ¢
-        Error,  // ´íÎóĞÅÏ¢
-        Fatal,  // ÖÂÃü´íÎóĞÅÏ¢
+        Disabled = 0,  // ç¦ç”¨
+        Trace,  // è·Ÿè¸ªä¿¡æ¯
+        Debug,  // è°ƒè¯•ä¿¡æ¯
+        Info,  // ä¸€èˆ¬ä¿¡æ¯
+        Warn,  // è­¦å‘Šä¿¡æ¯
+        Error,  // é”™è¯¯ä¿¡æ¯
+        Fatal,  // è‡´å‘½é”™è¯¯ä¿¡æ¯
         MaxLogLevels
     };
 
@@ -70,8 +70,8 @@ namespace CoreTools
 
     enum class LogAppenderIOManageSign
     {
-        TriggerAssert,  // ´¥·¢¶ÏÑÔ
-        AlwaysConsole,  // ×ÜÊÇÊä³öÖÁ¿ØÖÆÌ¨
+        TriggerAssert,  // è§¦å‘æ–­è¨€
+        AlwaysConsole,  // æ€»æ˜¯è¾“å‡ºè‡³æ§åˆ¶å°
     };
 }
 

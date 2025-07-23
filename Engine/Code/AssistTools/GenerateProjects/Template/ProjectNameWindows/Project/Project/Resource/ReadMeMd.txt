@@ -1,6 +1,6 @@
-@ingroup group_$ProjectName$_Documentation
+﻿@ingroup group_$ProjectName$_Documentation
 
 ---------------------------- 
-$ProjectChineseName$�淶
+$ProjectChineseName$规范
  
 ---------------------------- 

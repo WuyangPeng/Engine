@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/29 23:07)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/29 23:07)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -57,13 +57,13 @@ void CoreTools::FormatErrorMessageImpl::LoadedModuleSucceed(ConstDynamicLinkModu
 {
     if (!FormatErrorMessage(errorMessage, module, lastError))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("»ñÈ¡´íÎó´úÂë¡®"), EnumCastUnderlying(lastError), SYSTEM_TEXT("¡¯µÄÎÄ×ÖÃèÊöÊ§°Ü¡£"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("è·å–é”™è¯¯ä»£ç â€˜"), EnumCastUnderlying(lastError), SYSTEM_TEXT("â€™çš„æ–‡å­—æè¿°å¤±è´¥ã€‚"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
 void CoreTools::FormatErrorMessageImpl::LoadedModuleFailure() noexcept
 {
-    LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("´ò¿ªnetmsg.dllÊ§°Ü"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+    LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("æ‰“å¼€netmsg.dllå¤±è´¥"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
 }
 
 CoreTools::FormatErrorMessageImpl::~FormatErrorMessageImpl() noexcept
@@ -77,7 +77,7 @@ void CoreTools::FormatErrorMessageImpl::ReleaseMemory() noexcept
 {
     if (errorMessage != nullptr && !System::LocalMemoryFree(errorMessage))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("ÊÍ·ÅÖ¸¶¨µÄ±¾µØÄÚ´æ¶ÔÏóÊ§°Ü¡£"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("é‡Šæ”¾æŒ‡å®šçš„æœ¬åœ°å†…å­˜å¯¹è±¡å¤±è´¥ã€‚"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -93,6 +93,6 @@ System::String CoreTools::FormatErrorMessageImpl::GetErrorMessage() const
     }
     else
     {
-        return SYSTEM_TEXT("Î´·¢ÏÖÕâ¸ö´íÎó´úÂëµÄÎÄ×ÖÃèÊö¡£");
+        return SYSTEM_TEXT("æœªå‘ç°è¿™ä¸ªé”™è¯¯ä»£ç çš„æ–‡å­—æè¿°ã€‚");
     }
 }

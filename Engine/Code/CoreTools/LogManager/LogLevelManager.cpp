@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 14:06)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 14:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -20,21 +20,21 @@ System::String CoreTools::LogLevelManager::GetLogLevelDescribe(LogLevel logLevel
     switch (logLevelType)
     {
         case LogLevel::Disabled:
-            return SYSTEM_TEXT("½ûÓÃ");
+            return SYSTEM_TEXT("ç¦ç”¨");
         case LogLevel::Trace:
-            return SYSTEM_TEXT("¸ú×Ù");
+            return SYSTEM_TEXT("è·Ÿè¸ª");
         case LogLevel::Debug:
-            return SYSTEM_TEXT("µ÷ÊÔ");
+            return SYSTEM_TEXT("è°ƒè¯•");
         case LogLevel::Info:
-            return SYSTEM_TEXT("Ò»°ã");
+            return SYSTEM_TEXT("ä¸€èˆ¬");
         case LogLevel::Warn:
-            return SYSTEM_TEXT("¾¯¸æ");
+            return SYSTEM_TEXT("è­¦å‘Š");
         case LogLevel::Error:
-            return SYSTEM_TEXT("´íÎó");
+            return SYSTEM_TEXT("é”™è¯¯");
         case LogLevel::Fatal:
-            return SYSTEM_TEXT("ÖÂÃü´íÎó");
+            return SYSTEM_TEXT("è‡´å‘½é”™è¯¯");
         default:
-            CORE_TOOLS_ASSERTION_2(false, "Î´ÕÒµ½ÈÕÖ¾µÈ¼¶µÄÏà¹ØÃèÊö£¡");
+            CORE_TOOLS_ASSERTION_2(false, "æœªæ‰¾åˆ°æ—¥å¿—ç­‰çº§çš„ç›¸å…³æè¿°ï¼");
             return SYSTEM_TEXT("");
     }
 }

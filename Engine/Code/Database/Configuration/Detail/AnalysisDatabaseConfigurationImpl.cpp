@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 13:52)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 13:52)
 
 #include "Database/DatabaseExport.h"
 
@@ -50,7 +50,7 @@ void Database::AnalysisDatabaseConfigurationImpl::AnalysisMain()
         }
         catch (const CoreTools::Error& error)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, Database, SYSTEM_TEXT("Êı¾İ¿â²ßÂÔ"), tree.first, SYSTEM_TEXT("ÅäÖÃÖµ´íÎó£º"), error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Database, SYSTEM_TEXT("æ•°æ®åº“ç­–ç•¥"), tree.first, SYSTEM_TEXT("é…ç½®å€¼é”™è¯¯ï¼š"), error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
 }
@@ -140,7 +140,7 @@ Database::ConfigurationStrategy Database::AnalysisDatabaseConfigurationImpl::Get
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÕÒ²»µ½Ö¸¶¨Ãû×ÖµÄÅäÖÃ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ‰¾ä¸åˆ°æŒ‡å®šåå­—çš„é…ç½®ã€‚"s))
     }
 }
 
@@ -192,7 +192,7 @@ Database::WrappersStrategy Database::AnalysisDatabaseConfigurationImpl::GetWrapp
         return WrappersStrategy::Redis;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Êı¾İ¿â°ü×°Æ÷ÀàĞÍ²»´æÔÚ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("æ•°æ®åº“åŒ…è£…å™¨ç±»å‹ä¸å­˜åœ¨ã€‚"s))
 }
 
 Database::AnalysisDatabaseConfigurationImpl::ContainerConstIter Database::AnalysisDatabaseConfigurationImpl::begin() const noexcept

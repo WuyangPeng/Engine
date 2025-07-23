@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 11:13)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 11:13)
 
 #include "Rendering/RenderingExport.h"
 
@@ -96,7 +96,7 @@ Rendering::PickRecord Rendering::PickerImpl::GetClosestToZero() const
         return records.GetPickRecord(index);
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("¼ÇÂ¼²»´æÔÚ£¡"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("è®°å½•ä¸å­˜åœ¨ï¼"s));
 }
 
 Rendering::PickRecord Rendering::PickerImpl::GetClosestNonnegative() const
@@ -122,7 +122,7 @@ Rendering::PickRecord Rendering::PickerImpl::GetClosestNonnegative() const
 
         if (findIndex == -1)
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("¼ÇÂ¼µÄÖµ¶¼ÊÇ¸ºÊı£¡"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("è®°å½•çš„å€¼éƒ½æ˜¯è´Ÿæ•°ï¼"s));
         }
 
         for (auto i = findIndex + 1; i < numRecords; ++i)
@@ -141,7 +141,7 @@ Rendering::PickRecord Rendering::PickerImpl::GetClosestNonnegative() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¼ÇÂ¼²»´æÔÚ£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("è®°å½•ä¸å­˜åœ¨ï¼"s));
     }
 }
 
@@ -169,7 +169,7 @@ Rendering::PickRecord Rendering::PickerImpl::GetClosestNonpositive() const
 
         if (closest == -1)
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("¼ÇÂ¼µÄÖµ¶¼ÊÇÕıÊı£¡"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("è®°å½•çš„å€¼éƒ½æ˜¯æ­£æ•°ï¼"s));
         }
 
         for (auto i = findIndex + 1; i < numRecords; ++i)
@@ -188,7 +188,7 @@ Rendering::PickRecord Rendering::PickerImpl::GetClosestNonpositive() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¼ÇÂ¼²»´æÔÚ£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("è®°å½•ä¸å­˜åœ¨ï¼"s));
     }
 }
 

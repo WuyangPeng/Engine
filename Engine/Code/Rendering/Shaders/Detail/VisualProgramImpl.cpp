@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/26 15:08)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/26 15:08)
 
 #include "Rendering/RenderingExport.h"
 
@@ -86,7 +86,7 @@ void Rendering::VisualProgramImpl::SetVertexShader(const ShaderSharedPtr& shader
 
     if (shader->GetType() != GraphicsObjectType::VertexShader)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÊäÈë±ØĞëÊÇ¶¥µã×ÅÉ«Æ÷¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¾“å…¥å¿…é¡»æ˜¯é¡¶ç‚¹ç€è‰²å™¨ã€‚"))
     }
 
     vertexShader.object = shader;
@@ -98,7 +98,7 @@ void Rendering::VisualProgramImpl::SetPixelShader(const ShaderSharedPtr& shader)
 
     if (shader->GetType() != GraphicsObjectType::PixelShader)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÊäÈë±ØĞëÊÇÏñËØ×ÅÉ«Æ÷¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¾“å…¥å¿…é¡»æ˜¯åƒç´ ç€è‰²å™¨ã€‚"))
     }
 
     pixelShader.object = shader;
@@ -110,7 +110,7 @@ void Rendering::VisualProgramImpl::SetGeometryShader(const ShaderSharedPtr& shad
 
     if (shader->GetType() != GraphicsObjectType::GeometryShader)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÊäÈë±ØĞëÊÇ¼¸ºÎ×ÅÉ«Æ÷¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¾“å…¥å¿…é¡»æ˜¯å‡ ä½•ç€è‰²å™¨ã€‚"))
     }
 
     geometryShader.object = shader;

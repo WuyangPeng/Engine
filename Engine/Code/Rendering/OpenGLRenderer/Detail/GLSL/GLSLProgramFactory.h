@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/14 00:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/14 00:19)
 
 #ifndef RENDERING_OPENGL_RENDERER_GLSL_PROGRAM_FACTORY_H
 #define RENDERING_OPENGL_RENDERER_GLSL_PROGRAM_FACTORY_H
@@ -37,12 +37,12 @@ namespace Rendering
 
         NODISCARD ShaderAPIType GetAPI() const noexcept override;
 
-        /// GLSLVisualProgramºÍGLSLComputeProgram¶ÔÏó¸ºÔğÏú»Ù×ÅÉ«Æ÷ºÍ³ÌĞò¡£
-        /// ¹¤³§½«³ÌĞò¶ÔÏó°ü×°Îª¹²ÏíÖ¸Õë£¬ÒÔÔÊĞí×Ô¶¯ÇåÀí¡£
+        /// GLSLVisualProgramå’ŒGLSLComputeProgramå¯¹è±¡è´Ÿè´£é”€æ¯ç€è‰²å™¨å’Œç¨‹åºã€‚
+        /// å·¥å‚å°†ç¨‹åºå¯¹è±¡åŒ…è£…ä¸ºå…±äº«æŒ‡é’ˆï¼Œä»¥å…è®¸è‡ªåŠ¨æ¸…ç†ã€‚
 
     protected:
-        /// ´´½¨GPUÏÔÊ¾³ÌĞò¡£´Ë³ÌĞòÓë¼¤»îµÄÒıÇæ¶ÔÏóÏà¹ØÁª¡£
-        /// Ö»ÓĞµ±programHandleÎªÕıÊ±£¬·µ»ØµÄ³ÌĞò²ÅÓĞĞ§¡£
+        /// åˆ›å»ºGPUæ˜¾ç¤ºç¨‹åºã€‚æ­¤ç¨‹åºä¸æ¿€æ´»çš„å¼•æ“å¯¹è±¡ç›¸å…³è”ã€‚
+        /// åªæœ‰å½“programHandleä¸ºæ­£æ—¶ï¼Œè¿”å›çš„ç¨‹åºæ‰æœ‰æ•ˆã€‚
         NODISCARD VisualProgramSharedPtr CreateFromNamedSources(const std::string& vertexShaderName,
                                                                 const std::string& vertexShaderSource,
                                                                 const std::string& pixelShaderName,
@@ -50,8 +50,8 @@ namespace Rendering
                                                                 const std::string& geometryShaderName,
                                                                 const std::string& geometryShaderSource) override;
 
-        /// ´´½¨GPU¼ÆËã³ÌĞò¡£´Ë³ÌĞòÓë¼¤»îµÄÒıÇæ¶ÔÏóÏà¹ØÁª¡£
-        /// Ö»ÓĞµ±programHandleÎªÕıÊ±£¬·µ»ØµÄ³ÌĞò²ÅÓĞĞ§¡£
+        /// åˆ›å»ºGPUè®¡ç®—ç¨‹åºã€‚æ­¤ç¨‹åºä¸æ¿€æ´»çš„å¼•æ“å¯¹è±¡ç›¸å…³è”ã€‚
+        /// åªæœ‰å½“programHandleä¸ºæ­£æ—¶ï¼Œè¿”å›çš„ç¨‹åºæ‰æœ‰æ•ˆã€‚
         NODISCARD ComputeProgramSharedPtr CreateFromNamedSource(const std::string& computeShaderName,
                                                                 const std::string& computeShaderSource) override;
     };

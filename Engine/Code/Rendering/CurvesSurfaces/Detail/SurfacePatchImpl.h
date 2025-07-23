@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:58)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:58)
 
 #ifndef RENDERING_CURVES_SURFACES_SURFACE_PATCH_IMPL_H
 #define RENDERING_CURVES_SURFACES_SURFACE_PATCH_IMPL_H
@@ -34,9 +34,9 @@ namespace Rendering
         void Save(CoreTools::BufferTarget& target) const;
         NODISCARD int GetStreamingSize() const noexcept;
 
-        // ²ÎÊıÓò¿ÉÒÔÊÇ¾ØĞÎ»òÈı½ÇĞÎ¡£
-        // ¶ÔÓÚ¾ØĞÎÓòÓĞĞ§µÄ(u,v)ÖµÂú×ãumin <= u <= umax,  vmin <= v <= vmax
-        // Èı½ÇÓòÓĞĞ§µÄ(u,v)ÖµµÄÂú×ã umin <= u <= umax,  vmin <= v <= vmax£¬
+        // å‚æ•°åŸŸå¯ä»¥æ˜¯çŸ©å½¢æˆ–ä¸‰è§’å½¢ã€‚
+        // å¯¹äºçŸ©å½¢åŸŸæœ‰æ•ˆçš„(u,v)å€¼æ»¡è¶³umin <= u <= umax,  vmin <= v <= vmax
+        // ä¸‰è§’åŸŸæœ‰æ•ˆçš„(u,v)å€¼çš„æ»¡è¶³ umin <= u <= umax,  vmin <= v <= vmaxï¼Œ
         //  (vmax - vmin) * (u - umin) + (umax - umin) * (v - vmax) <= 0
         NODISCARD float GetUMin() const noexcept;
         NODISCARD float GetUMax() const noexcept;

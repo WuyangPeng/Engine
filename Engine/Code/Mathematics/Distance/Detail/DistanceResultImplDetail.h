@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 15:12)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 15:12)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RESULT_IMPL_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RESULT_IMPL_DETAIL_H
@@ -72,7 +72,7 @@ Vector Mathematics::DistanceResultImpl<Real, Vector>::GetLhsClosestPoint([[maybe
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("¾àÀë½á¹û²»°üº¬×î½üÏà½»µã£¡\n"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("è·ç¦»ç»“æžœä¸åŒ…å«æœ€è¿‘ç›¸äº¤ç‚¹ï¼\n"s));
 }
 
 template <typename Real, typename Vector>
@@ -80,7 +80,7 @@ Vector Mathematics::DistanceResultImpl<Real, Vector>::GetRhsClosestPoint([[maybe
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("¾àÀë½á¹û²»°üº¬×î½üÏà½»µã£¡\n"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("è·ç¦»ç»“æžœä¸åŒ…å«æœ€è¿‘ç›¸äº¤ç‚¹ï¼\n"s));
 }
 
 template <typename Real, typename Vector>
@@ -124,7 +124,7 @@ void Mathematics::DistanceResultImpl<Real, Vector>::SetContactTime([[maybe_unuse
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("¾àÀë½á¹û²»°üº¬½Ó´¥Ê±¼ä£¡\n"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("è·ç¦»ç»“æžœä¸åŒ…å«æŽ¥è§¦æ—¶é—´ï¼\n"s));
 }
 
 template <typename Real, typename Vector>
@@ -132,7 +132,7 @@ Real Mathematics::DistanceResultImpl<Real, Vector>::GetLhsParameter() const
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("¾àÀë½á¹û²»°üº¬½Ó´¥²ÎÊý£¡\n"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("è·ç¦»ç»“æžœä¸åŒ…å«æŽ¥è§¦å‚æ•°ï¼\n"s));
 }
 
 template <typename Real, typename Vector>
@@ -140,7 +140,7 @@ Real Mathematics::DistanceResultImpl<Real, Vector>::GetRhsParameter() const
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("¾àÀë½á¹û²»°üº¬½Ó´¥²ÎÊý£¡\n"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("è·ç¦»ç»“æžœä¸åŒ…å«æŽ¥è§¦å‚æ•°ï¼\n"s));
 }
 
 template <typename Real, typename Vector>

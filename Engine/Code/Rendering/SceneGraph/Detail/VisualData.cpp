@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/28 17:53)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/28 17:53)
 
 #include "Rendering/RenderingExport.h"
 
@@ -73,7 +73,7 @@ Rendering::IndexFormatType Rendering::VisualData::GetPrimitiveType() const
 
     if (indexBuffer.object == nullptr || indexBuffer->IsNullObject())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òý»º³åÇøÎ´Á¬½Ó"))
+        THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•ç¼“å†²åŒºæœªè¿žæŽ¥"))
     }
 
     return indexBuffer->GetPrimitiveType();
@@ -92,7 +92,7 @@ Rendering::VisualData::SpanIterator Rendering::VisualData::GetChannel(Semantic s
 
     if (vertexBuffer.object == nullptr || vertexBuffer->IsNullObject())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("»º³åÇøÎ´Á¬½Ó"))
+        THROW_EXCEPTION(SYSTEM_TEXT("ç¼“å†²åŒºæœªè¿žæŽ¥"))
     }
 
     return vertexBuffer->GetChannel(semantic, unit, requiredTypes);
@@ -104,7 +104,7 @@ Rendering::VisualData::ConstSpanIterator Rendering::VisualData::GetConstChannel(
 
     if (vertexBuffer.object == nullptr || vertexBuffer->IsNullObject())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("»º³åÇøÎ´Á¬½Ó"))
+        THROW_EXCEPTION(SYSTEM_TEXT("ç¼“å†²åŒºæœªè¿žæŽ¥"))
     }
 
     return vertexBuffer->GetConstChannel(semantic, unit, requiredTypes);

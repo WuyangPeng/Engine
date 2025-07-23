@@ -1,18 +1,18 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 17:26)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 17:26)
 
 #ifndef SYSTEM_HELPER_COMPAQ_CXX_H
 #define SYSTEM_HELPER_COMPAQ_CXX_H
 
 #ifdef _CRAYC
 
-    /// Cray C++ ±àÒëÆ÷ÉèÖÃ£º
+    /// Cray C++ ç¼–è¯‘å™¨è®¾ç½®ï¼š
 
     #ifndef SYSTEM_CPP_STANDARD
 
@@ -26,25 +26,25 @@
 
     #endif  // TCRE_USE_CRAY
 
-    #define TCRE_CRAY_x 9867657  // ÈÎÒâÊýÁ¿
+    #define TCRE_CRAY_x 9867657  // ä»»æ„æ•°é‡
     #define TCRE_CRAY_APPEND(MACRO) TCRE_CRAY_APPEND_INTERNAL(MACRO)
     #define TCRE_CRAY_APPEND_INTERNAL(MACRO) SYSTEM_CONCATENATOR(TCRE_CRAY_, MACRO)
 
     #if TCRE_CRAY_x == TCRE_CRAY_APPEND(_RELEASE_PATCHLEVEL)
 
-        /// ÕâÊÇÒ»¸ö¿ª·¢ÈËÔ±¹¹½¨¡£
-        /// _RELEASE_PATCHLEVEL¶¨ÒåÎªx£¬
-        /// xÎ´¶¨ÒåÎªºê£¬
-        /// ¼Ù×°_RELEASE_PATCHLEVELÎª99£¬
-        /// Òò´ËÎÒÃÇ»ñµÃÁË´Ë°æ±¾ÖÐ×îÐÂ²¹¶¡¼¶±ðµÄÅäÖÃ¡£
+        /// è¿™æ˜¯ä¸€ä¸ªå¼€å‘äººå‘˜æž„å»ºã€‚
+        /// _RELEASE_PATCHLEVELå®šä¹‰ä¸ºxï¼Œ
+        /// xæœªå®šä¹‰ä¸ºå®ï¼Œ
+        /// å‡è£…_RELEASE_PATCHLEVELä¸º99ï¼Œ
+        /// å› æ­¤æˆ‘ä»¬èŽ·å¾—äº†æ­¤ç‰ˆæœ¬ä¸­æœ€æ–°è¡¥ä¸çº§åˆ«çš„é…ç½®ã€‚
 
         #define CRAY_VERSION (_RELEASE_MAJOR * 10000 + _RELEASE_MINOR * 100 + 99)
 
     #else  // !TCRE_CRAY_x == TCRE_CRAY_APPEND(_RELEASE_PATCHLEVEL)
 
-        /// ÕâÊÇÒ»¸öÉú²ú°æ±¾,
-        /// _RELEASE_PATCHLEVELÎ´¶¨ÒåÎªx£¬
-        /// »òx±»¶¨ÒåÎªºê¡£
+        /// è¿™æ˜¯ä¸€ä¸ªç”Ÿäº§ç‰ˆæœ¬,
+        /// _RELEASE_PATCHLEVELæœªå®šä¹‰ä¸ºxï¼Œ
+        /// æˆ–xè¢«å®šä¹‰ä¸ºå®ã€‚
 
         #define CRAY_VERSION (_RELEASE_MAJOR * 10000 + _RELEASE_MINOR * 100 + _RELEASE_PATCHLEVEL)
 
@@ -62,17 +62,17 @@
 
     #ifndef TCRE_SYSTEM_COMPILER
 
-        #define TCRE_SYSTEM_COMPILER "Cray C °æ±¾ " SYSTEM_STRINGIZE(_RELEASE_MAJOR) "." SYSTEM_STRINGIZE(_RELEASE_MINOR) "." SYSTEM_STRINGIZE(_RELEASE_PATCHLEVEL)
+        #define TCRE_SYSTEM_COMPILER "Cray C ç‰ˆæœ¬ " SYSTEM_STRINGIZE(_RELEASE_MAJOR) "." SYSTEM_STRINGIZE(_RELEASE_MINOR) "." SYSTEM_STRINGIZE(_RELEASE_PATCHLEVEL)
 
     #endif  // TCRE_SYSTEM_COMPILER
 
     #if CRAY_VERSION < 80000
 
-        #error "ÔÚ°æ±¾8Ö®Ç°Ã»ÓÐÎªCray±àÒëÆ÷ÅäÖÃ¡ª¡ªÇëÖØÐÂÅäÖÃ½Å±¾¡£"
+        #error "åœ¨ç‰ˆæœ¬8ä¹‹å‰æ²¡æœ‰ä¸ºCrayç¼–è¯‘å™¨é…ç½®â€”â€”è¯·é‡æ–°é…ç½®è„šæœ¬ã€‚"
 
     #endif  // CRAY_VERSION < 80000
 
-    /// ÕâÐ©³£Á¿Ó¦¸ÃÓÉ±àÒëÆ÷Ìá¹©£¬ÖÁÉÙÔÚÃüÁîÐÐÉÏÉùÃ÷-hgnuÊ±¡£
+    /// è¿™äº›å¸¸é‡åº”è¯¥ç”±ç¼–è¯‘å™¨æä¾›ï¼Œè‡³å°‘åœ¨å‘½ä»¤è¡Œä¸Šå£°æ˜Ž-hgnuæ—¶ã€‚
     #ifndef __ATOMIC_RELAXED
 
         #define __ATOMIC_RELAXED 0

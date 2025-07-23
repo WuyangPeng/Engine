@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 11:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 11:19)
 
 #ifndef MATHEMATICS_OBJECTS_2D_ELLIPSE2_DETAIL_H
 #define MATHEMATICS_OBJECTS_2D_ELLIPSE2_DETAIL_H
@@ -167,22 +167,22 @@ void Mathematics::Ellipse2<Real>::FromCoefficients(const Ellipse2CoefficientsTyp
     const auto vector = coefficients.GetVector();
     const auto constants = coefficients.GetConstants();
 
-    // ¼ÆËãµÄÖĞĞÄ K = -A^{-1}*B/2.
+    // è®¡ç®—çš„ä¸­å¿ƒ K = -A^{-1}*B/2.
     const auto invMatrix = matrix.Inverse(epsilon);
 
     center = MathType::GetRational(-1, 2) * (invMatrix * vector);
 
-    // ¼ÆËã B^T*A^{-1}*B/4 - C = K^T*A*K - C = -K^T*B/2 - C.
+    // è®¡ç®— B^T*A^{-1}*B/4 - C = K^T*A*K - C = -K^T*B/2 - C.
     const auto rightSide = MathType::GetRational(-1, 2) * Vector2ToolsType::DotProduct(center, vector) - constants;
     if (MathType::FAbs(rightSide) < epsilon)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³ıÁã´íÎó£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("é™¤é›¶é”™è¯¯ï¼"s));
     }
 
-    // ¼ÆËã M = A/(K^T*A*K - C).
+    // è®¡ç®— M = A/(K^T*A*K - C).
     const auto eigenSystemMatrix = matrix / rightSide;
 
-    // ·Ö½âÒò×Ó M = Real*D*Real^T.
+    // åˆ†è§£å› å­ M = Real*D*Real^T.
     const auto eigenDecomposition = eigenSystemMatrix.EigenDecomposition(epsilon);
 
     const auto diagonal = eigenDecomposition.GetDiagonal();
@@ -194,7 +194,7 @@ void Mathematics::Ellipse2<Real>::FromCoefficients(const Ellipse2CoefficientsTyp
 
         if (eigenValue <= epsilon)
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("³ıÁã´íÎó£¡"s))
+            THROW_EXCEPTION(SYSTEM_TEXT("é™¤é›¶é”™è¯¯ï¼"s))
         }
 
 #include SYSTEM_WARNING_PUSH

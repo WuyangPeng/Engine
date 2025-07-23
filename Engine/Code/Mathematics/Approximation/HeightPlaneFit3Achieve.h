@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	�汾��0.9.1.6 (2023/10/27 14:13)
+///	标准：std:c++20
+///	版本：0.9.1.6 (2023/10/27 14:13)
 
 #ifndef MATHEMATICS_APPROXIMATION_HEIGHT_PLANE_FIT3_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_HEIGHT_PLANE_FIT3_ACHIEVE_H
@@ -53,7 +53,7 @@ Real Mathematics::HeightPlaneFit3<Real>::GetCoeffA() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("���ʧ�ܣ�"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("拟合失败！"s))
     }
 }
 
@@ -68,7 +68,7 @@ Real Mathematics::HeightPlaneFit3<Real>::GetCoeffB() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("���ʧ�ܣ�"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("拟合失败！"s))
     }
 }
 
@@ -83,18 +83,18 @@ Real Mathematics::HeightPlaneFit3<Real>::GetCoeffC() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("���ʧ�ܣ�"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("拟合失败！"s))
     }
 }
 
 template <typename Real>
 void Mathematics::HeightPlaneFit3<Real>::Calculate(const Points& points)
 {
-    // ��������Ҫ��������ȷ����ƽ�档
-    // ��ʹ���������������һ����ֱƽ�棬û����С���η���ϵġ��߶ȡ��ĸо���
-    // �⽫������ϵ�����������ʽ��
+    // 您至少需要三个点来确定的平面。
+    // 即使这样，如果点是在一个垂直平面，没有最小二次方拟合的“高度”的感觉。
+    // 这将受限于系数矩阵的行列式。
 
-    // ��������ϵͳ���ܺ͡�
+    // 计算线性系统的总和。
 
     auto sumX = MathType::GetValue(0);
     auto sumY = MathType::GetValue(0);

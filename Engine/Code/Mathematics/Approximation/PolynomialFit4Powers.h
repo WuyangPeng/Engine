@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:27)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:27)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_POWERS_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_POWERS_H
@@ -20,11 +20,11 @@
 
 namespace Mathematics
 {
-    // ÓëÒÔÏÂÐÎÊ½µÄ¶àÏîÊ½ÄâºÏÊý¾Ý
+    // ä¸Žä»¥ä¸‹å½¢å¼çš„å¤šé¡¹å¼æ‹Ÿåˆæ•°æ®
     //     w = sum_{i=0}^{n-1} c[i]*x^{p[i]}*y^{q[i]}*z^{r[i]}
-    // ÕâÀï<p[i],q[i],r[i]> ÓÉµ÷ÓÃÕßÌá¹©²»Í¬µÄ·Ç¸ºµÄÃÝ¡£
-    // ½«Ê¹ÓÃ×îÐ¡¶þ³ËÄâºÏËã·¨£¬
-    // µ«ÊäÈëÊý¾Ý(x,y,z,w) Ê×ÏÈ±»Ó³Éäµ½[-1,1]^4 ¶ÔÊýÖµÂ³°ôÐÔ¡£
+    // è¿™é‡Œ<p[i],q[i],r[i]> ç”±è°ƒç”¨è€…æä¾›ä¸åŒçš„éžè´Ÿçš„å¹‚ã€‚
+    // å°†ä½¿ç”¨æœ€å°äºŒä¹˜æ‹Ÿåˆç®—æ³•ï¼Œ
+    // ä½†è¾“å…¥æ•°æ®(x,y,z,w) é¦–å…ˆè¢«æ˜ å°„åˆ°[-1,1]^4 å¯¹æ•°å€¼é²æ£’æ€§ã€‚
 
     template <typename Real>
     class PolynomialFit4Powers final
@@ -38,10 +38,10 @@ namespace Mathematics
         using MathType = Math<Real>;
 
     public:
-        // ¹¹Ôìº¯ÊýÊÇÊý¾Ý(x[i],y[i],z[i],w[i])£¬·Ö±ðÎª0 <= i < numSamples¡£
-        // µ±isRepackage ÎªtrueÊ±£¬¹¹Ôìº¯ÊýÊÇÊý¾Ý(x[i],y[j],z[k],w[m]),
-        // ÆäÖÐ£¬0 <= i < numXSamples, 0 <= j < numYSamples,
-        //  0 <= k < numZSamples ºÍ m = i + numXSamples*(j + numYSamples*k)
+        // æž„é€ å‡½æ•°æ˜¯æ•°æ®(x[i],y[i],z[i],w[i])ï¼Œåˆ†åˆ«ä¸º0 <= i < numSamplesã€‚
+        // å½“isRepackage ä¸ºtrueæ—¶ï¼Œæž„é€ å‡½æ•°æ˜¯æ•°æ®(x[i],y[j],z[k],w[m]),
+        // å…¶ä¸­ï¼Œ0 <= i < numXSamples, 0 <= j < numYSamples,
+        //  0 <= k < numZSamples å’Œ m = i + numXSamples*(j + numYSamples*k)
 
         PolynomialFit4Powers(const Samples& xSamples,
                              const Samples& ySamples,
@@ -52,8 +52,8 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        // ÕâÊÇÒ»¸ö¹¦ÄÜÀà£¬Èç¹û½âÏßÐÔ·½³Ì×é³É¹¦Ôò·µ»Ø¡°true¡±¡£
-        // Èç¹û²»³É¹¦£¬Ôò¶àÏîÊ½ÇóÖµÊÇÎÞÐ§µÄ£¬×ÜÊÇ·µ»Øfalse¡£
+        // è¿™æ˜¯ä¸€ä¸ªåŠŸèƒ½ç±»ï¼Œå¦‚æžœè§£çº¿æ€§æ–¹ç¨‹ç»„æˆåŠŸåˆ™è¿”å›žâ€œtrueâ€ã€‚
+        // å¦‚æžœä¸æˆåŠŸï¼Œåˆ™å¤šé¡¹å¼æ±‚å€¼æ˜¯æ— æ•ˆçš„ï¼Œæ€»æ˜¯è¿”å›žfalseã€‚
         NODISCARD bool IsSolveSucceed() const noexcept;
 
         NODISCARD Real GetXMin() const;
@@ -65,8 +65,8 @@ namespace Mathematics
         NODISCARD Real GetWMin() const;
         NODISCARD Real GetWMax() const;
 
-        // ÄâºÏ¶àÏîÊ½µÄµÄÆÀ¹À¡£
-        // ÅÉÉúÀà¿ÉÒÔÖØÐ´´ËÊµÏÖ£¬ÓÐÐ§·½·¨»ùÓÚÓÐ¹Ø´«µÝ¸ø¹¹Ôìº¯ÊýµÄ¾ßÌåÃÝµÄÖªÊ¶¡£
+        // æ‹Ÿåˆå¤šé¡¹å¼çš„çš„è¯„ä¼°ã€‚
+        // æ´¾ç”Ÿç±»å¯ä»¥é‡å†™æ­¤å®žçŽ°ï¼Œæœ‰æ•ˆæ–¹æ³•åŸºäºŽæœ‰å…³ä¼ é€’ç»™æž„é€ å‡½æ•°çš„å…·ä½“å¹‚çš„çŸ¥è¯†ã€‚
         NODISCARD Real operator()(Real x, Real y, Real z) const;
 
     private:

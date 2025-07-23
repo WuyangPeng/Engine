@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 16:32)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 16:32)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_BOX3_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT3_BOX3_DETAIL_H
@@ -58,10 +58,10 @@ typename Mathematics::DistancePoint3Box3<Real>::DistanceResult Mathematics::Dist
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    // ÔÚ°üÎ§ºĞµÄ×ø±êÏµÖĞ¹¤×÷¡£
+    // åœ¨åŒ…å›´ç›’çš„åæ ‡ç³»ä¸­å·¥ä½œã€‚
     auto difference = point - box.GetCenter();
 
-    // ¼ÆËãÆ½·½¾àÀëºÍ°üÎ§ºĞÉÏµÄ×î½üµã¡£
+    // è®¡ç®—å¹³æ–¹è·ç¦»å’ŒåŒ…å›´ç›’ä¸Šçš„æœ€è¿‘ç‚¹ã€‚
     Vector3Type closest{ Vector3ToolsType::DotProduct(difference, box.GetAxis0()),
                      Vector3ToolsType::DotProduct(difference, box.GetAxis1()),
                      Vector3ToolsType::DotProduct(difference, box.GetAxis2()) };

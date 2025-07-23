@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 16:27)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 16:27)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_CIRCLE3_CIRCLE3_ACHIEVE_H
 #define MATHEMATICS_DISTANCE_DISTANCE_CIRCLE3_CIRCLE3_ACHIEVE_H
@@ -79,40 +79,40 @@ typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathematics::
     const auto b4 = -lhsCircle.GetRadius() * u0v1;
     const auto b5 = -lhsCircle.GetRadius() * v0v1;
 
-    // ¼ÆËã¶àÏîÊ½ p0 = p00 + p01 * z + p02 * z^2.
+    // è®¡ç®—å¤šé¡¹å¼ p0 = p00 + p01 * z + p02 * z^2.
     Polynomial<Real> p0{ 2 };
     p0[0] = a2 * b1 - a5 * b2;
     p0[1] = a0 * b4 - a3 * b5;
     p0[2] = a5 * b2 - a2 * b1 + a1 * b4 - a4 * b5;
 
-    // ¼ÆËã¶àÏîÊ½ p1 = p10 + p11 * z.
+    // è®¡ç®—å¤šé¡¹å¼ p1 = p10 + p11 * z.
     Polynomial<Real> p1{ 1 };
     p1[0] = a0 * b1 - a3 * b2;
     p1[1] = a1 * b1 - a5 * b5 + a2 * b4 - a4 * b2;
 
-    // ¼ÆËã¶àÏîÊ½ q0 = q00 + q01 * z + q02 * z^2.
+    // è®¡ç®—å¤šé¡¹å¼ q0 = q00 + q01 * z + q02 * z^2.
     Polynomial<Real> q0{ 2 };
     q0[0] = a0 * a0 + a2 * a2 + a3 * a3 + a5 * a5;
     q0[1] = MathType::GetValue(2) * (a0 * a1 + a3 * a4);
     q0[2] = a1 * a1 - a2 * a2 + a4 * a4 - a5 * a5;
 
-    // ¼ÆËã¶àÏîÊ½ q1 = q10 + q11 * z.
+    // è®¡ç®—å¤šé¡¹å¼ q1 = q10 + q11 * z.
     Polynomial<Real> q1{ 1 };
     q1[0] = MathType::GetValue(2) * (a0 * a2 + a3 * a5);
     q1[1] = MathType::GetValue(2) * (a1 * a2 + a4 * a5);
 
-    // ¼ÆËãÏµÊı r0 = r00+r02*z^2.
+    // è®¡ç®—ç³»æ•° r0 = r00+r02*z^2.
     Polynomial<Real> r0{ 2 };
     r0[0] = b0 * b0;
     r0[1] = MathType::GetValue(0);
     r0[2] = b3 * b3 - b0 * b0;
 
-    // ¼ÆËã¶àÏîÊ½ r1 = r11 * z.
+    // è®¡ç®—å¤šé¡¹å¼ r1 = r11 * z.
     Polynomial<Real> r1{ 1 };
     r1[0] = MathType::GetValue(0);
     r1[1] = MathType::GetValue(2) * b0 * b3;
 
-    // ¼ÆËã¶àÏîÊ½ g0 = g00 + g01 * z + g02 * z^2 + g03 * z^3 + g04 * z^4.
+    // è®¡ç®—å¤šé¡¹å¼ g0 = g00 + g01 * z + g02 * z^2 + g03 * z^3 + g04 * z^4.
     Polynomial<Real> g0{ 4 };
     g0[0] = p0[0] * p0[0] + p1[0] * p1[0] - q0[0] * r0[0];
     g0[1] = MathType::GetValue(2) * (p0[0] * p0[1] + p1[0] * p1[1]) - q0[1] * r0[0] - q1[0] * r1[1];
@@ -126,14 +126,14 @@ typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathematics::
     g0[3] = MathType::GetValue(2) * (p0[1] * p0[2] - p1[0] * p1[1]) - q0[1] * r0[2] + q1[0] * r1[1];
     g0[4] = p0[2] * p0[2] - p1[1] * p1[1] - q0[2] * r0[2] + q1[1] * r1[1];
 
-    // ¼ÆËã¶àÏîÊ½ g1 = g10 + g11 * z + g12 * z^2 + g13 * z^3.
+    // è®¡ç®—å¤šé¡¹å¼ g1 = g10 + g11 * z + g12 * z^2 + g13 * z^3.
     Polynomial<Real> g1{ 3 };
     g1[0] = MathType::GetValue(2) * p0[0] * p1[0] - q1[0] * r0[0];
     g1[1] = MathType::GetValue(2) * (p0[1] * p1[0] + p0[0] * p1[1]) - q1[1] * r0[0] - q0[0] * r1[1];
     g1[2] = MathType::GetValue(2) * (p0[2] * p1[0] + p0[1] * p1[1]) - q1[0] * r0[2] - q0[1] * r1[1];
     g1[3] = MathType::GetValue(2) * p0[2] * p1[1] - q1[1] * r0[2] - q0[2] * r1[1];
 
-    // ¼ÆËã¶àÏîÊ½ h = sum_{i=0}^8 h_i z^i.
+    // è®¡ç®—å¤šé¡¹å¼ h = sum_{i=0}^8 h_i z^i.
     Polynomial<Real> h{ 8 };
     h[0] = g0[0] * g0[0] - g1[0] * g1[0];
     h[1] = MathType::GetValue(2) * (g0[0] * g0[1] - g1[0] * g1[1]);
@@ -152,15 +152,15 @@ typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathematics::
     PolynomialRoots<Real> polyroots{ this->GetZeroThreshold() };
     if (!polyroots.FindBisection(h, static_cast<Real>(-1.01), static_cast<Real>(1.01), 6))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("FindBisectionÊ§°Ü"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("FindBisectionå¤±è´¥"s));
     }
 
     for (auto iter = polyroots.GetBegin(); iter != polyroots.GetEnd(); ++iter)
     {
         auto rhsCosValue = MathType::GetNumericalRoundOff(*iter, MathType::GetValue(-1), MathType::GetValue(1));
 
-        // ÄãÒ²¿ÉÒÔ³¢ÊÔrhsSinValue = -g0£¨rhsCosValue£©/ g1£¨rhsCosValue£©±ÜÃâsqrtµ÷ÓÃ£¬
-        // µ«ÒªĞ¡ĞÄg1¼¸ºõÎªÁã¡£ ÏÖÔÚÎÒÊ¹ÓÃg0ºÍg1À´È·¶¨rhsSinValueµÄ·ûºÅ¡£
+        // ä½ ä¹Ÿå¯ä»¥å°è¯•rhsSinValue = -g0ï¼ˆrhsCosValueï¼‰/ g1ï¼ˆrhsCosValueï¼‰é¿å…sqrtè°ƒç”¨ï¼Œ
+        // ä½†è¦å°å¿ƒg1å‡ ä¹ä¸ºé›¶ã€‚ ç°åœ¨æˆ‘ä½¿ç”¨g0å’Œg1æ¥ç¡®å®šrhsSinValueçš„ç¬¦å·ã€‚
         auto rhsSinValue = MathType::Sqrt(MathType::FAbs(MathType::GetValue(1) - rhsCosValue * rhsCosValue));
 
         auto g0cs1 = g0(rhsCosValue);
@@ -172,7 +172,7 @@ typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathematics::
         }
         else if (product < MathType::GetValue(0))
         {
-            // rhsSinValueÒÑ¾­ÓĞÕıÈ·µÄ·ûºÅ
+            // rhsSinValueå·²ç»æœ‰æ­£ç¡®çš„ç¬¦å·
         }
         else if (!MathType::Approximate(g1cs1, MathType::GetValue(0), this->GetZeroThreshold()))
         {
@@ -181,10 +181,10 @@ typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathematics::
         }
         else  // g1 == 0.0
         {
-            // µ±g1 = 0Ê±£¬¶ÔrhsSinValueÃ»ÓĞÔ¼Êø¡£
-            // ÕâÀïÓ¦¸Ã×öÊ²Ã´£¿ ÔÚÕâÖÖÇé¿öÏÂ£¬rhsSinValueÊÇËÄ´Î·½³Ìg0£¨rhsSinValue£©= 0µÄ¸ù¡£
-            // ÊÇ·ñÓĞ¼¸ºÎÒâÒå£¿
-            MATHEMATICS_ASSERTION_2(false, "ÒâÍâÇé¿ö\n");
+            // å½“g1 = 0æ—¶ï¼Œå¯¹rhsSinValueæ²¡æœ‰çº¦æŸã€‚
+            // è¿™é‡Œåº”è¯¥åšä»€ä¹ˆï¼Ÿ åœ¨è¿™ç§æƒ…å†µä¸‹ï¼ŒrhsSinValueæ˜¯å››æ¬¡æ–¹ç¨‹g0ï¼ˆrhsSinValueï¼‰= 0çš„æ ¹ã€‚
+            // æ˜¯å¦æœ‰å‡ ä½•æ„ä¹‰ï¼Ÿ
+            MATHEMATICS_ASSERTION_2(false, "æ„å¤–æƒ…å†µ\n");
         }
 
         auto m00 = a0 + a1 * rhsCosValue + a2 * rhsSinValue;
@@ -198,7 +198,7 @@ typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathematics::
             auto lhsCosValue = lambda * m00 / det;
             auto lhsSinValue = -lambda * m01 / det;
 
-            // ÔÚÊıÖµ´íÎóµÄÇé¿öÏÂµ¥Î»»¯¡£ Èç¹ûÄú¶ÔlhsCosValueºÍlhsSinValueµÄ×¼È·ĞÔÓĞĞÅĞÄ£¬ÇëÉ¾³ı¡£
+            // åœ¨æ•°å€¼é”™è¯¯çš„æƒ…å†µä¸‹å•ä½åŒ–ã€‚ å¦‚æœæ‚¨å¯¹lhsCosValueå’ŒlhsSinValueçš„å‡†ç¡®æ€§æœ‰ä¿¡å¿ƒï¼Œè¯·åˆ é™¤ã€‚
             auto tmp = MathType::InvSqrt(lhsCosValue * lhsCosValue + lhsSinValue * lhsSinValue);
             lhsCosValue *= tmp;
             lhsSinValue *= tmp;
@@ -219,8 +219,8 @@ typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathematics::
         }
         else
         {
-            // ´¦ÀíÕâÖÖÇé¿ö¡£ÓĞ¼¸ºÎÒâÒåÂğ£¿
-            MATHEMATICS_ASSERTION_2(false, "ÒâÍâÇé¿ö\n");
+            // å¤„ç†è¿™ç§æƒ…å†µã€‚æœ‰å‡ ä½•æ„ä¹‰å—ï¼Ÿ
+            MATHEMATICS_ASSERTION_2(false, "æ„å¤–æƒ…å†µ\n");
         }
     }
 

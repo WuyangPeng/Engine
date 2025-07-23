@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 14:53)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 14:53)
 
 #include "Framework/FrameworkExport.h"
 
@@ -52,12 +52,12 @@ void Framework::OpenGLGlutCallBackInterface::SetWindowId(int aWindowId)
 
     if (aWindowId == 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÉèÖÃµÄ´°¿ÚIDÎªÁã£¡"))
+        THROW_EXCEPTION(SYSTEM_TEXT("è®¾ç½®çš„çª—å£IDä¸ºé›¶ï¼"))
     }
 
     if (windowId != 0 && windowId != aWindowId)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("²»ÔÊĞíÖØ¸´ÉèÖÃ´°¿ÚId!"))
+        THROW_EXCEPTION(SYSTEM_TEXT("ä¸å…è®¸é‡å¤è®¾ç½®çª—å£Id!"))
     }
 
     windowId = aWindowId;
@@ -233,7 +233,7 @@ bool Framework::OpenGLGlutCallBackInterface::TimerFunction(TimerFunctionCallback
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("º¯ÊıÖ¸Õë²»ÄÜÎª¿Õ!"))
+        THROW_EXCEPTION(SYSTEM_TEXT("å‡½æ•°æŒ‡é’ˆä¸èƒ½ä¸ºç©º!"))
     }
 
     return true;
@@ -256,7 +256,7 @@ void Framework::OpenGLGlutCallBackInterface::DestroyWindow()
 
     if (windowId == 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("´°¿ÚIdÎªÁã!"))
+        THROW_EXCEPTION(SYSTEM_TEXT("çª—å£Idä¸ºé›¶!"))
     }
 
     const auto window = windowId;

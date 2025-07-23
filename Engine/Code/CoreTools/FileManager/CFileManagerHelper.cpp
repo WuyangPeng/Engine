@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/01 10:48)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/01 10:48)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -33,7 +33,7 @@ CoreTools::FileBuffer CoreTools::CFileManagerHelper::LoadFromFile(const String& 
     if (const auto result = manager.ReadFromFile(sizeof(char), buffer.GetSize(), buffer.GetBufferBegin());
         bufferSize != boost::numeric_cast<int>(result))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¶ÁÈ¡µÄÎÄ¼ş´óĞ¡²»Ò»ÖÂ£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¯»å–çš„æ–‡ä»¶å¤§å°ä¸ä¸€è‡´ï¼"s))
     }
 
     return buffer;
@@ -51,15 +51,15 @@ std::string CoreTools::CFileManagerHelper::LoadFromFile(const std::string& fileN
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎÄ¼ş²»´æÔÚ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ–‡ä»¶ä¸å­˜åœ¨ã€‚"s))
     }
 }
 
 void CoreTools::CFileManagerHelper::SaveIntoFile(const String& fileName, bool binaryFile, int bufferSize, const char* buffer)
 {
-    /// ÊäÈë»º³åÇø±ØĞë´æÔÚ¡£ÑéÖ¤¸Ã»º³åÇø¾ßÓĞÖ¸¶¨µÄ×Ö½ÚÊıÊÇ²»¿ÉÄÜµÄ¡£
-    CORE_TOOLS_ASSERTION_0(buffer != nullptr, "´«ÈëµÄÖ¸ÕëÎª¿Õ£¡");
-    CORE_TOOLS_ASSERTION_2(0 < bufferSize, "´«ÈëµÄ»º³åÇø´óĞ¡Ğ¡ÓÚ»òµÈÓÚÁã£¡");
+    /// è¾“å…¥ç¼“å†²åŒºå¿…é¡»å­˜åœ¨ã€‚éªŒè¯è¯¥ç¼“å†²åŒºå…·æœ‰æŒ‡å®šçš„å­—èŠ‚æ•°æ˜¯ä¸å¯èƒ½çš„ã€‚
+    CORE_TOOLS_ASSERTION_0(buffer != nullptr, "ä¼ å…¥çš„æŒ‡é’ˆä¸ºç©ºï¼");
+    CORE_TOOLS_ASSERTION_2(0 < bufferSize, "ä¼ å…¥çš„ç¼“å†²åŒºå¤§å°å°äºæˆ–ç­‰äºé›¶ï¼");
 
     const auto mode = binaryFile ? SYSTEM_TEXT("wb"s) : SYSTEM_TEXT("wt"s);
 
@@ -68,15 +68,15 @@ void CoreTools::CFileManagerHelper::SaveIntoFile(const String& fileName, bool bi
     if (const auto result = manager.WriteToFile(sizeof(char), bufferSize, buffer);
         bufferSize != boost::numeric_cast<int>(result))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ğ´ÈëµÄÎÄ¼ş´óĞ¡²»Ò»ÖÂ£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å†™å…¥çš„æ–‡ä»¶å¤§å°ä¸ä¸€è‡´ï¼"s))
     }
 }
 
 void CoreTools::CFileManagerHelper::AppendToFile(const String& fileName, bool binaryFile, int bufferSize, const char* buffer)
 {
-    /// ÊäÈë»º³åÇø±ØĞë´æÔÚ¡£ÑéÖ¤¸Ã»º³åÇø¾ßÓĞÖ¸¶¨µÄ×Ö½ÚÊıÊÇ²»¿ÉÄÜµÄ¡£
-    CORE_TOOLS_ASSERTION_0(buffer != nullptr, "´«ÈëµÄÖ¸ÕëÎª¿Õ£¡");
-    CORE_TOOLS_ASSERTION_2(0 < bufferSize, "´«ÈëµÄ»º³åÇø´óĞ¡Ğ¡ÓÚ»òµÈÓÚÁã£¡");
+    /// è¾“å…¥ç¼“å†²åŒºå¿…é¡»å­˜åœ¨ã€‚éªŒè¯è¯¥ç¼“å†²åŒºå…·æœ‰æŒ‡å®šçš„å­—èŠ‚æ•°æ˜¯ä¸å¯èƒ½çš„ã€‚
+    CORE_TOOLS_ASSERTION_0(buffer != nullptr, "ä¼ å…¥çš„æŒ‡é’ˆä¸ºç©ºï¼");
+    CORE_TOOLS_ASSERTION_2(0 < bufferSize, "ä¼ å…¥çš„ç¼“å†²åŒºå¤§å°å°äºæˆ–ç­‰äºé›¶ï¼");
 
     const auto mode = binaryFile ? SYSTEM_TEXT("ab"s) : SYSTEM_TEXT("at"s);
 
@@ -85,7 +85,7 @@ void CoreTools::CFileManagerHelper::AppendToFile(const String& fileName, bool bi
     if (const auto result = manager.WriteToFile(sizeof(char), bufferSize, buffer);
         bufferSize != boost::numeric_cast<int>(result))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ğ´ÈëµÄÎÄ¼ş´óĞ¡²»Ò»ÖÂ£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å†™å…¥çš„æ–‡ä»¶å¤§å°ä¸ä¸€è‡´ï¼"s))
     }
 }
 

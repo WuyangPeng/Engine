@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/05/03 23:21)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/05/03 23:21)
 
 #include "IFileStreamManagerTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -35,7 +35,7 @@ void CoreTools::IFileStreamManagerTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(IFileStreamManagerDeleteBackupFileTest);
     ASSERT_NOT_THROW_EXCEPTION_0(SeparateTest);
 
-    /// ÎÄ¼şÒÑÉ¾³ı£¬²âÊÔÕÒ²»µ½
+    /// æ–‡ä»¶å·²åˆ é™¤ï¼Œæµ‹è¯•æ‰¾ä¸åˆ°
     ASSERT_THROW_EXCEPTION_0(IFileStreamManagerBackupFileTest);
 }
 
@@ -63,11 +63,11 @@ void CoreTools::IFileStreamManagerTesting::IFileStreamManagerSucceedTest()
 
 void CoreTools::IFileStreamManagerTesting::BackupFileTest(const String& fileStreamFileContent, const IFileStreamManager& manager)
 {
-    /// ±¸·İÁ½´Î
+    /// å¤‡ä»½ä¸¤æ¬¡
     backupFile = manager.BackupFile();
     backupFile = manager.BackupFile();
 
-    /// ²âÊÔÁ½´Î
+    /// æµ‹è¯•ä¸¤æ¬¡
     ASSERT_EQUAL(manager.GetFileContent(), fileStreamFileContent);
     ASSERT_EQUAL(manager.GetFileContent(), fileStreamFileContent);
 }

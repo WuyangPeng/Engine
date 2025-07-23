@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/12 15:19)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/12 15:19)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_STATE_MACHINE_H
 #define CORE_TOOLS_STATE_MACHINE_STATE_MACHINE_H
@@ -52,25 +52,25 @@ namespace CoreTools
     };
 }
 
-/// Ê¹ÓÃStateMachineµÄ·½Ê½£º
+/// ä½¿ç”¨StateMachineçš„æ–¹å¼ï¼š
 
-/// µÚÒ»²½£º¶¨ÒåÏÂÁĞµÄÀà£º
+/// ç¬¬ä¸€æ­¥ï¼šå®šä¹‰ä¸‹åˆ—çš„ç±»ï¼š
 /// struct Play { };
 /// struct OpenClose {};
 /// struct CdDetected { CdDetected(char const*, std::vector<std::clock_t> const&) { } };
 /// struct Pause { };
 /// struct Stop { };
-/// ÕâĞ©Àà¿ÉÒÔÊ¹ÓÃ·ÇÄ¬ÈÏ¹¹Ôìº¯Êı¹¹Ôì¡£
+/// è¿™äº›ç±»å¯ä»¥ä½¿ç”¨éé»˜è®¤æ„é€ å‡½æ•°æ„é€ ã€‚
 
-/// µÚ¶ş²½£º¶¨Òå×´Ì¬Ã¶¾Ù»òÊ¹ÓÃÕûĞÍ£º
+/// ç¬¬äºŒæ­¥ï¼šå®šä¹‰çŠ¶æ€æšä¸¾æˆ–ä½¿ç”¨æ•´å‹ï¼š
 /// enum class States {
 /// Empty, Open, Stopped, Playing, Paused };
 
-/// µÚÈı²½£º¶¨ÒåÀà¼Ì³ĞÓÚStateMachine
+/// ç¬¬ä¸‰æ­¥ï¼šå®šä¹‰ç±»ç»§æ‰¿äºStateMachine
 /// class Player : public StateMachine<Player,States>
-/// ÀàPlayerĞèÒª¶¨ÒåÒÔÏÂº¯Êı£º
+/// ç±»Playeréœ€è¦å®šä¹‰ä»¥ä¸‹å‡½æ•°ï¼š
 /// static const StatesFlags sm_InitialState = States::Empty;
-/// Ò»¸öÄÚ²¿Àà£º
+/// ä¸€ä¸ªå†…éƒ¨ç±»ï¼š
 /// struct TransitionTable : boost::mpl::vector11<
 ///                 Derived  States  Start            Event      Next             Action
 /// StateMachineRow <Player, States, States::Stopped, Play,      States::Playing, &Player::StartPlayback>,
@@ -86,7 +86,7 @@ namespace CoreTools
 /// StateMachineRow <Player, States, States::Paused,  OpenClose, States::Open,    &Player::StopAndOpen>
 /// > {};
 
-/// Ê¹ÓÃ£º
+/// ä½¿ç”¨ï¼š
 /// Player player{};
 /// player.ProcessEvent(OpenClose());
 /// player.ProcessEvent(OpenClose());

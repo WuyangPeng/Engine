@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.5 (2024/02/05 09:20)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.5 (2024/02/05 09:20)
 
 #ifndef MATHEMATICS_ALGEBRA_VARIABLE_LENGTH_VECTOR_DETAIL_H
 #define MATHEMATICS_ALGEBRA_VARIABLE_LENGTH_VECTOR_DETAIL_H
@@ -106,7 +106,7 @@ void Mathematics::VariableLengthVector<Real>::SetSize(int size)
 
     if (size < 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("sizeÎª¸ºÊı£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("sizeä¸ºè´Ÿæ•°ï¼"s));
     }
 
     container.resize(size);
@@ -145,7 +145,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 
     if (container.size() != rhs.container.size())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÏòÁ¿´óĞ¡²»Í¬£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å‘é‡å¤§å°ä¸åŒï¼"s))
     }
 
     for (auto i = 0u; i < container.size(); ++i)
@@ -164,7 +164,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 
     if (container.size() != rhs.container.size())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÏòÁ¿´óĞ¡²»Í¬£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("å‘é‡å¤§å°ä¸åŒï¼"s));
     }
 
     for (auto i = 0u; i < container.size(); ++i)
@@ -201,7 +201,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
     }
     else
     {
-        MATHEMATICS_ASSERTION_0(false, "³ıÁã´íÎó£¡");
+        MATHEMATICS_ASSERTION_0(false, "é™¤é›¶é”™è¯¯ï¼");
 
         MakeZero();
     }
@@ -444,7 +444,7 @@ Real Mathematics::Dot(const VariableLengthVector<Real>& lhs, const VariableLengt
 {
     if (lhs.GetSize() != rhs.GetSize())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÏòÁ¿´óĞ¡²»Í¬£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("å‘é‡å¤§å°ä¸åŒï¼"s));
     }
 
     Real dotProduct{};
@@ -463,7 +463,7 @@ bool Mathematics::Approximate(const VariableLengthVector<Real>& lhs, const Varia
 {
     if (lhs.GetSize() != rhs.GetSize())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÏòÁ¿´óĞ¡²»Í¬£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("å‘é‡å¤§å°ä¸åŒï¼"s));
     }
 
     for (auto i = 0; i < lhs.GetSize(); ++i)
@@ -487,7 +487,7 @@ Real Mathematics::Orthonormalize(int numInputs, std::vector<VariableLengthVector
         {
             if (vector.at(0).GetSize() != vector.at(i).GetSize())
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("´óĞ¡²»Æ¥Åä¡£"))
+                THROW_EXCEPTION(SYSTEM_TEXT("å¤§å°ä¸åŒ¹é…ã€‚"))
             }
         }
 
@@ -511,7 +511,7 @@ Real Mathematics::Orthonormalize(int numInputs, std::vector<VariableLengthVector
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§ÊäÈë¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆè¾“å…¥ã€‚"))
     }
 }
 
@@ -525,7 +525,7 @@ void Mathematics::ComputeExtremes(int numVectors, const std::vector<VariableLeng
         {
             if (vector.at(0).GetSize() != vector.at(i).GetSize())
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("´óĞ¡²»Æ¥Åä¡£"))
+                THROW_EXCEPTION(SYSTEM_TEXT("å¤§å°ä¸åŒ¹é…ã€‚"))
             }
         }
 
@@ -550,7 +550,7 @@ void Mathematics::ComputeExtremes(int numVectors, const std::vector<VariableLeng
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎŞĞ§ÊäÈë¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ— æ•ˆè¾“å…¥ã€‚"))
     }
 }
 
@@ -641,7 +641,7 @@ std::ostream& Mathematics::operator<<(std::ostream& outFile, const VariableLengt
 {
     for (auto i = 0; i < vector.GetSize(); ++i)
     {
-        outFile << "(" << i << ")=" << vector[i] << "¡¡";
+        outFile << "(" << i << ")=" << vector[i] << "ã€€";
     }
 
     return outFile;

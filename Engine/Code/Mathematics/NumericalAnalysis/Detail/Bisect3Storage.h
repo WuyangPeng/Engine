@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 13:53)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 13:53)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_STORAGE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_STORAGE_H
@@ -168,7 +168,7 @@ namespace Mathematics
     private:
         const Bisect3Type& bisect;
 
-        // ¶¥µãºÍÖĞµãµÄÎ»ÖÃ¡£
+        // é¡¶ç‚¹å’Œä¸­ç‚¹çš„ä½ç½®ã€‚
         Real beginPointX;
         Real endPointX;
         Real midpointX;
@@ -179,7 +179,7 @@ namespace Mathematics
         Real endPointZ;
         Real midpointZ;
 
-        // ¶¥µã
+        // é¡¶ç‚¹
         Real beginXBeginYBeginZ0;
         Real endXBeginYBeginZ0;
         Real beginXEndYBeginZ0;
@@ -205,7 +205,7 @@ namespace Mathematics
         Real beginXEndYEndZ2;
         Real endXEndYEndZ2;
 
-        // ±ß
+        // è¾¹
         Real beginXBeginYMidZ0;
         Real endXBeginYMidZ0;
         Real beginXEndYMidZ0;
@@ -251,7 +251,7 @@ namespace Mathematics
         Real midXBeginYEndZ2;
         Real midXEndYEndZ2;
 
-        // Ãæ
+        // é¢
         Real beginXMidYMidZ0;
         Real midXBeginYMidZ0;
         Real midXMidYBeginZ0;
@@ -273,7 +273,7 @@ namespace Mathematics
         Real midXEndYMidZ2;
         Real midXMidYEndZ2;
 
-        // ÖĞĞÄ
+        // ä¸­å¿ƒ
         Real midXMidYMidZ0;
         Real midXMidYMidZ1;
         Real midXMidYMidZ2;

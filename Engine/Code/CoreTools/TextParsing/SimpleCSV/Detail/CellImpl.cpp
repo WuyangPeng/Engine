@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 11:00)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 11:00)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -138,7 +138,7 @@ CoreTools::SimpleCSV::CellImpl::SharedStringsSharedPtr CoreTools::SimpleCSV::Cel
 
     if (sharedStringsSharedPtr == nullptr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("sharedStringsÒÑ±»ÊÍ·Å¡£"s))
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("sharedStringså·²è¢«é‡Šæ”¾ã€‚"s))
     }
 
     return sharedStringsSharedPtr;
@@ -157,7 +157,7 @@ void CoreTools::SimpleCSV::CellImpl::CheckDocument() const
 {
     if (document.expired())
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("documentÒÑ±»ÊÍ·Å¡£"s))
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("documentå·²è¢«é‡Šæ”¾ã€‚"s))
     }
 }
 

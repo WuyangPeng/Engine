@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:22)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:22)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_HALFSPACE3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_HALFSPACE3_TRIANGLE3_DETAIL_H
@@ -55,7 +55,7 @@ Mathematics::Triangle3<Real> Mathematics::StaticFindIntersectorHalfspace3Triangl
 template <typename Real>
 void Mathematics::StaticFindIntersectorHalfspace3Triangle3<Real>::Find()
 {
-    // ´ÓÈı½ÇĞÎ¿ªÊ¼£¬È»ºó½«Æä²Ã¼ôÔÚÆ½ÃæÉÏ¡£
+    // ä»ä¸‰è§’å½¢å¼€å§‹ï¼Œç„¶åå°†å…¶è£å‰ªåœ¨å¹³é¢ä¸Šã€‚
 
     auto container = IntersectorUtility3<Real>::ClipConvexPolygonAgainstPlane(-halfspace.GetNormal(), -halfspace.GetConstant(), triangle.GetVertex());
 
@@ -106,7 +106,7 @@ Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorHalfspace3Triangle3
             return point1;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Ë÷ÒıÔ½½ç\n"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•è¶Šç•Œ\n"s));
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_HALFSPACE3_TRIANGLE3_DETAIL_H

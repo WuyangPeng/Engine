@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 11:13)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 11:13)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -49,7 +49,7 @@ CoreTools::SimpleCSV::RowDataProxyImpl& CoreTools::SimpleCSV::RowDataProxyImpl::
 
     if (!documentSharedPtr || !rowSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document»òrowÒÑ±»ÊÍ·Å¡£"s))
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("documentæˆ–rowå·²è¢«é‡Šæ”¾ã€‚"s))
     }
 
     auto columnSize = boost::numeric_cast<int>(values.size());
@@ -76,14 +76,14 @@ CoreTools::SimpleCSV::RowDataProxyImpl& CoreTools::SimpleCSV::RowDataProxyImpl::
 
     if (gMaxColumns < values.size())
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Overflow, "ÈİÆ÷´óĞ¡³¬¹ı×î´óÁĞÊı¡£\n"s)
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Overflow, "å®¹å™¨å¤§å°è¶…è¿‡æœ€å¤§åˆ—æ•°ã€‚\n"s)
     }
 
     const auto documentSharedPtr = document.lock();
 
     if (!documentSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("documentÒÑ±»ÊÍ·Å¡£"s))
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("documentå·²è¢«é‡Šæ”¾ã€‚"s))
     }
 
     if (values.empty())
@@ -118,7 +118,7 @@ CoreTools::SimpleCSV::RowDataProxyImpl::CellValueContainer CoreTools::SimpleCSV:
 
     if (!documentSharedPtr || !rowSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document»òrowÒÑ±»ÊÍ·Å¡£"s))
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("documentæˆ–rowå·²è¢«é‡Šæ”¾ã€‚"s))
     }
 
     const auto numCells = (rowNode.last_child() == XMLNode{} ? 0 : CellReference{ rowNode.last_child().attribute(TextParsing::gAttributeR.data()).value() }.GetColumn());
@@ -144,7 +144,7 @@ CoreTools::SimpleCSV::RowDataProxyImpl::SharedStringsSharedPtr CoreTools::Simple
 
     if (!rowSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("rowÒÑ±»ÊÍ·Å¡£"s))
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("rowå·²è¢«é‡Šæ”¾ã€‚"s))
     }
 
     return rowSharedPtr->GetSharedStrings();
@@ -180,7 +180,7 @@ void CoreTools::SimpleCSV::RowDataProxyImpl::PrependCellValue(const CellValue& v
 
     if (!documentSharedPtr || !rowSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document»òrowÒÑ±»ÊÍ·Å¡£"s))
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("documentæˆ–rowå·²è¢«é‡Šæ”¾ã€‚"s))
     }
 
     auto curNode = rowNode.prepend_child(TextParsing::gChildC.data());
@@ -194,7 +194,7 @@ CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::RowDataProxyImpl::GetRowNode
 
     if (document.expired())
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("documentÒÑ±»ÊÍ·Å¡£"s))
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("documentå·²è¢«é‡Šæ”¾ã€‚"s))
     }
 
     return rowNode;
@@ -217,7 +217,7 @@ CoreTools::SimpleCSV::ConstXMLDocumentSharedPtr CoreTools::SimpleCSV::RowDataPro
 
     if (!documentSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document ÒÑ±»ÊÍ·Å¡£"s))
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document å·²è¢«é‡Šæ”¾ã€‚"s))
     }
 
     return documentSharedPtr;

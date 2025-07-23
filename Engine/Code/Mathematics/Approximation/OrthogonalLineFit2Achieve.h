@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:14)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:14)
 
 #ifndef MATHEMATICS_APPROXIMATION_ORTHOGONAL_LINT_FIT2_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_ORTHOGONAL_LINT_FIT2_ACHIEVE_H
@@ -45,7 +45,7 @@ Mathematics::Line2<Real> Mathematics::OrthogonalLineFit2<Real>::GetLine2() const
 template <typename Real>
 typename Mathematics::OrthogonalLineFit2<Real>::Line2Type Mathematics::OrthogonalLineFit2<Real>::Calculate(const Points& points)
 {
-    // ¼ÆËãµãµÄÆ½¾ùÖµ¡£
+    // è®¡ç®—ç‚¹çš„å¹³å‡å€¼ã€‚
     Vector2Type origin{};
     for (const auto& point : points)
     {
@@ -54,7 +54,7 @@ typename Mathematics::OrthogonalLineFit2<Real>::Line2Type Mathematics::Orthogona
 
     origin /= boost::numeric_cast<Real>(points.size());
 
-    // ¼ÆËãµãµÄĞ­·½²î¾ØÕó¡£
+    // è®¡ç®—ç‚¹çš„åæ–¹å·®çŸ©é˜µã€‚
     auto sumXX = MathType::GetValue(0);
     auto sumXY = MathType::GetValue(0);
     auto sumYY = MathType::GetValue(0);
@@ -70,17 +70,17 @@ typename Mathematics::OrthogonalLineFit2<Real>::Line2Type Mathematics::Orthogona
     sumXY /= boost::numeric_cast<Real>(points.size());
     sumYY /= boost::numeric_cast<Real>(points.size());
 
-    // ½¨Á¢ eigensolver.
+    // å»ºç«‹ eigensolver.
     EigenDecomposition<Real> eigenSystem{ 2 };
     eigenSystem(0, 0) = sumYY;
     eigenSystem(0, 1) = -sumXY;
     eigenSystem(1, 0) = -sumXY;
     eigenSystem(1, 1) = sumXX;
 
-    // ¼ÆËãÌØÕ÷Öµ£¬×îĞ¡µÄÌØÕ÷ÊÇÔÚ×îºóµÄÎ»ÖÃ¡£
+    // è®¡ç®—ç‰¹å¾å€¼ï¼Œæœ€å°çš„ç‰¹å¾æ˜¯åœ¨æœ€åçš„ä½ç½®ã€‚
     eigenSystem.Solve(false);
 
-    // ¶ÔÓÚ×î¼ÑÄâºÏÏßµÄµ¥Î»³¤¶È·½Ïò¡£
+    // å¯¹äºæœ€ä½³æ‹Ÿåˆçº¿çš„å•ä½é•¿åº¦æ–¹å‘ã€‚
     const auto direction = eigenSystem.GetEigenvector2(1);
 
     return Line2Type{ origin, direction };

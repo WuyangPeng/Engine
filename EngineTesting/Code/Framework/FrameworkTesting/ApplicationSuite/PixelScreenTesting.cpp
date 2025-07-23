@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.3 (2023/08/11 20:44)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.3 (2023/08/11 20:44)
 
 #include "PixelScreenTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -14,6 +14,7 @@
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector2Tools.h"
 #include "Framework/WindowCreate/WindowSize.h"
+#include "Rendering/DataTypes/ColourDetail.h"
 
 Framework::PixelScreenTesting::PixelScreenTesting(const OStreamShared& stream)
     : ParentType{ stream }, random{ minColour, maxColour }
@@ -461,7 +462,7 @@ void Framework::PixelScreenTesting::DrawCircleSolidTest()
                 }
                 else
                 {
-                    // ¼ì²â±ß½çÖµ
+                    // æ£€æµ‹è¾¹ç•Œå€¼
                     const auto difference = widthIndex - x;
                     const auto differenceAbsolute = Mathematics::MathD::FAbs(difference);
 
@@ -799,8 +800,8 @@ void Framework::PixelScreenTesting::AssertColour(const TestingType& pixelScreen,
 
 void Framework::PixelScreenTesting::AssertColour(const TestingType& lhs, const TestingType& rhs)
 {
-    ASSERT_EQUAL_FAILURE_THROW(lhs.GetScreenWidth(), rhs.GetScreenWidth(), "²âÊÔ¶ÔÏóµÄ¿í¶È²»Ò»ÖÂ¡£");
-    ASSERT_EQUAL_FAILURE_THROW(lhs.GetScreenHeight(), rhs.GetScreenHeight(), "²âÊÔ¶ÔÏóµÄ¸ß¶È²»Ò»ÖÂ¡£");
+    ASSERT_EQUAL_FAILURE_THROW(lhs.GetScreenWidth(), rhs.GetScreenWidth(), "æµ‹è¯•å¯¹è±¡çš„å®½åº¦ä¸ä¸€è‡´ã€‚");
+    ASSERT_EQUAL_FAILURE_THROW(lhs.GetScreenHeight(), rhs.GetScreenHeight(), "æµ‹è¯•å¯¹è±¡çš„é«˜åº¦ä¸ä¸€è‡´ã€‚");
 
     for (auto widthIndex = 0; widthIndex < lhs.GetScreenWidth(); ++widthIndex)
     {

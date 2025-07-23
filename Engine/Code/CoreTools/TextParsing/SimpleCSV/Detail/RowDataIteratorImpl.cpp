@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+Ôªø/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-/// ¡™œµ◊˜’ﬂ£∫94458936@qq.com
+/// ‰ΩúËÄÖÔºöÂΩ≠Ê≠¶Èò≥ÔºåÂΩ≠ÊôîÊÅ©ÔºåÂΩ≠ÊôîÊ≥Ω
+/// ËÅîÁ≥ª‰ΩúËÄÖÔºö94458936@qq.com
 ///
-/// ±Í◊º£∫std:c++20
-/// ∞Ê±æ£∫1.0.0.8 (2024/04/11 11:13)
+/// Ê†áÂáÜÔºöstd:c++20
+/// ÁâàÊú¨Ôºö1.0.0.8 (2024/04/11 11:13)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -39,7 +39,7 @@ CoreTools::SimpleCSV::RowDataIteratorImpl& CoreTools::SimpleCSV::RowDataIterator
 
     if (!documentSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document “—±ª Õ∑≈°£"s))
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document Â∑≤Ë¢´ÈáäÊîæ„ÄÇ"s))
     }
 
     const auto cellNumber = currentCell->GetCellReference().GetColumn() + 1;
@@ -59,7 +59,7 @@ CoreTools::SimpleCSV::RowDataIteratorImpl& CoreTools::SimpleCSV::RowDataIterator
     }
     else
     {
-        CORE_TOOLS_ASSERTION_1(CellReference{ node.attribute(TextParsing::gAttributeR.data()).value() }.GetColumn() == cellNumber, "Column≤ª∂‘”¶°£");
+        CORE_TOOLS_ASSERTION_1(CellReference{ node.attribute(TextParsing::gAttributeR.data()).value() }.GetColumn() == cellNumber, "Column‰∏çÂØπÂ∫î„ÄÇ");
 
         currentCell = Cell::CreateCell(documentSharedPtr, node, dataRange.GetSharedStrings());
     }

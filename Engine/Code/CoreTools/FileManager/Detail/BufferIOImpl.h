@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/30 22:27)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/30 22:27)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_BUFFER_IO_IMPL_H
 #define CORE_TOOLS_FILE_MANAGER_BUFFER_IO_IMPL_H
@@ -15,14 +15,14 @@
 #include "CoreTools/FileManager/FileManagerFwd.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 
-/// Ö§³Ö¶ÁÈ¡»òĞ´Èë¶ş½øÖÆ»º³åÇø¡£
-/// Õâ¸öÀà²»Ö§³Ö¶ÁĞ´·ÃÎÊ¡£
-/// ¶ÔÓÚBufferIOÒ»¸ö³£¼ûµÄÓÃÍ¾ÊÇÊ¹ÓÃFileHandleHelper::LoadFromFile¶ÁÈ¡Õû¸öÎÄ¼ş£¬È»ºóÊ¹ÓÃBufferIO¶ÁÈ¡×Ö¶Î¡£
-/// Í¬Ñù£¬BufferIO¿ÉÓÃÓÚ½«×Ö¶ÎĞ´ÈëÒ»¸ö»º³åÇø£¬È»ºóÊ¹ÓÃFileHandleHelper::SaveIntoFile±£´æÕû¸öÎÄ¼ş¡£
+/// æ”¯æŒè¯»å–æˆ–å†™å…¥äºŒè¿›åˆ¶ç¼“å†²åŒºã€‚
+/// è¿™ä¸ªç±»ä¸æ”¯æŒè¯»å†™è®¿é—®ã€‚
+/// å¯¹äºBufferIOä¸€ä¸ªå¸¸è§çš„ç”¨é€”æ˜¯ä½¿ç”¨FileHandleHelper::LoadFromFileè¯»å–æ•´ä¸ªæ–‡ä»¶ï¼Œç„¶åä½¿ç”¨BufferIOè¯»å–å­—æ®µã€‚
+/// åŒæ ·ï¼ŒBufferIOå¯ç”¨äºå°†å­—æ®µå†™å…¥ä¸€ä¸ªç¼“å†²åŒºï¼Œç„¶åä½¿ç”¨FileHandleHelper::SaveIntoFileä¿å­˜æ•´ä¸ªæ–‡ä»¶ã€‚
 ///
-/// ËùÓĞµÄÊı¾İÎÄ¼ş¶¼´æ´¢Îªlittle endian¸ñÊ½£¬ÒòÎª´ó¶àÊıÆ½Ì¨¶¼ÊÇlittle endian¡£
+/// æ‰€æœ‰çš„æ•°æ®æ–‡ä»¶éƒ½å­˜å‚¨ä¸ºlittle endianæ ¼å¼ï¼Œå› ä¸ºå¤§å¤šæ•°å¹³å°éƒ½æ˜¯little endianã€‚
 ///
-/// BufferIOÀà±»Éè¼ÆÎª½«Õû¸öÎÄ¼ş¼ÓÔØµ½»º³åÇø£¬È»ºó½âÎö»º³åÇø¡£
+/// BufferIOç±»è¢«è®¾è®¡ä¸ºå°†æ•´ä¸ªæ–‡ä»¶åŠ è½½åˆ°ç¼“å†²åŒºï¼Œç„¶åè§£æç¼“å†²åŒºã€‚
 namespace CoreTools
 {
     class CORE_TOOLS_HIDDEN_DECLARE BufferIOImpl

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/29 11:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/29 11:28)
 
 #ifndef RENDERING_RESOURCES_BUFFER_DETAIL_H
 #define RENDERING_RESOURCES_BUFFER_DETAIL_H
@@ -20,12 +20,12 @@ void Rendering::Buffer::CheckMember(const T& layout) const
 
     if (layout.GetNumElements() != 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³ÉÔ±ÊÇÒ»¸öÊı×é£¬Ê¹ÓÃSetMember(name,index,value)¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æˆå‘˜æ˜¯ä¸€ä¸ªæ•°ç»„ï¼Œä½¿ç”¨SetMember(name,index,value)ã€‚"s))
     }
 
     if (GetNumBytes() < layout.GetOffset() + layout.GetStreamingSize())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("½«·ÃÎÊ»º³åÇøÍâµÄÄÚ´æ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å°†è®¿é—®ç¼“å†²åŒºå¤–çš„å†…å­˜ã€‚"s))
     }
 }
 
@@ -36,12 +36,12 @@ void Rendering::Buffer::CheckMember(int index, const T& layout) const
 
     if (layout.GetNumElements() == 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³ÉÔ±²»ÊÇÒ»¸öÊı×é£¬Ê¹ÓÃSetMember(name,value)¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æˆå‘˜ä¸æ˜¯ä¸€ä¸ªæ•°ç»„ï¼Œä½¿ç”¨SetMember(name,value)ã€‚"s))
     }
 
     if (GetNumBytes() < layout.GetOffset() + (index + 1) * layout.GetStreamingSize())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("½«·ÃÎÊ»º³åÇøÍâµÄÄÚ´æ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("å°†è®¿é—®ç¼“å†²åŒºå¤–çš„å†…å­˜ã€‚"s))
     }
 }
 

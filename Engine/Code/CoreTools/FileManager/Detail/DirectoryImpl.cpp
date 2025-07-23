@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/01 09:51)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/01 09:51)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -26,7 +26,7 @@ System::String CoreTools::DirectoryImpl::GetDirectoryName(const String& director
         String directoryResult{ systemCurrentDirectory.data() };
         if (!System::SetSystemCurrentDirectory(directoryName.c_str()))
         {
-            THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("ÉèÖÃµ±Ç°Ä¿Â¼¡°%1%¡±Ê§°Ü£¡"s)) % directoryName).str())
+            THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("è®¾ç½®å½“å‰ç›®å½•â€œ%1%â€å¤±è´¥ï¼"s)) % directoryName).str())
         }
 
         return directoryResult;
@@ -48,7 +48,7 @@ CoreTools::DirectoryImpl::~DirectoryImpl() noexcept
     if (!directoryName.empty() &&
         !System::SetSystemCurrentDirectory(directoryName.c_str()))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("ÉèÖÃµ±Ç°Ä¿Â¼"), directoryName, SYSTEM_TEXT("Ê§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("è®¾ç½®å½“å‰ç›®å½•"), directoryName, SYSTEM_TEXT("å¤±è´¥ï¼"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

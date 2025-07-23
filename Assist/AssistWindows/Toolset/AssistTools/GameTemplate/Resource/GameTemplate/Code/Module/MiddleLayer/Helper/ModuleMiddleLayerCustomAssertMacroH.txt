@@ -1,4 +1,4 @@
-$Copyright$
+﻿$Copyright$
 
 #ifndef $ModuleUppercase$_MIDDLE_LAYER_HELPER_$ModuleUppercase$_MIDDLE_LAYER_CUSTOM_ASSERT_MACRO_H
 #define $ModuleUppercase$_MIDDLE_LAYER_HELPER_$ModuleUppercase$_MIDDLE_LAYER_CUSTOM_ASSERT_MACRO_H

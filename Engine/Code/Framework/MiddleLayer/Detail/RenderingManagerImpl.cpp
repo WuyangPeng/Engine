@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/17 10:17)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/17 10:17)
 
 #include "Framework/FrameworkExport.h"
 
@@ -71,7 +71,7 @@ void Framework::RenderingManagerImpl::DrawFrameRate(int x, int y, const Colour& 
     {
         if (!renderer->Draw(x, y, color, message))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, Framework, SYSTEM_TEXT("Draw Ê§°Ü¡£"));
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Framework, SYSTEM_TEXT("Draw å¤±è´¥ã€‚"));
         }
     }
     else
@@ -169,5 +169,5 @@ Framework::RenderingManagerImpl::RendererSharedPtr Framework::RenderingManagerIm
 
 void Framework::RenderingManagerImpl::ThrowException()
 {
-    THROW_EXCEPTION(SYSTEM_TEXT("äÖÈ¾Æ÷Î´³õÊ¼»¯£¡ÇëÔÚCreateÖĞ¶ÔäÖÈ¾Æ÷½øĞĞ³õÊ¼»¯¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("æ¸²æŸ“å™¨æœªåˆå§‹åŒ–ï¼è¯·åœ¨Createä¸­å¯¹æ¸²æŸ“å™¨è¿›è¡Œåˆå§‹åŒ–ã€‚"s))
 }

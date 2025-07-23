@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 10:25)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 10:25)
 
 #ifndef MATHEMATICS_OBJECTS_3D_RECTANGLE3_H
 #define MATHEMATICS_OBJECTS_3D_RECTANGLE3_H
@@ -33,9 +33,9 @@ namespace Mathematics
         using AlgebraRectangle3 = Algebra::Rectangle3<Real>;
 
     public:
-        // µãReal(s,t) = C + s0 * U0 + s1 * U1£¬ÆäÖĞCÊÇ¾ØĞÎµÄÖĞĞÄ£¬U0ºÍU1ÊÇµ¥Î»³¤¶ÈµÄ´¹Ö±Öá¡£
-        // ²ÎÊıs0ºÍs1ÊÇÓÉÔ¼Êø|s0| <= e0 ºÍ|s1| <= e1£¬
-        // ÆäÖĞe0 > 0ºÍe1 > 0³ÆÎª¾ØĞÎµÄ·¶Î§¡£
+        // ç‚¹Real(s,t) = C + s0 * U0 + s1 * U1ï¼Œå…¶ä¸­Cæ˜¯çŸ©å½¢çš„ä¸­å¿ƒï¼ŒU0å’ŒU1æ˜¯å•ä½é•¿åº¦çš„å‚ç›´è½´ã€‚
+        // å‚æ•°s0å’Œs1æ˜¯ç”±çº¦æŸ|s0| <= e0 å’Œ|s1| <= e1ï¼Œ
+        // å…¶ä¸­e0 > 0å’Œe1 > 0ç§°ä¸ºçŸ©å½¢çš„èŒƒå›´ã€‚
         Rectangle3() noexcept;
         Rectangle3(const Vector3Type& center, const Vector3Type& axis0, const Vector3Type& axis1, Real extent0, Real extent1, Real epsilon = MathType::GetZeroTolerance()) noexcept;
         explicit Rectangle3(const AlgebraRectangle3& rectangle3, Real epsilon = MathType::GetZeroTolerance());
@@ -51,10 +51,10 @@ namespace Mathematics
         NODISCARD Vector3Type GetAxis(int index) const;
         NODISCARD Real GetExtent(int index) const;
 
-        // ·µ»Ø¾ØĞÎµÄËÄ¸ö¶¥µã
+        // è¿”å›çŸ©å½¢çš„å››ä¸ªé¡¶ç‚¹
         NODISCARD VerticesType ComputeVertices() const;
 
-        // »ñÈ¡¾ØĞÎ½Ç¡£
+        // è·å–çŸ©å½¢è§’ã€‚
         NODISCARD Vector3Type GetPPCorner() const;  // C + e0 * A0 + e1 * A1
         NODISCARD Vector3Type GetPMCorner() const;  // C + e0 * A0 - e1 * A1
         NODISCARD Vector3Type GetMPCorner() const;  // C - e0 * A0 + e1 * A1

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 09:34)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 09:34)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_CALCULATE_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_CALCULATE_DETAIL_H
@@ -44,11 +44,11 @@ void Mathematics::Bisect3Calculate<Real>::Calculate(Real beginPointX,
                                                     Real endPointY,
                                                     Real endPointZ)
 {
-    MATHEMATICS_ASSERTION_2(beginPointX <= endPointX, "ÆğµãµÄXÖµ±ÈÖÕµãµÄXÖµ´ó¡£");
-    MATHEMATICS_ASSERTION_2(beginPointY <= endPointY, "ÆğµãµÄYÖµ±ÈÖÕµãµÄYÖµ´ó¡£");
-    MATHEMATICS_ASSERTION_2(beginPointZ <= endPointZ, "ÆğµãµÄZÖµ±ÈÖÕµãµÄZÖµ´ó¡£");
+    MATHEMATICS_ASSERTION_2(beginPointX <= endPointX, "èµ·ç‚¹çš„Xå€¼æ¯”ç»ˆç‚¹çš„Xå€¼å¤§ã€‚");
+    MATHEMATICS_ASSERTION_2(beginPointY <= endPointY, "èµ·ç‚¹çš„Yå€¼æ¯”ç»ˆç‚¹çš„Yå€¼å¤§ã€‚");
+    MATHEMATICS_ASSERTION_2(beginPointZ <= endPointZ, "èµ·ç‚¹çš„Zå€¼æ¯”ç»ˆç‚¹çš„Zå€¼å¤§ã€‚");
 
-    // ²âÊÔµÄ°Ë¸ö½ÇµÄÖµ¡£
+    // æµ‹è¯•çš„å…«ä¸ªè§’çš„å€¼ã€‚
     if (bisect3Storage.TestEightCornerValues(beginPointX, beginPointY, beginPointZ, endPointX, endPointY, endPointZ))
     {
         bisect3Root = bisect3Storage.GetBisect3Root();
@@ -56,9 +56,9 @@ void Mathematics::Bisect3Calculate<Real>::Calculate(Real beginPointX,
         return;
     }
 
-    // ¹¹½¨³õÊ¼°Ë±ßĞÎ
+    // æ„å»ºåˆå§‹å…«è¾¹å½¢
 
-    // Ôö¼Ó N000¡£
+    // å¢åŠ  N000ã€‚
     graph = std::make_shared<Bisect3NodeType>(beginPointX,
                                           beginPointY,
                                           beginPointZ,
@@ -66,7 +66,7 @@ void Mathematics::Bisect3Calculate<Real>::Calculate(Real beginPointX,
                                           bisect3Storage.GetBeginXBeginYBeginZValue1(),
                                           bisect3Storage.GetBeginXBeginYBeginZValue2());
 
-    // Ôö¼Ó N100¡£
+    // å¢åŠ  N100ã€‚
     graph->AddXNextNode(endPointX,
                         beginPointY,
                         beginPointZ,
@@ -74,7 +74,7 @@ void Mathematics::Bisect3Calculate<Real>::Calculate(Real beginPointX,
                         bisect3Storage.GetEndXBeginYBeginZValue1(),
                         bisect3Storage.GetEndXBeginYBeginZValue2());
 
-    // Ôö¼Ó N010¡£
+    // å¢åŠ  N010ã€‚
     graph->AddYNextNode(beginPointX,
                         endPointY,
                         beginPointZ,
@@ -82,7 +82,7 @@ void Mathematics::Bisect3Calculate<Real>::Calculate(Real beginPointX,
                         bisect3Storage.GetBeginXEndYBeginZValue1(),
                         bisect3Storage.GetBeginXEndYBeginZValue2());
 
-    // Ôö¼Ó N110¡£
+    // å¢åŠ  N110ã€‚
     graph->GetXNext()->AddYNextNode(endPointX,
                                     endPointY,
                                     beginPointZ,
@@ -92,7 +92,7 @@ void Mathematics::Bisect3Calculate<Real>::Calculate(Real beginPointX,
 
     graph->GetYNext()->AddXNextNode(graph->GetXNext()->GetYNext());
 
-    // Ôö¼Ó N001¡£
+    // å¢åŠ  N001ã€‚
     graph->AddZNextNode(beginPointX,
                         beginPointY,
                         endPointZ,
@@ -100,7 +100,7 @@ void Mathematics::Bisect3Calculate<Real>::Calculate(Real beginPointX,
                         bisect3Storage.GetBeginXBeginYEndZValue1(),
                         bisect3Storage.GetBeginXBeginYEndZValue2());
 
-    // Ôö¼Ó N101¡£
+    // å¢åŠ  N101ã€‚
     graph->GetXNext()->AddZNextNode(endPointX,
                                     beginPointY,
                                     endPointZ,
@@ -110,7 +110,7 @@ void Mathematics::Bisect3Calculate<Real>::Calculate(Real beginPointX,
 
     graph->GetZNext()->AddXNextNode(graph->GetXNext()->GetZNext());
 
-    // Ôö¼Ó N011¡£
+    // å¢åŠ  N011ã€‚
     graph->GetYNext()->AddZNextNode(beginPointX,
                                     endPointY,
                                     endPointZ,
@@ -120,7 +120,7 @@ void Mathematics::Bisect3Calculate<Real>::Calculate(Real beginPointX,
 
     graph->GetZNext()->AddYNextNode(graph->GetYNext()->GetZNext());
 
-    // Ôö¼Ó N111¡£
+    // å¢åŠ  N111ã€‚
     graph->GetXNext()->GetYNext()->AddZNextNode(endPointX,
                                                 endPointY,
                                                 endPointZ,
@@ -137,7 +137,7 @@ void Mathematics::Bisect3Calculate<Real>::Calculate(Real beginPointX,
         bisect3Root = bisect3Storage.GetBisect3Root();
     }
 
-    // ½«Ê£ÏÂµÄËÄ±ßĞÎ´Óm_GraphÖĞÒÆ³ı¡£
+    // å°†å‰©ä¸‹çš„å››è¾¹å½¢ä»m_Graphä¸­ç§»é™¤ã€‚
     graph.reset();
 }
 
@@ -172,7 +172,7 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
 
     if (++level == bisect3.GetMaxLevel())
     {
-        // µİ¹é³¬³öÁË´ÎÊı£¬·µ»ØÒ»¸öÖĞ¼äÖµ¡£
+        // é€’å½’è¶…å‡ºäº†æ¬¡æ•°ï¼Œè¿”å›ä¸€ä¸ªä¸­é—´å€¼ã€‚
         --level;
         bisect3Root = std::make_shared<Bisect3RootType>(bisect3Storage.GetMidpointX(), bisect3Storage.GetMidpointY(), bisect3Storage.GetMidpointZ(), BisectRootType::Unknown);
 
@@ -181,17 +181,17 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
 
     if (node->IsFunctionResult0SameSign() || node->IsFunctionResult1SameSign() || node->IsFunctionResult2SameSign())
     {
-        // FirstFunction¾ßÓĞÏàÍ¬µÄ·ûºÅÔÚ±ß½çµã¡£
-        // »òÕßSecondFunction¾ßÓĞÏàÍ¬µÄ·ûºÅÔÚ±ß½çµã¡£
-        // »òÕßThirdFunction¾ßÓĞÏàÍ¬µÄ·ûºÅÔÚ±ß½çµã¡£
+        // FirstFunctionå…·æœ‰ç›¸åŒçš„ç¬¦å·åœ¨è¾¹ç•Œç‚¹ã€‚
+        // æˆ–è€…SecondFunctionå…·æœ‰ç›¸åŒçš„ç¬¦å·åœ¨è¾¹ç•Œç‚¹ã€‚
+        // æˆ–è€…ThirdFunctionå…·æœ‰ç›¸åŒçš„ç¬¦å·åœ¨è¾¹ç•Œç‚¹ã€‚
 
-        // ·½³ÌÔÚÕâ¸öÇø¼äÎŞ½â
+        // æ–¹ç¨‹åœ¨è¿™ä¸ªåŒºé—´æ— è§£
         --level;
 
         return false;
     }
 
-    // ¶şµÈ·Ö°Ë±ßĞÎ¡£
+    // äºŒç­‰åˆ†å…«è¾¹å½¢ã€‚
     bisect3Storage.SetStorageValue(node);
 
     if (bisect3Storage.TestEdgeValues())
@@ -199,11 +199,11 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
         return true;
     }
 
-    // ½«Á¢·½Ìå·Ö³É°Ë¸öÁ¢·½Ìå½øĞĞµİ¹éËÑË÷¡£
+    // å°†ç«‹æ–¹ä½“åˆ†æˆå…«ä¸ªç«‹æ–¹ä½“è¿›è¡Œé€’å½’æœç´¢ã€‚
 
-    // ¹¹½¨×óÏÂÄÚµÄÁ¢·½Ìå
+    // æ„å»ºå·¦ä¸‹å†…çš„ç«‹æ–¹ä½“
 
-    // Ô­×óÏÂÄÚµã
+    // åŸå·¦ä¸‹å†…ç‚¹
     auto leftLowerInside = std::make_shared<Bisect3NodeType>(bisect3Storage.GetBeginPointX(),
                                                          bisect3Storage.GetBeginPointY(),
                                                          bisect3Storage.GetBeginPointZ(),
@@ -213,9 +213,9 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
 
     BuildLeftLowerInside(leftLowerInside);
 
-    // ¹¹½¨ÓÒÏÂÄÚµÄÁ¢·½Ìå
+    // æ„å»ºå³ä¸‹å†…çš„ç«‹æ–¹ä½“
 
-    // ±ß 000, 100
+    // è¾¹ 000, 100
     auto rightLowerInside = std::make_shared<Bisect3NodeType>(bisect3Storage.GetMidpointX(),
                                                           bisect3Storage.GetBeginPointY(),
                                                           bisect3Storage.GetBeginPointZ(),
@@ -225,9 +225,9 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
 
     BuildRightLowerInside(rightLowerInside);
 
-    // ¹¹½¨×óÉÏÄÚµÄÁ¢·½Ìå
+    // æ„å»ºå·¦ä¸Šå†…çš„ç«‹æ–¹ä½“
 
-    // ±ß 000, 010
+    // è¾¹ 000, 010
     auto leftUpperInside = std::make_shared<Bisect3NodeType>(bisect3Storage.GetBeginPointX(),
                                                          bisect3Storage.GetMidpointY(),
                                                          bisect3Storage.GetBeginPointZ(),
@@ -237,9 +237,9 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
 
     BuildLeftUpperInside(leftUpperInside);
 
-    // ¹¹½¨ÓÒÉÏÄÚµÄÁ¢·½Ìå
+    // æ„å»ºå³ä¸Šå†…çš„ç«‹æ–¹ä½“
 
-    // Ãæ 000, 100, 110, 010
+    // é¢ 000, 100, 110, 010
     auto rightUpperInside = std::make_shared<Bisect3NodeType>(bisect3Storage.GetMidpointX(),
                                                           bisect3Storage.GetMidpointY(),
                                                           bisect3Storage.GetBeginPointZ(),
@@ -249,9 +249,9 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
 
     BuildRightUpperInside(rightUpperInside);
 
-    // ¹¹½¨×óÏÂÍâµÄÁ¢·½Ìå
+    // æ„å»ºå·¦ä¸‹å¤–çš„ç«‹æ–¹ä½“
 
-    // ±ß 000, 001
+    // è¾¹ 000, 001
     auto leftLowerOutside = std::make_shared<Bisect3NodeType>(bisect3Storage.GetBeginPointX(),
                                                           bisect3Storage.GetBeginPointY(),
                                                           bisect3Storage.GetMidpointZ(),
@@ -261,9 +261,9 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
 
     BuildLeftLowerOutside(leftLowerOutside);
 
-    // ¹¹½¨ÓÒÏÂÍâµÄÁ¢·½Ìå
+    // æ„å»ºå³ä¸‹å¤–çš„ç«‹æ–¹ä½“
 
-    // Ãæ 000, 100, 001, 101
+    // é¢ 000, 100, 001, 101
     auto rightLowerOutside = std::make_shared<Bisect3NodeType>(bisect3Storage.GetMidpointX(),
                                                            bisect3Storage.GetBeginPointY(),
                                                            bisect3Storage.GetMidpointZ(),
@@ -273,9 +273,9 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
 
     BuildRightLowerOutside(rightLowerOutside);
 
-    // ¹¹½¨×óÉÏÍâµÄÁ¢·½Ìå
+    // æ„å»ºå·¦ä¸Šå¤–çš„ç«‹æ–¹ä½“
 
-    // Ãæ 000, 010, 011, 001
+    // é¢ 000, 010, 011, 001
     auto leftUpperOutside = std::make_shared<Bisect3NodeType>(bisect3Storage.GetBeginPointX(),
                                                           bisect3Storage.GetMidpointY(),
                                                           bisect3Storage.GetMidpointZ(),
@@ -285,9 +285,9 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
 
     BuildLeftUpperOutside(leftUpperOutside);
 
-    // ¹¹½¨ÓÒÉÏÍâµÄÁ¢·½Ìå
+    // æ„å»ºå³ä¸Šå¤–çš„ç«‹æ–¹ä½“
 
-    // ÖĞĞÄ
+    // ä¸­å¿ƒ
     auto rightUpperOutside = std::make_shared<Bisect3NodeType>(bisect3Storage.GetMidpointX(),
                                                            bisect3Storage.GetMidpointY(),
                                                            bisect3Storage.GetMidpointZ(),
@@ -297,7 +297,7 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
 
     BuildRightUpperOutside(rightUpperOutside);
 
-    // ËÑË÷×ÓÁ¢·½ÌåµÄ¸ù¡£
+    // æœç´¢å­ç«‹æ–¹ä½“çš„æ ¹ã€‚
     const auto result = BisectRecurse(leftLowerInside) ||
                         BisectRecurse(rightLowerInside) ||
                         BisectRecurse(leftUpperInside) ||
@@ -307,7 +307,7 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
                         BisectRecurse(leftUpperOutside) ||
                         BisectRecurse(rightUpperOutside);
 
-    // Õû¸ö×Ó°Ë±ßĞÎ¼ì²éÊ§°Ü£¬É¾³ıÌí¼ÓµÄ½Úµã¡£
+    // æ•´ä¸ªå­å…«è¾¹å½¢æ£€æŸ¥å¤±è´¥ï¼Œåˆ é™¤æ·»åŠ çš„èŠ‚ç‚¹ã€‚
 
     --level;
 
@@ -322,7 +322,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftLowerInside(const Bisect3Node
         return;
     }
 
-    // ±ß 000, 100
+    // è¾¹ 000, 100
     node->AddXNextNode(bisect3Storage.GetMidpointX(),
                        bisect3Storage.GetBeginPointY(),
                        bisect3Storage.GetBeginPointZ(),
@@ -330,7 +330,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftLowerInside(const Bisect3Node
                        bisect3Storage.GetMidXBeginYBeginZValue1(),
                        bisect3Storage.GetMidXBeginYBeginZValue2());
 
-    // ±ß 000, 010
+    // è¾¹ 000, 010
     node->AddYNextNode(bisect3Storage.GetBeginPointX(),
                        bisect3Storage.GetMidpointY(),
                        bisect3Storage.GetBeginPointZ(),
@@ -338,7 +338,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftLowerInside(const Bisect3Node
                        bisect3Storage.GetBeginXMidYBeginZValue1(),
                        bisect3Storage.GetBeginXMidYBeginZValue2());
 
-    // Ãæ 000, 100, 110, 010¡£
+    // é¢ 000, 100, 110, 010ã€‚
     node->GetXNext()->AddYNextNode(bisect3Storage.GetMidpointX(),
                                    bisect3Storage.GetMidpointY(),
                                    bisect3Storage.GetBeginPointZ(),
@@ -348,7 +348,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftLowerInside(const Bisect3Node
 
     node->GetYNext()->AddXNextNode(node->GetXNext()->GetYNext());
 
-    // ±ß 000, 001¡£
+    // è¾¹ 000, 001ã€‚
     node->AddZNextNode(bisect3Storage.GetBeginPointX(),
                        bisect3Storage.GetBeginPointY(),
                        bisect3Storage.GetMidpointZ(),
@@ -356,7 +356,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftLowerInside(const Bisect3Node
                        bisect3Storage.GetBeginXBeginYMidZValue1(),
                        bisect3Storage.GetBeginXBeginYMidZValue2());
 
-    // Ãæ 000, 100, 001, 101¡£
+    // é¢ 000, 100, 001, 101ã€‚
     node->GetXNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
                                    bisect3Storage.GetBeginPointY(),
                                    bisect3Storage.GetMidpointZ(),
@@ -366,7 +366,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftLowerInside(const Bisect3Node
 
     node->GetZNext()->AddXNextNode(node->GetXNext()->GetZNext());
 
-    // Ãæ 000, 010, 011, 001¡£
+    // é¢ 000, 010, 011, 001ã€‚
     node->GetYNext()->AddZNextNode(bisect3Storage.GetBeginPointX(),
                                    bisect3Storage.GetMidpointY(),
                                    bisect3Storage.GetMidpointZ(),
@@ -376,7 +376,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftLowerInside(const Bisect3Node
 
     node->GetZNext()->AddYNextNode(node->GetYNext()->GetZNext());
 
-    // ÖĞĞÄ¡£
+    // ä¸­å¿ƒã€‚
     node->GetXNext()->GetYNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
                                                bisect3Storage.GetMidpointY(),
                                                bisect3Storage.GetMidpointZ(),
@@ -396,7 +396,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightLowerInside(const Bisect3Nod
         return;
     }
 
-    // Ô­ÓÒÏÂÄÚµã
+    // åŸå³ä¸‹å†…ç‚¹
     node->AddXNextNode(bisect3Storage.GetEndPointX(),
                        bisect3Storage.GetBeginPointY(),
                        bisect3Storage.GetBeginPointZ(),
@@ -404,7 +404,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightLowerInside(const Bisect3Nod
                        bisect3Storage.GetEndXBeginYBeginZValue1(),
                        bisect3Storage.GetEndXBeginYBeginZValue2());
 
-    // Ãæ 000, 100, 110, 010
+    // é¢ 000, 100, 110, 010
     node->AddYNextNode(bisect3Storage.GetMidpointX(),
                        bisect3Storage.GetMidpointY(),
                        bisect3Storage.GetBeginPointZ(),
@@ -412,7 +412,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightLowerInside(const Bisect3Nod
                        bisect3Storage.GetMidXMidYBeginZValue1(),
                        bisect3Storage.GetMidXMidYBeginZValue2());
 
-    // ±ß 100, 110
+    // è¾¹ 100, 110
     node->GetXNext()->AddYNextNode(bisect3Storage.GetEndPointX(),
                                    bisect3Storage.GetMidpointY(),
                                    bisect3Storage.GetBeginPointZ(),
@@ -422,7 +422,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightLowerInside(const Bisect3Nod
 
     node->GetYNext()->AddXNextNode(node->GetXNext()->GetYNext());
 
-    // Ãæ 000, 100, 001, 101
+    // é¢ 000, 100, 001, 101
     node->AddZNextNode(bisect3Storage.GetMidpointX(),
                        bisect3Storage.GetBeginPointY(),
                        bisect3Storage.GetMidpointZ(),
@@ -430,7 +430,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightLowerInside(const Bisect3Nod
                        bisect3Storage.GetMidXBeginYMidZValue1(),
                        bisect3Storage.GetMidXBeginYMidZValue2());
 
-    // ±ß 100, 101
+    // è¾¹ 100, 101
     node->GetXNext()->AddZNextNode(bisect3Storage.GetEndPointX(),
                                    bisect3Storage.GetBeginPointY(),
                                    bisect3Storage.GetMidpointZ(),
@@ -440,7 +440,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightLowerInside(const Bisect3Nod
 
     node->GetZNext()->AddXNextNode(node->GetXNext()->GetZNext());
 
-    // ÖĞĞÄ¡£
+    // ä¸­å¿ƒã€‚
     node->GetYNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
                                    bisect3Storage.GetMidpointY(),
                                    bisect3Storage.GetMidpointZ(),
@@ -450,7 +450,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightLowerInside(const Bisect3Nod
 
     node->GetZNext()->AddYNextNode(node->GetYNext()->GetZNext());
 
-    // Ãæ 110, 100, 101, 111
+    // é¢ 110, 100, 101, 111
     node->GetXNext()->GetYNext()->AddZNextNode(bisect3Storage.GetEndPointX(),
                                                bisect3Storage.GetMidpointY(),
                                                bisect3Storage.GetMidpointZ(),
@@ -470,7 +470,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftUpperInside(const Bisect3Node
         return;
     }
 
-    // Ãæ 000, 100£¬110£¬010
+    // é¢ 000, 100ï¼Œ110ï¼Œ010
     node->AddXNextNode(bisect3Storage.GetMidpointX(),
                        bisect3Storage.GetMidpointY(),
                        bisect3Storage.GetBeginPointZ(),
@@ -478,7 +478,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftUpperInside(const Bisect3Node
                        bisect3Storage.GetMidXMidYBeginZValue1(),
                        bisect3Storage.GetMidXMidYBeginZValue2());
 
-    // Ô­×óÉÏÄÚµã
+    // åŸå·¦ä¸Šå†…ç‚¹
     node->AddYNextNode(bisect3Storage.GetBeginPointX(),
                        bisect3Storage.GetEndPointY(),
                        bisect3Storage.GetBeginPointZ(),
@@ -486,7 +486,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftUpperInside(const Bisect3Node
                        bisect3Storage.GetBeginXEndYBeginZValue1(),
                        bisect3Storage.GetBeginXEndYBeginZValue2());
 
-    // ±ß 110, 010¡£
+    // è¾¹ 110, 010ã€‚
     node->GetXNext()->AddYNextNode(bisect3Storage.GetMidpointX(),
                                    bisect3Storage.GetEndPointY(),
                                    bisect3Storage.GetBeginPointZ(),
@@ -496,7 +496,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftUpperInside(const Bisect3Node
 
     node->GetYNext()->AddXNextNode(node->GetXNext()->GetYNext());
 
-    // Ãæ  000£¬001£¬011£¬010
+    // é¢  000ï¼Œ001ï¼Œ011ï¼Œ010
     node->AddZNextNode(bisect3Storage.GetBeginPointX(),
                        bisect3Storage.GetMidpointY(),
                        bisect3Storage.GetMidpointZ(),
@@ -504,7 +504,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftUpperInside(const Bisect3Node
                        bisect3Storage.GetBeginXMidYMidZValue1(),
                        bisect3Storage.GetBeginXMidYMidZValue2());
 
-    // ÖĞĞÄ
+    // ä¸­å¿ƒ
     node->GetXNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
                                    bisect3Storage.GetMidpointY(),
                                    bisect3Storage.GetMidpointZ(),
@@ -514,7 +514,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftUpperInside(const Bisect3Node
 
     node->GetZNext()->AddXNextNode(node->GetXNext()->GetZNext());
 
-    // ±ß 011,010
+    // è¾¹ 011,010
     node->GetYNext()->AddZNextNode(bisect3Storage.GetBeginPointX(),
                                    bisect3Storage.GetEndPointY(),
                                    bisect3Storage.GetMidpointZ(),
@@ -524,7 +524,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftUpperInside(const Bisect3Node
 
     node->GetZNext()->AddYNextNode(node->GetYNext()->GetZNext());
 
-    // Ãæ 010,110,111,011
+    // é¢ 010,110,111,011
     node->GetXNext()->GetYNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
                                                bisect3Storage.GetEndPointY(),
                                                bisect3Storage.GetMidpointZ(),
@@ -544,7 +544,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightUpperInside(const Bisect3Nod
         return;
     }
 
-    // ±ß 100 110
+    // è¾¹ 100 110
     node->AddXNextNode(bisect3Storage.GetEndPointX(),
                        bisect3Storage.GetMidpointY(),
                        bisect3Storage.GetBeginPointZ(),
@@ -552,7 +552,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightUpperInside(const Bisect3Nod
                        bisect3Storage.GetEndXMidYBeginZValue1(),
                        bisect3Storage.GetEndXMidYBeginZValue2());
 
-    // ±ß 110, 010
+    // è¾¹ 110, 010
     node->AddYNextNode(bisect3Storage.GetMidpointX(),
                        bisect3Storage.GetEndPointY(),
                        bisect3Storage.GetBeginPointZ(),
@@ -560,7 +560,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightUpperInside(const Bisect3Nod
                        bisect3Storage.GetMidXEndYBeginZValue1(),
                        bisect3Storage.GetMidXEndYBeginZValue2());
 
-    // Ô­ÓÒÉÏÄÚµã
+    // åŸå³ä¸Šå†…ç‚¹
     node->GetXNext()->AddYNextNode(bisect3Storage.GetEndPointX(),
                                    bisect3Storage.GetEndPointY(),
                                    bisect3Storage.GetBeginPointZ(),
@@ -570,7 +570,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightUpperInside(const Bisect3Nod
 
     node->GetYNext()->AddXNextNode(node->GetXNext()->GetYNext());
 
-    // ÖĞĞÄ
+    // ä¸­å¿ƒ
     node->AddZNextNode(bisect3Storage.GetMidpointX(),
                        bisect3Storage.GetMidpointY(),
                        bisect3Storage.GetMidpointZ(),
@@ -578,7 +578,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightUpperInside(const Bisect3Nod
                        bisect3Storage.GetMidXBeginYMidZValue1(),
                        bisect3Storage.GetMidXBeginYMidZValue2());
 
-    // Ãæ 100, 110, 111, 101¡£
+    // é¢ 100, 110, 111, 101ã€‚
     node->GetXNext()->AddZNextNode(bisect3Storage.GetEndPointX(),
                                    bisect3Storage.GetMidpointY(),
                                    bisect3Storage.GetMidpointZ(),
@@ -588,7 +588,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightUpperInside(const Bisect3Nod
 
     node->GetZNext()->AddXNextNode(node->GetXNext()->GetZNext());
 
-    // Ãæ 011,111,110,010
+    // é¢ 011,111,110,010
     node->GetYNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
                                    bisect3Storage.GetEndPointY(),
                                    bisect3Storage.GetMidpointZ(),
@@ -598,7 +598,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightUpperInside(const Bisect3Nod
 
     node->GetZNext()->AddYNextNode(node->GetYNext()->GetZNext());
 
-    // ±ß110£¬111
+    // è¾¹110ï¼Œ111
     node->GetXNext()->GetYNext()->AddZNextNode(bisect3Storage.GetEndPointX(),
                                                bisect3Storage.GetEndPointY(),
                                                bisect3Storage.GetMidpointZ(),
@@ -618,7 +618,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftLowerOutside(const Bisect3Nod
         return;
     }
 
-    // Ãæ 000, 100£¬101£¬001
+    // é¢ 000, 100ï¼Œ101ï¼Œ001
     node->AddXNextNode(bisect3Storage.GetMidpointX(),
                        bisect3Storage.GetBeginPointY(),
                        bisect3Storage.GetMidpointZ(),
@@ -626,7 +626,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftLowerOutside(const Bisect3Nod
                        bisect3Storage.GetMidXBeginYMidZValue1(),
                        bisect3Storage.GetMidXBeginYMidZValue2());
 
-    // Ãæ 000, 001£¬011£¬010
+    // é¢ 000, 001ï¼Œ011ï¼Œ010
     node->AddYNextNode(bisect3Storage.GetBeginPointX(),
                        bisect3Storage.GetMidpointY(),
                        bisect3Storage.GetMidpointZ(),
@@ -634,7 +634,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftLowerOutside(const Bisect3Nod
                        bisect3Storage.GetBeginXMidYMidZValue1(),
                        bisect3Storage.GetBeginXMidYMidZValue2());
 
-    // ÖĞĞÄ
+    // ä¸­å¿ƒ
     node->GetXNext()->AddYNextNode(bisect3Storage.GetMidpointX(),
                                    bisect3Storage.GetMidpointY(),
                                    bisect3Storage.GetMidpointZ(),
@@ -644,7 +644,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftLowerOutside(const Bisect3Nod
 
     node->GetYNext()->AddXNextNode(node->GetXNext()->GetYNext());
 
-    // Ô­×óÏÂÍâµã
+    // åŸå·¦ä¸‹å¤–ç‚¹
     node->AddZNextNode(bisect3Storage.GetBeginPointX(),
                        bisect3Storage.GetBeginPointY(),
                        bisect3Storage.GetEndPointZ(),
@@ -652,7 +652,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftLowerOutside(const Bisect3Nod
                        bisect3Storage.GetBeginXBeginYEndZValue1(),
                        bisect3Storage.GetBeginXBeginYEndZValue2());
 
-    // ±ß001,101
+    // è¾¹001,101
     node->GetXNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
                                    bisect3Storage.GetBeginPointY(),
                                    bisect3Storage.GetEndPointZ(),
@@ -662,7 +662,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftLowerOutside(const Bisect3Nod
 
     node->GetZNext()->AddXNextNode(node->GetXNext()->GetZNext());
 
-    // ±ß001,011
+    // è¾¹001,011
     node->GetYNext()->AddZNextNode(bisect3Storage.GetBeginPointX(),
                                    bisect3Storage.GetMidpointY(),
                                    bisect3Storage.GetEndPointZ(),
@@ -672,7 +672,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftLowerOutside(const Bisect3Nod
 
     node->GetZNext()->AddYNextNode(node->GetYNext()->GetZNext());
 
-    // Ãæ 001,101,111,011
+    // é¢ 001,101,111,011
     node->GetXNext()->GetYNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
                                                bisect3Storage.GetMidpointY(),
                                                bisect3Storage.GetEndPointZ(),
@@ -692,7 +692,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightLowerOutside(const Bisect3No
         return;
     }
 
-    // ±ß100,101
+    // è¾¹100,101
     node->AddXNextNode(bisect3Storage.GetEndPointX(),
                        bisect3Storage.GetBeginPointY(),
                        bisect3Storage.GetMidpointZ(),
@@ -700,7 +700,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightLowerOutside(const Bisect3No
                        bisect3Storage.GetEndXBeginYMidZValue1(),
                        bisect3Storage.GetEndXBeginYMidZValue2());
 
-    // ÖĞĞÄ
+    // ä¸­å¿ƒ
     node->AddYNextNode(bisect3Storage.GetMidpointX(),
                        bisect3Storage.GetMidpointY(),
                        bisect3Storage.GetMidpointZ(),
@@ -708,7 +708,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightLowerOutside(const Bisect3No
                        bisect3Storage.GetMidXMidYMidZValue1(),
                        bisect3Storage.GetMidXMidYMidZValue2());
 
-    // Ãæ100£¬101£¬111£¬110
+    // é¢100ï¼Œ101ï¼Œ111ï¼Œ110
     node->GetXNext()->AddYNextNode(bisect3Storage.GetEndPointX(),
                                    bisect3Storage.GetMidpointY(),
                                    bisect3Storage.GetMidpointZ(),
@@ -718,7 +718,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightLowerOutside(const Bisect3No
 
     node->GetYNext()->AddXNextNode(node->GetXNext()->GetYNext());
 
-    // ±ß001,101
+    // è¾¹001,101
     node->AddZNextNode(bisect3Storage.GetMidpointX(),
                        bisect3Storage.GetBeginPointY(),
                        bisect3Storage.GetEndPointZ(),
@@ -726,7 +726,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightLowerOutside(const Bisect3No
                        bisect3Storage.GetMidXBeginYEndZValue1(),
                        bisect3Storage.GetMidXBeginYEndZValue2());
 
-    // Ãæ001,101,111,011
+    // é¢001,101,111,011
     node->GetXNext()->AddZNextNode(bisect3Storage.GetEndPointX(),
                                    bisect3Storage.GetBeginPointY(),
                                    bisect3Storage.GetEndPointZ(),
@@ -736,7 +736,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightLowerOutside(const Bisect3No
 
     node->GetZNext()->AddXNextNode(node->GetXNext()->GetZNext());
 
-    // Ãæ001£¬101£¬111£¬011
+    // é¢001ï¼Œ101ï¼Œ111ï¼Œ011
     node->GetYNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
                                    bisect3Storage.GetMidpointY(),
                                    bisect3Storage.GetEndPointZ(),
@@ -746,7 +746,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightLowerOutside(const Bisect3No
 
     node->GetZNext()->AddYNextNode(node->GetYNext()->GetZNext());
 
-    // ±ß101,111
+    // è¾¹101,111
     node->GetXNext()->GetYNext()->AddZNextNode(bisect3Storage.GetEndPointX(),
                                                bisect3Storage.GetMidpointY(),
                                                bisect3Storage.GetEndPointZ(),
@@ -765,7 +765,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftUpperOutside(const Bisect3Nod
     {
         return;
     }
-    // ÖĞĞÄ
+    // ä¸­å¿ƒ
     node->AddXNextNode(bisect3Storage.GetMidpointX(),
                        bisect3Storage.GetMidpointY(),
                        bisect3Storage.GetMidpointZ(),
@@ -773,7 +773,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftUpperOutside(const Bisect3Nod
                        bisect3Storage.GetMidXMidYMidZValue1(),
                        bisect3Storage.GetMidXMidYMidZValue2());
 
-    // ±ß011,010
+    // è¾¹011,010
     node->AddYNextNode(bisect3Storage.GetBeginPointX(),
                        bisect3Storage.GetEndPointY(),
                        bisect3Storage.GetMidpointZ(),
@@ -781,7 +781,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftUpperOutside(const Bisect3Nod
                        bisect3Storage.GetBeginXEndYMidZValue1(),
                        bisect3Storage.GetBeginXEndYMidZValue2());
 
-    // Ãæ011£¬010£¬110£¬111
+    // é¢011ï¼Œ010ï¼Œ110ï¼Œ111
     node->GetXNext()->AddYNextNode(bisect3Storage.GetMidpointX(),
                                    bisect3Storage.GetEndPointY(),
                                    bisect3Storage.GetMidpointZ(),
@@ -791,7 +791,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftUpperOutside(const Bisect3Nod
 
     node->GetYNext()->AddXNextNode(node->GetXNext()->GetYNext());
 
-    // ±ß 001,011
+    // è¾¹ 001,011
     node->AddZNextNode(bisect3Storage.GetBeginPointX(),
                        bisect3Storage.GetMidpointY(),
                        bisect3Storage.GetEndPointZ(),
@@ -799,7 +799,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftUpperOutside(const Bisect3Nod
                        bisect3Storage.GetBeginXMidYEndZValue1(),
                        bisect3Storage.GetBeginXMidYEndZValue2());
 
-    // Ãæ001£¬101£¬111£¬011
+    // é¢001ï¼Œ101ï¼Œ111ï¼Œ011
     node->GetXNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
                                    bisect3Storage.GetMidpointY(),
                                    bisect3Storage.GetEndPointZ(),
@@ -809,7 +809,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftUpperOutside(const Bisect3Nod
 
     node->GetZNext()->AddXNextNode(node->GetXNext()->GetZNext());
 
-    // Ô­×óÉÏÍâµã
+    // åŸå·¦ä¸Šå¤–ç‚¹
     node->GetYNext()->AddZNextNode(bisect3Storage.GetBeginPointX(),
                                    bisect3Storage.GetEndPointY(),
                                    bisect3Storage.GetEndPointZ(),
@@ -819,7 +819,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftUpperOutside(const Bisect3Nod
 
     node->GetZNext()->AddYNextNode(node->GetYNext()->GetZNext());
 
-    // ±ß011£¬111
+    // è¾¹011ï¼Œ111
     node->GetXNext()->GetYNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
                                                bisect3Storage.GetEndPointY(),
                                                bisect3Storage.GetEndPointZ(),
@@ -839,7 +839,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightUpperOutside(const Bisect3No
         return;
     }
 
-    // Ãæ110,100,101,111
+    // é¢110,100,101,111
     node->AddXNextNode(bisect3Storage.GetEndPointX(),
                        bisect3Storage.GetMidpointY(),
                        bisect3Storage.GetMidpointZ(),
@@ -847,7 +847,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightUpperOutside(const Bisect3No
                        bisect3Storage.GetEndXMidYMidZValue1(),
                        bisect3Storage.GetEndXMidYMidZValue2());
 
-    // Ãæ010£¬110£¬111£¬011
+    // é¢010ï¼Œ110ï¼Œ111ï¼Œ011
     node->AddYNextNode(bisect3Storage.GetMidpointX(),
                        bisect3Storage.GetEndPointY(),
                        bisect3Storage.GetMidpointZ(),
@@ -855,7 +855,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightUpperOutside(const Bisect3No
                        bisect3Storage.GetMidXEndYMidZValue1(),
                        bisect3Storage.GetMidXEndYMidZValue2());
 
-    // ±ß110,111
+    // è¾¹110,111
     node->GetXNext()->AddYNextNode(bisect3Storage.GetEndPointX(),
                                    bisect3Storage.GetEndPointY(),
                                    bisect3Storage.GetMidpointZ(),
@@ -865,7 +865,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightUpperOutside(const Bisect3No
 
     node->GetYNext()->AddXNextNode(node->GetXNext()->GetYNext());
 
-    // Ãæ011£¬111£¬101£¬001
+    // é¢011ï¼Œ111ï¼Œ101ï¼Œ001
     node->AddZNextNode(bisect3Storage.GetMidpointX(),
                        bisect3Storage.GetMidpointY(),
                        bisect3Storage.GetEndPointZ(),
@@ -873,7 +873,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightUpperOutside(const Bisect3No
                        bisect3Storage.GetMidXBeginYEndZValue1(),
                        bisect3Storage.GetMidXBeginYEndZValue2());
 
-    // Ãæ 100, 110, 100, 101¡£
+    // é¢ 100, 110, 100, 101ã€‚
     node->GetXNext()->AddZNextNode(bisect3Storage.GetEndPointX(),
                                    bisect3Storage.GetMidpointY(),
                                    bisect3Storage.GetEndPointZ(),
@@ -883,7 +883,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightUpperOutside(const Bisect3No
 
     node->GetZNext()->AddXNextNode(node->GetXNext()->GetZNext());
 
-    // ±ß011£¬111
+    // è¾¹011ï¼Œ111
     node->GetYNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
                                    bisect3Storage.GetEndPointY(),
                                    bisect3Storage.GetEndPointZ(),
@@ -893,7 +893,7 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightUpperOutside(const Bisect3No
 
     node->GetZNext()->AddYNextNode(node->GetYNext()->GetZNext());
 
-    // Ô­ÓÒÉÏÍâµã
+    // åŸå³ä¸Šå¤–ç‚¹
     node->GetXNext()->GetYNext()->AddZNextNode(bisect3Storage.GetEndPointX(),
                                                bisect3Storage.GetEndPointY(),
                                                bisect3Storage.GetEndPointZ(),

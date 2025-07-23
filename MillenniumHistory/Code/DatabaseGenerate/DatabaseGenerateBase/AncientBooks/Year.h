@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-
+ï»¿/// Copyright (c) 2010-
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// ×Ô¶¯Éú³É
+/// æ ‡å‡†ï¼šstd:c++20
+/// è‡ªåŠ¨ç”Ÿæˆ
 
 #ifndef ANCIENT_BOOKS_YEAR_H
 #define ANCIENT_BOOKS_YEAR_H
@@ -61,12 +61,12 @@ namespace AncientBooks
 
     private:
         int id;  // Id
-        String name;  // Ãû×Ö
-        int sexagenaryCycle;  // ¸ÉÖ§
-        int64_t reignTitle;  // Õı½yÄêÌ–
-        int year;  // ×Äê
-        Int64Container unorthodoxReignTitle;  // ·ÇÄêÌ–
-        IntContainer unorthodoxYear;  // ×Äê
+        String name;  // åå­—
+        int sexagenaryCycle;  // å¹²æ”¯
+        int64_t reignTitle;  // æ­£çµ±å¹´è™Ÿ
+        int year;  // å¹¾å¹´
+        Int64Container unorthodoxReignTitle;  // éå¹´è™Ÿ
+        IntContainer unorthodoxYear;  // å¹¾å¹´
     };
 }
 

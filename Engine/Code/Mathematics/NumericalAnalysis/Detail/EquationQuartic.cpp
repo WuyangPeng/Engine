@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 13:31)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 13:31)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -68,7 +68,7 @@ Mathematics::EquationQuartic::Imaginary Mathematics::EquationQuartic::Substituti
 
 void Mathematics::EquationQuartic::Solving()
 {
-    // ÏûÈ¥Èı´ÎÏî
+    // æ¶ˆå»ä¸‰æ¬¡é¡¹
     // p = -3a^2 / 8 + b
     // q = a^3 / 8 - ab / 2 + c
     // r = -3a^4 / 256 + ba^2 / 16 - ac / 4 + d
@@ -81,7 +81,7 @@ void Mathematics::EquationQuartic::Solving()
 
 bool Mathematics::EquationQuartic::Predigest()
 {
-    // ³£ÊıÏîÎªÁãÊ±£¬»¯½â·½³Ì¡£
+    // å¸¸æ•°é¡¹ä¸ºé›¶æ—¶ï¼ŒåŒ–è§£æ–¹ç¨‹ã€‚
     if (MathD::FAbs(constant) <= GetEpsilon())
     {
         SetRealResult(0.0);
@@ -91,7 +91,7 @@ bool Mathematics::EquationQuartic::Predigest()
         return true;
     }
 
-    // ËÄ´ÎÏîÎªÁãÊ±£¬»¯½â·½³Ì¡£
+    // å››æ¬¡é¡¹ä¸ºé›¶æ—¶ï¼ŒåŒ–è§£æ–¹ç¨‹ã€‚
     if (MathD::FAbs(quartic) <= GetEpsilon())
     {
         const EquationThrice equation{ constant, once, secondary, thrice };
@@ -143,10 +143,10 @@ void Mathematics::EquationQuartic::CalculateThriceEquation(double p, double q, d
     const auto one = -r;
     const auto zero = (4.0 * r * p - q * q) / 8.0;
 
-    // ÏÈÇó½âÒ»¸öÈı´Î·½³Ì¡£
+    // å…ˆæ±‚è§£ä¸€ä¸ªä¸‰æ¬¡æ–¹ç¨‹ã€‚
     const EquationThrice equationThrice{ zero, one, two, 1.0 };
 
-    MATHEMATICS_ASSERTION_1(equationThrice.IsRealResult(), "ËÄ´Î·½³Ì·Ö½âµÄÈı´Î·½³ÌÎŞ½â£¡");
+    MATHEMATICS_ASSERTION_1(equationThrice.IsRealResult(), "å››æ¬¡æ–¹ç¨‹åˆ†è§£çš„ä¸‰æ¬¡æ–¹ç¨‹æ— è§£ï¼");
 
     for (auto iter = equationThrice.GetRealBegin(); iter != equationThrice.GetRealEnd(); ++iter)
     {
@@ -177,7 +177,7 @@ void Mathematics::EquationQuartic::CalculateResult(double solution, double p, do
 
 void Mathematics::EquationQuartic::CalculateSecondaryEquation(double thriceSolution, double secondaryConstant, double secondaryOnce)
 {
-    // ½«ËÄ´Î·½³Ì·Ö½âÎªÁ½¸ö¶ş´Î·½³Ì¡£
+    // å°†å››æ¬¡æ–¹ç¨‹åˆ†è§£ä¸ºä¸¤ä¸ªäºŒæ¬¡æ–¹ç¨‹ã€‚
     const auto minConstant = thriceSolution - secondaryConstant;
     const auto maxConstant = thriceSolution + secondaryConstant;
 

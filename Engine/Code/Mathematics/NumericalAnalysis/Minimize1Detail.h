@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 10:18)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 10:18)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZE1_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZE1_DETAIL_H
@@ -56,7 +56,7 @@ typename Mathematics::Minimize1<Real, UserDataType>::Minimize1DataType Mathemati
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    MATHEMATICS_ASSERTION_1(begin <= initial && initial <= end, "ÎŞĞ§µÄ³õÊ¼tÖµ\n");
+    MATHEMATICS_ASSERTION_1(begin <= initial && initial <= end, "æ— æ•ˆçš„åˆå§‹tå€¼\n");
 
     Minimize1DataType minimize1Data;
 
@@ -88,17 +88,17 @@ void Mathematics::Minimize1<Real, UserDataType>::CompareMinimum(Real begin, Real
 
     if (MathType::GetValue(0) < beginFunction - (MathType::GetValue(2) * middleFunction + endFunction))
     {
-        // ¶ş´ÎÄâºÏ¾ßÓĞÖĞµãÕı¶ş½×µ¼Êı¡£
+        // äºŒæ¬¡æ‹Ÿåˆå…·æœ‰ä¸­ç‚¹æ­£äºŒé˜¶å¯¼æ•°ã€‚
         if (beginFunction < endFunction)
         {
             if (beginFunction <= middleFunction)
             {
-                // Ôö¼Ó£¬ÖØ¸´ÔÚ [begin,middle]¡£
+                // å¢åŠ ï¼Œé‡å¤åœ¨ [begin,middle]ã€‚
                 CompareMinimum(begin, beginFunction, middle, middleFunction, level, minimize1Data);
             }
             else
             {
-                // ²»µ¥µ÷£¬ÓĞÒ»¸öÀ¨ºÅ
+                // ä¸å•è°ƒï¼Œæœ‰ä¸€ä¸ªæ‹¬å·
                 CompareBracketedMinimum(begin, beginFunction, middle, middleFunction, end, endFunction, level, minimize1Data);
             }
         }
@@ -106,39 +106,39 @@ void Mathematics::Minimize1<Real, UserDataType>::CompareMinimum(Real begin, Real
         {
             if (endFunction <= middleFunction)
             {
-                // ¼õÉÙ, ÖØ¸´ÔÚ [middle,end].
+                // å‡å°‘, é‡å¤åœ¨ [middle,end].
                 CompareMinimum(middle, middleFunction, end, endFunction, level, minimize1Data);
             }
             else
             {
-                // ²»µ¥µ÷£¬ÓĞÒ»¸öÀ¨ºÅ
+                // ä¸å•è°ƒï¼Œæœ‰ä¸€ä¸ªæ‹¬å·
                 CompareBracketedMinimum(begin, beginFunction, middle, middleFunction, end, endFunction, level, minimize1Data);
             }
         }
         else
         {
-            // ³£Êı£¬ÖØ¸´ÔÚ[begin,middle] ºÍ  [middle,end]¡£
+            // å¸¸æ•°ï¼Œé‡å¤åœ¨[begin,middle] å’Œ  [middle,end]ã€‚
             CompareMinimum(begin, beginFunction, middle, middleFunction, level, minimize1Data);
             CompareMinimum(middle, middleFunction, end, endFunction, level, minimize1Data);
         }
     }
     else
     {
-        // ¶ş´ÎÄâºÏ¾ßÓĞÖĞµã·ÇÕıÊı¶ş½×µ¼Êı¡£
+        // äºŒæ¬¡æ‹Ÿåˆå…·æœ‰ä¸­ç‚¹éæ­£æ•°äºŒé˜¶å¯¼æ•°ã€‚
 
         if (beginFunction < endFunction)
         {
-            // ÖØ¸´ÔÚ  [begin,middle]¡£
+            // é‡å¤åœ¨  [begin,middle]ã€‚
             CompareMinimum(begin, beginFunction, middle, middleFunction, level, minimize1Data);
         }
         else if (endFunction < beginFunction)
         {
-            // ÖØ¸´ÔÚ [middle,end]¡£
+            // é‡å¤åœ¨ [middle,end]ã€‚
             CompareMinimum(middle, middleFunction, end, endFunction, level, minimize1Data);
         }
         else
         {
-            // ÖØ¸´ÔÚ[begin,middle] ºÍ  [middle,end]¡£
+            // é‡å¤åœ¨[begin,middle] å’Œ  [middle,end]ã€‚
             CompareMinimum(begin, beginFunction, middle, middleFunction, level, minimize1Data);
             CompareMinimum(middle, middleFunction, end, endFunction, level, minimize1Data);
         }
@@ -155,17 +155,17 @@ void Mathematics::Minimize1<Real, UserDataType>::CompareMinimum(Real begin, Real
 
     if ((middle - begin) * (middleFunction - endFunction) < (end - middle) * (beginFunction - middleFunction))
     {
-        // ¶ş´ÎÄâºÏ¾ßÓĞÖĞµãÕı¶ş½×µ¼Êı¡£
+        // äºŒæ¬¡æ‹Ÿåˆå…·æœ‰ä¸­ç‚¹æ­£äºŒé˜¶å¯¼æ•°ã€‚
         if (beginFunction < endFunction)
         {
             if (beginFunction <= middleFunction)
             {
-                // Ôö¼Ó£¬ÖØ¸´ÔÚ[begin,middle]¡£
+                // å¢åŠ ï¼Œé‡å¤åœ¨[begin,middle]ã€‚
                 CompareMinimum(begin, beginFunction, middle, middleFunction, level, minimize1Data);
             }
             else
             {
-                // ²»µ¥µ÷£¬ÓĞÒ»¸öÀ¨ºÅ
+                // ä¸å•è°ƒï¼Œæœ‰ä¸€ä¸ªæ‹¬å·
                 CompareBracketedMinimum(begin, beginFunction, middle, middleFunction, end, endFunction, level, minimize1Data);
             }
         }
@@ -173,38 +173,38 @@ void Mathematics::Minimize1<Real, UserDataType>::CompareMinimum(Real begin, Real
         {
             if (endFunction <= middleFunction)
             {
-                // ¼õÉÙ, ÖØ¸´ÔÚ[middle,end].
+                // å‡å°‘, é‡å¤åœ¨[middle,end].
                 CompareMinimum(middle, middleFunction, end, endFunction, level, minimize1Data);
             }
             else
             {
-                // ²»µ¥µ÷£¬ÓĞÒ»¸öÀ¨ºÅ
+                // ä¸å•è°ƒï¼Œæœ‰ä¸€ä¸ªæ‹¬å·
                 CompareBracketedMinimum(begin, beginFunction, middle, middleFunction, end, endFunction, level, minimize1Data);
             }
         }
         else
         {
-            // ³£Êı£¬ÖØ¸´ÔÚ[begin,middle] ºÍ [middle,end]¡£
+            // å¸¸æ•°ï¼Œé‡å¤åœ¨[begin,middle] å’Œ [middle,end]ã€‚
             CompareMinimum(begin, beginFunction, middle, middleFunction, level, minimize1Data);
             CompareMinimum(middle, middleFunction, end, endFunction, level, minimize1Data);
         }
     }
     else
     {
-        // ¶ş´ÎÄâºÏ¾ßÓĞÖĞµã·ÇÕıÊı¶ş½×µ¼Êı¡£
+        // äºŒæ¬¡æ‹Ÿåˆå…·æœ‰ä¸­ç‚¹éæ­£æ•°äºŒé˜¶å¯¼æ•°ã€‚
         if (beginFunction < endFunction)
         {
-            // ÖØ¸´ÔÚ[begin,middle] .
+            // é‡å¤åœ¨[begin,middle] .
             CompareMinimum(begin, beginFunction, middle, middleFunction, level, minimize1Data);
         }
         else if (endFunction < beginFunction)
         {
-            // ÖØ¸´ÔÚ [middle,end].
+            // é‡å¤åœ¨ [middle,end].
             CompareMinimum(middle, middleFunction, end, endFunction, level, minimize1Data);
         }
         else
         {
-            // ÖØ¸´ÔÚ [begin,middle]  ºÍ[middle,end]
+            // é‡å¤åœ¨ [begin,middle]  å’Œ[middle,end]
             CompareMinimum(begin, beginFunction, middle, middleFunction, level, minimize1Data);
             CompareMinimum(middle, middleFunction, end, endFunction, level, minimize1Data);
         }
@@ -216,17 +216,17 @@ void Mathematics::Minimize1<Real, UserDataType>::CompareBracketedMinimum(Real be
 {
     for (auto i = 0; i < maxBracket; ++i)
     {
-        // ¸üĞÂ×îĞ¡Öµ¡£
+        // æ›´æ–°æœ€å°å€¼ã€‚
         minimize1Data.CompareData(middle, middleFunction);
 
-        // ²âÊÔÊÕÁ²¡£
+        // æµ‹è¯•æ”¶æ•›ã€‚
 
         if (MathType::FAbs(end - begin) <= MathType::GetValue(2) * MathType::GetZeroTolerance() * MathType::FAbs(middle) + MathType::epsilon)
         {
             break;
         }
 
-        // ²åÖµ¼ÆËãÅ×ÎïÏßµÄ¶¥µã¡£
+        // æ’å€¼è®¡ç®—æŠ›ç‰©çº¿çš„é¡¶ç‚¹ã€‚
         auto beginMinusMiddle = begin - middle;
         auto endMinusMiddle = end - middle;
         auto beginFunctionMinusMiddleFunction = beginFunction - middleFunction;
@@ -241,7 +241,7 @@ void Mathematics::Minimize1<Real, UserDataType>::CompareBracketedMinimum(Real be
 
         auto vertex = MathType::GetRational(1, 2) * (endMinusMiddle * product1 - beginMinusMiddle * product0) / denom + middle;
 
-        MATHEMATICS_ASSERTION_1(begin <= vertex && vertex <= end, "¶¥µã²»ÔÚÇø¼ä\n");
+        MATHEMATICS_ASSERTION_1(begin <= vertex && vertex <= end, "é¡¶ç‚¹ä¸åœ¨åŒºé—´\n");
 
         auto vertexFunction = function(vertex, userData);
         minimize1Data.CompareData(vertex, vertexFunction);
@@ -278,7 +278,7 @@ void Mathematics::Minimize1<Real, UserDataType>::CompareBracketedMinimum(Real be
         }
         else
         {
-            // Å×ÎïÏßµÄ¶¥µãÎªÖĞ¼äµÄ²ÉÑùµã¡£
+            // æŠ›ç‰©çº¿çš„é¡¶ç‚¹ä¸ºä¸­é—´çš„é‡‡æ ·ç‚¹ã€‚
             CompareMinimum(begin, beginFunction, middle, middleFunction, level, minimize1Data);
             CompareMinimum(middle, middleFunction, end, endFunction, level, minimize1Data);
         }

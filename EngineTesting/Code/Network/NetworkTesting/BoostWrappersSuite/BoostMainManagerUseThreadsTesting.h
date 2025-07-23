@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.4 (2023/09/16 10:47)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.4 (2023/09/16 10:47)
 
 #ifndef NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_MAIN_MANAGER_USE_THREADS_TESTING_H
 #define NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_MAIN_MANAGER_USE_THREADS_TESTING_H
@@ -36,7 +36,7 @@ namespace Network
         void IncrementTest();
         void SleepIncrementTest();
 
-        // ²âÊÔ¸¨Öúº¯Êı
+        // æµ‹è¯•è¾…åŠ©å‡½æ•°
         void Increment() noexcept;
         void IntSleepIncrement(IoContextType& ioContext, std::atomic_int& count);
         void Int16SleepIncrement(IoContextType& ioContext, std::atomic_int16_t& count);

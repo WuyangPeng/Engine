@@ -1,4 +1,4 @@
-$Copyright$
+ï»¿$Copyright$
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -24,7 +24,7 @@ void $ProjectName$::TestingHelper::InitSuite()
 
 void $ProjectName$::TestingHelper::AddVersionSuite()
 {
-    auto versionSuite = GenerateSuite("°æ±¾");
+    auto versionSuite = GenerateSuite("ç‰ˆæœ¬");
 
     ADD_TEST(versionSuite, VersionTesting);
 
@@ -33,7 +33,7 @@ void $ProjectName$::TestingHelper::AddVersionSuite()
 
 void $ProjectName$::TestingHelper::AddEngineSuite()
 {
-    auto engineSuite = GenerateSuite("ÒýÇæ");
+    auto engineSuite = GenerateSuite("å¼•æ“Ž");
 
     ADD_TEST(engineSuite, EngineTesting);
 

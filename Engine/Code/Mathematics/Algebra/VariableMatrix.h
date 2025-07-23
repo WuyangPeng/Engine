@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.5 (2024/02/05 14:17)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.5 (2024/02/05 14:17)
 
 #ifndef MATHEMATICS_ALGEBRA_VARIABLE_MATRIX_H
 #define MATHEMATICS_ALGEBRA_VARIABLE_MATRIX_H
@@ -19,18 +19,18 @@
 
 #include <vector>
 
-/// µ±¶¨ÒåÁËMATHEMATICS_USE_MATRIX_VECTORÊ±£¬
-/// ¾ØÕóÔËËãÓ¦ÓÃÎª×ó³Ë¡£
-/// ÀıÈç£¬¸ø¶¨µÄ¾ØÕóMºÍÏòÁ¿V£¬¾ØÕó³ËÊ¸Á¿ÎªM * V¡£
-/// Ò²¾ÍÊÇËµ£¬V±»µ±×÷Ò»¸öÁĞÏòÁ¿¡£
-/// Ò»Ğ©Í¼ĞÎAPIÊ¹ÓÃV * M£¬ÆäÖĞV±»ÊÓÎªĞĞÏòÁ¿¡£
-/// ÔÚÕâĞ©»·¾³ÖĞ£¬¾ØÕó¡°M¡±ÊÇÕæÕıµÄMËù±íÊ¾µÄ×ªÖÃ¡£
-/// ÀàËÆµØ£¬Ó¦ÓÃ2¸ö¾ØÕóÔËËãM0ºÍM1£¬ÒÔ¸ÃË³Ğò£¬
-/// Ôò¼ÆËãM1*M0¶ÔÒ»¸öÏòÁ¿µÄ×ª»»ÊÇ£¨M1 * M0£©* V = M1 *£¨M0* V£©¡£
-/// Ò»Ğ©Í¼ĞÎAPIÊ¹ÓÃM0 * M1£¬µ«Í¬ÑùÕâĞ©¾ØÕóÊÇÖ¸ÕâÀïËù±íÊ¾µÄ×ªÖÃ¡£
-/// Òò´Ë£¬ÄãÒ»¶¨ÒªĞ¡ĞÄÄãÈçºÎÔÚÍ¼ĞÎAPI½Ó¿ÚÖĞ×ª»»´úÂë¡£
+/// å½“å®šä¹‰äº†MATHEMATICS_USE_MATRIX_VECTORæ—¶ï¼Œ
+/// çŸ©é˜µè¿ç®—åº”ç”¨ä¸ºå·¦ä¹˜ã€‚
+/// ä¾‹å¦‚ï¼Œç»™å®šçš„çŸ©é˜µMå’Œå‘é‡Vï¼ŒçŸ©é˜µä¹˜çŸ¢é‡ä¸ºM * Vã€‚
+/// ä¹Ÿå°±æ˜¯è¯´ï¼ŒVè¢«å½“ä½œä¸€ä¸ªåˆ—å‘é‡ã€‚
+/// ä¸€äº›å›¾å½¢APIä½¿ç”¨V * Mï¼Œå…¶ä¸­Vè¢«è§†ä¸ºè¡Œå‘é‡ã€‚
+/// åœ¨è¿™äº›ç¯å¢ƒä¸­ï¼ŒçŸ©é˜µâ€œMâ€æ˜¯çœŸæ­£çš„Mæ‰€è¡¨ç¤ºçš„è½¬ç½®ã€‚
+/// ç±»ä¼¼åœ°ï¼Œåº”ç”¨2ä¸ªçŸ©é˜µè¿ç®—M0å’ŒM1ï¼Œä»¥è¯¥é¡ºåºï¼Œ
+/// åˆ™è®¡ç®—M1*M0å¯¹ä¸€ä¸ªå‘é‡çš„è½¬æ¢æ˜¯ï¼ˆM1 * M0ï¼‰* V = M1 *ï¼ˆM0* Vï¼‰ã€‚
+/// ä¸€äº›å›¾å½¢APIä½¿ç”¨M0 * M1ï¼Œä½†åŒæ ·è¿™äº›çŸ©é˜µæ˜¯æŒ‡è¿™é‡Œæ‰€è¡¨ç¤ºçš„è½¬ç½®ã€‚
+/// å› æ­¤ï¼Œä½ ä¸€å®šè¦å°å¿ƒä½ å¦‚ä½•åœ¨å›¾å½¢APIæ¥å£ä¸­è½¬æ¢ä»£ç ã€‚
 ///
-/// ¾ØÕó±»´¢´æÎªĞĞÖ÷Ğò±£´æ£¬matrix[row][col]¡£
+/// çŸ©é˜µè¢«å‚¨å­˜ä¸ºè¡Œä¸»åºä¿å­˜ï¼Œmatrix[row][col]ã€‚
 
 namespace Mathematics
 {
@@ -49,17 +49,17 @@ namespace Mathematics
         using VectorContainerType = std::vector<VariableLengthVectorType>;
 
     public:
-        /// ³¤¶ÈÎªÁã£¬numRowsºÍnumColsÉèÖÃÎªÁã¡£
+        /// é•¿åº¦ä¸ºé›¶ï¼ŒnumRowså’ŒnumColsè®¾ç½®ä¸ºé›¶ã€‚
         VariableMatrix() noexcept = default;
 
-        /// ³¤¶ÈÎªnumRows * numCols£¬ÔªËØ³õÊ¼»¯ÎªÁã¡£
+        /// é•¿åº¦ä¸ºnumRows * numColsï¼Œå…ƒç´ åˆå§‹åŒ–ä¸ºé›¶ã€‚
         VariableMatrix(int rowsNumber, int columnsNumber);
 
-        ///  ¶ÔÓÚ0 <= row < numRowsºÍ 0 <= column < numCols£¬
-        ///  ÔªËØ(row,column)Îª1£¬ÆäËûËùÓĞÔªËØ¾ùÎª0¡£
-        ///  Èç¹ûrow»òcolumnÖĞµÄÈÎºÎÒ»¸öÎŞĞ§£¬Ôò´´½¨Áã¾ØÕó¡£
-        ///  ÕâÎª´´½¨±ê×¼Å·¼¸ÀïµÃ»ù¾ØÕóÌá¹©ÁË±ãÀû£»
-        ///  ÁíÇë²Î¼ûMakeUnit(int,int)ºÍUnit(int,int)¡£
+        ///  å¯¹äº0 <= row < numRowså’Œ 0 <= column < numColsï¼Œ
+        ///  å…ƒç´ (row,column)ä¸º1ï¼Œå…¶ä»–æ‰€æœ‰å…ƒç´ å‡ä¸º0ã€‚
+        ///  å¦‚æœrowæˆ–columnä¸­çš„ä»»ä½•ä¸€ä¸ªæ— æ•ˆï¼Œåˆ™åˆ›å»ºé›¶çŸ©é˜µã€‚
+        ///  è¿™ä¸ºåˆ›å»ºæ ‡å‡†æ¬§å‡ é‡Œå¾—åŸºçŸ©é˜µæä¾›äº†ä¾¿åˆ©ï¼›
+        ///  å¦è¯·å‚è§MakeUnit(int,int)å’ŒUnit(int,int)ã€‚
         VariableMatrix(int rowsNumber, int columnsNumber, int row, int column);
 
         VariableMatrix(int rowsNumber, int columnsNumber, const ContainerType& entry);
@@ -69,11 +69,11 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        /// ´æ´¢±íÊ¾ĞÎÊ½Í¸Ã÷µÄ³ÉÔ±·ÃÎÊ¡£
-        /// ÔÚĞĞrowºÍÁĞcolumnÖĞµÄ¾ØÕóÌõÄ¿ÊÇA(row,column)¡£
-        /// µÚÒ»¸öoperator()·µ»ØµÄÊÇconstÒıÓÃ£¬¶ø²»ÊÇRealÖµ¡£
-        /// ÕâÖ§³ÖÍ¨¹ıĞèÒªÖ¸ÏòÊı¾İµÄ³£Á¿Ö¸ÕëµÄ±ê×¼ÎÄ¼ş²Ù×÷½øĞĞĞ´Èë¡£
-        /// Ê¹ÓÃSetSize»áÇå¿Õ¾ÉÊı¾İ¡£
+        /// å­˜å‚¨è¡¨ç¤ºå½¢å¼é€æ˜çš„æˆå‘˜è®¿é—®ã€‚
+        /// åœ¨è¡Œrowå’Œåˆ—columnä¸­çš„çŸ©é˜µæ¡ç›®æ˜¯A(row,column)ã€‚
+        /// ç¬¬ä¸€ä¸ªoperator()è¿”å›çš„æ˜¯constå¼•ç”¨ï¼Œè€Œä¸æ˜¯Realå€¼ã€‚
+        /// è¿™æ”¯æŒé€šè¿‡éœ€è¦æŒ‡å‘æ•°æ®çš„å¸¸é‡æŒ‡é’ˆçš„æ ‡å‡†æ–‡ä»¶æ“ä½œè¿›è¡Œå†™å…¥ã€‚
+        /// ä½¿ç”¨SetSizeä¼šæ¸…ç©ºæ—§æ•°æ®ã€‚
         void SetSize(int rowsNumber, int columnsNumber);
         NODISCARD int GetRowsNumber() const;
         NODISCARD int GetColumnsNumber() const;
@@ -81,47 +81,47 @@ namespace Mathematics
         NODISCARD const Real& operator()(int row, int column) const;
         NODISCARD Real& operator()(int row, int column);
 
-        /// Í¨¹ıÒ»Î¬Ë÷Òı·ÃÎÊ³ÉÔ±¡£
-        /// ×¢£ºµ±´æ´¢Æ÷ÊÇĞĞÖ÷´æ´¢Æ÷»¹ÊÇÁĞÖ÷´æ´¢Æ÷ÎŞ¹Ø½ôÒªÊ±£¬
-        /// ÕâĞ©·ÃÎÊÆ÷¶ÔÓÚ¾ØÕóÏîµÄ²Ù×÷·Ç³£ÓĞÓÃ¡£
-        /// ²»ÒªÊ¹ÓÃ¹«¿ª´æ´¢Ô¼¶¨µÄ½á¹¹£¬ÈçM[column+NumCols*row]»òM[row+NumRows*column]¡£
+        /// é€šè¿‡ä¸€ç»´ç´¢å¼•è®¿é—®æˆå‘˜ã€‚
+        /// æ³¨ï¼šå½“å­˜å‚¨å™¨æ˜¯è¡Œä¸»å­˜å‚¨å™¨è¿˜æ˜¯åˆ—ä¸»å­˜å‚¨å™¨æ— å…³ç´§è¦æ—¶ï¼Œ
+        /// è¿™äº›è®¿é—®å™¨å¯¹äºçŸ©é˜µé¡¹çš„æ“ä½œéå¸¸æœ‰ç”¨ã€‚
+        /// ä¸è¦ä½¿ç”¨å…¬å¼€å­˜å‚¨çº¦å®šçš„ç»“æ„ï¼Œå¦‚M[column+NumCols*row]æˆ–M[row+NumRows*column]ã€‚
         NODISCARD const Real& operator[](int index) const;
         NODISCARD Real& operator[](int index);
 
         NODISCARD ContainerType GetContainer() const;
         void SetContainer(int rowsNumber, int columnsNumber, const ContainerType& entry);
 
-        /// °´ĞĞ»ò°´ÁĞ·ÃÎÊ³ÉÔ±¡£ÊäÈëÏòÁ¿µÄÔªËØÊıÁ¿±ØĞëÓë¾ØÕó´óĞ¡ÏàÊÊÓ¦¡£
+        /// æŒ‰è¡Œæˆ–æŒ‰åˆ—è®¿é—®æˆå‘˜ã€‚è¾“å…¥å‘é‡çš„å…ƒç´ æ•°é‡å¿…é¡»ä¸çŸ©é˜µå¤§å°ç›¸é€‚åº”ã€‚
         void SetRow(int row, const VariableLengthVectorType& vector);
         NODISCARD VariableLengthVectorType GetRow(int row) const;
         void SetColumn(int column, const VariableLengthVectorType& vector);
         NODISCARD VariableLengthVectorType GetColumn(int column) const;
         void ResetMatrix(const VectorContainerType& matrix);
 
-        /// Ö§³Ö½»»»ĞĞºÍÁĞ¡£
+        /// æ”¯æŒäº¤æ¢è¡Œå’Œåˆ—ã€‚
         void SwapRows(int lhsRow, int rhsRow);
         void SwapColumns(int lhsColumns, int rhsColumns);
 
         NODISCARD bool Equal(const VariableMatrix& rhs) const;
         NODISCARD bool Less(const VariableMatrix& rhs) const;
 
-        /// ¶ÔÓÚ¾ØÕó³Ë·¨£º¡°this¡±¾ØÕóÁĞµÄÊıÄ¿±ØĞëµÈÓÚrhs¾ØÕóĞĞµÄÊıÄ¿
+        /// å¯¹äºçŸ©é˜µä¹˜æ³•ï¼šâ€œthisâ€çŸ©é˜µåˆ—çš„æ•°ç›®å¿…é¡»ç­‰äºrhsçŸ©é˜µè¡Œçš„æ•°ç›®
         VariableMatrix& operator*=(const VariableMatrix& rhs);
 
-        /// Ò»ÔªÔËËã¡£
+        /// ä¸€å…ƒè¿ç®—ã€‚
         NODISCARD VariableMatrix operator+() const;
         NODISCARD VariableMatrix operator-() const;
 
-        /// ÏßĞÔ´úÊıÔËËã¡£
+        /// çº¿æ€§ä»£æ•°è¿ç®—ã€‚
 
-        /// ¾ØÕó±ØĞëÓĞÏàÍ¬µÄ´óĞ¡£¨ÏàÍ¬µÄĞĞÊıºÍÁĞÊı£©
-        /// ¶ÔÓÚ¾ØÕóµÄ¼Ó·¨ºÍ¼õ·¨ÔËËã¡£
+        /// çŸ©é˜µå¿…é¡»æœ‰ç›¸åŒçš„å¤§å°ï¼ˆç›¸åŒçš„è¡Œæ•°å’Œåˆ—æ•°ï¼‰
+        /// å¯¹äºçŸ©é˜µçš„åŠ æ³•å’Œå‡æ³•è¿ç®—ã€‚
         VariableMatrix& operator+=(const VariableMatrix& rhs);
         VariableMatrix& operator-=(const VariableMatrix& rhs);
         VariableMatrix& operator*=(Real scalar);
         VariableMatrix& operator/=(Real scalar);
 
-        /// ¼¸ºÎÔËËã¡£
+        /// å‡ ä½•è¿ç®—ã€‚
         NODISCARD Real L1Norm() const;
         NODISCARD Real L2Norm() const;
         NODISCARD Real LInfinityNorm() const;
@@ -130,8 +130,8 @@ namespace Mathematics
         NODISCARD Real Determinant() const;
 
         /// vector0^T * M * vector1
-        /// £¨numColumns(M) = size(vector1) ºÍ
-        /// numRows(M) = size(vector0) ÊÇ±ØĞëµÄ£©
+        /// ï¼ˆnumColumns(M) = size(vector1) å’Œ
+        /// numRows(M) = size(vector0) æ˜¯å¿…é¡»çš„ï¼‰
         NODISCARD Real QuadraticForm(const VariableLengthVectorType& vector0, const VariableLengthVectorType& vector1) const;
 
         // M^T
@@ -139,15 +139,15 @@ namespace Mathematics
 
         NODISCARD Matrix3Type GetMatrix3() const;
 
-        /// ÌØÊâ¾ØÕó¡£
+        /// ç‰¹æ®ŠçŸ©é˜µã€‚
 
-        /// ËùÓĞ×é¼ş¾ùÎª0¡£
+        /// æ‰€æœ‰ç»„ä»¶å‡ä¸º0ã€‚
         void MakeZero();
 
-        /// ·ÖÁ¿ (row,column) Îª1£¬ÆäÓà¾ùÎªÁã¡£
+        /// åˆ†é‡ (row,column) ä¸º1ï¼Œå…¶ä½™å‡ä¸ºé›¶ã€‚
         void MakeUnit(int row, int column);
 
-        /// ¶Ô½ÇÏßÌõÄ¿1£¬ÆäËûÌõÄ¿0£¬¼´Ê¹ÊÇ·ÇÕı·½ĞÎÌõÄ¿¡£
+        /// å¯¹è§’çº¿æ¡ç›®1ï¼Œå…¶ä»–æ¡ç›®0ï¼Œå³ä½¿æ˜¯éæ­£æ–¹å½¢æ¡ç›®ã€‚
         void MakeIdentity();
 
         NODISCARD static VariableMatrix Zero(int rowsNumber, int columnsNumber);
@@ -155,14 +155,14 @@ namespace Mathematics
         NODISCARD static VariableMatrix Identity(int rowsNumber, int columnsNumber);
 
     private:
-        /// ¸Ã¾ØÕó´æ´¢ÔÚÁĞÖ÷ĞòÀ´×Ô¶şÎ¬Êı×é¡£
-        /// ĞĞÖ÷Ğò»òÁĞÖ÷ĞòµÄ¹ßÀıÓÉÄúÑ¡Ôñ¡£
+        /// è¯¥çŸ©é˜µå­˜å‚¨åœ¨åˆ—ä¸»åºæ¥è‡ªäºŒç»´æ•°ç»„ã€‚
+        /// è¡Œä¸»åºæˆ–åˆ—ä¸»åºçš„æƒ¯ä¾‹ç”±æ‚¨é€‰æ‹©ã€‚
         VectorContainerType container;
     };
 
-    /// ±È½Ï (½öÊ¹ÓÃÔÚSTLÈİÆ÷)¡£
-    /// ¾ØÕó±ØĞëÓĞÏàÍ¬µÄ´óĞ¡£¨ÏàÍ¬ĞĞÊıºÍÁĞÊı£©
-    /// ÅÅĞòÈİÆ÷ºÍ¼¸ºÎÅÅĞòµÄ±È½Ï¡£
+    /// æ¯”è¾ƒ (ä»…ä½¿ç”¨åœ¨STLå®¹å™¨)ã€‚
+    /// çŸ©é˜µå¿…é¡»æœ‰ç›¸åŒçš„å¤§å°ï¼ˆç›¸åŒè¡Œæ•°å’Œåˆ—æ•°ï¼‰
+    /// æ’åºå®¹å™¨å’Œå‡ ä½•æ’åºçš„æ¯”è¾ƒã€‚
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     NODISCARD bool operator==(const VariableMatrix<Real>& lhs, const VariableMatrix<Real>& rhs);
@@ -179,47 +179,47 @@ namespace Mathematics
     requires std::is_arithmetic_v<Real>
     NODISCARD VariableMatrix<Real> Multiply(const VariableMatrix<Real>& lhs, const VariableMatrix<Real>& rhs);
 
-    /// M * v (numColumns(matrix) = size(vector) ÊÇ±ØĞëµÄ)
+    /// M * v (numColumns(matrix) = size(vector) æ˜¯å¿…é¡»çš„)
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     NODISCARD VariableLengthVector<Real> operator*(const VariableMatrix<Real>& matrix, const VariableLengthVector<Real>& vector);
 
-    /// v^T * M (numRows(matrix) = size(vector) ÊÇ±ØĞëµÄ)
+    /// v^T * M (numRows(matrix) = size(vector) æ˜¯å¿…é¡»çš„)
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     NODISCARD VariableLengthVector<Real> operator*(const VariableLengthVector<Real>& vector, const VariableMatrix<Real>& matrix);
 
-    /// M * mat^T (numColumns(lhs) = numColumns(rhs) ÊÇ±ØĞëµÄ)
+    /// M * mat^T (numColumns(lhs) = numColumns(rhs) æ˜¯å¿…é¡»çš„)
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     NODISCARD VariableMatrix<Real> MultiplyTranspose(const VariableMatrix<Real>& lhs, const VariableMatrix<Real>& rhs);
 
-    /// M^T * mat (numRows(lhs) = numRows(rhs) ÊÇ±ØĞëµÄ)
+    /// M^T * mat (numRows(lhs) = numRows(rhs) æ˜¯å¿…é¡»çš„)
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     NODISCARD VariableMatrix<Real> TransposeMultiply(const VariableMatrix<Real>& lhs, const VariableMatrix<Real>& rhs);
 
-    /// M^T * mat^T (numRows(lhs) = numColumns(rhs) ÊÇ±ØĞëµÄ)
+    /// M^T * mat^T (numRows(lhs) = numColumns(rhs) æ˜¯å¿…é¡»çš„)
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     NODISCARD VariableMatrix<Real> TransposeMultiplyTranspose(const VariableMatrix<Real>& lhs, const VariableMatrix<Real>& rhs);
 
-    /// M*D£¬DÎªÕı·½ĞÎ¶Ô½ÇÏß£¨´æ´¢ÎªÊ¸Á¿£©
+    /// M*Dï¼ŒDä¸ºæ­£æ–¹å½¢å¯¹è§’çº¿ï¼ˆå­˜å‚¨ä¸ºçŸ¢é‡ï¼‰
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     NODISCARD VariableMatrix<Real> Multiply(const VariableMatrix<Real>& matrix, const VariableLengthVector<Real>& diagonal);
 
-    /// D*M, DÎªÕı·½ĞÎ¶Ô½ÇÏß£¨´æ´¢ÎªÊ¸Á¿£©
+    /// D*M, Dä¸ºæ­£æ–¹å½¢å¯¹è§’çº¿ï¼ˆå­˜å‚¨ä¸ºçŸ¢é‡ï¼‰
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     NODISCARD VariableMatrix<Real> Multiply(const VariableLengthVector<Real>& diagonal, const VariableMatrix<Real>& matrix);
 
-    /// U*V^T£¬UÊÇN³Ë1£¬VÊÇM³Ë1£¬½á¹ûÊÇN³ËM¡£
+    /// U*V^Tï¼ŒUæ˜¯Nä¹˜1ï¼ŒVæ˜¯Mä¹˜1ï¼Œç»“æœæ˜¯Nä¹˜Mã€‚
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     NODISCARD VariableMatrix<Real> OuterProduct(const VariableLengthVector<Real>& u, const VariableLengthVector<Real>& v);
 
-    /// ¶Ô½Ç¾ØÕóµÄ³õÊ¼»¯£¬Æä¶Ô½ÇÏîÊÇDµÄ·ÖÁ¿£¬¼´Ê¹ÊÇ·ÇÆ½·½µÄ¡£
+    /// å¯¹è§’çŸ©é˜µçš„åˆå§‹åŒ–ï¼Œå…¶å¯¹è§’é¡¹æ˜¯Dçš„åˆ†é‡ï¼Œå³ä½¿æ˜¯éå¹³æ–¹çš„ã€‚
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     NODISCARD VariableMatrix<Real> MakeDiagonal(int rowsNumber, int columnsNumber, const VariableLengthVector<Real>& diagonal);
@@ -228,7 +228,7 @@ namespace Mathematics
     requires std::is_arithmetic_v<Real>
     NODISCARD bool Approximate(const VariableMatrix<Real>& lhs, const VariableMatrix<Real>& rhs, Real epsilon = Math<Real>::GetZeroTolerance());
 
-    /// µ÷ÊÔÊä³ö¡£
+    /// è°ƒè¯•è¾“å‡ºã€‚
     template <typename Real>
     requires std::is_arithmetic_v<Real>
     std::ostream& operator<<(std::ostream& stream, const VariableMatrix<Real>& matrix);

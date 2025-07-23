@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/22 23:07)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/22 23:07)
 
 #include "DatabaseGenerate/DatabaseGenerateBase/AncientBooks/AncientBooksContainer.h"
 #include "DatabaseGenerate/DatabaseGenerateCore/Helper/DatabaseGenerateCoreClassInvariantMacro.h"
@@ -15,7 +15,7 @@
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 
 DatabaseGenerateBaseTesting::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "Êı¾İ¿âÉú³É»ù´¡µ¥Ôª²âÊÔ" }
+    : ParentType{ argc, argv, "æ•°æ®åº“ç”ŸæˆåŸºç¡€å•å…ƒæµ‹è¯•" }
 {
     InitSuite();
 
@@ -34,7 +34,7 @@ void DatabaseGenerateBaseTesting::TestingHelper::InitSuite()
 
 void DatabaseGenerateBaseTesting::TestingHelper::AddAncientBooksSuite(const AncientBooksContainer& ancientBooksContainer)
 {
-    auto ancientBooksSuite = GenerateSuite("¹Å¼®");
+    auto ancientBooksSuite = GenerateSuite("å¤ç±");
 
     ADD_TEST_USE_PARAMETER_1(ancientBooksSuite, AncientBooksContainerTesting, ancientBooksContainer);
     ADD_TEST_USE_PARAMETER_1(ancientBooksSuite, ArticleTesting, ancientBooksContainer);
@@ -62,7 +62,7 @@ void DatabaseGenerateBaseTesting::TestingHelper::AddAncientBooksSuite(const Anci
 
 void DatabaseGenerateBaseTesting::TestingHelper::AddDatabaseEntitySuite(const AncientBooksContainer& ancientBooksContainer)
 {
-    auto databaseEntitySuite = GenerateSuite("Êı¾İ¿âÊµÌå");
+    auto databaseEntitySuite = GenerateSuite("æ•°æ®åº“å®ä½“");
 
     ADD_TEST_USE_PARAMETER_1(databaseEntitySuite, ArticleEntityTesting, *ancientBooksContainer.GetArticleContainer());
     ADD_TEST_USE_PARAMETER_1(databaseEntitySuite, BookEntityTesting, *ancientBooksContainer.GetBookContainer());

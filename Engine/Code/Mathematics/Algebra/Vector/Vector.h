@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.5 (2024/01/27 15:29)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.5 (2024/01/27 15:29)
 
 #ifndef MATHEMATICS_ALGEBRA_ALGEBRA_VECTOR_H
 #define MATHEMATICS_ALGEBRA_ALGEBRA_VECTOR_H
@@ -31,17 +31,17 @@ namespace Mathematics::Algebra
     public:
         Vector() noexcept;
 
-        /// Ôª×éÓÉÊäÈëÍêÈ«³õÊ¼»¯¡£
+        /// å…ƒç»„ç”±è¾“å…¥å®Œå…¨åˆå§‹åŒ–ã€‚
         explicit Vector(const Container& container) noexcept;
 
         Vector(Real x, Real y) noexcept requires(N == 2);
         Vector(Real x, Real y, Real z) noexcept requires(N == 3);
         Vector(Real x, Real y, Real z, Real w) noexcept requires(N == 4);
 
-        /// ¶ÔÓÚ0 <= direction < N£¬ÔªËØdirectionÊÇ1£¬ËùÓĞÆäËûÔªËØ¶¼ÊÇ0¡£
-        /// Èç¹ûdirectionÎŞĞ§£¬Ôò´´½¨ÁãÏòÁ¿¡£
-        /// Õâ¶ÔÓÚ´´½¨±ê×¼Å·¼¸ÀïµÃ»ùÏòÁ¿ÊÇÒ»ÖÖ·½±ã£»
-        /// ÁíÇë²Î¼ûMakeUnit(int) and Unit(int).¡£
+        /// å¯¹äº0 <= direction < Nï¼Œå…ƒç´ directionæ˜¯1ï¼Œæ‰€æœ‰å…¶ä»–å…ƒç´ éƒ½æ˜¯0ã€‚
+        /// å¦‚æœdirectionæ— æ•ˆï¼Œåˆ™åˆ›å»ºé›¶å‘é‡ã€‚
+        /// è¿™å¯¹äºåˆ›å»ºæ ‡å‡†æ¬§å‡ é‡Œå¾—åŸºå‘é‡æ˜¯ä¸€ç§æ–¹ä¾¿ï¼›
+        /// å¦è¯·å‚è§MakeUnit(int) and Unit(int).ã€‚
         explicit Vector(int direction);
 
         CLASS_INVARIANT_DECLARE;
@@ -51,12 +51,12 @@ namespace Mathematics::Algebra
             return N;
         }
 
-        /// ³ÉÔ±·ÃÎÊ¡£µÚÒ»¸öÔËËã·û[]·µ»ØµÄÊÇconstÒıÓÃ£¬¶ø²»ÊÇRealÖµ¡£
-        /// ÕâÖ§³ÖÍ¨¹ıĞèÒªÖ¸ÏòÊı¾İµÄ³£Á¿Ö¸ÕëµÄ±ê×¼ÎÄ¼ş²Ù×÷½øĞĞĞ´Èë¡£
+        /// æˆå‘˜è®¿é—®ã€‚ç¬¬ä¸€ä¸ªè¿ç®—ç¬¦[]è¿”å›çš„æ˜¯constå¼•ç”¨ï¼Œè€Œä¸æ˜¯Realå€¼ã€‚
+        /// è¿™æ”¯æŒé€šè¿‡éœ€è¦æŒ‡å‘æ•°æ®çš„å¸¸é‡æŒ‡é’ˆçš„æ ‡å‡†æ–‡ä»¶æ“ä½œè¿›è¡Œå†™å…¥ã€‚
         NODISCARD const Real& operator[](int index) const;
         NODISCARD Real& operator[](int index);
 
-        /// ÅÅĞòÈİÆ÷ºÍ¼¸ºÎÅÅĞòµÄ±È½Ï¡£
+        /// æ’åºå®¹å™¨å’Œå‡ ä½•æ’åºçš„æ¯”è¾ƒã€‚
         NODISCARD bool operator==(const Vector& rhs) const noexcept;
         NODISCARD bool operator!=(const Vector& rhs) const noexcept;
 
@@ -65,39 +65,39 @@ namespace Mathematics::Algebra
         NODISCARD bool operator>(const Vector& rhs) const noexcept;
         NODISCARD bool operator>=(const Vector& rhs) const noexcept;
 
-        /// ÌØÊâÊ¸Á¿¡£
+        /// ç‰¹æ®ŠçŸ¢é‡ã€‚
 
-        /// ËùÓĞ×é¼ş¾ùÎª0¡£
+        /// æ‰€æœ‰ç»„ä»¶å‡ä¸º0ã€‚
         void MakeZero();
 
-        /// ËùÓĞ×é¼ş¾ùÎª1¡£
+        /// æ‰€æœ‰ç»„ä»¶å‡ä¸º1ã€‚
         void MakeOnes();
 
-        /// ·ÖÁ¿directionÎª1£¬ËùÓĞÆäËû·ÖÁ¿¾ùÎªÁã¡£
+        /// åˆ†é‡directionä¸º1ï¼Œæ‰€æœ‰å…¶ä»–åˆ†é‡å‡ä¸ºé›¶ã€‚
         void MakeUnit(int direction);
 
         NODISCARD static Vector GetZero() noexcept;
         NODISCARD static Vector GetOnes();
         NODISCARD static Vector GetUnit(int direction);
 
-        /// Ò»ÔªÔËËã¡£
+        /// ä¸€å…ƒè¿ç®—ã€‚
         NODISCARD Vector operator+() const noexcept;
         NODISCARD Vector operator-() const;
 
-        /// ÏßĞÔ´úÊıÔËËã¡£
+        /// çº¿æ€§ä»£æ•°è¿ç®—ã€‚
         Vector& operator+=(const Vector& rhs);
         Vector& operator-=(const Vector& rhs);
         Vector& operator*=(Real scalar);
         Vector& operator/=(Real scalar);
 
-        /// ×é¼ş´úÊıÔËËã¡£
+        /// ç»„ä»¶ä»£æ•°è¿ç®—ã€‚
         Vector& operator*=(const Vector& rhs);
         Vector& operator/=(const Vector& rhs);
 
         NODISCARD Real GetMaxComponent() const;
 
     private:
-        // ´ËÊı¾İ½á¹¹ÀûÓÃÁËMSVCÖĞÄÚÖÃµÄÔËËã·û[]¡¢·¶Î§¼ì²éºÍ¿ÉÊÓ»¯¹¤¾ß¡£
+        // æ­¤æ•°æ®ç»“æ„åˆ©ç”¨äº†MSVCä¸­å†…ç½®çš„è¿ç®—ç¬¦[]ã€èŒƒå›´æ£€æŸ¥å’Œå¯è§†åŒ–å·¥å…·ã€‚
         Container container;
     };
 
@@ -129,11 +129,11 @@ namespace Mathematics::Algebra
     requires(1 <= N && N <= 4 && std::is_arithmetic_v<Real>)
     NODISCARD Vector<N, Real> operator/(const Vector<N, Real>& lhs, const Vector<N, Real>& rhs);
 
-    /// ¼¸ºÎÔËËã¡£½«¡°robust¡±ÉèÖÃÎª¡°false¡±µÄº¯ÊıÊ¹ÓÃ±ê×¼Ëã·¨¶ÔÏòÁ¿½øĞĞ¹éÒ»»¯£¬
-    /// ·½·¨ÊÇ½«³¤¶È¼ÆËãÎª³¤¶ÈÆ½·½µÄÆ½·½¸ù²¢³ıÒÔËü¡£
-    /// Èç¹û³¤¶ÈÎªÁã£¬Ôò½á¹û¿ÉÒÔÊÇÎŞÇî´ó£¨»òNaN£©¡£
-    /// µ±¡°robust¡±ÉèÖÃÎª¡°true¡±Ê±£¬
-    /// ¸ÃËã·¨Ö¼ÔÚ±ÜÃâ¸¡µãÒç³ö£¬²¢ÔÚ³¤¶ÈÎªÁãÊ±½«¹éÒ»»¯ÏòÁ¿ÉèÖÃÎªÁã¡£
+    /// å‡ ä½•è¿ç®—ã€‚å°†â€œrobustâ€è®¾ç½®ä¸ºâ€œfalseâ€çš„å‡½æ•°ä½¿ç”¨æ ‡å‡†ç®—æ³•å¯¹å‘é‡è¿›è¡Œå½’ä¸€åŒ–ï¼Œ
+    /// æ–¹æ³•æ˜¯å°†é•¿åº¦è®¡ç®—ä¸ºé•¿åº¦å¹³æ–¹çš„å¹³æ–¹æ ¹å¹¶é™¤ä»¥å®ƒã€‚
+    /// å¦‚æœé•¿åº¦ä¸ºé›¶ï¼Œåˆ™ç»“æœå¯ä»¥æ˜¯æ— ç©·å¤§ï¼ˆæˆ–NaNï¼‰ã€‚
+    /// å½“â€œrobustâ€è®¾ç½®ä¸ºâ€œtrueâ€æ—¶ï¼Œ
+    /// è¯¥ç®—æ³•æ—¨åœ¨é¿å…æµ®ç‚¹æº¢å‡ºï¼Œå¹¶åœ¨é•¿åº¦ä¸ºé›¶æ—¶å°†å½’ä¸€åŒ–å‘é‡è®¾ç½®ä¸ºé›¶ã€‚
     template <int N, typename Real>
     requires(1 <= N && N <= 4 && std::is_arithmetic_v<Real>)
     NODISCARD Real Dot(const Vector<N, Real>& lhs, const Vector<N, Real>& rhs);
@@ -146,48 +146,48 @@ namespace Mathematics::Algebra
     requires(1 <= N && N <= 4 && std::is_arithmetic_v<Real>)
     Real Normalize(Vector<N, Real>& vector, bool robust = false);
 
-    /// Gram-SchmidtÕı½»¹éÒ»»¯£¬´ÓÏßĞÔÎŞ¹ØµÄÊäÈëÉú³ÉÕı½»Ê¸Á¿¡£
-    /// º¯Êı·µ»Ø¹ı³ÌÖĞ¼ÆËãµÄÎ´¹æ·¶»¯Ê¸Á¿µÄ×îĞ¡³¤¶È¡£
-    /// Èç¹û¸ÃÖµ¼¸ºõÎªÁã£¬ÔòÊäÈë¿ÉÄÜÊÇÏßĞÔÏà¹ØµÄ£¨ÔÚÊıÖµÉáÈëÎó²îÄÚ£©¡£
-    /// ÔÚÊäÈëÊ±£¬±ØĞë³õÊ¼»¯1 <= numElements <= NºÍv[0]µ½v[numElements-1]¡£
-    /// ÔÚÊä³öÊ±£¬ÏòÁ¿v[0]µ½v[numElements-1]ĞÎ³ÉÕı½»¼¯¡£
+    /// Gram-Schmidtæ­£äº¤å½’ä¸€åŒ–ï¼Œä»çº¿æ€§æ— å…³çš„è¾“å…¥ç”Ÿæˆæ­£äº¤çŸ¢é‡ã€‚
+    /// å‡½æ•°è¿”å›è¿‡ç¨‹ä¸­è®¡ç®—çš„æœªè§„èŒƒåŒ–çŸ¢é‡çš„æœ€å°é•¿åº¦ã€‚
+    /// å¦‚æœè¯¥å€¼å‡ ä¹ä¸ºé›¶ï¼Œåˆ™è¾“å…¥å¯èƒ½æ˜¯çº¿æ€§ç›¸å…³çš„ï¼ˆåœ¨æ•°å€¼èˆå…¥è¯¯å·®å†…ï¼‰ã€‚
+    /// åœ¨è¾“å…¥æ—¶ï¼Œå¿…é¡»åˆå§‹åŒ–1 <= numElements <= Nå’Œv[0]åˆ°v[numElements-1]ã€‚
+    /// åœ¨è¾“å‡ºæ—¶ï¼Œå‘é‡v[0]åˆ°v[numElements-1]å½¢æˆæ­£äº¤é›†ã€‚
     template <int N, typename Real>
     requires(1 <= N && N <= 4 && std::is_arithmetic_v<Real>)
     Real Orthonormalize(int numInputs, std::vector<Vector<N, Real>>& vector, bool robust = false);
 
-    /// ¹¹ÔìÓë·ÇÁãÊäÈëÏòÁ¿Õı½»µÄµ¥¸öÏòÁ¿¡£
-    /// Èç¹û×î´ó¾ø¶Ô·ÖÁ¿³öÏÖÔÚË÷Òıi´¦£¬
-    /// ÔòÕı½»ÏòÁ¿U¾ßÓĞu[i] = v[i+1], u[i+1] = -v[i]£¬²¢ÇÒËùÓĞÆäËü·ÖÁ¿ÎªÁã¡£
-    /// Ë÷ÒıÏà¼Ói+1ÊÇÒÔNÎªÄ£¼ÆËãµÄ¡£
+    /// æ„é€ ä¸éé›¶è¾“å…¥å‘é‡æ­£äº¤çš„å•ä¸ªå‘é‡ã€‚
+    /// å¦‚æœæœ€å¤§ç»å¯¹åˆ†é‡å‡ºç°åœ¨ç´¢å¼•iå¤„ï¼Œ
+    /// åˆ™æ­£äº¤å‘é‡Uå…·æœ‰u[i] = v[i+1], u[i+1] = -v[i]ï¼Œå¹¶ä¸”æ‰€æœ‰å…¶å®ƒåˆ†é‡ä¸ºé›¶ã€‚
+    /// ç´¢å¼•ç›¸åŠ i+1æ˜¯ä»¥Nä¸ºæ¨¡è®¡ç®—çš„ã€‚
     template <int N, typename Real>
     requires(1 <= N && N <= 4 && std::is_arithmetic_v<Real>)
     NODISCARD Vector<N, Real> GetOrthogonal(const Vector<N, Real>& vector, bool unitLength);
 
-    /// ¼ÆËãÊ¸Á¿µÄÖá¶ÔÆë±ß½ç¿ò¡£Èç¹ûÊäÈëÓĞĞ§£¬Ôò·µ»ØÖµÎª¡°true¡±£¬ÔÚÕâÖÖÇé¿öÏÂ£¬vectorMinºÍvectorMax¾ßÓĞÓĞĞ§Öµ¡£
+    /// è®¡ç®—çŸ¢é‡çš„è½´å¯¹é½è¾¹ç•Œæ¡†ã€‚å¦‚æœè¾“å…¥æœ‰æ•ˆï¼Œåˆ™è¿”å›å€¼ä¸ºâ€œtrueâ€ï¼Œåœ¨è¿™ç§æƒ…å†µä¸‹ï¼ŒvectorMinå’ŒvectorMaxå…·æœ‰æœ‰æ•ˆå€¼ã€‚
     template <int N, typename Real>
     requires(1 <= N && N <= 4 && std::is_arithmetic_v<Real>)
     NODISCARD bool ComputeExtremes(int numVectors, std::vector<Vector<N, Real>>& vector, Vector<N, Real>& vectorMin, Vector<N, Real>& vectorMax);
 
-    /// ½«nÔª×évectorÌáÉıµ½Æë´Î(n+1)-Ôª×é(v,last)¡£
+    /// å°†nå…ƒç»„vectoræå‡åˆ°é½æ¬¡(n+1)-å…ƒç»„(v,last)ã€‚
     template <int N, typename Real>
     requires(1 <= N && N <= 3 && std::is_arithmetic_v<Real>)
     NODISCARD Vector<N + 1, Real> HomogeneousLift(const Vector<N, Real>& vector, Real last);
 
-    /// ½«Æë´ÎnÔª×év = (u,v[n-1])Í¶Ó°µ½(n-1)-Ôª×éu¡£
+    /// å°†é½æ¬¡nå…ƒç»„v = (u,v[n-1])æŠ•å½±åˆ°(n-1)-å…ƒç»„uã€‚
     template <int N, typename Real>
     requires(2 <= N && N <= 4 && std::is_arithmetic_v<Real>)
     NODISCARD Vector<N - 1, Real> HomogeneousProject(const Vector<N, Real>& vector);
 
-    /// ½«nÔª×év = (w0,w1) ÌáÉıµ½(n+1)-Ôª×éu = (w0,u[inject],w1)¡£
-    /// ¸ù¾İÍÆ¶Ï£¬w0ÊÇ (inject)-Ôª×é[µ±inject=0Ê±²»´æÔÚ]£¬
-    /// w1ÊÇ(n-inject)-Ôª×é[µ±inject=nÊ±²»´æÔÚ]¡£
+    /// å°†nå…ƒç»„v = (w0,w1) æå‡åˆ°(n+1)-å…ƒç»„u = (w0,u[inject],w1)ã€‚
+    /// æ ¹æ®æ¨æ–­ï¼Œw0æ˜¯ (inject)-å…ƒç»„[å½“inject=0æ—¶ä¸å­˜åœ¨]ï¼Œ
+    /// w1æ˜¯(n-inject)-å…ƒç»„[å½“inject=næ—¶ä¸å­˜åœ¨]ã€‚
     template <int N, typename Real>
     requires(1 <= N && N <= 3 && std::is_arithmetic_v<Real>)
     NODISCARD Vector<N + 1, Real> Lift(const Vector<N, Real>& vector, int inject, Real value);
 
-    /// ½«nÔª×év = (w0,v[reject],w1) Í¶Ó°µ½ (n-1)-Ôª×éu = (w0,w1)¡£
-    /// Í¨¹ıÍÆ¶Ï£¬w0ÊÇ(reject)-Ôª×é[µ±reject=0Ê±²»´æÔÚ]£¬
-    /// w1ÊÇ(n-1-reject)-Ôª×é£¨µ±reject=n-1Ê±²»´æÔÚ£©¡£
+    /// å°†nå…ƒç»„v = (w0,v[reject],w1) æŠ•å½±åˆ° (n-1)-å…ƒç»„u = (w0,w1)ã€‚
+    /// é€šè¿‡æ¨æ–­ï¼Œw0æ˜¯(reject)-å…ƒç»„[å½“reject=0æ—¶ä¸å­˜åœ¨]ï¼Œ
+    /// w1æ˜¯(n-1-reject)-å…ƒç»„ï¼ˆå½“reject=n-1æ—¶ä¸å­˜åœ¨ï¼‰ã€‚
     template <int N, typename Real>
     requires(2 <= N && N <= 4 && std::is_arithmetic_v<Real>)
     NODISCARD Vector<N - 1, Real> Project(const Vector<N, Real>& vector, int reject);

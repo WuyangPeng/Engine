@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:14)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:14)
 
 #ifndef MATHEMATICS_APPROXIMATION_PARABOLOID_FIT3_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_PARABOLOID_FIT3_DETAIL_H
@@ -45,7 +45,7 @@ Mathematics::VariableLengthVector<Real> Mathematics::ParaboloidFit3<Real>::GetCo
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Å×ÎïÃæÄâºÏÊ§°Ü¡£"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("æŠ›ç‰©é¢æ‹Ÿåˆå¤±è´¥ã€‚"s));
     }
 }
 
@@ -60,7 +60,7 @@ bool Mathematics::ParaboloidFit3<Real>::GetIsFitSuccess() const noexcept
 template <typename Real>
 void Mathematics::ParaboloidFit3<Real>::Calculate(const Points& points)
 {
-    // ·ÖÅäÏßĞÔÏµÍ³£¨¾ØÕó×î³õÊÇÁã£©¡£
+    // åˆ†é…çº¿æ€§ç³»ç»Ÿï¼ˆçŸ©é˜µæœ€åˆæ˜¯é›¶ï¼‰ã€‚
 
     VariableMatrix<Real> matrix{ variableMatrixSize, variableMatrixSize };
 

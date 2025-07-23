@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 10:25)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 10:25)
 
 #ifndef MATHEMATICS_OBJECTS_3D_TETRAHEDRON3_H
 #define MATHEMATICS_OBJECTS_3D_TETRAHEDRON3_H
@@ -36,13 +36,13 @@ namespace Mathematics
         using PlaneContainerType = std::vector<Plane3Type>;
 
     public:
-        // ¸ÃËÄÃæÌå±»±íÊ¾ÎªËÄ¸ö¶¥µãµÄÊı×é£ºV0£¬V1£¬V2ºÍV3¡£
-        // ¶¥µã±»ÅÅĞò£¬Ê¹µÃÓÉËÄÃæÌåÍâµÄ¹Û²ìÕß¹Û²ìÊ±£¬
-        // Èı½ÇĞÎµÄÃæÊÇ±»ÄæÊ±ÕëÅÅĞòµÄÈı½ÇĞÎ£º
-        //   Ãæ 0 = <V[0],V[2],V[1]>
-        //   Ãæ 1 = <V[0],V[1],V[3]>
-        //   Ãæ 2 = <V[0],V[3],V[2]>
-        //   Ãæ 3 = <V[1],V[2],V[3]>
+        // è¯¥å››é¢ä½“è¢«è¡¨ç¤ºä¸ºå››ä¸ªé¡¶ç‚¹çš„æ•°ç»„ï¼šV0ï¼ŒV1ï¼ŒV2å’ŒV3ã€‚
+        // é¡¶ç‚¹è¢«æ’åºï¼Œä½¿å¾—ç”±å››é¢ä½“å¤–çš„è§‚å¯Ÿè€…è§‚å¯Ÿæ—¶ï¼Œ
+        // ä¸‰è§’å½¢çš„é¢æ˜¯è¢«é€†æ—¶é’ˆæ’åºçš„ä¸‰è§’å½¢ï¼š
+        //   é¢ 0 = <V[0],V[2],V[1]>
+        //   é¢ 1 = <V[0],V[1],V[3]>
+        //   é¢ 2 = <V[0],V[3],V[2]>
+        //   é¢ 3 = <V[1],V[2],V[3]>
 
         Tetrahedron3(const Vector3Type& vertex0,
                      const Vector3Type& vertex1,
@@ -56,12 +56,12 @@ namespace Mathematics
         NODISCARD Vector3Type GetVertex(int index) const;
         void SetVertex(int index, const Vector3Type& aVertex);
 
-        // »ñÈ¡¶¥µãË÷ÒıÔÚÖ¸¶¨µÄÃæ¡£
+        // è·å–é¡¶ç‚¹ç´¢å¼•åœ¨æŒ‡å®šçš„é¢ã€‚
         NODISCARD static IndicesType GetFaceIndices(int face);
 
-        // ¹¹ÔìËÄÃæÌåÃæµÄÆ½Ãæ¡£
-        // ¸ÃËÄÃæ¾ßÓĞÍâ²¿Ö¸ÏòµÄ·¨ÏòÁ¿¡£
-        // Æ½ÃæË÷ÒıÊÇÍ¬Ç°ÃæµÄGetFaceIndices·µ»ØµÄË÷ÒıÏàÍ¬¡£
+        // æ„é€ å››é¢ä½“é¢çš„å¹³é¢ã€‚
+        // è¯¥å››é¢å…·æœ‰å¤–éƒ¨æŒ‡å‘çš„æ³•å‘é‡ã€‚
+        // å¹³é¢ç´¢å¼•æ˜¯åŒå‰é¢çš„GetFaceIndicesè¿”å›çš„ç´¢å¼•ç›¸åŒã€‚
         NODISCARD PlaneContainerType GetPlanes() const;
 
         NODISCARD Tetrahedron3 GetMove(Real t, const Vector3Type& velocity) const;

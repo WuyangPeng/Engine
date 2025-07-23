@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:56)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:56)
 
 #include "Rendering/RenderingExport.h"
 
@@ -34,7 +34,7 @@ Rendering::HalfFloat::HalfFloat(int value)
 Rendering::HalfFloat::OriginalType Rendering::HalfFloat::ConvertHalfFloat(float value) noexcept
 {
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)  // ÕâÀï±ØĞëÊ¹ÓÃreinterpret_cast
+#include SYSTEM_WARNING_DISABLE(26490)  // è¿™é‡Œå¿…é¡»ä½¿ç”¨reinterpret_cast
 
     const auto bits = reinterpret_cast<FloatIntegerType&>(value);
 
@@ -48,7 +48,7 @@ Rendering::HalfFloat::OriginalType Rendering::HalfFloat::ConvertHalfFloat(float 
         {
             if (halfExponent != 0)
             {
-                // ½Ø¶Ï23Î»Ğ¡Êıµ½10Î»¡£
+                // æˆªæ–­23ä½å°æ•°åˆ°10ä½ã€‚
                 const auto sign = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::symbol) >> symbolShiftingDifference);
                 const auto halfMantissa = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::mantissa) >> exponentShiftingDifference);
                 halfExponent = (halfExponent - exponentDifference) << exponentShifting;
@@ -56,20 +56,20 @@ Rendering::HalfFloat::OriginalType Rendering::HalfFloat::ConvertHalfFloat(float 
             }
             else
             {
-                // E = 0 (Ìæ´ú±àÂëÎª0,, M²¢²»ÖØÒª)
+                // E = 0 (æ›¿ä»£ç¼–ç ä¸º0,, Må¹¶ä¸é‡è¦)
                 return OriginalType{ 0 };
             }
         }
         else
         {
-            // E = 30, M = 1023 (°ë¸¡µãÊıµÄ×î´óÁ¿¼¶)
+            // E = 30, M = 1023 (åŠæµ®ç‚¹æ•°çš„æœ€å¤§é‡çº§)
             const auto sign = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::symbol) >> symbolShiftingDifference);
             return sign | gsl::narrow_cast<OriginalType>(exponent - 1);
         }
     }
     else
     {
-        // E = 1, M = 0 (°ë¸¡µãÊıµÄ×îĞ¡Á¿¼¶)
+        // E = 1, M = 0 (åŠæµ®ç‚¹æ•°çš„æœ€å°é‡çº§)
         const auto sign = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::symbol) >> symbolShiftingDifference);
         return sign | gsl::narrow_cast<OriginalType>(1 << exponentShifting);
     }
@@ -90,7 +90,7 @@ float Rendering::HalfFloat::ToFloat() const noexcept
         const auto result = sign | halfExponent | halfMantissa;
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)  // ÕâÀï±ØĞëÊ¹ÓÃreinterpret_cast
+#include SYSTEM_WARNING_DISABLE(26490)  // è¿™é‡Œå¿…é¡»ä½¿ç”¨reinterpret_cast
 
         return reinterpret_cast<const float&>(result);
 
@@ -98,7 +98,7 @@ float Rendering::HalfFloat::ToFloat() const noexcept
     }
     else
     {
-        // E = 0 (Ìæ´ú±àÂëÎª0,, M²¢²»ÖØÒª)
+        // E = 0 (æ›¿ä»£ç¼–ç ä¸º0,, Må¹¶ä¸é‡è¦)
         return 0.0f;
     }
 }
@@ -172,7 +172,7 @@ Rendering::HalfFloat& Rendering::HalfFloat::operator/=(const HalfFloat& rhs)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³ıÁã´íÎó£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("é™¤é›¶é”™è¯¯ï¼"s));
     }
 
     return *this;
@@ -227,7 +227,7 @@ float Rendering::operator/(float lhs, const HalfFloat& rhs)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³ıÁã´íÎó£¡"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("é™¤é›¶é”™è¯¯ï¼"s));
     }
 }
 

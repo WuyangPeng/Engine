@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/05/19 20:05)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/05/19 20:05)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_INT_OBJECT_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_INT_OBJECT_H
@@ -14,7 +14,7 @@
 
 #include "CoreTools/ObjectSystems/NullObject.h"
 
-/// intÖµ¶ÔÏó£¬Õâ¸öÀàÓÃÓÚÑİÊ¾ObjectÊ¹ÓÃintÖµºÍintÖµµÄÊı×é¡£
+/// intå€¼å¯¹è±¡ï¼Œè¿™ä¸ªç±»ç”¨äºæ¼”ç¤ºObjectä½¿ç”¨intå€¼å’Œintå€¼çš„æ•°ç»„ã€‚
 namespace CoreTools
 {
     class IntObject final : public NullObject

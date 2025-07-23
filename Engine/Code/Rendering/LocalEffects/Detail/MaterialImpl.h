@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2024/01/09 20:35)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2024/01/09 20:35)
 
 #ifndef RENDERING_LOCAL_EFFECTS_MATERIAL_IMPL_H
 #define RENDERING_LOCAL_EFFECTS_MATERIAL_IMPL_H
@@ -50,14 +50,14 @@ namespace Rendering
         NODISCARD float GetSpecularExponent() const noexcept;
 
     private:
-        ColourType emissive;  // Ä¬ÈÏ: (0,0,0,1)
-        ColourType ambient;  // Ä¬ÈÏ: (0,0,0,1)
+        ColourType emissive;  // é»˜è®¤: (0,0,0,1)
+        ColourType ambient;  // é»˜è®¤: (0,0,0,1)
 
-        // ²ÄÁÏµÄalphaÊ¹ÓÃdiffuseµÄalphaÍ¨µÀ
-        ColourType diffuse;  // Ä¬ÈÏ: (0,0,0,1)
+        // ææ–™çš„alphaä½¿ç”¨diffuseçš„alphaé€šé“
+        ColourType diffuse;  // é»˜è®¤: (0,0,0,1)
 
-        // ²ÄÁÏµÄ¾µÃæÖ¸ÊıÊ¹ÓÃspecularµÄalphaÍ¨µÀ
-        ColourType specular;  // Ä¬ÈÏ: (0,0,0,1)
+        // ææ–™çš„é•œé¢æŒ‡æ•°ä½¿ç”¨specularçš„alphaé€šé“
+        ColourType specular;  // é»˜è®¤: (0,0,0,1)
     };
 }
 

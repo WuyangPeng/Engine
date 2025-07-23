@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/30 22:52)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/30 22:52)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_C_FILE_MANAGER_HELPER_H
 #define CORE_TOOLS_FILE_MANAGER_C_FILE_MANAGER_HELPER_H
@@ -28,15 +28,15 @@ namespace CoreTools
         using String = System::String;
 
     public:
-        /// ×°ÔØÕû¸öÎÄ¼şµ½Ò»¸ö»º³åÇø¡£
+        /// è£…è½½æ•´ä¸ªæ–‡ä»¶åˆ°ä¸€ä¸ªç¼“å†²åŒºã€‚
         NODISCARD static FileBuffer LoadFromFile(const String& fileName, bool binaryFile);
 
         NODISCARD static FileBuffer LoadFromFileUseEnvironment(const Environment& environment, const String& fileName, bool binaryFile);
 
-        /// ±£´æ»º³åÇøµ½Ò»¸öÎÄ¼şÖĞ¡£
+        /// ä¿å­˜ç¼“å†²åŒºåˆ°ä¸€ä¸ªæ–‡ä»¶ä¸­ã€‚
         static void SaveIntoFile(const String& fileName, bool binaryFile, int bufferSize, const char* buffer);
 
-        /// ¸½¼Ó»º³åÇøµ½Ò»¸öÎÄ¼şÖĞ¡£
+        /// é™„åŠ ç¼“å†²åŒºåˆ°ä¸€ä¸ªæ–‡ä»¶ä¸­ã€‚
         static void AppendToFile(const String& fileName, bool binaryFile, int bufferSize, const char* buffer);
 
         NODISCARD static std::string LoadFromFile(const std::string& fileName);

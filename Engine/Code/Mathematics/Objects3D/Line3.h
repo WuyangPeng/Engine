@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 10:26)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 10:26)
 
 #ifndef MATHEMATICS_OBJECTS_3D_LINE3_H
 #define MATHEMATICS_OBJECTS_3D_LINE3_H
@@ -31,8 +31,8 @@ namespace Mathematics
         using AlgebraLine3 = Algebra::Line3<Real>;
 
     public:
-        // Ïß±íÊ¾ÎªP+t*D£¬ÆäÖĞPÊÇÏßÔ­µã£¬DÊÇµ¥Î»³¤¶ÈµÄ·½ÏòÏòÁ¿£¬tÊÇÈÎÒâÊµÊı¡£
-        // ÓÃ»§±ØĞëÈ·±£DÊÇµ¥Î»³¤¶È¡£
+        // çº¿è¡¨ç¤ºä¸ºP+t*Dï¼Œå…¶ä¸­Pæ˜¯çº¿åŸç‚¹ï¼ŒDæ˜¯å•ä½é•¿åº¦çš„æ–¹å‘å‘é‡ï¼Œtæ˜¯ä»»æ„å®æ•°ã€‚
+        // ç”¨æˆ·å¿…é¡»ç¡®ä¿Dæ˜¯å•ä½é•¿åº¦ã€‚
         Line3(const Vector3Type& origin, const Vector3Type& direction, Real epsilon = MathType::GetZeroTolerance()) noexcept;
         explicit Line3(const AlgebraLine3& line, Real epsilon = MathType::GetZeroTolerance());
 
@@ -52,7 +52,7 @@ namespace Mathematics
     template <typename Real>
     NODISCARD bool Approximate(const Line3<Real>& lhs, const Line3<Real>& rhs, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-    // µ÷ÊÔÊä³ö
+    // è°ƒè¯•è¾“å‡º
     template <typename Real>
     std::ostream& operator<<(std::ostream& outFile, const Line3<Real>& line);
 

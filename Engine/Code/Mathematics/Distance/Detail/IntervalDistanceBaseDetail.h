@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 15:14)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 15:14)
 
 #ifndef MATHEMATICS_DISTANCE_INTERVAL_DISTANCE_BASED_ETAIL_H
 #define MATHEMATICS_DISTANCE_INTERVAL_DISTANCE_BASED_ETAIL_H
@@ -36,9 +36,9 @@ Mathematics::IntervalDistanceBase<Real, Vector>::IntervalDistanceBase(const Dist
 template <typename Real, typename Vector>
 void Mathematics::IntervalDistanceBase<Real, Vector>::Solve()
 {
-    // ÕâÀïµÄ¼ÙÉèÊÇ£¬¾àÀëf(t)ÊÇÒ»¸öÍ¹º¯Êı¡£
-    // f'(tmin) >= 0£¬Ôò×îĞ¡³öÏÖÔÚtmin¡£Èôf'(tmax) <= 0£¬Ôò×îĞ¡³öÏÖÔÚtmax¡£
-    // ·ñÔò£¬f'(0) < 0ÇÒf'(tmax) > 0 Ôò×îĞ¡·¢ÉúÔÚ(tmin,tmax)µÄÒ»Ğ©t¡£
+    // è¿™é‡Œçš„å‡è®¾æ˜¯ï¼Œè·ç¦»f(t)æ˜¯ä¸€ä¸ªå‡¸å‡½æ•°ã€‚
+    // f'(tmin) >= 0ï¼Œåˆ™æœ€å°å‡ºç°åœ¨tminã€‚è‹¥f'(tmax) <= 0ï¼Œåˆ™æœ€å°å‡ºç°åœ¨tmaxã€‚
+    // å¦åˆ™ï¼Œf'(0) < 0ä¸”f'(tmax) > 0 åˆ™æœ€å°å‘ç”Ÿåœ¨(tmin,tmax)çš„ä¸€äº›tã€‚
     if (!(CheckBeginMonotonicFunction() || CheckEndMonotonicFunction()))
     {
         if (!Iteration())
@@ -78,7 +78,7 @@ bool Mathematics::IntervalDistanceBase<Real, Vector>::CheckBeginMonotonicFunctio
     beginDistanceResult = Get(beginT);
     if (beginDistanceResult.GetDistance() <= distance.GetZeroThreshold())
     {
-        // ¾àÀëÎªÓĞĞ§ÖµÁã¡£¶ÔÏóÊÇÔÚ×î³õÎ»ÖÃ½Ó´¥¡£
+        // è·ç¦»ä¸ºæœ‰æ•ˆå€¼é›¶ã€‚å¯¹è±¡æ˜¯åœ¨æœ€åˆä½ç½®æ¥è§¦ã€‚
         beginDistanceResult.Set(MathType::GetValue(0), beginT);
         distanceResult = beginDistanceResult;
 
@@ -88,7 +88,7 @@ bool Mathematics::IntervalDistanceBase<Real, Vector>::CheckBeginMonotonicFunctio
     beginDerivativeDistanceResult = GetDerivative(beginT);
     if (MathType::GetValue(0) <= beginDerivativeDistanceResult)
     {
-        // ¾àÀëÔÚ[0,tmax]Ôö¼Ó¡£
+        // è·ç¦»åœ¨[0,tmax]å¢åŠ ã€‚
         beginDistanceResult.SetContactTime(beginT);
         distanceResult = beginDistanceResult;
 
@@ -104,7 +104,7 @@ bool Mathematics::IntervalDistanceBase<Real, Vector>::CheckEndMonotonicFunction(
     endDistanceResult = Get(endT);
     if (endDistanceResult.GetDistance() <= distance.GetZeroThreshold())
     {
-        // ¾àÀëÎªÓĞĞ§ÖµÁã¡£
+        // è·ç¦»ä¸ºæœ‰æ•ˆå€¼é›¶ã€‚
         endDistanceResult.Set(MathType::GetValue(0), endT);
         distanceResult = endDistanceResult;
 
@@ -114,7 +114,7 @@ bool Mathematics::IntervalDistanceBase<Real, Vector>::CheckEndMonotonicFunction(
     endDerivativeDistanceResult = GetDerivative(endT);
     if (endDerivativeDistanceResult <= MathType::GetValue(0))
     {
-        // ¾àÀëÔÚ[0,tmax]Ôö¼Ó¡£
+        // è·ç¦»åœ¨[0,tmax]å¢åŠ ã€‚
         endDistanceResult.SetContactTime(endT);
         distanceResult = endDistanceResult;
 
@@ -127,23 +127,23 @@ bool Mathematics::IntervalDistanceBase<Real, Vector>::CheckEndMonotonicFunction(
 template <typename Real, typename Vector>
 bool Mathematics::IntervalDistanceBase<Real, Vector>::Iteration()
 {
-    // ¿ªÊ¼ÓÃÅ£¶Ù·¨´¦Àí¼ÆËãµ±¾àÀëÎªÁãµÄÊ±¼ä¡£
-    // ÔÚ´Ë¹ı³ÌÖĞ£¬Èç¹ûÎÒÃÇÈ·¶¨¸Ã¾àÀë²»ÄÜÎªÁã£¬ÎÒÃÇ½«ÇĞ»»µ½Ò»¸ö×îĞ¡ÊıÖµ¡£
+    // å¼€å§‹ç”¨ç‰›é¡¿æ³•å¤„ç†è®¡ç®—å½“è·ç¦»ä¸ºé›¶çš„æ—¶é—´ã€‚
+    // åœ¨æ­¤è¿‡ç¨‹ä¸­ï¼Œå¦‚æœæˆ‘ä»¬ç¡®å®šè¯¥è·ç¦»ä¸èƒ½ä¸ºé›¶ï¼Œæˆ‘ä»¬å°†åˆ‡æ¢åˆ°ä¸€ä¸ªæœ€å°æ•°å€¼ã€‚
     const auto maximumIterations = distance.GetMaximumIterations();
     for (auto loop = 0; loop < maximumIterations; ++loop)
     {
-        // ¼ÆËãÏÂÒ»¸öÅ£¶Ùµü´ú
+        // è®¡ç®—ä¸‹ä¸€ä¸ªç‰›é¡¿è¿­ä»£
         auto iterationT = beginT - beginDistanceResult.GetDistance() / beginDerivativeDistanceResult;
         if (tMax <= iterationT)
         {
-            // Í¼ĞÎµÄÍ¹ĞÔ±£Ö¤µ±¸ÃÌõ¼ş·¢ÉúÊ±£¬¾àÀë×ÜÎªÕı¡£ÇĞ»»µ½×îĞ¡Êı×Ö¡£
+            // å›¾å½¢çš„å‡¸æ€§ä¿è¯å½“è¯¥æ¡ä»¶å‘ç”Ÿæ—¶ï¼Œè·ç¦»æ€»ä¸ºæ­£ã€‚åˆ‡æ¢åˆ°æœ€å°æ•°å­—ã€‚
             return false;
         }
 
         distanceResult = Get(iterationT);
         if (distanceResult.GetDistance() <= distance.GetZeroThreshold())
         {
-            // ¾àÀëÎªÓĞĞ§ÖµÁã¡£
+            // è·ç¦»ä¸ºæœ‰æ•ˆå€¼é›¶ã€‚
             distanceResult.SetDistance(MathType::GetValue(0));
             distanceResult.SetContactTime(iterationT);
 
@@ -153,7 +153,7 @@ bool Mathematics::IntervalDistanceBase<Real, Vector>::Iteration()
         auto derivativeResult = GetDerivative(iterationT);
         if (MathType::GetValue(0) <= derivativeResult)
         {
-            // Í¼ĞÎµÄÍ¹ĞÔ±£Ö¤µ±¸ÃÌõ¼ş·¢ÉúÊ±£¬¾àÀë×ÜÎªÕı¡£ÇĞ»»µ½×îĞ¡Êı×Ö¡£
+            // å›¾å½¢çš„å‡¸æ€§ä¿è¯å½“è¯¥æ¡ä»¶å‘ç”Ÿæ—¶ï¼Œè·ç¦»æ€»ä¸ºæ­£ã€‚åˆ‡æ¢åˆ°æœ€å°æ•°å­—ã€‚
             return false;
         }
 
@@ -163,11 +163,11 @@ bool Mathematics::IntervalDistanceBase<Real, Vector>::Iteration()
 
         if (loop + 1 == maximumIterations)
         {
-            // Î´ÄÜµü´úËùĞè´ÎÊıÄÚÊÕÁ²¡£µ½´ï´Ë´¦Ê±£¬µ¼ÊıÖµ×ÜÊÇ¸ºÖµ£¬Òò´Ë±¨¸æ×îºóÒ»´Î¾àÀë¡£
+            // æœªèƒ½è¿­ä»£æ‰€éœ€æ¬¡æ•°å†…æ”¶æ•›ã€‚åˆ°è¾¾æ­¤å¤„æ—¶ï¼Œå¯¼æ•°å€¼æ€»æ˜¯è´Ÿå€¼ï¼Œå› æ­¤æŠ¥å‘Šæœ€åä¸€æ¬¡è·ç¦»ã€‚
             distanceResult.SetDistance(beginDistanceResult.GetDistance());
             distanceResult.SetContactTime(beginT);
 
-            MATHEMATICS_ASSERTION_2(false, "Î´ÄÜµü´úËùĞè´ÎÊıÄÚÊÕÁ²");
+            MATHEMATICS_ASSERTION_2(false, "æœªèƒ½è¿­ä»£æ‰€éœ€æ¬¡æ•°å†…æ”¶æ•›");
 
             return true;
         }
@@ -179,7 +179,7 @@ bool Mathematics::IntervalDistanceBase<Real, Vector>::Iteration()
 template <typename Real, typename Vector>
 void Mathematics::IntervalDistanceBase<Real, Vector>::BisectionMethod()
 {
-    // ¾àÀë×ÜÎªÕı¡£Ê¹ÓÃ¶ş·Ö·¨ÕÒµ½µ¼Êıº¯ÊıµÄ¸ù¡£
+    // è·ç¦»æ€»ä¸ºæ­£ã€‚ä½¿ç”¨äºŒåˆ†æ³•æ‰¾åˆ°å¯¼æ•°å‡½æ•°çš„æ ¹ã€‚
     auto resultT = MathType::GetValue(0);
     for (auto loop = 0; loop < distance.GetMaximumIterations(); ++loop)
     {

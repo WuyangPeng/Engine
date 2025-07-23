@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.8 (2024/04/11 22:10)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/11 22:10)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_OUT_STREAM_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_OUT_STREAM_H
@@ -19,8 +19,8 @@
 
 CORE_TOOLS_NON_COPY_EXPORT_IMPL(BufferOutStreamImpl);
 
-/// дobjects���ڴ�顣
-/// ������ʧ��ʱ���׳�Error�쳣��
+/// 写objects到内存块。
+/// 当操作失败时，抛出Error异常。
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE BufferOutStream final

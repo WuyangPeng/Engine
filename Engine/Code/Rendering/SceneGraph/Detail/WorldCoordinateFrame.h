@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/28 17:53)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/28 17:53)
 
 #ifndef RENDERING_SCENE_GRAPH_WORLD_COORDINATE_FRAME_H
 #define RENDERING_SCENE_GRAPH_WORLD_COORDINATE_FRAME_H
@@ -38,12 +38,12 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        /// ÉãÏñ»ú×ø±êÏµ×ÜÊÇÔÚÊÀ½ç×ø±ê¡£Ä¬ÈÏ×ø±êÏµ{P;D,U,R}ÔÚÓÒÊÖÊÀ½ç×ø±êÖÐ£¬ÆäÖÐ
-        /// Ä¬ÈÏ position  P = (0, 0,  0; 1)
-        /// Ä¬ÈÏ direction D = (0, 0, -1; 0)
-        /// Ä¬ÈÏ up        U = (0, 1,  0; 0)
-        /// Ä¬ÈÏ right     R = (1, 0,  0; 0)
-        /// »ù{D,U,R}ÐèÒªÊÇÒ»¸öÓÒÊÖÕý½»¼¯¡£
+        /// æ‘„åƒæœºåæ ‡ç³»æ€»æ˜¯åœ¨ä¸–ç•Œåæ ‡ã€‚é»˜è®¤åæ ‡ç³»{P;D,U,R}åœ¨å³æ‰‹ä¸–ç•Œåæ ‡ä¸­ï¼Œå…¶ä¸­
+        /// é»˜è®¤ position  P = (0, 0,  0; 1)
+        /// é»˜è®¤ direction D = (0, 0, -1; 0)
+        /// é»˜è®¤ up        U = (0, 1,  0; 0)
+        /// é»˜è®¤ right     R = (1, 0,  0; 0)
+        /// åŸº{D,U,R}éœ€è¦æ˜¯ä¸€ä¸ªå³æ‰‹æ­£äº¤é›†ã€‚
         void SetPosition(const APoint& aPosition);
 
         void SetAxes(const AVector& aDirectionVector, const AVector& aUpVector, const AVector& aRightVector);
@@ -55,29 +55,29 @@ namespace Rendering
         NODISCARD AVector GetUpVector() const noexcept;
         NODISCARD AVector GetRightVector() const noexcept;
 
-        /// ·ÃÎÊ×ø±êÏµµÄÊÓÍ¼¾ØÕó¡£
-        /// Èç¹ûD = (d0,d1,d2),U = (u0,u1,u2),ºÍR = (r0,r1,r2),
-        /// ÊÓÍ¼¾ØÕóÎª
+        /// è®¿é—®åæ ‡ç³»çš„è§†å›¾çŸ©é˜µã€‚
+        /// å¦‚æžœD = (d0,d1,d2),U = (u0,u1,u2),å’ŒR = (r0,r1,r2),
+        /// è§†å›¾çŸ©é˜µä¸º
         ///   +-                     -+
         ///   | r0  r1  r2  -Dot(R,P) |
         ///   | u0  u1  u2  -Dot(U,P) |
         ///   | d0  d1  d2  -Dot(D,P) |
         ///   |  0   0   0          1 |
         ///   +-                     -+
-        /// µ±¶¨ÒåÁËMATHEMATICS_USE_MATRIX_VECTOR£¬¶ÔÊÓÍ¼¾ØÕóÓÒ³ËÏòÁ¿£¬¼´viewMat*vector4¡£
-        /// µ±Î´¶¨ÒåMATHEMATICS_USE_MATRIX_VECTOR£¬¶ÔÊÓÍ¼¾ØÕó×ó³ËÏòÁ¿£¬¼´vector4*viewMat£¬½«Ê¹ÓÃÏÔÊ¾¾ØÕóµÄ×ªÖÃ¡£
-        /// MATHEMATICS_USE_MATRIX_VECTORÔ¼¶¨µÄÄæÊÓÍ¼¾ØÕóÎª
+        /// å½“å®šä¹‰äº†MATHEMATICS_USE_MATRIX_VECTORï¼Œå¯¹è§†å›¾çŸ©é˜µå³ä¹˜å‘é‡ï¼Œå³viewMat*vector4ã€‚
+        /// å½“æœªå®šä¹‰MATHEMATICS_USE_MATRIX_VECTORï¼Œå¯¹è§†å›¾çŸ©é˜µå·¦ä¹˜å‘é‡ï¼Œå³vector4*viewMatï¼Œå°†ä½¿ç”¨æ˜¾ç¤ºçŸ©é˜µçš„è½¬ç½®ã€‚
+        /// MATHEMATICS_USE_MATRIX_VECTORçº¦å®šçš„é€†è§†å›¾çŸ©é˜µä¸º
         ///            +-            -+
         ///            | r0 u0 d0 p0 |
         ///   V^{-1} = | r1 u1 d1 p1 |
         ///            | r2 u2 d2 p1 |
         ///            |  0  0  0  1 |
         ///            +-           -+
-        /// µãX = (x0,x1,x2,1)¿ÉÒÔÓÉ
+        /// ç‚¹X = (x0,x1,x2,1)å¯ä»¥ç”±
         ///   X = P + y0*R + y1*U + y2*D,
-        /// ÆäÖÐy0 = Dot(R,X-P), y1 = Dot(U,X-P), ºÍ y2 = Dot(D,X-P)
-        /// Ê¹ÓÃMATHEMATICS_USE_MATRIX_VECTORÔ¼¶¨£¬Èç¹ûY = (y0,y1,y2,1)£¬ÔòY = V*X£¬
-        /// ÆäÖÐVÊÇÊÓÍ¼¾ØÕó¡£
+        /// å…¶ä¸­y0 = Dot(R,X-P), y1 = Dot(U,X-P), å’Œ y2 = Dot(D,X-P)
+        /// ä½¿ç”¨MATHEMATICS_USE_MATRIX_VECTORçº¦å®šï¼Œå¦‚æžœY = (y0,y1,y2,1)ï¼Œåˆ™Y = V*Xï¼Œ
+        /// å…¶ä¸­Væ˜¯è§†å›¾çŸ©é˜µã€‚
         NODISCARD Matrix GetViewMatrix() const noexcept;
         NODISCARD Matrix GetInverseViewMatrix() const noexcept;
 
@@ -86,26 +86,26 @@ namespace Rendering
         NODISCARD int GetStreamingSize() const noexcept;
 
     private:
-        // ¼ÆËãÖ¡¸ü¸ÄºóµÄÊÓÍ¼¾ØÕó£¬È»ºó¸üÐÂÍ¶Ó°ÊÓÍ¼¾ØÕó¡£
+        // è®¡ç®—å¸§æ›´æ”¹åŽçš„è§†å›¾çŸ©é˜µï¼Œç„¶åŽæ›´æ–°æŠ•å½±è§†å›¾çŸ©é˜µã€‚
         void OnFrameChange();
 
     private:
-        // ÊÀ½ç×ø±êÏµ¡£
+        // ä¸–ç•Œåæ ‡ç³»ã€‚
         APoint position;
         AVector directionVector;
         AVector upVector;
         AVector rightVector;
 
-        /// ÊÀ½ç×ø±êÏµµÄÊÓÍ¼¾ØÕó£¨V£©¡£
-        /// ´æ´¢Ë³ÐòÈ¡¾öÓÚÊÇ·ñ¶¨ÒåÁËMATHEMATICS_USE_MATRIX_VECTOR¡£
-        /// ÁíÒ»¸ö¾ØÕóÊÇÄæÊÓÍ¼¾ØÕó(V^{-1})¡£
+        /// ä¸–ç•Œåæ ‡ç³»çš„è§†å›¾çŸ©é˜µï¼ˆVï¼‰ã€‚
+        /// å­˜å‚¨é¡ºåºå–å†³äºŽæ˜¯å¦å®šä¹‰äº†MATHEMATICS_USE_MATRIX_VECTORã€‚
+        /// å¦ä¸€ä¸ªçŸ©é˜µæ˜¯é€†è§†å›¾çŸ©é˜µ(V^{-1})ã€‚
         Matrix viewMatrix;
         Matrix inverseViewMatrix;
 
 #ifdef RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
 
-        /// ËüµÄÊ¹ÓÃÓÉÌõ¼þ±àÒë¿ØÖÆ£¨Í¨¹ýRENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE£©¡£
-        /// ËüÔÊÐíÄú²¶»ñ²»ÕýÈ·¹¹½¨µÄ¿ò¼Ü»òÓÉÓÚÊýÖµÉáÈë´íÎó¶øÇãÐ±µÄ¿ò¼Ü¡£
+        /// å®ƒçš„ä½¿ç”¨ç”±æ¡ä»¶ç¼–è¯‘æŽ§åˆ¶ï¼ˆé€šè¿‡RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCEï¼‰ã€‚
+        /// å®ƒå…è®¸æ‚¨æ•èŽ·ä¸æ­£ç¡®æž„å»ºçš„æ¡†æž¶æˆ–ç”±äºŽæ•°å€¼èˆå…¥é”™è¯¯è€Œå€¾æ–œçš„æ¡†æž¶ã€‚
         bool validateCoordinateFrame;
 
 #endif  // RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE

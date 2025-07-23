@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 16:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 16:28)
 
 #include "Network/NetworkExport.h"
 
@@ -19,14 +19,14 @@ Network::ACESockStreamNativeType& Network::SockStreamImpl::GetACESockStream()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("²»ÊÇACE StreamÀà£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("ä¸æ˜¯ACE Streamç±»ï¼"s))
 }
 
 Network::ACEHandleType Network::SockStreamImpl::GetACEHandle() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("²»ÊÇACE StreamÀà£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("ä¸æ˜¯ACE Streamç±»ï¼"s))
 }
 
 void Network::SockStreamImpl::SetACEHandle(ACEHandleType handle)
@@ -35,7 +35,7 @@ void Network::SockStreamImpl::SetACEHandle(ACEHandleType handle)
 
     System::UnusedFunction(handle);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("²»ÊÇACE StreamÀà£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("ä¸æ˜¯ACE Streamç±»ï¼"s))
 }
 
 void Network::SockStreamImpl::SetNetworkHandle(WinSocketStreamType winSocket)
@@ -44,19 +44,19 @@ void Network::SockStreamImpl::SetNetworkHandle(WinSocketStreamType winSocket)
 
     System::UnusedFunction(winSocket);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("²»ÊÇNetwork StreamÀà£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("ä¸æ˜¯Network Streamç±»ï¼"s))
 }
 
 Network::BoostSockStreamType& Network::SockStreamImpl::GetBoostSockStream()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("²»ÊÇboost StreamÀà£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("ä¸æ˜¯boost Streamç±»ï¼"s))
 }
 
 Network::WinSocketStreamType& Network::SockStreamImpl::GetNetworkSockStream()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("²»ÊÇNetwork StreamÀà£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("ä¸æ˜¯Network Streamç±»ï¼"s))
 }

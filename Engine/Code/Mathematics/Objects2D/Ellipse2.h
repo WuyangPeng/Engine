@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 11:17)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 11:17)
 
 #ifndef MATHEMATICS_OBJECTS_2D_ELLIPSE2_H
 #define MATHEMATICS_OBJECTS_2D_ELLIPSE2_H
@@ -36,23 +36,23 @@ namespace Mathematics
         using Vector2ToolsType = Vector2Tools<Real>;
 
     public:
-        // ÍÖÔ²¾ßÓĞÖĞĞÄK£¬Öá·½ÏòU[0]ºÍU[1]£¨Á½¸ö¶¼ÊÇµ¥Î»³¤¶ÈÏòÁ¿£©£¬
-        // ºÍÀ©Õ¹e[0] ºÍ e[1]£¨Á½¸ö¶¼ÊÇ¾ùÎªÕıÊı£©¡£
-        // µãX = K + y[0] * U[0] + y[1] * U[1]ÊÇÍÖÔ²Ê±£¬
-        // µ±(y[0] / e[0])^2 + (y[1] / e[1])^2 = 1¡£
-        // ¸ÃÊÔÑéÍÖÔ²ÄÚ²¿µÄµãÊ¹ÓÃ¡°<=¡±´úÌæ¡°=¡±¡£
-        // ÍÖÔ²µÄ´úÊı±íÊ¾ÊÇ
+        // æ¤­åœ†å…·æœ‰ä¸­å¿ƒKï¼Œè½´æ–¹å‘U[0]å’ŒU[1]ï¼ˆä¸¤ä¸ªéƒ½æ˜¯å•ä½é•¿åº¦å‘é‡ï¼‰ï¼Œ
+        // å’Œæ‰©å±•e[0] å’Œ e[1]ï¼ˆä¸¤ä¸ªéƒ½æ˜¯å‡ä¸ºæ­£æ•°ï¼‰ã€‚
+        // ç‚¹X = K + y[0] * U[0] + y[1] * U[1]æ˜¯æ¤­åœ†æ—¶ï¼Œ
+        // å½“(y[0] / e[0])^2 + (y[1] / e[1])^2 = 1ã€‚
+        // è¯¥è¯•éªŒæ¤­åœ†å†…éƒ¨çš„ç‚¹ä½¿ç”¨â€œ<=â€ä»£æ›¿â€œ=â€ã€‚
+        // æ¤­åœ†çš„ä»£æ•°è¡¨ç¤ºæ˜¯
         //   1 = (X-K)^T * (U[0] * U[0]^T / e[0]^2 + U[1 ]* U[1]^T / e[1]^2) * (X-K)
         //     = (X-K)^T * M * (X-K)
-        // ÆäÖĞ£¬ÉÏ±êT±íÊ¾×ªÖÃ¡£¹Û²ìµ½U[i] * U[i]^TÊÇÒ»¸ö¾ØÕó£¬¶ø²»ÊÇ±êÁ¿»ı¡£
-        // ¾ØÕóMÊÇ¶Ô³ÆµÄ¡£ÍÖÔ²Ò²ÓÉÒ»Ôª¶ş´Î·½³Ì±íÊ¾
+        // å…¶ä¸­ï¼Œä¸Šæ ‡Tè¡¨ç¤ºè½¬ç½®ã€‚è§‚å¯Ÿåˆ°U[i] * U[i]^Tæ˜¯ä¸€ä¸ªçŸ©é˜µï¼Œè€Œä¸æ˜¯æ ‡é‡ç§¯ã€‚
+        // çŸ©é˜µMæ˜¯å¯¹ç§°çš„ã€‚æ¤­åœ†ä¹Ÿç”±ä¸€å…ƒäºŒæ¬¡æ–¹ç¨‹è¡¨ç¤º
         //   0 = a0 + a1 * x[0] + a2 * x[1] + a3 * x[0]^2 + a4 * x[0]*x[1] + a5 * x[1]^2
         //     = a0 + [a1 a2] * X + X^T * [a3   a4 / 2] * X
         //                                [a4 / 2 a5  ]
         //     = C + B^T * X + X^T * A * X
-        // ÆäÖĞX = (x[0],x[1])¡£Õâ¸öµÈÊ½¿ÉÒÔ±»·Ö½âµ½(X - K)^T * M * (X - K) = 1£¬
-        // ÆäÖĞK = -A^{-1} * B / 2, M = A / (B^T * A^{-1} * B / 4 - C)¡£
-        // ÎªÍÖÔ²ĞÎÊ±£¬M±ØĞë¾ßÓĞËùÓĞÌØÕ÷ÖµÎªÕı¡£
+        // å…¶ä¸­X = (x[0],x[1])ã€‚è¿™ä¸ªç­‰å¼å¯ä»¥è¢«åˆ†è§£åˆ°(X - K)^T * M * (X - K) = 1ï¼Œ
+        // å…¶ä¸­K = -A^{-1} * B / 2, M = A / (B^T * A^{-1} * B / 4 - C)ã€‚
+        // ä¸ºæ¤­åœ†å½¢æ—¶ï¼ŒMå¿…é¡»å…·æœ‰æ‰€æœ‰ç‰¹å¾å€¼ä¸ºæ­£ã€‚
 
         Ellipse2(const Vector2Type& center,
                  const Vector2Type& axis0,
@@ -71,24 +71,24 @@ namespace Mathematics
         NODISCARD Real GetExtent0() const noexcept;
         NODISCARD Real GetExtent1() const noexcept;
 
-        // ¼ÆËã M = sum_{i=0}^1 U[i]*U[i]^T/e[i]^2.
+        // è®¡ç®— M = sum_{i=0}^1 U[i]*U[i]^T/e[i]^2.
         NODISCARD Matrix2Type GetMatrix() const;
 
-        // ¼ÆËã M^{-1} = sum_{i=0}^1 U[i]*U[i]^T*e[i]^2.
+        // è®¡ç®— M^{-1} = sum_{i=0}^1 U[i]*U[i]^T*e[i]^2.
         NODISCARD Matrix2Type GetMatrixInverse() const;
 
-        // ¹¹½¨¶ş´Î·½³ÌÊ½£¬±íÊ¾ÍÖÔ²µÄÏµÊı¡£
+        // æ„å»ºäºŒæ¬¡æ–¹ç¨‹å¼ï¼Œè¡¨ç¤ºæ¤­åœ†çš„ç³»æ•°ã€‚
         NODISCARD Ellipse2CoefficientsType ToCoefficients() const;
 
-        // ¹¹½¨m_Center£¬m_AxisºÍm_Extent´Ó¶ş´Î·½³Ì¡£
-        // Èç¹ûÊäÈëÏµÊı²»ÄÜ±íÊ¾Ò»¸öÍÖÔ²£¬ÔòÅ×³öÒì³£¡£
+        // æ„å»ºm_Centerï¼Œm_Axiså’Œm_Extentä»äºŒæ¬¡æ–¹ç¨‹ã€‚
+        // å¦‚æœè¾“å…¥ç³»æ•°ä¸èƒ½è¡¨ç¤ºä¸€ä¸ªæ¤­åœ†ï¼Œåˆ™æŠ›å‡ºå¼‚å¸¸ã€‚
         void FromCoefficients(const Ellipse2CoefficientsType& coefficients, const Real newEpsilon = MathType::GetZeroTolerance());
 
-        // ¼ÆËãµÄ¶ş´Îº¯Êı Q(X) = (X-K)^T * M * (X-K) - 1.
+        // è®¡ç®—çš„äºŒæ¬¡å‡½æ•° Q(X) = (X-K)^T * M * (X-K) - 1.
         NODISCARD Real Evaluate(const Vector2Type& point) const;
 
-        // ²âÊÔÊäÈëµãÊÇ·ñÔÚÍÖÔ²ĞÎÄÚ²¿»ò±ßÉÏ¡£
-        // ¸Ãµã±»°üº¬µ±Q(X) <= 0£¬ÆäÖĞQ(X)º¯ÊıEvaluate()¡£
+        // æµ‹è¯•è¾“å…¥ç‚¹æ˜¯å¦åœ¨æ¤­åœ†å½¢å†…éƒ¨æˆ–è¾¹ä¸Šã€‚
+        // è¯¥ç‚¹è¢«åŒ…å«å½“Q(X) <= 0ï¼Œå…¶ä¸­Q(X)å‡½æ•°Evaluate()ã€‚
         NODISCARD bool Contains(const Vector2Type& point) const;
 
         NODISCARD Ellipse2 GetMove(Real t, const Vector2Type& velocity) const;
@@ -108,7 +108,7 @@ namespace Mathematics
     template <typename Real>
     NODISCARD bool Approximate(const Ellipse2<Real>& lhs, const Ellipse2<Real>& rhs, Real epsilon);
 
-    // µ÷ÊÔÊä³ö
+    // è°ƒè¯•è¾“å‡º
     template <typename Real>
     std::ostream& operator<<(std::ostream& outFile, const Ellipse2<Real>& line);
 

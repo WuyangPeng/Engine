@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 15:05)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 15:05)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_CIRCLE3_PLANE3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_CIRCLE3_PLANE3_H
@@ -39,9 +39,9 @@ namespace Mathematics
         NODISCARD Circle3Type GetCircle() const noexcept;
         NODISCARD Plane3Type GetPlane() const noexcept;
 
-        /// ÓÐ¹Ø½»¼¯µÄÐÅÏ¢¡£ ½ö»ñÈ¡Óë½»µãÀàÐÍÏà¶ÔÓ¦µÄ½»µãµÄÌØ¶¨¶ÔÏó¡£
-        /// Èç¹ûÀàÐÍÎªIT_POINT£¬GetPoint(i)¡£
-        /// Èç¹ûÀàÐÍÎªIT_OTHER£¬Ôò¸Ã¼¯ºÏÎªÔ²£¬Òò´ËÇëÊ¹ÓÃGetIntersectionCircle()£¬Ëü·µ»ØÔ²¶ÔÏó¡£
+        /// æœ‰å…³äº¤é›†çš„ä¿¡æ¯ã€‚ ä»…èŽ·å–ä¸Žäº¤ç‚¹ç±»åž‹ç›¸å¯¹åº”çš„äº¤ç‚¹çš„ç‰¹å®šå¯¹è±¡ã€‚
+        /// å¦‚æžœç±»åž‹ä¸ºIT_POINTï¼ŒGetPoint(i)ã€‚
+        /// å¦‚æžœç±»åž‹ä¸ºIT_OTHERï¼Œåˆ™è¯¥é›†åˆä¸ºåœ†ï¼Œå› æ­¤è¯·ä½¿ç”¨GetIntersectionCircle()ï¼Œå®ƒè¿”å›žåœ†å¯¹è±¡ã€‚
         NODISCARD int GetQuantity() const noexcept;
         NODISCARD Vector3Type GetPoint(int index) const;
         NODISCARD Circle3Type GetIntersectionCircle() const noexcept;

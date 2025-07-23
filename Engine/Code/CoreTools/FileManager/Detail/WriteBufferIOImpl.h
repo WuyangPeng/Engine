@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/30 22:50)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/30 22:50)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_WRITE_BUFFER_IO_IMPL_H
 #define CORE_TOOLS_FILE_MANAGER_WRITE_BUFFER_IO_IMPL_H
@@ -36,7 +36,7 @@ namespace CoreTools
         NODISCARD ConstFileBufferSharedPtr GetFileBuffer() const noexcept;
 
     private:
-        /// µ±ÇÒ½öµ±Ğ´ÈëµÄ×Ö½ÚÊıµÈÓÚdataµÄ´óĞ¡£¬²Ù×÷ÊÇ³É¹¦µÄ¡£·ñÔòÅ×³öErrorÒì³£¡£
+        /// å½“ä¸”ä»…å½“å†™å…¥çš„å­—èŠ‚æ•°ç­‰äºdataçš„å¤§å°ï¼Œæ“ä½œæ˜¯æˆåŠŸçš„ã€‚å¦åˆ™æŠ›å‡ºErrorå¼‚å¸¸ã€‚
         uint32_t WriteToBuffer(size_t itemSize, size_t itemsNumber, const void* data);
 
     private:

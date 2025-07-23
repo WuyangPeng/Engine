@@ -1,22 +1,22 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 17:27)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 17:27)
 
 #ifndef SYSTEM_HELPER_KAI_H
 #define SYSTEM_HELPER_KAI_H
 
 #ifdef __KCC
 
-    /// Kai C++ ±àÒëÆ÷ÉèÖÃ£º
+    /// Kai C++ ç¼–è¯‘å™¨è®¾ç½®ï¼š
 
     #if (4001 < __KCC_VERSION)
 
-        #error "Î´Öª±àÒëÆ÷"
+        #error "æœªçŸ¥ç¼–è¯‘å™¨"
 
     #endif  // (4001 < __KCC_VERSION)
 
@@ -40,7 +40,7 @@
 
     #ifndef TCRE_SYSTEM_COMPILER
 
-        #define TCRE_SYSTEM_COMPILER "Kai C++ °æ±¾ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
+        #define TCRE_SYSTEM_COMPILER "Kai C++ ç‰ˆæœ¬ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
 
     #endif  // TCRE_SYSTEM_COMPILER
 

@@ -1,4 +1,4 @@
-$Copyright$
+ï»¿$Copyright$
 
 #ifndef $ProjectCapital$_USER_MACRO_H
 #define $ProjectCapital$_USER_MACRO_H
@@ -13,7 +13,7 @@ $Copyright$
 
 #define CLOSE_$ProjectCapital$_MAX (($ProjectCapital$_ClOSE_END << 1) - 1)
 
-// ±àÒë²âÊÔ£¨Ä¬ÈÏÎª0B0000£¬×î´óÖµÎª0B0001£©
+// ç¼–è¯‘æµ‹è¯•ï¼ˆé»˜è®¤ä¸º0B0000ï¼Œæœ€å¤§å€¼ä¸º0B0001ï¼‰
 #define COMPILE_$ProjectCapital$_CLOSE 0B0000
 
 static_assert(0 <= COMPILE_$ProjectCapital$_CLOSE, "COMPILE_$ProjectCapital$_CLOSE Must be greater than or equal 0.");

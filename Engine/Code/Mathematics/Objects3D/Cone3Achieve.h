@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 10:43)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 10:43)
 
 #ifndef MATHEMATICS_OBJECTS_3D_CONE3_ACHIEVE_H
 #define MATHEMATICS_OBJECTS_3D_CONE3_ACHIEVE_H
@@ -25,7 +25,7 @@ Mathematics::Cone3<Real>::Cone3(const Vector3Type& vertex, const Vector3Type& ax
       height{ height },
       epsilon{ epsilon }
 {
-    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= angle && angle <= MathType::GetHalfPI(), "½Ç¶È±ØĞëÔÚµÚÒ»ÏóÏŞ£¡");
+    MATHEMATICS_ASSERTION_1(MathType::GetValue(0) <= angle && angle <= MathType::GetHalfPI(), "è§’åº¦å¿…é¡»åœ¨ç¬¬ä¸€è±¡é™ï¼");
 
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }

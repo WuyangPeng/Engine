@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 11:29)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 11:29)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -52,7 +52,7 @@ CoreTools::SimpleCSV::Worksheet CoreTools::SimpleCSV::Workbook::GetSheet(const s
 
     if (attribute == nullptr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "±í \""s + sheetName + "\" ²»´æÔÚ¡£"s)
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "è¡¨ \""s + sheetName + "\" ä¸å­˜åœ¨ã€‚"s)
     }
 
     const auto xmlId = attribute.attribute(TextParsing::gRId.data()).value();
@@ -68,7 +68,7 @@ CoreTools::SimpleCSV::Worksheet CoreTools::SimpleCSV::Workbook::GetSheet(int ind
 
     if (index < 1 || GetSheetCount() < index)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "¹¤×÷±íË÷Òı³¬³ö·¶Î§¡£"s)
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "å·¥ä½œè¡¨ç´¢å¼•è¶…å‡ºèŒƒå›´ã€‚"s)
     }
 
     const auto sheetsNode = GetSheetsNode();
@@ -127,7 +127,7 @@ void CoreTools::SimpleCSV::Workbook::DeleteSheet(const std::string& sheetName)
     if (const auto worksheetCount = std::ranges::count_if(sheetsNode, countFunction);
         worksheetCount == 1 && sheetType == ContentType::Worksheet)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "ÎŞĞ§²Ù×÷¡£¹¤×÷²¾ÖĞ±ØĞëÖÁÉÙÓĞÒ»ÕÅ¹¤×÷±í¡£"s)
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "æ— æ•ˆæ“ä½œã€‚å·¥ä½œç°¿ä¸­å¿…é¡»è‡³å°‘æœ‰ä¸€å¼ å·¥ä½œè¡¨ã€‚"s)
     }
 
     parentDocument->ExecuteCommand(CommandDeleteSheet{ sheetId, sheetName });
@@ -140,7 +140,7 @@ void CoreTools::SimpleCSV::Workbook::AddWorksheet(const std::string& sheetName)
 
     if (GetXmlDocument()->document_element().child(TextParsing::gSheets.data()).find_child_by_attribute(TextParsing::gName.data(), sheetName.c_str()))
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "¹¤×÷±íÃû×Ö \""s + sheetName + "\" ÒÑ¾­´æÔÚ¡£"s)
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "å·¥ä½œè¡¨åå­— \""s + sheetName + "\" å·²ç»å­˜åœ¨ã€‚"s)
     }
 
     const auto internalId = CreateInternalSheetId();
@@ -298,7 +298,7 @@ int CoreTools::SimpleCSV::Workbook::GetIndexOfSheet(const std::string& sheetName
         index++;
     }
 
-    THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "¹¤×÷±í²»´æÔÚ¡£"s)
+    THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "å·¥ä½œè¡¨ä¸å­˜åœ¨ã€‚"s)
 }
 
 CoreTools::SimpleCSV::SheetType CoreTools::SimpleCSV::Workbook::GetTypeOfSheet(const std::string& sheetName) const
@@ -307,7 +307,7 @@ CoreTools::SimpleCSV::SheetType CoreTools::SimpleCSV::Workbook::GetTypeOfSheet(c
 
     if (!IsSheetExists(sheetName))
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "¹¤×÷±í \""s + sheetName + "\" ²»´æÔÚ¡£"s)
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "å·¥ä½œè¡¨ \""s + sheetName + "\" ä¸å­˜åœ¨ã€‚"s)
     }
 
     if (IsWorksheetExists(sheetName))

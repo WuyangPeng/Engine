@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/12 18:16)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/12 18:16)
 
 #include "WaitForMultipleWaitableTimerTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -44,7 +44,7 @@ void System::WaitForMultipleWaitableTimerTesting::CreateSynchronizationTest()
 
     ASSERT_NOT_THROW_EXCEPTION_1(CreateThread, waitableTimerHandles);
 
-    GetStream() << "µÈ´ı½áÊø¡£\n";
+    GetStream() << "ç­‰å¾…ç»“æŸã€‚\n";
 
     for (auto waitableTimerHandle : waitableTimerHandles)
     {
@@ -89,7 +89,7 @@ void System::WaitForMultipleWaitableTimerTesting::ResetSystemWaitableTimer(const
 
 void System::WaitForMultipleWaitableTimerTesting::PrintTipsMessage()
 {
-    GetStream() << "Õâ¸ö²âÊÔĞèÒªµÈ´ı¡£\n";
+    GetStream() << "è¿™ä¸ªæµ‹è¯•éœ€è¦ç­‰å¾…ã€‚\n";
 
     SystemPause();
 }
@@ -124,7 +124,7 @@ void System::WaitForMultipleWaitableTimerTesting::CreateThread(const Container& 
         });
     }
 
-    GetStream() << "µÈ´ı" << (threadCount * 3) / 2 << "ÃëÖÓ¡£\n";
+    GetStream() << "ç­‰å¾…" << (threadCount * 3) / 2 << "ç§’é’Ÿã€‚\n";
 
     ASSERT_NOT_THROW_EXCEPTION_1(ResetSystemWaitableTimer, waitableTimerHandles);
 

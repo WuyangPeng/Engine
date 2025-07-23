@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 13:48)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 13:48)
 
 #ifndef MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_CONE3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_CONE3_ACHIEVE_H
@@ -55,13 +55,13 @@ Mathematics::Cone3<Real> Mathematics::StaticFindIntersectorLine3Cone3<Real>::Get
 template <typename Real>
 void Mathematics::StaticFindIntersectorLine3Cone3<Real>::Find()
 {
-    /// ÉèÖÃ¶ÔÓ¦ÓÚÔ²×¶µÄ¶ş´ÎQ(t) = c2 * t^2 + 2 * c1 * t + c0¡£
-    /// Éè¶¥µãÎªV£¬µ¥Î»³¤¶È·½ÏòÏòÁ¿ÎªA£¬´Ó×¶Öáµ½×¶±ÚµÄ½Ç¶ÈÎªTheta£¬¶¨Òå g = cos(Theta)¡£
-    /// Ã¿µ±Dot(A,(X - V)/|X - V|) = gÊ±£¬µãX¾Í»áÔÚ×¶±ÚÉÏ¡£
-    /// ½«¸Ã·½³ÌÊ½ºÍÒò×ÓÆ½·½£¬µÃµ½(X - V)^T * (A * A^T - g^2 * I) * (X - V) = 0£¬ÆäÖĞÉÏ±êT±íÊ¾×ªÖÃËã·û¡£
-    /// Õâ¶¨ÒåÁËÒ»¸öË«Ãæ×¶Ìå¡£ ÏßÊÇL(t) = P + t * D£¬ÆäÖĞPÊÇÏßµÄÔ­µã£¬DÊÇµ¥Î»³¤¶È·½ÏòµÄÏòÁ¿¡£
-    /// ½«X = L(t)´úÈëÉÏÊöÔ²×¶·½³ÌÊ½£¬½«µÃ³ö Q(t) = 0¡£
-    /// ÓÉÓÚÎÒÃÇÖ»Ï£Íûµ¥ÃæÔ²×¶ÉÏµÄ½»µãÎ»ÓÚAÖ¸ÏòµÄ°ë¿Õ¼äÖĞ£¬Òò´ËÈÎÒâµã L(t) ,ÓÉQ(t) = 0µÄ¸ùÉú³ÉµÄ£¬±ØĞë²âÊÔDot(A,L(t) - V) >= 0¡£
+    /// è®¾ç½®å¯¹åº”äºåœ†é”¥çš„äºŒæ¬¡Q(t) = c2 * t^2 + 2 * c1 * t + c0ã€‚
+    /// è®¾é¡¶ç‚¹ä¸ºVï¼Œå•ä½é•¿åº¦æ–¹å‘å‘é‡ä¸ºAï¼Œä»é”¥è½´åˆ°é”¥å£çš„è§’åº¦ä¸ºThetaï¼Œå®šä¹‰ g = cos(Theta)ã€‚
+    /// æ¯å½“Dot(A,(X - V)/|X - V|) = gæ—¶ï¼Œç‚¹Xå°±ä¼šåœ¨é”¥å£ä¸Šã€‚
+    /// å°†è¯¥æ–¹ç¨‹å¼å’Œå› å­å¹³æ–¹ï¼Œå¾—åˆ°(X - V)^T * (A * A^T - g^2 * I) * (X - V) = 0ï¼Œå…¶ä¸­ä¸Šæ ‡Tè¡¨ç¤ºè½¬ç½®ç®—ç¬¦ã€‚
+    /// è¿™å®šä¹‰äº†ä¸€ä¸ªåŒé¢é”¥ä½“ã€‚ çº¿æ˜¯L(t) = P + t * Dï¼Œå…¶ä¸­Pæ˜¯çº¿çš„åŸç‚¹ï¼ŒDæ˜¯å•ä½é•¿åº¦æ–¹å‘çš„å‘é‡ã€‚
+    /// å°†X = L(t)ä»£å…¥ä¸Šè¿°åœ†é”¥æ–¹ç¨‹å¼ï¼Œå°†å¾—å‡º Q(t) = 0ã€‚
+    /// ç”±äºæˆ‘ä»¬åªå¸Œæœ›å•é¢åœ†é”¥ä¸Šçš„äº¤ç‚¹ä½äºAæŒ‡å‘çš„åŠç©ºé—´ä¸­ï¼Œå› æ­¤ä»»æ„ç‚¹ L(t) ,ç”±Q(t) = 0çš„æ ¹ç”Ÿæˆçš„ï¼Œå¿…é¡»æµ‹è¯•Dot(A,L(t) - V) >= 0ã€‚
     auto axisDotDirection = Vector3ToolsType::DotProduct(cone.GetAxis(), line.GetDirection());
     auto cosSqr = cone.GetCosAngle() * cone.GetCosAngle();
     auto edge = line.GetOrigin() - cone.GetVertex();
@@ -72,21 +72,21 @@ void Mathematics::StaticFindIntersectorLine3Cone3<Real>::Find()
     auto c1 = axisDotDirection * axisDotEdge - cosSqr * directionDotEdge;
     auto c0 = axisDotEdge * axisDotEdge - cosSqr * edgeDotEdge;
 
-    // ½â¶ş´Î·½¡£ ½ö±£Áô Dot(A,X - V) >= 0µÄÄÇĞ©X¡£
+    // è§£äºŒæ¬¡æ–¹ã€‚ ä»…ä¿ç•™ Dot(A,X - V) >= 0çš„é‚£äº›Xã€‚
     if (MathType::GetZeroTolerance() <= MathType::FAbs(c2))
     {
         // c2 != 0
         auto discr = c1 * c1 - c0 * c2;
         if (discr < MathType::GetValue(0))
         {
-            // Q(t) = 0 Ã»ÓĞÊµÖµ¸ù¡£ ¸ÃÏß²»ÓëË«ÃæÔ²×¶Ïà½»¡£
+            // Q(t) = 0 æ²¡æœ‰å®å€¼æ ¹ã€‚ è¯¥çº¿ä¸ä¸åŒé¢åœ†é”¥ç›¸äº¤ã€‚
             this->SetIntersectionType(IntersectionType::Empty);
             quantity = 0;
         }
         else if (discr > MathType::GetZeroTolerance())
         {
-            // Q(t) = 0¾ßÓĞÁ½¸ö²»Í¬µÄÊµÖµ¸ù¡£ µ«ÊÇ£¬ËüÃÇÖĞµÄÒ»¸ö»òÁ½¸ö¶¼¿ÉÄÜÓë¶¥µã¡°ºó¡±µÄË«ÃæÔ²×¶Ìå²¿·ÖÏà½»¡£
-            // ÎÒÃÇ½ö¶Ô¶¥µã¡°Ç°Ãæ¡±µÄÄÇĞ©½»µã¸ĞĞËÈ¤¡£
+            // Q(t) = 0å…·æœ‰ä¸¤ä¸ªä¸åŒçš„å®å€¼æ ¹ã€‚ ä½†æ˜¯ï¼Œå®ƒä»¬ä¸­çš„ä¸€ä¸ªæˆ–ä¸¤ä¸ªéƒ½å¯èƒ½ä¸é¡¶ç‚¹â€œåâ€çš„åŒé¢åœ†é”¥ä½“éƒ¨åˆ†ç›¸äº¤ã€‚
+            // æˆ‘ä»¬ä»…å¯¹é¡¶ç‚¹â€œå‰é¢â€çš„é‚£äº›äº¤ç‚¹æ„Ÿå…´è¶£ã€‚
             auto root = MathType::Sqrt(discr);
 
             quantity = 0;
@@ -121,25 +121,25 @@ void Mathematics::StaticFindIntersectorLine3Cone3<Real>::Find()
 
             if (quantity == 2)
             {
-                // ¸ÃÏßÓë¶¥µãÇ°ÃæµÄµ¥ÃæÔ²×¶Ïà½»Á½´Î¡£
+                // è¯¥çº¿ä¸é¡¶ç‚¹å‰é¢çš„å•é¢åœ†é”¥ç›¸äº¤ä¸¤æ¬¡ã€‚
                 this->SetIntersectionType(IntersectionType::Segment);
             }
             else if (quantity == 1)
             {
-                // ¸ÃÏßÓë¶¥µãÇ°ÃæµÄµ¥ÃæÔ²×¶Ïà½»Ò»´Î¡£ ÁíÒ»¸ö½»µãÊÇ¶¥µãºóÃæµÄµ¥ÃæÔ²×¶¡£
+                // è¯¥çº¿ä¸é¡¶ç‚¹å‰é¢çš„å•é¢åœ†é”¥ç›¸äº¤ä¸€æ¬¡ã€‚ å¦ä¸€ä¸ªäº¤ç‚¹æ˜¯é¡¶ç‚¹åé¢çš„å•é¢åœ†é”¥ã€‚
                 this->SetIntersectionType(IntersectionType::Ray);
                 ++quantity;
                 point1 = line.GetDirection();
             }
             else
             {
-                // ¸ÃÏßÓë¶¥µãºóµÄµ¥ÃæÔ²×¶Ïà½»Á½´Î¡£
+                // è¯¥çº¿ä¸é¡¶ç‚¹åçš„å•é¢åœ†é”¥ç›¸äº¤ä¸¤æ¬¡ã€‚
                 this->SetIntersectionType(IntersectionType::Empty);
             }
         }
         else
         {
-            // Ò»¸öÖØ¸´µÄÊµ¸ù£¨ÏßÓëÔ²×¶ÏàÇĞ£©¡£
+            // ä¸€ä¸ªé‡å¤çš„å®æ ¹ï¼ˆçº¿ä¸åœ†é”¥ç›¸åˆ‡ï¼‰ã€‚
             point0 = line.GetOrigin() - (c1 / c2) * line.GetDirection();
             edge = point0 - cone.GetVertex();
             if (MathType::GetValue(0) < Vector3ToolsType::DotProduct(edge, cone.GetAxis()))
@@ -156,7 +156,7 @@ void Mathematics::StaticFindIntersectorLine3Cone3<Real>::Find()
     }
     else if (MathType::GetZeroTolerance() <= MathType::FAbs(c1))
     {
-        // c2 = 0, c1 != 0 £¨DÊÇÔ²×¶±ß½çÉÏµÄ·½ÏòÏòÁ¿£©
+        // c2 = 0, c1 != 0 ï¼ˆDæ˜¯åœ†é”¥è¾¹ç•Œä¸Šçš„æ–¹å‘å‘é‡ï¼‰
         point0 = line.GetOrigin() - (MathType::GetRational(1, 2) * c0 / c1) * line.GetDirection();
         edge = point0 - cone.GetVertex();
         auto dot = Vector3ToolsType::DotProduct(edge, cone.GetAxis());
@@ -180,7 +180,7 @@ void Mathematics::StaticFindIntersectorLine3Cone3<Real>::Find()
     }
     else
     {
-        // c2 = c1 = c0 = 0£¬Ô²×¶°üº¬¹âÏßV + t * D£¬ÆäÖĞVÊÇÔ²×¶¶¥µã£¬DÊÇÏß·½Ïò¡£
+        // c2 = c1 = c0 = 0ï¼Œåœ†é”¥åŒ…å«å…‰çº¿V + t * Dï¼Œå…¶ä¸­Væ˜¯åœ†é”¥é¡¶ç‚¹ï¼ŒDæ˜¯çº¿æ–¹å‘ã€‚
         this->SetIntersectionType(IntersectionType::Ray);
         quantity = 2;
         point0 = cone.GetVertex();
@@ -209,7 +209,7 @@ Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorLine3Cone3<Real>::G
             return point1;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Ë÷ÒıÔ½½ç\n"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•è¶Šç•Œ\n"s));
 }
 
 #endif  // MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_CONE3_ACHIEVE_H

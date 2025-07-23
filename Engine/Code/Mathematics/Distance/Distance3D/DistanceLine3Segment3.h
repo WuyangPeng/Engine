@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 16:51)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 16:51)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_LINE3_SEGMENT3_H
 #define MATHEMATICS_DISTANCE_DISTANCE_LINE3_SEGMENT3_H
@@ -43,10 +43,10 @@ namespace Mathematics
         NODISCARD Line3Type GetLine() const noexcept;
         NODISCARD Segment3Type GetSegment() const noexcept;
 
-        // ¾²Ì¬¾àÀë²éÑ¯¡£
+        // é™æ€è·ç¦»æŸ¥è¯¢ã€‚
         NODISCARD DistanceResult GetSquared() const override;
 
-        // º¯Êı¼ÆËã¶¯Ì¬¾àÀë²éÑ¯¡£
+        // å‡½æ•°è®¡ç®—åŠ¨æ€è·ç¦»æŸ¥è¯¢ã€‚
         NODISCARD DistanceResult GetSquared(Real t, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity) const override;
 
     private:

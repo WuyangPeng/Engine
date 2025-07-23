@@ -12,9 +12,10 @@
 #include "TerrainBaseImpl.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/ObjectSystems/BufferSource.h"
-#include "CoreTools/ObjectSystems/ObjectLink.h"
-#include "CoreTools/ObjectSystems/ObjectRegister.h"
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
+#include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
 Rendering::TerrainBaseImpl::TerrainBaseImpl() noexcept

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/12 18:16)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/12 18:16)
 
 #include "SetWaitableTimerTesting.h"
 #include "System/Helper/Tools.h"
@@ -58,11 +58,11 @@ void System::SetWaitableTimerTesting::DoAsynchronousTest(WindowsHandle waitableT
 
     ASSERT_TRUE(SetSystemWaitableTimer(waitableTimerHandle, &waitableTimerLargeInteger, period, ClassType::TimerApcProcedure, this, false));
 
-    GetStream() << "µÈ´ı" << -waitableTimerLargeInteger.QuadPart / base << "ÃëÖÓ¡£\n";
+    GetStream() << "ç­‰å¾…" << -waitableTimerLargeInteger.QuadPart / base << "ç§’é’Ÿã€‚\n";
 
     ASSERT_EQUAL(SystemSleep(EnumCastUnderlying(MutexWait::Infinite), true), SleepReturn::WaitIOCompletion);
 
-    GetStream() << "µÈ´ı" << period / 1000 << "ÃëÖÓ¡£\n";
+    GetStream() << "ç­‰å¾…" << period / 1000 << "ç§’é’Ÿã€‚\n";
 
     ASSERT_EQUAL(SystemSleep(EnumCastUnderlying(MutexWait::Infinite), true), SleepReturn::WaitIOCompletion);
 
@@ -95,11 +95,11 @@ void System::SetWaitableTimerTesting::DoAsynchronousUseTolerableDelayTest(Window
 
     ASSERT_TRUE(SetSystemWaitableTimer(waitableTimerHandle, &waitableTimerLargeInteger, period, ClassType::TimerApcProcedure, this, nullptr, tolerableDelay));
 
-    GetStream() << "µÈ´ı" << -waitableTimerLargeInteger.QuadPart / base << "ÃëÖÓ¡£\n";
+    GetStream() << "ç­‰å¾…" << -waitableTimerLargeInteger.QuadPart / base << "ç§’é’Ÿã€‚\n";
 
     ASSERT_EQUAL(SystemSleep(EnumCastUnderlying(MutexWait::Infinite), true), SleepReturn::WaitIOCompletion);
 
-    GetStream() << "µÈ´ı" << period / 1000 << "ÃëÖÓ¡£\n";
+    GetStream() << "ç­‰å¾…" << period / 1000 << "ç§’é’Ÿã€‚\n";
 
     ASSERT_EQUAL(SystemSleep(EnumCastUnderlying(MutexWait::Infinite), true), SleepReturn::WaitIOCompletion);
 
@@ -119,13 +119,13 @@ void System::SetWaitableTimerTesting::TimerApcProcedure(WindowsVoidPtr argToComp
 
     if (classType != nullptr)
     {
-        classType->GetStream() << "ÕâÀï½øĞĞÁË»Øµ÷º¯ÊıµÄµ÷ÓÃ¡£\n";
+        classType->GetStream() << "è¿™é‡Œè¿›è¡Œäº†å›è°ƒå‡½æ•°çš„è°ƒç”¨ã€‚\n";
     }
 }
 
 void System::SetWaitableTimerTesting::PrintTipsMessage()
 {
-    GetStream() << "Õâ¸ö²âÊÔĞèÒªµÈ´ı¡£\n";
+    GetStream() << "è¿™ä¸ªæµ‹è¯•éœ€è¦ç­‰å¾…ã€‚\n";
 
     SystemPause();
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 17:28)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 17:28)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_ELLIPSE2_ELLIPSE2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_ELLIPSE2_ELLIPSE2_DETAIL_H
@@ -88,19 +88,19 @@ bool Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::IsTransverseInter
 template <typename Real>
 void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Find()
 {
-    // ²âÊÔÍÖÔ²°üÎ§ºĞµÄÏà½»¡£ ÕâÊÇÒ»ÖÖ¿ìËÙ³¢ÊÔ¡£
+    // æµ‹è¯•æ¤­åœ†åŒ…å›´ç›’çš„ç›¸äº¤ã€‚ è¿™æ˜¯ä¸€ç§å¿«é€Ÿå°è¯•ã€‚
     const Box2<Real> box0{ ellipse0.GetCenter(), ellipse0.GetAxis0(), ellipse0.GetAxis1(), ellipse0.GetExtent0(), ellipse0.GetExtent1() };
     const Box2<Real> box1{ ellipse1.GetCenter(), ellipse1.GetAxis0(), ellipse1.GetAxis1(), ellipse1.GetExtent0(), ellipse1.GetExtent1() };
 
     if (StaticTestIntersectorBox2Box2<Real> staticTestIntersectorBox2Box2{ box0, box1 };
         !staticTestIntersectorBox2Box2.IsIntersection())
     {
-        // °üÎ§ºĞ²»ÖØµş£¬ÍÖÔ²Ò²²»ÖØµş¡£
+        // åŒ…å›´ç›’ä¸é‡å ï¼Œæ¤­åœ†ä¹Ÿä¸é‡å ã€‚
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
-    /// ¼ÆËãËÄ´Î¶àÏîÊ½£¬Æä¸ùµ¼ÖÂÍÖÔ²Ïà½»µÄ£¬È»ºó¼ÆËãÆä¸ù¡£
+    /// è®¡ç®—å››æ¬¡å¤šé¡¹å¼ï¼Œå…¶æ ¹å¯¼è‡´æ¤­åœ†ç›¸äº¤çš„ï¼Œç„¶åè®¡ç®—å…¶æ ¹ã€‚
     auto poly = GetQuartic(ellipse0, ellipse1);
     PolynomialRoots<Real> polynomialRoots{ MathType::GetZeroTolerance() };
     if (!polynomialRoots.FindBisection(poly, digitsAccuracy) || polynomialRoots.GetCount() == 0)
@@ -109,8 +109,8 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Find()
         return;
     }
 
-    /// ¼ÆËãs = sin(angle)ºÍc = cos(angle)µÄ¶àÏîÊ½µÄÏµÊı£¬È»ºó½«ellipse0ºÍellipse1Ïà¹ØÁª£¬·ÂÉä±ä»»ÎªÒ»¸öÔ²¡£
-    /// ¶àÏîÊ½Îªd0 + d1 * c + d2 * s + d3 * c^2 + d4 * c * s + d5 * s^2 = 0ÆäÖĞc^2 + s^2 = 1¡£
+    /// è®¡ç®—s = sin(angle)å’Œc = cos(angle)çš„å¤šé¡¹å¼çš„ç³»æ•°ï¼Œç„¶åå°†ellipse0å’Œellipse1ç›¸å…³è”ï¼Œä»¿å°„å˜æ¢ä¸ºä¸€ä¸ªåœ†ã€‚
+    /// å¤šé¡¹å¼ä¸ºd0 + d1 * c + d2 * s + d3 * c^2 + d4 * c * s + d5 * s^2 = 0å…¶ä¸­c^2 + s^2 = 1ã€‚
     auto center0MinusCenter1 = ellipse0.GetCenter() - ellipse1.GetCenter();
     const auto matrix1 = ellipse1.GetMatrix();
     const auto matrix1Center0MinusCenter1 = matrix1 * center0MinusCenter1;
@@ -124,7 +124,7 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Find()
                            (MathType::GetValue(2))*ellipse0.GetExtent0() * ellipse0.GetExtent1() * Vector2ToolsType::DotProduct(matrix1Axis0, ellipse0.GetAxis1()),
                            ellipse0.GetExtent1() * ellipse0.GetExtent1() * Vector2ToolsType::DotProduct(matrix1Axis1, ellipse0.GetAxis1()) };
 
-    /// Çó½â¶ş´Î·½£¬±£´æÕâĞ©ÖµÒÔ¹©ÒÔºó²âÊÔ½Ó½üÁãºÍ¸ù²¿Å×¹âµÄ³Ì¶È¡£
+    /// æ±‚è§£äºŒæ¬¡æ–¹ï¼Œä¿å­˜è¿™äº›å€¼ä»¥ä¾›ä»¥åæµ‹è¯•æ¥è¿‘é›¶å’Œæ ¹éƒ¨æŠ›å…‰çš„ç¨‹åº¦ã€‚
     auto ellipse0Coefficients = ellipse0.ToCoefficients();
     auto ellipse1Coefficients = ellipse1.ToCoefficients();
     auto qp0 = ellipse0Coefficients.GetCoefficients();
@@ -133,7 +133,7 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Find()
     constexpr auto measurementSize = 8;
     using MeasurementContainer = std::array<Measurement, measurementSize>;
 
-    MeasurementContainer measure{};  // ´¢´æ <x,y,sqrt(Q0^2 + S1^2)>
+    MeasurementContainer measure{};  // å‚¨å­˜ <x,y,sqrt(Q0^2 + S1^2)>
 
     auto indexX = 0;
     for (auto begin = polynomialRoots.GetBegin(); begin != polynomialRoots.GetEnd(); ++begin)
@@ -212,23 +212,23 @@ Mathematics::Polynomial<Real> Mathematics::StaticFindIntersectorEllipse2Ellipse2
     const auto p0 = ellipse2Coefficients0.GetCoefficients();
     const auto p1 = ellipse2Coefficients1.GetCoefficients();
 
-    // ¶àÏîÊ½ÊÇ
+    // å¤šé¡¹å¼æ˜¯
     //   P0 = a0 + a1 * x + a2 * y + a3 * x^2 + a4 * x * y + a5 * y^2
     //      = (a0 + a2 * y + a5 * y^2) + (a1 + a4 * y) * x + (a3) * x^2
     //      = u0(y) + u1(y) * x + u2(y) * x^2
     //   P1 = b0 + b1 * x + b2 * y + b3 * x^2 + b4 * x * y + b5 * y^2
     //      = (b0 + b2 * y + b5 * y^2) + (b1 + b4 * y)*x + (b3) * x^2
     //      = v0(y) + v1(y) * x + v2(y) * x^2
-    // µ±Çó½â·½³ÌP0(x,y) = 0ºÍP1(x,y) = 0Ê±£¬BezoutĞĞÁĞÊ½Ïû³ı±äÁ¿x¡£
-    // ÎÒÃÇÓĞ
+    // å½“æ±‚è§£æ–¹ç¨‹P0(x,y) = 0å’ŒP1(x,y) = 0æ—¶ï¼ŒBezoutè¡Œåˆ—å¼æ¶ˆé™¤å˜é‡xã€‚
+    // æˆ‘ä»¬æœ‰
     //   0 = P0 = u0 + u1 * x + u2 * x^2
     //   0 = P1 = v0 + v1 * x + v2 * x^2
     //   0 = v2 * P0 - u2 * P1 = (u0 * v2 - u2 * v0) + (u1 * v2 - u2 * v1) * x
     //   0 = v1 * P0 - u1 * P1 = (u0 * v1 - u1 * v0) + (u2 * v1 - u1 * v2) * x^2
-    // ¶ÔxÇó½â·½³Ì0 = v2 * P0 - u2 * P1²¢´úÈëÆäËû·½³ÌÊ½£¬¼ò»¯Îª
+    // å¯¹xæ±‚è§£æ–¹ç¨‹0 = v2 * P0 - u2 * P1å¹¶ä»£å…¥å…¶ä»–æ–¹ç¨‹å¼ï¼Œç®€åŒ–ä¸º
     //   Q(y) = (u0 * v1 - v1 * u0) * (u1 * v2 - u2 * v1) - (u0 * v2 - u2 * v0)^2 = 0
     //        = c0 + c1 * y + c2 * y^2 + c3 * y^3 + c4 * y^4
-    // Îª¸÷ÖÖË÷ÒıiºÍj¶¨Òådij = ai * bj - aj * bi¡£ ÀıÈç£¬d01 = a0 * b1 - b1 * a0¡£ Q£¨y£©µÄÏµÊıÎª
+    // ä¸ºå„ç§ç´¢å¼•iå’Œjå®šä¹‰dij = ai * bj - aj * biã€‚ ä¾‹å¦‚ï¼Œd01 = a0 * b1 - b1 * a0ã€‚ Qï¼ˆyï¼‰çš„ç³»æ•°ä¸º
     //   c0 = d01 * d13 - d30^2
     //   c1 = d01 * d43 + (d04 + d21) * d13 - 2 * d30 * d32
     //   c2 = (d04 + d21) * d43 + (d24 + d51) * d13 - 2 * d30 * d35 - d32^2
@@ -262,9 +262,9 @@ Mathematics::Polynomial<Real> Mathematics::StaticFindIntersectorEllipse2Ellipse2
 template <typename Real>
 typename Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Measurement Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::RefinePoint(const CoeffType& coeff, const Vector2Type& vector2)
 {
-    /// ´«Èë¶àÏîÊ½Îª
+    /// ä¼ å…¥å¤šé¡¹å¼ä¸º
     ///  f(angle) = d0 + d1 * c + d2 * s + d3 * c^2 + d4 * c * s + d5 * s^2
-    /// ÆäÖĞs = sin(angle)£¬ c = cos(angle)¡£ µ¼ÊıÊÇ
+    /// å…¶ä¸­s = sin(angle)ï¼Œ c = cos(angle)ã€‚ å¯¼æ•°æ˜¯
     ///  f'(angle) = -d1 * s + d2 * c + (d5 - d3) * 2 * c * s + d4 * (c^2 - s^2)
 
     auto diff = vector2 - ellipse0.GetCenter();
@@ -276,9 +276,9 @@ typename Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Measurement M
 
     auto a1 = MathType::GetValue(0);
 
-    /// f0ÖµÓ¦Óëq1ÏàÆ¥Åä£¨ÔÚ¸¡µãÉáÈëÎó²îÄÚ£©¡£ ³¢ÊÔÊ¹ÓÃ¶şµÈ·Ö½«f0Ç¿ÖÆÎªÁã¡£
-    /// ÕâĞèÒªÕÒµ½Ò»¸ö½Ç¶È£¬Ê¹µÃÏàÓ¦µÄº¯ÊıÖµµÄ·ûºÅÓëf0Ïà·´¡£
-    /// Èç¹ûËÑË÷Ê§°Ü£¬ÔòÊäÈëµãÒªÃ´ÊÇÇĞÏßÏà½»£¬ÒªÃ´¸ù±¾²»ÊÇÏà½»¡£
+    /// f0å€¼åº”ä¸q1ç›¸åŒ¹é…ï¼ˆåœ¨æµ®ç‚¹èˆå…¥è¯¯å·®å†…ï¼‰ã€‚ å°è¯•ä½¿ç”¨äºŒç­‰åˆ†å°†f0å¼ºåˆ¶ä¸ºé›¶ã€‚
+    /// è¿™éœ€è¦æ‰¾åˆ°ä¸€ä¸ªè§’åº¦ï¼Œä½¿å¾—ç›¸åº”çš„å‡½æ•°å€¼çš„ç¬¦å·ä¸f0ç›¸åã€‚
+    /// å¦‚æœæœç´¢å¤±è´¥ï¼Œåˆ™è¾“å…¥ç‚¹è¦ä¹ˆæ˜¯åˆ‡çº¿ç›¸äº¤ï¼Œè¦ä¹ˆæ ¹æœ¬ä¸æ˜¯ç›¸äº¤ã€‚
     auto maxIterations = 32;
     auto i = 0;
     for (; i < maxIterations; ++i)
@@ -290,7 +290,7 @@ typename Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Measurement M
 
         if (f0 * f1 < MathType::GetValue(0))
         {
-            // ÇĞ»»µ½¶şµÈ·Ö¡£
+            // åˆ‡æ¢åˆ°äºŒç­‰åˆ†ã€‚
             break;
         }
 
@@ -298,14 +298,14 @@ typename Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Measurement M
 
         if (df1 * df0 < MathType::GetValue(0))
         {
-            // ³¢ÊÔ¸ü¶¸µÄĞ±ÂÊÔÚÑ°ÕÒÒ»¸ö·ûºÅÏà·´ÖµµÄÏ£ÍûÖµ¡£
+            // å°è¯•æ›´é™¡çš„æ–œç‡åœ¨å¯»æ‰¾ä¸€ä¸ªç¬¦å·ç›¸åå€¼çš„å¸Œæœ›å€¼ã€‚
             df0 *= MathType::GetValue(2);
             continue;
         }
 
         if (MathType::FAbs(f1) < MathType::FAbs(f0))
         {
-            /// ÎÒÃÇÕÒ²»µ½Ïà·´µÄÖµ£¬µ«ÊÇĞÂº¯ÊıµÄÖµ½Ó½üÓÚÁã£¬Òò´ËÇë³¢ÊÔÊ¹ÓÃĞÂÖµ¡£
+            /// æˆ‘ä»¬æ‰¾ä¸åˆ°ç›¸åçš„å€¼ï¼Œä½†æ˜¯æ–°å‡½æ•°çš„å€¼æ¥è¿‘äºé›¶ï¼Œå› æ­¤è¯·å°è¯•ä½¿ç”¨æ–°å€¼ã€‚
             aTan = a1;
             f0 = f1;
             df0 = df1;
@@ -316,7 +316,7 @@ typename Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Measurement M
     auto transverseResult = false;
     if (i < maxIterations)
     {
-        // Ó¦ÓÃ¶şµÈ·Ö¡£ È·¶¨µü´ú´ÎÊıÒÔ»ñÈ¡10Î»¾«¶È¡£
+        // åº”ç”¨äºŒç­‰åˆ†ã€‚ ç¡®å®šè¿­ä»£æ¬¡æ•°ä»¥è·å–10ä½ç²¾åº¦ã€‚
         auto value0 = MathType::Log(MathType::FAbs(a1 - aTan));
         auto value1 = (static_cast<Real>(digitsAccuracy)) * MathType::Log(MathType::GetValue(10));
         auto arg = (value0 + value1) / MathType::Log(MathType::GetValue(2));

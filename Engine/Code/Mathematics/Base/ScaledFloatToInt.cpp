@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 09:54)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 09:54)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -44,7 +44,7 @@ void Mathematics::ScaledFloatToInt::Scaled() noexcept
 
 void Mathematics::ScaledFloatToInt::ShiftIntegerValue() noexcept
 {
-    // µ±½«¸¡µãÊı1.0f´«ÈëÊ±£¬m_Shift¿ÉÄÜ»áµÈÓÚ-1¡£
+    // å½“å°†æµ®ç‚¹æ•°1.0fä¼ å…¥æ—¶ï¼Œm_Shiftå¯èƒ½ä¼šç­‰äº-1ã€‚
     if (0 <= shift)
         result = ((integerValue & 0x007FFFFF) | 0x00800000) >> shift;
     else
@@ -61,9 +61,9 @@ void Mathematics::ScaledFloatToInt::CorrectResult() noexcept
 
 #ifdef OPEN_CLASS_INVARIANT
 
-// floatValueµÄÇø¼äÎª[0,1]¡£
-// powerµÄÇø¼äÎª[0,24]¡£
-// resultµÄÇø¼äÎª[0,2^power - 1]¡£
+// floatValueçš„åŒºé—´ä¸º[0,1]ã€‚
+// powerçš„åŒºé—´ä¸º[0,24]ã€‚
+// resultçš„åŒºé—´ä¸º[0,2^power - 1]ã€‚
 bool Mathematics::ScaledFloatToInt::IsValid() const noexcept
 {
     if (0 <= floatValue && floatValue <= 1 && 0 <= power && power <= 24 && 0 <= result && result <= pow(2.0, power) - 1)

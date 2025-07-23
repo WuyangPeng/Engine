@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 17:30)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 17:30)
 
 #include "Network/NetworkExport.h"
 
@@ -32,7 +32,7 @@ Network::AceSockAcceptor::AceSockAcceptor(int port)
     if (ACEInternetAddress internetAddress{};
         internetAddress.set(boost::numeric_cast<uint16_t>(port)) != 0 || aceSockAcceptor.open(internetAddress) != 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÉèÖÃµØÖ·Ê§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è®¾ç½®åœ°å€å¤±è´¥ï¼"s))
     }
 
     NETWORK_SELF_CLASS_IS_VALID_9;
@@ -44,7 +44,7 @@ Network::AceSockAcceptor::AceSockAcceptor(const std::string& hostName, int port)
     if (ACEInternetAddress internetAddress{};
         internetAddress.set(boost::numeric_cast<uint16_t>(port), hostName.c_str()) != 0 || aceSockAcceptor.open(internetAddress) != 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÉèÖÃµØÖ·Ê§°Ü£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è®¾ç½®åœ°å€å¤±è´¥ï¼"s))
     }
 
     NETWORK_SELF_CLASS_IS_VALID_9;
@@ -116,7 +116,7 @@ void Network::AceSockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventI
 
         if (!eventInterface->EventFunction(callbackParameters))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("ÊÂ¼ş»Øµ÷Ö´ĞĞÊ§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("äº‹ä»¶å›è°ƒæ‰§è¡Œå¤±è´¥ï¼"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
 }
@@ -137,7 +137,7 @@ void Network::AceSockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventI
 
         if (!eventInterface->EventFunction(callbackParameters))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("ÊÂ¼ş»Øµ÷Ö´ĞĞÊ§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("äº‹ä»¶å›è°ƒæ‰§è¡Œå¤±è´¥ï¼"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
 }

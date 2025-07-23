@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.6 (2024/02/20 09:15)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.6 (2024/02/20 09:15)
 
 #ifndef MATHEMATICS_ALGEBRA_TRANSFORM_H
 #define MATHEMATICS_ALGEBRA_TRANSFORM_H
@@ -21,29 +21,29 @@
 #include "Mathematics/Algebra/AVector.h"
 #include "Mathematics/Algebra/Matrix.h"
 
-/// ÔÚÔ¤´¦ÀíÆ÷·ûºÅÖÐ¶¨ÒåMATHEMATICS_USE_MATRIX_VECTORÊ±½øÐÐ×ª»»¡£
-/// ×ª»»Îª Y = M * X + T£¬ÆäÖÐMÊÇ3x3µÄ¾ØÕó£¬TÊÇ3x1µÄÆ½ÒÆÏòÁ¿¡£
-/// ÔÚ´ó¶àÊýÇé¿öÏÂ£¬M = R£¬Ò»¸öÐý×ª¾ØÕó£¬»òÕßM = S * R£¬ÕâÀïRÊÇÒ»¸öÐý×ª¾ØÕóºÍSÊÇÒ»¸ö¶Ô½Ç¾ØÕó£¬Æä¶Ô½ÇÔªËØÊÇÕýµÄËõ·Å¡£
-/// ÎªÁËÖ§³ÖÔÊÐíÍ¨ÓÃ·ÂÉä±ä»»µÄ½¨Ä£Èí¼þ°ü£¬M¿ÉÒÔÊÇÈÎÒâ¿ÉÄæµÄ3x3µÄ¾ØÕó¡£
-/// ÏòÁ¿XÊÇÔÚ¡°Õý¡±·½ÏòÏÂ×ª»»ÎªY£¬¡°Äæ¡±·½Ïò×ª»»YÎªX£¬¼´ÔÚÒ»°ãÇé¿öÏÂX = (Y - T) * M^{-1}¡£
-/// ÔÚÌØÊâÇé¿öM = S * R£¬Äæ·½ÏòÊÇX = S^{-1} * R^t * (Y - T)£¬ÕâÀïS^{-1}ÊÇ¶Ô½Ç¾ØÕó£¬¶Ô½ÇÔªËØÊÇSµÄµ¹Êý£¬ºÍR^tÊÇRµÄ×ªÖÃ¡£
-/// Ö§³ÖSIMD¾ØÕóÓëÏòÁ¿ºÍ¾ØÕóÓë¾ØÕóµÄ³Ë·¨£¬´ËÀà´¢´æÒ»¸öÆë´Î¾ØÕóH = {{M,T},{0,1}}¡£
-/// Õý×ª»»ÊÇ{Y,1} = H * {X,1}ºÍÄæ×ª»»ÊÇ {X,1} = H^{-1} * {Y,1}¡£
+/// åœ¨é¢„å¤„ç†å™¨ç¬¦å·ä¸­å®šä¹‰MATHEMATICS_USE_MATRIX_VECTORæ—¶è¿›è¡Œè½¬æ¢ã€‚
+/// è½¬æ¢ä¸º Y = M * X + Tï¼Œå…¶ä¸­Mæ˜¯3x3çš„çŸ©é˜µï¼ŒTæ˜¯3x1çš„å¹³ç§»å‘é‡ã€‚
+/// åœ¨å¤§å¤šæ•°æƒ…å†µä¸‹ï¼ŒM = Rï¼Œä¸€ä¸ªæ—‹è½¬çŸ©é˜µï¼Œæˆ–è€…M = S * Rï¼Œè¿™é‡ŒRæ˜¯ä¸€ä¸ªæ—‹è½¬çŸ©é˜µå’ŒSæ˜¯ä¸€ä¸ªå¯¹è§’çŸ©é˜µï¼Œå…¶å¯¹è§’å…ƒç´ æ˜¯æ­£çš„ç¼©æ”¾ã€‚
+/// ä¸ºäº†æ”¯æŒå…è®¸é€šç”¨ä»¿å°„å˜æ¢çš„å»ºæ¨¡è½¯ä»¶åŒ…ï¼ŒMå¯ä»¥æ˜¯ä»»æ„å¯é€†çš„3x3çš„çŸ©é˜µã€‚
+/// å‘é‡Xæ˜¯åœ¨â€œæ­£â€æ–¹å‘ä¸‹è½¬æ¢ä¸ºYï¼Œâ€œé€†â€æ–¹å‘è½¬æ¢Yä¸ºXï¼Œå³åœ¨ä¸€èˆ¬æƒ…å†µä¸‹X = (Y - T) * M^{-1}ã€‚
+/// åœ¨ç‰¹æ®Šæƒ…å†µM = S * Rï¼Œé€†æ–¹å‘æ˜¯X = S^{-1} * R^t * (Y - T)ï¼Œè¿™é‡ŒS^{-1}æ˜¯å¯¹è§’çŸ©é˜µï¼Œå¯¹è§’å…ƒç´ æ˜¯Sçš„å€’æ•°ï¼Œå’ŒR^tæ˜¯Rçš„è½¬ç½®ã€‚
+/// æ”¯æŒSIMDçŸ©é˜µä¸Žå‘é‡å’ŒçŸ©é˜µä¸ŽçŸ©é˜µçš„ä¹˜æ³•ï¼Œæ­¤ç±»å‚¨å­˜ä¸€ä¸ªé½æ¬¡çŸ©é˜µH = {{M,T},{0,1}}ã€‚
+/// æ­£è½¬æ¢æ˜¯{Y,1} = H * {X,1}å’Œé€†è½¬æ¢æ˜¯ {X,1} = H^{-1} * {Y,1}ã€‚
 ///
-/// ÔÚÔ¤´¦ÀíÆ÷·ûºÅÖÐÃ»ÓÐ¶¨ÒåMATHEMATICS_USE_MATRIX_VECTORÊ±½øÐÐ×ª»»¡£
-/// ×ª»»Îª Y = T + X * M£¬ÆäÖÐMÊÇ3x3µÄ¾ØÕó£¬TÊÇ1x3µÄÆ½ÒÆÏòÁ¿¡£
-/// ÔÚ´ó¶àÊýÇé¿öÏÂ£¬M = R£¬Ò»¸öÐý×ª¾ØÕó£¬»òÕßM = R * S£¬ÕâÀïRÊÇÒ»¸öÐý×ª¾ØÕóºÍSÊÇÒ»¸ö¶Ô½Ç¾ØÕó£¬Æä¶Ô½ÇÔªËØÊÇÕýµÄËõ·Å¡£
-/// ÎªÁËÖ§³ÖÔÊÐíÍ¨ÓÃ·ÂÉä±ä»»µÄ½¨Ä£Èí¼þ°ü£¬M¿ÉÒÔÊÇÈÎÒâ¿ÉÄæµÄ3x3µÄ¾ØÕó¡£
-/// ÏòÁ¿XÊÇÔÚ¡°Õý¡±·½ÏòÏÂ×ª»»ÎªY£¬¡°Äæ¡±·½Ïò×ª»»YÎªX£¬¼´ÔÚÒ»°ãÇé¿öÏÂX = M^{-1} * (Y - T)¡£
-/// ÔÚÌØÊâÇé¿öM = R * S£¬Äæ·½ÏòÊÇX = (Y - T) * R^t * S^{-1}£¬ÕâÀïS^{-1}ÊÇ¶Ô½Ç¾ØÕó£¬¶Ô½ÇÔªËØÊÇSµÄµ¹Êý£¬ºÍR^tÊÇRµÄ×ªÖÃ¡£
-/// Ö§³ÖSIMD¾ØÕóÓëÏòÁ¿ºÍ¾ØÕóÓë¾ØÕóµÄ³Ë·¨£¬´ËÀà´¢´æÒ»¸öÆë´Î¾ØÕóH = {{M,0},{T,1}}¡£
-/// Õý×ª»»ÊÇ{Y,1} = {X,1} * H ºÍÄæ×ª»»ÊÇ {X,1} = {Y,1} * H^{-1}¡£
+/// åœ¨é¢„å¤„ç†å™¨ç¬¦å·ä¸­æ²¡æœ‰å®šä¹‰MATHEMATICS_USE_MATRIX_VECTORæ—¶è¿›è¡Œè½¬æ¢ã€‚
+/// è½¬æ¢ä¸º Y = T + X * Mï¼Œå…¶ä¸­Mæ˜¯3x3çš„çŸ©é˜µï¼ŒTæ˜¯1x3çš„å¹³ç§»å‘é‡ã€‚
+/// åœ¨å¤§å¤šæ•°æƒ…å†µä¸‹ï¼ŒM = Rï¼Œä¸€ä¸ªæ—‹è½¬çŸ©é˜µï¼Œæˆ–è€…M = R * Sï¼Œè¿™é‡ŒRæ˜¯ä¸€ä¸ªæ—‹è½¬çŸ©é˜µå’ŒSæ˜¯ä¸€ä¸ªå¯¹è§’çŸ©é˜µï¼Œå…¶å¯¹è§’å…ƒç´ æ˜¯æ­£çš„ç¼©æ”¾ã€‚
+/// ä¸ºäº†æ”¯æŒå…è®¸é€šç”¨ä»¿å°„å˜æ¢çš„å»ºæ¨¡è½¯ä»¶åŒ…ï¼ŒMå¯ä»¥æ˜¯ä»»æ„å¯é€†çš„3x3çš„çŸ©é˜µã€‚
+/// å‘é‡Xæ˜¯åœ¨â€œæ­£â€æ–¹å‘ä¸‹è½¬æ¢ä¸ºYï¼Œâ€œé€†â€æ–¹å‘è½¬æ¢Yä¸ºXï¼Œå³åœ¨ä¸€èˆ¬æƒ…å†µä¸‹X = M^{-1} * (Y - T)ã€‚
+/// åœ¨ç‰¹æ®Šæƒ…å†µM = R * Sï¼Œé€†æ–¹å‘æ˜¯X = (Y - T) * R^t * S^{-1}ï¼Œè¿™é‡ŒS^{-1}æ˜¯å¯¹è§’çŸ©é˜µï¼Œå¯¹è§’å…ƒç´ æ˜¯Sçš„å€’æ•°ï¼Œå’ŒR^tæ˜¯Rçš„è½¬ç½®ã€‚
+/// æ”¯æŒSIMDçŸ©é˜µä¸Žå‘é‡å’ŒçŸ©é˜µä¸ŽçŸ©é˜µçš„ä¹˜æ³•ï¼Œæ­¤ç±»å‚¨å­˜ä¸€ä¸ªé½æ¬¡çŸ©é˜µH = {{M,0},{T,1}}ã€‚
+/// æ­£è½¬æ¢æ˜¯{Y,1} = {X,1} * H å’Œé€†è½¬æ¢æ˜¯ {X,1} = {Y,1} * H^{-1}ã€‚
 
-/// ¶ÔÓÚ³Ë·¨Ô¼¶¨£¬¾ØÕóM = R * S£¨MATHEMATICS_USE_MATRIX_VECTOR£©»ò¾ØÕóM = S * R£¨!MATHEMATICS_USE_MATRIX_VECTOR£©±»³ÆÎª¡°RS¾ØÕó¡±¡£
-/// ¸ÃÀàÎ´Ìá¹©³ÉÔ±º¯ÊýÀ´¼ÆËã±ä»»µÄÄæ£º¡°Transform GetInverse() const¡±¡£
-/// Èç¹ûÒªÌí¼Ó´ËÏî£¬Çë×¢ÒâRS¾ØÕóµÄÄæÍ¨³£²»ÊÇRS¾ØÕó£»
-/// Ò²¾ÍÊÇËµ£¬R*S ÊÇ S^{-1}*R^t £¬Ëü²»ÄÜ×ÜÊÇ±»·Ö½âÎª S^{-1} * R^t = R' * S'¡£
-/// ÄúÐèÒªÊ¹ÓÃS^{-1}*R^t×÷ÎªÊäÈëÀ´ÉèÖÃ¾ØÕó¡£
+/// å¯¹äºŽä¹˜æ³•çº¦å®šï¼ŒçŸ©é˜µM = R * Sï¼ˆMATHEMATICS_USE_MATRIX_VECTORï¼‰æˆ–çŸ©é˜µM = S * Rï¼ˆ!MATHEMATICS_USE_MATRIX_VECTORï¼‰è¢«ç§°ä¸ºâ€œRSçŸ©é˜µâ€ã€‚
+/// è¯¥ç±»æœªæä¾›æˆå‘˜å‡½æ•°æ¥è®¡ç®—å˜æ¢çš„é€†ï¼šâ€œTransform GetInverse() constâ€ã€‚
+/// å¦‚æžœè¦æ·»åŠ æ­¤é¡¹ï¼Œè¯·æ³¨æ„RSçŸ©é˜µçš„é€†é€šå¸¸ä¸æ˜¯RSçŸ©é˜µï¼›
+/// ä¹Ÿå°±æ˜¯è¯´ï¼ŒR*S æ˜¯ S^{-1}*R^t ï¼Œå®ƒä¸èƒ½æ€»æ˜¯è¢«åˆ†è§£ä¸º S^{-1} * R^t = R' * S'ã€‚
+/// æ‚¨éœ€è¦ä½¿ç”¨S^{-1}*R^tä½œä¸ºè¾“å…¥æ¥è®¾ç½®çŸ©é˜µã€‚
 
 namespace Mathematics
 {
@@ -77,7 +77,7 @@ namespace Mathematics
         using EulerAngles = Algebra::EulerAngles<Real>;
 
     public:
-        /// Ä¬ÈÏ¹¹Ôìº¯Êý²úÉúµ¥Î»×ª»»¡£
+        /// é»˜è®¤æž„é€ å‡½æ•°äº§ç”Ÿå•ä½è½¬æ¢ã€‚
         Transform() noexcept;
         explicit Transform(Real scale) noexcept;
         Transform(Real s0, Real s1, Real s2) noexcept;
@@ -86,33 +86,33 @@ namespace Mathematics
 
         NODISCARD explicit operator Matrix4x4() const;
 
-        /// ÉèÖÃ×ª»»Îªµ¥Î»¾ØÕó¡£
+        /// è®¾ç½®è½¬æ¢ä¸ºå•ä½çŸ©é˜µã€‚
         void MakeIdentity() noexcept;
 
-        /// ÉèÖÃ×ª»»µÄËõ·ÅÖµÎª1¡£
+        /// è®¾ç½®è½¬æ¢çš„ç¼©æ”¾å€¼ä¸º1ã€‚
         void MakeUnitScale();
 
-        /// ×ª»»½á¹¹µÄÌáÊ¾¡£
+        /// è½¬æ¢ç»“æž„çš„æç¤ºã€‚
 
         /// M = I
         NODISCARD bool IsIdentity() const noexcept;
 
-        /// R * S£¨ÒÑ¶¨ÒåMATHEMATICS_USE_MATRIX_VECTOR£©»òS * R£¨Î´¶¨ÒåMATHEMATICS_USE_MATRIX_VECTOR£©
+        /// R * Sï¼ˆå·²å®šä¹‰MATHEMATICS_USE_MATRIX_VECTORï¼‰æˆ–S * Rï¼ˆæœªå®šä¹‰MATHEMATICS_USE_MATRIX_VECTORï¼‰
         NODISCARD bool IsRotationOrScaleMatrix() const noexcept;
 
-        /// R * S£¬S = c * I
+        /// R * Sï¼ŒS = c * I
         NODISCARD bool IsUniformScale() const noexcept;
 
-        /// ³ÉÔ±·ÃÎÊ
-        /// (1) Set* º¯ÊýÉèÖÃIsIdentityÌáÊ¾Îªfalse¡£
-        /// (2) SetRotate º¯ÊýÉèÖÃIsRotationOrScaleMatrixÌáÊ¾Îªtrue¡£
-        ///     Èç¹ûÕâ¸öÌáÊ¾ÊÇfalse£¬GetRotate¿ÉÄÜ»á²úÉúÒ»¸ö¶ÏÑÔ¡£
-        /// (3) SetMatrixº¯ÊýÉèÖÃIsRotationOrScaleMatrixºÍIsUniformScaleÌáÊ¾Îªfalse¡£
-        /// (4) SetScaleº¯ÊýÉèÖÃIsUniformScaleÌáÊ¾Îªfalse¡£
-        ///     SetUniformScaleº¯ÊýÉèÖÃIsUniformScaleÌáÊ¾Îªtrue¡£
-        ///     Èç¹ûÕâ¸öÌáÊ¾ÊÇfalse, GetUniformScale¿ÉÄÜ»á²úÉúÒ»¸ö¶ÏÑÔ¡£
-        /// (5) ËùÓÐSet*º¯ÊýÉèÖÃinverseNeedsUpdateÎªtrue¡£
-        ///     µ±GetInverseMatrix±»µ÷ÓÃ£¬ÕâÖÖÇé¿öÄæ¾ØÕó±ØÐë±»ÖØÐÂ¼ÆËã£¬²¢ÉèÖÃinverseNeedsUpdateÎªfalse¡£
+        /// æˆå‘˜è®¿é—®
+        /// (1) Set* å‡½æ•°è®¾ç½®IsIdentityæç¤ºä¸ºfalseã€‚
+        /// (2) SetRotate å‡½æ•°è®¾ç½®IsRotationOrScaleMatrixæç¤ºä¸ºtrueã€‚
+        ///     å¦‚æžœè¿™ä¸ªæç¤ºæ˜¯falseï¼ŒGetRotateå¯èƒ½ä¼šäº§ç”Ÿä¸€ä¸ªæ–­è¨€ã€‚
+        /// (3) SetMatrixå‡½æ•°è®¾ç½®IsRotationOrScaleMatrixå’ŒIsUniformScaleæç¤ºä¸ºfalseã€‚
+        /// (4) SetScaleå‡½æ•°è®¾ç½®IsUniformScaleæç¤ºä¸ºfalseã€‚
+        ///     SetUniformScaleå‡½æ•°è®¾ç½®IsUniformScaleæç¤ºä¸ºtrueã€‚
+        ///     å¦‚æžœè¿™ä¸ªæç¤ºæ˜¯false, GetUniformScaleå¯èƒ½ä¼šäº§ç”Ÿä¸€ä¸ªæ–­è¨€ã€‚
+        /// (5) æ‰€æœ‰Set*å‡½æ•°è®¾ç½®inverseNeedsUpdateä¸ºtrueã€‚
+        ///     å½“GetInverseMatrixè¢«è°ƒç”¨ï¼Œè¿™ç§æƒ…å†µé€†çŸ©é˜µå¿…é¡»è¢«é‡æ–°è®¡ç®—ï¼Œå¹¶è®¾ç½®inverseNeedsUpdateä¸ºfalseã€‚
 
         /// {{R,0},{0,1}}
         void SetRotate(const MatrixType& rotate) noexcept;
@@ -160,21 +160,21 @@ namespace Mathematics
 
         NODISCARD Real GetUniformScale() const;
 
-        /// ÓÃÓÚÉèÖÃ/»ñÈ¡Ðý×ªµÄ±¸ÓÃ±íÊ¾¡£
+        /// ç”¨äºŽè®¾ç½®/èŽ·å–æ—‹è½¬çš„å¤‡ç”¨è¡¨ç¤ºã€‚
 
-        /// ´Ó3x3¾ØÕóÖÐÉèÖÃ/»ñÈ¡¡£
+        /// ä»Ž3x3çŸ©é˜µä¸­è®¾ç½®/èŽ·å–ã€‚
         void SetRotation(const Matrix3Type& rotate);
         NODISCARD Matrix3Type GetRotationMatrix3() const;
         void SetRotation(const Matrix3x3& rotate);
         NODISCARD Matrix3x3 GetRotationMatrix3x3() const;
 
-        /// ËÄÔªÊýÊÇµ¥Î»³¤¶È¡£
+        /// å››å…ƒæ•°æ˜¯å•ä½é•¿åº¦ã€‚
         void SetRotation(const AQuaternionType& quaternion) noexcept;
         NODISCARD AQuaternionType GetRotationAQuaternion() const;
         void SetRotation(const QuaternionType& quaternion);
         NODISCARD QuaternionType GetRotationQuaternion() const;
 
-        /// ÖáÎªµ¥Î»³¤¶È£¬½Ç¶ÈÒÔ»¡¶ÈÎªµ¥Î»¡£
+        /// è½´ä¸ºå•ä½é•¿åº¦ï¼Œè§’åº¦ä»¥å¼§åº¦ä¸ºå•ä½ã€‚
         void SetRotation(const AxisAngleType& axisAngle);
         NODISCARD AxisAngleType GetRotationAxisAngle() const;
         void SetRotation(const AlgebraAxisAngle3& axisAngle);
@@ -182,51 +182,51 @@ namespace Mathematics
         void SetRotation(const AlgebraAxisAngle4& axisAngle);
         NODISCARD AlgebraAxisAngle4 GetRotationAlgebraAxisAngle4() const;
 
-        /// Euler½Ç¶ÈÒÔ»¡¶ÈÎªµ¥Î»¡£GetEulerAnglesº¯ÊýÒªÇó½«orderÖµÉèÖÃÎªËùÐèµÄÖáË³Ðò¡£
+        /// Eulerè§’åº¦ä»¥å¼§åº¦ä¸ºå•ä½ã€‚GetEulerAngleså‡½æ•°è¦æ±‚å°†orderå€¼è®¾ç½®ä¸ºæ‰€éœ€çš„è½´é¡ºåºã€‚
         void SetRotation(const EulerType& eulerAngles);
         NODISCARD EulerType GetRotationEuler(ExtractEulerResultOrder order) const;
 
-        /// Euler½Ç¶ÈÒÔ»¡¶ÈÎªµ¥Î»¡£GetEulerAnglesº¯ÊýÒªÇó¸ù¾ÝaxisÖµÉèÖÃÎªËùÐèµÄÖáË³Ðò¡£
+        /// Eulerè§’åº¦ä»¥å¼§åº¦ä¸ºå•ä½ã€‚GetEulerAngleså‡½æ•°è¦æ±‚æ ¹æ®axiså€¼è®¾ç½®ä¸ºæ‰€éœ€çš„è½´é¡ºåºã€‚
         void SetRotation(const EulerAngles& eulerAngles);
         NODISCARD EulerAngles GetEulerAngles(int axis0, int axis1, int axis2) const;
 
-        /// ¶ÔÓÚM = R * S»òM = S * R£¬·µ»Ø¾ø¶ÔÖµÖÐSµÄ×î´óÖµ¡£
-        /// ¶ÔÓÚÒ»°ãµÄM£¬µ±¶¨ÒåMATHEMATICS_USE_MATRIX_VECTORÊ±·µ»Ø×î´óµÄÐÐ¾ø¶ÔÖµºÍ£¬
-        /// »òÕßµ±Î´¶¨ÒåMATHEMATICS_USE_MATRIX_VECTORÊ±×î´óµÄÁÐ¾ø¶ÔÖµºÍ£¬ÕâÊÇ±ä»»×î´ó¹æÄ£µÄºÏÀí¶ÈÁ¿¡£
+        /// å¯¹äºŽM = R * Sæˆ–M = S * Rï¼Œè¿”å›žç»å¯¹å€¼ä¸­Sçš„æœ€å¤§å€¼ã€‚
+        /// å¯¹äºŽä¸€èˆ¬çš„Mï¼Œå½“å®šä¹‰MATHEMATICS_USE_MATRIX_VECTORæ—¶è¿”å›žæœ€å¤§çš„è¡Œç»å¯¹å€¼å’Œï¼Œ
+        /// æˆ–è€…å½“æœªå®šä¹‰MATHEMATICS_USE_MATRIX_VECTORæ—¶æœ€å¤§çš„åˆ—ç»å¯¹å€¼å’Œï¼Œè¿™æ˜¯å˜æ¢æœ€å¤§è§„æ¨¡çš„åˆç†åº¦é‡ã€‚
         NODISCARD Real GetNorm() const;
 
-        /// ¾ØÕó-µã³Ë·¨, M * p¡£
+        /// çŸ©é˜µ-ç‚¹ä¹˜æ³•, M * pã€‚
         NODISCARD APointType operator*(const APointType& point) const noexcept;
 
-        /// ¾ØÕó-ÏòÁ¿³Ë·¨, M * v¡£
+        /// çŸ©é˜µ-å‘é‡ä¹˜æ³•, M * vã€‚
         NODISCARD AVectorType operator*(const AVectorType& vector) const noexcept;
 
-        /// ¾ØÕó-¾ØÕó³Ë·¨¡£
+        /// çŸ©é˜µ-çŸ©é˜µä¹˜æ³•ã€‚
         Transform& operator*=(const Transform& transform);
 
-        /// »ñÈ¡Æë´Î¾ØÕó¡£
+        /// èŽ·å–é½æ¬¡çŸ©é˜µã€‚
         NODISCARD MatrixType GetHomogeneousMatrix() const noexcept;
         NODISCARD Matrix4x4 GetMatrix4x4() const;
 
-        /// »ñÈ¡Æë´Î¾ØÕóµÄÄæ£¬µ±ÐèÒªÊ±ÖØÐÂ¼ÆËã¡£
-        /// ¶¨ÒåMATHEMATICS_USE_MATRIX_VECTOR
-        /// H = {{M,T},{0,1}}, ÕâÀï H^{-1} = {{M^{-1},-M^{-1}*T},{0,1}}¡£
-        /// Î´¶¨ÒåMATHEMATICS_USE_MATRIX_VECTOR
-        /// H = {{M,0},{T,1}}, ÕâÀï H^{-1} = {{M^{-1},0},{-M^{-1}*T,1}}
+        /// èŽ·å–é½æ¬¡çŸ©é˜µçš„é€†ï¼Œå½“éœ€è¦æ—¶é‡æ–°è®¡ç®—ã€‚
+        /// å®šä¹‰MATHEMATICS_USE_MATRIX_VECTOR
+        /// H = {{M,T},{0,1}}, è¿™é‡Œ H^{-1} = {{M^{-1},-M^{-1}*T},{0,1}}ã€‚
+        /// æœªå®šä¹‰MATHEMATICS_USE_MATRIX_VECTOR
+        /// H = {{M,0},{T,1}}, è¿™é‡Œ H^{-1} = {{M^{-1},0},{-M^{-1}*T,1}}
         NODISCARD MatrixType GetInverseMatrix(Real epsilon = MathType::GetZeroTolerance()) const;
 
-        /// »ñÈ¡TransformµÄÄæ¡£²»Ö´ÐÐ²âÊÔÀ´È·±£µ÷ÓÃµÄ×ª»»ÊÇ¿ÉÄæµÄ¡£
-        /// TransformÄæ¡£Èç¹û¿ÉÄÜ£¬Í¨µÀÒÑÕýÈ··ÖÅä¡£
-        /// ÀýÈç£¬Èç¹ûÊäÈëµÄIsRotationOrScaleMatrixµÈÓÚ 'true'£¬ÔòÄæ¾ØÕóµÄIsRotationOrScaleMatrixÒ²µÈÓÚ'true'£¬
-        /// ²¢ÇÒÄæ¾ØÕóµÄÐý×ª¾ØÕó£¬scaleÒ²ÏàÓ¦µØÉèÖÃ¡£
+        /// èŽ·å–Transformçš„é€†ã€‚ä¸æ‰§è¡Œæµ‹è¯•æ¥ç¡®ä¿è°ƒç”¨çš„è½¬æ¢æ˜¯å¯é€†çš„ã€‚
+        /// Transformé€†ã€‚å¦‚æžœå¯èƒ½ï¼Œé€šé“å·²æ­£ç¡®åˆ†é…ã€‚
+        /// ä¾‹å¦‚ï¼Œå¦‚æžœè¾“å…¥çš„IsRotationOrScaleMatrixç­‰äºŽ 'true'ï¼Œåˆ™é€†çŸ©é˜µçš„IsRotationOrScaleMatrixä¹Ÿç­‰äºŽ'true'ï¼Œ
+        /// å¹¶ä¸”é€†çŸ©é˜µçš„æ—‹è½¬çŸ©é˜µï¼Œscaleä¹Ÿç›¸åº”åœ°è®¾ç½®ã€‚
         NODISCARD Transform GetInverseTransform(Real epsilon = MathType::GetZeroTolerance()) const;
 
-        /// Á÷Ö§³Ö
+        /// æµæ”¯æŒ
         NODISCARD int GetStreamingSize() const noexcept;
         void ReadAggregate(BufferSource& source);
         void WriteAggregate(BufferTarget& target) const;
 
-        /// µ¥Î»×ª»»
+        /// å•ä½è½¬æ¢
         static constexpr Transform GetIdentityTransform() noexcept
         {
             return Transform{};
@@ -239,18 +239,18 @@ namespace Mathematics
     private:
         AffineMatrixType affineMatrix;
 
-        /// ÍêÕûµÄ4x4Æë´Î¾ØÕóH = {{M,T},{0,1}}ºÍËüµÄÄæ¾ØÕóÎªH^{-1} = {M^{-1},-M^{-1}*T},{0,1}}¡£ Äæ¾ØÕóÖ»ÔÚÐèÒªÊ±¼ÆËã¡£
+        /// å®Œæ•´çš„4x4é½æ¬¡çŸ©é˜µH = {{M,T},{0,1}}å’Œå®ƒçš„é€†çŸ©é˜µä¸ºH^{-1} = {M^{-1},-M^{-1}*T},{0,1}}ã€‚ é€†çŸ©é˜µåªåœ¨éœ€è¦æ—¶è®¡ç®—ã€‚
         TransformMatrixType transformMatrix;
 
         mutable MatrixType inverseMatrix;
         mutable bool inverseNeedsUpdate;
     };
 
-    /// ¼ÆËã M*V.
+    /// è®¡ç®— M*V.
     template <typename Real>
     NODISCARD Vector4<Real> operator*(const Transform<Real>& transform, const Vector4<Real>& vector);
 
-    ///  ¼ÆËãV^T*M.
+    ///  è®¡ç®—V^T*M.
     template <typename Real>
     NODISCARD Vector4<Real> operator*(const Vector4<Real>& vector, const Transform<Real>& transform);
 
@@ -266,7 +266,7 @@ namespace Mathematics
     template <typename Real>
     NODISCARD bool Approximate(const Transform<Real>& lhs, const Transform<Real>& rhs, Real epsilon = Math<Real>::GetZeroTolerance());
 
-    /// µ÷ÊÔÊä³ö¡£
+    /// è°ƒè¯•è¾“å‡ºã€‚
     template <typename Real>
     std::ostream& operator<<(std::ostream& stream, const Transform<Real>& transform);
 

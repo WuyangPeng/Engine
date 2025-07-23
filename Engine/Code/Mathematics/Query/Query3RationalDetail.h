@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:34)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:34)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_RATIONAL_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY3_RATIONAL_DETAIL_H
@@ -69,7 +69,7 @@ template <typename Real>
 Mathematics::PlaneQueryType Mathematics::Query3Rational<Real>::ToPlane(int index, int v0, int v1, int v2) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(rationalVertices.size()), "Ë÷Òı´íÎó£¡");
+    MATHEMATICS_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(rationalVertices.size()), "ç´¢å¼•é”™è¯¯ï¼");
 
     return ToPlane(rationalVertices.at(index), v0, v1, v2);
 }
@@ -139,10 +139,10 @@ template <typename Real>
 Mathematics::TetrahedronQueryType Mathematics::Query3Rational<Real>::ToTetrahedron(const QueryRationalVector& rationalTest, int v0, int v1, int v2, int v3) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_0(0 <= v0 && v0 < this->GetNumVertices(), "Ë÷Òı´íÎó£¡");
-    MATHEMATICS_ASSERTION_0(0 <= v1 && v1 < this->GetNumVertices(), "Ë÷Òı´íÎó£¡");
-    MATHEMATICS_ASSERTION_0(0 <= v2 && v2 < this->GetNumVertices(), "Ë÷Òı´íÎó£¡");
-    MATHEMATICS_ASSERTION_0(0 <= v3 && v3 < this->GetNumVertices(), "Ë÷Òı´íÎó£¡");
+    MATHEMATICS_ASSERTION_0(0 <= v0 && v0 < this->GetNumVertices(), "ç´¢å¼•é”™è¯¯ï¼");
+    MATHEMATICS_ASSERTION_0(0 <= v1 && v1 < this->GetNumVertices(), "ç´¢å¼•é”™è¯¯ï¼");
+    MATHEMATICS_ASSERTION_0(0 <= v2 && v2 < this->GetNumVertices(), "ç´¢å¼•é”™è¯¯ï¼");
+    MATHEMATICS_ASSERTION_0(0 <= v3 && v3 < this->GetNumVertices(), "ç´¢å¼•é”™è¯¯ï¼");
 
     const auto sign0 = ToPlane(rationalTest, v1, v2, v3);
     if (sign0 == PlaneQueryType::PositiveSide)

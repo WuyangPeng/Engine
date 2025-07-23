@@ -1,4 +1,4 @@
-{
+﻿{
   "RendererType": 4,
 
   "Texture": {

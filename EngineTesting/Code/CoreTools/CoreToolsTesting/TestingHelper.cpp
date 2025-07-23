@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.0 (2024/08/09 22:02)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.0 (2024/08/09 22:02)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -15,7 +15,7 @@
 #include "CoreTools/TextParsing/Json/JsonAnalysisManager.h"
 
 CoreTools::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "ºËĞÄ¹¤¾ß¿â" }
+    : ParentType{ argc, argv, "æ ¸å¿ƒå·¥å…·åº“" }
 {
     InitSuite();
 
@@ -59,7 +59,7 @@ void CoreTools::TestingHelper::InitSuite()
 
 void CoreTools::TestingHelper::AddHelperSuite()
 {
-    auto helperSuite = GenerateSuite("°ïÖú");
+    auto helperSuite = GenerateSuite("å¸®åŠ©");
 
     ADD_TEST(helperSuite, FunctionDescribedMacroTesting);
     helperSuite.AddSuite(GetAssertTestMacroSuite());
@@ -89,7 +89,7 @@ void CoreTools::TestingHelper::AddHelperSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetAssertExceptionMacroSuite()
 {
-    auto assertExceptionMacroSuite = GenerateSuite("¶ÏÑÔÒì³£²âÊÔ");
+    auto assertExceptionMacroSuite = GenerateSuite("æ–­è¨€å¼‚å¸¸æµ‹è¯•");
 
     ADD_TEST(assertExceptionMacroSuite, AssertNotThrowExceptionTesting);
     ADD_TEST(assertExceptionMacroSuite, AssertThrowExceptionTesting);
@@ -100,7 +100,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetAssertExceptionMacroSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetAssertTestMacroSuite()
 {
-    auto assertTestMacroSuite = GenerateSuite("¶ÏÑÔ²âÊÔ");
+    auto assertTestMacroSuite = GenerateSuite("æ–­è¨€æµ‹è¯•");
 
     ADD_TEST(assertTestMacroSuite, AssertTestExceptionThrowTesting);
     ADD_TEST(assertTestMacroSuite, AssertTestConditionTesting);
@@ -114,7 +114,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetAssertTestMacroSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetClassInvariantMacroSuite()
 {
-    auto classInvariantMacroSuite = GenerateSuite("Àà²»±äÊ½ºê");
+    auto classInvariantMacroSuite = GenerateSuite("ç±»ä¸å˜å¼å®");
 
     ADD_TEST(classInvariantMacroSuite, ClassInvariantMacroTesting);
     ADD_TEST(classInvariantMacroSuite, ModuleClassInvariantMacroTesting);
@@ -124,7 +124,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetClassInvariantMacroSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetCustomAssertMacroSuite()
 {
-    auto customAssertMacroSuite = GenerateSuite("¶ÏÑÔºê");
+    auto customAssertMacroSuite = GenerateSuite("æ–­è¨€å®");
 
     ADD_TEST(customAssertMacroSuite, CustomAssertMacroTesting);
     ADD_TEST(customAssertMacroSuite, ModuleCustomAssertMacroTesting);
@@ -135,7 +135,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetCustomAssertMacroSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetExportMacroSuite()
 {
-    auto exportMacroSuite = GenerateSuite("µ¼³öºê");
+    auto exportMacroSuite = GenerateSuite("å¯¼å‡ºå®");
 
     ADD_TEST(exportMacroSuite, ExportMacroTesting);
     ADD_TEST(exportMacroSuite, ModuleExportMacroTesting);
@@ -151,7 +151,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetExportMacroSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetLogMacroSuite()
 {
-    auto logMacroSuite = GenerateSuite("ÈÕÖ¾ºê");
+    auto logMacroSuite = GenerateSuite("æ—¥å¿—å®");
 
     ADD_TEST(logMacroSuite, LogDefaultMacroTesting);
     ADD_TEST(logMacroSuite, LogFileMacroTesting);
@@ -165,7 +165,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetLogMacroSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetMemberFunctionMacroSuite()
 {
-    auto memberFunctionMacroSuite = GenerateSuite("³ÉÔ±º¯Êıºê");
+    auto memberFunctionMacroSuite = GenerateSuite("æˆå‘˜å‡½æ•°å®");
 
     ADD_TEST(memberFunctionMacroSuite, MemberFunctionMacroTesting);
     ADD_TEST(memberFunctionMacroSuite, MemberFunctionNoexceptMacroTesting);
@@ -178,7 +178,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetMemberFunctionMacroSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetRttiMacroSuite()
 {
-    auto rttiMacroSuite = GenerateSuite("Rttiºê");
+    auto rttiMacroSuite = GenerateSuite("Rttiå®");
 
     ADD_TEST(rttiMacroSuite, RttiMacroBaseTesting);
     ADD_TEST(rttiMacroSuite, RttiMacroTesting);
@@ -189,7 +189,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetRttiMacroSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetStreamMacroSuite()
 {
-    auto streamMacroSuite = GenerateSuite("×Ö½ÚÁ÷ºê");
+    auto streamMacroSuite = GenerateSuite("å­—èŠ‚æµå®");
 
     ADD_TEST(streamMacroSuite, DebugStreamMacroTesting);
     ADD_TEST(streamMacroSuite, DefaultTestingNoObjectPtrTesting);
@@ -204,7 +204,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetStreamMacroSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetUnitTestSuiteMacroSuite()
 {
-    auto unitTestSuiteMacroSuite = GenerateSuite("UnitTestSuiteºê");
+    auto unitTestSuiteMacroSuite = GenerateSuite("UnitTestSuiteå®");
 
     ADD_TEST_USE_PARAMETER_1(unitTestSuiteMacroSuite, UnitTestSuiteMacroTesting, IsPrintRun());
 
@@ -213,7 +213,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetUnitTestSuiteMacroSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetExceptionMacroSuite()
 {
-    auto exceptionMacroSuite = GenerateSuite("Òì³£ºê");
+    auto exceptionMacroSuite = GenerateSuite("å¼‚å¸¸å®");
 
     ADD_TEST(exceptionMacroSuite, ExceptionMacroTesting);
     ADD_TEST(exceptionMacroSuite, ExceptionCatchMacroTesting);
@@ -223,7 +223,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetExceptionMacroSuite()
 
 void CoreTools::TestingHelper::AddContractSuite()
 {
-    auto contractSuite = GenerateSuite("ÆõÔ¼");
+    auto contractSuite = GenerateSuite("å¥‘çº¦");
 
     ADD_TEST(contractSuite, FunctionDescribedTesting);
     ADD_TEST(contractSuite, ScopeExitTesting);
@@ -253,7 +253,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetImplSuite()
 
 void CoreTools::TestingHelper::AddBaseSuite()
 {
-    auto baseSuite = GenerateSuite("»ù´¡");
+    auto baseSuite = GenerateSuite("åŸºç¡€");
 
     ADD_TEST(baseSuite, SingletonTesting);
     ADD_TEST(baseSuite, UniqueIdManagerTesting);
@@ -267,7 +267,7 @@ void CoreTools::TestingHelper::AddBaseSuite()
 
 void CoreTools::TestingHelper::AddCharacterStringSuite()
 {
-    auto characterStringSuite = GenerateSuite("×Ö·û´®Àà");
+    auto characterStringSuite = GenerateSuite("å­—ç¬¦ä¸²ç±»");
 
     ADD_TEST(characterStringSuite, FormatErrorMessageTesting);
     ADD_TEST(characterStringSuite, StringConversionTesting);
@@ -281,7 +281,7 @@ void CoreTools::TestingHelper::AddCharacterStringSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetCaseInsensitiveStringSuite()
 {
-    auto caseInsensitiveStringSuite = GenerateSuite("²»Çø·Ö´óĞ¡Ğ´µÄ×Ö·û´®Àà");
+    auto caseInsensitiveStringSuite = GenerateSuite("ä¸åŒºåˆ†å¤§å°å†™çš„å­—ç¬¦ä¸²ç±»");
 
     ADD_TEST(caseInsensitiveStringSuite, CaseInsensitiveStringTesting);
     ADD_TEST(caseInsensitiveStringSuite, CaseInsensitiveStringIOStreamTesting);
@@ -291,7 +291,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetCaseInsensitiveStringSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetCodeMappingSuite()
 {
-    auto codeMappingSuite = GenerateSuite("´úÂëÓ³Éä");
+    auto codeMappingSuite = GenerateSuite("ä»£ç æ˜ å°„");
 
     ADD_TEST(codeMappingSuite, CodeMappingTesting);
     ADD_TEST(codeMappingSuite, CodeMappingAnalysisTesting);
@@ -301,7 +301,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetCodeMappingSuite()
 
 void CoreTools::TestingHelper::AddExceptionSuite()
 {
-    auto exceptionSuite = GenerateSuite("Òì³£¿â");
+    auto exceptionSuite = GenerateSuite("å¼‚å¸¸åº“");
 
     ADD_TEST(exceptionSuite, LastErrorTesting);
     ADD_TEST(exceptionSuite, ErrorTesting);
@@ -311,7 +311,7 @@ void CoreTools::TestingHelper::AddExceptionSuite()
 
 void CoreTools::TestingHelper::AddConsoleSuite()
 {
-    auto consoleSuite = GenerateSuite("¿ØÖÆÌ¨¿â");
+    auto consoleSuite = GenerateSuite("æ§åˆ¶å°åº“");
 
     ADD_TEST(consoleSuite, ConsoleTesting);
     ADD_TEST(consoleSuite, ConsoleColorsTesting);
@@ -323,7 +323,7 @@ void CoreTools::TestingHelper::AddConsoleSuite()
 
 void CoreTools::TestingHelper::AddThreadingSuite()
 {
-    auto threadingSuite = GenerateSuite("Ïß³Ì¿â");
+    auto threadingSuite = GenerateSuite("çº¿ç¨‹åº“");
 
     ADD_TEST(threadingSuite, CriticalSectionTesting);
     ADD_TEST(threadingSuite, WindowsMutexTesting);
@@ -344,7 +344,7 @@ void CoreTools::TestingHelper::AddThreadingSuite()
 
 void CoreTools::TestingHelper::AddFileManagerSuite()
 {
-    auto fileManagerSuite = GenerateSuite("ÎÄ¼ş¹ÜÀí¿â");
+    auto fileManagerSuite = GenerateSuite("æ–‡ä»¶ç®¡ç†åº“");
 
     fileManagerSuite.AddSuite(GetEndianSuite());
     ADD_TEST(fileManagerSuite, FileBufferTesting);
@@ -365,7 +365,7 @@ void CoreTools::TestingHelper::AddFileManagerSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetEndianSuite()
 {
-    auto endianSuite = GenerateSuite("×Ö½ÚĞò");
+    auto endianSuite = GenerateSuite("å­—èŠ‚åº");
 
     ADD_TEST(endianSuite, ByteSwapTesting);
     ADD_TEST(endianSuite, ByteSwapperTesting);
@@ -377,7 +377,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetEndianSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetCFileManagerSuite()
 {
-    auto cFileManagerSuite = GenerateSuite("CÎÄ¼ş¹ÜÀí");
+    auto cFileManagerSuite = GenerateSuite("Cæ–‡ä»¶ç®¡ç†");
 
     ADD_TEST(cFileManagerSuite, CWriteFileManagerTesting);
     ADD_TEST(cFileManagerSuite, CReadFileManagerTesting);
@@ -388,7 +388,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetCFileManagerSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetStreamManagerSuite()
 {
-    auto streamManagerSuite = GenerateSuite("C++ÎÄ¼ş¹ÜÀí");
+    auto streamManagerSuite = GenerateSuite("C++æ–‡ä»¶ç®¡ç†");
 
     ADD_TEST(streamManagerSuite, OFileStreamManagerTesting);
     ADD_TEST(streamManagerSuite, IFileStreamManagerTesting);
@@ -398,7 +398,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetStreamManagerSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetFileSuite()
 {
-    auto fileSuite = GenerateSuite("ÎÄ¼ş¹ÜÀí");
+    auto fileSuite = GenerateSuite("æ–‡ä»¶ç®¡ç†");
 
     ADD_TEST(fileSuite, WriteFileManagerTesting);
     ADD_TEST(fileSuite, ReadFileManagerTesting);
@@ -409,7 +409,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetFileSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetFileHandleSuite()
 {
-    auto fileHandleSuite = GenerateSuite("ÎÄ¼ş¾ä±ú¹ÜÀí");
+    auto fileHandleSuite = GenerateSuite("æ–‡ä»¶å¥æŸ„ç®¡ç†");
 
     ADD_TEST(fileHandleSuite, WriteFileHandleTesting);
     ADD_TEST(fileHandleSuite, ReadFileHandleTesting);
@@ -422,7 +422,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetFileHandleSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetBufferIOSuite()
 {
-    auto bufferIOSuite = GenerateSuite("»º³åÇøIO");
+    auto bufferIOSuite = GenerateSuite("ç¼“å†²åŒºIO");
 
     ADD_TEST(bufferIOSuite, ReadBufferIOTesting);
     ADD_TEST(bufferIOSuite, WriteBufferIOTesting);
@@ -432,7 +432,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetBufferIOSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetEnvironmentSuite()
 {
-    auto environmentSuite = GenerateSuite("»º³åÇøIO");
+    auto environmentSuite = GenerateSuite("ç¼“å†²åŒºIO");
 
     ADD_TEST(environmentSuite, EnvironmentVariableTesting);
     ADD_TEST(environmentSuite, EnvironmentTesting);
@@ -442,7 +442,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetEnvironmentSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetFileAsynchronousSuite()
 {
-    auto fileAsynchronousSuite = GenerateSuite("ÎÄ¼şÒì²½¹ÜÀí");
+    auto fileAsynchronousSuite = GenerateSuite("æ–‡ä»¶å¼‚æ­¥ç®¡ç†");
 
     ADD_TEST(fileAsynchronousSuite, FileAsynchronousParameterTesting);
     ADD_TEST(fileAsynchronousSuite, FileEventTesting);
@@ -453,7 +453,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetFileAsynchronousSuite()
 
 void CoreTools::TestingHelper::AddTextParsingSuite()
 {
-    auto textParsingSuite = GenerateSuite("ÎÄ±¾½âÎö");
+    auto textParsingSuite = GenerateSuite("æ–‡æœ¬è§£æ");
 
     textParsingSuite.AddSuite(GetSimpleZipSuite());
     textParsingSuite.AddSuite(GetSimpleCSVSuite());
@@ -466,7 +466,7 @@ void CoreTools::TestingHelper::AddTextParsingSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetSimpleZipSuite()
 {
-    auto simpleZipSuite = GenerateSuite("¼òÒ×Zip");
+    auto simpleZipSuite = GenerateSuite("ç®€æ˜“Zip");
 
     ADD_TEST(simpleZipSuite, ZipEntryTesting);
     ADD_TEST(simpleZipSuite, ZipArchiveTesting);
@@ -476,7 +476,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetSimpleZipSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetSimpleCSVSuite()
 {
-    auto simpleCSVSuite = GenerateSuite("¼òÒ×Csv");
+    auto simpleCSVSuite = GenerateSuite("ç®€æ˜“Csv");
 
     ADD_TEST(simpleCSVSuite, SimpleCSVExceptionTesting);
     simpleCSVSuite.AddSuite(GetCommandSuite());
@@ -513,7 +513,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetSimpleCSVSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetCommandSuite()
 {
-    auto simpleCSVCommandSuite = GenerateSuite("csvÃüÁî");
+    auto simpleCSVCommandSuite = GenerateSuite("csvå‘½ä»¤");
 
     ADD_TEST(simpleCSVCommandSuite, CommandSetSheetNameTesting);
     ADD_TEST(simpleCSVCommandSuite, CommandSetSheetVisibilityTesting);
@@ -531,7 +531,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetCommandSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetQuerySuite()
 {
-    auto querySuite = GenerateSuite("csv²éÑ¯");
+    auto querySuite = GenerateSuite("csvæŸ¥è¯¢");
 
     ADD_TEST(querySuite, QuerySheetNameTesting);
     ADD_TEST(querySuite, QuerySheetIndexTesting);
@@ -587,7 +587,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetJsonSuite()
 
 void CoreTools::TestingHelper::AddLogManagerSuite()
 {
-    auto logManagerSuite = GenerateSuite("ÈÕÖ¾¹ÜÀí¿â");
+    auto logManagerSuite = GenerateSuite("æ—¥å¿—ç®¡ç†åº“");
 
     ADD_TEST(logManagerSuite, LogFilterManagerTesting);
     ADD_TEST(logManagerSuite, LogLevelManagerTesting);
@@ -610,7 +610,7 @@ void CoreTools::TestingHelper::AddLogManagerSuite()
 
 void CoreTools::TestingHelper::AddDataTypesSuite()
 {
-    auto dataTypesSuite = GenerateSuite("Êı¾İÀàĞÍ¿â");
+    auto dataTypesSuite = GenerateSuite("æ•°æ®ç±»å‹åº“");
 
     ADD_TEST(dataTypesSuite, TupleTesting);
     ADD_TEST(dataTypesSuite, TupleLessTesting);
@@ -625,7 +625,7 @@ void CoreTools::TestingHelper::AddDataTypesSuite()
 
 void CoreTools::TestingHelper::AddMemoryToolsSuite()
 {
-    auto memoryToolsSuite = GenerateSuite("ÄÚ´æ¹¤¾ß¿â");
+    auto memoryToolsSuite = GenerateSuite("å†…å­˜å·¥å…·åº“");
 
     ADD_TEST(memoryToolsSuite, Array2Testing);
     ADD_TEST(memoryToolsSuite, Array3Testing);
@@ -648,7 +648,7 @@ void CoreTools::TestingHelper::AddMemoryToolsSuite()
 
 void CoreTools::TestingHelper::AddObjectSystemSuite()
 {
-    auto objectSystemsSuite = GenerateSuite("¶ÔÏóÏµÍ³¿â");
+    auto objectSystemsSuite = GenerateSuite("å¯¹è±¡ç³»ç»Ÿåº“");
 
     ADD_TEST(objectSystemsSuite, InitTermTesting);
     ADD_TEST(objectSystemsSuite, RttiTestingBase);
@@ -682,7 +682,7 @@ void CoreTools::TestingHelper::AddObjectSystemSuite()
 
 void CoreTools::TestingHelper::AddTimeSuite()
 {
-    auto timeSuite = GenerateSuite("Ê±¼ä¿â");
+    auto timeSuite = GenerateSuite("æ—¶é—´åº“");
 
     ADD_TEST(timeSuite, CustomTimeTesting);
     ADD_TEST(timeSuite, DeltaTimeManagerTesting);
@@ -698,7 +698,7 @@ void CoreTools::TestingHelper::AddTimeSuite()
 
 void CoreTools::TestingHelper::AddReportOutputSuite()
 {
-    auto reportOutputSuite = GenerateSuite("±¨¸æÊä³ö¿â");
+    auto reportOutputSuite = GenerateSuite("æŠ¥å‘Šè¾“å‡ºåº“");
 
     ADD_TEST(reportOutputSuite, EquidistantReportOutputTesting);
     ADD_TEST(reportOutputSuite, UnitTestFailReportOutputTesting);
@@ -709,7 +709,7 @@ void CoreTools::TestingHelper::AddReportOutputSuite()
 
 void CoreTools::TestingHelper::AddUnitTestSuite()
 {
-    auto unitTestSuite = GenerateSuite("µ¥Ôª²âÊÔ¿â");
+    auto unitTestSuite = GenerateSuite("å•å…ƒæµ‹è¯•åº“");
 
     ADD_TEST(unitTestSuite, OStreamSharedTesting);
     ADD_TEST(unitTestSuite, UnitTestTesting);
@@ -722,7 +722,7 @@ void CoreTools::TestingHelper::AddUnitTestSuite()
 
 void CoreTools::TestingHelper::AddTemplateToolsSuite()
 {
-    auto templateToolsSuite = GenerateSuite("Ä£°å¹¤¾ß¿â");
+    auto templateToolsSuite = GenerateSuite("æ¨¡æ¿å·¥å…·åº“");
 
     ADD_TEST(templateToolsSuite, ConstraintTesting);
     ADD_TEST(templateToolsSuite, FactorialTesting);
@@ -748,7 +748,7 @@ void CoreTools::TestingHelper::AddTemplateToolsSuite()
 
 void CoreTools::TestingHelper::AddCommandSuite()
 {
-    auto commandSuite = GenerateSuite("ÃüÁîĞĞ¿â");
+    auto commandSuite = GenerateSuite("å‘½ä»¤è¡Œåº“");
 
     ADD_TEST(commandSuite, CommandArgumentTesting);
     ADD_TEST(commandSuite, CommandLineInformationTesting);
@@ -759,7 +759,7 @@ void CoreTools::TestingHelper::AddCommandSuite()
 
 void CoreTools::TestingHelper::AddMainFunctionHelperSuite()
 {
-    auto mainFunctionHelperSuite = GenerateSuite("Ö÷º¯Êı°ïÖú¿â");
+    auto mainFunctionHelperSuite = GenerateSuite("ä¸»å‡½æ•°å¸®åŠ©åº“");
 
     ADD_TEST(mainFunctionHelperSuite, TestingInformationHelperTesting);
     ADD_TEST(mainFunctionHelperSuite, CMainFunctionHelperTesting);
@@ -772,28 +772,28 @@ void CoreTools::TestingHelper::AddMainFunctionHelperSuite()
 
 void CoreTools::TestingHelper::AddModuleInitializerTerminatorSuite()
 {
-    auto moduleInitializerTerminatorSuite = GenerateSuite("Ä£¿é×Ô¶¯¼°ÖÕÖ¹");
+    auto moduleInitializerTerminatorSuite = GenerateSuite("æ¨¡å—è‡ªåŠ¨åŠç»ˆæ­¢");
 
     AddSuite(moduleInitializerTerminatorSuite);
 }
 
 void CoreTools::TestingHelper::AddSyntacticParserSuite()
 {
-    auto syntacticParserSuite = GenerateSuite("Óï·¨·ÖÎöÆ÷");
+    auto syntacticParserSuite = GenerateSuite("è¯­æ³•åˆ†æå™¨");
 
     AddSuite(syntacticParserSuite);
 }
 
 void CoreTools::TestingHelper::AddPerformanceProfilerSuite()
 {
-    auto performanceProfilerSuite = GenerateSuite("ĞÔÄÜÆÊÎö/Í³¼Æ²É¼¯");
+    auto performanceProfilerSuite = GenerateSuite("æ€§èƒ½å‰–æ/ç»Ÿè®¡é‡‡é›†");
 
     AddSuite(performanceProfilerSuite);
 }
 
 void CoreTools::TestingHelper::AddEngineConfigurationSuite()
 {
-    auto engineConfigurationSuite = GenerateSuite("ÒıÇæÅäÖÃ");
+    auto engineConfigurationSuite = GenerateSuite("å¼•æ“é…ç½®");
 
     ADD_TEST(engineConfigurationSuite, StringReplacingTesting);
     ADD_TEST(engineConfigurationSuite, GlobalConfigTesting);
@@ -804,7 +804,7 @@ void CoreTools::TestingHelper::AddEngineConfigurationSuite()
 
 void CoreTools::TestingHelper::AddPropertiesSuite()
 {
-    auto propertiesSuite = GenerateSuite("ÊôĞÔ");
+    auto propertiesSuite = GenerateSuite("å±æ€§");
 
     ADD_TEST(propertiesSuite, SimplePropertyExternalTesting);
     ADD_TEST(propertiesSuite, PropertyExternalTesting);
@@ -835,7 +835,7 @@ void CoreTools::TestingHelper::AddCyclicRedundancyCheckSuite()
 
 void CoreTools::TestingHelper::AddMessageEventSuite()
 {
-    auto messageEventSuite = GenerateSuite("ÏûÏ¢ÊÂ¼ş");
+    auto messageEventSuite = GenerateSuite("æ¶ˆæ¯äº‹ä»¶");
 
     ADD_TEST(messageEventSuite, ParametersInterfaceTesting);
     ADD_TEST(messageEventSuite, CallbackParametersTesting);
@@ -855,7 +855,7 @@ void CoreTools::TestingHelper::AddMessageEventSuite()
 
 void CoreTools::TestingHelper::AddStateMachineSuite()
 {
-    auto stateMachineSuite = GenerateSuite("×´Ì¬»ú");
+    auto stateMachineSuite = GenerateSuite("çŠ¶æ€æœº");
 
     ADD_TEST(stateMachineSuite, StateMachineTesting);
     ADD_TEST(stateMachineSuite, StateEntityTesting);
@@ -865,14 +865,14 @@ void CoreTools::TestingHelper::AddStateMachineSuite()
 
 void CoreTools::TestingHelper::AddNetworkSuite()
 {
-    auto networkSuite = GenerateSuite("ÍøÂç");
+    auto networkSuite = GenerateSuite("ç½‘ç»œ");
 
     AddSuite(networkSuite);
 }
 
 void CoreTools::TestingHelper::AddCoroutineSuite()
 {
-    auto coroutineSuite = GenerateSuite("Ğ­³Ì");
+    auto coroutineSuite = GenerateSuite("åç¨‹");
 
     AddSuite(coroutineSuite);
 }

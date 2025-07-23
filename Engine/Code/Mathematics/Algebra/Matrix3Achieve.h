@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 10:32)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 10:32)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX3_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_MATRIX3_ACHIEVE_H
@@ -33,7 +33,7 @@ Mathematics::Matrix3<Real>::Matrix3(const ContainerType& entry, MatrixMajorFlags
 {
     if (entry.size() != matrixSize)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Êı¾İ´óĞ¡´íÎó£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ•°æ®å¤§å°é”™è¯¯ï¼"s))
     }
 
 #include SYSTEM_WARNING_PUSH
@@ -85,7 +85,7 @@ Mathematics::Matrix3<Real>::Matrix3(const Vector3ContainerType& vectors, MatrixM
 {
     if (vectors.size() != vectorSize)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Êı¾İ´óĞ¡´íÎó£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ•°æ®å¤§å°é”™è¯¯ï¼"s))
     }
 
 #include SYSTEM_WARNING_PUSH
@@ -252,7 +252,7 @@ void Mathematics::Matrix3<Real>::MakeRotation(MatrixRotationAxis axis, Real angl
         }
         default:
         {
-            MATHEMATICS_ASSERTION_1(false, "´íÎóµÄÃ¶¾ÙÖµ£¡");
+            MATHEMATICS_ASSERTION_1(false, "é”™è¯¯çš„æšä¸¾å€¼ï¼");
             break;
         }
     }
@@ -287,7 +287,7 @@ const Mathematics::Vector3<Real>& Mathematics::Matrix3<Real>::operator[](int row
             break;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Ë÷Òı´íÎó£¡"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("ç´¢å¼•é”™è¯¯ï¼"s))
 }
 
 template <typename Real>
@@ -304,8 +304,8 @@ requires std::is_arithmetic_v<Real>
 const Real& Mathematics::Matrix3<Real>::operator()(int row, int column) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    MATHEMATICS_ASSERTION_0(xIndex <= row && row < vectorSize, "rowË÷Òı´íÎó£¡");
-    MATHEMATICS_ASSERTION_0(Vector3Type::xIndex <= column && column < Vector3Type::pointSize, "columnË÷Òı´íÎó£¡");
+    MATHEMATICS_ASSERTION_0(xIndex <= row && row < vectorSize, "rowç´¢å¼•é”™è¯¯ï¼");
+    MATHEMATICS_ASSERTION_0(Vector3Type::xIndex <= column && column < Vector3Type::pointSize, "columnç´¢å¼•é”™è¯¯ï¼");
 
     return (*this)[row][column];
 }
@@ -477,7 +477,7 @@ Mathematics::Matrix3<Real> Mathematics::Matrix3<Real>::GaussianEliminationInvers
     }
     else
     {
-        MATHEMATICS_ASSERTION_0(false, "¸Ã¾ØÕó²»´æÔÚÄæ¾ØÕó£¡");
+        MATHEMATICS_ASSERTION_0(false, "è¯¥çŸ©é˜µä¸å­˜åœ¨é€†çŸ©é˜µï¼");
 
         return GetZero();
     }
@@ -500,25 +500,25 @@ Mathematics::Matrix3<Real> Mathematics::Matrix3<Real>::Inverse(const Real epsilo
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    // Ê¹ÓÃ¸¨ÖúÒò×ÓÇóÒ»¸ö3x3¾ØÕóµÄÄæ¡£
-    // Õâ±ÈÊ¹ÓÃ¸ßË¹ÏûÔª·¨¸ü¿ì£¬ÒòÎªÑ­»·µÄ¿ªÏúÏàµ±ÓÚÒ»¸ö·½·¨¡£
+    // ä½¿ç”¨è¾…åŠ©å› å­æ±‚ä¸€ä¸ª3x3çŸ©é˜µçš„é€†ã€‚
+    // è¿™æ¯”ä½¿ç”¨é«˜æ–¯æ¶ˆå…ƒæ³•æ›´å¿«ï¼Œå› ä¸ºå¾ªç¯çš„å¼€é”€ç›¸å½“äºä¸€ä¸ªæ–¹æ³•ã€‚
 
-    // ¼ÆËã°éËæ¾ØÕó¡£
+    // è®¡ç®—ä¼´éšçŸ©é˜µã€‚
     auto adjoint = Adjoint();
 
     const auto det = GetValue<0, 0>() * adjoint.template GetValue<0, 0>() + GetValue<0, 1>() * adjoint.template GetValue<1, 0>() + GetValue<0, 2>() * adjoint.template GetValue<2, 0>();
 
     if (epsilon < MathType::FAbs(det))
     {
-        // ³ıÁã´íÎóÊ¹ÓÃµÄepsilonºÍÕâÀïµÄepsilon²»Í¬£¬
-        // ËùÒÔÊ¹ÓÃÏÈÇóµ¹Êı£¬ÔÙ³Ë¡£
+        // é™¤é›¶é”™è¯¯ä½¿ç”¨çš„epsilonå’Œè¿™é‡Œçš„epsilonä¸åŒï¼Œ
+        // æ‰€ä»¥ä½¿ç”¨å…ˆæ±‚å€’æ•°ï¼Œå†ä¹˜ã€‚
         adjoint *= (1 / det);
 
         return adjoint;
     }
     else
     {
-        MATHEMATICS_ASSERTION_1(false, "¸Ã¾ØÕó²»´æÔÚÄæ¾ØÕó£¡");
+        MATHEMATICS_ASSERTION_1(false, "è¯¥çŸ©é˜µä¸å­˜åœ¨é€†çŸ©é˜µï¼");
 
         return GetZero();
     }
@@ -565,7 +565,7 @@ Real Mathematics::Matrix3<Real>::ExtractAngle() const noexcept
     const auto trace = GetValue<0, 0>() + GetValue<1, 1>() + GetValue<2, 2>();
     const auto cosValue = MathType::GetRational(1, 2) * (trace - MathType::GetValue(1));
 
-    return MathType::ACos(cosValue);  // angle·¶Î§ÔÚ [0,PI]
+    return MathType::ACos(cosValue);  // angleèŒƒå›´åœ¨ [0,PI]
 }
 
 template <typename Real>
@@ -574,26 +574,26 @@ typename Mathematics::Matrix3<Real>::Matrix3Extract Mathematics::Matrix3<Real>::
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    // Éè(x,y,z)ÊÇµ¥Î»³¤¶ÈµÄÖáºÍAÊÇÒ»¸öĞı×ª½Ç¡£
-    // Ğı×ª¾ØÕóReal = I + sin(A) * P + (1 - cos(A)) * P^2£¬ÆäÖĞIÊÇµ¥Î»¾ØÕóºÍ
+    // è®¾(x,y,z)æ˜¯å•ä½é•¿åº¦çš„è½´å’ŒAæ˜¯ä¸€ä¸ªæ—‹è½¬è§’ã€‚
+    // æ—‹è½¬çŸ©é˜µReal = I + sin(A) * P + (1 - cos(A)) * P^2ï¼Œå…¶ä¸­Iæ˜¯å•ä½çŸ©é˜µå’Œ
     //       +-        -+
     //   P = |  0 -z +y |
     //       | +z  0 -x |
     //       | -y +x  0 |
     //       +-        -+
     //
-    // Èç¹ûA > 0Ê±£¬Real±íÊ¾ÈÆÖáÏß´Ó¹Û¿´ÖáÊ¸Á¿µÄÄ©¶Ë³¯ÏòÔ­µãµÄµÄ¸Ğ¾õÄæÊ±ÕëĞı×ª¡£
-    // Ò»Ğ©´úÊı½«Ö¤Ã÷
+    // å¦‚æœA > 0æ—¶ï¼ŒRealè¡¨ç¤ºç»•è½´çº¿ä»è§‚çœ‹è½´çŸ¢é‡çš„æœ«ç«¯æœå‘åŸç‚¹çš„çš„æ„Ÿè§‰é€†æ—¶é’ˆæ—‹è½¬ã€‚
+    // ä¸€äº›ä»£æ•°å°†è¯æ˜
     //
-    //   cos(A) = (trace(Real) - 1) / 2  ºÍ  Real - Real^t = 2 * sin(A) * P
+    //   cos(A) = (trace(Real) - 1) / 2  å’Œ  Real - Real^t = 2 * sin(A) * P
     //
-    // ÌÈÈôA = pi£¬Real - Real^t = 0£¬ÕâÊ¹ÎÒÃÇÎŞ·¨Í¨¹ıPÀ´ÌáÈ¡Öá
-    // È¡¶ø´úÖ®µÄÖ÷ÒâÊÇ£¬Real = I + 2 * P^2µ±A = pi£¬Òò´ËP^2 = (Real - I) / 2¡£
-    // P^2µÄ¶Ô½ÇÔªËØÎªx^2 - 1£¬ y^2 - 1ºÍz^2 - 1¡£
-    // ÎÒÃÇÄÜ¹»½â³öÖá(x,y,z)
-    // ÒòÎª½Ç¶ÈÊÇpi£¬ÄãÑ¡ÔñµÄÆ½·½¸ùµÄ±êÖ¾µÄ·ûºÅ²¢²»Òª½ô¡£
+    // å€˜è‹¥A = piï¼ŒReal - Real^t = 0ï¼Œè¿™ä½¿æˆ‘ä»¬æ— æ³•é€šè¿‡Pæ¥æå–è½´
+    // å–è€Œä»£ä¹‹çš„ä¸»æ„æ˜¯ï¼ŒReal = I + 2 * P^2å½“A = piï¼Œå› æ­¤P^2 = (Real - I) / 2ã€‚
+    // P^2çš„å¯¹è§’å…ƒç´ ä¸ºx^2 - 1ï¼Œ y^2 - 1å’Œz^2 - 1ã€‚
+    // æˆ‘ä»¬èƒ½å¤Ÿè§£å‡ºè½´(x,y,z)
+    // å› ä¸ºè§’åº¦æ˜¯piï¼Œä½ é€‰æ‹©çš„å¹³æ–¹æ ¹çš„æ ‡å¿—çš„ç¬¦å·å¹¶ä¸è¦ç´§ã€‚
 
-    const auto angle = ExtractAngle();  // angle·¶Î§ÔÚ [0,PI]
+    const auto angle = ExtractAngle();  // angleèŒƒå›´åœ¨ [0,PI]
 
     if (MathType::GetZeroTolerance() < angle)
     {
@@ -607,12 +607,12 @@ typename Mathematics::Matrix3<Real>::Matrix3Extract Mathematics::Matrix3<Real>::
         }
         else
         {
-            // ½Ç¶ÈÊÇ PI
+            // è§’åº¦æ˜¯ PI
             if (GetValue<1, 1>() <= GetValue<0, 0>() && GetValue<2, 2>() <= GetValue<0, 0>())
             {
                 // r11 <= r00
 
-                // r00ÊÇ×î´ó¶Ô½ÇÏßÏî
+                // r00æ˜¯æœ€å¤§å¯¹è§’çº¿é¡¹
                 auto axisX = MathType::GetRational(1, 2) * MathType::Sqrt(MathType::GetValue(1) + GetValue<0, 0>() - GetValue<1, 1>() - GetValue<2, 2>());
 
                 const auto halfInverse = MathType::GetRational(1, 2) / axisX;
@@ -623,7 +623,7 @@ typename Mathematics::Matrix3<Real>::Matrix3Extract Mathematics::Matrix3<Real>::
             {
                 // r00 < r11
 
-                // r11ÊÇ×î´ó¶Ô½ÇÏßÏî
+                // r11æ˜¯æœ€å¤§å¯¹è§’çº¿é¡¹
                 auto axisY = MathType::GetRational(1, 2) * MathType::Sqrt(MathType::GetValue(1) + GetValue<1, 1>() - GetValue<0, 0>() - GetValue<2, 2>());
 
                 const auto halfInverse = MathType::GetRational(1, 2) / axisY;
@@ -632,7 +632,7 @@ typename Mathematics::Matrix3<Real>::Matrix3Extract Mathematics::Matrix3<Real>::
             }
             else
             {
-                // r22ÊÇ×î´ó¶Ô½ÇÏßÏî
+                // r22æ˜¯æœ€å¤§å¯¹è§’çº¿é¡¹
                 auto axisZ = MathType::GetRational(1, 2) * MathType::Sqrt(MathType::GetValue(1) + GetValue<2, 2>() - GetValue<0, 0>() - GetValue<1, 1>());
 
                 const auto halfInverse = MathType::GetRational(1, 2) / axisZ;
@@ -645,7 +645,7 @@ typename Mathematics::Matrix3<Real>::Matrix3Extract Mathematics::Matrix3<Real>::
     }
     else
     {
-        // ½Ç¶ÈÎª0µÄ¾ØÕóÊÇµ¥Î»¾ØÕó¡£ËùÓĞÖá¶¼¿ÉÒÔ¹¤×÷£¬Òò´ËÖ»ĞèÊ¹ÓÃxÖá¡£
+        // è§’åº¦ä¸º0çš„çŸ©é˜µæ˜¯å•ä½çŸ©é˜µã€‚æ‰€æœ‰è½´éƒ½å¯ä»¥å·¥ä½œï¼Œå› æ­¤åªéœ€ä½¿ç”¨xè½´ã€‚
         return Matrix3Extract{ angle, Vector3Type::GetUnitX() };
     }
 }
@@ -667,22 +667,22 @@ void Mathematics::Matrix3<Real>::Orthonormalize()
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    // Ëã·¨²ÉÓÃGram-SchmidtÕı½»¡£
-    // Èç¹û'this'¾ØÕóÎªM = [m0|m1|m2]£¬È»ºóÊä³öÕı½»¾ØÕóQ = [q0|q1|q2]
+    // ç®—æ³•é‡‡ç”¨Gram-Schmidtæ­£äº¤ã€‚
+    // å¦‚æœ'this'çŸ©é˜µä¸ºM = [m0|m1|m2]ï¼Œç„¶åè¾“å‡ºæ­£äº¤çŸ©é˜µQ = [q0|q1|q2]
     //
     //   q0 = m0 / |m0|
     //   q1 = (m1 - (q0 * m1)q0) / |m1 - (q0 * m1)q0|
     //   q2 = (m2 - (q0 * m2)q0 - (q1 * m2)q1) / |m2 - (q0 * m2)q0 - (q1 * m2)q1|
-    // ÆäÖĞ|V|±íÊ¾ÏòÁ¿VµÄ³¤¶ÈºÍA * B±íÊ¾ÏòÁ¿AºÍBµÄµã»ı
+    // å…¶ä¸­|V|è¡¨ç¤ºå‘é‡Vçš„é•¿åº¦å’ŒA * Bè¡¨ç¤ºå‘é‡Aå’ŒBçš„ç‚¹ç§¯
 
-    // ¼ÆËã q0.
+    // è®¡ç®— q0.
     auto invLength = MathType::InvSqrt(GetValue<0, 0>() * GetValue<0, 0>() + GetValue<1, 0>() * GetValue<1, 0>() + GetValue<2, 0>() * GetValue<2, 0>());
 
     (*this)(0, 0) *= invLength;
     (*this)(1, 0) *= invLength;
     (*this)(2, 0) *= invLength;
 
-    // ¼ÆËã q1.
+    // è®¡ç®— q1.
     auto dot0 = GetValue<0, 0>() * GetValue<0, 1>() + GetValue<1, 0>() * GetValue<1, 1>() + GetValue<2, 0>() * GetValue<2, 1>();
 
     (*this)(0, 1) -= dot0 * GetValue<0, 0>();
@@ -695,7 +695,7 @@ void Mathematics::Matrix3<Real>::Orthonormalize()
     (*this)(1, 1) *= invLength;
     (*this)(2, 1) *= invLength;
 
-    // ¼ÆËã q2
+    // è®¡ç®— q2
     auto dot1 = GetValue<0, 1>() * GetValue<0, 2>() + GetValue<1, 1>() * GetValue<1, 2>() + GetValue<2, 1>() * GetValue<2, 2>();
 
     auto dot2 = GetValue<0, 0>() * GetValue<0, 2>() + GetValue<1, 0>() * GetValue<1, 2>() + GetValue<2, 0>() * GetValue<2, 2>();
@@ -717,25 +717,25 @@ typename Mathematics::Matrix3<Real>::Matrix3EigenDecompositionType Mathematics::
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 1>() - GetValue<1, 0>()) <= epsilon, "¾ØÕó±ØĞëÊÇ¶Ô³Æ¾ØÕó¡£");
-    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 2>() - GetValue<2, 0>()) <= epsilon, "¾ØÕó±ØĞëÊÇ¶Ô³Æ¾ØÕó¡£");
-    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<1, 2>() - GetValue<2, 1>()) <= epsilon, "¾ØÕó±ØĞëÊÇ¶Ô³Æ¾ØÕó¡£");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 1>() - GetValue<1, 0>()) <= epsilon, "çŸ©é˜µå¿…é¡»æ˜¯å¯¹ç§°çŸ©é˜µã€‚");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<0, 2>() - GetValue<2, 0>()) <= epsilon, "çŸ©é˜µå¿…é¡»æ˜¯å¯¹ç§°çŸ©é˜µã€‚");
+    MATHEMATICS_ASSERTION_1(MathType::FAbs(GetValue<1, 2>() - GetValue<2, 1>()) <= epsilon, "çŸ©é˜µå¿…é¡»æ˜¯å¯¹ç§°çŸ©é˜µã€‚");
 
-    // ÏµÊı M = Real * D * Real^T¡£
-    // RealµÄÁĞÊÇÌØÕ÷ÏòÁ¿¡£DµÄ¶Ô½ÇÔªËØÎªÏàÓ¦µÄÌØÕ÷Öµ¡£
+    // ç³»æ•° M = Real * D * Real^Tã€‚
+    // Realçš„åˆ—æ˜¯ç‰¹å¾å‘é‡ã€‚Dçš„å¯¹è§’å…ƒç´ ä¸ºç›¸åº”çš„ç‰¹å¾å€¼ã€‚
     const Tridiagonalize<Real> tridiagonalize{ *this };
 
     auto reflection = tridiagonalize.IsReflection();
     auto rotation = tridiagonalize.GetRotation();
     auto diagonal = tridiagonalize.GetDiagonal();
 
-    // ÌØÕ÷Öµ°´µİÔöË³ĞòÅÅĞò£¬d0 <= d1 <= d2¡£ÕâÊÇÒ»¸ö²åÈëÅÅĞò¡£
+    // ç‰¹å¾å€¼æŒ‰é€’å¢é¡ºåºæ’åºï¼Œd0 <= d1 <= d2ã€‚è¿™æ˜¯ä¸€ä¸ªæ’å…¥æ’åºã€‚
     if (diagonal.GetY() < diagonal.GetX())
     {
-        // ½»»» d0 ºÍ d1.
+        // äº¤æ¢ d0 å’Œ d1.
         std::swap(diagonal[0], diagonal[1]);
 
-        // ½»»» V0 ºÍ V1.
+        // äº¤æ¢ V0 å’Œ V1.
         for (auto i = 0; i < vectorSize; ++i)
         {
             std::swap(rotation(i, 0), rotation(i, 1));
@@ -745,10 +745,10 @@ typename Mathematics::Matrix3<Real>::Matrix3EigenDecompositionType Mathematics::
 
     if (diagonal.GetZ() < diagonal.GetY())
     {
-        // ½»»» d1 ºÍ d2.
+        // äº¤æ¢ d1 å’Œ d2.
         std::swap(diagonal[1], diagonal[2]);
 
-        // ½»»» V1 ºÍ V2.
+        // äº¤æ¢ V1 å’Œ V2.
         for (auto i = 0; i < vectorSize; ++i)
         {
             std::swap(rotation(i, 1), rotation(i, 2));
@@ -758,10 +758,10 @@ typename Mathematics::Matrix3<Real>::Matrix3EigenDecompositionType Mathematics::
 
     if (diagonal.GetY() < diagonal.GetX())
     {
-        // ½»»» d0 ºÍ d1.
+        // äº¤æ¢ d0 å’Œ d1.
         std::swap(diagonal[0], diagonal[1]);
 
-        // ½»»» V0 ºÍ V1.
+        // äº¤æ¢ V0 å’Œ V1.
         for (auto i = 0; i < vectorSize; ++i)
         {
             std::swap(rotation(i, 0), rotation(i, 1));
@@ -773,7 +773,7 @@ typename Mathematics::Matrix3<Real>::Matrix3EigenDecompositionType Mathematics::
 
     if (reflection)
     {
-        // Õâ¶Ô½Ç¾ØÕóMÕı½»±ä»»ÊÇÒ»ÖÖ·´Éä¡£Í¨¹ı¸Ä±ä×îºóÒ»ÁĞµÄ·ûºÅÊ¹ÌØÕ÷ÏòÁ¿·ûºÏÓÒÊÖÏµÍ³¡£
+        // è¿™å¯¹è§’çŸ©é˜µMæ­£äº¤å˜æ¢æ˜¯ä¸€ç§åå°„ã€‚é€šè¿‡æ”¹å˜æœ€åä¸€åˆ—çš„ç¬¦å·ä½¿ç‰¹å¾å‘é‡ç¬¦åˆå³æ‰‹ç³»ç»Ÿã€‚
         rotation(0, 2) = -rotation.template GetValue<0, 2>();
         rotation(1, 2) = -rotation.template GetValue<1, 2>();
         rotation(2, 2) = -rotation.template GetValue<2, 2>();
@@ -1052,7 +1052,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
         {
             // y_angle = -pi/2
             // z_angle - x_angle = atan2(r10,r11)
-            // ¾¯¸æ¡£¸Ã½â²»ÊÇÎ¨Ò»µÄ¡£Ñ¡Ôñz_angle = 0.
+            // è­¦å‘Šã€‚è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„ã€‚é€‰æ‹©z_angle = 0.
             constexpr auto yAngle = -MathType::GetHalfPI();
             const auto xAngle = -MathType::ATan2(GetValue<1, 0>(), GetValue<1, 1>());
             constexpr auto zAngle = MathType::GetValue(0);
@@ -1064,7 +1064,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
     {
         // y_angle = +pi/2
         // z_angle + x_angle = atan2(r10,r11)
-        // ¾¯¸æ¡£¸Ã½â²»ÊÇÎ¨Ò»µÄ¡£Ñ¡Ôñz_angle = 0.
+        // è­¦å‘Šã€‚è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„ã€‚é€‰æ‹©z_angle = 0.
         constexpr auto yAngle = MathType::GetHalfPI();
         const auto xAngle = MathType::ATan2(GetValue<1, 0>(), GetValue<1, 1>());
         constexpr auto zAngle = MathType::GetValue(0);
@@ -1101,7 +1101,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
         {
             // z_angle = +pi/2
             // y_angle - x_angle = atan2(-r20,r22)
-            // ¾¯¸æ¡£¸Ã½â²»ÊÇÎ¨Ò»µÄ¡£Ñ¡Ôñy_angle = 0.
+            // è­¦å‘Šã€‚è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„ã€‚é€‰æ‹©y_angle = 0.
             constexpr auto zAngle = MathType::GetHalfPI();
             const auto xAngle = -MathType::ATan2(-GetValue<2, 0>(), GetValue<2, 2>());
             constexpr auto yAngle = MathType::GetValue(0);
@@ -1113,7 +1113,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
     {
         // z_angle = -pi/2
         // y_angle + x_angle = atan2(-r20,r22)
-        // ¾¯¸æ¡£¸Ã½â²»ÊÇÎ¨Ò»µÄ¡£Ñ¡Ôñy_angle = 0.
+        // è­¦å‘Šã€‚è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„ã€‚é€‰æ‹©y_angle = 0.
         constexpr auto zAngle = -MathType::GetHalfPI();
         const auto xAngle = MathType::ATan2(-GetValue<2, 0>(), GetValue<2, 2>());
         constexpr auto yAngle = MathType::GetValue(0);
@@ -1151,7 +1151,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
         {
             // x_angle = +pi/2
             // z_angle - y_angle = atan2(-r01,r00)
-            // ¾¯¸æ¡£¸Ã½â²»ÊÇÎ¨Ò»µÄ¡£Ñ¡Ôñ z_angle = 0.
+            // è­¦å‘Šã€‚è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„ã€‚é€‰æ‹© z_angle = 0.
             constexpr auto xAngle = MathType::GetHalfPI();
             const auto yAngle = -MathType::ATan2(-GetValue<0, 1>(), GetValue<0, 0>());
             constexpr auto zAngle = MathType::GetValue(0);
@@ -1163,7 +1163,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
     {
         // x_angle = -pi/2
         // z_angle + y_angle = atan2(-r01,r00)
-        // ¾¯¸æ¡£¸Ã½â²»ÊÇÎ¨Ò»µÄ¡£Ñ¡Ôñz_angle = 0.
+        // è­¦å‘Šã€‚è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„ã€‚é€‰æ‹©z_angle = 0.
         constexpr auto xAngle = -MathType::GetHalfPI();
         const auto yAngle = MathType::ATan2(-GetValue<0, 1>(), GetValue<0, 0>());
         constexpr auto zAngle = MathType::GetValue(0);
@@ -1201,7 +1201,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
         {
             // z_angle = -pi/2
             // x_angle - y_angle = atan2(r21,r22)
-            // ¾¯¸æ¡£¸Ã½â²»ÊÇÎ¨Ò»µÄ¡£Ñ¡Ôñ x_angle = 0.
+            // è­¦å‘Šã€‚è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„ã€‚é€‰æ‹© x_angle = 0.
 
             constexpr auto zAngle = -MathType::GetHalfPI();
             const auto yAngle = -MathType::ATan2(GetValue<2, 1>(), GetValue<2, 2>());
@@ -1214,7 +1214,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
     {
         // z_angle = +pi/2
         // x_angle + y_angle = atan2(r21,r22)
-        // ¾¯¸æ¡£¸Ã½â²»ÊÇÎ¨Ò»µÄ¡£Ñ¡Ôñ x_angle = 0.
+        // è­¦å‘Šã€‚è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„ã€‚é€‰æ‹© x_angle = 0.
 
         constexpr auto zAngle = MathType::GetHalfPI();
         const auto yAngle = MathType::ATan2(GetValue<2, 1>(), GetValue<2, 2>());
@@ -1254,7 +1254,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
         {
             // x_angle = -pi/2
             // y_angle - z_angle = atan2(r02,r00)
-            // ¾¯¸æ¡£¸Ã½â²»ÊÇÎ¨Ò»µÄ¡£Ñ¡Ôñ y_angle = 0.
+            // è­¦å‘Šã€‚è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„ã€‚é€‰æ‹© y_angle = 0.
 
             constexpr auto xAngle = -MathType::GetHalfPI();
             const auto zAngle = -MathType::ATan2(GetValue<0, 2>(), GetValue<0, 0>());
@@ -1267,7 +1267,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
     {
         // x_angle = +pi/2
         // y_angle + z_angle = atan2(r02,r00)
-        // ¾¯¸æ¡£¸Ã½â²»ÊÇÎ¨Ò»µÄ¡£Ñ¡Ôñ y_angle = 0.
+        // è­¦å‘Šã€‚è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„ã€‚é€‰æ‹© y_angle = 0.
 
         constexpr auto xAngle = MathType::GetHalfPI();
         const auto zAngle = MathType::ATan2(GetValue<0, 2>(), GetValue<0, 0>());
@@ -1307,7 +1307,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
         {
             // y_angle = +pi/2
             // x_angle - z_angle = atan2(r01,r02)
-            // ¾¯¸æ¡£¸Ã½â²»ÊÇÎ¨Ò»µÄ¡£Ñ¡Ôñ x_angle = 0.
+            // è­¦å‘Šã€‚è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„ã€‚é€‰æ‹© x_angle = 0.
 
             constexpr auto yAngle = MathType::GetHalfPI();
             const auto zAngle = -MathType::ATan2(GetValue<0, 1>(), GetValue<0, 2>());
@@ -1320,7 +1320,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
     {
         // y_angle = -pi/2
         // x_angle + z_angle = atan2(-r01,-r02)
-        // ¾¯¸æ¡£¸Ã½â²»ÊÇÎ¨Ò»µÄ¡£Ñ¡Ôñ x_angle = 0;
+        // è­¦å‘Šã€‚è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„ã€‚é€‰æ‹© x_angle = 0;
 
         constexpr auto yAngle = -MathType::GetHalfPI();
         const auto zAngle = MathType::ATan2(-GetValue<0, 1>(), -GetValue<0, 2>());
@@ -1358,7 +1358,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
         }
         else
         {
-            // ¸Ã½â²»ÊÇÎ¨Ò»µÄ:  x1_angle - x0_angle = atan2(-r12,r11)
+            // è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„:  x1_angle - x0_angle = atan2(-r12,r11)
 
             constexpr auto yAngle = MathType::GetPI();
             const auto x0Angle = -MathType::ATan2(-GetValue<1, 2>(), GetValue<1, 1>());
@@ -1369,7 +1369,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
     }
     else
     {
-        // ¸Ã½â²»ÊÇÎ¨Ò»µÄ:  x1_angle + x0_angle = atan2(-r12,r11)
+        // è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„:  x1_angle + x0_angle = atan2(-r12,r11)
         constexpr auto yAngle = MathType::GetValue(0);
         const auto x0Angle = MathType::ATan2(-GetValue<1, 2>(), GetValue<1, 1>());
         constexpr auto x1Angle = MathType::GetValue(0);
@@ -1406,7 +1406,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
         }
         else
         {
-            // ¸Ã½â²»ÊÇÎ¨Ò»µÄ:  x1_angle - x0_angle = atan2(r21,r22)
+            // è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„:  x1_angle - x0_angle = atan2(r21,r22)
 
             constexpr auto zAngle = MathType::GetPI();
             const auto x0Angle = -MathType::ATan2(GetValue<2, 1>(), GetValue<2, 2>());
@@ -1417,7 +1417,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
     }
     else
     {
-        // ¸Ã½â²»ÊÇÎ¨Ò»µÄ: x1_angle + x0_angle = atan2(r21,r22)
+        // è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„: x1_angle + x0_angle = atan2(r21,r22)
 
         constexpr auto zAngle = MathType::GetValue(0);
         const auto x0Angle = MathType::ATan2(GetValue<2, 1>(), GetValue<2, 2>());
@@ -1455,7 +1455,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
         }
         else
         {
-            // ¸Ã½â²»ÊÇÎ¨Ò»µÄ:  y1_angle - y0_angle = atan2(r02,r00)
+            // è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„:  y1_angle - y0_angle = atan2(r02,r00)
 
             constexpr auto xAngle = MathType::GetPI();
             const auto y0Angle = -MathType::ATan2(GetValue<0, 2>(), GetValue<0, 0>());
@@ -1466,7 +1466,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
     }
     else
     {
-        // ¸Ã½â²»ÊÇÎ¨Ò»µÄ: y1_angle + y0_angle = atan2(r02,r00)
+        // è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„: y1_angle + y0_angle = atan2(r02,r00)
 
         constexpr auto xAngle = MathType::GetValue(0);
         const auto y0Angle = MathType::ATan2(GetValue<0, 2>(), GetValue<0, 0>());
@@ -1504,7 +1504,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
         }
         else
         {
-            // ¸Ã½â²»ÊÇÎ¨Ò»µÄ:  y1_angle - y0_angle = atan2(-r20,r22)
+            // è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„:  y1_angle - y0_angle = atan2(-r20,r22)
 
             constexpr auto zAngle = MathType::GetPI();
             const auto y0Angle = -MathType::ATan2(-GetValue<2, 0>(), GetValue<2, 2>());
@@ -1515,7 +1515,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
     }
     else
     {
-        // ¸Ã½â²»ÊÇÎ¨Ò»µÄ:  y1_angle + y0_angle = atan2(-r20,r22)
+        // è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„:  y1_angle + y0_angle = atan2(-r20,r22)
 
         constexpr auto zAngle = MathType::GetValue(0);
         const auto y0Angle = MathType::ATan2(-GetValue<2, 0>(), GetValue<2, 2>());
@@ -1553,7 +1553,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
         }
         else
         {
-            // ¸Ã½â²»ÊÇÎ¨Ò»µÄ:  z1_angle - z0_angle = atan2(-r01,r00)
+            // è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„:  z1_angle - z0_angle = atan2(-r01,r00)
 
             constexpr auto xAngle = MathType::GetPI();
             const auto z0Angle = -MathType::ATan2(-GetValue<0, 1>(), GetValue<0, 0>());
@@ -1564,7 +1564,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
     }
     else
     {
-        // ¸Ã½â²»ÊÇÎ¨Ò»µÄ: z1_angle + z0_angle = atan2(-r01,r00)
+        // è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„: z1_angle + z0_angle = atan2(-r01,r00)
 
         constexpr auto xAngle = MathType::GetValue(0);
         const auto z0Angle = MathType::ATan2(-GetValue<0, 1>(), GetValue<0, 0>());
@@ -1602,7 +1602,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
         }
         else  // r22 = -1
         {
-            // ¸Ã½â²»ÊÇÎ¨Ò»µÄ:  z1_angle - z0_angle = atan2(r10,r11)
+            // è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„:  z1_angle - z0_angle = atan2(r10,r11)
 
             constexpr auto yAngle = MathType::GetPI();
             const auto z0Angle = -MathType::ATan2(GetValue<1, 0>(), GetValue<1, 1>());
@@ -1613,7 +1613,7 @@ typename Mathematics::Matrix3<Real>::EulerType Mathematics::Matrix3<Real>::Extra
     }
     else  // r22 = +1
     {
-        // ¸Ã½â²»ÊÇÎ¨Ò»µÄ: z1_angle + z0_angle = atan2(r10,r11)
+        // è¯¥è§£ä¸æ˜¯å”¯ä¸€çš„: z1_angle + z0_angle = atan2(r10,r11)
 
         constexpr auto yAngle = MathType::GetValue(0);
         const auto z0Angle = MathType::ATan2(GetValue<1, 0>(), GetValue<1, 1>());

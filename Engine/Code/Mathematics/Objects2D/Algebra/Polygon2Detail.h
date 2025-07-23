@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.6 (2024/02/22 09:44)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.6 (2024/02/22 09:44)
 
 #ifndef MATHEMATICS_OBJECTS_2D_ALGEBRA_POLYGON2_DETAIL_H
 #define MATHEMATICS_OBJECTS_2D_ALGEBRA_POLYGON2_DETAIL_H
@@ -27,7 +27,7 @@ Mathematics::Algebra::Polygon2<Real>::Polygon2(const VertexPoolSharedPtr& vertex
 {
     if (numIndices < 3 && vertexPool == nullptr && indices.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Polygon2¹¹Ôìº¯ÊıµÄÊäÈëÎŞĞ§¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("Polygon2æ„é€ å‡½æ•°çš„è¾“å…¥æ— æ•ˆã€‚"))
     }
 
     for (auto i = 0; i < numIndices; ++i)
@@ -37,8 +37,8 @@ Mathematics::Algebra::Polygon2<Real>::Polygon2(const VertexPoolSharedPtr& vertex
 
     if (numIndices != boost::numeric_cast<int>(vertices.size()))
     {
-        /// ÖÁÉÙÓöµ½ÁËÒ»¸öÖØ¸´µÄ¶¥µã£¬ËùÒÔºÜ¼òµ¥¡£¹¹Ôìº¯Êıµ÷ÓÃÊ§°Ü¡£
-        THROW_EXCEPTION(SYSTEM_TEXT("Polygon2¹¹Ôìº¯ÊıµÄÊäÈë´æÔÚÖØ¸´¶¥µã¡£"))
+        /// è‡³å°‘é‡åˆ°äº†ä¸€ä¸ªé‡å¤çš„é¡¶ç‚¹ï¼Œæ‰€ä»¥å¾ˆç®€å•ã€‚æ„é€ å‡½æ•°è°ƒç”¨å¤±è´¥ã€‚
+        THROW_EXCEPTION(SYSTEM_TEXT("Polygon2æ„é€ å‡½æ•°çš„è¾“å…¥å­˜åœ¨é‡å¤é¡¶ç‚¹ã€‚"))
     }
 
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -72,7 +72,7 @@ typename Mathematics::Algebra::Polygon2<Real>::VertexPoolSharedPtr Mathematics::
 
     if (result == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("vertexPoolÒÑ¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("vertexPoolå·²ã€‚"))
     }
 
     return result;
@@ -178,10 +178,10 @@ bool Mathematics::Algebra::Polygon2<Real>::IsSimple() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    /// ±£Ö¤Ë÷ÒıµÄÊıÁ¿ÖÁÉÙÎª3¡£
+    /// ä¿è¯ç´¢å¼•çš„æ•°é‡è‡³å°‘ä¸º3ã€‚
     if (indices.size() == 3u)
     {
-        /// ¶à±ßĞÎÊÇÒ»¸öÈı½ÇĞÎ¡£
+        /// å¤šè¾¹å½¢æ˜¯ä¸€ä¸ªä¸‰è§’å½¢ã€‚
         return true;
     }
 
@@ -194,10 +194,10 @@ bool Mathematics::Algebra::Polygon2<Real>::IsConvex() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    /// ±£Ö¤Ë÷ÒıµÄÊıÁ¿ÖÁÉÙÎª3¡£
+    /// ä¿è¯ç´¢å¼•çš„æ•°é‡è‡³å°‘ä¸º3ã€‚
     if (indices.size() == 3u)
     {
-        /// ¶à±ßĞÎÊÇÒ»¸öÈı½ÇĞÎ¡£
+        /// å¤šè¾¹å½¢æ˜¯ä¸€ä¸ªä¸‰è§’å½¢ã€‚
         return true;
     }
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 15:35)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 15:35)
 
 #include "DistanceLine2Segment2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -129,7 +129,7 @@ void Mathematics::DistanceLine2Segment2Testing::StaticTest()
 
         if (rhsLength <= rhsExtent)
         {
-            // ×îĞ¡ÖµÎªÏß¶ÎÄÚ²¿µã¡£
+            // æœ€å°å€¼ä¸ºçº¿æ®µå†…éƒ¨ç‚¹ã€‚
 
             Vector2 rhsDifference2 = squaredResult.GetRhsClosestPoint() - rhsOrigin;
             const double rhsLength2 = Vector2ToolsD::GetLength(rhsDifference2);
@@ -152,7 +152,7 @@ void Mathematics::DistanceLine2Segment2Testing::StaticTest()
         }
         else if (rhsExtent < rhsLength && Vector2ToolsD::Approximate(rhsDifference, rhsDirection, 1e-8))
         {
-            // ×î½üµãÔÚlhsÉÏÄ³¸öµãºÍrhsÖÕµã
+            // æœ€è¿‘ç‚¹åœ¨lhsä¸ŠæŸä¸ªç‚¹å’Œrhsç»ˆç‚¹
             ASSERT_APPROXIMATE(squaredResult.GetDistance(), Vector2ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() - distance.GetSegment().GetEndPoint()), 1e-10);
             ASSERT_APPROXIMATE(squaredResult.GetContactTime(), 0.0, 1e-10);
             ASSERT_APPROXIMATE(result.GetDistance(), Vector2ToolsD::GetLength(squaredResult.GetLhsClosestPoint() - distance.GetSegment().GetEndPoint()), 1e-10);
@@ -164,7 +164,7 @@ void Mathematics::DistanceLine2Segment2Testing::StaticTest()
         }
         else
         {
-            // ×î½üµãÔÚlhsÉÏÄ³¸öµãºÍrhsÆğÊ¼µã
+            // æœ€è¿‘ç‚¹åœ¨lhsä¸ŠæŸä¸ªç‚¹å’Œrhsèµ·å§‹ç‚¹
             ASSERT_TRUE(rhsExtent < rhsLength);
             ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, rhsDifference, -rhsDirection, 1e-8);
 
@@ -287,7 +287,7 @@ void Mathematics::DistanceLine2Segment2Testing::DynamicTest()
 
         if (rhsLength <= rhsExtent)
         {
-            // ×îĞ¡ÖµÎªÏß¶ÎÄÚ²¿µã¡£
+            // æœ€å°å€¼ä¸ºçº¿æ®µå†…éƒ¨ç‚¹ã€‚
 
             Vector2 rhsDifference2 = squaredResult.GetRhsClosestPoint() - rhsOrigin - t * rhsVelocity;
             const double rhsLength2 = Vector2ToolsD::GetLength(rhsDifference2);
@@ -311,7 +311,7 @@ void Mathematics::DistanceLine2Segment2Testing::DynamicTest()
         else if (rhsExtent < rhsLength &&
                  Vector2ToolsD::Approximate(rhsDifference, rhsDirection, 1e-8))
         {
-            // ×î½üµãÔÚlhsÉÏÄ³¸öµãºÍrhsÖÕµã
+            // æœ€è¿‘ç‚¹åœ¨lhsä¸ŠæŸä¸ªç‚¹å’Œrhsç»ˆç‚¹
             ASSERT_APPROXIMATE(squaredResult.GetDistance(),
                                Vector2ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() - distance.GetSegment().GetEndPoint() - t * rhsVelocity),
                                1e-10);
@@ -327,7 +327,7 @@ void Mathematics::DistanceLine2Segment2Testing::DynamicTest()
         }
         else
         {
-            // ×î½üµãÔÚlhsÉÏÄ³¸öµãºÍrhsÆğÊ¼µã
+            // æœ€è¿‘ç‚¹åœ¨lhsä¸ŠæŸä¸ªç‚¹å’Œrhsèµ·å§‹ç‚¹
             ASSERT_TRUE(rhsExtent < rhsLength);
             ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, rhsDifference, -rhsDirection, 1e-8);
 

@@ -1,4 +1,4 @@
-$Copyright$
+﻿$Copyright$
 
 #include "$ProjectName$Helper.h"
 #include "Framework/Helper/MainFunctionMacro.h"

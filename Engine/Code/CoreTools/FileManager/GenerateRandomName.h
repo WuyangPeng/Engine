@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/30 22:56)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/30 22:56)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_GENERATE_RANDOM_NAME_H
 #define CORE_TOOLS_FILE_MANAGER_GENERATE_RANDOM_NAME_H
@@ -14,7 +14,7 @@
 
 #include "System/Helper/UnicodeUsing.h"
 
-/// Éú³ÉÒ»¸öËæ»úÎÄ¼þÃû£¬ÓÃÓÚÔÚÐÞ¸ÄºÍ±£´æ´æµµÎÄ¼þÊ±Éú³ÉÁÙÊ±´æµµ¡£
+/// ç”Ÿæˆä¸€ä¸ªéšæœºæ–‡ä»¶åï¼Œç”¨äºŽåœ¨ä¿®æ”¹å’Œä¿å­˜å­˜æ¡£æ–‡ä»¶æ—¶ç”Ÿæˆä¸´æ—¶å­˜æ¡£ã€‚
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE GenerateRandomName

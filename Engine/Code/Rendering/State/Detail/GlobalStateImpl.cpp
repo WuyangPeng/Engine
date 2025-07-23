@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/26 11:21)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/26 11:21)
 
 #include "Rendering/RenderingExport.h"
 
@@ -73,7 +73,7 @@ void Rendering::GlobalStateImpl::SetActiveBlendState(const BlendStateSharedPtr& 
 
     if (!state)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("stateÖ¸ÕëÎª¿Õ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("stateæŒ‡é’ˆä¸ºç©ºã€‚"s))
     }
 
     activeBlendState = state;
@@ -85,7 +85,7 @@ void Rendering::GlobalStateImpl::SetActiveDepthStencilState(const DepthStencilSt
 
     if (!state)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("stateÖ¸ÕëÎª¿Õ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("stateæŒ‡é’ˆä¸ºç©ºã€‚"s))
     }
 
     activeDepthStencilState = state;
@@ -97,7 +97,7 @@ void Rendering::GlobalStateImpl::SetActiveRasterizerState(const RasterizerStateS
 
     if (!state)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("stateÖ¸ÕëÎª¿Õ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("stateæŒ‡é’ˆä¸ºç©ºã€‚"s))
     }
 
     activeRasterizerState = state;
@@ -173,7 +173,7 @@ Rendering::GlobalStateImpl::ConstRendererObjectSharedPtr Rendering::GlobalStateI
     const auto result = rendererObjectBridge.lock();
     if (result == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("rendererObjectBridgeÒÑÊÍ·Å¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("rendererObjectBridgeå·²é‡Šæ”¾ã€‚"s))
     }
 
     return result->GetRendererObject(graphicsObject);
@@ -184,7 +184,7 @@ Rendering::GlobalStateImpl::RendererObjectBridgeSharedPtr Rendering::GlobalState
     auto result = rendererObjectBridge.lock();
     if (result == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("rendererObjectBridgeÒÑÊÍ·Å¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("rendererObjectBridgeå·²é‡Šæ”¾ã€‚"s))
     }
 
     return result;

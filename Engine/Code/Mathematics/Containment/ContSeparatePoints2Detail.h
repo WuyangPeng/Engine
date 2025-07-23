@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/09 09:41)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 09:41)
 
 #ifndef MATHEMATICS_CONTAINMENT_CONT_SEPARATE_POINTS2_DETAIL_H
 #define MATHEMATICS_CONTAINMENT_CONT_SEPARATE_POINTS2_DETAIL_H
@@ -20,12 +20,12 @@ Mathematics::ContSeparatePoints2<Real>::ContSeparatePoints2(const std::vector<Ve
     : separated{}
 {
     ConvexHull2<Real> hull0{ points0, Math<Real>::GetRational(1, 1000), QueryType::Int64 };
-    MATHEMATICS_ASSERTION_0(hull0.GetDimension() == 2, "´úÂëÄ¿Ç°½öÖ§³Ö·Ç¹²Ïßµã\n");
+    MATHEMATICS_ASSERTION_0(hull0.GetDimension() == 2, "ä»£ç ç›®å‰ä»…æ”¯æŒéå…±çº¿ç‚¹\n");
     const auto numEdges0 = hull0.GetNumSimplices();
     auto edges0 = hull0.GetIndices();
 
     ConvexHull2<Real> hull1{ points1, Math<Real>::GetRational(1, 1000), QueryType::Int64 };
-    MATHEMATICS_ASSERTION_0(hull1.GetDimension() == 2, "´úÂëÄ¿Ç°½öÖ§³Ö·Ç¹²Ïßµã\n");
+    MATHEMATICS_ASSERTION_0(hull1.GetDimension() == 2, "ä»£ç ç›®å‰ä»…æ”¯æŒéå…±çº¿ç‚¹\n");
     const auto numEdges1 = hull1.GetNumSimplices();
     auto edges1 = hull1.GetIndices();
 

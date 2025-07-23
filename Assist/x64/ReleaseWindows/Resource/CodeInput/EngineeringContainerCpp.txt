@@ -1,4 +1,4 @@
-$Copyright$
+Ôªø$Copyright$
 
 #include "$NameSpaceName$Container.h"
 
@@ -43,7 +43,7 @@ $SetContainer$}
 
 void $NameSpaceName$::$NameSpaceName$Container::Verify() const
 {
-$VerifyContainer$    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("$NameSpaceName$Ω· ¯‘ÿ»Î°≠°≠"));
+$VerifyContainer$    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("$NameSpaceName$ÁªìÊùüËΩΩÂÖ•‚Ä¶‚Ä¶"));
 }
 
 #ifdef OPEN_CLASS_INVARIANT

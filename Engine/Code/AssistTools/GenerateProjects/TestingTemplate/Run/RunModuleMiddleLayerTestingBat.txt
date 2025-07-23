@@ -1,4 +1,4 @@
-@echo on
+﻿@echo on
  
 start /d %$ProjectName$Win32DebugLib% $ModuleName$MiddleLayerTestingD.exe
 start /d %$ProjectName$Win32ReleaseLib% $ModuleName$MiddleLayerTesting.exe

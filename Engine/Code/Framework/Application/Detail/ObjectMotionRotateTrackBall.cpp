@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 15:26)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 15:26)
 
 #include "Framework/FrameworkExport.h"
 
@@ -13,7 +13,8 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
-#include "Mathematics/Algebra/Transform.h"
+#include "Mathematics/Algebra/TransformDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 
 Framework::ObjectMotionRotateTrackBall::ObjectMotionRotateTrackBall(SpatialSharedPtr motionObject,
                                                                     ConstCameraSharedPtr camera,
@@ -45,50 +46,50 @@ void Framework::ObjectMotionRotateTrackBall::Calculate()
     auto endX = endXTrack;
     auto endY = endYTrack;
 
-    // »ñµÃÇòÃæÉÏµÄµÚÒ»¸öÏòÁ¿¡£
+    // è·å¾—çƒé¢ä¸Šçš„ç¬¬ä¸€ä¸ªå‘é‡ã€‚
     auto length = Mathematics::MathF::Sqrt(beginX * beginX + beginY * beginY);
     auto beginZ = 0.0f;
     auto endZ = 0.0f;
 
     if (1.0f < length)
     {
-        // ÔÚµ¥Î»Ô²Íâ,Í¶Ó°µ½Ëü¡£
+        // åœ¨å•ä½åœ†å¤–,æŠ•å½±åˆ°å®ƒã€‚
         beginX /= length;
         beginY /= length;
         beginZ = 0.0f;
     }
     else
     {
-        // ¼ÆËãµã(x0,y0,z0)ÔÚ¸ºµ¥Î»°ëÇò¡£
+        // è®¡ç®—ç‚¹(x0,y0,z0)åœ¨è´Ÿå•ä½åŠçƒã€‚
         beginZ = 1.0f - beginX * beginX - beginY * beginY;
         beginZ = (beginZ <= 0.0f ? 0.0f : Mathematics::MathF::Sqrt(beginZ));
     }
     beginZ *= -1.0f;
 
-    // Ê¹ÓÃÏà»úµÄÊÀ½ç×ø±ê,Ë³ĞòÊÇ(D,U,R),ËùÒÔµãÊÇ(z,y,x)¡£
+    // ä½¿ç”¨ç›¸æœºçš„ä¸–ç•Œåæ ‡,é¡ºåºæ˜¯(D,U,R),æ‰€ä»¥ç‚¹æ˜¯(z,y,x)ã€‚
     const AVector vec0{ beginZ, beginY, beginX };
 
-    // »ñµÃÇòÃæÉÏµÄµÚ¶ş¸öÏòÁ¿¡£
+    // è·å¾—çƒé¢ä¸Šçš„ç¬¬äºŒä¸ªå‘é‡ã€‚
     length = Mathematics::MathF::Sqrt(endX * endX + endY * endY);
     if (1.0f < length)
     {
-        // ÔÚµ¥Î»Ô²Íâ,Í¶Ó°µ½Ëü¡£
+        // åœ¨å•ä½åœ†å¤–,æŠ•å½±åˆ°å®ƒã€‚
         endX /= length;
         endY /= length;
         endZ = 0.0f;
     }
     else
     {
-        // ¼ÆËãµã(x1,y1,z1) ÔÚ¸ºµ¥Î»°ëÇò¡£
+        // è®¡ç®—ç‚¹(x1,y1,z1) åœ¨è´Ÿå•ä½åŠçƒã€‚
         endZ = 1.0f - endX * endX - endY * endY;
         endZ = (endZ <= 0.0f ? 0.0f : Mathematics::MathF::Sqrt(endZ));
     }
     endZ *= -1.0f;
 
-    // Ê¹ÓÃÏà»úµÄÊÀ½ç×ø±ê,Ë³ĞòÊÇ(D,U,R),ËùÒÔµãÊÇ(z,y,x)¡£
+    // ä½¿ç”¨ç›¸æœºçš„ä¸–ç•Œåæ ‡,é¡ºåºæ˜¯(D,U,R),æ‰€ä»¥ç‚¹æ˜¯(z,y,x)ã€‚
     const AVector vec1{ endZ, endY, endX };
 
-    // ´´½¨Ğı×ªµÄÖáºÍ½Ç¶È¡£
+    // åˆ›å»ºæ—‹è½¬çš„è½´å’Œè§’åº¦ã€‚
     auto axis = Cross(vec0, vec1);
     const auto dot = Dot(vec0, vec1);
     auto angle = 0.0f;
@@ -97,11 +98,11 @@ void Framework::ObjectMotionRotateTrackBall::Calculate()
         axis.Normalize();
         angle = Mathematics::MathF::ACos(dot);
     }
-    else  // ÏòÁ¿ÊÇÆ½ĞĞµÄ¡£
+    else // å‘é‡æ˜¯å¹³è¡Œçš„ã€‚
     {
         if (dot < 0.0f)
         {
-            // ¦Ğ»¡¶ÈĞı×ª¡£
+            // Ï€å¼§åº¦æ—‹è½¬ã€‚
             const auto invLength = Mathematics::MathF::InvSqrt(beginX * beginX + beginY * beginY);
             axis[0] = beginY * invLength;
             axis[1] = -beginX * invLength;
@@ -110,21 +111,21 @@ void Framework::ObjectMotionRotateTrackBall::Calculate()
         }
         else
         {
-            // 0»¡¶ÈĞı×ª¡£
+            // 0å¼§åº¦æ—‹è½¬ã€‚
             axis = Mathematics::AVectorF::GetUnitX();
             angle = 0.0f;
         }
     }
 
-    // ¼ÆËãÊÀ½çĞı×ª¾ØÕóÒşº¬ÔË¶¯Çò¹ì¼££¬ÖáÊ¸Á¿ÔÚÏà»ú×ø±ê¼ÆËã¡£
-    // Ëü±ØĞë±»×ª»»³ÉÊÀ½ç×ø±ê£¬ÔÙÒ»´Î,ÎÒÓÃÏà»úË³Ğò(D,U,R)¡£
+    // è®¡ç®—ä¸–ç•Œæ—‹è½¬çŸ©é˜µéšå«è¿åŠ¨çƒè½¨è¿¹ï¼Œè½´çŸ¢é‡åœ¨ç›¸æœºåæ ‡è®¡ç®—ã€‚
+    // å®ƒå¿…é¡»è¢«è½¬æ¢æˆä¸–ç•Œåæ ‡ï¼Œå†ä¸€æ¬¡,æˆ‘ç”¨ç›¸æœºé¡ºåº(D,U,R)ã€‚
     const auto worldAxis = axis[0] * camera->GetDirectionVector() + axis[1] * camera->GetUpVector() + axis[2] * camera->GetRightVector();
 
     const Matrix trackRotate{ worldAxis, angle };
 
-    // ¼ÆËã³öĞÂµÄ¾Ö²¿Ğı×ª¡£Èç¹û¶ÔÏóÊÇ³¡¾°µÄ¸ù,
-    // ĞÂµÄĞı×ªÊÇ¹ì¼£ÇòÓ¦ÓÃÔÚ¶ÔÏó±»¾É¾Ö²¿Ğı×ªµÄÔöÁ¿Ğı×ª¡£
-    // Èç¹û¶ÔÏó²»ÊÇ³¡¾°µÄ¸ù,ÄãÒª×ª»»µÄÔöÁ¿Ê½Ğı×ªÒªÔÚ¸Ä±ä¸¸×ø±ê¿Õ¼äµÄ»ù´¡ÉÏ¡£
+    // è®¡ç®—å‡ºæ–°çš„å±€éƒ¨æ—‹è½¬ã€‚å¦‚æœå¯¹è±¡æ˜¯åœºæ™¯çš„æ ¹,
+    // æ–°çš„æ—‹è½¬æ˜¯è½¨è¿¹çƒåº”ç”¨åœ¨å¯¹è±¡è¢«æ—§å±€éƒ¨æ—‹è½¬çš„å¢é‡æ—‹è½¬ã€‚
+    // å¦‚æœå¯¹è±¡ä¸æ˜¯åœºæ™¯çš„æ ¹,ä½ è¦è½¬æ¢çš„å¢é‡å¼æ—‹è½¬è¦åœ¨æ”¹å˜çˆ¶åæ ‡ç©ºé—´çš„åŸºç¡€ä¸Šã€‚
     if (const auto parent = motionObject->GetParent();
         !parent->IsNullObject())
     {

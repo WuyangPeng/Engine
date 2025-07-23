@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/09 21:28)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/09 21:28)
 
 #include "GetModuleHandleTesting.h"
 #include "System/DynamicLink/LibraryTools.h"
@@ -111,7 +111,7 @@ void System::GetModuleHandleTesting::GetModuleHandleSucceed2Test()
 
 void System::GetModuleHandleTesting::GetModuleHandleSucceed3Test()
 {
-    /// Õâ¸ö²âÊÔ»áµ¼ÖÂResourcesLibrary²»Ğ¶ÔØ£¬´Ó¶øµ¼ÖÂÆäËû²âÊÔÊ§°Ü¡£
+    /// è¿™ä¸ªæµ‹è¯•ä¼šå¯¼è‡´ResourcesLibraryä¸å¸è½½ï¼Œä»è€Œå¯¼è‡´å…¶ä»–æµ‹è¯•å¤±è´¥ã€‚
 
     const auto libraryModule = GetDynamicLibraryFailureThrow();
 
@@ -162,7 +162,7 @@ System::DynamicLinkModule System::GetModuleHandleTesting::GetHandle(GetModuleHan
 System::DynamicLinkModule System::GetModuleHandleTesting::GetDynamicLibraryFailureThrow()
 {
     const auto libraryModule = GetDynamicLibrary();
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(libraryModule, "»ñÈ¡ResourcesLibraryÊ§°Ü¡£"s);
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(libraryModule, "è·å–ResourcesLibraryå¤±è´¥ã€‚"s);
 
     return libraryModule;
 }

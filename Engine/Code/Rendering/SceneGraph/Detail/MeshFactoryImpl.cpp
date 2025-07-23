@@ -18,6 +18,7 @@
 #include "Mathematics/Algebra/Vector3Detail.h"
 #include "Rendering/Resources/Flags/DataFormatType.h"
 #include "Rendering/Resources/Flags/UsageType.h"
+#include "Mathematics/Algebra/BoundingSphereDetail.h"
 
 #include <gsl/util>
 

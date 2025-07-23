@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/05 16:58)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/05 16:58)
 
 #ifndef SYSTEM_CONSOLE_CONSOLE_SCREEN_BUFFER_H
 #define SYSTEM_CONSOLE_CONSOLE_SCREEN_BUFFER_H
@@ -17,7 +17,7 @@
 #include "Using/ConsoleScreenBufferUsing.h"
 #include "System/Security/Using/SecurityBaseUsing.h"
 
-/// ¿ØÖÆÌ¨»º³åÇøµÄÉèÖÃºÍ»ñÈ¡¡£
+/// æ§åˆ¶å°ç¼“å†²åŒºçš„è®¾ç½®å’Œè·å–ã€‚
 namespace System
 {
     MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemConsoleScreenBuffer(DesiredAccessGeneric desiredAccess,

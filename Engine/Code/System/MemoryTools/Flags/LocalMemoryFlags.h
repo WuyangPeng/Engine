@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.7 (2024/03/04 15:53)
+/// 标准：std:c++20
+/// 版本：1.0.0.7 (2024/03/04 15:53)
 
 #ifndef SYSTEM_MEMORY_TOOLS_LOCAL_MEMORY_FLAGS_H
 #define SYSTEM_MEMORY_TOOLS_LOCAL_MEMORY_FLAGS_H
@@ -19,28 +19,28 @@ namespace System
 
     enum class LocalMemory
     {
-        /// ����̶��ڴ棬����ֵ��ָ���ڴ�����ָ�롣
+        /// 分配固定内存，返回值是指向内存对象的指针。
         Fixed = LMEM_FIXED,
 
-        /// ������ƶ��ڴ棬����ֵ���ڴ����ľ����Ҫ�����ת��Ϊָ�룬��ʹ��LocalLock��������ֵ������Fixed���ʹ�á�
+        /// 分配可移动内存，返回值是内存对象的句柄，要将句柄转换为指针，请使用LocalLock函数，此值不能与Fixed组合使用。
         MoveAble = LMEM_MOVEABLE,
 
-        /// ���洢�����ݳ�ʼ��Ϊ�㡣
+        /// 将存储器内容初始化为零。
         ZeroInit = LMEM_ZEROINIT,
 
-        /// ���MoveAble��ZeroInit��
+        /// 组合MoveAble和ZeroInit。
         LHnd = LHND,
 
-        /// ���Fixed��ZeroInit��
+        /// 组合Fixed和ZeroInit。
         LPtr = LPTR,
 
-        /// ͬMoveAble
+        /// 同MoveAble
         NonZeroLHnd = NONZEROLHND,
 
-        /// ͬFixed
+        /// 同Fixed
         NonZeroLPtr = NONZEROLPTR,
 
-        /// ReAllocѡ����ָ����Modify���������޸��ڴ��������ԣ�����bytes��������
+        /// ReAlloc选项，如果指定了Modify，则函数仅修改内存对象的属性（忽略bytes参数）。
         Modify = LMEM_MODIFY,
 
         InvalidHandle = LMEM_INVALID_HANDLE,

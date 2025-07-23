@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2024/01/06 11:29)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2024/01/06 11:29)
 
 #include "Rendering/RenderingExport.h"
 
@@ -39,21 +39,21 @@ void Rendering::OpenGLRendererObject::Enable()
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObject½ûÖ¹µ÷ÓÃEnable"))
+    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObjectç¦æ­¢è°ƒç”¨Enable"))
 }
 
 void Rendering::OpenGLRendererObject::Disable()
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObject½ûÖ¹µ÷ÓÃDisable"))
+    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObjectç¦æ­¢è°ƒç”¨Disable"))
 }
 
 bool Rendering::OpenGLRendererObject::Update()
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObject½ûÖ¹µ÷ÓÃUpdate"))
+    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObjectç¦æ­¢è°ƒç”¨Update"))
 }
 
 bool Rendering::OpenGLRendererObject::Update(int level)
@@ -62,7 +62,7 @@ bool Rendering::OpenGLRendererObject::Update(int level)
 
     System::UnusedFunction(level);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObject½ûÖ¹µ÷ÓÃUpdate"))
+    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObjectç¦æ­¢è°ƒç”¨Update"))
 }
 
 bool Rendering::OpenGLRendererObject::Update(int item, int level)
@@ -71,14 +71,14 @@ bool Rendering::OpenGLRendererObject::Update(int item, int level)
 
     System::UnusedFunction(item, level);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObject½ûÖ¹µ÷ÓÃUpdate"))
+    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObjectç¦æ­¢è°ƒç”¨Update"))
 }
 
 bool Rendering::OpenGLRendererObject::CopyGpuToCpu()
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObject½ûÖ¹µ÷ÓÃCopyGpuToCpu"))
+    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObjectç¦æ­¢è°ƒç”¨CopyGpuToCpu"))
 }
 
 bool Rendering::OpenGLRendererObject::CopyGpuToCpu(int level)
@@ -87,7 +87,7 @@ bool Rendering::OpenGLRendererObject::CopyGpuToCpu(int level)
 
     System::UnusedFunction(level);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObject½ûÖ¹µ÷ÓÃCopyGpuToCpu"))
+    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObjectç¦æ­¢è°ƒç”¨CopyGpuToCpu"))
 }
 
 bool Rendering::OpenGLRendererObject::CopyGpuToCpu(int item, int level)
@@ -96,14 +96,14 @@ bool Rendering::OpenGLRendererObject::CopyGpuToCpu(int item, int level)
 
     System::UnusedFunction(item, level);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObject½ûÖ¹µ÷ÓÃCopyGpuToCpu"))
+    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObjectç¦æ­¢è°ƒç”¨CopyGpuToCpu"))
 }
 
 bool Rendering::OpenGLRendererObject::CopyCpuToGpu()
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObject½ûÖ¹µ÷ÓÃCopyCpuToGpu"))
+    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObjectç¦æ­¢è°ƒç”¨CopyCpuToGpu"))
 }
 
 bool Rendering::OpenGLRendererObject::CopyCpuToGpu(int level)
@@ -112,7 +112,7 @@ bool Rendering::OpenGLRendererObject::CopyCpuToGpu(int level)
 
     System::UnusedFunction(level);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObject½ûÖ¹µ÷ÓÃCopyCpuToGpu"))
+    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObjectç¦æ­¢è°ƒç”¨CopyCpuToGpu"))
 }
 
 bool Rendering::OpenGLRendererObject::CopyCpuToGpu(int item, int level)
@@ -121,12 +121,12 @@ bool Rendering::OpenGLRendererObject::CopyCpuToGpu(int item, int level)
 
     System::UnusedFunction(item, level);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObject½ûÖ¹µ÷ÓÃCopyCpuToGpu"))
+    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObjectç¦æ­¢è°ƒç”¨CopyCpuToGpu"))
 }
 
 bool Rendering::OpenGLRendererObject::GetNumActiveElements()
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObject½ûÖ¹µ÷ÓÃGetNumActiveElements"))
+    THROW_EXCEPTION(SYSTEM_TEXT("OpenGLRendererObjectç¦æ­¢è°ƒç”¨GetNumActiveElements"))
 }

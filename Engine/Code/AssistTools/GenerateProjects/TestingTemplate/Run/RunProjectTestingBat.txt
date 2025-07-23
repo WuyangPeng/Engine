@@ -1,4 +1,4 @@
-@echo on
+﻿@echo on
  
 start /d %$ProjectName$Win32DebugLib% $ProjectName$D.exe
 start /d %$ProjectName$Win32ReleaseLib% $ProjectName$.exe

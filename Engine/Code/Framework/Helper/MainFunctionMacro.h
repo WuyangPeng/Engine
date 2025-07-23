@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+Ôªø/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-/// ¡™œµ◊˜’ﬂ£∫94458936@qq.com
+/// ‰ΩúËÄÖÔºöÂΩ≠Ê≠¶Èò≥ÔºåÂΩ≠ÊôîÊÅ©ÔºåÂΩ≠ÊôîÊ≥Ω
+/// ËÅîÁ≥ª‰ΩúËÄÖÔºö94458936@qq.com
 ///
-/// ±Í◊º£∫std:c++20
-/// ∞Ê±æ£∫1.0.0.4 (2024/01/11 15:18)
+/// Ê†áÂáÜÔºöstd:c++20
+/// ÁâàÊú¨Ôºö1.0.0.4 (2024/01/11 15:18)
 
 #ifndef FRAMEWORK_HELPER_MAIN_FUNCTION_MACRO_H
 #define FRAMEWORK_HELPER_MAIN_FUNCTION_MACRO_H
@@ -44,14 +44,14 @@
     #define WINDOWS_MAIN_FUNCTION_USE_PARAMETER(namespaceName, helperClassName, engineEnvironment, engineDirectory, renderer)                                                                    \
         int SYSTEM_WIN_API WinMain(SYSTEM_IN System::WindowsHInstance instance, SYSTEM_IN_OPT System::WindowsHInstance previousInstance, SYSTEM_IN char* commandLine, SYSTEM_IN int showCommand) \
         {                                                                                                                                                                                        \
-            System::UnusedFunction(showCommand);                                                                                                                                                 \
-            return Framework::WinMainEntryPoint<namespaceName::helperClassName>(instance, commandLine, engineEnvironment, engineDirectory, renderer, previousInstance);                          \
-        }                                                                                                                                                                                        \
-        int main()                                                                                                                                                                               \
-        {                                                                                                                                                                                        \
+            System::UnusedFunction(instance, previousInstance, commandLine, showCommand);                                                                                                        \
             return 0;                                                                                                                                                                            \
+        }                                                                                                                                                                                        \
+        int main(int argc, char** argv)                                                                                                                                                          \
+        {                                                                                                                                                                                        \
+            System::UnusedFunction(argc, argv);                                                                                                                                                  \
+            return Framework::WinMainEntryPoint<namespaceName::helperClassName>(nullptr, "", engineEnvironment, engineDirectory, renderer, nullptr);                                             \
         }
-
 #endif  // SYSTEM_PLATFORM_WIN32
 
 #define CONSOLE_MAIN_FUNCTION(namespaceName, helperClassName, consoleTitle, engineEnvironment, engineDirectory)                         \

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/17 10:52)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/17 10:52)
 
 #ifndef RENDERING_RENDERER_ENGINE_BASE_RENDERER_IMPL_H
 #define RENDERING_RENDERER_ENGINE_BASE_RENDERER_IMPL_H
@@ -181,9 +181,9 @@ namespace Rendering
                           int level);
 
     private:
-        /// Ö§³Ö»æÍ¼¡£
-        /// Èç¹ûÆôÓÃÁËÕÚµ²²éÑ¯£¬Ôò·µ»ØÖµÊÇÍ¨¹ıÉî¶ÈºÍÄ£¾ß²âÊÔµÄÑù±¾Êı£¬Êµ¼ÊÉÏÊÇ»æÖÆµÄÏñËØÊı¡£
-        /// Èç¹ûÕÚµ²²éÑ¯±»½ûÓÃ£¬º¯Êı½«·µ»Ø0¡£
+        /// æ”¯æŒç»˜å›¾ã€‚
+        /// å¦‚æœå¯ç”¨äº†é®æŒ¡æŸ¥è¯¢ï¼Œåˆ™è¿”å›å€¼æ˜¯é€šè¿‡æ·±åº¦å’Œæ¨¡å…·æµ‹è¯•çš„æ ·æœ¬æ•°ï¼Œå®é™…ä¸Šæ˜¯ç»˜åˆ¶çš„åƒç´ æ•°ã€‚
+        /// å¦‚æœé®æŒ¡æŸ¥è¯¢è¢«ç¦ç”¨ï¼Œå‡½æ•°å°†è¿”å›0ã€‚
         NODISCARD int64_t DrawPrimitive(const VertexBufferSharedPtr& vertexBuffer,
                                         const IndexBufferSharedPtr& indexBuffer,
                                         const VisualEffectSharedPtr& effect);
@@ -198,9 +198,9 @@ namespace Rendering
     private:
         RendererTypes rendererTypes;
         RendererAdapter rendererAdapter;
-        RendererClear rendererClear;  // Çå³ıÖµ¡£
-        GlobalFont globalFont;  // ÓÃÓÚÎÄ±¾³ÊÏÖµÄ×ÖÌå¡£
-        GlobalState globalState;  // È«¾Ö×´Ì¬¡£
+        RendererClear rendererClear;  // æ¸…é™¤å€¼ã€‚
+        GlobalFont globalFont;  // ç”¨äºæ–‡æœ¬å‘ˆç°çš„å­—ä½“ã€‚
+        GlobalState globalState;  // å…¨å±€çŠ¶æ€ã€‚
         bool allowOcclusionQuery;
         bool warnOnNonemptyBridges;
     };

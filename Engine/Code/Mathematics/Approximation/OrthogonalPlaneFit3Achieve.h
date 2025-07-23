@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:14)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:14)
 
 #ifndef MATHEMATICS_APPROXIMATION_ORTHOGONAL_PLANE_FIT3_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_ORTHOGONAL_PLANE_FIT3_ACHIEVE_H
@@ -43,7 +43,7 @@ Mathematics::Plane3<Real> Mathematics::OrthogonalPlaneFit3<Real>::GetPlane3() co
 template <typename Real>
 Mathematics::Plane3<Real> Mathematics::OrthogonalPlaneFit3<Real>::Calculate(const Points& points)
 {
-    // ¼ÆËãµãµÄÆ½¾ùÖµ¡£
+    // è®¡ç®—ç‚¹çš„å¹³å‡å€¼ã€‚
     Vector3Type origin{};
     for (const auto& point : points)
     {
@@ -53,7 +53,7 @@ Mathematics::Plane3<Real> Mathematics::OrthogonalPlaneFit3<Real>::Calculate(cons
     const auto numPoints = boost::numeric_cast<Real>(points.size());
     origin /= numPoints;
 
-    // ¼ÆËã²úÆ·×ÜºÍ
+    // è®¡ç®—äº§å“æ€»å’Œ
     auto sumXX = MathType::GetValue(0);
     auto sumXY = MathType::GetValue(0);
     auto sumXZ = MathType::GetValue(0);
@@ -79,7 +79,7 @@ Mathematics::Plane3<Real> Mathematics::OrthogonalPlaneFit3<Real>::Calculate(cons
     sumYZ /= numPoints;
     sumZZ /= numPoints;
 
-    // ½¨Á¢ eigensolver.
+    // å»ºç«‹ eigensolver.
     EigenDecomposition<Real> esystem{ 3 };
     esystem(0, 0) = sumXX;
     esystem(0, 1) = sumXY;
@@ -91,13 +91,13 @@ Mathematics::Plane3<Real> Mathematics::OrthogonalPlaneFit3<Real>::Calculate(cons
     esystem(2, 1) = sumYZ;
     esystem(2, 2) = sumZZ;
 
-    // ¼ÆËãÌØÕ÷Öµ£¬×îĞ¡µÄÌØÕ÷ÖµÊÇÔÚ×îºóµÄÎ»ÖÃ¡£
+    // è®¡ç®—ç‰¹å¾å€¼ï¼Œæœ€å°çš„ç‰¹å¾å€¼æ˜¯åœ¨æœ€åçš„ä½ç½®ã€‚
     esystem.Solve(false);
 
-    // »ñÈ¡Æ½Ãæ·¨Ïß
+    // è·å–å¹³é¢æ³•çº¿
     const auto normal = esystem.GetEigenvector3(2);
 
-    // ×îĞ¡ÄÜÁ¿
+    // æœ€å°èƒ½é‡
     return Plane3Type{ normal, origin };
 }
 

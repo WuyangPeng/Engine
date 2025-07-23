@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+﻿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	���ߣ������������ʶ���������
-///	��ϵ���ߣ�94458936@qq.com
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
 ///
-///	��׼��std:c++20
-///	����汾��0.9.0.12 (2023/06/09 09:52)
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/09 09:52)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_NURBS_CURVE2_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_NURBS_CURVE2_DETAIL_H
@@ -23,8 +23,8 @@ Mathematics::NURBSCurve2<Real>::NURBSCurve2(int numCtrlPoints, const std::vector
       basis{},
       replicate{ (loop ? (open ? 1 : degree) : 0) }
 {
-    MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "��Ч���롣\n");
-    MATHEMATICS_ASSERTION_0(1 <= degree && degree <= numCtrlPoints - 1, "��Ч���롣\n");
+    MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= degree && degree <= numCtrlPoints - 1, "无效输入。\n");
 
     CreateControl(ctrlPoint, ctrlWeight);
     basis.Create(numCtrlPoints + replicate, degree, open);
@@ -42,8 +42,8 @@ Mathematics::NURBSCurve2<Real>::NURBSCurve2(int numCtrlPoints, const std::vector
       basis{},
       replicate{ (loop ? 1 : 0) }
 {
-    MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "��Ч���롣\n");
-    MATHEMATICS_ASSERTION_0(1 <= degree && degree <= numCtrlPoints - 1, "��Ч���롣\n");
+    MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= degree && degree <= numCtrlPoints - 1, "无效输入。\n");
 
     CreateControl(ctrlPoint, ctrlWeight);
     basis.Create(numCtrlPoints + replicate, degree, knot);

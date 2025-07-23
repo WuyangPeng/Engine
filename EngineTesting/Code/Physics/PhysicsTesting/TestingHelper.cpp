@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.3 (2023/08/02 14:18)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.3 (2023/08/02 14:18)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -14,7 +14,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
 Physics::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "ÎïÀí¿â" }
+    : ParentType{ argc, argv, "ç‰©ç†åº“" }
 {
     InitSuite();
 
@@ -37,56 +37,56 @@ void Physics::TestingHelper::InitSuite()
 
 void Physics::TestingHelper::AddHelperSuite()
 {
-    auto helperSuite = GenerateSuite("°ïÖú");
+    auto helperSuite = GenerateSuite("å¸®åŠ©");
 
     AddSuite(helperSuite);
 }
 
 void Physics::TestingHelper::AddCollisionDetectionSuite()
 {
-    auto collisionDetectionSuite = GenerateSuite("Åö×²¼ì²â");
+    auto collisionDetectionSuite = GenerateSuite("ç¢°æ’æ£€æµ‹");
 
     AddSuite(collisionDetectionSuite);
 }
 
 void Physics::TestingHelper::AddFluidSuite()
 {
-    auto fluidSuite = GenerateSuite("Á÷Ìå");
+    auto fluidSuite = GenerateSuite("æµä½“");
 
     AddSuite(fluidSuite);
 }
 
 void Physics::TestingHelper::AddIntersectionSuite()
 {
-    auto intersectionSuite = GenerateSuite("Ïà½»");
+    auto intersectionSuite = GenerateSuite("ç›¸äº¤");
 
     AddSuite(intersectionSuite);
 }
 
 void Physics::TestingHelper::AddLCPSolverSuite()
 {
-    auto lCPSolverSuite = GenerateSuite("LCPÇó½â");
+    auto lCPSolverSuite = GenerateSuite("LCPæ±‚è§£");
 
     AddSuite(lCPSolverSuite);
 }
 
 void Physics::TestingHelper::AddParticleSystemSuite()
 {
-    auto particleSystemSuite = GenerateSuite("Á£×ÓÏµÍ³");
+    auto particleSystemSuite = GenerateSuite("ç²’å­ç³»ç»Ÿ");
 
     AddSuite(particleSystemSuite);
 }
 
 void Physics::TestingHelper::AddRigidBodySuite()
 {
-    auto rigidBodySuite = GenerateSuite("¸ÕÌå");
+    auto rigidBodySuite = GenerateSuite("åˆšä½“");
 
     AddSuite(rigidBodySuite);
 }
 
 void Physics::TestingHelper::AddMiscellaneousSuite()
 {
-    auto miscellaneousSuite = GenerateSuite("ÔÓÏî");
+    auto miscellaneousSuite = GenerateSuite("æ‚é¡¹");
 
     AddSuite(miscellaneousSuite);
 }

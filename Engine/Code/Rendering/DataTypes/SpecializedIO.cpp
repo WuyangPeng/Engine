@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:56)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:56)
 
 #include "Rendering/RenderingExport.h"
 
@@ -27,7 +27,7 @@ void CoreTools::BufferSource::ReadAggregate(Rendering::FloatColour& datum)
     auto colour = ReadContainer<Rendering::FloatColour::ValueType, Rendering::FloatColour::arraySize>();
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // Í¨¹ıÊ¹ÓÃ¾²Ì¬¶ÏÑÔ£¬¹Ì¶¨´óĞ¡Êı×éÊ¹ÓÃ³£Á¿Ë÷ÒıÊÇ±»ÔÊĞíµÄ¡£
+#include SYSTEM_WARNING_DISABLE(26446)  // é€šè¿‡ä½¿ç”¨é™æ€æ–­è¨€ï¼Œå›ºå®šå¤§å°æ•°ç»„ä½¿ç”¨å¸¸é‡ç´¢å¼•æ˜¯è¢«å…è®¸çš„ã€‚
 
     datum.SetColour(colour[0], colour[1], colour[2], colour[3]);
 
@@ -51,7 +51,7 @@ void CoreTools::BufferSource::ReadAggregate(Rendering::DoubleColour& datum)
     auto colour = ReadContainer<Rendering::DoubleColour::ValueType, Rendering::DoubleColour::arraySize>();
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // Í¨¹ıÊ¹ÓÃ¾²Ì¬¶ÏÑÔ£¬¹Ì¶¨´óĞ¡Êı×éÊ¹ÓÃ³£Á¿Ë÷ÒıÊÇ±»ÔÊĞíµÄ¡£
+#include SYSTEM_WARNING_DISABLE(26446)  // é€šè¿‡ä½¿ç”¨é™æ€æ–­è¨€ï¼Œå›ºå®šå¤§å°æ•°ç»„ä½¿ç”¨å¸¸é‡ç´¢å¼•æ˜¯è¢«å…è®¸çš„ã€‚
 
     datum.SetColour(colour[0], colour[1], colour[2], colour[3]);
 
@@ -75,7 +75,7 @@ void CoreTools::BufferSource::ReadAggregate(Rendering::ByteColour& datum)
     auto colour = ReadContainer<Rendering::ByteColour::ValueType, Rendering::ByteColour::arraySize>();
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // Í¨¹ıÊ¹ÓÃ¾²Ì¬¶ÏÑÔ£¬¹Ì¶¨´óĞ¡Êı×éÊ¹ÓÃ³£Á¿Ë÷ÒıÊÇ±»ÔÊĞíµÄ¡£
+#include SYSTEM_WARNING_DISABLE(26446)  // é€šè¿‡ä½¿ç”¨é™æ€æ–­è¨€ï¼Œå›ºå®šå¤§å°æ•°ç»„ä½¿ç”¨å¸¸é‡ç´¢å¼•æ˜¯è¢«å…è®¸çš„ã€‚
 
     datum.SetColour(colour[0], colour[1], colour[2], colour[3]);
 
@@ -99,7 +99,7 @@ void CoreTools::BufferSource::ReadAggregate(Rendering::IntColour& datum)
     auto colour = ReadContainer<Rendering::IntColour::ValueType, Rendering::IntColour::arraySize>();
 
 #include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)  // Í¨¹ıÊ¹ÓÃ¾²Ì¬¶ÏÑÔ£¬¹Ì¶¨´óĞ¡Êı×éÊ¹ÓÃ³£Á¿Ë÷ÒıÊÇ±»ÔÊĞíµÄ¡£
+#include SYSTEM_WARNING_DISABLE(26446)  // é€šè¿‡ä½¿ç”¨é™æ€æ–­è¨€ï¼Œå›ºå®šå¤§å°æ•°ç»„ä½¿ç”¨å¸¸é‡ç´¢å¼•æ˜¯è¢«å…è®¸çš„ã€‚
 
     datum.SetColour(colour[0], colour[1], colour[2], colour[3]);
 

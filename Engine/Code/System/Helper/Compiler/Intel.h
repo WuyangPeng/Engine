@@ -1,18 +1,18 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 17:27)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 17:27)
 
 #ifndef SYSTEM_HELPER_INTEL_H
 #define SYSTEM_HELPER_INTEL_H
 
 #if defined(__INTEL_COMPILER) || defined(__ICL) || defined(__ICC) || defined(__ECC)
 
-    /// Intel ±àÒëÆ÷ÉèÖÃ£º
+    /// Intel ç¼–è¯‘å™¨è®¾ç½®ï¼š
 
     #if defined(__INTEL_COMPILER) && (1500 <= __INTEL_COMPILER) && (defined(_MSC_VER) || defined(__GNUC__))
 
@@ -47,7 +47,7 @@
 
         #if __INTEL_COMPILER == 9999
 
-            // Intel bug ÔÚ 12.1.
+            // Intel bug åœ¨ 12.1.
             #define TCRE_COMPILER_VERSION 1200
 
         #else  // __INTEL_COMPILER != 9999
@@ -76,7 +76,7 @@
 
     #endif  // __GNUC__
 
-    /// Í¨¹ı±È½Ï¡°icpc -dM -E¡±µÄÊä³öÈ·¶¨µÄ±êÖ¾À´È·¶¨ÓĞÃ»ÓĞ¡°-std=c++0x¡±
+    /// é€šè¿‡æ¯”è¾ƒâ€œicpc -dM -Eâ€çš„è¾“å‡ºç¡®å®šçš„æ ‡å¿—æ¥ç¡®å®šæœ‰æ²¡æœ‰â€œ-std=c++0xâ€
     #if (!(defined(_WIN32) || defined(_WIN64)) && defined(__STDC_HOSTED__) && (__STDC_HOSTED__ && (TCRE_COMPILER_VERSION <= 1200))) || defined(__GXX_EXPERIMENTAL_CPP0X__) || defined(__GXX_EXPERIMENTAL_CXX0X__)
 
         #define SYSTEM_INTEL_STDCXX0X
@@ -93,11 +93,11 @@
 
         #if defined(SYSTEM_INTEL_STDCXX0X)
 
-            #define TCRE_SYSTEM_COMPILER "Intel C++ C++0x Ä£Ê½°æ±¾ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
+            #define TCRE_SYSTEM_COMPILER "Intel C++ C++0x æ¨¡å¼ç‰ˆæœ¬ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
 
         #else  // !SYSTEM_INTEL_STDCXX0X
 
-            #define TCRE_SYSTEM_COMPILER "Intel C++ °æ±¾ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
+            #define TCRE_SYSTEM_COMPILER "Intel C++ ç‰ˆæœ¬ " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
 
         #endif  // SYSTEM_INTEL_STDCXX0X
 
@@ -119,16 +119,16 @@
 
     #endif  // defined(_WIN32) || defined(_WIN64)
 
-    /// °æ±¾¼ì²é£ºÎÒÃÇ²»Ö§³Ö°æ±¾6.0Ö®Ç°µÄIntel£º
+    /// ç‰ˆæœ¬æ£€æŸ¥ï¼šæˆ‘ä»¬ä¸æ”¯æŒç‰ˆæœ¬6.0ä¹‹å‰çš„Intelï¼š
     #if TCRE_COMPILER_VERSION < 600
 
-        #error "±àÒëÆ÷Î´ÉèÖÃ"
+        #error "ç¼–è¯‘å™¨æœªè®¾ç½®"
 
     #endif  // TCRE_COMPILER_VERSION < 600
 
     #if (1700 < TCRE_COMPILER_VERSION)
 
-        #error "Î´ÖªµÄ±àÒëÆ÷"
+        #error "æœªçŸ¥çš„ç¼–è¯‘å™¨"
 
     #endif  // (1700 < COMPILER_VERSION)
 

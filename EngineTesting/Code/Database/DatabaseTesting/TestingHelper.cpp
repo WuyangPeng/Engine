@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.3 (2023/08/14 16:26)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.3 (2023/08/14 16:26)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -15,7 +15,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
 Database::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "Êı¾İ¿â" }
+    : ParentType{ argc, argv, "æ•°æ®åº“" }
 {
     InitSuite();
 
@@ -46,7 +46,7 @@ void Database::TestingHelper::InitSuite()
 
 void Database::TestingHelper::AddHelperSuite()
 {
-    auto helperSuite = GenerateSuite("°ïÖú");
+    auto helperSuite = GenerateSuite("å¸®åŠ©");
 
     ADD_TEST(helperSuite, UserMacroTesting);
 
@@ -55,7 +55,7 @@ void Database::TestingHelper::AddHelperSuite()
 
 void Database::TestingHelper::AddConfigurationSuite()
 {
-    auto configurationSuite = GenerateSuite("ÅäÖÃ");
+    auto configurationSuite = GenerateSuite("é…ç½®");
 
     ADD_TEST(configurationSuite, ConfigurationStrategyTesting);
     ADD_TEST(configurationSuite, AnalysisDatabaseConfigurationTesting);
@@ -65,7 +65,7 @@ void Database::TestingHelper::AddConfigurationSuite()
 
 void Database::TestingHelper::AddDatabaseInterfaceSuite()
 {
-    auto databaseInterfaceSuite = GenerateSuite("Êı¾İ¿â½Ó¿Ú");
+    auto databaseInterfaceSuite = GenerateSuite("æ•°æ®åº“æ¥å£");
 
     ADD_TEST(databaseInterfaceSuite, BasisDatabaseTesting);
     ADD_TEST(databaseInterfaceSuite, BasisDatabaseContainerTesting);
@@ -82,7 +82,7 @@ void Database::TestingHelper::AddDatabaseInterfaceSuite()
 
 void Database::TestingHelper::AddStatementSuite()
 {
-    auto statementSuite = GenerateSuite("Óï¾ä");
+    auto statementSuite = GenerateSuite("è¯­å¥");
 
     ADD_TEST(statementSuite, RedisStatementTesting);
     ADD_TEST(statementSuite, SqlStatementTesting);
@@ -92,14 +92,14 @@ void Database::TestingHelper::AddStatementSuite()
 
 void Database::TestingHelper::AddMysqlWrappersSuite()
 {
-    auto mysqlWrappersSuite = GenerateSuite("Mysql °ü×°Æ÷");
+    auto mysqlWrappersSuite = GenerateSuite("Mysql åŒ…è£…å™¨");
 
     AddSuite(mysqlWrappersSuite);
 }
 
 void Database::TestingHelper::AddMysqlConnectorWrappersSuite()
 {
-    auto mysqlConnectorWrappersSuite = GenerateSuite("Mysql Connector °ü×°Æ÷");
+    auto mysqlConnectorWrappersSuite = GenerateSuite("Mysql Connector åŒ…è£…å™¨");
 
     ADD_TEST(mysqlConnectorWrappersSuite, MysqlConnectorDatabaseFlushTesting);
 
@@ -108,7 +108,7 @@ void Database::TestingHelper::AddMysqlConnectorWrappersSuite()
 
 void Database::TestingHelper::AddMysqlBoostWrappersSuite()
 {
-    auto mysqlBoostWrappersSuite = GenerateSuite("mysql boost °ü×°Æ÷");
+    auto mysqlBoostWrappersSuite = GenerateSuite("mysql boost åŒ…è£…å™¨");
 
     ADD_TEST(mysqlBoostWrappersSuite, MysqlBoostDatabaseFlushTesting);
 
@@ -117,49 +117,49 @@ void Database::TestingHelper::AddMysqlBoostWrappersSuite()
 
 void Database::TestingHelper::AddSqlServerWrappersSuite()
 {
-    auto sqlServerWrappersSuite = GenerateSuite("Sql Server °ü×°Æ÷");
+    auto sqlServerWrappersSuite = GenerateSuite("Sql Server åŒ…è£…å™¨");
 
     AddSuite(sqlServerWrappersSuite);
 }
 
 void Database::TestingHelper::AddSQLiteWrappersSuite()
 {
-    auto sQLiteWrappersSuite = GenerateSuite("SQLite °ü×°Æ÷");
+    auto sQLiteWrappersSuite = GenerateSuite("SQLite åŒ…è£…å™¨");
 
     AddSuite(sQLiteWrappersSuite);
 }
 
 void Database::TestingHelper::AddPostgreSQLSuite()
 {
-    auto postgreSQLSuite = GenerateSuite("PostgreSQL °ü×°Æ÷");
+    auto postgreSQLSuite = GenerateSuite("PostgreSQL åŒ…è£…å™¨");
 
     AddSuite(postgreSQLSuite);
 }
 
 void Database::TestingHelper::AddOracleSuite()
 {
-    auto oracleSuite = GenerateSuite("Oracle °ü×°Æ÷");
+    auto oracleSuite = GenerateSuite("Oracle åŒ…è£…å™¨");
 
     AddSuite(oracleSuite);
 }
 
 void Database::TestingHelper::AddFlatFileWrappersSuite()
 {
-    auto flatFileWrappersSuite = GenerateSuite("Æ½ÃæÎÄ¼ş°ü×°Æ÷");
+    auto flatFileWrappersSuite = GenerateSuite("å¹³é¢æ–‡ä»¶åŒ…è£…å™¨");
 
     AddSuite(flatFileWrappersSuite);
 }
 
 void Database::TestingHelper::AddMariaDbWrappersSuite()
 {
-    auto mariaDBWrappersSuite = GenerateSuite("mariaDB °ü×°Æ÷");
+    auto mariaDBWrappersSuite = GenerateSuite("mariaDB åŒ…è£…å™¨");
 
     AddSuite(mariaDBWrappersSuite);
 }
 
 void Database::TestingHelper::AddMongoWrappersSuite()
 {
-    auto mongoWrappersSuite = GenerateSuite("mongo °ü×°Æ÷");
+    auto mongoWrappersSuite = GenerateSuite("mongo åŒ…è£…å™¨");
 
     ADD_TEST(mongoWrappersSuite, MongoEnvironmentTesting);
     ADD_TEST(mongoWrappersSuite, MongoDatabaseFlushTesting);
@@ -169,7 +169,7 @@ void Database::TestingHelper::AddMongoWrappersSuite()
 
 void Database::TestingHelper::AddRedisWrappersSuite()
 {
-    auto redisWrappersSuite = GenerateSuite("redis °ü×°Æ÷");
+    auto redisWrappersSuite = GenerateSuite("redis åŒ…è£…å™¨");
 
     ADD_TEST(redisWrappersSuite, RedisDatabaseFlushTesting);
 
@@ -178,7 +178,7 @@ void Database::TestingHelper::AddRedisWrappersSuite()
 
 void Database::TestingHelper::AddDatabaseEntityCodeGenerationSuite()
 {
-    auto databaseEntityCodeGenerationSuite = GenerateSuite("Êı¾İ¿âÊµÌå´úÂëÉú³É");
+    auto databaseEntityCodeGenerationSuite = GenerateSuite("æ•°æ®åº“å®ä½“ä»£ç ç”Ÿæˆ");
 
     ADD_TEST(databaseEntityCodeGenerationSuite, CodeHeaderFileGenerationTesting);
     ADD_TEST(databaseEntityCodeGenerationSuite, CodeFwdHeaderFileGenerationTesting);

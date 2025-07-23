@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/02 23:20)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/02 23:20)
 
 #include "System/SystemExport.h"
 
@@ -429,7 +429,7 @@ System::WindowsBool System::WglUseFontOutlinesW(WindowsHdc hdc, WindowsDWord fir
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-/// ARB À©Õ¹
+/// ARB æ‰©å±•
 
 /// WGL_ARB_buffer_region
 
@@ -1304,7 +1304,7 @@ void System::InitWglArbRobustnessShareGroupIsolation()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-/// 3DFX À©Õ¹
+/// 3DFX æ‰©å±•
 
 /// WGL_3DFX_multisample
 
@@ -1338,7 +1338,7 @@ void System::InitWgl3DfxMultiSample()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-/// 3DL À©Õ¹
+/// 3DL æ‰©å±•
 
 /// WGL_3DL_stereo_control
 
@@ -1395,7 +1395,7 @@ System::WindowsBool System::WglSetStereoEmitterState3Dl(WindowsHdc hdC, WindowsU
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-/// AMD À©Õ¹
+/// AMD æ‰©å±•
 
 /// WGL_AMD_gpu_association
 
@@ -1584,7 +1584,7 @@ void System::WglBlitContextFrameBufferAMD(OpenGLRcHandle dstCtx, GLint srcX0, GL
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-/// ATI À©Õ¹
+/// ATI æ‰©å±•
 
 /// WGL_ATI_pixel_format_float
 
@@ -1650,7 +1650,7 @@ void System::InitWglATIRenderTextureRectangle()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-/// EXT À©Õ¹
+/// EXT æ‰©å±•
 
 /// WGL_EXT_colorspace
 
@@ -2417,7 +2417,7 @@ void System::InitWglExtSwapControlTear()
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-/// I3D À©Õ¹
+/// I3D æ‰©å±•
 
 /// WGL_I3D_digital_video_control
 
@@ -3149,7 +3149,7 @@ System::WindowsBool System::WglQueryFrameTrackingI3D(WindowsDWord* frameCount, W
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-/// NV À©Õ¹
+/// NV æ‰©å±•
 
 /// WGL_NV_DX_interop
 
@@ -4312,7 +4312,7 @@ System::WindowsBool System::WglGetVideoInfoNv(WglHpVideoDev hpVideoDevice, unsig
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-/// OML À©Õ¹
+/// OML æ‰©å±•
 
 /// WGL_OML_sync_control
 
@@ -4579,6 +4579,6 @@ bool System::SupportsWglExtension(const char* wglExtension)
 
     const auto end = extension.at(endPos);
 
-    /// À©Õ¹±»·¢ÏÖ,µ«È·±£Ëü²»ÊÇÁíÒ»¸öÀ©Õ¹µÄºÏÊÊ×Ó´®¡£
+    /// æ‰©å±•è¢«å‘ç°,ä½†ç¡®ä¿å®ƒä¸æ˜¯å¦ä¸€ä¸ªæ‰©å±•çš„åˆé€‚å­ä¸²ã€‚
     return end == ' ' || end == 0 || end == '\t' || end == '\n';
 }

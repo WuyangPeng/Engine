@@ -1,1 +1,1 @@
-FileManagerHelper Testing Text
+﻿FileManagerHelper Testing Text

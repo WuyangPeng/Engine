@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/09 09:38)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 09:38)
 
 #ifndef MATHEMATICS_CONTAINMENT_CONT_BOX2_DETAIL_H
 #define MATHEMATICS_CONTAINMENT_CONT_BOX2_DETAIL_H
@@ -53,10 +53,10 @@ typename Mathematics::ContBox2<Real>::Box2Type Mathematics::ContBox2<Real>::Cont
     const GaussPointsFit2<Real> gaussPointsFit2{ points };
     const auto box = gaussPointsFit2.GetBox2();
 
-    // ÁîCÊÇ°üÎ§ºĞÖĞĞÄ£¬ÈÃU0ºÍU1ÊÇ°üÎ§ºĞµÄÖá¡£
-    // Ã¿Ò»¸öÊäÈëµãµÄĞÎÊ½ÎªX = C + y0 * U0 + y1 * U1¡£
-    // ÏÂÃæµÄ´úÂë¼ÆËãmin(y0), max(y0), min(y1)ºÍmax(y1)¡£
-    // È»ºó°üÎ§ºĞÖĞĞÄ±»µ÷ÕûÎª
+    // ä»¤Cæ˜¯åŒ…å›´ç›’ä¸­å¿ƒï¼Œè®©U0å’ŒU1æ˜¯åŒ…å›´ç›’çš„è½´ã€‚
+    // æ¯ä¸€ä¸ªè¾“å…¥ç‚¹çš„å½¢å¼ä¸ºX = C + y0 * U0 + y1 * U1ã€‚
+    // ä¸‹é¢çš„ä»£ç è®¡ç®—min(y0), max(y0), min(y1)å’Œmax(y1)ã€‚
+    // ç„¶ååŒ…å›´ç›’ä¸­å¿ƒè¢«è°ƒæ•´ä¸º
     // C' = C + 0.5*(min(y0) + max(y0)) * U0 + 0.5 * (min(y1) + max(y1)) * U1
 
     std::vector<Real> firstDotCollection{};
@@ -111,12 +111,12 @@ bool Mathematics::ContBox2<Real>::InBox(const Vector2Type& point, const Box2Type
 template <typename Real>
 typename Mathematics::ContBox2<Real>::Box2Type Mathematics::ContBox2<Real>::MergeBoxes(const Box2Type& lhs, const Box2Type& rhs)
 {
-    // ÔÚ°üÎ§ºĞÖĞĞÄµÄµÚÒ»¸ö²ÂÏë¡£ÊäÈë°üÎ§ºĞ¶¥µãÍ¶Ó°µ½È·¶¨µÄÆ½¾ù°üÎ§ºĞµÄÖá£¬
-    // ´ËÖµ½«ÔÚºóÃæ½øĞĞ¸üĞÂ¡£
+    // åœ¨åŒ…å›´ç›’ä¸­å¿ƒçš„ç¬¬ä¸€ä¸ªçŒœæƒ³ã€‚è¾“å…¥åŒ…å›´ç›’é¡¶ç‚¹æŠ•å½±åˆ°ç¡®å®šçš„å¹³å‡åŒ…å›´ç›’çš„è½´ï¼Œ
+    // æ­¤å€¼å°†åœ¨åé¢è¿›è¡Œæ›´æ–°ã€‚
     auto center = MathType::GetRational(1, 2) * (lhs.GetCenter() + rhs.GetCenter());
 
-    // ºÏ²¢µÄ°üÎ§ºĞµÄÖáÊÇÊäÈë°üÎ§ºĞÖáµÄÆ½¾ùÖµ¡£
-    // Èç¹ûĞèÒªµÄ»°£¬µÚ¶ş¸ö°üÎ§ºĞµÄÖá±»È¡¸º£¬ÕâÑùËüÃÇĞÎ³ÉÓëµÚÒ»¸ö°üÎ§ºĞµÄÖáÏßÎªÈñ½Ç¡£
+    // åˆå¹¶çš„åŒ…å›´ç›’çš„è½´æ˜¯è¾“å…¥åŒ…å›´ç›’è½´çš„å¹³å‡å€¼ã€‚
+    // å¦‚æœéœ€è¦çš„è¯ï¼Œç¬¬äºŒä¸ªåŒ…å›´ç›’çš„è½´è¢«å–è´Ÿï¼Œè¿™æ ·å®ƒä»¬å½¢æˆä¸ç¬¬ä¸€ä¸ªåŒ…å›´ç›’çš„è½´çº¿ä¸ºé”è§’ã€‚
     Vector2Type firstAxis{};
     if (MathType::GetValue(0) <= Vector2Tools<Real>::DotProduct(lhs.GetAxis0(), rhs.GetAxis0()))
     {
@@ -130,13 +130,13 @@ typename Mathematics::ContBox2<Real>::Box2Type Mathematics::ContBox2<Real>::Merg
     }
     const auto secondAxis = -Vector2Tools<Real>::GetPerp(firstAxis);
 
-    // ÏîÄ¿µÄÊäÈë°üÎ§ºĞ¶¥µãµ½ºÏ²¢ºóµÄ°üÎ§ºĞµÄÖá¡£
-    // ¸÷¸öÖáÏßD[i]°üº¬µ±Ç°ÖĞĞÄC¾ßÓĞ×îĞ¡Í¶Ó°Öµmin[i]ºÍ×î´óÍ¶Ó°Öµmax[i]¡£
-    // ÖáÏßÉÏµÄÏàÓ¦½áÊøµãÊÇC + min[i] * D[i]ºÍC + max[i] * D[i]¡£
-    // Cµã²¢²»Ò»¶¨ÊÇÈÎºÎÊ±¼ä¼ä¸ôµÄÖĞµã¡£
-    // Êµ¼Ê°üÎ§ºĞÖĞĞÄ½«´ÓCµ÷ÕûÎªµãC'ÊÇÃ¿¸ö¼ä¸ôµÄÖĞµã£¬
+    // é¡¹ç›®çš„è¾“å…¥åŒ…å›´ç›’é¡¶ç‚¹åˆ°åˆå¹¶åçš„åŒ…å›´ç›’çš„è½´ã€‚
+    // å„ä¸ªè½´çº¿D[i]åŒ…å«å½“å‰ä¸­å¿ƒCå…·æœ‰æœ€å°æŠ•å½±å€¼min[i]å’Œæœ€å¤§æŠ•å½±å€¼max[i]ã€‚
+    // è½´çº¿ä¸Šçš„ç›¸åº”ç»“æŸç‚¹æ˜¯C + min[i] * D[i]å’ŒC + max[i] * D[i]ã€‚
+    // Cç‚¹å¹¶ä¸ä¸€å®šæ˜¯ä»»ä½•æ—¶é—´é—´éš”çš„ä¸­ç‚¹ã€‚
+    // å®é™…åŒ…å›´ç›’ä¸­å¿ƒå°†ä»Cè°ƒæ•´ä¸ºç‚¹C'æ˜¯æ¯ä¸ªé—´éš”çš„ä¸­ç‚¹ï¼Œ
     //   C' = C + sum_{i=0}^1 0.5 * (min[i] + max[i]) * D[i]
-    // °üÎ§ºĞµÄ·¶Î§ÊÇ
+    // åŒ…å›´ç›’çš„èŒƒå›´æ˜¯
     //   e[i] = 0.5 * (max[i] - min[i])
 
     auto lhsVertices = lhs.ComputeVertices();
@@ -164,8 +164,8 @@ typename Mathematics::ContBox2<Real>::Box2Type Mathematics::ContBox2<Real>::Merg
 
     const auto secondBoundary = std::minmax_element(secondDotCollection.begin(), secondDotCollection.end());
 
-    // [min,max] ÎªºÏ²¢ºóµÄ°üÎ§ºĞµÄÖáÔÚ×ø±êÏµÖĞÎªÖá¶ÔÆë°üÎ§ºĞ¡£
-    // ¸üĞÂµ±Ç°°üÎ§ºĞÖĞĞÄ³ÉÎªĞÂ°üÎ§ºĞµÄÖĞĞÄ¡£¼ÆËã»ùÓÚĞÂµÄÖĞĞÄµÄ·¶Î§¡£
+    // [min,max] ä¸ºåˆå¹¶åçš„åŒ…å›´ç›’çš„è½´åœ¨åæ ‡ç³»ä¸­ä¸ºè½´å¯¹é½åŒ…å›´ç›’ã€‚
+    // æ›´æ–°å½“å‰åŒ…å›´ç›’ä¸­å¿ƒæˆä¸ºæ–°åŒ…å›´ç›’çš„ä¸­å¿ƒã€‚è®¡ç®—åŸºäºæ–°çš„ä¸­å¿ƒçš„èŒƒå›´ã€‚
     center += MathType::GetRational(1, 2) * (*firstBoundary.first + *firstBoundary.second) * firstAxis +
               MathType::GetRational(1, 2) * (*secondBoundary.first + *secondBoundary.second) * secondAxis;
 

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 10:27)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 10:27)
 
 #ifndef MATHEMATICS_OBJECTS_3D_BOX3_H
 #define MATHEMATICS_OBJECTS_3D_BOX3_H
@@ -33,10 +33,10 @@ namespace Mathematics
         using VerticesType = std::vector<Vector3Type>;
 
     public:
-        // Ò»¸öºĞ×ÓÓĞÖĞĞÄµãC£¬Öá·½ÏòU[0]¡¢U[1]ºÍU[2]£¨´¹Ö±ºÍµ¥Î»³¤¶ÈµÄÏòÁ¿£©£¬
-        // ºÍ·¶Î§e[0]¡¢e[1]ºÍe[2]£¨·Ç¸ºÊı£©¡£
-        // A point X = C + y[0] * U[0] + y[1] * U[1] + y[2] * U[2]ÊÇÔÚÄÚ²¿»òÔÚºĞ×ÓÉÏ£¬
-        // Ã¿µ±|y[i]| <= e[i]¶ÔÓÚËùÓĞµÄi
+        // ä¸€ä¸ªç›’å­æœ‰ä¸­å¿ƒç‚¹Cï¼Œè½´æ–¹å‘U[0]ã€U[1]å’ŒU[2]ï¼ˆå‚ç›´å’Œå•ä½é•¿åº¦çš„å‘é‡ï¼‰ï¼Œ
+        // å’ŒèŒƒå›´e[0]ã€e[1]å’Œe[2]ï¼ˆéè´Ÿæ•°ï¼‰ã€‚
+        // A point X = C + y[0] * U[0] + y[1] * U[1] + y[2] * U[2]æ˜¯åœ¨å†…éƒ¨æˆ–åœ¨ç›’å­ä¸Šï¼Œ
+        // æ¯å½“|y[i]| <= e[i]å¯¹äºæ‰€æœ‰çš„i
         Box3() noexcept;
         Box3(const Vector3Type& center,
              const Vector3Type& axis0,
@@ -49,7 +49,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        // ·µ»ØµÄ¶¥µãÊıÎª8
+        // è¿”å›çš„é¡¶ç‚¹æ•°ä¸º8
         NODISCARD VerticesType ComputeVertices() const;
         NODISCARD Vector3Type GetCenter() const noexcept;
 
@@ -94,7 +94,7 @@ namespace Mathematics
     template <typename Real>
     NODISCARD bool Approximate(const Box3<Real>& lhs, const Box3<Real>& rhs, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-    // µ÷ÊÔÊä³ö
+    // è°ƒè¯•è¾“å‡º
     template <typename Real>
     std::ostream& operator<<(std::ostream& outFile, const Box3<Real>& box);
 }

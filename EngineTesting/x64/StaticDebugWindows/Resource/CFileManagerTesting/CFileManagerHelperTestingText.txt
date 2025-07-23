@@ -1,1 +1,1 @@
-CFileManagerHelper Testing Text
+﻿CFileManagerHelper Testing Text

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2024/01/02 16:21)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2024/01/02 16:21)
 
 #include "Rendering/RenderingExport.h"
 
@@ -23,7 +23,7 @@ Rendering::RendererBasis::RendererBasis(int width, int height, DataFormatType co
 {
     if (!IsValid())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("äÖÈ¾²ÎÊı±ØĞë´óÓÚ»òµÈÓÚÁã¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ¸²æŸ“å‚æ•°å¿…é¡»å¤§äºæˆ–ç­‰äºé›¶ã€‚"s))
     }
 }
 
@@ -86,7 +86,7 @@ void Rendering::RendererBasis::SetSize(int width, int height)
 
     if (width < 0 || height < 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÊäÈëµÄ¿í¶È»ò¸ß¶ÈĞ¡ÓÚÁã¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¾“å…¥çš„å®½åº¦æˆ–é«˜åº¦å°äºé›¶ã€‚"s))
     }
 
     windowWidth = width;
@@ -107,7 +107,7 @@ void Rendering::RendererBasis::SetMultiSamplesNumber(int numMultiSamples)
 
     if (numMultiSamples < 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÊäÈëµÄ¶àÖØ²ÉÑù²ÎÊıĞ¡ÓÚÁã¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¾“å…¥çš„å¤šé‡é‡‡æ ·å‚æ•°å°äºé›¶ã€‚"s))
     }
 
     multiSamplesNumber = numMultiSamples;

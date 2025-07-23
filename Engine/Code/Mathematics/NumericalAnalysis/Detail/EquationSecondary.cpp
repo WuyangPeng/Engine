@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 13:29)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 13:29)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -59,7 +59,7 @@ void Mathematics::EquationSecondary::Solving()
 
 bool Mathematics::EquationSecondary::Predigest()
 {
-    // Çó³öÒ»¸ö½âÎª0£¬²¢¼ò»¯ÎªÒ»´Î·½³Ì
+    // æ±‚å‡ºä¸€ä¸ªè§£ä¸º0ï¼Œå¹¶ç®€åŒ–ä¸ºä¸€æ¬¡æ–¹ç¨‹
     if (MathD::FAbs(constant) <= GetEpsilon())
     {
         SetRealResult(0.0);
@@ -69,7 +69,7 @@ bool Mathematics::EquationSecondary::Predigest()
         return true;
     }
 
-    // ¼ò»¯ÎªÒ»´Î·½³Ì
+    // ç®€åŒ–ä¸ºä¸€æ¬¡æ–¹ç¨‹
     if (MathD::FAbs(secondary) <= GetEpsilon())
     {
         const EquationOnce equation{ constant, once };
@@ -83,13 +83,13 @@ bool Mathematics::EquationSecondary::Predigest()
 
 double Mathematics::EquationSecondary::CalculateDiscriminant() const noexcept
 {
-    // ¼ÆËãb^2 - 4ac
+    // è®¡ç®—b^2 - 4ac
     return -secondary * constant * 4.0 + once * once;
 }
 
 double Mathematics::EquationSecondary::CalculateLhs() const noexcept
 {
-    // ¼ÆËã-b / 2a
+    // è®¡ç®—-b / 2a
     return -once / secondary / 2.0;
 }
 
@@ -105,7 +105,7 @@ void Mathematics::EquationSecondary::CalculateResult(double lhs, double discrimi
 
 void Mathematics::EquationSecondary::CalculateResultDiscriminantIsPlus(double lhs, double discriminant)
 {
-    // ¼ÆËãsqrt(discriminant) / 2a
+    // è®¡ç®—sqrt(discriminant) / 2a
     auto rhs = MathD::Sqrt(discriminant) / secondary / 2.0;
 
     const auto minResult = lhs - rhs;
@@ -122,7 +122,7 @@ void Mathematics::EquationSecondary::CalculateResultDiscriminantIsZero(double lh
 
 void Mathematics::EquationSecondary::CalculateResultDiscriminantIsNegative(double lhs, double discriminant)
 {
-    // ¼ÆËãsqrt(-discriminant) / 2a
+    // è®¡ç®—sqrt(-discriminant) / 2a
     const auto rhs = MathD::Sqrt(-discriminant) / secondary / 2.0;
 
     SetImaginaryResult(Imaginary{ lhs, -rhs });

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 17:30)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 17:30)
 
 #include "Network/NetworkExport.h"
 
@@ -24,7 +24,7 @@ Network::AceSockInternetAddress::AceSockInternetAddress(const std::string& hostN
 {
     if (aceInternetAddress.set(boost::numeric_cast<uint16_t>(port), hostName.c_str()) != 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÍøÂçµØÖ·ÉèÖÃÎŞĞ§£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("ç½‘ç»œåœ°å€è®¾ç½®æ— æ•ˆï¼"s))
     }
 
     NETWORK_SELF_CLASS_IS_VALID_9;
@@ -41,7 +41,7 @@ Network::AceSockInternetAddress::AceSockInternetAddress(int port)
 {
     if (aceInternetAddress.set(boost::numeric_cast<uint16_t>(port)) != 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÍøÂçµØÖ·ÉèÖÃÎŞĞ§£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("ç½‘ç»œåœ°å€è®¾ç½®æ— æ•ˆï¼"s))
     }
 
     NETWORK_SELF_CLASS_IS_VALID_9;

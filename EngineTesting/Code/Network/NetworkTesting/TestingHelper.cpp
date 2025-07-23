@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.4 (2023/09/16 09:11)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.4 (2023/09/16 09:11)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -19,7 +19,7 @@
 #include "Network/NetworkMessage/MessageManager.h"
 
 Network::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "ÍøÂç" }
+    : ParentType{ argc, argv, "ç½‘ç»œ" }
 {
     CreateSingleton();
 
@@ -70,7 +70,7 @@ void Network::TestingHelper::InitSuite()
 
 void Network::TestingHelper::AddHelperSuite()
 {
-    auto helperSuite = GenerateSuite("ºê");
+    auto helperSuite = GenerateSuite("å®");
 
     ADD_TEST(helperSuite, StreamMacroTesting);
     ADD_TEST(helperSuite, UserMacroTesting);
@@ -80,7 +80,7 @@ void Network::TestingHelper::AddHelperSuite()
 
 void Network::TestingHelper::AddConfigurationSuite()
 {
-    auto configurationSuite = GenerateSuite("ÍøÂç¿âÅäÖÃ");
+    auto configurationSuite = GenerateSuite("ç½‘ç»œåº“é…ç½®");
 
     ADD_TEST(configurationSuite, ConfigurationStrategyTesting);
     ADD_TEST(configurationSuite, ConfigurationSubStrategyTesting);
@@ -92,7 +92,7 @@ void Network::TestingHelper::AddConfigurationSuite()
 
 void Network::TestingHelper::AddNetworkMessageSuite()
 {
-    auto networkMessageSuite = GenerateSuite("ÍøÂçÏûÏ¢");
+    auto networkMessageSuite = GenerateSuite("ç½‘ç»œæ¶ˆæ¯");
 
     ADD_TEST(networkMessageSuite, MessageInterfaceTesting);
     ADD_TEST(networkMessageSuite, NullMessageTesting);
@@ -133,14 +133,14 @@ void Network::TestingHelper::AddNetworkMessageSuite()
 
 void Network::TestingHelper::AddServiceWrappersSuite()
 {
-    auto serviceWrappersSuite = GenerateSuite("·şÎñ°ü×°Æ÷");
+    auto serviceWrappersSuite = GenerateSuite("æœåŠ¡åŒ…è£…å™¨");
 
     AddSuite(serviceWrappersSuite);
 }
 
 void Network::TestingHelper::AddInterfaceSuite()
 {
-    auto interfaceSuite = GenerateSuite("ÍøÂç½Ó¿Ú");
+    auto interfaceSuite = GenerateSuite("ç½‘ç»œæ¥å£");
 
     ADD_TEST(interfaceSuite, BaseMainManagerTesting);
     ADD_TEST(interfaceSuite, SockAddressTesting);
@@ -155,7 +155,7 @@ void Network::TestingHelper::AddInterfaceSuite()
 
 void Network::TestingHelper::AddACEWrappersSuite()
 {
-    auto aCEWrappersSuite = GenerateSuite("ACE°ü×°Æ÷");
+    auto aCEWrappersSuite = GenerateSuite("ACEåŒ…è£…å™¨");
 
     ADD_TEST(aCEWrappersSuite, ACEMainManagerTesting);
     ADD_TEST(aCEWrappersSuite, ACESockInternetAddressTesting);
@@ -171,7 +171,7 @@ void Network::TestingHelper::AddACEWrappersSuite()
 
 void Network::TestingHelper::AddBoostWrappersSuite()
 {
-    auto boostWrappersSuite = GenerateSuite("boost°ü×°Æ÷");
+    auto boostWrappersSuite = GenerateSuite("booståŒ…è£…å™¨");
 
     ADD_TEST(boostWrappersSuite, BoostMainManagerTesting);
     ADD_TEST(boostWrappersSuite, BoostMainManagerUseThreadsTesting);
@@ -186,7 +186,7 @@ void Network::TestingHelper::AddBoostWrappersSuite()
 
 CoreTools::Suite Network::TestingHelper::GetBoostSockAcceptorSuite()
 {
-    auto boostSockAcceptorSuite = GenerateSuite("boostÌ×½Ó×Ö½ÓÊÜÆ÷");
+    auto boostSockAcceptorSuite = GenerateSuite("boostå¥—æ¥å­—æ¥å—å™¨");
 
     ADD_TEST(boostSockAcceptorSuite, BoostSockAcceptorSynchronizeTesting);
     ADD_TEST(boostSockAcceptorSuite, BoostSockAcceptorNonBlockingTesting);
@@ -198,7 +198,7 @@ CoreTools::Suite Network::TestingHelper::GetBoostSockAcceptorSuite()
 
 CoreTools::Suite Network::TestingHelper::GetBoostSockConnectorSuite()
 {
-    auto boostSockConnectorSuite = GenerateSuite("boostÌ×½Ó×ÖÁ¬½ÓÆ÷");
+    auto boostSockConnectorSuite = GenerateSuite("boostå¥—æ¥å­—è¿æ¥å™¨");
 
     ADD_TEST(boostSockConnectorSuite, BoostSockConnectorSynchronizeTesting);
     ADD_TEST(boostSockConnectorSuite, BoostSockConnectorAsynchronousTesting);
@@ -209,7 +209,7 @@ CoreTools::Suite Network::TestingHelper::GetBoostSockConnectorSuite()
 
 CoreTools::Suite Network::TestingHelper::GetBoostSockStreamSuite()
 {
-    auto boostSockStreamSuite = GenerateSuite("boostÌ×½Ó×ÖÁ÷");
+    auto boostSockStreamSuite = GenerateSuite("boostå¥—æ¥å­—æµ");
 
     ADD_TEST(boostSockStreamSuite, BoostFixedSockStreamSynchronizeTesting);
     ADD_TEST(boostSockStreamSuite, BoostFixedSockStreamNonBlockingTesting);
@@ -224,7 +224,7 @@ CoreTools::Suite Network::TestingHelper::GetBoostSockStreamSuite()
 
 void Network::TestingHelper::AddNetworkWrappersSuite()
 {
-    auto networkWrappersSuite = GenerateSuite("Network°ü×°Æ÷");
+    auto networkWrappersSuite = GenerateSuite("NetworkåŒ…è£…å™¨");
 
     ADD_TEST(networkWrappersSuite, NetworkMainManagerTesting);
     ADD_TEST(networkWrappersSuite, NetworkSockInternetAddressTesting);
@@ -237,14 +237,14 @@ void Network::TestingHelper::AddNetworkWrappersSuite()
 
 void Network::TestingHelper::AddOpensslSuite()
 {
-    auto opensslSuite = GenerateSuite("Openssl°ü×°Æ÷");
+    auto opensslSuite = GenerateSuite("OpensslåŒ…è£…å™¨");
 
     AddSuite(opensslSuite);
 }
 
 void Network::TestingHelper::AddMessageOrientedMiddlewareSuite()
 {
-    auto messageOrientedMiddlewareSuite = GenerateSuite("ÏûÏ¢ÖĞ¼ä¼ş");
+    auto messageOrientedMiddlewareSuite = GenerateSuite("æ¶ˆæ¯ä¸­é—´ä»¶");
 
     ADD_TEST(messageOrientedMiddlewareSuite, ConsumerTesting);
     ADD_TEST(messageOrientedMiddlewareSuite, ProducerTesting);

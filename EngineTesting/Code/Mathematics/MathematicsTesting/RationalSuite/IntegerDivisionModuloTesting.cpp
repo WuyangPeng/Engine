@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 16:37)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 16:37)
 
 #include "IntegerDivisionModuloTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -55,7 +55,7 @@ void Mathematics::IntegerDivisionModuloTesting::DenominatorIsLargeTest()
         std::vector<uint16_t> firstShortVector(66);
         std::vector<uint16_t> secondShortVector(66);
 
-        // ×î¸ßÎ»ÎªÁã
+        // æœ€é«˜ä½ä¸ºé›¶
         for (auto i = 0; i < 60; ++i)
         {
             firstShortVector.at(i) = randomDistribution0(generator);
@@ -128,7 +128,7 @@ void Mathematics::IntegerDivisionModuloTesting::SingleTest()
         std::vector<uint16_t> firstShortVector(66);
         std::vector<uint16_t> secondShortVector(66);
 
-        // ×î¸ßÎ»ÎªÁã
+        // æœ€é«˜ä½ä¸ºé›¶
         for (auto i = 0; i < 65; ++i)
         {
             firstShortVector.at(i) = randomDistribution0(generator);
@@ -194,7 +194,7 @@ void Mathematics::IntegerDivisionModuloTesting::MultipleTest()
 
         const uint32_t secondIndexMax = randomDistribution1(generator);
 
-        // ×î¸ßÎ»ÎªÁã
+        // æœ€é«˜ä½ä¸ºé›¶
         for (auto i = 0u; i < secondIndexMax; ++i)
         {
             firstShortVector.at(i) = randomDistribution0(generator);

@@ -1,21 +1,21 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 14:44)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 14:44)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX2_H
 #define MATHEMATICS_ALGEBRA_MATRIX2_H
 
 #include "Mathematics/MathematicsDll.h"
 
-// Ğı×ª¾ØÕóµÄĞÎÊ½Îª
+// æ—‹è½¬çŸ©é˜µçš„å½¢å¼ä¸º
 //   Real = cos(t) -sin(t)
 //          sin(t)  cos(t)
-// µ±t > 0±íÊ¾ÔÚxyÆ½ÃæÉÏÄæÊ±ÕëĞı×ª¡£
+// å½“t > 0è¡¨ç¤ºåœ¨xyå¹³é¢ä¸Šé€†æ—¶é’ˆæ—‹è½¬ã€‚
 
 #include "AlgebraFwd.h"
 #include "Matrix2EigenDecomposition.h"
@@ -53,45 +53,45 @@ namespace Mathematics
         using Vector2ContainerType = std::vector<Vector2Type>;
 
     public:
-        // Èç¹û±êÖ¾ÎªMatrixFlagsZero£¬´´½¨Áã¾ØÕó£¬·ñÔò´´½¨µ¥Î»¾ØÕó¡£
+        // å¦‚æœæ ‡å¿—ä¸ºMatrixFlagsZeroï¼Œåˆ›å»ºé›¶çŸ©é˜µï¼Œå¦åˆ™åˆ›å»ºå•ä½çŸ©é˜µã€‚
         constexpr explicit Matrix2(MatrixInitType flag = MatrixInitType::Zero) noexcept
             : x{ Create(flag, VectorIndex::X) }, y{ Create(flag, VectorIndex::Y) }
         {
         }
 
-        // ÊäÈë¾ØÕóÔÚĞĞrºÍÁĞc
+        // è¾“å…¥çŸ©é˜µåœ¨è¡Œrå’Œåˆ—c
         constexpr Matrix2(Real member00, Real member01, Real member10, Real member11) noexcept
             : x{ member00, member01 }, y{ member10, member11 }
         {
         }
 
-        /// ´´½¨¾ØÕóÀ´×ÔÊı×éÊı×Ö¡£
-        /// ÊäÈëÊı×éÊÇ»ùÓÚMatrixTypeFlagsµÄÊäÈëµÄ½âÊÍ
+        /// åˆ›å»ºçŸ©é˜µæ¥è‡ªæ•°ç»„æ•°å­—ã€‚
+        /// è¾“å…¥æ•°ç»„æ˜¯åŸºäºMatrixTypeFlagsçš„è¾“å…¥çš„è§£é‡Š
         /// MatrixTypeFlagsRow:  entry[0..3] = { m00,m01,m10,m11 }  [row major]
         /// MatrixTypeFlagsColumn: entry[0..3] = { m00,m10,m01,m11 }  [column major]
         Matrix2(const ContainerType& entry, MatrixMajorFlags majorFlag);
 
-        /// ´´½¨»ùÓÚÊäÈëÊ¸Á¿µÄ¾ØÕó¡£MatrixMajorFlags½âÊÍÎª
-        /// MatrixTypeFlagsRow£ºÏòÁ¿ÊÇ¾ØÕóµÄĞĞ
-        /// MatrixTypeFlagsColumn£ºÏòÁ¿ÊÇ¾ØÕóµÄÁĞ
+        /// åˆ›å»ºåŸºäºè¾“å…¥çŸ¢é‡çš„çŸ©é˜µã€‚MatrixMajorFlagsè§£é‡Šä¸º
+        /// MatrixTypeFlagsRowï¼šå‘é‡æ˜¯çŸ©é˜µçš„è¡Œ
+        /// MatrixTypeFlagsColumnï¼šå‘é‡æ˜¯çŸ©é˜µçš„åˆ—
         Matrix2(const Vector2Type& vector0, const Vector2Type& vector1, MatrixMajorFlags majorFlag);
         explicit Matrix2(const Vector2ContainerType& vectors, MatrixMajorFlags majorFlag = MatrixMajorFlags::Column);
 
-        // ´´½¨Ò»¸ö¶Ô½Ç¾ØÕó, member01 = member10 = 0.
+        // åˆ›å»ºä¸€ä¸ªå¯¹è§’çŸ©é˜µ, member01 = member10 = 0.
         constexpr Matrix2(Real member00, Real member11) noexcept
             : x{ member00, MathType::GetValue(0) }, y{ MathType::GetValue(0), member11 }
         {
         }
 
-        // ´´½¨Ò»¸öĞı×ª¾ØÕó£¨½Ç¶ÈÎªÕı ->ÄæÊ±Õë·½Ïò£©.
+        // åˆ›å»ºä¸€ä¸ªæ—‹è½¬çŸ©é˜µï¼ˆè§’åº¦ä¸ºæ­£ ->é€†æ—¶é’ˆæ–¹å‘ï¼‰.
         explicit Matrix2(Real angle) noexcept;
 
-        // ´´½¨Ò»¸öÕÅÁ¿»ı U * V^T
+        // åˆ›å»ºä¸€ä¸ªå¼ é‡ç§¯ U * V^T
         Matrix2(const Vector2Type& vector0, const Vector2Type& vector1) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        // ´´½¨¸÷ÖÖ¾ØÕó¡£
+        // åˆ›å»ºå„ç§çŸ©é˜µã€‚
         void MakeZero() noexcept;
         void MakeIdentity() noexcept;
         void MakeDiagonal(Real member00, Real member11) noexcept;
@@ -124,7 +124,7 @@ namespace Mathematics
         // M * rhs
         Matrix2& operator*=(const Matrix2& rhs) noexcept;
 
-        // ÆäËüÔËËã
+        // å…¶å®ƒè¿ç®—
         NODISCARD Matrix2 Inverse(Real epsilon = MathType::GetZeroTolerance()) const;
         NODISCARD Matrix2 Adjoint() const noexcept;
         NODISCARD Real Determinant() const noexcept;
@@ -132,20 +132,20 @@ namespace Mathematics
         NODISCARD Matrix2 GaussianEliminationInverse(Real epsilon = MathType::GetZeroTolerance()) const;
         NODISCARD Real GaussianEliminationDeterminant(Real epsilon = MathType::GetZeroTolerance()) const;
 
-        // ¾ØÕó±ØĞëÊÇÒ»¸öĞı×ª¾ØÕó£¬ÏÂÃæº¯Êı²ÅÓĞĞ§¡£
-        // Orthonormalizeº¯ÊıÊ¹ÓÃGram-SchmidtÕı½»»¯Ê©¼Óµ½ËùÊöĞı×ª¾ØÕó¡£
-        // ½Ç¶È±ØĞëÎª»¡¶È£¬¶ø²»ÊÇ¶ÈÊı¡£
+        // çŸ©é˜µå¿…é¡»æ˜¯ä¸€ä¸ªæ—‹è½¬çŸ©é˜µï¼Œä¸‹é¢å‡½æ•°æ‰æœ‰æ•ˆã€‚
+        // Orthonormalizeå‡½æ•°ä½¿ç”¨Gram-Schmidtæ­£äº¤åŒ–æ–½åŠ åˆ°æ‰€è¿°æ—‹è½¬çŸ©é˜µã€‚
+        // è§’åº¦å¿…é¡»ä¸ºå¼§åº¦ï¼Œè€Œä¸æ˜¯åº¦æ•°ã€‚
         NODISCARD Real ExtractAngle() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
         void Orthonormalize();
 
-        // ¾ØÕó±ØĞëÊÇ¶Ô³Æ¾ØÕó¡£
-        // ÏµÊıM = Real * D * Real^T £¬ÆäÖĞReal = [u0|u1] ÊÇÒ»¸öÁĞÎªu0ºÍu1µÄĞı×ª¾ØÕóÇÒ
-        // D = diag(d0,d1)ÊÇÒ»¸ö¶Ô½Ç¾ØÕó£¬ÕâÀï¶Ô½ÇÏßÏîÎªd0ºÍd1¡£
-        // ÌØÕ÷ÏòÁ¿u[i]¶ÔÓ¦µÄÌØÕ÷ÏòÁ¿d[i]¡£ÌØÕ÷ÖµÅÅĞòÎªd0 <= d1¡£
-        // ·µ»ØÖµµÄµÚÒ»²¿·ÖÎªrotation£¬µÚ¶ş²¿·ÖÎªdiagonal¡£
+        // çŸ©é˜µå¿…é¡»æ˜¯å¯¹ç§°çŸ©é˜µã€‚
+        // ç³»æ•°M = Real * D * Real^T ï¼Œå…¶ä¸­Real = [u0|u1] æ˜¯ä¸€ä¸ªåˆ—ä¸ºu0å’Œu1çš„æ—‹è½¬çŸ©é˜µä¸”
+        // D = diag(d0,d1)æ˜¯ä¸€ä¸ªå¯¹è§’çŸ©é˜µï¼Œè¿™é‡Œå¯¹è§’çº¿é¡¹ä¸ºd0å’Œd1ã€‚
+        // ç‰¹å¾å‘é‡u[i]å¯¹åº”çš„ç‰¹å¾å‘é‡d[i]ã€‚ç‰¹å¾å€¼æ’åºä¸ºd0 <= d1ã€‚
+        // è¿”å›å€¼çš„ç¬¬ä¸€éƒ¨åˆ†ä¸ºrotationï¼Œç¬¬äºŒéƒ¨åˆ†ä¸ºdiagonalã€‚
         NODISCARD Matrix2EigenDecompositionType EigenDecomposition(Real epsilon = MathType::GetZeroTolerance()) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        // ÌØÊâ¾ØÕó¡£
+        // ç‰¹æ®ŠçŸ©é˜µã€‚
         NODISCARD static constexpr Matrix2 GetZero()
         {
             return Matrix2{ MatrixInitType::Zero };
@@ -194,7 +194,7 @@ namespace Mathematics
         NODISCARD typename Vector2Type::SetCoordinateFunction GetVectorSetFunction() const noexcept;
 
     private:
-        // ´æ´¢ÎªĞĞÖ÷Ğò¡£
+        // å­˜å‚¨ä¸ºè¡Œä¸»åºã€‚
         Vector2Type x;
         Vector2Type y;
     };

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 14:53)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 14:53)
 
 #include "Framework/FrameworkExport.h"
 
@@ -51,7 +51,7 @@ void Framework::OpenGLGlutProcessManagerImpl::SetWindowId(int window)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackÒÑÊÍ·Å"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackå·²é‡Šæ”¾"s))
     }
 }
 
@@ -63,7 +63,7 @@ int Framework::OpenGLGlutProcessManagerImpl::GetWindowId()
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackÒÑÊÍ·Å"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackå·²é‡Šæ”¾"s))
     }
 }
 
@@ -75,7 +75,7 @@ void Framework::OpenGLGlutProcessManagerImpl::SetMillisecond(int millisecond)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackÒÑÊÍ·Å"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackå·²é‡Šæ”¾"s))
     }
 }
 
@@ -87,7 +87,7 @@ int Framework::OpenGLGlutProcessManagerImpl::GetMillisecond()
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackÒÑÊÍ·Å"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackå·²é‡Šæ”¾"s))
     }
 }
 
@@ -110,7 +110,7 @@ Framework::OpenGLGlutProcessManagerImpl::MainFunctionHelperBaseSharedPtr Framewo
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("MainFunctionHelperÒÑÊÍ·Å"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("MainFunctionHelperå·²é‡Šæ”¾"s))
     }
 }
 
@@ -122,7 +122,7 @@ bool Framework::OpenGLGlutProcessManagerImpl::PreCreate()
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackÒÑÊÍ·Å"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackå·²é‡Šæ”¾"s))
     }
 }
 
@@ -134,7 +134,7 @@ bool Framework::OpenGLGlutProcessManagerImpl::Initialize()
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackÒÑÊÍ·Å"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackå·²é‡Šæ”¾"s))
     }
 }
 
@@ -146,7 +146,7 @@ void Framework::OpenGLGlutProcessManagerImpl::PreIdle()
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackÒÑÊÍ·Å"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackå·²é‡Šæ”¾"s))
     }
 }
 
@@ -158,7 +158,7 @@ void Framework::OpenGLGlutProcessManagerImpl::Terminate()
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackÒÑÊÍ·Å"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackå·²é‡Šæ”¾"s))
     }
 }
 
@@ -168,12 +168,12 @@ void Framework::OpenGLGlutProcessManagerImpl::RenderScene()
     {
         if (!openGLGlutCallBack->RenderScene())
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("RenderScene³öÏÖ´íÎó¡£"));
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("RenderSceneå‡ºçŽ°é”™è¯¯ã€‚"));
         }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackÒÑÊÍ·Å"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackå·²é‡Šæ”¾"s))
     }
 }
 
@@ -183,12 +183,12 @@ void Framework::OpenGLGlutProcessManagerImpl::ChangeSize(int width, int height)
     {
         if (!openGLGlutCallBack->ChangeSize(width, height))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("ChangeSize³öÏÖ´íÎó¡£"));
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("ChangeSizeå‡ºçŽ°é”™è¯¯ã€‚"));
         }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackÒÑÊÍ·Å"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackå·²é‡Šæ”¾"s))
     }
 }
 
@@ -200,12 +200,12 @@ void Framework::OpenGLGlutProcessManagerImpl::TimerFunction(int timer)
     {
         if (!openGLGlutCallBack->TimerFunction(TimerFunction))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("TimerFunction³öÏÖ´íÎó¡£"));
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("TimerFunctionå‡ºçŽ°é”™è¯¯ã€‚"));
         }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackÒÑÊÍ·Å"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackå·²é‡Šæ”¾"s))
     }
 }
 
@@ -215,12 +215,12 @@ void Framework::OpenGLGlutProcessManagerImpl::SpecialKeysDown(int key, int xCoor
     {
         if (!openGLGlutCallBack->SpecialKeysDown(key, xCoordinate, yCoordinate))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("SpecialKeysDown³öÏÖ´íÎó¡£"));
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("SpecialKeysDownå‡ºçŽ°é”™è¯¯ã€‚"));
         }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackÒÑÊÍ·Å"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackå·²é‡Šæ”¾"s))
     }
 }
 
@@ -230,12 +230,12 @@ void Framework::OpenGLGlutProcessManagerImpl::KeyboardDown(unsigned char key, in
     {
         if (!openGLGlutCallBack->KeyboardDown(key, xCoordinate, yCoordinate))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("KeyboardDown³öÏÖ´íÎó¡£"));
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("KeyboardDownå‡ºçŽ°é”™è¯¯ã€‚"));
         }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackÒÑÊÍ·Å"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackå·²é‡Šæ”¾"s))
     }
 }
 
@@ -245,12 +245,12 @@ void Framework::OpenGLGlutProcessManagerImpl::MouseFunction(int button, int stat
     {
         if (!openGLGlutCallBack->MouseClick(button, state, xCoordinate, yCoordinate))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("MouseClick³öÏÖ´íÎó¡£"));
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("MouseClickå‡ºçŽ°é”™è¯¯ã€‚"));
         }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackÒÑÊÍ·Å"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackå·²é‡Šæ”¾"s))
     }
 }
 
@@ -260,12 +260,12 @@ void Framework::OpenGLGlutProcessManagerImpl::MotionFunction(int xCoordinate, in
     {
         if (!openGLGlutCallBack->MotionFunction(xCoordinate, yCoordinate))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("MotionFunction³öÏÖ´íÎó¡£"));
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("MotionFunctionå‡ºçŽ°é”™è¯¯ã€‚"));
         }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackÒÑÊÍ·Å"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackå·²é‡Šæ”¾"s))
     }
 }
 
@@ -275,12 +275,12 @@ void Framework::OpenGLGlutProcessManagerImpl::PassiveMotion(int xCoordinate, int
     {
         if (!openGLGlutCallBack->PassiveMotion(xCoordinate, yCoordinate))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("PassiveMotion³öÏÖ´íÎó¡£"));
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("PassiveMotionå‡ºçŽ°é”™è¯¯ã€‚"));
         }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackÒÑÊÍ·Å"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackå·²é‡Šæ”¾"s))
     }
 }
 
@@ -290,12 +290,12 @@ void Framework::OpenGLGlutProcessManagerImpl::IdleFunction()
     {
         if (!openGLGlutCallBack->IdleFunction())
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("IdleFunction³öÏÖ´íÎó¡£"));
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("IdleFunctionå‡ºçŽ°é”™è¯¯ã€‚"));
         }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackÒÑÊÍ·Å"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackå·²é‡Šæ”¾"s))
     }
 }
 
@@ -305,12 +305,12 @@ void Framework::OpenGLGlutProcessManagerImpl::ProcessMenu(int menuValue)
     {
         if (!openGLGlutCallBack->ProcessMenu(menuValue))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("ProcessMenu³öÏÖ´íÎó¡£"));
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("ProcessMenuå‡ºçŽ°é”™è¯¯ã€‚"));
         }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackÒÑÊÍ·Å"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackå·²é‡Šæ”¾"s))
     }
 }
 
@@ -320,12 +320,12 @@ void Framework::OpenGLGlutProcessManagerImpl::SpecialKeysUp(int key, int xCoordi
     {
         if (!openGLGlutCallBack->SpecialKeysUp(key, xCoordinate, yCoordinate))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("SpecialKeysUp³öÏÖ´íÎó¡£"));
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("SpecialKeysUpå‡ºçŽ°é”™è¯¯ã€‚"));
         }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackÒÑÊÍ·Å"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackå·²é‡Šæ”¾"s))
     }
 }
 
@@ -335,12 +335,12 @@ void Framework::OpenGLGlutProcessManagerImpl::KeyboardUp(unsigned char key, int 
     {
         if (!openGLGlutCallBack->KeyboardUp(key, xCoordinate, yCoordinate))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("KeyboardUp³öÏÖ´íÎó¡£"));
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("KeyboardUpå‡ºçŽ°é”™è¯¯ã€‚"));
         }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackÒÑÊÍ·Å"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBackå·²é‡Šæ”¾"s))
     }
 }
 

@@ -15,6 +15,7 @@
 #include "Mathematics/Algebra/PlaneDetail.h"
 #include "Mathematics/Algebra/Vector3Tools.h"
 #include "Mathematics/Algebra/Vector4Tools.h"
+#include "Mathematics/Algebra/BoundingSphereDetail.h"
 #include "Rendering/GlobalEffects/LightProjector.h"
 #include "Rendering/LocalEffects/ConstantColorEffect.h"
 #include "Rendering/RendererEngine/BaseRenderer.h"

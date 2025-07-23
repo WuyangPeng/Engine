@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ¸¨Öú²âÊÔ°æ±¾£º0.9.1.2 (2023/06/12 19:15)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“è¾…åŠ©æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.1.2 (2023/06/12 19:15)
 
 #include "CoreTools/Helper/MainFunctionMacro.h"
 #include "Example/AnimationExample/AnimationExampleTesting/TestingHelper.h"

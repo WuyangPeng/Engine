@@ -1,6 +1,6 @@
-TODO Level 8
+ï»¿TODO Level 8
 
 1.0.1.0
 
-1. £¨WindowProcess£© ½«WindowMessageµÄDoCloseMessage²Ù×÷ÒÆ¶¯µ½äÖÈ¾²ã¡£
-2. £¨MiddleLayer£©ÒıÇæMiddleLayerÉèÖÃÄ£¿é½Ó¿ÚÔö¼Ó¶ÏÑÔ²âÊÔ¡£
+1. ï¼ˆWindowProcessï¼‰ å°†WindowMessageçš„DoCloseMessageæ“ä½œç§»åŠ¨åˆ°æ¸²æŸ“å±‚ã€‚
+2. ï¼ˆMiddleLayerï¼‰å¼•æ“MiddleLayerè®¾ç½®æ¨¡å—æ¥å£å¢åŠ æ–­è¨€æµ‹è¯•ã€‚

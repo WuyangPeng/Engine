@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/03/28 16:37)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/03/28 16:37)
 
 #ifndef CORE_TOOLS_BASE_VERSION_H
 #define CORE_TOOLS_BASE_VERSION_H
@@ -21,8 +21,8 @@ namespace CoreTools
     constexpr auto gMaxSubversion = 100;
 
     /// @class Version
-    /// @brief ·ÃÎÊÒýÇæµÄ°æ±¾ÐÅÏ¢¡£
-    /// ¾²Ì¬Àà¡£
+    /// @brief è®¿é—®å¼•æ“Žçš„ç‰ˆæœ¬ä¿¡æ¯ã€‚
+    /// é™æ€ç±»ã€‚
     class CORE_TOOLS_DEFAULT_DECLARE Version final
     {
     public:
@@ -31,8 +31,8 @@ namespace CoreTools
             return gTcreVersion;
         }
 
-        /// @return ·µ»ØÖ÷°æ±¾ºÅ£¬¡°1.2.3.4¡±ÖÐµÄ1¡£
-        /// @brief ¾ßÓÐÏàÍ¬Ãû³Æµ«²»Í¬Ö÷°æ±¾ºÅµÄ³ÌÐò¼¯²»¿É»¥»»¡£ÀýÈç£¬ÕâÊÊÓÃÓÚ¶Ô²úÆ·µÄ´óÁ¿ÖØÐ´£¬ÕâÐ©ÖØÐ´Ê¹µÃÎÞ·¨ÊµÏÖÏòºó¼æÈÝÐÔ¡£
+        /// @return è¿”å›žä¸»ç‰ˆæœ¬å·ï¼Œâ€œ1.2.3.4â€ä¸­çš„1ã€‚
+        /// @brief å…·æœ‰ç›¸åŒåç§°ä½†ä¸åŒä¸»ç‰ˆæœ¬å·çš„ç¨‹åºé›†ä¸å¯äº’æ¢ã€‚ä¾‹å¦‚ï¼Œè¿™é€‚ç”¨äºŽå¯¹äº§å“çš„å¤§é‡é‡å†™ï¼Œè¿™äº›é‡å†™ä½¿å¾—æ— æ³•å®žçŽ°å‘åŽå…¼å®¹æ€§ã€‚
         NODISCARD static constexpr int GetMajor(int version) noexcept
         {
             return (version / (gMaxSubversion * gMaxSubversion * gMaxSubversion)) % gMaxSubversion;
@@ -43,9 +43,9 @@ namespace CoreTools
             return GetMajor(GetTcreFullVersion());
         }
 
-        /// @return ·µ»Ø´Î°æ±¾ºÅ£¬¡°1.2.3.4¡±ÖÐµÄ2¡£
-        /// @brief Èç¹ûÁ½¸ö³ÌÐò¼¯µÄÃû³ÆºÍÖ÷°æ±¾ºÅÏàÍ¬£¬¶ø´Î°æ±¾ºÅ²»Í¬£¬ÕâÖ¸Ê¾ÏÔÖøÔöÇ¿£¬µ«ÕÕ¹Ëµ½ÁËÏòºó¼æÈÝÐÔ¡£
-        /// ÀýÈç£¬ÕâÊÊÓÃÓÚ²úÆ·µÄÐÞÕý°æ»òÍêÈ«Ïòºó¼æÈÝµÄÐÂ°æ±¾¡£
+        /// @return è¿”å›žæ¬¡ç‰ˆæœ¬å·ï¼Œâ€œ1.2.3.4â€ä¸­çš„2ã€‚
+        /// @brief å¦‚æžœä¸¤ä¸ªç¨‹åºé›†çš„åç§°å’Œä¸»ç‰ˆæœ¬å·ç›¸åŒï¼Œè€Œæ¬¡ç‰ˆæœ¬å·ä¸åŒï¼Œè¿™æŒ‡ç¤ºæ˜¾è‘—å¢žå¼ºï¼Œä½†ç…§é¡¾åˆ°äº†å‘åŽå…¼å®¹æ€§ã€‚
+        /// ä¾‹å¦‚ï¼Œè¿™é€‚ç”¨äºŽäº§å“çš„ä¿®æ­£ç‰ˆæˆ–å®Œå…¨å‘åŽå…¼å®¹çš„æ–°ç‰ˆæœ¬ã€‚
         NODISCARD static constexpr int GetMinor(int version) noexcept
         {
             return (version / (gMaxSubversion * gMaxSubversion)) % gMaxSubversion;
@@ -56,8 +56,8 @@ namespace CoreTools
             return GetMinor(GetTcreFullVersion());
         }
 
-        /// @return ·µ»ØÄÚ²¿°æ±¾ºÅ£¬¡°1.2.3.4¡±ÖÐµÄ3¡£
-        /// @brief ÄÚ²¿°æ±¾ºÅµÄ²»Í¬±íÊ¾¶ÔÏàÍ¬Ô´Ëù×÷µÄÖØÐÂ±àÒë¡£ÕâÊÊºÏÓÚ¸ü¸Ä´¦ÀíÆ÷¡¢Æ½Ì¨»ò±àÒëÆ÷µÄÇé¿ö¡£
+        /// @return è¿”å›žå†…éƒ¨ç‰ˆæœ¬å·ï¼Œâ€œ1.2.3.4â€ä¸­çš„3ã€‚
+        /// @brief å†…éƒ¨ç‰ˆæœ¬å·çš„ä¸åŒè¡¨ç¤ºå¯¹ç›¸åŒæºæ‰€ä½œçš„é‡æ–°ç¼–è¯‘ã€‚è¿™é€‚åˆäºŽæ›´æ”¹å¤„ç†å™¨ã€å¹³å°æˆ–ç¼–è¯‘å™¨çš„æƒ…å†µã€‚
         NODISCARD static constexpr int GetBuild(int version) noexcept
         {
             return (version / gMaxSubversion) % gMaxSubversion;
@@ -68,8 +68,8 @@ namespace CoreTools
             return GetBuild(GetTcreFullVersion());
         }
 
-        /// @return ·µ»ØÐÞ¶©ºÅ£¬¡°1.2.3.4¡±ÖÐµÄ4¡£
-        /// @brief Ãû³Æ¡¢Ö÷°æ±¾ºÅºÍ´Î°æ±¾ºÅ¶¼ÏàÍ¬µ«ÐÞ¶©ºÅ²»Í¬µÄ³ÌÐò¼¯Ó¦ÊÇÍêÈ«¿É»¥»»µÄ¡£ÕâÊÊÓÃÓÚÐÞ¸´ÒÔÇ°·¢²¼µÄ³ÌÐò¼¯ÖÐµÄ°²È«Â©¶´¡£
+        /// @return è¿”å›žä¿®è®¢å·ï¼Œâ€œ1.2.3.4â€ä¸­çš„4ã€‚
+        /// @brief åç§°ã€ä¸»ç‰ˆæœ¬å·å’Œæ¬¡ç‰ˆæœ¬å·éƒ½ç›¸åŒä½†ä¿®è®¢å·ä¸åŒçš„ç¨‹åºé›†åº”æ˜¯å®Œå…¨å¯äº’æ¢çš„ã€‚è¿™é€‚ç”¨äºŽä¿®å¤ä»¥å‰å‘å¸ƒçš„ç¨‹åºé›†ä¸­çš„å®‰å…¨æ¼æ´žã€‚
         NODISCARD static constexpr int GetRevision(int version) noexcept
         {
             return version % gMaxSubversion;
@@ -80,11 +80,11 @@ namespace CoreTools
             return GetRevision(GetTcreFullVersion());
         }
 
-        /// @return ·µ»ØÒ»¸öÍêÕûµÄ°æ±¾ºÅÎª×Ö·û´®£¬Èç¡°1.2.3.4¡±¡£
+        /// @return è¿”å›žä¸€ä¸ªå®Œæ•´çš„ç‰ˆæœ¬å·ä¸ºå­—ç¬¦ä¸²ï¼Œå¦‚â€œ1.2.3.4â€ã€‚
         NODISCARD static std::string GetVersion(int version);
         NODISCARD static std::string GetVersion();
 
-        /// @return Èç¹ûµ±Ç°°æ±¾ºÅ >= (major, minor, build , revision)£¬·µ»Øtrue¡£
+        /// @return å¦‚æžœå½“å‰ç‰ˆæœ¬å· >= (major, minor, build , revision)ï¼Œè¿”å›žtrueã€‚
         NODISCARD static bool IsAtLeast(int version, int major, int minor, int build, int revision) noexcept;
         NODISCARD static bool IsAtLeast(int major, int minor, int build, int revision) noexcept;
     };

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒýÇæ°æ±¾£º0.9.0.12 (2023/06/09 10:08)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“Žç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 10:08)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_QUADRATIC_NONUNIFORM2_DETAIL_H
 #define MATHEMATICS_INTERPOLATION_INTP_QUADRATIC_NONUNIFORM2_DETAIL_H
@@ -331,7 +331,7 @@ bool Mathematics::IntpQdrNonuniform2<Real>::Evaluate(const Vector2<Real>& p, Rea
         }
     }
 
-    MATHEMATICS_ASSERTION_0(index <= 6, "ÒâÍâÇé¿ö\n");
+    MATHEMATICS_ASSERTION_0(index <= 6, "æ„å¤–æƒ…å†µ\n");
     if (index > 6)
     {
         index = 5;

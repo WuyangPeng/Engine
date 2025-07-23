@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/17 16:52)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/17 16:52)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_SUITE_PROPERTIES_TESTING_H
 #define CORE_TOOLS_TEXT_PARSING_SUITE_PROPERTIES_TESTING_H
@@ -14,8 +14,8 @@
 
 namespace CoreTools
 {
-    /// Õâ¸ö²âÊÔ²»Ö±½Ó²âÊÔProperties£¬
-    /// ¶øÊÇÍ¨¹ıDocumentÀà¼ä½Óµ÷ÓÃPropertiesµÄÏà¹Øº¯Êı¡£
+    /// è¿™ä¸ªæµ‹è¯•ä¸ç›´æ¥æµ‹è¯•Propertiesï¼Œ
+    /// è€Œæ˜¯é€šè¿‡Documentç±»é—´æ¥è°ƒç”¨Propertiesçš„ç›¸å…³å‡½æ•°ã€‚
     class PropertiesTesting final : public UnitTest
     {
     public:

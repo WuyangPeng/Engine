@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.10 (2024/06/03 16:27)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.10 (2024/06/03 16:27)
 
 #include "EventTesting.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -31,7 +31,7 @@ void CoreTools::EventTesting::DoRunUnitTest()
 
 void CoreTools::EventTesting::MainTest()
 {
-    /// ²âÊÔÁ½´Î
+    /// æµ‹è¯•ä¸¤æ¬¡
     ASSERT_NOT_THROW_EXCEPTION_0(ManualResetTrueCreateThreadTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ManualResetTrueCreateThreadTest);
 

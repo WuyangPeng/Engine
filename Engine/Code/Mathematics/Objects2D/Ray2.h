@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/12 11:17)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/12 11:17)
 
 #ifndef MATHEMATICS_OBJECTS_2D_RAY2_H
 #define MATHEMATICS_OBJECTS_2D_RAY2_H
@@ -31,8 +31,8 @@ namespace Mathematics
         using MathType = Math<Real>;
 
     public:
-        // ÉäÏß±íÊ¾ÎªP+t*D£¬ÆäÖĞPÊÇÏßÔ­µã£¬DÊÇµ¥Î»³¤¶ÈµÄ·½ÏòÏòÁ¿£¬t >= 0¡£
-        // ÓÃ»§±ØĞëÈ·±£DÊÇµ¥Î»³¤¶È¡£
+        // å°„çº¿è¡¨ç¤ºä¸ºP+t*Dï¼Œå…¶ä¸­Pæ˜¯çº¿åŸç‚¹ï¼ŒDæ˜¯å•ä½é•¿åº¦çš„æ–¹å‘å‘é‡ï¼Œt >= 0ã€‚
+        // ç”¨æˆ·å¿…é¡»ç¡®ä¿Dæ˜¯å•ä½é•¿åº¦ã€‚
 
         Ray2(const Vector2Type& origin, const Vector2Type& direction, Real epsilon = MathType::GetZeroTolerance()) noexcept;
 
@@ -55,7 +55,7 @@ namespace Mathematics
     template <typename Real>
     NODISCARD bool Approximate(const Ray2<Real>& lhs, const Ray2<Real>& rhs, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-    // µ÷ÊÔÊä³ö
+    // è°ƒè¯•è¾“å‡º
     template <typename Real>
     std::ostream& operator<<(std::ostream& outFile, const Ray2<Real>& ray);
 }

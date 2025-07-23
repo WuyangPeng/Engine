@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:47)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:47)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE2_LINE2_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE2_LINE2_H
@@ -39,11 +39,11 @@ namespace Mathematics
         NODISCARD Line2Type GetLhsLine() const noexcept;
         NODISCARD Line2Type GetRhsLine() const noexcept;
 
-        // Ïà½»¼¯¡£ÈÃ q = GetQuantity()¡£Çé¿öÊÇ£º
-        //   q = 0: Ïß²»Ïà½»£¬ GetIntersection() ·µ»ØIntersectionType::Empty¡£
-        //   q = 1: ÏßÏà½»ÓÚÒ»¸öµã¡£GetIntersection()·µ»ØIntersectionType::Point¡£
-        //          ·ÃÎÊÏà½»µãÊ¹ÓÃGetPoint()¡£
-        //   q = INT_MAX:  ÏßÊÇÖØµşµÄ¡£GetIntersection() ·µ»ØIntersectionType::Line¡£
+        // ç›¸äº¤é›†ã€‚è®© q = GetQuantity()ã€‚æƒ…å†µæ˜¯ï¼š
+        //   q = 0: çº¿ä¸ç›¸äº¤ï¼Œ GetIntersection() è¿”å›IntersectionType::Emptyã€‚
+        //   q = 1: çº¿ç›¸äº¤äºä¸€ä¸ªç‚¹ã€‚GetIntersection()è¿”å›IntersectionType::Pointã€‚
+        //          è®¿é—®ç›¸äº¤ç‚¹ä½¿ç”¨GetPoint()ã€‚
+        //   q = INT_MAX:  çº¿æ˜¯é‡å çš„ã€‚GetIntersection() è¿”å›IntersectionType::Lineã€‚
         NODISCARD int GetQuantity() const noexcept;
         NODISCARD Vector2Type GetPoint() const;
 
@@ -51,11 +51,11 @@ namespace Mathematics
         void Find();
 
     private:
-        // ÒªÏà½»µÄ¶ÔÏó¡£
+        // è¦ç›¸äº¤çš„å¯¹è±¡ã€‚
         Line2Type lhsLine;
         Line2Type rhsLine;
 
-        // Ïà½»¼¯
+        // ç›¸äº¤é›†
         int quantity;
         Vector2Type point;
     };

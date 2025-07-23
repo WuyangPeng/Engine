@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:14)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:14)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SPHERE3_SPHERE3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SPHERE3_SPHERE3_ACHIEVE_H
@@ -55,7 +55,7 @@ Mathematics::Sphere3<Real> Mathematics::StaticFindIntersectorSphere3Sphere3<Real
 template <typename Real>
 void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::Find()
 {
-    // Ïà½»Æ½Ãæ±ØĞëÒÔNÎª·¨Ïß¡£
+    // ç›¸äº¤å¹³é¢å¿…é¡»ä»¥Nä¸ºæ³•çº¿ã€‚
     auto center1MinusCenter0 = sphere1.GetCenter() - sphere0.GetCenter();
     auto sqrLen = Vector3ToolsType::GetLengthSquared(center1MinusCenter0);
     auto radius0 = sphere0.GetRadius();
@@ -65,15 +65,15 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::Find()
     auto radiusSumSqr = radiusSum * radiusSum;
     if (radiusSumSqr < sqrLen)
     {
-        // ÇòÌåÊÇ²»Ïà½»µÄ/·ÖÀëµÄ¡£
+        // çƒä½“æ˜¯ä¸ç›¸äº¤çš„/åˆ†ç¦»çš„ã€‚
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
     if (MathType::Approximate(sqrLen, radiusSumSqr))
     {
-        // ÇòÌå¸Õ¸Õ½Ó´¥¡£ µ÷ÓÃÕß±ØĞëµ÷ÓÃGetIntersectionType() ÒÔÈ·¶¨·¢ÉúÁËÄÄÖÖÀàĞÍµÄÏà½»¡£
-        // ÔÚÕâÖÖÇé¿öÏÂ£¬Ó¦¸Ãµ÷ÓÃ GetContactPoint()£¬¶ø²»ÊÇGetCircle()¡£ ½öÔÚµ÷ÓÃÕß²»²âÊÔ½»²æµãÀàĞÍµÄÇé¿öÏÂÉèÖÃÔ²ĞÎ²ÎÊı¡£
+        // çƒä½“åˆšåˆšæ¥è§¦ã€‚ è°ƒç”¨è€…å¿…é¡»è°ƒç”¨GetIntersectionType() ä»¥ç¡®å®šå‘ç”Ÿäº†å“ªç§ç±»å‹çš„ç›¸äº¤ã€‚
+        // åœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œåº”è¯¥è°ƒç”¨ GetContactPoint()ï¼Œè€Œä¸æ˜¯GetCircle()ã€‚ ä»…åœ¨è°ƒç”¨è€…ä¸æµ‹è¯•äº¤å‰ç‚¹ç±»å‹çš„æƒ…å†µä¸‹è®¾ç½®åœ†å½¢å‚æ•°ã€‚
         center1MinusCenter0.Normalize();
         contactPoint = sphere0.GetCenter() + radius0 * center1MinusCenter0;
         circle = Circle3Type{ contactPoint, Vector3Type::GetZero(), Vector3Type::GetZero(), center1MinusCenter0, MathType::GetValue(0) };
@@ -85,9 +85,9 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::Find()
     auto radiusDiffSqr = radiusDiff * radiusDiff;
     if (sqrLen < radiusDiffSqr)
     {
-        /// Ò»¸öÁìÓòÑÏ¸ñ°üº¬ÔÚÁíÒ»¸öÁìÓòÖĞ¡£ µ÷ÓÃÕß±ØĞëµ÷ÓÃ GetIntersectionType()ÒÔÈ·¶¨·¢ÉúÁËÄÄÖÖÀàĞÍµÄÏà½»¡£
-        /// ÔÚÕâÖÖÇé¿öÏÂ£¬²»Ó¦µ÷ÓÃGetCircle()ºÍGetContactPoint()¡£
-        ///  ½öÔÚµ÷ÓÃÕß²»²âÊÔ½»²æµãÀàĞÍµÄÇé¿öÏÂÉèÖÃÔ²ĞÎºÍ½Ó´¥²ÎÊı£¬µ«Ñ¡ÔñÊÇÈÎÒâµÄ¡£
+        /// ä¸€ä¸ªé¢†åŸŸä¸¥æ ¼åŒ…å«åœ¨å¦ä¸€ä¸ªé¢†åŸŸä¸­ã€‚ è°ƒç”¨è€…å¿…é¡»è°ƒç”¨ GetIntersectionType()ä»¥ç¡®å®šå‘ç”Ÿäº†å“ªç§ç±»å‹çš„ç›¸äº¤ã€‚
+        /// åœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œä¸åº”è°ƒç”¨GetCircle()å’ŒGetContactPoint()ã€‚
+        ///  ä»…åœ¨è°ƒç”¨è€…ä¸æµ‹è¯•äº¤å‰ç‚¹ç±»å‹çš„æƒ…å†µä¸‹è®¾ç½®åœ†å½¢å’Œæ¥è§¦å‚æ•°ï¼Œä½†é€‰æ‹©æ˜¯ä»»æ„çš„ã€‚
         center1MinusCenter0.Normalize();
         contactPoint = MathType::GetRational(1, 2) * (sphere0.GetCenter() + sphere1.GetCenter());
         circle = Circle3Type{ contactPoint, Vector3Type::GetZero(), Vector3Type::GetZero(), center1MinusCenter0, MathType::GetValue(0) };
@@ -98,10 +98,10 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::Find()
 
     if (MathType::Approximate(sqrLen, radiusDiffSqr))
     {
-        /// Ò»¸öÇò°üº¬ÔÚÁíÒ»¸öÇòÖĞ£¬µ«Ö»ÓĞÒ»¸ö½Ó´¥µã¡£
-        /// µ÷ÓÃÕß±ØĞëµ÷ÓÃGetIntersectionType()ÒÔÈ·¶¨·¢ÉúÁËÄÄÖÖÀàĞÍµÄÏà½»¡£
-        /// ÔÚÕâÖÖÇé¿öÏÂ£¬Ó¦µ÷ÓÃGetContactPoint()¡£
-        /// ½öÔÚµ÷ÓÃÕß²»²âÊÔ½»²æµãÀàĞÍµÄÇé¿öÏÂÉèÖÃÔ²ĞÎ²ÎÊı¡£
+        /// ä¸€ä¸ªçƒåŒ…å«åœ¨å¦ä¸€ä¸ªçƒä¸­ï¼Œä½†åªæœ‰ä¸€ä¸ªæ¥è§¦ç‚¹ã€‚
+        /// è°ƒç”¨è€…å¿…é¡»è°ƒç”¨GetIntersectionType()ä»¥ç¡®å®šå‘ç”Ÿäº†å“ªç§ç±»å‹çš„ç›¸äº¤ã€‚
+        /// åœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œåº”è°ƒç”¨GetContactPoint()ã€‚
+        /// ä»…åœ¨è°ƒç”¨è€…ä¸æµ‹è¯•äº¤å‰ç‚¹ç±»å‹çš„æƒ…å†µä¸‹è®¾ç½®åœ†å½¢å‚æ•°ã€‚
         center1MinusCenter0.Normalize();
 
         if (radiusDiff <= MathType::GetValue(0))
@@ -120,12 +120,12 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::Find()
         return;
     }
 
-    // ¼ÆËãÏà½»Ô²¾ßÓĞÖĞĞÄµÄt£ºK = C0 + t*(C1 - C0)¡£
+    // è®¡ç®—ç›¸äº¤åœ†å…·æœ‰ä¸­å¿ƒçš„tï¼šK = C0 + t*(C1 - C0)ã€‚
     auto t = MathType::GetRational(1, 2) * (MathType::GetValue(1) + radiusDiff * radiusSum / sqrLen);
 
-    // Ïà½»Ô²µÄÖĞĞÄºÍ°ë¾¶¡£
+    // ç›¸äº¤åœ†çš„ä¸­å¿ƒå’ŒåŠå¾„ã€‚
 
-    // ¼ÆËãÔ²Æ½ÃæµÄN£¬UºÍV¡£
+    // è®¡ç®—åœ†å¹³é¢çš„Nï¼ŒUå’ŒVã€‚
     center1MinusCenter0.Normalize();
 
     const auto Vector3OrthonormalBasis = Vector3ToolsType::GenerateComplementBasis(center1MinusCenter0);
@@ -134,7 +134,7 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::Find()
                       center1MinusCenter0,
                       MathType::Sqrt(MathType::FAbs(radius0 * radius0 - t * t * sqrLen)) };
 
-    // Ïà½»ÊÇÒ»¸öÔ²¡£
+    // ç›¸äº¤æ˜¯ä¸€ä¸ªåœ†ã€‚
     this->SetIntersectionType(IntersectionType::Circle);
 }
 

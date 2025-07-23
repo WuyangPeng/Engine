@@ -1,0 +1,33 @@
+{
+  "helperSuite": {
+
+  },
+
+  "binaryOperationsSuite": {
+
+  },
+
+  "extractionSuite": {
+
+  },
+
+  "filtersSuite": {
+
+  },
+
+  "imagesSuite": {
+
+  },
+
+  "rasterDrawingSuite": {
+
+  },
+
+  "segmentersSuite": {
+
+  },
+
+  "openCVSuite": {
+
+  }
+}

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 15:09)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 15:09)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_TRIANGLE3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_TRIANGLE3_H
@@ -39,15 +39,15 @@ namespace Mathematics
         NODISCARD Segment3Type GetSegment() const noexcept;
         NODISCARD Triangle3Type GetTriangle() const noexcept;
 
-        // ²éÕÒ½»²æµã²éÑ¯¡£ Ïà½»µãÎª P = origin + t * direction = b0 * V0 + b1 * V1 + b2 * V2
+        // æŸ¥æ‰¾äº¤å‰ç‚¹æŸ¥è¯¢ã€‚ ç›¸äº¤ç‚¹ä¸º P = origin + t * direction = b0 * V0 + b1 * V1 + b2 * V2
         NODISCARD Real GetSegmentParameter() const noexcept;
         NODISCARD Real GetTriBary0() const noexcept;
         NODISCARD Real GetTriBary1() const noexcept;
         NODISCARD Real GetTriBary2() const noexcept;
 
-        /// ×¢Òâ£ºÕâĞ©º¯ÊıÖ¼ÔÚÔÚ¶¯Ì¬²éÕÒÏà½»²éÑ¯Ö®ºóµ÷ÓÃ¡£
-        /// ¶ÔÓÚ¡° bool Find()¡±²éÑ¯£¬Äú´òËãÊ¹ÓÃGetSegmentParameter()»òÈı¸öGetTriBary?()º¯Êı×Ô¼º¼ÆËã½Ó´¥µã¡£
-        ///  ÏÖÔÚ£¬ÕâĞ©º¯Êı»¹Ö§³Ö¡°bool Find()¡±²éÑ¯¡£
+        /// æ³¨æ„ï¼šè¿™äº›å‡½æ•°æ—¨åœ¨åœ¨åŠ¨æ€æŸ¥æ‰¾ç›¸äº¤æŸ¥è¯¢ä¹‹åè°ƒç”¨ã€‚
+        /// å¯¹äºâ€œ bool Find()â€æŸ¥è¯¢ï¼Œæ‚¨æ‰“ç®—ä½¿ç”¨GetSegmentParameter()æˆ–ä¸‰ä¸ªGetTriBary?()å‡½æ•°è‡ªå·±è®¡ç®—æ¥è§¦ç‚¹ã€‚
+        ///  ç°åœ¨ï¼Œè¿™äº›å‡½æ•°è¿˜æ”¯æŒâ€œbool Find()â€æŸ¥è¯¢ã€‚
         NODISCARD int GetQuantity() const noexcept;
         NODISCARD Vector3Type GetPoint(int index) const;
 
@@ -57,7 +57,7 @@ namespace Mathematics
         Segment3Type segment;
         Triangle3Type triangle;
 
-        // ÓĞ¹Ø¹Ì¶¨½»¼¯µÄĞÅÏ¢¡£
+        // æœ‰å…³å›ºå®šäº¤é›†çš„ä¿¡æ¯ã€‚
         Real segmentParameter;
         Real triBary0;
         Real triBary1;

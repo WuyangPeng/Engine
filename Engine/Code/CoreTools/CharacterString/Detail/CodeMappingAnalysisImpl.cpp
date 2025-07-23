@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+Ôªø/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-/// ¡™œµ◊˜’ﬂ£∫94458936@qq.com
+/// ‰ΩúËÄÖÔºöÂΩ≠Ê≠¶Èò≥ÔºåÂΩ≠ÊôîÊÅ©ÔºåÂΩ≠ÊôîÊ≥Ω
+/// ËÅîÁ≥ª‰ΩúËÄÖÔºö94458936@qq.com
 ///
-/// ±Í◊º£∫std:c++20
-/// ∞Ê±æ£∫1.0.0.8 (2024/03/29 22:57)
+/// Ê†áÂáÜÔºöstd:c++20
+/// ÁâàÊú¨Ôºö1.0.0.8 (2024/03/29 22:57)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -24,7 +24,7 @@ CoreTools::CodeMappingAnalysisImpl::CodeMappingAnalysisImpl(const std::wstring& 
 CoreTools::CodeMappingAnalysisImpl::CodeMappingAnalysisImpl(std::string fileName)
     : fileName{ std::move(fileName) }, codeMapping{ CodeMapping::Create() }, mainTree{}
 {
-    ASSERT_FAIL_THROW_EXCEPTION(!this->fileName.empty(), SYSTEM_TEXT("Œƒº˛√˚Œ™ø’°£"));
+    ASSERT_FAIL_THROW_EXCEPTION(!this->fileName.empty(), SYSTEM_TEXT("Êñá‰ª∂Âêç‰∏∫Á©∫„ÄÇ"));
 
     Analysis();
 
@@ -72,11 +72,11 @@ void CoreTools::CodeMappingAnalysisImpl::PrintErrorLog(const std::string& codeKe
 {
     LOG_SINGLETON_ENGINE_APPENDER(Error,
                                   CoreTools,
-                                  SYSTEM_TEXT("”≥…‰º¸÷µ£∫"),
+                                  SYSTEM_TEXT("Êò†Â∞ÑÈîÆÂÄºÔºö"),
                                   codeKey,
-                                  SYSTEM_TEXT("£¨¥ÌŒÛ£∫"),
+                                  SYSTEM_TEXT("ÔºåÈîôËØØÔºö"),
                                   error,
-                                  SYSTEM_TEXT("°£"),
+                                  SYSTEM_TEXT("„ÄÇ"),
                                   CoreTools::LogAppenderIOManageSign::TriggerAssert);
 }
 

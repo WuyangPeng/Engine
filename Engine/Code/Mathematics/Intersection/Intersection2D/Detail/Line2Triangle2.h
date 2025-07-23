@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:46)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:46)
 
 #ifndef MATHEMATICS_INTERSECTION_LINE2_TRIANGLE2_H
 #define MATHEMATICS_INTERSECTION_LINE2_TRIANGLE2_H
@@ -16,7 +16,7 @@
 
 namespace Mathematics
 {
-    /// È·¶¨Èý½ÇÐÎºÍÖ±ÏßÈçºÎÏà½»£¨Èç¹ûÓÐµÄ»°£©¡£
+    /// ç¡®å®šä¸‰è§’å½¢å’Œç›´çº¿å¦‚ä½•ç›¸äº¤ï¼ˆå¦‚æžœæœ‰çš„è¯ï¼‰ã€‚
     template <typename Real>
     class Line2Triangle2 final
     {
@@ -33,7 +33,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        // µ±Èý½ÇÐÎÓëÖ±ÏßÏà½»Ê±£¬¼ÆËãÏà½»Ïß¶ÎµÄ²ÎÊý¼ä¸ô¡£
+        // å½“ä¸‰è§’å½¢ä¸Žç›´çº¿ç›¸äº¤æ—¶ï¼Œè®¡ç®—ç›¸äº¤çº¿æ®µçš„å‚æ•°é—´éš”ã€‚
         NODISCARD Vector2Type GetInterval() const;
 
         NODISCARD int GetPositive() const noexcept;

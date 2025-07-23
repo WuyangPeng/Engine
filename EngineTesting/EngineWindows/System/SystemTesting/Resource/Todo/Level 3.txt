@@ -1,7 +1,7 @@
-TODO Level 3
+ï»¿TODO Level 3
 
 1.0.0.7
 
-1.£¨DynamicLinkSuite£©ResourceEnumTesting²âÊÔResourceEnum::MuiÊ§°Ü£¬
-					  ±¨´íÎó£º×ÊÔ´¼ÓÔØÆ÷ÕÒ²»µ½MUIÎÄ¼ş¡£
-					  Ö´ĞĞÕâ¸ö²âÊÔĞèÒªÒ»¸öMUIÎÄ¼ş¡£
+1.ï¼ˆDynamicLinkSuiteï¼‰ResourceEnumTestingæµ‹è¯•ResourceEnum::Muiå¤±è´¥ï¼Œ
+					  æŠ¥é”™è¯¯ï¼šèµ„æºåŠ è½½å™¨æ‰¾ä¸åˆ°MUIæ–‡ä»¶ã€‚
+					  æ‰§è¡Œè¿™ä¸ªæµ‹è¯•éœ€è¦ä¸€ä¸ªMUIæ–‡ä»¶ã€‚

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/05 16:37)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/05 16:37)
 
 #ifndef SYSTEM_DYNAMIC_LINK_LOAD_RESOURCE_TOOLS_USING_H
 #define SYSTEM_DYNAMIC_LINK_LOAD_RESOURCE_TOOLS_USING_H
@@ -21,7 +21,7 @@ namespace System
     using DynamicLinkResource = HRSRC;
     using DynamicLinkGlobal = HGLOBAL;
 
-    /// Ô¤¶¨Òå×ÊÔ´ÀàĞÍ£¬Ö¸ÕëÖ»ÄÜÓÃÀ´´«µİ¸øLoadResourceToolsÖĞ¶¨ÒåµÄº¯Êı£¬Ö¸Õë²»ÄÜ½øĞĞ½âÒıÓÃºÍ´òÓ¡¡£
+    /// é¢„å®šä¹‰èµ„æºç±»å‹ï¼ŒæŒ‡é’ˆåªèƒ½ç”¨æ¥ä¼ é€’ç»™LoadResourceToolsä¸­å®šä¹‰çš„å‡½æ•°ï¼ŒæŒ‡é’ˆä¸èƒ½è¿›è¡Œè§£å¼•ç”¨å’Œæ‰“å°ã€‚
     static const DynamicLinkCharType* predefinedResourceTypesCursor = RT_CURSOR;
     static const DynamicLinkCharType* predefinedResourceTypesBitmap = RT_BITMAP;
     static const DynamicLinkCharType* predefinedResourceTypesIcon = RT_ICON;

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/25 21:53)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/25 21:53)
 
 #include "Rendering/RenderingExport.h"
 
@@ -21,6 +21,9 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/Resources/Flags/DataFormatType.h"
+#include "Mathematics/Algebra/APointDetail.h"
+#include "Mathematics/Algebra/TransformDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, TerrainBase)
 
@@ -59,24 +62,24 @@ void Rendering::TerrainBase::AttachTerrainPage(const std::string& name,
     const auto index = vertexFormat->GetIndex(VertexFormatFlags::Semantic::Position, 0);
     if (index < 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¶¥µã¸ñÊ½Ã»ÓĞSemantic::Position¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("é¡¶ç‚¹æ ¼å¼æ²¡æœ‰Semantic::Positionã€‚"))
     }
 
     if (const auto type = vertexFormat->GetAttributeType(index);
         type != DataFormatType::R32G32B32Float && type != DataFormatType::R32G32B32A32Float)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("²»Ö§³ÖVertexFormatÀàĞÍ¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("ä¸æ”¯æŒVertexFormatç±»å‹ã€‚"))
     }
 
     if (const auto offset = vertexFormat->GetOffset(index);
         offset != 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("VertexFormatÆ«ÒÆÁ¿±ØĞëÎª0¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("VertexFormatåç§»é‡å¿…é¡»ä¸º0ã€‚"))
     }
 
     if (camera == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÉãÏñ»ú±ØĞë´æÔÚ¡£"))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ‘„åƒæœºå¿…é¡»å­˜åœ¨ã€‚"))
     }
 
     for (auto row = 0; row < numRows; ++row)
@@ -225,7 +228,7 @@ Rendering::ConstVisualSharedPtr Rendering::TerrainBase::GetPage(int row, int col
 
     if (impl->GetNumRows() <= row || impl->GetNumColumns() <= column)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("GetPageµÄÊäÈëÎŞĞ§"))
+        THROW_EXCEPTION(SYSTEM_TEXT("GetPageçš„è¾“å…¥æ— æ•ˆ"))
     }
 
     const auto child = GetConstChild(column + impl->GetNumColumns() * row);
@@ -239,7 +242,7 @@ void Rendering::TerrainBase::SetHeights(int row, int column, const HeightsType& 
 
     if (impl->GetNumRows() <= row || impl->GetNumColumns() <= column || boost::numeric_cast<int>(heights.size()) < impl->GetSize() * impl->GetSize())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("SetHeightsµÄÊäÈëÎŞĞ§"))
+        THROW_EXCEPTION(SYSTEM_TEXT("SetHeightsçš„è¾“å…¥æ— æ•ˆ"))
     }
 
     const auto child = GetChild(column + impl->GetNumColumns() * row);
@@ -255,7 +258,7 @@ Rendering::TerrainBase::HeightsType Rendering::TerrainBase::GetHeights(int row, 
 
     if (impl->GetNumRows() <= row || impl->GetNumColumns() <= column)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("GetHeightsµÄÊäÈëÎŞĞ§"))
+        THROW_EXCEPTION(SYSTEM_TEXT("GetHeightsçš„è¾“å…¥æ— æ•ˆ"))
     }
 
     const auto child = GetConstChild(column + impl->GetNumColumns() * row);

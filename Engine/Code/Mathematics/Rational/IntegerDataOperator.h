@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 23:29)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 23:29)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_OPERATOR_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_OPERATOR_H
@@ -20,7 +20,7 @@
 
 namespace Mathematics
 {
-    // NÊÇÄãÏëÒªÔªÕûÊıµÄ32Î»×Ö½ÚµÄÊıÄ¿¡£
+    // Næ˜¯ä½ æƒ³è¦å…ƒæ•´æ•°çš„32ä½å­—èŠ‚çš„æ•°ç›®ã€‚
     template <int N>
     class IntegerDataOperator final
     {
@@ -36,17 +36,17 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        // ËãÊõ¸üĞÂ¡£
+        // ç®—æœ¯æ›´æ–°ã€‚
         IntegerDataOperator& operator+=(const IntegerDataType& rhs);
         IntegerDataOperator& operator-=(const IntegerDataType& rhs);
         IntegerDataOperator& operator*=(const IntegerDataType& rhs);
 
-        // Èç¹ûÒªÍ¬Ê±Çó³öÉÌºÍÓàÊı£¬
-        // Ö±½Óµ÷ÓÃIntegerDataAnalysis::GetDivisionModulo
+        // å¦‚æœè¦åŒæ—¶æ±‚å‡ºå•†å’Œä½™æ•°ï¼Œ
+        // ç›´æ¥è°ƒç”¨IntegerDataAnalysis::GetDivisionModulo
         IntegerDataOperator& operator/=(const IntegerDataType& rhs);
         IntegerDataOperator& operator%=(const IntegerDataType& rhs);
 
-        // ÒÆÎ»¸üĞÂ¡£
+        // ç§»ä½æ›´æ–°ã€‚
         IntegerDataOperator& operator<<=(int shift);
         IntegerDataOperator& operator>>=(int shift);
 

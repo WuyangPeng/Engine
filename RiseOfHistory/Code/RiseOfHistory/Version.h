@@ -1,19 +1,19 @@
-/// Copyright (c) 2010-2025
+ï»¿/// Copyright (c) 2010-2025
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.2.0 (2025/01/03 19:25)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.2.0 (2025/01/03 19:25)
 
 #ifndef RISE_OF_HISTORY_VERSION_H
 #define RISE_OF_HISTORY_VERSION_H
 
-//  gRiseOfHistoryVersion % 100 ÊÇĞŞ¶©°æ±¾ºÅ
-//  gRiseOfHistoryVersion / 100 % 100 ÊÇÄÚ²¿°æ±¾ºÅ
-//  gRiseOfHistoryVersion / 10000 % 100 ÊÇ´Î°æ±¾ºÅ
-//  gRiseOfHistoryVersion / 1000000 % 100 ÊÇÖ÷°æ±¾ºÅ
+//  gRiseOfHistoryVersion % 100 æ˜¯ä¿®è®¢ç‰ˆæœ¬å·
+//  gRiseOfHistoryVersion / 100 % 100 æ˜¯å†…éƒ¨ç‰ˆæœ¬å·
+//  gRiseOfHistoryVersion / 10000 % 100 æ˜¯æ¬¡ç‰ˆæœ¬å·
+//  gRiseOfHistoryVersion / 1000000 % 100 æ˜¯ä¸»ç‰ˆæœ¬å·
 
 constexpr auto gRiseOfHistoryVersion = 1000200;
 

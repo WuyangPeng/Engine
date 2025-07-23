@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:15)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:15)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRAHEDRON3_TETRAHEDRON3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRAHEDRON3_TETRAHEDRON3_DETAIL_H
@@ -54,16 +54,16 @@ Mathematics::Tetrahedron3<Real> Mathematics::StaticFindIntersectorTetrahedron3Te
 template <typename Real>
 void Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>::Find()
 {
-    // ½¨Á¢ËÄÃæÌåµÄÆ½Ãæ¡£
+    // å»ºç«‹å››é¢ä½“çš„å¹³é¢ã€‚
 
     auto plane = tetrahedron0.GetPlanes();
 
-    // Òª¼ôÇĞµÄ³õÊ¼¶ÔÏóÊÇtetrahedron1¡£
+    // è¦å‰ªåˆ‡çš„åˆå§‹å¯¹è±¡æ˜¯tetrahedron1ã€‚
     IntersectionContainer intersection{};
 
     intersection.emplace_back(tetrahedron1);
 
-    // ½«ËÄÃæÌå1¼ôÇĞÔÚËÄÃæÌå0µÄÆ½ÃæÉÏ¡£
+    // å°†å››é¢ä½“1å‰ªåˆ‡åœ¨å››é¢ä½“0çš„å¹³é¢ä¸Šã€‚
     for (auto i = 0; i < 4; ++i)
     {
         IntersectionContainer inside{};
@@ -100,7 +100,7 @@ typename Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>::Inter
     auto result = inside;
     auto tetraCopy = tetra;
 
-    // È·¶¨ËÄÃæÌåµÄµãÎ»ÓÚÆ½ÃæµÄÄÄÒ»²à¡£
+    // ç¡®å®šå››é¢ä½“çš„ç‚¹ä½äºå¹³é¢çš„å“ªä¸€ä¾§ã€‚
     std::array<Real, 4> distance{};
     std::array<int, 4> positiveIndex{};
     std::array<int, 4> negativeIndex{};
@@ -127,22 +127,22 @@ typename Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>::Inter
         }
     }
 
-    // ÎªÁËÊ¹·ÖÁÑ·¢Éú£¬c_iÖ®Ò»±ØĞëÎªÕı£¬Ò»¸öc_i±ØĞëÎª¸º¡£
+    // ä¸ºäº†ä½¿åˆ†è£‚å‘ç”Ÿï¼Œc_iä¹‹ä¸€å¿…é¡»ä¸ºæ­£ï¼Œä¸€ä¸ªc_iå¿…é¡»ä¸ºè´Ÿã€‚
 
     if (negative == 0)
     {
-        // ËÄÃæÌåÍêÈ«Î»ÓÚÆ½ÃæµÄÕı²à£¬ÍêÈ«²Ã¼õ¡£
+        // å››é¢ä½“å®Œå…¨ä½äºå¹³é¢çš„æ­£ä¾§ï¼Œå®Œå…¨è£å‡ã€‚
         return result;
     }
 
     if (positive == 0)
     {
-        // ËÄÃæÌåÍêÈ«ÔÚÆ½ÃæµÄ¸º²à¡£
+        // å››é¢ä½“å®Œå…¨åœ¨å¹³é¢çš„è´Ÿä¾§ã€‚
         result.emplace_back(tetraCopy);
         return result;
     }
 
-    // ËÄÃæÌå±»Æ½Ãæ·Ö¿ª¡£ È·¶¨ÈçºÎ²ğ·ÖÒÔ¼°ÈçºÎ½«¸º¼«²¿·Ö·Ö½âÎªËÄÃæÌå£¨6Àı£©¡£
+    // å››é¢ä½“è¢«å¹³é¢åˆ†å¼€ã€‚ ç¡®å®šå¦‚ä½•æ‹†åˆ†ä»¥åŠå¦‚ä½•å°†è´Ÿæéƒ¨åˆ†åˆ†è§£ä¸ºå››é¢ä½“ï¼ˆ6ä¾‹ï¼‰ã€‚
     std::array<Vector3Type, 4> intp{};
 
     if (positive == 3)

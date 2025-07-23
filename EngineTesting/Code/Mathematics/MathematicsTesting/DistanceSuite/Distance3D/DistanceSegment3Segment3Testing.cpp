@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.12 (2023/06/09 15:46)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“æµ‹è¯•ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/09 15:46)
 
 #include "DistanceSegment3Segment3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -127,7 +127,7 @@ void Mathematics::DistanceSegment3Segment3Testing::StaticTest()
 
         if (lhsLength <= lhsExtent && rhsLength <= rhsExtent)
         {
-            // ×îĞ¡ÖµÎªÁ½¸öÏß¶ÎÄÚ²¿µã¡£
+            // æœ€å°å€¼ä¸ºä¸¤ä¸ªçº¿æ®µå†…éƒ¨ç‚¹ã€‚
             Vector3D lhsDifference2 = squaredResult.GetLhsClosestPoint() - lhsOrigin;
             Vector3D rhsDifference2 = squaredResult.GetRhsClosestPoint() - rhsOrigin;
             const double lhsLength2 = Vector3ToolsD::GetLength(lhsDifference2);
@@ -154,7 +154,7 @@ void Mathematics::DistanceSegment3Segment3Testing::StaticTest()
         else if (lhsLength <= lhsExtent && rhsExtent < rhsLength &&
                  Vector3ToolsD::Approximate(rhsDifference, rhsDirection, 1e-8))
         {
-            // ×î½üµãÔÚlhsÉÏÄ³¸öµãºÍrhsÖÕµã
+            // æœ€è¿‘ç‚¹åœ¨lhsä¸ŠæŸä¸ªç‚¹å’Œrhsç»ˆç‚¹
             ASSERT_APPROXIMATE(squaredResult.GetDistance(),
                                Vector3ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() - distance.GetRhsSegment().GetEndPoint()),
                                1e-10);
@@ -173,7 +173,7 @@ void Mathematics::DistanceSegment3Segment3Testing::StaticTest()
         else if (lhsLength <= lhsExtent && rhsExtent < rhsLength &&
                  Vector3ToolsD::Approximate(rhsDifference, -rhsDirection, 1e-8))
         {
-            // ×î½üµãÔÚlhsÉÏÄ³¸öµãºÍrhsÆğÊ¼µã
+            // æœ€è¿‘ç‚¹åœ¨lhsä¸ŠæŸä¸ªç‚¹å’Œrhsèµ·å§‹ç‚¹
             ASSERT_APPROXIMATE(squaredResult.GetDistance(),
                                Vector3ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() - distance.GetRhsSegment().GetBeginPoint()),
                                1e-10);
@@ -192,7 +192,7 @@ void Mathematics::DistanceSegment3Segment3Testing::StaticTest()
         else if (rhsLength <= rhsExtent && lhsExtent < lhsLength &&
                  Vector3ToolsD::Approximate(lhsDifference, lhsDirection, 1e-8))
         {
-            // ×î½üµãÔÚrhsÉÏÄ³¸öµãºÍlhsÖÕµã
+            // æœ€è¿‘ç‚¹åœ¨rhsä¸ŠæŸä¸ªç‚¹å’Œlhsç»ˆç‚¹
             ASSERT_APPROXIMATE(squaredResult.GetDistance(),
                                Vector3ToolsD::GetLengthSquared(squaredResult.GetRhsClosestPoint() - distance.GetLhsSegment().GetEndPoint()),
                                1e-10);
@@ -211,7 +211,7 @@ void Mathematics::DistanceSegment3Segment3Testing::StaticTest()
         else if (rhsLength <= rhsExtent && lhsExtent < lhsLength &&
                  Vector3ToolsD::Approximate(lhsDifference, -lhsDirection, 1e-8))
         {
-            // ×î½üµãÔÚrhsÉÏÄ³¸öµãºÍlhsÆğµã
+            // æœ€è¿‘ç‚¹åœ¨rhsä¸ŠæŸä¸ªç‚¹å’Œlhsèµ·ç‚¹
             ASSERT_APPROXIMATE(squaredResult.GetDistance(),
                                Vector3ToolsD::GetLengthSquared(squaredResult.GetRhsClosestPoint() - distance.GetLhsSegment().GetBeginPoint()),
                                1e-10);
@@ -392,7 +392,7 @@ void Mathematics::DistanceSegment3Segment3Testing::DynamicTest()
 
         if (lhsLength <= lhsExtent && rhsLength <= rhsExtent)
         {
-            // ×îĞ¡ÖµÎªÁ½¸öÏß¶ÎÄÚ²¿µã¡£
+            // æœ€å°å€¼ä¸ºä¸¤ä¸ªçº¿æ®µå†…éƒ¨ç‚¹ã€‚
             Vector3D lhsDifference2 = squaredResult.GetLhsClosestPoint() - (lhsOrigin + t * lhsVelocity);
             Vector3D rhsDifference2 = squaredResult.GetRhsClosestPoint() - (rhsOrigin + t * rhsVelocity);
             const double lhsLength2 = Vector3ToolsD::GetLength(lhsDifference2);
@@ -419,7 +419,7 @@ void Mathematics::DistanceSegment3Segment3Testing::DynamicTest()
         else if (lhsLength <= lhsExtent && rhsExtent < rhsLength &&
                  Vector3ToolsD::Approximate(rhsDifference, rhsDirection, 1e-8))
         {
-            // ×î½üµãÔÚlhsÉÏÄ³¸öµãºÍrhsÖÕµã
+            // æœ€è¿‘ç‚¹åœ¨lhsä¸ŠæŸä¸ªç‚¹å’Œrhsç»ˆç‚¹
             ASSERT_APPROXIMATE(squaredResult.GetDistance(),
                                Vector3ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() - (distance.GetRhsSegment().GetEndPoint() + t * rhsVelocity)),
                                1e-10);
@@ -438,7 +438,7 @@ void Mathematics::DistanceSegment3Segment3Testing::DynamicTest()
         else if (lhsLength <= lhsExtent && rhsExtent < rhsLength &&
                  Vector3ToolsD::Approximate(rhsDifference, -rhsDirection, 1e-8))
         {
-            // ×î½üµãÔÚlhsÉÏÄ³¸öµãºÍrhsÆğÊ¼µã
+            // æœ€è¿‘ç‚¹åœ¨lhsä¸ŠæŸä¸ªç‚¹å’Œrhsèµ·å§‹ç‚¹
             ASSERT_APPROXIMATE(squaredResult.GetDistance(),
                                Vector3ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() - (distance.GetRhsSegment().GetBeginPoint() + t * rhsVelocity)),
                                1e-10);
@@ -457,7 +457,7 @@ void Mathematics::DistanceSegment3Segment3Testing::DynamicTest()
         else if (rhsLength <= rhsExtent && lhsExtent < lhsLength &&
                  Vector3ToolsD::Approximate(lhsDifference, lhsDirection, 1e-8))
         {
-            // ×î½üµãÔÚrhsÉÏÄ³¸öµãºÍlhsÖÕµã
+            // æœ€è¿‘ç‚¹åœ¨rhsä¸ŠæŸä¸ªç‚¹å’Œlhsç»ˆç‚¹
             ASSERT_APPROXIMATE(squaredResult.GetDistance(),
                                Vector3ToolsD::GetLengthSquared(squaredResult.GetRhsClosestPoint() - distance.GetLhsSegment().GetEndPoint() - t * lhsVelocity),
                                1e-10);
@@ -476,7 +476,7 @@ void Mathematics::DistanceSegment3Segment3Testing::DynamicTest()
         else if (rhsLength <= rhsExtent && lhsExtent < lhsLength &&
                  Vector3ToolsD::Approximate(lhsDifference, -lhsDirection, 1e-8))
         {
-            // ×î½üµãÔÚrhsÉÏÄ³¸öµãºÍlhsÆğµã
+            // æœ€è¿‘ç‚¹åœ¨rhsä¸ŠæŸä¸ªç‚¹å’Œlhsèµ·ç‚¹
             ASSERT_APPROXIMATE(squaredResult.GetDistance(),
                                Vector3ToolsD::GetLengthSquared(squaredResult.GetRhsClosestPoint() - (distance.GetLhsSegment().GetBeginPoint() + t * lhsVelocity)),
                                1e-10);

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 14:15)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 14:15)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRIANGLE3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRIANGLE3_TRIANGLE3_DETAIL_H
@@ -41,21 +41,21 @@ Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::StaticFindIntersecto
 template <typename Real>
 void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::Find()
 {
-    // »ñÈ¡m_LhsTriangleµÄÆ½Ãæ
+    // è·å–m_LhsTriangleçš„å¹³é¢
     const Plane3Type lhsPlane0{ triangle0 };
 
-    // ¼ÆËãÈı½ÇĞÎm_RhsTriangle¶¥µãµ½Æ½ÃælhsPlane0µÄÓĞ·ûºÅ¾àÀë¡£Ê¹ÓÃepsilon-thick²âÊÔ¡£
+    // è®¡ç®—ä¸‰è§’å½¢m_RhsTriangleé¡¶ç‚¹åˆ°å¹³é¢lhsPlane0çš„æœ‰ç¬¦å·è·ç¦»ã€‚ä½¿ç”¨epsilon-thickæµ‹è¯•ã€‚
     const TrianglePlaneRelations<Real> rhsTrianglePlaneRelations{ triangle1, lhsPlane0, this->GetEpsilon() };
 
     if (rhsTrianglePlaneRelations.GetPositive() == 3 || rhsTrianglePlaneRelations.GetNegative() == 3)
     {
-        // Èı½ÇĞÎm_RhsTriangleÍêÈ«ÔÚÆ½ÃælhsPlaneµÄÒ»²à¡£
+        // ä¸‰è§’å½¢m_RhsTriangleå®Œå…¨åœ¨å¹³é¢lhsPlaneçš„ä¸€ä¾§ã€‚
         return;
     }
 
     if (rhsTrianglePlaneRelations.GetZero() == 3)
     {
-        // Èı½ÇĞÎm_RhsTriangleÓÉÆ½ÃælhsPlane°üº¬¡£
+        // ä¸‰è§’å½¢m_RhsTriangleç”±å¹³é¢lhsPlaneåŒ…å«ã€‚
         if (reportCoplanarIntersections)
         {
             GetCoplanarIntersection(lhsPlane0, triangle0, triangle1);
@@ -64,12 +64,12 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::Find()
         return;
     }
 
-    // ¼ì²éÈı½ÇĞÎm_RhsTriangleºÍÆ½ÃælhsPlaneÖ®¼äµÄ½Ó´¥¡£
+    // æ£€æŸ¥ä¸‰è§’å½¢m_RhsTriangleå’Œå¹³é¢lhsPlaneä¹‹é—´çš„æ¥è§¦ã€‚
     if (rhsTrianglePlaneRelations.GetPositive() == 0 || rhsTrianglePlaneRelations.GetNegative() == 0)
     {
         if (rhsTrianglePlaneRelations.GetZero() == 2)
         {
-            // Èı½ÇĞÎm_RhsTriangleµÄ±ßÔÚÆ½ÃælhsPlaneÖĞ¡£
+            // ä¸‰è§’å½¢m_RhsTriangleçš„è¾¹åœ¨å¹³é¢lhsPlaneä¸­ã€‚
             for (auto i = 0; i < 3; ++i)
             {
                 if (rhsTrianglePlaneRelations.GetSign(i) != NumericalValueSymbol::Zero)
@@ -83,9 +83,9 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::Find()
         }
         else
         {
-            MATHEMATICS_ASSERTION_2(rhsTrianglePlaneRelations.GetZero() == 1, "Èı½ÇĞÎºÍÆ½Ãæ½Ó´¥¼ÆËã´íÎó£¡");
+            MATHEMATICS_ASSERTION_2(rhsTrianglePlaneRelations.GetZero() == 1, "ä¸‰è§’å½¢å’Œå¹³é¢æ¥è§¦è®¡ç®—é”™è¯¯ï¼");
 
-            // Èı½ÇĞÎm_RhsTriangleµÄ¶¥µãÔÚÆ½ÃælhsPlaneÖĞ¡£
+            // ä¸‰è§’å½¢m_RhsTriangleçš„é¡¶ç‚¹åœ¨å¹³é¢lhsPlaneä¸­ã€‚
             for (auto i = 0; i < 3; ++i)
             {
                 if (rhsTrianglePlaneRelations.GetSign(i) == NumericalValueSymbol::Zero)
@@ -97,8 +97,8 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::Find()
         }
     }
 
-    // ´ËÊ±£¬Èı½ÇĞÎm_RhsTriangleºáÏòÓëÆ½ÃælhsPlaneÏà½»¡£¼ÆËã½»µãµÄÏß¶Î¡£
-    // È»ºó²âÊÔÕâ¸öÏß¶ÎºÍÈı½ÇĞÎm_LhsTriangleÖ®¼äµÄ½»¼¯¡£
+    // æ­¤æ—¶ï¼Œä¸‰è§’å½¢m_RhsTriangleæ¨ªå‘ä¸å¹³é¢lhsPlaneç›¸äº¤ã€‚è®¡ç®—äº¤ç‚¹çš„çº¿æ®µã€‚
+    // ç„¶åæµ‹è¯•è¿™ä¸ªçº¿æ®µå’Œä¸‰è§’å½¢m_LhsTriangleä¹‹é—´çš„äº¤é›†ã€‚
     if (rhsTrianglePlaneRelations.GetZero() == 0)
     {
         const auto sign = (rhsTrianglePlaneRelations.GetPositive() == 1 ? NumericalValueSymbol::Positive : NumericalValueSymbol::Negative);
@@ -132,7 +132,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::Find()
         }
     }
 
-    MATHEMATICS_ASSERTION_2(false, "Âß¼­²»Ó¦¸ÃÖ´ĞĞµ½ÕâÀï£¡\n");
+    MATHEMATICS_ASSERTION_2(false, "é€»è¾‘ä¸åº”è¯¥æ‰§è¡Œåˆ°è¿™é‡Œï¼\n");
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -183,34 +183,34 @@ Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorTriangle3Triangle3<
 template <typename Real>
 void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::ContainsPoint(const Triangle3Type& triangle, const Plane3Type& plane, const Vector3Type& vector3)
 {
-    /// Éú³ÉÆ½ÃæµÄ×ø±êÏµ¡£ ´«ÈëÈı½ÇĞÎµÄ¶¥µãÎª<V0,V1,V2>¡£
-    /// ÊäÈëÆ½ÃæµÄµ¥Î»³¤¶È·¨ÏòÎªN£¬ÊäÈëµãÎªP¡£Ñ¡ÔñV0×÷ÎªÆ½ÃæµÄÔ­µã¡£ ×ø±êÖá·½ÏòÊÇÁ½¸öµ¥Î»³¤¶ÈÏòÁ¿U0ºÍU1£¬
-    /// ¹¹ÔìÎª{ U0£¬U1£¬N } ÊÇÒ»¸öÕı½»¼¯¡£ Æ½ÃæÖĞµÄÈÎºÎµãQ¾ù¿ÉĞ´ÎªQ = V0 + x0 * U0 + x1 * U1¡£
-    ///  ×ø±ê¼ÆËãÎªx0 = Dot(U0,Q - V0)ºÍx1 = Dot(U1,Q - V0)¡£
+    /// ç”Ÿæˆå¹³é¢çš„åæ ‡ç³»ã€‚ ä¼ å…¥ä¸‰è§’å½¢çš„é¡¶ç‚¹ä¸º<V0,V1,V2>ã€‚
+    /// è¾“å…¥å¹³é¢çš„å•ä½é•¿åº¦æ³•å‘ä¸ºNï¼Œè¾“å…¥ç‚¹ä¸ºPã€‚é€‰æ‹©V0ä½œä¸ºå¹³é¢çš„åŸç‚¹ã€‚ åæ ‡è½´æ–¹å‘æ˜¯ä¸¤ä¸ªå•ä½é•¿åº¦å‘é‡U0å’ŒU1ï¼Œ
+    /// æ„é€ ä¸º{ U0ï¼ŒU1ï¼ŒN } æ˜¯ä¸€ä¸ªæ­£äº¤é›†ã€‚ å¹³é¢ä¸­çš„ä»»ä½•ç‚¹Qå‡å¯å†™ä¸ºQ = V0 + x0 * U0 + x1 * U1ã€‚
+    ///  åæ ‡è®¡ç®—ä¸ºx0 = Dot(U0,Q - V0)å’Œx1 = Dot(U1,Q - V0)ã€‚
 
     const auto vector3OrthonormalBasis = Vector3ToolsType::GenerateComplementBasis(plane.GetNormal());
     const auto uVector = vector3OrthonormalBasis.GetUVector();
     const auto vVector = vector3OrthonormalBasis.GetVVector();
 
-    /// ¼ÆËãµãP£¬V1ºÍV2µÄÆ½Ãæ×ø±ê¡£ Îª¼ò»¯Æğ¼û£¬´ÓÕâĞ©µãÖĞ¼õÈ¥Ô­µã£¬ÔÚÕâÖÖÇé¿öÏÂ£¬Æ½Ãæ×ø±êÊÊÓÃÓÚP - V0£¬V1 - V0ºÍV2 - V0¡£
+    /// è®¡ç®—ç‚¹Pï¼ŒV1å’ŒV2çš„å¹³é¢åæ ‡ã€‚ ä¸ºç®€åŒ–èµ·è§ï¼Œä»è¿™äº›ç‚¹ä¸­å‡å»åŸç‚¹ï¼Œåœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œå¹³é¢åæ ‡é€‚ç”¨äºP - V0ï¼ŒV1 - V0å’ŒV2 - V0ã€‚
     auto pointMinusVertex0 = vector3 - triangle.GetVertex(0);
     auto vertex1MinusVertex0 = triangle.GetVertex(1) - triangle.GetVertex(0);
     auto vertex2MinusVertex0 = triangle.GetVertex(2) - triangle.GetVertex(0);
 
-    // P - V0µÄÆ½Ãæ±íÊ¾¡£.
+    // P - V0çš„å¹³é¢è¡¨ç¤ºã€‚.
     const Vector2<Real> planar{ Vector3ToolsType::DotProduct(uVector, pointMinusVertex0), Vector3ToolsType::DotProduct(vVector, pointMinusVertex0) };
 
     using Triangle = std::vector<Vector2<Real>>;
 
-    /// Èı½ÇĞÎ<V0-V0,V1-V0,V2-V0>µÄÆ½Ãæ±íÊ¾¡£
+    /// ä¸‰è§’å½¢<V0-V0,V1-V0,V2-V0>çš„å¹³é¢è¡¨ç¤ºã€‚
     Triangle triangleVector{ Vector2<Real>::GetZero(),
                              Vector2<Real>{ Vector3ToolsType::DotProduct(uVector, vertex1MinusVertex0), Vector3ToolsType::DotProduct(vVector, vertex1MinusVertex0) },
                              Vector2<Real>{ Vector3ToolsType::DotProduct(uVector, vertex2MinusVertex0), Vector3ToolsType::DotProduct(vVector, vertex2MinusVertex0) } };
 
-    /// ²âÊÔP-V0ÊÇ·ñÔÚÈı½ÇĞÎ<0,V1-V0,V2-V0>ÖĞ¡£
+    /// æµ‹è¯•P-V0æ˜¯å¦åœ¨ä¸‰è§’å½¢<0,V1-V0,V2-V0>ä¸­ã€‚
     if (Query2<Real>{ triangleVector }.ToTriangle(planar, 0, 1, 2) != TriangleQueryType::Outside)
     {
-        // Ïòµ÷ÓÃÕß±¨¸æ½»²æµã¡£
+        // å‘è°ƒç”¨è€…æŠ¥å‘Šäº¤å‰ç‚¹ã€‚
         this->SetIntersectionType(IntersectionType::Point);
         point.emplace_back(vector3);
     }
@@ -219,9 +219,9 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::ContainsPoint(c
 template <typename Real>
 void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegment(const Plane3Type& plane, const Triangle3Type& triangle, const Vector3Type& end0, const Vector3Type& end1)
 {
-    /// ¼ÆËãÈı½ÇĞÎ¶¥µãµÄ¶şÎ¬±íÊ¾ÒÔ¼°Ïà¶ÔÓÚÈı½ÇĞÎÆ½ÃæµÄÏß¶Î¶Ëµã¡£ È»ºó¼ÆËã2D¿Õ¼äÖĞµÄ½»µã¡£
+    /// è®¡ç®—ä¸‰è§’å½¢é¡¶ç‚¹çš„äºŒç»´è¡¨ç¤ºä»¥åŠç›¸å¯¹äºä¸‰è§’å½¢å¹³é¢çš„çº¿æ®µç«¯ç‚¹ã€‚ ç„¶åè®¡ç®—2Dç©ºé—´ä¸­çš„äº¤ç‚¹ã€‚
 
-    /// ½«Èı½ÇĞÎÍ¶Ó°µ½ÓëÆ½Ãæ·¨Ïß×î¶ÔÆëµÄ×ø±êÆ½ÃæÉÏ¡£
+    /// å°†ä¸‰è§’å½¢æŠ•å½±åˆ°ä¸å¹³é¢æ³•çº¿æœ€å¯¹é½çš„åæ ‡å¹³é¢ä¸Šã€‚
     auto maxNormal = 0;
     auto x = MathType::FAbs(plane.GetNormal().GetX());
     auto y = MathType::FAbs(plane.GetNormal().GetY());
@@ -245,7 +245,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegme
 
     if (maxNormal == 0)
     {
-        // Í¶Ó°µ½yzÆ½ÃæÉÏ¡£
+        // æŠ•å½±åˆ°yzå¹³é¢ä¸Šã€‚
         for (auto i = 0; i < 3; ++i)
         {
             projectTriangleVector.at(i).SetX(triangle.GetVertex(i).GetY());
@@ -258,7 +258,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegme
     }
     else if (maxNormal == 1)
     {
-        // Í¶Ó°µ½xzÆ½ÃæÉÏ¡£
+        // æŠ•å½±åˆ°xzå¹³é¢ä¸Šã€‚
         for (auto i = 0; i < 3; ++i)
         {
             projectTriangleVector.at(i).SetX(triangle.GetVertex(i).GetX());
@@ -271,7 +271,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegme
     }
     else
     {
-        // Í¶Ó°µ½xyÆ½ÃæÉÏ¡£
+        // æŠ•å½±åˆ°xyå¹³é¢ä¸Šã€‚
         for (auto i = 0; i < 3; ++i)
         {
             projectTriangleVector.at(i).SetX(triangle.GetVertex(i).GetX());
@@ -304,13 +304,13 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegme
     }
     else
     {
-        MATHEMATICS_ASSERTION_0(calc.GetIntersectionType() == IntersectionType::Point, "½»²æµã±ØĞëÊÇµã\n");
+        MATHEMATICS_ASSERTION_0(calc.GetIntersectionType() == IntersectionType::Point, "äº¤å‰ç‚¹å¿…é¡»æ˜¯ç‚¹\n");
         this->SetIntersectionType(IntersectionType::Point);
 
         intersector.at(0) = calc.GetPoint(0);
     }
 
-    // È¡ÏûÍ¶Ó°Ïà½»Ïß¶Î¡£
+    // å–æ¶ˆæŠ•å½±ç›¸äº¤çº¿æ®µã€‚
     if (maxNormal == 0)
     {
         Real invNormalX = (MathType::GetValue(1)) / plane.GetNormal().GetX();
@@ -352,7 +352,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegme
 template <typename Real>
 void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetCoplanarIntersection(const Plane3Type& plane, const Triangle3Type& lhsTriangle, const Triangle3Type& rhsTriangle)
 {
-    // ÔÚÓëÆ½Ãæ·¨Ïß×î¶ÔÆëµÄ×ø±êÆ½ÃæÉÏÍ¶Ó°Èı½ÇĞÎ¡£
+    // åœ¨ä¸å¹³é¢æ³•çº¿æœ€å¯¹é½çš„åæ ‡å¹³é¢ä¸ŠæŠ•å½±ä¸‰è§’å½¢ã€‚
     auto maxNormal = 0;
     auto x = MathType::FAbs(plane.GetNormal().GetX());
     auto y = MathType::FAbs(plane.GetNormal().GetY());
@@ -374,7 +374,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInte
 
     if (maxNormal == 0)
     {
-        // Í¶Ó°µ½yzÆ½ÃæÉÏ¡£
+        // æŠ•å½±åˆ°yzå¹³é¢ä¸Šã€‚
         for (auto i = 0; i < 3; ++i)
         {
             projectTriangle0Vector.at(i).SetCoordinate(lhsTriangle.GetVertex(i).GetY(), lhsTriangle.GetVertex(i).GetZ());
@@ -383,7 +383,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInte
     }
     else if (maxNormal == 1)
     {
-        // Í¶Ó°µ½xzÆ½ÃæÉÏ¡£
+        // æŠ•å½±åˆ°xzå¹³é¢ä¸Šã€‚
         for (auto i = 0; i < 3; ++i)
         {
             projectTriangle0Vector.at(i).SetCoordinate(lhsTriangle.GetVertex(i).GetX(), lhsTriangle.GetVertex(i).GetZ());
@@ -392,7 +392,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInte
     }
     else
     {
-        // Í¶Ó°µ½xyÆ½ÃæÉÏ¡£
+        // æŠ•å½±åˆ°xyå¹³é¢ä¸Šã€‚
         for (auto i = 0; i < 3; ++i)
         {
             projectTriangle0Vector.at(i).SetCoordinate(lhsTriangle.GetVertex(i).GetX(), lhsTriangle.GetVertex(i).GetY());
@@ -403,13 +403,13 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInte
     Triangle2<Real> projectTriangle0{ projectTriangle0Vector.at(0), projectTriangle0Vector.at(1), projectTriangle0Vector.at(2) };
     Triangle2<Real> projectTriangle1{ projectTriangle1Vector.at(0), projectTriangle1Vector.at(1), projectTriangle1Vector.at(2) };
 
-    // 2DÈı½ÇĞÎÏà½»Àı³ÌĞèÒªÄæÊ±ÕëÅÅĞò¡£
+    // 2Dä¸‰è§’å½¢ç›¸äº¤ä¾‹ç¨‹éœ€è¦é€†æ—¶é’ˆæ’åºã€‚
 
     auto edge0 = projectTriangle0.GetVertex(1) - projectTriangle0.GetVertex(0);
     auto edge1 = projectTriangle0.GetVertex(2) - projectTriangle0.GetVertex(0);
     if (Vector2Tools<Real>::DotPerp(edge0, edge1) < MathType::GetValue(0))
     {
-        // Èı½ÇĞÎÊÇË³Ê±Õë·½Ïò£¬ÇëÖØĞÂÅÅĞò¡£
+        // ä¸‰è§’å½¢æ˜¯é¡ºæ—¶é’ˆæ–¹å‘ï¼Œè¯·é‡æ–°æ’åºã€‚
         projectTriangle0 = Triangle2<Real>{ projectTriangle0Vector.at(0), projectTriangle0Vector.at(2), projectTriangle0Vector.at(1) };
     }
 
@@ -417,7 +417,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInte
     edge1 = projectTriangle1.GetVertex(2) - projectTriangle1.GetVertex(0);
     if (Vector2Tools<Real>::DotPerp(edge0, edge1) < MathType::GetValue(0))
     {
-        // Èı½ÇĞÎÊÇË³Ê±Õë·½Ïò£¬ÇëÖØĞÂÅÅĞò¡£
+        // ä¸‰è§’å½¢æ˜¯é¡ºæ—¶é’ˆæ–¹å‘ï¼Œè¯·é‡æ–°æ’åºã€‚
         projectTriangle1 = Triangle2<Real>{ projectTriangle1Vector.at(0), projectTriangle1Vector.at(2), projectTriangle1Vector.at(1) };
     }
 
@@ -427,7 +427,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInte
         return;
     }
 
-    // ½«2D½»µãÓ³Éä»Ø3DÈı½ÇĞÎ¿Õ¼ä¡£
+    // å°†2Däº¤ç‚¹æ˜ å°„å›3Dä¸‰è§’å½¢ç©ºé—´ã€‚
     const auto quantity = intr.GetQuantity();
     if (maxNormal == 0)
     {

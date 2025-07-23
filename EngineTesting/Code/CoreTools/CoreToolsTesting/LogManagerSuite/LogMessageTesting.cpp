@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.9 (2024/05/11 14:40)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.9 (2024/05/11 14:40)
 
 #include "LogMessageTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -49,7 +49,7 @@ void CoreTools::LogMessageTesting::MainTest()
 void CoreTools::LogMessageTesting::LogLevelTest()
 {
     LogMessage message{ LogLevel::Error, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
-    message << SYSTEM_TEXT("Å×³öÒì³££¡"s);
+    message << SYSTEM_TEXT("æŠ›å‡ºå¼‚å¸¸ï¼"s);
 
     ASSERT_EQUAL(message.GetLogLevel(), LogLevel::Error);
     ASSERT_FALSE(message.IsDisabled());
@@ -58,7 +58,7 @@ void CoreTools::LogMessageTesting::LogLevelTest()
 void CoreTools::LogMessageTesting::LogFilterTest()
 {
     LogMessage message{ LogLevel::Fatal, LogFilter::Rendering, CORE_TOOLS_FUNCTION_DESCRIBED };
-    message << SYSTEM_TEXT("Í¼ÏñäÖÈ¾Ê§°Ü£¡"s);
+    message << SYSTEM_TEXT("å›¾åƒæ¸²æŸ“å¤±è´¥ï¼"s);
 
     ASSERT_EQUAL(message.GetLogFilterType(), LogFilter::Rendering);
     ASSERT_FALSE(message.IsDisabled());
@@ -66,7 +66,7 @@ void CoreTools::LogMessageTesting::LogFilterTest()
 
 void CoreTools::LogMessageTesting::MessageTest()
 {
-    const auto error = SYSTEM_TEXT("Á¬½Ó²»ÉÏÍøÂç£¡"s);
+    const auto error = SYSTEM_TEXT("è¿æ¥ä¸ä¸Šç½‘ç»œï¼"s);
     const auto functionDescribed = CORE_TOOLS_FUNCTION_DESCRIBED;
 
     LogMessage message{ LogLevel::Warn, LogFilter::Network, functionDescribed };
@@ -200,7 +200,7 @@ CoreTools::LogMessage CoreTools::LogMessageTesting::GetIntegerLogMessage()
 void CoreTools::LogMessageTesting::IsDisabledTest()
 {
     LogMessage message{ LogLevel::Disabled, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
-    message << SYSTEM_TEXT("Å×³öÒì³££¡"s);
+    message << SYSTEM_TEXT("æŠ›å‡ºå¼‚å¸¸ï¼"s);
 
     ASSERT_TRUE(message.IsDisabled());
 }

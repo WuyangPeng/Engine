@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.2 (2023/07/24 16:11)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.2 (2023/07/24 16:11)
 
 #include "Rendering/RenderingExport.h"
 
@@ -75,7 +75,7 @@ int Rendering::PointControllerImpl::GetNumPoints() const noexcept
 float Rendering::PointControllerImpl::GetPointLinearSpeed(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numPoints, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numPoints, "ç´¢å¼•é”™è¯¯ï¼");
 
     return pointLinearSpeeds.at(index);
 }
@@ -83,7 +83,7 @@ float Rendering::PointControllerImpl::GetPointLinearSpeed(int index) const
 float Rendering::PointControllerImpl::GetPointAngularSpeed(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numPoints, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numPoints, "ç´¢å¼•é”™è¯¯ï¼");
 
     return pointAngularSpeeds.at(index);
 }
@@ -91,7 +91,7 @@ float Rendering::PointControllerImpl::GetPointAngularSpeed(int index) const
 Rendering::PointControllerImpl::AVector Rendering::PointControllerImpl::GetPointLinearAxis(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numPoints, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numPoints, "ç´¢å¼•é”™è¯¯ï¼");
 
     return pointLinearAxes.at(index);
 }
@@ -99,7 +99,7 @@ Rendering::PointControllerImpl::AVector Rendering::PointControllerImpl::GetPoint
 Rendering::PointControllerImpl::AVector Rendering::PointControllerImpl::GetPointAngularAxis(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numPoints, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numPoints, "ç´¢å¼•é”™è¯¯ï¼");
 
     return pointAngularAxes.at(index);
 }
@@ -107,7 +107,7 @@ Rendering::PointControllerImpl::AVector Rendering::PointControllerImpl::GetPoint
 void Rendering::PointControllerImpl::SetPointLinearSpeed(int index, float pointLinearSpeed)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numPoints, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numPoints, "ç´¢å¼•é”™è¯¯ï¼");
 
     pointLinearSpeeds.at(index) = pointLinearSpeed;
 }
@@ -115,7 +115,7 @@ void Rendering::PointControllerImpl::SetPointLinearSpeed(int index, float pointL
 void Rendering::PointControllerImpl::SetPointAngularSpeed(int index, float pointAngularSpeed)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numPoints, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numPoints, "ç´¢å¼•é”™è¯¯ï¼");
 
     pointAngularSpeeds.at(index) = pointAngularSpeed;
 }
@@ -123,7 +123,7 @@ void Rendering::PointControllerImpl::SetPointAngularSpeed(int index, float point
 void Rendering::PointControllerImpl::SetPointLinearAxis(int index, const AVector& pointLinearAxis)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numPoints, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numPoints, "ç´¢å¼•é”™è¯¯ï¼");
 
     pointLinearAxes.at(index) = pointLinearAxis;
 }
@@ -131,7 +131,7 @@ void Rendering::PointControllerImpl::SetPointLinearAxis(int index, const AVector
 void Rendering::PointControllerImpl::SetPointAngularAxis(int index, const AVector& pointAngularAxis)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numPoints, "Ë÷Òı´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < numPoints, "ç´¢å¼•é”™è¯¯ï¼");
 
     pointAngularAxes.at(index) = pointAngularAxis;
 }

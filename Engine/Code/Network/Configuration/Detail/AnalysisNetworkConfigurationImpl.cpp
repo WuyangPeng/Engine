@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.4 (2024/01/11 17:20)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.4 (2024/01/11 17:20)
 
 #include "Network/NetworkExport.h"
 
@@ -51,7 +51,7 @@ void Network::AnalysisNetworkConfigurationImpl::AnalysisMain()
         }
         catch (const CoreTools::Error& error)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("ÍøÂç²ßÂÔ"), tree.first, SYSTEM_TEXT("ÅäÖÃÖµ´íÎó£º"), error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("ç½‘ç»œç­–ç•¥"), tree.first, SYSTEM_TEXT("é…ç½®å€¼é”™è¯¯ï¼š"), error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
 }
@@ -75,7 +75,7 @@ void Network::AnalysisNetworkConfigurationImpl::InsertStrategy(const String& nam
     if ((client == ClientStrategy::Disable && server == ServerStrategy::Disable) ||
         (client != ClientStrategy::Disable && server != ServerStrategy::Disable))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("·şÎñÆ÷ºÍ¿Í»§¶Ë²ßÂÔÎŞĞ§¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æœåŠ¡å™¨å’Œå®¢æˆ·ç«¯ç­–ç•¥æ— æ•ˆã€‚"s))
     }
 
     if (ClientStrategy::Disable <= client &&
@@ -105,12 +105,12 @@ void Network::AnalysisNetworkConfigurationImpl::InsertStrategy(const String& nam
         }
         else
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("·şÎñÆ÷ºÍ¿Í»§¶Ë²ßÂÔ¶¼²»´æÔÚ¡£"s))
+            THROW_EXCEPTION(SYSTEM_TEXT("æœåŠ¡å™¨å’Œå®¢æˆ·ç«¯ç­–ç•¥éƒ½ä¸å­˜åœ¨ã€‚"s))
         }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("·şÎñÆ÷ºÍ¿Í»§¶Ë²ßÂÔÎŞĞ§¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æœåŠ¡å™¨å’Œå®¢æˆ·ç«¯ç­–ç•¥æ— æ•ˆã€‚"s))
     }
 }
 
@@ -125,7 +125,7 @@ Network::ConfigurationStrategy Network::AnalysisNetworkConfigurationImpl::GetCon
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÕÒ²»µ½Ö¸¶¨Ãû×ÖµÄÅäÖÃ¡£"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ‰¾ä¸åˆ°æŒ‡å®šåå­—çš„é…ç½®ã€‚"s))
     }
 }
 
@@ -161,7 +161,7 @@ Network::WrappersStrategy Network::AnalysisNetworkConfigurationImpl::GetWrappers
         return WrappersStrategy::Kafka;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("ÍøÂç°ü×°Æ÷ÀàĞÍ²»´æÔÚ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("ç½‘ç»œåŒ…è£…å™¨ç±»å‹ä¸å­˜åœ¨ã€‚"s))
 }
 
 Network::ConnectStrategy Network::AnalysisNetworkConfigurationImpl::GetConnectStrategy(const System::String& connect)
@@ -188,7 +188,7 @@ Network::ConnectStrategy Network::AnalysisNetworkConfigurationImpl::GetConnectSt
         return ConnectStrategy::Kcp;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("ÍøÂçÁ´½ÓÀàĞÍ²»´æÔÚ¡£"s))
+    THROW_EXCEPTION(SYSTEM_TEXT("ç½‘ç»œé“¾æ¥ç±»å‹ä¸å­˜åœ¨ã€‚"s))
 }
 
 Network::ConfigurationSubStrategy Network::AnalysisNetworkConfigurationImpl::GetConfigurationSubStrategy(const BasicTree& basicTree)

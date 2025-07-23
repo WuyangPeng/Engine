@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/02 13:21)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/02 13:21)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_FLAGS_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_FLAGS_H
@@ -34,7 +34,7 @@ namespace CoreTools
         Unique,
     };
 
-    /// Bit£¬Vector2µÈÊı¾İÊ¹ÓÃ·Ö¸ô·û|£¬ArrayÊı¾İÊ¹ÓÃ·Ö¸ô·û&¡£
+    /// Bitï¼ŒVector2ç­‰æ•°æ®ä½¿ç”¨åˆ†éš”ç¬¦|ï¼ŒArrayæ•°æ®ä½¿ç”¨åˆ†éš”ç¬¦&ã€‚
     enum class CSVDataType
     {
         String,

@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/01 10:27)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/01 10:27)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -21,7 +21,7 @@
 CoreTools::FileHandleImpl::FileHandleImpl(const String& fileName, FileHandleDesiredAccess access, FileHandleShareMode shareMode, FileHandleCreationDisposition creation)
     : fileName{ fileName }, file{ System::CreateSystemFile(fileName, access, shareMode, creation) }
 {
-    ASSERT_FAIL_THROW_EXCEPTION(System::IsFileHandleValid(file), (Error::Format{ SYSTEM_TEXT("´ò¿ªÎÄ¼ş¡°%1%¡±Ê§°Ü£¡"s) } % fileName).str());
+    ASSERT_FAIL_THROW_EXCEPTION(System::IsFileHandleValid(file), (Error::Format{ SYSTEM_TEXT("æ‰“å¼€æ–‡ä»¶â€œ%1%â€å¤±è´¥ï¼"s) } % fileName).str());
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -32,7 +32,7 @@ CoreTools::FileHandleImpl::~FileHandleImpl() noexcept
 
     if (!System::CloseSystemFile(file))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("¹Ø±ÕÎÄ¼ş"), fileName, SYSTEM_TEXT("Ê§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("å…³é—­æ–‡ä»¶"), fileName, SYSTEM_TEXT("å¤±è´¥ï¼"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -65,7 +65,7 @@ void CoreTools::FileHandleImpl::ReadFromFile(size_t itemSize, size_t itemsNumber
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     CheckItemSize(itemSize);
-    CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "×¼±¸Ğ´ÈëµÄÊı¾İÎŞĞ§£¡");
+    CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "å‡†å¤‡å†™å…¥çš„æ•°æ®æ— æ•ˆï¼");
 
     System::WindowsDWord in{ 0 };
 
@@ -73,7 +73,7 @@ void CoreTools::FileHandleImpl::ReadFromFile(size_t itemSize, size_t itemsNumber
         !System::ReadSystemFile(file, data, readNumber, &in) ||
         in != readNumber)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("¶ÁÈëÎÄ¼şÊı¾İ´íÎó£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("è¯»å…¥æ–‡ä»¶æ•°æ®é”™è¯¯ï¼"s))
     }
 }
 
@@ -82,7 +82,7 @@ void CoreTools::FileHandleImpl::WriteToFile(size_t itemSize, size_t itemsNumber,
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     CheckItemSize(itemSize);
-    CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "×¼±¸¶ÁÈ¡µÄÊı¾İÎŞĞ§£¡");
+    CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "å‡†å¤‡è¯»å–çš„æ•°æ®æ— æ•ˆï¼");
 
     System::WindowsDWord out{ 0 };
 
@@ -90,7 +90,7 @@ void CoreTools::FileHandleImpl::WriteToFile(size_t itemSize, size_t itemsNumber,
         !System::WriteSystemFile(file, data, writeNumber, &out) ||
         out != writeNumber)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Êı¾İĞ´ÈëÎÄ¼ş´íÎó£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ•°æ®å†™å…¥æ–‡ä»¶é”™è¯¯ï¼"s))
     }
 }
 
@@ -99,7 +99,7 @@ void CoreTools::FileHandleImpl::AppendToFile(size_t itemSize, size_t itemsNumber
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     CheckItemSize(itemSize);
-    CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "×¼±¸¶ÁÈ¡µÄÊı¾İÎŞĞ§£¡");
+    CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "å‡†å¤‡è¯»å–çš„æ•°æ®æ— æ•ˆï¼");
 
     System::WindowsDWord out{ 0 };
 
@@ -107,6 +107,6 @@ void CoreTools::FileHandleImpl::AppendToFile(size_t itemSize, size_t itemsNumber
         !System::AppendSystemFile(file, data, writeNumber, &out) ||
         out != writeNumber)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Êı¾İĞ´ÈëÎÄ¼ş´íÎó£¡"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("æ•°æ®å†™å…¥æ–‡ä»¶é”™è¯¯ï¼"s))
     }
 }

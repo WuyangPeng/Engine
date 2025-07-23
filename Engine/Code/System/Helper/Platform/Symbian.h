@@ -1,18 +1,18 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/04 19:54)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/04 19:54)
 
 #ifndef SYSTEM_HELPER_SYMBIAN_H
 #define SYSTEM_HELPER_SYMBIAN_H
 
 #if defined(__SYMBIAN32__)
 
-    ///  symbian ¾ßÌåÅäÖÃÑ¡Ïî£º
+    ///  symbian å…·ä½“é…ç½®é€‰é¡¹ï¼š
 
     #define TCRE_SYSTEM_PLATFORM "Symbian"
     #define SYSTEM_PLATFORM_SYMBIAN static_cast<void>(0)
@@ -32,7 +32,7 @@
 
     #if !defined(__S60_3X__)
 
-        #error "²»Ö§³Ö Symbian SDK"
+        #error "ä¸æ”¯æŒ Symbian SDK"
 
     #endif  // !defined(__S60_3X__)
 

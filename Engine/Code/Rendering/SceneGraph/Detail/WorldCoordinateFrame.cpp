@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+Ôªø/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-/// ¡™œµ◊˜’ﬂ£∫94458936@qq.com
+/// ‰ΩúËÄÖÔºöÂΩ≠Ê≠¶Èò≥ÔºåÂΩ≠ÊôîÊÅ©ÔºåÂΩ≠ÊôîÊ≥Ω
+/// ËÅîÁ≥ª‰ΩúËÄÖÔºö94458936@qq.com
 ///
-/// ±Í◊º£∫std:c++20
-/// ∞Ê±æ£∫1.0.0.3 (2023/12/28 17:53)
+/// Ê†áÂáÜÔºöstd:c++20
+/// ÁâàÊú¨Ôºö1.0.0.3 (2023/12/28 17:53)
 
 #include "Rendering/RenderingExport.h"
 
@@ -15,6 +15,8 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
+#include "Mathematics/Algebra/MatrixDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/AVectorOrthonormalizeDetail.h"
 #include "Mathematics/Algebra/AlgebraAggregate.h"
@@ -28,11 +30,11 @@ Rendering::WorldCoordinateFrame::WorldCoordinateFrame() noexcept
       viewMatrix{},
       inverseViewMatrix{},
 
-#ifdef RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
+      #ifdef RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
 
       validateCoordinateFrame{ true },
 
-#endif  // RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
+      #endif  // RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
 
       epsilon{}
 {
@@ -47,11 +49,11 @@ Rendering::WorldCoordinateFrame::WorldCoordinateFrame(float epsilon)
       viewMatrix{ Mathematics::MatrixF::GetZeroMatrix() },
       inverseViewMatrix{ Mathematics::MatrixF::GetZeroMatrix() },
 
-#ifdef RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
+      #ifdef RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
 
       validateCoordinateFrame{ true },
 
-#endif  // RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
+      #endif  // RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
 
       epsilon{ epsilon }
 {
@@ -117,7 +119,7 @@ void Rendering::WorldCoordinateFrame::SetAxes(const AVector& aDirectionVector, c
     if (const auto det = Dot(directionVector, Cross(upVector, rightVector));
         epsilon < Mathematics::MathF::FAbs(1.0f - Mathematics::MathF::FAbs(det)))
     {
-#ifdef RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
+        #ifdef RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
 
         if (validateCoordinateFrame)
         {
@@ -136,13 +138,13 @@ void Rendering::WorldCoordinateFrame::SetAxes(const AVector& aDirectionVector, c
                 epsilon < Mathematics::MathF::FAbs(dotDpRight) ||
                 epsilon < Mathematics::MathF::FAbs(dotUpRight))
             {
-                LOG_SINGLETON_ENGINE_APPENDER(Info, Rendering, SYSTEM_TEXT("◊¯±Íœµ≤ª «’˝Ωªµƒ£°"));
+                LOG_SINGLETON_ENGINE_APPENDER(Info, Rendering, SYSTEM_TEXT("ÂùêÊ†áÁ≥ª‰∏çÊòØÊ≠£‰∫§ÁöÑÔºÅ"));
             }
         }
 
-#endif  // RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
+        #endif  // RENDERING_USE_VALIDATE_COORDINATE_FRAME_ONCE
 
-        //  ‰»ÎœÚ¡ø≤¢√ª”––Œ≥…“ª∏ˆ±Í◊º’˝ΩªºØ∫œ°£’‚¿Ô÷ÿ–¬’˝ΩªªØ
+        // ËæìÂÖ•ÂêëÈáèÂπ∂Ê≤°ÊúâÂΩ¢Êàê‰∏Ä‰∏™Ê†áÂáÜÊ≠£‰∫§ÈõÜÂêà„ÄÇËøôÈáåÈáçÊñ∞Ê≠£‰∫§Âåñ
         const auto orthonormalize = Orthonormalize(directionVector, upVector, rightVector, epsilon);
 
         directionVector = orthonormalize.GetUVector();
@@ -197,7 +199,7 @@ Rendering::WorldCoordinateFrame::Matrix Rendering::WorldCoordinateFrame::GetInve
 
 void Rendering::WorldCoordinateFrame::OnFrameChange()
 {
-#ifdef MATHEMATICS_USE_MATRIX_VECTOR
+    #ifdef MATHEMATICS_USE_MATRIX_VECTOR
 
     viewMatrix(0, 0) = rightVector[0];
     viewMatrix(0, 1) = rightVector[1];
@@ -233,7 +235,7 @@ void Rendering::WorldCoordinateFrame::OnFrameChange()
     inverseViewMatrix(3, 2) = 0.0f;
     inverseViewMatrix(3, 3) = 1.0f;
 
-#else  // !MATHEMATICS_USE_MATRIX_VECTOR
+    #else  // !MATHEMATICS_USE_MATRIX_VECTOR
 
     viewMatrix(0, 0) = rightVector[0];
     viewMatrix(1, 0) = rightVector[1];
@@ -269,7 +271,7 @@ void Rendering::WorldCoordinateFrame::OnFrameChange()
     inverseViewMatrix(2, 3) = 0.0f;
     inverseViewMatrix(3, 3) = 1.0f;
 
-#endif  // MATHEMATICS_USE_MATRIX_VECTOR
+    #endif  // MATHEMATICS_USE_MATRIX_VECTOR
 }
 
 void Rendering::WorldCoordinateFrame::Load(BufferSource& source)

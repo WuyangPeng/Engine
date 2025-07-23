@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/02 15:20)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/02 15:20)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_SIMPLE_ZIP_INTERNAL_FWD_H
 #define CORE_TOOLS_TEXT_PARSING_SIMPLE_ZIP_INTERNAL_FWD_H
@@ -19,14 +19,14 @@
 
 namespace CoreTools::SimpleZip
 {
-    /// ZipEntryInfo ÊµÌåÊÇminiz¿âÖÐmz_zip_archive_file_statµÄ±ðÃû¡£
-    /// ZipEntryInfo/mz_zip_archive_file_stat½á¹¹±£´æÓëzip´æµµÖÐÌØ¶¨ÌõÄ¿£¨»òÏîÄ¿£©Ïà¹ØµÄ¸÷ÖÖÔªÊý¾Ý£¬ÀýÈç£º×¢ÊÍ¡¢ÎÄ¼þ´óÐ¡¡¢ÈÕÆÚ´ÁµÈ¡£
-    /// ²»Ó¦ÊÖ¶¯´´½¨ÐÂµÄ ZipEntryInfo¡£
+    /// ZipEntryInfo å®žä½“æ˜¯minizåº“ä¸­mz_zip_archive_file_statçš„åˆ«åã€‚
+    /// ZipEntryInfo/mz_zip_archive_file_statç»“æž„ä¿å­˜ä¸Žzipå­˜æ¡£ä¸­ç‰¹å®šæ¡ç›®ï¼ˆæˆ–é¡¹ç›®ï¼‰ç›¸å…³çš„å„ç§å…ƒæ•°æ®ï¼Œä¾‹å¦‚ï¼šæ³¨é‡Šã€æ–‡ä»¶å¤§å°ã€æ—¥æœŸæˆ³ç­‰ã€‚
+    /// ä¸åº”æ‰‹åŠ¨åˆ›å»ºæ–°çš„ ZipEntryInfoã€‚
     using ZipEntryInfo = mz_zip_archive_file_stat;
 
-    /// ZipEntryDataÊµÌåÊÇstd::vector<uint8_t>µÄ±ðÃû¡£
-    /// ÕâÓÃ×÷ÈÎºÎÀàÐÍµÄÎÄ¼þÊý¾ÝµÄÍ¨ÓÃÈÝÆ÷£¬°üÀ¨×Ö·û´®ºÍ¶þ½øÖÆÎÄ¼þ¡£
-    /// Ò²¿ÉÒÔÊ¹ÓÃ×Ö·ûÏòÁ¿»ò×Ö·ûÊý×é£¬µ«×Ö½ÚÏòÁ¿¸üÇå³þµØ±íÃ÷Ëü¿ÉÒÔÓÃÓÚ·ÇÎÄ±¾Êý¾Ý¡£
+    /// ZipEntryDataå®žä½“æ˜¯std::vector<uint8_t>çš„åˆ«åã€‚
+    /// è¿™ç”¨ä½œä»»ä½•ç±»åž‹çš„æ–‡ä»¶æ•°æ®çš„é€šç”¨å®¹å™¨ï¼ŒåŒ…æ‹¬å­—ç¬¦ä¸²å’ŒäºŒè¿›åˆ¶æ–‡ä»¶ã€‚
+    /// ä¹Ÿå¯ä»¥ä½¿ç”¨å­—ç¬¦å‘é‡æˆ–å­—ç¬¦æ•°ç»„ï¼Œä½†å­—èŠ‚å‘é‡æ›´æ¸…æ¥šåœ°è¡¨æ˜Žå®ƒå¯ä»¥ç”¨äºŽéžæ–‡æœ¬æ•°æ®ã€‚
     using ZipEntryData = std::vector<uint8_t>;
 
     class ZipEntryImpl;

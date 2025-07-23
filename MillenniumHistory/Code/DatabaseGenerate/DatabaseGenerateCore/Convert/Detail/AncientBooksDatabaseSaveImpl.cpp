@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2023/12/23 22:32)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2023/12/23 22:32)
 
 #include "DatabaseGenerate/DatabaseGenerateCore/DatabaseGenerateCoreExport.h"
 
@@ -44,9 +44,9 @@ void DatabaseGenerateCore::AncientBooksDatabaseSaveImpl::DatabaseSave(const Anci
     DatabaseSave(*ancientBooksContainer.GetVersionContainer());
     DatabaseSave(*ancientBooksContainer.GetYearContainer());
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("¶àÓàÊı¾İ¿âÕıÔÚÉ¾³ı¡£"));
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("å¤šä½™æ•°æ®åº“æ­£åœ¨åˆ é™¤ã€‚"));
 
     convertEntity.DeleteInvalidDatabase();
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("Êı¾İ¿âÉ¾³ı½áÊø"));
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("æ•°æ®åº“åˆ é™¤ç»“æŸ"));
 }

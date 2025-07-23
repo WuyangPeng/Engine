@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.1.0 (2024/08/07 10:41)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.1.0 (2024/08/07 10:41)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -16,7 +16,7 @@
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 Framework::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "¿ò¼Ü²âÊÔ" }
+    : ParentType{ argc, argv, "æ¡†æ¶æµ‹è¯•" }
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
@@ -64,7 +64,7 @@ void Framework::TestingHelper::InitSuite()
 
 void Framework::TestingHelper::AddHelperSuite()
 {
-    auto helperSuite = GenerateSuite("°ïÖú");
+    auto helperSuite = GenerateSuite("å¸®åŠ©");
 
     ADD_TEST(helperSuite, UserMacroTesting);
     ADD_TEST(helperSuite, MainFunctionEntryPointTesting);
@@ -76,7 +76,7 @@ void Framework::TestingHelper::AddHelperSuite()
 
 void Framework::TestingHelper::AddMainFunctionHelperSuite()
 {
-    auto mainFunctionHelperSuite = GenerateSuite("Ö÷º¯Êı°ïÖú");
+    auto mainFunctionHelperSuite = GenerateSuite("ä¸»å‡½æ•°å¸®åŠ©");
 
     mainFunctionHelperSuite.AddSuite(GetEnvironmentDirectorySuite());
     ADD_TEST(mainFunctionHelperSuite, MainFunctionHelperBaseTesting);
@@ -92,7 +92,7 @@ void Framework::TestingHelper::AddMainFunctionHelperSuite()
 
 Framework::TestingHelper::Suite Framework::TestingHelper::GetEnvironmentDirectorySuite()
 {
-    auto environmentDirectorySuite = GenerateSuite("»·¾³Ä¿Â¼");
+    auto environmentDirectorySuite = GenerateSuite("ç¯å¢ƒç›®å½•");
 
     ADD_TEST(environmentDirectorySuite, DefaultEnvironmentDirectoryTesting);
     ADD_TEST(environmentDirectorySuite, FileEnvironmentDirectoryTesting);
@@ -102,7 +102,7 @@ Framework::TestingHelper::Suite Framework::TestingHelper::GetEnvironmentDirector
 
 void Framework::TestingHelper::AddWindowCreateSuite()
 {
-    auto windowCreateSuite = GenerateSuite("Window´´½¨");
+    auto windowCreateSuite = GenerateSuite("Windowåˆ›å»º");
 
     ADD_TEST(windowCreateSuite, WindowSizeTesting);
     ADD_TEST(windowCreateSuite, WindowPointTesting);
@@ -115,7 +115,7 @@ void Framework::TestingHelper::AddWindowCreateSuite()
 
 void Framework::TestingHelper::AddWindowProcessSuite()
 {
-    auto windowProcessSuite = GenerateSuite("´°¿Ú½ø³Ì");
+    auto windowProcessSuite = GenerateSuite("çª—å£è¿›ç¨‹");
 
     ADD_TEST(windowProcessSuite, VirtualKeysTypesTesting);
     ADD_TEST(windowProcessSuite, WindowMessageLoopTesting);
@@ -130,7 +130,7 @@ void Framework::TestingHelper::AddWindowProcessSuite()
 
 void Framework::TestingHelper::AddWindowRegisterSuite()
 {
-    auto windowRegisterSuite = GenerateSuite("Window×¢²á");
+    auto windowRegisterSuite = GenerateSuite("Windowæ³¨å†Œ");
 
     ADD_TEST(windowRegisterSuite, WindowRegisterParameterTesting);
     ADD_TEST(windowRegisterSuite, WindowHIconTesting);
@@ -145,7 +145,7 @@ void Framework::TestingHelper::AddWindowRegisterSuite()
 
 void Framework::TestingHelper::AddApplicationSuite()
 {
-    auto applicationSuite = GenerateSuite("Ó¦ÓÃ");
+    auto applicationSuite = GenerateSuite("åº”ç”¨");
 
     ADD_TEST(applicationSuite, ApplicationTraitTesting);
     ADD_TEST(applicationSuite, FontInformationTesting);
@@ -162,7 +162,7 @@ void Framework::TestingHelper::AddApplicationSuite()
 
 void Framework::TestingHelper::AddMiddleLayerSuite()
 {
-    auto middleLayerSuite = GenerateSuite("ÖĞ¼ä²ã");
+    auto middleLayerSuite = GenerateSuite("ä¸­é—´å±‚");
 
     ADD_TEST(middleLayerSuite, MiddleLayerInterfaceTesting);
     ADD_TEST(middleLayerSuite, ModelViewControllerMiddleLayerTesting);
@@ -198,7 +198,7 @@ void Framework::TestingHelper::AddMiddleLayerSuite()
 
 void Framework::TestingHelper::AddWindowsAPIFrameSuite()
 {
-    auto windowsAPIFrameSuite = GenerateSuite("Windows API ¿ò¼Ü´´½¨");
+    auto windowsAPIFrameSuite = GenerateSuite("Windows API æ¡†æ¶åˆ›å»º");
 
     ADD_TEST(windowsAPIFrameSuite, WindowsAPIFrameBuildTesting);
 
@@ -207,7 +207,7 @@ void Framework::TestingHelper::AddWindowsAPIFrameSuite()
 
 void Framework::TestingHelper::AddOpenGLGlutFrameSuite()
 {
-    auto openGLGlutFrameSuite = GenerateSuite("OpenGL GLUT ¿ò¼Ü´´½¨");
+    auto openGLGlutFrameSuite = GenerateSuite("OpenGL GLUT æ¡†æ¶åˆ›å»º");
 
     ADD_TEST(openGLGlutFrameSuite, OpenGLGlutProcessManagerTesting);
     ADD_TEST(openGLGlutFrameSuite, OpenGLGlutProcessTesting);
@@ -221,7 +221,7 @@ void Framework::TestingHelper::AddOpenGLGlutFrameSuite()
 
 void Framework::TestingHelper::AddAndroidFrameSuite()
 {
-    auto androidFrameSuite = GenerateSuite("°²×¿¿ò¼Ü");
+    auto androidFrameSuite = GenerateSuite("å®‰å“æ¡†æ¶");
 
     ADD_TEST(androidFrameSuite, AndroidProcessManagerTesting);
     ADD_TEST(androidFrameSuite, AndroidProcessTesting);
@@ -236,7 +236,7 @@ void Framework::TestingHelper::AddAndroidFrameSuite()
 
 void Framework::TestingHelper::AddLinuxFrameSuite()
 {
-    auto linuxFrameSuite = GenerateSuite("Linux¿ò¼Ü");
+    auto linuxFrameSuite = GenerateSuite("Linuxæ¡†æ¶");
 
     ADD_TEST(linuxFrameSuite, LinuxProcessTesting);
     ADD_TEST(linuxFrameSuite, LinuxCallBackInterfaceTesting);
@@ -247,7 +247,7 @@ void Framework::TestingHelper::AddLinuxFrameSuite()
 
 void Framework::TestingHelper::AddMacintoshFrameSuite()
 {
-    auto macintoshFrameSuite = GenerateSuite("Macintosh¿ò¼Ü");
+    auto macintoshFrameSuite = GenerateSuite("Macintoshæ¡†æ¶");
 
     ADD_TEST(macintoshFrameSuite, MacintoshProcessTesting);
     ADD_TEST(macintoshFrameSuite, MacintoshCallBackInterfaceTesting);
@@ -258,7 +258,7 @@ void Framework::TestingHelper::AddMacintoshFrameSuite()
 
 void Framework::TestingHelper::AddConsoleFrameSuite()
 {
-    auto consoleFrameSuite = GenerateSuite("Console¿ò¼Ü");
+    auto consoleFrameSuite = GenerateSuite("Consoleæ¡†æ¶");
 
     ADD_TEST(consoleFrameSuite, ConsoleProcessTesting);
     ADD_TEST(consoleFrameSuite, ConsoleCallBackInterfaceTesting);
@@ -269,7 +269,7 @@ void Framework::TestingHelper::AddConsoleFrameSuite()
 
 void Framework::TestingHelper::AddProjectSuite()
 {
-    auto projectSuite = GenerateSuite("¹¤³Ì");
+    auto projectSuite = GenerateSuite("å·¥ç¨‹");
 
     ADD_TEST(projectSuite, ProjectNameTesting);
     ADD_TEST(projectSuite, GUIProjectManagerTesting);

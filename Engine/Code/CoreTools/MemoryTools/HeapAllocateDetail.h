@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.8 (2024/04/11 16:10)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.8 (2024/04/11 16:10)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_HEAP_ALLOCATE_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_HEAP_ALLOCATE_DETAIL_H
@@ -22,7 +22,7 @@ requires(std::is_trivial_v<T> && std::is_standard_layout_v<T>)
 CoreTools::HeapAllocate<T>::HeapAllocate(int length)
     : length{ length }, point{ System::AllocateProcessHeap<T>(length) }
 {
-    ASSERT_FAIL_THROW_EXCEPTION(point != nullptr, SYSTEM_TEXT("·ÖÅäHeapÊ§°Ü¡£"))
+    ASSERT_FAIL_THROW_EXCEPTION(point != nullptr, SYSTEM_TEXT("åˆ†é…Heapå¤±è´¥ã€‚"))
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }

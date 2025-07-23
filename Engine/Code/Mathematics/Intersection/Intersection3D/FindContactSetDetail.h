@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 18:18)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 18:18)
 
 #ifndef MATHEMATICS_INTERSECTION_FIND_CONTACT_SET_DETAIL_H
 #define MATHEMATICS_INTERSECTION_FIND_CONTACT_SET_DETAIL_H
@@ -30,15 +30,15 @@ Mathematics::FindContactSet<Real>::FindContactSet(const SegmentType& segment,
                                                   Real tFirst)
     : points{}
 {
-    // ½«Ïß¶ÎÒÆµ½ĞÂÎ»ÖÃ¡£
+    // å°†çº¿æ®µç§»åˆ°æ–°ä½ç½®ã€‚
     SegmentType segmentFinal{ segment.at(0) + tFirst * segmentVelocity, segment.at(1) + tFirst * segmentVelocity };
 
-    // ½«Èı½ÇĞÎÒÆ¶¯µ½ĞÂÎ»ÖÃ¡£
+    // å°†ä¸‰è§’å½¢ç§»åŠ¨åˆ°æ–°ä½ç½®ã€‚
     TriangleType triangleFinal{ triangle.GetVertex(0) + tFirst * triangleVelocity,
                                 triangle.GetVertex(1) + tFirst * triangleVelocity,
                                 triangle.GetVertex(2) + tFirst * triangleVelocity };
 
-    if (side == ContactSide::Left)  // Èı½ÇĞÎÔÚÏß¶ÎµÄ×ó²à
+    if (side == ContactSide::Left)  // ä¸‰è§’å½¢åœ¨çº¿æ®µçš„å·¦ä¾§
     {
         if (segmentCfg.GetMap() == VertexProjectionMap::M11)
         {
@@ -54,12 +54,12 @@ Mathematics::FindContactSet<Real>::FindContactSet(const SegmentType& segment,
 
             SegmentSegment(segmentFinal, value);
         }
-        else  // Ïß¶ÎÊÇ m2, Èı½ÇĞÎÊÇ m3
+        else  // çº¿æ®µæ˜¯ m2, ä¸‰è§’å½¢æ˜¯ m3
         {
             ColinearSegmentTriangle(segmentFinal, triangleFinal);
         }
     }
-    else  // Ïß¶ÎÔÚÈı½ÇĞÎµÄ×ó²à
+    else  // çº¿æ®µåœ¨ä¸‰è§’å½¢çš„å·¦ä¾§
     {
         if (segmentCfg.GetMap() == VertexProjectionMap::M11)
         {
@@ -75,7 +75,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const SegmentType& segment,
 
             SegmentSegment(segmentFinal, value);
         }
-        else  // Ïß¶ÎÊÇ m2,Èı½ÇĞÎÊÇ m3
+        else  // çº¿æ®µæ˜¯ m2,ä¸‰è§’å½¢æ˜¯ m3
         {
             ColinearSegmentTriangle(segmentFinal, triangleFinal);
         }
@@ -95,15 +95,15 @@ Mathematics::FindContactSet<Real>::FindContactSet(const SegmentType& segment,
                                                   Real tFirst)
     : points{}
 {
-    // ½«Ïß¶ÎÒÆµ½ĞÂÎ»ÖÃ¡£
+    // å°†çº¿æ®µç§»åˆ°æ–°ä½ç½®ã€‚
     SegmentType segmentFinal{ segment.at(0) + tFirst * segmentVelocity, segment.at(1) + tFirst * segmentVelocity };
 
-    // ½«ºĞ×ÓÒÆµ½ĞÂÎ»ÖÃ¡£
+    // å°†ç›’å­ç§»åˆ°æ–°ä½ç½®ã€‚
     const auto boxFinal = box.GetMove(tFirst, boxVelocity);
 
     if (side == ContactSide::Left)
     {
-        // ºĞ×ÓÔÚÏß¶ÎµÄ×ó²à
+        // ç›’å­åœ¨çº¿æ®µçš„å·¦ä¾§
         if (segmentCfg.GetMap() == VertexProjectionMap::M11)
         {
             points.emplace_back(segmentFinal.at(segmentCfg.GetIndex(0)));
@@ -114,7 +114,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const SegmentType& segment,
         }
         else if (boxCfg.GetMap() == VertexProjectionMap::M2_2)
         {
-            // Ïß¶ÎÏß¶ÎÏà½»
+            // çº¿æ®µçº¿æ®µç›¸äº¤
             const SegmentType boxSegment{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(6), boxFinal),
                                           IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(7), boxFinal) };
 
@@ -122,7 +122,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const SegmentType& segment,
         }
         else  // boxCfg.GetMap() == VertexProjectionMap::M44
         {
-            // Ïß¶Î-ºĞÃæÏà½»
+            // çº¿æ®µ-ç›’é¢ç›¸äº¤
             const RectangleType boxFace{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(4), boxFinal),
                                          IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(5), boxFinal),
                                          IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(6), boxFinal),
@@ -133,7 +133,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const SegmentType& segment,
     }
     else  // side == Right
     {
-        // ºĞ×ÓÔÚÏß¶ÎµÄÓÒ²à
+        // ç›’å­åœ¨çº¿æ®µçš„å³ä¾§
         if (segmentCfg.GetMap() == VertexProjectionMap::M11)
         {
             points.emplace_back(segmentFinal.at(segmentCfg.GetIndex(1)));
@@ -144,7 +144,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const SegmentType& segment,
         }
         else if (boxCfg.GetMap() == VertexProjectionMap::M2_2)
         {
-            // Ïß¶ÎÏß¶ÎÏà½»
+            // çº¿æ®µçº¿æ®µç›¸äº¤
             const SegmentType boxSegment{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(0), boxFinal),
                                           IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(1), boxFinal) };
 
@@ -152,7 +152,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const SegmentType& segment,
         }
         else  // boxCfg.GetMap() == VertexProjectionMap::M44
         {
-            // Ïß¶Î-ºĞÃæÏà½»
+            // çº¿æ®µ-ç›’é¢ç›¸äº¤
             const RectangleType boxFace{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(0), boxFinal),
                                          IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(1), boxFinal),
                                          IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(2), boxFinal),
@@ -176,17 +176,17 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Triangle3Type& triangle,
                                                   Real tFirst)
     : points{}
 {
-    // ½«Èı½ÇĞÎÒÆ¶¯µ½ĞÂÎ»ÖÃ¡£
+    // å°†ä¸‰è§’å½¢ç§»åŠ¨åˆ°æ–°ä½ç½®ã€‚
     TriangleType triangleFinal{ triangle.GetVertex(0) + tFirst * triangleVelocity,
                                 triangle.GetVertex(1) + tFirst * triangleVelocity,
                                 triangle.GetVertex(2) + tFirst * triangleVelocity };
 
-    // ½«ºĞ×ÓÒÆµ½ĞÂÎ»ÖÃ¡£
+    // å°†ç›’å­ç§»åˆ°æ–°ä½ç½®ã€‚
     const auto boxFinal = box.GetMove(tFirst, boxVelocity);
 
     if (side == ContactSide::Left)
     {
-        // ºĞ×ÓÔÚÈı½ÇĞÎ×ó²à
+        // ç›’å­åœ¨ä¸‰è§’å½¢å·¦ä¾§
         if (triangleCfg.GetMap() == VertexProjectionMap::M111 || triangleCfg.GetMap() == VertexProjectionMap::M12)
         {
             points.emplace_back(triangleFinal.at(triangleCfg.GetIndex(0)));
@@ -199,7 +199,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Triangle3Type& triangle,
         {
             if (boxCfg.GetMap() == VertexProjectionMap::M2_2)
             {
-                // Èı½ÇĞÎÏß¶Î¡ª¡ªºĞ×ÓÏß¶ÎÏà½»
+                // ä¸‰è§’å½¢çº¿æ®µâ€”â€”ç›’å­çº¿æ®µç›¸äº¤
                 const SegmentType triangleSegment{ triangleFinal.at(triangleCfg.GetIndex(0)),
                                                    triangleFinal.at(triangleCfg.GetIndex(1)) };
 
@@ -210,7 +210,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Triangle3Type& triangle,
             }
             else  // boxCfg.GetMap() == VertexProjectionMap::M44
             {
-                // Èı½ÇĞÎÏß¶Î¡ª¡ªºĞ×ÓÃæÏà½»
+                // ä¸‰è§’å½¢çº¿æ®µâ€”â€”ç›’å­é¢ç›¸äº¤
                 const SegmentType triangleSegment{ triangleFinal.at(triangleCfg.GetIndex(0)),
                                                    triangleFinal.at(triangleCfg.GetIndex(1)) };
 
@@ -226,7 +226,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Triangle3Type& triangle,
         {
             if (boxCfg.GetMap() == VertexProjectionMap::M2_2)
             {
-                // ºĞ×ÓÏß¶Î¡ª¡ªÈı½ÇĞÎÃæÏà½»
+                // ç›’å­çº¿æ®µâ€”â€”ä¸‰è§’å½¢é¢ç›¸äº¤
                 const SegmentType boxSegment{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(6), boxFinal),
                                               IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(7), boxFinal) };
 
@@ -234,7 +234,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Triangle3Type& triangle,
             }
             else
             {
-                // Èı½ÇĞÎÃæ¡ª¡ªºĞ×ÓÃæÏà½»
+                // ä¸‰è§’å½¢é¢â€”â€”ç›’å­é¢ç›¸äº¤
                 const RectangleType boxFace{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(4), boxFinal),
                                              IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(5), boxFinal),
                                              IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(6), boxFinal),
@@ -246,7 +246,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Triangle3Type& triangle,
     }
     else  // side == Right
     {
-        // ºĞ×ÓÔÚÈı½ÇĞÎÓÒ²à
+        // ç›’å­åœ¨ä¸‰è§’å½¢å³ä¾§
         if (triangleCfg.GetMap() == VertexProjectionMap::M111 || triangleCfg.GetMap() == VertexProjectionMap::M21)
         {
             points.emplace_back(triangleFinal.at(triangleCfg.GetIndex(2)));
@@ -259,7 +259,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Triangle3Type& triangle,
         {
             if (boxCfg.GetMap() == VertexProjectionMap::M2_2)
             {
-                // Ïß¶Î¡ª¡ªÏß¶ÎÏà½»
+                // çº¿æ®µâ€”â€”çº¿æ®µç›¸äº¤
                 const SegmentType triangleSegment{ triangleFinal.at(triangleCfg.GetIndex(1)),
                                                    triangleFinal.at(triangleCfg.GetIndex(2)) };
 
@@ -270,7 +270,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Triangle3Type& triangle,
             }
             else  // boxCfg.GetMap() == VertexProjectionMap::M44
             {
-                // Èı½ÇĞÎÏß¶Î¡ª¡ªºĞ×ÓÃæÏà½»
+                // ä¸‰è§’å½¢çº¿æ®µâ€”â€”ç›’å­é¢ç›¸äº¤
                 const SegmentType triangleSegment{ triangleFinal.at(triangleCfg.GetIndex(1)),
                                                    triangleFinal.at(triangleCfg.GetIndex(2)) };
 
@@ -286,7 +286,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Triangle3Type& triangle,
         {
             if (boxCfg.GetMap() == VertexProjectionMap::M2_2)
             {
-                //  ºĞ×ÓÏß¶Î¡ª¡ªÈı½ÇĞÎÃæÏà½»
+                //  ç›’å­çº¿æ®µâ€”â€”ä¸‰è§’å½¢é¢ç›¸äº¤
                 const SegmentType boxSegment{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(0), boxFinal),
                                               IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(1), boxFinal) };
 
@@ -294,7 +294,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Triangle3Type& triangle,
             }
             else
             {
-                // Èı½ÇĞÎÃæ¡ª¡ªºĞ×ÓÃæÏà½»
+                // ä¸‰è§’å½¢é¢â€”â€”ç›’å­é¢ç›¸äº¤
                 const RectangleType boxFace{ IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(0), boxFinal),
                                              IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(1), boxFinal),
                                              IntersectorUtility3<Real>::GetPointFromIndex(boxCfg.GetIndex(2), boxFinal),
@@ -319,13 +319,13 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Box3Type& box0,
                                                   Real tFirst)
     : points{}
 {
-    // ½«ºĞ×ÓÒÆµ½ĞÂÎ»ÖÃ¡£
+    // å°†ç›’å­ç§»åˆ°æ–°ä½ç½®ã€‚
     const auto box0Final = box0.GetMove(tFirst, box0Velocity);
     const auto box1Final = box1.GetMove(tFirst, box1Velocity);
 
     if (side == ContactSide::Left)
     {
-        // box1ÔÚbox0×ó²à
+        // box1åœ¨box0å·¦ä¾§
         if (box0Cfg.GetMap() == VertexProjectionMap::M1_1)
         {
             points.emplace_back(IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(0), box0Final));
@@ -338,7 +338,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Box3Type& box0,
         {
             if (box1Cfg.GetMap() == VertexProjectionMap::M2_2)
             {
-                // box0±ß¡ª¡ªbox1±ßÏà½»
+                // box0è¾¹â€”â€”box1è¾¹ç›¸äº¤
                 const SegmentType edge0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(0), box0Final),
                                          IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(1), box0Final) };
 
@@ -349,7 +349,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Box3Type& box0,
             }
             else  // box1Cfg.mMap == VertexProjectionMap::M44
             {
-                // box0±ß¡ª¡ªbox1ÃæÏà½»
+                // box0è¾¹â€”â€”box1é¢ç›¸äº¤
                 const SegmentType edge0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(0), box0Final),
                                          IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(1), box0Final) };
 
@@ -365,7 +365,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Box3Type& box0,
         {
             if (box1Cfg.GetMap() == VertexProjectionMap::M2_2)
             {
-                // box0Ãæ¡ª¡ªbox1±ßÏà½»
+                // box0é¢â€”â€”box1è¾¹ç›¸äº¤
                 const RectangleType face0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(0), box0Final),
                                            IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(1), box0Final),
                                            IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(2), box0Final),
@@ -378,7 +378,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Box3Type& box0,
             }
             else
             {
-                // box0Ãæ¡ª¡ªbox1ÃæÏà½»
+                // box0é¢â€”â€”box1é¢ç›¸äº¤
                 const RectangleType face0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(0), box0Final),
                                            IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(1), box0Final),
                                            IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(2), box0Final),
@@ -395,7 +395,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Box3Type& box0,
     }
     else  // side == Right
     {
-        // box1ÔÚbox0ÓÒ²à
+        // box1åœ¨box0å³ä¾§
         if (box0Cfg.GetMap() == VertexProjectionMap::M1_1)
         {
             points.emplace_back(IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(7), box0Final));
@@ -408,7 +408,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Box3Type& box0,
         {
             if (box1Cfg.GetMap() == VertexProjectionMap::M2_2)
             {
-                // box0±ß¡ª¡ªbox1±ßÏà½»
+                // box0è¾¹â€”â€”box1è¾¹ç›¸äº¤
                 const SegmentType edge0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(6), box0Final),
                                          IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(7), box0Final) };
 
@@ -419,7 +419,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Box3Type& box0,
             }
             else  // box1Cfg.GetMap() == VertexProjectionMap::M44
             {
-                // box0±ß¡ª¡ªbox1ÃæÏà½»
+                // box0è¾¹â€”â€”box1é¢ç›¸äº¤
                 const SegmentType edge0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(6), box0Final),
                                          IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(7), box0Final) };
 
@@ -435,7 +435,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Box3Type& box0,
         {
             if (box1Cfg.GetMap() == VertexProjectionMap::M2_2)
             {
-                // box0Ãæ¡ª¡ªbox1±ßÏà½»
+                // box0é¢â€”â€”box1è¾¹ç›¸äº¤
                 const RectangleType face0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(4), box0Final),
                                            IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(5), box0Final),
                                            IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(6), box0Final),
@@ -448,7 +448,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(const Box3Type& box0,
             }
             else  // box1Cfg.GetMap() == VertexProjectionMap::M44
             {
-                // box0Ãæ¡ª¡ªbox1ÃæÏà½»
+                // box0é¢â€”â€”box1é¢ç›¸äº¤
                 const RectangleType face0{ IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(4), box0Final),
                                            IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(5), box0Final),
                                            IntersectorUtility3<Real>::GetPointFromIndex(box0Cfg.GetIndex(6), box0Final),
@@ -488,15 +488,15 @@ typename Mathematics::FindContactSet<Real>::PointType Mathematics::FindContactSe
 template <typename Real>
 void Mathematics::FindContactSet<Real>::ColinearSegments(const SegmentType& segment0, const SegmentType& segment1)
 {
-    // Ç±ÔÚµÄ½»¼¯±»³õÊ¼»¯Îªsegment0²¢Õë¶Ôsegment1½øĞĞ²Ã¼ô¡£
+    // æ½œåœ¨çš„äº¤é›†è¢«åˆå§‹åŒ–ä¸ºsegment0å¹¶é’ˆå¯¹segment1è¿›è¡Œè£å‰ªã€‚
     points.assign(segment0.begin(), segment0.end());
 
-    // µã 0
+    // ç‚¹ 0
     auto diff = segment1.at(1) - segment1.at(0);
     auto dot = Vector3Tools<Real>::DotProduct(diff, segment1.at(0));
     points = IntersectorUtility3<Real>::ClipConvexPolygonAgainstPlane(diff, dot, points);
 
-    // µã 1
+    // ç‚¹ 1
     diff = -diff;
     dot = Vector3Tools<Real>::DotProduct(diff, segment1.at(1));
     points = IntersectorUtility3<Real>::ClipConvexPolygonAgainstPlane(diff, dot, points);
@@ -509,7 +509,7 @@ void Mathematics::FindContactSet<Real>::SegmentThroughPlane(const SegmentType& s
     auto v0 = Vector3Tools<Real>::DotProduct(planeNormal, segment.at(0));
     auto v1 = Vector3Tools<Real>::DotProduct(planeNormal, segment.at(1));
 
-    // ÏÖÔÚ£¬Í¨¹ıÍ¶Ó°ÒÑ½«Æä¼ò»¯ÎªÒ»Î¬ÎÊÌâ£¬ÏÖÔÚºÜÈİÒ×ÕÒµ½VÓëUÏà½»µÄÑØVµÄ±ÈÂÊ¡£
+    // ç°åœ¨ï¼Œé€šè¿‡æŠ•å½±å·²å°†å…¶ç®€åŒ–ä¸ºä¸€ç»´é—®é¢˜ï¼Œç°åœ¨å¾ˆå®¹æ˜“æ‰¾åˆ°Vä¸Uç›¸äº¤çš„æ²¿Vçš„æ¯”ç‡ã€‚
     auto ratio = (u - v0) / (v1 - v0);
     points.clear();
     points.emplace_back(segment.at(0) + ratio * (segment.at(1) - segment.at(0)));
@@ -523,7 +523,7 @@ void Mathematics::FindContactSet<Real>::SegmentSegment(const SegmentType& segmen
 
     const auto normal = Vector3Tools<Real>::CrossProduct(dir0, dir1);
 
-    // ±È½ÏÎªsin(kDir0,kDir1) < epsilon¡£
+    // æ¯”è¾ƒä¸ºsin(kDir0,kDir1) < epsilonã€‚
     auto dir0LengthSquared = Vector3Tools<Real>::GetLengthSquared(dir0);
     auto dir1LengthSquared = Vector3Tools<Real>::GetLengthSquared(dir1);
     auto normalLengthSquared = Vector3Tools<Real>::GetLengthSquared(normal);
@@ -540,7 +540,7 @@ void Mathematics::FindContactSet<Real>::SegmentSegment(const SegmentType& segmen
 template <typename Real>
 void Mathematics::FindContactSet<Real>::ColinearSegmentTriangle(const SegmentType& segment, const TriangleType& triangle)
 {
-    // µçÎ»½»µã±»³õÊ¼»¯ÎªÏß¶Î£¬È»ºóÔÚÈı±ßĞÎµÄÈı¸ö±ßÉÏĞŞ¼ô¡£
+    // ç”µä½äº¤ç‚¹è¢«åˆå§‹åŒ–ä¸ºçº¿æ®µï¼Œç„¶ååœ¨ä¸‰è¾¹å½¢çš„ä¸‰ä¸ªè¾¹ä¸Šä¿®å‰ªã€‚
     points.assign(segment.begin(), segment.end());
 
     TriangleType side{ triangle.at(1) - triangle.at(0), triangle.at(2) - triangle.at(1), triangle.at(0) - triangle.at(2) };
@@ -548,7 +548,7 @@ void Mathematics::FindContactSet<Real>::ColinearSegmentTriangle(const SegmentTyp
     const auto normal = Vector3Tools<Real>::CrossProduct(side.at(0), side.at(1));
     for (auto i = 0; i < 3; ++i)
     {
-        // ·¨ÏßÖ¸ÏòÈı½ÇĞÎÄÚ¡£
+        // æ³•çº¿æŒ‡å‘ä¸‰è§’å½¢å†…ã€‚
         const auto sideCross = Vector3Tools<Real>::CrossProduct(normal, side.at(i));
         auto constant = Vector3Tools<Real>::DotProduct(sideCross, triangle.at(i));
         points = IntersectorUtility3<Real>::ClipConvexPolygonAgainstPlane(sideCross, constant, points);
@@ -558,7 +558,7 @@ void Mathematics::FindContactSet<Real>::ColinearSegmentTriangle(const SegmentTyp
 template <typename Real>
 void Mathematics::FindContactSet<Real>::CoplanarSegmentRectangle(const SegmentType& segment, const RectangleType& rectangle)
 {
-    // µçÎ»½»µã±»³õÊ¼»¯ÎªÏß¶Î£¬È»ºóÔÚ¾ØĞÎµÄËÄ¸ö±ßÉÏĞŞ¼ô¡£
+    // ç”µä½äº¤ç‚¹è¢«åˆå§‹åŒ–ä¸ºçº¿æ®µï¼Œç„¶ååœ¨çŸ©å½¢çš„å››ä¸ªè¾¹ä¸Šä¿®å‰ªã€‚
     points.assign(segment.begin(), segment.end());
 
     for (auto i0 = 3, i1 = 0; i1 < 4; i0 = i1++)
@@ -572,7 +572,7 @@ void Mathematics::FindContactSet<Real>::CoplanarSegmentRectangle(const SegmentTy
 template <typename Real>
 void Mathematics::FindContactSet<Real>::CoplanarTriangleRectangle(const TriangleType& triangle, const RectangleType& rectangle)
 {
-    // µçÎ»½»µã±»³õÊ¼»¯ÎªÈı½ÇĞÎ£¬È»ºóĞŞ¼ôµ½ºĞ×ÓµÄ²àÃæ
+    // ç”µä½äº¤ç‚¹è¢«åˆå§‹åŒ–ä¸ºä¸‰è§’å½¢ï¼Œç„¶åä¿®å‰ªåˆ°ç›’å­çš„ä¾§é¢
     points.assign(triangle.begin(), triangle.end());
 
     for (auto i0 = 3, i1 = 0; i1 < 4; i0 = i1++)
@@ -586,7 +586,7 @@ void Mathematics::FindContactSet<Real>::CoplanarTriangleRectangle(const Triangle
 template <typename Real>
 void Mathematics::FindContactSet<Real>::CoplanarRectangleRectangle(const RectangleType& rectangle0, const RectangleType& rectangle1)
 {
-    // ½»µã³õÊ¼»¯ÎªÃæ0£¬È»ºóÔÚÃæ1µÄËÄ¸ö±ßÉÏĞŞ¼ô¡£
+    // äº¤ç‚¹åˆå§‹åŒ–ä¸ºé¢0ï¼Œç„¶ååœ¨é¢1çš„å››ä¸ªè¾¹ä¸Šä¿®å‰ªã€‚
 
     points.assign(rectangle0.begin(), rectangle0.end());
 

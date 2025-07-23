@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	ÒıÇæ°æ±¾£º0.9.0.12 (2023/06/12 13:53)
+///	æ ‡å‡†ï¼šstd:c++20
+///	å¼•æ“ç‰ˆæœ¬ï¼š0.9.0.12 (2023/06/12 13:53)
 
 #include "Rendering/RenderingExport.h"
 
@@ -16,7 +16,8 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "Mathematics/Algebra/Transform.h"
+#include "Mathematics/Algebra/TransformDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 
 #include <gsl/util>
 
@@ -130,7 +131,7 @@ int Rendering::DlodNodeImpl::GetNumLevelsOfDetail() const noexcept
 float Rendering::DlodNodeImpl::GetModelMinDistance(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numLevelsOfDetail, "Ë÷ÒıÔ½½ç");
+    RENDERING_ASSERTION_0(0 <= index && index < numLevelsOfDetail, "ç´¢å¼•è¶Šç•Œ");
 
     return modelMinDistance.at(index);
 }
@@ -138,7 +139,7 @@ float Rendering::DlodNodeImpl::GetModelMinDistance(int index) const
 float Rendering::DlodNodeImpl::GetModelMaxDistance(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numLevelsOfDetail, "Ë÷ÒıÔ½½ç");
+    RENDERING_ASSERTION_0(0 <= index && index < numLevelsOfDetail, "ç´¢å¼•è¶Šç•Œ");
 
     return modelMaxDistance.at(index);
 }
@@ -146,7 +147,7 @@ float Rendering::DlodNodeImpl::GetModelMaxDistance(int index) const
 float Rendering::DlodNodeImpl::GetWorldMinDistance(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numLevelsOfDetail, "Ë÷ÒıÔ½½ç");
+    RENDERING_ASSERTION_0(0 <= index && index < numLevelsOfDetail, "ç´¢å¼•è¶Šç•Œ");
 
     return worldMinDistance.at(index);
 }
@@ -154,7 +155,7 @@ float Rendering::DlodNodeImpl::GetWorldMinDistance(int index) const
 float Rendering::DlodNodeImpl::GetWorldMaxDistance(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numLevelsOfDetail, "Ë÷ÒıÔ½½ç");
+    RENDERING_ASSERTION_0(0 <= index && index < numLevelsOfDetail, "ç´¢å¼•è¶Šç•Œ");
 
     return worldMaxDistance.at(index);
 }
@@ -162,7 +163,7 @@ float Rendering::DlodNodeImpl::GetWorldMaxDistance(int index) const
 void Rendering::DlodNodeImpl::SetModelDistance(int index, float minDistance, float maxDistance)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(0 <= index && index < numLevelsOfDetail, "Ë÷ÒıÔ½½ç");
+    RENDERING_ASSERTION_0(0 <= index && index < numLevelsOfDetail, "ç´¢å¼•è¶Šç•Œ");
 
     modelMinDistance.at(index) = minDistance;
     modelMaxDistance.at(index) = maxDistance;

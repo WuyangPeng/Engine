@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ���ߣ������������ʶ���������
-/// ��ϵ���ߣ�94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-/// ��׼��std:c++20
-/// �汾��1.0.0.8 (2024/04/11 22:14)
+/// 标准：std:c++20
+/// 版本：1.0.0.8 (2024/04/11 22:14)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_INIT_TERM_CONTAINER_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_INIT_TERM_CONTAINER_H
@@ -32,10 +32,10 @@ namespace CoreTools
         void Execute();
 
     private:
-        /// �����Ŀ�����㹻����֧�����Ӧ�ó���
-        /// ������Ӧ�ó��򴥷��˶��ԣ��޸����ֵȻ�����±��롣
-        /// ��Ŀ���Ǳ���ִ���ڼ�preMain��postMain�Ķ�̬���䣬
-        /// �Ӷ�ʹ������׹����͸����ڴ�ʹ�������
+        /// 这个数目必须足够大，以支持你的应用程序。
+        /// 如果你的应用程序触发此断言，修改这个值然后重新编译。
+        /// 其目标是避免执行期间preMain和postMain的动态分配，
+        /// 从而使其更容易管理和跟踪内存使用情况。
         static constexpr auto maxElements = 256;
         static_assert(0 < maxElements);
 

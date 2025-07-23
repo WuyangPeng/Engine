@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/28 16:04)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/28 16:04)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR1_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR1_H
@@ -35,9 +35,9 @@ namespace Mathematics
 
         NODISCARD bool IsIntersection() const noexcept override;
 
-        // ÓÐ¹Ø½»¼¯µÄÐÅÏ¢¡£
-        // Ïà½»ÊýÎª0£¨Çø¼ä²»ÖØµþ£©£¬
-        // 1£¨Çø¼ä±ß½çÏà½»£©»ò2£¨Çø¼äÓëÇø¼äÏà½»£©¡£
+        // æœ‰å…³äº¤é›†çš„ä¿¡æ¯ã€‚
+        // ç›¸äº¤æ•°ä¸º0ï¼ˆåŒºé—´ä¸é‡å ï¼‰ï¼Œ
+        // 1ï¼ˆåŒºé—´è¾¹ç•Œç›¸äº¤ï¼‰æˆ–2ï¼ˆåŒºé—´ä¸ŽåŒºé—´ç›¸äº¤ï¼‰ã€‚
         NODISCARD int GetNumIntersections() const;
         NODISCARD Real GetIntersection(int index) const;
 

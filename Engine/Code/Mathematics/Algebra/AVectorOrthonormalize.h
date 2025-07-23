@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 14:40)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 14:40)
 
 #ifndef MATHEMATICS_ALGEBRA_A_VECTOR_ORTHONORMALIZE_H
 #define MATHEMATICS_ALGEBRA_A_VECTOR_ORTHONORMALIZE_H
@@ -30,8 +30,8 @@ namespace Mathematics
         using AVectorType = AVector<Real>;
 
     public:
-        // Gram-SchmidtÕı½»»¯¡£
-        // ÒÔÏßĞÔÎŞ¹ØµÄÏòÁ¿U¡¢VºÍW£¬À´¼ÆËãÒ»¸öÕı½»×é£¨µ¥Î»³¤¶È£¬Ïà»¥´¹Ö±£©¡£
+        // Gram-Schmidtæ­£äº¤åŒ–ã€‚
+        // ä»¥çº¿æ€§æ— å…³çš„å‘é‡Uã€Vå’ŒWï¼Œæ¥è®¡ç®—ä¸€ä¸ªæ­£äº¤ç»„ï¼ˆå•ä½é•¿åº¦ï¼Œç›¸äº’å‚ç›´ï¼‰ã€‚
         AVectorOrthonormalize(const AVectorType& uVector, const AVectorType& vVector, const AVectorType& wVector, Real epsilon = MathType::GetZeroTolerance());
 
         explicit AVectorOrthonormalize(const std::vector<AVectorType> vectors, Real epsilon = MathType::GetZeroTolerance());

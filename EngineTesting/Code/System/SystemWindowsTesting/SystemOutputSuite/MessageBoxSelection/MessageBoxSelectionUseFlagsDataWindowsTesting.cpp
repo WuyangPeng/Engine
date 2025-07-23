@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.7 (2024/03/09 12:27)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.7 (2024/03/09 12:27)
 
 #include "MessageBoxSelectionUseFlagsDataWindowsTesting.h"
 #include "System/SystemOutput/Data/MessageBoxFlagsData.h"
@@ -61,33 +61,33 @@ System::MessageBoxSelectionUseFlagsDataWindowsTesting::MessageBoxSelectionUseFla
                          { MessageBoxType::YesNo, { DialogBoxCommand::IdYes, DialogBoxCommand::IdNo } },
                          { MessageBoxType::RetryCancel, { DialogBoxCommand::IdRetry, DialogBoxCommand::IdCancel } },
                          { MessageBoxType::CancelTryContinue, { DialogBoxCommand::IdCancel, DialogBoxCommand::IdTryAgain, DialogBoxCommand::IdContinue } } },
-      iconDescriptions{ { MessageBoxIcon::NoIcon, SYSTEM_TEXT("ÎŞÍ¼±ê") },
-                        { MessageBoxIcon::Hand, SYSTEM_TEXT("´íÎó") },
-                        { MessageBoxIcon::Question, SYSTEM_TEXT("ÎÊºÅ") },
-                        { MessageBoxIcon::Exclamation, SYSTEM_TEXT("¾¯¸æ") },
-                        { MessageBoxIcon::Asterisk, SYSTEM_TEXT("ĞÅÏ¢") },
-                        { MessageBoxIcon::UserIcon, SYSTEM_TEXT("ÎŞÍ¼±ê") },
-                        { MessageBoxIcon::Waning, SYSTEM_TEXT("¾¯¸æ") },
-                        { MessageBoxIcon::Error, SYSTEM_TEXT("´íÎó") },
-                        { MessageBoxIcon::Information, SYSTEM_TEXT("ĞÅÏ¢") },
-                        { MessageBoxIcon::Stop, SYSTEM_TEXT("´íÎó") } },
-      defaultDescriptions{ { MessageBoxDefault::Button1, SYSTEM_TEXT("£¨°´Å¥1£©") },
-                           { MessageBoxDefault::Button2, SYSTEM_TEXT("£¨°´Å¥2£©") },
-                           { MessageBoxDefault::Button3, SYSTEM_TEXT("£¨°´Å¥3£©") },
-                           { MessageBoxDefault::Button4, SYSTEM_TEXT("£¨°´Å¥4£©") } },
-      modeDescriptions{ { MessageBoxMode::ApplicationModal, SYSTEM_TEXT("ApplModalÑùÊ½") },
-                        { MessageBoxMode::SystemModal, SYSTEM_TEXT("SystemModalÑùÊ½") },
-                        { MessageBoxMode::TaskModal, SYSTEM_TEXT("TaskModalÑùÊ½") } },
-      miscDescriptions{ { MessageBoxMisc::NoMisc, SYSTEM_TEXT("£¨Ã»ÓĞÔÓÏî£©") },
-                        { MessageBoxMisc::Help, SYSTEM_TEXT("£¨ÏÔÊ¾°ïÖú°´Å¥£©") },
-                        { MessageBoxMisc::NoFocus, SYSTEM_TEXT("£¨MessageBox²»Ê¹ÓÃ´Ë±êÖ¾£©") },
-                        { MessageBoxMisc::SetForeground, SYSTEM_TEXT("£¨ÏûÏ¢¿òÎªÇ°¾°´°¿Ú£©") },
-                        { MessageBoxMisc::DefaultDesktopOnly, SYSTEM_TEXT("£¨½ÓÊÕÊäÈëµÄµ±Ç°×ÀÃæÒ»¶¨ÊÇÒ»¸öÈ±Ê¡×ÀÃæ£©") },
-                        { MessageBoxMisc::TopMost, SYSTEM_TEXT("£¨ÏûÏ¢¿òÓÃWS_EX_TOPMOST´°¿ÚÀàĞÍÀ´´´½¨£©") },
-                        { MessageBoxMisc::Right, SYSTEM_TEXT("£¨ÎÄ±¾ÓÒ¶ÔÆë£©") },
-                        { MessageBoxMisc::RightToLeftReading, SYSTEM_TEXT("£¨Ö¸¶¨ÎÄ±¾Ó¦ÎªÔÚÏ£²®À´ºÍ°¢À­²®ÓïÏµÍ³ÖĞµÄ´ÓÓÒµ½×óÏÔÊ¾£©") },
-                        { MessageBoxMisc::ServiceNotification, SYSTEM_TEXT("£¨µ÷ÓÃÕßÊÇÍ¨ÖªÓÃ»§ÊÂ¼şµÄ·şÎñ£©") },
-                        { MessageBoxMisc::ServiceNotificationNt3X, SYSTEM_TEXT("£¨MessageBox²»Ê¹ÓÃ´Ë±êÖ¾£©") } },
+      iconDescriptions{ { MessageBoxIcon::NoIcon, SYSTEM_TEXT("æ— å›¾æ ‡") },
+                        { MessageBoxIcon::Hand, SYSTEM_TEXT("é”™è¯¯") },
+                        { MessageBoxIcon::Question, SYSTEM_TEXT("é—®å·") },
+                        { MessageBoxIcon::Exclamation, SYSTEM_TEXT("è­¦å‘Š") },
+                        { MessageBoxIcon::Asterisk, SYSTEM_TEXT("ä¿¡æ¯") },
+                        { MessageBoxIcon::UserIcon, SYSTEM_TEXT("æ— å›¾æ ‡") },
+                        { MessageBoxIcon::Waning, SYSTEM_TEXT("è­¦å‘Š") },
+                        { MessageBoxIcon::Error, SYSTEM_TEXT("é”™è¯¯") },
+                        { MessageBoxIcon::Information, SYSTEM_TEXT("ä¿¡æ¯") },
+                        { MessageBoxIcon::Stop, SYSTEM_TEXT("é”™è¯¯") } },
+      defaultDescriptions{ { MessageBoxDefault::Button1, SYSTEM_TEXT("ï¼ˆæŒ‰é’®1ï¼‰") },
+                           { MessageBoxDefault::Button2, SYSTEM_TEXT("ï¼ˆæŒ‰é’®2ï¼‰") },
+                           { MessageBoxDefault::Button3, SYSTEM_TEXT("ï¼ˆæŒ‰é’®3ï¼‰") },
+                           { MessageBoxDefault::Button4, SYSTEM_TEXT("ï¼ˆæŒ‰é’®4ï¼‰") } },
+      modeDescriptions{ { MessageBoxMode::ApplicationModal, SYSTEM_TEXT("ApplModalæ ·å¼") },
+                        { MessageBoxMode::SystemModal, SYSTEM_TEXT("SystemModalæ ·å¼") },
+                        { MessageBoxMode::TaskModal, SYSTEM_TEXT("TaskModalæ ·å¼") } },
+      miscDescriptions{ { MessageBoxMisc::NoMisc, SYSTEM_TEXT("ï¼ˆæ²¡æœ‰æ‚é¡¹ï¼‰") },
+                        { MessageBoxMisc::Help, SYSTEM_TEXT("ï¼ˆæ˜¾ç¤ºå¸®åŠ©æŒ‰é’®ï¼‰") },
+                        { MessageBoxMisc::NoFocus, SYSTEM_TEXT("ï¼ˆMessageBoxä¸ä½¿ç”¨æ­¤æ ‡å¿—ï¼‰") },
+                        { MessageBoxMisc::SetForeground, SYSTEM_TEXT("ï¼ˆæ¶ˆæ¯æ¡†ä¸ºå‰æ™¯çª—å£ï¼‰") },
+                        { MessageBoxMisc::DefaultDesktopOnly, SYSTEM_TEXT("ï¼ˆæ¥æ”¶è¾“å…¥çš„å½“å‰æ¡Œé¢ä¸€å®šæ˜¯ä¸€ä¸ªç¼ºçœæ¡Œé¢ï¼‰") },
+                        { MessageBoxMisc::TopMost, SYSTEM_TEXT("ï¼ˆæ¶ˆæ¯æ¡†ç”¨WS_EX_TOPMOSTçª—å£ç±»å‹æ¥åˆ›å»ºï¼‰") },
+                        { MessageBoxMisc::Right, SYSTEM_TEXT("ï¼ˆæ–‡æœ¬å³å¯¹é½ï¼‰") },
+                        { MessageBoxMisc::RightToLeftReading, SYSTEM_TEXT("ï¼ˆæŒ‡å®šæ–‡æœ¬åº”ä¸ºåœ¨å¸Œä¼¯æ¥å’Œé˜¿æ‹‰ä¼¯è¯­ç³»ç»Ÿä¸­çš„ä»å³åˆ°å·¦æ˜¾ç¤ºï¼‰") },
+                        { MessageBoxMisc::ServiceNotification, SYSTEM_TEXT("ï¼ˆè°ƒç”¨è€…æ˜¯é€šçŸ¥ç”¨æˆ·äº‹ä»¶çš„æœåŠ¡ï¼‰") },
+                        { MessageBoxMisc::ServiceNotificationNt3X, SYSTEM_TEXT("ï¼ˆMessageBoxä¸ä½¿ç”¨æ­¤æ ‡å¿—ï¼‰") } },
       maxSize{ CoreTools::MaxElement<size_t>({ typeFlags.size(), iconFlags.size(), defaultFlags.size(), modeFlags.size(), miscFlags.size() }) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;

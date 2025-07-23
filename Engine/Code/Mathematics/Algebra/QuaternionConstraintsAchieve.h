@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/26 11:00)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/26 11:00)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_CONSTRAINTS_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_CONSTRAINTS_ACHIEVE_H
@@ -49,9 +49,9 @@ template <typename Real>
 requires std::is_arithmetic_v<Real> bool Mathematics::QuaternionConstraints<Real>::IsValid(Real x, Real y) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_1(MathType::Approximate(MathType::Sqrt(x * x + y * y), MathType::GetValue(1)), "(x,y)±ØĞëÊÇµ¥Î»³¤¶È£¡");
+    MATHEMATICS_ASSERTION_1(MathType::Approximate(MathType::Sqrt(x * x + y * y), MathType::GetValue(1)), "(x,y)å¿…é¡»æ˜¯å•ä½é•¿åº¦ï¼");
 
-    // ²âÊÔ(x,y)ÊÇ·ñÂú×ãÔ¼ÊøÌõ¼ş¡£
+    // æµ‹è¯•(x,y)æ˜¯å¦æ»¡è¶³çº¦æŸæ¡ä»¶ã€‚
     auto xm = x - cosMinAngle;
     auto ym = y - sinMinAngle;
     if (ym * diffCosMaxMin <= xm * diffSinMaxMin)
@@ -59,7 +59,7 @@ requires std::is_arithmetic_v<Real> bool Mathematics::QuaternionConstraints<Real
         return true;
     }
 
-    // ²âÊÔ(-x,-y)ÊÇ·ñÂú×ãÔ¼ÊøÌõ¼ş¡£
+    // æµ‹è¯•(-x,-y)æ˜¯å¦æ»¡è¶³çº¦æŸæ¡ä»¶ã€‚
     auto xp = x + cosMinAngle;
     auto yp = y + sinMinAngle;
     if (xp * diffSinMaxMin <= yp * diffCosMaxMin)

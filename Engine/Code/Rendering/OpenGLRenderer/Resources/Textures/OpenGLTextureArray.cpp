@@ -1,11 +1,11 @@
-/// Copyright (c) 2010-2024
+ï»¿/// Copyright (c) 2010-2024
 /// Threading Core Render Engine
 ///
-/// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-/// ÁªÏµ×÷Õß£º94458936@qq.com
+/// ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+/// è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-/// ±ê×¼£ºstd:c++20
-/// °æ±¾£º1.0.0.3 (2024/01/08 19:31)
+/// æ ‡å‡†ï¼šstd:c++20
+/// ç‰ˆæœ¬ï¼š1.0.0.3 (2024/01/08 19:31)
 
 #include "Rendering/RenderingExport.h"
 
@@ -200,7 +200,7 @@ bool Rendering::OpenGLTextureArray::Update(int item, int level)
     const auto texture = GetTexture();
     if (texture->GetUsage() != UsageType::DynamicUpdate)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎÆÀíÊ¹ÓÃ±ØĞëÎªDynamicUpdate¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("çº¹ç†ä½¿ç”¨å¿…é¡»ä¸ºDynamicUpdateã€‚"));
     }
 
     return DoCopyCpuToGpu(item, level);
@@ -232,25 +232,25 @@ bool Rendering::OpenGLTextureArray::CopyGpuToCpu(int item, int level)
     if (const auto numItems = texture->GetNumItems();
         item >= numItems)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎÆÀí¼¶±ğ³¬³ö·¶Î§¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("çº¹ç†çº§åˆ«è¶…å‡ºèŒƒå›´ã€‚"));
     }
 
     if (level >= texture->GetNumLevels())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎÆÀí¼¶±ğ³¬³ö·¶Î§¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("çº¹ç†çº§åˆ«è¶…å‡ºèŒƒå›´ã€‚"));
     }
 
     const auto pixBuffer = impl->GetLevelPixelPackBuffer(level);
     if (0 == pixBuffer)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Î´Îª¼¶±ğ") + System::ToString(level) + SYSTEM_TEXT("¶¨ÒåÔİ´æ»º³åÇø¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("æœªä¸ºçº§åˆ«") + System::ToString(level) + SYSTEM_TEXT("å®šä¹‰æš‚å­˜ç¼“å†²åŒºã€‚"));
     }
 
     const auto data = texture->GetDataFor(item, level);
     const auto numBytes = texture->GetNumLevelBytes(level);
     if (0 == numBytes)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ã»ÓĞÎÆÀí¼¶±ğ") + System::ToString(level) + SYSTEM_TEXT("µÄÄ¿±êÊı¾İ¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("æ²¡æœ‰çº¹ç†çº§åˆ«") + System::ToString(level) + SYSTEM_TEXT("çš„ç›®æ ‡æ•°æ®ã€‚"));
     }
 
     auto const textureTarget = GetTarget();
@@ -292,25 +292,25 @@ bool Rendering::OpenGLTextureArray::DoCopyCpuToGpu(int item, int level)
 
     if (CanAutoGenerateMipmaps() && (0 < level))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎŞ·¨¸üĞÂGPUÖĞ×Ô¶¯Éú³ÉµÄmipmap¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("æ— æ³•æ›´æ–°GPUä¸­è‡ªåŠ¨ç”Ÿæˆçš„mipmapã€‚"));
     }
 
     if (const auto numItems = texture->GetNumItems();
         numItems <= item)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎÆÀí¼¶±ğ³¬³ö·¶Î§¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("çº¹ç†çº§åˆ«è¶…å‡ºèŒƒå›´ã€‚"));
     }
 
     if (texture->GetNumLevels() <= level)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ÎÆÀí¼¶±ğ³¬³ö·¶Î§¡£"));
+        THROW_EXCEPTION(SYSTEM_TEXT("çº¹ç†çº§åˆ«è¶…å‡ºèŒƒå›´ã€‚"));
     }
 
     const auto data = texture->GetDataFor(item, level);
     const auto numBytes = texture->GetNumLevelBytes(level);
     if (numBytes == 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Ã»ÓĞÎÆÀí¼¶±ğ") + System::ToString(level) + SYSTEM_TEXT("µÄÔ´Êı¾İ"));
+        THROW_EXCEPTION(SYSTEM_TEXT("æ²¡æœ‰çº¹ç†çº§åˆ«") + System::ToString(level) + SYSTEM_TEXT("çš„æºæ•°æ®"));
     }
 
     const auto textureTarget = GetTarget();

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:07)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:07)
 
 #ifndef MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_UPDATE_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_UPDATE_DETAIL_H
@@ -39,11 +39,11 @@ template <typename Real>
 void Mathematics::CylinderFit3Update<Real>::Update(int maxLoopTime)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
-    MATHEMATICS_ASSERTION_2(0 < maxLoopTime, "Ñ­»·´ÎÊıÎª¸ºÊı\n");
+    MATHEMATICS_ASSERTION_2(0 < maxLoopTime, "å¾ªç¯æ¬¡æ•°ä¸ºè´Ÿæ•°\n");
 
     for (auto i = 0; i < maxLoopTime; ++i)
     {
-        // ÏÈ´æ´¢Ã¿Ò»¸öÑ­»·ĞèÒªµÄÖµ£¬±ÜÃâÖØ¸´¼ÆËã
+        // å…ˆå­˜å‚¨æ¯ä¸€ä¸ªå¾ªç¯éœ€è¦çš„å€¼ï¼Œé¿å…é‡å¤è®¡ç®—
         CalculateUpdateData();
 
         UpdateInverseRadiusSquare();
@@ -79,13 +79,13 @@ void Mathematics::CylinderFit3Update<Real>::UpdateInverseRadiusSquare() noexcept
     inverseRadiusSquare = deltaCrossAxisLengthSquaredSum / deltaCrossAxisLengthQuarticSum;
     exactly = MathType::GetValue(1) - inverseRadiusSquare * deltaCrossAxisLengthSquaredSum / static_cast<Real>(updateData.size());
 
-    MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= exactly && exactly <= MathType::GetValue(1), "Îó²îÖµ´íÎó£¡");
+    MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= exactly && exactly <= MathType::GetValue(1), "è¯¯å·®å€¼é”™è¯¯ï¼");
 }
 
 template <typename Real>
 void Mathematics::CylinderFit3Update<Real>::UpdateDirection()
 {
-    // ¼ÆËãµÄ×î¿ìÏÂ½µµÄ·½Ïò¡£
+    // è®¡ç®—çš„æœ€å¿«ä¸‹é™çš„æ–¹å‘ã€‚
     Vector3Type descentDirection{};
     auto aMean = MathType::GetValue(0);
     auto aaMean = MathType::GetValue(0);
@@ -106,12 +106,12 @@ void Mathematics::CylinderFit3Update<Real>::UpdateDirection()
     if (descentDirection.IsZero(epsilon))
     {
         exactly = aaMean;
-        MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= exactly && exactly <= MathType::GetValue(1), "Îó²îÖµ´íÎó£¡");
+        MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= exactly && exactly <= MathType::GetValue(1), "è¯¯å·®å€¼é”™è¯¯ï¼");
 
         return;
     }
 
-    // ¼ÆËãÓÃÓÚ×î¿ìÏÂ½µµÄÏßµÄËÄ´Î¶àÏîÊ½¡£
+    // è®¡ç®—ç”¨äºæœ€å¿«ä¸‹é™çš„çº¿çš„å››æ¬¡å¤šé¡¹å¼ã€‚
     auto abMean = MathType::GetValue(0);
     auto acMean = MathType::GetValue(0);
     auto bbMean = MathType::GetValue(0);
@@ -169,7 +169,7 @@ void Mathematics::CylinderFit3Update<Real>::UpdateDirection()
     }
 
     exactly = min;
-    MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= exactly && exactly <= MathType::GetValue(1), "Îó²îÖµ´íÎó£¡");
+    MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= exactly && exactly <= MathType::GetValue(1), "è¯¯å·®å€¼é”™è¯¯ï¼");
 
     if (0 <= minIndex)
     {
@@ -185,7 +185,7 @@ void Mathematics::CylinderFit3Update<Real>::UpdateCenter()
 {
     auto inverseNumPoints = MathType::GetValue(1) / static_cast<Real>(updateData.size());
 
-    // ¼ÆËãµÄ×î¿ìÏÂ½µµÄ·½Ïò¡£
+    // è®¡ç®—çš„æœ€å¿«ä¸‹é™çš„æ–¹å‘ã€‚
     Vector3Type descentDirection{};
     auto aMean = MathType::GetValue(0);
     auto aaMean = MathType::GetValue(0);
@@ -199,7 +199,7 @@ void Mathematics::CylinderFit3Update<Real>::UpdateCenter()
         aMean += a;
         aaMean += a * a;
 
-        // È·±£|axis| = 1
+        // ç¡®ä¿|axis| = 1
         descentDirection += (delta - axis * Vector3Tools<Real>::DotProduct(axis, delta)) * a;
     }
 
@@ -209,12 +209,12 @@ void Mathematics::CylinderFit3Update<Real>::UpdateCenter()
     if (descentDirection.IsZero(epsilon))
     {
         exactly = aaMean;
-        MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= exactly && exactly <= MathType::GetValue(1), "Îó²îÖµ´íÎó£¡");
+        MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= exactly && exactly <= MathType::GetValue(1), "è¯¯å·®å€¼é”™è¯¯ï¼");
 
         return;
     }
 
-    // ¼ÆËãÓÃÓÚ×î¿ìÏÂ½µµÄÏßµÄËÄ´Î¶àÏîÊ½¡£
+    // è®¡ç®—ç”¨äºæœ€å¿«ä¸‹é™çš„çº¿çš„å››æ¬¡å¤šé¡¹å¼ã€‚
     const auto descentDirectionCrossAxis = Vector3Tools<Real>::CrossProduct(descentDirection, axis);
     auto c = Vector3Tools<Real>::GetLength(descentDirectionCrossAxis) * inverseNumPoints * inverseRadiusSquare;
     auto bMean = MathType::GetValue(0);
@@ -264,7 +264,7 @@ void Mathematics::CylinderFit3Update<Real>::UpdateCenter()
     }
 
     exactly = min;
-    MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= exactly && exactly <= MathType::GetValue(1), "Îó²îÖµ´íÎó£¡");
+    MATHEMATICS_ASSERTION_2(MathType::GetValue(0) <= exactly && exactly <= MathType::GetValue(1), "è¯¯å·®å€¼é”™è¯¯ï¼");
 
     if (0 <= minIndex)
     {

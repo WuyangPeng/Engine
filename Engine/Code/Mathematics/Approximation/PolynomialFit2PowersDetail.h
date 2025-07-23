@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 14:15)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 14:15)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT2_POWERS_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT2_POWERS_DETAIL_H
@@ -40,8 +40,8 @@ void Mathematics::PolynomialFit2Powers<Real>::Init(const Samples& xSamples, cons
 template <typename Real>
 void Mathematics::PolynomialFit2Powers<Real>::InitializePowers()
 {
-    // È·¶¨×î´óµÄÃİ¹¦ÂÊ¡£xµÄÃİ¹¹ÔìµÄ¶àÏîÊ½ÄâºÏ¼ÆËãÁ½±¶µÄÃİ¡£
-    // xµÄÃİ¼ÆËã¿ÉÎªÄâºÏµÄ¶àÏîÊ½µÄÆÀ¶¨µÄÃİ¡£
+    // ç¡®å®šæœ€å¤§çš„å¹‚åŠŸç‡ã€‚xçš„å¹‚æ„é€ çš„å¤šé¡¹å¼æ‹Ÿåˆè®¡ç®—ä¸¤å€çš„å¹‚ã€‚
+    // xçš„å¹‚è®¡ç®—å¯ä¸ºæ‹Ÿåˆçš„å¤šé¡¹å¼çš„è¯„å®šçš„å¹‚ã€‚
     auto maxXPowerConstIter = std::max_element(powers.begin(), powers.end());
 
     powersData.SetMaxPower(0, *maxXPowerConstIter);
@@ -50,7 +50,7 @@ void Mathematics::PolynomialFit2Powers<Real>::InitializePowers()
 template <typename Real>
 void Mathematics::PolynomialFit2Powers<Real>::TransformToUnit(const Samples& xSourceSamples, const Samples& wSourceSamples, Samples& xTargetSamples, Samples& wTargetSamples)
 {
-    // ÎªÊıÖµÂ³°ôĞÔ×ª»»Êı¾İÎª [-1,1]^2¡£
+    // ä¸ºæ•°å€¼é²æ£’æ€§è½¬æ¢æ•°æ®ä¸º [-1,1]^2ã€‚
     TransformToUnit(xSourceSamples, xTargetSamples, 0);
     TransformToUnit(wSourceSamples, wTargetSamples, 1);
 }
@@ -73,7 +73,7 @@ void Mathematics::PolynomialFit2Powers<Real>::TransformToUnit(const Samples& sou
 template <typename Real>
 void Mathematics::PolynomialFit2Powers<Real>::DoLeastSquaresFit(const Samples& xTargetSamples, const Samples& wTargetSamples)
 {
-    MATHEMATICS_ASSERTION_2(xTargetSamples.size() == wTargetSamples.size(), "ÑùÆ·µãÊı×é´óĞ¡²»Í¬\n");
+    MATHEMATICS_ASSERTION_2(xTargetSamples.size() == wTargetSamples.size(), "æ ·å“ç‚¹æ•°ç»„å¤§å°ä¸åŒ\n");
 
     const auto maxXPower = powersData.GetMaxPower(0);
     const auto powersSize = 2 * maxXPower + 1;
@@ -83,7 +83,7 @@ void Mathematics::PolynomialFit2Powers<Real>::DoLeastSquaresFit(const Samples& x
 
     auto numPowers = boost::numeric_cast<int>(powers.size());
 
-    // ¶ÔÓÚÈ·¶¨µÄÄâºÏ¶àÏîÊ½µÄÏµÊıµÄÏßĞÔÏµÍ³µÄ¾ØÕóºÍÊ¸Á¿¡£
+    // å¯¹äºç¡®å®šçš„æ‹Ÿåˆå¤šé¡¹å¼çš„ç³»æ•°çš„çº¿æ€§ç³»ç»Ÿçš„çŸ©é˜µå’ŒçŸ¢é‡ã€‚
     VariableMatrix<Real> matrix{ numPowers, numPowers };
     VariableLengthVector<Real> vector{ numPowers };
 
@@ -91,7 +91,7 @@ void Mathematics::PolynomialFit2Powers<Real>::DoLeastSquaresFit(const Samples& x
 
     for (auto samplesIndex = 0u; samplesIndex < numSamples; ++samplesIndex)
     {
-        // ¼ÆËãxµÄÓĞ¹ØÃİ
+        // è®¡ç®—xçš„æœ‰å…³å¹‚
         auto x = xTargetSamples.at(samplesIndex);
         auto w = wTargetSamples.at(samplesIndex);
         for (auto powersIndex = 1; powersIndex <= 2 * maxXPower; ++powersIndex)
@@ -102,7 +102,7 @@ void Mathematics::PolynomialFit2Powers<Real>::DoLeastSquaresFit(const Samples& x
 
         for (auto row = 0; row < numPowers; ++row)
         {
-            // ¸üĞÂ¶Ô³Æ¾ØÕóµÄÉÏÈı½Ç²¿·Ö¡£
+            // æ›´æ–°å¯¹ç§°çŸ©é˜µçš„ä¸Šä¸‰è§’éƒ¨åˆ†ã€‚
             for (auto column = row; column < numPowers; ++column)
             {
                 auto next = powers.at(row) + powers.at(column);
@@ -110,13 +110,13 @@ void Mathematics::PolynomialFit2Powers<Real>::DoLeastSquaresFit(const Samples& x
                 matrix(row, column) += xp;
             }
 
-            // ¸üĞÂÏµÍ³ÔÚÓÒÊÖ×ø±êÏµ¡£
+            // æ›´æ–°ç³»ç»Ÿåœ¨å³æ‰‹åæ ‡ç³»ã€‚
             auto xp = xPowers.at(powers.at(row));
             vector[row] += xp * w;
         }
     }
 
-    // ¶ÔºÍ½øĞĞÕıÔò»¯
+    // å¯¹å’Œè¿›è¡Œæ­£åˆ™åŒ–
     matrix /= boost::numeric_cast<Real>(numSamples);
     vector /= boost::numeric_cast<Real>(numSamples);
 
@@ -184,10 +184,10 @@ Real Mathematics::PolynomialFit2Powers<Real>::operator()(Real x) const
 
     xPowers.at(0) = MathType::GetValue(1);
 
-    // ±ä»»x´ÓÔ­À´µÄ¿Õ¼äµ½[-1,1]¡£
+    // å˜æ¢xä»åŸæ¥çš„ç©ºé—´åˆ°[-1,1]ã€‚
     x = MathType::GetValue(-1) + (MathType::GetValue(2) * (x - powersData.GetMin(0)) * powersData.GetScale(0));
 
-    // ¼ÆËãxµÄÓĞ¹ØÃİ
+    // è®¡ç®—xçš„æœ‰å…³å¹‚
     for (auto power = 1; power <= maxXPower; ++power)
     {
         const auto next = power - 1;
@@ -201,7 +201,7 @@ Real Mathematics::PolynomialFit2Powers<Real>::operator()(Real x) const
         w += powersData.GetCoefficients(i) * xp;
     }
 
-    // ±ä»»w´Ó[-1,1]»Øµ½Ô­À´µÄ¿Õ¼ä¡£
+    // å˜æ¢wä»[-1,1]å›åˆ°åŸæ¥çš„ç©ºé—´ã€‚
     w = (w + MathType::GetValue(1)) * powersData.GetInvTwoWScale() + powersData.GetMin(1);
 
     return w;

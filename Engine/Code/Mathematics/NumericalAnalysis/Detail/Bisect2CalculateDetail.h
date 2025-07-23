@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2023
+ï»¿///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-///	ÁªÏµ×÷Õß£º94458936@qq.com
+///	ä½œè€…ï¼šå½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+///	è”ç³»ä½œè€…ï¼š94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++20
-///	°æ±¾£º0.9.1.6 (2023/10/27 09:22)
+///	æ ‡å‡†ï¼šstd:c++20
+///	ç‰ˆæœ¬ï¼š0.9.1.6 (2023/10/27 09:22)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BISECT2_CALCULATE_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BISECT2_CALCULATE_DETAIL_H
@@ -30,10 +30,10 @@ Mathematics::Bisect2Calculate<Real>::Bisect2Calculate(const Bisect2Type& bisect,
 template <typename Real>
 void Mathematics::Bisect2Calculate<Real>::Calculate(Real beginPointX, Real beginPointY, Real endPointX, Real endPointY)
 {
-    MATHEMATICS_ASSERTION_1(beginPointX <= endPointX, "ÆğµãµÄXÖµ±ÈÖÕµãµÄXÖµ´ó¡£");
-    MATHEMATICS_ASSERTION_1(beginPointY <= endPointY, "ÆğµãµÄYÖµ±ÈÖÕµãµÄYÖµ´ó¡£");
+    MATHEMATICS_ASSERTION_1(beginPointX <= endPointX, "èµ·ç‚¹çš„Xå€¼æ¯”ç»ˆç‚¹çš„Xå€¼å¤§ã€‚");
+    MATHEMATICS_ASSERTION_1(beginPointY <= endPointY, "èµ·ç‚¹çš„Yå€¼æ¯”ç»ˆç‚¹çš„Yå€¼å¤§ã€‚");
 
-    // ²âÊÔµÄËÄ¸ö½ÇµÄÖµ¡£
+    // æµ‹è¯•çš„å››ä¸ªè§’çš„å€¼ã€‚
     if (bisect2Storage.TestFourCornerValues(beginPointX, beginPointY, endPointX, endPointY))
     {
         bisect2Root = bisect2Storage.GetBisect2Root();
@@ -41,18 +41,18 @@ void Mathematics::Bisect2Calculate<Real>::Calculate(Real beginPointX, Real begin
         return;
     }
 
-    // ¹¹½¨³õÊ¼ËÄ±ßĞÎ¡£
+    // æ„å»ºåˆå§‹å››è¾¹å½¢ã€‚
 
-    // Ôö¼Ó N00¡£
+    // å¢åŠ  N00ã€‚
     graph = std::make_shared<Bisect2NodeType>(beginPointX, beginPointY, bisect2Storage.GetBeginXAndBeginYValue0(), bisect2Storage.GetBeginXAndBeginYValue1());
 
-    // Ôö¼Ó N10¡£
+    // å¢åŠ  N10ã€‚
     graph->AddXNextNode(endPointX, beginPointY, bisect2Storage.GetEndXAndBeginYValue0(), bisect2Storage.GetEndXAndBeginYValue1());
 
-    // Ôö¼Ó N01¡£
+    // å¢åŠ  N01ã€‚
     graph->AddYNextNode(beginPointX, endPointY, bisect2Storage.GetBeginXAndEndYValue0(), bisect2Storage.GetBeginXAndEndYValue1());
 
-    // Ôö¼Ó N11¡£
+    // å¢åŠ  N11ã€‚
     graph->GetXNext()->AddYNextNode(endPointX, endPointY, bisect2Storage.GetEndXAndEndYValue0(), bisect2Storage.GetEndXAndEndYValue1());
     graph->GetYNext()->AddXNextNode(graph->GetXNext()->GetYNext());
 
@@ -62,7 +62,7 @@ void Mathematics::Bisect2Calculate<Real>::Calculate(Real beginPointX, Real begin
         bisect2Root = bisect2Storage.GetBisect2Root();
     }
 
-    // ½«Ê£ÏÂµÄËÄ±ßĞÎ´Óm_GraphÖĞÒÆ³ı¡£
+    // å°†å‰©ä¸‹çš„å››è¾¹å½¢ä»m_Graphä¸­ç§»é™¤ã€‚
     graph.reset();
 }
 
@@ -97,26 +97,26 @@ bool Mathematics::Bisect2Calculate<Real>::BisectRecurse(const Bisect2NodeSharedP
 
     if (++level == bisect2.GetMaxLevel())
     {
-        // µİ¹é³¬³öÁË´ÎÊı£¬·µ»ØÒ»¸öÖĞ¼äÖµ¡£
+        // é€’å½’è¶…å‡ºäº†æ¬¡æ•°ï¼Œè¿”å›ä¸€ä¸ªä¸­é—´å€¼ã€‚
         --level;
         bisect2Root = std::make_shared<Bisect2RootType>(bisect2Storage.GetMidpointX(), bisect2Storage.GetMidpointY(), BisectRootType::Unknown);
 
         return false;
     }
 
-    // ¿ÉÓÅ»¯£ºÔÚÄ³¸öÇø¼äÎŞ½âÊ±¿ìËÙÍË³ö£¬¶ø²»½ö½öÅĞ¶Ï±ß½çµã¾ßÓĞÏàÍ¬µÄ·ûºÅ¡£
+    // å¯ä¼˜åŒ–ï¼šåœ¨æŸä¸ªåŒºé—´æ— è§£æ—¶å¿«é€Ÿé€€å‡ºï¼Œè€Œä¸ä»…ä»…åˆ¤æ–­è¾¹ç•Œç‚¹å…·æœ‰ç›¸åŒçš„ç¬¦å·ã€‚
     if (node->IsFunctionResult0SameSign() || node->IsFunctionResult1SameSign())
     {
-        // FirstFunction¾ßÓĞÏàÍ¬µÄ·ûºÅÔÚ±ß½çµã¡£
-        // »òÕßGecondFunction¾ßÓĞÏàÍ¬µÄ·ûºÅÔÚ±ß½çµã¡£
+        // FirstFunctionå…·æœ‰ç›¸åŒçš„ç¬¦å·åœ¨è¾¹ç•Œç‚¹ã€‚
+        // æˆ–è€…GecondFunctionå…·æœ‰ç›¸åŒçš„ç¬¦å·åœ¨è¾¹ç•Œç‚¹ã€‚
 
-        // ·½³ÌÔÚÕâ¸öÇø¼äÎŞ½â
+        // æ–¹ç¨‹åœ¨è¿™ä¸ªåŒºé—´æ— è§£
         --level;
 
         return false;
     }
 
-    // ¶şµÈ·ÖËÄ±ßĞÎ¡£
+    // äºŒç­‰åˆ†å››è¾¹å½¢ã€‚
     bisect2Storage.SetStorageValue(node);
 
     if (bisect2Storage.TestEdgeValues())
@@ -124,29 +124,29 @@ bool Mathematics::Bisect2Calculate<Real>::BisectRecurse(const Bisect2NodeSharedP
         return true;
     }
 
-    // ½«ËÄ±ßĞÎ·Ö³ÉËÄ¸öËÄ±ßĞÎ½øĞĞµİ¹éËÑË÷¡£
+    // å°†å››è¾¹å½¢åˆ†æˆå››ä¸ªå››è¾¹å½¢è¿›è¡Œé€’å½’æœç´¢ã€‚
 
-    // ¹¹½¨×óÉÏ½ÇµÄËÄ±ßĞÎ
+    // æ„å»ºå·¦ä¸Šè§’çš„å››è¾¹å½¢
 
-    // Ô­×óÉÏ½Çµã
+    // åŸå·¦ä¸Šè§’ç‚¹
     auto leftUpper = std::make_shared<Bisect2NodeType>(bisect2Storage.GetBeginPointX(),
                                                    bisect2Storage.GetBeginPointY(),
                                                    bisect2Storage.GetBeginXAndBeginYValue0(),
                                                    bisect2Storage.GetBeginXAndBeginYValue1());
 
-    // ¶¥²¿µÄÆ½·ÖÏß
+    // é¡¶éƒ¨çš„å¹³åˆ†çº¿
     leftUpper->AddXNextNode(bisect2Storage.GetMidpointX(),
                             bisect2Storage.GetBeginPointY(),
                             bisect2Storage.GetMidXAndBeginYValue0(),
                             bisect2Storage.GetMidXAndBeginYValue1());
 
-    // ×ó±ßµÄÆ½·ÖÏß
+    // å·¦è¾¹çš„å¹³åˆ†çº¿
     leftUpper->AddYNextNode(bisect2Storage.GetBeginPointX(),
                             bisect2Storage.GetMidpointY(),
                             bisect2Storage.GetBeginXAndMidYValue0(),
                             bisect2Storage.GetBeginXAndMidYValue1());
 
-    // ÖĞ¼äµÄÆ½·ÖÏß
+    // ä¸­é—´çš„å¹³åˆ†çº¿
     leftUpper->GetXNext()->AddYNextNode(bisect2Storage.GetMidpointX(),
                                         bisect2Storage.GetMidpointY(),
                                         bisect2Storage.GetMidXAndMidYValue0(),
@@ -154,27 +154,27 @@ bool Mathematics::Bisect2Calculate<Real>::BisectRecurse(const Bisect2NodeSharedP
 
     leftUpper->GetYNext()->AddXNextNode(leftUpper->GetXNext()->GetYNext());
 
-    // ¹¹½¨ÓÒÉÏ½ÇµÄËÄ±ßĞÎ
+    // æ„å»ºå³ä¸Šè§’çš„å››è¾¹å½¢
 
-    // ¶¥²¿µÄÆ½·ÖÏß
+    // é¡¶éƒ¨çš„å¹³åˆ†çº¿
     auto rightUpper = std::make_shared<Bisect2NodeType>(bisect2Storage.GetMidpointX(),
                                                     bisect2Storage.GetBeginPointY(),
                                                     bisect2Storage.GetMidXAndBeginYValue0(),
                                                     bisect2Storage.GetMidXAndBeginYValue1());
 
-    // Ô­ÓÒÉÏ½Çµã
+    // åŸå³ä¸Šè§’ç‚¹
     rightUpper->AddXNextNode(bisect2Storage.GetEndPointX(),
                              bisect2Storage.GetBeginPointY(),
                              bisect2Storage.GetEndXAndBeginYValue0(),
                              bisect2Storage.GetEndXAndBeginYValue1());
 
-    // ÖĞ¼äµÄÆ½·ÖÏß
+    // ä¸­é—´çš„å¹³åˆ†çº¿
     rightUpper->AddYNextNode(bisect2Storage.GetMidpointX(),
                              bisect2Storage.GetMidpointY(),
                              bisect2Storage.GetMidXAndMidYValue0(),
                              bisect2Storage.GetMidXAndMidYValue1());
 
-    // ÓÒ±ßµÄÆ½·ÖÏß
+    // å³è¾¹çš„å¹³åˆ†çº¿
     rightUpper->GetXNext()->AddYNextNode(bisect2Storage.GetEndPointX(),
                                          bisect2Storage.GetMidpointY(),
                                          bisect2Storage.GetEndXAndMidYValue0(),
@@ -182,27 +182,27 @@ bool Mathematics::Bisect2Calculate<Real>::BisectRecurse(const Bisect2NodeSharedP
 
     rightUpper->GetYNext()->AddXNextNode(rightUpper->GetXNext()->GetYNext());
 
-    // ¹¹½¨×óÏÂ½ÇµÄËÄ±ßĞÎ
+    // æ„å»ºå·¦ä¸‹è§’çš„å››è¾¹å½¢
 
-    // ×ó±ßµÄÆ½·ÖÏß
+    // å·¦è¾¹çš„å¹³åˆ†çº¿
     auto leftLower = std::make_shared<Bisect2NodeType>(bisect2Storage.GetBeginPointX(),
                                                    bisect2Storage.GetMidpointY(),
                                                    bisect2Storage.GetBeginXAndMidYValue0(),
                                                    bisect2Storage.GetBeginXAndMidYValue1());
 
-    // ÖĞ¼äµÄÆ½·ÖÏß
+    // ä¸­é—´çš„å¹³åˆ†çº¿
     leftLower->AddXNextNode(bisect2Storage.GetMidpointX(),
                             bisect2Storage.GetMidpointY(),
                             bisect2Storage.GetMidXAndMidYValue0(),
                             bisect2Storage.GetMidXAndMidYValue1());
 
-    // Ô­×óÏÂ½Çµã
+    // åŸå·¦ä¸‹è§’ç‚¹
     leftLower->AddYNextNode(bisect2Storage.GetBeginPointX(),
                             bisect2Storage.GetEndPointY(),
                             bisect2Storage.GetBeginXAndEndYValue0(),
                             bisect2Storage.GetBeginXAndEndYValue1());
 
-    // µ×²¿µÄÆ½·ÖÏß
+    // åº•éƒ¨çš„å¹³åˆ†çº¿
     leftLower->GetXNext()->AddYNextNode(bisect2Storage.GetMidpointX(),
                                         bisect2Storage.GetEndPointY(),
                                         bisect2Storage.GetMidXAndEndYValue0(),
@@ -210,27 +210,27 @@ bool Mathematics::Bisect2Calculate<Real>::BisectRecurse(const Bisect2NodeSharedP
 
     leftLower->GetYNext()->AddXNextNode(leftLower->GetXNext()->GetYNext());
 
-    // ¹¹½¨ÓÒÏÂ½ÇµÄËÄ±ßĞÎ
+    // æ„å»ºå³ä¸‹è§’çš„å››è¾¹å½¢
 
-    // ÖĞ¼äµÄÆ½·ÖÏß
+    // ä¸­é—´çš„å¹³åˆ†çº¿
     auto rightLower = std::make_shared<Bisect2NodeType>(bisect2Storage.GetMidpointX(),
                                                     bisect2Storage.GetMidpointY(),
                                                     bisect2Storage.GetMidXAndMidYValue0(),
                                                     bisect2Storage.GetMidXAndMidYValue1());
 
-    // ÓÒ±ßµÄÆ½·ÖÏß
+    // å³è¾¹çš„å¹³åˆ†çº¿
     rightLower->AddXNextNode(bisect2Storage.GetEndPointX(),
                              bisect2Storage.GetMidpointY(),
                              bisect2Storage.GetEndXAndMidYValue0(),
                              bisect2Storage.GetEndXAndMidYValue1());
 
-    // µ×²¿µÄÆ½·ÖÏß
+    // åº•éƒ¨çš„å¹³åˆ†çº¿
     rightLower->AddYNextNode(bisect2Storage.GetMidpointX(),
                              bisect2Storage.GetEndPointY(),
                              bisect2Storage.GetMidXAndEndYValue0(),
                              bisect2Storage.GetMidXAndEndYValue1());
 
-    // Ô­ÓÒÏÂ½Çµã
+    // åŸå³ä¸‹è§’ç‚¹
     rightLower->GetXNext()->AddYNextNode(bisect2Storage.GetMidpointX(),
                                          bisect2Storage.GetEndPointY(),
                                          bisect2Storage.GetMidXAndEndYValue0(),
@@ -238,11 +238,11 @@ bool Mathematics::Bisect2Calculate<Real>::BisectRecurse(const Bisect2NodeSharedP
 
     rightLower->GetYNext()->AddXNextNode(rightLower->GetXNext()->GetYNext());
 
-    // Ó¦¸ÃÏÈ¹¹ÔìËÄ¸öËÄ±ßĞÎÔÙ½øĞĞµİ¹é£¬ÒòÎªµİ¹é»áĞŞ¸Äm_Bisect2StorageÀïµÄÖµ¡£
-    // ËÑË÷×ÓËÄ±ßĞÎµÄ¸ù¡£
+    // åº”è¯¥å…ˆæ„é€ å››ä¸ªå››è¾¹å½¢å†è¿›è¡Œé€’å½’ï¼Œå› ä¸ºé€’å½’ä¼šä¿®æ”¹m_Bisect2Storageé‡Œçš„å€¼ã€‚
+    // æœç´¢å­å››è¾¹å½¢çš„æ ¹ã€‚
     const auto result = BisectRecurse(leftUpper) || BisectRecurse(rightUpper) || BisectRecurse(leftLower) || BisectRecurse(rightLower);
 
-    // Õû¸ö×ÓËÄ±ßĞÎ¼ì²éÊ§°Ü£¬É¾³ıÌí¼ÓµÄ½Úµã¡£
+    // æ•´ä¸ªå­å››è¾¹å½¢æ£€æŸ¥å¤±è´¥ï¼Œåˆ é™¤æ·»åŠ çš„èŠ‚ç‚¹ã€‚
     --level;
 
     return result;

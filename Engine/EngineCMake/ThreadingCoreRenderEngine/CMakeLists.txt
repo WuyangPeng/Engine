@@ -1,85 +1,113 @@
-﻿# CMakeList.txt: 顶层 CMake 项目文件，在此处执行全局配置
-# 并包含子项目。
+﻿# CMakeList.txt: ThreadingCoreRenderEngine 的 CMake 项目，在此处包括源代码并定义
+# 项目特定的逻辑。
 #
-cmake_minimum_required (VERSION 3.8)
+cmake_minimum_required(VERSION 3.14)
 
-project ("ThreadingCoreRenderEngine")
+file(GLOB_RECURSE SRC_DIR_LIST "${CMAKE_SOURCE_DIR}/../Code/ThreadingCoreRenderEngine/*.cpp")
 
-set(CMAKE_CXX_STANDARD 20)
+if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
 
-	include_directories(/data/coding/Libs/boost/)
-	include_directories(/data/coding/Libs/GSL/include/)
-	include_directories(/data/coding/Libs/STLSoft/include/)
-	include_directories(/data/coding/Libs/miniz/)
-	include_directories(/data/coding/Libs/miniz/build/)
-	include_directories(/data/coding/Libs/pugixml/src/) 
-	include_directories(/data/coding/Libs/ACE/ACE_wrappers/)
-	include_directories(/data/coding/Libs/protobuf/src/)
-	include_directories(/data/coding/Libs/activemq/src/main/)
-	include_directories(/data/coding/Libs/mongo-cxx-driver/src/mongocxx/include/mongocxx/v_noabi/)
-	include_directories(/data/coding/Libs/mongo-cxx-driver/build/src/mongocxx/lib/)
-	include_directories(/data/coding/Libs/mongo-cxx-driver/src/mongocxx/include/)	
-	include_directories(/data/coding/Libs/mongo-cxx-driver/src/bsoncxx/include/bsoncxx/v_noabi/)		
-	include_directories(/data/coding/Libs/mongo-cxx-driver/build/src/bsoncxx/lib/)
-	include_directories(/data/coding/Libs/mongo-cxx-driver/src/bsoncxx/include/)	
-	include_directories(/data/coding/Libs/mysql-connector-c++/include/)
-	include_directories(/data/coding/Libs/mysql-connector-c++/build/include/mysqlx/) 
-	include_directories(/data/coding/Libs/hiredis/) 	
-	
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+        link_libraries(libSystemD.so)
+        link_libraries(libCoreToolsD.so)
+        link_libraries(libNetworkD.so)
+        link_libraries(libDatabaseD.so)
+        link_libraries(libScriptD.so)
+        link_libraries(libMathematicsD.so)
+        link_libraries(libSoundEffectD.so)
+        link_libraries(libInputOutputD.so)
+        link_libraries(libResourceManagerD.so)
+        link_libraries(libRenderingD.so)
+        link_libraries(libPhysicsD.so)
+        link_libraries(libImagicsD.so)
+        link_libraries(libAnimationD.so)
+        link_libraries(libArtificialIntelligenceD.so)
+        link_libraries(libUserInterfaceD.so)
+        link_libraries(libAssistToolsD.so)
+        link_libraries(libFrameworkD.so)
 
-	include_directories($ENV{LibsEnvironmentBaseInclude}/)
-	include_directories($ENV{LibsEnvironmentExtendInclude}/)
+    else ()
 
-else()
-    # 其他平台下的操作
-endif()
+        link_libraries(libSystem.so)
+        link_libraries(libCoreTools.so)
+        link_libraries(libNetwork.so)
+        link_libraries(libDatabase.so)
+        link_libraries(libScript.so)
+        link_libraries(libMathematics.so)
+        link_libraries(libSoundEffect.so)
+        link_libraries(libInputOutput.so)
+        link_libraries(libResourceManager.so)
+        link_libraries(libRendering.so)
+        link_libraries(libPhysics.so)
+        link_libraries(libImagics.so)
+        link_libraries(libAnimation.so)
+        link_libraries(libArtificialIntelligence.so)
+        link_libraries(libUserInterface.so)
+        link_libraries(libAssistTools.so)
+        link_libraries(libFramework.so)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Code)
+    endif ()
 
+endif ()
+
+# 将源代码添加到此项目的可执行文件。
 if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+    add_library(ThreadingCoreRenderEngineD SHARED ${SRC_DIR_LIST})
+else ()
+    add_library(ThreadingCoreRenderEngine SHARED ${SRC_DIR_LIST})
+endif ()
 
-    link_directories($ENV{LibsEnvironmentX64DebugLib}/)   
-    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/DebugWindows) 
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
-    set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/DebugWindows)
+    if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
 
-else()
+        target_link_libraries(ThreadingCoreRenderEngineD
+                PRIVATE
+                SystemD
+                CoreToolsD
+                NetworkD
+                DatabaseD
+                ScriptD
+                MathematicsD
+                SoundEffectD
+                InputOutputD
+                ResourceManagerD
+                RenderingD
+                PhysicsD
+                ImagicsD
+                AnimationD
+                ArtificialIntelligenceD
+                UserInterfaceD
+                AssistToolsD
+                FrameworkD
+        )
 
-    link_directories($ENV{LibsEnvironmentX64ReleaseLib}/) 
-    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/ReleaseWindows) 
+    else ()
 
-    set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../x64/CMake/ReleaseWindows)
+        target_link_libraries(ThreadingCoreRenderEngine
+                PRIVATE
+                System
+                CoreTools
+                Network
+                Database
+                Script
+                Mathematics
+                SoundEffect
+                InputOutput
+                ResourceManager
+                Rendering
+                Physics
+                Imagics
+                Animation
+                ArtificialIntelligence
+                UserInterface
+                AssistTools
+                Framework
+        )
 
-endif()  
- 
-link_directories($ENV{LibsEnvironmentX64Lib}/)
+    endif ()
 
-# 包含子项目。
-add_subdirectory ("System")
+endif ()
 
-add_subdirectory ("CoreTools")
-
-add_subdirectory ("Network")
-add_subdirectory ("Database")
-add_subdirectory ("Script")
-add_subdirectory ("Mathematics")
-add_subdirectory ("SoundEffect")
-add_subdirectory ("InputOutput")
-
-add_subdirectory ("ResourceManager")
-add_subdirectory ("Rendering")
-add_subdirectory ("Physics")
-add_subdirectory ("Imagics")
-
-add_subdirectory ("Animation")
-add_subdirectory ("ArtificialIntelligence")
-add_subdirectory ("UserInterface")
-
-add_subdirectory ("AssistTools")
-
-add_subdirectory ("Framework")
-
-add_subdirectory ("ThreadingCoreRenderEngine")
+# TODO: 如有需要，请添加测试并安装目标。

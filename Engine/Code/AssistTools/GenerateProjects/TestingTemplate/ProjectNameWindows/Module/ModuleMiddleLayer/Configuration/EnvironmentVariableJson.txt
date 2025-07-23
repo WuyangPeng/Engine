@@ -1,4 +1,4 @@
-{
+﻿{
   "DefaultEnvironment": "",
   "Version": "$Version$", 
   "PrintRun": 1,
