@@ -1,12 +1,12 @@
-@ingroup group_RechargeServerTesting_Documentation
+ï»¿@ingroup group_RechargeServerTesting_Documentation
 
 ----------------------------
-³äÖµ·şÎñÆ÷µ¥Ôª²âÊÔ
+å……å€¼æœåŠ¡å™¨å•å…ƒæµ‹è¯•
 
-Ä¿Ç°°üº¬£º
+ç›®å‰åŒ…å«ï¼š
 
-1. RechargeServer£¨³äÖµ·şÎñÆ÷£©
+1. RechargeServerï¼ˆå……å€¼æœåŠ¡å™¨ï¼‰
 
-£¨1£©³äÖµ·şÎñÆ÷¡£
+ï¼ˆ1ï¼‰å……å€¼æœåŠ¡å™¨ã€‚
 
 ----------------------------

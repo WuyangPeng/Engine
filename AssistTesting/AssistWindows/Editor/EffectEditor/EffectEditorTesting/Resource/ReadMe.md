@@ -1,11 +1,11 @@
-@ingroup group_EffectEditorTesting_Documentation
+ï»¿@ingroup group_EffectEditorTesting_Documentation
 
 ----------------------------
-Ğ§¹û±à¼­Æ÷µ¥Ôª²âÊÔ
+æ•ˆæœç¼–è¾‘å™¨å•å…ƒæµ‹è¯•
 
 1.   EffectEditor 
 
-Ğ§¹û±à¼­Æ÷µÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£©Ğ§¹û¡£
+æ•ˆæœç¼–è¾‘å™¨çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰æ•ˆæœã€‚
 
 ----------------------------

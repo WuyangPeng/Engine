@@ -1,11 +1,11 @@
-@ingroup group_RenderingExample_Documentation
+ï»¿@ingroup group_RenderingExample_Documentation
 
 ----------------------------
-äÖÈ¾Àı×Ó
+æ¸²æŸ“ä¾‹å­
 
 1.   RenderingExample 
 
-äÖÈ¾Àı×Ó£¬°üÀ¨£º 
-£¨1£©äÖÈ¾¡£
+æ¸²æŸ“ä¾‹å­ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰æ¸²æŸ“ã€‚
 
 ----------------------------

@@ -1,12 +1,12 @@
-@ingroup group_Documentation
+ï»¿@ingroup group_Documentation
 
 Threading Core Render Engine
 
 ----------------------------
-Ö÷Òª¹±Ï×Õß£º
+ä¸»è¦è´¡çŒ®è€…ï¼š
 
-    ÅíÎäÑô
-	ÅíêÊ¶÷
-	ÅíêÊÔó
+    å½­æ­¦é˜³
+	å½­æ™”æ©
+	å½­æ™”æ³½
 	
 ----------------------------

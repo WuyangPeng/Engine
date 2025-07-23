@@ -1,11 +1,11 @@
-@ingroup group_DatabaseExampleTesting_Documentation
+ï»¿@ingroup group_DatabaseExampleTesting_Documentation
 
 ----------------------------
-Êı¾İ¿âÀı×Óµ¥Ôª²âÊÔ
+æ•°æ®åº“ä¾‹å­å•å…ƒæµ‹è¯•
 
 1.   DatabaseExampleTesting 
 
-Êı¾İ¿âÀı×ÓµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£©Êı¾İ¿âÀı×Ó¡£
+æ•°æ®åº“ä¾‹å­çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰æ•°æ®åº“ä¾‹å­ã€‚
 
 ----------------------------

@@ -1,12 +1,12 @@
-@ingroup group_CharacterInformation_Documentation
+ï»¿@ingroup group_CharacterInformation_Documentation
 
 ----------------------------
-ÈËÎïĞÅÏ¢Ä£¿éµ¥Ôª²âÊÔ 
+äººç‰©ä¿¡æ¯æ¨¡å—å•å…ƒæµ‹è¯• 
 
-Ä¿Ç°°üº¬£º
+ç›®å‰åŒ…å«ï¼š
 
-1.	CharacterInformation£¨ÈËÎïĞÅÏ¢£©
+1.	CharacterInformationï¼ˆäººç‰©ä¿¡æ¯ï¼‰
  
-£¨1£©ÈËÎïĞÅÏ¢¡£
+ï¼ˆ1ï¼‰äººç‰©ä¿¡æ¯ã€‚
 
 ----------------------------

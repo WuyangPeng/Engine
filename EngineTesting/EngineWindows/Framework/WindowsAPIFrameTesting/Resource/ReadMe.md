@@ -1,11 +1,11 @@
-@ingroup group_WindowsAPIFrameTesting_Documentation
+ï»¿@ingroup group_WindowsAPIFrameTesting_Documentation
 
 ----------------------------
-Window API ¿ò¼Ü µÄµ¥Ôª²âÊÔ
+Window API æ¡†æ¶ çš„å•å…ƒæµ‹è¯•
 
 1.  WindowsAPIFrame 
 
-Window API ¿ò¼ÜÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£© Window API ¿ò¼Ü¡£
+Window API æ¡†æ¶æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰ Window API æ¡†æ¶ã€‚
  
 ----------------------------

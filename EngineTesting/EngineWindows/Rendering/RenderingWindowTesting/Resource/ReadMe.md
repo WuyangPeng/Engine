@@ -1,7 +1,7 @@
-@ingroup group_RenderingWindowTesting_Documentation
+ï»¿@ingroup group_RenderingWindowTesting_Documentation
 
 ----------------------------
-äÖÈ¾»·¾³µÄÑéÊÕ²âÊÔ
+æ¸²æŸ“ç¯å¢ƒçš„éªŒæ”¶æµ‹è¯•
 
 1.  RenderingWindowTesting  
 

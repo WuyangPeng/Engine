@@ -1,10 +1,10 @@
-@ingroup group_DatabaseEntity_Documentation
+ï»¿@ingroup group_DatabaseEntity_Documentation
 
 ----------------------------
-Êı¾İ¿âÊ¾Àı
+æ•°æ®åº“ç¤ºä¾‹
 
 ----------------------------
 
-1.	Êı¾İ¿âÊ¾Àı 
+1.	æ•°æ®åº“ç¤ºä¾‹ 
 
 ----------------------------

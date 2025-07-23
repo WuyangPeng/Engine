@@ -1,11 +1,11 @@
-@ingroup group_InputOutputExample_Documentation
+ï»¿@ingroup group_InputOutputExample_Documentation
 
 ----------------------------
-ÊäÈëÊä³ö¿âÀı×Ó
+è¾“å…¥è¾“å‡ºåº“ä¾‹å­
 
 1.   InputOutputExample 
 
-ÊäÈëÊä³ö¿âÀı×Ó£¬°üÀ¨£º 
-£¨1£©ÊäÈëÊä³ö¿â¡£
+è¾“å…¥è¾“å‡ºåº“ä¾‹å­ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰è¾“å…¥è¾“å‡ºåº“ã€‚
 
 ----------------------------

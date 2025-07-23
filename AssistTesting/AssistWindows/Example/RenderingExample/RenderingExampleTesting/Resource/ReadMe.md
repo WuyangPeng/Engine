@@ -1,11 +1,11 @@
-@ingroup group_RenderingExampleTesting_Documentation
+ï»¿@ingroup group_RenderingExampleTesting_Documentation
 
 ----------------------------
-äÖÈ¾Àı×Óµ¥Ôª²âÊÔ
+æ¸²æŸ“ä¾‹å­å•å…ƒæµ‹è¯•
 
 1.   RenderingExampleTesting 
 
-äÖÈ¾Àı×ÓµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£©äÖÈ¾Àı×Ó¡£
+æ¸²æŸ“ä¾‹å­çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰æ¸²æŸ“ä¾‹å­ã€‚
 
 ----------------------------

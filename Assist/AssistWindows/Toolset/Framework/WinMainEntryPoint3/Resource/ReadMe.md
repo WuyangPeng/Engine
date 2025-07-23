@@ -1,12 +1,12 @@
-@ingroup group_WinMainEntryPoint3_Documentation
+ï»¿@ingroup group_WinMainEntryPoint3_Documentation
 
 ----------------------------
-WinMainÖ÷º¯ÊıÈë¿Úµã
+WinMainä¸»å‡½æ•°å…¥å£ç‚¹
 
 WinMainEntryPoint3 
 
-WINDOWS_MAIN_FUNCTION_WITH_INFORMATION¹¤¾ßÏä¡£ÊµÏÖÒÔÏÂ¹¦ÄÜ£º 
+WINDOWS_MAIN_FUNCTION_WITH_INFORMATIONå·¥å…·ç®±ã€‚å®ç°ä»¥ä¸‹åŠŸèƒ½ï¼š 
 
-£¨1£©µ÷ÓÃºêWINDOWS_MAIN_FUNCTION_WITH_INFORMATIONÔËĞĞ³ÌĞò¡£ 
+ï¼ˆ1ï¼‰è°ƒç”¨å®WINDOWS_MAIN_FUNCTION_WITH_INFORMATIONè¿è¡Œç¨‹åºã€‚ 
 
 ----------------------------

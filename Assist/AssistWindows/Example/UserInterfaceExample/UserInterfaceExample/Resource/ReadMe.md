@@ -1,11 +1,11 @@
-@ingroup group_UserInterfaceExample_Documentation
+ï»¿@ingroup group_UserInterfaceExample_Documentation
 
 ----------------------------
-ÓÃ»§½çÃæÀı×Ó
+ç”¨æˆ·ç•Œé¢ä¾‹å­
 
 1.   UserInterfaceExample 
 
-ÓÃ»§½çÃæÀı×Ó£¬°üÀ¨£º 
-£¨1£©ÓÃ»§½çÃæ¡£
+ç”¨æˆ·ç•Œé¢ä¾‹å­ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰ç”¨æˆ·ç•Œé¢ã€‚
 
 ----------------------------

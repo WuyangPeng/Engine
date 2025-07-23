@@ -1,11 +1,11 @@
-@ingroup group_AnimationEditor_Documentation
+ï»¿@ingroup group_AnimationEditor_Documentation
 
 ----------------------------
-¶¯»­±à¼­Æ÷
+åŠ¨ç”»ç¼–è¾‘å™¨
 
 1.   AnimationEditor 
 
-¶¯»­±à¼­Æ÷£¬°üÀ¨£º 
-£¨1£©¶¯»­¡£
+åŠ¨ç”»ç¼–è¾‘å™¨ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰åŠ¨ç”»ã€‚
 
 ----------------------------

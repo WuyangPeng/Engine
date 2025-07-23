@@ -1,12 +1,12 @@
-@ingroup group_UpdateServerTesting_Documentation
+ï»¿@ingroup group_UpdateServerTesting_Documentation
 
 ----------------------------
-¸üĞÂ·şÎñÆ÷µ¥Ôª²âÊÔ
+æ›´æ–°æœåŠ¡å™¨å•å…ƒæµ‹è¯•
 
-Ä¿Ç°°üº¬£º
+ç›®å‰åŒ…å«ï¼š
 
-1. UpdateServer£¨¸üĞÂ·şÎñÆ÷£©
+1. UpdateServerï¼ˆæ›´æ–°æœåŠ¡å™¨ï¼‰
 
-£¨1£©¸üĞÂ·şÎñÆ÷¡£
+ï¼ˆ1ï¼‰æ›´æ–°æœåŠ¡å™¨ã€‚
 
 ----------------------------

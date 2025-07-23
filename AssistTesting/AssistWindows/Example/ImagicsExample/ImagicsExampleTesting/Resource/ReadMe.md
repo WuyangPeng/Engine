@@ -1,11 +1,11 @@
-@ingroup group_ImagicsExampleTesting_Documentation
+ï»¿@ingroup group_ImagicsExampleTesting_Documentation
 
 ----------------------------
-Í¼Ïñ·ÖÎöÀı×Óµ¥Ôª²âÊÔ
+å›¾åƒåˆ†æä¾‹å­å•å…ƒæµ‹è¯•
 
 1.   ImagicsExampleTesting 
 
-Í¼Ïñ·ÖÎöÀı×ÓµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£©Í¼Ïñ·ÖÎöÀı×Ó¡£
+å›¾åƒåˆ†æä¾‹å­çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰å›¾åƒåˆ†æä¾‹å­ã€‚
 
 ----------------------------

@@ -1,12 +1,12 @@
-@ingroup group_TimeRefreshTesting_Documentation
+ï»¿@ingroup group_TimeRefreshTesting_Documentation
 
 ----------------------------
-Ê±¼äË¢ĞÂÄ£¿éµ¥Ôª²âÊÔ 
+æ—¶é—´åˆ·æ–°æ¨¡å—å•å…ƒæµ‹è¯• 
 
-Ä¿Ç°°üº¬£º
+ç›®å‰åŒ…å«ï¼š
 
-1.	TimeRefresh£¨Ê±¼äË¢ĞÂ£©
+1.	TimeRefreshï¼ˆæ—¶é—´åˆ·æ–°ï¼‰
  
-£¨1£©Ê±¼äË¢ĞÂ¡£
+ï¼ˆ1ï¼‰æ—¶é—´åˆ·æ–°ã€‚
 
 ----------------------------

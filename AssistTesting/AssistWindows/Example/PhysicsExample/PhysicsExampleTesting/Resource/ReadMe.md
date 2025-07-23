@@ -1,11 +1,11 @@
-@ingroup group_PhysicsExampleTesting_Documentation
+ï»¿@ingroup group_PhysicsExampleTesting_Documentation
 
 ----------------------------
-ÎïÀíÀı×Óµ¥Ôª²âÊÔ
+ç‰©ç†ä¾‹å­å•å…ƒæµ‹è¯•
 
 1.   PhysicsExampleTesting 
 
-ÎïÀíÀı×ÓµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£©ÎïÀíÀı×Ó¡£
+ç‰©ç†ä¾‹å­çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰ç‰©ç†ä¾‹å­ã€‚
 
 ----------------------------

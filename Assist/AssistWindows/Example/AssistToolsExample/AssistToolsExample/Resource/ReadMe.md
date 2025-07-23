@@ -1,11 +1,11 @@
-@ingroup group_AssistToolsExample_Documentation
+ï»¿@ingroup group_AssistToolsExample_Documentation
 
 ----------------------------
-¸¨Öú¹¤¾ß¿âÀı×Ó
+è¾…åŠ©å·¥å…·åº“ä¾‹å­
 
 1.   AssistToolsExample 
 
-¸¨Öú¹¤¾ß¿âÀı×Ó£¬°üÀ¨£º 
-£¨1£©¸¨Öú¹¤¾ß¿â¡£
+è¾…åŠ©å·¥å…·åº“ä¾‹å­ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰è¾…åŠ©å·¥å…·åº“ã€‚
 
 ----------------------------

@@ -1,68 +1,68 @@
-/// @mainpage Threading Core Render Engine API ÎÄµµ
+ï»¿/// @mainpage Threading Core Render Engine API æ–‡æ¡£
 
 @copyright Copyright (c) 2011-2024
 Threading Core Render Engine
 
-@author ÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-ÁªÏµ×÷Õß£º94458936@qq.com
+@author å½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+è”ç³»ä½œè€…ï¼š94458936@qq.com
 
 @version 1.0.1.0
-±ê×¼£ºstd:c++20
+æ ‡å‡†ï¼šstd:c++20
 
 @date 2024/06/04 23:26
 
-@section sec_Contents ÄÚÈİ
+@section sec_Contents å†…å®¹
 
 @li @ref sec_Overview
 @li @ref sec_Detail
 @li @ref sec_SeeAlso
 
-@section sec_Overview ¸ÅÊö
+@section sec_Overview æ¦‚è¿°
 
-ÒıÇæ°üº¬Ê®Æß¸öÄ£¿é£¬Æß¸ö²ã¼¶£º
+å¼•æ“åŒ…å«åä¸ƒä¸ªæ¨¡å—ï¼Œä¸ƒä¸ªå±‚çº§ï¼š
 
-µÚÒ»²ã£ºÏµÍ³£¨System£©¡£ 
+ç¬¬ä¸€å±‚ï¼šç³»ç»Ÿï¼ˆSystemï¼‰ã€‚ 
 
-µÚ¶ş²ã£ººËĞÄ¹¤¾ß£¨CoreTools£©¡£ 
+ç¬¬äºŒå±‚ï¼šæ ¸å¿ƒå·¥å…·ï¼ˆCoreToolsï¼‰ã€‚ 
 
-µÚÈı²ã£ºÍøÂç£¨Network£©¡¢Êı¾İ¿â£¨Database£©¡¢½Å±¾£¨Script£©¡¢ÊıÑ§£¨Mathematics£©¡¢ÒôĞ§£¨SoundEffect£©¡¢ÊäÈëÊä³ö£¨InputOutput£©¡£
+ç¬¬ä¸‰å±‚ï¼šç½‘ç»œï¼ˆNetworkï¼‰ã€æ•°æ®åº“ï¼ˆDatabaseï¼‰ã€è„šæœ¬ï¼ˆScriptï¼‰ã€æ•°å­¦ï¼ˆMathematicsï¼‰ã€éŸ³æ•ˆï¼ˆSoundEffectï¼‰ã€è¾“å…¥è¾“å‡ºï¼ˆInputOutputï¼‰ã€‚
  
-µÚËÄ²ã£º×ÊÔ´¹ÜÀí£¨ResourceManager£©¡¢äÖÈ¾£¨Rendering£©¡¢ÎïÀí£¨Physics£©¡¢Í¼Ïñ·ÖÎö£¨Imagics£©¡£
+ç¬¬å››å±‚ï¼šèµ„æºç®¡ç†ï¼ˆResourceManagerï¼‰ã€æ¸²æŸ“ï¼ˆRenderingï¼‰ã€ç‰©ç†ï¼ˆPhysicsï¼‰ã€å›¾åƒåˆ†æï¼ˆImagicsï¼‰ã€‚
  
-µÚÎå²ã£º¶¯»­£¨Animation£©¡¢ÈË¹¤ÖÇÄÜ£¨ArtificialIntelligence£©¡¢½çÃæ£¨UserInterface£©¡£ 
+ç¬¬äº”å±‚ï¼šåŠ¨ç”»ï¼ˆAnimationï¼‰ã€äººå·¥æ™ºèƒ½ï¼ˆArtificialIntelligenceï¼‰ã€ç•Œé¢ï¼ˆUserInterfaceï¼‰ã€‚ 
 
-µÚÁù²ã£º¸¨Öú¹¤¾ß£¨AssistTools£©¡£ 
+ç¬¬å…­å±‚ï¼šè¾…åŠ©å·¥å…·ï¼ˆAssistToolsï¼‰ã€‚ 
 
-µÚÆß²ã£º¿ò¼Ü£¨Framework£©¡£
+ç¬¬ä¸ƒå±‚ï¼šæ¡†æ¶ï¼ˆFrameworkï¼‰ã€‚
 
-@section sec_Detail ÏêÏ¸ËµÃ÷
+@section sec_Detail è¯¦ç»†è¯´æ˜
 
 @li @ref page_Documentation
 @li @ref page_Engine_Documentation
 
-@section sec_SeeAlso ²Î¼û
+@section sec_SeeAlso å‚è§
 
 @li @ref page_CoreTools_Base 
 
-@page page_Documentation ËµÃ÷
+@page page_Documentation è¯´æ˜
 
-@link group_Documentation \b ²é¿´ËùÓĞËµÃ÷ @endlink
+@link group_Documentation \b æŸ¥çœ‹æ‰€æœ‰è¯´æ˜ @endlink
 
-@defgroup group_Documentation ËµÃ÷
-ÓĞ¹ØÏêÏ¸ËµÃ÷£¬Çë²Î¼û @ref group_Documentation ¡£ 
+@defgroup group_Documentation è¯´æ˜
+æœ‰å…³è¯¦ç»†è¯´æ˜ï¼Œè¯·å‚è§ @ref group_Documentation ã€‚ 
 
-@page page_Engine_Documentation ÒıÇæËµÃ÷
+@page page_Engine_Documentation å¼•æ“è¯´æ˜
 
-@link group_Engine_Documentation \b ²é¿´ËùÓĞÒıÇæËµÃ÷ @endlink
+@link group_Engine_Documentation \b æŸ¥çœ‹æ‰€æœ‰å¼•æ“è¯´æ˜ @endlink
 
-@defgroup group_Engine_Documentation ÒıÇæËµÃ÷
-ÓĞ¹ØÏêÏ¸ÒıÇæËµÃ÷£¬Çë²Î¼û @ref group_Engine_Documentation ¡£ 
+@defgroup group_Engine_Documentation å¼•æ“è¯´æ˜
+æœ‰å…³è¯¦ç»†å¼•æ“è¯´æ˜ï¼Œè¯·å‚è§ @ref group_Engine_Documentation ã€‚ 
 
 @page page_CoreTools_Base The CoreTools Base 
 
-ÏêÏ¸ËµÃ÷ÔÚÕâÀï¡£
+è¯¦ç»†è¯´æ˜åœ¨è¿™é‡Œã€‚
 
 @link group_CoreTools_Base \b View All CoreTools Classes @endlink
 
-@defgroup group_CoreTools_Base ºËĞÄ¹¤¾ß¿â»ù´¡¹¦ÄÜ
-ÓĞ¹ØÏêÏ¸ËµÃ÷£¬Çë²Î¼û @ref page_CoreTools_Base ¡£
+@defgroup group_CoreTools_Base æ ¸å¿ƒå·¥å…·åº“åŸºç¡€åŠŸèƒ½
+æœ‰å…³è¯¦ç»†è¯´æ˜ï¼Œè¯·å‚è§ @ref page_CoreTools_Base ã€‚

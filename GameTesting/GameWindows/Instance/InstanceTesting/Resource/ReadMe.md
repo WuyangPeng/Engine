@@ -1,12 +1,12 @@
-@ingroup group_InstanceTesting_Documentation
+ï»¿@ingroup group_InstanceTesting_Documentation
 
 ----------------------------
-¸±±¾Ä£¿éµ¥Ôª²âÊÔ 
+å‰¯æœ¬æ¨¡å—å•å…ƒæµ‹è¯• 
 
-Ä¿Ç°°üº¬£º
+ç›®å‰åŒ…å«ï¼š
 
-1.	Instance£¨¸±±¾£©
+1.	Instanceï¼ˆå‰¯æœ¬ï¼‰
  
-£¨1£©¸±±¾¡£
+ï¼ˆ1ï¼‰å‰¯æœ¬ã€‚
 
 ----------------------------

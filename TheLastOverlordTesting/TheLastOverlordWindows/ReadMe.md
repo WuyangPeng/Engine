@@ -1,65 +1,65 @@
-@ingroup group_Documentation
+ï»¿@ingroup group_Documentation
 
 ----------------------------
-×îºóµÄ°ÔÍõµ¥Ôª²âÊÔ¹¤³Ì
+æœ€åçš„éœ¸ç‹å•å…ƒæµ‹è¯•å·¥ç¨‹
 
 ----------------------------
-TheLastOverlordTesting.props£º
-×îºóµÄ°ÔÍõµ¥Ôª²âÊÔ¹¤³ÌÊôĞÔ±í
+TheLastOverlordTesting.propsï¼š
+æœ€åçš„éœ¸ç‹å•å…ƒæµ‹è¯•å·¥ç¨‹å±æ€§è¡¨
 
-TheLastOverlordTestingStaticWin32DebugLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Élib¡¢Win32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordTestingStaticWin32DebugLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆlibã€Win32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordTestingStaticWin32ReleaseLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Élib¡¢Win32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordTestingStaticWin32ReleaseLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆlibã€Win32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordTestingStaticX64DebugLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Élib¡¢X64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordTestingStaticX64DebugLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆlibã€X64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordTestingStaticX64ReleaseLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Élib¡¢X64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordTestingStaticX64ReleaseLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆlibã€X64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordTestingWin32DebugLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Édll¡¢Win32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordTestingWin32DebugLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆdllã€Win32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordTestingWin32ReleaseLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Édll¡¢Win32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordTestingWin32ReleaseLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆdllã€Win32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordTestingX64DebugLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Édll¡¢X64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordTestingX64DebugLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆdllã€X64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordTestingX64ReleaseLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Édll¡¢X64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordTestingX64ReleaseLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆdllã€X64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordTestingEngineDynamicTheLastOverlordTestingStaticWin32DebugLibs.props£º
-ÒıÇæ£¨dll£©ºÍÓÎÏ·£¨lib£©¶¼±àÒë³ÉWin32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordTestingEngineDynamicTheLastOverlordTestingStaticWin32DebugLibs.propsï¼š
+å¼•æ“ï¼ˆdllï¼‰å’Œæ¸¸æˆï¼ˆlibï¼‰éƒ½ç¼–è¯‘æˆWin32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordTestingEngineDynamicTheLastOverlordTestingStaticWin32ReleaseLibs.props£º
-ÒıÇæ£¨dll£©ºÍÓÎÏ·£¨lib£©¶¼±àÒë³ÉWin32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordTestingEngineDynamicTheLastOverlordTestingStaticWin32ReleaseLibs.propsï¼š
+å¼•æ“ï¼ˆdllï¼‰å’Œæ¸¸æˆï¼ˆlibï¼‰éƒ½ç¼–è¯‘æˆWin32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordTestingEngineDynamicTheLastOverlordTestingStaticX64DebugLibs.props£º
-ÒıÇæ£¨dll£©ºÍÓÎÏ·£¨lib£©¶¼±àÒë³ÉX64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordTestingEngineDynamicTheLastOverlordTestingStaticX64DebugLibs.propsï¼š
+å¼•æ“ï¼ˆdllï¼‰å’Œæ¸¸æˆï¼ˆlibï¼‰éƒ½ç¼–è¯‘æˆX64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordTestingEngineDynamicTheLastOverlordTestingStaticX64ReleaseLibs.props£º
-ÒıÇæ£¨dll£©ºÍÓÎÏ·£¨lib£©¶¼±àÒë³ÉX64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordTestingEngineDynamicTheLastOverlordTestingStaticX64ReleaseLibs.propsï¼š
+å¼•æ“ï¼ˆdllï¼‰å’Œæ¸¸æˆï¼ˆlibï¼‰éƒ½ç¼–è¯‘æˆX64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordTestingEngineStaticTheLastOverlordTestingDynamicWin32DebugLibs.props£º
-ÒıÇæ£¨lib£©ºÍÓÎÏ·£¨dll£©¶¼±àÒë³ÉWin32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordTestingEngineStaticTheLastOverlordTestingDynamicWin32DebugLibs.propsï¼š
+å¼•æ“ï¼ˆlibï¼‰å’Œæ¸¸æˆï¼ˆdllï¼‰éƒ½ç¼–è¯‘æˆWin32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordTestingEngineStaticTheLastOverlordTestingDynamicWin32ReleaseLibs.props£º
-ÒıÇæ£¨lib£©ºÍÓÎÏ·£¨dll£©¶¼±àÒë³ÉWin32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordTestingEngineStaticTheLastOverlordTestingDynamicWin32ReleaseLibs.propsï¼š
+å¼•æ“ï¼ˆlibï¼‰å’Œæ¸¸æˆï¼ˆdllï¼‰éƒ½ç¼–è¯‘æˆWin32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordTestingEngineStaticTheLastOverlordTestingDynamicX64DebugLibs.props£º
-ÒıÇæ£¨lib£©ºÍÓÎÏ·£¨dll£©¶¼±àÒë³ÉX64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordTestingEngineStaticTheLastOverlordTestingDynamicX64DebugLibs.propsï¼š
+å¼•æ“ï¼ˆlibï¼‰å’Œæ¸¸æˆï¼ˆdllï¼‰éƒ½ç¼–è¯‘æˆX64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordTestingEngineStaticTheLastOverlordTestingDynamicX64ReleaseLibs.props£º
-ÒıÇæ£¨lib£©ºÍÓÎÏ·£¨dll£©¶¼±àÒë³ÉX64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordTestingEngineStaticTheLastOverlordTestingDynamicX64ReleaseLibs.propsï¼š
+å¼•æ“ï¼ˆlibï¼‰å’Œæ¸¸æˆï¼ˆdllï¼‰éƒ½ç¼–è¯‘æˆX64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
 ----------------------------
-SetEnvironment.bat£º
-ÉèÖÃ×îºóµÄ°ÔÍõµ¥Ôª²âÊÔËùĞèÒªµÄ»·¾³±äÁ¿
+SetEnvironment.batï¼š
+è®¾ç½®æœ€åçš„éœ¸ç‹å•å…ƒæµ‹è¯•æ‰€éœ€è¦çš„ç¯å¢ƒå˜é‡
 
-SetAllEnvironment.bat£º
-ÉèÖÃÓÎÏ·ËùĞèÒªµÄËùÓĞ»·¾³±äÁ¿
+SetAllEnvironment.batï¼š
+è®¾ç½®æ¸¸æˆæ‰€éœ€è¦çš„æ‰€æœ‰ç¯å¢ƒå˜é‡
 
 ----------------------------

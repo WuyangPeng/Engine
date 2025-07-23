@@ -1,12 +1,12 @@
-@ingroup group_MailServerTesting_Documentation
+ï»¿@ingroup group_MailServerTesting_Documentation
 
 ----------------------------
-ÓÊ¼ş·şÎñÆ÷µ¥Ôª²âÊÔ
+é‚®ä»¶æœåŠ¡å™¨å•å…ƒæµ‹è¯•
 
-Ä¿Ç°°üº¬£º
+ç›®å‰åŒ…å«ï¼š
 
-1. MailServer£¨ÓÊ¼ş·şÎñÆ÷£©
+1. MailServerï¼ˆé‚®ä»¶æœåŠ¡å™¨ï¼‰
 
-£¨1£©ÓÊ¼ş·şÎñÆ÷¡£
+ï¼ˆ1ï¼‰é‚®ä»¶æœåŠ¡å™¨ã€‚
 
 ----------------------------

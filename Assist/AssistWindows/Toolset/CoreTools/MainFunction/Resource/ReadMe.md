@@ -1,7 +1,7 @@
-@ingroup group_MainFunction_Documentation
+ï»¿@ingroup group_MainFunction_Documentation
 
 ----------------------------
-Ö÷º¯Êý  
+ä¸»å‡½æ•°  
 
 1.  MainFunction
  

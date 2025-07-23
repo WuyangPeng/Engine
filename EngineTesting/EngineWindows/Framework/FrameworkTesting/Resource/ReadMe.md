@@ -1,193 +1,193 @@
-@ingroup group_FrameworkTesting_Documentation
+ï»¿@ingroup group_FrameworkTesting_Documentation
 
 ----------------------------
-¿ò¼Ü¿âÄ£¿éµ¥Ôª²âÊÔ
+æ¡†æ¶åº“æ¨¡å—å•å…ƒæµ‹è¯•
 
-1. °ïÖú£¨Helper£©
+1. å¸®åŠ©ï¼ˆHelperï¼‰
 
-°ïÖúµ¥Ôª²âÊÔÄ£¿é£º
+å¸®åŠ©å•å…ƒæµ‹è¯•æ¨¡å—ï¼š
 
-£¨1£©UserMacro
-£¨2£©MainFunctionEntryPoint
-£¨3£©MainFunction
-£¨4£©MiddleLayerMacro
-
-----------------------------
-2. Ö÷º¯Êı°ïÖú£¨MainFunctionHelper£©
-
-Ö÷º¯Êı°ïÖúµ¥Ôª²âÊÔÄ£¿é£º
-
-£¨1£©»·¾³Ä¿Â¼£ºDefaultEnvironmentDirectoryTesting¡¢
-			   FileEnvironmentDirectoryTesting¡£
-£¨2£©MainFunctionHelperBase
-£¨3£©ConsoleMainFunctionHelperBase
-£¨4£©ConsoleMainFunctionHelper
-£¨5£©WindowMainFunctionHelper
-£¨6£©OpenGLGlutMainFunctionHelper
-£¨7£©AndroidMainFunctionHelper
-£¨8£©MacintoshMainFunctionHelper
+ï¼ˆ1ï¼‰UserMacro
+ï¼ˆ2ï¼‰MainFunctionEntryPoint
+ï¼ˆ3ï¼‰MainFunction
+ï¼ˆ4ï¼‰MiddleLayerMacro
 
 ----------------------------
-3. ´°¿Ú´´½¨£¨WindowCreate£©
+2. ä¸»å‡½æ•°å¸®åŠ©ï¼ˆMainFunctionHelperï¼‰
 
-´°¿Ú´´½¨µ¥Ôª²âÊÔÄ£¿é£º
+ä¸»å‡½æ•°å¸®åŠ©å•å…ƒæµ‹è¯•æ¨¡å—ï¼š
 
-£¨1£©WindowSize
-£¨2£©WindowPoint
-£¨3£©WindowInstanceParameter
-£¨4£©WindowCreateParameter
-£¨5£©WindowCreateHandle
-
-----------------------------
-4. ´°¿Ú½ø³Ì£¨WindowProcess£©
-
-´°¿Ú½ø³Ìµ¥Ôª²âÊÔÄ£¿é£º
-
-£¨1£©VirtualKeysTypes
-£¨2£©WindowMessageLoop
-£¨3£©WindowMessageInterface
-£¨4£©WindowMessage
-£¨5£©WindowProcessManager
-£¨6£©WindowProcessHandle
-£¨7£©WindowMessageUnitTestSuite
+ï¼ˆ1ï¼‰ç¯å¢ƒç›®å½•ï¼šDefaultEnvironmentDirectoryTestingã€
+			   FileEnvironmentDirectoryTestingã€‚
+ï¼ˆ2ï¼‰MainFunctionHelperBase
+ï¼ˆ3ï¼‰ConsoleMainFunctionHelperBase
+ï¼ˆ4ï¼‰ConsoleMainFunctionHelper
+ï¼ˆ5ï¼‰WindowMainFunctionHelper
+ï¼ˆ6ï¼‰OpenGLGlutMainFunctionHelper
+ï¼ˆ7ï¼‰AndroidMainFunctionHelper
+ï¼ˆ8ï¼‰MacintoshMainFunctionHelper
 
 ----------------------------
-5. ´°¿Ú×¢²á£¨WindowRegister£©
+3. çª—å£åˆ›å»ºï¼ˆWindowCreateï¼‰
 
-´°¿Ú×¢²áµ¥Ôª²âÊÔÄ£¿é£º
+çª—å£åˆ›å»ºå•å…ƒæµ‹è¯•æ¨¡å—ï¼š
 
-£¨1£©WindowRegisterParameter
-£¨2£©WindowHIcon
-£¨3£©WindowHCursor
-£¨4£©WindowHBrush
-£¨5£©WindowPictorial
-£¨6£©WindowName
-£¨7£©WindowRegisterHandle
+ï¼ˆ1ï¼‰WindowSize
+ï¼ˆ2ï¼‰WindowPoint
+ï¼ˆ3ï¼‰WindowInstanceParameter
+ï¼ˆ4ï¼‰WindowCreateParameter
+ï¼ˆ5ï¼‰WindowCreateHandle
 
 ----------------------------
-6. Ó¦ÓÃ£¨Application£©
+4. çª—å£è¿›ç¨‹ï¼ˆWindowProcessï¼‰
 
-Ó¦ÓÃµ¥Ôª²âÊÔÄ£¿é£º
+çª—å£è¿›ç¨‹å•å…ƒæµ‹è¯•æ¨¡å—ï¼š
 
-£¨1£©ApplicationTrait
-£¨2£©FontInformation
-£¨3£©MousePosition
-£¨4£©PerformanceMeasurements
-£¨5£©WindowApplicationInformation
-£¨6£©GLUTApplicationInformation
-£¨7£©PixelScreen
-£¨8£©CameraMotion
-£¨9£©ObjectMotion
+ï¼ˆ1ï¼‰VirtualKeysTypes
+ï¼ˆ2ï¼‰WindowMessageLoop
+ï¼ˆ3ï¼‰WindowMessageInterface
+ï¼ˆ4ï¼‰WindowMessage
+ï¼ˆ5ï¼‰WindowProcessManager
+ï¼ˆ6ï¼‰WindowProcessHandle
+ï¼ˆ7ï¼‰WindowMessageUnitTestSuite
 
 ----------------------------
-7. ÖĞ¼ä²ã£¨MiddleLayer£©
+5. çª—å£æ³¨å†Œï¼ˆWindowRegisterï¼‰
 
-ÖĞ¼ä²ãµ¥Ôª²âÊÔÄ£¿é£º
+çª—å£æ³¨å†Œå•å…ƒæµ‹è¯•æ¨¡å—ï¼š
 
-£¨1£©MiddleLayerInterface
-£¨2£©ModelViewControllerMiddleLayer
-£¨3£©ModelViewControllerMiddleLayerContainer
-£¨4£©ModelMiddleLayer
-£¨5£©ViewMiddleLayer.
-£¨6£©ControllerMiddleLayer
-£¨7£©PixelViewMiddleLayer
-£¨8£©CameraModelMiddleLayer
-£¨9£©CameraViewMiddleLayer.
-£¨10£©CameraControllerMiddleLayer
-£¨11£©EngineMiddleLayerInterface
-£¨12£©NetworkManagerInterface
-£¨13£©ObjectLogicManagerInterface
-£¨14£©ObjectLogicManager
-£¨15£©ObjectLogicInterface
-£¨16£©ArtificialIntelligenceInterface
-£¨17£©InputManagerInterface
-£¨18£©InputManagerDetail
-£¨19£©PhysicalModellingManagerInterface
-£¨20£©MessageManagerInterface
-£¨21£©EventManagerInterface
-£¨22£©SystemManagerInterface
-£¨23£©ResourceManagerInterface
-£¨24£©AudioManagerInterface
-£¨25£©CameraSystemsManagerInterface
-£¨26£©RenderingManagerInterface
-£¨27£©GUIManagerInterface
-£¨28£©EngineMiddleLayerContainer
+ï¼ˆ1ï¼‰WindowRegisterParameter
+ï¼ˆ2ï¼‰WindowHIcon
+ï¼ˆ3ï¼‰WindowHCursor
+ï¼ˆ4ï¼‰WindowHBrush
+ï¼ˆ5ï¼‰WindowPictorial
+ï¼ˆ6ï¼‰WindowName
+ï¼ˆ7ï¼‰WindowRegisterHandle
 
 ----------------------------
-8. WindowsAPI¿ò¼Ü£¨WindowsAPIFrame£©
+6. åº”ç”¨ï¼ˆApplicationï¼‰
 
-WindowsAPI¿ò¼Üµ¥Ôª²âÊÔÄ£¿é£º
+åº”ç”¨å•å…ƒæµ‹è¯•æ¨¡å—ï¼š
 
-£¨1£©WindowsAPIFrameBuild
-
-----------------------------
-9. GLUT¿ò¼Ü£¨OpenGLGlutFrame£©
-
-GLUT¿ò¼Üµ¥Ôª²âÊÔÄ£¿é£º
-
-£¨1£©OpenGLGlutProcessManager
-£¨2£©OpenGLGlutProcess
-£¨3£©OpenGLGlutCallBackInterface
-£¨4£©OpenGLGlutCallBack
-£¨5£©OpenGLGlutCallBackUnitTestSuite
-£¨6£©OpenGLGlutFrameBuild
+ï¼ˆ1ï¼‰ApplicationTrait
+ï¼ˆ2ï¼‰FontInformation
+ï¼ˆ3ï¼‰MousePosition
+ï¼ˆ4ï¼‰PerformanceMeasurements
+ï¼ˆ5ï¼‰WindowApplicationInformation
+ï¼ˆ6ï¼‰GLUTApplicationInformation
+ï¼ˆ7ï¼‰PixelScreen
+ï¼ˆ8ï¼‰CameraMotion
+ï¼ˆ9ï¼‰ObjectMotion
 
 ----------------------------
-10. Android¿ò¼Ü£¨AndroidFrame£©
+7. ä¸­é—´å±‚ï¼ˆMiddleLayerï¼‰
 
-Android¿ò¼Üµ¥Ôª²âÊÔÄ£¿é£º
+ä¸­é—´å±‚å•å…ƒæµ‹è¯•æ¨¡å—ï¼š
 
-£¨1£©AndroidProcessManager
-£¨2£©AndroidProcess
-£¨3£©AndroidCallBackInterface
-£¨4£©AndroidCallBack
-£¨5£©AndroidCallBackUnitTestSuite
-£¨6£©AndroidMessageLoop
-£¨7£©AndroidFrameBuild
-
-----------------------------
-11. Linux¿ò¼Ü£¨LinuxFrame£©
-
-Linux¿ò¼Üµ¥Ôª²âÊÔÄ£¿é£º
-
-£¨1£©LinuxProcess
-£¨2£©LinuxCallBackInterface
-£¨3£©LinuxFrameBuild
-
-----------------------------
-12. Macintosh¿ò¼Ü£¨MacintoshFrame£©
-
-Macintosh¿ò¼Üµ¥Ôª²âÊÔÄ£¿é£º
-
-£¨1£©MacintoshProcess
-£¨2£©MacintoshCallBackInterface
-£¨3£©MacintoshFrameBuild
-
-----------------------------
-13. ¿ØÖÆÌ¨¿ò¼Ü£¨ConsoleFrame£©
-
-ConsoleFrame¿ò¼Üµ¥Ôª²âÊÔÄ£¿é£º
-
-£¨1£©ConsoleProcess
-£¨2£©ConsoleCallBackInterface
-£¨3£©ConsoleFrameBuild
+ï¼ˆ1ï¼‰MiddleLayerInterface
+ï¼ˆ2ï¼‰ModelViewControllerMiddleLayer
+ï¼ˆ3ï¼‰ModelViewControllerMiddleLayerContainer
+ï¼ˆ4ï¼‰ModelMiddleLayer
+ï¼ˆ5ï¼‰ViewMiddleLayer.
+ï¼ˆ6ï¼‰ControllerMiddleLayer
+ï¼ˆ7ï¼‰PixelViewMiddleLayer
+ï¼ˆ8ï¼‰CameraModelMiddleLayer
+ï¼ˆ9ï¼‰CameraViewMiddleLayer.
+ï¼ˆ10ï¼‰CameraControllerMiddleLayer
+ï¼ˆ11ï¼‰EngineMiddleLayerInterface
+ï¼ˆ12ï¼‰NetworkManagerInterface
+ï¼ˆ13ï¼‰ObjectLogicManagerInterface
+ï¼ˆ14ï¼‰ObjectLogicManager
+ï¼ˆ15ï¼‰ObjectLogicInterface
+ï¼ˆ16ï¼‰ArtificialIntelligenceInterface
+ï¼ˆ17ï¼‰InputManagerInterface
+ï¼ˆ18ï¼‰InputManagerDetail
+ï¼ˆ19ï¼‰PhysicalModellingManagerInterface
+ï¼ˆ20ï¼‰MessageManagerInterface
+ï¼ˆ21ï¼‰EventManagerInterface
+ï¼ˆ22ï¼‰SystemManagerInterface
+ï¼ˆ23ï¼‰ResourceManagerInterface
+ï¼ˆ24ï¼‰AudioManagerInterface
+ï¼ˆ25ï¼‰CameraSystemsManagerInterface
+ï¼ˆ26ï¼‰RenderingManagerInterface
+ï¼ˆ27ï¼‰GUIManagerInterface
+ï¼ˆ28ï¼‰EngineMiddleLayerContainer
 
 ----------------------------
-14. ¹¤³Ì£¨Project£©
+8. WindowsAPIæ¡†æ¶ï¼ˆWindowsAPIFrameï¼‰
 
- Projectµ¥Ôª²âÊÔÄ£¿é£º
+WindowsAPIæ¡†æ¶å•å…ƒæµ‹è¯•æ¨¡å—ï¼š
 
-£¨1£©ProjectName£ºProjectNameTesting¡£
-£¨2£©ÖĞ¼ä²ã£ºGUIProjectManagerTesting¡¢
-			 InputProjectManagerTesting¡¢
-			 ResourceProjectManagerTesting¡¢
-			 SystemProjectManagerTesting¡£
+ï¼ˆ1ï¼‰WindowsAPIFrameBuild
+
+----------------------------
+9. GLUTæ¡†æ¶ï¼ˆOpenGLGlutFrameï¼‰
+
+GLUTæ¡†æ¶å•å…ƒæµ‹è¯•æ¨¡å—ï¼š
+
+ï¼ˆ1ï¼‰OpenGLGlutProcessManager
+ï¼ˆ2ï¼‰OpenGLGlutProcess
+ï¼ˆ3ï¼‰OpenGLGlutCallBackInterface
+ï¼ˆ4ï¼‰OpenGLGlutCallBack
+ï¼ˆ5ï¼‰OpenGLGlutCallBackUnitTestSuite
+ï¼ˆ6ï¼‰OpenGLGlutFrameBuild
+
+----------------------------
+10. Androidæ¡†æ¶ï¼ˆAndroidFrameï¼‰
+
+Androidæ¡†æ¶å•å…ƒæµ‹è¯•æ¨¡å—ï¼š
+
+ï¼ˆ1ï¼‰AndroidProcessManager
+ï¼ˆ2ï¼‰AndroidProcess
+ï¼ˆ3ï¼‰AndroidCallBackInterface
+ï¼ˆ4ï¼‰AndroidCallBack
+ï¼ˆ5ï¼‰AndroidCallBackUnitTestSuite
+ï¼ˆ6ï¼‰AndroidMessageLoop
+ï¼ˆ7ï¼‰AndroidFrameBuild
+
+----------------------------
+11. Linuxæ¡†æ¶ï¼ˆLinuxFrameï¼‰
+
+Linuxæ¡†æ¶å•å…ƒæµ‹è¯•æ¨¡å—ï¼š
+
+ï¼ˆ1ï¼‰LinuxProcess
+ï¼ˆ2ï¼‰LinuxCallBackInterface
+ï¼ˆ3ï¼‰LinuxFrameBuild
+
+----------------------------
+12. Macintoshæ¡†æ¶ï¼ˆMacintoshFrameï¼‰
+
+Macintoshæ¡†æ¶å•å…ƒæµ‹è¯•æ¨¡å—ï¼š
+
+ï¼ˆ1ï¼‰MacintoshProcess
+ï¼ˆ2ï¼‰MacintoshCallBackInterface
+ï¼ˆ3ï¼‰MacintoshFrameBuild
+
+----------------------------
+13. æ§åˆ¶å°æ¡†æ¶ï¼ˆConsoleFrameï¼‰
+
+ConsoleFrameæ¡†æ¶å•å…ƒæµ‹è¯•æ¨¡å—ï¼š
+
+ï¼ˆ1ï¼‰ConsoleProcess
+ï¼ˆ2ï¼‰ConsoleCallBackInterface
+ï¼ˆ3ï¼‰ConsoleFrameBuild
+
+----------------------------
+14. å·¥ç¨‹ï¼ˆProjectï¼‰
+
+ Projectå•å…ƒæµ‹è¯•æ¨¡å—ï¼š
+
+ï¼ˆ1ï¼‰ProjectNameï¼šProjectNameTestingã€‚
+ï¼ˆ2ï¼‰ä¸­é—´å±‚ï¼šGUIProjectManagerTestingã€
+			 InputProjectManagerTestingã€
+			 ResourceProjectManagerTestingã€
+			 SystemProjectManagerTestingã€‚
 
 ----------------------------
 15. Smtp
 
-Smtpµ¥Ôª²âÊÔÄ£¿é£º
+Smtpå•å…ƒæµ‹è¯•æ¨¡å—ï¼š
 
-£¨1£©µç×ÓÓÊ¼ş´«ÊäĞ­Òé£ºSmtpTransportTesting¡£
+ï¼ˆ1ï¼‰ç”µå­é‚®ä»¶ä¼ è¾“åè®®ï¼šSmtpTransportTestingã€‚
 
 ----------------------------

@@ -1,7 +1,7 @@
-@ingroup group_EffectEditorAssist_Documentation
+ï»¿@ingroup group_EffectEditorAssist_Documentation
 
 ----------------------------
-Ð§¹û±à¼­Æ÷¸¨Öú
+æ•ˆæžœç¼–è¾‘å™¨è¾…åŠ©
 
 1.  EffectEditorAssist 
 

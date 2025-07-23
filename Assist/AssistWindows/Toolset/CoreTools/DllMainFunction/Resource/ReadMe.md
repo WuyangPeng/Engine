@@ -1,7 +1,7 @@
-@ingroup group_DllMainFuction_Documentation
+ï»¿@ingroup group_DllMainFuction_Documentation
 
 ----------------------------
-DllÖ÷º¯Êý  
+Dllä¸»å‡½æ•°  
 
 1.  DllMainFunction
 

@@ -1,12 +1,12 @@
-@ingroup group_LeaderboardServerTesting_Documentation
+ï»¿@ingroup group_LeaderboardServerTesting_Documentation
 
 ----------------------------
-ÅÅĞĞ°ñ·şÎñÆ÷µ¥Ôª²âÊÔ
+æ’è¡Œæ¦œæœåŠ¡å™¨å•å…ƒæµ‹è¯•
 
-Ä¿Ç°°üº¬£º
+ç›®å‰åŒ…å«ï¼š
 
-1. LeaderboardServer£¨ÅÅĞĞ°ñ·şÎñÆ÷£©
+1. LeaderboardServerï¼ˆæ’è¡Œæ¦œæœåŠ¡å™¨ï¼‰
 
-£¨1£©ÅÅĞĞ°ñ·şÎñÆ÷¡£
+ï¼ˆ1ï¼‰æ’è¡Œæ¦œæœåŠ¡å™¨ã€‚
 
 ----------------------------

@@ -1,7 +1,7 @@
-@ingroup group_CMainFunctionHelper_Documentation
+ï»¿@ingroup group_CMainFunctionHelper_Documentation
 
 ----------------------------
-CÖ÷º¯Êý°ïÖú
+Cä¸»å‡½æ•°å¸®åŠ©
 
 1.  CMainFunctionHelper
  

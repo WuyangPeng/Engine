@@ -1,6 +1,6 @@
-@ingroup group_FightingServer_Documentation
+ï»¿@ingroup group_FightingServer_Documentation
 
 ----------------------------
-Õ½¶··şÎñÆ÷
+æˆ˜æ–—æœåŠ¡å™¨
 
 ----------------------------

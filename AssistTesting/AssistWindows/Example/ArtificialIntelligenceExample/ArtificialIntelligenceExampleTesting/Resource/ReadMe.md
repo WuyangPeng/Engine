@@ -1,11 +1,11 @@
-@ingroup group_ArtificialIntelligenceExampleTesting_Documentation
+ï»¿@ingroup group_ArtificialIntelligenceExampleTesting_Documentation
 
 ----------------------------
-ÈË¹¤ÖÇÄÜÀı×Óµ¥Ôª²âÊÔ
+äººå·¥æ™ºèƒ½ä¾‹å­å•å…ƒæµ‹è¯•
 
 1.   ArtificialIntelligenceExampleTesting 
 
-ÈË¹¤ÖÇÄÜÀı×ÓµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£©ÈË¹¤ÖÇÄÜÀı×Ó¡£
+äººå·¥æ™ºèƒ½ä¾‹å­çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰äººå·¥æ™ºèƒ½ä¾‹å­ã€‚
 
 ----------------------------

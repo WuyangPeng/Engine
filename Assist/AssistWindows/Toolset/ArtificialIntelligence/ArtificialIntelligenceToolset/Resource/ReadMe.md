@@ -1,7 +1,7 @@
-@ingroup group_ArtificialIntelligenceToolset_Documentation
+ï»¿@ingroup group_ArtificialIntelligenceToolset_Documentation
 
 ----------------------------
-ÈË¹¤ÖÇÄÜ¹¤¾ßÏä
+äººå·¥æ™ºèƒ½å·¥å…·ç®±
 
 1.  ArtificialIntelligenceToolset 
 

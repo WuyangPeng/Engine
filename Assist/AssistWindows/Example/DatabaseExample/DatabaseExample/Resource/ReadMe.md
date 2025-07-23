@@ -1,11 +1,11 @@
-@ingroup group_DatabaseExample_Documentation
+ï»¿@ingroup group_DatabaseExample_Documentation
 
 ----------------------------
-Êı¾İ¿âÀı×Ó
+æ•°æ®åº“ä¾‹å­
 
 1.   DatabaseExample 
 
-Êı¾İ¿âÀı×Ó£¬°üÀ¨£º 
-£¨1£©Êı¾İ¿â¡£
+æ•°æ®åº“ä¾‹å­ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰æ•°æ®åº“ã€‚
 
 ----------------------------

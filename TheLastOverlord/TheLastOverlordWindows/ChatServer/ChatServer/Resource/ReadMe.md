@@ -1,6 +1,6 @@
-@ingroup group_ChatServer_Documentation
+ï»¿@ingroup group_ChatServer_Documentation
 
 ----------------------------
-ÁÄÌì·şÎñÆ÷
+èŠå¤©æœåŠ¡å™¨
 
 ----------------------------

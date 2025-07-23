@@ -1,59 +1,59 @@
-@ingroup group_SystemWindowsTesting_Documentation
+ï»¿@ingroup group_SystemWindowsTesting_Documentation
 
 ----------------------------
-Ïµ½y¿âWindowsµ¥Ôª²âÊÔ
+ç³»çµ±åº“Windowså•å…ƒæµ‹è¯•
 
 ----------------------------
 1.	SystemOutputSuite
 
-¶ÔÏµÍ³Êä³öÄ£¿é½øĞĞ²âÊÔ£º
-£¨1£©ÏûÏ¢¿òÑ¡ÔñÊ¹ÓÃ±êÖ¾£ºMessageBoxSelectionUseFlagsDataWindowsTesting¡£
-£¨2£©ÏûÏ¢¿òÑ¡ÔñÊ¹ÓÃÓïÑÔID£ºMessageBoxSelectionUseLanguageIDDataWindowsTesting¡£
+å¯¹ç³»ç»Ÿè¾“å‡ºæ¨¡å—è¿›è¡Œæµ‹è¯•ï¼š
+ï¼ˆ1ï¼‰æ¶ˆæ¯æ¡†é€‰æ‹©ä½¿ç”¨æ ‡å¿—ï¼šMessageBoxSelectionUseFlagsDataWindowsTestingã€‚
+ï¼ˆ2ï¼‰æ¶ˆæ¯æ¡†é€‰æ‹©ä½¿ç”¨è¯­è¨€IDï¼šMessageBoxSelectionUseLanguageIDDataWindowsTestingã€‚
 
 ----------------------------
 2.	DynamicLinkSuite
 
-¶Ô¶¯Ì¬Á´½Ó¿âÄ£¿é½øĞĞ²âÊÔ£º
-£¨1£©¼ÓÔØ×ÊÔ´¹¤¾ß£ºFindResourceWindowsTesting¡¢
-                   LoadResourceWindowsTesting¡¢
-                   LoadStringWindowsTesting¡£
-£¨2£©Ã¶¾Ù×ÊÔ´¹¤¾ß£ºEnumResourceToolsTesting¡¢
-                   ResourceEnumTesting¡£
+å¯¹åŠ¨æ€é“¾æ¥åº“æ¨¡å—è¿›è¡Œæµ‹è¯•ï¼š
+ï¼ˆ1ï¼‰åŠ è½½èµ„æºå·¥å…·ï¼šFindResourceWindowsTestingã€
+                   LoadResourceWindowsTestingã€
+                   LoadStringWindowsTestingã€‚
+ï¼ˆ2ï¼‰æšä¸¾èµ„æºå·¥å…·ï¼šEnumResourceToolsTestingã€
+                   ResourceEnumTestingã€‚
 
 ----------------------------
 3.	OpenGLSuite 
 
-¶ÔOpenGLÄ£¿é½øĞĞ²âÊÔ£º
-£¨1£© OpenGL Wgl Ô­ĞÍ£ºOpenGLWglSwapIntervalTesting¡¢
-                       OpenGLGetCurrentWglContextTesting¡¢
-                       OpenGLGetWglProcAddressTesting¡¢
-                       OpenGLSwapDeviceBuffersTesting¡£
+å¯¹OpenGLæ¨¡å—è¿›è¡Œæµ‹è¯•ï¼š
+ï¼ˆ1ï¼‰ OpenGL Wgl åŸå‹ï¼šOpenGLWglSwapIntervalTestingã€
+                       OpenGLGetCurrentWglContextTestingã€
+                       OpenGLGetWglProcAddressTestingã€
+                       OpenGLSwapDeviceBuffersTestingã€‚
 
 ----------------------------
 4.	WindowsSuite 
 
-¶ÔWindowsÄ£¿é½øĞĞ²âÊÔ£º
-£¨1£© Windows´´½¨£ºCreateSystemWindowTesting¡¢
-                   GetHInstanceTesting¡¢
-                   WindowsCreateMenuTesting¡£
-£¨2£© Windows½ø³Ì£ºGetMessageTesting¡¢
-                   PeekMessageTesting¡¢
-                   PostQuitMessageTesting¡¢
-                   ValidateRectTesting¡¢
-                   DefWindowProcTesting¡¢
-                   MessageBoxTesting¡¢
-                   DestroyWindowTesting¡¢
-                   SendMessageTesting¡¢
-                   GetCommandLineTesting¡¢
-                   WindowPaintTesting¡£
-£¨3£© Windows×¢²á£ºGetStockObjectTesting¡¢
-                   LoadCursorTesting¡¢
-                   LoadIconTesting¡¢
-                   RegisterClassTesting¡¢
-                   RegisterWindowMessageTesting¡£
-£¨4£© Windows×ÖÌåĞÅÏ¢£ºWindowsFontInformationTesting¡£
-£¨5£© WindowÏµÍ³£ºGetActiveWindowTesting¡¢
-                  GetSystemClientRectTesting¡£
-£¨6£© WindowsÓÃ»§£ºWindowsUserTesting¡£
+å¯¹Windowsæ¨¡å—è¿›è¡Œæµ‹è¯•ï¼š
+ï¼ˆ1ï¼‰ Windowsåˆ›å»ºï¼šCreateSystemWindowTestingã€
+                   GetHInstanceTestingã€
+                   WindowsCreateMenuTestingã€‚
+ï¼ˆ2ï¼‰ Windowsè¿›ç¨‹ï¼šGetMessageTestingã€
+                   PeekMessageTestingã€
+                   PostQuitMessageTestingã€
+                   ValidateRectTestingã€
+                   DefWindowProcTestingã€
+                   MessageBoxTestingã€
+                   DestroyWindowTestingã€
+                   SendMessageTestingã€
+                   GetCommandLineTestingã€
+                   WindowPaintTestingã€‚
+ï¼ˆ3ï¼‰ Windowsæ³¨å†Œï¼šGetStockObjectTestingã€
+                   LoadCursorTestingã€
+                   LoadIconTestingã€
+                   RegisterClassTestingã€
+                   RegisterWindowMessageTestingã€‚
+ï¼ˆ4ï¼‰ Windowså­—ä½“ä¿¡æ¯ï¼šWindowsFontInformationTestingã€‚
+ï¼ˆ5ï¼‰ Windowç³»ç»Ÿï¼šGetActiveWindowTestingã€
+                  GetSystemClientRectTestingã€‚
+ï¼ˆ6ï¼‰ Windowsç”¨æˆ·ï¼šWindowsUserTestingã€‚
 
 ----------------------------

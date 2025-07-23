@@ -1,292 +1,292 @@
-@ingroup group_Assist_Documentation
+ï»¿@ingroup group_Assist_Documentation
 
 ----------------------------
-Ñ§Ï°¿â
+å­¦ä¹ åº“
 
 ----------------------------
-ogre£¨C++´óÑ§½Ì³Ì£©
+ogreï¼ˆC++å¤§å­¦æ•™ç¨‹ï¼‰
 
-1. °æ±¾£º1.12.7¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://www.ogre3d.org/¡£
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-4. ½«imgui´úÂë¸´ÖÆµ½Components\Overlay\src\imguiÏÂ¡£
-5. ¹¤³ÌOgreXMLConverterºÍPlugin_DotSceneµÄdebug°æ±¾µÄÔËĞĞ¿â¸Ä³É¶àÏß³Ì DLL (/MD)¡£
-
-----------------------------
-imgui£¨ogre¹ØÁª£©
-
-1. °æ±¾£º1.77¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://github.com/ocornut/imgui¡£
-3. gitµØÖ·£ºhttps://github.com/ocornut/imgui.git¡£
+1. ç‰ˆæœ¬ï¼š1.12.7ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://www.ogre3d.org/ã€‚
+3. ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
+4. å°†imguiä»£ç å¤åˆ¶åˆ°Components\Overlay\src\imguiä¸‹ã€‚
+5. å·¥ç¨‹OgreXMLConverterå’ŒPlugin_DotSceneçš„debugç‰ˆæœ¬çš„è¿è¡Œåº“æ”¹æˆå¤šçº¿ç¨‹ DLL (/MD)ã€‚
 
 ----------------------------
-ogre-next£¨ÒıÇæ²»¹ØÁª£©
+imguiï¼ˆogreå…³è”ï¼‰
 
-1. °æ±¾£º2.3¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://github.com/OGRECave/ogre-next ¡£
-3. ±àÒëÒÀÀµ¿â£¬gitµØÖ·£ºhttps://github.com/OGRECave/ogre-next-deps.git ¡£
-4. ÒÀÀµ¿â±àÒë·½Ê½£ºCMake¡£x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-5. ±àÒëÒÀÀµ¿â£¬²¢½«ogre-next-deps\BuildX64\ogredepsÏÂµÄÎÄ¼ş¸´ÖÆµ½ogre-next\DependenciesÏÂ¡£
-6. ogre-next±àÒë·½Ê½£ºCMake¡£x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
+1. ç‰ˆæœ¬ï¼š1.77ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://github.com/ocornut/imguiã€‚
+3. gitåœ°å€ï¼šhttps://github.com/ocornut/imgui.gitã€‚
 
 ----------------------------
-ZThread£¨C++±à³ÌË¼Ïë£© 
+ogre-nextï¼ˆå¼•æ“ä¸å…³è”ï¼‰
 
-1.  °æ±¾£º2.3.2¡£
-2.  ¹Ù·½ÍøÕ¾£ºhttp://zthread.sourceforge.net/¡£
-3.  ÔÚBuildÏÂĞÂ½¨ZThread¾²Ì¬¿â¹¤³Ì£¬°üº¬includeÏÂµÄÍ·ÎÄ¼şºÍsrcÏÂ¸ùÄ¿Â¼ÏÂµÄËùÓĞÎÄ¼ş¡£
-	ĞŞ¸ÄÊä³öÄ¿Â¼Îª$(SolutionDir)$(Platform)\$(Configuration)\£¬ÖĞ¼äÄ¿Â¼Îª$(Platform)\$(Configuration)\¡£
-	¸½¼Ó°üº¬Ä¿Â¼..\..\..\include;
-	SDL¼ì²éÉèÖÃÎª·ñ¡£
-4.  ÎÄ¼şGuard.h£º
-	ÔÚ223ĞĞ£¬È¥µô²ÎÊıl1¡£
-    ÔÚ431ĞĞ£¬extract¸ÄÎªthis->extract¡£
-    ÔÚ494ĞĞ£¬isDisabled()¸ÄÎªthis->isDisabled()¡£
-5.  ÎÄ¼şThreadLocal.h£º
-    ÔÚ304ĞĞ£¬Ôö¼Óreturn *this;
-6.  ÎÄ¼şGuardedClass.h£º
-	ÔÚ57ĞĞ£¬È¥µô²ÎÊıl¡£
-7.  MutexImpl.hµÚ156ĞĞ£¬¸Ä³Éthis->ownerAcquired(self);
-	µÚ167ĞĞ¸Ä³Éthis->waiterArrived(self);
-	µÚ176ĞĞ¸Ä³Éthis->waiterDeparted(self);
-	µÚ195ĞĞ¸Ä³Éthis->ownerAcquired(self);
-	µÚ239ĞĞ¸Ä³Éthis->ownerAcquired(self);
-	µÚ256ĞĞ¸Ä³Éthis->waiterArrived(self);
-	µÚ265ĞĞ¸Ä³Éthis->waiterDeparted(self);
-	µÚ287ĞĞ¸Ä³Éthis->ownerAcquired(self);
-	µÚ329ĞĞ¸Ä³Éthis->ownerReleased(impl);
-8.  ThreadOps.cxxµÚ55ĞĞ¸Ä³É HINSTANCE hInst = ::GetModuleHandleA("Kernel32.dll");
-9.	¸´ÖÆ¹¤³Ìµ½ZThreadDll£¬ÅäÖÃÀàĞÍ¸Ä³É¶¯Ì¬¿â¡£Ô¤´¦ÀíÆ÷¶¨ÒåÔö¼ÓZTHREAD_EXPORTS;¡£
+1. ç‰ˆæœ¬ï¼š2.3ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://github.com/OGRECave/ogre-next ã€‚
+3. ç¼–è¯‘ä¾èµ–åº“ï¼Œgitåœ°å€ï¼šhttps://github.com/OGRECave/ogre-next-deps.git ã€‚
+4. ä¾èµ–åº“ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚x64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
+5. ç¼–è¯‘ä¾èµ–åº“ï¼Œå¹¶å°†ogre-next-deps\BuildX64\ogredepsä¸‹çš„æ–‡ä»¶å¤åˆ¶åˆ°ogre-next\Dependenciesä¸‹ã€‚
+6. ogre-nextç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚x64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
+
+----------------------------
+ZThreadï¼ˆC++ç¼–ç¨‹æ€æƒ³ï¼‰ 
+
+1.  ç‰ˆæœ¬ï¼š2.3.2ã€‚
+2.  å®˜æ–¹ç½‘ç«™ï¼šhttp://zthread.sourceforge.net/ã€‚
+3.  åœ¨Buildä¸‹æ–°å»ºZThreadé™æ€åº“å·¥ç¨‹ï¼ŒåŒ…å«includeä¸‹çš„å¤´æ–‡ä»¶å’Œsrcä¸‹æ ¹ç›®å½•ä¸‹çš„æ‰€æœ‰æ–‡ä»¶ã€‚
+	ä¿®æ”¹è¾“å‡ºç›®å½•ä¸º$(SolutionDir)$(Platform)\$(Configuration)\ï¼Œä¸­é—´ç›®å½•ä¸º$(Platform)\$(Configuration)\ã€‚
+	é™„åŠ åŒ…å«ç›®å½•..\..\..\include;
+	SDLæ£€æŸ¥è®¾ç½®ä¸ºå¦ã€‚
+4.  æ–‡ä»¶Guard.hï¼š
+	åœ¨223è¡Œï¼Œå»æ‰å‚æ•°l1ã€‚
+    åœ¨431è¡Œï¼Œextractæ”¹ä¸ºthis->extractã€‚
+    åœ¨494è¡Œï¼ŒisDisabled()æ”¹ä¸ºthis->isDisabled()ã€‚
+5.  æ–‡ä»¶ThreadLocal.hï¼š
+    åœ¨304è¡Œï¼Œå¢åŠ return *this;
+6.  æ–‡ä»¶GuardedClass.hï¼š
+	åœ¨57è¡Œï¼Œå»æ‰å‚æ•°lã€‚
+7.  MutexImpl.hç¬¬156è¡Œï¼Œæ”¹æˆthis->ownerAcquired(self);
+	ç¬¬167è¡Œæ”¹æˆthis->waiterArrived(self);
+	ç¬¬176è¡Œæ”¹æˆthis->waiterDeparted(self);
+	ç¬¬195è¡Œæ”¹æˆthis->ownerAcquired(self);
+	ç¬¬239è¡Œæ”¹æˆthis->ownerAcquired(self);
+	ç¬¬256è¡Œæ”¹æˆthis->waiterArrived(self);
+	ç¬¬265è¡Œæ”¹æˆthis->waiterDeparted(self);
+	ç¬¬287è¡Œæ”¹æˆthis->ownerAcquired(self);
+	ç¬¬329è¡Œæ”¹æˆthis->ownerReleased(impl);
+8.  ThreadOps.cxxç¬¬55è¡Œæ”¹æˆ HINSTANCE hInst = ::GetModuleHandleA("Kernel32.dll");
+9.	å¤åˆ¶å·¥ç¨‹åˆ°ZThreadDllï¼Œé…ç½®ç±»å‹æ”¹æˆåŠ¨æ€åº“ã€‚é¢„å¤„ç†å™¨å®šä¹‰å¢åŠ ZTHREAD_EXPORTS;ã€‚
 
 ----------------------------	
-OIS£¨C++´óÑ§½Ì³Ì£©
+OISï¼ˆC++å¤§å­¦æ•™ç¨‹ï¼‰
 
-1. °æ±¾£º1.3¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://wiki.ogre3d.org/OIS¡£
-3. DebugºÍOIS_DebugDll°æ±¾ÉèÖÃÄ¿±êÎÄ¼şÃû$(ProjectName)_d¡£
-4. Demo_ConsoleµÄÊä³öÎÄ¼şÃû¸Ä³É$(OutDir)Demo_Console.exe¡£
-5. Demo_FFTestµÄÊä³öÎÄ¼şÃû¸Ä³É$(OutDir)Demo_FFTest.exe¡£
-6. Ö±½Ó¸´ÖÆx64¹¤³Ì¡£
-7. ĞŞ¸ÄÊä³öÄ¿Â¼Îª$(SolutionDir)$(Platform)\$(Configuration)\£¬ÖĞ¼äÄ¿Â¼Îª$(Platform)\$(Configuration)\¡£
-   ¸½¼Ó¿âÄ¿Â¼Ôö¼Ó$(SolutionDir)$(Platform)\$(Configuration)\¡£
-8. ÎÄ¼şOISConsole.cpp£º
-   µÚ15ĞĞ²åÈë#include <algorithm>¡£ 
-
-----------------------------
-freealut£¨OgreALÏà¹ØÁª£© 
-
-1. °æ±¾£º1.1.0¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://github.com/vancegroup/freealut¡£
-3. gitµØÖ·£ºhttps://github.com/vancegroup/freealut.git¡£
-4. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-5. ¶¨ÒåÕıÈ·µÄOPENAL_INCLUDE_DIRµ½($openal-soft)/include/AL¡£ 
-6. ¶¨ÒåÕıÈ·µÄOPENAL_LIBRARYµ½($openal-soft)/BuildX64/Release/OpenAL32.libºÍ($openal-soft)/BuildWin32/Release/OpenAL32.lib
+1. ç‰ˆæœ¬ï¼š1.3ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://wiki.ogre3d.org/OISã€‚
+3. Debugå’ŒOIS_DebugDllç‰ˆæœ¬è®¾ç½®ç›®æ ‡æ–‡ä»¶å$(ProjectName)_dã€‚
+4. Demo_Consoleçš„è¾“å‡ºæ–‡ä»¶åæ”¹æˆ$(OutDir)Demo_Console.exeã€‚
+5. Demo_FFTestçš„è¾“å‡ºæ–‡ä»¶åæ”¹æˆ$(OutDir)Demo_FFTest.exeã€‚
+6. ç›´æ¥å¤åˆ¶x64å·¥ç¨‹ã€‚
+7. ä¿®æ”¹è¾“å‡ºç›®å½•ä¸º$(SolutionDir)$(Platform)\$(Configuration)\ï¼Œä¸­é—´ç›®å½•ä¸º$(Platform)\$(Configuration)\ã€‚
+   é™„åŠ åº“ç›®å½•å¢åŠ $(SolutionDir)$(Platform)\$(Configuration)\ã€‚
+8. æ–‡ä»¶OISConsole.cppï¼š
+   ç¬¬15è¡Œæ’å…¥#include <algorithm>ã€‚ 
 
 ----------------------------
-OgreAL£¨C++´óÑ§½Ì³Ì£© 
+freealutï¼ˆOgreALç›¸å…³è”ï¼‰ 
 
-1. °æ±¾£º0.2¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://wiki.ogre3d.org/tiki-index.php?page=OgreAL¡£
-             https://sourceforge.net/projects/ogreal/¡£
-3. ÉèÖÃÕıÈ·µÄ¸½¼Ó°üº¬Ä¿Â¼µ½$(OgreInclude)¡¢$(OgreBuildInclude)¡¢$(OpenALSoftInclude)\AL¡£
-4. ÉèÖÃÕıÈ·µÄ¸½¼Ó°üº¬Ä¿Â¼µ½../../libogg/include£¬../../libvorbis/includeºÍ../../freealut/include¡£
-5. Debug°æ±¾ÉèÖÃÄ¿±êÎÄ¼şÃû$(ProjectName)_d¡£
-6. ÉèÖÃÕıÈ·µÄ¸½¼Ó¿âÄ¿Â¼µ½$(OpenALSoftWin32DebugLib)ºÍ$(OpenALSoftWin32ReleaseLib)¡£
-7. ÉèÖÃÕıÈ·µÄ¸½¼Ó¿âÄ¿Â¼µ½$(OgreWin32DebugLib)ºÍ$(OgreWin32ReleaseLib)¡£
-8. ÉèÖÃÕıÈ·µÄ¸½¼Ó¿âÄ¿Â¼µ½../../freealut/BuildWin32/src/$(Configuration)¡£
-9. ÉèÖÃÕıÈ·µÄ¸½¼Ó¿âÄ¿Â¼µ½../../libogg/BuildWin32/$(Configuration)
-                         ../../libvorbis/BuildWin32/lib/$(Configuration)¡£					 
-10.ÉèÖÃÕıÈ·µÄ¸½¼ÓÒÀÀµÏîvorbis.lib¡¢vorbisfile.libºÍogg.lib¡£
-11.Éú³ÉºóÊÂ¼şÃüÁîĞĞµÚ2Ìõ¸Ä³Éxcopy "../../freealut/BuildWin32/src/$(Configuration)/alut.dll" "$(SolutionDir)Demos/bin/$(Configuration)"  /F /Y¡£
-12.ËÄ¸öDemoÎŞ·¨Í¨¹ı±àÒë¡£
-13.ÎÄ¼şOgreALPrereqs.h£º
-   ×¢ÊÍµÚ13ĞĞ£¬ÔÚµÚ18ĞĞºó²åÈë
+1. ç‰ˆæœ¬ï¼š1.1.0ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://github.com/vancegroup/freealutã€‚
+3. gitåœ°å€ï¼šhttps://github.com/vancegroup/freealut.gitã€‚
+4. ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
+5. å®šä¹‰æ­£ç¡®çš„OPENAL_INCLUDE_DIRåˆ°($openal-soft)/include/ALã€‚ 
+6. å®šä¹‰æ­£ç¡®çš„OPENAL_LIBRARYåˆ°($openal-soft)/BuildX64/Release/OpenAL32.libå’Œ($openal-soft)/BuildWin32/Release/OpenAL32.lib
+
+----------------------------
+OgreALï¼ˆC++å¤§å­¦æ•™ç¨‹ï¼‰ 
+
+1. ç‰ˆæœ¬ï¼š0.2ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://wiki.ogre3d.org/tiki-index.php?page=OgreALã€‚
+             https://sourceforge.net/projects/ogreal/ã€‚
+3. è®¾ç½®æ­£ç¡®çš„é™„åŠ åŒ…å«ç›®å½•åˆ°$(OgreInclude)ã€$(OgreBuildInclude)ã€$(OpenALSoftInclude)\ALã€‚
+4. è®¾ç½®æ­£ç¡®çš„é™„åŠ åŒ…å«ç›®å½•åˆ°../../libogg/includeï¼Œ../../libvorbis/includeå’Œ../../freealut/includeã€‚
+5. Debugç‰ˆæœ¬è®¾ç½®ç›®æ ‡æ–‡ä»¶å$(ProjectName)_dã€‚
+6. è®¾ç½®æ­£ç¡®çš„é™„åŠ åº“ç›®å½•åˆ°$(OpenALSoftWin32DebugLib)å’Œ$(OpenALSoftWin32ReleaseLib)ã€‚
+7. è®¾ç½®æ­£ç¡®çš„é™„åŠ åº“ç›®å½•åˆ°$(OgreWin32DebugLib)å’Œ$(OgreWin32ReleaseLib)ã€‚
+8. è®¾ç½®æ­£ç¡®çš„é™„åŠ åº“ç›®å½•åˆ°../../freealut/BuildWin32/src/$(Configuration)ã€‚
+9. è®¾ç½®æ­£ç¡®çš„é™„åŠ åº“ç›®å½•åˆ°../../libogg/BuildWin32/$(Configuration)
+                         ../../libvorbis/BuildWin32/lib/$(Configuration)ã€‚					 
+10.è®¾ç½®æ­£ç¡®çš„é™„åŠ ä¾èµ–é¡¹vorbis.libã€vorbisfile.libå’Œogg.libã€‚
+11.ç”Ÿæˆåäº‹ä»¶å‘½ä»¤è¡Œç¬¬2æ¡æ”¹æˆxcopy "../../freealut/BuildWin32/src/$(Configuration)/alut.dll" "$(SolutionDir)Demos/bin/$(Configuration)"  /F /Yã€‚
+12.å››ä¸ªDemoæ— æ³•é€šè¿‡ç¼–è¯‘ã€‚
+13.æ–‡ä»¶OgreALPrereqs.hï¼š
+   æ³¨é‡Šç¬¬13è¡Œï¼Œåœ¨ç¬¬18è¡Œåæ’å…¥
    typedef ALenum (*EAXGetBufferMode)(ALuint buffer, ALint *pReserved);
    typedef ALboolean (*EAXSetBufferMode)(ALsizei n, ALuint *buffers, ALint value);
-14.ÎÄ¼şOgreALSoundManager.cpp£º
-   µÚ3ĞĞ¡¢µÚ147ĞĞ¡¢µÚ152ĞĞ£¬ms_Singleton¸Ä³ÉmsSingleton¡£
-15.ÎÄ¼şOgreALSound.h£º
-   µÚ226ĞĞ²åÈëvirtual void visitRenderables(Ogre::Renderable::Visitor* visitor, bool debugRenderables = false) { }
-16.ÎÄ¼şOgreALListener.h£º
-   µÚ95ĞĞ²åÈëvirtual void visitRenderables(Ogre::Renderable::Visitor* visitor, bool debugRenderables = false) { }
-17.ÎÄ¼şOgreALListener.cpp£º
-   µÚ3ĞĞ¡¢µÚ36ĞĞ¡¢µÚ41ĞĞ£¬ms_Singleton¸Ä³ÉmsSingleton¡£
-18.¸´ÖÆx64¹¤³Ì£¬ÉèÖÃÕıÈ·µÄ¸½¼Ó¿âÄ¿Â¼µ½$(OpenALSoftX64DebugLib)¡¢$(OpenALSoftX64ReleaseLib)¡¢$(OgreX64DebugLib)¡¢$(OgreX64ReleaseLib)¡¢
-   ../../freealut/BuildX64/src/$(Configuration)¡¢../../libogg/BuildX64/$(Configuration)¡¢
-   ../../libvorbis/BuildX64/lib/$(Configuration)¡£
+14.æ–‡ä»¶OgreALSoundManager.cppï¼š
+   ç¬¬3è¡Œã€ç¬¬147è¡Œã€ç¬¬152è¡Œï¼Œms_Singletonæ”¹æˆmsSingletonã€‚
+15.æ–‡ä»¶OgreALSound.hï¼š
+   ç¬¬226è¡Œæ’å…¥virtual void visitRenderables(Ogre::Renderable::Visitor* visitor, bool debugRenderables = false) { }
+16.æ–‡ä»¶OgreALListener.hï¼š
+   ç¬¬95è¡Œæ’å…¥virtual void visitRenderables(Ogre::Renderable::Visitor* visitor, bool debugRenderables = false) { }
+17.æ–‡ä»¶OgreALListener.cppï¼š
+   ç¬¬3è¡Œã€ç¬¬36è¡Œã€ç¬¬41è¡Œï¼Œms_Singletonæ”¹æˆmsSingletonã€‚
+18.å¤åˆ¶x64å·¥ç¨‹ï¼Œè®¾ç½®æ­£ç¡®çš„é™„åŠ åº“ç›®å½•åˆ°$(OpenALSoftX64DebugLib)ã€$(OpenALSoftX64ReleaseLib)ã€$(OgreX64DebugLib)ã€$(OgreX64ReleaseLib)ã€
+   ../../freealut/BuildX64/src/$(Configuration)ã€../../libogg/BuildX64/$(Configuration)ã€
+   ../../libvorbis/BuildX64/lib/$(Configuration)ã€‚
  
 ----------------------------
-DirectX£¨ÒıÇæ²»¹ØÁª£©
+DirectXï¼ˆå¼•æ“ä¸å…³è”ï¼‰
 
-1. °æ±¾£º9.29.1962¡£
-
-----------------------------
-Wild Magic£¨ÒıÇæ²»¹ØÁª£©
-
-1. °æ±¾£º5.17¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://www.geometrictools.com/index.html¡£
-3. ÉèÖÃÕıÈ·µÄ»·¾³±äÁ¿DXSDK_DIRÖ¸ÏòÕıÈ·µÄMicrosoft DirectX SDKÂ·¾¶¡£
-4. Ò»Ğ©ÎÄ¼şÁí´æÎªANSI±àÂë£¬ÒÔÍ¨¹ı±àÒë¡£
+1. ç‰ˆæœ¬ï¼š9.29.1962ã€‚
 
 ----------------------------
-Geometric Tools£¨ÒıÇæ²»¹ØÁª£©
+Wild Magicï¼ˆå¼•æ“ä¸å…³è”ï¼‰
+
+1. ç‰ˆæœ¬ï¼š5.17ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://www.geometrictools.com/index.htmlã€‚
+3. è®¾ç½®æ­£ç¡®çš„ç¯å¢ƒå˜é‡DXSDK_DIRæŒ‡å‘æ­£ç¡®çš„Microsoft DirectX SDKè·¯å¾„ã€‚
+4. ä¸€äº›æ–‡ä»¶å¦å­˜ä¸ºANSIç¼–ç ï¼Œä»¥é€šè¿‡ç¼–è¯‘ã€‚
+
+----------------------------
+Geometric Toolsï¼ˆå¼•æ“ä¸å…³è”ï¼‰
                   
-1. °æ±¾£º5.10¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://www.geometrictools.com/index.html¡£
-3. Ò»Ğ©ÎÄ¼şÁí´æÎªANSI±àÂë£¬ÒÔÍ¨¹ı±àÒë¡£
+1. ç‰ˆæœ¬ï¼š5.10ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://www.geometrictools.com/index.htmlã€‚
+3. ä¸€äº›æ–‡ä»¶å¦å­˜ä¸ºANSIç¼–ç ï¼Œä»¥é€šè¿‡ç¼–è¯‘ã€‚
 
 ----------------------------
-irrlicht£¨ÒıÇæ²»¹ØÁª£©
+irrlichtï¼ˆå¼•æ“ä¸å…³è”ï¼‰
 
-1. °æ±¾£º1.8.4¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://irrlicht.sourceforge.net/
-3. ÉèÖÃ¸½¼Ó°üº¬Ä¿Â¼$(DXSDK_DIR)\Include;
-
-----------------------------
-glew£¨ÒıÇæ²»¹ØÁª£©
-
-1. °æ±¾£º2.2.0¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://glew.sourceforge.net/¡£
-3. Ê¹ÓÃhttps://sourceforge.net/projects/glew/files/glew/2.2.0/ÏÂµÄ²ÅÓĞÔ´´úÂë¡£
-4. ¹¤³ÌÔÚbuild\vc15¡£
+1. ç‰ˆæœ¬ï¼š1.8.4ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://irrlicht.sourceforge.net/
+3. è®¾ç½®é™„åŠ åŒ…å«ç›®å½•$(DXSDK_DIR)\Include;
 
 ----------------------------
-loki£¨ÒıÇæ²»¹ØÁª£©
+glewï¼ˆå¼•æ“ä¸å…³è”ï¼‰
 
-1. °æ±¾£º0.1.7¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://loki-lib.sourceforge.net/¡£ 
-3. SmallObj.cppµÚ1132ĞĞ¸Ä³Éthrow std::bad_alloc();¡£
+1. ç‰ˆæœ¬ï¼š2.2.0ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://glew.sourceforge.net/ã€‚
+3. ä½¿ç”¨https://sourceforge.net/projects/glew/files/glew/2.2.0/ä¸‹çš„æ‰æœ‰æºä»£ç ã€‚
+4. å·¥ç¨‹åœ¨build\vc15ã€‚
+
+----------------------------
+lokiï¼ˆå¼•æ“ä¸å…³è”ï¼‰
+
+1. ç‰ˆæœ¬ï¼š0.1.7ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://loki-lib.sourceforge.net/ã€‚ 
+3. SmallObj.cppç¬¬1132è¡Œæ”¹æˆthrow std::bad_alloc();ã€‚
 4. SafeFormat.h
-   117ĞĞÔö¼Ó
+   117è¡Œå¢åŠ 
    #if (defined(_WIN64))
         LOKI_PRINTF_STATE_FORWARD(unsigned int)
    #endif
-5. FunctionTest.cppµÚ757ĞĞ¸Ä³Écatch(std::bad_function_call)¡£
-6. LevelMutex¹¤³ÌÔö¼ÓÔ¤´¦ÀíÆ÷¶¨Òå_ALLOW_RTCc_IN_STL;WINDOWS_IGNORE_PACKING_MISMATCH¡£
-7. SmartPtr.hµÚ1189ĞĞ¸Ä³É{ auto ptr = GetImplRef(rhs);GetImplRef(*this) = OP::Clone(ptr); }¡£
-8. AssocVectorTest.hµÚ162¡¢163¡¢165ĞĞÈ¥µôTestAllocatorÄ£°å²ÎÊı¡£
-9. Ö±½Ó¸´ÖÆx64¹¤³Ì¡£
+5. FunctionTest.cppç¬¬757è¡Œæ”¹æˆcatch(std::bad_function_call)ã€‚
+6. LevelMutexå·¥ç¨‹å¢åŠ é¢„å¤„ç†å™¨å®šä¹‰_ALLOW_RTCc_IN_STL;WINDOWS_IGNORE_PACKING_MISMATCHã€‚
+7. SmartPtr.hç¬¬1189è¡Œæ”¹æˆ{ auto ptr = GetImplRef(rhs);GetImplRef(*this) = OP::Clone(ptr); }ã€‚
+8. AssocVectorTest.hç¬¬162ã€163ã€165è¡Œå»æ‰TestAllocatoræ¨¡æ¿å‚æ•°ã€‚
+9. ç›´æ¥å¤åˆ¶x64å·¥ç¨‹ã€‚
 
 ----------------------------
-TIFF£¨ÒıÇæ²»¹ØÁª£©
+TIFFï¼ˆå¼•æ“ä¸å…³è”ï¼‰
 
-1. °æ±¾£º4.1.0¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://www.libtiff.org/¡£
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-
-----------------------------
-shwild£¨ÒıÇæ²»¹ØÁª£©
-
-1. °æ±¾£º0.9.20¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://www.shwild.org/¡£
-3. ĞŞ¸Äbuild\vc9ºÍbuild\vc9_x64ÏÂmakefileÎÄ¼ş£¬
-   µÚ26ĞĞ¸Ä³ÉCOMP_TAG = vc16¡£
-   µÚ45ĞĞ¸Ä³ÉPROJ_LIB_DIR = $(PROJ_BASE_DIR)\Win32\libºÍPROJ_LIB_DIR = $(PROJ_BASE_DIR)\X64\lib¡£
-   ×¢ÊÍµôµÚ153ĞĞºÍ158ĞĞ£¨-WX¾¯¸æÊÓÎª´íÎó£©¡£
-   16ĞĞÔö¼ÓSTLSOFT = ($stlsoft)¡£    
-4. ÔËĞĞVS£¬²¢´ò¿ªÃüÁîÌáÊ¾·û£¬¶¨Î»ÖÁbuild\vc9ºÍbuild\vc9_x64Â¼£¬Ö´ĞĞnmake¡£
-7. ±àÒëX64£¬×ªµ½Ä¿Â¼Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\BuildÏÂÔËĞĞvcvars64.bat¡£
-8. ²»ÒªÖ´ĞĞnmake clean¡£
+1. ç‰ˆæœ¬ï¼š4.1.0ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://www.libtiff.org/ã€‚
+3. ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
 
 ----------------------------
-cppunit£¨ÒıÇæ²»¹ØÁª£©
+shwildï¼ˆå¼•æ“ä¸å…³è”ï¼‰
 
-1. °æ±¾£º1.12.1¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://sourceforge.net/projects/cppunit/¡£
-
-----------------------------
-libpng£¨ÒıÇæ²»¹ØÁª£©
-
-1. °æ±¾£º1.6.37¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://www.libpng.org/pub/png/libpng.html¡£
-
-----------------------------
-libxml++£¨ÒıÇæ²»¹ØÁª£©
-
-1. °æ±¾£º4.9.1¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://libxmlplusplus.sourceforge.net/¡£
+1. ç‰ˆæœ¬ï¼š0.9.20ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://www.shwild.org/ã€‚
+3. ä¿®æ”¹build\vc9å’Œbuild\vc9_x64ä¸‹makefileæ–‡ä»¶ï¼Œ
+   ç¬¬26è¡Œæ”¹æˆCOMP_TAG = vc16ã€‚
+   ç¬¬45è¡Œæ”¹æˆPROJ_LIB_DIR = $(PROJ_BASE_DIR)\Win32\libå’ŒPROJ_LIB_DIR = $(PROJ_BASE_DIR)\X64\libã€‚
+   æ³¨é‡Šæ‰ç¬¬153è¡Œå’Œ158è¡Œï¼ˆ-WXè­¦å‘Šè§†ä¸ºé”™è¯¯ï¼‰ã€‚
+   16è¡Œå¢åŠ STLSOFT = ($stlsoft)ã€‚    
+4. è¿è¡ŒVSï¼Œå¹¶æ‰“å¼€å‘½ä»¤æç¤ºç¬¦ï¼Œå®šä½è‡³build\vc9å’Œbuild\vc9_x64å½•ï¼Œæ‰§è¡Œnmakeã€‚
+7. ç¼–è¯‘X64ï¼Œè½¬åˆ°ç›®å½•Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Buildä¸‹è¿è¡Œvcvars64.batã€‚
+8. ä¸è¦æ‰§è¡Œnmake cleanã€‚
 
 ----------------------------
-mysql++£¨ÒıÇæ²»¹ØÁª£©
+cppunitï¼ˆå¼•æ“ä¸å…³è”ï¼‰
 
-1. °æ±¾£º3.2.5¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://tangentsoft.com/mysqlpp/home¡£
+1. ç‰ˆæœ¬ï¼š1.12.1ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://sourceforge.net/projects/cppunit/ã€‚
 
 ----------------------------
-SDL2£¨ÒıÇæ²»¹ØÁª£©
+libpngï¼ˆå¼•æ“ä¸å…³è”ï¼‰
 
-1. °æ±¾£º2.0.12¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://www.libsdl.org/¡£
+1. ç‰ˆæœ¬ï¼š1.6.37ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://www.libpng.org/pub/png/libpng.htmlã€‚
+
+----------------------------
+libxml++ï¼ˆå¼•æ“ä¸å…³è”ï¼‰
+
+1. ç‰ˆæœ¬ï¼š4.9.1ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://libxmlplusplus.sourceforge.net/ã€‚
+
+----------------------------
+mysql++ï¼ˆå¼•æ“ä¸å…³è”ï¼‰
+
+1. ç‰ˆæœ¬ï¼š3.2.5ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://tangentsoft.com/mysqlpp/homeã€‚
+
+----------------------------
+SDL2ï¼ˆå¼•æ“ä¸å…³è”ï¼‰
+
+1. ç‰ˆæœ¬ï¼š2.0.12ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://www.libsdl.org/ã€‚
 
 ----------------------------
 perl 
 
-1. °æ±¾£º5.36.0¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://www.perl.org/
-3. ĞŞ¸Äwin32ÏÂµÄMakefileÎÄ¼ş£¬112ĞĞÈ¥³ı×¢ÊÍ¡£
-4. ĞŞ¸Äwin32ÏÂµÄMakefileÎÄ¼ş£¬22ĞĞµÄINST_DRVÉèÖÃ³É($perl)¡£
-5. ÔËĞĞVS£¬²¢´ò¿ªÃüÁîÌáÊ¾·û£¬¶¨Î»ÖÁ ($perl)/Win32Ä¿Â¼
-6. ±àÒëWin32µÄdebug°æ£¬ĞŞ¸Äwin32ÏÂµÄMakefileÎÄ¼ş£¬29ĞĞ¡¢143ĞĞÈ¥³ı×¢ÊÍ£¬23ĞĞÉèÖÃ³É$(INST_DRV)\BuildWin32\Debug¡£
-7. ±àÒëWin32µÄrelease°æ£¬ĞŞ¸Äwin32ÏÂµÄMakefileÎÄ¼ş£¬29ĞĞÈ¥³ı×¢ÊÍ£¬143ĞĞ×¢ÊÍ£¬23ĞĞÉèÖÃ³É$(INST_DRV)\BuildWin32\Release¡£
-8. ±àÒëX64£¬×ªµ½Ä¿Â¼Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\BuildÏÂÔËĞĞvcvars64.bat¡£
-9. ±àÒëX64µÄdebug°æ£¬ĞŞ¸Äwin32ÏÂµÄMakefileÎÄ¼ş£¬143ĞĞÈ¥³ı×¢ÊÍ£¬29ĞĞ×¢ÊÍ£¬23ĞĞÉèÖÃ³É$(INST_DRV)\BuildX64\Debug¡£
-10.±àÒëX64µÄrelease°æ£¬ĞŞ¸Äwin32ÏÂµÄMakefileÎÄ¼ş£¬29ĞĞ¡¢143ĞĞ×¢ÊÍ£¬23ĞĞÉèÖÃ³É$(INST_DRV)\BuildX64\Release¡£
-11.ÔÚWin32Ä¿Â¼²ã¼¶ÏÂÖ´ĞĞÃüÁînmake¡£
-12.±àÒëËÄ¸ö°æ±¾ÖĞĞèÒªÖ´ĞĞnmake clean£¬È»ºóÔÙÖ´ĞĞnmake¡¢nmake install¡£
-13.±àÒëWin32ºÍX64°æ±¾ÖĞĞèÒªÖØĞÂÊ¹ÓÃÔ­°æµÄperl±àÒë¡£
+1. ç‰ˆæœ¬ï¼š5.36.0ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://www.perl.org/
+3. ä¿®æ”¹win32ä¸‹çš„Makefileæ–‡ä»¶ï¼Œ112è¡Œå»é™¤æ³¨é‡Šã€‚
+4. ä¿®æ”¹win32ä¸‹çš„Makefileæ–‡ä»¶ï¼Œ22è¡Œçš„INST_DRVè®¾ç½®æˆ($perl)ã€‚
+5. è¿è¡ŒVSï¼Œå¹¶æ‰“å¼€å‘½ä»¤æç¤ºç¬¦ï¼Œå®šä½è‡³ ($perl)/Win32ç›®å½•
+6. ç¼–è¯‘Win32çš„debugç‰ˆï¼Œä¿®æ”¹win32ä¸‹çš„Makefileæ–‡ä»¶ï¼Œ29è¡Œã€143è¡Œå»é™¤æ³¨é‡Šï¼Œ23è¡Œè®¾ç½®æˆ$(INST_DRV)\BuildWin32\Debugã€‚
+7. ç¼–è¯‘Win32çš„releaseç‰ˆï¼Œä¿®æ”¹win32ä¸‹çš„Makefileæ–‡ä»¶ï¼Œ29è¡Œå»é™¤æ³¨é‡Šï¼Œ143è¡Œæ³¨é‡Šï¼Œ23è¡Œè®¾ç½®æˆ$(INST_DRV)\BuildWin32\Releaseã€‚
+8. ç¼–è¯‘X64ï¼Œè½¬åˆ°ç›®å½•Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Buildä¸‹è¿è¡Œvcvars64.batã€‚
+9. ç¼–è¯‘X64çš„debugç‰ˆï¼Œä¿®æ”¹win32ä¸‹çš„Makefileæ–‡ä»¶ï¼Œ143è¡Œå»é™¤æ³¨é‡Šï¼Œ29è¡Œæ³¨é‡Šï¼Œ23è¡Œè®¾ç½®æˆ$(INST_DRV)\BuildX64\Debugã€‚
+10.ç¼–è¯‘X64çš„releaseç‰ˆï¼Œä¿®æ”¹win32ä¸‹çš„Makefileæ–‡ä»¶ï¼Œ29è¡Œã€143è¡Œæ³¨é‡Šï¼Œ23è¡Œè®¾ç½®æˆ$(INST_DRV)\BuildX64\Releaseã€‚
+11.åœ¨Win32ç›®å½•å±‚çº§ä¸‹æ‰§è¡Œå‘½ä»¤nmakeã€‚
+12.ç¼–è¯‘å››ä¸ªç‰ˆæœ¬ä¸­éœ€è¦æ‰§è¡Œnmake cleanï¼Œç„¶åå†æ‰§è¡Œnmakeã€nmake installã€‚
+13.ç¼–è¯‘Win32å’ŒX64ç‰ˆæœ¬ä¸­éœ€è¦é‡æ–°ä½¿ç”¨åŸç‰ˆçš„perlç¼–è¯‘ã€‚
 
 ----------------------------
 Pantheios 
 
-1. °æ±¾£º1.0.1¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://www.pantheios.org/
-3. ĞŞ¸Äbuild\vc16.x64ºÍbuild\vc16ÏÂmakefileÎÄ¼ş£¬
-   µÚ77ĞĞ¸Ä³ÉPROJ_LIB_DIR =	$(PROJ_BASE_DIR)\X64\libºÍPROJ_LIB_DIR = $(PROJ_BASE_DIR)\Win32\lib¡£
-   ×¢ÊÍµôµÚ687ĞĞºÍ700ĞĞ£¨-WX¾¯¸æÊÓÎª´íÎó£©¡£
-   23ĞĞÏÂÔö¼Ó
+1. ç‰ˆæœ¬ï¼š1.0.1ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://www.pantheios.org/
+3. ä¿®æ”¹build\vc16.x64å’Œbuild\vc16ä¸‹makefileæ–‡ä»¶ï¼Œ
+   ç¬¬77è¡Œæ”¹æˆPROJ_LIB_DIR =	$(PROJ_BASE_DIR)\X64\libå’ŒPROJ_LIB_DIR = $(PROJ_BASE_DIR)\Win32\libã€‚
+   æ³¨é‡Šæ‰ç¬¬687è¡Œå’Œ700è¡Œï¼ˆ-WXè­¦å‘Šè§†ä¸ºé”™è¯¯ï¼‰ã€‚
+   23è¡Œä¸‹å¢åŠ 
    STLSOFT = ($stlsoft)
    ACE = ($ACE)
-4. ×¢ÊÍpantheios.hµÚ196ĞĞ£¬ÒòÎªÎŞ·¨ÏÂÔØµ½1.10.1 beta 20°æ±¾µÄstlsoft¡£
-5. test\component\test.component.bec.fprintfÏÂµÄÎÄ¼ştest.component.bec.fprintf.cpp×¢ÊÍµôµÚ182ĞĞ¡£
-6. ÔËĞĞVS£¬²¢´ò¿ªÃüÁîÌáÊ¾·û£¬¶¨Î»ÖÁbuild\vc16.x64ºÍbuild\vc16Ä¿Â¼£¬Ö´ĞĞnmake¡£
-7. ±àÒëX64£¬×ªµ½Ä¿Â¼Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\BuildÏÂÔËĞĞvcvars64.bat¡£
-8. ²»ÒªÖ´ĞĞnmake clean¡£
+4. æ³¨é‡Špantheios.hç¬¬196è¡Œï¼Œå› ä¸ºæ— æ³•ä¸‹è½½åˆ°1.10.1 beta 20ç‰ˆæœ¬çš„stlsoftã€‚
+5. test\component\test.component.bec.fprintfä¸‹çš„æ–‡ä»¶test.component.bec.fprintf.cppæ³¨é‡Šæ‰ç¬¬182è¡Œã€‚
+6. è¿è¡ŒVSï¼Œå¹¶æ‰“å¼€å‘½ä»¤æç¤ºç¬¦ï¼Œå®šä½è‡³build\vc16.x64å’Œbuild\vc16ç›®å½•ï¼Œæ‰§è¡Œnmakeã€‚
+7. ç¼–è¯‘X64ï¼Œè½¬åˆ°ç›®å½•Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Buildä¸‹è¿è¡Œvcvars64.batã€‚
+8. ä¸è¦æ‰§è¡Œnmake cleanã€‚
 
 ----------------------------
 Openrj 
 
-1. °æ±¾£º1.6.4¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://www.openrj.org/
-3. ĞŞ¸Äbuild\vc8ÏÂmakefileÎÄ¼ş£¬
-   µÚ26ĞĞ¸Ä³ÉCOMP_TAG = vc16¡£
-   µÚ44ĞĞ¸Ä³ÉPROJ_LIB_DIR = $(PROJ_BASE_DIR)\Win32\libºÍPROJ_LIB_DIR = $(PROJ_BASE_DIR)\X64\lib¡£
-   ×¢ÊÍµôµÚ110ĞĞºÍ115ĞĞ£¨-WX¾¯¸æÊÓÎª´íÎó£©¡£
-   25ĞĞÔö¼ÓSTLSOFT = ($stlsoft)¡£
-   ±àÒëX64£¬27ĞĞÏÂÔö¼Ó
+1. ç‰ˆæœ¬ï¼š1.6.4ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://www.openrj.org/
+3. ä¿®æ”¹build\vc8ä¸‹makefileæ–‡ä»¶ï¼Œ
+   ç¬¬26è¡Œæ”¹æˆCOMP_TAG = vc16ã€‚
+   ç¬¬44è¡Œæ”¹æˆPROJ_LIB_DIR = $(PROJ_BASE_DIR)\Win32\libå’ŒPROJ_LIB_DIR = $(PROJ_BASE_DIR)\X64\libã€‚
+   æ³¨é‡Šæ‰ç¬¬110è¡Œå’Œ115è¡Œï¼ˆ-WXè­¦å‘Šè§†ä¸ºé”™è¯¯ï¼‰ã€‚
+   25è¡Œå¢åŠ STLSOFT = ($stlsoft)ã€‚
+   ç¼–è¯‘X64ï¼Œ27è¡Œä¸‹å¢åŠ 
    LD_ARGS = -machine:x64
-   ARCH_TAG = .x64¡£
-4. ÔËĞĞVS£¬²¢´ò¿ªÃüÁîÌáÊ¾·û£¬¶¨Î»ÖÁbuild\vc8Ä¿Â¼£¬Ö´ĞĞnmake¡£
-5. ²»ÒªÖ´ĞĞnmake clean¡£
+   ARCH_TAG = .x64ã€‚
+4. è¿è¡ŒVSï¼Œå¹¶æ‰“å¼€å‘½ä»¤æç¤ºç¬¦ï¼Œå®šä½è‡³build\vc8ç›®å½•ï¼Œæ‰§è¡Œnmakeã€‚
+5. ä¸è¦æ‰§è¡Œnmake cleanã€‚
 
 ----------------------------
 chipmunk2D physics
 
-1. °æ±¾£º7.0.3¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://chipmunk-physics.net/¡£
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-4. chipmunk_demosµÄC++ÓïÑÔ±ê×¼¸Ä³É£ºstd:c++latest¡£
+1. ç‰ˆæœ¬ï¼š7.0.3ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://chipmunk-physics.net/ã€‚
+3. ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
+4. chipmunk_demosçš„C++è¯­è¨€æ ‡å‡†æ”¹æˆï¼šstd:c++latestã€‚
 5. ChipmunkDebugDraw.c
-   µÚ44ĞĞµÄ(RGBA8)¸Ä³ÉRGBA8¡£
-   ×¢ÊÍµÚ63ĞĞµ½150ĞĞ¡£ 
-   µÚ170ĞĞµ½175ĞĞ£¬µÚ183ĞĞµ½186ĞĞ£¬206ĞĞµ½213ĞĞ£¬267ĞĞµ½270ĞĞµÄ(Vertex)¸Ä³ÉVertex¡£
-   µÚ171ĞĞºÍ182ĞĞ¸Ä³É
+   ç¬¬44è¡Œçš„(RGBA8)æ”¹æˆRGBA8ã€‚
+   æ³¨é‡Šç¬¬63è¡Œåˆ°150è¡Œã€‚ 
+   ç¬¬170è¡Œåˆ°175è¡Œï¼Œç¬¬183è¡Œåˆ°186è¡Œï¼Œ206è¡Œåˆ°213è¡Œï¼Œ267è¡Œåˆ°270è¡Œçš„(Vertex)æ”¹æˆVertexã€‚
+   ç¬¬171è¡Œå’Œ182è¡Œæ”¹æˆ
    Index index[] = { 0, 1, 2, 0, 2, 3 };
    Vertex *vertexes = push_vertexes(4, index, 6);
 6. ChipmunkDemo.c   
-   µÚ353ĞĞµ½µÚ355ĞĞ¸Ä³É
+   ç¬¬353è¡Œåˆ°ç¬¬355è¡Œæ”¹æˆ
    sg_pass_action action{};
    action.colors[0] = {.action = SG_ACTION_CLEAR, .val = {0x07/255.0f, 0x36/255.0f, 0x42/255.0f}};
-   µÚ629ĞĞµ½µÚ638ĞĞ¸Ä³É
+   ç¬¬629è¡Œåˆ°ç¬¬638è¡Œæ”¹æˆ
    return sapp_desc{
 			.init_cb = Init,
 			.frame_cb = Display,
@@ -298,7 +298,7 @@ chipmunk2D physics
 			.window_title = "Chipmunk2D",
 		};
 7. ChipmunkDemoTextSupport.c
-   ×¢ÊÍµÚ69ĞĞµ½165ĞĞ¡£
-   µÚ206ĞĞµ½209ĞĞµÄ(Vertex)¸Ä³ÉVertex¡£
+   æ³¨é‡Šç¬¬69è¡Œåˆ°165è¡Œã€‚
+   ç¬¬206è¡Œåˆ°209è¡Œçš„(Vertex)æ”¹æˆVertexã€‚
 
 ----------------------------

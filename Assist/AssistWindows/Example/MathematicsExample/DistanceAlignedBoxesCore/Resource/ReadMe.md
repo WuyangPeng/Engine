@@ -1,7 +1,7 @@
-@ingroup group_DistanceAlignedBoxesCore_Documentation
+ï»¿@ingroup group_DistanceAlignedBoxesCore_Documentation
 
 ----------------------------
-AlignedBoxes¾àÀëºËĞÄ
+AlignedBoxesè·ç¦»æ ¸å¿ƒ
 
 1.   DistanceAlignedBoxesCore  
 

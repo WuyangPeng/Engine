@@ -1,65 +1,65 @@
-@ingroup group_Documentation
+ï»¿@ingroup group_Documentation
 
 ----------------------------
-Ç§ÄêÊ·²ß¹¤³Ì
+åƒå¹´å²ç­–å·¥ç¨‹
 
 ----------------------------
-MillenniumHistory.props£º
-Ç§ÄêÊ·²ß¹¤³ÌÊôĞÔ±í
+MillenniumHistory.propsï¼š
+åƒå¹´å²ç­–å·¥ç¨‹å±æ€§è¡¨
 
-MillenniumHistoryStaticWin32DebugLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Élib¡¢Win32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+MillenniumHistoryStaticWin32DebugLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆlibã€Win32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-MillenniumHistoryStaticWin32ReleaseLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Élib¡¢Win32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+MillenniumHistoryStaticWin32ReleaseLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆlibã€Win32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-MillenniumHistoryStaticX64DebugLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Élib¡¢X64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+MillenniumHistoryStaticX64DebugLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆlibã€X64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-MillenniumHistoryStaticX64ReleaseLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Élib¡¢X64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+MillenniumHistoryStaticX64ReleaseLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆlibã€X64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-MillenniumHistoryWin32DebugLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Édll¡¢Win32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+MillenniumHistoryWin32DebugLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆdllã€Win32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-MillenniumHistoryWin32ReleaseLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Édll¡¢Win32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+MillenniumHistoryWin32ReleaseLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆdllã€Win32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-MillenniumHistoryX64DebugLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Édll¡¢X64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+MillenniumHistoryX64DebugLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆdllã€X64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-MillenniumHistoryX64ReleaseLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Édll¡¢X64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+MillenniumHistoryX64ReleaseLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆdllã€X64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-MillenniumHistoryEngineDynamicMillenniumHistoryStaticWin32DebugLibs.props£º
-ÒıÇæ£¨dll£©ºÍÓÎÏ·£¨lib£©¶¼±àÒë³ÉWin32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+MillenniumHistoryEngineDynamicMillenniumHistoryStaticWin32DebugLibs.propsï¼š
+å¼•æ“ï¼ˆdllï¼‰å’Œæ¸¸æˆï¼ˆlibï¼‰éƒ½ç¼–è¯‘æˆWin32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-MillenniumHistoryEngineDynamicMillenniumHistoryStaticWin32ReleaseLibs.props£º
-ÒıÇæ£¨dll£©ºÍÓÎÏ·£¨lib£©¶¼±àÒë³ÉWin32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+MillenniumHistoryEngineDynamicMillenniumHistoryStaticWin32ReleaseLibs.propsï¼š
+å¼•æ“ï¼ˆdllï¼‰å’Œæ¸¸æˆï¼ˆlibï¼‰éƒ½ç¼–è¯‘æˆWin32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-MillenniumHistoryEngineDynamicMillenniumHistoryStaticX64DebugLibs.props£º
-ÒıÇæ£¨dll£©ºÍÓÎÏ·£¨lib£©¶¼±àÒë³ÉX64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+MillenniumHistoryEngineDynamicMillenniumHistoryStaticX64DebugLibs.propsï¼š
+å¼•æ“ï¼ˆdllï¼‰å’Œæ¸¸æˆï¼ˆlibï¼‰éƒ½ç¼–è¯‘æˆX64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-MillenniumHistoryEngineDynamicMillenniumHistoryStaticX64ReleaseLibs.props£º
-ÒıÇæ£¨dll£©ºÍÓÎÏ·£¨lib£©¶¼±àÒë³ÉX64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+MillenniumHistoryEngineDynamicMillenniumHistoryStaticX64ReleaseLibs.propsï¼š
+å¼•æ“ï¼ˆdllï¼‰å’Œæ¸¸æˆï¼ˆlibï¼‰éƒ½ç¼–è¯‘æˆX64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-MillenniumHistoryEngineStaticMillenniumHistoryDynamicWin32DebugLibs.props£º
-ÒıÇæ£¨lib£©ºÍÓÎÏ·£¨dll£©¶¼±àÒë³ÉWin32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+MillenniumHistoryEngineStaticMillenniumHistoryDynamicWin32DebugLibs.propsï¼š
+å¼•æ“ï¼ˆlibï¼‰å’Œæ¸¸æˆï¼ˆdllï¼‰éƒ½ç¼–è¯‘æˆWin32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-MillenniumHistoryEngineStaticMillenniumHistoryDynamicWin32ReleaseLibs.props£º
-ÒıÇæ£¨lib£©ºÍÓÎÏ·£¨dll£©¶¼±àÒë³ÉWin32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+MillenniumHistoryEngineStaticMillenniumHistoryDynamicWin32ReleaseLibs.propsï¼š
+å¼•æ“ï¼ˆlibï¼‰å’Œæ¸¸æˆï¼ˆdllï¼‰éƒ½ç¼–è¯‘æˆWin32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-MillenniumHistoryEngineStaticMillenniumHistoryDynamicX64DebugLibs.props£º
-ÒıÇæ£¨lib£©ºÍÓÎÏ·£¨dll£©¶¼±àÒë³ÉX64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+MillenniumHistoryEngineStaticMillenniumHistoryDynamicX64DebugLibs.propsï¼š
+å¼•æ“ï¼ˆlibï¼‰å’Œæ¸¸æˆï¼ˆdllï¼‰éƒ½ç¼–è¯‘æˆX64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-MillenniumHistoryEngineStaticMillenniumHistoryDynamicX64ReleaseLibs.props£º
-ÒıÇæ£¨lib£©ºÍÓÎÏ·£¨dll£©¶¼±àÒë³ÉX64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+MillenniumHistoryEngineStaticMillenniumHistoryDynamicX64ReleaseLibs.propsï¼š
+å¼•æ“ï¼ˆlibï¼‰å’Œæ¸¸æˆï¼ˆdllï¼‰éƒ½ç¼–è¯‘æˆX64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
 ----------------------------
-SetEnvironment.bat£º
-ÉèÖÃÇ§ÄêÊ·²ßËùĞèÒªµÄ»·¾³±äÁ¿
+SetEnvironment.batï¼š
+è®¾ç½®åƒå¹´å²ç­–æ‰€éœ€è¦çš„ç¯å¢ƒå˜é‡
 
-SetAllEnvironment.bat£º
-ÉèÖÃÓÎÏ·ËùĞèÒªµÄËùÓĞ»·¾³±äÁ¿
+SetAllEnvironment.batï¼š
+è®¾ç½®æ¸¸æˆæ‰€éœ€è¦çš„æ‰€æœ‰ç¯å¢ƒå˜é‡
 
 ----------------------------

@@ -1,12 +1,12 @@
-@ingroup group_GlutMainEntryPoint1_Documentation
+ï»¿@ingroup group_GlutMainEntryPoint1_Documentation
 
 ----------------------------
-GlutÖ÷º¯ÊıÈë¿Úµã
+Glutä¸»å‡½æ•°å…¥å£ç‚¹
 
 GlutMainEntryPoint1 
 
-GLUT mainÈë¿Úµã¹¤¾ßÏä¡£ÊµÏÖÒÔÏÂ¹¦ÄÜ£º 
+GLUT mainå…¥å£ç‚¹å·¥å…·ç®±ã€‚å®ç°ä»¥ä¸‹åŠŸèƒ½ï¼š 
 
-£¨1£©ÔËĞĞGLUT mainÈë¿Úµãº¯Êı¡£ 
+ï¼ˆ1ï¼‰è¿è¡ŒGLUT mainå…¥å£ç‚¹å‡½æ•°ã€‚ 
 
 ----------------------------

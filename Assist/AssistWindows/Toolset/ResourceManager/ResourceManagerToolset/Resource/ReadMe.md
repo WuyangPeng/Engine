@@ -1,7 +1,7 @@
-@ingroup group_ResourceManagerToolset_Documentation
+ï»¿@ingroup group_ResourceManagerToolset_Documentation
 
 ----------------------------
-×ÊÔ´¹ÜÀí¹¤¾ßÏä
+èµ„æºç®¡ç†å·¥å…·ç®±
 
 1.  ResourceManagerToolset 
 

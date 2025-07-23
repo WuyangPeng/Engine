@@ -1,12 +1,12 @@
-@ingroup group_GameServerTesting_Documentation
+ï»¿@ingroup group_GameServerTesting_Documentation
 
 ----------------------------
-ÓÎÏ··şÎñÆ÷µ¥Ôª²âÊÔ
+æ¸¸æˆæœåŠ¡å™¨å•å…ƒæµ‹è¯•
 
-Ä¿Ç°°üº¬£º
+ç›®å‰åŒ…å«ï¼š
 
-1. GameServer£¨ÓÎÏ··şÎñÆ÷£©
+1. GameServerï¼ˆæ¸¸æˆæœåŠ¡å™¨ï¼‰
 
-£¨1£©ÓÎÏ··şÎñÆ÷¡£
+ï¼ˆ1ï¼‰æ¸¸æˆæœåŠ¡å™¨ã€‚
 
 ----------------------------

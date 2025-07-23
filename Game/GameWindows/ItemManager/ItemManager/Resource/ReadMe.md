@@ -1,12 +1,12 @@
-@ingroup group_ItemManager_Documentation
+ï»¿@ingroup group_ItemManager_Documentation
 
 ----------------------------
-ÎïÆ·¹ÜÀíÄ£¿é 
+ç‰©å“ç®¡ç†æ¨¡å— 
 
-Ä¿Ç°°üº¬£º
+ç›®å‰åŒ…å«ï¼š
 
-1.	ItemManager£¨ÎïÆ·¹ÜÀí£©
+1.	ItemManagerï¼ˆç‰©å“ç®¡ç†ï¼‰
  
-£¨1£©ÎïÆ·¹ÜÀí¡£
+ï¼ˆ1ï¼‰ç‰©å“ç®¡ç†ã€‚
 
 ----------------------------

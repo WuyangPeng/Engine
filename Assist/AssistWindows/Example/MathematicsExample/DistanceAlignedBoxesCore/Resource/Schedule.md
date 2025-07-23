@@ -1,22 +1,22 @@
-@ingroup group_DistanceAlignedBoxesCore_Documentation
+ï»¿@ingroup group_DistanceAlignedBoxesCore_Documentation
 
 ----------------------------
-AlignedBoxes¾àÀëºËĞÄ
+AlignedBoxesè·ç¦»æ ¸å¿ƒ
 
 ----------------------------
 DistanceAlignedBoxesCore
 
 ----------------------------
-¹¤³ÌÀàĞÍ
-	dll/lib¡£
+å·¥ç¨‹ç±»å‹
+	dll/libã€‚
 
 ----------------------------
-×´Ì¬
-	Ä¿Ç°°æ±¾£º1.0.0.4¡£
+çŠ¶æ€
+	ç›®å‰ç‰ˆæœ¬ï¼š1.0.0.4ã€‚
 
 ----------------------------  
-ÊµÏÖÄÚÈİ	
-	1. ¸´ÖÆ¹¤³Ìdllµ½¸¨Öú²âÊÔÄ¿Â¼¡£
-	2. AlignedBoxes¾àÀëºËĞÄÄ£¿é¡£
+å®ç°å†…å®¹	
+	1. å¤åˆ¶å·¥ç¨‹dllåˆ°è¾…åŠ©æµ‹è¯•ç›®å½•ã€‚
+	2. AlignedBoxesè·ç¦»æ ¸å¿ƒæ¨¡å—ã€‚
 
 ----------------------------  

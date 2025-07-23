@@ -1,11 +1,11 @@
-@ingroup group_ShadowEditor_Documentation
+ï»¿@ingroup group_ShadowEditor_Documentation
 
 ----------------------------
-ÒõÓ°±à¼­Æ÷
+é˜´å½±ç¼–è¾‘å™¨
 
 1.   ShadowEditor 
 
-ÒõÓ°±à¼­Æ÷£¬°üÀ¨£º 
-£¨1£©ÒõÓ°¡£
+é˜´å½±ç¼–è¾‘å™¨ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰é˜´å½±ã€‚
 
 ----------------------------

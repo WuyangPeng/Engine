@@ -1,24 +1,24 @@
-@ingroup group_CMainFunctionHelper_Documentation
+ï»¿@ingroup group_CMainFunctionHelper_Documentation
 
 ----------------------------
-CÖ÷º¯Êı°ïÖú
+Cä¸»å‡½æ•°å¸®åŠ©
 
 ----------------------------
 CMainFunctionHelper
 	
 ----------------------------
-¹¤³ÌÀàĞÍ
-	exe£¬¿ØÖÆÌ¨¡£
+å·¥ç¨‹ç±»å‹
+	exeï¼Œæ§åˆ¶å°ã€‚
 
 ----------------------------
-×´Ì¬
-	Ä¿Ç°°æ±¾£º1.0.0.8¡£
+çŠ¶æ€
+	ç›®å‰ç‰ˆæœ¬ï¼š1.0.0.8ã€‚
 
 ----------------------------  
-ÊµÏÖÄÚÈİ
-	1.¸´ÖÆ¹¤³ÌµÄTesting.jsonµ½¸¨Öú¹¤³ÌÔËĞĞÄ¿Â¼¡£ 
-	2.ÊµÏÖCMainFunctionHelperµÄ×ÓÀà£¬Í¨¹ı³ÌĞòÔËĞĞ¡£
-	3.ÊµÏÖCMainFunctionTestingHelperµÄ×ÓÀà£¬Í¨¹ı³ÌĞòÔËĞĞ¡£
-	4.ÊµÏÖUnitTestµÄ×ÓÀà£¬Í¨¹ıCMainFunctionTestingHelper½øĞĞ²âÊÔ¡£
+å®ç°å†…å®¹
+	1.å¤åˆ¶å·¥ç¨‹çš„Testing.jsonåˆ°è¾…åŠ©å·¥ç¨‹è¿è¡Œç›®å½•ã€‚ 
+	2.å®ç°CMainFunctionHelperçš„å­ç±»ï¼Œé€šè¿‡ç¨‹åºè¿è¡Œã€‚
+	3.å®ç°CMainFunctionTestingHelperçš„å­ç±»ï¼Œé€šè¿‡ç¨‹åºè¿è¡Œã€‚
+	4.å®ç°UnitTestçš„å­ç±»ï¼Œé€šè¿‡CMainFunctionTestingHelperè¿›è¡Œæµ‹è¯•ã€‚
 
 ----------------------------  

@@ -1,7 +1,7 @@
-@ingroup group_ModelEditorAssist_Documentation
+ï»¿@ingroup group_ModelEditorAssist_Documentation
 
 ----------------------------
-Ä£ÐÍ±à¼­Æ÷¸¨Öú
+æ¨¡åž‹ç¼–è¾‘å™¨è¾…åŠ©
 
 1.  ModelEditorAssist 
  

@@ -1,11 +1,11 @@
-@ingroup group_PhysicsExample_Documentation
+ï»¿@ingroup group_PhysicsExample_Documentation
 
 ----------------------------
-ÎïÀíÀı×Ó
+ç‰©ç†ä¾‹å­
 
 1.   PhysicsExample 
 
-ÎïÀíÀı×Ó£¬°üÀ¨£º 
-£¨1£©ÎïÀí¡£
+ç‰©ç†ä¾‹å­ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰ç‰©ç†ã€‚
 
 ----------------------------

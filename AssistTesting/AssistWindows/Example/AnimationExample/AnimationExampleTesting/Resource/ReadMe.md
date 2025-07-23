@@ -1,11 +1,11 @@
-@ingroup group_AnimationExampleTesting_Documentation
+ï»¿@ingroup group_AnimationExampleTesting_Documentation
 
 ----------------------------
-¶¯»­Àı×Óµ¥Ôª²âÊÔ
+åŠ¨ç”»ä¾‹å­å•å…ƒæµ‹è¯•
 
 1.   AnimationExampleTesting 
 
-¶¯»­Àı×ÓµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£©¶¯»­Àı×Ó¡£
+åŠ¨ç”»ä¾‹å­çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰åŠ¨ç”»ä¾‹å­ã€‚
 
 ----------------------------

@@ -1,65 +1,65 @@
-@ingroup group_SystemOpenGLTesting_Documentation
+ï»¿@ingroup group_SystemOpenGLTesting_Documentation
 
 ----------------------------
-Ïµ½y¿âOpenGLµ¥Ôª²âÊÔ
+ç³»çµ±åº“OpenGLå•å…ƒæµ‹è¯•
 
 ---------------------------- 
 1.	OpenGLSuite 
 
-¶ÔOpenGLÄ£¿é½øĞĞ²âÊÔ£º
-£¨1£© OpenGL¹¤¾ß£ºOpenGLErrorDescriptionTesting¡¢
-				  OpenGLSupportsExtensionTesting¡¢
-				  OpenGLVersionTesting¡¢
-				  WglSupportsExtensionTesting¡£
-£¨2£© OpenGL³õÊ¼»¯£ºOpenGLInitTesting¡£
-£¨3£© OpenGL Base£ºOpenGLBaseTesting¡¢
-				   OpenGLQueryTesting¡¢
-				   OpenGLBlendTesting¡¢
-				   OpenGLDepthTesting¡¢
-				   OpenGLMaskTesting¡¢
-				   OpenGLStateTesting¡¢
-				   OpenGLStencilTesting¡¢
-				   OpenGLDrawTesting¡£
-£¨4£© OpenGL Buffers£ºOpenGLGetBufferTesting¡¢
-					  OpenGLSetBufferTesting¡¢
-					  OpenGLSetBufferSubDataTesting¡¢
-					  OpenGLSetCopyBufferSubDataTesting¡¢
-					  OpenGLFramebufferTesting¡¢
-					  OpenGLBindFramebufferTesting¡¢
-					  OpenGLVertexArraysTesting¡¢
-					  OpenGLBindVertexBufferTesting¡¢
-					  OpenGLDrawBuffersTesting¡¢
-					  OpenGLMapTesting¡£
-£¨5£© OpenGL Textures£ºOpenGLGetTexturesTesting¡¢
-					   OpenGLBindTexturesTesting¡¢
-					   OpenGLPixelStoreTesting¡¢
-					   OpenGLTexturesParameterTesting¡¢
-					   OpenGLTextures1DTesting¡¢
-					   OpenGLTextures2DTesting¡¢
-					   OpenGLTexturesCubeTesting¡¢
-					   OpenGLTextures3DTesting¡¢
-					   OpenGLTexturesCubeArrayTesting¡¢
-					   OpenGLFramebufferTextures2DTesting¡¢
-					   OpenGLActiveTextureTesting¡£
-£¨6£© OpenGL Polygon£ºOpenGLPolygonModeTesting¡¢
-					  OpenGLPolygonOffsetTesting¡£
-£¨7£© OpenGL Samplers£ºOpenGLGetSamplersTesting¡¢
-					   OpenGLSetSamplerParameterTesting¡£
-£¨8£© OpenGL Program£ºOpenGLCreateProgramTesting¡¢
-				      OpenGLProgramAttributesTesting¡¢
-					  OpenGLProgramLinkTesting¡¢
-					  OpenGLProgramResourceTesting¡¢
-					  OpenGLProgramStatusTesting¡¢
-					  OpenGLProgramInterfaceTesting¡£
-£¨9£© OpenGL Shader£ºOpenGLAttachShaderTesting¡¢
-					 OpenGLCompileShaderTesting¡¢
-					 OpenGLCreateShaderTesting¡¢
-					 OpenGLGetUniformLocationTesting¡¢
-					 OpenGLShaderAttributesTesting¡¢
-					 OpenGLShaderStatusTesting¡¢
-					 OpenGLShaderStorageBlockBindingTesting¡£
-£¨10£©GLUT£ºOpenGLGlutCallbackTesting¡¢
-		    OpenGLGlutCreateWindowTesting¡¢
-		    OpenGLGlutDestroyTesting¡£
+å¯¹OpenGLæ¨¡å—è¿›è¡Œæµ‹è¯•ï¼š
+ï¼ˆ1ï¼‰ OpenGLå·¥å…·ï¼šOpenGLErrorDescriptionTestingã€
+				  OpenGLSupportsExtensionTestingã€
+				  OpenGLVersionTestingã€
+				  WglSupportsExtensionTestingã€‚
+ï¼ˆ2ï¼‰ OpenGLåˆå§‹åŒ–ï¼šOpenGLInitTestingã€‚
+ï¼ˆ3ï¼‰ OpenGL Baseï¼šOpenGLBaseTestingã€
+				   OpenGLQueryTestingã€
+				   OpenGLBlendTestingã€
+				   OpenGLDepthTestingã€
+				   OpenGLMaskTestingã€
+				   OpenGLStateTestingã€
+				   OpenGLStencilTestingã€
+				   OpenGLDrawTestingã€‚
+ï¼ˆ4ï¼‰ OpenGL Buffersï¼šOpenGLGetBufferTestingã€
+					  OpenGLSetBufferTestingã€
+					  OpenGLSetBufferSubDataTestingã€
+					  OpenGLSetCopyBufferSubDataTestingã€
+					  OpenGLFramebufferTestingã€
+					  OpenGLBindFramebufferTestingã€
+					  OpenGLVertexArraysTestingã€
+					  OpenGLBindVertexBufferTestingã€
+					  OpenGLDrawBuffersTestingã€
+					  OpenGLMapTestingã€‚
+ï¼ˆ5ï¼‰ OpenGL Texturesï¼šOpenGLGetTexturesTestingã€
+					   OpenGLBindTexturesTestingã€
+					   OpenGLPixelStoreTestingã€
+					   OpenGLTexturesParameterTestingã€
+					   OpenGLTextures1DTestingã€
+					   OpenGLTextures2DTestingã€
+					   OpenGLTexturesCubeTestingã€
+					   OpenGLTextures3DTestingã€
+					   OpenGLTexturesCubeArrayTestingã€
+					   OpenGLFramebufferTextures2DTestingã€
+					   OpenGLActiveTextureTestingã€‚
+ï¼ˆ6ï¼‰ OpenGL Polygonï¼šOpenGLPolygonModeTestingã€
+					  OpenGLPolygonOffsetTestingã€‚
+ï¼ˆ7ï¼‰ OpenGL Samplersï¼šOpenGLGetSamplersTestingã€
+					   OpenGLSetSamplerParameterTestingã€‚
+ï¼ˆ8ï¼‰ OpenGL Programï¼šOpenGLCreateProgramTestingã€
+				      OpenGLProgramAttributesTestingã€
+					  OpenGLProgramLinkTestingã€
+					  OpenGLProgramResourceTestingã€
+					  OpenGLProgramStatusTestingã€
+					  OpenGLProgramInterfaceTestingã€‚
+ï¼ˆ9ï¼‰ OpenGL Shaderï¼šOpenGLAttachShaderTestingã€
+					 OpenGLCompileShaderTestingã€
+					 OpenGLCreateShaderTestingã€
+					 OpenGLGetUniformLocationTestingã€
+					 OpenGLShaderAttributesTestingã€
+					 OpenGLShaderStatusTestingã€
+					 OpenGLShaderStorageBlockBindingTestingã€‚
+ï¼ˆ10ï¼‰GLUTï¼šOpenGLGlutCallbackTestingã€
+		    OpenGLGlutCreateWindowTestingã€
+		    OpenGLGlutDestroyTestingã€‚
 
 ----------------------------

@@ -1,12 +1,12 @@
-@ingroup group_MessageClientTesting_Documentation
+ï»¿@ingroup group_MessageClientTesting_Documentation
 
 ----------------------------
-ÏûÏ¢¿Í»§¶Ëµ¥Ôª²âÊÔ
+æ¶ˆæ¯å®¢æˆ·ç«¯å•å…ƒæµ‹è¯•
 
-Ä¿Ç°°üº¬£º
+ç›®å‰åŒ…å«ï¼š
 
-1. MessageClient£¨ÏûÏ¢¿Í»§¶Ë£©
+1. MessageClientï¼ˆæ¶ˆæ¯å®¢æˆ·ç«¯ï¼‰
 
-£¨1£©ÏûÏ¢¿Í»§¶Ë¡£
+ï¼ˆ1ï¼‰æ¶ˆæ¯å®¢æˆ·ç«¯ã€‚
 
 ----------------------------

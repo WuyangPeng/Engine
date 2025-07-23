@@ -1,12 +1,12 @@
-@ingroup group_WinMainEntryPoint2_Documentation
+ï»¿@ingroup group_WinMainEntryPoint2_Documentation
 
 ----------------------------
-WinMainÖ÷º¯ÊıÈë¿Úµã
+WinMainä¸»å‡½æ•°å…¥å£ç‚¹
 
 WinMainEntryPoint2 
 
-WinMainÈë¿Úµã¹¤¾ßÏä¡£ÊµÏÖÒÔÏÂ¹¦ÄÜ£º 
+WinMainå…¥å£ç‚¹å·¥å…·ç®±ã€‚å®ç°ä»¥ä¸‹åŠŸèƒ½ï¼š 
 
-£¨1£©ÔËĞĞÊ¹ÓÃÅäÖÃµÄWinMainÈë¿Úµãº¯Êı¡£ 
+ï¼ˆ1ï¼‰è¿è¡Œä½¿ç”¨é…ç½®çš„WinMainå…¥å£ç‚¹å‡½æ•°ã€‚ 
 
 ----------------------------

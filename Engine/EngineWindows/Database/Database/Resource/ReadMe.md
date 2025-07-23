@@ -1,140 +1,140 @@
-@ingroup group_Database_Documentation
+﻿@ingroup group_Database_Documentation
 
 ----------------------------
-���ݿ�ģ��
+数据库模块
 
-���ݿ⣨Database����װ����������ݿ����á���ʵ�����ݿ��ķ�װ��
-���ݿ�λ������ĵ����㣬ֻ�������������е�System��CoreTools�⣬������Ҫ����System��������ԡ�
-��ʹ��boost��mysqlclient��mysql connector c++��mongo cxx driver����hiredis���߿⡣
+数据库（Database）封装了引擎的数据库层调用。以实现数据库层的封装。
+数据库位于引擎的第三层，只允许调用引擎中的System、CoreTools库，并且需要减少System库的依赖性。
+并使用boost、mysqlclient、mysql connector c++、mongo cxx driver、和hiredis工具库。
 
 ----------------------------
-1.	Helper��������
+1.	Helper（帮助）
 
-���ݿ�ģ��ϵͳ�ꡣ
+数据库模块系统宏。
  
-��1���û��꣺�����Ƿ�ʹ�þ�̬�⡢�Ƿ�ʹ��mysqlclient��mysql connector c++��mongo��hiredis���û��趨�� 
-��2�����ݿ�꣺���ݿ�ģ����ʹ�õĺ꣬����Ҫ���ӡ�
+（1）用户宏：用于是否使用静态库、是否使用mysqlclient、mysql connector c++、mongo和hiredis等用户设定。 
+（2）数据库宏：数据库模块所使用的宏，按需要添加。
 
 ----------------------------
-2.  Configuration�����ã�
+2.  Configuration（配置）
 
-��װ�����ݿ�����á�
+封装了数据库的配置。
  
-��1�����ò��ԣ������ݿ����ز��Խ��з�װ������Ҫ�������ӡ� 
-��2�����ý����������ݿ����ý��н������������õĲ��ԡ�
+（1）配置策略：对数据库的相关策略进行封装，按需要后续添加。 
+（2）配置解析：对数据库配置进行解析，返回配置的策略。
 
 ----------------------------
-3.	DatabaseInterface��Database�ӿڣ�
+3.	DatabaseInterface（Database接口）
 
-��װ�����ݿ��ͳһ�ӿڡ� ����ģʽʹ�ò����࣬�ֱ����ʹ���������ݿ⡣ 
-�ڲ�ʹ��mysqlclient��mysql connector c++��Sql Server��SQLite��PostgreSQL��Oracle��mongo��hiredis����ƽ���ļ����ӿھ�������ͬmysql connector c++һ�¡� 
+封装了数据库的统一接口。 处理模式使用策略类，分别代表使用哪种数据库。 
+内部使用mysqlclient、mysql connector c++、Sql Server、SQLite、PostgreSQL、Oracle、mongo、hiredis或者平面文件。接口尽量保持同mysql connector c++一致。 
 
-��1�� ��¼���߼��㵥�����ݻ��࣬�����ݿ����
-��2�� ��¼�������߼���������ݻ��࣬�����ݿ����
-��3�� ��¼�޸ģ���¼�ͼ�¼���������ݿ��Ľ����ࡣ
-��4�� ���ݶ������ݶ����������������Ϣ��
-��5�� �Ự������ʵ�ֵĻỰ����ࡣ
-��6�� �洢������ʵ�ֵĴ洢����ࡣ 
-
-----------------------------
-4.	Statement����䣩
-
-��װ��sql����ʵ�֡�
-
-��1����䣺��װ��sql����ʵ�֡�
+（1） 记录：逻辑层单条数据基类，与数据库层解耦。
+（2） 记录容器：逻辑层多条数据基类，与数据库层解耦。
+（3） 记录修改：记录和记录容器与数据库层的交互类。
+（4） 数据对象：数据对象单例，返回相关信息。
+（5） 会话：各种实现的会话类基类。
+（6） 存储：各种实现的存储类基类。 
 
 ----------------------------
-5.	MySqlWrappers��MySQL C API ��װ����
+4.	Statement（语句）
 
-��װ��MySQL C API��ʵ�֡�
+封装了sql语句的实现。
 
-��1�� �Ự��MySQL C API�ĻỰ�ࡣ
-��2�� �洢��MySQL C API�Ĵ洢�ࡣ 
-
-----------------------------
-6.	MysqlConnectorWrappers��mysql connector c++ ��װ����
-
-��װ��mysql connector c++��ʵ�֡��������ó������ӵ�Mysql��������ͨ����װʹ�������ȫ������׳��������ʹ�á�
-
-��1�� �Ự��mysql connector c++�ĻỰ�ࡣ
-��2�� �洢��mysql connector c++�Ĵ洢�ࡣ 
+（1）语句：封装了sql语句的实现。
 
 ----------------------------
-7.	MysqlBoostWrappers��mysql boost ��װ����
+5.	MySqlWrappers（MySQL C API 包装器）
 
-��װ��mysql boost��ʵ�֡� 
+封装了MySQL C API的实现。
 
-��1�� �Ự��mysql boost�ĻỰ�ࡣ
-��2�� �洢��mysql boost�Ĵ洢�ࡣ 
-
-----------------------------
-8.	SqlServerWrappers��Sql Server ��װ����
-
-��װ��Sql Server��ʵ�֡�
-
-��1�� �Ự��Sql Server�ĻỰ�ࡣ
-��2�� �洢��Sql Server�Ĵ洢�ࡣ 
+（1） 会话：MySQL C API的会话类。
+（2） 存储：MySQL C API的存储类。 
 
 ----------------------------
-9.	SQLiteWrappers��SQLite ��װ����
+6.	MysqlConnectorWrappers（mysql connector c++ 包装器）
 
-��װ��SQLite��ʵ�֡�
+封装了mysql connector c++的实现。它可以让程序连接到Mysql服务器。通过封装使程序更安全、更健壮，更易于使用。
 
-��1�� �Ự��SQLite�ĻỰ�ࡣ
-��2�� �洢��SQLite�Ĵ洢�ࡣ  
-
-----------------------------
-10.	PostgreSQL��PostgreSQL ��װ����
-
-��װ��PostgreSQL��ʵ�֡�
-
-��1�� �Ự��PostgreSQL�ĻỰ�ࡣ
-��2�� �洢��PostgreSQL�Ĵ洢�ࡣ  
+（1） 会话：mysql connector c++的会话类。
+（2） 存储：mysql connector c++的存储类。 
 
 ----------------------------
-11.	Oracle��Oracle ��װ����
+7.	MysqlBoostWrappers（mysql boost 包装器）
 
-��װ��Oracle��ʵ�֡�
+封装了mysql boost的实现。 
 
-��1�� �Ự��Oracle�ĻỰ�ࡣ
-��2�� �洢��Oracle�Ĵ洢�ࡣ 
-
-----------------------------
-12.	FlatFileWrappers��ƽ���ļ���װ����
-
-��װ��ƽ���ļ���ʵ�֡�
-
-��1�� �Ự��ƽ���ļ��ĻỰ�ࡣ
-��2�� �洢��ƽ���ļ��Ĵ洢�ࡣ  
+（1） 会话：mysql boost的会话类。
+（2） 存储：mysql boost的存储类。 
 
 ----------------------------
-13. mariaDB��mariaDB ��װ����
+8.	SqlServerWrappers（Sql Server 包装器）
 
-��װ��mariaDB��ʵ�֡�
+封装了Sql Server的实现。
 
-��1�� �Ự��mariaDB�ĻỰ�ࡣ
-��2�� �洢��mariaDB�Ĵ洢�ࡣ   
-
-----------------------------
-14. mongo��mongo ��װ����
-
-��װ��mongo��ʵ�֡�
-
-��1�� �Ự��mongo�ĻỰ�ࡣ
-��2�� �洢��mongo�Ĵ洢�ࡣ   
+（1） 会话：Sql Server的会话类。
+（2） 存储：Sql Server的存储类。 
 
 ----------------------------
-15. Redis��Redis ��װ����
+9.	SQLiteWrappers（SQLite 包装器）
 
-��װ��Redis��ʵ�֡�
+封装了SQLite的实现。
 
-��1�� �Ự��Redis�ĻỰ�ࡣ
-��2�� �洢��Redis�Ĵ洢�ࡣ  
+（1） 会话：SQLite的会话类。
+（2） 存储：SQLite的存储类。  
 
 ----------------------------
-16. DatabaseEntityCodeGeneration��DatabaseEntity�������ɣ�
+10.	PostgreSQL（PostgreSQL 包装器）
 
-ʵ��DatabaseEntity��������ɡ� 
+封装了PostgreSQL的实现。
+
+（1） 会话：PostgreSQL的会话类。
+（2） 存储：PostgreSQL的存储类。  
+
+----------------------------
+11.	Oracle（Oracle 包装器）
+
+封装了Oracle的实现。
+
+（1） 会话：Oracle的会话类。
+（2） 存储：Oracle的存储类。 
+
+----------------------------
+12.	FlatFileWrappers（平面文件包装器）
+
+封装了平面文件的实现。
+
+（1） 会话：平面文件的会话类。
+（2） 存储：平面文件的存储类。  
+
+----------------------------
+13. mariaDB（mariaDB 包装器）
+
+封装了mariaDB的实现。
+
+（1） 会话：mariaDB的会话类。
+（2） 存储：mariaDB的存储类。   
+
+----------------------------
+14. mongo（mongo 包装器）
+
+封装了mongo的实现。
+
+（1） 会话：mongo的会话类。
+（2） 存储：mongo的存储类。   
+
+----------------------------
+15. Redis（Redis 包装器）
+
+封装了Redis的实现。
+
+（1） 会话：Redis的会话类。
+（2） 存储：Redis的存储类。  
+
+----------------------------
+16. DatabaseEntityCodeGeneration（DatabaseEntity代码生成）
+
+实现DatabaseEntity代码的生成。 
 
 ----------------------------
 

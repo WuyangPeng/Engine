@@ -1,7 +1,7 @@
-@ingroup group_SoundEffectToolset_Documentation
+ï»¿@ingroup group_SoundEffectToolset_Documentation
 
 ----------------------------
-ÒôĞ§¹¤¾ßÏä
+éŸ³æ•ˆå·¥å…·ç®±
 
 1.  SoundEffectToolset 
 

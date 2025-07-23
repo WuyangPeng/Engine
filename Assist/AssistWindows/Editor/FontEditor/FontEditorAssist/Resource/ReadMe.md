@@ -1,7 +1,7 @@
-@ingroup group_FontEditorAssist_Documentation
+ï»¿@ingroup group_FontEditorAssist_Documentation
 
 ----------------------------
-×ÖÌå±à¼­Æ÷¸¨Öú
+å­—ä½“ç¼–è¾‘å™¨è¾…åŠ©
 
 1.  FontEditorAssist 
  

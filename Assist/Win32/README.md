@@ -1,3 +1,3 @@
-@ingroup group_Documentation
+ï»¿@ingroup group_Documentation
 
-ÒıÇæ¸¨ÖúWin32Ö´ĞĞÄ¿Â¼
+å¼•æ“è¾…åŠ©Win32æ‰§è¡Œç›®å½•

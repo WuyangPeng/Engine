@@ -1,38 +1,38 @@
-@ingroup group_Documentation
+ï»¿@ingroup group_Documentation
 
 ----------------------------
-ÒıÇæ¸¨Öú²âÊÔ¹¤³Ì
+å¼•æ“è¾…åŠ©æµ‹è¯•å·¥ç¨‹
 
 ----------------------------
-AssistTesting.props£º
-ÒıÇæ¸¨Öú²âÊÔ¹¤³ÌÊôĞÔ±í
+AssistTesting.propsï¼š
+å¼•æ“è¾…åŠ©æµ‹è¯•å·¥ç¨‹å±æ€§è¡¨
 
-AssistTestingStaticWin32DebugLibs.props£º
-ÒıÇæ¸¨Öú²âÊÔ±àÒë³Élib¡¢Win32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+AssistTestingStaticWin32DebugLibs.propsï¼š
+å¼•æ“è¾…åŠ©æµ‹è¯•ç¼–è¯‘æˆlibã€Win32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-AssistTestingStaticWin32ReleaseLibs.props£º
-ÒıÇæ¸¨Öú²âÊÔ±àÒë³Élib¡¢Win32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+AssistTestingStaticWin32ReleaseLibs.propsï¼š
+å¼•æ“è¾…åŠ©æµ‹è¯•ç¼–è¯‘æˆlibã€Win32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-AssistTestingStaticX64DebugLibs.props£º
-ÒıÇæ¸¨Öú²âÊÔ±àÒë³Élib¡¢X64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+AssistTestingStaticX64DebugLibs.propsï¼š
+å¼•æ“è¾…åŠ©æµ‹è¯•ç¼–è¯‘æˆlibã€X64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-AssistTestingStaticX64ReleaseLibs.props£º
-ÒıÇæ¸¨Öú²âÊÔ±àÒë³Élib¡¢X64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+AssistTestingStaticX64ReleaseLibs.propsï¼š
+å¼•æ“è¾…åŠ©æµ‹è¯•ç¼–è¯‘æˆlibã€X64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-AssistTestingWin32DebugLibs.props£º
-ÒıÇæ¸¨Öú²âÊÔ±àÒë³Édll¡¢Win32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+AssistTestingWin32DebugLibs.propsï¼š
+å¼•æ“è¾…åŠ©æµ‹è¯•ç¼–è¯‘æˆdllã€Win32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-AssistWin32ReleaseLibs.props£º
-ÒıÇæ¸¨Öú²âÊÔ±àÒë³Édll¡¢Win32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+AssistWin32ReleaseLibs.propsï¼š
+å¼•æ“è¾…åŠ©æµ‹è¯•ç¼–è¯‘æˆdllã€Win32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-AssistX64DebugLibs.props£º
-ÒıÇæ¸¨Öú²âÊÔ±àÒë³Édll¡¢X64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+AssistX64DebugLibs.propsï¼š
+å¼•æ“è¾…åŠ©æµ‹è¯•ç¼–è¯‘æˆdllã€X64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-AssistX64ReleaseLibs.props£º
-ÒıÇæ¸¨Öú²âÊÔ±àÒë³Édll¡¢X64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+AssistX64ReleaseLibs.propsï¼š
+å¼•æ“è¾…åŠ©æµ‹è¯•ç¼–è¯‘æˆdllã€X64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
 ----------------------------
-SetEnvironment.bat£º
-ÉèÖÃÒıÇæ¸¨Öú²âÊÔËùĞèÒªµÄ»·¾³±äÁ¿
+SetEnvironment.batï¼š
+è®¾ç½®å¼•æ“è¾…åŠ©æµ‹è¯•æ‰€éœ€è¦çš„ç¯å¢ƒå˜é‡
 
 ----------------------------

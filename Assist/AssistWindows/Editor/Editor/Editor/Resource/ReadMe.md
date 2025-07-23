@@ -1,36 +1,36 @@
-@ingroup group_Editor_Documentation
+ï»¿@ingroup group_Editor_Documentation
 
 ----------------------------
-±à¼­Æ÷£¨Editor£©
+ç¼–è¾‘å™¨ï¼ˆEditorï¼‰
 
-1.  ½çÃæ£¨UserInterface£©
+1.  ç•Œé¢ï¼ˆUserInterfaceï¼‰
 
-2.  µØĞÎ£¨Terrain£©
+2.  åœ°å½¢ï¼ˆTerrainï¼‰
 
-3.  ×ÅÉ«Æ÷£¨Shader£©
+3.  ç€è‰²å™¨ï¼ˆShaderï¼‰
 
-4.  ÒõÓ°£¨Shadow£© 
+4.  é˜´å½±ï¼ˆShadowï¼‰ 
 
-5.  ³¡¾°£¨Scene£©
+5.  åœºæ™¯ï¼ˆSceneï¼‰
 
-6.  Ğ§¹û£¨Effect£©
+6.  æ•ˆæœï¼ˆEffectï¼‰
 
-7.  Êı¾İ£¨Data£©
+7.  æ•°æ®ï¼ˆDataï¼‰
 
-8.  ¶¯»­£¨Animation£©
+8.  åŠ¨ç”»ï¼ˆAnimationï¼‰
 
-9.  Ä£ĞÍ£¨Model£©
+9.  æ¨¡å‹ï¼ˆModelï¼‰
 
-10. ÎÆÀí£¨Texture£©
+10. çº¹ç†ï¼ˆTextureï¼‰
 
-11. ²ÄÖÊ£¨Material£©
+11. æè´¨ï¼ˆMaterialï¼‰
 
-12. ×ÖÌå£¨Font£©
+12. å­—ä½“ï¼ˆFontï¼‰
 
-13. ¹Ç÷À£¨Skeleton£©
+13. éª¨éª¼ï¼ˆSkeletonï¼‰
 
-14. ¹Ø¿¨£¨Level£©
+14. å…³å¡ï¼ˆLevelï¼‰
 
-15. ½Å±¾£¨Script£©
+15. è„šæœ¬ï¼ˆScriptï¼‰
 
 ----------------------------

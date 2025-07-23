@@ -1,11 +1,11 @@
-@ingroup group_UserInterfaceExampleTesting_Documentation
+ï»¿@ingroup group_UserInterfaceExampleTesting_Documentation
 
 ----------------------------
-ÓÃ»§½çÃæÀı×Óµ¥Ôª²âÊÔ
+ç”¨æˆ·ç•Œé¢ä¾‹å­å•å…ƒæµ‹è¯•
 
 1.   UserInterfaceExampleTesting 
 
-ÓÃ»§½çÃæÀı×ÓµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£©ÓÃ»§½çÃæÀı×Ó¡£
+ç”¨æˆ·ç•Œé¢ä¾‹å­çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰ç”¨æˆ·ç•Œé¢ä¾‹å­ã€‚
 
 ----------------------------

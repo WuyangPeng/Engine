@@ -1,7 +1,7 @@
-@ingroup group_TerrainEditorAssistTesting_Documentation
+ï»¿@ingroup group_TerrainEditorAssistTesting_Documentation
 
 ----------------------------
-µØĞÎ±à¼­Æ÷¸¨Öúµ¥Ôª²âÊÔ
+åœ°å½¢ç¼–è¾‘å™¨è¾…åŠ©å•å…ƒæµ‹è¯•
 
 1.   TerrainEditorAssistTesting 
 

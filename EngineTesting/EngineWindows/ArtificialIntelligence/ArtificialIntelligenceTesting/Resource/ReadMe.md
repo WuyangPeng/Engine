@@ -1,11 +1,11 @@
-@ingroup group_ArtificialIntelligenceTesting_Documentation
+ï»¿@ingroup group_ArtificialIntelligenceTesting_Documentation
 
 ----------------------------
-ÈË¹¤ÖÇÄÜ¿âµ¥Ôª²âÊÔ
+äººå·¥æ™ºèƒ½åº“å•å…ƒæµ‹è¯•
 
 1.   HelperSuite 
 
-¶Ô°ïÖúÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£©ÓÃ»§ºê¡£ 
+å¯¹å¸®åŠ©æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰ç”¨æˆ·å®ã€‚ 
 
 ----------------------------  

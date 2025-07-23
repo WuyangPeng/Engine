@@ -1,11 +1,11 @@
-@ingroup group_SoundEffectExampleTesting_Documentation
+ï»¿@ingroup group_SoundEffectExampleTesting_Documentation
 
 ----------------------------
-ÒôĞ§Àı×Óµ¥Ôª²âÊÔ
+éŸ³æ•ˆä¾‹å­å•å…ƒæµ‹è¯•
 
 1.   SoundEffectExampleTesting 
 
-ÒôĞ§Àı×ÓµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£©ÒôĞ§Àı×Ó¡£
+éŸ³æ•ˆä¾‹å­çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰éŸ³æ•ˆä¾‹å­ã€‚
 
 ----------------------------

@@ -1,11 +1,11 @@
-@ingroup group_OpenGLGlutCallBackUnitTestSuiteTesting_Documentation
+ï»¿@ingroup group_OpenGLGlutCallBackUnitTestSuiteTesting_Documentation
 
 ----------------------------
-OpenGL glut»Øµ÷µ¥Ôª²âÊÔÌ×¼şµÄµ¥Ôª²âÊÔ
+OpenGL glutå›è°ƒå•å…ƒæµ‹è¯•å¥—ä»¶çš„å•å…ƒæµ‹è¯•
 
 1.  OpenGLGlutCallBackUnitTestSuite 
 
-¶ÔOpenGL glut»Øµ÷µ¥Ôª²âÊÔÌ×¼şÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£© OpenGL glut»Øµ÷µ¥Ôª²âÊÔÌ×¼ş¡£ 
+å¯¹OpenGL glutå›è°ƒå•å…ƒæµ‹è¯•å¥—ä»¶æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰ OpenGL glutå›è°ƒå•å…ƒæµ‹è¯•å¥—ä»¶ã€‚ 
  
 ----------------------------

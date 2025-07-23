@@ -1,7 +1,7 @@
-@ingroup group_SkeletonEditorAssist_Documentation
+ï»¿@ingroup group_SkeletonEditorAssist_Documentation
 
 ----------------------------
-¹Ç÷À±à¼­Æ÷¸¨Öú
+éª¨éª¼ç¼–è¾‘å™¨è¾…åŠ©
 
 1.  SkeletonEditorAssist 
 

@@ -1,70 +1,70 @@
-@ingroup group_Documentation
+ï»¿@ingroup group_Documentation
 
-Ïß³ÌºËĞÄäÖÈ¾ÒıÇæ¸¨Öú£¨Threading Core Render Engine Assist£©
-
-----------------------------
-ÒıÇæ¸¨Öú°üº¬Èı¸öÄ£¿é£º
-----------------------------
-¹¤¾ßÏä£¨Toolset£©
-
-1. ÏµÍ³£¨System£©
-2. ºËĞÄ¹¤¾ß£¨CoreTools£©
-3. ÍøÂç£¨Network£©
-4. Êı¾İ¿â£¨Database£©
-5. ½Å±¾£¨Script£©
-6. ÊıÑ§£¨Mathematics£©
-7. ÒôĞ§£¨SoundEffect£©
-8. ÊäÈëÊä³ö£¨InputOutput£©
-9. ×ÊÔ´¹ÜÀí£¨ResourceManager£©
-10.äÖÈ¾£¨Rendering£©
-11.ÎïÀí£¨Physics£©
-12.Í¼Ïñ·ÖÎö£¨Imagics£©
-13.¶¯»­£¨Animation£©
-14.ÈË¹¤ÖÇÄÜ£¨ArtificialIntellegence£©
-15.½çÃæ£¨UserInterface£©
-16.¸¨Öú¹¤¾ß£¨AssistTools£©
-17.¿ò¼Ü£¨Framework£©
-18.±à¼­Æ÷£¨Editor£©
-19.Àı×Ó£¨Example£© 
+çº¿ç¨‹æ ¸å¿ƒæ¸²æŸ“å¼•æ“è¾…åŠ©ï¼ˆThreading Core Render Engine Assistï¼‰
 
 ----------------------------
-±à¼­Æ÷£¨Editor£©
+å¼•æ“è¾…åŠ©åŒ…å«ä¸‰ä¸ªæ¨¡å—ï¼š
+----------------------------
+å·¥å…·ç®±ï¼ˆToolsetï¼‰
 
-1. ½çÃæ£¨UserInterface£©
-2. µØĞÎ£¨Terrain£©
-3. ×ÅÉ«Æ÷£¨Shader£©
-4. ÒõÓ°£¨Shadow£© 
-5. ³¡¾°£¨Scene£©
-6. Ğ§¹û£¨Effect£©
-7. Êı¾İ£¨Data£©
-8. ¶¯»­£¨Animation£©
-9. Ä£ĞÍ£¨Model£©
-10.ÎÆÀí£¨Texture£©
-11.²ÄÖÊ£¨Material£©
-12.×ÖÌå£¨Font£©
-13.¹Ç÷À£¨Skeleton£©
-14.¹Ø¿¨£¨Level£©
-15.½Å±¾£¨Script£©
+1. ç³»ç»Ÿï¼ˆSystemï¼‰
+2. æ ¸å¿ƒå·¥å…·ï¼ˆCoreToolsï¼‰
+3. ç½‘ç»œï¼ˆNetworkï¼‰
+4. æ•°æ®åº“ï¼ˆDatabaseï¼‰
+5. è„šæœ¬ï¼ˆScriptï¼‰
+6. æ•°å­¦ï¼ˆMathematicsï¼‰
+7. éŸ³æ•ˆï¼ˆSoundEffectï¼‰
+8. è¾“å…¥è¾“å‡ºï¼ˆInputOutputï¼‰
+9. èµ„æºç®¡ç†ï¼ˆResourceManagerï¼‰
+10.æ¸²æŸ“ï¼ˆRenderingï¼‰
+11.ç‰©ç†ï¼ˆPhysicsï¼‰
+12.å›¾åƒåˆ†æï¼ˆImagicsï¼‰
+13.åŠ¨ç”»ï¼ˆAnimationï¼‰
+14.äººå·¥æ™ºèƒ½ï¼ˆArtificialIntellegenceï¼‰
+15.ç•Œé¢ï¼ˆUserInterfaceï¼‰
+16.è¾…åŠ©å·¥å…·ï¼ˆAssistToolsï¼‰
+17.æ¡†æ¶ï¼ˆFrameworkï¼‰
+18.ç¼–è¾‘å™¨ï¼ˆEditorï¼‰
+19.ä¾‹å­ï¼ˆExampleï¼‰ 
 
 ----------------------------
-Àı×Ó£¨Example£©
+ç¼–è¾‘å™¨ï¼ˆEditorï¼‰
 
-1. ÏµÍ³£¨System£©
-2. ºËĞÄ¹¤¾ß£¨CoreTools£©
-3. ÍøÂç£¨Network£©
-4. Êı¾İ¿â£¨Database£©
-5. ½Å±¾£¨Script£©
-6. ÊıÑ§£¨Mathematics£©
-7. ÒôĞ§£¨SoundEffect£©
-8. ÊäÈëÊä³ö£¨InputOutput£©
-9. ×ÊÔ´¹ÜÀí£¨ResourceManager£©
-10.äÖÈ¾£¨Rendering£©
-11.ÎïÀí£¨Physics£©
-12.Í¼Ïñ·ÖÎö£¨Imagics£©
-13.¶¯»­£¨Animation£©
-14.ÈË¹¤ÖÇÄÜ£¨ArtificialIntellegence£©
-15.½çÃæ£¨UserInterface£©
-16.¸¨Öú¹¤¾ß£¨AssistTools£©
-17.¿ò¼Ü£¨Framework£©  
+1. ç•Œé¢ï¼ˆUserInterfaceï¼‰
+2. åœ°å½¢ï¼ˆTerrainï¼‰
+3. ç€è‰²å™¨ï¼ˆShaderï¼‰
+4. é˜´å½±ï¼ˆShadowï¼‰ 
+5. åœºæ™¯ï¼ˆSceneï¼‰
+6. æ•ˆæœï¼ˆEffectï¼‰
+7. æ•°æ®ï¼ˆDataï¼‰
+8. åŠ¨ç”»ï¼ˆAnimationï¼‰
+9. æ¨¡å‹ï¼ˆModelï¼‰
+10.çº¹ç†ï¼ˆTextureï¼‰
+11.æè´¨ï¼ˆMaterialï¼‰
+12.å­—ä½“ï¼ˆFontï¼‰
+13.éª¨éª¼ï¼ˆSkeletonï¼‰
+14.å…³å¡ï¼ˆLevelï¼‰
+15.è„šæœ¬ï¼ˆScriptï¼‰
+
+----------------------------
+ä¾‹å­ï¼ˆExampleï¼‰
+
+1. ç³»ç»Ÿï¼ˆSystemï¼‰
+2. æ ¸å¿ƒå·¥å…·ï¼ˆCoreToolsï¼‰
+3. ç½‘ç»œï¼ˆNetworkï¼‰
+4. æ•°æ®åº“ï¼ˆDatabaseï¼‰
+5. è„šæœ¬ï¼ˆScriptï¼‰
+6. æ•°å­¦ï¼ˆMathematicsï¼‰
+7. éŸ³æ•ˆï¼ˆSoundEffectï¼‰
+8. è¾“å…¥è¾“å‡ºï¼ˆInputOutputï¼‰
+9. èµ„æºç®¡ç†ï¼ˆResourceManagerï¼‰
+10.æ¸²æŸ“ï¼ˆRenderingï¼‰
+11.ç‰©ç†ï¼ˆPhysicsï¼‰
+12.å›¾åƒåˆ†æï¼ˆImagicsï¼‰
+13.åŠ¨ç”»ï¼ˆAnimationï¼‰
+14.äººå·¥æ™ºèƒ½ï¼ˆArtificialIntellegenceï¼‰
+15.ç•Œé¢ï¼ˆUserInterfaceï¼‰
+16.è¾…åŠ©å·¥å…·ï¼ˆAssistToolsï¼‰
+17.æ¡†æ¶ï¼ˆFrameworkï¼‰  
 
 ----------------------------

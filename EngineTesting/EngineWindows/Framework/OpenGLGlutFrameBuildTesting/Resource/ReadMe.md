@@ -1,12 +1,12 @@
-@ingroup group_OpenGLGlutFrameBuildTesting_Documentation
+ï»¿@ingroup group_OpenGLGlutFrameBuildTesting_Documentation
 
 ----------------------------
-OpenGL glut¿ò¼Ü¹¹½¨µÄµ¥Ôª²âÊÔ
+OpenGL glutæ¡†æ¶æ„å»ºçš„å•å…ƒæµ‹è¯•
 
 1.  OpenGLGlutFrameBuild 
 
-¶ÔOpenGL glut¿ò¼Ü¹¹½¨Ä£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£© OpenGL glut¿ò¼Ü¹¹½¨¡£
+å¯¹OpenGL glutæ¡†æ¶æ„å»ºæ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰ OpenGL glutæ¡†æ¶æ„å»ºã€‚
 
 ----------------------------
  

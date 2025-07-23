@@ -1,11 +1,11 @@
-@ingroup group_MaterialEditorTesting_Documentation
+ï»¿@ingroup group_MaterialEditorTesting_Documentation
 
 ----------------------------
-²ÄÖÊ±à¼­Æ÷µ¥Ôª²âÊÔ
+æè´¨ç¼–è¾‘å™¨å•å…ƒæµ‹è¯•
 
 1.   MaterialEditor 
 
-²ÄÖÊ±à¼­Æ÷µÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£©²ÄÖÊ¡£
+æè´¨ç¼–è¾‘å™¨çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰æè´¨ã€‚
 
 ----------------------------

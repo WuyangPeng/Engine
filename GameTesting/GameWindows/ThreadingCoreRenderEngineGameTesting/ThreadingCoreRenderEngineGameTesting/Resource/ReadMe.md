@@ -1,6 +1,6 @@
-@ingroup group_GameTesting_Documentation
+﻿@ingroup group_GameTesting_Documentation
 
 ----------------------------
-��Ϸ���Թ淶 
+游戏测试规范 
 
 ----------------------------

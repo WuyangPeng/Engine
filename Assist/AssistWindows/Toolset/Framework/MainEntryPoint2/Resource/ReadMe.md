@@ -1,12 +1,12 @@
-@ingroup group_MainEntryPoint2_Documentation
+ï»¿@ingroup group_MainEntryPoint2_Documentation
 
 ----------------------------
-mainÖ÷º¯ÊıÈë¿Úµã
+mainä¸»å‡½æ•°å…¥å£ç‚¹
 
 MainEntryPoint2
 
-CONSOLE_MAIN_FUNCTION¹¤¾ßÏä¡£ÊµÏÖÒÔÏÂ¹¦ÄÜ£º 
+CONSOLE_MAIN_FUNCTIONå·¥å…·ç®±ã€‚å®ç°ä»¥ä¸‹åŠŸèƒ½ï¼š 
 
-£¨1£©µ÷ÓÃºêCONSOLE_MAIN_FUNCTIONÔËĞĞ³ÌĞò¡£ 
+ï¼ˆ1ï¼‰è°ƒç”¨å®CONSOLE_MAIN_FUNCTIONè¿è¡Œç¨‹åºã€‚ 
 
 ----------------------------

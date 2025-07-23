@@ -1,12 +1,12 @@
-@ingroup group_FrameworkExampleTesting_Documentation
+ï»¿@ingroup group_FrameworkExampleTesting_Documentation
 
 ----------------------------
-¿ò¼ÜÀı×Óµ¥Ôª²âÊÔ
+æ¡†æ¶ä¾‹å­å•å…ƒæµ‹è¯•
 
 FrameworkExampleTesting 
 
-¿ò¼Ü¿âÀı×Óµ¥Ôª²âÊÔ¡£ÊµÏÖÒÔÏÂ¹¦ÄÜ£º 
+æ¡†æ¶åº“ä¾‹å­å•å…ƒæµ‹è¯•ã€‚å®ç°ä»¥ä¸‹åŠŸèƒ½ï¼š 
 
-£¨1£©¿ò¼ÜÀı×ÓµÄµ¥Ôª²âÊÔ¡£ 
+ï¼ˆ1ï¼‰æ¡†æ¶ä¾‹å­çš„å•å…ƒæµ‹è¯•ã€‚ 
 
 ----------------------------

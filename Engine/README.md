@@ -1,56 +1,56 @@
-@ingroup group_Documentation
+ï»¿@ingroup group_Documentation
 
-Ïß³ÌºËĞÄäÖÈ¾ÒıÇæ£¨Threading Core Render Engine£©
-
-----------------------------
-ÒıÇæ°üº¬Ê®Æß¸öÄ£¿é£¬Æß¸ö²ã¼¶£º
+çº¿ç¨‹æ ¸å¿ƒæ¸²æŸ“å¼•æ“ï¼ˆThreading Core Render Engineï¼‰
 
 ----------------------------
-µÚÒ»²ã£º
-ÏµÍ³£¨System£©¡£
+å¼•æ“åŒ…å«åä¸ƒä¸ªæ¨¡å—ï¼Œä¸ƒä¸ªå±‚çº§ï¼š
 
 ----------------------------
-µÚ¶ş²ã£º
-ºËĞÄ¹¤¾ß£¨CoreTools£©¡£
+ç¬¬ä¸€å±‚ï¼š
+ç³»ç»Ÿï¼ˆSystemï¼‰ã€‚
 
 ----------------------------
-µÚÈı²ã£º
-ÍøÂç£¨Network£©¡¢Êı¾İ¿â£¨Database£©¡¢½Å±¾£¨Script£©¡¢ÊıÑ§£¨Mathematics£©¡¢ÒôĞ§£¨SoundEffect£©¡¢ÊäÈëÊä³ö£¨InputOutput£©¡£
+ç¬¬äºŒå±‚ï¼š
+æ ¸å¿ƒå·¥å…·ï¼ˆCoreToolsï¼‰ã€‚
 
 ----------------------------
-µÚËÄ²ã£º
-×ÊÔ´¹ÜÀí£¨ResourceManager£©¡¢äÖÈ¾£¨Rendering£©¡¢ÎïÀí£¨Physics£©¡¢Í¼Ïñ·ÖÎö£¨Imagics£©¡£
+ç¬¬ä¸‰å±‚ï¼š
+ç½‘ç»œï¼ˆNetworkï¼‰ã€æ•°æ®åº“ï¼ˆDatabaseï¼‰ã€è„šæœ¬ï¼ˆScriptï¼‰ã€æ•°å­¦ï¼ˆMathematicsï¼‰ã€éŸ³æ•ˆï¼ˆSoundEffectï¼‰ã€è¾“å…¥è¾“å‡ºï¼ˆInputOutputï¼‰ã€‚
 
 ----------------------------
-µÚÎå²ã£º
-¶¯»­£¨Animation£©¡¢ÈË¹¤ÖÇÄÜ£¨ArtificialIntellegence£©¡¢½çÃæ£¨UserInterface£©¡£
+ç¬¬å››å±‚ï¼š
+èµ„æºç®¡ç†ï¼ˆResourceManagerï¼‰ã€æ¸²æŸ“ï¼ˆRenderingï¼‰ã€ç‰©ç†ï¼ˆPhysicsï¼‰ã€å›¾åƒåˆ†æï¼ˆImagicsï¼‰ã€‚
 
 ----------------------------
-µÚÁù²ã£º
-¸¨Öú¹¤¾ß£¨AssistTools£©¡£
+ç¬¬äº”å±‚ï¼š
+åŠ¨ç”»ï¼ˆAnimationï¼‰ã€äººå·¥æ™ºèƒ½ï¼ˆArtificialIntellegenceï¼‰ã€ç•Œé¢ï¼ˆUserInterfaceï¼‰ã€‚
 
 ----------------------------
-µÚÆß²ã£º
-¿ò¼Ü£¨Framework£©¡£
+ç¬¬å…­å±‚ï¼š
+è¾…åŠ©å·¥å…·ï¼ˆAssistToolsï¼‰ã€‚
 
 ----------------------------
-¹ØÁªµÄÍâ²¿¿â£º
+ç¬¬ä¸ƒå±‚ï¼š
+æ¡†æ¶ï¼ˆFrameworkï¼‰ã€‚
 
-Ö±½Ó¹ØÁª£º
-	gsl¡¢CppCoreGuidelines¡¢OpenGL¡¢EGL¡¢boost¡¢stlsoft¡¢Visual Leak Detector£¨Debug£©¡¢zlib¡¢freeType¡¢pugixml¡¢miniz¡£
+----------------------------
+å…³è”çš„å¤–éƒ¨åº“ï¼š
+
+ç›´æ¥å…³è”ï¼š
+	gslã€CppCoreGuidelinesã€OpenGLã€EGLã€boostã€stlsoftã€Visual Leak Detectorï¼ˆDebugï¼‰ã€zlibã€freeTypeã€pugixmlã€minizã€‚
 	
-Í¨¹ıºê¿ØÖÆÊÇ·ñ¹ØÁª£º
-	ACE¡¢openssl¡¢mysql¡¢mysql connector c++¡¢protobuf¡¢freeglut¡¢wxWidgets¡¢opencv¡¢OpenAL Soft¡¢
-	lua¡¢OpenXLSX¡¢ogg¡¢vorbis¡¢FLTK¡¢Apr¡¢ActiveMQ¡¢Mongo-c-driver¡¢Mongo-cxx-driver¡¢hiredis¡£
+é€šè¿‡å®æ§åˆ¶æ˜¯å¦å…³è”ï¼š
+	ACEã€opensslã€mysqlã€mysql connector c++ã€protobufã€freeglutã€wxWidgetsã€opencvã€OpenAL Softã€
+	luaã€OpenXLSXã€oggã€vorbisã€FLTKã€Aprã€ActiveMQã€Mongo-c-driverã€Mongo-cxx-driverã€hiredisã€‚
 
 ----------------------------
-Ïà¹ØÄ£¿é£º
+ç›¸å…³æ¨¡å—ï¼š
 
-¹¤¾ßÏä£¨Toolset£©¡¢±à¼­Æ÷£¨Editor£©¡¢Àı×Ó£¨Example£©¡¢¿âÀı×Ó£¨LibExample£©¡£
+å·¥å…·ç®±ï¼ˆToolsetï¼‰ã€ç¼–è¾‘å™¨ï¼ˆEditorï¼‰ã€ä¾‹å­ï¼ˆExampleï¼‰ã€åº“ä¾‹å­ï¼ˆLibExampleï¼‰ã€‚
 
 ----------------------------
-Ïà¹ØÄ£¿éµÄµ¥Ôª²âÊÔ£º
+ç›¸å…³æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š
 
-ÒıÇæµ¥Ôª²âÊÔ£¨EngineTesting£©¡¢±à¼­Æ÷µ¥Ôª²âÊÔ£¨EditorTesting£©¡¢Àı×Óµ¥Ôª²âÊÔ£¨ExampleTesting£©¡¢¿âÀı×Óµ¥Ôª²âÊÔ£¨LibExampleTesting£©¡£
+å¼•æ“å•å…ƒæµ‹è¯•ï¼ˆEngineTestingï¼‰ã€ç¼–è¾‘å™¨å•å…ƒæµ‹è¯•ï¼ˆEditorTestingï¼‰ã€ä¾‹å­å•å…ƒæµ‹è¯•ï¼ˆExampleTestingï¼‰ã€åº“ä¾‹å­å•å…ƒæµ‹è¯•ï¼ˆLibExampleTestingï¼‰ã€‚
 
 ----------------------------

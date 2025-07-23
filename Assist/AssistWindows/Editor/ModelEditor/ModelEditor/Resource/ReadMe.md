@@ -1,11 +1,11 @@
-@ingroup group_ModelEditor_Documentation
+ï»¿@ingroup group_ModelEditor_Documentation
 
 ----------------------------
-Ä£ÐÍ±à¼­Æ÷
+æ¨¡åž‹ç¼–è¾‘å™¨
 
 1.   ModelEditor 
 
-Ä£ÐÍ±à¼­Æ÷£¬°üÀ¨£º 
-£¨1£©Ä£ÐÍ¡£
+æ¨¡åž‹ç¼–è¾‘å™¨ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰æ¨¡åž‹ã€‚
 
 ----------------------------

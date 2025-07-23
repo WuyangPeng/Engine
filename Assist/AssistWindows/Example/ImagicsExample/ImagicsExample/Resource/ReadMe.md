@@ -1,11 +1,11 @@
-@ingroup group_ImagicsExample_Documentation
+ï»¿@ingroup group_ImagicsExample_Documentation
 
 ----------------------------
-Í¼Ïñ·ÖÎöÀı×Ó
+å›¾åƒåˆ†æä¾‹å­
 
 1.   ImagicsExample 
 
-Í¼Ïñ·ÖÎöÀı×Ó£¬°üÀ¨£º 
-£¨1£©Í¼Ïñ·ÖÎö¡£
+å›¾åƒåˆ†æä¾‹å­ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰å›¾åƒåˆ†æã€‚
 
 ----------------------------

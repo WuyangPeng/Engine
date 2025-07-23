@@ -1,6 +1,6 @@
-@ingroup group_Documentation
+锘緻ingroup group_Documentation
 
 ----------------------------
-千年史策Win32执行目录
+鍗冨勾鍙茬瓥Win32鎵ц鐩綍
 
 ----------------------------

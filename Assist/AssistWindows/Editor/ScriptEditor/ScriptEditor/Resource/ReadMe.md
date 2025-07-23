@@ -1,11 +1,11 @@
-@ingroup group_ScriptEditor_Documentation
+ï»¿@ingroup group_ScriptEditor_Documentation
 
 ----------------------------
-½Å±¾±à¼­Æ÷
+è„šæœ¬ç¼–è¾‘å™¨
 
 1.   ScriptEditor 
 
-½Å±¾±à¼­Æ÷£¬°üÀ¨£º 
-£¨1£©½Å±¾¡£
+è„šæœ¬ç¼–è¾‘å™¨ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰è„šæœ¬ã€‚
 
 ----------------------------

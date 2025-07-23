@@ -1,50 +1,50 @@
-@ingroup group_Documentation
+ï»¿@ingroup group_Documentation
 
 ----------------------------
-ÒıÇæ¸¨Öú¹¤³Ì
+å¼•æ“è¾…åŠ©å·¥ç¨‹
 
 ----------------------------
-Assist.props£º
-ÒıÇæ¸¨Öú¹¤³ÌÊôĞÔ±í
+Assist.propsï¼š
+å¼•æ“è¾…åŠ©å·¥ç¨‹å±æ€§è¡¨
 
-AssistDebugXCopy.props£º
-ÒıÇæ¸¨Öú¹¤³ÌDebug°æ±¾¸´ÖÆÎÄ¼şµ½ÒıÇæ¸¨Öú²âÊÔÄ¿Â¼ÊôĞÔ±í
+AssistDebugXCopy.propsï¼š
+å¼•æ“è¾…åŠ©å·¥ç¨‹Debugç‰ˆæœ¬å¤åˆ¶æ–‡ä»¶åˆ°å¼•æ“è¾…åŠ©æµ‹è¯•ç›®å½•å±æ€§è¡¨
 
-AssistDebugXCopyToEngineTesting.props£º
-ÒıÇæ¸¨Öú¹¤³ÌDebug°æ±¾¸´ÖÆÎÄ¼şµ½ÒıÇæ²âÊÔÄ¿Â¼ÊôĞÔ±í
+AssistDebugXCopyToEngineTesting.propsï¼š
+å¼•æ“è¾…åŠ©å·¥ç¨‹Debugç‰ˆæœ¬å¤åˆ¶æ–‡ä»¶åˆ°å¼•æ“æµ‹è¯•ç›®å½•å±æ€§è¡¨
 
-AssistReleaseXCopy.props£º
-ÒıÇæ¸¨Öú¹¤³ÌRelease°æ±¾¸´ÖÆÎÄ¼şµ½ÒıÇæ¸¨ÖúÄ¿Â¼ÊôĞÔ±í
+AssistReleaseXCopy.propsï¼š
+å¼•æ“è¾…åŠ©å·¥ç¨‹Releaseç‰ˆæœ¬å¤åˆ¶æ–‡ä»¶åˆ°å¼•æ“è¾…åŠ©ç›®å½•å±æ€§è¡¨
 
-AssistReleaseXCopyToEngineTesting.props£º
-ÒıÇæ¸¨Öú¹¤³ÌRelease°æ±¾¸´ÖÆÎÄ¼şµ½ÒıÇæ²âÊÔÄ¿Â¼ÊôĞÔ±í
+AssistReleaseXCopyToEngineTesting.propsï¼š
+å¼•æ“è¾…åŠ©å·¥ç¨‹Releaseç‰ˆæœ¬å¤åˆ¶æ–‡ä»¶åˆ°å¼•æ“æµ‹è¯•ç›®å½•å±æ€§è¡¨
 
-AssistStaticWin32DebugLibs.props£º
-ÒıÇæ¸¨Öú±àÒë³Élib¡¢Win32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+AssistStaticWin32DebugLibs.propsï¼š
+å¼•æ“è¾…åŠ©ç¼–è¯‘æˆlibã€Win32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-AssistStaticWin32ReleaseLibs.props£º
-ÒıÇæ¸¨Öú±àÒë³Élib¡¢Win32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+AssistStaticWin32ReleaseLibs.propsï¼š
+å¼•æ“è¾…åŠ©ç¼–è¯‘æˆlibã€Win32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-AssistStaticX64DebugLibs.props£º
-ÒıÇæ¸¨Öú±àÒë³Élib¡¢X64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+AssistStaticX64DebugLibs.propsï¼š
+å¼•æ“è¾…åŠ©ç¼–è¯‘æˆlibã€X64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-AssistStaticX64ReleaseLibs.props£º
-ÒıÇæ¸¨Öú±àÒë³Élib¡¢X64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+AssistStaticX64ReleaseLibs.propsï¼š
+å¼•æ“è¾…åŠ©ç¼–è¯‘æˆlibã€X64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-AssistWin32DebugLibs.props£º
-ÒıÇæ¸¨Öú±àÒë³Édll¡¢Win32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+AssistWin32DebugLibs.propsï¼š
+å¼•æ“è¾…åŠ©ç¼–è¯‘æˆdllã€Win32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-AssistWin32ReleaseLibs.props£º
-ÒıÇæ¸¨Öú±àÒë³Édll¡¢Win32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+AssistWin32ReleaseLibs.propsï¼š
+å¼•æ“è¾…åŠ©ç¼–è¯‘æˆdllã€Win32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-AssistX64DebugLibs.props£º
-ÒıÇæ¸¨Öú±àÒë³Édll¡¢X64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+AssistX64DebugLibs.propsï¼š
+å¼•æ“è¾…åŠ©ç¼–è¯‘æˆdllã€X64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-AssistX64ReleaseLibs.props£º
-ÒıÇæ¸¨Öú±àÒë³Édll¡¢X64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+AssistX64ReleaseLibs.propsï¼š
+å¼•æ“è¾…åŠ©ç¼–è¯‘æˆdllã€X64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
 ----------------------------
-SetEnvironment.bat£º
-ÉèÖÃÒıÇæ¸¨ÖúËùĞèÒªµÄ»·¾³±äÁ¿
+SetEnvironment.batï¼š
+è®¾ç½®å¼•æ“è¾…åŠ©æ‰€éœ€è¦çš„ç¯å¢ƒå˜é‡
 
 ----------------------------

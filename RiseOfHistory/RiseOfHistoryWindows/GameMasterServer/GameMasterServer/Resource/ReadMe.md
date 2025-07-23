@@ -1,6 +1,6 @@
-@ingroup group_GameMasterServer_Documentation
+锘緻ingroup group_GameMasterServer_Documentation
 
 ----------------------------
-游戏管理员服务器
+娓告垙绠＄悊鍛樻湇鍔″櫒
 
 ----------------------------
