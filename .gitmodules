@@ -7,3 +7,9 @@
 [submodule "External/CppCoreGuidelines"]
 	path = External/CppCoreGuidelines
 	url = https://github.com/isocpp/CppCoreGuidelines.git
+[submodule "External/KhronosGroup/OpenGL"]
+	path = External/KhronosGroup/OpenGL
+	url = https://github.com/KhronosGroup/OpenGL-Registry.git
+[submodule "External/KhronosGroup/EGL"]
+	path = External/KhronosGroup/EGL
+	url = https://github.com/KhronosGroup/EGL-Registry.git

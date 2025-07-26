@@ -10,6 +10,7 @@ set(CMAKE_CXX_STANDARD 20)
 if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
     include_directories(/data/coding/External/GSL/include/)
+
     include_directories(/data/coding/Libs/boost/)
     include_directories(/data/coding/Libs/STLSoft/include/)
     include_directories(/data/coding/Libs/miniz/)
@@ -55,6 +56,10 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     link_libraries(libprotobuf.a)
 
 elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+
+    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../External/GSL/include/)
+    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../External/KhronosGroup/OpenGL/api/)
+    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../External/KhronosGroup/EGL/api/)
 
     include_directories($ENV{LibsEnvironmentBaseInclude}/)
     include_directories($ENV{LibsEnvironmentExtendInclude}/)
