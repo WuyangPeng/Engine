@@ -57,12 +57,12 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 	
 	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/boost/)
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../ACE/ACE_wrappers/)
-
-    include_directories($ENV{LibsEnvironmentBaseInclude}/)
-    include_directories($ENV{LibsEnvironmentExtendInclude}/)
 	
 	link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/boost/stage/lib/)
     link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/ACE/ACE_wrappers/lib/x64/)
+
+    include_directories($ENV{LibsEnvironmentBaseInclude}/)
+    include_directories($ENV{LibsEnvironmentExtendInclude}/)
 
     if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
        
