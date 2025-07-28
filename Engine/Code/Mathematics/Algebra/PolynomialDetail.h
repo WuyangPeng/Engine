@@ -18,6 +18,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/TemplateTools/RangeIteration.h"
 #include "Mathematics/Base/MathDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
