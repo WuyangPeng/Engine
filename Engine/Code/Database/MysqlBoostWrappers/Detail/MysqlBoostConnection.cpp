@@ -22,7 +22,6 @@
 #include "Database/Statement/SqlStatement.h"
 #include "System/Helper/PragmaWarning/Asio.h"
 
-
 using namespace std::literals;
 
 Database::MysqlBoostConnection::MysqlBoostConnection(ConfigurationStrategy configurationStrategy)
