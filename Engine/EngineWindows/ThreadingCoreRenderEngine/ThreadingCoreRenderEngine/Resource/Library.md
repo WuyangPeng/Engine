@@ -54,7 +54,7 @@
 
    #endif /* ACE_CONFIG_H */  
    可使用ACE下的批处理文件CopyACEConfig执行。
-4. 编译好x64版本后，手动将ACE\ACE_wrappers\lib下文件复制到ACE\ACE_wrappers\lib\X64，  
+4. 编译好x64版本后，手动将ACE\ACE_wrappers\lib下文件复制到ACE\ACE_wrappers\lib\x64，  
    然后再编译Win32版本，手动将ACE\ACE_wrappers\lib下文件复制到ACE\ACE_wrappers\lib\Win32。  
    可使用ACE下的批处理文件CopyACEWin32和CopyACEX64执行。
 

@@ -1,5 +1,5 @@
 @echo on
 
-xcopy "%ACEInclude%/lib/*" "%ACEX64Lib%/" /F /Y
+xcopy "../../ACE/ACE_wrappers/lib/*" "../../ACE/ACE_wrappers/lib/x64/" /F /Y
 
 pause
