@@ -1,6 +1,6 @@
 @echo on
 
-cd ../boost
+cd ../../boost
 
 .\b2
 

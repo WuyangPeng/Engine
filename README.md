@@ -120,6 +120,10 @@ It can be used for activities such as:
 
 	sudo yum install mesa-libGL-devel freeglut-devel
 	
+-  安装python
+
+	sudo dnf install python3-devel
+	
 - 编译工程
 	
 	cd /data/coding/Libs/Bat。

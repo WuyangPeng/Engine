@@ -23,7 +23,7 @@ if [ ! -f /data/coding/External/boost_installed.txt ]; then
 		./bootstrap.sh --with-libraries=all --with-toolset=gcc
 	fi 
 	
-	./b2 install --prefix=/data/coding/Libs/boost/stage/ cxxflags="-std=c++20"
-	touch /data/coding/Libs/boost_installed.txt
+	./b2 install --prefix=/data/coding/External/boost/stage/ cxxflags="-std=c++20"
+	touch /data/coding/External/boost_installed.txt
 	
 fi

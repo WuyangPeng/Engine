@@ -44,18 +44,18 @@
 ----------------------------
 ## ACE（引擎通过宏NETWORK_USE_ACE关联）
 
-1. 版本：7.1.0。
+1. 版本：8.4.0。
 2. 官方网站：http://download.dre.vanderbilt.edu/、 http://www.dre.vanderbilt.edu/~schmidt/ACE.html。
-3. 在ace目录下增加文件config.h包含正确的config文件。
-   #ifndef ACE_CONFIG_H
+3. 在ace目录下增加文件config.h包含正确的config文件。  
+   #ifndef ACE_CONFIG_H  
    #define ACE_CONFIG_H
 
        #include "config-win32.h"
 
-   #endif /* ACE_CONFIG_H */
+   #endif /* ACE_CONFIG_H */  
    可使用ACE下的批处理文件CopyACEConfig执行。
-4. 编译好x64版本后，手动将ACE\ACE_wrappers\lib下文件复制到ACE\ACE_wrappers\lib\X64，
-   然后再编译Win32版本，手动将ACE\ACE_wrappers\lib下文件复制到ACE\ACE_wrappers\lib\Win32。
+4. 编译好x64版本后，手动将ACE\ACE_wrappers\lib下文件复制到ACE\ACE_wrappers\lib\X64，  
+   然后再编译Win32版本，手动将ACE\ACE_wrappers\lib下文件复制到ACE\ACE_wrappers\lib\Win32。  
    可使用ACE下的批处理文件CopyACEWin32和CopyACEX64执行。
 
 ----------------------------
