@@ -24,6 +24,7 @@
 #include "Network/NetworkMessage/BufferReceiveStream.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
 #include "Network/NetworkMessage/MessageBuffer.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 #ifdef NETWORK_USE_ACTIVE_MQ
 
@@ -111,7 +112,6 @@ void Network::ActiveMQConsumer::Run()
         });
 
         Execution();
-
     } while (!isStop || !messageContainer.empty());
 }
 
