@@ -547,7 +547,6 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Hiredis.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\IteratorFacade.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\LexicalCast.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\LimitTraits.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\ListInserter.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\MathConstants.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Miniz.h" />

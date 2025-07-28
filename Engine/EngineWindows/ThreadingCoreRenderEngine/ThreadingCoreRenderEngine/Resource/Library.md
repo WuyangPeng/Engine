@@ -1,35 +1,35 @@
 ﻿@ingroup group_Engine_Documentation
 
-----------------------------
+---
 # 库
 
-----------------------------
+---
 ## GSL（引擎直接关联）
 
 1. 官方网站：https://github.com/microsoft/GSL。
 2. git地址：https://github.com/microsoft/GSL.git。
 
-----------------------------
+---
 ## CppCoreGuidelines（引擎直接关联）
 
 1. 官方网站：https://github.com/isocpp/CppCoreGuidelines。
 2. git地址：https://github.com/isocpp/CppCoreGuidelines.git。
 
-----------------------------
+---
 ## OpenGL（引擎直接关联）
 
 1. 版本：4.6。
 2. 官方网站：http://www.opengl.org/registry/。
 3. git地址：https://github.com/KhronosGroup/OpenGL-Registry.git。
 
-----------------------------
+---
 ## EGL（引擎直接关联）
 
 1. 版本：1.5。
 2. 官方网站：https://www.khronos.org/registry/EGL/。
 3. git地址：https://github.com/KhronosGroup/EGL-Registry.git。
 
-----------------------------
+---
 ## boost（引擎直接关联）
 
 1. 版本：1.88.0。
@@ -40,15 +40,6 @@
 4. linux编译指令：  
   （1）./bootstrap.sh --with-libraries=all --with-toolset=gcc  
   （2）./b2 install --prefix=/data/coding/Libs/boost/stage/ cxxflags="-std=c++20"
-
-----------------------------
-## stlsoft（引擎直接关联）
-
-1. 版本：1.10.11。
-2. git地址：https://github.com/synesissoftware/STLSoft-1.10
-3. 在stlsoft.h第795行增加
-	#  elif (_MSC_VER < 2000)
-	#   define STLSOFT_COMPILER_VERSION_STRING                  "Visual C++ 16.x"
 
 ----------------------------
 ## ACE（引擎通过宏NETWORK_USE_ACE关联）

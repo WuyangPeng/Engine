@@ -4,8 +4,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
     include_directories(/data/coding/External/GSL/include/)
     include_directories(/data/coding/External/boost/)
-	
-    include_directories(/data/coding/Libs/STLSoft/include/)
+
     include_directories(/data/coding/Libs/miniz/)
     include_directories(/data/coding/Libs/miniz/build/)
     include_directories(/data/coding/Libs/pugixml/src/)
@@ -37,6 +36,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     link_libraries(libboost_timer.so)
     link_libraries(libboost_date_time.so)
     link_libraries(libboost_thread.so)
+    link_libraries(libboost_charconv.so)
     link_libraries(libACE.so)
     link_libraries(libmongocxx.so)
     link_libraries(libbsoncxx.so)
