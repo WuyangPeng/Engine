@@ -38,7 +38,7 @@
   （1）运行bootstrap。  
   （2）运行b2（最新版本）  
   b2 --toolset=msvc-14.2（特定版本）  
-  （3）由于链接context库需要，使用选项  asmflags=\safeseh。 
+  （3）由于链接context库需要，使用选项 asmflags=\safeseh。 
 4. linux编译指令：  
   （1）./bootstrap.sh --with-libraries=all --with-toolset=gcc  
   （2）./b2 install --prefix=/data/coding/Libs/boost/stage/
