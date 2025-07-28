@@ -49,7 +49,7 @@ if [ ! -f /data/coding/External/ace_installed.txt ]; then
 			mkdir /data/coding/External/ACE
 			
 			# 解压下载的文件
-			tar -xzf /data/coding/External/ACE-8.0.2.tar.gz -C /data/coding/External/ACE
+			tar -xzf /data/coding/External/ACE-8.0.4.tar.gz -C /data/coding/External/ACE
 
 			# 检查解压是否成功
 			if [ $? -eq 0 ]; then
