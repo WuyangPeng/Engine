@@ -32,16 +32,14 @@
 ----------------------------
 ## boost（引擎直接关联）
 
-1. 版本：1.83.0。
+1. 版本：1.88.0。
 2. 官方网站：http://www.boost.org/。
 3. Windows编译指令：  
   （1）运行bootstrap。  
-  （2）运行b2（最新版本）  
-  b2 --toolset=msvc-14.2（特定版本）  
-  （3）由于链接context库需要，使用选项 asmflags=\safeseh。 
+  （2）运行b2（最新版本）b2 --toolset=msvc-14.2（特定版本）
 4. linux编译指令：  
   （1）./bootstrap.sh --with-libraries=all --with-toolset=gcc  
-  （2）./b2 install --prefix=/data/coding/Libs/boost/stage/
+  （2）./b2 install --prefix=/data/coding/Libs/boost/stage/ cxxflags="-std=c++20"
 
 ----------------------------
 ## stlsoft（引擎直接关联）

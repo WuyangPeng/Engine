@@ -3,8 +3,8 @@
 if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
     include_directories(/data/coding/External/GSL/include/)
-
-    include_directories(/data/coding/Libs/boost/)
+    include_directories(/data/coding/External/boost/)
+	
     include_directories(/data/coding/Libs/STLSoft/include/)
     include_directories(/data/coding/Libs/miniz/)
     include_directories(/data/coding/Libs/miniz/build/)
@@ -22,7 +22,8 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     include_directories(/data/coding/Libs/mysql-connector-c++/build/include/mysqlx/)
     include_directories(/data/coding/Libs/hiredis/)
 
-    link_directories(/data/coding/Libs/boost/stage/lib)
+    link_directories(/data/coding/External/boost/stage/lib)
+	
     link_directories(/data/coding/Libs/ACE/ACE_wrappers/lib)
     link_directories(/data/coding/Libs/mongo-cxx-driver/build/src/mongocxx)
     link_directories(/data/coding/Libs/mongo-cxx-driver/build/src/bsoncxx)
@@ -53,11 +54,15 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../External/GSL/include/)
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../External/KhronosGroup/OpenGL/api/)
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../External/KhronosGroup/EGL/api/)
+	
+	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/boost/)
 
     include_directories($ENV{LibsEnvironmentBaseInclude}/)
     include_directories($ENV{LibsEnvironmentExtendInclude}/)
+	
+	link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/boost/stage/lib/)
 
-    if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+    if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))		
 
         link_directories($ENV{LibsEnvironmentX64DebugLib}/)
 

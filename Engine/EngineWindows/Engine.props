@@ -10,7 +10,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(LibsEnvironmentBaseInclude);$(LibsEnvironmentExtendInclude);../../../Code/;../../../../External/GSL/include/;../../../../External/KhronosGroup/OpenGL/api/;../../../../External/KhronosGroup/EGL/api/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../Code/;../../../../External/GSL/include/;../../../../External/KhronosGroup/OpenGL/api/;../../../../External/KhronosGroup/EGL/api/;../../../../Libs/boost/;$(LibsEnvironmentBaseInclude);$(LibsEnvironmentExtendInclude);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
@@ -19,5 +19,8 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <EnablePREfast>true</EnablePREfast>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>../../../../Libs/boost/stage/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
   </ItemDefinitionGroup>
 </Project>
