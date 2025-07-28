@@ -44,7 +44,7 @@
 ----------------------------
 ## ACE（引擎通过宏NETWORK_USE_ACE关联）
 
-1. 版本：8.4.0。
+1. 版本：8.0.4。
 2. 官方网站：http://download.dre.vanderbilt.edu/、 http://www.dre.vanderbilt.edu/~schmidt/ACE.html。
 3. 在ace目录下增加文件config.h包含正确的config文件。  
    #ifndef ACE_CONFIG_H  

@@ -4,11 +4,11 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
     include_directories(/data/coding/External/GSL/include/)
     include_directories(/data/coding/External/boost/)
+    include_directories(/data/coding/External/ACE/ACE_wrappers/)
 
     include_directories(/data/coding/Libs/miniz/)
     include_directories(/data/coding/Libs/miniz/build/)
-    include_directories(/data/coding/Libs/pugixml/src/)
-    include_directories(/data/coding/Libs/ACE/ACE_wrappers/)
+    include_directories(/data/coding/Libs/pugixml/src/)   
     include_directories(/data/coding/Libs/protobuf/src/)
     include_directories(/data/coding/Libs/activemq/src/main/)
     include_directories(/data/coding/Libs/mongo-cxx-driver/src/mongocxx/include/mongocxx/v_noabi/)
@@ -21,9 +21,9 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     include_directories(/data/coding/Libs/mysql-connector-c++/build/include/mysqlx/)
     include_directories(/data/coding/Libs/hiredis/)
 
-    link_directories(/data/coding/External/boost/stage/lib)
-	
-    link_directories(/data/coding/Libs/ACE/ACE_wrappers/lib)
+    link_directories(/data/coding/External/boost/stage/lib)	
+    link_directories(/data/coding/External/ACE/ACE_wrappers/lib)
+
     link_directories(/data/coding/Libs/mongo-cxx-driver/build/src/mongocxx)
     link_directories(/data/coding/Libs/mongo-cxx-driver/build/src/bsoncxx)
     link_directories(/data/coding/Libs/mysql-connector-c++/build)
@@ -56,14 +56,16 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../External/KhronosGroup/EGL/api/)
 	
 	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/boost/)
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../ACE/ACE_wrappers/)
 
     include_directories($ENV{LibsEnvironmentBaseInclude}/)
     include_directories($ENV{LibsEnvironmentExtendInclude}/)
 	
 	link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/boost/stage/lib/)
+    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/ACE/ACE_wrappers/lib/x64/)
 
-    if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))		
-
+    if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+       
         link_directories($ENV{LibsEnvironmentX64DebugLib}/)
 
     else ()

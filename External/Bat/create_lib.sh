@@ -27,3 +27,67 @@ if [ ! -f /data/coding/External/boost_installed.txt ]; then
 	touch /data/coding/External/boost_installed.txt
 	
 fi
+
+ace_config="/data/coding/External/ACE/ACE_wrappers/ace/config.h"
+ace_platform_macros_gnu="/data/coding/External/ACE/ACE_wrappers/include/makeinclude/platform_macros.GNU"
+
+if [ ! -f /data/coding/External/ace_installed.txt ]; then
+
+    cd /data/coding/External/
+	
+	if [ ! -f /data/coding/External/ace_installed_clone.txt ]; then
+	
+		rm -rf ACE
+	 
+		if [ ! -f /data/coding/External/ACE-8.0.4.tar.gz ]; then
+			wget -O /data/coding/External/ACE-8.0.4.tar.gz https://github.com/DOCGroup/ACE_TAO/releases/download/ACE%2BTAO-8_0_4/ACE-8.0.4.tar.gz
+		fi
+		
+		# 检查下载是否成功
+		if [ $? -eq 0 ]; then
+		
+			mkdir /data/coding/External/ACE
+			
+			# 解压下载的文件
+			tar -xzf /data/coding/External/ACE-8.0.2.tar.gz -C /data/coding/External/ACE
+
+			# 检查解压是否成功
+			if [ $? -eq 0 ]; then
+				# 创建标志文件
+				touch /data/coding/External/ace_installed_clone.txt 
+			else
+				echo "解压失败"
+			fi
+		else
+			echo "下载失败"
+		fi
+	
+	fi 
+	
+	if [ -f /data/coding/External/ace_installed_clone.txt ]; then
+	
+		# 创建新的 config.h 文件
+		echo "#ifndef _CONFIG_H_" > "$ace_config"
+		echo "#define _CONFIG_H_" >> "$ace_config"
+		echo "#include \"ace/config-linux.h\"" >> "$ace_config"
+		echo "#endif" >> "$ace_config"
+
+		# 创建新的 platform_macros.GNU 文件
+		echo "include /data/coding/External/ACE/ACE_wrappers/include/makeinclude/platform_linux.GNU" > "$ace_platform_macros_gnu"	
+	
+		export ACE_ROOT="/data/coding/External/ACE/ACE_wrappers"
+	
+		cd /data/coding/External/ACE/ACE_wrappers		
+		 
+		make
+	 
+		if [ $? -eq 0 ]; then 
+	 
+			touch /data/coding/External/ace_installed.txt
+	
+		fi
+	
+	fi
+	
+fi  
+
