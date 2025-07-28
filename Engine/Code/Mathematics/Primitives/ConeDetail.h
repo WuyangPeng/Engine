@@ -16,6 +16,7 @@
 #include "Mathematics/Algebra/Matrix/MatrixDetail.h"
 #include "Mathematics/Algebra/Vector/Vector3Detail.h"
 #include "Mathematics/Meshes/UniqueVerticesSimplices.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <int N, typename Real>
 requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)

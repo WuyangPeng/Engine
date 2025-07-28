@@ -15,6 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Base/MathDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 #include <gsl/util>
 
