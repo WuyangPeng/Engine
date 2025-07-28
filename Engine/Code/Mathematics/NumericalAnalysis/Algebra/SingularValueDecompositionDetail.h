@@ -15,6 +15,7 @@
 #include "SingularValueDecomposition.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 requires(std::is_arithmetic_v<Real>)

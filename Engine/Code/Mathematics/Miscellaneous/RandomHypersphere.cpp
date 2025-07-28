@@ -12,6 +12,7 @@
 #include "RandomHypersphere.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Base/RandomDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 static void RecurseRandomPoint(int dimension, std::vector<double>& point, int index)
 {
