@@ -13,6 +13,7 @@
 #include "IntpAkimaUniform3.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/MathDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::IntpAkimaUniform3<Real>::IntpAkimaUniform3(int xBound, int yBound, int zBound, Real xMin, Real xSpacing, Real yMin, Real ySpacing, Real zMin, Real zSpacing, const Container& f)
@@ -376,8 +377,8 @@ typename Mathematics::IntpAkimaUniform3<Real>::Container Mathematics::IntpAkimaU
     const auto yPreviousBound = yBound - 1;
     const auto zPreviousBound = zBound - 1;
 
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26451)
+    #include SYSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26451)
 
     fxyz.at(0).at(0).at(0) = Math<Real>::GetValue(0);
     fxyz.at(0).at(0).at(xPreviousBound) = Math<Real>::GetValue(0);
@@ -585,7 +586,7 @@ typename Mathematics::IntpAkimaUniform3<Real>::Container Mathematics::IntpAkimaU
         }
     }
 
-#include SYSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
 
     return fxyz;
 }

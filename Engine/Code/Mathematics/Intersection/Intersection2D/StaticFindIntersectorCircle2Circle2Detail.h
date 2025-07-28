@@ -17,6 +17,7 @@
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
 #include "Mathematics/Objects2D/Circle2Detail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::StaticFindIntersectorCircle2Circle2<Real>::StaticFindIntersectorCircle2Circle2(const Circle2Type& lhsCircle, const Circle2Type& rhsCircle, const Real epsilon)

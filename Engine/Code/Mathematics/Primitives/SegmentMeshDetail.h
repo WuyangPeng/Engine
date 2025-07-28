@@ -14,9 +14,10 @@
 #include "Flags/TopologyType.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::SegmentMesh<N, Real>::SegmentMesh() noexcept
     : topology{ TopologyType::Unknown }, vertices{}, indices{}
 {
@@ -24,7 +25,7 @@ Mathematics::SegmentMesh<N, Real>::SegmentMesh() noexcept
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::SegmentMesh<N, Real>::SegmentMesh(const VerticesType& vertices)
     : topology{ TopologyType::Disjoint },
       vertices{ vertices },
@@ -45,7 +46,7 @@ Mathematics::SegmentMesh<N, Real>::SegmentMesh(const VerticesType& vertices)
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::SegmentMesh<N, Real>::SegmentMesh(const VerticesType& vertices, bool isOpen)
     : topology{ isOpen ? TopologyType::ContiguousOpen : TopologyType::ContiguousClosed },
       vertices{ vertices },
@@ -78,7 +79,7 @@ Mathematics::SegmentMesh<N, Real>::SegmentMesh(const VerticesType& vertices, boo
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::SegmentMesh<N, Real>::SegmentMesh(const VerticesType& vertices, const IndicesType& indices, bool validateIndices)
     : topology{ TopologyType::Indexed },
       vertices{ vertices },
@@ -107,7 +108,7 @@ Mathematics::SegmentMesh<N, Real>::SegmentMesh(const VerticesType& vertices, con
 #ifdef OPEN_CLASS_INVARIANT
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 bool Mathematics::SegmentMesh<N, Real>::IsValid() const noexcept
 {
     return true;
@@ -116,7 +117,7 @@ bool Mathematics::SegmentMesh<N, Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::TopologyType Mathematics::SegmentMesh<N, Real>::GetTopology() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -125,7 +126,7 @@ Mathematics::TopologyType Mathematics::SegmentMesh<N, Real>::GetTopology() const
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 typename Mathematics::SegmentMesh<N, Real>::VerticesType Mathematics::SegmentMesh<N, Real>::GetVertices() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -134,7 +135,7 @@ typename Mathematics::SegmentMesh<N, Real>::VerticesType Mathematics::SegmentMes
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 typename Mathematics::SegmentMesh<N, Real>::IndicesType Mathematics::SegmentMesh<N, Real>::GetIndices() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;

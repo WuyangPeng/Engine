@@ -12,6 +12,7 @@
 
 #include "ContPointInPolygon2.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::ContPointInPolygon2<Real>::ContPointInPolygon2(const std::vector<Vector2<Real>>& points)

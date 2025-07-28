@@ -15,6 +15,7 @@
 #include "QuerySortTools.h" 
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::Query3<Real>::Query3(const VerticesType& vertices)

@@ -13,6 +13,7 @@
 #include "CubicPolynomialCurve2.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::CubicPolynomialCurve2<Real>::CubicPolynomialCurve2(const Polynomial<Real>& xPoly, const Polynomial<Real>& yPoly)

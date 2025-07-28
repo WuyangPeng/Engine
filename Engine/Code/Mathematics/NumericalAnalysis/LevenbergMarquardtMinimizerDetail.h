@@ -13,6 +13,7 @@
 #include "LevenbergMarquardtMinimizer.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename T>
 Mathematics::LevenbergMarquardtMinimizer<T>::LevenbergMarquardtMinimizer(int numPDimensions, int numFDimensions, FFunction inFFunction, JFunction inJFunction)

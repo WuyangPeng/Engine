@@ -13,6 +13,7 @@
 #include "ContEllipsoid3MinCR.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/Random.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::ContEllipsoid3MinCR<Real>::ContEllipsoid3MinCR(const std::vector<Vector3<Real>>& points, const Vector3<Real>& c, const Matrix3<Real>& r, std::array<Real, 3>& d)

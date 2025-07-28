@@ -12,6 +12,7 @@
 
 #include "StaticFindIntersectorTriangle2Triangle2.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::StaticFindIntersectorTriangle2Triangle2(const Triangle2Type& triangle0, const Triangle2Type& triangle1, const Real epsilon)
@@ -164,7 +165,7 @@ typename Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::Intersectio
                 t = dotProduct.at(currentIndex) / (dotProduct.at(currentIndex) - dotProduct.at(previousIndex));
                 result.emplace_back(intersection.at(currentIndex) + t * (intersection.at(previousIndex) - intersection.at(currentIndex)));
             }
-            else  // firstIndex 为 0
+            else // firstIndex 为 0
             {
                 // 顶点在行的正侧。
                 auto currentIndex = 0;

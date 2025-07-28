@@ -13,12 +13,13 @@
 #include "Integration.h"
 #include "RootsPolynomial.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 #include <gsl/util>
 #include <array>
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 Mathematics::Integration<Real>::Integration() noexcept
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -27,7 +28,7 @@ Mathematics::Integration<Real>::Integration() noexcept
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 bool Mathematics::Integration<Real>::IsValid() const noexcept
 {
     return true;
@@ -36,7 +37,7 @@ bool Mathematics::Integration<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 Real Mathematics::Integration<Real>::TrapezoidRule(int numSamples, Real a, Real b, const std::function<Real(Real)>& integrand)
 {
     const auto h = (b - a) / (MathType::GetValue(numSamples) - MathType::GetValue(1));
@@ -50,7 +51,7 @@ Real Mathematics::Integration<Real>::TrapezoidRule(int numSamples, Real a, Real 
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 Real Mathematics::Integration<Real>::Romberg(int order, Real a, Real b, const std::function<Real(Real)>& integrand)
 {
     constexpr auto half = MathType::GetRational(1, 2);
@@ -85,7 +86,7 @@ Real Mathematics::Integration<Real>::Romberg(int order, Real a, Real b, const st
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 void Mathematics::Integration<Real>::ComputeQuadratureInfo(int degree, std::vector<Real>& roots, std::vector<Real>& coefficients)
 {
     constexpr auto zero = MathType::GetValue(0);
@@ -193,7 +194,7 @@ void Mathematics::Integration<Real>::ComputeQuadratureInfo(int degree, std::vect
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 Real Mathematics::Integration<Real>::GaussianQuadrature(const std::vector<Real>& roots, const std::vector<Real>& coefficients, Real a, Real b, const std::function<Real(Real)>& integrand)
 {
     constexpr auto half = MathType::GetRational(1, 2);

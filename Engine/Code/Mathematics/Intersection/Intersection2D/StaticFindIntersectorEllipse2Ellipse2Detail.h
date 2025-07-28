@@ -14,6 +14,7 @@
 #include "StaticTestIntersectorBox2Box2Detail.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/NumericalAnalysis/PolynomialRoots.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::StaticFindIntersectorEllipse2Ellipse2(const Ellipse2Type& ellipse0, const Ellipse2Type& ellipse1, const Real epsilon)
@@ -118,10 +119,10 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Find()
     const auto matrix1Axis1 = matrix1 * ellipse0.GetAxis1();
 
     const CoeffType coeff{ Vector2ToolsType::DotProduct(matrix1Center0MinusCenter1, center0MinusCenter1) - MathType::GetValue(1),
-                           (MathType::GetValue(2))*ellipse0.GetExtent0() * Vector2ToolsType::DotProduct(matrix1Axis0, center0MinusCenter1),
-                           (MathType::GetValue(2))*ellipse0.GetExtent1() * Vector2ToolsType::DotProduct(matrix1Axis1, center0MinusCenter1),
+                           (MathType::GetValue(2)) * ellipse0.GetExtent0() * Vector2ToolsType::DotProduct(matrix1Axis0, center0MinusCenter1),
+                           (MathType::GetValue(2)) * ellipse0.GetExtent1() * Vector2ToolsType::DotProduct(matrix1Axis1, center0MinusCenter1),
                            ellipse0.GetExtent0() * ellipse0.GetExtent0() * Vector2ToolsType::DotProduct(matrix1Axis0, ellipse0.GetAxis0()),
-                           (MathType::GetValue(2))*ellipse0.GetExtent0() * ellipse0.GetExtent1() * Vector2ToolsType::DotProduct(matrix1Axis0, ellipse0.GetAxis1()),
+                           (MathType::GetValue(2)) * ellipse0.GetExtent0() * ellipse0.GetExtent1() * Vector2ToolsType::DotProduct(matrix1Axis0, ellipse0.GetAxis1()),
                            ellipse0.GetExtent1() * ellipse0.GetExtent1() * Vector2ToolsType::DotProduct(matrix1Axis1, ellipse0.GetAxis1()) };
 
     /// 求解二次方，保存这些值以供以后测试接近零和根部抛光的程度。
@@ -133,7 +134,7 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Find()
     constexpr auto measurementSize = 8;
     using MeasurementContainer = std::array<Measurement, measurementSize>;
 
-    MeasurementContainer measure{};  // 储存 <x,y,sqrt(Q0^2 + S1^2)>
+    MeasurementContainer measure{}; // 储存 <x,y,sqrt(Q0^2 + S1^2)>
 
     auto indexX = 0;
     for (auto begin = polynomialRoots.GetBegin(); begin != polynomialRoots.GetEnd(); ++begin)
@@ -251,9 +252,9 @@ Mathematics::Polynomial<Real> Mathematics::StaticFindIntersectorEllipse2Ellipse2
 
     Polynomial<Real> poly{ 4 };
     poly[0] = d01 * d13 - d30 * d30;
-    poly[1] = d01 * d43 + d04p21 * d13 - (MathType::GetValue(2))*d30 * d32;
-    poly[2] = d04p21 * d43 + d24p51 * d13 - (MathType::GetValue(2))*d30 * d35 - d32 * d32;
-    poly[3] = d24p51 * d43 + d54 * d13 - (MathType::GetValue(2))*d32 * d35;
+    poly[1] = d01 * d43 + d04p21 * d13 - (MathType::GetValue(2)) * d30 * d32;
+    poly[2] = d04p21 * d43 + d24p51 * d13 - (MathType::GetValue(2)) * d30 * d35 - d32 * d32;
+    poly[3] = d24p51 * d43 + d54 * d13 - (MathType::GetValue(2)) * d32 * d35;
     poly[4] = d54 * d43 - d35 * d35;
 
     return poly;

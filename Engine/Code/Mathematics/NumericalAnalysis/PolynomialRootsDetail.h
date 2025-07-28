@@ -14,13 +14,14 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Mathematics/Algebra/PolynomialDivideDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 #include <gsl/util>
 
 template <typename Real>
 Mathematics::PolynomialRoots<Real>::PolynomialRoots(Real epsilon)
     : count{ 0 },
-      maxRoot{ 4 },  // 默认支持维度 <= 4
+      maxRoot{ 4 }, // 默认支持维度 <= 4
       root(maxRoot),
       epsilon{ epsilon },
       maxIterations{ 128 }
@@ -180,12 +181,12 @@ Real Mathematics::PolynomialRoots<Real>::GetBound(Real constant, Real once, Real
         // 方程是一次的
         if (FindAlgebraic(constant, once))
         {
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+            #include SYSTEM_WARNING_PUSH
+            #include SYSTEM_WARNING_DISABLE(26446)
 
             return root[0];
 
-#include SYSTEM_WARNING_POP
+            #include SYSTEM_WARNING_POP
         }
         else
         {
@@ -223,7 +224,7 @@ bool Mathematics::PolynomialRoots<Real>::FindAlgebraic(Real constant, Real once,
     const auto a = once - secondary * offset;
     const auto b = constant + secondary * (MathType::GetValue(2) * secondary * secondary - MathType::GetValue(9) * once) * twentySeventh;
 
-    const auto halfB = (MathType::GetRational(1, 2))*b;
+    const auto halfB = (MathType::GetRational(1, 2)) * b;
 
     auto discriminant = halfB * halfB + a * a * a * twentySeventh;
 
@@ -237,7 +238,7 @@ bool Mathematics::PolynomialRoots<Real>::FindAlgebraic(Real constant, Real once,
         SetRoot(1, -halfBPowThird - offset);
         count = 2;
     }
-    else if (MathType::GetValue(0) < discriminant)  // 1实,2虚根
+    else if (MathType::GetValue(0) < discriminant) // 1实,2虚根
     {
         discriminant = MathType::Sqrt(discriminant);
         const auto discriminantMinusHalfB = -halfB + discriminant;
@@ -249,7 +250,7 @@ bool Mathematics::PolynomialRoots<Real>::FindAlgebraic(Real constant, Real once,
         SetRoot(0, cubeRoot);
         count = 1;
     }
-    else  // if (discr <  MathType::sm_Zero)
+    else // if (discr <  MathType::sm_Zero)
     {
         const auto dist = MathType::Sqrt(-third * a);
         const auto angle = third * MathType::ATan2(MathType::Sqrt(-discriminant), -halfB);
@@ -281,7 +282,7 @@ bool Mathematics::PolynomialRoots<Real>::FindEigenvalues(Real constant, Real onc
     secondary /= thrice;
 
     // 构造3×3协同矩阵。
-    VariableMatrixType matrix{ 3, 3 };  // 初始化为0。
+    VariableMatrixType matrix{ 3, 3 }; // 初始化为0。
     matrix(1, 0) = MathType::GetValue(1);
     matrix(2, 1) = MathType::GetValue(1);
     matrix(0, 2) = -constant;
@@ -476,8 +477,8 @@ void Mathematics::PolynomialRoots<Real>::FrancisQRStep(VariableMatrixType& hesse
     auto det = hessenbergMatrix(rowsNumber - 2, rowsNumber - 2) * hessenbergMatrix(rowsNumber - 1, rowsNumber - 1) -
                hessenbergMatrix(rowsNumber - 2, rowsNumber - 1) * hessenbergMatrix(rowsNumber - 1, rowsNumber - 2);
     Vector3Type uVector{ hessenbergMatrix(0, 0) * hessenbergMatrix(1, 1) + hessenbergMatrix(0, 1) * hessenbergMatrix(1, 0) - trace * hessenbergMatrix(0, 0) + det,
-                     hessenbergMatrix(1, 0) * (hessenbergMatrix(0, 0) + hessenbergMatrix(1, 1) - trace),
-                     hessenbergMatrix(1, 0) * hessenbergMatrix(2, 1) };
+                         hessenbergMatrix(1, 0) * (hessenbergMatrix(0, 0) + hessenbergMatrix(1, 1) - trace),
+                         hessenbergMatrix(1, 0) * hessenbergMatrix(2, 1) };
 
     // 覆盖H 使用 P(0) * H * P(0)^T.
     auto vVector = GetHouseholderVector(3, uVector);
@@ -1201,7 +1202,7 @@ bool Mathematics::PolynomialRoots<Real>::QRIteration4(VariableMatrixType& matrix
             root.at(count++) = saveRoot.at(j);
         }
     }
-    else  // i == 2
+    else // i == 2
     {
         // matrix(3,3)是一个根，减少3×3子矩阵
         // 避免拷贝，并通过行/列偏移量的FrancisQR方法。

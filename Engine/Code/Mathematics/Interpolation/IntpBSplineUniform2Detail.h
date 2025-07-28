@@ -13,6 +13,7 @@
 #include "IntpBSplineUniform2.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/MathDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::IntpBSplineUniform2<Real>::IntpBSplineUniform2(int degree, const std::vector<int>& dim, const std::vector<Real>& data)

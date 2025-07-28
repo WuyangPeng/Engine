@@ -14,6 +14,7 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/MemoryTools/LexicoArray2Detail.h"
 #include "Mathematics/Base/MathDetail.h"
 

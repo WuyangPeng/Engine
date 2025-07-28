@@ -13,6 +13,7 @@
 #include "IntersectorUtility3.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 typename Mathematics::IntersectorUtility3<Real>::Container Mathematics::IntersectorUtility3<Real>::ClipConvexPolygonAgainstPlane(const Vector3Type& normal, Real constant, const Container& point)
@@ -66,7 +67,7 @@ typename Mathematics::IntersectorUtility3<Real>::Container Mathematics::Intersec
                     // vertex0为正，vertex1被裁剪
                     clip = 1;
                 }
-                else  // pIndex == 1
+                else // pIndex == 1
                 {
                     // vertex1为正， vertex0被裁剪
                     clip = 0;
@@ -121,7 +122,7 @@ typename Mathematics::IntersectorUtility3<Real>::Container Mathematics::Intersec
                     t = dotProduct.at(curIndex) / (dotProduct.at(curIndex) - dotProduct.at(prvIndex));
                     container.emplace_back(result.at(curIndex) + t * (result.at(prvIndex) - result.at(curIndex)));
                 }
-                else  // index is 0
+                else // index is 0
                 {
                     // 线正侧的顶点
                     auto curIndex = 0;

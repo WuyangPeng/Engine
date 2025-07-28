@@ -14,6 +14,7 @@
 #include "QueryDotToolsDetail.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::Query2Int64<Real>::Query2Int64(const VerticesType& vertices)

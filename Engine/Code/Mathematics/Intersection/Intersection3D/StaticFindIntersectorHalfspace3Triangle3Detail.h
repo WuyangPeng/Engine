@@ -13,6 +13,7 @@
 #include "IntersectorUtility3Detail.h"
 #include "StaticFindIntersectorHalfspace3Triangle3.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::StaticFindIntersectorHalfspace3Triangle3<Real>::StaticFindIntersectorHalfspace3Triangle3(const Plane3Type& halfspace, const Triangle3Type& triangle, const Real epsilon)

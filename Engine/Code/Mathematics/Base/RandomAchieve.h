@@ -13,13 +13,14 @@
 #include "MathDetail.h"
 #include "Random.h"
 #include "CoreTools/Time/CustomTime.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 #include <algorithm>
 #include <chrono>
 #include <random>
 
 template <typename Real>
-requires std::is_floating_point_v<Real>
+    requires std::is_floating_point_v<Real>
 Real Mathematics::Random<Real>::UnitRandom(uint32_t seed)
 {
     if (0 < seed)
@@ -41,7 +42,7 @@ Real Mathematics::Random<Real>::UnitRandom(uint32_t seed)
 }
 
 template <typename Real>
-requires std::is_floating_point_v<Real>
+    requires std::is_floating_point_v<Real>
 Real Mathematics::Random<Real>::SymmetricRandom(uint32_t seed)
 {
     const auto ratio = (MathType::GetValue(2) * UnitRandom(seed)) - MathType::GetValue(1);
@@ -52,7 +53,7 @@ Real Mathematics::Random<Real>::SymmetricRandom(uint32_t seed)
 }
 
 template <typename Real>
-requires std::is_floating_point_v<Real>
+    requires std::is_floating_point_v<Real>
 Real Mathematics::Random<Real>::IntervalRandom(Real min, Real max, uint32_t seed)
 {
     MATHEMATICS_ASSERTION_3(min <= max, "设定的最小值大于最大值");

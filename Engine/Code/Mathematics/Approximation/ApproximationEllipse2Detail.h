@@ -18,11 +18,12 @@
 #include "Mathematics/NumericalAnalysis/RootsPolynomialDetail.h"
 #include "Mathematics/NumericalAnalysis/SymmetricEigensolver2x2Detail.h"
 #include "Mathematics/Primitives/OrientedBox.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 #include <map>
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 Mathematics::ApproximationEllipse2<Real>::ApproximationEllipse2() noexcept
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -31,7 +32,7 @@ Mathematics::ApproximationEllipse2<Real>::ApproximationEllipse2() noexcept
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 bool Mathematics::ApproximationEllipse2<Real>::IsValid() const noexcept
 {
     return true;
@@ -40,7 +41,7 @@ bool Mathematics::ApproximationEllipse2<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 Real Mathematics::ApproximationEllipse2<Real>::operator()(const Vector2Container& points, int numIterations, bool useEllipseForInitialGuess, Ellipse2& ellipse)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -92,7 +93,7 @@ Real Mathematics::ApproximationEllipse2<Real>::operator()(const Vector2Container
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 Real Mathematics::ApproximationEllipse2<Real>::UpdateCenter(const Vector2Container& points, const Matrix2x2& m, Vector2& c)
 {
     constexpr Real zero = MathType::GetValue(0);
@@ -175,7 +176,7 @@ Real Mathematics::ApproximationEllipse2<Real>::UpdateCenter(const Vector2Contain
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 Real Mathematics::ApproximationEllipse2<Real>::UpdateMatrix(const Vector2Container& points, const Vector2& c, Matrix2x2& m)
 {
     constexpr Real zero = MathType::GetValue(0);
@@ -261,7 +262,7 @@ Real Mathematics::ApproximationEllipse2<Real>::UpdateMatrix(const Vector2Contain
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 Real Mathematics::ApproximationEllipse2<Real>::ErrorFunction(const Vector2Container& points, const Vector2& c, const Matrix2x2& m) const
 {
     Real error{};

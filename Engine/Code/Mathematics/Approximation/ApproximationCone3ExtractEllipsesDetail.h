@@ -16,9 +16,10 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/ComputationalGeometry/OrientedBoundingBoxTreeOfPoints.h"
 #include "Mathematics/Objects2D/Ellipse2.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 Mathematics::ApproximationCone3ExtractEllipses<Real>::ApproximationCone3ExtractEllipses() noexcept
     : boxExtentEpsilon{},
       cosAngleEpsilon{},
@@ -34,7 +35,7 @@ Mathematics::ApproximationCone3ExtractEllipses<Real>::ApproximationCone3ExtractE
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 bool Mathematics::ApproximationCone3ExtractEllipses<Real>::IsValid() const noexcept
 {
     return true;
@@ -43,7 +44,7 @@ bool Mathematics::ApproximationCone3ExtractEllipses<Real>::IsValid() const noexc
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 void Mathematics::ApproximationCone3ExtractEllipses<Real>::Extract(const Vector3Container& points, Real aBoxExtentEpsilon, Real aCosAngleEpsilon, const Ellipse3Container& aEllipses)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -69,7 +70,7 @@ void Mathematics::ApproximationCone3ExtractEllipses<Real>::Extract(const Vector3
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 typename Mathematics::ApproximationCone3ExtractEllipses<Real>::Ellipse3Container Mathematics::ApproximationCone3ExtractEllipses<Real>::GetEllipses() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -78,7 +79,7 @@ typename Mathematics::ApproximationCone3ExtractEllipses<Real>::Ellipse3Container
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 typename Mathematics::ApproximationCone3ExtractEllipses<Real>::OrientedBoundingBoxNodeContainer Mathematics::ApproximationCone3ExtractEllipses<Real>::GetOrientedBoundingBoxTree() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -87,7 +88,7 @@ typename Mathematics::ApproximationCone3ExtractEllipses<Real>::OrientedBoundingB
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 typename Mathematics::ApproximationCone3ExtractEllipses<Real>::Plane3Container Mathematics::ApproximationCone3ExtractEllipses<Real>::GetPlanes() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -96,7 +97,7 @@ typename Mathematics::ApproximationCone3ExtractEllipses<Real>::Plane3Container M
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 typename Mathematics::ApproximationCone3ExtractEllipses<Real>::IndicesContainer Mathematics::ApproximationCone3ExtractEllipses<Real>::GetIndices() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -105,7 +106,7 @@ typename Mathematics::ApproximationCone3ExtractEllipses<Real>::IndicesContainer 
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 typename Mathematics::ApproximationCone3ExtractEllipses<Real>::OrientedBox3Container Mathematics::ApproximationCone3ExtractEllipses<Real>::GetBoxes() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -114,7 +115,7 @@ typename Mathematics::ApproximationCone3ExtractEllipses<Real>::OrientedBox3Conta
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 void Mathematics::ApproximationCone3ExtractEllipses<Real>::CreateOrientedBoundingBoxTree(const Vector3Container& points)
 {
     OrientedBoundingBoxTreeOfPoints<Real> creator{};
@@ -123,7 +124,7 @@ void Mathematics::ApproximationCone3ExtractEllipses<Real>::CreateOrientedBoundin
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 void Mathematics::ApproximationCone3ExtractEllipses<Real>::LocatePlanes(int nodeIndex)
 {
     const auto& node = orientedBoundingBoxTree.at(nodeIndex);
@@ -153,7 +154,7 @@ void Mathematics::ApproximationCone3ExtractEllipses<Real>::LocatePlanes(int node
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 void Mathematics::ApproximationCone3ExtractEllipses<Real>::ProcessPlane(const Plane3& plane)
 {
     const auto epsilon = cosAngleEpsilon;
@@ -188,7 +189,7 @@ void Mathematics::ApproximationCone3ExtractEllipses<Real>::ProcessPlane(const Pl
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 void Mathematics::ApproximationCone3ExtractEllipses<Real>::AssociatePointsWithPlanes(const Vector3Container& points)
 {
     indices.resize(planes.size());
@@ -214,7 +215,7 @@ void Mathematics::ApproximationCone3ExtractEllipses<Real>::AssociatePointsWithPl
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 typename Mathematics::ApproximationCone3ExtractEllipses<Real>::Ellipse3 Mathematics::ApproximationCone3ExtractEllipses<Real>::ComputeEllipse(const Vector3Container& points, const IndicesType& aIndices)
 {
     /// 使用三维高斯分布拟合点。

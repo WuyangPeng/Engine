@@ -12,6 +12,7 @@
 
 #include "ContPointInPolygon2.h"
 #include "ContPointInPolyhedron3.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Intersection/Intersection3D/StaticFindIntersectorRay3Plane3.h"
 #include "Mathematics/Intersection/Intersection3D/StaticTestIntersectorRay3Plane3.h"
