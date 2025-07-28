@@ -10,7 +10,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>../../../Code/;../../../../External/GSL/include/;../../../../External/KhronosGroup/OpenGL/api/;../../../../External/KhronosGroup/EGL/api/;../../../../Libs/boost/;$(LibsEnvironmentBaseInclude);$(LibsEnvironmentExtendInclude);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../Code/;../../../../External/GSL/include/;../../../../External/KhronosGroup/OpenGL/api/;../../../../External/KhronosGroup/EGL/api/;../../../../Libs/boost/;../../../../Libs/ACE/ACE_wrappers/;$(LibsEnvironmentBaseInclude);$(LibsEnvironmentExtendInclude);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
