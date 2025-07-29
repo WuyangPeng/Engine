@@ -41,7 +41,7 @@
   （1）./bootstrap.sh --with-libraries=all --with-toolset=gcc  
   （2）./b2 install --prefix=/data/coding/Libs/boost/stage/ cxxflags="-std=c++20"
 
-----------------------------
+---
 ## ACE（引擎通过宏NETWORK_USE_ACE关联）
 
 1. 版本：8.0.4。
@@ -58,7 +58,7 @@
    然后再编译Win32版本，手动将ACE\ACE_wrappers\lib下文件复制到ACE\ACE_wrappers\lib\Win32。  
    可使用ACE下的批处理文件CopyACEWin32和CopyACEX64执行。
 
-----------------------------
+---
 ## openssl（引擎通过宏NETWORK_USE_OPENSSL关联）
 
 1. 版本：3.5.1。
@@ -74,17 +74,6 @@
    perl Configure VC-WIN64A --prefix=($openssl)\x64\Release（编译x64 release版）。  
 8. 执行 nmake、nmake test、nmake install。  
 9. 编译四个版本中需要执行 nmake clean，再输入下个版本的perl语句。
-
-----------------------------
-
-## mysql （引擎通过宏DATABASE_USE_MYSQL_C_API关联）
-1.  版本：8.0.33。
-2.  官方网站：https://www.mysql.com/。
-3.  编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
-4.  定义WITHOUT_SERVER。
-5.  定义正确的BOOST_INCLUDE_DIR到($boost)。
-6.  boost.cmake 41行、304行、306行、314行改成当前使用的boost库版本。
-7.  定义正确的OPENSSL_ROOT_DIR到($openssl)，需要链接对应版本的openssl。
 
 ----------------------------
 ## mysql connector c++（引擎通过宏DATABASE_USE_MYSQL_CPP_CONNECTOR关联）
