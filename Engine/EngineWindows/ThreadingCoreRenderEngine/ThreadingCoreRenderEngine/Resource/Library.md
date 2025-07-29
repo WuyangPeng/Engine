@@ -69,7 +69,7 @@
 5. 下载并安装 Nasm 汇编器，并将($NASM)\目录添加到系统环境变量 Path 中。
    下载地址：http://www.nasm.us/ 。
 6. 通过管理员身份运行VS，并打开命令提示符，定位至 ($openssl)目录
-7. 输入perl Configure VC-WIN32 --debug --prefix=($openssl)\Win32\Debug（编译debug版），
+7. 输入perl Configure VC-WIN32 --debug --prefix=($openssl)\Win32\Debug（编译debug版），  
    perl Configure VC-WIN32 --prefix=($openssl)\Win32\Release（编译release版本），    
    会出现错误，可忽略。
 8. 编译X64，转到目录Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build下运行vcvars64.bat，
