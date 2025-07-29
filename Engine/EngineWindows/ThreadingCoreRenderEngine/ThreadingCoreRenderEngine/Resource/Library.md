@@ -61,21 +61,19 @@
 ----------------------------
 ## openssl（引擎通过宏NETWORK_USE_OPENSSL关联）
 
-1. 版本：3.0.9。
+1. 版本：3.5.1。
 2. 官方网站：https://www.openssl.org/ 。
-3. 下载并安装 ActivePerl。下载地址：http://www.activestate.com/activeperl/downloads 
-4. 打开命令提示符，定位到 ($Perl64)\eg 目录，执行 perl example.pl，
-   若提示 Hello from ActivePerl! 则说明 Perl 安装成功。
-5. 下载并安装 Nasm 汇编器，并将($NASM)\目录添加到系统环境变量 Path 中。
+3. 下载并安装 Strawberry Perl。下载地址：https://strawberryperl.com/
+4. 下载并安装 Nasm 汇编器，并将($NASM)\目录添加到系统环境变量 Path 中。
    下载地址：http://www.nasm.us/ 。
-6. 通过管理员身份运行VS，并打开命令提示符，定位至 ($openssl)目录
-7. 输入perl Configure VC-WIN32 --debug --prefix=($openssl)\Win32\Debug（编译debug版），  
+5. 通过管理员身份运行VS，并打开命令提示符，定位至 ($openssl)目录。
+6. 输入perl Configure VC-WIN32 --debug --prefix=($openssl)\Win32\Debug（编译debug版），  
    perl Configure VC-WIN32 --prefix=($openssl)\Win32\Release（编译release版本），    
    会出现错误，可忽略。
-8. 编译X64，转到目录Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build下运行vcvars64.bat，
+7. 编译X64，转到目录Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build下运行vcvars64.bat，
    然后输入 perl Configure VC-WIN64A --debug --prefix=($openssl)\X64\Debug（编译debug版）。
    perl Configure VC-WIN64A --prefix=($openssl)\X64\Release（编译release版）。    
-9. 编译四个版本中需要执行 nmake clean，再输入perl语句。然后
+8. 编译四个版本中需要执行 nmake clean，再输入perl语句。然后
    执行 nmake、nmake test、nmake install。
 
 ----------------------------
