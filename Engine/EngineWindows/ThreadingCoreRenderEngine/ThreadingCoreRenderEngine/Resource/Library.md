@@ -67,14 +67,13 @@
 4. 下载并安装 Nasm 汇编器，并将($NASM)\目录添加到系统环境变量 Path 中。
    下载地址：http://www.nasm.us/ 。
 5. 通过管理员身份运行VS，并打开命令提示符，定位至 ($openssl)目录。
-6. 输入perl Configure VC-WIN32 --debug --prefix=($openssl)\Win32\Debug（编译debug版），  
-   perl Configure VC-WIN32 --prefix=($openssl)\Win32\Release（编译release版本），    
-   会出现错误，可忽略。
-7. 编译X64，转到目录Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build下运行vcvars64.bat，
-   然后输入 perl Configure VC-WIN64A --debug --prefix=($openssl)\X64\Debug（编译debug版）。
-   perl Configure VC-WIN64A --prefix=($openssl)\X64\Release（编译release版）。    
-8. 编译四个版本中需要执行 nmake clean，再输入perl语句。然后
-   执行 nmake、nmake test、nmake install。
+6. 如果正在编译X64，转到目录Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build下运行vcvars64.bat，
+7. 输入perl语句：perl Configure VC-WIN32 --debug --prefix=($openssl)\Win32\Debug（编译Win32 debug版），  
+   perl Configure VC-WIN32 --prefix=($openssl)\Win32\Release（编译Win32 release版本），  
+   perl Configure VC-WIN64A --debug --prefix=($openssl)\x64\Debug（编译x64 debug版），  
+   perl Configure VC-WIN64A --prefix=($openssl)\x64\Release（编译x64 release版）。  
+8. 执行 nmake、nmake test、nmake install。  
+9. 编译四个版本中需要执行 nmake clean，再输入下个版本的perl语句。
 
 ----------------------------
 
