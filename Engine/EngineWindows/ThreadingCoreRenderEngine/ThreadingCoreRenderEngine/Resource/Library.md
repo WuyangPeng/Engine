@@ -83,17 +83,12 @@
 4.  定义WITHOUT_SERVER。
 5.  定义正确的OPENSSL_ROOT_DIR到($openssl)，需要链接对应版本的openssl。
 
-----------------------------
+---
 ## mysql connector c++（引擎通过宏DATABASE_USE_MYSQL_CPP_CONNECTOR关联）
-1. 版本：8.0.33。
+1. 版本：9.4.0。
 2. 官方网站：https://www.mysql.com/。
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 4. 设置正确的WITH_SSL（原为system）指向对应版本的($openssl)，如编译的是x64版本，需要指向x64的openssl。
-5. WIN32版本如果无法编译，使用CMake重新生成以下工程：
-   $(MysqlConnectorCpp)\cdk\extra\zlib，生成目录：$(MysqlConnectorCpp)\BuildWin32\cdk\protocol\mysqlx\zlib
-   $(MysqlConnectorCpp)\cdk\extra\zstd 生成目录：$(MysqlConnectorCpp)\BuildWin32\cdk\protocol\mysqlx\zstd
-   $(MysqlConnectorCpp)\cdk\extra\lz4 生成目录：$(MysqlConnectorCpp)\BuildWin32\cdk\protocol\mysqlx\lz4
-   $(MysqlConnectorCpp)\cdk\extra\protobuf 生成目录：$(MysqlConnectorCpp)\BuildWin32\cdk\protocol\mysqlx\protobuf
    
 ----------------------------  
 ## protobuf（引擎通过宏NETWORK_USE_PROTOBUF关联）

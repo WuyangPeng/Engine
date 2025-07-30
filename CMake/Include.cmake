@@ -5,6 +5,8 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     include_directories(/data/coding/External/GSL/include/)
     include_directories(/data/coding/External/boost/)
     include_directories(/data/coding/External/ACE/ACE_wrappers/)
+    include_directories(/data/coding/External/mysql-connector-c++/include/)
+    include_directories(/data/coding/External/mysql-connector-c++/build/include/mysqlx/)
 
     include_directories(/data/coding/Libs/miniz/)
     include_directories(/data/coding/Libs/miniz/build/)
@@ -16,17 +18,15 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     include_directories(/data/coding/Libs/mongo-cxx-driver/src/mongocxx/include/)
     include_directories(/data/coding/Libs/mongo-cxx-driver/src/bsoncxx/include/bsoncxx/v_noabi/)
     include_directories(/data/coding/Libs/mongo-cxx-driver/build/src/bsoncxx/lib/)
-    include_directories(/data/coding/Libs/mongo-cxx-driver/src/bsoncxx/include/)
-    include_directories(/data/coding/Libs/mysql-connector-c++/include/)
-    include_directories(/data/coding/Libs/mysql-connector-c++/build/include/mysqlx/)
+    include_directories(/data/coding/Libs/mongo-cxx-driver/src/bsoncxx/include/)    
     include_directories(/data/coding/Libs/hiredis/)
 
     link_directories(/data/coding/External/boost/stage/lib)	
     link_directories(/data/coding/External/ACE/ACE_wrappers/lib)
+    link_directories(/data/coding/External/mysql-connector-c++/build)
 
     link_directories(/data/coding/Libs/mongo-cxx-driver/build/src/mongocxx)
-    link_directories(/data/coding/Libs/mongo-cxx-driver/build/src/bsoncxx)
-    link_directories(/data/coding/Libs/mysql-connector-c++/build)
+    link_directories(/data/coding/Libs/mongo-cxx-driver/build/src/bsoncxx)    
     link_directories(/data/coding/Libs/activemq/src/main/.libs)
     link_directories(/data/coding/Libs/miniz/build)
     link_directories(/data/coding/Libs/hiredis/build)
@@ -73,10 +73,12 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
        
         link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/mysql/BuildX64/archive_output_directory/Debug/)
+        link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/mysql-connector-c++/BuildX64//Debug/)
 
     else ()
 
         link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/mysql/BuildX64/archive_output_directory/Release/)
+        link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/mysql-connector-c++/BuildX64//Release/)
 
     endif ()
 

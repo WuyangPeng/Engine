@@ -2,3 +2,4 @@ boost/
 ACE/
 openssl/
 mysql/
+mysql-connector-c++/

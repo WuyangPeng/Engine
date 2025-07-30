@@ -91,3 +91,45 @@ if [ ! -f /data/coding/External/ace_installed.txt ]; then
 	
 fi  
 
+if [ ! -f /data/coding/External/mysql_connector_cpp_installed.txt ]; then
+
+    cd /data/coding/External/
+	
+	if [ ! -f /data/coding/External/mysql_connector_cpp_installed_clone.txt ]; then
+	
+		rm -rf mysql-connector-c++
+
+		git clone https://github.com/mysql/mysql-connector-cpp.git mysql-connector-c++
+		
+		if [ $? -eq 0 ]; then 
+	 
+			touch /data/coding/Libs/mysql_connector_cpp_installed_clone.txt
+	
+		fi
+	
+	fi 
+	
+	if [ -f /data/coding/External/mysql_connector_cpp_installed_clone.txt ]; then
+	
+		cd /data/coding/External/mysql-connector-c++
+	
+		mkdir -p build
+		cd build
+
+		cmake .. -DCMAKE_BUILD_TYPE=Release
+		
+		cd /data/coding/External/mysql-connector-c++/build/cdk/protocol/mysqlx/protobuf
+		make
+		
+		cd /data/coding/External/mysql-connector-c++/build
+		make 
+	 
+		if [ $? -eq 0 ]; then 
+	 
+			touch /data/coding/External/mysql_connector_cpp_installed.txt
+	
+		fi
+	
+	fi
+	
+fi
