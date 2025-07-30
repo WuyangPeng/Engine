@@ -10,7 +10,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>../../../Code/;../../../../External/GSL/include/;../../../../External/KhronosGroup/OpenGL/api/;../../../../External/KhronosGroup/EGL/api/;../../../../Libs/boost/;../../../../Libs/ACE/ACE_wrappers/;../../../../Libs/mysql/include/;../../../../Libs/mysql-connector-c++/include/;../../../../Libs/protobuf/src/;../../../../Libs/freeglut/include/;../../../../Libs/vld/src/;../../../../Libs/zlib/;../../../../Libs/freetype/include/;../../../../Libs/OpenXLSX/;../../../../Libs/pugixml/src/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../Code/;../../../../External/GSL/include/;../../../../External/KhronosGroup/OpenGL/api/;../../../../External/KhronosGroup/EGL/api/;../../../../Libs/boost/;../../../../Libs/ACE/ACE_wrappers/;../../../../Libs/mysql/include/;../../../../Libs/mysql-connector-c++/include/;../../../../Libs/protobuf/src/;../../../../Libs/freeglut/include/;../../../../Libs/vld/src/;../../../../Libs/zlib/;../../../../Libs/freetype/include/;../../../../Libs/OpenXLSX/;../../../../Libs/pugixml/src/;$(LibsEnvironmentBaseInclude);$(LibsEnvironmentExtendInclude);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>

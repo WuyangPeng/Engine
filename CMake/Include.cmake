@@ -80,6 +80,21 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
     endif ()
 
+    include_directories($ENV{LibsEnvironmentBaseInclude}/)
+    include_directories($ENV{LibsEnvironmentExtendInclude}/)
+
+        if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+       
+        link_directories($ENV{LibsEnvironmentX64DebugLib}/) 
+
+    else ()
+
+        link_directories($ENV{LibsEnvironmentX64ReleaseLib}/) 
+
+    endif ()
+
+    link_directories($ENV{LibsEnvironmentX64Lib}/)
+
 else ()
 
     # 其他平台下的操作
