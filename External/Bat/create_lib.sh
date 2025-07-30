@@ -106,7 +106,7 @@ if [ ! -f /data/coding/External/mysql_connector_cpp_installed.txt ]; then
 		if [ $? -eq 0 ]; then 
 		
 			cd mysql-connector-c++
-			git checkout "tags/${TAG}" -b "build-${TAG}"
+			git checkout "tags/${mysql_connector_cpp_tag}" -b "build-${mysql_connector_cpp_tag}"
 			cd ..
 	 
 			touch /data/coding/External/mysql_connector_cpp_installed_clone.txt
