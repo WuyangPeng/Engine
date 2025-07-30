@@ -3,3 +3,4 @@ ACE/
 openssl/
 mysql/
 mysql-connector-c++/
+protobuf/

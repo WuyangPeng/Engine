@@ -90,17 +90,20 @@
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 4. 设置正确的WITH_SSL（原为system）指向对应版本的($openssl)，如编译的是x64版本，需要指向x64的openssl。
    
-----------------------------  
+---
 ## protobuf（引擎通过宏NETWORK_USE_PROTOBUF关联）
-1. 版本：21.12。
+1. 版本：31.1。
 2. 官方网站：https://github.com/protocolbuffers/protobuf。
 3. git地址：https://github.com/protocolbuffers/protobuf.git。
 4. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 5. 选中protobuf_BUILD_SHARED_LIBS。
-6. port_def.inc尾部增加
-   #ifdef PROTO_BUF_PRAGMA_WARNING
-	#include "System/Helper/PragmaWarning/ProtoBuf.inl"
-   #endif
+6. 将无法通过编译的工程的C++ 标准改成 /std:c++latest。
+7. port_def.inc尾部增加  
+   #ifdef PROTO_BUF_PRAGMA_WARNING  
+       
+	   #include "System/Helper/PragmaWarning/ProtoBuf.inl"  
+   
+   #endif  
 
 ----------------------------
 ## freeglut（引擎通过宏SYSTEM_USE_GLUT关联）
