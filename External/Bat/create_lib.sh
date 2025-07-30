@@ -91,6 +91,8 @@ if [ ! -f /data/coding/External/ace_installed.txt ]; then
 	
 fi  
 
+mysql_connector_cpp_tag="9.4.0"
+
 if [ ! -f /data/coding/External/mysql_connector_cpp_installed.txt ]; then
 
     cd /data/coding/External/
@@ -102,6 +104,10 @@ if [ ! -f /data/coding/External/mysql_connector_cpp_installed.txt ]; then
 		git clone https://github.com/mysql/mysql-connector-cpp.git mysql-connector-c++
 		
 		if [ $? -eq 0 ]; then 
+		
+			cd mysql-connector-c++
+			git checkout "tags/${TAG}" -b "build-${TAG}"
+			cd ..
 	 
 			touch /data/coding/External/mysql_connector_cpp_installed_clone.txt
 	
