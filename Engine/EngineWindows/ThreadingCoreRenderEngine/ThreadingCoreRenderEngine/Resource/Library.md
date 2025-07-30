@@ -114,19 +114,6 @@
 4. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 
 ----------------------------
-## wxWidgets（引擎通过宏USER_INTERFACE_USE_WX_WIDGETS关联）
-
-1. 版本：3.2.0。
-2. 官方网站：http://www.wxwidgets.org/。
-
-----------------------------
-## opencv（引擎通过宏IMAGICS_USE_OPENCV关联）
-
-1. 版本：4.6.0。
-2. 官方网站：https://opencv.org/
-3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
-
-----------------------------
 ## Visual Leak Detector（引擎Debug版本直接关联）
 
 1. 版本：2.7.0。
@@ -138,13 +125,6 @@
    #elif _MSC_VER > 1927	// VS 2019
    #define CRTDLLNAME   _T("ucrtbase.dll") 
 5. src\tests下Common.props第18行改成v142。
-
-----------------------------
-## OpenAL Soft（引擎通过宏SOUND_EFFECT_USE_OPENAL关联）
-
-1. 版本：1.22.2。
-2. 官方网站：https://www.openal-soft.org/。
-3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 
 ----------------------------
 ## zlib（引擎直接关联）
