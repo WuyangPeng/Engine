@@ -105,12 +105,12 @@
    
    #endif  
 
-----------------------------
+---
 ## freeglut（引擎通过宏SYSTEM_USE_GLUT关联）
 
-1. 版本：3.2.2。
+1. 版本：3.6.0。
 2. 官方网站：http://freeglut.sourceforge.net/。
-3. git地址：https://github.com/dcnieho/FreeGLUT。
+3. git地址：https://github.com/freeglut/freeglut。
 4. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 
 ----------------------------

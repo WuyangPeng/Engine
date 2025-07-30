@@ -4,3 +4,4 @@ openssl/
 mysql/
 mysql-connector-c++/
 protobuf/
+freeglut/
