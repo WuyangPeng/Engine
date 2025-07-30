@@ -930,6 +930,7 @@
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26417.inl" />
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26437.inl" />
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26445.inl" />
+    <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26816.inl" />
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26826.inl" />
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4018.inl" />
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4127.inl" />
