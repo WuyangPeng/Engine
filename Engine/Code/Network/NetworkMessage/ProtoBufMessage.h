@@ -14,7 +14,7 @@
 
 #include "MessageInterface.h"
 
-#include <google/protobuf/message.h>
+#include "System/Helper/PragmaWarning/ProtobufMessage.h"
 
 namespace Network
 {

@@ -11,8 +11,8 @@
 #define NETWORK_NETWORK_MESSAGE_FWD_H
 
 #include "CoreTools/Helper/SharedPtrMacro.h"
+#include "System/Helper/PragmaWarning/ProtobufMessage.h"
 
-#include <google/protobuf/message.h>
 #include <memory>
 
 namespace Network

@@ -4,6 +4,8 @@ rmdir /S /Q "../../../Libs/protobuf"
 
 xcopy "../../protobuf/src/*.h" "../../../Libs/protobuf/src/" /F /Y /E  
 xcopy "../../protobuf/src/*.inc" "../../../Libs/protobuf/src/" /F /Y /E  
+xcopy "../../protobuf/BuildX64/_deps/absl-src/*.h" "../../../Libs/protobuf/src/" /F /Y /E  
+xcopy "../../protobuf/BuildX64/_deps/absl-src/*.inc" "../../../Libs/protobuf/src/" /F /Y /E  
 
 xcopy "../../protobuf/BuildWin32/bin/Debug/*.lib" "../../../Libs/protobuf/BuildWin32/bin/Debug/" /F /Y /E  
 xcopy "../../protobuf/BuildWin32/bin/Debug/*.dll" "../../../Libs/protobuf/BuildWin32/bin/Debug/" /F /Y /E  

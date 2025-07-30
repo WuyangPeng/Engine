@@ -564,6 +564,7 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\PosixTime.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\PropertyTree.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\ProtoBuf.inl" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\ProtobufMessage.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\PtrVector.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\PugiXml.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Push.inl" />
@@ -930,7 +931,10 @@
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26437.inl" />
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26445.inl" />
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26826.inl" />
+    <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4018.inl" />
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4127.inl" />
+    <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4251.inl" />
+    <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4267.inl" />
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6031.inl" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />
