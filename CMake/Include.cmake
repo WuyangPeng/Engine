@@ -57,24 +57,28 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 	
 	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/boost/)
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../ACE/ACE_wrappers/)
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../mysql/include/)
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../mysql-connector-c++/include/)
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../protobuf/src/)
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../freeglut/include/)
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../vld/src/)
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../zlib/)
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../freetype/include/)
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../OpenXLSX/)
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../pugixml/src/)
 	
 	link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/boost/stage/lib/)
     link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/ACE/ACE_wrappers/lib/x64/)
 
-    include_directories($ENV{LibsEnvironmentBaseInclude}/)
-    include_directories($ENV{LibsEnvironmentExtendInclude}/)
-
     if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
        
-        link_directories($ENV{LibsEnvironmentX64DebugLib}/)
+        link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/mysql/BuildX64/archive_output_directory/Debug/)
 
     else ()
 
-        link_directories($ENV{LibsEnvironmentX64ReleaseLib}/)
+        link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/mysql/BuildX64/archive_output_directory/Release/)
 
     endif ()
-
-    link_directories($ENV{LibsEnvironmentX64Lib}/)
 
 else ()
 
