@@ -8,6 +8,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     include_directories(/data/coding/External/mysql-connector-c++/include/)
     include_directories(/data/coding/External/mysql-connector-c++/build/include/mysqlx/)
     include_directories(/data/coding/External/protobuf/src/)
+    include_directories(/data/coding/External/protobuf/build/_deps/absl-src/)
 
     include_directories(/data/coding/Libs/miniz/)
     include_directories(/data/coding/Libs/miniz/build/)
