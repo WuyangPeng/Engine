@@ -103,7 +103,7 @@ if [ ! -f /data/coding/External/mysql_connector_cpp_installed.txt ]; then
 		
 		if [ $? -eq 0 ]; then 
 	 
-			touch /data/coding/Libs/mysql_connector_cpp_installed_clone.txt
+			touch /data/coding/External/mysql_connector_cpp_installed_clone.txt
 	
 		fi
 	
