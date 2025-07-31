@@ -1866,6 +1866,9 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Asio.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Vld.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\ProtobufMessage.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
