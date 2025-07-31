@@ -5,4 +5,5 @@ mysql/
 mysql-connector-c++/
 protobuf/
 freeglut/
+vld/
 OpenXLSX/
