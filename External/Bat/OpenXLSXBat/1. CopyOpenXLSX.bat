@@ -3,6 +3,7 @@
 rmdir /S /Q "../../../Libs/OpenXLSX"
 
 xcopy "../../OpenXLSX/OpenXLSX/*.hpp" "../../../Libs/OpenXLSX/OpenXLSX/" /F /Y /E  
+xcopy "../../OpenXLSX/BuildX64/OpenXLSX/OpenXLSX-Exports.hpp" "../../../Libs/OpenXLSX/OpenXLSX/" /F /Y /E  
 
 xcopy "../../OpenXLSX/BuildWin32/*.lib" "../../../Libs/OpenXLSX/BuildWin32/" /F /Y /E 
 xcopy "../../OpenXLSX/BuildWin32/*.dll" "../../../Libs/OpenXLSX/BuildWin32/" /F /Y /E   
