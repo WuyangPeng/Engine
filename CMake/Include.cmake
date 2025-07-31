@@ -83,6 +83,7 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/mysql-connector-c++/BuildX64//${SYSTEM_BUILD_DIRECTORIES}/)
     link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/protobuf/BuildX64/bin/${SYSTEM_BUILD_DIRECTORIES}/)
     link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/freeglut/BuildX64/lib/${SYSTEM_BUILD_DIRECTORIES}/)
+	link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/vld/src/bin/x64/${SYSTEM_BUILD_DIRECTORIES}-v143/)
 
     include_directories($ENV{LibsEnvironmentBaseInclude}/)
     include_directories($ENV{LibsEnvironmentExtendInclude}/)

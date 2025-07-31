@@ -118,13 +118,13 @@
 
 1. 版本：2.7.0。
 2. git地址：https://github.com/oneiric/vld 。
-3. Allocs.cpp第39行，testsuite.cpp第78行增加 
-   #elif _MSC_VER > 1927	// VS 2019
-   #define CRTDLLNAME   _T("ucrtbased.dll")
-4. Allocs.cpp第67行，testsuite.cpp第105行增加 
-   #elif _MSC_VER > 1927	// VS 2019
-   #define CRTDLLNAME   _T("ucrtbase.dll") 
-5. src\tests下Common.props第18行改成v142。
+3. Allocs.cpp第39行，testsuite.cpp第78行增加   
+   #elif _MSC_VER > 1927	// VS 2019  
+   #define CRTDLLNAME   _T("ucrtbased.dll")  
+4. Allocs.cpp第67行，testsuite.cpp第105行增加   
+   #elif _MSC_VER > 1927	// VS 2019  
+   #define CRTDLLNAME   _T("ucrtbase.dll")   
+5. src\tests下Common.props第18行改成v143。
 
 ---
 ## OpenXLSX （引擎通过宏CORE_TOOLS_USE_OPEN_XLSX关联）
