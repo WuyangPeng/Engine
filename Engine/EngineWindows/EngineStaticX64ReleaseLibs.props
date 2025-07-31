@@ -7,7 +7,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalLibraryDirectories>../../../../Libs/ACE/ACE_wrappers/lib/x64;../../../../Libs/mysql/BuildX64/archive_output_directory/Release;../../../../Libs/mysql-connector-c++/BuildX64/Release/;../../../../Libs/protobuf/BuildX64/bin/Release/;$(LibsEnvironmentX64Lib);$(LibsEnvironmentX64ReleaseLib);../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../../../Libs/ACE/ACE_wrappers/lib/x64;../../../../Libs/mysql/BuildX64/archive_output_directory/Release;../../../../Libs/mysql-connector-c++/BuildX64/Release/;../../../../Libs/protobuf/BuildX64/bin/Release/;../../../../Libs/freeglut/BuildX64/Release/;$(LibsEnvironmentX64Lib);$(LibsEnvironmentX64ReleaseLib);../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>BUILDING_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>

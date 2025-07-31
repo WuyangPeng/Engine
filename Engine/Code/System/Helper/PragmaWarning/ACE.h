@@ -22,6 +22,7 @@
 
     #endif  // defined(NDEBUG)
 
+    #include SYSTEM_WARNING_DISABLE(6240)
     #include SYSTEM_WARNING_DISABLE(6285)
     #include SYSTEM_WARNING_DISABLE(6320)
     #include SYSTEM_WARNING_DISABLE(6387)

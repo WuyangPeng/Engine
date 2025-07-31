@@ -936,7 +936,9 @@
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4127.inl" />
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4251.inl" />
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4267.inl" />
+    <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4324.inl" />
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6031.inl" />
+    <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6240.inl" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />
   </ItemGroup>

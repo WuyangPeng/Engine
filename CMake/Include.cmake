@@ -72,23 +72,24 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/ACE/ACE_wrappers/lib/x64/)
 
     if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
-       
-        link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/mysql/BuildX64/archive_output_directory/Debug/)
-        link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/mysql-connector-c++/BuildX64/Debug/)
-        link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/protobuf/BuildX64/bin/Debug/)
+	
+		set(SYSTEM_BUILD_DIRECTORIES "Debug")
 
     else ()
-
-        link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/mysql/BuildX64/archive_output_directory/Release/)
-        link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/mysql-connector-c++/BuildX64//Release/)
-        link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/protobuf/BuildX64/bin/Release/)
+	
+		set(SYSTEM_BUILD_DIRECTORIES "Release")
 
     endif ()
+	
+    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/mysql/BuildX64/archive_output_directory/${SYSTEM_BUILD_DIRECTORIES}/)
+    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/mysql-connector-c++/BuildX64//${SYSTEM_BUILD_DIRECTORIES}/)
+    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/protobuf/BuildX64/bin/${SYSTEM_BUILD_DIRECTORIES}/)
+    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/freeglut/BuildX64/lib/${SYSTEM_BUILD_DIRECTORIES}/)
 
     include_directories($ENV{LibsEnvironmentBaseInclude}/)
     include_directories($ENV{LibsEnvironmentExtendInclude}/)
 
-        if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+    if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
        
         link_directories($ENV{LibsEnvironmentX64DebugLib}/) 
 

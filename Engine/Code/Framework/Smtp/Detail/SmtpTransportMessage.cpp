@@ -139,7 +139,7 @@ void Framework::SmtpTransportMessage::Response(std::promise<void>& promise)
         {
             if (!line.empty())
             {
-                self->Analysis(line);
+                SmtpTransportMessage::Analysis(line);
             }
         }
 
