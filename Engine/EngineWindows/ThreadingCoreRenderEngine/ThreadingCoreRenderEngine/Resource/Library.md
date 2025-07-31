@@ -113,7 +113,7 @@
 3. git地址：https://github.com/freeglut/freeglut。
 4. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 
-----------------------------
+---
 ## Visual Leak Detector（引擎Debug版本直接关联）
 
 1. 版本：2.7.0。
@@ -126,35 +126,7 @@
    #define CRTDLLNAME   _T("ucrtbase.dll") 
 5. src\tests下Common.props第18行改成v142。
 
-----------------------------
-## zlib（引擎直接关联）
-
-1. 版本：1.2.12。
-2. 官方网站：http://www.zlib.net/
-3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
-
-----------------------------
-## freetype（引擎直接关联）
-
-1. 版本：2.12.1。
-2. 官方网站：https://www.freetype.org/
-3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
-
-----------------------------
-## lua（引擎通过宏SCRIPT_USE_LUA关联）
-
-1. 版本：5.4.4。
-2. 官方网站：http://www.lua.org/
-3. 在build下建立VS工程，lua，静态库。包含以下文件：lapi.c lcode.c lctype.c ldebug.c ldo.c ldump.c 
-   lfunc.c lgc.c llex.c lmem.c lobject.c lopcodes.c lparser.c lstate.c lstring.c ltable.c ltm.c 
-   lundump.c lvm.c lzio.c lauxlib.c lbaselib.c lbitlib.c lcorolib.c ldblib.c liolib.c lmathlib.c 
-   loslib.c lstrlib.c ltablib.c lutf8lib.c loadlib.c linit.c。（除去luac.c和lua.c的所有文件）。
-   输出目录改成：$(SolutionDir)$(Platform)\$(Configuration)\。
-4. 建立VS工程，程序interpreter（包含lua.c）和compiler（包含luac.c）。
-   输出目录改成：$(SolutionDir)$(Platform)\$(Configuration)\。
-   增加附加库目录：$(SolutionDir)$(Platform)\$(Configuration)\。附加依赖项增加：lua.lib。
-
-----------------------------  
+---
 ## OpenXLSX （引擎通过宏CORE_TOOLS_USE_OPEN_XLSX关联）
 
 1. 版本：0.4.1。
