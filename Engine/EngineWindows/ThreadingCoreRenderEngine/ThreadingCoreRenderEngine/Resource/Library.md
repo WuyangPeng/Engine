@@ -157,18 +157,21 @@
 ---
 ## ActiveMQ（引擎通过宏NETWORK_USE_ACTIVE_MQ关联）
 
-1. 版本：3.9.5
-2. 官方网站：https://activemq.apache.org/components/cms/download/ 。
-3. git地址：https://github.com/apache/activemq-cpp。
-4. 启用函数级链接改成是。
-5. 附加库包含目录增加：..\..\..\apr\include和..\..\..\apr\BuildX64。
-6. 附加库根据不同编译版本增加：  
+1.  版本：3.9.5
+2.  官方网站：https://activemq.apache.org/components/cms/download/ 。
+3.  git地址：https://github.com/apache/activemq-cpp。
+4.  启用函数级链接改成是。
+5.  附加库包含目录增加：..\..\..\apr\include和..\..\..\apr\BuildX64。
+6.  附加库根据不同编译版本增加：  
     ../../../apr/BuildX64/Debug、  
     ../../../apr/BuildX64/Release、  
     ../../../apr/BuildWin32/Debug、  
     ../../../apr/BuildWin32/Release
-7. 附加依赖项libapr-1.lib改成libapr-2.lib。
-8. 编译DebugDLL和ReleaseDLL版本。
+7.  附加依赖项libapr-1.lib改成libapr-2.lib。
+8.  编译DebugDLL和ReleaseDLL版本。
+9.  AbstractCollection.h第77、95、119、134、153、201、240、261、286、311、334行auto_ptr改成unique_ptr。
+10. AbstractSet.h第74、84行auto_ptr改成unique_ptr。
+11. StlMap.h第672、820行auto_ptr改成unique_ptr。
 
 ----------------------------
 
