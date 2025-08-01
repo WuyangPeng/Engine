@@ -87,6 +87,7 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 	link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/vld/src/bin/x64/${SYSTEM_BUILD_DIRECTORIES}-v143/)
 	link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/OpenXLSX/BuildX64/output/${SYSTEM_BUILD_DIRECTORIES}/)
     link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/miniz/BuildX64/${SYSTEM_BUILD_DIRECTORIES}/)
+	link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/apr/BuildX64/${SYSTEM_BUILD_DIRECTORIES}/)
 
     include_directories($ENV{LibsEnvironmentBaseInclude}/)
     include_directories($ENV{LibsEnvironmentExtendInclude}/)

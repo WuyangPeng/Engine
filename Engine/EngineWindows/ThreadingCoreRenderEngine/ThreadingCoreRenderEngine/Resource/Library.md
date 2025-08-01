@@ -134,69 +134,32 @@
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 4. OPENXLSX_LIBRARY_TYPE值修改成SHARED。
 
-----------------------------
+---
 ## pugixml（引擎直接关联）
 
 1. 版本：1.15。
 2. 官方网站：https://github.com/zeux/pugixml 。
 3. pugiconfig.hpp第47行，定义宏PUGIXML_HEADER_ONLY。
 
-----------------------------
+---
 ## miniz（引擎直接关联）
 
 1. 版本：3.0.2。
 2. 官方网站：https://github.com/richgel999/miniz 。
-3. 使用releases page页的版本编译静态库，名为miniz。
-
-----------------------------
-## ogg（引擎通过宏SOUND_EFFECT_USE_OGG关联）
-
-1. 版本：1.3.5。
-2. 官方网站：https://www.xiph.org/downloads/。
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 
-----------------------------
-## vorbis（引擎通过宏SOUND_EFFECT_USE_VORBIS关联）
-
-1. 版本：1.3.7。
-2. 官方网站：https://www.xiph.org/downloads/。
-3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
-4. 定义正确的OGG_INCLUDE_DIR到($ogg)/include。 
-5. 定义正确的OGG_LIBRARY到($ogg)/BuildX64/Release/ogg.lib和($ogg)/BuildWin32/Release/ogg.lib。  
-
-----------------------------
-## FLTK（引擎通过宏USER_INTERFACE_USE_FLTK关联）
-
-1. 版本：1.3.8
-2. 官方网站：https://www.fltk.org/。
-3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
-4. 文件Fl_Device.cxx：
-   第84行改成
-   static
-   #if defined(__APPLE__)
-		Fl_Quartz_Graphics_Driver
-   #elif defined(WIN32)
-		Fl_GDI_Graphics_Driver
-   #else
-		Fl_Xlib_Graphics_Driver
-   #endif
-		driver;
-   static Fl_Display_Device display(&driver);
-   return &display;
-   以消除內存泄露。 
- 
-----------------------------
+---
 ## Apr（引擎通过宏NETWORK_USE_ACTIVE_MQ关联）
 
 1. 官方网站：https://github.com/apache/apr 。
 2. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 
-----------------------------
-
+---
 ## ActiveMQ（引擎通过宏NETWORK_USE_ACTIVE_MQ关联）
 
-1. 版本：5.18.1
+1. 版本：3.9.5
 2. 官方网站：https://activemq.apache.org/components/cms/download/ 。
+3. git地址：https://github.com/apache/activemq-cpp
 
 ----------------------------
 
