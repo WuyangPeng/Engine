@@ -218,7 +218,7 @@ if [ ! -f /data/coding/External/miniz_installed.txt ]; then
 	 
 		if [ $? -eq 0 ]; then 
 	 
-			touch /data/External/Libs/miniz_installed.txt
+			touch /data/External/miniz_installed.txt
 	
 		fi
 	
