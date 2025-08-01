@@ -234,7 +234,7 @@ if [ ! -f /data/coding/External/activemq_installed.txt ]; then
 	
 		rm -rf activemq
 
-		git clone https://github.com/apache/activemq-cpp
+		git clone https://github.com/apache/activemq-cpp activemq
 		
 		if [ $? -eq 0 ]; then 
 		
