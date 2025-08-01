@@ -7,7 +7,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalLibraryDirectories>../../../../Libs/ACE/ACE_wrappers/lib/Win32;../../../../Libs/mysql/BuildWin32/archive_output_directory/Release;../../../../Libs/mysql-connector-c++/BuildWin32/Release/;../../../../Libs/protobuf/BuildWin32/bin/Release/;../../../../Libs/freeglut/BuildWin32/Release/;../../../../Libs/vld/src/bin/Win32/Release-v143/;../../../../Libs/OpenXLSX/BuildWin32/output/Release;$(LibsEnvironmentWin32Lib);$(LibsEnvironmentWin32ReleaseLib);../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../../../Libs/ACE/ACE_wrappers/lib/Win32;../../../../Libs/mysql/BuildWin32/archive_output_directory/Release;../../../../Libs/mysql-connector-c++/BuildWin32/Release/;../../../../Libs/protobuf/BuildWin32/bin/Release/;../../../../Libs/freeglut/BuildWin32/Release/;../../../../Libs/vld/src/bin/Win32/Release-v143/;../../../../Libs/OpenXLSX/BuildWin32/output/Release/;../../../../Libs/miniz/BuildWin32/Release/;$(LibsEnvironmentWin32Lib);$(LibsEnvironmentWin32ReleaseLib);../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>BUILDING_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>

@@ -184,3 +184,44 @@ if [ ! -f /data/coding/External/protobuf_installed.txt ]; then
 	
 fi
 
+if [ ! -f /data/coding/External/miniz_installed.txt ]; then
+
+    cd /data/coding/External/
+	
+	if [ ! -f /data/coding/External/miniz_installed_clone.txt ]; then
+	
+		rm -rf miniz
+
+		git clone https://github.com/richgel999/miniz
+		
+		if [ $? -eq 0 ]; then 
+		
+			cd miniz
+			git checkout 3.0.2
+			cd ..
+	 
+			touch /data/coding/External/miniz_installed_clone.txt
+	
+		fi
+	
+	fi 
+	
+	if [ -f /data/coding/External/miniz_installed_clone.txt ]; then
+	
+		cd /data/coding/External/miniz
+	
+		mkdir -p build
+		cd build
+
+		cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+		make 
+	 
+		if [ $? -eq 0 ]; then 
+	 
+			touch /data/External/Libs/miniz_installed.txt
+	
+		fi
+	
+	fi
+	
+fi
