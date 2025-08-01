@@ -225,3 +225,43 @@ if [ ! -f /data/coding/External/miniz_installed.txt ]; then
 	fi
 	
 fi
+
+if [ ! -f /data/coding/External/activemq_installed.txt ]; then
+
+    cd /data/coding/External/
+	
+	if [ ! -f /data/coding/External/activemq_installed_clone.txt ]; then
+	
+		rm -rf activemq
+
+		git clone https://github.com/apache/activemq-cpp
+		
+		if [ $? -eq 0 ]; then 
+		
+			cd activemq-cpp
+			git checkout activemq-cpp-3.9.5
+			cd ..
+	 
+			touch /data/coding/External/activemq_installed_clone.txt
+	
+		fi
+	
+	fi 
+	
+	if [ -f /data/coding/External/activemq_installed_clone.txt ]; then
+	
+		cd /data/coding/External/activemq/activemq-cpp
+	
+		sh ./build.sh configure
+		./configure
+		make
+	 
+		if [ $? -eq 0 ]; then 
+	 
+			touch /data/coding/External/activemq_installed.txt
+	
+		fi
+	
+	fi
+	
+fi 
