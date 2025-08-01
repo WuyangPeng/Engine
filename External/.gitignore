@@ -7,3 +7,5 @@ protobuf/
 freeglut/
 vld/
 OpenXLSX/
+pugixml/
+miniz/

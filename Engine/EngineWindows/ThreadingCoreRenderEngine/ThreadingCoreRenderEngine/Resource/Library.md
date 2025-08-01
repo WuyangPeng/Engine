@@ -137,14 +137,14 @@
 ----------------------------
 ## pugixml（引擎直接关联）
 
-1. 版本：1.12.1。
+1. 版本：1.15。
 2. 官方网站：https://github.com/zeux/pugixml 。
 3. pugiconfig.hpp第47行，定义宏PUGIXML_HEADER_ONLY。
 
 ----------------------------
 ## miniz（引擎直接关联）
 
-1. 版本：2.2.0。
+1. 版本：3.0.2。
 2. 官方网站：https://github.com/richgel999/miniz 。
 3. 使用releases page页的版本编译静态库，名为miniz。
 
