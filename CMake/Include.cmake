@@ -19,8 +19,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     include_directories(/data/coding/External/mongo-cxx-driver/src/bsoncxx/include/bsoncxx/v_noabi/)
     include_directories(/data/coding/External/mongo-cxx-driver/build/src/bsoncxx/lib/)
     include_directories(/data/coding/External/mongo-cxx-driver/src/bsoncxx/include/)    
-
-    include_directories(/data/coding/Libs/hiredis/)
+    include_directories(/data/coding/External/hiredis/)
 
     link_directories(/data/coding/External/boost/stage/lib)	
     link_directories(/data/coding/External/ACE/ACE_wrappers/lib)
@@ -30,8 +29,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	link_directories(/data/coding/External/activemq/activemq-cpp/src/main/.libs)   
     link_directories(/data/coding/External/mongo-cxx-driver/build/src/mongocxx)
     link_directories(/data/coding/External/mongo-cxx-driver/build/src/bsoncxx)
-
-    link_directories(/data/coding/Libs/hiredis/build) 
+    link_directories(/data/coding/External/hiredis/build) 
 
     link_libraries(libGL.so)
     link_libraries(libssl.so)
@@ -68,6 +66,7 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/miniz/)
 	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/activemq/activemq-cpp/src/main/)	
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/mongo-cxx-driver/src/mongocxx/include/mongocxx/v_noabi)	
+	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/hiredis/)
 
     if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
 	
@@ -89,7 +88,9 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 	link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/OpenXLSX/BuildX64/output/${SYSTEM_BUILD_DIRECTORIES}/)
     link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/miniz/BuildX64/${SYSTEM_BUILD_DIRECTORIES}/)
 	link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/activemq/activemq-cpp/BuildX64/${SYSTEM_BUILD_DIRECTORIES}/)
-    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/activemq/mongo-cxx-driver/BuildX64/src/mongocxx/${SYSTEM_BUILD_DIRECTORIES}/)
+    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/mongo-cxx-driver/BuildX64/src/bsoncxx/${SYSTEM_BUILD_DIRECTORIES}/)
+	link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/mongo-cxx-driver/BuildX64/src/mongocxx/${SYSTEM_BUILD_DIRECTORIES}/)
+	link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/hiredis/BuildX64/${SYSTEM_BUILD_DIRECTORIES}/)
 
 else ()
 

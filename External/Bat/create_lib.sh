@@ -308,3 +308,46 @@ if [ ! -f /data/coding/External/mongo-cxx-driver_installed.txt ]; then
 	fi
 	
 fi 
+
+
+if [ ! -f /data/coding/External/hiredis_installed.txt ]; then
+
+    cd /data/coding/External/
+	
+	if [ ! -f /data/coding/External/hiredis_installed_clone.txt ]; then
+	
+		rm -rf hiredis
+
+		git clone https://github.com/redis/hiredis
+		
+		if [ $? -eq 0 ]; then 
+		
+			cd hiredis
+			git checkout v1.3.0
+			cd ..
+	 
+			touch /data/coding/External/hiredis_installed_clone.txt
+	
+		fi
+	
+	fi 
+	
+	if [ -f /data/coding/External/hiredis_installed_clone.txt ]; then
+	
+		cd /data/coding/External/hiredis
+	
+		mkdir -p build
+		cd build
+
+		cmake .. -DCMAKE_BUILD_TYPE=Release
+		make 
+	 
+		if [ $? -eq 0 ]; then 
+	 
+			touch /data/coding/External/hiredis_installed.txt
+	
+		fi
+	
+	fi
+	
+fi

@@ -11,5 +11,5 @@ pugixml/
 miniz/
 apr/
 activemq/
-mongo-c-driver/
 mongo-cxx-driver/
+hiredis/

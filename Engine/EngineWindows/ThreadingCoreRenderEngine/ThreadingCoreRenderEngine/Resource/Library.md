@@ -188,7 +188,7 @@
 ---
 ## hiredis（引擎通过宏DATABASE_USE_REDIS关联）
 
-1. 版本：1.1.0
+1. 版本：1.3.0
 2. 官方网站：https://github.com/redis/hiredis 。
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 
