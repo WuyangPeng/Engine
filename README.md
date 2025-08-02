@@ -122,9 +122,9 @@ It can be used for activities such as:
 	
 - 编译工程
 	
-	cd /data/coding/Bat。
+	cd /data/coding/Bat  
 
-	sh compile.sh。  
+	sh compile.sh  
 
 	如果出现依赖库错误，根据Engine\EngineWindows\ThreadingCoreRenderEngine\ThreadingCoreRenderEngine\Resource下的Library.md进行修正。
 
