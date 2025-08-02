@@ -265,3 +265,46 @@ if [ ! -f /data/coding/External/activemq_installed.txt ]; then
 	fi
 	
 fi 
+
+
+if [ ! -f /data/coding/External/mongo-cxx-driver_installed.txt ]; then
+
+    cd /data/coding/External/
+	
+	if [ ! -f /data/coding/External/mongo-cxx-driver_installed_clone.txt ]; then
+	
+		rm -rf mongo-cxx-driver
+
+		git clone https://github.com/mongodb/mongo-cxx-driver.git
+		
+		if [ $? -eq 0 ]; then 
+		
+			cd mongo-cxx-driver
+			git checkout releases/v4.1
+			cd ..
+	 
+			touch /data/coding/External/mongo-cxx-driver_installed_clone.txt
+	
+		fi
+	
+	fi 
+	
+	if [ -f /data/coding/External/mongo-cxx-driver_installed_clone.txt ]; then
+	
+		cd /data/coding/External/mongo-cxx-driver
+	
+		mkdir -p build
+		cd build
+
+		cmake .. -DCMAKE_BUILD_TYPE=Release
+		make
+	 
+		if [ $? -eq 0 ]; then 
+	 
+			touch /data/coding/External/mongo-cxx-driver_installed.txt
+	
+		fi
+	
+	fi
+	
+fi 

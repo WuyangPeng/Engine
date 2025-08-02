@@ -172,37 +172,24 @@
 9.  AbstractCollection.h第77、95、119、134、153、201、240、261、286、311、334行auto_ptr改成unique_ptr。
 10. AbstractSet.h第74、84行auto_ptr改成unique_ptr。
 11. StlMap.h第672、820行auto_ptr改成unique_ptr。
-
-----------------------------
-
-## Mongo-c-driver（Mongo-cxx-driver关联）
-
-1. 版本：1.23.4
-2. 官方网站：https://github.com/mongodb/mongo-c-driver 。
-3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
-4. 编译好x64版本后，执行Release版本的INSTALL。手动将C:/Program Files (x86)/mongo-c-driver下文件复制到mongo-cxx-driver/BuildX64/mongo-c-driver下，
-   然后再编译Win32版本，执行Release版本的INSTALL。手动将C:/Program Files (x86)/mongo-c-driver下文件复制到mongo-cxx-driver/BuildWin32/mongo-c-driver下，
-   可使用Mongo下的批处理文件CopyMongoWin32和CopyMongoX64执行。
-   
-----------------------------
-
+  
+---
 ## Mongo-cxx-driver（引擎通过宏DATABASE_USE_MONGO关联）
 
-1. 版本：3.7.1
+1. 版本：4.1.1
 2. 官方网站：https://github.com/mongodb/mongo-cxx-driver 。
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
-4. 设置libbson-1.0_DIR到mongo-c-driver下BuildX64\src\libbson。
-5. 设置BSON_LIBRARY到mongo-cxx-driver下BuildX64\mongo-c-driver\lib\bson-1.0.lib。
-6. 设置正确的Boost_INCLUDE_DIR。
-7. 设置libmongoc-1.0_DIR到mongo-c-driver下BuildX64\src\libmongoc。
-8. 设置MONGOC_LIBRARY到mongo-cxx-driver下BuildX64\mongo-c-driver\lib\mongoc-1.0.lib。
+4. 下载gzip，并将gzip目录添加到系统环境变量 Path 中。  
+   下载地址：https://gnuwin32.sourceforge.net/packages/gzip.htm。
+5. 下载hugo，并将hugo目录添加到系统环境变量 Path 中。  
+   下载地址：https://github.com/gohugoio/hugo/releases。   
+   找到类似hugo_extended_0.148.2_windows-amd64.zip的文件。  
 
-----------------------------
-
+---
 ## hiredis（引擎通过宏DATABASE_USE_REDIS关联）
 
 1. 版本：1.1.0
 2. 官方网站：https://github.com/redis/hiredis 。
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 
-----------------------------
+---

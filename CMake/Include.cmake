@@ -12,14 +12,14 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	include_directories(/data/coding/Libs/pugixml/src/)    
     include_directories(/data/coding/External/miniz/)
     include_directories(/data/coding/External/miniz/build/)        
-    include_directories(/data/coding/External/activemq/activemq-cpp/src/main/)
-	
-    include_directories(/data/coding/Libs/mongo-cxx-driver/src/mongocxx/include/mongocxx/v_noabi/)
-    include_directories(/data/coding/Libs/mongo-cxx-driver/build/src/mongocxx/lib/)
-    include_directories(/data/coding/Libs/mongo-cxx-driver/src/mongocxx/include/)
-    include_directories(/data/coding/Libs/mongo-cxx-driver/src/bsoncxx/include/bsoncxx/v_noabi/)
-    include_directories(/data/coding/Libs/mongo-cxx-driver/build/src/bsoncxx/lib/)
-    include_directories(/data/coding/Libs/mongo-cxx-driver/src/bsoncxx/include/)    
+    include_directories(/data/coding/External/activemq/activemq-cpp/src/main/)	
+    include_directories(/data/coding/External/mongo-cxx-driver/src/mongocxx/include/mongocxx/v_noabi/)
+    include_directories(/data/coding/External/mongo-cxx-driver/build/src/mongocxx/lib/)
+    include_directories(/data/coding/External/mongo-cxx-driver/src/mongocxx/include/)
+    include_directories(/data/coding/External/mongo-cxx-driver/src/bsoncxx/include/bsoncxx/v_noabi/)
+    include_directories(/data/coding/External/mongo-cxx-driver/build/src/bsoncxx/lib/)
+    include_directories(/data/coding/External/mongo-cxx-driver/src/bsoncxx/include/)    
+
     include_directories(/data/coding/Libs/hiredis/)
 
     link_directories(/data/coding/External/boost/stage/lib)	
@@ -28,27 +28,27 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     link_directories(/data/coding/External/protobuf/build)
     link_directories(/data/coding/External/miniz/build)
 	link_directories(/data/coding/External/activemq/activemq-cpp/src/main/.libs)   
+    link_directories(/data/coding/External/mongo-cxx-driver/build/src/mongocxx)
+    link_directories(/data/coding/External/mongo-cxx-driver/build/src/bsoncxx)
 
-    link_directories(/data/coding/Libs/mongo-cxx-driver/build/src/mongocxx)
-    link_directories(/data/coding/Libs/mongo-cxx-driver/build/src/bsoncxx)
     link_directories(/data/coding/Libs/hiredis/build) 
 
+    link_libraries(libGL.so)
+    link_libraries(libssl.so)
+    link_libraries(libcrypto.so)    
     link_libraries(libboost_system.so)
     link_libraries(libboost_timer.so)
     link_libraries(libboost_date_time.so)
     link_libraries(libboost_thread.so)
     link_libraries(libboost_charconv.so)
     link_libraries(libACE.so)
+    link_libraries(libmysqlcppconnx.so)    
+    link_libraries(libprotobuf.a)
+    link_libraries(libminiz.a)
+    link_libraries(libactivemq-cpp.so)    
     link_libraries(libmongocxx.so)
     link_libraries(libbsoncxx.so)
-    link_libraries(libmysqlcppconnx.so)
-    link_libraries(libactivemq-cpp.so)
-    link_libraries(libminiz.a)
     link_libraries(libhiredis.so)
-    link_libraries(libGL.so)
-    link_libraries(libssl.so)
-    link_libraries(libcrypto.so)
-    link_libraries(libprotobuf.a)
 
 elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
@@ -66,7 +66,8 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/OpenXLSX/)
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/pugixml/src/)
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/miniz/)
-	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/activemq/activemq-cpp/src/main)	
+	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/activemq/activemq-cpp/src/main/)	
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/mongo-cxx-driver/src/mongocxx/include/mongocxx/v_noabi)	
 
     if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
 	
@@ -88,21 +89,7 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 	link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/OpenXLSX/BuildX64/output/${SYSTEM_BUILD_DIRECTORIES}/)
     link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/miniz/BuildX64/${SYSTEM_BUILD_DIRECTORIES}/)
 	link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/activemq/activemq-cpp/BuildX64/${SYSTEM_BUILD_DIRECTORIES}/)
-
-    include_directories($ENV{LibsEnvironmentBaseInclude}/)
-    include_directories($ENV{LibsEnvironmentExtendInclude}/)
-
-    if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
-       
-        link_directories($ENV{LibsEnvironmentX64DebugLib}/) 
-
-    else ()
-
-        link_directories($ENV{LibsEnvironmentX64ReleaseLib}/) 
-
-    endif ()
-
-    link_directories($ENV{LibsEnvironmentX64Lib}/)
+    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/activemq/mongo-cxx-driver/BuildX64/src/mongocxx/${SYSTEM_BUILD_DIRECTORIES}/)
 
 else ()
 

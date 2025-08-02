@@ -7,7 +7,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalLibraryDirectories>../../../../Libs/ACE/ACE_wrappers/lib/Win32;../../../../Libs/mysql/BuildWin32/archive_output_directory/Debug;../../../../Libs/mysql-connector-c++/BuildWin32/Debug/;../../../../Libs/protobuf/BuildWin32/bin/Debug/;../../../../Libs/freeglut/BuildWin32/Debug/;../../../../Libs/vld/src/bin/Win32/Debug-v143/;../../../../Libs/OpenXLSX/BuildWin32/output/Debug;../../../../Libs/miniz/BuildWin32/Debug/;../../../../Libs/activemq/activemq-cpp/vs2010-build/Win32/DebugDLL/;$(LibsEnvironmentWin32Lib);$(LibsEnvironmentWin32DebugLib);../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../../../Libs/ACE/ACE_wrappers/lib/Win32;../../../../Libs/mysql/BuildWin32/archive_output_directory/Debug;../../../../Libs/mysql-connector-c++/BuildWin32/Debug/;../../../../Libs/protobuf/BuildWin32/bin/Debug/;../../../../Libs/freeglut/BuildWin32/Debug/;../../../../Libs/vld/src/bin/Win32/Debug-v143/;../../../../Libs/OpenXLSX/BuildWin32/output/Debug;../../../../Libs/miniz/BuildWin32/Debug/;../../../../Libs/activemq/activemq-cpp/vs2010-build/Win32/DebugDLL/;../../../../Libs/mongo-cxx-driver/BuildWin32/src/mongocxx/Debug/;$(LibsEnvironmentWin32Lib);$(LibsEnvironmentWin32DebugLib);../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>BUILDING_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
