@@ -934,6 +934,7 @@
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26826.inl" />
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4018.inl" />
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4127.inl" />
+    <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4166.inl" />
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4251.inl" />
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4267.inl" />
     <None Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4324.inl" />
