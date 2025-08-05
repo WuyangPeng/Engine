@@ -347,7 +347,6 @@ call $(ProjectDir)/../../../../../Bat/CopyResource.bat $(ProjectDir) ../../../..
     <None Include="Configuration\ThreadingCoreRenderEngineAssist.json" />
     <None Include="Configuration\ThreadingCoreRenderEngineAssist\Database.json" />
     <None Include="Configuration\ThreadingCoreRenderEngineAssist\Renderer.json" />
-    <None Include="Resource\LearningLibrary.md" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />
   </ItemGroup>
