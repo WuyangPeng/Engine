@@ -7,9 +7,9 @@ set LibPath=%3
 xcopy "%LibPath%/ACE/ACE_wrappers/lib/X64/ACEd.dll" "%Target%" /F /Y
 xcopy "%LibPath%/openssl/x64/Debug/bin/*.dll" "%Target%" /F /Y
 xcopy "%LibPath%/mysql-connector-c++/BuildX64/Debug/*.dll" "%Target%" /F /Y
-xcopy "%LibPath%/vld/src/bin/x64/Debug-v143/vld_x64.dll" "%Target%" /F /Y
-xcopy "%LibPath%/vld/src/bin/x64/Debug-v143/dbghelp.dll" "%Target%" /F /Y
-xcopy "%LibPath%/vld/src/bin/x64/Debug-v143/*.manifest" "%Target%" /F /Y
+xcopy "%LibPath%/vld/src/bin/x64/Release-v143/vld_x64.dll" "%Target%" /F /Y
+xcopy "%LibPath%/vld/src/bin/x64/Release-v143/dbghelp.dll" "%Target%" /F /Y
+xcopy "%LibPath%/vld/src/bin/x64/Release-v143/*.manifest" "%Target%" /F /Y
 xcopy "%LibPath%/freeglut/BuildX64/bin/Debug/freeglutd.dll" "%Target%" /F /Y
 xcopy "%LibPath%/OpenXLSX/BuildX64/output/Debug/*.dll" "%Target%" /F /Y
 xcopy "%LibPath%/protobuf/BuildX64/bin/Debug/*.dll" "%Target%" /F /Y
