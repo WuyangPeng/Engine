@@ -175,7 +175,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../../Bat/CopyDebugWin32Dll.bat $(Platform) ../../../../$(Platform)/$(Configuration)Windows</Command>
+      <Command>call $(ProjectDir)/../../../../../Bat/CopyDebugWin32Dll.bat $(Platform) ../../../../$(Platform)/$(Configuration)Windows ../../../../../Libs/</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
@@ -196,7 +196,7 @@ call $(ProjectDir)/../../../../../Bat/CopyResource.bat $(ProjectDir) ../../../..
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../../Bat/CopyDebugWin32Dll.bat $(Platform) ../../../../$(Platform)/$(Configuration)Windows</Command>
+      <Command>call $(ProjectDir)/../../../../../Bat/CopyDebugWin32Dll.bat $(Platform) ../../../../$(Platform)/$(Configuration)Windows ../../../../../Libs/</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>call $(ProjectDir)/../../../../../Bat/CopyConfiguration.bat $(ProjectDir) $(ProjectName) ../../../../$(Platform)/$(Configuration)Windows/Configuration/
@@ -218,7 +218,7 @@ call $(ProjectDir)/../../../../../Bat/CopyResource.bat $(ProjectDir) ../../../..
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../../Bat/CopyReleaseWin32Dll.bat $(Platform) ../../../../$(Platform)/$(Configuration)Windows</Command>
+      <Command>call $(ProjectDir)/../../../../../Bat/CopyReleaseWin32Dll.bat $(Platform) ../../../../$(Platform)/$(Configuration)Windows ../../../../../Libs/</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
@@ -243,7 +243,7 @@ call $(ProjectDir)/../../../../../Bat/CopyResource.bat $(ProjectDir) ../../../..
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../../Bat/CopyReleaseWin32Dll.bat $(Platform) ../../../../$(Platform)/$(Configuration)Windows</Command>
+      <Command>call $(ProjectDir)/../../../../../Bat/CopyReleaseWin32Dll.bat $(Platform) ../../../../$(Platform)/$(Configuration)Windows ../../../../../Libs/</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>call $(ProjectDir)/../../../../../Bat/CopyConfiguration.bat $(ProjectDir) $(ProjectName) ../../../../$(Platform)/$(Configuration)Windows/Configuration/
@@ -261,7 +261,7 @@ call $(ProjectDir)/../../../../../Bat/CopyResource.bat $(ProjectDir) ../../../..
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../../Bat/CopyDebugX64Dll.bat $(Platform) ../../../../$(Platform)/$(Configuration)Windows</Command>
+      <Command>call $(ProjectDir)/../../../../../Bat/CopyDebugX64Dll.bat $(Platform) ../../../../$(Platform)/$(Configuration)Windows ../../../../../Libs/</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
@@ -282,7 +282,7 @@ call $(ProjectDir)/../../../../../Bat/CopyResource.bat $(ProjectDir) ../../../..
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../../Bat/CopyDebugX64Dll.bat $(Platform) ../../../../$(Platform)/$(Configuration)Windows</Command>
+      <Command>call $(ProjectDir)/../../../../../Bat/CopyDebugX64Dll.bat $(Platform) ../../../../$(Platform)/$(Configuration)Windows ../../../../../Libs/</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>call $(ProjectDir)/../../../../../Bat/CopyConfiguration.bat $(ProjectDir) $(ProjectName) ../../../../$(Platform)/$(Configuration)Windows/Configuration/
@@ -304,7 +304,7 @@ call $(ProjectDir)/../../../../../Bat/CopyResource.bat $(ProjectDir) ../../../..
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../../Bat/CopyReleaseX64Dll.bat $(Platform) ../../../../$(Platform)/$(Configuration)Windows</Command>
+      <Command>call $(ProjectDir)/../../../../../Bat/CopyReleaseX64Dll.bat $(Platform) ../../../../$(Platform)/$(Configuration)Windows ../../../../../Libs/</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
@@ -329,7 +329,7 @@ call $(ProjectDir)/../../../../../Bat/CopyResource.bat $(ProjectDir) ../../../..
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>call $(ProjectDir)/../../../../../Bat/CopyReleaseX64Dll.bat $(Platform) ../../../../$(Platform)/$(Configuration)Windows</Command>
+      <Command>call $(ProjectDir)/../../../../../Bat/CopyReleaseX64Dll.bat $(Platform) ../../../../$(Platform)/$(Configuration)Windows ../../../../../Libs/</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>call $(ProjectDir)/../../../../../Bat/CopyConfiguration.bat $(ProjectDir) $(ProjectName) ../../../../$(Platform)/$(Configuration)Windows/Configuration/
