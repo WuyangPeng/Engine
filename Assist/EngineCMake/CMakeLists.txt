@@ -67,12 +67,14 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
         set(BAT_NAME CopyDebugX64Dll)
         link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Engine/x64/CMake/DebugWindows/)
+        set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../x64/CMake/DebugWindows)
 
     else ()
 
         set(BAT_NAME CopyReleaseX64Dll)
         link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Engine/x64/CMake/ReleaseWindows)
-
+        set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../x64/CMake/ReleaseWindows)
+        
     endif ()
 
     # 创建目录
@@ -87,7 +89,7 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     add_custom_target(
             RunBatFile ALL
             COMMAND
-            COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/../../Bat/${BAT_NAME}.bat x64 ${EXECUTABLE_OUTPUT_PATH}
+            COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/../../Bat/${BAT_NAME}.bat x64 ${EXECUTABLE_OUTPUT_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/
             COMMENT "Running ${BAT_NAME}.bat after build"
     )
 
