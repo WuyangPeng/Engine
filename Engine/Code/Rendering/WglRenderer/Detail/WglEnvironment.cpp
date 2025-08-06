@@ -54,7 +54,7 @@ void Rendering::WglEnvironment::Release() noexcept
                 LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering, SYSTEM_TEXT("WglDeleteContext失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
             }
 
-            immediate = nullptr;
+            immediate = nullptr;          
         }
 
         if (!System::ReleaseSystemDC(handle, device))

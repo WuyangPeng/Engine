@@ -14,4 +14,6 @@ xcopy "%LibPath%/activemq/activemq-cpp/vs2010-build/x64/ReleaseDLL/*.dll" "%Targ
 xcopy "%LibPath%/apr/BuildX64/Release/*.dll" "%Target%" /F /Y
 xcopy "%LibPath%/mongo-cxx-driver/BuildX64/src/mongocxx/Release/*.dll" "%Target%" /F /Y
 xcopy "%LibPath%/mongo-cxx-driver/BuildX64/src/bsoncxx/Release/*.dll" "%Target%" /F /Y
+xcopy "%LibPath%/mongo-cxx-driver/BuildX64/_deps/mongo-c-driver-build/src/libmongoc/Release/*.dll" "%Target%" /F /Y
+xcopy "%LibPath%/mongo-cxx-driver/BuildX64/_deps/mongo-c-driver-build/src/libbson/Release/*.dll" "%Target%" /F /Y
 xcopy "%LibPath%/hiredis/BuildX64/Release/*.dll" "%Target%" /F /Y
