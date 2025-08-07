@@ -7,7 +7,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalLibraryDirectories>$(LibsEnvironmentX64Lib);$(LibsEnvironmentX64ReleaseLib);$(EngineStaticX64ReleaseLib);../../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../../../../Libs/openssl/x64/Release/lib/;../../../../../Libs/mysql/BuildX64/archive_output_directory/Release;../../../../../Libs/mysql-connector-c++/BuildX64/Release/;../../../../../Libs/protobuf/BuildX64/bin/Release/;../../../../../Libs/freeglut/BuildX64/lib/Release/;../../../../../Libs/vld/src/bin/x64/Release-v143/;../../../../../Libs/OpenXLSX/BuildX64/output/Release/;../../../../../Libs/miniz/BuildX64/Release/;../../../../../Libs/activemq/activemq-cpp/vs2010-build/x64/ReleaseDLL/;../../../../../Libs/mongo-cxx-driver/BuildX64/src/mongocxx/Release/;../../../../../Libs/mongo-cxx-driver/BuildX64/src/bsoncxx/Release/;../../../../../Libs/hiredis/BuildX64/Release/;../../../../../Engine/$(Platform)/$(Configuration)Windows;../../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>BUILDING_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>

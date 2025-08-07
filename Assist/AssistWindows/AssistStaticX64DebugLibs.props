@@ -7,7 +7,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalLibraryDirectories>$(LibsEnvironmentX64Lib);$(LibsEnvironmentX64DebugLib);$(EngineStaticX64DebugLib);../../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../../../../Libs/openssl/x64/Debug/lib/;../../../../../Libs/mysql/BuildX64/archive_output_directory/Debug;../../../../../Libs/mysql-connector-c++/BuildX64/Debug/;../../../../../Libs/protobuf/BuildX64/bin/Debug/;../../../../../Libs/freeglut/BuildX64/lib/Debug/;../../../../../Libs/vld/src/bin/x64/Release-v143/;../../../../../Libs/OpenXLSX/BuildX64/output/Debug/;../../../../../Libs/miniz/BuildX64/Debug/;../../../../../Libs/activemq/activemq-cpp/vs2010-build/x64/DebugDLL/;../../../../../Libs/mongo-cxx-driver/BuildX64/src/mongocxx/Debug/;../../../../../Libs/mongo-cxx-driver/BuildX64/src/bsoncxx/Debug/;../../../../../Libs/hiredis/BuildX64/Debug/;../../../../../Engine/$(Platform)/$(Configuration)Windows;../../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>BUILDING_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
