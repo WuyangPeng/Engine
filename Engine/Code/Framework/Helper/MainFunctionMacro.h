@@ -50,7 +50,7 @@
         int main(int argc, char** argv)                                                                                                                                                          \
         {                                                                                                                                                                                        \
             System::UnusedFunction(argc, argv);                                                                                                                                                  \
-            return Framework::WinMainEntryPoint<namespaceName::helperClassName>(nullptr, "", engineEnvironment, engineDirectory, renderer, nullptr);                                             \
+            return Framework::WinMainEntryPoint<namespaceName::helperClassName>(nullptr, static_cast<char*>(""), engineEnvironment, engineDirectory, renderer, nullptr);                         \
         }
 #endif  // SYSTEM_PLATFORM_WIN32
 
