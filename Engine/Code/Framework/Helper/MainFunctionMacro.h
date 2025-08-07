@@ -51,8 +51,8 @@
         {                                                                                                                                                                                        \
             System::UnusedFunction(argc, argv);                                                                                                                                                  \
             char emptyCmdLine[1] = { '\0' };                                                                                                                                                     \
-            return Framework::WinMainEntryPoint<namespaceName::helperClassName>(nullptr, emptyCmdLine, engineEnvironment, engineDirectory, renderer, nullptr);
-}
+            return Framework::WinMainEntryPoint<namespaceName::helperClassName>(nullptr, emptyCmdLine, engineEnvironment, engineDirectory, renderer, nullptr);                                   \
+        }
 #endif  // SYSTEM_PLATFORM_WIN32
 
 #define CONSOLE_MAIN_FUNCTION(namespaceName, helperClassName, consoleTitle, engineEnvironment, engineDirectory)                         \
