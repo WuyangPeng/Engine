@@ -10,6 +10,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "WglEnvironment.h"
+#include "System/Helper/PragmaWarning/Vld.h"
 #include "System/OpenGL/Flags/OpenGLWglPrototypesFlags.h"
 #include "System/OpenGL/OpenGLWglPrototypes.h"
 #include "System/Windows/WindowsFontInformation.h"
@@ -54,7 +55,7 @@ void Rendering::WglEnvironment::Release() noexcept
                 LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering, SYSTEM_TEXT("WglDeleteContext失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
             }
 
-            immediate = nullptr;          
+            immediate = nullptr;
         }
 
         if (!System::ReleaseSystemDC(handle, device))
@@ -136,12 +137,24 @@ System::PixelFormatDescriptor Rendering::WglEnvironment::GetPixelFormatDescripto
 
 void Rendering::WglEnvironment::SetWindowPixelFormat(const PixelFormatDescriptor& pixelFormatDescriptor)
 {
+#ifdef SYSTEM_PLATFORM_WIN32
+
+    VLDDisable();
+
+#endif  // SYSTEM_PLATFORM_WIN32
+
     /// 设置渲染上下文的像素格式。
     const auto pixelFormat = System::ChooseWindowPixelFormat(device, &pixelFormatDescriptor);
     if (pixelFormat == 0)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("ChoosePixelFormat失败。"))
     }
+
+#ifdef SYSTEM_PLATFORM_WIN32
+
+    VLDEnable();
+
+#endif  // SYSTEM_PLATFORM_WIN32
 
     if (!System::SetWindowPixelFormat(device, pixelFormat, &pixelFormatDescriptor))
     {

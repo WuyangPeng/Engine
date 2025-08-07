@@ -18,6 +18,7 @@
 #include "System/SystemOutput/Flags/DialogBoxCommandFlags.h"
 #include "System/SystemOutput/Flags/MessageBoxFlags.h"
 #include "System/SystemOutput/MessageBoxSelection.h"
+#include "System/Helper/PragmaWarning/Vld.h"
 
 bool System::GetSystemMessage(WindowsMessage* message, WindowsHWnd hWnd) noexcept
 {
@@ -115,7 +116,13 @@ System::WindowsLResult System::DefaultSystemWindowProcess(WindowsHWnd hWnd, Wind
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return ::DefWindowProc(hWnd, EnumCastUnderlying(message), wParam, lParam);
+    VLDDisable();
+
+    const auto result = ::DefWindowProc(hWnd, EnumCastUnderlying(message), wParam, lParam);
+
+    VLDEnable();
+
+    return result;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
