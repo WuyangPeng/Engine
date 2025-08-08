@@ -17,6 +17,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Framework/Application/PerformanceMeasurements.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 Framework::PerformanceMeasurementsTesting::PerformanceMeasurementsTesting(const OStreamShared& stream)
     : ParentType{ stream }
