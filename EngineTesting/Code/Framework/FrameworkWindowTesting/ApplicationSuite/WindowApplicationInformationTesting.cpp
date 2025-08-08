@@ -8,6 +8,7 @@
 ///	版本：0.9.1.3 (2023/08/10 15:55)
 
 #include "WindowApplicationInformationTesting.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Windows/Flags/WindowsFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
