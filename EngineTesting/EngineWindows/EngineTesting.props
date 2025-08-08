@@ -22,8 +22,8 @@
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
-	<Link>
-      <AdditionalLibraryDirectories>../../../../../Libs/boost/stage/lib/;../../../../../Libs/ACE/ACE_wrappers/lib/$(Platform)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    <Link>
+      <AdditionalLibraryDirectories>../../../../Libs/boost/stage/lib/;../../../../Libs/ACE/ACE_wrappers/lib/$(Platform)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
 </Project>

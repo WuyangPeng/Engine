@@ -98,7 +98,7 @@
 4. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 5. 选中protobuf_BUILD_SHARED_LIBS。
 6. 将无法通过编译的工程的C++ 标准改成 /std:c++latest。
-7. port_def.inc尾部增加  
+7. runtime_version.h尾部增加  
    #ifdef PROTO_BUF_PRAGMA_WARNING  
        
 	   #include "System/Helper/PragmaWarning/ProtoBuf.inl"  
