@@ -8,6 +8,7 @@
 /// 版本：1.0.0.7 (2024/03/13 17:20)
 
 #include "EngineeringNumDigitsTesting.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Windows/Engineering.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
