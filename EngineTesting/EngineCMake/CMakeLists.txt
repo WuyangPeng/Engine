@@ -15,6 +15,22 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     include_directories(/data/coding/Assist/Code/)
     include_directories(/data/coding/Assist/AssistWindows/)
 
+    if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+
+        set(BAT_NAME CopyDebugX64Dll)
+        set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../Assist/x64/CMake/DebugWindows)
+
+        link_libraries(libExportTestD.so)
+
+    else ()
+
+        set(BAT_NAME CopyReleaseX64Dll)
+        set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../Assist/x64/CMake/ReleaseWindows)
+
+        link_libraries(libExportTest.so)
+
+    endif ()
+
 elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
     if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
