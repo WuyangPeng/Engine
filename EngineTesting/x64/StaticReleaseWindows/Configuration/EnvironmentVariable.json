@@ -2,9 +2,9 @@
   "DefaultEnvironment": "",
   "EngineDirectory": "Configuration/EngineDirectory.json",
   "FrameworkEngineDirectory": "Configuration/FrameworkEngineDirectory.json",
-  "Version": "1.0.2.1",
+  "Version": "0.0.0.0",
   "PrintRun": 1,
-  "RandomSeed": 1000201,
+  "RandomSeed": 0,
 
   "JSON": "JSON",
   "TcpPort": 30000,

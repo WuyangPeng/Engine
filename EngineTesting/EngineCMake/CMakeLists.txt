@@ -13,7 +13,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
     include_directories(/data/coding/EngineTesting/Code/)
     include_directories(/data/coding/Assist/Code/)
-	include_directories(/data/coding/EngineTesting/EngineWindows/)
+    include_directories(/data/coding/EngineTesting/EngineWindows/)
     include_directories(/data/coding/Assist/AssistWindows/)
 
     if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
@@ -22,6 +22,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
         link_directories(/data/coding/Assist/x64/CMake/DebugWindows)
 
         link_libraries(libExportTestD.so)
+        link_libraries(libCSVConfigureD.so)
 
     else ()
 
@@ -29,6 +30,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
         link_directories(/data/coding/Assist/x64/CMake/ReleaseWindows)
 
         link_libraries(libExportTest.so)
+        link_libraries(libCSVConfigure.so)
 
     endif ()
 
