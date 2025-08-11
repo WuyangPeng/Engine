@@ -18,14 +18,14 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
 
         set(BAT_NAME CopyDebugX64Dll)
-        set(EXECUTABLE_OUTPUT_PATH /data/coding/Assist/x64/CMake/DebugWindows)
+        link_directories(/data/coding/Assist/x64/CMake/DebugWindows)
 
         link_libraries(libExportTestD.so)
 
     else ()
 
         set(BAT_NAME CopyReleaseX64Dll)
-        set(EXECUTABLE_OUTPUT_PATH /data/coding/Assist/x64/CMake/ReleaseWindows)
+        link_directories(/data/coding/Assist/x64/CMake/ReleaseWindows)
 
         link_libraries(libExportTest.so)
 
