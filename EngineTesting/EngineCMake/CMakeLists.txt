@@ -15,6 +15,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     include_directories(/data/coding/Assist/Code/)
     include_directories(/data/coding/EngineTesting/EngineWindows/)
     include_directories(/data/coding/Assist/AssistWindows/)
+    include_directories(/data/coding/EngineTesting/Code/Network/NetworkTesting/NetworkMessageSuite/Detail/)
 
     if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
 
