@@ -46,6 +46,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     link_libraries(libactivemq-cpp.so)
     link_libraries(libmongocxx.so)
     link_libraries(libbsoncxx.so)
+    link_libraries(libabseil_dll.so)
     link_libraries(libhiredis.so)
 
 elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
