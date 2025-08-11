@@ -171,8 +171,11 @@ if [ ! -f /data/coding/External/protobuf_installed.txt ]; then
 		mkdir -p build
 		cd build
 
-		cmake .. -DCMAKE_BUILD_TYPE=Release
-		make
+		cmake .. \
+			-DCMAKE_BUILD_TYPE=Release \
+			-DBUILD_SHARED_LIBS=ON \
+			-DCMAKE_POSITION_INDEPENDENT_CODE=ON
+		make -j$(nproc)
 	 
 		if [ $? -eq 0 ]; then 
 	 
