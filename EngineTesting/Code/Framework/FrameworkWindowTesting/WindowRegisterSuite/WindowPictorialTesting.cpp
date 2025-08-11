@@ -8,7 +8,7 @@
 ///	版本：0.9.1.3 (2023/08/10 13:59)
 
 #include "WindowPictorialTesting.h"
-#include "resource.h"
+#include "Framework/FrameworkWindowTesting/resource.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Windows/Using/WindowsRegistryUsing.h"
 #include "System/Windows/WindowsRegister.h"

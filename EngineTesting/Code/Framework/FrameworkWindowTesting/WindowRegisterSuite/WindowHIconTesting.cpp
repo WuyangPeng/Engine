@@ -8,7 +8,7 @@
 ///	版本：0.9.1.3 (2023/08/10 13:58)
 
 #include "WindowHIconTesting.h"
-#include "resource.h"
+#include "Framework/FrameworkWindowTesting/resource.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Windows/WindowsRegister.h"
 #include "CoreTools/Helper/AssertMacro.h"
