@@ -25,7 +25,7 @@ namespace NetworkExample
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void InitSuite();
+        void InitSuite() noexcept;
     };
 }
 
