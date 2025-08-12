@@ -24,7 +24,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
         link_libraries(libExportTestD.so)
         link_libraries(libCSVConfigureD.so)
-		link_libraries(libDatabaseEntityD.so)
+        link_libraries(libDatabaseEntityD.so)
 
     else ()
 
@@ -33,21 +33,29 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
         link_libraries(libExportTest.so)
         link_libraries(libCSVConfigure.so)
-		link_libraries(libDatabaseEntity.so)
+        link_libraries(libDatabaseEntity.so)
 
     endif ()
 
 elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../EngineTesting/EngineWindows/)
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Assist/AssistWindows/)
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../EngineTesting/Code/Network/NetworkTesting/NetworkMessageSuite/Detail/)
 
     if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
 
         set(BAT_NAME CopyDebugX64Dll)
         set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../x64/CMake/DebugWindows)
 
+        link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Assist/x64/CMake/DebugWindows)
+
     else ()
 
         set(BAT_NAME CopyReleaseX64Dll)
         set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../x64/CMake/ReleaseWindows)
+
+        link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Assist/x64/CMake/ReleaseWindows)
 
     endif ()
 
@@ -63,7 +71,7 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     add_custom_target(
             RunBatFile ALL
             COMMAND
-            COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/../../Bat/${BAT_NAME}.bat x64 ${EXECUTABLE_OUTPUT_PATH}
+            COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/../../Bat/${BAT_NAME}.bat x64 ${EXECUTABLE_OUTPUT_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/../../Libs/
             COMMENT "Running ${BAT_NAME}.bat after build"
     )
 
