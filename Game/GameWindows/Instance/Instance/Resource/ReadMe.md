@@ -1,12 +1,12 @@
-@ingroup group_Instance_Documentation
+ï»¿@ingroup group_Instance_Documentation
 
 ----------------------------
-¸±±¾Ä£¿é 
+å‰¯æœ¬æ¨¡å— 
 
-Ä¿Ç°°üº¬£º
+ç›®å‰åŒ…å«ï¼š
 
-1.	Instance£¨¸±±¾£©
+1.	Instanceï¼ˆå‰¯æœ¬ï¼‰
  
-£¨1£©¸±±¾¡£
+ï¼ˆ1ï¼‰å‰¯æœ¬ã€‚
 
 ----------------------------

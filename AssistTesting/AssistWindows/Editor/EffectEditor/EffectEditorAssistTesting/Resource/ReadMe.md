@@ -1,7 +1,7 @@
-@ingroup group_EffectEditorAssistTesting_Documentation
+ï»¿@ingroup group_EffectEditorAssistTesting_Documentation
 
 ----------------------------
-Ğ§¹û±à¼­Æ÷¸¨Öúµ¥Ôª²âÊÔ
+æ•ˆæœç¼–è¾‘å™¨è¾…åŠ©å•å…ƒæµ‹è¯•
 
 1.   EffectEditorAssistTesting 
 

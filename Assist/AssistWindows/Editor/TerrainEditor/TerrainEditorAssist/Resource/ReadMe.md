@@ -1,7 +1,7 @@
-@ingroup group_TerrainEditorAssist_Documentation
+ï»¿@ingroup group_TerrainEditorAssist_Documentation
 
 ----------------------------
-µØÐÎ±à¼­Æ÷¸¨Öú
+åœ°å½¢ç¼–è¾‘å™¨è¾…åŠ©
 
 1.  TerrainEditorAssist 
 

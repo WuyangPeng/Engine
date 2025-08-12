@@ -1,11 +1,11 @@
-@ingroup group_TextureEditor_Documentation
+ï»¿@ingroup group_TextureEditor_Documentation
 
 ----------------------------
-ÎÆÀí±à¼­Æ÷
+çº¹ç†ç¼–è¾‘å™¨
 
 1.   TextureEditor 
 
-ÎÆÀí±à¼­Æ÷£¬°üÀ¨£º 
-£¨1£©ÎÆÀí¡£
+çº¹ç†ç¼–è¾‘å™¨ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰çº¹ç†ã€‚
 
 ----------------------------

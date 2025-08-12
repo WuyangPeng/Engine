@@ -13,6 +13,7 @@
 #include "BSplineCurve2.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::BSplineCurve2<Real>::BSplineCurve2(const std::vector<Vector2<Real>>& ctrlPoint, int degree, bool loop, bool open)

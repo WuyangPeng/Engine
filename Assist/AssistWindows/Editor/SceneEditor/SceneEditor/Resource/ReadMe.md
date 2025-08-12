@@ -1,11 +1,11 @@
-@ingroup group_SceneEditor_Documentation
+ï»¿@ingroup group_SceneEditor_Documentation
 
 ----------------------------
-³¡¾°±à¼­Æ÷
+åœºæ™¯ç¼–è¾‘å™¨
 
 1.   SceneEditor 
 
-³¡¾°±à¼­Æ÷£¬°üÀ¨£º 
-£¨1£©³¡¾°¡£
+åœºæ™¯ç¼–è¾‘å™¨ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰åœºæ™¯ã€‚
 
 ----------------------------

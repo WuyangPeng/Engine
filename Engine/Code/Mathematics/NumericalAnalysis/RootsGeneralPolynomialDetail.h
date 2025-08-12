@@ -12,11 +12,12 @@
 
 #include "RootsGeneralPolynomial.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 #include <thread>
 
 template <typename T>
-requires(std::is_arithmetic_v<T>)
+    requires(std::is_arithmetic_v<T>)
 Mathematics::RootsGeneralPolynomial<T>::RootsGeneralPolynomial() noexcept
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -25,7 +26,7 @@ Mathematics::RootsGeneralPolynomial<T>::RootsGeneralPolynomial() noexcept
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename T>
-requires(std::is_arithmetic_v<T>)
+    requires(std::is_arithmetic_v<T>)
 bool Mathematics::RootsGeneralPolynomial<T>::IsValid() const noexcept
 {
     return true;
@@ -34,7 +35,7 @@ bool Mathematics::RootsGeneralPolynomial<T>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
-requires(std::is_arithmetic_v<T>)
+    requires(std::is_arithmetic_v<T>)
 void Mathematics::RootsGeneralPolynomial<T>::Solve(const Container& p, bool useThreading, Container& roots)
 {
     roots.clear();
@@ -99,7 +100,7 @@ void Mathematics::RootsGeneralPolynomial<T>::Solve(const Container& p, bool useT
 }
 
 template <typename T>
-requires(std::is_arithmetic_v<T>)
+    requires(std::is_arithmetic_v<T>)
 void Mathematics::RootsGeneralPolynomial<T>::Solve(const RationalContainer& rP, bool useThreading, RationalContainer& rRoots)
 {
     rRoots.clear();
@@ -158,7 +159,7 @@ void Mathematics::RootsGeneralPolynomial<T>::Solve(const RationalContainer& rP, 
 }
 
 template <typename T>
-requires(std::is_arithmetic_v<T>)
+    requires(std::is_arithmetic_v<T>)
 void Mathematics::RootsGeneralPolynomial<T>::InitiateSolver(const RationalContainer& rP, bool useThreading, RationalContainer& rRoots)
 {
     /// 计算柯西边界以获得包含p(x).的根的区间。此时多项式为monic。
@@ -179,7 +180,7 @@ void Mathematics::RootsGeneralPolynomial<T>::InitiateSolver(const RationalContai
 }
 
 template <typename T>
-requires(std::is_arithmetic_v<T>)
+    requires(std::is_arithmetic_v<T>)
 void Mathematics::RootsGeneralPolynomial<T>::SolveRecursive(const RationalContainer& rP, const Rational& rXMin, const Rational& rXMax, bool useThreading, RationalContainer& rRoots)
 {
     /// 递归的基础。
@@ -305,7 +306,7 @@ void Mathematics::RootsGeneralPolynomial<T>::SolveRecursive(const RationalContai
 }
 
 template <typename T>
-requires(std::is_arithmetic_v<T>)
+    requires(std::is_arithmetic_v<T>)
 bool Mathematics::RootsGeneralPolynomial<T>::Bisect(const Container& tP, const RationalContainer& rP, const Rational& rXMin, const Rational& rXMax, Rational& rRoot)
 {
     /// 第一个区间是[-cauchyBound,derivativeRoot.first]。
@@ -422,7 +423,7 @@ bool Mathematics::RootsGeneralPolynomial<T>::Bisect(const Container& tP, const R
 }
 
 template <typename T>
-requires(std::is_arithmetic_v<T>)
+    requires(std::is_arithmetic_v<T>)
 template <typename Numeric>
 Numeric Mathematics::RootsGeneralPolynomial<T>::Evaluate(const std::vector<Numeric>& p, const Numeric& x)
 {

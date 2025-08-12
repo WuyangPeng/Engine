@@ -1,7 +1,7 @@
-@ingroup group_ConsoleSystemTesting_Documentation
+ï»¿@ingroup group_ConsoleSystemTesting_Documentation
 
 ----------------------------
-¿ØÖÆÌ¨ÏµÍ³²âÊÔ
+æ§åˆ¶å°ç³»ç»Ÿæµ‹è¯•
 
 ----------------------------
 1. AllocConsole 

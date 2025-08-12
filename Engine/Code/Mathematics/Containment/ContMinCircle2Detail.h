@@ -13,6 +13,7 @@
 #include "ContMinCircle2.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::ContMinCircle2<Real>::ContMinCircle2(const std::vector<Vector2<Real>>& points, Circle2<Real>& minimal, Real epsilon)

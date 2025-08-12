@@ -2,20 +2,21 @@
  
 set Platform=%1
 set Target=%2
+set LibPath=%3
 
-xcopy "%ACEX64Lib%/ACEd.dll" "%Target%" /F /Y
-xcopy "%MysqlConnectorX64DebugLib%/*.dll" "%Target%" /F /Y
-xcopy "%VisualLeakDetectorX64Lib%/vld_x64.dll" "%Target%" /F /Y
-xcopy "%VisualLeakDetectorX64Lib%/dbghelp.dll" "%Target%" /F /Y
-xcopy "%VisualLeakDetectorX64Lib%/*.manifest" "%Target%" /F /Y
-xcopy "%FreeglutX64DebugBin%/freeglutd.dll" "%Target%" /F /Y
-xcopy "%OpenSSLX64Lib%/../bin/*.dll" "%Target%" /F /Y
-xcopy "%OpenXLSXX64DebugLib%/*.dll" "%Target%" /F /Y
-xcopy "%ProtobufX64DebugLib%/*.dll" "%Target%" /F /Y
-xcopy "%ActiveMQX64DebugLib%/*.dll" "%Target%" /F /Y
-xcopy "%AprX64DebugLib%/*.dll" "%Target%" /F /Y
-xcopy "%MongoCxxDriverX64DebugLib%/*.dll" "%Target%" /F /Y
-xcopy "%BsoncxxX64DebugLib%/*.dll" "%Target%" /F /Y
-xcopy "%MongocxxInclude%/../Build%Platform%/mongo-c-driver/bin/mongoc*.dll" "%Target%" /F /Y
-xcopy "%MongocxxInclude%/../Build%Platform%/mongo-c-driver/bin/bson*.dll" "%Target%" /F /Y
-xcopy "%HiredisX64DebugLib%/*.dll" "%Target%" /F /Y
+xcopy "%LibPath%/ACE/ACE_wrappers/lib/X64/ACEd.dll" "%Target%" /F /Y
+xcopy "%LibPath%/openssl/x64/Debug/bin/*.dll" "%Target%" /F /Y
+xcopy "%LibPath%/mysql-connector-c++/BuildX64/Debug/*.dll" "%Target%" /F /Y
+xcopy "%LibPath%/vld/src/bin/x64/Release-v143/vld_x64.dll" "%Target%" /F /Y
+xcopy "%LibPath%/vld/src/bin/x64/Release-v143/dbghelp.dll" "%Target%" /F /Y
+xcopy "%LibPath%/vld/src/bin/x64/Release-v143/*.manifest" "%Target%" /F /Y
+xcopy "%LibPath%/freeglut/BuildX64/bin/Debug/freeglutd.dll" "%Target%" /F /Y
+xcopy "%LibPath%/OpenXLSX/BuildX64/output/Debug/*.dll" "%Target%" /F /Y
+xcopy "%LibPath%/protobuf/BuildX64/bin/Debug/*.dll" "%Target%" /F /Y
+xcopy "%LibPath%/activemq/activemq-cpp/vs2010-build/x64/DebugDLL/*.dll" "%Target%" /F /Y
+xcopy "%LibPath%/apr/BuildX64/Debug/*.dll" "%Target%" /F /Y
+xcopy "%LibPath%/mongo-cxx-driver/BuildX64/src/mongocxx/Debug/*.dll" "%Target%" /F /Y
+xcopy "%LibPath%/mongo-cxx-driver/BuildX64/src/bsoncxx/Debug/*.dll" "%Target%" /F /Y
+xcopy "%LibPath%/mongo-cxx-driver/BuildX64/_deps/mongo-c-driver-build/src/libmongoc/Debug/*.dll" "%Target%" /F /Y
+xcopy "%LibPath%/mongo-cxx-driver/BuildX64/_deps/mongo-c-driver-build/src/libbson/Debug/*.dll" "%Target%" /F /Y
+xcopy "%LibPath%/hiredis/BuildX64/Debug/*.dll" "%Target%" /F /Y

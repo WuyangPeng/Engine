@@ -1,7 +1,7 @@
-@ingroup group_MathematicsToolset_Documentation
+ï»¿@ingroup group_MathematicsToolset_Documentation
 
 ----------------------------
-ÊýÑ§¹¤¾ßÏä
+æ•°å­¦å·¥å…·ç®±
 
 1.  MathematicsToolset 
 

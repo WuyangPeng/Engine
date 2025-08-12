@@ -1,65 +1,65 @@
-@ingroup group_Documentation
+ï»¿@ingroup group_Documentation
 
 ----------------------------
-×îºóµÄ°ÔÍõ¹¤³Ì
+æœ€åçš„éœ¸ç‹å·¥ç¨‹
 
 ----------------------------
-TheLastOverlord.props£º
-×îºóµÄ°ÔÍõ¹¤³ÌÊôĞÔ±í
+TheLastOverlord.propsï¼š
+æœ€åçš„éœ¸ç‹å·¥ç¨‹å±æ€§è¡¨
 
-TheLastOverlordStaticWin32DebugLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Élib¡¢Win32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordStaticWin32DebugLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆlibã€Win32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordStaticWin32ReleaseLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Élib¡¢Win32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordStaticWin32ReleaseLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆlibã€Win32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordStaticX64DebugLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Élib¡¢X64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordStaticX64DebugLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆlibã€X64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordStaticX64ReleaseLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Élib¡¢X64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordStaticX64ReleaseLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆlibã€X64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordWin32DebugLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Édll¡¢Win32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordWin32DebugLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆdllã€Win32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordWin32ReleaseLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Édll¡¢Win32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordWin32ReleaseLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆdllã€Win32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordX64DebugLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Édll¡¢X64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordX64DebugLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆdllã€X64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordX64ReleaseLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Édll¡¢X64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordX64ReleaseLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆdllã€X64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordEngineDynamicTheLastOverlordStaticWin32DebugLibs.props£º
-ÒıÇæ£¨dll£©ºÍÓÎÏ·£¨lib£©¶¼±àÒë³ÉWin32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordEngineDynamicTheLastOverlordStaticWin32DebugLibs.propsï¼š
+å¼•æ“ï¼ˆdllï¼‰å’Œæ¸¸æˆï¼ˆlibï¼‰éƒ½ç¼–è¯‘æˆWin32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordEngineDynamicTheLastOverlordStaticWin32ReleaseLibs.props£º
-ÒıÇæ£¨dll£©ºÍÓÎÏ·£¨lib£©¶¼±àÒë³ÉWin32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordEngineDynamicTheLastOverlordStaticWin32ReleaseLibs.propsï¼š
+å¼•æ“ï¼ˆdllï¼‰å’Œæ¸¸æˆï¼ˆlibï¼‰éƒ½ç¼–è¯‘æˆWin32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordEngineDynamicTheLastOverlordStaticX64DebugLibs.props£º
-ÒıÇæ£¨dll£©ºÍÓÎÏ·£¨lib£©¶¼±àÒë³ÉX64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordEngineDynamicTheLastOverlordStaticX64DebugLibs.propsï¼š
+å¼•æ“ï¼ˆdllï¼‰å’Œæ¸¸æˆï¼ˆlibï¼‰éƒ½ç¼–è¯‘æˆX64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordEngineDynamicTheLastOverlordStaticX64ReleaseLibs.props£º
-ÒıÇæ£¨dll£©ºÍÓÎÏ·£¨lib£©¶¼±àÒë³ÉX64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordEngineDynamicTheLastOverlordStaticX64ReleaseLibs.propsï¼š
+å¼•æ“ï¼ˆdllï¼‰å’Œæ¸¸æˆï¼ˆlibï¼‰éƒ½ç¼–è¯‘æˆX64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordEngineStaticTheLastOverlordDynamicWin32DebugLibs.props£º
-ÒıÇæ£¨lib£©ºÍÓÎÏ·£¨dll£©¶¼±àÒë³ÉWin32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordEngineStaticTheLastOverlordDynamicWin32DebugLibs.propsï¼š
+å¼•æ“ï¼ˆlibï¼‰å’Œæ¸¸æˆï¼ˆdllï¼‰éƒ½ç¼–è¯‘æˆWin32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordEngineStaticTheLastOverlordDynamicWin32ReleaseLibs.props£º
-ÒıÇæ£¨lib£©ºÍÓÎÏ·£¨dll£©¶¼±àÒë³ÉWin32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordEngineStaticTheLastOverlordDynamicWin32ReleaseLibs.propsï¼š
+å¼•æ“ï¼ˆlibï¼‰å’Œæ¸¸æˆï¼ˆdllï¼‰éƒ½ç¼–è¯‘æˆWin32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordEngineStaticTheLastOverlordDynamicX64DebugLibs.props£º
-ÒıÇæ£¨lib£©ºÍÓÎÏ·£¨dll£©¶¼±àÒë³ÉX64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordEngineStaticTheLastOverlordDynamicX64DebugLibs.propsï¼š
+å¼•æ“ï¼ˆlibï¼‰å’Œæ¸¸æˆï¼ˆdllï¼‰éƒ½ç¼–è¯‘æˆX64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-TheLastOverlordEngineStaticTheLastOverlordDynamicX64ReleaseLibs.props£º
-ÒıÇæ£¨lib£©ºÍÓÎÏ·£¨dll£©¶¼±àÒë³ÉX64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+TheLastOverlordEngineStaticTheLastOverlordDynamicX64ReleaseLibs.propsï¼š
+å¼•æ“ï¼ˆlibï¼‰å’Œæ¸¸æˆï¼ˆdllï¼‰éƒ½ç¼–è¯‘æˆX64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
 ----------------------------
-SetEnvironment.bat£º
-ÉèÖÃ×îºóµÄ°ÔÍõËùĞèÒªµÄ»·¾³±äÁ¿
+SetEnvironment.batï¼š
+è®¾ç½®æœ€åçš„éœ¸ç‹æ‰€éœ€è¦çš„ç¯å¢ƒå˜é‡
 
-SetAllEnvironment.bat£º
-ÉèÖÃÓÎÏ·ËùĞèÒªµÄËùÓĞ»·¾³±äÁ¿
+SetAllEnvironment.batï¼š
+è®¾ç½®æ¸¸æˆæ‰€éœ€è¦çš„æ‰€æœ‰ç¯å¢ƒå˜é‡
 
 ----------------------------

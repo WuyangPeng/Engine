@@ -27,7 +27,7 @@
 
         #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
 
-            #pragma comment(lib, "mysqlcppconn8.lib")
+            #pragma comment(lib, "mysqlcppconnx.lib")
 
         #endif  // DATABASE_USE_MYSQL_CPP_CONNECTOR
 

@@ -1,41 +1,41 @@
-@ingroup group_FrameworkWindowTesting_Documentation
+ï»¿@ingroup group_FrameworkWindowTesting_Documentation
 
 ----------------------------
-¿ò¼Ü¿â´°¿Ú»·¾³µ¥Ôª²âÊÔ
+æ¡†æ¶åº“çª—å£ç¯å¢ƒå•å…ƒæµ‹è¯•
 
-1. ´°¿Ú´´½¨£¨WindowCreate£©
+1. çª—å£åˆ›å»ºï¼ˆWindowCreateï¼‰
 
-´°¿Ú´´½¨µ¥Ôª²âÊÔÄ£¿é£º
-£¨1£©WindowInstanceParameter
-£¨2£©WindowCreateParameter
-£¨3£©WindowCreateHandle
-
-----------------------------
-2. ´°¿Ú½ø³Ì£¨WindowProcess£©
-
-´°¿Ú½ø³Ìµ¥Ôª²âÊÔÄ£¿é£º 
-£¨1£©WindowMessageInterface
-£¨2£©WindowMessage
-£¨3£©WindowProcessManager
-£¨4£©WindowProcessHandle 
+çª—å£åˆ›å»ºå•å…ƒæµ‹è¯•æ¨¡å—ï¼š
+ï¼ˆ1ï¼‰WindowInstanceParameter
+ï¼ˆ2ï¼‰WindowCreateParameter
+ï¼ˆ3ï¼‰WindowCreateHandle
 
 ----------------------------
-3. ´°¿Ú×¢²á£¨WindowRegister£©
+2. çª—å£è¿›ç¨‹ï¼ˆWindowProcessï¼‰
 
-´°¿Ú×¢²áµ¥Ôª²âÊÔÄ£¿é£º
-£¨1£©WindowRegisterParameter
-£¨2£©WindowHIcon
-£¨3£©WindowHCursor
-£¨4£©WindowPictorial
-£¨5£©WindowRegisterHandle
+çª—å£è¿›ç¨‹å•å…ƒæµ‹è¯•æ¨¡å—ï¼š 
+ï¼ˆ1ï¼‰WindowMessageInterface
+ï¼ˆ2ï¼‰WindowMessage
+ï¼ˆ3ï¼‰WindowProcessManager
+ï¼ˆ4ï¼‰WindowProcessHandle 
 
 ----------------------------
-4. Ó¦ÓÃ£¨Application£©
+3. çª—å£æ³¨å†Œï¼ˆWindowRegisterï¼‰
 
-Ó¦ÓÃµ¥Ôª²âÊÔÄ£¿é£º
-£¨1£©FontInformation
-£¨2£©MousePosition
-£¨3£©WindowApplicationInformation
+çª—å£æ³¨å†Œå•å…ƒæµ‹è¯•æ¨¡å—ï¼š
+ï¼ˆ1ï¼‰WindowRegisterParameter
+ï¼ˆ2ï¼‰WindowHIcon
+ï¼ˆ3ï¼‰WindowHCursor
+ï¼ˆ4ï¼‰WindowPictorial
+ï¼ˆ5ï¼‰WindowRegisterHandle
+
+----------------------------
+4. åº”ç”¨ï¼ˆApplicationï¼‰
+
+åº”ç”¨å•å…ƒæµ‹è¯•æ¨¡å—ï¼š
+ï¼ˆ1ï¼‰FontInformation
+ï¼ˆ2ï¼‰MousePosition
+ï¼ˆ3ï¼‰WindowApplicationInformation
 
 ----------------------------
  

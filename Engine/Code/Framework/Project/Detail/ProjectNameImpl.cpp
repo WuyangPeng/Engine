@@ -13,6 +13,7 @@
 #include "ProjectNameImpl.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Mathematics/Base/MathDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 #include <iomanip>
 #include <sstream>

@@ -1,7 +1,7 @@
-@ingroup group_AnimationEditorAssistTesting_Documentation
+ï»¿@ingroup group_AnimationEditorAssistTesting_Documentation
 
 ----------------------------
-¶¯»­±à¼­Æ÷¸¨Öúµ¥Ôª²âÊÔ
+åŠ¨ç”»ç¼–è¾‘å™¨è¾…åŠ©å•å…ƒæµ‹è¯•
 
 1.   AnimationEditorAssistTesting 
 

@@ -1,62 +1,62 @@
-@ingroup group_Documentation
+﻿@ingroup group_Documentation
 
 ----------------------------
-引擎游戏工程
+寮曟搸娓告垙宸ョ▼
 
 ----------------------------
-Game.props：
-引擎游戏工程属性表
+Game.props锛?
+寮曟搸娓告垙宸ョ▼灞炴€ц〃
 
-GameStaticWin32DebugLibs.props：
-引擎和游戏都编译成lib、Win32、Debug工程依赖库属性表
+GameStaticWin32DebugLibs.props锛?
+寮曟搸鍜屾父鎴忛兘缂栬瘧鎴恖ib銆乄in32銆丏ebug宸ョ▼渚濊禆搴撳睘鎬ц〃
 
-GameStaticWin32ReleaseLibs.props：
-引擎和游戏都编译成lib、Win32、Release工程依赖库属性表
+GameStaticWin32ReleaseLibs.props锛?
+寮曟搸鍜屾父鎴忛兘缂栬瘧鎴恖ib銆乄in32銆丷elease宸ョ▼渚濊禆搴撳睘鎬ц〃
 
-GameStaticX64DebugLibs.props：
-引擎和游戏都编译成lib、X64、Debug工程依赖库属性表
+GameStaticX64DebugLibs.props锛?
+寮曟搸鍜屾父鎴忛兘缂栬瘧鎴恖ib銆乆64銆丏ebug宸ョ▼渚濊禆搴撳睘鎬ц〃
 
-GameStaticX64ReleaseLibs.props：
-引擎和游戏都编译成lib、X64、Release工程依赖库属性表
+GameStaticX64ReleaseLibs.props锛?
+寮曟搸鍜屾父鎴忛兘缂栬瘧鎴恖ib銆乆64銆丷elease宸ョ▼渚濊禆搴撳睘鎬ц〃
 
-GameWin32DebugLibs.props：
-引擎和游戏都编译成dll、Win32、Debug工程依赖库属性表
+GameWin32DebugLibs.props锛?
+寮曟搸鍜屾父鎴忛兘缂栬瘧鎴恉ll銆乄in32銆丏ebug宸ョ▼渚濊禆搴撳睘鎬ц〃
 
-GameWin32ReleaseLibs.props：
-引擎和游戏都编译成dll、Win32、Release工程依赖库属性表
+GameWin32ReleaseLibs.props锛?
+寮曟搸鍜屾父鎴忛兘缂栬瘧鎴恉ll銆乄in32銆丷elease宸ョ▼渚濊禆搴撳睘鎬ц〃
 
-GameX64DebugLibs.props：
-引擎和游戏都编译成dll、X64、Debug工程依赖库属性表
+GameX64DebugLibs.props锛?
+寮曟搸鍜屾父鎴忛兘缂栬瘧鎴恉ll銆乆64銆丏ebug宸ョ▼渚濊禆搴撳睘鎬ц〃
 
-GameX64ReleaseLibs.props：
-引擎和游戏都编译成dll、X64、Release工程依赖库属性表
+GameX64ReleaseLibs.props锛?
+寮曟搸鍜屾父鎴忛兘缂栬瘧鎴恉ll銆乆64銆丷elease宸ョ▼渚濊禆搴撳睘鎬ц〃
 
-GameEngineDynamicGameStaticWin32DebugLibs.props：
-引擎（dll）和游戏（lib）都编译成Win32、Debug工程依赖库属性表
+GameEngineDynamicGameStaticWin32DebugLibs.props锛?
+寮曟搸锛坉ll锛夊拰娓告垙锛坙ib锛夐兘缂栬瘧鎴怶in32銆丏ebug宸ョ▼渚濊禆搴撳睘鎬ц〃
 
-GameEngineDynamicGameStaticWin32ReleaseLibs.props：
-引擎（dll）和游戏（lib）都编译成Win32、Release工程依赖库属性表
+GameEngineDynamicGameStaticWin32ReleaseLibs.props锛?
+寮曟搸锛坉ll锛夊拰娓告垙锛坙ib锛夐兘缂栬瘧鎴怶in32銆丷elease宸ョ▼渚濊禆搴撳睘鎬ц〃
 
-GameEngineDynamicGameStaticX64DebugLibs.props：
-引擎（dll）和游戏（lib）都编译成X64、Debug工程依赖库属性表
+GameEngineDynamicGameStaticX64DebugLibs.props锛?
+寮曟搸锛坉ll锛夊拰娓告垙锛坙ib锛夐兘缂栬瘧鎴怷64銆丏ebug宸ョ▼渚濊禆搴撳睘鎬ц〃
 
-GameEngineDynamicGameStaticX64ReleaseLibs.props：
-引擎（dll）和游戏（lib）都编译成X64、Release工程依赖库属性表
+GameEngineDynamicGameStaticX64ReleaseLibs.props锛?
+寮曟搸锛坉ll锛夊拰娓告垙锛坙ib锛夐兘缂栬瘧鎴怷64銆丷elease宸ョ▼渚濊禆搴撳睘鎬ц〃
 
-GameEngineStaticGameDynamicWin32DebugLibs.props：
-引擎（lib）和游戏（dll）都编译成Win32、Debug工程依赖库属性表
+GameEngineStaticGameDynamicWin32DebugLibs.props锛?
+寮曟搸锛坙ib锛夊拰娓告垙锛坉ll锛夐兘缂栬瘧鎴怶in32銆丏ebug宸ョ▼渚濊禆搴撳睘鎬ц〃
 
-GameEngineStaticGameDynamicWin32ReleaseLibs.props：
-引擎（lib）和游戏（dll）都编译成Win32、Release工程依赖库属性表
+GameEngineStaticGameDynamicWin32ReleaseLibs.props锛?
+寮曟搸锛坙ib锛夊拰娓告垙锛坉ll锛夐兘缂栬瘧鎴怶in32銆丷elease宸ョ▼渚濊禆搴撳睘鎬ц〃
 
-GameEngineStaticGameDynamicX64DebugLibs.props：
-引擎（lib）和游戏（dll）都编译成X64、Debug工程依赖库属性表
+GameEngineStaticGameDynamicX64DebugLibs.props锛?
+寮曟搸锛坙ib锛夊拰娓告垙锛坉ll锛夐兘缂栬瘧鎴怷64銆丏ebug宸ョ▼渚濊禆搴撳睘鎬ц〃
 
-GameEngineStaticGameDynamicX64ReleaseLibs.props：
-引擎（lib）和游戏（dll）都编译成X64、Release工程依赖库属性表
+GameEngineStaticGameDynamicX64ReleaseLibs.props锛?
+寮曟搸锛坙ib锛夊拰娓告垙锛坉ll锛夐兘缂栬瘧鎴怷64銆丷elease宸ョ▼渚濊禆搴撳睘鎬ц〃
 
 ----------------------------
-SetEnvironment.bat：
-设置引擎游戏所需要的环境变量
+SetEnvironment.bat锛?
+璁剧疆寮曟搸娓告垙鎵€闇€瑕佺殑鐜鍙橀噺
 
 ----------------------------

@@ -1,6 +1,6 @@
 curDir=$(pwd)/..
 
-cd "$curDir"/Libs/Bat
+cd "$curDir"/External/Bat
 sh create_lib.sh
 
 cd "$curDir"/Engine/Bat

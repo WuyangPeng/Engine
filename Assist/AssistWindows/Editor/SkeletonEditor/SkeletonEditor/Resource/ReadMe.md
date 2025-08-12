@@ -1,11 +1,11 @@
-@ingroup group_SkeletonEditor_Documentation
+ï»¿@ingroup group_SkeletonEditor_Documentation
 
 ----------------------------
-¹Ç÷À±à¼­Æ÷
+éª¨éª¼ç¼–è¾‘å™¨
 
 1.   SkeletonEditor 
 
-¹Ç÷À±à¼­Æ÷£¬°üÀ¨£º 
-£¨1£©¹Ç÷À¡£
+éª¨éª¼ç¼–è¾‘å™¨ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰éª¨éª¼ã€‚
 
 ----------------------------

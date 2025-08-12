@@ -1,12 +1,12 @@
-@ingroup group_OpenGLGlutMainFunctionHelper1_Documentation
+ï»¿@ingroup group_OpenGLGlutMainFunctionHelper1_Documentation
 
 ----------------------------
-OpenGL GLUTÖ÷º¯Êı°ïÖú
+OpenGL GLUTä¸»å‡½æ•°å¸®åŠ©
 
 OpenGLGlutMainFunctionHelper1 
 
-OpenGL GLUTÖ÷º¯Êı°ïÖú¹¤¾ßÏä¡£ÊµÏÖÒÔÏÂ¹¦ÄÜ£º 
+OpenGL GLUTä¸»å‡½æ•°å¸®åŠ©å·¥å…·ç®±ã€‚å®ç°ä»¥ä¸‹åŠŸèƒ½ï¼š 
 
-£¨1£©ÔËĞĞOpenGL GLUTÖ÷º¯Êı°ïÖú¡£ 
+ï¼ˆ1ï¼‰è¿è¡ŒOpenGL GLUTä¸»å‡½æ•°å¸®åŠ©ã€‚ 
 
 ----------------------------

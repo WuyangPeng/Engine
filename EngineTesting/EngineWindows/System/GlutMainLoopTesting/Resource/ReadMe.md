@@ -1,7 +1,7 @@
-@ingroup group_GlutMainLoopTesting_Documentation
+ï»¿@ingroup group_GlutMainLoopTesting_Documentation
 
 ----------------------------
-GlutÖ÷Ñ­»·µ¥Ôª²âÊÔ
+Glutä¸»å¾ªç¯å•å…ƒæµ‹è¯•
 
 ----------------------------
 1. GlutMainLoop 

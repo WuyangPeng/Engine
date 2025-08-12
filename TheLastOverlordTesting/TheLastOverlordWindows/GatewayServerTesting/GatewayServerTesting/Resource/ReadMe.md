@@ -1,12 +1,12 @@
-@ingroup group_GatewayServerTesting_Documentation
+ï»¿@ingroup group_GatewayServerTesting_Documentation
 
 ----------------------------
-Íø¹Ø·şÎñÆ÷µ¥Ôª²âÊÔ
+ç½‘å…³æœåŠ¡å™¨å•å…ƒæµ‹è¯•
 
-Ä¿Ç°°üº¬£º
+ç›®å‰åŒ…å«ï¼š
 
-1. GatewayServer£¨Íø¹Ø·şÎñÆ÷£©
+1. GatewayServerï¼ˆç½‘å…³æœåŠ¡å™¨ï¼‰
 
-£¨1£©Íø¹Ø·şÎñÆ÷¡£
+ï¼ˆ1ï¼‰ç½‘å…³æœåŠ¡å™¨ã€‚
 
 ----------------------------

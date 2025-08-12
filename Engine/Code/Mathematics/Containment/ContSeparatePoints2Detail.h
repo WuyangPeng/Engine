@@ -14,6 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/ComputationalGeometry/ConvexHull2.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::ContSeparatePoints2<Real>::ContSeparatePoints2(const std::vector<Vector2<Real>>& points0, const std::vector<Vector2<Real>>& points1, Line2<Real>& separatingLine)

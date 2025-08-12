@@ -1,12 +1,12 @@
-@ingroup group_WindowMessageUnitTestSuiteTesting_Documentation
+ï»¿@ingroup group_WindowMessageUnitTestSuiteTesting_Documentation
 
 ----------------------------
-´°¿ÚÏûÏ¢µ¥Ôª²âÊÔÌ×¼şµÄµ¥Ôª²âÊÔ
+çª—å£æ¶ˆæ¯å•å…ƒæµ‹è¯•å¥—ä»¶çš„å•å…ƒæµ‹è¯•
 
 1.  WindowMessageUnitTestSuite 
 
-1. ´°¿ÚÏûÏ¢µ¥Ôª²âÊÔÌ×¼ş£¨WindowMessageUnitTest£©
-´°¿ÚÏûÏ¢µ¥Ôª²âÊÔÌ×¼şµÄµ¥Ôª²âÊÔÄ£¿é£¬Ä¿Ç°°üº¬£º
-£¨1£©WindowMessageUnitTestSuiteTesting 
+1. çª—å£æ¶ˆæ¯å•å…ƒæµ‹è¯•å¥—ä»¶ï¼ˆWindowMessageUnitTestï¼‰
+çª—å£æ¶ˆæ¯å•å…ƒæµ‹è¯•å¥—ä»¶çš„å•å…ƒæµ‹è¯•æ¨¡å—ï¼Œç›®å‰åŒ…å«ï¼š
+ï¼ˆ1ï¼‰WindowMessageUnitTestSuiteTesting 
 
 ----------------------------

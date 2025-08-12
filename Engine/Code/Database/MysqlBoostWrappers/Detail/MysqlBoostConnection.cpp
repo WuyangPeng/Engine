@@ -20,6 +20,7 @@
 #include "Database/DatabaseInterface/BasisDatabaseManager.h"
 #include "Database/DatabaseInterface/DatabaseField.h"
 #include "Database/Statement/SqlStatement.h"
+#include "System/Helper/PragmaWarning/Asio.h"
 
 using namespace std::literals;
 
@@ -165,7 +166,7 @@ void Database::MysqlBoostConnection::Execution()
             boost::mysql::results result{};
             const auto sql = SqlStatement::GenerateStatement(basisDatabaseContainer);
 
-            connection.query(sql, result);
+            connection.async_execute(sql, result, boost::asio::use_future).get();
         }
         EXCEPTION_ALL_CATCH(Database)
     }
@@ -189,7 +190,7 @@ Database::BasisDatabaseManager Database::MysqlBoostConnection::SelectOne(const B
     boost::mysql::results result{};
     const auto sql = SqlStatement::GenerateSelectOneStatement(fieldNameContainer, basisDatabaseContainer);
 
-    connection.query(sql, result);
+    connection.async_execute(sql, result, boost::asio::use_future).get();
 
     uniqueLock.unlock();
 
@@ -219,7 +220,7 @@ Database::MysqlBoostConnection::ResultContainer Database::MysqlBoostConnection::
     boost::mysql::results result{};
     const auto sql = SqlStatement::GenerateSelectAllStatement(fieldNameContainer, basisDatabaseContainer);
 
-    connection.query(sql, result);
+    connection.async_execute(sql, result, boost::asio::use_future).get();
 
     uniqueLock.unlock();
 

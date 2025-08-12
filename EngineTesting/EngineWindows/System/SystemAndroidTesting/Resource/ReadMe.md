@@ -1,17 +1,17 @@
-@ingroup group_SystemAndroidTesting_Documentation
+ï»¿@ingroup group_SystemAndroidTesting_Documentation
 
 ----------------------------
-Ïµ½y¿â°²×¿µ¥Ôª²âÊÔ
+ç³»çµ±åº“å®‰å“å•å…ƒæµ‹è¯•
 
 ----------------------------
 1.	AndroidSuite
 
-¶ÔAndroidÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© °²×¿ÊäÈë¼üÊÂ¼ş£ºAndroidInputKeyEventFacadeTesting¡£  
-£¨2£© °²×¿ÊäÈë¹ö¶¯ÊÂ¼ş£ºAndroidInputMotionEventFacadeTesting¡£  
-£¨3£© °²×¿Ñ­»·£ºAndroidLooperTesting¡£
-£¨4£© °²×¿ÊäÈë¶ÓÁĞ£ºAndroidInputQueueFacadeTesting¡£ 
-£¨5£© °²×¿´°¿Ú£ºAndroidNativeWindowFacadeTesting¡£
-£¨6£© °²×¿Ó¦ÓÃ³ÌĞò£ºAndroidNativeAppGlueTesting¡£
+å¯¹Androidæ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ å®‰å“è¾“å…¥é”®äº‹ä»¶ï¼šAndroidInputKeyEventFacadeTestingã€‚  
+ï¼ˆ2ï¼‰ å®‰å“è¾“å…¥æ»šåŠ¨äº‹ä»¶ï¼šAndroidInputMotionEventFacadeTestingã€‚  
+ï¼ˆ3ï¼‰ å®‰å“å¾ªç¯ï¼šAndroidLooperTestingã€‚
+ï¼ˆ4ï¼‰ å®‰å“è¾“å…¥é˜Ÿåˆ—ï¼šAndroidInputQueueFacadeTestingã€‚ 
+ï¼ˆ5ï¼‰ å®‰å“çª—å£ï¼šAndroidNativeWindowFacadeTestingã€‚
+ï¼ˆ6ï¼‰ å®‰å“åº”ç”¨ç¨‹åºï¼šAndroidNativeAppGlueTestingã€‚
 
 ----------------------------

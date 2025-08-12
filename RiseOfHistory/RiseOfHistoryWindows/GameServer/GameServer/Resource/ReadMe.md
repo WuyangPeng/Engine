@@ -1,6 +1,6 @@
-@ingroup group_GameServer_Documentation
+ï»¿@ingroup group_GameServer_Documentation
 
 ----------------------------
-ÓÎÏ··şÎñÆ÷
+æ¸¸æˆæœåŠ¡å™¨
 
 ----------------------------

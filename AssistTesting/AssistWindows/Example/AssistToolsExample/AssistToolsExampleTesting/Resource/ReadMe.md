@@ -1,11 +1,11 @@
-@ingroup group_AssistToolsExampleTesting_Documentation
+ï»¿@ingroup group_AssistToolsExampleTesting_Documentation
 
 ----------------------------
-ÏµÍ³Àı×Óµ¥Ôª²âÊÔ
+ç³»ç»Ÿä¾‹å­å•å…ƒæµ‹è¯•
 
 1.   AssistToolsExampleTesting 
 
-ÏµÍ³Àı×ÓµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£©ÏµÍ³Àı×Ó¡£
+ç³»ç»Ÿä¾‹å­çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰ç³»ç»Ÿä¾‹å­ã€‚
 
 ----------------------------

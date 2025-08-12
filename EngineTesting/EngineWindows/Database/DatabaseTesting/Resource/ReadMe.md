@@ -1,107 +1,107 @@
-@ingroup group_DatabaseTesting_Documentation
+ï»¿@ingroup group_DatabaseTesting_Documentation
 
 ----------------------------
-Êı¾İ¿âµ¥Ôª²âÊÔ
+æ•°æ®åº“å•å…ƒæµ‹è¯•
 
 1.   HelperSuite 
 
-¶ÔºêÄ£¿éµÄµ¥Ôª²âÊÔ£º 
-£¨1£©ÓÃ»§ºê£ºUserMacroTesting¡£
+å¯¹å®æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š 
+ï¼ˆ1ï¼‰ç”¨æˆ·å®ï¼šUserMacroTestingã€‚
 
 ----------------------------
 2.  ConfigurationSuite 
 
-¶ÔÅäÖÃÄ£¿éµÄµ¥Ôª²âÊÔ£º
-£¨1£©ÅäÖÃ²ßÂÔ£ºConfigurationStrategyTesting¡£ 
-£¨2£©ÅäÖÃ½âÎö£ºAnalysisDatabaseConfigurationTesting¡£
+å¯¹é…ç½®æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š
+ï¼ˆ1ï¼‰é…ç½®ç­–ç•¥ï¼šConfigurationStrategyTestingã€‚ 
+ï¼ˆ2ï¼‰é…ç½®è§£æï¼šAnalysisDatabaseConfigurationTestingã€‚
 
 ----------------------------
 3.  DatabaseInterfaceSuite 
 
-¶ÔÊı¾İ¿â½Ó¿ÚÄ£¿éµÄµ¥Ôª²âÊÔ£º 
-£¨1£© ¼ÇÂ¼£º BasisDatabaseTesting¡£
-£¨2£© ¼ÇÂ¼ÈİÆ÷£ºBasisDatabaseContainerTesting¡¢
-			    BasisDatabaseManagerTesting¡£
-£¨3£© ¼ÇÂ¼ĞŞ¸Ä£ºDatabaseEntityTesting¡¢
-			    EntityTesting¡¢
-				DatabaseFieldTesting¡£
-£¨4£© Êı¾İ¶ÔÏó£º DatabaseEnvironmentTesting¡£
-£¨5£© »á»°£º DatabaseManagerTesting¡£
-£¨6£© ´æ´¢£º DatabaseFlushTesting¡£ 
+å¯¹æ•°æ®åº“æ¥å£æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š 
+ï¼ˆ1ï¼‰ è®°å½•ï¼š BasisDatabaseTestingã€‚
+ï¼ˆ2ï¼‰ è®°å½•å®¹å™¨ï¼šBasisDatabaseContainerTestingã€
+			    BasisDatabaseManagerTestingã€‚
+ï¼ˆ3ï¼‰ è®°å½•ä¿®æ”¹ï¼šDatabaseEntityTestingã€
+			    EntityTestingã€
+				DatabaseFieldTestingã€‚
+ï¼ˆ4ï¼‰ æ•°æ®å¯¹è±¡ï¼š DatabaseEnvironmentTestingã€‚
+ï¼ˆ5ï¼‰ ä¼šè¯ï¼š DatabaseManagerTestingã€‚
+ï¼ˆ6ï¼‰ å­˜å‚¨ï¼š DatabaseFlushTestingã€‚ 
 
 ----------------------------
 4.  StatementSuite  
 
-¶ÔÓï¾äÄ£¿éµÄµ¥Ôª²âÊÔ£º
-£¨1£© Óï¾ä£ºRedisStatementTesting¡¢
-		    SqlStatementTesting¡£
+å¯¹è¯­å¥æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š
+ï¼ˆ1ï¼‰ è¯­å¥ï¼šRedisStatementTestingã€
+		    SqlStatementTestingã€‚
 
 ----------------------------
-5.	MySqlWrappers£¨MySQL C API °ü×°Æ÷£©
+5.	MySqlWrappersï¼ˆMySQL C API åŒ…è£…å™¨ï¼‰
 
-¶ÔMySQL C API°ü×°Æ÷Ä£¿éµÄµ¥Ôª²âÊÔ£º 
-£¨1£© »á»°¡£
-£¨2£© ´æ´¢¡£ 
+å¯¹MySQL C APIåŒ…è£…å™¨æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š 
+ï¼ˆ1ï¼‰ ä¼šè¯ã€‚
+ï¼ˆ2ï¼‰ å­˜å‚¨ã€‚ 
 
 ----------------------------
 6.  MysqlConnectorWrappersSuite 
 
-¶ÔMysql Connector °ü×°Æ÷Ä£¿éµÄµ¥Ôª²âÊÔ£º 
-£¨1£© Mysql Connector£ºMysqlConnectorDatabaseFlushTesting¡£ 
+å¯¹Mysql Connector åŒ…è£…å™¨æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š 
+ï¼ˆ1ï¼‰ Mysql Connectorï¼šMysqlConnectorDatabaseFlushTestingã€‚ 
 
 ----------------------------
 7.  MysqlBoostWrappersSuite  
 
-¶Ômysql boost°ü×°Æ÷Ä£¿éµÄµ¥Ôª²âÊÔ£º 
-£¨1£© mysql boost£ºMysqlBoostDatabaseFlushTesting¡£
+å¯¹mysql booståŒ…è£…å™¨æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š 
+ï¼ˆ1ï¼‰ mysql boostï¼šMysqlBoostDatabaseFlushTestingã€‚
 
 ----------------------------
 8.  SqlServerWrappersSuite  
 
-¶ÔSql Server °ü×°Æ÷Ä£¿éµÄµ¥Ôª²âÊÔ£º 
-£¨1£© Sql Server¡£
+å¯¹Sql Server åŒ…è£…å™¨æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š 
+ï¼ˆ1ï¼‰ Sql Serverã€‚
 
 ----------------------------
 9.  SQLiteWrappersSuite 
 
-¶ÔSQLite °ü×°Æ÷Ä£¿éµÄµ¥Ôª²âÊÔ£º 
-£¨1£© SQLite¡£
+å¯¹SQLite åŒ…è£…å™¨æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š 
+ï¼ˆ1ï¼‰ SQLiteã€‚
 
 ----------------------------
 10.  PostgreSQLSuite   
 
-¶ÔPostgreSQL°ü×°Æ÷Ä£¿éµÄµ¥Ôª²âÊÔ£º 
-£¨1£© PostgreSQL¡£
+å¯¹PostgreSQLåŒ…è£…å™¨æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š 
+ï¼ˆ1ï¼‰ PostgreSQLã€‚
 
 ----------------------------
 11.  OracleSuite  
 
-¶ÔOracle°ü×°Æ÷Ä£¿éµÄµ¥Ôª²âÊÔ£º 
-£¨1£© OracleSuite¡£
+å¯¹OracleåŒ…è£…å™¨æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š 
+ï¼ˆ1ï¼‰ OracleSuiteã€‚
 
 ----------------------------
 12.  FlatFileWrappersSuite  
 
-¶ÔÆ½ÃæÎÄ¼ş°ü×°Æ÷Ä£¿éµÄµ¥Ôª²âÊÔ£º  
-£¨1£© Æ½ÃæÎÄ¼ş¡£
+å¯¹å¹³é¢æ–‡ä»¶åŒ…è£…å™¨æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š  
+ï¼ˆ1ï¼‰ å¹³é¢æ–‡ä»¶ã€‚
 
 ----------------------------
 13.  MariaDBWrappersSuite  
 
-¶ÔmariaDB°ü×°Æ÷Ä£¿éµÄµ¥Ôª²âÊÔ£º  
-£¨1£© mariaDB¡£
+å¯¹mariaDBåŒ…è£…å™¨æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š  
+ï¼ˆ1ï¼‰ mariaDBã€‚
 
 ----------------------------
 14.  MongoWrappersSuite  
 
-¶Ômongo°ü×°Æ÷Ä£¿éµÄµ¥Ôª²âÊÔ£º  
-£¨1£© mongo£º MongoEnvironmentTesting¡¢
-			  MongoDatabaseFlushTesting¡£
+å¯¹mongoåŒ…è£…å™¨æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š  
+ï¼ˆ1ï¼‰ mongoï¼š MongoEnvironmentTestingã€
+			  MongoDatabaseFlushTestingã€‚
 
 ----------------------------
 15.  RedisWrappersSuite  
 
-¶Ôredis°ü×°Æ÷Ä£¿éµÄµ¥Ôª²âÊÔ£º  
-£¨1£© redis£ºRedisDatabaseFlushTesting¡£
+å¯¹redisåŒ…è£…å™¨æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š  
+ï¼ˆ1ï¼‰ redisï¼šRedisDatabaseFlushTestingã€‚
 
 ----------------------------

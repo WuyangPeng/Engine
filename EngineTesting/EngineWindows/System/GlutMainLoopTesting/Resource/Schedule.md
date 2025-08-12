@@ -1,23 +1,23 @@
-@ingroup group_GlutMainLoopTesting_Documentation
+ï»¿@ingroup group_GlutMainLoopTesting_Documentation
 
 ----------------------------
-GlutÖ÷Ñ­»·²âÊÔ
+Glutä¸»å¾ªç¯æµ‹è¯•
  
 ----------------------------
 GlutMainLoopTesting
 
 ----------------------------
-¹¤³ÌÀàĞÍ
-	exe£¬¿ØÖÆÌ¨¡£
+å·¥ç¨‹ç±»å‹
+	exeï¼Œæ§åˆ¶å°ã€‚
 
 ----------------------------
-×´Ì¬
-	Ä¿Ç°°æ±¾£º1.0.0.7¡£
+çŠ¶æ€
+	ç›®å‰ç‰ˆæœ¬ï¼š1.0.0.7ã€‚
 
 ----------------------------
 
-ÊµÏÖÄÚÈİ
-	1.Ê¹ÓÃGlutMainLoopÖ´ĞĞGlutÖ÷Ñ­»·¡£
-	2.Ê¹ÓÃGlutLeaveMainLoopÍË³öGlutÖ÷Ñ­»·¡£
+å®ç°å†…å®¹
+	1.ä½¿ç”¨GlutMainLoopæ‰§è¡ŒGlutä¸»å¾ªç¯ã€‚
+	2.ä½¿ç”¨GlutLeaveMainLoopé€€å‡ºGlutä¸»å¾ªç¯ã€‚
 
 ----------------------------

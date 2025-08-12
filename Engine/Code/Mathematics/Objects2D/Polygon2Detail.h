@@ -14,6 +14,7 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::Polygon2<Real>::Polygon2(const VerticesType& vertices)
@@ -98,12 +99,12 @@ Real Mathematics::Polygon2<Real>::ComputePerimeterLength() const
     auto perimeterLength = Vector2ToolsType::GetLength(vertices.at(0) - vertices.at(last));
     for (auto i = 1u; i < numVertices; ++i)
     {
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+        #include SYSTEM_WARNING_PUSH
+        #include SYSTEM_WARNING_DISABLE(26446)
 
         auto edge = vertices[i] - vertices[i - 1];
 
-#include SYSTEM_WARNING_POP
+        #include SYSTEM_WARNING_POP
 
         perimeterLength += Vector2ToolsType::GetLength(edge);
     }
@@ -122,15 +123,15 @@ Real Mathematics::Polygon2<Real>::ComputeArea() const
 
     for (auto i = 1u; i < last; ++i)
     {
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
+        #include SYSTEM_WARNING_PUSH
+        #include SYSTEM_WARNING_DISABLE(26446)
 
         const auto next = i + 1;
         const auto previous = i - 1;
 
         area += vertices[i].GetX() * (vertices[next].GetY() - vertices[previous].GetY());
 
-#include SYSTEM_WARNING_POP
+        #include SYSTEM_WARNING_POP
     }
 
     area *= MathType::GetRational(1, 2);

@@ -12,10 +12,11 @@
 
 #include "ApproximationHeightLine2.h"
 #include "System/Helper/PragmaWarning/PolymorphicCast.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 Mathematics::ApproximationHeightLine2<Real>::ApproximationHeightLine2() noexcept
     : ParentType{}, parameters{}
 {
@@ -25,7 +26,7 @@ Mathematics::ApproximationHeightLine2<Real>::ApproximationHeightLine2() noexcept
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 bool Mathematics::ApproximationHeightLine2<Real>::IsValid() const noexcept
 {
     return true;
@@ -34,7 +35,7 @@ bool Mathematics::ApproximationHeightLine2<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 bool Mathematics::ApproximationHeightLine2<Real>::FitIndexed(const ObservationTypeContainer& observations, const IndicesContainer& indices)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -83,7 +84,7 @@ bool Mathematics::ApproximationHeightLine2<Real>::FitIndexed(const ObservationTy
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 typename Mathematics::ApproximationHeightLine2<Real>::ParametersType Mathematics::ApproximationHeightLine2<Real>::GetParameters() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -92,7 +93,7 @@ typename Mathematics::ApproximationHeightLine2<Real>::ParametersType Mathematics
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 int Mathematics::ApproximationHeightLine2<Real>::GetMinimumRequired() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -101,7 +102,7 @@ int Mathematics::ApproximationHeightLine2<Real>::GetMinimumRequired() const noex
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 Real Mathematics::ApproximationHeightLine2<Real>::Error(const Vector2& point) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -112,7 +113,7 @@ Real Mathematics::ApproximationHeightLine2<Real>::Error(const Vector2& point) co
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 void Mathematics::ApproximationHeightLine2<Real>::CopyParameters(const ParentType& input)
 {
     MATHEMATICS_CLASS_IS_VALID_9;

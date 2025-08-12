@@ -1,43 +1,43 @@
-@ingroup group_Documentation
+ï»¿@ingroup group_Documentation
 
-----------------------------
-ÒýÇæ²âÊÔ´úÂë
+---
+å¼•æ“Žæµ‹è¯•ä»£ç 
 
-----------------------------
-System£º´úÂë·ÖÎö£¨ËùÓÐ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+---
+Systemï¼šä»£ç åˆ†æžï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
 
-CoreTools£º´úÂë·ÖÎö£¨ËùÓÐ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+CoreToolsï¼šä»£ç åˆ†æžï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
 
-Network£º´úÂë·ÖÎö£¨ËùÓÐ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+Networkï¼šä»£ç åˆ†æžï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
 
-Database£º´úÂë·ÖÎö£¨ËùÓÐ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+Databaseï¼šä»£ç åˆ†æžï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
 
-Script£º´úÂë·ÖÎö£¨ËùÓÐ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+Scriptï¼šä»£ç åˆ†æžï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
 
-Mathematics£º´úÂë·ÖÎö£¨ËùÓÐ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+Mathematicsï¼šä»£ç åˆ†æžï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
 
-SoundEffect£º´úÂë·ÖÎö£¨ËùÓÐ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+SoundEffectï¼šä»£ç åˆ†æžï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
 
-InputOutput£º´úÂë·ÖÎö£¨ËùÓÐ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+InputOutputï¼šä»£ç åˆ†æžï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
 
-ResourceManager£º´úÂë·ÖÎö£¨ËùÓÐ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+ResourceManagerï¼šä»£ç åˆ†æžï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
 
-Rendering£º´úÂë·ÖÎö£¨ËùÓÐ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+Renderingï¼šä»£ç åˆ†æžï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
 
-Physics£º´úÂë·ÖÎö£¨ËùÓÐ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+Physicsï¼šä»£ç åˆ†æžï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
 
-Imagics£º´úÂë·ÖÎö£¨ËùÓÐ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+Imagicsï¼šä»£ç åˆ†æžï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
 
-Animation£º´úÂë·ÖÎö£¨ËùÓÐ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+Animationï¼šä»£ç åˆ†æžï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
 
-ArtificialIntellegence£º´úÂë·ÖÎö£¨ËùÓÐ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+ArtificialIntellegenceï¼šä»£ç åˆ†æžï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
 
-UserInterface£º´úÂë·ÖÎö£¨ËùÓÐ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+UserInterfaceï¼šä»£ç åˆ†æžï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
 
-AssistTools£º´úÂë·ÖÎö£¨ËùÓÐ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+AssistToolsï¼šä»£ç åˆ†æžï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
 
-Framework£º´úÂë·ÖÎö£¨ËùÓÐ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+Frameworkï¼šä»£ç åˆ†æžï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
 
-ThreadingCoreRenderEngine£º´úÂë·ÖÎö£¨ËùÓÐ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+ThreadingCoreRenderEngineï¼šä»£ç åˆ†æžï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
 
-----------------------------
+---

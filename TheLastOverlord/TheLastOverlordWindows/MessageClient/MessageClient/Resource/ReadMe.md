@@ -1,6 +1,6 @@
-@ingroup group_MessageClient_Documentation
+ï»¿@ingroup group_MessageClient_Documentation
 
 ----------------------------
-ÏûÏ¢¿Í»§¶Ë
+æ¶ˆæ¯å®¢æˆ·ç«¯
 
 ----------------------------

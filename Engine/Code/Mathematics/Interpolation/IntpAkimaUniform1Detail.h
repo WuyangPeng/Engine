@@ -13,6 +13,7 @@
 #include "IntpAkimaUniform1.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/MathDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::IntpAkimaUniform1<Real>::IntpAkimaUniform1(int quantity, Real xMin, Real xSpacing, const std::vector<Real>& f)

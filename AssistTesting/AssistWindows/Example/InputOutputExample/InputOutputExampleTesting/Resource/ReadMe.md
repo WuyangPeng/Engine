@@ -1,11 +1,11 @@
-@ingroup group_InputOutputExampleTesting_Documentation
+ï»¿@ingroup group_InputOutputExampleTesting_Documentation
 
 ----------------------------
-ÊäÈëÊä³öÀı×Óµ¥Ôª²âÊÔ
+è¾“å…¥è¾“å‡ºä¾‹å­å•å…ƒæµ‹è¯•
 
 1.   InputOutputExampleTesting 
 
-ÊäÈëÊä³öÀı×ÓµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£©ÊäÈëÊä³öÀı×Ó¡£
+è¾“å…¥è¾“å‡ºä¾‹å­çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰è¾“å…¥è¾“å‡ºä¾‹å­ã€‚
 
 ----------------------------

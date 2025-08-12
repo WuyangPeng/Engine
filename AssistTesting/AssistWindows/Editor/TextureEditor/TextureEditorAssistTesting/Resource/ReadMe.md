@@ -1,7 +1,7 @@
-@ingroup group_TextureEditorAssistTesting_Documentation
+ï»¿@ingroup group_TextureEditorAssistTesting_Documentation
 
 ----------------------------
-ÎÆÀí±à¼­Æ÷¸¨Öúµ¥Ôª²âÊÔ
+çº¹ç†ç¼–è¾‘å™¨è¾…åŠ©å•å…ƒæµ‹è¯•
 
 1.   TextureEditorAssistTesting 
 

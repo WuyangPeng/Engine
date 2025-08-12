@@ -1,7 +1,7 @@
-@ingroup group_AnimationEditorAssist_Documentation
+ï»¿@ingroup group_AnimationEditorAssist_Documentation
 
 ----------------------------
-¶¯»­±à¼­Æ÷¸¨Öú
+åŠ¨ç”»ç¼–è¾‘å™¨è¾…åŠ©
 
 1.  AnimationEditorAssist 
  

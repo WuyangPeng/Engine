@@ -1,12 +1,12 @@
-@ingroup group_SceneObjectTesting_Documentation
+ï»¿@ingroup group_SceneObjectTesting_Documentation
 
 ----------------------------
-³¡¾°¶ÔÏóÄ£¿éµ¥Ôª²âÊÔ 
+åœºæ™¯å¯¹è±¡æ¨¡å—å•å…ƒæµ‹è¯• 
 
-Ä¿Ç°°üº¬£º
+ç›®å‰åŒ…å«ï¼š
 
-1.	SceneObject£¨³¡¾°¶ÔÏó£©
+1.	SceneObjectï¼ˆåœºæ™¯å¯¹è±¡ï¼‰
  
-£¨1£©³¡¾°¶ÔÏó¡£
+ï¼ˆ1ï¼‰åœºæ™¯å¯¹è±¡ã€‚
 
 ----------------------------

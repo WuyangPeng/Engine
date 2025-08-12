@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：v0.0.0.0 (2025/07/16 20:06:43)
+/// 版本：v0.0.0.0 (2025/08/05 19:34:13)
 
 #include "AssistHelper.h"
 #include "Helper/AssistClassInvariantMacro.h"

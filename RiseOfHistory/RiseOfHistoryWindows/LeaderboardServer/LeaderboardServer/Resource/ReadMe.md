@@ -1,6 +1,6 @@
-@ingroup group_LeaderboardServer_Documentation
+ï»¿@ingroup group_LeaderboardServer_Documentation
 
 ----------------------------
-ÅÅĞĞ°ñ·şÎñÆ÷
+æ’è¡Œæ¦œæœåŠ¡å™¨
 
 ----------------------------

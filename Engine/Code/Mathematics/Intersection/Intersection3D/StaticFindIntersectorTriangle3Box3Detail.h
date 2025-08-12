@@ -14,6 +14,7 @@
 #include "StaticFindIntersectorSegment3Box3.h"
 #include "StaticFindIntersectorTriangle3Box3.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::StaticFindIntersectorTriangle3Box3<Real>::StaticFindIntersectorTriangle3Box3(const Triangle3Type& triangle, const Box3Type& box, const Real epsilon)

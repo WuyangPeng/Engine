@@ -1,6 +1,6 @@
-@ingroup group_DistanceAlignedBoxes_Documentation
+Ôªø@ingroup group_DistanceAlignedBoxes_Documentation
 
 ---------------------------- 
-AlignedBoxesæ‡¿Î
+AlignedBoxesË∑ùÁ¶ª
  
 ---------------------------- 

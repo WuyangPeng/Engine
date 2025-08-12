@@ -13,9 +13,10 @@
 #include "ApproximationGaussian2.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/NumericalAnalysis/SymmetricEigensolver2x2.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 Mathematics::ApproximationGaussian2<Real>::ApproximationGaussian2() noexcept
     : ParentType{}, parameters{}
 {
@@ -25,7 +26,7 @@ Mathematics::ApproximationGaussian2<Real>::ApproximationGaussian2() noexcept
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 bool Mathematics::ApproximationGaussian2<Real>::IsValid() const noexcept
 {
     return true;
@@ -34,7 +35,7 @@ bool Mathematics::ApproximationGaussian2<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 bool Mathematics::ApproximationGaussian2<Real>::FitIndexed(const ObservationTypeContainer& observations, const IndicesContainer& indices)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -88,7 +89,7 @@ bool Mathematics::ApproximationGaussian2<Real>::FitIndexed(const ObservationType
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 typename Mathematics::ApproximationGaussian2<Real>::OrientedBox2 Mathematics::ApproximationGaussian2<Real>::GetParameters() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -97,7 +98,7 @@ typename Mathematics::ApproximationGaussian2<Real>::OrientedBox2 Mathematics::Ap
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 int Mathematics::ApproximationGaussian2<Real>::GetMinimumRequired() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -106,7 +107,7 @@ int Mathematics::ApproximationGaussian2<Real>::GetMinimumRequired() const noexce
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 Real Mathematics::ApproximationGaussian2<Real>::Error(const Vector2& point) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -125,7 +126,7 @@ Real Mathematics::ApproximationGaussian2<Real>::Error(const Vector2& point) cons
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 void Mathematics::ApproximationGaussian2<Real>::CopyParameters(const ParentType& input)
 {
     MATHEMATICS_CLASS_IS_VALID_9;

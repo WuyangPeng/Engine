@@ -13,9 +13,10 @@
 #include "ContOrientedBox2.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Approximation/ApproximationGaussian2.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 Mathematics::ContOrientedBox2<Real>::ContOrientedBox2() noexcept
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -24,7 +25,7 @@ Mathematics::ContOrientedBox2<Real>::ContOrientedBox2() noexcept
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 bool Mathematics::ContOrientedBox2<Real>::IsValid() const noexcept
 {
     return true;
@@ -33,7 +34,7 @@ bool Mathematics::ContOrientedBox2<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 bool Mathematics::ContOrientedBox2<Real>::GetContainer(const Vector2Container& points, OrientedBox2& box)
 {
     const auto numPoints = boost::numeric_cast<int>(points.size());
@@ -83,7 +84,7 @@ bool Mathematics::ContOrientedBox2<Real>::GetContainer(const Vector2Container& p
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 bool Mathematics::ContOrientedBox2<Real>::InContainer(const Vector2& point, const OrientedBox2& box)
 {
     const auto diff = point - box.GetCenter();
@@ -99,7 +100,7 @@ bool Mathematics::ContOrientedBox2<Real>::InContainer(const Vector2& point, cons
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 bool Mathematics::ContOrientedBox2<Real>::MergeContainers(const OrientedBox2& box0, const OrientedBox2& box1, OrientedBox2& merge)
 {
     /// 在方框中心的第一个猜测。

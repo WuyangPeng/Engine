@@ -1,7 +1,7 @@
-@ingroup group_SceneEditorAssist_Documentation
+ï»¿@ingroup group_SceneEditorAssist_Documentation
 
 ----------------------------
-³¡¾°±à¼­Æ÷¸¨Öú
+åœºæ™¯ç¼–è¾‘å™¨è¾…åŠ©
 
 1.  SceneEditorAssist 
 

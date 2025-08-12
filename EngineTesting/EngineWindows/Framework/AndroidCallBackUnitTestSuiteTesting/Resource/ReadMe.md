@@ -1,11 +1,11 @@
-@ingroup group_AndroidCallBackUnitTestSuiteTesting_Documentation
+ï»¿@ingroup group_AndroidCallBackUnitTestSuiteTesting_Documentation
 
 ----------------------------
-°²×¿»Øµ÷µ¥Ôª²âÊÔÌ×¼şµÄµ¥Ôª²âÊÔ
+å®‰å“å›è°ƒå•å…ƒæµ‹è¯•å¥—ä»¶çš„å•å…ƒæµ‹è¯•
 
 1.  AndroidCallBackUnitTestSuiteTesting 
 
-¶Ô°²×¿¿ò¼ÜÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£© °²×¿¿ò¼Ü¡£ 
+å¯¹å®‰å“æ¡†æ¶æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰ å®‰å“æ¡†æ¶ã€‚ 
  
 ----------------------------

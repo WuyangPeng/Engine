@@ -1,11 +1,11 @@
-@ingroup group_AnimationExample_Documentation
+ï»¿@ingroup group_AnimationExample_Documentation
 
 ----------------------------
-¶¯»­¿âÀı×Ó
+åŠ¨ç”»åº“ä¾‹å­
 
 1.   AnimationExample 
 
-¶¯»­¿âÀı×Ó£¬°üÀ¨£º 
-£¨1£©¶¯»­¿â¡£
+åŠ¨ç”»åº“ä¾‹å­ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰åŠ¨ç”»åº“ã€‚
 
 ----------------------------

@@ -15,6 +15,7 @@
 #include "TestIntersectorAxisDetail.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Intersection/Intersection3D/IntersectorUtility3Detail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::DynamicFindIntersectorHalfspace3Box3(const Plane3Type& halfSpace, const Box3Type& box, Real tMax, const Vector3Type& lhsVelocity, const Vector3Type& rhsVelocity, const Real epsilon)
@@ -112,7 +113,7 @@ void Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::Find()
         container.emplace_back(IntersectorUtility3<Real>::GetPointFromIndex(cfg.GetIndex(0), box));
         container.emplace_back(IntersectorUtility3<Real>::GetPointFromIndex(cfg.GetIndex(1), box));
     }
-    else  // cfg.mMap == VertexProjectionMap::M44
+    else // cfg.mMap == VertexProjectionMap::M44
     {
         // 面相交
 

@@ -8,6 +8,7 @@
 /// 版本：1.0.0.10 (2024/06/01 10:55)
 
 #include "WorkbookTesting.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/SimpleCSV/Cell.h"

@@ -13,6 +13,7 @@
 #include "Delaunay1.h"
 #include "DelaunayDetail.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::Delaunay1<Real>::Delaunay1(const Vertices& vertices, Real epsilon, QueryType queryType)

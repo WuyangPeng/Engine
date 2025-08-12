@@ -1,10 +1,10 @@
-@ingroup group_JsonConfigure_Documentation
+ï»¿@ingroup group_JsonConfigure_Documentation
 
 ----------------------------
-jsonÅäÖÃÊ¾Àı
+jsoné…ç½®ç¤ºä¾‹
 
 ----------------------------
 
-1.	jsonÅäÖÃÊ¾Àı 
+1.	jsoné…ç½®ç¤ºä¾‹ 
 
 ----------------------------

@@ -1,12 +1,12 @@
-@ingroup group_BackgroundServerTesting_Documentation
+ï»¿@ingroup group_BackgroundServerTesting_Documentation
 
 ----------------------------
-ºóÌ¨·şÎñÆ÷µ¥Ôª²âÊÔ
+åå°æœåŠ¡å™¨å•å…ƒæµ‹è¯•
 
-Ä¿Ç°°üº¬£º
+ç›®å‰åŒ…å«ï¼š
 
-1. BackgroundServer£¨ºóÌ¨·şÎñÆ÷£©
+1. BackgroundServerï¼ˆåå°æœåŠ¡å™¨ï¼‰
 
-£¨1£©ºóÌ¨·şÎñÆ÷¡£
+ï¼ˆ1ï¼‰åå°æœåŠ¡å™¨ã€‚
 
 ----------------------------

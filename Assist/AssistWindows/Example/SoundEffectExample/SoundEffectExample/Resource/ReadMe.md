@@ -1,11 +1,11 @@
-@ingroup group_SoundEffectExample_Documentation
+ï»¿@ingroup group_SoundEffectExample_Documentation
 
 ----------------------------
-ÒôĞ§Àı×Ó
+éŸ³æ•ˆä¾‹å­
 
 1.   SoundEffectExample 
 
-ÒôĞ§Àı×Ó£¬°üÀ¨£º 
-£¨1£©ÒôĞ§¡£
+éŸ³æ•ˆä¾‹å­ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰éŸ³æ•ˆã€‚
 
 ----------------------------

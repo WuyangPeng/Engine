@@ -9,6 +9,7 @@
 
 #include "ModelMiddleLayerTesting.h"
 #include "System/Helper/PragmaWarning/Format.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Threading/SyncTools.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
 #include "System/Windows/Flags/WindowsDisplayFlags.h"

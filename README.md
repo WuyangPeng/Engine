@@ -1,57 +1,130 @@
-# Threading Core Render Engine£¨Ïß³ÌºËĞÄäÖÈ¾ÒıÇæ£©
+ï»¿# Threading Core Render Engineï¼ˆçº¿ç¨‹æ ¸å¿ƒæ¸²æŸ“å¼•æ“ï¼‰
 
 Engine is an open-source 3D rendering engine written in C++ and using OpenGL,OpenGLES,DirectX and Vulkan as graphic API.
 It can be used for activities such as:
   - Gaming
   - Scientific computation and visualization
   
-ÒıÇæÊÇÒ»¸ö¿ªÔ´µÄÈıÎ¬»æÖÆÒıÇæ£¬ÓÃC++±àĞ´£¬Ê¹ÓÃOpenGL¡¢OpenGLES¡¢DirectX¡¢Vulkan×÷ÎªÍ¼ĞÎAPI¡£
-Ëü¿ÉÓÃÓÚÒÔÏÂ»î¶¯£º
-  - ÓÎÏ·
-  - ¿ÆÑ§¼ÆËãºÍ¿ÉÊÓ»¯
+å¼•æ“æ˜¯ä¸€ä¸ªå¼€æºçš„ä¸‰ç»´ç»˜åˆ¶å¼•æ“ï¼Œç”¨C++ç¼–å†™ï¼Œä½¿ç”¨OpenGLã€OpenGLESã€DirectXã€Vulkanä½œä¸ºå›¾å½¢APIã€‚
+å®ƒå¯ç”¨äºä»¥ä¸‹æ´»åŠ¨ï¼š
+  - æ¸¸æˆ
+  - ç§‘å­¦è®¡ç®—å’Œå¯è§†åŒ–
 
-### Supported Platforms£¨Ö§³ÖÆ½Ì¨£©:
+### Supported Platformsï¼ˆæ”¯æŒå¹³å°ï¼‰:
 - windows
 - linux
 - android
 - macintosh
 
-## Setup£¨°²×°³ÌĞò£©:
+## Setupï¼ˆå®‰è£…ç¨‹åºï¼‰:
 - Before building, make sure your setup is correct : 
-- ÔÚ¹¹½¨Ö®Ç°£¬ÇëÈ·±£ÄúµÄÉèÖÃÕıÈ·£º
+- åœ¨æ„å»ºä¹‹å‰ï¼Œè¯·ç¡®ä¿æ‚¨çš„è®¾ç½®æ­£ç¡®ï¼š
 
-### Setup Window machine£¨ÉèÖÃWindow»úÆ÷£©:
+### Setup Window machineï¼ˆè®¾ç½®Windowæœºå™¨ï¼‰:
 - Install Visual Studio 2022 Community or Professional, make sure to add "Desktop development with C++".
-- °²×°Visual Studio 2022ÉçÇø°æ»ò×¨Òµ°æ£¬È·±£Ìí¼Ó¡°Ê¹ÓÃC++½øĞĞ×ÀÃæ¿ª·¢¡±¡£
+- å®‰è£…Visual Studio 2022ç¤¾åŒºç‰ˆæˆ–ä¸“ä¸šç‰ˆï¼Œç¡®ä¿æ·»åŠ â€œä½¿ç”¨C++è¿›è¡Œæ¡Œé¢å¼€å‘â€ã€‚
 
-### Compile£¨±àÒë£©£º
+### Compileï¼ˆç¼–è¯‘ï¼‰ï¼š
 
-### WindowsÆ½Ì¨
+### Windowså¹³å°
 
-- LibsÄ¿Â¼ÏÂÎªÒÀÀµ¿â£¬Èç¹û³öÏÖÒÀÀµ¿â´íÎó£¬¸ù¾İEngine\EngineWindows\ThreadingCoreRenderEngine\ThreadingCoreRenderEngine\ResourceÏÂµÄLibrary.md½øĞĞĞŞÕı¡£
+- Libsç›®å½•ä¸‹ä¸ºä¾èµ–åº“ï¼Œå¦‚æœå‡ºç°ä¾èµ–åº“é”™è¯¯ï¼Œæ ¹æ®Engine\EngineWindows\ThreadingCoreRenderEngine\ThreadingCoreRenderEngine\Resourceä¸‹çš„Library.mdè¿›è¡Œä¿®æ­£ã€‚
 	
-- Ö´ĞĞEnvironmentÏÂµÄÅú´¦ÀíÎÄ¼şSetIncludeEnv.batºÍSetLibEnv.bat¸÷Á½´Î£¨LibsEnvironmentBaseIncludeµÈ±äÁ¿ĞèÒªÊ¹ÓÃÆäËûµÄ»·¾³±äÁ¿£¬ËùÒÔĞèÒªÖ´ĞĞÁ½´Î£©¡£
+- ç¼–è¯‘Engineå·¥ç¨‹ã€‚
 	
-- Ö´ĞĞMillenniumHistory¡¢RiseOfHistoryºÍTheLastOverlord¹¤³Ì$$WindowsÄ¿Â¼ÏÂµÄSetAllEnvironment.bat¡£
+- ç¼–è¯‘Assistå·¥ç¨‹ã€‚
 	
-- ±àÒëEngine¹¤³Ì¡£
+- ç¼–è¯‘Gameå·¥ç¨‹ã€‚
 	
-- ±àÒëAssist¹¤³Ì¡£
+- ç¼–è¯‘MillenniumHistoryï¼ˆåƒå¹´å²ç­–ï¼‰ã€RiseOfHistoryï¼ˆå†å²çš„å´›èµ·ï¼‰å’ŒTheLastOverlordï¼ˆæœ€åçš„éœ¸ç‹ï¼‰å·¥ç¨‹ã€‚
 	
-- ±àÒëGame¹¤³Ì¡£
-	
-- ±àÒëMillenniumHistory£¨Ç§ÄêÊ·²ß£©¡¢RiseOfHistory£¨ÀúÊ·µÄáÈÆğ£©ºÍTheLastOverlord£¨×îºóµÄ°ÔÍõ£©¹¤³Ì¡£
-	
-- ±àÒë¸÷¹¤³ÌµÄµ¥Ôª²âÊÔ£¨EngineTestingÒÀÀµÓÚAssist£©¡£
+- ç¼–è¯‘å„å·¥ç¨‹çš„å•å…ƒæµ‹è¯•ï¼ˆEngineTestingä¾èµ–äºAssistï¼‰ã€‚
 
-### linuxÆ½Ì¨ 
+### linuxå¹³å° 
 
-- ½«LibsÎÄ¼ş¸´ÖÆµ½/data/coding/LibsÏÂ¡£
+- ä¸‹è½½ä»£ç†
+	cd /data  
+	tar -zxvf clashpremium-release-linux-amd64.tar.gz  
+	mv CrashCore clash  
+	wget -O config.yaml "https://bergv.no-mad-world.club/link/KWK9VOvamb7MfR10?clash=3"  
+	chmod +x clash  
+	nohup ./clash -d . &  
+
+- å®‰è£… git  
+	sudo yum install git  
+	git config --global http.https://github.com.proxy http://127.0.0.1:7890  
+
+- ä¸‹è½½ä»“åº“
+
+	git clone https://github.com/WuyangPeng/Engine.git /data/coding  
+	cd /data/coding  
+	git checkout develop  
+	git pull origin develop  
+	git submodule update --init --recursive  
+
+- å®‰è£… cmake
+
+	sudo yum install cmake
+
+- å®‰è£…c++ ç¼–è¯‘å™¨
+
+	sudo dnf install gcc-c++
+
+- å‡çº§ gcc
+
+	tar -zxvf gcc-14.2.0.tar.gz  
+	cd gcc-14.2.0  
+
+	./contrib/download_prerequisites  
+	mkdir build  
+	cd build  
+	../configure -enable-checking=release -enable-languages=c,c++ -disable-multilib  
+	make -j1  
+	make install  
+
+-  å¤åˆ¶æ–‡ä»¶
+	cp /usr/local/lib64/libstdc++.so.6.0.33 /usr/lib64/  
+	cd /usr/lib64/  
+	ll libstdc*  
+	rm -f libstdc++.so.6  
+	ln -s libstdc++.so.6.0.33 libstdc++.so.6  
+	ll libstdc*  
+
+	cd /usr/local/bin  
+	mv g++ g++_old  
+	ln -s x86_64-pc-linux-gnu-g++ g++  
+
+	cd /usr/bin  
+	ll *g++*  
+	mv g++ g++_old  
+	ln -s x86_64-pc-linux-gnu-g++ g++  
+	ll *gcc*  
+	mv  gcc gcc_old  
+	ln -s x86_64-pc-linux-gnu-gcc gcc  
+
+-  å®‰è£… openssl
+
+	sudo yum install openssl-devel
+
+-  å®‰è£… autoconf
+
+	sudo yum install autoconf  
+	sudo yum install autoconf automake libtool  
+	sudo yum install apr-devel apr-util-devel  
+
+-  å®‰è£…opengl
+
+	sudo yum install mesa-libGL-devel freeglut-devel
 	
-- Ö´ĞĞcd /data/coding/Libs/Bat¡£
+-  å®‰è£…python
+
+	sudo dnf install python3-devel
 	
-- Ö´ĞĞsh create_lib.sh¡£Èç¹û³öÏÖÒÀÀµ¿â´íÎó£¬¸ù¾İEngine\EngineWindows\ThreadingCoreRenderEngine\ThreadingCoreRenderEngine\ResourceÏÂµÄLibrary.md½øĞĞĞŞÕı¡£
+- ç¼–è¯‘å·¥ç¨‹
+	
+	cd /data/coding/Bat  
 
-- Ö´ĞĞcd /data/coding/Engine/Bat¡£
+	sh compile.sh  
 
-- Ö´ĞĞsh compile.sh¡£
+	å¦‚æœå‡ºç°ä¾èµ–åº“é”™è¯¯ï¼Œæ ¹æ®Engine\EngineWindows\ThreadingCoreRenderEngine\ThreadingCoreRenderEngine\Resourceä¸‹çš„Library.mdè¿›è¡Œä¿®æ­£ã€‚
+

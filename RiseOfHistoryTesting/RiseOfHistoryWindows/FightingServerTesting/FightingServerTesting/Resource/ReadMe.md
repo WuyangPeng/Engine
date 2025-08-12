@@ -1,12 +1,12 @@
-@ingroup group_FightingServerTesting_Documentation
+ï»¿@ingroup group_FightingServerTesting_Documentation
 
 ----------------------------
-Õ½¶··şÎñÆ÷µ¥Ôª²âÊÔ
+æˆ˜æ–—æœåŠ¡å™¨å•å…ƒæµ‹è¯•
 
-Ä¿Ç°°üº¬£º
+ç›®å‰åŒ…å«ï¼š
 
-1. FightingServer£¨Õ½¶··şÎñÆ÷£©
+1. FightingServerï¼ˆæˆ˜æ–—æœåŠ¡å™¨ï¼‰
 
-£¨1£©Õ½¶··şÎñÆ÷¡£
+ï¼ˆ1ï¼‰æˆ˜æ–—æœåŠ¡å™¨ã€‚
 
 ----------------------------

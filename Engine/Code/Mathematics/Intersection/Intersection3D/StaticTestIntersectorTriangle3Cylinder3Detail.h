@@ -13,6 +13,7 @@
 #include "StaticTestIntersectorTriangle3Cylinder3.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>::StaticTestIntersectorTriangle3Cylinder3(const Triangle3Type& triangle, const Cylinder3Type& cylinder, const Real epsilon)

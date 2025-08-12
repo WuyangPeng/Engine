@@ -15,6 +15,8 @@
 #include "Mathematics/Rational/IntegerDataAmendDetail.h"
 #include "Mathematics/Rational/IntegerDataDetail.h"
 
+#include <boost/utility/binary.hpp>
+
 namespace Mathematics
 {
     template class IntegerData<1>;

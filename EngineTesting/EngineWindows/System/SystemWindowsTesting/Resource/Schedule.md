@@ -1,27 +1,27 @@
-@ingroup group_SystemWindowsTesting_Documentation
+ï»¿@ingroup group_SystemWindowsTesting_Documentation
 
 ----------------------------
-Ïµ½yWindows²âÊÔ
+ç³»çµ±Windowsæµ‹è¯•
 
 ----------------------------
 SystemWindowsTesting
 
 ----------------------------
-¹¤³ÌÀàĞÍ
-	exe£¬´°¿Ú¡£
+å·¥ç¨‹ç±»å‹
+	exeï¼Œçª—å£ã€‚
 
 ----------------------------
-×´Ì¬
-	Ä¿Ç°°æ±¾£º1.0.0.7¡£
+çŠ¶æ€
+	ç›®å‰ç‰ˆæœ¬ï¼š1.0.0.7ã€‚
 
 ----------------------------
 
-ÊµÏÖÄÚÈİ
-	1.¸´ÖÆ¹¤³ÌµÄTesting.jsonµ½²âÊÔ¹¤³ÌÔËĞĞÄ¿Â¼¡£ 
-	2.¸´ÖÆ¹¤³ÌResourcesÄ¿Â¼µÄResourcesLibrary.dllµ½Resources/CopyÄ¿Â¼¡£ 
-	3.SystemOutputÄ£¿éµÄWindowsµ¥Ôª²âÊÔ¡£
-	4.DynamicLinkÄ£¿éµÄWindowsµ¥Ôª²âÊÔ¡£
-	5.OpenGLÄ£¿éµÄWindowsµ¥Ôª²âÊÔ¡£
-	6.WindowsÄ£¿éµÄWindowsµ¥Ôª²âÊÔ¡£	
+å®ç°å†…å®¹
+	1.å¤åˆ¶å·¥ç¨‹çš„Testing.jsonåˆ°æµ‹è¯•å·¥ç¨‹è¿è¡Œç›®å½•ã€‚ 
+	2.å¤åˆ¶å·¥ç¨‹Resourcesç›®å½•çš„ResourcesLibrary.dllåˆ°Resources/Copyç›®å½•ã€‚ 
+	3.SystemOutputæ¨¡å—çš„Windowså•å…ƒæµ‹è¯•ã€‚
+	4.DynamicLinkæ¨¡å—çš„Windowså•å…ƒæµ‹è¯•ã€‚
+	5.OpenGLæ¨¡å—çš„Windowså•å…ƒæµ‹è¯•ã€‚
+	6.Windowsæ¨¡å—çš„Windowså•å…ƒæµ‹è¯•ã€‚	
 
 ----------------------------	

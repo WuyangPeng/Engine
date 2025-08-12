@@ -8,6 +8,7 @@
 /// 版本：1.0.0.10 (2024/06/01 13:36)
 
 #include "RowTesting.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/PragmaWarning/PugiXml.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"

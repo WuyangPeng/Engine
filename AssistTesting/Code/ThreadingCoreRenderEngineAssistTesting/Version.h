@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.2.0 (2025/03/22 18:03)
+/// 版本：v0.0.0.0 (2025/08/12 16:01:18)
 
 #ifndef THREADING_CORE_RENDER_ENGINE_ASSIST_TESTING_VERSION_H
 #define THREADING_CORE_RENDER_ENGINE_ASSIST_TESTING_VERSION_H
@@ -15,6 +15,6 @@
 //  gTcreAssistTestingVersion / 10000 % 100 是次版本号
 //  gTcreAssistTestingVersion / 1000000 % 100 是主版本号
 
-constexpr auto gTcreAssistTestingVersion = 1000200;
+constexpr auto gTcreAssistTestingVersion = 0000000;
 
 #endif  // THREADING_CORE_RENDER_ENGINE_ASSIST_TESTING_VERSION_H

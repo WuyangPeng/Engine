@@ -13,6 +13,7 @@
 #include "ContSeparatePoints3.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/ComputationalGeometry/ConvexHull3.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 #include <gsl/util>
 

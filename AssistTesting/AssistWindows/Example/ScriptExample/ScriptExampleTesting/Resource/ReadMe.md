@@ -1,11 +1,11 @@
-@ingroup group_ScriptExampleTesting_Documentation
+ï»¿@ingroup group_ScriptExampleTesting_Documentation
 
 ----------------------------
-½Å±¾Àı×Óµ¥Ôª²âÊÔ
+è„šæœ¬ä¾‹å­å•å…ƒæµ‹è¯•
 
 1.   ScriptExampleTesting 
 
-½Å±¾Àı×ÓµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£©½Å±¾Àı×Ó¡£
+è„šæœ¬ä¾‹å­çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰è„šæœ¬ä¾‹å­ã€‚
 
 ----------------------------

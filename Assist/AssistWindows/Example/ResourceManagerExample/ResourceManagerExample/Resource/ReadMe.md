@@ -1,11 +1,11 @@
-@ingroup group_ResourceManagerExample_Documentation
+ï»¿@ingroup group_ResourceManagerExample_Documentation
 
 ----------------------------
-×ÊÔ´¹ÜÀíÀı×Ó
+èµ„æºç®¡ç†ä¾‹å­
 
 1.   ResourceManagerExample 
 
-×ÊÔ´¹ÜÀíÀı×Ó£¬°üÀ¨£º 
-£¨1£©×ÊÔ´¹ÜÀí¡£
+èµ„æºç®¡ç†ä¾‹å­ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰èµ„æºç®¡ç†ã€‚
 
 ----------------------------

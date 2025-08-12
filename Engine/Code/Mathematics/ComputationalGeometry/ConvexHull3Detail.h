@@ -17,6 +17,7 @@
 #include "Mathematics/Query/Query3Int64.h"
 #include "Mathematics/Query/Query3Integer.h"
 #include "Mathematics/Query/Query3Rational.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 #include <map>
 #include <stack>

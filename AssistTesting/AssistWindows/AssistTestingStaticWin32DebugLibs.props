@@ -7,7 +7,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalLibraryDirectories>$(LibsEnvironmentWin32Lib);$(LibsEnvironmentWin32DebugLib);$(EngineStaticWin32DebugLib);$(AssistStaticWin32DebugLib);../../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../../../../Libs/openssl/Win32/Debug/lib/;../../../../../Libs/mysql/BuildWin32/archive_output_directory/Debug;../../../../../Libs/mysql-connector-c++/BuildWin32/Debug/;../../../../../Libs/protobuf/BuildWin32/bin/Debug/;../../../../../Libs/freeglut/BuildWin32/lib/Debug/;../../../../../Libs/vld/src/bin/Win32/Release-v143/;../../../../../Libs/OpenXLSX/BuildWin32/output/Debug;../../../../../Libs/miniz/BuildWin32/Debug/;../../../../../Libs/activemq/activemq-cpp/vs2010-build/Win32/DebugDLL/;../../../../../Libs/mongo-cxx-driver/BuildWin32/src/mongocxx/Debug/;../../../../../Libs/mongo-cxx-driver/BuildWin32/src/bsoncxx/Debug/;../../../../../Libs/hiredis/BuildWin32/Debug/;../../../../../Engine/$(Platform)/$(Configuration)Windows;../../../../../Assist/$(Platform)/$(Configuration)Windows;../../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>BUILDING_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>

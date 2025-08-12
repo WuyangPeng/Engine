@@ -1,7 +1,7 @@
-@ingroup group_AnimationToolset_Documentation
+ï»¿@ingroup group_AnimationToolset_Documentation
 
 ----------------------------
-¶¯»­¹¤¾ßÏä
+åŠ¨ç”»å·¥å…·ç®±
 
 1.  AnimationToolset 
 

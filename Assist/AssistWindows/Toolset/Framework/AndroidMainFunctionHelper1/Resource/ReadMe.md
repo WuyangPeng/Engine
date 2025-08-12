@@ -1,12 +1,12 @@
-@ingroup group_AndroidMainFunctionHelper1_Documentation
+ï»¿@ingroup group_AndroidMainFunctionHelper1_Documentation
 
 ----------------------------
-°²×¿Ö÷º¯Êı°ïÖú
+å®‰å“ä¸»å‡½æ•°å¸®åŠ©
 
 AndroidMainFunctionHelper1 
 
-°²×¿Ö÷º¯Êı°ïÖú¹¤¾ßÏä¡£ÊµÏÖÒÔÏÂ¹¦ÄÜ£º 
+å®‰å“ä¸»å‡½æ•°å¸®åŠ©å·¥å…·ç®±ã€‚å®ç°ä»¥ä¸‹åŠŸèƒ½ï¼š 
 
-£¨1£©ÔËĞĞ°²×¿Ö÷º¯Êı°ïÖú¡£ 
+ï¼ˆ1ï¼‰è¿è¡Œå®‰å“ä¸»å‡½æ•°å¸®åŠ©ã€‚ 
 
 ----------------------------

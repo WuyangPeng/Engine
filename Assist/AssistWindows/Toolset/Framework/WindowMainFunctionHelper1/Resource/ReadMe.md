@@ -1,12 +1,12 @@
-@ingroup group_WindowMainFunctionHelper1_Documentation
+ï»¿@ingroup group_WindowMainFunctionHelper1_Documentation
 
 ----------------------------
-WindowÖ÷º¯Êı°ïÖú
+Windowä¸»å‡½æ•°å¸®åŠ©
 
 WindowMainFunctionHelper1 
 
-WindowÖ÷º¯Êı°ïÖú¹¤¾ßÏä¡£ÊµÏÖÒÔÏÂ¹¦ÄÜ£º 
+Windowä¸»å‡½æ•°å¸®åŠ©å·¥å…·ç®±ã€‚å®ç°ä»¥ä¸‹åŠŸèƒ½ï¼š 
 
-£¨1£©ÔËĞĞWindowÖ÷º¯Êı°ïÖú¡£ 
+ï¼ˆ1ï¼‰è¿è¡ŒWindowä¸»å‡½æ•°å¸®åŠ©ã€‚ 
 
 ----------------------------

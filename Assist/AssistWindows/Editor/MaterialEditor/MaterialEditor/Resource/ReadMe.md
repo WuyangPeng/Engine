@@ -1,11 +1,11 @@
-@ingroup group_MaterialEditor_Documentation
+ï»¿@ingroup group_MaterialEditor_Documentation
 
 ----------------------------
-²ÄÖÊ±à¼­Æ÷
+æè´¨ç¼–è¾‘å™¨
 
 1.   MaterialEditor 
 
-²ÄÖÊ±à¼­Æ÷£¬°üÀ¨£º 
-£¨1£©²ÄÖÊ¡£
+æè´¨ç¼–è¾‘å™¨ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰æè´¨ã€‚
 
 ----------------------------

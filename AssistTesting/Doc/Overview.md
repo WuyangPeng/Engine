@@ -1,52 +1,50 @@
-/// @mainpage Threading Core Render Engine Assist Testing API ÎÄµµ
+ï»¿/// @mainpage Threading Core Render Engine Assist Testing API æ–‡æ¡£
 
-@copyright Copyright (c) 2011-2020
+@copyright Copyright (c) 2011-2025  
 Threading Core Render Engine Assist Testing
 
-@author ÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-ÁªÏµ×÷Õß£º94458936@qq.com
+@author å½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½  
+è”ç³»ä½œè€…ï¼š94458936@qq.com
 
-@version 0.6.0.0
-±ê×¼£ºstd:c++17
+@version v0.0.0.0  
+æ ‡å‡†ï¼šstd:c++20
 
-@date 2020/12/19 17:52
+@date 2025/08/12 15:42:11
 
-@section sec_Contents ÄÚÈİ
+@section sec_Contents å†…å®¹
 
-@li @ref sec_Overview
-@li @ref sec_Detail
-@li @ref sec_SeeAlso
+@li @ref sec_Overview  
+@li @ref sec_Detail  
+@li @ref sec_SeeAlso  
 
-@section sec_Overview ¸ÅÊö
+@section sec_Overview æ¦‚è¿°
 
-ÒıÇæ¸¨Öúµ¥Ôª²âÊÔ°üº¬Èı¸öÄ£¿é£º
+å¼•æ“è¾…åŠ©å•å…ƒæµ‹è¯•åŒ…å«ä¸¤ä¸ªæ¨¡å—ï¼š
 
-±à¼­Æ÷£¨Editor£©¡£
+ç¼–è¾‘å™¨ï¼ˆEditorï¼‰ã€‚
  
-Àı×Ó£¨Example£©¡£
- 
-¿âÀı×Ó£¨LibExample£©¡£
+ä¾‹å­ï¼ˆExampleï¼‰ã€‚
 
-@section sec_Detail ÏêÏ¸ËµÃ÷
+@section sec_Detail è¯¦ç»†è¯´æ˜
 
 @li @ref page_Documentation
 
-@section sec_SeeAlso ²Î¼û
+@section sec_SeeAlso å‚è§
 
 @li @ref page_CoreTools_Base 
 
-@page page_Documentation ËµÃ÷
+@page page_Documentation è¯´æ˜
 
-@link group_Documentation \b ²é¿´ËùÓĞËµÃ÷ @endlink
+@link group_Documentation \b æŸ¥çœ‹æ‰€æœ‰è¯´æ˜ @endlink
 
-@defgroup group_Documentation ËµÃ÷
-ÓĞ¹ØÏêÏ¸ËµÃ÷£¬Çë²Î¼û @ref page_Documentation ¡£ 
+@defgroup group_Documentation è¯´æ˜  
+æœ‰å…³è¯¦ç»†è¯´æ˜ï¼Œè¯·å‚è§ @ref page_Documentation ã€‚   
 
 @page page_CoreTools_Base The CoreTools Base 
 
-ÏêÏ¸ËµÃ÷ÔÚÕâÀï¡£
+è¯¦ç»†è¯´æ˜åœ¨è¿™é‡Œã€‚
 
 @link group_CoreTools_Base \b View All CoreTools Classes @endlink
 
-@defgroup group_CoreTools_Base ºËĞÄ¹¤¾ß¿â»ù´¡¹¦ÄÜ
-ÓĞ¹ØÏêÏ¸ËµÃ÷£¬Çë²Î¼û @ref page_CoreTools_Base ¡£
+@defgroup group_CoreTools_Base æ ¸å¿ƒå·¥å…·åº“åŸºç¡€åŠŸèƒ½  
+æœ‰å…³è¯¦ç»†è¯´æ˜ï¼Œè¯·å‚è§ @ref page_CoreTools_Base ã€‚

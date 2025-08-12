@@ -10,7 +10,6 @@
 #include "LiteralCastTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/TemplateTools/LiteralCastDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 #define LITERAL_CAST_COMPILE_ERROR
@@ -41,93 +40,20 @@ void CoreTools::LiteralCastTesting::MainTest()
 
 void CoreTools::LiteralCastTesting::Int8CastTest() noexcept
 {
-    MAYBE_UNUSED const int8_t s8{ LiteralCast<int8_t, 0>() };
-    std::ignore = LiteralCast<int8_t, 100>();
-
-#ifdef LITERAL_CAST_COMPILE_ERROR  // 这里应该产生编译错误。
-
-    std::ignore = LiteralCast<int8_t, 1000>();
-
-#endif  // LITERAL_CAST_COMPILE_ERROR
-
-#ifdef LITERAL_CAST_COMPILE_ERROR  // 这里应该产生编译错误。
-
-    std::ignore = LiteralCast<int8_t, 10000000>();
-
-#endif  // LITERAL_CAST_COMPILE_ERROR
-
-#ifdef LITERAL_CAST_COMPILE_ERROR  // 这里应该产生编译错误。
-
-    std::ignore = LiteralCast<int8_t, 10000000000000LL>();
-
-#endif  // LITERAL_CAST_COMPILE_ERROR
-
-    std::ignore = LiteralCast<int8_t, 0U>();
-    std::ignore = LiteralCast<int8_t, 100U>();
-    std::ignore = LiteralCast<int8_t, 127U>();
-
-#ifdef LITERAL_CAST_COMPILE_ERROR  // 这里应该产生编译错误。
-
-    std::ignore = LiteralCast<int8_t, 128>();
-
-#endif  // LITERAL_CAST_COMPILE_ERROR
-
-    std::ignore = LiteralCast<int8_t, -128>();
-
-#ifdef LITERAL_CAST_COMPILE_ERROR  // 这里应该产生编译错误。
-
-    std::ignore = LiteralCast<int8_t, -129>();
-
-#endif  // LITERAL_CAST_COMPILE_ERROR
 }
 
 void CoreTools::LiteralCastTesting::UInt8CastTest() noexcept
 {
-    MAYBE_UNUSED const uint8_t u8{ LiteralCast<uint8_t, 0>() };
-
-#ifdef LITERAL_CAST_COMPILE_ERROR  // 这里应该产生编译错误。
-
-    std::ignore = LiteralCast<uint8_t, -1>();
-
-#endif  // LITERAL_CAST_COMPILE_ERROR
-
-    std::ignore = LiteralCast<uint8_t, 128>();
-    std::ignore = LiteralCast<uint8_t, 255>();
-
-#ifdef LITERAL_CAST_COMPILE_ERROR  // 这里应该产生编译错误。
-
-    std::ignore = LiteralCast<uint8_t, 256>();
-
-#endif  // LITERAL_CAST_COMPILE_ERROR
 }
 
 void CoreTools::LiteralCastTesting::UInt32CastTest() noexcept
 {
-    MAYBE_UNUSED const uint32_t u32{ LiteralCast<uint32_t, 0>() };
-    std::ignore = LiteralCast<uint32_t, 100000>();
-    std::ignore = LiteralCast<uint32_t, 1000000000>();
-
-#ifdef LITERAL_CAST_COMPILE_ERROR  // 这里应该产生编译错误。
-
-    std::ignore = LiteralCast<uint32_t, 10000000000000LL>();
-
-#endif  // LITERAL_CAST_COMPILE_ERROR
 }
 
 void CoreTools::LiteralCastTesting::Int64CastTest() noexcept
-{
-#ifdef LITERAL_CAST_COMPILE_ERROR  // 这里应该产生编译错误。
-
-    MAYBE_UNUSED int64_t s64{ LiteralCast<int64_t, 0>() };
-
-#endif  // LITERAL_CAST_COMPILE_ERROR
+{ 
 }
 
 void CoreTools::LiteralCastTesting::UInt64CastTest() noexcept
 {
-#ifdef LITERAL_CAST_COMPILE_ERROR  // 这里应该产生编译错误。
-
-    MAYBE_UNUSED uint64_t u64{ LiteralCast<uint64_t, 1>() };
-
-#endif  // LITERAL_CAST_COMPILE_ERROR
 }

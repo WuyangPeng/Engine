@@ -13,6 +13,7 @@
 #include "ConvexHull1.h"
 #include "ConvexHullDetail.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::ConvexHull1<Real>::ConvexHull1(const Vertices& vertices, Real epsilon, QueryType queryType)

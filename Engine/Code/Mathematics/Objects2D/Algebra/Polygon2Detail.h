@@ -16,6 +16,7 @@
 #include "Mathematics/Algebra/Vector/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector/VectorDetail.h"
 #include "Mathematics/Intersection/Intersection2D/StaticTestIntersectorSegment2Segment2Detail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>

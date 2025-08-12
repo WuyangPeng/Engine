@@ -1,12 +1,12 @@
-@ingroup group_MacintoshMainFunctionHelper1_Documentation
+ï»¿@ingroup group_MacintoshMainFunctionHelper1_Documentation
 
 ----------------------------
-MacintoshÖ÷º¯Êı°ïÖú
+Macintoshä¸»å‡½æ•°å¸®åŠ©
 
 MacintoshMainFunctionHelper1 
 
-MacintoshÖ÷º¯Êı°ïÖú¹¤¾ßÏä¡£ÊµÏÖÒÔÏÂ¹¦ÄÜ£º 
+Macintoshä¸»å‡½æ•°å¸®åŠ©å·¥å…·ç®±ã€‚å®ç°ä»¥ä¸‹åŠŸèƒ½ï¼š 
 
-£¨1£©ÔËĞĞMacintoshÖ÷º¯Êı°ïÖú¡£ 
+ï¼ˆ1ï¼‰è¿è¡ŒMacintoshä¸»å‡½æ•°å¸®åŠ©ã€‚ 
 
 ----------------------------

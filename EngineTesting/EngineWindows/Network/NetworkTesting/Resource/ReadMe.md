@@ -1,163 +1,163 @@
-@ingroup group_NetworkTesting_Documentation
+ï»¿@ingroup group_NetworkTesting_Documentation
 
 ----------------------------
-ÍøÂç¿âµ¥Ôª²âÊÔ
+ç½‘ç»œåº“å•å…ƒæµ‹è¯•
 
 ----------------------------
 1.   HelperSuite  
 
-¶Ô°ïÖúÄ£¿éµÄµ¥Ôª²âÊÔ£º 
-£¨1£©ÊäÈëÊä³öÁ÷ºê£ºStreamMacroTesting¡£
-£¨2£©ÓÃ»§ºê£ºUserMacroTesting¡£
+å¯¹å¸®åŠ©æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š 
+ï¼ˆ1ï¼‰è¾“å…¥è¾“å‡ºæµå®ï¼šStreamMacroTestingã€‚
+ï¼ˆ2ï¼‰ç”¨æˆ·å®ï¼šUserMacroTestingã€‚
 
 ----------------------------
 2.	ConfigurationSuite  
 
-¶ÔÍøÂç¿âÅäÖÃÄ£¿éµÄµ¥Ôª²âÊÔ£º
-£¨1£©ÅäÖÃ²ßÂÔ£ºConfigurationStrategyTesting¡£
-£¨2£©ÅäÖÃ×Ó²ßÂÔ£ºConfigurationSubStrategyTesting¡£
-£¨3£©ÅäÖÃ²ÎÊı£ºConfigurationParameterTesting¡£
-£¨4£©ÅäÖÃ½âÎö£ºAnalysisNetworkConfigurationTesting¡£
+å¯¹ç½‘ç»œåº“é…ç½®æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š
+ï¼ˆ1ï¼‰é…ç½®ç­–ç•¥ï¼šConfigurationStrategyTestingã€‚
+ï¼ˆ2ï¼‰é…ç½®å­ç­–ç•¥ï¼šConfigurationSubStrategyTestingã€‚
+ï¼ˆ3ï¼‰é…ç½®å‚æ•°ï¼šConfigurationParameterTestingã€‚
+ï¼ˆ4ï¼‰é…ç½®è§£æï¼šAnalysisNetworkConfigurationTestingã€‚
 
 ----------------------------
 3.	NetworkMessageSuite  
 
-¶ÔÍøÂçÏûÏ¢Ä£¿éµÄµ¥Ôª²âÊÔ£º
-£¨1£©ÏûÏ¢½Ó¿Ú£ºMessageInterfaceTesting¡¢
-			   NullMessageTesting¡¢
-			   NullDoubleMessageTesting¡¢ 
-			   MessageContainerTesting¡¢
-			   IntegerMessageTesting¡¢
-			   StringMessageTesting¡¢
-			   MultipleMessageCastTesting¡¢
-			   MultipleMessageElementTesting¡¢
-			   MultipleMessageSizeTesting¡¢
-			   MultipleMessageInitValueTesting¡¢			   
-			   MultipleMessageStreamingLoadTesting¡¢
-			   MultipleMessageStreamingSaveTesting¡¢
-			   MultipleMessageStreamingSizeTesting¡¢
-			   MultipleMessageContainerTesting¡¢			  
-			   MultipleMessageTesting¡¢	
-			   MessageContainerGroupTesting¡¢			   
-			   MessageInterfaceSharedPtrLessTesting¡¢
-			   MessageManagerTesting¡¢		   
-			   MultipleMessageContainerGroupTesting¡£			   
-£¨2£©ÏûÏ¢ÊÂ¼ş£ºNetworkMessageEventTesting¡¢
-			   MessageEventContainerTesting¡¢
-			   MessageEventManagerTesting¡£
-£¨3£©ÏûÏ¢ÀàĞÍ£ºMessageTypeConditionTesting¡¢
-			   MessageTypeConditionOperatingTesting¡£
-£¨4£©ÏûÏ¢Á÷£ºBufferReceiveStreamTesting¡¢
-			 BufferSendStreamTesting¡¢
-			 MessageBufferTesting¡¢
-			 MessageSourceTesting¡¢
-			 MessageTargetTesting¡¢
-			 ReceiveMessageLevelTesting¡¢
-			 SendMessageLevelTesting¡£ 
-£¨5£©protobuf£º ProtoBufMessageTesting¡£
-£¨6£©json£º JsonMessageTesting¡£
+å¯¹ç½‘ç»œæ¶ˆæ¯æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š
+ï¼ˆ1ï¼‰æ¶ˆæ¯æ¥å£ï¼šMessageInterfaceTestingã€
+			   NullMessageTestingã€
+			   NullDoubleMessageTestingã€ 
+			   MessageContainerTestingã€
+			   IntegerMessageTestingã€
+			   StringMessageTestingã€
+			   MultipleMessageCastTestingã€
+			   MultipleMessageElementTestingã€
+			   MultipleMessageSizeTestingã€
+			   MultipleMessageInitValueTestingã€			   
+			   MultipleMessageStreamingLoadTestingã€
+			   MultipleMessageStreamingSaveTestingã€
+			   MultipleMessageStreamingSizeTestingã€
+			   MultipleMessageContainerTestingã€			  
+			   MultipleMessageTestingã€	
+			   MessageContainerGroupTestingã€			   
+			   MessageInterfaceSharedPtrLessTestingã€
+			   MessageManagerTestingã€		   
+			   MultipleMessageContainerGroupTestingã€‚			   
+ï¼ˆ2ï¼‰æ¶ˆæ¯äº‹ä»¶ï¼šNetworkMessageEventTestingã€
+			   MessageEventContainerTestingã€
+			   MessageEventManagerTestingã€‚
+ï¼ˆ3ï¼‰æ¶ˆæ¯ç±»å‹ï¼šMessageTypeConditionTestingã€
+			   MessageTypeConditionOperatingTestingã€‚
+ï¼ˆ4ï¼‰æ¶ˆæ¯æµï¼šBufferReceiveStreamTestingã€
+			 BufferSendStreamTestingã€
+			 MessageBufferTestingã€
+			 MessageSourceTestingã€
+			 MessageTargetTestingã€
+			 ReceiveMessageLevelTestingã€
+			 SendMessageLevelTestingã€‚ 
+ï¼ˆ5ï¼‰protobufï¼š ProtoBufMessageTestingã€‚
+ï¼ˆ6ï¼‰jsonï¼š JsonMessageTestingã€‚
 ----------------------------
 4.	ServiceWrappersSuite 
 
-¶Ô·şÎñ°ü×°Æ÷½Ó¿ÚÄ£¿éµÄµ¥Ôª²âÊÔ£º
-£¨1£©·şÎñ°ü×°Æ÷¡£
+å¯¹æœåŠ¡åŒ…è£…å™¨æ¥å£æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š
+ï¼ˆ1ï¼‰æœåŠ¡åŒ…è£…å™¨ã€‚
 
 ----------------------------
 5.	InterfaceSuite 
 
-¶ÔÍøÂç¿â½Ó¿ÚÄ£¿éµÄµ¥Ôª²âÊÔ£º
-£¨1£©»ù´¡Ö÷¹ÜÀí£ºBaseMainManagerTesting¡¢
-				 SingletonTesting¡£
-£¨2£©ÍøÂçµØÖ·£ºSockAddressTesting¡£
-£¨3£©½ÓÊÜÆ÷£ºSockAcceptorTesting¡£
-£¨4£©Á¬½ÓÆ÷£ºSockConnectorTesting¡£
-£¨5£©Á÷£ºSockStreamTesting¡£
-£¨6£©¾ä±ú¼¯£ºHandleSetIteratorTesting¡¢
-		     HandleSetTesting¡£
+å¯¹ç½‘ç»œåº“æ¥å£æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š
+ï¼ˆ1ï¼‰åŸºç¡€ä¸»ç®¡ç†ï¼šBaseMainManagerTestingã€
+				 SingletonTestingã€‚
+ï¼ˆ2ï¼‰ç½‘ç»œåœ°å€ï¼šSockAddressTestingã€‚
+ï¼ˆ3ï¼‰æ¥å—å™¨ï¼šSockAcceptorTestingã€‚
+ï¼ˆ4ï¼‰è¿æ¥å™¨ï¼šSockConnectorTestingã€‚
+ï¼ˆ5ï¼‰æµï¼šSockStreamTestingã€‚
+ï¼ˆ6ï¼‰å¥æŸ„é›†ï¼šHandleSetIteratorTestingã€
+		     HandleSetTestingã€‚
 
 ----------------------------
 6.	ACEWrappersSuite
 
-¶ÔACE°ü×°Æ÷Ä£¿éµÄµ¥Ôª²âÊÔ£º
-£¨1£©»ù´¡Ö÷¹ÜÀí£ºACEMainManagerTesting¡£
-£¨2£©ÍøÂçµØÖ·£ºACESockInetAddressTesting¡£
-£¨3£©½ÓÊÜÆ÷£ºACESockAcceptorTesting¡£
-£¨4£©Á¬½ÓÆ÷£ºACESockConnectorTesting¡£
-£¨5£©Á÷£ºACEIovecSockStreamTesting¡¢
-		 ACESockStreamTesting¡£
-£¨6£©¾ä±ú¼¯£ºSockACEHandleSetIteratorTesting¡¢
-		     SockACEHandleSetTesting¡£
+å¯¹ACEåŒ…è£…å™¨æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š
+ï¼ˆ1ï¼‰åŸºç¡€ä¸»ç®¡ç†ï¼šACEMainManagerTestingã€‚
+ï¼ˆ2ï¼‰ç½‘ç»œåœ°å€ï¼šACESockInetAddressTestingã€‚
+ï¼ˆ3ï¼‰æ¥å—å™¨ï¼šACESockAcceptorTestingã€‚
+ï¼ˆ4ï¼‰è¿æ¥å™¨ï¼šACESockConnectorTestingã€‚
+ï¼ˆ5ï¼‰æµï¼šACEIovecSockStreamTestingã€
+		 ACESockStreamTestingã€‚
+ï¼ˆ6ï¼‰å¥æŸ„é›†ï¼šSockACEHandleSetIteratorTestingã€
+		     SockACEHandleSetTestingã€‚
 
 ----------------------------
 7.	BoostWrappersSuite 
 
-¶Ôboost°ü×°Æ÷Ä£¿éµÄµ¥Ôª²âÊÔ£º
-£¨1£©»ù´¡Ö÷¹ÜÀí£ºBoostMainManagerTesting¡¢
-				 BoostMainManagerUseMultiContextTesting¡¢
-				 BoostMainManagerUseThreadsTesting¡£
-£¨2£©ÍøÂçµØÖ·£ºBoostSockInetAddressTesting¡£
-£¨3£©½ÓÊÜÆ÷£ºBoostSockAcceptorAsynchronousTesting¡¢
-			 BoostSockAcceptorHandleTesting¡¢
-			 BoostSockAcceptorNonBlockingTesting¡¢
-			 BoostSockAcceptorSynchronizeTesting¡¢
-			 BoostSockAcceptorTesting¡£
-£¨4£©Á¬½ÓÆ÷£ºBoostSockConnectorAsynchronousTesting¡¢
-			 BoostSockConnectorHandleTesting¡¢
-			 BoostSockConnectorSynchronizeTesting¡¢
-			 BoostSockConnectorTesting¡£
-£¨5£©Á÷£ºBoostFixedSockStreamAsynchronousTesting¡¢
-		 BoostFixedSockStreamNonBlockingTesting¡¢
-		 BoostFixedSockStreamSynchronizeTesting¡¢
-		 BoostSegmentationSockStreamAsynchronousTesting¡¢
-		 BoostSegmentationSockStreamNonBlockingTesting¡¢
-		 BoostSegmentationSockStreamSynchronizeTesting¡¢
-		 BoostSockStreamHandleTesting¡¢
-		 BoostSockStreamTesting¡£
+å¯¹booståŒ…è£…å™¨æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š
+ï¼ˆ1ï¼‰åŸºç¡€ä¸»ç®¡ç†ï¼šBoostMainManagerTestingã€
+				 BoostMainManagerUseMultiContextTestingã€
+				 BoostMainManagerUseThreadsTestingã€‚
+ï¼ˆ2ï¼‰ç½‘ç»œåœ°å€ï¼šBoostSockInetAddressTestingã€‚
+ï¼ˆ3ï¼‰æ¥å—å™¨ï¼šBoostSockAcceptorAsynchronousTestingã€
+			 BoostSockAcceptorHandleTestingã€
+			 BoostSockAcceptorNonBlockingTestingã€
+			 BoostSockAcceptorSynchronizeTestingã€
+			 BoostSockAcceptorTestingã€‚
+ï¼ˆ4ï¼‰è¿æ¥å™¨ï¼šBoostSockConnectorAsynchronousTestingã€
+			 BoostSockConnectorHandleTestingã€
+			 BoostSockConnectorSynchronizeTestingã€
+			 BoostSockConnectorTestingã€‚
+ï¼ˆ5ï¼‰æµï¼šBoostFixedSockStreamAsynchronousTestingã€
+		 BoostFixedSockStreamNonBlockingTestingã€
+		 BoostFixedSockStreamSynchronizeTestingã€
+		 BoostSegmentationSockStreamAsynchronousTestingã€
+		 BoostSegmentationSockStreamNonBlockingTestingã€
+		 BoostSegmentationSockStreamSynchronizeTestingã€
+		 BoostSockStreamHandleTestingã€
+		 BoostSockStreamTestingã€‚
 
 ----------------------------
 8.	NetworkWrappersSuite 
 
-¶ÔNetwork°ü×°Æ÷Ä£¿éµÄµ¥Ôª²âÊÔ£º
-£¨1£©»ù´¡Ö÷¹ÜÀí£ºNetworkMainManagerTesting¡£
-£¨2£©ÍøÂçµØÖ·£ºNetworkSockInetAddressTesting¡£
-£¨3£©½ÓÊÜÆ÷£ºNetworkSockAcceptorTesting¡£
-£¨4£©Á¬½ÓÆ÷£ºNetworkSockConnectorTesting¡£
-£¨5£©Á÷£ºNetworkSockStreamTesting¡£
+å¯¹NetworkåŒ…è£…å™¨æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š
+ï¼ˆ1ï¼‰åŸºç¡€ä¸»ç®¡ç†ï¼šNetworkMainManagerTestingã€‚
+ï¼ˆ2ï¼‰ç½‘ç»œåœ°å€ï¼šNetworkSockInetAddressTestingã€‚
+ï¼ˆ3ï¼‰æ¥å—å™¨ï¼šNetworkSockAcceptorTestingã€‚
+ï¼ˆ4ï¼‰è¿æ¥å™¨ï¼šNetworkSockConnectorTestingã€‚
+ï¼ˆ5ï¼‰æµï¼šNetworkSockStreamTestingã€‚
 
 ----------------------------
 9.	OpensslSuite
 
-¶ÔopensslÄ£¿éµÄµ¥Ôª²âÊÔ£º
-£¨1£©openssl¡£
+å¯¹opensslæ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š
+ï¼ˆ1ï¼‰opensslã€‚
 
 ----------------------------
 10.	MessageOrientedMiddlewareSuite
 
-¶ÔÏûÏ¢ÖĞ¼ä¼şÄ£¿éµÄµ¥Ôª²âÊÔ£º
-£¨1£©ÏûÏ¢ÖĞ¼ä¼ş£ºConsumerTesting¡¢
-				 ProducerTesting¡¢
-				 RouteServiceManagerTesting¡¢
-				 RouteServiceTesting¡£
+å¯¹æ¶ˆæ¯ä¸­é—´ä»¶æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š
+ï¼ˆ1ï¼‰æ¶ˆæ¯ä¸­é—´ä»¶ï¼šConsumerTestingã€
+				 ProducerTestingã€
+				 RouteServiceManagerTestingã€
+				 RouteServiceTestingã€‚
 
 ----------------------------
 11.	ActiveMQSuite
 
-¶ÔActiveMQÄ£¿éµÄµ¥Ôª²âÊÔ£º
-£¨1£©ActiveMQ£ºActiveMQConsumerTesting¡¢
-			   ActiveMQProducerTesting¡¢
-			   ActiveMQRouteServiceManagerTesting¡¢
-			   ActiveMQRouteServiceTesting¡£
+å¯¹ActiveMQæ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š
+ï¼ˆ1ï¼‰ActiveMQï¼šActiveMQConsumerTestingã€
+			   ActiveMQProducerTestingã€
+			   ActiveMQRouteServiceManagerTestingã€
+			   ActiveMQRouteServiceTestingã€‚
 
 ----------------------------
 12.	NatsSuite
 
-¶ÔNatsÄ£¿éµÄµ¥Ôª²âÊÔ£º
-£¨1£©Nats¡£
+å¯¹Natsæ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š
+ï¼ˆ1ï¼‰Natsã€‚
 
 ----------------------------
 13.	KafkaSuite
 
-¶ÔKafkaÄ£¿éµÄµ¥Ôª²âÊÔ£º
-£¨1£©Kafka¡£
+å¯¹Kafkaæ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼š
+ï¼ˆ1ï¼‰Kafkaã€‚
 
 ----------------------------

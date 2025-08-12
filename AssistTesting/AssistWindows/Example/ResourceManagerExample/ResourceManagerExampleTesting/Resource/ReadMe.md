@@ -1,11 +1,11 @@
-@ingroup group_ResourceManagerExampleTesting_Documentation
+ï»¿@ingroup group_ResourceManagerExampleTesting_Documentation
 
 ----------------------------
-×ÊÔ´¹ÜÀíÀı×Óµ¥Ôª²âÊÔ
+èµ„æºç®¡ç†ä¾‹å­å•å…ƒæµ‹è¯•
 
 1.   ResourceManagerExampleTesting 
 
-×ÊÔ´¹ÜÀíÀı×ÓµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£©×ÊÔ´¹ÜÀíÀı×Ó¡£
+èµ„æºç®¡ç†ä¾‹å­çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰èµ„æºç®¡ç†ä¾‹å­ã€‚
 
 ----------------------------

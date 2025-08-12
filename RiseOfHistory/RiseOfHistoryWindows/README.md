@@ -1,65 +1,65 @@
-@ingroup group_Documentation
+ï»¿@ingroup group_Documentation
 
 ----------------------------
-ÀúÊ·µÄáÈÆğ¹¤³Ì
+å†å²çš„å´›èµ·å·¥ç¨‹
 
 ----------------------------
-RiseOfHistory.props£º
-ÀúÊ·µÄáÈÆğ¹¤³ÌÊôĞÔ±í
+RiseOfHistory.propsï¼š
+å†å²çš„å´›èµ·å·¥ç¨‹å±æ€§è¡¨
 
-RiseOfHistoryStaticWin32DebugLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Élib¡¢Win32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+RiseOfHistoryStaticWin32DebugLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆlibã€Win32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-RiseOfHistoryStaticWin32ReleaseLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Élib¡¢Win32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+RiseOfHistoryStaticWin32ReleaseLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆlibã€Win32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-RiseOfHistoryStaticX64DebugLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Élib¡¢X64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+RiseOfHistoryStaticX64DebugLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆlibã€X64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-RiseOfHistoryStaticX64ReleaseLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Élib¡¢X64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+RiseOfHistoryStaticX64ReleaseLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆlibã€X64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-RiseOfHistoryWin32DebugLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Édll¡¢Win32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+RiseOfHistoryWin32DebugLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆdllã€Win32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-RiseOfHistoryWin32ReleaseLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Édll¡¢Win32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+RiseOfHistoryWin32ReleaseLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆdllã€Win32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-RiseOfHistoryX64DebugLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Édll¡¢X64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+RiseOfHistoryX64DebugLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆdllã€X64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-RiseOfHistoryX64ReleaseLibs.props£º
-ÒıÇæºÍÓÎÏ·¶¼±àÒë³Édll¡¢X64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+RiseOfHistoryX64ReleaseLibs.propsï¼š
+å¼•æ“å’Œæ¸¸æˆéƒ½ç¼–è¯‘æˆdllã€X64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-RiseOfHistoryEngineDynamicRiseOfHistoryStaticWin32DebugLibs.props£º
-ÒıÇæ£¨dll£©ºÍÓÎÏ·£¨lib£©¶¼±àÒë³ÉWin32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+RiseOfHistoryEngineDynamicRiseOfHistoryStaticWin32DebugLibs.propsï¼š
+å¼•æ“ï¼ˆdllï¼‰å’Œæ¸¸æˆï¼ˆlibï¼‰éƒ½ç¼–è¯‘æˆWin32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-RiseOfHistoryEngineDynamicRiseOfHistoryStaticWin32ReleaseLibs.props£º
-ÒıÇæ£¨dll£©ºÍÓÎÏ·£¨lib£©¶¼±àÒë³ÉWin32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+RiseOfHistoryEngineDynamicRiseOfHistoryStaticWin32ReleaseLibs.propsï¼š
+å¼•æ“ï¼ˆdllï¼‰å’Œæ¸¸æˆï¼ˆlibï¼‰éƒ½ç¼–è¯‘æˆWin32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-RiseOfHistoryEngineDynamicRiseOfHistoryStaticX64DebugLibs.props£º
-ÒıÇæ£¨dll£©ºÍÓÎÏ·£¨lib£©¶¼±àÒë³ÉX64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+RiseOfHistoryEngineDynamicRiseOfHistoryStaticX64DebugLibs.propsï¼š
+å¼•æ“ï¼ˆdllï¼‰å’Œæ¸¸æˆï¼ˆlibï¼‰éƒ½ç¼–è¯‘æˆX64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-RiseOfHistoryEngineDynamicRiseOfHistoryStaticX64ReleaseLibs.props£º
-ÒıÇæ£¨dll£©ºÍÓÎÏ·£¨lib£©¶¼±àÒë³ÉX64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+RiseOfHistoryEngineDynamicRiseOfHistoryStaticX64ReleaseLibs.propsï¼š
+å¼•æ“ï¼ˆdllï¼‰å’Œæ¸¸æˆï¼ˆlibï¼‰éƒ½ç¼–è¯‘æˆX64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-RiseOfHistoryEngineStaticRiseOfHistoryDynamicWin32DebugLibs.props£º
-ÒıÇæ£¨lib£©ºÍÓÎÏ·£¨dll£©¶¼±àÒë³ÉWin32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+RiseOfHistoryEngineStaticRiseOfHistoryDynamicWin32DebugLibs.propsï¼š
+å¼•æ“ï¼ˆlibï¼‰å’Œæ¸¸æˆï¼ˆdllï¼‰éƒ½ç¼–è¯‘æˆWin32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-RiseOfHistoryEngineStaticRiseOfHistoryDynamicWin32ReleaseLibs.props£º
-ÒıÇæ£¨lib£©ºÍÓÎÏ·£¨dll£©¶¼±àÒë³ÉWin32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+RiseOfHistoryEngineStaticRiseOfHistoryDynamicWin32ReleaseLibs.propsï¼š
+å¼•æ“ï¼ˆlibï¼‰å’Œæ¸¸æˆï¼ˆdllï¼‰éƒ½ç¼–è¯‘æˆWin32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-RiseOfHistoryEngineStaticRiseOfHistoryDynamicX64DebugLibs.props£º
-ÒıÇæ£¨lib£©ºÍÓÎÏ·£¨dll£©¶¼±àÒë³ÉX64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+RiseOfHistoryEngineStaticRiseOfHistoryDynamicX64DebugLibs.propsï¼š
+å¼•æ“ï¼ˆlibï¼‰å’Œæ¸¸æˆï¼ˆdllï¼‰éƒ½ç¼–è¯‘æˆX64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-RiseOfHistoryEngineStaticRiseOfHistoryDynamicX64ReleaseLibs.props£º
-ÒıÇæ£¨lib£©ºÍÓÎÏ·£¨dll£©¶¼±àÒë³ÉX64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+RiseOfHistoryEngineStaticRiseOfHistoryDynamicX64ReleaseLibs.propsï¼š
+å¼•æ“ï¼ˆlibï¼‰å’Œæ¸¸æˆï¼ˆdllï¼‰éƒ½ç¼–è¯‘æˆX64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
 ----------------------------
-SetEnvironment.bat£º
-ÉèÖÃÀúÊ·µÄáÈÆğËùĞèÒªµÄ»·¾³±äÁ¿
+SetEnvironment.batï¼š
+è®¾ç½®å†å²çš„å´›èµ·æ‰€éœ€è¦çš„ç¯å¢ƒå˜é‡
 
-SetAllEnvironment.bat£º
-ÉèÖÃÓÎÏ·ËùĞèÒªµÄËùÓĞ»·¾³±äÁ¿
+SetAllEnvironment.batï¼š
+è®¾ç½®æ¸¸æˆæ‰€éœ€è¦çš„æ‰€æœ‰ç¯å¢ƒå˜é‡
 
 ----------------------------

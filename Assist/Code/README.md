@@ -1,15 +1,15 @@
-@ingroup group_Documentation
+ï»¿@ingroup group_Documentation
 
 ----------------------------
-ÒýÇæ¸¨Öú´úÂë
+å¼•æ“Žè¾…åŠ©ä»£ç 
 
 ----------------------------
-Toolset£º´úÂë·ÖÎö£¨ËùÓÐ¹æÔò£©£¬Æ½Ì¨£¨Windows£© 
+Toolsetï¼šä»£ç åˆ†æžï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰ 
 
-Editor£º´úÂë·ÖÎö£¨ËùÓÐ¹æÔò£©£¬Æ½Ì¨£¨Windows£© 
+Editorï¼šä»£ç åˆ†æžï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰ 
 
-Example£º´úÂë·ÖÎö£¨ËùÓÐ¹æÔò£©£¬Æ½Ì¨£¨Windows£© 
+Exampleï¼šä»£ç åˆ†æžï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰ 
 
-ThreadingCoreRenderEngineAssist£º´úÂë·ÖÎö£¨ËùÓÐ¹æÔò£©£¬Æ½Ì¨£¨Windows£© 
+ThreadingCoreRenderEngineAssistï¼šä»£ç åˆ†æžï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰ 
 
 ----------------------------

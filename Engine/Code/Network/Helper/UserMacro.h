@@ -57,7 +57,12 @@ static_assert(COMPILE_NETWORK_CLOSE <= CLOSE_NETWORK_MAX, "COMPILE_NETWORK_CLOSE
 #if !defined(COMPILE_NETWORK_CLOSE) || (COMPILE_NETWORK_CLOSE & CLOSE_USE_PROTO_BUF) != CLOSE_USE_PROTO_BUF
 
     #define NETWORK_USE_PROTO_BUF static_cast<void>(0)
-    #define PROTOBUF_USE_DLLS static_cast<void>(0)
+
+    #ifndef PROTOBUF_USE_DLLS
+
+        #define PROTOBUF_USE_DLLS static_cast<void>(0)
+
+    #endif  // PROTOBUF_USE_DLLS
 
     #ifndef PROTO_BUF_PRAGMA_WARNING
 

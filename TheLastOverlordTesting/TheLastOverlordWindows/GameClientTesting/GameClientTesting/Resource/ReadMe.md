@@ -1,12 +1,12 @@
-@ingroup group_GameClientTesting_Documentation
+О╩©@ingroup group_GameClientTesting_Documentation
 
 ----------------------------
-сно╥©м╩╖╤к╣╔т╙╡Бйт
+Ф╦╦Ф┬▐Е╝╒Ф┬╥Г╚╞Е█∙Е┘┐Ф╣▀Х╞∙
 
-д©г╟╟Э╨╛ё╨
+Г⌡╝Е┴█Е▄┘Е░╚О╪ 
 
-1. GameClientё╗сно╥©м╩╖╤кё╘
+1. GameClientО╪┬Ф╦╦Ф┬▐Е╝╒Ф┬╥Г╚╞О╪┴
 
-ё╗1ё╘сно╥©м╩╖╤к║ё
+О╪┬1О╪┴Ф╦╦Ф┬▐Е╝╒Ф┬╥Г╚╞Ц─┌
 
 ----------------------------

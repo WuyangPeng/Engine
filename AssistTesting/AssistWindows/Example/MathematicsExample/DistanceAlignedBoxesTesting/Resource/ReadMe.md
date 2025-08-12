@@ -1,11 +1,11 @@
-@ingroup group_DistanceAlignedBoxesTesting_Documentation
+ï»¿@ingroup group_DistanceAlignedBoxesTesting_Documentation
 
 ----------------------------
-ÊıÑ§Àı×Óµ¥Ôª²âÊÔ
+æ•°å­¦ä¾‹å­å•å…ƒæµ‹è¯•
 
 1.   DistanceAlignedBoxesTesting 
 
-AlignedBoxes¾àÀëÀı×ÓµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£©AlignedBoxes¾àÀëÀı×Ó¡£
+AlignedBoxesè·ç¦»ä¾‹å­çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰AlignedBoxesè·ç¦»ä¾‹å­ã€‚
 
 ----------------------------

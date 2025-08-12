@@ -1,11 +1,11 @@
-@ingroup group_UserInterfaceEditor_Documentation
+ï»¿@ingroup group_UserInterfaceEditor_Documentation
 
 ----------------------------
-ÓÃ»§½çÃæ±à¼­Æ÷
+ç”¨æˆ·ç•Œé¢ç¼–è¾‘å™¨
 
 1.   UserInterfaceEditor 
 
-ÓÃ»§½çÃæ±à¼­Æ÷£¬°üÀ¨£º 
-£¨1£©ÓÃ»§½çÃæ¡£
+ç”¨æˆ·ç•Œé¢ç¼–è¾‘å™¨ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰ç”¨æˆ·ç•Œé¢ã€‚
 
 ----------------------------

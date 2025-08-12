@@ -42,9 +42,6 @@
     <None Include="Configuration\EngineDirectory.json">
       <Filter>配置</Filter>
     </None>
-    <None Include="Resource\LearningLibrary.md">
-      <Filter>资源文件</Filter>
-    </None>
     <None Include="Resource\ReadMe.md">
       <Filter>资源文件</Filter>
     </None>

@@ -1,6 +1,6 @@
-@ingroup group_GameClient_Documentation
+О╩©@ingroup group_GameClient_Documentation
 
 ----------------------------
-сно╥©м╩╖╤к
+Ф╦╦Ф┬▐Е╝╒Ф┬╥Г╚╞
 
 ----------------------------

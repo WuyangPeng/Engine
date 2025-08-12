@@ -1,12 +1,12 @@
-@ingroup group_WindowMessageLoop1_Documentation
+ï»¿@ingroup group_WindowMessageLoop1_Documentation
 
 ----------------------------
-WindowÏûÏ¢Ñ­»·
+Windowæ¶ˆæ¯å¾ªç¯
 
 WindowMessageLoop1 
 
-WindowÏûÏ¢Ñ­»·¹¤¾ßÏä¡£ÊµÏÖÒÔÏÂ¹¦ÄÜ£º 
+Windowæ¶ˆæ¯å¾ªç¯å·¥å…·ç®±ã€‚å®ç°ä»¥ä¸‹åŠŸèƒ½ï¼š 
 
-£¨1£©ÔËĞĞWindowÏûÏ¢Ñ­»·¡£
+ï¼ˆ1ï¼‰è¿è¡ŒWindowæ¶ˆæ¯å¾ªç¯ã€‚
 
 ----------------------------

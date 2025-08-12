@@ -13,10 +13,11 @@
 #include "ApproximationCone3EllipseAndPoints.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "Mathematics/NumericalAnalysis/Algebra/Minimize1.h"
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 Mathematics::ApproximationCone3EllipseAndPoints<Real>::ApproximationCone3EllipseAndPoints() noexcept
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -25,7 +26,7 @@ Mathematics::ApproximationCone3EllipseAndPoints<Real>::ApproximationCone3Ellipse
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 bool Mathematics::ApproximationCone3EllipseAndPoints<Real>::IsValid() const noexcept
 {
     return true;
@@ -34,7 +35,7 @@ bool Mathematics::ApproximationCone3EllipseAndPoints<Real>::IsValid() const noex
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 typename Mathematics::ApproximationCone3EllipseAndPoints<Real>::Cone3 Mathematics::ApproximationCone3EllipseAndPoints<Real>::Fit(const Ellipse3& ellipse, const Vector3Container& points, ApproximationCone3EllipseAndPointsControlType control)
 {
     ASSERT_FAIL_THROW_EXCEPTION(control.ValidParameters(), SYSTEM_TEXT("无效的控制参数。"))
@@ -133,7 +134,7 @@ typename Mathematics::ApproximationCone3EllipseAndPoints<Real>::Cone3 Mathematic
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 typename Mathematics::ApproximationCone3EllipseAndPoints<Real>::Cone3 Mathematics::ApproximationCone3EllipseAndPoints<Real>::ComputeCone(Real theta, Real sigma0, Real sigma1, const Ellipse3& ellipse)
 {
     const auto& c = ellipse.GetCenter();

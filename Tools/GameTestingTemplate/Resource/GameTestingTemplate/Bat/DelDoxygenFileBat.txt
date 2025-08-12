@@ -1,7 +1,7 @@
-ï»¿@echo on
+@echo on
 cd ..
 cd Doxygen
-echo è¯·æ£€æŸ¥å½“å‰è·¯å¾„æ˜¯å¦æ­£ç¡®ã€‚
+echo Çë¼ì²éµ±Ç°Â·¾¶ÊÇ·ñÕıÈ·¡£
 pause 
 rmdir /s /q html
 pause 

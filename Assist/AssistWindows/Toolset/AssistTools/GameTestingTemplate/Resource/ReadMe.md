@@ -1,11 +1,11 @@
-@ingroup group_GameTestingTemplate_Documentation
+ï»¿@ingroup group_GameTestingTemplate_Documentation
 
 ----------------------------
-ÓÎÏ·²âÊÔÉú³ÉÆ÷
+æ¸¸æˆæµ‹è¯•ç”Ÿæˆå™¨
 
 1.   GameTestingTemplate 
 
-ÓÎÏ·²âÊÔÉú³ÉÆ÷£¬°üÀ¨£º 
-£¨1£©ÓÎÏ·²âÊÔÉú³ÉÆ÷¡£
+æ¸¸æˆæµ‹è¯•ç”Ÿæˆå™¨ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰æ¸¸æˆæµ‹è¯•ç”Ÿæˆå™¨ã€‚
 
 ----------------------------

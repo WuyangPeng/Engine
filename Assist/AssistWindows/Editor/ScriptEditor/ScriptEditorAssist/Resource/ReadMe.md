@@ -1,7 +1,7 @@
-@ingroup group_ScriptEditorAssist_Documentation
+ï»¿@ingroup group_ScriptEditorAssist_Documentation
 
 ----------------------------
-½Å±¾±à¼­Æ÷¸¨Öú
+è„šæœ¬ç¼–è¾‘å™¨è¾…åŠ©
 
 1.  ScriptEditorAssist 
 

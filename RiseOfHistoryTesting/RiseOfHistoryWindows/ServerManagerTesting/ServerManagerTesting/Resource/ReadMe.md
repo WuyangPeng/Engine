@@ -1,12 +1,12 @@
-@ingroup group_ServerManagerTesting_Documentation
+ï»¿@ingroup group_ServerManagerTesting_Documentation
 
 ----------------------------
-·şÎñÆ÷¹ÜÀíÕßµ¥Ôª²âÊÔ
+æœåŠ¡å™¨ç®¡ç†è€…å•å…ƒæµ‹è¯•
 
-Ä¿Ç°°üº¬£º
+ç›®å‰åŒ…å«ï¼š
 
-1. ServerManager£¨·şÎñÆ÷¹ÜÀíÕß£©
+1. ServerManagerï¼ˆæœåŠ¡å™¨ç®¡ç†è€…ï¼‰
 
-£¨1£©·şÎñÆ÷¹ÜÀíÕß¡£
+ï¼ˆ1ï¼‰æœåŠ¡å™¨ç®¡ç†è€…ã€‚
 
 ----------------------------

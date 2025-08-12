@@ -1,11 +1,11 @@
-@ingroup group_ScriptExample_Documentation
+ï»¿@ingroup group_ScriptExample_Documentation
 
 ----------------------------
-½Å±¾Àı×Ó
+è„šæœ¬ä¾‹å­
 
 1.   ScriptExample 
 
-½Å±¾Àı×Ó£¬°üÀ¨£º 
-£¨1£©½Å±¾¡£
+è„šæœ¬ä¾‹å­ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰è„šæœ¬ã€‚
 
 ----------------------------

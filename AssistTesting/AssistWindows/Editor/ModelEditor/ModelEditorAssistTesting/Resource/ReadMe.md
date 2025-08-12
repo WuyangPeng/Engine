@@ -1,7 +1,7 @@
-@ingroup group_ModelEditorAssistTesting_Documentation
+ï»¿@ingroup group_ModelEditorAssistTesting_Documentation
 
 ----------------------------
-Ä£ĞÍ±à¼­Æ÷¸¨Öúµ¥Ôª²âÊÔ
+æ¨¡å‹ç¼–è¾‘å™¨è¾…åŠ©å•å…ƒæµ‹è¯•
 
 1.   ModelEditorAssistTesting 
 

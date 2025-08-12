@@ -12,6 +12,7 @@
 
 #include "ContSphere3.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::Sphere3<Real> Mathematics::ContSphere3<Real>::ContSphereOfAABB(const std::vector<Vector3<Real>>& points)

@@ -185,8 +185,8 @@ xcopy "$(ProjectDir)/Resource/Protobuf/Proto/*.proto" "../../../$(Platform)/$(Co
 </Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy "$(ProtobufX64ReleaseLib)/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
-xcopy "$(ProtobufX64ReleaseLib)/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+      <Command>xcopy "../../../../Libs/protobuf/BuildX64/bin/Release/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+xcopy "../../../../Libs/protobuf/BuildX64/bin/Release/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
 $(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -211,8 +211,8 @@ xcopy "$(ProjectDir)/Resource/Protobuf/Proto/*.proto" "../../../$(Platform)/$(Co
 </Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy "$(ProtobufX64ReleaseLib)/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
-xcopy "$(ProtobufX64ReleaseLib)/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+      <Command>xcopy "../../../../Libs/protobuf/BuildX64/bin/Release/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+xcopy "../../../../Libs/protobuf/BuildX64/bin/Release/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
 $(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -237,8 +237,8 @@ xcopy "$(ProjectDir)/Resource/Protobuf/Proto/*.proto" "../../../$(Platform)/$(Co
 </Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy "$(ProtobufX64ReleaseLib)/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
-xcopy "$(ProtobufX64ReleaseLib)/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+      <Command>xcopy "../../../../Libs/protobuf/BuildX64/bin/Release/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+xcopy "../../../../Libs/protobuf/BuildX64/bin/Release/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
 $(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -263,8 +263,8 @@ xcopy "$(ProjectDir)/Resource/Protobuf/Proto/*.proto" "../../../$(Platform)/$(Co
 </Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy "$(ProtobufX64ReleaseLib)/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
-xcopy "$(ProtobufX64ReleaseLib)/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+      <Command>xcopy "../../../../Libs/protobuf/BuildX64/bin/Release/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+xcopy "../../../../Libs/protobuf/BuildX64/bin/Release/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
 $(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -293,8 +293,8 @@ xcopy "$(ProjectDir)/Resource/Protobuf/Proto/*.proto" "../../../$(Platform)/$(Co
 </Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy "$(ProtobufX64ReleaseLib)/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
-xcopy "$(ProtobufX64ReleaseLib)/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+      <Command>xcopy "../../../../Libs/protobuf/BuildX64/bin/Release/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+xcopy "../../../../Libs/protobuf/BuildX64/bin/Release/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
 $(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -323,8 +323,8 @@ xcopy "$(ProjectDir)/Resource/Protobuf/Proto/*.proto" "../../../$(Platform)/$(Co
 </Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy "$(ProtobufX64ReleaseLib)/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
-xcopy "$(ProtobufX64ReleaseLib)/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+      <Command>xcopy "../../../../Libs/protobuf/BuildX64/bin/Release/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+xcopy "../../../../Libs/protobuf/BuildX64/bin/Release/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
 $(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -353,8 +353,8 @@ xcopy "$(ProjectDir)/Resource/Protobuf/Proto/*.proto" "../../../$(Platform)/$(Co
 </Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy "$(ProtobufX64ReleaseLib)/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
-xcopy "$(ProtobufX64ReleaseLib)/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+      <Command>xcopy "../../../../Libs/protobuf/BuildX64/bin/Release/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+xcopy "../../../../Libs/protobuf/BuildX64/bin/Release/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
 $(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -383,8 +383,8 @@ xcopy "$(ProjectDir)/Resource/Protobuf/Proto/*.proto" "../../../$(Platform)/$(Co
 </Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy "$(ProtobufX64ReleaseLib)/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
-xcopy "$(ProtobufX64ReleaseLib)/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+      <Command>xcopy "../../../../Libs/protobuf/BuildX64/bin/Release/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+xcopy "../../../../Libs/protobuf/BuildX64/bin/Release/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
 $(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>

@@ -1,6 +1,6 @@
-@ingroup group_Documentation
+锘緻ingroup group_Documentation
 
 ----------------------------
-历史的崛起Win32执行目录
+鍘嗗彶鐨勫礇璧稺in32鎵ц鐩綍
 
 ----------------------------

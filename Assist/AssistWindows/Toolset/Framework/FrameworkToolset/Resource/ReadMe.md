@@ -1,13 +1,13 @@
-@ingroup group_FrameworkToolset_Documentation
+﻿@ingroup group_FrameworkToolset_Documentation
 
 ----------------------------
-��ܹ�����
+框架工具箱
 
 FrameworkToolset 
 
-��ܿ⹤���䡣ʵ�����¹��ܣ� 
+框架库工具箱。实现以下功能： 
 
-��1�����ģ�鹤�����ģ�巶�����̡�
-��2����ܿ��ģ��ʵ�������ԡ�
+（1）框架模块工具箱库模板范例工程。
+（2）框架库的模板实例化测试。
 
 ----------------------------

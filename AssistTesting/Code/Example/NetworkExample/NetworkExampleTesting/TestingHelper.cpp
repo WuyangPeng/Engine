@@ -21,6 +21,6 @@ NetworkExample::TestingHelper::TestingHelper(int argc, char** argv)
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(NetworkExample, TestingHelper)
 
-void NetworkExample::TestingHelper::InitSuite()
+void NetworkExample::TestingHelper::InitSuite() noexcept
 {
 }

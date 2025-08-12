@@ -16,6 +16,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Mathematics/Base/MathDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::LinearSystemInverse<Real>::LinearSystemInverse(const VariableMatrixType& matrix, const RealContainer& input, Real zeroTolerance)

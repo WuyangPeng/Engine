@@ -1,74 +1,74 @@
-/// @mainpage Threading Core Render Engine Game Testing API ÎÄµµ
+ï»¿/// @mainpage Threading Core Render Engine Game Testing API æ–‡æ¡£
 
 @copyright Copyright (c) 2011-2021
 Threading Core Render Engine Game Testing
 
-@author ÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-ÁªÏµ×÷Õß£º94458936@qq.com
+@author å½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+è”ç³»ä½œè€…ï¼š94458936@qq.com
 
 @version 0.7.0.1
-±ê×¼£ºstd:c++17
+æ ‡å‡†ï¼šstd:c++17
 
 @date 2021/02/17 00:34
 
-@section sec_Contents ÄÚÈİ
+@section sec_Contents å†…å®¹
 
 @li @ref sec_Overview
 @li @ref sec_Detail
 @li @ref sec_SeeAlso
 
-@section sec_Overview ¸ÅÊö
+@section sec_Overview æ¦‚è¿°
 
-ÒıÇæÓÎÏ·µ¥Ôª²âÊÔ°üº¬Ê®¾Å¸öÄ£¿é£º
+å¼•æ“æ¸¸æˆå•å…ƒæµ‹è¯•åŒ…å«åä¹ä¸ªæ¨¡å—ï¼š
 
-1. ½Ó¿Ú£¨Interface£© 
-2. ÓÃ»§ĞÅÏ¢£¨UserInfo£© 
-3. ÈËÎïĞÅÏ¢£¨CharacterInformation£©
-4. ÎïÆ·¹ÜÀí£¨ItemManager£© 
-5. ÉÌµê£¨Shop£©
-6. Ê±¼äË¢ĞÂ£¨TimeRefresh£©
-7. ³¡¾°£¨Scene£© 
-8. ³¡¾°¶ÔÏó£¨SceneObject£© 
-9. ¼¼ÄÜ£¨Skill) 
-10. ×´Ì¬£¨Status£©
-11. ¹ØÏµ£¨Relation£© 
-12. ÈÎÎñ£¨Quest£© 
-13. ×é¶Ó£¨Team£© 
-14. ÓÊ¼ş£¨Mail£© 
-15. ¹«»á£¨Guild£© 
-16. ÁÄÌì£¨Chat£©  
-17. ¾º¼¼³¡£¨Arena£© 
-18. ¸±±¾£¨Instance£© 
-19. »î¶¯£¨Activity£©  
+1. æ¥å£ï¼ˆInterfaceï¼‰ 
+2. ç”¨æˆ·ä¿¡æ¯ï¼ˆUserInfoï¼‰ 
+3. äººç‰©ä¿¡æ¯ï¼ˆCharacterInformationï¼‰
+4. ç‰©å“ç®¡ç†ï¼ˆItemManagerï¼‰ 
+5. å•†åº—ï¼ˆShopï¼‰
+6. æ—¶é—´åˆ·æ–°ï¼ˆTimeRefreshï¼‰
+7. åœºæ™¯ï¼ˆSceneï¼‰ 
+8. åœºæ™¯å¯¹è±¡ï¼ˆSceneObjectï¼‰ 
+9. æŠ€èƒ½ï¼ˆSkill) 
+10. çŠ¶æ€ï¼ˆStatusï¼‰
+11. å…³ç³»ï¼ˆRelationï¼‰ 
+12. ä»»åŠ¡ï¼ˆQuestï¼‰ 
+13. ç»„é˜Ÿï¼ˆTeamï¼‰ 
+14. é‚®ä»¶ï¼ˆMailï¼‰ 
+15. å…¬ä¼šï¼ˆGuildï¼‰ 
+16. èŠå¤©ï¼ˆChatï¼‰  
+17. ç«æŠ€åœºï¼ˆArenaï¼‰ 
+18. å‰¯æœ¬ï¼ˆInstanceï¼‰ 
+19. æ´»åŠ¨ï¼ˆActivityï¼‰  
 
-@section sec_Detail ÏêÏ¸ËµÃ÷
+@section sec_Detail è¯¦ç»†è¯´æ˜
 
 @li @ref page_Documentation
 @li @ref page_GameTesting_Documentation
 
-@section sec_SeeAlso ²Î¼û
+@section sec_SeeAlso å‚è§
 
 @li @ref page_CoreTools_Base 
 
-@page page_Documentation ËµÃ÷
+@page page_Documentation è¯´æ˜
 
-@link group_Documentation \b ²é¿´ËùÓĞËµÃ÷ @endlink
+@link group_Documentation \b æŸ¥çœ‹æ‰€æœ‰è¯´æ˜ @endlink
 
-@defgroup group_Documentation ËµÃ÷
-ÓĞ¹ØÏêÏ¸ËµÃ÷£¬Çë²Î¼û @ref page_Documentation ¡£
+@defgroup group_Documentation è¯´æ˜
+æœ‰å…³è¯¦ç»†è¯´æ˜ï¼Œè¯·å‚è§ @ref page_Documentation ã€‚
 
-@page page_GameTesting_Documentation ÒıÇæÓÎÏ·µ¥Ôª²âÊÔËµÃ÷
+@page page_GameTesting_Documentation å¼•æ“æ¸¸æˆå•å…ƒæµ‹è¯•è¯´æ˜
 
-@link group_GameTesting_Documentation \b ²é¿´ËùÓĞÒıÇæÓÎÏ·µ¥Ôª²âÊÔËµÃ÷ @endlink
+@link group_GameTesting_Documentation \b æŸ¥çœ‹æ‰€æœ‰å¼•æ“æ¸¸æˆå•å…ƒæµ‹è¯•è¯´æ˜ @endlink
 
-@defgroup group_GameTesting_Documentation ÒıÇæÓÎÏ·µ¥Ôª²âÊÔËµÃ÷
-ÓĞ¹ØÏêÏ¸ÒıÇæÓÎÏ·µ¥Ôª²âÊÔËµÃ÷£¬Çë²Î¼û @ref group_GameTesting_Documentation ¡£ 
+@defgroup group_GameTesting_Documentation å¼•æ“æ¸¸æˆå•å…ƒæµ‹è¯•è¯´æ˜
+æœ‰å…³è¯¦ç»†å¼•æ“æ¸¸æˆå•å…ƒæµ‹è¯•è¯´æ˜ï¼Œè¯·å‚è§ @ref group_GameTesting_Documentation ã€‚ 
 
 @page page_CoreTools_Base The CoreTools Base 
 
-ÏêÏ¸ËµÃ÷ÔÚÕâÀï¡£
+è¯¦ç»†è¯´æ˜åœ¨è¿™é‡Œã€‚
 
 @link group_CoreTools_Base \b View All CoreTools Classes @endlink
 
-@defgroup group_CoreTools_Base ºËĞÄ¹¤¾ß¿â»ù´¡¹¦ÄÜ
-ÓĞ¹ØÏêÏ¸ËµÃ÷£¬Çë²Î¼û @ref page_CoreTools_Base ¡£
+@defgroup group_CoreTools_Base æ ¸å¿ƒå·¥å…·åº“åŸºç¡€åŠŸèƒ½
+æœ‰å…³è¯¦ç»†è¯´æ˜ï¼Œè¯·å‚è§ @ref page_CoreTools_Base ã€‚

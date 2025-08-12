@@ -1,78 +1,78 @@
-/// @mainpage Millennium History API ÎÄµµ
+ï»¿/// @mainpage Millennium History API æ–‡æ¡£
 
 @copyright Copyright (c) 2011-2024
 Millennium History
 
-@author ÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-ÁªÏµ×÷Õß£º94458936@qq.com
+@author å½­æ­¦é˜³ï¼Œå½­æ™”æ©ï¼Œå½­æ™”æ³½
+è”ç³»ä½œè€…ï¼š94458936@qq.com
 
 @version 1.0.1.0
-±ê×¼£ºstd:c++20
+æ ‡å‡†ï¼šstd:c++20
 
 @date 2024/06/16 17:44
 
-@section sec_Contents ÄÚÈİ
+@section sec_Contents å†…å®¹
 
 @li @ref sec_Overview
 @li @ref sec_Detail
 @li @ref sec_SeeAlso
 
-@section sec_Overview ¸ÅÊö
+@section sec_Overview æ¦‚è¿°
 
-Ç§ÄêÊ·²ß°üº¬23¸öÄ£¿é£º
+åƒå¹´å²ç­–åŒ…å«23ä¸ªæ¨¡å—ï¼š
 
-1. GameClient£¨ÓÎÏ·¿Í»§¶Ë£©
-2. RobotClient£¨»úÆ÷ÈË¿Í»§¶Ë£©
-3. MessageClient£¨ÏûÏ¢¿Í»§¶Ë£©
-4. BackgroundClient£¨ºóÌ¨¿Í»§¶Ë£©
-5. GatewayServer£¨Íø¹Ø·şÎñÆ÷£©
-6. LoginServer£¨µÇÂ½·şÎñÆ÷£©
-7. PlayerServer£¨Íæ¼Ò·şÎñÆ÷£©
-8. GameServer£¨ÓÎÏ··şÎñÆ÷£©
-9. FightingServer£¨Õ½¶··şÎñÆ÷£©
-10. WorldServer£¨ÊÀ½ç·şÎñÆ÷£©
-11. CrossServer£¨¿ç·ş·şÎñÆ÷£©
-12. OfflineServer£¨ÀëÏß·şÎñÆ÷£©
-13. LeaderboardServer£¨ÅÅĞĞ°ñ·şÎñÆ÷£©
-14. MailServer£¨ÓÊ¼ş·şÎñÆ÷£©
-15. ChatServer£¨ÁÄÌì·şÎñÆ÷£©
-16. RechargeServer£¨³äÖµ·şÎñÆ÷£©
-17. LogServer£¨ÈÕÖ¾·şÎñÆ÷£©
-18. GameMasterServer£¨ÓÎÏ·¹ÜÀíÔ±·şÎñÆ÷£©
-19. UpdateServer£¨¸üĞÂ·şÎñÆ÷£©
-20. BackgroundServer£¨ºóÌ¨·şÎñÆ÷£©
-21. DatabaseServer£¨Êı¾İ¿â·şÎñÆ÷£©
-22. ServerManager£¨·şÎñÆ÷¹ÜÀíÕß£©
-23. DatabaseGenerate£¨Êı¾İ¿âÉú³É£©
+1. GameClientï¼ˆæ¸¸æˆå®¢æˆ·ç«¯ï¼‰
+2. RobotClientï¼ˆæœºå™¨äººå®¢æˆ·ç«¯ï¼‰
+3. MessageClientï¼ˆæ¶ˆæ¯å®¢æˆ·ç«¯ï¼‰
+4. BackgroundClientï¼ˆåå°å®¢æˆ·ç«¯ï¼‰
+5. GatewayServerï¼ˆç½‘å…³æœåŠ¡å™¨ï¼‰
+6. LoginServerï¼ˆç™»é™†æœåŠ¡å™¨ï¼‰
+7. PlayerServerï¼ˆç©å®¶æœåŠ¡å™¨ï¼‰
+8. GameServerï¼ˆæ¸¸æˆæœåŠ¡å™¨ï¼‰
+9. FightingServerï¼ˆæˆ˜æ–—æœåŠ¡å™¨ï¼‰
+10. WorldServerï¼ˆä¸–ç•ŒæœåŠ¡å™¨ï¼‰
+11. CrossServerï¼ˆè·¨æœæœåŠ¡å™¨ï¼‰
+12. OfflineServerï¼ˆç¦»çº¿æœåŠ¡å™¨ï¼‰
+13. LeaderboardServerï¼ˆæ’è¡Œæ¦œæœåŠ¡å™¨ï¼‰
+14. MailServerï¼ˆé‚®ä»¶æœåŠ¡å™¨ï¼‰
+15. ChatServerï¼ˆèŠå¤©æœåŠ¡å™¨ï¼‰
+16. RechargeServerï¼ˆå……å€¼æœåŠ¡å™¨ï¼‰
+17. LogServerï¼ˆæ—¥å¿—æœåŠ¡å™¨ï¼‰
+18. GameMasterServerï¼ˆæ¸¸æˆç®¡ç†å‘˜æœåŠ¡å™¨ï¼‰
+19. UpdateServerï¼ˆæ›´æ–°æœåŠ¡å™¨ï¼‰
+20. BackgroundServerï¼ˆåå°æœåŠ¡å™¨ï¼‰
+21. DatabaseServerï¼ˆæ•°æ®åº“æœåŠ¡å™¨ï¼‰
+22. ServerManagerï¼ˆæœåŠ¡å™¨ç®¡ç†è€…ï¼‰
+23. DatabaseGenerateï¼ˆæ•°æ®åº“ç”Ÿæˆï¼‰
 
-@section sec_Detail ÏêÏ¸ËµÃ÷
+@section sec_Detail è¯¦ç»†è¯´æ˜
 
 @li @ref page_Documentation
 @li @ref page_MillenniumHistory_Documentation
 
-@section sec_SeeAlso ²Î¼û
+@section sec_SeeAlso å‚è§
 
 @li @ref page_CoreTools_Base 
 
-@page page_Documentation ËµÃ÷
+@page page_Documentation è¯´æ˜
 
-@link group_Documentation \b ²é¿´ËùÓĞËµÃ÷ @endlink
+@link group_Documentation \b æŸ¥çœ‹æ‰€æœ‰è¯´æ˜ @endlink
 
-@defgroup group_Documentation ËµÃ÷
-ÓĞ¹ØÏêÏ¸ËµÃ÷£¬Çë²Î¼û @ref page_Documentation ¡£
+@defgroup group_Documentation è¯´æ˜
+æœ‰å…³è¯¦ç»†è¯´æ˜ï¼Œè¯·å‚è§ @ref page_Documentation ã€‚
 
-@page page_MillenniumHistory_Documentation Ç§ÄêÊ·²ßËµÃ÷
+@page page_MillenniumHistory_Documentation åƒå¹´å²ç­–è¯´æ˜
 
-@link group_MillenniumHistory_Documentation \b ²é¿´ËùÓĞÇ§ÄêÊ·²ßËµÃ÷ @endlink
+@link group_MillenniumHistory_Documentation \b æŸ¥çœ‹æ‰€æœ‰åƒå¹´å²ç­–è¯´æ˜ @endlink
 
-@defgroup group_MillenniumHistory_Documentation Ç§ÄêÊ·²ßËµÃ÷
-ÓĞ¹ØÏêÏ¸Ç§ÄêÊ·²ßËµÃ÷£¬Çë²Î¼û @ref group_MillenniumHistory_Documentation ¡£ 
+@defgroup group_MillenniumHistory_Documentation åƒå¹´å²ç­–è¯´æ˜
+æœ‰å…³è¯¦ç»†åƒå¹´å²ç­–è¯´æ˜ï¼Œè¯·å‚è§ @ref group_MillenniumHistory_Documentation ã€‚ 
 
 @page page_CoreTools_Base The CoreTools Base 
 
-ÏêÏ¸ËµÃ÷ÔÚÕâÀï¡£
+è¯¦ç»†è¯´æ˜åœ¨è¿™é‡Œã€‚
 
 @link group_CoreTools_Base \b View All CoreTools Classes @endlink
 
-@defgroup group_CoreTools_Base ºËĞÄ¹¤¾ß¿â»ù´¡¹¦ÄÜ
-ÓĞ¹ØÏêÏ¸ËµÃ÷£¬Çë²Î¼û @ref page_CoreTools_Base ¡£
+@defgroup group_CoreTools_Base æ ¸å¿ƒå·¥å…·åº“åŸºç¡€åŠŸèƒ½
+æœ‰å…³è¯¦ç»†è¯´æ˜ï¼Œè¯·å‚è§ @ref page_CoreTools_Base ã€‚

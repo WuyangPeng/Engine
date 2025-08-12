@@ -1,11 +1,11 @@
-@ingroup group_ResourcesLibrary_Documentation
+ï»¿@ingroup group_ResourcesLibrary_Documentation
 
 ----------------------------
-×ÊÔ´¿â
+èµ„æºåº“
 
 ----------------------------
-1.	DynamicLink£¨¶¯Ì¬Á´½Ó£©
-ÓÉSystemTestingÖĞµÄLoadResourceTesting¡¢FindResourceTesting½øĞĞ²âÊÔ¡£ 
+1.	DynamicLinkï¼ˆåŠ¨æ€é“¾æ¥ï¼‰
+ç”±SystemTestingä¸­çš„LoadResourceTestingã€FindResourceTestingè¿›è¡Œæµ‹è¯•ã€‚ 
 
 ----------------------------
  

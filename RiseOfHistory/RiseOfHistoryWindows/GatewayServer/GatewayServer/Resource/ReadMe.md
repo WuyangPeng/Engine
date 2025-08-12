@@ -1,6 +1,6 @@
-@ingroup group_GatewayServer_Documentation
+ï»¿@ingroup group_GatewayServer_Documentation
 
 ----------------------------
-Íø¹Ø·şÎñÆ÷
+ç½‘å…³æœåŠ¡å™¨
 
 ----------------------------

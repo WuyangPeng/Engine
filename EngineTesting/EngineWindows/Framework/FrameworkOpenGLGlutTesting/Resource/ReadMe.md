@@ -1,12 +1,12 @@
-@ingroup group_FrameworkOpenGLGlutTesting_Documentation
+ï»¿@ingroup group_FrameworkOpenGLGlutTesting_Documentation
 
 ----------------------------
-OpenGL Glut ¿ò¼ÜµÄµ¥Ôª²âÊÔ
+OpenGL Glut æ¡†æ¶çš„å•å…ƒæµ‹è¯•
 
 1.  AndroidFrameSuite 
 
-¶ÔOpenGL Glut¿ò¼ÜÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£© OpenGL Glut¿ò¼Ü¡£ 
+å¯¹OpenGL Glutæ¡†æ¶æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰ OpenGL Glutæ¡†æ¶ã€‚ 
 
 ----------------------------
  

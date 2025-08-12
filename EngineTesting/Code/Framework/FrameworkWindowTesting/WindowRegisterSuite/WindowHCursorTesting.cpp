@@ -8,12 +8,12 @@
 ///	版本：0.9.1.3 (2023/08/10 13:55)
 
 #include "WindowHCursorTesting.h"
-#include "resource.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Windows/WindowsRegister.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Framework/FrameworkWindowTesting/resource.h"
 #include "Framework/WindowRegister/WindowHCursor.h"
 
 #include <algorithm>

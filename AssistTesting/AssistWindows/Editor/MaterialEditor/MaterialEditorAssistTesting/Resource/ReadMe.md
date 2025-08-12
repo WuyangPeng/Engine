@@ -1,7 +1,7 @@
-@ingroup group_MaterialEditorAssistTesting_Documentation
+ï»¿@ingroup group_MaterialEditorAssistTesting_Documentation
 
 ----------------------------
-²ÄÖÊ±à¼­Æ÷¸¨Öúµ¥Ôª²âÊÔ
+æè´¨ç¼–è¾‘å™¨è¾…åŠ©å•å…ƒæµ‹è¯•
 
 1.   MaterialEditorAssistTesting 
 

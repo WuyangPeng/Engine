@@ -1,38 +1,38 @@
-@ingroup group_Documentation
+ï»¿@ingroup group_Documentation
 
-----------------------------
-ÒıÇæ²âÊÔ¹¤³Ì 
+---
+å¼•æ“æµ‹è¯•å·¥ç¨‹ 
 
-----------------------------
-EngineTesting.props£º
-ÒıÇæ²âÊÔ¹¤³ÌÊôĞÔ±í
+---
+EngineTesting.propsï¼š
+å¼•æ“æµ‹è¯•å·¥ç¨‹å±æ€§è¡¨
 
-EngineTestingStaticWin32DebugLibs.props£º
-ÒıÇæ²âÊÔ±àÒë³Élib¡¢Win32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+EngineTestingStaticWin32DebugLibs.propsï¼š
+å¼•æ“æµ‹è¯•ç¼–è¯‘æˆlibã€Win32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-EngineTestingStaticWin32ReleaseLibs.props£º
-ÒıÇæ²âÊÔ±àÒë³Élib¡¢Win32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+EngineTestingStaticWin32ReleaseLibs.propsï¼š
+å¼•æ“æµ‹è¯•ç¼–è¯‘æˆlibã€Win32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-EngineTestingStaticX64DebugLibs.props£º
-ÒıÇæ²âÊÔ±àÒë³Élib¡¢X64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+EngineTestingStaticX64DebugLibs.propsï¼š
+å¼•æ“æµ‹è¯•ç¼–è¯‘æˆlibã€X64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-EngineTestingStaticX64ReleaseLibs.props£º
-ÒıÇæ²âÊÔ±àÒë³Élib¡¢X64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+EngineTestingStaticX64ReleaseLibs.propsï¼š
+å¼•æ“æµ‹è¯•ç¼–è¯‘æˆlibã€X64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-EngineTestingWin32DebugLibs.props£º
-ÒıÇæ²âÊÔ±àÒë³Édll¡¢Win32¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+EngineTestingWin32DebugLibs.propsï¼š
+å¼•æ“æµ‹è¯•ç¼–è¯‘æˆdllã€Win32ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-EngineTestingWin32ReleaseLibs.props£º
-ÒıÇæ²âÊÔ±àÒë³Édll¡¢Win32¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+EngineTestingWin32ReleaseLibs.propsï¼š
+å¼•æ“æµ‹è¯•ç¼–è¯‘æˆdllã€Win32ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-EngineTestingX64DebugLibs.props£º
-ÒıÇæ²âÊÔ±àÒë³Édll¡¢X64¡¢Debug¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+EngineTestingX64DebugLibs.propsï¼š
+å¼•æ“æµ‹è¯•ç¼–è¯‘æˆdllã€X64ã€Debugå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-EngineTestingX64ReleaseLibs.props£º
-ÒıÇæ²âÊÔ±àÒë³Édll¡¢X64¡¢Release¹¤³ÌÒÀÀµ¿âÊôĞÔ±í
+EngineTestingX64ReleaseLibs.propsï¼š
+å¼•æ“æµ‹è¯•ç¼–è¯‘æˆdllã€X64ã€Releaseå·¥ç¨‹ä¾èµ–åº“å±æ€§è¡¨
 
-----------------------------
-SetEnvironment.bat£º
-ÉèÖÃÒıÇæ²âÊÔËùĞèÒªµÄ»·¾³±äÁ¿
+---
+SetEnvironment.batï¼š
+è®¾ç½®å¼•æ“æµ‹è¯•æ‰€éœ€è¦çš„ç¯å¢ƒå˜é‡
 
-----------------------------
+---

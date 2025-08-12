@@ -1,7 +1,7 @@
-@ingroup group_SceneEditorAssistTesting_Documentation
+ï»¿@ingroup group_SceneEditorAssistTesting_Documentation
 
 ----------------------------
-³¡¾°±à¼­Æ÷¸¨Öúµ¥Ôª²âÊÔ
+åœºæ™¯ç¼–è¾‘å™¨è¾…åŠ©å•å…ƒæµ‹è¯•
 
 1.   SceneEditorAssistTesting 
 

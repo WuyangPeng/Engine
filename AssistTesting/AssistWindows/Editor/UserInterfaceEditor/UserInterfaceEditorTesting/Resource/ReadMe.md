@@ -1,7 +1,7 @@
-@ingroup group_UserInterfaceEditorTesting_Documentation
+ï»¿@ingroup group_UserInterfaceEditorTesting_Documentation
 
 ----------------------------
-ÓÃ»§½çÃæ±à¼­Æ÷µ¥Ôª²âÊÔ
+ç”¨æˆ·ç•Œé¢ç¼–è¾‘å™¨å•å…ƒæµ‹è¯•
 
 1.   UserInterfaceEditorTesting
 

@@ -1,7 +1,7 @@
-@ingroup group_ShadowEditorAssist_Documentation
+ï»¿@ingroup group_ShadowEditorAssist_Documentation
 
 ----------------------------
-ÒõÓ°±à¼­Æ÷¸¨Öú
+é˜´å½±ç¼–è¾‘å™¨è¾…åŠ©
 
 1.  ShadowEditorAssist 
 

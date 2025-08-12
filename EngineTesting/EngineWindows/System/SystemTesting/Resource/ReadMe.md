@@ -1,461 +1,461 @@
-@ingroup group_SystemTesting_Documentation
+ï»¿@ingroup group_SystemTesting_Documentation
 
 ----------------------------
-Ïµ½y¿âµ¥Ôª²âÊÔ
+ç³»çµ±åº“å•å…ƒæµ‹è¯•
 
 ----------------------------
 1.	HelperSuite
 
-¶ÔHelperÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© ÅäÖÃ³£Á¿ºÍºê£ºFixedSizeTesting¡¢
-					CompilerConfigTesting¡¢
-					PlatformConfigTesting¡¢
-					StdLibConfigTesting¡¢
-					EndianTesting¡¢
-					ConfigMarkTesting¡£
-£¨2£© ÓÃ»§ºê£ºUserMacroTesting¡£
-£¨3£© ×Ö·û´®Æ´½Óºê£ºStringizeMacroTesting¡£ 
-£¨4£© Unicode×Ö·ûusingÉùÃ÷£ºStringMacroTesting¡¢
-							FileStreamMacroTesting¡¢
-							NullCharTesting¡¢
-							StringStreamMacroTesting¡¢
-							ToStringTesting¡¢
-							CharBufferTesting¡£ 
-£¨5£© ´òÓ¡±àÒëÆ÷ĞÅÏ¢ºê£ºPragmaMessageMacroTesting¡£
-£¨6£© °æ±¾ºÅ£ºVersionTesting¡£
-£¨7£© µ¼³ö±êÖ¾ºê£ºExportMacroTesting¡£
-£¨8£© WindowsÆ½Ì¨Ïà¹Øºê£ºMakeLanguageIdTesting¡¢
-						 MakeIntreSourceTesting¡¢
-						 MakeLanguageCidTesting¡¢  
-						 HResultTesting¡¢
-						 MakeWordTesting¡¢
-						 PtrToIntTesting¡¢
-						 MarkTesting¡£
-£¨9£© °²È«±êÊ¶·ûºê£ºSecuritySidMacroTesting¡£
-£¨10£©ÍøÂçºê£ºNetworkMacroTesting¡£
-£¨11£©Æ½Ì¨Í·ÎÄ¼ş£ºPlatformTesting¡£
-£¨12£©Ã¶¾ÙµÄ×ª»»ÔËËã·û£ºEnumCastTesting¡£
-£¨13£©Ã¶¾ÙÔËËã·û£ºEnumAddableTesting¡¢
-				  EnumSubtractableTesting¡¢
-				  EnumMultiplicationTesting¡¢
-				  EnumNegateTesting¡¢
-				  EnumIncrementableTesting¡¢
-				  EnumDecrementableTesting¡¢
-				  EnumAndableTesting¡¢
-				  EnumOrableTesting¡¢
-				  EnumXorableTesting¡¢
-				  EnumShiftableTesting¡£
-£¨14£©Noexcept£ºNoexceptTesting¡£
-£¨15£©PragmaWarning£ºPragmaWarningTesting¡£
-£¨16£©glÀ©Õ¹ºê£ºGlExtensionsMacroTesting¡¢
-				WglExtensionsMacroTesting¡¢
-				GlxExtensionsMacroTesting¡¢
-				GlPluginMacroTesting¡¢
-				GlUtilityMarkTesting¡¢
-				GlUtilityGetFunctionTesting¡¢
-				GlUtilityPreviouslyBodyTesting¡¢
-				GlUtilityPreviouslyBodyResultTesting¡¢
-				GlUtilityBodyTesting¡¢
-				GlUtilityBodyResultTesting¡£
-£¨17£©¿É±ä²ÎÊıÄ£°åÀàĞÍ£ºVariableTemplateTypeTesting¡£
-£¨18£©¹¤¾ß£ºGetArraySizeTesting¡¢
-			UnusedFunctionTesting¡¢
-			DebugTesting¡¢
-			OperatorTesting¡£
+å¯¹Helperæ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ é…ç½®å¸¸é‡å’Œå®ï¼šFixedSizeTestingã€
+					CompilerConfigTestingã€
+					PlatformConfigTestingã€
+					StdLibConfigTestingã€
+					EndianTestingã€
+					ConfigMarkTestingã€‚
+ï¼ˆ2ï¼‰ ç”¨æˆ·å®ï¼šUserMacroTestingã€‚
+ï¼ˆ3ï¼‰ å­—ç¬¦ä¸²æ‹¼æ¥å®ï¼šStringizeMacroTestingã€‚ 
+ï¼ˆ4ï¼‰ Unicodeå­—ç¬¦usingå£°æ˜ï¼šStringMacroTestingã€
+							FileStreamMacroTestingã€
+							NullCharTestingã€
+							StringStreamMacroTestingã€
+							ToStringTestingã€
+							CharBufferTestingã€‚ 
+ï¼ˆ5ï¼‰ æ‰“å°ç¼–è¯‘å™¨ä¿¡æ¯å®ï¼šPragmaMessageMacroTestingã€‚
+ï¼ˆ6ï¼‰ ç‰ˆæœ¬å·ï¼šVersionTestingã€‚
+ï¼ˆ7ï¼‰ å¯¼å‡ºæ ‡å¿—å®ï¼šExportMacroTestingã€‚
+ï¼ˆ8ï¼‰ Windowså¹³å°ç›¸å…³å®ï¼šMakeLanguageIdTestingã€
+						 MakeIntreSourceTestingã€
+						 MakeLanguageCidTestingã€  
+						 HResultTestingã€
+						 MakeWordTestingã€
+						 PtrToIntTestingã€
+						 MarkTestingã€‚
+ï¼ˆ9ï¼‰ å®‰å…¨æ ‡è¯†ç¬¦å®ï¼šSecuritySidMacroTestingã€‚
+ï¼ˆ10ï¼‰ç½‘ç»œå®ï¼šNetworkMacroTestingã€‚
+ï¼ˆ11ï¼‰å¹³å°å¤´æ–‡ä»¶ï¼šPlatformTestingã€‚
+ï¼ˆ12ï¼‰æšä¸¾çš„è½¬æ¢è¿ç®—ç¬¦ï¼šEnumCastTestingã€‚
+ï¼ˆ13ï¼‰æšä¸¾è¿ç®—ç¬¦ï¼šEnumAddableTestingã€
+				  EnumSubtractableTestingã€
+				  EnumMultiplicationTestingã€
+				  EnumNegateTestingã€
+				  EnumIncrementableTestingã€
+				  EnumDecrementableTestingã€
+				  EnumAndableTestingã€
+				  EnumOrableTestingã€
+				  EnumXorableTestingã€
+				  EnumShiftableTestingã€‚
+ï¼ˆ14ï¼‰Noexceptï¼šNoexceptTestingã€‚
+ï¼ˆ15ï¼‰PragmaWarningï¼šPragmaWarningTestingã€‚
+ï¼ˆ16ï¼‰glæ‰©å±•å®ï¼šGlExtensionsMacroTestingã€
+				WglExtensionsMacroTestingã€
+				GlxExtensionsMacroTestingã€
+				GlPluginMacroTestingã€
+				GlUtilityMarkTestingã€
+				GlUtilityGetFunctionTestingã€
+				GlUtilityPreviouslyBodyTestingã€
+				GlUtilityPreviouslyBodyResultTestingã€
+				GlUtilityBodyTestingã€
+				GlUtilityBodyResultTestingã€‚
+ï¼ˆ17ï¼‰å¯å˜å‚æ•°æ¨¡æ¿ç±»å‹ï¼šVariableTemplateTypeTestingã€‚
+ï¼ˆ18ï¼‰å·¥å…·ï¼šGetArraySizeTestingã€
+			UnusedFunctionTestingã€
+			DebugTestingã€
+			OperatorTestingã€‚
 
 ----------------------------
 2.	SystemOutputSuite
 
-¶ÔÏµÍ³Êä³öÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£© ÓïÑÔIDÊı¾İ£ºLanguageIdDataTesting¡£
-£¨2£© ÏûÏ¢¿ò±êÖ¾Êı¾İ£ºMessageBoxFlagsDataTesting¡£
-£¨3£© Êä³öĞÅÏ¢£ºOutputDebugStringTesting¡£
-£¨4£© ÏûÏ¢¿òÑ¡Ôñ£ºMessageBoxSelectionUseYesNoCancelTesting¡¢
-				  MessageBoxSelectionUseFlagsDataTesting¡¢
-				  MessageBoxSelectionUseLanguageIDDataTesting¡£
+å¯¹ç³»ç»Ÿè¾“å‡ºæ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰ è¯­è¨€IDæ•°æ®ï¼šLanguageIdDataTestingã€‚
+ï¼ˆ2ï¼‰ æ¶ˆæ¯æ¡†æ ‡å¿—æ•°æ®ï¼šMessageBoxFlagsDataTestingã€‚
+ï¼ˆ3ï¼‰ è¾“å‡ºä¿¡æ¯ï¼šOutputDebugStringTestingã€‚
+ï¼ˆ4ï¼‰ æ¶ˆæ¯æ¡†é€‰æ‹©ï¼šMessageBoxSelectionUseYesNoCancelTestingã€
+				  MessageBoxSelectionUseFlagsDataTestingã€
+				  MessageBoxSelectionUseLanguageIDDataTestingã€‚
 
 ----------------------------
 3.	DynamicLinkSuite 
 
-¶Ô¶¯Ì¬Á´½ÓÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£©¼ÓÔØ¶¯Ì¬Á´½Ó¿â£ºLoadLibraryTesting¡¢
-					 GetProcAddressTesting¡¢
-					 FreeLibraryTesting¡£
-£¨2£©¿â¹¤¾ß£ºGetModuleHandleTesting¡¢
-			 GetModuleFileNameTesting¡£
-£¨3£©¿âÄ¿Â¼£ºLibraryDirectoryTesting¡£
-£¨4£©¼ÓÔØ×ÊÔ´¹¤¾ß£ºFindResourceTesting¡¢
-				   LoadResourceTesting¡¢
-				   LoadStringTesting¡£
-£¨5£©Ã¶¾Ù×ÊÔ´Êı¾İ£ºEnumResourceDataTesting¡£
-£¨6£©Ã¶¾Ù×ÊÔ´¹¤¾ß£ºEnumResourceToolsTesting¡¢
-				   ResourceEnumTesting¡£
+å¯¹åŠ¨æ€é“¾æ¥æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰åŠ è½½åŠ¨æ€é“¾æ¥åº“ï¼šLoadLibraryTestingã€
+					 GetProcAddressTestingã€
+					 FreeLibraryTestingã€‚
+ï¼ˆ2ï¼‰åº“å·¥å…·ï¼šGetModuleHandleTestingã€
+			 GetModuleFileNameTestingã€‚
+ï¼ˆ3ï¼‰åº“ç›®å½•ï¼šLibraryDirectoryTestingã€‚
+ï¼ˆ4ï¼‰åŠ è½½èµ„æºå·¥å…·ï¼šFindResourceTestingã€
+				   LoadResourceTestingã€
+				   LoadStringTestingã€‚
+ï¼ˆ5ï¼‰æšä¸¾èµ„æºæ•°æ®ï¼šEnumResourceDataTestingã€‚
+ï¼ˆ6ï¼‰æšä¸¾èµ„æºå·¥å…·ï¼šEnumResourceToolsTestingã€
+				   ResourceEnumTestingã€‚
 
 ----------------------------
 4.	CharacterStringSuite 
 
-¶Ô×Ö·û´®Ä£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º  
-£¨1£© ¸ñÊ½»¯´íÎóÏûÏ¢£ºFormatErrorMessageUseLocalAllocTesting¡¢
-					  FormatErrorMessageUseBufferTesting¡¢
-					  FormatErrorMessageUseDllMoudleAndLocalAllocTesting¡¢
-					  FormatErrorMessageUseDllMoudleAndUseBufferTesting¡¢
-					  FormatErrorMessageReturnStringTesting¡¢
-					  FormatErrorMessageTesting¡¢
-					  FormatStringMessageUseArgumentArrayAndLocalAllocTesting¡¢
-					  FormatStringMessageUseArgumentArrayAndBufferTesting¡¢
-					  FormatStringMessageUseVaListAndLocalAllocTesting¡¢
-					  FormatStringMessageUseVaListAndUseBufferTesting¡¢
-					  SoftwareExceptionTesting¡¢
-					  FormatErrorMessageParameterTesting¡£
-£¨2£© ´úÂëÒ³£ºCodePageValidTesting¡¢
-			  CodePageTesting¡¢
-			  LocaleTesting¡£
-£¨3£© ×Ö·û×ª»»£ºMultiByteConversionWideCharTesting¡¢
-				WideCharConversionMultiByteTesting¡¢
-				UTF8ConversionWideCharTesting¡¢
-			    WideCharConversionUTF8Testing¡¢
-				CompareStringUseLocaleFlagsTesting¡¢
-				CompareStringUseLocaleStringTesting¡¢
-				CompareStringOrdinalUseBinaryTesting¡¢
-				CaseInsensitiveComparisonTesting¡£
-£¨4£© ¸ñÊ½»¯×Ö·û´®£ºVsnPrintfTesting¡¢
-					StringCatTesting¡¢
-					StringLengthTesting¡¢
-					StringCopyTesting¡¢
-					StringTokenTesting¡¢
-					StringStringTesting¡¢
-					SNPrintfTesting¡£ 
+å¯¹å­—ç¬¦ä¸²æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š  
+ï¼ˆ1ï¼‰ æ ¼å¼åŒ–é”™è¯¯æ¶ˆæ¯ï¼šFormatErrorMessageUseLocalAllocTestingã€
+					  FormatErrorMessageUseBufferTestingã€
+					  FormatErrorMessageUseDllMoudleAndLocalAllocTestingã€
+					  FormatErrorMessageUseDllMoudleAndUseBufferTestingã€
+					  FormatErrorMessageReturnStringTestingã€
+					  FormatErrorMessageTestingã€
+					  FormatStringMessageUseArgumentArrayAndLocalAllocTestingã€
+					  FormatStringMessageUseArgumentArrayAndBufferTestingã€
+					  FormatStringMessageUseVaListAndLocalAllocTestingã€
+					  FormatStringMessageUseVaListAndUseBufferTestingã€
+					  SoftwareExceptionTestingã€
+					  FormatErrorMessageParameterTestingã€‚
+ï¼ˆ2ï¼‰ ä»£ç é¡µï¼šCodePageValidTestingã€
+			  CodePageTestingã€
+			  LocaleTestingã€‚
+ï¼ˆ3ï¼‰ å­—ç¬¦è½¬æ¢ï¼šMultiByteConversionWideCharTestingã€
+				WideCharConversionMultiByteTestingã€
+				UTF8ConversionWideCharTestingã€
+			    WideCharConversionUTF8Testingã€
+				CompareStringUseLocaleFlagsTestingã€
+				CompareStringUseLocaleStringTestingã€
+				CompareStringOrdinalUseBinaryTestingã€
+				CaseInsensitiveComparisonTestingã€‚
+ï¼ˆ4ï¼‰ æ ¼å¼åŒ–å­—ç¬¦ä¸²ï¼šVsnPrintfTestingã€
+					StringCatTestingã€
+					StringLengthTestingã€
+					StringCopyTestingã€
+					StringTokenTestingã€
+					StringStringTestingã€
+					SNPrintfTestingã€‚ 
 
 ----------------------------
 5.	ConsoleSuite 
 
-¶Ô¿ØÖÆÌ¨Ä£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© ¿ØÖÆÌ¨¾ä±ú£ºConsoleHandleTesting¡£ 
-£¨2£© ¿ØÖÆÌ¨ÑÕÉ«£ºTextColourTesting¡¢
-				  BackgroundColourTesting¡¢
-				  ConsoleCommonTesting¡¢
-				  DefaultTextAttributeTesting¡¢ 
-			      ReadAttributeTesting ¡¢
-				  WriteAttributeTesting¡¢
-				  FillAttributeTesting¡£
-£¨3£© ¿ØÖÆÌ¨ÆÁÄ»»º³åÇø£ºCreateSystemConsoleScreenBufferTesting¡¢
-						ConsoleScreenBufferInfoTesting¡¢
-						SetConsoleHandleScreenBufferInfoTesting¡¢
-						SetSystemConsoleScreenBufferSizeTesting¡£
-£¨4£© ¿ØÖÆÌ¨×ÖÌå£ºConsoleFontSizeTesting¡¢
-				  CurrentConsoleFontTesting¡¢
-				  SetCurrentConsoleFontTesting¡£ 
-£¨5£© ¿ØÖÆÌ¨Ä£Ê½£ºConsoleOutputModeTesting¡¢
-				  ConsoleInputModeTesting¡£ 
-£¨6£© ¿ØÖÆÌ¨´úÂëÒ³£ºConsoleCodePageTesting¡£ 
-£¨7£© ¿ØÖÆÌ¨´´½¨£ºConsoleCreateTesting¡£ 
+å¯¹æ§åˆ¶å°æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ æ§åˆ¶å°å¥æŸ„ï¼šConsoleHandleTestingã€‚ 
+ï¼ˆ2ï¼‰ æ§åˆ¶å°é¢œè‰²ï¼šTextColourTestingã€
+				  BackgroundColourTestingã€
+				  ConsoleCommonTestingã€
+				  DefaultTextAttributeTestingã€ 
+			      ReadAttributeTesting ã€
+				  WriteAttributeTestingã€
+				  FillAttributeTestingã€‚
+ï¼ˆ3ï¼‰ æ§åˆ¶å°å±å¹•ç¼“å†²åŒºï¼šCreateSystemConsoleScreenBufferTestingã€
+						ConsoleScreenBufferInfoTestingã€
+						SetConsoleHandleScreenBufferInfoTestingã€
+						SetSystemConsoleScreenBufferSizeTestingã€‚
+ï¼ˆ4ï¼‰ æ§åˆ¶å°å­—ä½“ï¼šConsoleFontSizeTestingã€
+				  CurrentConsoleFontTestingã€
+				  SetCurrentConsoleFontTestingã€‚ 
+ï¼ˆ5ï¼‰ æ§åˆ¶å°æ¨¡å¼ï¼šConsoleOutputModeTestingã€
+				  ConsoleInputModeTestingã€‚ 
+ï¼ˆ6ï¼‰ æ§åˆ¶å°ä»£ç é¡µï¼šConsoleCodePageTestingã€‚ 
+ï¼ˆ7ï¼‰ æ§åˆ¶å°åˆ›å»ºï¼šConsoleCreateTestingã€‚ 
 
 ----------------------------
 6.	MemoryToolsSuite 
 
-¶ÔÄÚ´æ¹¤¾ßÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£© ¶Ñ£ºCreateHeapTesting¡¢
-		  AllocateHeapTesting¡¢
-		  AllocateGenerateExceptionsTesting¡¢
-		  ReAllocateHeapTesting¡¢
-		  ValidateHeapTesting¡¢
-		  CompactHeapTesting¡¢
-		  CurrentProcessHeapTesting ¡£
-£¨2£© ĞéÄâÄÚ´æ£ºAllocateVirtualOneStepTesting¡¢
-				AllocateVirtualSeparationTesting¡¢
-				VirtualProtectTesting¡¢
-				VirtualQueryTesting¡£
-£¨3£© ÎÄ¼şÓ³ÉäÏµÍ³£ºCreateFileMappingTesting¡¢
-					OpenFileMappingTesting¡¢
-					ViewOfFileTesting¡£
-£¨4£© ÄÚ´æ¹¤¾ß£ºMemorySetTesting¡¢
-				MemoryCopyTesting¡¢
-				MallocMemoryTesting¡¢
-				FillMemoryTesting¡¢
-				GetWindowsStructDefaultSizeTesting¡£
-£¨5£© ¾Ö²¿ÄÚ´æ£ºLocalMemoryAllocTesting¡¢
-				LocalMemorySizeTesting¡£
+å¯¹å†…å­˜å·¥å…·æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰ å †ï¼šCreateHeapTestingã€
+		  AllocateHeapTestingã€
+		  AllocateGenerateExceptionsTestingã€
+		  ReAllocateHeapTestingã€
+		  ValidateHeapTestingã€
+		  CompactHeapTestingã€
+		  CurrentProcessHeapTesting ã€‚
+ï¼ˆ2ï¼‰ è™šæ‹Ÿå†…å­˜ï¼šAllocateVirtualOneStepTestingã€
+				AllocateVirtualSeparationTestingã€
+				VirtualProtectTestingã€
+				VirtualQueryTestingã€‚
+ï¼ˆ3ï¼‰ æ–‡ä»¶æ˜ å°„ç³»ç»Ÿï¼šCreateFileMappingTestingã€
+					OpenFileMappingTestingã€
+					ViewOfFileTestingã€‚
+ï¼ˆ4ï¼‰ å†…å­˜å·¥å…·ï¼šMemorySetTestingã€
+				MemoryCopyTestingã€
+				MallocMemoryTestingã€
+				FillMemoryTestingã€
+				GetWindowsStructDefaultSizeTestingã€‚
+ï¼ˆ5ï¼‰ å±€éƒ¨å†…å­˜ï¼šLocalMemoryAllocTestingã€
+				LocalMemorySizeTestingã€‚
  
 ----------------------------
 7.	ThreadingSuite
  
-¶ÔÏß³ÌÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£© ÁÙ½çÇø£ºCriticalSectionTesting¡¢
-			  CriticalSectionThreadTesting¡¢
-			  SpecifyCriticalSectionTesting¡¢
-			  SpecifyCriticalSectionAndSpinCountTesting¡£
-£¨2£© ĞÅºÅÁ¿£ºCreateSemaphoreThreadTesting¡¢
-			  CreateSemaphoreThreadUseNameTesting¡¢
-			  ReleaseSemaphoreTesting¡¢
-			  WaitSemaphoreTesting¡¢
-			  WaitMultipleSemaphoreTesting¡¢
-			  OpenSemaphoreTesting¡£
-£¨3£© ÊÂ¼ş¶ÔÏó£ºCreateEventTesting¡¢
-				CreateEventUseNameTesting¡¢
-				ManualEventThreadTesting¡¢
-				AutoEventThreadTesting¡¢
-				ResetEventTesting¡¢
-				WaitForEventTesting¡¢
-				WaitForMultipleEventTesting¡¢
-				OpenEventTesting¡£
-£¨4£© »¥³âËø£ºCreateDefaultMutexTesting¡¢
-			  CreateMutexTesting¡¢
-			  CreateMutexUseFlagsTesting¡¢
-			  CreateMutexUseNameTesting¡¢
-			  ThreadMutexTesting¡¢
-			  WaitForMutexTesting¡¢
-			  WaitForMultipleMutexTesting¡¢
-			  OpenMutexTesting¡¢
-			  PThreadMutexTesting¡£
-£¨5£© ¶ÁĞ´Ëø£ºSlimReaderWriterInitializeTesting¡¢
-	          SlimReaderWriterReaderTesting¡¢
-			  SlimReaderWriterWriterTesting¡£
-£¨6£© Ìõ¼ş±äÁ¿£ºConditionVariableCriticalSectionTesting¡¢
-				ConditionVariableSlimReaderWriterLockTesting¡£
-£¨7£© Ò»´Î¶ÔÏó£ºInitOnceSynchronousTesting¡¢
-				InitOnceAsynchronousTesting¡£
-£¨8£© µÈ´ı¼ÆÊ±Æ÷£ºCreateWaitableTimerManualTesting¡¢
-				  CreateWaitableTimerSynchronizationTesting¡¢
-				  CreateWaitableTimerUseNameTesting¡¢
-				  CreateWaitableTimerManualUseFlagsTesting¡¢
-				  CreateWaitableTimerSynchronizationUseFlagsTesting¡¢
-				  OpenWaitableTimerTesting¡¢
-				  WaitForWaitableTimerTesting¡¢
-				  WaitForMultipleWaitableTimerTesting¡¢
-				  CancelWaitableTimerTesting¡¢
-				  SetWaitableTimerTesting¡£
-£¨9£© Í¬²½¹¤¾ß£ºSleepTesting¡¢
-				SignalObjectAndWaitTesting¡£
-£¨10£©Ô­×Ó²Ù×÷£ºInterlockedTesting¡¢
-				InterlockedSubtractTesting¡¢
-				InterlockedBinaryTesting¡£
-£¨11£©Ïß³Ì£ºCreateDefaultThreadTesting¡¢
-			CreateSuspendedThreadTesting¡¢
-			CreateCThreadTesting¡¢
-			GetCurrentThreadTesting¡¢
-		    ThreadPriorityTesting¡¢
-			WaitForThreadTesting¡¢
-			WaitForMultipleThreadTesting¡£
-£¨12£©Ïß³Ì¸¨Öú¹¤¾ß£ºOpenThreadTesting¡¢
-					PriorityBoostTesting¡¢
-					ThreadTimesTesting¡¢
-					ThreadTokenTesting¡£
-£¨13£©Ïß³Ì¾Ö²¿´æ´¢£ºThreadLocalStorageTesting¡£
-£¨14£©½ø³Ì£ºCreateDefaultProcessTesting¡¢
-			CreateProcessTesting¡¢
-			GetProcessHandleTesting¡¢
-			ProcessPriorityClassTesting¡¢
-			OpenProcessTesting¡¢
-			ExitProcessTesting¡£
-£¨15£©½ø³Ì¹¤¾ß£ºProcessTokenTesting¡£
+å¯¹çº¿ç¨‹æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰ ä¸´ç•ŒåŒºï¼šCriticalSectionTestingã€
+			  CriticalSectionThreadTestingã€
+			  SpecifyCriticalSectionTestingã€
+			  SpecifyCriticalSectionAndSpinCountTestingã€‚
+ï¼ˆ2ï¼‰ ä¿¡å·é‡ï¼šCreateSemaphoreThreadTestingã€
+			  CreateSemaphoreThreadUseNameTestingã€
+			  ReleaseSemaphoreTestingã€
+			  WaitSemaphoreTestingã€
+			  WaitMultipleSemaphoreTestingã€
+			  OpenSemaphoreTestingã€‚
+ï¼ˆ3ï¼‰ äº‹ä»¶å¯¹è±¡ï¼šCreateEventTestingã€
+				CreateEventUseNameTestingã€
+				ManualEventThreadTestingã€
+				AutoEventThreadTestingã€
+				ResetEventTestingã€
+				WaitForEventTestingã€
+				WaitForMultipleEventTestingã€
+				OpenEventTestingã€‚
+ï¼ˆ4ï¼‰ äº’æ–¥é”ï¼šCreateDefaultMutexTestingã€
+			  CreateMutexTestingã€
+			  CreateMutexUseFlagsTestingã€
+			  CreateMutexUseNameTestingã€
+			  ThreadMutexTestingã€
+			  WaitForMutexTestingã€
+			  WaitForMultipleMutexTestingã€
+			  OpenMutexTestingã€
+			  PThreadMutexTestingã€‚
+ï¼ˆ5ï¼‰ è¯»å†™é”ï¼šSlimReaderWriterInitializeTestingã€
+	          SlimReaderWriterReaderTestingã€
+			  SlimReaderWriterWriterTestingã€‚
+ï¼ˆ6ï¼‰ æ¡ä»¶å˜é‡ï¼šConditionVariableCriticalSectionTestingã€
+				ConditionVariableSlimReaderWriterLockTestingã€‚
+ï¼ˆ7ï¼‰ ä¸€æ¬¡å¯¹è±¡ï¼šInitOnceSynchronousTestingã€
+				InitOnceAsynchronousTestingã€‚
+ï¼ˆ8ï¼‰ ç­‰å¾…è®¡æ—¶å™¨ï¼šCreateWaitableTimerManualTestingã€
+				  CreateWaitableTimerSynchronizationTestingã€
+				  CreateWaitableTimerUseNameTestingã€
+				  CreateWaitableTimerManualUseFlagsTestingã€
+				  CreateWaitableTimerSynchronizationUseFlagsTestingã€
+				  OpenWaitableTimerTestingã€
+				  WaitForWaitableTimerTestingã€
+				  WaitForMultipleWaitableTimerTestingã€
+				  CancelWaitableTimerTestingã€
+				  SetWaitableTimerTestingã€‚
+ï¼ˆ9ï¼‰ åŒæ­¥å·¥å…·ï¼šSleepTestingã€
+				SignalObjectAndWaitTestingã€‚
+ï¼ˆ10ï¼‰åŸå­æ“ä½œï¼šInterlockedTestingã€
+				InterlockedSubtractTestingã€
+				InterlockedBinaryTestingã€‚
+ï¼ˆ11ï¼‰çº¿ç¨‹ï¼šCreateDefaultThreadTestingã€
+			CreateSuspendedThreadTestingã€
+			CreateCThreadTestingã€
+			GetCurrentThreadTestingã€
+		    ThreadPriorityTestingã€
+			WaitForThreadTestingã€
+			WaitForMultipleThreadTestingã€‚
+ï¼ˆ12ï¼‰çº¿ç¨‹è¾…åŠ©å·¥å…·ï¼šOpenThreadTestingã€
+					PriorityBoostTestingã€
+					ThreadTimesTestingã€
+					ThreadTokenTestingã€‚
+ï¼ˆ13ï¼‰çº¿ç¨‹å±€éƒ¨å­˜å‚¨ï¼šThreadLocalStorageTestingã€‚
+ï¼ˆ14ï¼‰è¿›ç¨‹ï¼šCreateDefaultProcessTestingã€
+			CreateProcessTestingã€
+			GetProcessHandleTestingã€
+			ProcessPriorityClassTestingã€
+			OpenProcessTestingã€
+			ExitProcessTestingã€‚
+ï¼ˆ15ï¼‰è¿›ç¨‹å·¥å…·ï¼šProcessTokenTestingã€‚
 
 ----------------------------
 8.	TimeSuite 
 
-¶ÔÊ±¼äÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© Ê±¼ä£ºCurrentDeltaTimeTesting¡£
-£¨2£© ¼ä¸ôÊ±¼äÖµ£ºDeltaTimeValueDataTesting¡£
-£¨3£© ¼ä¸ôÊ±¼ä£ºDeltaTimeTesting¡£ 
-£¨4£© ÔİÍ£¿ØÖÆÌ¨£ºSystemPauseTesting¡£
+å¯¹æ—¶é—´æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ æ—¶é—´ï¼šCurrentDeltaTimeTestingã€‚
+ï¼ˆ2ï¼‰ é—´éš”æ—¶é—´å€¼ï¼šDeltaTimeValueDataTestingã€‚
+ï¼ˆ3ï¼‰ é—´éš”æ—¶é—´ï¼šDeltaTimeTestingã€‚ 
+ï¼ˆ4ï¼‰ æš‚åœæ§åˆ¶å°ï¼šSystemPauseTestingã€‚
 
 ----------------------------
 9.	FileManagerSuite 
  
-¶ÔÎÄ¼ş¹ÜÀíÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© Cº¯ÊıÎÄ¼şÏµÍ³£ºCFileOpenTesting¡¢
-					 CFileWriteReadTesting¡¢
-					 CFileSetVBufferTesting¡¢
-					 CFileCharacterTesting¡¢
-					 CFileOperatorTesting¡£
-£¨2£© »ù´¡ÎÄ¼şÏµÍ³£ºCreateExistingFileTesting¡¢
-					CreateFileWithDefaultAttributesTesting¡¢
-					CreateFileWithOtherFlagsTesting¡¢
-					CreateFileWithSecurityFlagsTesting¡¢
-					CreateFileWithAttributesTesting¡¢
-					DirectoryTesting¡¢					
-					MoveFileTesting¡¢
-					FileLengthTesting¡¢
-					CopyFileTesting¡¢
-					FileHandlePointerTesting¡¢
-					OpenFileTesting¡¢
-					ReadFileTesting¡¢
-					ReadFileUseOverlappedTesting¡¢
-					ReadFileUseCompletionRoutineTesting¡¢
-					WriteFileTesting¡¢
-					WriteFileUseCompletionRoutineTesting¡¢
-					WriteFileUseOverlappedTesting¡¢
-					AppendFileTesting¡£
-£¨3£© ¸¨Öú¹¤¾ß£ºCreateDirectoryTesting¡¢
-				DiskFreeTesting¡£
-£¨4£© ÎÄ¼şÊ±¼ä£ºFileTimeCompareTesting¡¢
-				FileTimeConvertTesting¡¢
-				FileTimeTesting¡£ 
-£¨5£© »·¾³±äÁ¿£ºEnvironmentVariableTesting¡£ 
+å¯¹æ–‡ä»¶ç®¡ç†æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ Cå‡½æ•°æ–‡ä»¶ç³»ç»Ÿï¼šCFileOpenTestingã€
+					 CFileWriteReadTestingã€
+					 CFileSetVBufferTestingã€
+					 CFileCharacterTestingã€
+					 CFileOperatorTestingã€‚
+ï¼ˆ2ï¼‰ åŸºç¡€æ–‡ä»¶ç³»ç»Ÿï¼šCreateExistingFileTestingã€
+					CreateFileWithDefaultAttributesTestingã€
+					CreateFileWithOtherFlagsTestingã€
+					CreateFileWithSecurityFlagsTestingã€
+					CreateFileWithAttributesTestingã€
+					DirectoryTestingã€					
+					MoveFileTestingã€
+					FileLengthTestingã€
+					CopyFileTestingã€
+					FileHandlePointerTestingã€
+					OpenFileTestingã€
+					ReadFileTestingã€
+					ReadFileUseOverlappedTestingã€
+					ReadFileUseCompletionRoutineTestingã€
+					WriteFileTestingã€
+					WriteFileUseCompletionRoutineTestingã€
+					WriteFileUseOverlappedTestingã€
+					AppendFileTestingã€‚
+ï¼ˆ3ï¼‰ è¾…åŠ©å·¥å…·ï¼šCreateDirectoryTestingã€
+				DiskFreeTestingã€‚
+ï¼ˆ4ï¼‰ æ–‡ä»¶æ—¶é—´ï¼šFileTimeCompareTestingã€
+				FileTimeConvertTestingã€
+				FileTimeTestingã€‚ 
+ï¼ˆ5ï¼‰ ç¯å¢ƒå˜é‡ï¼šEnvironmentVariableTestingã€‚ 
 
 ----------------------------
 10.	SecuritySuite
  
-¶Ô°²È«ĞÔÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© ²éÕÒÈ¨ÏŞ£ºGetLookupPrivilegeDisplayNameTesting¡¢
-			    GetLookupPrivilegeNameTesting¡¢
-				GetLookupPrivilegeValueTesting¡£ 
-£¨2£© ´´½¨°²È«ĞÔ£ºFileSecurityTesting¡¢
-				  KernelObjectSecurityTesting¡¢
-				  CreatePrivateObjectSecurityTesting¡¢
-				  CreateFilePrivateObjectSecurityTesting¡¢
-				  CreatePrivateObjectSecurityUseAutoInheritTesting¡¢
-				  CreatePrivateObjectSecurityWithMultipleInheritanceTesting¡¢
-				  SetPrivateObjectSecurityTesting¡¢
-				  ConvertToAutoInheritPrivateObjectSecurityTesting¡¢
-				  SecurityAccessMaskTesting¡£
-£¨3£© °²È«ĞÔ±êÊ¶·û£ºInitializeSecurityIdentifierTesting¡¢
-					AllocateAndInitializeSecurityIdentifierTesting¡¢
-					GetSubAuthorityTesting¡¢
-					WellKnownSidTesting¡¢
-					CopySecurityIdentifierTesting¡£ 
-£¨4£© ·ÃÎÊ¿ØÖÆÁĞ±í£ºInitializeAclTesting¡¢
-					AclInformationTesting¡£ 
-£¨5£© °²È«ÃèÊö·û£ºUserObjectSecurityTesting¡¢
-				  InitializeSecurityDescriptorTesting¡¢
-				  SecurityDescriptorDiscretionaryAccessControlListTesting¡¢
-				  SecurityDescriptorControlTesting¡¢
-				  SecurityDescriptorGroupTesting¡¢
-				  SecurityDescriptorOwnerTesting¡¢
-				  SecurityDescriptorResourceManagerControlTesting¡¢
-				  SecurityDescriptorSystemAccessControlListTesting¡£ 
-£¨6£© ·ÃÎÊ¿ØÖÆÏî£ºAddAccessControlEntriesTesting¡¢
-				  FindFirstFreeAccessControlEntriesTesting¡¢
-				  AddMandatoryAceTesting¡£
-£¨7£© Ìí¼Ó·ÃÎÊÈ¨ÏŞ£ºAddAccessAllowedAceTesting¡¢
-				    AddAccessAllowedAceUseAceFlagsTesting¡¢
-					AddAccessAllowedObjectAceTesting¡¢
-					AddAccessDeniedAceTesting¡¢
-					AddAccessDeniedObjectAceTesting¡¢
-					AddAuditAccessAceTesting¡¢
-					AddAuditAccessObjectAceTesting¡£
-£¨8£© °²È«»ù´¡£ºTokenInformationTesting¡¢
-				AdjustTokenPrivilegesTesting¡¢
-				AdjustTokenGroupsTesting¡¢
-				AccessesGrantedEnlistmentMapTesting¡¢
-				AccessesGrantedFileMapTesting¡¢
-				AccessesGrantedResourceManagerMapTesting¡¢
-				AccessesGrantedTransactionManagerMapTesting¡¢
-				AccessesGrantedTransactionMapTesting¡¢
-				DuplicateTokenTesting¡¢
-				RestrictedTokenTesting¡¢
-				QuerySecurityAccessMaskTesting¡£
-£¨9£© ·ÃÎÊ¼ì²é£ºMapGenericMaskTesting¡¢
-				EnlistmentMapGenericMaskTesting¡¢
-				FileMapGenericMaskTesting¡¢
-				ResourceManagerMapGenericMaskTesting¡¢
-				TransactionManagerMapGenericMaskTesting¡¢
-				TransactionMapGenericMaskTesting¡¢
-				AccessCheckTesting¡¢
-				AccessCheckByTypeResultListTesting¡¢
-				AccessCheckByTypeTesting¡£
+å¯¹å®‰å…¨æ€§æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ æŸ¥æ‰¾æƒé™ï¼šGetLookupPrivilegeDisplayNameTestingã€
+			    GetLookupPrivilegeNameTestingã€
+				GetLookupPrivilegeValueTestingã€‚ 
+ï¼ˆ2ï¼‰ åˆ›å»ºå®‰å…¨æ€§ï¼šFileSecurityTestingã€
+				  KernelObjectSecurityTestingã€
+				  CreatePrivateObjectSecurityTestingã€
+				  CreateFilePrivateObjectSecurityTestingã€
+				  CreatePrivateObjectSecurityUseAutoInheritTestingã€
+				  CreatePrivateObjectSecurityWithMultipleInheritanceTestingã€
+				  SetPrivateObjectSecurityTestingã€
+				  ConvertToAutoInheritPrivateObjectSecurityTestingã€
+				  SecurityAccessMaskTestingã€‚
+ï¼ˆ3ï¼‰ å®‰å…¨æ€§æ ‡è¯†ç¬¦ï¼šInitializeSecurityIdentifierTestingã€
+					AllocateAndInitializeSecurityIdentifierTestingã€
+					GetSubAuthorityTestingã€
+					WellKnownSidTestingã€
+					CopySecurityIdentifierTestingã€‚ 
+ï¼ˆ4ï¼‰ è®¿é—®æ§åˆ¶åˆ—è¡¨ï¼šInitializeAclTestingã€
+					AclInformationTestingã€‚ 
+ï¼ˆ5ï¼‰ å®‰å…¨æè¿°ç¬¦ï¼šUserObjectSecurityTestingã€
+				  InitializeSecurityDescriptorTestingã€
+				  SecurityDescriptorDiscretionaryAccessControlListTestingã€
+				  SecurityDescriptorControlTestingã€
+				  SecurityDescriptorGroupTestingã€
+				  SecurityDescriptorOwnerTestingã€
+				  SecurityDescriptorResourceManagerControlTestingã€
+				  SecurityDescriptorSystemAccessControlListTestingã€‚ 
+ï¼ˆ6ï¼‰ è®¿é—®æ§åˆ¶é¡¹ï¼šAddAccessControlEntriesTestingã€
+				  FindFirstFreeAccessControlEntriesTestingã€
+				  AddMandatoryAceTestingã€‚
+ï¼ˆ7ï¼‰ æ·»åŠ è®¿é—®æƒé™ï¼šAddAccessAllowedAceTestingã€
+				    AddAccessAllowedAceUseAceFlagsTestingã€
+					AddAccessAllowedObjectAceTestingã€
+					AddAccessDeniedAceTestingã€
+					AddAccessDeniedObjectAceTestingã€
+					AddAuditAccessAceTestingã€
+					AddAuditAccessObjectAceTestingã€‚
+ï¼ˆ8ï¼‰ å®‰å…¨åŸºç¡€ï¼šTokenInformationTestingã€
+				AdjustTokenPrivilegesTestingã€
+				AdjustTokenGroupsTestingã€
+				AccessesGrantedEnlistmentMapTestingã€
+				AccessesGrantedFileMapTestingã€
+				AccessesGrantedResourceManagerMapTestingã€
+				AccessesGrantedTransactionManagerMapTestingã€
+				AccessesGrantedTransactionMapTestingã€
+				DuplicateTokenTestingã€
+				RestrictedTokenTestingã€
+				QuerySecurityAccessMaskTestingã€‚
+ï¼ˆ9ï¼‰ è®¿é—®æ£€æŸ¥ï¼šMapGenericMaskTestingã€
+				EnlistmentMapGenericMaskTestingã€
+				FileMapGenericMaskTestingã€
+				ResourceManagerMapGenericMaskTestingã€
+				TransactionManagerMapGenericMaskTestingã€
+				TransactionMapGenericMaskTestingã€
+				AccessCheckTestingã€
+				AccessCheckByTypeResultListTestingã€
+				AccessCheckByTypeTestingã€‚
 
 ----------------------------
 11.	NetworkSuite 
 
-¶ÔÍøÂçÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© Ì×½Ó×ÖÔ­ĞÍ£ºGetSocketTesting¡¢
-				  HostNetConversionTesting¡¢
-				  AcceptTesting¡¢
-				  ConnectTesting¡¢
-				  SocketNameTesting¡¢
-				  SockOptionTesting¡¢
-				  IoctlSocketTesting¡¢
-				  ShutDownTesting¡¢ 
-				  RecvFromTesting¡¢
-				  SendToTesting¡¢
-				  SelectTesting¡£ 
-£¨2£© Êı¾İÔ­ĞÍ£ºWinSockHostTesting¡¢
-				WinSockServerEntTesting¡¢
-				WinSockProtoEntTesting¡£
-£¨3£© WindowsÀ©Õ¹Ô­ĞÍ£ºWindowsExtensionPrototypesTesting¡£
-£¨4£© WindowsÌ×½Ó×Ö£º GetWinSocketTesting¡¢
-					  WinSocketAcceptTesting¡¢
-					  WinSocketConnectTesting¡¢
-					  WinSocketConnectByNameTesting¡¢
-					  WinSocketHostNetConversionTesting¡¢
-					  WinSocketRecvFromTesting¡¢
-					  WinSocketSendToTesting¡£   
+å¯¹ç½‘ç»œæ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ å¥—æ¥å­—åŸå‹ï¼šGetSocketTestingã€
+				  HostNetConversionTestingã€
+				  AcceptTestingã€
+				  ConnectTestingã€
+				  SocketNameTestingã€
+				  SockOptionTestingã€
+				  IoctlSocketTestingã€
+				  ShutDownTestingã€ 
+				  RecvFromTestingã€
+				  SendToTestingã€
+				  SelectTestingã€‚ 
+ï¼ˆ2ï¼‰ æ•°æ®åŸå‹ï¼šWinSockHostTestingã€
+				WinSockServerEntTestingã€
+				WinSockProtoEntTestingã€‚
+ï¼ˆ3ï¼‰ Windowsæ‰©å±•åŸå‹ï¼šWindowsExtensionPrototypesTestingã€‚
+ï¼ˆ4ï¼‰ Windowså¥—æ¥å­—ï¼š GetWinSocketTestingã€
+					  WinSocketAcceptTestingã€
+					  WinSocketConnectTestingã€
+					  WinSocketConnectByNameTestingã€
+					  WinSocketHostNetConversionTestingã€
+					  WinSocketRecvFromTestingã€
+					  WinSocketSendToTestingã€‚   
 
 ----------------------------
 12.	OpenGLSuite 
 
-¶ÔOpenGLÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© OpenGL¹¤¾ß£ºOpenGLUtilityTesting¡£
-£¨2£© OpenGL³õÊ¼»¯£ºOpenGLInitTesting¡£
-£¨3£© OpenGL Base£ºOpenGLBaseTesting¡£
-£¨4£© OpenGL »º³åÇø£ºOpenGLBuffersTesting¡£
-£¨5£© OpenGL ÎÆÀí£ºOpenGLTexturesTesting¡£
-£¨6£© OpenGL Polygon£ºOpenGLPolygonTesting¡£
-£¨7£© OpenGL Samplers£ºOpenGLSamplersTesting¡£
-£¨8£© OpenGL Program£ºOpenGLProgramTesting¡£
-£¨9£© OpenGL Shader£ºOpenGLShaderTesting¡£
-£¨10£©GLUT£ºOpenGLGlutTesting¡£
-£¨11£©OpenGL Wgl Ô­ĞÍ£ºOpenGLWglPrototypesTesting¡£  
+å¯¹OpenGLæ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ OpenGLå·¥å…·ï¼šOpenGLUtilityTestingã€‚
+ï¼ˆ2ï¼‰ OpenGLåˆå§‹åŒ–ï¼šOpenGLInitTestingã€‚
+ï¼ˆ3ï¼‰ OpenGL Baseï¼šOpenGLBaseTestingã€‚
+ï¼ˆ4ï¼‰ OpenGL ç¼“å†²åŒºï¼šOpenGLBuffersTestingã€‚
+ï¼ˆ5ï¼‰ OpenGL çº¹ç†ï¼šOpenGLTexturesTestingã€‚
+ï¼ˆ6ï¼‰ OpenGL Polygonï¼šOpenGLPolygonTestingã€‚
+ï¼ˆ7ï¼‰ OpenGL Samplersï¼šOpenGLSamplersTestingã€‚
+ï¼ˆ8ï¼‰ OpenGL Programï¼šOpenGLProgramTestingã€‚
+ï¼ˆ9ï¼‰ OpenGL Shaderï¼šOpenGLShaderTestingã€‚
+ï¼ˆ10ï¼‰GLUTï¼šOpenGLGlutTestingã€‚
+ï¼ˆ11ï¼‰OpenGL Wgl åŸå‹ï¼šOpenGLWglPrototypesTestingã€‚  
 
 ----------------------------
 13.	DirectXSuite 
 
-¶ÔDirectXÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© DirectXD3D12£ºDirectXD3D12Testing¡£ 
+å¯¹DirectXæ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ DirectXD3D12ï¼šDirectXD3D12Testingã€‚ 
 
 ----------------------------
 14.	VulkanSuite 
 
-¶ÔVulkanÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© Vulkan£ºVulkanTesting¡£ 
+å¯¹Vulkanæ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ Vulkanï¼šVulkanTestingã€‚ 
 
 ----------------------------
 15.	WindowsSuite 
 
-¶ÔWindowsÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© ÏµÍ³´íÎóÂë£ºLastWindowErrorTesting¡£
-£¨2£© Window´´½¨£ºWindowsCreateLParamTesting¡¢
-				  WindowsCreateWParamTesting¡£
-£¨3£© Window½ø³Ì£ºWindowsProcessTesting¡£
-£¨4£© Window×¢²á£ºWindowsRegisterTesting¡£
-£¨5£© Window×ÖÌåĞÅÏ¢£ºWindowsFontInformationTesting¡£
-£¨6£© WindowÏµÍ³£ºGetSystemInfoTesting¡¢
-				  DebugBreakTesting¡¢
-				  ExitTesting¡¢
-				  SystemCommandTesting¡¢
-				  SystemDirectoryTesting¡¢
-				  GetSystemUserNameTesting¡¢
-				  BoolConversionTesting¡¢
-				  GetSystemInputTesting¡£
-£¨7£© WindowÃû×Ö¹ÜµÀ£ºWindowsNamedPipeTesting¡£
-£¨8£© WindowÓÃ»§£ºWindowsUserTesting¡£
-£¨9£© Engineering£ºEngineeringNumDigitsTesting¡¢
-				   EngineeringOffsetTesting¡¢
-				   EngineeringSuffixTesting¡¢
-				   EngineeringTypeDisplayerTesting¡¢
-				   GetLastSlashPositionTesting¡£  
+å¯¹Windowsæ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ ç³»ç»Ÿé”™è¯¯ç ï¼šLastWindowErrorTestingã€‚
+ï¼ˆ2ï¼‰ Windowåˆ›å»ºï¼šWindowsCreateLParamTestingã€
+				  WindowsCreateWParamTestingã€‚
+ï¼ˆ3ï¼‰ Windowè¿›ç¨‹ï¼šWindowsProcessTestingã€‚
+ï¼ˆ4ï¼‰ Windowæ³¨å†Œï¼šWindowsRegisterTestingã€‚
+ï¼ˆ5ï¼‰ Windowå­—ä½“ä¿¡æ¯ï¼šWindowsFontInformationTestingã€‚
+ï¼ˆ6ï¼‰ Windowç³»ç»Ÿï¼šGetSystemInfoTestingã€
+				  DebugBreakTestingã€
+				  ExitTestingã€
+				  SystemCommandTestingã€
+				  SystemDirectoryTestingã€
+				  GetSystemUserNameTestingã€
+				  BoolConversionTestingã€
+				  GetSystemInputTestingã€‚
+ï¼ˆ7ï¼‰ Windowåå­—ç®¡é“ï¼šWindowsNamedPipeTestingã€‚
+ï¼ˆ8ï¼‰ Windowç”¨æˆ·ï¼šWindowsUserTestingã€‚
+ï¼ˆ9ï¼‰ Engineeringï¼šEngineeringNumDigitsTestingã€
+				   EngineeringOffsetTestingã€
+				   EngineeringSuffixTestingã€
+				   EngineeringTypeDisplayerTestingã€
+				   GetLastSlashPositionTestingã€‚  
 
 ----------------------------
 16.	LinuxSuite 
 
-¶ÔLinuxÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© LinuxÔ­Éú´°¿Ú£ºLinuxNativeWindowTesting¡£
+å¯¹Linuxæ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ LinuxåŸç”Ÿçª—å£ï¼šLinuxNativeWindowTestingã€‚
 
 ----------------------------
 17.	MacintoshSuite 
 
-¶ÔMacintoshÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© MacintoshÔ­Éú´°¿Ú£ºMacintoshNativeWindowTesting¡£
+å¯¹Macintoshæ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ MacintoshåŸç”Ÿçª—å£ï¼šMacintoshNativeWindowTestingã€‚
 
 ----------------------------
 18.	AndroidSuite
 
-¶ÔAndroidÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© °²×¿ÊäÈë¼üÊÂ¼ş£ºAndroidInputKeyEventFacadeTesting¡£  
-£¨2£© °²×¿ÊäÈë¹ö¶¯ÊÂ¼ş£ºAndroidInputMotionEventFacadeTesting¡£  
-£¨3£© °²×¿Ñ­»·£ºAndroidLooperTesting¡£
-£¨4£© °²×¿ÊäÈë¶ÓÁĞ£ºAndroidInputQueueFacadeTesting¡£ 
-£¨5£© °²×¿´°¿Ú£ºAndroidNativeWindowFacadeTesting¡£
-£¨6£© °²×¿Ó¦ÓÃ³ÌĞò£ºAndroidNativeAppGlueTesting¡£
+å¯¹Androidæ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ å®‰å“è¾“å…¥é”®äº‹ä»¶ï¼šAndroidInputKeyEventFacadeTestingã€‚  
+ï¼ˆ2ï¼‰ å®‰å“è¾“å…¥æ»šåŠ¨äº‹ä»¶ï¼šAndroidInputMotionEventFacadeTestingã€‚  
+ï¼ˆ3ï¼‰ å®‰å“å¾ªç¯ï¼šAndroidLooperTestingã€‚
+ï¼ˆ4ï¼‰ å®‰å“è¾“å…¥é˜Ÿåˆ—ï¼šAndroidInputQueueFacadeTestingã€‚ 
+ï¼ˆ5ï¼‰ å®‰å“çª—å£ï¼šAndroidNativeWindowFacadeTestingã€‚
+ï¼ˆ6ï¼‰ å®‰å“åº”ç”¨ç¨‹åºï¼šAndroidNativeAppGlueTestingã€‚
 
 ----------------------------

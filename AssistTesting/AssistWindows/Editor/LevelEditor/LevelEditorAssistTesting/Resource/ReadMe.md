@@ -1,7 +1,7 @@
-@ingroup group_LevelEditorAssistTesting_Documentation
+ï»¿@ingroup group_LevelEditorAssistTesting_Documentation
 
 ----------------------------
-¹Ø¿¨±à¼­Æ÷¸¨Öúµ¥Ôª²âÊÔ
+å…³å¡ç¼–è¾‘å™¨è¾…åŠ©å•å…ƒæµ‹è¯•
 
 1.   LevelEditorAssistTesting 
 

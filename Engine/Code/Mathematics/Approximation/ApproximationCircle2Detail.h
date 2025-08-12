@@ -12,9 +12,10 @@
 
 #include "ApproximationCircle2.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 Mathematics::ApproximationCircle2<Real>::ApproximationCircle2() noexcept
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -23,7 +24,7 @@ Mathematics::ApproximationCircle2<Real>::ApproximationCircle2() noexcept
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 bool Mathematics::ApproximationCircle2<Real>::IsValid() const noexcept
 {
     return true;
@@ -32,7 +33,7 @@ bool Mathematics::ApproximationCircle2<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 bool Mathematics::ApproximationCircle2<Real>::FitUsingSquaredLengths(const Vector2Container& points, Circle2Type& circle)
 {
     const auto numPoints = boost::numeric_cast<int>(points.size());
@@ -89,7 +90,7 @@ bool Mathematics::ApproximationCircle2<Real>::FitUsingSquaredLengths(const Vecto
 }
 
 template <typename Real>
-requires(std::is_arithmetic_v<Real>)
+    requires(std::is_arithmetic_v<Real>)
 int Mathematics::ApproximationCircle2<Real>::FitUsingLengths(const Vector2Container& points, int maxIterations, bool initialCenterIsAverage, Circle2Type& circle, Real epsilon)
 {
     const auto numPoints = boost::numeric_cast<int>(points.size());

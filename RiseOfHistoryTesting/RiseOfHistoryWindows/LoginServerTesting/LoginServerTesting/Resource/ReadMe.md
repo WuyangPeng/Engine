@@ -1,12 +1,12 @@
-@ingroup group_LoginServerTesting_Documentation
+ï»¿@ingroup group_LoginServerTesting_Documentation
 
 ----------------------------
-µÇÂ½·şÎñÆ÷µ¥Ôª²âÊÔ
+ç™»é™†æœåŠ¡å™¨å•å…ƒæµ‹è¯•
 
-Ä¿Ç°°üº¬£º
+ç›®å‰åŒ…å«ï¼š
 
-1. LoginServer£¨µÇÂ½·şÎñÆ÷£©
+1. LoginServerï¼ˆç™»é™†æœåŠ¡å™¨ï¼‰
 
-£¨1£©µÇÂ½·şÎñÆ÷¡£
+ï¼ˆ1ï¼‰ç™»é™†æœåŠ¡å™¨ã€‚
 
 ----------------------------

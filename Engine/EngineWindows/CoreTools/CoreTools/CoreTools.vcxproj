@@ -815,8 +815,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\IfThenElse.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\IncrementScope.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\IncrementScopeDetail.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\LiteralCast.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\LiteralCastDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\MaxElement.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\MustBePod.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\MustBeSameSize.h" />

@@ -1,493 +1,493 @@
-@ingroup group_CoreToolsTesting_Documentation
+ï»¿@ingroup group_CoreToolsTesting_Documentation
 
 ----------------------------
-ºËĞÄ¹¤¾ß¿âµ¥Ôª²âÊÔ
+æ ¸å¿ƒå·¥å…·åº“å•å…ƒæµ‹è¯•
 
 ----------------------------
 1.   HelperSuite 
 
-¶ÔHelperÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© º¯ÊıÃèÊöºê£ºFunctionDescribedMacroTesting¡£
-£¨2£© ¶ÏÑÔ²âÊÔºê£ºAssertTestExceptionThrowTesting¡¢
-				  AssertTestConditionTesting¡¢
-				  AssertTestOperatorTesting¡¢
-				  AssertTestApproximateTesting¡¢
-				  AssertTestNullptrTesting¡¢
-				  AssertTestRangeTesting¡£
-£¨3£© ¶ÏÑÔÒì³£ºê£ºAssertTestExceptionThrowTesting¡¢
-				  AssertThrowExceptionTesting¡¢
-				  AssertExecuteLoopNotThrowTesting¡£
-£¨4£© Àà²»±äÊ½ºê£ºClassInvariantMacroTesting¡¢
-			      ModuleClassInvariantMacroTesting¡£
-£¨5£© ¶ÏÑÔºê£ºCustomAssertMacroTesting¡¢
-			  ModuleCustomAssertMacroTesting¡¢
-			  FunctionProhibitedFromCallingTesting¡£
-£¨6£© µ¼³öºê£ºExportMacroTesting¡¢
-			  ModuleExportMacroTesting¡¢
-			  CopyModuleExportMacroTesting¡¢
-			  CopyUnsharedExportMacroTesting¡¢
-			  DelayCopyUnsharedExportMacroTesting¡¢
-			  NonCopyExportMacroTesting¡¢
-			  PerformanceUnsharedExportMacroTesting¡¢
-			  SharedExportMacroTesting¡£
-£¨7£© ÈÕÖ¾ºê£ºLogDefaultMacroTesting¡¢
-			  LogFileMacroTesting¡¢
-			  LogConsoleMacroTesting¡¢
-			  LogFileAndConsoleMacroTesting¡¢
-			  LogEngineMacroTesting¡¢
-			  LogTriggerAssertMacroTesting¡£
-£¨8£© ³õÊ¼»¯Ïú»Ùºê£ºInitializeTerminatorMacroTesting¡£
-£¨9£© Ö÷º¯Êıºê£ºMainFunctionMacroTesting¡£
-£¨10£©³ÉÔ±º¯Êıºê£ºMemberFunctionNoexceptMacroTesting¡¢
-				  MemberFunctionMacroTesting¡¢
-				  CallConstMemberFunctionMacroTesting¡¢
-				  MemberFunctionStaticAssertMacroTesting¡¢
-				  CopyMemberFunctionStaticAssertMacroTesting¡£
-£¨11£©ÔËĞĞÊ±ÀàĞÍÊ¶±ğºê£ºRttiMacroBaseTesting¡¢
-					    RttiMacroTesting¡¢
-						RttiMacroFinalTesting¡£
-£¨12£©µ¥Àıºê£ºSingletonMacroTesting¡£
-£¨13£©Ãû×Öºê£ºNameMacroTesting¡£
-£¨14£©×Ö½ÚÁ÷ºê£ºStreamSizeMacroTesting¡¢
-				DebugStreamMacroTesting¡¢
-				DefaultTestingNoObjectPtrTesting¡¢
-				DefaultTestingObjectPtrTesting¡¢
-				TestingNoObjectPtrTesting¡¢
-				TestingObjectPtrTesting¡¢
-				TestingObjectSizeTesting¡¢
-				TestingObjectTesting¡£
-£¨15£©µ¥Ôª²âÊÔºê£ºUnitTestSuiteMacroTesting¡£
-£¨16£©ÖÇÄÜÖ¸Õëºê£ºSharedPtrMacroTesting¡£
-£¨17£©Òì³£ºê£ºExceptionMacroTesting¡¢
-			  ExceptionCatchMacroTesting¡£ 
-£¨18£©ÊôĞÔºê£ºPropertiesMacroTesting¡£
-£¨19£©ÓÃ»§ºê£ºUserMacroTesting¡£
-£¨20£©whileÑ­»·°²È«¼ÆÊıÆ÷ºê£ºSafetyLimitMacroTesting¡£
-£¨21£©»ñÈ¡ÊıÖµËùĞèµÄÎ»£ºGetRequiredBitsTesting¡£
-£¨22£©¹şÏ£×éºÏ£ºHashCombineTesting¡£
+å¯¹Helperæ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ å‡½æ•°æè¿°å®ï¼šFunctionDescribedMacroTestingã€‚
+ï¼ˆ2ï¼‰ æ–­è¨€æµ‹è¯•å®ï¼šAssertTestExceptionThrowTestingã€
+				  AssertTestConditionTestingã€
+				  AssertTestOperatorTestingã€
+				  AssertTestApproximateTestingã€
+				  AssertTestNullptrTestingã€
+				  AssertTestRangeTestingã€‚
+ï¼ˆ3ï¼‰ æ–­è¨€å¼‚å¸¸å®ï¼šAssertTestExceptionThrowTestingã€
+				  AssertThrowExceptionTestingã€
+				  AssertExecuteLoopNotThrowTestingã€‚
+ï¼ˆ4ï¼‰ ç±»ä¸å˜å¼å®ï¼šClassInvariantMacroTestingã€
+			      ModuleClassInvariantMacroTestingã€‚
+ï¼ˆ5ï¼‰ æ–­è¨€å®ï¼šCustomAssertMacroTestingã€
+			  ModuleCustomAssertMacroTestingã€
+			  FunctionProhibitedFromCallingTestingã€‚
+ï¼ˆ6ï¼‰ å¯¼å‡ºå®ï¼šExportMacroTestingã€
+			  ModuleExportMacroTestingã€
+			  CopyModuleExportMacroTestingã€
+			  CopyUnsharedExportMacroTestingã€
+			  DelayCopyUnsharedExportMacroTestingã€
+			  NonCopyExportMacroTestingã€
+			  PerformanceUnsharedExportMacroTestingã€
+			  SharedExportMacroTestingã€‚
+ï¼ˆ7ï¼‰ æ—¥å¿—å®ï¼šLogDefaultMacroTestingã€
+			  LogFileMacroTestingã€
+			  LogConsoleMacroTestingã€
+			  LogFileAndConsoleMacroTestingã€
+			  LogEngineMacroTestingã€
+			  LogTriggerAssertMacroTestingã€‚
+ï¼ˆ8ï¼‰ åˆå§‹åŒ–é”€æ¯å®ï¼šInitializeTerminatorMacroTestingã€‚
+ï¼ˆ9ï¼‰ ä¸»å‡½æ•°å®ï¼šMainFunctionMacroTestingã€‚
+ï¼ˆ10ï¼‰æˆå‘˜å‡½æ•°å®ï¼šMemberFunctionNoexceptMacroTestingã€
+				  MemberFunctionMacroTestingã€
+				  CallConstMemberFunctionMacroTestingã€
+				  MemberFunctionStaticAssertMacroTestingã€
+				  CopyMemberFunctionStaticAssertMacroTestingã€‚
+ï¼ˆ11ï¼‰è¿è¡Œæ—¶ç±»å‹è¯†åˆ«å®ï¼šRttiMacroBaseTestingã€
+					    RttiMacroTestingã€
+						RttiMacroFinalTestingã€‚
+ï¼ˆ12ï¼‰å•ä¾‹å®ï¼šSingletonMacroTestingã€‚
+ï¼ˆ13ï¼‰åå­—å®ï¼šNameMacroTestingã€‚
+ï¼ˆ14ï¼‰å­—èŠ‚æµå®ï¼šStreamSizeMacroTestingã€
+				DebugStreamMacroTestingã€
+				DefaultTestingNoObjectPtrTestingã€
+				DefaultTestingObjectPtrTestingã€
+				TestingNoObjectPtrTestingã€
+				TestingObjectPtrTestingã€
+				TestingObjectSizeTestingã€
+				TestingObjectTestingã€‚
+ï¼ˆ15ï¼‰å•å…ƒæµ‹è¯•å®ï¼šUnitTestSuiteMacroTestingã€‚
+ï¼ˆ16ï¼‰æ™ºèƒ½æŒ‡é’ˆå®ï¼šSharedPtrMacroTestingã€‚
+ï¼ˆ17ï¼‰å¼‚å¸¸å®ï¼šExceptionMacroTestingã€
+			  ExceptionCatchMacroTestingã€‚ 
+ï¼ˆ18ï¼‰å±æ€§å®ï¼šPropertiesMacroTestingã€‚
+ï¼ˆ19ï¼‰ç”¨æˆ·å®ï¼šUserMacroTestingã€‚
+ï¼ˆ20ï¼‰whileå¾ªç¯å®‰å…¨è®¡æ•°å™¨å®ï¼šSafetyLimitMacroTestingã€‚
+ï¼ˆ21ï¼‰è·å–æ•°å€¼æ‰€éœ€çš„ä½ï¼šGetRequiredBitsTestingã€‚
+ï¼ˆ22ï¼‰å“ˆå¸Œç»„åˆï¼šHashCombineTestingã€‚
  
 ----------------------------
 2.   ContractSuite 
 
-¶ÔÆõÔ¼Ä£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© º¯ÊıÃèÊö£ºFunctionDescribedTesting¡£
-£¨2£© ×ÊÔ´×Ô¶¯¹ÜÀí£ºScopeExitTesting¡£
-£¨3£© ´¥·¢¶ÏÑÔ£ºTriggerAssertTesting¡£
-£¨4£© Àà²»±äÊ½£ºCheckInvariantTesting¡£
-£¨5£© Noexcept£ºNoexceptTesting¡£
-£¨6£© ¶ÏÑÔ£ºAssertionTesting¡£
-£¨7£© ImplÌØÕ÷Àà£ºImplStaticAssertHelperTesting¡¢
-				  CopyUnsharedImplTesting¡¢
-				  DelayCopyUnsharedImplTesting¡¢
-				  NonCopyImplTesting¡¢
-				  PerformanceUnsharedImplTesting¡¢
-				  SharedImplTesting¡£
+å¯¹å¥‘çº¦æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ å‡½æ•°æè¿°ï¼šFunctionDescribedTestingã€‚
+ï¼ˆ2ï¼‰ èµ„æºè‡ªåŠ¨ç®¡ç†ï¼šScopeExitTestingã€‚
+ï¼ˆ3ï¼‰ è§¦å‘æ–­è¨€ï¼šTriggerAssertTestingã€‚
+ï¼ˆ4ï¼‰ ç±»ä¸å˜å¼ï¼šCheckInvariantTestingã€‚
+ï¼ˆ5ï¼‰ Noexceptï¼šNoexceptTestingã€‚
+ï¼ˆ6ï¼‰ æ–­è¨€ï¼šAssertionTestingã€‚
+ï¼ˆ7ï¼‰ Implç‰¹å¾ç±»ï¼šImplStaticAssertHelperTestingã€
+				  CopyUnsharedImplTestingã€
+				  DelayCopyUnsharedImplTestingã€
+				  NonCopyImplTestingã€
+				  PerformanceUnsharedImplTestingã€
+				  SharedImplTestingã€‚
  
 ----------------------------
 3.   BaseSuite 
 
-¶Ô»ù±¾¹¦ÄÜÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£©µ¥Àı»ùÀà£ºSingletonTesting¡£
-£¨2£©Î¨Ò»ID¹ÜÀí£ºUniqueIdManagerTesting¡£
-£¨3£©°æ±¾ĞÅÏ¢£ºVersionTesting¡£
-£¨4£©¶¯Ì¬Á´½Ó¿â£ºLoadingLibraryTesting¡£
-£¨5£©¿ç¶Èµü´úÆ÷£ºSpanIteratorTesting¡£
-£¨6£©¾²Ì¬µ¥Àı£ºStaticSingletonTesting¡£
+å¯¹åŸºæœ¬åŠŸèƒ½æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰å•ä¾‹åŸºç±»ï¼šSingletonTestingã€‚
+ï¼ˆ2ï¼‰å”¯ä¸€IDç®¡ç†ï¼šUniqueIdManagerTestingã€‚
+ï¼ˆ3ï¼‰ç‰ˆæœ¬ä¿¡æ¯ï¼šVersionTestingã€‚
+ï¼ˆ4ï¼‰åŠ¨æ€é“¾æ¥åº“ï¼šLoadingLibraryTestingã€‚
+ï¼ˆ5ï¼‰è·¨åº¦è¿­ä»£å™¨ï¼šSpanIteratorTestingã€‚
+ï¼ˆ6ï¼‰é™æ€å•ä¾‹ï¼šStaticSingletonTestingã€‚
 
 ----------------------------
 4.   CharacterStringSuite 
 
-¶Ô×Ö·û´®Ä£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£©¸ñÊ½»¯´íÎóÏûÏ¢£ºFormatErrorMessageTesting¡£
-£¨2£©×Ö·û´®×ª»»£ºStringConversionTesting¡£
-£¨3£©ºöÂÔ´óĞ¡Ğ´µÄ×Ö·ûÀà£ºCaseInsensitiveStringTesting¡¢
-						 CaseInsensitiveStringIOStreamTesting¡£ 
-£¨4£©×Ö·û´®¹¤¾ß£ºStringUtilityTesting¡£
-£¨5£©´úÂëÓ³Éä£ºCodeMappingTesting¡¢
-			   CodeMappingAnalysisTesting¡£
-£¨6£©Base64×ª»»£ºBase64Testing¡£
+å¯¹å­—ç¬¦ä¸²æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰æ ¼å¼åŒ–é”™è¯¯æ¶ˆæ¯ï¼šFormatErrorMessageTestingã€‚
+ï¼ˆ2ï¼‰å­—ç¬¦ä¸²è½¬æ¢ï¼šStringConversionTestingã€‚
+ï¼ˆ3ï¼‰å¿½ç•¥å¤§å°å†™çš„å­—ç¬¦ç±»ï¼šCaseInsensitiveStringTestingã€
+						 CaseInsensitiveStringIOStreamTestingã€‚ 
+ï¼ˆ4ï¼‰å­—ç¬¦ä¸²å·¥å…·ï¼šStringUtilityTestingã€‚
+ï¼ˆ5ï¼‰ä»£ç æ˜ å°„ï¼šCodeMappingTestingã€
+			   CodeMappingAnalysisTestingã€‚
+ï¼ˆ6ï¼‰Base64è½¬æ¢ï¼šBase64Testingã€‚
 
 ----------------------------
 5.   ExceptionSuite 
 
-¶ÔÒì³£Ä£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£©´íÎóÂë£ºLastErrorTesting¡£
-£¨2£©´íÎó£ºErrorTesting¡£
-£¨3£©ÓÎÏ·Òì³££ºGameErrorTesting¡£
+å¯¹å¼‚å¸¸æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰é”™è¯¯ç ï¼šLastErrorTestingã€‚
+ï¼ˆ2ï¼‰é”™è¯¯ï¼šErrorTestingã€‚
+ï¼ˆ3ï¼‰æ¸¸æˆå¼‚å¸¸ï¼šGameErrorTestingã€‚
 
 ----------------------------
 6.  ConsoleSuite 
 
-¶Ô¿ØÖÆÌ¨Ä£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£©¿ØÖÆÌ¨ÊµÀı£ºConsoleTesting¡£
-£¨2£©¿ØÖÆÌ¨ÑÕÉ«£ºConsoleColorsTesting¡¢
-				 ConsoleTextColorsManagerTesting¡£
-£¨3£©¿ØÖÆÌ¨´´½¨£ºConsoleAllocTesting¡£
+å¯¹æ§åˆ¶å°æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰æ§åˆ¶å°å®ä¾‹ï¼šConsoleTestingã€‚
+ï¼ˆ2ï¼‰æ§åˆ¶å°é¢œè‰²ï¼šConsoleColorsTestingã€
+				 ConsoleTextColorsManagerTestingã€‚
+ï¼ˆ3ï¼‰æ§åˆ¶å°åˆ›å»ºï¼šConsoleAllocTestingã€‚
 
 ----------------------------
 7.	 ThreadingSuite 
 
-¶ÔÏß³ÌÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© ÁÙ½çÇø£ºCriticalSectionTesting¡£
-£¨2£© Windows»¥³âËø£ºWindowsMutexTesting¡£
-£¨3£© std»¥³âËø£ºStdMutexTesting¡£
-£¨4£© stdµİ¹é»¥³âËø£ºStdRecursiveMutexTesting¡£
-£¨5£© boost»¥³âËø£ºBoostMutexTesting¡£
-£¨6£© boostµİ¹é»¥³âËø£ºBoostRecursiveMutexTesting¡£
-£¨7£© ¿Õ»¥³âËø£ºNullMutexTesting¡£
-£¨8£© ÊÂ¼ş£ºEventTesting¡£
-£¨9£© ĞÅºÅÁ¿£ºSemaphoreTesting¡£
-£¨10£©Ïß³Ì£ºThreadTesting¡£
-£¨11£©Ïß³Ì¹ÜÀí£ºThreadManagerTesting¡£ 
-£¨12£©Ïß³ÌÊØÎÀ£ºThreadGuardTesting¡£ 
-£¨13£©Ïß³Ì×é£ºThreadGroupTesting¡£ 
+å¯¹çº¿ç¨‹æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ ä¸´ç•ŒåŒºï¼šCriticalSectionTestingã€‚
+ï¼ˆ2ï¼‰ Windowsäº’æ–¥é”ï¼šWindowsMutexTestingã€‚
+ï¼ˆ3ï¼‰ stdäº’æ–¥é”ï¼šStdMutexTestingã€‚
+ï¼ˆ4ï¼‰ stdé€’å½’äº’æ–¥é”ï¼šStdRecursiveMutexTestingã€‚
+ï¼ˆ5ï¼‰ boostäº’æ–¥é”ï¼šBoostMutexTestingã€‚
+ï¼ˆ6ï¼‰ boosté€’å½’äº’æ–¥é”ï¼šBoostRecursiveMutexTestingã€‚
+ï¼ˆ7ï¼‰ ç©ºäº’æ–¥é”ï¼šNullMutexTestingã€‚
+ï¼ˆ8ï¼‰ äº‹ä»¶ï¼šEventTestingã€‚
+ï¼ˆ9ï¼‰ ä¿¡å·é‡ï¼šSemaphoreTestingã€‚
+ï¼ˆ10ï¼‰çº¿ç¨‹ï¼šThreadTestingã€‚
+ï¼ˆ11ï¼‰çº¿ç¨‹ç®¡ç†ï¼šThreadManagerTestingã€‚ 
+ï¼ˆ12ï¼‰çº¿ç¨‹å®ˆå«ï¼šThreadGuardTestingã€‚ 
+ï¼ˆ13ï¼‰çº¿ç¨‹ç»„ï¼šThreadGroupTestingã€‚ 
 
 ----------------------------
 8.	 FileManagerSuite 
 
-¶ÔÎÄ¼ş¹ÜÀíÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£©×Ö½ÚĞò£ºByteSwapperTesting¡¢
-			 ByteSwapTesting¡¢
-			 TypeAliasTesting¡¢
-			 EndianTesting¡£
-£¨2£©ÎÄ¼ş»º³åÇø£ºFileBufferTesting¡£
-£¨3£©CÎÄ¼ş¹ÜÀí£ºCWriteFileManagerTesting¡¢
-			    CReadFileManagerTesting¡¢
-				CFileManagerTesting¡£
-£¨4£©C++ÎÄ¼ş¹ÜÀí£ºOFileStreamManagerTesting¡¢
-				  IFileStreamManagerTesting¡£
-£¨5£©É¾³ıÎÄ¼ş¹¤¾ß£ºDeleteFileToolsTesting¡£
-£¨6£©¸´ÖÆÎÄ¼ş¹¤¾ß£ºCopyFileToolsTesting¡£
-£¨7£©HandleÎÄ¼ş¹ÜÀí£ºWriteFileHandleTesting¡¢
-					 ReadFileHandleTesting¡¢
-					 ReadAndWriteFileHandleTesting¡¢
-					 FileHandleHelperTesting¡¢
-					 FileHandleTesting¡£
-£¨8£©ÎÄ¼ş¹ÜÀí£ºWriteFileManagerTesting¡¢
-			   ReadFileManagerTesting¡¢
-			   FileManagerHelperTesting¡£
-£¨9£©Ä¿Â¼¹ÜÀí£ºDirectoryTesting¡£
-£¨10£©»º³åÇøIO£ºReadBufferIOTesting¡¢
-				WriteBufferIOTesting¡£
-£¨11£©»·¾³±äÁ¿£ºEnvironmentTesting¡¢
-				EnvironmentVariableTesting¡£
-£¨12£©ÎÄ¼ş¶ÁÈ¡´æÈëÒì²½¹ÜÀí£ºFileAsynchronousParameterTesting¡¢
-						    FileEventTesting¡¢
-							FileAsynchronousTesting¡£
-£¨13£©Ëæ»úÎÄ¼şÃû£ºGenerateRandomNameTesting¡£
+å¯¹æ–‡ä»¶ç®¡ç†æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰å­—èŠ‚åºï¼šByteSwapperTestingã€
+			 ByteSwapTestingã€
+			 TypeAliasTestingã€
+			 EndianTestingã€‚
+ï¼ˆ2ï¼‰æ–‡ä»¶ç¼“å†²åŒºï¼šFileBufferTestingã€‚
+ï¼ˆ3ï¼‰Cæ–‡ä»¶ç®¡ç†ï¼šCWriteFileManagerTestingã€
+			    CReadFileManagerTestingã€
+				CFileManagerTestingã€‚
+ï¼ˆ4ï¼‰C++æ–‡ä»¶ç®¡ç†ï¼šOFileStreamManagerTestingã€
+				  IFileStreamManagerTestingã€‚
+ï¼ˆ5ï¼‰åˆ é™¤æ–‡ä»¶å·¥å…·ï¼šDeleteFileToolsTestingã€‚
+ï¼ˆ6ï¼‰å¤åˆ¶æ–‡ä»¶å·¥å…·ï¼šCopyFileToolsTestingã€‚
+ï¼ˆ7ï¼‰Handleæ–‡ä»¶ç®¡ç†ï¼šWriteFileHandleTestingã€
+					 ReadFileHandleTestingã€
+					 ReadAndWriteFileHandleTestingã€
+					 FileHandleHelperTestingã€
+					 FileHandleTestingã€‚
+ï¼ˆ8ï¼‰æ–‡ä»¶ç®¡ç†ï¼šWriteFileManagerTestingã€
+			   ReadFileManagerTestingã€
+			   FileManagerHelperTestingã€‚
+ï¼ˆ9ï¼‰ç›®å½•ç®¡ç†ï¼šDirectoryTestingã€‚
+ï¼ˆ10ï¼‰ç¼“å†²åŒºIOï¼šReadBufferIOTestingã€
+				WriteBufferIOTestingã€‚
+ï¼ˆ11ï¼‰ç¯å¢ƒå˜é‡ï¼šEnvironmentTestingã€
+				EnvironmentVariableTestingã€‚
+ï¼ˆ12ï¼‰æ–‡ä»¶è¯»å–å­˜å…¥å¼‚æ­¥ç®¡ç†ï¼šFileAsynchronousParameterTestingã€
+						    FileEventTestingã€
+							FileAsynchronousTestingã€‚
+ï¼ˆ13ï¼‰éšæœºæ–‡ä»¶åï¼šGenerateRandomNameTestingã€‚
 
 ----------------------------
 9.  TextParsingSuite 
 
-¶ÔÎÄ±¾½âÎöÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£©¼òÒ×zip¹ÜÀí£ºZipEntryTesting¡¢
-				  ZipArchiveTesting¡£
-£¨2£©¼òÒ×csv¹ÜÀí£ºSimpleCSVExceptionTesting¡¢
-				  XmlDataTesting¡¢
-				  XmlFileTesting¡¢
-				  SharedStringsTesting¡¢
-				  ColorTesting¡¢
-				  CellValueProxyTesting¡¢
-				  CellValueTesting¡¢
-				  CellReferenceTesting¡¢
-				  CellTesting¡¢
-				  CellRangeTesting¡¢
-				  CellIteratorTesting¡¢
-				  ColumnTesting¡¢
-				  RowDataIteratorTesting¡¢
-				  RowDataRangeTesting¡¢
-				  RowRangeTesting¡¢
-				  RowTesting¡¢
-				  RowDataProxyTesting¡¢
-				  RowIteratorTesting¡¢
-				  SheetBaseTesting¡¢
-				  WorksheetTesting¡¢
-				  AppPropertiesTesting¡¢
-				  PropertiesTesting¡¢
-				  ContentItemTesting¡¢
-				  ContentTypesTesting¡¢
-				  RelationshipItemTesting¡¢
-				  RelationshipsTesting¡¢
-				  WorkbookTesting¡¢
-				  DocumentTesting¡£
-£¨3£©¼òÒ×csv¿ØÖÆ£ºCommandSetSheetNameTesting¡¢
-				  CommandSetSheetVisibilityTesting¡¢
-				  CommandSetSheetColorTesting¡¢
-				  CommandSetSheetIndexTesting¡¢
-				  CommandResetCalcChainTesting¡¢
-				  CommandAddSharedStringsTesting¡¢
-				  CommandAddWorksheetTesting¡¢
-				  CommandAddChartsheetTesting¡¢
-				  CommandDeleteSheetTesting¡¢
-				  CommandCloneSheetTesting¡£
-£¨4£©¼òÒ×csv²éÑ¯£ºQuerySheetNameTesting¡¢
-				  QuerySheetIndexTesting¡¢
-				  QuerySheetVisibilityTesting¡¢
-				  QuerySheetTypeTesting¡¢
-				  QuerySheetIDTesting¡¢
-				  QuerySheetRelsIDTesting¡¢
-				  QuerySheetRelsTargetTesting¡¢
-				  QuerySharedStringsTesting¡¢
-				  QueryXmlDataTesting¡£
-£¨5£©Excel×ªcsv¹¦ÄÜ£º ExcelConversionCSVTesting¡¢
-					  BatchConversionCSVTesting¡¢
-					  BatchConversionCodeTesting¡£
-£¨6£©csv½âÎö£ºCSVDataTesting¡¢
-			  CSVTypeConversionTesting¡¢
-			  CSVHeadTesting¡¢
-			  CSVRowTesting¡¢
-			  CSVContentTesting¡¢
-			  CSVGenerateTesting¡¢
-			  CSVTotalGenerateTesting¡¢
-			  CSVConfigureTesting¡¢
-			  DataTypeDescribeTesting¡¢
-			  CSVConfigureLoadingTesting¡£
-£¨7£©json½âÎö£ºJsonBaseTesting¡¢
-			   JsonAnalysisManagerTesting¡£
+å¯¹æ–‡æœ¬è§£ææ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ç®€æ˜“zipç®¡ç†ï¼šZipEntryTestingã€
+				  ZipArchiveTestingã€‚
+ï¼ˆ2ï¼‰ç®€æ˜“csvç®¡ç†ï¼šSimpleCSVExceptionTestingã€
+				  XmlDataTestingã€
+				  XmlFileTestingã€
+				  SharedStringsTestingã€
+				  ColorTestingã€
+				  CellValueProxyTestingã€
+				  CellValueTestingã€
+				  CellReferenceTestingã€
+				  CellTestingã€
+				  CellRangeTestingã€
+				  CellIteratorTestingã€
+				  ColumnTestingã€
+				  RowDataIteratorTestingã€
+				  RowDataRangeTestingã€
+				  RowRangeTestingã€
+				  RowTestingã€
+				  RowDataProxyTestingã€
+				  RowIteratorTestingã€
+				  SheetBaseTestingã€
+				  WorksheetTestingã€
+				  AppPropertiesTestingã€
+				  PropertiesTestingã€
+				  ContentItemTestingã€
+				  ContentTypesTestingã€
+				  RelationshipItemTestingã€
+				  RelationshipsTestingã€
+				  WorkbookTestingã€
+				  DocumentTestingã€‚
+ï¼ˆ3ï¼‰ç®€æ˜“csvæ§åˆ¶ï¼šCommandSetSheetNameTestingã€
+				  CommandSetSheetVisibilityTestingã€
+				  CommandSetSheetColorTestingã€
+				  CommandSetSheetIndexTestingã€
+				  CommandResetCalcChainTestingã€
+				  CommandAddSharedStringsTestingã€
+				  CommandAddWorksheetTestingã€
+				  CommandAddChartsheetTestingã€
+				  CommandDeleteSheetTestingã€
+				  CommandCloneSheetTestingã€‚
+ï¼ˆ4ï¼‰ç®€æ˜“csvæŸ¥è¯¢ï¼šQuerySheetNameTestingã€
+				  QuerySheetIndexTestingã€
+				  QuerySheetVisibilityTestingã€
+				  QuerySheetTypeTestingã€
+				  QuerySheetIDTestingã€
+				  QuerySheetRelsIDTestingã€
+				  QuerySheetRelsTargetTestingã€
+				  QuerySharedStringsTestingã€
+				  QueryXmlDataTestingã€‚
+ï¼ˆ5ï¼‰Excelè½¬csvåŠŸèƒ½ï¼š ExcelConversionCSVTestingã€
+					  BatchConversionCSVTestingã€
+					  BatchConversionCodeTestingã€‚
+ï¼ˆ6ï¼‰csvè§£æï¼šCSVDataTestingã€
+			  CSVTypeConversionTestingã€
+			  CSVHeadTestingã€
+			  CSVRowTestingã€
+			  CSVContentTestingã€
+			  CSVGenerateTestingã€
+			  CSVTotalGenerateTestingã€
+			  CSVConfigureTestingã€
+			  DataTypeDescribeTestingã€
+			  CSVConfigureLoadingTestingã€‚
+ï¼ˆ7ï¼‰jsonè§£æï¼šJsonBaseTestingã€
+			   JsonAnalysisManagerTestingã€‚
 
 ----------------------------
 10.	 LogManagerSuite 
 
-¶ÔÈÕÖ¾¹ÜÀíÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£©ÈÕÖ¾¹ıÂËÆ÷£ºLogFilterManagerTesting¡£
-£¨2£©ÈÕÖ¾µÈ¼¶¹ÜÀí£ºLogLevelManagerTesting¡£
-£¨3£©ÈÕÖ¾ÏûÏ¢£ºLogMessagePostfixTesting¡¢
-			   LogMessagePrefixTesting¡¢
-			   LogMessageTesting¡£
-£¨4£©ÈÕÖ¾¿ØÖÆÌ¨ÑÕÉ«¹ÜÀí£ºLogConsoleTextColorsManagerTesting¡£
-£¨5£©¸½¼ÓÆ÷£ºAppenderManagerTesting¡¢
-			 AppenderTesting¡£
-£¨6£©ÈÕÖ¾¼ÇÂ¼Æ÷£ºLoggerTesting¡£
-£¨7£©ÈÕÖ¾ÎÄ¼şÃû£ºLogFileNameTesting¡£
-£¨8£©ÈÕÖ¾IO¹ÜÀí£ºLogAppenderIOManagerTesting¡¢
-				 LogAppenderIOManagerSignTesting¡£
-£¨9£©ÈÕÖ¾¹ÜÀí£ºLogTesting¡¢
-			   LogAsynchronousTesting¡¢
-			   LogHelperTesting¡£
+å¯¹æ—¥å¿—ç®¡ç†æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰æ—¥å¿—è¿‡æ»¤å™¨ï¼šLogFilterManagerTestingã€‚
+ï¼ˆ2ï¼‰æ—¥å¿—ç­‰çº§ç®¡ç†ï¼šLogLevelManagerTestingã€‚
+ï¼ˆ3ï¼‰æ—¥å¿—æ¶ˆæ¯ï¼šLogMessagePostfixTestingã€
+			   LogMessagePrefixTestingã€
+			   LogMessageTestingã€‚
+ï¼ˆ4ï¼‰æ—¥å¿—æ§åˆ¶å°é¢œè‰²ç®¡ç†ï¼šLogConsoleTextColorsManagerTestingã€‚
+ï¼ˆ5ï¼‰é™„åŠ å™¨ï¼šAppenderManagerTestingã€
+			 AppenderTestingã€‚
+ï¼ˆ6ï¼‰æ—¥å¿—è®°å½•å™¨ï¼šLoggerTestingã€‚
+ï¼ˆ7ï¼‰æ—¥å¿—æ–‡ä»¶åï¼šLogFileNameTestingã€‚
+ï¼ˆ8ï¼‰æ—¥å¿—IOç®¡ç†ï¼šLogAppenderIOManagerTestingã€
+				 LogAppenderIOManagerSignTestingã€‚
+ï¼ˆ9ï¼‰æ—¥å¿—ç®¡ç†ï¼šLogTestingã€
+			   LogAsynchronousTestingã€
+			   LogHelperTestingã€‚
 
 ----------------------------
 11.	 DataTypesSuite 
 
-¶ÔÊı¾İÀàĞÍÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£©Ôª×é£ºTupleTesting¡¢
-		   TupleLessTesting¡£
-£¨2£©±í£ºTableTesting¡£
-£¨3£©×îĞ¡¶Ñ£ºMinHeapRecordTesting¡¢
-			 MinHeapTesting¡£
-£¨4£©Ïß³Ì°²È«ÈİÆ÷£ºThreadSafeMapTesting¡¢
-				   ThreadSafeQueueTesting¡£
+å¯¹æ•°æ®ç±»å‹æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰å…ƒç»„ï¼šTupleTestingã€
+		   TupleLessTestingã€‚
+ï¼ˆ2ï¼‰è¡¨ï¼šTableTestingã€‚
+ï¼ˆ3ï¼‰æœ€å°å †ï¼šMinHeapRecordTestingã€
+			 MinHeapTestingã€‚
+ï¼ˆ4ï¼‰çº¿ç¨‹å®‰å…¨å®¹å™¨ï¼šThreadSafeMapTestingã€
+				   ThreadSafeQueueTestingã€‚
 
 ----------------------------
 12.	 MemoryToolsSuite 
 
-¶ÔÄÚ´æ¹¤¾ßÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£©¶Ñ·ÖÅä£ºHeapAllocateTesting¡£
-£¨2£©Ö¸Õë±È½Ï£ºRawIteratorsTesting¡¢
-			   RawPtrCompareTesting¡¢
-			   SharedPtrCompareTesting¡¢
-			   WeakPtrCompareTesting¡£
-£¨3£©¶àÎ¬Êı×é£ºAtomicMinMaxTesting¡¢
-			   TypeTraitsTesting¡¢
-			   Array2Testing¡¢
-			   Array3Testing¡¢
-			   Array4Testing¡¢
-			   ContainerAdapterTesting¡¢
-			   LatticeTesting¡¢
-			   LexicoArray2Testing¡¢
-			   MultiArrayTesting¡¢
-			   MultiArrayAdapterTesting¡£
+å¯¹å†…å­˜å·¥å…·æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰å †åˆ†é…ï¼šHeapAllocateTestingã€‚
+ï¼ˆ2ï¼‰æŒ‡é’ˆæ¯”è¾ƒï¼šRawIteratorsTestingã€
+			   RawPtrCompareTestingã€
+			   SharedPtrCompareTestingã€
+			   WeakPtrCompareTestingã€‚
+ï¼ˆ3ï¼‰å¤šç»´æ•°ç»„ï¼šAtomicMinMaxTestingã€
+			   TypeTraitsTestingã€
+			   Array2Testingã€
+			   Array3Testingã€
+			   Array4Testingã€
+			   ContainerAdapterTestingã€
+			   LatticeTestingã€
+			   LexicoArray2Testingã€
+			   MultiArrayTestingã€
+			   MultiArrayAdapterTestingã€‚
 
 ----------------------------
 13.	 ObjectSystemsSuite 
 
-¶Ô¶ÔÏóÏµÍ³Ä£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© ³õÊ¼ÖÕÖ¹Æ÷£ºInitTermTesting¡¢
-				  InitTermContainerTesting¡¢
-				  InitTermRegisterFactoryTesting¡£
-£¨2£© Rtti£ºRttiTesting¡¢
-		    RttiTestingBase¡£
-£¨3£© ¶ÔÏóÃû×Ö£ºObjectNameTesting¡£
-£¨4£© ¶ÔÏóÏµÍ³ÎÄ¼şÁ÷£ºBufferInStreamTesting¡¢
-					  BufferOutStreamTesting¡¢
-					  BufferSourceTesting¡¢
-					  BufferTargetTesting¡¢
-					  FileInStreamTesting¡¢
-					  FileOutStreamTesting¡¢
-					  InTopLevelTesting¡¢
-					  OutTopLevelTesting¡¢
-					  StreamSizeTesting¡¢
-					  StreamTesting¡¢
-					  ObjectLinkTesting¡¢
-					  ObjectRegisterTesting¡£
-£¨5£© ¶ÔÏóÏµÍ³¹ÜÀíÆ÷£ºObjectManagerTesting¡¢
-					  ObjectTesting¡¢					 
-					  ConstObjectAssociatedTesting¡¢
-					  ConstWeakObjectAssociatedTesting¡¢
-					  ObjectAssociatedTesting¡¢
-					  WeakObjectAssociatedTesting¡¢
-					  NullObjectTesting¡¢
-					  ObjectInterfaceTesting¡£
+å¯¹å¯¹è±¡ç³»ç»Ÿæ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ åˆå§‹ç»ˆæ­¢å™¨ï¼šInitTermTestingã€
+				  InitTermContainerTestingã€
+				  InitTermRegisterFactoryTestingã€‚
+ï¼ˆ2ï¼‰ Rttiï¼šRttiTestingã€
+		    RttiTestingBaseã€‚
+ï¼ˆ3ï¼‰ å¯¹è±¡åå­—ï¼šObjectNameTestingã€‚
+ï¼ˆ4ï¼‰ å¯¹è±¡ç³»ç»Ÿæ–‡ä»¶æµï¼šBufferInStreamTestingã€
+					  BufferOutStreamTestingã€
+					  BufferSourceTestingã€
+					  BufferTargetTestingã€
+					  FileInStreamTestingã€
+					  FileOutStreamTestingã€
+					  InTopLevelTestingã€
+					  OutTopLevelTestingã€
+					  StreamSizeTestingã€
+					  StreamTestingã€
+					  ObjectLinkTestingã€
+					  ObjectRegisterTestingã€‚
+ï¼ˆ5ï¼‰ å¯¹è±¡ç³»ç»Ÿç®¡ç†å™¨ï¼šObjectManagerTestingã€
+					  ObjectTestingã€					 
+					  ConstObjectAssociatedTestingã€
+					  ConstWeakObjectAssociatedTestingã€
+					  ObjectAssociatedTestingã€
+					  WeakObjectAssociatedTestingã€
+					  NullObjectTestingã€
+					  ObjectInterfaceTestingã€‚
 
 ----------------------------
 14.	 TimeSuite 
 
-¶ÔÊ±¼äÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£©Ê±¼ä£ºDeltaTimeManagerTesting¡¢
-		   DateTesting¡¢
-		   YearTesting¡¢
-		   MonthTesting¡¢
-		   DayTesting¡£
-£¨2£©¼ÆÊ±Æ÷£ºSecondTimerTesting¡¢
-			 MillisecondTimerTesting¡£
-£¨3£©¶¨ÖÆÊ±¼äÆ÷£ºCustomTimeTesting¡£
+å¯¹æ—¶é—´æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰æ—¶é—´ï¼šDeltaTimeManagerTestingã€
+		   DateTestingã€
+		   YearTestingã€
+		   MonthTestingã€
+		   DayTestingã€‚
+ï¼ˆ2ï¼‰è®¡æ—¶å™¨ï¼šSecondTimerTestingã€
+			 MillisecondTimerTestingã€‚
+ï¼ˆ3ï¼‰å®šåˆ¶æ—¶é—´å™¨ï¼šCustomTimeTestingã€‚
 
 ----------------------------
 15.	 ReportOutputSuite 
 
-¶Ô±¨¸æÊä³öÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£©µÈ³¤±¨¸æÊä³ö£ºEquilongReportOutputTesting¡£
-£¨2£©²âÊÔÊ§°Ü±¨¸æÊä³ö£ºUnitTestFailReportOutputTesting¡£
-£¨3£©²âÊÔÌ×¼ş±¨¸æÊä³ö£ºUnitTestSuiteReportOutputTesting¡£
+å¯¹æŠ¥å‘Šè¾“å‡ºæ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ç­‰é•¿æŠ¥å‘Šè¾“å‡ºï¼šEquilongReportOutputTestingã€‚
+ï¼ˆ2ï¼‰æµ‹è¯•å¤±è´¥æŠ¥å‘Šè¾“å‡ºï¼šUnitTestFailReportOutputTestingã€‚
+ï¼ˆ3ï¼‰æµ‹è¯•å¥—ä»¶æŠ¥å‘Šè¾“å‡ºï¼šUnitTestSuiteReportOutputTestingã€‚
 
 ----------------------------
 16.	 UnitTestSuiteSuite 
 
-¶Ôµ¥Ôª²âÊÔÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© µ¥Ôª²âÊÔ£ºOStreamSharedTesting¡¢
-				UnitTestTesting¡¢
-				UnitTestCompositeTesting¡¢
-				UnitTestStreamTesting¡£
-£¨2£© µ¥Ôª²âÊÔÌ×¼ş£ºSuiteTesting¡£
+å¯¹å•å…ƒæµ‹è¯•æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ å•å…ƒæµ‹è¯•ï¼šOStreamSharedTestingã€
+				UnitTestTestingã€
+				UnitTestCompositeTestingã€
+				UnitTestStreamTestingã€‚
+ï¼ˆ2ï¼‰ å•å…ƒæµ‹è¯•å¥—ä»¶ï¼šSuiteTestingã€‚
 
 ----------------------------
 17.	 TemplateToolsSuite 
 
-¶ÔÄ£°å¹¤¾ßÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© Ô¼Êø£ºConstraintTesting¡£
-£¨2£© ½×³Ë£ºFactorialTesting¡£
-£¨3£© ì³²¨ÄÇÆõÊı£ºFibonacciTesting¡£
-£¨4£© ²ÎÊıÀàĞÍ£ºParamTypeTesting¡£
-£¨5£© Èı½Çº¯Êı£ºTrigonometricFunctionTesting¡£
-£¨6£© Ö¸Õë±È½Ï£ºPtrCompareTesting¡¢
-				RangeIterationTesting¡£
-£¨7£© IfThenElse£ºIfThenElseTesting¡£
-£¨8£© ÊıÑ§º¯Êı£ºSqrtTesting¡¢
-			    Pow3Testing¡¢
-				MaxElementTesting¡£
-£¨9£© ×ª»»£ºExplicitCastTesting¡¢
-			LiteralCastTesting¡¢
-			ReferenceCastTesting¡£
-£¨10£©×ÔÔö×Ô¼õ£ºIncrementScopeTesting¡¢
-		        ValueScopeTesting¡£
-£¨11£©ÕæÊµµØÖ·£ºRealAddressTesting¡£
-£¨12£©Tiny£ºTinyTesting¡£
+å¯¹æ¨¡æ¿å·¥å…·æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ çº¦æŸï¼šConstraintTestingã€‚
+ï¼ˆ2ï¼‰ é˜¶ä¹˜ï¼šFactorialTestingã€‚
+ï¼ˆ3ï¼‰ æ–æ³¢é‚£å¥‘æ•°ï¼šFibonacciTestingã€‚
+ï¼ˆ4ï¼‰ å‚æ•°ç±»å‹ï¼šParamTypeTestingã€‚
+ï¼ˆ5ï¼‰ ä¸‰è§’å‡½æ•°ï¼šTrigonometricFunctionTestingã€‚
+ï¼ˆ6ï¼‰ æŒ‡é’ˆæ¯”è¾ƒï¼šPtrCompareTestingã€
+				RangeIterationTestingã€‚
+ï¼ˆ7ï¼‰ IfThenElseï¼šIfThenElseTestingã€‚
+ï¼ˆ8ï¼‰ æ•°å­¦å‡½æ•°ï¼šSqrtTestingã€
+			    Pow3Testingã€
+				MaxElementTestingã€‚
+ï¼ˆ9ï¼‰ è½¬æ¢ï¼šExplicitCastTestingã€
+			LiteralCastTestingã€
+			ReferenceCastTestingã€‚
+ï¼ˆ10ï¼‰è‡ªå¢è‡ªå‡ï¼šIncrementScopeTestingã€
+		        ValueScopeTestingã€‚
+ï¼ˆ11ï¼‰çœŸå®åœ°å€ï¼šRealAddressTestingã€‚
+ï¼ˆ12ï¼‰Tinyï¼šTinyTestingã€‚
 
 ----------------------------
 18.	 CommandSuite 
 
-¶ÔÃüÁîĞĞÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© ÃüÁîĞĞ²ÎÊı£ºCommandArgumentTesting¡£
-£¨2£© ÃüÁîĞĞĞÅÏ¢£ºCommandLineInformationTesting¡£
-£¨3£© ÃüÁîĞĞ£ºCommandHandleTesting¡£
+å¯¹å‘½ä»¤è¡Œæ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ å‘½ä»¤è¡Œå‚æ•°ï¼šCommandArgumentTestingã€‚
+ï¼ˆ2ï¼‰ å‘½ä»¤è¡Œä¿¡æ¯ï¼šCommandLineInformationTestingã€‚
+ï¼ˆ3ï¼‰ å‘½ä»¤è¡Œï¼šCommandHandleTestingã€‚
 
 ----------------------------
 19.	 MainFunctionHelperSuite 
 
-¶ÔÖ÷º¯Êı°ïÖúÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£©²âÊÔĞÅÏ¢°ïÖú£ºTestingInformationHelperTesting¡£
-£¨2£©¶¯Ì¬Á´½Ó¿âº¯Êı°ïÖú£ºDllFunctionHelperTesting¡¢
-						 ExecuteDllMainTesting¡£
-£¨3£©Ö÷º¯Êı°ïÖú£ºCMainFunctionHelperTesting¡£
-£¨4£©Ö÷º¯Êı²âÊÔ°ïÖú£ºCMainFunctionTestingHelperTesting¡£
+å¯¹ä¸»å‡½æ•°å¸®åŠ©æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰æµ‹è¯•ä¿¡æ¯å¸®åŠ©ï¼šTestingInformationHelperTestingã€‚
+ï¼ˆ2ï¼‰åŠ¨æ€é“¾æ¥åº“å‡½æ•°å¸®åŠ©ï¼šDllFunctionHelperTestingã€
+						 ExecuteDllMainTestingã€‚
+ï¼ˆ3ï¼‰ä¸»å‡½æ•°å¸®åŠ©ï¼šCMainFunctionHelperTestingã€‚
+ï¼ˆ4ï¼‰ä¸»å‡½æ•°æµ‹è¯•å¸®åŠ©ï¼šCMainFunctionTestingHelperTestingã€‚
 
 ----------------------------
 20.	 ModuleInitializerTerminatorSuite 
 
-¶ÔÄ£¿é×Ô¶¯¼°ÖÕÖ¹Ä£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£©Ä£¿éÅäÖÃ¡£ 
-£¨2£©Ä£¿é×Ô¶¯¼ÓÔØ¼°ÖÕÖ¹¡£
-£¨3£©Ä£¿éÖØÔØ¡£
+å¯¹æ¨¡å—è‡ªåŠ¨åŠç»ˆæ­¢æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰æ¨¡å—é…ç½®ã€‚ 
+ï¼ˆ2ï¼‰æ¨¡å—è‡ªåŠ¨åŠ è½½åŠç»ˆæ­¢ã€‚
+ï¼ˆ3ï¼‰æ¨¡å—é‡è½½ã€‚
 
 ----------------------------
 21.	 SyntacticParserSuite 
 
-¶ÔÓï·¨·ÖÎöÆ÷Ä£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© Óï·¨·ÖÎöÆ÷¡£
+å¯¹è¯­æ³•åˆ†æå™¨æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ è¯­æ³•åˆ†æå™¨ã€‚
 
 ----------------------------
 22.	 PerformanceProfilerSuite 
 
-¶ÔĞÔÄÜÆÊÎöºÍÍ³¼Æ²É¼¯Ä£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£©ĞÔÄÜÆÊÎöÆ÷¡£
-£¨2£©Í³¼Æ²É¼¯¡£
+å¯¹æ€§èƒ½å‰–æå’Œç»Ÿè®¡é‡‡é›†æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰æ€§èƒ½å‰–æå™¨ã€‚
+ï¼ˆ2ï¼‰ç»Ÿè®¡é‡‡é›†ã€‚
 
 ----------------------------
 23.	 EngineConfigurationSuite 
 
-¶ÔÒıÇæÅäÖÃÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© ×Ö·ûÌæ»»£ºStringReplacingTesting¡£
-£¨2£© ÒıÇæÅäÖÃ£ºGlobalConfigTesting¡¢
-			    SmtpConfigTesting¡£
+å¯¹å¼•æ“é…ç½®æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ å­—ç¬¦æ›¿æ¢ï¼šStringReplacingTestingã€‚
+ï¼ˆ2ï¼‰ å¼•æ“é…ç½®ï¼šGlobalConfigTestingã€
+			    SmtpConfigTestingã€‚
 
 ----------------------------
-24.	 PropertiesSuite£¨ÊôĞÔ£©
+24.	 PropertiesSuiteï¼ˆå±æ€§ï¼‰
 
-¶ÔÊôĞÔÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£©ÊôĞÔ£ºDirectPropertyInternalTesting¡¢
-		   MethodPropertyTesting¡¢
-		   PropertiesBaseTesting¡¢
-		   PropertyExternalTesting¡¢
-		   PropertyOffsetTesting¡¢
-		   SimplePropertyExternalTesting¡¢
-		   StaticPropertyExternalTesting¡£ 
+å¯¹å±æ€§æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰å±æ€§ï¼šDirectPropertyInternalTestingã€
+		   MethodPropertyTestingã€
+		   PropertiesBaseTestingã€
+		   PropertyExternalTestingã€
+		   PropertyOffsetTestingã€
+		   SimplePropertyExternalTestingã€
+		   StaticPropertyExternalTestingã€‚ 
 
 ----------------------------
 25.	 CyclicRedundancyCheckSuite 
 
-¶ÔCRCÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£©CheckSumĞ£ÑéÂëËã·¨£ºCyclicRedundancyCheckCcittTesting¡¢
-						 CyclicRedundancyCheckCcittUsingTableTesting¡¢
-						 CyclicRedundancyCheckHandleTesting¡¢
-						 IntelCheckSumTesting¡¢
-						 SevenModElevenCheckSumTesting¡¢
-						 SpecifyCheckSumTesting¡£
-£¨2£©CRC16Ëã·¨£ºCyclicRedundancyCheck16Testing¡£
-£¨3£©CRC32Ëã·¨£ºCyclicRedundancyCheck32Testing¡£
+å¯¹CRCæ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰CheckSumæ ¡éªŒç ç®—æ³•ï¼šCyclicRedundancyCheckCcittTestingã€
+						 CyclicRedundancyCheckCcittUsingTableTestingã€
+						 CyclicRedundancyCheckHandleTestingã€
+						 IntelCheckSumTestingã€
+						 SevenModElevenCheckSumTestingã€
+						 SpecifyCheckSumTestingã€‚
+ï¼ˆ2ï¼‰CRC16ç®—æ³•ï¼šCyclicRedundancyCheck16Testingã€‚
+ï¼ˆ3ï¼‰CRC32ç®—æ³•ï¼šCyclicRedundancyCheck32Testingã€‚
 
 ----------------------------
 26.	 MessageEventSuite 
 
-¶ÔÏûÏ¢ÊÂ¼şÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£©ÊµÌåÏûÏ¢£ºParametersInterfaceTesting¡¢
-			   CallbackParametersTesting¡¢
-			   EventInterfaceTesting¡¢
-			   EventSlotTesting¡¢
-			   EventSlotManagerTesting¡¢
-			   MessageManagerTesting¡¢
-			   TelegramTesting¡¢
-			   TelegramLessTesting¡£ 
-£¨2£©Àà¼àÌıÊÂ¼ş£ºBaseEntityTesting¡¢
-				 EntityManagerTesting¡¢
-				 EventEntityTesting¡¢
-				 TelegramMessageManagerTesting¡£
+å¯¹æ¶ˆæ¯äº‹ä»¶æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰å®ä½“æ¶ˆæ¯ï¼šParametersInterfaceTestingã€
+			   CallbackParametersTestingã€
+			   EventInterfaceTestingã€
+			   EventSlotTestingã€
+			   EventSlotManagerTestingã€
+			   MessageManagerTestingã€
+			   TelegramTestingã€
+			   TelegramLessTestingã€‚ 
+ï¼ˆ2ï¼‰ç±»ç›‘å¬äº‹ä»¶ï¼šBaseEntityTestingã€
+				 EntityManagerTestingã€
+				 EventEntityTestingã€
+				 TelegramMessageManagerTestingã€‚
 
 ----------------------------
 27.	 StateMachineManagerSuite 
 
-¶Ô×´Ì¬»úÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© ×´Ì¬»ú¹ÜÀíÆ÷£ºStateEntityTesting¡¢
-					StateMachineTesting¡£
+å¯¹çŠ¶æ€æœºæ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ çŠ¶æ€æœºç®¡ç†å™¨ï¼šStateEntityTestingã€
+					StateMachineTestingã€‚
 
 ----------------------------
 28.  NetworkSuite 
 
-¶ÔÍøÂçÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£© ÍøÂç¡£
+å¯¹ç½‘ç»œæ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰ ç½‘ç»œã€‚
 
 ----------------------------
 29.  CoroutineSuite 
 
-¶ÔĞ­³ÌÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º
-£¨1£©Ğ­³Ì¡£
+å¯¹åç¨‹æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š
+ï¼ˆ1ï¼‰åç¨‹ã€‚
 
 ----------------------------

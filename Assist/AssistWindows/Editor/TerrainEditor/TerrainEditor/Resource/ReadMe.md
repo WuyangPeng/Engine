@@ -1,11 +1,11 @@
-@ingroup group_TerrainEditor_Documentation
+ï»¿@ingroup group_TerrainEditor_Documentation
 
 ----------------------------
-µØÐÎ±à¼­Æ÷
+åœ°å½¢ç¼–è¾‘å™¨
 
 1.   TerrainEditor 
 
-µØÐÎ±à¼­Æ÷£¬°üÀ¨£º 
-£¨1£©µØÐÎ¡£
+åœ°å½¢ç¼–è¾‘å™¨ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰åœ°å½¢ã€‚
 
 ----------------------------

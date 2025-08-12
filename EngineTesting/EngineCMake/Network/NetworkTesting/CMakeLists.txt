@@ -9,9 +9,17 @@ include_directories($ENV{EngineTestingInclude}/Network/NetworkTesting/NetworkMes
 
 # 将源代码添加到此项目的可执行文件。
 if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+
     add_executable(NetworkTestingD ${SRC_DIR_LIST})
+
+    target_compile_definitions(NetworkTestingD PRIVATE PROTO_BUF_PRAGMA_WARNING)
+
 else ()
+
     add_executable(NetworkTesting ${SRC_DIR_LIST})
+
+    target_compile_definitions(NetworkTesting PRIVATE PROTO_BUF_PRAGMA_WARNING)
+
 endif ()
 
 # TODO: 如有需要，请添加测试并安装目标。

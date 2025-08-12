@@ -1,12 +1,12 @@
-@ingroup group_WorldServerTesting_Documentation
+ï»¿@ingroup group_WorldServerTesting_Documentation
 
 ----------------------------
-ÊÀ½ç·şÎñÆ÷µ¥Ôª²âÊÔ
+ä¸–ç•ŒæœåŠ¡å™¨å•å…ƒæµ‹è¯•
 
-Ä¿Ç°°üº¬£º
+ç›®å‰åŒ…å«ï¼š
 
-1. WorldServer£¨ÊÀ½ç·şÎñÆ÷£©
+1. WorldServerï¼ˆä¸–ç•ŒæœåŠ¡å™¨ï¼‰
 
-£¨1£©ÊÀ½ç·şÎñÆ÷¡£
+ï¼ˆ1ï¼‰ä¸–ç•ŒæœåŠ¡å™¨ã€‚
 
 ----------------------------

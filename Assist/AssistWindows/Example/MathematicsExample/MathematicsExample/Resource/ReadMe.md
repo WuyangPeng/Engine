@@ -1,11 +1,11 @@
-@ingroup group_MathematicsExample_Documentation
+ï»¿@ingroup group_MathematicsExample_Documentation
 
 ----------------------------
-ÊıÑ§Àı×Ó
+æ•°å­¦ä¾‹å­
 
 1.   MathematicsExample 
 
-ÊıÑ§Àı×Ó£¬°üÀ¨£º 
-£¨1£©ÊıÑ§¡£
+æ•°å­¦ä¾‹å­ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰æ•°å­¦ã€‚
 
 ----------------------------

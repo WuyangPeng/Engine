@@ -1,12 +1,12 @@
-@ingroup group_Interface_Documentation
+О╩©@ingroup group_Interface_Documentation
 
 ----------------------------
-╫с©здё©И 
+Ф▌╔Е▐ёФ╗║Е²≈ 
 
-д©г╟╟Э╨╛ё╨
+Г⌡╝Е┴█Е▄┘Е░╚О╪ 
 
-1.	Interfaceё╗╫с©зё╘
+1.	InterfaceО╪┬Ф▌╔Е▐ёО╪┴
  
-ё╗1ё╘╫с©з║ё
+О╪┬1О╪┴Ф▌╔Е▐ёЦ─┌
 
 ----------------------------

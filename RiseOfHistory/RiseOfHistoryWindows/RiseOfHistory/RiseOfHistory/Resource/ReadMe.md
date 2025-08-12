@@ -1,6 +1,6 @@
-@ingroup group_RiseOfHistory_Documentation
+ï»¿@ingroup group_RiseOfHistory_Documentation
 
 ---------------------------- 
-ÀúÊ·µÄáÈÆğ¹æ·¶
+å†å²çš„å´›èµ·è§„èŒƒ
  
 ---------------------------- 

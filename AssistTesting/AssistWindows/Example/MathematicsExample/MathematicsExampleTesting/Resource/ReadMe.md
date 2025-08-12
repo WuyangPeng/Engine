@@ -1,11 +1,11 @@
-@ingroup group_MathematicsExampleTesting_Documentation
+ï»¿@ingroup group_MathematicsExampleTesting_Documentation
 
 ----------------------------
-ÊıÑ§Àı×Óµ¥Ôª²âÊÔ
+æ•°å­¦ä¾‹å­å•å…ƒæµ‹è¯•
 
 1.   MathematicsExampleTesting 
 
-ÊıÑ§Àı×ÓµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£©ÊıÑ§Àı×Ó¡£
+æ•°å­¦ä¾‹å­çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰æ•°å­¦ä¾‹å­ã€‚
 
 ----------------------------

@@ -1,53 +1,53 @@
-@ingroup group_ScriptTesting_Documentation
+﻿@ingroup group_ScriptTesting_Documentation
 
 ----------------------------
-�ű��ⵥԪ����
+脚本库单元测试
 
 1.   HelperSuite 
 
-�԰���ģ��ĵ�Ԫ���ԣ� 
-��1���û��ꡣ
+对帮助模块的单元测试： 
+（1）用户宏。
 
 ----------------------------
 2.	ConfigurationSuite
 
-������ģ��ĵ�Ԫ���ԣ� 
-��1�����á�
+对配置模块的单元测试： 
+（1）配置。
 
 ----------------------------
 3.	InterfaceSuite
 
-�Խӿ�ģ��ĵ�Ԫ���ԣ� 
-��1���ӿڡ�
+对接口模块的单元测试： 
+（1）接口。
 
 ----------------------------
 4.	JavaSuite
 
-��Javaģ��ĵ�Ԫ���ԣ� 
-��1��Java��
+对Java模块的单元测试： 
+（1）Java。
 
 ----------------------------
 5.	LuaSuite
 
-��luaģ��ĵ�Ԫ���ԣ� 
-��1��lua��
+对lua模块的单元测试： 
+（1）lua。
 
 ----------------------------
 6.	PerlSuite
 
-��Perlģ��ĵ�Ԫ���ԣ� 
-��1��Perl��
+对Perl模块的单元测试： 
+（1）Perl。
 
 ----------------------------
 7.	PythonSuite
 
-��Pythonģ��ĵ�Ԫ���ԣ� 
-��1��Python��
+对Python模块的单元测试： 
+（1）Python。
 
 ----------------------------
 8.	TCREScriptSuite 
 
-��TCREScriptģ��ĵ�Ԫ���ԣ� 
-��1��TCREScript��
+对TCREScript模块的单元测试： 
+（1）TCREScript。
 
 ----------------------------

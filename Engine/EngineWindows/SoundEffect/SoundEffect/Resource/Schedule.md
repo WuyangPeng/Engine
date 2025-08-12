@@ -1,29 +1,29 @@
-@ingroup group_SoundEffect_Documentation
+﻿@ingroup group_SoundEffect_Documentation
 
 ----------------------------
-��Ч
+音效
  
 ----------------------------
 SoundEffect
 
 ----------------------------	
-��������
-	dll/lib��
+工程类型
+	dll/lib。
 
 ----------------------------
-״̬
-	Ŀǰ�汾��1.0.0.3��
+状态
+	目前版本：1.0.0.3。
 
 ---------------------------- 
-ʵ������
-	1.	����ģ�飺һЩϵͳ��صĺ�ͳ����Ķ��塣 
-	2.	���ã���װ����Ч������á�  	
-	3.	�ӿڣ���װ����Ч���ͳһ�ӿڡ� 
-	4.	CsynUtil����װ��CsynUtil��
-	5.	DirectSound����װ��DirectSound��
-	6.	ogg����װ��ogg��
-	7.	OpenAL����װ��OpenAL��
-	8.	vorbis����װ��vorbis��
-	9.	FreeAlut����װ��FreeAlut��
+实现内容
+	1.	帮助模块：一些系统相关的宏和常量的定义。 
+	2.	配置：封装了音效库的配置。  	
+	3.	接口：封装了音效库的统一接口。 
+	4.	CsynUtil：封装了CsynUtil。
+	5.	DirectSound：封装了DirectSound。
+	6.	ogg：封装了ogg。
+	7.	OpenAL：封装了OpenAL。
+	8.	vorbis：封装了vorbis。
+	9.	FreeAlut：封装了FreeAlut。
 
 ---------------------------- 

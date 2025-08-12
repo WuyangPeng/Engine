@@ -1,12 +1,12 @@
-@ingroup group_BackgroundClientTesting_Documentation
+ï»¿@ingroup group_BackgroundClientTesting_Documentation
 
 ----------------------------
-ºóÌ¨¿Í»§¶Ëµ¥Ôª²âÊÔ
+åå°å®¢æˆ·ç«¯å•å…ƒæµ‹è¯•
 
-Ä¿Ç°°üº¬£º
+ç›®å‰åŒ…å«ï¼š
 
-1. BackgroundClient£¨ºóÌ¨¿Í»§¶Ë£©
+1. BackgroundClientï¼ˆåå°å®¢æˆ·ç«¯ï¼‰
 
-£¨1£©ºóÌ¨¿Í»§¶Ë¡£
+ï¼ˆ1ï¼‰åå°å®¢æˆ·ç«¯ã€‚
 
 ----------------------------

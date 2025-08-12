@@ -1,7 +1,7 @@
-@ingroup group_ShaderEditorAssist_Documentation
+ï»¿@ingroup group_ShaderEditorAssist_Documentation
 
 ----------------------------
-×ÅÉ«Æ÷±à¼­Æ÷¸¨Öú
+ç€è‰²å™¨ç¼–è¾‘å™¨è¾…åŠ©
 
 1.  ShaderEditorAssist 
 

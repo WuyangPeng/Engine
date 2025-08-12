@@ -15,6 +15,7 @@
 #include "Mathematics/Algebra/Matrix3Detail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::ContMinSphere3<Real>::ContMinSphere3(const std::vector<Vector3<Real>>& points, Sphere3<Real>& minimal, Real epsilon)

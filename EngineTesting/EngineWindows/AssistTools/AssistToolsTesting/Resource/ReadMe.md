@@ -1,27 +1,27 @@
-@ingroup group_AnimationTesting_Documentation
+ï»¿@ingroup group_AnimationTesting_Documentation
 
 ----------------------------
-¸¨Öú¹¤¾ß¿âµ¥Ôª²âÊÔ
+è¾…åŠ©å·¥å…·åº“å•å…ƒæµ‹è¯•
 
 1.   HelperSuite 
 
-¶Ô°ïÖúÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£©ÓÃ»§ºê¡£ 
+å¯¹å¸®åŠ©æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰ç”¨æˆ·å®ã€‚ 
  
 ----------------------------
  2.  GenerateProjects
 
-¶ÔÉú³ÉÏîÄ¿Ä£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£©Éú³ÉÏîÄ¿£ºGameModuleTesting¡¢¡ï¡ï¡ï
-			   MiddleLayerModuleTesting¡¢¡ï¡ï¡ï
-			   GameParameterAnalysisTesting¡¢¡ï¡ï¡ï
-			   DefaultProjectGenerationTesting¡¢¡ï¡ï¡ï
-			   ClientProjectGenerationTesting¡¢¡ï¡ï¡ï
-			   ReplaceProjectGenerationTesting¡¢¡ï¡ï¡ï
-			   Utf8ReplaceProjectGenerationTesting¡¢¡ï¡ï¡ï
-			   SlnProjectGenerationTesting¡¢¡ï¡ï¡ï
-			   ReplaceTesting¡¢¡ï¡ï¡ï
-			   GenerateEngineTesting¡¢¡ï¡ï¡ï
-			   GenerateTestingEngineTesting¡£¡ï¡ï¡ï
+å¯¹ç”Ÿæˆé¡¹ç›®æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰ç”Ÿæˆé¡¹ç›®ï¼šGameModuleTestingã€â˜…â˜…â˜…
+			   MiddleLayerModuleTestingã€â˜…â˜…â˜…
+			   GameParameterAnalysisTestingã€â˜…â˜…â˜…
+			   DefaultProjectGenerationTestingã€â˜…â˜…â˜…
+			   ClientProjectGenerationTestingã€â˜…â˜…â˜…
+			   ReplaceProjectGenerationTestingã€â˜…â˜…â˜…
+			   Utf8ReplaceProjectGenerationTestingã€â˜…â˜…â˜…
+			   SlnProjectGenerationTestingã€â˜…â˜…â˜…
+			   ReplaceTestingã€â˜…â˜…â˜…
+			   GenerateEngineTestingã€â˜…â˜…â˜…
+			   GenerateTestingEngineTestingã€‚â˜…â˜…â˜…
 
 ----------------------------

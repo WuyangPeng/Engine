@@ -1,23 +1,23 @@
-@ingroup group_MainFunction_Documentation
+﻿@ingroup group_MainFunction_Documentation
 
 ----------------------------
-������
+主函数
 
 ----------------------------
 MainFunction
 	
 ----------------------------
-��������
-	exe������̨��
+工程类型
+	exe，控制台。
 
 ----------------------------
-״̬
-	Ŀǰ�汾��1.0.0.8��
+状态
+	目前版本：1.0.0.8。
 
 ----------------------------   
-ʵ������
-	1.�Ժ�CORE_TOOLS_MUTEX_INIT���в��ԡ�
-	2.�Ժ�CORE_TOOLS_MUTEX_EXTERN���в��ԡ�
-	3.�Ժ�MAIN_FUNCTION���в��ԡ�
+实现内容
+	1.对宏CORE_TOOLS_MUTEX_INIT进行测试。
+	2.对宏CORE_TOOLS_MUTEX_EXTERN进行测试。
+	3.对宏MAIN_FUNCTION进行测试。
 
 ----------------------------   

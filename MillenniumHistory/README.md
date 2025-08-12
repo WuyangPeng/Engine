@@ -1,35 +1,35 @@
-@ingroup group_Documentation
+ï»¿@ingroup group_Documentation
 
 ---------------------------
-Ç§ÄêÊ·²ß£¨Millennium History£©
+åƒå¹´å²ç­–ï¼ˆMillennium Historyï¼‰
 
 ----------------------------
-Ç§ÄêÊ·²ß°üº¬23¸öÄ£¿é£º
+åƒå¹´å²ç­–åŒ…å«23ä¸ªæ¨¡å—ï¼š
 
 ---------------------------
 
-1. GameClient£¨ÓÎÏ·¿Í»§¶Ë£©
-2. RobotClient£¨»úÆ÷ÈË¿Í»§¶Ë£©
-3. MessageClient£¨ÏûÏ¢¿Í»§¶Ë£©
-4. BackgroundClient£¨ºóÌ¨¿Í»§¶Ë£©
-5. GatewayServer£¨Íø¹Ø·şÎñÆ÷£©
-6. LoginServer£¨µÇÂ½·şÎñÆ÷£©
-7. PlayerServer£¨Íæ¼Ò·şÎñÆ÷£©
-8. GameServer£¨ÓÎÏ··şÎñÆ÷£©
-9. FightingServer£¨Õ½¶··şÎñÆ÷£©
-10. WorldServer£¨ÊÀ½ç·şÎñÆ÷£©
-11. CrossServer£¨¿ç·ş·şÎñÆ÷£©
-12. OfflineServer£¨ÀëÏß·şÎñÆ÷£©
-13. LeaderboardServer£¨ÅÅĞĞ°ñ·şÎñÆ÷£©
-14. MailServer£¨ÓÊ¼ş·şÎñÆ÷£©
-15. ChatServer£¨ÁÄÌì·şÎñÆ÷£©
-16. RechargeServer£¨³äÖµ·şÎñÆ÷£©
-17. LogServer£¨ÈÕÖ¾·şÎñÆ÷£©
-18. GameMasterServer£¨ÓÎÏ·¹ÜÀíÔ±·şÎñÆ÷£©
-19. UpdateServer£¨¸üĞÂ·şÎñÆ÷£©
-20. BackgroundServer£¨ºóÌ¨·şÎñÆ÷£©
-21. DatabaseServer£¨Êı¾İ¿â·şÎñÆ÷£©
-22. ServerManager£¨·şÎñÆ÷¹ÜÀíÕß£©
-23. DatabaseGenerate£¨Êı¾İ¿âÉú³É£©
+1. GameClientï¼ˆæ¸¸æˆå®¢æˆ·ç«¯ï¼‰
+2. RobotClientï¼ˆæœºå™¨äººå®¢æˆ·ç«¯ï¼‰
+3. MessageClientï¼ˆæ¶ˆæ¯å®¢æˆ·ç«¯ï¼‰
+4. BackgroundClientï¼ˆåå°å®¢æˆ·ç«¯ï¼‰
+5. GatewayServerï¼ˆç½‘å…³æœåŠ¡å™¨ï¼‰
+6. LoginServerï¼ˆç™»é™†æœåŠ¡å™¨ï¼‰
+7. PlayerServerï¼ˆç©å®¶æœåŠ¡å™¨ï¼‰
+8. GameServerï¼ˆæ¸¸æˆæœåŠ¡å™¨ï¼‰
+9. FightingServerï¼ˆæˆ˜æ–—æœåŠ¡å™¨ï¼‰
+10. WorldServerï¼ˆä¸–ç•ŒæœåŠ¡å™¨ï¼‰
+11. CrossServerï¼ˆè·¨æœæœåŠ¡å™¨ï¼‰
+12. OfflineServerï¼ˆç¦»çº¿æœåŠ¡å™¨ï¼‰
+13. LeaderboardServerï¼ˆæ’è¡Œæ¦œæœåŠ¡å™¨ï¼‰
+14. MailServerï¼ˆé‚®ä»¶æœåŠ¡å™¨ï¼‰
+15. ChatServerï¼ˆèŠå¤©æœåŠ¡å™¨ï¼‰
+16. RechargeServerï¼ˆå……å€¼æœåŠ¡å™¨ï¼‰
+17. LogServerï¼ˆæ—¥å¿—æœåŠ¡å™¨ï¼‰
+18. GameMasterServerï¼ˆæ¸¸æˆç®¡ç†å‘˜æœåŠ¡å™¨ï¼‰
+19. UpdateServerï¼ˆæ›´æ–°æœåŠ¡å™¨ï¼‰
+20. BackgroundServerï¼ˆåå°æœåŠ¡å™¨ï¼‰
+21. DatabaseServerï¼ˆæ•°æ®åº“æœåŠ¡å™¨ï¼‰
+22. ServerManagerï¼ˆæœåŠ¡å™¨ç®¡ç†è€…ï¼‰
+23. DatabaseGenerateï¼ˆæ•°æ®åº“ç”Ÿæˆï¼‰
 
 ---------------------------

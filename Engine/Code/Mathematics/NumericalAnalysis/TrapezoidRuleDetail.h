@@ -12,6 +12,7 @@
 
 #include "TrapezoidRule.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real, typename UserDataType>
 Mathematics::TrapezoidRule<Real, UserDataType>::TrapezoidRule(int numSamples, Real begin, Real end, Function function, const UserDataType* userData)

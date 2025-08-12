@@ -1,12 +1,12 @@
-@ingroup group_RelationTesting_Documentation
+ï»¿@ingroup group_RelationTesting_Documentation
 
 ----------------------------
-¹ØÏµÄ£¿éµ¥Ôª²âÊÔ 
+å…³ç³»æ¨¡å—å•å…ƒæµ‹è¯• 
 
-Ä¿Ç°°üº¬£º
+ç›®å‰åŒ…å«ï¼š
 
-1.	Relation£¨¹ØÏµ£©
+1.	Relationï¼ˆå…³ç³»ï¼‰
  
-£¨1£©¹ØÏµ¡£
+ï¼ˆ1ï¼‰å…³ç³»ã€‚
 
 ----------------------------

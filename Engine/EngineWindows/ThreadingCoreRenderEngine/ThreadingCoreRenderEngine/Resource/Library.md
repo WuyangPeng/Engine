@@ -1,300 +1,195 @@
-@ingroup group_Engine_Documentation
+ï»¿@ingroup group_Engine_Documentation
 
-----------------------------
-¿â
+---
+# åº“
 
-----------------------------
-GSL£¨ÒıÇæÖ±½Ó¹ØÁª£©
+---
+## GSLï¼ˆå¼•æ“ç›´æ¥å…³è”ï¼‰
 
-1. ¹Ù·½ÍøÕ¾£ºhttps://github.com/microsoft/GSL¡£
-2. gitµØÖ·£ºhttps://github.com/microsoft/GSL.git¡£
+1. å®˜æ–¹ç½‘ç«™ï¼šhttps://github.com/microsoft/GSLã€‚
+2. gitåœ°å€ï¼šhttps://github.com/microsoft/GSL.gitã€‚
 
-----------------------------
-CppCoreGuidelines£¨ÒıÇæÖ±½Ó¹ØÁª£©
+---
+## CppCoreGuidelinesï¼ˆå¼•æ“ç›´æ¥å…³è”ï¼‰
 
-1. ¹Ù·½ÍøÕ¾£ºhttps://github.com/isocpp/CppCoreGuidelines¡£
-2. gitµØÖ·£ºhttps://github.com/isocpp/CppCoreGuidelines.git¡£
+1. å®˜æ–¹ç½‘ç«™ï¼šhttps://github.com/isocpp/CppCoreGuidelinesã€‚
+2. gitåœ°å€ï¼šhttps://github.com/isocpp/CppCoreGuidelines.gitã€‚
 
-----------------------------
-OpenGL£¨ÒıÇæÖ±½Ó¹ØÁª£©
+---
+## OpenGLï¼ˆå¼•æ“ç›´æ¥å…³è”ï¼‰
 
-1. °æ±¾£º4.6¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://www.opengl.org/registry/¡£
-3. gitµØÖ·£ºhttps://github.com/KhronosGroup/OpenGL-Registry.git¡£
+1. ç‰ˆæœ¬ï¼š4.6ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://www.opengl.org/registry/ã€‚
+3. gitåœ°å€ï¼šhttps://github.com/KhronosGroup/OpenGL-Registry.gitã€‚
 
-----------------------------
-EGL£¨ÒıÇæÖ±½Ó¹ØÁª£©
+---
+## EGLï¼ˆå¼•æ“ç›´æ¥å…³è”ï¼‰
 
-1. °æ±¾£º1.5¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://www.khronos.org/registry/EGL/¡£
-3. gitµØÖ·£ºhttps://github.com/KhronosGroup/EGL-Registry.git¡£
+1. ç‰ˆæœ¬ï¼š1.5ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://www.khronos.org/registry/EGL/ã€‚
+3. gitåœ°å€ï¼šhttps://github.com/KhronosGroup/EGL-Registry.gitã€‚
 
-----------------------------
-boost£¨ÒıÇæÖ±½Ó¹ØÁª£©
+---
+## boostï¼ˆå¼•æ“ç›´æ¥å…³è”ï¼‰
 
-1. °æ±¾£º1.83.0¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://www.boost.org/¡£
-3. Windows±àÒëÖ¸Áî£º
-  £¨1£©ÔËĞĞbootstrap¡£
-  £¨2£©ÔËĞĞb2£¨×îĞÂ°æ±¾£©
-		   b2 --toolset=msvc-14.2£¨ÌØ¶¨°æ±¾£©           	
-  £¨3£©ÓÉÓÚÁ´½Ócontext¿âĞèÒª£¬Ê¹ÓÃÑ¡Ïîasmflags=\safeseh¡£
-4. linux±àÒëÖ¸Áî£º
-  £¨1£©./bootstrap.sh --with-libraries=all --with-toolset=gcc
-  £¨2£©./b2 install --prefix=/data/coding/Libs/boost/stage/
+1. ç‰ˆæœ¬ï¼š1.88.0ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://www.boost.org/ã€‚
+3. Windowsç¼–è¯‘æŒ‡ä»¤ï¼š  
+  ï¼ˆ1ï¼‰è¿è¡Œbootstrapã€‚  
+  ï¼ˆ2ï¼‰è¿è¡Œb2ï¼ˆæœ€æ–°ç‰ˆæœ¬ï¼‰b2 --toolset=msvc-14.2ï¼ˆç‰¹å®šç‰ˆæœ¬ï¼‰
+4. linuxç¼–è¯‘æŒ‡ä»¤ï¼š  
+  ï¼ˆ1ï¼‰./bootstrap.sh --with-libraries=all --with-toolset=gcc  
+  ï¼ˆ2ï¼‰./b2 install --prefix=/data/coding/Libs/boost/stage/ cxxflags="-std=c++20"
 
-----------------------------
-stlsoft£¨ÒıÇæÖ±½Ó¹ØÁª£©
+---
+## ACEï¼ˆå¼•æ“é€šè¿‡å®NETWORK_USE_ACEå…³è”ï¼‰
 
-1. °æ±¾£º1.10.11¡£
-2. gitµØÖ·£ºhttps://github.com/synesissoftware/STLSoft-1.10
-3. ÔÚstlsoft.hµÚ795ĞĞÔö¼Ó
-	#  elif (_MSC_VER < 2000)
-	#   define STLSOFT_COMPILER_VERSION_STRING                  "Visual C++ 16.x"
-
-----------------------------
-ACE£¨ÒıÇæÍ¨¹ıºêNETWORK_USE_ACE¹ØÁª£©
-
-1. °æ±¾£º7.1.0¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://download.dre.vanderbilt.edu/¡¢ http://www.dre.vanderbilt.edu/~schmidt/ACE.html¡£
-3. ÔÚaceÄ¿Â¼ÏÂÔö¼ÓÎÄ¼şconfig.h°üº¬ÕıÈ·µÄconfigÎÄ¼ş¡£
-   #ifndef ACE_CONFIG_H
+1. ç‰ˆæœ¬ï¼š8.0.4ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://download.dre.vanderbilt.edu/ã€ http://www.dre.vanderbilt.edu/~schmidt/ACE.htmlã€‚
+3. åœ¨aceç›®å½•ä¸‹å¢åŠ æ–‡ä»¶config.håŒ…å«æ­£ç¡®çš„configæ–‡ä»¶ã€‚  
+   #ifndef ACE_CONFIG_H  
    #define ACE_CONFIG_H
 
        #include "config-win32.h"
 
-   #endif /* ACE_CONFIG_H */
-   ¿ÉÊ¹ÓÃACEÏÂµÄÅú´¦ÀíÎÄ¼şCopyACEConfigÖ´ĞĞ¡£
-4. ±àÒëºÃx64°æ±¾ºó£¬ÊÖ¶¯½«ACE\ACE_wrappers\libÏÂÎÄ¼ş¸´ÖÆµ½ACE\ACE_wrappers\lib\X64£¬
-   È»ºóÔÙ±àÒëWin32°æ±¾£¬ÊÖ¶¯½«ACE\ACE_wrappers\libÏÂÎÄ¼ş¸´ÖÆµ½ACE\ACE_wrappers\lib\Win32¡£
-   ¿ÉÊ¹ÓÃACEÏÂµÄÅú´¦ÀíÎÄ¼şCopyACEWin32ºÍCopyACEX64Ö´ĞĞ¡£
+   #endif /* ACE_CONFIG_H */  
+   å¯ä½¿ç”¨ACEä¸‹çš„æ‰¹å¤„ç†æ–‡ä»¶CopyACEConfigæ‰§è¡Œã€‚
+4. ç¼–è¯‘å¥½x64ç‰ˆæœ¬åï¼Œæ‰‹åŠ¨å°†ACE\ACE_wrappers\libä¸‹æ–‡ä»¶å¤åˆ¶åˆ°ACE\ACE_wrappers\lib\x64ï¼Œ  
+   ç„¶åå†ç¼–è¯‘Win32ç‰ˆæœ¬ï¼Œæ‰‹åŠ¨å°†ACE\ACE_wrappers\libä¸‹æ–‡ä»¶å¤åˆ¶åˆ°ACE\ACE_wrappers\lib\Win32ã€‚  
+   å¯ä½¿ç”¨ACEä¸‹çš„æ‰¹å¤„ç†æ–‡ä»¶CopyACEWin32å’ŒCopyACEX64æ‰§è¡Œã€‚
 
-----------------------------
-openssl£¨ÒıÇæÍ¨¹ıºêNETWORK_USE_OPENSSL¹ØÁª£©
+---
+## opensslï¼ˆå¼•æ“é€šè¿‡å®NETWORK_USE_OPENSSLå…³è”ï¼‰
 
-1. °æ±¾£º3.0.9¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://www.openssl.org/ ¡£
-3. ÏÂÔØ²¢°²×° ActivePerl¡£ÏÂÔØµØÖ·£ºhttp://www.activestate.com/activeperl/downloads 
-4. ´ò¿ªÃüÁîÌáÊ¾·û£¬¶¨Î»µ½ ($Perl64)\eg Ä¿Â¼£¬Ö´ĞĞ perl example.pl£¬
-   ÈôÌáÊ¾ Hello from ActivePerl! ÔòËµÃ÷ Perl °²×°³É¹¦¡£
-5. ÏÂÔØ²¢°²×° Nasm »ã±àÆ÷£¬²¢½«($NASM)\Ä¿Â¼Ìí¼Óµ½ÏµÍ³»·¾³±äÁ¿ Path ÖĞ¡£
-   ÏÂÔØµØÖ·£ºhttp://www.nasm.us/ ¡£
-6. Í¨¹ı¹ÜÀíÔ±Éí·İÔËĞĞVS£¬²¢´ò¿ªÃüÁîÌáÊ¾·û£¬¶¨Î»ÖÁ ($openssl)Ä¿Â¼
-7. ÊäÈëperl Configure VC-WIN32 --debug --prefix=($openssl)\Win32\Debug£¨±àÒëdebug°æ£©£¬
-   perl Configure VC-WIN32 --prefix=($openssl)\Win32\Release£¨±àÒërelease°æ±¾£©£¬    
-   »á³öÏÖ´íÎó£¬¿ÉºöÂÔ¡£
-8. ±àÒëX64£¬×ªµ½Ä¿Â¼Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\BuildÏÂÔËĞĞvcvars64.bat£¬
-   È»ºóÊäÈë perl Configure VC-WIN64A --debug --prefix=($openssl)\X64\Debug£¨±àÒëdebug°æ£©¡£
-   perl Configure VC-WIN64A --prefix=($openssl)\X64\Release£¨±àÒërelease°æ£©¡£    
-9. ±àÒëËÄ¸ö°æ±¾ÖĞĞèÒªÖ´ĞĞ nmake clean£¬ÔÙÊäÈëperlÓï¾ä¡£È»ºó
-   Ö´ĞĞ nmake¡¢nmake test¡¢nmake install¡£
+1. ç‰ˆæœ¬ï¼š3.5.1ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://www.openssl.org/ ã€‚
+3. ä¸‹è½½å¹¶å®‰è£… Strawberry Perlã€‚ä¸‹è½½åœ°å€ï¼šhttps://strawberryperl.com/
+4. ä¸‹è½½å¹¶å®‰è£… Nasm æ±‡ç¼–å™¨ï¼Œå¹¶å°†($NASM)\ç›®å½•æ·»åŠ åˆ°ç³»ç»Ÿç¯å¢ƒå˜é‡ Path ä¸­ã€‚
+   ä¸‹è½½åœ°å€ï¼šhttp://www.nasm.us/ ã€‚
+5. é€šè¿‡ç®¡ç†å‘˜èº«ä»½è¿è¡ŒVSï¼Œå¹¶æ‰“å¼€å‘½ä»¤æç¤ºç¬¦ï¼Œå®šä½è‡³ ($openssl)ç›®å½•ã€‚
+6. å¦‚æœæ­£åœ¨ç¼–è¯‘X64ï¼Œè½¬åˆ°ç›®å½•Microsoft Visual Studio\2022\Community\VC\Auxiliary\Buildä¸‹è¿è¡Œvcvars64.batï¼Œ
+7. è¾“å…¥perlè¯­å¥ï¼šperl Configure VC-WIN32 --debug --prefix=($openssl)\Win32\Debugï¼ˆç¼–è¯‘Win32 debugç‰ˆï¼‰ï¼Œ  
+   perl Configure VC-WIN32 --prefix=($openssl)\Win32\Releaseï¼ˆç¼–è¯‘Win32 releaseç‰ˆæœ¬ï¼‰ï¼Œ  
+   perl Configure VC-WIN64A --debug --prefix=($openssl)\x64\Debugï¼ˆç¼–è¯‘x64 debugç‰ˆï¼‰ï¼Œ  
+   perl Configure VC-WIN64A --prefix=($openssl)\x64\Releaseï¼ˆç¼–è¯‘x64 releaseç‰ˆï¼‰ã€‚  
+8. æ‰§è¡Œ nmakeã€nmake testã€nmake installã€‚  
+9. ç¼–è¯‘å››ä¸ªç‰ˆæœ¬ä¸­éœ€è¦æ‰§è¡Œ nmake cleanï¼Œå†è¾“å…¥ä¸‹ä¸ªç‰ˆæœ¬çš„perlè¯­å¥ã€‚
 
-----------------------------
+---
+## mysql ï¼ˆå¼•æ“é€šè¿‡å®DATABASE_USE_MYSQL_C_APIå…³è”ï¼‰
+1.  ç‰ˆæœ¬ï¼š9.4.0ã€‚
+2.  å®˜æ–¹ç½‘ç«™ï¼šhttps://www.mysql.com/ã€‚
+3.  ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
+4.  å®šä¹‰WITHOUT_SERVERã€‚
+5.  å®šä¹‰æ­£ç¡®çš„OPENSSL_ROOT_DIRåˆ°($openssl)ï¼Œéœ€è¦é“¾æ¥å¯¹åº”ç‰ˆæœ¬çš„opensslã€‚
 
-mysql £¨ÒıÇæÍ¨¹ıºêDATABASE_USE_MYSQL_C_API¹ØÁª£©
-1.  °æ±¾£º8.0.33¡£
-2.  ¹Ù·½ÍøÕ¾£ºhttps://www.mysql.com/¡£
-3.  ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-4.  ¶¨ÒåWITHOUT_SERVER¡£
-5.  ¶¨ÒåÕıÈ·µÄBOOST_INCLUDE_DIRµ½($boost)¡£
-6.  boost.cmake 41ĞĞ¡¢304ĞĞ¡¢306ĞĞ¡¢314ĞĞ¸Ä³Éµ±Ç°Ê¹ÓÃµÄboost¿â°æ±¾¡£
-7.  ¶¨ÒåÕıÈ·µÄOPENSSL_ROOT_DIRµ½($openssl)£¬ĞèÒªÁ´½Ó¶ÔÓ¦°æ±¾µÄopenssl¡£
-
-----------------------------
-mysql connector c++£¨ÒıÇæÍ¨¹ıºêDATABASE_USE_MYSQL_CPP_CONNECTOR¹ØÁª£©
-1. °æ±¾£º8.0.33¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://www.mysql.com/¡£
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-4. ÉèÖÃÕıÈ·µÄWITH_SSL£¨Ô­Îªsystem£©Ö¸Ïò¶ÔÓ¦°æ±¾µÄ($openssl)£¬Èç±àÒëµÄÊÇx64°æ±¾£¬ĞèÒªÖ¸Ïòx64µÄopenssl¡£
-5. WIN32°æ±¾Èç¹ûÎŞ·¨±àÒë£¬Ê¹ÓÃCMakeÖØĞÂÉú³ÉÒÔÏÂ¹¤³Ì£º
-   $(MysqlConnectorCpp)\cdk\extra\zlib£¬Éú³ÉÄ¿Â¼£º$(MysqlConnectorCpp)\BuildWin32\cdk\protocol\mysqlx\zlib
-   $(MysqlConnectorCpp)\cdk\extra\zstd Éú³ÉÄ¿Â¼£º$(MysqlConnectorCpp)\BuildWin32\cdk\protocol\mysqlx\zstd
-   $(MysqlConnectorCpp)\cdk\extra\lz4 Éú³ÉÄ¿Â¼£º$(MysqlConnectorCpp)\BuildWin32\cdk\protocol\mysqlx\lz4
-   $(MysqlConnectorCpp)\cdk\extra\protobuf Éú³ÉÄ¿Â¼£º$(MysqlConnectorCpp)\BuildWin32\cdk\protocol\mysqlx\protobuf
+---
+## mysql connector c++ï¼ˆå¼•æ“é€šè¿‡å®DATABASE_USE_MYSQL_CPP_CONNECTORå…³è”ï¼‰
+1. ç‰ˆæœ¬ï¼š9.4.0ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://www.mysql.com/ã€‚
+3. ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
+4. è®¾ç½®æ­£ç¡®çš„WITH_SSLï¼ˆåŸä¸ºsystemï¼‰æŒ‡å‘å¯¹åº”ç‰ˆæœ¬çš„($openssl)ï¼Œå¦‚ç¼–è¯‘çš„æ˜¯x64ç‰ˆæœ¬ï¼Œéœ€è¦æŒ‡å‘x64çš„opensslã€‚
    
-----------------------------  
-protobuf£¨ÒıÇæÍ¨¹ıºêNETWORK_USE_PROTOBUF¹ØÁª£©
-1. °æ±¾£º21.12¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://github.com/protocolbuffers/protobuf¡£
-3. gitµØÖ·£ºhttps://github.com/protocolbuffers/protobuf.git¡£
-4. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-5. Ñ¡ÖĞprotobuf_BUILD_SHARED_LIBS¡£
-6. port_def.incÎ²²¿Ôö¼Ó
-   #ifdef PROTO_BUF_PRAGMA_WARNING
-	#include "System/Helper/PragmaWarning/ProtoBuf.inl"
-   #endif
-
-----------------------------
-freeglut£¨ÒıÇæÍ¨¹ıºêSYSTEM_USE_GLUT¹ØÁª£©
-
-1. °æ±¾£º3.2.2¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://freeglut.sourceforge.net/¡£
-3. gitµØÖ·£ºhttps://github.com/dcnieho/FreeGLUT¡£
-4. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-
-----------------------------
-wxWidgets£¨ÒıÇæÍ¨¹ıºêUSER_INTERFACE_USE_WX_WIDGETS¹ØÁª£©
-
-1. °æ±¾£º3.2.0¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://www.wxwidgets.org/¡£
-
-----------------------------
-opencv£¨ÒıÇæÍ¨¹ıºêIMAGICS_USE_OPENCV¹ØÁª£©
-
-1. °æ±¾£º4.6.0¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://opencv.org/
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-
-----------------------------
-Visual Leak Detector£¨ÒıÇæDebug°æ±¾Ö±½Ó¹ØÁª£©
-
-1. °æ±¾£º2.7.0¡£
-2. gitµØÖ·£ºhttps://github.com/oneiric/vld ¡£
-3. Allocs.cppµÚ39ĞĞ£¬testsuite.cppµÚ78ĞĞÔö¼Ó 
-   #elif _MSC_VER > 1927	// VS 2019
-   #define CRTDLLNAME   _T("ucrtbased.dll")
-4. Allocs.cppµÚ67ĞĞ£¬testsuite.cppµÚ105ĞĞÔö¼Ó 
-   #elif _MSC_VER > 1927	// VS 2019
-   #define CRTDLLNAME   _T("ucrtbase.dll") 
-5. src\testsÏÂCommon.propsµÚ18ĞĞ¸Ä³Év142¡£
-
-----------------------------
-OpenAL Soft£¨ÒıÇæÍ¨¹ıºêSOUND_EFFECT_USE_OPENAL¹ØÁª£©
-
-1. °æ±¾£º1.22.2¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://www.openal-soft.org/¡£
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-
-----------------------------
-zlib£¨ÒıÇæÖ±½Ó¹ØÁª£©
-
-1. °æ±¾£º1.2.12¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://www.zlib.net/
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-
-----------------------------
-freetype£¨ÒıÇæÖ±½Ó¹ØÁª£©
-
-1. °æ±¾£º2.12.1¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://www.freetype.org/
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-
-----------------------------
-lua£¨ÒıÇæÍ¨¹ıºêSCRIPT_USE_LUA¹ØÁª£©
-
-1. °æ±¾£º5.4.4¡£
-2. ¹Ù·½ÍøÕ¾£ºhttp://www.lua.org/
-3. ÔÚbuildÏÂ½¨Á¢VS¹¤³Ì£¬lua£¬¾²Ì¬¿â¡£°üº¬ÒÔÏÂÎÄ¼ş£ºlapi.c lcode.c lctype.c ldebug.c ldo.c ldump.c 
-   lfunc.c lgc.c llex.c lmem.c lobject.c lopcodes.c lparser.c lstate.c lstring.c ltable.c ltm.c 
-   lundump.c lvm.c lzio.c lauxlib.c lbaselib.c lbitlib.c lcorolib.c ldblib.c liolib.c lmathlib.c 
-   loslib.c lstrlib.c ltablib.c lutf8lib.c loadlib.c linit.c¡££¨³ıÈ¥luac.cºÍlua.cµÄËùÓĞÎÄ¼ş£©¡£
-   Êä³öÄ¿Â¼¸Ä³É£º$(SolutionDir)$(Platform)\$(Configuration)\¡£
-4. ½¨Á¢VS¹¤³Ì£¬³ÌĞòinterpreter£¨°üº¬lua.c£©ºÍcompiler£¨°üº¬luac.c£©¡£
-   Êä³öÄ¿Â¼¸Ä³É£º$(SolutionDir)$(Platform)\$(Configuration)\¡£
-   Ôö¼Ó¸½¼Ó¿âÄ¿Â¼£º$(SolutionDir)$(Platform)\$(Configuration)\¡£¸½¼ÓÒÀÀµÏîÔö¼Ó£ºlua.lib¡£
-
-----------------------------  
-OpenXLSX £¨ÒıÇæÍ¨¹ıºêCORE_TOOLS_USE_OPEN_XLSX¹ØÁª£©
-
-1. °æ±¾£º0.4.1¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://github.com/troldal/OpenXLSX ¡£
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-4. OPENXLSX_LIBRARY_TYPEÖµĞŞ¸Ä³ÉSHARED¡£
-
-----------------------------
-pugixml£¨ÒıÇæÖ±½Ó¹ØÁª£©
-
-1. °æ±¾£º1.12.1¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://github.com/zeux/pugixml ¡£
-3. pugiconfig.hppµÚ47ĞĞ£¬¶¨ÒåºêPUGIXML_HEADER_ONLY¡£
-
-----------------------------
-miniz£¨ÒıÇæÖ±½Ó¹ØÁª£©
-
-1. °æ±¾£º2.2.0¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://github.com/richgel999/miniz ¡£
-3. Ê¹ÓÃreleases pageÒ³µÄ°æ±¾±àÒë¾²Ì¬¿â£¬ÃûÎªminiz¡£
-
-----------------------------
-ogg£¨ÒıÇæÍ¨¹ıºêSOUND_EFFECT_USE_OGG¹ØÁª£©
-
-1. °æ±¾£º1.3.5¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://www.xiph.org/downloads/¡£
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-
-----------------------------
-vorbis£¨ÒıÇæÍ¨¹ıºêSOUND_EFFECT_USE_VORBIS¹ØÁª£©
-
-1. °æ±¾£º1.3.7¡£
-2. ¹Ù·½ÍøÕ¾£ºhttps://www.xiph.org/downloads/¡£
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-4. ¶¨ÒåÕıÈ·µÄOGG_INCLUDE_DIRµ½($ogg)/include¡£ 
-5. ¶¨ÒåÕıÈ·µÄOGG_LIBRARYµ½($ogg)/BuildX64/Release/ogg.libºÍ($ogg)/BuildWin32/Release/ogg.lib¡£  
-
-----------------------------
-FLTK£¨ÒıÇæÍ¨¹ıºêUSER_INTERFACE_USE_FLTK¹ØÁª£©
-
-1. °æ±¾£º1.3.8
-2. ¹Ù·½ÍøÕ¾£ºhttps://www.fltk.org/¡£
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-4. ÎÄ¼şFl_Device.cxx£º
-   µÚ84ĞĞ¸Ä³É
-   static
-   #if defined(__APPLE__)
-		Fl_Quartz_Graphics_Driver
-   #elif defined(WIN32)
-		Fl_GDI_Graphics_Driver
-   #else
-		Fl_Xlib_Graphics_Driver
-   #endif
-		driver;
-   static Fl_Display_Device display(&driver);
-   return &display;
-   ÒÔÏû³ıƒÈ´æĞ¹Â¶¡£ 
- 
-----------------------------
-Apr£¨ÒıÇæÍ¨¹ıºêNETWORK_USE_ACTIVE_MQ¹ØÁª£©
-
-1. ¹Ù·½ÍøÕ¾£ºhttps://github.com/apache/apr ¡£
-2. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-
-----------------------------
-
-ActiveMQ£¨ÒıÇæÍ¨¹ıºêNETWORK_USE_ACTIVE_MQ¹ØÁª£©
-
-1. °æ±¾£º5.18.1
-2. ¹Ù·½ÍøÕ¾£ºhttps://activemq.apache.org/components/cms/download/ ¡£
-
-----------------------------
-
-Mongo-c-driver£¨Mongo-cxx-driver¹ØÁª£©
-
-1. °æ±¾£º1.23.4
-2. ¹Ù·½ÍøÕ¾£ºhttps://github.com/mongodb/mongo-c-driver ¡£
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-4. ±àÒëºÃx64°æ±¾ºó£¬Ö´ĞĞRelease°æ±¾µÄINSTALL¡£ÊÖ¶¯½«C:/Program Files (x86)/mongo-c-driverÏÂÎÄ¼ş¸´ÖÆµ½mongo-cxx-driver/BuildX64/mongo-c-driverÏÂ£¬
-   È»ºóÔÙ±àÒëWin32°æ±¾£¬Ö´ĞĞRelease°æ±¾µÄINSTALL¡£ÊÖ¶¯½«C:/Program Files (x86)/mongo-c-driverÏÂÎÄ¼ş¸´ÖÆµ½mongo-cxx-driver/BuildWin32/mongo-c-driverÏÂ£¬
-   ¿ÉÊ¹ÓÃMongoÏÂµÄÅú´¦ÀíÎÄ¼şCopyMongoWin32ºÍCopyMongoX64Ö´ĞĞ¡£
+---
+## protobufï¼ˆå¼•æ“é€šè¿‡å®NETWORK_USE_PROTOBUFå…³è”ï¼‰
+1. ç‰ˆæœ¬ï¼š31.1ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://github.com/protocolbuffers/protobufã€‚
+3. gitåœ°å€ï¼šhttps://github.com/protocolbuffers/protobuf.gitã€‚
+4. ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
+5. CMakeLists.txtæ–‡ä»¶ç¬¬5è¡Œå¢åŠ  set(CMAKE_CXX_STANDARD 20)ã€‚
+6. é€‰ä¸­protobuf_BUILD_SHARED_LIBSã€‚
+7. runtime_version.hå°¾éƒ¨å¢åŠ   
+   #ifdef PROTO_BUF_PRAGMA_WARNING  
+       
+	   #include "System/Helper/PragmaWarning/ProtoBuf.inl"  
    
-----------------------------
+   #endif  
 
-Mongo-cxx-driver£¨ÒıÇæÍ¨¹ıºêDATABASE_USE_MONGO¹ØÁª£©
+---
+## freeglutï¼ˆå¼•æ“é€šè¿‡å®SYSTEM_USE_GLUTå…³è”ï¼‰
 
-1. °æ±¾£º3.7.1
-2. ¹Ù·½ÍøÕ¾£ºhttps://github.com/mongodb/mongo-cxx-driver ¡£
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
-4. ÉèÖÃlibbson-1.0_DIRµ½mongo-c-driverÏÂBuildX64\src\libbson¡£
-5. ÉèÖÃBSON_LIBRARYµ½mongo-cxx-driverÏÂBuildX64\mongo-c-driver\lib\bson-1.0.lib¡£
-6. ÉèÖÃÕıÈ·µÄBoost_INCLUDE_DIR¡£
-7. ÉèÖÃlibmongoc-1.0_DIRµ½mongo-c-driverÏÂBuildX64\src\libmongoc¡£
-8. ÉèÖÃMONGOC_LIBRARYµ½mongo-cxx-driverÏÂBuildX64\mongo-c-driver\lib\mongoc-1.0.lib¡£
+1. ç‰ˆæœ¬ï¼š3.6.0ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttp://freeglut.sourceforge.net/ã€‚
+3. gitåœ°å€ï¼šhttps://github.com/freeglut/freeglutã€‚
+4. ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
 
-----------------------------
+---
+## Visual Leak Detectorï¼ˆå¼•æ“Debugç‰ˆæœ¬ç›´æ¥å…³è”ï¼‰
 
-hiredis£¨ÒıÇæÍ¨¹ıºêDATABASE_USE_REDIS¹ØÁª£©
+1. ç‰ˆæœ¬ï¼š2.7.0ã€‚
+2. gitåœ°å€ï¼šhttps://github.com/oneiric/vld ã€‚
+3. Allocs.cppç¬¬39è¡Œï¼Œtestsuite.cppç¬¬78è¡Œå¢åŠ    
+   #elif _MSC_VER > 1927	// VS 2019  
+   #define CRTDLLNAME   _T("ucrtbased.dll")  
+4. Allocs.cppç¬¬67è¡Œï¼Œtestsuite.cppç¬¬105è¡Œå¢åŠ    
+   #elif _MSC_VER > 1927	// VS 2019  
+   #define CRTDLLNAME   _T("ucrtbase.dll")   
+5. src\testsä¸‹Common.propsç¬¬18è¡Œæ”¹æˆv143ã€‚
 
-1. °æ±¾£º1.1.0
-2. ¹Ù·½ÍøÕ¾£ºhttps://github.com/redis/hiredis ¡£
-3. ±àÒë·½Ê½£ºCMake¡£Win32°æ±¾½¨Á¢ÔÚBuildWin32ÏÂ£¬x64°æ±¾½¨Á¢ÔÚBuildX64ÏÂ¡£
+---
+## OpenXLSX ï¼ˆå¼•æ“é€šè¿‡å®CORE_TOOLS_USE_OPEN_XLSXå…³è”ï¼‰
 
-----------------------------
+1. ç‰ˆæœ¬ï¼š0.4.1ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://github.com/troldal/OpenXLSX ã€‚
+3. ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
+4. OPENXLSX_LIBRARY_TYPEå€¼ä¿®æ”¹æˆSHAREDã€‚
+
+---
+## pugixmlï¼ˆå¼•æ“ç›´æ¥å…³è”ï¼‰
+
+1. ç‰ˆæœ¬ï¼š1.15ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://github.com/zeux/pugixml ã€‚
+3. pugiconfig.hppç¬¬47è¡Œï¼Œå®šä¹‰å®PUGIXML_HEADER_ONLYã€‚
+
+---
+## minizï¼ˆå¼•æ“ç›´æ¥å…³è”ï¼‰
+
+1. ç‰ˆæœ¬ï¼š3.0.2ã€‚
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://github.com/richgel999/miniz ã€‚
+3. ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
+
+---
+## Aprï¼ˆå¼•æ“é€šè¿‡å®NETWORK_USE_ACTIVE_MQå…³è”ï¼‰
+
+1. å®˜æ–¹ç½‘ç«™ï¼šhttps://github.com/apache/apr ã€‚
+2. ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
+
+---
+## ActiveMQï¼ˆå¼•æ“é€šè¿‡å®NETWORK_USE_ACTIVE_MQå…³è”ï¼‰
+
+1.  ç‰ˆæœ¬ï¼š3.9.5
+2.  å®˜æ–¹ç½‘ç«™ï¼šhttps://activemq.apache.org/components/cms/download/ ã€‚
+3.  gitåœ°å€ï¼šhttps://github.com/apache/activemq-cppã€‚
+4.  å¯ç”¨å‡½æ•°çº§é“¾æ¥æ”¹æˆæ˜¯ã€‚
+5.  é™„åŠ åº“åŒ…å«ç›®å½•å¢åŠ ï¼š..\..\..\apr\includeå’Œ..\..\..\apr\BuildX64ã€‚
+6.  é™„åŠ åº“æ ¹æ®ä¸åŒç¼–è¯‘ç‰ˆæœ¬å¢åŠ ï¼š  
+    ../../../apr/BuildX64/Debugã€  
+    ../../../apr/BuildX64/Releaseã€  
+    ../../../apr/BuildWin32/Debugã€  
+    ../../../apr/BuildWin32/Release
+7.  é™„åŠ ä¾èµ–é¡¹libapr-1.libæ”¹æˆlibapr-2.libã€‚
+8.  ç¼–è¯‘DebugDLLå’ŒReleaseDLLç‰ˆæœ¬ã€‚
+9.  AbstractCollection.hç¬¬77ã€95ã€119ã€134ã€153ã€201ã€240ã€261ã€286ã€311ã€334è¡Œauto_ptræ”¹æˆunique_ptrã€‚
+10. AbstractSet.hç¬¬74ã€84è¡Œauto_ptræ”¹æˆunique_ptrã€‚
+11. StlMap.hç¬¬672ã€820è¡Œauto_ptræ”¹æˆunique_ptrã€‚
+  
+---
+## Mongo-cxx-driverï¼ˆå¼•æ“é€šè¿‡å®DATABASE_USE_MONGOå…³è”ï¼‰
+
+1. ç‰ˆæœ¬ï¼š4.1.1
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://github.com/mongodb/mongo-cxx-driver ã€‚
+3. ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
+4. ä¸‹è½½gzipï¼Œå¹¶å°†gzipç›®å½•æ·»åŠ åˆ°ç³»ç»Ÿç¯å¢ƒå˜é‡ Path ä¸­ã€‚  
+   ä¸‹è½½åœ°å€ï¼šhttps://gnuwin32.sourceforge.net/packages/gzip.htmã€‚
+5. ä¸‹è½½hugoï¼Œå¹¶å°†hugoç›®å½•æ·»åŠ åˆ°ç³»ç»Ÿç¯å¢ƒå˜é‡ Path ä¸­ã€‚  
+   ä¸‹è½½åœ°å€ï¼šhttps://github.com/gohugoio/hugo/releasesã€‚   
+   æ‰¾åˆ°ç±»ä¼¼hugo_extended_0.148.2_windows-amd64.zipçš„æ–‡ä»¶ã€‚  
+
+---
+## hiredisï¼ˆå¼•æ“é€šè¿‡å®DATABASE_USE_REDISå…³è”ï¼‰
+
+1. ç‰ˆæœ¬ï¼š1.3.0
+2. å®˜æ–¹ç½‘ç«™ï¼šhttps://github.com/redis/hiredis ã€‚
+3. ç¼–è¯‘æ–¹å¼ï¼šCMakeã€‚Win32ç‰ˆæœ¬å»ºç«‹åœ¨BuildWin32ä¸‹ï¼Œx64ç‰ˆæœ¬å»ºç«‹åœ¨BuildX64ä¸‹ã€‚
+
+---

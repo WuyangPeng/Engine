@@ -7,7 +7,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalLibraryDirectories>$(LibsEnvironmentWin32Lib);$(LibsEnvironmentWin32ReleaseLib);$(EngineStaticWin32ReleaseLib);../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../../../Libs/openssl/Win32/Release/lib/;../../../../Libs/mysql/BuildWin32/archive_output_directory/Release;../../../../Libs/mysql-connector-c++/BuildWin32/Release/;../../../../Libs/protobuf/BuildWin32/bin/Release/;../../../../Libs/freeglut/BuildWin32/lib/Release/;../../../../Libs/vld/src/bin/Win32/Release-v143/;../../../../Libs/OpenXLSX/BuildWin32/output/Release/;../../../../Libs/miniz/BuildWin32/Release/;../../../../Libs/activemq/activemq-cpp/vs2010-build/Win32/ReleaseDLL/;../../../../Libs/mongo-cxx-driver/BuildWin32/src/mongocxx/Release/;../../../../Libs/mongo-cxx-driver/BuildWin32/src/bsoncxx/Release/;../../../../Libs/hiredis/BuildWin32/Release/;../../../../Engine/$(Platform)/$(Configuration)Windows;../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>BUILDING_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>

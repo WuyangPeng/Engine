@@ -1,12 +1,12 @@
-@ingroup group_MainEntryPoint1_Documentation
+ï»¿@ingroup group_MainEntryPoint1_Documentation
 
 ----------------------------
-mainÖ÷º¯ÊıÈë¿Úµã
+mainä¸»å‡½æ•°å…¥å£ç‚¹
 
 MainEntryPoint1 
 
-mainÈë¿Úµã¹¤¾ßÏä¡£ÊµÏÖÒÔÏÂ¹¦ÄÜ£º 
+mainå…¥å£ç‚¹å·¥å…·ç®±ã€‚å®ç°ä»¥ä¸‹åŠŸèƒ½ï¼š 
 
-£¨1£©ÔËĞĞmainÈë¿Úµãº¯Êı¡£ 
+ï¼ˆ1ï¼‰è¿è¡Œmainå…¥å£ç‚¹å‡½æ•°ã€‚ 
 
 ----------------------------

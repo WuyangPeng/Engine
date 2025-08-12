@@ -1,7 +1,7 @@
-@ingroup group_UserInterfaceEditorAssist_Documentation
+ï»¿@ingroup group_UserInterfaceEditorAssist_Documentation
 
 ----------------------------
-½çÃæĞŞ¸ÄÆ÷¸¨Öú
+ç•Œé¢ä¿®æ”¹å™¨è¾…åŠ©
 
 1.  UserInterfaceEditorAssist 
 

@@ -1,7 +1,7 @@
-@ingroup group_ImagicsToolset_Documentation
+ï»¿@ingroup group_ImagicsToolset_Documentation
 
 ----------------------------
-Í¼Ïñ·ÖÎö¹¤¾ßÏä
+å›¾åƒåˆ†æå·¥å…·ç®±
 
 1.  ImagicsToolset 
 

@@ -1,6 +1,6 @@
-@ingroup group_CoreToolsExample_Documentation
+锘緻ingroup group_CoreToolsExample_Documentation
 
 ----------------------------
-核心工具例子
+鏍稿績宸ュ叿渚嬪瓙
 
 ----------------------------

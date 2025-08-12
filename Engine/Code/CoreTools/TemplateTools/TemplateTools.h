@@ -15,7 +15,6 @@
 #include "Fibonacci.h"
 #include "IfThenElse.h"
 #include "IncrementScopeDetail.h"
-#include "LiteralCastDetail.h"
 #include "MustBePod.h"
 #include "MustBeSameSize.h"
 #include "MustBeSubscriptable.h"

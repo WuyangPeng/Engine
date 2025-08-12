@@ -14,9 +14,10 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Matrix/MatrixDetail.h"
 #include "Mathematics/NumericalAnalysis/SymmetricEigensolverDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::HyperEllipsoid<N, Real>::HyperEllipsoid() noexcept requires(N == 2)
     : center{}, axis{ Vector{ MathType::GetValue(1), MathType::GetValue(0) }, Vector{ MathType::GetValue(0), MathType::GetValue(1) } }, extent{ MathType::GetValue(1), MathType::GetValue(1) }
 {
@@ -24,7 +25,7 @@ Mathematics::HyperEllipsoid<N, Real>::HyperEllipsoid() noexcept requires(N == 2)
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::HyperEllipsoid<N, Real>::HyperEllipsoid() noexcept requires(N == 3)
     : center{},
       axis{ Vector{ MathType::GetValue(1), MathType::GetValue(0), MathType::GetValue(0) },
@@ -36,7 +37,7 @@ Mathematics::HyperEllipsoid<N, Real>::HyperEllipsoid() noexcept requires(N == 3)
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Mathematics::HyperEllipsoid<N, Real>::HyperEllipsoid(const Vector& center, const AxisType& axis, const Vector& extent) noexcept
     : center{ center }, axis{ axis }, extent{ extent }
 {
@@ -46,7 +47,7 @@ Mathematics::HyperEllipsoid<N, Real>::HyperEllipsoid(const Vector& center, const
 #ifdef OPEN_CLASS_INVARIANT
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 bool Mathematics::HyperEllipsoid<N, Real>::IsValid() const noexcept
 {
     return true;
@@ -55,7 +56,7 @@ bool Mathematics::HyperEllipsoid<N, Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 typename Mathematics::HyperEllipsoid<N, Real>::Vector Mathematics::HyperEllipsoid<N, Real>::GetCenter() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -64,7 +65,7 @@ typename Mathematics::HyperEllipsoid<N, Real>::Vector Mathematics::HyperEllipsoi
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 void Mathematics::HyperEllipsoid<N, Real>::SetCenter(const Vector& aCenter) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -73,7 +74,7 @@ void Mathematics::HyperEllipsoid<N, Real>::SetCenter(const Vector& aCenter) noex
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 typename Mathematics::HyperEllipsoid<N, Real>::AxisType Mathematics::HyperEllipsoid<N, Real>::GetAxis() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -82,7 +83,7 @@ typename Mathematics::HyperEllipsoid<N, Real>::AxisType Mathematics::HyperEllips
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 void Mathematics::HyperEllipsoid<N, Real>::SetAxis(const AxisType& aAxis) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -91,7 +92,7 @@ void Mathematics::HyperEllipsoid<N, Real>::SetAxis(const AxisType& aAxis) noexce
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 typename Mathematics::HyperEllipsoid<N, Real>::Vector Mathematics::HyperEllipsoid<N, Real>::GetAxis(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -100,7 +101,7 @@ typename Mathematics::HyperEllipsoid<N, Real>::Vector Mathematics::HyperEllipsoi
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 void Mathematics::HyperEllipsoid<N, Real>::SetAxis(int index, const Vector& aAxis)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -109,7 +110,7 @@ void Mathematics::HyperEllipsoid<N, Real>::SetAxis(int index, const Vector& aAxi
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 typename Mathematics::HyperEllipsoid<N, Real>::Vector Mathematics::HyperEllipsoid<N, Real>::GetExtent() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -118,7 +119,7 @@ typename Mathematics::HyperEllipsoid<N, Real>::Vector Mathematics::HyperEllipsoi
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 void Mathematics::HyperEllipsoid<N, Real>::SetExtent(const Vector& aExtent) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -127,7 +128,7 @@ void Mathematics::HyperEllipsoid<N, Real>::SetExtent(const Vector& aExtent) noex
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 Real Mathematics::HyperEllipsoid<N, Real>::GetExtent(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -136,7 +137,7 @@ Real Mathematics::HyperEllipsoid<N, Real>::GetExtent(int index) const
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 void Mathematics::HyperEllipsoid<N, Real>::SetExtent(int index, Real aExtent)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -145,7 +146,7 @@ void Mathematics::HyperEllipsoid<N, Real>::SetExtent(int index, Real aExtent)
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 typename Mathematics::HyperEllipsoid<N, Real>::Matrix Mathematics::HyperEllipsoid<N, Real>::GetM() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -162,7 +163,7 @@ typename Mathematics::HyperEllipsoid<N, Real>::Matrix Mathematics::HyperEllipsoi
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 typename Mathematics::HyperEllipsoid<N, Real>::Matrix Mathematics::HyperEllipsoid<N, Real>::GetMInverse() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -179,7 +180,7 @@ typename Mathematics::HyperEllipsoid<N, Real>::Matrix Mathematics::HyperEllipsoi
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 typename Mathematics::HyperEllipsoid<N, Real>::CoefficientType Mathematics::HyperEllipsoid<N, Real>::ToCoefficients() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -193,21 +194,21 @@ typename Mathematics::HyperEllipsoid<N, Real>::CoefficientType Mathematics::Hype
     ToCoefficients(a, b, c);
     Convert(a, b, c, coefficient);
 
-#include SYSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26496)
+    #include SYSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26496)
 
     /// 将二次项的其中一个系数设置为1。
     auto quadIndex = numCoefficients - 1;
     auto maxIndex = quadIndex;
     auto maxValue = MathType::FAbs(coefficient.at(quadIndex));
 
-#include SYSTEM_WARNING_POP
+    #include SYSTEM_WARNING_POP
 
     /// 注：当N = 2时，MSVS 2019 16+生成：警告C6294：
     /// 循环定义错误：初始条件不满足测试。
     /// 循环体未执行。这是N=2的正确行为。
     if constexpr (constexpr auto localN = N;
-                  3 <= localN)
+        3 <= localN)
     {
         for (auto d = 2; d < localN; ++d)
         {
@@ -238,7 +239,7 @@ typename Mathematics::HyperEllipsoid<N, Real>::CoefficientType Mathematics::Hype
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 void Mathematics::HyperEllipsoid<N, Real>::ToCoefficients(Matrix& a, Vector& b, Real& c) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -250,7 +251,7 @@ void Mathematics::HyperEllipsoid<N, Real>::ToCoefficients(Matrix& a, Vector& b, 
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 bool Mathematics::HyperEllipsoid<N, Real>::FromCoefficients(const CoefficientType& coefficient)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -264,7 +265,7 @@ bool Mathematics::HyperEllipsoid<N, Real>::FromCoefficients(const CoefficientTyp
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 bool Mathematics::HyperEllipsoid<N, Real>::FromCoefficients(const Matrix& a, const Vector& b, Real c)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -296,7 +297,7 @@ bool Mathematics::HyperEllipsoid<N, Real>::FromCoefficients(const Matrix& a, con
     SymmetricEigensolver<Real> es{ N, 32 };
     Matrix rotation{};
     std::vector<Real> diagonal{};
-    es.Solve(m.GetBaseContainer(), +1);  // diagonal[i] 是不减的
+    es.Solve(m.GetBaseContainer(), +1); // diagonal[i] 是不减的
     diagonal = es.GetEigenvalues();
     rotation = Matrix{ es.GetEigenvectors() };
     if (es.GetEigenvectorMatrixType() == 0)
@@ -320,7 +321,7 @@ bool Mathematics::HyperEllipsoid<N, Real>::FromCoefficients(const Matrix& a, con
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 void Mathematics::HyperEllipsoid<N, Real>::Convert(const CoefficientType& coefficient, Matrix& a, Vector& b, Real& c)
 {
     auto i = 0;
@@ -357,7 +358,7 @@ void Mathematics::HyperEllipsoid<N, Real>::Convert(const CoefficientType& coeffi
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 void Mathematics::HyperEllipsoid<N, Real>::Convert(const Matrix& a, const Vector& b, Real c, CoefficientType& coefficient)
 {
     auto i = 0;
@@ -382,21 +383,21 @@ void Mathematics::HyperEllipsoid<N, Real>::Convert(const Matrix& a, const Vector
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 bool Mathematics::operator==(const HyperEllipsoid<N, Real>& lhs, const HyperEllipsoid<N, Real>& rhs)
 {
     return lhs.GetCenter() == rhs.GetCenter() && lhs.GetAxis() == rhs.GetAxis() && lhs.GetExtent() == rhs.GetExtent();
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 bool Mathematics::operator!=(const HyperEllipsoid<N, Real>& lhs, const HyperEllipsoid<N, Real>& rhs)
 {
     return !(lhs == rhs);
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 bool Mathematics::operator<(const HyperEllipsoid<N, Real>& lhs, const HyperEllipsoid<N, Real>& rhs)
 {
     if (lhs.GetCenter() < rhs.GetCenter())
@@ -423,21 +424,21 @@ bool Mathematics::operator<(const HyperEllipsoid<N, Real>& lhs, const HyperEllip
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 bool Mathematics::operator<=(const HyperEllipsoid<N, Real>& lhs, const HyperEllipsoid<N, Real>& rhs)
 {
     return !(rhs < lhs);
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 bool Mathematics::operator>(const HyperEllipsoid<N, Real>& lhs, const HyperEllipsoid<N, Real>& rhs)
 {
     return rhs < lhs;
 }
 
 template <int N, typename Real>
-requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
+    requires(1 < N && N < 4 && std::is_arithmetic_v<Real>)
 bool Mathematics::operator>=(const HyperEllipsoid<N, Real>& lhs, const HyperEllipsoid<N, Real>& rhs)
 {
     return !(lhs < rhs);

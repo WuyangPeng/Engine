@@ -14,6 +14,7 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename Real>
 Mathematics::BSplineCurve3<Real>::BSplineCurve3(const std::vector<Vector3<Real>>& ctrlPoint, int degree, bool loop, bool open)

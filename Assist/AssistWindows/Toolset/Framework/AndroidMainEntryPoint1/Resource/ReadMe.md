@@ -1,12 +1,12 @@
-@ingroup group_AndroidMainEntryPoint1_Documentation
+ï»¿@ingroup group_AndroidMainEntryPoint1_Documentation
 
 ----------------------------
-°²×¿Ö÷º¯ÊıÈë¿Úµã
+å®‰å“ä¸»å‡½æ•°å…¥å£ç‚¹
 
 AndroidMainEntryPoint1 
 
-°²×¿ mainÈë¿Úµã¹¤¾ßÏä¡£ÊµÏÖÒÔÏÂ¹¦ÄÜ£º 
+å®‰å“ mainå…¥å£ç‚¹å·¥å…·ç®±ã€‚å®ç°ä»¥ä¸‹åŠŸèƒ½ï¼š 
 
-£¨1£©ÔËĞĞ°²×¿ mainÈë¿Úµãº¯Êı¡£
+ï¼ˆ1ï¼‰è¿è¡Œå®‰å“ mainå…¥å£ç‚¹å‡½æ•°ã€‚
 
 ----------------------------

@@ -1,11 +1,11 @@
-@ingroup group_FrameworkAndroidTesting_Documentation
+ï»¿@ingroup group_FrameworkAndroidTesting_Documentation
 
 ----------------------------
-°²×¿¿ò¼ÜµÄµ¥Ôª²âÊÔ
+å®‰å“æ¡†æ¶çš„å•å…ƒæµ‹è¯•
 
 1.  AndroidFrameSuite 
 
-¶Ô°²×¿¿ò¼ÜÄ£¿éµÄµ¥Ôª²âÊÔ£¬°üÀ¨£º 
-£¨1£© °²×¿¿ò¼Ü¡£ 
+å¯¹å®‰å“æ¡†æ¶æ¨¡å—çš„å•å…ƒæµ‹è¯•ï¼ŒåŒ…æ‹¬ï¼š 
+ï¼ˆ1ï¼‰ å®‰å“æ¡†æ¶ã€‚ 
 
 ----------------------------

@@ -33,7 +33,9 @@ CoreTools::HeapAllocate<T>::~HeapAllocate() noexcept
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 
-    System::FreeProcessHeap(point);
+    if (!System::FreeProcessHeap(point))
+    {
+    }
 }
 
 #ifdef OPEN_CLASS_INVARIANT

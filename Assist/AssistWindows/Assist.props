@@ -7,9 +7,9 @@
     <IntDir>$(ProjectDir)..\..\..\..\Temporary\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
-    <ClCompile>
-      <AdditionalIncludeDirectories>$(LibsEnvironmentBaseInclude);$(LibsEnvironmentExtendInclude);$(EngineInclude);../../../../Code/;</AdditionalIncludeDirectories>
-      <WarningLevel>Level4</WarningLevel>
+    <ClCompile>   
+      <AdditionalIncludeDirectories>../../../../Code/;../../../../../Engine/Code/;../../../../../External/GSL/include/;../../../../../External/KhronosGroup/OpenGL/api/;../../../../../External/KhronosGroup/EGL/api/;../../../../../Libs/boost/;../../../../../Libs/ACE/ACE_wrappers/;../../../../../Libs/openssl/x64/Release/include;../../../../../Libs/mysql/include/;../../../../../Libs/mysql-connector-c++/include/;../../../../../Libs/protobuf/src/;../../../../../Libs/freeglut/include/;../../../../../Libs/vld/src/;../../../../../Libs/OpenXLSX/OpenXLSX/;../../../../../Libs/pugixml/src/;../../../../../Libs/miniz/;../../../../../Libs/activemq/activemq-cpp/src/main/;../../../../../Libs/mongo-cxx-driver/src/mongocxx/include;../../../../../Libs/mongo-cxx-driver/src/mongocxx/include/mongocxx/v_noabi;../../../../../Libs/mongo-cxx-driver/BuildX64/src/mongocxx/lib;../../../../../Libs/mongo-cxx-driver/src/bsoncxx/include;../../../../../Libs/mongo-cxx-driver/src/bsoncxx/include/bsoncxx/v_noabi;../../../../../Libs/mongo-cxx-driver/BuildX64/src/bsoncxx/lib;../../../../../Libs/hiredis/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	  <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ConformanceMode>true</ConformanceMode>
@@ -17,5 +17,8 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <EnablePREfast>true</EnablePREfast>
     </ClCompile>
+	<Link>
+      <AdditionalLibraryDirectories>../../../../../Libs/boost/stage/lib/;../../../../../Libs/ACE/ACE_wrappers/lib/$(Platform)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
   </ItemDefinitionGroup>
 </Project>

@@ -1,12 +1,12 @@
-@ingroup group_GameMasterServerTesting_Documentation
+ï»¿@ingroup group_GameMasterServerTesting_Documentation
 
 ----------------------------
-ÓÎÏ·¹ÜÀíÔ±·şÎñÆ÷µ¥Ôª²âÊÔ
+æ¸¸æˆç®¡ç†å‘˜æœåŠ¡å™¨å•å…ƒæµ‹è¯•
 
-Ä¿Ç°°üº¬£º
+ç›®å‰åŒ…å«ï¼š
 
-1. GameMasterServer£¨ÓÎÏ·¹ÜÀíÔ±·şÎñÆ÷£©
+1. GameMasterServerï¼ˆæ¸¸æˆç®¡ç†å‘˜æœåŠ¡å™¨ï¼‰
 
-£¨1£©ÓÎÏ·¹ÜÀíÔ±·şÎñÆ÷¡£
+ï¼ˆ1ï¼‰æ¸¸æˆç®¡ç†å‘˜æœåŠ¡å™¨ã€‚
 
 ----------------------------

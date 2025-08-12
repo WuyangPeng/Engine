@@ -1,6 +1,6 @@
-@ingroup group_WorldServer_Documentation
+ï»¿@ingroup group_WorldServer_Documentation
 
 ----------------------------
-ÊÀ½ç·şÎñÆ÷
+ä¸–ç•ŒæœåŠ¡å™¨
 
 ----------------------------

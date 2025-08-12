@@ -1,0 +1,15 @@
+boost/
+ACE/
+openssl/
+mysql/
+mysql-connector-c++/
+protobuf/
+freeglut/
+vld/
+OpenXLSX/
+pugixml/
+miniz/
+apr/
+activemq/
+mongo-cxx-driver/
+hiredis/
