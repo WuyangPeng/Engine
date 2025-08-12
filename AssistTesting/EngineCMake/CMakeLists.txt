@@ -29,9 +29,9 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
 elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
-    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../EngineTesting/EngineWindows/)
-    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Assist/AssistWindows/)
-    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../AssistTesting/AssistWindows/)
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../EngineTesting/Code/)
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../Assist/Code/)
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../AssistTesting/Code/)
 
     if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
 
