@@ -1,23 +1,23 @@
 ﻿TODO Level 7
 
-1.0.1.2
+v0.0.0.1
 
-1.锛圡emoryTools锛夊畬鎴怣emoryTools闈濿indows骞冲彴鐨勫疄鐜帮細VirtualTools銆?
-													 ViewOfFile銆?
-													 MemoryHelper銆?
-													 LocalTools銆?
-2.锛圱hreading锛夊畬鎴怲hreading闈濿indows骞冲彴鐨勫疄鐜帮細 CriticalSection銆?
-												  Semaphore銆?
-												  Event銆?
-												  Mutex銆?
-												  SlimReaderWriter銆?
-												  ConditionVariable銆?
-												  InitOnce銆?
-												  WaitableTimer銆?
-												  SyncTools銆?
-												  Interlocked銆?
-												  Thread銆?
-												  ThreadTools銆?
-												  ThreadLocalStorage銆?
-												  Process銆?
-												  ProcessTools銆
+1.（MemoryTools）完成MemoryTools非Windows平台的实现：VirtualTools、
+													 ViewOfFile、
+													 MemoryHelper、
+													 LocalTools。
+2.（Threading）完成Threading非Windows平台的实现： CriticalSection、
+												  Semaphore、
+												  Event、
+												  Mutex、
+												  SlimReaderWriter、
+												  ConditionVariable、
+												  InitOnce、
+												  WaitableTimer、
+												  SyncTools、
+												  Interlocked、
+												  Thread、
+												  ThreadTools、
+												  ThreadLocalStorage、
+												  Process、
+												  ProcessTools。

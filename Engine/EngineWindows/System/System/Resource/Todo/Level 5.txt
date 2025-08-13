@@ -1,10 +1,10 @@
 ﻿TODO Level 5
 
-1.0.1.2
+v0.0.0.1
 
-1.锛圠inux锛夊畬鎴怢inux API浠ュ強鍏朵粬骞冲彴瀵筁inux API鐨勮櫄鎷熷疄鐜般€?
-2.锛圠inux锛夊疄鐜扮Щ娈栧埌Linux骞冲彴銆?
-3.锛圡acintosh锛夊畬鎴怣acintosh API浠ュ強鍏朵粬骞冲彴瀵筂acintosh API鐨勮櫄鎷熷疄鐜般€?
-4.锛圡acintosh锛夊疄鐜扮Щ娈栧埌Macintosh骞冲彴銆?
-5.锛圓ndroid锛夊畬鎴怉ndroid API浠ュ強鍏朵粬骞冲彴瀵笰ndroid API鐨勮櫄鎷熷疄鐜般€?
-6.锛圓ndroid锛夊疄鐜扮Щ娈栧埌Android骞冲彴銆
+1.（Linux）完成Linux API以及其他平台对Linux API的虚拟实现。
+2.（Linux）实现移殖到Linux平台。
+3.（Macintosh）完成Macintosh API以及其他平台对Macintosh API的虚拟实现。 
+4.（Macintosh）实现移殖到Macintosh平台。
+5.（Android）完成Android API以及其他平台对Android API的虚拟实现。 
+6.（Android）实现移殖到Android平台。
