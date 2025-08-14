@@ -1,32 +1,18 @@
-﻿/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2025
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.7 (2024/03/04 17:24)
+/// 版本：v0.0.0.1 (2025/08/14 17:18:01)
 
 #ifndef SYSTEM_HELPER_CLANG_H
 #define SYSTEM_HELPER_CLANG_H
 
 /// Clang编译器设置：
 
-#if defined(__clang__) && !defined(__CUDACC__) && !defined(__ibmxl__)
-
-    #if defined(__CUDACC__)
-
-        #if defined(__GXX_EXPERIMENTAL_CXX0X__) || (201103L <= __cplusplus)
-
-            #define SYSTEM_CPP_STANDARD 11
-
-        #else  // !defined(__GXX_EXPERIMENTAL_CXX0X__) || (__cplusplus < 201103L)
-
-            #define SYSTEM_CPP_STANDARD 3
-
-        #endif  // defined(__GXX_EXPERIMENTAL_CXX0X__) || (201103L <= __cplusplus)
-
-    #endif  // __CUDACC__
+#if defined(__clang__) && !defined(__ibmxl__) && !defined(__CODEGEARC__)
 
     #ifndef TCRE_USE_CLANG
 
@@ -46,26 +32,27 @@
 
     #endif  // TCRE_SYSTEM_COMPILER
 
-    /// 在定义__has_extension之前使用clang进行编译时，
-    /// 即使编写了“defined(__has_extension) && __has_extension(xxx)”，
-    /// clang也会报告编译器错误，所以唯一的解决方法是：
-    #ifndef __has_extension
+    #if __cplusplus >= 202002L
 
-        #define __has_extension __has_feature
+        #define SYSTEM_CPP_STANDARD 20
 
-    #endif  // __has_extension
+    #elif __cplusplus >= 201703L
 
-    #ifndef __has_attribute
+        #define SYSTEM_CPP_STANDARD 17
 
-        #define __has_attribute(x) 0
+    #elif __cplusplus >= 201402L
 
-    #endif  // __has_attribute
+        #define SYSTEM_CPP_STANDARD 14
 
-    #ifndef __has_cpp_attribute
+    #elif __cplusplus >= 201103L
 
-        #define __has_cpp_attribute(x) 0
+        #define SYSTEM_CPP_STANDARD 11
 
-    #endif  // __has_cpp_attribute
+    #else  // __cplusplus < 201103L
+
+        #define SYSTEM_CPP_STANDARD 3
+
+    #endif  // __cplusplus
 
     /// 自第一个版本以来，Clang一直支持“unused”属性。
     #define MAYBE_UNUSED __attribute__((__unused__))
@@ -81,6 +68,6 @@
 
     #endif  // 201103L <= __cplusplus && defined(__has_warning)
 
-#endif  // defined(__clang__) && !defined(__CUDACC__) && !defined(__ibmxl__)
+#endif  // defined(__clang__) && !defined(__ibmxl__) && !defined(__CODEGEARC__)
 
 #endif  // SYSTEM_HELPER_CLANG_H
