@@ -10,7 +10,7 @@
 #ifndef SYSTEM_OPENGL_GET_OPENGL_FUNCTION_H
 #define SYSTEM_OPENGL_GET_OPENGL_FUNCTION_H
 
-#include "System/Helper/ConfigMacro.h"
+#include "System/Helper/UserMacro.h"
 
 #include <boost/assert.hpp>
 #include <string>

@@ -10,7 +10,7 @@
 #ifndef SYSTEM_DYNAMIC_LINK_DYNAMIC_LINK_FLAGS_DATA_H
 #define SYSTEM_DYNAMIC_LINK_DYNAMIC_LINK_FLAGS_DATA_H
 
-#include "System/Helper/ConfigMacro.h"
+#include "System/Helper/UserMacro.h"
 
 namespace System
 {

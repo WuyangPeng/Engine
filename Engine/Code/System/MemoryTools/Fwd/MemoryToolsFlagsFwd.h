@@ -10,7 +10,7 @@
 #ifndef SYSTEM_MEMORY_TOOLS_MEMORY_TOOLS_FLAGS_FWD_H
 #define SYSTEM_MEMORY_TOOLS_MEMORY_TOOLS_FLAGS_FWD_H
 
-#include "System/Helper/ConfigMacro.h"
+#include "System/Helper/UserMacro.h"
 
 namespace System
 {

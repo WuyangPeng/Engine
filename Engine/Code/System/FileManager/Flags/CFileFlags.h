@@ -10,7 +10,7 @@
 #ifndef SYSTEM_FILE_MANAGER_C_FILE_FLAGS_H
 #define SYSTEM_FILE_MANAGER_C_FILE_FLAGS_H
 
-#include "System/Helper/ConfigMacro.h"
+#include "System/Helper/UserMacro.h"
 
 #include <cstdio>
 

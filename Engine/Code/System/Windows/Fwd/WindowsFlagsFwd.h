@@ -10,7 +10,7 @@
 #ifndef SYSTEM_WINDOWS_WINDOWS_FWD_H
 #define SYSTEM_WINDOWS_WINDOWS_FWD_H
 
-#include "System/Helper/ConfigMacro.h"
+#include "System/Helper/UserMacro.h"
 
 namespace System
 {

@@ -10,7 +10,7 @@
 #ifndef SYSTEM_CHARACTER_STRING_CHARACTER_STRING_FLAGS_FWD_H
 #define SYSTEM_CHARACTER_STRING_CHARACTER_STRING_FLAGS_FWD_H
 
-#include "System/Helper/ConfigMacro.h"
+#include "System/Helper/UserMacro.h"
 
 namespace System
 {

@@ -10,7 +10,7 @@
 #ifndef SYSTEM_HELPER_EXPORT_MACRO_H
 #define SYSTEM_HELPER_EXPORT_MACRO_H
 
-#include "ConfigMacro.h"
+#include "System/Helper/UserMacro.h"
 
 #if defined(SYSTEM_PLATFORM_WIN32) || defined(SYSTEM_PLATFORM_CYGWIN)
 

@@ -10,7 +10,7 @@
 #ifndef SYSTEM_HELPER_PRAGMA_WARNING_H
 #define SYSTEM_HELPER_PRAGMA_WARNING_H
 
-#include "System/Helper/ConfigMacro.h"
+#include "System/Helper/UserMacro.h"
 
 #define SYSTEM_WARNING_PUSH "System/Helper/PragmaWarning/Push.inl"
 

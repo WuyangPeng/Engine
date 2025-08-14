@@ -10,7 +10,7 @@
 #ifndef SYSTEM_NETWORK_NETWORK_FLAGS_FWD_H
 #define SYSTEM_NETWORK_NETWORK_FLAGS_FWD_H
 
-#include "System/Helper/ConfigMacro.h"
+#include "System/Helper/UserMacro.h"
 
 namespace System
 {

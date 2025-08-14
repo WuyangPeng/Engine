@@ -10,7 +10,7 @@
 #ifndef SYSTEM_OPENGL_GLUT_KEY_CODES_FLAGS_H
 #define SYSTEM_OPENGL_GLUT_KEY_CODES_FLAGS_H
 
-#include "System/Helper/ConfigMacro.h"
+#include "System/Helper/UserMacro.h"
 
 #include "System/Helper/GLExtensionsMacro.h"
 #include "System/Helper/Platform.h"

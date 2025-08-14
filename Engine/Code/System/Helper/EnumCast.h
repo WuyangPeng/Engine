@@ -10,7 +10,7 @@
 #ifndef SYSTEM_HELPER_ENUM_CAST_H
 #define SYSTEM_HELPER_ENUM_CAST_H
 
-#include "System/Helper/ConfigMacro.h"
+#include "System/Helper/UserMacro.h"
 
 #include <type_traits>
 

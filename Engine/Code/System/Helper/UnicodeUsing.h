@@ -12,7 +12,7 @@
 
 /// Unicode字符和ANSI字符所需要的using声明和宏
 
-#include "ConfigMacro.h"
+#include "System/Helper/UserMacro.h"
 #include "EnumCast.h"
 
 #include <iosfwd>

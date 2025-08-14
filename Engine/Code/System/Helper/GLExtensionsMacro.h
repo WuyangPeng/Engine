@@ -10,7 +10,7 @@
 #ifndef SYSTEM_HELPER_GL_EXTENSIONS_MACRO_H
 #define SYSTEM_HELPER_GL_EXTENSIONS_MACRO_H
 
-#include "System/Helper/ConfigMacro.h"
+#include "System/Helper/UserMacro.h"
 #include "System/Helper/Platform.h"
 
 #if defined(__gl_h_) || defined(__GL_H__) || defined(_GL_H) || defined(__gl_gl_h_) || defined(__X_GL_H)

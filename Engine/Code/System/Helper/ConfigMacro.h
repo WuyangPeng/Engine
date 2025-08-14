@@ -129,6 +129,4 @@
 
 #endif  // defined(All)
 
-#include "UserMacro.h"
-
 #endif  // SYSTEM_HELPER_CONFIG_MACRO_H

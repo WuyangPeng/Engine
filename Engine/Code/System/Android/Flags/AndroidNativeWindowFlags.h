@@ -10,7 +10,7 @@
 #ifndef SYSTEM_ANDROID_ANDROID_WINDOW_FLAGS_H
 #define SYSTEM_ANDROID_ANDROID_WINDOW_FLAGS_H
 
-#include "System/Helper/ConfigMacro.h"
+#include "System/Helper/UserMacro.h"
 
 #ifdef SYSTEM_PLATFORM_ANDROID
 

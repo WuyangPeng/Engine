@@ -10,7 +10,7 @@
 #ifndef SYSTEM_ANDROID_ANDROID_USING_FWD_H
 #define SYSTEM_ANDROID_ANDROID_USING_FWD_H
 
-#include "System/Helper/ConfigMacro.h"
+#include "System/Helper/UserMacro.h"
 
 #ifndef SYSTEM_PLATFORM_ANDROID
 

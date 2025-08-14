@@ -12,7 +12,7 @@
 
 #include "System/SystemDll.h"
 
-#include "System/Helper/ConfigMacro.h"
+#include "System/Helper/UserMacro.h"
 #include "System/Helper/UnicodeUsing.h"
 
 namespace System

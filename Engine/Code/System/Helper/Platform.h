@@ -10,7 +10,7 @@
 #ifndef SYSTEM_HELPER_PLATFORM_H
 #define SYSTEM_HELPER_PLATFORM_H
 
-#include "System/Helper/ConfigMacro.h"
+#include "System/Helper/UserMacro.h"
 
 #ifdef SYSTEM_PLATFORM_WIN32
 

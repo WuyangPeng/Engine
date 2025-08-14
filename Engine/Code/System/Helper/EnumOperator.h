@@ -10,7 +10,7 @@
 #ifndef SYSTEM_HELPER_ENUM_OPERATOR_H
 #define SYSTEM_HELPER_ENUM_OPERATOR_H
 
-#include "ConfigMacro.h"
+#include "System/Helper/UserMacro.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/PragmaWarning.h"
 
