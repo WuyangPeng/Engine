@@ -105,13 +105,13 @@ void System::ConfigMarkTesting::NoReturn()
 
 void System::ConfigMarkTesting::ArchitectureTypeTest() const noexcept
 {
-#ifdef TCRE_ARCHITECTURE_TYPE_64
+#ifdef SYSTEM_64_BIT
 
     static_assert(sizeof(size_t) == sizeof(uint64_t));
 
-#else  // !TCRE_ARCHITECTURE_TYPE_64
+#else  // !SYSTEM_64_BIT
 
     static_assert(sizeof(size_t) == sizeof(uint32_t));
 
-#endif  // TCRE_ARCHITECTURE_TYPE_64
+#endif  // SYSTEM_64_BIT
 }

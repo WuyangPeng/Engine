@@ -1,11 +1,11 @@
-﻿/// Copyright (c) 2010-2024
+﻿/// Copyright (c) 2010-2025
 /// Threading Core Render Engine
 ///
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：1.0.0.7 (2024/03/04 21:44)
+/// 版本：v0.0.0.1 (2025/08/14 13:49:21)
 
 #ifndef SYSTEM_HELPER_CONFIG_MACRO_H
 #define SYSTEM_HELPER_CONFIG_MACRO_H
@@ -29,7 +29,7 @@
 
 #ifndef SYSTEM_CPP_STANDARD
 
-    #define SYSTEM_CPP_STANDARD 3
+    #define SYSTEM_CPP_STANDARD 20
 
 #endif  // SYSTEM_CPP_STANDARD
 
@@ -121,11 +121,11 @@
     defined(__s390__) ||    \
     defined(__s390x__)
 
-    #define TCRE_ARCHITECTURE_TYPE_64 static_cast<void>(0)
+    #define SYSTEM_64_BIT static_cast<void>(0)
 
 #else  // !defined(All)
 
-    #define TCRE_ARCHITECTURE_TYPE_32 static_cast<void>(0)
+    #define SYSTEM_32_BIT static_cast<void>(0)
 
 #endif  // defined(All)
 
