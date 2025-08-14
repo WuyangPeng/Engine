@@ -20,7 +20,7 @@
 	  选择的平台名称：TCRE_SYSTEM_PLATFORM，使用的平台：SYSTEM_PLATFORM_XXX。  
 	  选择的编译器版本：TCRE_COMPILER_VERSION，编译器名称：TCRE_SYSTEM_COMPILER，使用的编译器：TCRE_USE_XXX。   
 	  选择的标准库版本：TCRE_CPP_LIB_VERSION、标准库名称：TCRE_SYSTEM_STD_LIB，使用的标准库：TCRE_USE_XXX。  
-	  64位或32位程序：TCRE_ARCHITECTURE_TYPE_64和TCRE_ARCHITECTURE_TYPE_32。  
+	  64位或32位程序：SYSTEM_64_BIT和SYSTEM_32_BIT。  
 ### （2） 用户宏
 	  用于是否使用静态库、检查GL错误、是否使用Windows宏、DirectX12、自旋锁、glut、glfw和vulkan等用户设定。  
 ### （3） 字符串拼接宏
