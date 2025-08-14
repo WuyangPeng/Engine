@@ -1,8 +1,8 @@
 {
   "DefaultEnvironment": "",
-  "Version": "1.0.0.7",
+  "Version": "0.0.0.0",
   "PrintRun": 1,
-  "RandomSeed": 1000007,
+  "RandomSeed": 1,
   "TcpPort": 30000,
   "UdpPort": 31000,
   "Address": "127.0.0.1",
