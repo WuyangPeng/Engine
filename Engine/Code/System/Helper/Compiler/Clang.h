@@ -32,42 +32,6 @@
 
     #endif  // TCRE_SYSTEM_COMPILER
 
-    #if __cplusplus >= 202002L
-
-        #define SYSTEM_CPP_STANDARD 20
-
-    #elif __cplusplus >= 201703L
-
-        #define SYSTEM_CPP_STANDARD 17
-
-    #elif __cplusplus >= 201402L
-
-        #define SYSTEM_CPP_STANDARD 14
-
-    #elif __cplusplus >= 201103L
-
-        #define SYSTEM_CPP_STANDARD 11
-
-    #else  // __cplusplus < 201103L
-
-        #define SYSTEM_CPP_STANDARD 3
-
-    #endif  // __cplusplus
-
-    /// 自第一个版本以来，Clang一直支持“unused”属性。
-    #define MAYBE_UNUSED __attribute__((__unused__))
-
-    /// FALLTHROUGH宏可用于注释switch标签之间的隐式的fall-through。
-    #if 201103L <= __cplusplus && defined(__has_warning)
-
-        #if __has_feature(cxx_attributes) && __has_warning("-Wimplicit-fallthrough")
-
-            #define FALLTHROUGH [[clang::fallthrough]]
-
-        #endif  //  __has_feature(cxx_attributes) && __has_warning("-Wimplicit-fallthrough")
-
-    #endif  // 201103L <= __cplusplus && defined(__has_warning)
-
 #endif  // defined(__clang__) && !defined(__ibmxl__) && !defined(__CODEGEARC__)
 
 #endif  // SYSTEM_HELPER_CLANG_H

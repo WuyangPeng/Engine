@@ -45,7 +45,7 @@
     /// Intel
     #define TCRE_COMPILER_CONFIG "Compiler/Intel.h"
 
-#elif defined(__clang__) && !defined(__CUDACC__) && !defined(__ibmxl__)
+#elif defined(__clang__) && !defined(__ibmxl__) && !defined(__CODEGEARC__)
 
     /// Clang C++模拟GCC，所以它必须出现更早。
     #define TCRE_COMPILER_CONFIG "Compiler/Clang.h"

@@ -5,7 +5,7 @@
 /// 联系作者：94458936@qq.com
 ///
 /// 标准：std:c++20
-/// 版本：v0.0.0.1 (2025/08/14 13:49:21)
+/// 版本：v0.0.0.1 (2025/08/15 10:06:48)
 
 #ifndef SYSTEM_HELPER_CONFIG_MACRO_H
 #define SYSTEM_HELPER_CONFIG_MACRO_H
@@ -29,7 +29,27 @@
 
 #ifndef SYSTEM_CPP_STANDARD
 
-    #define SYSTEM_CPP_STANDARD 20
+    #if __cplusplus >= 202002L
+
+        #define SYSTEM_CPP_STANDARD 20
+
+    #elif __cplusplus >= 201703L
+
+        #define SYSTEM_CPP_STANDARD 17
+
+    #elif __cplusplus >= 201402L
+
+        #define SYSTEM_CPP_STANDARD 14
+
+    #elif __cplusplus >= 201103L
+
+        #define SYSTEM_CPP_STANDARD 11
+
+    #else  // __cplusplus < 201103L
+
+        #define SYSTEM_CPP_STANDARD 3
+
+    #endif  // __cplusplus
 
 #endif  // SYSTEM_CPP_STANDARD
 
